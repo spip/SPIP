@@ -69,8 +69,18 @@ function action_tester_taille_dist() {
 
 	// si l'intervalle est assez petit, on garde la valeur min
 	if ($GLOBALS['taille_max']*$GLOBALS['taille_max']-$GLOBALS['taille_min']*$GLOBALS['taille_min']<50000){
-		ecrire_meta('max_taille_vignettes',$t=($GLOBALS['taille_min']*$GLOBALS['taille_min'])*0.9,'non');
-		echo round($t/1000000,3).' Mpx';
+		$t = ($GLOBALS['taille_min']*$GLOBALS['taille_min']);
+		if ($GLOBALS['taille_min']!==$GLOBALS['taille_max']){
+			$t = $t * 0.9; // marge de securite
+			ecrire_meta('max_taille_vignettes', $t = ($GLOBALS['taille_min']*$GLOBALS['taille_min'])*0.9, 'non');
+			echo round($t/1000000, 3) . ' Mpx';
+		}
+		else {
+			// c'est un cas "on a reussi la borne max initiale, donc on a pas de limite connue"
+			$t = 0;
+			echo "OK";
+		}
+		ecrire_meta('max_taille_vignettes', $t, 'non');
 		die();
 	}
 
@@ -103,10 +113,14 @@ function action_tester_taille_dist() {
 	ob_start('action_tester_taille_error_handler');
 	filtrer('image_recadre',$image_source,$taille,$taille);
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
+
 	// si la valeur intermediaire a reussi, on teste la valeur maxi qui est peut etre sous estimee
-	$taille = $GLOBALS['taille_max'];
-	filtrer('image_recadre',$image_source,$taille,$taille);
-	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
+	// si $GLOBALS['taille_min']==0 (car on est au premier coup)
+	if ($GLOBALS['taille_min']==0){
+		$taille = $GLOBALS['taille_max'];
+		filtrer('image_recadre',$image_source,$taille,$taille);
+		$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
+	}
 	ob_end_clean();
 
 	// on est ici, donc pas de plantage
