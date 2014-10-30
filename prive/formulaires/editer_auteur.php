@@ -234,6 +234,9 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
 	$retour = parametre_url($retour, 'email_confirm','');
 
+	set_request('email', email_valide(_request('email'))); // eviter d'enregistrer les cas qui sont acceptés par email_valide dans le verifier :
+	// "Marie@toto.com  " ou encore "Marie Toto <Marie@toto.com>"
+	
 	include_spip('inc/autoriser');
 	if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))){
 		$email_nouveau = _request('email');
