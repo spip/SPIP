@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL error',
 	'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Problem entering the private area',
+	'avis_nb_erreurs_saisie' => 'There are @nb@ errors in your entry, check the information.', # RELIRE
 
 	// B
 	'barre_a_accent_grave' => 'Insert a capital A with grave accent',
