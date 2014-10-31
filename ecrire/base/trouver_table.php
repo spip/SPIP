@@ -103,7 +103,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 	// base sous SPIP: gerer les abreviations explicites des noms de table
 	if ($connexion['spip_connect_version']) {
-		if (isset($table_des_tables[$nom])) {
+		if ($table_spip AND isset($table_des_tables[$nom])) {
 			$nom = $table_des_tables[$nom];
 			$nom_sql = 'spip_' . $nom;
 		}
@@ -120,7 +120,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		  AND $desc_cache=unserialize($desc_cache))
 		  $connexion['tables'] = $desc_cache;
 	}
-	if (!isset($connexion['tables'][$nom_sql])) {
+	if ($table_spip AND !isset($connexion['tables'][$nom_sql])) {
 
 		if (isset($tables_principales[$nom_sql]))
 			$fdesc = $tables_principales[$nom_sql];
@@ -131,13 +131,11 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			$nom_sql = 'spip_' . $nom;
 			$fdesc = &$tables_principales[$nom_sql];
 		}
-		else {
-			if (isset($tables_auxiliaires[$n=$nom])
-			  OR isset($tables_auxiliaires[$n='spip_'.$nom])) {
-				$nom_sql = $n;
-				$fdesc = &$tables_auxiliaires[$n];
-			}  # table locale a cote de SPIP, comme non SPIP:
-		}
+		elseif (isset($tables_auxiliaires[$n=$nom])
+		  OR isset($tables_auxiliaires[$n='spip_'.$nom])) {
+			$nom_sql = $n;
+			$fdesc = &$tables_auxiliaires[$n];
+		}  # table locale a cote de SPIP, comme non SPIP:
 	}
 	if (!isset($connexion['tables'][$nom_sql])) {
 
