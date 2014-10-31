@@ -541,7 +541,25 @@ function inc_plugins_to_array_dist() {
  * @return array
  */
 function inc_xml_to_array_dist($u) {
-	return @ObjectToArray(new SimpleXmlIterator($u));
+	return @XMLObjectToArray(new SimpleXmlIterator($u));
+}
+
+/**
+ *
+ * object -> tableau
+ *
+ * @param    object  $object The object to convert
+ * @return   array
+ *
+ */
+function inc_object_to_array( $object ) {
+    if( !is_object( $object ) && !is_array( $object ) ) {
+        return $object;
+    }
+    if( is_object( $object ) ) {
+        $object = get_object_vars( $object );
+    }
+    return array_map( 'inc_object_to_array', $object );
 }
 
 /**
@@ -560,7 +578,7 @@ function inc_yql_to_array_dist($u) {
 	if (isset($w['error'])){
 		throw new Exception($w['error']['description']);
 	}
-	return (array) $w;
+	return inc_object_to_array($w);
 }
 
 /**
@@ -710,7 +728,7 @@ function inc_ls_to_array_dist($u) {
  * @param Object $object
  * @return array|bool
  */
-function ObjectToArray($object){
+function XMLObjectToArray($object){
 	$xml_array = array();
 	for( $object->rewind(); $object->valid(); $object->next() ) {
 		if(array_key_exists($key = $object->key(), $xml_array)){
