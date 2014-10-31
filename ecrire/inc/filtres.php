@@ -1933,10 +1933,13 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$trad = $trads[$l];
 			} else {
 				include_spip('inc/texte');
-				// langue absente, prendre la premiere dispo
+				// langue absente, prendre le fr (meme comportement que inc/traduire.php)
+				// ou la premiere dispo
 				// mais typographier le texte selon les regles de celle-ci
 				// Attention aux blocs multi sur plusieurs lignes
-				$l = key($trads);
+				if (!$l = approcher_langue($trads, 'fr')) {
+					$l = key($trads);
+				}
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
 				$trad = $typographie($trad);
