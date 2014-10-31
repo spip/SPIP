@@ -542,9 +542,13 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	$trouver_table = charger_fonction('trouver_table','base');
 
 	foreach ($tables as $table){
-		// en principe, pas de spip_ dans le nom de table passe a trouver_table
-		$desc_source = $trouver_table(preg_replace(",^spip_,","",$table), $serveur_source, false);
-		if (!$desc_source)
+		// si table commence par spip_ c'est une table SPIP, renommer le prefixe si besoin
+		// sinon chercher la vraie table
+		$desc_source = false;
+		if (strncmp($table,"spip_",5)==0){
+			$desc_source = $trouver_table(preg_replace(",^spip_,","",$table), $serveur_source, true);
+		}
+		if (!$desc_source OR !$desc_source['exist'])
 			$desc_source = $trouver_table($table, $serveur_source, false);
 
 		// verifier que la table est presente dans la base source
