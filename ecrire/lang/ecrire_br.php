@@ -685,6 +685,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 
 	// R
 	'repertoire_plugins' => 'Kavlec’h :',
+	'required' => '[Rekis]',
 
 	// S
 	'sans_heure' => 'hep eur',

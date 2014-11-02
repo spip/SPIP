@@ -699,6 +699,7 @@ numa cor que indica o seu estado:',
 
 	// R
 	'repertoire_plugins' => 'Directório :',
+	'required' => '[Obigatório]',
 
 	// S
 	'sans_heure' => 'tempo não especificado',

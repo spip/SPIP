@@ -450,6 +450,9 @@ nan yon koulè ki bay lestati ali :',
 	// O
 	'onglet_repartition_actuelle' => 'kounye-a',
 
+	// R
+	'required' => '[Nésèsè]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(komandè ki limité)', # MODIF
 

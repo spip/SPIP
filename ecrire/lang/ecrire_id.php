@@ -472,6 +472,7 @@ dalam warna yang menunjukkan statusnya:',
 
 	// R
 	'repertoire_plugins' => 'Directori:',
+	'required' => '[Dibutuhkan]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(admin terbatas)', # MODIF

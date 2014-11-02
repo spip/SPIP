@@ -681,6 +681,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// R
 	'repertoire_plugins' => 'Diretório:',
+	'required' => '(obrigatório)',
 
 	// S
 	'sans_heure' => 'sem hora',

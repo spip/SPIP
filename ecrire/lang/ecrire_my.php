@@ -440,6 +440,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'အညွှန်း',
+	'required' => '[လိုအပ်ပါသည်]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(ကန့်သတ်​ထားသော ကြီးကြပ်သူ)', # MODIF

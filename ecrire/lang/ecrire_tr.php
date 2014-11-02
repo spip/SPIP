@@ -561,6 +561,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 	// R
 	'repertoire_plugins' => 'Dizin :',
+	'required' => '[Zorunlu]', # MODIF
 
 	// S
 	'sans_heure' => 'saatsiz',

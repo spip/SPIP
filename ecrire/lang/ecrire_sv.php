@@ -506,6 +506,9 @@ med en färg som visar deras status:',
 	'plugins_erreur' => 'Fel i följande plugin: @plugins@',
 	'plugins_liste' => 'Lista över plugins',
 
+	// R
+	'required' => '[Krävs]', # MODIF
+
 	// T
 	'taille_cache_vide' => 'Cachen är tom.',
 	'text_article_propose_publication' => 'Artikel inlämnad för publicering. tveka inte att säga din mening i forumet längst ned på sidan.', # MODIF

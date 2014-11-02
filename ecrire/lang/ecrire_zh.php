@@ -432,6 +432,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_repartition_actuelle' => '现在',
 
+	// R
+	'required' => '[必须的]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(受限制的管理)', # MODIF
 

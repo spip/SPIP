@@ -563,6 +563,7 @@ Le traduzioni sono associate all’originale,
 
 	// R
 	'repertoire_plugins' => 'Cartella:',
+	'required' => '[Obbligatorio]', # MODIF
 
 	// S
 	'sans_heure' => 'ora mancante',

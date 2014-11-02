@@ -415,6 +415,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 
 	// R
 	'repertoire_plugins' => 'Directorij:',
+	'required' => '[Obavezno]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(ograniceni admin)', # MODIF

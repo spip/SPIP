@@ -683,6 +683,7 @@ Hutsik utz ezazu ez betetzeko, espazio edo komak tarteka itzazu LDAP eremu bat b
 
 	// R
 	'repertoire_plugins' => 'Direktorioa :',
+	'required' => '(nahitaezkoa)',
 
 	// S
 	'sans_heure' => 'ordurik gabe',

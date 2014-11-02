@@ -668,6 +668,7 @@ amb un color que indica el seu estat:',
 
 	// R
 	'repertoire_plugins' => 'Directori:',
+	'required' => '[obligatori]',
 
 	// S
 	'sans_heure' => 'sense hora',

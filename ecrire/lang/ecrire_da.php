@@ -410,6 +410,9 @@ i en farve, der angiver deres status:',
 	// O
 	'onglet_repartition_actuelle' => 'nu',
 
+	// R
+	'required' => '[Skal udfyldes]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(begrænset admin)', # MODIF
 

@@ -647,6 +647,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 
 	// R
 	'repertoire_plugins' => 'Katalog :',
+	'required' => '[Obowiązkowo]', # MODIF
 
 	// S
 	'sans_heure' => 'Czas nie określony',

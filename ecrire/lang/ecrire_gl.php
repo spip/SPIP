@@ -659,6 +659,7 @@ cunha cor que indica o seu estado :',
 
 	// R
 	'repertoire_plugins' => 'Repertorio :',
+	'required' => '[Obrigatorio]', # MODIF
 
 	// S
 	'sans_heure' => 'sen hora',

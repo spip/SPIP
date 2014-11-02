@@ -686,6 +686,7 @@ in einer Farbe, die den Status anzeigt :',
 
 	// R
 	'repertoire_plugins' => 'Verzeichnis:',
+	'required' => ' (Erforderlich)',
 
 	// S
 	'sans_heure' => 'Ohne Zeit',

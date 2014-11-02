@@ -687,6 +687,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 
 	// R
 	'repertoire_plugins' => 'Carpeta:',
+	'required' => '(obligatorio)',
 
 	// S
 	'sans_heure' => 'sin hora',

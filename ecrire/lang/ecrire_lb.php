@@ -665,6 +665,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'Dossier:',
+	'required' => '(obligatoresch)',
 
 	// S
 	'sans_heure' => 'ouni Zäit',

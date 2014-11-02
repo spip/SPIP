@@ -699,6 +699,7 @@ een kleur geeft hun status aan :',
 
 	// R
 	'repertoire_plugins' => 'Map :',
+	'required' => '(verplicht)',
 
 	// S
 	'sans_heure' => 'zonder tijdstip',

@@ -424,6 +424,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_repartition_actuelle' => '今',
 
+	// R
+	'required' => '[要求した]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(限定された管理者)', # MODIF
 
