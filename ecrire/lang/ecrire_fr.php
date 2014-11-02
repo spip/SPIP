@@ -712,6 +712,7 @@ dans une couleur qui indique leur état :',
 
 	// R
 	'repertoire_plugins' => 'Répertoire :',
+	'required' => ' (obligatoire)',
 
 	// S
 	'sans_heure' => 'sans heure',
