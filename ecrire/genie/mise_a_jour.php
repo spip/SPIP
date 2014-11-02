@@ -49,6 +49,9 @@ define('_VERSIONS_LISTE', 'archives.xml');
  * ou de ne repondre une 304 que si le md5 est bon
  */
 function mise_a_jour_ecran_securite(){
+	// TODO : url https avec verification du certificat
+	return;
+
 	// si l'ecran n'est pas deja present ou pas updatable, sortir
 	if (!_URL_ECRAN_SECURITE
 	  OR !file_exists($filename = _DIR_ETC."ecran_securite.php")
