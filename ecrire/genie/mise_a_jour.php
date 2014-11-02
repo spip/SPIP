@@ -29,14 +29,61 @@ function genie_mise_a_jour_dist($t) {
 	$maj = info_maj ('spip', 'SPIP', $GLOBALS['spip_version_branche']);
 	ecrire_meta('info_maj_spip',$maj?($GLOBALS['spip_version_branche']."|$maj"):"",'non');
 
+	mise_a_jour_ecran_securite();
+
 	spip_log("Verification version SPIP : ".($maj?$maj:"version a jour"),"verifie_maj");
 	return 1;
 }
 
-
-
+// TODO : fournir une URL sur spip.net pour maitriser la diffusion d'une nouvelle version de l'ecran via l'update auto
+// ex : http://www.spip.net/auto-update/ecran_securite.php
+define('_URL_ECRAN_SECURITE','http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt');
 define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
 define('_VERSIONS_LISTE', 'archives.xml');
+
+/**
+ * Mise a jour automatisee de l'ecran de securite
+ * On se base sur le filemtime de l'ecran source avec un en-tete if_modified_since
+ * Mais on fournit aussi le md5 de notre ecran actuel et la version branche de SPIP
+ * Cela peut permettre de diffuser un ecran different selon la version de SPIP si besoin
+ * ou de ne repondre une 304 que si le md5 est bon
+ */
+function mise_a_jour_ecran_securite(){
+	// si l'ecran n'est pas deja present ou pas updatable, sortir
+	if (!_URL_ECRAN_SECURITE
+	  OR !file_exists($filename = _DIR_ETC."ecran_securite.php")
+	  OR !is_writable($filename)
+	  OR !$last_modified = filemtime($filename)
+	  OR !$md5 = md5_file($filename))
+		return false;
+
+	include_spip('inc/distant');
+	$tmp_file = _DIR_TMP . "ecran_securite.php";
+	$url = parametre_url(_URL_ECRAN_SECURITE,"md5",$md5);
+	$url = parametre_url($url,"vspip",$GLOBALS['spip_version_branche']);
+	$res = recuperer_url($url,array(
+		'if_modified_since' => $last_modified,
+		'file' => $tmp_file
+	));
+
+	// si il y a une version plus recente que l'on a recu correctement
+	if ($res['status']==200
+	  AND $res['length']
+	  AND $tmp_file = $res['file']){
+
+		if ($md5 !== md5_file($tmp_file)){
+			// on essaye de l'inclure pour verifier que ca ne fait pas erreur fatale
+			include_once $tmp_file;
+			// ok, on le copie a la place de l'ecran existant
+			// en backupant l'ecran avant, au cas ou
+			@copy($filename, $filename . "-bck-" . date('Y-m-d-His', $last_modified));
+			@rename($tmp_file, $filename);
+		}
+		else {
+			@unlink($tmp_file);
+		}
+	}
+}
 
 /**
  * Vérifier si une nouvelle version de SPIP est disponible
