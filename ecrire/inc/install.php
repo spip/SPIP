@@ -414,7 +414,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 			.'<p class="explication">'
 			. _T('install_types_db_connus')
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
-			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
+			// . "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 			.'</p>'
 		. "\n<div class='p'>\n<ul>\n"
 		.   join("\n", install_select_serveur())
