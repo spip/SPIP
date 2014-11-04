@@ -291,7 +291,7 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// Le visiteur a-t-il un statut prevu par la config ?
 	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
 	!==false)
-		return test_previsualiser_objet_champ($type, $opt);
+		return test_previsualiser_objet_champ($type, $id, $qui, $opt);
 
 	// Sinon, on regarde s'il a un jeton (var_token) et on lui pose
 	// le cas echeant une session contenant l'autorisation
@@ -326,11 +326,13 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
  * @uses lister_tables_objets_sql()
  * @uses table_objet_sql()
  * 
+ * @param array $qui 
  * @param string|null $type
+ * @param string|null $id
  * @param array $opt
  * @return boolean
  */
-function test_previsualiser_objet_champ($type=null, $opt=array()) {
+function test_previsualiser_objet_champ($type=null, $id=0, $qui=array(), $opt=array()) {
 
 	// si pas de type et statut fourni, c'est une autorisation generale => OK
 	if (!$type)
