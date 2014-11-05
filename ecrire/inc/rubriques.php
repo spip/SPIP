@@ -474,6 +474,7 @@ function calculer_langues_utilisees ($serveur='') {
 	include_spip('public/interfaces');
 	include_spip('public/compiler');
 	include_spip('public/composer');
+	include_spip('public/phraser_html');
 	$langues = array();
 
 	$langues[$GLOBALS['meta']['langue_site']] = 1;
@@ -501,6 +502,9 @@ function calculer_langues_utilisees ($serveur='') {
 			$boucle->return = '$Pile[$SP][\'lang\']';
 			$boucle->iterateur = 'sql';
 
+			$boucle->descr['nom'] = 'objet_test_si_publie'; // eviter notice php
+			$boucle->descr['sourcefile'] = 'internal';
+
 			$boucle = pipeline('pre_boucle', $boucle);
 
 			if (isset($desc['statut'])
@@ -513,7 +517,7 @@ function calculer_langues_utilisees ($serveur='') {
 					$functionname = 'f_calculer_langues_utilisees_' . $boucle->id_table . '_' . time() . '_' . rand();
 				} while (function_exists($functionname));
 				$code = calculer_boucle('calculer_langues_utilisees',$boucles);
-				$code = '$command=array();$Pile=array(0=>array());'."\n".$code;
+				$code = '$SP=0; $command=array();$command["connect"] = $connect = "' . $serveur . '"; $Pile=array(0=>array());'."\n".$code;
 				$code = 'function '.$functionname.'(){'.$code.'};$res='.$functionname.'();';
 				$res = '';
 				eval($code);
