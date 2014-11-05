@@ -270,7 +270,7 @@ function admin_debug()
 			OR (isset($GLOBALS['bouton_admin_debug']) AND $GLOBALS['bouton_admin_debug'])
 			OR (
 				defined('_VAR_MODE') AND _VAR_MODE == 'debug'
-				AND $_COOKIE['spip_debug']
+				AND isset($_COOKIE['spip_debug']) AND $_COOKIE['spip_debug']
 			)
 		) AND autoriser('debug')
 	  )
