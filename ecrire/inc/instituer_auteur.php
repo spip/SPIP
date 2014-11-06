@@ -64,7 +64,7 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 
 
 function afficher_webmestre($auteur){
-	if (autoriser('webmestre','',0,$auteur['id_auteur']))
+	if (autoriser('webmestre','',0, intval($auteur['id_auteur'])))
 		return "<p>"._T("info_admin_webmestre")."</p>";
 	return "";
 }
@@ -74,7 +74,7 @@ function editer_choix_webmestre($auteur){
 	$style = "";
 	if (!autoriser('modifier', 'auteur', $auteur['id_auteur'],
 	null, array('webmestre' => '?'))){
-		$res =  afficher_webmestre($auteur);
+		$res = afficher_webmestre($auteur);
 	}
 	else {
 		$res = "<input type='checkbox' class='checkbox' name='webmestre' id='webmestre' value='oui'"
