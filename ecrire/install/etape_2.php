@@ -21,6 +21,10 @@ function install_etape_2_dist()
 		? _INSTALL_HOST_DB
 		: _request('adresse_db');
 
+        if (preg_match(',(.*):(.*),', $adresse_db, $r))
+                list(,$adresse_db, $port) = $r;
+        else $port = '';
+
 	$login_db = defined('_INSTALL_USER_DB')
 		? _INSTALL_USER_DB
 		: _request('login_db');
@@ -39,7 +43,7 @@ function install_etape_2_dist()
 
 	$chmod = _request('chmod');
 
-	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, $name_db, $server_db);
+	$link = spip_connect_db($adresse_db, $port, $login_db, $pass_db, $name_db, $server_db);
 	$GLOBALS['connexions'][$server_db] = $link;
 
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
@@ -66,17 +70,13 @@ function install_etape_2_dist()
 
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2", true));
 
-
-
-		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
-
 		echo "\n", '<!-- ',  sql_version($server_db), ' -->' ;
 		list($checked, $res) = install_etape_2_bases($login_db, $server_db);
 
 		$hidden = (defined('_SPIP_CHMOD')
 		? ''
 		: ("\n<input type='hidden' name='chmod' value='".spip_htmlspecialchars($chmod)."' />"))
-		. predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db);
+		. predef_ou_cache($adresse_db.($port?':'.$port:''), $login_db, $pass_db, $server_db);
 
 		echo install_etape_2_form($hidden, $checked, $res, 3);
 	} else  {
