@@ -110,16 +110,18 @@ AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_secu
 	include $f;
 
 
-if (!defined('_IS_BOT')) {
-/**
+/*
  * Détecteur de robot d'indexation
- *
- * Utilisé en divers endroits, centralisé ici
  */
+if (!defined('_IS_BOT')){
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
-			$_SERVER['HTTP_USER_AGENT'])
+		AND preg_match(
+		// mots generiques
+			',bot|slurp|crawler|spider|webvac|yandex|'
+			// UA plus cibles
+			. '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+			. ',i', (string)$_SERVER['HTTP_USER_AGENT'])
 	);
 }
 
