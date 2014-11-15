@@ -128,6 +128,8 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 			$attrs['procure'] = array();
 			$attrs['pipeline'] = array();
 			$attrs['utilise'] = array();
+			$attrs['style'] = array();
+			$attrs['script'] = array();
 		}
 		$phraseur->contenu['compatible'] = $n;
 		$phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
@@ -333,6 +335,56 @@ function info_paquet_spip($phraseur, $attrs, $texte) {
 function info_paquet_pipeline($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['pipeline'][] = $attrs;
+}
+
+
+/**
+ * Style : plusieurs declarations possibles.
+ * Traitement de l'attribut source pour générer en remplacement les attributs url et path
+ *
+ * @param $phraseur
+ * @param $attrs
+ * @param $texte
+ */
+function info_paquet_style($phraseur, $attrs, $texte) {
+	$lien = $chemin = $type = $media = '';
+
+	include_spip('inc/utils');
+	if (tester_url_absolue($attrs['source']))
+		$lien = $attrs['source'];
+	else
+		$chemin = $attrs['source'];
+	if (isset($attrs['type']))
+		$type = $attrs['type'];
+	if (isset($attrs['media']))
+		$media = $attrs['media'];
+
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['style'][] = array('url' => $lien, 'path' => $chemin, 'type' => $type, 'media' => $media);
+}
+
+
+/**
+ * Script : plusieurs declarations possibles.
+ * Traitement de l'attribut source pour générer en remplacement les attributs url et path
+ *
+ * @param $phraseur
+ * @param $attrs
+ * @param $texte
+ */
+function info_paquet_script($phraseur, $attrs, $texte) {
+	$lien = $chemin = $type = $media = '';
+
+	include_spip('inc/utils');
+	if (tester_url_absolue($attrs['source']))
+		$lien = $attrs['source'];
+	else
+		$chemin = $attrs['source'];
+	if (isset($attrs['type']))
+		$type = $attrs['type'];
+
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['script'][] = array('url' => $lien, 'path' => $chemin, 'type' => $type);
 }
 
 ?>
