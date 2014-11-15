@@ -3090,8 +3090,12 @@ function traiter_doublons_documents(&$doublons, $letexte) {
 	if (strstr($t, 'spip_document_') // evite le preg_match_all si inutile
 	AND preg_match_all(
 	',<[^>]+\sclass=["\']spip_document_([0-9]+)[\s"\'],imsS',
-	$t, $matches, PREG_PATTERN_ORDER))
+	$t, $matches, PREG_PATTERN_ORDER)) {
+		if (!isset($doublons['documents'])) {
+			$doublons['documents'] = "";
+		}
 		$doublons['documents'] .= "," . join(',', $matches[1]);
+	}
 
 	return $letexte;
 }
