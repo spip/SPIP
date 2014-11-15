@@ -76,7 +76,7 @@ function copie_locale($source, $mode = 'auto', $local = null){
 	if ($mode=='test') return $t ? $local : '';
 
 	// sinon voir si on doit/peut le telecharger
-	if ($local==$source OR !preg_match(',^\w+://,', $source))
+	if ($local==$source OR !tester_url_absolue($source))
 		return $local;
 
 	if ($mode=='modif' OR !$t){
@@ -273,9 +273,10 @@ function recuperer_url($url, $options = array()){
 		$options['datas'] = $head . "\r\n\r\n" . $postdata;
 	}
 
-	// Accepter les URLs au format feed:// ou qui ont oublie le http://
+	// Accepter les URLs au format feed:// ou qui ont oublie le http:// ou les urls relatives au protocole
 	$url = preg_replace(',^feed://,i', 'http://', $url);
-	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://' . $url;
+	if (!tester_url_absolue($url)) $url = 'http://' . $url;
+	elseif (strncmp($url,"//",2)==0) $url = 'http:' . $url;
 
 	$result = array('status' => 0, 'headers' => '', 'page' => '', 'length' => 0, 'last_modified' => '', 'location' => '', 'url' => $url);
 
@@ -754,7 +755,7 @@ function nom_fichier_copie_locale($source, $extension){
  **/
 function fichier_copie_locale($source){
 	// Si c'est deja local pas de souci
-	if (!preg_match(',^\w+://,', $source)){
+	if (!tester_url_absolue($source)){
 		if (_DIR_RACINE)
 			$source = preg_replace(',^' . preg_quote(_DIR_RACINE) . ',', '', $source);
 		return $source;

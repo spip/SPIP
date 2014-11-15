@@ -543,14 +543,14 @@ function appliquer_modifs_config($purger_skel=false) {
  * (ou auto détection si vide)
  * 
  * @param string $adresse_site
- * @return void
+ * @return string
  */
 function appliquer_adresse_site($adresse_site){
 	if ($adresse_site!==NULL){
 		if (!strlen($adresse_site)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$adresse_site = url_de_base();}
 		$adresse_site = preg_replace(",/?\s*$,", "", $adresse_site);
 
-		if (!preg_match(",^[\w]+://,Uims",$adresse_site))
+		if (!tester_url_absolue($adresse_site))
 			$adresse_site = "http://$adresse_site";
 
 		ecrire_meta('adresse_site',$adresse_site);

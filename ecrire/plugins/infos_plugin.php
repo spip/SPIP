@@ -60,7 +60,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['documentation'] = trim(join(' ',$arbre['lien']));
 		if ($ret['documentation']) {
 			// le lien de doc doit etre une url et c'est tout
-			if (!preg_match(',^https?://,iS', $ret['documentation']))
+			if (!tester_url_absolue($ret['documentation']))
 				$ret['documentation'] = "";
 		}
 	}

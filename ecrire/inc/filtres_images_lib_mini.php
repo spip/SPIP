@@ -143,7 +143,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 
 	// les protocoles web prennent au moins 3 lettres
-	if (preg_match(';^(\w{3,7}://);', $source)){
+	if (tester_url_absolue($source)){
 		include_spip('inc/distant');
 		$fichier = _DIR_RACINE . copie_locale($source);
 		if (!$fichier) return "";

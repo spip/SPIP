@@ -170,7 +170,7 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 	    // en cas d'inclusion, l'espace de nom est le meme
 	  // mais gaffe aux DTD dont l'URL est relative a l'engloblante
 		if (($n[0] == 'PUBLIC')
-		AND !preg_match("%^http://%", $n[1])) {
+		AND !tester_url_absolue($n[1])) {
 			$n[1] = substr($grammaire,0, strrpos($grammaire,'/')+1) . $n[1];
 		}
 		analyser_dtd($n[1], $n[0], $dtc);

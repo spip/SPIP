@@ -44,7 +44,7 @@ function set_spip_doc($fichier) {
  */
 function get_spip_doc($fichier) {
 	// fichier distant
-	if (preg_match(',^\w+://,', $fichier))
+	if (tester_url_absolue($fichier))
 		return $fichier;
 
 	// gestion d'erreurs, fichier=''

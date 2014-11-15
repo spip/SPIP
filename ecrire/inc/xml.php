@@ -46,7 +46,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas='', $profondeur = -1){
 	$contenu = "";
-	if (preg_match(",^(http|ftp)://,",$fichier)){
+	if (tester_url_absolue($fichier)){
 		include_spip('inc/distant');
 		$contenu = recuperer_page($fichier,false,false,$taille_max, $datas);
 	}
