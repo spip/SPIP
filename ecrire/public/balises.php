@@ -2136,7 +2136,7 @@ function balise_DOUBLONS_dist($p) {
 	if ($type = interprete_argument_balise(1,$p)) {
 		if ($famille = interprete_argument_balise(2,$p))
 			$type .= '.' . $famille;
-		$p->code = '$doublons['.$type.']';
+		$p->code = '(isset($doublons['.$type.']) ? $doublons['.$type.'] : "")';
 		if (!$p->etoile)
 			$p->code = 'array_filter(array_map("intval",explode(",",'
 				. $p->code . ')))';
