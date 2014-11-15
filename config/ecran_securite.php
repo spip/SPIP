@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.9'); // 2014-10-01
+define('_ECRAN_SECURITE', '1.2.0'); // 2014-10-27
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -36,15 +36,19 @@ if (!defined('_IS_BOT'))
  * soit pas numérique (ce qui bloque l'exploitation de divers trous
  * de sécurité, dont celui de toutes les versions < 1.8.2f)
  * (sauf pour id_table, qui n'est pas numérique jusqu'à [5743])
+ * (id_base est une variable de la config des widgets de WordPress)
  */
 foreach ($_GET as $var => $val)
-	if ($_GET[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_GET[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$_GET[$var] = is_array($_GET[$var])?@array_map('intval',$_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
-	if ($_POST[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_POST[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$_POST[$var] = is_array($_POST[$var])?@array_map('intval',$_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
-	if ($GLOBALS[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($GLOBALS[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$GLOBALS[$var] = is_array($GLOBALS[$var])?@array_map('intval',$GLOBALS[$var]):intval($GLOBALS[$var]);
 
 /*
