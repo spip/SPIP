@@ -219,6 +219,17 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		include_spip('public/sandbox');
 		$corps = sandbox_filtrer_squelette($skel,$corps,strlen($headers['X-Spip-Filtre'])?explode('|', $headers['X-Spip-Filtre']):array(),$filtres[$nom]);
 		unset($headers['X-Spip-Filtre']);
+
+		if ($process_ins=='html'){
+			$skel['process_ins'] = (
+				strpos($corps,'<'.'?') === false
+				OR
+				 (strpos($corps,'<'.'?xml')!==false AND
+				  strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false)
+			)
+				? 'html'
+				: 'php';
+		}
 	}
 
 	$skel['entetes'] = $headers;
