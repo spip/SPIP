@@ -130,7 +130,8 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 		}
 	}
 	foreach($oblis as $obli) {
-		if (!_request($obli)) {
+		$value = _request($obli);
+		if (is_null($value) OR !(is_array($value)?count($value):strlen($value))) {
 			if (!isset($erreurs[$obli])) { $erreurs[$obli] = ''; }
 			$erreurs[$obli] .= _T("info_obligatoire");
 		}
