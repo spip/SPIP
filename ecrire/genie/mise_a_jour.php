@@ -116,19 +116,36 @@ function info_maj ($dir, $file, $version){
 	$p = substr("0123456789", intval($maj));
 	$p = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
 	preg_match_all($p, $page, $m,  PREG_SET_ORDER);
-	$page = '';
+	$page = $page_majeure = '';
+	
+	// branche en cours d'utilisation
+	$branche = implode('.', array_slice(explode('.', $version, 3), 0, 2));
+	
 	foreach ($m as $v) {
 		list(, $maj2, $min2,, $rev2) = $v;
+		$branche_maj = $maj2 . '.' . $min2;
 		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
+		// d'abord les mises à jour de la même branche
 		if ((spip_version_compare($version, $version_maj, '<'))
-		AND (spip_version_compare($page, $version_maj, '<')))
+			AND (spip_version_compare($page, $version_maj, '<'))
+			AND spip_version_compare($branche, $branche_maj, '=')
+		) {
 			$page = $version_maj;
+		}
+		// puis les mises à jours majeures
+		if ((spip_version_compare($version, $version_maj, '<'))
+			AND (spip_version_compare($page, $version_maj, '<'))
+			AND spip_version_compare($branche, $branche_maj, '<')
+		) {
+			$page_majeure = $version_maj;
+		}
 	}
-
-	if (!$page) return "";
-	return "<a class='info_maj_spip' href='"._VERSIONS_SERVEUR."$dir' title='$page'>" .
-		_T('nouvelle_version_spip',array('version'=>$page)) .
-	    '</a>';
+	if (!$page AND !$page_majeure) return "";
+	
+	$message = $page ? _T('nouvelle_version_spip',array('version'=>$page)) . ($page_majeure ? ' | ' : '' ) : '';
+	$message .= $page_majeure ? _T('nouvelle_version_spip_majeure',array('version'=>$page_majeure)) : '';
+	
+	return "<a class='info_maj_spip' href='"._VERSIONS_SERVEUR."$dir' title='$page'>" . $message . '</a>';
 }
 
 /**
