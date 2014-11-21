@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  */
 
-$GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
+$GLOBALS['visiteur_session'] = array(); # globale decrivant l'auteur
 $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
 //
