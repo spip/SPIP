@@ -262,14 +262,18 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace){
 	$primary = $boucle->primary;
 	$constant = preg_match(CODE_MONOTONE, str_replace("\\'", '', $return));
 	$flag_cpt = $boucle->mode_partie || $boucle->cptrows;
+    $_doublons = $boucle->doublons;
 	$corps = '';
 
+    // un peu dommage de calculer la clause Where ici et une 2e fois plus loin,
+    // mais faudrait revoir la representation des doublons pour l'eviter
+	if ($_doublons AND strpos(calculer_dump_array($boucle->where), $_doublons)) {
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
-	if ($boucle->doublons)
-		$corps .= "\n\t\t\tforeach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
+		$corps = "\n\t\t\tforeach($_doublons as " . '$k) $doublons[$k] .= "," . ' .
 			index_pile($id_boucle, $primary, $boucles)
 			. "; // doublons\n";
+    } else $_doublons = '';
 
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
@@ -386,8 +390,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace){
 	// Ne calculer la requete que maintenant
 	// car ce qui precede appelle index_pile qui influe dessus
 
-	$init = (($init = $boucles[$id_boucle]->doublons)
-		? ("\n\t$init = array();") : '')
+	$init = ($_doublons ? ("\n\t$_doublons = array();") : '')
 		. calculer_requete_sql($boucles[$id_boucle]);
 
 	$contexte = memoriser_contexte_compil($boucle);
