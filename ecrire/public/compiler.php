@@ -1185,7 +1185,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				if ($show) {
 					$boucles[$id]->show = $show;
 					// recopie les infos les plus importantes
-					$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
+					$boucles[$id]->primary = isset($show['key']["PRIMARY KEY"]) ? $show['key']["PRIMARY KEY"] : '';
 					$boucles[$id]->id_table = $x = preg_replace(",^spip_,","",$show['id_table']);
 					$boucles[$id]->from[$x] = $nom_table = $show['table'];
 					$boucles[$id]->iterateur = 'SQL';
