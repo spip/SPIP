@@ -547,9 +547,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// et retourner les fichiers a verifier
 	plugins_precompile_xxxtions($plugin_valides, $ordre);
 	// mise a jour de la matrice des pipelines
-	pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
+	$prepend_code = pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
 	// generer le fichier _CACHE_PIPELINE
-	pipeline_precompile();
+	pipeline_precompile($prepend_code);
 
 	// lancer et initialiser les nouveaux crons !
 	include_spip('inc/genie');
@@ -702,6 +702,8 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
 
+	$prepend_code = array();
+
 	foreach($ordre as $p => $info){
 		// $ordre peur contenir des plugins en attente et non valides pour ce hit
 		if (isset($plugin_valides[$p])){
@@ -736,6 +738,21 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 						}
 					}
 				}
+				if (isset($info['genie']) AND count($info['genie'])){
+					if (!isset($prepend_code['taches_generales_cron'])){
+						$prepend_code['taches_generales_cron'] = "";
+					}
+					foreach($info['genie'] as $genie){
+						$nom = $prefix . $genie['nom'];
+						$periode = max(60,intval($genie['periode']));
+						if (charger_fonction($nom,"genie",true)){
+							$prepend_code['taches_generales_cron'] = "\$val['$nom'] = $periode;\n";
+						}
+						else {
+							spip_log("Fonction genie_$nom introuvable",_LOG_ERREUR);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -754,11 +771,13 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 	foreach($liste_pipe_manquants as $add_pipe)
 		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
 			$GLOBALS['spip_pipeline'][$add_pipe]= '';
+
+	return $prepend_code;
 }
 
 // precompilation des pipelines
 // http://doc.spip.org/@pipeline_precompile
-function pipeline_precompile(){
+function pipeline_precompile($prepend_code = array()){
 	global $spip_pipeline, $spip_matrice;
 
 	$content = "";
@@ -791,6 +810,7 @@ function pipeline_precompile(){
 		$content .= "// Pipeline $action \n"
 		.	"function execute_pipeline_$action(&\$val){\n"
 		. $s_inc
+		. (isset($prepend_code[$action])?trim($prepend_code[$action])."\n":'')
 		. $s_call
 		. "return \$val;\n}\n";
 	}
