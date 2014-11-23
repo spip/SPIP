@@ -753,6 +753,25 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 						}
 					}
 				}
+				if (isset($info['style']) AND count($info['style'])){
+					if (!isset($prepend_code['insert_head_css'])){
+						$prepend_code['insert_head_css'] = "";
+						$prepend_code['header_prive'] = "";
+					}
+					foreach ($info['style'] as $style){
+						$code = "";
+						if (isset($style['path']) AND $style['path'])
+							$code = "if (\$f=find_in_path('".addslashes($style['path'])."')) ";
+						else
+							$code = "if (\$f='".addslashes($style['url'])."') ";
+						$code .= "\$val .= '<link rel=\"stylesheet\" href=\"'.direction_css(\$f).'\" type=\"text/css\"";
+						if (isset($style['media']) AND strlen($style['media']))
+							$code .= " media=\"".addslashes($style['media'])."\"";
+						$code .="/>';\n";
+						if ($style['type']!='prive') $prepend_code['insert_head_css'] .= $code;
+						if ($style['type']!='public') $prepend_code['header_prive'] .= $code;
+					}
+				}
 			}
 		}
 	}
@@ -810,7 +829,7 @@ function pipeline_precompile($prepend_code = array()){
 		$content .= "// Pipeline $action \n"
 		.	"function execute_pipeline_$action(&\$val){\n"
 		. $s_inc
-		. (isset($prepend_code[$action])?trim($prepend_code[$action])."\n":'')
+		. ((isset($prepend_code[$action]) AND strlen($prepend_code[$action]))?trim($prepend_code[$action])."\n":'')
 		. $s_call
 		. "return \$val;\n}\n";
 	}
