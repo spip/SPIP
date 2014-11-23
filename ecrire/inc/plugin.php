@@ -208,8 +208,14 @@ function liste_plugin_valides($liste_plug, $force = false)
 		if (!isset($liste_non_classee[$p])){
 			$procure['etat'] = '?';
 			$procure['dir_type'] = '_DIR_RESTREINT';
-			$procure['dir'] = '';
+			$procure['dir'] = $procure['nom'];
 			$liste_non_classee[$p] = $procure;
+			$infos['_DIR_RESTREINT'][$procure['nom']] = array(
+				'nom' => $procure['nom'],
+				'etat' => $procure['stable'],
+				'version' => $procure['version'],
+				'chemin' => array(),
+			);
 		}
 	}
 
@@ -754,27 +760,47 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 					}
 				}
 				if (isset($info['style']) AND count($info['style'])){
-					if (!isset($prepend_code['insert_head_css'])){
-						$prepend_code['insert_head_css'] = "";
-						$prepend_code['header_prive'] = "";
-					}
+					if (!isset($prepend_code['insert_head_css'])){$prepend_code['insert_head_css'] = "";}
+					if (!isset($prepend_code['header_prive_css'])){$prepend_code['header_prive_css'] = "";}
 					foreach ($info['style'] as $style){
-						$code = "";
 						if (isset($style['path']) AND $style['path'])
-							$code = "if (\$f=find_in_path('".addslashes($style['path'])."')) ";
+							$code = "if (\$f=timestamp(direction_css(find_in_path('".addslashes($style['path'])."')))) ";
 						else
 							$code = "if (\$f='".addslashes($style['url'])."') ";
-						$code .= "\$val .= '<link rel=\"stylesheet\" href=\"'.direction_css(\$f).'\" type=\"text/css\"";
+						$code .= "\$val .= '<link rel=\"stylesheet\" href=\"'.\$f.'\" type=\"text/css\"";
 						if (isset($style['media']) AND strlen($style['media']))
 							$code .= " media=\"".addslashes($style['media'])."\"";
 						$code .="/>';\n";
 						if ($style['type']!='prive') $prepend_code['insert_head_css'] .= $code;
-						if ($style['type']!='public') $prepend_code['header_prive'] .= $code;
+						if ($style['type']!='public') $prepend_code['header_prive_css'] .= $code;
+					}
+				}
+				if (!isset($prepend_code['insert_head'])){$prepend_code['insert_head'] = "";}
+				if (!isset($prepend_code['header_prive'])){$prepend_code['header_prive'] = "";}
+				if (isset($info['script']) AND count($info['script'])){
+					foreach ($info['script'] as $script){
+						if (isset($script['path']) AND $script['path'])
+							$code = "if (\$f=timestamp(find_in_path('".addslashes($script['path'])."'))) ";
+						else
+							$code = "if (\$f='".addslashes($script['url'])."') ";
+						$code .= "\$val .= '<script src=\"'.\$f.'\" type=\"text/javascript\"></script>';\n";
+						if ($script['type']!='prive') $prepend_code['insert_head'] .= $code;
+						if ($script['type']!='public') $prepend_code['header_prive'] .= $code;
 					}
 				}
 			}
 		}
 	}
+
+	$prepend_code['insert_head'] =
+		  "include_once_check(_DIR_RESTREINT . 'inc/pipelines.php');\n"
+		. "\$val = minipipe('f_jQuery', \$val);\n"
+		. $prepend_code['insert_head'];
+	$prepend_code['header_prive'] =
+		  "include_once_check(_DIR_RESTREINT . 'inc/pipelines_ecrire.php');\n"
+		. "\$val = minipipe('f_jQuery_prive', \$val);\n"
+		. $prepend_code['header_prive'];
+
 
 	// on charge les fichiers d'options qui peuvent completer
 	// la globale spip_pipeline egalement

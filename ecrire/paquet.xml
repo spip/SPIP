@@ -80,12 +80,12 @@
 	<pipeline nom="formulaire_traiter" action="cvtautosave_formulaire_traiter" inclure="inc/cvt_autosave.php" />
 	<pipeline nom="formulaire_fond" action="" />
 	<pipeline nom="formulaire_admin" action="" />
-	<pipeline nom="header_prive" action="f_jQuery_prive" inclure="inc/pipelines_ecrire.php" />
+	<pipeline nom="header_prive" action="" />
 	<pipeline nom="header_prive_css" action="" />
 	<pipeline nom="image_preparer_filtre" action="" />
 	<pipeline nom="image_ecrire_tag_preparer" action="" />
 	<pipeline nom="image_ecrire_tag_finir" action="" />
-	<pipeline nom="insert_head" action="f_jQuery" inclure="inc/pipelines.php" />
+	<pipeline nom="insert_head" action="" />
 	<pipeline nom="insert_head_css" action="" />
 	<pipeline nom="jquery_plugins" action="" />
 	<pipeline nom="lister_tables_noerase" action="" />
