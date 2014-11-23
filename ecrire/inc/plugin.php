@@ -746,7 +746,7 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 						$nom = $prefix . $genie['nom'];
 						$periode = max(60,intval($genie['periode']));
 						if (charger_fonction($nom,"genie",true)){
-							$prepend_code['taches_generales_cron'] = "\$val['$nom'] = $periode;\n";
+							$prepend_code['taches_generales_cron'] .= "\$val['$nom'] = $periode;\n";
 						}
 						else {
 							spip_log("Fonction genie_$nom introuvable",_LOG_ERREUR);
