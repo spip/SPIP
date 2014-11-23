@@ -35,7 +35,7 @@
 
 <!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % IMPLEMENTATION "(menu|chemin|lib|necessite|onglet|procure|pipeline|utilise|style|script)*" >
+<!ENTITY % IMPLEMENTATION "(menu|chemin|lib|necessite|onglet|procure|pipeline|utilise|style|script|genie)*" >
 
 <!ELEMENT paquet (nom, %CREDITS;, traduire*, %IMPLEMENTATION;, spip*) >
 <!ATTLIST paquet
@@ -154,4 +154,10 @@
 <!ATTLIST script
 	  source %SOURCE; #REQUIRED
 	  type %NAME; #IMPLIED
+>
+
+<!ELEMENT genie EMPTY>
+<!ATTLIST genie
+	  nom %NAME; #REQUIRED
+	  periode %NUMBER; #REQUIRED
 >

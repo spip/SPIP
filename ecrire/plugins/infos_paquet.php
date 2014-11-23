@@ -130,6 +130,7 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 			$attrs['utilise'] = array();
 			$attrs['style'] = array();
 			$attrs['script'] = array();
+			$attrs['genie'] = array();
 		}
 		$phraseur->contenu['compatible'] = $n;
 		$phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
@@ -144,7 +145,7 @@ function paquet_debutElement($phraseur, $name, $attrs) {
  * et memoriser les attributs dans le tableau avec l'oppose de la profondeur
  * comme index, avec '' comme sous-index (les autres sont les attributs)
  *
- * @param pbject $phraseur
+ * @param object $phraseur
  * @param string $data
  */
 function paquet_textElement($phraseur, $data) {
@@ -328,9 +329,9 @@ function info_paquet_spip($phraseur, $attrs, $texte) {
 /**
  * Pipelines : plusieurs declarations possibles pour un meme pipeline
  *
- * @param $phraseur
- * @param $attrs
- * @param $texte
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
  */
 function info_paquet_pipeline($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
@@ -342,9 +343,9 @@ function info_paquet_pipeline($phraseur, $attrs, $texte) {
  * Style : plusieurs declarations possibles.
  * Traitement de l'attribut source pour générer en remplacement les attributs url et path
  *
- * @param $phraseur
- * @param $attrs
- * @param $texte
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
  */
 function info_paquet_style($phraseur, $attrs, $texte) {
 	$lien = $chemin = $type = $media = '';
@@ -368,9 +369,9 @@ function info_paquet_style($phraseur, $attrs, $texte) {
  * Script : plusieurs declarations possibles.
  * Traitement de l'attribut source pour générer en remplacement les attributs url et path
  *
- * @param $phraseur
- * @param $attrs
- * @param $texte
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
  */
 function info_paquet_script($phraseur, $attrs, $texte) {
 	$lien = $chemin = $type = $media = '';
@@ -385,6 +386,18 @@ function info_paquet_script($phraseur, $attrs, $texte) {
 
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['script'][] = array('url' => $lien, 'path' => $chemin, 'type' => $type);
+}
+
+/**
+ * Genie : plusieurs declarations possibles pour les crons
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+ */
+function info_paquet_genie($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['genie'][] = $attrs;
 }
 
 ?>
