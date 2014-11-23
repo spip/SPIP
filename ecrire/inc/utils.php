@@ -380,7 +380,7 @@ function set_request($var, $val = NULL, $c=false) {
  * @return bool
  */
 function tester_url_absolue($url){
-	return preg_match(";^([a-z]+:)?//;Uims",trim($url))?true:false;
+	return preg_match(";^([a-z]{3,7}:)?//;Uims",trim($url))?true:false;
 }
 
 /**
