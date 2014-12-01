@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.2.1'); // 2014-11-15
+define('_ECRAN_SECURITE', '1.2.2'); // 2014-11-15
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -26,6 +26,8 @@ if (!defined('_IS_BOT'))
 		AND preg_match(
 	    // mots generiques
 	    ',bot|slurp|crawler|spider|webvac|yandex|'
+	    // MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
+	    . 'MSIE 6\.0|'
 	    // UA plus cibles
 	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
 	    . ',i',(string) $_SERVER['HTTP_USER_AGENT'])
@@ -227,6 +229,15 @@ if (count($_FILES)){
 		 AND preg_match(',\.php,i',$v['name']))
 		 	unset($_FILES[$k]);
 	}
+}
+/*
+ * et Contact trop laxiste avec une variable externe
+ * on bloque pas le post pour eviter de perdre des donnees mais on unset la variable et c'est tout
+ */
+if (isset($_REQUEST['pj_enregistrees_nom']) AND $_REQUEST['pj_enregistrees_nom']){
+	unset($_REQUEST['pj_enregistrees_nom']);
+	unset($_GET['pj_enregistrees_nom']);
+	unset($_POST['pj_enregistrees_nom']);
 }
 
 /*
