@@ -149,7 +149,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						'publie' => 'publie',
 						'previsu' => 'publie,prop,prepa/auteur',
 						'post_date' => 'date',
-						'exception' => 'statut'
+						'exception' => array('statut','tout')
 					)
 				),
 				'statut_titres' => array(
