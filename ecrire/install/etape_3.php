@@ -61,7 +61,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	// un sql_mode
 	install_mode_appel($server_db, false);
 	$GLOBALS['connexions'][$server_db]
-	= spip_connect_db($adresse_db, 0, $login_db, $pass_db, $sel_db, $server_db);
+	= spip_connect_db($adresse_db, $port, $login_db, $pass_db, $sel_db, $server_db);
 
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
 	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
