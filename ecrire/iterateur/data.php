@@ -541,6 +541,7 @@ function inc_plugins_to_array_dist() {
  * @return array
  */
 function inc_xml_to_array_dist($u) {
+	var_dump(XMLObjectToArray(new SimpleXmlIterator($u)));die();
 	return @XMLObjectToArray(new SimpleXmlIterator($u));
 }
 
@@ -739,7 +740,7 @@ function XMLObjectToArray($object){
 			foreach($vars['@attributes'] as $k => $v)
 			$xml_array[$key][$k] = $v;
 		if($object->hasChildren()){
-			$xml_array[$key][] = ObjectToArray(
+			$xml_array[$key][] = XMLObjectToArray(
 				$object->current());
 		}
 		else{
