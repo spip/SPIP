@@ -114,13 +114,13 @@ function traduire_nom_langue($lang) {
 //
 
 // Donne la direction d'ecriture a partir de la langue. Retourne 'gaucher' si
-// la langue est arabe, persan, kurde, pachto, ourdou (langues ecrites en
+// la langue est arabe, persan, kurde, dari, pachto, ourdou (langues ecrites en
 // alphabet arabe a priori), hebreu, yiddish (langues ecrites en alphabet
 // hebreu a priori), 'droitier' sinon.
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
 // http://doc.spip.org/@lang_dir
 function lang_dir($lang='', $droitier='ltr', $gaucher='rtl') {
-	static $lang_rtl = array('ar', 'fa', 'ku', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
+	static $lang_rtl = array('ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
 
 	return in_array(($lang ? $lang : $GLOBALS['spip_lang']), $lang_rtl) ?
 		$gaucher : $droitier;
