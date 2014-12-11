@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'إلغاء',
 	'antispam_champ_vide' => 'الرجاء الإبقاء على هذا الحقل فارغاً:',
 	'articles_recents' => 'أحدث المقالات',
+	'avis_1_erreur_saisie' => 'هناك خطأ في إدخالك، الرجاء التدقيق في المعلومات.',
 	'avis_archive_incorrect' => 'ملف الأرشيف ليس ملف SPIP',
 	'avis_archive_invalide' => 'ملف الأرشيف غير صالح',
 	'avis_attention' => 'تحذير!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'خطأ SQL ',
 	'avis_erreur_sauvegarde' => 'خطأ في النسخة الاحتياطية (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'هناك مشكلة في الدخول إلى المجال الخاص',
+	'avis_nb_erreurs_saisie' => 'هناك @nb@ خطأ في إدخالك، الرجاء التدقيق في المعلومات.',
 
 	// B
 	'barre_a_accent_grave' => 'إدراج حرف A كبير مع نبر الإطالة',
