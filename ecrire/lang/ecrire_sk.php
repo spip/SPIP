@@ -172,6 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => 'Zapísať nového autora a priradiť ho k tomuto článku',
 	'icone_creer_mot_cle' => 'Vytvoriť nové kľúčové slovo a priradiť ho k tomuto článku',
 	'icone_creer_rubrique_2' => 'Vytvoriť novú rubriku',
+	'icone_developpement' => 'Vývoj',
 	'icone_edition' => 'Upraviť',
 	'icone_ma_langue' => 'Môj jazyk',
 	'icone_mes_infos' => 'Moje údaje',
@@ -197,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_visiteur' => '1 návštevník',
 	'info_activer_cookie' => 'Môžete aktivovať <b>svoju cookie,</b> ktorá vám umožní
  jednoducho prechádzať medzi verejne prístupnou  stránkou a súkromnou zónou.',
+	'info_activer_menu_developpement' => 'Zobraziť menu Vývoj',
 	'info_admin_etre_webmestre' => 'Prideliť mi práva administrátora webu',
 	'info_admin_gere_rubriques' => 'Tento administrátor riadi tieto rubriky:',
 	'info_admin_gere_toutes_rubriques' => 'Tento administrátor riadi <b>všetky rubriky</b>',
