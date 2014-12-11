@@ -212,13 +212,16 @@ function liste_plugin_valides($liste_plug, $force = false)
 			$liste_non_classee[$p] = $procure;
 			// on fournit une information minimale pour ne pas perturber la compilation
 			$infos['_DIR_RESTREINT'][$procure['nom']] = array(
+				'prefix' => $procure['nom'],
 				'nom' => $procure['nom'],
-				'etat' => $procure['stable'],
+				'etat' => $procure['etat'],
 				'version' => $procure['version'],
 				'chemin' => array(),
 				'necessite' => array(),
 				'utilise' => array(),
 				'lib' => array(),
+				'menu' => array(),
+				'onglet' => array(),
 			);
 		}
 	}
