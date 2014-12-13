@@ -232,8 +232,9 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 			$joker = false; // indiquer a l'appelant
 			// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
 			if ($boucles[$idb]->jointures_explicites) {
-				$t = trouver_champ_exterieur($nom_champ, 
-						 $boucles[$idb]->jointures,
+				$jointures = preg_split("/\s+/",$boucles[$idb]->jointures_explicites);
+				$t = trouver_champ_exterieur($nom_champ,
+						 $jointures,
 						 $boucles[$idb]);
 				if ($t) {
 					// si on a trouvé une jointure possible, on fait comme
