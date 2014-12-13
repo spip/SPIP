@@ -230,20 +230,26 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 		// tenter via une jointure...
 		else {
 			$joker = false; // indiquer a l'appelant
-			// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
-			if ($boucles[$idb]->jointures_explicites) {
-				$jointures = preg_split("/\s+/",$boucles[$idb]->jointures_explicites);
-				$t = trouver_champ_exterieur($nom_champ,
-						 $jointures,
-						 $boucles[$idb]);
-				if ($t) {
-					// si on a trouvé une jointure possible, on fait comme
-					// si c'était une exception pour le champ demandé
-					return index_exception($boucles[$idb],
-						$desc,
-						$nom_champ,
-						array($t[1]['id_table'], $nom_champ));
+			// regarder si le champ est deja dans une jointure existante
+			// sinon, si il y a des joitures explicites, la construire
+			if (!$t = trouver_champ_exterieur($nom_champ,$boucles[$idb]->from,$boucles[$idb])){
+				if ($boucles[$idb]->jointures_explicites) {
+					// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
+					// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
+					// mais est-ce ce qu'on veut ?
+					$jointures = preg_split("/\s+/",$boucles[$idb]->jointures_explicites);
+					if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)){
+						$t = trouver_champ_exterieur($nom_champ,$boucles[$idb]->from,$boucles[$idb]);
+					}
 				}
+			}
+			if ($t) {
+				// si on a trouvé une jointure possible, on fait comme
+				// si c'était une exception pour le champ demandé
+				return index_exception($boucles[$idb],
+					$desc,
+					$nom_champ,
+					array($t[1]['id_table'], $nom_champ));
 			}
 			return array('','');
 		}
