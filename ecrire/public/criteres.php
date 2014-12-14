@@ -1730,6 +1730,9 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 			$t = array_search($arrivee[0], $boucle->from);
 			// recuperer la cle id_xx eventuellement decomposee en (id_objet,objet)
 			$cols = $arrivee[2];
+			// mais on ignore la 3eme cle si presente qui correspond alors au point de depart
+			if (count($cols)>2)
+				array_pop($cols);
 			if ($t){
 				// la table est déjà dans le FROM, on vérifie si le champ est utilisé.
 				$joindre = false;
@@ -1744,6 +1747,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 				}
 				if (!$joindre) return $t;
 			}
+			array_pop($arrivee);
 			if ($res = calculer_jointure($boucle, array($boucle->id_table, $desc), $arrivee, $cols, $cond, 1)) {
 				return $res;
 			}
