@@ -1009,8 +1009,8 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
 		$scheme = 'http';
 		$noproxy = '';
 	} elseif ($t['scheme']=='https') {
-		$scheme = 'ssl';
-		$noproxy = 'ssl://';
+		$scheme = 'tls';
+		$noproxy = 'tls://';
 		if (!isset($t['port']) || !($port = $t['port'])) $t['port'] = 443;
 	} else {
 		$scheme = $t['scheme'];
@@ -1045,7 +1045,7 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
  * @param string $method
  *   type de la requete (GET, HEAD, POST...)
  * @param string $scheme
- *   protocole (http, ssl, ftp...)
+ *   protocole (http, tls, ftp...)
  * @param array $user
  *   couple (utilisateur, mot de passe) en cas d'authentification http
  * @param string $host
@@ -1078,13 +1078,13 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 
 	$connect = "";
 	if ($http_proxy){
-		if (defined('_PROXY_HTTPS_VIA_CONNECT') AND $scheme=="ssl"){
+		if (defined('_PROXY_HTTPS_VIA_CONNECT') AND $scheme=="tls"){
 			$path_host = (!$user ? '' : "$user@") . $host . (($port!=80) ? ":$port" : "");
 			$connect = "CONNECT " . $path_host . " $vers\r\n"
 				. "Host: $path_host\r\n"
 				. "Proxy-Connection: Keep-Alive\r\n";
 		} else {
-			$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
+			$path = (($scheme=='tls') ? 'https://' : "$scheme://")
 				. (!$user ? '' : "$user@")
 				. "$host" . (($port!=80) ? ":$port" : "") . $path;
 		}
@@ -1120,7 +1120,10 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 		stream_socket_enable_crypto($f, true, STREAM_CRYPTO_METHOD_SSLv23_CLIENT);
 		spip_log("OK CONNECT sur $first_host:$port", "connect");
 	} else {
-		$f = @fsockopen($first_host, $port);
+		$ntry = 3;
+		do {
+			$f = @fsockopen($first_host, $port, $errno, $errstr, 10);
+		} while(!$f AND $ntry-- AND sleep(1));
 		spip_log("Recuperer $path sur $first_host:$port par $f");
 		if (!$f) return false;
 	}
