@@ -534,10 +534,11 @@ function trouver_jointure_champ($champ, &$boucle, $jointures = false, $cond = fa
 	}
 	// TODO : aberration, on utilise $jointures pour trouver le champ
 	// mais pas poour construire la jointure ensuite
-	$cle = trouver_champ_exterieur($champ, $jointures, $boucle);
-	if ($cle){
+	$arrivee = trouver_champ_exterieur($champ, $jointures, $boucle);
+	if ($arrivee){
 		$desc = $boucle->show;
-		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, '', $cond);
+		array_pop($arrivee); // enlever la cle en 3eme argument
+		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $arrivee, '', $cond);
 	}
 	if ($cle) return $cle;
 	spip_log("trouver_jointure_champ: $champ inconnu");
