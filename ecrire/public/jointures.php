@@ -469,7 +469,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 			        // si on sait ou on veut arriver, il faut que ca colle
 			        AND ($checkarrivee==false || $checkarrivee==$table['table'])
 			)
-				return array($table['table'], $table);
+				return array($table['table'], $table, $cle);
 		}
 	}
 
