@@ -98,9 +98,9 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 		$desc = substr($desc, 0,$p);
 	$url = parametre_url($url_page, "plugin", $dir);
 
-	if (isset($info['icon']) and $i = trim($info['icon'])) {
+	if (isset($info['icon']) AND $i = trim($info['icon'])) {
 		include_spip("inc/filtres_images_mini");
-		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','');
+		$i = image_reduire("<img src='$dir/$i' alt='' />", 32);
 		$i = "<div class='icon'><a href='$url' rel='info'>$i</a></div>";
 	} else $i = '';
 
