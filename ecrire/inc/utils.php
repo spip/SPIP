@@ -848,6 +848,7 @@ function job_queue_add($function, $description, $arguments = array(), $file = ''
 
 /**
  * Supprimer une tache de la file d'attente
+ * 
  * @param int $id_job
  *  id of jonb to delete
  * @return bool
@@ -859,6 +860,7 @@ function job_queue_remove($id_job){
 
 /**
  * Associer une tache a un/des objets de SPIP
+ * 
  * @param int $id_job
  *	id of job to link
  * @param array $objets
