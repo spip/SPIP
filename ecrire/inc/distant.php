@@ -665,11 +665,10 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 
 	$proxy_user = '';
 	$http_proxy = need_proxy($host);
-	if ($user) $user = urlencode($user[0]) . ":" . urlencode($user[1]);
 
 	if ($http_proxy){
 		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
-			. (!$user ? '' : "$user@")
+			. (!$user ? '' : (urlencode($user[0]) . ":" . urlencode($user[1]) . "@"))
 			. "$host" . (($port!=80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
 		$first_host = $t2['host'];
@@ -686,13 +685,15 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 
 	$site = $GLOBALS['meta']["adresse_site"];
 
+	if ($user) $user = base64_encode($user[0] . ":" . $user[1]);
+
 	$req = "$method $path $vers\r\n"
 		. "Host: $host\r\n"
 		. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
 		. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
 		. (!$site ? '' : "Referer: $site/$referer\r\n")
 		. (!$date ? '' : "If-Modified-Since: " . (gmdate("D, d M Y H:i:s", $date) . " GMT\r\n"))
-		. (!$user ? '' : ("Authorization: Basic " . base64_encode($user) . "\r\n"))
+		. (!$user ? '' : "Authorization: Basic $user\r\n")
 		. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
 		. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
 
