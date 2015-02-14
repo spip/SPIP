@@ -142,6 +142,7 @@ $GLOBALS['codes_langues'] = array(
 	'oc_lnc' => "&ograve;c lengadocian",
 	'oc_ni' => "&ograve;c ni&ccedil;ard",
 	'oc_ni_la' => "&ograve;c ni&ccedil;ard (larg)",
+	'oc_ni_mis' => "&ograve;c nissart (mistralenc)",
 	'oc_prv' => "&ograve;c proven&ccedil;au",
 	'oc_gsc' => "&ograve;c gascon",
 	'oc_lms' => "&ograve;c lemosin",
