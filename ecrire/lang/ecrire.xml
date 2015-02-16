@@ -138,14 +138,14 @@
 	</langue>
 	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_lnc" total="789" traduits="518" relire="0" modifs="40" nouveaux="231" pourcent="65.65">
 	</langue>
-	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni" total="789" traduits="532" relire="2" modifs="16" nouveaux="239" pourcent="67.43">
+	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni" total="789" traduits="674" relire="1" modifs="0" nouveaux="114" pourcent="85.42">
 		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_la" total="789" traduits="457" relire="0" modifs="40" nouveaux="292" pourcent="57.92">
 		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
 	</langue>
-	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="789" traduits="783" relire="0" modifs="0" nouveaux="6" pourcent="99.24">
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="789" traduits="789" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_prv" total="789" traduits="471" relire="0" modifs="40" nouveaux="278" pourcent="59.70">
