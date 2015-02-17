@@ -1,5 +1,5 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ar" total="789" traduits="787" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ar" total="789" traduits="789" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="chankalan" lien="http://trad.spip.net/auteur/chankalan" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>

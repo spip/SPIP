@@ -174,6 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => 'إضافة مؤلف جديد وإشراكه في هذا المقال',
 	'icone_creer_mot_cle' => 'إنشاء مفتاح جديد وربطه بهذا المقال',
 	'icone_creer_rubrique_2' => 'إنشاء قسم جديد',
+	'icone_developpement' => 'تطوير',
 	'icone_edition' => 'تحرير',
 	'icone_ma_langue' => 'لغتي',
 	'icone_mes_infos' => 'بياناتي',
@@ -199,6 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_visiteur' => 'زائر واحد',
 	'info_activer_cookie' => 'يمكنك تفعيل <b>كعكة إدارية</b>، تتيح لك 
 التنقل بسهولة بين الموقع العمومي والمجال الخاص.',
+	'info_activer_menu_developpement' => 'عرض قائمة التطوير',
 	'info_admin_etre_webmestre' => 'إعطائي حقوق المشرف',
 	'info_admin_gere_rubriques' => 'هذا المدير يتمتع بحق إدارة الأقسام التالية:',
 	'info_admin_gere_toutes_rubriques' => 'هذا المدير يتمتع بحق إدارة <b>كل الأقسام<b>.',
