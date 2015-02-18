@@ -22,6 +22,7 @@ www\.cegetel\.net
 search\.conduit\.com
 search\.sweetim\.com
 chello\.fr
+isearch\.avg\.com
 
 [Voila]
 (kw|rdata)=
@@ -29,11 +30,15 @@ chello\.fr
 
 [Yahoo!]
 p=
-(.*)(search|ink|dir|google)\.yahoo\.([a-z]+)$
+(.*)(m|search|ink|dir|google)\.yahoo\.([a-z]+)$
 
 [AltaVista]
 q=
 (.*)altavista\.com
+
+[Delicious]
+p=
+delicious\.com
 
 [Ask]
 q=
@@ -104,7 +109,7 @@ www\.excite\.fr
 (.*)recherchet?\.aol\.fr
 
 [AOLsearch]
-query=
+(query|q)=
 (.*)search\.aol\.(.*)
 
 [AllTheWeb]
@@ -259,6 +264,98 @@ x_query=
 q=
 search\.babylon\.com
 
+[Crawler]
+q=
+(www\.)crawler\.com
+
+[Searchqu]
+q=
+(www\.)searchqu\.com
+
+[SearchYa]
+q=
+(www\.|)searchya\.com
+
+[Iadah]
+q=
+(www\.|)iadah\.com
+
+[Incredibar]
+q=
+(search\.)incredibar\.com
+
+[Search-Results]
+q=
+(.*\.|)search-results\.com
+
+[Facemoods]
+s=
+start\.facemoods\.com
+
+[Yandex]
+text=
+(www\.)?yandex\.ru
+
+[Xeoo]
+k=
+(www\.)?xeoo\.com
+
+[Delta Search]
+q=
+(.*\.|)delta-search\.com
+
+[HolaSearch]
+q=
+(.*\.|)holasearch\.com
+
+[Govome]
+q=
+(.*\.|)govome\.com
+
+[mySearchDial]
+q=
+(.*\.|)mysearchdial\.com
+
+[SOSO Globo]
+q=
+(.*\.|)globososo\.com
+
+[Seznam]
+q=
+(.*\.|)seznam\.cz
+
+[Baidu]
+wd=
+(.*\.|)baidu\.com
+
+[Dogpile]
+q=
+(.*\.|)dogpile\.co\.uk
+
+[Trouver]
+q=
+(.*\.|)trouver\.fr
+
+[Pesquisa]
+q=
+pesquisa\.sapo\.pt
+
+[Qwant]
+q=
+(.*\.|)qwant\.com
+
+[Qone8]
+q=
+(.*\.|)qone8\.com
+
+[Ecosia]
+q=
+(.*\.|)ecosia\.org
+
+[Wow]
+q=
+(.*\.|)wow\.com
+
 #
 # Services de mail
 # 
@@ -273,4 +370,3 @@ webmail([0-9]*)\.wanadoo\.fr
 www\.laposte\.net
 mail([0-9]*)\.voila\.fr
 \/(web)?mail\/
-
