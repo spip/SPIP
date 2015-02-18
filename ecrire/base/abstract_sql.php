@@ -30,6 +30,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 define('sql_ABSTRACT_VERSION', 1);
 include_spip('base/connect_sql');
 
+function sql_error_backtrace($compil_info = false){
+	$trace = debug_backtrace();
+	$caller = array_shift($trace);
+	while (count($trace) AND ($trace[0]['file']===$caller['file'] OR $trace[0]['file']===__FILE__))
+		array_shift($trace);
+
+	if ($compil_info){
+		$contexte_compil = array(
+			$trace[0]['file'],// sourcefile
+			'', //nom
+			$trace[1]['function']."(){\n".$trace[0]['function']."();\n}", //id_boucle
+			$trace[0]['line'], // ligne
+			$GLOBALS['spip_lang'], // lang
+		);
+		return $contexte_compil;
+	}
+	$message = $trace[0]['file']." L".$trace[0]['line'];
+	$f = array();
+	while(count($trace) AND $t=array_shift($trace)){
+		if (in_array($t['function'],array('include_once','include_spip','find_in_path')))
+			break;
+		$f[] = $t['function'];
+	}
+	if (count($f))
+		$message .= " [".implode("(),",$f)."()]";
+
+	return $message;
+}
+
 
 
 /**
@@ -195,7 +224,8 @@ function sql_select ($select = array(), $from = array(), $where = array(),
 	// denoncer l'erreur SQL dans sa version brute
 	spip_sql_erreur($serveur);
 	// idem dans sa version squelette (prefixe des tables non substitue)
-	erreur_squelette(array(sql_errno($serveur), sql_error($serveur), $res), $option);
+	$contexte_compil = sql_error_backtrace(true);
+	erreur_squelette(array(sql_errno($serveur), sql_error($serveur), $res), $contexte_compil);
 	return false;
 }
 

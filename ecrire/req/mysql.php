@@ -911,7 +911,12 @@ function spip_mysql_countsel($from = array(), $where = array(),
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 	$s = mysqli_error($link);
-	if ($s) spip_log("$s - $query", 'mysql.'._LOG_ERREUR);
+	if ($s) {
+		$trace = debug_backtrace();
+		if ($trace[0]['function']!="spip_mysql_error"){
+			spip_log("$s - $query - ".sql_error_backtrace(), 'mysql.'._LOG_ERREUR);
+		}
+	}
 	return $s;
 }
 

@@ -775,7 +775,12 @@ function spip_sqlite_error($query = '', $serveur = ''){
 	} else {
 		$s = ": aucune ressource sqlite (link)";
 	}
-	if ($s) spip_log("$s - $query", 'sqlite.'._LOG_ERREUR);
+	if ($s) {
+		$trace = debug_backtrace();
+		if ($trace[0]['function']!="spip_mysql_error"){
+			spip_log("$s - $query - ".sql_error_backtrace(), 'sqlite.'._LOG_ERREUR);
+		}
+	}
 	return $s;
 }
 
