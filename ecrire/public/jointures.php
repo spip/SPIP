@@ -539,8 +539,8 @@ function trouver_jointure_champ($champ, &$boucle, $jointures = false, $cond = fa
 		$desc = $boucle->show;
 		array_pop($arrivee); // enlever la cle en 3eme argument
 		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $arrivee, '', $cond);
+		if ($cle) return $cle;
 	}
-	if ($cle) return $cle;
 	spip_log("trouver_jointure_champ: $champ inconnu");
 	return '';
 }
