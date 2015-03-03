@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annulla',
 	'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
 	'articles_recents' => 'Articoli più recenti',
+	'avis_1_erreur_saisie' => 'C’è un errore nella vostra richiesta, verificare le informazioni.', # RELIRE
 	'avis_archive_incorrect' => 'il file archivio non è un file SPIP',
 	'avis_archive_invalide' => 'il file archivio non è valido',
 	'avis_attention' => 'ATTENZIONE!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Errore SQL ',
 	'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
 	'avis_erreur_visiteur' => 'Problema di accesso all’area riservata',
+	'avis_nb_erreurs_saisie' => 'Ci sono @nb@ errori nella vostra ricerca, verificare le informazioni.', # RELIRE
 
 	// B
 	'barre_a_accent_grave' => 'Inserire una A maiscola con accento grave',
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ ore @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'Il @jour@ dalle @heure_debut@ alle @heure_fin@', # MODIF
-	'date_fmt_jour_heure_debut_fin_abbr' => 'Il @dtstart@@jour@ dalle @heure_debut@@dtabbr@ al @dtstart@@heure_fin@@dtend@', # MODIF
+	'date_fmt_jour_heure_debut_fin' => 'Il @jour@ dalle @heure_debut@ alle @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => 'Il @dtstart@@jour@ dalle @heure_debut@@dtabbr@ alle @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -671,6 +673,7 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'titre_statistiques' => 'Statistiche del sito',
 	'titre_titre_document' => 'Titolo del documento:',
 	'todo' => 'prossimo',
+	'trad_definir_reference' => 'Scegliere "@titre@" come riferimento per le traduzioni',
 	'trad_reference' => '(articolo di riferimento)',
 
 	// Z
