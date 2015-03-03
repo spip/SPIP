@@ -11,15 +11,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Attiva il plugin',
 	'affichage' => 'Visualizzazione',
 	'aide_non_disponible' => 'Questa parte della guida in linea non è ancora disponibile in italiano.',
+	'annuler_recherche' => 'Annullare la ricerca',
 	'auteur' => 'Autrice:',
 	'avis_acces_interdit' => 'Accesso vietato.',
 	'avis_article_modifie' => 'Attenzione, @nom_auteur_modif@ ha lavorato su quest’articolo @date_diff@ minuti fa',
 	'avis_aucun_resultat' => 'Nessun risultato.',
+	'avis_base_inaccessible' => 'Impossibile connettersi al database @base@.',
 	'avis_chemin_invalide_1' => 'il percorso che hai scelto',
 	'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_1' => 'il collegamento alla base di dati è fallito.',
 	'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Spesso sul server si deve <b>chiedere</b> l’attivazione dell’accesso alla base di dati prima di poterlo utilizzare. Se è impossibile collegarsi, verificare la configurazione per la connessione con l’amministratrice del sistema.',
+	'avis_connexion_erreur_nom_base' => 'Il nome del database può contenere solo lettere, cifre e tratti',
 	'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP è fallita.',
 	'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 	'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
@@ -39,11 +42,15 @@ disattivata per motivi sicurezza (verifica con l’amministratrice di sistema).'
 	'bouton_acces_ldap' => 'Aggiungi l’accesso a LDAP',
 	'bouton_ajouter' => 'Aggiungi',
 	'bouton_annuler' => 'Annulla',
+	'bouton_cache_activer' => 'Riattivare la cache',
+	'bouton_cache_desactiver' => 'Disattivare temporaneamente la cache',
 	'bouton_demande_publication' => 'Chiedi la pubblicazione di questo articolo',
 	'bouton_desactive_tout' => 'Disattiva tutto',
 	'bouton_desinstaller' => 'Disinstalla',
 	'bouton_effacer_tout' => 'Cancella TUTTO',
 	'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
+	'bouton_fermer' => 'Chiudere',
+	'bouton_mettre_a_jour_base' => 'Aggiornare il database',
 	'bouton_modifier' => 'Modifica',
 	'bouton_radio_afficher' => 'Visualizza',
 	'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Comparire nell’elenco delle redattrici collegate',
@@ -77,25 +84,32 @@ disattivata per motivi sicurezza (verifica con l’amministratrice di sistema).'
 	'config_titre_base_sup' => 'Dichiarazione di un database supplementare',
 	'config_titre_base_sup_choix' => 'Scegliere un database supplementare',
 	'connexion_ldap' => 'Connessione:',
+	'creer_et_associer_un_auteur' => 'Creare ed associare un’autrice',
 
 	// D
 	'date_mot_heures' => 'ore',
 
 	// E
+	'ecran_securite' => ' + schermo di sicurezza @version@', # RELIRE
 	'email' => 'email',
 	'email_2' => 'email:',
+	'en_savoir_plus' => 'Ulteriori informazioni', # RELIRE
 	'entree_adresse_annuaire' => 'Indirizzo della rubrica',
 	'entree_adresse_email' => 'Il tuo indirizzo email',
+	'entree_adresse_email_2' => 'Indirizzo email',
 	'entree_base_donnee_1' => 'Indirizzo del database',
 	'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell’intero sito, qualche volta corrisponde a "localhost", altre volte invece non è necessario specificarlo.)',
 	'entree_biographie' => 'La tua biografia in breve.',
 	'entree_chemin_acces' => '<b>Inserire</b> il percorso d’accesso:',
 	'entree_cle_pgp' => 'Chiave PGP',
+	'entree_cle_pgp_2' => 'Autenticazione', # RELIRE
 	'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
 	'entree_identifiants_connexion' => 'Identificativo di connessione...',
+	'entree_identifiants_connexion_2' => 'Identificativo', # RELIRE
 	'entree_informations_connexion_ldap' => 'Inserisci in questo form gli estremi per la connessione alla tua rubrica LDAP.
 Se non conosci queste informazioni, richiedile all’amministratrice del sistema o della rete.',
 	'entree_infos_perso' => 'Chi sei?',
+	'entree_infos_perso_2' => 'Chi è l’autrice ?',
 	'entree_interieur_rubrique' => 'All’interno della rubrica:',
 	'entree_liens_sites' => '<b>Link ipertestuale</b> (riferimento, sito da visitare...)',
 	'entree_login' => 'Login',
@@ -107,13 +121,20 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'entree_nom_fichier' => 'Inserire il nome del file @texte_compresse@:',
 	'entree_nom_pseudo' => 'Nome o pseudonimo',
 	'entree_nom_pseudo_1' => '(Nome o pseudonimo)',
+	'entree_nom_pseudo_2' => 'Nome o pseudonimo',
 	'entree_nom_site' => 'Nome del tuo sito',
+	'entree_nom_site_2' => 'Nome del sito dell’autrice', # RELIRE
 	'entree_nouveau_passe' => 'Nuova password',
 	'entree_passe_ldap' => 'Password',
 	'entree_port_annuaire' => 'Il numero di porta della rubrica',
 	'entree_signature' => 'Firma',
 	'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 	'entree_url' => 'Indirizzo (URL) del sito',
+	'entree_url_2' => 'Indirizzo (URL) del sito',
+	'erreur_connect_deja_existant' => 'Esiste già un server con questo nome', # RELIRE
+	'erreur_email_deja_existant' => 'Questo indirizzo email è già registrato',
+	'erreur_nom_connect_incorrect' => 'Questo nome non è autorizzato', # RELIRE
+	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plug in è fallita. E’ comunque possibile disattivarlo.', # RELIRE
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
@@ -121,6 +142,9 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'erreur_plugin_prefix_manquant' => 'Spazio per il nome del plugin non definito',
 	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
 	'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
+
+	// H
+	'htaccess_a_simuler' => 'Attenzione: la configurazione del vostro server HTTP non tiene conto dei file @htaccess@. Per poter mettere in sicurezza bisognerà modificare la configurazione di questo punto, oppure sarà necessario che i parametri fissi @constantes@ (definiti nel file le_mie_opzioni.php) abbiano i valore dei registri diversi da @document_root@.', # RELIRE
 
 	// I
 	'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attività del sito.',
@@ -136,6 +160,7 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'ical_titre_mailing' => 'Mailing-list',
 	'ical_titre_rss' => 'File di syndication',
 	'icone_activer_cookie' => 'Attiva il cookie di corrispondenza',
+	'icone_activite' => 'Attività',
 	'icone_admin_plugin' => 'Gestione dei plugin',
 	'icone_afficher_auteurs' => 'Pubblica le autrici',
 	'icone_afficher_visiteurs' => 'Pubblica i visitatori',
@@ -144,6 +169,8 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'icone_creer_auteur' => 'Crea una nuova autrice ed associala a questo articolo',
 	'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
 	'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
+	'icone_ma_langue' => 'La mia lingua',
+	'icone_mes_infos' => 'Le mie informazioni',
 	'icone_modifier_article' => 'Modifica l’articolo',
 	'icone_modifier_rubrique' => 'Modifica la rubrica',
 	'icone_relancer_signataire' => 'Rilanciare il firmatario',
@@ -256,7 +283,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_hier' => 'ieri:',
 	'info_identification_publique' => 'La tua identità pubblica...',
 	'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull’immagine corrispondente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l’uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>', # MODIF
+	'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l’uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi alla responsabile tecnica chiedendo di installare le estensioni "GD" o "Imagick".</i>', # MODIF
 	'info_images_auto' => 'Immagini elaborate automaticamente',
 	'info_informations_personnelles' => 'Informazioni personali',
 	'info_inscription_automatique' => 'Iscrizione automatica di nuove redattrici',
@@ -304,7 +331,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_nouvel_article' => 'Nuovo articolo',
 	'info_nouvelle_traduction' => 'Nuova traduzione:',
 	'info_numero_article' => 'ARTICOLO NUMERO:',
-	'info_obligatoire_02' => '[Obbligatorio]', # MODIF
+	'info_obligatoire_02' => '[obbligatorio]', # MODIF
 	'info_option_accepter_visiteurs' => 'Accetta l’iscrizione di utenti del sito pubblico',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rifiuta l’iscrizione di utenti',
 	'info_options_avancees' => 'OPZIONE AVANZATA',
