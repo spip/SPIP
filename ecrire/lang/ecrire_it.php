@@ -152,7 +152,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'ical_info2' => 'Per ulteriori informazioni su tutte queste tecniche, non esitate a consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
 	'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo è una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: è un’area riservata, mediante identificativo personale, che è possibile modificare in qualsiasi momento rinnovando la password personale.',
 	'ical_methode_http' => 'Download',
-	'ical_methode_webcal' => 'Sincronizzazione (webcal://)', # MODIF
+	'ical_methode_webcal' => 'Sincronizzazione (webcal://)',
 	'ical_texte_js' => 'Una linea in javascript permette di visualizzare, con molta semplicità e su qualsiasi tipo di sito, gli articoli recenti pubblicati su questo sito.',
 	'ical_texte_prive' => 'Questo calendario, ad uso strettamente privato, dà informazioni sull’attività redazionale privata di questo sito (impegni e appuntamenti personali, articoli e brevi proposti...).',
 	'ical_texte_public' => 'Questo calendario permette di monitorare l’attività pubblica del sito (articoli e brevi pubblicati).',
@@ -173,6 +173,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'icone_creer_auteur' => 'Crea un nuovo autore ed associalo a questo articolo',
 	'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
 	'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
+	'icone_developpement' => 'Sviluppo',
 	'icone_edition' => 'Modifica',
 	'icone_ma_langue' => 'La mia lingua',
 	'icone_mes_infos' => 'Le mie informazioni',
@@ -198,6 +199,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'info_1_visiteur' => '1 visitatore',
 	'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetterà
 di passare facilmente dal sito pubblico all’interfaccia privata.',
+	'info_activer_menu_developpement' => 'Mostra il menù Sviluppo', # RELIRE
 	'info_admin_etre_webmestre' => 'Concedimi i privilegi di webmaster',
 	'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 	'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
@@ -322,6 +324,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_image_process2' => 'Se non appare alcuna immagine, significa che la configurazione del server non permette l’uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni «GD» o «Imagick».',
 	'info_images_auto' => 'Immagini elaborate automaticamente',
 	'info_informations_personnelles' => 'Informazioni personali',
+	'info_inscription' => 'Iscritto il',
 	'info_inscription_automatique' => 'Iscrizione automatica di nuovi redattori',
 	'info_jeu_caractere' => 'Set di caratteri del sito',
 	'info_jours' => 'giorni',
@@ -421,6 +424,7 @@ In caso affermativo, i visitatori potranno iscriversi grazie ad un modulo automa
 	'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 	'info_redirection' => 'Reindirizzamento',
 	'info_redirection_activee' => 'Il reindirizzamento è attivato.',
+	'info_redirection_boucle' => 'Stai cercando di sovrascrivere l’articolo', # RELIRE
 	'info_redirection_desactivee' => 'Il reindirizzamento è stato cancellato.',
 	'info_refuses' => 'I tuoi articoli rifiutati',
 	'info_reglage_ldap' => 'Opzioni: <b>Parametri per l’importazione LDAP</b>',
@@ -580,6 +584,7 @@ Le traduzioni sono associate all’originale,
 	'lien_retirer_tous_auteurs' => 'Elimina tutti gli autori',
 	'lien_retirer_toutes_rubriques' => 'Rimuovi tutte le rubriche',
 	'lien_site' => 'sito',
+	'lien_tout_decocher' => 'Deselezionare tutto',
 	'lien_tout_deplier' => 'Espandi',
 	'lien_tout_replier' => 'Richiudi',
 	'lien_tout_supprimer' => 'Eliminare tutto',
@@ -755,13 +760,12 @@ Serviti dell’elenco qui sotto per indicare quali elementi rendere disponibili.
 	'texte_en_cours_validation' => 'Gli articoli e le brevi elencati qui sotto sono stati proposti per la pubblicazione. ',
 	'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le «scorciatoie tipografiche»',
 	'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
-e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
- Questi file possono servire a limitare l’accesso agli autori
+e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b>
+<p> Questi file possono servire a limitare l’accesso agli autori
 e agli amministratori in particolari aree del sito
-(per esempio, per un programma esterno di statistiche).</p><p>
-Se ciò non è necessario, lasciare quest’opzione
-al suo valore predefinito (nessuna creazione 
-di file).</p>', # MODIF
+(per esempio, per un programma esterno di statistiche).</p>
+<p> Se ciò non è necessario, lasciare quest’opzione al suo valore predefinito (nessuna creazione 
+di file).</p>',
 	'texte_informations_personnelles_1' => 'Il sistema creerà un tuo accesso personalizzato al sito.',
 	'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 	'texte_introductif_article' => 'Testo introduttivo dell’articolo',
