@@ -109,7 +109,7 @@
 		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it_fem" total="789" traduits="620" relire="9" modifs="36" nouveaux="124" pourcent="78.58">
+	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it_fem" total="789" traduits="637" relire="28" modifs="0" nouveaux="124" pourcent="80.74">
 		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 	</langue>
 	<langue code="ja" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ja" total="789" traduits="464" relire="0" modifs="40" nouveaux="285" pourcent="58.81">
