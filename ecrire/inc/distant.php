@@ -946,9 +946,12 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	if ($mime_type=='text/html'){
 		include_spip('inc/filtres');
 		$page = recuperer_page($source, true, false, _INC_DISTANT_MAX_SIZE);
-		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs))
+		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs)) {
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
-		if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
+		}
+		if (!isset($a['taille']) or !$a['taille']) {
+			$a['taille'] = strlen($page); # a peu pres
+		}
 	}
 	$a['mime_type'] = $mime_type;
 
