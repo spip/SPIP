@@ -134,6 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom',
 	'erreur_email_deja_existant' => 'Cette adresse email est déjà enregistrée.',
 	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n’est pas autorisé',
+	'erreur_plugin_attribut_balise_manquant' => 'Attribut @attribut@ manquant dans la balise @balise@.',
 	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a échoué. Vous pouvez néanmoins le désactiver.',
 	'erreur_plugin_fichier_absent' => 'Fichier absent',
 	'erreur_plugin_fichier_def_absent' => 'Fichier de définition absent',

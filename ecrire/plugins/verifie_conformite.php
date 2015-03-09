@@ -122,7 +122,13 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		if (spip_xml_match_nodes(',^necessite,',$arbre,$needs)){
 			foreach(array_keys($needs) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
-				$necessite[] = $att;
+				if (!isset($att['id'])) {
+					if (!$silence) {
+						$arbre['erreur'][] = _T('erreur_plugin_attribut_balise_manquant', array('attribut' => 'id', 'balise' => $att));
+					}
+				} else {
+					$necessite[] = $att;
+				}
 				if (strtolower($att['id']) == 'spip')
 					$spip_trouve = true;
 			}
@@ -134,7 +140,13 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		if (spip_xml_match_nodes(',^utilise,',$arbre,$uses)){
 			foreach(array_keys($uses) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
-				$utilise[] = $att;
+				if (!isset($att['id'])) {
+					if (!$silence) {
+						$arbre['erreur'][] = _T('erreur_plugin_attribut_balise_manquant', array('attribut' => 'id', 'balise' => $att));
+					}
+				} else {
+					$utilise[] = $att;
+				}
 			}
 		}
 		$arbre['utilise'] = $utilise;
