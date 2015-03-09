@@ -38,9 +38,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if (!charger_php_extension('mysqli')) return false;
 	if ($port) {
-		$link = mysqli_connect($host, $login, $pass, '', $port);
+		$link = @mysqli_connect($host, $login, $pass, '', $port);
 	} else {
-		$link = mysqli_connect($host, $login, $pass);
+		$link = @mysqli_connect($host, $login, $pass);
 	}
 
 	if (!$link) {

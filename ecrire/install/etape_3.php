@@ -48,12 +48,17 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	$fquery = sql_serveur('query', $server_db);
 	if ($choix_db == "new_spip") {
 		$re = ',^[a-z_][a-z_0-9-]*$,i';
-		if (preg_match($re, $sel_db))
-			sql_create_base($sel_db, $server_db);
-		else {
-		  $re = "Le nom de la base doit correspondre a $re";
-		  spip_log($re);
-		  return "<p>"._T("avis_connexion_erreur_nom_base")."</p><!--\n$re\n-->";
+		if (preg_match($re, $sel_db)) {
+			$ok = sql_create_base($sel_db, $server_db);
+			if (!$ok) {
+				$re = "Impossible de creer la base $re";
+				spip_log($re);
+				return "<p>"._T("avis_connexion_erreur_creer_base")."</p><!--\n$re\n-->";
+			}
+		} else {
+			$re = "Le nom de la base doit correspondre a $re";
+			spip_log($re);
+			return "<p>"._T("avis_connexion_erreur_nom_base")."</p><!--\n$re\n-->";
 		}
 	}
 
