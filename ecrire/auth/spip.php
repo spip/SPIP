@@ -349,7 +349,7 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(),
 		// Cette variable de configuration peut etre posee par un plugin
 		// par exemple acces_restreint ;
 		// si .htaccess existe, outrepasser spip_meta
-		if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
+		if ((!isset($GLOBALS['meta']['creer_htpasswd']) OR ($GLOBALS['meta']['creer_htpasswd'] != 'oui'))
 		AND !@file_exists($htaccess)) {
 			spip_unlink($htpasswd);
 			spip_unlink($htpasswd."-admin");
