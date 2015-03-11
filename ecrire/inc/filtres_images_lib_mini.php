@@ -877,6 +877,10 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		}
 		// gd ou gd2
 		else if ($process == 'gd1' OR $process == 'gd2') {
+			if (!function_exists('gd_info')) {
+				spip_log("Librairie GD absente !", _LOG_ERREUR);
+				return;
+			}
 			if (_IMG_GD_MAX_PIXELS && $srcWidth*$srcHeight>_IMG_GD_MAX_PIXELS){
 				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
 				return;
