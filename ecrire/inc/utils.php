@@ -922,7 +922,7 @@ function queue_sleep_time_to_next_job($force=null) {
 // http://doc.spip.org/@quote_amp
 function quote_amp($u) {
 	return preg_replace(
-		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
+		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,6};)/i",
 		"&amp;",$u);
 }
 
