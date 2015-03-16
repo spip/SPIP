@@ -21,6 +21,7 @@
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_MYSQL_NOPLANES')) define('_MYSQL_NOPLANES', true);
 
 /**
  * Crée la première connexion à un serveur MySQL via MySQLi
