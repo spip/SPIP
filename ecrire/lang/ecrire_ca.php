@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Activar el connector',
 	'affichage' => 'Presentació',
 	'aide_non_disponible' => 'Aquesta part de l’ajuda en línia no està encara disponible en aquesta llengua.',
+	'annuler_recherche' => 'Anul-lar la cerca',
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Accès prohibit',
 	'avis_article_modifie' => 'Atenció, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',
@@ -131,7 +132,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'entree_url_2' => 'Adreça (URL) del lloc',
 	'erreur_connect_deja_existant' => 'Ja existeix un servidor amb aquest nom',
 	'erreur_nom_connect_incorrect' => 'Aquest nom de servidor no està autoritzat',
-	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
 	'erreur_plugin_fichier_absent' => 'Fitxer absent',
 	'erreur_plugin_fichier_def_absent' => 'Fitxer de definició absent',
 	'erreur_plugin_nom_fonction_interdit' => 'Nom de funció prohibit',
@@ -149,7 +150,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'ical_info2' => 'Per tenir més informacions sobre aquestes tècniques, no dubteu a consultar <a href="@spipnet@">la documentació d’SPIP</a>.',
 	'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposició. El primer és un mapa del lloc que mostra tots els articles publicats. El segon conté els anuncis editorials a més dels vostres darrers missatges privats: està reservat per vosaltres gràcies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
 	'ical_methode_http' => 'Descàrrega',
-	'ical_methode_webcal' => 'Sincronització (webcal://)', # MODIF
+	'ical_methode_webcal' => 'Sincronització (webcal://)',
 	'ical_texte_js' => 'Els articles publicats en aquest lloc poden ser mostrats fàcilment, en qualsevol lloc vostre, mitjançant una línia de javascript. ',
 	'ical_texte_prive' => 'Aquest calendari, d’ús estrictament personal, us informa de l’activitat editorial privada d’aquest lloc (feines i cites personals, articles i breus proposats...).',
 	'ical_texte_public' => 'Aquest calendari us permet seguir l’activitat pública d’aquest lloc (articles i breus publicats).',
@@ -257,7 +258,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_conflit_edition_votre_version' => 'La vostra versió:',
 	'info_connexion_base' => 'Intent de connexió a la base de dades',
 	'info_connexion_base_donnee' => 'Connexió amb la vostra base de dades',
-	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>', # MODIF
+	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>',
 	'info_connexion_mysql' => 'La vostra connexió SQL',
 	'info_connexion_ok' => 'La connexió ha reexit.',
 	'info_contact' => 'Contacte',
@@ -277,7 +278,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_ecrire_article' => 'Abans de poder escriure un article, heu de crear com a mínim una secció.',
 	'info_email_envoi' => 'L’adreça electrònica del remitent (opcional)',
 	'info_email_envoi_txt' => 'Introduiu aquí l’adreça a fer servir per enviar els correus electrònics (per defecte, l’adreça del destinatari serà utilitzada com a adreça del remitent):',
-	'info_email_webmestre' => 'Adreça electrònica del webmestre (opcional)', # MODIF
+	'info_email_webmestre' => 'Adreça electrònica del webmestre (opcional)',
 	'info_envoi_email_automatique' => 'Enviament automàtic de correus electrònics',
 	'info_envoyer_maintenant' => 'Envia-ho ara',
 	'info_etape_suivante' => 'Passar a l’etapa següent',
@@ -292,8 +293,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_gauche_admin_vider' => '<b>Només els responsables del lloc tenen accés a aquesta pàgina.</b><p> Dóna accés a les diferents funcions de manteniment tècnic. Algunes d’aquestes necessiten un procés d’autenticació específic que requereix disposar d’un accés FTP al lloc Web.</p>',
 	'info_gauche_auteurs' => 'Aquí hi trobareu tots els autors del lloc.
  El seu estat s’indica pel color de la seva icona (administrador = verd; redactor = groc).',
-	'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense accés al lloc, estan indicats amb una icona blava;
- els autors esborrats amb una paperera.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense accés al lloc web, estan indicats amb una icona blava;
+ els autors esborrats amb una paperera.', # RELIRE
 	'info_gauche_messagerie' => 'La missatgeria us permet intercanviar missatges entre els redactors, conservar recordatoris (pel vostre ús personal) o mostrar avisos a la pàgina inicial de l’espai privat (si sóu administrador).',
 	'info_gauche_statistiques_referers' => 'Aquesta pàgina mostra la llista de  <i>referidors</i>, és a dir, dels llocs que contenen enllaços cap al vostre propi lloc Web, únicament per ahir i avui; aquesta llista es posa a zero cada 24 hores. ',
 	'info_gauche_visiteurs_enregistres' => 'Aquí hi trobareu els visitants registrats
@@ -304,7 +305,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_hier' => 'ahir:',
 	'info_identification_publique' => 'La vostra identitat pública...',
 	'info_image_process' => 'Vulgueu seleccionar el millor mètode de fabricació de vinyetes fent un clic damunt de la imatge corresponent. ',
-	'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores és que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable tècnic i demaneu les extensions «GD» o «Imagick».</i>', # MODIF
+	'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores és que el servidor que allotja el vostre lloc web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable tècnic i demaneu les extensions «GD» o «Imagick».</i>',
 	'info_images_auto' => 'Imatges calculades automàticament',
 	'info_informations_personnelles' => 'Informacions personals',
 	'info_inscription_automatique' => 'Inscripció automàtica dels nous redactors',
@@ -314,6 +315,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_langues' => 'Idiomes del lloc',
 	'info_ldap_ok' => 'L’autenticació LDAP està instal·lada.',
 	'info_lien_hypertexte' => 'Enllaç hipertext:',
+	'info_liste_nouveautes_envoyee' => 'La lliste de les novetats ha estat enviada',
 	'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 	'info_login_existant' => 'Aquest nom d’usuari ja existeix.',
 	'info_login_trop_court' => 'Nom d’usuari massa curt.',
@@ -387,9 +389,9 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_publier' => 'publicar',
 	'info_publies' => 'Els vostres articles publicats en línia',
 	'info_question_accepter_visiteurs' => 'Si a les plantilles (esquelets) del vostre lloc Web es preveu l’enregistrament de visitants sense accés a l’espai privat, vulgueu activar la següent opció:',
-	'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc públic? Si ho accepteu, els visitants es podran inscriure
- mitjançant un formulari  automatitzat i llavors accediran a l’espai privat per proposar els seus propis articles.<blockquote><i>Durant el procés d’inscripció, els usuaris reben un correu electrònic automàtic en el que se’ls dóna els seus codis d’accés al lloc privat. Alguns proveïdors d’hostatge desactiven l’enviament de correus electrònics des dels seus servidors: en aquest
- cas, la inscripció automàtica és impossible.</i></blockquote>', # MODIF
+	'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc web públic? Si ho accepteu, els visitants es podran inscriure
+ mitjançant un formulari  automatitzat i llavors accediran a l’espai privat per proposar els seus propis articles.<blockquote><i>Durant el procés d’inscripció, els usuaris reben un correu electrònic automàtic en el que se’ls dóna els seus codis d’accés a la web privada. Alguns proveïdors d’hostatge desactiven l’enviament de correus electrònics des dels seus servidors: en aquest
+ cas, la inscripció automàtica és impossible.</i></blockquote>',
 	'info_qui_edite' => '@nom_auteur_modif@ ha treballat en aquest contingut fa @date_diff@ minuts', # MODIF
 	'info_racine_site' => 'Arrel del lloc',
 	'info_recharger_page' => 'Actualitzeu aquesta pàgina en breus instants.',
@@ -495,8 +497,8 @@ amb un color que indica el seu estat:',
 	'install_serveur_hebergeur' => 'Servidor de base de dades atribuït per l’hostatjador',
 	'install_table_prefix_hebergeur' => 'Prefix de taula donat per l’hostatjador:',
 	'install_tables_base' => 'Taules de la base',
-	'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.', # RELIRE
+	'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL', # RELIRE
 	'instituer_erreur_statut_a_change' => 'L’estat ja s’ha modificat',
 	'instituer_erreur_statut_non_autorise' => 'No podeu escollir aquest estat',
 	'intem_redacteur' => 'redactor',
@@ -551,10 +553,13 @@ amb un color que indica el seu estat:',
 	'ldap_correspondance_1' => 'Herència dels camps LDAP',
 	'ldap_correspondance_2' => 'Per cadascun dels camps següents d’SPIP, indiqueu el nom del camp LDAP corresponent. Deixeu-lo buit per no omplir-lo, separeu-lo amb espais o comes per assajar diversos camps LDAP.',
 	'lien_ajouter_auteur' => 'Afegir aquest autor',
+	'lien_ajouter_une_rubrique' => 'Afegir aquesta secció',
 	'lien_email' => 'correu electrònic',
 	'lien_nom_site' => 'NOM DEL LLOC:',
 	'lien_retirer_auteur' => 'Retirar aquest autor',
+	'lien_retirer_rubrique' => 'eliminar la secció ',
 	'lien_retirer_tous_auteurs' => 'Retirar tots els autors',
+	'lien_retirer_toutes_rubriques' => 'elimina totes les seccions',
 	'lien_site' => 'lloc',
 	'lien_tout_deplier' => 'Obrir-ho tot',
 	'lien_tout_replier' => 'Tancar-ho tot',
@@ -621,10 +626,10 @@ amb un color que indica el seu estat:',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d’aquest connector és incorrecta',
 	'plugin_info_install_ok' => 'Instal·lació correcta',
-	'plugin_info_necessite' => 'Necessita:', # MODIF
+	'plugin_info_necessite' => 'Necessita:',
 	'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d’SPIP',
-	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s’activen al directori @plugins_dist@.', # MODIF
-	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s’activen al directori @plugins_dist@.',
+	'plugin_info_plugins_dist_2' => 'No es poden desactivar.',
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
@@ -634,6 +639,7 @@ amb un color que indica el seu estat:',
 	'plugin_titre_automatique' => 'Instal·lació automàtica',
 	'plugin_titre_automatique_ajouter' => 'Afegir plugins',
 	'plugin_titre_installation' => 'Instal·lació del connector @plugin@',
+	'plugin_titre_modifier' => 'els meus plugins',
 	'plugin_zip_active' => 'Continueu per activar-lo',
 	'plugin_zip_adresse' => 'indiqueu més avall l’adreça d’un fitxer zip de plugin a baixar, o fins i tot l’adreça d’una llista de plugins.',
 	'plugin_zip_adresse_champ' => 'Adreça del plugin o de la llista ',
@@ -645,14 +651,15 @@ amb un color que indica el seu estat:',
 	'plugins_actif_aucun' => 'No hi ha cap connector activat.',
 	'plugins_actif_un' => 'Un connector activat.',
 	'plugins_actifs' => '@count@ plugins actius.',
-	'plugins_actifs_liste' => 'Connectors actius', # MODIF
+	'plugins_actifs_liste' => ' Actius',
 	'plugins_compte' => '@count@ plugins',
 	'plugins_disponible_un' => 'Un connector disponible.',
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error en els plugins: @plugins@',
 	'plugins_liste' => 'Llista dels connectors',
-	'plugins_liste_dist' => 'Extensions', # MODIF
+	'plugins_liste_dist' => 'Extensions', # RELIRE
 	'plugins_recents' => 'Connectors recents.',
+	'plugins_tous_liste' => 'Tots',
 	'plugins_vue_hierarchie' => 'Jerarquia',
 	'plugins_vue_liste' => 'Llista',
 	'protocole_ldap' => 'Versió del protocol:',
@@ -663,7 +670,7 @@ amb un color que indica el seu estat:',
 	'queue_next_job_in_nb_sec' => 'Proper treball en @nb@ s',
 	'queue_no_job_in_queue' => 'Cap treball en espera',
 	'queue_one_job_in_queue' => '1 treball en espera',
-	'queue_purger_queue' => 'Purgar la llista de treballs', # MODIF
+	'queue_purger_queue' => 'Purgar la llista de treballs',
 	'queue_titre' => 'Llista de treballs',
 
 	// R
@@ -672,15 +679,15 @@ amb un color que indica el seu estat:',
 
 	// S
 	'sans_heure' => 'sense hora',
-	'statut_admin_restreint' => '(admin restringida)', # MODIF
+	'statut_admin_restreint' => '(admin restringida)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # MODIF
+	'tache_cron_asap' => 'Tasca CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Tasca CRON @function@ (toutes les @nb@ s)',
 	'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 	'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d’aquest lloc a aproximadament <b>@octets@</b> de dades.',
-	'taille_cache_octets' => 'La mida de la memòria cau és actualment de @octets@.', # MODIF
+	'taille_cache_octets' => 'La mida de la memòria cau és actualment de @octets@.', # RELIRE
 	'taille_cache_vide' => 'La memòria cau està buida.',
 	'taille_repertoire_cache' => 'Mida del directori de la memòria cau',
 	'text_article_propose_publication' => 'Article proposat per ser publicat.',
@@ -713,18 +720,23 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 	'texte_crash_base' => 'Si la bbdd ha deixat de funcionar correctament, es pot intentar fer una reparació automàtica.',
 	'texte_creer_rubrique' => 'Abans de poder escriure els articles, <br /> heu de crear una secció.',
 	'texte_date_creation_article' => 'DATA DE CREACIÓ DE L’ARTICLE :',
+	'texte_date_creation_objet' => 'Data de creació', # on ajoute le ":"
 	'texte_date_publication_anterieure' => 'Data de redacció anterior:',
 	'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacció anterior.',
 	'texte_date_publication_article' => 'DATA DE PUBLICACIÓ EN LÍNIA :',
+	'texte_date_publication_objet' => 'Data de publicació en línia',
 	'texte_descriptif_rapide' => 'Descripció ràpida',
 	'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 	'texte_effacer_statistiques' => 'Esborrar les estadístiques',
 	'texte_en_cours_validation' => 'Els continguts que hi ha aquí a sota estan a l’espera de ser validats. ',
 	'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginació del text emprant "dreceres tipogràfiques".',
-	'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
- Aquests fitxers us poden servir per restringir l’accés als autors i als administradors a altres llocs de la vostra Web (programa extern d’estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>', # MODIF
+	'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials
+ <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el 
+directori @dossier@ ?</b>
+<p> Aquests fitxers us poden servir per restringir l’accés als autors i als administradors a altres llocs de la vostra Web (programa extern d’estadístiques, per exemple).</p>
+ Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no hi ha  creació de fitxers).</p>',
 	'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un accés personalitzat al web.',
-	'texte_informations_personnelles_2' => ' (Nota: si es tracta d’una reinstal.lació mantenint el vostre accés pot', # MODIF
+	'texte_informations_personnelles_2' => ' (Nota: si es tracta d’una reinstal.lació, si el vostre accés funciona encara vostès poden',
 	'texte_introductif_article' => ' (Texte introductiu de l’article.)',
 	'texte_jeu_caractere' => 'És aconsellable utilitzar, al vostre lloc Web, l’alfabet universal (<tt>utf-8</tt>) : aquest permet la presentació de texts en totes les llengües, i no posa problemes de compatibilitat amb els navegadors moderns.',
 	'texte_jeu_caractere_3' => 'Actualment el vostre lloc Web està configurat amb el joc de caràcters:',
@@ -736,8 +748,8 @@ Useu aquest formulari amb precaució...',
 	'texte_mise_a_niveau_base_1' => 'S’han actualitzat els fitxers d’SPIP.
  Cal ara actualitzar la base de dades del lloc.',
 	'texte_modifier_article' => 'Modificar l’article:',
-	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l’idioma dels articles i/o de les seccions, en funció de l’organització del lloc web.', # MODIF
-	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d’enllaços entre les diferents traduccions d’un article.', # MODIF
+	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l’idioma dels articles i/o de les seccions, en funció de l’organització del lloc web.',
+	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d’enllaços entre les diferents traduccions de certs objectes.',
 	'texte_non_compresse' => ' <i>no comprimit</i> (el servidor no suporta aquesta funcionalitat)',
 	'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versió d’SPIP.',
 	'texte_nouvelle_version_spip_2' => 'Aquesta nova versió necessita una actualització més complerta que la normal. Si sou el webmestre del lloc, esborreu el fitxer @connect@ i repreneu la instal·lació per tal d’actualitzar els paràmetres de connexió a la base de dades.<p> (NB.: si heu oblidat els vostres paràmetres de connexió, doneu un cop d’ull al fitxer @connect@ abans de suprimir-lo...)</p>',
