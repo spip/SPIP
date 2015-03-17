@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annulla',
 	'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
 	'articles_recents' => 'Articoli più recenti',
-	'avis_1_erreur_saisie' => 'C’è un errore nella vostra richiesta, verificare le informazioni.', # RELIRE
+	'avis_1_erreur_saisie' => 'C’è un errore nell’input, verificare le informazioni.',
 	'avis_archive_incorrect' => 'il file archivio non è un file SPIP',
 	'avis_archive_invalide' => 'il file archivio non è valido',
 	'avis_attention' => 'ATTENZIONE!',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Errore SQL ',
 	'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
 	'avis_erreur_visiteur' => 'Problema di accesso all’area riservata',
-	'avis_nb_erreurs_saisie' => 'Ci sono @nb@ errori nella vostra ricerca, verificare le informazioni.', # RELIRE
+	'avis_nb_erreurs_saisie' => 'Ci sono @nb@ errori nell’input, verificare le informazioni.',
 
 	// B
 	'barre_a_accent_grave' => 'Inserire una A maiscola con accento grave',
