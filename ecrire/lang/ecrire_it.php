@@ -20,8 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_chemin_invalide_1' => 'il percorso che hai scelto',
 	'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_1' => 'Il collegamento alla base di dati  è fallito.',
-	'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
+	'avis_connexion_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Su molti server si deve <b>chiedere</b> l’attivazione dell’accesso alla base di dati prima di poterlo utilizzare. Se è impossibile collegarsi, verificare che questo passo sia stato fatto.',
+	'avis_connexion_erreur_creer_base' => 'Non è stato possibile creare un database.',
 	'avis_connexion_erreur_nom_base' => 'Il nome del database può contenere solo lettere, numeri e tratti.',
 	'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP è fallita.',
 	'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
@@ -134,6 +135,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'erreur_connect_deja_existant' => 'Esista già un server con quel nome',
 	'erreur_email_deja_existant' => 'Questo indirizzo email risulta già registrato.',
 	'erreur_nom_connect_incorrect' => 'Nome del server non consentito',
+	'erreur_plugin_attribut_balise_manquant' => 'Attributo @attribut@ mancante nel tag @balise@.', # RELIRE
 	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.',
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
@@ -199,7 +201,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'info_1_visiteur' => '1 visitatore',
 	'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetterà
 di passare facilmente dal sito pubblico all’interfaccia privata.',
-	'info_activer_menu_developpement' => 'Mostra il menù Sviluppo', # RELIRE
+	'info_activer_menu_developpement' => 'Mostra il menù Sviluppo',
 	'info_admin_etre_webmestre' => 'Concedimi i privilegi di webmaster',
 	'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 	'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
@@ -424,7 +426,7 @@ In caso affermativo, i visitatori potranno iscriversi grazie ad un modulo automa
 	'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 	'info_redirection' => 'Reindirizzamento',
 	'info_redirection_activee' => 'Il reindirizzamento è attivato.',
-	'info_redirection_boucle' => 'Stai cercando di sovrascrivere l’articolo', # RELIRE
+	'info_redirection_boucle' => 'Stai cercando di sovrascrivere l’articolo.',
 	'info_redirection_desactivee' => 'Il reindirizzamento è stato cancellato.',
 	'info_refuses' => 'I tuoi articoli rifiutati',
 	'info_reglage_ldap' => 'Opzioni: <b>Parametri per l’importazione LDAP</b>',
