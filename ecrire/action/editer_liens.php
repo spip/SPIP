@@ -14,6 +14,15 @@
  * API d'édition de liens
  *
  * @package SPIP\Core\Liens\API
+ *
+ * Cette API gère la création, modification et suppressions de liens
+ * entre deux objets éditoriaux par l'intermédiaire de tables de liaison
+ * tel que spip_xx_liens.
+ * 
+ * L'unicité est assurée dans les fonctions sur le trio (id_x, objet, id_objet)
+ * par défaut, ce qui correspond à la déclaration de clé primaire.
+ *
+ *
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -61,7 +70,7 @@ function objet_associable($objet){
  * on peut passer optionnellement une qualification du (des) lien(s) qui sera
  * alors appliquee dans la foulee.
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
- * 
+ *
  * @api
  * @param array $objets_source
  * @param array|string $objets_lies
@@ -152,9 +161,10 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  * )
  * 
  * @api
- * @param array $objets_source
- * @param array|string $objets_lies
+ * @param array $objets_source      Couples (objets_source => identifiants) (objet qui a la table de lien)
+ * @param array|string $objets_lies Couples (objets_lies => identifiants)
  * @return array
+ *     Liste des trouvailles
  */
 function objet_trouver_liens($objets_source,$objets_lies){
 	return objet_traiter_liaisons('lien_find',$objets_source,$objets_lies);
@@ -183,6 +193,7 @@ function objet_trouver_liens($objets_source,$objets_lies){
 function objet_optimiser_liens($objets_source,$objets_lies){
 	return objet_traiter_liaisons('lien_optimise',$objets_source,$objets_lies);
 }
+
 
 
 /**
@@ -238,6 +249,7 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible,$types=null,$exclure_
 /**
  * Fonction générique qui
  * applique une operation de liaison entre un ou des objets et des objets listés
+ * 
  * $objets_source et $objets_lies sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -252,9 +264,18 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible,$types=null,$exclure_
  *
  * @internal
  * @param string $operation
+ *     Nom de la fonction PHP qui traitera l'opération
  * @param array $objets_source
+ *     Liste de ou des objets source
+ *     De la forme array($objet=>$id_objets,...), où $id_objets peut lui
+ *     même être un scalaire ou un tableau pour une liste d'objets du même type
  * @param array $objets_lies
- * @param array $set
+ *     Liste de ou des objets liés
+ *     De la forme array($objet=>$id_objets,...), où $id_objets peut lui
+ *     même être un scalaire ou un tableau pour une liste d'objets du même type
+ * @param null|array $set
+ *     Liste de coupels champs valeur, soit array(champs => valeur)
+ *     En fonction des opérations il peut servir à différentes utilisations
  * @return bool|int|array
  */
 function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = null){
@@ -299,18 +320,17 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
  * $objets et de la forme
  * array($objet=>$id_objets,...)
  *
- * Retourne le nombre d'insertions realisees
+ * Retourne le nombre d'insertions réalisées
  *
- * @pipeline appel pre_edition_lien
- * @pipeline appel post_edition_lien
- * 
  * @internal
- * @param string $objet_source
- * @param string $primary
- * @param sgring $table_lien
- * @param int $id
- * @param array $objets
+ * @param string $objet_source  Objet source de l'insertion (celui qui a la table de liaison)
+ * @param string $primary       Nom de la clé primaire de cet objet
+ * @param sgring $table_lien    Nom de la table de lien de cet objet
+ * @param int $id               Identifiant de l'objet sur lesquels on va insérer des liaisons
+ * @param array $objets         Liste des liaisons à faire, de la forme array($objet=>$id_objets)
+ *
  * @return bool|int
+ *     Nombre d'insertions faites, false si échec.
  */
 function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	$ins = 0;
@@ -319,20 +339,25 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$objet = ($objet=='*')?$objet:objet_type($objet); # securite
+
+			$args = array(
+				'table_lien'      => $table_lien,
+				'objet_source'    => $objet_source,
+				'id_objet_source' => $id,
+				'objet'           => $objet,
+				'id_objet'        => $id_objet,
+				'action'          => 'insert',
+			);
+
 			// Envoyer aux plugins
 			$id_objet = pipeline('pre_edition_lien',
 				array(
-					'args' => array(
-						'table_lien' => $table_lien,
-						'objet_source' => $objet_source,
-						'id_objet_source' => $id,
-						'objet' => $objet,
-						'id_objet' => $id_objet,
-						'action'=>'insert',
-					),
+					'args' => $args,
 					'data' => $id_objet
 				)
 			);
+			$args['id_objet'] = $id_objet;
+
 			if ($id_objet=intval($id_objet)
 				AND !sql_getfetsel(
 								$primary,
@@ -348,14 +373,7 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 						// Envoyer aux plugins
 						pipeline('post_edition_lien',
 							array(
-								'args' => array(
-									'table_lien' => $table_lien,
-									'objet_source' => $objet_source,
-									'id_objet_source' => $id,
-									'objet' => $objet,
-									'id_objet' => $id_objet,
-									'action'=>'insert',
-								),
+								'args' => $args,
 								'data' => $id_objet
 							)
 						);
@@ -372,11 +390,11 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
  * Fabriquer la condition where en tenant compte des jokers *
  *
  * @internal
- * @param string $primary
- * @param int|string|array $id_source
- * @param string $objet
- * @param int|string|array $id_objet
- * @return array
+ * @param string $primary               Nom de la clé primaire
+ * @param int|string|array $id_source   Identifiant de la clé primaire
+ * @param string $objet                 Nom de l'objet lié
+ * @param int|string|array $id_objet    Identifiant de l'objet lié
+ * @return array                        Liste des conditions
  */
 function lien_where($primary, $id_source, $objet, $id_objet){
 	if ((!is_array($id_source) AND !strlen($id_source))
@@ -420,13 +438,10 @@ function lien_where($primary, $id_source, $objet, $id_objet){
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
- * @pipeline appel pre_edition_lien
- * @pipeline appel post_edition_lien
- * 
  * @internal
  * @param string $objet_source
  * @param string $primary
- * @param sgring $table_lien
+ * @param string $table_lien
  * @param int $id
  * @param array $objets
  * @return bool|int
@@ -442,23 +457,30 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 			// id_objet peut valoir '*'
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			// lire les liens existants pour propager la date de modif
-			$liens = sql_allfetsel("$primary,id_objet,objet",$table_lien,$where);
+			$select = "$primary,id_objet,objet";
+			$liens = sql_allfetsel($select,$table_lien,$where);
+
 			// iterer sur les liens pour permettre aux plugins de gerer
-			foreach($liens as $l){
+			foreach($liens as $l) {
+
+				$args = array(
+					'table_lien' => $table_lien,
+					'objet_source' => $objet_source,
+					'id_objet_source' => $l[$primary],
+					'objet' => $l['objet'],
+					'id_objet' => $l['id_objet'],
+					'action'=>'delete',
+				);
+
 				// Envoyer aux plugins
 				$id_o = pipeline('pre_edition_lien',
 					array(
-						'args' => array(
-							'table_lien' => $table_lien,
-							'objet_source' => $objet_source,
-							'id_objet_source' => $l[$primary],
-							'objet' => $l['objet'],
-							'id_objet' => $l['id_objet'],
-							'action'=>'delete',
-						),
+						'args' => $args,
 						'data' => $l['id_objet']
 					)
 				);
+				$args['id_objet'] = $id_o;
+
 				if ($id_o=intval($id_o)){
 					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o);
 					$e = sql_delete($table_lien, $where);
@@ -469,18 +491,16 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 					}
 					else
 						$echec = true;
-					$retire[] = array('source'=>array($objet_source=>$l[$primary]),'lien'=>array($l['objet']=>$id_o),'type'=>$l['objet'],'id'=>$id_o);
+					$retire[] = array(
+						'source' => array($objet_source=>$l[$primary]),
+						'lien'   => array($l['objet']=>$id_o),
+						'type'   => $l['objet'],
+						'id'     => $id_o
+					);
 					// Envoyer aux plugins
 					pipeline('post_edition_lien',
 						array(
-							'args' => array(
-								'table_lien' => $table_lien,
-								'objet_source' => $objet_source,
-								'id_objet_source' => $l[$primary],
-								'objet' => $l['objet'],
-								'id_objet' => $id_o,
-								'action'=>'delete',
-							),
+							'args' => $args,
 							'data' => $id_o
 						)
 					);
@@ -488,6 +508,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 			}
 		}
 	}
+
 	pipeline('trig_supprimer_objets_lies',$retire);
 
 	return ($echec?false:$dels);
@@ -540,7 +561,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 					$e = sql_delete($table_lien, array("$primary=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
 					if ($e!=false){
 						$dels+=$e;
-						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien",_LOG_INFO_IMPORTANTE);
+						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien", _LOG_INFO_IMPORTANTE);
 					}
 				}
 			}
@@ -574,13 +595,15 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
  * $qualif = array('vu'=>'oui');
  *
  * @internal
- * @param string $objet_source
- * @param string $primary
- * @param sgring $table_lien
- * @param int $id
- * @param array $objets
+ * @param string $objet_source  Objet source de l'insertion (celui qui a la table de liaison)
+ * @param string $primary       Nom de la clé primaire de cet objet
+ * @param string $table_lien    Nom de la table de lien de cet objet
+ * @param int $id               Identifiant de l'objet sur lesquels on va insérer des liaisons
+ * @param array $objets         Liste des liaisons à faire, de la forme array($objet=>$id_objets)
  * @param array $qualif
+ *     Liste des qualifications à appliquer.
  * @return bool|int
+ *     Nombre de modifications faites, false si échec.
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	$echec = null;
@@ -599,12 +622,41 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
+
+			$args = array(
+				'table_lien'      => $table_lien,
+				'objet_source'    => $objet_source,
+				'id_objet_source' => $id,
+				'objet'           => $objet,
+				'id_objet'        => $id_objet,
+				'action'          => 'modifier',
+			);
+
+			// Envoyer aux plugins
+			$id_objet = pipeline('pre_edition_lien',
+				array(
+					'args' => $args,
+					'data' => $id_objet,
+				)
+			);
+			$args['id_objet'] = $id_objet;
+
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			$e = sql_updateq($table_lien,$qualif,$where);
-			if ($e===false)
+
+			if ($e===false) {
 				$echec = true;
-		  else
-			  $ok++;
+			}
+			else {
+				// Envoyer aux plugins
+				pipeline('post_edition_lien',
+					array(
+						'args' => $args,
+						'data' => $id_objet
+					)
+				);
+				$ok++;
+			}
 		}
 	}
 	return ($echec?false:$ok);
@@ -623,7 +675,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
  * @internal
  * @param string $objet_source
  * @param string $primary
- * @param sgring $table_lien
+ * @param string $table_lien
  * @param int $id
  * @param array $objets
  * @return array
@@ -653,6 +705,15 @@ function lien_find($objet_source,$primary,$table_lien,$id,$objets){
  * @param array|int $ids
  */
 function lien_propage_date_modif($objet,$ids){
+	static $done = array();
+	$hash = md5($objet . serialize($ids));
+
+	// sql_updateq, peut être un rien lent.
+	// On évite de l'appeler 2 fois sur les mêmes choses
+	if (isset($done[$hash])) {
+		return;
+	}
+
 	$trouver_table = charger_fonction('trouver_table','base');
 
 	$table = table_objet_sql($objet);
@@ -662,5 +723,7 @@ function lien_propage_date_modif($objet,$ids){
 		$where = (is_array($ids)?sql_in($primary, array_map('intval',$ids)):"$primary=".intval($ids));
 		sql_updateq($table, array('date_modif'=>date('Y-m-d H:i:s')), $where);
 	}
+
+	$done[$hash] = true;
 }
 ?>
