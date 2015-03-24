@@ -1942,7 +1942,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
+	if (isset($_SERVER['SERVER_SOFTWARE']) AND strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
 		if (!defined('_OS_SERVEUR')) define('_OS_SERVEUR', 'windows');
 		if (!defined('_SPIP_LOCK_MODE')) define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 	}
@@ -2015,7 +2015,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
 	} else {
 		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
-		if ($_SERVER['QUERY_STRING']
+		if (!empty($_SERVER['QUERY_STRING'])
 		AND !strpos($_SERVER['REQUEST_URI'], '?'))
 			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 	}
@@ -2142,10 +2142,11 @@ function spip_initialisation_suite(){
 	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
 	// les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
 	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
-
-	if (!defined('_SPIP_ECRIRE_SCRIPT')) define('_SPIP_ECRIRE_SCRIPT', // true ? #decommenter ici et commenter la
-	  preg_match(',IIS|thttpd,', $_SERVER['SERVER_SOFTWARE']) ?
-		'index.php' : '');
+	if (!defined('_SPIP_ECRIRE_SCRIPT')) {
+		define('_SPIP_ECRIRE_SCRIPT', (empty($_SERVER['SERVER_SOFTWARE']) ? '' :
+			preg_match(',IIS|thttpd,', $_SERVER['SERVER_SOFTWARE']) ?
+				'index.php' : ''));
+	}
 
 
 	if (!defined('_SPIP_AJAX'))

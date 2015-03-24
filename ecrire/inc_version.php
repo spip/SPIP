@@ -445,6 +445,7 @@ if (!headers_sent()) {
 		header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 }
 
-spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT,_LOG_DEBUG);
+$methode = (isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : ((php_sapi_name() == 'cli') ? 'cli' : ''));
+spip_log($methode.' '.self() . ' - '._FILE_CONNECT,_LOG_DEBUG);
 
 ?>
