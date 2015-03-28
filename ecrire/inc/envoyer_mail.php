@@ -105,17 +105,20 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 		$email_envoi = $destinataire;
 	}
 
+	$parts = "";
 	if (is_array($corps)){
 		$texte = $corps['texte'];
 		$from = (isset($corps['from'])?$corps['from']:$from);
 		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
-		if (is_array($headers))
+		if (is_array($headers)) {
 			$headers = implode("\n",$headers);
-		$parts = "";
-		if ($corps['pieces_jointes'] AND function_exists('mail_embarquer_pieces_jointes'))
+		}
+		if ($corps['pieces_jointes'] AND function_exists('mail_embarquer_pieces_jointes')) {
 			$parts = mail_embarquer_pieces_jointes($corps['pieces_jointes']);
-	} else
+		}
+	} else {
 		$texte = $corps;
+	}
 
 	if (!$from) $from = $email_envoi;
 

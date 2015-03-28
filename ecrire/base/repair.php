@@ -147,7 +147,7 @@ function admin_repair_tables() {
 				$m .= "("._T('texte_vide').")\n";
 
 			if ($result_repair
-				AND $msg = join(" ", is_resource($result_repair)?sql_fetch($result_repair):$result_repair) . ' '
+				AND $msg = join(" ", (is_resource($result_repair) or is_object($result_repair))?sql_fetch($result_repair):$result_repair) . ' '
 				AND strpos($msg, ' OK ')===FALSE){
 				$class = " class='notice'";
 				$m .= "<br /><tt>".spip_htmlentities($msg)."</tt>\n";
