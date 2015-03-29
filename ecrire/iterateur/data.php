@@ -434,7 +434,7 @@ class IterateurDATA implements Iterator {
 					$a = '.sprintf($tv,'$aa').';
 					$b = '.sprintf($tv,'$bb').';
 					if ($a <> $b)
-						return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+						return ($a ' . ((isset($r[2]) and $r[2]) ? '>' : '<').' $b) ? -1 : 1;';
 				}
 			}
 		}
