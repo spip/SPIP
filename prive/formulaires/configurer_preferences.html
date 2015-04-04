@@ -103,8 +103,8 @@
 			<li class='editer editer_activer_menudev[ (#ENV**{erreurs}|table_valeur{activer_menudev}|oui)erreur]'>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{activer_menudev})</span>]
 				<div class='choix'>
-					<input type="hidden" name="activer_menudev" value="" />
-					<input class='checkbox' type="checkbox" name="activer_menudev" value='oui' [checked="(#ENV{activer_menudev}|=={oui}|?{checked})"] id="activer_menudev"/>
+					<input type="hidden" name="activer_menudev" value="non" />
+					<input class='checkbox' type="checkbox" name="activer_menudev" value='oui' [checked="(#ENV{activer_menudev,non}|=={oui}|?{checked})"] id="activer_menudev"/>
 					<label for="activer_menudev"><:info_activer_menu_developpement:></label>
 				</div>
 			</li>
