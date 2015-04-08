@@ -49,7 +49,7 @@ function sql_error_backtrace($compil_info = false){
 		);
 		return $contexte_compil;
 	}
-	$message = count($trace) ? $trace[0]['file']." L".$trace[0]['line'] : "";
+	$message = count($trace) ? $trace[0]['file']." L".$trace[0]['line'] : "";
 	$f = array();
 	while(count($trace) AND $t=array_shift($trace)){
 		if (in_array($t['function'],array('include_once','include_spip','find_in_path')))
