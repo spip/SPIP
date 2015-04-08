@@ -487,7 +487,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
 	sous_repertoire(_DIR_CACHE, '', false,true);
 
-	if (!spip_connect()) return false;
 	if ($operation!='raz') {
 		$plugin_valides = liste_chemin_plugin_actifs();
 		$plugin_valides = is_plugin_dir($plugin_valides);
