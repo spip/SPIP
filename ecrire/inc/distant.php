@@ -1031,17 +1031,21 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
 	if (@$t['query']) $path .= "?" . $t['query'];
 
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
-	if (!$f){
-		// fallback : fopen
-		if (!need_proxy($host)
+	if (!$f OR !is_resource($f)){
+		// fallback : fopen si on a pas fait timeout dans lance_requete
+		// ce qui correspond a $f===110
+		if ($f!==110
+			AND !need_proxy($host)
 		  AND !_request('tester_proxy')
 		  AND (!isset($GLOBALS['inc_distant_allow_fopen']) OR $GLOBALS['inc_distant_allow_fopen'])){
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
-		} else
+		}
+		else {
+			// echec total
 			$f = false;
-		// echec total
+		}
 	}
 
 	return array($f, $fopen);
@@ -1074,7 +1078,7 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
  * @param int|string $date
  *   timestamp pour entente If-Modified-Since
  * @return bool|resource
- *   false si echec
+ *   false|int si echec
  *   resource socket vers l'url demandee
  */
 function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz = false, $referer = '', $datas = "", $vers = "HTTP/1.0", $date = ''){
@@ -1100,14 +1104,19 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 		if (!($port = $t2['port'])) $port = 80;
 		if ($t2['user'])
 			$proxy_user = base64_encode($t2['user'] . ":" . $t2['pass']);
-	} else
+	}
+	else {
 		$first_host = $noproxy . $host;
+	}
 
 	if ($connect){
 		$streamContext = stream_context_create(array('ssl' => array('verify_peer' => false, 'allow_self_signed' => true)));
-		$f = @stream_socket_client("tcp://$first_host:$port", $nError, $sError, _INC_DISTANT_CONNECT_TIMEOUT, STREAM_CLIENT_CONNECT, $streamContext);
+		$f = @stream_socket_client("tcp://$first_host:$port", $errno, $errstr, _INC_DISTANT_CONNECT_TIMEOUT, STREAM_CLIENT_CONNECT, $streamContext);
 		spip_log("Recuperer $path sur $first_host:$port par $f (via CONNECT)", "connect");
-		if (!$f) return false;
+		if (!$f) {
+			spip_log("Erreur connexion $errno $errstr",_LOG_ERREUR);
+			return $errno;
+		}
 		stream_set_timeout($f, _INC_DISTANT_CONNECT_TIMEOUT);
 
 		fputs($f, $connect);
@@ -1131,11 +1140,11 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 		$ntry = 3;
 		do {
 			$f = @fsockopen($first_host, $port, $errno, $errstr, _INC_DISTANT_CONNECT_TIMEOUT);
-		} while(!$f AND $ntry-- AND sleep(1));
+		} while(!$f AND $ntry-- AND $errno!==110 AND sleep(1));
 		spip_log("Recuperer $path sur $first_host:$port par $f");
 		if (!$f) {
 			spip_log("Erreur connexion $errno $errstr",_LOG_ERREUR);
-			return false;
+			return $errno;
 		}
 		stream_set_timeout($f, _INC_DISTANT_CONNECT_TIMEOUT);
 	}
