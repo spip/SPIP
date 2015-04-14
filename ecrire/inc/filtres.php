@@ -545,7 +545,7 @@ function entites_html($texte, $tout=false, $quote=true) {
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
-	$flags = !defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400 ? ENT_COMPAT : ENT_COMPAT|ENT_HTML401;
+	$flags = ENT_COMPAT|ENT_HTML401;
 	$texte = spip_htmlspecialchars(echappe_retour(echappe_html($texte, '', true), '', 'proteger_amp'), $quote?ENT_QUOTES:$flags);
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
