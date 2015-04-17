@@ -22,6 +22,7 @@ div.time-picker li {
   height: 10px;
   font: 12px/1 Helvetica, Arial, sans-serif;
   padding: 4px 3px;
+  box-sizing:content-box;
 }
 div.time-picker li.selected {
   background: #888; /* #0063CE */
