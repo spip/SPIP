@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plan_site' => 'Карта сайта',
 	'popularite' => 'Популярность',
 	'poster_message' => 'Отправить сообщение',
-	'proposer_site' => 'Вы можете предложить добавить сайт к этому разделу:',
+	'proposer_site' => 'Вы можете добавить ссылку на сайт в этот раздел:',
 
 	// R
 	'repondre_article' => 'Оставить комментарий ',
@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_web' => 'Сайты',
 	'sous_rubriques' => 'Подразделы',
 	'spam' => 'Спам',
-	'suite' => 'далее',
+	'suite' => 'продолжить',
 	'sur_web' => 'В интернете',
 	'syndiquer_rubrique' => 'RSS этого раздела',
 	'syndiquer_site' => 'RSS всего сайта',
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'ver_imprimer' => 'Версия для печати',
 	'voir_en_ligne' => 'См. онлайн',
-	'voir_squelette' => 'Показать шаблон этой страницы'
+	'voir_squelette' => 'показать шаблон этой страницы'
 );
 
 ?>
