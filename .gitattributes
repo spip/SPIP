@@ -181,6 +181,7 @@ ecrire/lang/ecrire_id.php -text
 ecrire/lang/ecrire_it_fem.php -text
 ecrire/lang/ecrire_km.php -text
 ecrire/lang/ecrire_my.php -text
+ecrire/lang/ecrire_oc_ni_mis.php -text
 ecrire/lang/ecrire_ru.php -text
 ecrire/lang/ecrire_sk.php -text
 ecrire/lang/ecrire_sv.php -text
@@ -194,10 +195,12 @@ ecrire/lang/public_co.php -text
 ecrire/lang/public_cs.php -text
 ecrire/lang/public_fr_fem.php -text
 ecrire/lang/public_he.php -text
+ecrire/lang/public_hr.php -text
 ecrire/lang/public_id.php -text
 ecrire/lang/public_it_fem.php -text
 ecrire/lang/public_km.php -text
 ecrire/lang/public_my.php -text
+ecrire/lang/public_oc_ni_mis.php -text
 ecrire/lang/public_ru.php -text
 ecrire/lang/public_sk.php -text
 ecrire/lang/public_sv.php -text
@@ -210,10 +213,12 @@ ecrire/lang/spip_co.php -text
 ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_fr_fem.php -text
 ecrire/lang/spip_he.php -text
+ecrire/lang/spip_hr.php -text
 ecrire/lang/spip_id.php -text
 ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_km.php -text
 ecrire/lang/spip_my.php -text
+ecrire/lang/spip_oc_ni_mis.php -text
 ecrire/lang/spip_ru.php -text
 ecrire/lang/spip_sk.php -text
 ecrire/lang/spip_sv.php -text
