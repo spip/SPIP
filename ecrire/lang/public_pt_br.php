@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelles_breves' => 'Novas notas',
 
 	// P
-	'page_precedente' => 'pagina anterior',
+	'page_precedente' => 'página anterior',
 	'page_suivante' => 'página seguinte',
 	'par_auteur' => 'por ',
 	'participer_site' => 'Você pode participar da vida deste site e propor as suas próprias matérias ao se inscrever abaixo. Você receberá imediatamente um e-mail informando os seus códigos de acesso ao espaço privado do site.',
@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repondre_article' => 'Responder a esta matéria',
 	'repondre_breve' => 'Responder a esta nota',
-	'resultats_recherche' => 'Resultados da pesquisa',
+	'resultats_recherche' => 'Resultados da busca',
 	'retour_debut_forums' => 'Voltar ao início dos fóruns',
 	'rubrique' => 'Seção',
 	'rubriques' => 'Seções',

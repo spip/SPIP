@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Degemer al lec’hienn', # MODIF
-	'articles' => 'Pennadoù',
+	'articles' => '@nb@ pennad',
 	'articles_auteur' => 'Pennadoù all ar skridaozer-mañ',
 	'articles_populaires' => 'Pennadoù lennet ar muiañ',
 	'articles_rubrique' => 'Pennadoù ar rubrikenn-mañ',

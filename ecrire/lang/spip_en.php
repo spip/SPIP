@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancel',
 	'antispam_champ_vide' => 'Please leave this field empty:',
 	'articles_recents' => 'Most recent articles',
+	'avis_1_erreur_saisie' => 'Your entry contains an error, please check your information.',
 	'avis_archive_incorrect' => 'archive is not a valid SPIP file',
 	'avis_archive_invalide' => 'archive file is not valid',
 	'avis_attention' => 'CAUTION!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL error',
 	'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Problem entering the private area',
+	'avis_nb_erreurs_saisie' => 'Your entry contains @nb@ errors, please check your information.',
 
 	// B
 	'barre_a_accent_grave' => 'Insert a capital A with grave accent',
@@ -111,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ at @heure@',
 	'date_fmt_jour_heure_debut_fin' => '@jour@ from @heure_debut@ to @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ from @heure_debut@@dtabbr@ to @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ from @heure_debut@@dtabbr@ to @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -121,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'From @dtart@@date_debut@@dtabbr@ to @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'From',
 	'date_fmt_periode_to' => 'to',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'hours',
 	'date_hier' => 'yesterday',
 	'date_il_y_a' => '@delai@ ago',
@@ -674,6 +677,7 @@ and log in to the site.
 	'titre_statistiques' => 'Site statistics',
 	'titre_titre_document' => 'Document title:',
 	'todo' => 'to come',
+	'trad_definir_reference' => 'Choose "@titre@" as a reference for translations',
 	'trad_reference' => '(reference for translations)',
 
 	// Z
@@ -687,6 +691,7 @@ and log in to the site.
 	'zbug_champ_hors_motif' => 'Field @champ@ outside context @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Unknown criterion @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} on a table without atomic primary key',
 	'zbug_distant_interdit' => 'External data forbidden',
 	'zbug_doublon_table_sans_cle_primaire' => 'Duplicate entries on a table which does not have a simple primary key',
 	'zbug_doublon_table_sans_index' => 'Duplicate entries on a table without an index',
