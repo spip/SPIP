@@ -12,7 +12,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='titre principale' scope='col' colspan='2'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur' scope='col'><:auteur:></th>
 			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
@@ -23,10 +23,10 @@
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{90,70})
-				]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+			<td class='titre principale'[(#LOGO_ARTICLE|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class="surtitre">(#SURTITRE)</span>][(#RANG). ]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
+			[<td class='logo'>(#LOGO_ARTICLE|image_reduire{90,70})</td>]
 			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
