@@ -100,7 +100,7 @@ h1 {font-size: 2em;line-height: 125%;}
 .sous-rub .inner .bd .liste-items .item:hover a {color: black;}
 .sous-rub .inner .bd .liste-items > .item:last-child {border-bottom: 0px;}
 
-.liste-objets {border:1px solid #D7D7D7;-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;position: relative;z-index: 1;display: block;}
+.liste-objets {border:1px solid #e5e5e5;-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;position: relative;z-index: 1;display: block;}
 
 /*
 .liste-objets:hover {-webkit-box-shadow:0px 0px 0px #dddddd;-moz-box-shadow:0px 0px 0px #dddddd;box-shadow:0px 0px 0px #dddddd;position:relative;}
@@ -112,7 +112,7 @@ h1 {font-size: 2em;line-height: 125%;}
 .liste-objets.selection-articles table {background-color: white;border-bottom: 1px solid #ccc;}
 .liste-objets.selection-articles form {background-color: #[(#ENV{claire}|couleur_luminance{0.25})];}
 .liste-objets table {background: transparent;}
-.liste-objets table caption {background: #e5e5e5;background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#e0e0e0));background-image: -webkit-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -moz-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -ms-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -o-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: linear-gradient(top, #f0f0f0, #e0e0e0);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#f0f0f0', endColorstr='#e0e0e0');}
+.liste-objets table caption {background: #e5e5e5;}
 .liste-objets table caption strong.caption { padding-top: 7px; padding-bottom: 7px; color: #444; background-color: transparent; font-size: 0.85em; line-height: 120%; }
 .liste-objets table thead {font-size: 0.85em;line-height: 120%;}
 .liste-objets table thead th {padding-top: 5px;padding-bottom: 5px;}
@@ -226,7 +226,7 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 .formulaire_spip button.delete:hover {color: red;text-decoration: underline;border: none;}
 .formulaire_spip button.delete:focus {color: red;text-decoration: underline;border: none;}
 .logo_du_site {text-align: center;}
-.fiche_objet .formulaire_spip {border: 1px solid #d7d7d7;}
+.fiche_objet .formulaire_spip {border: 1px solid #e5e5e5;}
 .fiche_objet .formulaire_spip.formulaire_dater {margin-top:0;border: 0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;margin-left: -15px;margin-right: -15px;padding: 10px 15px;background-color: #eee;position:relative;}
 .fiche_objet .formulaire_spip.formulaire_dater label {font-size: 85%;font-weight: normal;}
 .fiche_objet .formulaire_spip.formulaire_dater input.text {padding-top: 3px;padding-bottom: 3px;}
@@ -245,11 +245,11 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 .en-edition .bd .liste-items {border-top: 1px solid white;}
 .en-edition .bd .liste-items li {border-bottom: 1px solid white;padding-left: 10px;padding-right: 10px;}
 
-.barre_onglet ul li {margin-right: 0px;border-left-width: 0px;border-color: #ccc;}
-.barre_onglet ul li strong.on {background-color: #ENV{foncee};background: -webkit-gradient(linear, left top, left bottom, from(#ENV{foncee}), to(#[(#ENV{foncee}|couleur_luminance{0.55})]));background-image: -webkit-linear-gradient(top, #ENV{foncee}, #[(#ENV{foncee}|couleur_luminance{0.55})]);background-image: -moz-linear-gradient(top, #ENV{foncee}, #[(#ENV{foncee}|couleur_luminance{0.55})]);background-image: -ms-linear-gradient(top, #ENV{foncee}, #[(#ENV{foncee}|couleur_luminance{0.55})]);background-image: -o-linear-gradient(top, #ENV{foncee}, #[(#ENV{foncee}|couleur_luminance{0.55})]);background-image: linear-gradient(top, #ENV{foncee}, #[(#ENV{foncee}|couleur_luminance{0.55})]);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ENV{foncee}', endColorstr='#[(#ENV{foncee}|couleur_luminance{0.55})]');position:relative;}
+.barre_onglet ul li {margin-right: 0px;border-left-width: 0px;border-color: #eee;}
+.barre_onglet ul li strong.on {background-color: #ENV{foncee};}
 .barre_onglet ul li:first-child strong.on {-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;}
 .barre_onglet ul li:last-child strong.on {-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;}
-.barre_onglet ul li a {background-color: #eeeeee;background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee));background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee);background-image: -moz-linear-gradient(top, #ffffff, #eeeeee);background-image: -ms-linear-gradient(top, #ffffff, #eeeeee);background-image: -o-linear-gradient(top, #ffffff, #eeeeee);background-image: linear-gradient(top, #ffffff, #eeeeee);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#eeeeee');}
+.barre_onglet ul li a {background-color: #eee;}
 .barre_onglet ul li a:hover {background-color: white;background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);background-image: -moz-linear-gradient(top, #ffffff, #ffffff);background-image: -ms-linear-gradient(top, #ffffff, #ffffff);background-image: -o-linear-gradient(top, #ffffff, #ffffff);background-image: linear-gradient(top, #ffffff, #ffffff);color: #[(#ENV{foncee}|couleur_luminance{0.7})];filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ffffff');}
 .barre_onglet ul li a:focus {background-color: white;background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);background-image: -moz-linear-gradient(top, #ffffff, #ffffff);background-image: -ms-linear-gradient(top, #ffffff, #ffffff);background-image: -o-linear-gradient(top, #ffffff, #ffffff);background-image: linear-gradient(top, #ffffff, #ffffff);color: #[(#ENV{foncee}|couleur_luminance{0.7})];filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ffffff');}
 .barre_onglet ul> li:first-child {border-left-width: 1px;}
