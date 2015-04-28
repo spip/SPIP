@@ -26,7 +26,7 @@
 			<td class='titre principale'[(#LOGO_ARTICLE|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class="surtitre">(#SURTITRE)</span>][(#RANG). ]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
-			[<td class='logo'>(#LOGO_ARTICLE|image_reduire{90,70})</td>]
+			[<td class='logo'>(#LOGO_ARTICLE_NORMAL|image_reduire{90,70})</td>]
 			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
