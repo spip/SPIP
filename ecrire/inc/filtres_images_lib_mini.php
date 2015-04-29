@@ -804,7 +804,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		}
 		// imagemagick en ligne de commande
 		else if ($process == 'convert') {
-			define('_CONVERT_COMMAND', 'convert');
+			if (!defined('_CONVERT_COMMAND')) define('_CONVERT_COMMAND', 'convert'); // Securite : mes_options.php peut preciser le chemin absolu
 			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality '._IMG_CONVERT_QUALITE.' -resize %xx%y! %src %dest');
 			$vignette = $destination.".".$format_sortie;
 			$commande = str_replace(
@@ -841,7 +841,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		else
 		// netpbm
 		if ($process == "netpbm") {
-			define('_PNMSCALE_COMMAND', 'pnmscale'); // chemin a changer dans mes_options
+			if (!defined('_PNMSCALE_COMMAND')) define('_PNMSCALE_COMMAND', 'pnmscale'); // Securite : mes_options.php peut preciser le chemin absolu
 			if (_PNMSCALE_COMMAND == '') return;
 			$vignette = $destination.".".$format_sortie;
 			$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);

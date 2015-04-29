@@ -91,7 +91,7 @@ function action_tester_dist() {
 
 	// verifier les formats netpbm
 	else if ($arg == "netpbm") {
-		define('_PNMSCALE_COMMAND', 'pnmscale'); // chemin a changer dans mes_options
+		if (!defined('_PNMSCALE_COMMAND')) define('_PNMSCALE_COMMAND', 'pnmscale'); // Securite : mes_options.php peut preciser le chemin absolu
 		if (_PNMSCALE_COMMAND == '') return;
 		$netpbm_formats= Array();
 
