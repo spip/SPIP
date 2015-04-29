@@ -43,15 +43,15 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 	if ($p >0) $port = " port=$p" ; else $port = '';
 	$erreurs = array();
 	if ($db) {
-		@$link = pg_connect("host=$host$port dbname=$db user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW);
-	} elseif (!@$link = pg_connect("host=$host$port user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW)) {
+		@$link = pg_connect("host=$host$port dbname=$db user=$login password='$pass'", PGSQL_CONNECT_FORCE_NEW);
+	} elseif (!@$link = pg_connect("host=$host$port user=$login password='$pass'", PGSQL_CONNECT_FORCE_NEW)) {
 			$erreurs[] = pg_last_error();
-	    if (@$link = pg_connect("host=$host$port dbname=$login user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW)) {
+	    if (@$link = pg_connect("host=$host$port dbname=$login user=$login password='$pass'", PGSQL_CONNECT_FORCE_NEW)) {
 	      $db = $login;
 	    } else {
 		    $erreurs[] = pg_last_error();
 	      $db = _DEFAULT_DB;
-	      $link = pg_connect("host=$host$port dbname=$db user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW);
+	      $link = pg_connect("host=$host$port dbname=$db user=$login password='$pass'", PGSQL_CONNECT_FORCE_NEW);
 	    }
 	}
 	if (!$link) {
