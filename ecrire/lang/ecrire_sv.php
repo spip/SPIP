@@ -155,7 +155,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Du kan aktivera en <b>administrationscookie</b>, som tillåter dig
  att enkelt växla mellan den publika och den privata delen.',
 	'info_admin_gere_rubriques' => 'Den här administratören hanterar följande avdelningar:',
-	'info_admin_gere_toutes_rubriques' => 'Den här administratören hanterar <b>alla avdelningar</b>.', # MODIF
 	'info_administrateur' => 'Administratör',
 	'info_administrateur_1' => 'Administratör',
 	'info_administrateur_2' => 'på sajten (<i>använd med försiktighet</i>)',

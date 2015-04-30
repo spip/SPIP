@@ -156,7 +156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Bir <b>yazışma kurabiyesi</b> çalıştırabilirsiniz,
  bu sizin kolayca kamu sitesinden özel siteye geçmenizi sağlar.',
 	'info_admin_gere_rubriques' => 'Bu yönetici şu bölümleri yönetiyor :',
-	'info_admin_gere_toutes_rubriques' => 'Bu yönetici <b>tüm bölümleri</b> yönetiyor.', # MODIF
 	'info_administrateur' => 'Yönetici',
 	'info_administrateur_1' => 'Yönetici',
 	'info_administrateur_2' => 'sitenindir (<i>dikkatli kullanınız</i>)',

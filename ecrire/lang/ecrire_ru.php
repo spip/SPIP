@@ -200,8 +200,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  легко переключаться  между основной и административной частью сайта ..',
 	'info_admin_etre_webmestre' => 'Предоставить мне права вебмастера',
 	'info_admin_gere_rubriques' => 'Этот администратор управляет следующими разделами:',
-	'info_admin_gere_toutes_rubriques' => 'Администратор управляет<b> всеми разделами</b>.',
-	'info_admin_gere_toutes_rubriques_2' => 'Я управляю <b>всеми разделами</b>',
 	'info_admin_je_suis_webmestre' => 'Я <b>вебмастер</b>',
 	'info_admin_statuer_webmestre' => 'Сделать администратора вебмастером сайта',
 	'info_admin_webmestre' => 'Администратор является <b>вебмастером</b>',

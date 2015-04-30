@@ -198,8 +198,6 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_activer_cookie' => 'Egokitasun-"cookie" bat aktibatu dezakezu; horrek aukera emango dizu orrialdeakeguneratzeko, eta jendaurreko ataletik erredakziora errazki aldatzeko ere.',
 	'info_admin_etre_webmestre' => 'Web-arduradun eskubideak nire kontuari ezarri',
 	'info_admin_gere_rubriques' => 'Pertsona horrek honako atal hauek administratzenditu:',
-	'info_admin_gere_toutes_rubriques' => 'Administratzaile honek <b>atal guztiak</b> kudeatzen ditu.',
-	'info_admin_gere_toutes_rubriques_2' => '<b>Atal guztiak</b> kudeatzen ditut',
 	'info_admin_je_suis_webmestre' => '<b>web-arduradun</b> naiz.',
 	'info_admin_statuer_webmestre' => 'Administratzaile honi Web-arduradun eskubideak eman',
 	'info_admin_webmestre' => 'Administratzaile hau <b>Web-arduradun</b> da.',

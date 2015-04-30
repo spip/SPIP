@@ -197,8 +197,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_activer_cookie' => 'Podeu activar una <b>galeta de correspondència</b>, us permetrà passar fàcilment del lloc públic al lloc privat.',
 	'info_admin_etre_webmestre' => 'Donar-me els drets d’administrador',
 	'info_admin_gere_rubriques' => 'Aquest administrador gestiona les següents seccions:',
-	'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>',
-	'info_admin_gere_toutes_rubriques_2' => 'Gestiono <b>totes les seccions</b>',
 	'info_admin_je_suis_webmestre' => 'Sóc <b>administrador</b>',
 	'info_admin_statuer_webmestre' => 'Donar a aquest administrador els drets de webmestre',
 	'info_admin_webmestre' => 'Aquest administrador és <b>webmestre</b>',

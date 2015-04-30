@@ -189,7 +189,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	di passà senza straziu da u situ pùbblicu à u situ privatu.',
 	'info_admin_etre_webmestre' => 'Dammi i diritti di webmaestru',
 	'info_admin_gere_rubriques' => 'St’amministratore gestisce e seguenti rùbbriche :',
-	'info_admin_gere_toutes_rubriques' => 'St’amministratore gestisce <b>tutte e rùbbriche</b>.', # MODIF
 	'info_admin_je_suis_webmestre' => 'Sò u <b>webmaestru</b>',
 	'info_admin_statuer_webmestre' => 'Dà à st’amministratore tutti i diritti di webmaestru',
 	'info_admin_webmestre' => 'St’amministratore hè <b>webmaestru</b>',

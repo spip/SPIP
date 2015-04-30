@@ -138,7 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Můžete nastavit <b>administrátorské cookie</b>, které vám dovolí
  snadno přecházet mezi prohlížením webu a jeho editací.',
 	'info_admin_gere_rubriques' => 'Tento správce ospovídá za následující sekce:',
-	'info_admin_gere_toutes_rubriques' => 'Tento správce odpovídá ua <b>všechny sekce</b>.', # MODIF
 	'info_administrateur' => 'Správce',
 	'info_administrateur_1' => 'Správce',
 	'info_administrateur_2' => 'webu (<i>používat opatrně</i>)',
