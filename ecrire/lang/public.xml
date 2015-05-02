@@ -112,7 +112,8 @@
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/public?lang_cible=lb" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Jim Wanderscheid" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
-	<langue code="lt" url="http://trad.spip.net/tradlang_module/public?lang_cible=lt" total="78" traduits="58" relire="0" modifs="2" nouveaux="18" pourcent="74.36">
+	<langue code="lt" url="http://trad.spip.net/tradlang_module/public?lang_cible=lt" total="78" traduits="59" relire="0" modifs="2" nouveaux="17" pourcent="75.64">
+		<traducteur nom="Andras" lien="http://trad.spip.net/auteur/andras" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="my" url="http://trad.spip.net/tradlang_module/public?lang_cible=my" total="78" traduits="66" relire="0" modifs="3" nouveaux="9" pourcent="84.62">
