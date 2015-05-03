@@ -353,8 +353,8 @@ function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 		$k = $infos[$dir_type][$plug];
 		$plug = constant($dir_type) . $plug;
 		if (!isset($msg[$p])) {
-		  if (!$msg[$p] = plugin_necessite($k['necessite'], $liste))
-		    $msg[$p] = plugin_necessite($k['utilise'], $liste);
+		  if (!$msg[$p] = plugin_necessite($k['necessite'], $liste, 'necessite'))
+		    $msg[$p] = plugin_necessite($k['utilise'], $liste, 'utilise');
 		} else {
 		  foreach($msg[$p] as $c => $l)
 		    $msg[$p][$c] = plugin_controler_lib($l['nom'], $l['lien']);
@@ -394,11 +394,11 @@ function plugin_donne_erreurs($raw=false, $raz=true) {
  * 		Tableau des messages d'erreurs recus. Il sera vide si tout va bien.
  *
 **/
-function plugin_necessite($n, $liste) {
+function plugin_necessite($n, $liste, $balise='necessite') {
 	$msg = array();
 	foreach($n as $need){
 		$id = strtoupper($need['nom']);
-		if ($r = plugin_controler_necessite($liste, $id, isset($need['compatibilite']) ? $need['compatibilite'] : '')) {
+		if ($r = plugin_controler_necessite($liste, $id, isset($need['compatibilite']) ? $need['compatibilite'] : '', $balise)) {
 			$msg[] = $r;
 		}
 	}
@@ -412,28 +412,63 @@ function plugin_necessite($n, $liste) {
  * 		Liste de description des plugins
  * @param $nom
  * 		Le plugin donc on cherche la presence
- * @param $version
+ * @param $intervalle
  * 		L'éventuelle intervalle de compatibilité de la dependance. ex: [1.1.0;]
+ * @param $balise
+ * 		Permet de définir si on teste un utilise ou un necessite
  * @return string.
  * 		Vide si ok,
  * 		Message d'erreur lorsque la dependance est absente.
 **/
-function plugin_controler_necessite($liste, $nom, $version)
+function plugin_controler_necessite($liste, $nom, $intervalle, $balise)
 {
-	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'])) {
-		return '';
-	}
-	// retrouver le minimum
-	if (preg_match(_EXTRAIRE_INTERVALLE, $version, $regs)) {
-		$minimum = $regs[1];
-		if ($minimum) {
-			return _T('plugin_necessite_plugin', array(
-				'plugin' => $nom,
-				'version' => $minimum));
+    if (isset($liste[$nom]) AND plugin_version_compatible($intervalle,$liste[$nom]['version'])) {
+   		return '';
+   	}
+    return
+        plugin_message_incompatibilite($intervalle, $liste[$nom]['version'], $nom, $balise);
+}
+
+
+function plugin_message_incompatibilite($intervalle, $version, $nom, $balise) {
+
+	if (preg_match(_EXTRAIRE_INTERVALLE,$intervalle,$regs)) {
+        $minimum = $regs[1];
+       	$maximum = $regs[2];
+
+       	$minimum_inclus = $intervalle{0}=="[";
+       	$maximum_inclus = substr($intervalle,-1)=="]";
+
+		if (strlen($minimum)) {
+			if ($minimum_inclus AND spip_version_compare($version,$minimum,'<')) {
+				return _T("plugin_${balise}_plugin", array(
+					'plugin' => $nom,
+					'version' => ' &ge; ' . $minimum));
+			}
+			if (!$minimum_inclus AND spip_version_compare($version,$minimum,'<=')) {
+				return _T("plugin_${balise}_plugin", array(
+					'plugin' => $nom,
+					'version' => ' &gt; ' . $minimum));
+			}
+		}
+
+		if (strlen($maximum)) {
+			if ($maximum_inclus AND spip_version_compare($version,$maximum,'>')) {
+				return _T("plugin_${balise}_plugin", array(
+					'plugin' => $nom,
+					'version' => ' &le; ' . $maximum));
+			}
+			if (!$maximum_inclus AND spip_version_compare($version,$maximum,'>=')) {
+				return _T("plugin_${balise}_plugin", array(
+					'plugin' => $nom,
+					'version' => ' &lt; ' . $maximum));
+			}
 		}
 	}
-	return _T('plugin_necessite_plugin_sans_version', array('plugin' => $nom));
+
+	return _T("plugin_necessite_plugin_sans_version", array('plugin' => $nom));
 }
+
 
 function plugin_controler_lib($lib, $url)
 {
