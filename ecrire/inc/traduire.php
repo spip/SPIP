@@ -226,14 +226,14 @@ function inc_traduire_dist($ori, $lang) {
 			$GLOBALS['idx_lang']= $var;
 			// ... (lang/)local_xx.php
 			$local['local_'.$lang] = chercher_module_lang('local', $lang);
-			if ($local['local_'.$lang])
-				surcharger_langue($local['local_'.$lang]);
-			// ... puis (lang/)local.php
-			if (!isset($local['local']))
-				$local['local'] = chercher_module_lang('local');
-			if ($local['local'])
-				surcharger_langue($local['local']);
 		}
+		if ($local['local_'.$lang])
+			surcharger_langue($local['local_'.$lang]);
+		// ... puis (lang/)local.php
+		if (!isset($local['local']))
+			$local['local'] = chercher_module_lang('local');
+		if ($local['local'])
+			surcharger_langue($local['local']);
 
 		if (isset($GLOBALS[$var][$code])) {
 			$module_retenu = $module;
