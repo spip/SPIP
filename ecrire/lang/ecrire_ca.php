@@ -631,7 +631,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
-	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.',
+	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.', # MODIF
 	'plugin_necessite_spip' => 'Requereix com a mínim la versió @version@ d’SPIP.',
 	'plugin_source' => 'font: ',
 	'plugin_titre_automatique' => 'Instal·lació automàtica',

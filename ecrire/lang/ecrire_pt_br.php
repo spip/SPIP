@@ -640,7 +640,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_upgrade_ok' => 'Atualização bem sucedida',
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',
-	'plugin_necessite_plugin' => 'É necessário o plugin @plugin@, pelo menos na versão @version@.',
+	'plugin_necessite_plugin' => 'É necessário o plugin @plugin@, pelo menos na versão @version@.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Precisa do plugin @plugin@',
 	'plugin_necessite_spip' => 'É necessário o SPIP na versão @version@, pelo menos.',
 	'plugin_source' => 'fonte: ',

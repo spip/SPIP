@@ -619,7 +619,7 @@ cunha cor que indica o seu estado :',
 	'plugin_info_telecharger' => 'descargar desde @url@ e instalalo no cartafol @rep@',
 	'plugin_librairies_installees' => 'Librarías instaladas',
 	'plugin_necessite_lib' => 'Este módulo necesita a libraría @lib@',
-	'plugin_necessite_plugin' => 'Necesita o plugin @plugin@ na súa version @version@ mínimo.',
+	'plugin_necessite_plugin' => 'Necesita o plugin @plugin@ na súa version @version@ mínimo.', # MODIF
 	'plugin_necessite_spip' => 'Necesita SPIP na súa versión @version@ como mínimo.',
 	'plugin_source' => 'fonte: ',
 	'plugin_titre_automatique' => 'Instalación automática',

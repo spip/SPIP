@@ -638,7 +638,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
 	'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 	'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
-	'plugin_necessite_plugin' => 'Postulas la kromprogramon @plugin@ minimume laŭ versio @version@.',
+	'plugin_necessite_plugin' => 'Postulas la kromprogramon @plugin@ minimume laŭ versio @version@.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Necesas la kromprogramon @plugin@',
 	'plugin_necessite_spip' => 'Necesas SPIP laŭ minimume versio @version@.',
 	'plugin_source' => 'fonto : ',

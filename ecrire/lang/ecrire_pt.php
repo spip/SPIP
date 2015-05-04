@@ -653,7 +653,7 @@ numa cor que indica o seu estado:',
 	'plugin_info_upgrade_ok' => 'Actualizado com sucesso',
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin requer a biblioteca @lib@',
-	'plugin_necessite_plugin' => 'Requer o plugin @plugin@ em versão @version@ ou mais recente.',
+	'plugin_necessite_plugin' => 'Requer o plugin @plugin@ em versão @version@ ou mais recente.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Requer o plugin @plugin@',
 	'plugin_necessite_spip' => 'Requer SPIP em version @version@ ou mais recente.',
 	'plugin_source' => 'fonte: ',

@@ -561,7 +561,7 @@ una color indica lo sieu estat :',
 	'plugin_info_telecharger' => 'à descargar despì @url@ et à instalar dins @rep@',
 	'plugin_librairies_installees' => 'Librerìas instaladi',
 	'plugin_necessite_lib' => 'Aquesto plugin demanda la librerìa @lib@',
-	'plugin_necessite_plugin' => 'Demanda lo plugin @plugin@ en version @version@ minimum.',
+	'plugin_necessite_plugin' => 'Demanda lo plugin @plugin@ en version @version@ minimum.', # MODIF
 	'plugin_necessite_spip' => 'Demanda SPIP en version @version@ minimum.',
 	'plugin_source' => 'sorgent: ',
 	'plugin_titre_automatique' => 'Instalacion automatica',

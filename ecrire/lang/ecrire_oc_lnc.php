@@ -476,7 +476,7 @@ una color indica lor estat:',
 	'plugin_etat_stable' => 'estable',
 	'plugin_etat_test' => 'a l’ensag',
 	'plugin_impossible_activer' => 'Impossible d’activar l’ajuston @plugin@',
-	'plugin_necessite_plugin' => 'Demanda l’ajuston @plugin@ en version @version@ al mens.',
+	'plugin_necessite_plugin' => 'Demanda l’ajuston @plugin@ en version @version@ al mens.', # MODIF
 	'plugin_necessite_spip' => 'Demanda SPIP en version @version@ al mens.',
 	'plugins_liste' => 'Tièra dels ajustons',
 	'protocole_ldap' => 'Version del protocòl :',

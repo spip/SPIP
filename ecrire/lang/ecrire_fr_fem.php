@@ -670,7 +670,7 @@ dans une couleur qui indique leur état :',
 	'plugin_info_upgrade_ok' => 'Mise à jour réussie',
 	'plugin_librairies_installees' => 'Librairies installées',
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@',
-	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.',
+	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@',
 	'plugin_necessite_spip' => 'Nécessite SPIP en version @version@ minimum.',
 	'plugin_source' => 'source : ',
