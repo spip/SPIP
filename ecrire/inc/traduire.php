@@ -18,6 +18,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_LANGUE_PAR_DEFAUT')) define('_LANGUE_PAR_DEFAUT','fr');
+
 /**
  * Rechercher tous les lang/file dans le path
  * qui seront ensuite chargés dans l'ordre du path
@@ -106,7 +108,7 @@ function charger_langue($lang, $module = 'spip') {
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
 		if (!$fichiers_lang = chercher_module_lang($module, $l))
-			$fichiers_lang = chercher_module_lang($module, 'fr');
+			$fichiers_lang = chercher_module_lang($module, _LANGUE_PAR_DEFAUT);
 
 		if ($fichiers_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
@@ -246,14 +248,14 @@ function inc_traduire_dist($ori, $lang) {
 	// on essaie d'abord la langue du site, puis a defaut la langue fr
 	$langue_retenue = $lang;
 	if (!strlen($text)
-	AND $lang !== 'fr') {
+	AND $lang !== _LANGUE_PAR_DEFAUT) {
 		if ($lang !== $GLOBALS['meta']['langue_site']) {
 			$text = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site']);
 			$langue_retenue = (!strlen($text) ? $GLOBALS['meta']['langue_site'] : '');
 		}
 		else {
-			$text = inc_traduire_dist($ori, 'fr');
-			$langue_retenue = (!strlen($text) ? 'fr' : '');
+			$text = inc_traduire_dist($ori, _LANGUE_PAR_DEFAUT);
+			$langue_retenue = (!strlen($text) ? _LANGUE_PAR_DEFAUT : '');
 		}
 	}
 
