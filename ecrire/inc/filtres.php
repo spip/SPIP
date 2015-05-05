@@ -1930,11 +1930,11 @@ function extraire_multi($letexte, $lang=null, $options=array()) {
 
 		// Compatibilité avec le prototype de fonction précédente qui utilisait un boolean
 		if (is_bool($options))
-			$options = array('echappe_span' => $options, 'lang_defaut' => 'fr');
+			$options = array('echappe_span' => $options, 'lang_defaut' => _LANGUE_PAR_DEFAUT);
 		if (!isset($options['echappe_span']))
 			$options = array_merge($options, array('echappe_span' => false));
 		if (!isset($options['lang_defaut']))
-			$options = array_merge($options, array('lang_defaut' => 'fr'));
+			$options = array_merge($options, array('lang_defaut' => _LANGUE_PAR_DEFAUT));
 
 		include_spip('inc/lang');
 		foreach ($regs as $reg) {

@@ -404,8 +404,8 @@ function init_langues() {
 	if (!isset($GLOBALS['meta']['langue_site'])) {
 		// Initialisation : le francais si dispo, sinon la premiere langue trouvee
 		$GLOBALS['meta']['langue_site'] = $tout =
-		(!$all_langs OR (strpos(',fr,',",$all_langs,")!==false))
-		  ? 'fr' :  substr($all_langs,0,strpos($all_langs,','));
+		(!$all_langs OR (strpos(','._LANGUE_PAR_DEFAUT.',',",$all_langs,")!==false))
+		  ? _LANGUE_PAR_DEFAUT :  substr($all_langs,0,strpos($all_langs,','));
 		ecrire_meta('langue_site', $tout);
 	}
 }
