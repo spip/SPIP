@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Отмена',
 	'antispam_champ_vide' => 'Оставьте это поле пустым:',
 	'articles_recents' => 'Свежие статьи',
+	'avis_1_erreur_saisie' => 'Имеется 1 ошибка в записи, проверьте информацию.',
 	'avis_archive_incorrect' => 'это неправильный архивный файл SPIP',
 	'avis_archive_invalide' => 'этот архивный файл не может быть использован',
 	'avis_attention' => 'Внимание!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Ошибка SQL ',
 	'avis_erreur_sauvegarde' => 'Ошибка в бэкапе (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Ошибка при входе в администрирование сайта',
+	'avis_nb_erreurs_saisie' => 'Обнаружено @nb@ ошибок в вашей записи, проверьте информацию.',
 
 	// B
 	'barre_a_accent_grave' => 'Прописное A с пимпочкой вверху',
@@ -69,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_enregistrer' => 'Сохранить',
 	'bouton_radio_desactiver_messagerie_interne' => 'Отключить приватную переписку',
 	'bouton_radio_envoi_annonces' => 'Отправить оповещение',
-	'bouton_radio_non_envoi_annonces' => 'Отключить отправку внутрених сообщений',
+	'bouton_radio_non_envoi_annonces' => 'Отключить отправку внутренних сообщений',
 	'bouton_radio_non_envoi_liste_nouveautes' => 'Не отправлять список последних новостей',
 	'bouton_recharger_page' => 'перезагрузить страницу',
 	'bouton_telecharger' => 'Загрузить',
@@ -91,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'date_aujourdhui' => 'сегодня',
-	'date_avant_jc' => 'До н.э.',
+	'date_avant_jc' => 'до н.э.',
 	'date_dans' => 'в @delai@',
 	'date_de_mois_1' => '@j@ января',
 	'date_de_mois_10' => '@j@ октября',
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ до @heure@',
-	'date_fmt_jour_heure_debut_fin' => '@jour@ с @heure_debut@ по @heure_fin@', # MODIF
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ с @heure_debut@@dtabbr@ по @dtstart@@heure_fin@@dtend@', # MODIF
+	'date_fmt_jour_heure_debut_fin' => '@jour@ с @heure_debut@ по @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ с @heure_debut@@dtabbr@ по @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -219,9 +221,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dirs_preliminaire' => 'Подготовка: <b>Настройки прав доступа</b>',
 	'dirs_probleme_droits' => 'Проблема в правах доступа',
 	'dirs_repertoires_absents' => '<b>Следующие папки не найдены:<ul>@bad_dirs@.</ul></b>
-  <p>Возможная причина - использование строчных и прописных букв в названии папок.
-  Пожалуйста проверьте, что регистр букв в названиях папок соответствует тому, что выводится выше; если это не так, переименуйте папки, используя FTP-клиент, чтобы исправить ошибку.
- </p><p>Как только это сделано, все заработает</p>',
+  <p>Возможная причина - использование строчных и прописных букв в названии папок. Пожалуйста, проверьте соответствие регистра букв в названиях папок тому, что выводится выше; если есть несовпадения, переименуйте папки используя FTP-клиент, чтобы исправить ошибку.
+ </p><p>Как только это будет сделано, всё заработает</p>',
 	'dirs_repertoires_suivants' => '<b>У следующих папок нет прав на запись:
 <ul>@bad_dirs@.</ul></b>
 
@@ -235,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'en_cours' => 'выполняется',
 	'envoi_via_le_site' => 'Отправить при помощи сайта',
 	'erreur' => 'Ошибка',
-	'erreur_balise_non_fermee' => 'последний тэг не закрыт:',
+	'erreur_balise_non_fermee' => 'последний тег не закрыт:',
 	'erreur_technique_ajaxform' => 'Непонятная ошибка не дает отправить эту форму. Попробуйте еще раз.',
 	'erreur_technique_enregistrement_champs' => 'Из-за технической ошибки не удалось правильно зарегистрировать поле @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Не удается зарегистрировать из-за технической ошибки.',
@@ -244,20 +245,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fichier_introuvable' => 'Файл не найден: @fichier@',
-	'form_auteur_confirmation' => 'Пожалуйста, подтвердите ваш емейл',
-	'form_auteur_email_modifie' => 'Ваш емейл был изменен.',
-	'form_auteur_envoi_mail_confirmation' => 'Письмо о подтверждении было отправлено по адресу @email@. Вам необходимо будет перейти по ссылке в письме, что бы подтвердить ваш почтовый адрес.',
+	'form_auteur_confirmation' => 'Пожалуйста, подтвердите ваш email',
+	'form_auteur_email_modifie' => 'Ваш email был изменен.',
+	'form_auteur_envoi_mail_confirmation' => 'Письмо о подтверждении было отправлено по адресу @email@. Вам необходимо будет перейти по ссылке в письме, чтобы подтвердить свой почтовый адрес.',
 	'form_auteur_mail_confirmation' => 'Добрый день,
 
 Вы запросили смену вашего почтового адреса.
-Что бы подтвердить ваш новый адрес перейдите по ссылке:
+Чтобы подтвердить ваш новый адрес перейдите по ссылке:
     @url@
  (Если вы этого не сделаете, то адрес не изменится):
 
 ',
 	'form_deja_inscrit' => 'Вы уже зарегистрированы.',
 	'form_email_non_valide' => 'Указан неправильный e-mail адрес.',
-	'form_forum_access_refuse' => 'У Вас больше нет доступа к этому сайту.',
+	'form_forum_access_refuse' => 'У вас больше нет доступа к этому сайту.',
 	'form_forum_bonjour' => 'Приветствуем @nom@,',
 	'form_forum_confirmer_email' => 'Для подтверждения регистрации на сайте перейдите по ссылке: @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Этот адрес электронной почты уже зарегистрирован. Попробуйте использовать ваш обычный пароль.',
@@ -289,7 +290,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_prop_non_enregistre' => 'Ваше предложение не было записано.',
 	'form_prop_sujet' => 'Тема',
 	'form_prop_url_site' => 'URL сайта',
-	'forum_non_inscrit' => 'Или Вы не регистрированы, или адрес или пароль неправильны.',
+	'forum_non_inscrit' => 'Либо вы не зарегистрированы, либо адрес или пароль неправильны.',
 	'forum_par_auteur' => ' @auteur@',
 	'forum_titre_erreur' => 'Ошибка...',
 
@@ -302,7 +303,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_agenda' => 'Календарь',
 	'icone_aide_ligne' => 'Помощь',
 	'icone_articles' => 'Статьи',
-	'icone_auteurs' => 'Автора',
+	'icone_auteurs' => 'Авторы',
 	'icone_brouteur' => 'Быстрый переход',
 	'icone_configuration_site' => 'Настройка',
 	'icone_configurer_site' => 'Настройте ваш сайт',
@@ -364,7 +365,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_breves_2' => 'новости',
 	'info_breves_nb' => '@nb@ новостей',
 	'info_breves_un' => '1 новость',
-	'info_connexion_refusee' => 'Подключение запрещенно',
+	'info_connexion_refusee' => 'Подключение запрещено',
 	'info_contact_developpeur' => 'Свяжитесь с разработчиками.',
 	'info_contenance' => 'Этот сайт содержит:',
 	'info_contribution' => 'вложения в форум',
@@ -375,7 +376,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_creer_repertoire' => 'Создайте файл или папку с названием:',
 	'info_creer_repertoire_2' => 'в подразделе <b>@repertoire@</b>, затем ',
 	'info_creer_vignette' => 'автоматическое создание миниатюр изображений',
-	'info_creerdansrubrique_non_autorise' => 'У вас недостаточно прав чтобы создавать материалы в этом разделе',
+	'info_creerdansrubrique_non_autorise' => 'У вас недостаточно прав, чтобы создавать материалы в этом разделе',
 	'info_deplier' => 'Откройте',
 	'info_descriptif_nombre' => 'описание(я):',
 	'info_description' => 'Описание:',
@@ -395,15 +396,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <span style="color:red;">Попробуйте <a href=\'@script@\'>восстановить базу данных</a>
  или обратитесь к вашему хостинг-провайдеру.</span>',
 	'info_fini' => 'Готово!',
-	'info_format_image' => 'Формат, который используется для автоматического уменьшения изображений @gd_formats@.',
+	'info_format_image' => 'Формат, используемый для автоматического уменьшения изображений @gd_formats@.',
 	'info_format_non_defini' => 'неопределенный формат',
 	'info_grand_ecran' => 'Большой экран',
 	'info_image_aide' => 'ПОМОЩЬ',
 	'info_image_process_titre' => 'Как создавать миниатюры',
 	'info_impossible_lire_page' => '<b>Ошибка!</b> Страницу <tt><html>@test_proxy@</html></tt> нельзя получить через прокси сервер',
 	'info_installation_systeme_publication' => 'Установка SPIP ...',
-	'info_installer_documents' => 'Вы можете разместить файлы в папку @upload@ и они будут добавлены автоматически.',
-	'info_installer_ftp' => 'Вы можете переписать файлы по FTP в папку @upload@, что бы использовать их в дальнейшей работе. ',
+	'info_installer_documents' => 'Вы можете разместить файлы в папку @upload@, и они будут добавлены автоматически.',
+	'info_installer_ftp' => 'Вы можете переписать файлы по FTP в папку @upload@, чтобы использовать их в дальнейшей работе. ',
 	'info_installer_images' => 'Вы можете добавлять изображения в форматах JPEG, GIF или PNG.',
 	'info_installer_images_dossier' => 'Добавьте изображения в папку  @upload@ для использования их в этом меню.',
 	'info_interface_complete' => 'полный интерфейс',
@@ -460,7 +461,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -----------------',
 	'info_rechercher' => 'Поиск',
 	'info_rechercher_02' => 'Поиск:',
-	'info_remplacer_vignette' => 'Заменить миниатюру своим уменьшеным изображением:',
+	'info_remplacer_vignette' => 'Заменить миниатюру своим уменьшенным изображением:',
 	'info_rubriques_nb' => '@nb@ раздела(ов)',
 	'info_rubriques_un' => '1 раздел',
 	'info_sans_titre_2' => 'без названия',
@@ -471,7 +472,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_supprimer_vignette' => 'удалить миниатюру',
 	'info_symbole_bleu' => '<b>Синий</b> символ  указывает на <b>заметку</b> - сообщение для вашего личного использования.',
 	'info_symbole_jaune' => '<b>Желтый</b> символ - <b> объявление всем редакторам </b>: объявление может редактировать любой администратор и его видят все редактора.',
-	'info_symbole_vert' => '<b>Зеленый</b> символ - <b> переписка с другими польвователями </b> сайта.',
+	'info_symbole_vert' => '<b>Зеленый</b> символ - <b> переписка с другими пользователями </b> сайта.',
 	'info_telecharger_nouveau_logo' => 'Загрузить новое лого:',
 	'info_telecharger_ordinateur' => 'Загрузить с вашего компьютера:',
 	'info_tous_resultats_enregistres' => '[все результаты записаны]',
@@ -483,7 +484,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_valider_lien' => 'подтвердить ссылку',
 	'info_verifier_image' => ', проверьте, что ваши изображения были переданы правильно.',
 	'info_vignette_defaut' => 'Миниатюра по умолчанию',
-	'info_vignette_personnalisee' => 'Ваша миниаюра (уменьшенное изображение)',
+	'info_vignette_personnalisee' => 'Ваша миниатюра (уменьшенное изображение)',
 	'info_visite' => 'посещение:',
 	'info_vos_rendez_vous' => 'Ваши будущие задачи',
 	'infos_vos_pense_bete' => 'Ваши заметки',
@@ -514,7 +515,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_acces_prive' => 'доступ к административной части',
 	'login_autre_identifiant' => 'изменить логин',
 	'login_cookie_accepte' => 'Пожалуйста, настройте ваш браузер для приема cookies (по крайней мере для этого сайта).',
-	'login_cookie_oblige' => 'В вашем броузере должны быть включены cookies.',
+	'login_cookie_oblige' => 'В вашем браузере должны быть включены cookies.',
 	'login_deconnexion_ok' => 'Вышел из системы.',
 	'login_erreur_pass' => 'Пароль введен неправильно.',
 	'login_espace_prive' => 'административная часть',
@@ -523,16 +524,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_login2' => 'Логин или email:',
 	'login_login_pass_incorrect' => '(Неправильный логин или пароль).',
 	'login_motpasseoublie' => 'забыли пароль?',
-	'login_non_securise' => 'Внимание, эта форма не безопасна 
-   Если Вы не хотите, чтобы ваш пароль был открытым для
-   перехват в сети, активизируйте Javascript
-   в вашем браузере и',
+	'login_non_securise' => 'Внимание, эта форма небезопасна! 
+Если вы не хотите, чтобы ваш пароль был открыт для перехвата в сети, активизируйте Javascript в вашем браузере и ',
 	'login_nouvelle_tentative' => 'Попробовать еще раз',
 	'login_par_ici' => 'Вы зарегистрированы ... вам сюда...',
 	'login_pass2' => 'Пароль:',
 	'login_preferez_refuser' => '<b>Если Вы хотите отказываться от cookies </b>, есть другой метод входа на сайт (менее безопасный):',
 	'login_recharger' => 'перегрузить страницу',
-	'login_rester_identifie' => 'Не спрашивать в течение нескольких дней',
+	'login_rester_identifie' => 'Запомнить логин на несколько дней',
 	'login_retour_public' => 'На главную страницу сайта',
 	'login_retour_site' => 'На главную страницу сайта',
 	'login_retoursitepublic' => 'на главную страницу сайта',
@@ -579,10 +578,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 и участвовать во всех обсуждениях.',
 	'pass_forum_bla' => 'Вы отправили запрос для  участия в 
 форуме, который доступен только для зарегистрированных пользователей.',
-	'pass_indiquez_cidessous' => 'Введите ниже адрес электронной почты с который вы 
- использовали для регистрации. Вам 
-будет отправленно письмо с дальнейшими инструкциями.',
-	'pass_mail_passcookie' => '(это письмо отправленно автоматически)
+	'pass_indiquez_cidessous' => 'Введите ниже адрес электронной почты, который вы использовали для регистрации. Вам будет отправлено письмо с дальнейшими инструкциями.',
+	'pass_mail_passcookie' => '(это письмо отправлено автоматически)
 
 Для того, что бы восстановить ваш пароль для входа на сайт @nom_site_spip@ (@adresse_site@) 
 
@@ -642,21 +639,17 @@ and connect again to the site.
 	'texte_documents_associes' => 'Следующие документы связаны со статьей, 
     но они не были 
     вставлены. На сайте они могут отображаться как прикрепленные документы (в зависимости от дизайна).',
-	'texte_erreur_mise_niveau_base' => 'Ошибка базы данных в процессе апгрейда
-     Изображение <b> @fichier </b> нельзя  передать (статьёй @id_article). <p> 
-      Еще раз нажмите на ссылку, повторите процедуру апгрейда 
-      и удостоверьтесь что изображение есть в статьях.',
+	'texte_erreur_mise_niveau_base' => 'Ошибка базы данных в процессе апгрейда.  Изображение <b> @fichier@ </b> нельзя  передать (статья @id_article@). <p> Еще раз нажмите на ссылку, повторите процедуру апгрейда и удостоверьтесь, что изображения есть в статьях.',
 	'texte_erreur_visiteur' => 'Вы пробовали получить доступ к административной части сайта с использованием логина, который не имеет достаточно прав для такой операции.',
 	'texte_inc_auth_1' => 'Вы ввели логин <b>@auth_login@</b>. Такого пользователя нет в базе данных. 
 Пробуйте еще раз',
 	'texte_inc_auth_2' => '(пере)подключиться',
-	'texte_inc_auth_3' => 'выйдете и
-  перезагрузите ваш браузер в случае необходимости.',
+	'texte_inc_auth_3' => ', выйдите и перезагрузите ваш браузер в случае необходимости.',
 	'texte_inc_config' => 'Изменение настроек сайта очень сильно влияет на его работу.
 Настоятельно рекомендуем менять настройки только в том случае, если вы четко представляете,
  какие изменения это повлечет.
 <b>Вы можете запросить консультацию у разработчика Вашего сайта по настройкам системы.</b>',
-	'texte_inc_meta_1' => 'Система вызвала  ошибку,при попытки записи в файл <code>@fichier@</code>. Обратитесь к администратору сайта, что бы',
+	'texte_inc_meta_1' => 'Система вызвала  ошибку при попытке записи в файл <code>@fichier@</code>. Обратитесь к администратору сайта, чтобы',
 	'texte_inc_meta_2' => 'проверить права доступа на запись',
 	'texte_inc_meta_3' => ' в папке <code>@repertoire@</code>.',
 	'texte_statut_en_cours_redaction' => 'готовится',
@@ -688,19 +681,20 @@ and connect again to the site.
 
 	// Z
 	'zbug_balise_b_aval' => ': B tag too late in loop',
-	'zbug_balise_inexistante' => 'Тег #@balise@ не корректно указан для @from@ ',
+	'zbug_balise_inexistante' => 'Тег #@balise@ некорректно указан для @from@ ',
 	'zbug_balise_sans_argument' => 'Не хватает аргумента в теге @balise@',
 	'zbug_boucle' => 'цикл (boucle)',
-	'zbug_boucle_recursive_undef' => 'неопределен рекурсивный цикл (boucle): @nom@',
+	'zbug_boucle_recursive_undef' => 'не определен рекурсивный цикл (boucle): @nom@',
 	'zbug_calcul' => 'вычисления',
 	'zbug_champ_hors_boucle' => 'Поле @champ@ находится вне цикла (boucle)',
 	'zbug_champ_hors_motif' => 'Поле @champ@ находится вне контекста @motif@',
 	'zbug_code' => 'код ',
 	'zbug_critere_inconnu' => 'Неизвестный критерий @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} таблица без первичного ключа ', # MODIF
 	'zbug_distant_interdit' => 'Внешние данные запрещены',
 	'zbug_doublon_table_sans_cle_primaire' => 'Дубликаты записей в таблице, не имеющей простого первичного ключа',
 	'zbug_doublon_table_sans_index' => 'Дубликаты записей в таблице без индекса',
-	'zbug_erreur_boucle_double' => 'Цикл @id@ - указан дважды в одном шаблоне',
+	'zbug_erreur_boucle_double' => 'Цикл @id@ указан дважды в одном шаблоне',
 	'zbug_erreur_boucle_fermant' => 'Цикл @id@: отсутствует закрывающий тег',
 	'zbug_erreur_boucle_syntaxe' => 'Синтаксическая ошибка в цикле  @id@',
 	'zbug_erreur_compilation' => 'Ошибка компиляции',
@@ -721,18 +715,18 @@ and connect again to the site.
 	'zxml_connus_attributs' => 'известные атрибуты',
 	'zxml_de' => 'из',
 	'zxml_inconnu_attribut' => 'неизвестный атрибут',
-	'zxml_inconnu_balise' => 'неизвестный тэг',
+	'zxml_inconnu_balise' => 'неизвестный тег',
 	'zxml_inconnu_entite' => 'неизвестная запись',
 	'zxml_inconnu_id' => 'неизвестный ID',
 	'zxml_mais_de' => 'но из',
 	'zxml_non_conforme' => 'не соответствует принципу',
 	'zxml_non_fils' => 'не является дочерним по отношению к',
-	'zxml_nonvide_balise' => 'таг не пуст',
+	'zxml_nonvide_balise' => 'тег не пуст',
 	'zxml_obligatoire_attribut' => 'требуется атрибут, отсутствующий в',
 	'zxml_succession_fils_incorrecte' => 'неверное дочернее наследование',
 	'zxml_survoler' => 'чтобы увидеть правильные, наведите курсор',
 	'zxml_valeur_attribut' => 'значение атрибута',
-	'zxml_vide_balise' => 'пустой таг',
+	'zxml_vide_balise' => 'пустой тег',
 	'zxml_vu' => 'уже просматривалось'
 );
 
