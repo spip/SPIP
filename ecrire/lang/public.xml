@@ -165,6 +165,7 @@
 	<langue code="roa" url="http://trad.spip.net/tradlang_module/public?lang_cible=roa" total="78" traduits="66" relire="0" modifs="3" nouveaux="9" pourcent="84.62">
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/public?lang_cible=ru" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sc" url="http://trad.spip.net/tradlang_module/public?lang_cible=sc" total="78" traduits="64" relire="0" modifs="3" nouveaux="11" pourcent="82.05">
@@ -185,6 +186,9 @@
 	<langue code="th" url="http://trad.spip.net/tradlang_module/public?lang_cible=th" total="78" traduits="63" relire="0" modifs="3" nouveaux="12" pourcent="80.77">
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/public?lang_cible=tr" total="78" traduits="71" relire="0" modifs="3" nouveaux="4" pourcent="91.03">
+	</langue>
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/public?lang_cible=uk" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 	</langue>
 	<langue code="vi" url="http://trad.spip.net/tradlang_module/public?lang_cible=vi" total="78" traduits="65" relire="0" modifs="3" nouveaux="10" pourcent="83.33">
 	</langue>

@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Привет',
 
 	// C
-	'commenter_site' => 'Коментарии к этому сайту',
+	'commenter_site' => 'Комментарии к этому сайту',
 	'contact' => 'Контакты',
 	'copie_document_impossible' => 'Невозможно скопировать документ',
 
