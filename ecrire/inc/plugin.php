@@ -426,7 +426,7 @@ function plugin_controler_necessite($liste, $nom, $intervalle, $balise)
    		return '';
    	}
     return
-        plugin_message_incompatibilite($intervalle, $liste[$nom]['version'], $nom, $balise);
+        plugin_message_incompatibilite($intervalle, (isset($liste[$nom]) ? $liste[$nom]['version'] : ""), $nom, $balise);
 }
 
 
