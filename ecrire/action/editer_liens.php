@@ -387,13 +387,13 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets,$qualif) {
 			);
 
 			// Envoyer aux plugins
-			$id_objet = pipeline('pre_edition_lien',
+			$insertions = pipeline('pre_edition_lien',
 				array(
 					'args' => $args,
-					'data' => $id_objet
+					'data' => $insertions
 				)
 			);
-			$args['id_objet'] = $id_objet;
+			$args['id_objet'] = $insertions['id_objet'];
 
 			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 
@@ -409,7 +409,7 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets,$qualif) {
 						pipeline('post_edition_lien',
 							array(
 								'args' => $args,
-								'data' => $id_objet
+								'data' => $insertions
 							)
 						);
 					}
@@ -528,13 +528,13 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
 				);
 
 				// Envoyer aux plugins
-				$id_o = pipeline('pre_edition_lien',
+				$l = pipeline('pre_edition_lien',
 					array(
 						'args' => $args,
-						'data' => $l['id_objet']
+						'data' => $l
 					)
 				);
-				$args['id_objet'] = $id_o;
+				$args['id_objet'] = $id_o = $l['id_objet'];
 
 				if ($id_o=intval($l['id_objet'])) {
 					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o, $cond);
@@ -557,7 +557,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
 					pipeline('post_edition_lien',
 						array(
 							'args' => $args,
-							'data' => $id_o
+							'data' => $l
 						)
 					);
 				}
@@ -700,10 +700,10 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 			);
 
 			// Envoyer aux plugins
-			$id_objet = pipeline('pre_edition_lien',
+			$qualif = pipeline('pre_edition_lien',
 				array(
 					'args' => $args,
-					'data' => $id_objet,
+					'data' => $qualif,
 				)
 			);
 			$args['id_objet'] = $id_objet;
@@ -719,7 +719,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 				pipeline('post_edition_lien',
 					array(
 						'args' => $args,
-						'data' => $id_objet
+						'data' => $qualif
 					)
 				);
 				$ok++;
