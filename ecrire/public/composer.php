@@ -453,8 +453,9 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// retrouver le fichier qui a déclaré la fonction
 	// même si la fonction dynamique est déclarée dans un fichier de fonctions.
-	$reflFunc = new ReflectionFunction($fonction_balise);
-	$file = substr($reflFunc->getFileName(), strlen(_ROOT_CWD));
+	// Attention sous windows, getFileName() retourne un antislash. 
+	$reflector = new ReflectionFunction($fonction_balise);
+	$file = substr(str_replace('\\', '/', $reflector->getFileName()), strlen(_ROOT_CWD));
 
 	// Y a-t-il une fonction de traitement des arguments ?
 	$f = 'balise_' . $nomfonction . '_stat';
