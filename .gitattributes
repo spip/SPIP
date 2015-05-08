@@ -144,6 +144,7 @@ ecrire/inc/puce_statut.php -text
 ecrire/inc/queue.php -text
 ecrire/inc/recherche_to_array.php -text
 ecrire/inc/rechercher.php -text
+ecrire/inc/roles.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/texte_mini.php -text
