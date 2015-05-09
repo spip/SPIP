@@ -296,13 +296,11 @@ function session_set($nom, $val=null) {
 		// rien a faire
 		if (!isset($GLOBALS['visiteur_session'][$nom])) return;
 		unset($GLOBALS['visiteur_session'][$nom]);
-		ajouter_session($GLOBALS['visiteur_session']);
 		actualiser_sessions($GLOBALS['visiteur_session'], array($nom));
 	}
 	else {
 		// On ajoute la valeur dans la globale
 		$GLOBALS['visiteur_session'][$nom] = $val;
-		ajouter_session($GLOBALS['visiteur_session']);
 		actualiser_sessions($GLOBALS['visiteur_session']);
 	}
 }
@@ -322,8 +320,20 @@ function session_set($nom, $val=null) {
  */
 function actualiser_sessions($auteur, $supprimer_cles = array()) {
 
-	// si session anonyme on ne fait rien
-	if (!isset($auteur['id_auteur']) OR !$id_auteur = intval($auteur['id_auteur']))
+	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
+	$id_auteur_courant = isset($GLOBALS['visiteur_session']['id_auteur']) ? intval($GLOBALS['visiteur_session']['id_auteur']) : 0;
+
+	// si l'auteur est celui de la session courante, verifier/creer la session si besoin
+	$fichier_session_courante = "";
+	if ($id_auteur == $id_auteur_courant){
+		ajouter_session($auteur);
+		if ($id_auteur){
+			$fichier_session_courante = fichier_session('alea_ephemere');
+		}
+	}
+
+	// si session anonyme on ne fait rien d'autre ici : les sessions anonymes sont non partagees
+	if (!$id_auteur)
 		return;
 
 	// memoriser l'auteur courant (celui qui modifie la fiche)
@@ -333,26 +343,47 @@ function actualiser_sessions($auteur, $supprimer_cles = array()) {
 	// attention au $ final pour ne pas risquer d'embarquer un .php.jeton temporaire
 	// cree par une ecriture concurente d'une session (fichier atomique temporaire)
 	$sessions = preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php$');
+
+	// 1ere passe : lire et fusionner les sessions
+	foreach($sessions as $session) {
+		$GLOBALS['visiteur_session'] = array();
+		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
+		if ($session !== $fichier_session_courante
+		  AND @file_exists($session)){
+			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
+
+			$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+		}
+	}
+
+	// supprimer les eventuelles cles dont on ne veut plus
+	foreach ($supprimer_cles as $cle) {
+		unset($auteur[$cle]);
+	}
+
+	// seconde passe : ecrire les sessions qui ne sont pas a jour
 	foreach($sessions as $session) {
 		$GLOBALS['visiteur_session'] = array();
 		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
 		if (@file_exists($session)){
 			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 
-			$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
-			foreach ($supprimer_cles as $cle) {
-				unset($auteur[$cle]);
-			} 
-			ecrire_fichier_session($session, $auteur);
+			// est-ce que cette session est a mettre a jour ?
+			if ($auteur != $GLOBALS['visiteur_session']){
+				ecrire_fichier_session($session, $auteur);
+			}
 		}
 	}
 
-	// restaurer l'auteur courant
-	$GLOBALS['visiteur_session'] = $sauve;
+	if ($id_auteur == $id_auteur_courant){
+		$GLOBALS['visiteur_session'] = $auteur;
+		$GLOBALS['auteur_session'] = &$GLOBALS['visiteur_session'];
+	}
+	else {
+		// restaurer l'auteur courant
+		$GLOBALS['visiteur_session'] = $sauve;
+	}
 
-	// si c'est le meme, rafraichir les valeurs
-	if (isset($sauve['id_auteur']) and $auteur['id_auteur'] == $sauve['id_auteur'])
-		verifier_session();
 }
 
 
