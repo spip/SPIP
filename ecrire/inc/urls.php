@@ -77,14 +77,17 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 		elseif (isset($_ENV['url_propre']))
 			$url = $_ENV['url_propre'];
 		else {
+			$qs = explode("?",$url);
 			// ne prendre que le segment d'url qui correspond, en fonction de la profondeur calculee
-			$url = ltrim($url,'/');
+			$url = ltrim($qs[0],'/');
 			$url = explode('/',$url);
 			while (count($url)>$GLOBALS['profondeur_url']+1)
 				array_shift($url);
-			$url = implode('/',$url);
+			$qs[0] = implode('/',$url);
+			$url = implode("?",$qs);
 		}
 	}
+
 	unset($_SERVER['REDIRECT_url_propre']);
 	unset($_ENV['url_propre']);
 	include_spip('inc/filtres_mini');
