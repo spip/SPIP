@@ -361,6 +361,8 @@ function actualiser_sessions($auteur, $supprimer_cles = array()) {
 		unset($auteur[$cle]);
 	}
 
+	$auteur_session = preparer_ecriture_session($auteur);
+
 	// seconde passe : ecrire les sessions qui ne sont pas a jour
 	foreach($sessions as $session) {
 		$GLOBALS['visiteur_session'] = array();
@@ -369,7 +371,7 @@ function actualiser_sessions($auteur, $supprimer_cles = array()) {
 			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 
 			// est-ce que cette session est a mettre a jour ?
-			if ($auteur != $GLOBALS['visiteur_session']){
+			if ($auteur_session != $GLOBALS['visiteur_session']){
 				ecrire_fichier_session($session, $auteur);
 			}
 		}
