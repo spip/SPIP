@@ -16,8 +16,9 @@
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=bs" total="792" traduits="431" relire="0" modifs="69" nouveaux="292" pourcent="54.42">
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="792" traduits="763" relire="5" modifs="2" nouveaux="22" pourcent="96.34">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="792" traduits="791" relire="0" modifs="0" nouveaux="1" pourcent="99.87">
 		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
+		<traducteur nom="laura" lien="http://trad.spip.net/auteur/laura" />
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="co" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=co" total="792" traduits="678" relire="0" modifs="36" nouveaux="78" pourcent="85.61">
