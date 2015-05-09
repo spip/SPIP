@@ -266,7 +266,7 @@ function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=t
 		// liberer le verrou et fermer le fichier
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) {
-			spip_clear_opcode_cache($fichier);
+			spip_clear_opcode_cache(realpath($fichier));
 			return $ok;
 		}
 	}
