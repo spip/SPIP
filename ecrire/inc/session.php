@@ -274,6 +274,7 @@ function verifier_session($change=false) {
 /**
  * Lire une valeur dans la session SPIP
  *
+ * @api
  * @param string $nom
  * @return mixed
  */
@@ -285,25 +286,27 @@ function session_get($nom) {
 /**
  * Ajouter une donnée dans la session SPIP
  *
+ * @api
  * @param string $nom
  * @param null $val
  * @return void
  */
 function session_set($nom, $val=null) {
-
 	if (is_null($val)){
 		// rien a faire
 		if (!isset($GLOBALS['visiteur_session'][$nom])) return;
 		unset($GLOBALS['visiteur_session'][$nom]);
+		ajouter_session($GLOBALS['visiteur_session']);
+		actualiser_sessions($GLOBALS['visiteur_session'], array($nom));
 	}
 	else {
 		// On ajoute la valeur dans la globale
 		$GLOBALS['visiteur_session'][$nom] = $val;
+		ajouter_session($GLOBALS['visiteur_session']);
+		actualiser_sessions($GLOBALS['visiteur_session']);
 	}
-
-	ajouter_session($GLOBALS['visiteur_session']);
-	actualiser_sessions($GLOBALS['visiteur_session']);
 }
+
 
 /**
  * Mettre a jour les sessions existantes pour un auteur
@@ -314,8 +317,10 @@ function session_set($nom, $val=null) {
  * Ne concerne que les sessions des auteurs loges (id_auteur connu)
  *
  * @param array $auteur
+ * @param array $supprimer_cles
+ *     Liste des clés à supprimer des tableaux de sessions
  */
-function actualiser_sessions($auteur) {
+function actualiser_sessions($auteur, $supprimer_cles = array()) {
 
 	// si session anonyme on ne fait rien
 	if (!isset($auteur['id_auteur']) OR !$id_auteur = intval($auteur['id_auteur']))
@@ -335,6 +340,9 @@ function actualiser_sessions($auteur) {
 			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 
 			$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+			foreach ($supprimer_cles as $cle) {
+				unset($auteur[$cle]);
+			} 
 			ecrire_fichier_session($session, $auteur);
 		}
 	}
