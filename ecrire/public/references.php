@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -641,7 +641,7 @@ function balise_distante_interdite($p) {
 // Traitements standard de divers champs
 // definis par $table_des_traitements, cf. ecrire/public/interfaces
 //
-// http://doc.spip.org/@champs_traitements
+// http://code.spip.net/@champs_traitements
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
@@ -709,7 +709,7 @@ function champs_traitements ($p) {
 //  - une etoile => pas de processeurs standards
 //  - deux etoiles => pas de securite non plus !
 //
-// http://doc.spip.org/@applique_filtres
+// http://code.spip.net/@applique_filtres
 function applique_filtres($p) {
 
 	// Traitements standards (cf. supra)
@@ -732,7 +732,7 @@ function applique_filtres($p) {
 }
 
 // Cf. function pipeline dans ecrire/inc_utils.php
-// http://doc.spip.org/@compose_filtres
+// http://code.spip.net/@compose_filtres
 function compose_filtres(&$p, $code) {
 
 	$image_miette = false;
@@ -795,7 +795,7 @@ function filtre_logique($fonc, $code, $arg)
 	return '';
 }
 
-// http://doc.spip.org/@compose_filtres_args
+// http://code.spip.net/@compose_filtres_args
 function compose_filtres_args($p, $args, $sep)
 {
 	$arglist = "";
@@ -842,7 +842,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut=null) 
 // "SELECT XXXX AS points"
 //
 
-// http://doc.spip.org/@rindex_pile
+// http://code.spip.net/@rindex_pile
 function rindex_pile($p, $champ, $motif) 
 {
 	$n = 0;

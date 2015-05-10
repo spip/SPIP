@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -757,7 +757,7 @@ $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclu
  * et les envoie dans un pipeline
  * pour les plugins
  *
- * @link http://doc.spip.org/@declarer_interfaces
+ * @link http://code.spip.net/@declarer_interfaces
  *
  * @return void
  */

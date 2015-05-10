@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -35,7 +35,7 @@ function cadre_depliable($icone,$titre,$deplie,$contenu,$ids='',$style_cadre='r'
 		. fin_cadre();
 }
 
-// http://doc.spip.org/@block_parfois_visible
+// http://code.spip.net/@block_parfois_visible
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false){
 	return "\n"
 	. bouton_block_depliable($invite,$visible,$nom)
@@ -44,7 +44,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 	. fin_block();
 }
 
-// http://doc.spip.org/@debut_block_depliable
+// http://code.spip.net/@debut_block_depliable
 function debut_block_depliable($deplie,$id=""){
 	$class=' blocdeplie';
 	// si on n'accepte pas js, ne pas fermer
@@ -52,14 +52,14 @@ function debut_block_depliable($deplie,$id=""){
 		$class=" blocreplie";
 	return "<div ".($id?"id='$id' ":"")."class='bloc_depliable$class'>";	
 }
-// http://doc.spip.org/@fin_block
+// http://code.spip.net/@fin_block
 function fin_block() {
 	return "<div class='nettoyeur'></div>\n</div>";
 }
 // $texte : texte du bouton
 // $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page 
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
-// http://doc.spip.org/@bouton_block_depliable
+// http://code.spip.net/@bouton_block_depliable
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	$bouton_id = 'b'.substr(md5($texte.microtime()),0,8);
 
@@ -92,7 +92,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 //
 // Tests sur le nom du butineur
 //
-// http://doc.spip.org/@verif_butineur
+// http://code.spip.net/@verif_butineur
 function verif_butineur() {
 
 	global $browser_name, $browser_version;

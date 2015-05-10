@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -28,7 +28,7 @@ include_spip('plugins/installer');
 // $dir_plugins pour forcer un repertoire (ex: _DIR_PLUGINS_DIST)
 // _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs
 // (chemin relatif a la racine du site)
-// http://doc.spip.org/@liste_plugin_files
+// http://code.spip.net/@liste_plugin_files
 function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
 	if (is_null($dir_plugins))
@@ -158,7 +158,7 @@ function plugin_version_compatible($intervalle, $version, $avec_quoi = '') {
 
 // Construire la liste des infos strictement necessaires aux plugins a activer
 // afin de les memoriser dans une meta pas trop grosse
-// http://doc.spip.org/@liste_plugin_valides
+// http://code.spip.net/@liste_plugin_valides
 function liste_plugin_valides($liste_plug, $force = false)
 {
 	$liste_ext = liste_plugin_files(_DIR_PLUGINS_DIST);
@@ -867,7 +867,7 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 }
 
 // precompilation des pipelines
-// http://doc.spip.org/@pipeline_precompile
+// http://code.spip.net/@pipeline_precompile
 function pipeline_precompile($prepend_code = array()){
 	global $spip_pipeline, $spip_matrice;
 
@@ -910,7 +910,7 @@ function pipeline_precompile($prepend_code = array()){
 }
 
 
-// http://doc.spip.org/@plugin_est_installe
+// http://code.spip.net/@plugin_est_installe
 function plugin_est_installe($plug_path){
 	$plugin_installes = isset($GLOBALS['meta']['plugin_installes'])?unserialize($GLOBALS['meta']['plugin_installes']):array();
 	if (!$plugin_installes) return false;

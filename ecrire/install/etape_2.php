@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@install_etape_2_dist
+// http://code.spip.net/@install_etape_2_dist
 function install_etape_2_dist()
 {
 	$adresse_db = defined('_INSTALL_HOST_DB')
@@ -98,7 +98,7 @@ function install_etape_2_dist()
 // Liste les bases accessibles, 
 // avec une heuristique pour preselectionner la plus probable
 
-// http://doc.spip.org/@install_etape_2_bases
+// http://code.spip.net/@install_etape_2_bases
 function install_etape_2_bases($login_db, $server_db)
 {
 	$res =  install_etape_liste_bases($server_db, $login_db);
@@ -146,7 +146,7 @@ function install_etape_2_bases($login_db, $server_db)
 	return array($checked, $res);
 }
 
-// http://doc.spip.org/@install_etape_2_form
+// http://code.spip.net/@install_etape_2_form
 function install_etape_2_form($hidden, $checked, $res, $etape)
  {
 	return generer_form_ecrire('install', (

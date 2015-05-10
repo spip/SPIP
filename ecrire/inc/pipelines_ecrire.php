@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette fonction est appelée par le pipeline header_prive
  *
  * @see f_jQuery()
- * @link http://doc.spip.org/@f_jQuery
+ * @link http://code.spip.net/@f_jQuery
  * 
  * @param string $texte    Contenu qui sera inséré dans le head HTML
  * @return string          Contenu complété des scripts javascripts, dont jQuery
@@ -91,7 +91,7 @@ function affichage_final_prive_title_auto($texte){
 
 
 // Fonction standard pour le pipeline 'boite_infos'
-// http://doc.spip.org/@f_boite_infos
+// http://code.spip.net/@f_boite_infos
 function f_boite_infos($flux) {
 	$args = $flux['args'];
 	$type = $args['type'];

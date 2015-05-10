@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -50,7 +50,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Le fichier homonyme du repertoire "genie/" est automatiquement lu
 // et il est suppose definir cette fonction.
 
-// http://doc.spip.org/@inc_genie_dist
+// http://code.spip.net/@inc_genie_dist
 function inc_genie_dist($taches = array()) {
 	include_spip('inc/queue');
 
@@ -77,7 +77,7 @@ function inc_genie_dist($taches = array()) {
 // les serveurs Http n'accordant en general pas plus de 30 secondes
 // a leur sous-processus
 //
-// http://doc.spip.org/@taches_generales
+// http://code.spip.net/@taches_generales
 function taches_generales($taches_generales = array()) {
 
 	// verifier que toutes les taches cron sont planifiees
@@ -114,7 +114,7 @@ function taches_generales($taches_generales = array()) {
 // - elle peut retirer les fichiers perimes
 // - elle fait appliquer le quota
 // En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-// http://doc.spip.org/@genie_invalideur_dist
+// http://code.spip.net/@genie_invalideur_dist
 function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');

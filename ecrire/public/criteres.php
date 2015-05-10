@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -580,7 +580,7 @@ function critere_fusion_dist($idb, &$boucles, $crit){
 
 // c'est la commande SQL "COLLATE"
 // qui peut etre appliquee sur les order by, group by, where like ...
-// http://doc.spip.org/@critere_collecte_dist
+// http://code.spip.net/@critere_collecte_dist
 function critere_collecte_dist($idb, &$boucles, $crit){
 	if (isset($crit->param[0])){
 		$_coll = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
@@ -593,7 +593,7 @@ function critere_collecte_dist($idb, &$boucles, $crit){
 		return (array('zbug_critere_inconnu', array('critere' => $crit->op." ".count($boucles[$idb]->order))));
 }
 
-// http://doc.spip.org/@calculer_critere_arg_dynamique
+// http://code.spip.net/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix = ''){
 	$boucle = $boucles[$idb];
 	$alt = "('".$boucle->id_table.'.\' . $x'.$suffix.')';
@@ -611,12 +611,12 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix = ''){
 
 // Tri : {par xxxx}
 // http://www.spip.net/@par
-// http://doc.spip.org/@critere_par_dist
+// http://code.spip.net/@critere_par_dist
 function critere_par_dist($idb, &$boucles, $crit){
 	return critere_parinverse($idb, $boucles, $crit);
 }
 
-// http://doc.spip.org/@critere_parinverse
+// http://code.spip.net/@critere_parinverse
 function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 	global $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
@@ -744,7 +744,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 	}
 }
 
-// http://doc.spip.org/@critere_par_joint
+// http://code.spip.net/@critere_par_joint
 function critere_par_joint($table, $champ, &$boucle, $idb){
 	$t = array_search($table, $boucle->from);
 	if (!$t) $t = trouver_jointure_champ($champ, $boucle);
@@ -754,7 +754,7 @@ function critere_par_joint($table, $champ, &$boucle, $idb){
 // {inverse}
 // http://www.spip.net/@inverse
 
-// http://doc.spip.org/@critere_inverse_dist
+// http://code.spip.net/@critere_inverse_dist
 function critere_inverse_dist($idb, &$boucles, $crit){
 
 	$boucle = &$boucles[$idb];
@@ -785,7 +785,7 @@ function critere_inverse_dist($idb, &$boucles, $crit){
 	}
 }
 
-// http://doc.spip.org/@critere_agenda_dist
+// http://code.spip.net/@critere_agenda_dist
 function critere_agenda_dist($idb, &$boucles, $crit) {
 	$params = $crit->param;
 
@@ -1115,7 +1115,7 @@ function calculer_criteres($idb, &$boucles){
  * Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
  * hum, c'est kwoi cette fonxion ? on va dire qu'elle desemberlificote les guillemets...
  *
- * http://doc.spip.org/@kwote
+ * http://code.spip.net/@kwote
  *
  * @param string $lisp    Code compilé
  * @param string $serveur Connecteur de bdd utilisé
@@ -1174,7 +1174,7 @@ function critere_IN_dist($idb, &$boucles, $crit){
 		$boucles[$idb]->where[] = $where_complement;
 }
 
-// http://doc.spip.org/@critere_IN_cas
+// http://code.spip.net/@critere_IN_cas
 function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 	static $num = array();
 	$descr = $boucles[$idb]->descr;
@@ -1941,7 +1941,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 
 // compatibilite ancienne version
 
-// http://doc.spip.org/@calculer_vieux_in
+// http://code.spip.net/@calculer_vieux_in
 function calculer_vieux_in($params){
 	$deb = $params[0][0];
 	$k = count($params)-1;

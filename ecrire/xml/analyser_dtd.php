@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('xml/interfaces');
 
-// http://doc.spip.org/@charger_dtd
+// http://code.spip.net/@charger_dtd
 function charger_dtd($grammaire, $avail, $rotlvl)
 {
 	static $dtd = array(); # cache bien utile pour le validateur en boucle
@@ -66,7 +66,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 // faire suivre chaque nom d'un espace (et supprimer les autres) ...
 // et parentheser le tout pour que  | + * ? s'applique dessus.
 
-// http://doc.spip.org/@compilerRegle
+// http://code.spip.net/@compilerRegle
 function compilerRegle($val)
 {
 	$x = str_replace('()','',
@@ -79,7 +79,7 @@ function compilerRegle($val)
 }
 
 
-// http://doc.spip.org/@analyser_dtd
+// http://code.spip.net/@analyser_dtd
 function analyser_dtd($loc, $avail, &$dtc)
 {
 	// creer le repertoire de cache si ce n'est fait
@@ -140,7 +140,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	return true;
 }
 
-// http://doc.spip.org/@analyser_dtd_comment
+// http://code.spip.net/@analyser_dtd_comment
 function analyser_dtd_comment($dtd, &$dtc, $grammaire){
 	// ejecter les commentaires, surtout quand ils contiennent du code.
 	// Option /s car sur plusieurs lignes parfois
@@ -150,14 +150,14 @@ function analyser_dtd_comment($dtd, &$dtc, $grammaire){
 	return $m[1];
 }
 
-// http://doc.spip.org/@analyser_dtd_pi
+// http://code.spip.net/@analyser_dtd_pi
 function analyser_dtd_pi($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^<\?.*?>\s*(.*)$/s', $dtd, $m))
 		return -10;
 	return $m[1];
 }
 
-// http://doc.spip.org/@analyser_dtd_lexeme
+// http://code.spip.net/@analyser_dtd_lexeme
 function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 
 	if (!preg_match(_REGEXP_ENTITY_DEF,$dtd, $m))
@@ -182,7 +182,7 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 // il faudrait gerer plus proprement les niveaux d'inclusion:
 // ca ne depasse pas 3 ici.
 
-// http://doc.spip.org/@analyser_dtd_data
+// http://code.spip.net/@analyser_dtd_data
 function analyser_dtd_data($dtd, &$dtc, $grammaire){
 
 	if (!preg_match(_REGEXP_INCLUDE_USE,$dtd,$m))
@@ -197,7 +197,7 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire){
 	return $retour;
 }
 
-// http://doc.spip.org/@analyser_dtd_notation
+// http://code.spip.net/@analyser_dtd_notation
 function analyser_dtd_notation($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s',$dtd, $m))
 		return -8;
@@ -205,7 +205,7 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire){
 	return $m[1];
 }
 
-// http://doc.spip.org/@analyser_dtd_entity
+// http://code.spip.net/@analyser_dtd_entity
 function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match(_REGEXP_ENTITY_DECL, $dtd, $m))
@@ -254,7 +254,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // aura fait l'essentiel du controle sans memorisation des balises.
 // Fin du controle en finElement
 
-// http://doc.spip.org/@analyser_dtd_element
+// http://code.spip.net/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
@@ -296,7 +296,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 }
 
 
-// http://doc.spip.org/@analyser_dtd_attlist
+// http://code.spip.net/@analyser_dtd_attlist
 function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match('/^<!ATTLIST\s+(\S+)\s+([^>]*)>\s*(.*)/s', $dtd, $m))
@@ -327,7 +327,7 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 // Si le premier argument n'est pas une chaine,
 // retourne les statistiques (pour debug de DTD, inutilise en mode normal)
 
-// http://doc.spip.org/@expanserEntite
+// http://code.spip.net/@expanserEntite
 function expanserEntite($val, $macros=array())
 {
 	static $vu = array();

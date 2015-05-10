@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -321,7 +321,7 @@ function debusquer_requete($message){
 
 
 
-// http://doc.spip.org/@trouve_boucle_debug
+// http://code.spip.net/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = ""){
 	global $debug_objets;
 
@@ -357,7 +357,7 @@ function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = ""){
 	return array($nom, $boucle, $n-$debut);
 }
 
-// http://doc.spip.org/@trouve_squelette_inclus
+// http://code.spip.net/@trouve_squelette_inclus
 function trouve_squelette_inclus($script){
 	global $debug_objets;
 	preg_match('/include\(.(.*).php3?.\);/', $script, $reg);
@@ -377,7 +377,7 @@ function trouve_squelette_inclus($script){
 	return "";
 }
 
-// http://doc.spip.org/@reference_boucle_debug
+// http://code.spip.net/@reference_boucle_debug
 function reference_boucle_debug($n, $nom, $self){
 	list($skel, $boucle, $ligne) = trouve_boucle_debug($n, $nom);
 
@@ -397,7 +397,7 @@ function reference_boucle_debug($n, $nom, $self){
 
 // affiche un texte avec numero de ligne et ancre.
 
-// http://doc.spip.org/@ancre_texte
+// http://code.spip.net/@ancre_texte
 function ancre_texte($texte, $fautifs = array(), $nocpt = false) {
 
 	$var_mode_ligne = _request('var_mode_ligne');
@@ -524,7 +524,7 @@ function debusquer_squelette($fonc, $mode, $self){
 }
 
 
-// http://doc.spip.org/@emboite_texte
+// http://code.spip.net/@emboite_texte
 function emboite_texte($res, $fonc = '', $self = ''){
 	$errs = $res->err;
 	$texte = $res->entete . ($errs ? '' : $res->page);
@@ -599,7 +599,7 @@ function emboite_texte($res, $fonc = '', $self = ''){
 	}
 }
 
-// http://doc.spip.org/@count_occ
+// http://code.spip.net/@count_occ
 function count_occ($regs){
 	$encore = array();
 	foreach ($regs as $r){
@@ -753,7 +753,7 @@ function debusquer_source($objet, $affiche){
 	return array($legend, $res, $res2);
 }
 
-// http://doc.spip.org/@debusquer_entete
+// http://code.spip.net/@debusquer_entete
 function debusquer_entete($titre, $corps){
 	global $debug_objets;
 	include_spip('balise/formulaire_admin');

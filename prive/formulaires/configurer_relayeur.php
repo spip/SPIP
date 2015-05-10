@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -95,7 +95,7 @@ function relayeur_saisie_ou_config($http_proxy, $default){
 }
 
 // Function glue_url : le pendant de parse_url
-// http://doc.spip.org/@glue_url
+// http://code.spip.net/@glue_url
 function glue_url ($url){
 	if (!is_array($url)){
 		return false;
@@ -124,7 +124,7 @@ function glue_url ($url){
 
 
 // Ne pas afficher la partie 'password' du proxy
-// http://doc.spip.org/@no_password_proxy_url
+// http://code.spip.net/@no_password_proxy_url
 function no_password_proxy_url($http_proxy) {
 	if ($http_proxy
 	AND $p = @parse_url($http_proxy)

@@ -3,7 +3,7 @@
 /* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -596,7 +596,7 @@ function ramasse_miettes($fichier){
  * d'images dans un squelette.
  * 
  * @filtre
- * @link http://doc.spip.org/@image_graver
+ * @link http://code.spip.net/@image_graver
  * 
  * @uses reconstruire_image_intermediaire()
  *     Si l'image finale a déjà été supprimée car considérée comme temporaire
@@ -639,7 +639,7 @@ function image_graver($img){
 // Si la transformation ne peut se faire on renvoie false. Si elle peut se faire ou si
 // l'image est deja en vrai RGB, on renvoie true.
 // Existe seulement pour compatibilite avec PHP < 5.5
-// http://doc.spip.org/@imagepalettetotruecolor
+// http://code.spip.net/@imagepalettetotruecolor
 if (!function_exists("imagepalettetotruecolor")) {
  function imagepalettetotruecolor(&$img) {
 	if (!$img OR !function_exists('imagecreatetruecolor')) {
@@ -664,7 +664,7 @@ if (!function_exists("imagepalettetotruecolor")) {
  }
 }
 
-// http://doc.spip.org/@image_tag_changer_taille
+// http://code.spip.net/@image_tag_changer_taille
 function _image_tag_changer_taille($tag,$width,$height,$style=false){
 	if ($style===false) $style = extraire_attribut($tag,'style');
 	// enlever le width et height du style
@@ -954,7 +954,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 }
 
 // Calculer le ratio
-// http://doc.spip.org/@image_ratio
+// http://code.spip.net/@image_ratio
 function _image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	$ratioWidth = $srcWidth/$maxWidth;
 	$ratioHeight = $srcHeight/$maxHeight;
@@ -975,7 +975,7 @@ function _image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 // Calculer le ratio ajuste sur la plus petite dimension
-// http://doc.spip.org/@ratio_passe_partout
+// http://code.spip.net/@ratio_passe_partout
 function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	$ratioWidth = $srcWidth/$maxWidth;
 	$ratioHeight = $srcHeight/$maxHeight;
@@ -995,7 +995,7 @@ function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		min($ratioWidth,$ratioHeight));
 }
 
-// http://doc.spip.org/@process_image_reduire
+// http://code.spip.net/@process_image_reduire
 function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process){
 	$image = false;
 	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))

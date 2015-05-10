@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -29,7 +29,7 @@ $GLOBALS['visiteur_session'] = array(); # globale decrivant l'auteur
  * - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
  * - bool: predicat de validite de la session indiquee par le cookie
  *
- * http://doc.spip.org/@inc_session_dist
+ * http://code.spip.net/@inc_session_dist
  *
  * @param int|array|bool $auteur
  * @return bool|null|void
@@ -55,7 +55,7 @@ function inc_session_dist($auteur=false)
  * et du meme coup des repertoires plats
  * Attention : id_auteur peut etre negatif (cas des auteurs temporaires pendant le dump)
  *
- * http://doc.spip.org/@supprimer_sessions
+ * http://code.spip.net/@supprimer_sessions
  *
  * @param int $id_auteur
  * 		Identifiant d'auteur dont on veut supprimer les sessions
@@ -190,7 +190,7 @@ function ajouter_session($auteur) {
  *
  * Retourne false en cas d'echec, l'id_auteur de la session si defini, null sinon
  *
- * http://doc.spip.org/@verifier_session
+ * http://code.spip.net/@verifier_session
  *
  * @param bool $change
  * @return bool|int|null
@@ -442,7 +442,7 @@ function preparer_ecriture_session($auteur){
 /**
  * Ecrire le fichier d'une session
  *
- * http://doc.spip.org/@ecrire_fichier_session
+ * http://code.spip.net/@ecrire_fichier_session
  *
  * @param string $fichier
  * @param array $auteur

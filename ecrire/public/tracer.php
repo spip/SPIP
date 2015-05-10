@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@trace_query_start
+// http://code.spip.net/@trace_query_start
 function trace_query_start()
 {
 	static $trace = '?';
@@ -25,7 +25,7 @@ function trace_query_start()
 	return  $trace ?  microtime() : 0;
 }
 
-// http://doc.spip.org/@trace_query_end
+// http://code.spip.net/@trace_query_end
 function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 	if ($start)
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
@@ -35,7 +35,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 	return $result;
 }
 
-// http://doc.spip.org/@trace_query_chrono
+// http://code.spip.net/@trace_query_chrono
 function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 {
 	include_spip('inc/filtres_mini');

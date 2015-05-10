@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Gestion du raccourci <math>...</math> en client-serveur
 //
 
-// http://doc.spip.org/@image_math
+// http://code.spip.net/@image_math
 function produire_image_math($tex) {
 	global $traiter_math;
 	switch ($traiter_math) {
@@ -75,7 +75,7 @@ function produire_image_math($tex) {
 
 
 // Fonction appelee par propre() s'il repere un mode <math>
-// http://doc.spip.org/@traiter_math
+// http://code.spip.net/@traiter_math
 function traiter_math($letexte, $source='') {
 
 	$texte_a_voir = $letexte;

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -27,7 +27,7 @@ function securiser_redirect_action($redirect){
 	return $redirect;
 }
 
-// http://doc.spip.org/@traiter_appels_actions
+// http://code.spip.net/@traiter_appels_actions
 function traiter_appels_actions(){
 	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
 	if ($action = _request('action')) {
@@ -86,7 +86,7 @@ function traiter_appels_actions(){
 }
 
 
-// http://doc.spip.org/@refuser_traiter_formulaire_ajax
+// http://code.spip.net/@refuser_traiter_formulaire_ajax
 function refuser_traiter_formulaire_ajax(){
 	if ($v=_request('var_ajax')
 	  AND $v=='form'
@@ -103,7 +103,7 @@ function refuser_traiter_formulaire_ajax(){
 	}
 }
 
-// http://doc.spip.org/@traiter_appels_inclusions_ajax
+// http://code.spip.net/@traiter_appels_inclusions_ajax
 function traiter_appels_inclusions_ajax(){
 	// traiter les appels de bloc ajax (ex: pagination)
 	if ($v = _request('var_ajax')
@@ -139,7 +139,7 @@ function traiter_appels_inclusions_ajax(){
 // au 2e se sachant 2e, retourne les messages et erreurs stockes au 1er
 // Le 1er renvoie True si il faut faire exit a la sortie
 
-// http://doc.spip.org/@traiter_formulaires_dynamiques
+// http://code.spip.net/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques($get=false){
 	static $post = array();
 	static $done = false;

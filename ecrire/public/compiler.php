@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -56,7 +56,7 @@ include_spip('public/jointures');
 // mais pas pour <INCLURE> dont le fond est defini explicitement.
 
 
-// http://doc.spip.org/@argumenter_inclure
+// http://code.spip.net/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true, $lang = '', $fond1=false){
 	$l = array();
 	$erreur_p_i_i = '';
@@ -738,7 +738,7 @@ function calculer_dump_array($a)
   }
 }
 
-// http://doc.spip.org/@calculer_dump_join
+// http://code.spip.net/@calculer_dump_join
 function calculer_dump_join($a)
 {
   $res = "";
@@ -778,7 +778,7 @@ function calculer_from_type(&$boucle)
   return 'array(' . substr($res,1) . ')';
 }
 
-// http://doc.spip.org/@calculer_order
+// http://code.spip.net/@calculer_order
 function calculer_order(&$boucle)
 {
 	if (!$order = $boucle->order
@@ -799,7 +799,7 @@ function calculer_order(&$boucle)
 // Retourne une expression PHP,
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
-// http://doc.spip.org/@calculer_liste
+// http://code.spip.net/@calculer_liste
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
@@ -833,7 +833,7 @@ define('_REGEXP_COND_VIDE_NONVIDE',"/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/");
 define('_REGEXP_COND_NONVIDE_VIDE',"/^[(](.*)[?]\s*('[^']+')\s*:\s*''\s*[)]$/");
 define('_REGEXP_CONCAT_NON_VIDE', "/^(.*)[.]\s*'[^']+'\s*$/");
 
-// http://doc.spip.org/@compile_cas
+// http://code.spip.net/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
         $codes = array();
@@ -1010,7 +1010,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 // mais si EXP est de la forme (t ? 'C' : '') on produit (t ? (p . C . s) : a)
 // de meme si EXP est de la forme (t ? '' : 'C')
 
-// http://doc.spip.org/@compile_retour
+// http://code.spip.net/@compile_retour
 function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 {
 	if ($avant == "''") $avant = '';
@@ -1065,7 +1065,7 @@ function compile_inclure_doublons($lexemes)
 // - 'entetes' => tableau des entetes http
 // En cas d'erreur, elle retournera un tableau des 2 premiers elements seulement
 
-// http://doc.spip.org/@public_compiler_dist
+// http://code.spip.net/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM

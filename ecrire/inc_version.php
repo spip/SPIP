@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -255,7 +255,7 @@ $controler_dates_rss = true;
 # ils seront compiles par la suite
 # note: un pipeline non reference se compile aussi, mais uniquement
 # lorsqu'il est rencontre
-// http://doc.spip.org/@Tuto-Se-servir-des-points-d-entree
+// http://code.spip.net/@Tuto-Se-servir-des-points-d-entree
 $spip_pipeline = array();
 
 # la matrice standard (fichiers definissant les fonctions a inclure)

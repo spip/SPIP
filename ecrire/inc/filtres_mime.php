@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -29,7 +29,7 @@ function filtre_application_dist($t) {return '';}
 function filtre_message_dist($t) {return '';}
 function filtre_multipart_dist($t) {return '';}
 
-// http://doc.spip.org/@filtre_text_txt_dist
+// http://code.spip.net/@filtre_text_txt_dist
 function filtre_text_dist($t) {
 	static $t1 = array('&', '<', '>');
 	static $t2 = array('&amp;', '&lt;', '&gt;');
@@ -63,7 +63,7 @@ function filtre_text_csv_dist($t) {
 
 // Incrustation de HTML, si on est capable de le securiser
 // sinon, afficher le source
-// http://doc.spip.org/@filtre_text_html_dist
+// http://code.spip.net/@filtre_text_html_dist
 function filtre_text_html_dist($t)
 {
 	if (!preg_match(',^(.*?)<body[^>]*>(.*)</body>,is', $t, $r))
@@ -89,7 +89,7 @@ function filtre_text_html_dist($t)
 	return (!$style ? '' : "\n<style>".$style."</style>") . $t;
 }
 
-// http://doc.spip.org/@filtre_audio_x_pn_realaudio
+// http://code.spip.net/@filtre_audio_x_pn_realaudio
 function filtre_audio_x_pn_realaudio($id)
 {
   return "

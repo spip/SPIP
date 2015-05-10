@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -152,7 +152,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 		return importer_charset($texte,$charset);//$texte;
 }
 
-// http://doc.spip.org/@spip_xml_aplatit
+// http://code.spip.net/@spip_xml_aplatit
 function spip_xml_aplatit($arbre,$separateur = " "){
 	$s = "";
 	if (is_array($arbre))
@@ -177,13 +177,13 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 	return strlen($separateur) ? substr($s, 0, -strlen($separateur)) : $s;
 }
 
-// http://doc.spip.org/@spip_xml_tagname
+// http://code.spip.net/@spip_xml_tagname
 function spip_xml_tagname($tag){
 	if (preg_match(',^([a-z][\w:]*),i',$tag,$reg))
 		return $reg[1];
 	return "";
 }
-// http://doc.spip.org/@spip_xml_decompose_tag
+// http://code.spip.net/@spip_xml_decompose_tag
 function spip_xml_decompose_tag($tag){
 	$tagname = spip_xml_tagname($tag);
 	$liste = array();

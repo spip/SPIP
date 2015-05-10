@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -228,7 +228,7 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 /**
  * retourne le fichier d'un document
  *
- * http://doc.spip.org/@quete_fichier
+ * http://code.spip.net/@quete_fichier
  *
  * @param int $id_document
  * @param string $serveur
@@ -252,7 +252,7 @@ function quete_document($id_document, $serveur='') {
 /**
  * recuperer une meta sur un site distant (en local il y a plus simple)
  *
- * http://doc.spip.org/@quete_meta
+ * http://code.spip.net/@quete_meta
  *
  * @param $nom
  * @param $serveur
@@ -329,7 +329,7 @@ function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 /**
  * fonction appelee par la balise #LOGO_DOCUMENT
  *
- * http://doc.spip.org/@calcule_logo_document
+ * http://code.spip.net/@calcule_logo_document
  *
  * @param array $row
  * @param string $connect
@@ -415,7 +415,7 @@ function vignette_logo_document($row, $connect='')
  * Calcul pour savoir si un objet est expose dans le contexte
  * fournit par $reference
  * 
- * http://doc.spip.org/@calcul_exposer
+ * http://code.spip.net/@calcul_exposer
  *
  * @param int $id
  * @param string $prim
