@@ -598,19 +598,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// generer le fichier _CACHE_PIPELINE
 	pipeline_precompile($prepend_code);
 
-
-	// si opcache est actif et en mode validate_timestamps
-	// le timestamp ne sera checke qu'apres revalidate_freq s
-	// il faut donc attendre ce temps la pour etre sur qu'on va bien beneficier de la recompilation
-	// NB c'est une config foireuse deconseillee de opcode cache mais malheureusement utilisee par Octave
-	// cf http://stackoverflow.com/questions/25649416/when-exactly-does-php-5-5-opcache-check-file-timestamp-based-on-revalidate-freq
-	// et http://wiki.mikejung.biz/PHP_OPcache
-	if (function_exists('opcache_get_configuration')
-		AND @ini_get('opcache.enable')
-		AND @ini_get('opcache.validate_timestamps')
-		AND $duree = @ini_get('opcache.revalidate_freq') ) {
-		sleep($duree);
-	}
+	// attendre eventuellement l'invalidation du cache opcode
+	spip_attend_invalidation_opcode_cache();
 
 	if (spip_connect()) {
 		// lancer et initialiser les nouveaux crons !
