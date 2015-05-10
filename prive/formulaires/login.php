@@ -200,7 +200,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	// on arrive ici si on ne s'est pas identifie avec un SSO
 	if (!is_array($auteur)) {
 		$erreurs = array();
-		if (is_string($auteur))
+		if (is_string($auteur) AND strlen($auteur))
 			$erreurs['var_login'] = $auteur;
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
