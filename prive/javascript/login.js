@@ -13,7 +13,7 @@ function informe_auteur(c){
 		alea_futur = c.alea_futur;
 		// indiquer le cnx si on n'y a pas touche
 		jQuery('input#session_remember:not(.modifie)')
-		.attr('checked',(c.cnx=='1')?'checked':'');
+		.prop('checked',(c.cnx=='1')?true:false);
 	} else {
 		alea_actuel = '';
 	}
