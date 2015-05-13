@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Noum',
 	'nouveautes' => 'Li nouvità',
 	'nouveautes_web' => 'Nouvità soubre lou web',
-	'nouveaux_articles' => 'Article nòu',
+	'nouveaux_articles' => 'Nouvèl article',
 	'nouvelles_breves' => 'Brèva nouvèli',
 
 	// P
