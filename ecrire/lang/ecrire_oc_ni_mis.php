@@ -146,7 +146,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'erreur_plugin_version_manquant' => 'Mìnga versioun dóu plugin',
 
 	// H
-	'htaccess_a_simuler' => 'Avertissamen : la counfiguracioun dóu vouòstre servidou HTTP noun ten rasoun dei fichié @htaccess@. Per poudé assegurà una bouòna segurtà, vi cóu moudificà aquela counfiguracioun soubre aqueu pounch, o que li coustanta @constantes@ (definissable en lou fichié mes_options.php) aiguon dei repertori en defouòra de @document_root@ per valour.',
+	'htaccess_a_simuler' => 'Avertimen : la counfiguracioun dóu vouòstre servidou HTTP noun ten rasoun dei fichié @htaccess@. Per poudé assegurà una bouòna segurtà, vi cóu moudificà aquela counfiguracioun soubre aquestou pounch, o que li coustanta @constantes@ (definissable en lou fichié mes_options.php) aiguon dei repertori en defouòra de @document_root@ per valour.',
 	'htaccess_inoperant' => 'htaccess inouperant',
 
 	// I
@@ -244,7 +244,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'info_auteurs_par_tri' => 'autour@partri@',
 	'info_auteurs_trouves' => 'Autour troubat',
 	'info_authentification_externe' => 'Autentificacioun esterna',
-	'info_avertissement' => 'Avertissamen',
+	'info_avertissement' => 'Avertimen',
 	'info_barre_outils' => 'embé la siéu barra d’óutis ?',
 	'info_base_installee' => 'L’estrutura de la vouòstra basa de dounada es instalada.',
 	'info_bio' => 'Biougrafìa',
@@ -455,7 +455,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'info_suivi_activite' => 'Segut de l’atività editouriala',
 	'info_surtitre' => 'Soubretitre :',
 	'info_syndication_integrale_1' => 'Lou vouòstre sit proupausa dei fichié de sindicacioun (vèire « <a href="@url@">@titre@</a> »).',
-	'info_syndication_integrale_2' => 'Desiràs transmetre l’integralità dei article, o difusà lou coumpèndi de quauqui centena de caractère ?',
+	'info_syndication_integrale_2' => 'Desìres trasmetre l’integralità dei article, o difusà lou coumpèndi de quauqui centena de caracter ?',
 	'info_table_prefix' => 'Poudès moudificà lou prefisse dóu noum dei taula de dounada (acò es indispensable quoura si vòu instalà plusiur sit en la mema basa de dounada). Aqueu prefisse s’ecriéu en letra minusculi, noun acentuadi, e sensa espaci.',
 	'info_taille_maximale_images' => 'SPIP va prouvà la talha massimala dei image que pòu tratà (en milioun de pixel).<br /> Lu image mai grani noun seran reduchi.',
 	'info_taille_maximale_vignette' => 'Talha massimala dei vigneta generadi per lou sistema :',
@@ -480,7 +480,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 Li traducioun soun assouciadi a l’ouriginau,
 embé una coulou qu’endica lou sieu estat :',
 	'info_traductions' => 'Traducioun',
-	'info_travail_colaboratif' => 'Trabalh coulabouratiu sus lu article',
+	'info_travail_colaboratif' => 'Travai coulabouratiéu sus lu article',
 	'info_un_article' => 'un article, ',
 	'info_un_site' => 'un sit, ',
 	'info_une_rubrique' => 'una rùbrica, ',
@@ -523,7 +523,7 @@ embé una coulou qu’endica lou sieu estat :',
 	'intem_redacteur' => 'redatour',
 	'intitule_licence' => 'Licença',
 	'item_accepter_inscriptions' => 'Achetà li inscricioun',
-	'item_activer_messages_avertissement' => 'Ativà lu message d’avertissamen',
+	'item_activer_messages_avertissement' => 'Ativà lu message d’avertimen',
 	'item_administrateur_2' => 'aministratour',
 	'item_afficher_calendrier' => 'Afichà en lou calendari',
 	'item_autoriser_syndication_integrale' => 'Difusì l’integralità dei article en lu fichié de sindicacioun',
@@ -540,7 +540,7 @@ embé una coulou qu’endica lou sieu estat :',
 	'item_mots_cles_association_sites' => 'ai sit referença o sindicat',
 	'item_non' => 'Noun',
 	'item_non_accepter_inscriptions' => 'Noun achetà li inscricioun',
-	'item_non_activer_messages_avertissement' => 'Minga de message d’avertissamen',
+	'item_non_activer_messages_avertissement' => 'Minga message d’avertimen',
 	'item_non_afficher_calendrier' => 'Noun afichà lou calendari',
 	'item_non_autoriser_syndication_integrale' => 'Difondre un coumpèndi soulamen',
 	'item_non_creer_fichiers_authent' => 'Noun creà aquelu fichié',
@@ -688,7 +688,7 @@ embé una coulou qu’endica lou sieu estat :',
 	'protocole_ldap' => 'Versioun dóu proutoucole :',
 
 	// Q
-	'queue_executer_maintenant' => 'Eseguì ahura',
+	'queue_executer_maintenant' => 'Esecutà ahura',
 	'queue_info_purger' => 'Poudès supprimà toui lu travai en aspera et reinicialisà la lista embé lu travai periòdicou',
 	'queue_nb_jobs_in_queue' => '@nb@ travai en aspera',
 	'queue_next_job_in_nb_sec' => 'Travai que ven en @nb@ s',
@@ -788,7 +788,7 @@ reinstalà SPIP per recreà una basa nouvèla couma pura un premié achès amini
 	'texte_port_annuaire' => '(La valour predefinida counven generalamen.)',
 	'texte_presente_plugin' => 'Aquela pàgina lista lu plugin dispounible sus lou sit. Poudès ativà lu plugin necessari en entacant la casa courrespoundenta.',
 	'texte_proposer_publication' => 'Quoura lou vouòstre article sera acabat,<br /> pourès proupausà la siéu publicacioun.',
-	'texte_proxy' => 'De còu que lì a (intranet, rets protegidi...), lu sit distant (doucumentacioun de SPIP, sit sindicat, eca.) soun achessible qu’ a travès un <i>proxy</i>. En aquèu cas, endicàs aquì souta la siéu adressa coum’acò @proxy_en_cours@. En general, laisserès aquèla casa vuèia',
+	'texte_proxy' => 'De còu que lì a (intranet, rets protegidi...), lu sit distant (doucumentacioun de SPIP, sit sindicat, eca.) soun achessible qu’a travès un <i>proxy</i>. En aqueu cas, endicàs aquì souta la siéu adressa coum’acò @proxy_en_cours@. En general, laisserès aquèla casa vuèia',
 	'texte_publication_articles_post_dates' => 'Couma SPIP si deu coumpourtà embé lu article que la sieu
 		data de publicacioun es fissada a una 
 		escadença futura ?',
@@ -828,10 +828,10 @@ s’avès fach dei moudificacioun empourtanti de grafisme o d’estrutura dóu s
 	'texte_titre_02' => 'Titre :',
 	'texte_titre_obligatoire' => '<b>Titre</b> [Oubligatori]',
 	'texte_travail_article' => '@nom_auteur_modif@ a trabalhat sus aquel article @date_diff@ minuta fa',
-	'texte_travail_collaboratif' => 'Quoura es frequent que mai d’un redatour 
-  trabalhe sus lou meme article, lou sistema
+	'texte_travail_collaboratif' => 'Coura es frequent que mai d’un redatour 
+  travalhe sus lou meme article, lou sistema
   pòu afichà lu article darieramen « dubèrt »
-  da evità li moudificacioun fach ensen.
+  da evità li moudificacioun fachi ensen.
   Aquela oupcioun es desativada de maniera predefinida
   da evità d’afichà de message d’avertimen
   intempestiéu.',
