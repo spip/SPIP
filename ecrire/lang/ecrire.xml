@@ -11,7 +11,8 @@
 	</langue>
 	<langue code="bg" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=bg" total="792" traduits="485" relire="0" modifs="39" nouveaux="268" pourcent="61.24">
 	</langue>
-	<langue code="br" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=br" total="792" traduits="769" relire="0" modifs="4" nouveaux="19" pourcent="97.10">
+	<langue code="br" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=br" total="792" traduits="770" relire="0" modifs="4" nouveaux="18" pourcent="97.22">
+		<traducteur nom="AudeB" lien="http://trad.spip.net/auteur/audeb" />
 		<traducteur nom="Kristen" lien="http://trad.spip.net/auteur/kristen" />
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=bs" total="792" traduits="431" relire="0" modifs="69" nouveaux="292" pourcent="54.42">
