@@ -1,132 +1,14 @@
 /**
  * Fichiers sha256.js et login.js concaténés et minifiés
  */
-var chrsz=8;
-function safe_add(x,y){
-var lsw=(x&0xFFFF)+(y&0xFFFF);
-var msw=(x>>16)+(y>>16)+(lsw>>16);
-return(msw<<16)|(lsw&0xFFFF);
-}
-function S(X,n){return(X>>>n)|(X<<(32-n));}
-function R(X,n){return(X>>>n);}
-function Ch(x,y,z){return((x&y)^((~x)&z));}
-function Maj(x,y,z){return((x&y)^(x&z)^(y&z));}
-function Sigma0256(x){return(S(x,2)^S(x,13)^S(x,22));}
-function Sigma1256(x){return(S(x,6)^S(x,11)^S(x,25));}
-function Gamma0256(x){return(S(x,7)^S(x,18)^R(x,3));}
-function Gamma1256(x){return(S(x,17)^S(x,19)^R(x,10));}
-function core_sha256(m,l){
-var K=new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
-var HASH=new Array(0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19);
-var W=new Array(64);
-var a,b,c,d,e,f,g,h,i,j;
-var T1,T2;
-m[l>>5]|=0x80<<(24-l%32);
-m[((l+32>>9)<<4)+15]=l;
-for(var i=0;i<m.length;i+=16){
-a=HASH[0];b=HASH[1];c=HASH[2];d=HASH[3];e=HASH[4];f=HASH[5];g=HASH[6];h=HASH[7];
-for(var j=0;j<64;j++){
-if(j<16)W[j]=m[j+i];
-else W[j]=safe_add(safe_add(safe_add(Gamma1256(W[j-2]),W[j-7]),Gamma0256(W[j-15])),W[j-16]);
-T1=safe_add(safe_add(safe_add(safe_add(h,Sigma1256(e)),Ch(e,f,g)),K[j]),W[j]);
-T2=safe_add(Sigma0256(a),Maj(a,b,c));
-h=g;g=f;f=e;e=safe_add(d,T1);d=c;c=b;b=a;a=safe_add(T1,T2);
-}
-HASH[0]=safe_add(a,HASH[0]);HASH[1]=safe_add(b,HASH[1]);HASH[2]=safe_add(c,HASH[2]);HASH[3]=safe_add(d,HASH[3]);HASH[4]=safe_add(e,HASH[4]);HASH[5]=safe_add(f,HASH[5]);HASH[6]=safe_add(g,HASH[6]);HASH[7]=safe_add(h,HASH[7]);
-}
-return HASH;
-}
-function str2binb(str){
-var bin=Array();
-var i;
-chrsz=8;
-for(i=0;i<str.length;i++)
-if(str.charCodeAt(i)>0x7F)
-chrsz=16;
-var mask=(1<<chrsz)-1;
-for(i=0;i<str.length*chrsz;i+=chrsz)
-bin[i>>5]|=(str.charCodeAt(i/chrsz)&mask)<<(24-i%32);
-return bin;
-}
-function binb2hex(binarray){
-var hexcase=0;
-var hex_tab=hexcase?"0123456789ABCDEF":"0123456789abcdef";
-var str="";
-for(var i=0;i<binarray.length*4;i++){
-str+=hex_tab.charAt((binarray[i>>2]>>((3-i%4)*8+4))&0xF)+hex_tab.charAt((binarray[i>>2]>>((3-i%4)*8))&0xF);
-}
-return str;
-}
-function hex_sha256(s){return binb2hex(core_sha256(str2binb(s),s.length*chrsz));}
-function sha256_self_test(){
-return hex_sha256("message digest")=="f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650";
-}
-function affiche_login_secure(){
-if(alea_actuel)
-jQuery('#pass_securise').show();
-else
-jQuery('#pass_securise').hide();
-}
-function informe_auteur(c){
-informe_auteur_en_cours=false;
-eval('c = '+c);
-if(c){
-alea_actuel=c.alea_actuel;
-alea_futur=c.alea_futur;
-jQuery('input#session_remember:not(.modifie)')
-.attr('checked',(c.cnx=='1')?'checked':'');
-}else{
-alea_actuel='';
-}
-if(c.logo)
-jQuery('#spip_logo_auteur').html(c.logo);
-else
-jQuery('#spip_logo_auteur').html('');
-affiche_login_secure();
-}
-function calcule_hash_pass(pass){
-if((alea_actuel||alea_futur)
-&&!pass.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)
-&&!pass.match(/^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$/i)
-&&sha256_self_test()
-){
-var hash="";
-hash=hex_sha256(alea_actuel+pass);
-hash=hash+';'+hex_sha256(alea_futur+pass);
-if(window.calcMD5){
-hash=hash+';'+calcMD5(alea_actuel+pass);
-hash=hash+';'+calcMD5(alea_futur+pass);
-}
-jQuery('input[name=password]').attr('value','{'+hash+'}');
-}
-}
-function actualise_auteur(){
-if(login!=jQuery('#var_login').attr('value')){
-informe_auteur_en_cours=true;
-login=jQuery('#var_login').attr('value');
-var currentTime=new Date();
-jQuery.get(page_auteur,{var_login:login,var_compteur:currentTime.getTime()},informe_auteur);
-}
-}
-function login_submit(){
-actualise_auteur();
-var inputpass=jQuery('input[name=password]');
-pass=inputpass.attr('value');
-if(pass){
-if(informe_auteur_en_cours&&(attente_informe<5)){
-attente_informe++;
-jQuery('form#formulaire_login').animeajax().find('p.boutons input').before('.');
-setTimeout(function(){
-jQuery('form#formulaire_login').submit();
-},1000);
-return false;
-}
-if(alea_actuel||alea_futur){
-inputpass.after('<input name="password" type="hidden" value="" />').attr('value',pass);
-inputpass.attr('name','nothing').attr('value','');
-calcule_hash_pass(pass);
-}
-else if(informe_auteur_en_cours)
-jQuery('input[name=password]').attr('value','');
-}
-}
+var chrsz=8;function safe_add(a,b){var c=(a&65535)+(b&65535);return(a>>16)+(b>>16)+(c>>16)<<16|c&65535}function S(a,b){return a>>>b|a<<32-b}function R(a,b){return a>>>b}function Ch(a,b,c){return a&b^~a&c}function Maj(a,b,c){return a&b^a&c^b&c}function Sigma0256(a){return S(a,2)^S(a,13)^S(a,22)}function Sigma1256(a){return S(a,6)^S(a,11)^S(a,25)}function Gamma0256(a){return S(a,7)^S(a,18)^R(a,3)}function Gamma1256(a){return S(a,17)^S(a,19)^R(a,10)}
+function core_sha256(a,b){var c=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,
+3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],d=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],f=Array(64),g,k,l,q,h,m,n,r,p,e,t,u;a[b>>5]|=128<<24-b%32;a[(b+32>>9<<4)+15]=b;for(p=0;p<a.length;p+=16){g=d[0];k=d[1];l=d[2];q=d[3];h=d[4];m=d[5];n=d[6];r=d[7];for(e=0;64>e;e++)f[e]=16>e?a[e+p]:
+safe_add(safe_add(safe_add(Gamma1256(f[e-2]),f[e-7]),Gamma0256(f[e-15])),f[e-16]),t=safe_add(safe_add(safe_add(safe_add(r,Sigma1256(h)),Ch(h,m,n)),c[e]),f[e]),u=safe_add(Sigma0256(g),Maj(g,k,l)),r=n,n=m,m=h,h=safe_add(q,t),q=l,l=k,k=g,g=safe_add(t,u);d[0]=safe_add(g,d[0]);d[1]=safe_add(k,d[1]);d[2]=safe_add(l,d[2]);d[3]=safe_add(q,d[3]);d[4]=safe_add(h,d[4]);d[5]=safe_add(m,d[5]);d[6]=safe_add(n,d[6]);d[7]=safe_add(r,d[7])}return d}
+function str2binb(a){var b=[],c;chrsz=8;for(c=0;c<a.length;c++)127<a.charCodeAt(c)&&(chrsz=16);var d=(1<<chrsz)-1;for(c=0;c<a.length*chrsz;c+=chrsz)b[c>>5]|=(a.charCodeAt(c/chrsz)&d)<<24-c%32;return b}function binb2hex(a){for(var b="",c=0;c<4*a.length;c++)b+="0123456789abcdef".charAt(a[c>>2]>>8*(3-c%4)+4&15)+"0123456789abcdef".charAt(a[c>>2]>>8*(3-c%4)&15);return b}function hex_sha256(a){return binb2hex(core_sha256(str2binb(a),a.length*chrsz))}
+function sha256_self_test(){return"f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650"==hex_sha256("message digest")}var login_info;console.log(login_info);function affiche_login_secure(){login_info.alea_actuel?jQuery("#pass_securise").show():jQuery("#pass_securise").hide()}
+function informe_auteur(a){login_info.informe_auteur_en_cours=!1;(a=jQuery.parseJSON(a))?(login_info.alea_actuel=a.alea_actuel,login_info.alea_futur=a.alea_futur,jQuery("input#session_remember:not(.modifie)").prop("checked","1"==a.cnx?!0:!1)):login_info.alea_actuel="";a.logo?jQuery("#spip_logo_auteur").html(a.logo):jQuery("#spip_logo_auteur").html("");affiche_login_secure()}
+function calcule_hash_pass(a){if((login_info.alea_actuel||login_info.alea_futur)&&!a.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)&&!a.match(/^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$/i)&&sha256_self_test()){var b="",b=hex_sha256(login_info.alea_actuel+a),b=b+";"+hex_sha256(login_info.alea_futur+a);window.calcMD5&&(b=b+";"+calcMD5(login_info.alea_actuel+a),b=b+";"+calcMD5(login_info.alea_futur+a));jQuery("input[name=password]").prop("value","{"+b+"}")}}
+function actualise_auteur(){login_info.login!=jQuery("#var_login").prop("value")&&(login_info.informe_auteur_en_cours=!0,login_info.login=jQuery("#var_login").prop("value"),jQuery.get(login_info.page_auteur,{var_login:login_info.login,var_compteur:(new Date).getTime()},informe_auteur))}
+function login_submit(){actualise_auteur();var a=jQuery("input[name=password]"),b=a.prop("value");if(b){if(login_info.informe_auteur_en_cours&&5>login_info.attente_informe)return login_info.attente_informe++,jQuery("form#formulaire_login").animeajax().find("p.boutons input").before("."),setTimeout(function(){jQuery("form#formulaire_login").submit()},1E3),!1;login_info.alea_actuel||login_info.alea_futur?(a.after('<input name="password" type="hidden" value="" />').prop("value",b),a.prop("name","nothing").prop("value",
+""),calcule_hash_pass(b)):login_info.informe_auteur_en_cours&&a.prop("value","")}};

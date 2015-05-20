@@ -112,20 +112,19 @@ function auth_spip_formulaire_login($flux){
 	  ($compat_md5?'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>':'')
 		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login-sha-min.js"></script>'
 		.'<script type="text/javascript">/*<![CDATA[*/'
-		."var alea_actuel='".$flux['args']['contexte']['_alea_actuel']."';"
-		."var alea_futur='".$flux['args']['contexte']['_alea_futur']."';"
-		."var login='".$flux['args']['contexte']['var_login']."';"
-		."var page_auteur = '".generer_url_public('informer_auteur')."';"
-		."var informe_auteur_en_cours = false;"
-		."var attente_informe = 0;"
-		."var compat_md5 = ".($compat_md5?"true;":"false;")
+		."var login_info={'alea_actuel':'".$flux['args']['contexte']['_alea_actuel']."',"
+		."'alea_futur':'".$flux['args']['contexte']['_alea_futur']."',"
+		."'login':'".$flux['args']['contexte']['var_login']."',"
+		."'page_auteur': '".generer_url_public('informer_auteur')."',"
+		."'informe_auteur_en_cours':false,"
+		."'attente_informe':0,"
+		."'compat_md5':".($compat_md5?"true":"false")."};"
 		."jQuery(function(){
-		jQuery('#password')
-			.after(\"<em id='pass_securise'><img src='".chemin_image('cadenas-16.png')."' width='16' height='16' alt='" . attribut_html(_T('login_securise')) . "' title='" . attribut_html(_T('login_securise')) . "' \/><\/em>\");
-		affiche_login_secure();
-		jQuery('#var_login').change(actualise_auteur);
-		jQuery('form#formulaire_login').submit(login_submit);
-	});"
+	jQuery('#password').after(\"<em id='pass_securise'><img src='".chemin_image('cadenas-16.png')."' width='16' height='16' alt='" . attribut_html(_T('login_securise')) . "' title='" . attribut_html(_T('login_securise')) . "' \/><\/em>\");
+	affiche_login_secure();
+	jQuery('#var_login').change(actualise_auteur);
+	jQuery('form#formulaire_login').submit(login_submit);
+});"
 		."/*]]>*/</script>";
 
 	return $flux;
