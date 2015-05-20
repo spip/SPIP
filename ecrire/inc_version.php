@@ -312,7 +312,7 @@ $liste_des_authentifications = array(
 $spip_version_branche = "3.1.0-beta";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 17873;
+$spip_version_code = 22159;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version_base = 21742;
 
