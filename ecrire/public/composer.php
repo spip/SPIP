@@ -342,7 +342,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 
 /** Code PHP pour inclure une balise dynamique à l'exécution d'une page */
 define('CODE_INCLURE_BALISE', '<' . '?php 
-include_once("./" . _DIR_RACINE . "%s");
+include_once("%s");
 if ($lang_select = "%s") $lang_select = lang_select($lang_select);
 inserer_balise_dynamique(balise_%s_dyn(%s), array(%s));
 if ($lang_select) lang_select();
@@ -367,6 +367,9 @@ if ($lang_select) lang_select();
  *     Code PHP pour inclure le squelette de la balise dynamique
 **/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
+	if (strncmp($file,"/",1)!==0){
+		$file = './" . _DIR_RACINE . "'.$file;
+	}
 	$r = sprintf(CODE_INCLURE_BALISE,
 	       $file,
 	       $context_compil[4]?$context_compil[4]:'',
@@ -455,7 +458,10 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	// même si la fonction dynamique est déclarée dans un fichier de fonctions.
 	// Attention sous windows, getFileName() retourne un antislash. 
 	$reflector = new ReflectionFunction($fonction_balise);
-	$file = substr(str_replace('\\', '/', $reflector->getFileName()), strlen(_ROOT_CWD));
+	$file = str_replace('\\', '/', $reflector->getFileName());
+	if (strncmp($file,_ROOT_RACINE,strlen(_ROOT_RACINE))==0){
+		$file = substr($file, strlen(_ROOT_RACINE));
+	}
 
 	// Y a-t-il une fonction de traitement des arguments ?
 	$f = 'balise_' . $nomfonction . '_stat';
@@ -469,20 +475,18 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	if (!function_exists('balise_' . $nomfonction . '_dyn')) {
 		if ($nomfonction_generique
 			AND $file = include_spip("balise/" .strtolower($nomfonction_generique))
-			AND function_exists('balise_' . $nomfonction_generique . '_dyn'))
-		{
+			AND function_exists('balise_' . $nomfonction_generique . '_dyn')) {
 			// et lui injecter en premier arg le nom de la balise 
 			array_unshift($r, $nom);
 			$nomfonction = $nomfonction_generique;
+			if (!_DIR_RESTREINT) {
+				$file = _DIR_RESTREINT_ABS . $file;
+			}
 		} else {
 			$msg = array('zbug_balise_inexistante',array('from'=>'CVT', 'balise'=>$nom));
 			erreur_squelette($msg, $context_compil);
 			return '';
 		}
-	}
-
-	if (!_DIR_RESTREINT) {
-		$file = _DIR_RESTREINT_ABS . $file;
 	}
 
 	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
