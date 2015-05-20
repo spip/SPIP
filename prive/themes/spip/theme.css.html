@@ -22,9 +22,9 @@
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
 /* pour les icones pochoir de diala */
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #GET{claire};}
 .navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{foncee}; }
 
 .navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:60px;}
 .navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px; margin-#GET{right}: 1.0em; background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
@@ -41,7 +41,7 @@ body {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;b
 #bando_haut ul.deroulant li ul li {background-color: transparent;}
 #bando_haut ul.deroulant li ul> li:last-child {-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;position:relative;}
 #bando_haut ul.deroulant li ul li.actif,
-#bando_haut ul.deroulant li ul li.actif_tempo {background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];-webkit-box-shadow:0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.25})] inset;-moz-box-shadow:0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.25})] inset;box-shadow:0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.25})] inset;position:relative;}
+#bando_haut ul.deroulant li ul li.actif_tempo {background-color: #[(#ENV{claire}|couleur_eclaircir)];position:relative;}
 #bando_haut ul.deroulant li ul li.actif a:hover,
 #bando_haut ul.deroulant li ul li.actif_tempo a:hover {background-color: transparent;}
 #bando_navigation ul li {line-height: 125%;}
