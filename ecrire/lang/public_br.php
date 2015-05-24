@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Degemer al lec’hienn', # MODIF
+	'accueil_site' => 'Degemer al lec’hienn',
+	'article' => 'Pennad-skrid',
 	'articles' => '@nb@ pennad',
 	'articles_auteur' => 'Pennadoù all ar skridaozer-mañ',
 	'articles_populaires' => 'Pennadoù lennet ar muiañ',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'N’eus lec’hienn ebet er chomlec’h-mañ',
 	'aucune_breve' => 'N’eus berrskrid ebet er chomlec’h-mañ',
 	'aucune_rubrique' => 'N’eus rubrikenn ebet er chomlec’h-mañ',
+	'auteur' => 'Aozer',
 	'autres' => 'Re all',
 	'autres_breves' => 'Berrskridoù all',
 	'autres_groupes_mots_clefs' => 'Strolladoù gerioù-stur all',
@@ -28,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Ober evezhiadennoù diwar-benn al lec’hienn-mañ',
+	'contact' => 'Darempred',
 	'copie_document_impossible' => 'N’eo ket posupl eilañ an teul',
 
 	// D
@@ -62,8 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meme_rubrique' => 'Er rubrikenn-mañ',
 	'memes_auteurs' => 'Gant ar skridaozerien-mañ',
 	'message' => 'Kemennadenn',
-	'messages_forum' => 'Kemennadennoù forom', # MODIF
+	'messages_forum' => 'Kemennadennoù',
 	'messages_recents' => 'Kemennadennoù forom diwezhañ',
+	'mots_clef' => 'Ger-alc’hwez',
 	'mots_clefs' => 'Gerioù-stur',
 	'mots_clefs_meme_groupe' => 'Gerioù-stur er strollad-mañ',
 
@@ -106,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_lettre_information' => 'Setu lizher kelaouiñ al lec’hienn',
-	'texte_lettre_information_2' => 'Enni emañ ar pennadoù hag ar berrskridoù embannet abaoe', # MODIF
+	'texte_lettre_information_2' => 'El lizher-mañ emañ ar pennadoù hag ar berrskridoù embannet abaoe',
 
 	// V
 	'ver_imprimer' => 'Stumm da voullañ',
