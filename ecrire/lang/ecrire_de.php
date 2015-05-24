@@ -235,6 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Keine Nachricht',
 	'info_aucun_rubrique' => 'Keine Rubrik',
 	'info_aujourdhui' => 'heute: ',
+	'info_auteur_gere_toutes_rubriques' => 'Dieser Autor kümmert sich <b>alle Durchschneidung</b>', # RELIRE
 	'info_auteurs' => 'Autoren',
 	'info_auteurs_par_tri' => 'Autoren@partri@',
 	'info_auteurs_trouves' => 'Gefundene Autoren',
