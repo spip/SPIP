@@ -658,7 +658,7 @@ Le traduzioni sono associate all’originale,
 	'plugin_info_upgrade_ok' => 'Aggiornamento avvenuto',
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
-	'plugin_necessite_plugin' => 'Necessita l’estensione @plugin@ con almeno la versione @version@.', # MODIF
+	'plugin_necessite_plugin' => 'Necessita l’estensione @plugin@ con la versione @version@.',
 	'plugin_necessite_plugin_sans_version' => 'Necessita del plugin @plugin@',
 	'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 	'plugin_source' => 'origine: ',
