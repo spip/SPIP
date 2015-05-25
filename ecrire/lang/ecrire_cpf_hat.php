@@ -277,7 +277,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 	'info_nouvel_article' => 'Nouvo atik',
 	'info_nouvelle_traduction' => 'Nouvo tradiksyon :',
 	'info_numero_article' => 'ATIK NIMEWO :',
-	'info_obligatoire_02' => '[Nésèsè]', # MODIF
+	'info_obligatoire_02' => ' (Nésèsè)', # MODIF
 	'info_option_accepter_visiteurs' => 'Asepte vizitè yo enskri y sou sit piblik',
 	'info_option_ne_pas_accepter_visiteurs' => 'Refize lenskripsyon vizitè yo',
 	'info_options_avancees' => 'KEK OPSYON PWESI ',
