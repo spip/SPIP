@@ -218,6 +218,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Ningunha mensaxe',
 	'info_aucun_rubrique' => 'Ningunha sección',
 	'info_aujourdhui' => 'hoxe:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'O equipo de redacción',
 	'info_auteurs_par_tri' => 'Autores @partri@',
 	'info_auteurs_trouves' => 'Autores/as atopados',
@@ -391,7 +392,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   cos seus códigos de acceso ao web privado. Algúns
   provedores desactivan o envío automático desde os seus servidores:
   nese caso, a inscrición automática é imposible.</i></blockquote>', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Raíz do web',
 	'info_recharger_page' => 'Recarga a páxina nuns intres.',
 	'info_recherche_auteur_zero' => '<b>Ningún resultado para "@cherche_auteur@".',

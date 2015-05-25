@@ -164,6 +164,7 @@ inn liv-zimaz (sédir inn galri).',
 	'info_articles_trouves' => 'Bann zartik la finn dèt trouvé',
 	'info_attente_validation' => 'Out bann zartik sak i espèr lakonfirmasyon',
 	'info_aujourdhui' => 'Zordi :',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Bann lotèr',
 	'info_auteurs_par_tri' => 'Bann lotèr@partri@',
 	'info_auteurs_trouves' => 'Bann lotèr la finn dèt trouvé',

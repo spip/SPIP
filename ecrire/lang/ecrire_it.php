@@ -239,6 +239,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_aucun_message' => 'Nessun messaggio',
 	'info_aucun_rubrique' => 'Nessuna rubrica',
 	'info_aujourdhui' => 'oggi: ',
+	'info_auteur_gere_toutes_rubriques_2' => 'Io modifico <b>tutte le rubriche</b>', # MODIF
 	'info_auteurs' => 'Gli autori',
 	'info_auteurs_par_tri' => 'Autori@partri@',
 	'info_auteurs_trouves' => 'Autori trovati',

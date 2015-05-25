@@ -294,7 +294,6 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 a felhasználók automatikus emailt kapnak,
   mely a privát reszhez szükséges hozzáférési kódokat tartalmazza.
  Bizonyos szolgáltatók inaktiválják az emailküldést a szerverükről : ilyen esetben lehetetlen az automatikus beíratkozás.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Honlap teteje',
 	'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
 	'info_recherche_auteur_zero' => '"@cherche_auteur@" nincs találat.',

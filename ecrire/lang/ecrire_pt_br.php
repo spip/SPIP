@@ -236,6 +236,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_aucun_rubrique' => 'Nenhuma seção',
 	'info_aujourdhui' => 'Hoje:',
 	'info_auteur_gere_toutes_rubriques' => 'Este autor gerencia <b>todas as seções</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Eu gerencio <b>todas as seções</b>', # MODIF
 	'info_auteurs' => 'Os autores',
 	'info_auteurs_par_tri' => 'Autores@partri@',
 	'info_auteurs_trouves' => 'Autores encontrados',

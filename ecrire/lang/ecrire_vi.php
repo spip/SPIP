@@ -271,7 +271,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_publies' => 'Bài của bạn được đăng online',
 	'info_question_accepter_visiteurs' => 'Nếu trang web cho phép khách ghi danh mà không cần phải vào vùng riêng, thì xin hãy mở lên những chọn lựa sau:',
 	'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Gốc của website',
 	'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
 	'info_recherche_auteur_zero' => 'Không có kết quả cho "@cherche_auteur@".',

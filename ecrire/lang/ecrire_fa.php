@@ -232,6 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'هيچ پيامي موجود نيست',
 	'info_aucun_rubrique' => 'هيچ بخش',
 	'info_aujourdhui' => ': امروز',
+	'info_auteur_gere_toutes_rubriques_2' => 'من <b> تمام بخش‌ها را اداره مي‌كنم</b>', # MODIF
 	'info_auteurs' => 'نويسندگان ',
 	'info_auteurs_par_tri' => '@partri@ نويسنده گان',
 	'info_auteurs_trouves' => 'نويسنده گان پيدا شده   ',

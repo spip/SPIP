@@ -284,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_publies' => 'オンラインに公開されたあなたの記事',
 	'info_question_accepter_visiteurs' => 'もしあなたのサイトのテンプレートが、プライベートエリアに入らないで登録する訪問者たちを許すなら、次のオプションを有効にしてください:',
 	'info_question_inscription_nouveaux_redacteurs' => '公開されているサイトで新しいエディターの登録を募りますか？　許可した場合、訪問者たちはフォームから自動で登録でき、プライベートエリアにアクセスし自分の記事を提出できます。 <blockquote><i>登録作業中に、ユーザーは自動的に送信されるプライベートエリアへのIDとパスワードを記したe-mailを受け取ります。若干のホストでは、それらサーバー上からメールが送れない場合があります：そういう場合、自動登録を実施できません。', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'サイトのルート',
 	'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 	'info_recherche_auteur_zero' => '"@cherche_auteur@"は何も見つかりませんでした。',

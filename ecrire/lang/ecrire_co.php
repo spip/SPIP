@@ -222,6 +222,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Nisun messagiu',
 	'info_aucun_rubrique' => 'Nisuna rùbrica',
 	'info_aujourdhui' => 'oghje : ',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'L’autori',
 	'info_auteurs_par_tri' => 'Autori@partri@',
 	'info_auteurs_trouves' => 'Autori trovi',

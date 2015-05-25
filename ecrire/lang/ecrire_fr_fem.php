@@ -242,6 +242,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_rubrique' => 'Aucune rubrique',
 	'info_aujourdhui' => 'aujourd’hui :',
 	'info_auteur_gere_toutes_rubriques' => 'Cette autrice gère <b>toutes les rubriques</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Les autrices',
 	'info_auteurs_par_tri' => 'Autrices@partri@',
 	'info_auteurs_trouves' => 'Autrices trouvées',

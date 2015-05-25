@@ -235,6 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_rubrique' => 'Нет разделов',
 	'info_aujourdhui' => 'сегодня:',
 	'info_auteur_gere_toutes_rubriques' => 'Этот автор управляет <b>всеми разделами</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Я управляю <b>всеми разделами</b>', # MODIF
 	'info_auteurs' => 'Автора',
 	'info_auteurs_par_tri' => 'Автора@partri@',
 	'info_auteurs_trouves' => 'Найденные автора',

@@ -240,6 +240,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_rubrique' => 'Žiadne rubriky',
 	'info_aujourdhui' => 'dnes:',
 	'info_auteur_gere_toutes_rubriques' => 'Tento autor riadi <b>všetky rubriky</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Ja riadim <b>všetky rubriky</b>', # MODIF
 	'info_auteurs' => 'Autori',
 	'info_auteurs_par_tri' => 'Authori@partri@',
 	'info_auteurs_trouves' => 'Nájdení autori',

@@ -240,6 +240,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'info_aucun_rubrique' => 'Mìnga rùbrica',
 	'info_aujourdhui' => 'Ancuei :',
 	'info_auteur_gere_toutes_rubriques' => 'Aquel autour gèra <b>touti li rùbrica</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Gèri <b>touti li rùbrica</b>', # MODIF
 	'info_auteurs' => 'Lu autour',
 	'info_auteurs_par_tri' => 'autour@partri@',
 	'info_auteurs_trouves' => 'Autour troubat',
