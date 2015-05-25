@@ -239,6 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_rubrique' => 'No sections',
 	'info_aujourdhui' => 'today:',
 	'info_auteur_gere_toutes_rubriques' => 'This author manage <b>all the sections</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'I manage <b>all the sections</b>',
 	'info_auteurs' => 'Authors',
 	'info_auteurs_par_tri' => 'Authors@partri@',
 	'info_auteurs_trouves' => 'Authors found',
