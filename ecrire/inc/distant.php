@@ -940,8 +940,8 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	// Fichier swf, si on n'a pas la taille, on va mettre 425x350 par defaut
 	// ce sera mieux que 0x0
-	if ($a AND $a['extension']=='swf'
-		AND !$a['largeur']
+	if ($a AND isset($a['extension']) and $a['extension']=='swf'
+		AND empty($a['largeur'])
 	){
 		$a['largeur'] = 425;
 		$a['hauteur'] = 350;
