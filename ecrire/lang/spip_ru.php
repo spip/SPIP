@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 	'0_langue' => 'Русский [ru]',
 	'0_liste' => 'spip-ru@rezo.net',
-	'0_mainteneur' => '2009-2014 Serge Markitanenko (ss1945@gmail.com).2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com)upd. Maxim Krioukov (krumax@mail.ru)',
+	'0_mainteneur' => '2009-2014 Serge Markitanenko (ss1945@gmail.com). 2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com) upd. Maxim Krioukov (krumax@mail.ru)',
 
 	// A
 	'access_interface_graphique' => 'Возврат к полному интерфейсу',
@@ -677,6 +677,7 @@ and connect again to the site.
 	'titre_statistiques' => 'Статистика сайта',
 	'titre_titre_document' => 'Название документа:',
 	'todo' => 'сделать',
+	'trad_definir_reference' => 'Выберите "@titre@" как источник перевода',
 	'trad_reference' => '(источник для переводов)',
 
 	// Z
@@ -690,7 +691,7 @@ and connect again to the site.
 	'zbug_champ_hors_motif' => 'Поле @champ@ находится вне контекста @motif@',
 	'zbug_code' => 'код ',
 	'zbug_critere_inconnu' => 'Неизвестный критерий @critere@',
-	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} таблица без первичного ключа ', # MODIF
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} таблица без первичного ключа ',
 	'zbug_distant_interdit' => 'Внешние данные запрещены',
 	'zbug_doublon_table_sans_cle_primaire' => 'Дубликаты записей в таблице, не имеющей простого первичного ключа',
 	'zbug_doublon_table_sans_index' => 'Дубликаты записей в таблице без индекса',
