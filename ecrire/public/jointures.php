@@ -480,6 +480,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	){
 
 		$desc = $boucle->show;
+		
 		// cas 1 : la cle id_xx est dans la table de depart
 		// -> on cherche uniquement id_objet,objet a l'arrivee
 		if (isset($desc['field'][$c])){
@@ -492,7 +493,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 			// -> il faut trouver une cle de depart zzz telle que
 			// id_objet,objet,zzz soit a l'arrivee
 		else {
-			$depart = liste_champs_jointures($desc['table'], $desc);
+			$depart = liste_champs_jointures((isset($desc['table']) ? $desc['table'] : ''), $desc);
 			foreach ($depart as $d){
 				$cle = array();
 				$cle[] = array_shift($decompose); // id_objet
