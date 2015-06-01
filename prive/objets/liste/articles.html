@@ -23,7 +23,7 @@
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'[(#LOGO_ARTICLE|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+			<td class='titre principale'[(#LOGO_ARTICLE_NORMAL|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class="surtitre">(#SURTITRE)</span>][(#RANG). ]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
 			[<td class='logo'>(#LOGO_ARTICLE_NORMAL|image_reduire{90,70})</td>]
