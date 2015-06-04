@@ -476,7 +476,7 @@ function spip_attend_invalidation_opcode_cache(){
 	  AND @ini_get('opcache.enable')
 	  AND @ini_get('opcache.validate_timestamps')
 	  AND $duree = @ini_get('opcache.revalidate_freq') ) {
-		sleep($duree);
+		sleep($duree+1);
 	}
 }
 
