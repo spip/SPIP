@@ -693,7 +693,11 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source){
 
 function debusquer_source($objet, $affiche){
 	$quoi = $GLOBALS['debug_objets'][$affiche][$objet];
-	$nom = $GLOBALS['debug_objets']['boucle'][$objet]->id_boucle;
+	if (!empty($GLOBALS['debug_objets']['boucle'][$objet]->id_boucle)) {
+		$nom = $GLOBALS['debug_objets']['boucle'][$objet]->id_boucle;
+	} else {
+		$nom = $GLOBALS['debug_objets']['sourcefile'][$objet];
+	}
 	$res2 = "";
 
 	if ($affiche=='resultat'){
