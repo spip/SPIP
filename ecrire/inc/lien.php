@@ -198,7 +198,17 @@ function typer_raccourci ($lien) {
 	return $match;
 }
 
-// Retourne le champ textuel associe a une cle primaire, et sa langue
+/**
+ * Retourne le titre et la langue d'un objet éditorial
+ *
+ * @param int $id Identifiant de l'objet
+ * @param string $type Type d'objet
+ * @param string|null $connect Connecteur SQL utilisé
+ * @return array {
+ *     @var string $titre Titre si présent, sinon ''
+ *     @var string $lang Langue si présente, sinon ''
+ * }
+**/
 function traiter_raccourci_titre($id, $type, $connect=NULL)
 {
 	$trouver_table = charger_fonction('trouver_table', 'base');
@@ -208,7 +218,9 @@ function traiter_raccourci_titre($id, $type, $connect=NULL)
 	$r = sql_fetsel($s, $desc['table'], "$_id=$id", '','','','',$connect);
 	if (!$r) return array();
 	$r['titre'] = supprimer_numero($r['titre']);
-	if (!$r['titre']) $r['titre'] = $r['surnom'];
+	if (!$r['titre'] and !empty($r['surnom'])) {
+		$r['titre'] = $r['surnom'];
+	}
 	if (!isset($r['lang'])) $r['lang'] = '';
 	return $r;
 }
