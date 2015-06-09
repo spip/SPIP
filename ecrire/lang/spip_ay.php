@@ -466,7 +466,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach’a qamawita (urunaka, phuqañ
 	'login_retour_public' => 'Jach’a qamaw utar kuttaña',
 	'login_retour_site' => 'Jach’a qamaw utar kuttaña',
 	'login_retoursitepublic' => 'jach’a qamaw uta',
-	'login_sans_cookiie' => 'Uñicht’aw jan \\&quot;cookie\\&quot;',
+	'login_sans_cookie' => 'Uñicht’aw jan \\&quot;cookie\\&quot;',
 	'login_sinscrire' => 'qillqayasiña',
 	'login_test_navigateur' => 'tuyur yant’a/mayamp yatiyt’awi',
 	'login_verifiez_navigateur' => '(Tuyurimax janiw imt’atam sum katkiti uk qhanstayam...)',

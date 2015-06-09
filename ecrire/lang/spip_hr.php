@@ -529,7 +529,7 @@ Kako biste potvrdili svoju novu adresu, potrebno je samo pristupiti niže navede
 	'login_retour_public' => 'natrag u javni dio weba',
 	'login_retour_site' => 'natrag u javni dio weba',
 	'login_retoursitepublic' => 'natrag u javni dio weba',
-	'login_sans_cookiie' => 'identifikacija bez cookie',
+	'login_sans_cookie' => 'identifikacija bez cookie',
 	'login_securise' => 'Sigurnosna prijava',
 	'login_sinscrire' => 'prijava',
 	'login_test_navigateur' => 'ispitivanje browsera / ponovno spajanje',

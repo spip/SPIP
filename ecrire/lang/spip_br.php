@@ -505,7 +505,7 @@ Evit gwiriekaat ho postel nevez, n’ho peus nemet kevreañ d’ar chomlec’h a
 	'login_retour_public' => 'Distreiñ d’al lodenn foran',
 	'login_retour_site' => 'Distreiñ d’al lodenn foran',
 	'login_retoursitepublic' => 'distreiñ d’al lodenn foran',
-	'login_sans_cookiie' => 'Kevreañ hep toupinoù',
+	'login_sans_cookie' => 'Kevreañ hep toupinoù',
 	'login_securise' => 'Login diogelet',
 	'login_sinscrire' => 'en em enskrivañ',
 	'login_test_navigateur' => 'taol-arnod merdeer/adkevreañ',
