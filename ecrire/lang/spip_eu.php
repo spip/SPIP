@@ -528,7 +528,6 @@ Zure pasahitza sarean atzeman ahal izatea nahi ez baduzu, JavaScript-a aktibatu 
 	'login_retour_public' => 'Eremu publikora itzuli',
 	'login_retour_site' => 'Eremu publikora itzuli',
 	'login_retoursitepublic' => 'eremu publikora itzuli',
-	'login_sans_cookie' => 'Identifikazioa "cookie" barik',
 	'login_securise' => 'Login segurua',
 	'login_sinscrire' => 'inskribatu',
 	'login_test_navigateur' => 'nabigatzaile proba/berkonexioa',

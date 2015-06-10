@@ -525,7 +525,6 @@ Per confirmar la nova adreça, només heu de connectar-vos a l’adreça que hi 
 	'login_retour_public' => 'Tornar al lloc públic',
 	'login_retour_site' => 'Tornar al lloc públic',
 	'login_retoursitepublic' => 'tornar al lloc públic',
-	'login_sans_cookie' => 'Identificació sense galeta',
 	'login_securise' => 'Inici de sessió segur',
 	'login_sinscrire' => 'inscriure’s',
 	'login_test_navigateur' => 'prova de navegador/tornar a connectar',

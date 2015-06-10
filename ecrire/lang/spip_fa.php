@@ -521,7 +521,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'بازگشت به سايت همگانى',
 	'login_retour_site' => 'بازگشت به سايت همگانى',
 	'login_retoursitepublic' => 'بازگشت به سايت همگانى',
-	'login_sans_cookie' => 'شناسائى بدون كوكى cookie',
 	'login_securise' => 'لاگين امن ',
 	'login_sinscrire' => 'ثبت نام ',
 	'login_test_navigateur' => 'آزمايش مرورگر/ ارتباط دوباره',

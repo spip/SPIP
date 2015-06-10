@@ -462,7 +462,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'login_retour_public' => 'Tounyen sou sit piblik',
 	'login_retour_site' => 'Tounyen sou sit piblik',
 	'login_retoursitepublic' => 'tounyen dèyè sou sit piblik',
-	'login_sans_cookie' => 'Idantifikasyon ki gen pa pa oken gatomakro',
 	'login_sinscrire' => 'enskri w',
 	'login_test_navigateur' => 'test navigatè/rekoneksyon',
 	'login_verifiez_navigateur' => '(Gad pou si navigatè ou li te pa raple modpas ou...)',
