@@ -61,10 +61,11 @@
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eo" total="636" traduits="626" relire="0" modifs="2" nouveaux="8" pourcent="98.43">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es" total="636" traduits="631" relire="0" modifs="0" nouveaux="5" pourcent="99.21">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es" total="636" traduits="632" relire="0" modifs="0" nouveaux="4" pourcent="99.37">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
@@ -162,7 +163,7 @@
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_la" total="636" traduits="474" relire="0" modifs="24" nouveaux="138" pourcent="74.53">
 	</langue>
-	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_mis" total="636" traduits="635" relire="0" modifs="0" nouveaux="1" pourcent="99.84">
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_mis" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_prv" total="636" traduits="478" relire="0" modifs="24" nouveaux="134" pourcent="75.16">
