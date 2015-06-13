@@ -8,7 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='submit' class='submit' value='<:bouton_enregistrer:>' style="display:none;"/>
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,image_process}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer haut editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_image_process:>#AIDER{logoart}</label>[
@@ -69,7 +69,7 @@
 			<li class="editer fieldset">
 				<fieldset><legend><:info_generation_miniatures_images:></legend>
 					<p><:info_ajout_image:></p>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,creer_preview}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							[

@@ -7,7 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_article' value='#ENV{id_article}' />
-	  <ul>
+	  <ul class="editer-groupe">
 	  
 	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
 	    <li class="editer editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
@@ -59,7 +59,7 @@
 	  	<li class="editer editer_liens_sites fieldset">
 			<fieldset>
 				<h3 class="legend"><:entree_liens_sites:></h3>
-				<ul>
+				<ul class="editer-groupe">
 				<li class="editer editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
 					<label for="nom_site"><:info_titre:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>

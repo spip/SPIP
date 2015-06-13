@@ -8,7 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		]
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
 				<label for="changer_lang">[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{changer_lang})</span>
