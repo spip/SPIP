@@ -125,15 +125,15 @@ function balise_BOITE_FERMER_dist($p) {
  */
 function boite_ouvrir($titre, $class='', $head_class='', $id=""){
 	$class = "box $class";
-	$head_class = "hd $head_class";
+	$head_class = "clearfix hd $head_class";
 	// dans l'espace prive, titrer en h3 si pas de balise <hn>
 	if (test_espace_prive() AND strlen($titre) AND strpos($titre,'<h')===false)
 		$titre = "<h3>$titre</h3>";
 	return '<div class="'.$class.($id?"\" id=\"$id":"").'">'
 	.'<b class="top"><b class="tl"></b><b class="tr"></b></b>'
 	.'<div class="inner">'
-	.($titre?'<div class="'.$head_class.'">'.$titre.'<div class="nettoyeur"></div><!--/hd--></div>':'')
-	.'<div class="bd">';
+	.($titre?'<div class="clearfix '.$head_class.'">'.$titre.'<!--/hd--></div>':'')
+	.'<div class="clearfix bd">';
 }
 
 
@@ -151,8 +151,8 @@ function boite_ouvrir($titre, $class='', $head_class='', $id=""){
  */
 function boite_pied($class='act'){
 	$class = "ft $class";
-	return 	'<div class="nettoyeur"></div></div>'
-	.'<div class="'.$class.'">';
+	return 	'</div>'
+	.'<div class="cleafix '.$class.'">';
 }
 
 
@@ -167,7 +167,7 @@ function boite_pied($class='act'){
  *     HTML de fin de la boîte
  */
 function boite_fermer(){
-	return '<div class="nettoyeur"></div></div></div>'
+	return '</div></div>'
 	.'<b class="bottom"><b class="bl"></b><b class="br"></b></b>'
 	.'</div>';
 }
