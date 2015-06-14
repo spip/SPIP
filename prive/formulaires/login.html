@@ -19,24 +19,24 @@
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		[<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
-		<ul class="editer-groupe">
-			<li class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:></label>[
 				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>
 				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40'[(#HTML5) required='required' autofocus='autofocus'] autocapitalize="off" autocorrect="off" />
-			</li>
-			<li class="editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
+			</div>
+			<div class="editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
 				<label for="password"><:login_pass2:></label>[
 				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>
 				]<input type='password' class='text password' name='password' id='password' value="" size='40' autocapitalize="off" autocorrect="off" />
 				<p class='details'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
-			</li>
+			</div>
 			[(#ENV{rester_connecte})
-			<li class="editer editer_session"><div class='choix'>
+			<div class="editer editer_session"><div class='choix'>
 				<input type="checkbox" class="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
 				<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
-			</div></li>]
-		</ul>
+			</div></div>]
+		</div>
 	</fieldset>
 	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider|attribut_html:>" /></p>
 	</form>

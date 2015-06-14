@@ -12,8 +12,8 @@
 		[(#REM) un submit pour attraper la touche entree]
 		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
-		<ul class="editer-groupe">
-			<li class="editer editer_logo_on[ (#ENV{logo_on}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_logo_on[ (#ENV{logo_on}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 				[(#ENV{logo_on}|oui)
 					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
 				][(#ENV{editable})
@@ -24,9 +24,9 @@
 						#SET{valider,' '}
 					]
 				]
-			</li>
+			</div>
 			[(#ENV{logo_survol}|ou{#ENV{logo_off}}|oui)
-			<li class="editer editer_logo_off[ (#ENV{logo_off}|non)logo_upload][(#ENV{_show_upload_off}|oui)open][ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
+			<div class="editer editer_logo_off[ (#ENV{logo_off}|non)logo_upload][(#ENV{_show_upload_off}|oui)open][ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 				[(#ENV{logo_off}|oui)
 					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_off},quoi=logo_off,editable=#ENV{editable}})]
 				][(#ENV{editable})
@@ -41,9 +41,9 @@
 						</div>
 					]
 				]
-			</li>
+			</div>
 			]
-		</ul>
+		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 	[(#ENV{editable})

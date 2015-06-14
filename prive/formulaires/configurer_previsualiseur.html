@@ -8,9 +8,9 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul class="editer-groupe">
+		<div class="editer-groupe">
 			#SET{name,preview}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -22,8 +22,8 @@
 					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" id="#GET{name}_1comite" value="1comite"
 					[(#VAL{1comite}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{name}_1comite"><:info_redacteurs:></label>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

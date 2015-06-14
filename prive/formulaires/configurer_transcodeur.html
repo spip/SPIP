@@ -8,21 +8,19 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <ul class="editer-groupe">
-			<li>
-				<div class="explication">
-					<p><:texte_jeu_caractere_3:></p>
-					<div style='text-align: center'><b><tt>#ENV{charset}</tt></b></div>
-					<p><:texte_jeu_caractere_4:></p>
-				</div>
-			</li>
+	  <div class="editer-groupe">
+			<div class="explication">
+				<p><:texte_jeu_caractere_3:></p>
+				<div style='text-align: center'><b><tt>#ENV{charset}</tt></b></div>
+				<p><:texte_jeu_caractere_4:></p>
+			</div>
 	  	#SET{name,charset}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_jeu_caractere:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
-	    </li>
-	  </ul>
+	    </div>
+	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

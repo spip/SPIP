@@ -12,8 +12,8 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 		]
 			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<ul class="editer-groupe">
-				<li class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer-groupe">
+				<div class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<span class="show">
@@ -34,8 +34,8 @@
 						<span class="statut">[(#ENV{#GET{name}}|puce_statut{#ENV{_objet}})] [(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|_T)]</span>
 					]
 				</span>
-				</li>
-			</ul>
+				</div>
+			</div>
 			<!--extra-->
 			[(#ENV{editable})
 			<p class='boutons'><span class='image_loading'>&nbsp;</span>
