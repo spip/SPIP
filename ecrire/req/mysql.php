@@ -1198,7 +1198,7 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 	if (!$desc) $champs = array(); else $fields =  $desc['field'];
 	$set = array();
 	foreach ($champs as $champ => $val) {
-		$set[] = $champ . '=' . spip_mysql_cite($val, $fields[$champ]);
+		$set[] = $champ . '=' . spip_mysql_cite($val, @$fields[$champ]);
 	}
 	return spip_mysql_query(
 			  calculer_mysql_expression('UPDATE', $table, ',')
