@@ -280,7 +280,7 @@ function queue_schedule($force_jobs = null){
 	}
 
 	// rien a faire si le prochain job est encore dans le futur
-	if (queue_sleep_time_to_next_job() AND (!$force_jobs OR !count($force_jobs))){
+	if (queue_sleep_time_to_next_job()>0 AND (!$force_jobs OR !count($force_jobs))){
 		spip_log("queue_sleep_time_to_next_job",'jq'._LOG_DEBUG);
 		return;
 	}
@@ -479,7 +479,7 @@ function queue_set_next_job_time($next) {
 	// toujours relire la valeur pour comparer, pour tenir compte des maj concourrantes
 	// et ne mettre a jour que si il y a un interet a le faire
 	// permet ausis d'initialiser le nom de fichier a coup sur
-	$curr_next = $_SERVER['REQUEST_TIME'] + queue_sleep_time_to_next_job(true);
+	$curr_next = $_SERVER['REQUEST_TIME'] + max(0,queue_sleep_time_to_next_job(true));
 	if (
 			($curr_next<=$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
@@ -507,8 +507,9 @@ function queue_set_next_job_time($next) {
 function queue_affichage_cron(){
 	$texte = "";
 
+	$time_to_next = queue_sleep_time_to_next_job();
 	// rien a faire si le prochain job est encore dans le futur
-	if (queue_sleep_time_to_next_job() OR defined('_DEBUG_BLOCK_QUEUE'))
+	if ($time_to_next>0 OR defined('_DEBUG_BLOCK_QUEUE'))
 		return $texte;
 
 	// ne pas relancer si on vient de lancer dans la meme seconde par un hit concurent
@@ -517,6 +518,11 @@ function queue_affichage_cron(){
 	@touch($lock);
 
 	// il y a des taches en attentes
+	// si depuis plus de 5min, on essaye de lancer le cron par tous les moyens pour rattraper le coup
+	// on est sans doute sur un site qui n'autorise pas http sortant ou avec peu de trafic
+	$urgent = false;
+	if ($time_to_next<-300)
+		$urgent = true;
 
 	$url_cron = generer_url_action('cron','',false,true);
 
@@ -562,7 +568,8 @@ function queue_affichage_cron(){
 					spip_timer('read');
 				}
 				fclose($fp);
-				return $texte;
+				if (!$urgent)
+					return $texte;
 			}
 		}
 		// si fsockopen n'est pas dispo on essaye cURL :
@@ -579,7 +586,8 @@ function queue_affichage_cron(){
 			curl_exec($ch);
 			// fermer
 			curl_close($ch);
-			return $texte;
+			if (!$urgent)
+				return $texte;
 		}
 	}
 
