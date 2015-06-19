@@ -535,6 +535,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'На главную страницу сайта',
 	'login_retour_site' => 'На главную страницу сайта',
 	'login_retoursitepublic' => 'на главную страницу сайта',
+	'login_sans_cookie' => 'Идентификация без cookie',
 	'login_securise' => 'Безопасный вход',
 	'login_sinscrire' => 'регистрация',
 	'login_test_navigateur' => 'проверка браузера/(пере)подключения',
