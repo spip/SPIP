@@ -36,7 +36,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Tableau des champs et valeurs collectées 
  */
-function collecter_requests($white_list, $black_list, $set=null, $tous=false){
+function collecter_requests($white_list, $black_list=array(), $set=null, $tous=false){
 	$c = $set;
 	if (!$c){
 		$c = array();
