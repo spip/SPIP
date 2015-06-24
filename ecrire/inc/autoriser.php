@@ -192,7 +192,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		}
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'));
+	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'), 'autoriser');
 
 	return $a;
 }
