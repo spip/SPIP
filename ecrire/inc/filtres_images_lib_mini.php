@@ -152,6 +152,11 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		// enlever le timestamp eventuel
 		if (strpos($source,"?")!==false)
 			$source = preg_replace(',[?][0-9]+$,','',$source);
+		if (strpos($source,"?")!==false
+			AND strncmp($source,_DIR_IMG,strlen(_DIR_IMG))==0
+			AND file_exists($f=preg_replace(',[?].*$,','',$source))){
+			$source = $f;
+		}
 		$fichier = $source;
 	}
 
