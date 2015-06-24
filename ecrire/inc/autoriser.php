@@ -153,7 +153,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : array();
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?");
+	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?", 'autoriser');
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
