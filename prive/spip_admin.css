@@ -3,7 +3,7 @@
 .spip-admin-float { z-index: 100; position: fixed; right: 20%; top: 0; white-space: nowrap; }
 
 /* Couleurs et design des boutons d'admin */
-.spip-admin-boutons { margin: 0; padding: .4em 1em; background: #666; border: 0; font-weight: bold;border-radius: 0 0 .3em .3em; opacity: .7; }
+.spip-admin-boutons { margin: 0; padding: .4em 1em; background: #666; border: 0; font-weight: bold; border-radius: 0 0 .3em .3em; opacity: .7; }
 .spip-admin-boutons,
 a.spip-admin-boutons,
 .spip-admin-boutons a { color: #FFF; text-decoration: none; }
@@ -13,7 +13,7 @@ a:hover.spip-admin-boutons,
 .spip-admin-boutons a:hover { opacity: 1; }
 a:active.spip-admin-boutons,
 .spip-admin-boutons a:active { background-color: #333; opacity: 1; }
-.spip-admin-boutons:hover {background:#000;} 
+.spip-admin-boutons:hover { background: #000; } 
 
 /* Style pour le mode debug */
 #spip-debug-toggle {position:absolute; top:4px; right:80px; width:24px;height:20px; cursor:pointer; z-index:1000;}
