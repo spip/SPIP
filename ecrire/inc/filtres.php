@@ -3403,7 +3403,7 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
  */
 function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if (is_string($c)
-	AND !is_null(@unserialize($c))) {
+	  AND @unserialize($c)!==false) {
 		$c = unserialize($c);
 	}
 
@@ -3411,12 +3411,14 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	// pour que la pagination ajax ne soit pas plantee
 	// si on charge la page &debut_x=1 : car alors en cliquant sur l'item 0,
 	// le debut_x=0 n'existe pas, et on resterait sur 1
-	foreach ($c as $k => $v) {
-		if (strpos($k,'debut_') === 0) {
-			unset($c[$k]);
+	if (is_array($c)){
+		foreach ($c as $k => $v) {
+			if (strpos($k,'debut_') === 0) {
+				unset($c[$k]);
+			}
 		}
 	}
-	
+
 	if (!function_exists('calculer_cle_action'))
 		include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
