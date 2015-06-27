@@ -236,7 +236,7 @@ function f_queue(&$texte){
 
 	// si rien a afficher
 	// ou si on est pas dans une page html, on ne sait rien faire de mieux
-	if (!$code OR !$GLOBALS['html'])
+	if (!$code OR !isset($GLOBALS['html']) OR !$GLOBALS['html'])
 		return $texte;
 
 	// inserer avant le </body> fermant si on peut, a la fin de la page sinon
