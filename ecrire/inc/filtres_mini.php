@@ -146,22 +146,21 @@ function protocole_implicite($url_absolue){
  * @return string Texte avec des URLs absolues
 **/
 function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
+	if (preg_match_all(',(<(a|link|image|img|script)\s[^<>]*(href|src)=[^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[3], $base);
-			if ($abs <> $lien[3] and !preg_match('/^#/',$lien[3]))
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
+			foreach(array('href', 'src') as $attr) {
+				$href = extraire_attribut($lien[0], $attr);
+				if (strlen($href)>0) {
+					$abs = url_absolue($href, $base);
+					if ($href != $abs and !preg_match('/^#/',$href)) {
+						$texte = inserer_attribut($texte, $attr, $abs);
+					}
+				}
+			}
 		}
 	}
-	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
-	$texte, $liens, PREG_SET_ORDER)) {
-		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[3], $base);
-			if ($abs <> $lien[3])
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
-		}
-	}
+
 	return $texte;
 }
 
