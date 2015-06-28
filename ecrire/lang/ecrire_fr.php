@@ -407,7 +407,7 @@ exige d’avoir un accès FTP au site Web.</p>',
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum :',
 	'info_pour' => 'pour',
-	'info_preview_texte' => 'Il est possible de prévisualiser le site comme si tous les articles et les brèves (ayant au moins le statut « proposé ») étaient publiés. Cette possibilité doit-elle être ouverte aux administrateurs seulement, à tous les rédacteurs, ou à personne ?',
+	'info_preview_texte' => 'Il est possible de prévisualiser les différents éléments éditoriaux du site ayant au moins le statut « proposé », ainsi que les éléments en cours de rédaction dont on est l\'auteur. Cette fonctionnalité doit-elle être disponible pour les administrateurs, les rédacteurs, ou personne ?',
 	'info_procedez_par_etape' => 'procédez étape par étape',
 	'info_procedure_maj_version' => 'la procédure de mise à jour doit être lancée afin d’adapter
 	la base de données à la nouvelle version de SPIP.',
