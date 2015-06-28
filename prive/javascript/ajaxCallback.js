@@ -190,7 +190,7 @@ jQuery.spip.updateReaderBuffer = function(){
 	if (!i.length) return;
 	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du
 	// buffer du lecteur d'ecran (au moins dans Jaws)
-	i.attr('value',parseInt(i.attr('value'))+1);
+	i.val(parseInt(i.val())+1);
 }
 
 jQuery.fn.formulaire_setARIA = function(){
