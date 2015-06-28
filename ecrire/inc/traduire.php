@@ -212,6 +212,7 @@ function inc_traduire_dist($ori, $lang) {
 	}
 
 	$text = '';
+	$module_retenu = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
 		$var = "i18n_".$module."_".$lang;
