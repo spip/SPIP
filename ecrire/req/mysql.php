@@ -195,10 +195,7 @@ function spip_query_db($query, $serveur='',$requeter=true) {
  *     - array : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
 function spip_mysql_query($query, $serveur='',$requeter=true) {
-	// debug perso requetes
-	global $debug_requetes;
-	$debug_start = microtime(true);
-	
+
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
@@ -244,13 +241,6 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 		}
 	}
 
-	// debug perso requetes
-	$debug_end = microtime(true);
-	$debug_requetes[] = array(
-		'query' => str_replace("  ", " ", str_replace("\n", " ", str_replace("\r", " ", $query))),
-		'time' => $debug_end - $debug_start
-	);
-	
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
