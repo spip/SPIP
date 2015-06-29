@@ -392,7 +392,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_post_scriptum' => 'Postdata',
 	'info_post_scriptum_2' => 'Postdata:',
 	'info_pour' => 'per',
-	'info_preview_texte' => 'És possible previsualitzar el lloc com si tots els articles i breus (que almenys tinguen l’estat de "proposats") estigueren publicats. Aquesta possibilitat ha d’estar oberta només als administradors, a tots els redactors, o a ningú?',
+	'info_preview_texte' => 'És possible previsualitzar el lloc com si tots els articles i breus (que almenys tinguen l’estat de "proposats") estigueren publicats. Aquesta possibilitat ha d’estar oberta només als administradors, a tots els redactors, o a ningú?', # MODIF
 	'info_procedez_par_etape' => 'procediu pas per pas',
 	'info_procedure_maj_version' => 'El procés d’actualització s’ha de tornar a arrancar per tal d’adaptar la base de dades a la nova versió d’SPIP.',
 	'info_proxy_ok' => 'Test del proxy amb èxit.',

@@ -281,7 +281,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_post_scriptum' => '后记',
 	'info_post_scriptum_2' => '后记:',
 	'info_pour' => '为',
-	'info_preview_texte' => '可以预览整个网站，就像所有的文章和短消息（至少有 « 建议发表 »资格）都被发表了一样。向管理员，编辑开放这一功能，还是不向任何人开放？',
+	'info_preview_texte' => '可以预览整个网站，就像所有的文章和短消息（至少有 « 建议发表 »资格）都被发表了一样。向管理员，编辑开放这一功能，还是不向任何人开放？', # MODIF
 	'info_procedez_par_etape' => '请一步步进行下去',
 	'info_procedure_maj_version' => '升级过程应该适应
  SPIP的新版本的数据库运行.',

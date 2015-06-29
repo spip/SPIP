@@ -403,7 +403,7 @@ cez FTP.</p>',
 	'info_post_scriptum' => 'Post scriptum',
 	'info_post_scriptum_2' => 'Post scriptum:',
 	'info_pour' => 'pre',
-	'info_preview_texte' => 'Stránka sa dá prezrieť tak, akoby už všetky články a novinky,  (ktoré boli aspoň „odoslané“) boli publikované. Má byť tento režim ukážky vyhradený pre administrátorov, otvorený pre všetkých autorov, alebo úplne deaktivovaný?',
+	'info_preview_texte' => 'Stránka sa dá prezrieť tak, akoby už všetky články a novinky,  (ktoré boli aspoň „odoslané“) boli publikované. Má byť tento režim ukážky vyhradený pre administrátorov, otvorený pre všetkých autorov, alebo úplne deaktivovaný?', # MODIF
 	'info_procedez_par_etape' => 'prosím, postupujte krok za krokom',
 	'info_procedure_maj_version' => 'Na prispôsobenie databázy SPIPu novej verzii sa musí spustiť upgrade.',
 	'info_proxy_ok' => 'Test proxy úspešný.',

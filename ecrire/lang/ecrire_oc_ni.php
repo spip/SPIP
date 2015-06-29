@@ -340,7 +340,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-Scriptum :',
 	'info_pour' => 'per',
-	'info_preview_texte' => 'Es possible de previsualisar lo site coma se toi lu articles e brèvas (que tenon au mànco l’estatut « prepauat ») èron publicats. Aquela possibilitat deu èstre duberta ai administrators solament, à toi lu redactors, ò à degun ?',
+	'info_preview_texte' => 'Es possible de previsualisar lo site coma se toi lu articles e brèvas (que tenon au mànco l’estatut « prepauat ») èron publicats. Aquela possibilitat deu èstre duberta ai administrators solament, à toi lu redactors, ò à degun ?', # MODIF
 	'info_procedez_par_etape' => 'procedètz estapa per estapa',
 	'info_procedure_maj_version' => 'la procedura de mesa à jorn deu èstre lançada per adaptar la basa de donadas à la novèla version de SPIP.',
 	'info_proxy_ok' => 'Pròva dau proxy capitat.',

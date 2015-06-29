@@ -321,7 +321,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_post_scriptum' => ' Not :',
 	'info_post_scriptum_2' => ' Not :',
 	'info_pour' => ' Için',
-	'info_preview_texte' => 'Siteyi sanki (en azından « önerildi » statüsüne sahip) tüm makale ve haberler yayınlanmış gibi önizlemeye almak olanaklıdır. Bu olanak sadece yöneticilere mi, tüm yazarlara mı, açık olmalı yoksa hiç kimseye açık olmamalı mı ?',
+	'info_preview_texte' => 'Siteyi sanki (en azından « önerildi » statüsüne sahip) tüm makale ve haberler yayınlanmış gibi önizlemeye almak olanaklıdır. Bu olanak sadece yöneticilere mi, tüm yazarlara mı, açık olmalı yoksa hiç kimseye açık olmamalı mı ?', # MODIF
 	'info_procedez_par_etape' => 'Aşama aşama ilerleyiniz',
 	'info_procedure_maj_version' => 'Veritabanını yeni SPIP sürümüne uyarlamak için
               seviye yükseltme işlemi başlatılmalı.',

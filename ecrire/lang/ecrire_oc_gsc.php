@@ -273,7 +273,7 @@ L’administrator deu sistèma o de l’arret que’vs deu poder hornir
 	'info_post_scriptum' => 'Post-scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum:',
 	'info_pour' => 'entà',
-	'info_preview_texte' => 'Qu’ei possible de previsualizar lo sit com s’avèvan publicat tots los articles e brèvas (qui tienen aumensh l’estatut "prepausat"). E la cau obrir, aquera possibilitat, aus administrators sonque, a tots los redactors, o non pas a degun?',
+	'info_preview_texte' => 'Qu’ei possible de previsualizar lo sit com s’avèvan publicat tots los articles e brèvas (qui tienen aumensh l’estatut "prepausat"). E la cau obrir, aquera possibilitat, aus administrators sonque, a tots los redactors, o non pas a degun?', # MODIF
 	'info_procedez_par_etape' => 'proceditz estapa per estapa',
 	'info_procedure_maj_version' => 'Que cau lançar la procedura d’actualizacion tà adaptar
  la basa de dadas a la version navèra d’SPIP.',

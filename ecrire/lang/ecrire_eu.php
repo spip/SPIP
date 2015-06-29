@@ -381,7 +381,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_post_scriptum' => 'Post scriptum',
 	'info_post_scriptum_2' => 'Post scriptum:',
 	'info_pour' => '-rako',
-	'info_preview_texte' => 'Gunea artikulu eta berri labur guztiak (gutxienez« proposatua » statusa dutenak) argitaratuta egon balira bezala aurreikustea posible da. Posibilitate hau administratzaileentzat bakarrik, idazlari guztientzat, edo inorentzat egon behar da zabalik?',
+	'info_preview_texte' => 'Gunea artikulu eta berri labur guztiak (gutxienez« proposatua » statusa dutenak) argitaratuta egon balira bezala aurreikustea posible da. Posibilitate hau administratzaileentzat bakarrik, idazlari guztientzat, edo inorentzat egon behar da zabalik?', # MODIF
 	'info_procedez_par_etape' => 'etapaz etapa jokatu',
 	'info_procedure_maj_version' => 'Eguneratzeko prozedura bete egin behar da datu-basea SPIP-en bertsio berrira moldatzeko.',
 	'info_proxy_ok' => 'Proxy-aren proba lortua',

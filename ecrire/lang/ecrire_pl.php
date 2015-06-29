@@ -383,7 +383,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_post_scriptum' => 'Postscriptum',
 	'info_post_scriptum_2' => 'Postscriptum:',
 	'info_pour' => 'dla',
-	'info_preview_texte' => 'Istnieje możliwość włączania podglądu nieopublikowanych artykułów i newsów (muszą być "zaproponowane do oceny"). Czy chcesz, żeby ta funkcja była dostępna dla administratorów, redaktorów czy dla nikogo ? ',
+	'info_preview_texte' => 'Istnieje możliwość włączania podglądu nieopublikowanych artykułów i newsów (muszą być "zaproponowane do oceny"). Czy chcesz, żeby ta funkcja była dostępna dla administratorów, redaktorów czy dla nikogo ? ', # MODIF
 	'info_procedez_par_etape' => 'etap za etapem',
 	'info_procedure_maj_version' => 'powinna zostać procedura uaktualniania w celu dostosowania
  bazy danych do nowej wersji SPIP.',

@@ -372,7 +372,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_post_scriptum' => 'Post Scríptum',
 	'info_post_scriptum_2' => 'Post Scríptum:',
 	'info_pour' => 'pa',
-	'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l’estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?',
+	'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l’estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?', # MODIF
 	'info_procedez_par_etape' => 'sigue pasu ente pasu',
 	'info_procedure_maj_version' => 'hai que llanzar el procesu d’actualización a la fin d’adautar
  la base de datos a la nueva versión de SPIP.',

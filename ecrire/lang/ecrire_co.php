@@ -384,7 +384,7 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_post_scriptum_2' => 'Post-Scriptum :',
 	'info_pour' => 'per',
 	'info_preview_texte' => 'Hè pussìbule avè una vista in antìcipu di u situ cù tutti l’artìculi è i dispacci "pruposti" per a pubblicazione. Sta pussibulità 
-		deve esse attivata solu pè l’amministratori, à tutti i scrittori o puru disattivata.',
+		deve esse attivata solu pè l’amministratori, à tutti i scrittori o puru disattivata.', # MODIF
 	'info_procedez_par_etape' => 'avanzà un passu dopu l’altru',
 	'info_procedure_maj_version' => 'Deve esse lanciatu a l’aghjurnamentu pè addattà a basa di dati à a nova versione di SPIP.',
 	'info_proxy_ok' => 'Prova di u proxy riesciuta.',

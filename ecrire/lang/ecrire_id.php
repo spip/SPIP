@@ -296,7 +296,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_post_scriptum' => 'Postscript',
 	'info_post_scriptum_2' => 'Postscript:',
 	'info_pour' => 'untuk',
-	'info_preview_texte' => 'Ada kemungkinan melihat situs terlebih dahulu seolah-olah semua artikel dan berita (yang paling tidak memiliki status "terkirim") telah dipublikasi. Apakah mode preview ini sebaiknya dibatasi hanya kepada administrator, terbuka untuk semua penulis atau dinonaktifkan selama-lamanya?',
+	'info_preview_texte' => 'Ada kemungkinan melihat situs terlebih dahulu seolah-olah semua artikel dan berita (yang paling tidak memiliki status "terkirim") telah dipublikasi. Apakah mode preview ini sebaiknya dibatasi hanya kepada administrator, terbuka untuk semua penulis atau dinonaktifkan selama-lamanya?', # MODIF
 	'info_procedez_par_etape' => 'silakan dilanjutkan langkah demi langkah',
 	'info_procedure_maj_version' => 'prosedur pembaharuan hendaknya dijalankan untuk
 	mengadaptasi database degan versi terbaru SPIP.',

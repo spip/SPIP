@@ -359,7 +359,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum :',
 	'info_pour' => 'pentru',
-	'info_preview_texte' => 'Este posibilă previzualizarea site-ului ca şi cum toate articolele şi ştirile (care au cel puţin starea « propus ») ar fi fost deja publicate. Această posibilitate trebuie să fie disponibilă doar pentru administratori, la toţi redactorii, sau nimănui ?',
+	'info_preview_texte' => 'Este posibilă previzualizarea site-ului ca şi cum toate articolele şi ştirile (care au cel puţin starea « propus ») ar fi fost deja publicate. Această posibilitate trebuie să fie disponibilă doar pentru administratori, la toţi redactorii, sau nimănui ?', # MODIF
 	'info_procedez_par_etape' => 'procedaţi etapă cu etapă',
 	'info_procedure_maj_version' => 'procedura de aducere la zi trebuie lansată pentru a adapta
  baza de date la noua versiune SPIP.',

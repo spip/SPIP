@@ -388,7 +388,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 	'info_post_scriptum' => 'Rodapé',
 	'info_post_scriptum_2' => 'Rodapé:',
 	'info_pour' => 'para',
-	'info_preview_texte' => 'É possível visualizar o site como se todas as matérias e notas (tendo pelo menos o status de «proposta») estivessem publicadas. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redatores, ou para ninguém?',
+	'info_preview_texte' => 'É possível visualizar o site como se todas as matérias e notas (tendo pelo menos o status de «proposta») estivessem publicadas. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redatores, ou para ninguém?', # MODIF
 	'info_procedez_par_etape' => 'proceder passo-a-passo',
 	'info_procedure_maj_version' => 'o procedimento de atualização deve ser rodado para adaptar a base de dados à nova versão do SPIP.',
 	'info_proxy_ok' => 'Proxy testado com sucesso',

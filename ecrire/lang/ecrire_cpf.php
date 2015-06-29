@@ -293,7 +293,7 @@ la finn dèt publyé).',
 	'info_post_scriptum' => 'Koz-Déryèr',
 	'info_post_scriptum_2' => 'Koz-déryèr :',
 	'info_pour' => 'pou',
-	'info_preview_texte' => 'Lé posib vwar lo sit avan komsi tout bann zartik èk bann tit-nouvèl (sat néna omwin lo statu « pou pibliyé ») zot sré astèr an liny. Ou pé swazi si lé sèlman po komandèr, po rédaktèr ou si lé pa posib ni po lin ni po lot. ',
+	'info_preview_texte' => 'Lé posib vwar lo sit avan komsi tout bann zartik èk bann tit-nouvèl (sat néna omwin lo statu « pou pibliyé ») zot sré astèr an liny. Ou pé swazi si lé sèlman po komandèr, po rédaktèr ou si lé pa posib ni po lin ni po lot. ', # MODIF
 	'info_procedez_par_etape' => 'azi étap sanm étap',
 	'info_procedure_maj_version' => 'Lé nésésèr fé zwé arnouvèlman la bazdodné pou giny roul ron la nouvèl
 versyon SPIP.',

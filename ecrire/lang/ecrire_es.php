@@ -387,7 +387,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 	'info_post_scriptum' => 'Post Scríptum',
 	'info_post_scriptum_2' => 'Post Scríptum:',
 	'info_pour' => 'para',
-	'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los artículos y las breves (que tengan al menos el estado «propuesto») estuviesen publicados. Debe esta posibilidad estar disponible sólo para los administradores, para todos los redactores, o para nadie?',
+	'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los artículos y las breves (que tengan al menos el estado «propuesto») estuviesen publicados. Debe esta posibilidad estar disponible sólo para los administradores, para todos los redactores, o para nadie?', # MODIF
 	'info_procedez_par_etape' => 'proceda etapa por etapa',
 	'info_procedure_maj_version' => 'Se debe ejecutar el proceso de actualización de la base de datos a esta nueva versión de SPIP.',
 	'info_proxy_ok' => 'Test del proxy logrado.',

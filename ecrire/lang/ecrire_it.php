@@ -402,7 +402,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_post_scriptum' => 'Post Scriptum',
 	'info_post_scriptum_2' => 'Post Scriptum:',
 	'info_pour' => 'per',
-	'info_preview_texte' => 'È possibile visualizzare un’anteprima del sito comprendente anche gli articoli e le brevi "proposti" per la pubblicazione. Questa funzionalità può essere disattivata, consentita solo agli amministratori o a tutti i redattori.',
+	'info_preview_texte' => 'È possibile visualizzare un’anteprima del sito comprendente anche gli articoli e le brevi "proposti" per la pubblicazione. Questa funzionalità può essere disattivata, consentita solo agli amministratori o a tutti i redattori.', # MODIF
 	'info_procedez_par_etape' => 'procedere passo dopo passo',
 	'info_procedure_maj_version' => 'è necessario avviare la procedura di aggiornamento per adattare
 il database alla nuova versione di SPIP.',

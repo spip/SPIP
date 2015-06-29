@@ -393,7 +393,7 @@ gewiste auteurs met een grijze.',
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum :',
 	'info_pour' => 'voor',
-	'info_preview_texte' => 'Nu is het ook mogelijk om de site in preview mode te zien, alsof alle artikels en berichten (indien ze tenminste werden « voorgesteld voor publicatie ») ook echt waren gepubliceerd.Dient deze mogelijkheid te worden voorzien voor de beheerders alleen, voor alle redacteurs of voor niemand ?',
+	'info_preview_texte' => 'Nu is het ook mogelijk om de site in preview mode te zien, alsof alle artikels en berichten (indien ze tenminste werden « voorgesteld voor publicatie ») ook echt waren gepubliceerd.Dient deze mogelijkheid te worden voorzien voor de beheerders alleen, voor alle redacteurs of voor niemand ?', # MODIF
 	'info_procedez_par_etape' => 'volg stap voor stap',
 	'info_procedure_maj_version' => 'de procedure voor updaten die nodig is om de databank aan te passen
  aan de nieuwe versie van SPIP.',

@@ -396,7 +396,7 @@ os autores apagados, por um ícone cinzento.',
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum :',
 	'info_pour' => 'para',
-	'info_preview_texte' => 'É possível pré-visualizar o site como se todas os artigos e notas (tendo pelo menos o estatuto de «proposta») estivessem publicados. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redactores, ou para ninguém?',
+	'info_preview_texte' => 'É possível pré-visualizar o site como se todas os artigos e notas (tendo pelo menos o estatuto de «proposta») estivessem publicados. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redactores, ou para ninguém?', # MODIF
 	'info_procedez_par_etape' => 'proceder etapa por etapa',
 	'info_procedure_maj_version' => 'o procedimento de actualização deve ser lançado para adaptar
 a base de dados à nova versão de SPIP.',

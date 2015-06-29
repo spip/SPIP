@@ -298,7 +298,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_post_scriptum' => 'P.S.',
 	'info_post_scriptum_2' => 'P.S.:',
 	'info_pour' => 'pro',
-	'info_preview_texte' => 'Náhled umožňuje zobrazit web tak, jakoby všechny články a novinky (minimálně ve stavu "předloženo") byly zveřejněny. Chcete náhled povolit jen správcům, všem redaktorům nebo jej nechcete povolit nikomu?',
+	'info_preview_texte' => 'Náhled umožňuje zobrazit web tak, jakoby všechny články a novinky (minimálně ve stavu "předloženo") byly zveřejněny. Chcete náhled povolit jen správcům, všem redaktorům nebo jej nechcete povolit nikomu?', # MODIF
 	'info_procedez_par_etape' => 'postupujte krok za krokem',
 	'info_procedure_maj_version' => 'pro úpravu nové verze systému SPIP je třeba spustit aktualizaci
  databáze.',

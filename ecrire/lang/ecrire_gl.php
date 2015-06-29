@@ -375,7 +375,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_post_scriptum' => 'Pé do artigo',
 	'info_post_scriptum_2' => 'Pé do artigo:',
 	'info_pour' => 'para',
-	'info_preview_texte' => 'É posíbel previsualizar o web como se todos os artigos e breves (que teñan cando menos o estado de « proposto ») estivesen publicados. Esta posibilidade debe estar aberta só para os administradores, para todos os redactores, ou para calquera ?',
+	'info_preview_texte' => 'É posíbel previsualizar o web como se todos os artigos e breves (que teñan cando menos o estado de « proposto ») estivesen publicados. Esta posibilidade debe estar aberta só para os administradores, para todos os redactores, ou para calquera ?', # MODIF
 	'info_procedez_par_etape' => 'procede etapa por etapa',
 	'info_procedure_maj_version' => 'o procedemento da posta ó día ten que ser lanzado a fin
 		de adaptar a base de datos á nova versión de SPIP.',

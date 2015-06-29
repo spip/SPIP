@@ -395,7 +395,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne’z afe ket en-dro ken.<br 
 	'info_post_scriptum' => 'Goude-skrid',
 	'info_post_scriptum_2' => 'Goude-skrid :',
 	'info_pour' => 'evit',
-	'info_preview_texte' => 'Posupl eo rakwelet penaos e vefe al lec’hienn ma vefe embannet an holl bennadoù hag an holl verrskridoù (dezho ar statud « kinniget » d’an nebeutañ). Daoust ha dleout a rafe an holl skridaozerien gallout en ober, ar verourien hepken, pe den ebet ?',
+	'info_preview_texte' => 'Posupl eo rakwelet penaos e vefe al lec’hienn ma vefe embannet an holl bennadoù hag an holl verrskridoù (dezho ar statud « kinniget » d’an nebeutañ). Daoust ha dleout a rafe an holl skridaozerien gallout en ober, ar verourien hepken, pe den ebet ?', # MODIF
 	'info_procedez_par_etape' => 'kit war-raok pazenn-ha-pazenn',
 	'info_procedure_maj_version' => 'rankout a ra al labour hizivaat bezañ lañset a-benn azasaat 
  an diaz titouroù ouzh stumm nevez SPIP.',

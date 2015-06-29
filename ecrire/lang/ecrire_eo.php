@@ -381,7 +381,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_post_scriptum' => 'Postskribo',
 	'info_post_scriptum_2' => 'Postskribo :',
 	'info_pour' => 'por',
-	'info_preview_texte' => 'Eblas antaŭrigardi la retejon kvazaŭ ciuj artikoloj kaj fulm-informoj (kiuj almenaŭ havas la statuson « proponatan ») estus publikigitaj. Ĉu tio eblu nur al mastrumantoj, al ĉiuj redaktantoj, aŭ al neniu ?',
+	'info_preview_texte' => 'Eblas antaŭrigardi la retejon kvazaŭ ciuj artikoloj kaj fulm-informoj (kiuj almenaŭ havas la statuson « proponatan ») estus publikigitaj. Ĉu tio eblu nur al mastrumantoj, al ĉiuj redaktantoj, aŭ al neniu ?', # MODIF
 	'info_procedez_par_etape' => 'procedu etapon post etapo',
 	'info_procedure_maj_version' => 'la ĝisdatiga proceduro devas esti lanĉita por adapti
  la datenbazon al la nova versio de SPIP.',

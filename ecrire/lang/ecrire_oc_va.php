@@ -273,7 +273,7 @@ L’administrator dau sistèma o de la ret vos deu poer fornir
 	'info_post_scriptum' => 'Post-scriptum',
 	'info_post_scriptum_2' => 'Post-scriptum:',
 	'info_pour' => 'per',
-	'info_preview_texte' => 'Es possible de previsualizar lo sit coma s’avián publicat totes los articles e brèvas (que tenon aumens l’estatut "prepausat"). La chal dobrir, aquela possibilitat, als administrators solament, a totes los redactors, o a degun?',
+	'info_preview_texte' => 'Es possible de previsualizar lo sit coma s’avián publicat totes los articles e brèvas (que tenon aumens l’estatut "prepausat"). La chal dobrir, aquela possibilitat, als administrators solament, a totes los redactors, o a degun?', # MODIF
 	'info_procedez_par_etape' => 'procedissètz estapa per estapa',
 	'info_procedure_maj_version' => 'Chal lançar la procedura d’actualizacion per adaptar
  la basa de donaas a la version novèla d’SPIP.',

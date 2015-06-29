@@ -281,7 +281,7 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_post_scriptum' => 'Útóírat',
 	'info_post_scriptum_2' => 'Útóírat:',
 	'info_pour' => 'erre',
-	'info_preview_texte' => 'Lehetséges előnézni a honlapot, mintha az összes cikk és hír (legalább "javasolt" státusszal) publikálva lenne. Ezt a lehetőséget csak az adminisztrátoroknak, az összes szerzőnek, vagy senkinek kell adni ?',
+	'info_preview_texte' => 'Lehetséges előnézni a honlapot, mintha az összes cikk és hír (legalább "javasolt" státusszal) publikálva lenne. Ezt a lehetőséget csak az adminisztrátoroknak, az összes szerzőnek, vagy senkinek kell adni ?', # MODIF
 	'info_procedez_par_etape' => 'lépésről lépésre járjon el',
 	'info_procedure_maj_version' => 'A naprakésztételes eljárást kell indítani ahhoz, hogy
  adaptáljuk az adatbázist az SPIP új változatához.',

@@ -394,7 +394,7 @@ Aqueli informacioun vi devon poudé estre prouvedi da l’aministratour dóu sis
 	'info_post_scriptum' => 'Post-Escrich',
 	'info_post_scriptum_2' => 'Post-Escrich :',
 	'info_pour' => 'per',
-	'info_preview_texte' => 'Es poussible de previsualisà lou sit couma se toui lu article e brèva (que àugue au màncou lou statut « proupausat ») èron publicat. Dèu aquela poussibilità estre duberda basta ai aministratour, a toui lu redatour, o a degun ?',
+	'info_preview_texte' => 'Es poussible de previsualisà lou sit couma se toui lu article e brèva (que àugue au màncou lou statut « proupausat ») èron publicat. Dèu aquela poussibilità estre duberda basta ai aministratour, a toui lu redatour, o a degun ?', # MODIF
 	'info_procedez_par_etape' => 'proucedès tapa per tapa',
 	'info_procedure_maj_version' => 'la proucedura de metuda a jou dèu èstre lançada per adatà la basa de dounada a la nouvèla version de SPIP.',
 	'info_proxy_ok' => 'Prova dóu proxy ruèisset.',

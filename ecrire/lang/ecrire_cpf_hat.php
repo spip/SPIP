@@ -294,7 +294,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 	'info_post_scriptum' => 'Gen di ankò',
 	'info_post_scriptum_2' => 'Gen di ankò :',
 	'info_pour' => 'pou',
-	'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouvèl sa-yo (yon ki lestati  « se pwopozé » omwen) te pibliyé an liy. Eske w vle bay posibilite a ouvè  pou tout komandè sèlman, oubyen tout rédaktè, ousinon pa okenn moun sa-mèm ?',
+	'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouvèl sa-yo (yon ki lestati  « se pwopozé » omwen) te pibliyé an liy. Eske w vle bay posibilite a ouvè  pou tout komandè sèlman, oubyen tout rédaktè, ousinon pa okenn moun sa-mèm ?', # MODIF
 	'info_procedez_par_etape' => 'avans etap pa etap',
 	'info_procedure_maj_version' => 'fòk w koumans larnouvèlman labaz pou adapte labazdone
  ansamn nouvo vèsyon SPIP.',
