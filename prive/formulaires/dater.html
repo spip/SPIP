@@ -16,7 +16,7 @@
 				<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
 	[(#ENV{editable})
 				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
-						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();return false;"
+						onclick="var f=jQuery(this).parents('form').eq(0);f.find('.editer .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();return false;"
 						><:bouton_changer:><i class="over"> \(#ENV{_label_date}\)</i></a>&#93;</span>
 				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
