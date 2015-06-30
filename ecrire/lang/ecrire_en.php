@@ -404,7 +404,7 @@ via FTP.</p>',
 	'info_post_scriptum' => 'Postscript',
 	'info_post_scriptum_2' => 'Postscript:',
 	'info_pour' => 'for',
-	'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (with at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?', # MODIF
+	'info_preview_texte' => 'It is possible to preview the site’s  various editorial elements with at least the "submitted" status, as well as the"editing in progress" elements of which you are the author. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
 	'info_procedez_par_etape' => 'please proceed step by step',
 	'info_procedure_maj_version' => 'the upgrade procedure must be run to adapt
  the database to this new version of SPIP.',
