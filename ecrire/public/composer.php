@@ -545,8 +545,25 @@ function calculer_notes() {
 	return $r;
 }
 
-// Selectionner la langue de l'objet dans la boucle, sauf dans les
-// cas ou il ne le faut pas :-)
+/**
+ * Selectionner la langue de l'objet dans la boucle
+ *
+ * Applique sur un item de boucle la langue de l'élément qui est parcourru.
+ * Sauf dans les cas ou il ne le faut pas !
+ * 
+ * La langue n'est pas modifiée lorsque :
+ * - la globale 'forcer_lang' est définie à true
+ * - l'objet ne définit pas de langue
+ * - le titre contient une balise multi.
+ *
+ * @param string $lang
+ *     Langue de l'objet
+ * @param string $lang_select
+ *     'oui' si critère lang_select est présent, '' sinon.
+ * @param null|string $titre
+ *     Titre de l'objet
+ * @return null;
+**/
 function lang_select_public($lang, $lang_select, $titre=null) {
 	// Cas 1. forcer_lang = true et pas de critere {lang_select}
 	if (isset($GLOBALS['forcer_lang']) AND $GLOBALS['forcer_lang']
