@@ -183,15 +183,26 @@ function debusquer_bandeau($erreurs){
 		return '';
 }
 
+/**
+ * Affiche proprement dans un tableau le contexte d'environnement
+ *
+ * @param array|string $env
+ * @return string Code HTML
+**/
 function debusquer_contexte($env){
 
 	if (is_array($env_tab = @unserialize($env))) $env = $env_tab;
 
 	if (!$env) return '';
 	$res = "";
-	foreach ($env as $nom => $valeur){
-		if (is_array($valeur))
-			$valeur = '(' . count($valeur) . ' items) [' . join(',', $valeur) . ']';
+	foreach ($env as $nom => $valeur) {
+		if (is_array($valeur)) {
+			$valeur_simple = array();
+			foreach ($valeur as $v) {
+				$valeur_simple[] = is_array($v) ? 'array(size=' . count($v) . ')' : $v;
+			}
+			$valeur = '(' . count($valeur) . ' items) [' . join(',', $valeur_simple) . ']';
+		}
 		$res .= "\n<tr><td><strong>" . nl2br(entites_html($nom))
 			. "</strong></td><td>:&nbsp;" . nl2br(entites_html($valeur))
 			. "</td></tr>\n";
