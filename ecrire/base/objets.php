@@ -285,6 +285,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_nb_objets' => 'info_nb_rubriques',
 				'texte_logo_objet' => 'logo_rubrique',
 				'texte_langue_objet' => 'titre_langue_rubrique',
+				'texte_definir_comme_traduction_objet' => 'texte_definir_comme_traduction_rubrique',
 				'titre'=>'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
