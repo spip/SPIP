@@ -2376,25 +2376,38 @@ function verifier_visiteur() {
 	return false;
 }
 
-// selectionne la langue donnee en argument et memorise la courante
-// ou restaure l'ancienne si appel sans argument
-// On pourrait economiser l'empilement en cas de non changemnt
-// et lui faire retourner False pour prevenir l'appelant
-// Le noyau de Spip sait le faire, mais pour assurer la compatibilite
-// cette fonction retourne toujours non False
 
-// http://code.spip.net/@lang_select
-function lang_select ($lang=NULL) {
+/**
+ * Sélectionne la langue donnée en argument et mémorise la courante
+ *
+ * Restaure l'ancienne langue si appellée sans argument.
+ *
+ * @note
+ *     On pourrait économiser l'empilement en cas de non changemnt
+ *     et lui faire retourner `False` pour prevenir l'appelant
+ *     Le noyau de Spip sait le faire, mais pour assurer la compatibilité
+ *     cette fonction retourne toujours non `False`
+ *
+ * @uses changer_langue()
+ * @param null|string $lang
+ *     - string : Langue à appliquer,
+ *     - null : Pour restituer la dernière langue mémorisée.
+ * @return string
+ *     - string Langue utilisée.
+**/
+function lang_select($lang = NULL) {
 	static $pile_langues = array();
-	if (!function_exists('changer_langue'))
+	if (!function_exists('changer_langue')) {
 		include_spip('inc/lang');
-	if ($lang === NULL)
+	}
+	if ($lang === NULL) {
 		$lang = array_pop($pile_langues);
-	else {
+	} else {
 		array_push($pile_langues, $GLOBALS['spip_lang']);
 	}
-	if (isset($GLOBALS['spip_lang']) AND $lang == $GLOBALS['spip_lang'])
+	if (isset($GLOBALS['spip_lang']) AND $lang == $GLOBALS['spip_lang']) {
 		return $lang;
+	}
 	changer_langue($lang);
 	return $lang;
 }
