@@ -136,7 +136,7 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = array()){
 	}
 	else {
 		if (!$fonc) $fonc = $debug_objets['principal'];
-		$titre = !$mode ? $fonc : ($mode . ' ' . $debug_objets['sourcefile'][$fonc]);
+		$titre = !$mode ? $fonc : ($mode . (isset($debug_objets['sourcefile'][$fonc]) ? " " . $debug_objets['sourcefile'][$fonc] : ""));
 	}
 	if ($message===false){
 		lang_select();
