@@ -312,7 +312,7 @@ exige d’avoir un accès FTP au site Web.</p>',
 fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
 exige d’avoir un accès FTP au site Web.</p>',
 	'info_gauche_auteurs' => 'Vous trouverez ici toutes les autrices du site.
- Leur statut est indiqué par la couleur de leur icône (administratrice = vert ; rédactrice = jaune).',
+ Leur statut est indiqué par la couleur de leur icone (administratrice = vert ; rédactrice = jaune).',
 	'info_gauche_auteurs_exterieurs' => 'Les autrices extérieures, sans accès au site, sont indiquées par une icone bleue ;
 		les autrices effacées par une icone grise.',
 	'info_gauche_messagerie' => 'La messagerie vous permet d’échanger des messages entre rédactrices, de conserver des pense-bêtes (pour votre usage personnel) ou d’afficher des annonces sur la page d’accueil de l’espace privé (si vous êtes administratrice).',
