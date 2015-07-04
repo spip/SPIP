@@ -770,7 +770,7 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de rédaction antérieure.',
 	'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :',
 	'texte_date_publication_objet' => 'Date de publication en ligne :',
-	'texte_definir_comme_traduction_rubrique' => 'Cette rubrique est une traduction de la rubrique numéro :',
+	'texte_definir_comme_traduction_rubrique' => 'Cette rubrique est une traduction de la rubrique numéro :',
 	'texte_descriptif_rapide' => 'Descriptif rapide',
 	'texte_effacer_base' => 'Effacer la base de données SPIP',
 	'texte_effacer_statistiques' => 'Effacer les statistiques',
