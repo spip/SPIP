@@ -449,10 +449,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_portfolio_automatique' => 'Автоматизированное портфолио:',
 	'info_premier_resultat' => '[@debut_limit@ из @total@]',
 	'info_premier_resultat_sur' => '[@debut_limit@ из @total@]',
-	'info_propose_1' => '[@nom_site_spip@] Отправленные: @titre@',
-	'info_propose_2' => 'Статья отправлена на проверку
+	'info_propose_1' => '[@nom_site_spip@] Предложенные: @titre@',
+	'info_propose_2' => 'Статья предложена
 -----------------',
-	'info_propose_3' => 'Статья "@titre@" отправлена для публикации.',
+	'info_propose_3' => 'Статья "@titre@" предложена для публикации.',
 	'info_propose_4' => 'Вы приглашены для рецензирования. Выскажите свое мнение',
 	'info_propose_5' => 'на связанном с этим форуме, расположенном по адресу:',
 	'info_publie_01' => 'Статья "@titre@" была одобрена @connect_nom@.',
