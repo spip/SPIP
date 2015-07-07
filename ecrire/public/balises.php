@@ -1764,7 +1764,7 @@ function balise_CACHE_dist($p) {
 		// Remplir le header Cache-Control
 		// cas #CACHE{0}
 		if ($duree == 0)
-			$code .= "'<'.'"
+			$code .= ".'<'.'"
 			.'?php header("Cache-Control: no-cache, must-revalidate"); ?'
 			."'.'><'.'"
 			.'?php header("Pragma: no-cache"); ?'
