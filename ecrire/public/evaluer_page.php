@@ -40,8 +40,9 @@ if (empty($page['process_ins']) OR $page['process_ins'] != 'html') {
 		$notes($page['notes'],'restaurer_etat');
 	}
 	ob_start();
-	if (strpos($page['texte'],'?xml')!==false)
+	if (strpos($page['texte'],'?xml')!==false) {
 		$page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);
+	}
 
 	$res = eval('?' . '>' . $page['texte']);
 	$eval = ob_get_contents();

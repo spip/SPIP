@@ -93,6 +93,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$skel_code[$id] = $f;
 	}
 
+	$code = '';
 	if ($nom) {
 		// Si le code est bon, concatener et mettre en cache
 		if (function_exists($nom))
