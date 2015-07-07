@@ -69,7 +69,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
  *   donc une variable statique contrôle si FORMULAIRE_ADMIN a été vu.
  * 
  *   Toutefois, si c'est le debuger qui appelle, il peut avoir recopié
- *   le code dans ses données et il faut le lui refounir.
+ *   le code dans ses données et il faut le lui refournir.
  *   Pas question de recompiler: ca fait boucler !
  *   Le debuger transmet donc ses données, et cette balise y retrouve son petit.
  * 
@@ -93,10 +93,15 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			return '';
 	} else {
 		if ($dejafait) {
-			if (empty($debug['sourcefile'])) return '';
+			if (empty($debug['sourcefile'])) {
+				return '';
+			}
 			foreach($debug['sourcefile'] as $k => $v) {
-				if (strpos($v,'administration.') !== false)
-					return $debug['resultat'][$k . 'tout'];
+				if (strpos($v, 'administration.') !== false) {
+					if (isset($debug['resultat'][$k . 'tout'])) {
+						return $debug['resultat'][$k . 'tout'];
+					}
+				}
 			}
 			return '';
 		}
