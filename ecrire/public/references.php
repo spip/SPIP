@@ -397,8 +397,8 @@ function calculer_champ($p) {
  *     Nom de la balise
  * @param Champ $p
  *     AST au niveau de la balise
- * @return string
- *     Code PHP pour d'exécution de la balise et de ses filtres
+ * @return Champ
+ *     Pile complétée par le code PHP pour l'exécution de la balise et de ses filtres
 **/
 function calculer_balise($nom, $p) {
 
@@ -406,15 +406,15 @@ function calculer_balise($nom, $p) {
 	if ($f = charger_fonction($nom, 'balise', true)) {
 		$p->balise_calculee = true;
 		$res = $f($p);
-		if ($res !== NULL)
+		if ($res !== NULL AND is_object($res))
 			return $res;
 	}
 
 	// Certaines des balises comportant un _ sont generiques
 	if ($f = strpos($nom, '_')
-	AND $f = charger_fonction(substr($nom,0,$f+1), 'balise', true)) {
+	  AND $f = charger_fonction(substr($nom,0,$f+1), 'balise', true)) {
 		$res = $f($p);
-		if ($res !== NULL)
+		if ($res !== NULL AND is_object($res))
 			return $res;
 	}
 
