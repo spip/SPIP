@@ -1757,18 +1757,18 @@ function balise_CACHE_dist($p) {
 
 		// noter la duree du cache dans un entete proprietaire
 
-		$code = '\'<'.'?php header("X-Spip-Cache: '
+		$code = "'<'.'".'?php header("X-Spip-Cache: '
 		. $duree
-		. '"); ?'.'>\'';
+		. '"); ?'."'.'>'";
 
 		// Remplir le header Cache-Control
 		// cas #CACHE{0}
 		if ($duree == 0)
-			$code .= '.\'<'
+			$code .= "'<'.'"
 			.'?php header("Cache-Control: no-cache, must-revalidate"); ?'
-			.'><'
+			."'.'><'.'"
 			.'?php header("Pragma: no-cache"); ?'
-			.'>\'';
+			."'.'>'";
 
 		// recuperer les parametres suivants
 		$i = 1;
@@ -1777,16 +1777,16 @@ function balise_CACHE_dist($p) {
 
 			if ($pa == 'cache-client'
 			AND $duree > 0) {
-				$code .= '.\'<'.'?php header("Cache-Control: max-age='
+				$code .= ".'<'.'".'?php header("Cache-Control: max-age='
 				. $duree
-				. '"); ?'.'>\'';
+				. '"); ?'."'.'>'";
 			// il semble logique, si on cache-client, de ne pas invalider
 				$pa = 'statique';
 			}
 
 			if ($pa == 'statique'
 			AND $duree > 0)
-				$code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
+				$code .= ".'<'.'".'?php header("X-Spip-Statique: oui"); ?'."'.'>'";
 		}
 	} else $code = "''";
 	$p->code = $code;
@@ -1823,10 +1823,9 @@ function balise_CACHE_dist($p) {
  *     Pile complétée par le code à générer
  */
 function balise_INSERT_HEAD_dist($p) {
-	$p->code = '\'<'
-		.'?php header("X-Spip-Filtre: \'.'
-			.'\'insert_head_css_conditionnel\''
-		. " . '\"); ?'.'>'";
+	$p->code = "'<'.'"
+		.'?php header("X-Spip-Filtre: insert_head_css_conditionnel"); ?'
+		."'.'>'";
 	$p->code .= ". pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
 	return $p;
