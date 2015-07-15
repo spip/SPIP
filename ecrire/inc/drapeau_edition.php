@@ -142,7 +142,7 @@ function qui_edite ($id, $type='article') {
 
 	$edition = lire_tableau_edition();
 
-	return $edition ? $edition[$type][$id] : array();
+	return empty($edition[$type][$id]) ? array() : $edition[$type][$id];
 }
 
 /**
