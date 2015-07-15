@@ -560,7 +560,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// potentiellement modifiees entre temps par un autre utilisateur)
 	foreach ($champs as $key => $val) {
 		if (isset($ctr[$prefix.$key]) AND $m = $ctr[$prefix.$key]) {
-			if ($m == md5($val))
+			if (is_scalar($val) and $m == md5($val))
 				unset ($champs[$key]);
 		}
 	}
