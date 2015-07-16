@@ -84,7 +84,10 @@ function chrono_requete($temps)
 		$total += $dt;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-		$d[$k]+= $dt;
+		if (!isset($d[$k])) {
+			$d[$k] = 0;
+		}
+		$d[$k] += $dt;
 		if ($k) @++$n[$k];
 
 		if (!is_array($explain))
@@ -116,6 +119,9 @@ function chrono_requete($temps)
 		$titre = strip_tags($v[2]);
 		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
 
+		if (!isset($t[$v[2]])) {
+			$t[$v[2]] = array();
+		}
 		$t[$v[2]][]= "<span class='spip-debug-arg'> "
 		. "<a title='$titre' href='$href'>$i</a>"
 		. '</span>'
