@@ -755,6 +755,7 @@ reinstalà SPIP per recreà una basa nouvèla couma pura un premié achès amini
 	'texte_date_publication_anterieure_nonaffichee' => 'Noun faire aparèisse de data de redacioun anterioura.',
 	'texte_date_publication_article' => 'DATA DE PUBLICACIOUN EN LIGNA:',
 	'texte_date_publication_objet' => 'Data de publicacioun en ligna :',
+	'texte_definir_comme_traduction_rubrique' => 'Aquela rùbrica es una traducioun de la rùbrica nùmero :',
 	'texte_descriptif_rapide' => 'Descritiéu rapide',
 	'texte_effacer_base' => 'Escassà la basa de dounada SPIP',
 	'texte_effacer_statistiques' => 'Escassà li estatìstica',
