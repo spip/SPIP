@@ -37,7 +37,7 @@ function action_desinstaller_plugin_dist() {
 	if (defined('_DIR_PLUGINS_SUPPL') AND $dir_plugins==_DIR_PLUGINS_SUPPL)
 		$dir_type = "_DIR_PLUGINS_SUPPL";
 	$installer_plugins = charger_fonction('installer', 'plugins');
-	$infos = $installer_plugins($plugin, 'uninstall');
+	$infos = $installer_plugins($plugin, 'uninstall',$dir_type);
 	if ($infos AND !$infos['install_test'][0]) {
 		include_spip('inc/plugin');
 		ecrire_plugin_actifs(array($plugin),false,'enleve');
