@@ -89,7 +89,7 @@
 		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
 		<traducteur nom="touti" lien="http://trad.spip.net/auteur/touti" />
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="636" traduits="635" relire="0" modifs="0" nouveaux="1" pourcent="99.84">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
