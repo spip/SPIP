@@ -551,7 +551,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'label_choix_langue' => 'Elektu vian lingvon',
 	'label_nom_fichier_connect' => 'Indiku la nomon uzita por tiu servilo',
 	'label_slogan_site' => 'Devizo de la retejo',
-	'label_taille_ecran' => 'Larĝo de la ekrano',
+	'label_taille_ecran' => 'Larĝo de la ekrano', # MODIF
 	'label_texte_et_icones_navigation' => 'Naviga menuo',
 	'label_texte_et_icones_page' => 'Afiŝado en paĝo',
 	'ldap_correspondance' => 'heredado de la kampo @champ@',

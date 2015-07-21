@@ -568,7 +568,7 @@ een kleur geeft hun status aan :',
 	'label_choix_langue' => 'Selecteer uw taal',
 	'label_nom_fichier_connect' => 'Geef de naam die wordt gebruikt voor deze server',
 	'label_slogan_site' => 'Site Tag',
-	'label_taille_ecran' => 'Breedte van het scherm',
+	'label_taille_ecran' => 'Breedte van het scherm', # MODIF
 	'label_texte_et_icones_navigation' => 'Navigatiemenu',
 	'label_texte_et_icones_page' => 'Bekijken van de pagina',
 	'ldap_correspondance' => 'erfenis van het veld @champ@',

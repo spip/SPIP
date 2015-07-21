@@ -549,7 +549,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'label_choix_langue' => 'Hizkuntza aukera ezazu',
 	'label_nom_fichier_connect' => 'Zerbitzari honendako erabilitako izena ezar ezazu',
 	'label_slogan_site' => 'Gunearen lema',
-	'label_taille_ecran' => 'Panatila zabalera',
+	'label_taille_ecran' => 'Panatila zabalera', # MODIF
 	'label_texte_et_icones_navigation' => 'Nabigazio menua',
 	'label_texte_et_icones_page' => 'Orria erakutsi',
 	'ldap_correspondance' => '@champ@ eremuaren jaurantsia',

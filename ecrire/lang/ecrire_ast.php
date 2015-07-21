@@ -535,7 +535,7 @@ con una color que indica el estáu:',
 	'label_bando_outils_masquer' => 'Anubrir les ferramientes',
 	'label_choix_langue' => 'Escueye la to llingua',
 	'label_slogan_site' => 'Eslogan del sitiu',
-	'label_taille_ecran' => 'Tamañu de la pantalla',
+	'label_taille_ecran' => 'Tamañu de la pantalla', # MODIF
 	'label_texte_et_icones_navigation' => 'Menú de navegación',
 	'label_texte_et_icones_page' => 'Presentación na páxina',
 	'ldap_correspondance' => 'herencia del campu @champ@',

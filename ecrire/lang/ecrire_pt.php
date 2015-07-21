@@ -566,7 +566,7 @@ numa cor que indica o seu estado:',
 	'label_choix_langue' => 'Seleccione o seu idioma',
 	'label_nom_fichier_connect' => 'Indique o nome para este servidor',
 	'label_slogan_site' => 'Slogan do sítio',
-	'label_taille_ecran' => 'Largura do ecrã',
+	'label_taille_ecran' => 'Largura do ecrã', # MODIF
 	'label_texte_et_icones_navigation' => 'Menu de navegação',
 	'label_texte_et_icones_page' => 'Exibição da página',
 	'ldap_correspondance' => 'sucessão do campo @champ@',

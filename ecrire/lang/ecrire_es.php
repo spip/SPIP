@@ -558,7 +558,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'label_choix_langue' => 'Seleccione su idioma',
 	'label_nom_fichier_connect' => 'Indica el nombre utilizado para este servidor',
 	'label_slogan_site' => 'Eslogan del sitio',
-	'label_taille_ecran' => 'Ancho de pantalla',
+	'label_taille_ecran' => 'Ancho de pantalla', # MODIF
 	'label_texte_et_icones_navigation' => 'Menú de navegación',
 	'label_texte_et_icones_page' => 'Aparencia en la página',
 	'ldap_correspondance' => 'herencia del campo @champ@',

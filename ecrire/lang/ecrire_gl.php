@@ -540,7 +540,7 @@ cunha cor que indica o seu estado :',
 	'label_choix_langue' => 'Seleccione o seu idioma',
 	'label_nom_fichier_connect' => 'Indique o nome utilizado polo servidor',
 	'label_slogan_site' => 'Lema do sitio',
-	'label_taille_ecran' => 'Largura de pantalla',
+	'label_taille_ecran' => 'Largura de pantalla', # MODIF
 	'label_texte_et_icones_navigation' => 'Menú de navegación',
 	'label_texte_et_icones_page' => 'Presentación na páxina',
 	'ldap_correspondance' => 'herdanza do campo @champ@',

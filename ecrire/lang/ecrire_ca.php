@@ -559,7 +559,7 @@ amb un color que indica el seu estat:',
 	'label_choix_langue' => 'Seleccioneu la vostra llengua',
 	'label_nom_fichier_connect' => 'Indiqueu el nom utilitzat per aquest servidor',
 	'label_slogan_site' => 'Eslògan del lloc',
-	'label_taille_ecran' => 'Amplada de la pantalla',
+	'label_taille_ecran' => 'Amplada de la pantalla', # MODIF
 	'label_texte_et_icones_navigation' => 'Menú de navegació',
 	'label_texte_et_icones_page' => 'Visualització a la pàgina',
 	'ldap_correspondance' => 'herència del camp @champ@',

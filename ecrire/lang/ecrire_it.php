@@ -570,7 +570,7 @@ Le traduzioni sono associate all’originale,
 	'label_choix_langue' => 'Seleziona la tua lingua',
 	'label_nom_fichier_connect' => 'Indica il nome per questo server',
 	'label_slogan_site' => 'Slogan del sito',
-	'label_taille_ecran' => 'Larghezza dello schermo',
+	'label_taille_ecran' => 'Larghezza dello schermo', # MODIF
 	'label_texte_et_icones_navigation' => 'Menù di naviagazione',
 	'label_texte_et_icones_page' => 'Visualizzazione nella pagina',
 	'ldap_correspondance' => 'mappa del campo @champ@',

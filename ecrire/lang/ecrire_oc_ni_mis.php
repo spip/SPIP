@@ -566,7 +566,7 @@ embé una coulou qu’endica lou sieu estat :',
 	'label_choix_langue' => 'Seleciounàs la vouòstra lenga',
 	'label_nom_fichier_connect' => 'Endicàs lou noum utilisat per aqueu servidou',
 	'label_slogan_site' => 'Eslougan dóu sit',
-	'label_taille_ecran' => 'Larguessa de l’ecran',
+	'label_taille_ecran' => 'Larguessa de l’ecran', # MODIF
 	'label_texte_et_icones_navigation' => 'Menù de navigacioun',
 	'label_texte_et_icones_page' => 'Afichage en la pàgina',
 	'ldap_correspondance' => 'eritage dóu camp @champ@',

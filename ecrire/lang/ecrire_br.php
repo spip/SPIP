@@ -567,7 +567,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'label_choix_langue' => 'Dibabit ho yezh',
 	'label_nom_fichier_connect' => 'Lakait anv an dafariad-mañ',
 	'label_slogan_site' => 'Lugan al load internet',
-	'label_taille_ecran' => 'Ledander ar skramm',
+	'label_taille_ecran' => 'Ledander ar skramm', # MODIF
 	'label_texte_et_icones_navigation' => 'Lañser gwedeiñ',
 	'label_texte_et_icones_page' => 'Diskouez er bajenn',
 	'ldap_correspondance' => 'hêrezh ar vaezienn @champ@',

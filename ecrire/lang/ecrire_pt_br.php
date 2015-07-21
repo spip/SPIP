@@ -552,7 +552,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'label_choix_langue' => 'Escolha o seu idioma',
 	'label_nom_fichier_connect' => 'Informe o nome usado por este servidor',
 	'label_slogan_site' => 'Slogan do site',
-	'label_taille_ecran' => 'Largura da tela',
+	'label_taille_ecran' => 'Largura da tela', # MODIF
 	'label_texte_et_icones_navigation' => 'Menu de navegação',
 	'label_texte_et_icones_page' => 'Exibição na página',
 	'ldap_correspondance' => 'herança do campo @champ@',

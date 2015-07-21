@@ -557,7 +557,7 @@ in einer Farbe, die den Status anzeigt :',
 	'label_choix_langue' => 'Ihre Sprache wählen',
 	'label_nom_fichier_connect' => 'Geben Sie den für diesen Server verwendeten Namen an.',
 	'label_slogan_site' => 'Slogan der Website',
-	'label_taille_ecran' => 'Bildschirmbreite',
+	'label_taille_ecran' => 'Bildschirmbreite', # MODIF
 	'label_texte_et_icones_navigation' => 'Navigationsmenü',
 	'label_texte_et_icones_page' => 'Auf der Seite anzeigen',
 	'ldap_correspondance' => 'Vererbung von Feld @champ@',

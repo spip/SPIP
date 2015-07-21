@@ -573,7 +573,7 @@ a stav ich spracovania je označený farbou:',
 	'label_choix_langue' => 'Vyberte si jazyk',
 	'label_nom_fichier_connect' => 'Uveďte názov tohto servera',
 	'label_slogan_site' => 'Slogan webstránky',
-	'label_taille_ecran' => 'Šírka obrazovky',
+	'label_taille_ecran' => 'Šírka obrazovky', # MODIF
 	'label_texte_et_icones_navigation' => 'Menu navigácie',
 	'label_texte_et_icones_page' => 'Zobrazenie stránky',
 	'ldap_correspondance' => 'dediť pole @champ@',

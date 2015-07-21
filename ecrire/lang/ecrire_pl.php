@@ -539,7 +539,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'label_choix_langue' => 'Wybierz swój język',
 	'label_nom_fichier_connect' => 'Podaj nazwę dla tego serwera',
 	'label_slogan_site' => 'Slogan witryny internetowej',
-	'label_taille_ecran' => 'Szerokość ekranu',
+	'label_taille_ecran' => 'Szerokość ekranu', # MODIF
 	'label_texte_et_icones_navigation' => 'Menu nawigacyjne',
 	'label_texte_et_icones_page' => 'Wyświetlanie stron',
 	'lien_ajouter_auteur' => 'Dodaj autora',
