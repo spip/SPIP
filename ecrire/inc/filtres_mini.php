@@ -194,7 +194,10 @@ function abs_url($texte, $base='') {
 */
 function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){
 	if (is_null($flags)) {
-		$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT;
+		if (defined('ENT_HTML401')) {
+			$flags |= ENT_HTML401;
+		}
 	}
 
 	return htmlspecialchars($string,$flags,$encoding,$double_encode);
@@ -211,7 +214,10 @@ function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $do
 */
 function spip_htmlentities($string,$flags=null,$encoding = 'ISO-8859-1',$double_encode = true){
 	if (is_null($flags)) {
-		$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT;
+		if (defined('ENT_HTML401')) {
+			$flags |= ENT_HTML401;
+		}
 	}
 
 	return htmlentities($string,$flags,$encoding,$double_encode);

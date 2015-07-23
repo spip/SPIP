@@ -545,7 +545,10 @@ function entites_html($texte, $tout=false, $quote=true) {
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
-	$flags = ($quote?ENT_QUOTES:ENT_NOQUOTES)|ENT_HTML401;
+	$flags = ($quote?ENT_QUOTES:ENT_NOQUOTES);
+	if (defined('ENT_HTML401')) {
+		$flags |= ENT_HTML401;
+	}
 	$texte = spip_htmlspecialchars(echappe_retour(echappe_html($texte, '', true), '', 'proteger_amp'), $flags);
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
