@@ -27,7 +27,7 @@
 					var contenu = $(this).serialize();
 					// ajoutons un timestamp
 					var d=new Date();
-					contenu = contenu + "&__timestamp=" + d.getTime();
+					contenu = contenu + "&__timestamp=" + Math.round(d.getTime()/1000);
 					$.post(opt.url, {
 						'action': 'session',
 						'var': 'autosave_' + $('input[name=autosave]', this).val(),
