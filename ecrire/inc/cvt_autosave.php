@@ -103,7 +103,7 @@ function cvtautosave_formulaire_traiter($flux){
 			}
 		}
 	}
-	
+
 	return $flux;
 }
 

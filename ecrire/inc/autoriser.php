@@ -19,11 +19,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-/**
- * Tracer les autorisations dans tmp/spip.log pour débug ?
- */
-defined('_DEBUG_AUTORISER') || define('_DEBUG_AUTORISER', false);
-
 // Constantes surchargeables, cf. plugin autorite
 
 /**
@@ -153,7 +148,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : array();
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?");
+	spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?","autoriser"._LOG_DEBUG);
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
@@ -192,7 +187,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		}
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'));
+	spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'),"autoriser"._LOG_DEBUG);
 
 	return $a;
 }
