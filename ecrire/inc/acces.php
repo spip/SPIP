@@ -300,7 +300,13 @@ function verifier_htaccess($rep, $force=false) {
 	if (((@file_exists($htaccess)) OR defined('_TEST_DIRS')) AND !$force)
 		return true;
 	if ($ht = @fopen($htaccess, "w")) {
+	    fputs($ht, "<IfModule !authz_core_module>\n");
 		fputs($ht, "deny from all\n");
+	    fputs($ht, "</IfModule>\n");
+	    fputs($ht, "<IfModule authz_core_module>\n");
+		fputs($ht, "Require all denied\n");
+	    fputs($ht, "</IfModule>\n");
+	    
 		fclose($ht);
 		@chmod($htaccess, _SPIP_CHMOD & 0666);
 		$t = rtrim($rep,"/") . "/.ok";
