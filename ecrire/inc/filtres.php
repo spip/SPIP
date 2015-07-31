@@ -942,14 +942,16 @@ function majuscules($texte) {
 // "127.4 ko" ou "3.1 Mo"
 // http://doc.spip.org/@taille_en_octets
 function taille_en_octets ($taille) {
+	if (!defined('_KILOBYTE')) define('_KILOBYTE', 1024);
+
 	if ($taille < 1) return '';
-	if ($taille < 1024) {$taille = _T('taille_octets', array('taille' => $taille));}
-	else if ($taille < 1024*1024) {
-		$taille = _T('taille_ko', array('taille' => round($taille/1024, 1)));
-	} else if ($taille < 1024*1024*1024) {
-		$taille = _T('taille_mo', array('taille' => round($taille/1024/1024, 1)));
+	if ($taille < _KILOBYTE) {$taille = _T('taille_octets', array('taille' => $taille));}
+	else if ($taille < _KILOBYTE*_KILOBYTE) {
+		$taille = _T('taille_ko', array('taille' => round($taille/_KILOBYTE, 1)));
+	} else if ($taille < _KILOBYTE*_KILOBYTE*_KILOBYTE) {
+		$taille = _T('taille_mo', array('taille' => round($taille/_KILOBYTE/_KILOBYTE, 1)));
 	} else {
-		$taille = _T('taille_go', array('taille' => round($taille/1024/1024/1024, 2)));
+		$taille = _T('taille_go', array('taille' => round($taille/_KILOBYTE/_KILOBYTE/_KILOBYTE, 2)));
 	}
 	return $taille;
 }
