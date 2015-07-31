@@ -26,7 +26,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 		$page = calculer_page($fond, $contexte_inclus);
 		if ($page) {
 			spip_log("calcul($delais): $chemin_cache");
-			ecrire_fichier_cache($chemin_cache, $texte);
+			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
 	return $chemin_cache;
