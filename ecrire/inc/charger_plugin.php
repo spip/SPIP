@@ -518,7 +518,7 @@ function bouton_telechargement_plugin($url, $rep) {
 			'',
 			'',
 			"<input type='hidden' name='url_zip_plugin' value='$url' />"
-			."<input type='submit' name='ok' value='"._T('bouton_download')."' />",
+			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
 			'class="noajax"');
 
 	return _T('plugin_info_telecharger',array('url'=>$url,'rep'=>$rep.'/')).$bouton;
