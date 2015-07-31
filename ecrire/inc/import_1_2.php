@@ -95,7 +95,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 		}
 	}
    if ($values) {
-	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', array_map('_q', $values)) . ')')) {
+	if (!spip_abstract_replace($table, $values, $desc)) {
 		echo "--><br /><span style='color: red; font-weight: bold;'>"._T('avis_erreur_mysql')."</span>\n<span style='color: black'><tt>".spip_sql_error()."</tt></span>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
