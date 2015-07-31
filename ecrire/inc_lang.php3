@@ -18,9 +18,26 @@ function charger_langue($lang) {
 //
 function changer_langue($lang) {
 	global $all_langs;
- 	if (ereg(",$lang,", $all_langs)) {
+ 	if (ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
 		return true;
+	}
+	return false;
+}
+
+//
+// Regler la langue courante selon les infos envoyees par le brouteur
+//
+function regler_langue_navigateur() {
+	global $HTTP_SERVER_VARS;
+	$accept_langs = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
+	if (is_array($accept_langs)) {
+		while(list(, $s) = each($accept_langs)) {
+			if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
+				$lang = strtolower($r[1]);
+				if (changer_langue($lang)) return $lang;
+			}
+		}
 	}
 	return false;
 }
@@ -51,8 +68,12 @@ function traduire_chaine($text, $args) {
 //
 // Initialisation
 //
-$GLOBALS['all_langs'] = 'fr,zg';
-$GLOBALS['spip_lang'] = 'fr';
-changer_langue(lire_meta('langue_site'));
+$GLOBALS['langues_ok'] = 'fr';
+$GLOBALS['langues_tests'] = 'zg';
+$GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
+
+$GLOBALS['spip_lang'] = 'zg';
+if (!regler_langue_navigateur())
+	changer_langue(lire_meta('langue_site'));
 
 ?>
