@@ -5,35 +5,27 @@
 - #GET{hauteur} et #GET{largeur} correspondent prioritairemnt a #ENV,
   puis #LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
-#SET{hauteur,#ENV{hauteur}|sinon{#HAUTEUR}} #SET{largeur,#ENV{largeur}|sinon{#LARGEUR}}
+#SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
 [(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
- (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#ENV{largeur}|moins{40}},''})
+ (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#INCLUS|=={embed}|?{
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align}|=={center}|?{'',' '})[width:(#LARGEUR|max{120})px]']>
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#LARGEUR|max{120})px]']>
 })
 ][(#EXTENSION|=={svg}|?{' '})
 <embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
 #SET{done,1}
 ][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
-<div><object width='0' height='0'>
-<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='controls' value='ImageWindow' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='ImageWindow' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='0' height='0'></inclus>
-</object>
-</div><object width='40' height='25'>
-<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='controls' value='PlayButton' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='PlayButton' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='40' height='25'></inclus>
-</object>
-<object width='-40' height='25'>
-<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></inclus>
-</object>
-#SET{done,1}
+[(#ENV{controls,''}|?{'',' '})
+	<div>
+	[(#EMB{controls=ImageWindow,type=type=audio/x-pn-realaudio-plugin,console=Console,nojava=true})]
+	</div>
+	[(#EMB{controls=PlayButton,type=type=audio/x-pn-realaudio-plugin,console=Console,nojava=true})]
+	[(#EMB{controls=PositionSlider,type=type=audio/x-pn-realaudio-plugin,console=Console,nojava=true})]
+	#SET{done,1}
+]
 ][(#EXTENSION|=={swf}|?{' '})
 <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
@@ -58,7 +50,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 [(#ENV*|env_to_params)]
 <embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
-][(#INCLUS)|=={image}|?{' '})
+][(#INCLUS|=={image}|?{' '})
 [(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}})]
 ]
 ][(#INCLUS|=={embed}|?{' '})
