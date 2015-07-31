@@ -64,6 +64,9 @@ function login($cible, $prive = 'prive', $message_login='') {
 	global $spip_admin;
 	global $php_module;
 	global $clean_link;
+		$clean_link->delVar('var_erreur');
+		$clean_link->delVar('var_login');
+
 	global $auteur_session;
 	global $spip_session, $PHP_AUTH_USER;
 
