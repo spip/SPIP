@@ -151,12 +151,13 @@ function cron_invalideur($t) {
 	$total_cache = $t['n'];
 	spip_log("Taille du CACHE: $total_cache octets");
 	global $quota_cache;
-	if ($total_cache>5*$quota_cache){
+	if ($total_cache>5*$quota_cache*1024*1024){
 		spip_log("Taille explose (max $quota_cache)/ purge totale");
 		// on purge d'abord le repertoire (le plus long, qui ne tiendra peut etre pas en un hit)
 		purger_repertoire(_DIR_CACHE);
 		// on solde les invalideurs
-		supprime_invalideurs();		
+		supprime_invalideurs();
+		return 1;
 	}
 
 	//
