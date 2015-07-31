@@ -86,7 +86,6 @@ function login_pour_tous($login, $cible, $action, $mode) {
 	} else if ($login == '-1')
 		$login = '';
 
-	$row = array();
 	$erreur = '';
 	if ($login) {
 		$s = spip_query("SELECT * FROM spip_auteurs
@@ -118,6 +117,8 @@ function login_pour_tous($login, $cible, $action, $mode) {
 			unset($row['lang']);
 		}
 	}
+	if (!$row)
+		$row = array();
 
 	// afficher "erreur de mot de passe" si &var_erreur=pass
 	if (_request('var_erreur') == 'pass')
