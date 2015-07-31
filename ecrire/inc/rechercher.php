@@ -81,7 +81,7 @@ function liste_des_jointures() {
 				'mot' => array('titre' => 3),
 				'document' => array('titre' => 2, 'descriptif' => 1)
 			),
-			'documents' => array(
+			'document' => array(
 				'mot' => array('titre' => 3)
 			)
 		)
