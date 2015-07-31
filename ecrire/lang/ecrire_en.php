@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'You do not have access to this message.',
 'avis_non_acces_page' => 'You do not have access to this page.',
 'avis_operation_echec' => 'The operation failed.',
+'avis_operation_impossible' => 'Operation impossible',
 'avis_probleme_archive' => 'Reading error in file @archive@',
 'avis_site_introuvable' => 'Site not found',
 'avis_site_syndique_probleme' => 'Warning: the syndication of this site encountered a problem; consequently the system is temporarily interrupted. Please verify the address of this site\'s syndication file (<b>@url_syndic@</b>), and try again to perform a new recovery of information.',
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Add',
 'bouton_ajouter_participant' => 'ADD A PARTICIPANT:',
 'bouton_annonce' => 'ANNOUNCEMENT',
+'bouton_annuler' => 'Cancel',
 'bouton_checkbox_envoi_message' => 'possibility to send a message',
 'bouton_checkbox_indiquer_site' => 'You must enter the name of a Web site',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'site administrators',
@@ -178,10 +180,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Missing version of the plugin',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'This page presents you with several methods to keep in contact with this site\'s activity.',
 'ical_info2' => 'For more information, do not hesitate to visit <a href="http://www.spip.net/en_suivi">SPIP\'s documentation</a>.',
 'ical_info_calendrier' => 'Two calendars are at your disposal. The first is a site map showing all the published articles. The second contains editorial annoucements as well as your latest private messages: it is reserved for you thanks to a personal key that you can modify at any time by renewing your password.',
+'ical_lien_rss_breves' => 'Syndication of the site\'s news items',
 'ical_methode_http' => 'Downloading',
 'ical_methode_webcal' => 'Synchronization (webcal://)',
 'ical_texte_js' => 'A line of javascript allows to display,  very easily and in any site belonging to you, the most recent articles published on this site.',
@@ -490,6 +497,7 @@ requiring an FTP access to the Web site.',
 'info_procedez_par_etape' => 'please proceed step by step',
 'info_procedure_maj_version' => 'the upgrade procedure should be ran to adapt
 	the database to the new version of SPIP.',
+'info_proxy_ok' => 'Test of the proxy successful.',
 'info_ps' => 'P.S.',
 'info_publier' => 'publish',
 'info_publies' => 'Your articles published online',
@@ -721,6 +729,7 @@ in a colour indicating their status:',
 'lien_supprimer_rubrique' => 'delete this section',
 'lien_tout_deplier' => 'Expand all',
 'lien_tout_replier' => 'Collapse all',
+'lien_tout_supprimer' => 'Delete all',
 'lien_trier_nom' => 'Sort by name',
 'lien_trier_nombre_articles' => 'Sort by number of articles',
 'lien_trier_statut' => 'Sort by status',
@@ -776,6 +785,8 @@ in a colour indicating their status:',
 
 
 // S
+'sauvegarde_fusionner' => 'Merge the current database with the backup',
+'sauvegarde_url_origine' => 'If necessary, the URL of the source site:',
 'statut_admin_restreint' => '(restricted admin)',
 'syndic_choix_moderation' => 'What should be done with the next links from this site?',
 'syndic_choix_oublier' => 'What should be done with links which are no longer present in the syndication file?',

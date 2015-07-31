@@ -782,7 +782,7 @@ et vous reconnecter au site.
 'zxml_non_conforme' => 'n\'est pas conforme au motif',
 'zxml_non_fils' => 'n\'est pas un fils de',
 'zxml_nonvide_balise' => 'balise non vide',
-'zxml_obligatoire_attribut' => 'ttribut obligatoire mais absent dans',
+'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans',
 'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte',
 'zxml_survoler' => 'survoler pour voir les corrects',
 'zxml_valeur_attribut' => 'valeur de l\'attribut',
