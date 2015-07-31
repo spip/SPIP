@@ -252,8 +252,9 @@ if ($echec){
 
 
 debut_cadre_formulaire();
-echo "<FORM ACTION='auteur_infos.php3?id_auteur=$id_auteur' METHOD='post'>";
-echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
+echo "<form  method='POST' action='auteur_infos.php3",
+  (!$id_auteur ? "'>" :
+   ("?id_auteur=$id_auteur'><input type='hidden' name='id_auteur' value='$id_auteur' />"));
 
 
 //

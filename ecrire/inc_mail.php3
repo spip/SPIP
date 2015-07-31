@@ -103,12 +103,11 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
 
-	spip_log("mail ($email): $sujet from $from");
-
 	if (!$from) {
 		$email_envoi = lire_meta("email_envoi");
 		$from = email_valide($email_envoi) ? $email_envoi : $email;
 	}
+	spip_log("mail ($email): $sujet". ($from ?", from <$from>":''));
 
 	$charset = lire_meta('charset');
 

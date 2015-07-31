@@ -32,11 +32,8 @@ if ($spip_display != 4) {
 	$titre_cadre = afficher_plus("auteurs_edit.php3?id_auteur=$connect_id_auteur");
 	$titre_cadre .= majuscules(typo($connect_nom));
 	
-	debut_cadre_couleur_foncee("fiche-perso-24.gif", false, '', '');
-	echo "<center><b>".$titre_cadre."</b></center>";
-	fin_cadre_couleur_foncee();
+	debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
 	
-
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
@@ -46,6 +43,7 @@ if ($spip_display != 4) {
 		if ($spip_display != 1) $texte .= aide("cookie");
 		icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
 	}
+	fin_cadre_relief();
 
 	$nom_site_spip = propre(lire_meta("nom_site"));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";

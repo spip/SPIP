@@ -14,10 +14,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Pour utiliser les champs "extra", il faut installer dans le fichier
-// ecrire/mes_options.php3 un tableau definissant les champs en question,
-// pour chaque type d'objet (article, rubrique, breve, auteur ou mot) que
-// l'on veut ainsi etendre ; utiliser dans l'espace public avec
-// [(#EXTRA|nom_du_champ)]
+// ecrire/mes_options.php3 un tableau definissant les champs pour chaque
+// type d'objet que l'on veut Žtendre (article, rubrique, breve, auteur,
+// site ou mot). Pour acceder aux valeurs des champs extra dans les
+// squelettes du site public, utiliser la notation :
+//                     [(#EXTRA|extra{nom_du_champ})]
 // Exemples :
 
 /*

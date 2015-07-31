@@ -238,7 +238,7 @@ if (ereg("^Apache", $SERVER_SOFTWARE)) {
 	redirige_par_entete($redirect);
 }
 else {
-	@header("Refresh: 0; url=" . $redirect);
+	spip_header("Refresh: 0; url=" . $redirect);
 	echo "<html><head>";
 	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";
 	echo "</head>\n";

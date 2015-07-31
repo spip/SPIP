@@ -51,7 +51,7 @@ function _generer_url_propre($type, $id_objet) {
 		$champ_titre = 'titre';
 
 	// D'abord, essayer de recuperer l'URL existante si possible
-	$result = spip_query("SELECT url_propre, $champ_titre
+	$result = spip_query("SELECT url_propre, statut, $champ_titre
 	FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
 
@@ -202,8 +202,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 				// recuperer les arguments supplementaires (&debut_xxx=...)
 				$reste = preg_replace('/^&/','?',
 					preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-				Header("Location: $url_propre$reste");
-				exit;
+				redirige_par_entete("$url_propre$reste");
 			}
 		}
 		return;

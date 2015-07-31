@@ -101,8 +101,8 @@ function fichier_aide($lang_aide = '') {
 					ecrire_fichier ($fichier_aide, $contenu);
 			}
 		}
-
-		lire_fichier($fichier_aide, $contenu);
+		if (@file_exists($fichier_aide))
+			lire_fichier($fichier_aide, $contenu);
 
 		if (strlen($contenu) > 500) {
 			return array($contenu, $lang_aide);
@@ -116,7 +116,6 @@ function fichier_aide($lang_aide = '') {
 			$GLOBALS['clean_link'] = new Link("../aide/?aide=$aide");
 		}
 
-		erreur_aide_indisponible();
 	}
 
 	return false;
@@ -270,7 +269,7 @@ function help_img($regs) {
 			echo $contenu;
 			ecrire_fichier (_DIR_CACHE . 'aide-'.$cache, $contenu);
 		} else
-			header ("Location: $help_server/$rep/$lang/$file");
+			redirige_par_entete("$help_server/$rep/$lang/$file");
 	}
 	exit;
 }
@@ -477,7 +476,7 @@ else {
 	if (!$html) {
 		// Renvoyer sur l'aide en ligne du serveur externe
 		if ($help_server)
-			@Header("Location: $help_server/?lang=$spip_lang");
+			redirige_par_entete("$help_server/?aide=$aide&lang=$spip_lang");
 		// Sinon message d'erreur
 		else {
 			erreur_aide_indisponible();

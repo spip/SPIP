@@ -304,9 +304,15 @@ function couper($texte, $taille=50) {
 	// travailler en accents charset
 	$texte = filtrer_entites($texte);
 
-	// supprimer les liens
-	$texte = ereg_replace("\[->([^]]*)\]","\\1", $texte); // liens sans texte
-	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte);
+	// remplacer les liens
+	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],', $texte, $regs, PREG_SET_ORDER))
+		foreach ($regs as $reg) {
+			if (strlen($reg[1]))
+				$titre = $reg[1];
+			else
+				list(,,$titre) = extraire_lien($reg);
+			$texte = str_replace($reg[0], $titre, $texte);
+		}
 
 	// supprimer les notes
 	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
@@ -374,7 +380,7 @@ function couper_intro($texte, $long) {
 
 // Securite : empecher l'execution de code PHP
 function interdire_scripts($source) {
-	$source = preg_replace(",<(\%|\?|([[:space:]]*)script),", "&lt;\\1", $source);
+	$source = preg_replace(",<(\%|\?|[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
 	return $source;
 }
 
@@ -665,7 +671,7 @@ function extraire_lien ($regs) {
 	$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
 		.">".typo($lien_texte)."</a>";
 
-	return array($insert, $lien_url);
+	return array($insert, $lien_url, $lien_texte);
 }
 
 //

@@ -2,6 +2,7 @@
 
 // Appel spip
 if (!function_exists('find_in_path')) {
+	define('_SPIP_PAGE',1); # ne pas mourir si on passe le $fond
 	include ('ecrire/inc_version.php3');
 }
 // Reglage du $fond

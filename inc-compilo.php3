@@ -457,7 +457,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
 			$altern = "''";
 			break;
 
-		case 'champ';
+		case 'champ':
 
 			// cette structure pourrait etre completee des le phrase' (a faire)
 			$p->id_boucle = $id_boucle;

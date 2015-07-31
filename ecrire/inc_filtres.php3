@@ -828,11 +828,22 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 		}
 	}
 
-	// Cas general : trier toutes les images
-	if (preg_match_all(',<img\s.*>,Uims', $texte, $tags, PREG_SET_ORDER)) {
+	// Cas general : trier toutes les images, avec eventuellement leur <span>
+	if (preg_match_all(',(<span [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
+	$texte, $tags, PREG_SET_ORDER)) {
 		foreach ($tags as $tag) {
-			if ($reduit = reduire_une_image($tag[0], $taille, $taille_y))
-				$texte = str_replace($tag[0], $reduit, $texte);
+			if ($reduit = reduire_une_image($tag[2], $taille, $taille_y))
+
+				// En cas de span spip_documents, modifier le style=...width:
+				if($tag[1]
+				AND $w = extraire_attribut($reduit, 'width')) {
+					$texte = str_replace($tag[1],
+						inserer_attribut($tag[1], 'style', 
+						preg_replace(", width: *\d+px,", " width: ${w}px",
+						extraire_attribut($tag[1], 'style'))), $texte);
+				}
+
+				$texte = str_replace($tag[2], $reduit, $texte);
 		}
 	}
 	

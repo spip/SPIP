@@ -392,10 +392,8 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	if ($r) {
 		list($titre) = spip_fetch_array(spip_query($r));
 		$titre = supprimer_numero($titre);
-	} else {
-		$titre = _T('forum_titre_erreur');
-		$table = '';
-	}
+	} else 
+		return;
 
 	// quelle est la configuration du forum ?
 	if ($ida)
