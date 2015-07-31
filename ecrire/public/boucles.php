@@ -20,8 +20,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Boucle standard, sans condition rajoutee
 //
-// http://doc.spip.org/@boucle_DEFAUT
-function boucle_DEFAUT($id_boucle, &$boucles) {
+// http://doc.spip.org/@boucle_DEFAUT_dist
+function boucle_DEFAUT_dist($id_boucle, &$boucles) {
 	global $table_des_tables;
 	$boucle = &$boucles[$id_boucle];
 	$type = $boucle->type_requete;
