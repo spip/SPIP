@@ -97,6 +97,12 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 // Magic quotes : on n'en veut pas sur la base,
 // et on nettoie les GET/POST/COOKIE le cas echeant
 function magic_unquote($_table) {
+
+	// Certains hebergeurs n'activent pas $GLOBALS['GLOBALS']
+	if ($_table == 'GLOBALS'
+	AND !isset($GLOBALS['GLOBALS']))
+		$GLOBALS['GLOBALS'] = &$GLOBALS;
+
 	if (is_array($GLOBALS[$_table])) {
 		foreach ($GLOBALS[$_table] as $key => $val) {
 			if (is_string($val))
