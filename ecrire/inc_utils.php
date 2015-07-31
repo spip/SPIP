@@ -55,29 +55,17 @@ function include_ecrire($file, $silence=false) {
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme, ou de suffixe _dist
 
-function include_fonction($nom) {
-	$inc = ("exec_" . $nom  . '.php');
-	$f = find_in_path($inc);
-	if ($f) {
-		if (!$GLOBALS['included_files'][$f]++) include($f);
-		#spip_log("surcharge de $nom trouvee dans $f");
-	} else {
-		$f = (defined(' _DIR_INCLUDE') ? _DIR_INCLUDE : _DIR_RESTREINT)
-			. $inc;
-		if (is_readable($f)) {
-			if (!$GLOBALS['included_files'][$f]++) include($f);
-		} else {
-		    $inc = "";
-		}
-	}
+function include_fonction($nom, $dossier='exec') {
+	if(!preg_match(',^[a-z0-9_-]+$,', $nom)) return;
+	$inc = include_spip($dossier.'/'.$nom);
 	if (function_exists($nom))
 		return $nom;
 	elseif (function_exists($f = $nom . "_dist"))
 		return $f;
 	else {
-	  spip_log("fonction $nom indisponible" .
-		   ($inc ? "" : "(aucun fichier exec_$nom disponible)"));
-	  exit;
+		spip_log("fonction $nom indisponible" .
+			($inc ? "" : "(fichier $dossier/$nom absent)"));
+		exit;
 	}
 }
 
@@ -85,9 +73,10 @@ function include_fonction($nom) {
 // une fonction destinee a remplacer include_ecrire, surchargeable
 // par $surcharge['inc_truc'] = '/chemin/vers/truc.php'
 //
-function include_spip($f) {
+function include_spip($f, $include = true) {
 	// deja charge (nom) ?
-	if (@$GLOBALS['included_files'][$f]++) return true;
+	if (isset($GLOBALS['included_files'][$f]))
+		return @$GLOBALS['included_files'][$f];
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -100,14 +89,17 @@ function include_spip($f) {
 	// sinon, chercher dans le chemin
 	AND !$s = find_in_path($f . '.php')
 	AND !$s = find_in_path($f . '.php3'))
-		return false;
+		return $GLOBALS['included_files'][$f] = false;
 
 	// deja charge (chemin complet) ?
-	if ($GLOBALS['included_files'][$s]++) return true;
+	if (isset($GLOBALS['included_files'][$s]))
+		return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s];
 
-	// alors on le charge
-	include($s);
-	return true;
+	// alors on le charge (sauf si on ne voulait que son chemin)
+	if ($include) {
+		include($s);
+	}
+	return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
 }
 
 // un pipeline est lie a une action et une valeur
