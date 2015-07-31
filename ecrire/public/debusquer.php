@@ -211,7 +211,7 @@ function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 	. "</th><th>"
 	. _T('squelette')
 	. "</th><th>"
-	. _T('boucle')
+	. _T('zbug_boucle')
 	.  "</th><th>"
 	. _T('ligne')
 	. "</th></tr>"
@@ -577,7 +577,7 @@ function debusquer_source($objet, $affiche)
 		$legend = $nom;
 		$res = ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
-		$legend = _T('boucle') . ' ' .  $nom;
+		$legend = _T('zbug_boucle') . ' ' .  $nom;
 		// Le compilateur prefixe le nom des boucles par l'extension du fichier source.
 		$gram = preg_match('/^([^_]+)_/', $objet, $r) ? $r[1] : '';
 		$res = ancre_texte(public_decompiler($quoi, '', 0, 'boucle'));
