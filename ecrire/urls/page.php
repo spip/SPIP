@@ -17,7 +17,8 @@ if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 ####### modifications possibles dans ecrire/mes_options
 # on peut indiquer '.html' pour faire joli
 define ('_terminaison_urls_page', '');
-# ici, ce qu'on veut ou presque (de preference pas de '/')
+# ci-dessous, ce qu'on veut ou presque (de preference pas de '/')
+# attention toutefois seuls '' et '=' figurent dans les modes de compatibilite
 define ('_separateur_urls_page', '');
 # on peut indiquer '' si on a installe le .htaccess
 define ('_debut_urls_page', get_spip_script('./').'?');
