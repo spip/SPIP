@@ -492,7 +492,7 @@ function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs) {
 	// quand on fait supprimer/reuploader un logo
 	// (pas de filemtime si SAFE MODE)
 	$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
-	return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."'$attributs />";
+	return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."' $attributs />";
 }
 
 ?>

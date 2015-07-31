@@ -73,7 +73,7 @@ function inc_formater_article_dist($row)
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
 	   (" <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>"))
-	. (!$row['petition'] ? '' : (" <font size=1 color='red'>"._T('lien_petitions')."</font>"))
+	. (!$row['petition'] ? '' : (" <font size='1' color='red'>"._T('lien_petitions')."</font>"))
 	. "</a>"
 	. "</div>";
 	
