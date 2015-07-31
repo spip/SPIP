@@ -113,11 +113,11 @@ abbr.published { border: 0; }
 
 /* Portfolio */
 #documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
-#documents_portfolio .spip_logos { margin: 6px 3px 0 3px; padding: 4px; border: 1px solid #DDD; }
-#documents_portfolio a:hover .spip_logos { border-color: #F57900; }
-#documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
+#documents_portfolio .spip_logos { margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+#documents_portfolio a.on .spip_logos { border-color: #F57900; }
+#documents_portfolio a:hover .spip_logos { border-color: #8B6F92; }
 #document_actif { margin: 1em auto; }
-#document_actif img { padding: 4px; border: 1px solid #DDD; }
+#document_actif img {}
 
 
 /* Habillage des forums
