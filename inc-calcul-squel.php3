@@ -2269,6 +2269,7 @@ function calculer_squelette($squelette, $fichier) {
 	
 	// Calculer le code PHP de la racine
 	$texte .= "function $func(\$contexte) {\n";
+	$texte .= " global \$pile_boucles, \$id_instance_cond;\n \$pile_boucles = Array();\n \$id_instance_cond = -1;\n"; // pour #TOTAL_BOUCLE
 	$texte .= calculer_liste($racine, $prefix, '');
 	$texte .= "	return \$retour;\n";
 	$texte .= "}\n\n";
