@@ -128,6 +128,15 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 					) {
 					$conflits[$k]['post'] = $champs[$k];
 					$conflits[$k]['save'] = $v;
+
+					// cas specifique MySQL+emoji : si l'un est la
+					// conversion utf8_noplanes de l'autre alors c'est OK
+					if (defined('_MYSQL_NOPLANES') && _MYSQL_NOPLANES) {
+						include_spip('inc/charsets');
+						if ($v == utf8_noplanes($champs[$k])) {
+							unset($conflits[$k]);
+						}
+					}
 				}
 			}
 		}

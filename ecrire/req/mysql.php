@@ -93,8 +93,9 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 //'iso-8859-6'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
 'iso-8859-9'=>array('charset'=>'latin5','collation'=>'latin5_turkish_ci'),
 //'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci'))
-		);
+'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
+		)
+	);
 
 // http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
@@ -312,6 +313,11 @@ function traite_query($query, $db='', $prefixe='') {
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
+	// en option, remplacer les emoji (que mysql ne sait pas gérer) en &#128169;
+	if (defined('_MYSQL_NOPLANES') && _MYSQL_NOPLANES) {
+		include_spip('inc/charsets');
+		$r = utf8_noplanes($r);
+	}
 #	spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
 	return $r;
 }
