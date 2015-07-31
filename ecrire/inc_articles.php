@@ -427,7 +427,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 		echo "<P>"._T('texte_descriptif_petition')."&nbsp;:<BR>";
 		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
-		echo $texte_petition;
+		echo entites_html($texte_petition);
 		echo "</TEXTAREA><P>\n";
 
 		echo "<P align='$spip_lang_right'>";
