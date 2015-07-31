@@ -12,26 +12,33 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/plugin');
-// http://doc.spip.org/@action_desinstaller_plugin_dist
-function action_desinstaller_plugin_dist() {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$plug_file = $securiser_action();
-	$get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos($plug_file);
-	if (isset($infos['install'])){
-		// desinstaller
-		$etat = desinstalle_un_plugin($plug_file,$infos);
-		// desactiver si il a bien ete desinstalle
-		if (!$etat)
-			ecrire_plugin_actifs(array($plug_file),false,'enleve');
+/**
+ * Extraire les infos de pipeline
+ *
+ * @param array $arbre
+ */
+function plugins_extraire_pipelines_dist(&$arbre){
+	$pipeline = array();
+	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){
+		foreach($pipes as $tag=>$p){
+			if (!is_array($p[0])){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$pipeline[] = $att;
+			}
+			else foreach($p as $pipe){
+				$att = array();
+				if (is_array($pipe))
+					foreach($pipe as $k=>$t)
+						$att[$k] = trim(end($t));
+				$pipeline[] = $att;
+			}
+		}
+		unset($arbre[$tag]);
 	}
-	if ($redirect = _request('redirect')){
-		include_spip('inc/headers');
-		$redirect = str_replace('&amp;','&',$redirect);
-		redirige_par_entete($redirect);
-	}
+
+	return $pipeline;
 }
+
 
 ?>
