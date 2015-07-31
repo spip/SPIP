@@ -153,6 +153,17 @@ input.formrecherche {
 
 
 /*
+ *  Images typographiques (via image_typo)
+ */
+.image_typo {
+	display: inline;
+}
+.texte_typo {
+	display: none;
+}
+
+
+/*
  * Barre de raccourcis
  */
 
