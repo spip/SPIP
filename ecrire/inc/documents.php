@@ -884,18 +884,16 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 
 function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 {
-	$redirect = generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article&show_docs=$id"), true) . "#$album";
-
-	return generer_action_auteur('tourner', $id, $redirect) .
-		("&amp;var_rot=$rot");
+	return generer_action_auteur('tourner', $id, generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article&show_docs=$id"), true) . "#$album") .
+		"&amp;var_rot=$rot";
 }
 
 function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
 {
 
-	$redirect = generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album";
+	return generer_action_auteur('supprimer', $id_v, generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album");
 
-	return generer_action_auteur('supprimer', $id_v, $redirect);
+
 }
 
 function bloc_gerer_vignette($document, $id_article, $type, $album) {

@@ -97,7 +97,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
-	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer', "forum $id_forum $valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . rawurlencode(rawurlencode($link)), true)),
+	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer', "forum $id_forum $valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . rawurlencode($link), true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
 	}
