@@ -98,4 +98,8 @@ function spip_abstract_quote($arg_sql) {
 	return _q($arg_sql);
 }
 
+function creer_repertoire($base, $subdir) {
+	return sous_repertoire($base, $subdir, true);
+}
+
 ?>
