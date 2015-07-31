@@ -165,6 +165,7 @@ function version_svn_courante($dir) {
 // La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
 // et laisser passer les fonctions personnelles baptisees image_...
 $GLOBALS['spip_matrice']['image_valeurs_trans'] = true;
+$GLOBALS['spip_matrice']['image_graver'] = true;
 $GLOBALS['spip_matrice']['image_reduire'] = true;
 $GLOBALS['spip_matrice']['image_reduire_par'] = true;
 $GLOBALS['spip_matrice']['image_recadre'] = true;
@@ -189,16 +190,30 @@ $GLOBALS['spip_matrice']['image_imagick'] = true;
 $GLOBALS['spip_matrice']['image_ramasse_miettes'] = true;
 $GLOBALS['spip_matrice']['image_passe_partout'] = true;
 
+$GLOBALS['spip_matrice']['couleur_dec_to_hex'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_hex_to_dec'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_extreme'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_inverser'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = 'inc/filtres_images.php';
+
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
-	find_in_path('filtres_images.php', 'inc/', true);
+	if (is_string($f = $GLOBALS['spip_matrice'][$filtre]))
+		find_in_path($f,'', true);
 	$tous = func_get_args();
-	if (substr($filtre,0,6)=='image_' && $GLOBALS['spip_matrice']['$filtre'])
+	if (substr($filtre,0,6)=='image_' && $GLOBALS['spip_matrice'][$filtre])
 		return image_filtrer($tous);
-	else{
-		array_shift($tous); # enlever $filtre
-		return call_user_func_array($filtre, $tous);
+	elseif($f = chercher_filtre($filtre)) {
+		array_shift($tous);
+		return call_user_func_array($f, $tous);
+	}
+	else {
+		// le filtre n'existe pas, on provoque une erreur
+		erreur_squelette(texte_script(_T('zbug_erreur_filtre', array('filtre'=>$filtre))),'');
 	}
 }
 
@@ -213,6 +228,7 @@ function image_filtrer($args){
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
 	if (!$texte) return;
+	find_in_path('filtres_images.php','inc/', true);
 
 	// Cas du nom de fichier local
 	if ( strpos(substr($texte,strlen(_DIR_RACINE)),'..')===FALSE
