@@ -971,6 +971,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	spip_log("COMPIL ($secondes) ["
 		.preg_replace(',\.html$,', '', $sourcefile)
 		."] $nom.php");
+	// $connect n'est pas sûr : on nettoie
+	$connect = preg_replace(',[^\w],', '', $connect);
 
 	$code = "<"."?php
 /*
