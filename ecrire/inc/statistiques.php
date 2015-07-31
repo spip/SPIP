@@ -80,7 +80,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	
 	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
 		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
-			$keywords = rawurldecode($regs[2]);
+			$keywords = urldecode($regs[2]);
 			
 			
 		else
@@ -100,7 +100,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
 					if (ereg($arr_engines[$cnt][1]."([^\&]*)", $query, $vals)) {
-						$keywords = rawurldecode($vals[2]);
+						$keywords = urldecode($vals[2]);
 					}
 				}
 			} else {
@@ -133,7 +133,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			// supprimer l'eventuelle entite finale mal coupee
 			$keywords = preg_replace('/&#?[a-z0-9]*$/', '', $keywords);
 		}
-		$buffer["keywords"] = trim(entites_html(rawurldecode(stripslashes($keywords))));
+		$buffer["keywords"] = trim(entites_html(urldecode(stripslashes($keywords))));
 	}
 
 	return $buffer;
@@ -177,7 +177,7 @@ function aff_referers ($result, $limit, $plus) {
 			}
 
 			if ($tmp)
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(rawurldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
 			else
 				$lesliensracine[$numero] += $visites;
 			$lesdomaines[$numero] = $buff["hostname"];
