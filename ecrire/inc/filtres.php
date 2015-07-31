@@ -51,9 +51,13 @@ function filtre_text_csv_dist($t)
 	else	{ $sep = ';'; $hs = '&#59;'; $virg = $pvirg;}
 	if ($tab > $virg) {$sep = "\t"; $hs = "\t";}
 
-	$t = str_replace('""','&#34;',
-			 preg_replace('/\r?\n/', "\n",
-				      preg_replace('/[\r\n]+/', "\n", $t)));
+	$t = preg_replace('/\r?\n/', "\n",
+				      preg_replace('/[\r\n]+/', "\n", $t));
+	// un separateur suivi de 3 guillemets attention !
+	// attention au ; suceptible d'etre confondu avec un separateur
+	// on substitue un # et on remplacera a la fin
+	$t = preg_replace("/([\n$sep])\"\"\"/",'\\1"&#34#',$t);
+	$t = str_replace('""','&#34#',$t);
 	preg_match_all('/"[^"]*"/', $t, $r);
 	foreach($r[0] as $cell) 
 		$t = str_replace($cell, 
@@ -127,6 +131,7 @@ function filtre_text_html_dist($t)
 		$style =  join("\n",$r[1]);
 	// ... et externes
 
+	include_spip('inc/distant');
 	if (preg_match_all(',<link[^>]+type=.text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER))
 		foreach($r[0] as $l) {
 			preg_match("/href='([^']*)'/", str_replace('"',"'",$l), $m);
@@ -1613,7 +1618,7 @@ function div($a,$b) {
 }
 // http://doc.spip.org/@modulo
 function modulo($nb, $mod, $add=0) {
-	return ($nb%$mod)+$add;
+	return ($mod?$nb%$mod:0)+$add;
 }
 
 
