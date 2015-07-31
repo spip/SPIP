@@ -233,7 +233,7 @@ function _q ($a) {
 // http://doc.spip.org/@table_objet
 function table_objet($type) {
 	static $surnoms = null;
-	if (!type) return;
+	if (!$type) return;
 	if (!$surnoms){
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		$surnoms = pipeline('declarer_tables_objets_surnoms',
