@@ -59,6 +59,7 @@ function creer_base() {
 		messagerie VARCHAR(3) NOT NULL,
 		alea_actuel tinytext NOT NULL,
 		alea_futur tinytext NOT NULL,
+		prefs tinytext NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut))";
@@ -893,6 +894,11 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_visites_temp CHANGE date date DATE NOT NULL");
 		spip_query("ALTER TABLE spip_visites CHANGE date date DATE NOT NULL");
 		spip_query("ALTER TABLE spip_visites_referers CHANGE date date DATE NOT NULL");
+	}
+
+	if ($version_installee < 1.442) {
+		$query = "ALTER TABLE spip_auteurs ADD prefs TINYTEXT NOT NULL";
+		spip_query($query);
 	}
 
 	//

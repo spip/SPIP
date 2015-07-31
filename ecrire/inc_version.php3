@@ -5,9 +5,6 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-// Pas de warnings idiots
-error_reporting(E_ALL ^ E_NOTICE);
-
 //
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -15,7 +12,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 //
 
 // version de la base
-$spip_version = 1.441;
+$spip_version = 1.442;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
@@ -24,6 +21,9 @@ $spip_version_affichee = "1.4d4 CVS";
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 
+
+// Pas de warnings idiots
+error_reporting(E_ALL ^ E_NOTICE);
 
 //
 // Parametrage du prefixe des tables dans la base de donnees
