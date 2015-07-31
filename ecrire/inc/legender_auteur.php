@@ -225,8 +225,6 @@ function apparait_auteur_infos($id_auteur, $auteur)
 	. fin_cadre_formulaire(true);
 }
 
-
-// http://doc.spip.org/@table_auteurs_edit
 function legender_auteur_voir($auteur, $redirect)
 {
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options,$spip_lang_right ;

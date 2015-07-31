@@ -186,47 +186,52 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	return $r;
 }
 
-//
-// Le selecteur de rubriques en mode Ajax
-//
-
 // http://doc.spip.org/@selecteur_rubrique_ajax
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
-	## $restreint indique qu'il faut limiter les rubriques affichees
-	## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
-	## Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
-	## je laisse ca aux specialistes de l'ajax & des admins restreints
-	## note : toutefois c'est juste un pb d'interface, car question securite
-	## la verification est faite a l'arrivee des donnees (Fil)
-
-	if ($idem)
-		$exclus = "&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui');
+       ## $restreint indique qu'il faut limiter les rubriques affichees
+       ## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
+       ## Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
+       ## je laisse ca aux specialistes de l'ajax & des admins restreints
+       ## note : toutefois c'est juste un pb d'interface, car question securite
+       ## la verification est faite a l'arrivee des donnees (Fil)
 
 	if ($id_rubrique)
-		list($titre_parent) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
+		list($titre) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
 	else if ($type == 'auteur')
-		$titre_parent = '&nbsp;';
+		$titre = '&nbsp;';
 	else
-		$titre_parent = _T('info_racine_site');
+		$titre = _T('info_racine_site');
 
-	return 	"<table width='100%'><tr width='100%'><td width='45'>
-	<a	href=\"#\"
-		onClick=\"if(findObj_forcer('selection_rubrique').style.display=='none')
-			{charger_id_url_si_vide('" .
-	  generer_url_ecrire('selectionner',"id=$id_rubrique$exclus&type=$type", true) ."',
-				'selection_rubrique');}
-			else {findObj_forcer('selection_rubrique').style.display='none';}\"
-	><img src='". _DIR_IMG_PACK . "loupe.png' style='vertical-align: middle;'
-	/></a><img src='". _DIR_IMG_PACK . "searching.gif'
-		id='img_selection_rubrique' style='visibility: hidden;'>
-	</td><td>
-	<input type='text' id='titreparent' name='titreparent'
-		disabled='disabled' class='forml' value=\""
-	  . str_replace('&amp;', '&', entites_html(textebrut(typo($titre_parent))))
-	  ."\" />
-	<input type='hidden' id='id_parent' name='id_parent' value='$id_rubrique' />
-	</td></tr></table>
-	<div id='selection_rubrique' style='display: none;'></div>";
+	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
+
+	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))));
+
+	return construire_selecteur($url, 'selection_rubrique', $id_rubrique, 'id_parent', $titre);
+}
+
+// construit un bloc comportant une icone clicable avec image animee a cote
+// pour charger en Ajax du code a mettre sous cette icone.
+// Attention: changer le onclick si on change le code Html.
+// (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
+// getElement en mode Ajax est trop couteux).
+
+function construire_selecteur($url, $idom, $id, $name, $titre)
+{
+	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\"charger_node_url_si_vide('"
+	. $url
+	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling)\"><img src='"
+	. _DIR_IMG_PACK
+	. "loupe.png' style='vertical-align: middle;'/></a><img src='"
+	. _DIR_IMG_PACK
+	. "searching.gif' id='img_"
+	.  $idom
+	. "' style='visibility: hidden;' /></td><td><input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\""
+	. $titre
+	."\" /><input type='hidden' id='$name' name='$name' value='"
+	. $id
+	. "' /></td></tr></table><div id='"
+	. $idom
+	. "' style='display: none;'></div>";
 }
 ?>

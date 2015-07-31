@@ -45,16 +45,10 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	$rac = htmlentities($rac);
 
 # ce lien provoque la selection (directe) de la rubrique cliquee
-	$onClick = "findObj_forcer('id_parent').value=$id;";
 # et l'affichage de son titre dans le bandeau
-	$onClick .= "findObj_forcer('titreparent').value='"
-					. strtr(
-						str_replace("'", "&#8217;",
-						str_replace('"', "&#34;",
-							textebrut($titre))),
-						"\n\r", "  ")."';";
-	$onClick .= "findObj_forcer('selection_rubrique').style.display='none';";
-	$onClick .= "return false;";
+	$titre = strtr(str_replace("'", "&#8217;",
+			str_replace('"', "&#34;", textebrut($titre))),
+		       "\n\r", "  ");
 
 	return "<div style='display: none;'>"
 	. "<input type='text' id='".$rac."_sel' value='$id' />"
@@ -67,9 +61,9 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	. "<div><p><b>$titre</b></p></div>"
 	. (!$descriptif ? '' : "<div>$descriptif</div>")
 	. "<div style='text-align: $spip_lang_right;'>"
-	. "<input type='submit' value='"
+	. "<input type='submit' class='fondo' value='"
 	. _T('bouton_choisir')
-	. "' onClick=\"$onClick\" class=\"fondo\" />"
+	. "'\nonClick=\"aff_selection_titre('$titre',$id); return false;\" />"
 	.  "</div>"
 	.  "</div>";
 }
