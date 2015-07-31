@@ -26,7 +26,11 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 	}
 
-	$id = $document["id_$type"];
+	if (preg_match('/^\w+$/',$type)) { // securite
+		$id = spip_fetch_array(spip_query("SELECT id_$type FROM spip_documents_$type" . "s WHERE id_document = " . intval($id_document)), SPIP_NUM);
+		$id = $id[0];
+	} else $id = 0; // le hash sera inutilisable
+
 	$titre = $document['titre'];
 	$id_vignette = $document['id_vignette'];
 	$fichier = entites_html($document['fichier']);
