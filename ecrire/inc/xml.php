@@ -60,7 +60,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 		$tag = rtrim($chars[1]);
 		$txt = $chars[2];
 		
-		if (strncmp($tag,'<![CDATA[',9)==0) return importer_charset($texte,$charset);//$texte;
+		if (strncmp($tag,'![CDATA[',8)==0) return importer_charset($texte,$charset);//$texte;
 		if(substr($tag,-1)=='/'){ // self closing tag
 			$tag = rtrim(substr($tag,0,strlen($tag)-1));
 			$out[$tag][]="";
