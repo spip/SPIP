@@ -951,11 +951,13 @@ function url_de_($http,$host,$request,$prof=0){
 }
 
 
-function tester_url_ecrire($nom)
-{
+function tester_url_ecrire($nom){
+	// tester si c'est une page en squelette
 	if (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
-		$nom = 'fond';
-	return charger_fonction($nom,'exec',true);
+		return 'fond';
+	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
+	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
+	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
 }
 
 // Pour une redirection, la liste des arguments doit etre separee par "&"
