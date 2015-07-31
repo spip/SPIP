@@ -463,7 +463,7 @@ function test_plugin_actif($plugin){
  */
 function _T($texte, $args=array(), $options=array()) {
 	static $traduire=false ;
-	$o = array('class'=>'','force'=>true);
+	$o = array('class'=>'', 'force'=>true);
 	if ($options){
 		// support de l'ancien argument $class
 		if (is_string($options))
@@ -494,12 +494,14 @@ function _T($texte, $args=array(), $options=array()) {
 			return '';
 
 		$text = $texte;
+
 		// pour les chaines non traduites, assurer un service minimum
-		if (!isset($GLOBALS['test_i18n']))
+		if (!$GLOBALS['test_i18n'])
 			$text = str_replace('_', ' ',
 				 (($n = strpos($text,':')) === false ? $texte :
 					substr($texte, $n+1)));
-		$class=null;
+		$o['class'] = null;
+
 	}
 
 	return _L($text, $args, $o['class']);
