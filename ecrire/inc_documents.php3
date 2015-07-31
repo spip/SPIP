@@ -141,8 +141,6 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 function integre_image($id_document, $align, $type_aff = 'IMG') {
 	global $id_doublons;
-	$lien_ouvrant_doc = lire_meta("lien_ouvrant_doc");
-	if ($lien_ouvrant_doc == "oui") $ouvrant = " target='_blank'";
 	
 	$id_doublons['documents'] .= ",$id_document";
 	
@@ -215,7 +213,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		}
 
 		if ($mode == 'document')
-			$vignette = "<a href='$fichier'$ouvrant>$vignette</a>";
+			$vignette = "<a href='$fichier'>$vignette</a>";
 
 		// si affichage detaille ('DOC'), ajouter une legende
 		if ($affichage_detaille) {
@@ -234,7 +232,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			if ($descriptif) $retour .= "<br>$descriptif";
 
 			if ($mode == 'document')
-				$retour .= "<br>(<a href='$fichier'$ouvrant>$type, ".taille_en_octets($taille)."</a>)";
+				$retour .= "<br>(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)";
 
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}
