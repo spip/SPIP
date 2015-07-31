@@ -136,7 +136,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if (!$flag_editable) return;
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE $table = 'oui'	AND ".substr($connect_statut,1)." = 'oui'"));
 
-		if (!$cpt['n']) return;
+		if (!$cpt['n'] AND !$flag_editable) return;
 	}
 
 	echo "<a name='mots'></a>";
@@ -153,19 +153,20 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	//
 
 	$nouveaux_mots = $nouv_mot ? array($nouv_mot) : array();
-
 	$tous_les_mots = split(" *[,;] *", $cherche_mot);
 	while ((list(,$cherche_mot) = each ($tous_les_mots)) AND $cherche_mot) {
 		echo "<P ALIGN='left'>";
 		$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=" . intval($GLOBALS['select_groupe']));
 
-		unset($table_mots);
-		unset($table_ids);
+		$table_mots = array();
+		$table_ids = array();
 		while ($row = spip_fetch_array($result)) {
 			$table_ids[] = $row['id_mot'];
 			$table_mots[] = $row['titre'];
 		}
+
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
+
 		debut_boite_info();
 		if (!$resultat) {
 			echo "<B>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</B><BR>";
@@ -192,40 +193,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			}
 			echo "</UL>";
 		}
-		else {
-			reset($resultat);
-			unset($les_mots);
-			while (list(, $id_mot) = each($resultat)
-			AND $nombre ++ < 17)
-				$les_mots[] = $id_mot;
-			if ($les_mots) {
-				if (count($resultat) > 17) {
-					echo "<br /><b>"._T('info_trop_resultat', array('cherche_mot' => $cherche_mot))."</b><p />\n";
-				}
-				$les_mots = join(',', $les_mots);
-				echo "<B>"._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))."</B><BR>";
-				$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre");
-
-				echo "<UL>";
-				while ($row = spip_fetch_array($result)) {
-					$id_mot = $row['id_mot'];
-					$titre_mot = $row['titre'];
-					$type_mot = typo($row['type']);
-					$descriptif_mot = $row['descriptif'];
-
-					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
-
-					if ($type_mot) echo " ($type_mot)";
-					echo " | <A href='", generer_url_ecrire($url_base, "$table_id=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
-
-					if (strlen($descriptif_mot) > 1) {
-						echo "<BR><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
-					}
-					echo "</FONT><p>\n";
-				}
-				echo "</UL>";
-			}
-		}
+		else affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base);
 
 		if ($GLOBALS['connect_statut'] == '0minirezo'
 		     AND $connect_toutes_rubriques ) {
@@ -251,7 +219,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$result = spip_query("SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet");
 
 			if (!spip_num_rows($result)) {
-				$result = spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
+				spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
 
 			}
 		}
@@ -273,6 +241,46 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	//
 	// Afficher les mots-cles
 	//
+	$visible = $nouveaux_mots||$cherche_mot||$supp_mot;
+
+	afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_id, $url_base, $visible);
+	fin_cadre_enfonce();
+}
+
+function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base)
+{
+	if (count($resultat) > 17)
+		echo "<br /><b>",_T('info_trop_resultat', array('cherche_mot' => $cherche_mot)),"</b><p />\n";
+				
+	$les_mots = join(',', $resultat);
+	echo "<B>",_T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot)),"</B><BR>";
+	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre LIMIT 17");
+
+	echo "<UL>";
+	while ($row = spip_fetch_array($result)) {
+		$id_mot = $row['id_mot'];
+		$titre_mot = $row['titre'];
+		$type_mot = typo($row['type']);
+		$descriptif_mot = $row['descriptif'];
+
+		echo "<li><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>",typo($titre_mot),"</FONT></B>";
+
+		if ($type_mot) echo " ($type_mot)";
+		echo " | <A href='", generer_url_ecrire($url_base, "$table_id=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
+
+		if (strlen($descriptif_mot) > 1) {
+			echo "<br /><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
+		}
+		echo "</FONT></li>>\n";
+	}
+	echo "</UL>";
+}
+
+
+function afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_id, $url_base, $visible)
+{
+	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
+
 
 	$les_mots = array();
 	$id_groupes_vus = array();
@@ -299,10 +307,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
-			$titre_groupe = entites_html($row_groupe['titre']);
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 			$type_mot = typo($row_groupe['titre']);
-			$obligatoire = $row_groupe['obligatoire'];
 			$flag_groupe = (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
 			// Changer
 			if (($row_groupe['unseul'] == "oui") AND ($flag_editable AND $flag_groupe)) {
@@ -358,18 +364,17 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$les_mots = "0";
 		$nombre_mots_associes = 0;
 	}
-	if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
-	else $id_groupes_vus = "0";
-
-	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)"));
-
 
 	//
 	// Afficher le formulaire d'ajout de mots-cles
 	//
 
 	if ($flag_editable) {
-		if ($nouveaux_mots||$cherche_mot||$supp_mot)
+		if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
+		else $id_groupes_vus = "0";
+		$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)"));
+
+		if ($visible)
 			echo debut_block_visible("lesmots");
 		else if ($nb_groupes > 0) {
 			echo debut_block_visible("lesmots");
@@ -409,7 +414,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$message_ajouter_mot = "";
 		}
 		
-		if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
+		if ($connect_statut == '0minirezo' AND $options == "avancees" AND $connect_toutes_rubriques) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
@@ -420,8 +425,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		echo "</table>";
 		echo fin_block();
 	}
-
-	fin_cadre_enfonce();
 }
 
 function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mot)
