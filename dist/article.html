@@ -71,7 +71,8 @@
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
 					<li>
 					<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-					[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
+					[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+					</li>
 					</BOUCLE_documents_joints>
 				</ul>
 			</div>
@@ -117,11 +118,11 @@
 			<B_mots>
 			<div class="divers">
 				<h2 class="menu-titre"><:mots_clefs:></h2>
-			<ul>
-				<BOUCLE_mots(MOTS) {id_article} {par titre}>
-				<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
-				</BOUCLE_mots>
-			</ul>
+				<ul>
+					<BOUCLE_mots(MOTS) {id_article} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+					</BOUCLE_mots>
+				</ul>
 			</div>
 			</B_mots>
 		</div><!-- fin navigation -->
