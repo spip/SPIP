@@ -1267,6 +1267,17 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// La taille des Log
 	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
+	// Les niveaux de log
+	if (!defined('_LOG_GRAVITE_HS')) define('_LOG_GRAVITE_HS', 0);
+	if (!defined('_LOG_GRAVITE_ALERTE_ROUGE')) define('_LOG_GRAVITE_ALERTE_ROUGE', 1);
+	if (!defined('_LOG_GRAVITE_CRITIQUE')) define('_LOG_GRAVITE_CRITIQUE', 2);
+	if (!defined('_LOG_GRAVITE_ERREUR')) define('_LOG_GRAVITE_ERREUR', 3);
+	if (!defined('_LOG_GRAVITE_AVERTISSEMENT')) define('_LOG_GRAVITE_AVERTISSEMENT', 4);
+	if (!defined('_LOG_GRAVITE_INFO_IMPORTANTE')) define('_LOG_GRAVITE_INFO_IMPORTANTE', 5);
+	if (!defined('_LOG_GRAVITE_INFO')) define('_LOG_GRAVITE_INFO', 6);
+	if (!defined('_LOG_GRAVITE_DEBUG')) define('_LOG_GRAVITE_DEBUG', 7);
+	// niveau maxi d'enregistrement des logs
+	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
