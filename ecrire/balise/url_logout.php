@@ -27,6 +27,6 @@ function balise_URL_LOGOUT_dyn($cible) {
 
 	if (!$GLOBALS['auteur_session']['login']) return '';
 
-	return generer_url_action('logout',"logout=public&url=" . rawurlencode($cible ? $cible : self('&')));
+	return generer_url_action('logout',"logout=public&url=" . rawurlencode($cible ? $cible : str_replace('&amp;','&',self())));
 }
 ?>
