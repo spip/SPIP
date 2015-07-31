@@ -19,11 +19,17 @@ include_spip('inc/filtres_mini');
  * Charger un filtre depuis le php :
  * - on inclue tous les fichiers fonctions des plugins et du skel
  * - on appelle chercher_filtre
+ *
+ * @param string $fonc
+ * @param string $default
+ * @return string
  */
-function charger_filtre($fonc, $default=NULL) {
+function charger_filtre($fonc, $default='filtre_identite_dist') {
 	include_spip('public/parametrer'); // inclure les fichiers fonctions
 	return chercher_filtre($fonc, $default);
 }
+
+function filtre_identite_dist($texte){return $texte;}
 
 // http://adoc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
@@ -274,8 +280,8 @@ function taille_image($img) {
 		elseif(@file_exists($f = "$logo.src")
 		  AND lire_fichier($f,$valeurs)
 		  AND $valeurs=unserialize($valeurs)) {
-			if (!$srcWidth)	$largeur_img[$mem] = $srcWidth = $valeurs["largeur_dest"];
-			if (!$srcHeight)	$hauteur_img[$mem] = $srcHeight = $valeurs["hauteur_dest"];
+			if (!$srcWidth)	$largeur_img[$logo] = $srcWidth = $valeurs["largeur_dest"];
+			if (!$srcHeight)	$hauteur_img[$logo] = $srcHeight = $valeurs["hauteur_dest"];
 	  }
 	}
 	return array($srcHeight, $srcWidth);
@@ -1563,6 +1569,7 @@ function in_any($val, $vals, $def='') {
 // n'accepte que les *, + et - (a ameliorer si on l'utilise vraiment)
 // http://doc.spip.org/@valeur_numerique
 function valeur_numerique($expr) {
+	$a = 0;
 	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,S', trim($expr)))
 		eval("\$a = $expr;");
 	return intval($a);
@@ -1691,7 +1698,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
-		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+		$bloc_ancre = $ancres[$ancre] = "<a name='".$ancre."' id='".$ancre."'></a>";
 	else $bloc_ancre = '';
 	// liste = false : on ne veut que l'ancre
 	if (!$liste)
@@ -1881,11 +1888,11 @@ function table_valeur($table,$cle,$defaut=''){
 		$table= is_string($table) ? unserialize($table) : $table;
 
 		if (is_object($table))
-			$table = isset($table->$k) ? $table->$k : $default;
+			$table = isset($table->$k) ? $table->$k : $defaut;
 		else if (is_array($table))
 			$table = isset($table[$k]) ? $table[$k] : $defaut;
 		else
-			$table = $default;
+			$table = $defaut;
 	}
 	return $table;
 }
