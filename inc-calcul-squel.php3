@@ -1286,9 +1286,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'FORMULAIRE_ECRIRE_AUTEUR':
 
 		$milieu = '
-		if (ereg("@",$row[email])) {
+		if (eregi("([^\"<>?[:space:]]+@[^\"<>?[:space:]]+)",$row[email],$match)) {
+			$email = $match[1];
 			$'.$nom_var.' = "<?
-				include (\'inc-formulaires.php3\'); ecrire_auteur($row[id_auteur],\'$row[email]\');
+				include (\'inc-formulaires.php3\'); ecrire_auteur($row[id_auteur],\'$email\');
 			?'.'>";
 		}
 		';
