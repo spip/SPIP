@@ -64,6 +64,9 @@ function include_plug($file) {
 }
 
 
+// Masquer les warning
+error_reporting(E_ALL ^ E_NOTICE);
+
 // *********** traiter les variables ************
 
 // Recuperer les superglobales $_GET si non definies
@@ -324,9 +327,6 @@ $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
-
-// Masquer les warning
-error_reporting(E_ALL ^ E_NOTICE);
 
 // Variables du compilateur de squelettes
 
