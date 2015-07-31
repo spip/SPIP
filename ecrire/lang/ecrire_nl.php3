@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Bestanden in de buffer zijn in gecomprimeerd mode opgeslaagd.',
 'cache_mode_non_compresse' => 'Bestanden in de buffer zijn in niet gecomprimeerd mode opgeslaagd.',
-'cache_modifiable_webmestre' => 'Deze parameters kunnen door de webmaster van de site gezijzigd worden.',
+'cache_modifiable_webmestre' => '<MODIF>Deze parameters kunnen door de webmaster van de site gezijzigd worden.',
 'calendrier_synchro' => 'Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt, kan je deze synchroniseren met informatie van deze site.',
 
 
@@ -126,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Toegevoegde tekst',
 'diff_texte_deplace' => 'Verplaatste tekst',
 'diff_texte_supprime' => 'Verwijderde tekst',
+'double_clic_inserer_doc' => '<NEW>Double-cliquez pour ins&eacute;rer ce raccourci dans le texte',
 
 
 // E
@@ -299,7 +300,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Cre&euml;ren</b> een nieuw gegevensbank:',
 'info_dans_groupe' => 'In de groep:',
 'info_dans_rubrique' => 'In de rubriek:',
-'info_date_publication_anterieure' => 'Datum van eerdere publicatie :',
+'info_date_publication_anterieure' => '<MODIF>Datum van eerdere publicatie :',
 'info_date_referencement' => 'DATUM VAN DE KOPPELING VAN DEZE SITE:',
 'info_delet_mots_cles' => 'Je hebt gevraagd het trefwoord 
 <B>@titre_mot@</b> (@type_mot@) te verwijderen. Dit trefwoord is gekoppeld aan 
@@ -373,6 +374,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_process' => 'Kies de beste methode om een miniatuurafbeelding te maken door op de bijhorende afbeelding te klikken.',
 'info_image_process2' => '<b>N.B.</b> <i>Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar &laquo;GD&raquo; of &laquo;Imagick&raquo; extensies.</i>',
+'info_images_auto' => '<NEW>Images calcul&eacute;es automatiquement',
 'info_informations_personnelles' => 'Vijfde stap : <B>Persoonlijke gegevnes</b>',
 'info_inscription_automatique' => 'Automatische inschrijving van nieuwe redacteurs',
 'info_jeu_caractere' => 'Tekenset van de site',
@@ -507,6 +509,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_redacteurs' => 'Redacteurs',
 'info_redaction_en_cours' => 'IN REDACTIE',
 'info_redirection' => 'Omleiding',
+'info_referencer_doc_distant' => '<NEW>R&eacute;f&eacute;rencer un document sur l\'internet&nbsp;:',
 'info_refuses' => 'Uw geweigerde artikels',
 'info_reglage_ldap' => 'Opties : <B>instellen van de LDAP-invoer</B>',
 'info_renvoi_article' => '<B>Doorsturen.</B> Dit artikel verwijst naar de pagina :',
@@ -612,6 +615,9 @@ een kleur geeft hun status aan&nbsp;:',
 'info_visiteur_2' => 'van de publieke site',
 'info_visiteurs' => 'Bezoekers',
 'info_visiteurs_02' => 'Bezoekers van de publieke site',
+'install_echec_annonce' => '<NEW>L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...',
+'install_extension_mbstring' => '<NEW>SPIP ne fonctionne pas avec&nbsp;:',
+'install_extension_php_obligatoire' => '<NEW>SPIP exige l\'extension php&nbsp;:',
 'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  &laquo;volgende&raquo; om de installatie te beginnen.',
 'intem_redacteur' => 'redacteur',
 'item_accepter_inscriptions' => 'Inschrijvingen aanvaarden',
@@ -742,6 +748,7 @@ een kleur geeft hun status aan&nbsp;:',
 
 
 // T
+'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de map <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP poogt de omvang van de map <code>CACHE/</code> van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
 'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.',
@@ -797,8 +804,8 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 'texte_creer_rubrique' => 'Voor je een artikel kan schrijven,<BR> dien je een rubriek aan te maken.',
 'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
-'texte_date_publication_anterieure' => 'DATUM VAN EERDERE PUBLICATIE&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van antidatering.',
+'texte_date_publication_anterieure' => '<MODIF>DATUM VAN EERDERE PUBLICATIE&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => '<MODIF>Verberg de datum van antidatering.',
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE&nbsp;:',
 'texte_demander_blocage_priori' => 'De volgende koppelingen
     komende van deze site zullen preventief tegengehouden worden.',

@@ -128,6 +128,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'diff_texte_ajoute' => 'Dodany tekst',
 'diff_texte_deplace' => 'Przeniesiony tekst',
 'diff_texte_supprime' => 'Usuni&#281;ty tekst',
+'double_clic_inserer_doc' => 'Kliknij dwa razy aby umie&#347;ci&#263; skr&oacute;t w tek&#347;cie',
 
 
 // E
@@ -377,6 +378,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_identification_publique' => 'Twoja nazwa publiczna',
 'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkaj&#261;c na odpowiednim obrazku.',
 'info_image_process2' => '<b>N.B.</b> <i>Je&#347;li nie wy&#347;wietli&#322; si&#281; &#380;aden obrazek, Tw&oacute;j serwer nie zosta&#322; skonfugurowany tak, aby skorzysta&#263; z tego narz&#281;dzia. Je&#347;li jednak chcesz skorzysta&#263; z tych funkcji, skontaktuj si&#281; z osob&#261; odpowiedzialn&#261; za sprawy techniczne Twojego serwisu i popro&#347; o w&#322;&#261;czenie rozszerze&#324; "GD" lub "Imagick".</i>',
+'info_images_auto' => 'Automatycznie obliczane rozmiary obrazka',
 'info_informations_personnelles' => 'Pi&#261;ty krok: <B>Informacja osobista</B>',
 'info_inscription_automatique' => 'Automatyczna rejestracja nowych redaktor&oacute;w',
 'info_jeu_caractere' => 'Kodowanie strony',
@@ -511,6 +513,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_redacteurs' => 'Redaktorzy',
 'info_redaction_en_cours' => 'REDAKCJA W TOKU',
 'info_redirection' => 'Przekierowanie',
+'info_referencer_doc_distant' => 'Dodaj odno&#347;nik do dokumentu w internecie:',
 'info_refuses' => 'Twoje odrzucone artyku&#322;y',
 'info_reglage_ldap' => 'Opcje : <B>Regulacja importu LDAP</B>',
 'info_renvoi_article' => '<B>Przekierowanie.</B> Ten artyku&#322; odsy&#322;a do strony:',
@@ -615,6 +618,9 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'info_visiteur_2' => 'strony publicznej',
 'info_visiteurs' => 'Odwiedzaj&#261;cy',
 'info_visiteurs_02' => 'Odwiedzaj&#261;cy stron&#281; publiczn&#261;',
+'install_echec_annonce' => 'Instalacja mo&#380;e si&#281; nie powie&#347;&#263; lub mo&#380;e si&#281; zda&#380;y&#263;, &#380;e strona przestanie dzia&#322;a&#263; ...',
+'install_extension_mbstring' => 'SPIP nie dzia&#322;a z:',
+'install_extension_php_obligatoire' => 'SPIP wymaga rozszerzenia php:',
 'install_select_langue' => 'Wybierz j&#281;zyk i kliknij na przycisk "next" aby rozpocz&#261;&#263; procedur&#281; instalacji.',
 'intem_redacteur' => 'redaktor',
 'item_accepter_inscriptions' => 'Zaakceptuj zapisy',
@@ -745,6 +751,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 
 // T
+'taille_cache_image' => 'Obrazki maj&#261; automatycznie zmieniany rozmiar przez SPIP (miniaturki dokument&oacute;w, tytu&#322;y przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmuj&#261; w katalogu @dir@ obszar @taille@.',
 'taille_cache_infinie' => 'Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
 'taille_cache_octets' => 'W tym momencie wielko&#347;&#263; cache to: @octets@.',
@@ -799,7 +806,7 @@ od pocz&#261;tku opublikowania artyku&#322;u pojawi si&#281; kiedy najedziesz my
    automatycznie.',
 'texte_creer_rubrique' => 'Aby m&oacute;c pisa&#263; artyku&#322;y,<BR> musisz utworzy&#263; dzia&#322;.',
 'texte_date_creation_article' => 'DATA UTWORZENIA ARTYKU&#321;U:',
-'texte_date_publication_anterieure' => 'DATA POPRZEDNIEJ PUBLIKACJI&nbsp;:',
+'texte_date_publication_anterieure' => 'Data poprzedniej publikacji&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ukryj dat&#281; poprzedniej publikacji.',
 'texte_date_publication_article' => 'DATA PUBLIKACJI ONLINE:',
 'texte_demander_blocage_priori' => 'Kolejne linki pochodz&#261;ce

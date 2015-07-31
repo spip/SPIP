@@ -104,7 +104,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 // C
 'cache_mode_compresse' => 'Cache-Dateien werden komprimiert gespeichert.',
 'cache_mode_non_compresse' => 'Cache-Dateien werden unkomprimiert gespeichert.',
-'cache_modifiable_webmestre' => 'Diese Parameter k&ouml;nnen vom Webmaster eingestellt werden.',
+'cache_modifiable_webmestre' => 'Dieser Parameter kann vom Webmaster eingestellt werden.',
 'calendrier_synchro' => 'Wenn Sie eine mit <b>iCal</b> kompatibles PIM-Programm verwenden, k&ouml;nne Sie es mit den Eintr&auml;gen dieser Website synchronisieren.',
 
 
@@ -116,6 +116,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'diff_texte_ajoute' => 'Neuer Text',
 'diff_texte_deplace' => 'Text verschoben',
 'diff_texte_supprime' => 'Text gel&ouml;scht',
+'double_clic_inserer_doc' => 'M&uuml;gen Sie mit einem Doppelklick das K&uuml;rzel in den Text ein',
 
 
 // E
@@ -282,7 +283,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'info_creer_base' => 'Neue <B>Datenbank anlegen</b>:',
 'info_dans_groupe' => 'In der Kategorie:',
 'info_dans_rubrique' => 'In der Rubrik:',
-'info_date_publication_anterieure' => 'Datum einer fr&uuml;heren Ver&ouml;ffentlichung:',
+'info_date_publication_anterieure' => 'Datum einer fr&uuml;heren Bearbeitung:',
 'info_date_referencement' => 'DATUM DER VERLINKUNG DIESER WEBSITE:',
 'info_delet_mots_cles' => 'Das Schlagwort <B>@titre_mot@</b> (@type_mot@) ist mit dem Artikel <b>@texte_lie@</b> verkn&uuml;pft. Sie m&uuml;ssen deshalb das L&ouml;schen ausdr&uuml;cklich best&auml;tigen:',
 'info_demander_blocage_priori' => 'Bitte zun&auml;chst sperren',
@@ -343,6 +344,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gr&uuml;n; 
 'info_identification_publique' => 'Ihre &ouml;ffentliche Identit&auml;t ...',
 'info_image_process' => 'Bitte w&auml;hlen Sie das beste Verfahren zum Generieren der Miniaturbilder, indem Sie auf ein Bild klicken.',
 'info_image_process2' => '<b>Bemerkung:</b> <i>Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht f&uuml;r die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen m&ouml;chten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen &laquo;GD&raquo; oder &laquo;Imagick&raquo; einzurichten.</i>',
+'info_images_auto' => 'automatisch berechnete Bilder',
 'info_informations_personnelles' => 'Schritt 5: <B>Pers&ouml;nliche Informationen</b>',
 'info_inscription_automatique' => 'Automatische Anmeldung neuer Redakteure',
 'info_jeu_caractere' => 'Zeichensatz der Website',
@@ -459,6 +461,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gr&uuml;n; 
 'info_redacteurs' => 'Redakteure',
 'info_redaction_en_cours' => 'IN BEARBEITUNG',
 'info_redirection' => 'Umleitung',
+'info_referencer_doc_distant' => 'Dokument im Internet verlinken:',
 'info_refuses' => 'Ihre abgelehnten Artikel',
 'info_reglage_ldap' => 'Optionen: <B>LDAP-Import Einstellungen</b>',
 'info_renvoi_article' => '<B>Umleitung.</b> Dieser Artikel zeigt auf die Seite: ',
@@ -564,6 +567,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'info_visiteur_2' => 'des &ouml;ffentlichen Bereichs',
 'info_visiteurs' => 'Besucher',
 'info_visiteurs_02' => 'Besucher des &ouml;ffentlichen Bereichs',
+'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
+'install_extension_mbstring' => 'SPIP funktioniert nicht mit:',
+'install_extension_php_obligatoire' => 'SPIP ben&ouml;tigt die Dateierweiterung php:',
 'install_select_langue' => 'W&auml;hlen Sie eine Sprache aus und klicken Sie auf &laquo;Weiter&raquo;, um die Installation zu starten.',
 'intem_redacteur' => 'Redakteur',
 'item_accepter_inscriptions' => 'Anmeldungen erlauben',
@@ -694,6 +700,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 
 
 // T
+'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons f&uuml;r Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdr&uuml;cke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 'taille_cache_infinie' => 'Die Gr&ouml;sse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 'taille_cache_maxi' => 'SPIP versucht die Gr&ouml;sse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
 'taille_cache_octets' => 'Aktuelle Gr&ouml;sse des Cache: @octets@ Byte',
@@ -735,8 +742,8 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_crash_base' => 'Wenn Ihre Datenbank abgest&uuml;rzt ist, k&ouml;nnen Sie eine automatische Reparatur versuchen.',
 'texte_creer_rubrique' => 'Bevor Sie Artikel schreiben k&ouml;nnen,<BR> m&uuml;ssen Sie eine Rubrik anlegen.',
 'texte_date_creation_article' => 'ARTIKEL ANGELEGT AM:',
-'texte_date_publication_anterieure' => 'DATUM EINER FR&Uuml;HEREN VER&Ouml;FFENTLICHUNG',
-'texte_date_publication_anterieure_nonaffichee' => 'Kein Datum einer fr&uuml;heren Ver&ouml;ffentlichung anzeigen.',
+'texte_date_publication_anterieure' => 'DATUM EINER FR&Uuml;HEREN BEARBEITUNG',
+'texte_date_publication_anterieure_nonaffichee' => 'Kein Datum einer fr&uuml;heren Bearbeitung anzeigen.',
 'texte_date_publication_article' => 'ONLINE VER&Ouml;FFENTLICHT AM:',
 'texte_demander_blocage_priori' => 'Die n&auml;chsten Links dieser Website werden zun&auml;chst gesperrt.',
 'texte_descriptif_petition' => 'Beschreibung der Petition',

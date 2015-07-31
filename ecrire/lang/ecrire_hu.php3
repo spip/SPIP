@@ -297,7 +297,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'info_creer_base' => '<B>L&eacute;trehozni</B> egy &uacute;jabb adatb&aacute;zist&nbsp;:',
 'info_dans_groupe' => 'A csoportban :',
 'info_dans_rubrique' => 'A rovatban :',
-'info_date_publication_anterieure' => 'El&ouml;z&#337; publik&aacute;l&aacute;si d&aacute;tum :',
+'info_date_publication_anterieure' => 'El&ouml;z&#337; szerkeszt&eacute;s d&aacute;tuma :',
 'info_date_referencement' => 'A HONLAP ELT&Aacute;VOL&Iacute;T&Aacute;SA D&Aacute;TUMA&nbsp;:',
 'info_delet_mots_cles' => 'K&eacute;rte, hogy t&ouml;r&ouml;lve legyen a kulcssz&oacute;
 <B>@titre_mot@</B> (@type_mot@). Mivel ez a kulcssz&oacute; ehhez kapcsol&oacute;dik
@@ -777,8 +777,8 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
   egy automatikus jav&iacute;t&aacute;st kis&eacute;rletezhet.',
 'texte_creer_rubrique' => 'Miel&#337;bb &iacute;rhat cikkeket,<BR> egy rovatot kell l&eacute;trehozni.',
 'texte_date_creation_article' => 'CIKK L&Eacute;TREHOZ&Aacute;S&Aacute;NAK ID&#336;PONTJA&nbsp;:',
-'texte_date_publication_anterieure' => 'EL&Ouml;Z&#336; PUBLIK&Aacute;L&Aacute;SI ID&#336;PONT&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Nem kell megjelen&iacute;teni az el&ouml;z&#337; publik&aacute;l&aacute;si id&#337;pontot.',
+'texte_date_publication_anterieure' => 'El&ouml;z&#337; szerkeszt&eacute;s d&aacute;tuma&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'Nem kell megjelen&iacute;teni az el&ouml;z&#337; szerkeszt&eacute;s(ek) id&#337;pontj&aacute;t.',
 'texte_date_publication_article' => 'NYILV&Aacute;NOS PUBLIK&Aacute;L&Aacute;S ID&#336;PONTJA&nbsp;:',
 'texte_demander_blocage_priori' => 'A leend&#337; linkek, melyek
     sz&aacute;rmaznak err&#337;l a honlapr&oacute;l eleve tiltva lesznek.',
