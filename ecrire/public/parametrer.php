@@ -336,11 +336,13 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 			if($val)
 				$info[] = "$var='$val'";
 		spip_log("calcul ("
-			.spip_timer($a)
+			.($profile = spip_timer($a))
 			.") [$skel] "
 			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
+		if ($GLOBALS['var_mode'] == 'debug')
+			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))

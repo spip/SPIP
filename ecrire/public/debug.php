@@ -361,7 +361,7 @@ function ancre_texte($texte, $fautifs=array())
 // l'environnement graphique du debuggueur 
 // http://doc.spip.org/@debug_dumpfile
 function debug_dumpfile ($texte, $fonc, $type) {
-	global $debug_objets, $var_mode_objet, $var_mode_affiche;
+	global $debug_objets, $var_mode_objet, $var_mode_affiche, $spip_lang_right;
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
@@ -384,6 +384,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
+		echo "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>$debug_objets['profile'][$sourcefile]))."</span>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
