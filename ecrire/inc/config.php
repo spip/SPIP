@@ -316,6 +316,7 @@ function lister_configurer($exclure = array()){
 			$forms = array_merge($forms,$matches);
 		}
 	}
+	$forms = array_flip($forms);
 
 	// trouver tous les formulaires/configurer_
 	// et construire un tableau des entrees
