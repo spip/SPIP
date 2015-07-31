@@ -37,7 +37,7 @@ function boutonne($t, $n, $v, $a='') {
 //
 // Le code dynamique appelee par les squelettes
 //
-function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $hidden) {
+function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $retour) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
@@ -131,10 +131,14 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 
 	$url = quote_amp($url);
 
-	return ("<form action='$url' method='post' name='formulaire'>\n$hidden" .
+	return ("<form action='$url' method='post' name='formulaire'>\n" .
+		boutonne('hidden', 'retour', $retour) .
+		boutonne('hidden', 'ajout_forum','oui') .
 		boutonne('hidden', 'id_message', $id_message) .
 		boutonne('hidden', 'alea', $alea) .
 		boutonne('hidden', 'hash', $hash) .
+		(($forums_publics != 'pri') ? '' :
+		 (_T('forum_info_modere'). '<p>')) .
 		(($afficher_texte == "non") ?
 		 (boutonne('hidden', 'titre', $titre) .
 		  $table .
@@ -262,9 +266,9 @@ function afficher_petits_logos_mots($id_mot) {
 
 
 
-/*******************************************/
-/* DEFINITION DES BALISES LIEES AUX FORUMS */
-/*******************************************/
+/***********************************************/
+/* FONCTIONS POUR LES BALISES LIEES AUX FORUMS */
+/***********************************************/
 
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
@@ -353,8 +357,6 @@ function forum_dyn($args, $donnees_forum) {
 
   list ($idr, $idf, $ida, $idb, $ids) = unserialize($args);
   list($titre, $table, $accepter_forum) = unserialize($donnees_forum);
-	// titre propose pour la reponse
-	$titre = '> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre));
 
 	// url de reference
 	if (!$url = rawurldecode($GLOBALS['url'])) 
@@ -372,30 +374,28 @@ function forum_dyn($args, $donnees_forum) {
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
-	// url de retour du forum
+
+	// verifier l'identite des posteurs pour les forums sur abo
+	if (($accepter_forum == "abo") && (!$GLOBALS["auteur_session"]))
+	  {
+	    include_local('inc-login.php3');
+	    return login_pour_tous($url, false, true, $url, 'forum');
+	  }
+	// au premier appel (pas de http-var nommee "retour")
+	// memoriser l'URL courante pour y revenir apres envoi du message
+	// aux appels suivants, reconduire la valeur.
 	if ($retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
 	  $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
 	else {
 	  if (!$retour_forum = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
 	    $retour_forum = $url;
 	}
-	// verifier l'identite des posteurs pour les forums sur abo
-	if (($accepter_forum == "abo") && (!$GLOBALS["auteur_session"]))
-	  {
-	    include_local('inc-login.php3');
-	    return login_pour_tous($url, false, true, $url);
-	  }
-	else
-	// debut formulaire forum
 	 return retour_forum($idr,$idf,$ida,$idb,$ids,
-			     texte_script($titre),
-		      $table,
-		      $accepter_forum,
-		      $url,
-		      "<input type='hidden' name='retour' value='".$retour_forum."' />
-	<input type='hidden' name='ajout_forum' value='oui' />
-	" .
-		      (($accepter_forum != 'pri') ? '' : (_T('forum_info_modere'). '<p>')));
+			     texte_script('> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre))),
+			     $table,
+			     $accepter_forum,
+			     $url,
+			     $retour_forum);
 }
 
 //

@@ -61,15 +61,15 @@ function login($cible, $prive = 'prive') {
 		echo "<a href='$cible'>"._T('login_par_ici')."</a>\n";
 		return;
 	}
-	echo login_pour_tous($cible, $prive, '', $action);
+	echo login_pour_tous($cible, $prive, '', $action, 'redac');
 }
 
 
 // fonction aussi pour le forums sur abonnement
 
-function login_pour_tous($cible, $prive, $message, $action) {
-  $pass_popup ='href="spip_pass.php3" target="spip_pass" onclick="'
-                       . "javascript:window.open('spip_pass.php3', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\"";
+function login_pour_tous($cible, $prive, $message, $action, $mode) {
+  $pass_popup ="href='spip_pass.php3?mode=$mode' target='spip_pass'
+ onclick=\"javascript:window.open('spip_pass.php3?mode=$mode', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\"";
 
 	global $ignore_auth_http;
 	global $spip_admin;
@@ -97,8 +97,8 @@ function login_pour_tous($cible, $prive, $message, $action) {
 		$statut_login = 0; // statut inconnu
 		$login = addslashes($login);
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
+		$row = spip_fetch_array(spip_query($query));
+		if ($row) {
 		  if ($row['statut'] == '5poubelle' OR ($row['source'] == 'spip' AND $row['pass'] == '')) {
 				$statut_login = -1; // refus
 			} else {
@@ -229,7 +229,7 @@ function login_pour_tous($cible, $prive, $message, $action) {
 	// bouton oubli de mot de passe
 	include_ecrire("inc_mail.php3");
 	if (tester_mail()) {
-		$res .= ' [<a href="spip_pass.php3?oubli_pass=oui" target="spip_pass" onclick="'
+		$res .= ' [<a href="spip_pass.php3?mode=oubli_pass" target="spip_pass" onclick="'
 			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;\">"
 			._T('login_motpasseoublie').'</a>]';
 	}
