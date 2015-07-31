@@ -185,7 +185,7 @@ function traiter_autoliens($r) {
 	$url = $protocol.'://'.$k[1];
 	$lien = charger_fonction('lien', 'inc');
 	$r = $lien($url,'','','','','nofollow') . $k[2];
-	// si l'orignal ne contenait pas le 'http:' on le supprime du clic
+	// si l'original ne contenait pas le 'http:' on le supprime du clic
 	return $m ? $r : str_replace('>http://', '>', $r);
 }
 
@@ -264,7 +264,7 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	if (!$texte) {
 		$texte = str_replace('"', '', $lien);
 		if (strlen($texte)>40) $texte = substr($texte,0,35).'...';
-		$texte = "<html>$texte</html>";
+		$texte = "<html>".quote_amp($texte)."</html>";
 	}
 
 	if ($pour == 'titre') return $texte;
