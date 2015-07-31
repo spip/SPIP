@@ -185,6 +185,7 @@ function import_translate_std($values, $table, $desc, $request, $atts) {
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
+// http://doc.spip.org/@import_translate_spip_articles
 function import_translate_spip_articles($values, $table, $desc, $request, $atts) {
 	$v = $values['chapo']; 
 	if ($v[0]=='=' AND preg_match(_RACCOURCI_CHAPO, substr($v,1)))
@@ -194,6 +195,7 @@ function import_translate_spip_articles($values, $table, $desc, $request, $atts)
 	import_translate_std($values, $table, $desc, $request, $atts);
 }
 
+// http://doc.spip.org/@import_translate_spip_breves
 function import_translate_spip_breves($values, $table, $desc, $request, $atts) {
 	if ($request['statut'] == 'on' AND $values['statut'] == 'publie')
 		$values['statut'] = 'prop';

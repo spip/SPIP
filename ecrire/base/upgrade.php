@@ -103,6 +103,7 @@ function maj_while($version_installee, $version_cible)
 // Appliquer une serie de spip_query() qui risquent de partir en timeout
 // cf. maj/v019.php
 
+// http://doc.spip.org/@serie_alter
 function serie_alter($serie, $q = array()) {
 	$etape = intval(@$GLOBALS['meta']['upgrade_etape_'.$serie]);
 	foreach ($q as $i => $req) {
