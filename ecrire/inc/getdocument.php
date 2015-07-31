@@ -422,7 +422,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	// Demander l'indexation du document
 	include_spip('inc/indexation');
-	marquer_indexer('document', $id_document);
+	marquer_indexer('spip_documents', $id_document);
 
 	return true;
 }

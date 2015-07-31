@@ -598,19 +598,18 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	'non' ne jamais indexer
 */
 
-// API pour l'espace prive
+// API pour l'espace prive pour marquer un objet d'une table a reindexer
 // http://doc.spip.org/@marquer_indexer
-function marquer_indexer ($objet, $id_objet) {
-	spip_log ("demande indexation $objet $id_objet");
-	$table = 'spip_'.table_objet($objet);
-	$id = id_table_objet($objet);
+function marquer_indexer ($table, $id_objet) {
+	spip_log ("demande indexation $table id=$id_objet");
+	$id = primary_index_tables($table);
 	spip_query("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
 }
 
 // A garder pour compatibilite bouton memo...
 // http://doc.spip.org/@indexer_article
 function indexer_article($id_article) {
-	marquer_indexer('article', $id_article);
+	marquer_indexer('spip_articles', $id_article);
 }
 
 // n'indexer que les objets publies
@@ -671,7 +670,7 @@ function executer_une_indexation_syndic() {
 	if ($row) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
-		marquer_indexer('syndic', $id_syndic);
+		marquer_indexer('spip_syndic', $id_syndic);
 	}
 	return $id_syndic;
 }

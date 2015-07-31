@@ -59,7 +59,7 @@ function ajouter_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
-		marquer_indexer('article', $id_article);
+		marquer_indexer('spip_articles', $id_article);
 	}
 
 	if ($redirect) redirige_par_entete($redirect);

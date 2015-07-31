@@ -278,7 +278,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
-		marquer_indexer('breve', $id_breve);
+		marquer_indexer('spip_breves', $id_breve);
 	}
 	$calculer_rubriques = true;
 	

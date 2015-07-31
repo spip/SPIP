@@ -73,7 +73,7 @@ global
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('mot', $id_mot);
+			marquer_indexer('spip_mots', $id_mot);
 		}
 	}
 	else if ($new == 'oui') {

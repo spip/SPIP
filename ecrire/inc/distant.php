@@ -49,7 +49,7 @@ function copie_locale($source, $mode='auto') {
 				$id_document = $id_document['id_document'];
 				if ($id_document) {
 					include_spip('inc/indexation');
-					marquer_indexer('document', $id_document);
+					marquer_indexer('spip_documents', $id_document);
 				}
 			}
 			else

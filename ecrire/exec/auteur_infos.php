@@ -177,7 +177,7 @@ modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent']);
 if ($nom OR $statut) {
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
-		marquer_indexer('auteur', $id_auteur);
+		marquer_indexer('spip_auteurs', $id_auteur);
 	}
 
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin

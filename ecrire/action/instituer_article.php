@@ -41,7 +41,7 @@ function action_instituer_article_dist() {
 		if ($statut == 'publie') {
 			if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('article', $id_article);
+			marquer_indexer('spip_articles', $id_article);
 			}
 			include_spip('inc/lang');
 			include_spip('inc/texte');
