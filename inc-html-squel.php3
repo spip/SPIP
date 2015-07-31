@@ -236,7 +236,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$champ->nom_champ = $regs[4];
 		$champ->etoile = $regs[5];
 		// phraser_filtres indiquera ou commence cond_apres
-		$result = phraser_filtres($regs[6], ")", $sep, $result, &$champ);
+		$result = phraser_filtres($regs[6], ")", $sep, $result, $champ);
 		$champ->cond_avant = phraser_champs_exterieurs($regs[1],$sep,$result);
 		$champ->cond_apres = phraser_champs_exterieurs($champ->cond_apres,$sep,$result);
 
