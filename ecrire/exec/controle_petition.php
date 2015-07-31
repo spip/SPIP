@@ -94,9 +94,11 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 
 	echo "<br /><br /><br /><br /><br />";
 
-	$res = icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
+	if ($id_article) {
+		$res = icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 
-	echo bloc_des_raccourcis($res);
+		echo bloc_des_raccourcis($res);
+	}
 
 	echo debut_droite('', true);
   

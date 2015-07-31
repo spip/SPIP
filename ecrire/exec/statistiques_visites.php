@@ -141,10 +141,9 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 		echo statistiques_forums($aff_jours, $id_article, $serveur);
 	}
 
-	$r = sql_select("referer, referer_md5, visites AS vis", $table_ref, $where, "", "vis DESC", $limit,'',$serveur);
-
 	$referenceurs = charger_fonction('referenceurs', 'inc');
-	$res = $referenceurs ($r, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
+	$res = $referenceurs ('statistiques_visites', ($id_article?"id_article=$id_article" : ''), "visites", $table_ref, $where, '', $limit);
+
 	if ($res) {
 		echo gros_titre(_T("onglet_origine_visites"),'', false);
 		echo "<div style='overflow:hidden;' class='verdana1 spip_small'><br />";

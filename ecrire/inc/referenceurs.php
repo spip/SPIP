@@ -3,16 +3,16 @@
 //
 // Afficher les referers d'un article (ou du site)
 //
-// http://doc.spip.org/@inc_referenceurs_dist
-function inc_referenceurs_dist ($jour, $limit, $serveur='') {
+
+function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupby, $limit, $serveur='') {
 	global $spip_lang_right, $source_vignettes;
 
 	$nbvisites = array();
 	$aff = '';
 
-	$plus = generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200)));
+	$plus = generer_url_ecrire($script, $args . "&limit=" . strval($limit+200));
 
-	$result = sql_select("referer_md5, referer, SUM(visites_$jour) AS vis", "spip_referers", "visites_$jour>0 ", "referer", "vis DESC", $limit);
+	$result = sql_select("referer_md5, referer, $select AS vis", $table, $where, $groupby, "vis DESC", $limit,'',$serveur);
 
 	while ($row = sql_fetch($result,$serveur)) {
 		$referermd5 = $row['referer_md5'];

@@ -30,7 +30,7 @@ function exec_statistiques_referers_dist()
 	if ($jour<>'veille') $jour='jour';
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
-	$res = $referenceurs ($jour, $limit);
+	$res = $referenceurs ('statistiques_referers', "jour=$jour", "SUM(visites_$jour)", 'spip_referers', "visites_$jour>0", "referer", $limit);
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
