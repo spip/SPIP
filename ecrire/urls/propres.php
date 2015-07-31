@@ -395,7 +395,6 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	// gerer le cas de retour depuis des urls arbos
 	// mais si url arbo ne trouve pas, on veut une 404 par securite
 	if ($GLOBALS['profondeur_url']>0){
-		$entite = 'type_urls';
 		$urls_anciennes = charger_fonction('arbo','urls');
 		$urls_anciennes($url_propre,$entite);
 		return;
