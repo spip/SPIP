@@ -18,6 +18,7 @@ function messagerie_dist()
 {
 
   global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
+  global $detruire_message, $id_message, $supp_dest;
 
   $id_message = intval($id_message);
   $detruire_message = intval($detruire_message);
@@ -27,6 +28,7 @@ function messagerie_dist()
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
 }
 
+  spip_log("messa det $detruire_message");
 if ($detruire_message) {
 	spip_query("DELETE FROM spip_messages WHERE id_message=$detruire_message");
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
