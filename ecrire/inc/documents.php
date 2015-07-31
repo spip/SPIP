@@ -88,7 +88,8 @@ function image_pattern($vignette) {
 
 function document_et_vignette($document, $url, $portfolio=false) {
 	// a supprimer avec spip_types_documents
-	$extension = spip_fetch_array(spip_query("SELECT extension FROM	spip_types_documents WHERE id_type=".$document['id_type']));
+	$extension = spip_fetch_array(spip_query("SELECT extension, mime_type FROM	spip_types_documents WHERE id_type=".$document['id_type']));
+	$mime = $extension['mime_type'];
 	$extension = $extension['extension'];
 	$vignette = $document['id_vignette'];
 
@@ -120,7 +121,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if (!$url)
 		return $image;
 	else
-		return "<a href='$url'>$image</a>";
+		return "<a href='$url' type='$mime'>$image</a>";
 }
 
 //
