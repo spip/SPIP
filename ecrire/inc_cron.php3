@@ -193,7 +193,7 @@ function spip_cron() {
 	// Mise a jour d'un (ou de zero) site syndique
 	//
 	if (lire_meta("activer_syndic") == "oui") {
-		if (timeout()) {
+		if (timeout('syndication')) {
 			include_ecrire("inc_sites.php3");
 			executer_une_syndication();
 			if (lire_meta('activer_moteur') == 'oui') {
