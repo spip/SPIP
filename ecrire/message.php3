@@ -119,7 +119,7 @@ while($row = spip_fetch_array($result_message)) {
 
 
 	
-	debut_page($titre, "messagerie", "messagerie");
+	debut_page($titre, "asuivre", "messagerie");
 
 	debut_gauche();
 	

@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page("R&eacute;diger un message");
+debut_page("R&eacute;diger un message", "asuivre", "messagerie");
 debut_gauche();
 debut_droite();
 
