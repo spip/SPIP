@@ -77,6 +77,7 @@ function lire_meta_maj($nom) {
 	if ($f) {
 		@fputs($f, $s);
 		@fclose($f);
+		@unlink($fichier_meta_cache);
 		@rename($fichier_meta_cache.'.'.@getmypid(), $fichier_meta_cache);
 	} else {
 		global $connect_statut;
