@@ -78,12 +78,13 @@ function inc_genie_dist($taches = array()) {
 	}
 	if ($tache) {
 		spip_timer('tache');
+		spip_log('cron: debut '.$tache, 'genie');
 		touch($lock);
 		$cron = charger_fonction($tache, 'genie');
 		$retour = $cron($last);
 		// si la tache a eu un effet : log
 		if ($retour) {
-			spip_log("cron: $tache (" . spip_timer('tache') . ") $retour");
+			spip_log("cron: $tache (" . spip_timer('tache') . ") $retour", 'genie');
 			if ($retour < 0)
 				@touch($lock, 0 - $retour);
 		}
