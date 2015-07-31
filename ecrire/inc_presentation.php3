@@ -1286,19 +1286,19 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre);
 	
-		echo "\n<map name='map_couleur' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21'>";
+		echo "\n<map name='map_couleur'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21 title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21 title=\"Changer la couleur de l'interface\"'>";
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
