@@ -54,15 +54,6 @@ if (!tester_variable('puce', "<img class='spip_puce' src='puce.gif' alt='-'>&nbs
 
 
 //
-// Trouver une locale qui marche
-//
-$lang2 = strtoupper($GLOBALS['spip_lang']);
-setlocale(LC_CTYPE, $GLOBALS['spip_lang']) ||
-setlocale(LC_CTYPE, $lang2.'_'.$GLOBALS['spip_lang']) ||
-setlocale(LC_CTYPE, $GLOBALS['spip_lang'].'_'.$lang2);
-
-
-//
 // Diverses fonctions essentielles
 //
 
@@ -974,7 +965,7 @@ function traiter_raccourcis_generale($letexte) {
 function traiter_les_notes($mes_notes, $les_echap) {
 	list($mes_notes,) = traiter_raccourcis_generale($mes_notes);
 	if (ereg('<p class="spip">',$mes_notes))
-		$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
 	else
 		$mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
 	$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
