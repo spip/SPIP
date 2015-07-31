@@ -64,6 +64,7 @@ function creer_base() {
 		url_site text NOT NULL,
 		login VARCHAR(255) BINARY NOT NULL,
 		pass tinytext NOT NULL,
+		low_sec tinytext NOT NULL,
 		statut VARCHAR(255) NOT NULL,
 		maj TIMESTAMP,
 		pgp BLOB NOT NULL,
@@ -1378,6 +1379,11 @@ function maj_base() {
 	if ($version_installee < 1.724) {
 		spip_query("ALTER TABLE spip_messages ADD date_fin datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		maj_version (1.724);
+	}
+
+	if ($version_installee < 1.726) {
+		spip_query("ALTER TABLE spip_auteurs ADD low_sec tinytext NOT NULL");
+		maj_version (1.726);
 	}
 
 
