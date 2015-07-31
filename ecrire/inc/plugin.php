@@ -496,7 +496,9 @@ function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		@include_once(_DIR_PLUGINS."$plug/$file");
+		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+			include_once($f);
+		}
 	}
 	$prefix_install = $infos['prefix']."_install";
 	if (function_exists($prefix_install)){
@@ -518,7 +520,9 @@ function installe_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		@include_once(_DIR_PLUGINS."$plug/$file");
+		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+			include_once($f);
+		}
 	}
 	$prefix_install = $infos['prefix']."_install";
 	// cas de la fonction install fournie par le plugin
