@@ -2200,7 +2200,7 @@ function nom_acceptable($nom) {
 		return false;
 	}
 	$v_nom = str_replace(array('@multi@','@/multi@'), array('<multi>','</multi>'), supprimer_tags(str_replace(array('<multi>','</multi>'), array('@multi@','@/multi@'), $nom)));
-	return $v_nom == $nom;
+	return str_replace('&lt;', '<', $v_nom) == $nom;
 }
 
 
