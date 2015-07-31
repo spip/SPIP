@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // qui passent en arguments de la balise: #LOGO{left,#URL...}
 // -> http://www.spip.net/fr_article901.html
 
-function phraser_vieux_logos($p)
+function phraser_vieux_logos(&$p)
 {
 	if ($p->param[0][0])
 		$args = array('');
@@ -39,15 +39,16 @@ function phraser_vieux_logos($p)
 			$c->texte = $nom;
 			$args[] = array($c);
 			array_shift($p->param);
-			spip_log('filtre de logo obsolete', 'vieilles_defs');
+			spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
 		} elseif ($r === 2) {
 				$p->etoile = '**';
 				array_shift($p->param);
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
+				spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
 		} elseif ($r === 1) {
 				array_shift($p->param);
 				$p->etoile = '*';
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
+				spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
+
 		} elseif (preg_match("/^".NOM_DE_CHAMP.'(.*)$/sS', $nom, $m)) {
 				$champ = new Champ();
 				$champ->nom_boucle = $m[2];
@@ -61,7 +62,9 @@ function phraser_vieux_logos($p)
 				}
 				$args[]= $champ;
 				array_shift($p->param);
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
+				var_dump($p);
+				spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
+
 		} // le cas else est la seule incompatibilite
 
 	}
@@ -171,10 +174,17 @@ function normaliser_inclure($champ)
 {
 	normaliser_args_inclumodel($champ);
 	$l = $champ->param[0];
-	if (is_array($l) AND !$l[0]) foreach ($l as $k => $p) {
+	if (is_array($l) AND !$l[0]) {
+	  foreach ($l as $k => $p) {
+	    if ($p AND $p[0]->type == 'texte' AND !strpos($p[0]->texte,'=')) {
+	      $p[0]->texte = trim($p[0]->texte);
+	      }
+	  }
+	  foreach ($l as $k => $p) {
 		if (!$p OR $p[0]->type != 'texte' OR 
 		    !preg_match('/^fond\s*=\s*(.*)$/',$p[0]->texte, $r))
 			continue;
+
 		if ($r[1])
 			$p[0]->texte = $r[1];
 		else unset($p[0]);
@@ -183,6 +193,7 @@ function normaliser_inclure($champ)
 		if (count($champ->param[0]) ==1) 
 			array_shift($champ->param);
 		return;
+	  }
 	}
 	spip_log("inclure sans fond ni fichier");
 }
