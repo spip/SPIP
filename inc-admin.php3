@@ -19,6 +19,42 @@ function bouton_admin($titre, $lien) {
 	return $ret;
 }
 
+
+function boutons_admin_debug () {
+	if ($GLOBALS['bouton_admin_debug']
+	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
+		include_ecrire('inc_filtres.php3');
+
+		$link = $GLOBALS['clean_link'];
+		if ($link->getvar('var_afficher_debug') != 'page') {
+			$link->addvar('var_afficher_debug', 'page');
+			$ret .=  $link->getForm('GET');
+			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_L('Debug cache'))."\" />";
+			$ret .= "</form>\n";
+		}
+
+		$link = $GLOBALS['clean_link'];
+		if ($link->getvar('var_afficher_debug') != 'skel') {
+			$link->addvar('var_afficher_debug', 'skel');
+			$link->addvar('recalcul', 'oui');
+			$ret .=  $link->getForm('GET');
+			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_L('Debug skel'))."\" />";
+			$ret .= "</form>\n";
+		}
+
+		$link = $GLOBALS['clean_link'];
+		if ($link->getvar('var_afficher_debug') != '') {
+			$link->delvar('var_afficher_debug');
+			$link->addvar('recalcul', 'oui');
+			$ret .=  $link->getForm('GET');
+			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('icone_retour'))."\" />";
+			$ret .= "</form>\n";
+		}
+	}
+	
+	return $ret;
+}
+
 function afficher_boutons_admin($pop) {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	include_ecrire("inc_filtres.php3");
@@ -32,6 +68,7 @@ function afficher_boutons_admin($pop) {
 	}
 	lang_select($lang);
 
+	// Bouton modifier
 	$ret = '<div class="spip-admin" dir="'.lang_dir($lang,'ltr','rtl').'">';
 	if ($id_article) {
 		$ret .= bouton_admin(_T('admin_modifier_article')." ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
@@ -48,14 +85,17 @@ function afficher_boutons_admin($pop) {
 	else if ($id_auteur) {
 		$ret .= bouton_admin(_T('admin_modifier_auteur')." ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
+
+	// Bouton Recalculer
 	$link = $GLOBALS['clean_link'];
 	$link->addVar('recalcul', 'oui');
-	$link->delVar('submit');
 	$ret .=  $link->getForm('GET');
 	$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\" />";
 	$ret .= "</form>\n";
 
-	if (lire_meta("activer_statistiques") != "non" AND $id_article AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
+	// Bouton statistiques
+	if (lire_meta("activer_statistiques") != "non" AND $id_article
+	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 		if (spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article =".intval($id_article)))) {
 			include_local ("inc-stats.php3");
 			$ret .= bouton_admin(_T('stats_visites_et_popularite',
@@ -63,6 +103,9 @@ function afficher_boutons_admin($pop) {
 			"./ecrire/statistiques_visites.php3?id_article=$id_article");
 		}
 	}
+
+	// Boutons debug
+	$ret .= boutons_admin_debug();
 
 	$ret .= "</div>";
 

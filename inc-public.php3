@@ -4,13 +4,7 @@
 if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
 
-	if ($GLOBALS['afficher_page'] == 'oui'
-	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
-		@header('Content-Type: text/plain; charset='.lire_meta('charset'));
-		echo $page['texte'];
-	} else {
-		eval('?' . '>' . $page['texte']);
-	}
+	eval('?' . '>' . $page['texte']);
 
 	if ($page['lang_select'])
 		lang_dselect();
@@ -42,7 +36,7 @@ else {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
- 	if ($GLOBALS['forcer_lang']) {
+	if ($GLOBALS['forcer_lang']) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
@@ -69,7 +63,10 @@ else {
 
 	include_local ("inc-public-global.php3");
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
+
+	afficher_page_si_demande_admin ('page', $page['texte'], $page['cache']);
 	eval('?' . '>' . $page['texte']);
+
 	terminer_public_global($use_cache, $page['cache']);
 }
 

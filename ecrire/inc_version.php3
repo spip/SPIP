@@ -144,6 +144,9 @@ $champs_extra_proposes = false;
 $ignore_auth_http = false;
 $ignore_remote_user = false;
 
+// Faut-il afficher les boutons d'admin 'debug cache' et 'debug squelette' ?
+$bouton_admin_debug = false;
+
 // Serveurs externes
 $spip_server = array (
 	'tex' => 'http://math.spip.org/tex.php',
