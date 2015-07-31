@@ -208,7 +208,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	// gerer les statuts si declares pour cette table
 	/*
-	$table_statut[nom_table][] = array(
+	$show['statut'][] = array(
 		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
 		'publie'=>'publie', // valeur ou liste de valeurs, qui definissent l'objet comme publie.
 		'previsu'=>'publie,prop', // valeur ou liste de valeurs qui sont visibles en previsu

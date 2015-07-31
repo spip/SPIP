@@ -159,10 +159,10 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if (!$type)
 		return true;
 
-	include_spip('public/interfaces');
-	$table = table_objet_sql($type);
-	if (isset($GLOBALS['table_statut'][$table]))
-		foreach($GLOBALS['table_statut'][$table] as $c){
+	include_spip('base/objets');
+	$infos = lister_tables_objets_sql(table_objet_sql($type));
+	if (isset($infos['statut']))
+		foreach($infos['statut'] as $c){
 			if (isset($c['publie'])){
 				if (!isset($c['previsu'])) return false; // pas de previsu definie => NIET
 				$champ = $c['champ'];
