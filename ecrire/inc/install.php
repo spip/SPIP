@@ -195,7 +195,7 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 			$etat = 'todo';
 */
 		if ($debut < $last) {
-			if ($debut == $en_cours && $erreur) $class = "erreur";
+			if ($debut == $en_cours && $erreur) $class = "on erreur";
 			else if ($debut == $en_cours) $class = "on";
 			else if ($debut > $en_cours) $class = "prochains";
 			else $class = "valides";
