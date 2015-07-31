@@ -21,6 +21,7 @@ function exec_controle_petition_dist()
 				    intval(_request('id_signature')));
 }
 
+// http://doc.spip.org/@exec_controle_petition_args
 function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 {
 	include_spip('inc/presentation');
@@ -75,6 +76,7 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 	}
 }
 
+// http://doc.spip.org/@controle_petition_page
 function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -109,6 +111,7 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 	echo fin_gauche(), fin_page();
 }
 
+// http://doc.spip.org/@controle_petition_onglet
 function controle_petition_onglet($id_article, $debut, $type)
 {
 	$arg = ($id_article ? "id_article=$id_article&" :'');

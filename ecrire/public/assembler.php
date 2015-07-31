@@ -707,6 +707,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 }
 
 // Appeler avant et apres chaque eval()
+// http://doc.spip.org/@xml_hack
 function xml_hack(&$page, $echap = false) {
 	if ($echap)
 		$page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);

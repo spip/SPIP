@@ -117,6 +117,7 @@ function verifier_action_auteur($action, $valeur) {
 
 // Le secret du site doit rester aussi secret que possible, et est eternel
 // On ne doit pas l'exporter
+// http://doc.spip.org/@secret_du_site
 function secret_du_site() {
 	if (!isset($GLOBALS['meta']['secret_du_site'])
 	OR !strlen($GLOBALS['meta']['secret_du_site'])

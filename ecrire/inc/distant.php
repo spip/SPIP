@@ -435,6 +435,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 }
 
 
+// http://doc.spip.org/@need_proxy
 function need_proxy($host)
 {
 	$http_proxy = $GLOBALS['meta']["http_proxy"];

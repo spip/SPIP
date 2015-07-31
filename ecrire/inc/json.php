@@ -21,6 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string js script | boolean false if error
  */
 
+// http://doc.spip.org/@var2js
 function var2js($var) {
 	$asso = false;
 	switch (true) {
@@ -61,6 +62,7 @@ function var2js($var) {
 	return false;
 }
 
+// http://doc.spip.org/@json_export
 function json_export($var) {
 	$var = var2js($var);
 

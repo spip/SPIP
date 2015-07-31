@@ -532,6 +532,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	exit;
 }
 
+// http://doc.spip.org/@debug_affiche_navig
 function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
 {
 	return "\n<tr style='background-color: " .

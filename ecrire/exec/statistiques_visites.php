@@ -83,6 +83,7 @@ function exec_statistiques_visites_dist()
 	}
 }
 
+// http://doc.spip.org/@exec_statistiques_visites_args
 function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 {
 	$titre = $pourarticle = "";
@@ -275,6 +276,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 	echo fin_gauche(), fin_page();	
 }
 
+// http://doc.spip.org/@statistiques_signatures
 function statistiques_signatures($aff_jours, $id_article, $mode, $n)
 {
 	$stable = "spip_signatures";
@@ -303,6 +305,7 @@ function statistiques_signatures($aff_jours, $id_article, $mode, $n)
 	. statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_unix, COUNT(*) AS total_visites", 'spip_signatures',  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date_unix"), 0);
 }
 
+// http://doc.spip.org/@statistiques_collecte_date
 function statistiques_collecte_date($select, $table, $where, $groupby, $order)
 {
 	$result = sql_select($select, $table, $where, $groupby, $order);
@@ -316,6 +319,7 @@ function statistiques_collecte_date($select, $table, $where, $groupby, $order)
 
 // Appelee S'il y a au moins cinq minutes de stats :-)
 
+// http://doc.spip.org/@statistiques_tous
 function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, $classement=array(), $id_article=0, $liste=0)
 {
 	$r = array_keys($log);
@@ -434,6 +438,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 
 // Le bouton pour CSV et pour passer de svg a htm
 
+// http://doc.spip.org/@statistiques_mode
 function statistiques_mode($lui)
 {
 	if (flag_svg()) {
@@ -449,6 +454,7 @@ function statistiques_mode($lui)
 		. "</div>\n";
 }
 
+// http://doc.spip.org/@stat_log1
 function stat_log1($log, $agreg, $date_debut, $date_today, $id_article, $largeur, &$total_absolu, $maxgraph, $rapport, $val_popularite, $visites_today) {
 	$res = '';
 
@@ -556,6 +562,7 @@ function stat_log1($log, $agreg, $date_debut, $date_today, $id_article, $largeur
 	return array($moyenne, $val_prec, $res);
 }
 
+// http://doc.spip.org/@statistiques_jour
 function statistiques_jour($key, $tagtitle, $largeur, $hauteur_moyenne, $hauteur) 
 {
 	if ($hauteur_moyenne > $hauteur) {
@@ -587,6 +594,7 @@ $res .= http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
 	return $res;
 }
 
+// http://doc.spip.org/@statistiques_nom_des_mois
 function statistiques_nom_des_mois($date_debut, $date_today, $largeur)
 {
 	global $spip_lang_left;
@@ -612,6 +620,7 @@ function statistiques_nom_des_mois($date_debut, $date_today, $largeur)
 	return "<div style='position: relative; height: 15px'>$res</div>";  
 }
 
+// http://doc.spip.org/@statistiques_par_mois
 function statistiques_par_mois($query, $visites_today)
  {
 	$entrees = array();
@@ -701,6 +710,7 @@ function statistiques_par_mois($query, $visites_today)
 	. "</td></tr></table>";
  }
 
+// http://doc.spip.org/@statistiques_echelle
 function statistiques_echelle($maxgraph)
 {
   return "<div class='verdana1 spip_x-small'>"
@@ -736,6 +746,7 @@ function statistiques_echelle($maxgraph)
  . "</table></div>";
 }
 	
+// http://doc.spip.org/@stat_logsvg
 function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, &$total_absolu, $visites_today) {
 
 	$total_absolu = $total_absolu + $visites_today;
@@ -788,6 +799,7 @@ function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, &$total
 	return array($moyenne, $val_prec, $res);
 }
 
+// http://doc.spip.org/@statistiques_moyenne
 function statistiques_moyenne($tab)
 {
 	if (!$tab) return 0;

@@ -25,6 +25,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   return fabrique_jointures($boucle, $res, $cond, $desc, $nom, $col);
 }
 
+// http://doc.spip.org/@fabrique_jointures
 function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='', $col='')
 {
 	static $num=array();
@@ -98,6 +99,7 @@ function liste_champs_jointures($nom,$desc){
 	return $join;
 }
 
+// http://doc.spip.org/@split_key
 function split_key($v, $join = array())
 {
 	foreach (preg_split('/,\s*/', $v) as $k) $join[$k] = $k;
@@ -184,6 +186,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	return "";
 }
 
+// http://doc.spip.org/@trouver_jointure_champ
 function trouver_jointure_champ($champ, $boucle)
 {
 	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);

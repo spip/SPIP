@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/install');
 
-// http://doc.spip.org/@exec_admin_effacer_dist
+// http://doc.spip.org/@exec_admin_declarer_dist
 function exec_admin_declarer_dist()
 {
 	if (!autoriser('detruire')) {
@@ -50,6 +50,7 @@ function exec_admin_declarer_dist()
 	}
 }
 
+// http://doc.spip.org/@autres_bases
 function autres_bases()
 {
 	$tables =  bases_referencees(_FILE_CONNECT_TMP);
