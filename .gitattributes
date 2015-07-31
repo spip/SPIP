@@ -736,11 +736,11 @@ prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/page-breves.html -text
+prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
 prive/squelettes/contenu/page-configurer_preferences.html -text
-prive/squelettes/contenu/page-typo.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/dist.html -text
