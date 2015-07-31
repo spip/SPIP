@@ -140,7 +140,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 			: ''
 		)
 
-	  . $editer_mots('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
+	  . $editer_mots('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true, 'breves_voir')
 	  . ((($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) ? langue_breve($id_breve,$row):"")
 	  . pipeline('affiche_milieu',array(
 			'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
