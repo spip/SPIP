@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2007                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/config');
@@ -31,7 +41,7 @@ function exec_admin_plugin() {
 		// pour la peine, un redirige, 
 		// que les plugin charges soient coherent avec la liste
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('admin_plugin'));
+		redirige_par_entete(generer_url_ecrire(_request('exec')));
 	}
 	else
 		verif_plugin();
@@ -69,8 +79,11 @@ div.cadre-padding ul li li div.nomplugin a {
 }
 div.cadre-padding ul li li div.nomplugin_on {
 	background:$couleur_claire;
+}
+div.cadre-padding ul li li div.nomplugin_on>a {
 	font-weight:bold;
 }
+
 div.cadre-padding div.droite label {
 	padding:.3em;
 	background:#EFEFEF;
@@ -121,8 +134,6 @@ EOF;
 	$s .= "<p><span class='experimental'>&nbsp;</span>"._T('plugin_etat_experimental')."</p>";
 	echo $s;
 	fin_boite_info();
-	/*echo "<a href='#' onclick=\"$('input.check').attr('checked','checked');\">"._L("tout_activer")."</a><br/>";
-	echo "<a href='#' onclick=\"$('input.check').attr('checked','');\">"._L("tout_desactiver")."</a><br/>";*/
 
 	debut_droite();
 
@@ -136,7 +147,7 @@ EOF;
 	echo "<tr><td class='serif' colspan='4'>";
 	echo _T('texte_presente_plugin');
 
-	echo generer_url_post_ecrire("admin_plugin");
+	echo generer_url_post_ecrire(_request('exec'));
 
 	echo "<ul>";
 	affiche_arbre_plugins(liste_plugin_files(),liste_chemin_plugin_actifs());
@@ -188,7 +199,7 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 		$chemin .= $open . "/";
 		$output .= "<li>";
 		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
-		$output .= "$chemin\n<ul>";
+		$output .= "<span onclick=\"jQuery(this).prev().click();\">$chemin</span>\n<ul>";
 			
 		$output .= $visible? debut_block_visible($chemin):debut_block_invisible($chemin);
 	}
@@ -228,8 +239,12 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 			$('input.check').click(function(){\$(this).parent().toggleClass('nomplugin_on');});
 		});
 	$(document).ready(function(){
-		$('div.nomplugin a[@rel=info]').click(function(){
-			$(this).siblings('div.info').prepend(ajax_image_searching).load($(this).name());
+		$('div.nomplugin a[@rel=info]').click(function() {
+			if (!$(this).siblings('div.info').html()) {
+				$(this).siblings('div.info').prepend(ajax_image_searching).load($(this).name());
+			} else {
+				$(this).siblings('div.info').toggle();
+			}
 			return false;
 		});
 	});
@@ -275,11 +290,10 @@ function ligne_plug($plug_file, $actif, $id){
 	if (isset($info['etat']))
 		$etat = $info['etat'];
 	$nom = typo($info['nom']);
-	// puce d'etat du plugin
-	// <etat>dev|experimental|test|stable</etat>
+
 	$id = substr(md5("aide_$plug_file"),0,8);
-	//$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500&link=$url")."' class='jTip' name=\"".attribut_html($nom)."\" id='$id'>?</a></span>";
-	$s .= "<span class='$etat'>&nbsp;</span>";
+	$s .= "<span class='$etat' title='$etat'>&nbsp;</span>";
+
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
@@ -288,14 +302,16 @@ function ligne_plug($plug_file, $actif, $id){
 	$id_input++;
 
 	//$s .= bouton_block_invisible("$plug_file");
-	$url_stat = generer_url_ecrire('admin_plugin',"plug=$plug_file",'&');
+	$url_stat = generer_url_ecrire(_request('exec'),"plug=$plug_file",'&');
 	$url_dyn = generer_url_ecrire('info_plugin',"plug=$plug_file");
 	$s .= "<a href='$url_stat' rel='info' name='$url_dyn'>$nom</a>";
+
 	$s .= "<div class='info'>";
 	// afficher les details d'un plug en secours
 	if (_request('plug')==$plug_file)
 		$s .= affiche_bloc_plugin($plug_file, $info);
 	$s .= "</div>";
+
 	$s .= "</div>";
 	return $s;
 }
