@@ -128,7 +128,7 @@ function action_legender_auteur_post($r) {
 	// seuls les admins peuvent modifier le mail
 	// les admins restreints ne peuvent modifier celui des autres admins
 
-	if (_request('email') AND $auteur_session['statut'] == '0minirezo') {
+	if (is_string(_request('email')) AND $auteur_session['statut'] == '0minirezo') {
 		if (!($ok = ($statut <> '0minirezo'))) {
 			if (is_string($acces))
 				$acces = admin_general($auteur_session);
