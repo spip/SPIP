@@ -1632,8 +1632,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			}
 
 			// boutons de moderation
-			if ($controle_id_article && is_numeric($controle_id_article))
-				echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$controle_id_article", $ip);
+			if ($controle_id_article)
+				echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
 
 			echo safehtml(justifier(propre($texte)));
 
