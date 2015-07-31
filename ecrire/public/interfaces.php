@@ -203,6 +203,7 @@ function declarer_interfaces(){
 	// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
 	global $tables_jointures;
 	$tables_jointures = array();
+	$tables_jointures['spip_jobs'][] = 'jobs_liens';
 
 	global  $exceptions_des_jointures;
 	#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
