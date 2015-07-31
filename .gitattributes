@@ -86,7 +86,6 @@ ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/relayeur.php -text
-ecrire/configuration/syndications.php -text
 ecrire/configuration/visiteurs.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
@@ -382,6 +381,8 @@ prive/formulaires/configurer_breves.html -text
 prive/formulaires/configurer_breves.php -text
 prive/formulaires/configurer_documents.html -text
 prive/formulaires/configurer_documents.php -text
+prive/formulaires/configurer_flux.html -text
+prive/formulaires/configurer_flux.php -text
 prive/formulaires/configurer_identite.html -text
 prive/formulaires/configurer_identite.php -text
 prive/formulaires/configurer_langage.html -text
@@ -397,6 +398,8 @@ prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
 prive/formulaires/configurer_rubriques.html -text
 prive/formulaires/configurer_rubriques.php -text
+prive/formulaires/configurer_sites.html -text
+prive/formulaires/configurer_sites.php -text
 prive/formulaires/configurer_transcodeur.html -text
 prive/formulaires/configurer_transcodeur.php -text
 prive/formulaires/editer_article.html -text
