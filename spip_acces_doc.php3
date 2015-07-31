@@ -17,7 +17,7 @@
 # il verifie soit que le demandeur est authentifie
 # soit que le fichier est joint à au moins 1 article, breve ou rubrique
 
-$id_document = ($_GET['id_document']);
+$id_document = intval($_GET['id_document']);
 $file = urldecode($_GET['file']);
 if (strpos($file,'../') !== false)
   $refus = 1;
@@ -41,7 +41,7 @@ else
       }
 
     if (!$id_document) {
-      $id_document = @spip_fetch_array(spip_query("select id_document from spip_documents as documents where documents.fichier='".$file."'"));
+      $id_document = @spip_fetch_array(spip_query("select id_document from spip_documents as documents where documents.fichier='".addslashes($file)."'"));
       if (!$id_document) $refus = 2;
       $id_document = $id_document['id_document'];
     } else {
