@@ -78,6 +78,16 @@ function exec_auteur_infos_dist() {
 			'data'=>'')
 		);
 
+		// Interface de logo
+		$iconifier = charger_fonction('iconifier', 'inc');
+		if ($id_auteur > 0)
+			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+
+		// nouvel auteur : le hack classique
+		else if ($fiche)
+			echo $iconifier('id_auteur',
+			0 - $GLOBALS['auteur_session']['id_auteur'],
+			'auteur_infos');
 
 		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',
@@ -86,22 +96,6 @@ function exec_auteur_infos_dist() {
 						    'id_auteur'=>$id_auteur),
 				    'data'=>'')
 			      );
-
-
-		// Interface de logo
-		if ($spip_display != 4) {
-			$iconifier = charger_fonction('iconifier', 'inc');
-
-			if ($id_auteur > 0)
-				echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
-
-			// nouvel auteur : le hack classique
-			else if ($fiche)
-				echo $iconifier('id_auteur',
-				0 - $GLOBALS['auteur_session']['id_auteur'],
-				'auteur_infos');
-		}
-
 		echo debut_droite('', true);
 
 		echo debut_cadre_relief("redacteurs-24.gif", true);
@@ -130,24 +124,13 @@ function exec_auteur_infos_dist() {
 // http://doc.spip.org/@cadre_auteur_infos
 function cadre_auteur_infos($id_auteur, $auteur)
 {
-	global $connect_statut;
-
-	if (!$id_auteur) return '';
-
-	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
-	. _T('titre_cadre_numero_auteur')
-	. "<br /><span class='spip_xx-large'>"
-	. $id_auteur
-	. '</span></div>';
-
-// "Voir en ligne" si l'auteur a un article publie
-// seuls les admins peuvent "previsualiser" une page auteur
-	$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND lien.id_article=articles.id_article AND articles.statut='publie'"));
-
-	if ($n)
-	  $res .= voir_en_ligne ('auteur', $id_auteur, 'publie', 'racine-24.gif', false);
-	else if (autoriser('voir', 'auteur'))
-	  $res .= voir_en_ligne ('auteur', $id_auteur, 'prop', 'racine-24.gif', false);
+	$boite = pipeline ('boite_infos', array('data' => '',
+		'args' => array(
+			'type'=>'auteur',
+			'id' => $id_auteur,
+			'row' => $auteur
+		)
+	));
 
 	return debut_boite_info(true) . $res . fin_boite_info(true);
 }
