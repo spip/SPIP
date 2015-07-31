@@ -129,7 +129,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		// marquer les documents vus dans le texte si il y a lieu
 		include_spip('base/auxiliaires');
 		if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
-			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet);
+			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
 
 		// Notifications, gestion des revisions...
 		// en standard, appelle |nouvelle_revision ci-dessous
@@ -158,13 +158,15 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 }
 
 // http://doc.spip.org/@marquer_doublons_documents
-function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet){
+function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
+	if (!$desc) $desc = $trouver_table($table_objet, $serveur);
 	$load = "";
 
 	// charger le champ manquant en cas de modif partielle de l'objet
-	if (!isset($champs['texte'])) $load = 'texte';
-	if (!isset($champs['chapo'])) $load = 'chapo';
+	// seulement si le champ existe dans la table demande
+	if (!isset($champs['texte']) && isset($desc['field']['texte'])) $load = 'texte';
+	if (!isset($champs['chapo']) && isset($desc['field']['chapo'])) $load = 'chapo';
 	if ($load){
 		$champs[$load] = "";
 		$row = sql_fetsel($load, $spip_table_objet, "$id_table_objet=".sql_quote($id));
