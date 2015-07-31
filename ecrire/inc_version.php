@@ -437,7 +437,7 @@ error_reporting(SPIP_ERREUR_REPORT);
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
 
-if (@is_readable(_CACHE_PLUGINS_OPT)){
+if (@is_readable(_CACHE_PLUGINS_OPT) AND @is_readable(_CACHE_PLUGINS_PATH)){
 	// chargement optimise precompile
 	include_once(_CACHE_PLUGINS_OPT);
 } else {
@@ -446,6 +446,8 @@ if (@is_readable(_CACHE_PLUGINS_OPT)){
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
 	if (verif_plugin()) {
+		if (@is_readable(_CACHE_PLUGINS_PATH))
+			include_once(_CACHE_PLUGINS_PATH); // securite : a priori n'a pu etre fait plus tot
 		if (@is_readable(_CACHE_PLUGINS_OPT))
 			include_once(_CACHE_PLUGINS_OPT);
 		else spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT); 

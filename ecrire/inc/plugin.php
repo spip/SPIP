@@ -288,29 +288,36 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// generer les fichier
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
-	foreach(array('options','fonctions') as $charge){
-		$s = "error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n";
+	foreach(array('chemins'=>_CACHE_PLUGINS_PATH,'options'=>_CACHE_PLUGINS_OPT,'fonctions'=>_CACHE_PLUGINS_FCT) as $charge=>$fileconf){
+		$s = "";
+		if ($charge!=='chemins')
+			$s .= "error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n";
 		$splugs = "";
+		$chemins = array();
 		if (is_array($infos)){
 			foreach($ordre as $plug){
 				$info = $infos[$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
-				if ($charge=='options'){
+				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
 					foreach($info['path'] as $chemin){
 						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])){
-							if (isset($chemin['type']))
-								$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
 							$dir = $chemin['dir'];
 							if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-							$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+							if (!isset($chemin['type']) OR $chemin['type']=='public')
+								$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+							if (!isset($chemin['type']) OR $chemin['type']=='prive')
+								$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+							#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
+							#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
 						}
 					}
 					//$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
 					//$splugs .= "\n";
 				}
+				// concerne uniquement options et fonctions
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
 						$s .= "include_once _ROOT_PLUGINS.'$plug/".trim($file)."';\n";
@@ -319,13 +326,19 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				}
 			}
 		}
-		$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
+		if ($charge!=='chemins')
+			$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
+		if ($charge=='chemins'){
+			if (count($chemins)){
+				$splugs .= "if (_DIR_RESTREINT) _chemin(implode(':',array(".implode(',',array_reverse($chemins['public'])).")));\n";
+				$splugs .= "else _chemin(implode(':',array(".implode(',',array_reverse($chemins['prive'])).")));\n";
+			}
+		}
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
 			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
-			$f = _CACHE_PLUGINS_OPT;
-		} else  $f = _CACHE_PLUGINS_FCT;
-		ecrire_fichier($f, $start_file . $splugs . $s . $end_file);
+		}
+		ecrire_fichier($fileconf, $start_file . $splugs . $s . $end_file);
 	}
 
 	if (is_array($infos)){
