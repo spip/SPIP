@@ -24,7 +24,7 @@ include_spip('inc/lang');
 if ($f = find_in_path('mes_fonctions.php')
 OR $f = find_in_path('mes_fonctions.php3')) {
 	global $dossier_squelettes;
-	@include ($f); 
+	include ($f);
 }
 if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	// chargement optimise precompile
