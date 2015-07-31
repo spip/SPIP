@@ -94,8 +94,7 @@ function liste_plugin_valides($liste_plug, $force = false)
 
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
-	$get_infos = charger_fonction('get_infos','plugins');
-	$infos['_DIR_RESTREINT'][''] = $get_infos('./',$force,_DIR_RESTREINT,'core.xml');
+	$infos['_DIR_RESTREINT'][''] = $get_infos('./',$force,_DIR_RESTREINT,'plugin.xml');
 	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
 	$infos['_DIR_RESTREINT']['SPIP']['path'] = array();
 	$liste_non_classee = array('SPIP'=>array(
@@ -113,7 +112,6 @@ function liste_plugin_valides($liste_plug, $force = false)
 		$procure['etat'] = '?';
 		$procure['dir_type'] = '_DIR_RESTREINT';
 		$procure['dir'] = '';
-		$procure['etat'] = '?';
 		$liste_non_classee[strtoupper($procure['id'])] = $procure;
 	}
 	
