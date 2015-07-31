@@ -93,7 +93,7 @@ function debusquer_contexte($env) {
 // et en mode validation (fausse erreur "double occurrence insert_head")
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
 // http://doc.spip.org/@affiche_erreurs_page
-function affiche_erreurs_page($tableau_des_erreurs, $message='') {
+function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 
 	if (_request('exec')=='valider_xml' OR !$tableau_des_erreurs)
 		return '';
@@ -111,7 +111,9 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		$i++;
 	}
 	$cols = 1+count($err);
-	$style = (_DIR_RESTREINT AND headers_sent()) ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
+	if (_DIR_RESTREINT AND headers_sent())
+		$style = "z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" 
+		  . ($style ? $style : " position: absolute; top: 90px; left: 10px; width: 200px;");
 
 	return "\n<table id='spip-debug' cellpadding='2'  border='1'
 	style='text-align: left;$style'><tr><th style='text-align: center' colspan='$cols'>"
@@ -317,14 +319,13 @@ function debusquer_squelette ($texte, $fonc) {
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
 	if (ob_get_length()) ob_end_clean();
-	$self = str_replace("\\'", '&#39;', self());
-	$self = parametre_url($self,'var_mode', 'debug');
 	echo debusquer_entete($fonc ? $fonc : $debug_objets['principal']);
 	echo "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
-	if (!$texte AND !$fonc)
-		echo affiche_erreurs_page($tableau_des_erreurs);
+	echo affiche_erreurs_page($GLOBALS['tableau_des_erreurs'], '', 'text-align: center;');
 	$titre = _request('var_mode_affiche');
 	$validation = ($titre == 'validation');
+	$self = str_replace("\\'", '&#39;', self());
+	$self = parametre_url($self,'var_mode', 'debug');
 
 	if (!$validation) {
 		echo "<div id='spip-boucles'>\n"; 
