@@ -301,12 +301,8 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	if (!$texte) {
 		$texte = str_replace('"', '', $lien);
 		// evite l'affichage de trops longues urls.
-		// personnalisation possible dans mes_options
-		$long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
-		$coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
-		if (strlen($texte)>$long_url) {
-			$texte = substr($texte,0,$coupe_url).'...';
-		}
+		$lien_court = charger_fonction('lien_court', 'inc');
+		$texte = $lien_court($texte);
 		$texte = "<html>".quote_amp($texte)."</html>";
 	}
 
