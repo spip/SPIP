@@ -1016,6 +1016,7 @@ function objet_type($table_objet, $serveur=''){
 	// dans le pipeline declarer_tables_objets_surnoms
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$ts=lister_tables_spip($serveur);
+	$desc = false;
 	if (in_array($table_objet,$ts))
 		$desc = $trouver_table($table_objet);
 	if (!$desc AND in_array($table_objet=table_objet($type,$serveur),$ts))
