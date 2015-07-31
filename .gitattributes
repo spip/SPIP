@@ -283,6 +283,7 @@ ecrire/inc_controle_petition.php -text
 ecrire/inc_cookie.php -text
 ecrire/inc_distant.php -text
 ecrire/inc_forum_admin.php -text
+ecrire/inc_forum_envoi.php3 -text
 ecrire/inc_headers.php -text
 ecrire/inc_install.php -text
 ecrire/inc_js_menu_rubriques.php -text
