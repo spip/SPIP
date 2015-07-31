@@ -646,7 +646,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	else
 		$aff_boucles = "pas de boucle";
 
-	$squelette_compile = "
+	$squelette_compile = "<"."?php
 /*
  * Squelette : $sourcefile
  * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
@@ -668,7 +668,8 @@ function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 		'invalideurs' => \$Cache
 	);
 }
-";
+
+?".">";
 
 	if ($GLOBALS['var_debug'])
 		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
