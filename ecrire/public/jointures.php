@@ -512,7 +512,7 @@ function trouver_jointure_champ($champ, &$boucle, $jointures = false, $cond = fa
 	$cle = trouver_champ_exterieur($champ, $jointures, $boucle);
 	if ($cle){
 		$desc = $boucle->show;
-		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, $cond);
+		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, '', $cond);
 	}
 	if ($cle) return $cle;
 	spip_log("trouver_jointure_champ: $champ inconnu");
