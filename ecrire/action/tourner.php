@@ -38,7 +38,7 @@ function action_tourner_post($r)
 
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $r[2];
-	$src = copie_locale($row['fichier']);
+	$src = copie_locale(get_spip_doc($row['fichier']));
 	if (preg_match(',^(.*)-r(90|180|270)\.([^.]+)$,', $src, $match)) {
 		$effacer = $src;
 		$src = $match[1].'.'.$match[3];
@@ -92,7 +92,8 @@ function action_tourner_post($r)
 
 	// succes !
 	if ($largeur>0 AND $hauteur>0) {
-		spip_query("UPDATE spip_documents SET fichier='".addslashes($dest)."', largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
+		$f = "'" . addslashes(set_spip_doc($dest)) . "'";
+		spip_query("UPDATE spip_documents SET fichier=$f, largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
 		if ($effacer) {
 			spip_log("j'efface $effacer");
 			@unlink($effacer);

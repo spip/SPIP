@@ -62,8 +62,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 // http://doc.spip.org/@image_pattern
 function image_pattern($vignette) {
 	return "<img src='"
-			. _DIR_RACINE
-			. $vignette['fichier']."'
+			. get_spip_doc($vignette['fichier'])."'
 			alt=' '
 			width='".$vignette['largeur']."'
 			height='".$vignette['hauteur']."' />";
@@ -84,7 +83,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = image_pattern($vignette);
 			} else {
 				include_spip('inc/filtres');
-				$image = filtrer('image_reduire', _DIR_RACINE .$vignette['fichier'], 120, 110, false, true);
+				$image = filtrer('image_reduire', get_spip_doc($vignette['fichier']), 120, 110, false, true);
 			}
 	}
 	else if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false
@@ -93,7 +92,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		include_spip('inc/filtres');
 
 		if ($document['distant'] != 'oui')
-			$image = _DIR_RACINE.$document['fichier'];
+			$image = get_spip_doc($document['fichier']);
 
 		if ($portfolio) {
 			$image = filtrer('image_reduire',	$image,	110, 120, false, true);
@@ -257,7 +256,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
 
-	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+	$result = spip_query("SELECT titre,inclus,extension FROM spip_types_documents WHERE id_type=$id_type");
 	if ($letype = @spip_fetch_array($result)) {
 		$type_extension = $letype['extension'];
 		$type_inclus = $letype['inclus'];

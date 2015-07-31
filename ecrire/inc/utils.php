@@ -235,6 +235,12 @@ function _q($a) {
 	return (is_int($a)) ? strval($a) : ("'" . addslashes($a) . "'");
 }
 
+function set_spip_doc($fichier) {return $fichier;}
+function get_spip_doc($fichier) {return _DIR_RACINE . $fichier;}
+// pour bientot:
+//function set_spip_doc($fichier) {return substr($fichier, strlen(_DIR_IMG));}
+//function get_spip_doc($fichier) {return _DIR_IMG . $fichier;}
+
 // Renvoie le _GET ou le _POST emis par l'utilisateur
 // ou pioche dans $c si c'est un array()
 // http://doc.spip.org/@_request

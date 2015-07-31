@@ -438,8 +438,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
-		return preg_replace(',^' . preg_quote(_DIR_IMG).',', '',
-			extraire_attribut($logo, 'src'));
+		return substr(extraire_attribut($logo, 'src'), strlen(_DIR_IMG));
 
 
 	// Calculer le code html complet (cf. calcule_logo)
