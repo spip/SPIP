@@ -934,7 +934,7 @@ function resolve_path($url) {
 	OR preg_match(',^/\.\./,', $url, $regs))		# supprime les /../ du haut
 		$url = str_replace($regs[0], '/', $url);
 
-	return $url;
+	return '/'.preg_replace(',^/,', '', $url);
 }
 
 // 

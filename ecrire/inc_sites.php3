@@ -140,8 +140,9 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 			while ($s = trim(fgets($f, 16384))) {
 				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
-					$location = $r[1];
-					spip_log($s);
+					include_ecrire('inc_filtres.php3');
+					$location = suivre_lien($url, $r[1]);
+					spip_log("Location: $location");
 				}
 			}
 			if ($status >= 300 AND $status < 400 AND $location) $url = $location;
