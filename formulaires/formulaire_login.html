@@ -24,9 +24,7 @@
 			</label>
 ][
 <div>
-[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|cherche_logo{aut,on}|array_shift)"
-	width="75"
-	alt="[(#ENV{login_alt})]" /></div>]
+[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;">(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})</div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
 document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a style='color: #e86519' href='[(#ENV{action2}
