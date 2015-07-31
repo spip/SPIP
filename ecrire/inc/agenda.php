@@ -23,6 +23,8 @@ include_spip('inc/texte'); // inclut inc_filtre
 /// ceux-ci apparaissent TOUJOURS dans cet ordre 
 
 define('DEFAUT_D_ECHELLE',120); # 1 pixel = 2 minutes
+define('DEFAUT_DECALE', 4); # marge gauche en EM
+define('DEFAUT_TAILLE_HEURE', 0.7); # marge gauche en EM
 
 define('DEFAUT_PARTIE_M', "matin");
 define('DEFAUT_PARTIE_S', "soir");
@@ -626,7 +628,7 @@ function http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, $large
 
 	list($dimheure, $dimjour, $fontsize, $padding) =
 	  calendrier_echelle($debut, $fin, $echelle);
-	$size = sprintf("%0.2f", 0.7+(10/$echelle));
+	$size = sprintf("%0.2f", DEFAUT_TAILLE_HEURE+(10/$echelle));
 	$style .= "height:${dimjour}px;font-size:${size}em;";
 	$date = date("Ymd", mktime(0,0,0,$mois, $jour, $annee));
 
@@ -705,7 +707,8 @@ function http_calendrier_ics_div($evts, $date, $debut, $fin, $dimheure, $dimjour
 		$hauteur = calendrier_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour);
 
 		if ($bas_prec >= $haut) $decale += 1;
-		else $decale = ($echelle >= 120) ? 4 : 3;
+		else $decale = DEFAUT_DECALE -
+		       (($echelle >= DEFAUT_D_ECHELLE) ? 0 : 1);
 		if ($bas > $bas_prec) $bas_prec = $bas;
 			
 		$colors = $evenement['CATEGORIES'];
@@ -731,7 +734,7 @@ function http_calendrier_ics_div($evts, $date, $debut, $fin, $dimheure, $dimjour
 			$sum .= "\n<span class='calendrier-attendee $colors'>$perso</span>";
 		$sum = pipeline('agenda_rendu_evenement',array('args'=>array('evenement'=>$evenement,'type'=>'ics'),'data'=>$sum));
 
-		$width = ($largeur - 2 * ($padding+1));
+		$width = $largeur - ($padding<<1) - DEFAUT_DECALE;
 		$fontsize = sprintf("%0.2f", 1+(10/$echelle));
 		$style = "z-index:${i};${spip_lang_left}:${decale}em;top:${haut}px;height:${hauteur}px;width:${width}px;font-size:${fontsize}em;padding:${padding}px;$bordure";
 		$total .= "\n<div class='$colors calendrier-evt' style='$style'
