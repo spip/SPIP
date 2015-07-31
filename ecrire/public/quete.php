@@ -186,7 +186,6 @@ function vignette_logo_document($row, $connect='')
 // http://doc.spip.org/@calcul_exposer
 function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	static $exposer = array();
-	static $ref_precedente =-1;
 
 	// Que faut-il exposer ? Tous les elements de $reference
 	// ainsi que leur hierarchie ; on ne fait donc ce calcul
@@ -196,7 +195,10 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 		$principal = isset($reference[$type])?$reference[$type]:
 			// cas de la pagination indecte @xx qui positionne la page avec l'id xx
 			// et donne la reference dynamique @type=xx dans le contexte
-			isset($reference["@$type"])?$reference["@$type"]:'';
+			(isset($reference["@$type"])?$reference["@$type"]:'');
+		// le parent fournit en argument est le parent de $id, pas celui de $principal
+		// il n'est donc pas utile
+		$parent = 0;
 		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
 			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
 			if (isset($enfants[$type]))
@@ -206,12 +208,10 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 						OR isset($reference["@$t"])) {
 						$type = $t;
 						$principal = isset($reference[$type])?$reference[$type]:$reference["@$type"];
-						$parent=0;
 						continue;
 					}
 		}
 		$exposer[$m][$type] = array();
-		$parent = intval($parent);
 		if ($principal) {
 			$principaux = is_array($principal)?$principal:array($principal);
 			foreach($principaux as $principal){
