@@ -738,10 +738,11 @@ function load_extension($module) {
 			$GLOBALS['meta']['dl_allowed'] = false;
 		}
 
-		// Attention, a l'installation le ecrire_meta() echouera ;
-		// d'ou cette ecriture un peu bizarre.
-		include_spip('inc/meta');
-		ecrire_meta('dl_allowed', $GLOBALS['meta']['dl_allowed'], 'non');
+		// Attention, le ecrire_meta() echouera si on le tente ici ;
+		// donc on ne fait rien, et on attend qu'un prochain ecrire_meta()
+		// se produisant apres cette sequence enregistre sa valeur.
+		#include_spip('inc/meta');
+		#ecrire_meta('dl_allowed', $GLOBALS['meta']['dl_allowed'], 'non');
 	}
 
 	if (!$GLOBALS['meta']['dl_allowed']) {
