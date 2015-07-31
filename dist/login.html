@@ -12,15 +12,25 @@
 	<meta name="robots" content="none" />
 	<meta name="generator" content="SPIP" />
 	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
-	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" />
 	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
-	<style><!--
+	<style>
+	<!--
+		body#page_login { background: #fff; text-align: center; font-size: 1em; }
+		.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.77em; }
+		.formulaire_menu_lang { float: #LANG_RIGHT; }
+		.formulaire_menu_lang label { display: none; }
+		.formulaire_login { clear: both; }
+		.spip_logos { float: right; padding-left: 10px; }
+		.forml { width: 12em; }
+		.spip_bouton {}
+		.reponse_formulaire { font-weight: bold; color: red; }
 		a { color: #e86519; text-decoration: none; }
-	--></style>
+	-->
+	</style>
 </head>
-<body id="page_login" style="background: #fff; text-align: center; font-size: 1em;">
+<body id="page_login">
 
-<div style="clear: both; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
+<div style="text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
 
 		<h3 class="spip">#NOM_SITE_SPIP<br />
 			<small><:login_acces_prive:></small>
@@ -28,10 +38,10 @@
 
 		#MENU_LANG_ECRIRE
 
-		<div class="formulaire_spip formulaire_login" style="clear: both;">
+		<div class="formulaire_spip formulaire_login">
 			#LOGIN_PRIVE
 
-			<p style="clear: both; text-align: center;">
+			<p style="text-align: center;">
 			[&#91;<a href="#URL_PAGE{spip_inscription,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
 			&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
 			&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
