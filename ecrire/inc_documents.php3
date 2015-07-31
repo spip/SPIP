@@ -168,7 +168,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			if ($largeur_vignette < 120) $largeur_vignette = 120;
 			$forcer_largeur = " width = '$largeur_vignette'";
 
-			$retour = "<table cellpadding='0' cellspacing='0' style='border-width: 0px' align='$align'>\n";
+			$retour = "<table style='border-width: 0px; padding: 0px; margin: 0px; text-align: $align;'>\n";
 			$retour .= "<tr>";
 			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
 			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
