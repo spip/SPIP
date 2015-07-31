@@ -419,7 +419,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$nom_auteur = typo($row['nom']);
 					$auteur_messagerie = $row['messagerie'];
 
-					$les_auteurs .= ", $nom_auteur";
+					$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom_auteur</a>";
 					if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non" AND $activer_messagerie != "non") {
 						$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
 					}
