@@ -6,10 +6,11 @@
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
 	 style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
 	<a href="(#ENV{lien})"[
-		class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'
-		[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][
-			title="(#TITRE|attribut_html)"]
-			alt="[(#TITRE|attribut_html)]" />[(#ENV{lien}|?{</a>})]</span>
+		class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[
+		width="(#LARGEUR**|>{0}|?{#LARGEUR})"][
+		height="(#HAUTEUR**|>{0}|?{#HAUTEUR})"][
+		title="(#TITRE|attribut_html)"]
+		alt="[(#TITRE|attribut_html)]" />[(#ENV{lien}|?{</a>})]</span>
 ][
 
 (#REM) Cas <embXX> : on est appele ici avec emb=' ' : on veut la legende
