@@ -17,12 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 include_spip('inc/lang');
-include_spip('inc/acces');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
-if ($f = find_in_path('mes_fonctions.php')
-OR $f = find_in_path('mes_fonctions.php3')) {
+if ($f = find_in_path('mes_fonctions.php')) {
 	global $dossier_squelettes;
 	include ($f);
 }
