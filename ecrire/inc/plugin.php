@@ -59,10 +59,13 @@ function liste_plugin_files($dir_plugins = null){
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,',$intervalle,$regs)) return false;
+	// Extraction des bornes et traitement de * pour la borne sup :
+	// -- on autorise uniquement les ecritures 3.0.*, 3.*
 	$minimum = $regs[1];
 	$maximum = $regs[2];
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
+
 	if (strlen($minimum)){
 		if ($minimum_inc AND spip_version_compare($version,$minimum,'<')) return false;
 		if (!$minimum_inc AND spip_version_compare($version,$minimum,'<=')) return false;
@@ -89,7 +92,31 @@ function liste_plugin_valides($liste_plug, $force = false)
 		'_DIR_PLUGINS' => $get_infos($liste_plug, $force, _DIR_PLUGINS)
 		       );
 
-	$liste_non_classee = array();
+	// creer une premiere liste non ordonnee mais qui ne retient
+	// que les plugins valides, et dans leur derniere version en cas de doublon
+	$get_infos = charger_fonction('get_infos','plugins');
+	$infos['_DIR_RESTREINT'][''] = $get_infos('./',$force,_DIR_RESTREINT,'core.xml');
+	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
+	$infos['_DIR_RESTREINT']['SPIP']['path'] = array();
+	$liste_non_classee = array('SPIP'=>array(
+		'nom' => 'SPIP',
+		'etat' => 'stable',
+		'version' => $GLOBALS['spip_version_branche'],
+		'dir_type' => '_DIR_RESTREINT',
+		'dir'=> '',
+	)
+	);
+
+	// les procure de core.xml sont consideres comme des plugins installes
+	foreach($infos['_DIR_RESTREINT']['']['procure'] as $procure) {
+		$procure['nom'] = $procure['id'];
+		$procure['etat'] = '?';
+		$procure['dir_type'] = '_DIR_RESTREINT';
+		$procure['dir'] = '';
+		$procure['etat'] = '?';
+		$liste_non_classee[strtoupper($procure['id'])] = $procure;
+	}
+	
 	foreach($liste_ext as $plug){
 	  if (isset($infos['_DIR_EXTENSIONS'][$plug]))
 	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_EXTENSIONS');
@@ -390,7 +417,7 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		}
 	}
 
-	$contenu['options'] .= plugin_ongletbouton("boutons_plugins", $boutons)
+	$contenu['fonctions'] .= plugin_ongletbouton("boutons_plugins", $boutons)
 	. plugin_ongletbouton("onglets_plugins", $onglets);
 
 	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $contenu['options']);
