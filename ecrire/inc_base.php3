@@ -37,7 +37,6 @@ function spip_create($nom, $champs, $cles, $f=false)
 		(($f && ($p == $k)) ? " auto_increment" : '');
       $s = ",";
     }
-  if (!$f)  spip_query ("DROP TABLE IF EXISTS $nom;");
   $query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
     	($keys ? ",$keys" : '') .
     	")\n";
