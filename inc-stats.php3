@@ -107,6 +107,8 @@ function ecrire_stats() {
 
 
 function afficher_raccourci_stats($id_article) {
+	include_ecrire("inc_connect.php3");
+
 	$query = "SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
 	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
