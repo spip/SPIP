@@ -669,12 +669,13 @@ function plugin_get_infos($plug, $force_reload=false){
 // http://doc.spip.org/@plugin_verifie_conformite
 function plugin_verifie_conformite($plug,&$arbre){
 	$silence = false;
-	if (isset($arbre['plugin'])&&is_array($arbre['plugin']))
+	if (isset($arbre['plugin']) AND is_array($arbre['plugin']))
 		$arbre = end($arbre['plugin']); // derniere def plugin
 	else{
 		$arbre = array('erreur' => array(_T('erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
 		$silence = true;
 	}
+	if (!is_array($arbre)) $arbre = array();
   // verification de la conformite du plugin avec quelques
   // precautions elementaires
   if (!isset($arbre['nom'])){
