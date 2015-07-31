@@ -108,7 +108,7 @@ function bouton_block_invisible($nom_block) {
 				$numero_block["$nom_block"] = $compteur_block;
 			}
 
-			$javasc .= "swap_couche(\\'$compteur_block\\');";
+			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\');";
 		}
 		$retour = "\n<script language='JavaScript'><!--\n";
 		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut.gif\" alt=\"D&eacute;plier\" title=\"D&eacute;plier\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";

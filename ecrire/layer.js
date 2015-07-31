@@ -9,14 +9,14 @@ function MM_findObj(n, d) { //v4.0
 }
 
 function swap_couche(couche){
-	if (!(triangle = MM_findObj('triangle' + couche))) return;
+	triangle = MM_findObj('triangle' + couche);
 	if (!(layer = MM_findObj('Layer' + couche))) return;
 	if (vis[couche] == 'hide'){
-		triangle.src = 'img_pack/deplierbas.gif';
+		if (triangle) triangle.src = 'img_pack/deplierbas.gif';
 		layer.style.display = 'block';
 		vis[couche] = 'show';
 	} else {
-		triangle.src = 'img_pack/deplierhaut.gif';
+		if (triangle) triangle.src = 'img_pack/deplierhaut.gif';
 		layer.style.display = 'none';
 		vis[couche] = 'hide';
 	}
