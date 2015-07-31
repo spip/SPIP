@@ -165,7 +165,7 @@ function nettoyer_url_page($url, $contexte=array())
 	$url_objets = urls_liste_objets();
 	$raccourci_url_page_html = ',^(?:[^?]*/)?('. $url_objets . ')([0-9]+)(?:\.html)?([?&].*)?$,';
 	$raccourci_url_page_id = ',^(?:[^?]*/)?('. $url_objets .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,';
-	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)(&.*)?$,';
+	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)=?(&.*)?$,';
 
 	if (preg_match($raccourci_url_page_html, $url, $regs)
 	OR preg_match($raccourci_url_page_id, $url, $regs)
