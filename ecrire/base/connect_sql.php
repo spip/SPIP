@@ -27,6 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_connect($serveur='', $version='') {
 	global $connexions, $spip_sql_version;
 
+	$serveur = strtolower($serveur);
 	$index = $serveur ? $serveur : 0;
 	if (!$version) $version = $spip_sql_version;
 	if (isset($connexions[$index][$version])) return $connexions[$index];
@@ -34,7 +35,7 @@ function spip_connect($serveur='', $version='') {
 	include_spip('base/abstract_sql');
 	$install = (_request('exec') == 'install');
 
-	// Premiere connexion ? 
+	// Premiere connexion ?
 	if (!($old = isset($connexions[$index]))) {
 		$f = (!preg_match('/^[\w\.]*$/', $serveur))	? ''
 		: (($serveur AND !$install) ?
@@ -53,7 +54,7 @@ function spip_connect($serveur='', $version='') {
 		}
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
-			if ($install) return false; 
+			if ($install) return false;
 			spip_log("spip_connect: serveur $index mal defini dans '$f'.");
 			// ne plus reessayer si ce n'est pas l'install
 			return $connexions[$index]=false;
@@ -62,7 +63,7 @@ function spip_connect($serveur='', $version='') {
 	}
 	// si la connexion a deja ete tentee mais a echoue, le dire!
 	if (!$connexions[$index]) return false;
-	
+
 	// la connexion a reussi ou etait deja faite.
 	// chargement de la version du jeu de fonctions
 	// si pas dans le fichier par defaut
@@ -71,7 +72,7 @@ function spip_connect($serveur='', $version='') {
 	if (!isset($GLOBALS[$jeu])) {
 		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)){
 		  spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'");
-			// ne plus reessayer 
+			// ne plus reessayer
 			return $connexions[$index][$version] = array();
 		}
 	}
@@ -141,7 +142,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	AND !defined('_ECRIRE_INSTALL')) {
 		return;
 	}
-	if (!$prefixe) 
+	if (!$prefixe)
 		$prefixe = isset($GLOBALS['table_prefix'])
 		? $GLOBALS['table_prefix'] : $db;
 	$h = charger_fonction($type, 'req', true);
@@ -163,7 +164,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	}
 }
 
-// Premiere connexion au serveur principal: 
+// Premiere connexion au serveur principal:
 // retourner le charset donnee par la table principale
 // mais verifier que le fichier de connexion n'est pas trop vieux
 // Version courante = 0.7 (indication d'un LDAP comme 7e arg)
@@ -207,7 +208,7 @@ function spip_connect_ldap($serveur='') {
 
 // http://doc.spip.org/@_q
 function _q ($a) {
-	return (is_numeric($a)) ? strval($a) : 
+	return (is_numeric($a)) ? strval($a) :
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));
 }
@@ -280,12 +281,12 @@ function objet_type($table_objet){
 	// et la marque du pluriel
 	$type = preg_replace(',^spip_|s$,', '', $table_objet);
 	// si le type redonne bien la table c'est bon
-	if ( (table_objet($type)==$table_objet) 
+	if ( (table_objet($type)==$table_objet)
 	  OR (table_objet_sql($type)==$table_objet))
 	  return $type;
-	
+
 	// sinon on passe par la cle primaire id_xx pour trouver le type
-	// car le s a la fin est incertain 
+	// car le s a la fin est incertain
 	// notamment en cas de pluriel derogatoire
 	// id_jeu/spip_jeux id_journal/spip_journaux qui necessitent tout deux
 	// une declaration jeu => jeux, journal => journaux
@@ -299,7 +300,7 @@ function objet_type($table_objet){
 		$type = preg_replace(',^id_,', '', $primary);
 	}
 	// on a fait ce qu'on a pu
-	return $type;	
+	return $type;
 }
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
