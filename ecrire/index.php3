@@ -57,12 +57,10 @@ if ($spip_display != 4) {
 
 
 	if ($spip_display != 1) {
-		include_ecrire("inc_logos.php3");
-	
-		$logo = decrire_logo("rubon0");
-		if ($logo) {
+		include_ecrire('inc_logos.php3');
+		if ($logo = decrire_logo("rubon0")) {
 			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'>";
-			echo $logo[2];
+			echo reduire_image_logo(_DIR_IMG.$logo[0], 170);
 			echo "</a></div>";
 		}
 	}
