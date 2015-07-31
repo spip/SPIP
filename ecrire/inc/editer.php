@@ -29,6 +29,7 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	return $message;
 }
 
+// http://doc.spip.org/@formulaires_editer_objet_verifier
 function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	$erreurs = array();
 	if (intval($id)) {
