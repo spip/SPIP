@@ -446,11 +446,11 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	if (!$taille_y)
 		$taille_y = $taille;
 
-	// recuperer le nom du fichier (est-ce encore utilise ?)
-	if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
-	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
-	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
-	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
+	// recuperer le nom du fichier
+	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
+	if (eregi("align='([^']+)'", $img, $regs)) $align = $regs[1];
+	if (eregi("name='([^']+)'", $img, $regs)) $name = $regs[1];
+	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
 	if (!$logo) $logo = $img;
 
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
