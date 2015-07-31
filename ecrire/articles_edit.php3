@@ -219,7 +219,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $couleur_claire, $spip_lang_left;
 	global $browser_name, $browser_version;
-
+	global $ja_rub;
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
@@ -293,6 +293,9 @@ function enfant($leparent){
 			$titre = couper(supprimer_tags(typo(extraire_multi($titre)))." ", 50);
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 			echo "<option".mySel($my_rubrique,$id_rubrique)." class='$selec_rub' style=\"$style\">$espace$titre</option>\n";
+		
+		
+			$ja_rub .= addslashes("[$my_rubrique] $titre ///");
 		}
 		$premier = 0;
 		enfant($my_rubrique);
@@ -379,9 +382,90 @@ echo "<P><HR><P>";
 	}
 
 	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
-	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+
+
+	echo "<script language='JavaScript' type='text/javascript'>
+<!--
+/*
+  Author: Justin Whitford
+  Source: www.evolt.org
+*/
+function filtery(pattern, list){
+  /*
+  if the dropdown list passed in hasn't
+  already been backed up, we'll do that now
+  */
+  if (!list.bak){
+    /*
+    We're going to attach an array to the select object
+    where we'll keep a backup of the original dropdown list
+    */
+    list.bak = new Array();
+    for (n=0; n<list.length; n++){
+      list.bak[list.bak.length] = new Array(list[n].value, list[n].text);
+    }
+    bakselected = list.selectedIndex;
+  }
+
+  /*
+  We're going to iterate through the backed up dropdown
+  list. If an item matches, it is added to the list of
+  matches. If not, then it is added to the list of non matches.
+  */
+  match = new Array();
+  nomatch = new Array();
+  
+  if (pattern.length != 0) {
+	  for (n=0; n<list.bak.length; n++){
+		if(list.bak[n][1].toLowerCase().indexOf(pattern.toLowerCase())!=-1 || list.bak[n][0] == pattern ){
+		  match[match.length] = new Array(list.bak[n][0], list.bak[n][1]);
+		}else{
+		  nomatch[nomatch.length] = new Array(list.bak[n][0], list.bak[n][1]);
+		}
+	  }
+  }
+
+  /*
+  Now we completely rewrite the dropdown list.
+  First we write in the matches, then we write
+  in the non matches
+  */
+  
+  if (match.length > 0) {
+	  list.options.length = match.length;
+	  for (n=0; n<match.length; n++){
+		list[n].value = match[n][0];
+		list[n].text = match[n][1];
+	  }
+
+    list.selectedIndex=0;
+  
+  }
+  else {
+	  list.options.length = list.bak.length;
+	  for (n=0; n<list.bak.length; n++){
+		list[n].value =  list.bak[n][0];
+		list[n].text =  list.bak[n][1];
+	  }
+  list.selectedIndex = bakselected;
+  }
+
+}
+// -->
+</script>";
+
+	
+	echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
+
+
+
+
+	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
+	
+	
+	
 	echo _T('texte_rappel_selection_champs');
 	fin_cadre_couleur();
 	
