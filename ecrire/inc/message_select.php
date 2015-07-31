@@ -100,7 +100,7 @@ function presenter_message_boucles($row, $afficher_auteurs)
 			
 	//
 	// Messages de forums
-	if (_DIR_PLUGIN_FORUM
+	if (test_plugin_actif('forum')
 	  AND	$total_forum = sql_countsel('spip_forum', "id_message=$id_message")>0)
 		$vals[] = "($total_forum)";
 	else

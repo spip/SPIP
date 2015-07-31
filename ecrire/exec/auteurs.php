@@ -316,7 +316,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// tri
 	switch ($tri) {
 	case 'nombre':
-		if (!$visit OR defined('_DIR_PLUGIN_FORUM')){
+		if (!$visit OR test_plugin_actif('forum')){
 			$sql_sel = "COUNT(lien.id_article) AS compteur";
 			$sql_order = 'compteur DESC, unom';
 			$join = $visit ?

@@ -60,7 +60,7 @@ function configuration_mots_dist(){
 	. fin_cadre_relief(true);
 
 	// la configuration des mots cles dans les forums est liee a la presence du plugin homonyme
-	if (defined('_DIR_PLUGIN_FORUM')){
+	if (test_plugin_actif('forum')){
 		$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
 		$forums_publics = $GLOBALS['meta']["forums_publics"];
 		if ($forums_publics != "non"){

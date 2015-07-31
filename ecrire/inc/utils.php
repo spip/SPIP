@@ -387,6 +387,17 @@ function test_espace_prive() {
 	return defined('_ESPACE_PRIVE') ? _ESPACE_PRIVE : false;
 }
 
+/**
+ * Verifie la presence d'un plugin active, identifie par son prefix
+ * 
+ *
+ * @param string $plugin
+ * @return bool
+ */
+function test_plugin_actif($plugin){
+	return ($plugin AND defined('_DIR_PLUGIN_'.strtoupper($plugin)))? true:false;
+}
+
 //
 // Traduction des textes de SPIP
 //
