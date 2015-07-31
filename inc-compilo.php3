@@ -62,7 +62,7 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
 		join(", ",$l) .
-		");\n\t\$fichier_inclus = \'$fichier\';\n" .
+		");" .
 		(($dossier_squelettes) ?
 		("
 			if (@file_exists(\'$dossier_squelettes/$fichier\')){
@@ -479,7 +479,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		    if (($res != $t) || ($altern != "''"))
 		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
-		// if ($code) # c'est toujours etre ainsi
+
 		  $codes[]= (!$commentaire ? $code : 
 			     ("/"."* $commentaire *"."/ " . $code));
 	} // foreach
@@ -676,7 +676,6 @@ function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 
 	if ($GLOBALS['var_mode'] == 'debug')
 		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
-
 	return $squelette_compile;
 
 }

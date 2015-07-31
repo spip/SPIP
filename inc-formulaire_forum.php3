@@ -21,10 +21,10 @@ else
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
 global $balise_FORMULAIRE_FORUM_collecte;
-$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'alea', 'hash');
+$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
 
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
-	list ($idr, $idf, $ida, $idb, $ids, $alea, $hash) = $args;
+	list ($idr, $idf, $ida, $idb, $ids) = $args;
 
 	// recuperer les donnees du forum auquel on repond, false = forum interdit
 	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
@@ -32,10 +32,10 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	list($titre, $table, $forums_publics) = $r;
 	return
-		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids, $alea, $hash);
+		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids);
 }
 
-function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $alea, $hash) {
+function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
@@ -52,6 +52,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	  if ($id_syndic) $args .= "id_syndic=$id_syndic";
 	  if ($args && strpos($url,$args)===false) $url .= (strpos($url,'?') ? '&' : '?') . $args;
 	}
+
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
 	$url = ereg_replace("[?&]url=[^&]*", '', $url);
@@ -62,22 +63,39 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	    include_local('inc-login_public.php3');
 	    return login_pour_tous($GLOBALS['var_login'], $url, true, $url, 'forum');
 	  }
-	// au premier appel (pas de http-var nommee "retour")
-	// memoriser l'URL courante pour y revenir apres envoi du message
-	// aux appels suivants, reconduire la valeur.
-	if ($retour = rawurldecode($GLOBALS['_GET']['retour']))
-	  $retour = ereg_replace('&var_mode=recalcul','',$retour);
-	else {
-	  if (!$retour = rawurldecode($GLOBALS['_POST']['retour']))
-	    $retour = $url;
-	}
+
+	$id_rubrique = intval($id_rubrique);
+	$id_forum = intval($id_forum);
+	$id_article = intval($id_article);
+	$id_breve = intval($id_breve);
+	$id_syndic = intval($id_syndic);
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 
 	$previsu = ' ';
 
+	// au premier appel (pas de Post-var nommee "retour_forum")
+	// memoriser l'URL courante pour y revenir apres envoi du message
+	// aux appels suivants, reconduire la valeur.
+	// Initialiser aussi l'auteur
+
+	if (!$retour_forum = rawurldecode($GLOBALS['_POST']['retour_forum'])) {
+		if ($retour_forum = rawurldecode($GLOBALS['_GET']['retour']))
+			$retour_forum = ereg_replace('&var_mode=recalcul','',$retour_forum);
+		else $retour_forum = $url;
+
+		if ($spip_forum_user &&
+		is_array($cookie_user = unserialize($spip_forum_user))) {
+			$auteur = $cookie_user['nom'];
+			$email_auteur = $cookie_user['email'];
+		} else {
+			$auteur = $GLOBALS['auteur_session']['nom'];
+			$email_auteur = $GLOBALS['auteur_session']['email'];
+		}
+
+	} else {
+
 	// Recuperer le message a previsualiser
-	if ($GLOBALS['_POST']['ajout_forum'])  {
 		$titre = $GLOBALS['_POST']['titre'];
 		$texte = $GLOBALS['_POST']['texte'];
 		$auteur = $GLOBALS['_POST']['auteur'];
@@ -126,39 +144,20 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 				$previsu .= "<p align='right' style='color: red;'>"._T('forum_attention_trois_caracteres')."</p>";
 			}
 			else {
-				$previsu .= "<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
+				$previsu .= "<div align='right'><input type='submit' name='confirmer_forum' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
 			}
 			$previsu = "<div class='spip_encadrer'>$previsu</div>\n<br />";
 			// supprimer les <form> de la previsualisation
 			// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 			$previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism", "<\\1no-f\\2", $previsu);
 		}
-	} else {
-		// Premiere edition, initialiser l'auteur
-		if ($spip_forum_user &&
-		is_array($cookie_user = unserialize($spip_forum_user))) {
-			$auteur = $cookie_user['nom'];
-			$email_auteur = $cookie_user['email'];
-		}
-		else {
-			$auteur = $GLOBALS['auteur_session']['nom'];
-			$email_auteur = $GLOBALS['auteur_session']['email'];
-		}
-	}
-
-	$id_rubrique = intval($id_rubrique);
-	$id_forum = intval($id_forum);
-	$id_article = intval($id_article);
-	$id_breve = intval($id_breve);
-	$id_syndic = intval($id_syndic);
 
 	// Une securite qui nous protege contre :
 	// - les doubles validations de forums (derapages humains ou des brouteurs)
-	// - les abus visant ˆ mettre des forums malgre nous sur un article (??)
+	// - les abus visant a mettre des forums malgre nous sur un article (??)
 	// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
 	// afin de ne pas bugguer quand on vide le cache)
 	// Le lock est leve au moment de l'insertion en base (inc-messforum.php3)
-	if ($GLOBALS['_POST']['ajout_forum']) {
 
 		$alea = preg_replace('/[^0-9]/', '', $alea);
 		if(!$alea OR !@file_exists(_DIR_SESSIONS."forum_$alea.lck")) {
@@ -195,7 +194,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		'modere' => (($forums_publics != 'pri') ? '' : _T('forum_info_modere')),
 		'nom_site_forum' => $nom_site_forum,
 		'previsu' => $previsu,
-		'retour' => $retour,
+		'retour_forum' => $retour_forum,
 		'table' => $table,
 		'texte' => $texte,
 		'titre' => $titre,

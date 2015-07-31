@@ -1,16 +1,6 @@
 <?php
-
-// Page inclue ?
 if (defined("_INC_PUBLIC")) {
-	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
-
-	if ($page['process_ins'] == 'html')
-		echo $page['texte'];
-	else
-		eval('?' . '>' . $page['texte']);
-
-	if ($page['lang_select'])
-		lang_dselect();
+	 inclure_page_lang($fond, $delais, $contexte_inclus);
 }
 // Premier appel inc-public
 else {
@@ -36,22 +26,28 @@ else {
 		verifier_visiteur();
 	}
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($_POST)) {
+	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($GLOBALS['_POST'])) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
-	if ($_GET['lang']) {
+	if ($GLOBALS['_GET']['lang']) {
 		include_ecrire('inc_lang.php3');
 		lang_select($_GET['lang']);
 	}
-	// Ajout_forum (pour les forums) et $val_confirm signalent des modifications
-	// a faire avant d'afficher la page
-	if ($ajout_forum) {
-		$redirect = '';
+
+	// Si envoi pour un forum, enregistrer puis rediriger
+
+	if (strlen($GLOBALS['_POST']['confirmer_forum']) > 0
+	OR ($GLOBALS['_POST']['afficher_texte']=='non'
+		AND $GLOBALS['_POST']['ajouter_mot'])) {
 		include('inc-messforum.php3');
-		if ($redirect) redirige_par_entete($redirect);
+		redirige_par_entete(enregistre_forum());
 	}
-	if ($val_confirm) {
+
+	// si signature de petition, l'enregistrer avant d'afficher la page
+	// afin que celle-ci contienne la signature
+
+	if ($GLOBALS['_GET']['val_confirm']) {
 		include_local('inc-formulaire_signature.php3');
 		reponse_confirmation($id_article, $val_confirm);
 	}
@@ -116,8 +112,10 @@ else {
 			$contenu = ob_get_contents(); 
 			ob_end_clean();
 
-			// en cas d'erreur lors du eval, afficher un message
-			// et forcer les boutons de debug
+			// en cas d'erreur lors du eval,
+			// la memoriser dans le tableau des erreurs
+			// et forcer les boutons de debug.
+			// On ne revient pas ici si le nb d'erreurs > 4
 			if ($res === false AND $affiche_boutons_admin
 			AND $auteur_session['statut'] == '0minirezo') {
 				include_ecrire('inc_debug_sql.php3');
@@ -131,9 +129,8 @@ else {
 		include_ecrire("inc_debug_sql.php3");
 		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
 		exit;
-	} else if (count($tableau_des_erreurs) > 0
-	AND $affiche_boutons_admin)
-		affiche_erreurs_page ($tableau_des_erreurs);
+	} else if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
+	  $contenu = affiche_erreurs_page($tableau_des_erreurs) . $contenu;
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {
@@ -144,7 +141,7 @@ else {
 	// Afficher au besoin les boutons admins
 	if ($affiche_boutons_admin) {
 		include_local("inc-admin.php3");
-		affiche_boutons_admin($contenu);
+		$contenu = affiche_boutons_admin($contenu);
 	}
 
 	// Afficher le resultat final
