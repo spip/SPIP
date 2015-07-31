@@ -392,6 +392,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// generer les fichier
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
+	if (defined('_DIR_PLUGINS_SUPPL'))
+		$dir_plugins_suppl = implode(array_filter(explode(':',_DIR_PLUGINS_SUPPL)),'|');
+
 	foreach(array('chemins'=>_CACHE_PLUGINS_PATH,'options'=>_CACHE_PLUGINS_OPT,'fonctions'=>_CACHE_PLUGINS_FCT) as $charge=>$fileconf){
 		$s = "";
 		$splugs = "";
@@ -401,9 +404,13 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				$dir_type = $plugin_valides[$p]['dir_type'];
 				$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
 				$plug = $plugin_valides[$p]['dir'];
-				$dir = $dir_type.".'"
-					. str_replace(constant($dir_type), '', $plug)
-					."/'";
+				if($dir_plugins_suppl && preg_match(',('.$dir_plugins_suppl.'),',$plug)){
+					$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
+				}else{
+					$dir = $dir_type.".'"
+						. str_replace(constant($dir_type), '', $plug)
+						."/'";
+				}
 				$info = $infos[$dir_type][$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
