@@ -43,6 +43,7 @@ function effacer_repertoire_temporaire($nom) {
 		AND is_dir("$nom/$f"))
 			effacer_repertoire_temporaire("$nom/$f");
 	}
+	closedir($d);
 	@rmdir($nom);
 }
 
