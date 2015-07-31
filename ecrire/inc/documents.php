@@ -192,7 +192,8 @@ function formulaire_taille($document) {
 		// ou distants
 		OR $document['distant'] == 'oui'
 		// ou formats dont la taille ne peut etre lue par getimagesize
-		OR $extension=='rm' OR $extension=='mov' OR $extension=='flv'
+		OR $extension=='rm' OR $extension=='mov' 
+		OR $extension=='flv' OR $extension=='mpg'
 	)) {
 		return "\n<br /><b>"._T('entree_dimensions')."</b><br />\n" .
 		  "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
