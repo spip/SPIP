@@ -1113,7 +1113,7 @@ function debut_entete($title, $entete='') {
 //
 function find_in_path ($filename, $path='AUTO') {
 	if ($path == 'AUTO') {
-		$path = '.:squelettes:squelettes/dist:squelettes/dist/formulaires';
+		$path = '.:squelettes:dist:formulaires';
 		if ($GLOBALS['dossier_squelettes'])
 			$path = $GLOBALS['dossier_squelettes'].':'.$path;
 	}

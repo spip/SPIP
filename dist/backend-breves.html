@@ -1,0 +1,32 @@
+<?php echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n"; ?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<channel>
+
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description></description>
+	<language>#LANG</language>
+
+	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>#URL_SITE_SPIP[/(#LOGO_SITE_SPIP||extraire_attribut{src})]</url>
+		<link>#URL_SITE_SPIP/</link>
+		<description></description>
+	</image>
+
+	<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{par date}{inverse}{0,10}>
+	<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>#URL_SITE_SPIP/#URL_BREVE</link>
+		<date>#DATE</date>
+		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_BREVE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#TEXTE|texte_backend)]</description>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+	</item>
+	</BOUCLE_breves>
+
+</channel>
+
+</rss>

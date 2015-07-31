@@ -1,0 +1,44 @@
+<form method='post'
+      action='#SELF#sp[(#ENV{id_article})]' >
+      <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF">
+      <div class='spip_encadrer' style='color: black; font-size: 80%; font-weight: normal;'>
+	[(#ENV*{texte}|propre)]
+	<fieldset style='font-size: 110%; font-weight: bold;'>
+	  <legend></legend>
+	  <label>
+	    <:form_pet_votre_nom:>
+	    <input type="text" class="forml" name="nom_email" value="" size="20" />
+	  </label>
+	  <label>
+	    <:form_pet_votre_email:><br />
+	    <input type="text" class="forml" name="adresse_email" value="" size="20" />
+	  </label>
+	</fieldset>
+	<br />
+	<p>[(#ENV{site_obli}|=={oui}|?{'',' '})<:form_pet_votre_site:><br />]
+	<fieldset style='font-size: 110%; font-weight: bold;'>
+	  <legend></legend>
+	  <label>
+	  <:form_pet_nom_site2:><br />
+	  <input type="text" class="forml" name="signature_nom_site" value="" size="20" />
+	  </label>
+	  <label>
+	    <:form_pet_adresse_site:><br />
+	    <input type="text" class="forml" name="signature_url_site" value="http://" size="20" />
+	  </label>
+	</fieldset>[
+	<br />
+	<fieldset style='font-weight: bold'>
+	  <legend></legend>
+	(#ENV{message}|=={oui}|?{' ',''})
+	  <label>
+	  <:form_pet_message_commentaire:><br />
+	    <textarea name="message" rows="3" class="forml" cols="20"></textarea>
+	  </label>
+	</fieldset>
+	]
+	<br />
+	<div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div>
+      </div>
+</form>
+

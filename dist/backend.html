@@ -1,0 +1,46 @@
+<?php echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n"; ?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description></description>
+	<language>#LANG</language>
+
+	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>#URL_SITE_SPIP[/(#LOGO_SITE_SPIP||extraire_attribut{src})]</url>
+		<link>#URL_SITE_SPIP/</link>
+		<description></description>
+	</image>
+
+	<BOUCLE_10recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{0,10}{unique}>
+		<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+		<date>#DATE</date>
+		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+		<dc:creator><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></dc:creator>
+		</item>
+	</BOUCLE_10recents>
+	<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{age<3}{unique}>
+		<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+		<date>#DATE</date>
+		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+		<author><BOUCLE_auteurs_t(AUTEURS){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_auteurs_t></author>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+		<dc:creator><BOUCLE_auteurs_tb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs_tb></dc:creator>
+		</item>
+	</BOUCLE_tres_recents>
+
+</channel>
+
+</rss>
