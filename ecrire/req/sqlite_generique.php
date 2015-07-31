@@ -1170,7 +1170,19 @@ function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @param string $match
+ *     Filtre sur tables à récupérer
+ * @param string $serveur
+ *     Connecteur de la base
+ * @param bool $requeter
+ *     true pour éxecuter la requête
+ *     false pour retourner le texte de la requête.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	// type est le type d'entrée : table / index / view
 	// on ne retourne que les tables (?) et non les vues...

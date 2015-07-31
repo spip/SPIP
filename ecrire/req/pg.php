@@ -1141,7 +1141,19 @@ function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	return spip_pg_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_pg_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @param string $match
+ *     Filtre sur tables à récupérer
+ * @param string $serveur
+ *     Connecteur de la base
+ * @param bool $requeter
+ *     true pour éxecuter la requête
+ *     false pour retourner le texte de la requête.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
