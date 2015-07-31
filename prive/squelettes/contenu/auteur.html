@@ -35,7 +35,7 @@
 
 	#SET{statuts,#SESSION{statut}|statuts_articles_visibles}
 	[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui) #SET{statuts,''}]
-	[(#PIPELINE{affiche_auteurs_interventions,#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#INCLURE{fond=prive/objets/liste/articles,id_auteur,statut=#GET{statuts},par=date,titre=<:info_articles_auteur:>}}})]
+	[(#PIPELINE{affiche_auteurs_interventions,#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#INCLURE{fond=prive/objets/liste/articles,id_auteur,statut=#GET{statuts},par=date,titre=<:info_articles_auteur:>,env,ajax}}})]
 ]
 
 [(#EVAL{_AJAX}|oui)
