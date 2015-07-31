@@ -309,8 +309,6 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'info_classement_2' => '<NEW>&nbsp;out of @liste@',
 'info_code_acces' => 'Gl&ouml;m inte ditt eget l&ouml;senord!',
 'info_comment_lire_tableau' => 'Hur tolkar man den h&auml;r bilden',
-'info_compresseur_activer' => 'Aktivera komprimering',
-'info_compresseur_desactiver' => 'Avaktivera komprimering',
 'info_compresseur_texte' => '<NEW>If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
 'info_compresseur_titre' => 'Optimering och komprimering',
 'info_config_suivi' => 'Om den h&auml;r adressen &auml;r en mailing lista, kan du under adressen visa var man kan registrera sig. Det kan vara en URL (till exempel en webbsida d&auml;r man kan registrera sig), eller en e-postadress med en speciell &auml;renderad (till exempel: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -478,7 +476,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Kr&auml;vs]',
 'info_option_accepter_visiteurs' => 'Till&aring;t bes&ouml;kare registrera sig p&aring; den publika delen',
-'info_option_email' => '<NEW>When a site visitor posts a message to the forum
+'info_option_email' => '<MODIF>When a site visitor posts a message to the forum
 		associated with an article, the article\'s authors can be
 		informed of this message by e-mail. Do you wish to use this option?',
 'info_option_faire_suivre' => 'Vidarebefordra forummeddelanden till artikelredakt&ouml;ren',
@@ -952,7 +950,7 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
 'texte_effacer_statistiques' => '<NEW>Delete the statistics',
 'texte_en_cours_validation' => '<NEW>The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => '<NEW>You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
-'texte_fichier_authent' => '<NEW><b>Should SPIP create the <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
   These files can be used to restrict access to authors
   and administrators in other parts of your site
@@ -1057,7 +1055,7 @@ irreversible.</b>',
 i SPIP\'s cache. Det g&ouml;r det m&ouml;jligt att tvinga fram en uppdatering av alla sidor om du
 gjort viktiga f&ouml;r&auml;ndringar i sajtens utseende eller struktur.',
 'texte_sur_titre' => '&Ouml;vertitel',
-'texte_syndication' => '<NEW>If a site allows it, it is possible to retrieve automatically
+'texte_syndication' => '<MODIF>If a site allows it, it is possible to retrieve automatically
 		the list of its latest material. To achieve this, you must activate the syndication. 
 		<blockquote><i>Some hosts disable this function; 
 		in this case, you cannot use the content syndication
@@ -1076,7 +1074,7 @@ gjort viktiga f&ouml;r&auml;ndringar i sajtens utseende eller struktur.',
   messages.',
 'texte_trop_resultats_auteurs' => 'F&ouml;r m&aring;nga resultat f&ouml;r "@cherche_auteur@"; Var v&auml;nlig att smalna av fr&aring;gan.',
 'texte_unpack' => '<NEW>downloading the latest version',
-'texte_utilisation_moteur_syndiques' => '<NEW>When you use SPIP\'s integrated search engine, 
+'texte_utilisation_moteur_syndiques' => '<MODIF>When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
  articles syndicated in two different ways. <br />- The simplest
  way is to search only in the

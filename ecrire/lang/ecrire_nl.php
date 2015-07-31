@@ -316,8 +316,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
-'info_compresseur_activer' => 'De samendrukking activeren',
-'info_compresseur_desactiver' => 'Ontactivering van de samendrukking',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
 'info_compresseur_titre' => 'Optimaliseringen en samendrukking',
 'info_config_suivi' => 'Wanneer dit adres van een rondzendlijst is, kan je hieronder het adres opgeven waarlangs deelnemers van de site zich kunnen inschrijven. Dit adres kan een URL zijn (bvb. het webadres voor het inschrijving op de mailinglist), of een e-mailadres met een onderwerp (bvb. <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -484,7 +482,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Verplicht]',
 'info_option_accepter_visiteurs' => 'Inschrijving van bezoekers van de publieke site aanvaarden',
-'info_option_email' => 'Wanneer een bezoeker van de site een bericht post in het forum over een bepaald artikel, kan de auteur van dat artikel via e-mail verwittigd worden. Wil je van deze mogelijkheid gebruik maken?',
+'info_option_email' => '<MODIF>Wanneer een bezoeker van de site een bericht post in het forum over een bepaald artikel, kan de auteur van dat artikel via e-mail verwittigd worden. Wil je van deze mogelijkheid gebruik maken?',
 'info_option_faire_suivre' => 'Berichten van het forum bezorgen aan de auteurs van de artikels',
 'info_option_ne_pas_accepter_visiteurs' => 'Inschrijving van bezoekers weigeren',
 'info_option_ne_pas_faire_suivre' => 'Berichten uit de forums niet laten opvolgen',
@@ -954,7 +952,7 @@ artikel of afzonderlijk getoond worden.<p />',
 'texte_effacer_statistiques' => 'De statistieken uitwissen',
 'texte_en_cours_validation' => 'De artikels en berichten hieronder werden voorgesteld voor publicatie. Aarzel niet om je mening te geven via de forums die er op volgen.',
 'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;typografische snelkoppelingen&raquo;.',
-'texte_fichier_authent' => '<b>Moet SPIP speciale <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Moet SPIP speciale <tt>.htpasswd</tt>
   en <tt>.htpasswd-admin</tt> bestanden aanmaken in de map @dossier@ ?</b><p />
  Deze bestanden zijn nuttig om de toegang tot andere delen
  van je website (zoals een extern programma voor
@@ -1053,7 +1051,7 @@ artikel of afzonderlijk getoond worden.<p />',
 Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de structuur van de site hebt veranderd.
  De nieuwste pagina\'s worden dan getoond en de buffer wordt opnieuw opgebouwd.',
 'texte_sur_titre' => 'opschrift',
-'texte_syndication' => 'Het is mogelijk om van een site automatisch een lijst met
+'texte_syndication' => '<MODIF>Het is mogelijk om van een site automatisch een lijst met
  nieuws, als de website het toelaat, binnen te halen.
  Hiervoor dien je de syndicatie (nieuwsovername) te
  activeren. <blockquote><i>Sommige hostingproviders laten
@@ -1077,7 +1075,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
  scherm verschijnen.',
 'texte_trop_resultats_auteurs' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
 'texte_unpack' => 'binnenhalen van de laatste versie',
-'texte_utilisation_moteur_syndiques' => 'Wanneer u de ge&iuml;ntegreerdeb de zoekmotor van
+'texte_utilisation_moteur_syndiques' => '<MODIF>Wanneer u de ge&iuml;ntegreerdeb de zoekmotor van
  SPIP, kunt u het onderzoek naar de site en
  instellen    de georganiseerde artikelen op twee wijze
     verschillend. <br />- De meest eenvoudige

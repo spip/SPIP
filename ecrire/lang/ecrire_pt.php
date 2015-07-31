@@ -458,7 +458,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_numero_article' => 'ARTIGO N&Uacute;MERO&nbsp;:',
 'info_obligatoire_02' => '[Obigat&oacute;rio]',
 'info_option_accepter_visiteurs' => 'Aceitar a inscri&ccedil;&atilde;o de visitantes do site p&uacute;blico',
-'info_option_email' => 'Quando um visitante do s&iacute;tio deixa uma nova mensagem no f&oacute;rum
+'info_option_email' => '<MODIF>Quando um visitante do s&iacute;tio deixa uma nova mensagem no f&oacute;rum
  ligado a um artigo, os autores do artigo podem ser
  avisados por e-mail. Deseja utilizar essa op&ccedil;&atilde;o&nbsp;?',
 'info_option_faire_suivre' => 'Fazer seguir as mensagens dos f&oacute;runs para os autores dos artigos',
@@ -968,7 +968,7 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
 na cache SPIP. Isso permite, por exemplo, obrigar uma recomposi&ccedil;&atilde;o de todas as p&aacute;ginas se voc&ecirc;
  fez modifica&ccedil;&otilde;esimportantes de grafismo ou de estrutura do s&iacute;tio.',
 'texte_sur_titre' => 'Supra-t&iacute;tulo',
-'texte_syndication' => '&Eacute; poss&iacute;vel recuperar automaticamente, quando um s&iacute;tio Web o permitir, 
+'texte_syndication' => '<MODIF>&Eacute; poss&iacute;vel recuperar automaticamente, quando um s&iacute;tio Web o permitir, 
  a lista das suas novidades. Para tal, deve activar a vincula&ccedil;&atilde;o. 
   <blockquote><i>Alguns servi&ccedil;os de hospedagem desactivam esta funcionalidade&nbsp;; 
  neste caso, n&atilde;o poder&aacute; utilizar a vincula&ccedil;&atilde;o de conte&uacute;do

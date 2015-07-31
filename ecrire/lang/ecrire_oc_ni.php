@@ -438,7 +438,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_numero_article' => 'ARTICLE N&Uacute;MERO',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dei visitaires dau sit public',
-'info_option_email' => 'Quora un visitaire dau sit poasta un messatge nov&egrave;u dins lo f&ograve;ro, associat &agrave; un article, lu autors de l\'article poadon &egrave;stre avertits d\'aqueu messatge per corrier electronic. Desiratz d\'utilisar aquela opcion&nbsp;?',
+'info_option_email' => '<MODIF>Quora un visitaire dau sit poasta un messatge nov&egrave;u dins lo f&ograve;ro, associat &agrave; un article, lu autors de l\'article poadon &egrave;stre avertits d\'aqueu messatge per corrier electronic. Desiratz d\'utilisar aquela opcion&nbsp;?',
 'info_option_faire_suivre' => 'Faire s&egrave;gre lu messatges dei f&ograve;ros ai autors dei articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de visitaires',
 'info_option_ne_pas_faire_suivre' => 'Non faire s&egrave;gre lu messatges dei f&ograve;ros',
@@ -841,7 +841,7 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_effacer_donnees_indexation' => 'Esca&ccedil;ar li donadas d\'indexacion',
 'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e br&egrave;vas &ccedil;ai sota. Esitetz pas de donar lo voastre vejaire gra&ccedil;a ai f&ograve;ros que li son estacats.',
 'texte_enrichir_mise_a_jour' => 'Pod&egrave;tz enriquir la compaginacion dau voastre t&egrave;xt en utilisant d\'"escorchas tipografiqui"',
-'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Deu crear, SPIP, de fichiers especiaus <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@&nbsp;?</b><p />
   Aquelu fichiers vos poadon servir per restr&eacute;nher l\'acc&egrave;s ai autors
   e administrators en d\'autres lu&egrave;cs dau voastre site
@@ -949,7 +949,7 @@ tornar calcular solament una p&agrave;gina, passatz pusl&egrave;u per l\'espaci 
 dins l\'amagador SPIP. Aqu&ograve; permete per exemple de for&ccedil;ar un nov&egrave;u calcul de toti li p&agrave;ginas
 s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.',
 'texte_sur_titre' => 'Sobretitre',
-'texte_syndication' => 'Si p&ograve;u recuperar automaticament, quora un sit web lo permet, 
+'texte_syndication' => '<MODIF>Si p&ograve;u recuperar automaticament, quora un sit web lo permet, 
   la ti&egrave;ra dei sieus noveutats. Per far aqu&ograve;, vos cau activar la sindicacion. 
   <blockquote><i>D\'unu aubergadors activon pas aquela foncionalitat; 
   dins aqueu cas, podretz pas utilisar la sindicacion de contengut
@@ -972,7 +972,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;up de resultats per &quot;@cherche_auteur@&quot; ; vorgatz afinar la recerca.',
 'texte_unpack' => 'Descargament de la darriera version',
-'texte_utilisation_moteur_syndiques' => 'Quora utilisatz lo motor de recerca integrat 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quora utilisatz lo motor de recerca integrat 
     &agrave; SPIP, pod&egrave;tz far li recercas sus lu sites e
     articles sindicats de doi manieras
     diferenti. <br />- Lo mai

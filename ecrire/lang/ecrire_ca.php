@@ -315,8 +315,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_classement_2' => '<sup>n</sup> a la @liste@',
 'info_code_acces' => 'No oblideu els vostres codis d\'acc&eacute;s!',
 'info_comment_lire_tableau' => 'Com llegir aquest quadre',
-'info_compresseur_activer' => 'Activar la compressi&oacute;',
-'info_compresseur_desactiver' => 'Desactivar la compressi&oacute;',
 'info_compresseur_texte' => 'Si el vostre servidor no comprimeix autom&agrave;ticament les p&agrave;gines html per enviar-les als internautes, podeu provar for&ccedil;ar aquesta compressi&oacute; per disminuir el pes de les p&agrave;gines baixades. <b>Atenci&oacute;</b>: aix&ograve; pot reduir considerablement la velocitat d\'alguns servidors. ',
 'info_compresseur_titre' => 'Optimitzacions i compressi&oacute;',
 'info_config_suivi' => 'Si aquesta adre&ccedil;a correspon a una llista de correu, podeu indicar m&eacute;s avall l\'adre&ccedil;a a la que els participants es poden registrar. Aquesta adre&ccedil;a pot ser una URL (per exemple la p&agrave;gina de registre a la llista per la Web), o un correu electr&ograve;nic amb un assumpte espec&iacute;fic: <tt>@adresse_suivi@?assumpte=subscriure\'s</tt>):',
@@ -474,7 +472,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_numero_article' => 'ARTICLE N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obligatori]',
 'info_option_accepter_visiteurs' => 'Acceptar la inscripci&oacute; dels visitants del lloc p&uacute;blic',
-'info_option_email' => 'Quan un visitant del lloc envia un nou missatge en el f&ograve;rum associat a un article, els autors de l\'article poden ser informats d\'aquest missatge per correu electr&ograve;nic. Voleu fer servir aquesta opci&oacute;?',
+'info_option_email' => '<MODIF>Quan un visitant del lloc envia un nou missatge en el f&ograve;rum associat a un article, els autors de l\'article poden ser informats d\'aquest missatge per correu electr&ograve;nic. Voleu fer servir aquesta opci&oacute;?',
 'info_option_faire_suivre' => 'Reenviar els missatges del f&ograve;rum als autors dels articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar la inscripci&oacute; de visitants',
 'info_option_ne_pas_faire_suivre' => 'No reenviar els missatges dels f&ograve;rums',
@@ -926,7 +924,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_effacer_statistiques' => 'Esborrar les estad&iacute;stiques',
 'texte_en_cours_validation' => 'Els articles i breus d\'ac&iacute; sota estan proposats per a la seua publicaci&oacute;. No vos estigueu de fer-ne algun comentari al respecte als f&ograve;rums que tenen assignats.',
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
-'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p />
+'texte_fichier_authent' => '<MODIF><b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p />
  Aquests fitxers poden servir per restringir l\'acc&eacute;s als autors i als administradors en altres llocs de la vostra Web (programa extern d\'estad&iacute;stiques, per exemple).<p>
  Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no creaci&oacute; dels fitxers).',
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
@@ -1007,7 +1005,7 @@ Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues
 a la cach&eacute; d\'SPIP. Aix&ograve; permet per exemple for&ccedil;ar un rec&agrave;lcul de totes les p&agrave;gines si s\'ha
 fet modificacions importants gr&agrave;ficament o estructurals del lloc web.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
-'texte_syndication' => '&Eacute;s possible recuperar autom&agrave;ticament, quan el lloc Web ho permet, la llista de novetats. Per aix&ograve;, heu d\'activar la sindicaci&oacute;.
+'texte_syndication' => '<MODIF>&Eacute;s possible recuperar autom&agrave;ticament, quan el lloc Web ho permet, la llista de novetats. Per aix&ograve;, heu d\'activar la sindicaci&oacute;.
 <blockquote><i>Alguns prove&iuml;dors d\'hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula est&agrave; OK.',
 'texte_tables_indexation_vides' => 'Les taules d\'indexaci&oacute; del motor estan buides.',
@@ -1022,7 +1020,7 @@ que es vol testar.',
 Aquesta opci&oacute; est&agrave; desactivada per defecte amb la finalitat d\'evitar mostrar  missatges d\'advert&egrave;ncia intempestius.',
 'texte_trop_resultats_auteurs' => 'Massa resultats "@cherche_auteur@" ; si us plau, fa&ccedil;a una recerca m&eacute;s acurada.',
 'texte_unpack' => 'desc&agrave;rrega de la darrera versi&oacute;',
-'texte_utilisation_moteur_syndiques' => 'Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br />- La m&eacute;s simple consisteix en buscar &uacute;nicament a dins dels t&iacute;tols i les descripcions dels articles. <br />- Un segon m&egrave;tode, molt m&eacute;s potent, permet a SPIP buscar tamb&eacute; a dins dels texts dels llocs referenciats. Si referencieu un lloc Web, SPIP efectuar&agrave; llavors la cerca a dins del text d\'aquest lloc.',
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br />- La m&eacute;s simple consisteix en buscar &uacute;nicament a dins dels t&iacute;tols i les descripcions dels articles. <br />- Un segon m&egrave;tode, molt m&eacute;s potent, permet a SPIP buscar tamb&eacute; a dins dels texts dels llocs referenciats. Si referencieu un lloc Web, SPIP efectuar&agrave; llavors la cerca a dins del text d\'aquest lloc.',
 'texte_utilisation_moteur_syndiques_2' => 'Aquest metode obliga SPIP a visitar
 regularment les webs referenciades,
 el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',

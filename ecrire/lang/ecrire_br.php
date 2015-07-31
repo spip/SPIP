@@ -303,8 +303,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>vet</sup> war @liste@',
 'info_code_acces' => 'N\'ankouait ket ho kodo&ugrave; dont-tre&nbsp;!',
 'info_comment_lire_tableau' => 'Penaos lenn an daolenn-ma&ntilde;',
-'info_compresseur_activer' => 'Ober gant ar gwaska&ntilde;',
-'info_compresseur_desactiver' => 'Chom hep ober gant ar gwaska&ntilde;',
 'info_compresseur_texte' => 'Ma ne vez ket gwasket ar pajenno&ugrave; HTML gant ho servijour evit o c\'has d\'al lennerien e c\'hellit klask redia&ntilde; ar gwaska&ntilde; evit bihanaat o vent.  <b>Diwallit</b> : gallout a ra gorrekaat servijourien \'zo.',
 'info_compresseur_titre' => 'Gwellekaat ha gwaska&ntilde;',
 'info_config_suivi' => 'Ma\'z eo ar chomlec\'h-ma&ntilde; hini ul listenn-skigna&ntilde; e c\'hellit skriva&ntilde; ama&ntilde; ar chomlec\'h evit en em enrolla&ntilde;. Gallout a ra ar chomlec\'h-se beza&ntilde; un URL (hini ar bajenn Web m\'en em enroller warni), pe ur postel, gñant ur sujed dezha&ntilde; (da skouer : <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -460,7 +458,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_numero_article' => 'PENNAD NIVERENN&nbsp;:',
 'info_obligatoire_02' => '[Rediet]',
 'info_option_accepter_visiteurs' => 'Aotrea&ntilde; ma enrollfe gweladennerien al lec\'hienn foran',
-'info_option_email' => 'Pa vez kaset un evezhiadenn nevez gant ur gweladenner er forom diwar-benn ur pennad resis,
+'info_option_email' => '<MODIF>Pa vez kaset un evezhiadenn nevez gant ur gweladenner er forom diwar-benn ur pennad resis,
   e c\'hell skridaozerien ar pennad beza&ntilde; kelaouet ouzh kement-se.
   Ha c\'hoant ho peus ma vefent kelaouet ?',
 'info_option_faire_suivre' => 'Lakaat skridaozerien ar pennado&ugrave; da heulia&ntilde; evezhiadenno&ugrave; ar forom',
@@ -922,7 +920,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_effacer_statistiques' => 'Diverka&ntilde; ar statistiko&ugrave;',
 'texte_en_cours_validation' => 'Kinniget eo ar pennado&ugrave; ha berrskrido&ugrave; ama&ntilde;-dindan d\'an embann. Gallout a rit rei&ntilde; ho ali er foromo&ugrave; stag outo.',
 'texte_enrichir_mise_a_jour' => 'Gallout a rit bravaat kinnig ho testenn oc\'h implijout &laquo;&nbsp;berradenno&ugrave;-lizherenna&ntilde;&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>Ha rankout a ra SPIP kroui&ntilde; ar restro&ugrave; ispisial <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Ha rankout a ra SPIP kroui&ntilde; ar restro&ugrave; ispisial <tt>.htpasswd</tt>
   ha <tt>.htpasswd-admin</tt> en teul @dossier@ ?</b><p />
   Gant ar restro&ugrave;-se e c\'hellit herzel ouzh ar re n\'int ket skridaozer pe merour
   da vont war bajeno&ugrave; all \'zo
@@ -1002,7 +1000,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_statut_refuses' => 'nac\'het',
 'texte_suppression_fichiers' => 'Implijit ar servij-se evit diverka&ntilde; an holl restro&ugrave; e memoret SPIP. An dra-se a c\'hell servij evit ma vo adjedet ho holl pajenno&ugrave;, m\'ho eus graet kemmo&ugrave; bras e aozadur pe kinnig al lec\'hienn.',
 'texte_sur_titre' => 'Us-titl',
-'texte_syndication' => 'Pa vez aotreet gant ul lec\'hienn-Web eo posupl dastum en un doare emgefreek listenn an nevezinti.
+'texte_syndication' => '<MODIF>Pa vez aotreet gant ul lec\'hienn-Web eo posupl dastum en un doare emgefreek listenn an nevezinti.
 		Evit se eo dav implijout al liammo&ugrave; RSS.
 		<blockquote><i>Gant boderien \'zo e vez lakaet ar servij-se dizoberiant&nbsp;; 
 		neuze n\'halloc\'h ket ober gant liammo&ugrave; RSS adalek ho lec\'hienn.</i></blockquote>',
@@ -1020,7 +1018,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 		Ne vez ket implijet ar servij-ma&ntilde; dre-ziouer evit chom hep kaout kemenno&ugrave;-berz a-hed an amzer.',
 'texte_trop_resultats_auteurs' => 'Re a zisoc\'ho&ugrave; evit "@cherche_auteur@" ; spisait ho enklask.',
 'texte_unpack' => 'o pellgarga&ntilde; an arreval diwezha&ntilde;',
-'texte_utilisation_moteur_syndiques' => 'Daou zoare a zo d\'ober enklasko&ugrave; el lec\'hienno&ugrave; listennet gant benvegad-enklask diabarzh SPIP.<br />
+'texte_utilisation_moteur_syndiques' => '<MODIF>Daou zoare a zo d\'ober enklasko&ugrave; el lec\'hienno&ugrave; listennet gant benvegad-enklask diabarzh SPIP.<br />
     - Gant an hini simpla&ntilde; e vez klasket e titlo&ugrave; ha testenno&ugrave;-kinnig ar pennado&ugrave; hepken.<br />
     - Gant an eil doare, kalz galloudusoc\'h, e vo graet an enklask en holl destenno&ugrave; da gaout war al lec\'hienno&ugrave; listennet.
     Ma listennit ul lec\'hienn e raio SPIP e enklask e testenn al lec\'hienn.',

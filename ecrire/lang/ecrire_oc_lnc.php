@@ -452,7 +452,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dels vesitaires del sit public',
-'info_option_email' => 'Quora un vesitaire del sit manda un messatge n&ograve;u al forum
+'info_option_email' => '<MODIF>Quora un vesitaire del sit manda un messatge n&ograve;u al forum
  associat a un article, se\'n p&ograve;t avisar los autors
  de l\'article per e-mail. Desiratz d\'utilizar aquela opcion?',
 'info_option_faire_suivre' => 'Far seguir los messatges dels forums als autors dels articles',
@@ -858,7 +858,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_effacer_donnees_indexation' => 'Escafar las donadas d\'indexacion',
 'texte_en_cours_validation' => 'Se prepausa de publicar los articles e br&egrave;vas &ccedil;ai sota. Esitetz pas de donar lo v&ograve;stre vejaire gr&agrave;cias als forums que i son estacats.',
 'texte_enrichir_mise_a_jour' => 'Pod&egrave;tz enriquir la compaginacion del v&ograve;stre t&egrave;xt en utilizar d\'"acorchas tipograficas".',
-'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichi&egrave;rs especials  <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Deu crear, SPIP, de fichi&egrave;rs especials  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Aqueles fichi&egrave;rs vos p&ograve;don servir per restr&eacute;nher l\'acc&egrave;s als autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
@@ -963,7 +963,7 @@ dins lo repert&ograve;ri @dossier@.
 dins l\'escondedor SPIP. Aqu&ograve; permet per exemple de for&ccedil;ar un calcul n&ograve;u de totas las paginas
 s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'texte_sur_titre' => 'Subret&iacute;tol',
-'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quora un sit web o permet, 
+'texte_syndication' => '<MODIF>Se p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la ti&egrave;ra de sas novetats. Per aqu&ograve; far, vos cal activar la sindicacion. 
   <blockquote><i>D\'unes albergadors activan pas aquela foncionalitat; 
   en aquel cas, poiretz pas utilizar la sindicacion de contengut
@@ -986,7 +986,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;p de resultats per "@cherche_auteur@" ; volgatz afinar la c&egrave;rca.',
 'texte_unpack' => 'telecargament de la darri&egrave;ra version',
-'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quora utilizatz lo cercador integrat 
     a SPIP, pod&egrave;tz far las c&egrave;rcas suls sits e
     articles sindicats de dos biaisses
     diferents. <br />- Lo mai

@@ -415,7 +415,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Skal udfyldes]',
 'info_option_accepter_visiteurs' => '<NEW>Allow visitors registration from the public site',
-'info_option_email' => 'N&aring;r en bes&oslash;gende p&aring; webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter f&aring; underretning om meddelelsen via e-mail. &Oslash;nsker du at bruge denne mulighed?',
+'info_option_email' => '<MODIF>N&aring;r en bes&oslash;gende p&aring; webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter f&aring; underretning om meddelelsen via e-mail. &Oslash;nsker du at bruge denne mulighed?',
 'info_option_faire_suivre' => 'Videresend meddelelser i forummer til artiklernes forfattere',
 'info_option_ne_pas_accepter_visiteurs' => '<NEW>Refuse visitor registration',
 'info_option_ne_pas_faire_suivre' => 'Videresend ikke meddelelser i forummer',
@@ -763,7 +763,7 @@ i en farve, der angiver deres status:',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
 'texte_en_cours_validation' => 'F&oslash;lgende artikler og nyheder er foresl&aring;et offentliggjort. T&oslash;v ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.',
 'texte_enrichir_mise_a_jour' => 'Du kan forbedre layoutet af teksten ved at benytte &laquo;typografiske koder&raquo;.',
-'texte_fichier_authent' => '<b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
 		og <tt>.htpasswd-admin</tt> filer i kataloget @dossier@?</b><p>
 		Disse filer kan benyttes til at begr&aelig;nse adgangen for forfattere og administratorer til andre dele af dit websted
 		(f.eks. et eksternt statistikprogram).<p>
@@ -857,7 +857,7 @@ i en farve, der angiver deres status:',
 		Dette giver dig bl.a. mulighed for at gennemtvinge opdatering af alle sider i tilf&aelig;lde af 
 		at du har lavet v&aelig;sentlige grafiske eller strukturelle &aelig;ndringer p&aring; webstedet.',
 'texte_sur_titre' => 'Hovedoverskrift',
-'texte_syndication' => 'Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
+'texte_syndication' => '<MODIF>Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
 		seneste materiale. For at g&oslash;re dette, skal du igangs&aelig;tte syndikering.
 		<blockquote><i>Nogle webhoteller tillader ikke denne funktion.
 		I s&aring; fald kan du ikke foretage indholdssyndikering fra dit websted.</i></blockquote>',
@@ -874,7 +874,7 @@ i en farve, der angiver deres status:',
 		sl&aring;et fra for at undg&aring; utidige advarselsmeddelelser.',
 'texte_trop_resultats_auteurs' => 'For mange resultater til "@cherche_auteur@"; v&aelig;r venlig at afgr&aelig;nse s&oslash;gningen yderligere.',
 'texte_unpack' => 'download af seneste version',
-'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP\'s indbyggede s&oslash;gefunktion, kan du p&aring; forskellig vis foretage
+'texte_utilisation_moteur_syndiques' => '<MODIF>Hvis du benytter SPIP\'s indbyggede s&oslash;gefunktion, kan du p&aring; forskellig vis foretage
 		s&oslash;gninger p&aring; websteder og i syndikerede artikler. <br /><img src=\'puce.gif\'> Den enkleste best&aring;r i kun at 
 		s&oslash;ge i artiklernes overskrifter og beskrivelser. <br /><img src=\'puce.gif\'> 
 		En anden metode, som er st&aelig;rkere, lader SPIP s&oslash;ge i teksten p&aring; de websteder, der henvises til. 

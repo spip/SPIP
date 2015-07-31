@@ -449,7 +449,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_numero_article' => '&#268;L&Aacute;NEK &#268;.:',
 'info_obligatoire_02' => '[povinn&yacute; &uacute;daj]',
 'info_option_accepter_visiteurs' => 'Schv&aacute;lit p&#345;ihl&aacute;&#353;en&iacute; n&aacute;v&#353;t&#283;vn&iacute;k&#367; ve&#345;ejn&eacute;ho webu',
-'info_option_email' => 'Auto&#345;i &#269;l&aacute;nku mohou b&yacute;t informov&aacute;ni emailem o tom, &#382;e n&aacute;v&#353;t&#283;vn&iacute;ci
+'info_option_email' => '<MODIF>Auto&#345;i &#269;l&aacute;nku mohou b&yacute;t informov&aacute;ni emailem o tom, &#382;e n&aacute;v&#353;t&#283;vn&iacute;ci
   webu poslali zpr&aacute;vu do diskusn&iacute; skupiny, t&yacute;kaj&iacute;c&iacute; se
   jejich &#269;l&aacute;nku. Chcete tuto mo&#382;nost pou&#382;&iacute;t?',
 'info_option_faire_suivre' => 'Sledovat zpr&aacute;vy z diskusn&iacute; skupiny autory &#269;l&aacute;nk&#367;',
@@ -843,7 +843,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_effacer_donnees_indexation' => 'Odstranit indexy',
 'texte_en_cours_validation' => 'N&aacute;sleduj&iacute;c&iacute; &#269;l&aacute;nky a novinky jsou p&#345;ipraveny k publikaci. Nev&aacute;hejte p&#345;ipojit sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je k nim p&#345;ipojeno.',
 'texte_enrichir_mise_a_jour' => 'Zalamov&aacute;n&iacute; textu m&#367;&#382;ete roz&#353;&iacute;&#345;it pomoc&iacute; "typografick&yacute;ch zkratek".',
-'texte_fichier_authent' => '<b>M&aacute; syst&eacute;m SPIP vytvo&#345;it speci&aacute;ln&iacute; soubory <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>M&aacute; syst&eacute;m SPIP vytvo&#345;it speci&aacute;ln&iacute; soubory <tt>.htpasswd</tt>
   a <tt>.htpasswd-admin</tt> v adres&aacute;&#345;i  @dossier@?</b><p />
   Tyto soubory umo&#382;&#328;uj&iacute; omezit p&#345;&iacute;stup autor&#367; a spr&aacute;vc&#367; k dal&#353;&iacute;m &#269;&aacute;stem
   va&#353;eho webu
@@ -942,7 +942,7 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
 T&iacute;m nap&#345;&iacute;klad vynut&iacute;te obnovu v&#353;ech str&aacute;nek pot&eacute;, co provedete v&yacute;znamn&eacute;
 zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury va&#353;eho webu.',
 'texte_sur_titre' => 'Podtitul',
-'texte_syndication' => 'Pokud to web umo&#382;&#328;uje, m&#367;&#382;ete automaticky z&iacute;skat seznam na n&#283;m zve&#345;ejn&#283;n&yacute;ch
+'texte_syndication' => '<MODIF>Pokud to web umo&#382;&#328;uje, m&#367;&#382;ete automaticky z&iacute;skat seznam na n&#283;m zve&#345;ejn&#283;n&yacute;ch
   novinek. K tomu je nutno zapnout syndikaci.
   <blockquote><i>N&#283;kte&#345;&iacute; poskytovatel&eacute; webov&eacute;ho prostoru tuto funkcni vyp&iacute;naj&iacute;.
   V takov&eacute;m p&#345;&iacute;pad&#283; nem&#367;&#382;ete syndikaci ze sv&eacute;ho webu pou&#382;&iacute;t.</i></blockquote>',
@@ -962,7 +962,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
   zobrazov&aacute;n&iacute; zbyte&#269;n&yacute;ch varovn&yacute;ch hl&aacute;&#353;en&iacute;.',
 'texte_trop_resultats_auteurs' => 'Pro "@cherche_auteur@" bylo zobrazeno p&#345;&iacute;li&#353; mnoho v&yacute;sledk&#367;. Zp&#345;esn&#283;te vyhled&aacute;vac&iacute; krit&eacute;ria.',
 'texte_unpack' => 'odes&iacute;l&aacute;n&iacute;/stahov&aacute;n&iacute; posledn&iacute; verze',
-'texte_utilisation_moteur_syndiques' => 'Vestav&#283;n&yacute; prohled&aacute;vac&iacute; n&aacute;stroj syst&eacute;mu SPIS,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Vestav&#283;n&yacute; prohled&aacute;vac&iacute; n&aacute;stroj syst&eacute;mu SPIS,
     m&#367;&#382;ete vyhled&aacute;vat i na syndikovan&yacute;ch webech a v syndikovan&yacute;ch
     &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.    <br />- Nejjednodu&#353;&#353;&iacute; je
     hledat pouze v n&aacute;zvech a popisech &#269;l&aacute;nk&#367;. <br />-    Druh&yacute;, mnohem &uacute;&#269;inn&#283;j&#353;&iacute; zp&#367;sob, umo&#382;&#328;uje syst&eacute;mu SPIP

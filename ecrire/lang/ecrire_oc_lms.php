@@ -419,7 +419,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_numero_article' => 'ARTICLE NUMERO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion daus vesitaires dau sit public',
-'info_option_email' => 'Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
+'info_option_email' => '<MODIF>Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
  associat a un article, se\'n p&ograve;t avisar los autors
  de l\'article per e-mail. Desiratz d\'utilizar quela opcion?',
 'info_option_faire_suivre' => 'Far segre los messatges daus forums aus autors daus articles',
@@ -788,7 +788,7 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar las donadas d\'indexacion',
 'texte_en_cours_validation' => 'Se prepausa de publicar los articles e brevas &ccedil;ai sos. Esitetz pas per donar v&ograve;stre av&iacute;s gr&agrave;cias aus forums que i son estachats.',
 'texte_enrichir_mise_a_jour' => 'Podetz enrichir la compaginacion de v&ograve;stre text en utilizar de las "escorchieras tipograficas".',
-'texte_fichier_authent' => '<b>Deu crear, SPIP, daus fichiers especiaus  <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Deu crear, SPIP, daus fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Quilhs fichiers vos p&ograve;den servir per restr&eacute;nher l\'acc&egrave;s aus autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
@@ -898,7 +898,7 @@ dins lo repert&ograve;ri @dossier@.
 dins l\'escondedor SPIP. Qu&ograve; permet per exemple de for&ccedil;ar un calcul nu&ograve;u de totas las paginas
 s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_sur_titre' => 'Subret&iacute;tol',
-'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
+'texte_syndication' => '<MODIF>Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
   la tiera de sas novetats. Per qu&ograve; far, vos chau activar la sindicacion. 
   <blockquote><i>Quauques auberjadors activan pas quela foncionalitat; 
   en queu cas, poiretz pas utilizar la sindicacion de contengut
@@ -921,7 +921,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;p de resultats per "@cherche_auteur@" ; volhatz afinar la cercha.',
 'texte_unpack' => 'telecharjament de la darriera version',
-'texte_utilisation_moteur_syndiques' => 'Quand utilizatz lo cerchador integrat 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quand utilizatz lo cerchador integrat 
     a SPIP, podetz far las cerchas sus los sits e
     articles sindicats de doas manieras
     diferentas. <br /><img src=\'puce.gif\'> Lo mai

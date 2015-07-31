@@ -432,7 +432,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_numero_article' => 'CIKK SZ&Aacute;MA&nbsp;:',
 'info_obligatoire_02' => '[K&ouml;telez&#337;]',
 'info_option_accepter_visiteurs' => 'A l&aacute;togat&oacute;i be&iacute;ratkoz&aacute;s enged&eacute;lyez&eacute;se ',
-'info_option_email' => 'Ha egy l&aacute;togat&oacute; &uuml;zenetet k&uuml;ld egy &uacute;j &uuml;zenetet a cikkhez csatolt f&oacute;rumba,
+'info_option_email' => '<MODIF>Ha egy l&aacute;togat&oacute; &uuml;zenetet k&uuml;ld egy &uacute;j &uuml;zenetet a cikkhez csatolt f&oacute;rumba,
   akkor a szerz&#337;k err&#337;l az &uuml;zenetr&#337;l &eacute;rtes&uuml;lhetnek emailen. Szeretne haszn&aacute;lni ezt az opci&oacute;t&nbsp;?',
 'info_option_faire_suivre' => 'A f&oacute;rumok &uuml;zenetei tov&aacute;bb&iacute;t&aacute;sa a cikkek szerz&#337;i fel&eacute;',
 'info_option_ne_pas_accepter_visiteurs' => 'L&aacute;togat&oacute;i be&iacute;ratkoz&aacute;s tilt&aacute;sa',
@@ -812,7 +812,7 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_effacer_donnees_indexation' => 'Az index&aacute;l&aacute;si adatok t&ouml;rl&eacute;se',
 'texte_en_cours_validation' => 'Az al&aacute;bbi h&iacute;reket &eacute;s cikkeket javasolt&aacute;k publik&aacute;l&aacute;sra. Sz&oacute;ljon hozz&aacute; a hozz&aacute;juk csatolt f&oacute;rumokban.',
 'texte_enrichir_mise_a_jour' => 'A szerkeszt&eacute;st lehet sz&eacute;p&iacute;teni a &laquo;&nbsp;nyomdai jelek&nbsp;&raquo; seg&iacute;ts&eacute;g&eacute;vel.',
-'texte_fichier_authent' => '<b>SPIP-nek kell-e l&eacute;trehoznia sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>SPIP-nek kell-e l&eacute;trehoznia sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
   &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a @dossier@ mapp&aacute;ban?</b><p />
   Azok a f&aacute;jlok haszn&aacute;lhat&oacute;k a szerz&#337;i &eacute;s adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;s korl&aacute;toz&aacute;s&aacute;ra bizonyos helyeken
   (p&eacute;ld&aacute;ul k&uuml;ls&#337; statistikai program).<p />
@@ -902,7 +902,7 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
 'texte_suppression_fichiers' => 'EZt a parancsot haszn&aacute;lja az SPIP cache-ban l&eacute;v&#337; &ouml;sszes f&aacute;jlok t&ouml;rl&eacute;s&eacute;re
 dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes oldal friss&iacute;t&eacute;s&eacute;t, ha jelent&#337;s m&oacute;dos&iacute;t&aacute;sokat v&eacute;gzett a honlap grafik&aacute;j&aacute;n, vagy szerkezet&eacute;n.',
 'texte_sur_titre' => 'Fels&#337; c&iacute;m',
-'texte_syndication' => 'Ha a honlap megengedi,akkor automatikusan lehet szerezni &uacute;jdons&aacute;gait list&aacute;j&aacute;t.
+'texte_syndication' => '<MODIF>Ha a honlap megengedi,akkor automatikusan lehet szerezni &uacute;jdons&aacute;gait list&aacute;j&aacute;t.
   Ez&eacute;rt kell aktiv&aacute;lni a szindik&aacute;l&aacute;st.
   <blockquote><i>Egyes szolg&aacute;ltat&oacute;k kikapcsolj&aacute;k ezt a lehet&#337;s&eacute;get&nbsp;; 
   ilyen esetben, nem haszn&aacute;lhatja a tartalomszindik&aacute;l&aacute;st
@@ -923,7 +923,7 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 ',
 'texte_trop_resultats_auteurs' => 'T&uacute;l sok tal&aacute;lat erre "@cherche_auteur@" ; sz&uuml;k&iacute;tse a k&eacute;r&eacute;s&eacute;st.',
 'texte_unpack' => 'Leg&uacute;jabb verzi&oacute; let&ouml;lt&eacute;se',
-'texte_utilisation_moteur_syndiques' => 'Ha az SPIP bels&#337;  keres&#337; motorj&aacute;t haszn&aacute;lja 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Ha az SPIP bels&#337;  keres&#337; motorj&aacute;t haszn&aacute;lja 
     , k&eacute;tf&eacute;le m&oacute;don lehet keresni a szindik&aacute;lt cikkekben, illetve honlapokon.
     <br />Az egyszer&#369;bb korl&aacute;t&oacute;zodik a cikkek c&iacute;meire &eacute;s r&ouml;vid ismertet&#337;ire.
     <br />
