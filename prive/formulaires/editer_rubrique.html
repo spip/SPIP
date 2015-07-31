@@ -16,7 +16,7 @@
 			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
-	
+
 	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
 			<em class="aide">#AIDER{rubrub}</em>
