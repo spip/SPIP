@@ -78,6 +78,15 @@ function exec_admin_tech_dist()
 	 _T('texte_admin_tech_02') .
 	"</p>";
 	
+	$res .= "\n<p><label for='id_rubrique'>" .
+	    _L('Vous pouvez limiter la sauvegarde &agrave; la rubrique: ') .
+	       "</label>" .
+	    "\n<input name='id_rubrique' id='id_rubrique' size='5' "
+	  .  "onchange='x=\"_rub\"+findObj_forcer(\"id_rubrique\").value;
+findObj_forcer(\"znom_sauvegarde\").value+=x;
+findObj_forcer(\"nom_sauvegarde\").value+=x;'"
+	  ." /></p>";
+
 	$file = nom_fichier_dump();
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
 	$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
@@ -107,10 +116,6 @@ function exec_admin_tech_dist()
 	    "\n<input type='hidden' name='gz' id='gz' value='0' /></p>";
 	}
 
-	$res .= "\n<p><label for='id_rubrique'>" .
-	    _L('Vous pouvez limiter la sauvegarde &agrave; la rubrique: ') .
-	       "</label>" .
-	    "\n<input name='id_rubrique' id='id_rubrique' size='5' /></p>";
 
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
  
