@@ -712,12 +712,12 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'statut_admin_restreint' => '(admin limitado)',
 'syndic_choix_moderation' => 'O que fazer com os pr&oacute;ximos links que venham deste site?',
 'syndic_choix_oublier' => 'O que fazer com os links que n&atilde;o constam mais do arquivo de sindica&ccedil;&atilde;o?',
-'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
+'syndic_choix_resume' => 'Alguns sites divulgam o texto completo das mat&eacute;rias. Caso o mesmo esteja dispon&iacute;vel, voc&ecirc; deseja sindicar:',
 'syndic_lien_obsolete' => 'link obsoleto',
 'syndic_option_miroir' => 'bloque&aacute;-los automaticamente',
 'syndic_option_oubli' => 'apag&aacute;-los (ap&oacute;s @mois@&nbsp;mois)',
-'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
-'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
+'syndic_option_resume_non' => 'O conte&uacute;do completo das mat&eacute;rias ( em formato HTML)',
+'syndic_option_resume_oui' => 'um resumo b&aacute;sico (em formato texto)',
 'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o:',
 
 

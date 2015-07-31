@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'access_interface_graphique' => 'Distro d\'ar c\'hetal kevrega&ntilde; klok',
+'access_interface_graphique' => 'Distrei&ntilde; d\'an etrefas grafek klok',
 'access_mode_texte' => 'diskouez ar c\'hetal testenn eeun',
 'admin_debug' => 'debug',
 'admin_modifier_article' => 'Kemm ar pennad-ma&ntilde;',
@@ -606,7 +606,7 @@ Kit d\'ar chomlec\'h-ma&ntilde; :
     @adresse_site@/spip_pass.php3?p=@cookie@
 
 Neuze e c\'helloc\'h rei&ntilde; ur ger-tremen nevez ha
-kennaska&ntilde; en-dro ouzh al lec\'hienn.
+kevrea&ntilde; en-dro ouzh al lec\'hienn.
 
 ',
 'pass_mot_oublie' => 'Ankouaet ar ger-tremen',
@@ -680,7 +680,7 @@ kennaska&ntilde; en-dro ouzh al lec\'hienn.
 'titre_mots_cles' => 'GERIO&Ugrave;-ALC\'HWEZ',
 'titre_probleme_technique' => 'Diwallit&nbsp;: ur gudenn teknikel (servijer MySQL) a ra ma n\'eus ket tu da dizhout lodenn-ma&ntilde; al lec\'hienn. Trugarez da gompren.',
 'titre_publier_document' => 'EMBANN UN TEULIAD ER RUMMAD-MA&Ntilde;',
-'titre_statistiques' => 'Statistiko&ugrave; al lec\'hienn',
+'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn',
 'titre_titre_document' => 'Titl an teuliad&nbsp;:',
 'trad_reference' => '(pennad-orin)',
 

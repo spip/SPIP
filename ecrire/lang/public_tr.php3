@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'page_precedente' => '&ouml;nceki sayfa',
 'page_suivante' => 'sonraki sayfa',
-'par_auteur' => 'taraf&#305;ndan ',
+'par_auteur' => 'yazan',
 'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. An&#305;nda sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir iletiyi alabilirsiniz.',
 'plan_site' => 'Site plan&#305;',
 'popularite' => 'Pop&uuml;lerlik',

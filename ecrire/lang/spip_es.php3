@@ -228,8 +228,8 @@ Has facilitado las siguientes informaciones:
 IMPORTANTE...
 
 Para validar tu firma, basta con conectarte a
-la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, tu demanda
-ser&aacute; rechazada):
+la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, tu firma
+no ser&aacute; tomada en cuenta):
 
     @url@
 
