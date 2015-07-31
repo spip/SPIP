@@ -1,6 +1,8 @@
 /*
  * jQuery Form Plugin
  * version: 2.25 (08-APR-2009)
+ * +patch http://trac.rezo.net/trac/spip/changeset/13968
+ *
  * @requires jQuery v1.2.2 or later
  *
  * Examples and documentation at: http://malsup.com/jquery/form/
