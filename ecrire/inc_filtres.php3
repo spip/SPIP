@@ -506,23 +506,6 @@ function date_iso($date_heure) {
 	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
-// A supprimer apres referendum, remplace' par #EXPOSER et [(#EXPOSER|on,off)]
-function exposer ($id, $identique='on', $different='') {
-	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
-
-	// pour l'ordre des variables respecter celui des boutons de inc-admin.php3
-	$objet = $id_article
-	OR $objet = $id_breve
-	OR $objet = $id_rubrique
-	OR $objet = $id_mot
-	OR $objet = $id_auteur;
-
-	if ($id == $objet)
-		return $identique;
-	else
-		return $different;
-}
-
 //
 // Reduire la taille d'un logo
 // [(#LOGO_ARTICLE||reduire_image{100,60})]
