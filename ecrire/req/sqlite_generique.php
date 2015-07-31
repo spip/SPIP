@@ -958,7 +958,7 @@ function spip_sqlite_set_charset($charset, $serveur='',$requeter=true){
 function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 	// type est le type d'entrée : table / index / view
 	// on ne retourne que les tables (?) et non les vues...
-	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name LIKE '$match'", $serveur, $requeter);
+	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name LIKE '$match' ESCAPE '\'", $serveur, $requeter);
 }
 
 
