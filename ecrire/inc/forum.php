@@ -237,6 +237,10 @@ function racine_forum($id_forum){
 	if (!$row = spip_fetch_array($result))
 		return false;
 
+	if ($row['id_parent']
+	AND $row['id_thread'] != $id_forum)) // eviter boucle infinie
+		return racine_forum($row['id_thread']);
+
 	if ($row['id_rubrique'])
 		return array('rubrique', $row['id_rubrique'], $id_forum);
 	if ($row['id_article'])
@@ -245,9 +249,6 @@ function racine_forum($id_forum){
 		return array('breve', $row['id_breve'], $id_forum);
 	if ($row['id_syndic'])
 		return array('site', $row['id_syndic'], $id_forum);
-
-	if ($row['id_thread'] <> $id_forum)
-		return racine_forum($row['id_thread']);
 
 	// On ne devrait jamais arriver ici, mais prevoir des cas de forums
 	// poses sur autre chose que les objets prevus...

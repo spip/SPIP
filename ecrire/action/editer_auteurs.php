@@ -63,11 +63,12 @@ function action_editer_auteurs_dist() {
 // http://doc.spip.org/@supprimer_auteur_et_rediriger
 function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
+	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
-		spip_query("DELETE FROM spip_auteurs_{$type}s WHERE id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
+		spip_query("DELETE FROM spip_{$jointure} WHERE id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 				include_spip("inc/indexation");
-				marquer_indexer("spip_{$type}s", $id);
+				marquer_indexer("spip_".table_objet($type), $id);
 		}
 	}
 
@@ -77,14 +78,15 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 // http://doc.spip.org/@ajouter_auteur_et_rediriger
 function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
+	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
-		$res = spip_query("SELECT id_$type FROM spip_auteurs_{$type}s WHERE id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
+		$res = spip_query("SELECT id_$type FROM spip_{$jointure} WHERE id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
 		if (!spip_num_rows($res))
-			spip_abstract_insert("spip_auteurs_{$type}s", "(id_auteur,id_{$type})", "($id_auteur,$id)");
+			spip_abstract_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
 	
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer("spip_{$type}s", $id);
+			marquer_indexer("spip_".table_objet($type), $id);
 		}
 	}
 

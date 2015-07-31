@@ -613,6 +613,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 // API pour l'espace prive pour marquer un objet d'une table a reindexer
 // http://doc.spip.org/@marquer_indexer
 function marquer_indexer ($table, $id_objet) {
+	if (!isset($GLOBALS['INDEX_elements_objet'][$table]))
+		return;
 	spip_log ("demande indexation $table id=$id_objet");
 	$id = primary_index_table($table);
 	spip_query("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
