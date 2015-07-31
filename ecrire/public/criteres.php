@@ -57,8 +57,10 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 
-	if (!$primary)
-		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
+	if (!$primary OR strpos($primary,','))
+#		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
+// changer un peu le libelle
+		erreur_squelette(_L('doublon_sur_table_sans_cle_primaire_atomique'), "BOUCLE$idb");
 	$not = ($crit->not ? '' : 'NOT');
 
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
