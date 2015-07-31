@@ -15,11 +15,11 @@ include_spip('inc/actions');
 include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
+function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
-	$visible = ($cherche_mot OR ($flag === 'ajax'));
+	$visible = $visible OR ($cherche_mot OR ($flag === 'ajax'));
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';

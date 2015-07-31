@@ -161,7 +161,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
 	  $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
-	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
+	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, true))
 	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  );
@@ -279,7 +279,7 @@ function boites_de_config_articles($id_article)
 	return 
 		cadre_depliable("forum-interne-24.gif",
 		  $invite,
-		  $visible = strstr($masque, '<!-- visible -->'),
+		  true,//$visible = strstr($masque, '<!-- visible -->')
 		  $masque,
 		  'forumpetition');
 }
