@@ -233,12 +233,18 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 			jQuery(this).parent().toggleClass('nomplugin_on');
 		});
 		jQuery('div.nomplugin a[@rel=info]').click(function(){
+			var prefix = jQuery(this).parent().prev().attr('name');
 			if (!jQuery(this).siblings('div.info').html()) {
 				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin/, 'info_plugin')
+					jQuery(this).attr('href').replace(/admin_plugin/, 'info_plugin'), {},
+					function() {
+						document.location = '#' + prefix;
+					}
 				);
 			} else {
-				jQuery(this).siblings('div.info').toggle();
+				if (jQuery(this).siblings('div.info').toggle().attr('display') != 'none') {
+					document.location = '#' + prefix;
+				}
 			}
 			return false;
 		});
@@ -260,7 +266,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
+	$s = "<a name='{$info[prefix]}'></a><div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div class='toile_claire'>";
 		$erreur = true;
