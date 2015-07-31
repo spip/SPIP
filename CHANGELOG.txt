@@ -1,3 +1,47 @@
+SPIP-Core spip-3.0.14 -> spip-3.0.15  21 février 2014
+-------------------------------------------------------------
+
+r21147 | denisb    |  (lun. 20 janv. 2014) | ecrire/inc_version.php, ecrire/paquet.xml : une page de tournée, on repart au boulot...
+r21156 | b_b       |  (mer. 22 janv. 2014) | Report de r21155 : réparer le formulaire editer_liens en ajoutant un attribut type submit aux boutons (compat jquery.form suite à r20622)
+r21176 | cedric    |  (jeu. 06 févr. 2014) | patch grossier : quand une recherche se fait sur une table dont la clé primaire est composée, ne mémoriser que la valeur du premier champ de la clé. Ça marche moins pire qu'actuellement ou l'on ne memorise rien... (et ça peut etre utile sur certaines tables comme spip_formulaires_reponses_champs)
+r21177 | cedric    |  (ven. 07 févr. 2014) | Revert de r21138 qui introduit des incompatibilites (chaines de langue manquantes)svn merge -r21138:21137 .
+r21179 | eric      |  (sam. 08 févr. 2014) | Oubli d'un include pour spip_htmlentities
+r21180 | eric      |  (sam. 08 févr. 2014) | Suite du report de 21161 : oubli de l'include pour spip_htmlentitites
+r21181 | cedric    |  (lun. 10 févr. 2014) | Le modele <formulaire|...> est plus sympa :- dans l'espace privé il s'instancie directement car on a pas de cache et ça permet de le voir plutot que du PHP échappé- dans le site public il injecte son PHP comme avant, et reste bien dynamique
+r21183 | cedric    |  (jeu. 13 févr. 2014) | r14456 a nettoyé a raison la globale $contexte_inclus qui était utilisée par tous les <INCLURE>Mais dans le cas <INCLURE(script.php){foo=bar}> on ne disposait plus du contexte dans script.php, ce qui rendait totalement inoperant les anciennes écritures d'inclusion via php malgré la subsitance de code pour cela dans public.phpPar ailleurs ce script.php peut être utilisé pour faire un aiguillage dynamique vers un squelette ou un autre en fonction de la session et du contexte sans générer de multiplication de caches (performance issue).On rétablit donc l'affectation de la variable $contexte_inclus dans le seul cas d'une inclusion d'un php, script.php pouvant ainsi recevoir tout le contexte désiré (y compris un {env}) et agir en conséquence.Le define CODE_INCLURE_SCRIPT est modifié pour prendre $_contexte en argument supplémentaire, mais sans risque de casse en cas de personalisation.
+r21187 | cedric    |  (sam. 15 févr. 2014) | coquille dans la fonction affdate_debut_fin (merci les tests)
+r21188 | cedric    |  (sam. 15 févr. 2014) | coquille dans la chaine de langue sur les abbr (affdate_debut_fin)
+r21189 | cedric    |  (sam. 15 févr. 2014) | extraire_attribut redresse les ' exprimes en entites html, mais on peut avoir &#39; ou &#039;extraire_attribut est supposé aussi redresser les " exprimes en entites html d'après son test unitaire
+r21190 | cedric    |  (sam. 15 févr. 2014) | r19869 visait à ne plus echapper les simple quotes dans les flux RSS, mais du coup on n'échappait plus non plus les double quotes. On rétablit ce dernier cas.
+r21191 | cedric    |  (sam. 15 févr. 2014) | retablir la conversion des booleens (true => '1' et false=>'') de protege_champ qui avait sauté par erreur avec r16979(c'est a priori un cas peu courant, mais tenons nous en a la spec initiale definie par le test unitaire)
+r21206 | rasta     |  (sam. 15 févr. 2014) | Correction du sélecteur générique quand on sélectionne un article (oups de copiage-collage depuis celui des rubriques).
+r21225 | kent1     |  (ven. 21 févr. 2014) | report de r21224Passer la langue de l'article dans le contexte d'inclusion de la représentation de l'article.Permet d'avoir les modèles, par exemple les documents traduits à l'aide de balises multi, dans la langue de l'article et non la langue principale du site.
+r21227 | kent1     |  (ven. 21 févr. 2014) | revert de r21225 car change la langue de l'interface (pardon, oups)
+r21228 | cedric    |  (ven. 21 févr. 2014) | Report de r20237 : spip_meta n'existe pas toujours dans la base -- C'est le cas d'un dump sqlite par exemple (clot http://core.spip.org/issues/2951)
+
+SPIP-plugins-dist spip-3.0.14 -> spip-3.0.15  21 février 2014
+-------------------------------------------------------------
+
+r80151 | real3t    |  (lun. 20 janv. 2014) | Ajout du moteur Ecosia dans les moteurs de recherche reconnus par SPIP pour l'affichage des stats
+r80152 | real3t    |  (lun. 20 janv. 2014) | Et un incrément de z pour fêter ça !
+r80163 | b_b       |  (lun. 20 janv. 2014) | Fix de r80130 qui reportait les chaînes de langue du trunk sans modifier leur appel dans le source
+r80196 | marcimat  |  (mer. 22 janv. 2014) | Report de r80194 : Ajout des attributs type sur les boutons (relatif à http://core.spip.org/issues/3133) nécessaires à faire fonctionner l'ajout/suppression des liaisions, suite aux évolutions du plugins forms de jquery
+r80225 | b_b       |  (ven. 24 janv. 2014) | oubli malheureux dans r80059
+r80227 | b_b       |  (ven. 24 janv. 2014) | réparer la boulette de r80059
+r80421 | erational@erational.org |  (lun. 03 févr. 2014) | mise à jour de version pour tenir compte des mises à jour de langue (préfixe grenier) et forcer le zip sur files.spip.org à se rafraichir
+r80558 | cedric    |  (ven. 07 févr. 2014) | Revert de r80130 qui introduit des incompatibilites (chaines de langue supprimees)svn merge -r80130:80129 .
+r80682 | denisb    |  (ven. 14 févr. 2014) | compresseur/inc/compresseur_minifier.php : si elle est égale à 0, enlever la partie entière des unités décimales  (report de r80681).
+r80724 | cedric    |  (sam. 15 févr. 2014) | Renommer le dossier qui ne contient pas de tests unitaires mais des squelettes de test et debug
+r80726 | cedric    |  (sam. 15 févr. 2014) | mise a jour du lanceur pour utiliser simpletest de tests/
+r80760 | eric      |  (dim. 16 févr. 2014) | Correction de l'utilisation des forums privés pour un nouvel objet.Il suffit maintenant d'appeler le squelette discuter_forum dans la page de l'objet pour obtenir un forum privé sur l'objet.
+r80764 | eric      |  (dim. 16 févr. 2014) | Oups, oubli d'incrément de version.
+r80782 | cedric    |  (dim. 16 févr. 2014) | PHPDoc
+r80795 | cedric    |  (lun. 17 févr. 2014) | bugfix sur |image_fond_transparent : un if (true) de debug tentait de creer l'image meme si ce n'était pas nécessaire, et du coup la source pouvait être manquante (image intermédiaire non reconstruite car creer=false) ce qui provoquait une erreur squelette
+r80865 | cedric    |  (mar. 18 févr. 2014) | un pipeline pre_echappe_html_propre qui voit passer le texte brut de propre() avant tout echappement htmlLe nommage est verbeux, mais on pourrait etre amené à intégrer un pipeline symétrique dans typo() et cela permetta de les distinguer
+r80916 | severo@rednegra.net |  (mer. 19 févr. 2014) | forum - configuration pour désactiver la prévisualisation des messages.Pas actif, pour l'instant. Par défaut, la prévisualisationdes messages est activée (comportement actuel).
+r80917 | severo@rednegra.net |  (mer. 19 févr. 2014) | oups
+r80918 | severo@rednegra.net |  (mer. 19 févr. 2014) | oups 2 - pas commité au bon endroit.On va commiter dans http://zone.spip.org/trac/spip-zone/log/_core_/plugins/forumpour spip 3.1
+
 SPIP-Core spip-3.0.13 -> spip-3.0.14  19 janvier 2014
 -------------------------------------------------------------
 r20964 | eric      |  (lun. 11 nov. 2013) | Aligner la version dans inc_version.php avec celle de son paquet.xml
