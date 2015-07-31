@@ -293,7 +293,7 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 
 
 // http://doc.spip.org/@calcul_exposer
-function calcul_exposer ($id, $type, $reference) {
+function calcul_exposer ($id, $type, $reference, $parent) {
 	static $exposer;
 	static $ref_precedente;
 
@@ -303,23 +303,11 @@ function calcul_exposer ($id, $type, $reference) {
 	// en static.
 	if ($reference<>$ref_precedente) {
 		$ref_precedente = $reference;
-		$exposer = array();
-		foreach ($reference as $element=>$v) {
-			if ((strpos($element, "id_") === 0) AND $v) {
-				$x = substr($element, 3);
-				if ($x == 'secteur') $x = 'rubrique';
-				$desc = trouver_table(table_objet($x));
-				if ($desc) {
-					$table = $desc['table'];
-					$exposer[$element][$v] = true;
-					if (isset($desc['field']['id_rubrique'])) {
-						$row = sql_fetsel('id_rubrique', $table, ("$element=" . _q($v)));
-						$hierarchie = calculer_hierarchie($row['id_rubrique']);
-						foreach (split(',',$hierarchie) as $id_rubrique)
-							$exposer['id_rubrique'][$id_rubrique] = true;
-					}
-				}
-			}
+		$principal = $reference[$type];
+		$exposer= array($type => array($principal => true));
+		if ($principal AND $parent) {
+			foreach(split(',',calculer_hierarchie($parent)) as $n)
+				$exposer['id_rubrique'][$n] = true;
 		}
 	}
 
@@ -471,7 +459,7 @@ function calculer_notes() {
 }
 
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site.
-// Si le 2e parametre est "-1", c'est qu'on n'a pas pu
+// Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
 // Il faudrait encore completer: on ne connait pas la langue
 // pour une boucle forum sans id_article ou id_rubrique donné par le contexte
@@ -479,12 +467,13 @@ function calculer_notes() {
 // 
 // http://doc.spip.org/@lang_parametres_forum
 function lang_parametres_forum($qs, $lang) {
-	if ($lang == -1 AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
-		$desc = trouver_table(table_objet($r[1]));
-		if (!$desc OR !isset($desc['field']['lang'])) return '';
-		$lang = sql_getfetsel('lang', $desc['table'], ("id_$r[1]=" . intval($r[2])));
+	if (is_array($lang) AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
+		$id = 'id_' . $r[1];
+		if ($t = $lang[$id])
+			$lang = sql_getfetsel('lang', $t, "$id=" . $r[2]);
 	}
   // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
+
 	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
 		return $qs . "&lang=" . $lang;
 

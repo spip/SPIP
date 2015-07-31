@@ -291,17 +291,21 @@ function balise_EXPOSER_dist($p)
 // http://doc.spip.org/@calculer_balise_expose
 function calculer_balise_expose($p, $on, $off)
 {
-	$primary_key = $p->boucles[$p->id_boucle]->primary;
-	if (!$primary_key) {
-		erreur_squelette(_T('zbug_champ_hors_boucle',
-				array('champ' => '#EXPOSER')
-			), $p->id_boucle);
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$key = $p->boucles[$b]->primary; 
+	$desc = $p->boucles[$b]->show;
 
+	if (!$key) {
+		erreur_squelette(_T('zbug_champ_hors_boucle', array('champ' => '#EXPOSER')), $b);
 	}
 
-	$p->code = '(calcul_exposer('
-	.champ_sql($primary_key, $p)
-	.", '$primary_key', \$Pile[0]) ? $on : $off)";
+	$c = champ_sql($key, $p);
+
+	$r = !isset($desc['field']['id_rubrique']) ? "''"
+	  : index_pile($p->id_boucle, 'id_rubrique', $p->boucles, $b);
+
+	$p->code = "(calcul_exposer($c, '$key', \$Pile[0], $r) ? $on : $off)";
+
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -694,15 +698,20 @@ function balise_PARAMETRES_FORUM_dist($p) {
 		// y cherchera l'identifiant  donnant la langue
 		// et pour id_syndic c'est id_rubrique car sa table n'en a pas
 		  
-			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+			$liste_table = array ("article","breve","rubrique","syndic","forum");
 			$c = '';
-			foreach ($liste_champs as $champ) {
-				$x = champ_sql( $champ, $p);
+			$tables = array();
+			foreach ($liste_table as $t) {
+				$champ = 'id_' . $t;
+				$x = champ_sql($champ, $p);
 				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
+				if ($lang AND $t!='forum') $tables[]= 
+				  "'$champ' => '" . table_objet_sql($t) . "'";
 			}
 			$c = "substr($c,1)";
 
-			if ($lang) $lang = -1;
+			if ($lang)
+				$lang = "array(" . join(",",$tables) .")";
 			break;
 	}
 
