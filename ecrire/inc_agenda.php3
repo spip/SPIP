@@ -72,10 +72,10 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 				echo "</td>";
 			} else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
 				if ($jour_semaine==1) {
-					$style = "-moz-border-radius-top$spip_lang_left: 5px; -moz-border-radius-bottom$spip_lang_left: 5px;";
+					$style = "-moz-border-radius-top$spip_lang_left: 10px; -moz-border-radius-bottom$spip_lang_left: 10px;";
 				}
-				else if ($jour_semaine==7) {
-					$style = "-moz-border-radius-top$spip_lang_right: 5px; -moz-border-radius-bottom$spip_lang_right: 5px;";
+				else if ($jour_semaine==0) {
+					$style = "-moz-border-radius-top$spip_lang_right: 10px; -moz-border-radius-bottom$spip_lang_right: 10px;";
 				}
 				else {
 					$style = "";
