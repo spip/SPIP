@@ -185,14 +185,13 @@ function calculer_params($type, $params, $idb, &$boucles)
 	if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
 	  $col = $regs[1];
 	  if ($regs[2]) {
-	    $date_orig = "PileRow[0][date_redac]";
-	    $date_compare = 'PileRow[0][date_redac]';
+	    $date_orig = "$id_table.." . '$PileRow[0][date_redac]';
+	    $date_compare = '$PileRow[0][date_redac]';
 	  }
 	  else {
-	    $date_orig = $table_date[$type];
-	    $date_compare = 'PileRow[0][date]';
+	    $date_orig = "$id_table." . $table_date[$type];
+	    $date_compare = '$PileRow[0][date]';
 	  }
-	  $date_orig = "$id_table.$date_orig"; 
 
 	  if ($col == 'date')
 	    $col = $date_orig;
@@ -205,11 +204,31 @@ function calculer_params($type, $params, $idb, &$boucles)
 	    $col_table = '';
 	  }
 	  else if ($col == 'age') {
-	    $col = "(LEAST((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP($date_orig))/86400, TO_DAYS(now())-TO_DAYS($date_orig), DAYOFMONTH(now())-DAYOFMONTH($date_ orig)+30.4368*(MONTH(now())-MONTH($date_orig))+365.2422*(YEAR(now())-YEAR($date_orig))))";
+	    $col = "(LEAST((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(" . $date_orig . "))/86400, TO_DAYS(now())-TO_DAYS($date_orig), DAYOFMONTH(now())-DAYOFMONTH($date_ orig)+30.4368*(MONTH(now())-MONTH($date_orig))+365.2422*(YEAR(now())-YEAR($date_orig))))";
 	    $col_table = '';
 	  }
 	  else if ($col == 'age_relatif') {
-	    $col = "LEAST((UNIX_TIMESTAMP('\$$date_compare')-UNIX_TIMESTAMP($date_orig))/86400, TO_DAYS('\$$date_compare')-TO_DAYS($date_orig), DAYOFMONTH('\$$date_compare')-DAYOFMONTH($date_orig)+30.4368*(MONTH('\$$date_compare')-MONTH($date_orig))+365.2422*(YEAR('\$$date_compare')-YEAR($date_orig)))";
+	    $col = "LEAST((UNIX_TIMESTAMP('\" . " .
+		 $date_compare .
+		 ". \"')-UNIX_TIMESTAMP(" .
+		 $date_orig .
+		 "))/86400, TO_DAYS('\" . " .
+		 $date_compare .
+		 ". \"')-TO_DAYS(" .
+		 $date_orig .
+		 "), DAYOFMONTH('\" . " .
+		 $date_compare .
+		" . \"')-DAYOFMONTH(" .
+		 $date_orig .
+		 ")+30.4368*(MONTH('\" ." .
+		 $date_compare .
+		 " . \"')-MONTH(" .
+		 $date_orig .
+		 "))+365.2422*(YEAR('\" ." .
+		 $date_compare .
+		 ". \"')-YEAR(" .
+		 $date_orig .
+		 ")))";
 	    $col_table = '';
 	  }
 	  else if ($col == 'jour_relatif') {
