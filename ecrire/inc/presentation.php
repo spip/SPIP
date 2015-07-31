@@ -1594,13 +1594,11 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
 	. 'spip_style_print.css" media="print" >' . "\n"
 
-	// CSS "visible au chargement", hack necessaire pour garder un depliement
-	// sympathique meme sans javascript (on exagere ?)
-	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
-	. '<link rel="alternate stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style_invisible.css" title="invisible" >' . "\n"
-	. '<link rel="stylesheet" href="' . _DIR_IMG_PACK
-	. 'spip_style_visible.css"  title="visible" >' . "\n"
+	// CSS "visible au chargement" differente selon js actif ou non
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
+	. 'spip_style_'
+	. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
+	. '.css" >' . "\n"
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'
@@ -2040,7 +2038,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		. ' onLoad="'
-		. "setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
+		. "$browser_verifForm$onLoad"
 		. '">');
 
 	if ($spip_ecran == "large") $largeur = 974;

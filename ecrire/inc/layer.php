@@ -89,6 +89,11 @@ function bouton_block_visible($nom_block){
 }
 
 function produire_acceder_couche($couches, $nom, $icone) {
+
+	// ne rien afficher si js desactive
+	if ($_COOKIE['spip_accepte_ajax'] == -1)
+		return '';
+
 	$onclick = array();
 	foreach($couches as $i=>$couche)
 		$onclick[] = 'swap_couche(' . $couche[0]
