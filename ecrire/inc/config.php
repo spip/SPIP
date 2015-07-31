@@ -78,7 +78,7 @@ function liste_metas()
 
 		'activer_moteur' => 'non',
 		'articles_versions' => 'non',
-		'preview' => 'non',
+		'preview' => '',
 		'activer_statistiques' => 'non',
 
 		'documents_article' => 'non',
@@ -200,6 +200,10 @@ function appliquer_modifs_config() {
 	if ($i = _request('langues_auth') AND is_array($i)) {
 		set_request('langues_multilingue', join($i, ","));
 	}
+
+	if ($i = _request('preview') AND is_array($i)) {
+		set_request('preview', "," . join($i, ",") . ",");
+	} else	set_request('preview', '');
 
 	if ($i = _request('email_webmaster'))
 		ecrire_meta("email_webmaster", $i);
