@@ -207,6 +207,13 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		jQuery('form:not(.noajax):not(.bouton_action_post)', this).each(function(){
 		var leform = this;
 		var leclk,leclk_x,leclk_y;
+		var onError = function(xhr, status, error, $form){
+			jQuery(leform).ajaxFormUnbind().find('input[name="var_ajax"]').remove();
+			var msg = "Erreur";
+			if (typeof(error_on_ajaxform)!=="undefined") msg = error_on_ajaxform;
+			jQuery(leform).prepend("<p class='error ajax-error none'>"+msg+"</p>").find('.ajax-error').show('fast');
+			jQuery(cible).closest('.ariaformprop').endLoading(true);
+		}
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
 		.ajaxForm({
 			beforeSubmit: function(){
@@ -225,8 +232,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 				if (scrollwhensubmit)
 					jQuery(cible).positionner(false,false);
 			},
-			success: function(c){
-				if (c=='noajax'){
+			error: onError,
+			success: function(c, status, xhr , $form){
+				if (c.match(/\s*noajax\s*/)){
 					// le serveur ne veut pas traiter ce formulaire en ajax
 					// on resubmit sans ajax
 					jQuery("input[name=var_ajax]",leform).remove();
@@ -246,6 +254,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {
+					if (!c.length || c.indexOf("ajax-form-is-ok")==-1)
+						return onError.apply(this,[status, xhr , $form]);
 					// commencons par vider le cache des urls, si jamais un js au retour
 					// essaye tout de suite de suivre un lien en cache
 					// dans le doute sur la validite du cache il vaut mieux l'invalider

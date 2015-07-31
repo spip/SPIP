@@ -245,7 +245,8 @@ function traiter_formulaires_dynamiques($get=false){
 				$retour .= inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false);
 				// on ajoute un br en display none en tete du retour ajax pour regler un bug dans IE6/7
 				// sans cela le formulaire n'est pas actif apres le hit ajax
-				$retour = "<br class='bugajaxie' style='display:none;'/>".$retour;
+				// la classe ajax-form-is-ok sert a s'assurer que le retour ajax s'est bien passe
+				$retour = "<br class='bugajaxie ajax-form-is-ok' style='display:none;'/>".$retour;
 				ajax_retour($retour,false);
 				return true; // on a fini le hit
 			}
