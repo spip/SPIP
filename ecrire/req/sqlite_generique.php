@@ -660,7 +660,7 @@ function spip_sqlite_error($query = '', $serveur = ''){
 		$s = '';
 		if (ltrim($errs[0],'0')){ // 00000 si pas d'erreur
 			foreach ($errs as $n => $e){
-				$s .= "\n$n : $e";
+				$s .= " | $n : $e";
 			}
 		}
 	} elseif ($link) {
