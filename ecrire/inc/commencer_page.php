@@ -154,12 +154,20 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		// Choix de la couleur
 		$res .= "</div></li>";
 */
-		$res .= "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>"
+		$res .= "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>";
+
+		// couleurs
+		$couleurs = charger_fonction('couleurs', 'inc');
+		$res .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
+		$res .= $couleurs() . "</div>";
+
+
 		//. $couleurs()
-		. "<a href='#' onmouseover=\"changestyle('bandeauinterface');\" title=\"$i\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\">" 
-		. _L('Pr&eacute;f&eacute;rences')
-		. "</a>"
-		. "</div></li>";
+//		. "<a href='#' onmouseover=\"changestyle('bandeauinterface');\" title=\"$i\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\">" 
+//		. _L('Affichage')
+//		. "</a>";
+		
+		$res .= "</div></li>";
 
 		// choix de la langue
 		if ($i = menu_langues('var_lang_ecrire')) {

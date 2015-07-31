@@ -129,10 +129,19 @@ ol.formfx .commentaire_bas{
 	float: #GET{left};
 	margin-#GET{left}: -20px;	
 }
+ol.formfx li textarea {
+	padding: 7px;
+	font-family: verdana, arial, sans;
+	font-size: 12px;
+	line-height: 1.3em;
+}
 ol.formfx li.obligatoire label {
 	font-weight: bold;
 }
-
+ol.formfx li label em {
+	float: #GET{right};
+	padding-#GET{right}: 5px;
+}
 ol.formfx li.gauche {
 	position: relative;
 	clear: #GET{left};
@@ -148,10 +157,10 @@ ol.formfx li.gauche label {
 		display: block;
 		width: 110px;
 		
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
 
 		font-size: 9px;
-		color: white;
+		color: #[(#GET{foncee}|couleur_foncer)];
 		line-height: 11px;
 		text-transform: uppercase;
 		font-family: verdana, arial, helvetica, sans;
@@ -162,7 +171,8 @@ ol.formfx li.gauche label {
 		padding-right: 5px;
 	}
 ol.formfx li.gauche.obligatoire label {
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#666666}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#555555}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+		color: white;
 }
 ol.formfx li.gauche input, ol.formfx li.gauche textarea {
 	margin-top: -1.9em;
@@ -197,23 +207,22 @@ ol.formfx li.haut label {
 		padding-bottom: 9px;
 		padding-left: 5px;
 		padding-right: 5px;
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+		color: #[(#GET{foncee}|couleur_foncer)];
 
 }
 ol.formfx li.haut.obligatoire label {
 		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#666666}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+		color: white;
 }
 ol.formfx fieldset {
 	margin-top: 7px;
 	border: 1px solid #GET{foncee};
 	padding-top: 2px;
-	margin-left: 9px;
 	padding: 10px;
 	padding-top: 5px;
 }
 ol.formfx fieldset legend {
-		clear: #GET{left};
-		margin-#GET{left}: -20px;
 		
 		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
 
@@ -285,7 +294,7 @@ select.fondl { padding: 0; }
 #bandeau_couleur1 .menu-item { width: 230px; text-align: #ENV{ltr}}
 #bandeau_couleur3 .menu-item { width: 150px; text-align: #GET{right}}
 #bandeau_couleur4 .menu-item { width: 68px; margin: 0 5px; text-align: #GET{right}; }
-#bandeau_couleur4 .menu-item a {font-weight:normal;}
+#bandeau_couleur4 .menu-item a {font-weight:normal; color: black;}
 #bandeau_couleur5 .menu-item { width: 114px; }
 #bandeau_couleur6 .menu-item { width: 32px; }
 
@@ -302,7 +311,7 @@ select.fondl { padding: 0; }
 /* .bandeau_sec .gauche { margin-top: 0; padding: 2px; padding-top: 0; background-color: #FFF; border-bottom: 1px solid #000; border-#GET{left}: 1px solid #000; border-#GET{right}: 1px solid #000; z-index: 100; } */
 /* .bandeau-icones.separateur { vertical-align: middle; height: 100%; width: 11px; margin: 0; padding: 0; background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=tirets-separation.gif); background-position: 5px 0px; } */
 .bandeau_couleur { padding-#GET{right}: 4px; padding-#GET{left}: 4px; font-family: verdana, helvetica, arial, sans; font-size: 11px; color: #000; text-align: center; font-weight: bold; height: 22px; }
-.bandeau_couleur_sous { position: absolute; visibility: hidden; top: 0; background-color: #GET{claire}; color: #000; padding: 5px; padding-top: 2px; font-family: verdana, helvetica, arial, sans; font-size: 11px; border-bottom: 1px solid #FFF; border-#GET{right}: 1px solid #FFF; }
+.bandeau_couleur_sous { position: absolute; visibility: hidden; top: 0; background-color: #GET{claire}; color: #000; padding: 5px; padding-top: 2px; font-family: verdana, helvetica, arial, sans; font-size: 11px; }
 
 a.lien_sous { color: #666; }
 a.lien_sous:hover { color: #000; }

@@ -12,19 +12,19 @@
 	  <ol class="formfx">
 	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
 	    <li class="gauche">
-	      <label for="surtitre"><:texte_sur_titre:><em>#AIDER{arttitre}</em></label>
+	      <label for="surtitre"><em>#AIDER{arttitre}</em><:texte_sur_titre:></label>
 	      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
 	    </li>]
 	    <li class="gauche obligatoire">
-	      <label for="titre"><:info_titre:><em>#AIDER{arttitre}</em></label>
+	      <label for="titre"><em>#AIDER{arttitre}</em><:info_titre:></label>
 	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 	    </li>
 	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
 	    <li class="gauche">
-	      <label for="soustitre"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
+	      <label for="soustitre"><em>#AIDER{arttitre}</em><:texte_sous_titre:></label>
 	      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV**{soustitre})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
 	    </li>]
@@ -34,7 +34,7 @@
 	
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">
-	      <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
+	      <label for="descriptif"><em>#AIDER{artdesc}</em><:texte_descriptif_rapide:></label>
 	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 	    </li>]
@@ -43,10 +43,10 @@
 				<label for='virtuel'><:info_redirection:></label>
 				<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''})]" />
 				<input type='hidden' name='changer_virtuel' value='oui' />
-				<div class='commentaire_bas'><:texte_article_virtuel_reference:>#AIDER{artvirt}</div>
+				<div class='commentaire_bas'><em>#AIDER{artvirt}</em><:texte_article_virtuel_reference:></div>
 			</li>]
 			[<li class="haut">(#ENV**{chapo}|match{^=}|?{'',' '})
-				<label for="chapo"><:info_chapeau:><em>#AIDER{arttitre}</em></label>
+				<label for="chapo"><em>#AIDER{arttitre}</em><:info_chapeau:></label>
 				<textarea name='chapo' id='chapo' class='forml'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
 			</li>]
@@ -68,9 +68,9 @@
 	    </fieldset></li>]
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
 	    <li class="haut">
-	      <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em></label>
+	      <label for="text_area"><em>#AIDER{arttexte}</em><:info_texte:></label>
 	    	[(#ENV**{_texte_trop_long,''})]
-	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+	      <div class="commentaire"><em>#AIDER{raccourcis}</em><:texte_enrichir_mise_a_jour:></div>
 	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
