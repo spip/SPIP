@@ -225,9 +225,7 @@ function sax_bug($data)
 	$doctype = "";
 
 	$r = analyser_doctype($data);
-	if (!$r)
-		$data = html2unicode($data, true);
-	else  {
+	if ($r) {
 		list ($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
 		//$data = str_replace('DOCTYPE','doctype',$doctype).substr($data,strlen($doctype));
 		$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
@@ -236,16 +234,21 @@ function sax_bug($data)
 		else {
 			include_spip('xml/analyser_dtd');
 		    	$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
-			if ($avail == 'PUBLIC')
+			if (($avail == 'PUBLIC' ) AND $phraseur_xml->dtc)
 				ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
 		}
+	}
+
+	if ($phraseur_xml->dtc) {
 		$trans = array();
 		
 		foreach($phraseur_xml->dtc->entites as $k => $v)
-		  if (!strpos(" amp lt gt quot ", $k))
-		    $trans["&$k;"] = $v;
+			if (!strpos(" amp lt gt quot ", $k))
+			    $trans["&$k;"] = $v;
 		$data = strtr($data, $trans);
-	}
+	} else 
+		$data = html2unicode($data, true);
+		
 	return array($doctype,unicode2charset($data));
 }
 
