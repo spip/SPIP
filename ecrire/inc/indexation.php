@@ -881,7 +881,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
-	if (!$cache[$recherche][$primary]) {
+	if (!$cache[$recherche][$id_table.$primary]) {
 		if (!$cache[$recherche]['hash'])
 			$cache[$recherche]['hash'] = requete_hash($recherche);
 		list($hash_recherche, $hash_recherche_strict, $hash_recherche_not, $hash_recherche_and, $hash_recherche_strict_and)
@@ -944,7 +944,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
-			$cache[$recherche][$primary] = array("''", '0');
+			$cache[$recherche][$id_table.$primary] = array("''", '0');
 		} else {
 			$ids = array();
 			$select = '0';
@@ -955,7 +955,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 					calcul_mysql_in("$id_table.$primary", substr($liste_ids, 1))
 					.") ";
 
-			$cache[$recherche][$primary] = array($select,
+			$cache[$recherche][$id_table.$primary] = array($select,
 				'('.calcul_mysql_in("$id_table.$primary",
 					join(',',array_keys($points))).')'
 				);
@@ -966,7 +966,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 		// purger le petit cache
 		nettoyer_petit_cache('rech', 300);
 	}
-	return $cache[$recherche][$primary];
+	return $cache[$recherche][$id_table.$primary];
 }
 
 
