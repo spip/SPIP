@@ -460,10 +460,14 @@ function translitteration($texte, $charset='AUTO') {
 		}
 	}
 
+/*
+	// Le probleme d'iconv c'est qu'il risque de nous renvoyer des ? alors qu'on
+	// prefere garder l'utf-8 pour que la chaine soit indexable.
 	// 3. Translitterer grace a iconv
 	if ($GLOBALS['flag_iconv'] && ereg('&#0*([0-9]+);', $texte)) {
 		$texte = iconv('utf-8', 'ascii//translit', $texte);
 	}
+*/
 
 	return $texte;
 }
