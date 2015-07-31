@@ -264,7 +264,6 @@ function gerer_menu_langues() {
 	if ($var_lang) {
 		if (changer_langue($var_lang)) {
 			spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
-
 		}
 	}
 }
@@ -307,7 +306,7 @@ function init_langues() {
 
 		if (!$langue_site) {
 			// Initialisation : le francais par defaut, sinon la premiere langue trouvee
-			if (ereg(',fr,', ',$all_langs,')) $langue_site = 'fr';
+			if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
 			else list(, $langue_site) = each($toutes_langs);
 			if (defined("_ECRIRE_INC_META"))
 				ecrire_meta('langue_site', $langue_site);
