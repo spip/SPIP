@@ -3,7 +3,7 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok,#ENV*{_confirm}|affiche_reponse_confirmation})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
-<form method="post" action="#ENV{action}#sp#ENV{id_article}">
+<form method="post" action="#ENV{action}#sp#ENV{id_article}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	
 	<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
@@ -46,7 +46,7 @@
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;">
 		<label for="nobot"><:antispam_champ_vide:></label>
-		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+		<input type="text" class="text" name="nobot" id="nobot_signature#ENV{id_article}" value="#ENV{nobot}" size="10" />
 	</p>
 
 	[(#ENV{_message})
@@ -61,6 +61,7 @@
 	</fieldset>]
 
 	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+</div>
 </form>
 ]
 </div>
