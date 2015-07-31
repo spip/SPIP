@@ -5,7 +5,7 @@ http://www.alistapart.com/articles/prettyaccessibleforms
 NB: ca sert a quoi ?
 ***********************************/
 .cadre-formulaire form fieldset { margin: 0px; width:100%;border:0;padding:0;clear:both;}
-	
+
 .cadre-formulaire form legend { padding: 0 2px; font-weight: bold; _margin: 0 -7px; /* IE Win */	}
 .cadre-formulaire form label { display: inline-block; /* vertical-align: top; */ }
 .cadre-formulaire form fieldset ol { margin: 0; padding: 0; list-style: none; }
@@ -51,7 +51,7 @@ $(function(){
     </li>]
     <li>
       <label for="titre"><:texte_titre_obligatoire:><em>#AIDER{arttitre}</em></label>
-      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]" 
+      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]"
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
     </li>
   	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
@@ -62,7 +62,7 @@ $(function(){
 
     [(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
     |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})]
-  
+
   	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
     <li>
       <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
@@ -113,8 +113,8 @@ $(function(){
     </li>]
   </ol>
 
-    [(#ENV**{config}|table_valeur{extra}|?{
+    [(#ENV**{config}|table_valeur{extra}|match{non}|?{'',' '})
     	[(#ENV**{extra}|editer_extra{#ENV{id_secteur}})]
-    })]
+    ]
 
 </fieldset>
