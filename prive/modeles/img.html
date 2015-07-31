@@ -30,5 +30,5 @@
 	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]><img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT})]' /></a></span>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]><img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}|attribut_html)]' /></a></span>
 ]</BOUCLE_document>
