@@ -104,34 +104,36 @@ function mots_du_forum($ajouter_mot, $id_message)
 function enregistre_forum() {
 	global $REMOTE_ADDR, $auteur_session,
 	  $afficher_texte, $ajouter_mot, $alea, $hash,
-	  $auteur, $confirmer_forum, $email_auteur,
-	  $id_article, $id_auteur, $id_breve, $id_forum, $id_rubrique, $id_syndic,
+	  $auteur, $confirmer_forum, $email_auteur, $id_auteur,
 	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;
 
 	$retour_forum = rawurldecode($retour_forum);
-	$id_article = intval($id_article);
-	$id_rubrique = intval($id_rubrique);
-	$id_forum = intval($id_forum);
-	$id_breve = intval($id_breve);
-	$id_syndic = intval($id_syndic);
 
-// initialisation de l'eventuel visiteur connecte
+	// Recuperer les donnees postees du formulaire ou stocker '0'
+	foreach (array('id_article', 'id_breve', 'id_syndic',
+	'id_rubrique', 'id_forum') as $id)
+		if (isset($_POST['forum_'.$id]))
+			$$id = intval($_POST['forum_'.$id]);
+		else
+			$$id = 0;
+
+	// initialisation de l'eventuel visiteur connecte
 	if (!$id_auteur)
 	$id_auteur = intval($auteur_session['id_auteur']);
 
 	$statut = controler_forum($id_article, $retour_forum);
 
-// Ne pas autoriser de changement de nom si forum sur abonnement
-
+	// Ne pas autoriser de changement de nom si forum sur abonnement
 	if ($statut == 'abo') {
 		$auteur = $auteur_session['nom'];
 		$email_auteur = $auteur_session['email'];
 	}
 
-// trop court ?
-	if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
+	// trop court ?
+	if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) +
+	strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
 		ask_php_auth(_T('forum_message_trop_long'),
-			     _T('forum_cliquer_retour',
+			_T('forum_cliquer_retour',
 				array('retour_forum' => $retour_forum)));
 		exit;
 	}
@@ -140,8 +142,10 @@ function enregistre_forum() {
 	include_ecrire("inc_admin.php3");
 	if (!verifier_action_auteur("ajout_forum $id_rubrique".
 	" $id_forum $id_article $id_breve".
-	" $id_syndic $alea", $hash))
-		exit; 	# echec silencieux du POST
+	" $id_syndic $alea", $hash)) {
+		spip_log('erreur hash forum');
+		die (_T('forum_titre_erreur')); 	# echec du POST
+	}
 
 	// verifier fichier lock
 	$alea = preg_replace('/[^0-9]/', '', $alea);
