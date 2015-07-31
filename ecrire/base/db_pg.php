@@ -51,6 +51,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'delete' => 'spip_pg_delete',
 		'errno' => 'spip_pg_errno',
 		'error' => 'spip_pg_error',
+		'explain' => 'spip_pg_explain',
 		'fetch' => 'spip_pg_fetch',
 		'free' => 'spip_pg_free',
 		'insert' => 'spip_pg_insert',
@@ -120,7 +121,19 @@ function spip_pg_alter($query, $serveur='') {
 	}
 }
 
-//  Qu'une seule base pour le moment
+function spip_pg_explain($query, $serveur=''){
+	if (strpos($query, 'SELECT') !== 0) return array();
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
+	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
+		$suite = strstr($query, $regs[0]);
+		$query = substr($query, 0, -strlen($suite));
+	} else $suite ='';
+	$query = 'EXPLAIN ' . preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
+
+	$r = pg_query($link,$query);
+	return spip_pg_fetch($r, NULL, $serveur);
+}
 
 // http://doc.spip.org/@spip_pg_selectdb
 function spip_pg_selectdb($db) {

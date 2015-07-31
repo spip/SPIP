@@ -73,6 +73,11 @@ function sql_alter($q, $serveur='') {
 	return $f($q, $serveur);
 }
 
+function sql_explain($q, $serveur='') {
+	$f = sql_serveur('explain', $serveur);
+	return $f($q, $serveur);
+}
+
 // http://doc.spip.org/@sql_fetch
 function sql_fetch($res, $serveur='') {
 	$f = sql_serveur('fetch', $serveur);

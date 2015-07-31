@@ -53,7 +53,9 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	$res = '';
 	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr><td style='text-align: right'>$i</td><td>" .$err[0] . "</td><td>".$err[1]."</td></tr>\n";
+		$res .= "<tr><td style='text-align: right'>$i</td><td>"
+		  .join("</td>\n<td>",$err)
+		  ."</td></tr>\n";
 		$i++;
 	}
 	$style = _DIR_RESTREINT ? "position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
@@ -665,9 +667,18 @@ function trace_query_chrono($m1, $m2, $query, $result)
  	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
 	$nb++;
+
+	$explain = '';
+	foreach (sql_explain($query) as $k => $v) {
+		$explain .= "<tr><td>$k</td><td>" .str_replace(';','<br />',$v) ."</td></tr>";
+	}
+	if ($explain) $explain = "<table border='1'>$explain</table>";
+	$result = str_replace('Resource id ','',$result);
+	$query = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
 	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
-				     "<table border='1'><tr><td>" .
-				     sprintf(" %3d", $nb) .
-				     "e</td><td>$query</td><td>$result</td></tr></table>");
+				     sprintf(" %3de", $nb),
+				     $query,
+				     $explain,
+				     $result);
 }
 ?>
