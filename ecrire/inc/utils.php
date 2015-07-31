@@ -387,8 +387,10 @@ function _T($texte, $args=array()) {
 
 	static $traduire=false ;
 
- 	if (!$traduire)
+ 	if (!$traduire) {
 		$traduire = charger_fonction('traduire', 'inc');
+		include_spip('inc/lang');
+	}
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
 	if (!strlen($text))
@@ -1477,6 +1479,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 			
 		if ($GLOBALS['var_noisettes'])
 			$page['texte'] = "<fieldset class='blocs'><legend>".$page['sourcefile']."</legend>".$page['texte']."</fieldset>";
+		$page = pipeline('recuperer_fond',array(
+			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
+			'data'=>$page
+		));
 		if (isset($options['raw']) AND $options['raw'])
 			$pages[] = $page;
 		else
