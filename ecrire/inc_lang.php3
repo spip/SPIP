@@ -263,13 +263,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$parenthese_o = '(';
 		$parenthese_f = ')';
 		$default = lire_meta('langue_site');
-	} else if (substr($default,0,1) == '.') {
-		$parenthese_o = '(';
-		$parenthese_f = ')';
-		$default = substr($default,1);
 	}
-	
-	
 
 	if ($nom_select == 'var_lang') {
 		$langues = explode(',', $GLOBALS['all_langs']);
@@ -297,9 +291,9 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	
 	if (lire_meta('multi_rubriques') == "oui") {
 		if ($herit) {
-			$ret .= "<option value='herit' selected> ("._T('info_multi_herit').")</option>\n";
+			$ret .= "<option value='herit' selected>"._T('info_multi_herit')." ($default)</option>\n";
 		} else if ($nom_select == 'changer_lang') {
-			$ret .= "<option value='herit'> ("._T('info_multi_herit').")</option>\n";
+			$ret .= "<option value='herit'>"._T('info_multi_herit')." ($default)</option>\n";
 		}
 	}
 
