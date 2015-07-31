@@ -400,19 +400,21 @@ function spip_pg_frommysql($arg)
 			    $res);
 
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)\"([^\"]*)\"/", '\1\'\2\'', $res);
+	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m%d\'[)]/', 'to_number(to_char(\1, \'YYYYMMDD\'), \'8\')', $res);
+	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m\'[)]/', 'to_number(to_char(\1, \'YYYYMM\'),\'6\')', $res);
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
 	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
 	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
 	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\s+\d+:\d+(:\d+)\')/', '\1 timestamp \2', $res);
-	$res = preg_replace('/(\'\d+-\d+-\d+\s+\d+:\d+:\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+	$res = preg_replace('/(\'\d+-\d+-\d+\s+\d+:\d+:\d+\')\s*([+<>-]=?)/', 'timestamp \1 \2', $res);
 
-	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 date \2', $res);
-	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 timestamp \2', $res);
+	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'timestamp \1 \2', $res);
 
-	$res = preg_replace('/(date .\d+)-00-/','\1-01-', $res);
-	$res = preg_replace('/(date .\d+-\d+)-00/','\1-01',$res);
-	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(date *'[^']*' *[+-] *date *'[^']*') *[)]/", '\2', $res);
-	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)('[^']*')/", '\1 date \2', $res);
+	$res = preg_replace('/(timestamp .\d+)-00-/','\1-01-', $res);
+	$res = preg_replace('/(timestamp .\d+-\d+)-00/','\1-01',$res);
+	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(timestamp *'[^']*' *[+-] *timestamp *'[^']*') *[)]/", '\2', $res);
+	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)('[^']*')/", '\1 timestamp \2', $res);
 
 	return str_replace('REGEXP', '~', $res);
 }
@@ -713,7 +715,7 @@ function spip_pg_cite($v, $t)
 		else {
 			if (strpos($v, "-00-00") === 4)
 				$v = substr($v,0,4)."-01-01".substr($v,10);
-			return "date '$v'";
+			return "timestamp '$v'";
 		}
 	}
 	elseif (!sql_test_int($t))
