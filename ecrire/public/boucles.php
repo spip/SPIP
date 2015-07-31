@@ -245,7 +245,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	. '$hierarchie = '
 	. (isset($boucle->modificateur['tout']) ? '",$id_rubrique"' : "''")
 	. ";\n\t"
-	. 'while ($id_rubrique = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=" . $id_rubrique,"","",0, "", $connect)) { 
+	. 'while ($id_rubrique = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=" . $id_rubrique,"","","", "", $connect)) { 
 		$hierarchie = ",$id_rubrique$hierarchie";
 	}
 	if (!$hierarchie) return "";
