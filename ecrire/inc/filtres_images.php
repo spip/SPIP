@@ -2073,8 +2073,7 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $trans
 			$im = $im_;
 		}
 		// allouer la couleur de fond
-		if ($transparence) 	$color_t = ImageColorAllocateAlpha( $im_, $dr, $dv, $db, 127);
-		else 	$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
+		$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
 
 		imagefill ($im_, 0, 0, $color_t);
 
