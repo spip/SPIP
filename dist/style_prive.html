@@ -117,7 +117,7 @@ select.fondl {
 	width: 11px;
 	padding: 0;
 	margin: 0;
-	background: url(#EVAL{_DIR_IMG_PACK}tirets-separation.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=tirets-separation.gif);
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -170,7 +170,7 @@ a.bandeau_rub {
 	border-bottom: 1px solid #ccc;
 	background-repeat: no-repeat;
 	background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center;
-	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
 }
 a.bandeau_rub:hover {
 	background-color: #fff;
@@ -191,7 +191,7 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }
 div.pos_r {
 	position: relative;
@@ -199,7 +199,7 @@ div.pos_r {
 
 option.selec_rub {
 	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] center;
-	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
 	background-repeat: no-repeat;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 }
@@ -233,7 +233,7 @@ a.icone26 img {
 	background-color: ##ENV{couleur_foncee,3874b0};
 }
 a.icone26:hover img {
-	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 }
 
 
@@ -355,7 +355,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0;
 	border: 0;
-	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 }
 
 
@@ -380,7 +380,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
-	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
 }
@@ -487,7 +487,7 @@ a.cellule-h div.cell-i {
 a.cellule-h:hover div.cell-i {
 	padding: 0;
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0;
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
@@ -530,7 +530,7 @@ a.cellule-h-texte {
 }
 .danger a.cellule-h-texte {
 	border: 1px dashed #000;
-	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rayures-sup.gif);
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
@@ -624,10 +624,10 @@ div.onglet_off {
 
 
 .reliefblanc {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}barre-blanc.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=barre-blanc.gif);
 }
 .reliefgris { 
-	 background-image: url(#EVAL{_DIR_IMG_PACK}barre-noir.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=barre-noir.gif);
 }
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaa; background-color: #f0f0f0;
@@ -636,7 +636,7 @@ div.onglet_off {
 	cursor: pointer; padding: 3px; margin: 1px; border-right: solid 1px #fff; border-bottom: solid 1px #fff; border-left: solid 1px #666; border-top: solid 1px #666; background-color: #eee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed #000;
-	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rayures-sup.gif);
 }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
@@ -1010,19 +1010,19 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles .publie {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-verte.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-verte.gif);
 }
 .plan-articles .prepa {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-blanche.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-blanche.gif);
 }
 .plan-articles .prop {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-orange.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-orange.gif);
 }
 .plan-articles .refuse {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-rouge.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-rouge.gif);
 }
 .plan-articles .poubelle {
-	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-poubelle.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-poubelle.gif);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
@@ -1072,7 +1072,7 @@ div.liste {
 }
 
 a.liste-mot {
-	background: url(#EVAL{_DIR_IMG_PACK}petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
 }
 
@@ -1142,7 +1142,7 @@ div.brouteur_rubrique {
 	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: #fff;
 }
 
@@ -1154,7 +1154,7 @@ div.brouteur_rubrique_on {
 	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1223,7 +1223,7 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(#EVAL{_DIR_IMG_PACK}spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
 	border-bottom: 1px solid;
 }
@@ -1343,7 +1343,7 @@ a.triangle_block:hover {
 }
 
 .fond-agenda {
-	background: url(#EVAL{_DIR_IMG_PACK}fond-agenda.gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-agenda.gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	float: [(#ENV{ltr}|choixsiegal{left,left,right})]; 
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 4px;
@@ -1366,10 +1366,10 @@ div.highlight:hover, div.pashighlight:hover {
 
 div.petite-rubrique {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
-	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
 }
 div.rub-ouverte {
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
-	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }
