@@ -114,8 +114,6 @@ function minipipe($fonc,&$val){
 	// fonction
 	if (function_exists($fonc))
 		$val = call_user_func($fonc, $val);
-	else if (function_exists($fonc . '_dist'))
-		$val = call_user_func($fonc. '_dist', $val);
 	// Class::Methode
 	else if (preg_match("/^(\w*)::(\w*)$/S", $fonc, $regs)
 	AND $methode = array($regs[1], $regs[2])
