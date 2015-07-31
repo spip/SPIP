@@ -477,7 +477,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuèi lors servido
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cerchador integrat a SPIP? (lo desactivar abriva lo foncionament dau sistèma.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Raiç dau sit',
 'info_recharger_page' => 'Volhatz tornar charjar aquela pagina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròp de resultats per "@cherche_auteur@"; volhatz afinar la cèrcha.',

@@ -473,7 +473,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
 (desaktibapenak sistemaren funtzionamendua bizkortzen du.)',
 'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
-'info_qui_edite' => '@nom_auteur_modif@ eduki hau landu du duela  @date_diff@ minutu',
+'info_qui_edite' => '@nom_auteur_modif@ eduki hau landu du duela  @date_diff@ minutu', # MODIF
 'info_racine_site' => 'Gunearen erroa',
 'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
 'info_recherche_auteur_a_affiner' => 'Emaitza gehiegi "@cherche_auteur@"-rako ; mesedez bilaketa doitu.',

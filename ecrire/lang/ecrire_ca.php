@@ -468,7 +468,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
  (inhabilitar-lo accelera el funcionament del sistema.)',
 'info_question_vignettes_referer_non' => 'No mostrar les captures dels llocs d\'origen de les visites',
-'info_qui_edite' => '@nom_auteur_modif@ ha treballat en aquest contingut fa @date_diff@ minuts',
+'info_qui_edite' => '@nom_auteur_modif@ ha treballat en aquest contingut fa @date_diff@ minuts', # MODIF
 'info_racine_site' => 'Arrel del lloc',
 'info_recharger_page' => 'Actualitzeu aquesta pàgina en breus instants.',
 'info_recherche_auteur_a_affiner' => 'Massa resultats per "@cherche_auteur@"; afineu la cerca.',

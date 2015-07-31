@@ -460,7 +460,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'آيا مايل هستيد كه از موتور جستجوى اسپيپ استفاده كنيد ؟
  (غير فعال كردن آن سرعت سيستم را افزايش ميدهد)',
 'info_question_vignettes_referer_non' => 'گيراندازي‌هاي سايت‌هاي مبداء بازديد‌كنندگان را نشان ندادن',
-'info_qui_edite' => ' چند دقيقه پيش اصلاحات شما روي@nom_auteur_modif@ در مورد نوشته‌ي @date_diff@ جواب داد',
+'info_qui_edite' => ' چند دقيقه پيش اصلاحات شما روي@nom_auteur_modif@ در مورد نوشته‌ي @date_diff@ جواب داد', # MODIF
 'info_racine_site' => 'ريشه سايت',
 'info_recharger_page' => 'خواهشمند است اين صفحه را تا چند لحظه بعد دوباره شارژ كنيد',
 'info_recherche_auteur_a_affiner' => 'پاسخهاى بيشمار براى "@cherche_auteur@" ;خواهشمند است پرسشتان را بهتر مطرح كنيد.',

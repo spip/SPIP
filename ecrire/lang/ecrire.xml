@@ -1,6 +1,11 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
 		<traducteur nom="kandalaft" />
+		<traducteur nom="George" />
+		<traducteur nom="kandalaft" />
+		<traducteur nom=" &lt;multi&gt;[ar]جورج قندلف" />
+		<traducteur nom="kandalaft" />
+		<traducteur nom=" &lt;multi&gt;[fr]George[ar]" />
 	</langue>
 	<langue code="ast">
 		<traducteur nom="xuacu" />
@@ -44,6 +49,7 @@
 		<traducteur nom="davood" />
 	</langue>
 	<langue code="fon" />
+	<langue code="fr" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 		<traducteur nom="orlammd" />

@@ -471,7 +471,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
  In diesem Fall funktioniert die automatische Anmeldung nicht.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
 'info_question_vignettes_referer_non' => 'Keine Thumbnails der Herkunftswebsites anzeigen',
-'info_qui_edite' => '@nom_auteur_modif@ hat vor  @date_diff@ an diesem Objekt gearbeitet.',
+'info_qui_edite' => '@nom_auteur_modif@ hat vor  @date_diff@ an diesem Objekt gearbeitet.', # MODIF
 'info_racine_site' => 'OBERSTE EBENE DER WEBSITE',
 'info_recharger_page' => 'Bitte laden Sie diese Seite in ein paar Augenblicken erneut.',
 'info_recherche_auteur_a_affiner' => 'Zu viele Fundstellen für R20;@cherche_auteur@R21; - bitte grenzen Sie die Suche ein.',

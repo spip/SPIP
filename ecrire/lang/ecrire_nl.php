@@ -495,7 +495,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
-'info_qui_edite' => '@nom_auteur_modif@ gewerkt aan de inhoud er @date_diff@ minuten ',
+'info_qui_edite' => '@nom_auteur_modif@ gewerkt aan de inhoud er @date_diff@ minuten ', # MODIF
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',

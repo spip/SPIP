@@ -474,7 +474,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@"の検索結果が多すぎます; もうちょっとキーワードをひねって検索して下さい。',

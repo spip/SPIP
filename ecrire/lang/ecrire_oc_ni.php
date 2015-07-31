@@ -28,8 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Dàida ! Aquela rubrica conten @contient_breves@ brèva@scb@ : se la desplaçatz, vorgatz ben faire una taca dins aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Devètz indicar un destinatari denant de mandar aqueu messatge.',
 'avis_erreur_connexion_mysql' => 'Error de conexion SQL',
-'avis_erreur_version_archive' => '<b>Dàida ! Lo fichier @archive@ correspoande à una autra version de SPIP qu\'aquela qu\'avètz installada.</b> Anatz vèrs de bèli dificultats : risca de destruccion de la voastra basa de donadas, disfoncionaments divèrs dau sit eca. Non validetz aquela demanda d\'importacion.<p> Per mai d\'informacions, veguètz
-<a href="@spipnet@">la documentacion de SPIP</a>.</p>', # MODIF
+'avis_erreur_version_archive' => '<b>Dàida ! Lo fichier @archive@ correspoande à una autra version de SPIP qu\'aquela qu\'avètz installada.</b> Anatz vèrs de bèli dificultats : risca de destruccion de la voastra basa de donadas, disfoncionaments divèrs dau sit eca. Non validetz aquela demanda d\'importacion. <p>Per mai d\'informacions, veguètz <a href="@spipnet@">la documentacion de SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Espaci proïbit</b><div>SPIP es ja installat.</div>',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas poscut lièger lu noms dei basas de donadas installadi.',
 'avis_lecture_noms_bases_2' => 'Sia minga de basa es pas disponibla, sia la foncion que permete d\'entierar li basas es estada desactivada per de rasons de seguretat (cen qu\'es lo cas de plusors aubergadors).',
@@ -380,11 +379,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_message_technique' => 'Messatge tecnic:',
 'info_messagerie_interne' => 'Messatgeria interna',
 'info_mise_a_niveau_base' => 'Mesa à nivèu de la voastra basa SQL',
-'info_mise_a_niveau_base_2' => '{{Mèfi!}} Avètz installat una version
-  de fichiers SPIP {anteriora} à-n-aquela que si trobava
-  avant sus aqueu sit : la voastra basa de donadas risca d\'èstre
-  perduda e lo voastre sit foncionarà pas plus.<br />{{Tornatz installar lu
-  fichiers de SPIP.}}',
+'info_mise_a_niveau_base_2' => '{{Mèfi!}} Avètz installat una version de fichiers SPIP {anteriora} à-n-aquela que si trobava avant sus aqueu sit : la voastra basa de donadas risca d\'èstre perduda e lo voastre sit foncionarà pas plus.<br />{{Tornatz installar lu fichiers de SPIP.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar l\'autor :',
 'info_modifier_rubrique' => 'Modificar la rubrica:',
@@ -474,7 +469,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat à SPIP? (s\'es desactivat, accelèra lo foncionament dau sistema.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Raiç dau sit',
 'info_recharger_page' => 'Vorgatz tornar cargar aquela pàgina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròup de resultats per "@cherche_auteur@"; vorgatz afinar la recerca.',

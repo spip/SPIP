@@ -491,7 +491,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
   (desactivalo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Raíz do web',
 'info_recharger_page' => 'Recarga a páxina nuns intres.',
 'info_recherche_auteur_a_affiner' => 'Resultados de máis para "@cherche_auteur@"; por favor, afine a súa procura.',

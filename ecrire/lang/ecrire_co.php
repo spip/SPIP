@@ -507,7 +507,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_question_utilisation_moteur_recherche' => 'vulete aduprà u mutore di ricerca integratu di SPIP ?
 	(disattivu vene acceleratu u funziunamentu di u sistema)',
 'info_question_vignettes_referer_non' => 'Ùn vede micca a cattura di screnu di i siti d\'orìgine di e vìsite',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Ràdica di u situ',
 'info_recharger_page' => 'Aghjurnate sta pàgina da quì à un minutu.',
 'info_recherche_auteur_a_affiner' => 'Troppu risultati per "@cherche_auteur@"; precisate puru a ricerca.',

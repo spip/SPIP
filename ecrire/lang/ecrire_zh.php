@@ -492,7 +492,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
  (使它不可用能加速系统的性能.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => '站点根',
 'info_recharger_page' => '请重新载入该页.',
 'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',

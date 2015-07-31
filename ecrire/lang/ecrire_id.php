@@ -491,7 +491,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
 	(Menonaktifkannya akan meningkatkan kinerja sistem.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Root situs',
 'info_recharger_page' => 'Silakan buka kembali halaman ini beberapa saat lagi.',
 'info_recherche_auteur_a_affiner' => 'Terlalu banyaj hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',

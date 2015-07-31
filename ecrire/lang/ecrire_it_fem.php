@@ -487,7 +487,7 @@ impossibile.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
 'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',

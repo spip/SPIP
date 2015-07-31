@@ -477,7 +477,7 @@ a felhasználók automatikus emailt kapnak,
 'info_question_utilisation_moteur_recherche' => 'Kivánja-e használni az SPIP integrált kereső motorját ?
  (annak inaktiválása gyorsítja a rendszer működését.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Honlap teteje',
 'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
 'info_recherche_auteur_a_affiner' => 'Túl sok eredmény erre "@cherche_auteur@" ; legyen szíves szükíteni a keresést.',

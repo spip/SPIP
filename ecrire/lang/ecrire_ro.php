@@ -479,7 +479,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Doriţi să utilizaţi motorul de căutare integrat în SPIP ?
  (funcţionarea sistemului este mai rapidă fără activarea motorului de căutare.)',
 'info_question_vignettes_referer_non' => 'Nu afişati capturile site-urilor de unde vin vizitele',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Rădăcina site-ului',
 'info_recharger_page' => 'Vă rugăm să reîncărcaţi această pagină în câteva momente.',
 'info_recherche_auteur_a_affiner' => 'Prea multe rezultate pentru "@cherche_auteur@" ; vă rugăm să rafinaţi termenii căutării.',
