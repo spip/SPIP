@@ -185,6 +185,7 @@ function quete_rubrique($id_article) {
 
 # retourne le champ lang d'une table 
 
+// http://doc.spip.org/@quete_lang
 function quete_lang($id, $table) {
 	$desc = trouver_table(table_objet($table));
 	if (!$desc OR !isset($desc['field']['lang'])) return '';

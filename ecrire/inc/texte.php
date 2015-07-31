@@ -37,6 +37,7 @@ function tester_variable($var, $val){
 // voir aussi traiter_raccourci_glossaire et traiter_raccourci_notes
 // Retourne aussi un double tableau raccourci / texte-clair les utilisant.
 
+// http://doc.spip.org/@traiter_variables_sales
 function traiter_variables_sales()
 {
 	global $class_spip, $class_spip_plus;
@@ -1104,6 +1105,7 @@ function paragrapher($letexte, $forcer=true) {
 
 define('_RACCOURCI_ANCRE', "|\[#?([^][]*)<-\]|S");
 
+// http://doc.spip.org/@traiter_raccourci_ancre
 function traiter_raccourci_ancre($letexte)
 {
 	if (preg_match_all(_RACCOURCI_ANCRE, $letexte, $m, PREG_SET_ORDER))
@@ -1121,6 +1123,7 @@ function traiter_raccourci_ancre($letexte)
 
 define('_RACCOURCI_GLOSSAIRE', "|\[\?+\s*([^][<>]+)\]|S");
 
+// http://doc.spip.org/@traiter_raccourci_glossaire
 function traiter_raccourci_glossaire($letexte)
 {
 	static $glosateur = NULL, $subst = NULL;
@@ -1164,6 +1167,7 @@ function traiter_raccourci_glossaire($letexte)
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
 define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
+// http://doc.spip.org/@traiter_raccourcis_propre
 function traiter_raccourcis_propre($letexte)
 {
 	$inserts = array();
@@ -1212,6 +1216,7 @@ function traiter_raccourci_lien($regs) {
 // Repere dans la partie texte d'un raccourci [texte->...]
 // la langue et la bulle eventuelles
 
+// http://doc.spip.org/@traiter_raccourci_lien_atts
 function traiter_raccourci_lien_atts($texte) {
 
 	$bulle = $hlang = '';
@@ -1268,6 +1273,7 @@ function chapo_redirige($chapo)
 	return $m;
 }
 
+// http://doc.spip.org/@traiter_poesie
 function traiter_poesie($letexte)
 {
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
@@ -1379,6 +1385,7 @@ function traiter_raccourcis($letexte) {
 // Notes de bas de page
 //
 
+// http://doc.spip.org/@traite_raccourci_notes
 function traite_raccourci_notes($letexte)
 {
 	global $compt_note,  $marqueur_notes, $les_notes;
