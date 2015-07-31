@@ -419,7 +419,7 @@ if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites 
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
 }
 
-if ($articles_versions AND $id_version>1) {
+if ($articles_versions AND $id_version>1 AND $options == "avancees") {
 	icone_horizontale(_L('Afficher les r&eacute;visions...'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
