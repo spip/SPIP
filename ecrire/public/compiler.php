@@ -56,11 +56,11 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
-	$l['lang'] = ($echap?"\'lang\' => ' .":"'lang' => ") ." argumenter_squelette(" .
+	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
 		($lang
 			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
 			: '$GLOBALS["spip_lang"]'
-			) . ")" . ($echap?" . '":" ");
+			) . ($echap?") . '":" ");
 	return $l;
 }
 
