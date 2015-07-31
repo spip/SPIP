@@ -685,7 +685,12 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 
 	// inserer la negation (cf !...)
 
-	if ($crit->not) $where = array("'NOT'", $where);
+	if ($crit->not) 
+		if (!preg_match(",^L[0-9]+[.],",$arg))
+			$where = array("'NOT'", $where);
+		else
+			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
+			$where = array("'NOT'",array("'IN'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'" ,array("'SELF'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'",$where)));
 
 	// inserer la condition (cf {lang?})
 	// traiter a part la date, elle est mise d'office par SPIP,
@@ -718,7 +723,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
 	$col_alias = $col;
-
+//var_dump(array($fct, $col, $op, $val, $args_sql));
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
 	  $col = $boucle->primary;
@@ -941,7 +946,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	  }
 	  $args_sql .= $a[2];;
 	}
-
+//var_dump(array($fct,$col,$op,$val,$args_sql));
 	return array($fct, $col, $op, $val, $args_sql);
 }
 

@@ -484,6 +484,34 @@ function lang_parametres_forum($qs, $lang) {
 	return $qs;
 }
 
+
+function match_self($w){
+	if (is_string($w)) return false;
+	if (is_array($w)) {
+		if (reset($w)=="SELF") return $w;
+		foreach($w as $sw)
+			if ($m=match_self($sw)) return $m;
+	}
+	return false;
+}
+function remplace_sous_requete($w,$sousrequete){
+	if (is_array($w)) {
+		if (reset($w)=="SELF") return $sousrequete;
+		foreach($w as $k=>$sw)
+			$w[$k] = remplace_sous_requete($sw,$sousrequete);
+	}
+	return $w;
+}
+function trouver_sous_requetes($where){
+	$where_simples = array();
+	$where_sous = array();
+	foreach($where as $k=>$w){
+		if (match_self($w)) $where_sous[$k] = $w;
+		else $where_simples[$k] = $w;
+	}
+	return array($where_simples,$where_sous);
+}
+
 // La fonction presente dans les squelettes compiles
 
 // http://doc.spip.org/@calculer_select
@@ -491,7 +519,7 @@ function calculer_select ($select = array(), $from = array(),
 			$from_type = array(),
       $where = array(), $join=array(),
 			$groupby = array(), $orderby = array(), $limit = '',
-			$having=array(), $table = '', $id = '', $serveur='') {
+			$having=array(), $table = '', $id = '', $serveur='', $requeter=true) {
 
 // retirer les criteres vides:
 // {X ?} avec X absent de l'URL
@@ -506,6 +534,17 @@ function calculer_select ($select = array(), $from = array(),
 			$menage = true;
 		}
 	}
+	// remplacer les sous requetes recursives au calcul
+	list($where_simples,$where_sous) = trouver_sous_requetes($where);
+	//var_dump($where_sous);
+	foreach($where_sous as $k=>$w) {
+		// on recupere la sous requete 
+		$sous = match_self($w);
+		array_push($where_simples,$sous[2]);
+		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,$where_simples,$join,$groupby,$orderby,'',$having,$table,$id,$serveur,false).")");
+		array_pop($where_simples);
+	}
+	//var_dump($where);
 
 	foreach($having as $k => $v) { 
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
@@ -564,7 +603,7 @@ function calculer_select ($select = array(), $from = array(),
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
 
 	$r = sql_select($select, $from, $where,
-		$groupby, array_filter($orderby), $limit, $having, $serveur);
+		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
 	unset($GLOBALS['debug']['aucasou']);
 	return $r;
 }
