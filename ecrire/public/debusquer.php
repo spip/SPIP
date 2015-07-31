@@ -232,7 +232,7 @@ function debusquer_navigation($tableau, $caption = array(), $id = 'debug-nav') {
 		$res .= "<tr id='req$j'><td style='text-align: right'>"
 			. $j
 			. "&nbsp;</td><td style='text-align: left'>"
-			. $msg
+			. (is_array($msg) ? implode('', $msg) : $msg)
 			. "</td><td style='text-align: left'>"
 			. ($skel ? $skel : "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;")
 			. "</td><td class='spip-debug-arg' style='text-align: left'>"
