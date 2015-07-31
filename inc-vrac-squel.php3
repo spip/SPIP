@@ -144,7 +144,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		    {
 		      if (strpos($v,'recherche') !== false)
 			{
-			  $code = '$PileRow[$SP' . (($n==0) ? "" : "-$n") .
+			  $code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
 			    '][points]';
 			  $b = '';
 			  break;
@@ -199,7 +199,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
                 }
                 $id_on_off = $doublons[$boucles[$id_boucle]->type_requete];
                 if ($id_on_off) 
-                        $code = "(\$PileRow[0]['$id_on_off'] == \$PileRow[\$SP]['$id_on_off']) ?
+                        $code = "(\$Pile[0]['$id_on_off'] == \$Pile[\$SP]['$id_on_off']) ?
  '$on' : '$off'";
                 else 
                         $code = "'$off'";

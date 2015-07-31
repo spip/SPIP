@@ -108,9 +108,10 @@ function is_cache($path, $dir)
   $n = strlen($dir);
   return
     ((strpos($path, $dir) === 0) && 
-     (strpos("abcdef0123456789", $path[$n])) &&
+     (strpos("abcdef0123456789", $path[$n]) !== false) &&
      ($path[$n+1] == '/') &&
      (strpos($path, '../') === false) );
+ return $x;
 }
 
 ?>

@@ -39,7 +39,7 @@ function index_pile($idb, $nom_champ, &$boucles)
     if (!$x) 
     {
       include_local("inc-debug-squel.php3");
-      erreur_squelette(_L("Table SQL absente de \$tables_principales dans inc_serialbase"), $r, $idb);
+      erreur_squelette(_L("Table SQL absente de \$tables_principales dans inc_serialbase"), $r, "'$idb'");
     }
 
     $a = $x['field'];
@@ -59,7 +59,7 @@ function index_pile($idb, $nom_champ, &$boucles)
     if ($e)
       {
 	$boucles[$idb]->select[] = $t . "." . $e;
-	return ('$PileRow[$SP' .
+	return ('$Pile[$SP' .
 		($i ? "-$i" : "") . '][' .
 		$e . 
 		"]");
@@ -69,7 +69,7 @@ function index_pile($idb, $nom_champ, &$boucles)
   }
 #  spip_log("Pas vu $nom_champ dans les " . count($boucles) . " boucles");
   # espe'rons qu'il y sera
-  return('$PileRow[0]['.$nom_champ.']');
+  return('$Pile[0]['.$nom_champ.']');
 }
 
 # calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
@@ -92,7 +92,7 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
     {
     # on regarde ensuite s'il y a un champ SQL homonyme,
       $code = index_pile($id_boucle, $nom_champ, $boucles);
-      if (($code) && ($code != '$PileRow[0]['.$nom_champ.']'))
+      if (($code) && ($code != '$Pile[0]['.$nom_champ.']'))
 	  return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
       else
 	{
@@ -127,7 +127,7 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere)
 		    $milieu .= $m;
 		  }
 		else {if ($arg[0] =='$')
-		    $arg = '$PileRow[0][\'' . substr($arg,1) . "']";}
+		    $arg = '$Pile[0][\'' . substr($arg,1) . "']";}
 		$arglist .= ','.$arg;
 	      }
 	  }
