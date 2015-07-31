@@ -138,19 +138,15 @@ function balise_URL_PAGE_dist($p) {
 		$args = "''";
 
 	if ($s = trouver_nom_serveur_distant($p)) {
-		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
-			$code = "404";
-		} else {
-			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
-			// elle devra aussi traiter le cas derogatoire type=page
-			if (function_exists($f = 'generer_generer_url_'.$s)){
-				if ($args AND $args!=="''") $code .= ", $args";
-				$code = $f('page', $code, $s);
-				return $p;
-			}
-			$s = 'connect=' .  addslashes($s);
-			$args = (($args AND $args!=="''") ? "$args . '&$s'" : "'$s'");
+		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+		// elle devra aussi traiter le cas derogatoire type=page
+		if (function_exists($f = 'generer_generer_url_'.$s)){
+			if ($args AND $args!=="''") $code .= ", $args";
+			$code = $f('page', $code, $s);
+			return $p;
 		}
+		$s = 'connect=' .  addslashes($s);
+		$args = (($args AND $args!=="''") ? "$args . '&$s'" : "'$s'");
 	}
 
 	if (!$code) {
