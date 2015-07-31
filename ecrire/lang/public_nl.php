@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Beginpagina',
+'article' => 'Article', # NEW
 'articles' => 'Artikels',
 'articles_auteur' => 'Artikels van deze auteur',
 'articles_populaires' => 'Meest bekeken artikels',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Op dit adres is geen site te vinden',
 'aucune_breve' => 'Op dit adres is geen nieuwsbericht te vinden',
 'aucune_rubrique' => 'Op dit adres is geen rubriek te vinden',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Anderen',
 'autres_breves' => 'Andere nieuwsberichten',
 'autres_groupes_mots_clefs' => 'Andere groepen trefwoorden',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hallo',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Nieuwsberichten',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Bericht',
 'messages_forum' => 'Berichten van het forum',
 'messages_recents' => 'Meest recente berichten van de forums',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Trefwoorden',
 'mots_clefs_meme_groupe' => 'Trefwoorden van dezelfde groep',
 

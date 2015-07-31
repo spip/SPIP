@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Lakey lo sit',
+'article' => 'Article', # NEW
 'articles' => 'Bann zartik',
 'articles_auteur' => 'Bann zartik lot&egrave;r-la',
 'articles_populaires' => 'Bann zartik sak l&eacute; pli popil&egrave;r',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'N&eacute;na pa okin sitw&egrave;b si ladr&egrave;s-la',
 'aucune_breve' => 'N&eacute;na pa okin titnouv&egrave;l si ladr&egrave;s-la',
 'aucune_rubrique' => 'N&eacute;na pa okinn ribrik si ladr&egrave;s-la',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Bann zot tite-nouv&egrave;l',
 'autres_groupes_mots_clefs' => 'Bann zot bann molakl&eacute;',
 'autres_sites' => 'Bann zot sitw&egrave;b',
 
 // B
 'bonjour' => 'Ot&eacute;',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Bann tite-nouv&egrave;l',
 
 // C
 'commenter_site' => 'Donn out lavi si lo sit-la',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Ladat',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Bann d&egrave;rny&eacute; zartik',
 'derniers_commentaires' => 'Bann d&egrave;rny&eacute; lavi',
 'derniers_messages_forum' => 'Bann d&egrave;rny&eacute; mod&eacute;kri andann bann forom',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Po &eacute;dit&eacute; andann mod t&egrave;ks',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'L&eacute;spas priv&eacute;',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forom kozman',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'bann zour',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Pa lot&egrave;r minm sa-minm',
 'meme_rubrique' => 'Andan minm ribrik-la',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mod&eacute;kri',
 'messages_forum' => 'Bann mod&eacute;kri andann forom',
 'messages_recents' => 'Bann mod&eacute;kri la finn m&egrave;t an derny&eacute; andan forom',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Bann molakl&eacute;',
 'mots_clefs_meme_groupe' => 'Bann molakl&eacute; andann lo minm bann sa-minm',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sit-la ni la f&eacute; &egrave;k SPIP',
 'sites_web' => 'Bann sitw&egrave;b',
 'sous_rubriques' => 'Bann souribrik',
+'spam' => 'Spam', # NEW
 'suite' => 'laswit',
 'sur_web' => 'Si lo w&egrave;b',
 'syndiquer_rubrique' => 'Po sindik&eacute; ribrik-la',

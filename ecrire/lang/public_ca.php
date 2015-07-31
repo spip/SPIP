@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Arrel de la web',
+'article' => 'Article', # NEW
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquest autor',
 'articles_populaires' => 'Els articles m&eacute;s populars',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'No hi ha cap lloc web en aquesta adre&ccedil;a',
 'aucune_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
 'aucune_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Altres',
 'autres_breves' => 'Altres breus',
 'autres_groupes_mots_clefs' => 'Altres grups de paraules clau',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bon dia',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Breus',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Missatge',
 'messages_forum' => 'Missatges al f&ograve;rum',
 'messages_recents' => 'Els missatges m&eacute;s recents als f&ograve;rums',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Paraules clau',
 'mots_clefs_meme_groupe' => 'Paraules clau al mateix grup',
 

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Strona g&#322;&oacute;wna',
+'article' => 'Article', # NEW
 'articles' => 'Artyku&#322;y',
 'articles_auteur' => 'Artyku&#322;y napisane przez tego autora',
 'articles_populaires' => 'Najbardziej popularne artyku&#322;y',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nie ma &#380;adnej strony pod tym adresem',
 'aucune_breve' => 'Nie ma &#380;adnego newsa pod tym adresem ',
 'aucune_rubrique' => 'Nie ma &#380;adnego dzia&#322;u pod tym adresem',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Reszta aktualno&#347;ci',
 'autres_groupes_mots_clefs' => 'Inne grupy s&#322;&oacute;w kluczowych',
 'autres_sites' => 'Inne strony',
 
 // B
 'bonjour' => 'Dzie&#324; dobry',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Aktualno&#347;ci',
 
 // C
 'commenter_site' => 'Dodaj komentarz na temat strony',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Data',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Najnowsze artyku&#322;y',
 'derniers_commentaires' => 'Ostatnie komentarze',
 'derniers_messages_forum' => 'Ostatnie wiadomo&#347;ci opublikowane w forum',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Edycja w trybie tekstowym',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Strefa prywatna',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'dni',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Ten sam autor',
 'meme_rubrique' => 'W tym samym dziale',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Wiadomo&#347;&#263;',
 'messages_forum' => 'Wiadomo&#347;ci na forum',
 'messages_recents' => 'Najnowsze wiadomo&#347;ci na forum',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'S&#322;owa kluczowe',
 'mots_clefs_meme_groupe' => 'S&#322;owa kluczowe z tej samej grupy',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Strona zrealizowana przy pomocy SPIP',
 'sites_web' => 'Strony internetowe',
 'sous_rubriques' => 'Pod-dzia&#322;y',
+'spam' => 'Spam', # NEW
 'suite' => 'wi&#281;cej',
 'sur_web' => 'W internecie',
 'syndiquer_rubrique' => 'Ten dzia&#322;',

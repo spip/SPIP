@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'P&aacute;gina de abertura do s&iacute;tio',
+'article' => 'Article', # NEW
 'articles' => 'Artigos',
 'articles_auteur' => 'Artigos deste autor',
 'articles_populaires' => 'Artigos mais populares',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nenhum s&iacute;tio neste endere&ccedil;o',
 'aucune_breve' => 'Nenhuma not&iacute;cia neste endere&ccedil;o',
 'aucune_rubrique' => 'Nenhuma rubrica neste endere&ccedil;o',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Outras not&iacute;cias',
 'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
 'autres_sites' => 'Outros s&iacute;tios',
 
 // B
 'bonjour' => 'Bom dia',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Not&iacute;cias',
 
 // C
 'commenter_site' => 'Comentar este s&iacute;tio',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Data',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => '&Uacute;ltimos artigos',
 'derniers_commentaires' => '&Uacute;ltimos coment&aacute;rios',
 'derniers_messages_forum' => '&Uacute;ltimas mensagens publicadas nos f&oacute;runs',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Edi&ccedil;&atilde;o em modo texto de',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espa&ccedil;o privado',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'F&oacute;rum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'dias',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Do mesmo autor',
 'meme_rubrique' => 'Na mesma rubrica',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mensagem',
 'messages_forum' => 'Mensagens de f&oacute;rum',
 'messages_recents' => 'Mensagens de f&oacute;runs mais recentes',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Palavras-chave',
 'mots_clefs_meme_groupe' => 'Palavras-chave no mesmo grupo',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'S&iacute;tio realizado com SPIP',
 'sites_web' => 'S&iacute;tios Web',
 'sous_rubriques' => 'Sub-rubricas',
+'spam' => 'Spam', # NEW
 'suite' => 'continua&ccedil;&atilde;o',
 'sur_web' => 'Na Web',
 'syndiquer_rubrique' => 'Vincular esta rubrica',

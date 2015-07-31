@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Prima pagin&#259;',
+'article' => 'Article', # NEW
 'articles' => 'Articole',
 'articles_auteur' => 'Articole de acela&#351;i autor',
 'articles_populaires' => 'Cele mai populare articole',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nu exist&#259; nici un site la aceast&#259; adres&#259;',
 'aucune_breve' => 'Nu exist&#259; nici o &#351;tire la aceast&#259; adres&#259;',
 'aucune_rubrique' => 'Nu exist&#259; nici o rubric&#259; la aceast&#259; adres&#259;',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Altele',
 'autres_breves' => 'Alte &#351;tiri',
 'autres_groupes_mots_clefs' => 'Alte grupuri de cuvinte-cheie',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bun&#259; ziua',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => '&#350;tiri',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mesaj',
 'messages_forum' => 'Mesajele forum-ului',
 'messages_recents' => 'Cele mai recente mesaje de forum',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Cuvinte-cheie',
 'mots_clefs_meme_groupe' => 'Cuvinte-cheie &icirc;n acela&#351;i grup',
 

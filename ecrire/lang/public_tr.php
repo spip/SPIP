@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Ana sayfa',
+'article' => 'Article', # NEW
 'articles' => 'Makaleler',
 'articles_auteur' => 'Bu yazar&#305;n makaleleri',
 'articles_populaires' => 'En pop&uuml;ler makaleler',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Bu adreste site yok',
 'aucune_breve' => 'Bu adreste k&#305;sa haber yok',
 'aucune_rubrique' => 'Bu adreste b&ouml;l&uuml;m yok',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Di&#287;er',
 'autres_breves' => 'Di&#287;er k&#305;sa haberler',
 'autres_groupes_mots_clefs' => 'Di&#287;er anahtar s&ouml;zc&uuml;k gruplar&#305;',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Merhaba',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'K&#305;sa haberler',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => '&#304;leti',
 'messages_forum' => 'Forum mesajlar&#305;',
 'messages_recents' => 'Son forum mesajlar&#305;',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Anahtar s&ouml;zc&uuml;k',
 'mots_clefs_meme_groupe' => 'Ayn&#305; grupta anahtar s&ouml;zc&uuml;k',
 

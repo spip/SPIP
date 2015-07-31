@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Acuelh dau sit',
+'article' => 'Article', # NEW
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Los articles mai populars',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'I a ges de sit a aquela adrei&ccedil;a ',
 'aucune_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a ',
 'aucune_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a ',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Autras br&egrave;vas',
 'autres_groupes_mots_clefs' => 'Autres grops de mots clau',
 'autres_sites' => 'Autres sits',
 
 // B
 'bonjour' => 'Bonjorn',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Br&egrave;vas',
 
 // C
 'commenter_site' => 'Comentar aqueu sit',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Data',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Darriers articles',
 'derniers_commentaires' => 'Darriers comentaris',
 'derniers_messages_forum' => 'Darriers messatges publicats dins los forums',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Edicion en m&ograve;de t&egrave;xt de',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espaci privat',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'jorns',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Dau mesme autor',
 'meme_rubrique' => 'Dins la mesma rubrica',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mai recents',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Mots clau',
 'mots_clefs_meme_groupe' => 'Mots clau dins lo mesme grop',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sit realizat amb SPIP',
 'sites_web' => 'Sits web',
 'sous_rubriques' => 'Sosrubricas',
+'spam' => 'Spam', # NEW
 'suite' => 'segua',
 'sur_web' => 'Sobre lo web',
 'syndiquer_rubrique' => 'Sindicar aquela rubrica',
@@ -106,7 +118,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Version d\'estampar',
-'voir_en_ligne' => 'Ve&egrave;tz en linha'
+'voir_en_ligne' => 'Ve&egrave;tz en linha',
+'voir_squelette' => 'voir le squelette de cette page', # NE
 );
 
 ?>
