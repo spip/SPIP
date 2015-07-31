@@ -79,6 +79,5 @@ a:active.spip-admin-boutons,
 .liste-reqs .spip-debug-arg {display:block;float:left;width:3em;text-align:right;}
 
 /* Couleurs et design de la previsu */
-.spip-previsu { background-color: #111111; color: #eeeeee; font-size: 18px; position: absolute; padding-right: 5px; padding-top: 2px; padding-bottom: 5px;top: 0px; left: 0px;}
-.spip-previsu img {display:inline;}
+.spip-previsu { background-color: #333; color: #eeeeee;font-size: 18px; text-transform: uppercase;position: absolute; top: 0px; left: 0px;padding: 10px 50px; background-position: 5px 5px;background-repeat: no-repeat;display:block;opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=80);}
 
