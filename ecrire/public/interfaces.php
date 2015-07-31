@@ -493,6 +493,11 @@ class Critere {
 	public $exclus;
 
 	/**
+	 * Présence d'une condition dans le critère (truc ?)
+	 * @var bool */
+	public $cond = false;
+
+	/**
 	 * Paramètres du critère
 	 * - $param[0] : élément avant l'opérateur
 	 * - $param[1..n] : éléments après l'opérateur

@@ -454,11 +454,16 @@ function debusquer_squelette($fonc, $mode, $self){
 				$texte = ancre_texte($texte, array('', ''));
 			}
 		}
-		else
-			return strlen(trim($res))
-			? "<div id='spip-debug'>$res</div>"
-			// cas de l'appel sur erreur: montre la page
-			: $GLOBALS['debug_objets']['resultat']['tout'];
+		else {
+			if (strlen(trim($res))) {
+				return "<div id='spip-debug'>$res</div>";
+			} else {
+				// cas de l'appel sur erreur: montre la page
+				return isset($GLOBALS['debug_objets']['resultat']['tout'])
+					? $GLOBALS['debug_objets']['resultat']['tout']
+					: '';
+			}
+		}
 	}
 	else {
 		$valider = charger_fonction('valider', 'xml');
