@@ -1,0 +1,26 @@
+<BOUCLE_afficher_contenu(AUTEURS){id_auteur=#ENV{id}}{statut?}>
+<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+<div class='label'><:info_nom:></div>
+<div dir='#LANG_DIR' class='#EDIT{nom} nom'>#NOM</div>
+</div>
+<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+<div class='label'><:email_2:></div>
+<div dir='#LANG_DIR' class='#EDIT{email} email'><a href='mailto:[(#EMAIL|htmlspecialchars)]'>#EMAIL</a></div>
+</div>
+<div class="champ contenu_nom_site[ (#NOM_SITE*|sinon{#URL_SITE*}|strlen|?{'',vide})]">
+<div class='label'><:info_site_2:></div>
+<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'>[<a href='(#URL_SITE)'>][(#NOM_SITE|sinon{<:info_site:>})][(#URL_SITE|oui)</a>]</div>
+</div>
+<div class="champ contenu_bio[ (#BIO*|strlen|?{'',vide})]">
+<div class='label'><:info_bio:></div>
+<div dir='#LANG_DIR' class='#EDIT{bio} bio'>[(#BIO|image_reduire{500,0})]</div>
+</div>
+<div class="champ contenu_pgp[ (#PGP*|strlen|?{'',vide})]">
+<div class='label'>PGP</div>
+<div dir='#LANG_DIR' class='#EDIT{pgp} pgp'>[<tt>(#PGP|image_reduire{500,0})</tt>]</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+</BOUCLE_afficher_contenu>

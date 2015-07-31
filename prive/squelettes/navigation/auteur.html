@@ -1,0 +1,12 @@
+<BOUCLE_nav(AUTEURS){id_auteur}{statut?}{si #ENV{exec}|=={auteur}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','auteur','id',#ENV{id_auteur}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{auteur,#ID_AUTEUR,'',#ENV**}
+</div>
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={auteur_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/auteur_edit,env}>]
+<//B_nav>

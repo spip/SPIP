@@ -1,0 +1,46 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}{si #ENV{exec}|=={auteur}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
+				
+		[(#ID_AUTEUR|afficher_qui_edite{auteur}|non)
+			[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}|icone_verticale{<:admin_modifier_auteur:>,auteur,edit,right ajax preload})]
+		]
+		[(#ID_AUTEUR|afficher_qui_edite{auteur}|oui)
+			[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}|icone_verticale{#ID_AUTEUR|afficher_qui_edite{auteur},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{auteur-24.png}|balise_img{auteur,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<!--affiche_milieu-->
+
+[(#ENV{email_confirm}|oui)
+#BOITE_OUVRIR{'','notice'}<p><:form_auteur_envoi_mail_confirmation{email=#EMAIL}:></p>#BOITE_FERMER
+]
+[(#ENV{email_modif}|oui)
+#BOITE_OUVRIR{'','success'}<p><:form_auteur_email_modifie:></p>#BOITE_FERMER
+]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/auteur,id=#ID_AUTEUR}>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,auteur,id,#ID_AUTEUR},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#ENV{id_auteur}|intval|oui)
+
+	#SET{statuts,#SESSION{statut}|statuts_articles_visibles}
+	[(#ID_AUTEUR|=={#SESSION{id_auteur}}) #SET{statuts,''}]
+	[(#PIPELINE{affiche_auteurs_interventions,#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#INCLURE{fond=prive/objets/liste/article,id_auteur,statut=#GET{statuts},par=date,titre=<:info_articles_auteur:>}}})]
+]
+
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">if (window.jQuery)
+jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'auteur'}});})
+</script>
+]
+</BOUCLE_auteur>
+[(#ENV**{exec}|=={auteur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/auteur_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_auteur>
