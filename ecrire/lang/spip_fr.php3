@@ -180,7 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'date_aujourdhui' => 'aujourd\'hui',
 'date_avant_jc' => 'av. J.C.',
-'date_dans' => 'dans',
+'date_dans' => 'dans @delai@',
 'date_de_mois_1' => '@j@ @nommois@',
 'date_de_mois_10' => '@j@ @nommois@',
 'date_de_mois_11' => '@j@ @nommois@',
@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_fmt_nomjour_date' => 'le @nomjour@ @date@',
 'date_heures' => 'heures',
 'date_hier' => 'hier',
-'date_il_y_a' => 'il y a',
+'date_il_y_a' => 'il y a @delai@',
 'date_jnum1' => '1er',
 'date_jnum10' => '10',
 'date_jnum11' => '11',
