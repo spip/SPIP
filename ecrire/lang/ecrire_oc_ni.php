@@ -232,7 +232,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 	'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondença</b>; aquò vos permetrà de passar facilament dau sit public au sit privat.',
 	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Aquel administrator gerisse li rubricas seguentas:',
-	'info_admin_gere_toutes_rubriques' => 'Aquel administrador gerisse <b>toti li rubricas</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Aquel administrator gera<b>toti li rubricas</b>.',
 	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
