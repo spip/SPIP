@@ -300,7 +300,7 @@ function install_etape_3_dist()
 		  . (defined('_INSTALL_NAME_DB') ? ''
 		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
 
-		$auteur_obligatoire = !sql_countsel('spip_auteurs');
+		$auteur_obligatoire = !sql_countsel('spip_auteurs','','','',$server_db);
 
 		$res =  "<div class='success'><h3>"
 		. _T('info_base_installee')
