@@ -542,25 +542,31 @@ function calculer_balise_logo ($p) {
 	$filtres = '';
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
-		// eliminer les faux filtres
-		  if (!$flag_stop) array_shift($p->filtres);
-		  $nom = $couple[0];
-			if (ereg('^(left|right|center|top|bottom)$', $nom))
-				$align = $nom;
-			else if ($nom == 'lien') {
-				$flag_lien_auto = 'oui';
-				$flag_stop = true;
-			}
-			else if ($nom == 'fichier') {
-				$flag_fichier = 1;
-				$flag_stop = true;
-			}
-			// double || signifie "on passe aux filtres"
-			else if ($nom == '')
-				$flag_stop = true;
-			else if (!$flag_stop) {
-				$lien = $nom;
-				$flag_stop = true;
+			// eliminer les faux filtres
+			if (!$flag_stop) {
+				array_shift($p->filtres);
+				$nom = $couple[0];
+				if (ereg('^(left|right|center|top|bottom)$', $nom))
+					$align = $nom;
+				else if ($nom == 'lien') {
+					$flag_lien_auto = 'oui';
+					$flag_stop = true;
+				}
+				else if ($nom == 'fichier') {
+					$flag_fichier = 1;
+					$flag_stop = true;
+				}
+				// double || signifie "on passe aux filtres"
+				else if ($nom == '') {
+					if (!$params = $couple[1])
+						$flag_stop = true;
+				}
+				else if ($nom) {
+					$lien = $nom;
+					$flag_stop = true;
+				} else {
+					
+				}
 			}
 			// apres un URL ou || ou |fichier ce sont
 			// des filtres (sauf left...lien...fichier)
@@ -590,7 +596,7 @@ function calculer_balise_logo ($p) {
 	}
 
 	if ($flag_fichier)
-	  $code_lien = "'',''" ; 
+		$code_lien = "'',''" ; 
 	else {
 		if (!$code_lien)
 			$code_lien = "''";
@@ -603,7 +609,7 @@ function calculer_balise_logo ($p) {
 			$p->descr['documents'] .
 			'\', $doublons, '. intval($flag_fichier).", $code_lien, '".
 			// #LOGO_DOCUMENT{x,y} donne la taille maxi
-			texte_script(param_balise($p))
+			texte_script($params)
 			."')";
 	}
 	else {
