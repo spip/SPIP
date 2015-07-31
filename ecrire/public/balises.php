@@ -475,8 +475,10 @@ function balise_RANG_dist($p) {
 	else {
 		$champ_titre = 'titre';
 		$boucle = &$p->boucles[$p->id_boucle];
-		if (isset($GLOBALS['table_titre'][$boucle->id_table])){
-			$t=$GLOBALS['table_titre'][$boucle->id_table];
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table($boucle->id_table);
+		if (isset($desc['titre'])){
+			$t=$desc['titre'];
 		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
 			  $m = explode(' ',trim($m[2]));
 		    $champ_titre = reset($m);
