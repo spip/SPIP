@@ -29,11 +29,11 @@ function exec_admin_tech_dist()
 
 	if ($GLOBALS['connect_toutes_rubriques']) {
 
-		debut_gauche();
+		echo debut_gauche('',true);
 		echo "<br /><br /><br /><br />";
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo  _T('info_gauche_admin_tech');
-		fin_boite_info();
+		echo fin_boite_info(true);
 		$repertoire = _DIR_DUMP;
 		if(!@file_exists($repertoire)) {
 			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
@@ -42,92 +42,89 @@ function exec_admin_tech_dist()
 		$dir_dump = $repertoire;
 		$onglet = barre_onglets("administration", "sauver") . "<br />";
 	} else {
-		debut_gauche();
+		echo debut_gauche(true);
 		$dir_dump = determine_upload();
 		$onglet = '';
 	}
 
 	$dir_dump = joli_repertoire($dir_dump);
 
-	debut_droite();
+	echo debut_droite('',true);
 
 	echo "<div style='text-align: center'>",
 	  gros_titre(_T('titre_admin_tech'),'',true),
 	  '</div>',
 	  $onglet;
 
-//
-// Sauvegarde de la base
-//
+	//
+	// Sauvegarde de la base
+	//
 
- debut_cadre_relief();
+	echo debut_cadre_trait_couleur('',true,'',_T('texte_sauvegarde'),'sauvegarder');
 
- // a passer en fonction
- if (substr(_DIR_IMG, 0, strlen(_DIR_RACINE)) === _DIR_RACINE)
-   $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
- else
-   $dir_img = _DIR_IMG;
+	// a passer en fonction
+	if (substr(_DIR_IMG, 0, strlen(_DIR_RACINE)) === _DIR_RACINE)
+	 $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
+	else
+	 $dir_img = _DIR_IMG;
 
- $res = 
-   "\n<p style='text-align: justify;'>" .
-   http_img_pack('warning.gif', _T('info_avertissement'), 
+	$res = 
+	 "\n<p>" .
+	 http_img_pack('warning.gif', _T('info_avertissement'), 
 		 "style='width: 48px; height: 48px; float: right;margin: 10px;'") .
-   _T('texte_admin_tech_01',
-     array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
-   '&nbsp;' .
-   _T('texte_admin_tech_02') .
-  "</p>";
-
- $file = nom_fichier_dump();
- $nom = "\n<input name='nom_sauvegarde' size='40' value='$file' />";
- $znom = "\n<input name='znom_sauvegarde' size='40' value='$file' />";
-
- if ($flag_gz) {
-
-	$res .= "\n<p style='text-align: justify;'>" .
+	 _T('texte_admin_tech_01',
+	   array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
+	 '&nbsp;' .
+	 _T('texte_admin_tech_02') .
+	"</p>";
+	
+	$file = nom_fichier_dump();
+	$nom = "\n<input name='nom_sauvegarde' size='40' value='$file' />";
+	$znom = "\n<input name='znom_sauvegarde' size='40' value='$file' />";
+	
+	if ($flag_gz) {
+	
+	$res .= "\n<p>" .
 	  _T('texte_admin_tech_03') .
-	  "</p>\n<p>" .
-	  "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
+	  "</p>\n<ul>" .
+	  "\n<li><input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
 	  _T('bouton_radio_sauvegarde_compressee', array('fichier'=>'')) .
 	  " </label><br />\n" .
 	  '<b>' . $dir_dump . "</b>" .
 	  $znom .
-	  "<b>.xml.gz</b><br /><br />" . 
-	  "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'>" .
+	  "<b>.xml.gz</b></li>" . 
+	  "\n<li><input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'>" .
 	  _T('bouton_radio_sauvegarde_non_compressee',  array('fichier'=>'')) .
 	  '</label><br /><b>' .
 	  $dir_dump .
-	  "</b>$nom<b>.xml</b><br /></p>\n";
- }
-else {
-  $res .= "\n<p style='text-align: justify;'>" .
-    _T('texte_sauvegarde_compressee' .
-       array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")) .
-    "\n<input type='hidden' name='gz' value='0' /></p>";
-}
+	  "</b>$nom<b>.xml</b></li></ul>\n";
+	}
+	else {
+	  $res .= "\n<p>" .
+	    _T('texte_sauvegarde_compressee' .
+	       array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")) .
+	    "\n<input type='hidden' name='gz' value='0' /></p>";
+	}
 
- $res .= "\n<input type='hidden' name='reinstall' value='non' />";
+	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
+ 
+	echo 
+ 		generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
+ 		fin_cadre_trait_couleur();
 
- echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>",
-   "<tr><td style='color: #ffffff;' class='toile_foncee verdana1 spip_medium'><b>", 
-   _T('texte_sauvegarde'), "</b></td></tr><tr><td class='serif'>",
-   generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
-   "</td></tr></table>";
+	//
+	// Restauration de la base
+	//
 
-
-//
-// Restauration de la base
-//
-
- // restaurer est equivalent a detruire, ou pas (cas des restaurations partielles, a affiner ?)
- if (autoriser('detruire')) {
-
- 	$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
- 	$selected = end($liste_dump);
- 	$liste_choix = "<ul>"; 
- 	foreach($liste_dump as $key=>$fichier){
- 		$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
- 		$liste_choix.="\n<li><input type='radio' name='archive' value='"
+	// restaurer est equivalent a detruire, ou pas (cas des restaurations partielles, a affiner ?)
+	if (autoriser('detruire')) {
+	
+		$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
+		$selected = end($liste_dump);
+		$liste_choix = "<ul>"; 
+		foreach($liste_dump as $key=>$fichier){
+			$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
+			$liste_choix.="\n<li><input type='radio' name='archive' value='"
 		. $affiche_fichier
 		. "' id='dump_$key' "
 		.  (($fichier==$selected)?"checked='checked' ":"")
@@ -137,66 +134,61 @@ else {
 		. _T('taille_octets',
 		     array('taille' => number_format(filesize($fichier), 0, ' ', ' ')))
 		. ')</label></li>';
- 	}
+		}
  	
-	if ($flag_gz) {
-		$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
-		$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
-	} else {
-		$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
-		$texte_compresse = _T('texte_non_compresse')."&nbsp;";
+		if ($flag_gz) {
+			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
+			$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
+		} else {
+			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
+			$texte_compresse = _T('texte_non_compresse')."&nbsp;";
+		}
+
+		$res = 	"\n<p style='text-align: justify;'> " .
+		_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
+		  '</p>' .
+		_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
+		$liste_choix .
+		"\n<li><input type='radio' name='archive' value='' />" .
+		"\n<span class='spip_medium'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>" .
+		  debut_cadre_relief('',true) .
+		"<p><input name='insertion' type='checkbox' />&nbsp;" .
+		  _T('sauvegarde_fusionner') .
+		  '</p>' .
+		  "<p>" .
+		  _T('sauvegarde_url_origine') .
+		  "<br /><input name='url_site' type='text' size='60'/>" .
+		  '</p>' .
+		  fin_cadre_relief(true);
+		
+		echo 
+			debut_cadre_trait_couleur('',true,'',_T('texte_restaurer_base'),'restaurer'),
+		  generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base')),
+		  fin_cadre_trait_couleur(true);
 	}
 
-	$res = 	"\n<p style='text-align: justify;'> " .
-	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
-	  '</p>' .
-	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
-	$liste_choix .
-	"\n<li><input type='radio' name='archive' value='' />" .
-	"\n<span class='spip_medium'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>" .
-	  debut_cadre_relief('',true) .
-	"<p><input name='insertion' type='checkbox' />&nbsp;" .
-	  _T('sauvegarde_fusionner') .
-	  '</p>' .
-	  "<p>" .
-	  _T('sauvegarde_url_origine') .
-	  "<br /><input name='url_site' type='text' size='60'/>" .
-	  '</p>' .
-	  fin_cadre_relief(true);
+	//
+	// Lien vers la reparation
+	//
 
-	echo "\n<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
-	"\n<tr><td style='background-color: #eeeecc; color: #000000;' class='verdana1 spip_medium'><b>", _T('texte_restaurer_base')."</b></td></tr>",
-	  "<tr><td class='serif'>" .
-	  generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base')).
-	  "\n</td></tr>",
-	  "</table>";
- }
-
-//
-// Lien vers la reparation
-//
-
-if (autoriser('webmestre')) {
-	if (version_compare(spip_mysql_version(),'3.23.14','>=')) {
-		$res = "\n<p style='text-align: justify;'>".
-			_T('texte_crash_base') .
-			"\n</p>";
-
-		echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>";
-		echo "<tr><td style='background-color: #eeeecc;'><b>";
-		echo "<span style='color: #000000;' class='verdana1 spip_medium'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
-			"<tr><td class='serif'>",
-			generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
-			"</td></tr>",
-			"</table>";
+	if (autoriser('webmestre')) {
+		if (version_compare(spip_mysql_version(),'3.23.14','>=')) {
+			$res = "\n<p style='text-align: justify;'>".
+				_T('texte_crash_base') .
+				"\n</p>";
+	
+			echo 
+				debut_cadre_trait_couleur('',true,'',_T('texte_recuperer_base'),'reparer'),
+				generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
+				fin_cadre_trait_couleur(true);
+		}
 	}
-}
 
-fin_cadre_relief();
+	fin_cadre_relief();
 
-echo "<br />";
+	echo "<br />";
 
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@nom_fichier_dump

@@ -226,12 +226,12 @@ function fin_cadre_trait_couleur($return = false){
 //
 // http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
-	return "<table width='100%' cellpadding='6' border='0'><tr><td style='width: 100%; background-color: red'><table width='100%' cellpadding='12' border='0'><tr><td style='width: 100%; background-color: white'>";
+	return debut_cadre('alerte', '', '', '', '', '');
 }
 
 // http://doc.spip.org/@fin_boite_alerte
 function fin_boite_alerte() {
-	return "</td></tr></table></td></tr></table>";
+	return fin_cadre('alerte');
 }
 
 

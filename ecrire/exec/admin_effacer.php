@@ -33,33 +33,29 @@ function exec_admin_effacer_dist()
 	echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
 
 	echo "\n<br /><br /><br />";
-	gros_titre(_T('titre_admin_effacer'));
+	echo gros_titre(_T('titre_admin_effacer'),'',false);
 	echo barre_onglets("administration", "effacer");
 
-	debut_gauche();
-	debut_boite_info();
+	echo debut_gauche('',true);
+	echo debut_boite_info(true);
 
 	echo _T('info_gauche_admin_effacer');
 
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 	
-	creer_colonne_droite();
+	echo creer_colonne_droite('',true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 	
-	debut_droite();
-	debut_cadre_relief();
+	echo debut_droite('',true);
+	echo debut_cadre_trait_couleur('',true,'',_T('texte_effacer_base'));
 
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
 
 	$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
 
-	echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
-		"<tr><td style='font-weight: bold; color: #FFFFFF;' class='toile_foncee verdana1 spip_medium'>",
-		_T('texte_effacer_base'),
-		"</td></tr>",
-		"<tr><td class='serif'>\n",
+	echo 
 		'<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="',
 	  	_T('info_avertissement'),
 		"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
@@ -71,11 +67,9 @@ function exec_admin_effacer_dist()
 		$res,
 		"\n</div>",
 		fin_boite_alerte(),
-		"</div>",
-		"</td></tr>",
-		"</table>";
+		"</div>";
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 
