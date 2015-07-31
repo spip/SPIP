@@ -35,13 +35,13 @@ function dispose_champs($type)
 {
   $corps = '';
   $p = new Champ;
-  $p->id_boucle = $nom;
+  $p->id_boucle = '';
   $p->boucles = '';
-  $p->id_mere = $nom;
+  $p->id_mere = '';
   $p->etoile = false; # le + dur
   $p->documents = true; # le + dur
   $p->statut = 'html';
-  $p->type_requete = $v;
+  $p->type_requete = '';
   $p->code ='';
   global $tables_principales;
   foreach($tables_principales[$type]['field'] as $n => $t) {
@@ -110,9 +110,14 @@ foreach($table_des_tables as $k => $v)
     "\n<br><hr><br>\n";
 }
 
-$res .= "</body></html>";
 $fond = "lagaffe";
-$f = fopen($GLOBALS['dossier_squelettes'] . $fond. ".html",'w');
+if (!($f = fopen($GLOBALS['dossier_squelettes'] . $fond. ".html",'w')))
+  {if (function_exists("php_sapi_name")  AND eregi("cgi", @php_sapi_name()))
+      Header("Status: 503");
+    else Header("HTTP/1.0 Service Unavailable");
+    echo ("impossible d'écrire le fichier de tests");
+    exit;
+  }
 fwrite($f, $res);
 fwrite($f, '<INCLUDE(casse-noisettes.php3)>');
 fclose($f);
@@ -121,5 +126,5 @@ $flag_dynamique = true;
 $delais = 0;
 
 include ("inc-public.php3");
-
+$res .= "</body></html>";
 ?>
