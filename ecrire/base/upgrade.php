@@ -31,7 +31,13 @@ function base_upgrade_dist($titre)
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
-		ecrire_meta('version_installee', $version,'non');
+		if ($version>=1.922)
+			ecrire_meta('version_installee', $version,'non');
+		else {
+			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
+			$GLOBALS['meta'][$nom] = $valeur;
+			spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
+		}
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
 	} else {
@@ -663,9 +669,10 @@ function maj_base($version_cible = 0) {
 	}
 
 	if (upgrade_vers(1.600, $version_installee, $version_cible)) {
-		include_spip('inc/indexation');
-		purger_index();
-		creer_liste_indexation();
+#8/08/07  plus d'indexation dans le core
+#		include_spip('inc/indexation');
+#		purger_index();
+#		creer_liste_indexation();
 		maj_version (1.600);
 	}
 
@@ -816,7 +823,7 @@ function maj_base($version_cible = 0) {
 	}
 
 	// Ici version 1.7 officielle
-
+echo "la";
 	if (upgrade_vers(1.728, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
 		maj_version (1.728);
@@ -1221,8 +1228,9 @@ function maj_base($version_cible = 0) {
 		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
 		// des choses plus sympa
 		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
-		include_spip('inc/indexation');
-		update_index_tables();
+#8/08/07  plus d'indexation dans le core
+		//include_spip('inc/indexation'); 
+		//update_index_tables();
 		maj_version(1.916);
 	}
 	if (upgrade_vers(1.917, $version_installee, $version_cible)) {
