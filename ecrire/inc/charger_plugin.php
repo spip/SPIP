@@ -435,7 +435,7 @@ function essaie_ajouter_liste_plugins($url) {
 // les renvoie sous forme de tableau url => titre
 // si $desc on ramene aussi le descriptif du paquet desc
 // http://doc.spip.org/@chercher_enclosures_zip
-function chercher_enclosures_zip($rss, $desc) {
+function chercher_enclosures_zip($rss, $desc = '') {
 	$liste = array();
 	include_spip('inc/syndic');
 	foreach(analyser_backend($rss) as $item)
