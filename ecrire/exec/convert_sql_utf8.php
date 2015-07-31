@@ -31,7 +31,7 @@ function exec_convert_sql_utf8_dist() {
 	$charset_spip = $GLOBALS['meta']['charset'];
 	// Definir le titre de la page (et le nom du fichier admin)
 	//$action = _T('utf8_convertir_votre_site');
-	$action = _L("Conversion de la base en $charset_spip");
+	$action = _L("Conversion de la base en $charset_spip"); #volontairement non traduit (obsolete)
 
 	// si meta deja la, c'est une reprise apres timeout.
 	if ($GLOBALS['meta']['convert_sql_utf8']) {

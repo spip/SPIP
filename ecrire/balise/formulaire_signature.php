@@ -136,9 +136,9 @@ function reponse_confirmation($var_confirm = '') {
 					$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere_ancien')
 				)) {
 					spip_query("UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$id_signature");
-					$confirm= _T('info_message_supprime'); # _L('Signature supprimee');
+					$confirm= _T('info_signature_supprimee');
 				} else {
-					$confirm = _T('forum_titre_erreur'); # _L('Erreur: ce code de suppression ne correspond a aucune signature');
+					$confirm = _T('info_signature_supprimee_erreur');
 				}
 				return '';
 			}
@@ -239,8 +239,8 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	elseif (!email_valide($adresse_email)) 
 		$texte = _T('form_email_non_valide');
 	elseif (strlen(_request('nobot'))
-	OR substr_count($message,'http://')>2) {
-		$texte = _T('form_pet_probleme_technique'); # _L("Vilain !")
+	OR preg_match_all(',\bhref=[\'"]?http,i',$message)>2) {
+		$texte = _T('form_pet_probleme_liens');
 		#envoyer_mail('email_moderateur@example.tld', 'spam intercepte', var_export($_POST,1));
 	} else {
 		if ($email_unique == "oui") {

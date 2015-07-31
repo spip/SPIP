@@ -25,7 +25,7 @@ function configuration_redirection_dist()
 
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 	. "<tr><td class='verdana2'>"
-	. _T('info_redirection')
+	. _T('config_info_redirection')
 	. "</td></tr>"
 
 	. "<tr><td align='$spip_lang_left' class='verdana2'>"
@@ -35,7 +35,7 @@ function configuration_redirection_dist()
 	. "</td></tr>\n"
 	. "</table>\n";
 
-	$res = debut_cadre_relief("", true, "", _L('Redirection d\'article').aide ("artvirt"))
+	$res = debut_cadre_relief("", true, "", _T('config_redirection').aide ("artvirt"))
 	. ajax_action_post('configurer', 'redirection', 'configuration','',$res)
  	. fin_cadre_relief(true);
 

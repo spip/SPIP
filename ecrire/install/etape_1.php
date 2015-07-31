@@ -65,7 +65,7 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 			:"")
 
 	. ($predef[0]
-	? '<h3>'._T('entree_base_donnee_1')._L(' attribu&eacute;e par l\'h&#233;bergeur').'</h3>'
+	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
@@ -77,7 +77,7 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 	)
 
 	. ($predef[1]
-	? '<h3>'._T('entree_login_connexion_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
+	? '<h3>'._T('install_login_base_hebergeur ').'</h3>'
 	: fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
@@ -89,7 +89,7 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 	)
 
 	. ($predef[2]
-	? '<h3>'._T('entree_mot_passe_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
+	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_mot_passe_1'),
 		array(
 			'pass_db' => array(

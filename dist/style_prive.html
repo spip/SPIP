@@ -1246,8 +1246,6 @@ li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article
 li.sec ul{display:none;}
 li.rub ul{display:none;}
 
-li .puce_statut{float:#GET{left};	padding-top: 5px;}
-li .puce_article_popup {padding:0px;}
 li img.expandImage{
 	display:block;
 	float:#GET{left};
@@ -1284,34 +1282,7 @@ a.liste-mot {
 	height: 100%;
 }
 
-div.puce_article, span.puce_article, div.puce_breve, span.puce_breve {
-	position: relative; 
-}
-div.puce_article_fixe, div.puce_breve_fixe, span.puce_article_fixe, span.puce_breve_fixe {
-	position: relative;
-}
 
-div.puce_article_popup, div.puce_breve_popup, span.puce_article_popup, span.puce_breve_popup {
-	position: absolute;
-	top: 0;
-	left: 0;
-	visibility: hidden;
-	border: 1px solid #666; 
-	background-color: #ccc; z-index: 10;
-}
-
-div.puce_article_popup img, div.puce_breve_popup img, span.puce_article_popup img, span.puce_breve_popup img {
-	padding: 1px;
-	border: none;
-}
-
-div.puce_article_popup, span.puce_article_popup {
-	width: 55px; 
-}
-
-div.puce_breve_popup, span.puce_breve_popup {
-	width: 27px; 
-}
 
 img.puce {
 	width: 7px;
@@ -1899,3 +1870,38 @@ td.vu {background:#cccccc;}
 }
 /* config/locuteur */
 .langues_bloquees {color:#GET{foncee};font-weight:bold;}
+
+
+[(#REM)
+	pour les puces de changement rapide de statut ;
+	NB: ca buggue car ca s'affiche en-dessous du cadre
+]
+li .puce_statut{float:#GET{left};	padding-top: 5px;}
+li .puce_article_popup {padding:0px;}
+div.puce_article, span.puce_article, div.puce_breve, span.puce_breve {
+	position: relative; 
+}
+div.puce_article_fixe, div.puce_breve_fixe, span.puce_article_fixe, span.puce_breve_fixe {
+	position: relative;
+}
+
+div.puce_article_popup, div.puce_breve_popup, span.puce_article_popup, span.puce_breve_popup {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	border: 1px solid #666; 
+	background-color: #ccc; z-index: 10;
+}
+div.puce_article_popup img, div.puce_breve_popup img, span.puce_article_popup img, span.puce_breve_popup img {
+	padding: 1px;
+	border: none;
+}
+
+div.puce_article_popup, span.puce_article_popup {
+	width: 55px; 
+}
+
+div.puce_breve_popup, span.puce_breve_popup {
+	width: 27px; 
+}

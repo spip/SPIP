@@ -16,21 +16,6 @@ include_spip('inc/presentation');
 
 /// A PASSER DANS LES FICHIERS DE LANGUE
 
-_T('texte_test_proxy'); // force le chargement du fichier de langue
-// pour ecraser la valeur ci-dessous ensuite 
-$GLOBALS[$GLOBALS['idx_lang']]['texte_proxy'] = 'Dans certains cas
-		(intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
-		les sites distants
-		(documentation de SPIP, sites syndiqu&eacute;s etc.)
-		ne sont accessibles qu\'&agrave; travers un
-		<i>proxy HTTP</i>.
-		Le cas &eacute;ch&eacute;ant,
-		indiquez ci-dessous son adresse, sous la forme
-		@proxy_en_cours@.
-		En g&eacute;n&eacute;ral, vous laisserez cette case vide.';
-// et un nouveau, gaffe au _L implicite
-$GLOBALS[$GLOBALS['idx_lang']]['pas_de_proxy_pour'] = 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple: @exemple@)&nbsp;:';
-
 function configuration_relayeur_dist($retour_proxy)
 {
 	global $spip_lang_left;

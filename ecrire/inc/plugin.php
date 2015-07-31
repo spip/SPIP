@@ -109,14 +109,24 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 					foreach($infos[$plug]['necessite'] as $need){
 						$id = strtoupper($need['id']);
 						if ($id=='SPIP' AND !plugin_version_compatible($need['version'],$GLOBALS['spip_version_code'])){
-							$necessite .= "<li>"._L("Necessite SPIP en version ".$need['version'])."</li>";
+							$necessite .= "<li>"
+							._T('plugin_necessite_spip',
+								array('version' => $need['version'])
+							)."</li>";
 						}
 						elseif (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
-							$necessite .= "<li>"._L("Necessite le plugin $id en version ".$need['version'])."</li>";
+							$necessite .= "<li>"
+							._T('plugin_necessite_plugin',
+								array('plugin' => $id,
+								'version' => $need['version'])
+							)."</li>";
 						}
 					}
-				if (strlen($necessite)) $necessite="<ul>$necessite</ul>";
-				$erreurs .= "<li>"._L("Impossible d'activer le plugin $plug").$necessite."</li>";
+				if (strlen($necessite))
+					$necessite="<ul>$necessite</ul>";
+				$erreurs .= "<li>" . _T('plugin_impossible_activer',
+					array('plugin' => $plug)
+				)."</li>";
 			}
 			ecrire_meta('plugin_erreur_activation',"<ul>$erreurs</ul>");
 		}

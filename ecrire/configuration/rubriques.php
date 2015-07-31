@@ -28,7 +28,7 @@ function configuration_rubriques_dist(){
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 
 	. "<tr><td colspan='2' class='verdana2'>"
-	. typo(_L('Activer les champs suivants').':')
+	. typo(_T('config_activer_champs').':')
 	. "</td></tr>"
 
 	. "<tr>"

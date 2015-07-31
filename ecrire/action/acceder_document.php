@@ -73,8 +73,8 @@ function action_acceder_document_dist() {
 	case 404:
 		http_status(404);
 		include_spip('inc/minipres');
-		echo minipres(_L('Erreur').' 404',
-			_L('Ce document n\'est pas disponible sur le site.'));
+		echo minipres(_T('erreur').' 404',
+			_T('info_document_indisponible'));
 		break;
 
 	default:
