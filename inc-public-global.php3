@@ -106,6 +106,11 @@ if ($ajout_forum) {
 	ajout_forum();
 }
 
+if ($xhtml){
+	include_ecrire('inc_tidy.php');
+	if (version_tidy() > 0) ob_start("xhtml");
+}
+
 if (!$use_cache) {
 	$lastmodified = time();
 	if (($lastmodified - lire_meta('date_purge_cache')) > 3600) {
@@ -158,11 +163,6 @@ if (!$use_cache) {
 	}
 }
 
-if ($xhtml){
-	include_ecrire('inc_tidy.php');
-	if (version_tidy() > 0) ob_start("xhtml");
-}
-
 //
 // si $var_recherche est positionnee, on met en rouge les mots cherches (php4 uniquement)
 //
@@ -201,7 +201,15 @@ else {
 }
 $flag_preserver |= $headers_only;	// ne pas se fatiguer a envoyer des donnees
 if (!$flag_preserver) {
-	@Header("Content-Type: text/html; charset=".lire_meta('charset'));
+	if ($xhtml) {
+		verif_butineur();
+		if ($browser_name == "MSIE")
+			@Header("Content-Type: text/html; charset=".lire_meta('charset'));
+		else 
+			@Header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+	} else {
+		@Header("Content-Type: text/html; charset=".lire_meta('charset'));
+	}
 }
 
 // Envoyer la page

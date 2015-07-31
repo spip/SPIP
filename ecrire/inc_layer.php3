@@ -5,10 +5,6 @@ if (defined("_INC_LAYER")) return;
 define("_INC_LAYER", "1");
 
 
-//
-// Le contenu de cette fonction est a mettre dans inc_version
-//
-
 
 
 function test_layer(){

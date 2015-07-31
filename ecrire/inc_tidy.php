@@ -18,12 +18,36 @@ function version_tidy() {
 	return $version;
 }
 
+
+function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
+	$regexp_echap_math = "/<math((.*?))<\/math>/si";
+	$source = "mathml";
+
+	while (preg_match($regexp_echap_math, $letexte, $regs)) {
+		$num_echap++;
+		
+		$les_echap[$num_echap] = $regs[0];
+
+		$pos = strpos($letexte, $regs[0]);
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+			.substr($letexte,$pos+strlen($regs[0]));
+	}
+	
+	return array($letexte, $les_echap);
+}
+
+
 function xhtml ($buffer) {
 	$config = array('indent' => TRUE,
                'output-xhtml' => TRUE,
                'wrap', 200);
-
 	if (version_tidy() == "1") {
+		include_ecrire("inc_texte.php3");
+
+		$retour_echap = echappe_xhtml ($buffer);
+		$buffer = $retour_echap[0];
+		$les_echap = $retour_echap[1];
+
 		tidy_set_encoding ("utf8");
 		tidy_setopt('wrap', 0);
 		tidy_setopt('indent-spaces', 4);
@@ -34,6 +58,7 @@ function xhtml ($buffer) {
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
 	    $tidy = tidy_get_output();
+	    $tidy = echappe_retour($tidy, $les_echap, "mathml");
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {
