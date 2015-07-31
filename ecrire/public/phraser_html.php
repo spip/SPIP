@@ -88,6 +88,9 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ->param = $champ_->param;
 		$texte = substr($champ->apres,1);
 		$champ->apres = "";
+		if (preg_match(',^</INCLU[DR]E>,m', $texte)) {	
+			$texte = substr($texte,10);
+		}
 		$result[] = $champ;
 	}
 	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));
