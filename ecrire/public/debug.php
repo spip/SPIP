@@ -47,7 +47,7 @@ function afficher_debug_contexte($env) {
 // http://doc.spip.org/@affiche_erreurs_page
 function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 
-	if ($GLOBALS['exec']=='valider_xml' OR !$tableau_des_erreurs)
+	if (_request('exec')=='valider_xml' OR !$tableau_des_erreurs)
 		return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
@@ -148,7 +148,7 @@ function erreur_squelette($message='', $lieu='') {
 		($GLOBALS['var_mode'] == 'debug')) {
 			include_spip('inc/minipres');
 
-			$titre = 'Spip '
+			$titre = 'SPIP '
 				. $GLOBALS['spip_version_affichee']
 				. ' '
 				. _T('admin_debug')
@@ -318,7 +318,7 @@ function reference_boucle_debug($n, $nom, $self)
 // http://doc.spip.org/@ancre_texte
 function ancre_texte($texte, $fautifs=array())
 {
-	global $var_mode_ligne;
+	$var_mode_ligne = _request('var_mode_ligne');
 	if ($var_mode_ligne) $fautifs[]= array($var_mode_ligne);
 	$res ='';
 
@@ -377,7 +377,9 @@ function ancre_texte($texte, $fautifs=array())
 // l'environnement graphique du debuggueur 
 // http://doc.spip.org/@debug_dumpfile
 function debug_dumpfile ($texte, $fonc, $type) {
-	global $debug_objets, $var_mode_objet, $var_mode_affiche, $spip_lang_right;
+	global $debug_objets, $spip_lang_right;
+	$var_mode_objet = _request('var_mode_objet');
+	$var_mode_affiche = _request('var_mode_affiche');
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
@@ -469,7 +471,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	if ($texte) {
 
 		$err = "";
-		$titre = $GLOBALS['var_mode_affiche'];
+		$titre = _request('var_mode_affiche');
 		if ($titre != 'validation') {
 			$titre = 'zbug_' . $titre;
 			$texte = ancre_texte($texte, array('',''));
@@ -507,7 +509,7 @@ function debug_debut($titre)
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .
 	  "<head>\n<title>" .
-	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
+	  ('SPIP ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' . $titre . ' (' .
 	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))) . 
 	  ")</title>\n" .
