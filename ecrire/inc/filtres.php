@@ -1413,6 +1413,10 @@ function modulo($nb, $mod, $add=0) {
 //  retourne false ou la  normalisation de la derniere adresse donnee
 // http://doc.spip.org/@email_valide
 function email_valide($adresses) {
+	// eviter d'injecter n'importe quoi dans preg_match
+	if (!is_string($adresses))
+		return false;
+
 	// Si c'est un spammeur autant arreter tout de suite
 	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $adresses)) {
 		spip_log("Tentative d'injection de mail : $adresses");
