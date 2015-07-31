@@ -89,7 +89,8 @@ function expression_recherche($recherche, $options) {
 		// 'une', 'des' ...)
 
 		// attention : plusieurs mots entre guillemets sont a rechercher tels quels
-		$recherche_mod = $recherche;
+		$recherche_trans = $recherche_mod = $recherche;
+
 		// les expressions entre " " sont un mot a chercher tel quel
 		// -> on remplace les espaces par un \x1 et on enleve les guillemets
 		if (preg_match(',["][^"]+["],Uims',$recherche_mod,$matches)){
