@@ -770,8 +770,8 @@ entites_html($document['fichier'])."\" />\n";
 				  echo "</tr>\n";
 				}
 			
-			document_vu($id_document);
 			}
+			document_vu($id_document);
 	}
 	// fermer la derniere ligne
 	if ($case > 0) {
