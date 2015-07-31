@@ -1,5 +1,14 @@
 <?php
 
+//
+// Fonctions complementaires a spip_image.php3
+
+//
+// Ce fichier ne sera execute qu'une fois
+if (defined("_ECRIRE_INC_GETDOCUMENT")) return;
+define("_ECRIRE_INC_GETDOCUMENT", "1");
+
+
 function creer_repertoire_documents($ext) {
 	global $dossier_squelettes;
 
@@ -106,6 +115,7 @@ function afficher_compactes($image_name, $fichiers, $link) {
 
 function ajout_doc($orig, $source, $mode, $id_document) {
 	global $hash_id_auteur, $hash, $id_article, $type;
+
 	//
 	// Securite
 	//
@@ -113,21 +123,29 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		return;
 
 	// type de document inconnu ?
-
 	if (!ereg("\.([^.]+)$", $orig, $match)) return;
 
 	$ext = corriger_extension(addslashes(strtolower($match[1])));
 	$row = spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'" . (($mode != 'vignette') ? '' : " AND inclus='image'"));
 
 	// type de document invalide ?
-
 	if (!$row = spip_fetch_array($row)) {return;}
 
 	// Recopier le fichier sauf si deja fait (zip tel quel)
-
 	$dest_path = !$source ? $orig : copier_document($ext,$orig, $source);
-
 	if (!$dest_path) return;
+	$taille = filesize($dest_path);
+
+	$size_image = @getimagesize($dest_path);
+	$type_image = decoder_type_image($size_image[2]);
+	if ($type_image) {
+		$largeur = $size_image[0];
+		$hauteur = $size_image[1];
+	}
+
+	if ($taille == 0
+	OR ($mode == 'vignette' AND ($largeur == 0 OR $hauteur==0)))
+		return;
 
 	// Preparation
 	if ($mode == 'vignette') {
@@ -145,16 +163,6 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 			spip_query($query);
 		}
 	}
-	//
-	// Mettre a jour les infos du document uploade
-	//
-	$size_image = @getimagesize($dest_path);
-	$type_image = decoder_type_image($size_image[2]);
-	if ($type_image) {
-		$largeur = $size_image[0];
-		$hauteur = $size_image[1];
-	}
-	$taille = filesize($dest_path);
 	if ($nouveau) {
 		$type_inclus = $row['inclus'];
 		if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
@@ -218,13 +226,14 @@ function ajout_doc_zip($image, $image_name, $mode, $forcer_document, $action_zip
 	ajout_doc_s($image, $image_name, $mode, $forcer_document,$id_document, $hash);
 }
 
-function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash) 
-{
+function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash) {
+	$mode = ($forcer_document == 'oui' ? "document" : $mode);
+
 	if (!is_dir($image_name)) {
 		ajout_doc($image_name,
-			  $image,
-			  ($forcer_document == 'oui' ? "document" : $mode),
-			  $id_document);
+			$image,
+			$mode,
+			$id_document);
 	} else {
 		include_ecrire('inc_documents.php3');
 		$fichiers = fichiers_upload($image_name);
@@ -236,7 +245,7 @@ function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document,
 					$ext = 'jpg';
 				$r = spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext'" . ($inclus ? " AND inclus='$inclus'" : ''));
 				if (spip_fetch_array($r))
-					ajout_doc($f, $f, 'document', false);
+					ajout_doc($f, $f, $mode, false);
 			}
 		}
 

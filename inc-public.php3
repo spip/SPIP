@@ -22,7 +22,7 @@ else {
 	//
 
 	// Regler le $delais par defaut
-	if ($INSECURE['fond'] || $INSECURE['delais'])
+	if (is_insecure('fond') || is_insecure('delais'))
 		exit;
 	if (!isset($delais))
 		$delais = 1 * 3600;

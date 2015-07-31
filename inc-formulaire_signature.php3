@@ -214,7 +214,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 					$url_site = addslashes($url_site);
 					$message = addslashes($message);
 	
-					spip_query("INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')");
+					spip_query("INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) VALUES ($id_article, NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')");
 					return _T('form_pet_envoi_mail_confirmation');
 				}
 				else {

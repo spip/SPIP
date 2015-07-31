@@ -211,7 +211,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	return array (ceil($destWidth), ceil($destHeight));
 }
 
-function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false) {
+function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false, $test_cache_only = false) {
 	global $convert_command, $djpeg_command, $cjpeg_command, $pnmscale_command;
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
@@ -241,8 +241,11 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			$vignette = $destination.'.'.$fmt;
 			if ($force) @unlink($vignette);
 		}
-		
+
+	if ($test_cache_only AND !$vignette) return;
+
 	// utiliser le cache ?
+	if (!$test_cache_only)
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
 		$creation = true;
@@ -398,6 +401,7 @@ function inserer_vignette_base($image, $vignette) {
 	if ($type == "2") $format = 1;
 	else if ($type == "3") $format = 2;
 	else if ($type == "1") $format = 3;
+	else return;
 
 	$vignette = str_replace('../', '', $vignette);
 

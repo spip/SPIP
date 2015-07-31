@@ -15,8 +15,7 @@ include_ecrire("inc_filtres.php3");
 // Par securite ne pas accepter les variables passees par l'utilisateur
 //
 function tester_variable($nom_var, $val){
-	global $INSECURE;
-	if (!isset($GLOBALS[$nom_var]) || $INSECURE[$nom_var]) {
+	if (!isset($GLOBALS[$nom_var]) || is_insecure($nom_var)) {
 		$GLOBALS[$nom_var] = $val;
 		return false;
 	}

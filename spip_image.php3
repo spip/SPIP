@@ -6,6 +6,11 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_ecrire("inc_abstract_sql.php3");
 
+
+// Recuperer les variables d'upload
+if (!$_FILES)
+$_FILES = &$HTTP_POST_FILES;
+
 function effacer_image($nom) {
 	global $hash_id_auteur, $hash;
 
@@ -266,7 +271,7 @@ function gdRotate($imagePath,$rtt){
 // Creation automatique de vignette new style
 // Normalement le test est vérifié donc on ne rend rien sinon
 
-function creer_fichier_vignette($vignette) {
+function creer_fichier_vignette($vignette, $test_cache_only=false) {
 	if ($vignette && lire_meta("creer_preview") == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
 		$ext = $regs[1];
@@ -274,7 +279,7 @@ function creer_fichier_vignette($vignette) {
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
 
-		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
+		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
 		{
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];
@@ -286,6 +291,8 @@ function creer_fichier_vignette($vignette) {
 
 function supprime_document_et_vignette($doc_supp) {
 	global $hash_id_auteur, $hash;
+
+
 	// Securite
 	if (verifier_action_auteur("supp_doc $doc_supp", $hash, $hash_id_auteur)) {
 		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
@@ -323,7 +330,7 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 		return '';
 	}
 	
-	if (!$var_rot) $var_rot = 0;
+	$var_rot = intval($var_rot);
 
 	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_rotate";
 	$result = spip_query($query);
@@ -361,63 +368,114 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 
 		if ($id_vignette > 0) {
 			creer_fichier_vignette($image);
-/*			$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
-			$result = spip_query($query);
-			if ($row = spip_fetch_array($result)) {
-				$fichier = $row['fichier'];
-				@unlink($fichier);
-			}
-			spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
-*/		}
-
+		}
 
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
 
 	}
 }
 
-if ($test_vignette) // appel de config-fonction
-	$redirect = tester_vignette($test_vignette);
-elseif ($vignette) // appels de inc_logo
-	$redirect = creer_fichier_vignette($vignette);
-else {
-   $retour = $redirect;
-   $redirect = '';
-   if ($ajout_doc == 'oui') {
-	include_ecrire('inc_getdocument.php3');
-	if (!$image_name AND $image2) {
-		$image = _DIR_TRANSFERT . $image2;
-		$image_name = $image;
-	} 
-	if (!eregi("\.zip$",$image_name))
-	  ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash);
-	else {
-	  // bizarre: clean_link ne recupere pas les variables
-	  $link = new Link('spip_image.php3');
-	  $link->addVar("ajout_doc", "oui");
-	  $link->addVar("redirect", $retour);
-	  $link->addVar('id_document', $id_document);
-	  $link->addVar('id_article', $id_article);
-	  $link->addVar('mode', $mode);
-	  $link->addVar('type', $type);
-	  $link->addVar('hash', $hash);
-	  $link->addVar('hash_id_auteur', $hash_id_auteur);
-	  ajout_doc_zip($image, $image_name, $mode, $forcer_document, $action_zip, $id_document, $hash, $link);
-	}
-   }
-   elseif ($ajout_logo == "oui")
-	ajout_image($image, $logo);
-   elseif ($image_supp)
-	effacer_image($image_supp);
-   elseif ($doc_supp) // appels de inc_document
-	supprime_document_et_vignette($doc_supp);
-   elseif ($doc_rotate)
-	tourner_document($var_rot, $doc_rotate, $convert_command);
- }
 
+//
+// Le switch principal : quelle est l'action demandee
+//
+
+
+// appel de config-fonction
+if ($test_vignette)
+	$redirect = tester_vignette($test_vignette);
+
+// appels de inc_logo
+else if ($vignette) {
+	if ($creer_vignette == 'oui' AND
+	verifier_action_auteur("vign $vignette", $hash, $hash_id_auteur)) {
+		creer_fichier_vignette($vignette);
+		$retour = $redirect;
+		$redirect = '';
+	}
+	else
+		$redirect = creer_fichier_vignette($vignette, true);
+}
+else {
+	$retour = $redirect;
+	$redirect = '';
+
+	//
+	// Ajout d'un document ou d'une image
+	//
+	if ($ajout_doc == 'oui') {
+		include_ecrire('inc_getdocument.php3');
+
+		// cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
+		if ($_POST['image2'] AND $_POST['ok_ftp']) {
+			$_FILES = array(
+				array (
+					'name' => _DIR_TRANSFERT . $image2,
+					'tmp_name' => _DIR_TRANSFERT . $image2
+				)
+			);
+		} 
+
+		// Upload d'un ZIP : retour du formulaire demandant
+		/// quelle action il fallait effectuer
+		if ($_POST['action_zip']) {
+			if (!preg_match('@^IMG/zip/[^/]+\.zip$@', $_POST['image_name']))
+				return;
+			$_FILES = array(
+				array (
+					'name' => $_POST['image_name'],
+					'tmp_name' => $_POST['image_name']
+				)
+			);
+		} 
+
+		if (is_array($_FILES))
+		foreach ($_FILES as $file) {
+			// ajout d'un doc normal
+			if (!eregi("\.zip$",$file['name']) OR count($_FILES) > 1)
+				ajout_doc_s($file['tmp_name'], $file['name'], $mode, $forcer_document, $id_document, $hash);
+			else
+			// ajout d'un doc au format zip
+			{
+				// bizarre: clean_link ne recupere pas les variables
+				$link = new Link('spip_image.php3');
+				$link->addVar("ajout_doc", "oui");
+				$link->addVar("redirect", $retour);
+				$link->addVar('id_document', $id_document);
+				$link->addVar('id_article', $id_article);
+				$link->addVar('mode', $mode);
+				$link->addVar('type', $type);
+				$link->addVar('hash', $hash);
+				$link->addVar('hash_id_auteur', $hash_id_auteur);
+				ajout_doc_zip($file['tmp_name'], $file['name'], $mode,
+					$forcer_document, $action_zip, $id_document, $hash, $link);
+			}
+		}	// foreach $_FILES
+
+	}
+
+	// Ajout d'un logo
+	else if ($ajout_logo == "oui")
+		ajout_image($image, $logo);
+
+	// Suppression d'un logo
+	else if ($image_supp)
+		effacer_image($image_supp);
+
+	// Suppression d'un document et de sa vignette
+	else if ($doc_supp)
+		supprime_document_et_vignette($doc_supp);
+
+	// Rotation d'une image
+	else if ($doc_rotate)
+		tourner_document($var_rot, $doc_rotate, $convert_command);
+}
+
+
+
+//
+// Fin et retour
+//
 if (!($redirect)) {
 	if ($_POST) $vars = $_POST;
 	else $vars = $_GET;
@@ -425,7 +483,7 @@ if (!($redirect)) {
 	$link = new Link(_DIR_RESTREINT_ABS . $redirect);
 	reset($vars);
 	while (list ($key, $val) = each ($vars)) {
-	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {
+	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip|mode|ok_.*)$", $key)) {
 	    $link->addVar($key, $val);
 	  }
 	}

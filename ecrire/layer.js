@@ -38,15 +38,15 @@ var vis = new Array();
 		}
 	}
 
-function swap_couche(couche, rtl, dir) {
+function swap_couche(couche, rtl, dir, no_swap) {
 	triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (vis[couche] == 'hide'){
-		if (triangle) triangle.src = dir + 'deplierbas.gif';
+		if (!no_swap && triangle) triangle.src = dir + 'deplierbas.gif';
 		layer.style.display = 'block';
 		vis[couche] = 'show';
 	} else {
-		if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
+		if (!no_swap && triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
 		layer.style.display = 'none';
 		vis[couche] = 'hide';
 	}
