@@ -25,11 +25,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Pagina vernieuwen',
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
 'afficher_trad' => 'Vertalingen weergeven',
-'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de SQL-gegevensbank naar versie @version@ is niet mogelijk. Misschien wegens een probleem van wijzigingsrecht op de gegevensbank. Gelieve met uw leverancier contact op te nemen.',
-'alerte_modif_info_concourante' => 'OPGELET : Deze informatie werd voorts gewijzigd. De huidige waarde is&nbsp;:',
+'alerte_maj_impossible' => '<b>Waarshuwing !</b> Het updaten van de SQL-gegevensbank naar versie @version@ is niet mogelijk. Misschien wegens een probleem van wijzigingsrecht op de gegevensbank. Gelieve met uw leverancier contact op te nemen.',
+'alerte_modif_info_concourante' => 'OPGELET : Deze informatie werd voorts gewijzigd. De huidige waarde is :',
 'analyse_xml' => 'XML Analyse',
 'annuler' => 'Annuleren',
-'antispam_champ_vide' => 'Gelieve dit veld leeg te laten&nbsp;:',
+'antispam_champ_vide' => 'Gelieve dit veld leeg te laten :',
 'articles_recents' => 'Meest recente artikels',
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
@@ -52,16 +52,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Hoofdletter E met accent aigu toevoegen',
 'barre_eo' => 'O gekoppeld aan E (ligatuur) toevoegen',
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
-'barre_euro' => '&euro; teken invoegen',
+'barre_euro' => '€ teken invoegen',
 'barre_gras' => 'In het {{vet}} zetten',
-'barre_guillemets' => 'Van &laquo; haakjes &raquo; voorzien',
+'barre_guillemets' => 'Van « haakjes » voorzien',
 'barre_guillemets_simples' => 'Van „haakjes van het tweede niveau“ voorzien',
 'barre_intertitre' => 'Omzetten naar {{{tussentitel}}}',
 'barre_italic' => '{cursief} zetten',
 'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
 'barre_lien_input' => 'Gelieve hier het adres van de koppeling op te geven. Je kan naar een webpagina verwijzen onder de vorm http://www.mijnsite.com ofwel het nummer van een artikel van deze site invullen.',
 'barre_note' => 'Omzetten naar een [[Voetnoot]]',
-'barre_paragraphe' => 'Een paragraaf cre&euml;ren',
+'barre_paragraphe' => 'Een paragraaf creëren',
 'barre_quote' => '<quote>een bericht citeren</quote>',
 'bouton_ajouter_document' => 'Een document toevoegen',
 'bouton_ajouter_image' => 'Een beeld toevoegen',
@@ -180,10 +180,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_11' => 'November',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'December',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'Februari',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'Maart',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'April',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'Juli',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'Augustus',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'September',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'winter',
@@ -212,12 +212,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf: <b>Toegangsrechten regelen</b>',
 'dirs_probleme_droits' => 'Probleem met toegangsrechten',
-'dirs_repertoires_absents' => '<p><b>De volgende mappen werden niet gevonden&nbsp;:</b></p><ul>@bad_dirs@.</ul>
+'dirs_repertoires_absents' => '<p><b>De volgende mappen werden niet gevonden :</b></p><ul>@bad_dirs@.</ul>
   <p>Waarschijnlijk is dit te wijten aan het door elkaar halen van hoofd- en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
  is dit niet het geval, hernoem dan de mappen met je FTP-programma om de fout zo te herstellen.</p>
   <p>Eenmaal deze bewerking uitgevoerd is, kan je',
-'dirs_repertoires_suivants' => '<p><b>Je hebt geen schrijfrechten op de volgende mappen&nbsp;:</b></p> <ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>Je hebt geen schrijfrechten op de volgende mappen :</b></p> <ul>@bad_dirs@.</ul>
   <p>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding.</p>
   <p>Eenmaal deze wijziging doorgevoerd, kan je ',
@@ -317,7 +317,7 @@ Bedankt voor je deelname
 'forum_acces_refuse' => 'Je hebt geen toegang meer tot deze forums.',
 'forum_attention_dix_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 10 tekens bevatten.',
 'forum_attention_trois_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 3 tekens bevatten.',
-'forum_attention_trop_caracteres' => '<b>Opgelet&nbsp;!</b> uw bericht is te lang (@compte@ caract&egrave;res)&nbsp;: om registratie mogelijk te maken, mag het niet meer dan @max@ karakters tellen.',
+'forum_attention_trop_caracteres' => '<b>Opgelet !</b> uw bericht is te lang (@compte@ caractères) : om registratie mogelijk te maken, mag het niet meer dan @max@ karakters tellen.',
 'forum_avez_selectionne' => 'Je hebt gekozen:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>hier</a> om door te gaan.',
 'forum_forum' => 'forum',
@@ -329,7 +329,7 @@ Bedankt voor je deelname
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_page_url' => '(Als je bericht naar een artikel op het web verwijst of naar een pagina die meer informatie bevat, kunt u hier de titel en de URL van deze webverwijzing invoeren.)',
 'forum_par_auteur' => 'door @auteur@',
-'forum_poste_par' => 'Bericht poste@parauteur@ als vervolg op je artikel &laquo; @titre@ &raquo; .',
+'forum_poste_par' => 'Bericht poste@parauteur@ als vervolg op je artikel « @titre@ » .',
 'forum_probleme_database' => 'Probleem met databank, je bericht is niet geregistreerd.',
 'forum_qui_etes_vous' => '<b>Wie ben je ?</b> (optioneel)',
 'forum_texte' => 'Tekst van je bericht :',
@@ -347,8 +347,8 @@ Bedankt voor je deelname
 'forum_vous_inscrire' => 'je inschrijven.',
 
 // I
-'ical_texte_rss_articles' => 'Het &laquo;backend&raquo; bestand van de artikels bevindt zich op dit adres:',
-'ical_texte_rss_articles2' => 'Je kan eveneens de &laquo;backend&raquo; bestanden bekomen voor de artikels van elke rubriek van deze site:',
+'ical_texte_rss_articles' => 'Het «backend» bestand van de artikels bevindt zich op dit adres:',
+'ical_texte_rss_articles2' => 'Je kan eveneens de «backend» bestanden bekomen voor de artikels van elke rubriek van deze site:',
 'ical_texte_rss_breves' => 'Daarnaast bestaat ook een bestand met de nieuwsberichten van de site. Door het nummer van de rubriek op te geven, ontvang je automatisch de berichten van deze rubriek.',
 'icone_a_suivre' => 'Taken',
 'icone_admin_site' => 'Beheer van de site',
@@ -388,7 +388,7 @@ Bedankt voor je deelname
 'icone_statistiques' => 'Statistieken van de site',
 'icone_statistiques_visites' => 'Statistieken',
 'icone_suivi_activite' => 'De activiteit van de site opvolgen',
-'icone_suivi_actualite' => 'Evolutie van de&nbsp;site',
+'icone_suivi_actualite' => 'Evolutie van de site',
 'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
 'icone_suivi_revisions' => 'Wijzigingen van de artikels',
@@ -401,12 +401,12 @@ Bedankt voor je deelname
 'icone_valider_message' => 'Bericht goedkeuren',
 'icone_visiter_site' => 'Bekijk publieke site',
 'icone_voir_en_ligne' => 'Online bekijken',
-'image_tourner_180' => '180&deg; draaien',
-'image_tourner_droite' => '90&deg; naar rechts draaien',
-'image_tourner_gauche' => '90&deg; naar links draaien',
+'image_tourner_180' => '180° draaien',
+'image_tourner_droite' => '90° naar rechts draaien',
+'image_tourner_gauche' => '90° naar links draaien',
 'img_indisponible' => 'beeld onbeschikbaar',
 'impossible' => 'onmogelijk',
-'info_a_suivre' => 'TAKEN&raquo;',
+'info_a_suivre' => 'TAKEN»',
 'info_a_valider' => '[ter goedkeuring]',
 'info_acces_interdit' => 'Geen toegang',
 'info_acces_refuse' => 'Toegang geweigerd',
@@ -442,9 +442,9 @@ Bedankt voor je deelname
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
 'info_copyright_gpl' => 'onder GPL licentie',
-'info_cours_edition' => 'Je artikels in redactie', # MODIF
+'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
-'info_creer_repertoire_2' => 'binnen in de submap <b>@repertoire@</b>, vervolgens&nbsp;:',
+'info_creer_repertoire_2' => 'binnen in de submap <b>@repertoire@</b>, vervolgens :',
 'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
 'info_deplier' => 'Uitvouwen',
 'info_descriptif_nombre' => 'Beschrijving(en):',
@@ -458,11 +458,11 @@ Bedankt voor je deelname
 'info_documents_un' => '1 document',
 'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
-'info_ecire_message_prive' => 'Een priv&eacute;-bericht schrijven',
+'info_ecire_message_prive' => 'Een privé-bericht schrijven',
 'info_email_invalide' => 'Fout e-mailadres.',
 'info_en_cours_validation' => 'Je artikels in redactie',
 'info_en_ligne' => 'Momenteel online:',
-'info_envoyer_message_prive' => 'Een priv&eacute;-bericht sturen naar deze auteur',
+'info_envoyer_message_prive' => 'Een privé-bericht sturen naar deze auteur',
 'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
@@ -517,7 +517,7 @@ Bedankt voor je deelname
 'info_non_utilisation_messagerie' => 'Je gebruikt het interne berichtensysteem van deze site niet.',
 'info_nouveau_message' => 'JE HEBT EEN NIEUW BERICHT',
 'info_nouveaux_messages' => 'JE HEBT @total_messages@ NIEUWE BERICHTEN',
-'info_numero_abbreviation' => 'N&deg;&nbsp;',
+'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Deze informatie is verplicht',
 'info_panne_site_syndique' => 'Gesyndiceerde site is niet bereikbaar',
 'info_pense_bete' => 'MEMO',
@@ -554,7 +554,7 @@ Bedankt voor je deelname
 'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
 'info_signature_supprimee' => 'Handtekening verwijderd',
-'info_signature_supprimee_erreur' => 'Fout&nbsp;: de verwijderde code komt met geen enkele handtekening overeen.',
+'info_signature_supprimee_erreur' => 'Fout : de verwijderde code komt met geen enkele handtekening overeen.',
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
 'info_site_refuse' => 'Website weigerd',
@@ -565,7 +565,7 @@ Bedankt voor je deelname
 'info_symbole_bleu' => 'Het <b>blauwe</b> symbool wijst op een <b>memo</b>: dat wil zeggen een bericht voor persoonlijk gebruik.',
 'info_symbole_jaune' => 'Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
 'info_symbole_vert' => 'Het <b>groene</b> symbool wijst op <b>uitgewisselde berichten met andere gebruikers</b> van deze site.',
-'info_syndication' => 'nieuwsovername (syndicatie)&nbsp;:',
+'info_syndication' => 'nieuwsovername (syndicatie) :',
 'info_syndication_articles' => 'artikel(s)',
 'info_telecharger' => 'Opladen vanf je computer:',
 'info_telecharger_nouveau_logo' => 'Een nieuw logo opladen:',
@@ -615,11 +615,11 @@ Bedankt voor je deelname
 'login_deconnexion_ok' => 'Verbinding verbreken.',
 'login_erreur_pass' => 'Foutief paswoord.',
 'login_espace_prive' => 'Privaat gedeelte',
-'login_identifiant_inconnu' => 'Loginnaam &laquo; @login@ &raquo; is niet bekend.',
+'login_identifiant_inconnu' => 'Loginnaam « @login@ » is niet bekend.',
 'login_login' => 'Login :',
 'login_login2' => 'Login (naam voor aanmelding bij deze site):',
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
-'login_motpasseoublie' => 'Paswoord&nbsp;vergeten?',
+'login_motpasseoublie' => 'Paswoord vergeten?',
 'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.
 
    Als je wil dat derden je paswoord niet kunnen onderscheppen
@@ -726,13 +726,13 @@ opnieuw verbinding maken met de site
 'suivant' => 'volgende',
 
 // T
-'taille_ko' => '@taille@&nbsp;kB',
-'taille_mo' => '@taille@&nbsp;MB',
+'taille_ko' => '@taille@ kB',
+'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
-'texte_actualite_site_1' => 'Eenmaal je vertrouwd bent met de interface, kan je klikken op &laquo;',
+'texte_actualite_site_1' => 'Eenmaal je vertrouwd bent met de interface, kan je klikken op «',
 'texte_actualite_site_2' => 'Volledige interface',
-'texte_actualite_site_3' => '&raquo; om meer mogelijkheden te openen.',
-'texte_creation_automatique_vignette' => 'Op deze site is de automatische aanmaak van miniaturen (vignettes) geactiveerd. Als je vanop dit forumulier afbeeldingen oplaadt van het formaat @gd_formats@, zullen miniaturen aangemaakt worden met een maximale grootte van  @taille_preview@&nbsp;pixels.',
+'texte_actualite_site_3' => '» om meer mogelijkheden te openen.',
+'texte_creation_automatique_vignette' => 'Op deze site is de automatische aanmaak van miniaturen (vignettes) geactiveerd. Als je vanop dit forumulier afbeeldingen oplaadt van het formaat @gd_formats@, zullen miniaturen aangemaakt worden met een maximale grootte van  @taille_preview@ pixels.',
 'texte_documents_associes' => 'Volgende documenten zijn bij het artikel gevoegd,
     maar zijn niet rechtstreeks in de tekst opgenomen.
     Naargelang de opmaak van de publieke website
@@ -742,14 +742,14 @@ opnieuw verbinding maken met de site
  Noteer deze referentie en probeer andermaal het opladen
  van de afbeelding. Kijk vervolgens na of de afbeeldingen
  correct verschijnen in het artikel.',
-'texte_erreur_visiteur' => 'U probeerde toegang te krijgen tot het priv&eacute;-gedeelte met een login die hiervoor geen machtiging heeft.',
+'texte_erreur_visiteur' => 'U probeerde toegang te krijgen tot het privé-gedeelte met een login die hiervoor geen machtiging heeft.',
 'texte_inc_auth_1' => 'U bent aangemeld als
   <b>@auth_login@</b>, maar deze naam komt niet (meer) voor in de databank. 
   Probeert van u',
 'texte_inc_auth_2' => 'Opnieuw verbinden',
 'texte_inc_auth_3' => ', nadat je je bladerprogramma eventueel gesloten en opnieuw herstart hebt.',
 'texte_inc_config' => 'De wijzigingen die op deze pagina worden aangebracht,
- be&iuml;nvloeden grondig de werking van de volledige website. We raden
+ beïnvloeden grondig de werking van de volledige website. We raden
  je aan hier niets aan te wijzigen tot je voldoende bekend
  bent met het functioneren van het SPIP systeem.
  <br /><br /><b>Algemeen gesproken laat je het
@@ -780,7 +780,7 @@ opnieuw verbinding maken met de site
 'titre_joindre_document' => 'Document toevoegen',
 'titre_liens_entrants' => 'Inkomende koppelingen',
 'titre_mots_cles' => 'TREFWOORDEN',
-'titre_probleme_technique' => 'Opgelet&nbsp;: een technisch probleem (SQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
+'titre_probleme_technique' => 'Opgelet : een technisch probleem (SQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
 'titre_publier_document' => 'EEN DOCUMENT PUBLICEREN IN DEZE RUBRIEK',
 'titre_signatures_attente' => 'Handtekeningen in wachten van validatie',
 'titre_signatures_confirmees' => 'Bevestigde handtekeningen',
@@ -790,11 +790,11 @@ opnieuw verbinding maken met de site
 'trad_reference' => '(referentie-artikel)', # MODIF
 
 // Z
-'zbug_balise_b_aval' => '&nbsp;: komende opmaakcode B',
+'zbug_balise_b_aval' => ' : komende opmaakcode B',
 'zbug_balise_inexistante' => 'Baken @balise@ die slecht voor @from@ wordt verklaard',
 'zbug_balise_sans_argument' => 'Argument niet inbegrepen in het baken @balise@',
 'zbug_boucle' => 'lus',
-'zbug_boucle_recursive_undef' => 'Niet bepaalde recursieve gesp&nbsp;: @nom@',
+'zbug_boucle_recursive_undef' => 'Niet bepaalde recursieve gesp : @nom@',
 'zbug_calcul' => 'berekening',
 'zbug_champ_hors_boucle' => 'Veld @champ@ buiten de lus',
 'zbug_champ_hors_motif' => 'Veld @champ@ buiten een context @motif@',
@@ -815,12 +815,12 @@ opnieuw verbinding maken met de site
 'zbug_info_erreur_squelette' => 'Fout op de site',
 'zbug_inversion_ordre_inexistant' => 'Omzetting van onbestaande aard',
 'zbug_pagination_sans_critere' => 'Baken #PAGINATION zonder criterium {pagination} of werknemer in een recursieve gesp',
-'zbug_parametres_inclus_incorrects' => 'Incorrecte parameter van insluitsel&nbsp;: @param@',
-'zbug_profile' => 'Berekeningstijd&nbsp;: @time@',
+'zbug_parametres_inclus_incorrects' => 'Incorrecte parameter van insluitsel : @param@',
+'zbug_profile' => 'Berekeningstijd : @time@',
 'zbug_resultat' => 'resultaat',
 'zbug_serveur_indefini' => 'Vage server SQL',
 'zbug_statistiques' => 'Statistieken van de verzoeken SQL die per duur worden ingedeeld',
-'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend',
+'zbug_table_inconnue' => 'SQL tabel « @table@ » onbekend',
 'zxml_connus_attributs' => 'onbekende eigenschappen',
 'zxml_de' => 'van',
 'zxml_inconnu_attribut' => 'onbekende eigenschap',

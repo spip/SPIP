@@ -25,19 +25,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rigenera la pagina',
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
 'afficher_trad' => 'visualizzare le traduzioni',
-'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database SQL alla versione @version@ &egrave; impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
-'alerte_modif_info_concourante' => 'ATTENZIONE: Questa informazione &egrave; stata modificata altrove. Il valore attuale &egrave;:',
+'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database SQL alla versione @version@ è impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
+'alerte_modif_info_concourante' => 'ATTENZIONE: Questa informazione è stata modificata altrove. Il valore attuale è:',
 'analyse_xml' => 'Analisi XML',
 'annuler' => 'Annulla',
 'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
-'articles_recents' => 'Articoli pi&ugrave; recenti',
-'avis_archive_incorrect' => 'il file archivio non &egrave; un file SPIP',
-'avis_archive_invalide' => 'il file archivio non &egrave; valido',
+'articles_recents' => 'Articoli più recenti',
+'avis_archive_incorrect' => 'il file archivio non è un file SPIP',
+'avis_archive_invalide' => 'il file archivio non è valido',
 'avis_attention' => 'ATTENZIONE!',
 'avis_champ_incorrect_type_objet' => 'Nome di campo errato @name@ per oggetto di tipo ',
 'avis_colonne_inexistante' => 'La colonna @col@ non esiste',
-'avis_echec_syndication_01' => 'La syndication &egrave; fallita: il backend indicato &egrave; indecifrabile o non propone alcun articolo.',
-'avis_echec_syndication_02' => 'La syndication &egrave; fallita: impossibile accedere al backend di questo sito.',
+'avis_echec_syndication_01' => 'La syndication è fallita: il backend indicato è indecifrabile o non propone alcun articolo.',
+'avis_echec_syndication_02' => 'La syndication è fallita: impossibile accedere al backend di questo sito.',
 'avis_erreur' => 'Errore: vedi sopra',
 'avis_erreur_connexion' => 'Errore di connessione',
 'avis_erreur_cookie' => 'problema di cookie',
@@ -52,30 +52,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Inserire una E maiscola con accento acuto',
 'barre_eo' => 'Inserire una E nell\'O',
 'barre_eo_maj' => 'Inserire una E nell\'O maiuscola',
-'barre_euro' => 'Inserire il simbolo &euro;',
+'barre_euro' => 'Inserire il simbolo €',
 'barre_gras' => 'Formattare in {{grassetto}}',
-'barre_guillemets' => 'Porre il testo fra &laquo; virgolette basse francesi &raquo;',
-'barre_guillemets_simples' => 'Porre il testo fra &#132;virgolette&#147;',
+'barre_guillemets' => 'Porre il testo fra « virgolette basse francesi »',
+'barre_guillemets_simples' => 'Porre il testo fra virgolette',
 'barre_intertitre' => 'Trasformare in {{{titolo di paragrafo}}}',
 'barre_italic' => 'Formattare in {corsivo}',
 'barre_lien' => 'Trasformare in un [link ipertestuale->http://...]',
-'barre_lien_input' => 'Indicare l\'indirizzo del link (&egrave; possibile indicare l\'indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
+'barre_lien_input' => 'Indicare l\'indirizzo del link (è possibile indicare l\'indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
 'barre_note' => 'Trasformare in [[Nota a fondo pagina]]',
 'barre_paragraphe' => 'Crea un paragrafo',
 'barre_quote' => '<quote>Citare un messaggio</quote>',
 'bouton_ajouter_document' => 'Aggiungi un documento',
 'bouton_ajouter_image' => 'Aggiungi un\'immagine',
-'bouton_ajouter_image_document' => 'Aggiungi un\'immagine o&nbsp;un&nbsp;documento',
+'bouton_ajouter_image_document' => 'Aggiungi un\'immagine o un documento',
 'bouton_changer' => 'Cambia',
 'bouton_chercher' => 'Cerca',
 'bouton_choisir' => 'Scegli',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Déplacer', # NEW
 'bouton_download' => 'Download',
 'bouton_enregistrer' => 'Salva',
 'bouton_radio_desactiver_messagerie_interne' => 'Disattiva la messaggistica interna',
 'bouton_radio_envoi_annonces' => 'Invia gli annunci editoriali',
 'bouton_radio_non_envoi_annonces' => 'Non inviare annunci',
-'bouton_radio_non_envoi_liste_nouveautes' => 'Non inviare l\'elenco delle novit&agrave;',
+'bouton_radio_non_envoi_liste_nouveautes' => 'Non inviare l\'elenco delle novità',
 'bouton_recharger_page' => 'ricaricare questa pagina',
 'bouton_telecharger' => 'Upload',
 'bouton_valider' => 'Invia',
@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_couleur_interface' => 'colore',
 'choix_interface' => 'scelta dell\'interfaccia',
 'colonne' => 'Colonna',
-'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
+'confirm_changer_statut' => 'Attenzione, è stato chiesto di modificare lo status di questo elemento. Continuare?',
 'correcte' => 'corretto',
 
 // D
@@ -153,19 +153,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jour_1' => 'domenica',
 'date_jour_1_abbr' => 'dom',
 'date_jour_1_initiale' => 'd',
-'date_jour_2' => 'luned&igrave;',
+'date_jour_2' => 'lunedì',
 'date_jour_2_abbr' => 'lun',
 'date_jour_2_initiale' => 'l',
-'date_jour_3' => 'marted&igrave;',
+'date_jour_3' => 'martedì',
 'date_jour_3_abbr' => 'mar',
 'date_jour_3_initiale' => 'm',
-'date_jour_4' => 'mercoled&igrave;',
+'date_jour_4' => 'mercoledì',
 'date_jour_4_abbr' => 'mer',
 'date_jour_4_initiale' => 'm',
-'date_jour_5' => 'gioved&igrave;',
+'date_jour_5' => 'giovedì',
 'date_jour_5_abbr' => 'giov',
 'date_jour_5_initiale' => 'g',
-'date_jour_6' => 'venerd&igrave;',
+'date_jour_6' => 'venerdì',
 'date_jour_6_abbr' => 'ven',
 'date_jour_6_initiale' => 'v',
 'date_jour_7' => 'sabato',
@@ -180,10 +180,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_11' => 'Novembre',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'Dicembre',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'Febbraio',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'Marzo',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'Aprile',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'Luglio',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'Agosto',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'Settembre',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'inverno',
@@ -213,14 +213,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Prima di iniziare: <b>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => 'Problema nei diritti di accesso',
 'dirs_repertoires_absents' => '<p><b>Le seguenti cartelle non sono state trovate: </b></p><ul>@bad_dirs@.</ul>
-  <p>Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
+  <p>Probabilmente ciò è dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
-  qui sopra; se non &egrave; cos&igrave;, rinominare le cartelle utilizzando il software FTP.
-  <p>Una volta effettuata questa correzione, si potr&agrave;',
+  qui sopra; se non è così, rinominare le cartelle utilizzando il software FTP.
+  <p>Una volta effettuata questa correzione, si potrà',
 'dirs_repertoires_suivants' => '<p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@</ul>
 <p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
-di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
-<p>Una volta attribuiti i permessi, si potr&agrave; ',
+di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guida d\'installazione.</p>
+<p>Una volta attribuiti i permessi, si potrà ',
 'double_occurrence' => 'Doppia occorrenza', # MODIF
 
 // E
@@ -237,29 +237,29 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
 'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
 'form_auteur_mail_confirmation' => 'Bonjour,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+Vous avez demandé à changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
 l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+sera ignorée) :
 
     @url@
 ', # NEW
-'form_deja_inscrit' => 'Sei gi&agrave; iscritta.',
-'form_email_non_valide' => 'L\'indirizzo email non &egrave; valido.',
-'form_forum_access_refuse' => 'Non hai pi&ugrave; accesso a questo sito.',
+'form_deja_inscrit' => 'Sei già iscritta.',
+'form_email_non_valide' => 'L\'indirizzo email non è valido.',
+'form_forum_access_refuse' => 'Non hai più accesso a questo sito.',
 'form_forum_bonjour' => 'Buongiorno @nom@,',
-'form_forum_email_deja_enregistre' => 'Questo indirizzo email &egrave; gi&agrave; registrato, puoi dunque utilizzare la tua password abituale.',
-'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti &egrave; stato appena inviato tramite email.',
+'form_forum_email_deja_enregistre' => 'Questo indirizzo email è già registrato, puoi dunque utilizzare la tua password abituale.',
+'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti è stato appena inviato tramite email.',
 'form_forum_identifiants' => 'Dati personali',
-'form_forum_indiquer_nom_email' => 'Indica qui nome e indirizzo email.  L\'ID personale ti verr&agrave; recapitato tramite email a breve.',
+'form_forum_indiquer_nom_email' => 'Indica qui nome e indirizzo email.  L\'ID personale ti verrà recapitato tramite email a breve.',
 'form_forum_login' => 'login:',
-'form_forum_message_auto' => '(questo &egrave; un messaggio generato automaticamente)',
+'form_forum_message_auto' => '(questo è un messaggio generato automaticamente)',
 'form_forum_pass' => 'password:',
-'form_forum_probleme_mail' => 'Problema di posta: l\'ID non pu&ograve; essere inviato.',
+'form_forum_probleme_mail' => 'Problema di posta: l\'ID non può essere inviato.',
 'form_forum_voici1' => 'Ecco i dati per poter partecipare ai forum
  del sito"@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Ecco i dati per poter proporre degli articoli sul sito
@@ -270,9 +270,9 @@ sera ignor&eacute;e) :
 'form_pet_adresse_site' => 'Indirizzo del sito',
 'form_pet_aucune_signature' => 'Nessuna adesione corrisponde a questo codice...',
 'form_pet_confirmation' => 'Conferma l\'adesione:',
-'form_pet_deja_enregistre' => 'Questo sito &egrave; gi&agrave; registrato',
-'form_pet_deja_signe' => 'Hai gi&agrave; firmato questo testo.',
-'form_pet_envoi_mail_confirmation' => 'Ti &egrave; stato appena inviato un messaggio di posta elettronica. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
+'form_pet_deja_enregistre' => 'Questo sito è già registrato',
+'form_pet_deja_signe' => 'Hai già firmato questo testo.',
+'form_pet_envoi_mail_confirmation' => 'Ti è stato appena inviato un messaggio di posta elettronica. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
 'form_pet_mail_confirmation' => 'Salve,
 
 Hai richiesto di firmare la petizione:
@@ -285,7 +285,7 @@ Hai fornito le seguenti informazioni:
 
 IMPORTANTE...
 
-Per confermare la tua adesione &egrave; sufficiente visitare l\'indirizzo web qui sotto (se non lo fai, la tua domanda sar&agrave; respinta):
+Per confermare la tua adesione è sufficiente visitare l\'indirizzo web qui sotto (se non lo fai, la tua domanda sarà respinta):
 
     @url@
 
@@ -295,42 +295,42 @@ Grazie per la partecipazione',
 'form_pet_nom_site2' => 'Nome del tuo sito Web',
 'form_pet_probleme_liens' => 'Per favore, riprenda il suo messaggio ed elimini i link ipertestuali.',
 'form_pet_probleme_technique' => 'Le adesioni sono temporaneamente sospese per il verificarsi di problemi tecnici.',
-'form_pet_signature_pasprise' => 'La tua adesione non &egrave; stata presa in considerazione.',
-'form_pet_signature_validee' => 'La tua adesione &egrave; stata confermata. Grazie!',
-'form_pet_site_deja_enregistre' => 'Questo sito &egrave; gi&agrave; registrato',
+'form_pet_signature_pasprise' => 'La tua adesione non è stata presa in considerazione.',
+'form_pet_signature_validee' => 'La tua adesione è stata confermata. Grazie!',
+'form_pet_site_deja_enregistre' => 'Questo sito è già registrato',
 'form_pet_url_invalide' => 'L\'URL indicato non risulta valido.',
 'form_pet_votre_email' => 'Il tuo indirizzo email',
 'form_pet_votre_nom' => 'Nome o pseudonimo',
 'form_pet_votre_site' => 'Se hai un sito Web, puoi segnalarlo qui sotto',
 'form_prop_confirmer_envoi' => 'Conferma l\'invio',
 'form_prop_description' => 'Descrizione/commento',
-'form_prop_enregistre' => 'La tua proposta &egrave; stata registrata ed apparir&agrave; on line dopo l\'approvazione della responsabile del sito.',
+'form_prop_enregistre' => 'La tua proposta è stata registrata ed apparirà on line dopo l\'approvazione della responsabile del sito.',
 'form_prop_envoyer' => 'Invia un messaggio',
 'form_prop_indiquer_email' => 'Indica un indirizzo email valido',
 'form_prop_indiquer_nom_site' => 'Indica il nome del sito.',
 'form_prop_indiquer_sujet' => 'Indica un argomento',
 'form_prop_message_envoye' => 'Messaggio inviato',
 'form_prop_nom_site' => 'Nome del sito',
-'form_prop_non_enregistre' => 'La tua proposta non &egrave; stata registrata.',
+'form_prop_non_enregistre' => 'La tua proposta non è stata registrata.',
 'form_prop_sujet' => 'Argomento',
 'form_prop_url_site' => 'Indirizzo (URL) del sito',
 'forum_acces_refuse' => 'Non hai accesso a questi forum.',
 'forum_attention_dix_caracteres' => '<b>Attenzione!</b> il messaggio deve contenere almeno dieci caratteri.',
 'forum_attention_trois_caracteres' => '<b>Attenzione!</b> il titolo deve contenere almeno tre caratteri.',
-'forum_attention_trop_caracteres' => '<b>Attenzione!</b> il messaggio &egrave; troppo lungo (@compte@ caratteri): per poter essere registrato esso non deve essere pi&ugrave; lungo di @max@ caratteri.',
+'forum_attention_trop_caracteres' => '<b>Attenzione!</b> il messaggio è troppo lungo (@compte@ caratteri): per poter essere registrato esso non deve essere più lungo di @max@ caratteri.',
 'forum_avez_selectionne' => 'Hai selezionato:',
 'forum_cliquer_retour' => 'Clicca <a href=\'@retour_forum@\'>qui</a> per continuare.',
 'forum_forum' => 'forum',
-'forum_info_modere' => 'Questo forum &egrave; moderato a priori: il tuo contributo apparir&agrave; solo dopo essere stato approvato da un\'amministratrice del sito.',
+'forum_info_modere' => 'Questo forum è moderato a priori: il tuo contributo apparirà solo dopo essere stato approvato da un\'amministratrice del sito.',
 'forum_lien_hyper' => '<b>Link ipertestuale</b> (opzionale)',
 'forum_message_definitif' => 'Messaggio definitivo: invialo al sito',
-'forum_message_trop_long' => 'Il tuo messaggio &egrave; troppo lungo. La dimensione massima &egrave; di 20000 caratteri.',
+'forum_message_trop_long' => 'Il tuo messaggio è troppo lungo. La dimensione massima è di 20000 caratteri.',
 'forum_ne_repondez_pas' => 'Non rispondere a questo email ma intervieni sul forum all\'indirizzo seguente:', # MODIF
 'forum_non_inscrit' => 'Non sei iscritta, oppure l\'indirizzo o la password inseriti non sono corretti.',
-'forum_page_url' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web o ad una pagina contenente maggiori informazioni, &egrave; possibile indicare di seguito il titolo della pagina ed il suo indirizzo URL.)',
+'forum_page_url' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web o ad una pagina contenente maggiori informazioni, è possibile indicare di seguito il titolo della pagina ed il suo indirizzo URL.)',
 'forum_par_auteur' => 'di @auteur@',
-'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  &laquo; @titre@ &raquo;.',
-'forum_probleme_database' => 'Problema nel database. Il tuo messaggio non &egrave; stato registrato.',
+'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  « @titre@ ».',
+'forum_probleme_database' => 'Problema nel database. Il tuo messaggio non è stato registrato.',
 'forum_qui_etes_vous' => '<b>Chi sei?</b> (opzionale)',
 'forum_texte' => 'Testo del messaggio:',
 'forum_titre' => 'Titolo:',
@@ -340,15 +340,15 @@ Grazie per la partecipazione',
 'forum_voir_avant' => 'Vedi il messaggio prima di inviarlo',
 'forum_votre_email' => 'Indirizzo email:',
 'forum_votre_nom' => 'Nome (o pseudonimo):',
-'forum_vous_enregistrer' => '&Egrave; necessario iscriversi
+'forum_vous_enregistrer' => 'È necessario iscriversi
 per partecipare a questo forum.  Indica qui sotto l\'ID personale
-che ti &egrave; stato fornito.  Se non sei registrata, devi',
+che ti è stato fornito.  Se non sei registrata, devi',
 'forum_vous_inscrire' => 'prima iscriverti.',
 
 // I
 'ical_texte_rss_articles' => 'Il file di "backend" degli articoli di questo sito si trova al seguente indirizzo:',
-'ical_texte_rss_articles2' => '&Egrave; anche possibile ottenere un file di "backend" per gli articoli di una singola rubrica:',
-'ical_texte_rss_breves' => 'Inoltre esiste un file per l\'insieme delle brevi del sito. Precisando un numero di rubrica ci si pu&ograve; limitare alle brevi in essa contenute.',
+'ical_texte_rss_articles2' => 'È anche possibile ottenere un file di "backend" per gli articoli di una singola rubrica:',
+'ical_texte_rss_breves' => 'Inoltre esiste un file per l\'insieme delle brevi del sito. Precisando un numero di rubrica ci si può limitare alle brevi in essa contenute.',
 'icone_a_suivre' => 'Pannello di controllo',
 'icone_admin_site' => 'Amministrazione del sito',
 'icone_agenda' => 'Agenda',
@@ -386,8 +386,8 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'icone_sites_references' => 'Siti repertoriati',
 'icone_statistiques' => 'Statistiche del sito',
 'icone_statistiques_visites' => 'Statistiche delle visite',
-'icone_suivi_activite' => 'Monitorare l\'attivit&agrave; del sito',
-'icone_suivi_actualite' => 'Evoluzione del&nbsp;sito',
+'icone_suivi_activite' => 'Monitorare l\'attività del sito',
+'icone_suivi_actualite' => 'Evoluzione del sito',
 'icone_suivi_forums' => 'Gestione dei forum',
 'icone_suivi_pettions' => 'Gestione delle petizioni',
 'icone_suivi_revisions' => 'Modifiche agli articoli',
@@ -400,12 +400,12 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'icone_valider_message' => 'Convalida il messaggio',
 'icone_visiter_site' => 'Visita il sito', # MODIF
 'icone_voir_en_ligne' => 'Vedi on line',
-'image_tourner_180' => 'Ruota 180&deg;',
-'image_tourner_droite' => 'Ruota 90&deg; a destra',
-'image_tourner_gauche' => 'Ruota 90&deg; a sinistra',
+'image_tourner_180' => 'Ruota 180°',
+'image_tourner_droite' => 'Ruota 90° a destra',
+'image_tourner_gauche' => 'Ruota 90° a sinistra',
 'img_indisponible' => 'immagine non disponibile',
 'impossible' => 'impossibile',
-'info_a_suivre' => 'PANNELLO DI CONTROLLO&nbsp;&raquo;',
+'info_a_suivre' => 'PANNELLO DI CONTROLLO »',
 'info_a_valider' => '[da convalidare]',
 'info_acces_interdit' => 'Accesso vietato',
 'info_acces_refuse' => 'Accesso rifiutato',
@@ -431,17 +431,17 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'info_bloquer_lien' => 'bloccare questo link',
 'info_breves_02' => 'Brevi',
 'info_breves_2' => 'brevi',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ brèves', # NEW
+'info_breves_un' => '1 brève', # NEW
 'info_breves_valider' => 'Brevi da convalidare',
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
 'info_contenance' => 'Questo sito contiene:',
 'info_contribution' => 'contributi dei forum',
-'info_copyright' => '@spip@ &egrave; un software libero distribuito @lien_gpl@.',
+'info_copyright' => '@spip@ è un software libero distribuito @lien_gpl@.',
 'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.',
 'info_copyright_gpl' => 'sotto licenza GPL',
-'info_cours_edition' => 'Articoli in fase di redazione', # MODIF
+'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 'info_creer_vignette' => 'creazione automatica dell\'anteprima',
@@ -451,12 +451,12 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'info_description_2' => 'Descrizione:',
 'info_dimension' => 'Dimensioni:',
 'info_document' => 'Documento',
-'info_document_indisponible' => 'Questo documento non &egrave; disponibile',
+'info_document_indisponible' => 'Questo documento non è disponibile',
 'info_documents' => 'Documenti',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permette lo scambio di messaggi e la costituzione di forum di discussione
-privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&agrave;.',
+privati tra i membri del sito. Puoi attivare o disattivare questa funzionalità.',
 'info_ecire_message_prive' => 'Scrivi un messaggio privato',
 'info_email_invalide' => 'Indirizzo email non valido.',
 'info_en_cours_validation' => 'I tuoi articoli in corso di redazione',
@@ -478,9 +478,9 @@ o contatta il tuo hoster.</font>',
 'info_inclusion_directe' => 'Inclusione diretta:',
 'info_inclusion_vignette' => 'Inclusione dell\'immagine:',
 'info_installation_systeme_publication' => 'Installazione del sistema di pubblicazione...',
-'info_installer_documents' => '&Egrave; possibile installare automaticamente tutti i documenti contenuti nella cartella @upload@.',
-'info_installer_ftp' => 'In qualit&agrave; di amministratrice, puoi installare file (via FTP) nella cartella @upload@ per poi selezionarli direttamente.',
-'info_installer_images' => '&Egrave; possibile installare delle immagini in formato JPEG, GIF e PNG.',
+'info_installer_documents' => 'È possibile installare automaticamente tutti i documenti contenuti nella cartella @upload@.',
+'info_installer_ftp' => 'In qualità di amministratrice, puoi installare file (via FTP) nella cartella @upload@ per poi selezionarli direttamente.',
+'info_installer_images' => 'È possibile installare delle immagini in formato JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Installare delle immagini nella cartella @upload@ per poterle selezionare direttamente.',
 'info_installer_tous_documents' => 'Installare tutti i documenti',
 'info_interface_complete' => 'Interfaccia completa',
@@ -495,8 +495,8 @@ o contatta il tuo hoster.</font>',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixel',
 'info_les_auteurs_1' => 'di @les_auteurs@ ',
 'info_logo_format_interdit' => 'Solo i logo in formato @formats@ sono permessi.',
-'info_logo_max_poids' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file &egrave; di @actuel@).',
-'info_logo_max_taille' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file &egrave; di @actuel@).',
+'info_logo_max_poids' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file è di @actuel@).',
+'info_logo_max_taille' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file è di @actuel@).',
 'info_mail_fournisseur' => 'tuo@provider.com',
 'info_message_2' => 'MESSAGGIO',
 'info_message_supprime' => 'MESSAGGIO ELIMINATO',
@@ -505,26 +505,26 @@ o contatta il tuo hoster.</font>',
 'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 'info_mois_courant' => 'Durante il mese:',
-'info_mot_cle_ajoute' => 'La seguente parola chiave &egrave; stata aggiunta a',
+'info_mot_cle_ajoute' => 'La seguente parola chiave è stata aggiunta a',
 'info_multi_herit' => 'Lingua predefinita',
 'info_multi_langues_soulignees' => 'Le <u>lingue sottolineate</u> hanno la traduzione di tutti i testi dell\'interfaccia. Se si seleziona una di queste lingue, molti elementi del sito pubblico (date, form) verranno tradotti automaticamente. Per le lingue che non sono sottolineate, invece, tali elementi rimarranno nella lingua principale del sito.',
 'info_multilinguisme' => 'Multilinguismo',
 'info_nom_non_utilisateurs_connectes' => 'Il tuo nome non appare nella lista delle utenti collegate.',
-'info_nom_utilisateurs_connectes' => 'Il tuo nome &egrave; visibile nella lista delle utenti collegate.',
+'info_nom_utilisateurs_connectes' => 'Il tuo nome è visibile nella lista delle utenti collegate.',
 'info_nombre_en_ligne' => 'Attualmente on line:',
 'info_non_resultat' => 'Nessun risultato per "@cherche_mot@"',
 'info_non_utilisation_messagerie' => 'Il sistema di messaggistica interna di questo sito non viene utilizzato.',
 'info_nouveau_message' => 'HAI UN NUOVO MESSAGGIO',
 'info_nouveaux_messages' => 'HAI @total_messages@ NUOVI MESSAGGI',
-'info_numero_abbreviation' => 'N.&nbsp;',
-'info_obligatoire' => 'Questa informazione &egrave; obbligatoria',
+'info_numero_abbreviation' => 'N. ',
+'info_obligatoire' => 'Questa informazione è obbligatoria',
 'info_panne_site_syndique' => 'Il sito in syndication non funziona',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Layout per monitor piccoli',
 'info_petition_close' => 'Petizione chiusa',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Numerose parole chiave trovate per "@cherche_mot@":',
-'info_popularite_5' => 'popolarit&agrave;:',
+'info_popularite_5' => 'popolarità:',
 'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Portfolio automatico:',
 'info_premier_resultat' => '[@debut_limit@ primi risultati su @total@]',
@@ -533,12 +533,12 @@ o contatta il tuo hoster.</font>',
 'info_propose_1' => '[@nom_site_spip@] Propone: @titre@',
 'info_propose_2' => 'Articolo proposto
 ---------------',
-'info_propose_3' => 'L\'articolo "@titre@" &egrave; proposto per la pubblicazione',
+'info_propose_3' => 'L\'articolo "@titre@" è proposto per la pubblicazione',
 'info_propose_4' => 'Sei invitata a consultare e a dare la tua opinione ',
 'info_propose_5' => 'nel forum annesso.
 
-&Egrave; disponibile all\'indirizzo:',
-'info_publie_01' => 'L\'articolo "@titre@" &egrave; stato convalidato da @connect_nom@.',
+È disponibile all\'indirizzo:',
+'info_publie_01' => 'L\'articolo "@titre@" è stato convalidato da @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBBLICA: @titre@',
 'info_publie_2' => 'Articolo pubblicato
 --------------',
@@ -562,7 +562,7 @@ o contatta il tuo hoster.</font>',
 'info_sites_referencer' => 'Inserisci un sito in repertorio',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Cancella l\'immagine',
-'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cio&egrave; un messaggio ad uso personale.',
+'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cioè un messaggio ad uso personale.',
 'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici</b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
 'info_symbole_vert' => 'Il simbolo <b>verde</b> indica i <b>messaggi scambiati con altre utenti  </b> del sito.',
 'info_syndication' => 'syndication:',
@@ -572,7 +572,7 @@ o contatta il tuo hoster.</font>',
 'info_telecharger_ordinateur' => 'Upload dal tuo computer:',
 'info_tous_resultats_enregistres' => '[tutti i risultati sono salvati]',
 'info_tout_afficher' => 'Visualizza tutto',
-'info_travaux_texte' => 'Questo sito non &egrave; stato ancora configurato. Torna pi&ugrave; tardi...',
+'info_travaux_texte' => 'Questo sito non è stato ancora configurato. Torna più tardi...',
 'info_travaux_titre' => 'Lavori in corso',
 'info_trop_resultat' => 'Troppi risultati per "@cherche_mot@" ; restringi la ricerca.',
 'info_utilisation_messagerie_interne' => 'Stai utilizzando il sistema di messaggistica interna al sito.',
@@ -597,43 +597,43 @@ o contatta il tuo hoster.</font>',
 'lien_nouveau_message' => 'NUOVO MESSAGGIO',
 'lien_nouvelle_annonce' => 'NUOVO ANNUNCIO',
 'lien_petitions' => 'PETIZIONE',
-'lien_popularite' => 'popolarit&agrave;: @popularite@%',
+'lien_popularite' => 'popolarità: @popularite@%',
 'lien_racine_site' => 'ROOT DEL SITO',
 'lien_reessayer' => 'Prova di nuovo',
 'lien_repondre_message' => 'Rispondi',
 'lien_supprimer' => 'cancella',
 'lien_tout_afficher' => 'Visualizza tutto ',
 'lien_visite_site' => 'visita il sito',
-'lien_visites' => '@visites@&nbsp;visite',
+'lien_visites' => '@visites@ visite',
 'lien_voir_auteur' => 'Vedi questa autrice',
 'ligne' => 'Linea',
 'login' => 'Collegamento',
 'login_acces_prive' => 'accesso all\'area riservata',
 'login_autre_identifiant' => 'connettiti con un altro ID',
-'login_cookie_accepte' => 'Imposta il tuo browser affinch&eacute; li accetti (almeno per questo sito).',
-'login_cookie_oblige' => 'Per identificarsi in modo sicuro su questo sito &egrave; necessario accettare i cookie.',
+'login_cookie_accepte' => 'Imposta il tuo browser affinché li accetti (almeno per questo sito).',
+'login_cookie_oblige' => 'Per identificarsi in modo sicuro su questo sito è necessario accettare i cookie.',
 'login_deconnexion_ok' => 'Disconnessione effettuata.',
 'login_erreur_pass' => 'Errore nella password.',
 'login_espace_prive' => 'area riservata',
-'login_identifiant_inconnu' => 'L\'ID &laquo; @login@ &raquo; risulta inesistente.',
+'login_identifiant_inconnu' => 'L\'ID « @login@ » risulta inesistente.',
 'login_login' => 'Login:',
 'login_login2' => 'Login (ID di connessione al sito):',
 'login_login_pass_incorrect' => '(Login o password errati.)',
-'login_motpasseoublie' => 'password&nbsp;dimenticata?',
-'login_non_securise' => 'Attenzione, questo modulo non &egrave; sicuro.
+'login_motpasseoublie' => 'password dimenticata?',
+'login_non_securise' => 'Attenzione, questo modulo non è sicuro.
 Se non vuoi che la tua password possa essere intercettata sulla rete,
 devi attivare Javascript nel tuo browser e',
 'login_nouvelle_tentative' => 'Nuovo tentativo',
 'login_par_ici' => 'Sei registrata... per di qua...',
 'login_pass2' => 'Password:',
-'login_preferez_refuser' => '<b>Se preferisci non accettare i cookie</b> c\'&egrave; un altro metodo (meno sicuro) per connettersi:',
+'login_preferez_refuser' => '<b>Se preferisci non accettare i cookie</b> c\'è un altro metodo (meno sicuro) per connettersi:',
 'login_recharger' => 'aggiorna questa pagina',
 'login_rester_identifie' => 'Conservare l\'identificazione per alcuni giorni',
 'login_retour_public' => 'Ritorna al sito pubblico',
 'login_retour_site' => 'Ritorna al sito pubblico',
-'login_retoursitepublic' => 'ritorna&nbsp;al&nbsp;sito&nbsp;pubblico',
+'login_retoursitepublic' => 'ritorna al sito pubblico',
 'login_sans_cookiie' => 'Identificazione senza cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login sécurisé', # NEW
 'login_sinscrire' => 'registrati',
 'login_test_navigateur' => 'test browser/riconnessione',
 'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',
@@ -655,7 +655,7 @@ devi attivare Javascript nel tuo browser e',
 'onglet_evolution_visite_mod' => 'Evoluzione',
 'onglet_fonctions_avances' => 'Funzioni avanzate',
 'onglet_informations_personnelles' => 'Dati personali',
-'onglet_interactivite' => 'Interattivit&agrave;',
+'onglet_interactivite' => 'Interattività',
 'onglet_messagerie' => 'Messaggi',
 'onglet_messages_internes' => 'Messaggi interni',
 'onglet_messages_publics' => 'Messaggi pubblici',
@@ -670,12 +670,12 @@ devi attivare Javascript nel tuo browser e',
 // P
 'pass_choix_pass' => 'Inserisci una nuova password:',
 'pass_erreur' => 'Errore',
-'pass_erreur_acces_refuse' => '<b>Errore:</b> non hai pi&ugrave; accesso a questo sito.',
+'pass_erreur_acces_refuse' => '<b>Errore:</b> non hai più accesso a questo sito.',
 'pass_erreur_code_inconnu' => '<b>Errore:</b> il codice inserito non corriponde a nessuno delle utenti che hanno accesso a questo sito.',
-'pass_erreur_non_enregistre' => '<b>Errore:</b> l\'indirizzo <tt>@email_oubli@</tt> non &egrave; registrato su questo sito.',
-'pass_erreur_non_valide' => '<b>Errore:</b> questo indirizzo <tt>@email_oubli@</tt> non &egrave; valido!',
-'pass_erreur_probleme_technique' => '<b>Errore:</b> l\'email non pu&ograve; essere inviato a causa di un problema tecnico.',
-'pass_espace_prive_bla' => 'L\'area riservata di questo sito &egrave; accessibile
+'pass_erreur_non_enregistre' => '<b>Errore:</b> l\'indirizzo <tt>@email_oubli@</tt> non è registrato su questo sito.',
+'pass_erreur_non_valide' => '<b>Errore:</b> questo indirizzo <tt>@email_oubli@</tt> non è valido!',
+'pass_erreur_probleme_technique' => '<b>Errore:</b> l\'email non può essere inviato a causa di un problema tecnico.',
+'pass_espace_prive_bla' => 'L\'area riservata di questo sito è accessibile
 unicamente alle utenti registrate.
 Una volta iscritta, potrai consultare gli articoli in corso di redazione,
 proporre nuovi articoli e partecipare a tutti i forum.',
@@ -683,7 +683,7 @@ proporre nuovi articoli e partecipare a tutti i forum.',
 riservato alle utenti registrate.',
 'pass_indiquez_cidessous' => 'Indica qui sotto l\'indirizzo email con il quale ti sei registrata precedentemente.
 Riceverai un email con le istruzioni per recuperare i dati di accesso al sito.',
-'pass_mail_passcookie' => '(questo &egrave; un messaggio generato automaticamente)
+'pass_mail_passcookie' => '(questo è un messaggio generato automaticamente)
 Per recuperare i dati di accesso al sito
 @nom_site_spip@ (@adresse_site@)
 
@@ -695,12 +695,12 @@ e riconnetterti all\'area riservata.
 
 ',
 'pass_mot_oublie' => 'Password dimenticata',
-'pass_nouveau_enregistre' => 'La nuova password &egrave; stata salvata.',
+'pass_nouveau_enregistre' => 'La nuova password è stata salvata.',
 'pass_nouveau_pass' => 'Nuova password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Password dimenticata',
 'pass_quitter_fenetre' => 'Chiudi la finestra',
-'pass_rappel_login' => 'Ricorda: il tuo ID (login) &egrave; &laquo; @login@ &raquo;.',
+'pass_rappel_login' => 'Ricorda: il tuo ID (login) è « @login@ ».',
 'pass_recevoir_mail' => 'Riceverai un email contenente le istruzioni per recuperare i dati di accesso al sito.',
 'pass_retour_public' => 'Torna al sito pubblico',
 'pass_rien_a_faire_ici' => 'Vicolo cieco...',
@@ -713,39 +713,39 @@ e riconnetterti all\'area riservata.
 'retour' => 'Indietro',
 
 // S
-'spip_conforme_dtd' => 'SPIP ritiene che questo documento &egrave; conforme al proprio DOCTYPE:',
+'spip_conforme_dtd' => 'SPIP ritiene che questo documento è conforme al proprio DOCTYPE:',
 'squelette' => 'modello di layout',
 'squelette_inclus_ligne' => 'modello incluso, linea',
 'squelette_ligne' => 'modello, linea',
-'stats_visites_et_popularite' => '@visites@ visite; popolarit&agrave;: @popularite@',
+'stats_visites_et_popularite' => '@visites@ visite; popolarità: @popularite@',
 'suivant' => 'successivo',
 
 // T
-'taille_ko' => '@taille@&nbsp;Kb',
-'taille_mo' => '@taille@&nbsp;Mb',
-'taille_octets' => '@taille@&nbsp;byte',
-'texte_actualite_site_1' => 'Quando avrai maggiore familiarit&agrave; con l\'interfaccia, clicca su &laquo;',
+'taille_ko' => '@taille@ Kb',
+'taille_mo' => '@taille@ Mb',
+'taille_octets' => '@taille@ byte',
+'texte_actualite_site_1' => 'Quando avrai maggiore familiarità con l\'interfaccia, clicca su «',
 'texte_actualite_site_2' => 'interfaccia completa',
-'texte_actualite_site_3' => '&raquo; per avere accesso a nuove opzioni.',
-'texte_creation_automatique_vignette' => 'La creazione automatica di thumbnail di anteprima &egrave; attivata. Se inserisci in questo campo delle immagini in formato @gd_formats@, esse saranno accompagnate da thumbnail con una dimensione massima di @taille_preview@&nbsp;pixel. ',
+'texte_actualite_site_3' => '» per avere accesso a nuove opzioni.',
+'texte_creation_automatique_vignette' => 'La creazione automatica di thumbnail di anteprima è attivata. Se inserisci in questo campo delle immagini in formato @gd_formats@, esse saranno accompagnate da thumbnail con una dimensione massima di @taille_preview@ pixel. ',
 'texte_documents_associes' => 'I seguenti documenti sono associati all\'articolo,
 ma non vi sono stati inseriti direttamente.
 A seconda delle impostazioni di pubblicazione del sito,
 potranno essere disponibili sotto forma di documenti allegati.',
 'texte_erreur_mise_niveau_base' => 'Errore nel database durante l\'aggiornamento.
-L\'immagine <b>@fichier@</b> non &egrave; passata (articolo @id_article@).
+L\'immagine <b>@fichier@</b> non è passata (articolo @id_article@).
 Prendi nota di questo riferimento, ritenta l\'aggiornamento,
 e verifica che le immagini si vedano ancora
 negli articoli.',
-'texte_erreur_visiteur' => 'Si &egrave; tentato di entrare nell\'area riservata con un login non valido.',
+'texte_erreur_visiteur' => 'Si è tentato di entrare nell\'area riservata con un login non valido.',
 'texte_inc_auth_1' => 'Sei identificata con il
-login <b>@auth_login@</b>, ma non esiste pi&ugrave; nel database. 
+login <b>@auth_login@</b>, ma non esiste più nel database. 
 Prova a ',
 'texte_inc_auth_2' => 'collegarti nuovamente',
 'texte_inc_auth_3' => ', dopo aver eventualmente effettuato un logout e 
 riavviato il tuo browser.',
 'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il
-funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <br /><br /><b>In generale, si consiglia di lasciare sempre alla webmistress la configurazione delle opzioni qui presenti.</b>',
+funzionamento del sito. Non intervenire finché non conosci bene i meccanismi del sistema SPIP. <br /><br /><b>In generale, si consiglia di lasciare sempre alla webmistress la configurazione delle opzioni qui presenti.</b>',
 'texte_inc_meta_1' => 'La scrittura del file <code>@fichier@</code> ha causato un errore di sistema. L\'amministratrice del sito, ',
 'texte_inc_meta_2' => 'verifichi i diritti di scrittura',
 'texte_inc_meta_3' => 'nella cartella <code>@repertoire@</code>.',
@@ -799,7 +799,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zbug_erreur_boucle_syntaxe' => 'Sintassi del ciclo errata', # MODIF
 'zbug_erreur_compilation' => 'Errore di compilazione',
 'zbug_erreur_execution_page' => 'errore di esecuzione della pagina', # MODIF
-'zbug_erreur_filtre' => 'Errore: filtro <b>&laquo; @filtre@ &raquo;</b> non esistente', # MODIF
+'zbug_erreur_filtre' => 'Errore: filtro <b>« @filtre@ »</b> non esistente', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} si applica unicamente ai cicli (FORUMS) o (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Errore/i nel modello di layout',
 'zbug_hors_compilation' => 'Fuori Compilazione',
@@ -811,16 +811,16 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zbug_resultat' => 'risultato',
 'zbug_serveur_indefini' => 'server SQL non definito', # MODIF
 'zbug_statistiques' => 'Statistiche delle query SQL in ordine di durata',
-'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta',
+'zbug_table_inconnue' => 'Tabella SQL « @table@ » sconosciuta',
 'zxml_connus_attributs' => 'attributi conosciuti',
 'zxml_de' => 'di',
 'zxml_inconnu_attribut' => 'attributo sconosciuto',
 'zxml_inconnu_balise' => 'segnaposto sconosciuto',
-'zxml_inconnu_entite' => 'entit&agrave; sconosciuta',
+'zxml_inconnu_entite' => 'entità sconosciuta',
 'zxml_inconnu_id' => 'ID sconosciuto',
 'zxml_mais_de' => 'ma di',
-'zxml_non_conforme' => 'non &egrave; conforme al motivo',
-'zxml_non_fils' => 'non &egrave; un figlio di',
+'zxml_non_conforme' => 'non è conforme al motivo',
+'zxml_non_fils' => 'non è un figlio di',
 'zxml_nonvide_balise' => 'segnaposto non vuoto',
 'zxml_obligatoire_attribut' => 'attributo obbligatorio ma assente in',
 'zxml_succession_fils_incorrecte' => 'successione dei figli non corretta',

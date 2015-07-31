@@ -26,11 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
 'afficher_trad' => 'afficher les traductions', # NEW
 'alerte_maj_impossible' => '<b>Paznja!</b> Osvjezavanje SQL baze podataka na verziju @version@ nije uspjelo. Mozda se radi o dozvoli na bazi podataka. Molimo, kontaktirajte vas ISP.', # MODIF
-'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute;e par ailleurs. La valeur actuelle est&nbsp;:', # NEW
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 'analyse_xml' => 'Obrada XML',
 'annuler' => 'Annuler', # NEW
-'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:', # NEW
-'articles_recents' => '&#1055;&#1086;&#1089;&#1083;&#1077;&#1076;&#1085;&#1112;&#1080; &#1063;&#1083;&#1072;&#1085;&#1094;&#1080;',
+'antispam_champ_vide' => 'Veuillez laisser ce champ vide :', # NEW
+'articles_recents' => 'Последнји Чланци',
 'avis_archive_incorrect' => 'arhiv dokument nije vazeci SPIP dokument',
 'avis_archive_invalide' => 'arhiv dokument nije vazeci',
 'avis_attention' => 'OPREZ!',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Greska u programiranju.Ova funkcija se ne treba pozivati u ovom kontekstu.', # MODIF
 'avis_erreur_mysql' => 'SQL greska', # MODIF
 'avis_erreur_sauvegarde' => 'Backup greska (@type@ @id_objet@) !',
-'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;', # NEW
+'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 // B
 'barre_a_accent_grave' => 'Unesi veliko A sa grave akcentom',
@@ -61,16 +61,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'pretvori u [hiperlink->http://...]',
 'barre_lien_input' => 'Unesite odrediste vaseg hiperlinka (mozete unijeti internet URL u formi http://www.mysite.com ili navesti broj clanka na ovoj stranici.',
 'barre_note' => 'Pretvori u [[fusnotu]]',
-'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
+'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>citiraj neku poruku</quote>',
 'bouton_ajouter_document' => 'DODAJ DOKUMENT', # MODIF
 'bouton_ajouter_image' => 'DODAJ FOTOGRAFIJU', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
+'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Izmijeni',
 'bouton_chercher' => 'Pretraga',
 'bouton_choisir' => 'Izaberi',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
-'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
+'bouton_deplacer' => 'Déplacer', # NEW
+'bouton_download' => 'Télécharger', # NEW
 'bouton_enregistrer' => 'Snimi',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezaktiviraj interni servis poruka',
 'bouton_radio_envoi_annonces' => 'Posalji editorijalne najave',
@@ -180,10 +180,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_11' => 'novembar',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'decembar',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'februar',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'mart',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'april',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'juli',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'august',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'septembar',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'zima',
@@ -228,21 +228,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Naziv fotografije:',
 'envoi_via_le_site' => 'Poslano putem stranice',
 'erreur' => 'Erreur', # NEW
-'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
+'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
 'erreur_texte' => 'erreur(s)', # NEW
-'etape' => '&Eacute;tape', # NEW
+'etape' => 'Étape', # NEW
 
 // F
 'fichier_introuvable' => 'Dokument @fichier@ nije pronadjen',
 'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
 'form_auteur_mail_confirmation' => 'Bonjour,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+Vous avez demandé à changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
 l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+sera ignorée) :
 
     @url@
 ', # NEW
@@ -296,7 +296,7 @@ sera ignor&eacute;e) :
 'forum_acces_refuse' => 'Nemate vise pristup ovim forumima.',
 'forum_attention_dix_caracteres' => '<b>Upozorenje!</b> Vasa poruka mora sadrzati najmanje deset karaktera.',
 'forum_attention_trois_caracteres' => '<b>Upozorenje!</b> Vas naslov mora sadrzati najmanje tri karaktera.',
-'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.', # NEW
+'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
 'forum_avez_selectionne' => 'Izabrali ste:',
 'forum_cliquer_retour' => 'Kliknite <a href=\'@retour_forum@\'>ici</a> da bi ste nastavili.',
 'forum_forum' => 'forum',
@@ -326,7 +326,7 @@ sera ignor&eacute;e) :
 'ical_texte_rss_articles' => 'Backend dokument clanaka ove stranice se nalazi na adresi:',
 'ical_texte_rss_articles2' => 'Svakako mozete dobiti backend dokumente za clanke svih rubrika na stanici:',
 'ical_texte_rss_breves' => 'Postoji dokument koji sadrzi novosti stranice. Mozete dobiti samo novosti jedne rubrike, tako sto ce te izabrati broj sekcije.',
-'icone_a_suivre' => '&Agrave; suivre',
+'icone_a_suivre' => 'À suivre',
 'icone_admin_site' => 'Administracija stranice',
 'icone_agenda' => 'Kalendar',
 'icone_aide_ligne' => 'Pomoc',
@@ -382,7 +382,7 @@ sera ignor&eacute;e) :
 'image_tourner_gauche' => 'Okreni 90° na lijevu stranu',
 'img_indisponible' => 'fotografija je nedostupna',
 'impossible' => 'impossible', # NEW
-'info_a_suivre' => 'LAUNCH PAD&raquo;',
+'info_a_suivre' => 'LAUNCH PAD»',
 'info_a_valider' => '[za ovjeriti]',
 'info_acces_interdit' => 'zabranjen pristup',
 'info_acces_refuse' => 'pristup odbijen',
@@ -398,7 +398,7 @@ sera ignor&eacute;e) :
 'info_article_redaction' => 'Clanak u toku uredjivanja',
 'info_article_refuse' => 'Clanak je odbijen',
 'info_article_supprime' => 'Clanak je izbrisan',
-'info_articles' => '&#1063;&#1083;&#1072;&#1085;&#1094;&#1080;',
+'info_articles' => 'Чланци',
 'info_articles_a_valider' => 'Clanci za ovjeriti',
 'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Predlozeni clanci',
@@ -408,8 +408,8 @@ sera ignor&eacute;e) :
 'info_bloquer_lien' => 'blokiraj ovaj link',
 'info_breves_02' => 'Obavjestenja',
 'info_breves_2' => 'obavjestenja',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ brèves', # NEW
+'info_breves_un' => '1 brève', # NEW
 'info_breves_valider' => 'Obavjestenja za ovjeriti',
 'info_connexion_refusee' => 'Prijava odbijena',
 'info_contact_developpeur' => 'Kontaktirajte programera.',
@@ -418,7 +418,7 @@ sera ignor&eacute;e) :
 'info_copyright' => '@spip@ je slobodni softver distribucije @lien_gpl@.',
 'info_copyright_doc' => 'Za vise informacija pogledajte <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'pod GPL licencom',
-'info_cours_edition' => 'Vasi clanci u toku uredjivanja', # MODIF
+'info_cours_edition' => 'Vasi clanci u toku uredjivanja',
 'info_creer_repertoire' => 'Kreirajte dokument ili direktorij pod imenom:',
 'info_creer_repertoire_2' => 'Unutar podirektorija<b>ecrire/data/</b>, zatim:',
 'info_creer_vignette' => 'automatska kreacija vinjete',
@@ -463,11 +463,11 @@ sera ignor&eacute;e) :
 'info_joindre_document_article' => 'Ovom clanku mozete pridruziti dokumente tipa',
 'info_joindre_document_rubrique' => 'Ovoj rubrici mozete dodati dokumente tipa',
 'info_joindre_documents_article' => 'Vasem clanku mozete dodati dokumente tipa:',
-'info_l_article' => '&#1063;&#1083;&#1072;&#1085;&#1072;&#1082;',
+'info_l_article' => 'Чланак',
 'info_la_breve' => 'obavjestenje',
 'info_la_rubrique' => 'rubrika',
 'info_langue_principale' => 'Glavni jezik stranice',
-'info_largeur_vignette' => '@largeur_vignette@ &#215; @hauteur_vignette@ piksela',
+'info_largeur_vignette' => '@largeur_vignette@ × @hauteur_vignette@ piksela',
 'info_les_auteurs_1' => 'od @les_auteurs@',
 'info_logo_format_interdit' => 'Dozvoljeni su samo logotipi formata @formats@.',
 'info_logo_max_poids' => 'Logotip mora biti manji od @maxi@ (ovaj dokument je @actuel@).',
@@ -496,7 +496,7 @@ sera ignor&eacute;e) :
 'info_panne_site_syndique' => 'Sindikovana stranica nije u funkciji',
 'info_pense_bete' => 'BILJESKA',
 'info_petit_ecran' => 'Mali prikaz',
-'info_petition_close' => 'P&eacute;tition close', # NEW
+'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'piksela',
 'info_plusieurs_mots_trouves' => 'Pronadjeno je vise kljucnih rijeci za "@cherche_mot@":',
 'info_popularite_5' => 'popularno:',
@@ -526,8 +526,8 @@ sera ignor&eacute;e) :
 'info_sans_titre_2' => 'bez naslova',
 'info_selectionner_fichier' => 'Mozete izabrati dokument iz foldera <i>upload</i>',
 'info_selectionner_fichier_2' => 'Izaberite dokument:',
-'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
-'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
+'info_signature_supprimee' => 'Signature supprimée', # NEW
+'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Web stranica ceka na ovjeru',
 'info_site_reference' => 'Preporucene stranice online',
 'info_site_refuse' => 'Web stranica odbijena',
@@ -535,7 +535,7 @@ sera ignor&eacute;e) :
 'info_sites_referencer' => 'Preporuci stranicu',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'izbrisi vinjetu',
-'info_symbole_bleu' => 'Simbol <b>bleu</b> ukazuje na <b>pense-b&ecirc;te</b>: to jeste poruku za vasu licnu upotrebu.', # MODIF
+'info_symbole_bleu' => 'Simbol <b>bleu</b> ukazuje na <b>pense-bête</b>: to jeste poruku za vasu licnu upotrebu.', # MODIF
 'info_symbole_jaune' => 'Simbol <b>jaune</b> ukazuje na <b>najavu za sve urednike: Svi urednici ga mogu vidjeti i izmijeniti.', # MODIF
 'info_symbole_vert' => 'Simbol <b>vert</b> ukazuje na <b>poruke razmijene sa drugim korisnicima</b> stranicama.', # MODIF
 'info_syndication' => 'sindikacija:',
@@ -577,7 +577,7 @@ sera ignor&eacute;e) :
 'lien_supprimer' => 'izbrisi',
 'lien_tout_afficher' => 'Prikazi sve',
 'lien_visite_site' => 'posjeti ovu stranicu',
-'lien_visites' => '@visites@ &#1087;&#1086;&#1089;&#1077;&#1090;&#1077;',
+'lien_visites' => '@visites@ посете',
 'lien_voir_auteur' => 'Pgledaj ovog autora',
 'ligne' => 'Ligne', # NEW
 'login' => 'Connexion', # NEW
@@ -588,9 +588,9 @@ sera ignor&eacute;e) :
 'login_deconnexion_ok' => 'Odjavljeni ste.',
 'login_erreur_pass' => 'Greska sa lozinkom.',
 'login_espace_prive' => 'privatni prostor',
-'login_identifiant_inconnu' => 'Identifikator &laquo; @login@ &raquo; je nepoznat.',
+'login_identifiant_inconnu' => 'Identifikator « @login@ » je nepoznat.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identifikator za prijavu na stranicu)&nbsp;:',
+'login_login2' => 'Login (identifikator za prijavu na stranicu) :',
 'login_login_pass_incorrect' => '(Login ili lozinka nije ispravna.)',
 'login_motpasseoublie' => 'zaboravili ste lozinku?',
 'login_non_securise' => 'Oprez, ovaj formular nije siguran.
@@ -605,7 +605,7 @@ sera ignor&eacute;e) :
 'login_retour_site' => 'Nazad na javnu stranicu',
 'login_retoursitepublic' => 'nazad na javnu stranicu',
 'login_sans_cookiie' => 'Identifikacija bez cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login sécurisé', # NEW
 'login_sinscrire' => 'registruj se',
 'login_test_navigateur' => 'test navigatora/ponovna konekcija',
 'login_verifiez_navigateur' => '(Svakako se uvjerite da vas navigator nije zapamtio vasu lozinku...)',
@@ -617,7 +617,7 @@ sera ignor&eacute;e) :
 
 // N
 'navigateur_pas_redirige' => 'Ako vas navigator nije preusmjeren, kliknite ovdje da biste nastavili.',
-'numero' => 'Num&eacute;ro', # NEW
+'numero' => 'Numéro', # NEW
 
 // O
 'occurence' => 'Occurrence', # NEW
@@ -668,7 +668,7 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Zaboravljena lozinka',
 'pass_quitter_fenetre' => 'Napusti ovaj prozor',
-'pass_rappel_login' => 'Podsjetnik: vas identifikator (login) je &laquo; @login@ &raquo;.',
+'pass_rappel_login' => 'Podsjetnik: vas identifikator (login) je « @login@ ».',
 'pass_recevoir_mail' => 'Primicete e-mai sa uputstvom za pronalazenje vaseg pristupa.',
 'pass_retour_public' => 'Nazad na javnu stranicu',
 'pass_rien_a_faire_ici' => 'Ovdje nema nista za raditi.',
@@ -681,7 +681,7 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'retour' => 'Retour', # NEW
 
 // S
-'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
+'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
 'squelette' => 'predlozak',
 'squelette_inclus_ligne' => 'ukjucen predlozak, linija',
 'squelette_ligne' => 'predlozak linija',
@@ -689,18 +689,18 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'suivant' => 'Naprijed',
 
 // T
-'taille_ko' => '@taille@&nbsp;kb',
-'taille_mo' => '@taille@&nbsp;Mb',
-'taille_octets' => '@taille@&nbsp;bit',
-'texte_actualite_site_1' => 'Kada se naviknete na interfejs, kliknite na &laquo;',
+'taille_ko' => '@taille@ kb',
+'taille_mo' => '@taille@ Mb',
+'taille_octets' => '@taille@ bit',
+'texte_actualite_site_1' => 'Kada se naviknete na interfejs, kliknite na «',
 'texte_actualite_site_2' => 'cjelokupni interfejs',
-'texte_actualite_site_3' => '&raquo; za otveranje vise mogucnosti.',
+'texte_actualite_site_3' => '» za otveranje vise mogucnosti.',
 'texte_creation_automatique_vignette' => 'Aktivirano je automatsko kreiranje vinjeta na ovoj stranici. Ako putem ovog formulara instalirate fotografije formata @gd_formats@, one ce biti popracene vinjetom maksimalne velicine @taille_preview@piksela.',
 'texte_documents_associes' => 'Sljedeci dokumenti su povezani sa clankom,ali nisu direktno ukljuceni. Na osnovu izgleda javne stranice, mogu biti prikazani kao pridruzeni dokumenti',
 'texte_erreur_mise_niveau_base' => 'Greska u bazi podataka tokom nadogradnje.
 Fotografija <b>@fichier@</b> nije predjena (clanak @id_article@).
 Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjerite da li se fotografije uvijek pojavljuju u clancima.', # MODIF
-'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.', # NEW
+'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 'texte_inc_auth_1' => 'Identifikovani ste pod loginom <b>@auth_login@</b>, ali on vise ne postoji u bazi. Pokusajte se ponovo', # MODIF
 'texte_inc_auth_2' => 'prijaviti',
 'texte_inc_auth_3' => ', nakon sto ste iskljucili, a zatim ponovo ukljucili vas navigator.',
@@ -733,14 +733,14 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'titre_probleme_technique' => 'Upozorenje: tehnicki problem (SQL server) sprijecava pristup ovom dijelu stranice. Hvala na razumijevanju.', # MODIF
 'titre_publier_document' => 'OBJAVI DOKUMENT U OVOJ RUBRICI',
 'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
+'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 'titre_statistiques' => 'Statistike stranice',
 'titre_titre_document' => 'Naslov dokumenta:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'à venir', # NEW
 'trad_reference' => '(preporuceni clanak)', # MODIF
 
 // Z
-'zbug_balise_b_aval' => '&nbsp;: oznaka B kasni u petlji',
+'zbug_balise_b_aval' => ' : oznaka B kasni u petlji',
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'petlja',
@@ -758,24 +758,24 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'zbug_erreur_boucle_syntaxe' => 'Pogresna sintaksa petlje', # MODIF
 'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 'zbug_erreur_execution_page' => 'greska pri izvodjenju stranice', # MODIF
-'zbug_erreur_filtre' => 'Greska: nedefinisan filter <b>&laquo; @filtre@ &raquo;</b>', # MODIF
+'zbug_erreur_filtre' => 'Greska: nedefinisan filter <b>« @filtre@ »</b>', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} odnosi se samo na petlje (FORUMI) ili (RUBRIKE)', # MODIF
 'zbug_erreur_squelette' => 'Greska sa predloskom',
 'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => 'Greska na stranici',
 'zbug_inversion_ordre_inexistant' => 'inverzija nepostojecim rasporedom', # MODIF
-'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
 'zbug_parametres_inclus_incorrects' => 'Pogresni parametri ukljucivanja', # MODIF
-'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
+'zbug_profile' => 'Temps de calcul : @time@', # NEW
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'nedefinisan SQL server', # MODIF
-'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
-'zbug_table_inconnue' => 'Nedefinisana SQL  tabela &laquo; @table@ &raquo;',
+'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
+'zbug_table_inconnue' => 'Nedefinisana SQL  tabela « @table@ »',
 'zxml_connus_attributs' => 'attributs connus', # NEW
 'zxml_de' => 'de', # NEW
 'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
 'zxml_inconnu_balise' => 'balise inconnue', # NEW
-'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
+'zxml_inconnu_entite' => 'entité inconnue', # NEW
 'zxml_inconnu_id' => 'ID inconnu', # NEW
 'zxml_mais_de' => 'mais de', # NEW
 'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
