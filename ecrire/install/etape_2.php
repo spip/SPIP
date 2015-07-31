@@ -61,7 +61,7 @@ function install_etape_2_dist()
 	//echo "\n-->\n";
 
 	if (($db_connect=="0") && $link) {
-		echo "<div class='success'><h3>"._T('info_connexion_ok')."</h3></div>";
+		echo "<div class='success'><b>"._T('info_connexion_ok')."</b></div>";
 		echo info_progression_etape(2,'etape_','install/');
 
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));

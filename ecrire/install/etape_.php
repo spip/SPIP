@@ -22,8 +22,8 @@ function install_etape__dist()
 	} else {
 		include_spip('inc/presentation'); // pour info_copyright
 
-		$res = "<div class='petit-centre'><img alt='SPIP' src='" .  chemin_image('logo-spip2.gif') . "' /></div>\n" .
-			"<div class='petit-centre'><p>" .info_copyright() ."</p></div>\n" .
+		$res = "<div class='petit-centre'><img alt='SPIP' src='" .  chemin_image('logo-spip2.gif') . "' />\n" .
+			"<p class='small'>" .info_copyright() ."</p></div>\n" .
 			"<p>" ._T('install_select_langue') ."</p>" .
 			"<div>" .$menu_langues ."</div>\n" .
 			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />" . bouton_suivant());

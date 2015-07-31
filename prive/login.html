@@ -10,7 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 <meta name="robots" content="none" />
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
-<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
 #INSERT_HEAD
 <script type='text/javascript'><!--
@@ -35,11 +34,11 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 	
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	<p class="retour">
-		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
+		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onClick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
 		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
 	</p>
-	<p class="retour">
-		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a>
+	<p class="generator">
+		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="63" height="40" /></a>
 	</p>
 	
 </div><!--#minipres-->

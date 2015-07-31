@@ -302,9 +302,9 @@ function install_etape_3_dist()
 
 		$auteur_obligatoire = !sql_countsel('spip_auteurs','','','',$server_db);
 
-		$res =  "<div class='success'><h3>"
+		$res =  "<div class='success'><b>"
 		. _T('info_base_installee')
-		. "</h3></div>"
+		. "</b></div>"
 		. install_premier_auteur(_request('email'),
 					_request('login'),
 					_request('nom'),
