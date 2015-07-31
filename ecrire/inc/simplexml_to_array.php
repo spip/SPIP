@@ -17,12 +17,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Transforme un texte XML en tableau PHP
- * @param  string $u
+ * @param string|object $u
  * @param bool $utiliser_namespace
  * @return array
  */
 function inc_simplexml_to_array_dist($u, $utiliser_namespace=false){
-	$u = simplexml_load_string($u);
+	// decoder la chaine en SimpleXML si pas deja fait
+	if (is_string($u))
+		$u = simplexml_load_string($u);
 	return array('root'=>@xmlObjToArr($u, $utiliser_namespace));
 }
 
