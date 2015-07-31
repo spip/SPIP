@@ -2283,7 +2283,7 @@ function url_rss_forum($texte){return $texte;}
  *   complement a la balise a pour gerer un evenement javascript, de la forme " onclick='...'"
  * @return string
  */
-function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel="", $evt=''){
+function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel="", $evt=''){
 	if ($on) {
 		$bal = "strong";
 		$att = "class='on'";
@@ -2296,7 +2296,7 @@ function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel="", $ev
 		.$evt;
 	}
 
-	return "<$bal $att>$libelle</$bal>";
+	return "<$bal $att>($libelle!=NULL?$libelle:$url)</$bal>";
 }
 
 
