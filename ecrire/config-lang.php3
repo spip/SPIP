@@ -31,7 +31,7 @@ lire_metas();
 	$myDir = opendir("lang");
 	while($entryName = readdir($myDir)) {
 		if (is_file("lang/".$entryName)) {
-			if (ereg("^spip\_([^\.]*)", $entryName, $match)) {
+			if (ereg("^spip\_([^\.]*)\.php3?$", $entryName, $match)) {
 				$ext = $match[1];
 				$langues_toutes[] = "$ext";
 			}
@@ -85,11 +85,11 @@ echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _T('info_langues_proposees');
 //$langues_toutes = split(',',$all_langs);
 $langues_proposees = lire_meta('langues_proposees');
-$test = (ereg(",$langue_site,", ",$langues_tests,")) ? _T('info_en_test_1') : "";
-echo "<input type='checkbox' name='langues_prop[]' value='$langue_site' checked id='lang_$langue_site'><label for='lang_$langue_site'>&nbsp;<b>".traduire_nom_langue($langue_site).'</b>'.$test."</label>\n";
+$test = (!ereg(",$langue_site,", ",$langues_ok,")) ? _T('info_en_test_1') : "";
+echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$langue_site' checked id='lang_$langue_site'><label for='lang_$langue_site'>&nbsp;<b>".traduire_nom_langue($langue_site).'</b>'.$test."</label>\n";
 while (list(,$l) = each ($langues_toutes)) {
 	if ($l AND ($l <> $langue_site)) {
-		$test = (ereg(",$l,", ",$langues_tests,")) ? _T('info_en_test_2') : "";
+		$test = (!ereg(",$l,", ",$langues_ok,")) ? _T('info_en_test_2') : "";
 		if (ereg(",$l,", ",$langues_proposees,"))
 			echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' checked id='lang_$l'><label for='lang_$l'>&nbsp;<b>".traduire_nom_langue($l).'</b>'.$test.'</label>';
 		else
