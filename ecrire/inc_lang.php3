@@ -244,6 +244,7 @@ function traduire_nom_langue($lang) {
 	'za' => "Zhuang",
 	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
+	$GLOBALS['codes_langues'] = $codes_langues;
 
 	$r = $codes_langues[$lang];
 	if (!$r) $r = $lang;
@@ -253,7 +254,7 @@ function traduire_nom_langue($lang) {
 //
 // Afficher un menu de selection de langue
 //
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $uniq_langues_traduites = false) {
 	global $couleur_foncee;
 
 	if ($default == '')
@@ -268,7 +269,9 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 		$default = substr($default,1);
 	}
 
-	$langues = explode(',', $GLOBALS['all_langs']);
+	if ($uniq_langues_traduites) $langues = explode(',', $GLOBALS['all_langs']);
+	else $langues = explode(',', lire_meta('multi_auth'));
+
 	if (count($langues) <= 1) return;
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';

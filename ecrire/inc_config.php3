@@ -62,7 +62,8 @@ function init_config() {
 		'langue_site' => $lang,
 		
 		'multi_articles' => 'non',
-		'multi_rubriques' => 'non'
+		'multi_rubriques' => 'non',
+		'multi_auth' => $GLOBALS['all_langs']
 
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
@@ -121,7 +122,7 @@ function appliquer_modifs_config() {
 	global $clean_link, $connect_id_auteur;
 	global $adresse_site, $email_webmaster, $post_dates, $tester_proxy, $test_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
-	global $charset, $charset_custom;
+	global $charset, $charset_custom, $langues_auth;
 
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 
@@ -163,6 +164,10 @@ function appliquer_modifs_config() {
 	if ($activer_moteur == 'oui') {
 		include_ecrire('inc_index.php3');
 		creer_liste_indexation();
+	}
+
+	if ($langues_auth) {
+		$GLOBALS['multi_auth'] = join($langues_auth,",");
 	}
 
 	if (isset($email_webmaster) AND email_valide($email_webmaster))
@@ -216,7 +221,8 @@ function appliquer_modifs_config() {
 
 		'charset',
 		'multi_articles',
-		'multi_rubriques'
+		'multi_rubriques',
+		'multi_auth'
 		
 	);
 	while (list(,$i) = each($liste_meta))
