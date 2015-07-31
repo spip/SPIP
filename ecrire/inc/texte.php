@@ -100,10 +100,10 @@ function code_echappement($rempl, $source='') {
 	$return = '';
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
-	$arempl = str_split($rempl, 30000);
-	foreach($arempl as $rempl) {
+	$taille = 30000;
+	for($i = 0; $i < strlen($rempl); $i += $taille) {
 		// Convertir en base64
-		$base64 = base64_encode($rempl);
+		$base64 = base64_encode(substr($rempl, $i, $taille));
 		$return .=
 			inserer_attribut("<$mode class=\"base64$source\">", 'title', $base64)
 					                ."</$mode>";
