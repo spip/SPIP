@@ -555,7 +555,7 @@ function attribut_html($texte,$textebrut = true) {
 	if ($textebrut)
 		$texte = preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),textebrut($texte));
 	$texte = texte_backend($texte);
-	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
+	$texte = str_replace(array("'",'"'),array('&#039;', '&#034;'), $texte);
 	
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
 }
