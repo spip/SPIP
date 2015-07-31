@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_suivante' => 'sekvanta pa&#285;o',
 'par_auteur' => 'de ',
 'participer_site' => 'Por partopreni la vivon de tiu retejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuj ricevos retleteron indikante ensalutilojn por eniri la privatan spacon.',
-'plan_site' => 'Retejo-mapo',
+'plan_site' => 'Mapo de la retejo',
 'popularite' => 'Populareco',
 'poster_message' => 'Sendi mesa&#285;on',
 'proposer_site' => 'Vi povas proponi retejon aldonotan al tiu rubriko&nbsp;:',
@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'signatures_petition' => 'Subskriboj',
-'site_realise_avec_spip' => 'Retejo realigita per SPIP',
+'site_realise_avec_spip' => 'Retejo pelata de SPIP',
 'sites_web' => 'Retejoj',
 'sous_rubriques' => 'Sub-rubrikoj',
 'suite' => 'sekvo',

@@ -256,6 +256,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 ',
 'form_pet_message_commentaire' => 'Eine Nachricht, ein Kommentar?',
 'form_pet_nom_site2' => 'Name Ihrer Website',
+'form_pet_probleme_liens' => 'Bitte entfernen Sie die Hyperlinks aus Ihrer Nachricht.',
 'form_pet_probleme_technique' => 'Technisches Problem: Signaturen sind vor&uuml;bergehend nicht m&ouml;glich.',
 'form_pet_signature_pasprise' => 'Ihre Signatur wird nicht ber&uuml;cksichtigt.',
 'form_pet_signature_validee' => 'Ihre Signatur wurde erfolgreich gepr&uuml;ft. Vielen Dank!',
@@ -408,6 +409,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_description_2' => 'Beschreibung:',
 'info_dimension' => 'Ma&szlig;e:',
 'info_document' => 'Dokument',
+'info_document_indisponible' => 'Dokument nicht verf&uuml;gbar',
 'info_documents' => 'Dokumente',
 'info_echange_message' => 'In SPIP k&ouml;nnen Sie interne Nachrichten austauschen und interne Foren f&uuml;r Teilnehmer der Website anlegen. Diese Funktionen k&ouml;nnen Sie abschalten.',
 'info_ecire_message_prive' => 'Neue private Nachricht schreiben',
@@ -498,6 +500,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_sans_titre_2' => 'ohne Titel',
 'info_selectionner_fichier' => 'Sie k&ouml;nnen eine Datei aus dem Verzeichnis @upload@ ausw&auml;hlen.',
 'info_selectionner_fichier_2' => 'W&auml;hlen Sie eine Datei:',
+'info_signature_supprimee' => 'Unterschrift gel&ouml;scht',
+'info_signature_supprimee_erreur' => 'Fehler: Dieser L&ouml;schcode entspricht keiner Unterschrift.',
 'info_site_attente' => 'Websites, die auf Freigabe warten',
 'info_site_reference' => 'Verlinkte Website online',
 'info_site_refuse' => 'Abgelehnte Website',
@@ -673,7 +677,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_erreur_mise_niveau_base' => 'Datenbankfehler beim Einrichten der neuen Version. Das Bild <b>@fichier@</b> wurde nicht &uuml;bernommen (Artikel @id_article@).
  Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder
  in den Artikeln angezeigt werden.',
-'texte_erreur_visiteur' => 'Sie haben versucht sich unter einer Identit&auml;t einzuloggen, die das nicht erlaubt.',
+'texte_erreur_visiteur' => 'Sie haben versucht, sich mit einer Identit&auml;t einzuloggen, die dazu nicht berechtigt.',
 'texte_inc_auth_1' => 'Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
  Versuchen Sie,',
 'texte_inc_auth_2' => 'sich erneut anzumelden',

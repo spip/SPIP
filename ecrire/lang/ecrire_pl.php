@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     spe&#322;niaj &#380;&#261;dania importu.<p>Wi&#281;cej
     informacji na <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                  w dokumentacji SPIP</a>.',
-'avis_espace_interdit' => '<b>Obszar zabroniony</b><p>SPIP jest ju&#380; zainstalowany.',
+'avis_espace_interdit' => '<b>Dost&#281;p zabroniony</b><div>SPIP jest ju&#380; zainstalowany.</div>',
 'avis_lecture_noms_bases_1' => 'Program instalacyjny nie mo&#380;e odczyta&#263; nazw instalowanych baz danych.',
 'avis_lecture_noms_bases_2' => '&#379;adna baza danych nie jest dost&#281;pna, lub funkcja listingu baz danych nie dzia&#322;a
    ze wzgl&#281;d&oacute;w bezpiecze&#324;stwa(co jest cz&#281;stym przypadkiem wielu host&oacute;w).',
@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Nie masz dost&#281;pu do tej wiadomo&#347;ci.',
 'avis_non_acces_page' => 'Nie masz dost&#281;pu do tej strony.',
 'avis_operation_echec' => 'Operacja nie powiod&#322;a si&#281;.',
+'avis_operation_impossible' => 'Operacja niemo&#380;liwa',
 'avis_probleme_archive' => 'Istnieje b&#322;&#261;d w pliku @archive@',
 'avis_site_introuvable' => 'Strony nie znaleziono',
 'avis_site_syndique_probleme' => 'Uwaga : syndykacja strony napotka&#322;a na problem&nbsp;; system zosta&#322; na chwil&#281; wstrzymany. Sprawd&#378; URL syndykowanej strony (<b>@url_syndic@</b>), i spr&oacute;buj powt&oacute;rnie pozyska&#263; informacje.',
@@ -50,10 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Dodaj dost&#281;p do LDAP >>',
+'bouton_acces_ldap' => 'Dodaj dost&#281;p do LDAP',
 'bouton_ajouter' => 'Dodaj',
 'bouton_ajouter_participant' => 'DODAJ UCZESTNIKA:',
 'bouton_annonce' => 'ZAWIADOMIENIE',
+'bouton_annuler' => 'Anuluj',
 'bouton_checkbox_envoi_message' => 'mo&#380;liwo&#347;&#263; wys&#322;ania wiadomo&#347;ci',
 'bouton_checkbox_indiquer_site' => 'Musisz wpisa&#263; nazw&#281; strony internetowej',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorzy strony',
@@ -63,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_site' => 'tylko jeden podpis na stron&#281; internetow&#261;',
 'bouton_demande_publication' => 'Pro&#347;ba o publikacj&#281; artyku&#322;u',
 'bouton_desactive_tout' => 'Wy&#322;&#261;cz wszystko',
+'bouton_desinstaller' => 'Odinstaluj',
 'bouton_effacer_index' => 'Usu&#324; indeksowanie',
 'bouton_effacer_tout' => 'Usu&#324; WSZYSTKO',
 'bouton_envoi_message_02' => 'WY&#346;LIJ WIADOMO&#346;&#262;',
@@ -99,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  (posty b&#281;d&#261; si&#281; ukazywa&#263; w momencie ich wys&#322;ania, administratorzy mog&#261;
  je p&oacute;&#378;niej usun&#261;&#263;).',
 'bouton_radio_sauvegarde_compressee' => 'zapisz w postaci skompresowanej w @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => '<MODIF>Zapisz w postaci nieskompresowanej w @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'zapisz w postaci nieskompresowanej w @fichier@',
 'bouton_radio_supprimer_petition' => 'Usu&#324; og&#322;oszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
 'bouton_redirection' => 'PRZEKIERUJ',
@@ -117,6 +120,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Pliki cache zosta&#322;y zapisane w trybie nieskompresowanym',
 'cache_modifiable_webmestre' => 'Te parametry mo&#380;e zmienia&#263; webmaster serwisu.',
 'calendrier_synchro' => 'Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b>, mo&#380;esz go zsynchronizowa&#263; z informacjami tego serwisu.',
+'config_activer_champs' => 'W&#322;&#261;cz nast&#281;puj&#261;ce pola',
+'config_info_logos' => 'Ka&#380;dy element strony mo&#380;e mie&#263; logo, a tak&#380;e logo roll-over.',
+'config_info_logos_utiliser' => 'U&#380;yj logo',
+'config_info_logos_utiliser_non' => 'Nie u&#380;ywaj logo',
+'config_info_logos_utiliser_survol' => 'U&#380;ywaj logo roll-over',
+'config_info_logos_utiliser_survol_non' => 'Nie u&#380;ywaj logo roll-over',
+'config_info_redirection' => 'W&#322;&#261;czaj&#261;c t&#261; opcj&#281;, mo&#380;esz tworzy&#263; artyku&#322;y wirtualne, odnosz&#261;ce si&#281; do artyku&#322;&oacute;w opublikowanych na innych stronach ni&#380; Twoja.',
+'config_redirection' => 'Wirtualne artyku&#322;y',
+'connexion_ldap' => 'Po&#322;&#261;czenie:',
+'copier_en_local' => 'Skopiuj lokalnie',
 
 
 // D
@@ -141,7 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Cz&#281;sto adres ten jest taki sam, jak adres strony, czasem odpowiada nazwie &laquo;serwera lokalnego&raquo;, a czasem jest pozostawiony pusty.)',
 'entree_biographie' => 'Kr&oacute;tka biografia w kilku s&#322;owach.',
 'entree_breve_publiee' => 'Czy ten news ma zosta&#263; opublikowany?',
-'entree_chemin_acces' => '<b>Wpisz</b> &#347;cie&#380;k&#281;:',
+'entree_chemin_acces' => '<b>Podaj</b> &#347;cie&#380;k&#281; dost&#281;pu:',
 'entree_cle_pgp' => 'Tw&oacute;j klucz PGP',
 'entree_contenu_rubrique' => '(Zawarto&#347;&#263; dzia&#322;u w kilku s&#322;owach.)',
 'entree_description_site' => 'Opis strony',
@@ -177,10 +190,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
 
 
+// F
+'forum_info_original' => 'oryginalny',
+
+
 // I
 'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
 'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Do Twojej dyspozycji s&#261; dwa kalendarze. Jeden pokazuje map&#281; strony wraz ze wszystkimi opublikowanymi artyku&#322;ami. Drugi zawiera og&#322;oszenia redakcyjne oraz Twoje ostatni wiadomo&#347;ci prywatne&nbsp;: tylko Ty masz do niego dost&#281;p za has&#322;em.',
+'ical_lien_rss_breves' => 'Zapisz si&#281; do RSS news&oacute;w',
 'ical_methode_http' => '&#346;ci&#261;gnij',
 'ical_methode_webcal' => 'Synchronizacja (webcal://)',
 'ical_texte_js' => 'Jedna linia javascript pozwala w bardzo prosty spos&oacute;b, w ka&#380;dym nale&#380;&#261;cym do Ciebie serwisie pokaza&#263; ostatnio opublikowane w tym serwisie artyku&#322;y.',
@@ -229,8 +247,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_site' => '1 strona',
 'info_activer_cookie' => 'Mo&#380;esz uaktywni&#263; <b>cookies korespondecji</b>, co ci
  pozwoli przechodzi&#263; &#322;atwo pomi&#281;dzy stron&#261; publiczn&#261; a prywatn&#261;.',
-'info_activer_forum_public' => '<i>Aby aktywowa&#263; forum publiczne, wybierz tryb
- moderowany jako domy&#347;lny:</i>',
+'info_activer_forum_public' => '<i>Aby aktywowa&#263; forum publiczne, wybierz domy&#347;lny spos&oacute;b moderacji</i>',
 'info_admin_gere_rubriques' => 'Ten administrator zarz&#261;dza nast&#281;puj&#261;cymi dzia&#322;ami:',
 'info_admin_gere_toutes_rubriques' => 'Ten administrator zarz&#261;dza <b>wszystkimi dzia&#322;ami</b>.',
 'info_administrateur' => 'Administrator',
@@ -294,25 +311,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Je&#347;li ten adres odpowiada li&#347;cie subskrypcyjnej, mo&#380;ecie wpisa&#263; poni&#380;ej adres, za kt&oacute;ego pomoc&#261; uczestnicy serwisu mog&#261; si&#281; zapisa&#263;. Adres ten mo&#380;e by&#263; URL-em (np. stron&#261; s&#322;u&#380;&#261;c&#261; do zapisywania si&#281; na list&#281; przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@dany_adres@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Mo&#380;esz automatycznie, za pomoc&#261; poczty elektronicznej otrzymywa&#263; og&#322;oszenia dotycz&#261;ce aktywno&#347;ci redakcyjnej tego serwisu. W tym celu powinniene&#347; si&#281; zapisa&#263; na list&#281; mailow&#261;.',
 'info_confirmer_passe' => 'Potwierd&#378; nowe has&#322;o:',
-'info_connexion_base' => 'Drugi krok: <b>Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych</b>',
+'info_connexion_base' => 'Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych',
 'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p /> Id&#378; do nast&#281;pnego etapu.',
-'info_connexion_mysql' => 'Pierwszy krok: <b>Twoje po&#322;&#261;czenie MySQL</b>',
+'info_connexion_mysql' => 'Po&#322;&#261;czenie z baz&#261; MySQL',
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Zawarto&#347;&#263; artyku&#322;&oacute;w',
 'info_creation_mots_cles' => 'Utw&oacute;rz i konfiguruj tu s&#322;owa kluczowe strony',
 'info_creation_paragraphe' => '(By utworzy&#263; akapity, po prostu zostaw puste linijki.)',
 'info_creation_rubrique' => 'Aby m&oacute;c pisa&#263; artyku&#322;y,<br /> musisz utworzy&#263; przynajmniej jeden dzia&#322;.<br />',
-'info_creation_tables' => 'Czwarty krok: <b>Tworzenie tabeli bazy danych</b>',
-'info_creer_base' => '<b>Utw&oacute;rz</b> now&#261; baz&#281; danych:',
+'info_creation_tables' => 'Tworzenie tablic bazy danych',
+'info_creer_base' => '<b>Utw&oacute;rz</b> now&#261; baz&#281; danych&nbsp;:',
 'info_dans_groupe' => 'W grupie:',
 'info_dans_rubrique' => 'W dziale:',
 'info_date_publication_anterieure' => 'Data poprzedniej publikacji:',
 'info_date_referencement' => 'DATA ZLINKOWANIA TEJ STRONY:',
-'info_delet_mots_cles' => 'Zarz&#261;da&#322;e&#347; usuni&#281;cia s&#322;owa kluczowego
+'info_delet_mots_cles' => 'Chcesz usun&#261;&#263; s&#322;owo kluczowege
 <b>@titre_mot@</b> (@type_mot@). To s&#322;owo jest powi&#261;zane z
 <b>@texte_lie@</b>musisz potwierdzi&#263; swoj&#261; decyzj&#281;:',
-'info_derniere_etape' => 'Ostatni krok: <b>Zako&#324;czone!',
+'info_derniere_etape' => 'Zako&#324;czone z sukcesem!',
 'info_derniere_syndication' => 'Ostatnia syndykacja tego serwisu zosta&#322;a dokonana',
 'info_derniers_articles_publies' => 'Twoje ostatnie opublikowane artyku&#322;y',
 'info_desactiver_forum_public' => 'Wy&#322;&#261;cz mo&#380;liwo&#347;&#263; korzystania z forum
@@ -320,6 +337,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  do&#322;&#261;czaj&#261;c je do okre&#347;lonych artyku&#322;&oacute;w ; wy&#322;&#261;czenie b&#281;dzie dotyczy&#322;o przede wszystkim dzia&#322;&oacute;w i skr&oacute;t&oacute;w itd.',
 'info_desactiver_messagerie_personnelle' => 'Mo&#380;esz w&#322;&#261;czy&#263; lub wy&#322;&#261;czy&#263; wewn&#281;trzn&#261; poczt&#281; w tym serwisie.',
 'info_descriptif' => 'Opis:',
+'info_desinstaller_plugin' => 'usu&#324; dane i wy&#322;&#261;cz plugina',
 'info_discussion_cours' => 'Dyskusja w toku',
 'info_ecrire_article' => 'Aby m&oacute;c pisa&#263; artyku&#322;y, musisz utworzy&#263; przynajmniej jeden dzia&#322;.',
 'info_email_envoi' => 'Adres e-mail nadawcy (nieobowi&#261;zkowo)',
@@ -360,7 +378,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_numero_auteur' => 'AUTOR NUMER',
 'info_gauche_numero_breve' => 'NEWS NUMER',
 'info_gauche_statistiques_referers' => 'Ta strona wy&#347;wietla list&#281; <i>odno&#347;nik&oacute;w</i>, to znaczy stron kt&oacute;re zawieraj&#261; &#322;&#261;cza prowadz&#261;ce do Twojej strony, kt&oacute;re kto&#347; u&#380;y&#322; wczoraj lub dzisiaj&nbsp;: lista jest zerowana co 24 godziny.',
-'info_gauche_suivi_forum' => 'Strona <i>obserwacji forum</i> jest narz&#281;dziem zarz&#261;dzania stron&#261; (nie, miejscem dyskusji czy redakcji). Wy&#347;wiela ona wszystkie komentarze na forum publicznym do danego artyku&#322;u i pozwala edytowa&#263; owe komentarze.',
+'info_gauche_suivi_forum' => 'Strona <i>obserwacji forum</i> jest narz&#281;dziem zarz&#261;dzania stron&#261; (nie, miejscem dyskusji czy redakcji). Wy&#347;wietla ona wszystkie komentarze do danego artyku&#322;u na forum publicznym i pozwala edytowa&#263; owe komentarze.',
 'info_gauche_suivi_forum_2' => 'Strona  <i>archiwum forum</i> jest narz&#281;dziem administracji stron&#261; (a nie miejscem dyskusji czy redagowania). Wy&#347;wietla ona wszystkie komentarze forum z ca&#322;ego serwisu, zar&oacute;wno te ze stron publicznych i strefy prywatnej i pozwala na zarz&#261;dzanie tymi komentarzami.',
 'info_gauche_visiteurs_enregistres' => 'Znajdziesz tu go&#347;ci zarejestrowanych
  w strefie publicznej strony (abonament forum).',
@@ -383,7 +401,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkaj&#261;c na odpowiednim obrazku.',
 'info_image_process2' => '<b>N.B.</b> <i>Je&#347;li nie wy&#347;wietli&#322; si&#281; &#380;aden obrazek, Tw&oacute;j serwer nie zosta&#322; skonfugurowany tak, aby skorzysta&#263; z tego narz&#281;dzia. Je&#347;li jednak chcesz skorzysta&#263; z tych funkcji, skontaktuj si&#281; z osob&#261; odpowiedzialn&#261; za sprawy techniczne Twojego serwisu i popro&#347; o w&#322;&#261;czenie rozszerze&#324; "GD" lub "Imagick".</i>',
 'info_images_auto' => 'Automatycznie obliczane rozmiary obrazka',
-'info_informations_personnelles' => 'Pi&#261;ty krok: <b>Informacja osobista</b>',
+'info_informations_personnelles' => 'Informacje o u&#380;ytkowniku',
 'info_inscription_automatique' => 'Automatyczna rejestracja nowych redaktor&oacute;w',
 'info_jeu_caractere' => 'Kodowanie strony',
 'info_jours' => 'dni',
@@ -401,6 +419,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lista zalogowanych redaktor&oacute;w',
 'info_login_existant' => 'Podany login ju&#380; istnieje.',
 'info_login_trop_court' => 'Za kr&oacute;tki login.',
+'info_logos' => 'Logo',
 'info_maximum' => 'maksimum:',
 'info_meme_rubrique' => 'W tym samym dziale',
 'info_message' => 'Wiadomo&#347;&#263; od',
@@ -464,7 +483,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ou' => 'lub...',
 'info_oui_suppression_mot_cle' => 'chc&#281; definitywni usun&#261;&#263; to s&#322;owo kluczowe.',
 'info_page_interdite' => 'Strona zabroniona',
+'info_par_nom' => 'wg nazw',
 'info_par_nombre_article' => '(wg liczby artyku&#322;&oacute;w)',
+'info_par_statut' => 'wg statusu',
+'info_par_tri' => '\'(par @tri@)\'',
 'info_pas_de_forum' => 'brak forum',
 'info_passe_trop_court' => 'Za kr&oacute;tkie has&#322;o.',
 'info_passes_identiques' => 'Has&#322;a nie s&#261; identyczne.',
@@ -487,7 +509,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'etap za etapem',
 'info_procedure_maj_version' => 'powinna zosta&#263; procedura uaktualniania w celu dostosowania
  bazy danych do nowej wersji SPIP.',
-'info_ps' => '<MODIF>P.S.',
+'info_proxy_ok' => 'Test proxy udany.',
+'info_ps' => 'P.S.',
 'info_publier' => 'opublikuj',
 'info_publies' => 'Twoje artyku&#322;y opublikowane online',
 'info_question_accepter_visiteurs' => 'Je&#347;li szkielety Twojego serwisu przewiduj&#261; dla odwiedzaj&#261;cych zapisy bez dost&#281;pu do panelu administracyjnego, w&#322;&#261;cz poni&#380;sz&#261; opcj&#281;:',
@@ -519,7 +542,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection' => 'Przekierowanie',
 'info_referencer_doc_distant' => 'Dodaj odno&#347;nik do dokumentu w internecie:',
 'info_refuses' => 'Twoje odrzucone artyku&#322;y',
-'info_reglage_ldap' => 'Opcje : <b>Regulacja importu LDAP</b>',
+'info_reglage_ldap' => 'Opcje: <b>Regulacja importu LDAP</b>',
 'info_renvoi_article' => '<b>Przekierowanie.</b> Ten artyku&#322; odsy&#322;a do strony:',
 'info_reserve_admin' => 'Tylko administratorzy mog&#261; zmieni&#263; ten adres.',
 'info_restauration_sauvegarde' => 'odtworzenie zapisanego pliku @archive@',
@@ -545,7 +568,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sauvegarde_petitions' => 'Zapisz og&#322;oszenia',
 'info_sauvegarde_refers' => 'Zapisz odno&#347;niki',
 'info_sauvegarde_reussi_01' => 'Backup zako&#324;czy&#322; si&#281; pomy&#347;lnie.',
-'info_sauvegarde_reussi_02' => '<MODIF>Baza danych zosta&#322;a zapisana w @archive@. Mo&#380;esz',
+'info_sauvegarde_reussi_02' => '<Baza danych zosta&#322;a zapisana w @archive@. Mo&#380;esz',
 'info_sauvegarde_reussi_03' => 'powr&oacute;t do zarz&#261;dzania',
 'info_sauvegarde_reussi_04' => 'Twojej strony.',
 'info_sauvegarde_rubriques' => 'Kopia bezpiecze&#324;stwa dzia&#322;&oacute;w',
@@ -588,6 +611,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_surtitre' => 'Nadtytu&#322; :',
 'info_syndication_integrale_1' => 'Twoja strona oferuje plik syndykacji &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Czy chcesz przesy&#322;a&#263; ca&#322;e artyku&#322;y czy wolisz dystrybuowa&#263; podsumowanie ograniczone do kilkuset znak&oacute;w&nbsp;?',
+'info_table_prefix' => 'Mo&#380;esz u&#380;y&#263; w&#322;asnego prefixa nazw tablic w bazie danych (jest to niezb&#281;dne je&#347;li chcesz zainstalowa&#263; wi&#281;cej stron przy u&#380;yciu tej samej bazy danych). Prefix powinien by&#263; pisany bez akcent&oacute;w, ma&#322;ymi literami i bez spacji.',
 'info_taille_maximale_vignette' => 'Maksymalny rozmiar minitaurek, generowanych przez system&nbsp;:',
 'info_terminer_installation' => 'Mo&#380;esz teraz zako&#324;czy&#263; proces standardowej instalacji.',
 'info_texte' => 'Tekst',
@@ -626,10 +650,16 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'info_visiteur_2' => 'strony publicznej',
 'info_visiteurs' => 'Odwiedzaj&#261;cy',
 'info_visiteurs_02' => 'Odwiedzaj&#261;cy stron&#281; publiczn&#261;',
+'install_adresse_base_hebergeur' => 'Adres bazy danych przyznany przez us&#322;ugodawc&#281; hostingowego',
 'install_echec_annonce' => 'Instalacja mo&#380;e si&#281; nie powie&#347;&#263; lub mo&#380;e si&#281; zda&#380;y&#263;, &#380;e strona przestanie dzia&#322;a&#263; ...',
 'install_extension_mbstring' => 'SPIP nie dzia&#322;a z:',
 'install_extension_php_obligatoire' => 'SPIP wymaga rozszerzenia php:',
+'install_login_base_hebergeur' => 'Login po&#322;&#261;czenia z baz&#261; danych przyznany przez us&#322;ugodawc&#281; hostingowego',
+'install_nom_base_hebergeur' => 'Nazwa bazy danych przyznana przez us&#322;ugodawc&#281; hostingowego:',
+'install_pass_base_hebergeur' => 'Has&#322;o do bazy danych przyznane przez u&#322;ugodawc&#281; hostingowego',
+'install_php_version' => 'wersja PHP @version@ jest za niska (minimum = @minimum@)',
 'install_select_langue' => 'Wybierz j&#281;zyk i kliknij na przycisk "next" aby rozpocz&#261;&#263; procedur&#281; instalacji.',
+'install_table_prefix_hebergeur' => 'Prefix przyznany przez us&#322;ugodawc&#281; hostingowego',
 'intem_redacteur' => 'redaktor',
 'item_accepter_inscriptions' => 'Zaakceptuj zapisy',
 'item_activer_forum_administrateur' => 'Aktywuj forum administrator&oacute;w',
@@ -696,6 +726,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 
 // L
+'les_deux' => 'oba',
 'lien_ajout_destinataire' => 'Dodaj odbiorc&#281;',
 'lien_ajouter_auteur' => 'Dodaj autora',
 'lien_ajouter_participant' => 'Dodaj uczestnika',
@@ -715,6 +746,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'lien_supprimer_rubrique' => 'usu&#324; ten dzia&#322;',
 'lien_tout_deplier' => 'Zwi&#324; wszystko',
 'lien_tout_replier' => 'Rozwi&#324; wszystko',
+'lien_tout_supprimer' => 'Usu&#324; wszystko',
 'lien_trier_nom' => 'Sortuj wed&#322;ug nazw',
 'lien_trier_nombre_articles' => 'Sortuj wed&#322;ug liczby artyku&#322;&oacute;w',
 'lien_trier_statut' => 'Sortuj wed&#322;ug status',
@@ -757,11 +789,16 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 
 // P
+'pas_de_proxy_pour' => 'Je&#347;li potrzeba podaj serwery lub domeny, do kt&oacute;rych to proxy ma nie by&#263; u&#380;ywane: @exemple@)',
 'plugin_etat_developpement' => 'wersja rozwojowa',
 'plugin_etat_experimental' => 'wersja eksperymentalna',
 'plugin_etat_stable' => 'wersja stabilna',
 'plugin_etat_test' => 'wersja testowa',
+'plugin_impossible_activer' => 'Nie mo&#380;na w&#322;&#261;czy&#263; plugina @plugin@',
+'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',
+'plugin_necessite_spip' => 'Potrzeba co minimum wersji SPIP @version@ .',
 'plugins_liste' => 'Lista rozszerze&#324;',
+'protocole_ldap' => 'Wersja protoko&#322;u:',
 
 
 // R
@@ -769,6 +806,8 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 
 // S
+'sauvegarde_fusionner' => 'Dokona&#263; po&#322;&#261;czenia istniej&#261;cej bazy danych z backupem',
+'sauvegarde_url_origine' => 'Ewentualnie, URL strony oryginalnej :',
 'statut_admin_restreint' => '(admin z ograniczeniami)',
 'syndic_choix_moderation' => 'Co zrobi&#263; z linkami, kt&oacute;re pochodz&#261; z tego serwisu ?',
 'syndic_choix_oublier' => 'Co zrobi&#263; z linkami, kt&oacute;rych nie ma ju&#380; w pliku syndykacji?',
@@ -783,8 +822,8 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 // T
 'taille_cache_image' => 'Obrazki maj&#261; automatycznie zmieniany rozmiar przez SPIP (miniaturki dokument&oacute;w, tytu&#322;y przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmuj&#261; w katalogu @dir@ obszar @taille@.',
-'taille_cache_infinie' => '<MODIF>Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu <code>CACHE/</code>.',
-'taille_cache_maxi' => '<MODIF>SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
+'taille_cache_infinie' => 'Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu cache.',
+'taille_cache_maxi' => 'SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
 'taille_cache_octets' => 'W tym momencie wielko&#347;&#263; cache to: @octets@.',
 'taille_cache_vide' => 'Cache jest pusty.',
 'taille_repertoire_cache' => 'Wielko&#347;&#263; katalogu cache',
@@ -793,7 +832,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>ca&#322;&#261;</i> zawarto&#347;&#263; bazy danych,
 w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oacute;w i administartor&oacute;w. Po jej zastosowaniu powiniene&#347;
 zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierwszego administratora.',
-'texte_admin_tech_01' => '<MODIF>Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu @dossier@.Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu <i>IMG/</i>, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
+'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu @dossier@. Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu @img@, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
 'texte_admin_tech_02' => 'Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
  TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
@@ -814,6 +853,7 @@ zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierw
 'texte_choix_base_1' => 'Wybierz baz&#281; danych:',
 'texte_choix_base_2' => 'Serwer MySQL zawiera kilka baz danych.',
 'texte_choix_base_3' => '<b>Wybierz</b>, jaka zosta&#322;a Ci przyznana przez Tw&oacute;j serwis hostingowy:',
+'texte_choix_table_prefix' => 'Prefix tablic:',
 'texte_commande_vider_tables_indexation' => 'Skorzystaj z tego polecenia w celu opr&oacute;&#380;nienia tabeli indeksuj&#261;cych, kt&oacute;re u&#380;ywane s&#261;
  przez zintegrowan&#261; wyszukiwark&#281; SPIP.
    Pozwoli to oszcz&#281;dzi&#263; przestrze&#324; dysku twardego.',
@@ -851,7 +891,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_effacer_donnees_indexation' => 'Wyma&#380; dane pochodz&#261;ce z indeksowania',
 'texte_en_cours_validation' => 'Nast&#281;puj&#261;ce artyku&#322;y i newsy zosta&#322;y zatwierdzone do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; na do&#322;&#261;czonych do nich forach.',
 'texte_enrichir_mise_a_jour' => 'Mo&#380;esz wzbogaci&#263; uk&#322;ad Twojego tekstu &laquo;&nbsp;skr&oacute;tami typograficznymi&nbsp;&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
   i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p />
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
@@ -908,7 +948,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_proposer_publication' => 'Gdy Tw&oacute;j artyku&#322; jest uko&#324;czony,<br /> mo&#380;esz zatwierdzi&#263; go do publikacji.',
 'texte_proxy' => 'W niekt&oacute;rych przypadkach (intranet, sieci chronione...),
   mo&#380;e zaj&#347;&#263; konieczno&#347;&#263; wykorzystania <i>proxy HTTP</i> aby dosta&#263; si&#281; do stron zrzeszonych.
-  W innym przypadku, wpiszcie poni&#380;ej adres takiej strony, w postaci
+  W innym przypadku, wpisz poni&#380;ej adres takiej strony, w postaci
   <tt><html>http://proxy:8080</html></tt>. Zwykle,
   to pole pozostaje wolne.',
 'texte_publication_articles_post_dates' => 'Jak powinien zachowywa&#263; si&#281; SPIP odno&#347;nie artyku&#322;&oacute;w,
@@ -930,14 +970,14 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
   zachcowaj kopi&#281; wy&#347;wietlanego komunikatu, poniewa&#380; mo&#380;e on zawiera&#263; wskaz&oacute;wki w czym tkwi poroblem.
 <p>  Je&#347;li problem b&#281;dzie si&#281; pojawia&#322; cz&#281;sto skontaktuj si&#281; z administratorem Twojego serwera.',
 'texte_restaurer_base' => 'Odtw&oacute;rz zawarto&#347;&#263; kopii bezpiecze&#324;stwa bazy',
-'texte_restaurer_sauvegarde' => '<MODIF>Ta opcja pozwala Ci odtworzy&#263; poprzedni&#261; kopi&#281; bezpiecze&#324;stwa
+'texte_restaurer_sauvegarde' => 'Ta opcja pozwala Ci odtworzy&#263; poprzedni&#261; kopi&#281; bezpiecze&#324;stwa
   bazy danych. Aby m&oacute;c to uczyni&#263; plik - kopia bezpiecze&#324;stwa powienien by&#263;
   umieszczony w katalogu @dossier@.
   B&#261;d&#378; ostro&#380;ny korzystaj&#261;c z tej funkcji&nbsp;: <b> modyfikacje i ewentualne straty, s&#261;
   nieodwracalne.</b>',
 'texte_sauvegarde' => 'Backup zawarto&#347;ci bazy danych',
 'texte_sauvegarde_base' => 'Backup bazy danych',
-'texte_sauvegarde_compressee' => '<MODIF>Backup zostanie zrobiony w nieskompresowanym pliku @fichier@.',
+'texte_sauvegarde_compressee' => 'Backup zostanie zrobiony w nieskompresowanym pliku @fichier@.',
 'texte_selection_langue_principale' => 'Mo&#380;esz poni&#380;ej wybra&#263; &laquo;&nbsp;g&#322;&oacute;wny j&#281;zyk&nbsp;&raquo; serwisu. Ten wyb&oacute;r nie zmusza Ci&#281; - na szcz&#281;&#347;cie&nbsp;! - do pisania artyku&#322;&oacute;w w wybranym j&#281;zyku, ale pozwala okre&#347;li&#263;&nbsp;:
  <ul><li> domy&#347;lny format dat na stronach publicznych&nbsp;;</li>
  <li> rodzaj kodowania tekstu, kt&oacute;ry ma u&#380;ywa&#263; SPIP&nbsp;;</li>
@@ -973,8 +1013,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
   w celu wyeliminowania niepotrzebnych komunikat&oacute;w.',
 'texte_trop_resultats_auteurs' => 'Zbyt du&#380;o rezultat&oacute;w dla "@cherche_auteur@" ; spr&oacute;buj sprecyzowa&#263; kryteria wyszukiwania.',
 'texte_unpack' => '&#347;ci&#261;ganie najnowszej wersji',
-'texte_utilisation_moteur_syndiques' => 'Je&#347;li korzystasz ze zintegorwanej wyszukiwarki 
-    SPIP, mo&#380;esz dokonywa&#263; przeszukiwania
+'texte_utilisation_moteur_syndiques' => 'Je&#347;li korzystasz z wyszukiwarki zintegrowanej ze    SPIP, mo&#380;esz dokonywa&#263; przeszukiwania
     do&#322;&#261;czonych artyku&#322;&oacute;w na dwa sposoby.
     <br />- Najprostszy
     polega na wyszukiwaniu jedynie
@@ -1062,10 +1101,11 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_sites_tous' => 'Linki do stron',
 'titre_suivi_petition' => 'Archiwum og&#322;osze&#324;',
 'titre_syndication' => 'Syndykacja stron',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Ca&#322;y katalog @upload@',
 'trad_article_inexistant' => 'Nie ma artyku&#322;u o tym numerze.',
 'trad_article_traduction' => 'Wszystkie wersje tego artyku&#322;u:',
-'trad_deja_traduit' => 'Ten artyku&#322; jest przek&#322;adem',
+'trad_deja_traduit' => 'B&#322;&#261;d: nie mo&#380;na po&#322;&#261;czy&#263; tego artyku&#322;u z wybranym numerem.',
 'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
@@ -1074,7 +1114,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 // U
 'utf8_convert_attendez' => 'Poczekaj chwil&#281; i od&#347;wie&#380; stron&#281;.',
 'utf8_convert_avertissement' => 'Zamierzasz przekonwertowa&#263; zawarto&#347;&#263; Twojej bazy danych (artyku&#322;y, aktualno&#347;ci, etc.) z kodowania <b>@orig@</b> na kodowanie <b>@charset@</b>.',
-'utf8_convert_backup' => '<MODIF>Nie zapomnij wykona&#263; wcze&#347;niej kopi&#281; bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
+'utf8_convert_backup' => 'Nie zapomnij wykona&#263; wcze&#347;niej kopii bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
 'utf8_convert_erreur_deja' => 'Twoja strona ju&#380; jest w kodowaniu @charset@, nie ma potrzeby konwertowania...',
 'utf8_convert_erreur_orig' => 'B&#322;&#261;d&nbsp;: kodowanie @charset@ nie jest wspierane.',
 'utf8_convert_termine' => 'Zako&#324;czone&nbsp;!',
