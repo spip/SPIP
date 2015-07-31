@@ -117,12 +117,22 @@ function interface_plugins_auto($retour) {
 
 	$res .= '<p>'._T('plugin_zip_adresse').'</p>';
 
-	$res .= '<p>('._T('plugin_info_automatique_exemples').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
+	$res .= '<p>'._T('plugin_info_automatique_exemples')
+	.'</p><ul>';
+	
+	$les_urls = array('http://files.spip.org/spip-zone/paquets.rss.xml.gz','http://www.spip-contrib.net/spip.php?page=rss_plugins_spip_2','http://plugins.spip.net/rss-+-selection-2-+');
+	if (isset($GLOBALS['chargeur_urls_rss']) AND is_array($GLOBALS['chargeur_urls_rss']))
+		$les_urls = array_merge($les_urls,$GLOBALS['chargeur_urls_rss']);
+	foreach($les_urls as $url)
+		$res .= "<li><a href='#' onclick=\"jQuery('#url_zip_plugin2').attr('value',jQuery(this).html()).focus();return false;\">"
+		.$url
+		."</a></li>";
+	$res .= "</ul>";
 
 	$res .= '<label>'._T('plugin_zip_adresse_champ');
 	$res .= "<br />
 	<input type='radio' id='antiradio' name='url_zip_plugin' value='' /></label>
-	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' />\n";
+	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='' size='50' />\n";
 
 	$res .= http_script("
 	// charger en ajax le descriptif si on click une div
@@ -450,7 +460,8 @@ function chercher_enclosures_zip($rss, $desc = '') {
 // http://doc.spip.org/@liste_plugins_distants
 function liste_plugins_distants($desc = false) {
 	// TODO une liste multilingue a telecharger
-	$liste = array(
+	$liste = array();
+	/*$liste = array(
 		'http://files.spip.org/spip-zone/crayons.zip' =>
 			array('Les Crayons', 'http://www.spip-contrib.net/Les-Crayons'),
 		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' =>
@@ -461,7 +472,7 @@ function liste_plugins_distants($desc = false) {
 			array('CFG, outil de configuration', 'http://www.spip-contrib.net/cfg-references'),
 		'http://files.spip.org/spip-zone/ortho.zip' =>
 			array('Correcteur d\'orthographe')
-	);
+	);*/
 
 	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
 		foreach ($flux as $url => $c) {
@@ -479,17 +490,19 @@ function afficher_liste_listes_plugins() {
 	if (!is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug'])))
 		return '';
 
-	$ret = '<p>'._T('plugin_info_automatique_liste').'</p><ul>';
-		$ret .= '<li>'._T('plugin_info_automatique_liste_officielle').'</li>';
-	foreach ($flux as $url => $c) {
-		$a = '<a href="'.parametre_url(
-			generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">x</a>';
-		$ret .= '<li>'.PtoBR(propre("[->$url]")).' ('._T('plugins_compte',array('count' => $c)).') '.$a.'</li>';
+	if (count($flux)){
+		$ret = '<p>'._T('plugin_info_automatique_liste').'</p><ul>';
+			//$ret .= '<li>'._T('plugin_info_automatique_liste_officielle').'</li>';
+		foreach ($flux as $url => $c) {
+			$a = '<a href="'.parametre_url(
+				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">x</a>';
+			$ret .= '<li>'.inserer_attribut(PtoBR(propre("[->$url]")),'title',$url).' ('._T('plugins_compte',array('count' => $c)).') '.$a.'</li>';
+		}
+		$ret .= '</ul>';
+	
+		$ret .= '<a href="'.parametre_url(
+										  generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._T('plugin_info_automatique_liste_update').'</a>';
 	}
-	$ret .= '</ul>';
-
-	$ret .= '<a href="'.parametre_url(
-									  generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._T('plugin_info_automatique_liste_update').'</a>';
 
 	return $ret;
 }
