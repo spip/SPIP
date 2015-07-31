@@ -606,7 +606,7 @@ function sql_showbase($spip=NULL, $serveur='', $option=true)
 
 	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($spip == NULL){
-		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$spip = $connexion['prefixe'] . '\_%';
 	}
 
@@ -648,7 +648,7 @@ function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 
 	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($table_spip){
-		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$prefixe = $connexion['prefixe'];
 		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
 	} else $vraie_table = $table;
