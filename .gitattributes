@@ -441,6 +441,7 @@ ecrire/action/editer_auteur.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
 ecrire/action/editer_message.php -text
+ecrire/action/editer_mot.php -text
 ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_signatures.php -text
