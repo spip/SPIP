@@ -122,6 +122,7 @@ if ($options == 'avancees') {
 	$articles_chapeau = lire_meta("articles_chapeau");
 	$articles_ps = lire_meta("articles_ps");
 	$articles_redac = lire_meta("articles_redac");
+	$articles_urlref = lire_meta("articles_urlref");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>"._T('info_contenu_articles')."</FONT></B>".aide ("confart")."</TD></TR>";
@@ -181,6 +182,15 @@ if ($options == 'avancees') {
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_redac', $articles_redac,
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
+	echo "</TD></TR>\n";
+
+	echo "<TR>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo _T('info_urlref');
+	echo "</TD>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	afficher_choix('articles_urlref', $articles_urlref,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 

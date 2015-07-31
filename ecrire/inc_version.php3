@@ -149,10 +149,10 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.718;
+$spip_version = 1.720;
 
 // version de spip
-$spip_version_affichee = "1.7a8 CVS";
+$spip_version_affichee = "1.7b1 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];

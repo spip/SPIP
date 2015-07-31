@@ -7,6 +7,7 @@ include_ecrire ("inc_barre.php3");
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
 $articles_descriptif = lire_meta("articles_descriptif");
+$articles_urlref = lire_meta("articles_urlref");
 $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
@@ -37,6 +38,7 @@ if ($id_article) {
 		$id_rubrique = $row["id_rubrique"];
 		$id_secteur = $row['id_secteur'];
 		$descriptif = $row["descriptif"];
+		$url_ref = $row["url_ref"];
 		$chapo = $row["chapo"];
 		$texte = $row["texte"];
 		$ps = $row["ps"];
@@ -282,6 +284,7 @@ echo "<P><HR><P>";
 	$surtitre = entites_html($surtitre);
 
 	$descriptif = entites_html($descriptif);
+	$url_ref = entites_html($url_ref);
 	$chapo = entites_html($chapo);
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
@@ -352,6 +355,11 @@ echo "<P><HR><P>";
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+	}
+
+	if (($options == "avancees" AND $articles_urlref != "non") OR $url_ref) {
+		echo "<P><b>"._T('info_urlref')."</b> ";
+		echo "<input type='text' name='url_ref' class='forml' width='40' value=\"$url_ref\"/>";
 	}
 
 	if (substr($chapo, 0, 1) == '=') {
