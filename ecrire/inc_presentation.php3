@@ -1987,7 +1987,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			$retour .= "</tr></table></a>\n";
 		}
 		else {
-			$retour .= "<a href='$lien' class='cellule-h-texte'><div>$texte</div></a>\n";
+			$retour .= "<a href='$lien' class='cellule-h-texte' $javascript><div>$texte</div></a>\n";
 		}
 		if ($danger) $retour .= "</div>";
 	} else {
