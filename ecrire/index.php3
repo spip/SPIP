@@ -17,7 +17,7 @@ if($options != 'avancees') {
 
 
 //
-// Messages d'accueil
+// Annonces
 //
 $query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie' ORDER BY date_heure DESC";
 $result = mysql_query($query);

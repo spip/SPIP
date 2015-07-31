@@ -29,7 +29,7 @@ echo propre(" <br><br><IMG SRC='IMG2/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BOR
 
 echo aide ("messpense");
 
-echo propre(" <br><br><IMG SRC='IMG2/m_envoi_affich.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{jaune}} indique les messages de la page d'accueil: ils sont modifiables par tous les administrateurs, et visibles par tous les r&eacute;dacteurs.");
+echo propre(" <br><br><IMG SRC='IMG2/m_envoi_affich.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{jaune}} indique une annonce&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.");
 
 
 fin_boite_info();
@@ -173,7 +173,7 @@ afficher_messages("Vos anciens pense-b&ecirc;te", $query_message, false, false, 
 
 if ($connect_statut == '0minirezo') {
 	$query_message = "SELECT * FROM spip_messages WHERE statut='publie' AND type='affich'";
-	afficher_messages("Messages d'accueil<font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='IMG2/m_envoi_affich.gif' width='14' height='7' border='0'>Ajouter</a></font>", $query_message, false, false, false, true);
+	afficher_messages("Annonces <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='IMG2/m_envoi_affich.gif' width='14' height='7' border='0'>Ajouter</a></font>", $query_message, false, false, false, true);
 }
 
 fin_page();

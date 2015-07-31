@@ -53,12 +53,12 @@ if ($row = mysql_fetch_array($result)) {
 	echo "<FORM ACTION='message.php3?id_message=$id_message' METHOD='post'>";
 	if ($type == 'normal') $le_type = "ENVOYER UN MESSAGE";
 	if ($type == 'pb') $le_type = "PENSE-B&Ecirc;TE &Agrave; USAGE PERSONNEL";
-	if ($type == 'affich') $le_type = "MESSAGE D'ACCUEIL";
+	if ($type == 'affich') $le_type = "ANNONCE";
 
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
 	
 	if ($type == "affich")
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N'utilisez ce type de message que pour exposer des &eacute;v&eacute;nements importants de la vie du site.</font><p>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N'utilisez les annonces que pour exposer des &eacute;v&eacute;nements importants de la vie du site.</font><p>";
 	
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_message' VALUE=\"oui\">";

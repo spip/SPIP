@@ -143,7 +143,7 @@ while($row = mysql_fetch_array($result_message)) {
 		$la_couleur = "blue";	
 	}
 	else if ($type == 'affich') {
-		$le_type = "MESSAGE D'ACCUEIL";
+		$le_type = "ANNONCE";
 		$la_couleur = "red";	
 	}
 
