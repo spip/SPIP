@@ -138,16 +138,22 @@ function controle_un_forum($row) {
 	
 	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
 
-	if ($forum_stat=="off" OR $forum_stat == "privoff") {
-		$controle .= "<div style='border: 2px #ff0000 dashed;'>";
+	switch($forum_stat) {
+		case 'off':
+		case 'privoff':
+			$controle .= "<div style='border: 2px #ff0000 dashed;'>";
+			break;
+		case 'prop':
+			$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
+			break;
+		case 'spam':
+			$controle .= "<div style='border: 2px black dotted;'>";
+			break;
+		default:
+			$controle .= "<div>";
+			break;
 	}
-	else if ($forum_stat=="prop") {
-		$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
-	}
-	else {
-		$controle .= "<div>";
-	}
-	
+
 	$controle .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='width: 100%' valign='top'><table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td class='serif'><span class='arial2'>" .
 	  date_interface($forum_date_heure) .
 	  "</span>";
