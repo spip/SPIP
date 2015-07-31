@@ -604,6 +604,7 @@ function http_status($status) {
 	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
 	$status_string = array(
 		200 => '200 OK',
+		301 => '301 Moved Permanently',
 		304 => '304 Not Modified',
 		401 => '401 Unauthorized',
 		403 => '403 Forbidden',
