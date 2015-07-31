@@ -727,11 +727,11 @@ amb un color que indica el seu estat:',
 	'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
-	'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
-	'plugin_info_extension_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_install_ok' => 'Instal·lació correcta',
 	'plugin_info_necessite' => 'Necessita:',
 	'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d\'SPIP',
+	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',

@@ -750,11 +750,11 @@ cunha cor que indica o seu estado :',
 	'plugin_info_automatique_select' => 'Seleccione a seguir un módulo : SPIP  descargarao e instalarao no cartafol <code>@rep@</code> ; si o módulo xa existe será actualizado.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'As extensións seguintes cárganse e actívanse no cartafol @plugins_dist@.', # MODIF
-	'plugin_info_extension_2' => 'Non son desactivables', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'As extensións seguintes cárganse e actívanse no cartafol @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Non son desactivables', # MODIF
 	'plugin_info_telecharger' => 'descargar desde @url@ e instalalo no cartafol @rep@',
 	'plugin_librairies_installees' => 'Librarías instaladas',
 	'plugin_necessite_lib' => 'Este módulo necesita a libraría @lib@',

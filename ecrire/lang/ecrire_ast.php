@@ -758,11 +758,11 @@ con una color que indica el estáu:',
 	'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @plugins_dist@.', # MODIF
-	'plugin_info_extension_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_telecharger' => 'a descargar de @url@ y a instalar en @rep@',
 	'plugin_librairies_installees' => 'Llibreríes instaláes',
 	'plugin_necessite_lib' => 'Esti plugin necesita la llibrería @lib@',

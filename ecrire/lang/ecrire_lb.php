@@ -721,11 +721,11 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'plugin_info_automatique_select' => 'Wielt e Plugin: SPIP lued en erof an installéiert en am Repertoire <code>@rep@</code>; wann de Plugin schons do ass gëtt en Update gemaach.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
+	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'Eroflueden vun @url@ an Installatioun an @rep@',
 	'plugin_librairies_installees' => 'Installéiert Librairie\'en',
 	'plugin_necessite_lib' => 'Dëse Plugin brauch d\'Librairie @lib@',

@@ -721,11 +721,11 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_automatique_select' => 'Selecione abaixo um plugin: O SPIP o transferirá e o instalará no diretório <code>@rep@</code>; se o plugin já existir, será atualizado.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'As extensões abaixo são carregadas e ativadas no diretório @plugins_dist@.', # MODIF
-	'plugin_info_extension_2' => 'Elas não são desativáveis.', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'As extensões abaixo são carregadas e ativadas no diretório @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Elas não são desativáveis.', # MODIF
 	'plugin_info_telecharger' => 'transferir de @url@ e instalar em @rep@',
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',

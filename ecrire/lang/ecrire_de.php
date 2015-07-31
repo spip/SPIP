@@ -730,11 +730,11 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_automatique_select' => 'Wählen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
 	'plugin_info_credit' => 'Beteiligte',
 	'plugin_info_erreur_xml' => 'Die Deklaration dieses Plugins ist nicht korrekt.',
-	'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und sind aktiviert.', # MODIF
-	'plugin_info_extension_2' => 'Man kann sie nicht deaktivieren.', # MODIF
 	'plugin_info_install_ok' => 'Installation war erfolgreich.',
 	'plugin_info_necessite' => 'Erfordert:',
 	'plugin_info_non_compatible_spip' => 'Dieses Plugin ist nicht mit SPIP kompatibel.',
+	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und sind aktiviert.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.', # MODIF
 	'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
 	'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
