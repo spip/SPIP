@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function base_upgrade_dist($titre='', $reprise='')
 {
 	if (!$titre) return; // anti-testeur automatique
-	if ($GLOBALS['spip_version']!=$GLOBALS['meta']['version_installee']) {
+	if ($GLOBALS['spip_version_base']!=$GLOBALS['meta']['version_installee']) {
 		if (!is_numeric(_request('reinstall'))) {
 			include_spip('base/create');
 			spip_log("recree les tables eventuellement disparues","maj."._LOG_INFO_IMPORTANTE);
