@@ -19,7 +19,7 @@ function bouton_admin($titre, $lien) {
 	return $ret;
 }
 
-function afficher_boutons_admin() {
+function afficher_boutons_admin($pop) {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_lang.php3");
@@ -52,8 +52,6 @@ function afficher_boutons_admin() {
 	$link->addVar('recalcul', 'oui');
 	$link->delVar('submit');
 	$ret .=  $link->getForm('GET');
-	if ($GLOBALS['use_cache']) $pop = " *";
-	else $pop = "";
 	$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\"></input>";
 	$ret .= "</form>\n";
 
