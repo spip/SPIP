@@ -26,12 +26,14 @@ function _sqlite_init_functions(&$sqlite){
 	
 	$fonctions = array(
 		'CONCAT'		=> array( '_sqlite_func_concat'			,2),
+		'CEIL'      => array( '_sqlite_func_ceil', 1), // absent de sqlite2
 		
 		'DATE_FORMAT'	=> array( '_sqlite_func_strftime'		,2),
 		'DAYOFMONTH'	=> array( '_sqlite_func_dayofmonth'		,1),
 		
 		'EXP'			=> array( 'exp'							,1),//exponentielle
 		'FIND_IN_SET'	=> array( '_sqlite_func_find_in_set'	,2),
+		'FLOOR'      => array( '_sqlite_func_floor', 1), // absent de sqlite2
 
 		'IF'			=> array( '_sqlite_func_if' 			,3),
 		'INSERT'		=> array( '_sqlite_func_insert'			,4),		
@@ -99,6 +101,10 @@ function _sqlite_add_function(&$sqlite, &$f, &$r){
 // entre autre auteurs : mlebas
 //
 
+function _sqlite_func_ceil($a) {
+	return ceil($a);
+}
+
 // http://doc.spip.org/@_sqlite_func_concat
 function _sqlite_func_concat ($a, $b) {
     return $a.$b;
@@ -128,6 +134,9 @@ function _sqlite_func_find_in_set($num, $set) {
   return 0;
 }
 
+function _sqlite_func_floor($a) {
+	return floor($a);
+}
 
 // http://doc.spip.org/@_sqlite_func_if
 function _sqlite_func_if ($bool, $oui, $non) {
