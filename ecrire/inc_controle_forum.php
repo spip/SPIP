@@ -111,7 +111,6 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 
 
 function controle_un_forum($row, $rappel) {
-	global $couleur_foncee;
 
 	$id_forum = $row['id_forum'];
 	$forum_id_parent = $row['id_parent'];

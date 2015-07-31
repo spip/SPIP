@@ -707,7 +707,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 
 function afficher_sites($titre_table, $requete) {
-	global $couleur_claire, $couleur_foncee, $spip_lang_left, $spip_lang_right;
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 
 	$tranches = afficher_tranches_requete($requete, 3);
@@ -835,7 +835,6 @@ function afficher_sites($titre_table, $requete) {
 
 
 function afficher_syndic_articles($titre_table, $requete, $afficher_site = false) {
-	global $couleur_claire;
 	global $connect_statut;
 	global $REQUEST_URI;
 	global $debut_liste_sites;

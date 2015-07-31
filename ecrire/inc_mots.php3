@@ -618,7 +618,7 @@ else $aff_articles = "'prop','publie'";
 
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
-	global $spip_lang_right;
+	global $spip_lang_right, $couleur_claire;
 
 	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
 

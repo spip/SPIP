@@ -18,7 +18,7 @@ define("_ECRIRE_INC_MINI_NAV", "1");
 
 
 function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $rub_exclus=0) {
-	global $couleur_claire, $couleur_foncee, $spip_lang_left;
+	global  $spip_lang_left;
 	
 	if (strlen($liste) > 0) {
 		$rubs = explode(",", $liste);
@@ -147,7 +147,7 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
 function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id_rubrique=::sel::';", $rub_exclus=0, $aff_racine=false) {
-	global $couleur_claire, $couleur_foncee, $spip_lang_right, $spip_lang_left;
+	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
 	$ret .= "<div id='$rac'>";
 	$ret .= "<div style='display: none;'>";

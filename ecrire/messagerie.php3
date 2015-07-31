@@ -139,7 +139,6 @@ if (spip_num_rows($result) > 0) {
 
 	bandeau_titre_boite2(_T('info_principaux_correspondants'), "redacteurs-24.gif", "#333333", "white");
 
-	//echo "<div style='padding: 3px; background-color: $couleur_foncee; color: white;'><b class='verdana2'>"._T('info_principaux_correspondants')."</b></div>";
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' width='50%'>";
 	while($row = spip_fetch_array($result)) {

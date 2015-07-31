@@ -70,7 +70,7 @@ function aide_lang_dir($spip_lang,$spip_lang_rtl) {
 }
 
 function aide($aide='') {
-	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $spip_display;
+	global $spip_lang, $spip_lang_rtl, $spip_display;
 
 	if (!$aide OR $spip_display == 4) return;
 
