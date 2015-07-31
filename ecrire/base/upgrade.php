@@ -192,8 +192,9 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 
 // http://doc.spip.org/@upgrade_types_documents
 function upgrade_types_documents() {
-	include_spip('base/create');
-	creer_base_types_doc();
+	if (include_spip('base/medias')
+	  AND function_exists('creer_base_types_doc'));
+		creer_base_types_doc();
 }
 
 // http://doc.spip.org/@upgrade_test

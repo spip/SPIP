@@ -13,7 +13,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
-include_spip('inc/documents');
 
 // Effacer une rubrique
 // http://doc.spip.org/@action_supprimer_dist

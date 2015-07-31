@@ -24,19 +24,11 @@ function action_editer_article_dist($arg=null) {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		if (!($id_parent AND $id_auteur)) {
+		if (!($id_parent AND $GLOBALS['visiteur_session']['id_auteur'])) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
-		if (($id_article = insert_article($id_parent)) > 0)
-		
-		# cf. GROS HACK ecrire/inc/getdocument
-		# rattrapper les documents associes a cet article nouveau
-		# ils ont un id = 0-id_auteur
-
-			sql_updateq("spip_documents_liens", array("id_objet" => $id_article), array("id_objet = ".(0-$id_auteur),"objet='article'"));
-	} 
+	}
 
 	// Enregistre l'envoi dans la BD
 	if ($id_article > 0) $err = articles_set($id_article);
