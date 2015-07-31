@@ -11,7 +11,9 @@
 \***************************************************************************/
 
 /**
- * Gestion de la recherche
+ * Gestion de la recherche ajax du mini navigateur de rubriques
+ *
+ * Cette possibilité de recherche apparaît s'il y a beaucoup de rubriques dans le site.
  * 
  * @package SPIP\Core\Rechercher
 **/
@@ -22,7 +24,7 @@ include_spip('inc/actions');
 include_spip('inc/texte');
 
 /**
- * Prépare la fonction de recherche
+ * Prépare la fonction de recherche ajax du mini navigateur de rubriques
  * 
  * @uses exec_rechercher_args() Formate le rendu de la recherche.
 **/
@@ -40,6 +42,7 @@ function exec_rechercher_dist()
 }
 
 /**
+ * Formate le rendu de la recherche ajax du mini navigateur de rubriques
  * 
  * @see calcul_branche_in()
  * @see proposer_item()
@@ -116,12 +119,16 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 	return (proposer_item($points, $rub, $rac, $type, $do));
 }
 
-// Resultat de la recherche interactive demandee par la fonction JS
-// onkey_rechercher qui testera s'il comporte une seule balise au premier niveau
-// car cela qui indique qu'un seul resultat a ete trouve.
-// ==> attention a composer le message d'erreur avec au moins 2 balises
 
 /**
+ * Résultat de la recherche intéractive demandée par la fonction JS
+ * `onkey_rechercher`
+ *
+ * @note
+ *   `onkey_rechercher()` testera s'il comporte une seule balise au premier niveau
+ *   car cela qui indique qu'un seul résultat a été trouvé.
+ * 
+ *   Attention donc à composer le message d'erreur avec au moins 2 balises.
  * 
  * @param array $ids
  * @param array|string $titles

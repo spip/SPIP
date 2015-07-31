@@ -22,10 +22,13 @@ include_spip('inc/filtres');
 
 
 /**
- * Affiche un mini-navigateur ajax positionné sur la rubrique `$sel`
+ * Affiche un mini-navigateur ajax positionné sur une rubrique
  *
+ * @uses mini_hier()
  * @uses construire_selectionner_hierarchie()
  * @uses inc_plonger_dist()
+ * 
+ * @see exec_rechercher_dist()
  * 
  * @param int $sel
  *     Identifiant de la rubrique
