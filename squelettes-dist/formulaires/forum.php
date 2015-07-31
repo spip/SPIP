@@ -77,7 +77,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		
 	$script_hidden .= "<input type='hidden' name='arg' value='$arg' />";
 	$script_hidden .= "<input type='hidden' name='hash' value='$hash' />";
-	$script_hidden .= "<input type='hidden' name='verif_$hash' value='ok' />";
+	$script_hidden .= "<input type='hidden' name='verif_".substr($hash,0,32)."' value='ok' />";
 	$script_hidden .= "<input type='hidden' name='afficher_texte' value='$afficher_texte' />";
 	$script_hidden .= "<input type='hidden' name='retour_forum' value='$retour_forum' />";
 

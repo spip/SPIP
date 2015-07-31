@@ -247,7 +247,7 @@ function forum_insert_noprevisu()
 
 	// antispam : si le champ au nom aleatoire verif_$hash n'est pas 'ok'
 	// on meurt
-	if (_request('verif_'._request('hash')) != 'ok') {
+	if (_request('verif_'.substr(_request('hash'),0,32)) != 'ok') {
 			tracer_erreur_forum('champ verif manquant');
 			return true;
 	}
