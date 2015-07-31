@@ -68,10 +68,10 @@ function exec_admin_tech_dist()
    $dir_img = _DIR_IMG;
 
  echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
-   "<tr><td bgcolor='", $couleur_foncee, "'><b>",
+   "<tr><td style='background-color: ", $couleur_foncee, ";'><b>",
    "<span style='font-size: 16px; color: #FFFFFF;' class='verdana1'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
    generer_url_post_ecrire("export_all", "reinstall=non"),
-   "\n<p align='justify'>",
+   "\n<div><p style='text-align: justify;'>",
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
    _T('texte_admin_tech_01',
      array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
@@ -79,18 +79,18 @@ function exec_admin_tech_dist()
   "</p>";
 
 if ($flag_gz) {
-	echo "\n<p align='justify'>"._T('texte_admin_tech_03')."</p>\n<p>";
+	echo "\n<p style='text-align: justify;'>"._T('texte_admin_tech_03')."</p>\n<p>";
 	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> "._T('bouton_radio_sauvegarde_compressee',
 	array('fichier'=>'<b>'.$zfile.'</b>'))." </label><br />\n";
 	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> "._T('bouton_radio_sauvegarde_non_compressee',
 	array('fichier'=>'<b>'.$file.'</b>'))." </label><br /></p>\n";
 }
 else {
-	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.$file.'</b>'));
+	echo "\n<p style='text-align: justify;'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.$file.'</b>'));
 	echo "\n<input type='hidden' name='gz' value='0' />";
 }
 
-echo "\n<div align='right'><input class='fondo' type='submit' value='"._T('texte_sauvegarde_base')."' /></div></form>";
+echo "\n<div align='right'><input class='fondo' type='submit' value='"._T('texte_sauvegarde_base')."' /></div></div></form>";
 
 echo "</td></tr>";
 echo "</table>";
@@ -127,11 +127,11 @@ echo "</table>";
 	}
 
 	echo	"\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">",
-	"<tr><td bgcolor='#eeeecc'><b>",
+	"<tr><td style='background-color: #eeeecc;'><b>",
 	"<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_restaurer_base')."</span></b></td></tr>",
 	"<tr><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
-	"\n<p align='justify'> ",
+	"\n<p style='text-align: justify;'> ",
 	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')),
 	  '</p>',
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
@@ -165,11 +165,11 @@ if ($options == "avancees" AND 	$connect_toutes_rubriques) {
 	$res = spip_mysql_version();
 	if ($res >= '3.23.14') {
 		echo "<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
-		echo "<tr><td bgcolor='#eeeecc'><b>";
+		echo "<tr><td style='background-color: #eeeecc;'><b>";
 		echo "<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
 			"<tr><td class='serif'>",
 			generer_url_post_ecrire("admin_repair"),
-			"\n<p align='justify'>"._T('texte_crash_base'),
+			"\n<p style='text-align: justify;'>"._T('texte_crash_base'),
 			"\n</p><div align='right'><input class='fondo' type='submit' value='",
 		 	_T('bouton_tenter_recuperation'),
 			"' /></div></form>",

@@ -203,7 +203,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 
 // Corps de l'article
 
-echo "\n\n<div align='justify'>";
+echo "\n\n<div style='text-align: justify'>";
 
 if ($virtuel) {
 	debut_boite_info();

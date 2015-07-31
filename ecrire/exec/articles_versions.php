@@ -209,7 +209,7 @@ echo "</ul>\n";
 //
 
 if ($id_version) {
-	echo "\n\n<div align='justify'>";
+	echo "\n\n<div style='text-align: justify;'>";
 
 	// pour l'affichage du virtuel
 

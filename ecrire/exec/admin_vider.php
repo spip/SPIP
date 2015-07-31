@@ -91,8 +91,8 @@ if (!$connect_toutes_rubriques) {
 
 debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
 
-echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."</p>",
-	"<p align='justify'>"._T('texte_recalcul_page')."</p>";
+echo "\n<p style='text-align: justify;'>"._T('texte_suppression_fichiers')."</p>",
+	"<p style='text-align: justify;'>"._T('texte_recalcul_page')."</p>";
 
 echo "\n<div>&nbsp;</div>";
 
@@ -109,9 +109,9 @@ if ($cpt = $cpt['n']) {
 } else
 	$info = _T('taille_cache_vide');
 
-echo "<p align='justify'><b>$info</b></p>\n";
+echo "<p style='text-align: justify;'><b>$info</b></p>\n";
 
-echo "\n<p align='justify'>";
+echo "\n<p style='text-align: justify;'>";
 if ($quota_cache) {
 	echo _T('taille_cache_maxi',
 		array('octets' => taille_en_octets($quota_cache*1024*1024)));
@@ -151,7 +151,7 @@ fin_cadre_trait_couleur();
 //
 debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_donnees_indexation'));
 
-	echo "\n<p align='justify'>";
+	echo "\n<p style='text-align: justify;'>";
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui')
 		echo _T('texte_moteur_recherche_active');
 	else {
