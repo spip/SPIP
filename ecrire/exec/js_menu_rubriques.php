@@ -143,6 +143,29 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	return $ret;
 }
 
+
+function http_last_modified($lastmodified, $expire = 0) {
+	if (!$lastmodified) return false;
+	$headers_only = false;
+	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
+	{
+		$if_modified_since = preg_replace('/;.*/', '',
+			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
+		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+		if ($if_modified_since == $gmoddate) {
+			include_spip('inc/headers');
+			http_status(304);
+			$headers_only = true;
+		}
+	}
+	@Header ("Last-Modified: ".$gmoddate." GMT");
+	if ($expire) 
+		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $expire)." GMT");
+	return $headers_only;
+}
+
 function exec_js_menu_rubriques_dist()
 {
 	if (http_last_modified(@filemtime(__FILE__), time() + 24 * 3600)) 

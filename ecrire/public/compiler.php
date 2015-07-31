@@ -724,8 +724,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$code = "<"."?php
 /*
  * Squelette : $sourcefile
- * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
- * Compile :   ".http_gmoddate(time())." GMT ($secondes)
+ * Date :      ".gmdate("D, d M Y H:i:s", @filemtime($sourcefile))." GMT
+ * Compile :   ".gmdate("D, d M Y H:i:s", time())." GMT ($secondes)
  * " . (!$boucles ?  "Pas de boucle" :
 	("Boucles :   " . join (', ', array_keys($boucles)))) ."
  */ " .

@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion des inclusions et infos repertoires
 //
 
-# fonction obsolete, assurant la compatilibite ascendante
+# fonction obsolete, assurant la compatilibite ascendante. cf include_spip
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	if (!defined('_DIR_INCLUDE'))
@@ -76,7 +76,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 }
 
 //
-// une fonction remplacant include_ecrire, et autorisant les surcharges
+// une fonction cherchant un fichier dans une liste de repertoires
 //
 function include_spip($f, $include = true) {
 
@@ -376,14 +376,8 @@ function self($root = false) {
 }
 
 
-//
-// Gerer les valeurs meta
-//
-// Fonction lire_meta abandonnee, remplacee par son contenu. Ne plus utiliser
-function lire_meta($nom) {
-	global $meta;
-	return $meta[$nom];
-}
+// Fonction abandonnee. . Ne plus utiliser, remplacer par son contenu
+function lire_meta($nom) { global $meta; return $meta[$nom];}
 
 
 //
@@ -542,37 +536,6 @@ function cron ($gourmand=false) {
 			spip_cron();
 		}
 	}
-}
-
-
-//
-// Entetes les plus courants (voir inc_headers.php pour les autres)
-//
-
-function http_gmoddate($lastmodified) {
-	return gmdate("D, d M Y H:i:s", $lastmodified);
-}
-
-function http_last_modified($lastmodified, $expire = 0) {
-	if (!$lastmodified) return false;
-	$headers_only = false;
-	$gmoddate = http_gmoddate($lastmodified);
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
-	{
-		$if_modified_since = preg_replace('/;.*/', '',
-			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
-		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-		if ($if_modified_since == $gmoddate) {
-			include_spip('inc/headers');
-			http_status(304);
-			$headers_only = true;
-		}
-	}
-	@Header ("Last-Modified: ".$gmoddate." GMT");
-	if ($expire) 
-		@Header ("Expires: ".http_gmoddate($expire)." GMT");
-	return $headers_only;
 }
 
 // envoyer le navigateur sur une nouvelle adresse
