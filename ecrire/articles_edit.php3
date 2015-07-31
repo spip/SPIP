@@ -79,6 +79,16 @@ if ($id_document) {
 }
 
 
+$modif_document = $GLOBALS['modif_document'];
+if ($modif_document == 'oui' AND $flag_document_editable) {
+	$titre = addslashes(corriger_caracteres($titre));
+	$descriptif = addslashes(corriger_caracteres($descriptif));
+	mysql_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
+}
+		
+	
+
+
 //
 // Gestion des textes trop longs (limitation brouteurs)
 //
@@ -113,7 +123,7 @@ debut_gauche();
 // Pave "documents associes a l'article"
 //
 
-boite_documents_article($id_article);
+afficher_documents_colonne($id_article,"articles_edit.php3?id_article=$id_article");
 
 
 debut_droite();
