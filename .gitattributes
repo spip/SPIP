@@ -1,5 +1,4 @@
 * text=auto !eol
-IMG/logo_spip.jpg -text
 /INSTALL.txt -text
 /UPGRADE.txt -text
 dist/favicon.ico -text
@@ -238,6 +237,7 @@ ecrire/img_pack/langues-24.gif -text
 ecrire/img_pack/langues-modif-12.gif -text
 ecrire/img_pack/langues-off-12.gif -text
 ecrire/img_pack/logo-spip.gif -text
+ecrire/img_pack/logo_spip.jpg -text
 ecrire/img_pack/loupe-moins.gif -text
 ecrire/img_pack/loupe-plus.gif -text
 ecrire/img_pack/loupe.png -text
