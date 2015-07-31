@@ -262,7 +262,7 @@ function sql_repair($q, $serveur='') {
 // http://doc.spip.org/@sql_query
 function sql_query($ins, $serveur='') {
   	$f = sql_serveur('query', $serveur);
-	return $f($ins);
+	return $f($ins, $serveur);
 }
 
 # une composition tellement frequente...
