@@ -15,7 +15,7 @@
 // annonce au compilo les "champs" disponibles
 //
 function public_creer_boucle_ENUM_dist($b) {
-	$b->iterateur = 'IterENUM'; # designe la classe d'iterateur
+	$b->iterateur = 'ENUM'; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
 			'cle' => 'STRING',
