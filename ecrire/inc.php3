@@ -36,9 +36,12 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
-if ($set_lang AND ereg(",$set_lang,", ",$all_langs,")) {
-	$prefs['i18n'] = $set_lang;
-	$prefs_mod = true;
+if ($set_lang) {
+	include_ecrire("inc_lang.php3");
+	if (changer_langue($set_lang)) {
+		$prefs['spip_lang'] = $set_lang;
+		$prefs_mod = true;
+	}
 }
 if ($securite == 'normal' || $securite == 'strict') {
 	$prefs['securite'] = $securite;
@@ -69,8 +72,11 @@ $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 
 // fixer la langue
-if ($prefs['i18n'])
-	$i18n = $prefs['i18n'];
+if ($prefs['spip_lang']) {
+	include_ecrire("inc_lang.php3");
+	changer_langue($prefs['spip_lang']);
+}
+
 /*
 else if ... Nicolas, quel est l'entete http a verifier contre $all_langs ?
 

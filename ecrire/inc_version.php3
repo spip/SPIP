@@ -730,7 +730,6 @@ if (!defined("_ECRIRE_INC_META_CACHE")) {
 
 
 // Verifier la conformite d'une ou plusieurs adresses email
-
 function email_valide($adresse) {
 	$adresses = explode(',', $adresse);
 	if (is_array($adresses)) {
@@ -745,27 +744,16 @@ function email_valide($adresse) {
 }
 
 
-//
-// internationalisation (i18n)
-//
-
-// gettext
-function _T($text, $args=Array(), $lang='AUTO') {
-	include_ecrire('inc_gettext.php3');
-	if ($lang=='AUTO')
-		$lang = $GLOBALS['i18n'];
-
-	return spip_gettext($text, $args, $lang);
+// Traduction des textes de SPIP
+function _T($text, $args = '') {
+	include_ecrire('inc_lang.php3');
+	return traduire_chaine($text, $args);
 }
 
 // chaines en cours de traduction
 function _L($text) {
 	return "<div style='font-color:red;'>$text</div>";
 }
-
-// initialisation
-$i18n = lire_meta('langue_site');
-$all_langs = 'fr,zg';
 
 //
 // Enregistrement des evenements
