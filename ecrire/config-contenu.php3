@@ -590,14 +590,14 @@ debut_cadre_relief("site-24.gif");
 				choisir, site par site, de bloquer les liens &agrave; venir
 				de tel ou tel site.");
 			if (lire_meta("moderation_sites") == 'oui') {
-				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='syndic_on' CHECKED>";
+				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='mod_syndic_on' CHECKED>";
 				echo " <B><label for='mod_syndic_on'>Bloquer les liens a priori</label></B> ";
-				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='syndic_off'>";
+				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='mod_syndic_off'>";
 				echo " <label for='mod_syndic_off'>Ne pas bloquer</label> ";
 			} else {
-				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='syndic_on'>";
+				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='mod_syndic_on'>";
 				echo " <label for='mod_syndic_on'>Bloquer les liens a priori</label> ";
-				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='syndic_off' CHECKED>";
+				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='mod_syndic_off' CHECKED>";
 				echo " <B><label for='mod_syndic_off'>Ne pas bloquer</label></B> ";
 			}
 
