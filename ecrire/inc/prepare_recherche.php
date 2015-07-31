@@ -18,7 +18,7 @@ include_spip('inc/rechercher');
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 // http://doc.spip.org/@inc_prepare_recherche_dist
-function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_table='articles',$unused='', $cond=false) {
+function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
 
@@ -40,11 +40,12 @@ function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_tab
 			$cache[$recherche] = @unserialize($contenu);
 	}
 
+
 	// si on n'a pas encore traite les donnees dans une boucle precedente
-	if (!$cache[$recherche][$primary]) {
+	if (!$cache[$recherche][$table]) {
 
 		$tables = liste_des_champs();
-		$x = preg_replace(',s$,', '', $id_table);
+		$x = preg_replace(',s$,', '', $table); // eurk
 		if ($x == 'syndic') $x = 'site';
 		$points = recherche_en_base($recherche,
 			$x,
@@ -67,19 +68,20 @@ function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_tab
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
-			$cache[$recherche][$primary] = array("''", '0');
+			$cache[$recherche][$table] = array("''", '0');
 		} else {
 			$listes_ids = array();
 			$select = '0';
+			$primary = id_table_objet($table);
 			foreach ($points as $id => $p)
 				$listes_ids[$p['score']] .= ','.$id;
 			foreach ($listes_ids as $p => $liste_ids)
 				$select .= "+$p*(".
-					calcul_mysql_in("$id_table.$primary", substr($liste_ids, 1))
+					calcul_mysql_in("$table.$primary", substr($liste_ids, 1))
 					.") ";
 
-			$cache[$recherche][$primary] = array($select,
-				'('.calcul_mysql_in("$id_table.$primary",
+			$cache[$recherche][$table] = array($select,
+				'('.calcul_mysql_in("$table.$primary",
 					array_keys($points)).')'
 				);
 		}
@@ -90,7 +92,7 @@ function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_tab
 		nettoyer_petit_cache('rech', 300);
 	}
 
-	return $cache[$recherche][$primary];
+	return $cache[$recherche][$table];
 }
 
 

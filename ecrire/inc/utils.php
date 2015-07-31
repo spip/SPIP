@@ -567,6 +567,7 @@ function table_objet_sql($type) {
 
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type) {
+	$type = preg_replace(',^spip_|s$,', '', $type);
 	if ($type == 'site' OR $type == 'syndic')
 		return 'id_syndic';
 	else if ($type == 'forum')
