@@ -56,8 +56,7 @@ done
 # Et maintenant, changer la definition de la fonction pivot
 # et eliminer les sequelles de - en _
 
-grep -v "script = '/'"  inc_utils.php |
-grep -v "= include_rustine" |
+grep -v "= include_rustine" inc_utils.php |
 sed 's/$ext=.*"\?/$args = "?exec=$script" . ($args ? "\&$args/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/' > x
 mv x inc_utils.php
 
