@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
 'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
-'cache_modifiable_webmestre' => 'Ces param&egrave;tres sont modifiables par le webmestre du site.',
+'cache_modifiable_webmestre' => 'Ce param&egrave;tre est modifiable par le webmestre du site.',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 
 
@@ -386,6 +386,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_identification_publique' => 'Votre identit&eacute; publique...',
 'info_image_process' => 'Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
 'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Images calcul&eacute;es automatiquement',
 'info_informations_personnelles' => 'Cinqui&egrave;me &eacute;tape : <B>Informations personnelles</B>',
 'info_inscription_automatique' => 'Inscription automatique de nouveaux r&eacute;dacteurs',
 'info_jeu_caractere' => 'Jeu de caract&egrave;res du site',
@@ -759,6 +760,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // T
+'taille_cache_image' => 'Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
 'taille_cache_octets' => 'La taille du cache est actuellement de @octets@.',
