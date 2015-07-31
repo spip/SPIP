@@ -1145,9 +1145,25 @@ function autoriser_infosperso_dist($faire,$type,$id,$qui,$opt) {
 }
 
 /**
- * Autorisation de voir l'onglet configurerlangage
+ * Autorisation de voir le formulaire configurer_langage
  *
  * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_langage_configurer_dist($faire,$type,$id,$qui,$opt) {
+	return true;
+}
+
+/**
+ * Autorisation de voir l'onglet configurerlangage
+ *
+ * Calquée sur l'autorisation de voir le formulaire configurer_langage
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -1157,11 +1173,11 @@ function autoriser_infosperso_dist($faire,$type,$id,$qui,$opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_configurerlangage_dist($faire,$type,$id,$qui,$opt) {
-	return true;
+	return autoriser('configurer', '_langage', $id, $qui, $opt);
 }
 
 /**
- * Autorisation de voir l'onglet configurerpreferences
+ * Autorisation de voir le formulaire configurer_preferences
  *
  * Toujours OK
  * 
@@ -1172,8 +1188,24 @@ function autoriser_configurerlangage_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_preferences_configurer_dist($faire,$type,$id,$qui,$opt) {
 	return true;
+}
+
+/**
+ * Autorisation de voir l'onglet configurerpreferences
+ *
+ * Calquée sur l'autorisation de voir le formulaire configurer_preferences
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
+	return autoriser('configurer', '_preferences', $id, $qui, $opt);
 }
 
 /**
