@@ -124,10 +124,9 @@ function initialiser_sel() {
 }
 
 
-// Cette fonction ne sert plus que pour l'option "activer le htpasswd"
-// dont le reglage se fait depuis le plugin "acces restreint"
-// Toutefois elle reste ici par mesure de precaution/securite
-// pour les sites qui dependent de la production de ces fichiers.
+// Cette fonction ne sert qu'a la connexion en mode http_auth.non LDAP
+// Son role est de creer le fichier htpasswd
+// Voir le plugin "acces restreint"
 // http://doc.spip.org/@ecrire_acces
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
@@ -147,10 +146,11 @@ function ecrire_acces() {
 	# de devenir redacteur le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
 
-	$p1 = ''; // login:htpass pour tous
-	$p2 = ''; // login:htpass pour les admins
 	$s = sql_select("login, htpass, statut", "spip_auteurs", "statut IN  ('1comite','0minirezo','nouveau')");
 	$n = sql_count($s);
+	if (!$n OR $GLOBALS['ldap_present']) return;
+	$p1 = ''; // login:htpass pour tous
+	$p2 = ''; // login:htpass pour les admins
 	while ($t = sql_fetch($s)) {
 		$p1 .= $t['login'].':'.$t['htpass']."\n";
 		if ($t['statut'] == '0minirezo')

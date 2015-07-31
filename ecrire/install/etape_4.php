@@ -136,7 +136,7 @@ function autres_bases($adresse_db, $login_db, $pass_db, $server_db, $hidden)
 		  . "<ul>\n<li>"
 		  . join("</li>\n<li>",  $tables)
 		  . "</li>\n</ul>";
-	else $table ='';
+	else $tables ='';
 
 	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
 	.  _L("Toutefois, si vous avez une autre base de donn&eacute;es &agrave; interroger avec SPIP, sur ce serveur ou un autre, d&eacute;clarez-la d&egrave;s maintenant. Si vous laissez les champs ci-dessous vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
