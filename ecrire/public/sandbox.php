@@ -73,9 +73,13 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p){
 
 // Calculer un <INCLURE(xx.php)>
 // La constante ci-dessous donne le code general quand il s'agit d'un script.
-define('CODE_INCLURE_SCRIPT', 'if (($path = %s) AND is_readable($path)) {
-include $path;
-} else erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), array(%s));'
+define('CODE_INCLURE_SCRIPT', 'if (!($path = %s) OR !is_readable($path))
+	erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), array(%s));
+else {
+	$contexte_inclus = %s;
+	include $path;
+}
+'
 );
 
 /**
@@ -84,16 +88,17 @@ include $path;
  * @param string $fichier
  * @param Champ $p
  *     Balise créant l'inclusion
+ * @param array $_contexte
  * @return string
  */
-function sandbox_composer_inclure_php($fichier, &$p){
+function sandbox_composer_inclure_php($fichier, &$p, $_contexte){
 	$compil = texte_script(memoriser_contexte_compil($p));
 	// si inexistant, on essaiera a l'execution
 	if ($path = find_in_path($fichier))
 		$path = "\"$path\"";
 	else $path = "find_in_path(\"$fichier\")";
 
-	return sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
+	return sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil, $_contexte);
 }
 
 /**
