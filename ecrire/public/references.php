@@ -229,15 +229,18 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 // Inclusion du fichier associe a son nom, qui contient la fonction homonyme
 // donnant les arguments a chercher dans la pile, et qui sont donc compiles.
 // On leur adjoint les arguments explicites de la balise (cf #LOGIN{url})
+// et d'eventuelles valeurs transmises d'autorite par la balise.
+// (cf http://trac.rezo.net/trac/spip/ticket/1728)
 // La fonction nomme ci-dessous recevra a l'execution la valeur de tout ca.
 
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
+	array(%s),
 	\$GLOBALS['spip_lang'],
 	%s)");
 
 // http://doc.spip.org/@calculer_balise_dynamique
-function calculer_balise_dynamique($p, $nom, $l) {
+function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 
 	if (!balise_distante_interdite($p)) {
 		$p->code = "''";
@@ -254,6 +257,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
 		$collecte,
 		($collecte ? $param : substr($param,1)), # virer la virgule
+		join(',', $supp),
 		$p->ligne);
 
 	$p->interdire_scripts = false;
