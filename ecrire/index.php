@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fichier d'exécution de l'interface privée
+ *
+ * @package SPIP\Core\Chargement
+**/
+
+/** Drapeau indiquant que l'on est dans l'espace privé */
 define('_ESPACE_PRIVE', true);
 if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 

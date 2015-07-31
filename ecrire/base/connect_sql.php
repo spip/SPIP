@@ -10,12 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Utilitaires indispensables autour des serveurs SQL
+ *
+ * @package SPIP\Core\SQL
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/objets');
 
-//
-// Utilitaires indispensables autour des serveurs SQL
-//
+
 
 // API d'appel aux bases de donnees:
 // on charge le fichier config/$serveur ($serveur='connect' pour le principal)
@@ -342,8 +345,18 @@ function query_reinjecte_textes($query, $textes){
 	return $query;
 }
 
-// Pour compatibilite. Ne plus utiliser.
-// http://doc.spip.org/@spip_query
+
+/**
+ * Exécute une requête sur le serveur SQL
+ *
+ * @see sql_query()
+ * @deprecated  Pour compatibilité. Utiliser `sql_query()` ou l'API `sql_*`.
+ * @param string $query Texte de la requête
+ * @param string $serveur Nom du connecteur pour la base de données
+ * @return bool|mixed
+ *     - false si on ne peut pas exécuter la requête
+ *     - indéfini sinon.
+**/
 function spip_query($query, $serveur='') {
 	global $spip_sql_version;
 	$f = spip_connect_sql($spip_sql_version, 'query', $serveur, true);

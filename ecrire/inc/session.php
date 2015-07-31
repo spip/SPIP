@@ -88,11 +88,11 @@ function supprimer_sessions($id_auteur, $toutes=true, $actives=true) {
 }
 
 /**
- * Ajoute une session pour l'auteur decrit par un tableau issu d'un SELECT-SQL
- *
- * http://doc.spip.org/@ajouter_session
+ * Ajoute une session pour l'auteur décrit par un tableau issu d'un SELECT-SQL
  *
  * @param array $auteur
+ *     Description de la session de l'auteur. Peut contenir (par exemple)
+ *     les clés : id_auteur, nom, login, email, statut, lang, ...
  * @return bool|string
  */
 function ajouter_session($auteur) {

@@ -20,17 +20,30 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * charge un fichier perso ou, a defaut, standard
- * et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
- * ou de suffixe _dist
- * Peut etre appelee plusieurs fois, donc optimiser
+ * Cherche une fonction surchargeable et en retourne le nom exact,
+ * après avoir chargé le fichier la contenant si nécessaire.
+ * 
+ * Charge un fichier (suivant les chemins connus) et retourne si elle existe
+ * le nom de la fonction homonyme `$dir_$nom`, ou suffixé `$dir_$nom_dist`
+ * 
+ * Peut être appelé plusieurs fois, donc optimisé.
  *
- * http://doc.spip.org/@charger_fonction
- *
+ * @api
+ * @uses include_spip() Pour charger le fichier
+ * @example
+ *     ```
+ *     $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+ *     $envoyer_mail($email, $sujet, $texte);
+ *     ```
+ * 
  * @param string $nom
+ *     Nom de la fonction (et du fichier)
  * @param string $dossier
+ *     Nom du dossier conteneur
  * @param bool $continue
+ *     true pour ne pas râler si la fonction n'est pas trouvée
  * @return string
+ *     Nom de la fonction, ou false.
  */
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 	static $echecs = array();
@@ -511,15 +524,19 @@ function self($amp = '&amp;', $root = false) {
 	return $url;
 }
 
-// Indique si on est dans l'espace prive
-// http://doc.spip.org/@test_espace_prive
+ 
+/**
+ * Indique si on est dans l'espace prive
+ *
+ * @return bool
+ *     true si c'est le cas, false sinon.
+ */
 function test_espace_prive() {
 	return defined('_ESPACE_PRIVE') ? _ESPACE_PRIVE : false;
 }
 
 /**
- * Verifie la presence d'un plugin active, identifie par son prefix
- *
+ * Vérifie la présence d'un plugin actif, identifié par son préfixe
  *
  * @param string $plugin
  * @return bool
