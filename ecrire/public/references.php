@@ -198,13 +198,14 @@ function calculer_champ($p) {
 // http://doc.spip.org/@calculer_balise
 function calculer_balise($nom, $p) {
 
-	$f = charger_fonction($nom, 'balise', true);
+	// S'agit-t-il d'une balise_XXXX[_dist]() ?
+	if ($f = charger_fonction($nom, 'balise', true))
+		return $f($p);
 
-	if ($f) return $f($p);
+	// S'agit-t-il d'un modele ?
+	if (find_in_path('modeles/'.strtolower($nom).'.html'))
+		return balise_MODELE_dist($p);
 
- if(find_in_path('modeles/'.strtolower($nom).'.html'))
-  return balise_MODELE_dist($p);
- 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
 		$res = calculer_balise_logo($p);
@@ -217,10 +218,11 @@ function calculer_balise($nom, $p) {
 
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1])
+	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1]) {
+		$code = addslashes($p->fonctions[0][1]);
+		$p->code .= " . '$code'";
+	}
 
-	  {	$code = addslashes($p->fonctions[0][1]);
-		$p->code .= " . '$code'";}
 	// ne pas passer le filtre securite sur les id_xxx
 	if (strpos($nom, 'ID_') === 0)
 		$p->interdire_scripts = false;
