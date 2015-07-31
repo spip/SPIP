@@ -112,3 +112,14 @@ a:after {
 	display: none;
 }
 
+
+/*
+ *  Images typographiques (via image_typo)
+ */
+.image_typo {
+	display: none;
+}
+.texte_typo {
+	display: inline;
+}
+
