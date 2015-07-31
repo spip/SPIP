@@ -640,8 +640,13 @@ function charger_generer_url() {
 	else {
 		// fichier inc-urls ? (old style)
 		include_local(_DIR_RACINE."inc-urls", true)
-		// sinon fichier inc-urls-xxx
-		OR include_local(find_in_path('urls/'.$GLOBALS['type_urls'].'.php', _DIR_RESTREINT));
+		OR ((
+			$f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3')
+			// sinon fichier urls/xxx.php
+			OR
+			$f = find_in_path('urls/'.$GLOBALS['type_urls'].'.php',
+				_DIR_RESTREINT)
+		) AND include_local($f));
 	}
 }
 
