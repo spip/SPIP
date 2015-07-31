@@ -298,10 +298,19 @@ function echappe_retour($letexte, $les_echap, $source) {
 	return $letexte;
 }
 
-function couper($texte, $long) {
-	$texte2 = substr($texte, 0, $long * 2); /* heuristique pour prendre seulement le necessaire */
-	if (strlen($texte2) < strlen($texte)) $plus_petit = true;
-	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte2);
+function couper($texte, $taille=50) {
+	$texte = substr($texte, 0, 400 + 2*$taille); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
+
+	// supprimer les tags
+	$texte = supprimer_tags($texte);
+	$texte = trim(ereg_replace("[\n\r]"," ", $texte));
+	$texte .= "\n";	// marquer la fin
+
+	// travailler en accents charset
+	$texte = filtrer_entites($texte);
+
+	// supprimer les liens
+	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte);
 
 	// supprimer les notes
 	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
@@ -309,11 +318,32 @@ function couper($texte, $long) {
 	// supprimer les codes typos
 	$texte = ereg_replace("[{}]", "", $texte);
 
-	$texte2 = substr($texte, 0, $long);
-	$texte2 = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $texte2);
-	if ((strlen($texte2) + 3) < strlen($texte)) $plus_petit = true;
-	if ($plus_petit) $texte2 .= '&nbsp;(...)';
-	return $texte2;
+	// supprimer les tableaux
+	$texte = ereg_replace("(^|\n)\|.*\|\n", "", $texte);
+
+	// supprimer les traits, lignes etc
+	$texte = ereg_replace("(^|\n)-[-#\*]*", "", $texte);
+
+	// couper au mot precedent
+	$long = substr($texte, 0, max($taille-4,1));
+	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $long);
+	$points = '&nbsp;(...)';
+
+	// trop court ? ne pas faire de (...)
+	if (strlen($court) < max(0.75 * $taille,2)) {
+		$points = '';
+		$long = ereg_replace("&#?[a-z0-9]*;?$", "", substr($texte, 0, $taille));
+		$texte = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $long);
+		// encore trop court ? couper au caractere
+		if (strlen($texte) < 0.75 * $taille)
+			$texte = $long;
+	} else
+		$texte = $court;
+
+	if (strpos("\n", $texte))	// la fin est encore la : c'est qu'on n'a pas de texte de suite
+		$points = '';
+
+	return trim($texte).$points;
 }
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
@@ -328,7 +358,7 @@ function couper_intro($texte, $long) {
 	}
 
 	if ($intro)
-		$intro = $intro.' (...)';
+		$intro = $intro.'&nbsp;(...)';
 	else
 		$intro = couper($texte, $long);
 
