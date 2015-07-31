@@ -281,9 +281,10 @@ jQuery.fn.ajaxbloc = function() {
 
 	  var makeAjaxUrl = function(href){
 		  var url = href.split('#');
-			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
+			url[0] = parametre_url(url[0],'var_ajax',1);
+		  url[0] = parametre_url(url[0],'var_ajax_env',ajax_env);
 			if (url[1])
-				url[0] += "&var_ajax_ancre="+url[1];
+				url[0] = parametre_url(url[0],'var_ajax_ancre',url[1]);
 		  return url[0];
 	  }
 
@@ -369,6 +370,102 @@ jQuery.fn.ajaxbloc = function() {
 function ajaxReload(ajaxid, callback){
 	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload', [callback]);
 }
+
+/**
+ * Equivalent js de parametre_url php de spip
+ *
+ * Exemples :
+ * parametre_url(url,suite,18) (ajout)
+ * parametre_url(url,suite,'') (supprime)
+ * parametre_url(url,suite) (lit la valeur suite)
+ * parametre_url(url,suite[],1) (tableau valeux multiples)
+ * @param url
+ *   url
+ * @param c
+ *   champ
+ * @param v
+ *   valeur
+ * @param sep
+ *  separateur '&' par defaut
+ */
+function parametre_url(url,c,v,sep){
+	var p;
+	// lever l'#ancre
+	var ancre='';
+	var a='./';
+	var args=[];
+	p = url.indexOf('#');
+	if (p!=-1) {
+		ancre=url.substring(p);
+		url = url.substring(0,p);
+	}
+
+	// eclater
+	p=url.indexOf('?');
+	if (p!==-1){
+		// recuperer la base
+		if (p>0) a=url.substring(0,p);
+		args = url.substring(p+1).split('&');
+	}
+        else
+            a=url;
+	var regexp = new RegExp('^(' + c.replace('[]','\[\]') + '\[?\]?)(=.*)?$');
+	var ajouts = [];
+	var u = (typeof(v)!=='object')?encodeURIComponent(v):v;
+	var na = [];
+	// lire les variables et agir
+	for(var n=0;n<args.length;n++){
+		var val = args[n];
+		val = decodeURIComponent(val);
+		var r=val.match(regexp);
+		if (r && r.length){
+			if (v==null){
+				return (r.length>2)?r[2].substring(1):'';
+			}
+			// suppression
+			else if (!v.length) {
+			}
+			// Ajout. Pour une variable, remplacer au meme endroit,
+			// pour un tableau ce sera fait dans la prochaine boucle
+			else if (r[1].substring(-2) != '[]') {
+				na.push(r[1]+'='+u);
+				ajouts.push(r[1]);
+			}
+			else na.push(args[n]);
+		}
+		else
+			na.push(args[n]);
+	}
+
+	if (v==null) return v; // rien de trouve
+	// traiter les parametres pas encore trouves
+	if (v || v.length) {
+		ajouts = "="+ajouts.join("=")+"=";
+		var all=c.split('|');
+		for (n=0;n<all.length;n++){
+			if (ajouts.search("="+all[n]+"=")==-1){
+				if (typeof(v)!=='object'){
+				  na.push(all[n] +'='+ u);
+				}
+				else {
+					var id = ((all[n].substring(-2)=='[]')?all[n]:all[n]+"[]");
+					for(p=0;p<v.length;p++)
+						na.push(id +'='+ encodeURIComponent(v[p]));
+				}
+			}
+		}
+	}
+
+	// recomposer l'adresse
+	if (na.length){
+                if (!sep) sep='&';
+		a = a+"?"+na.join(sep);
+        }
+
+	return a + ancre;
+}
+
+
 
 // Ajaxer les formulaires qui le demandent, au demarrage
 
