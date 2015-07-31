@@ -37,7 +37,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		// qu'il faut changer d'invalideur a la prochaine lecture et donner
 		// un invalideur 't' dans 1 heure
 		// NB: cet invalideur connait aussi la taille du fichier
-		spip_log("cache" . $page['process_ins']);
+		#spip_log("cache" . $page['process_ins']);
 		if (@file_exists($chemin_cache)) {
 			$bedtime = time() + 3600;
 			$taille = @filesize($chemin_cache);
