@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // et arguments
 function filtrer($filtre) {
 	if ($f = $GLOBALS['spip_matrice'][$filtre])
-		include_local($f);
+		include_once($f);
 
 	$tous = func_get_args();
 	array_shift($tous); # enlever $filtre

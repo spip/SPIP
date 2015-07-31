@@ -546,7 +546,7 @@ function install_ldap5()
 
 	install_debut_html();
 
-	include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	include_once(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	include_ecrire('inc_meta');
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();

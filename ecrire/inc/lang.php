@@ -28,10 +28,9 @@ function chercher_module_lang($module, $lang = '') {
 }
 
 function charger_langue($lang, $module = 'spip') {
-
 	if ($fichier_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include_local($fichier_lang);
+		include_once($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// la langue par defaut du site -- et au pire sur le francais, qui
@@ -43,7 +42,7 @@ function charger_langue($lang, $module = 'spip') {
 
 		if ($fichier_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
-			include_local($fichier_lang);
+			include($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
 			#spip_log("module de langue : ${module}_$l.php");
@@ -136,7 +135,7 @@ function traduire_chaine($code, $args) {
 	}
 
 	// parcourir tous les modules jusqu'a ce qu'on trouve
-	while (list(,$module) = each ($modules)) {
+	foreach ($modules as $module) {
 		$var = "i18n_".$module."_".$spip_lang;
 		if (empty($GLOBALS[$var])) {
 			charger_langue($spip_lang, $module);
@@ -384,7 +383,7 @@ function repertoire_lang($module='spip', $lang='fr') {
 		return _DIR_LANG;
 
 	# regarder s'il existe une v.f. qq part
-	if ($f = include_spip('lang/'.$module.'_'.$lang));
+	if ($f = include_spip('lang/'.$module.'_'.$lang, false));
 		return dirname($f).'/';
 
 	# sinon, je ne sais trop pas quoi dire...
@@ -400,7 +399,6 @@ function init_langues() {
 
 	$all_langs = $GLOBALS['meta']['langues_proposees']
 		.$GLOBALS['meta']['langues_proposees2'];
-#	$langue_site = $GLOBALS['meta']['langue_site'];
 	$pile_langues = array();
 	$lang_typo = '';
 	$lang_dir = '';

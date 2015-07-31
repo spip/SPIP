@@ -342,9 +342,8 @@ function safehtml($t) {
 		return str_replace("\x00", '', $t);
 
 	if (!$test) {
-		define('XML_HTMLSAX3', _DIR_INCLUDE."safehtml/classes/");
-		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
-			include_local(XML_HTMLSAX3.'safehtml');
+		if ($f = include_spip('safehtml/classes/safehtml.php')) {
+			define('XML_HTMLSAX3', dirname($f).'/');
 			$process = new safehtml();
 		}
 		if ($process)

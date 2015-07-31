@@ -659,7 +659,8 @@ function maj_base() {
 
 	if ($version_installee < 1.603) {
 		// supprimer les fichiers deplaces
-		@unlink('inc_meta_cache' . _EXTENSION_PHP);
+		@unlink('inc_meta_cache.php');
+		@unlink('inc_meta_cache.php3');
 		@unlink('data/engines-list.ini');
 		maj_version (1.603);
 	}

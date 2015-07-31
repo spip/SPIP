@@ -140,7 +140,7 @@ if ($essai_login == "oui") {
 
 	// Essayer differentes methodes d'authentification
 	$auths = array('spip');
-	include_local(_FILE_CONNECT); // pour savoir si ldap est present 
+	spip_connect(); // pour savoir si ldap est present 
 	if ($ldap_present) $auths[] = 'ldap';
 	$ok = false;
 	foreach ($auths as $nom_auth) {

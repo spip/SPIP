@@ -159,8 +159,8 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 function determiner_cache(&$use_cache, $contexte, $fond) {
 
-	// pour tester si la base est dispo
-	include_local(_FILE_CONNECT);
+	// tester si la base est dispo
+	spip_connect();
 
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {

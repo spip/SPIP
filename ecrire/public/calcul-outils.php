@@ -144,11 +144,11 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 
 // elles sont traitees comme des inclusions
 function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
- return 
+	return
 		('<'.'?php 
 include_ecrire(\'inc_lang\');
 lang_select("'.$lang.'");
-include_local("'
+include_once("'
 		. $file
 		. '");
 inclure_balise_dynamique(balise_'
@@ -169,7 +169,7 @@ function argumenter_squelette($v) {
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
 function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
-	if (!include_spip('inc-' . strtolower($nom)))
+	if (!$file = include_spip('inc-' . strtolower($nom)))
 		die ("pas de balise dynamique pour #". strtolower($nom)." !");
 
 	// Y a-t-il une fonction de traitement filtres-arguments ?
@@ -181,7 +181,7 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 	if (!is_array($r))
 		return $r;
 	else
-	  return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
+		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
 }
 
 
