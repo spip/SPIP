@@ -692,14 +692,15 @@ function find_in_path ($file, $dirname='', $include=false) {
 
 
 // http://doc.spip.org/@find_all_in_path
-function find_all_in_path($dir,$pattern){
+function find_all_in_path($dir,$pattern, $recurs=false){
 	$liste_fichiers=array();
 	$maxfiles = 10000;
 
 	// Parcourir le chemin
-	foreach (creer_chemin() as $d)
-		if (@is_dir($f = $d.$dir)){
-			$liste = preg_files($d.$dir,$pattern,$maxfiles-count($liste_fichiers),false);
+	foreach (creer_chemin() as $d) {
+		$f = $d.$dir;
+		if (@is_dir($f)){
+			$liste = preg_files($f,$pattern,$maxfiles-count($liste_fichiers),$recurs);
 			foreach($liste as $chemin){
 				$nom = basename($chemin);
 				// ne prendre que les fichiers pas deja trouves
@@ -709,7 +710,7 @@ function find_all_in_path($dir,$pattern){
 					$liste_fichiers[$nom] = $chemin;
 			}
 		}
-
+	}
 	return $liste_fichiers;
 }
 
@@ -766,7 +767,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	include_spip('inc/lien');
 	if (!function_exists($f = 'generer_url_' . $entite)) {
 		if (!function_exists($f .= '_dist')) $f = '';
-	    }
+	}
 	if ($f) return $f($id, $args, $ancre);
 	// On a ete gentil mais la ....
 	spip_log("generer_url_entite: entite $entite ($f) inconnue $type");

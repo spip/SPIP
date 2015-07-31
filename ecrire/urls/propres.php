@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+define('URLS_PROPRES_EXEMPLE', 'Titre-de-l-article -Rubrique-');
+
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
 define('CONFIRMER_MODIFIER_URL', false);

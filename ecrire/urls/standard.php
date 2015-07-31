@@ -14,6 +14,9 @@
 ## type d'URLs obsolete
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+
+define('URLS_STANDARD_EXEMPLE', 'article.php3?id_article=12');
+
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 // http://doc.spip.org/@generer_url_article
