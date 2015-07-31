@@ -140,9 +140,13 @@ function inc_traduire_dist($ori, $lang) {
 		if (empty($GLOBALS[$var])) {
 			charger_langue($lang, $module);
 
-			// surcharge perso -- on cherche (lang/)local_xx.php ...
-			if (!isset($local['local_'.$lang]))
+			// surcharge perso
+			// -- on cherche (lang/)local_xx.php ...
+			if (!isset($local['local_'.$lang])) {
+				// redéfinir la langue en cours pour les surcharges (chercher_langue a pu le changer)
+				$GLOBALS['idx_lang']= $var;
 				$local['local_'.$lang] = chercher_module_lang('local', $lang);
+			}
 			if ($local['local_'.$lang])
 				surcharger_langue($local['local_'.$lang]);
 			// ... puis (lang/)local.php
