@@ -84,7 +84,7 @@
 							<label for='new_login'><:item_login:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
 							]<p class='explication'>(<:texte_plus_trois_car:>)</p>
-							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{login})]" />
+							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{new_login})]" />
 						]
 						[(#ENV{config}|table_valeur{edit_login}|non)
 							<label for='login'><:item_login:>

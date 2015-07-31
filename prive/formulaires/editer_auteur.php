@@ -9,6 +9,7 @@ include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le publi
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
+	$valeurs['new_login'] = $valeurs['login'];
 
 	return $valeurs;
 }
