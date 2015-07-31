@@ -100,48 +100,9 @@ function install_etape_4_dist()
 	$suite =  "\n<input type='hidden' name='etape' value='fin' />" 
 	  . bouton_suivant(_T('login_espace_prive'));
 
-	$adresse_db = defined('_INSTALL_HOST_DB')
-		? ''
-		: _request('adresse_db');
-
-	$login_db = defined('_INSTALL_USER_DB')
-		? ''
-		: _request('login_db');
-
-	$pass_db = defined('_INSTALL_PASS_DB')
-		? ''
-		: _request('pass_db');
-
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? ''
-		: _request('server_db');
-
-	$choix = defined('_INSTALL_NAME_DB')
-		? ''
-	  : ("\n<input type='hidden' name='sel_db' value='" . _request('sel_db') . "' />\n");
-
 	echo generer_form_ecrire('install', $suite);
 	echo info_progression_etape(4,'etape_','install/');
-	echo autres_bases($adresse_db, $login_db, $pass_db, $server_db, $choix);
 	echo install_fin_html();
 }
 
-function autres_bases($adresse_db, $login_db, $pass_db, $server_db, $hidden)
-{
-	$tables =  bases_referencees(_FILE_CONNECT_TMP);
-
-	if ($tables)
-		$tables = _L('Bases suppl&eacute;mentaires interrogeables:')
-		  . "<ul>\n<li>"
-		  . join("</li>\n<li>",  $tables)
-		  . "</li>\n</ul>";
-	else $tables ='';
-
-	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
-	  . $tables
-	.  _L("Si vous avez une autre base de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec ce serveur SQL ou avec un autre, d&eacute;clarez-la d&egrave;s maintenant. Si vous laissez les champs ci-dessous vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
-	  . '<div style="background-color: #eeeeee">'
-	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array(), $hidden, 'sup1')
-	  .  "</div></div>";
-}
 ?>

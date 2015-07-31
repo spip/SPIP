@@ -291,19 +291,24 @@ function barre_onglets_stat_depuis() {
 	return $onglets;
 }
 
+
 // http://doc.spip.org/@barre_onglets_administration
 function barre_onglets_administration() {
 
 	$onglets = array();
 	if (autoriser('sauvegarder')) {
 			$onglets['sauver']=
-			  new Bouton('base-24.gif', 'onglet_save_restaur_base',
+			  new Bouton('spip-pack-24.png', 'onglet_save_restaur_base',
 				generer_url_ecrire("admin_tech"));
 	}
 	if (autoriser('detruire')) {
 			$onglets['effacer']=
 			  new Bouton('supprimer.gif', 'onglet_affacer_base',
 				generer_url_ecrire("admin_effacer"));
+
+			$onglets['declarer']=
+			  new Bouton('base-24.gif', 'declarer_une_autre_base',
+				generer_url_ecrire("admin_declarer"));
 		}
 	return $onglets;
 }
@@ -380,17 +385,15 @@ function definir_barre_onglets($script) {
 
 // http://doc.spip.org/@barre_onglets
 function barre_onglets($rubrique, $ongletCourant){
-	$onglets= definir_barre_onglets($rubrique);
-	if(count($onglets)==0) return '';
 
-	$res = debut_onglet();
+	$res = '';
 
-	foreach($onglets as $exec => $onglet) {
+	foreach(definir_barre_onglets($rubrique) as $exec => $onglet) {
 		$url= $onglet->url ? $onglet->url : generer_url_ecrire($exec);
-		$res .= onglet(_T($onglet->libelle), $url,	$exec, $ongletCourant, $onglet->icone);
+		$res .= onglet(_T($onglet->libelle), $url, $exec, $ongletCourant, $onglet->icone);
 	}
-	$res .= fin_onglet();
-	return $res;
+
+	return  !$res ? '' : (debut_onglet() . $res . fin_onglet());
 }
 
 // http://doc.spip.org/@definir_barre_gadgets

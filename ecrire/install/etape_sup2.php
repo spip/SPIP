@@ -104,9 +104,8 @@ function install_etape_sup2_dist()
 		}
 	}
 
-	$res .= generer_form_ecrire('install',
-			"\n<input type='hidden' name='etape' value='4' />"
-			. (defined('_INSTALL_NAME_DB') ? ''
+	$res .= generer_form_ecrire('admin_declarer',
+			(defined('_INSTALL_NAME_DB') ? ''
 			   :  ("\n<input type='hidden' name='sel_db' value='"
 			       . $sel_db
 			       . "' />"))
