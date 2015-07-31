@@ -112,6 +112,10 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // revenant a l'envoyeur $script d'arguments $args.
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
+// Precise le charset de l'envoyeur avec la variable d'url var_ajaxcharset
+// qui sert aussi a index.php de savoir que la requete est en Ajax.
+// Attention, la redirection doit propager cette variable, 
+// i.e. la mettre dans la 2e URL, et avant l'ancre de celle ci.
 
 // http://doc.spip.org/@ajax_action_auteur
 function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
@@ -138,7 +142,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			return redirige_action_auteur($action,
 				$id,
 				$action,
-				"script=$script$args_ajax&var_ajaxcharset=utf-8",
+				"var_ajaxcharset=utf-8&script=$script$args_ajax",
 				$corps,
 				(" method='post'\nonsubmit="
 				 . declencheur_ajax('this', $ancre, $fct_ajax)));
@@ -161,7 +165,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
-			"script=$script$args_ajax&var_ajaxcharset=utf-8");
+			"var_ajaxcharset=utf-8&script=$script$args_ajax");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
 		return "<a href='$href'\nonclick="

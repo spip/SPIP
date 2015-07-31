@@ -213,7 +213,9 @@ function AjaxSqueezeNode(trig, noeud, f)
 	if (!f) f = function(r) { noeud.innerHTML = r;}
 
 	if (typeof(trig) == 'string') {
-		return !ajah('GET', trig+'&var_ajaxcharset=utf-8', null, f);
+		i = trig.split('?');
+		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
+		return !ajah('GET', trig, null, f);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {

@@ -2040,7 +2040,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</a></div></td>"
+			$retour .= "</div></a></td>"
 			. "\n<td class='cellule-h-lien'><a$lien class='cellule-h'>"
 			. $texte
 			. "</a></td></tr></table></a>\n";
