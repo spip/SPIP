@@ -305,8 +305,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_code_acces' => 'N’oubliez pas vos propres codes d’accès !',
 	'info_compatibilite_html' => 'Norme HTML à suivre',
 	'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@',
-	'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.',
-	'info_config_suivi' => 'Si cette adresse correspond à une mailing-list, vous pouvez indiquer ci-dessous l’adresse à laquelle les participants au site peuvent s’inscrire. Cette adresse peut être une URL (par exemple la page d’inscription à la liste par le Web), ou une adresse email dotée d’un sujet spécifique (par exemple : <tt>@adresse_suivi@ ?subject=subscribe</tt>) :',
+	'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considérablement certains serveurs.',
+	'info_config_suivi' => 'Si cette adresse correspond à une mailing-list, vous pouvez indiquer ci-dessous l’adresse à laquelle les participants au site peuvent s’inscrire. Cette adresse peut être une URL (par exemple la page d’inscription à la liste par le Web), ou une adresse email dotée d’un sujet spécifique (par exemple : <tt>@adresse_suivi@?subject=subscribe</tt>) :',
 	'info_config_suivi_explication' => 'Vous pouvez vous abonner à la mailing-list de ce site. Vous recevrez alors par courrier électronique les annonces d’articles et de brèves proposés à la publication.',
 	'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 	'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont été modifiés par ailleurs. Vos modifications sur ces champs n’ont donc pas été enregistrées.',
@@ -337,7 +337,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ecrire_article' => 'Avant de pouvoir écrire des articles, vous devez créer au moins une rubrique.',
 	'info_email_envoi' => 'Adresse email d’envoi (optionnel)',
 	'info_email_envoi_txt' => 'Indiquez ici l’adresse à utiliser pour envoyer les emails (à défaut, l’adresse destinataire sera utilisée comme adresse d’envoi) :',
-	'info_email_webmestre' => 'Adresse e-mail du webmestre',
+	'info_email_webmestre' => 'Adresse email du webmestre',
 	'info_entrer_code_alphabet' => 'Entrez le code de l’alphabet à utiliser :',
 	'info_envoi_email_automatique' => 'Envoi de mails automatique',
 	'info_envoyer_maintenant' => 'Envoyer maintenant',
@@ -439,13 +439,13 @@ exige d’avoir un accès FTP au site Web.</p>',
 	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés',
 	'info_nom_site' => 'Nom de votre site',
 	'info_nombre_articles' => '@nb_articles@ articles,',
-	'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION :',
+	'info_nombre_partcipants' => 'PARTICIPANTS À LA DISCUSSION :',
 	'info_nombre_rubriques' => '@nb_rubriques@ rubriques,',
 	'info_nombre_sites' => '@nb_sites@ sites,',
 	'info_non_deplacer' => 'Ne pas déplacer...',
 	'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP peut envoyer, régulièrement, l’annonce des dernières nouveautés du site
 		(articles et brèves récemment publiés).',
-	'info_non_envoi_liste_nouveautes' => 'Ne pas envoyer  la liste des nouveautés',
+	'info_non_envoi_liste_nouveautes' => 'Ne pas envoyer la liste des nouveautés',
 	'info_non_modifiable' => 'ne peut pas être modifié',
 	'info_non_suppression_mot_cle' => 'je ne veux pas supprimer ce mot-clé.',
 	'info_note_numero' => 'Note @numero@',
@@ -653,7 +653,7 @@ dans une couleur qui indique leur état :',
 	'item_non_compresseur' => 'Désactiver la compression',
 	'item_non_creer_fichiers_authent' => 'Ne pas créer ces fichiers',
 	'item_non_gerer_statistiques' => 'Ne pas gérer les statistiques',
-	'item_non_limiter_recherche' => 'Etendre la recherche au contenu des sites référencés',
+	'item_non_limiter_recherche' => 'Étendre la recherche au contenu des sites référencés',
 	'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda',
 	'item_non_publier_articles' => 'Ne pas publier les articles avant la date de publication fixée.',
 	'item_non_utiliser_moteur_recherche' => 'Ne pas utiliser le moteur',
@@ -740,7 +740,7 @@ dans une couleur qui indique leur état :',
 	'plugin_erreur_charger' => 'erreur : impossible de charger @zip@',
 	'plugin_erreur_droit1' => 'Le répertoire <code>@dest@</code> n’est pas accessible en écriture.',
 	'plugin_erreur_droit2' => 'Veuillez vérifier les droits sur ce répertoire (et le créer le cas échéant), ou installer les fichiers par FTP.',
-	'plugin_erreur_zip' => 'echec pclzip : erreur @status@',
+	'plugin_erreur_zip' => 'échec pclzip : erreur @status@',
 	'plugin_etat_developpement' => 'en développement',
 	'plugin_etat_experimental' => 'expérimental',
 	'plugin_etat_stable' => 'stable',
@@ -880,14 +880,10 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	'texte_effacer_statistiques' => 'Effacer les statistiques',
 	'texte_en_cours_validation' => 'Les contenus ci-dessous sont en attente de validation.',
 	'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».',
-	'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt>
-  et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b><p>
-  Ces fichiers peuvent vous servir à restreindre l’accès aux auteurs
-  et administrateurs en d’autres endroits de votre site
-  (programme externe de statistiques, par exemple).</p><p>
-  Si vous n’en avez pas utilité, vous pouvez laisser cette option
-  à sa valeur par défaut (pas de création
-  des fichiers).</p>',
+	'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux
+<tt>.htpasswd</tt> et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b>
+<p>Ces fichiers peuvent vous servir à restreindre l’accès aux auteurs et administrateurs en d’autres endroits de votre site (programme externe de statistiques, par exemple).</p>
+<p>Si vous n’en avez pas utilité, vous pouvez laisser cette option à sa valeur par défaut (pas de création des fichiers).</p>',
 	'texte_informations_personnelles_1' => 'Le système va maintenant vous créer un accès personnalisé au site.',
 	'texte_informations_personnelles_2' => '(Note : il s’agit d’une réinstallation, si votre accès marche toujours vous pouvez',
 	'texte_introductif_article' => '(Texte introductif de l’article.)',

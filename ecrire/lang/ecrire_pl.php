@@ -293,7 +293,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_compatibilite_html' => 'Norma HTML do zastosowania',
 	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Jeśli serwer nie kompresuje strony HTML przed wysłaniem, można próbować wymusić kompresję w celu zmniejszenia rozmiaru przesyłanych stron. Uwaga: to może mieć widoczny niekorzystny wpływ na działanie niektórych serwerów.',
-	'info_config_suivi' => 'Jeśli ten adres odpowiada liście subskrypcyjnej, możecie wpisać poniżej adres, za któego pomocą uczestnicy serwisu mogą się zapisać. Adres ten może być URL-em (np. stroną służącą do zapisywania się na listę przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@dany_adres@?subject=subscribe</tt>):',
+	'info_config_suivi' => 'Jeśli ten adres odpowiada liście subskrypcyjnej, możecie wpisać poniżej adres, za któego pomocą uczestnicy serwisu mogą się zapisać. Adres ten może być URL-em (np. stroną służącą do zapisywania się na listę przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Możesz automatycznie, za pomocą poczty elektronicznej otrzymywać ogłoszenia dotyczące aktywności redakcyjnej tego serwisu. W tym celu powinnieneś się zapisać na listę mailową.',
 	'info_confirmer_passe' => 'Potwierdź nowe hasło:',
 	'info_conflit_edition_avis_non_sauvegarde' => 'Uwaga: poniższe pola zostały zmodyfikowane w innym miejscu. Dlatego Twoje zmiany na tych polach nie zostały zapisane.',

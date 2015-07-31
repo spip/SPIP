@@ -67,7 +67,7 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 	</langue>
-	<langue code="fon" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fon" total="927" traduits="561" relire="0" modifs="42" nouveaux="324" pourcent="60.52">
+	<langue code="fon" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fon" total="927" traduits="560" relire="0" modifs="42" nouveaux="325" pourcent="60.41">
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr" total="927" traduits="927" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
