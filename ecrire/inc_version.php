@@ -239,12 +239,16 @@ $connect_statut = '';
 $hash_recherche = '';
 $hash_recherche_strict = '';
 
-// Fonction definissant les repertoires et fichiers non mutualisables. 
+// Fonction definissant les repertoires et fichiers non partageables
 // Elle indique dans $test_dirs ceux devant etre accessibles en ecriture
 // mais ne touche pas a cette variable si elle est deja definie
-// afin que mes_options.php puisse en specifier d'autres
+// afin que mes_options.php puisse en specifier d'autres.
 
 function spip_initialisation_parametree($dir1, $dir2) {
+
+	static $too_late = false;
+	if ($too_late) return;
+	$too_late = true;
 
 	define('_DIR_IMG', $dir1 ."IMG/");
 	define('_DIR_DOC', $dir1 ."IMG/");
@@ -304,7 +308,7 @@ if (defined('_FILE_OPTIONS')) {
 // 
 // mais cette fonction a peut-etre deja ete appelee par mes_options
 
-@spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
 
 //
 // Definitions standards (charge aussi inc/flock)
