@@ -838,7 +838,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_nouveau_message' => 'Missatge nou',
 'texte_nouveau_mot' => 'Nova paraula',
 'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versi&oacute; d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer <tt>inc_connect.php3</tt> del directori <tt>ecrire</tt> i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p />(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer <tt>inc_connect.php3</tt> abans de suprimir-lo...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer @connect@ i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p />(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer @connect@ abans de suprimir-lo...)',
 'texte_operation_echec' => 'Torneu a la p&agrave;gina anterior, seleccioneu una altra base o creeu-ne una de nova. Verifiqueu les dades donades pel vostre prove&iuml;dor d\'hostatge.',
 'texte_plus_trois_car' => 'm&eacute;s de 3 car&agrave;cters',
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',

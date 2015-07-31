@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semanas',
 'dirs_commencer' => 'Para come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar: <b>Configurar os direitos de acesso</b>',
-'dirs_probleme_droits' => 'Problema com os direitos de acesso',
+'dirs_probleme_droits' => 'Problema com as permiss&otilde;es de acesso',
 'dirs_repertoires_absents' => '<b>Os diret&oacute;rios a seguir n&atilde;o foram encontrados: <ul>@bad_dirs@.</ul> </b>
   <p />&Eacute; prov&aacute;vel que isto se deva a um problema de letras em mai&uacute;sculas e min&uacute;sculas.
 Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios coincidam exatamente com o que est&aacute; sendo exibido abaixo; se este n&atilde;o for o caso, renomeie os diret&oacute;rios com o seu programa de FTP de modo a corrigir o erro.
@@ -394,7 +394,7 @@ Obrigado por participar.
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
 'info_erreur_systeme2' => '&Eacute; poss&iacute;vel que n&atilde;o haja espa&ccedil;o livre em disco, ou que a base de dados esteja corrompida.<br>
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
- ou contate o servi&ccedil;o de hospedagem.</font>',
+ ou contate o seu servi&ccedil;o de hospedagem.</font>',
 'info_fini' => 'Terminou!',
 'info_format_image' => 'Formatos das imagens que podem ser utilizados para criar os &iacute;cones @gd_formats@.',
 'info_format_non_defini' => 'formato n&atilde;o definido',
@@ -406,7 +406,7 @@ Obrigado por participar.
 'info_inclusion_vignette' => 'Inclus&atilde;o do &iacute;cone:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o...',
 'info_installer_documents' => 'Voc&ecirc; pode instalar automaticamente todos os documentos cont&iacute;dos no diret&oacute;rio @upload@.',
-'info_installer_ftp' => 'Como administrador, voc&ecirc; pode transferir (por FTP) arquivos para o diret&oacute;rio @upload@ para depois selecion&aacute;-los aqui diretamente.',
+'info_installer_ftp' => 'Como administrador, voc&ecirc; pode transferir (por FTP) arquivos para o diret&oacute;rio @upload@ para, em seguida, selecion&aacute;-los aqui diretamente.',
 'info_installer_images' => 'Voc&ecirc; pode transferir imagens nos formatos JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Transferir as imagens para o diret&oacute;rio @upload@ para poder selecion&aacute;-las aqui.',
 'info_installer_tous_documents' => 'Instalar todos os documentos',
@@ -601,7 +601,7 @@ clique por favor no endere&ccedil;o a seguir:
 
     @sendcookie@
 
-Voc&Ecirc; poder&aacute; ent&atilde;o cadastrar uma nova senha
+Voc&ecirc; poder&aacute; ent&atilde;o cadastrar uma nova senha
 e reconectar-se com o site.
 
 ',

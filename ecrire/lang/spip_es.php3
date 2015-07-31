@@ -202,9 +202,9 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'form_forum_message_auto' => '(esto es un mensaje autom&aacute;tico)',
 'form_forum_pass' => 'contrase&ntilde;a:',
 'form_forum_probleme_mail' => 'Problema con el correo electr&oacute;nico: no se puede enviar el identificador.',
-'form_forum_voici1' => 'He aqu&iacute; tus identificadores para poder participar
+'form_forum_voici1' => 'Esta es tu identificaci&oacute;n para participar
 en los foros del sitio "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => 'He aqu&iacute; tus identificadores para proponer art&iacute;culos
+'form_forum_voici2' => 'Esta es tu identificaci&oacute;n para proponer art&iacute;culos
 en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indica tu direcci&oacute;n de correo electr&oacute;nico.',
 'form_indiquer_nom' => 'Indica tu nombre.',
@@ -399,8 +399,8 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_erreur_requete' => 'Error en la petici&oacute;n:',
 'info_erreur_squelette2' => 'No hay ning&uacute;n esqueleto <b>@fichier@</b>  disponible...',
 'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
-'info_erreur_systeme2' => 'El disco duro puede estar lleno o la base de datos da&ntilde;ada. <br>
- <font color=\'red\'>Prueba <a href=\'@script@\'>reparar la base</a>,
+'info_erreur_systeme2' => 'El disco duro puede estar lleno o la base de datos da&ntilde;ada.<br>
+ <font color=\'red\'>Intenta <a href=\'@script@\'>reparar la base</a>,
  o contacta tu hospedaje.</font>',
 'info_fini' => 'Terminado!',
 'info_format_image' => 'Formatos de imagen utilizables para los iconos  @gd_formats@.',
@@ -415,7 +415,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_installer_documents' => 'Puedes instalar autom&aacute;ticamente todos los documentos contenidos en el directorio @upload@.',
 'info_installer_ftp' => 'Con derechos de administraci&oacute;n, puedes instalar archivos (v&iacute;a FTP) en la carpeta @upload@ para luego poder seleccionarlos directamente aqu&iacute;.',
 'info_installer_images' => 'Puedes instalar im&aacute;genes de formato JPEG, GIF y PNG.',
-'info_installer_images_dossier' => 'Instalar  im&aacute;genes en la carpeta @upload@ para luego poder seleccionarlas directamente aqu&iacute;.',
+'info_installer_images_dossier' => 'Instalar im&aacute;genes en la carpeta @upload@ para luego poder seleccionarlas directamente aqu&iacute;.',
 'info_installer_tous_documents' => 'Instalar todos los documentos',
 'info_interface_complete' => 'Interfaz completa',
 'info_interface_simple' => 'Interfaz simple',
@@ -608,7 +608,9 @@ Ir a la siguiente direcci&oacute;n:
 
     @sendcookie@
 
-Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte al sitio.
+Ah&iacute; podr&aacute;s poner una nueva contrase&ntilde;a y
+volver a conectarte al sitio.
+
 ',
 'pass_mot_oublie' => 'Contrase&ntilde;a olvidada',
 'pass_nouveau_enregistre' => 'Tu nueva contrase&ntilde;a fue registrada.',
@@ -648,7 +650,7 @@ Debes intentar',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
 'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al o a la webmestre principal de tu sitio. </b>',
-'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>@fichier@</code>.Como administradorA del sitio, procede',
+'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>@fichier@</code>. Como administrador(a) del sitio, procede',
 'texte_inc_meta_2' => 'a verificar los derechos de escritura',
 'texte_inc_meta_3' => 'del directorio <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'En curso de redacci&oacute;n',
