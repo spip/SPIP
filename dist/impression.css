@@ -117,9 +117,13 @@ a:after {
  *  Images typographiques (via image_typo)
  */
 .image_typo {
-	display: none;
-}
-.texte_typo {
-	display: inline;
+	behavior: url("win_png.htc");
 }
 
+/*
+ * Boutons admin
+ */
+ 
+.spip-admin-float {
+	display: none;
+}

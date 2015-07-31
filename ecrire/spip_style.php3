@@ -107,7 +107,7 @@ select.fondl {
 
 
 .format_png {
-	behavior: url("win_png.htc");
+	behavior: url("<?php echo _DIR_PREFIX1; ?>win_png.htc");
 }
 
 
@@ -261,7 +261,7 @@ a.icone26:hover {
 }
 a.icone26 img {
 	vertical-align: middle;
-	behavior: url("win_png.htc");
+	behavior: url("<?php echo _DIR_PREFIX1; ?>win_png.htc");
 	background-color: <?php echo $couleur_foncee; ?>;
 }
 a.icone26:hover img {
@@ -367,7 +367,7 @@ a.icone26:hover img {
 
 
 .cellule48 a img {
-	behavior: url("win_png.htc");
+	behavior: url("<?php echo _DIR_PREFIX1; ?>win_png.htc");
 	display: inline;
 	margin: 4px;
 	padding: 0px;
