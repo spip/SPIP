@@ -140,8 +140,7 @@ function balise_URL_PAGE_dist($p) {
 	if ($args == NULL)
 		$args = "''";
 
-	if ($p->id_boucle
-	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
+	if ($s = trouver_nom_serveur_distant($p)) {
 
 		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
 			$p->code = "404";

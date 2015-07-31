@@ -283,6 +283,25 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 }
 
 
+
+// recuperer le nom du serveur,
+// mais pas si c'est un serveur specifique derogatoire
+// @param array $p, AST positionne sur la balise
+// @return string nom de la connexion
+function trouver_nom_serveur_distant($p) {
+	$nom = $p->id_boucle;
+	if ($nom
+		AND isset($p->boucles[$nom])) {
+		$s = $p->boucles[$nom]->sql_serveur;
+		if (strlen($s)
+			AND strlen($serveur = strtolower($s))
+			AND !in_array($serveur,$GLOBALS['exception_des_connect'])) {
+				return $s;
+		}
+	}
+	return "";
+}
+
 // il faudrait savoir traiter les formulaires en local
 // tout en appelant le serveur SQL distant.
 // En attendant, cette fonction permet de refuser une authentification
@@ -292,9 +311,7 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 
-	if ($nom 
-		AND $p->boucles[$nom]->sql_serveur
-		AND !in_array($p->boucles[$nom]->sql_serveur,$GLOBALS['exception_des_connect'])) {
+	if ($nom AND trouver_nom_serveur_distant($p)) {
 		spip_log( $nom .':' . $p->nom_champ .' '._T('zbug_distant_interdit'));
 		return false;
 	}
