@@ -264,7 +264,7 @@ function legender_auteur_voir($auteur, $redirect)
 		$clic = _T("admin_modifier_auteur");
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
 		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
-		  $evt .= "\nonclick=" . ajax_action_declencheur("\"$h\"",$ancre);
+		  $evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		  $h = "<a\nhref='$h$a'$evt>$clic</a>";
 		}
 	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
