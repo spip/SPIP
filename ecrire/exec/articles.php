@@ -194,14 +194,16 @@ if ($flag_editable) {
 // "Demander la publication"
 //
 
+
 if ($flag_auteur AND $statut_article == 'prepa') {
 	echo "<P>";
 	debut_cadre_relief();
 	echo	"<center>",
 		"<B>"._T('texte_proposer_publication')."</B>",
 		aide ("artprop"),
-		generer_url_post_ecrire("articles", "id_article=$id_article"),
-		"<input type='hidden' name='statut_nouv' value='prop' />\n",
+		"\n<form method='post' action='",
+		generer_action_auteur("instituer", "article $id_article prop", generer_url_ecrire('articles', "id_article=$id_article", true)),
+      "'>",
 		"<input type='submit' class='fondo' value=\"", 
 		_T('bouton_demande_publication'),
 		"\" />\n",
@@ -477,56 +479,6 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 meme_rubrique_articles($id_rubrique, $id_article, $options);
 
-}
-
-function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur)
-{
-	if ($statut_rubrique) $ok_nouveau_statut = true;
-	else if ($flag_auteur) {
-		if ($statut_nouv == 'prop' AND $statut_article == 'prepa')
-			$ok_nouveau_statut = true;
-		else if ($statut_nouv == 'prepa' AND $statut_article == 'poubelle')
-			$ok_nouveau_statut = true;
-	}
-	if ($ok_nouveau_statut) {
-		spip_query("UPDATE spip_articles SET date_modif=NOW(), statut='$statut_nouv' WHERE id_article=$id_article");
-
-		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article)
-			spip_query("UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article");
-
-		$ok_nouveau_statut =  ($statut_nouv != $statut_article);
-
-		// 'depublie' => invalider les caches
-		if ($ok_nouveau_statut AND $statut_article == 'publie') {
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='id_article/$id_article'");
-		}
-	}
-	return $ok_nouveau_statut ;
-}
-
-
-function cron_articles($id_article, $statut, $statut_ancien) {
-	calculer_rubriques();
-
-	if ($statut == 'publie') {
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('article', $id_article);
-		}
-		include_spip('inc/mail');
-		envoyer_mail_publication($id_article);
-	}
-
-	if ($statut_ancien == 'publie') {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_article/$id_article'");
-	}
-
-	if ($statut == "prop" AND $statut_ancien != 'publie') {
-		include_spip('inc/mail');
-		envoyer_mail_proposition($id_article);
-	}
 }
 
 function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='articles.date', $limit=30)
@@ -1369,7 +1321,9 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
   	
-    echo generer_url_post_ecrire("articles", "id_article=$id_article"),
+    echo "\n<form method='post' action='",
+      generer_action_auteur("instituer", "article $id_article", generer_url_ecrire('articles', "id_article=$id_article", true)),
+      "'>",
 	  debut_cadre_relief("", true),
       "\n<center>", "<B>",_T('texte_article_statut'),"</B>",
 	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
@@ -1386,16 +1340,15 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	  "</SELECT>",
 	  " &nbsp; ",
 	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
-	  "  &nbsp; ";
+	  "  &nbsp;\n";
 
-	// echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></noscript>";
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
 	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</span>";
-	echo aide ("artstatut");
+	echo aide("artstatut");
 	echo "</center>";
 	fin_cadre_relief();
-	echo "</form>";
+	echo "\n</form>";
  }
 }
 
@@ -1548,7 +1501,7 @@ function insert_article($id_parent, $new)
 
 function exec_articles_dist()
 {
-global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
+global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
  $id_parent = intval($id_parent);
  if (!($id_article=intval($id_article))) {
@@ -1577,17 +1530,7 @@ else {
 
 $flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 
-if (!$statut_nouv) {
-	$ok_nouveau_statut = false;
-	$flag_editable = ($statut_rubrique
-		OR ($flag_auteur
-			AND ($statut_article == 'prepa'
-				OR $statut_article == 'prop' 
-				OR $statut_article == 'poubelle')));
- } else {
-	$ok_nouveau_statut = comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur);
-	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_nouv == 'prepa' OR $statut_nouv == 'prop')));
-}
+ $flag_editable = ($statut_rubrique OR ($flag_auteur AND $flag_editable));
 
 if ($flag_editable) {
 
@@ -1650,11 +1593,5 @@ if ($titre) {
 
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
-// Taches lentes
-
-
-if ($ok_nouveau_statut) {
-  cron_articles($id_article, $statut_nouv, $statut_article);
 }
-    }    
 ?>
