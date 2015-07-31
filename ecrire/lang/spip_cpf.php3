@@ -1641,11 +1641,7 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>'
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)'
 
 );
 

@@ -1681,14 +1681,7 @@ a SPIP pesquisar igualmente no texto dos
 'trad_delier' => 'N&atilde;o mais ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
-'trad_reference' => '(artigo de refer&ecirc;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
-'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
-'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(artigo de refer&ecirc;ncia)'
 
 );
 
