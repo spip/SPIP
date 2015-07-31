@@ -17,7 +17,6 @@
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
-
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de l'article ]
@@ -40,7 +39,7 @@
 
 			<div class="surlignable">
   			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-  			<br class="nettoyeur" />
+  			
   			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
   			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
 			</div>

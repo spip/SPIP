@@ -43,6 +43,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /* Fil d'Ariane */
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; }
+#hierarchie a { text-decoration: none; }
 
 /* Pied de page */
 #pied { clear: both; width: 100%; margin-top: 4em; border-top: 1px dotted #CCC; padding: 2px; text-align: center; }
@@ -104,6 +105,7 @@ h2, h2 a { color: #fff; }
 .menu { margin-bottom: 2em; text-align: left; }
 #contenu .menu { font-size: 0.82em; }
 #navigation .menu { min-width: 10em; font-size: 0.77em; }
+#navigation .menu a { text-decoration: none; }
 
 .menu p { margin: .2em 0; padding: .2em .1em; }
 .menu ul { margin: 0; padding: 0; list-style: none; }
@@ -111,23 +113,19 @@ h2, h2 a { color: #fff; }
 .menu ul li ul { margin-left: 1em; }
 .menu ul li ul li { margin: 0; padding: 0; border: 0; }
 
-/*#navigation p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
-#navigation ul { margin: 0; padding: 0.2em 0; text-align: left; }
-#navigation li { margin: 0; padding: 0 0.7em; }*/
-
 .pagination { text-align: right; font-size: 0.90em; }
-.pagination a { color: #99CC66; }
+.pagination a { color: #99CC66; text-decoration: none; }
 .pagination .on { font-weight: bold; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul {}
 .articles li { margin-bottom: 1em; clear: both; }
-.articles li .titre { /*font-size: 1.03em;*/ font-weight: bold; }
+.articles li .titre { font-weight: bold; }
 .articles li .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; clear: right; }
 .articles li p { margin: 0; padding: 0; }
 .articles li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
-.articles li small { display: block; /*font-size: 0.71em;*/ }
-.articles li .introduction { margin-top: 5px; margin-bottom: 2em; /*font-size: 0.82em;*/ line-height: 1.4em; }
+.articles li small { display: block; }
+.articles li .introduction { margin-top: 5px; margin-bottom: 2em; line-height: 1.4em; }
 
 /* Portfolio */
 #documents_portfolio { clear: both; margin-top: 1.4em; padding-top: 2px; }
@@ -144,7 +142,6 @@ h2, h2 a { color: #fff; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-
 .formulaire_spip { text-align: left; font-size: 0.77em; }
 .formulaire_spip p { margin: 0.5em 0; padding: 0; }
 .formulaire_spip fieldset {}
@@ -208,7 +205,6 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Habillage des petitions
 ---------------------------------------------- */
-
 #signatures { clear: both; font-size: 0.77em; }
 #signatures h2 { padding: 0.5em; text-align: center; font-size: 1.2em; font-weight: bold; }
 #signatures table { width: 100%; margin: 1em 0; }
@@ -219,8 +215,19 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Couleurs des liens
 ---------------------------------------------- */
-a { text-decoration: none; color: #333; }
-a:hover { text-decoration: underline; }
+a { color: #900; }
+
+a.spip_note {} /* liens vers notes de bas de page */
+a.spip_in {} /* liens internes */
+a.spip_out {} /* liens sortants */
+a.spip_url {} /* liens url sortants */
+a.spip_glossaire {} /* liens vers encyclopedie */
+
+.spip_out, .spip_url, .spip_glossaire { padding-right: 12px; background: url(out.gif) no-repeat right; }
+
+.on { font-weight: bold; color: #000; } /* liens exposes */
+
+a:hover { text-decoration: underline; color: #C30; }
 
 /* menu langues */
 #menu_langues { vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px; }
