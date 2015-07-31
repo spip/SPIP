@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Entèdiksyon riv isit .',
 'avis_article_modifie' => 'Atansyon, @nom_auteur_modif@ te travaye sou atik-la  @date_diff@ minit pase',
 'avis_aucun_resultat' => 'Okenn rezilta.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Chemen w te chwazi prann',
 'avis_chemin_invalide_2' => 'li samn pa bon. Mèsi tounyen paj dèyè  pou verifye tout enfomasyon ki w te done.',
 'avis_connexion_echec_1' => 'Koneksyon sou sévè SQL te pa mache.', # MODIF
@@ -194,6 +195,8 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'entree_texte_breve' => 'Tèks pou tinouvèl-la',
 'entree_titre_obligatoire' => '<b>Kouman bagay la rele</b> [Nesesè]<br />',
 'entree_url' => 'Ladrès (URL) sit-w',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Oken fichye',
 'erreur_plugin_fichier_def_absent' => 'Oken fichye pou definisyon an',
@@ -323,6 +326,8 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_articles_2' => 'Atik yo',
 'info_articles_auteur' => 'Tout atik lotè-a ',
 'info_articles_lies_mot' => 'Atik yo ki te fin jwenn ak mokle-a ',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Atik yo ki te rannkont',
 'info_articles_trouves_dans_texte' => 'Atik yo ki te rannkont (nan tèks)',
 'info_attente_validation' => 'Atik w-a ki tann komandè konfime',
@@ -500,6 +505,7 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 pa mache mèm.<br />{{Fòk w instal ankò
   yon lot fwa tout fichye spip pli frè.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Kouman tout fowom piblik mache otomatikman',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Chanje tinouvèl-la :',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -584,6 +590,7 @@ ak yon limèl. W vle itilize opsyon nan ?', # MODIF
 'info_preview_comite' => 'Tout redakté kapab gad avan sit-la kom li te an liy',
 'info_preview_desactive' => 'Sistèm pou gad avan kom te an liy tout patisipasyon, l ap pa aktive ',
 'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouvèl sa-yo (yon ki lestati  « se pwopozé » omwen) te pibliyé an liy. Eske w vle bay posibilite a ouvè  pou tout komandè sèlman, oubyen tout rédaktè, ousinon pa okenn moun sa-mèm ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Ou gwoup kowespondan pli enpòtan',
 'info_procedez_par_etape' => 'avans etap pa etap',
 'info_procedure_maj_version' => 'fòk w koumans larnouvèlman labaz pou adapte labazdone
@@ -749,6 +756,7 @@ nan yon koulè ki bay lestati ali :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Lenstalasyon-an ka pétèt branlan, osnon pétèt li don yon sit ki pa kav mache...',
 'install_extension_mbstring' => 'SPIP ki pa mache ak :',
 'install_extension_php_obligatoire' => 'Fok SPIP li genyen léstansyon php :',
@@ -849,6 +857,7 @@ nan yon koulè ki bay lestati ali :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -974,6 +983,14 @@ nan yon koulè ki bay lestati ali :',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW
@@ -1239,6 +1256,7 @@ ou nan dékripsyon atik sa-yo
 'titre_cadre_forum_interne' => 'Fowom andedan',
 'titre_cadre_interieur_rubrique' => 'nan ribrik',
 'titre_cadre_numero_auteur' => 'LOTE NIMEWO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Siyati</b> [Nésesè]<br />', # MODIF
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

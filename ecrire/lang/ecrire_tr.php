@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Erişim yasak.',
 'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin üzerinde @date_diff@ dakika önce çalıştı',
 'avis_aucun_resultat' => 'Hiç sonuç yok.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Seçtiğiniz yol',
 'avis_chemin_invalide_2' => 'geçersiz gözüküyor. Verdiğiniz bilgileri kontrol etmek için lütfen bir önceki sayfaya dönün.',
 'avis_connexion_echec_1' => 'SQL veri tabanına bağlantı başarısız.',
@@ -185,6 +186,8 @@ sonradan yok edebilir).',
 'entree_texte_breve' => 'Kısa haber özeti',
 'entree_titre_obligatoire' => '<b>Başlık</b>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Dosya eksik',
 'erreur_plugin_fichier_def_absent' => 'Tanımlama dosyası eksik',
@@ -313,6 +316,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_articles_2' => 'Makaleler',
 'info_articles_auteur' => 'Bu yazarın makaleleri',
 'info_articles_lies_mot' => 'Bu anahtar sözcüğe bağlı makaleler',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Bulunan makaleler',
 'info_articles_trouves_dans_texte' => '(metin içerisinde) bulunan makeleler ',
 'info_attente_validation' => 'Onay bekleyen makaleleriniz',
@@ -488,6 +493,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
             veritabanınız kaybolabilir ve siteniz işlemez hale gelebilir.
             {{SPIP dosyalarını tekrar kurunuz.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Kamu forumlarının varsayılan çalışma kipi ',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Yazarı değiştir :',
 'info_modifier_breve' => 'Kısa haberi değiştir :',
 'info_modifier_mot' => 'Anahtar sözcüğü değiştir :',
@@ -572,6 +578,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_preview_comite' => 'Siteyi tüm yazarlar ön izleyebilir',
 'info_preview_desactive' => 'Önizleme kipi tamamen iptal edildi',
 'info_preview_texte' => 'Siteyi sanki (en azından « önerildi » statüsüne sahip) tüm makale ve haberler yayınlanmış gibi önizlemeye almak olanaklıdır. Bu olanak sadece yöneticilere mi, tüm yazarlara mı, açık olmalı yoksa hiç kimseye açık olmamalı mı ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Başlıca yazışmacılarınız',
 'info_procedez_par_etape' => 'Aşama aşama ilerleyiniz',
 'info_procedure_maj_version' => 'Veritabanını yeni SPIP sürümüne uyarlamak için
@@ -735,6 +742,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Barındırma firması tarafından atanmış veritabanının adresi',
 'install_base_ok' => '@base@ veri tabanı tanındı',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Kurulum büyük olasılıkla başarısız olacak veya site çalışmayacak...',
 'install_extension_mbstring' => 'SPIP belirtilen programla çalışamaz :',
 'install_extension_php_obligatoire' => 'SPIP için php uzantısı zorunludur :',
@@ -835,6 +843,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -960,6 +969,14 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugins_vue_hierarchie' => 'Hiyerarşi',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Protokol sürümü :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dizin :',
@@ -1161,6 +1178,7 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_cadre_forum_interne' => 'İç forum',
 'titre_cadre_interieur_rubrique' => 'Bölüm içinde',
 'titre_cadre_numero_auteur' => 'YAZAR NO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>İmza</b> [Zorunlu]<br />',
 'titre_compacter_script_css' => 'Skriptlerin ve CSSlerin sıkıştırılması',
 'titre_compresser_flux_http' => 'HTTP akısının sıkıştırılması',

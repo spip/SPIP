@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Sarrera Debekatua',
 'avis_article_modifie' => 'Adi egon,(@nom_auteur_modif@) lan honetan aritu zen orain dela (@date_diff@)minutu.',
 'avis_aucun_resultat' => 'Emaitzarik ez dago.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Aukeratutako bideak',
 'avis_chemin_invalide_2' => 'ez dirudi egokia. Itzul zaitez aurreko orrialdera eta egiazta itzazu sartutako informazioak.',
 'avis_connexion_echec_1' => 'SQL zerbitzariarekiko lokarriak huts egin du.',
@@ -183,6 +184,8 @@ Ez balidatu inportazio galdera hau.
 'entree_texte_breve' => 'Berri laburraren testua',
 'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 'entree_url' => 'Zure lekuaren (URL) helbidea',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fitxategia ez dago',
 'erreur_plugin_fichier_def_absent' => 'Definizio fitxategia ez dago',
@@ -307,6 +310,8 @@ Ez balidatu inportazio galdera hau.
 'info_articles_2' => 'Artikuluak',
 'info_articles_auteur' => 'Idazlari honen artikuluak',
 'info_articles_lies_mot' => 'Gako-hitz honi lotutako artikuluak',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Aurkitutako artikuluak',
 'info_articles_trouves_dans_texte' => '(Testuan)aurkitutako artikuluak',
 'info_attente_validation' => 'Egiaztapenaren zain dauden zureartikuluak',
@@ -472,6 +477,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_mise_a_niveau_base' => 'Zure SQL basearen eguneratzea',
 'info_mise_a_niveau_base_2' => '{{Kontuz!}} Lehendikgune honetan aurkitzen zen SPIP fitxategien {lehenagoko} bertsio bat instalatuduzu: zure datu-basea galdua izateko arriskuan dago eta zure guneak ez dugehiago funtzionatuko.{{SPIP fitxategiak berrinstalatu.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Foro publikoenfuntzionamendua',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Egilea aldatu :',
 'info_modifier_breve' => 'Berri laburra aldatu',
 'info_modifier_mot' => 'Gako-hitza aldatu :',
@@ -552,6 +558,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_preview_comite' => 'Idazlari guztiek tokia aurreikusten ahal dute',
 'info_preview_desactive' => 'Aurreikuspena guztiz desaktibatuta dago',
 'info_preview_texte' => 'Gunea artikulu eta berri labur guztiak (gutxienez« proposatua » statusa dutenak) argitaratuta egon balira bezala aurreikustea posible da. Posibilitate hau administratzaileentzat bakarrik, idazlari guztientzat, edo inorentzat egon behar da zabalik?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Zure korrespontsal printzipalak',
 'info_procedez_par_etape' => 'etapaz etapa jokatu',
 'info_procedure_maj_version' => 'Eguneratzeko prozedura bete egin behar da datu-basea SPIP-en bertsio berrira moldatzeko.',
@@ -712,6 +719,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Aterbetzaileak emandako datu-basearen helbidea',
 'install_base_ok' => '@base@ basea ezagutua izan da',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalazioak seguraski huts eginen du, edo martxan izanen ez den gune bat sortuko du...',
 'install_extension_mbstring' => 'SPIP ez da ibilki hunekin :',
 'install_extension_php_obligatoire' => 'SPIPek beharesten du php luzapena :',
@@ -812,6 +820,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -937,6 +946,14 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugins_vue_hierarchie' => 'Hierarkia',
 'plugins_vue_liste' => 'Zerrenda',
 'protocole_ldap' => 'Protokoloaren bersioa :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Direktorioa :',
@@ -1128,6 +1145,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_cadre_forum_interne' => 'Barneko foroa',
 'titre_cadre_interieur_rubrique' => 'Atalaren barnera',
 'titre_cadre_numero_auteur' => 'IDAZLEA',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => 'Izenpetzea [Derrigorrezkoa]',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Ou nana pwinn lapermisyon pou rant dann kwind sit-la.',
 'avis_article_modifie' => 'Tansyon pangar, @nom_auteur_modif@ la fin travayé lartik-la, néna  @date_diff@ minit pasé',
 'avis_aucun_resultat' => 'Néna pwinn rézilta.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Somin ou la swazi',
 'avis_chemin_invalide_2' => 'i sanm pa marsé. Ou pé artourn paz-déryèr èk vèy bann zinformasyon ou la doné.',
 'avis_connexion_echec_1' => 'Lakostaz-la sir servèr SQL la finn loupé.', # MODIF
@@ -219,6 +220,8 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'entree_texte_breve' => 'Lo tèks pou tit-nouvèl',
 'entree_titre_obligatoire' => '<b>Titr</b> [Nésésèr]<br />',
 'entree_url' => 'Ladrès (URL) out sitwèb',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Okin fisyé ',
 'erreur_plugin_fichier_def_absent' => 'Nena pa okinn fisyé po définisyon',
@@ -346,6 +349,8 @@ inn liv-zimaz (sédir inn galri).',
 'info_articles_2' => 'Bann zartik',
 'info_articles_auteur' => 'Bann zartik lotèr-la',
 'info_articles_lies_mot' => 'Bann zartik an gatiraz èk molaklé-la',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Bann zartik la finn dèt trouvé',
 'info_articles_trouves_dans_texte' => 'Bann zartik la finn dèt trouvé (dann lo tèks)',
 'info_attente_validation' => 'Out bann zartik sak i espèr lakonfirmasyon',
@@ -518,6 +523,7 @@ avan sir lo sit: out bazdodné i sava dégréné
  oubyinsa out siwèb minm i sava pli marsé<br />{{Lé néséser arinstal tout bann 
 fisyé SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Lo fonksionman otomatik (sanswa) pou bann forom-déor (piblik)',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Sanz la tit-nouvèl :',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -603,6 +609,7 @@ sanm inn limèl. Indik tèrla si ou vé anserv lopsyon-la ?', # MODIF
 'info_preview_comite' => 'Tout bann rédaktèr i pé vwar lo sit avan',
 'info_preview_desactive' => 'Manyir po vwar lo sit avan lé tout dégréné-la',
 'info_preview_texte' => 'Lé posib vwar lo sit avan komsi tout bann zartik èk bann tit-nouvèl (sat néna omwin lo statu « pou pibliyé ») zot sré astèr an liny. Ou pé swazi si lé sèlman po komandèr, po rédaktèr ou si lé pa posib ni po lin ni po lot. ',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Out méyèr dalon po koresponn',
 'info_procedez_par_etape' => 'azi étap sanm étap',
 'info_procedure_maj_version' => 'Lé nésésèr fé zwé arnouvèlman la bazdodné pou giny roul ron la nouvèl
@@ -764,6 +771,7 @@ sanm in koulèr i présiz son léta :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalasyon-la li pè sirman dègrn ali ou sar don ou in sit sat lé pa kav roulé...',
 'install_extension_mbstring' => 'SPIP  li roul pa èk :',
 'install_extension_php_obligatoire' => 'SPIP li domann léstansyon php :',
@@ -864,6 +872,7 @@ sanm in koulèr i présiz son léta :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -989,6 +998,14 @@ sanm in koulèr i présiz son léta :',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertwar :',
@@ -1212,6 +1229,7 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_cadre_forum_interne' => 'Forom dodan',
 'titre_cadre_interieur_rubrique' => 'Dann rubrik',
 'titre_cadre_numero_auteur' => 'LOTÈR NIMÉRO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Sinyatir</b> [Obligatwar]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

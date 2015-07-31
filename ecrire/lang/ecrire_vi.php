@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Quý vị không có quyền vào đây.',
 'avis_article_modifie' => 'Coi chừng, @nom_auteur_modif@ vừa sửa bài này cách đây @date_diff@ phút',
 'avis_aucun_resultat' => 'Không có kết quả.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Hướng đi mà bạn đã chọn',
 'avis_chemin_invalide_2' => 'dường như không đúng. Xin vui lòng trở lại trang trước và xem lại các dữ kiện cung cấp.',
 'avis_connexion_echec_1' => 'Không nối vào SQL được.', # MODIF
@@ -183,6 +184,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'entree_texte_breve' => 'Nội dung tin ngắn',
 'entree_titre_obligatoire' => '<b>Tựa đề</b> [Bắt buộc]<br />',
 'entree_url' => 'Địa chỉ website của bạn',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'File missing', # NEW
 'erreur_plugin_fichier_def_absent' => 'Definition file missing', # NEW
@@ -307,6 +310,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_articles_2' => 'Bài',
 'info_articles_auteur' => 'Bài của tác giả này',
 'info_articles_lies_mot' => 'Những bài liên hệ đến từ then chốt này',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Những bài tìm thấy',
 'info_articles_trouves_dans_texte' => 'Những bài tìm thấy (trong văn bản)',
 'info_attente_validation' => 'Bài vở của bạn đang chờ thông qua',
@@ -470,6 +475,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_mise_a_niveau_base' => 'Nâng cấp database SQL',
 'info_mise_a_niveau_base_2' => '{{Cảnh báo!}}Bạn vừa thiết trí một ấn bản SPIP cũ hơn ấn bản thiết trí trước đây: database của bạn có thể gặp rủi ro mất mát và webiste không hoạt động đúng nữa.{{Tái thiết trí các hồ sơ SPIP.}} ',
 'info_mode_fonctionnement_defaut_forum_public' => 'Cách thức điều hành định sẵn của diễn đàn công',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Sửa đổi tin ngắn:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -551,6 +557,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_preview_comite' => 'Tất cả tác giả có thể dùng dạng xem trước.',
 'info_preview_desactive' => 'Dạng xem trước chưa mở lên',
 'info_preview_texte' => 'Bạn có thể xem trước trang web mà các bài vở, tin ngắn (với tình trạng "được đăng") trong đó như đã được cho đăng lên chính thức. Dạng xem trước này chỉ nên giới hạn cho quản trị viên, cho tất cả các tác giả, hay hoàn toàn tắt nó đi ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Những người liên lạc chính',
 'info_procedez_par_etape' => 'Xin tiếp diễn từng bước một',
 'info_procedure_maj_version' => 'Quy trình nâng cấp cần được chạy để database thích ứng với ấn bản SPIP mới.',
@@ -706,6 +713,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Phần cài đặt này có thể gặp trở ngại, hoặc khiến website hoạt động không hoàn chỉnh...',
 'install_extension_mbstring' => 'SPIP không hoạt động với:',
 'install_extension_php_obligatoire' => 'SPIP cần một bộ phận php:',
@@ -806,6 +814,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -931,6 +940,14 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Protocol version:', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directory:', # NEW
@@ -1127,6 +1144,7 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_cadre_forum_interne' => 'Diễn đàn nội bộ',
 'titre_cadre_interieur_rubrique' => 'Trong đề mục',
 'titre_cadre_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Danh tánh</b> [Bắt buộc]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

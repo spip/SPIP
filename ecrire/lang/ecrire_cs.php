@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Přístup zakázán.',
 'avis_article_modifie' => 'Varování: Na tomto článku pracoval před @date_diff@ minutou/minutami @nom_auteur_modif@.',
 'avis_aucun_resultat' => 'Nenalezeny žádné výsledky.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Zvolili jste cestu',
 'avis_chemin_invalide_2' => 'nejspíš neplatnou. Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 'avis_connexion_echec_1' => 'Spojení k serveru SQL selhalo.', # MODIF
@@ -192,6 +193,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text novinky',
 'entree_titre_obligatoire' => '<b>Titul</b> [povinný údaj]<br />', # MODIF
 'entree_url' => 'Adresa (URL) vašeho webu',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Soubor chybí',
 'erreur_plugin_fichier_def_absent' => 'Chybí definiční soubor',
@@ -321,6 +324,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Články',
 'info_articles_auteur' => 'Články tohoto autora',
 'info_articles_lies_mot' => 'Články spojené s tímto klíčovým slovem',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Nalezené články',
 'info_articles_trouves_dans_texte' => 'Nalezené články (v textu)',
 'info_attente_validation' => 'Vaše články čekající na schválení',
@@ -502,6 +507,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
              <br />{{Nainstalujte znovu
   soubor systému SPIP.}}', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardní režim veřejných diskusních skupin',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Edit author details:', # NEW
 'info_modifier_breve' => 'Změnit novinku:',
 'info_modifier_mot' => 'Edit the keyword:', # NEW
@@ -585,6 +591,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_preview_comite' => 'Náhled webu je přístupný všem redaktorům',
 'info_preview_desactive' => 'Náhledy jsou zcela vypnuty',
 'info_preview_texte' => 'Náhled umožňuje zobrazit web tak, jakoby všechny články a novinky (minimálně ve stavu "předloženo") byly zveřejněny. Chcete náhled povolit jen správcům, všem redaktorům nebo jej nechcete povolit nikomu?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Vaši hlavní korespondenti',
 'info_procedez_par_etape' => 'postupujte krok za krokem',
 'info_procedure_maj_version' => 'pro úpravu nové verze systému SPIP je třeba spustit aktualizaci
@@ -750,6 +757,7 @@ ukazuje jejich stav:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
 'install_base_ok' => 'The base @base@ was identified', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalace se nejspíš nezdaří, resp. jejím výsledkem bude nefunkční web...',
 'install_extension_mbstring' => 'Systém SPIP nefunguje s:',
 'install_extension_php_obligatoire' => 'Systém SPIP vyžaduje rozšíření php:',
@@ -850,6 +858,7 @@ ukazuje jejich stav:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -975,6 +984,14 @@ ukazuje jejich stav:',
 'plugins_vue_hierarchie' => 'Hierarchy', # NEW
 'plugins_vue_liste' => 'List', # NEW
 'protocole_ldap' => 'Protocol version:', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Adresář:',
@@ -1225,6 +1242,7 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_cadre_forum_interne' => 'Interní diskusní skupina',
 'titre_cadre_interieur_rubrique' => 'V rámci sekce',
 'titre_cadre_numero_auteur' => 'ČÍSLO AUTORA',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinný údaj]<br />', # MODIF
 'titre_compacter_script_css' => 'Compression of scripts and CSS', # NEW
 'titre_compresser_flux_http' => 'Compression of HTTP data', # NEW

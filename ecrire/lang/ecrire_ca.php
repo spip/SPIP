@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accès prohibit',
 'avis_article_modifie' => 'Atenció, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',
 'avis_aucun_resultat' => 'Cap resultat',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'El camí que heu triat',
 'avis_chemin_invalide_2' => 'no sembla pas vàlid. Voleu tornar a la pàgina precedent i constrastar les informacions donades.',
 'avis_connexion_echec_1' => 'La connexió a la base de dades ha fracassat.',
@@ -186,6 +187,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'entree_texte_breve' => 'Text de la breu',
 'entree_titre_obligatoire' => '<b>Títol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adreça (URL) del vostre lloc',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
 'erreur_plugin_fichier_absent' => 'Fitxer absent',
 'erreur_plugin_fichier_def_absent' => 'Fitxer de definició absent',
@@ -311,6 +314,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'Articles d\'aquest autor',
 'info_articles_lies_mot' => 'Articles lligats a aquesta paraula clau',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (en el text)',
 'info_attente_validation' => 'Els vostres articles en espera de validació',
@@ -481,6 +486,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_mise_a_niveau_base' => 'actualització de la vostra base de dades SQL',
 'info_mise_a_niveau_base_2' => '{{Atenció!}} Heu instal·lat una versió dels fitxers d\'SPIP {anterior} a la que hi havia anteriorment en aquest lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br />{{Torneu a instal·lar els fitxers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de funcionament per defecte dels fòrums públics',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar l\'autor:',
 'info_modifier_breve' => 'Modificar la breu:',
 'info_modifier_mot' => 'Modificar la paraula clau:',
@@ -563,6 +569,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_preview_comite' => 'Tots els redactors poden previsualitzar el lloc web',
 'info_preview_desactive' => 'La previsualització està totalment desactivada',
 'info_preview_texte' => 'És possible previsualitzar el lloc com si tots els articles i breus (que almenys tinguen l\'estat de "proposats") estigueren publicats. Aquesta possibilitat ha d\'estar oberta només als administradors, a tots els redactors, o a ningú?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Els vostres principals corresponsals',
 'info_procedez_par_etape' => 'procediu pas per pas',
 'info_procedure_maj_version' => 'El procés d\'actualització s\'ha de tornar a arrancar per tal d\'adaptar la base de dades a la nova versió d\'SPIP.',
@@ -721,6 +728,7 @@ amb un color que indica el seu estat:',
 'info_webmestre_forces' => 'Els administradors estan definits a <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Adreça de la base de dades donada per l\'hostatjador',
 'install_base_ok' => 'La base @base@ ha estat reconeguda',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'La instal·lació probablement fracassarà, o anirà a parar a un lloc no funcional...',
 'install_extension_mbstring' => 'SPIP no funciona amb :',
 'install_extension_php_obligatoire' => 'SPIP exigeix l\'extensió php :',
@@ -821,6 +829,7 @@ amb un color que indica el seu estat:',
 'label_bando_outils_afficher' => 'Mostrar les eines',
 'label_bando_outils_masquer' => 'Amagar les eines',
 'label_choix_langue' => 'Seleccioneu la vostra llengua',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Eslògan del lloc',
 'label_taille_ecran' => 'Amplada de la pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegació',
@@ -946,6 +955,14 @@ amb un color que indica el seu estat:',
 'plugins_vue_hierarchie' => 'Jerarquia',
 'plugins_vue_liste' => 'Llista',
 'protocole_ldap' => 'Versió del protocol:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directori:',
@@ -1157,6 +1174,7 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'titre_cadre_forum_interne' => 'Fòrum intern',
 'titre_cadre_interieur_rubrique' => 'A l\'interior de la secció',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligatòria]<br />',
 'titre_compacter_script_css' => 'Compressió dels scripts i el CSS',
 'titre_compresser_flux_http' => 'Compressió del flux HTTP',

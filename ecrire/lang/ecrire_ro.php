@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accesul interzis.',
 'avis_article_modifie' => 'Atenţie, @nom_auteur_modif@ a lucrat la acest articol în urmă cu @date_diff@ minute',
 'avis_aucun_resultat' => 'Fără rezultat.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Calea pe care aţi ales-o',
 'avis_chemin_invalide_2' => ' nu pare a fi valabilă. Vă rugăm să reveniţi la pagina anterioară pentru a verifica informaţiile furnizate.',
 'avis_connexion_echec_1' => 'Conexiunea la baza de date a eşuat.',
@@ -181,6 +182,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Textul ştirii',
 'entree_titre_obligatoire' => '<b>Titlu</b> [Obligatoriu]<br />',
 'entree_url' => 'Adresa (URL) site-ului dumneavoastră',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fişier lipsă',
 'erreur_plugin_fichier_def_absent' => 'Fişier de definiţii lipsă',
@@ -307,6 +310,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Articole',
 'info_articles_auteur' => 'Articole de acelaşi autor',
 'info_articles_lies_mot' => 'Articole legate de acest cuvânt-cheie',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articole găsite',
 'info_articles_trouves_dans_texte' => 'Articole găsite (în text)',
 'info_attente_validation' => 'Articolele dumneavoastră în curs de validare',
@@ -480,6 +485,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   pierdută şi site-ul dumneavoastră nu va mai funcţiona.
 {{Reinstalaţi fişierele originale SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modul implicit de funcţionare a forum-urilor publice',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificaţi autorul :',
 'info_modifier_breve' => 'Modificaţi ştirea:',
 'info_modifier_mot' => 'Modificaţi cuvântul-cheie :',
@@ -563,6 +569,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Toţi redactorii pot previzualiza site-ul',
 'info_preview_desactive' => 'Previzualizarea este complet dezactivată',
 'info_preview_texte' => 'Este posibilă previzualizarea site-ului ca şi cum toate articolele şi ştirile (care au cel puţin starea « propus ») ar fi fost deja publicate. Această posibilitate trebuie să fie disponibilă doar pentru administratori, la toţi redactorii, sau nimănui ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Corespondenţii dumneavoastră principali',
 'info_procedez_par_etape' => 'procedaţi etapă cu etapă',
 'info_procedure_maj_version' => 'procedura de aducere la zi trebuie lansată pentru a adapta
@@ -729,6 +736,7 @@ cu o culoare care le indică starea :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresa bazei de date furnizată de provider',
 'install_base_ok' => 'Baza @base@ fost recunoscută',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalarea va eşua probabil sau va conduce la un site nefuncţional...',
 'install_extension_mbstring' => 'SPIP nu foncţionează cu :',
 'install_extension_php_obligatoire' => 'SPIP are nevoie de extensia php :',
@@ -829,6 +837,7 @@ cu o culoare care le indică starea :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -954,6 +963,14 @@ cu o culoare care le indică starea :',
 'plugins_vue_hierarchie' => 'Ierarhie',
 'plugins_vue_liste' => 'Listă',
 'protocole_ldap' => 'Versiunea protocolului :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Director :',
@@ -1188,6 +1205,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_cadre_forum_interne' => 'Forum intern',
 'titre_cadre_interieur_rubrique' => 'În interiorul rubricii',
 'titre_cadre_numero_auteur' => 'AUTOR NUMĂRUL',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Semnătura</b> [Obligatorie]
 ',
 'titre_compacter_script_css' => 'Compactarea script-urilor şi a CSS-urlor',

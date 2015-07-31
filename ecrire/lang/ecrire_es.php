@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabajó en este artículo hace @date_diff@ minutos.',
 'avis_aucun_resultat' => 'Ningún resultado.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'El camino escogido',
 'avis_chemin_invalide_2' => 'no parece válido. Regresa a la página precedente y comprueba las informaciones procuradas.',
 'avis_connexion_echec_1' => 'Falló la conexión con la base de datos',
@@ -183,6 +184,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto de la breve',
 'entree_titre_obligatoire' => '<b>Título</b> [Obligatorio]<br />',
 'entree_url' => 'La dirección (URL) de tu sitio',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La desinstalación del plugin fracasó.No obstante, puedes desactivarlo.',
 'erreur_plugin_fichier_absent' => 'Archivo inexistente ',
 'erreur_plugin_fichier_def_absent' => 'Archivo de definición inexistente',
@@ -307,6 +310,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artículos',
 'info_articles_auteur' => 'Los artículos de esta autora o autor',
 'info_articles_lies_mot' => 'Los artículos ligados a esta palabra clave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artículos localizados',
 'info_articles_trouves_dans_texte' => 'Artículos encontrados (en el texto)',
 'info_attente_validation' => 'Tus artículos en espera de validación',
@@ -471,6 +476,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_mise_a_niveau_base' => 'actualización de tu base SQL',
 'info_mise_a_niveau_base_2' => '{{¡ATENCIÓN!}} Has instalado una versión de los archivos SPIP {anterior} a la que se encontraba antes en este sitio: Corres el riesgo de perder la base de datos y que el sitio deje de funcionar.<br />{{Vuelve a instalar los archivos de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamiento de los foros públicos',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar el autor:',
 'info_modifier_breve' => 'Modificar la breve',
 'info_modifier_mot' => 'Modificar la palabra clave:',
@@ -553,6 +559,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_preview_comite' => 'Todos los redactores pueden previsualizar el sitio',
 'info_preview_desactive' => 'La previsualización está totalmente desactivada',
 'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los artículos y las breves (que tengan al menos el estado « propuesto ») estuviesen publicados. Esta posibilidad debe estar disponible para ¿ los administradores solamente, todos los redactores, o nadie ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Tus principales corresponsales',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'Se debe ejecutar el proceso de actualización de la base de datos a esta nueva versión de SPIP.',
@@ -707,6 +714,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'info_webmestre_forces' => 'La lista de webmasters es actualmente definida en <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Dirección de la base de datos asignada por el proveedor del alojamiento',
 'install_base_ok' => 'La base @base@ ha sido reconocida',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'La instalación probablemente va a fallar, o creará un sitio que no funcione...',
 'install_extension_mbstring' => 'SPIP no funciona con :',
 'install_extension_php_obligatoire' => 'SPIP exige instalar la extensión php :',
@@ -807,6 +815,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'label_bando_outils_afficher' => 'نمايش ابزارها',
 'label_bando_outils_masquer' => 'پنهان سازي ابزارها',
 'label_choix_langue' => 'Seleccione su idioma',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan del sitio',
 'label_taille_ecran' => 'Ancho de pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegación',
@@ -932,6 +941,14 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugins_vue_hierarchie' => 'Jerarquía',
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Versión del protocolo:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Carpeta:',
@@ -1140,6 +1157,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_cadre_forum_interne' => 'Foro interno',
 'titre_cadre_interieur_rubrique' => 'Al interior de la sección',
 'titre_cadre_numero_auteur' => 'AUTOR O AUTORA NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obligatoria]<br />',
 'titre_compacter_script_css' => 'Compresión de los scripts y CSS',
 'titre_compresser_flux_http' => 'Compresión del flujo HTTP',

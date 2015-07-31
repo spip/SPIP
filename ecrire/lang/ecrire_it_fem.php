@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accesso vietato.',
 'avis_article_modifie' => 'Attenzione, @nom_auteur_modif@ ha lavorato su quest\'articolo @date_diff@ minuti fa',
 'avis_aucun_resultat' => 'Nessun risultato.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'il percorso che hai scelto',
 'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
 'avis_connexion_echec_1' => 'il collegamento alla base di dati è fallito.',
@@ -192,6 +193,8 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
@@ -320,6 +323,8 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_articles_2' => 'Articoli',
 'info_articles_auteur' => 'Articoli di questo autore',
 'info_articles_lies_mot' => 'Gli articoli collegati a questa parola chiave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articoli trovati',
 'info_articles_trouves_dans_texte' => 'Articoli trovati (ricerca nel testo)',
 'info_attente_validation' => 'I tuoi articoli in attesa di convalida',
@@ -497,6 +502,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
 le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo di funzionamento predefinito dei forum pubblici',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifica l\'autrice:',
 'info_modifier_breve' => 'Modifica la breve:',
 'info_modifier_mot' => 'Modifica la parola chiave:',
@@ -581,6 +587,7 @@ avvertite via email. Per ogni tipo di forum, indica se desideri utilizzare quest
 'info_preview_comite' => 'Tutte le redattrici possono visualizzare l\'anteprima del sito',
 'info_preview_desactive' => 'L\'anteprima del sito è totalmente disattivata',
 'info_preview_texte' => 'È possibile visualizzare un\'anteprima del sito comprendente anche gli articoli e le brevi "proposti" per la pubblicazione. Questa funzionalità può essere disattivata, consentita solo alle amministratrici o a tutte le redattrici.',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Corrispondenti principali',
 'info_procedez_par_etape' => 'procedere passo dopo passo',
 'info_procedure_maj_version' => 'è necessario avviare la procedura di aggiornamento per adattare
@@ -745,6 +752,7 @@ Le traduzioni sono associate all\'originale,
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Indirizzo del database attribuito dal provider',
 'install_base_ok' => 'Il database @base@ è stato riconosciuto',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalità al sito...',
 'install_extension_mbstring' => 'SPIP non funziona con:',
 'install_extension_php_obligatoire' => 'SPIP esige l\'estensione php:',
@@ -845,6 +853,7 @@ Le traduzioni sono associate all\'originale,
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -970,6 +979,14 @@ Le traduzioni sono associate all\'originale,
 'plugins_vue_hierarchie' => 'Struttura gerarchica',
 'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Cartella:',
@@ -1218,6 +1235,7 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_cadre_forum_interne' => 'Forum interno',
 'titre_cadre_interieur_rubrique' => 'All\'interno della rubrica',
 'titre_cadre_numero_auteur' => 'AUTRICE NUMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
 'titre_compacter_script_css' => 'Compressione degli script e dei CSS',
 'titre_compresser_flux_http' => 'Compressione del flusso HTTP',

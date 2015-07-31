@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accès proïbit.',
 'avis_article_modifie' => 'Atencion, @nom_auteur_modif@ a travalhat sus aquel article fa @date_diff@ minutas',
 'avis_aucun_resultat' => 'Minga de resultat.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Lo camin qu\'avètz chausit',
 'avis_chemin_invalide_2' => 'sembla pas valid. Vorgatz tornar à la pàgina anteriora e verificar li informacions fornidi.',
 'avis_connexion_echec_1' => 'La conexion à la base de donadas a soït.',
@@ -181,6 +182,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'entree_texte_breve' => 'Tèxt de la brèva',
 'entree_titre_obligatoire' => '<b>Titre</b> [Obligatòri]<br />',
 'entree_url' => 'L\'adreça (URL) dau voastre sit',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier assent',
 'erreur_plugin_fichier_def_absent' => 'Fichier de definicion assent',
@@ -306,6 +309,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'Lu articles d\'aquel autor',
 'info_articles_lies_mot' => 'Lu articles ligats à-n-aqueu mòt clau',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (dins lo tèxt)',
 'info_attente_validation' => 'Lu voastres articles en aspèra de validacion',
@@ -474,6 +479,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
   perduda e lo voastre sit foncionarà pas plus.<br />{{Tornatz installar lu
   fichiers de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mòde de foncionament predefinit dei fòros publics',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar l\'autor :',
 'info_modifier_breve' => 'Modificar la brèva:',
 'info_modifier_mot' => 'Modificar lo mot clau :',
@@ -555,6 +561,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_preview_comite' => 'Toi lu redactors poadon previsualisar lo sit',
 'info_preview_desactive' => '>La previsualisacion es totalament desactivada',
 'info_preview_texte' => 'Es possible de previsualisar lo site coma se toi lu articles e brèvas (que tenon au mànco l\'estatut « prepauat ») èron publicats. Aquela possibilitat deu èstre duberta ai administrators solament, à toi lu redactors, ò à degun ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Lu voastres correspondents principaus',
 'info_procedez_par_etape' => 'procedètz estapa per estapa',
 'info_procedure_maj_version' => 'la procedura de mesa à jorn deu èstre lançada per adaptar la basa de donadas à la novèla version de SPIP.',
@@ -718,6 +725,7 @@ una color indica lo sieu estat :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'L\'installacion capitarà mau, ò abotirà à un sit non foncionau...',
 'install_extension_mbstring' => 'SPIP fonciona pas emb:',
 'install_extension_php_obligatoire' => 'SPIP esige l\'estension PHP:',
@@ -818,6 +826,7 @@ una color indica lo sieu estat :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -943,6 +952,14 @@ una color indica lo sieu estat :',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version dau protocòl :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Repertòri:',
@@ -1208,6 +1225,7 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_cadre_forum_interne' => 'Fòro interne',
 'titre_cadre_interieur_rubrique' => 'Dintre de la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligada]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

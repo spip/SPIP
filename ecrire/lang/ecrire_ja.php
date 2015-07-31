@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'アクセス権がありません',
 'avis_article_modifie' => 'ご注意ください。 @nom_auteur_modif@　が@date_diff@分前にこの記事について作業を行いました。',
 'avis_aucun_resultat' => '一致するデータがありませんでした。',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => '選択されたファイルパス',
 'avis_chemin_invalide_2' => 'が無効です。前のページに戻って、与えられた情報を確認してください。',
 'avis_connexion_echec_1' => 'SQLサーバーへの接続に失敗しました。', # MODIF
@@ -189,6 +190,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'entree_texte_breve' => 'ニュースの文',
 'entree_titre_obligatoire' => '<b>タイトル</b> [必須]<br />',
 'entree_url' => 'あなたのサイトのURL',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'ファイルが見つかりません',
 'erreur_plugin_fichier_def_absent' => 'Definition file missing', # NEW
@@ -317,6 +320,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_articles_2' => '記事',
 'info_articles_auteur' => 'この著者の記事',
 'info_articles_lies_mot' => 'このキーワードに関連した記事',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => '記事が見つかりました',
 'info_articles_trouves_dans_texte' => '記事が見つかりました（文中）',
 'info_attente_validation' => '適性検査前のあなたの記事',
@@ -486,6 +491,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
   あなたのサイトはこれ以上適切に動かないでしょう。<br />{{SPIPファイルを
   再インストール。}}',
 'info_mode_fonctionnement_defaut_forum_public' => '公開掲示板の標準の操作方法',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => '修正するニュース:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -567,6 +573,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_preview_comite' => 'すべての編集者がプレビューモードへアクセス出来る',
 'info_preview_desactive' => 'プレビューモードは使用不能',
 'info_preview_texte' => '（少なくとも"提出中"状態の）すべての記事とニュースを公表した時どのように見えるか試しに見ることが出来ます。このプレビューモードは管理人だけに限定するか、すべての編集者に開放するか、完全に無効にすることが出来ます。',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'あなたの主な通信者',
 'info_procedez_par_etape' => 'どうかステップbyステップで進んでください',
 'info_procedure_maj_version' => '新しいバージョンのSPIPに順応させるために、データベースをアップグレードするべきです。',
@@ -723,6 +730,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'このインストールではたぶん動かないか、上手く機能しないサイトになるでしょう。',
 'install_extension_mbstring' => 'SPIPは次によって停止中:',
 'install_extension_php_obligatoire' => 'SPIPにはphpの拡張モジュールが必要:',
@@ -823,6 +831,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -948,6 +957,14 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directory:', # NEW
@@ -1137,6 +1154,7 @@ demande plus de puissance au serveur.', # NEW
 'titre_cadre_forum_interne' => '関係者用の掲示板',
 'titre_cadre_interieur_rubrique' => 'セクションで',
 'titre_cadre_numero_auteur' => '著者番号',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>署名</b> [必須]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

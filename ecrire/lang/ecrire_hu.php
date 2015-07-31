@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Hozzáférés nincs engedélyezve',
 'avis_article_modifie' => 'Vigyázat, @nom_auteur_modif@ dolgozott ezen a cikken @date_diff@ perccel ezelőtt',
 'avis_aucun_resultat' => 'Nincs eredmény.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Az Ön által választott elérési út',
 'avis_chemin_invalide_2' => 'nem tűnik érvényesnek. Menjen az elöző oldalra és ellenőrizze a beírt adatokat.',
 'avis_connexion_echec_1' => 'A SQL szerverhez való csatlakozás sikertelen.', # MODIF
@@ -190,6 +191,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'entree_texte_breve' => 'Hír szövege',
 'entree_titre_obligatoire' => '<b>Cím</b> [Kötelező]<br />', # MODIF
 'entree_url' => 'A honlapja címe (URL)',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Nem létező fájl',
 'erreur_plugin_fichier_def_absent' => 'Nem létező definiáló fájl',
@@ -317,6 +320,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_articles_2' => 'Cikkek',
 'info_articles_auteur' => 'A szerző cikkei',
 'info_articles_lies_mot' => 'A kulcsszóhoz kötött cikkek',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Talált cikkek',
 'info_articles_trouves_dans_texte' => 'Talált cikkek (a szövegben)',
 'info_attente_validation' => 'Jóváhagyás alatti cikkei',
@@ -484,6 +489,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_mise_a_niveau_base' => 'A SQL adatbázisa naprakész tétele', # MODIF
 'info_mise_a_niveau_base_2' => '{{Vigyázat!}} Az SPIP fájlait egyik {elöző} változatot telepített fel, mint ami ezelőtt volt ezen a tárhelyen: az adatbázis veszhet, és a honlap többet nem fog működni.<br />{{Telepítse újra az SPIP fájlait.}}', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => 'Nyilvános fórumok alapértelmezett működési módszere',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'A hír módosítása :',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -567,6 +573,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_preview_comite' => 'Minden szerző előnézheti a honlapot',
 'info_preview_desactive' => 'Az előnézet teljesen van leállítva',
 'info_preview_texte' => 'Lehetséges előnézni a honlapot, mintha az összes cikk és hír (legalább "javasolt" státusszal) publikálva lenne. Ezt a lehetőséget csak az adminisztrátoroknak, az összes szerzőnek, vagy senkinek kell adni ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'A főbb levelezőtársai',
 'info_procedez_par_etape' => 'lépésről lépésre járjon el',
 'info_procedure_maj_version' => 'A naprakésztételes eljárást kell indítani ahhoz, hogy
@@ -728,6 +735,7 @@ ami állapotát jelzi :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'A telepítés valószinűleg nem fog sikerülni, vagy a honlap nem fog megfelelően működni...',
 'install_extension_mbstring' => 'Azzal nem működik az SPIP :',
 'install_extension_php_obligatoire' => 'SPIP a PHP-t igényli :',
@@ -828,6 +836,7 @@ ami állapotát jelzi :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -953,6 +962,14 @@ ami állapotát jelzi :',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Mappa :',
@@ -1191,6 +1208,7 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_cadre_forum_interne' => 'Belső fórum',
 'titre_cadre_interieur_rubrique' => 'A rovaton belül',
 'titre_cadre_numero_auteur' => 'SZERZŐ SZÁMA',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Aláírás</b> [Kötelező]<br />', # MODIF
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

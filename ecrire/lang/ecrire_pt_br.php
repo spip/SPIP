@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Acesso negado.',
 'avis_article_modifie' => 'Atenção, @nom_auteur_modif@ editou esta matéria há @date_diff@ minutos',
 'avis_aucun_resultat' => 'Nenhum resultado.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'O caminho que você escolheu',
 'avis_chemin_invalide_2' => 'não parece válido. Por favor, volte para a página anterior e verifique as informações fornecidas.',
 'avis_connexion_echec_1' => 'A conexão com a base de dados falhou.',
@@ -77,7 +78,7 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'bouton_radio_activer_messagerie_interne' => 'Ativar o sistema interno de mensagens',
 'bouton_radio_activer_petition' => 'Ativar a petição',
 'bouton_radio_afficher' => 'Exibir',
-'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Aparecer nas listas de redatures conectados',
+'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Aparecer nas listas de redatores conectados',
 'bouton_radio_articles_futurs' => 'apenas às próximas matérias (sem ação sobre a base de dados).',
 'bouton_radio_articles_tous' => 'a todas as matérias, sem exceção.',
 'bouton_radio_articles_tous_sauf_forum_desactive' => 'a todas as matérias, exceto aquelas em que o fórum está desativado.',
@@ -182,6 +183,8 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'entree_texte_breve' => 'Texto da nota',
 'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />',
 'entree_url' => 'O endereço (URL) do seu site',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.',
 'erreur_plugin_fichier_absent' => 'Arquivo ausente',
 'erreur_plugin_fichier_def_absent' => 'Arquivo de definição ausente',
@@ -306,6 +309,8 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_articles_2' => 'Matérias',
 'info_articles_auteur' => 'As matérias deste autor',
 'info_articles_lies_mot' => 'As matérias associadas a esta palavra-chave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Matérias encontradas',
 'info_articles_trouves_dans_texte' => 'Matérias encontradas (no texto)',
 'info_attente_validation' => 'Suas matérias aguardando validação',
@@ -470,6 +475,7 @@ os autores excluídos por uma lixeira.',
 'info_mise_a_niveau_base' => 'atualização da sua base SQL',
 'info_mise_a_niveau_base_2' => '{{Atenção!}} Você instalou uma versão de arquivos SPIP {anterior} à que estava instalada no site: a sua base de dados corre o risco de se corromper e o seu site não funcionar mais.<br />{{Reinstale os arquivos SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamento padrão dos fóruns públicos',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Alterar o autor:',
 'info_modifier_breve' => 'Editar a nota:',
 'info_modifier_mot' => 'Editar a palavra-chave:',
@@ -551,6 +557,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_preview_comite' => 'Todos os redatores podem visualizar o site',
 'info_preview_desactive' => 'A visualização está totalmente desativada',
 'info_preview_texte' => 'É possível visualizar o site como se todas as matérias e notas (tendo pelo menos o status de «proposta») estivessem publicadas. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redatores, ou para ninguém?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Seus correspondentes principais',
 'info_procedez_par_etape' => 'proceder passo-a-passo',
 'info_procedure_maj_version' => 'o procedimento de atualização deve ser rodado para adaptar a base de dados à nova versão do SPIP.',
@@ -705,6 +712,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'info_webmestre_forces' => 'Os webmasters são definidos em <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Endereço da base de dados atribuído pelo serviço de hospedagem:',
 'install_base_ok' => 'A base @base@ foi reconhecida',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'A instalação irá, provavelmente, falhar, ou levar a um site que não funciona...',
 'install_extension_mbstring' => 'O SPIP não funciona com:',
 'install_extension_php_obligatoire' => 'O SPIP exige a extensão php:',
@@ -805,6 +813,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'label_bando_outils_afficher' => 'Exibir as ferramentas',
 'label_bando_outils_masquer' => 'Esconder as ferramentas',
 'label_choix_langue' => 'Escolha o seu idioma',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan do site',
 'label_taille_ecran' => 'Largura da tela',
 'label_texte_et_icones_navigation' => 'Menu de navegação',
@@ -931,6 +940,14 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Versão do protocolo:',
 
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
+
 // R
 'repertoire_plugins' => 'Diretório:',
 
@@ -986,7 +1003,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'texte_compacter_avertissement' => 'Atenção para não ativar estas opções durante o desenvolvimento do seu site: os elementos compactados perdem toda a legibilidade.',
 'texte_compacter_script_css' => 'O SPIP pode compactar os scripts javascript e as folhas de estilo CSS, para gravá-los nos arquivos de estatísticas; isto acelera a exibição do site.',
 'texte_compatibilite_html' => 'Você pode solicitar ao SPIP que gere, no site público, código compatível com o padrão <i>HTML4</i>, ou permitir que ele use as possibilidades mais modernas do <i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'Não há nenhum risco em ativar a opção <i>HTML5</i> mas, se você o fizer, as páginas do seu site deverão començar com o código a seguir, para se manterem válidas: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Não há nenhum risco em ativar a opção <i>HTML5</i> mas, se você o fizer, as páginas do seu site deverão começar com o código a seguir, para continuarem válidas: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(pode ser compactado ou não)',
 'texte_compresseur_page' => 'O SPIP pode comprimir automaticamente cada página que ele envia aos visitantes do site. Esta regulagem permite otimizar a banda de transmissão (le site torna-se mais rápido quando estiver sob uma conexão de banda baixa), mas demanda mais potência do servidor.',
 'texte_compte_element' => '@count@ elemento',
@@ -1116,6 +1133,7 @@ neste caso, você não poderá usar a sindicação de conteúdo no seu site.</i>
 'titre_cadre_forum_interne' => 'Fórum interno',
 'titre_cadre_interieur_rubrique' => 'Na seção',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [obrigatório]<br />',
 'titre_compacter_script_css' => 'Compactação de scripts e CSS',
 'titre_compresser_flux_http' => 'Compressão do fluxo HTTP',

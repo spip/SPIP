@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accès proïbit.',
 'avis_article_modifie' => 'Atencion, @nom_auteur_modif@ qu\'a trabalhat sus aqueth article hè @date_diff@ minutas',
 'avis_aucun_resultat' => 'Nat resultat.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Lo camin qui avetz causit',
 'avis_chemin_invalide_2' => 'non sembla pas valid. Volhatz tornar a la pagina anteriora tà verificar las informacions hornidas.',
 'avis_connexion_echec_1' => 'La connexion au servider SQL que s\'i ei mauescaduda.', # MODIF
@@ -188,6 +189,8 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'entree_texte_breve' => 'Tèxt de la brèva',
 'entree_titre_obligatoire' => '<b>Títol</b> [Obligatòri]<br />',
 'entree_url' => 'L\'adreiça (URL) deu vòste sit',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
 'erreur_plugin_fichier_def_absent' => 'Fichier de définition absent', # NEW
@@ -312,6 +315,8 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'Los articles d\'aqueth autor',
 'info_articles_lies_mot' => 'Los articles ligats a aqueth mot clau',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (dens lo tèxt)',
 'info_attente_validation' => 'Los vòstes articles en espèra de validacion',
@@ -482,6 +487,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
    e lo vòste sit non foncionarà plus.<br />{{Tornatz installar los
   fichièrs d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mòde de foncionament predefinit deus forums publics',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Modificar la brèva:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -566,6 +572,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_preview_comite' => 'Tots los redactors que pòden previsualizar lo sit',
 'info_preview_desactive' => 'La previsualizacion qu\'ei deu tot desactivada',
 'info_preview_texte' => 'Qu\'ei possible de previsualizar lo sit com s\'avèvan publicat tots los articles e brèvas (qui tienen aumensh l\'estatut "prepausat"). E la cau obrir, aquera possibilitat, aus administrators sonque, a tots los redactors, o non pas a degun?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Los vòstes correspondents principaus',
 'info_procedez_par_etape' => 'proceditz estapa per estapa',
 'info_procedure_maj_version' => 'Que cau lançar la procedura d\'actualizacion tà adaptar
@@ -728,6 +735,7 @@ ua color qu\'indica lo lor estat:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'L\'installacion que s\'i mauescairà, o qu\'abotirà a un sit non foncionau...',
 'install_extension_mbstring' => 'SPIP non fonciona pas dab:',
 'install_extension_php_obligatoire' => 'SPIP qu\'exigeish l\'extension php:',
@@ -828,6 +836,7 @@ ua color qu\'indica lo lor estat:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -953,6 +962,14 @@ ua color qu\'indica lo lor estat:',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW
@@ -1228,6 +1245,7 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_cadre_forum_interne' => 'Forum intèrne',
 'titre_cadre_interieur_rubrique' => 'Laguens la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NUMÈRO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligatòria]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

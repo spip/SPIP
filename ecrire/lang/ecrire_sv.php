@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Tilltr&amp;auml;de f&amp;ouml;rbjudet.',
 'avis_article_modifie' => 'Varning, @nom_auteur_modif@ har arbetat på den här artikeln för @date_diff@ minuter sen',
 'avis_aucun_resultat' => 'Hittade inga resultat',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Sökvägen du har angett',
 'avis_chemin_invalide_2' => 'är ogiltig. Återgå till den föregående sidan och kontrollera den angivna informationen',
 'avis_connexion_echec_1' => 'Anslutningen till SQL-servern misslyckades.',
@@ -184,6 +185,8 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'entree_texte_breve' => 'Notisens text',
 'entree_titre_obligatoire' => '<b>Title</b> [Krävs]<br />',
 'entree_url' => 'Din webbplats URL',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Filen saknas',
 'erreur_plugin_fichier_def_absent' => 'Definitionsfilen saknas',
@@ -312,6 +315,8 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_articles_2' => 'Artiklar',
 'info_articles_auteur' => 'Den här redaktörens artiklar',
 'info_articles_lies_mot' => 'Artiklar kopplade till det här nyckelordet',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artiklar hittade',
 'info_articles_trouves_dans_texte' => 'Artiklar hittade (i texten)',
 'info_attente_validation' => 'Dina artiklar som väntar på validering',
@@ -493,6 +498,7 @@ funktioner hos SPIP inte användas.',
   och ha en sajt som inte längre fungerar.<br />{{återinstallera
   SPIP filerna.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Valt funktionssätt för de publika forumen',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Editera detaljer för redaktören:',
 'info_modifier_breve' => 'Editera nyheten:',
 'info_modifier_mot' => 'Editera nyckelordet:',
@@ -577,6 +583,7 @@ funktioner hos SPIP inte användas.',
 'info_preview_comite' => 'Alla redaktörer har tillgång till förhandsvisning',
 'info_preview_desactive' => 'Förhandsvisning är avaktiverad',
 'info_preview_texte' => 'Il est possible de prévisualiser le site comme si tous les articles et les brèves (ayant au moins le statut « proposé ») étaient publiés. Cette possibilité doit-elle être ouverte aux administrateurs seulement, à tous les rédacteurs, ou à personne ?', # NEW
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Vos principaux correspondants', # NEW
 'info_procedez_par_etape' => 'Var vänlig, fortsätt steg för steg',
 'info_procedure_maj_version' => 'Uppdateringsproceduren skall köras för att
@@ -742,6 +749,7 @@ med en färg som visar deras status:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Databasadress tillhandahållen av webbhotellet',
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Den här installationen kommer förmodligen inte att fungera, alternativt resulterar den i en sajt med reducerad funktionalitet ...',
 'install_extension_mbstring' => 'SPIP fungerar inte med:',
 'install_extension_php_obligatoire' => 'SPIP kräver ett tillägg till php:',
@@ -842,6 +850,7 @@ med en färg som visar deras status:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -967,6 +976,14 @@ med en färg som visar deras status:',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW
@@ -1235,6 +1252,7 @@ you can perform searches on sites and
 'titre_cadre_forum_interne' => 'Internt forum',
 'titre_cadre_interieur_rubrique' => 'I Avdelningen',
 'titre_cadre_numero_auteur' => 'Redaktör nummer',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signatur</b> [krävs]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

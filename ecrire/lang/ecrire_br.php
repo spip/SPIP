@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Arabat mont tre.',
 'avis_article_modifie' => 'Diwallit, labouret ez eus bet war ar pennad-mañ gant @nom_auteur_modif@, @date_diff@ munutenn zo',
 'avis_aucun_resultat' => 'Disoc\'h ebet.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'An hent dibabet ganeoc\'h',
 'avis_chemin_invalide_2' => 'ne seblant ket bezañ reizh. Deuit en-dro d\'ar bajenn a-raok ha gwiriit an titouroù lakaet ganeoc\'h.',
 'avis_connexion_echec_1' => 'C\'hwitet eo ar c\'hevreañ ouzh an diaz-titouroù.',
@@ -183,6 +184,8 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'entree_texte_breve' => 'Testenn ar berrskrid',
 'entree_titre_obligatoire' => '<b>Titl</b> [Rekis]<br />',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Restr ezvezant',
 'erreur_plugin_fichier_def_absent' => 'Restr termeniñ ezvezant',
@@ -310,6 +313,8 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_articles_2' => 'Pennad',
 'info_articles_auteur' => 'Pennadoù ar skridaozer-mañ',
 'info_articles_lies_mot' => 'Ar pennadoù liammet ouzh ar ger-stur-mañ',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Pennadoù kavet',
 'info_articles_trouves_dans_texte' => 'Pennadoù kavet (en destenn)',
 'info_attente_validation' => 'Ho pennadoù a chom da vezañ aprouet',
@@ -479,6 +484,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_mise_a_niveau_base_2' => '{{Diwallit!}} Staliet ho peus ur stumm eus SPIP {koshoc\'h} eget an hini a oa war al lec\'hienn-mañ a-raok .
 Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br />{{Adstailhit restroù SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mont en-dro dre ziouer ar foromoù foran',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Kemmañ an aozer :',
 'info_modifier_breve' => 'Kemmañ ar berrskrid :',
 'info_modifier_mot' => 'Kemmañ ar ger-alc\'hwez :',
@@ -563,6 +569,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_preview_comite' => 'Gallout a ra an holl skridaozerien rakwelet al lec\'hienn',
 'info_preview_desactive' => 'Diweredekaet-mik eo ar rakweled',
 'info_preview_texte' => 'Posupl eo rakwelet penaos e vefe al lec\'hienn ma vefe embannet an holl bennadoù hag an holl verrskridoù (dezho ar statud « kinniget » d\'an nebeutañ). Daoust ha dleout a rafe an holl skridaozerien gallout en ober, ar verourien hepken, pe den ebet ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Ho kenskriverien bennañ',
 'info_procedez_par_etape' => 'kit war-raok pazenn-ha-pazenn',
 'info_procedure_maj_version' => 'rankout a ra al labour hizivaat bezañ lañset a-benn azasaat 
@@ -726,6 +733,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Chomlec\'h an diaz titouroù roet gant an herberc\'hier',
 'install_base_ok' => 'Anavezet eo bet an diaz @base@',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Moarvat e c\'hwito ar staliadur pe e kaso d\'ul lec\'hienn na\'z aio ket en-dro...',
 'install_extension_mbstring' => 'Ne\'z a ket SPIP en-dro gant :',
 'install_extension_php_obligatoire' => 'Ezhomm en deus SPIP eus an astenn php :',
@@ -826,6 +834,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -951,6 +960,14 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugins_vue_hierarchie' => 'Urzhaz',
 'plugins_vue_liste' => 'Roll',
 'protocole_ldap' => 'Stumm ar protokol :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Kavlec\'h :',
@@ -1172,6 +1189,7 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_cadre_forum_interne' => 'Forom diabarzh',
 'titre_cadre_interieur_rubrique' => 'Er rubrikenn',
 'titre_cadre_numero_auteur' => 'SKRIDAOZER NIVERENN',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Sinadur</b> [Rekis]<br />',
 'titre_compacter_script_css' => 'Gwaskañ ar furmskridoù hag ar follennoù-stil',
 'titre_compresser_flux_http' => 'Gwaskañ al lanvad HTTP',

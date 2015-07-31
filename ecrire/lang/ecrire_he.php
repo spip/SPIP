@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'גישה אסורה',
 'avis_article_modifie' => 'אזהרה, @nom_auteur_modif@ עבד על הכתבה הזאת @date_diff@ לפני דקות אחדות',
 'avis_aucun_resultat' => '.שום תוצאות לא נמצאו',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'הנתיב שבחרת',
 'avis_chemin_invalide_2' => 'לא נראה בר תוקף. נא לחזור לדף הקודם ולוודא את האינפורמציה.',
 'avis_connexion_echec_1' => 'התקשרות לבסיס הנתונים נכשלה',
@@ -185,6 +186,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'טקסט של המבזק',
 'entree_titre_obligatoire' => '<b>כותרת</b> [הכרחי]<br />',
 'entree_url' => 'הכתובת הכללית של האתר שלך',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'קובץ חסר',
 'erreur_plugin_fichier_def_absent' => 'קובץ בעל הגדרה חסרה',
@@ -314,6 +317,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'מאמרים',
 'info_articles_auteur' => 'המאמרים של המחבר הזה',
 'info_articles_lies_mot' => 'מאמרים מקושרים עם מילת המפתח הזו',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'מאמרים נמצאו',
 'info_articles_trouves_dans_texte' => '(מאמרים נמצאו (בתוך הטקסט',
 'info_attente_validation' => 'המאמרים שלך מחכים למתן תוקף',
@@ -496,6 +501,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 		perdue et votre site ne fonctionnera plus.<br />{{Réinstallez les
 		fichiers de SPIP.}}', # NEW
 'info_mode_fonctionnement_defaut_forum_public' => 'פעולה ברירת מחדל של פורומים ציבוריים',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'תיקון המבזק :',
 'info_modifier_mot' => 'ערוך את מילה המפתח :',
@@ -580,6 +586,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_preview_comite' => 'Tous les rédacteurs peuvent prévisualiser le site', # NEW
 'info_preview_desactive' => 'La prévisualisation est totalement désactivée', # NEW
 'info_preview_texte' => 'אפשר לבקר את האתר בהקשפה מוקדמת כאילו כל המאמרים והמבזקים התפרסמו (עם לפחות הסטטוס "מוצע"). האם אתה רוצה להגיש אפשרות זו למנהלים בלבד, לכל מחברים או לכולם?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'הכתבים הראשיים שלך',
 'info_procedez_par_etape' => 'אנא המשך צעד אחר צעד',
 'info_procedure_maj_version' => 'la procédure de mise à jour doit être lancée afin d\'adapter
@@ -745,6 +752,7 @@ dans une couleur qui indique leur état :', # NEW
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'L\'installation va probablement échouer, ou aboutir à un site non fonctionnel...', # NEW
 'install_extension_mbstring' => 'SPIP ne fonctionne pas avec :', # NEW
 'install_extension_php_obligatoire' => 'SPIP exige l\'extension php :', # NEW
@@ -845,6 +853,7 @@ dans une couleur qui indique leur état :', # NEW
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -970,6 +979,14 @@ dans une couleur qui indique leur état :', # NEW
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'רשימה',
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'ספריה :',
@@ -1240,6 +1257,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_cadre_forum_interne' => 'Forum interne', # NEW
 'titre_cadre_interieur_rubrique' => 'À l\'intérieur de la rubrique', # NEW
 'titre_cadre_numero_auteur' => 'AUTEUR NUMÉRO', # NEW
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Obligatoire]<br />', # NEW
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

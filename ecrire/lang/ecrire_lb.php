@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Zougang gespaart.',
 'avis_article_modifie' => 'Opgepasst, den @nom_auteur_modif@ huet un dësem Artikel virun @date_diff@ Minuten geschafft',
 'avis_aucun_resultat' => 'Kee Resultat.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'De Wee deen dir gewielt hutt',
 'avis_chemin_invalide_2' => 'schengt nët gëlteg ze sinn. Gidd op déi läscht Säit zerëck a kontrolléiert d\'Informatiounen.',
 'avis_connexion_echec_1' => 'D\'Verbannen mat der Datebank huet nët fonktionnéiert.',
@@ -182,6 +183,8 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun ärem Site',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier fehlt',
 'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
@@ -306,6 +309,8 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_articles_2' => 'Artikelen',
 'info_articles_auteur' => 'Artikelen vun dësem Auteur',
 'info_articles_lies_mot' => 'Artikelen déi un dëst Schlësselwuert gebonnen sinn',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artikelen fonnt',
 'info_articles_trouves_dans_texte' => 'Artikelen fonnt (am Text)',
 'info_attente_validation' => 'Är Artikelen déi op d\'Validatioun waarden',
@@ -469,6 +474,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_mise_a_niveau_base' => 'Update vun ärer SQL-Datebank',
 'info_mise_a_niveau_base_2' => '{{Opgepasst!}} Dier hutt eng {al} Versioun vun de SPIP-Fichier\'en installéiert: är Datebank riskéiert verluer ze goën an äre Site nët méi ze fonktionnéieren.<br />{{Installéiert d\'SPIP-Fichier\'en nach eng kéier.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Default-Modus vun den öffentlëche Forum\'en',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Auteur änneren:',
 'info_modifier_breve' => 'Kuerzmeldung änneren:',
 'info_modifier_mot' => 'Schlësselwuert änneren:',
@@ -550,6 +556,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_preview_comite' => 'All d\'Redakteren kënnen de Site previsualiséieren',
 'info_preview_desactive' => 'D\'Prévisualisatioun ass ausgeschalt',
 'info_preview_texte' => 'Dir kënnt de Site prévisualiséieren wéi wann all d\'Artikelen an d\'Kuerzmeldungen (déi op manst de Status "propséiert" hunn) publizéiert wären. Soll dës Méiglechkeet fir just d\'Administrateuren, fir all d\'Redakteren oder fir keen gëllen.',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Är wichtegst Korrespondenten',
 'info_procedez_par_etape' => 'gidd Schrëtt fir Schrëtt fir',
 'info_procedure_maj_version' => 'D\'Update-Prozedur muss ausgeféiert ginn fir är Datebank un déi nei SPIP-Versioun unzepassen.',
@@ -704,6 +711,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adress vun der Datebank déi dir vum Hosting krut',
 'install_base_ok' => 'D\'Datebank @base@ ass erkannt ginn',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'D\'Installatioun wärt warscheinlech nët fonktionnéieren oder zu engem fehlerhaften Site féieren...',
 'install_extension_mbstring' => 'SPIP fonktionnéiert nët mat:',
 'install_extension_php_obligatoire' => 'SPIP brauch d\'PHP-Extensioun:',
@@ -804,6 +812,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -929,6 +938,14 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugins_vue_hierarchie' => 'Hiérarchie',
 'plugins_vue_liste' => 'Lëscht',
 'protocole_ldap' => 'Versioun vum Protokol:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dossier:',
@@ -1115,6 +1132,7 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_cadre_forum_interne' => 'Internen Forum',
 'titre_cadre_interieur_rubrique' => 'An der Rubrik',
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Ënnerschrëft</b> [Obligatoresch]<br />',
 'titre_compacter_script_css' => 'Skripter an CSS kompriméieren',
 'titre_compresser_flux_http' => 'HTTP-Flow kompriméiren',
