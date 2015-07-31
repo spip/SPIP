@@ -188,7 +188,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
       if ($fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
       $res = array($fonc);
       $args = $suite ;
-      if (($suite[0] != '{') || !eregi("^[A-Z0-9_]*$", $fonc))
+      if (($suite[0] != '{') /* || !eregi("^[?A-Z0-9_]*$", $fonc) */)
 	{ if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
 	  // suite zarbi, c'est un critere infixe comme "/"
