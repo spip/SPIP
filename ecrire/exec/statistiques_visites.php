@@ -502,7 +502,9 @@ function stat_log1($log, $agreg, $date_debut, $date_today, $id_article, $largeur
 		if ($hauteur > 0) {
 			$hauteur_moyenne = round($moyenne * $rapport) - 1;
 			$tagtitle= attribut_html(supprimer_tags("$jour | "
-			._T('info_visites')." ".$value));
+			._T('info_visites')." ". $value . " | "
+			._T('info_moyenne')." "
+			. round($moyenne,2)));
 
 			$res .= statistiques_jour($key, $tagtitle, $largeur, $hauteur_moyenne, $hauteur);
 		}
@@ -515,7 +517,7 @@ function stat_log1($log, $agreg, $date_debut, $date_today, $id_article, $largeur
 	
 	// Dernier jour
 	$hauteur = round($visites_today * $rapport) - 1;
-	$total_absolu = $total_absolu + $visites_today;
+	// $total_absolu = $total_absolu + $visites_today;
 	// prevision de visites jusqu'a minuit
 	// basee sur la moyenne (site) ou popularite (article)
 	if (! $id_article) $val_popularite = $moyenne;
@@ -568,7 +570,7 @@ function statistiques_jour($key, $tagtitle, $largeur, $hauteur_moyenne, $hauteur
 		if (date("w",$key) == "0") // Dimanche en couleur foncee
 $res .= http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
 		else
-		  $res = http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
+		  $res .= http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
 	} else if ($hauteur_moyenne < $hauteur) {
 		$difference = ($hauteur - $hauteur_moyenne) -1;
 		$res = http_img_rien($largeur,1,"trait_haut", $tagtitle);
