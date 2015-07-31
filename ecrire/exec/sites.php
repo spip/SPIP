@@ -49,6 +49,7 @@ function exec_sites_dist()
 }
 
 
+// http://doc.spip.org/@afficher_site
 function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 {
 

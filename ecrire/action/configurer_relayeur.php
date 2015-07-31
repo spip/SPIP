@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('configuration/relayeur');
 
+// http://doc.spip.org/@action_configurer_relayeur_dist
 function action_configurer_relayeur_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_configurer_relayeur_dist
 function exec_configurer_relayeur_dist()
 {
 	$relayeur = charger_fonction('relayeur', 'configuration');
