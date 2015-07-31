@@ -1,11 +1,11 @@
 [
-(#HTTP_VARS*{message})
+(#ENV*{message})
 ][
-(#HTTP_VARS*{message}|?{'',' '})[
- (#HTTP_VARS{mode}|=={forum}|?{' ',''})
+(#ENV*{message}|?{'',' '})[
+ (#ENV{mode}|=={forum}|?{' ',''})
 	<:pass_forum_bla:><br /><br />
 ][
- (#HTTP_VARS{mode}|=={redac}|?{' ',''})
+ (#ENV{mode}|=={redac}|?{' ',''})
 	<:pass_espace_prive_bla:><br /><br />
 ]<:form_forum_indiquer_nom_email:>
  <form	id="inscription" method='post' action='#SELF'
@@ -24,12 +24,12 @@
 	</div> 
  </form>[
 <script type="text/javascript"><!--
-document.inscription.(#HTTP_VARS{focus}).focus()
+document.inscription.(#ENV{focus}).focus()
 --></script>
  ]
 ][<br />
 <div align="right">
-(#HTTP_VARS{target}|?{' ',''})
+(#ENV{target}|?{' ',''})
 <script type="text/javascript"><!--
 document.write("<a href='")
 document.write((window.opener) ? "javascript:close()" : "./")

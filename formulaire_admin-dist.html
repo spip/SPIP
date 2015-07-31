@@ -1,16 +1,16 @@
-[<(#HTTP_VARS{floatdiv}) class="spip-admin-float">]
+[<(#ENV{floatdiv}) class="spip-admin-float">]
 <div class="spip-admin-bloc" dir='#LANG_DIR'>
 <div class="spip-admin">
 	<ul>[
-	<li><a href='ecrire/articles.php3?id_article=(#HTTP_VARS{id_article})' class='spip-admin-boutons'><:admin_modifier_article:> ([(#HTTP_VARS{id_article})])</a></li>][
-	<li><a href='ecrire/breves_voir.php3?id_breve=(#HTTP_VARS{id_breve})' class='spip-admin-boutons'><:admin_modifier_breve:> ([(#HTTP_VARS{id_breve})])</a></li>][
-	<li><a href='ecrire/naviguer.php3?id_rubrique=(#HTTP_VARS{id_rubrique})' class='spip-admin-boutons'><:admin_modifier_rubrique:> ([(#HTTP_VARS{id_rubrique})])</a></li>][
-	<li><a href='ecrire/mots_edit.php3?id_mot=(#HTTP_VARS{id_mot})' class='spip-admin-boutons'><:admin_modifier_mot:> ([(#HTTP_VARS{id_mot})])</a></li>][
-	<li><a href='ecrire/auteurs_edit.php3?id_auteur=(#HTTP_VARS{id_auteur})' class='spip-admin-boutons'><:admin_modifier_auteur:> ([(#HTTP_VARS{id_auteur})])</a></li>]
-	<li><a href='[(#HTTP_VARS{action})]var_mode=recalcul' class='spip-admin-boutons'><:admin_recalculer:>[(#HTTP_VARS{use_cache})]</a></li>[
-	<li><a href='ecrire/(#HTTP_VARS{statistiques})[id_article=(#HTTP_VARS{id_article})]' class='spip-admin-boutons'><:info_visites:>&nbsp;[(#HTTP_VARS{visites})];&nbsp;<:info_popularite_5:>&nbsp;[(#HTTP_VARS{popularite})]</a></li>][
-	<li><a href='[(#HTTP_VARS{action})]var_mode=(#HTTP_VARS{debug})' class='spip-admin-boutons'><:admin_debug:></a></li>]
+	<li><a href='ecrire/articles.php3?id_article=(#ENV{id_article})' class='spip-admin-boutons'><:admin_modifier_article:> ([(#ENV{id_article})])</a></li>][
+	<li><a href='ecrire/breves_voir.php3?id_breve=(#ENV{id_breve})' class='spip-admin-boutons'><:admin_modifier_breve:> ([(#ENV{id_breve})])</a></li>][
+	<li><a href='ecrire/naviguer.php3?id_rubrique=(#ENV{id_rubrique})' class='spip-admin-boutons'><:admin_modifier_rubrique:> ([(#ENV{id_rubrique})])</a></li>][
+	<li><a href='ecrire/mots_edit.php3?id_mot=(#ENV{id_mot})' class='spip-admin-boutons'><:admin_modifier_mot:> ([(#ENV{id_mot})])</a></li>][
+	<li><a href='ecrire/auteurs_edit.php3?id_auteur=(#ENV{id_auteur})' class='spip-admin-boutons'><:admin_modifier_auteur:> ([(#ENV{id_auteur})])</a></li>]
+	<li><a href='[(#ENV{action})]var_mode=recalcul' class='spip-admin-boutons'><:admin_recalculer:>[(#ENV{use_cache})]</a></li>[
+	<li><a href='ecrire/(#ENV{statistiques})[id_article=(#ENV{id_article})]' class='spip-admin-boutons'><:info_visites:>&nbsp;[(#ENV{visites})];&nbsp;<:info_popularite_5:>&nbsp;[(#ENV{popularite})]</a></li>][
+	<li><a href='[(#ENV{action})]var_mode=(#ENV{debug})' class='spip-admin-boutons'><:admin_debug:></a></li>]
 	</ul>
 </div>
 </div>
-[</(#HTTP_VARS{floatdiv})>]
+[</(#ENV{floatdiv})>]

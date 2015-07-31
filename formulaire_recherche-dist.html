@@ -1,9 +1,9 @@
-<form action="[(#HTTP_VARS{lien})]" method="get" class="formrecherche">
+<form action="[(#ENV{lien})]" method="get" class="formrecherche">
 	<div>
 		<input type="text"
 			id="formulaire_recherche"
 			class="formrecherche"
 			name="recherche"
-			value="[(#HTTP_VARS*{recherche_securisee})]" />
+			value="[(#ENV*{recherche_securisee})]" />
 	</div>
 </form>

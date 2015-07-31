@@ -1,16 +1,16 @@
 [
-(#HTTP_VARS*{message})
+(#ENV*{message})
 ][
-(#HTTP_VARS*{message}|?{'',' '})
+(#ENV*{message}|?{'',' '})
 <form id="oubli_form" action='spip_pass.php3' method='post'>
 	<fieldset style="border: none;"><legend></legend>[
 	<:pass_nouveau_pass:>
-	<input type='hidden' name="p" value="(#HTTP_VARS{p})">
+	<input type='hidden' name="p" value="(#ENV{p})">
 	<label>
 	    <:pass_choix_pass:>
 	    <input type="password" name="oubli">
 	</label>][
-	(#HTTP_VARS{p}|?{'',' '})
+	(#ENV{p}|?{'',' '})
 	<label>
 	  <:pass_indiquez_cidessous:>
 	  <input type="texte" name="oubli">
@@ -23,7 +23,7 @@
 <div align="right">
 <script type="text/javascript"><!--
 [
-(#HTTP_VARS*{message}|?{'',' '})
+(#ENV*{message}|?{'',' '})
 document.oubli_form.oubli.focus()
 ]
 document.write("<a href='")
