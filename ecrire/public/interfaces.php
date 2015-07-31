@@ -226,6 +226,7 @@ $tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
 $tables_jointures['spip_articles'][]= 'documents_articles';
 $tables_jointures['spip_articles'][]= 'mots';
 $tables_jointures['spip_articles'][]= 'signatures';
+$tables_jointures['spip_articles'][]= 'petitions';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
 $tables_jointures['spip_auteurs'][]= 'mots'; // ??
@@ -267,6 +268,7 @@ $tables_jointures['spip_groupes_mots'][]= 'mots';
 global  $exceptions_des_jointures;
 $exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre');
 $exceptions_des_jointures['type_mot'] = array('spip_mots', 'type');
+$exceptions_des_jointures['petition'] = array('spip_petitions', 'texte');
 $exceptions_des_jointures['id_signature']= array('spip_signatures', 'id_signature');
 
 global  $table_des_traitements;
