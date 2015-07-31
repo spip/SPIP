@@ -1,0 +1,26 @@
+#CACHE{0}#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml version="1.0" encoding="#CHARSET" ?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="[(#ENV{lang}|texte_backend)]">
+<BOUCLE_RSS_A(RUBRIQUES){id_rubrique}>
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93; <:ecrire:titre_page_forum_suivi:> ]RSS[ (#TITRE|texte_backend)]</title>
+	<link>[(#URL_RUBRIQUE|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>[(#ENV{lang}|texte_backend)]</language>
+	<BOUCLE_RSS(FORUMS?){id_rubrique}{statut="publie"}{tout}>
+	<item>
+		<title>[(#TITRE|texte_backend)][ ((#ENV{page}|=={publie}|?{#STATUT, "publie"}|=={publie}|?{'', #STATUT}))]</title>
+		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_FORUM|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		[<thr:in-reply-to type="text/html"
+			ref="(#ID_FORUM|generer_url_forum_parent|url_absolue)"
+			href="(#ID_FORUM|generer_url_forum_parent|url_absolue)" />';
+		<dc:creator>[(#AUTEUR|texte_backend)][ &lt;(#EMAIL_AUTEUR|texte_backend)&gt;]</dc:creator>
+		<description>[ (#TEXTE|liens_absolus|texte_backend)]#NOTES</description>
+	</item></BOUCLE_RSS>
+</BOUCLE_RSS_A>
+</channel>
+</rss>

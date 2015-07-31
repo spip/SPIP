@@ -1,0 +1,68 @@
+[(#REM) Cette balise (invisible) provoque le recalcul du forum
+la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#PARAMETRES_FORUM|?{''})]
+
+[(#REM) Messages du forum ]
+<B_comments>
+<div class="comments comments-thread comments-thread-1">
+<h2><:messages_forum:></h2>
+<ul class="comments-items">
+
+	<BOUCLE_comments(FORUMS?) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date}>
+	<li class="comment-item comment-fil[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last][ (#EXPOSE)]">
+		<div class="comment hreview">
+			<a href="#comment#ID_FORUM" name="comment#ID_FORUM" id="comment#ID_FORUM"></a>
+			<a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
+			<p class="comment-meta">
+				<a rel="self bookmark" href="#forum#ID_FORUM" title="<:forum:forum_permalink:> #ID_FORUM" class="permalink">[(#CONFIG{forums_titre}|!={non}|oui)<span class="permalink">#COMPTEUR_BOUCLE.</span>
+				<strong class="#EDIT{titre} comment-titre">[(#TITRE), ]</strong>]
+				<small><abbr class="dtreviewed"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)][, (#DATE|heures)][:(#DATE|minutes)]</abbr>[<span class="sep">, </span><:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small></a>
+			</p>
+			<div class="#EDIT{texte} comment-content description">
+				[(#TEXTE|lignes_longues)]
+				[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				<B_doc><div class="comment-doc"><BOUCLE_doc(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#MODELE{emb}|image_reduire{500,*})]
+				,
+					#LOGO_DOCUMENT{#URL_DOCUMENT}
+				})]
+				</BOUCLE_doc></div></B_doc>
+			</div>
+		</div>
+		<B_comments-fils>
+		<ul class="comments-items">
+			<BOUCLE_comments-fils(FORUMS){id_thread}{id_forum!=#_comments:ID_FORUM}{par date}>
+			<li class="comment-item comment-fil[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+				<div class="comment hreview">
+					<a href="#comment#ID_FORUM" name="comment#ID_FORUM" id="comment#ID_FORUM"></a>
+					<a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
+					<p class="comment-meta">
+						<a rel="self bookmark" href="#forum#ID_FORUM" title="<:forum:forum_permalink:> #ID_FORUM" class="permalink">[(#CONFIG{forums_titre}|!={non}|oui)<span class="permalink">#COMPTEUR_BOUCLE.</span>
+						<strong class="#EDIT{titre} comment-titre">[(#TITRE), ]</strong>]
+						<small><abbr class="dtreviewed"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)][, (#DATE|heures)][:(#DATE|minutes)]</abbr>[<span class="sep">, </span><:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small></a>
+					</p>
+					<div class="#EDIT{texte} comment-content description">
+						[(#TEXTE|lignes_longues)]
+						[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+						<B_doc2><div class="comment-doc"><BOUCLE_doc2(DOCUMENTS){id_forum}>
+						[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+							[(#MODELE{emb}|image_reduire{500,*})]
+						,
+							#LOGO_DOCUMENT{#URL_DOCUMENT}
+						})]
+						</BOUCLE_doc2></div></B_doc2>
+					</div>
+				</div>
+			</li>
+			</BOUCLE_comments-fils>
+		</ul>
+		</B_comments-fils>
+	</li>
+	</BOUCLE_comments>
+
+</ul>
+</div>
+</B_comments>

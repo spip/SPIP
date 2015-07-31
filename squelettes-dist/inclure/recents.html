@@ -1,0 +1,17 @@
+<B_articles>
+<div class="menu menu_articles" id="articles_recents">
+	<h2 class="offscreen"><:articles_recents:></h2>
+	#ANCRE_PAGINATION
+	<ul>
+		<BOUCLE_articles(ARTICLES) {!par date} {pagination}>
+		<li class="hentry clearfix">
+			[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE}|image_reduire{40,*})]
+			<h3 class="h2 entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+			<small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
+		</li>
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">(#PAGINATION|{precedent_suivant})</p>]
+</div><!--#articles_recents-->
+</B_articles>

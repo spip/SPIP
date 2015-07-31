@@ -1,0 +1,165 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+[<link rel="canonical" href="(#URL_RUBRIQUE|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="pas_surlignable page_rubrique">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+
+	<div class="main">
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p><!--.arbo-->
+	
+			<div class="cartouche">
+				<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+			</div>
+	
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+	
+			[(#REM) Articles de la rubrique ]
+			<B_articles>
+			<div class="menu menu_articles">
+				#ANCRE_PAGINATION
+				<ul>
+					<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date} {pagination}>
+					<li>
+						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
+						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+					</li>
+					</BOUCLE_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_articles>
+	
+			[(#REM) Si aucun article, affiche un plan de la rubrique ]
+			<B_sous_rubriques>
+			<div class="menu menu_rubriques">
+				<h2><:sous_rubriques:></h2>
+				<ul class="spip">
+					<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date}>
+					<li>
+						<a href="#URL_RUBRIQUE">#TITRE</a>
+	
+						[(#REM) Une boucle recursive pour le mini plan]
+						<B_miniplan>
+						<ul>
+							<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre}{!par date}>
+							<li>
+								<a href="#URL_RUBRIQUE">#TITRE</a>
+								<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+							</li>
+							</BOUCLE_miniplan>
+						</ul>
+						</B_miniplan>
+	
+					</li>
+					</BOUCLE_sous_rubriques>
+				</ul>
+				</div>
+			</B_sous_rubriques>
+	
+			<//B_articles>[(#REM) supprimer pour toujours avoir le miniplan]
+	
+	
+			[(#REM) Documents joints a la rubrique ]
+			<B_documents_joints>
+			<div class="menu" id="documents_joints">
+				<h2><:medias:titre_documents_joints:></h2>
+				<ul class="spip">
+					<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
+					<li>
+						<a href="#URL_DOCUMENT" type="#MIME_TYPE" class="spip_doc[ (#EXTENSION|attribut_html)]"><strong class="#EDIT{titre} titre">[(#TITRE|sinon{[(#FICHIER|basename|couper{80})]})]</strong>
+						<small class="info_document">([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][<span>(#TAILLE|taille_en_octets)</span>])</small></a>
+						[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
+					</li>
+					</BOUCLE_documents_joints>
+				</ul>
+			</div><!--#documents_joints-->
+			</B_documents_joints>
+	
+			[<div class="notes"><hr />(#NOTES)</div>]
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+	
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+			
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="menu">
+				<h2><:mots_clefs:></h2>
+				<ul>
+					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+	
+			[(#REM) Breves du secteur ]
+			<B_breves>
+			<div class="menu menu_breves">
+				<h2><:breves:breves:></h2>
+				<ul>
+					<BOUCLE_breves(BREVES) {id_rubrique} {!par date} {0,5}>
+					<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
+	
+			[(#REM) Sites de la rubrique ]
+			<B_sites>
+			<div class="menu">
+				<h2><:sur_web:></h2>
+				<ul>
+					<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+					<li>
+						<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
+						<B_syndic>
+						<ul>
+							<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {!par date} {0,3}>
+							<li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
+							</BOUCLE_syndic>
+						</ul>
+						</B_syndic>
+					</li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+			</B_sites>
+	
+			[(#REM) Proposer un site ]
+			#FORMULAIRE_SITE
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucune_rubrique:>})]
+<//B_principale>
