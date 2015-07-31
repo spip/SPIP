@@ -520,7 +520,6 @@ define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
 
 // http://doc.spip.org/@typer_raccourci
 function typer_raccourci ($lien) {
-
 	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
 	$f = $match[1];
 	// valeur par defaut et alias historiques
@@ -547,14 +546,13 @@ function typer_raccourci ($lien) {
 // http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
-
 	if ($match = typer_raccourci ($lien)) {
 		@list($f,$objet,$id,$params,$ancre) = $match;
 		// chercher la fonction nommee generer_url_$raccourci
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
-		if (function_exists($f)) {
+		if (function_exists($f) OR function_exists($f .= '_dist')) {
 			if ($pour == 'url') {
 				$url = $f($id);
 				if ($params)
@@ -607,8 +605,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
-// http://doc.spip.org/@calculer_url_article
-function calculer_url_article($id, $texte='') {
+function calculer_url_article_dist($id, $texte='') {
 	$lien = generer_url_article($id);
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
 	$row = spip_fetch_array($s);
@@ -619,8 +616,7 @@ function calculer_url_article($id, $texte='') {
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_rubrique
-function calculer_url_rubrique($id, $texte='')
+function calculer_url_rubrique_dist($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
 	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
@@ -632,8 +628,7 @@ function calculer_url_rubrique($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_mot
-function calculer_url_mot($id, $texte='')
+function calculer_url_mot_dist($id, $texte='')
 {
 	$lien = generer_url_mot($id);
 	$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
@@ -645,8 +640,7 @@ function calculer_url_mot($id, $texte='')
 	return array($lien, 'spip_in', $texte);
 }
 
-// http://doc.spip.org/@calculer_url_breve
-function calculer_url_breve($id, $texte='')
+function calculer_url_breve_dist($id, $texte='')
 {
 	$lien = generer_url_breve($id);
 	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
@@ -658,8 +652,7 @@ function calculer_url_breve($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_auteur
-function calculer_url_auteur($id, $texte='')
+function calculer_url_auteur_dist($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
 	if ($texte=='') {
@@ -670,8 +663,7 @@ function calculer_url_auteur($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
-// http://doc.spip.org/@calculer_url_document
-function calculer_url_document($id, $texte='')
+function calculer_url_document_dist($id, $texte='')
 {
 	$lien = generer_url_document($id);
 	if ($texte=='') {
@@ -686,8 +678,7 @@ function calculer_url_document($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
-// http://doc.spip.org/@calculer_url_site
-function calculer_url_site($id, $texte='')
+function calculer_url_site_dist($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
@@ -703,8 +694,7 @@ function calculer_url_site($id, $texte='')
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_forum
-function calculer_url_forum($id, $texte='')
+function calculer_url_forum_dist($id, $texte='')
 {
 	$lien = generer_url_forum($id);
 	if (!trim($texte)) {
@@ -1059,7 +1049,6 @@ function paragrapher($letexte, $forcer=true) {
 //
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
-
 	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
