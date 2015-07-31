@@ -203,16 +203,17 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
-		  if (!ereg("^(.*)" . NOM_DE_CHAMP ."[{|]", $arg, $r)) {
+		  if (!ereg(NOM_DE_CHAMP ."[{|]", $arg, $r)) {
 		    $arg = phraser_champs_exterieurs($arg, $sep, $result);
 		    $args = ltrim($regs[count($regs)-1]);
 		    $collecte = array_merge($collecte, $arg);
 		    $result = array_merge($result, $arg);
 		  }
 		  else {
-		    $pred = $r[1];
+		    $n = strpos($args,$r[0]);
+		    $pred = substr($args, 0, $n);
 		    $par = ',}';
-		    if (ereg('(.*)\($', $pred, $m))
+		    if (ereg('^(.*)\($', $pred, $m))
 		      {$pred = $m[1]; $par =')';}
 		    if ($pred) {
 			$champ = new Texte;
@@ -221,11 +222,11 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$result[] = $champ;
 			$collecte[] = $champ;
 		    }
-		    $rec = substr($args, strpos($r[0],$args)+strlen($r[0])-1);
+		    $rec = substr($args, $n + strlen($r[3])+1);
 		    $champ = new Champ;
-		    $champ->nom_boucle = $r[3];
-		    $champ->nom_champ = $r[4];
-		    $champ->etoile = $r[6];
+		    $champ->nom_boucle = $r[2];
+		    $champ->nom_champ = $r[3];
+		    $champ->etoile = $r[5];
 		    phraser_args($rec, $par, $sep, array(), $champ);
 		    $args = $champ->apres ;
 		    $champ->apres = '';
@@ -384,7 +385,7 @@ function phraser_criteres($params, &$result) {
 			    $crit->not = $m[1];
 			    $crit->cond = $m[3];
 			  }
-			  else
+			  else 
 			    erreur_squelette(_T('zbug_critere_inconnu',
 						array('critere' => $param)));
 			  $args[] = $crit;

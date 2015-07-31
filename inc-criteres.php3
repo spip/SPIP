@@ -407,11 +407,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	      $j = count($last)-1;
 	      $last = $last[$j];
 	      $n = strlen($last->texte);
-	      if (($deb->texte[0] == '(') &&
-		  ($last->texte[$n-1] == ')'))
+	      if (($deb->texte[0] == '(') && ($last->texte[$n-1] == ')'))
 		{
 		  $params[0][0]->texte = substr($deb->texte,1);
-		  $params[$k][$j]->texte = substr($last->texte,0,$n);
+		  $params[$k][$j]->texte = substr($last->texte,0,$n-1);
 		}
 	    }
 	    $val = array();
@@ -593,9 +592,7 @@ function calculer_critere_repete(&$boucle, $col, $val)
 {
 	foreach ($boucle->where as $k => $v)  {
         	if (ereg(" *$col *(=|IN) *\(?'(.*)(\".*)[')]$",$v, $m)) {
-		  spip_log($boucle->where[$k]);
                   $boucle->where[$k] = "$col IN ('$m[2] \"','\" . $val . $m[3])";
-		  spip_log($boucle->where[$k]);
                   // esperons que c'est le meme !
                   $boucle->having++;
 		  return true;}
