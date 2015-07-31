@@ -106,6 +106,7 @@ ecrire/inc/commencer_page.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/couleurs.php -text
 ecrire/inc/csv.php -text
+ecrire/inc/cvt_autosave.php -text
 ecrire/inc/cvt_configurer.php -text
 ecrire/inc/cvt_multietapes.php -text
 ecrire/inc/distant.php -text

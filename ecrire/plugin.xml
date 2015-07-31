@@ -268,6 +268,10 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 		<action>cvtconf_formulaire_charger</action>
 		<inclure>inc/cvt_configurer.php</inclure>
 	</pipeline>
+	<pipeline><nom>formulaire_charger</nom>
+		<action>cvtautosave_formulaire_charger</action>
+		<inclure>inc/cvt_autosave.php</inclure>
+	</pipeline>
 	<pipeline><nom>formulaire_verifier</nom>
 		<action>cvtmulti_formulaire_verifier</action>
 		<inclure>inc/cvt_multietapes.php</inclure>
@@ -275,6 +279,10 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<pipeline><nom>formulaire_traiter</nom>
 		<action>cvtconf_formulaire_traiter</action>
 		<inclure>inc/cvt_configurer.php</inclure>
+	</pipeline>
+	<pipeline><nom>formulaire_traiter</nom>
+		<action>cvtautosave_formulaire_traiter</action>
+		<inclure>inc/cvt_autosave.php</inclure>
 	</pipeline>
 	<pipeline><nom>formulaire_admin</nom><action></action></pipeline>
 	<pipeline><nom>header_prive</nom>
