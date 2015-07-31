@@ -160,10 +160,8 @@ function pipeline($action,$val) {
 	}
 	// si le flux est une table qui encapsule donnees et autres
 	// on ne ressort du pipe que les donnees
-	if (is_array($val)){
-		if (!isset($val['data'])) {spip_log('pipeline $action flux de retour array sans element data :'.serialize($val));$val['data']='';}
-		$val = $val['data'];
-	}
+	if (is_array($val) && isset($val['data']))
+			$val = $val['data'];
 	return $val;
 }
 
