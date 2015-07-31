@@ -99,6 +99,7 @@ function aide($aide='') {
 //
 // Mention de la revision SVN courante de l'espace restreint standard
 // (numero non garanti pour l'espace public et en cas de mutualisation)
+// on est negatif si on est sur .svn, et positif si on utilise svn.revision
 // http://doc.spip.org/@version_svn_courante
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
@@ -107,7 +108,7 @@ function version_svn_courante($dir) {
 	if (lire_fichier($dir . '/.svn/entries', $c)
 	AND preg_match_all(
 	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER))
-		return max($r1[1]);
+		return -max($r1[1]);
 
 	// version installee par paquet ZIP de SPIP-Zone
 	if (lire_fichier($dir.'/svn.revision', $c)
@@ -127,8 +128,12 @@ function info_copyright() {
 	//
 	// Mention, le cas echeant, de la revision SVN courante
 	//
-	if ($svn_revision = version_svn_courante(_DIR_RACINE))
-		$version .= " SVN [<a href='http://trac.rezo.net/trac/spip/changeset/$svn_revision' target='_blank'>$svn_revision</a>]";
+	if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
+		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
+		. "[<a href='http://trac.rezo.net/trac/spip/changeset/"
+		. abs($svn_revision) . "' target='_blank'>"
+		. abs($svn_revision) . "</a>]";
+	}
 
 	echo _T('info_copyright', 
 		   array('spip' => "<b>SPIP $version</b> ",
