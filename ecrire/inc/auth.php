@@ -136,7 +136,7 @@ function inc_auth_dist() {
 			$auth_can_disconnect = true;
 		} else unset($_COOKIE['spip_session']);
 	}
-	
+
 	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
 	if (!$ignore_auth_http AND !$connect_id_auteur) {
@@ -170,8 +170,7 @@ function inc_auth_dist() {
 
 	if (!$row = spip_fetch_array($result)) {
 
-		auth_areconnecter($connect_login);
-		exit;
+		return auth_areconnecter($connect_login);
 	}
 
 	// Indiquer la connexion. A la minute pres ca suffit.
@@ -229,7 +228,7 @@ function auth_areconnecter($auth_login)
 	} else {
 		echo minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
 	}
-	exit;
+	return false;
 }
 
 // redemande login, avec nettoyage
