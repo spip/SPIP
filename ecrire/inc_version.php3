@@ -856,8 +856,7 @@ function verif_butineur() {
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 	}
-	else if (eregi("KHTML", $browser_description)) {
-		eregi("Safari/([^;]*)", $browser_description, $match);
+	else if (eregi("KHTML", $browser_description) && eregi("Safari/([^;]*)",$browser_description, $match)) {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
 	}

@@ -1578,6 +1578,15 @@ End If
 		if (element.style.visibility != statut) element.style.visibility = statut;
 	}
 	
+	function montrer(objet) {
+		setvisibility(objet, 'visible');
+	}
+	function cacher(objet) {
+		setvisibility(objet, 'hidden');
+	}
+	
+	
+	
 	function getHeight(obj) {
 		if (obj == "window") {
 			return hauteur_fenetre();
@@ -2340,11 +2349,9 @@ else {
 	else {
 		$style = "background-color: $couleur_claire";
 	}
+
 	echo "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
-
-
-
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\"><img src='img_pack/tout-site.png' border='0' alt='' /></a>";

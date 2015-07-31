@@ -170,6 +170,7 @@ a.bandeau_rub {
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
 	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
+	background-image: url(img_pack/rubrique-12.gif);
 }
 a.bandeau_rub:hover {
 	background-color: white;
@@ -188,6 +189,14 @@ div.bandeau_rub {
 	visibility: hidden;
 	width: 170px;
 }
+
+div.brt {
+	background: url(img_pack/triangle-droite<?php echo $_rtl; ?>.gif) <?php echo $right; ?> center no-repeat;
+}
+div.pos_r {
+	position: relative;
+}
+
 
 div.messages {
 	padding: 5px;
