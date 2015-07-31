@@ -1,9 +1,7 @@
 <?  // test cvs version auto 
 
-	// on est appele via un tag ?
-	if ($tag = "$Name$") {
-		$version = $tag;
-	} else {
-		$version = "$Id$";
-	}
+	// dernier tag connu
+	if (ereg("Name: v(.*) ","$Name$", $regs)
+		$spip_version_affichee = $regs[1];
+
 ?>
