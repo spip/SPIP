@@ -6,29 +6,26 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 	$criteres = '';
 	if ($params) {
 		foreach($params as $param) {
-			if (eregi("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
-				$var = $args[1];
-				$val = $args[3];
-
+                    if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+			$var = $args[1];
+			$val = $args[3];
 				// Cas de la langue : passer $spip_lang
 				// et non table.lang (car depend de {lang_select})
-				if ($var =='lang') {
+			if ($var =='lang') {
 					if ($val)
 						$l[] = "'\'lang\' => " . addslashes($val) . "'";
 					else
 						$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
 				}
-
-				else
+			else
 				if ($val)
 					$l[] = "'\'$var\' => " . addslashes($val) . "'";
 				else {
 					$l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\''";
 				}
-			}
+		    }
+		$criteres = ("' . " . join(".', '.\n",$l) . " . '");
 		}
-		if ($l)
-			$criteres = ("' ." . join(".', '.\n",$l) . ". '");
 	}
 	return "\n'<".
 		"?php
