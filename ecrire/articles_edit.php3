@@ -122,6 +122,7 @@ else if ($new=='oui') {
 	else {
 		// Nouvel article : titre par defaut
 		$titre = filtrer_entites(_T('info_nouvel_article'));
+		$onfocus = " onfocus=\"this.value='';\"";
 	}
 	if (!$id_secteur) {
 		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
@@ -378,7 +379,7 @@ echo "<P><HR><P>";
 
 	echo _T('texte_titre_obligatoire');
 	echo aide ("arttitre");
-	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
+	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
 	if (($articles_soustitre != "non") OR $soustitre) {
 		echo "<B>"._T('texte_sous_titre')."</B>";

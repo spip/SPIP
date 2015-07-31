@@ -6,6 +6,7 @@ include ("inc.php3");
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
 	$type = filtrer_entites(_T('titre_nouveau_groupe'));
+	$onfocus = " onfocus=\"this.value='';\"";
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
@@ -70,7 +71,7 @@ if ($connect_statut =="0minirezo"){
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
 	debut_cadre_formulaire();
 	echo "<b>"._T('info_changer_nom_groupe')."</b><br>\n";
-	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\">\n";
+	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\" $onfocus>\n";
 	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
 	fin_cadre_formulaire();
 }

@@ -54,6 +54,7 @@ if ($new != "oui") {
 }
 else {
 	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
+	$onfocus = " onfocus=\"this.value='';\"";
 	$statut = "prop";
 }
 
@@ -127,7 +128,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$lien_titre = entites_html($lien_titre);
 
 	echo _T('entree_titre_obligatoire');
-	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
+	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
 		echo "<B>"._T('entree_interieur_rubrique')."</B>".aide ("brevesrub")."<BR>\n";
 

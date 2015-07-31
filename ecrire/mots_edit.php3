@@ -60,6 +60,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	else if ($new == 'oui') {
 		$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
+		$onfocus = " onfocus=\"this.value='';\"";
 	}
 }
 
@@ -221,7 +222,7 @@ if ($connect_statut =="0minirezo"){
 	echo "<B>"._T('info_titre_mot_cle')."</B> "._T('info_obligatoire_02');
 	echo aide ("mots");
 
-	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40'>";
+	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus>";
 
 	// dans le groupe...
 	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";

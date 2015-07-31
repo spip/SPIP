@@ -65,6 +65,7 @@ if ($new == "oui") {
 		$id_parent = intval($id_parent);
 		$id_rubrique = 0;
 		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
+		$onfocus = " onfocus=\"this.value='';\"";
 		$descriptif = "";
 		$texte = "";
 	}
@@ -152,7 +153,7 @@ if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 $titre = entites_html($titre);
 
 echo _T('entree_titre_obligatoire');
-echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
+echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
 
 debut_cadre_relief("$logo_parent");
