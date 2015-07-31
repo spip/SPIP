@@ -34,8 +34,6 @@ function exec_upgrade_dist()
 		                  array('connect' => '<tt>'._FILE_CONNECT.'</tt>'))
 		              .generer_form_ecrire('upgrade', "<input type='hidden' name='reinstall' value='non' />", '', _T('bouton_relancer_installation')));
 		echo $r;
-
-		@rename(_FILE_CONNECT, _FILE_CONNECT_TMP);
 	} else {
 
 		if (!isset($GLOBALS['meta']['version_installee']))
