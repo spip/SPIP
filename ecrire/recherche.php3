@@ -66,9 +66,11 @@ if (!$nba AND !$nbb AND !$nbr AND !$nbt AND !$nbs) {
 
 if (lire_meta('activer_moteur') == 'oui') {
 	debut_cadre_relief();
+	echo "</td></tr>\n<tr><td class='arial2' align=center>";
 	echo "<form action='recherche.php3' method='get'>";
-	echo "<p>Recherche en texte int&eacute;gral :<br>";
+	echo "<p>Vous pouvez aussi faire une recherche en texte int&eacute;gral :<br>";
 	echo "<input type='text' name='rech' value='$recherche$rech'>";
+	echo "&nbsp; &nbsp;<input type='submit' class='fondo' name='go' value='Chercher'>";
 	echo "</form>";
 	fin_cadre_relief();
 }
