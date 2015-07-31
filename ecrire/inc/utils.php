@@ -1809,11 +1809,13 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
-			$msg = array('info_erreur_squelette2',
-				       array('fichier'=>"'$fond'"));
-			erreur_squelette($msg, @$options['compil']);
+			$c = isset($options['compil']) ? $options['compil'] :'';
+			$a = array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES);
+			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
 		}
-		if (isset($options['ajax'])AND $options['ajax'])
+					 
+		if (isset($options['ajax'])AND $options['ajax']){
+			include_spip('inc/filtres');
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
 
 		$page = pipeline('recuperer_fond',array(
