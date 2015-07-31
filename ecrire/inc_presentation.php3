@@ -585,7 +585,7 @@ function puce_statut_article($id, $statut) {
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
 	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
-		$inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>"
+	  $inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>"
 			. "<div class='puce_article_fixe' $action>" .
 		  http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'") ."</div>"
 			. "<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
@@ -1613,7 +1613,7 @@ function debut_javascript($admin, $stat)
 	// envoi le fichier JS de config si browser ok.
 	echo $GLOBALS['browser_layer'];
 ?>
-<script type='text/javascript'<!--
+<script type='text/javascript'><!--
 	var admin = <?php echo ($admin ? 1 : 0) ?>;
 	var stat = <?php echo ($stat ? 1 : 0) ?>;
 	var largeur_icone = <?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?>;
@@ -1626,7 +1626,8 @@ function debut_javascript($admin, $stat)
 	var confirm_changer_statut = '<?php include_ecrire("inc_charsets.php3"); echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>';
 //--></script>
 <script type='text/javascript' src='presentation.js'></script>
-	<?php }
+<?php
+}
 
 // Fonctions onglets
 
