@@ -465,7 +465,7 @@ function plugin_ongletbouton($nom, $val)
 	return "if (!function_exists('$nom')) {function $nom(){return $val;}}\n";
 }
 
-// creer le fichier CACHE_PLUGIN_VERIF � partir de
+// creer le fichier CACHE_PLUGIN_VERIF a partir de
 // $GLOBALS['spip_pipeline']
 // $GLOBALS['spip_matrice']
 
