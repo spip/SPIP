@@ -863,6 +863,13 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'vider_date';
 	}
 
+	// URL_SITE : vider les url == 'http://'
+	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL');
+	reset($c);
+	while (list(, $val) = each($c)) {
+		$champs_traitement[$val][] = 'vider_url';
+	}
+
 
 	//
 	// Construire un tableau associatif des champs de chaque type

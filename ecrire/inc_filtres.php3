@@ -114,6 +114,14 @@ function attribut_html($texte) {
 	return $texte;
 }
 
+// vider les url nulles comme 'http://' ou 'mailto:'
+function vider_url($url) {
+	if (eregi("^(http:?/?/?|mailto:?)$", trim($url)))
+		return false;
+	else
+		return $url;
+}
+
 // Extraire une date de n'importe quel champ (a completer...)
 function extraire_date($texte) {
 	// format = 2001-08
