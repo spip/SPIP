@@ -171,7 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualitŽ de ce site.',
+'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualit&eacute; de ce site.',
 'calendrier_synchro_lien' => 'R&eacute;cup&eacute;rer le fichier <i>iCal</i>',
 // D
 'date_avant_jc' => 'av. J.C.',

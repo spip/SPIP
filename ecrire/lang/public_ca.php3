@@ -8,8 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Arrel de la web',
 'articles' => 'Articles',
+'articles_auteur' => 'Articles d\'aquest autor',
 'articles_populaires' => 'Els articles m&eacute;s populars',
 'articles_recents' => 'Els articles m&eacute;s recents',
+'articles_rubrique' => 'Articles d\'aquesta secci&oacute;',
 'aucun_article' => 'No hi ha cap article en aquesta adre&ccedil;a',
 'aucun_auteur' => 'No hi ha cap autor/a a aquesta adre&ccedil;a',
 'aucun_site' => 'No hi ha cap lloc web en aquesta adre&ccedil;a',
@@ -75,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 'navigation' => 'Navegaci&oacute;',
-'nom' => ' Nom',
+'nom' => 'Nom',
 'nouveautes' => 'Les novetats',
 'nouveautes_web' => 'Novetats a la Web',
 'nouveaux_articles' => 'Articles nous',

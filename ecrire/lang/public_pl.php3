@@ -8,8 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Strona g&#322;&oacute;wna',
 'articles' => 'Artyku&#322;y',
+'articles_auteur' => 'Artyku&#322;y napisane przez tego autora',
 'articles_populaires' => 'Najbardziej popularne artyku&#322;y',
 'articles_recents' => 'Najnowsze artyku&#322;y',
+'articles_rubrique' => 'Artyku&#322;y w tym dziale',
 'aucun_article' => 'Nie ma &#380;adnego artyku&#322;u pod tym adresem',
 'aucun_auteur' => 'Nie ma &#380;adnego autora pod tym adresem',
 'aucun_site' => 'Nie ma &#380;adnej strony pod tym adresem',
@@ -87,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // R
-'repondre_article' => 'Skomentuj ten artyku&#322;',
+'repondre_article' => '<MODIF> Skomentuj ten artyku&#322;',
 'repondre_breve' => 'Skomentuj ten news',
 'repondre_message' => 'Skomentuj wiadomo&#347;&#263;',
 'resultats_recherche' => 'Wynik wyszukiwania',
@@ -113,21 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Zobacz on-line',
-
-
-// PLUS_UTILISE
-'autres_groupes_de_mots_clefs' => '-vide-',
-'dans_meme_rubrique' => 'W tym samym dziale',
-'derniers_messages_des_forums' => 'Ostatnie wiadomo&#347;ci opublikowane w forum',
-'envoyer_un_message' => 'Wy&#347;lij wiadomo&#347;&#263;',
-'pas_d_article' => 'Nie ma artyku&#322;u pod tym adresem',
-'pas_d_auteur' => 'Nie ma takiego autora',
-'pas_de_breve' => 'Nie ma takiego newsa',
-'pas_de_rubrique' => 'Nie ma takiego dzia&#322;u',
-'pas_de_site' => 'Nie ma takiej strony',
-'plan_du_site' => 'Mapa strony',
-'poster_un_message' => 'Napisz wiadomo&#347;&#263;'
+'voir_en_ligne' => 'Zobacz on-line'
 
 );
 

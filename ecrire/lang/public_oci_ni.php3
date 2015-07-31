@@ -8,10 +8,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Acu&egrave;lh dau sit',
 'articles' => 'Articles',
+'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Lu articles mai populars',
 'articles_recents' => 'Lu articles mai recents',
+'articles_rubrique' => 'Articles d\'aquela rubrica',
+'aucun_article' => 'L\'i a minga d\'article a aquela adre&ccedil;a ',
+'aucun_auteur' => 'L\'i a minga d\'autor a aquela adre&ccedil;a ',
+'aucun_site' => 'L\'i a minga de sit a aquela adre&ccedil;a ',
+'aucune_breve' => 'L\'i a minga de br&egrave;va a aquela adre&ccedil;a ',
+'aucune_rubrique' => 'L\'i a minga de rubrica a aquela adre&ccedil;a ',
 'autres_breves' => 'Autri br&egrave;vas',
 'autres_groupes_de_mots_clefs' => 'Autres grops de m&ograve;ts claus',
+'autres_groupes_mots_clefs' => 'Autres grops de m&ograve;ts claus',
 'autres_sites' => 'Autres sits',
 
 
@@ -32,12 +40,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Darri&egrave;rs articles',
 'derniers_commentaires' => 'Darri&egrave;rs comentaris',
 'derniers_messages_des_forums' => 'Darri&egrave;rs messatges publicats dins lu forums',
+'derniers_messages_forum' => 'Darri&egrave;rs messatges publicats dins lu forums',
 
 
 // E
 'edition_mode_texte' => 'Edicion en m&ograve;de testo de',
 'en_reponse' => 'En responsa a:',
 'en_resume' => 'En resumit',
+'envoyer_message' => 'Mandar un messatge',
 'envoyer_un_message' => 'Mandar un messatge',
 'espace_prive' => 'Espaci privat',
 
@@ -56,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Dau meteis autor',
+'meme_rubrique' => 'Dins la meteissa rubrica',
 'memes_auteurs' => 'Dei meteisses autors',
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
@@ -82,7 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_rubrique' => 'I a pas de rubrica a aquela adre&ccedil;a',
 'pas_de_site' => 'I a pas de sit a aquela adre&ccedil;a',
 'plan_du_site' => 'Plan dau sit',
+'plan_site' => 'Plan dau sit',
 'popularite' => 'Popularitat',
+'poster_message' => 'Postar un messatge',
 'poster_un_message' => 'Postar un messatge',
 
 

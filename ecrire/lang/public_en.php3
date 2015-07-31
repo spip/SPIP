@@ -8,8 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Home page',
 'articles' => 'Articles',
+'articles_auteur' => 'This author\'s articles',
 'articles_populaires' => 'The most read articles',
 'articles_recents' => 'The most recent articles',
+'articles_rubrique' => 'This section\'s articles',
 'aucun_article' => 'There is no article at this address',
 'aucun_auteur' => 'There is no author at this address',
 'aucun_site' => 'There is no site at this address',

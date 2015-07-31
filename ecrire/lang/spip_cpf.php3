@@ -93,8 +93,9 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'barre_e_accent_aigu' => 'Pou m&egrave; in E &egrave;k son laksan &eacute;gi an mazizkil',
 'barre_eo' => 'Pou m&egrave;t in E andan O',
 'barre_eo_maj' => 'Pou m&egrave;t in E andan O an mazizkil',
+'barre_euro' => 'M&egrave;t lo sinbol &euro;',
 'barre_gras' => 'Pou &eacute;kri {{an gro}}',
-'barre_guillemets' => 'Pou m&egrave;t bann &laquo; giym&eacute; frans&eacute; &raquo;',
+'barre_guillemets' => '<MODIF> Pou m&egrave;t bann &laquo; giym&eacute; frans&eacute; &raquo;',
 'barre_guillemets_simples' => 'Pou m&egrave; bann „giym&eacute;“',
 'barre_intertitre' => 'M&egrave;t sa-la kom in {{{lint&egrave;rtitr}}}',
 'barre_italic' => 'M&egrave;t sa-la an {litalik}',
@@ -198,6 +199,11 @@ l&eacute; pa kav rokon&egrave;t ali.',
 'bouton_valider' => 'Konfirm',
 'bouton_vider_cache' => 'D&eacute;vid kas lo sitw&egrave;b',
 'bouton_voir_message' => 'Artourn g&egrave;t mod&eacute;kri avann konfirm ali',
+
+
+// C
+'calendrier_synchro' => 'Si ou ans&egrave;rv in lozisy&egrave;l pou in lajinda i mars &egrave;k <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...),ou p&eacute; m&egrave;t ali si lo ritm bann arnouv&egrave;lman laktyalit&eacute; lo sit-la.',
+'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>',
 
 
 // D
@@ -398,12 +404,14 @@ Mersi aou m&egrave;t ansanm isi
 'icone_admin_site' => 'Kolonaz lo sitw&egrave;b',
 'icone_afficher_auteurs' => 'Armontr bann lot&egrave;r',
 'icone_afficher_visiteurs' => 'Armontr bann vizit&egrave;r',
+'icone_agenda' => 'Lajinda &egrave;k kazmod&eacute;kri',
 'icone_aide_ligne' => 'Koudmin sir lo w&egrave;b',
 'icone_arret_discussion' => 'Anbar ou m&egrave;t ansanm dann kozman-la ',
 'icone_articles' => 'Bann zartik',
 'icone_auteurs' => 'Bann lot&egrave;r',
 'icone_breves' => 'Bann tit-nouv&egrave;l',
 'icone_calendrier' => 'Kalandriy&eacute;',
+'icone_calendrier_messagerie' => 'Lajinda &egrave;k kazmod&eacute;kri',
 'icone_configuration_site' => 'Konfigir lo sitw&egrave;b',
 'icone_configurer_site' => 'Konfigir out sitw&egrave;b',
 'icone_creation_groupe_mots' => 'Kr&eacute; inn nouvo group ast&egrave;r pou bann molakl&eacute;',
@@ -497,7 +505,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_adresse_email' => 'LADRES IMEL&nbsp;:',
 'info_adresse_non_indiquee' => 'Ou n&eacute;na pwin mi ladr&egrave;s sak i v&eacute; test ast&egrave;r&nbsp;!',
 'info_adresse_url' => 'Ladr&egrave;s (URL) lo sit piblik (figirw&egrave;b)',
-'info_afficher_visites' => 'Armontr bann vizit pou :',
+'info_afficher_visites' => '<MODIF> Armontr bann vizit pou :',
 'info_affichier_visites_articles_plus_visites' => 'Armontr bann vizit pou <b>bann zartik l&eacute; pli vizit&eacute; dopwi lo komansman&nbsp;:</b>',
 'info_aide' => 'KOUDMIN :',
 'info_aide_en_ligne' => 'Koudmin an liyn SPIP',
@@ -607,7 +615,6 @@ domann d&eacute;gr&egrave;n molakl&eacute;-la
 'info_dimension' => 'Dimansyon&nbsp;:',
 'info_discussion_cours' => 'Bann kozman ou l&eacute; apr&eacute; koz&eacute; ',
 'info_document' => 'Dokiman',
-'info_donner_rendez_vous' => 'Bouton-la li perm&egrave;t aou anvwa inn rand&eacute;vou &egrave;k innd&eacute; zot dalon.',
 'info_echange_message' => '&Egrave;k SPIP ou p&eacute; anvway&eacute; bann mod&eacute;kri &eacute; f&eacute; zw&eacute; bann forom kozman
 (forom priv&eacute;) antrozot. L&eacute; posib m&egrave;t ou d&eacute;gr&egrave;n fonksyon-la kom sak ou v&eacute;.',
 'info_ecire_message_prive' => 'Pou kr&eacute; inn mod&eacute;kri priv&eacute;',
@@ -771,7 +778,6 @@ la finn d&egrave;t publy&eacute;).',
 'info_notes' => 'Bann komant&egrave;r',
 'info_nouveau' => '(Nouvo)',
 'info_nouveau_message' => 'OU NA INN NOUVO MOD&Eacute;KRI',
-'info_nouveau_pense_bete' => 'Bouton-la i rand aou kav pou kr&eacute; inn nouvo gardant&egrave;t.',
 'info_nouveaux_message' => 'Bann nouvo mod&eacute;kri',
 'info_nouveaux_messages' => 'OU N&Egrave;NA @total_messages@ BANN MOD&Eacute;KRI',
 'info_nouvel_article' => 'Nouvo lartik',
@@ -1220,7 +1226,9 @@ dann out navigat&egrave;r &eacute;',
 
 // O
 'onglet_affacer_base' => 'D&eacute;gr&egrave;n labazdodn&eacute;',
+'onglet_agenda' => 'Lajinda',
 'onglet_auteur' => 'Lot&egrave;r',
+'onglet_calendrier' => 'Kalandry&eacute;',
 'onglet_contenu_site' => 'Sak lo sit i kontyin',
 'onglet_evolution_visite_mod' => 'Sanzman',
 'onglet_fonctions_avances' => 'Bann fonksyon pr&eacute;siz',
@@ -1228,6 +1236,7 @@ dann out navigat&egrave;r &eacute;',
 'onglet_interactivite' => 'Kozantrozot',
 'onglet_langues' => 'Bann patwa',
 'onglet_messagerie' => 'Kazmod&eacute;kri',
+'onglet_messagerie_personnelle' => 'Out kazmod&eacute;kri',
 'onglet_messages_internes' => 'Bann mod&eacute;kri-dodan',
 'onglet_messages_publics' => 'Bann mod&eacute;kri-d&eacute;or',
 'onglet_messages_vide' => 'Bann mod&eacute;kri san t&egrave;ks',
@@ -1488,7 +1497,9 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'titre_admin_tech' => 'Lantrotyin t&egrave;knik',
 'titre_admin_vider' => 'Lantrotyin t&egrave;knik',
 'titre_ajouter_mot_cle' => 'AZOUT INN MOLAKL&Eacute; :',
+'titre_articles_populaires' => 'Bann zartik l&eacute; pli popul&egrave;r',
 'titre_articles_syndiques' => 'Bann zartik sindik&eacute; i sort lo sit-la',
+'titre_articles_visites' => 'Bann zartik l&eacute; pli vizit&eacute;',
 'titre_breve_proposee' => 'Tit-nouv&egrave;l propoz&eacute;',
 'titre_breve_publiee' => 'Tit-nouv&egrave;l pibliy&eacute;',
 'titre_breve_refusee' => 'Tit-nouv&egrave;l arfiz&eacute;',
@@ -1585,7 +1596,12 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)'
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
+
+
+// PLUS_UTILISE
+'info_donner_rendez_vous' => 'Bouton-la li perm&egrave;t aou anvwa inn rand&eacute;vou &egrave;k innd&eacute; zot dalon.',
+'info_nouveau_pense_bete' => 'Bouton-la i rand aou kav pou kr&eacute; inn nouvo gardant&egrave;t.'
 
 );
 
