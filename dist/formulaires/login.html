@@ -28,7 +28,7 @@
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 
-		<span id="spip_logo_auteur" class="spip_logos">[(#INCLURE{fond=formulaires/logo_auteur}{id_auteur}|inserer_attribut{alt,#ENV{login_alt}})]</span>
+		<span id="spip_logo_auteur">[(#INCLURE{fond=formulaires/logo_auteur}{id_auteur}|inserer_attribut{alt,#ENV{login_alt}})]</span>
 
 		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />
 		<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" /></p>]
