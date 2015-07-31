@@ -60,7 +60,6 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 
 	while (list(, $mot) = each($table)) {
 		if (strlen($mot) > $min_long) {
-			$mot = strtolower($mot);
 			$h = substr(md5($mot), 0, 16);
 			$index[$h] += $val;
 			$mots .= ",(0x$h,'$mot')";
