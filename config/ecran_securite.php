@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.5'); // 26 juil. 2011
+define('_ECRAN_SECURITE', '1.0.6'); // 05 nov. 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -50,10 +50,10 @@ foreach ($GLOBALS as $var => $val)
  */
 $cjpeg_command='';
 
-/*     - controle la variable lang, var_recherche (XSS)
+/*     - controle la variable lang, var_recherche, aide (XSS)
  *
  */
-foreach(array('lang', 'var_recherche') as $var) {
+foreach(array('lang', 'var_recherche', 'aide') as $var) {
 	if (isset($_GET[$var]))
 		$_REQUEST[$var] = $GLOBALS[$var] = $_GET[$var] = preg_replace(',[^\w-]+,',' ',(string)$_GET[$var]);
 	if (isset($_POST[$var]))
