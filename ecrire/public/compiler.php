@@ -54,7 +54,7 @@ include_spip('public/jointures');
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true, $lang = '', $fond1=false){
 	$l = array();
-
+	if (!is_array($params)) return $l;
 	foreach($params as $k => $couple) {
 	// la liste d'arguments d'inclusion peut se terminer par un filtre
 		$filtre = array_shift($couple);
@@ -130,6 +130,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	} else {
 		$code = calculer_liste($p->texte, $p->descr, $boucles, $id_boucle);
+		
 		if (preg_match("/^'([^']*)'/s", $code, $r))
 			$fichier = $r[1];
 		else $fichier = '';
@@ -146,7 +147,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
 	} else 	{
-		$code = texte_script($code);
+		$code = " ' . argumenter_squelette($code) . '"; 
 		$code = "echo recuperer_fond($code, \$contexte_inclus, array(\"compil\"=>array($compil)), _request(\"connect\"));";
 	}
 
@@ -815,7 +816,7 @@ function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 function compile_inclure_doublons($lexemes)
 {
 	foreach($lexemes as $v)
-	  if($v->type === 'include') 
+	  if($v->type === 'include' AND $v->param) 
 	    foreach($v->param as $r) 
 	      if (trim($r[0]) === 'doublons') 
 		return true;
@@ -937,7 +938,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 	foreach($boucles as $id => $boucle) { 
-		if ($boucle->type_requete == 'boucle') {
+		if ($boucle->type_requete == 'boucle' AND $boucle->param) {
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
 			if (!$rec) {
