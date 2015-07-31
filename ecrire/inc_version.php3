@@ -164,7 +164,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 // ** Securite **
 $auteur_session = '';
 $connect_statut = '';
-$dir_ecrire = '';
 $hash_recherche = '';
 
 
@@ -177,6 +176,8 @@ $php_version = explode('.', phpversion());
 $php_version_maj = (int) $php_version[0];
 $php_version_med = (int) $php_version[1];
 if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
+
+$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 $flag_levenshtein = ($php_version_maj >= 4);
 $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);

@@ -1,7 +1,6 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-$dir_ecrire = 'ecrire/';
 
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_presentation.php3");

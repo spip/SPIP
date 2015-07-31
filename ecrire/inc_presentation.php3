@@ -13,12 +13,9 @@ utiliser_langue_visiteur();
 // Aide
 //
 function aide ($aide='') {
-	global $couleur_foncee, $spip_lang_rtl;
+	global $couleur_foncee, $spip_lang_rtl, $dir_ecrire;
 
 	if (!$aide) return;
-
-	if (!ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
-		$dir_ecrire = 'ecrire/';
 
 	return "&nbsp;&nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
