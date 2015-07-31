@@ -13,8 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-charger_generer_url();
-include_spip('inc/rubriques');
+include_spip('base/abstract_sql');
 include_spip('inc/mots');
 
 function exec_message_dist()
@@ -47,9 +46,9 @@ $titre;
 $id_message = intval($id_message);
 $supp_dest = intval($supp_dest);
 $nouv_auteur = intval($nouv_auteur);
+charger_generer_url();
 
-if (!spip_num_rows(spip_query("
-SELECT id_auteur FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"))) {
+if (!spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"))) {
 
 	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 	if ($row['type'] != "affich"){
@@ -109,8 +108,10 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 
 function sql_nouveau_participant($nouv_auteur, $id_message)
 {
-  spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$nouv_auteur' AND id_message='$id_message'");
-  spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$nouv_auteur','$id_message','non')");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$nouv_auteur' AND id_message='$id_message'");
+	spip_abstract_insert('spip_auteurs_messages',
+		"(id_auteur,id_message,vu)",
+		"('$nouv_auteur','$id_message','non')");
 }
 
 function http_auteurs_ressemblants($cherche_auteur, $id_message)

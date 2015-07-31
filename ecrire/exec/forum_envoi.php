@@ -13,8 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip ('inc/barre');
+include_spip('inc/barre');
 include_spip('inc/forum');
+include_spip('base/abstract_sql');
 
 function exec_forum_envoi_dist()
 {
@@ -56,11 +57,9 @@ if ($valider_forum AND ($statut!='')) {
 	$titre_message = corriger_caracteres($titre_message);
 	$texte = corriger_caracteres($texte);
 
-	$query = "INSERT INTO spip_forum
-	(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,
-	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,
-	id_message, id_syndic)
-	VALUES ('".addslashes($titre_message)."',
+	spip_abstract_insert('spip_forum',
+		"(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)",
+		"('".addslashes($titre_message)."',
 	'".addslashes($texte)."', NOW(),
 	'".addslashes($nom_site)."',
 	'".addslashes($url_site)."',
@@ -69,15 +68,13 @@ if ($valider_forum AND ($statut!='')) {
 	'".addslashes($nom)."',
 	'$connect_email',
 	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',
-	'$id_message', '$id_syndic')";
-	$result = spip_query($query);
+	'$id_message', '$id_syndic')");
 
 	calculer_threads();
 
 	if ($id_message > 0) {
-		$query = "UPDATE spip_auteurs_messages SET vu = 'non'
-			WHERE id_message='$id_message'";
-		$result = spip_query($query);
+		spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'");
+
 	}
 	redirige_par_entete($adresse_retour);
 }
@@ -89,8 +86,7 @@ debut_droite();
 
 
 if ($id_parent) {
-	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_parent";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_parent");
 	if ($row = spip_fetch_array($result)) {
 		$id_article = $row['id_article'];
 		$id_breve = $row['id_breve'];
@@ -107,8 +103,6 @@ if ($id_parent) {
 		$url_site_parent = $row['url_site'];
 	}
 }
-
-
 
 if ($titre_parent) {
 	debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre_parent));
