@@ -574,6 +574,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 {
 	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
 		if ($t) {
@@ -583,7 +584,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 			}
 			if ($t)	return $t;
 		}
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
+		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col);
 		if ($cle) return "L$cle";
 	}
 
@@ -597,16 +598,39 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 // deduction automatique des jointures 
 // une jointure sur une table avec primary key doit se faire sur celle-ci. 
 
-function calculer_jointure(&$boucle, $depart, $arrivee)
+function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
 {
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
   $n = "";
+  list($dnom,$ddesc) = $depart;
+  $id_primary = $ddesc['key']['PRIMARY KEY'];
+  $id_field = $dnom . '.' . $id_primary;
 
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j);
+    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a[0], $j);
   }
+  // pas besoin de group by 
+  // si une seule jointure et sur une table primary key formee
+  // de l'index principal et de l'index de jointure
+  // cf http://article.gmane.org/gmane.comp.web.spip.devel/30555
+  // 
+  if ($pk = (count($res) == 1)) {
+    if ($pk = $a[1]['key']['PRIMARY KEY']) {
+	$pk=preg_match("/^$id_primary, *$col$/", $pk) OR
+	  preg_match("/^$col, *$id_primary$/", $pk);
+    }
+  }
+  // la clause Group by est en conflit avec ORDER BY, a completer
+
+  if (!$pk && !in_array($id_field, $boucle->group)) {
+	  $boucle->group[] = $id_field;
+	// postgres exige que le champ pour GROUP soit dans le SELECT
+	  if (!in_array($id_field, $boucle->select))
+	    $boucle->select[] = $id_field;
+  }
+
   return $n;
 }
 
@@ -617,13 +641,13 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
   $prim = $ddesc['key']['PRIMARY KEY'];
   $v = array_intersect($prim ? split(',',$prim): $ddesc['key'], $adesc['key']);
   if ($v)
-    return array(array($dnom, $anom, array_shift($v)));
+    return array(array($dnom, $arrivee, array_shift($v)));
    else    {
       $new = $vu;
       foreach($boucle->jointures as $v) {
 	if ($v && (!in_array($v,$vu)) && 
-	    ($j = trouver_def_table($v, $boucle))) {
-	  list($table,$join) = $j;
+	    ($def = trouver_def_table($v, $boucle))) {
+	  list($table,$join) = $def;
 	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
 	  foreach ($milieu as $k)
 	    {
@@ -631,7 +655,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 	      $r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
 	      if ($r)
 		{
-		  array_unshift($r, array($dnom, $table, $k));
+		  array_unshift($r, array($dnom, $def, $k));
 		  return $r;
 		}
 	    }
@@ -672,7 +696,6 @@ function trouver_def_table($nom, &$boucle)
 		$s = 'localhost';
 		if (in_array($nom, $table_des_tables))
 		   $nom_table = 'spip_' . $nom;
-
 	}
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
@@ -698,6 +721,7 @@ function trouver_def_table($nom, &$boucle)
 function trouver_champ_exterieur($cle, $joints, &$boucle)
 {
   foreach($joints as $k => $join) {
+	spip_log("tce $cle $join");
     if ($join && $table = trouver_def_table($join, $boucle)) {
       if (array_key_exists($cle, $table[1]['field'])) 
 	return  $table;
@@ -715,15 +739,6 @@ function calculer_critere_externe(&$boucle, $id_table, $lien, $join) {
 	$boucle->lien = true;
 	$boucle->from["L$num"] = $lien;
 	$boucle->join[] = "$id_field=L$num." . $join;
-	/* cette clause semble contradictoire avec un eventuel ORDER BY
-	 // cf http://article.gmane.org/gmane.comp.web.spip.devel/30497
-	if (!in_array($id_field, $boucle->group))
-	  $boucle->group[] = $id_field;
-	// postgres exige que le champ pour GROUP soit dans le SELECT
-	if (!in_array($id_field, $boucle->select))
-	  $boucle->select[] = $id_field;
-	*/
-
 	return $num;
 }
 

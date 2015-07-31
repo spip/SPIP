@@ -1152,12 +1152,10 @@ function maj_base() {
 		}
 		maj_version(1.906);
 	}
-
 	if ($version_installee < 1.907) {
 		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
 		maj_version(1.907);
 	}
-
 	// Oups ! on stockait les tags de syndication sous la forme rel="category"
 	// au lieu de rel="directory" - http://microformats.org/wiki/rel-directory
 	if ($version_installee < 1.908) {
@@ -1166,8 +1164,15 @@ function maj_base() {
 		WHERE tags like '%category%'");
 		maj_version(1.908);
 	}
-
-
+	if ($version_installee < 1.909) {
+		spip_query("ALTER IGNORE TABLE spip_mots_articles ADD PRIMARY KEY (id_article, id_mot)");
+		spip_query("ALTER IGNORE TABLE spip_mots_breves ADD PRIMARY KEY (id_breve, id_mot)");
+		spip_query("ALTER IGNORE TABLE spip_mots_rubriques ADD PRIMARY KEY (id_rubrique, id_mot)");
+		spip_query("ALTER IGNORE TABLE spip_mots_syndic ADD PRIMARY KEY (id_syndic, id_mot)");
+		spip_query("ALTER IGNORE TABLE spip_mots_documents ADD PRIMARY KEY (id_document, id_mot)");
+		spip_query("ALTER IGNORE TABLE spip_mots_forum ADD PRIMARY KEY (id_forum, id_mot)");
+		maj_version(1.909);
+	}
 	return true;
 }
 
