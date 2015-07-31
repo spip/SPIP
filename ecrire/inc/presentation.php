@@ -1356,6 +1356,7 @@ function debut_javascript($admin, $stat)
 			((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
 			? ''
 			: "jQuery.ajax({'url':'$testeur'});") .
+			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
 			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';" .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .
