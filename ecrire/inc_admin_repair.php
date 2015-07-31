@@ -12,6 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/*
+ * REMARQUE IMPORTANTE : SECURITE
+ * Ce systeme de reparation doit pouvoir fonctionner meme si
+ * la table spip_auteurs est en panne : on n'appelle donc pas
+ * inc_auth ; seule l'authentification ftp est exigee
+ *
+ */
+
+$GLOBALS['connect_statut'] = '0minirezo';
+
 include_ecrire ("inc_admin");
 include_ecrire ("inc_texte");
 include_ecrire ("inc_minipres");

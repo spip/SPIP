@@ -288,7 +288,6 @@ $connect_statut = '';
 $hash_recherche = '';
 $hash_recherche_strict = '';
 
-
 //
 // Capacites php (en fonction de la version)
 //
@@ -394,9 +393,8 @@ $spip_lang = $langue_site;
 // Que faire si Spip n'est pas installe... sauf si justement on l'installe!
 //
 if (!(_FILE_CONNECT
-OR defined('_ECRIRE_INSTALL')
 OR defined('_TEST_DIRS')
-OR defined('_ECRIRE_AIDE'))) {
+OR autoriser_sans_cookie($SCRIPT_NAME))) {
 
 	include_ecrire('inc_upgrade');
 	info_install();
