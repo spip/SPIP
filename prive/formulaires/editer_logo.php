@@ -12,6 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+global $logo_libelles;
+$logo_libelles['article'] = _T('logo_article').aide ("logoart");
+$logo_libelles['auteur'] = _T('logo_auteur').aide ("logoart");
+$logo_libelles['breve'] = _T('logo_breve').aide ("breveslogo");
+$logo_libelles['syndic'] = _T('logo_site')." ".aide ("rublogo");
+$logo_libelles['mot'] = _T('logo_mot_cle').aide("breveslogo");
+$logo_libelles['groupe'] = _T('logo_groupe').aide("breveslogo");
+$logo_libelles['rubrique'] = _T('logo_rubrique')." ".aide ("rublogo");
+$logo_libelles['racine'] = _T('logo_standard_rubrique')." ".aide ("rublogo");
+
 /**
  * Formulaire #EDITER_LOGO
  *
@@ -36,8 +46,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return Array               Variables d'environnement pour le fond
  */
 function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $options=array()){
+	// pas dans une boucle ? formulaire pour le logo du site
+	// dans ce cas, il faut chercher un 'siteon0.ext'
+	if (!$objet) {
+		$objet = 'syndic';
+		$_id_objet = 'site';
+	}
+	else {
+		if ($objet=='site') $objet = 'syndic';
+		$_id_objet = id_table_objet($objet);
+	}
+
 	if (!is_array($options))
 		$options = unserialize($options);
+
+	if (!isset ($options['titre'])) {
+		$img = balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
+		$options['titre'] = $img . $GLOBALS['logo_libelles'][($id_objet OR $objet != 'rubrique') ? $objet : 'racine'];
+	}
+	if (!isset ($options['editable']))
+		$options['editable'] = autoriser('iconifier',$objet,$id_objet);
+	
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '')&&(!isset($options['editable']) OR $options['editable']),
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
@@ -45,12 +74,6 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 		'id_objet'=>$id_objet,
 		'_options'=>$options
 	);
-	// pas dans une boucle ? formulaire pour le logo du site
-	// dans ce cas, il faut chercher un 'siteon0.ext'	
-	if (!$objet)
-		$_id_objet = 'site';
-	else
-		$_id_objet = id_table_objet($objet);
 	
 	// rechercher le logo de l'objet
 	// la fonction prend un parametre '_id_objet' etrange : 
