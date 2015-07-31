@@ -20,9 +20,9 @@
 <B_restreint>
 	<div class='liste_rubriques_restreintes'>
 		<:info_admin_gere_rubriques:>
-		<ul>
+		<ul class="liste-items rubriques">
 			<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #STATUT|=={0minirezo}}>
-				<li><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
+				<li class="item rubrique"><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img) ][(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
 			</BOUCLE_restreint>
 		</ul>
 	</div>
