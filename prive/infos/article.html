@@ -15,21 +15,20 @@
 
 	Bouton voir en ligne
 
-][(#VAL{article}|voir_en_ligne{#ID_ARTICLE,#STATUT,racine-24.gif,0,0})]
-
-
-
-
-
-
-[(#REM)
-
-	Bouton statistiques des articles
-
 ]
-[(#CONFIG{activer_statistiques}|=={oui}|?{#STATUT}|=={publie}
-	|?{[(#AUTORISER{voirstats,article,#ID_ARTICLE})]}
-	|?{[(#VISITES|bouton_lien_statistiques{#ID_ARTICLE})]})]
+<BOUCLE_publie(ARTICLES){id_article}>
+	[(#VAL{redirect}
+		|generer_url_action{type=article&id=#ID_ARTICLE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,article,#ID_ARTICLE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=article&id=#ID_ARTICLE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,racine})]
+	]
+<//B_publie>
 
 
 </div>
