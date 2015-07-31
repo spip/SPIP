@@ -292,7 +292,7 @@ $spip_version = 1.927;
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
-$spip_version_affichee = '1.9.2f';
+$spip_version_affichee = '1.9.2g';
 $spip_version_code = 1.9208;
 
 // ** Securite **
