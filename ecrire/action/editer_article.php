@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@action_editer_article_dist
 function action_editer_article_dist($arg=null) {
+	include_spip('inc/autoriser');
 	$err="";
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
