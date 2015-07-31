@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'access_interface_graphique' => 'Interfaz grafiko osora itzuli',
-	'access_mode_texte' => 'Testu moduan laburtutako interfaz-a erakutsi.',
+	'access_mode_texte' => 'Testu moduan laburtutako interfazea erakutsi.',
 	'admin_debug' => 'debug',
 	'admin_modifier_article' => 'Artikulu hau aldatu',
 	'admin_modifier_auteur' => 'Egile hau aldatu',
@@ -227,8 +227,8 @@ Eragiketa hori egin eta gero, gauza izango zara',
 	'envoi_via_le_site' => 'Gunearen bitartez egindako bidalpena',
 	'erreur' => 'Errorea',
 	'erreur_balise_non_fermee' => 'ez itxitako azken etiketa :',
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+	'erreur_technique_enregistrement_champs' => 'Arazo tekniko batek @champs@ eremuaren grabaketa trabatu du.',
+	'erreur_technique_enregistrement_impossible' => 'Arazo tekniko batek grabaketa trabatu du.',
 	'erreur_texte' => 'errore',
 	'etape' => 'Etapa',
 
@@ -275,7 +275,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 	'form_prop_message_envoye' => 'Mezua igorria',
 	'form_prop_non_enregistre' => 'Zure proposamena ez zen erregistratu.',
 	'form_prop_sujet' => 'Gai',
-	'form_prop_url_site' => 'Gunearen (URL) helbidea', # MODIF
+	'form_prop_url_site' => 'Gunearen (URL) helbidea',
 	'forum_non_inscrit' => 'Ez zaude inskribaturik, edota emandako helbidea edo pasahitza ez dira zuzenak.',
 	'forum_par_auteur' => '@auteur@-k',
 	'forum_titre_erreur' => 'Errore...',
@@ -362,7 +362,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 	'info_creer_repertoire' => 'Fitxategi edo karpeta bat sortu behar duzu, eta hari izen hau jarri :',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b>, azpidirektorioan, eta ondotik :',
 	'info_creer_vignette' => 'miniaturaren sorkuntza automatikoa',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Behar diren eskubideak ez dituzu atal honetan eduki bat eratzeko.',
 	'info_deplier' => 'Desplegatu',
 	'info_descriptif_nombre' => 'deskribapena(k):',
 	'info_description' => 'Deskribapena :',
@@ -477,7 +477,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 	'infos_vos_pense_bete' => 'Zure oroigarriak',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+	'label_ajout_id_rapide' => 'Laster gehitu',
 	'label_poids_fichier' => 'Tamaina',
 	'lien_afficher_icones_seuls' => 'Ikurrak soilik erakutsi',
 	'lien_afficher_texte_icones' => 'Ikurrak eta testua erakutsi',
@@ -575,7 +575,7 @@ Orduan pasahitza berri bat jarri eta gunera berriz konektatzen ahalko zara. ',
 	'pass_nouveau_pass' => 'Pasahitz berria',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Pasahitza ahaztu dut',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+	'pass_procedure_changer' => 'Pasahitza aldatu aitzin, zure nortasuna baieztatu behar dugu. Horregatik zure kontuari lotutako helbide elektronikoa jakinarazi behar diguzu.',
 	'pass_quitter_fenetre' => 'Leiho honetatik irten',
 	'pass_rappel_login' => 'Gogoan izan: zure identifikatzailea (logina) hau da : «@login@».',
 	'pass_recevoir_mail' => 'Gunerako sarbidea nola berreskuratzen ahal duzun zehazten duen mezu bat jasoko duzu.',
@@ -598,7 +598,7 @@ Orduan pasahitza berri bat jarri eta gunera berriz konektatzen ahalko zara. ',
 	'suivant' => 'hurrengoa',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
+	'taille_go' => '@taille@ Go',
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ byte',
