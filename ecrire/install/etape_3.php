@@ -136,9 +136,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
 	}
 
-	$ligne_rappel = ($server_db != 'mysql') ? ''
-	: (test_rappel_nom_base_mysql($server_db)
-	  .test_sql_mode_mysql($server_db)	);
+	$ligne_rappel = install_mode_appel($server_db);
 
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
@@ -304,32 +302,4 @@ function install_etape_3_dist()
 	echo install_fin_html();
 }
 
-// Tester si mysql ne veut pas du nom de la base dans les requetes
-
-// http://doc.spip.org/@test_rappel_nom_base_mysql
-function test_rappel_nom_base_mysql($server_db)
-{
-	$GLOBALS['mysql_rappel_nom_base'] = true;
-	sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
-	$ok = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')", $server_db);
-
-	if ($ok) {
-		sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
-		return '';
-	} else {
-		$GLOBALS['mysql_rappel_nom_base'] = false;
-		return "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
-		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
-	}
-}
-// http://doc.spip.org/@test_sql_mode_mysql
-function test_sql_mode_mysql($server_db){
-	$res = sql_select("version() as v",'','','','','','',$server_db);
-	$row = sql_fetch($res,$server_db);
-	if (version_compare($row['v'],'5.0.0','>=')){
-		define('_MYSQL_SET_SQL_MODE',true);
-		return "define('_MYSQL_SET_SQL_MODE',true);\n";
-	}
-	return '';
-}
 ?>
