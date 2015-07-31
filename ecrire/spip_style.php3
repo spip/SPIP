@@ -63,7 +63,13 @@ td {
 	background-position: center bottom; float: none; 
 	behavior: url("win_width.htc");
 }
-.fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000; }
+.fondl { 
+	padding: 3px; 
+	background-color: #e4e4e4; 
+	border: 1px solid <?php echo $couleur_claire; ?>; 
+	background-position: center bottom; 
+	float: none;
+}
 .fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF; }
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; }
 .maj-debut:first-letter { text-transform: uppercase; }
@@ -650,6 +656,17 @@ td.icone a:hover {
 }
 td.icone a img {
 	border: 0px;
+}
+
+a.bouton_rotation img {
+	padding: 1px;
+	margin-bottom: 1px;
+	background-color: #eeeeee;
+	border: 1px solid <? echo $couleur_claire; ?>;
+}
+
+a.bouton_rotation:hover img {
+	border: 1px solid <? echo $couleur_foncee; ?>;
 }
 
 

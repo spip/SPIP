@@ -107,7 +107,6 @@ ecrire/img_pack/deconnecter-24.gif -text
 ecrire/img_pack/deconnecter-24_rtl.gif -text
 ecrire/img_pack/degrade.jpg -text
 ecrire/img_pack/deplierbas.gif -text
-ecrire/img_pack/deplierbas_rtl.gif -text
 ecrire/img_pack/deplierhaut.gif -text
 ecrire/img_pack/deplierhaut_rtl.gif -text
 ecrire/img_pack/doc-24.gif -text
@@ -209,6 +208,9 @@ ecrire/img_pack/suivi-forum-24.gif -text
 ecrire/img_pack/supprimer.gif -text
 ecrire/img_pack/synchro-24.gif -text
 ecrire/img_pack/tirets-separation.gif -text
+ecrire/img_pack/tourner-180.gif -text
+ecrire/img_pack/tourner-droite.gif -text
+ecrire/img_pack/tourner-gauche.gif -text
 ecrire/img_pack/tout-site-24.gif -text
 ecrire/img_pack/tout-site.gif -text
 ecrire/img_pack/traductions-24.gif -text

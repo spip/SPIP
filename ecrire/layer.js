@@ -12,7 +12,7 @@ function swap_couche(couche, rtl) {
 	triangle = MM_findObj('triangle' + couche);
 	if (!(layer = MM_findObj('Layer' + couche))) return;
 	if (vis[couche] == 'hide'){
-		if (triangle) triangle.src = 'img_pack/deplierbas' + rtl + '.gif';
+		if (triangle) triangle.src = 'img_pack/deplierbas.gif';
 		layer.style.display = 'block';
 		vis[couche] = 'show';
 	} else {
@@ -24,7 +24,7 @@ function swap_couche(couche, rtl) {
 function ouvrir_couche(couche, rtl) {
 	triangle = MM_findObj('triangle' + couche);
 	if (!(layer = MM_findObj('Layer' + couche))) return;
-	if (triangle) triangle.src = 'img_pack/deplierbas' + rtl + '.gif';
+	if (triangle) triangle.src = 'img_pack/deplierbas.gif';
 	layer.style.display = 'block';
 	vis[couche] = 'show';
 }
