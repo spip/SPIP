@@ -49,7 +49,7 @@ function exec_mots_type_dist()
 	echo debut_droite('', true);
 
 	
-	$out .= "";debut_cadre_formulaire('',true);
+	$out .= "";
 	$contexte = array(
 		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 		'titre'=>$type,
@@ -59,7 +59,6 @@ function exec_mots_type_dist()
 	);
 
 	$out .= recuperer_fond("prive/editer/groupe_mot", $contexte);
-	//$out .= fin_cadre_formulaire(true);
 	echo $out;
 
 	echo pipeline('affiche_milieu',
