@@ -50,7 +50,10 @@ $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_editable) {
 	$titre_document = texte_script(corriger_caracteres($titre_document));
 	$descriptif_document = texte_script(corriger_caracteres($descriptif_document));
-	spip_query("UPDATE spip_documents SET titre='".$titre_document."', descriptif='".$descriptif_document."' WHERE id_document=$id_document");
+	$query = "UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\"";
+	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
+	$query .= " WHERE id_document=$id_document";
+	spip_query($query);
 }
 
 

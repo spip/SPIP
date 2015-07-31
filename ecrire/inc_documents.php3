@@ -456,6 +456,12 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
+
+			if ($type_inclus == "embed" OR $type_inclus == "image") {
+			echo "<br><b>Dimensions&nbsp;:</b><br>\n";
+				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
+				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+			}
 		
 			echo "<div align='right'>";
 			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
