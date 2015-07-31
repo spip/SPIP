@@ -24,9 +24,9 @@ function assembler($fond, $connect='') {
 	global $flag_preserver,$lastmodified, $use_cache, $contexte;
 
 	$contexte = calculer_contexte();
-	$contexte['fond'] = $fond;
 
-	$page = preg_replace('/[?].*$/', '', 
+	$page = $fond .
+		preg_replace('/[?].*$/', '', 
 		preg_replace(',\.[a-zA-Z0-9]*$,', '', $GLOBALS['REQUEST_URI']));
 
 	// Cette fonction est utilisee deux fois
