@@ -734,8 +734,12 @@ function charger_generer_url() {
 // Fonctions de fabrication des URL des scripts de Spip
 //
 
-// l'URL de base du site, sans se fier a meta(adresse_site) qui peut etre fausse
-// (sites a plusieurs noms d'hotes, deplacements, erreurs)
+// l'URL de base du site, sans se fier a meta(adresse_site) qui
+// peut etre fausse (sites a plusieurs noms d'hotes, deplacements, erreurs)
+// Note : la globale $profondeur_url doit etre initialisee de maniere a
+// indiquer le nombre de sous-repertoires de l'url courante par rapport a la
+// racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
+// la racine 0. Sur url/perso/ elle vaut 2
 function url_de_base() {
 	global $REQUEST_URI;
 
@@ -751,8 +755,11 @@ function url_de_base() {
 	# note : HTTP_HOST contient le :port si necessaire
 	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
 
-	# supprimer (ecrire/)?xxxxx
-	$url = preg_replace(',/('._DIR_RESTREINT_ABS.')?[^/]*$,', '/', $myself);
+	# supprimer n sous-repertoires
+	$supprime_preg = '/+';
+	for ($i=0; $i<$GLOBALS['profondeur_url']; $i++)
+		$supprime_preg .= '[^/]+/+';
+	$url = preg_replace(','.$supprime_preg.'[^/]*$,', '/', $myself);
 	return $url;
 }
 
