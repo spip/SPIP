@@ -64,9 +64,9 @@
     </li>]
   </ol>
 
-    [(#ENV**{config}|table_valeur{extra}|match{non}|?{'',' '})
+    [(#ENV**{config}|table_valeur{extra}|?{
     	[(#ENV{extra}|editer_extra{#ENV{id_secteur}})]
-    ]
+    })]
 
 </fieldset>
 <style type='text/css'>
