@@ -12,8 +12,6 @@
 
 function install_etape_2_dist()
 {
-	global $spip_lang_right;
-
 	$adresse_db = defined('_INSTALL_HOST_DB')
 		? _INSTALL_HOST_DB
 		: _request('adresse_db');
@@ -26,26 +24,47 @@ function install_etape_2_dist()
 		? _INSTALL_PASS_DB
 		: _request('pass_db');
 
-	$chmod = defined('_SPIP_CHMOD')
-		? _SPIP_CHMOD
-		: _request('chmod');
+	$chmod = _request('chmod');
 
 	echo install_debut_html();
 
-	// prenons toutes les dispositions possibles pour que rien ne s'affiche !
+// prenons toutes les dispositions possibles pour que rien ne s'affiche !
 	echo "<!--";
 	$link = mysql_connect($adresse_db,$login_db,$pass_db);
 	$db_connect = mysql_errno();
 	echo "-->";
 
-	if (($db_connect=="0") && $link){
+	if (($db_connect=="0") && $link) {
+		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
+		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
-	echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
-	echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
+		// pourquoi se connecter une deuxieme fois ?
+		$link = mysql_connect($adresse_db,$login_db,$pass_db);
+		list($checked, $res) = install_etape_2_bases($login_db);
 
-	$link = mysql_connect($adresse_db,$login_db,$pass_db);
+		$hidden = (defined('_SPIP_CHMOD')
+		? ''
+		: "\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"
+			   );
+
+		echo install_etape_2_form($adresse_db,$login_db,$pass_db, $hidden, $checked, $res);
+	} else  {
+		echo info_etape(_T('info_connexion_base'));
+		echo "<p class='resultat'><b>"._T('avis_connexion_echec_1')."</b></p>";
+		echo "<p>"._T('avis_connexion_echec_2')."</p>";
+		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
+	}
+	
+	echo info_progression_etape(2,'etape_','install/');
+	echo install_fin_html();
+}
+
+// Liste les bases accessibles, 
+// avec une heuristique pour preselectionner la plus probable
+
+function install_etape_2_bases($login_db)
+{
 	$result = @mysql_list_dbs();
-
 
 	$checked = '';
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
@@ -55,15 +74,15 @@ function install_etape_2_dist()
 			$table_nom = mysql_dbname($result, $i);
 			$base = "<li>\n<input name=\"choix_db\" value=\"".$table_nom."\" type='radio' id='tab$i'";
 			$base_fin = " /><label for='tab$i'>".$table_nom."</label>\n</li>";
-			if ($table_nom == $login_db) {
-				$bases = "$base checked='checked'$base_fin".$bases;
-				$checked = true;
-			}
-			else {
+			if (!$checked AND
+			    (($table_nom == $login_db) OR
+			     ($GLOBALS['table_prefix'] == $table_nom))) {
+				$checked = "$base checked='checked'$base_fin";
+			} else {
 				$bases .= "$base$base_fin\n";
 			}
 		}
-		$res = "<ul>".$bases."</ul><p>"._T('info_ou')." ";
+		$res = "<ul>$checked$bases</ul><p>"._T('info_ou')." ";
 	}
 	else {
 		$res = "<b>"._T('avis_lecture_noms_bases_1')."</b>
@@ -90,14 +109,14 @@ function install_etape_2_dist()
 			}
 		}
 	}
+	return array($checked, $res);
+}
 
-	echo generer_form_ecrire('install', (
+function install_etape_2_form($adresse_db,$login_db,$pass_db, $hidden, $checked, $res)
+ {
+	return generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='3' />"
-
-	. (defined('_SPIP_CHMOD')
-		? ''
-		: "\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"
-	)
+	 . $hidden
 	. (defined('_INSTALL_HOST_DB')
 		? ''
 		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
@@ -132,17 +151,6 @@ function install_etape_2_dist()
 	)
 
 	. bouton_suivant()));
-
-	}
-	else {
-		echo info_etape(_T('info_connexion_base'));
-		echo "<p class='resultat'><b>"._T('avis_connexion_echec_1')."</b></p>";
-		echo "<p>"._T('avis_connexion_echec_2')."</p>";
-		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
-	}
-	
-	echo info_progression_etape(2,'etape_','install/');
-	echo install_fin_html();
 }
 
 ?>

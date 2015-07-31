@@ -13,14 +13,11 @@
 // http://doc.spip.org/@inc_install_1
 function install_etape_1_dist()
 {
-	global $spip_lang_right;
 
 	echo install_debut_html();
 
 	// stopper en cas de grosse incompatibilite de l'hebergement
 	tester_compatibilite_hebergement();
-
-	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
 
 	list($adresse_db, $login_db) = login_hebergeur();
 	$pass_db = '';
@@ -45,56 +42,66 @@ function install_etape_1_dist()
 			$chmod = $regs[1]; 
 		}
 	}
-	echo generer_form_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='2' />" 
-	. "\n<input type='hidden' name='chmod' value='$chmod' />"
-	
+
+	$req = array($adresse_db,$login_db,$pass_db);
+
+	$predef = array(defined('_INSTALL_HOST_DB'), defined('_INSTALL_USER_DB'), defined('_INSTALL_PASS_DB'));
+
+	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
+	echo install_etape_1_form($req, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
+	echo info_progression_etape(1,'etape_','install/');
+	echo install_fin_html();
+}
+
+function install_etape_1_form($req, $predef, $hidden, $etape)
+{
+
+  return generer_form_ecrire('install', (
+	  "\n<input type='hidden' name='etape' value='$etape' />" 
+	. $hidden
 	. (_request('echec')?
 			("<p><b>"._T('avis_connexion_echec_1').
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 
-	. (defined('_INSTALL_HOST_DB')
+	. ($predef[0]
 	? '<h3>'._T('entree_base_donnee_1')._L(' attribu&eacute;e par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
-				'valeur' => $adresse_db
+				'valeur' => $req[0]
 			),
 		)
 	)
 	)
 
-	. (defined('_INSTALL_USER_DB')
+	. ($predef[1]
 	? '<h3>'._T('entree_login_connexion_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
 				'label' => _T('entree_login_connexion_2'),
-				'valeur' => $login_db
+				'valeur' => $req[1]
 			),
 		)
 	)
 	)
 
-	. (defined('_INSTALL_PASS_DB')
+	. ($predef[2]
 	? '<h3>'._T('entree_mot_passe_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_mot_passe_1'),
 		array(
 			'pass_db' => array(
 				'label' => _T('entree_mot_passe_2'),
-				'valeur' => $pass_db
+				'valeur' => $req[2]
 			),
 		)
 	)
 	)
 
 	. bouton_suivant()));
-	
-	echo info_progression_etape(1,'etape_','install/');
 
-	echo install_fin_html();
 }
 
 ?>
