@@ -116,7 +116,7 @@ else if ($ajout_doc == 'oui') {
 	//
 	// Upload d'un ZIP
 	//
-    if (function_exists('gzopen')) {
+	if (function_exists('gzopen') AND !($mode == 'distant')) {
 
 		// traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
 		if ($_POST['source_zip']
