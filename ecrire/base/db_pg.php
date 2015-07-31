@@ -297,25 +297,31 @@ function spip_pg_free($res, $serveur='') {
 }
 
 // http://doc.spip.org/@spip_pg_insert
-function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
-	global $tables_principales;
+function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
+
 	global $spip_pg_link, $table_prefix;
-	include_spip('base/serial');
-	if (isset($tables_principales[$table]['key']["PRIMARY KEY"]))
-		$ret = " RETURNING "
-		. $tables_principales[$table]['key']["PRIMARY KEY"];
+	if (!$desc) {
+		global $tables_principales;
+		include_spip('base/serial');
+		$desc = @$tables_principales[$table];
+	}
+	if (isset($desc['key']["PRIMARY KEY"]))
+		$ret = " RETURNING " . $desc['key']["PRIMARY KEY"];
 	else $ret = '';
 
 	if ($GLOBALS['table_prefix'])
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	$r = pg_query("INSERT INTO $table $champs VALUES $valeurs $ret");
-	if (!$r) return 0;
-	if (!$ret) return -1;
-	$r = pg_fetch_array($r, NULL, PGSQL_NUM);
+	$r = pg_query($q="INSERT INTO $table $champs VALUES $valeurs $ret");
+	if ($r) {
+		if (!$ret) return 0;
+		if ($r = pg_fetch_array($r, NULL, PGSQL_NUM))
+			return $r[0];
+	}
+	spip_log("Erreur $q", 'pg'); // trace a minima
+	return -1;
 
-	return $r[0];
 }
 
 // http://doc.spip.org/@spip_pg_update

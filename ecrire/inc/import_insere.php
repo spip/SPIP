@@ -12,22 +12,30 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@insere_1_init
-function insere_1_init($request) {
+//  table des translations
 
-  //  preparation de la table des translations
-	$spip_translate = array(
+$spip_translate = array(
 		"type"		=> "VARCHAR(16) NOT NULL",
 		"ajout"		=> "ENUM('0', '1')",
 		"titre"		=> "text NOT NULL",
                 "id_old"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
                 "id_new"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
-	$spip_translate_key = array(
+$spip_translate_key = array(
                 "PRIMARY KEY"	=> "id_old, id_new, type",
                 "KEY id_old"	=> "id_old");
 
-	spip_mysql_create('spip_translate', $spip_translate, $spip_translate_key, true);
+// La rajouter ici car sql_insert en a besoin
+global $tables_principales;;
+$tables_principales['spip_translate'] =
+	array('field' => &$spip_translate, 'key' => &$spip_translate_key, 'join' => &$spip_signatures_join);
+
+// http://doc.spip.org/@insere_1_init
+function insere_1_init($request) {
+	global $tables_principales;
+	$v = $tables_principales['spip_translate'];
+	sql_create('spip_translate',  $v['field'], $v['key'], true);
+
 	// au cas ou la derniere fois ce serait terminee anormalement
 	spip_query("DELETE FROM spip_translate");
 	return insere_1bis_init($request);
@@ -40,6 +48,12 @@ function insere_1bis_init($request) {
 	$t = array_keys($GLOBALS['tables_principales']);
 	// ... mais pas cette table a cause de la duplication des login 
 	unset($t[array_search('spip_auteurs', $t)]);
+	// ni celle-ci, les qui est liee implicitement a la precedente
+	unset($t[array_search('spip_messages', $t)]);
+	// et pour celles-ci restent à programmer les regles
+	unset($t[array_search('spip_forum', $t)]);
+	unset($t[array_search('spip_syndic', $t)]);
+	unset($t[array_search('spip_signatures', $t)]);
 	return $t;
 }
 
@@ -87,19 +101,18 @@ function translate_init($request) {
 // http://doc.spip.org/@import_insere
 function import_insere($values, $table, $desc, $request, $atts) {
 
+	static $jesais = array();
+
 	$type_id = $desc['key']["PRIMARY KEY"];
 	// reserver une place dans les tables principales si nouveau
 	$ajout = 0;
+
 	if ((!function_exists($f = 'import_identifie_' . $type_id))
 	OR (!($n = $f($values, $table, $desc, $request)))) {
-	  // pas d'importation de types_doc (a revoir)
+          // pas d'importation de types_doc (a revoir)
 		if ($table == 'spip_types_documents') return;
-		$n = sql_insert($table, '', '()');
-		if (!$n) {
-			$GLOBALS['erreur_restauration'] = sql_error();
-			return;
-		}
-		$ajout = 1;
+		$n = sql_insert($table, '()', '()');
+		$ajout=1;
 	}
 
 	if (is_array($n))
@@ -107,7 +120,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	else {$id = $n; $titre = "";}
 	sql_insert('spip_translate',
 				"(id_old, id_new, titre, type, ajout)",
-				     "(". $values[$type_id] .",$id, " . _q($titre) . ", '$type_id', '$ajout')");
+				     "(". $values[$type_id] .",$id, " . _q($titre) . ", '$type_id', $ajout)");
 }
 
 // Renumerotation des entites collectees
@@ -131,14 +144,13 @@ function import_translate($values, $table, $desc, $request, $atts) {
 // Une synchronisation plus fine serait preferable, cf [8004]
 
 // http://doc.spip.org/@import_inserer_translate
-function import_inserer_translate($values, $table, $desc, $request, $vals, $atts) {
+function import_inserer_translate($values, $table, $desc, $request, $atts) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
 
 	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2]){
-		spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
-
+		sql_replace($table, $values, $desc);
 		$on = isset($atts['on']) ? ($atts['on']) : '';
 		$off = isset($atts['off']) ? ($atts['off']) : '';
 		if ($on OR $off) {
@@ -164,19 +176,15 @@ function import_inserer_translate($values, $table, $desc, $request, $vals, $atts
 // http://doc.spip.org/@import_translate_std
 function import_translate_std($values, $table, $desc, $request, $atts) {
 
-	$vals = '';
-
 	foreach ($values as $k => $v) {
 		if ($k=='id_parent' OR $k=='id_secteur')
 				$k = 'id_rubrique';
 		else  if (($k=='chapo') AND ($v[0]=='=') AND preg_match(_RACCOURCI_CHAPO, substr($v,1), $m))
 			$v = '=[->' . substr($v,1) . ']';
 
-		$v = importe_raccourci($k,importe_translate_maj($k, $v));
-
-		$vals .= "," . _q($v);
+		$values[$k]= importe_raccourci($k,importe_translate_maj($k, $v));
 	}
-	import_inserer_translate($values, $table, $desc, $request, $vals, $atts);
+	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
 // http://doc.spip.org/@import_translate_spip_documents
@@ -188,14 +196,13 @@ function import_translate_spip_documents($values, $table, $desc, $request, $atts
 #	$url .= $atts['dir_img']; // deja dans la BD importee
 	$values['distant']= 'oui';
 
-	$vals = '';
 	foreach ($values as $k => $v) {
 	  if ($k=='fichier')
 	    $v = $url .$v;
 	  else $v = importe_raccourci($k,importe_translate_maj($k, $v));
-	  $vals .= "," . _q($v);
+	  $values[]= $v;
 	}
-	import_inserer_translate($values, $table, $desc, $request, $vals, $atts);
+	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
 // Fonction de renumerotation, par delegation aux fonction specialisees
@@ -308,7 +315,7 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 		$r = sql_fetch(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
 		if ($r) return  (0 - $r['id_mot']);
 	}
-	$r = sql_insert('spip_mots', '', '()');
+	$r = sql_insert('spip_mots', '()', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_mot',1)");
 	return $r;
 }
@@ -330,7 +337,7 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$r = sql_fetch(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
 	if ($r) return (0 - $r['id_article']);
 
-	$r = sql_insert('spip_articles', '', '()');
+	$r = sql_insert('spip_articles', '()', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_article',1)");
 	return $r;
 }
@@ -352,7 +359,7 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	$r = sql_fetch(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
 	if ($r) return (0 - $r['id_breve']);
 
-	$r = sql_insert('spip_breves', '', '()');
+	$r = sql_insert('spip_breves', '()', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_breve',1)");
 	return $r;
 }
