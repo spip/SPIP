@@ -138,7 +138,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form = "<label for='sel_lang'>" . _T('entree_titre_obligatoire') . "</label>"
+	$form = "<label for='titre'>" . _T('entree_titre_obligatoire') . "</label>"
 	. "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />"
 	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />"
 	. debut_cadre_couleur($logo_parent, true, "",_T('entree_interieur_rubrique').aide ("brevesrub"))
