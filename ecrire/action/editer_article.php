@@ -100,6 +100,10 @@ function articles_set($id_article, $new) {
 function revisions_articles ($id_article, $new, $c = false) {
 	global $flag_revisions;
 
+	$row = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	$statut = $row['statut'];
+	$nouveau_statut = false;
+
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
 
@@ -126,8 +130,21 @@ function revisions_articles ($id_article, $new, $c = false) {
 	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
 	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article AND id_rubrique!=$id_rubrique")))) {
 		$champs['id_rubrique'] = $id_rubrique;
-	}
 
+		// si l'article est publie 
+		// et que le demandeur n'est pas admin de la rubrique
+		// repasser l'article en statut 'propose'.
+		if ($statut == 'publie') {
+			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
+				$nouveau_statut = $statut = 'prop';
+			else {
+				include_spip('inc/auth');
+				$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
+				if (is_array($r) AND !$r[$id_rubrique])
+		  			$nouveau_statut = $statut = 'prop';
+			}
+		}
+	}
 	// recuperer les extras (incompatible avec $c pour l'instant)
 	if ($GLOBALS['champs_extra']
 	AND !is_array($c)) {
@@ -145,7 +162,6 @@ function revisions_articles ($id_article, $new, $c = false) {
 			'data' => $champs
 		)
 	);
-
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -184,11 +200,10 @@ function revisions_articles ($id_article, $new, $c = false) {
 			signale_edition ($id_article, $GLOBALS['auteur_session']['id_auteur'], 'article');
 	}
 
-
 	// Si on deplace l'article
 	// - propager les secteurs
 	// - changer sa langue (si heritee)
-	if (isset($champ['id_rubrique'])) {
+	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
@@ -201,14 +216,14 @@ function revisions_articles ($id_article, $new, $c = false) {
 			if ($langue_new != $langue_old)
 				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
 		}
+		if ($nouveau_statut)
+			spip_query("UPDATE spip_articles SET statut = '$statut' WHERE id_article = $id_article");
 	}
 
 
 	//
 	// Post-modifications
 	//
-	$row = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article"));
-	$statut = $row['statut'];
 
 	// Invalider les caches
 	if ($statut == 'publie') {

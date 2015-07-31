@@ -30,7 +30,7 @@ function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 	global $connect_statut;
 
-	return ($connect_statut == "0minirezo" AND isset($connect_id_rubrique[$id_rubrique]));
+	return (isset($connect_id_rubrique[$id_rubrique]));
 }
 
 // http://doc.spip.org/@acces_mots
@@ -60,32 +60,31 @@ function acces_article($id_article)
 	return ($s == 'prepa' OR $s == 'prop' OR $s == 'poubelle');
 }
 
+// Retourne les droits de publication d'un auteur selon le codage suivant:
+// - le tableau de ses rubriques si c'est un admin restreint
+// - 0 si c'est un admin de plein droit
+// - la chaine indiquant son statut s'il n'est pas admin
+
 // http://doc.spip.org/@auth_rubrique
-function auth_rubrique()
+function auth_rubrique($id_auteur, $statut)
 {
-	global $connect_statut, $connect_id_auteur, $connect_toutes_rubriques, $connect_id_rubrique;
+	if ($statut != '0minirezo') return $statut;
 
-	if ($connect_statut != '0minirezo') {
-		$connect_toutes_rubriques = false;
-		$connect_id_rubrique = array();
-		return;
-	}
+	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
 
-	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'");
+	if (!spip_num_rows($result)) return 0;
 
-	$connect_toutes_rubriques = (@spip_num_rows($result) == 0);
-	if (!$connect_toutes_rubriques) {
-		$connect_id_rubrique = array();
-		for (;;) {
-			$r = array();
-			while ($row = spip_fetch_array($result)) {
-				$id_rubrique = $row['id_rubrique'];
-				$r[] = $connect_id_rubrique[$id_rubrique] = $id_rubrique;
-			}
-			if (!$r) break;
-			$r = join(',', $r);
-			$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
+	$rubriques = array();
+	for (;;) {
+		$r = array();
+		while ($row = spip_fetch_array($result)) {
+			$id_rubrique = $row['id_rubrique'];
+			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
 		}
+		if (!$r) return $rubriques;
+		$r = join(',', $r);
+
+		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
 	}
 }
 
@@ -109,8 +108,7 @@ function acces_statut($id_auteur, $statut, $bio)
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 	global $prefs, $connect_id_auteur, $connect_login;
-	global $connect_statut, $connect_toutes_rubriques;
-
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 	//
 	// Initialiser variables (eviter hacks par URL)
 	//
@@ -175,8 +173,13 @@ function inc_auth_dist() {
 
 	$connect_id_auteur = $row['id_auteur'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
-	if ($connect_statut == '0minirezo') auth_rubrique();
-	else if ($connect_statut != '1comite') return auth_arefaire();
+	$r = auth_rubrique($connect_id_auteur, $connect_statut);
+
+	if (is_string($r)) {
+		if ($r != '1comite') return auth_arefaire();
+	} elseif (is_array($r))
+		$connect_id_rubrique = $r;
+	else $connect_toutes_rubriques = true;
 
 	$prefs = unserialize($row['prefs']);
 	$connect_login = $row['login'];
