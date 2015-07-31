@@ -152,7 +152,7 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	if (avoir_visiteurs())
+	if (avoir_visiteurs(true)) 
 		$sousmenu['auteurs'] = 
 			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!1comite,0minirezo,nouveau");
 
