@@ -415,17 +415,23 @@ function inclure_modele($type, $id, $params, $lien) {
 	$type = strtolower($type);
 
 	$fond = 'modeles/'.$type;
-	if (preg_match(',^([a-z_0-9-]+)([|]|$),i', $params, $sub)) {
-		if (in_array(strtolower($sub[1]),
-		array('left', 'right', 'center')))
-			$align = $sub[0];
 
-		$fond = 'modeles/'.$type.'_'.$sub[1];
+	$params = array_filter(explode('|', $params));
+	if ($params) {
+		list(,$soustype) = each($params);
+		$soustype = strtolower($soustype);
+		if (in_array($soustype,
+		array('left', 'right', 'center'))) {
+			list(,$soustype) = each($params);
+			$soustype = strtolower($soustype);
+		}
 
-		if (!find_in_path($fond.'.html')) {
-			$fond = 'modeles/'.$type;
-			if (!$align)
-				$class = $sub[1];
+		if ($soustype) {
+			$fond = 'modeles/'.$type.'_'.$soustype;
+			if (!find_in_path($fond.'.html')) {
+				$fond = 'modeles/'.$type;
+				$class = $soustype;
+			}
 		}
 	}
 
@@ -455,9 +461,6 @@ function inclure_modele($type, $id, $params, $lien) {
 	// id => 1.
 	$contexte[id_table_objet($type)] = $contexte['id'] = $id;
 
-	if ($align)
-		$contexte['align'] = $align;
-
 	if ($class)
 		$contexte['class'] = $class;
 
@@ -471,7 +474,7 @@ function inclure_modele($type, $id, $params, $lien) {
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte,
-		creer_contexte_de_modele(explode('|', $params))); 
+		creer_contexte_de_modele($params)); 
 
 	// On cree un marqueur de notes unique lie a ce modele
 	$enregistre_marqueur_notes = $GLOBALS['marqueur_notes'];
