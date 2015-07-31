@@ -207,6 +207,10 @@ function vignettes_config()
 		$nb_process ++;
 	}
 
+	$cell = $nb_process%3?(3-$nb_process%3):0;
+	while($cell--)
+		echo "\n".'<td>&nbsp;</td>';
+
 	echo "</tr></table>\n";
 	
 	echo "<p class='verdana2'>";
