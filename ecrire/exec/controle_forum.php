@@ -197,21 +197,21 @@ function controle_un_forum($row, $rappel) {
 function exec_controle_forum_dist()
 {
 
-  global $page, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
+  global $type, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
 
   debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
-  if (!preg_match('/^\w+$/', $page)) $page = "public";
+  if (!preg_match('/^\w+$/', $type)) $type = "public";
 
   echo "<br><br><br>";
   gros_titre(_T('titre_forum_suivi'));
 
 // faut rajouter id_rubrique donc on n'appelle plus
-//  barre_onglets("suivi_forum", $page); 
+//  barre_onglets("suivi_forum", $type); 
 // on expanse
   
   $id_rubrique = intval($id_rubrique);
-  $args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'page=';
+  $args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
 
   debut_onglet();
   onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", $onglet, "forum-public-24.gif");
@@ -233,7 +233,7 @@ function exec_controle_forum_dist()
 	echo "<B>"._T('avis_non_acces_page')."</B>";
 	exit;
   }
-  list($from,$where) = critere_statut_controle_forum($page, $id_rubrique);
+  list($from,$where) = critere_statut_controle_forum($type, $id_rubrique);
 
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval($debut_id_forum)
@@ -264,12 +264,12 @@ function exec_controle_forum_dist()
   echo "<div style='text-align: "
     . $GLOBALS['spip_lang_right']
     . ";'>"
-    . bouton_spip_rss('forums', array('page' => $page))
+    . bouton_spip_rss('forums', array('type' => $type))
     ."</div>";
 
   fin_boite_info();
   debut_droite();
-  $args .= $page;
+  $args .= $type;
 
   echo "<div class='serif2'>";
   $i = $limitdeb;

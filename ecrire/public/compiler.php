@@ -129,7 +129,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	.  "\n	return \$t0;";
 }
 
-// compil d'un boucle non recursive. 
+// compil d'une boucle recursive. 
 // il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
 // reference, car par definition un tel passage ne les sauvegarde pas
 
@@ -140,7 +140,7 @@ function calculer_boucle_rec($id_boucle, &$boucles) {
 	. "\n\t\$Numrows['$nom'] = (\$save_numrows);";
 }
 
-// compil d'un boucle non recursive. 
+// compil d'une boucle non recursive. 
 // c'est un "while (fetch_sql)" dans le cas général,
 // qu'on essaye d'optimiser un max.
 
