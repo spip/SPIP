@@ -1142,10 +1142,9 @@ function enfant_rub($collection){
 function sous_enfant_rub($collection2){
 	global $spip_lang_left;
 
-	$result3 =  sql_select("*", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
+	$result3 =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
-	if (!sql_count($result3)) return '';
-	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+	$retour = '';
 	while($row=sql_fetch($result3)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
@@ -1156,9 +1155,13 @@ function sous_enfant_rub($collection2){
 			$retour.="\n<li><div class='arial11' " .
 			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div></li>\n";
 	}
-	$retour .= "</ul>\n\n".fin_block()."\n\n";
 
-	return $retour;
+	if (!$retour) return '';
+
+	return debut_block_depliable(false,"enfants$collection2")
+	."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n"
+	. $retour
+	. "</ul>\n\n".fin_block()."\n\n";
 }
 
 // http://doc.spip.org/@afficher_enfant_rub

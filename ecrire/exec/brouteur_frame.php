@@ -64,50 +64,53 @@ function exec_brouteur_frame_dist() {
 
 	if ($special == "redac") {
 		$result=sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien USING (id_article)", "articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur ", " id_article ", " articles.date DESC");
-		if (sql_count($result)>0) {
-			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
-			echo "\n<div class='plan-articles'>";
-			while($row=sql_fetch($result)){
-				$id_article=$row['id_article'];
-				if (autoriser('voir','article',$id_article)){
-					$titre = typo($row['titre']);
-					$statut = $row['statut'];
-					echo "<a class='$statut'\nhref='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+		$res = '';
+		while($row=sql_fetch($result)){
+			$id_article=$row['id_article'];
+			if (autoriser('voir','article',$id_article)){
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+				$h = generer_url_ecrire('articles',"id_article=$id_article");
+				$res .= "<a class='$statut'\nhref='javascript:window.parent.location=\"$h\"'>$titre</a>";
 				}
 			}
-			echo "</div>";
+		if ($res) {
+			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
+			echo "\n<div class='plan-articles'>", $res, "</div>";
 		}
 	
-	}
-	else if ($special == "valider") {
+	} else if ($special == "valider") {
 		$result=sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "statut = 'prop'", "", "date DESC");
-		if (sql_count($result)>0) {
-			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
-			echo "\n<div class='plan-articles'>";
-			while($row=sql_fetch($result)){
-				$id_article=$row['id_article'];
-				if (autoriser('voir','article',$id_article)){
-					$titre = typo($row['titre']);
-					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+		$res = '';
+		while($row=sql_fetch($result)){
+			$id_article=$row['id_article'];
+			if (autoriser('voir','article',$id_article)){
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+				$h = generer_url_ecrire('articles',"id_article=$id_article");
+				$res .= "<a class='$statut' href='javascript:window.parent.location=\"$h\"'>$titre</a>";
 				}
-			}
-			echo "</div>";
+		}
+
+		if ($res) {
+			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
+			echo "\n<div class='plan-articles'>", $res, "</div>";
 		}
 	
 		$result=sql_select("*", "spip_breves", "statut = 'prop'", "", "date_heure DESC", "20");
-		if (sql_count($result)>0) {
-			echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
-			echo "\n<div class='plan-articles'>";
-			while($row=sql_fetch($result)){
-				$id_breve=$row['id_breve'];
-				if (autoriser('voir','breve',$id_breve)){
-					$titre = typo($row['titre']);
-					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve"),"\"'>",$titre,"</a>";
+		$res = '';
+		while($row=sql_fetch($result)){
+			$id_breve=$row['id_breve'];
+			if (autoriser('voir','breve',$id_breve)){
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+				$h = generer_url_ecrire('breves_voir',"id_breve=$id_breve");
+				$res .= "<a class='$statut' href='javascript:window.parent.location=\"$h\"'>$titre</a>";
 				}
-			}
-			echo "</div>";
+		}
+		if ($res) {
+			echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
+			echo "\n<div class='plan-articles'>", $res, "</div>";
 		}
 
 	}
@@ -168,50 +171,51 @@ function exec_brouteur_frame_dist() {
 				$result = sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "id_rubrique=$id_rubrique", "", "date DESC");
 			else 
 				$result = sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles, spip_auteurs_articles AS lien", "articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) ", " id_article ", " articles.date DESC");
-
-			if (sql_count($result)>0) {
-				echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
-				echo "\n<div class='plan-articles'>";
-				while($row=sql_fetch($result)){
+			$res = '';
+			while($row=sql_fetch($result)){
 					$id_article=$row['id_article'];
 					if (autoriser('voir','article',$id_article)){
 						$titre = typo($row['titre']);
 						$statut = $row['statut'];
-						echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article")."\"'>",$titre,"</a>";
+						$h = generer_url_ecrire('articles',"id_article=$id_article");
+						$res .= "<a class='$statut' href='javascript:window.parent.location=\"$h\"'>$titre</a>";
 					}
-				}
-				echo "</div>";
+			}
+			if ($res) {
+				echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
+				echo "\n<div class='plan-articles'>", $res, "</div>";
 			}
 	
 			$result=sql_select("*", "spip_breves", "id_rubrique=$id_rubrique", "", "date_heure DESC", "20");
-			if (sql_count($result)>0) {
-				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
-				echo "\n<div class='plan-articles'>";
-				while($row=sql_fetch($result)){
-					$id_breve=$row['id_breve'];
-					if (autoriser('voir','breve',$id_breve)){
-						$titre = typo($row['titre']);
-						$statut = $row['statut'];
-						echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve")."\"'>",$titre,"</a>";
-					}
+			$res = '';
+			while($row=sql_fetch($result)){
+				$id_breve=$row['id_breve'];
+				if (autoriser('voir','breve',$id_breve)){
+					$titre = typo($row['titre']);
+					$statut = $row['statut'];
+					$h = generer_url_ecrire('breves_voir',"id_breve=$id_breve");
+					$res .= "<a class='$statut' href='javascript:window.parent.location=\"$h\"'>$titre</a>";
 				}
-				echo "</div>";
-
+			}
+			if ($res) {
+				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
+				echo "\n<div class='plan-articles'>", $res, "</div>";
 
 			}
 	
 			$result=sql_select("*", "spip_syndic", "id_rubrique=$id_rubrique AND statut!='refuse'", "", "nom_site");
-			if (sql_count($result)>0) {
-				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
-				while($row=sql_fetch($result)){
-					$id_syndic=$row['id_syndic'];
-					if (autoriser('voir','site',$id_syndic)){
-						$titre = typo($row['nom_site']);
-						$statut = $row['statut'];
-						echo "\n<div class='brouteur_icone_site'><b><a href='javascript:window.parent.location=\"", generer_url_ecrire('sites',"id_syndic=$id_syndic"),"\"'>",$titre,"</a></b></div>";
-					}
+			$res = '';
+			while($row=sql_fetch($result)){
+				$id_syndic=$row['id_syndic'];
+				if (autoriser('voir','site',$id_syndic)){
+					$titre = typo($row['nom_site']);
+					$statut = $row['statut'];
+					$h = generer_url_ecrire('sites',"id_syndic=$id_syndic");
+					$res .= "\n<div class='brouteur_icone_site'><b><a href='javascript:window.parent.location=\"$h\"'>$titre</a></b></div>";
 				}
 			}
+			if ($res)
+				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>", $res;
 		}
 
 		// en derniere colonne, afficher articles et breves
