@@ -176,9 +176,9 @@ function balise_SPIP_VERSION_dist($p) {
  * 			<a href="#URL_SITE">#NOM_SITE</a>
  * 		</code>
  *
- * @param array $p
+ * @param Champ $p
  * 		Pile au niveau de la balise
- * @return array
+ * @return Champ
  * 		Pile complétée par le code à générer
 **/
 function balise_NOM_SITE_dist($p) {
@@ -676,14 +676,14 @@ function balise_CHEMIN_IMAGE_dist($p) {
  * anti-javascript, par exemple en filtrant avec |safehtml : [(#ENV*{toto}|safehtml)]
  * 
  *
- * @param array $p
+ * @param Champ $p
  * 		Pile ; arbre de syntaxe abstrait positionne au niveau de la balise.
  *
  * @param array $src
  * 		Tableau dans lequel chercher la cle demandee en parametre de la balise.
  * 		Par defaut prend dans le contexte du squelette.
  *  
- * @return array $p
+ * @return Champ $p
  * 		Pile completee du code PHP d'execution de la balise
 **/
 function balise_ENV_dist($p, $src = NULL) {
@@ -1155,9 +1155,9 @@ function balise_GET_dist($p) {
  * #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
  * (changera si la gestion des doublons evolue)
  * 
- * @param array $p
+ * @param Champ $p
  * 		Pile au niveau de la balise
- * @return array
+ * @return Champ
  * 		Pile complétée par le code à générer
 **/
 function balise_DOUBLONS_dist($p) {

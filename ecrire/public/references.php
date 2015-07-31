@@ -367,10 +367,17 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 
 
 
-// recuperer le nom du serveur,
-// mais pas si c'est un serveur specifique derogatoire
-// @param array $p, AST positionne sur la balise
-// @return string nom de la connexion
+
+/**
+ * Récuperer le nom du serveur
+ * 
+ * Mais pas si c'est un serveur specifique derogatoire
+ * 
+ * @param Champ $p
+ *     AST positionné sur la balise
+ * @return string
+ *     Nom de la connexion
+**/
 function trouver_nom_serveur_distant($p) {
 	$nom = $p->id_boucle;
 	if ($nom
@@ -385,12 +392,25 @@ function trouver_nom_serveur_distant($p) {
 	return "";
 }
 
-// il faudrait savoir traiter les formulaires en local
-// tout en appelant le serveur SQL distant.
-// En attendant, cette fonction permet de refuser une authentification
-// sur qqch qui n'a rien a voir.
 
-// http://doc.spip.org/@balise_distante_interdite
+/**
+ * Teste si une balise est appliquée sur une base distante
+ *
+ * La fonction loge une erreur si la balise est utilisée sur une
+ * base distante et retourne false dans ce cas.
+ * 
+ * Note :
+ * Il faudrait savoir traiter les formulaires en local
+ * tout en appelant le serveur SQL distant.
+ * En attendant, cette fonction permet de refuser une authentification
+ * sur qqch qui n'a rien a voir.
+ * 
+ * @param Champ $p
+ *     AST positionné sur la balise
+ * @return bool
+ *     - true : La balise est autorisée
+ *     - false : La balise est interdite car le serveur est distant
+**/
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 
