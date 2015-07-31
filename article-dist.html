@@ -257,7 +257,7 @@
 
 	<BOUCLE_auteurs(AUTEURS){id_article}>
 	<P>
-	[(#LOGO_AUTEUR|mailto:#EMAIL)<BR>]
+	[<a href="mailto:#EMAIL">(#LOGO_AUTEUR)</a><BR>]
 	<B>[<A HREF="mailto:(#EMAIL)">]#NOM</A></B><BR>
 	[<A HREF="(#URL_SITE)">][<IMG SRC="puce.gif" BORDER=0>(#NOM_SITE)<BR>]</A>
 	[<IMG SRC="puce.gif">(#BIO)]
