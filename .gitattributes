@@ -531,6 +531,7 @@ ecrire/inc/petitionner.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
+ecrire/inc/premiers_pas.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/regler_moderation.php -text
 ecrire/inc/safehtml.php -text
