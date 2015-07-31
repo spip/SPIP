@@ -1063,11 +1063,11 @@ function affdate_heure($numdate) {
  * @return string
  */
 function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
-	$abbr = '';
-	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
+	$abbr = $jour = '';
 	$affdate = "affdate_jourcourt";
+	if (strpos($forme,'abbr') !==false) $abbr = 'abbr';
 	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
-	if (strpos($forme,'jour')!==false) $jour = 'jour';
+	if (strpos($forme,'jour') !==false) $jour = 'jour';
 	
 	$dtstart = $dtend = $dtabbr = "";
 	if (strpos($forme,'hcal')!==false) {
