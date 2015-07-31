@@ -339,7 +339,7 @@ function ajouter_tags($matches, $item) {
 		if ($mot)
 			$tags[] = creer_tag($mot, $type, $url);
 	}
-	return join(', ', $tags);
+	return $tags;
 }
 
 // prend un fichier backend et retourne un tableau des items lus,
@@ -498,18 +498,18 @@ function analyser_backend($rss, $url_syndic='') {
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
 		}
 
-		// Trouver les microformats
+		// Trouver les microformats (ecrase les <category> et <dc:subject>)
 		if (preg_match_all(
 		',<a[[:space:]]([^>]+[[:space:]])?rel=[^>]+>.*</a>,Uims',
-		$data['item'], $regs, PREG_PATTERN_ORDER))
-			$data['tags'] = join(', ', $regs[0]); # eviter les doublons
-
+		$data['item'], $regs, PREG_PATTERN_ORDER)) {
+			$data['tags'] = $regs[0];
+		}
 		// Cas particulier : tags Connotea sous la forme <a class="postedtag">
 		if (preg_match_all(
 		',<a[[:space:]][^>]+ class="postedtag"[^>]*>.*</a>,Uims',
 		$data['item'], $regs, PREG_PATTERN_ORDER))
-			$data['tags'] = join(', ', preg_replace(', class="postedtag",i',
-			' rel="tag"', $regs[0]));
+			$data['tags'] = preg_replace(', class="postedtag",i',
+			' rel="tag"', $regs[0]);
 
 		// Trouver les pieces jointes <enclosure> (RSS)
 		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
@@ -577,11 +577,17 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	$update_date = $data['lastbuilddate'] ?
 		"date = FROM_UNIXTIME(".$data['lastbuilddate'].")," : '';
 
-	// tags & enclosures
-	if ($data['tags'] AND $data['enclosures'])
-		$tags = $data['tags'].', '.$data['enclosures'];
-	else
-		$tags = $data['tags'].$data['enclosures'];
+	// tags & enclosures (preparer spip_syndic_articles.tags)
+	$tags = $data['enclosures'];
+	# eviter les doublons (cle = url+titre) et passer d'un tableau a une chaine
+	if ($data['tags']) {
+		$vus = array();
+		foreach ($data['tags'] as $tag) {
+			$cle = supprimer_tags($tag).extraire_attribut($tag,'href');
+			$vus[$cle] = $tag;
+		}
+		$tags .= ($tags ? ', ' : '') . join(', ', $vus);
+	}
 
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
 	spip_query ("UPDATE spip_syndic_articles SET
