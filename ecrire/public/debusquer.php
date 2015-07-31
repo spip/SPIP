@@ -63,8 +63,12 @@ function public_debusquer_dist($message = '', $lieu = ''){
 		$urgence = (_DEBUG_MAX_SQUELETTE_ERREURS AND count($tableau_des_erreurs)>_DEBUG_MAX_SQUELETTE_ERREURS);
 		if (!$urgence) return;
 	}
-	if (empty($debug_objets['principal']))
-		$debug_objets['principal'] = $GLOBALS['fond'];
+	if (empty($debug_objets['principal'])) {
+		// espace public ?
+		if (isset($GLOBALS['fond'])) {
+			$debug_objets['principal'] = $GLOBALS['fond'];
+		} 
+	}
 
 	include_spip('inc/autoriser');
 	if (!autoriser('debug')) return;

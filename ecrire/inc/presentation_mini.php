@@ -189,7 +189,7 @@ function html_tests_js(){
 **/
 function info_maj_spip(){
 
-	$maj = $GLOBALS['meta']['info_maj_spip'];
+	$maj = isset($GLOBALS['meta']['info_maj_spip']) ? $GLOBALS['meta']['info_maj_spip'] : null;
 	if (!$maj)
 		return "";
 
