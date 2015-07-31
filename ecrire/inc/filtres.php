@@ -2735,7 +2735,7 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
     $comment = "/* #PRODUIRE{fond=$fond";
     foreach($contexte as $k=>$v)
 	    $comment .= ",$k=$v";
-    $comment .="} le ".date("Y-m-d H:i:s")." */";
+    $comment .="} le ".date("Y-m-d H:i:s")." */\n";
 	  // et ecrire le fichier
     ecrire_fichier($filename,$comment.$contenu);
   }
