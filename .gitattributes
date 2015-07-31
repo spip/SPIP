@@ -73,8 +73,11 @@ dist/images/documents-48_rtl.png -text
 dist/images/edit.gif -text
 dist/images/effacer-cache-24.gif -text
 dist/images/envoi-message-24.gif -text
+dist/images/etape-encours.gif -text
 dist/images/etape-encours.png -text
+dist/images/etape-ok.gif -text
 dist/images/etape-ok.png -text
+dist/images/etape-todo.gif -text
 dist/images/etape-todo.png -text
 dist/images/feed.png -text
 dist/images/fiche-perso-24.gif -text
