@@ -103,8 +103,7 @@ function auth_spip_formulaire_login($flux){
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
 	$flux['data'].=
 	  ($compat_md5?'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>':'')
-		. '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'sha256.js"></script>'
-		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login.js"></script>'
+		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login-sha-min.js"></script>'
 		.'<script type="text/javascript">/*<![CDATA[*/'
 		."var alea_actuel='".$flux['args']['contexte']['_alea_actuel']."';"
 		."var alea_futur='".$flux['args']['contexte']['_alea_futur']."';"
