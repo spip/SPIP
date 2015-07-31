@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /*		Nouvelle gestion des MAJ (par tableau)			*/
 /*--------------------------------------------------------------------- */
 
-// on la fait coincider retroactivement avec l'état de la 1.9.2
+// on la fait coincider retroactivement avec l'etat de la 1.9.2
 // => l'index numerique entier est la * par 1000 (resultat < SVN c'est ok)
 
 	// FLV est incrustable, la MAJ precedente l'avait oublie
@@ -307,9 +307,9 @@ $GLOBALS['maj'][1949] = array(
 function maj_1_950($installee) {
   // oubli de gerer le prefixe lors l'introduction de l'abstraction
   // => Relancer les MAJ concernees si la version dont on part les avait fait
-	if ($installe >= 1.946) serie_alter('950a', $GLOBALS['maj'][1946]); 
-	if ($installe >= 1.947) serie_alter('950b', $GLOBALS['maj'][1947]);
-	if ($installe >= 1.949)	@serie_alter('950c', $GLOBALS['maj'][1949]); 
+	if ($installee >= 1.946) serie_alter('950a', $GLOBALS['maj'][1946]);
+	if ($installee >= 1.947) serie_alter('950b', $GLOBALS['maj'][1947]);
+	if ($installee >= 1.949)	@serie_alter('950c', $GLOBALS['maj'][1949]);
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_urls'];
@@ -319,12 +319,12 @@ function maj_1_950($installee) {
 	foreach(array('article'=>'id_article',
 		      'rubrique'=>'id_rubrique',
 		      'breve'=>'id_breve',
-		      'auteur' => 'id_auteur', 
-		      'mot' => 'id_mot', 
+		      'auteur' => 'id_auteur',
+		      'mot' => 'id_mot',
 		      'syndic' => 'id_syndic') as $type => $id_objet){
 		$table = ($type == 'syndic') ? $type : ($type ."s");
-		$date = ($type == 'breve') ? 'date_heure' : 
-		  (($type == 'auteur') ? 'maj' : 
+		$date = ($type == 'breve') ? 'date_heure' :
+		  (($type == 'auteur') ? 'maj' :
 		   (($type == 'mot') ? 'maj' : 'date'));
 		$q = @sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
 		if (!$q) return; // anormal, mais ne pas boucler en erreur
@@ -368,7 +368,7 @@ function maj_1_952() {
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".calcul_mysql_in('id_document', $vignettes));
 	}
-	if (!$ok) die('echec sur maj_1_952()'); 
+	if (!$ok) die('echec sur maj_1_952()');
 }
 
 $GLOBALS['maj'][1952] = array(array('maj_1_952'));
@@ -377,7 +377,7 @@ $GLOBALS['maj'][1953] = array(array('upgrade_types_documents'));
 
 $GLOBALS['maj'][1954] = array(
 
-		//pas de psd en <img> 
+		//pas de psd en <img>
   array('spip_query', "UPDATE spip_types_documents SET `inclus`='non' WHERE `extension`='psd'"),
 		//ajout csv
     array('spip_query', "INSERT IGNORE INTO spip_types_documents (`extension`, `titre`) VALUES ('csv', 'CSV')"),
@@ -413,7 +413,7 @@ $GLOBALS['maj'][1938] = array(
 	array('maj_1_938'),
 # supprimer l'ancien champ et son index
 	array('sql_alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
-# le champ id_type devient superflu 
+# le champ id_type devient superflu
 	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
 	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
