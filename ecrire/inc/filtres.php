@@ -68,11 +68,33 @@ function chercher_filtre($fonc, $default=NULL) {
 	return $default;
 }
 
-// http://doc.spip.org/@appliquer_filtre
-function appliquer_filtre($arg, $filtre) {
+/**
+ * Applique un filtre
+ * 
+ * Fonction générique qui prend en argument l’objet (texte, etc) à modifier
+ * et le nom du filtre. Retrouve les arguments du filtre demandé dans les arguments
+ * transmis à cette fonction, via func_get_args().
+ *
+ * @see filtrer() Assez proche
+ * 
+ * @param string $arg
+ *     Texte sur lequel appliquer le filtre
+ * @param string $filtre
+ *     Nom du filtre a appliquer
+ * @param string $force
+ *     La fonction doit-elle retourner le texte ou rien ?
+ * @return string
+ *     Texte avec le filtre appliqué s'il a été trouvé,
+ *     Texte sans le filtre appliqué s'il n'a pas été trouvé et que $force n'a
+ *       pas été fourni,
+ *     Chaîne vide si le filtre n'a pas été trouvé et que $force a été fourni.
+**/
+function appliquer_filtre($arg, $filtre, $force=NULL) {
 	$f = chercher_filtre($filtre);
-	if (!$f)
-		return ''; // ou faut-il retourner $arg inchange == filtre_identite?
+	if (!$f) {
+		if (!$force) return '';
+		else return $arg;
+	}
 
 	$args = func_get_args();
 	array_shift($args); // enlever $arg
