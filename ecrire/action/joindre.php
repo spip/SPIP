@@ -30,6 +30,7 @@ function action_joindre_dist()
 	}
 
 	list(, $id, $id_document, $mode, $type) = $r;
+
 	$actifs = array();
 	$redirect = action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
 }
@@ -175,7 +176,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 				);
 		// Est-ce qu'on sait le lire ?
 		include_spip('inc/pclzip');
-		$archive = $zip ? new PclZip($zip) '';
+		$archive = $zip ? new PclZip($zip) : '';
 		if ($archive) {
 			$valables = verifier_compactes($archive);
 			if ($valables) {
