@@ -195,7 +195,8 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 	  if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
 	  // pas d'arg et pas d'autres filtres ==> critere infixe comme "/"
-          if ((!$suite) || strpos(")|", $suite[0]) === false) break;
+          if (($fin != ':') &&
+	      ((!$suite) || strpos(")|", $suite[0]) === false)) break;
 	} else {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
