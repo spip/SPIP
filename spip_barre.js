@@ -120,10 +120,20 @@ function mozWrap(txtarea, open, close)
 	var selEnd = txtarea.selectionEnd;
 	if (selEnd == 1 || selEnd == 2)
 		selEnd = selLength;
-
+	
+	// Raccourcir la selection par double-clic si dernier caractere est espace	
+	if ((txtarea.value).substring(selEnd-1,selEnd) == ' ') selEnd = selEnd-1;
+	
 	var s1 = (txtarea.value).substring(0,selStart);
 	var s2 = (txtarea.value).substring(selStart, selEnd)
 	var s3 = (txtarea.value).substring(selEnd, selLength);
+
+	// Eviter melange bold-italic
+	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && close.substring(0,1) == "}") close = close + " ";
+	if ((txtarea.value).substring(selStart-1,selStart) == '{' && open.substring(0,1) == "{") open = " " + open;
+
+
+
 	txtarea.value = s1 + open + s2 + close + s3;
 	return;
 }
