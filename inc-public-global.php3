@@ -25,7 +25,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
 	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
-	if ($lang = $contexte_inclus['lang']
+	if (($lang = $contexte_inclus['lang'])
 	|| ($GLOBALS['spip_lang'] != ($lang = lire_meta('langue_site')))) {
 		include_ecrire('inc_lang.php3');
 		lang_select($lang);

@@ -6,30 +6,32 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 	$criteres = '';
 	if ($params) {
 		foreach($params as $param) {
-                    if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
-			$var = $args[1];
-			$val = $args[3];
+			if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+				$var = $args[1];
+				$val = ereg_replace('^["\'](.*)["\']$', "\\1", trim($args[3]));
+				$val = addslashes(addslashes($val));
+
 				// Cas de la langue : passer $spip_lang
 				// et non table.lang (car depend de {lang_select})
-			if ($var =='lang') {
+				if ($var =='lang') {
 					if ($val)
-						$l[] = "'\'lang\' => " . addslashes($val) . "'";
+						$l[] = "\'lang\' => \'$val\'";
 					else
-						$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
+						$l[] = "\'lang\' => \''.\$GLOBALS[spip_lang].'\'";
 				}
-			else
+
+				// Cas normal {var=val}
+				else
 				if ($val)
-					$l[] = "'\'$var\' => " . addslashes($val) . "'";
-				else {
-					$l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\''";
-				}
+					$l[] = "\'$var\' => \'$val\'";
+				else
+					$l[] = "\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\'";
 		    }
-		$criteres = ("' . " . join(".', '.\n",$l) . " . '");
+		$criteres = join(", ",$l);
 		}
 	}
 	return "\n'<".
-		"?php
-		\$contexte_inclus = array($criteres);" .
+		"?php\n\t\$contexte_inclus = array($criteres);\n" .
 		(($dossier_squelettes) ?
 		("
 			if (@file_exists(\'$dossier_squelettes/$fichier\')){
