@@ -39,6 +39,11 @@ if ($etape6) {
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",\"0minirezo\")";
 		}
 		spip_query($query);
+
+		// inserer email comme email webmaster principal
+		include_local('inc_meta.php3');
+		ecrire_meta('email_webmaster', $email);
+		ecrire_metas();
 	}
 
 	// Si PHP est installe en module Apache, pas besoin de .htaccess

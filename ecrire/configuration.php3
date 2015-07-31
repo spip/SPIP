@@ -57,6 +57,9 @@ if ($changer_config == 'oui') {
 	ecrire_meta("accepter_inscriptions", $accepter_inscriptions);
 	ecrire_meta("forums_publics","$forums_publics");
 
+	if (ereg(".@.+\...",$email_webmaster))
+		ecrire_meta("email_webmaster", $email_webmaster);
+
 	ecrire_metas();	
 
 	if ($purger_skel) {
@@ -82,6 +85,7 @@ debut_cadre_relief("racine-24.gif");
 
 	$nom_site = htmlspecialchars(lire_meta("nom_site"));
 	$adresse_site = htmlspecialchars(lire_meta("adresse_site"));
+	$email_webmaster = htmlspecialchars(lire_meta("email_webmaster"));
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Nom de votre site</FONT></B> ".aide ("confnom")."</TD></TR>";
@@ -94,6 +98,12 @@ debut_cadre_relief("racine-24.gif");
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
 	echo "<input type='text' name='adresse_site' value=\"$adresse_site\" size='40' CLASS='forml'>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Email du webmaster du site</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+	echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='forml'>";
 	echo "</TD></TR>";
 
 

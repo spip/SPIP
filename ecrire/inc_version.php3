@@ -67,7 +67,7 @@ function spip_query($query) {
 //
 
 // version de la base
-$spip_version = 1.417;
+$spip_version = 1.418;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
@@ -146,7 +146,7 @@ if ($unquote_gpc) {
 
 
 //
-// Dirty hack contre le register_globals à 'Off' (PHP 4.1.x)
+// Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
 // A remplacer par une gestion propre des variables admissibles ;-)
 //
 
