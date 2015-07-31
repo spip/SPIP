@@ -107,7 +107,6 @@ function supprimer_sessions($id_auteur) {
 
 // http://doc.spip.org/@verifier_session
 function verifier_session($change=false) {
-
 	// si pas de cookie, c'est fichu
 	if (!isset($_COOKIE['spip_session']))
 		return false;
