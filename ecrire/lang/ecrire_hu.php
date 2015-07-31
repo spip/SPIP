@@ -835,8 +835,8 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_jeu_caractere' => 'Az &#336;n honlapj&aacute;n aj&aacute;nlott az univerz&aacute;lis ab&eacute;c&eacute; (<tt>utf-8</tt>) haszn&aacute;lata&nbsp;:az &ouml;sszes nyelv megjelen&iacute;t&eacute;s&eacute;t teszi lehet&#337;v&eacute;, &eacute;s m&aacute;r nem okoz kompatibilit&aacute;si problem&aacute;t a korszer&#369; b&ouml;ng&eacute;sz&#337;kkel.',
 'texte_jeu_caractere_2' => 'Vigy&aacute;zat: E be&aacute;ll&iacute;t&aacute;s nem v&eacute;gzi az adatb&aacute;zisban m&aacute;r megl&eacute;v&#337; sz&ouml;vegek konvert&aacute;l&aacute;s&aacute;t.',
 'texte_jeu_caractere_3' => 'Az &#336;n honlapja jelenleg a kovetkez&#337; karaktert&aacute;bl&aacute;t haszn&aacute;lja&nbsp;:',
-'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
-'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
+'texte_jeu_caractere_4' => 'Ha nem felel meg adatai &aacute;llapot&aacute;nak (pl. adatb&aacute;zisresztaur&aacute;l&aacute;s ut&aacute;n), vagy ha <em>inditja ezt a honlapot</em>, &eacute;s szeretne egy m&aacute;sik karaktert&aacute;bl&aacute;t haszn&aacute;lni, ezt az ut&oacute;bbit jel&ouml;lje ide&nbsp;:',
+'texte_jeu_caractere_conversion' => 'Megjegyz&eacute;s&nbsp;: &uacute;gy d&ouml;ntheti, hogy v&eacute;glegesen konvert&aacute;lja honlapja &ouml;sszes sz&ouml;vegeit (cikkek, h&iacute;rek, f&oacute;rumok, stb.) az <tt>utf-8</tt> karakter t&aacute;bl&aacute;ra az <a href="@url@">utf-8-ra konvert&aacute;l&aacute;si oldal</a> l&aacute;t&oacute;gat&aacute;s&aacute;val.',
 'texte_lien_hypertexte' => '(Ha az &Ouml;n &uuml;zenete egy publik&aacute;lt cikkre, vagy egy t&ouml;bb inform&aacute;ci&oacute;t tartalmaz&oacute; oldara hivatkozik, lejjeb jelezze az oldal nev&eacute;t, illetve c&iacute;m&eacute;t.)',
 'texte_liens_sites_syndiques' => 'A szindik&aacute;lt honlapokr&oacute;l sz&aacute;rmaz&oacute; linkeket lehetnek eleve tiltva&nbsp;; a lenti be&aacute;ll&iacute;t&aacute;s jelzi a szindik&aacute;lt honlapok alap&eacute;rtelmezett be&aacute;ll&iacute;t&aacute;s&aacute;t l&eacute;trehoz&aacute;suk ut&aacute;n.
 Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&eacute;nt, vagy honlap szerint tiltani a leend&#337; linkeket.
@@ -864,12 +864,12 @@ Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&ea
 'texte_nouveau_message' => '&Uacute;j &uuml;zenet',
 'texte_nouveau_mot' => '&Uacute;j sz&oacute;',
 'texte_nouvelle_version_spip_1' => 'Az SPIP egyik &uacute;jabb verzi&oacute;j&aacute;t telep&iacute;tette.',
-'texte_nouvelle_version_spip_2' => '<MODIF>Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel, t&ouml;r&ouml;lje az <tt>inc_connect.php3</tt> nev&#369; f&aacute;jlt a  <tt>ecrire</tt> mapp&aacute;b&#337;l &eacute;s folytatni a telep&iacute;t&eacute;st az adatb&aacute;zishoz val&oacute; csatlakoz&aacute;s param&eacute;tereinek friss&iacute;t&eacute;s&eacute;re.<p /> (Megjegyz&eacute;s.&nbsp;: ha ezeket elfelejtette, tekintse meg a <tt>inc_connect.php3</tt> f&aacute;jlt, miel&#337;bb t&ouml;rli...)',
+'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel. Ha &Ouml;n a honlap gazd&aacute;ja, akkor t&ouml;r&ouml;lje a @connect@ nev&#369; f&aacute;jlt, folytassa a telep&iacute;t&eacute;st ahhoz, hogy az adatb&aacute;zis csatlakoz&aacute;si param&eacute;tereit m&oacute;dos&iacute;thassa.<p /> (Megjegyz&eacute;s.&nbsp;: amennyiben elfelejtette a csatlakoz&aacute;si param&eacute;tereit, tekintse &aacute;t a @connect@ nev&#369; f&aacute;jlt, miel&#337;bb kit&ouml;r&ouml;lne...)',
 'texte_operation_echec' => 'Menjen az el&ouml;z&#337; oldalra, jel&ouml;lj&ouml;n ki egy m&aacute;sik adatb&aacute;zist, vagy hozzon l&eacute;tre egy ujat. Ellen&#337;rizze az &Ouml;n szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat.',
 'texte_plus_trois_car' => 't&ouml;bb, mint 3 karakter',
 'texte_plusieurs_articles' => 'T&ouml;bb szerz&#337; tal&aacute;lt "@cherche_auteur@" szerint:',
 'texte_port_annuaire' => '(Az alap&eacute;rtelmezett &eacute;rt&eacute;k &aacute;ltal&aacute;ban megfelel.)',
-'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
+'texte_presente_plugin' => 'Ez az oldal sorolja a rendelkez&eacute;sre &aacute;ll&oacute; plugineket a honlapon. Ezek k&ouml;z&uuml;l a sz&uuml;ks&eacute;geseket aktiv&aacute;lhatja a megfelel&#337; n&eacute;gyzet kijel&ouml;l&eacute;s&eacute;vel. ',
 'texte_proposer_publication' => 'Ha a cikk be van fejezve,<br> akkor a publik&aacute;l&aacute;s&aacute;t javasolhatja.',
 'texte_proxy' => 'Bizonyos esetekben (intranet, biztons&aacute;gos h&aacute;l&oacute;zatok...),
   sz&uuml;ks&eacute;ges haszn&aacute;lni egy <I>HTTP proxy</I>-t a szindik&aacute;lt honlapok el&eacute;r&eacute;s&eacute;re.
@@ -884,7 +884,7 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
 'texte_recapitiule_liste_documents' => 'Ez az oldal felsorolja ezeket a dokumentumokat, melyeket helyezte a rovatokba. Minden egyes dokumentum m&oacute;dos&iacute;t&aacute;s&aacute;ra, k&ouml;vesse a rovata oldal&aacute;hoz vezet&#337; linket.',
 'texte_recuperer_base' => 'Adatb&aacute;zis jav&iacute;t&aacute;sa',
 'texte_reference_mais_redirige' => 'a cikke fel van v&eacute;ve az &Ouml;n SPIP honlapj&aacute;n, de &aacute;t lett ir&aacute;ny&iacute;tva egy m&aacute;sik URL fel&eacute;.',
-'texte_referencement_automatique' => '<MODIF><b>egy honlap aztomatikus felv&eacute;tele</b><br>Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;s...).',
+'texte_referencement_automatique' => '<b>egy honlap automatikus felv&eacute;tele</b><br>Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;sa...).',
 'texte_requetes_echouent' => '<b>Ha bizonyos MySQL lek&eacute;rdez&eacute;sek rendszeresen &eacute;s oktalanul hib&aacute;sak,
  lehets&eacute;ges, hogy maga az adatb&aacute;zis az  oka.</b><p />
   MySQL ad lehet&#337;s&eacute;get a t&aacute;bl&aacute;k jav&iacute;t&aacute;s&aacute;ra, ha v&eacute;letlen&uuml;l lett s&eacute;r&uuml;lved.
@@ -893,12 +893,12 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
   ami tal&aacute;n nyomokat tartalmaz...<p />
  Ha a probl&eacute;ma fenn&aacute;ll, keresse a szolg&aacute;ltat&oacute;j&aacute;t.<p />',
 'texte_restaurer_base' => 'Egy megmentett adatb&aacute;zis tartalm&aacute;nak resztaur&aacute;l&aacute;sa',
-'texte_restaurer_sauvegarde' => '<MODIF>Ez az opci&oacute; lehet&#337;v&eacute; teszi egy m&aacute;r megmentett adatb&aacute;zis resztaur&aacute;l&aacute;s&aacute;t.
+'texte_restaurer_sauvegarde' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi egy m&aacute;r megmentett adatb&aacute;zis resztaur&aacute;l&aacute;s&aacute;t.
   Az&eacute;rt a ment&eacute;st tartalmaz&oacute; f&aacute;jlt kell helyezni a @dossier@ mapp&aacute;ba.
-  Legyen &oacute;vatos azzal a lehet&#337;s&eacute;ggel&nbsp;: <b>a m&oacute;dos&iacute;t&aacute;sok, esetleges veszt&eacute;sek visszavonhatatlanok.</b>',
+  Legyen &oacute;vatos ezzel a lehet&#337;s&eacute;ggel&nbsp;: <b>a m&oacute;dos&iacute;t&aacute;sok, esetleges veszt&eacute;sek visszavonhatatlanok.</b>',
 'texte_sauvegarde' => 'Az adatb&aacute;zis tartalm&aacute;nak ment&eacute;se',
 'texte_sauvegarde_base' => 'Adatb&aacute;zis ment&eacute;se',
-'texte_sauvegarde_compressee' => '<MODIF>A ment&eacute;s a nem t&ouml;m&ouml;r&iacute;tett @fichier@ f&aacute;jlba fog t&ouml;rtenni.',
+'texte_sauvegarde_compressee' => 'A ment&eacute;s a nem t&ouml;m&ouml;r&iacute;tett @fichier@ n. f&aacute;jlba fog t&ouml;rtenni.',
 'texte_selection_langue_principale' => 'Lejjebb kijel&ouml;lhet&#337; a honlap &laquo;&nbsp;f&#337; nyelve&nbsp;&raquo;. Ez a v&aacute;laszt&aacute;s - szerencs&eacute;re&nbsp;! - nem k&ouml;telez &iacute;rni cikkeket a v&aacute;lasztott nyelven, de meghat&aacute;rozhatja&nbsp;:
  <ul><li> a nyilv&aacute;nos r&eacute;szen az alap&eacute;rtelmezett d&aacute;tumform&aacute;tumot&nbsp;;</li>
  <li> milyen nyomdai motort haszn&aacute;lhasson az SPIP a sz&ouml;vegekre&nbsp;;</li>
@@ -934,10 +934,10 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 ',
 'texte_trop_resultats_auteurs' => 'T&uacute;l sok tal&aacute;lat erre "@cherche_auteur@" ; sz&uuml;k&iacute;tse a k&eacute;r&eacute;s&eacute;st.',
 'texte_unpack' => 'Leg&uacute;jabb verzi&oacute; let&ouml;lt&eacute;se',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Ha a bels&#337; SPIP keres&#337; motort haszn&aacute;lja 
+'texte_utilisation_moteur_syndiques' => 'Ha az SPIP bels&#337;  keres&#337; motorj&aacute;t haszn&aacute;lja 
     , k&eacute;tf&eacute;le m&oacute;don lehet keresni a szindik&aacute;lt cikkekben, illetve honlapokon.
-    <br><img src=\'puce.gif\'> Az egyszer&#369;bb korl&aacute;t&oacute;zodik a cikkek c&iacute;meire &eacute;s r&ouml;vid ismertet&#337;ire.
-    <br><img src=\'puce.gif\'>
+    <br>Az egyszer&#369;bb korl&aacute;t&oacute;zodik a cikkek c&iacute;meire &eacute;s r&ouml;vid ismertet&#337;ire.
+    <br>
     Egy er&#337;teljesebb m&oacute;dszer lehet&#337;v&eacute; teszi,
     hogy az SPIP a felvett honlapok sz&ouml;vegein bel&uuml;l is keres&nbsp;.     Ha valamilyen honlapot vesz fel,
     akkor SPIP fogja v&eacute;gezni a keres&eacute;st a honlap saj&aacute;t sz&ouml;veg&eacute;ben.',
@@ -1029,19 +1029,19 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 
 
 // U
-'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
-'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
-'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
-'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
-'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
-'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
-'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
-'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
-'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+'utf8_convert_attendez' => 'V&aacute;rjon egy kicsit, majd t&ouml;ltse &uacute;jra az oldalt.',
+'utf8_convert_avertissement' => 'Most az adatb&aacute;zis tartalm&aacute;t (cikkek, h&iacute;rek, stb.) k&eacute;sz&uuml;l konvert&aacute;lni az eredeti <b>@orig@</b> karaktert&aacute;bl&aacute;b&oacute;l a <b>@charset@</b> karaktert&aacute;bla fel&eacute;.',
+'utf8_convert_backup' => 'Ne felejtse el&#337;sz&ouml;r teljesen megmenteni a honlapj&aacute;t. Azt is ellen&#337;rizze, hogy a szkiptjei &eacute;s a nyelvi f&aacute;jlok is @charset@ kompatibilis. Egy&eacute;bk&eacute;nt a m&oacute;dos&iacute;t&aacute;sok k&ouml;vet&eacute;se, ha aktiv&aacute;lt, k&aacute;rosodni fog.',
+'utf8_convert_erreur_deja' => 'A honlapja haszn&aacute;lja m&aacute;r a @charset@ karaktert&aacute;bl&aacute;t, sz&oacute;val felesleges konvert&aacute;lni...',
+'utf8_convert_erreur_orig' => 'Hiba&nbsp;: a @charset@ karaktert&aacute;bla nincs t&aacute;mogatva.',
+'utf8_convert_termine' => 'Befejez&#337;d&ouml;tt&nbsp;!',
+'utf8_convert_timeout' => 'Fontos&nbsp;:</b> szerver <i>id&#337;t&uacute;ll&eacute;p&eacute;se</i> eset&eacute;n t&ouml;ltse &uacute;jra az oldalt addig, am&iacute;g nem &iacute;rja ki, hogy "befejez&#337;d&ouml;tt".',
+'utf8_convert_verifier' => 'Most &uuml;r&iacute;tse a cache-t, &eacute;s ellen&#337;rizze, hogy minden rendben van a publikus lapokon. Nagyobb problema eset&eacute;re egy adatment&eacute;s (SQL form&aacute;tumban) megt&ouml;rt&eacute;nt a @rep@ n. mapp&aacute;ban.',
+'utf8_convertir_votre_site' => 'utf-8 karaktert&aacute;bl&aacute;ba konvert&aacute;lodjon a honlapja',
 
 
 // V
-'version' => '<NEW>Version&nbsp;:',
+'version' => 'Verzi&oacute;&nbsp;:',
 'version_initiale' => 'Eredeti verzi&oacute;'
 
 );
