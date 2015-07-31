@@ -162,7 +162,7 @@ function invalideur_session(&$Cache, $code=NULL) {
 
 // http://doc.spip.org/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source='') {
-	static $filtres = array;
+	static $filtres = array();
 	$headers = array();
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
