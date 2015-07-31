@@ -33,8 +33,10 @@
 				[(#ENV{id_trad}|=={#VALEUR{id}}|oui)<:trad_reference:>]
 			</td>
 			<td class='langue'>[(#VALEUR{lang}|traduire_nom_langue)]</td>
-			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
-				<a href="[(#URL_ECRIRE{#ENV{objet}|objet_info{url_edit}}|parametre_url{#ENV{objet}|id_table_objet,#VALEUR{id}})]">#VALEUR{id}</a>,
+			<td class='id'>
+				[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{[
+				<a href="[(#URL_ECRIRE{#ENV{objet}|objet_info{url_edit}}
+					|parametre_url{[(#ENV{objet}|id_table_objet)],#VALEUR{id}})]">(#VALEUR{id})</a>],
 				#VALEUR{id}
 			})]</td>
 		</tr>
