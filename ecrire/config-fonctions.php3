@@ -172,6 +172,8 @@ echo "</TABLE>\n";
 
 fin_cadre_relief();
 
+echo "<p>";
+
 
 //
 // Configuration du charset
@@ -227,6 +229,46 @@ if ($options == 'avancees') {
 	echo "</TABLE>";
 
 	fin_cadre_relief();
+
+	echo "<p>";
+}
+
+
+//
+// Notification de modification des articles
+//
+
+if ($options == "avancees") {
+	debut_cadre_relief("article-24.gif");
+
+	$articles_modif = lire_meta("articles_modif");
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Travail collaboratif sur les articles</FONT></B></TD></TR>";
+
+	echo "<TR><TD class='verdana2'>";
+	echo "S'il est fréquent que plusieurs r&eacute;dacteurs travaillent sur le m&ecirc;me articles,
+		activer la fonctionnalit&eacute; suivante permettra de conserver l'heure de derni&egrave;re
+		ouverture d'un article afin d'en informer les autres r&eacute;dacteurs.
+		Par d&eacute;faut, cette option est d&eacute;sactiv&eacute;e afin d'&eacute;viter
+		d'afficher des messages d'avertissement intempestifs.";
+	echo "<p>Voulez-vous afficher les messages d'information li&eacute;s &agrave; l'heure d'ouverture
+		des articles&nbsp;?";
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	afficher_choix('articles_modif', $articles_modif,
+		array('oui' => "Oui", 'non' => "Non"), ' &nbsp; ');
+	echo "</TD></TR>\n";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+	
+	echo "<p>";
 }
 
 

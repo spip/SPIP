@@ -1724,7 +1724,7 @@ function creer_colonne_droite($rubrique=""){
 					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
 				}
 			}
-		
+
 			if ($flag_cadre) {
 				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 				if ($nb_connectes > 0) {
@@ -1752,39 +1752,42 @@ function debut_droite($rubrique="") {
 
 	if ($options == "avancees") {
 		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
+
 		// liste des articles bloques
-		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
-		$result = spip_query($query);
-		$num_articles_ouverts = spip_num_rows($result);
-		if ($num_articles_ouverts) {
-			echo "<p>";
-			debut_cadre_enfonce('warning-24.gif');
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	
-			if ($num_articles_ouverts == 1)
-				echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
-			else
-				echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
-			echo typo("avant une heure.").aide("artmodif");
-			while ($row = @spip_fetch_array($result)) {
-				$ze_article = $row['id_article'];
-				$ze_titre = typo($row['titre']);
-				echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
-				// ne pas proposer de debloquer si c'est l'article en cours d'edition
-				if ($ze_article != $GLOBALS['id_article_bloque']) {
-					$lien = $clean_link;
-					$lien->addVar('debloquer_article', $ze_article);
-					echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+		if (lire_meta("articles_modif") == "oui") {
+			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
+			$result = spip_query($query);
+			$num_articles_ouverts = spip_num_rows($result);
+			if ($num_articles_ouverts) {
+				echo "<p>";
+				debut_cadre_enfonce('warning-24.gif');
+				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+
+				if ($num_articles_ouverts == 1)
+					echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
+				else
+					echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
+				echo typo("avant une heure.").aide("artmodif");
+				while ($row = @spip_fetch_array($result)) {
+					$ze_article = $row['id_article'];
+					$ze_titre = typo($row['titre']);
+					echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+					// ne pas proposer de debloquer si c'est l'article en cours d'edition
+					if ($ze_article != $GLOBALS['id_article_bloque']) {
+						$lien = $clean_link;
+						$lien->addVar('debloquer_article', $ze_article);
+						echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+					}
+					echo "</div>";
 				}
-				echo "</div>";
+
+				fin_cadre_enfonce();
 			}
-	
-			fin_cadre_enfonce();
 		}
 	}
 
 	echo "<br></font>&nbsp;</td>";
-	
+
 	if (!$flag_3_colonnes) {
 		echo "<td width=50>&nbsp;</td>";
 	}
@@ -1799,7 +1802,7 @@ function debut_droite($rubrique="") {
 		$largeur = 600;
 	else
 		$largeur = 500;
-	
+
 	echo '<td width="'.$largeur.'" valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// zap sessions si bonjour

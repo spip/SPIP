@@ -28,6 +28,7 @@ function init_config() {
 		'post_dates' => 'oui',
 		'creer_preview' => 'non',
 		'taille_preview' => 150,
+		'articles_modif' => 'non',
 
 		'activer_sites' => 'oui',
 		'proposer_sites' => 0,
@@ -177,6 +178,7 @@ function appliquer_modifs_config() {
 		'post_dates',
 		'creer_preview',
 		'taille_preview',
+		'articles_modif',
 
 		'activer_sites',
 		'proposer_sites',

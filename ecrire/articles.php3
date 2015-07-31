@@ -13,6 +13,7 @@ $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
+$articles_modif = lire_meta("articles_modif");
 
 if ($id_article==0) {
 	if ($new=='oui') {
@@ -213,9 +214,11 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$titre_article = stripslashes($titre);
 
 	// marquer l'article (important pour les articles nouvellement crees)
-	$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article";
-	$result = spip_query($query);
-	$id_article_bloque = $id_article;   // message pour inc_presentation
+	if ($articles_modif == 'oui') {
+		$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article";
+		$result = spip_query($query);
+		$id_article_bloque = $id_article;   // message pour inc_presentation
+	}
 }
 
 
@@ -718,33 +721,39 @@ echo "</td>";
 
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='center'>";
+	echo "<td align='center'>";
+	$flag_modif = false;
+
 	// Recuperer les donnees de l'article
-	$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
-	$result = spip_query($query);
-	
-	while ($row = spip_fetch_array($result)) {
-		$auteur_modif = $row["auteur_modif"];
-		$modification = $row["modification"];
-		$maintenant = $row["maintenant"];
-		
-		$date_diff = floor(($maintenant - $modification)/60);
-		
-		if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-			$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
-			$result_auteur = spip_query($query_auteur);
-			while ($row_auteur = spip_fetch_array($result_auteur)) {
-				$nom_auteur_modif = $row_auteur["nom"];
+	if ($articles_modif == 'oui') {
+		$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
+		$result = spip_query($query);
+
+		if ($row = spip_fetch_array($result)) {
+			$auteur_modif = $row["auteur_modif"];
+			$modification = $row["modification"];
+			$maintenant = $row["maintenant"];
+
+			$date_diff = floor(($maintenant - $modification)/60);
+
+			if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
+				$flag_modif = true;
+				$query_auteur = "SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
+				$result_auteur = spip_query($query_auteur);
+				if ($row_auteur = spip_fetch_array($result_auteur)) {
+					$nom_auteur_modif = $row_auteur["nom"];
+				}
 			}
-			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
-			echo aide("artmodif");
-		}
-		else {
-			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
 		}
 	}
-	
+	if ($flag_modif) {
+		icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
+		echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
+		echo aide("artmodif");
+	}
+	else {
+		icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+	}
 
 	echo "</td>";
 }
