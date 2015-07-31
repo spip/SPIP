@@ -357,12 +357,17 @@ function revision_forum($id_forum, $c=false) {
 		// on n'affecte pas $r, car un deplacement ne change pas l'auteur
 	}
 
-	// s'il y a vraiment eu une modif, on stocke le numero IP courant
-	// ainsi que le nouvel id_auteur dans le message modifie ; et on
+	// s'il y a vraiment eu une modif, on
 	// enregistre le nouveau date_thread
 	if ($r) {
+		// on ne stocke ni le numero IP courant ni le nouvel id_auteur
+		// dans le message modifie (trop penible a l'usage) ; mais du
+		// coup attention a la responsabilite editoriale
+		/*
 		sql_updateq('spip_forum', array('ip'=>($GLOBALS['ip']), 'id_auteur'=>($GLOBALS['visiteur_session']['id_auteur'])),"id_forum=".sql_quote($id_forum));
+		*/
 
+		// & meme ca ca pourrait etre optionnel
 		sql_updateq("spip_forum", array("date_thread" => date('Y-m-d H:i:s')), "id_thread=".$t);
 	}
 }
