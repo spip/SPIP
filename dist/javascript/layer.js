@@ -70,14 +70,25 @@ jQuery.fn.toggleother = function(cible) {
 		return this.showother(cible);
 }
 
-// deplier un ou plusieurs blocs au premier hover
+// deplier lors du premier hover
+// on le fait subtilement : on attend presque 1sec avant de deplier, periode
+// durant laquelle si la souris  sort du controle, on annule le depliement
 jQuery.fn.showonhover = function(cible) {
 // decommenter pour ne rien faire au hover
 //	return this;
 	if (!this.is('.dejahover'))
 	return this
-		.addClass('dejahover')
-		.showother(cible);
+		.each(function(){
+			var me = this;
+			var t = setTimeout(function(){
+				jQuery(me)
+				.addClass('dejahover')
+				.showother(cible);
+			}, 750);
+			jQuery(me).one('mouseout', function() {
+				clearTimeout(t);
+			});
+		});
 }
 
 
