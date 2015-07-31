@@ -73,6 +73,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 		"<title>".
 		textebrut($titre).
 		"</title>\n".
+		"<meta name='viewport' content='width=device-width' />\n".
 		$css .
 "</head>
 <body".$onLoad." class='minipres'>
