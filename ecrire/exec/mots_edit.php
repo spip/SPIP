@@ -77,7 +77,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		} else
 			$add_extra = '';
 
-		spip_query("UPDATE spip_mots SET titre=" . spip_abstract_quote($titre_mot) . ", texte=" . spip_abstract_quote($texte) . ", descriptif=" . spip_abstract_quote($descriptif) . ", type=" . spip_abstract_quote($type) . ", id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($extra))) . " WHERE id_mot=$id_mot");
+		spip_query("UPDATE spip_mots SET titre=" . spip_abstract_quote($titre_mot) . ", texte=" . spip_abstract_quote($texte) . ", descriptif=" . spip_abstract_quote($descriptif) . ", type=" . spip_abstract_quote($type) . ", id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_mot=$id_mot");
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
