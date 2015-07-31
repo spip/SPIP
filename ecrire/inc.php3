@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
+include_ecrire('inc_cookie');
 
 //
 // Determiner l'action demandee
@@ -21,14 +22,13 @@ preg_match(',^[0-9a-z_]*$,i', $_GET['exec']))
 	$exec = $_GET['exec'];
  else $exec = $SCRIPT_NAME;
 
+$var_auth ="";
 if (autoriser_sans_cookie($exec)) {
-	unset($GLOBALS['_COOKIE']);
 	if (!isset($reinstall)) $reinstall = 'non';
  } else {
 	include_ecrire ("inc_session");
-	include_ecrire('inc_cookie');
-	$var_f = include_fonction('auth');
-	if (!$var_f()) exit;
+	$var_auth = include_fonction('auth');
+	if (!$var_auth()) exit;
  } 
 
 //
@@ -122,20 +122,27 @@ bgcolor='#f8f7f3' text='#000000'
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 	($spip_lang_rtl ? " dir='rtl'" : ""));
 
-
-// Choisir la langue et charger le minimum vital pour l'affichage
+// charger l'affichage minimal et initialiser a la langue par defaut
 
 include_ecrire("inc_minipres");
 
-if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
-AND $spip_lang_ecrire <> $auteur_session['lang']
-AND changer_langue($spip_lang_ecrire)) {
-	spip_query ("UPDATE spip_auteurs SET lang = '".
-		    addslashes($spip_lang_ecrire) .
-		    "' WHERE id_auteur = $connect_id_auteur");
-	$auteur_session['lang'] = $spip_lang_ecrire;
-	ajouter_session($auteur_session, $spip_session);
-}
+//  si la langue est specifiee par cookie alors ...
+if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']) {
+
+	// si pas authentifie, changer juste pour cette execution
+	if (!$var_auth)
+		changer_langue($spip_lang_ecrire);
+	// si authentifie, changer definitivement si ce n'est fait
+	else {	if (($spip_lang_ecrire <> $auteur_session['lang'])
+		AND changer_langue($spip_lang_ecrire)) {
+			spip_query ("UPDATE spip_auteurs SET lang = '".
+				addslashes($spip_lang_ecrire) .
+				"' WHERE id_auteur = $connect_id_auteur");
+			$auteur_session['lang'] = $spip_lang_ecrire;
+			ajouter_session($auteur_session, $spip_session);
+	       }
+	}
+ }
 
 //
 // Controle de la version, sauf si on est deja en train de s'en occuper
@@ -149,7 +156,6 @@ if (!isset($reinstall)) {
 	  demande_maj_version();
 	}
  }
-
 
 $var_f = include_fonction($exec);
 $var_f();
