@@ -71,6 +71,7 @@ $spip_auteurs_articles = array(
 		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_auteurs_articles_key = array(
+		"PRIMARY KEY"	=> "id_auteur, id_article",
 		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_article"	=> "id_article");
 
@@ -79,6 +80,7 @@ $spip_auteurs_rubriques = array(
 		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_auteurs_rubriques_key = array(
+		"PRIMARY KEY"	=> "id_auteur, id_rubrique",
 		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_rubrique"	=> "id_rubrique");
 
@@ -88,6 +90,7 @@ $spip_auteurs_messages = array(
 		"vu"		=> "CHAR (3) NOT NULL");
 
 $spip_auteurs_messages_key = array(
+		"PRIMARY KEY"	=> "id_auteur, id_message",
 		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_message"	=> "id_message");
 
