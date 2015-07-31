@@ -51,13 +51,27 @@ function login_explicite($login, $cible, $accepter_visiteurs = false) {
 	// passer $action dans parametre_url pour avoir une chance que $cible == $action
 	// et pas faire de boulce infinie de redirection
 	$action = parametre_url(str_replace('&amp;', '&', self()),'var_dummy','','&');
+	if (!$cible){
+		if (preg_match("/[?&]url=([^&]*)/", $action, $m))
+			$cible = rawurldecode($m[1]);
+	}
+
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_erreur', '', '&');
 		$cible = parametre_url($cible, 'var_login', '', '&');
-	} else {
-		if (preg_match("/[?&]url=([^&]*)/", $action, $m))
-			$cible = rawurldecode($m[1]);
-		else
+		// transformer la cible absolue en cible relative
+		// pour pas echouer quand la meta adresse_site est foireuse
+		if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
+			$cible = "./".substr($cible,strlen($u));
+		}
+		// si c'est une url absolue, refuser la redirection
+		// sauf si cette securite est levee volontairement par le webmestre
+		elseif (preg_match(";^([a-z]+:)?//;Uims",$cible) AND !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
+			$cible = "";
+		}
+	}
+
+	if (!$cible){
 			$cible = _DIR_RESTREINT ;
 	}
 

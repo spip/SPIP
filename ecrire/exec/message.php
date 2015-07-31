@@ -65,6 +65,8 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 // http://doc.spip.org/@http_auteurs_ressemblants
 function http_auteurs_ressemblants($cherche_auteur, $id_message)
 {
+	$cherche_auteur = htmlspecialchars($cherche_auteur);
+
   global $connect_id_auteur;
   $query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
   $table_auteurs = array();

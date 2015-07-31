@@ -212,7 +212,10 @@ AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
  }
 
 // si nom pas plausible, prendre le script par defaut
-if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
+if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) {
+	$exec = "accueil";
+  set_request('exec', $exec);
+}
 
 // Trouver la fonction eventuellement surchagee
 
