@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
 // http://doc.spip.org/@levenshtein255

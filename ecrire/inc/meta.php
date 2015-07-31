@@ -30,7 +30,6 @@ function lire_metas() {
 function ecrire_meta($nom, $valeur) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
-		if (!_FILE_CONNECT) return;
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . spip_abstract_quote($valeur) . " )");
 	}
 }
@@ -47,7 +46,6 @@ function effacer_meta($nom) {
 //
 // http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {
-	if (!_FILE_CONNECT) return;
 
 	lire_metas();
 
@@ -80,6 +78,5 @@ if (!isset($GLOBALS['meta']))
 if ((!_DIR_RESTREINT) AND _FILE_CONNECT AND abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
 	include_spip('inc/acces');
 	renouvelle_alea();
-}
-
+ }
 ?>

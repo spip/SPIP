@@ -15,6 +15,8 @@ include_spip('inc/meta');
 include_spip('inc/forum');
 include_spip('inc/filtres');
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
+
 spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
@@ -124,7 +126,6 @@ function forum_insert_secure($alea, $hash)
 		$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
 	}
 
-	include_spip('inc/actions');
 	if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
 		$hash)) {
 		spip_log('erreur hash forum');

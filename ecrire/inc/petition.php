@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
 
 // http://doc.spip.org/@formulaire_petitionner
 function formulaire_petitionner($id_article, $script, $args, $ajax=false)

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/getdocument');
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
@@ -27,7 +28,6 @@ function action_joindre_dist()
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 

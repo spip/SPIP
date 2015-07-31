@@ -13,11 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_ajouter_dist
 function action_editer_auteurs_dist() {
 	
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 

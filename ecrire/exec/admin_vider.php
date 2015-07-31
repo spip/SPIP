@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
