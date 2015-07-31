@@ -448,6 +448,7 @@ function safehtml($t) {
 // Typographie generale
 // avec protection prealable des balises HTML et SPIP
 
+// http://doc.spip.org/@typo
 function typo($letexte, $echapper=true) {
 
 	// Plus vite !
@@ -480,6 +481,7 @@ function typo($letexte, $echapper=true) {
 
 // Correcteur typographique
 
+// http://doc.spip.org/@corriger_typo
 function corriger_typo($letexte) {
 
 	// Plus vite !
