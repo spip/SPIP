@@ -28,7 +28,7 @@ if ($change_session == "oui") {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
 //		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
-		setcookie('spip_session', $cookie, time() + 24 * 7 * 3600);
+		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
 		@header('Cache-Control: no-cache');
