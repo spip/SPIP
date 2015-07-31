@@ -70,7 +70,7 @@ function spip_version() {
 	$version = $GLOBALS['spip_version_affichee'];
 	include_spip('inc/minipres');
 	if ($svn_revision = version_svn_courante(_DIR_RACINE))
-		$version .= " SVN [$svn_revision]";
+		$version .= ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']';
 	return $version;
 }
 

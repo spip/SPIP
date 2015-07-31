@@ -214,7 +214,7 @@ function inclure_page($fond, $contexte_inclus) {
 		$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
 	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
-		lang_select($lang);
+		lang_select($contexte_inclus['lang']);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 
