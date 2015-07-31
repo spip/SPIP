@@ -49,6 +49,7 @@ dist/spip_pass.html -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
+ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
 ecrire/action/configurer_notifications_forum.php -text
