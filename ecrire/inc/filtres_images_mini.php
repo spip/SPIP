@@ -101,7 +101,7 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	// Determiner la taille x,y maxi
 	// prendre le reglage de previsu par defaut
 	if ($taille == -1)
-		$taille = isset($GLOBALS['meta']['taille_preview'])?$GLOBALS['meta']['taille_preview']:150;
+		$taille = (isset($GLOBALS['meta']['taille_preview']) AND intval($GLOBALS['meta']['taille_preview']))?intval($GLOBALS['meta']['taille_preview']):150;
 	if ($taille_y == -1)
 		$taille_y = $taille;
 
