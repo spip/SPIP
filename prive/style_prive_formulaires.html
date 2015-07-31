@@ -36,48 +36,6 @@
 		etroit = 505px
 */
 
-/* Style des formulaires d'edition
------------------------------------------------ */
-.formulaire_spip {
-	font-size:11px;
-	line-height: 1.4em;
-	padding:0;
-	clear:both;
-
-	border: 1px solid #GET{foncee};
-	color: #333;
-	background-color: #GET{claire};
-}
-
-
-/*
-.cadre-formulaire{background:white;padding:0;}
-.entete-formulaire{padding:0.5em;}
-*/
-
-/* ul li */
-.formulaire_spip ul {
-	margin: 0;
-	padding: 0;
-	padding-bottom: 10px;
-	list-style: none;
-	background-color: #f0f0f0;
-}
-.formulaire_spip ul li ul {
-	padding-bottom: 0px;
-}
-
-.formulaire_spip li {
-	margin: 0;
-	padding: 10px 10px 0px 10px;
-	padding-#GET{left}:130px;
-	clear:both;
-	overflow:hidden;
-}
-.formulaire_spip li fieldset li {
-	border:0; 
-	padding: 10px 10px 0px 10px;
-}
 
 /* elements du formulaire */
 .formulaire_spip input.text,
@@ -91,6 +49,33 @@
 	border: 1px solid #GET{claire};
 	padding: 3px;
 }
+
+.formulaire_spip li .erreur_message {
+	display: block;
+	border: 1px solid #GET{claire};
+	border-bottom: 0px;
+	color: red;
+	background-color: #fed7d7;
+	padding: 3px;
+	width: 96%;
+}
+
+/* Explications */
+.formulaire_spip .explication {
+	margin: 0px;
+	display: -moz-inline-box;
+	display: inline-block;
+	width: 96%;
+	border: 1px solid #GET{claire};
+	border-bottom: 0px;
+	padding: 3px;
+	font-size:10px;
+	background-color: #dddddd;
+}
+/* Remarques importantes */
+.formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
+
+
 .formulaire_spip textarea {
 	width: 93.6%;
 	padding: 10px;
@@ -112,79 +97,70 @@
 	padding: 2px;
 }
 
-
-/* intitules (label) */
-
-.formulaire_spip li,
-li.haut {
-	padding-#GET{left}: 10px;
+/* icone d'aide */
+.formulaire_spip li em.aide {
+	padding-top: 0px;
 }
 
-.formulaire_spip li.gauche,
-.formulaire_spip li.extra,
-.formulaire_spip li.editer_titre,
-.formulaire_spip li.editer_groupe_mot,
-.formulaire_spip li.editer_nom_site,
-.formulaire_spip li.editer_url_site,
-.formulaire_spip li.editer_surtitre,
-.formulaire_spip li.editer_soustitre ,
-.formulaire_spip li.editer_nom,
-.formulaire_spip li.editer_email,
-.formulaire_spip li.editer_new_login,
-.formulaire_spip li.editer_new_pass,
-.formulaire_spip li.editer_new_pass2,
-.formulaire_spip li.editer_statut
-	{
-	padding-#GET{left}: 130px;
 
-}
-.formulaire_spip label,
-li.haut label
-{
-		font-size: 95%;
-		display: -moz-inline-box;
-		display: inline-block;
-		color: white;
-		line-height: 11px;
-		font-family: verdana, arial, helvetica, sans;
 
-		width: auto;
+/* Style des formulaires d'edition
+----------------------------------------------- */
+.formulaire_spip {
+	font-size:11px;
+	line-height: 1.4em;
+	padding:0;
+	clear:both;
 
-		padding-top: 5px;
-		padding-bottom: 10px;
-		padding-#GET{left}: 5px;
-		padding-#GET{right}: 20px;
-
-		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
-
-		color: #[(#GET{foncee}|couleur_foncer)];
-}
-.formulaire_spip li.editer_texte label {
-	font-weight: bold;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
-	color: white;
+	border: 1px solid #GET{foncee};
+	color: #333;
+	background-color: #f0f0f0;
 }
 
-li.gauche label,
-li.extra label,
-.formulaire_spip li.editer_titre label,
-.formulaire_spip li.editer_groupe_mot label,
-.formulaire_spip li.editer_nom_site label,
-.formulaire_spip li.editer_url_site label,
-.formulaire_spip li.editer_surtitre label,
-.formulaire_spip li.editer_soustitre label,
-.formulaire_spip li.editer_nom label,
-.formulaire_spip li.editer_email label,
-.formulaire_spip li.editer_new_login label,
-.formulaire_spip li.editer_new_pass label,
-.formulaire_spip li.editer_new_pass2 label,
-.formulaire_spip li.editer_statut label
-{
-	width: 100px;
+.formulaire_spip form {
+	margin: 0px;
+}
 
+/* ul li */
+.formulaire_spip ul {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 10px;
+	list-style: none;
+}
+.formulaire_spip ul li ul {
+	padding-bottom: 0px;
+}
+.formulaire_spip li {
+	margin: 0;
+	padding: 10px;
+	clear:both;
+	overflow:hidden;
+}
+.formulaire_spip li:first-child {
+	padding-top: 10px;
+}
+
+.formulaire_spip>form li {
+	padding-top: 0px;	
+}
+
+/* Formulaires alignes a gauche */
+.formulaire_spip li.editer_type_input div.label,
+.formulaire_spip li.editer_type_select div.label,
+.formulaire_spip li.gauche .label,
+.formulaire_spip li.extra .label{
 	float: #GET{left};
-	margin-#GET{left}: -120px;
-	
+	width: 130px;
+}
+
+
+
+.formulaire_spip li.editer_type_input div.label label,
+.formulaire_spip li.editer_type_select div.label label,
+.formulaire_spip li.gauche div.label label,
+.formulaire_spip li.extra div.label label {
+	display: block;
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire,3874b0})], center [(#GET{right})] no-repeat })]
 
 	color: #[(#GET{foncee}|couleur_foncer)];
@@ -194,208 +170,161 @@ li.extra label,
 	padding-top: 4px;
 	padding-bottom: 6px;
 	padding-#GET{left}: 5px;
-	padding-#GET{right}: 15px;
-	position: relative; /* IE6 */
-	display:inline;
-
+	padding-#GET{right}: 10px;
 }
 
-.formulaire_spip li.editer_parent, 
-.formulaire_spip li.editer_groupe_mot {
-	margin-top: 10px;
-	padding-bottom: 10px;
-	background-color: [#(#GET{claire}|couleur_eclaircir)];
+.formulaire_spip li.editer_type_input div.edition,
+.formulaire_spip li.editer_type_select div.edition,
+.formulaire_spip li.gauche div.edition,
+.formulaire_spip li.extra div.edition {
+	padding-left: 130px;
 }
-.formulaire_spip li.editer_parent label,
-.formulaire_spip li fieldset legend {
-	display: -moz-inline-box;
-	display: inline-block;
+
+
+
+
+/* Formulaires avec label en haut */
+
+.formulaire_spip li.editer_type_textarea div.label label {
+	display: block;
+	float: #GET{left};
 	margin: 0px;
 	padding-top: 5px;
 	padding-bottom: 10px;
 	padding-#GET{left}: 5px;
-	padding-#GET{right}: 20px;
+	padding-#GET{right}: 5px;
+	font-family: verdana, arial, helvetica, sans;
+	color: #[(#GET{foncee}|couleur_foncer)];
+	font-weight: bold;
+	font-size: 95%;
+	line-height: 11px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+}
+.formulaire_spip li.editer_type_textarea div.edition {
+	clear: #GET{left};
+}
+
+/* Formulaires obligatoires */
+.formulaire_spip li.obligatoire input {
+	font-weight: bold;
+}
+
+.formulaire_spip li.obligatoire.editer_type_input div.label label,
+.formulaire_spip li.obligatoire.editer_type_select div.label label,
+.formulaire_spip li.obligatoire.gauche div.label label,
+.formulaire_spip li.obligatoire.extra div.label label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
+	color: white;
+	font-weight: bold;
+}
+.formulaire_spip li.obligatoire.editer_type_textarea div.label label,
+.formulaire_spip li.obligatoire.haut div.label label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+	color: white;
+}
+
+
+
+/* Fieldset */
+
+.formulaire_spip li.editer_type_fieldset {
+	margin: 0px;
+	padding: 0px;
+}
+.formulaire_spip fieldset {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 0px;
+	border-top: 1px solid [(#GET{foncee})];
+}
+
+.formulaire_spip h3.legend {
+	display: block;
+	float: [(#GET{left})];
+	margin: 0px;
+	margin-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
 	color: white;
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
-
-}
-.formulaire_spip li fieldset legend {
-	clear: both;
-	
-	margin-top: 10px; 
-	margin-#GET{left}: 10px; 
 }
 
+/* Extra */
 
-.formulaire_spip li p {
-	margin-top:0;
-	margin-bottom:0;
-}
-
-/* fieldset */
-.formulaire_spip fieldset {
-	margin:0;
-	padding:0 0 0px 0;
-	border:0;
-	position: relative;
-}
-.formulaire_spip li fieldset {
-	position: relative;
-	margin-left: -10px;
-	margin-right: -10px;
-	padding-bottom: 10px;
-	border-top: 1px solid #GET{foncee};
+.formulaire_spip extra {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
 }
 
-/* icone d'aide */
-.formulaire_spip li em.aide {
-	display: -moz-inline-box;
-	display: inline-block;
-	margin-#GET{left}: -28px; 
-	padding-top: 6px;
-	height: 12px;
-	vertical-align: top;
-}
 
-.formulaire_spip li.editer_titre em.aide,
-.formulaire_spip li.editer_surtitre em.aide,
-.formulaire_spip li.editer_soustitre em.aide {
-	float: #GET{left}; 
-	margin-#GET{left}:-30px; 
-	padding-top: 0px;
-}
+
 /* boutons */
 .formulaire_spip .boutons {
+	background-color: [#(#GET{claire}|couleur_eclaircir)];
+	border-top: 1px solid [(#GET{claire})];
 	margin:0; 
 	clear:both;
 	text-align: #GET{right};
-	margin: 7px 1em;
-}
-.formulaire_spip .boutons input.submit {
+	padding: 7px 1em;
 }
 
 
-/* obligatoire */
-.formulaire_spip li.obligatoire {
-}
-.formulaire_spip li.obligatoire label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
-	color: white;
-	font-weight: bold;
-}
 
-/* champ des radio/checkbox
-*  on annule les decalages de label/champs
-*  lorsqu'ils sont inclus dans une class .champ
-*
-*  La liste par defaut est verticale
-*  pour l'avoir horizontale, il faut specifier :
-*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
-*/
-.formulaire_spip li.editer_parent .choix {
-	padding-left: 40px;
-}
-.formulaire_spip li.editer_parent .choix label,
-.formulaire_spip .choix label{
-	float:none; 
-	display:inline;
-	margin-#GET{left}: 5px; 
-	font-weight:normal; 
-	text-transform: none;
-	font-size: 1em;
-	background: none;
-	padding: 0px;
-	color: #666666;
-}
-.formulaire_spip .choix input.radio,
-.formulaire_spip .choix input.checkbox {width:auto;}
-
-
-/* erreur */
-.formulaire_spip li.erreur input.text,
-.formulaire_spip li.erreur textarea { background-color: #FFCCCC; border-style: solid; border-color: #C30; }
-.formulaire_spip li.erreur .erreur_message,
-.formulaire_spip em.attention,
-.formulaire_spip .reponse_formulaire_erreur { color: #C30; font-weight: bold; }
-.formulaire_spip .reponse_formulaire_erreur { display: block; margin-#GET{left}: 0.5em; }
-
-/* Message reussite ? */
-.formulaire_spip .reponse_formulaire_ok { color: #53AD20; font-weight: bold; }
-
-/* Explications */
-.formulaire_spip .explication {
-	display: -moz-inline-box;
-	display: inline-block;
-	width: 96%;
-	border: 1px solid #GET{claire};
-	border-bottom: 0px;
-	padding: 3px;
-	font-size:10px;
-	background-color: #dddddd;
-}
-/* Remarques importantes */
-.formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
 
 /*
- * Cas particuliers
- */
- 
-.formulaire_editer .editer_titre input,
-.formulaire_editer .editer_nom input{font-size:1.2em; font-weight:bold;}
-.formulaire_editer .editer_chapo textarea{height:12em;}
-
-/* le brouteur de rubrique en cas de petit ecran doit etre aussi plus petit ! */
-.etroit .formulaire_editer .editer_parent #titreparent{width:50% !important;}
-
-/* pour mettre les text-area en grand...* /
-.formulaire_editer .editer_texte,
-.formulaire_editer .editer_chapo,
-.formulaire_editer .editer_descriptif {padding-#GET{left}:20px;}
-.formulaire_editer .editer_texte label,
-.formulaire_editer .editer_chapo label,
-.formulaire_editer .editer_descriptif label {margin-#GET{left}:-15px;margin-bottom:5px; display:block; float:none;}
-.formulaire_editer .editer_texte textarea,
-.formulaire_editer .editer_chapo textarea,
-.formulaire_editer .editer_descriptif textarea {width:97%;}
-.formulaire_editer .editer_texte table.spip_barre {width:97%;}
-/* */
+.cadre-formulaire{background:white;padding:0;}
+.entete-formulaire{padding:0.5em;}
+*/
 
 
-/* auteur */
-.formulaire_editer_auteur .editer_statut ul{margin:0; }
-.formulaire_editer_auteur .editer_statut li{list-style-position:inside; padding:0;}
-.formulaire_editer_auteur .editer_statut input[type=submit]{width:auto;}
 
-.formulaire_editer .editer_redacteurs_connectes p.explication{margin:0.5em;}
-
-/* si on enleve le: ul fieldset{margin-#GET{left}:-125px;} il faut remettre ceci : * /
-.formulaire_editer .editer_identification{padding-#GET{left}:5px;}
-.formulaire_editer .editer_redacteurs_connectes{padding-#GET{left}:5px;}
-.formulaire_editer .editer_referencement_automatise {padding-#GET{left}:5px;}
-.formulaire_editer .editer_syndications {padding-#GET{left}:5px;}
-.formulaire_editer .editer_liens_sites {padding-#GET{left}:5px;}
-/* */
-
-/* sites */
-.formulaire_editer .editer_referencement_automatise label {margin-#GET{left}:0px;}
-.formulaire_editer .editer_referencement_automatise li {padding-#GET{left}:5px;}
-.formulaire_editer .editer_referencement_automatise li label {display:block; float:none; width:auto;}
-
-
-/* breves */
-.formulaire_editer_breve .editer_statut{padding-#GET{left}:250px;}
-.formulaire_editer_breve .editer_statut label{width:240px;margin-#GET{left}:-245px;}
-
-
-/* navigateur de rubrique */
-.confirmer_deplacement input {
-	float: #GET{left};
-	margin-#GET{left}: -20px;	
+.formulaire_spip li.editer_identification fieldset{
+	background-color: [#(#GET{claire}|couleur_eclaircir)];
 }
+
+.formulaire_spip li.editer_parent, 
+.formulaire_spip li.editer_groupe_mot {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: [#(#GET{claire}|couleur_eclaircir)];
+}
+
+
+
+/* Inscription du flux RSS */
+.formulaire_spip li.editer_referencement_automatise {
+	border-top: 0px;
+	background-color: #GET{foncee};
+	margin-bottom: 10px;
+}
+.formulaire_spip li.editer_referencement_automatise fieldset {
+	padding: 0px;
+	border-bottom: 1px solid #GET{foncee};
+}
+.formulaire_spip li.editer_referencement_automatise p.explication {
+	width: auto;
+	border: 0px;
+}
+
+
+
+
+.formulaire_spip li.editer_parent label, 
+.formulaire_spip li.editer_groupe_mot label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+	color: white;
+}
+
 
 /* barre typo */
 
@@ -417,6 +346,24 @@ li.extra label,
 }
 .formulaire_spip table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 .formulaire_spip table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+
+.formulaire_spip li.editer_parent .choix label,
+.formulaire_spip .choix label{
+	float:none; 
+	display:inline;
+	margin-#GET{left}: 5px; 
+	font-weight:normal; 
+	text-transform: none;
+	font-size: 1em;
+	background: none;
+	padding: 0px;
+	color: #666666;
+}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
+
+
 
 
 /* Formulaire compact */
