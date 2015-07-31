@@ -102,7 +102,6 @@ function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 		if ($GLOBALS['var_mode'] == 'debug') {
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
-		spip_log($skel_code);
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
