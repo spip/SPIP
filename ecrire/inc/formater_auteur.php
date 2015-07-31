@@ -53,7 +53,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	. (!$row['bio'] ? '' : (" title=\"" . attribut_html(couper(textebrut($row["bio"]), 200)) ."\""))
 	. ">$nom</a>";
 
-	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
+	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>".couper(sinon(typo($row['nom_site']), $row["url_site"]),30)."</a>";
 	else $vals[] =  "&nbsp;";
 
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
