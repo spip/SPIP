@@ -46,7 +46,6 @@ div.navigation-calendrier img {
 	font-size: 10px;
 	font-weight: bold;
 	color: #FFF;
-	-moz-border-radius: 5px;
 }
 
 .calendrier-annee:hover {
@@ -123,7 +122,6 @@ div.navigation-calendrier img {
 	padding: 1px;
 	text-align: center; 
 	background-color: #FFF;
-	-moz-border-radius: 5px;
  }
 
 .calendrier-demiagenda { 
@@ -132,7 +130,6 @@ div.navigation-calendrier img {
 	padding: 0;
 	text-align: center; 
 	background-color: #FFF;
-	-moz-border-radius: 5px;
  }
 
 .calendrier-tripleagenda { 
@@ -148,8 +145,6 @@ div.navigation-calendrier img {
 	padding-bottom: 5px;
 	border: 0;
 	background-color: #FFF;
-	-moz-border-radius-bottomleft: 8px;
-	-moz-border-radius-bottomright: 8px;
  }
 
 .calendrier-titre { 
@@ -178,35 +173,12 @@ div.navigation-calendrier img {
 	border-top: 1px solid #CCC;
  }
 
-.calendrier-mozleft { 
-	-moz-border-radius-topleft: 10px;
-	-moz-border-radius-bottomleft: 10px;
- }
-
-.calendrier-mozright { 
-	-moz-border-radius-topright: 10px;
-	-moz-border-radius-bottomright: 10px;
- }
-
-.calendrier-moztop8 { 
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-}
-
-.calendrier-mozbottom8 { 
-	-moz-border-radius-bottomleft: 8px; 
-	-moz-border-radius-bottomright: 8px;
-}
-
-.calendrier-moztop6 { 
-	-moz-border-radius-topleft: 6px; 
-	-moz-border-radius-topright: 6px;
-}
-
-.calendrier-mozbottom6 { 
-	-moz-border-radius-bottomleft: 6px; 
-	-moz-border-radius-bottomright: 6px;
-}
+.calendrier-mozleft {}
+.calendrier-mozright {}
+.calendrier-moztop8 {}
+.calendrier-mozbottom8 {}
+.calendrier-moztop6 {}
+.calendrier-mozbottom6 {}
 
 .calendrier-opacity { 
 	-moz-opacity: 0.3;
