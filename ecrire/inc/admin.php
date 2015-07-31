@@ -128,9 +128,10 @@ function debut_admin($script, $action='', $corps='') {
 			. "</legend>\n<label for='fichier'>"
 			. _T('info_creer_repertoire')
 			. "</label>\n"
-			. "<input class='formo' size='40' id='fichier' name='fichier' value='"
+            . "<span id='signal' class='formo'>".$signal."</span>"
+            . "<input type='hidden' id='fichier' name='fichier' value='" 
 			. $signal
-			. "' /><br />"
+			. "' />"
 			. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
 			. "</fieldset>";
 
@@ -140,8 +141,8 @@ function debut_admin($script, $action='', $corps='') {
 	// provoquer la copie dans le presse papier du nom du repertoire
 	// en remettant a vide le champ pour que ca marche aussi en cas
 	// de JavaScript inactif.
+			$js = " onload='var range=document.createRange(); var signal = document.getElementById(\"signal\"); var userSelection = window.getSelection(); range.setStart(signal,0); range.setEnd(signal,1); userSelection.addRange(range);'";
 
-			$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
 		}
 
 		$form = copy_request($script, $corps, $suivant);
