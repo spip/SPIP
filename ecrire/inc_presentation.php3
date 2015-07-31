@@ -1075,7 +1075,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\"");\n//--></script>'
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 		$a_href = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\" class=\\"icone\\"");\n//--></script>'
+			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\" class=\\"icone\\""); //--></script>'
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
