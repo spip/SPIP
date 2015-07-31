@@ -1067,7 +1067,12 @@ function spip_desinfecte(&$t) {
 	if (!isset($magic_quotes))
 		$magic_quotes = @get_magic_quotes_gpc();
 
-	if (is_array($t)) {
+	if (is_string($t)) {
+		$t = str_replace(chr(0), '-', $t);
+		if ($magic_quotes)
+			$t = stripslashes($t);
+	}
+	else if (is_array($t)) {
 		foreach ($t as $key => $val) {
 			if (!is_array($val)
 			OR !isset($t['spip_recursions'])) { # interdire les recursions
@@ -1075,10 +1080,6 @@ function spip_desinfecte(&$t) {
 				spip_desinfecte($t[$key]);
 			}
 		}
-	} else {
-		$t = str_replace(chr(0), '-', $t);
-		if ($magic_quotes)
-			$t = stripslashes($t);
 	}
 }
 

@@ -125,13 +125,11 @@ function retire_caches($chemin = '') {
 
 // gestion des delais par specification a l'exterieur du squelette
 
-function cache_valide($chemin_cache, $contenu, $date) {
+function cache_valide($chemin_cache, $date) {
 
-	if (!isset($GLOBALS['delais'])) $GLOBALS['delais'] = 3600;
+	tester_variable('delais', 3600);
 
 	if (!$GLOBALS['delais']) return -1;
-
-	if (!$contenu) return $GLOBALS['delais'];
 
 	if ((time() - $date) > $GLOBALS['delais']) return $GLOBALS['delais'];
 
@@ -148,7 +146,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 		return ($date + intval($duree) > time()) ? 0 : $t;
 
 	// squelette ancienne maniere, on se rabat sur le vieux modele
-	return cache_valide($chemin_cache, $contenu, $date);
+	return cache_valide($chemin_cache, $date);
 }
 
 
