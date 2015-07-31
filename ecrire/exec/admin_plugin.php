@@ -131,24 +131,21 @@ EOF;
 	echo "<tr><td class='serif' colspan='4'>";
 	echo _T('texte_presente_plugin');
 
-	$action = generer_action_auteur('activer_plugins','activer',generer_url_ecrire("admin_plugin"));
-	echo "<form action='$action' method='post' >";
-	echo form_hidden($action);
-	echo "<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-	echo "</div>";
+	$lpf = liste_plugin_files();
+	$lcpa = liste_chemin_plugin_actifs();
 
-	affiche_arbre_plugins(liste_plugin_files(),liste_chemin_plugin_actifs());
+	$sub = "\n<div style='text-align:$spip_lang_right'>"
+	.  "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />"
+	. "</div>";
 
-	echo "\n<br />";
+	$corps = $sub
+	. affiche_arbre_plugins($lpf, $lcpa)
+	. "\n<br />"
+	. $sub;
 
-	echo "<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-	echo "</div>";
+	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps);
 
-	echo "</form></tr></table>\n";
-
-	echo "<br />";
+	echo "</tr></table><br />\n";
 
 	echo fin_gauche(), fin_page();
 
@@ -217,7 +214,29 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	
 	$visible = @isset($deplie[$current_dir]);
 	$maxiter=1000;
-	echo http_script("
+
+	$res = '';
+	while (count($liste_plugins) && $maxiter--){
+		// le rep suivant
+		$dir = dirname(reset($liste_plugins));
+		if ($dir != $current_dir)
+			$res .= tree_open_close_dir($current_dir,$dir,$deplie);
+			
+		// d'abord tous les plugins du rep courant
+		if (isset($dir_index[$current_dir]))
+			foreach($dir_index[$current_dir] as $key){
+				$plug = $liste_plugins[$key];
+				$actif = @isset($fast_liste_plugins_actifs[$plug]);
+				$id = substr(md5($plug),0,16);
+				$res .= "<li>"
+				. ligne_plug(substr($plug,strlen($racine)+1), $actif, $id)
+				. "</li>\n";
+				unset($liste_plugins[$key]);
+			}
+	}
+	$res .= tree_open_close_dir($current_dir,$init_dir);
+
+	return http_script("
 	jQuery(function(){
 		jQuery('input.check').click(function(){
 			jQuery(this).parent().toggleClass('nomplugin_on');
@@ -236,29 +255,10 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 		jQuery(pack).find('a').hide();
 		jQuery(pack).find('img').bind('click',function(){jQuery(this).siblings('a').toggle();});
 	});
-	");
-
-	echo "<ul>";
-	while (count($liste_plugins) && $maxiter--){
-		// le rep suivant
-		$dir = dirname(reset($liste_plugins));
-		if ($dir != $current_dir)
-			echo tree_open_close_dir($current_dir,$dir,$deplie);
-			
-		// d'abord tous les plugins du rep courant
-		if (isset($dir_index[$current_dir]))
-			foreach($dir_index[$current_dir] as $key){
-				$plug = $liste_plugins[$key];
-				$actif = @isset($fast_liste_plugins_actifs[$plug]);
-				$id = substr(md5($plug),0,16);
-				echo "<li>";
-				echo ligne_plug(substr($plug,strlen($racine)+1), $actif, $id);
-				echo "</li>\n";
-				unset($liste_plugins[$key]);
-			}
-	}
-	echo tree_open_close_dir($current_dir,$init_dir);
-	echo "</ul>";
+	")
+	.  "<ul>"
+	. $res
+	. "</ul>";
 }
 
 // http://doc.spip.org/@ligne_plug
