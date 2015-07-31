@@ -30,10 +30,9 @@
 			</li>
 			#SET{name,test_proxy}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{http_proxy}|strlen|non)style='display:none;']>
-				<p class="explication"><:texte_test_proxy:></p>
 				<label for="#GET{name}"><:info_url_test_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]
+				]<p class="explication"><:texte_test_proxy:></p>
 				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
 				<input type='submit' class='submit' name="tester_proxy" value='<:bouton_test_proxy:>' />
 			</li>
