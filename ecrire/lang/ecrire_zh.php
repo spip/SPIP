@@ -21,48 +21,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_ldap_echec_2' => '返回前页校验您所提供的信息.',
 	'avis_connexion_ldap_echec_3' => '请勿使用LDAP支持导入用户.',
 	'avis_deplacement_rubrique' => '注意! 该专栏包含 @contient_breves@ 简要@scb@: 如果您要移动它,请选择该确认框.',
-	'avis_destinataire_obligatoire' => '发送消息前请选择接收者.',
 	'avis_erreur_connexion_mysql' => 'SQL连接失败',
-	'avis_erreur_version_archive' => '<b>注意! 文件 @archive@ 与您已安装的SPIP版本不一致
-    </b> 您面临一个大问题: 极有可能破坏数据库,
-    引起站点的各种故障. 请勿提交您的导入请求.
-    <p>
-    详细信息,请看 <a href="@spipnet@">
-                                 SPIP 文档</a>.', # MODIF
 	'avis_espace_interdit' => '<b>禁止区</b><p>SPIP已安装.', # MODIF
 	'avis_lecture_noms_bases_1' => '安装程序无法读取已安装的数据库的名称.',
 	'avis_lecture_noms_bases_2' => '要么是数据库不可用,要么数据库的允许特性因安全原因被禁止
 (这是多主机的的一个例子).',
 	'avis_lecture_noms_bases_3' => '第二种情况为使用您的用户名登录后的数据库是可用的:',
-	'avis_non_acces_message' => '您无权查看此消息.',
 	'avis_non_acces_page' => '您无权查看此页.',
 	'avis_operation_echec' => '操作失败.',
-	'avis_probleme_archive' => '读取文件@archive@失败 ',
 	'avis_suppression_base' => '注意, 数据删除不可挽回',
-	'avis_version_mysql' => 'SQL (@version_mysql@) 版本不允许数据库表格的自动修复.',
 
 	// B
 	'bouton_acces_ldap' => '添加LDAP访问 >>', # MODIF
 	'bouton_ajouter' => '添加',
-	'bouton_ajouter_participant' => '添加参与者:',
-	'bouton_annonce' => '声明',
 	'bouton_checkbox_envoi_message' => '可以发消息',
 	'bouton_checkbox_indiquer_site' => '您必须输入站点的名字',
 	'bouton_checkbox_signature_unique_email' => '一个邮件地址只能有一个签名',
 	'bouton_checkbox_signature_unique_site' => '一个站点只能有一个签名',
 	'bouton_demande_publication' => '请求发表文章',
-	'bouton_effacer_index' => '删除索引',
 	'bouton_effacer_tout' => '删除所有',
-	'bouton_envoi_message_02' => '发消息',
 	'bouton_envoyer_message' => '最后消息:发送',
 	'bouton_modifier' => '修改',
-	'bouton_pense_bete' => '个人备注',
-	'bouton_radio_activer_messagerie' => '激活内部消息',
-	'bouton_radio_activer_messagerie_interne' => '激活内部消息',
 	'bouton_radio_activer_petition' => '激活请求',
 	'bouton_radio_afficher' => '显示',
 	'bouton_radio_apparaitre_liste_redacteurs_connectes' => '显示在已连接的编辑者列表中',
-	'bouton_radio_desactiver_messagerie' => '停用消息',
 	'bouton_radio_envoi_annonces_adresse' => '发送声明给下列地址:',
 	'bouton_radio_envoi_liste_nouveautes' => '发送最近新闻列表',
 	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '不要出现在连接编辑者列表中',
@@ -76,11 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tenter_recuperation' => '试图修复',
 	'bouton_test_proxy' => '测试代理',
 	'bouton_vider_cache' => '清空缓存',
-	'bouton_voir_message' => '确认前预览',
 
 	// C
-	'cache_mode_compresse' => '缓存中的文件是以压缩方式存储。',
-	'cache_mode_non_compresse' => '缓存中的文件是以非压缩方式存储。',
 	'cache_modifiable_webmestre' => '这些参数可以被管理员修改。', # MODIF
 	'calendrier_synchro' => '如果您使用的日历软件与<b>iCal</b>兼容, 您可以同步站点信息.',
 
@@ -142,9 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => '新建一个作者并与该文章关联',
 	'icone_creer_mot_cle' => '新建一个关键词并与该文章关联',
 	'icone_creer_rubrique_2' => '新建专栏',
-	'icone_envoyer_message' => '发送这个消息',
 	'icone_modifier_article' => '修改文章',
-	'icone_modifier_message' => '修改消息',
 	'icone_modifier_rubrique' => '修改此栏',
 	'icone_retour' => '返回',
 	'icone_retour_article' => '返回文章',
@@ -167,15 +144,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => '您可以管理该栏',
 	'info_adresse' => '给地址:',
 	'info_adresse_url' => '您的公众站点URL地址',
-	'info_afficher_visites' => '显示访问者:',
 	'info_aide_en_ligne' => 'SPIP在线帮助',
 	'info_ajout_image' => '当您添加图像作为文章的附加文档,  SPIP 能根据插入的图片自动创建缩略图.
 这将允许, 例如, 自动创建
   画廊或相册.',
-	'info_ajout_participant' => '下列参考者已经加入:',
 	'info_ajouter_rubrique' => '加入其它专栏进行管理:',
 	'info_annonce_nouveautes' => '最近的新闻声明',
-	'info_anterieur' => '返回',
 	'info_article' => '文章',
 	'info_article_2' => '文章',
 	'info_article_a_paraitre' => '过期文章发表',
@@ -183,10 +157,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_2' => '文章',
 	'info_articles_auteur' => '该作者的文章',
 	'info_articles_trouves' => '找到的文章',
-	'info_articles_trouves_dans_texte' => '找到的文章 (文本)',
 	'info_attente_validation' => '您的文章正在等候确认中',
 	'info_aujourdhui' => '今天:',
-	'info_auteur_message' => '消息发送者:',
 	'info_auteurs' => '作者',
 	'info_auteurs_par_tri' => '作者 @partri@',
 	'info_auteurs_trouves' => '找到的作者',
@@ -219,15 +191,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_publication_anterieure' => '更早出版的日期:', # MODIF
 	'info_date_referencement' => '参考站点日期:',
 	'info_derniere_etape' => '最后一步: <b>完成了!', # MODIF
-	'info_derniers_articles_publies' => '你最近出版的文章',
-	'info_desactiver_messagerie_personnelle' => '你可激活或使站点个人消息不可用.',
 	'info_descriptif' => '描述:',
 	'info_discussion_cours' => '讨论进展中',
 	'info_ecrire_article' => '在能够发表文章之前,您必须建立至少一个专栏.',
 	'info_email_envoi' => '发送者电子邮件地址 (可选)',
 	'info_email_envoi_txt' => '输入发送者电子邮件地址,发送电子邮件将用这个地址, 接收者的地址将做为发送者的地址 :',
 	'info_email_webmestre' => 'Web站点管理员的电子邮件地址 (可选)', # MODIF
-	'info_entrer_code_alphabet' => '输入要用的字符集:',
 	'info_envoi_email_automatique' => '自动邮寄',
 	'info_envoyer_maintenant' => '现在发送',
 	'info_etape_suivante' => '到下一步',
@@ -240,7 +209,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   确认的声明.',
 	'info_fichiers_authent' => '认证文件 ".htpasswd"',
 	'info_forums_abo_invites' => '您的网站包含要求注册的公共论坛；所以公共网站的访客将被要求注册。',
-	'info_gauche_admin_effacer' => '<b>只有管理员才有权访问该页.</b><p> 它提供访问不同的技术维护任务. 其中有些需要特殊认证，必须通过FTP访问站点.', # MODIF
 	'info_gauche_admin_tech' => '<b>只有管理者才有权访问这页.</b><p> 它提供多种多种
 维护任务. 它们有一些需更高的认证
 (通过FTP访问站点).', # MODIF
@@ -251,21 +219,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  每一个的状态用路标的颜色标识(作者 = 绿色; 管理员 = 黄色).', # MODIF
 	'info_gauche_auteurs_exterieurs' => '外部作者用蓝色图标标识, 不能访问站点; 通过垃圾箱删除作者.', # MODIF
 	'info_gauche_messagerie' => '消息允许你在作者中交换消息, 为保护备忘录(给个人用的) 或在主页私有区上显示声明(如果你是管理者).',
-	'info_gauche_numero_auteur' => '作者号:',
 	'info_gauche_statistiques_referers' => '页面显示 <i>引用</i>列表, 例如. 包含你站点的链接, 只有今天: 列表每24小时都要更新.', # MODIF
 	'info_gauche_visiteurs_enregistres' => '在这儿你将找到在站点公共区
  注册的访问者(订阅论坛).',
 	'info_generation_miniatures_images' => '产生像册',
-	'info_gerer_trad' => '管理翻译连接?',
 	'info_hebergeur_desactiver_envoi_email' => '一些主机禁止自动邮件发送
  . 这种情况下SPIP的
   以下特性不能用.',
 	'info_hier' => '昨天:',
-	'info_historique_activer' => '使用修订跟踪功能。',
-	'info_historique_affiche' => '显示这一版本。',
-	'info_historique_comparaison' => '比较',
-	'info_historique_desactiver' => '不使用修订跟踪功能',
-	'info_historique_texte' => '修订跟踪功能可以保存对一篇文章内容所做的所有的修改，并且显示前后不同版本之间的区别。',
 	'info_identification_publique' => '你的公开标识...',
 	'info_image_process' => '点击相关图片选取最佳的标志制作方法.',
 	'info_image_process2' => '<b>注意</b> <i>如果没有任何图片显示，那么储存您的网站的服务器不支持该工具。如果您希望使用这些功能，请联系您的服务器的技术支持，请他们安装《GD》或者《Imagick》扩展。</i>', # MODIF
@@ -282,8 +243,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_login_trop_court' => '登录名太短.',
 	'info_maximum' => '最大:',
 	'info_meme_rubrique' => '在同一栏目',
-	'info_message' => '消息来自',
-	'info_message_efface' => '删除的消息',
 	'info_message_en_redaction' => '你的进展中的消息',
 	'info_message_technique' => '技术消息:',
 	'info_messagerie_interne' => '内部消息',
@@ -297,19 +256,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_titre' => '修改: @titre@',
 	'info_mon_site_spip' => '我的 SPIP 站点',
 	'info_mot_sans_groupe' => '(不在组中的关键词...)',
-	'info_moteur_recherche' => '集成的搜索引擎',
 	'info_moyenne' => '平均:',
-	'info_multi_articles' => '使文章的语言菜单可用?',
 	'info_multi_cet_article' => '文章的语言:',
 	'info_multi_langues_choisies' => '请在站点中选择以下语言使它们对编辑者可用.
  你的站点已经用了如下语言(在顶端列表),它们不能设为未激活.',
-	'info_multi_rubriques' => '激活专栏中的语言菜单?',
 	'info_multi_secteurs' => '... 只为站点根目录下的专栏?',
 	'info_nom' => '名字',
 	'info_nom_destinataire' => '接收者名字',
 	'info_nom_site' => '你的站点名',
 	'info_nombre_articles' => '@nb_articles@ 文章,',
-	'info_nombre_partcipants' => '讨论的参考者:',
 	'info_nombre_rubriques' => '专栏@nb_rubriques@,',
 	'info_nombre_sites' => '@nb_sites@ 站点,',
 	'info_non_deplacer' => '不要移动...',
@@ -319,36 +274,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_non_modifiable' => '不能修改',
 	'info_non_suppression_mot_cle' => '我不想删除关键词.',
 	'info_notes' => '脚注',
-	'info_nouveaux_message' => '新消息',
 	'info_nouvel_article' => '新文章',
 	'info_nouvelle_traduction' => '新译文:',
 	'info_numero_article' => '文章号:',
 	'info_obligatoire_02' => '[必须的]', # MODIF
 	'info_option_accepter_visiteurs' => '允许公共网站访问者注册。',
-	'info_option_faire_suivre' => '转寄论坛消息给作者',
 	'info_option_ne_pas_accepter_visiteurs' => '拒绝公共网站访问者注册。',
 	'info_options_avancees' => '高级选项',
-	'info_ortho_activer' => '使用拼写检查功能',
-	'info_ortho_desactiver' => '不使用拼写检查功能',
 	'info_ou' => '或...',
 	'info_page_interdite' => '禁止页',
 	'info_par_nombre_article' => '(按文章数)', # MODIF
 	'info_passe_trop_court' => '密码过短.',
 	'info_passes_identiques' => '两个密码不一致.',
-	'info_pense_bete_ancien' => '你的旧备忘', # MODIF
 	'info_plus_cinq_car' => '多于5 字符',
 	'info_plus_cinq_car_2' => '(多于 5 字符)',
 	'info_plus_trois_car' => '(多于 3 字符)',
 	'info_popularite' => '流行: @popularite@; 访问: @visites@',
-	'info_popularite_4' => '流行: @popularite@; 访问: @visites@',
 	'info_post_scriptum' => '后记',
 	'info_post_scriptum_2' => '后记:',
 	'info_pour' => '为',
-	'info_preview_admin' => '只有管理员可以预览网站',
-	'info_preview_comite' => '所有的编辑均可预览网站',
-	'info_preview_desactive' => '完全关闭预览功能',
 	'info_preview_texte' => '可以预览整个网站，就像所有的文章和短消息（至少有 « 建议发表 »资格）都被发表了一样。向管理员，编辑开放这一功能，还是不向任何人开放？',
-	'info_principaux_correspondants' => '你主要的通讯者',
 	'info_procedez_par_etape' => '请一步步进行下去',
 	'info_procedure_maj_version' => '升级过程应该适应
  SPIP的新版本的数据库运行.',
@@ -364,12 +309,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   这样,
   自动注册将
   不生效.', # MODIF
-	'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
- (使它不可用能加速系统的性能.)',
 	'info_racine_site' => '站点根',
 	'info_recharger_page' => '请重新载入该页.',
-	'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',
-	'info_recherche_auteur_ok' => '几个编辑者找到了 "@cherche_auteur@":',
 	'info_recherche_auteur_zero' => '<b> "@cherche_auteur@"没有结果.', # MODIF
 	'info_recommencer' => '请再试.',
 	'info_redacteur_1' => 'Rédacteur',
@@ -386,7 +327,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubriques' => '专栏',
 	'info_rubriques_02' => '专栏',
 	'info_rubriques_trouvees' => '找到的专栏',
-	'info_rubriques_trouvees_dans_texte' => '找到的专栏(在文章中)',
 	'info_sans_titre' => '无标题',
 	'info_selection_chemin_acces' => '从目录的访问路径<b>选择</b> :',
 	'info_signatures' => '签名',
@@ -399,11 +339,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sites_lies_mot' => '与关键词关联的参考站点',
 	'info_sites_proxy' => '使用代理',
 	'info_sites_trouves' => '站点找到了',
-	'info_sites_trouves_dans_texte' => '站点找到了 (在正文)',
 	'info_sous_titre' => '子标题:',
 	'info_statut_administrateur' => '管理者',
 	'info_statut_auteur' => '作者状态:', # MODIF
-	'info_statut_efface' => '删除',
 	'info_statut_redacteur' => '编辑者',
 	'info_statut_utilisateurs_1' => '导入用户的缺省状态',
 	'info_statut_utilisateurs_2' => 'Choose the status that is attributed to the persons present in the LDAP directory when they connect for the first time. Later, you can modify this value for each author on a case by case basis.',
@@ -421,7 +359,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_articles_en_redaction' => '进展中的所有文章',
 	'info_tous_articles_presents' => '该专栏中所有发表的文章',
 	'info_tous_les' => '每一个:',
-	'info_tous_redacteurs' => '对所有编辑者的声明',
 	'info_tout_site' => '整个站点',
 	'info_tout_site2' => '该文章尚未译成中文.',
 	'info_tout_site3' => '文章已经译为本语言,但由参考文章带来一些变动.译文应更新.',
@@ -458,7 +395,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_choix_redacteurs' => '编辑者',
 	'item_choix_visiteurs' => '公共站点的访问者',
 	'item_creer_fichiers_authent' => '创建 .htpasswd 文件',
-	'item_limiter_recherche' => '限制搜索你站点包括的内容',
 	'item_login' => '登录',
 	'item_mots_cles_association_articles' => '文章',
 	'item_mots_cles_association_rubriques' => '相关专栏',
@@ -468,33 +404,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_activer_messages_avertissement' => '没有警告信息',
 	'item_non_afficher_calendrier' => '在日历中不显示',
 	'item_non_autoriser_documents_joints' => '不论证文章中文档',
-	'item_non_autoriser_documents_joints_rubriques' => '不认证专栏中的文档',
 	'item_non_creer_fichiers_authent' => '不创建这些文件',
-	'item_non_gerer_statistiques' => '不管理统计表',
-	'item_non_limiter_recherche' => '扩充搜索到参考站点',
 	'item_non_publier_articles' => '不发表出版日期前的文章.',
-	'item_non_utiliser_moteur_recherche' => '不使用引擎',
 	'item_nouvel_auteur' => '新作者',
 	'item_nouvelle_rubrique' => '新专栏',
 	'item_oui' => '是',
 	'item_publier_articles' => '忽略出版日期出版文章.',
 	'item_reponse_article' => '回复文章',
-	'item_utiliser_moteur_recherche' => '使用搜索引擎',
 	'item_visiteur' => '访问者',
 
 	// J
 	'jour_non_connu_nc' => '不知道',
 
 	// L
-	'lien_ajout_destinataire' => '加接收者',
 	'lien_ajouter_auteur' => '加作者',
-	'lien_ajouter_participant' => '添加一个新的参与者',
 	'lien_email' => '电子邮件',
 	'lien_nom_site' => '站点名:',
 	'lien_retirer_auteur' => '移去作者',
-	'lien_retrait_particpant' => '移去参与者',
 	'lien_site' => '站点',
-	'lien_supprimer_rubrique' => '删除此栏',
 	'lien_tout_deplier' => '展开所有',
 	'lien_tout_replier' => '伸缩所有',
 	'lien_trier_nom' => '按名字排序',
@@ -542,15 +469,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_article_virtuel_reference' => '<b>虚文章 :</b>在SPIP中引用文档, 但是重定向到其它的URL. 移去链接, 删除以下 URL.',
 	'texte_aucun_resultat_auteur' => '"@cherche_auteur@"没有结果.',
 	'texte_auteur_messagerie' => '站点能连续监控连接编辑列表, 它允许实时交换信息 (如果以上消息被禁, 连接编辑列表自身禁用). 你能决定不出现在列表中 (其他用户在列表中" 无法 "看到你）', # MODIF
-	'texte_auteur_messagerie_1' => '本站点开放注册会员的短消息及私人论坛的交流.您可以选择不参与讨论交流.',
 	'texte_auteurs' => '作者',
 	'texte_choix_base_1' => '选择你的数据库:',
 	'texte_choix_base_2' => 'SQL 服务器包括几个数据库.',
 	'texte_choix_base_3' => '<b>选择</b> 以下主机给你提供的这个:', # MODIF
-	'texte_commande_vider_tables_indexation' => '使用命令清空被SPIP集成的搜索引擎用到的索引表
-   . 它将允许你保留磁盘空间
-   .',
-	'texte_compresse_ou_non' => '(这个被压缩或没有)',
 	'texte_compte_element' => '@count@ 元素',
 	'texte_compte_elements' => '@count@ 元素',
 	'texte_connexion_mysql' => '根据你主机提到的信息: 它将给你, 如果你的主机支持 SQL,SQL 服务器的连接码.', # MODIF
@@ -569,7 +491,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_descriptif_petition' => '请求说明',
 	'texte_descriptif_rapide' => '主要描述',
 	'texte_effacer_base' => '删除SPIP 数据库',
-	'texte_effacer_donnees_indexation' => '删除索引文件',
 	'texte_en_cours_validation' => '下列文章和新闻提交出版. 请不要犹豫通过论坛发表您的观点.', # MODIF
 	'texte_enrichir_mise_a_jour' => '你可以丰富你的文本,通过«文字快捷方式».',
 	'texte_fichier_authent' => '<b>让SPIP创建特殊的<tt>.htpasswd</tt>
@@ -589,29 +510,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ; 无论如何, 我们建议你试试不同的字符符集
  . 如果你修改参数, 不要忘记, 
  根据 (<tt>#CHARSET</tt> 标记)协调公共站点.', # MODIF
-	'texte_jeu_caractere_2' => '设置没有生效.
- 因此, 已输入的文本可能不能正常显示
- 在修改设置后. 无论如何,
- 你可返回到以前的设置.', # MODIF
-	'texte_lien_hypertexte' => '(如果消息引用了一个WEB站点的文章, 或页面, 请提供页面标题和 URL.)',
 	'texte_login_ldap_1' => '(匿名访问留空或输入完整路径, 例如 «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 	'texte_login_precaution' => '警告 ! 这是你正连接的登录.
  小心使用这个表单...',
-	'texte_message_edit' => '警告: 消息可被所有站点管理员管理, 对所有编辑显示. 使用声明只加重了站点的重要事件.',
 	'texte_mise_a_niveau_base_1' => '你已更新 SPIP 文件.
  现在你必须更新站点
  数据库.',
 	'texte_modifier_article' => '修改文章:',
-	'texte_moteur_recherche_active' => '<b>搜索引擎激活了.</b> 
-  如果你执行快速索引使用这个命令 (例如恢复
-  备份后). 你应注意文章用正常方式修改
-   (从SPIP界面) 被重新正常索引
-  : 因此这个命令只在异常情况下有用.',
-	'texte_moteur_recherche_non_active' => '搜索引擎未激活.',
 	'texte_multilinguisme' => '如果您希望用复杂导航管理多语言文章, 您可以根据站点的组织, 在文章及/或专栏中添加语言选择菜单.', # MODIF
 	'texte_multilinguisme_trad' => '同样,在不同的文章翻译中你可以激活连接管理系统.', # MODIF
 	'texte_non_compresse' => '<i>未解压</i> (你的服务器不支持)',
-	'texte_nouveau_message' => '新消息',
 	'texte_nouvelle_version_spip_1' => '您已经安装了新版SPIP.',
 	'texte_nouvelle_version_spip_2' => '新版本需要比通常更彻底的更新. 如果你是站点管理员, 请删除目录中 <tt>ecrire</tt>文件 <tt>inc_connect.php3</tt>  并重新安装更新你的数据库连接参数. <p>(NB.: 如果你忘记了连接参数, 在删除前看看<tt>inc_connect.php3</tt> ...)', # MODIF
 	'texte_operation_echec' => '返回前页,选择另一个数据库或新建一个. 确认你主机提供的信息.',
@@ -630,7 +538,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_rappel_selection_champs' => '[记住正确选择区域.]',
 	'texte_recalcul_page' => '如果你只要刷新
 这页, 最好在公共区做,使用按钮 « refresh ».',
-	'texte_recapitiule_liste_documents' => '该页将汇总各专栏中的文档. 如需修改各个文档的信息, 单击所属专栏页面的链接.',
 	'texte_recuperer_base' => '修复数据库',
 	'texte_reference_mais_redirige' => '你的SPIP参考的文章, 但是重定向到别的 URL.',
 	'texte_requetes_echouent' => '<b>当一些 SQL 查询失败并且没有任何原因显示
@@ -663,7 +570,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 强制你刷新所有的页面.',
 	'texte_sur_titre' => '顶标题',
 	'texte_table_ok' => ': 表好了.',
-	'texte_tables_indexation_vides' => '引擎的索引表为空.',
 	'texte_tentative_recuperation' => '试图修复',
 	'texte_tenter_reparation' => '试图修复数据库',
 	'texte_test_proxy' => '若使用代理, 输入要测试的
@@ -678,13 +584,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   该选项为避免不合时宜的警告信息缺省
   设定为
   不可用.',
-	'texte_trop_resultats_auteurs' => '搜索到 "@cherche_auteur@"太多结果; 请重新定义搜索.',
-	'texte_unpack' => '正下载最新版本',
-	'texte_utilisation_moteur_syndiques' => '当你使用集成到SPIP的搜索引擎, 你可以执行搜索携带站点和不同方式联合的文章. <br /><img src=\'puce.gif\'>最简单的是只搜索文章的标题和描述. <br /><img src=\'puce.gif\'> 第二种方法, 更强有力, 允许SPIP搜索参考站点的文本. 如果你引用了站点, SPIP 将执行搜索站点的文本.', # MODIF
-	'texte_utilisation_moteur_syndiques_2' => '该方法强制 SPIP 定期访问参考站点,这将使你自己的站点性能降低.',
 	'texte_vide' => '清空',
 	'texte_vider_cache' => '清空缓存',
-	'titre_admin_effacer' => '技术维护',
 	'titre_admin_tech' => '技术维护',
 	'titre_admin_vider' => '技术维护',
 	'titre_cadre_afficher_article' => '显示文章:',
@@ -704,7 +605,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_naviguer_dans_le_site' => '浏览站点...',
 	'titre_nouvelle_rubrique' => '新专栏',
 	'titre_numero_rubrique' => '专栏编号:',
-	'titre_page_admin_effacer' => '技术维护:删除数据库',
 	'titre_page_articles_edit' => '修改: @titre@',
 	'titre_page_articles_page' => '文章',
 	'titre_page_articles_tous' => '整个站点',
@@ -717,19 +617,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_delete_all' => '所有和不能撤回的删除',
 	'titre_page_documents_liste' => '专栏文档',
 	'titre_page_index' => '您的私有区',
-	'titre_page_message_edit' => '写消息',
-	'titre_page_messagerie' => '您的消息',
 	'titre_page_recherche' => '搜索结果@recherche@',
 	'titre_page_statistiques_referers' => '统计(引入链接)',
 	'titre_page_upgrade' => 'SPIP升级 ',
 	'titre_publication_articles_post_dates' => '发表日期文章的出版物',
 	'titre_referencer_site' => '参考站点:',
-	'titre_rendez_vous' => '约会:',
 	'titre_reparation' => '修复',
 	'titre_suivi_petition' => '跟踪请求',
-	'trad_article_inexistant' => '没有文章为该号',
 	'trad_article_traduction' => '这篇文章的所有版本:',
-	'trad_deja_traduit' => '该文是一篇译文', # MODIF
 	'trad_delier' => '取消这篇文章到它的译文的链接', # MODIF
 	'trad_lier' => '该篇文章译自文章No.',
 	'trad_new' => '为该篇文章写一篇新译文' # MODIF

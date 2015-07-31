@@ -23,50 +23,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_ldap_echec_2' => 'Menjen az elöző oldalra, és ellenőrizze a beírt adatokat.',
 	'avis_connexion_ldap_echec_3' => 'Alternatív módon, ne használja az LDAP támogatást felhasználók importálására.',
 	'avis_deplacement_rubrique' => 'Vigyázat ! Ez a rovat @contient_breves@ hírt tartalmaz : ha át akarja helyezni, ezt a megerősítési jelölőkockát kell jelölni.',
-	'avis_destinataire_obligatoire' => 'Egy címzettet kell jelölni mielőbb elküldi ezt az üzenetet.',
 	'avis_erreur_connexion_mysql' => 'SQL-es csatlakozási hiba', # MODIF
-	'avis_erreur_version_archive' => '<b>Vigyázat! A @archive@ fájl az itt telepített SPIP
-    egy másik verziónak felel meg
-    </b> Óriási nehézségek előtt áll:
-az Ön adatbázis megsemmisítése, honlap rossz működése, stb. Ne
-    érvényesítse ezt az impotálási kérést.<p>több
-    információról lásd <a href="@spipnet@">
-SPIP dokumentációja (franciául)</a>.', # MODIF
 	'avis_espace_interdit' => '<b>Tiltott zóna</b><p>SPIP már telepítve van.', # MODIF
 	'avis_lecture_noms_bases_1' => 'A telepítő program nem tudta olvasni a már telepített adatbázisok nevét.',
 	'avis_lecture_noms_bases_2' => 'Vagy egyetlen adatbázis sem szabad, vagy az adatbázisokat listázó függvény lett inaktiválva
   biztonsági okokból (ami előfordul számos szolgáltatónál).',
 	'avis_lecture_noms_bases_3' => 'A második alternativában elképzelhető, hogy az Ön login nevét viselő adatbázis használható :',
-	'avis_non_acces_message' => 'Nincs jogosultsága erre az üzenetre.',
 	'avis_non_acces_page' => 'Nincs jogosultsága erre az oldalra.',
 	'avis_operation_echec' => 'A művelet sikertelen.',
-	'avis_probleme_archive' => 'Olvasási hiba a @archive@ nevű fájlon',
 	'avis_suppression_base' => 'VIGYÁZAT, az adatok törlése visszavonhatatlan',
-	'avis_version_mysql' => 'Ez a SQL verzió (@version_mysql@) nem teszi lehetővé a adatbázis táblai önjavítását.', # MODIF
 
 	// B
 	'bouton_acces_ldap' => 'Hozzátenni az LDAP hozzáférést >>', # MODIF
 	'bouton_ajouter' => 'Új',
-	'bouton_ajouter_participant' => 'ÚJ RÉSZTVEVŐ :',
-	'bouton_annonce' => 'HÍRDETÉS',
 	'bouton_checkbox_envoi_message' => 'Lehetőség üzenetküldéshez',
 	'bouton_checkbox_indiquer_site' => 'Honlapot kötelezően kell kijelölni',
 	'bouton_checkbox_signature_unique_email' => 'csak egy aláírás emailcímenként',
 	'bouton_checkbox_signature_unique_site' => 'csak egy aláírás honlaponként',
 	'bouton_demande_publication' => 'Kérni e cikk publikálását',
 	'bouton_desactive_tout' => 'Minden tiltása',
-	'bouton_effacer_index' => 'Törölni az indexeket',
 	'bouton_effacer_tout' => 'MINDENT törölni',
-	'bouton_envoi_message_02' => 'ÜZENET KÜLDÉS',
 	'bouton_envoyer_message' => 'Végleges üzenet: küldés',
 	'bouton_modifier' => 'Módosítás',
-	'bouton_pense_bete' => 'EMLÉKEZTETŐ SZEMÉLYES HASZNÁLATHOZ',
-	'bouton_radio_activer_messagerie' => 'A belső üzenetek aktiválása',
-	'bouton_radio_activer_messagerie_interne' => 'A belső üzenetek aktiválása',
 	'bouton_radio_activer_petition' => 'Az aláírásgyűjtés aktiválása',
 	'bouton_radio_afficher' => 'Megjelenítés',
 	'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Szerepelni a csatlakozott szerzők listában',
-	'bouton_radio_desactiver_messagerie' => 'Inaktiválni az üzeneteket',
 	'bouton_radio_envoi_annonces_adresse' => 'Küldeni a hírdetéseket a következő címre :',
 	'bouton_radio_envoi_liste_nouveautes' => 'Küldeni az újdongágok listáját',
 	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nem szerepelni a szerzők listában',
@@ -80,11 +61,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'bouton_tenter_recuperation' => 'Kisérletezni egy javítást',
 	'bouton_test_proxy' => 'Probálni a proxyt',
 	'bouton_vider_cache' => 'A "cache" ürítése',
-	'bouton_voir_message' => 'Nézni az üzenetet jóváhagyás előtt',
 
 	// C
-	'cache_mode_compresse' => 'A "cache" fájlai tömörített formában vannak felvéve.',
-	'cache_mode_non_compresse' => 'A "cache" fájlai nem tömörített formában vannak felvéve.',
 	'cache_modifiable_webmestre' => 'Ezt a paramétert a honlap gazdája módosíthatja.',
 	'calendrier_synchro' => 'Amennyiben egy <b>iCal</b>-val kompatibilis szoftvert használ, lehet szinkronizálni e honlap információival.',
 
@@ -155,9 +133,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'icone_creer_auteur' => 'Új szerző létrehozása, és hozzárendelése ehhez a cikkekhez',
 	'icone_creer_mot_cle' => 'Új kulcsszó létrehozása és hozzárendelése ehhez a cikkhez',
 	'icone_creer_rubrique_2' => 'Új rovat létrehozása',
-	'icone_envoyer_message' => 'Üzenet küldése',
 	'icone_modifier_article' => 'A cikk módosítása',
-	'icone_modifier_message' => 'Az üzenet módosítása',
 	'icone_modifier_rubrique' => 'A rovat módosítása',
 	'icone_retour' => 'Vissza',
 	'icone_retour_article' => 'Vissza a cikkhez',
@@ -180,15 +156,12 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_administrer_rubrique' => 'Ezt a rubrikát Ön adminisztrálhatja',
 	'info_adresse' => 'ezen a címen :',
 	'info_adresse_url' => 'A nyilvános honlap címe (URL)',
-	'info_afficher_visites' => 'A látógatások megjelenítése erre :',
 	'info_aide_en_ligne' => 'On-line SPIP súgó',
 	'info_ajout_image' => 'Ha képeket tesz hozzá, mint cikkhez csatolt dokumentum,
   akkor SPIP automatikusan létre hozhat Önnek kisebb képeket (miniatürök)a beszúrt képekről
   Ez példáúl teszi lehetővé egy képgalléria, vagy egy portfolio automatikus létrehozása.',
-	'info_ajout_participant' => 'A következő résztvevő hozzá van téve :',
 	'info_ajouter_rubrique' => 'Újabb adminisztrálandó rovat létrehozása :',
 	'info_annonce_nouveautes' => 'Az újdonságok közlése',
-	'info_anterieur' => 'elöző',
 	'info_article' => 'cikk',
 	'info_article_2' => 'cikk',
 	'info_article_a_paraitre' => 'utólagosan dátumozott publikálandó cikkek',
@@ -196,10 +169,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_articles_2' => 'Cikkek',
 	'info_articles_auteur' => 'A szerző cikkei',
 	'info_articles_trouves' => 'Talált cikkek',
-	'info_articles_trouves_dans_texte' => 'Talált cikkek (a szövegben)',
 	'info_attente_validation' => 'Jóváhagyás alatti cikkei',
 	'info_aujourdhui' => 'A mai napon :',
-	'info_auteur_message' => 'AZ ÜZENET SZERZŐJE :',
 	'info_auteurs' => 'A szerzők',
 	'info_auteurs_par_tri' => 'Szerzők@partri@',
 	'info_auteurs_trouves' => 'Talált szerzők',
@@ -215,7 +186,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_classement_1' => '<sup>.</sup> összesen @liste@',
 	'info_classement_2' => '<sup>.-dik</sup> összesen @liste@',
 	'info_code_acces' => 'Ne felejtse el a saját hozzáférési kódjait !',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_config_suivi' => 'Ha ez a cím egy levelező listahoz tartozik, lejjebb azt a címet jelezheti, ahova a résztvevők beíratkozhatnak. Ez a cím akár URL lehet (pl. a beíratkozási oldal a Weben), vagy egy specifikus tárgyat tartalmazó email cím (pl.<tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Beíratkozhat a honlap levelező listájához. Ilyenkor emailben fogja kapni ezeket a cikkeket, híreket, melyeket javasoltak publikálásra.',
 	'info_confirmer_passe' => 'Az új jelszó erősítse meg :',
@@ -233,15 +203,12 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_date_publication_anterieure' => 'Elöző szerkesztés dátuma :',
 	'info_date_referencement' => 'A HONLAP ELTÁVOLÍTÁSA DÁTUMA :',
 	'info_derniere_etape' => 'Utolsó lépés : <b>Vége van !', # MODIF
-	'info_derniers_articles_publies' => 'Az Ön legutolsó publikált cikkei',
-	'info_desactiver_messagerie_personnelle' => 'Lehet aktiválni, vagy inaktiválni a személyes levelezést a honlapon.',
 	'info_descriptif' => 'Rövid ismertető :',
 	'info_discussion_cours' => 'Folyamatban lévő viták',
 	'info_ecrire_article' => 'Mielőbb írjon cikkeket, legalább egy rubrikát kell létrehozni.',
 	'info_email_envoi' => 'Email cím küldésre (opció)',
 	'info_email_envoi_txt' => 'Itt jelezze a használandó feladó címet az email küldésére (ennek híján, a címzett címét használjuk, mint feladói) :',
 	'info_email_webmestre' => 'A Webmester email címe (opció)', # MODIF
-	'info_entrer_code_alphabet' => 'Írja be a használandó abécé kódját :',
 	'info_envoi_email_automatique' => 'Automatikus email küldés',
 	'info_envoyer_maintenant' => 'Azonnali küldés',
 	'info_etape_suivante' => 'Következő lépés',
@@ -251,7 +218,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_facilite_suivi_activite' => 'Ahhoz, hogy könnyebben lehessen figyelemmel követni a honlap szerkesztői tevékenységét, SPIP emailen küldheti például a publikálási, ill. cikkjóváhagyási kéréseket egy szerzői levelezőlistára.',
 	'info_fichiers_authent' => 'Azonosítási fájlok « .htpasswd »',
 	'info_forums_abo_invites' => 'A honlapja beiratkozásos fórumokat tartalmaz ; tehát a látogatók beíratkozhatnak a nyilvános részen.',
-	'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai részére elérhető.</b><p> A különböző műszaki karbantartási feladatokra ad lehetőséget. Ezek közül néhany igényel olyan specifikus azonosítási eljárást, ami a honlaphoz FTP elérést követel.</p>', # MODIF
 	'info_gauche_admin_tech' => '<b>Ez az oldal csak a honlap gazdai részére elérhető.</b><p> A különböző műszaki karbantartási feladatokra ad lehetőséget. Ezek közül néhany igényel olyan specifikus azonosítási eljárást, ami a honlaphoz FTP elérést követel.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Ez az oldal csak a honlap gazdai részére elérhető.</b><p> A különböző műszaki karbantartási feladatokra ad lehetőséget. Ezek közül néhany igényel olyan specifikus azonosítási eljárást, ami a honlaphoz FTP elérést követel.</p>', # MODIF
 	'info_gauche_auteurs' => 'Itt található a honlap összes szerzője.
@@ -259,18 +225,11 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_gauche_auteurs_exterieurs' => 'A külső szerzők, melyek nem férhetnek a honlaphoz, kék ikonnal vannak jelölve ;
 a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_gauche_messagerie' => 'A levelezés lehetővé tesz szerzők közti üzenetcserét, emlékeztetők (saját használatra) megtartását, vagy hírdetések megjelenítését a privát rész főoldalán (amennyiben Ön adminisztrátor).',
-	'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
 	'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',
 	'info_gauche_visiteurs_enregistres' => 'Itt találhatók a honlap nyilvános részén regisztrált látogatók (beíratkozásos fórumok).',
 	'info_generation_miniatures_images' => 'Bélyegképek generálása a képekről',
-	'info_gerer_trad' => 'Fordítasi linkek kezelése ?',
 	'info_hebergeur_desactiver_envoi_email' => 'Bizonyos szolgáltatók nem aktiválják az automatikus email küldést a szerverükről. Ilyen esetben, a következő SPIP funkciók nem fognak működni.',
 	'info_hier' => 'Tegnap :',
-	'info_historique_activer' => 'A felülvizsgálatok megfigyelésének aktiválása',
-	'info_historique_affiche' => 'A verzió megjelenítése',
-	'info_historique_comparaison' => 'Összehasonlítás',
-	'info_historique_desactiver' => 'A felülvizsgalatok megfigyelésének inaktiválása',
-	'info_historique_texte' => 'A felülvizsgalatok megfigyelése egy cikk tartalmához nyújtott összes módosításokről tárolja az előzményeket, és megjeleníti az egymást követő változatok eltéréseket.',
 	'info_identification_publique' => 'Az Ön nyilvános azonosítása...',
 	'info_image_process' => 'Válasszon a bélyegképek legjobb készítesi modszerét azzal, hogy kattintson a megfelelő képre.',
 	'info_image_process2' => '<b>Megjegyzés</b> <i>Ha egyetlen kép sem jelenik meg, akkor ez azt jelenti, hogy a honlapját tároló szervert nem konfigurálták olyan eszkőzök használására. Ha mégis akarja használni ezeket a funkciókat, keresse a rendszergazdát, és a «GD» vagy «Imagick» kiegészítéseket kérje.</i>', # MODIF
@@ -288,8 +247,6 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_login_trop_court' => 'A login túl rövid.',
 	'info_maximum' => 'A legtöbb :',
 	'info_meme_rubrique' => 'Abban a rovatban',
-	'info_message' => 'Üzenet kelte',
-	'info_message_efface' => 'ÜZENET TÖRÖLVE',
 	'info_message_en_redaction' => 'Az Ön szerkesztés alatti üzenetei',
 	'info_message_technique' => 'Műszaki üzenet :',
 	'info_messagerie_interne' => 'Belső levelezés',
@@ -299,19 +256,15 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_modifier_titre' => 'Módosítás : @titre@',
 	'info_mon_site_spip' => 'Az én SPIP honlapom',
 	'info_mot_sans_groupe' => '(Csoport nélküli szavak...)',
-	'info_moteur_recherche' => 'Integrált kereső motor',
 	'info_moyenne' => 'Átlagosan :',
-	'info_multi_articles' => 'A nyelvi menü aktiválása a cikkeknél ?',
 	'info_multi_cet_article' => 'A cikk nyelve :',
 	'info_multi_langues_choisies' => 'Lejjebb jelölje ki a szerzők által használható nyelveket.
   A honlapján már használt nyelveket (elsőknek jelennek meg) nem lehet inaktiválni.',
-	'info_multi_rubriques' => 'A nyelvi menü aktiválása a rovatoknál ?',
 	'info_multi_secteurs' => '... csak a gyökérben található rovatok esetén ?',
 	'info_nom' => 'Név',
 	'info_nom_destinataire' => 'Címzett neve',
 	'info_nom_site' => 'Az Ön honlapja neve',
 	'info_nombre_articles' => '@nb_articles@ cikk,',
-	'info_nombre_partcipants' => 'A VITA RÉSZTVEVŐI :',
 	'info_nombre_rubriques' => '@nb_rubriques@ rovat,',
 	'info_nombre_sites' => '@nb_sites@ honlap,',
 	'info_non_deplacer' => 'Nem kell áthelyezni...',
@@ -321,36 +274,26 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_non_modifiable' => 'nem módosítható',
 	'info_non_suppression_mot_cle' => 'ne akarom törölni ezt a kulcsszót.',
 	'info_notes' => 'Megjegyzések',
-	'info_nouveaux_message' => 'Új üzenetek',
 	'info_nouvel_article' => 'Új cikk',
 	'info_nouvelle_traduction' => 'Új fordítás :',
 	'info_numero_article' => 'CIKK SZÁMA :',
 	'info_obligatoire_02' => '[Kötelező]', # MODIF
 	'info_option_accepter_visiteurs' => 'A látogatói beíratkozás engedélyezése ',
-	'info_option_faire_suivre' => 'A fórumok üzenetei továbbítása a cikkek szerzői felé',
 	'info_option_ne_pas_accepter_visiteurs' => 'Látogatói beíratkozás tiltása',
 	'info_options_avancees' => 'B?VÍTETT OPCIÓK',
-	'info_ortho_activer' => 'A helyesírás ellenőrző aktiválása',
-	'info_ortho_desactiver' => 'A helyesírás ellenőrző leállítása',
 	'info_ou' => 'vagy...',
 	'info_page_interdite' => 'Tiltott oldal',
 	'info_par_nombre_article' => '(cikk darabszám szerint)', # MODIF
 	'info_passe_trop_court' => 'A jelszó túl rövid.',
 	'info_passes_identiques' => 'A két jelszó nem egyforma.',
-	'info_pense_bete_ancien' => 'Az Ön régebbi emlékeztet?i', # MODIF
 	'info_plus_cinq_car' => 'több, mint 5 karakter',
 	'info_plus_cinq_car_2' => '(több, mint 5 karakter)',
 	'info_plus_trois_car' => '(több, mint 3 karakter)',
 	'info_popularite' => 'Népszer?ség : @popularite@ ; látógatások : @visites@',
-	'info_popularite_4' => 'népszerűség : @popularite@ ; látógatások : @visites@',
 	'info_post_scriptum' => 'Útóírat',
 	'info_post_scriptum_2' => 'Útóírat:',
 	'info_pour' => 'erre',
-	'info_preview_admin' => 'Csak az adminisztrátorok előnézhetik a honlapot',
-	'info_preview_comite' => 'Minden szerző előnézheti a honlapot',
-	'info_preview_desactive' => 'Az előnézet teljesen van leállítva',
 	'info_preview_texte' => 'Lehetséges előnézni a honlapot, mintha az összes cikk és hír (legalább "javasolt" státusszal) publikálva lenne. Ezt a lehetőséget csak az adminisztrátoroknak, az összes szerzőnek, vagy senkinek kell adni ?',
-	'info_principaux_correspondants' => 'A főbb levelezőtársai',
 	'info_procedez_par_etape' => 'lépésről lépésre járjon el',
 	'info_procedure_maj_version' => 'A naprakésztételes eljárást kell indítani ahhoz, hogy
  adaptáljuk az adatbázist az SPIP új változatához.',
@@ -363,13 +306,9 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 a felhasználók automatikus emailt kapnak,
   mely a privát reszhez szükséges hozzáférési kódokat tartalmazza.
  Bizonyos szolgáltatók inaktiválják az emailküldést a szerverükről : ilyen esetben lehetetlen az automatikus beíratkozás.', # MODIF
-	'info_question_utilisation_moteur_recherche' => 'Kivánja-e használni az SPIP integrált kereső motorját ?
- (annak inaktiválása gyorsítja a rendszer működését.)',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Honlap teteje',
 	'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
-	'info_recherche_auteur_a_affiner' => 'Túl sok eredmény erre "@cherche_auteur@" ; legyen szíves szükíteni a keresést.',
-	'info_recherche_auteur_ok' => 'Több szerző talált erre "@cherche_auteur@":',
 	'info_recherche_auteur_zero' => '"@cherche_auteur@" nincs találat.',
 	'info_recommencer' => 'Még egyszer, legyen szíves.',
 	'info_redacteur_1' => 'Szerző',
@@ -386,7 +325,6 @@ a felhasználók automatikus emailt kapnak,
 	'info_rubriques' => 'Rovatok',
 	'info_rubriques_02' => 'rovatok',
 	'info_rubriques_trouvees' => 'Talált rovatok',
-	'info_rubriques_trouvees_dans_texte' => 'Talált rovatok (a szövegben)',
 	'info_sans_titre' => 'Cím nélkül',
 	'info_selection_chemin_acces' => '<b>Válassza</b> lejjebb az elérési utat a címtárban :',
 	'info_signatures' => 'aláírások',
@@ -399,13 +337,11 @@ a felhasználók automatikus emailt kapnak,
 	'info_sites_lies_mot' => 'A kulcsszóhoz kötött felvett honlapok',
 	'info_sites_proxy' => 'Proxy használata',
 	'info_sites_trouves' => 'Talált honlapok',
-	'info_sites_trouves_dans_texte' => 'Talált honlapok (a szövegben)',
 	'info_sous_titre' => 'Alcím :',
 	'info_statut_administrateur' => 'Adminisztrátor',
 	'info_statut_auteur' => 'A szerző státusza :', # MODIF
 	'info_statut_auteur_a_confirmer' => 'Megerősítendő beíratkozás',
 	'info_statut_auteur_autre' => 'Egyéb státusz :',
-	'info_statut_efface' => 'Törölt',
 	'info_statut_redacteur' => 'Szerző',
 	'info_statut_utilisateurs_1' => 'Az importált felhasználók alapértelmezett státusza',
 	'info_statut_utilisateurs_2' => 'Válassza azt a státuszt, ami lesz hozzárendelve az LDAP címtárban lévő személyekhez, ha csatlakoznak legelőször. Később ez az érték egyénileg lesz módosítható.',
@@ -425,7 +361,6 @@ a felhasználók automatikus emailt kapnak,
 	'info_tous_articles_en_redaction' => 'Az összes szerkesztés alatti cikk',
 	'info_tous_articles_presents' => 'Az összes publikált cikk abban a rovatban',
 	'info_tous_les' => 'minden :',
-	'info_tous_redacteurs' => 'Hírdetések minden szerző részére',
 	'info_tout_site' => 'A egész honlap',
 	'info_tout_site2' => 'A cikk nem lett lefordítva erre a nyelvre.',
 	'info_tout_site3' => 'A cikk le lett fordítva arra a nyelvre, de később módosült az eredeti. A fordítást frissíteni kell.',
@@ -466,7 +401,6 @@ ami állapotát jelzi :',
 	'item_choix_redacteurs' => 'a szerzők',
 	'item_choix_visiteurs' => 'a nyilvános honlap látógatói',
 	'item_creer_fichiers_authent' => 'A .htpasswd tipusú fájlok létrehozása',
-	'item_limiter_recherche' => 'Keresés a honlapon',
 	'item_login' => 'Login',
 	'item_mots_cles_association_articles' => 'cikkekre',
 	'item_mots_cles_association_rubriques' => 'rovatokra',
@@ -476,34 +410,25 @@ ami állapotát jelzi :',
 	'item_non_activer_messages_avertissement' => 'Nincs figyelmeztető üzenet',
 	'item_non_afficher_calendrier' => 'Nincs megjelenítés a naptárban',
 	'item_non_autoriser_documents_joints' => 'Dokumentumok tiltása a cikkekben',
-	'item_non_autoriser_documents_joints_rubriques' => 'Dokumentumok tiltása a rovatokban',
 	'item_non_autoriser_syndication_integrale' => 'Csak egy összefoglalást átadni',
 	'item_non_creer_fichiers_authent' => 'Nem kell létrehozni ezeket a fájlokat',
-	'item_non_gerer_statistiques' => 'Nem kell kezelni a statisztikákat',
-	'item_non_limiter_recherche' => 'Keresés bővítése a felvett honlapok tartalmáig',
 	'item_non_publier_articles' => 'Nem kell publikálni a cikkeket az adott publikálási dátum előtt.',
-	'item_non_utiliser_moteur_recherche' => 'Nem kell motort használni',
 	'item_nouvel_auteur' => 'Új szerző',
 	'item_nouvelle_rubrique' => 'Új rovat',
 	'item_oui' => 'Igen',
 	'item_publier_articles' => 'A cikkek publikálása, publikálási dátumtól függetlenül.',
 	'item_reponse_article' => 'Hozzászólás a cikkhez',
-	'item_utiliser_moteur_recherche' => 'Kereső motor használata',
 	'item_visiteur' => 'vendég',
 
 	// J
 	'jour_non_connu_nc' => 'névtelen',
 
 	// L
-	'lien_ajout_destinataire' => 'A címzett hozzáadása',
 	'lien_ajouter_auteur' => 'A szerző hozzáadása',
-	'lien_ajouter_participant' => 'Egy résztvevő hozzáadása',
 	'lien_email' => 'email',
 	'lien_nom_site' => 'HONLAP NEVE :',
 	'lien_retirer_auteur' => 'A szerző eltávolítása',
-	'lien_retrait_particpant' => 'a résztvevő eltávolítása',
 	'lien_site' => 'honlap',
-	'lien_supprimer_rubrique' => 'a rovat törlése',
 	'lien_tout_deplier' => 'Minden kibontása',
 	'lien_tout_replier' => 'Minden összecsukása',
 	'lien_trier_nom' => 'Név szerinti sorbarendezés',
@@ -562,13 +487,10 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 	'texte_article_virtuel_reference' => '<b>Virtuális cikk :</b> SPIP honlapján felvett cikk, de másik URL felé átirányítva. Az átirányítás megszüntetésére törölje a fenti URL-t.',
 	'texte_aucun_resultat_auteur' => 'Nincs találat erre "@cherche_auteur@"',
 	'texte_auteur_messagerie' => 'A honlap állandóan jelezheti a csatlakozott szerzők listáját, ami közvetlen üzenetcserét tesz lehetővé.  Úgy is döntheti, hogy nem szerepel a listában (Ön "láthatatlan" a többi felhasználók számára).',
-	'texte_auteur_messagerie_1' => 'Ez a honlap engedi az üzenetcserét és a magán fórumok létrehozását a résztvevők között. Úgy dönhet, hogy nem vesz részt ezekben.',
 	'texte_auteurs' => 'A SZERZŐ',
 	'texte_choix_base_1' => 'Válassza az adatbázist :',
 	'texte_choix_base_2' => 'A SQL szerver több adatbázist tartalmaz.', # MODIF
 	'texte_choix_base_3' => '<b>Jelölje</b> azt, amit az Ön Web szolgaltatója adta:', # MODIF
-	'texte_commande_vider_tables_indexation' => 'Ezt a parancsot használja a használt indexálási táblák törlésére, melyeket használ az SPIP belső kereső motorja. Ettól tárhelyet lehet visszanyerni.',
-	'texte_compresse_ou_non' => '(ez tömörítve lehet, vagy nem)',
 	'texte_compte_element' => '@count@ darab',
 	'texte_compte_elements' => '@count@ darab',
 	'texte_connexion_mysql' => 'Ellenőrizze a Web szolgáltatója által adott információkat : található az, ha fut SQL, illetve annak csatlakozási paraméterei.', # MODIF
@@ -586,7 +508,6 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 	'texte_descriptif_petition' => 'Az aláírásgyűjtés leírása',
 	'texte_descriptif_rapide' => 'Rövid leírás',
 	'texte_effacer_base' => 'Az SPIP adatbázisa törlése',
-	'texte_effacer_donnees_indexation' => 'Az indexálási adatok törlése',
 	'texte_en_cours_validation' => 'Az alábbi híreket és cikkeket javasolták publikálásra. Szóljon hozzá a hozzájuk csatolt fórumokban.', # MODIF
 	'texte_enrichir_mise_a_jour' => 'A szerkesztést lehet szépíteni a « nyomdai jelek » segítségével.',
 	'texte_fichier_authent' => '<b>SPIP-nek kell-e létrehoznia spéciális <tt>.htpasswd</tt>
@@ -599,26 +520,17 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 	'texte_informations_personnelles_2' => '(Megjegyzés : ha újratelepítésról van szó, és még mindig megy a hozzáférése, akkor', # MODIF
 	'texte_introductif_article' => '(A cikk bevezető szövege.)',
 	'texte_jeu_caractere' => 'Az Őn honlapján ajánlott az univerzális abécé (<tt>utf-8</tt>) használata :az összes nyelv megjelenítését teszi lehetővé, és már nem okoz kompatibilitási problemát a korszerű böngészőkkel.',
-	'texte_jeu_caractere_2' => 'Vigyázat: E beállítás nem végzi az adatbázisban már meglévő szövegek konvertálását.',
 	'texte_jeu_caractere_3' => 'Az Őn honlapja jelenleg a kovetkező karaktertáblát használja :',
 	'texte_jeu_caractere_4' => 'Ha nem felel meg adatai állapotának (pl. adatbázisresztaurálás után), vagy ha <em>inditja ezt a honlapot</em>, és szeretne egy másik karaktertáblát használni, ezt az utóbbit jelölje ide :',
-	'texte_jeu_caractere_conversion' => 'Megjegyzés : úgy döntheti, hogy véglegesen konvertálja honlapja összes szövegeit (cikkek, hírek, fórumok, stb.) az <tt>utf-8</tt> karakter táblára az <a href="@url@">utf-8-ra konvertálási oldal</a> látógatásával.',
-	'texte_lien_hypertexte' => '(Ha az Ön üzenete egy publikált cikkre, vagy egy több információt tartalmazó oldara hivatkozik, lejjeb jelezze az oldal nevét, illetve címét.)',
 	'texte_login_ldap_1' => '(Névtelen hozzáféréshez üresen kell hagyni, vagy beírni a teljes utat például « <tt>uid=azennevem, ou=users, dc=azen-domainem, dc=com</tt> ».)',
 	'texte_login_precaution' => 'Vigyázat ! Ez az a login, amivel jelenleg csatlakozva van.
  Ezt az űrlapot óvatosan használja...',
-	'texte_message_edit' => 'Vigyázat : ezt az üzenetet a honlap összes adminisztrátora módosíthatja, és az összes szerző láthatja. A hirdetéseket csak a honlap legfontosabb eseményeinek közlésére használja.',
 	'texte_mise_a_niveau_base_1' => 'Éppen SPIP verziófrissítést végzett.
  Most pedig a honlap adatbázisát kell naprakésszé tenni.',
 	'texte_modifier_article' => 'Cikk módosítása :',
-	'texte_moteur_recherche_active' => '<b>A kereső motor aktiválva van.</b> Ezt a parancsot használja,
- ha gyors újraindexálást szeretne (például egy mentés resztaurálása után).
- Jegyezze meg, hogy a rendesen (az SPIP    felületen) módosított dokumentumok automatikusan vannak újra indexelve : ez a parancs tehát csak rendkivül esetben hasznos.',
-	'texte_moteur_recherche_non_active' => 'A kereső motor nincs aktiválva.',
 	'texte_multilinguisme' => 'Amennyiben több nyelvű cikkeket szeretne kezelni, komplex böngészés mellett, egy nyelvi menüt lehet tenni a cikkekhez és/vagy a rovatokhoz, a honlapja felépítésétől függően.', # MODIF
 	'texte_multilinguisme_trad' => 'Egy linkeket kezelő rendszert is lehet aktiválni egy cikk különböző fordításai között.', # MODIF
 	'texte_non_compresse' => '<i>nincs tömörítve</i> (az Ön szervere nem él azzal a lehetőséggel)',
-	'texte_nouveau_message' => 'Új üzenet',
 	'texte_nouvelle_version_spip_1' => 'Az SPIP egyik újabb verzióját telepítette.',
 	'texte_nouvelle_version_spip_2' => 'Ez az új verzió a szokásosnál teljesebb frissítést igényel. Ha Ön a honlap gazdája, akkor törölje a @connect@ nevű fájlt, folytassa a telepítést ahhoz, hogy az adatbázis csatlakozási paramétereit módosíthassa.<p> (Megjegyzés. : amennyiben elfelejtette a csatlakozási paramétereit, tekintse át a @connect@ nevű fájlt, mielőbb kitörölne...)</p>', # MODIF
 	'texte_operation_echec' => 'Menjen az elöző oldalra, jelöljön ki egy másik adatbázist, vagy hozzon létre egy ujat. Ellenőrizze az Ön szolgáltatója által adott információkat.',
@@ -637,7 +549,6 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 	'texte_rappel_selection_champs' => '[Ne felejtse el helyesen kijelölni ezt a mezőt.]',
 	'texte_recalcul_page' => 'Ha csak egy oldalt
 szeretne frissíteni, akkor menjen inkább a nyilvános részre, és kattintson az «oldal frissítés» gombra.',
-	'texte_recapitiule_liste_documents' => 'Ez az oldal felsorolja ezeket a dokumentumokat, melyeket helyezte a rovatokba. Minden egyes dokumentum módosítására, kövesse a rovata oldalához vezető linket.',
 	'texte_recuperer_base' => 'Adatbázis javítása',
 	'texte_reference_mais_redirige' => 'a cikke fel van véve az Ön SPIP honlapján, de át lett irányítva egy másik URL felé.',
 	'texte_requetes_echouent' => '<b>Ha bizonyos SQL lekérdezések rendszeresen és oktalanul hibásak,
@@ -661,7 +572,6 @@ szeretne frissíteni, akkor menjen inkább a nyilvános részre, és kattintson 
 dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha jelentős módosításokat végzett a honlap grafikáján, vagy szerkezetén.',
 	'texte_sur_titre' => 'Felső cím',
 	'texte_table_ok' => ': ez a tábla rendben van.',
-	'texte_tables_indexation_vides' => 'A motor indexálási táblai üresek.',
 	'texte_tentative_recuperation' => 'Javítási kisérlet',
 	'texte_tenter_reparation' => 'Adatbázis javítási kisérlet',
 	'texte_test_proxy' => 'Ha ezt a proxyt akarja tesztelni, ide jelezze a tesztelni kívánt honlap címét.',
@@ -674,20 +584,8 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
   Ez az opció nincs aktiválva eleve
  a váratlan figyelmeztető üzenetek elkerülésére.
 ',
-	'texte_trop_resultats_auteurs' => 'Túl sok találat erre "@cherche_auteur@" ; szükítse a kérésést.',
-	'texte_unpack' => 'Legújabb verzió letöltése',
-	'texte_utilisation_moteur_syndiques' => 'Ha az SPIP belső  kereső motorját használja 
-    , kétféle módon lehet keresni a szindikált cikkekben, illetve honlapokon.
-    <br />Az egyszerűbb korlátózodik a cikkek címeire és rövid ismertetőire.
-    <br />
-    Egy erőteljesebb módszer lehetővé teszi,
-    hogy az SPIP a felvett honlapok szövegein belül is keres .     Ha valamilyen honlapot vesz fel,
-    akkor SPIP fogja végezni a keresést a honlap saját szövegében.', # MODIF
-	'texte_utilisation_moteur_syndiques_2' => 'Ez a módszer kényszeríti az SPIP rendszeres látógatásokra a felvett honlapokon,
-    ami enyhe lassítást okozhat az Ön honlapján.',
 	'texte_vide' => 'üres',
 	'texte_vider_cache' => 'A cache ürítése',
-	'titre_admin_effacer' => 'Műszaki karbantartás',
 	'titre_admin_tech' => 'Műszaki karbantartás',
 	'titre_admin_vider' => 'Műszaki karbantartás',
 	'titre_cadre_afficher_article' => 'Cikkek megjelenítése',
@@ -707,7 +605,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 	'titre_naviguer_dans_le_site' => 'Böngészni a honlapon...',
 	'titre_nouvelle_rubrique' => 'Új rovat',
 	'titre_numero_rubrique' => 'ROVAT SZÁMA :',
-	'titre_page_admin_effacer' => 'Műszaki karbantartás : adatbázis törlése',
 	'titre_page_articles_edit' => 'Módosítás : @titre@',
 	'titre_page_articles_page' => 'A cikkek',
 	'titre_page_articles_tous' => 'Az egész honlap',
@@ -720,19 +617,14 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 	'titre_page_delete_all' => 'Teljes és visszavonhatatlan törlés',
 	'titre_page_documents_liste' => 'A rovatok dokumentumai',
 	'titre_page_index' => 'Az Ön privát része',
-	'titre_page_message_edit' => 'Üzenet szerkesztése',
-	'titre_page_messagerie' => 'Az Ön levelezése',
 	'titre_page_recherche' => 'A @recherche@ alapú keresés eredménye',
 	'titre_page_statistiques_referers' => 'Statisztikák (bejövő linkek)',
 	'titre_page_upgrade' => 'SPIP frissítése',
 	'titre_publication_articles_post_dates' => 'Utólagosan dátumozott cikkek publikálása',
 	'titre_referencer_site' => 'Honlap felvétele :',
-	'titre_rendez_vous' => 'TALÁLKOZÓ :',
 	'titre_reparation' => 'Javítás',
 	'titre_suivi_petition' => 'Aláírásgyűjtések megfigyelése',
-	'trad_article_inexistant' => 'Nincs ilyen sorszámú cikk.',
 	'trad_article_traduction' => 'A cikk összes változatai :',
-	'trad_deja_traduit' => 'Ez a cikk már egy fordítás a jelen cikkről.', # MODIF
 	'trad_delier' => 'Visszavenni a cikk csatolását ezekre a fordításokra', # MODIF
 	'trad_lier' => 'Ez a cikk egy fordítás erről a cikkről :',
 	'trad_new' => 'Írni egy újabb fordítást erről a cikkről', # MODIF
