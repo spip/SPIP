@@ -33,8 +33,9 @@ include_spip('base/connect_sql');
 function sql_error_backtrace($compil_info = false){
 	$trace = debug_backtrace();
 	$caller = array_shift($trace);
-	while (count($trace) AND ($trace[0]['file']===$caller['file'] OR $trace[0]['file']===__FILE__))
+	while (count($trace) AND !empty($trace[0]['file']) AND ($trace[0]['file']===$caller['file'] OR $trace[0]['file']===__FILE__)) {
 		array_shift($trace);
+	}
 
 	if ($compil_info){
 		$contexte_compil = array(
