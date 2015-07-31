@@ -71,11 +71,14 @@ function inc_auth_dist() {
 	if (!$connect_login) return auth_a_loger();
 
 	// Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
-	// C'est soit parce que le serveur MySQL ne repond pas,
+	// C'est soit parce que la base est inutilisable,
 	// soit parce que la table des auteurs a changee (restauration etc)
-	// Pas la peine d'insister.  Envoyer un message clair au client.
+	// Pas la peine d'insister. 
+	// Renvoyer le nom fautif et une URL de remise a zero
 
-	if (spip_connect()) return array('nom' => $connect_login);
+	if (spip_connect())
+		return array('login' => $connect_login,
+			'site' => generer_url_public('', "action=logout&amp;logout=prive"));
 
 	$n = intval(sql_errno());
 	spip_log("Erreur base de donnees $n " . sql_error());
