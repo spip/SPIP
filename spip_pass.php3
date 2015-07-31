@@ -1,5 +1,6 @@
 <?php
 
+$dir_ecrire = 'ecrire/';
 include ("ecrire/inc_version.php3");
 
 include_ecrire ("inc_meta.php3");
@@ -115,9 +116,7 @@ else if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (
 	else
 		echo propre("Vous avez demand&eacute; &agrave; intervenir sur un forum
 		r&eacute;serv&eacute; aux visiteurs enregistr&eacute;s.");
-	echo "\n<p>".propre ("Indiquez ici votre nom et votre adresse email.
-	Votre identifiant personnel vous parviendra rapidement, par courrier
-	&eacute;lectronique.");
+	echo "\n<p>";
 
 	formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
 }

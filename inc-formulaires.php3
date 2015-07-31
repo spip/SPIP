@@ -348,6 +348,9 @@ function formulaire_inscription($type) {
 		echo "</div>";
 	}
 	else {
+		echo propre ("Indiquez ici votre nom et votre adresse email.
+		Votre identifiant personnel vous parviendra rapidement, par courrier
+		&eacute;lectronique.");
 		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('GET');
 		echo  "<P><B>Votre nom ou pseudo</B><BR>";
