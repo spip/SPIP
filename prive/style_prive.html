@@ -131,7 +131,7 @@ select.fondl { padding: 0; }
 #bandeau-principal a {cursor:hand;}
 #bandeau-principal a .icon_fond { width: 48px; height: 48px; background: #GET{claire}; margin: auto; }
 #bandeau-principal a.selection .icon_fond { width: 48px; margin:auto }
-#bandeau-principal a:hover span.icon_fond { background:url([(#CHEMIN{[(#EVAL{ _DIR_IMG_PACK})fond-gris-anim.gif]}|url_absolue)]); width: 48px; height: 48px; margin: auto; }
+#bandeau-principal a:hover span.icon_fond { background:url(#GET{chemin_img_pack}fond-gris-anim.gif); width: 48px; height: 48px; margin: auto; }
 #bandeau-principal li.boutons_admin:hover .bandeau_sec,
 #bandeau-principal li.boutons_admin.sfhover .bandeau_sec { display: block; }
 #bandeau-principal span.icon_fond span { background: center top no-repeat; height: 48px; display: block; width: 48px; margin: 0; }
@@ -326,7 +326,7 @@ a.ortho-dico:hover { margin: -2px; border: 2px dashed #a0b890; color: inherit; t
 .ortho-content { position: absolute; top: 0; width: 70%; padding: 15px; margin: 0; }
 .suggest-actif, .suggest-inactif { font-family: "Trebuchet Sans MS", Verdana, Geneva, sans-serif; font-size: 95%; font-weight: bold; margin: 8px; z-index: 1; }
 .suggest-actif .detail, .suggest-inactif .detail { margin: 8px; margin-top: -0.5em; padding: 0.5em; padding-top: 1em; border: 1px solid #c8c8c8; background: #f3f2f3; font-family: Georgia, Garamond, "Times New Roman", serif; font-weight: normal; z-index: 0; }
-.suggest-actif .detail ul, .suggest-inactif .detail ul { list-style-image: url(#EVAL{ _DIR_IMG_PACK}puce.gif); background: #f3f2f3; margin: 0; padding: 0; padding-#GET{left}: 25px; }
+.suggest-actif .detail ul, .suggest-inactif .detail ul { list-style-image: url(#GET{chemin_img_pack}puce.gif); background: #f3f2f3; margin: 0; padding: 0; padding-#GET{left}: 25px; }
 .suggest-actif { display: block; }
 .suggest-inactif { display: none; }
 .form-ortho select { background: #ffe0e0; }
