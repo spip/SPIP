@@ -107,9 +107,9 @@ function spip_connect($serveur='', $version='') {
 function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 	$desc = spip_connect($serveur, $version);
 	if (function_exists($f = @$desc[$version][$ins])) return $f;
+	if ($cont) return $desc;
 	if ($ins)
 		spip_log("Le serveur '$serveur' version $version n'a pas '$ins'");
-	if ($cont) return $desc;
 	include_spip('inc/minipres');
 	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'));
 	exit;
@@ -141,7 +141,6 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		spip_log("les requetes $type ne sont pas fournies");
 		return;
 	}
-	  
 	if ($g = $h($host, $port, $login, $pass, $db, $prefixe, $ldap)) {
 
 		$g['type'] = $type;
