@@ -41,7 +41,6 @@ if (!isset($EXPORT_tables_noexport)){
 	$EXPORT_tables_noexport= array(
 		'spip_ajax_fonc',
 		'spip_caches',
-		'spip_meta',
 		'spip_index',
 		'spip_index_dico',
 		'spip_referers',
@@ -104,7 +103,7 @@ function exec_export_all_dist()
 
 	if ($start){
 		$status_dump = "$gz::$archive::0::0";
-		ecrire_meta("status_dump", "$status_dump");
+		ecrire_meta("status_dump", "$status_dump",'non');
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
 		// un ramassage preventif au cas ou le dernier dump n'aurait pas ete acheve correctement
@@ -240,11 +239,11 @@ function exec_export_all_dist()
 				// on le renomme avec un numero -> operation atomique en linux
 				rename($partfile,$partfile.".$cpt");
 				$cpt ++;
-				ecrire_meta("status_dump", implode("::",$status_dump));
+				ecrire_meta("status_dump", implode("::",$status_dump),'non');
 				#lire_metas();
 				list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
 			}
-			ecrire_meta("status_dump", implode("::",$status_dump));
+			ecrire_meta("status_dump", implode("::",$status_dump),'non');
 			#lire_metas();
 		}
 		echo "</ul>\n";
