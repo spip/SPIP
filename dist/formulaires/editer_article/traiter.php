@@ -17,18 +17,7 @@ include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_article_traiter_dist($id_article='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
-
-	$message = "";
-	$action_editer_article = charger_fonction('editer_article','action');
-	list($id_article,$err) = $action_editer_article();
-	if ($err){
-		$message .= $err;
-	}
-	elseif ($retour) {
-		include_spip('inc/headers');
-		$message .= redirige_formulaire(parametre_url($retour,'id_article',$id_article));
-	}
-	return $message;
+	return formulaires_editer_objet_traiter('article',$id_article,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
 ?>

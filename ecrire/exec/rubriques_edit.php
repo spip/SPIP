@@ -98,8 +98,21 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
-
+	
 	echo debut_cadre_formulaire("", true);
+
+	$contexte = array(
+	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$GLOBALS['spip_lang_right']),
+	'redirect'=>generer_url_ecrire("naviguer"),
+	'titre'=>$titre,
+	'new'=>$new == "oui"?$new:$id_rubrique,
+	'id_rubrique'=>$id_parent, // pour permettre la specialisation par la rubrique appelante
+	'config_fonc'=>'rubriques_edit_config'
+	);
+	$page = evaluer_fond("prive/editer/rubrique", $contexte, $connect);
+	echo $page['texte'];
+	echo fin_cadre_formulaire(true);
+	/*
 
 	if ($id_rubrique) echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$spip_lang_right);
 	else echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif",$spip_lang_right);
@@ -119,8 +132,8 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	$form .= "<li>"
 		. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
 		. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
-// si c'est une rubrique-secteur contenant des breves, demander la
-// confirmation du deplacement
+	// si c'est une rubrique-secteur contenant des breves, demander la
+	// confirmation du deplacement
 	$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',2);
 
 	if ($contient_breves > 0) {
@@ -175,8 +188,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	$form .= "</ol>";
 
 	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
-
-	echo "\n", fin_cadre_formulaire(true);
+	*/
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 

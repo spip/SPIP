@@ -28,10 +28,15 @@ function action_editer_rubrique_dist() {
 
 	revisions_rubriques($id_rubrique);
 
-	$redirect = parametre_url(
-		urldecode(_request('redirect')),
-		'id_rubrique', $id_rubrique, '&');
-	redirige_par_entete($redirect);
+	if (_request('redirect')) {
+		$redirect = parametre_url(
+			urldecode(_request('redirect')),
+			'id_rubrique', $id_rubrique, '&');
+	
+		redirige_par_entete($redirect);
+	}
+	else 
+		return array($id_rubrique,'');
 }
 
 
