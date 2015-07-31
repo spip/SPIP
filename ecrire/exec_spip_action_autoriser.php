@@ -26,7 +26,6 @@ function spip_action_autoriser_dist()
 {
   global $file, $arg, $toujours;
 
-  if ($toujours) return spip_action_telecharger_dist();
   $file = urldecode($file);
 
   $refus = false;
@@ -49,11 +48,12 @@ function spip_action_autoriser_dist()
       }
 
     if (!$arg) {
-      $arg = spip_query("select id_document from spip_documents as documents where documents.fichier='".$file."'");
+      $arg = spip_query("select id_document from spip_documents as documents where documents.fichier='". addslashes($file) ."'");
 	$arg = spip_fetch_array($arg);
       if (!$arg) $refus = 2;
       $arg = $arg['id_document'];
     } else {
+      $arg = intval($arg);
       $file = spip_query("select fichier from spip_documents as documents where id_document='". $arg ."'");
       $file = spip_fetch_array($file);
       if (!$file) $refus = 3;
