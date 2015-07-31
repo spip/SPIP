@@ -137,11 +137,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$type_boucle = $boucle->type_requete;
 
-	list($return,$corps) = $boucle->return;
+	$return = $boucle->return;
 
 	// Boucle recursive : simplement appeler la boucle interieure
 	if ($type_boucle == 'boucle')
-	    return ("$corps\n	return $return;");
+	    return ("\n	return $return;");
 
 	// Cas general : appeler la fonction de definition de la boucle
 	$f = 'boucle_'.strtoupper($type_boucle);	// definition perso
@@ -200,12 +200,12 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Cas {1/3} {1,4} {n-2,1}...
 	$flag_parties = ($boucle->partie AND $boucle->total_parties);
 	$flag_cpt = $flag_parties || // pas '$compteur' a cause du cas 0
-		strpos($corps,'compteur_boucle') ||
 		strpos($return,'compteur_boucle');
 
 	//
 	// Creer le debut du corps de la boucle :
 	//
+	$debut = '';
 	if ($flag_cpt)
 		$debut = "\n		\$compteur_boucle++;";
 
@@ -218,10 +218,10 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$debut .= '
 			if ($x = $Pile[$SP]["lang"]) $spip_lang = $x; // lang_select';
 
-	$debut .= $invalide;
+	$corps = $debut . $invalide;
 
 	if ($boucle->doublons)
-		$debut .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
+		$corps .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
 		index_pile($id_boucle, $primary_key, $boucles)
 		. "; // doublons";
 
@@ -229,8 +229,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	// L'ajouter au corps
 	//
-	$corps = $debut . $corps;
-
 	// Separateur ?
 	if ($boucle->separateur) {
 		$corps .= "\n			\$t1 = $return;
@@ -285,9 +283,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$corps = '
 
 	// RESULTATS
-	while ($objet = @spip_fetch_array($result)) {'
-	. "\n\t\t\$Pile[\$SP] = \$objet;"
-	. "\n$corps\n	}\n";
+	while ($Pile[$SP] = @spip_fetch_array($result)) {'. "\n$corps\n	}\n";
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
@@ -310,7 +306,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	// En absence de champ c'est un decompte : on prend la primary pour
 	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
-	// incompatible avec le cas general)	$init .= 
+	// incompatible avec le cas general)
 	$init .= "spip_abstract_select(\n\t\tarray(\"". 
 		((!$boucle->select) ? $id_field :
 		join("\",\n\t\t\"", array_unique($boucle->select))) .
@@ -415,6 +411,10 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 	return $retour;
 }
 
+function nom_de_fonction($nom)
+{
+  return 'BOUCLE' . ereg_replace("-","_", $nom) . '_';
+}
 
 
 // Production du code PHP a partir de la sequence livree par le phraseur
@@ -425,126 +425,82 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 // avant d'evaluer l'expression (a rendre obsolete tant que possible).
 
 function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere) {
-	if ((!$tableau))
-		return array("''",'');
+	if (!$tableau) return "''";
+        $codes = array();
 	$t = '$t' . ($niv+1);
 
 	for ($i=0; $i<=$niv; $i++) $tab .= "\t";
 
 	foreach ($tableau as $objet) {
 
-		// c = 'code' ; m = 'entete'
-		// rendu[0] = (code, entete) du principal
-		// rendu[1] = (code, entete) du "avant"
-		// rendu[2] = (code, entete) du "apres"
-		// rendu[3] = (code, entete) du "alternatif"
-		unset($rendu);
-		unset($commentaire);
-
 		switch($objet->type) {
 		// texte seul
 		case 'texte':
-			$rendu[0][0] = calculer_texte($objet->texte, $id_boucle, $boucles, $id_mere);
+			$code = calculer_texte($objet->texte, $id_boucle, $boucles, $id_mere);
+			$commentaire='';
+			$avant='';
+			$apres='';
+			$altern = "''";
 			break;
 
 		// inclure
 		case 'include':
-			$rendu[0][0] = calculer_inclure($objet->fichier,
-				$objet->params,
-				$id_boucle,
-				$boucles);
+			$code= calculer_inclure($objet->fichier,
+						$objet->params,
+						$id_boucle,
+						$boucles);
 			$commentaire = "<INCLURE($objet->fichier)>";
+			$avant='';
+			$apres='';
+			$altern = "''";
 			break;
 
 		// boucle
 		case 'boucle':
 			$nom = $objet->id_boucle;
-			// avant
-			$rendu[1] = calculer_liste($objet->cond_avant, $prefix,
-				$id_boucle, $niv+2, $boucles, $nom);
-			// apres
-			$rendu[2] = calculer_liste($objet->cond_apres, $prefix,
-				$id_boucle, $niv+2, $boucles, $nom);
-			// alternatif
-			$rendu[3] = calculer_liste($objet->cond_altern, $prefix,
-				$id_boucle, $niv+1,$boucles, $nom);
-			$rendu[0][0] = $prefix . ereg_replace("-","_", $nom)
-			. '($Cache, $Pile, $doublons, $Numrows, $SP)';
-			$commentaire = "BOUCLE$nom";
+
+			$code = 'BOUCLE' .
+			  ereg_replace("-","_", $nom) . $prefix .
+			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
+			$commentaire='';
+			$avant = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2, $boucles, $nom);
+			$apres = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2, $boucles, $nom);
+			$altern = calculer_liste($objet->cond_altern, $prefix, $id_boucle, $niv+1,$boucles, $nom);
 			break;
 
 		// balise SPIP
 		default: 
-			$rendu[0][0] = calculer_champ($objet->fonctions, 
-				$objet->nom_champ,
-				$id_boucle,
-				$boucles,
-				$id_mere,
-				$objet->etoile);
+
+			$code = calculer_champ($objet->fonctions, 
+					       $objet->nom_champ,
+					       $id_boucle,
+					       $boucles,
+					       $id_mere,
+					       $objet->etoile);
 			$commentaire = "#$objet->nom_champ".($objet->etoile?'*':'');
-			// avant
-			$rendu[1] = calculer_liste($objet->cond_avant, $prefix,
-				$id_boucle, $niv+2,$boucles, $id_mere); 
-			// apres
-			$rendu[2] = calculer_liste($objet->cond_apres, $prefix,
-				$id_boucle, $niv+2,$boucles, $id_mere);
+			$avant = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,$boucles, $id_mere);
+			$apres = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,$boucles, $id_mere);
+			$altern = "''";
 			break;
 
 		} // switch
 
-		// Assembler les elements en simplifiant si possible
-		// le resultat (lisibilite et rapidite)
-		$utiliser_f = false;
-		for ($i = 0; $i<=3; $i++) {
-			if ($rendu[$i][0] == '' OR $rendu[$i][0] == "''") {
-				$rendu[$i][0] = "''";
-			} else {
-				// Ajouter l'entete eventuel
-				if ($rendu[$i][1])
-					$rendu[$i][0] =
-					"eval('".texte_script($rendu[$i][1])."')."
-					."/"."* entete *"."/"
-					."\n$tab".$rendu[$i][0];
-				// Noter le recours eventuel ˆ _f
-				if ($i>0)
-					$utiliser_f = true;
-			}
-		}
-		if ($commentaire)
-			$rendu[0][0] = "/"."* $commentaire *"."/ ".$rendu[0][0];
+		if ($avant == "''") $avant = '';
+		if ($apres == "''") $apres = '';
+		if ($avant||$apres||($altern!="''"))
+		  {
+		    $res = (!$avant ? "" : "$avant . ") . 
+		      $t .
+		      (!$apres ? "" : " . $apres");
 
-		//
-		// (_f(1,principal) ? avant._f().apres : _f().alternatif)
-		// _f() fonctionne avec une pile ; cette structure logique permet
-		// de n'evaluer que ce qui doit l'etre (ne pas evaluer avant/apres
-		// si on veut utiliser sinon, et vice-versa)
-		if ($utiliser_f)
-			$code = "(_f(1,".$rendu[0][0].") ? "
-			. (($rendu[1][0]=="''") ? "" :
-				"\n$tab\t/"."* << *"."/".$rendu[1][0]." .")
-			. "_f()"
-			. (($rendu[2][0]=="''") ? "" :
-				". ".$rendu[2][0]."/"."* >> *"."/")
-			. " : _f()"
-			. (($rendu[3][0]=="''") ? "" :
-				" /"."* sinon: *"."/.".$rendu[3][0])
-			.")";
-		else
-		// eviter les conditionnelles qui forkent le resultat
-		// si le code est '$a ? $b : $c', le parenthesage est obligatoire
-		// quand on est lie a d'autres chaines par des . tout nus
-		// NB/astuce: s'il y a un entete, la formule eval('...').$a ? $b : $c
-		// fonctionne a l'identique de $a ? $b : $c
-		if (strpos($rendu[0][0], '?'))
-			$code = "(".$rendu[0][0].")";
-		else
-			$code = $rendu[0][0];
-
-		$codes[] = $code;
-
+		    if (($res != $t) || ($altern != "''"))
+		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab$altern)";
+		  }
+		$codes[]= (!$commentaire ? $code : 
+			   ("/"."* $commentaire *"."/ " . $code));
 	} // foreach
 
-	return array(join ("\n$tab. ", $codes), '');
+	return join ("\n$tab. ", $codes);
 }
 
 // Prend en argument le source d'un squelette, sa grammaire et un nom.
@@ -608,7 +564,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	}
 
 	// idem pour la racine
-	list ($return,$corps) = calculer_liste($racine, $nom, '',0, $boucles, '');
+	$return = calculer_liste($racine, $nom, '',0, $boucles, '');
 
 
 	// Corps de toutes les fonctions PHP,
@@ -633,7 +589,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 			// Puis envoyer son code
 			$codeboucle = "\n//\n// <$pretty>\n//\n"
-			."function $nom" . ereg_replace("-","_",$id) .
+			."function BOUCLE" . ereg_replace("-","_",$id) . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$boucle->return;
 

@@ -232,11 +232,7 @@ function balise_URL_AUTEUR_dist($p) {
 
 function balise_NOTES_dist($p) {
 	// Recuperer les notes
-	$p->code = '$GLOBALS["les_notes"]';
-	// Vider ensuite les globales des notes recuperees
-	// avec une formule qui renvoit toujours ""
-	$p->code .= '. ($GLOBALS["les_notes"] = $GLOBALS["compt_note"] = '
-	. '($GLOBALS["marqueur_notes"]++)?"":"")';
+	$p->code = 'calculer_notes()';
 	$p->type = 'html';
 	return $p;
 }
