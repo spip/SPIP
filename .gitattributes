@@ -73,6 +73,14 @@ dist/images/cookie-24.gif -text
 dist/images/creer.gif -text
 dist/images/croix-rouge.gif -text
 dist/images/deconnecter-24.gif -text
+dist/images/degrade-etapes-clair-left.gif -text
+dist/images/degrade-etapes-clair-right.gif -text
+dist/images/degrade-etapes-fonce-left.gif -text
+dist/images/degrade-etapes-fonce-right.gif -text
+dist/images/degrade-etapes-rouge-left.gif -text
+dist/images/degrade-etapes-rouge-right.gif -text
+dist/images/degrade-etapes-vert-left.gif -text
+dist/images/degrade-etapes-vert-right.gif -text
 dist/images/degrade.jpg -text
 dist/images/deplierbas.gif -text
 dist/images/deplierhaut.gif -text

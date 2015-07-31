@@ -42,12 +42,12 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		"<title>".
 		textebrut($titre).
 		"</title>
-		<link rel='stylesheet' href='".find_in_path('minipres.css').
+		<link rel='stylesheet' href='".direction_css(find_in_path('minipres.css')).
 		"' type='text/css' media='all' />\n" .
  // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
 		http_script('',  "spip_barre.js") .
 "</head>
-<body".$onLoad.">
+<body".$onLoad." class='minipres'>
 	<div id='minipres'>
 	<h1>".
 	  $titre .
