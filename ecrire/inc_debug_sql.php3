@@ -170,13 +170,14 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
 	  "</head>\n<body>",
 	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
+
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>",$sourcefile,"</b>";
 		echo " <a href='",$self, "&var_mode_objet=$nom_skel&var_mode_affiche=resultat'>resultat</a>";
 		echo " <a href='", $self, "&var_mode_objet=$nom_skel&var_mode_affiche=code'>code</a>";
 		echo "<table width='100%'>\n";
 		$i = 0;
-		$colors = array('#ff00ff', '#00ff00');
+		$colors = array('#c0c0c0', '#c0cad4');
 		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
