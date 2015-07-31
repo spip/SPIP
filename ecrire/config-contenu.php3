@@ -254,7 +254,7 @@ if ($options == "avancees") {
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo "Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
 		partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s'inscrire
-		depuis un formulaire automatis&eacute,, et acc&eacute;deront alors &agrave; l'espace priv&eacute; pour
+		depuis un formulaire automatis&eacute et acc&eacute;deront alors &agrave; l'espace priv&eacute; pour
 		proposer leurs propres articles. <blockquote><i>Lors de la phase d'inscription,
 		les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
 		leur fournissant leurs codes d'acc&egrave;s au site priv&eacute;. Certains
