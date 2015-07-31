@@ -26,17 +26,16 @@ function enfant($leparent) {
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=$row['titre'];
-		$descriptif=$row['descriptif'];
-		$texte=$row['texte'];
 		$lang_rub = $row['lang'];
 		$langue_choisie_rub = $row['langue_choisie'];
 		
-		$titre = couper($titre." ", 50); // largeur maxi
+		$titre = couper(textebrut(typo($titre)), 50); // largeur maxi
 		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style='$style'>".supprimer_tags($titre)."\n";		
+		echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style='$style'>".supprimer_tags($titre)."\n";
 	}
 }
 
+$id_breve = intval($id_breve);
 if ($new != "oui") {
 	$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 	$result = spip_query($query);

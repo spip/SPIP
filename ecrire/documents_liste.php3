@@ -41,7 +41,7 @@ debut_droite();
 			$date=$row['date'];
 			$id_document=$row['id_doc'];
 			$id_rubrique=$row['id_rub'];
-			$titre_rub=$row['titre_rub'];
+			$titre_rub = typo($row['titre_rub']);
 			$fichier = $row['fichier'];
 
 			if (!$titre) $titre = _T('info_document').' '.$id_document;
