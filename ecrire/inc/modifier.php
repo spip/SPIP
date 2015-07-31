@@ -121,7 +121,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 	// Gerer les champs non vides
 	if (isset($options['nonvide']) AND is_array($options['nonvide'])) {
 		foreach ($options['nonvide'] as $champ => $sinon) {
-			if ($c[$champ] === '') {
+			if (isset($c[$champ]) AND $c[$champ] === '') {
 				$c[$champ] = $sinon;
 			}
 		}
