@@ -597,13 +597,14 @@ function test_plugin_actif($plugin){
  *     ```
  *     _T('bouton_enregistrer')
  *     _T('medias:image_tourner_droite')
- *     _T('medias:erreurs', array('nb'=>3)
+ *     _T('medias:erreurs', array('nb'=>3))
+ *     _T("email_sujet", array('spip_lang'=>$lang_usager))
  *     ```
  *
  * @param string $texte
  *     Clé de traduction
  * @param array $args
- *     Couples (variable => valeur) pour passer des variables à la chaîne traduite
+ *     Couples (variable => valeur) pour passer des variables à la chaîne traduite. la variable spip_lang permet de forcer la langue
  * @param array $options
  *     - string class : nom d'une classe a ajouter sur un span pour encapsuler la chaine
  *     - bool force : forcer un retour meme si la chaine n'a pas de traduction

@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Vérification en tâche de fond des différentes mise à jour.
+ *
+ * @package SPIP\Core\Genie\Mise_a_jour
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
