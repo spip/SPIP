@@ -96,10 +96,10 @@ if (!$use_cache) {
 		if (!$row)
 			$ecraser_cache = true;
 
-		if (substr($chapo, 0, 1) == '=') {
+		if (substr($row['chapo'], 0, 1) == '=') {
 			include_ecrire('inc_texte.php3');
 
-			$regs = array('','','',substr($chapo, 1));
+			$regs = array('','','',substr($row['chapo'], 1));
 			list(,$url) = extraire_lien($regs);
 			$url = addslashes($url);
 			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
