@@ -863,7 +863,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'repertoire_plugins' => 'Diret&oacute;rio:',
 
 // S
-'sans_heure' => '<NEW>Tempo livre',
+'sans_heure' => 'sem hora',
 'sauvegarde_fusionner' => 'Combinar a base atual e a c&oacute;pia de seguran&ccedil;a',
 'sauvegarde_fusionner_depublier' => 'Despublicar os objetos fundidos',
 'sauvegarde_url_origine' => 'Eventualmente, URL do site de origem:',
