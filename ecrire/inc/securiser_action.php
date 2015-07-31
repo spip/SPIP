@@ -120,7 +120,7 @@ function caracteriser_auteur($id_auteur=null) {
 			return $caracterisation[$id_auteur] = array($id_auteur, $GLOBALS['visiteur_session']['pass']);
 	}
 
-	if ($caracterisation[$id_auteur]) return $caracterisation[$id_auteur];
+	if (isset($caracterisation[$id_auteur])) return $caracterisation[$id_auteur];
 
 	if ($id_auteur) {
 		include_spip('base/abstract_sql');
