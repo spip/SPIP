@@ -133,11 +133,13 @@
 
 #principal {
 	position: absolute;
-	left: 18em;
+	left: 30%;
+	/*left: 18em;*/
 	top: 0px;
 	margin: 0px;
 	padding: 0px;
-	margin-right: 2em;
+	/*margin-right: 2em;*/
+	margin-right: 3%;
 	margin-top: 1.5em;
 }
 
@@ -152,21 +154,24 @@
 }
 
 #navigation {
-/*	position: fixed;*/
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	width: 14em;
+	width: 24%;
+	/*width: 14em;*/
 	padding: 0px;
 	margin: 0px;
-	margin-left: 1.8em;
+	/*margin-left: 1.8em;*/
+	margin-left: 3%;
 	margin-top: 1.5em;
 }
 
 .encart {
 	float: right;
-	width: 14em;
-	margin-left: 2em;
+	/*width: 14em;*/
+	width: 34%;
+	margin-left: 4%;
+	/*margin-left: 2em;*/
 	margin-top: 1em;
 	margin-bottom: 1em;
 	margin-right: 0px;
