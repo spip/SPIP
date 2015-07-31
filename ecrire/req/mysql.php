@@ -12,6 +12,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_MYSQL_NOPLANES')) define('_MYSQL_NOPLANES', true);
+
 // fonction pour la premiere connexion a un serveur MySQL
 
 // http://doc.spip.org/@req_mysql_dist
