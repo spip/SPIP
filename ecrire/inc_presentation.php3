@@ -1358,7 +1358,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre);
 
-	$ctitre = addslashes(_T('titre_changer_couleur_interface'));
+	$ctitre = entites_html(_T('titre_changer_couleur_interface'));
 	echo "\n<map name='map_couleur'>";
 	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
 	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
@@ -1601,7 +1601,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	// choix de la couleur
 	echo "<td align='right'>";
-	echo "<img src='img_pack/barre-couleurs.gif' alt='".addslashes(_T('titre_changer_couleur_interface'))."' width='70' height='21' border='0' usemap='#map_couleur'>";
+	echo "<img src='img_pack/barre-couleurs.gif' alt=\"".entites_html(_T('titre_changer_couleur_interface'))."\" width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";
