@@ -589,4 +589,9 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
 }
 
+function cron_rubriques($t) {
+	calculer_rubriques();
+	return 1;
+}
+
 ?>

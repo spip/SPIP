@@ -158,4 +158,38 @@ function calculer_taille_dossier ($dir) {
 	return $taille;
 }
 
+
+function cron_invalideur($t) {
+	//
+	// menage des vieux fichiers du cache
+	// marques par l'invalideur 't' = date de fin de fichier
+	//
+
+	retire_vieux_caches();
+
+	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
+
+	// A revoir: il semble y avoir une desynchro ici.
+	
+		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
+		FROM spip_caches WHERE type IN ('t', 'x')"));
+		spip_log("Taille du CACHE: $total_cache octets");
+
+		global $quota_cache;
+		$total_cache -= $quota_cache*1024*1024;
+		if ($quota_cache > 0 AND $total_cache > 0) {
+			$q = spip_query("SELECT id, taille FROM spip_caches
+			WHERE type IN ('t', 'x') ORDER BY id");
+			while ($r = spip_fetch_array($q)
+			AND ($total_cache > $taille_supprimee)) {
+				$date_limite = $r['id'];
+				$taille_supprimee += $r['taille'];
+			}
+			spip_log ("Quota cache: efface $taille_supprimee octets");
+			include_spip('inc/invalideur');
+			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
+		}
+	return 1;
+}
+
 ?>

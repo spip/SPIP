@@ -14,11 +14,10 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function nettoyer_ajax() {
-	$query = "DELETE FROM spip_ajax_fonc  WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)";
-	$res = spip_query($query);
+function cron_ajax ($t) {
+	spip_query("DELETE FROM spip_ajax_fonc
+	WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
+	return 1;
 }
-
-
 
 ?>

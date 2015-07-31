@@ -190,4 +190,19 @@ function calculer_visites($t) {
 	}
 }
 
+//
+// Calcule les stats en plusieurs etapes
+//
+function cron_visites($t) {
+	$encore = calculer_visites($t);
+
+	// Si ce n'est pas fini on redonne la meme date au fichier .lock
+	// pour etre prioritaire lors du cron suivant
+	if ($encore)
+		return (0 - $t);
+
+	return 1;
+}
+
+
 ?>

@@ -13,7 +13,7 @@
 
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire('inc_base');
+include_spip('base/create');
 include_ecrire('inc_abstract_sql');
 
 // Quels formats sait-on extraire ?
@@ -779,6 +779,19 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 	}
 	return $cache[$recherche][$primary];
 }
+
+
+function cron_indexation($t) {
+	$c = count(effectuer_une_indexation());
+	// si des indexations ont ete effectuees, on passe la periode a 0 s
+	## note : (time() - 90) correspond en fait a :
+	## time() - $taches_generales['indexation']
+	if ($c)
+		return (0 - (time() - 90));
+	else
+		return 0;
+}
+
 
 // Si la liste des correspondances tables/id_table n'est pas la, la creer
 if ((isset($GLOBALS['meta']))&&(!isset($GLOBALS['meta']['index_table'])))
