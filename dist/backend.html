@@ -19,7 +19,7 @@
 
 	<BOUCLE_un_article(ARTICLES){id_article}>
 		<item>
-		<title>[(#TITRE|texte_backend)]</title>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
 		<description>[(#LOGO_ARTICLE|right||liens_absolus|texte_backend)][(#TEXTE|liens_absolus|texte_backend)]</description>
