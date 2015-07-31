@@ -418,7 +418,7 @@ sera ignorée) :
 	'info_mois_courant' => 'En la kuranta monato :',
 	'info_mot_cle_ajoute' => 'La jena ŝlosilvorto estas ligita kun',
 	'info_multi_herit' => 'Defaŭlta lingvo',
-	'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, ĉiuj tekstoj de la interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datenoj, formularoj) estos aŭtomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afiŝiĝos en la ĉefa lingvo de la retejo.',
+	'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, ĉiuj tekstoj de la interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datenoj, formularoj) estos aŭtomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afiŝiĝos en la ĉefa lingvo de la retejo.', # MODIF
 	'info_multilinguisme' => 'Multlingvismo',
 	'info_nom_non_utilisateurs_connectes' => 'Via nomo ne aperas en la listo de la ensalutintaj uzantoj.',
 	'info_nom_utilisateurs_connectes' => 'Via nomo aperas en la listo de la ensalutintaj uzantoj.',

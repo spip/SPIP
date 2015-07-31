@@ -413,7 +413,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 	'info_mois_courant' => 'Durant aquest mes:',
 	'info_mot_cle_ajoute' => 'La paraula clau següent ha estat afegida',
 	'info_multi_herit' => 'Idioma per defecte',
-	'info_multi_langues_soulignees' => 'Les <u>llengües subratllades</u> es beneficien d\'una traducció de tots els textos de la interfície. Si seleccioneu aquestes llengües, molts elements del lloc públic (dates, formularis) es traduiran automàticament. En les llengües no subratllades, aquests elements es mostraran en la llengua principal del lloc.',
+	'info_multi_langues_soulignees' => 'Les <u>llengües subratllades</u> es beneficien d\'una traducció de tots els textos de la interfície. Si seleccioneu aquestes llengües, molts elements del lloc públic (dates, formularis) es traduiran automàticament. En les llengües no subratllades, aquests elements es mostraran en la llengua principal del lloc.', # MODIF
 	'info_multilinguisme' => 'Multilingüisme',
 	'info_nom_non_utilisateurs_connectes' => 'El vostre nom no apareix a la llista d\'usuaris/àries connectats/des.',
 	'info_nom_utilisateurs_connectes' => 'El vostre nom apareix a la llista dels usuaris connectats.',

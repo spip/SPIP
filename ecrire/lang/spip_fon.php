@@ -408,7 +408,7 @@ sera ignorée) :
 	'info_mois_courant' => 'sún ɖòkpó ɔ mɛ:',
 	'info_mot_cle_ajoute' => 'zé gbètakɛn gɔná',
 	'info_multi_herit' => 'Gbè ɖébú',
-	'info_multi_langues_soulignees' => 'Nú mi sɔ gbè ɖé ɔ  é jɛ ɖɔ yè ná tínmɛ.',
+	'info_multi_langues_soulignees' => 'Nú mi sɔ gbè ɖé ɔ  é jɛ ɖɔ yè ná tínmɛ.', # MODIF
 	'info_multilinguisme' => 'Gbèguèguè',
 	'info_nom_non_utilisateurs_connectes' => 'nyíkɔ tɔn ɖò mɛ ɖò kánnú lɛ jí á.',
 	'info_nom_utilisateurs_connectes' => 'nyíkɔ mi tɔn nɔ tɔn  ɖò mɛ ɖò kánnú lɛ jí .',

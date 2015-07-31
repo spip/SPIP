@@ -415,7 +415,7 @@ sera ignorée) :
 	'info_mois_courant' => 'Ay içinde :',
 	'info_mot_cle_ajoute' => 'Şu anahtar sözcük eklendi > ',
 	'info_multi_herit' => 'Varsayılan dil :',
-	'info_multi_langues_soulignees' => '<u>Altı çizili dillerin</u> arayüzde tüm metinlerin çevirileri bulunmaktadır. Bu dilleri seçerseniz, kamu sitesinin bir çok elemanı (tarihler, formlar) otomatik olarak çevrilecektir. Altı çizili olmayan diller için ise bu elemanlar sitenin başlıca dilinde görüntülenecektir.',
+	'info_multi_langues_soulignees' => '<u>Altı çizili dillerin</u> arayüzde tüm metinlerin çevirileri bulunmaktadır. Bu dilleri seçerseniz, kamu sitesinin bir çok elemanı (tarihler, formlar) otomatik olarak çevrilecektir. Altı çizili olmayan diller için ise bu elemanlar sitenin başlıca dilinde görüntülenecektir.', # MODIF
 	'info_multilinguisme' => 'Çok dillilik',
 	'info_nom_non_utilisateurs_connectes' => 'Bağlı kullanıcılar listesinde isminiz görünmüyor.',
 	'info_nom_utilisateurs_connectes' => 'Bağlı kullanıcılar listesinde isminiz görünüyor.',

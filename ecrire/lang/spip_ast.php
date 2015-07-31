@@ -419,7 +419,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'A lo llargo d\'esti mes:',
 	'info_mot_cle_ajoute' => 'La pallabra-clave darréu amestóse a',
 	'info_multi_herit' => 'Llíngua por omisión',
-	'info_multi_langues_soulignees' => 'Les <u>llíngües solliñáes</u> beneficiense de la traducción de tolos testos de la interfaz. Si seleiciones estes llíngües, van traducise automáticamente abondos elementos del sitiu públicu (feches, formularios). Pa les llíngües non solliñáes, estos elementos apaecerán na llingua principal del sitiu.',
+	'info_multi_langues_soulignees' => 'Les <u>llíngües solliñáes</u> beneficiense de la traducción de tolos testos de la interfaz. Si seleiciones estes llíngües, van traducise automáticamente abondos elementos del sitiu públicu (feches, formularios). Pa les llíngües non solliñáes, estos elementos apaecerán na llingua principal del sitiu.', # MODIF
 	'info_multilinguisme' => 'Multillingüismu',
 	'info_nom_non_utilisateurs_connectes' => 'El to nome nun apaez na llista d\'usuarios coneutaos.',
 	'info_nom_utilisateurs_connectes' => 'El to nome apaez na llista d\'usuarios coneutáos.',

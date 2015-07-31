@@ -418,7 +418,7 @@ o contatta il tuo hoster.</font>',
 	'info_mois_courant' => 'Durante il mese:',
 	'info_mot_cle_ajoute' => 'La seguente parola chiave è stata aggiunta a',
 	'info_multi_herit' => 'Lingua predefinita',
-	'info_multi_langues_soulignees' => 'Le <u>lingue sottolineate</u> hanno la traduzione di tutti i testi dell\'interfaccia. Se si seleziona una di queste lingue, molti elementi del sito pubblico (date, form) verranno tradotti automaticamente. Per le lingue che non sono sottolineate, invece, tali elementi rimarranno nella lingua principale del sito.',
+	'info_multi_langues_soulignees' => 'Le <u>lingue sottolineate</u> hanno la traduzione di tutti i testi dell\'interfaccia. Se si seleziona una di queste lingue, molti elementi del sito pubblico (date, form) verranno tradotti automaticamente. Per le lingue che non sono sottolineate, invece, tali elementi rimarranno nella lingua principale del sito.', # MODIF
 	'info_multilinguisme' => 'Multilinguismo',
 	'info_nom_non_utilisateurs_connectes' => 'Il tuo nome non appare nella lista degli utenti collegati.',
 	'info_nom_utilisateurs_connectes' => 'Il tuo nome è visibile nella lista degli utenti collegati.',

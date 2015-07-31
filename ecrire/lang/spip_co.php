@@ -422,7 +422,7 @@ sera ignorée) :
 	'info_multi_herit' => 'Lingua predefinita',
 	'info_multi_langues_soulignees' => 'E <u>lingue sottufrisgiate</u> godenu d\'una traduzzione di tutti i testi di l\'interfaccia. 
 		Sè vo sceglite ste lingue, seranu tradutti in autumàticu assai elementi di u situ pùbblicu (date, furmulari, ...). 
-		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.',
+		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.', # MODIF
 	'info_multilinguisme' => 'Multilinguìsimu',
 	'info_nom_non_utilisateurs_connectes' => 'U vostru nome ùn cumparisce micca in a lista di l\'utilizatori cunnessi.',
 	'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l\'utilizatori cunnessi.',

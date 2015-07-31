@@ -428,7 +428,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 	'info_multi_herit' => 'Armaqat aru',
 	'info_multi_langues_soulignees' => '&lt;u&gt;Arunakaxa  sirqitanakaxa&lt;/u&gt; ajanutxa taqpach sawutanak mä jaqukipaw churi.
 
-Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ laphinaka) justupak jaqukiptatani. Jani aru sirqitanakataki, qamawit arun  uñstani.',
+Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ laphinaka) justupak jaqukiptatani. Jani aru sirqitanakataki, qamawit arun  uñstani.', # MODIF
 	'info_multilinguisme' => 'Walja arunaka',
 	'info_nom_non_utilisateurs_connectes' => 'Sutimax janiw uñstkiti  jaqi tantanakan chinuta',
 	'info_nom_utilisateurs_connectes' => 'Sutimax uñstiw jaqi tantanakan chinuta',

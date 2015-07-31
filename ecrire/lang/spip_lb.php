@@ -417,7 +417,7 @@ oder kontaktéiert äre Provider.</span>',
 	'info_mois_courant' => 'An dësem Mount:',
 	'info_mot_cle_ajoute' => 'D\'Schlësselwuert gouf derbäi gesat bei',
 	'info_multi_herit' => 'Haapt-Sprooch',
-	'info_multi_langues_soulignees' => 'Déi <u>ënnerstrache Sproochen</u> hun eng komplett Iwersetzung vum Interface. Wann dier dës Sprooche wielt, da ginn vill Elementer vum öffentlëche Site (Datumen, Formulairen) automatesch iwersaat. Bei de nët ënnerstrache Sproochen erschéngen dës Elementer an der Haaptsprooch vum Site.',
+	'info_multi_langues_soulignees' => 'Déi <u>ënnerstrache Sproochen</u> hun eng komplett Iwersetzung vum Interface. Wann dier dës Sprooche wielt, da ginn vill Elementer vum öffentlëche Site (Datumen, Formulairen) automatesch iwersaat. Bei de nët ënnerstrache Sproochen erschéngen dës Elementer an der Haaptsprooch vum Site.', # MODIF
 	'info_multilinguisme' => 'Verschidden Sproochen',
 	'info_nom_non_utilisateurs_connectes' => 'Äre Numm ass nët op der Lëscht vun den ugemelden Benotzer.',
 	'info_nom_utilisateurs_connectes' => 'Äre Numm kënnt op d\'Lëscht vun den ugemelten Benotzer.',

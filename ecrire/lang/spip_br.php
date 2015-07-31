@@ -417,7 +417,7 @@ sera ignorée) :
 	'info_mois_courant' => 'E-kerzh ar miz :',
 	'info_mot_cle_ajoute' => 'Ar ger-stur-mañ zo bet ouzhpennet',
 	'info_multi_herit' => 'Yezh dre ziouer',
-	'info_multi_langues_soulignees' => 'Ar <u>yezhoù islinennet</u> zo bet troet holl destennoù an etrefas enne. Ma tibabit ar yezhoù-se e vo troet o-unan ul lodenn vat eus elfennoù al lec\'hienn (deiziadoù, furmskridoù, hag all). Evit ar yezhoù n\'int ket islinennet e vo an elfennoù-se e yezh pennañ al lec\'hienn.',
+	'info_multi_langues_soulignees' => 'Ar <u>yezhoù islinennet</u> zo bet troet holl destennoù an etrefas enne. Ma tibabit ar yezhoù-se e vo troet o-unan ul lodenn vat eus elfennoù al lec\'hienn (deiziadoù, furmskridoù, hag all). Evit ar yezhoù n\'int ket islinennet e vo an elfennoù-se e yezh pennañ al lec\'hienn.', # MODIF
 	'info_multilinguisme' => 'Liesyezhegezh',
 	'info_nom_non_utilisateurs_connectes' => 'N\'emañ ket hoc\'h  anv war roll an implijerien kevreet.',
 	'info_nom_utilisateurs_connectes' => 'Gwelet e vez hoc\'h anv war roll an implijerien kevreet.',

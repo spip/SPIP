@@ -411,7 +411,7 @@ För att bekräfta din nya adress måste du gå till
 	'info_mois_courant' => 'I månaden:',
 	'info_mot_cle_ajoute' => 'Följande nyckelord las till',
 	'info_multi_herit' => 'Förvalt språk',
-	'info_multi_langues_soulignees' => 'För de <u>understrukna språken</u> tillhandahåller SPIP en översättning av all text i gränssnittet. Om du väljer dessa språk, kommer många delar av den publika delen (datum, formulär) att översättas automatiskt. För de språk som inte är understrukna, kommer de delarna att vara i sajtens huvudspråk.',
+	'info_multi_langues_soulignees' => 'För de <u>understrukna språken</u> tillhandahåller SPIP en översättning av all text i gränssnittet. Om du väljer dessa språk, kommer många delar av den publika delen (datum, formulär) att översättas automatiskt. För de språk som inte är understrukna, kommer de delarna att vara i sajtens huvudspråk.', # MODIF
 	'info_multilinguisme' => 'Flerspråkig',
 	'info_nom_non_utilisateurs_connectes' => 'Ditt namn visas inte i listan över anslutna användare.',
 	'info_nom_utilisateurs_connectes' => 'Ditt namn visas i listan över anslutna användare.',

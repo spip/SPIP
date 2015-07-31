@@ -413,7 +413,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'info_mois_courant' => 'No mês corrente:',
 	'info_mot_cle_ajoute' => 'A palavra-chave a seguir foi associada a',
 	'info_multi_herit' => 'Idioma padrão',
-	'info_multi_langues_soulignees' => 'Os <u>idiomas sublinhados</u> possuem tradução para todos os textos da interface. Se você escolher esses idiomas, diversos elementos do site público (datas, formulários) são traduzidos automaticamente. Para os idiomas não sublinhados, estes elementos aparecerão no idioma principal do site.',
+	'info_multi_langues_soulignees' => 'Os <u>idiomas sublinhados</u> possuem tradução para todos os textos da interface. Se você escolher esses idiomas, diversos elementos do site público (datas, formulários) são traduzidos automaticamente. Para os idiomas não sublinhados, estes elementos aparecerão no idioma principal do site.', # MODIF
 	'info_multilinguisme' => 'Multilinguismo',
 	'info_nom_non_utilisateurs_connectes' => 'Seu nome não aparece na relação de usuários conectados.',
 	'info_nom_utilisateurs_connectes' => 'Seu nome aparecerá na relação de usuários conectados.',

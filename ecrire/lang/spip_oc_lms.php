@@ -419,7 +419,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_mois_courant' => 'Dins lo corrent dau mes:',
 	'info_mot_cle_ajoute' => 'S\'es apondut lo mot clau seguent a ',
 	'info_multi_herit' => 'Lenga predefinida',
-	'info_multi_langues_soulignees' => 'Las <u>lengas solinhadas</u> benefícian d\'una revirada de tots los texts de l\'interfàcia. Se seleccionatz quelas lengas, fòrça elements dau sit public (datas, formularis) se revirarán automaticament. Per las lengas non solinhadas, quilhs elements apareisserán dins la lenga principala dau sit.',
+	'info_multi_langues_soulignees' => 'Las <u>lengas solinhadas</u> benefícian d\'una revirada de tots los texts de l\'interfàcia. Se seleccionatz quelas lengas, fòrça elements dau sit public (datas, formularis) se revirarán automaticament. Per las lengas non solinhadas, quilhs elements apareisserán dins la lenga principala dau sit.', # MODIF
 	'info_multilinguisme' => 'Multilingüisme',
 	'info_nom_non_utilisateurs_connectes' => 'Vòstre nom apareis pas dins la tiera daus utilizaires connectats.',
 	'info_nom_utilisateurs_connectes' => 'Vòstre nom apareis dins la tiera daus utilizaires connectats.',

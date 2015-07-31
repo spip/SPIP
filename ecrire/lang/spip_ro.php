@@ -418,7 +418,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'În timpul lunii :',
 	'info_mot_cle_ajoute' => 'Cuvântul-cheie următor a fost adăugat la',
 	'info_multi_herit' => 'Limba implicită',
-	'info_multi_langues_soulignees' => '<u>Limbile subliniate</u> beneficiază de o traducere a tuturor textelor interfeţei. Dacă veţi selecţiona o astfel de limbă, numeroase elemente ale site-ului public (date, formulare) vor fi traduse în mod automat. Pentru limbile nesubliniate, aceste elemente vor apare în limba principală a site-ului.',
+	'info_multi_langues_soulignees' => '<u>Limbile subliniate</u> beneficiază de o traducere a tuturor textelor interfeţei. Dacă veţi selecţiona o astfel de limbă, numeroase elemente ale site-ului public (date, formulare) vor fi traduse în mod automat. Pentru limbile nesubliniate, aceste elemente vor apare în limba principală a site-ului.', # MODIF
 	'info_multilinguisme' => 'Multilingvism',
 	'info_nom_non_utilisateurs_connectes' => 'Numele dumneavoastră nu apare în lista utilizatorilor conectaţi.',
 	'info_nom_utilisateurs_connectes' => 'Numele dumneavoastră apare în lista utilizatorilor conectaţi.',
