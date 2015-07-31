@@ -437,7 +437,8 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
     
     
 		if($sousmenu) {
-			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
+			//offset is not necessary when javascript is active. It can be usefull when js is disabled
+      $offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			if ($offset<0){	$offset = 0; }
 
 			$width=0;
@@ -461,7 +462,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 				if($width>$max_width) $max_width+=$largitem;
 			}
 			$res .= "</ul></div>\n";
-			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;$spip_lang_left:{$offset}px;'><ul>".$res;
+			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;'><ul>".$res;
 		}
 		
 	return $res;
