@@ -27,13 +27,10 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
 
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
-	$mode = isset($args[0]) ? $args[0] : 'redac';
+	list($mode, $id, $focus) = $args;
 	if (!test_mode_inscription($mode))
 		return '';
-	else
-		return array($mode, 
-			     (isset($args[2]) ? $args[2] : ''),
-			     (isset($args[1]) ? $args[1] : ''));
+	else return array($mode, $focus, $id);
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
