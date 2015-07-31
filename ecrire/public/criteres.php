@@ -682,14 +682,13 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$arg = "FIELD($arg,\" . _q($var) . \")";
-	if ($boucles[$idb]->group) $arg = "SUM($arg)";
-	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
-	$op = array("'$op'", "'cpt$cpt'", 0);
+	$arg = "'FIELD($arg,' . _q($var) . ')'";
+	$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
+	$op = array("'$op'", $arg, 0);
 
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 
-	$boucles[$idb]->having[]= (!$crit->cond ? $op :
+	$boucles[$idb]->where[]= (!$crit->cond ? $op :
 	  array("'?'",
 		calculer_argument_precedent($idb, $col, $boucles),
 		$op,
