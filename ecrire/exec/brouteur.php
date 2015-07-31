@@ -111,7 +111,7 @@ function exec_brouteur_dist()
 		
 		echo "<iframe width='100%' id='iframe$i' name='iframe$i'",
 			(" src='" . generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i'")),
-		  " class='iframe-bouteur' height='",
+		  " class='iframe-brouteur' height='",
 		  $hauteur_table,
 		  "'></iframe>";
 
@@ -121,7 +121,7 @@ function exec_brouteur_dist()
 
 	// fixer la hauteur du brouteur de maniere a remplir l'ecran
 	echo "<script type='text/javascript'><!--
-		jQuery('iframe.iframe-bouteur').height(
+		jQuery('iframe.iframe-brouteur').height(
 			Math.max((window.innerHeight||0)-190,300)
 		);
 	//--></script>\n";
