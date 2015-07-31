@@ -1,5 +1,9 @@
 <?php
 
+// Appel spip
+if (!function_exists('find_in_path')) {
+	include ('ecrire/inc_version.php3');
+}
 // Reglage du $fond
 if (isset($contexte_inclus['fond']))
 	$fond = $contexte_inclus['fond'];
@@ -17,14 +21,10 @@ if (isset($contexte_inclus['delais']))
 if (strstr($fond, '/')) {
 	die ("Faut pas se gener");
 }
-if (!function_exists('find_in_path')) {
-	include ('ecrire/inc_version.php3');
-}
-if (find_in_path("$fond.html")) {
-	include ("inc-public.php3");
-} else {
+if (!find_in_path("$fond.html")) {
 	spip_log("page.php3: find_in_path ne trouve pas le squelette $fond");
+	$fond = '404';
 }
-
+include ("inc-public.php3");
 
 ?>
