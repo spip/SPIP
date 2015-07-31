@@ -21,8 +21,8 @@ include_spip('base/abstract_sql');
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-// http://doc.spip.org/@action_autoriser_dist
-function action_autoriser_dist()
+// http://doc.spip.org/@action_acceder_document_dist
+function action_acceder_document_dist()
 {
   global $auteur_session; // positionne par verifier_visiteur dans inc_version
   if ($auteur_session['statut'] == '0minirezo' 

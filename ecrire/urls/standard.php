@@ -48,13 +48,8 @@ function generer_url_auteur($id_auteur) {
 
 // http://doc.spip.org/@generer_url_document
 function generer_url_document($id_document) {
-	if (intval($id_document) <= 0)
-		return '';
-	if (($GLOBALS['meta']["creer_htaccess"]) == 'oui')
-		return generer_url_action('autoriser',"arg=$id_document", true);
-	$row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document"));
-	if ($row) return get_spip_doc($row['fichier']);
-	return '';
+	include_spip('inc/documents');
+	return generer_url_document_dist($id_document);
 }
 
 // http://doc.spip.org/@recuperer_parametres_url

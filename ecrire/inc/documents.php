@@ -16,6 +16,42 @@ include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
 
+
+// donne le chemin du fichier relatif a _DIR_IMG
+// pour stockage 'tel quel' dans la base de donnees
+// http://doc.spip.org/@set_spip_doc
+function set_spip_doc($fichier) {
+	if (strpos(_DIR_IMG, $fichier) === 0)
+		return substr($fichier, strlen(_DIR_IMG));
+	else
+		return $fichier; // ex: fichier distant
+}
+
+// donne le chemin complet du fichier
+// http://doc.spip.org/@get_spip_doc
+function get_spip_doc($fichier) {
+	if (preg_match(',^\w+://,', $fichier))
+		return $fichier;
+	else
+		return (strpos(_DIR_IMG, $fichier) === false)
+			? _DIR_IMG . $fichier
+			: $fichier;
+}
+
+function generer_url_document_dist($id_document) {
+	if (intval($id_document) <= 0)
+		return '';
+	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document = $id_document"));
+	if ($row) {
+		if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
+		AND $row['distant'] == 'oui')
+			return generer_url_action('acceder_document', "arg=$id_document", true);
+		else
+			return get_spip_doc($row['fichier']);
+	}
+	return '';
+}
+
 //
 // Vignette pour les documents lies
 //

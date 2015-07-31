@@ -229,13 +229,8 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 		$update = "mode='$mode', ";
 	}
 
-	// Pour les fichiers distants remettre l'URL de base
-	$path =  ($distant == 'oui')
-	  ? _q($source)
-	  : ("'" . addslashes(set_spip_doc($fichier)) . "'");
-
 	// Mise a jour des donnees
-	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier=$path WHERE id_document=$id_document");
+	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q(set_spip_doc($fichier))." WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
