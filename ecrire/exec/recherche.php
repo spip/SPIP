@@ -31,12 +31,26 @@ function exec_recherche_dist() {
 		unset($tables['forum']);
 
 		$results = recherche_en_base($recherche, $tables);
-		$modifier = false;
+
+/*		$modifier = false;
 		foreach ($results as $table => $r) {
 			foreach ($r as $id => $x) {
 				$modifier |= autoriser('modifier', $table, $id);
 			}
 		}
+*/
+
+		// Ajouter la recherche par identifiant
+		if (preg_match(',^[0-9]+$,', $recherche)
+		AND $id = intval($recherche))
+		foreach ($tables as $table => $x) {
+			$s = spip_query($q = "SELECT ".id_table_objet($table)." FROM spip_".table_objet($table)." WHERE ".id_table_objet($table)."="._q($id));
+			if ($t = spip_fetch_array($s)
+			AND autoriser('voir', $table, $id)
+			AND !isset($results[$table][$id]))
+				$results[$table][$id] = array();
+		}
+
 	}
 
 	debut_gauche();
