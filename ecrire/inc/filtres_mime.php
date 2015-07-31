@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/filtres');
 
 // Fichier des filtres d'incrustation d'un document selon son type MIME
 // Les 7 familles de base ne font rien sauf celle des textes
