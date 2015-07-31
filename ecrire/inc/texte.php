@@ -529,7 +529,6 @@ define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,
 
 // http://doc.spip.org/@corriger_typo
 function corriger_typo($letexte, $lang='') {
-	static $typographie = array();
 	// Plus vite !
 	if (!$letexte) return $letexte;
 
@@ -554,9 +553,8 @@ function corriger_typo($letexte, $lang='') {
 	$e = ($e === $letexte);
 
 	// Charger & appliquer les fonctions de typographie
-	if (!isset($typographie[$lang]))
-		$typographie[$lang] = charger_fonction(lang_typo($lang), 'typographie');
-	$letexte = $typographie[$lang]($letexte);
+	$typographie = charger_fonction(lang_typo($lang), 'typographie');
+	$letexte = $typographie($letexte);
 
 	// Les citations en une autre langue, s'il y a lieu
 	if (!$e) $letexte = echappe_retour($letexte, 'multi');
