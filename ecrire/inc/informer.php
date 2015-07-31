@@ -42,7 +42,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 		}
 	}
 
-	$rac = htmlentities($rac);
+	$rac = spip_htmlentities($rac);
 
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau

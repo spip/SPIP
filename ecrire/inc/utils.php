@@ -82,7 +82,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	include_spip('inc/minipres');
 	echo minipres(_T('forum_titre_erreur'),
-		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities($d).'</b>')));
+		 _T('fichier_introuvable', array('fichier'=> '<b>'.spip_htmlentities($d).'</b>')));
 	exit;
 }
 

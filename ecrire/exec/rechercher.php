@@ -33,7 +33,7 @@ function exec_rechercher_dist()
 {
 	$id = intval(_request('id'));
 	$exclus = intval(_request('exclus'));
-	$rac = htmlentities(_request('rac'));
+	$rac = spip_htmlentities(_request('rac'));
 	$type = _request('type');
 	$do  = _request('do');
 	if (preg_match('/^\w*$/', $do))
@@ -143,7 +143,7 @@ function proposer_item ($ids, $titles, $rac, $type, $do)
 
 	if (!$ids)
 		return "<br /><br /><div style='padding: 5px; color: red;'><b>"
-		.htmlentities($type)
+		.spip_htmlentities($type)
 		."</b> :  "._T('avis_aucun_resultat')."</div>";
 
 	$ret = '';
