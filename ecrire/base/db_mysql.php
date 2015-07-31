@@ -26,8 +26,9 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		$ok = spip_mysql_selectdb($db);
 		if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
 			mysql_query("set sql_mode=''");
-		if (isset($GLOBALS['meta']['charset_sql_connexion']))
-			mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_connexion']));
+		$x = isset($GLOBALS['meta']['charset_sql_connexion']) ?
+		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
+		mysql_query("SET NAMES ". _q($x));
 	}
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($ok ? "operationnelle sur $link" : 'impossible'));

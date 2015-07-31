@@ -34,15 +34,17 @@ function lire_metas() {
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL) {
 	if (!$nom) return;
-	$GLOBALS['meta'][$nom] = $valeur; 
+	$GLOBALS['meta'][$nom] = $valeur;
+
 	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
-	$r = spip_query("SELECT impt FROM spip_meta WHERE nom=" . _q($nom));
-	$r = sql_fetch($r);
-		// conserver la valeur de impt si existante
-	if ($r) {
+	$res = sql_fetsel("impt,valeur", 'spip_meta', "nom=" . _q($nom));
+	// conserver la valeur de impt si existante
+	// et ne pas detruire le cache si affectation a l'identique
+	if ($res) {
+		if ($valeur == $res['valeur']) return;
 		$r = ($importable === NULL) ? ''
-		    : ", impt=" .  _q($importable);
-			spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
+		: (", impt=" .  _q($importable));
+		spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
 	} else
 		spip_query("INSERT INTO spip_meta (nom,valeur,impt) VALUES (" .  _q($nom) . "," . _q($valeur) ."," .  _q($importable) . ')');
 	spip_unlink(_FILE_META);
