@@ -139,12 +139,14 @@ function echappe_html($letexte,$source) {
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
 		$regexp_echap_cadre = "<cadre>((.*?))<\/cadre>";
-		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)/si";
+		$regexp_echap_quote = "<quote>((.*?))<\/quote>";
+		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_quote)/si";
 	} else {
 		$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
 		$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
 		$regexp_echap_cadre = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
-		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
+		$regexp_echap_quote = "<quote>(([^<]|<[^/]|</[^q]|</q[^u]|</qu[^o]|</quo[^t]|</quot[^e]|<\/quote[^>])*)<\/quote>";
+		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_quote)";
 	}
 
 	while (($flag_pcre && preg_match($regexp_echap, $letexte, $regs))
@@ -180,6 +182,11 @@ function echappe_html($letexte,$source) {
 			$total_lignes = count(explode("\n", $lecode));
 
 			$les_echap[$num_echap] = "<form><textarea readonly='readonly' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+		}
+		if ($regs[10]) {
+			// Echapper les <quote>...</quote>
+			$lecode = $regs[11];
+			$les_echap[$num_echap] = "<div class='spip_quote'>".$lecode."</div>";
 		}
 
 		$pos = strpos($letexte, $regs[0]);
@@ -778,8 +785,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "\n<p class=\"spip\">", $letexte);
 		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
 		$letexte = str_replace("\n", " ", $letexte);
-		$letexte = str_replace("<quote>", "<div class='spip_quote'>", $letexte);
-		$letexte = str_replace("<\/quote>", "</div'>", $letexte);
 	}
 	else {
 		$cherche1 = array(
@@ -799,8 +804,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 			/* 13 */	"/<p>/",
 			/* 14 */	"/\n/",
-			/* 16 */	"/<quote>/",
-			/* 16 */	"/<\/quote>/"
 		);
 		$remplace1 = array(
 			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
@@ -819,8 +822,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 12 */	"\n<p class=\"spip\">",
 			/* 13 */	"<p class=\"spip\">",
 			/* 14 */	" ",
-			/* 15 */	"<div class=\"spip_quote\">",
-			/* 16 */	"</div>"
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
