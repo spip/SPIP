@@ -276,8 +276,8 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 		}
 		if (strlen($titre)){
 			$s .= "<a href='" . lien_voir_objet($type,$primary,$id_objet) . "'"
-			  . "' title='" . _T('info_numero_abbreviation'). "$id_objet'"
-			  .">";
+				. " title='" . _T('info_numero_abbreviation'). "$id_objet'"
+				. ">";
 			$s .= $titre;
 			$s .= "</a>";
 		}

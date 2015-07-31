@@ -63,7 +63,7 @@ function inc_formater_article_dist($row)
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
-  . "' title='" . _T('info_numero_abbreviation'). "$id_article"
+	. " title='" . _T('info_numero_abbreviation'). "$id_article"
 	. (!$descriptif ? '' : 
 	     (':'.attribut_html(typo($descriptif)).'"'))
 	. "' dir='$lang_dir'>"
