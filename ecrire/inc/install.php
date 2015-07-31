@@ -272,10 +272,10 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			? "\n<option value='pg'$p>"._L('PostGreSQL')."</option>"
 			: '')
 		. (($sqlite2)
-			? "\n<option value='sqlite2'$s2>"._L('SQLite2')."</option>"
+			? "\n<option value='sqlite2'$s2>"._L('SQLite 2')."</option>"
 			: '')
 		. (($sqlite3)
-			? "\n<option value='sqlite3'$s3>"._L('SQLite3')."</option>"
+			? "\n<option value='sqlite3'$s3>"._L('SQLite 3')."</option>"
 			: '')
 		   . "\n</select></legend></fieldset>")
 	)
