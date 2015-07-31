@@ -967,7 +967,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	if ($spip_display == 1) {
 		if ($onglet_ref == $onglet){
 			echo "\n<td  class='iconeon' valign='middle'>";
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='black'><b>$texte</b></font>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='black'><b>$texte</b></font>";
 			echo "</td>";
 		}
 		else {
@@ -985,16 +985,18 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			echo "</td>";
 			}
 			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
-			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='black'><b>$texte</b></font> &nbsp;";
+			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='black'><b>$texte</b></font> &nbsp;";
 			echo "</td>";
 		}
 		else {
 			onglet_relief_inter();
-			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
 			if (strlen($icone)>3){
-				echo "&nbsp; <img src='img_pack/$icone'  alt='o' border=0 align='middle'>";
+				echo "\n<td class='reliefblanc' height=40 valign='middle'>";
+				echo "<a href='$lien' class='icone'><img src='img_pack/$icone' border=0></a>";
+				echo "</td>";
 			}
-			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
+			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
+			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><b>$texte</b></font></a> &nbsp;";
 			echo "</td>";
 		}
 	}
@@ -1063,13 +1065,13 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$alt = " alt=\"$texte\"";
 	}
 	else {
-		$hauteur = 70;
+		$hauteur = 80;
 		$largeur = 80;
 	}
 
 	if (eregi("^javascript:",$lien)){
 		$java_lien = substr($lien, 11, strlen($lien));
-		$onClick = " onClick=\"$java_lien\"";
+		$onClick = "";
 		$a_href = '<script language="JavaScript"><!--' . "\n"
 			. 'document.write("<a href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
@@ -1084,7 +1086,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	}
 
 	if ($rubrique_icone == $rubrique){
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\" $onClick>";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgrison\" $onClick>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1093,12 +1095,12 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	} 
 	else {
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1107,7 +1109,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	}
@@ -1342,7 +1344,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Edition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
+		icone_bandeau_principal ("&Eacute;dition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
 	echo "</td>";
@@ -1520,7 +1522,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "<span class='fondgris'
 				onMouseOver=\"changeclass(this,'fondgrison2')\"
 				onMouseOut=\"changeclass(this,'fondgris')\"><a
-				href='". $lien->getUrl() ."'><font color='black'>Interface
+				href='". $lien->getUrl() ."' class='icone'><font color='black'>Interface
 				simplifi&eacute;e</font></a></span> <span style='padding: 3px;
 				margin: 1px; border: 1px solid $couleur_claire; color:
 				$couleur_claire'><b>interface compl&egrave;te</b></span>";
@@ -1533,7 +1535,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				simplifi&eacute;e</b></span> <span class='fondgris'
 				onMouseOver=\"changeclass(this,'fondgrison2')\"
 				onMouseOut=\"changeclass(this,'fondgris')\"><a
-				href='". $lien->getUrl() ."'><font color='black'>interface
+				href='". $lien->getUrl() ."' class='icone'><font color='black'>interface
 				compl&egrave;te</font></a></span>";
 		}
 
@@ -1735,10 +1737,12 @@ function debut_droite() {
 			echo "<p>";
 
 			echo "<div align='right'>";
-			$link = new Link('index.php3?secu=oui');
+			echo "<a href='index.php3?secu=oui'><b>Afficher les informations de s&eacute;curit&eacute;</b></a>";
+			/*$link = new Link('index.php3?secu=oui');
 			echo $link->getForm('GET');
 			echo "<input type='submit' class='fondo' name='submit' value='Afficher les informations de s&eacute;curit&eacute;'>\n";
-			echo "</form></div>\n";
+			echo "</form>"; */
+			echo "</div>\n";
 
 			fin_cadre_enfonce();
 		}
