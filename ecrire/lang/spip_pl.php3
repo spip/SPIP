@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'access_interface_graphique' => 'Powr&oacute;t do pe&#322;nego interfejsu graficznego',
+'access_mode_texte' => 'Uproszczony interfejs - tryb tekstowy',
 'admin_modifier_article' => 'Modyfikuj artyku&#322;',
 'admin_modifier_auteur' => 'Modyfikuj autora',
 'admin_modifier_breve' => 'Modyfikuj news',
@@ -167,14 +169,17 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 
 
 // C
-'cache_mode_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
-'cache_mode_non_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
-'cache_modifiable_webmestre' => '<NEW>Ces param&egrave;tres sont modifiables par le webmestre du site.',
+'cache_mode_compresse' => 'Pliki cache zosta&#322;y zapisane w postaci skompresowanej.',
+'cache_mode_non_compresse' => 'Pliki cache zosta&#322;y zapisane w trybie nieskompresowanym',
+'cache_modifiable_webmestre' => 'Te parametry mo&#380;e zmienia&#263; webmaster serwisu.',
 'calendrier_synchro' => 'Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b>, mo&#380;esz go zsynchronizowa&#263; z informacjami tego serwisu.',
+'confirm_changer_statut' => 'Uwaga, czy na pewno chcesz zmieni&#263; status tego elementu ? Kontynuowa&#263; ?',
 
 
 // D
+'date_aujourdhui' => 'dzi&#347;',
 'date_avant_jc' => 'P.N.E.',
+'date_dans' => 'w @terminie@',
 'date_de_mois_1' => '@j@ stycznia',
 'date_de_mois_10' => '@j@ pa&#378;dziernika',
 'date_de_mois_11' => '@j@ listopada',
@@ -187,12 +192,16 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'date_de_mois_7' => '@j@ lipca',
 'date_de_mois_8' => '@j@ sierpnia',
 'date_de_mois_9' => '@j@ wrze&#347;nia',
+'date_demain' => 'jutro',
 'date_fmt_heures_minutes' => '@h@h@m@min',
 'date_fmt_jour_heure' => '@jour@ o @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => '@date@ @nomjour@ ',
+'date_heures' => 'godziny',
+'date_hier' => 'wczoraj',
+'date_il_y_a' => 'jest @delai@',
 'date_jnum1' => '1',
 'date_jnum10' => '10',
 'date_jnum11' => '11',
@@ -231,6 +240,9 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'date_jour_5' => 'Czwartek',
 'date_jour_6' => 'Pi&#261;tek',
 'date_jour_7' => 'Sobota',
+'date_jours' => 'dni',
+'date_minutes' => 'minuty',
+'date_mois' => 'miesi&#261;c',
 'date_mois_1' => 'Stycze&#324;',
 'date_mois_10' => 'Pa&#378;dziernik',
 'date_mois_11' => 'Listopad',
@@ -248,6 +260,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'date_saison_2' => 'wiosna',
 'date_saison_3' => 'lato',
 'date_saison_4' => 'jesie&#324;',
+'date_semaines' => 'tygodnie',
 'diff_para_ajoute' => 'Dodany akapit',
 'diff_para_deplace' => 'Akapit przeniesiony',
 'diff_para_supprime' => 'Akapit usuni&#281;ty',
@@ -257,12 +270,12 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
 'dirs_preliminaire' => 'Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
 'dirs_probleme_droits' => '<b>Problem z pozwoleniami dost&#281;pu</b>',
-'dirs_repertoires_absents' => '<MODIF><B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej w niew&#322;a&#347;ciwym miejscu wystepuj&#261; du&#380;e i ma&#322;e litery.
-  Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i duzych liter.
+'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
+  <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
+  Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i du&#380;ych liter.
   Je&#347;li rzeczywi&#347;cie wielko&#347;&#263; liter jest r&oacute;&#380;na, zmie&#324; nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
   <P>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
-'dirs_repertoires_suivants' => '<MODIF><B>Nast&#281;puj&#261;ce katalogi nie s&#261; udost&#281;pnione do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_suivants' => '<B>Nast&#281;puj&#261;ce katalogi nie s&#261; skonfigurowane do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
   <P>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
@@ -309,7 +322,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'entree_titre_image' => 'Tytu&#322; obrazka:',
 'entree_titre_obligatoire' => '<B>Tytu&#322;</b> [Obowi&#261;zkowo]<BR>',
 'entree_url' => 'URL Twojej strony',
-'envoi_via_le_site' => '<NEW>Envoi via le site',
+'envoi_via_le_site' => 'Wy&#347;lij ze strony',
 'erreur_boucle_double' => 'BOUCLE@id@: podw&oacute;jna definicja',
 'erreur_boucle_fermant' => 'BOUCLE@id@: brakuje znacznika zamykaj&#261;cego',
 'erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
@@ -330,7 +343,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'form_forum_message_auto' => '(to jest wiadomo&#347;&#263; automatyczna)',
 'form_forum_pass' => 'has&#322;o:',
 'form_forum_probleme_mail' => 'Problem z poczt&#261;: Tw&oacute;j identyfikator nie mo&#380;e zosta&#263; wys&#322;any.',
-'form_forum_voici1' => '<MODIF>Oto Tw&oacute;j identyfikator do brania udzia&#322;u w forum
+'form_forum_voici1' => 'Oto Tw&oacute;je dane, kt&oacute;re pozwol&#261; Ci wzi&#261;&#263; udzia&#322; w rozwoju serwisu
 "@nom_site_spip@" (@adresse_site@/):',
 'form_forum_voici2' => 'Oto Tw&oacute;j identyfikator do zatwierdzania artyku&#322;&oacute;w dla
 strony "@nom_site_spip@" (@adresse_site@/ecrire/):',
@@ -364,7 +377,7 @@ Dzi&#281;kujemy za uczestnictwo
 'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
 'form_pet_probleme_technique' => 'Problem techniczny, podpisy s&#261; tymczasowo zawieszone.',
 'form_pet_signature_pasprise' => 'Tw&oacute;j podpis zosta&#322; zlekcewa&#380;ony.',
-'form_pet_signature_validee' => '<MODIF>Tw&oacute;j podpis jest prawid&#322;owy. Pojawi si&#281; po zaktualizowaniu strony. Dzi&#281;kujemy!',
+'form_pet_signature_validee' => 'Tw&oacute;j podpis zosta&#322; zatwierdzony. Dzi&#281;kujemy!',
 'form_pet_site_deja_enregistre' => 'Ta strona jest ju&#380; zarejestrowana',
 'form_pet_url_invalide' => 'Wpisany URL nie jest prawid&#322;owy.',
 'form_pet_votre_email' => 'Tw&oacute;j adres e-mail ',
@@ -389,16 +402,16 @@ Dzi&#281;kujemy za uczestnictwo
 'forum_cliquer_retour' => 'Kliknij <a href=\'@retour_forum@\'>tutaj</a> aby kontynuowa&#263;.',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'To forum jest moderowane&nbsp;: Tw&oacute;j wpis uka&#380;e si&#281; dopiero po weryfikacji przez administratora strony.',
-'forum_lien_hyper' => '<MODIF><B>Link</B> (opcjonalny)',
+'forum_lien_hyper' => '<b>Link</b> (opcjonalny)',
 'forum_message_definitif' => 'Wiadomo&#347;&#263; ko&#324;cowa: wy&#347;lij na stron&#281;',
 'forum_message_trop_long' => 'Twoja wiadomo&#347;&#263; jest za d&#322;uga. Maksymalna d&#322;ugo&#347;&#263; to 20000 znak&oacute;w.',
 'forum_ne_repondez_pas' => 'Nie odpowiadaj na tego maila, lecz na forum, pod nast&#281;puj&#261;cym adresem:',
 'forum_non_inscrit' => 'Nie jeste&#347; zarejestrowany, lub adres b&#261;d&#378; has&#322;o s&#261; nieprawid&#322;owe.',
-'forum_page_url' => '(Je&#347;li twoja wiadomo&#347;&#263; odnosi si&#281; jakiego&#347; artyku&#322;y opublikoanego w internecie, wpisz poni&#380;ej tytu&#322; tej strony oraz jej adres).',
+'forum_page_url' => '(Je&#347;li twoja wiadomo&#347;&#263; odnosi si&#281; jakiego&#347; artyku&#322;y opublikowanego w internecie, wpisz poni&#380;ej tytu&#322; tej strony oraz jej adres).',
 'forum_par_auteur' => 'wg @auteur@',
 'forum_poste_par' => 'Wiadomo&#347;&#263; napisana przez@parauteur@ na temat twojego artyku&#322;u.',
 'forum_probleme_database' => 'Problem z baz&#261; danych, Twoja wiadomo&#347;&#263; nie mog&#322;a by&#263; zapisana.',
-'forum_qui_etes_vous' => '<MODIF><B>Kim jeste&#347;?</B> (nieobowi&#261;zkowe)',
+'forum_qui_etes_vous' => '<b>Kim jeste&#347;?</b> (nieobowi&#261;zkowe)',
 'forum_texte' => 'Tekst Twojej wiadomo&#347;ci:',
 'forum_titre' => 'Temat:',
 'forum_titre_erreur' => 'B&#322;&#261;d...',
@@ -497,6 +510,7 @@ Dzi&#281;kujemy za uczestnictwo
 'icone_suivi_forum' => '&#346;led&#378; w&#261;tek forum publicznego: @nb_forums@',
 'icone_suivi_forums' => 'Obserwuj/zarz&#261;dzaj danym dorum',
 'icone_suivi_pettions' => '&#346;led&#378;/zarz&#261;dzaj og&#322;oszeniami',
+'icone_suivi_revisions' => 'Zmiany artyku&#322;&oacute;w',
 'icone_supprimer_cookie' => 'Usu&#324; cookies korespondencji',
 'icone_supprimer_document' => 'Usu&#324; ten dokument',
 'icone_supprimer_groupe_mots' => 'Usu&#324; t&#281; grup&#281;',
@@ -610,7 +624,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_config_suivi_explication' => 'Mo&#380;esz automatycznie, za pomoc&#261; poczty elektronicznej otrzymywa&#263; og&#322;oszenia dotycz&#261;ce aktywno&#347;ci redakcyjnej tego serwisu. W tym celu powinniene&#347; si&#281; zapisa&#263; na list&#281; mailow&#261;.',
 'info_confirmer_passe' => 'Potwierd&#378; nowe has&#322;o:',
 'info_connexion_base' => 'Drugi krok: <B>Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych</B>',
-'info_connexion_ldap_ok' => '<MODIF><B>Po&#322;&#261;czenie z LDAP powiod&#322;o si&#281;.B><P> Id&#378; do nast&#281;pnego kroku',
+'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p /> Id&#378; do nast&#281;pnego etapu.',
 'info_connexion_mysql' => 'Pierwszy krok: <B>Twoje po&#322;&#261;czenie MySQL</b>',
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_connexion_refusee' => 'Brak po&#322;&#261;czenia',
@@ -696,8 +710,8 @@ Dzi&#281;kujemy za uczestnictwo
   zarejestrownych redaktor&oacute;w. Mo&#380;ecie tak&#380;e aktywowa&#263;
   dodatkowe forum, zarezerwowane jedynie dla admin&oacute;w.',
 'info_forum_statistiques' => 'Odwied&#378; statystyki',
-'info_forums_abo_invites' => '<NEW>Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
-'info_gauche_admin_effacer' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<B><P> Daje ona dost&#281;p do funkcji konserwacji technicznej.Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego procesu uwierzytelniaj&#261;cego, do kt&oacute;rego potrzebny jest dost&#281;p do FTP strony internetowej.',
+'info_forums_abo_invites' => 'Twoja strona zawiera formu dost&#281;pne po zalogowaniu, zatem odwiedzaj&#261;cy powinni si&#281; zarejestrowa&#263; na stronie publicznej.',
+'info_gauche_admin_effacer' => '<b>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<b><p> Daje ona dost&#281;p do funkcji technicznych serwisu. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; wymagaj&#261; po&#322;&#261;czenia   z serwerem przez FTP.',
 'info_gauche_admin_tech' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
 funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
@@ -711,7 +725,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_gauche_messagerie' => 'Poczta wewn&#281;trzna pozwala Ci wymienia&#263; wiadomo&#347;ci z innymi redaktorami, i zapisywa&#263; notki (prywatne) lub publikowa&#263; og&#322;oszenia na stronie g&#322;&oacute;wnej strefy prywatnej (je&#347;li jeste&#347; administratorem).',
 'info_gauche_numero_auteur' => 'AUTOR NUMER',
 'info_gauche_numero_breve' => 'NEWS NUMER',
-'info_gauche_statistiques_referers' => 'Ta strona wy&#347;wietla list&#281; <i>odno&#347;nik&oacute;w</i>, to znaczy stron kt&oacute;re zawieraj&#261; &#322;&#261;cza do Twojej strony z dzisiejszego dnia&nbsp;: ta strona jest zerowana co 24 godziny.',
+'info_gauche_statistiques_referers' => '<MODIF>Ta strona wy&#347;wietla list&#281; <i>odno&#347;nik&oacute;w</i>, to znaczy stron kt&oacute;re zawieraj&#261; &#322;&#261;cza do Twojej strony z dzisiejszego dnia&nbsp;: ta strona jest zerowana co 24 godziny.',
 'info_gauche_suivi_forum' => 'Strona <I>obserwacji forum</I> jest narz&#281;dziem zarz&#261;dzania stron&#261; (nie, miejscem dyskusji czy redakcji). Wy&#347;wiela ona wszystkie komentarze na forum publicznym do danego artyku&#322;u i pozwala edytowa&#263; owe komentarze.',
 'info_gauche_suivi_forum_2' => 'Strona  <I>archiwum forum</I> jest narz&#281;dziem administracji stron&#261; (a nie miejscem dyskusji czy redagowania). Wy&#347;wietla ona wszystkie komentarze forum z ca&#322;ego serwisu, zar&oacute;wno te ze stron publicznych i strefy prywatnej i pozwala na zarz&#261;dzanie tymi komentarzami.',
 'info_gauche_visiteurs_enregistres' => 'Znajdziesz tu go&#347;ci zarejestrowanych
@@ -729,7 +743,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_historique_affiche' => '<NEW>Afficher cette version',
 'info_historique_comparaison' => '<NEW>comparaison',
 'info_historique_desactiver' => '<NEW>D&eacute;sactiver le suivi des r&eacute;visions',
-'info_historique_lien' => '<NEW>Afficher l\'historique',
+'info_historique_lien' => '<NEW>Afficher l\'historique des modifications',
 'info_historique_texte' => '<NEW>Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
 'info_historique_titre' => '<NEW>Suivi des r&eacute;visions',
 'info_identification_publique' => 'Twoja nazwa publiczna',
@@ -761,7 +775,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_laisser_champs_vides' => 'pozostaw te pola puste)',
 'info_langue_principale' => 'J&#281;zyk g&#322;&oacute;wnej strony',
 'info_langues' => 'J&#281;zyki stron',
-'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pikseli',
+'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ pikseli',
 'info_ldap_ok' => 'Uwierzytelnianie LDAP jest w&#322;&#261;czone.',
 'info_les_auteurs_1' => 'wg @les_auteurs@',
 'info_lien_hypertexte' => 'Hiper&#322;&#261;cze:',
@@ -922,7 +936,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_recharger_page' => 'Prosz&#281; za chwil&#281; ponownie za&#322;adowa&#263; t&#281; stron&#281;.',
 'info_recherche_auteur_a_affiner' => 'Zbyt du&#380;o rezultat&oacute;w w "@cherche_auteur@" ; spr&oacute;buj sprecyzowa&#263; poszukiwania.',
 'info_recherche_auteur_ok' => 'Kilkunastu redaktor&oacute;w zosta&#322;o znalezionych dla "@cherche_auteur@":',
-'info_recherche_auteur_zero' => '<B>&#379;adnych wynik&oacute;w dla "@cherche_auteur@".',
+'info_recherche_auteur_zero' => '<MODIF><B>&#379;adnych wynik&oacute;w dla "@cherche_auteur@".',
 'info_rechercher' => 'Szukaj',
 'info_rechercher_02' => 'Szukaj:',
 'info_recommencer' => 'Prosz&#281; spr&oacute;bowa&#263; ponownie.',
@@ -1246,7 +1260,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'onglet_origine_visites' => 'Wizyty z URL-i',
 'onglet_repartition_actuelle' => 'teraz',
 'onglet_repartition_debut' => 'od pocz&#261;tku',
-'onglet_repartition_lang' => 'przez j&#281;zyki',
+'onglet_repartition_lang' => '<MODIF>przez j&#281;zyki',
 'onglet_repartition_rubrique' => 'Roz&#322;o&#380;enie dzia&#322;&oacute;w',
 'onglet_save_restaur_base' => 'Backup/zapisywanie bazy danych',
 'onglet_vider_cache' => 'Opr&oacute;&#380;nij cache',
@@ -1510,7 +1524,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
  <li> rodzaj kodowania tekstu, kt&oacute;ry ma u&#380;ywa&#263; SPIP&nbsp;;</li>
  <li> j&#281;zyk u&#380;ywany wa formularzach stron publicznych&nbsp;;</li>
  <li> oraz j&#281;zyk u&#380;ywany domy&#347;lnie w strefie prywatnej.</li></ul>',
-'texte_signification' => 'Czerwone paski oznaczaj&#261; podsumowanie odwiedzin (ca&#322;kowitych w poddzia&#322;ach), paski zielone liczb&#281; wizyt w danych dzia&#322;ach.',
+'texte_signification' => '<MODIF>Czerwone paski oznaczaj&#261; podsumowanie odwiedzin (ca&#322;kowitych w poddzia&#322;ach), paski zielone liczb&#281; wizyt w danych dzia&#322;ach.',
 'texte_sous_titre' => 'Podtytu&#322;',
 'texte_statistiques_visites' => '(ciemny pasek : niedziela / ciemna krzywa : rozw&oacute;j &#347;redniej)',
 'texte_statut_attente_validation' => 'w trakcie zatwierdzania',
@@ -1603,7 +1617,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_langue_rubrique' => 'J&#280;ZYK DZIA&#321;U',
 'titre_langue_trad_article' => 'J&#280;ZYK I T&#321;UMACZENIA ARTYKU&#321;U',
 'titre_les_articles' => 'ARTYKU&#321;Y',
-'titre_liens_entrants' => 'Dzisiejsze linki wej&#347;ciowe',
+'titre_liens_entrants' => '<MODIF>Dzisiejsze linki wej&#347;ciowe',
 'titre_mots_cles' => 'S&#321;OWA KLUCZOWE',
 'titre_mots_cles_dans_forum' => 'S&#322;owa kluczowe na forum na stronie publicznej',
 'titre_mots_tous' => 'S&#322;owa kluczowe',

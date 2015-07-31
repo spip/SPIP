@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Plano de la teksejo',
 'popularite' => 'Populareco',
 'poster_message' => 'Sendi mesa&#285;on',
+'proposer_site' => 'Vi povas proponi teksejon aldonota al tiu rubriko:',
 
 
 // R
