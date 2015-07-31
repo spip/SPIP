@@ -45,7 +45,7 @@ else
 // Le squelette compile est-il trop vieux ?
 function squelette_obsolete($skel, $squelette) {
 	return (
-		isset($GLOBALS['var_mode'])
+		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php3') > $date)
