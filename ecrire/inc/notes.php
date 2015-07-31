@@ -151,16 +151,15 @@ function traiter_les_notes($notes) {
 		$title =  _T('info_notes');
 		foreach ($notes as $r) {
 			list($ancre, $nom, $texte) = $r;
-			$atts = " href='#nh$ancre' id='nb$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
+			$atts = " href='#nh$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
 			$mes_notes .= "\n\n"
+			. "<p id='nb$ancre'". ($GLOBALS['class_spip'] ? " class='spip_note'" : "") .">"
 			. code_echappement($nom
 				? "$ouvre_note<a$atts>$nom</a>$ferme_note"
 				: '')
 			. $texte;
 		}
-		$mes_notes = propre('<p>' . $mes_notes);
-		if ($GLOBALS['class_spip'])
-			$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+		$mes_notes = propre($mes_notes);
 	}
 	return ($GLOBALS['les_notes'] .= $mes_notes);
 }
