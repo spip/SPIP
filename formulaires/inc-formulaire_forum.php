@@ -44,6 +44,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	// Note : ceci n'est pas documente !!
 	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum)]
+	// ou encore [(#FORMULAIRE_FORUM|forumspip.php)]
 
 	// le denier arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
@@ -67,8 +68,13 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	if (($GLOBALS['meta']["mots_cles_forums"] != "oui"))
 		$table = '';
 
-	// compatibilite: virer l'extension
-	$script = preg_match(',.php3?$,', $filtres[0],$r) ? $r[1] : $filtres[0];
+	// Sur quelle adresse va-t-on "boucler" pour la previsualisation ?
+	if ($script = $filtres[0])
+		$script = preg_match(',[.]php3?$,', $script) ?
+			$script : generer_url_public($script);
+	else
+		$script = self(); # sur soi-meme
+
 	return
 		array($titre, $table, $forums_publics, $script,
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
@@ -93,10 +99,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
 		$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
 
-	if ($script)
-		$url = $script;
-	else
-		$url = generer_url_public('forum');
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -116,7 +118,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			// sauf si on a passe un parametre en argument (exemple : {#SELF})
 			if ($url_param_retour) {
 				$retour_forum = $url_param_retour;
-				$url = $retour_forum;
+				$script = $retour_forum;
 			}
 		}
 		if (isset($_COOKIE['spip_forum_user'])
@@ -138,7 +140,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$nom_site_forum = _request('nom_site_forum');
 		$url_site = _request('url_site');
 
-		if ($retour_forum != "!") $url = $retour_forum;
+		// cas du #FORMULAIRE_FORUM{#SELF} (??)
+		if ($retour_forum != "!") $script = $retour_forum;
 		
 		if ($afficher_texte != 'non') 
 			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
@@ -148,9 +151,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
 	}
 
-	$url_post = $url;
+	// pour la chaine de hidden
+	$script_hidden = $script = str_replace('&amp;', '&', $script);
 	foreach ($ids as $id => $v)
-		$url_post = parametre_url($url_post, $id, $v, '&');
+		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
 
 	return array('formulaire_forum', 0,
 	array(
@@ -165,8 +169,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'table' => $table,
 		'texte' => $texte,
 		'titre' => extraire_multi($titre),
-		'url' => $url, # ce sur quoi on fait le action='...'
-		'url_post' => $url_post, # pour les variables hidden
+		'url' => $script, # ce sur quoi on fait le action='...'
+		'url_post' => $script_hidden, # pour les variables hidden
 		'url_site' => ($url_site ? $url_site : "http://"),
 		'alea' => $alea,
 		'hash' => $hash,
