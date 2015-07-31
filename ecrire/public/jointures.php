@@ -532,6 +532,8 @@ function trouver_jointure_champ($champ, &$boucle, $jointures = false, $cond = fa
 	if ($jointures === false) {
 		$jointures = $boucle->jointures;
 	}
+	// TODO : aberration, on utilise $jointures pour trouver le champ
+	// mais pas poour construire la jointure ensuite
 	$cle = trouver_champ_exterieur($champ, $jointures, $boucle);
 	if ($cle){
 		$desc = $boucle->show;
