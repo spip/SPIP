@@ -147,9 +147,25 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 	if ( (!isset($GLOBALS[$table_meta][$nom_meta_base_version]) )
 			|| (!spip_version_compare($current_version = $GLOBALS[$table_meta][$nom_meta_base_version],$version_cible,'='))){
 
+		// $maj['create'] contient les directives propres a la premiere creation de base
+		// c'est une operation derogatoire qui fait aboutir directement dans la version_cible
+		if (isset($maj['create'])){
+			if (!isset($GLOBALS[$table_meta][$nom_meta_base_version])){
+				// installation : on ne fait que l'operation create
+				$maj = array($version_cible=>$maj['create']);
+				// et on lui ajoute un appel a inc/config
+				// pour creer les metas par defaut
+				$config = charger_fonction('config','inc');
+				$maj[$version_cible][] = array($config);
+			}
+			// dans tous les cas enlever cet index du tableau
+			unset($maj['create']);
+		}
 		include_spip('inc/plugin'); // pour spip_version_compare
 		uksort($maj,'spip_version_compare');
 
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
 		$res = maj_while($current_version, $version_cible, $maj, $nom_meta_base_version, $table_meta, generer_url_ecrire('admin_plugin'));
 		if ($res) {
 			if (!is_array($res))
