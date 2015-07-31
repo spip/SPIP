@@ -252,26 +252,26 @@ $exceptions_des_jointures['titre_mot'] = 'titre';
 $exceptions_des_jointures['type_mot'] = 'type';
 
 global  $table_des_traitements;
-$table_des_traitements['BIO'][]= 'traiter_raccourcis(%s)';
-$table_des_traitements['CHAPO'][]= 'traiter_raccourcis(nettoyer_chapo(%s))';
+$table_des_traitements['BIO'][]= 'propre(%s)';
+$table_des_traitements['CHAPO'][]= 'propre(nettoyer_chapo(%s))';
 $table_des_traitements['DATE'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_MODIF'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_NOUVEAUTES'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
-$table_des_traitements['DESCRIPTIF'][]= 'traiter_raccourcis(%s)';
+$table_des_traitements['DESCRIPTIF'][]= 'propre(%s)';
 $table_des_traitements['LIEN_TITRE'][]= 'typo(%s)';
 $table_des_traitements['LIEN_URL'][]= 'htmlspecialchars(vider_url(%s))';
-$table_des_traitements['MESSAGE'][]= 'traiter_raccourcis(%s)';
+$table_des_traitements['MESSAGE'][]= 'propre(%s)';
 $table_des_traitements['NOM_SITE_SPIP'][]= 'typo(%s)';
 $table_des_traitements['NOM_SITE'][]= 'typo(%s)';
 $table_des_traitements['NOM'][]= 'typo(%s)';
 $table_des_traitements['PARAMETRES_FORUM'][]= 'htmlspecialchars(lang_parametres_forum(%s))';
-$table_des_traitements['PS'][]= 'traiter_raccourcis(%s)';
+$table_des_traitements['PS'][]= 'propre(%s)';
 $table_des_traitements['SOURCE'][]= 'typo(%s)';
 $table_des_traitements['SOUSTITRE'][]= 'typo(%s)';
 $table_des_traitements['SURTITRE'][]= 'typo(%s)';
 $table_des_traitements['TAGS'][]= '%s';
-$table_des_traitements['TEXTE'][]= 'traiter_raccourcis(%s)';
+$table_des_traitements['TEXTE'][]= 'propre(%s)';
 $table_des_traitements['TITRE'][]= 'typo(%s)';
 $table_des_traitements['TYPE'][]= 'typo(%s)';
 $table_des_traitements['URL_ARTICLE'][]= 'htmlspecialchars(vider_url(%s))';
@@ -287,21 +287,11 @@ $table_des_traitements['URL_SYNDIC'][]= 'htmlspecialchars(vider_url(%s))';
 $table_des_traitements['ENV'][]= 'entites_html(%s)';
 
 
-// Securite supplementaire pour certaines tables
-
-// Articles syndiques : remplacer les filtres par safehtml()
+// Articles syndiques : passage des donnees telles quelles, sans traitement typo
+// A noter, dans applique_filtres la securite et compliance XHTML de ces champs
+// est assuree par safehtml()
 foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 	if (!isset($table_des_traitements[$balise]['syndic_articles']))
-		$table_des_traitements[$balise]['syndic_articles'] = 'safehtml(%s)';
-
-// Forums & petitions : ajouter safehtml aux filtres existants
-foreach(array('TITRE','TEXTE','AUTEUR','EMAIL_AUTEUR','NOM_SITE') as $balise)
-	if (!isset($table_des_traitements[$balise]['forums']))
-		$table_des_traitements[$balise]['forums'] =
-			'safehtml('.$table_des_traitements[$balise][0].')';
-foreach(array('NOM','NOM_SITE','MESSAGE','AD_EMAIL') as $balise)
-	if (!isset($table_des_traitements[$balise]['signatures']))
-		$table_des_traitements[$balise]['signatures'] =
-			'safehtml('.$table_des_traitements[$balise][0].')';
+		$table_des_traitements[$balise]['syndic_articles'] = '%s';
 
 ?>

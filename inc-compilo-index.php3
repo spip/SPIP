@@ -246,28 +246,98 @@ function collecter_balise_dynamique($l, $p) {
 	return $args;
 }
 
+
+// il faudrait savoir traiter les formulaires en local
+// tout en appelant le serveur SQL distant.
+// En attendant, cette fonction permet de refuser une authentification
+// sur qqch qui n'a rien a voir.
+
+function balise_distante_interdite($p) {
+	$nom = $p->id_boucle;
+	if ($p->boucles[$nom]->sql_serveur) {
+		erreur_squelette($p->nom_champ .' '._T('zbug_distant_interdit'), $nom);
+	}
+}
+
+
+//
+// Traitements standard de divers champs
+// definis par $table_des_traitements, cf. inc-compilo-api.php3
+//
+function champs_traitements ($p) {
+	global $table_des_traitements;
+
+	if (!is_array($table_des_traitements[$p->nom_champ]))
+	  // old style
+		$ps = $table_des_traitements[$p->nom_champ];
+	else {
+		if ($p->nom_boucle)
+			$type = $p->boucles[$p->nom_boucle]->type_requete;
+		else
+			$type = $p->type_requete;
+		$ps = $table_des_traitements[$p->nom_champ][$type];
+		if (!$ps)
+			$ps = $table_des_traitements[$p->nom_champ][0];
+	}
+		 
+	if (!$ps) return $p->code;
+
+	// Si une boucle sous-jacente (?) traite les documents, on insere ici
+	// une fonction de remplissage du tableau des doublons -- mais seulement
+	// si on rencontre le filtre propre (qui traite les
+	// raccourcis <docXX> qui nous interessent)
+	if ($p->descr['documents']
+	AND preg_match(',propre,', $ps))
+		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
+
+	// De meme, en cas de sql_serveur, on supprime les < IMGnnn > tant
+	// qu'on ne rapatrie pas les documents distants joints..
+	// il faudrait aussi corriger les raccourcis d'URL locales
+	if ($p->boucles[$p->id_boucle]->sql_serveur)
+		$p->code = 'supprime_img(' . $p->code . ')';
+
+	// Remplacer enfin le placeholder %s par le vrai code de la balise
+	return str_replace('%s', $p->code, $ps);
+}
+
+
+//
+// Appliquer les filtres a un champ [(#CHAMP|filtre1|filtre2)]
+// retourne un code php compile exprimant ce champ filtre et securise
+//  - une etoile => pas de processeurs standards
+//  - deux etoiles => pas de securite non plus !
+//
 function applique_filtres($p) {
 
-	// pretraitements standards (explication dans inc-compilo-index)
-	switch ($statut) {
-		case 'num':
-			$code = "intval($code)";
-			break;
-		case 'php':
-			break;
-		case 'html':
-		default:
-			$code = "trim($code)";
-			break;
+	// Traitements standards (cf. supra)
+	if ($p->etoile == '')
+		$code = champs_traitements($p);
+	else
+		$code = $p->code;
+
+	// Appliquer les filtres perso
+	if ($p->param)
+		$code = compose_filtres($p, $code);
+
+	// Securite
+	if ($p->interdire_scripts
+	AND $p->etoile != '**') {
+
+		switch ($p->type_requete) {
+			// Passer |safehtml sur les boucles "sensibles"
+			case 'forums':
+			case 'signatures':
+			case 'syndic_articles':
+				$code = "safehtml($code)";
+				break;
+
+			// et |interdire_scripts sur les autres
+			default:
+				$code = "interdire_scripts($code)";
+				break;
+		}
 	}
 
-//  processeurs standards (cf inc-balises)
-	$code = ($p->etoile ? $p->code : champs_traitements($p));
-	// Appliquer les filtres perso
-	if ($p->param) $code = compose_filtres($p, $code);
-	// post-traitement securite
-	if ($p->interdire_scripts)
-		$code = "interdire_scripts($code)";
 	return $code;
 }
 

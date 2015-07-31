@@ -24,52 +24,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 //
-// Traitements standard de divers champs
-//
-function champs_traitements ($p) {
-	global $table_des_traitements;
-
-	if (!is_array($table_des_traitements[$p->nom_champ]))
-	  // old style
-		$ps = $table_des_traitements[$p->nom_champ];
-	else {
-		if ($p->nom_boucle)
-			$type = $p->boucles[$p->nom_boucle]->type_requete;
-		else
-			$type = $p->type_requete;
-		$ps = $table_des_traitements[$p->nom_champ][$type];
-		if (!$ps)
-			$ps = $table_des_traitements[$p->nom_champ][0];
-	}
-		 
-	if (!$ps) return $p->code;
-	if ($p->descr['documents']) {
-		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
-	}
-
-	// on supprime les < IMGnnn > tant qu'on ne rapatrie pas
-	// les documents distants joints..
-	// il faudrait aussi corriger les raccourcis d'URL locales
-	return str_replace('%s',
-		(!$p->boucles[$p->id_boucle]->sql_serveur ?
-		$p->code :
-		('supprime_img(' . $p->code . ')')),
-		$ps);
-}
-
-// il faudrait savoir traiter les formulaires en local 
-// tout en appelant le serveur SQL distant.
-// En attendant, cette fonction permet de refuser une authentification 
-// sur qqch qui n'a rien a voir.
-
-function balise_distante_interdite($p) {
-	$nom = $p->id_boucle;
-	if ($p->boucles[$nom]->sql_serveur) {
-		erreur_squelette($p->nom_champ .' '._T('zbug_distant_interdit'), $nom);
-	}
-}
-
-//
 // Definition des balises
 //
 function balise_NOM_SITE_SPIP_dist($p) {
