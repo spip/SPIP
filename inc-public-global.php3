@@ -231,6 +231,7 @@ if (lire_meta('activer_moteur') == 'oui') {
 		}
 	}
 	if ($use_cache AND file_exists($fichier_index) AND $size = filesize($fichier_index)) {
+		include_ecrire("inc_connect.php3");
 		if ($db_ok) {
 			include_ecrire("inc_texte.php3");
 			include_ecrire("inc_filtres.php3");
