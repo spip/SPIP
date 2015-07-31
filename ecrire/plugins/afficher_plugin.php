@@ -25,11 +25,10 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$prefix = $info['prefix'];
-	$config = !empty($info['config']) ? $info['config'] : 'plugin_bouton_cfg';
 	$erreur = (!isset($info['erreur']) ? ''
 	: ("<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>"));
 
-	$cfg = !$actif ? '' : $config($dir_plugins.$plug_file);
+	$cfg = !$actif ? '' : plugin_bouton_config($dir_plugins.$plug_file,$info['config']);
 
 	// numerotons les occurrences d'un meme prefix
 	$versions[$prefix] = $id = isset($versions[$prefix]) ? $versions[$prefix] + 1 : '';
@@ -50,11 +49,29 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	."</li>";
 }
 
-function plugin_bouton_cfg($file, $cfg='cfg')
+function plugin_bouton_config($dir, $config, $cfg='cfg')
 {
-	if  (defined('_DIR_PLUGIN_CFG')) {
+	// si <config> definie dans plugin.xml
+	if ($config) {
+		// si un exec existe avec ce nom, le lier directement
+		if (find_in_path("$dir/exec/$config.php") OR find_in_path("$dir/prive/exec/$config.html")){
+			$ret .= '<a href="'.generer_url_ecrire($config).'">'
+				.'<img src="'._DIR_IMG_PACK.'cfg-16.png"
+					width="16" height="16"
+					alt="'._T('icone_configuration_site').' '.$config.'"
+					title="'._T('icone_configuration_site').' '.$config.'"
+				/></a>';
+			return "<div class='cfg_link'>$ret</div>";
+		}
+		// sinon ce peut etre une fonction perso, qui va renvoyer son html ...
+		elseif(function_exists($config)){
+			return $config($dir,$cfg);
+		}
+	}
+	// sinon passer la main au plugin CFG si il est la
+	else if  (defined('_DIR_PLUGIN_CFG')) {
 		if (include_spip('inc/cfg')) // test CFG version >= 1.0.5
-			if ($cfg = icone_lien_cfg($file, $cfg))
+			if ($cfg = icone_lien_cfg($dir, $cfg))
 				return "<div class='cfg_link'>$cfg</div>";
 	}
 	return '';
