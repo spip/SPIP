@@ -208,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Erreur',
 'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => 'erreur(s)',
-'etape' => '&Eacute;tape';
+'etape' => '&Eacute;tape',
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
