@@ -35,7 +35,8 @@ function action_logout_dist()
 			preg_match(',^[^/]*//[^/]*(.*)/$,',
 				   url_de_base(),
 				   $r);
-			spip_setcookie('spip_session', '', 0,$r[1]);
+			spip_setcookie('spip_session', '', -1,$r[1]);
+			spip_setcookie('spip_session', '', -1);
 		}
 		if ($_SERVER['PHP_AUTH_USER'] AND !$ignore_auth_http) {
 			include_spip('inc/actions');
