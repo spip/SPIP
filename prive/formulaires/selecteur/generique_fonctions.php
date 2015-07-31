@@ -169,7 +169,8 @@ function test_enfants_rubrique($id_rubrique,$types=array()){
 		while (count($fratrie) AND is_array($types) AND count($types)){
 			$type = array_shift($types);
 			$h = sql_allfetsel("DISTINCT id_rubrique",table_objet_sql($type),sql_in('id_rubrique',$fratrie));
-			$has = array_merge($has,array_map('reset',$h));
+			$h = array_map('reset',$h);
+			$has = array_merge($has,$h);
 			$fratrie = array_diff($fratrie,$h);
 		}
 		if (count($has))
