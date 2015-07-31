@@ -38,7 +38,7 @@ function spip_mysql_trace($query, $start, $result)
 {
 	if ($start) spip_mysql_timing($start, microtime(), $query, $result);
 
-	if ($s = mysql_error()) {
+	if ($s = trim(mysql_errno().' '.mysql_error())) {
 		if ($GLOBALS['mysql_debug']
 		AND (($GLOBALS['connect_statut'] == '0minirezo')
 		  OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) {
@@ -52,6 +52,7 @@ function spip_mysql_trace($query, $start, $result)
 		}
 		spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
 		spip_log("$result - $query", 'mysql');
+		spip_log($s, 'mysql');
 	}
 	return $result;
 }
