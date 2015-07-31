@@ -29,7 +29,7 @@ function balise_MENU_LANG_stat ($args, $filtres) {
 
 // normalement $opt sera toujours non vide suite au test ci-dessus
 function balise_MENU_LANG_dyn($opt) {
-	include_spip('menu_lang_ecrire', 'balise');
+	include_spip('balise/menu_lang_ecrire');
 	return menu_lang_pour_tous('var_lang', $opt);
 }
 
