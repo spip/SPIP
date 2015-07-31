@@ -238,32 +238,32 @@ function determine_upload()
 }
 
 //
-// retourne le statut d'un utilisateur authentifie en php_auth, false sinon
+//  Verif d'un utilisateur authentifie en php_auth
 //
-// http://doc.spip.org/@verifier_php_auth
+
+function lire_php_auth($user, $pw) {
+
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user)));
+
+	if ($row AND $row['source'] != 'ldap')
+		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
+	elseif ($GLOBALS['ldap_present']) {
+		$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
+		if ($auth_ldap) return $auth_ldap($user, $pw);
+	}
+	return false;
+}
+
+
 function verifier_php_auth() {
+
 	if (@$_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !@$GLOBALS['ignore_auth_http']) {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($_SERVER['PHP_AUTH_USER']));
-
-		$row = @spip_fetch_array($result);
-		if ($row AND $row['source'] != 'ldap') {
-		  if ($row['pass'] == md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
-			$GLOBALS['auteur_session'] = $row;
-			return $row['statut'];
-		  } else return false;
-		} else {
-		  if (!$row AND !$GLOBALS['ldap_present'])
-		    return false;
-		  else {
-			$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
-			if ($auth_ldap) {
-			  $GLOBALS['auteur_session'] =  $auth_ldap($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
-			  return $GLOBALS['auteur_session']['statut'];
-			}
-		  }
-		}
-	} 
+		if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+		  $GLOBALS['auteur_session'] = $r;
+		  return $GLOBALS['auteur_session']['statut'];
+		} 
+	}
 	return false;
 }
 

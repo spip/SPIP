@@ -112,22 +112,33 @@ function inc_auth_dist() {
 
 	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
-	if (!$ignore_auth_http AND !$connect_id_auteur) {
+	if (!$ignore_auth_http) {
 		if (isset($_SERVER['PHP_AUTH_USER'])
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
 			include_spip('inc/actions');
-			if (verifier_php_auth()) {
-				$connect_login = $GLOBALS['auteur_session']['login'];
-				$_SERVER['PHP_AUTH_PW'] = '';
-				$auth_can_disconnect = true;
+			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+				if (!$connect_id_auteur) {
+					$_SERVER['PHP_AUTH_PW'] = '';
+					$auth_can_disconnect = true;
+					$GLOBALS['auteur_session'] = $r;
+					$connect_login = $GLOBALS['auteur_session']['login'];
+				} else {
+				  // cas de la session en plus de PHP_AUTH
+				  /*				  if ($connect_id_auteur != $r['id_auteur']){
+				    spip_log("vol de session $connect_id_auteur" . join(', ', $r));
+					unset($_COOKIE['spip_session']);
+					$connect_id_auteur = '';
+					} */
+				}
 			}
-		} else if (isset($_SERVER['REMOTE_USER']))
+		} else { if (isset($_SERVER['REMOTE_USER']))
 
 	// Authentification .htaccess old style, car .htaccess semble
 	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
 
-			$connect_login = $_SERVER['REMOTE_USER'];
-	}    
+				$connect_login = $_SERVER['REMOTE_USER'];
+		}
+	}
 
 	$where = (is_numeric($connect_id_auteur)) ?
 	  "id_auteur=$connect_id_auteur" :
