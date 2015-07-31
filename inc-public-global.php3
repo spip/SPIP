@@ -5,9 +5,11 @@ if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
 
 // fonction principale declenchant tout le service
-
-function calcule_header_et_page($fond, $delais) {
-	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique, $flag_ob, $flag_preserver, $forcer_lang, $id_article, $ignore_auth_http, $lastmodified, $recherche, $use_cache, $val_confirm, $var_mode, $var_mode_affiche, $var_mode_objet, $var_recherche, $tableau_des_erreurs;
+function calcule_header_et_page ($fond, $delais) {
+	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique,
+	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
+	  $lastmodified, $recherche, $use_cache, $val_confirm, $var_mode,
+	  $var_recherche, $tableau_des_erreurs;
 
 	// Regler le $delais par defaut
 	if (!isset($delais))
@@ -45,7 +47,7 @@ function calcule_header_et_page($fond, $delais) {
 
 	if ($GLOBALS['_GET']['val_confirm']) {
 		include_local(find_in_path('inc-formulaire_signature.php3'));
-		reponse_confirmation($id_article, $val_confirm);
+		reponse_confirmation($GLOBALS['_GET']['id_article'], $val_confirm);
 	}
 
 	//  refus du debug si pas dans les options generales ni admin connecte
@@ -64,16 +66,25 @@ function calcule_header_et_page($fond, $delais) {
 		include_local(find_in_path('inc-formulaire_admin.php3'));
 
 	$tableau_des_erreurs = array();
-	$http_status = 200;
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
-	if (!$flag_preserver) {
 
-		// si la page est vide, envoi d'un 404
-		if (preg_match('/^[[:space:]]*$/', $page['texte'])) {
-			$http_status = 404;
+	//
+	// Envoyer les entetes appropries
+	// a condition d'etre sur de pouvoir le faire
+	//
+	if (!$flag_preserver
+	AND $flag_ob AND !strlen(@ob_get_contents())) {
+
+		// Si la page est vide, gerer l'erreur 404
+		if (preg_match('/^[[:space:]]*$/', $page['texte'])
+		AND $var_mode != 'debug') {
 			header("HTTP/1.0 404");
 			header("Content-Type: text/html; charset=".lire_meta('charset'));
+			$contexte_inclus = array(
+				'erreur_aucun' => message_erreur_404()
+			);
+			include(find_in_path('404.php3'));
 		}
 		// Interdire au client de cacher un login, un admin ou un recalcul
 		else if ($flag_dynamique OR $var_mode
@@ -95,50 +106,9 @@ function calcule_header_et_page($fond, $delais) {
 		}
 	}
 
-	// Cas d'une page contenant uniquement du HTML :
-	if ($page['process_ins'] == 'html') {
-		$page = $page['texte'];
-	}
+	return $page;
+}
 
-	// Cas d'une page contenant du PHP :
-	else {
-		if (!($flag_ob AND ($var_mode == 'debug'
-		OR $var_recherche OR $affiche_boutons_admin))) {
-			eval('?' . '>' . $page['texte']);
-			$page = '';
-		} else {
-			ob_start(); 
-			$res = eval('?' . '>' . $page['texte']);
-			$page = ob_get_contents(); 
-			ob_end_clean();
-
-			// en cas d'erreur lors du eval,
-			// la memoriser dans le tableau des erreurs
-			// On ne revient pas ici si le nb d'erreurs > 4
-			if ($res === false AND $affiche_boutons_admin
-			AND $auteur_session['statut'] == '0minirezo') {
-				include_ecrire('inc_debug_sql.php3');
-				erreur_squelette(_T('zbug_erreur_execution_page'));
-			}
-		}
-	}
-
-	// Passer la main au debuggueur le cas echeant 
-	if ($var_mode == 'debug') {
-		include_ecrire("inc_debug_sql.php3");
-		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
-	} 
-	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
-	  $page = affiche_erreurs_page($tableau_des_erreurs) . $page;
-
-	// Traiter var_recherche pour surligner les mots
-	if ($var_recherche) {
-		include_ecrire("inc_surligne.php3");
-		$page = surligner_mots($page, $var_recherche);
-	}
-
-	return array($http_status, $page);
-	}
 
 //
 // Aller chercher la page dans le cache ou pas
