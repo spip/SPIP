@@ -547,14 +547,14 @@ function formulaire_taille($document) {
 	// Donnees sur le type de document
 	$t = @spip_abstract_fetsel('inclus,extension',
 		'spip_types_documents', "id_type=".$document['id_type']);
-	$type_inclus = $t['type_inclus'];
+	$type_inclus = $t['inclus'];
 	$extension = $t['extension'];
 
 	# TODO -- pour le MP3 "l x h pixels" ne va pas
 	if (($type_inclus == "embed" OR $type_inclus == "image")
 	AND (
 		// documents dont la taille est definie
-		$document['largeur'] * $document['hauteur']
+		($document['largeur'] * $document['hauteur'])
 		// ou distants
 		OR $document['distant'] == 'oui'
 		// ou formats dont la taille ne peut etre lue par getimagesize
@@ -564,7 +564,6 @@ function formulaire_taille($document) {
 		  "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
 		  " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
-	return '';
 }
 
 //
@@ -575,27 +574,33 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 	global $spip_lang_right;
 	static $num_form = 0; $num_form ++;
 
-	if (!_DIR_RESTREINT) {
+	if (!_DIR_RESTREINT)
 		$dir_ftp = determine_upload();
-		$debut = "\n" . bouton_block_invisible("ftp$num_form");
-		$milieu = "\n<div>" . debut_block_invisible("ftp$num_form");
-		$fin = "\n" . fin_block();
-	} else $dir_ftp = $debut = $fin = '';
+	else $dir_ftp = '';
 
-	$res =  "\n$debut" .
-		(!$intitule ? '' : "\n\t<span>$intitule</span><br />") .
-		"\n\t\t<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
+	$res = "<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
 		"\n\t\t<div align='" .
 		$GLOBALS['spip_lang_right'] . 
 		"'><input name='sousaction1' type='submit' value='" .
 		_T('bouton_telecharger') .
-		"' class='fondo' /></div>";
+		"' class='fondo' />";
 
 	// Un menu depliant si on a une possibilite supplementaire
 
 	$test_distant = ($mode == 'document' AND $type);
-	if ($dir_ftp OR $test_distant)
-		$res .= $milieu;
+	if ($dir_ftp OR $test_distant OR ($mode == 'vignette')) {
+		$debut = "<div style='float:".$GLOBALS['spip_lang_left'].";'>"
+			. bouton_block_invisible("ftp$num_form") ."</div>\n";
+		$milieu = debut_block_invisible("ftp$num_form");
+		$fin = fin_block();
+
+		if ($mode == 'vignette')
+			$res = $milieu . $res;
+		else
+			$res = $res . $milieu;
+	}
+
+	$res = $debut . ($intitule ? "<span>$intitule</span><br />" : '') .$res;
 
 	if ($dir_ftp) {
 		$l = texte_upload_manuel($dir_ftp,$inclus, $mode);
@@ -619,9 +624,8 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 			"\n</div>";
 	}
 
-	if ($dir_ftp OR $test_distant)
-		$res .= $fin;
-	// Fin menu depliant
+	$res .= $fin;
+	// Fin eventuel menu depliant
 
 	$res .= "\n\t\t<input type='hidden' name='id' value='$id' />" .
 		"\n\t\t<input type='hidden' name='id_document' value='$id_document' />" .
@@ -629,9 +633,16 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		"\n\t\t<input type='hidden' name='ancre' value='$ancre' />" .
 		"\n\t$fin";
 
+	// a cause d'ajax, on ne peut pas faire confiance au script "documenter"
+	// pour reafficher la page apres upload de la vignette... donc il faut
+	// hacker
+	$script = $GLOBALS['exec'];
+	if ($script == 'documenter')
+		$script = ($type == 'rubriques') ? 'naviguer' : 'articles';
+
 	return generer_action_auteur('joindre',
 		$mode,
-		generer_url_ecrire($GLOBALS['exec'], "id_$type=$id"),
+		generer_url_ecrire($script, "id_$type=$id"),
 		$res,
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
 }
@@ -704,10 +715,11 @@ function afficher_portfolio(
 
 		# script pour l'action des formulaires
 		if (isset($document['script']))
-			$script = $document['script']; 
+			$script = $document['script']; # jamais utilise !?
 		elseif ($type == "rubrique")
 			$script = 'naviguer';
-		else	$script = $GLOBALS['exec'];
+		else
+			$script = 'articles';
 
 		$style = "";
 		if (!$case)
@@ -719,7 +731,7 @@ function afficher_portfolio(
 		echo formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif)
-			echo formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
+			echo formulaire_documenter($id_document, $document, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
 			echo "<div class='verdana1'>".$document['info']."</div>";
@@ -1089,7 +1101,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			  "</font></div>";
 		}
 
-		echo formulaire_documenter($id_document, $document, '', $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document, $type, $id, "document$id_document");
 
 		fin_cadre_enfonce();
 		}
@@ -1136,7 +1148,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		if (ereg(",$id_document,", $doublons))
 			echo $raccourci_doc;
 
-		echo formulaire_documenter($id_document, $document,'', $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document, $type, $id, "document$id_document");
 		
 		fin_cadre_relief();
 	}
@@ -1172,21 +1184,34 @@ function date_formulaire_documenter($date, $id_document) {
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
-function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre)
-{
+function formulaire_documenter($id_document, $document, $type, $id, $ancre) {
+
+	// + securite (avec le script exec=documenter ca vient de dehors)
+	if (!preg_match('/^(article|rubrique)$/',$type, $r)) return;
+
 	if ($document) {
 		// premier appel
 		$flag_deplie = teste_doc_deplie($id_document);
-		if (!$script) $script = $GLOBALS['exec'];
-	} else {
-	  	// retour d'Ajax
+	} else if ($id_document) {
+		// retour d'Ajax
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 		$flag_deplie = 'ajax';
+	} else {
+		spip_log("erreur dans formulaire_documenter()");
+		return;
 	}
 
 	$descriptif = $document['descriptif'];
 	$titre = $document['titre'];
 	$date = $document['date'];
+
+	// vers ou rediriger
+	// a cause d'ajax, on ne peut pas faire confiance au script "documenter"
+	// pour reafficher la page apres upload de la vignette... donc il faut
+	// hacker
+	$script = $GLOBALS['exec'];
+	if ($script == 'documenter')
+		$script = ($type == 'rubrique') ? 'naviguer' : 'articles';
  
 	if ($document['mode'] == 'vignette') {
 
@@ -1198,10 +1223,11 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	  $label = _T('entree_titre_document');
 	  $taille = formulaire_taille($document);
 	  $supp = 'doc-24.gif';
+
 	  $id_vignette = $document['id_vignette'];
 	  $vignette = "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />" .
 	    ($id_vignette ?
-	     icone_horizontale (_T('info_supprimer_vignette'), redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id#$ancre"), "vignette-24.png", "supprimer.gif", false) :
+	     icone_horizontale (_T('info_supprimer_vignette'), redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre"), "vignette-24.png", "supprimer.gif", false) :
 	     formulaire_upload($id,_T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document));
 	}
 
