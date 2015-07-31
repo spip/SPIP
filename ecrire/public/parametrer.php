@@ -293,10 +293,9 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if ($fond == 'article'
 	AND $id_article = intval($local['id_article'])) {
 		if ($chapo = sql_chapo($id_article)) {
-			if (substr($chapo, 0, 1) == '=') {
+			if (preg_match(',^=(\[->)?(.*?)[]]?$,', $chapo, $url)){
 				include_spip('inc/texte');
-				list(,$url) = extraire_lien(array('','','',
-				substr($chapo, 1)));
+				$url = calculer_url($url[2]);
 				if ($url) { // sinon les navigateurs pataugent
 					$url = texte_script(str_replace('&amp;', '&', $url));
 					return array('texte' => "<".

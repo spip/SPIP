@@ -484,9 +484,7 @@ function calculer_notes() {
 
 // Renvoie le titre du "lien hypertexte"
 function construire_titre_lien($nom,$url) {
-	$result = extraire_lien(array(1=>$nom, 3=>$url));
-	preg_match("/>([^>]*)<\/a>/", $result[0], $matches);
-	return $matches[1];
+	return typo(supprimer_numero(calculer_url($url, $nom, 'titre')));
 }
 
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site
