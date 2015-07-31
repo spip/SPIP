@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@decompose_champ_id_objet
 function decompose_champ_id_objet($champ){
 	if (($champ!=='id_objet') AND preg_match(',^id_([a-z_]+)$,',$champ,$regs)){
-		return array('id_objet','objet',$regs[1]);
+		return array('id_objet','objet',objet_type($regs[1]));
 	}
 	return $champ;
 }
@@ -57,6 +57,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 	// on contraint le nombre d'etapes en l'augmentant
 	// jusqu'a ce qu'on trouve une jointure ou qu'on atteigne la limite maxi 
 	$max_liens = 1;
+	$res = false;
 	while($max_liens<=5 AND !$res) {
 		$res = calculer_chaine_jointures($boucle, $depart, $arrivee,array(),array(),$max_liens);
 		$max_liens++;
@@ -328,7 +329,7 @@ function trouver_cles_table($keys)
 // http://doc.spip.org/@trouver_champ_exterieur
 function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
-	static $trouver_table;
+	static $trouver_table='';
 	if (!$trouver_table)
 		$trouver_table = charger_fonction('trouver_table', 'base');
 
