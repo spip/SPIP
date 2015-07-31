@@ -150,7 +150,7 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><
 
 debut_cadre_relief("$logo_parent");
 echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
-echo "<SELECT NAME='id_parent'  style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' CLASS='forml' SIZE=1>\n";
+echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif;' class='forml' SIZE='1'>\n";
 if ($connect_toutes_rubriques) {
 	echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>Racine du site\n";
 } else {
