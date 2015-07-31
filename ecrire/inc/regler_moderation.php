@@ -36,7 +36,7 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 
 	$statut_forum = get_forums_publics($id_article);
 
-	$nb_forums = sql_fetch(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')"));
+	$nb_forums = sql_fetsel("COUNT(*) AS count", "spip_forum", "id_article=$id_article AND statut IN ('publie', 'off', 'prop')");
 	$nb_forums = $nb_forums['count'];
 
 	if ($nb_forums) {

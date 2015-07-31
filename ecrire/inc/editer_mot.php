@@ -238,7 +238,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 // http://doc.spip.org/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
-	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
+	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER BY titre");
 
 	$s = '';
 
@@ -405,6 +405,6 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 function editer_mot_droits($select, $cond)
 {
 	$droit = substr($GLOBALS['auteur_session']['statut'],1);
-	return spip_query("SELECT $select FROM spip_groupes_mots WHERE $droit = 'oui' AND $cond");
+	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
 ?>

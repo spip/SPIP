@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+include_spip('base/abstract_sql');
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
@@ -27,7 +27,7 @@ function acces_restreint_rubrique($id_rubrique) {
 // http://doc.spip.org/@auteurs_article
 function auteurs_article($id_article, $cond='')
 {
-	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));
+	return sql_select("id_auteur", "spip_auteurs_articles", "id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
 // http://doc.spip.org/@auteurs_autorises
@@ -124,7 +124,7 @@ function inc_auth_dist() {
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
-	$result = spip_query("SELECT *, en_ligne AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
+	$result = sql_select("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 	if (!$row = sql_fetch($result)) {
 		// il n'est PLUS connu. c'est SQL qui est desyncrho
 		auth_areconnecter($connect_login);

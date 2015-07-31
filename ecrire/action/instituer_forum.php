@@ -37,7 +37,7 @@ function action_instituer_forum_dist() {
 		$id_messages = join(',', $id_messages);
 		spip_query("UPDATE spip_forum SET statut='$statut' WHERE id_forum IN ($id_messages) AND statut = '$old'");
 
-		$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($id_messages)");
+		$result_forum = sql_select("id_forum", "spip_forum", "id_parent IN ($id_messages)");
 		$id_messages = array();
 		while ($row = sql_fetch($result_forum))
 			$id_messages[] = $row['id_forum'];

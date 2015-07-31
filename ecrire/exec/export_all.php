@@ -153,7 +153,7 @@ function complete_fils($rubriques)
 {
 	$r = $rubriques;
 	do {
-		$q = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN (".join(',',$r).")");
+		$q = sql_select("id_rubrique", "spip_rubriques", "id_parent IN (".join(',',$r).")");
 		$r = array();
 		while ($row = sql_fetch($q)) {
 			$r[]= $rubriques[] = $row['id_rubrique'];

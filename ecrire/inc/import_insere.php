@@ -291,7 +291,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = sql_fetch(spip_query("SELECT id_document AS id, fichier AS titre, distant FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
+	$r = sql_fetsel("id_document AS id, fichier AS titre, distant", "spip_documents", "taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')');
 	if (!$r) return false;
 	if (($r['distant'] != 'oui')
 	AND !file_exists(_DIR_IMG . $r['titre']))
@@ -306,7 +306,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
-	$r = sql_fetch(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
+	$r = sql_fetsel("id_type AS id, titre", "spip_types_documents", "extension=" . _q($e) . " AND titre=" . _q($t));
 	return $r ? array($r['id'], $r['titre']) : false;
 }
 
@@ -334,7 +334,7 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 	if (isset($trans['id_groupe'])
 	AND isset($trans['id_groupe'][$id_groupe])) {
 		$new = $trans['id_groupe'][$id_groupe][0];
-		$r = sql_fetch(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
+		$r = sql_fetsel("id_mot", "spip_mots", "titre=$titre AND id_groupe=$new" );
 		if ($r) return  (0 - $r['id_mot']);
 	}
 	if ($r = sql_insert('spip_mots', '()', '()'))
@@ -362,7 +362,7 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = sql_fetch(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
+	$r = sql_fetsel("id_article", "spip_articles", "titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" );
 	if ($r) return (0 - $r['id_article']);
 
 	if ($r = sql_insert('spip_articles', '()', '()'))
@@ -392,7 +392,7 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = sql_fetch(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
+	$r = sql_fetsel("id_breve", "spip_breves", "titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" );
 	if ($r) return (0 - $r['id_breve']);
 
 	if ($r = sql_insert('spip_breves', '()', '()'))
@@ -443,7 +443,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 			}
 		}
 
-		$r = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
+		$r = sql_fetsel("id_rubrique", "spip_rubriques", "titre=" . _q($titre) . " AND id_parent=" . intval($id_parent));
 		if ($r)  {
 		  return (0 - $r['id_rubrique']);
 		}

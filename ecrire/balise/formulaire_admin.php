@@ -81,7 +81,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	AND !$var_preview
 	AND autoriser('voirstats')
 	) {
-		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
+		$result = sql_select("visites, popularite", "spip_articles", "id_article=$id_article AND statut='publie'");
 
 		if ($row = @sql_fetch($result)) {
 			$visites = intval($row['visites']);

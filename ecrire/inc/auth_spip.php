@@ -33,7 +33,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	// login inexistant ou mot de passe vide
 	if (!$md5pass) return array();
 
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($login) . " AND pass=" . _q($md5pass) . " AND statut<>'5poubelle'");
+	$result = sql_select("*", "spip_auteurs", "login=" . _q($login) . " AND pass=" . _q($md5pass) . " AND statut<>'5poubelle'");
 	$row = sql_fetch($result);
 
 	// login/mot de passe incorrect

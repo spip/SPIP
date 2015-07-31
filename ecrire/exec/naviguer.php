@@ -174,7 +174,7 @@ function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 	$navigation =
 	  ($boite ?debut_boite_info(true). $boite . fin_boite_info(true):"");
 
-	$q = spip_query("SELECT A.nom, A.id_auteur FROM spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur WHERE R.id_rubrique=$id_rubrique");
+	$q = sql_select("A.nom, A.id_auteur", "spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur", "R.id_rubrique=$id_rubrique");
 	$res = "";
 	while ($row = sql_fetch($q)) {
 		$id = $row['id_auteur'];

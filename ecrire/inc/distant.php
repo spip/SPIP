@@ -287,7 +287,7 @@ function fichier_copie_locale($source) {
 	}
 
 	// Chercher d'abord le doc dans la table des documents, pour se baser sur son type reel
-	$s = spip_query("SELECT extension FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui' AND extension>''");
+	$s = sql_select("extension", "spip_documents", "fichier=" . _q($source) . " AND distant='oui' AND extension>''");
 	if ($t = sql_fetch($s)) {
 		$extension = $t['extension'];
 

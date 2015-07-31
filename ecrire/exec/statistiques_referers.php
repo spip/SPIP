@@ -30,7 +30,7 @@ function exec_statistiques_referers_dist()
 		exit;
 	}
 	if ($id_article){
-		$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'");
+		$result = sql_select("titre, visites, popularite", "spip_articles", "statut='publie' AND id_article ='$id_article'");
 
 		if ($row = sql_fetch($result)) {
 			$total_absolu = $row['visites'];

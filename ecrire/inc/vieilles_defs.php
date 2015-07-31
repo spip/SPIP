@@ -297,7 +297,7 @@ spip_log('auth_rubrique() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'
 
 	if ($statut != '0minirezo') return $statut;
 
-	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
+	$result = sql_select("id_rubrique", "spip_auteurs_rubriques", "id_auteur=$id_auteur AND id_rubrique!='0'");
 	if (!sql_count($result)) {
 		return 0;
 	}

@@ -28,7 +28,7 @@ function exec_message_dist()
 	$row = sql_fetsel("type", "spip_messages", "id_message=$id_message");
 
 	if ($row['type'] != "affich"){
-		$res = sql_fetch(spip_query("SELECT vu FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
+		$res = sql_fetsel("vu", "spip_auteurs_messages", "id_auteur=$connect_id_auteur AND id_message=$id_message");
 		if (!$res) {
 			include_spip('inc/minipres');
 			echo minipres();
@@ -63,7 +63,7 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 function http_auteurs_ressemblants($cherche_auteur, $id_message)
 {
   global $connect_id_auteur;
-  $query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
+  $query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
   $table_auteurs = array();
   $table_ids = array();
   while ($row = sql_fetch($query)) {
@@ -163,7 +163,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result_auteurs = spip_query("SELECT auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang, auteurs.extra FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
+	$result_auteurs = sql_select("auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang, auteurs.extra", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
 	$total_dest = sql_count($result_auteurs);
 

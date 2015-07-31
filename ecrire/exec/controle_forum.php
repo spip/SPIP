@@ -19,7 +19,7 @@ include_spip('inc/forum');
 
 // http://doc.spip.org/@forum_parent
 function forum_parent($id_forum) {
-	$row=sql_fetch(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
+	$row=sql_fetsel("*", "spip_forum", "id_forum=$id_forum AND statut != 'redac'");
 	if (!$row) return '';
 	$id_forum=$row['id_forum'];
 	$forum_id_parent=$row['id_parent'];
@@ -172,7 +172,7 @@ function controle_un_forum($row) {
 	$controle .= safehtml(lignes_longues($suite));
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
-	  $result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+	  $result_mots = sql_select("*", "spip_mots AS mots, spip_mots_forum AS lien", "lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 
 		while ($row_mots = sql_fetch($result_mots)) {
