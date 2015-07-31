@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+@define('_COPIE_LOCALE_MAX_SIZE',1048576); // poids (inc/utils l'a fait)
 //
 // Cree au besoin la copie locale d'un fichier distant
 // mode = 'test' - ne faire que tester
@@ -171,7 +171,8 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 	if (!empty($datas)) {
 		$get = 'POST';
-		$datas = prepare_donnees_post($datas);
+		list($type, $postdata) = prepare_donnees_post($datas);
+		$datas = $type . 'Content-Length: '.strlen($postdata)."\r\n\r\n".$postdata;
 	}
 
 	// dix tentatives maximum en cas d'entetes 301...
@@ -191,72 +192,38 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // http://doc.spip.org/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
-	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);
-	$gz = false;
-
-	// si on a utilise fopen() - passer a la suite
-	if (!$fopen) {
-			// Fin des entetes envoyees par SPIP
-			if($get == 'POST') {
-				list($content_type, $postdata) = $datas;
-				@fputs($f, $content_type);
-				@fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
-				@fputs($f, "\r\n".$postdata);
-			} else {
-				@fputs($f,"\r\n");
-			}
-
-			// Reponse du serveur distant
-			$s = @trim(fgets($f, 16384));
-			if (preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
-				$status = $r[1];
-			}
-			else return false;
-
-			// Entetes HTTP de la page
-			$headers = '';
-			while ($s = trim(fgets($f, 16384))) {
-				$headers .= $s."\n";
-				if (preg_match(',^Location: (.*),i', $s, $r)) {
-					include_spip('inc/filtres');
-					$location = suivre_lien($url, $r[1]);
-				}
-				if ($date_verif AND preg_match(',^Last-Modified: (.*),', $s, $r)) {
-					if(strtotime($date_verif)>=strtotime($r[1])) {
-						//Cas ou la page distante n'a pas bouge depuis
-						//la derniere visite
-						return $status;
-					}
-				}
-				if (preg_match(",^Content-Encoding: .*gzip,i", $s))
-					$gz = true;
-			}
-			if ($status >= 300 AND $status < 400 AND $location) {
-				fclose($f);
-				return $location;
-			} else if ($status != 200){
-				spip_log("ECHEC chargement $url : Status $status");
-				return false;
-			}
-			; # sinon on est content
-		}
-		
-	// Contenu de la page
+	// ouvrir la connexion et envoyer la requete et ses en-tetes
+	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas);
 	if (!$f) {
-		spip_log("ECHEC chargement $url");
+		spip_log("ECHEC init_http $url");
 		return false;
 	}
 
+	// Sauf en fopen, envoyer le flux d'entree 
+	// et recuperer les en-tetes de reponses
+	if ($fopen) 
+		$headers = '';
+	else {
+		$headers = recuperer_entetes($f, $date_verif);
+		if (!$headers) {
+			spip_log("ECHEC chargement $url");
+			return false;
+		}
+		if (!is_array($headers))
+			return $headers ; // cas Location ou Modified.
+		$headers = join('', $headers);
+	}
+
+#	spip_log("recup  $headers" );
 	if ($trans === NULL) return array($headers, '');
-	$result = '';
-	while (!feof($f) AND strlen($result)<$taille_max)
-		$result .= fread($f, 16384);
+	$result = recuperer_body($f, $taille_max);
 	fclose($f);
+	if (!$result) return array($headers, $result);
 
-	// Decompresser le flux
-	if ($gz AND $result)
+	// Decompresser au besoin
+	if (preg_match(",\bContent-Encoding: .*gzip,i", $headers)) {
 		$result = gzinflate(substr($result,10));
-
+	}
 	// Faut-il l'importer dans notre charset local ?
 	if ($trans) {
 		include_spip('inc/charsets');
@@ -266,6 +233,54 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 	return array($headers, $result);
 }
 
+function recuperer_body($f, $taille_max=1048576)
+{
+	$result = '';
+	while (!feof($f) AND strlen($result)<$taille_max)
+		$result .= fread($f, 16384);
+	return $result;
+}
+
+// Entetes de reponse HTTP sur la socket $f
+// Les retourne sous forme de tableau, 
+// sauf si presence de Location ou Last-Modified,
+// ou on renvoie une chaine et on ferme la connexion
+
+function recuperer_entetes($f, $date_verif='')
+{
+	$s = @trim(fgets($f, 16384));
+
+	if (!preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
+		@fclose($f);
+		return false;
+	}
+	$status = $r[1];
+	$headers = array();
+	while ($s = trim(fgets($f, 16384))) {
+		$headers[]= $s."\n";
+		if (preg_match(',^Location: (.*),i', $s, $r)) {
+			include_spip('inc/filtres');
+			$location = suivre_lien($url, $r[1]);
+		}
+		if ($date_verif AND preg_match(',^Last-Modified: (.*),', $s, $r)) {
+			if(strtotime($date_verif)>=strtotime($r[1])) {
+				//Cas ou la page distante n'a pas bouge depuis
+				//la derniere visite
+				fclose($f);
+				return $status;
+			}
+		}
+	}
+	if ($status >= 300 AND $status < 400 AND $location) {
+		fclose($f);
+		return $location;
+	} else if ($status != 200){
+		spip_log("ECHEC chargement $url : Status $status");
+		@fclose($f);
+		return false;
+	}
+	return $headers;
+}
 
 // Si on doit conserver une copie locale des fichiers distants, autant que ca
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
@@ -462,11 +477,11 @@ function need_proxy($host)
 }
 
 //
-// Demarre une transaction HTTP (s'arrete a la fin des entetes)
-// retourne un descripteur de fichier
+// Lance une requete HTTP avec entetes
+// retourne le descripteur sur lequel lire la reponse
 //
 // http://doc.spip.org/@init_http
-function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
+function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 
 	$t = @parse_url($url);
@@ -481,45 +496,37 @@ function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 		$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
 	}
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
-	$query = $t['query'];
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
+	if ($t['query']) $path .= "?" .$t['query'];
 
 	$http_proxy = need_proxy($host);
 
 	if ($http_proxy) {
-		spip_log("connexion vers $url via $http_proxy");
+		$path = "$scheme://$host" . (($port != 80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
-		$proxy_host = $t2['host'];
 		$proxy_user = $t2['user'];
 		$proxy_pass = $t2['pass'];
-		if (!($proxy_port = $t2['port'])) $proxy_port = 80;
-		$f = @fsockopen($proxy_host, $proxy_port);
-		$req = "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n";
-	} else {
-		$f = @fsockopen($scheme_fsock.$host, $port);
-		spip_log("connexion vers $url sans proxy");
-		$req = "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n";
-	}
+		$first_host = $t2['host'];
+		if (!($port = $t2['port'])) $port = 80;
+
+	} else $first_host = $scheme_fsock.$host;
+	$f = @fsockopen($first_host, $port);
+	spip_log("Recuperer $path sur $first_host:$port par $f");
 	if ($f) {
+		$site = $GLOBALS['meta']["adresse_site"];
+
+		$req = "$method $path $vers\r\n"
+		. "Host: $host\r\n"
+		. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
+		. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
+		. (!$site ? '' : "Referer: $site/$referer\r\n")
+		. (!$proxy_user ? '' :
+		    ("Proxy-Authorization: Basic "
+		     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
+
+#		spip_log("Requete\n$req");
 		fputs($f, $req);
-		fputs($f, "Host: $host\r\n");
-		fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
-
-		// Proxy authentifiant
-		if ($proxy_user) {
-			fputs($f, "Proxy-Authorization: Basic "
-			. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
-		}
-		// Referer = c'est nous !
-		if ($referer = $GLOBALS['meta']["adresse_site"]) {
-			$referer .= '/'.$uri_referer;
-			fputs($f, "Referer: $referer\r\n");
-		}
-
-		// On sait lire du gzip
-		if ($GLOBALS['flag_gz'] AND !$refuse_gz)
-			fputs($f, "Accept-Encoding: gzip\r\n");
-
+		fputs($f, $datas ? $datas : "\r\n");
 	}
 	// fallback : fopen
 	else if (!$GLOBALS['tester_proxy']) {
