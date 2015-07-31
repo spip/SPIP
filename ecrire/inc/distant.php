@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-@define('_COPIE_LOCALE_MAX_SIZE',1048576); // poids (inc/utils l'a fait)
+//@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 //
 // Cree au besoin la copie locale d'un fichier distant
 // mode = 'test' - ne faire que tester
