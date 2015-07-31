@@ -405,7 +405,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_contenance' => 'Ta strona zawiera:',
 'info_contribution' => 'wpisy na forum',
 'info_copyright' => '@spip@ - darmowe oprogramowanie dystrybuowane w oparciu o licencj&#281; @lien_gpl@.',
-'info_copyright_doc' => 'Wi&#281;cej informacji na stronie <a href="@spipnet@">http://www.spip.net</a>.',
+'info_copyright_doc' => '<MODIF>Wi&#281;cej informacji na stronie <a href="@spipnet@">http://www.spip.net</a>.',
 'info_copyright_gpl' => 'na licencji GPL',
 'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',

@@ -405,7 +405,7 @@ Merc&eacute; de la voastra participacion
 'info_contenance' => 'Aqueu sit compren&nbsp;:',
 'info_contribution' => 'contribucions de f&ograve;ro',
 'info_copyright' => 'es un logiciau liure distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
+'info_copyright_doc' => '<MODIF>Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
 'info_copyright_gpl' => 'sota licen&ccedil;a GPL',
 'info_cours_edition' => 'Lu voastres articles en cors de redacion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier &ograve; un repert&ograve;ri nomat',

@@ -399,7 +399,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_contenance' => 'Aquest lloc cont&eacute;:',
 'info_contribution' => 'contribucions del f&ograve;rum',
 'info_copyright' => '@spip@ &eacute;s programari lliure distribu&iuml;t @lien_gpl@.',
-'info_copyright_doc' => 'Per a m&eacute;s informaci&oacute;, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.',
+'info_copyright_doc' => '<MODIF>Per a m&eacute;s informaci&oacute;, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.',
 'info_copyright_gpl' => 'sota llic&egrave;ncia GPL',
 'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',

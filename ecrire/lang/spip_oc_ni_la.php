@@ -369,7 +369,7 @@ Merc&eacute; per la v&ograve;stra participacion
 'info_contenance' => 'Aqueu sit conten:',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => '@spip@ es un logiciau liure distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
+'info_copyright_doc' => '<MODIF>Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
 'info_copyright_gpl' => 'sota lic&eacute;ncia GPL',
 'info_cours_edition' => 'Li v&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier &ograve; un repert&ograve;ri nommat',

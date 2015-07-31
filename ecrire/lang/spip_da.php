@@ -396,7 +396,7 @@ Tak for din deltagelse
 'info_contenance' => 'Dette websted indeholder:',
 'info_contribution' => 'indl&aelig;g i fora',
 'info_copyright' => '@spip@ er fri software der distribueres @lien_gpl@.',
-'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href="@spipnet@">http://www.spip.net/da</a>.',
+'info_copyright_doc' => '<MODIF>For yderligere oplysninger bes&oslash;g webstedet <a href="@spipnet@">http://www.spip.net/da</a>.',
 'info_copyright_gpl' => 'under GPL licens',
 'info_cours_edition' => 'Artikler undervejs',
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',

@@ -401,7 +401,7 @@ Trugarez da gemer perzh
 'info_contenance' => 'El lec\'hienn-ma&ntilde; ez eus&nbsp;:',
 'info_contribution' => 'kemennadenn er forum',
 'info_copyright' => 'Ur meziant dieub eo @spip@, kinniget @lien_gpl@.',
-'info_copyright_doc' => 'Evit titouro&ugrave; ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.',
+'info_copyright_doc' => '<MODIF>Evit titouro&ugrave; ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'dindan gwarez GPL',
 'info_cours_edition' => 'Ho pennado&ugrave; war-skriva&ntilde;',
 'info_creer_repertoire' => 'Krouit ur restr pe un teul anvet&nbsp;:',

@@ -393,7 +393,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_contenance' => 'Tyto str&aacute;nky obsahuj&iacute;:',
 'info_contribution' => 'p&#345;&iacute;sp&#283;vky do diskusn&iacute; skupiny',
 'info_copyright' => '@spip@ je freeware distribuovan&yacute; @lien_gpl@.',
-'info_copyright_doc' => 'Bli&#382;&#353;&iacute; informace viz <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => '<MODIF>Bli&#382;&#353;&iacute; informace viz <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'v r&aacute;mci licence GPL',
 'info_cours_edition' => 'Va&#353;e rozpracovan&eacute; &#269;l&aacute;nky',
 'info_creer_repertoire' => 'Vytvo&#345;te soubor nebo adres&aacute;&#345; s n&aacute;zvem:',

@@ -404,7 +404,7 @@ Bedankt voor je deelname
 'info_contenance' => 'Deze site bevat:',
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
-'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
+'info_copyright_doc' => '<MODIF>Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
 'info_copyright_gpl' => 'onder GPL licentie',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',

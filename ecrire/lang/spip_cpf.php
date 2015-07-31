@@ -408,7 +408,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_contenance' => 'Dann sit-la nana&nbsp;:',
 'info_contribution' => 'bann kontribusyon dann forom',
 'info_copyright' => '@spip@ l&eacute; inn lozisyel lib sak l&eacute; don&eacute; @lien_gpl@.',
-'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href="@spipnet@">http://www.spip.net/cpf</a>.',
+'info_copyright_doc' => '<MODIF>Pou plid zinformasyon anon vizit lo sit <a href="@spipnet@">http://www.spip.net/cpf</a>.',
 'info_copyright_gpl' => 'sou lisans GPL',
 'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
 'info_creer_repertoire' => 'Mersi kr&eacute; inn fisy&eacute; o inn r&eacute;pertwar &egrave;k non-la&nbsp;:',
