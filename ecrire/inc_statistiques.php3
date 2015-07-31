@@ -12,7 +12,6 @@ define("_ECRIRE_INC_STATISTIQUES", "1");
 function stats_load_engines() {
 	// le moteur de recherche interne
 	$arr_engines = Array();
-	$arr_engines[] = Array('Recherche SPIP','recherche=',ereg_replace('^http://([^/]+)(/.*)?','\1',lire_meta('adresse_site')));
 
 	$file_name = 'data/engines-list.ini';
 	if ($fp = @fopen($file_name, 'r'))
@@ -48,12 +47,17 @@ function stats_load_engines() {
 }
 
 function stats_show_keywords($kw_referer, $kw_referer_host) {
-	global $arr_engines;
+	static $arr_engines;
+	static $url_site;
 	global $flag_utf8_decode;
 	
-	if (sizeof($arr_engines) == 0) {
+	if (!$arr_engines) {
 		// Charger les moteurs de recherche
 		$arr_engines = stats_load_engines();
+
+		// initialiser la recherche interne
+		$url_site = lire_meta('adresse_site');
+		$url_site = strtolower(eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site));
 	}
  
 	$url   = parse_url( $kw_referer );
@@ -65,6 +69,13 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$keywords = '';
 	$found = false;
   
+	if (strpos('-'.$kw_referer, $url_site)) {
+		if (eregi("recherche=([^=]+)", $kw_referer, $regs)) {
+			$keywords = $regs[1];
+			$kw_referer_host = "Recherche SPIP";
+		} else
+			return '';
+	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
 		if ($found = ($host == $arr_engines[$cnt][2]))

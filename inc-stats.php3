@@ -43,9 +43,9 @@ function ecrire_stats() {
 	}
 	if (lire_meta('activer_statistiques_ref') == 'oui') {
 		$url_site_spip = lire_meta('adresse_site');
-		$url_site_spip = eregi_replace("^(https?|ftp://)www\.", "\\1(www)?\.", $url_site_spip);
+		$url_site_spip = eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site_spip);
 		$log_referer = $GLOBALS['HTTP_REFERER'];
-		if (eregi($url_site_spip, $log_referer) AND !$GLOBALS['var_recherche']) $log_referer = "";
+		if (strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
 			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
 			$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
