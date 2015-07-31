@@ -12,12 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-// Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
-// il faut donc definir la fonction _cron ici.
 function genie_optimiser_dist($t) {
 
-	optimiser_base();
+	if ($GLOBALS['connexions'][0]['type'] == 'mysql')
+		optimiser_base();
+	else spip_log($GLOBALS['connexions'][0]['type'] . " pas d'optimiseur disponible");
 	return 1;
 }
 
