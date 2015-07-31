@@ -631,7 +631,7 @@ td.icone a img {
 	background-image: url(img_pack/puce-rouge-breve.gif);
 }
 .plan-articles .poubelle {
-	background-image: url(img_pack/puce-rouge-breve.gif);
+	background-image: url(img_pack/puce-poubelle-breve.gif);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, a.creer, a.creer:hover {

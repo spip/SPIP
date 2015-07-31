@@ -3,12 +3,6 @@
 include ("inc.php3");
 // pour low_sec (iCal)
 include_ecrire("inc_acces.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_documents.php3");
-include_ecrire ("inc_agenda.php3");
-
-
 
 
 ///// debut de la page
@@ -39,7 +33,6 @@ $adresse_site=lire_meta("adresse_site");
 $adresse_suivi_inscription=lire_meta("adresse_suivi_inscription");
 
 debut_droite();
-
 
 
 ///

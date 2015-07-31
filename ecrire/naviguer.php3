@@ -9,7 +9,6 @@ include_ecrire ("inc_documents.php3");
 $coll = intval($coll);
 $flag_mots = lire_meta("articles_mots");
 
-
 function enfant($collection){
 	global $les_enfants, $couleur_foncee, $lang_dir;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
