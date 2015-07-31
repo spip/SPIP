@@ -196,8 +196,6 @@ function exec_suivi_edito_dist()
 
 	echo encours_suivi();
 
- 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'suivi_edito'),'data'=>''));
-
 	// Les articles recents
 	//
 	echo "<h2>"._T('articles_recents')."</h2>";
@@ -207,11 +205,7 @@ function exec_suivi_edito_dist()
 		? " AND date<".sql_quote(date('Y-m-d H:i:s')) : ''),
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
 
-	// Dernieres modifications d'articles
-	if (($GLOBALS['meta']['articles_versions'] == 'oui')) {
-		include_spip('inc/suivi_versions');
-		echo afficher_suivi_versions (0, 0, false, "", true);
-	}
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'suivi_edito'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }
