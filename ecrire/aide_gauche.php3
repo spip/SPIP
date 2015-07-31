@@ -32,6 +32,7 @@ echo ">";
 function rubrique($titre, $statut = "redac") {
 	global $aide;
 	global $ligne;
+	global $ligne_rubrique;
 	global $larubrique;
 	global $texte;
 	global $afficher;
@@ -44,8 +45,13 @@ function rubrique($titre, $statut = "redac") {
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$larubrique++;
 		$ligne++;
+		$ligne_rubrique = $ligne;
+		$ancre = "a$ligne_rubrique";
 
-		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR><TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A>	<B><A HREF='#LIEN'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B></TD></TR>";
+		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR>"
+			."<TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A> "
+			."<B><A HREF='#LIEN' NAME='$ancre'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B>"
+			."</TD></TR>";
 		$rubrique[$ligne]=$larubrique;
 
 		if (ereg(",$larubrique,","$les_rub")){
@@ -53,7 +59,7 @@ function rubrique($titre, $statut = "redac") {
 		}else{
 			$afficher[$larubrique]=0;
 		}
-		
+
 		$aff_ligne[$ligne]=1;
 	}
 }
@@ -61,6 +67,7 @@ function rubrique($titre, $statut = "redac") {
 function article($titre, $lien, $statut = "redac") {
 	global $aide;
 	global $ligne;
+	global $ligne_rubrique;
 	global $larubrique;
 	global $rubrique;
 	global $texte;
@@ -71,15 +78,21 @@ function article($titre, $lien, $statut = "redac") {
 
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$ligne++;
+		$ancre = "a$ligne_rubrique";
+		$url = "aide_index.php3?aide=$lien&les_rub=$les_rub&ancre=$ancre";
 
 		$rubrique[$ligne]=$larubrique;
-		
+
 		if ($aide==$lien) {
 			$afficher[$larubrique]=1;
-			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> <IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0 ALIGN='middle'></TD></TR>";
+			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2>"
+				."<FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> "
+				."<IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0 ALIGN='middle'></TD></TR>";
 		}
 		else {
-			$texte[$ligne]= "<TR><TD><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><B><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'><IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0></A></B></font></TD><TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'>$titre</A></font></TD></TR>";
+			$texte[$ligne]= "<TR><TD><A HREF='$url' TARGET='_top'><IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0></A></TD>"
+				."<TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='$url' TARGET='_top'>$titre</A></font>"
+				."</TD></TR>";
 		}
 	}
 }
@@ -176,21 +189,21 @@ article(_T('menu_aide_interface_perso_cookie'),"cookie");
 article(_T('menu_aide_interface_perso_deconnecter'),"deconnect");
 
 for ($i=0; $i<=count($texte); $i++) {
-	
+
 	$larubrique=$rubrique[$i];
 	$aff=$afficher[$larubrique];
-	
+
 	if ($aff == 1 OR $aff_ligne[$i] == 1) {
 		if ($aff == 1) {
 			$supp_rub="$larubrique";
-			
+
 			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide",$texte[$i]);
+			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide#a$i",$texte[$i]);
 		}
 		else {
 			$ajouter_rub="$larubrique";
 			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide",$texte[$i]);
+			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide#a$i",$texte[$i]);
 
 		}
 		echo $texte[$i]."\n";
