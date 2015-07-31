@@ -73,10 +73,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Insertar una E may&uacute;scula con tilde',
 'barre_eo' => 'Insertar una E en la O ',
 'barre_eo_maj' => 'Insertar una E en la O may&uacute;scula ',
-'barre_euro' => 'Insertar el s&iacute;mbolo &euro;€',
-'barre_gras' => 'Poner en {{negrilla}}',
-'barre_guillemets' => 'Poner entre &laquo; comillas francesas &raquo;',
-'barre_guillemets_simples' => 'Poner entre “comillas de segundo nivel”',
+'barre_euro' => 'Insertar el s&iacute;mbolo &euro;',
+'barre_gras' => 'Poner en {{negrita}}',
+'barre_guillemets' => 'Poner entre &laquo;comillas&raquo;',
+'barre_guillemets_simples' => 'Poner entre "comillas de segundo nivel"',
 'barre_intertitre' => 'Transformar en  {{{inter-t&iacute;tulo}}}',
 'barre_italic' => 'Poner en {cursiva}',
 'barre_lien' => 'Transformar en [enlace de hipertexto->http://...]',
@@ -155,10 +155,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => '<MODIF> Si utilizas un software de agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), puedes sincronizarlo con la actualidad editorial de este sitio.',
-'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
-'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
-'calendrier_synchro_public' => 'El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => 'Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -351,18 +347,18 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 
 // I
-'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
-'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
-'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
-'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
-'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
-'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
-'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
-'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
-'ical_titre_js' => '<NEW> Javascript',
-'ical_titre_mailing' => '<NEW> Mailing-list',
-'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
+'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
+'ical_info2' => 'Para mayor informaci&oacute;n acerca de estas t&eacute;cnicas, no dudes en consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
+'ical_info_calendrier' => 'Tienes dos calendarios a tu disposici&oacute;n. El primero es un plano del sitio que anuncia todos los art&iacute;culos publicados. El segundo contiene los anuncios editoriales y tus &uacute;ltimos mensajes privados: s&oacute;lo t&uacute;lo v&eacute;s gracias a una clave personal, que podr&aacute;s modificar en cualquier momento modificando tu contrase&ntilde;a. ',
+'ical_methode_http' => 'Descargar',
+'ical_methode_webcal' => 'Sincronizaci&oacute;n (webcal://)',
+'ical_texte_js' => 'Una l&iacute;nea de javascript te permite mostrar muy simplemente, en cualquier sitio que te pertenece, los art&iacute;culos recientes publicados en este sitio.',
+'ical_texte_prive' => 'Este calendario, de uso estrictamente personal, te informa de la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...)',
+'ical_texte_public' => 'Este calendariopermite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicados)',
+'ical_texte_rss' => 'Puedes sindicar las novedades de este sitio con cualquier lector de ficheros al formato XML/RSS (Rich Site Summary). Este es tambi&eacute;n el formato que permite a SPIP leer las novedades publicadas en otros sitios que utilizan un formato de intercambio compatible. ',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Lista de correo',
+'ical_titre_rss' => 'Fichero &laquo;backend&raquo;',
 'icone_a_suivre' => 'Mis tareas',
 'icone_activer_cookie' => 'Activar la "cookie" de correspondencia',
 'icone_admin_site' => 'Administraci&oacute;n del sitio',
@@ -1528,7 +1524,14 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br><img src="puce.g
 'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ',
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
-'trad_reference' => '(art&iacute;culo de referencia)'
+'trad_reference' => '(art&iacute;culo de referencia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
+'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
+'calendrier_synchro_public' => 'El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
+'calendrier_synchro_sync' => 'Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 

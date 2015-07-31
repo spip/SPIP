@@ -203,6 +203,7 @@ l&eacute; pa kav rokon&egrave;t ali.',
 
 // C
 'calendrier_synchro' => '<MODIF> Si ou ans&egrave;rv in lozisy&egrave;l pou in lajinda i mars &egrave;k <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...),ou p&eacute; m&egrave;t ali si lo ritm bann arnouv&egrave;lman laktyalit&eacute; lo sit-la.',
+'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>',
 
 
 // D
@@ -403,9 +404,9 @@ Mersi aou m&egrave;t ansanm isi
 'ical_info_calendrier' => 'Ast&egrave;r n&eacute;na d&eacute; kalandry&eacute; disponib. Promy&eacute; l&eacute; in many&egrave;r d\'kart pou lo sit, sak i donn a ou tout bann zartik la finn d&egrave;t pibliy&eacute;. D&eacute;zi&egrave;m-la, i donn aou tout bann zanons l&eacute;ditoryal &egrave;k zot derny&eacute; mod&eacute;kri andann out l&eacute;spas priv&eacute; (out kazmod&eacute;kri)&nbsp;: laks&eacute; d&eacute;zy&egrave;m kalandry&eacute;-la, li l&eacute; r&eacute;zerv&eacute;. ou minm s&egrave;lman l&eacute; kav konsilt ali sanm inn sort kl&eacute; priv&eacute;, sak ou p&eacute; sanz kank i v&eacute; (sanz s&egrave;lman out modpas). ',
 'ical_methode_http' => 'T&eacute;l&eacute;sarzman',
 'ical_methode_webcal' => 'Po f&eacute; lasinkronizasyon(webcal://)',
-'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
-'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_js' => 'In liny "javascript" (zavaskrip) i perm&eacute; afis&eacute; tout bann zartik sat la finn d&egrave;t pibliy&eacute; an liny si lo sit-la. L&eacute; tr&eacute; sinp. Ou i p&eacute; afis&eacute; zot-la  si tout bann sit aou.',
+'ical_texte_prive' => 'Kalandry&eacute;-la l&eacute; s&egrave;lman disponib pou ou-minm. I di aou kosa i l&eacute; laktivit&eacute; &eacute;ditoryal lo sitw&egrave;b (kosa ou dwa f&eacute;, kank i l&eacute; out bann rand&eacute;vou, kank bann zartik &egrave;k bann tite-nouv&egrave;l la finn d&egrave;t propoz&eacute;...).',
+'ical_texte_public' => 'Kalandry&eacute;-la i di aou kosa i l&eacute; laktivit&eacute; pibli si lo sitw&egrave;b (i rapp&egrave;l tout bann zartik &egrave;k tite-nouv&egrave;l sat la finn d&egrave;t pibliy&eacute;).',
 'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
 'ical_titre_js' => '<NEW> Javascript',
 'ical_titre_mailing' => '<NEW> Mailing-list',
@@ -1640,11 +1641,7 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>'
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)'
 
 );
 
