@@ -20,15 +20,18 @@ function exec_mots_edit_dist()
 {
 	global $spip_lang_right;
 // attention, ajouter_id_article n'est pas forcement un id d'article
-global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
+global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 
- $id_groupe = intval($id_groupe);
- $id_mot = intval($id_mot);
+ $id_groupe = intval(_request('id_groupe'));
+ $id_mot = intval(_request('id_mot'));
+ $new = _request('new');
  // Secu un peu superfetatoire car seuls les admin generaux les verront;
  // mais si un jour on relache les droits, vaut mieux blinder.
- $table = preg_replace('/\W/','',$table);
- $table_id = preg_replace('/\W/','',$table_id);
- $ajouter_id_article = intval($ajouter_id_article);
+ $table = preg_replace('/\W/','',_request('table'));
+ $table_id = preg_replace('/\W/','', _request('table_id'));
+ $titre = _request('titre');
+ $redirect = _request('redirect');
+ $ajouter_id_article = intval(_request('ajouter_id_article'));
 //
 // Recupere les donnees
 //
@@ -48,7 +51,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 			exit;
 		}
 		$id_mot = 0;
-
+		$descriptif = $texte = '';
 		if (!$titre_mot = $titre) {
 			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
