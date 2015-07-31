@@ -340,7 +340,7 @@ function import_all_continue()
 {
   global $meta, $flag_gz, $buf, $abs_pos, $my_pos, $connect_toutes_rubriques;
 	global $affiche_progression_pourcent;
-	ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
 	lire_metas();
