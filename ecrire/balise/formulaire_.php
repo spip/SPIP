@@ -29,7 +29,7 @@ function balise_FORMULAIRE__dyn($form)
 	$editable = (!isset($_POST["erreurs_$form"])) || count($erreurs);
 
 	if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
-		$valeurs = call_user_func($charger_valeurs,$args);
+		$valeurs = call_user_func_array($charger_valeurs,$args);
 	if ($valeurs===false) {
 		// pas de saisie
 		$editable = false;
