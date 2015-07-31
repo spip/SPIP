@@ -266,8 +266,8 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = spip_fetch_array(spip_query($q="SELECT id_document, fichier FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'), SPIP_NUM);
-	return $r;
+	$r = spip_fetch_array(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
+	return array($r['id'], $r['titre']);
 }
 
 // un type de document importe est considere comme identique a un type present
@@ -277,15 +277,15 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
-	$r = spip_fetch_array(spip_query($q="SELECT id_type, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)), SPIP_NUM);
-	return $r;
+	$r = spip_fetch_array(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
+	return array($r['id'], $r['titre']);
 }
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
-	$r = spip_fetch_array(spip_query("SELECT id_groupe, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])), SPIP_NUM);
-	return $r;
+	$r = spip_fetch_array(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
+	return array($r['id'], $r['titre']);
 }
 
 // pour un mot le titre est insuffisant, il faut aussi l'identite du groupe.

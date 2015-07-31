@@ -166,9 +166,10 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
        ## note : toutefois c'est juste un pb d'interface, car question securite
        ## la verification est faite a l'arrivee des donnees (Fil)
 
-	if ($id_rubrique)
-		list($titre) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
-	else if ($type == 'auteur')
+	if ($id_rubrique) {
+		$titre = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$titre = $titre['titre'];
+	} else if ($type == 'auteur')
 		$titre = '&nbsp;';
 	else
 		$titre = _T('info_racine_site');

@@ -174,10 +174,11 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 			$vals= array("<a href='$url'>$cle</a>");
 
-			list($type_mot, $unseul) = spip_fetch_array(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"), SPIP_NUM);
+			$r = spip_fetch_array(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+			$unseul = $r['unseul'];
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+			$type_mot = typo($r['titre']);
 
-			$type_mot = typo($type_mot);
 			if (autoriser('modifier', 'groupemots', $id_groupe))
 				$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
 

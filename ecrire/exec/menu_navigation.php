@@ -67,31 +67,31 @@ function exec_menu_navigation_dist() {
 			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
-		
-	if (spip_num_rows($result) > 0) {
-		list($une_rubrique) = spip_fetch_array($result, SPIP_NUM);
+	$result = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+
+	if ($result) {
+		$une_rubrique = $result['id_rubrique'];
 		$gadget .= "<div>&nbsp;</div>";
 		if ($id_rubrique > 0) {
-				$dans_rub = "&id_rubrique=$id_rubrique";
-				$dans_parent = "&id_parent=$id_rubrique";
+			$dans_rub = "&id_rubrique=$id_rubrique";
+			$dans_parent = "&id_parent=$id_rubrique";
 		} else $dans_rub = $dans_parent = '';
 		if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {	
-				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-				if ($id_rubrique > 0)
-					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);
-				else 
-					$gadget .= icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
-				$gadget .= "</div>";
+			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
+			if ($id_rubrique > 0)
+				$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);
+			else 
+				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
+			$gadget .= "</div>";
 		}		
 		$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 		$gadget .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
 		$gadget .= "</div>";
 			
 		if ($GLOBALS['meta']["activer_breves"] != "non") {
-				$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
-				$gadget .= "</div>";
+			$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
+			$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
+			$gadget .= "</div>";
 		}
 			
 		if (autoriser('creersitedans', 'rubrique', $une_rubrique)) {
