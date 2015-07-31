@@ -607,15 +607,16 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 function http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, $largeur, $evt, $style='', $class='') {
 	global $spip_lang_left;
 
-	if (is_array($GLOBALS['calendrier_partie'][$partie_cal]))
-	  list($debut, $fin) = $GLOBALS['calendrier_partie'][$partie_cal];
-	elseif (preg_match('/^(\d+)\D(\d+)$/', $partie_cal, $m))
-	  list(,$debut, $fin)  = $m;
+	if (is_array($GLOBALS['calendrier_partie'][$partie_cal])) {
+		$debut = $GLOBALS['calendrier_partie'][$partie_cal]['debut'];
+		$fin = $GLOBALS['calendrier_partie'][$partie_cal]['fin'];
+	} elseif (preg_match('/^(\d+)\D(\d+)$/', $partie_cal, $m))
+		list(,$debut, $fin)  = $m;
 	else {
 		$debut = 7;
 		$fin =21;
 	}
-	
+
 	if ($echelle==0) $echelle = DEFAUT_D_ECHELLE;
 
 	list($dimheure, $dimjour, $fontsize, $padding) =
