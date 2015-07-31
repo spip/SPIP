@@ -41,7 +41,7 @@ function  configuration_bloc_votre_site()
 	. fin_cadre_relief(true);
 }
 
-function configuration_accueil()
+function configuration_accueil_dist()
 {
 	$res = configuration_bloc_votre_site();
 

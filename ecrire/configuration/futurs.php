@@ -19,7 +19,7 @@ include_spip('inc/config');
 // Articles post-dates
 //
 
-function configuration_futurs()
+function configuration_futurs_dist()
 {
 	global $spip_lang_left;
 

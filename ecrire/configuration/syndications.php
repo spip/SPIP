@@ -15,16 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 
-
 //
 // Actives/desactiver systeme de syndication
 //
 
-
-function configuration_syndications()
+function configuration_syndications_dist()
 {
-	global $spip_lang_left, $spip_lang_right;
-
+	global $spip_lang_left;
 	
 	$activer_sites = $GLOBALS['meta']['activer_sites'];
 	$activer_syndic = $GLOBALS['meta']["activer_syndic"];

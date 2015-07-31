@@ -19,23 +19,21 @@ include_spip('inc/config');
 // Actives/desactiver les breves
 //
 
-function configuration_breves(){
-	global $spip_lang_left, $spip_lang_right;
+function configuration_breves_dist(){
 
 	$activer_breves = $GLOBALS['meta']["activer_breves"];
 
-	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-	$res .= "<tr><td class='verdana2'>";
-	$res .= _T('texte_breves')."<br />\n";
-	$res .= _T('info_breves');
-	$res .= "</td></tr>";
-	
-	$res .= "<tr><td align='center' class='verdana2'>";
-	$res .= afficher_choix('activer_breves', $activer_breves,
+	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+	. "<tr><td class='verdana2'>"
+	. _T('texte_breves')."<br />\n"
+	. _T('info_breves')
+	. "</td></tr>"
+	. "<tr><td align='center' class='verdana2'>"
+	. afficher_choix('activer_breves', $activer_breves,
 		array('oui' => _T('item_utiliser_breves'),
-			'non' => _T('item_non_utiliser_breves')), " &nbsp; ");
-	$res .= "</td></tr>\n";
-	$res .= "</table>\n";
+			'non' => _T('item_non_utiliser_breves')), " &nbsp; ")
+	. "</td></tr>\n"
+	. "</table>\n";
 	
 	$res = debut_cadre_trait_couleur("breve-24.gif", true, "", _T('titre_breves').aide ("confbreves"))
 	. ajax_action_post('configurer', 'breves', 'configuration','',$res)

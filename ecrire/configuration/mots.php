@@ -19,27 +19,24 @@ include_spip('inc/config');
 // Gestion des mots-cles
 //
 
-function configuration_mots(){
-	global $spip_lang_left, $spip_lang_right;
+function configuration_mots_dist(){
+	global $spip_lang_left;
 
 	$articles_mots = $GLOBALS['meta']["articles_mots"];
 	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
 	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
 	$forums_publics = $GLOBALS['meta']["forums_publics"];
 
-	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-	$res .= "<tr><td class='verdana2'>";
-	$res .= _T('texte_mots_cles')."<br />\n";
-	$res .= _T('info_question_mots_cles');
-	$res .= "</td></tr>";
-
-	$res .= "<tr>";
-	$res .= "<td align='center' class='verdana2'>";
-
-
-	$res .= bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');");
-	$res .= " &nbsp;";
-	$res .= bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
+	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+	. "<tr><td class='verdana2'>"
+	. _T('texte_mots_cles')."<br />\n"
+	. _T('info_question_mots_cles')
+	. "</td></tr>"
+	. "<tr>"
+	. "<td align='center' class='verdana2'>"
+	. bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');")
+	. " &nbsp;"
+	. bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
 
 	//	$res .= afficher_choix('articles_mots', $articles_mots,
 	//		array('oui' => _T('item_utiliser_mots_cles'),
@@ -49,40 +46,36 @@ function configuration_mots(){
 	if ($articles_mots != "non") $style = "display: block;";
 	else $style = "display: none;";
 	
-	$res .= "<div id='mots-config' style='$style'>";
-	
-	$res .= "<br />\n";
-	$res .= debut_cadre_relief("", true, "", _T('titre_config_groupe_mots_cles'));
-
-	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-	$res .= "<tr><td class='verdana2'>";
-	$res .= _T('texte_config_groupe_mots_cles');
-	$res .= "</td></tr>";
-
-	$res .= "<tr>";
-	$res .= "<td align='$spip_lang_left' class='verdana2'>";
-	$res .= afficher_choix('config_precise_groupes', $config_precise_groupes,
+	$res .= "<div id='mots-config' style='$style'>"
+	. "<br />\n"
+	. debut_cadre_relief("", true, "", _T('titre_config_groupe_mots_cles'))
+	. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+	. "<tr><td class='verdana2'>"
+	. _T('texte_config_groupe_mots_cles')
+	. "</td></tr>"
+	. "<tr>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. afficher_choix('config_precise_groupes', $config_precise_groupes,
 		array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
-			'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
-	$res .= "</td></tr></table>";
-	$res .= fin_cadre_relief(true);
+			'non' => _T('item_non_utiliser_config_groupe_mots_cles')))
+	. "</td></tr></table>"
+	. fin_cadre_relief(true);
 
 	if ($forums_publics != "non"){
-		$res .= "<br />\n";
-		$res .= debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'));
-		$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		$res .= "<tr><td class='verdana2'>";
-		$res .= _T('texte_mots_cles_dans_forum');
-		$res .= "</td></tr>";
-
-		$res .= "<tr>";
-		$res .= "<td align='$spip_lang_left' class='verdana2'>";
-		$res .= afficher_choix('mots_cles_forums', $mots_cles_forums,
+		$res .= "<br />\n"
+		. debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'))
+		. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+		. "<tr><td class='verdana2'>"
+		. _T('texte_mots_cles_dans_forum')
+		. "</td></tr>"
+		. "<tr>"
+		. "<td align='$spip_lang_left' class='verdana2'>"
+		. afficher_choix('mots_cles_forums', $mots_cles_forums,
 			array('oui' => _T('item_ajout_mots_cles'),
-				'non' => _T('item_non_ajout_mots_cles')));
-		$res .= "</td></tr>";
-		$res .= "</table>";
-		$res .= fin_cadre_relief(true);
+				'non' => _T('item_non_ajout_mots_cles')))
+		. "</td></tr>"
+		. "</table>"
+		. fin_cadre_relief(true);
 	}
 	$res .= "</div>";	
 
