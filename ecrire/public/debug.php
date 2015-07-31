@@ -222,20 +222,6 @@ function erreur_squelette($message='', $lieu='') {
 	}
 }
 
-// appelee a chaque requete
-// on n'a pas le nom du squelette, d'ailleurs ca n'en vient peut-etre pas
-
-// http://doc.spip.org/@boucle_debug_requete
-function boucle_debug_requete ($req) {
-	global $debug_objets;
-
-	if (isset($GLOBALS['debug']['aucasou'])) {
-		list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
-		$nom = $debug_objets['courant'];
-		$debug_objets['requete']["$nom$id"] = $req;
-	}
-}
-
 // appelee a chaque sortie de sequence (compilo.php)
 // http://doc.spip.org/@debug_sequence
 function debug_sequence($id, $nom, $niv, $sequence) {
@@ -524,12 +510,13 @@ function debug_affiche($fonc, $tout)
 {
 	$objet = _request('var_mode_objet');
 	$affiche = _request('var_mode_affiche');
+
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
 	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return '';
 	$nom = $tout['boucle'][$objet]->id_boucle;
 
 	if ($affiche == 'resultat') {
-		$res .= "<legend>" .$nom ."</legend>";
+		$res = "<legend>" .$nom ."</legend>";
 		$req = $tout['requete'][$objet];
 		if (function_exists('traite_query')) {
 		  $c = _request('connect');
@@ -565,10 +552,10 @@ function debug_affiche($fonc, $tout)
 		}
 
 	} else if ($affiche == 'code') {
-		$res .=  "<legend>" .$nom ."</legend>";
+		$res =  "<legend>" .$nom ."</legend>";
 		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
-		$res .=  "<legend>" . _T('boucle') . ' ' .  $nom ."</legend>"
+		$res =  "<legend>" . _T('boucle') . ' ' .  $nom ."</legend>"
 		. ancre_texte(decompiler_boucle($quoi));
 	} else if ($affiche == 'squelette') {
 		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";

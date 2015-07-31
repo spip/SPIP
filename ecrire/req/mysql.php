@@ -176,13 +176,10 @@ function spip_mysql_select($select, $from, $where='',
 		. ($orderby ? ("\nORDER BY " . spip_mysql_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
-	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
+	// renvoyer la requete inerte si demandee
+	spip_log("select $requeter " . strlen($query));
+	if ($requeter === false) return $query;
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' AND $requeter) {
-		include_spip('public/debug');
-		boucle_debug_requete($query);
-	}
-	
 	if (!($res = spip_mysql_query($query, $serveur, $requeter))) {
 		include_spip('public/debug');
 		erreur_requete_boucle(substr($query, 7),

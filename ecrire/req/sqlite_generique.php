@@ -846,11 +846,8 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 		. ($orderby ? ("\nORDER BY " . _sqlite_calculer_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
-	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
-		include_spip('public/debug');
-		boucle_debug_requete($query);
-	}
+	// renvoyer la requete inerte si demandee
+	if ($requeter === false) return $query;
 
 	if (!($res = spip_sqlite_query($query, $serveur, $requeter))) {
 		include_spip('public/debug');
