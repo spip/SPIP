@@ -59,7 +59,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 
 	echo debut_grand_cadre(true);
 	if ($id_rubrique  > 0)
-		echo afficher_hierarchie($id_parent,'',$id_rubrique,'rubrique',$id_secteur,(!$GLOBALS['connect_toutes_rubriques']));
+		echo afficher_hierarchie($id_parent,true,$id_rubrique,'rubrique',$id_secteur,(!$GLOBALS['connect_toutes_rubriques']));
 	else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 
 	echo fin_grand_cadre(true);
