@@ -711,7 +711,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 
   list($dnom,$ddesc) = $depart;
   $id_primary = $ddesc['key']['PRIMARY KEY'];
-  $id_field = $dnom . '.' . $id_primary;
+	$keys = preg_split('/,\s*/', $id_primary);
   $id_table = "";
   $cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
   foreach($res as $r) {
@@ -734,12 +734,15 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   }
   // la clause Group by est en conflit avec ORDER BY, a completer
 
-  if (!$pk && !in_array($id_field, $boucle->group)) {
-	  $boucle->group[] = $id_field;
-	// postgres exige que le champ pour GROUP soit dans le SELECT
-	  if (!in_array($id_field, $boucle->select))
-	    $boucle->select[] = $id_field;
-  }
+	foreach($keys as $id_prim){
+		$id_field = $dnom . '.' . $id_prim;
+		if (!$pk && !in_array($id_field, $boucle->group)) {
+			$boucle->group[] = $id_field;
+			// postgres exige que le champ pour GROUP soit dans le SELECT
+			if (!in_array($id_field, $boucle->select))
+			$boucle->select[] = $id_field;
+		}
+	}
 
   $boucle->lien = true;
   return $n;
