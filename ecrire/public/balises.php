@@ -21,6 +21,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, array(%s), array(%s), %s)');
+
 // http://doc.spip.org/@interprete_argument_balise
 function interprete_argument_balise($n,$p) {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
@@ -424,11 +426,12 @@ function balise_LESAUTEURS_dist ($p) {
 		$connect = !$p->id_boucle ? '' 
 		  : $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$p->code = "recuperer_fond('modeles/lesauteurs',
-			array('id_article' => ".champ_sql('id_article', $p)
-			."), array('trim'=>true), "
-			. _q($connect)
-			.")";
+		$c = memoriser_contexte_compil($p);
+
+		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
+				   "'id_article' => ".champ_sql('id_article', $p),
+				   "'trim'=>true, 'compil'=>array($c)",
+				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	}
 
@@ -959,14 +962,16 @@ function balise_MODELE_dist($p) {
 				$_contexte[] = "'id'=>".$id;
 			}
 		}
-
+		$_contexte[] = "'recurs'=>(++\$recurs)";
 		$connect = '';
 		if (isset($p->boucles[$p->id_boucle]))
 			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$page = "recuperer_fond('modeles/' . $nom, array(".join(',', $_contexte).",'recurs'=>(++\$recurs)), array('trim'=>true, 'modele'=>true"
-	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
-	. "), " . _q($connect) . ")";
+		$_options = "'trim'=>true, 'modele'=>true"
+		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'')
+		  . ", 'compil'=>array(" . memoriser_contexte_compil($p) .")";
+
+		$page = sprintf(CODE_RECUPERER_FOND, "'modeles/' . $nom", join(',', $_contexte), $_options, _q($connect));
 
 		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
