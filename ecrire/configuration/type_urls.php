@@ -30,8 +30,8 @@ function configuration_type_urls_dist()
 		'html' => '<em>html</em> &mdash; <tt>article12.html</tt>',
 		'arbo' => '<em>arbo</em> &mdash; <tt>/article/Titre</tt>',
 		'propres' => '<em>propres</em> &mdash; <tt>Titre-de-l-article</tt>',
-		'propres2' => '<em>propres2</em> &mdash; <tt>Titre-de-l-article.html</tt>'
-#		'propresqs' => '<em>propresqs</em> &mdash; <tt>?Titre-de-l-article</tt>', // ne fonctionne plus
+		'propres2' => '<em>propres2</em> &mdash; <tt>Titre-de-l-article.html</tt>',
+		'propres_qs' => '<em>propres_qs</em> &mdash; <tt>?Titre-de-l-article</tt>'
 	);
 
 	$res .= "<p class='verdana2'>"
