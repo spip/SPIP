@@ -262,19 +262,18 @@ function calculer_popularites() {
 	ecrire_metas();	// il faut le marquer de suite pour eviter les acces concurrents
 
 	$duree = time() - $date;
-	$demivie = 1 * 24 * 60;	// en minutes
-	$a = 1-exp(log(0.5)/$demivie);
-	$b = $a * 60 * 24;
+	$demivie = 3 * 24 * 3600;	// en secondes
+	$a = pow(2, - $duree / $demivie);
+	$b = 1 - $a;
 
 	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET popularite = popularite*POW(1-$a,$duree/60)");
-
+	spip_query("UPDATE spip_articles SET popularite = popularite * $a");
 
 	// ajouter les points visites
 	$count_article = Array();
 	$query = "SELECT COUNT(*) as count,id_objet FROM spip_visites_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
 	$res = spip_query($query);
-	while ($row = mysql_fetch_array($res)) {
+	while ($row = @mysql_fetch_array($res)) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count visites
 	}
 
@@ -290,7 +289,7 @@ function calculer_popularites() {
 	$count_article = Array();
 	$query = "SELECT COUNT(*) as count,id_objet FROM spip_referers_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
 	$res = spip_query($query);
-	while ($row = mysql_fetch_array($res)) {
+	while ($row = @mysql_fetch_array($res)) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count referers
 	}
 
@@ -303,8 +302,7 @@ function calculer_popularites() {
 	}
 
 	// et enregistrer les metas...
-	list($maxpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite) FROM spip_articles"));
-	list($totalpop) = mysql_fetch_array(spip_query("SELECT SUM(popularite) FROM spip_articles"));
+	list($maxpop, $totalpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite), SUM(popularite) FROM spip_articles"));
 	ecrire_meta("popularite_max", $maxpop);
 	ecrire_meta("popularite_total", $totalpop);
 	ecrire_metas();
