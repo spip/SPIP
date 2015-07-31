@@ -23,7 +23,8 @@ if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP
 if (!defined('_INC_DISTANT_MAX_SIZE')) define('_INC_DISTANT_MAX_SIZE',2097152);
 
 define('_REGEXP_COPIE_LOCALE', ',' . 
-       preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
+       preg_replace('@^https?:@', 'https?:',
+           (isset($GLOBALS['meta']["adresse_site"]) ? $GLOBALS['meta']["adresse_site"] : ''))
        . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
@@ -1063,7 +1064,7 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	spip_log("Recuperer $path sur $first_host:$port par $f");
 	if (!$f) return false;
 
-	$site = $GLOBALS['meta']["adresse_site"];
+	$site = isset($GLOBALS['meta']["adresse_site"]) ? $GLOBALS['meta']["adresse_site"] : '';
 
 	$req = "$method $path $vers\r\n"
 		. "Host: $host\r\n"
