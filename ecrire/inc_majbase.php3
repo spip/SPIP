@@ -839,7 +839,6 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.801) {
-		// integrer nouvelles tables auxiliaires du compilateur ESJ
 		spip_query("ALTER TABLE spip_rubriques
 			ADD statut_tmp VARCHAR(10) NOT NULL,
 			ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
