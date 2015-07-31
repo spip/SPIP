@@ -29,15 +29,37 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 		ecrire_metas();
-	} else spip_log("reprise de $script");
+	} else 	admin_verifie_session($script);
+
 	$base = charger_fonction($script, 'base');
 	$base($titre,$reprise);
-	effacer_meta($script);
-	ecrire_metas();
-	spip_unlink(_FILE_META);
 	fin_admin($script);
-	spip_log("efface meta: $script " . ($retour ? $retour : ''));
+	spip_log("efface les meta admin et $script " . ($retour ? $retour : ''));
 	if ($retour) redirige_par_entete($retour);
+}
+
+// Gestion dans la meta "admin" du script d'administation demande,
+// pour eviter des executions en parallele, notamment apres Time-Out.
+// Cette meta contient le nom du script et, a un codage pres, du demandeur.
+// Le code de ecrire/index.php devie toute demande d'execution d'un script
+// vers le script d'administration indique par cette meta si elle est là.
+// Au niveau de la fonction inc_admin, on controle la meta 'admin'.
+// Si la meta n'est pas la, c'est le debut on la cree 
+// Sinon, on verifie que le connecte est bien celui ayant entame 
+// l'operation d'administration, 
+// Si le connecte n'est pas le bon, on refuse la connexion.
+
+// http://doc.spip.org/@import_verifie_session
+function admin_verifie_session($script) {
+
+	$signal = $script . ' ' . fichier_admin($action);
+	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
+	if (!$row) {
+		ecrire_meta('admin', $signal,'non');
+		ecrire_metas();
+	} elseif ($row['valeur'] != $signal)
+		die(_T('info_travaux_texte'));
+	else spip_log("reprise de $script");
 }
 
 // http://doc.spip.org/@dir_admin
@@ -123,8 +145,12 @@ function debut_admin($script, $action='', $commentaire='') {
 // http://doc.spip.org/@fin_admin
 function fin_admin($action) {
 	$signal = dir_admin() . fichier_admin($action);
+	@rmdir($signal); // par precaution
 	spip_unlink($signal);
-	@rmdir($signal);
+	spip_unlink(_FILE_META);
+	effacer_meta($action);
+	effacer_meta('admin');
+	ecrire_metas();
 }
 
 // http://doc.spip.org/@copy_request

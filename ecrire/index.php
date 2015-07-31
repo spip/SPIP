@@ -128,13 +128,18 @@ AND (!isset($var_ajaxcharset))
 AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
-// Si interruption d'une longue restauration
-// detourner le script demande pour qu'il reprenne le boulot, et
-// refuser Ajax et non-admin pour eviter des restaurations paralleles
-elseif (isset($GLOBALS['meta']["import_all"])) {
+// Quand une action d'administration est en cours (meta "admin"),
+// refuser les connexions non-admin ou Ajax pour laisser la base intacte.
+// Si c'est une admin, detourner le script demande vers cette action:
+// si l'action est vraiment en cours, inc_admin refusera cette 2e demande,
+// sinon c'est qu'elle a ete interrompue et il faut la reprendre
+
+elseif (isset($GLOBALS['meta']["admin"])) {
 	if (isset($var_ajaxcharset) OR !isset($_COOKIE['spip_admin']))
-		die('Importation en cours, revenez plus tard.');
-	$exec = 'import_all';
+		die(_T('info_travaux_texte'));
+	$l = $GLOBALS['meta']["admin"];
+	spip_log("Le script $l, en cours, se substitue a $exec");
+	$exec = substr($l, 0, strpos($l, ' '));
 }
 // si nom pas plausible, prendre le script par defaut
 elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";

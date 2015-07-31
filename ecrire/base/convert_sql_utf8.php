@@ -16,12 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_convert_sql_utf8_dist
 function base_convert_sql_utf8_dist($titre, $reprise=false)
 {
-	// poser un verrou (et abandonner si l'action est en cours)
-
-	if (!spip_get_lock('conversion_charset_sql')) {
-		echo minipres(_T('utf8_convert_attendez'));
-		exit;
-	}
 
 	include_spip('inc/meta');
 	ecrire_meta('convert_sql_utf8','oui','non');
@@ -135,6 +129,5 @@ function convert_sql_utf8(){
 	ecrire_meta('charset_sql_base',$sql_charset,'non');
 	ecrire_meta('charset_sql_connexion',$sql_charset,'non');
 	ecrire_metas();
-	spip_release_lock('conversion_charset_sql');
 }
 ?>
