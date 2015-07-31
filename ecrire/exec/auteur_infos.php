@@ -86,7 +86,8 @@ function exec_auteur_infos_dist() {
 			$iconifier = charger_fonction('iconifier', 'inc');
 
 			if ($id_auteur > 0)
-				echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+				echo $iconifier('id_auteur', $id_auteur, 'auteur_infos', autoriser('modifier', 'auteur', $id_auteur)
+				);
 
 			// nouvel auteur : le hack classique
 			else if ($fiche)

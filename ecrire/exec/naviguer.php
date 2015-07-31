@@ -76,9 +76,9 @@ function exec_naviguer_dist()
 		//
 		// Logos de la rubrique
 		//
-		if ($flag_editable AND ($spip_display != 4)) {
+		if ($spip_display != 4) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer');
+			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer', $flag_editable);
 		}
 	}
 

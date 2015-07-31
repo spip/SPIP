@@ -95,9 +95,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	// Logos de la breve
 	//
 
-	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique)) {
+	if (($spip_display != 4) AND $id_breve>0) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		echo $iconifier('id_breve', $id_breve, 'breves_voir'); 
+		echo $iconifier('id_breve', $id_breve, 'breves_voir', autoriser('publierdans','rubrique',$id_rubrique)); 
 	}
 
 	echo pipeline('affiche_gauche',

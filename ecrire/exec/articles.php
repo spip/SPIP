@@ -103,9 +103,9 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 
-	if ($flag_editable AND ($spip_display != 4)) {
+	if ($spip_display != 4) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_article', $id_article,'articles');
+		$icone = $iconifier('id_article', $id_article,'articles', $flag_editable);
 	} else $icone = '';
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');

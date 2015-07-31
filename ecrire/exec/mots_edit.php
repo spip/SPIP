@@ -105,9 +105,9 @@ global
 
 		// Logos du mot-clef
 
-		if (autoriser('modifier','groupemots',$id_groupe) AND ($spip_display != 4)) {
+		if ($spip_display != 4) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
+			$out .= $iconifier('id_mot', $id_mot, 'mots_edit', autoriser('modifier','groupemots',$id_groupe));
 		}
 	 }
 

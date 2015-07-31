@@ -66,7 +66,7 @@ debut_gauche();
 //
  if ($spip_display != 4) {
 	  $iconifier = charger_fonction('iconifier', 'inc');
-	  echo $iconifier('id_syndic', 0, 'configuration');
+	  echo $iconifier('id_syndic', 0, 'configuration', true);
  }
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));

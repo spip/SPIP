@@ -92,9 +92,9 @@ function exec_sites_dist()
 	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 	echo "</div>";
 
-	if ($id_syndic AND $flag_administrable AND ($spip_display != 4)) {
+	if ($id_syndic AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		echo $iconifier('id_syndic', $id_syndic, 'sites');
+		echo $iconifier('id_syndic', $id_syndic, 'sites', $flag_administrable);
 	}
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
