@@ -821,7 +821,8 @@ function id_table_objet($type,$serveur='') {
 	if (!$desc OR isset($desc['field']["id_$type"]))
 		return "id_$type";
 	// sinon renvoyer le premier champ de la table...
-	return array_shift(array_keys($desc['field']));
+	$keys = array_keys($desc['field']);
+	return array_shift($keys);
 }
 
 // http://doc.spip.org/@objet_type

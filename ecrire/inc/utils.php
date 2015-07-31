@@ -1327,7 +1327,8 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
-	$script1 = array_shift(explode('&', $script));
+	$script1 = explode('&', $script);
+	$script1 = reset($script1);
 
 	return "<form action='"
 	. ($script ? generer_url_ecrire($script) : '')

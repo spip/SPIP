@@ -118,7 +118,8 @@ function formulaires_traduire_traiter_dist($objet, $id_objet, $retour='', $tradu
 			$referencer_traduction($objet, $id_objet, intval($id_trad)); // 0 si supprimer_trad
 		}
 		elseif ($new_id_trad = _request('changer_reference_trad')
-		  AND $new_id_trad = reset(array_keys($new_id_trad))){
+		  AND $new_id_trad = array_keys($new_id_trad)
+		  AND $new_id_trad = reset($new_id_trad)){
 			$table_objet_sql = table_objet_sql($objet);
 			$_id_table_objet = id_table_objet($objet);
 			if ($id_trad = sql_getfetsel('id_trad',$table_objet_sql,"$_id_table_objet=".intval($id_objet))){
