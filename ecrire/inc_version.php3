@@ -499,6 +499,27 @@ function appliquer_fonction($lafonction, $entree) {
 	return $sortie;
 }
 
+function appliquer_fonction_avant($lafonction, $entree) {
+	$sortie = $entree;
+	
+	foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
+		if (@function_exists($value)) $sortie = $value($sortie);
+	}
+			
+	return $sortie;
+}
+
+function appliquer_fonction_apres($lafonction, $entree) {
+
+	$sortie = $entree;
+	
+	foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
+		if (@function_exists($value)) $sortie = $value($sortie);
+	}
+		
+	return $sortie;
+}
+
 
 // Destine a "completer" une fonction
 function completer_fonction($fonction_base, $fonction_avant="", $fonction_apres="") {
