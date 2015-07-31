@@ -296,15 +296,58 @@ function action_rss_dist()
 		$title = _T('forum_titre_erreur');
 		$url = '';
 		break;
+	}
+
+	$title = "[".$GLOBALS['meta']['nom_site']."] RSS ". $title;
+
+	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
+	echo '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n", '
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="'.texte_backend($GLOBALS['spip_lang']).'">
+	<title>'.texte_backend($intro['title']).'</title>
+	<link>'.texte_backend(url_absolue($url)).'</link>
+	<description></description>
+	<language>'.texte_backend($GLOBALS['spip_lang']).'</language>
+	', xml_rss($rss), '</channel>
+</rss>
+';
+
+	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
 }
 
-	if (!$fmt) $fmt = 'rss';
-	$f = charger_fonction($fmt, 'xml');
-	$f($rss, array(
-		'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
-		'url' => $url,
-		'language'=> $GLOBALS['spip_lang']));
- 
-	spip_log("spip_rss applique $f sur '$fmt $op $args $id $cle' - " . spip_timer('rss'));
+function xml_rss($rss) {
+	$u = '';
+	if (is_array($rss)) {
+		usort($rss, 'trier_par_date');
+		foreach ($rss as $article) {
+			$u .= '
+	<item';
+			if ($article['lang']) 
+				$u .= 'xml:lang="'.texte_backend($article['lang']).'"';
+			$u .= '>
+		<title>'.texte_backend($article['title']).'</title>
+		<link>'.texte_backend(url_absolue($article['url'])).'</link>
+		<guid isPermaLink="true">'.texte_backend(url_absolue($article['url'])).'</guid>
+		<dc:date>'.date_iso($article['date']).'</dc:date>
+		<dc:format>text/html</dc:format>';
+			if ($article['lang']) $u .= '
+		<dc:language>'.texte_backend($article['lang']).'</dc:language>';
+			if ($article['in_reply_to_url']) $u .= ' 
+		<thr:in-reply-to ref="'.texte_backend(url_absolue($article['in_reply_to_url'])).
+				'" href="'.texte_backend(url_absolue($article['in_reply_to_url'])).'" type="text/html" />';
+			if ($article['author']) {
+				if ($article['email'])
+					$article['author'].=' <'.$article['email'].'>';
+
+				$u .= '
+		<dc:creator>'.texte_backend($article['author']).'</dc:creator>';
+			}
+			$u .= '
+		<description>'.texte_backend(liens_absolus($article['description'])).'</description>
+	</item>
+';
+		}
+	}
+	return $u;
 }
 ?>
