@@ -140,6 +140,37 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 #	spip_log("TOTAL_BOUCLE: $id_boucle dans $id_mere");
 		break;
 
+  case 'POINTS':
+	  $n = 0;
+	  $b = $id_boucle;
+	  $code = '';
+	  while ($b != '')
+	    {
+	      if ($s = 	$boucles[$b]->param)
+		{
+		  foreach($s as $v)
+		    {
+		      if (strpos($v,'recherche') !== false)
+			{
+			  $code = '$PileROW[$SP' . (($n==0) ? "" : "-$n") .
+			    '][points]';
+			  $b = '';
+			  break;
+			}
+		      }
+		}
+
+	      $n++;
+	      $b = $boucles[$b]->id_parent;
+	    }
+	  if (!$code) 
+	    {
+	      include_local("inc-debug-squel.php3");
+	      erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $idb);
+	    }
+
+		break;
+
   case 'POPULARITE_ABSOLUE':
 		$code = 'ceil(' .
 		  index_pile($id_boucle,  "popularite", $boucles) .
@@ -271,10 +302,6 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
     // retour imme'diat: filtres de'rogatoires traite's dans la fonction
     return calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
     break; 
-
-case 'POINTS':
-	$code = '$PileRow[$SP]["points"]';
-	break;
 
   default:
 	  // champ inconnu. Il s'auto-de'note.
