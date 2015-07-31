@@ -4,7 +4,7 @@ include ("inc.php3");
 include_local ("inc_acces.php3");
 include_local ("inc_index.php3");
 include_local ("inc_logos.php3");
-
+include_local ("inc_session.php3");
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";

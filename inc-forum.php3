@@ -450,7 +450,7 @@ function ajout_forum() {
 		if ($HTTP_GET_VARS['titre']){
 			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
 		}
-		$query_forum = "INSERT spip_forum (date_heure, titre, ip, statut)
+		$query_forum = "INSERT INTO spip_forum (date_heure, titre, ip, statut)
 			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
 		$result_forum = spip_query($query_forum);
 		$id_message = mysql_insert_id();

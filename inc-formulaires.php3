@@ -212,7 +212,7 @@ function formulaire_signature($id_article) {
 				$nom_site = addslashes($nom_site);
 				$message = addslashes($message);
 
-		 		$query = "INSERT spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
+		 		$query = "INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
 		 			"VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')";
 				$result = spip_query($query);
 			}
@@ -388,7 +388,7 @@ function formulaire_site($la_rubrique) {
 			$description_site = addslashes($description_site);
 			
 			include_local ("ecrire/inc_connect.php3");
-			$query = "INSERT spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
+			$query = "INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
 				"VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')";
 			$result = spip_query($query);
 			echo "Votre proposition est enregistr&eacute;e, elle appara&icirc;tra en ligne apr&egrave;s validation par les responsables de ce site.";

@@ -230,7 +230,7 @@ function import_objet_1_2($f, $gz=false) {
 				else $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
 			else
 				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
-			$query = "INSERT $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
+			$query = "INSERT INTO $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
 			spip_query($query);
 		}
 	}
@@ -294,7 +294,7 @@ function import_objet_0_0($f, $gz=false) {
 		if ($auteurs) {
 			reset ($auteurs);
 			while (list(, $auteur) = each($auteurs)) {
-				$query = "INSERT spip_auteurs_articles (id_auteur, id_article) VALUES ($auteur, $id_article)";
+				$query = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($auteur, $id_article)";
 				spip_query($query);
 			}
 		}
@@ -313,35 +313,35 @@ function import_objet_0_0($f, $gz=false) {
 		if ($articles) {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {
-				$query = "INSERT spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $article)";
+				$query = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $article)";
 				spip_query($query);
 			}
 		}
 		if ($breves) {
 			reset ($breves);
 			while (list(, $breve) = each($breves)) {
-				$query = "INSERT spip_mots_breves (id_mot, id_breve) VALUES ($id_mot, $breve)";
+				$query = "INSERT INTO spip_mots_breves (id_mot, id_breve) VALUES ($id_mot, $breve)";
 				spip_query($query);
 			}
 		}
 		if ($forums) {
 			reset ($forums);
 			while (list(, $forum) = each($forums)) {
-				$query = "INSERT spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
+				$query = "INSERT INTO spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
 				spip_query($query);
 			}
 		}
 		if ($rubriques) {
 			reset ($rubriques);
 			while (list(, $rubrique) = each($rubriques)) {
-				$query = "INSERT spip_mots_rubriques (id_mot, id_rubrique) VALUES ($id_mot, $id_rubrique)";
+				$query = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES ($id_mot, $id_rubrique)";
 				spip_query($query);
 			}
 		}
 		if ($syndics) {
 			reset ($syndics);
 			while (list(, $syndic) = each($syndics)) {
-				$query = "INSERT spip_mots_syndic (id_mot, id_syndic) VALUES ($id_mot, $syndic)";
+				$query = "INSERT INTO spip_mots_syndic (id_mot, id_syndic) VALUES ($id_mot, $syndic)";
 				spip_query($query);
 			}
 		}

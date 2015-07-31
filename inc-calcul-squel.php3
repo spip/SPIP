@@ -259,7 +259,7 @@ function parser_boucle($texte, $id_parent) {
 						$doublons = 'oui';
 						$req_where[] = "$table.$id_objet NOT IN (\$id_doublons[$type])";
 					}
-					else if (ereg('"([^"]*)"', $param, $match)) {
+					else if (ereg('^ *"([^"]*)" *$', $param, $match)) {
 						$separateur = ereg_replace("'","\'",$match[1]);
 					}
 					else if (ereg('^([0-9]+),([0-9]*)', $param, $match)) {
@@ -311,7 +311,7 @@ function parser_boucle($texte, $id_parent) {
 					}
 	
 					// Restriction de valeurs (implicite ou explicite)
-					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *([^<>=!]*))?$', $param, $match)) {
+					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
 						// Variable comparee
 						$col = $match[1];
 						$col_table = $table;
@@ -1749,7 +1749,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$valeurs = "$id_article, $id_rubrique, $id_breve, $my_id_forum, \'$fichier_cache\'";
 		
 		if (!$requetes_cache[$valeurs]) {
-			$query_cache = "INSERT spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
+			$query_cache = "INSERT INTO spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
 			spip_query($query_cache);
 			$requetes_cache[$valeurs] = 1;
 		}

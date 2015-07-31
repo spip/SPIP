@@ -6,44 +6,41 @@ if (defined("_ECRIRE_INC_STATISTIQUES")) return;
 define("_ECRIRE_INC_STATISTIQUES", "1");
 
 
-function stats_load_engines()
-{
+function stats_load_engines() {
+	$file_name = 'data/engines-list.ini';
+	if ($fp = @fopen($file_name, 'r'))
+	{
+		while ($data = fgets($fp, 256))
+		{
+			$data = trim(chop($data));
 
-    $file_name = 'data/engines-list.ini';
-    if ($fp = @fopen($file_name, 'r'))
-    {
-        while ($data = fgets($fp, 256))
-        {
-            $data = trim(chop($data));
+			if (!ereg('^#', $data) && $data != '')
+			{
+				if (ereg('^\[(.*)\]$', $data, $engines))
+				{
+					// engine
+					$engine = $engines[1];
 
-            if (!ereg('^#', $data) && $data != '')
-            {
-                if (ereg('^\[(.*)\]$', $data, $engines))
-                {
-                    // engine
-                    $engine = $engines[1];
-
-                    // query | dir
-                    if (!feof($fp))
-                    {
-                        $data = fgets($fp, 256);
-                        $query_or_dir = trim(chop($data));
-                    }
-                }
-                else
-                {
-                    $host = $data;
-                    $arr_engines[] = Array($engine, $query_or_dir, $host);
-                }
-            }
-        }
-        fclose($fp);
-    }
-    return $arr_engines;
+					// query | dir
+					if (!feof($fp))
+					{
+						$data = fgets($fp, 256);
+						$query_or_dir = trim(chop($data));
+					}
+				}
+				else
+				{
+					$host = $data;
+					$arr_engines[] = Array($engine, $query_or_dir, $host);
+				}
+			}
+		}
+		fclose($fp);
+	}
+	return $arr_engines;
 }
 
-function stats_show_keywords($kw_referer, $kw_referer_host)
-{
+function stats_show_keywords($kw_referer, $kw_referer_host) {
 	global $arr_engines;
 	
 	if (sizeof($arr_engines) == 0) {
@@ -51,42 +48,42 @@ function stats_show_keywords($kw_referer, $kw_referer_host)
 		$arr_engines = stats_load_engines();
 	}
  
-    $url   = parse_url( $kw_referer );
-    $query = $url['query'];
-    $host  = $url['host'];
-    
-    parse_str($query);
+	$url   = parse_url( $kw_referer );
+	$query = $url['query'];
+	$host  = $url['host'];
+	
+	parse_str($query);
   
-    $keywords = '';
-    $found    = false;
+	$keywords = '';
+	$found = false;
   
-    for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
-    {
-        if ($found = ($host == $arr_engines[$cnt][2]))
-        {
-            $kw_referer_host = $arr_engines[$cnt][0];
-            $keywords = ereg('=', $arr_engines[$cnt][1])
-                ? ${str_replace('=', '', $arr_engines[$cnt][1])}
-                : $lvm_directory;
-        }
-    }
-    
-    $nom_url = substr(strip_tags($kw_referer_host),0,40);
+	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
+	{
+		if ($found = ($host == $arr_engines[$cnt][2]))
+		{
+			$kw_referer_host = $arr_engines[$cnt][0];
+			$keywords = ereg('=', $arr_engines[$cnt][1])
+				? ${str_replace('=', '', $arr_engines[$cnt][1])}
+				: $lvm_directory;
+		}
+	}
 
-    $buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
-    
-    if ($keywords != '')
-    {
-      $buffer .= "(<b>" .trim(stripslashes(htmlentities($keywords)))."</b>)\n";
-    }
+	$nom_url = substr(strip_tags($kw_referer_host),0,40);
 
-    return( $buffer );
+	$buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
+
+	if ($keywords != '')
+	{
+		$buffer .= "(<b>" .trim(stripslashes(htmlentities($keywords)))."</b>)\n";
+	}
+
+	return( $buffer );
 
 }
 
 
 
-function calculer_visites(){
+function calculer_visites() {
 
 	// Selectionner les dates > 24 heures
 	$query_date= "SELECT date FROM spip_visites_temp WHERE date < DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY date";
@@ -102,7 +99,7 @@ function calculer_visites(){
 		$query = "SELECT ip AS total_visites FROM spip_visites_temp WHERE date='$date' GROUP BY ip";
 		$result = spip_query($query);
 		$total_visites = mysql_num_rows($result);
-		$query_insert = "INSERT spip_visites (date, type, visites) VALUES ('$date', 'tout', '$total_visites');";
+		$query_insert = "INSERT INTO spip_visites (date, type, visites) VALUES ('$date', 'tout', '$total_visites');";
 		$result_insert = spip_query($query_insert);
 	
 	
@@ -130,18 +127,16 @@ function calculer_visites(){
 			$id_article = $row['id_article'];
 			$vis_article = $row['visites'];
 			$visites_articles[$id_article] = $vis_article;
-		}				
-		
-		
+		}
+
 		while (list($key, $value) = each($visites)) {
 			$type_page = $key;
 			$visites_uniques = count($value);
-			
-			
+
 			if (ereg("^article([0-9]+)", $type_page, $regs)){
 				$id_article = $regs[1];
 				$total_article = $visites_articles[$id_article] + $visites_uniques;
-				$query_insert = "INSERT spip_visites (date, type, visites) VALUES ('$date', 'article$id_article', '$visites_uniques');";
+				$query_insert = "INSERT INTO spip_visites (date, type, visites) VALUES ('$date', 'article$id_article', '$visites_uniques');";
 				$result_insert = spip_query($query_insert);
 				$query_insert = "UPDATE spip_articles SET visites = '$total_article' WHERE id_article = '$id_article'";
 				$result_insert = spip_query($query_insert);
@@ -150,15 +145,11 @@ function calculer_visites(){
 	
 		$activer_statistiques_ref=lire_meta("activer_statistiques_ref");
 		
-		if ($activer_statistiques_ref == "oui"){		
+		if ($referers && $activer_statistiques_ref == "oui"){
 			while (list($key, $value) = each($referers)) {
 				$referer = $key;
 				$ref_md5 = substr(md5($referer), 0, 15);
-	
-	
-	
-				//echo stats_show_keywords($referer, $referer);
-	
+
 				$total_ref = 0;
 				while (list($key2,$value2) = each ($value)) {
 					$value2 = count($value2);
@@ -174,12 +165,11 @@ function calculer_visites(){
 							$query_insert = "UPDATE spip_visites_referers SET visites = $total_visites WHERE id_referer = '$id_referer'";
 							$result_insert = spip_query($query_insert);
 						}
-						else {				
-							$query_insert = "INSERT spip_visites_referers (date, referer, referer_md5, type, visites) VALUES ('$date', '$referer', '$ref_md5', 'article$id_article', '$value2');";
+						else {
+							$query_insert = "INSERT INTO spip_visites_referers (date, referer, referer_md5, type, visites) VALUES ('$date', '$referer', '$ref_md5', 'article$id_article', '$value2');";
 							$result_insert = spip_query($query_insert);
 						}
 					}
-				
 				}
 	
 				$query = "SELECT id_referer, visites FROM spip_visites_referers WHERE type = 'tout' AND referer_md5 = '$ref_md5'";
@@ -190,17 +180,17 @@ function calculer_visites(){
 					$query_insert = "UPDATE spip_visites_referers SET visites = $total_visites WHERE id_referer = '$id_referer'";
 					$result_insert = spip_query($query_insert);
 				}
-				else {				
-					$query_insert = "INSERT spip_visites_referers (date, referer, referer_md5, type, visites) VALUES ('$date', '$referer', '$ref_md5', 'tout', '$total_ref');";
+				else {
+					$query_insert = "INSERT INTO spip_visites_referers (date, referer, referer_md5, type, visites) VALUES ('$date', '$referer', '$ref_md5', 'tout', '$total_ref');";
 					$result_insert = spip_query($query_insert);
 				}
 			}
 		}
-		
+
 		$query_effacer = "DELETE FROM spip_visites_temp WHERE date = '$date'";
 		$result_effacer = spip_query($query_effacer);	
-			
-	}	
+
+	}
 }
 
 
@@ -255,9 +245,9 @@ function optimiser_referers(){
 		$popularite[$id_article] = $visites * $referers;
 	}
 	if (count($popularite)>0){
-		$max_pop = max($popularite);
+		$facteur_pop = 1000000/(max($popularite) + 1);
 		while (list($id_article, $pop) = each($popularite)) {
-			$relatif = round($pop/$max_pop*1000000);
+			$relatif = round($pop * $facteur_pop);
 			$query = "UPDATE spip_articles SET popularite = '$relatif' WHERE id_article = '$id_article'";
 			$result = spip_query($query);
 		}

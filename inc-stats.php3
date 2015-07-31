@@ -25,11 +25,11 @@ function ecrire_stats() {
 	}
 	$url_site_spip = lire_meta('adresse_site');
 	$log_referer = $GLOBALS['HTTP_REFERER'];
-	if (eregi($url_site_spip,$log_referer)) $log_referer = "";
+	if ($url_site_spip == '' OR eregi($url_site_spip,$log_referer)) $log_referer = "";
 	
 	$log_date = date("Y-m-d")." 00:00:00";
 	
-	$query = "INSERT spip_visites_temp (date, ip, type, referer) VALUES ('$log_date', '$log_ip', '$log_type$log_id_num','$log_referer')";
+	$query = "INSERT INTO spip_visites_temp (date, ip, type, referer) VALUES ('$log_date', '$log_ip', '$log_type$log_id_num','$log_referer')";
 	spip_query($query);
 
 	if ($admin_ok AND $id_article > 0) {
