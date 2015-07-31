@@ -100,10 +100,7 @@ function auth_dist() {
 	if (!$auth_login) {
 		if ($_GET['bonjour'] == 'oui') $clean_link->delVar('bonjour');
 
-		$url = str_replace('/./', '/',  _DIR_LOGGED_IN. $clean_link->getUrl());
-		redirige_par_entete(generer_url_public('spip_login'),
-			"?url=".urlencode($url));
-		exit; # pour etre vraiment surs :)
+		redirige_url_public('spip_login', "url=".urlencode(str_replace('/./', '/',  _DIR_LOGGED_IN. $clean_link->getUrl())));
 	}
 
 	//
@@ -197,7 +194,7 @@ function auth_dist() {
 	}
 
 	if (!$auth_pass_ok) {
-	  redirige_par_entete(generer_url_public('spip_login'),"?var_erreur=pass");
+	  redirige_url_public('spip_login',"var_erreur=pass");
 	}
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
