@@ -88,35 +88,25 @@ function retire_cache($cache) {
 }
 
 // Supprimer les caches marques "x"
-function retire_caches($chemin_prioritaire = '') {
+function retire_caches() {
 	if ($GLOBALS['flag_ecrire']) return;
 
-	// inutile de ramer si tout est invalide, on n'est pas tout seul
-	$max = 30;
-	// mais recuperer en priorite notre chemin
-	if ($chemin_prioritaire)
-		$order = "ORDER BY fichier != '$chemin_prioritaire'";
+	// signaler
+	effacer_meta('invalider');
+	ecrire_metas();
 
-	// faire le boulot de suppression
-	$q = spip_query("SELECT DISTINCT fichier FROM spip_caches
-	WHERE type='x' $order LIMIT 0,$max");
-	if ($n = @spip_num_rows($q)) {
+	// recuperer la liste des caches voues a la suppression
+	$suppr = array();
+	$q = spip_query("SELECT fichier FROM spip_caches WHERE type='x'");
+	while ($r = spip_fetch_array($q))
+		$suppr[$r['fichier']] = true;
+
+	if ($n = count($suppr)) {
 		spip_log ("Retire $n caches");
-		while (list($cache) = spip_fetch_array($q)) {
+		foreach ($suppr as $cache => $ignore)
 			retire_cache($cache);
-			$supprimes[] = "'$cache'";
-		}
 		spip_query("DELETE FROM spip_caches WHERE "
-		.calcul_mysql_in('fichier', join(',',$supprimes)) );
-	}
-
-	// marque comme fait
-	if (count($supprimes) < $max) {
-		effacer_meta('invalider');
-		ecrire_metas();
-	} else {
-		ecrire_meta('invalider', 'oui');
-		ecrire_metas();
+		.calcul_mysql_in('fichier', "'".join("','",$supprimes)."'") );
 	}
 }
 
@@ -152,7 +142,7 @@ function utiliser_cache(&$chemin_cache, $delais) {
 	// ne jamais recalculer pour les moteurs de recherche, proxies...
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$ok_cache = true;
-	spip_log("'$ok_cache'");
+	#spip_log("'$ok_cache'");
 	return $ok_cache;
 }
 

@@ -121,16 +121,16 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		}
 	}
 
-	// Calculer le chemin putatif du cache
-	$chemin_cache = generer_nom_fichier_cache('', $fond);
-
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		if (lire_meta('invalider'))
-			retire_caches($chemin_cache);
+			retire_caches();
 	}
+
+	// Calculer le chemin putatif du cache
+	$chemin_cache = generer_nom_fichier_cache('', $fond);
 
 	// Peut-on utiliser un fichier cache ?
 	determiner_cache($delais, $use_cache, $chemin_cache);
