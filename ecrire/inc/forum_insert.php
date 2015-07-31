@@ -122,6 +122,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	return generer_url_entite($id_message, 'forum');
 }
 
+// http://doc.spip.org/@forum_insert_base
 function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $statut, $retour)
 {
 	$afficher_texte = (_request('afficher_texte') <> 'non');
@@ -193,6 +194,7 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 // calcul de l'adresse de retour en cas d'echec du POST
 // mais la veritable adresse de retour sera calculee apres insertion
 
+// http://doc.spip.org/@forum_insert_nopost
 function forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique)
 {
 	if ($id_forum>0)
@@ -209,6 +211,7 @@ function forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_
 	return str_replace('&amp;','&',$r);
 }
 
+// http://doc.spip.org/@forum_insert_noprevisu
 function forum_insert_noprevisu()
 {
 	// simuler une action venant de l'espace public
@@ -235,6 +238,7 @@ function forum_insert_noprevisu()
 	return false;
 }
 
+// http://doc.spip.org/@forum_insert_statut
 function forum_insert_statut($statut, $id_article, $retour, $forcer_statut=NULL)
 {
 	$statut = controler_forum($id_article);
