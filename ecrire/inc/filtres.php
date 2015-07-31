@@ -1058,7 +1058,7 @@ function image_flip_horizontal($im)
 }
 
 
-function image_masque($im, $masque) {
+function image_masque($im, $masque, $pos="") {
 	// Passer, en plus de l'image d'origine,
 	// une image de "masque": un fichier PNG24 transparent.
 	// Le decoupage se fera selon la transparence du "masque",
@@ -1067,10 +1067,29 @@ function image_masque($im, $masque) {
 	//
 	// Si l'image source est plus grande que le masque, alors cette image est reduite a la taille du masque.
 	// Sinon, c'est la taille de l'image source qui est utilisee.
+	//
+	// $pos est une variable libre, qui permet de passer left=..., right=..., bottom=..., top=...
+	// dans ce cas, le pasque est place a ces positions sur l'image d'origine,
+	// et evidemment cette image d'origine n'est pas redimensionnee
 
 	
 	$nom = ereg_replace("\.png", "", $masque);
-	$image = valeurs_image_trans($im, "$nom", "png");
+
+
+	$numargs = func_num_args();
+	$arg_list = func_get_args();
+	$texte = $arg_list[0];
+	for ($i = 1; $i < $numargs; $i++) {
+		if (ereg("\=", $arg_list[$i])) {
+			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
+			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
+			$variable["$nom_variable"] = $val_variable;
+			$defini["$nom_variable"] = 1;
+		}
+	}
+
+
+	$image = valeurs_image_trans($im, "$nom$pos", "png");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -1082,6 +1101,11 @@ function image_masque($im, $masque) {
 	$creer = $image["creer"];
 
 
+	if (strlen($pos) > 0) {
+		$placer = true;
+	}
+	else $placer = false;
+
 	if ($creer) {
 		include_spip('inc/logos'); // bicoz presence reduire_image
 	
@@ -1091,6 +1115,58 @@ function image_masque($im, $masque) {
 		$x_m = $mask["largeur"];
 		$y_m = $mask["hauteur"];
 	
+		$im2 = $mask["fonction_imagecreatefrom"]($masque);
+		
+		if ($placer) {
+			// On fabriquer une version "agrandie" du masque,
+			// aux dimensions de l'image source
+			// et on "installe" le masque dans cette image
+			// ainsi: aucun redimensionnement
+			
+			$dx = 0;
+			$dy = 0;
+			
+			if ($defini["right"]) {
+				$right = $variable["right"];
+				$dx = ($x_i - $x_m) - $right;
+			}
+			if ($defini["bottom"]) {
+				$bottom = $variable["bottom"];
+				$dy = ($y_i - $y_m) - $bottom;
+				}
+			if ($defini["top"]) {
+				$top = $variable["top"];
+				$dy = $top;
+			}
+			if ($defini["left"]) {
+				$left = $variable["left"];
+				$dx = $left;
+			}
+			
+			
+			$im3 = imagecreatetruecolor($x_i, $y_i);
+			@imagealphablending($im3, false);
+			@imagesavealpha($im3,true);
+			$color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 0 );
+			imagefill ($im3, 0, 0, $color_t);
+
+			
+
+			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);	
+
+			imagedestroy($im2);
+			$im2 = imagecreatetruecolor($x_i, $y_i);
+			@imagealphablending($im2, false);
+			@imagesavealpha($im2,true);
+			
+			
+			
+			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);			
+			imagedestroy($im3);
+			$x_m = $x_i;
+			$y_m = $y_i;
+		}
+		
 	
 		$rapport = $x_i / $x_m;
 		if (($y_i / $y_m) < $rapport ) {
@@ -1119,7 +1195,6 @@ function image_masque($im, $masque) {
 		
 	
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
-		$im2 = $mask["fonction_imagecreatefrom"]($masque);
 		$im_ = imagecreatetruecolor($x_dest, $y_dest);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1159,8 +1234,6 @@ function image_masque($im, $masque) {
 			}
 		}
 
-
-
 		$image["fonction_image"]($im_, "$dest");
 		imagedestroy($im_);
 		imagedestroy($im);
@@ -1175,9 +1248,8 @@ function image_masque($im, $masque) {
 	if (strlen($style) > 1) $tags="$tags style='$style'";
 	return "<img src='$dest'$tags />";
 
-
-
 }
+
 
 // Passage de l'image en noir et blanc
 // un noir & blanc "photo" n'est pas "neutre": les composantes de couleur sont
