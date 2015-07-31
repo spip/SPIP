@@ -1722,6 +1722,7 @@ function spip_initialisation_suite() {
 		(isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
 		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
 		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
+		OR @$_REQUEST['var_ajax'] # forms ajax & inclure ajax de spip
 		)
 		AND !@$_REQUEST['var_noajax'] # horrible exception, car c'est pas parce que la requete est ajax jquery qu'il faut tuer tous les formulaires ajax qu'elle contient
 	);
