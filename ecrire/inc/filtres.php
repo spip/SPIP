@@ -1072,6 +1072,7 @@ function image_masque($im, $masque, $pos="") {
 
 	
 	$nom = ereg_replace("\.png", "", $masque);
+	$nom = ereg_replace("/","-",$nom);
 
 
 	$numargs = func_num_args();
@@ -1085,7 +1086,6 @@ function image_masque($im, $masque, $pos="") {
 			$defini["$nom_variable"] = 1;
 		}
 	}
-
 
 	$image = valeurs_image_trans($im, "$nom$pos", "png");
 	if (!$image) return("");
