@@ -60,7 +60,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 
 	foreach($liste_boutons as $id => $infos){
 		// les boutons principaux ne sont pas soumis a autorisation
-		if (!($parent = $infos['parent']) OR !$autorise OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
+		if (!($parent = $infos['parent']) OR !$autorise OR autoriser('menu',$id,0,NULL,array('contexte'=>$contexte))){
 			if ($parent AND isset($boutons_admin[$parent])){
 				if (!is_array($boutons_admin[$parent]->sousmenu))
 					$boutons_admin[$parent]->sousmenu = array();
@@ -92,7 +92,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 		}
 	}
 
-	return pipeline('ajouter_boutons', $boutons_admin);
+	return pipeline('ajouter_menus', $boutons_admin);
 }
 
 /**
