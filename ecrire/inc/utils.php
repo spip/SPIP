@@ -616,7 +616,9 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // http://doc.spip.org/@action_cron
 function action_cron() {
 	include_spip('inc/headers');
-	envoie_image_vide();
+	//	envoie_image_vide();
+	http_status(204); // No Content
+	header("Connection: close");
 	cron (1);
 }
 
