@@ -109,7 +109,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		: null
 	);
 
-	echo recuperer_fond("prive/editer/article", $contexte, true, $connect);
+	echo recuperer_fond("prive/editer/article", $contexte);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 

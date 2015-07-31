@@ -494,7 +494,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "recuperer_fond(
 			'modeles/lesauteurs',
 			array('id_article' => ".champ_sql('id_article', $p)
-			."), true, "
+			."), array('trim'=>true), "
 			. sql_quote($connect)
 			.")";
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
@@ -1062,7 +1062,7 @@ function balise_INCLURE_dist($p) {
 		$connect = !$id_boucle ? '' 
 		  : $p->boucles[$id_boucle]->sql_serveur;
 
-		$p->code = "recuperer_fond('',\$l = ".$l.", false, " . sql_quote($connect) .")";
+		$p->code = "recuperer_fond('',\$l = ".$l.", array('trim'=>false), " . sql_quote($connect) .")";
 
 		// Gerer ajax
 		if (isset($_contexte['ajax'])) {
@@ -1142,7 +1142,7 @@ function balise_MODELE_dist($p) {
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
 	recuperer_fond('$nom',
-		creer_contexte_de_modele(array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])), true, " . sql_quote($connect) . "):'')";
+		creer_contexte_de_modele(array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])), array('trim'=>true), " . sql_quote($connect) . "):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	// Gerer ajax

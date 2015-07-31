@@ -671,7 +671,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	return $retour;
 }
 
-// Un inclure_page qui marche aussi pour l'espace prive 
+// Un inclure_page qui marche aussi pour l'espace prive
+// fonction interne a spip, ne pas appeler directement
+// pour recuperer $page complet, utiliser recuperer_fond($fond,$contexte,array('raw'=>true))
 // http://doc.spip.org/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 

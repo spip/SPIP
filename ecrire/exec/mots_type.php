@@ -58,7 +58,7 @@ function exec_mots_type_dist()
 		'config_fonc'=>'groupes_mots_edit_config',
 	);
 
-	$out .= recuperer_fond("prive/editer/groupe_mot", $contexte, true, $connect);
+	$out .= recuperer_fond("prive/editer/groupe_mot", $contexte);
 	//$out .= fin_cadre_formulaire(true);
 	echo $out;
 

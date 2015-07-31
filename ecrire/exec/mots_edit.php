@@ -211,7 +211,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			'table_id'=>$table_id
 		);
 
-		$out .= recuperer_fond("prive/editer/mot", $contexte, $connect);
+		$out .= recuperer_fond("prive/editer/mot", $contexte);
 		$out .= '</div>';
 
 	}

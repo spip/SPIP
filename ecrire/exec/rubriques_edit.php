@@ -89,7 +89,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	'config_fonc'=>'rubriques_edit_config'
 	);
 
-	echo recuperer_fond("prive/editer/rubrique", $contexte, true, $connect);
+	echo recuperer_fond("prive/editer/rubrique", $contexte);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 

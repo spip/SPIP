@@ -1809,7 +1809,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 
 	if ($modele) $modele = '_'.$modele;
 
-	return recuperer_fond("modeles/pagination$modele", $pagination, true, $connect);
+	return recuperer_fond("modeles/pagination$modele", $pagination, array('trim'=>true), $connect);
 }
 
 // passer les url relatives a la css d'origine en url absolues
@@ -2139,6 +2139,10 @@ function compacte($source, $format = null) {
 	if (!preg_match(',[\s{}],', $source)
 	AND preg_match(',\.'.$format.'$,i', $source, $r)
 	AND file_exists($source)) {
+		// si c'est une css, il faut reecrire les url en absolu
+  	if ($type=='css')
+  		$source = url_absolue_css($source);
+		
 		$f = basename($source,'.'.$format);
 		$f = sous_repertoire (_DIR_VAR, 'cache-'.$format) 
 		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-"

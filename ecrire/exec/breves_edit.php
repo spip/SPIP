@@ -110,7 +110,7 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	'config_fonc'=>'breves_edit_config'
 	);
 
-	echo recuperer_fond("prive/editer/breve", $contexte, true, $connect);
+	echo recuperer_fond("prive/editer/breve", $contexte);
 
 	echo fin_gauche(), fin_page();
 

@@ -76,7 +76,7 @@ function exec_sites_edit_dist()
 	'config_fonc'=>'sites_edit_config'
 	);
 
-	echo recuperer_fond("prive/editer/site", $contexte, true, $connect);
+	echo recuperer_fond("prive/editer/site", $contexte);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 	echo fin_gauche(), fin_page();

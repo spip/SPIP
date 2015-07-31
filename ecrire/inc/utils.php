@@ -1385,18 +1385,42 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
-// La fonction de base de SPIP : un squelette + un contexte => une page
+
+/**
+ * La fonction de base de SPIP : un squelette + un contexte => une page.
+ * $fond peut etre un nom de squelette, ou une liste de squelette au format array.
+ * Dans ce dernier cas, les squelettes sont tous evalues et mis bout a bout
+ * $options permet de selectionner les options suivantes :
+ * 	trim => true (valeur par defaut) permet de ne rien renvoyer si le fond ne produit que des espaces ;
+ * 	raw => true permet de recuperer la strucure $page complete avec entetes et invalideurs pour chaque $fond fourni.
+ *
+ * @param string/array $fond
+ * @param array $contexte
+ * @param array $options
+ * @param string $connect
+ * @return string/array
+ */
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
+function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
+	// assurer la compat avec l'ancienne syntaxe (trim etait le 3eme argument, par defaut a true)
+	if (!is_array($options)) $options = array('trim'=>$options);
+	if (!isset($options['trim'])) $options['trim']=true;
 
 	$texte = "";
+	$pages = array();
 	include_spip('public/assembler');
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
-		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
+		if (isset($options['raw']) AND $options['raw'])
+			$pages[] = $page;
+		else
+			$texte .= $options['trim'] ? rtrim($page['texte']) : $page['texte'];
 	}
-
-	return $trim ? ltrim($texte) : $texte;
+	
+	if (isset($options['raw']) AND $options['raw'])
+		return is_array($fond)?$pages:reset($pages);
+	else
+		return $options['trim'] ? ltrim($texte) : $texte;
 }
 
 // Charger dynamiquement une extension php
