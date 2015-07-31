@@ -49,7 +49,7 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 }
 
 // http://doc.spip.org/@formulaires_editer_objet_charger
-function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour=NULL, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
@@ -129,7 +129,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$contexte['_pipeline'] = array('editer_contenu_objet',array('type'=>$type,'id'=>$id));
 	// preciser que le formulaire doit etre securise auteur/action
 	$contexte['_action'] = array("editer_$type",$id);
-	if ($retour) $contexte['action'] = trim($retour);
+
 	return $contexte;
 }
 
