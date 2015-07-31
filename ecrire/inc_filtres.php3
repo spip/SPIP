@@ -715,7 +715,6 @@ function image_math($tex) {
 		."\\ifdim\\haut>\\prof\\prof=\\haut\\else\\haut=\\prof\\fi\n"
 		."\\advance\haut by .5em\n"
 		."\\color{white}\\vrule height \\haut depth \\prof width 0.1pt\\color{black}\\box1";
-	
 
 	// Regarder dans le repertoire local des images TeX
 	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';
