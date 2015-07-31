@@ -14,6 +14,11 @@
 	  <input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" value="#ENV{url_site}" size="30" /></p>
 	<p><label for="description_site"><:form_prop_description:></label>
 	  <textarea class="forml" name="description_site" id="description_site" rows="5" cols="40">#ENV{descriptif_site}</textarea></p>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+
 	<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 	</fieldset>
 </form>
