@@ -159,7 +159,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$type_mot = $row['type'];
 				$descriptif_mot = $row['descriptif'];
 
-				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
+				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
 				echo "</FONT>\n";
 			}
 			echo "</UL>";
@@ -180,7 +180,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					$type_mot = $row['type'];
 					$descriptif_mot = $row['descriptif'];
 
-					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
+					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
 
 					if ($type_mot) echo " ($type_mot)";
 					echo " | <A HREF=\"$url_base&nouv_mot=$id_mot#mots\">"._T('info_ajouter_mot')."</A>";
@@ -295,7 +295,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$result_autres_mots = spip_query($query_autres_mots);
 			while ($row_autres = spip_fetch_array($result_autres_mots)) {
 				$le_mot = $row_autres['id_mot'];
-				$le_titre_mot = supprimer_tags($row_autres['titre']);
+				$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
 
 				if ($le_mot == $id_mot) $selected = "SELECTED";
 				else $selected = "";
@@ -307,7 +307,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "</form>";
 
 		} else {
-			echo "<A HREF='$url'>$titre_mot</A>";
+			echo "<A HREF='$url'>".typo($titre_mot)."</A>";
 		}
 		echo "</TD>";
 
@@ -437,7 +437,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					while($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = $row['titre'];
-						$texte_option = entites_html($titre_mot);
+						$texte_option = entites_html(supprimer_tags(typo($titre_mot)));
 						echo "\n<OPTION VALUE=\"$id_mot\">";
 						echo "&nbsp;&nbsp;&nbsp;";
 						echo $texte_option;

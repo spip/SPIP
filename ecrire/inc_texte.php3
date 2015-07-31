@@ -132,9 +132,10 @@ function nettoyer_chapo($chapo){
 
 // points d'entree de pre- et post-traitement pour propre() et typo()
 function spip_avant_propre ($letexte) {
+	$letexte = extraire_multi($letexte);
+
 	if (@function_exists('avant_propre'))
 		return avant_propre ($letexte);
-
 	return $letexte;
 }
 
@@ -146,6 +147,8 @@ function spip_apres_propre ($letexte) {
 }
 
 function spip_avant_typo ($letexte) {
+	$letexte = extraire_multi($letexte);
+
 	if (@function_exists('avant_typo'))
 		return avant_typo ($letexte);
 
@@ -914,7 +917,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
 			/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 			/* 13 */	"/<p>/",
-			/* 14 */	"/\n/",
+			/* 14 		"/\n/", */
 			/* 15 */	"/<quote>/",
 			/* 16 */	"/<\/quote>/"
 		);
@@ -933,7 +936,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 11 */	"<p class=\"spip\">",
 			/* 12 */	"<p class=\"spip\">",
 			/* 13 */	"<p class=\"spip\">",
-			/* 14 */	" ",
+			/* 14 		" ", */
 			/* 15 */	"<blockquote class=\"spip\">",
 			/* 16 */	"</blockquote>"
 		);

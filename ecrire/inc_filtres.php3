@@ -681,4 +681,72 @@ function post_autobr($texte, $delim="\n_ ") {
 	return $texte;
 }
 
+//
+// Gestion des blocs multilingues
+//
+
+// renvoie la traduction d'un bloc multi dans la langue demandee
+function multi_trad ($lang, $trads) {
+	// si la traduction existe, genial
+	if (isset($trads[$lang]))
+		$retour = $trads[$lang];
+
+	// sinon, renvoyer la premiere du tableau
+	// remarque : on pourrait aussi appeler un service de traduction externe
+	else {
+		list (,$trad) = each($trads);
+		$retour = $trad;
+	}
+
+
+	// dans l'espace prive, mettre un popup multi
+	if ($GLOBALS['flag_ecrire']) {
+		$retour = ajoute_popup_multi($trads, $retour);
+	}
+
+	return $retour;
+}
+
+// analyse un bloc multi
+function extraire_trad ($langue_demandee, $bloc) {
+	$lang = '';
+
+	while (preg_match("/^(.*?)\[([a-z_]+)\]/si", $bloc, $regs)) {
+		$texte = trim($regs[1]);
+		if ($texte OR $lang)
+			$trads[$lang] = $texte;
+		$bloc = substr($bloc, strlen($regs[0]));
+		$lang = $regs[2];
+	}
+	$trads[$lang] = $bloc;
+
+	// faire la traduction avec ces donnees
+	return multi_trad($langue_demandee, $trads);
+}
+
+// repere les blocs multi dans un texte et extrait le bon
+function extraire_multi ($letexte) {
+	global $flag_pcre;
+
+	if ($flag_pcre AND preg_match_all("@<multi>(.*?)</multi>@si", $letexte, $regs, PREG_SET_ORDER)) {
+		foreach($regs as $reg) {
+			$letexte = str_replace($reg[0], extraire_trad($GLOBALS['spip_lang'], $reg[1]), $letexte);
+		}
+	}
+	return $letexte;
+}
+
+// popup des blocs multi dans l'espace prive (a ameliorer)
+function ajoute_popup_multi($trads, $texte) {
+	global $popups_multi, $compteur_multi;
+	while (list($lang,$bloc) = each($trads)) 
+		$popup .= "[$lang] ".supprimer_tags(couper($bloc,20))."\n";
+
+	if ($popup) {
+		$texte .= " <img src=\"img_pack/langues-modif-12.gif\" alt=\"(multi)\" title=\"$popup\" height=\"12\" width=\"12\" border=\"0\" />";
+	}
+
+	return $texte;
+}
+
 ?>

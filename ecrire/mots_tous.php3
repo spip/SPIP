@@ -248,9 +248,9 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				echo "</TD>";
 				echo "<TD class='serif2'>";
 				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
-					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'>$titre_mot</A>";
+					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'>".typo($titre_mot)."</A>";
 				else
-					echo "$titre_mot";
+					echo typo($titre_mot);
 				echo "</TD>";
 				echo "<TD ALIGN='right' class='verdana2'>";
 

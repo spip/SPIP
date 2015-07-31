@@ -1438,7 +1438,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 			automatique.',
 'texte_creation_automatique_vignette' => 'La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au(x) format(s) @gd_formats@, elles seront accompagn&eacute;es d\'une vignette d\'une taille maximale de @taille_preview@&nbsp;pixels.',
 'texte_creer_rubrique' => 'Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er une rubrique.',
-'texte_date_creation_article' => 'DATE DE CR&Eacute;ATION DE L\'ARTICLE',
+'texte_date_creation_article' => 'DATE DE CR&Eacute;ATION DE L\'ARTICLE&nbsp;:',
 'texte_date_publication_anterieure' => 'DATE DE PUBLICATION ANT&Eacute;RIEURE',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de publication ant&eacute;rieure.',
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :',
