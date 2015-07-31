@@ -1566,14 +1566,14 @@ function fin_html() {
 <blockquote><p>&nbsp;</p>
 <div align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
+est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>Les icones de l'interface sont distribu&eacute;s en GPL par <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
+	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
 }
 if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statistiques_referers.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>,<br> distribu&eacute; en GPL par Jean-Pierre D&eacute;z&eacute;lus.";
+	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>,<br> par Jean-Pierre D&eacute;z&eacute;lus.";
 }
 ?>
 </div></blockquote>
