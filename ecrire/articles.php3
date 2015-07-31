@@ -602,6 +602,7 @@ if ($connect_statut=="0minirezo" AND $options=="avancees"){
 	echo "REDIRECTION";
 	echo aide ("artvirt");
 	echo "</b></font></td></tr></table></center>";
+	echo debut_block_invisible("virtuel");
 	echo "<form action='articles.php3' method='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
@@ -610,7 +611,6 @@ if ($connect_statut=="0minirezo" AND $options=="avancees"){
 		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
 	}
 
-	echo debut_block_invisible("virtuel");
 	if (strlen($virtuel) == 0) { 
 		$virtuel = "http://";
 		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
@@ -1308,7 +1308,7 @@ echo "\n\n<DIV align=justify>";
 if (substr($chapo, 0, 1) == '=') {
 	$adresse = substr($chapo, 1, strlen($chapo));
 	debut_boite_info();
-	echo propre("{{Redirection.}} Cet article correspond &agrave;
+	echo propre("{{Redirection.}} Cet article renvoie &agrave;
 	la page: <center>[->$adresse]</center>");
 	fin_boite_info();
 }

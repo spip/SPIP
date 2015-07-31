@@ -478,16 +478,7 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'mots':
-				// Si aucun lien avec un article, et si pas de demande de "tout" les mots-cles
-				// alors selectionner uniquement les mots-cles attaches a un article publie
-/*				if (!$tout AND !$flag_lien) {
-					$req_from[] = 'spip_mots_articles AS lien';
-					$req_from[] = 'spip_articles AS articles';
-					$req_where[] = "lien.id_mot=$table.id_mot";
-					$req_where[] = "lien.id_article=articles.id_article";
-					$req_where[] = "articles.statut='publie'";
-					$req_group = " GROUP BY $table.$id_objet";
-				}*/
+				// pas de restriction sur les mots
 				break;
 
 			case 'breves':
