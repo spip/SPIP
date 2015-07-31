@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/acces');
 include_spip('base/serial');
-include_spip('base/aux');
+include_spip('base/auxiliaires');
 include_spip('base/typedoc');
 include_spip('base/upgrade');
 
