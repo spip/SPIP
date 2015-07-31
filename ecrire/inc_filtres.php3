@@ -126,6 +126,7 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 		'&frac34;' => "3/4",
 		'&amp;' => '&',
 		'&quot;' => '"',
+		'&apos;' => "'",
 		'&lt;' => '<',
 		'&gt;' => '>'
 	);
@@ -228,7 +229,7 @@ function utf_8_to_unicode($source) {
 /*
  * Ce code provient de php.net, son auteur est Ronen. Adapte pour compatibilite php3
  */
-	// array used to figure what number to decrement from character order value 
+	// array used to figure what number to decrement from character order value
 	// according to number of characters used to map unicode to ascii by utf-8
 	$decrement[4] = 240;
 	$decrement[3] = 224;
