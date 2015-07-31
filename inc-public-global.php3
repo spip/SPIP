@@ -219,9 +219,10 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
+		include_ecrire('inc_connect.php3');
 		include_ecrire('inc_meta.php3');
 		lire_metas();
-		if (lire_meta('invalider'))
+		if (lire_meta('invalider') AND $GLOBALS['db_ok'])
 			retire_caches($chemin_cache);
 	}
 

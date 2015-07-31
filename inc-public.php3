@@ -19,7 +19,7 @@ if (defined("_INC_PUBLIC")) {
 	else
 		eval('?' . '>' . $page['texte']);
 
-	if ($page['lang_select'])
+	if ($page['lang_select'] === true)
 		lang_dselect();
 
 } else {
