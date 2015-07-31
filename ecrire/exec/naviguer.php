@@ -314,7 +314,7 @@ if ($relief) {
 	//
 	// Les sites references a valider
 	//
-	if ($GLOBALS['meta']['activer_syndic'] != 'non') {
+	if ($GLOBALS['meta']['activer_sites'] != 'non') {
 		include_spip('inc/sites_voir');
 		afficher_sites(_T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "nom_site"));
 	}
@@ -322,7 +322,7 @@ if ($relief) {
 	//
 	// Les sites a probleme
 	//
-	if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_spip('inc/sites_voir');
 		afficher_sites(_T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 	}
