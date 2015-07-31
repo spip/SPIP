@@ -5,6 +5,7 @@
 
 	<procure id="iterateurs" version="0.3.0" />
 	<procure id="queue" version="0.6.4" />
+	<procure id="jqueryui" version="1.8.9" />
 
 	<bouton id="bando_accueil">
 		<icone>images/accueil-48.png</icone>
