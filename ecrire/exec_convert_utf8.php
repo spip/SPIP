@@ -87,7 +87,7 @@ function convert_utf8_dist() {
 		'spip_syndic' => 'nom_site',
 		'spip_messages' => 'titre'
 	);
-#	$tables_a_convertir = array();
+
 	// Definir le titre de la page (et le nom du fichier admin)
 	$action = _L('Conversion utf-8');
 
@@ -96,13 +96,14 @@ function convert_utf8_dist() {
 		demander_conversion($tables_a_convertir, $action);
 
 		// si on est la c'est que l'autorisation ftp vient d'etre donnee
+		@unlink(_DIR_SESSIONS.'convert_utf8_backup.sql');
 
 		// convertir spip_meta
 		$charset_source = lire_meta('conversion_charset');
 		foreach ($GLOBALS['meta'] as $c => $v) {
 			$v2 = unicode_to_utf_8(charset2unicode($v, $charset_source));
 			if ($v2 != $v)
-				ecrire_meta($c, $v);
+				ecrire_meta($c, $v2);
 		}
 		ecrire_metas();
 	}
@@ -136,11 +137,14 @@ function convert_utf8_dist() {
 					$v = substr($v, strlen($reg[0]));
 					$charset_source = $reg[1];
 				}
-				$query[] = "$c = '".addslashes($v)."'";
+				if (is_numeric($v))
+					$query[] = "$c=$v";
+				else
+					$query[] = "$c='".addslashes($v)."'";
 			}
 
 			// Cette query ne fait que retablir les donnees existantes
-			$query = "UPDATE $table SET ".join(',', $query)."
+			$query = "UPDATE $table SET ".join(', ', $query)."
 			WHERE $id_champ = ".$t[$id_champ];
 
 			// On l'enregistre telle quelle sur le fichier de sauvegarde
