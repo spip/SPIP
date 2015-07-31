@@ -141,13 +141,13 @@ function import_translate_std($values, $table, $desc, $request) {
 	$vals = '';
 
 	foreach ($values as $k => $v) {
-		if (($k=='chapo') AND preg_match(',^=(\d+)(.*)$,', $v, $m))
-			$v = '=' . importe_translate_maj('id_article',$m[1]).$m[2];
-		else {
-			if ($k=='id_parent' OR $k=='id_secteur')
+		if ($k=='id_parent' OR $k=='id_secteur')
 				$k = 'id_rubrique';
-			$v = importe_raccourci($k,importe_translate_maj($k, $v));
-		}
+		else  if (($k=='chapo') AND ($v[0]=='=') AND preg_match(_RACCOURCI_CHAPO, substr($v,1), $m))
+			$v = '=[->' . substr($v,1) . ']';
+
+		$v = importe_raccourci($k,importe_translate_maj($k, $v));
+
 		$vals .= "," . _q($v);
 	}
 	import_inserer_translate($values, $table, $desc, $request, $vals);

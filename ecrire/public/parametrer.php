@@ -261,19 +261,23 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		$local = $contexte;
 
 		// si le champ chapo commence par '=' c'est une redirection.
+		// avec un eventuel raccourci Spip
+		// si le raccourci a un titre il sera pris comme corps du 302
 		if ($fond == 'article'
 		AND $id_article = intval($local['id_article'])) {
-			if ($chapo = sql_chapo($id_article)) {
-				if (preg_match(',^=(\[->)?(.*?)[]]?$,', $chapo, $url)){
-					include_spip('inc/texte');
-					$url = calculer_url($url[2]);
-					if ($url) { // sinon les navigateurs pataugent
-						$url = texte_script(str_replace('&amp;', '&', $url));
-						return array('texte' => "<".
-						"?php header('Location: $url'); ?" . ">",
-						'process_ins' => 'php');
-					}
-				}
+			$m = sql_chapo($id_article);
+			if ($m[0]=='=') {
+				include_spip('inc/texte');
+				// les navigateurs pataugent si l'URL est vide
+				if ($m = chapo_redirige(substr($m,1)))
+					if ($url = calculer_url($m[3]))
+					return array('texte' => "<"
+				. "?php header('Location: "
+				. texte_script(str_replace('&amp;', '&', $url))
+				. "'); echo '"
+				.  addslashes($m[1])
+				. "'?" . ">",
+					'process_ins' => 'php');
 			}
 		}
 	}
