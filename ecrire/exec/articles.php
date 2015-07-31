@@ -191,7 +191,7 @@ function articles_documents($flag_editable, $type, $id)
     $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
     $res .= <<<EOF
     <script type='text/javascript'>
-    $(".form_upload").async_upload(async_upload_article);
+    $(".form_upload").async_upload(async_upload_portfolio_documents);
     </script>
 EOF;
 		
