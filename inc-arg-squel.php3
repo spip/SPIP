@@ -95,13 +95,13 @@ function calculer_params($type, $params, $idb, &$boucles) {
 				$boucle->where[] = "$id_table.id_parent='0'";
 			}
 			else if (ereg("^branche *(\??)", $param, $regs)) {
-				$c = '".' ."calcul_mysql_in('$id_table.id_rubrique',
+				$c = "calcul_mysql_in('$id_table.id_rubrique',
 				calcul_branche(" . index_pile($boucle->id_parent, 'id_rubrique',
-				$boucles) . "), '') . \"";
+				$boucles) . "), '')";
 				if (!$regs[1])
-					$boucle->where[] = $c ;
+					$boucle->where[] = "\". $c .\"" ;
 				else
-					$boucle->where[] = "('\$id_rubrique'='' OR $c)";
+					$boucle->where[] = "\".(".index_pile($boucle->id_parent, 'id_rubrique', $boucles)."? $c : 1).\"";
 			}
 			else if ($type == 'hierarchie') {
 				// Hack specifique; cf complement dans calculer_boucle
@@ -133,9 +133,6 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$val = '" . addslashes(' . $val . ') . "';
 				else
 					$val = addslashes($val);
-
-				// operateur optionnel {lang?}
-				$ou_rien = ($match[2]) ? "'$val'='' OR " : '';
 
 				// Traitement general des relations externes
 				if ($s = $tables_relations[$type][$col]) {
@@ -257,7 +254,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 				if (!$op)
 					$op = '=';
 				else if ($op == '==')
-					$op = 'REGEXP ';
+					$op = 'REGEXP';
 	
 				if ($col_table)
 					$col = "$col_table.$col";
@@ -280,10 +277,19 @@ function calculer_params($type, $params, $idb, &$boucles) {
 
 				if (!$vu) {
 					if ($match[4] == '!')
-						$boucle->where[] = "NOT ($ou_rien$col $op'$val')";
+						$where = "NOT ($col $op '$val')";
 					else
-						$boucle->where[] = "($ou_rien$col $op'$val')";
+						$where = "($col $op '$val')";
+
+					// operateur optionnel {lang?}
+					if ($match[2]) {
+						$champ = index_pile($boucle->id_parent, $match[1], $boucles) ;
+						$where = "\".($champ ? \"$where\" : 1).\"";
+					}
+
+					$boucle->where[] = $where;
 				}
+
 			} // fin du if sur les restrictions de valeurs
 
 			// Selection du classement

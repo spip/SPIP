@@ -414,13 +414,15 @@ function calculer_squelette($squelette, $nom, $gram) {
       
       foreach($boucles as $id => $boucle) 
 	{
-	  $code .= "\n\nfunction $nom" . ereg_replace("-","_",$id) .
+	  $code .= "\n\n// BOUCLE".$id.
+	  "\nfunction $nom" . ereg_replace("-","_",$id) .
 		'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 	    $boucle->return .
 	    "\n}\n";
 	}
     }
   return $code . '
+// Fonction principale du squelette
 function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0) {
 ' .
     $corps . "\n \$t0 = " . $return . ';
