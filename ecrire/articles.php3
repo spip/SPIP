@@ -623,11 +623,11 @@ icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 if ($connect_statut == '0minirezo') {
 	$retour = urlencode($clean_link->getUrl());
 
-	icone_horizontale("Cr&eacute;er un nouvel auteur pour cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale("Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 
 	$articles_mots = lire_meta('articles_mots');
 	if ($articles_mots != "non")
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; pour cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
 }
 
 
