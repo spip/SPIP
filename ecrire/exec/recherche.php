@@ -101,7 +101,7 @@ function exec_recherche_dist() {
 				$titre = _T('titre_documents_joints');
 				$order = "id_$table";
 				break;
-			case 'groupe_mot':
+			case 'groupes_mot':
 				$titre = _T('titre_groupe_mots');
 				$order = 'titre';
 				break;
