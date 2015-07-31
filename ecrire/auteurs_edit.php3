@@ -375,11 +375,14 @@ if ($row = mysql_fetch_array($result)) {
 			<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution.</font></b></font><p>\n";
 		}
 
-		if (($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_id_auteur == $id_auteur) {
+		if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
 			echo "<fieldset style='padding:5'><legend><B>Login</B><BR></legend>";
 			echo "(Plus de 3 caract&egrave;res)<BR>";
 			echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"$login\" SIZE='40'><P>\n";
-
+		} else if ($connect_id_auteur == $id_auteur) {
+			echo "<fieldset style='padding:5'><legend><B>Login</B><BR></legend><br><b>$login</b><p>\n";
+		}
+		if (($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_id_auteur == $id_auteur) {
 			echo "<B>Nouveau mot de passe</B><BR>";
 			echo "(Plus de 5 caract&egrave;res)<BR>";
 			echo "<INPUT TYPE='password' NAME='new_pass' CLASS='formo' VALUE=\"\" SIZE='40'><BR>\n";

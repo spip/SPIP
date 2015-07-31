@@ -339,7 +339,7 @@ function boite_documents_article($id_article) {
 	$txticone = "$a<img src='IMG2/$icone' width='48' height='48' border='0'></a>";
 
 	if ($nbdoc == 0) {
-		$txtdoc .= $a."<b>Lier un document &agrave; cet article</b></a>";
+		$txtdoc .= $a."<b>Lier une image ou un document &agrave; cet article</b></a>";
 	}
 	else {
 		$txtdoc .= $a."<b>";

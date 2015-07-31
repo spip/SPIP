@@ -27,9 +27,9 @@ $requete_fichier = "articles.php3?id_article=$id_article";
 $query = "SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article";
 $result = mysql_query($query);
 if ($row = mysql_fetch_array($result)) {
-	$statut_article = $row[0];
-	$titre_article = $row[1];
-	$rubrique_article = $row[2];
+	$statut_article = $row['statut'];
+	$titre_article = $row['titre'];
+	$rubrique_article = $row['id_rubrique'];
 }
 else {
 	$statut_article = '';
@@ -40,7 +40,7 @@ $result_auteur = mysql_query($query);
 
 $flag_auteur = (mysql_num_rows($result_auteur) > 0);
 $flag_editable = (acces_rubrique($rubrique_article)
-	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR !$rubrique_article)));
+	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 
 
@@ -56,7 +56,7 @@ if ($statut_nouv) {
 	else if ($flag_auteur) {
 		if ($statut_nouv == 'prop' AND $statut_article == 'prepa')
 			$ok = true;
-		else if ($statut_nouv == 'prepa' AND !$rubrique_article)
+		else if ($statut_nouv == 'prepa' AND $statut_article == 'poubelle')
 			$ok = true;
 	}
 	if ($ok) {
