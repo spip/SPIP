@@ -136,7 +136,6 @@ function nettoyer_titre_email($titre) {
 function envoyer_mail_publication($id_article) {
 	global $connect_nom;
 	$adresse_suivi = lire_meta("adresse_suivi");
-	$adresse_site = lire_meta("adresse_site");
 	$nom_site_spip = lire_meta("nom_site");
 	$suivi_edito = lire_meta("suivi_edito");
 
@@ -167,29 +166,33 @@ function envoyer_mail_publication($id_article) {
 
 function envoyer_mail_proposition($id_article) {
 	$adresse_suivi = lire_meta("adresse_suivi");
-	$adresse_site = lire_meta("adresse_site") . _DIR_RESTREINT_ABS;
+	$adresse_site = lire_meta("adresse_site");
 	$nom_site_spip = lire_meta("nom_site");
 	$suivi_edito = lire_meta("suivi_edito");
 
 	if ($suivi_edito == "oui") {
-		$query = "SELECT * FROM spip_articles WHERE id_article = $id_article";
-		$result = spip_query($query);
-
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"))) {
 			$lang_utilisateur = $GLOBALS['spip_lang'];
 			changer_langue($GLOBALS['langue_site']);
 
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_propose_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			$courr = _T('info_propose_2')."\n\n";
-			$courr .= _T('info_propose_3', array('titre' => $titre))."\n";
-			$courr .= _T('info_propose_4')."\n";
-			$courr .= _T('info_propose_5')."\n";
-			$courr .= $adresse_site."articles.php3?id_article=$id_article\n\n\n";
-			$courr = $courr . extrait_article($row);
-			envoyer_mail($adresse_suivi, $sujet, $courr);
-
+			envoyer_mail($adresse_suivi,
+				     $sujet,
+				     _T('info_propose_2')
+				     ."\n\n" 
+				     . _T('info_propose_3', array('titre' => $titre))
+				     ."\n" 
+				     . _T('info_propose_4')
+				     ."\n" 
+				     . _T('info_propose_5')
+				     ."\n" 
+				     . $adresse_site 
+				     . '/' 
+				     . _DIR_RESTREINT_ABS 
+				     . "articles.php3?id_article=$id_article\n\n\n" 
+				     . extrait_article($row));
 			changer_langue($lang_utilisateur);
 		}
 	}
