@@ -158,7 +158,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 			$res .= '<b>'._T('info_articles').'</b>';
 		else
 			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title='"._T('lien_trier_nombre_articles'). "'");
-	}
+	} else $visiteurs = '&visiteurs=oui';
 	$res .= "</td></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
@@ -198,8 +198,6 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 	. "<table width='100%' border='0'>";
 
 	$debut_suivant = $debut + $max_par_page;
-	if ($visiteurs)
-		$visiteurs = '&visiteurs=oui';
 	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		$res .= "<tr height='10'></tr>"
 		. "<tr bgcolor='white'><td align='left'>";
