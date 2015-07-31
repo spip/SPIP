@@ -38,6 +38,7 @@ function exec_sites_args($id_syndic)
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
 		afficher_site($id_syndic, $id_rubrique, $nom_site, $row);
+		echo fin_gauche();
 		echo fin_page();
 	}
 }
