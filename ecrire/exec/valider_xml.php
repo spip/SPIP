@@ -94,7 +94,7 @@ function valider_resultats($res)
 		if ($texte < 0) {
 			$texte = (0- $texte);
 			$color = ";color: red";
-		} else  $color = '';
+		} else  {$color = '';}
 		$h = generer_url_ecrire('valider_xml', "var_url=$script");
 		$table .= "<tr class='$class'>"
 		. "<td><a href='$h'>$script</a></td>"
@@ -124,14 +124,27 @@ function controle_une_url($transformer_xml, $script, $dir)
 
 	unset($GLOBALS['xhtml_error']);
 	$f = charger_fonction($script, $dir, true);
-	spip_log("$script $f");
 	if(!$f) return false;
-	$f = $transformer_xml($f, true);
-	$res = strlen($f);
-	// On colore en rouge s'il y a l'attribut minipres:
-	// test non significatif car le script necessite des arguments
-	// (ou une authentification pour action d'administration)
-	if (strpos($f, "id='minipres'")) $res = 0 - $res;
+	$page = $transformer_xml($f, true);
+
+	// s'il y a l'attribut minipres, le test est non significatif
+	// le script necessite peut-etre des arguments, on lui en donne un,
+	// en appelant la fonction _args associee si elle existe
+	// Si ca ne marche toujours pas l'argument n'est pas bon
+	// ou c'est une authentification pour action d'administration;
+	// tant pis, on signale le cas par un resultat negatif
+	if (!strpos($page, "id='minipres'"))
+		$res = strlen($page);
+	else {
+		$f = charger_fonction($script . '_args', $dir, true);
+		if ($f) {
+			unset($GLOBALS['xhtml_error']);
+			$page2 = $transformer_xml($f, array(1));
+		}
+	  	if (strpos($page2, "id='minipres'")) {
+			$res = 0 - strlen($page2);
+		} else	$res = 0 - strlen($page);
+	}
 	if (isset($GLOBALS['xhtml_error'])) {
 		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 		       $GLOBALS['xhtml_error'],

@@ -25,12 +25,16 @@ function inc_documenter_dist(
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
+	$table = 'spip_documents_' . $type . 's';
+	$prim = id_table_objet($table);
+	if (!$prim) return '';
+	$prim = 'id_' . $type;
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
-		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");
+		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, l.vu, l." .$prim, "spip_documents AS D, $table AS l", "l.$prim=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");
 		} else {
-		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension NOT IN ('gif', 'jpg', 'png')",'', "0+D.titre, D.date");
+		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, l.vu,l." . $prim, "spip_documents AS D, $table AS l", "l.$prim=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension NOT IN ('gif', 'jpg', 'png')",'', "0+D.titre, D.date");
 		}
 
 		$documents = array();
