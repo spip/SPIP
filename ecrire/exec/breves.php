@@ -47,7 +47,6 @@ function exec_breves_dist()
 		echo $res ;
 
 		if ($editable) {
-		  if (!$res) echo bandeau_titre_boite2($titre, "breve-24.gif", 'toile_foncee', "ligne_blanche");
 		  echo "<div style='float:$spip_lang_right'>"
 		  . icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif", $spip_lang_right)
 		  . "</div><br class='nettoyeur' />";
