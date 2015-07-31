@@ -620,7 +620,6 @@ dans une couleur qui indique leur état :',
 
 	// N
 	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible',
-	'nouvelle_version_spip_majeure' => 'Une nouvelle version majeure @version@ est disponible',
 
 	// O
 	'onglet_contenu' => 'Contenu',
