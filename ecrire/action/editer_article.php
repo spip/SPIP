@@ -21,18 +21,19 @@ function action_editer_article_dist() {
 
 	$arg = _request('arg');
 
-	// Creation d'un article ?
+	// si id_article n'est pas un nombre, c'est une creation 
+	// mais on verifie qu'on a toutes les données qu'il faut.
 	if (!$id_article = intval($arg)) {
-		if ($arg != 'oui') redirige_par_entete('./');
-		$id_article = insert_article(_request('id_parent'));
+		$id_parent = _request('id_parent');
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		if (!($id_parent AND $id_auteur)) redirige_par_entete('./');
+		$id_article = insert_article($id_parent);
 		
 		# cf. GROS HACK ecrire/inc/getdocument
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
-		if ($GLOBALS['auteur_session']['id_auteur']>0)
-			spip_query("UPDATE spip_documents_articles
-			SET id_article = $id_article
-			WHERE id_article = ".(0-$GLOBALS['auteur_session']['id_auteur']));
+
+		spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_article = ".(0-$id_auteur));
 	} 
 
 	// Enregistre l'envoi dans la BD

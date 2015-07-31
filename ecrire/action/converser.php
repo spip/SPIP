@@ -16,16 +16,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_converser_dist()
 {
-	$lang = _request('var_lang_ecrire');
 
-	if (_FILE_CONNECT AND $lang) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
+
+	if (_FILE_CONNECT AND $lang = _request('var_lang_ecrire')) {
 		spip_query("UPDATE spip_auteurs SET lang = " . _q($lang) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
 		$auteur_session['lang'] = $lang;
 		$session = charger_fonction('session', 'inc');
 		$session($auteur_session);
 	}
+	action_converser_post();
 }
 
 function action_converser_post()
