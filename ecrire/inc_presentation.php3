@@ -1050,9 +1050,16 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 	if ($spip_display != 1){	
 		echo "<tr><td background='' align='center'>";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-		echo "<a href='$lien'><img src='img_pack/$fonction' $title width='24' height='24' border='0'></a>";
-		echo "</td></tr></table>\n";
+		if ($fonction != "rien.gif"){
+			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
+			echo "<a href='$lien'><img src='img_pack/$fonction' $title width='24' height='24' border='0'></a>";
+			echo "</td></tr></table>\n";
+		}
+		else {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
+			echo "<a href='$lien'><img src='img_pack/$fond' $title width='24' height='24' border='0'></a>";
+			echo "</td></tr></table>\n";
+		}
 		echo "</td></tr>";
 	}
 	echo "<tr><td background=''>";
@@ -1083,9 +1090,16 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 	echo "<tr><td background='' align='left' valign='middle' width=$largeur height=$hauteur>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td background='' align='center'>";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-		echo "<a href='$lien'><img src='img_pack/$fonction' $title width='24' height='24' border='0'></a>";
-		echo "</td></tr></table>\n";
+		if ($fonction != "rien.gif"){
+			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
+			echo "<a href='$lien'><img src='img_pack/$fonction' $title width='24' height='24' border='0'></a>";
+			echo "</td></tr></table>\n";
+		}
+		else {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
+			echo "<a href='$lien'><img src='img_pack/$fond' $title width='24' height='24' border='0'></a>";
+			echo "</td></tr></table>\n";
+		}
 		echo "</td>";
 
 		echo "<td background=''>";
