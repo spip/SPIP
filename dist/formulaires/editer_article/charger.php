@@ -132,17 +132,19 @@ function editer_article_recolle($texte, $att_text)
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
 {
-	global $champs_extra, $spip_ecran, $spip_lang, $spip_display;
+	global /*$champs_extra,*/ $spip_ecran, $spip_lang, $spip_display;
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
 	$config['afficher_barre'] = $spip_display != 4;
 	$config['langue'] = $spip_lang;
 
-	if ($champs_extra) {
+	/*if ($champs_extra) {
 		include_spip('inc/extra');
 		$config['extra'] = true;
-	} else $config['extra'] = false;
+	} 
+	else 
+		$config['extra'] = false;*/
 
 	$config['restreint'] = ($row['statut'] == 'publie');
 	return $config;

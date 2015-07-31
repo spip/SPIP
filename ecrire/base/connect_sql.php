@@ -261,6 +261,11 @@ function id_table_objet($type) {
 	}
 }
 
+function objet_type($table_objet){
+	$type = preg_replace(',^spip_|s$,', '', $table_objet);
+	return $type;	
+}
+
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
 // http://doc.spip.org/@table_jointure
 function table_jointure($x, $y) {

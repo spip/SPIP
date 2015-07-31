@@ -2434,4 +2434,18 @@ function compacte_head($flux){
 	return $flux;
 }
 
+function f_extra_editer_contenu_objet($flux){
+	if ($GLOBALS['champs_extra']){
+		$args = $flux['args'];
+		include_spip('inc/extra');
+		$type_extra = table_objet($args['type']);
+		$extra_saisie = extra_saisie($args['contexte']['extra'],$type_extra,$args['contexte']['id_secteur']);
+		if (strpos($flux['data'],'<!--extra-->')!==FALSE)
+			$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims',"\\1$extra_saisie\\2",$flux['data'],1);
+		else
+			$flux['data'] = preg_replace(',(.*)(</fieldset>),ims',"\\1\\\2$extra_saisie",$flux['data'],1);
+	}
+	return $flux;
+}
+
 ?>

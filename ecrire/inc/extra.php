@@ -88,8 +88,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
 // http://doc.spip.org/@extra_saisie
-function extra_saisie($extra, $type, $ensemble='') {
-	if ($affiche = extra_form($extra, $type, $ensemble)) {
+function extra_saisie($extra, $table_objet, $ensemble='') {
+	if ($affiche = extra_form($extra, $table_objet, $ensemble)) {
 		return debut_cadre_enfonce('',true)
 			. $affiche
 			. fin_cadre_enfonce(true);
@@ -97,12 +97,12 @@ function extra_saisie($extra, $type, $ensemble='') {
 }
 
 // http://doc.spip.org/@extra_form
-function extra_form($extra, $type, $ensemble='') {
+function extra_form($extra, $table_objet, $ensemble='') {
 	if (!is_array($extra))
 		$extra = @unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
-	if (!$champs = $GLOBALS['champs_extra'][$type])
+	if (!$champs = $GLOBALS['champs_extra'][$table_objet])
 		$champs = Array();
 
 	// prendre en compte, eventuellement, les champs presents dans la base
@@ -114,11 +114,11 @@ function extra_form($extra, $type, $ensemble='') {
 
 	// quels sont les extras proposes...
 	// ... si l'ensemble est connu
-	if ($ensemble && isset($GLOBALS['champs_extra_proposes'][$type][$ensemble]))
-		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type][$ensemble]);
+	if ($ensemble && isset($GLOBALS['champs_extra_proposes'][$table_objet][$ensemble]))
+		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$table_objet][$ensemble]);
 	// ... sinon, les champs proposes par defaut
-	else if (isset($GLOBALS['champs_extra_proposes'][$type]['tous'])) {
-		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type]['tous']);
+	else if (isset($GLOBALS['champs_extra_proposes'][$table_objet]['tous'])) {
+		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$table_objet]['tous']);
 	}
 
 	// sinon tous les champs extra du type
@@ -253,8 +253,8 @@ function extra_form($extra, $type, $ensemble='') {
 
 // recupere les valeurs postees pour reconstituer l'extra
 // http://doc.spip.org/@extra_recup_saisie
-function extra_recup_saisie($type, $c=false) {
-	$champs = $GLOBALS['champs_extra'][$type];
+function extra_recup_saisie($table_objet, $c=false) {
+	$champs = $GLOBALS['champs_extra'][$table_objet];
 	if (is_array($champs)) {
 		$extra = Array();
 		foreach($champs as $champ => $config)
@@ -298,8 +298,8 @@ function extra_recup_saisie($type, $c=false) {
 
 // Retourne la liste des filtres a appliquer pour un champ extra particulier
 // http://doc.spip.org/@extra_filtres
-function extra_filtres($type, $nom_champ) {
-	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
+function extra_filtres($table_objet, $nom_champ) {
+	$champ = $GLOBALS['champs_extra'][$table_objet][$nom_champ];
 	if (!$champ) return array();
 	list(, $filtre, ) = explode("|", $champ);
 	list($filtre, ) = explode(",", $filtre);
@@ -311,8 +311,8 @@ function extra_filtres($type, $nom_champ) {
 // Retourne la liste des filtres a appliquer a la recuperation
 // d'un champ extra particulier
 // http://doc.spip.org/@extra_filtres_recup
-function extra_filtres_recup($type, $nom_champ) {
-	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
+function extra_filtres_recup($table_objet, $nom_champ) {
+	$champ = $GLOBALS['champs_extra'][$table_objet][$nom_champ];
 	if (!$champ) return array();
 	list(, $filtre, ) = explode("|", $champ);
 	list(,$filtre) = explode(",", $filtre);
@@ -322,16 +322,16 @@ function extra_filtres_recup($type, $nom_champ) {
 }
 
 // http://doc.spip.org/@extra_champ_valide
-function extra_champ_valide($type, $nom_champ) {
-	return isset($GLOBALS['champs_extra'][$type][$nom_champ]);
+function extra_champ_valide($table_objet, $nom_champ) {
+	return isset($GLOBALS['champs_extra'][$table_objet][$nom_champ]);
 }
 
 // a partir de la liste des champs, generer l'affichage
 // http://doc.spip.org/@extra_affichage
-function extra_affichage($extra, $type) {
+function extra_affichage($extra, $table_objet) {
 	$extra = unserialize ($extra);
 	if (!is_array($extra)) return;
-	$champs = $GLOBALS['champs_extra'][$type];
+	$champs = $GLOBALS['champs_extra'][$table_objet];
 
 	while (list($nom,$contenu) = each($extra)) {
 		list ($style, $filtre, $prettyname, $choix, $valeurs) =
@@ -376,15 +376,15 @@ function extra_affichage($extra, $type) {
 // s'il y a mise a jour des extras, mixer les champs modifies
 // avec les champs existants (car la mise a jour peut etre partielle)
 // http://doc.spip.org/@extra_update
-function extra_update($type, $id, $c = false) {
-	$extra = @unserialize(extra_recup_saisie($type, $c));
+function extra_update($table_objet, $id, $c = false) {
+	$extra = @unserialize(extra_recup_saisie($table_objet, $c));
 
 	// pas de mise a jour, ou erreur
 	if (!is_array($extra) OR !count($extra))
 		return false;
 
-	// passer de 'articles' a 'article' :-(
-	$t = preg_replace(',s$,', '', $type);
+	// passer de 'articles' a 'article'
+	$t = objet_type($table_objet);
 
 	$orig = sql_select("extra", table_objet_sql($t), id_table_objet($t)."=".intval($id));
 	$orig = sql_fetch($orig);

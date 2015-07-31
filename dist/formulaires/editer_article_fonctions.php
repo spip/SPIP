@@ -17,9 +17,4 @@ function barre_typo($id,$lang=''){
 	return '<div>' . afficher_barre("document.getElementById('$id')",false,$lang) . '</div>';
 }
 
-function editer_extra($extra,$id_secteur) {
-	include_spip('inc/extra');
-	return extra_saisie($extra, 'articles', $id_secteur);
-}
-
 ?>
