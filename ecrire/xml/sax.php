@@ -81,8 +81,7 @@ function xml_textElement($phraseur, $data)
 	  : entites_html($data);
 }
 
-// http://doc.spip.org/@xml_PiElement
-function xml_PiElement($phraseur, $target, $data)
+function xml_piElement($phraseur, $target, $data)
 {
 	$depth = $phraseur->depth;
 
@@ -99,7 +98,7 @@ function xml_PiElement($phraseur, $target, $data)
 
 
 // http://doc.spip.org/@xml_defautElement
-function xml_defautElement($phraseur, $data)
+function xml_defaultElement($phraseur, $data)
 {
 	$depth = $phraseur->depth;
 
@@ -157,10 +156,10 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 				       array($phraseur, "textElement"));
 
 	xml_set_processing_instruction_handler($xml_parser,
-				       array($phraseur, 'PiElement'));
+				       array($phraseur, 'piElement'));
 
 	xml_set_default_handler($xml_parser,
-				array($phraseur, "defautElement"));
+				array($phraseur, "defaultElement"));
 
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
@@ -197,8 +196,6 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 // http://doc.spip.org/@sax_bug
 function sax_bug($data)
 {
-	static $dtd = array(); # cache bien utile pour le validateur en boucle
-
 	$r = analyser_doctype($data);
 
 	if (!$r) {
@@ -208,23 +205,9 @@ function sax_bug($data)
 	}
 
 	list($doctype, $topelement, $avail, $grammaire, $rotlvl, $len) = $r;
-	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
-	if (isset($dtd[$file]))
-		$dtc = $dtd[$file];
-	else {
-		if (lire_fichier($file, $r)
-		AND (($avail == 'PUBLIC')
-			OR filemtime($file) > filemtime($grammaire))) {
-			$dtc = unserialize($r);
-		} else {
-			include_spip('xml/analyser_dtd');
-			$dtc = charger_dtd($grammaire, $avail);
-			if ($dtc)
-				ecrire_fichier($file, serialize($dtc), true);
-		}
-		$dtd[$file] = $dtc;
-	}
+	include_spip('xml/analyser_dtd');
+	$dtc = charger_dtd($grammaire, $avail, $rotlvl);
 
 	// l'entete contient eventuellement < ? xml... ? >, le Doctype, 
 	// et des commentaires autour d'eux
