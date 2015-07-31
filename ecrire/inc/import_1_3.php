@@ -127,18 +127,18 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 			foreach($keys as $key){
 				if (!isset($values[$key])){
 					$GLOBALS['erreur_restauration'] = "champ $key manquant a l'import sur la table $table";
-					$where .= "";
+					$where = "";
 					break;
 				}
 				$where .= " AND $key="._q($values[$key]);
 			}
 			if ($where) {
 				$where = "impt='oui' $where";
-				if (sql_countsel($table, $where,'',1)) {
+				if (sql_countsel($table, $where)) {
 					if (!sql_updateq($table, $values, $where)) {
 						$GLOBALS['erreur_restauration'] = sql_error();
 					}
-				} else sql_insertq($table, $valeurs);
+				} else sql_insertq($table, $values);
 			}
 		}
 	}
