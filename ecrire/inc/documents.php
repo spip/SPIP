@@ -397,7 +397,8 @@ function integre_image($id_document, $align, $type_aff) {
 
 	# mode <span ...> : ne pas mettre d'attributs de type block sinon MSIE Windows refuse de faire des liens dessus
 	if ($span == 'span') {
-		$vignette = "<span class='spip_document_$id_document spip_documents$class_align' style='${float}${width}px'>$vignette</span>";
+		$width = 'width: '.$width.'px;';
+		$vignette = "<span class='spip_document_$id_document spip_documents$class_align' style='${float}${width}'>$vignette</span>";
 		return $vignette;
 	}
 	# mode <div ...>
