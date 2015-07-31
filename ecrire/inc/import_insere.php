@@ -224,7 +224,7 @@ function importe_translate_maj($k, $v)
 	return $g;
 }
 
-define('_RACCOURCI_MODELE_ALL', '/' . _RACCOURCI_MODELE .'/isS');
+define('_RACCOURCI_MODELE_ALL', '@' . _RACCOURCI_MODELE .'@isS');
 
 // http://doc.spip.org/@importe_raccourci
 function importe_raccourci($k, $v)
