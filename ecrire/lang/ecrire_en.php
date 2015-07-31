@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'activer_plugin' => 'Activate plugin',
 'affichage' => 'Display',
-'aide_non_disponible' => 'This part of the online help is not yet available in the present language.',
+'aide_non_disponible' => 'This part of the online help is not yet available in the current language.',
 'auteur' => 'Author:',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_article_modifie' => 'Warning, @nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
@@ -24,14 +24,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_2' => 'Go back to the previous page, and verify the information you have provided.',
 'avis_connexion_ldap_echec_3' => 'Alternatively, do not use LDAP support to import users.',
 'avis_conseil_selection_mot_cle' => '<b>Important group:</b> It is very strongly advised to select a keyword in this group.',
-'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it , please check this box to confirm.',
+'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it, please check this box to confirm.',
 'avis_destinataire_obligatoire' => 'You must select a recipient before sending this message.',
-'avis_doublon_mot_cle' => 'A word with this title already exists. Are you sure you want to create another?',
+'avis_doublon_mot_cle' => 'A keyword with this title already exists. Are you sure you want to create another?',
 'avis_erreur_connexion_mysql' => 'SQL connection error',
 'avis_erreur_version_archive' => '<b>Warning! The file @archive@ was created by
     a version of SPIP other than the one you have
-    installed.</b> You are facing great
-    difficulties: the risk of destroying your database,
+    installed.</b> You are likely encounter
+    serious problems: the risk of destroying your database,
     various malfunctions of your site, etc. Do not
     submit this import request.<p>For more
     information, please see <a href="@spipnet@">
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Delete ALL',
 'bouton_envoi_message_02' => 'SEND A MESSAGE',
 'bouton_envoyer_message' => 'Final message: send',
-'bouton_fermer' => 'Fermer', # NEW
+'bouton_fermer' => 'Close',
 'bouton_forum_petition' => 'FORUM &amp; PETITION',
 'bouton_modifier' => 'Modify',
 'bouton_pense_bete' => 'PERSONAL MEMO',
@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_info_base_sup' => 'If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.',
 'config_info_base_sup_disponibles' => 'Additional databases to which queries may be sent:',
 'config_info_enregistree' => 'The new configuration has been saved',
-'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo',
+'config_info_logos' => 'Each element of the site can have its own logo and also a "mouseover" logo',
 'config_info_logos_utiliser' => 'Use logos',
 'config_info_logos_utiliser_non' => 'Do not use logos',
 'config_info_logos_utiliser_survol' => 'Use "mouseover" logos',
@@ -322,15 +322,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_trouves' => 'Articles found',
 'info_articles_trouves_dans_texte' => 'Articles found (in the text)',
 'info_attente_validation' => 'Your articles pending validation',
-'info_aucun_article' => 'Aucun article', # NEW
-'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
-'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
-'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
-'info_aucun_site' => 'Aucun site', # NEW
-'info_aucun_visiteur' => 'Aucun visiteur', # NEW
+'info_aucun_article' => 'There are no articles',
+'info_aucun_article_syndique' => 'There are no syndicated articles',
+'info_aucun_auteur' => 'There aren\'t any authors',
+'info_aucun_breve' => 'There aren\'t any news items',
+'info_aucun_message' => 'There aren\'t any messages',
+'info_aucun_mot_cle' => 'There aren\'t any keywords',
+'info_aucun_rubrique' => 'There aren\'t any sections',
+'info_aucun_site' => 'There aren\'t any sites',
+'info_aucun_visiteur' => 'There aren\'t any visitors',
 'info_aujourdhui' => 'today:',
 'info_auteur_message' => 'MESSAGE SENDER:',
 'info_auteurs' => 'Authors',
@@ -436,8 +436,8 @@ through an FTP access to the Web site.</p>',
 'info_gauche_admin_vider' => '<b>Only webmasters have access to this page.</b><p> It provides access to various
 maintenance tasks. Some of them require a specific authentication process
 through an FTP access to the Web site.</p>',
-'info_gauche_auteurs' => 'You will find here all the site\'s authors.
- The status of each one is indicated by the colour of there icon (administrator = green; editor = yellow).',
+'info_gauche_auteurs' => 'All of the site\'s authors are listed here.
+ The status of each one is indicated by the colour of their icon (administrator = green; editor = yellow).',
 'info_gauche_auteurs_exterieurs' => 'External authors, without any access to the site, are indicated by a blue icon; deleted authors by a dustbin.',
 'info_gauche_messagerie' => 'Messaging allows you to exchange messages amongst editors, to preserve memos (for your personal use) or to display announcements on the homepage of the private area (if you are an administrator).',
 'info_gauche_numero_auteur' => 'AUTHOR NUMBER:',
@@ -626,7 +626,7 @@ through an FTP access to the Web site.</p>',
 'info_referencer_doc_distant' => 'Reference a document on the internet:',
 'info_refuses' => 'Your articles rejected',
 'info_reglage_ldap' => 'Options: <b>Adjusting LDAP import</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
+'info_remplacer_mot' => 'Replace "@titre@"',
 'info_renvoi_article' => '<b>Redirection.</b> This article redirects to:',
 'info_reserve_admin' => 'Only administrators can modify this address.',
 'info_restauration_sauvegarde' => 'Restoring the backup @archive@',
@@ -850,7 +850,7 @@ in a colour indicating their status:',
 'ldap_correspondance_2' => 'For each of the following SPIP fields, enter the name of the corresponding LDAP field. Leave it blank if you don\'t wanted it filled, separate with spaces or commas to try several LDAP fields.',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
-'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
+'lien_ajouter_mot' => 'Add this keyword',
 'lien_ajouter_participant' => 'Add a participant',
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Manage this article\'s public forum',
@@ -863,7 +863,7 @@ in a colour indicating their status:',
 'lien_reponse_rubrique' => 'Reply to the section',
 'lien_reponse_site_reference' => 'Reply to the referenced site:',
 'lien_retirer_auteur' => 'Remove author',
-'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_tous_auteurs' => 'Remove all of the authors',
 'lien_retrait_particpant' => 'remove this participant',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'delete this section',
@@ -1136,7 +1136,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 		a future date?',
 'texte_rappel_selection_champs' => '[Remember to select this field correctly.]',
 'texte_recalcul_page' => 'If you want
-to refresh only one page, you would rather do it from the public area and use the button &laquo; refresh &raquo;.',
+to refresh just one page, it is easier to do so from that page on the public site using the "refresh" button.',
 'texte_recapitiule_liste_documents' => 'This page sums up the list of documents that you have placed in the sections. To modify each document\'s information, follow the link to its section\'s page.',
 'texte_recuperer_base' => 'Repair the database',
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
@@ -1162,11 +1162,11 @@ irreversible.</b>',
 'texte_sauvegarde' => 'Backup the content of the database',
 'texte_sauvegarde_base' => 'Backup the database',
 'texte_sauvegarde_compressee' => 'Backup will be stored in the uncompressed file @fichier@.',
-'texte_selection_langue_principale' => 'You can select below the "main language" of the site. This does not mean you can only write articles in the selected language, but determines
+'texte_selection_langue_principale' => 'You can select below the "primary language" of the site. This does not mean that you can write articles only in that selected language, but it is used to determine
 
-<ul><li> the default format of the dates on the public site</li>
-<li> the nature of the typographical engine which will be used by SPIP for the text rendering;</li>
-<li> the language used in the forms of the public site</li>
+<ul><li> the default format of the dates on the public site,</li>
+<li> the nature of the typographical engine which will be used by SPIP for rendering text,</li>
+<li> the language used in the forms on the public site,</li>
 <li> the default language displayed in the private area.</li></ul>',
 'texte_signification' => 'Dark bars represent cumulative entries (total of sub-sections), light bars represent the number of visits for each section.',
 'texte_sous_titre' => 'Subtitle',
@@ -1174,9 +1174,9 @@ irreversible.</b>',
 'texte_statut_attente_validation' => 'pending validation',
 'texte_statut_publies' => 'published online',
 'texte_statut_refuses' => 'rejected',
-'texte_suppression_fichiers' => 'Use this command to delete all the files
-in the SPIP cache. This allows you, amongst other things, to force the refreshing of all the pages in case you
-entered important modifications on the graphics or the structure of the site.',
+'texte_suppression_fichiers' => 'Use this command to purge all of the files
+in the SPIP cache. This allows you, for example, to force all pages on the site to be recalculated after you
+have made significant modifications to the graphics or structure of the site.',
 'texte_sur_titre' => 'Top title',
 'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
   the list of its latest material. To achieve this, you must activate the syndication. 
@@ -1215,8 +1215,8 @@ you can perform searches on sites and
 'titre_admin_effacer' => 'Technical maintenance',
 'titre_admin_tech' => 'Technical maintenance',
 'titre_admin_vider' => 'Technical maintenance',
-'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
+'titre_ajouter_un_auteur' => 'Add an author',
+'titre_ajouter_un_mot' => 'Add a keyword',
 'titre_articles_syndiques' => 'Syndicated articles pulled out from this site',
 'titre_breves' => 'News',
 'titre_cadre_afficher_article' => 'Show the articles:',

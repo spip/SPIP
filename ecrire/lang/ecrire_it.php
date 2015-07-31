@@ -73,7 +73,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
-'bouton_fermer' => 'Fermer', # NEW
+'bouton_fermer' => 'Chiudi',
 'bouton_forum_petition' => 'FORUM E PETIZIONE',
 'bouton_modifier' => 'Modifica',
 'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',
@@ -221,16 +221,16 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
 'ical_titre_rss' => 'File di syndication',
-'icone_accueil' => 'Accueil', # NEW
+'icone_accueil' => 'Pannello di controllo',
 'icone_activer_cookie' => 'Attiva il cookie di corrispondenza',
-'icone_activite' => 'Activit&eacute;', # NEW
+'icone_activite' => 'Attivit&agrave;',
 'icone_admin_plugin' => 'Gestione dei plugin',
-'icone_administration' => 'Maintenance', # NEW
+'icone_administration' => 'Manutenzione',
 'icone_afficher_auteurs' => 'Pubblica gli autori',
 'icone_afficher_visiteurs' => 'Pubblica i visitatori',
 'icone_arret_discussion' => 'Non partecipare pi&ugrave; a questa discussione',
 'icone_calendrier' => 'Calendario',
-'icone_configuration' => 'Configuration', # NEW
+'icone_configuration' => 'Configurazione',
 'icone_creation_groupe_mots' => 'Crea un nuovo gruppo',
 'icone_creation_mots_cles' => 'Crea una nuova parola chiave',
 'icone_creer_auteur' => 'Crea un nuovo autore ed associalo a questo articolo',
@@ -240,12 +240,12 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_creer_mot_cle_site' => 'Creare una nuova parola chiave e collegarla a questo sito',
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
 'icone_ecrire_nouvel_article' => 'Le brevi contenute nella rubrica',
-'icone_edition' => '&Eacute;dition', # NEW
+'icone_edition' => 'Modifica',
 'icone_envoyer_message' => 'Invia questo messaggio',
 'icone_evolution_visites' => 'Evoluzione delle visite<br />@visites@ visite',
-'icone_ma_langue' => 'Ma langue', # NEW
-'icone_mes_infos' => 'Mes informations', # NEW
-'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
+'icone_ma_langue' => 'La mia lingua',
+'icone_mes_infos' => 'Le mie informazioni',
+'icone_mes_preferences' => 'Le mie preferenze',
 'icone_modif_groupe_mots' => 'Modifica questo gruppo',
 'icone_modifier_article' => 'Modifica l\'articolo',
 'icone_modifier_breve' => 'Modifica la breve',
@@ -254,16 +254,16 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_modifier_rubrique' => 'Modifica la rubrica',
 'icone_modifier_site' => 'Modifica il sito',
 'icone_poster_message' => 'Invia un messaggio',
-'icone_publication' => 'Publication', # NEW
+'icone_publication' => 'Pubblicazione',
 'icone_publier_breve' => 'Pubblica questa breve',
 'icone_referencer_nouveau_site' => 'Inserisci un nuovo sito in repertorio',
 'icone_refuser_breve' => 'Rifiuta questa breve',
 'icone_relancer_signataire' => 'Rilanciare il firmatario',
 'icone_retour' => 'Indietro',
 'icone_retour_article' => 'Torna all\'articolo',
-'icone_squelette' => 'Squelettes', # NEW
+'icone_squelette' => 'Modelli',
 'icone_suivi_forum' => 'Andamento del forum pubblico: @nb_forums@&nbsp;contributi',
-'icone_suivi_publication' => 'Suivi de la publication', # NEW
+'icone_suivi_publication' => 'Segui la pubblicazione',
 'icone_supprimer_cookie' => 'Elimina il cookie di corrispondenza',
 'icone_supprimer_groupe_mots' => 'Elimina il gruppo',
 'icone_supprimer_rubrique' => 'Elimina la rubrica',
@@ -273,22 +273,22 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_voir_tous_mots_cles' => 'Vedi tutte le parole chiave',
 'image_administrer_rubrique' => 'Puoi amministrare questa rubrica',
 'info_1_article' => '1 articolo',
-'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
-'info_1_auteur' => '1 auteur', # NEW
+'info_1_article_syndique' => '1 articolo in syndication',
+'info_1_auteur' => '1 autore',
 'info_1_breve' => '1 breve',
-'info_1_message' => '1 message', # NEW
-'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
-'info_1_rubrique' => '1 rubrique', # NEW
+'info_1_message' => '1 messaggio',
+'info_1_mot_cle' => '1 parola chiave',
+'info_1_rubrique' => '1 rubrica',
 'info_1_site' => '1 sito',
-'info_1_visiteur' => '1 visiteur', # NEW
+'info_1_visiteur' => '1 visitatore',
 'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetter&agrave;
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
 'info_activer_forum_public' => '<i>Per attivare i forum pubblici, scegli il tipo
 di moderazione predefinito:</i>',
-'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
+'info_admin_etre_webmestre' => 'Concedimi i privilegi di webmaster',
 'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
-'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
+'info_admin_je_suis_webmestre' => 'Sono <b>webmaster</b>',
 'info_admin_statuer_webmestre' => 'Dai a questo amministratore i privilegi di webmaster',
 'info_admin_webmestre' => 'Questo amministratore &egrave; un <b>webmaster</b>',
 'info_administrateur' => 'Amministratore',
@@ -322,15 +322,15 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_articles_trouves' => 'Articoli trovati',
 'info_articles_trouves_dans_texte' => 'Articoli trovati (ricerca nel testo)',
 'info_attente_validation' => 'I tuoi articoli in attesa di convalida',
-'info_aucun_article' => 'Aucun article', # NEW
-'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
-'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
-'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
-'info_aucun_site' => 'Aucun site', # NEW
-'info_aucun_visiteur' => 'Aucun visiteur', # NEW
+'info_aucun_article' => 'Nessun articolo',
+'info_aucun_article_syndique' => 'Nessun articolo in syndication',
+'info_aucun_auteur' => 'Nessun autore',
+'info_aucun_breve' => 'Nessuna breve',
+'info_aucun_message' => 'Nessun messaggio',
+'info_aucun_mot_cle' => 'Nessuna parola chiave',
+'info_aucun_rubrique' => 'Nessuna rubrica',
+'info_aucun_site' => 'Nessun sito',
+'info_aucun_visiteur' => 'Nessun visitatore',
 'info_aujourdhui' => 'oggi: ',
 'info_auteur_message' => 'AUTORE DEL MESSAGGIO:',
 'info_auteurs' => 'Gli autori',
@@ -358,7 +358,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_classement_2' => '<sup>o</sup> su @liste@',
 'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
 'info_comment_lire_tableau' => 'Come leggere questa tabella',
-'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
+'info_compatibilite_html' => 'Schema HTML da seguire',
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Si raccomanda di verificare preventivamente se il provider comprime gi&agrave; in maniera sistematica gli script php; a tal fine &egrave; possibile utilizzare, per esempio,  il seguente servizio: @testgzip@',
 'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, &egrave; possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ci&ograve; pu&ograve; rallentare notevolmente alcuni server.',
 'info_compresseur_titre' => 'Ottimizzazione e compressione',
@@ -380,7 +380,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
 'info_contenu_articles' => 'Contentuto degli articoli',
-'info_contributions' => 'Contributions', # NEW
+'info_contributions' => 'Contributi',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
 'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
@@ -416,7 +416,7 @@ sui singoli articoli; saranno invece proibiti nelle rubriche, nelle brevi, ecc',
 'info_etape_suivante' => 'Passare alla fase successiva',
 'info_etape_suivante_1' => 'Puoi passare alla fase successiva.',
 'info_etape_suivante_2' => 'Puoi passare alla fase successiva.',
-'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
+'info_exceptions_proxy' => 'Eccezioni per il proxy',
 'info_exportation_base' => 'esportazione del database verso @archive@',
 'info_facilite_suivi_activite' => 'Al fine di facilitare il monitoraggio
 dell\'attivit&agrave; editoriale del sito, SPIP pu&ograve; far pervenire via email,
@@ -515,15 +515,15 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
   Le lingue gi&agrave; utilizzate nel sito (visualizzate per prime) non possono essere disattivate.',
 'info_multi_rubriques' => 'Attivare il menu della lingua nelle rubriche?',
 'info_multi_secteurs' => '... solo per le rubriche collocate nella {root} del sito?',
-'info_nb_articles' => '@nb@ articles', # NEW
-'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
-'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
-'info_nb_messages' => '@nb@ messages', # NEW
-'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
-'info_nb_rubriques' => '@nb@ rubriques', # NEW
-'info_nb_sites' => '@nb@ sites', # NEW
-'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
+'info_nb_articles' => '@nb@ articoli',
+'info_nb_articles_syndiques' => '@nb@ articoli in syndication',
+'info_nb_auteurs' => '@nb@ autori',
+'info_nb_breves' => '@nb@ brevi',
+'info_nb_messages' => '@nb@ messaggi',
+'info_nb_mots_cles' => '@nb@ parole chiave',
+'info_nb_rubriques' => '@nb@ rubriche',
+'info_nb_sites' => '@nb@ siti',
+'info_nb_visiteurs' => '@nb@ visitatori',
 'info_nom' => 'Nome',
 'info_nom_destinataire' => 'Nome del destinatario',
 'info_nom_site' => 'Nome del tuo sito',
@@ -539,7 +539,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_non_envoi_liste_nouveautes' => 'Non inviare l\'elenco delle novit&agrave;',
 'info_non_modifiable' => 'non pu&ograve; essere modificato',
 'info_non_suppression_mot_cle' => 'non voglio cancellare questa parola chiave.',
-'info_note_numero' => 'Note @numero@', # NEW
+'info_note_numero' => 'Nota @numero@',
 'info_notes' => 'Note',
 'info_nouveaux_message' => 'Nuovi messaggi',
 'info_nouvel_article' => 'Nuovo articolo',
@@ -624,7 +624,7 @@ impossibile.</i></blockquote>',
 'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
 'info_refuses' => 'I tuoi articoli rifiutati',
 'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
+'info_remplacer_mot' => 'Sostituisci "@titre@"',
 'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo gli amministratori possono modificare quest\'indirizzo.',
 'info_restauration_sauvegarde' => 'Ripristino del salvataggio @archive@',
@@ -728,9 +728,9 @@ Le traduzioni sono associate all\'originale,
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
-'info_url_proxy' => 'URL du proxy', # NEW
+'info_url_proxy' => 'URL del proxy',
 'info_url_site' => 'URL DEL SITO:',
-'info_url_test_proxy' => 'URL de test', # NEW
+'info_url_test_proxy' => 'URL di test',
 'info_urlref' => 'Link ipertestuale:',
 'info_utilisation_spip' => 'Puoi ora cominciare ad utilizzare il sistema di pubblicazione assistita...',
 'info_visites_par_mois' => 'Visualizzazione per mese:',
@@ -739,7 +739,7 @@ Le traduzioni sono associate all\'originale,
 'info_visiteur_2' => 'del sito pubblico',
 'info_visiteurs' => 'Visitatori',
 'info_visiteurs_02' => 'Visitatori del sito pubblico',
-'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
+'info_webmestre_forces' => 'I webmaster sono attualmente definiti in <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Indirizzo del database attribuito dal provider',
 'install_base_ok' => 'Il database @base@ &egrave; stato riconosciuto',
 'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalit&agrave; al sito...',
@@ -830,25 +830,25 @@ Le traduzioni sono associate all\'originale,
 'item_utiliser_moteur_recherche' => 'Utilizza il motore di ricerca',
 'item_utiliser_mots_cles' => 'Utilizza le parole chiave',
 'item_utiliser_syndication' => 'Attiva la syndication automatica',
-'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
+'item_version_html_max_html4' => 'Limita a HTML4 sul sito pubblico',
+'item_version_html_max_html5' => 'Consenti HTML5',
 'item_visiteur' => 'visitatore',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
 
 // L
-'label_choix_langue' => 'Selectionnez votre langue', # NEW
-'label_slogan_site' => 'Slogan du site', # NEW
-'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
-'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
-'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
+'label_choix_langue' => 'Seleziona la tua lingua',
+'label_slogan_site' => 'Slogan del sito',
+'label_taille_ecran' => 'Larghezza dello schermo',
+'label_texte_et_icones_navigation' => 'Men&ugrave; di naviagazione',
+'label_texte_et_icones_page' => 'Visualizzazione nella pagina',
+'ldap_correspondance' => 'mappa del campo @champ@',
+'ldap_correspondance_1' => 'Mappa dei campi LDAP',
+'ldap_correspondance_2' => 'Per ognuno dei seguenti campi SPIP, indicare il nome del campo LDAP corrispondente. Lasciare vuoto per non riempire, separare da spazi o da virgole per provare pi&ugrave; campi LDAP.',
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questo autore',
-'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
+'lien_ajouter_mot' => 'Aggiungi una parola chiave',
 'lien_ajouter_participant' => 'Aggiungi un partecipante',
 'lien_email' => 'email',
 'lien_forum_public' => 'Gestisci il forum pubblico di quest\'articolo',
@@ -861,7 +861,7 @@ Le traduzioni sono associate all\'originale,
 'lien_reponse_rubrique' => 'Risposta alla rubrica',
 'lien_reponse_site_reference' => 'Risposta al sito repertoriato:',
 'lien_retirer_auteur' => 'Rimuovere l\'autore',
-'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_tous_auteurs' => 'Elimina tutti gli autori',
 'lien_retrait_particpant' => 'rimuovere questo partecipante',
 'lien_site' => 'sito',
 'lien_supprimer_rubrique' => 'elimina la rubrica',
@@ -875,7 +875,7 @@ Le traduzioni sono associate all\'originale,
 'logo_article' => 'LOGO DELL\'ARTICOLO',
 'logo_auteur' => 'LOGO DELL\'AUTORE',
 'logo_breve' => 'LOGO DELLA BREVE',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
+'logo_groupe' => 'LOGO DI QUESTO GRUPPO',
 'logo_mot_cle' => 'LOGO DELLA PAROLA CHIAVE',
 'logo_rubrique' => 'LOGO DELLA RUBRICA',
 'logo_site' => 'LOGO DI QUESTO SITO ',
@@ -892,7 +892,7 @@ Le traduzioni sono associate all\'originale,
 'mois_non_connu' => 'sconosciuto',
 
 // N
-'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+'nouvelle_version_spip' => 'La versione @version@ di SPIP &egrave; disponibile',
 
 // O
 'onglet_contenu' => 'Contenuto',
@@ -940,7 +940,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 'plugin_source' => 'origine:&nbsp;',
 'plugin_titre_automatique' => 'Installazione automatica',
-'plugin_titre_automatique_ajouter' => 'Aggiungere delle estensioni',
+'plugin_titre_automatique_ajouter' => 'Aggiungere dei plugin',
 'plugin_titre_installation' => 'Installazione del plugin @plugin@',
 'plugin_zip_active' => 'Continuare per attivarlo',
 'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
@@ -1033,8 +1033,8 @@ sono visualizzati nel commento che appare
 quando si passa con il mouse sopra al titolo.',
 'texte_compacter_avertissement' => 'Fare attenzione a non attivare queste opzioni durante la fase di sviluppo del sito: gli elementi compressi sono completamente illeggibili.',
 'texte_compacter_script_css' => 'SPIP pu&ograve; comprimere gli script javascript e i fogli di stile CSS, per registrarli nei file statici; ci&ograve; accelera la visualizzazione del sito.',
-'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
+'texte_compatibilite_html' => 'Puoi impostare SPIP per produrre, sul sito pubblico, codice compatibile con lo schema <i>HTML4</i>, o consentire di utilizzare le pi&ugrave; moderne funzionalit&agrave; di <i>HTML5</i>.',
+'texte_compatibilite_html_attention' => 'Non c\'&egrave; nessun rischio di attivare l\'opzione <i>HTML5</i>, ma se lo fai, le pagine del tuo sito dovranno cominciare con la seguente dichiarazione per essere valide: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(pu&ograve; essere compresso o meno)',
 'texte_compresseur_page' => 'SPIP pu&ograve; comprimere automaticamente tutte le pagine che invia ai
 visitatori del sito. Questa impostazione permette di ottimizzare la banda passante (il
@@ -1201,8 +1201,8 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_admin_effacer' => 'Manutenzione tecnica',
 'titre_admin_tech' => 'Manutenzione tecnica',
 'titre_admin_vider' => 'Manutenzione tecnica',
-'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
+'titre_ajouter_un_auteur' => 'Aggiungi un autore',
+'titre_ajouter_un_mot' => 'Aggiungi una parola chiave',
 'titre_articles_syndiques' => 'Articoli in syndication raccolti da questo sito',
 'titre_breves' => 'Le brevi',
 'titre_cadre_afficher_article' => 'Visualizza gli articoli',
@@ -1221,9 +1221,9 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_config_fonctions' => 'Configurazione del sito',
 'titre_config_forums_prive' => 'Forum dell\'area riservata',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
-'titre_config_langage' => 'Configurer la langue', # NEW
+'titre_config_langage' => 'Configura la lingua',
 'titre_configuration' => 'Configurazione del sito',
-'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
+'titre_configurer_preferences' => 'Configura le tue preferenze',
 'titre_conflit_edition' => 'Conflitto all\'atto dell\'edizione',
 'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
@@ -1232,7 +1232,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_forum_suivi' => 'Monitoraggio dei forum',
 'titre_gauche_mots_edit' => 'PAROLA CHIAVE NUMERO:',
 'titre_groupe_mots' => 'GRUPPO DI PAROLE CHIAVE:',
-'titre_identite_site' => 'Identit&eacute; du site', # NEW
+'titre_identite_site' => 'Identit&agrave; del sito',
 'titre_langue_article' => 'LINGUA DELL\'ARTICOLO',
 'titre_langue_breve' => 'LINGUA DELLA BREVE',
 'titre_langue_rubrique' => 'LINGUA DELLA RUBRICA',
