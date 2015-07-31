@@ -118,7 +118,7 @@ $GLOBALS['extracteur'] = array (
 );
 
 // Indexer le contenu d'un document
-function indexer_document ($row) {
+function indexer_contenu_document ($row) {
 	global $extracteur;
 
 	if ($row['mode'] == 'vignette') return;
@@ -157,6 +157,48 @@ function indexer_document ($row) {
 		spip_log("pas d'extracteur '$extension' fonctionnel");
 	}
 }
+
+
+// Indexer les documents, auteurs, mots-cles associes a l'objet
+function indexer_elements_associes($objet, $id_objet, $associe, $valeur) {
+	switch ($associe) {
+		case 'document':
+			$r = spip_query("SELECT doc.titre, doc.descriptif
+				FROM spip_documents AS doc,
+				spip_documents_".table_objet($objet)." AS lien
+				WHERE lien.".id_table_objet($objet)."=$id_objet
+				AND doc.id_document=lien.id_document");
+			while ($row = spip_fetch_array($r)) {
+				indexer_chaine($row['titre'],2 * $valeur);
+				indexer_chaine($row['descriptif'],1 * $valeur);
+			}
+			break;
+
+		case 'auteur':
+			$r = spip_query("SELECT auteurs.nom
+				FROM spip_auteurs AS auteurs,
+				spip_auteurs_".table_objet($objet)." AS lien
+				WHERE lien.".id_table_objet($objet)."=$id_objet
+				AND auteurs.id_auteur=lien.id_auteur");
+			while ($row_doc = spip_fetch_array($r)) {
+				indexer_chaine($row['nom'], 1 * $valeur, 2);
+			}
+			break;
+
+		case 'mot':
+			$r = spip_query("SELECT mots.titre, mots.descriptif
+				FROM spip_mots AS mots,
+				spip_mots_".table_objet($objet)." AS lien
+				WHERE lien.".id_table_objet($objet)."=$id_objet
+				AND mots.id_mot = lien.id_mot");
+			while ($row = spip_fetch_array($r)) {
+				indexer_chaine($row['titre'],4 * $valeur);
+				indexer_chaine($row['descriptif'],1 * $valeur);
+			}
+			break;
+	}
+}
+
 
 function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	global $index, $mots, $translitteration_complexe;
@@ -205,30 +247,17 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		indexer_chaine($row['ps'], 1);
 		indexer_chaine($row['nom_site'], 1);
 		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
-		while ($row_doc = spip_fetch_array($r)) {
-			indexer_chaine($row_doc[0],2);
-			indexer_chaine($row_doc[1],1);
-		}
-
-		$query2 = "SELECT mots.* FROM spip_mots AS mots, spip_mots_articles AS lien WHERE lien.id_article=$id_objet AND mots.id_mot=lien.id_mot";
-		$result2 = spip_query($query2);
-		while ($row = spip_fetch_array($result2)) {
-			indexer_chaine($row['titre'], 12);
-			indexer_chaine($row['descriptif'], 3);
-		}
-	
-		$query3 = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_objet AND auteurs.id_auteur=lien.id_auteur";
-		$result3 = spip_query($query3);
-		while ($row = spip_fetch_array($result3)) {
-			indexer_chaine($row['nom'], 10, 2);
-		}
+		indexer_elements_associes('article', $id_objet, 'document', 1);
+		indexer_elements_associes('article', $id_objet, 'auteur', 10);
+		indexer_elements_associes('article', $id_objet, 'mot', 3);
 		break;
 
 	case 'breve':
 		indexer_chaine($row['titre'], 8);
 		indexer_chaine($row['texte'], 2);
 		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
+		indexer_elements_associes('breve', $id_objet, 'document', 1);
+		indexer_elements_associes('breve', $id_objet, 'mot', 3);
 		break;
 
 	case 'rubrique':
@@ -236,11 +265,8 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		indexer_chaine($row['descriptif'], 5);
 		indexer_chaine($row['texte'], 1);
 		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
-		while ($row_doc = spip_fetch_array($r)) {
-			indexer_chaine($row_doc[0],2);
-			indexer_chaine($row_doc[1],1);
-		}
+		indexer_elements_associes('rubrique', $id_objet, 'document', 1);
+		indexer_elements_associes('rubrique', $id_objet, 'mot', 3);
 		break;
 
 	case 'auteur':
@@ -267,6 +293,8 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	case 'syndic':
 		indexer_chaine($row['nom_site'], 50);
 		indexer_chaine($row['descriptif'], 30);
+		indexer_elements_associes('syndic', $id_objet, 'document', 1);
+		indexer_elements_associes('syndic', $id_objet, 'mot', 3);
 
 		// Ajouter les titres des articles syndiques de ce site, le cas echeant
 		if ($row['syndication'] = "oui") {
@@ -344,8 +372,10 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		indexer_chaine($row['titre'], 20);
 		indexer_chaine($row['descriptif'], 10);
 		indexer_chaine(preg_replace(',^(IMG/|.*://),', '', $row['fichier']), 1);
+		indexer_elements_associes('document', $id_objet, 'mot', 3);
+
 		// 2. Indexer le contenu si on sait le lire
-		indexer_document($row);
+		indexer_contenu_document($row);
 		break;
 
 
