@@ -308,7 +308,7 @@ function exec_aide_index_dist()
 		aide_index_frame(_request('var_lang_r'),
 				 _request('lang_r'),
 				 _request('frame'),
-				 _request('aide'),
+				 strtr(_request('aide'),'<>"\'', '____'),
 				 $help_server);
 	} else {
 		list (,$server, $cache, $rep, $lang, $file, $ext) = $r;
