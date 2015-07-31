@@ -136,7 +136,7 @@ function spip_sqlite_alter($query, $serveur=''){
 	$requete = new sqlite_traiter_requete("ALTER $query", $serveur);
 	$requete->traduire_requete(); // mysql -> sqlite
 	$query = $requete->query;
-		
+	
 	/* 
 	 * la il faut faire les transformations
 	 * si ALTER TABLE x (DROP|CHANGE) y
@@ -172,8 +172,8 @@ function spip_sqlite_alter($query, $serveur=''){
 		$colonne_origine = $matches[2];
 		$colonne_destination = '';
 		$def = $matches[3];
+		
 			
-
 		switch($cle){
 			// allez, on simule, on simule !
 			case 'DROP':
@@ -330,6 +330,14 @@ function spip_sqlite_delete($table, $where='', $serveur='') {
 
 function spip_sqlite_drop_table($table, $exist='', $serveur='') {
 	if ($exist) $exist =" IF EXISTS";
+	
+	/* simuler le IF EXISTS - version 2 */
+	if ($exist && _sqlite_is_version(2, '', $serveur)){
+		$a = spip_sqlite_showtable($table, $serveur); 
+		if (!$a) return true;
+		$exist = '';
+	}
+	
 	return spip_sqlite_query("DROP TABLE$exist $table", $serveur);
 }
 
@@ -646,7 +654,7 @@ function spip_sqlite_showtable($nom_table, $serveur=''){
 	if (!$a) return "";
 	if (!($a = spip_sqlite_fetch($a, null, $serveur))) return "";
 	$a = array_shift($a); 
-	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
+	if (!preg_match("/^[^(),]*\((([^()]*(\([^()]*\))?[^()]*)*)\)[^()]*$/", $a, $r))
 		return "";
 	else {
 		$dec = $r[1];
