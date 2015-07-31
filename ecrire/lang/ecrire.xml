@@ -16,7 +16,8 @@
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=bs" total="791" traduits="431" relire="0" modifs="70" nouveaux="290" pourcent="54.49">
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="791" traduits="739" relire="0" modifs="24" nouveaux="28" pourcent="93.43">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="791" traduits="766" relire="5" modifs="1" nouveaux="19" pourcent="96.84">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="co" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=co" total="791" traduits="679" relire="0" modifs="36" nouveaux="76" pourcent="85.84">
@@ -54,7 +55,7 @@
 		<traducteur nom="frederik" lien="http://trad.spip.net/auteur/frederik" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es" total="791" traduits="789" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es" total="791" traduits="791" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
@@ -104,7 +105,7 @@
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=id" total="791" traduits="498" relire="0" modifs="40" nouveaux="253" pourcent="62.96">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="791" traduits="787" relire="2" modifs="0" nouveaux="2" pourcent="99.49">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="791" traduits="790" relire="1" modifs="0" nouveaux="0" pourcent="99.87">
 		<traducteur nom="cam.lafit" lien="http://trad.spip.net/auteur/cam-lafit" />
 		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
