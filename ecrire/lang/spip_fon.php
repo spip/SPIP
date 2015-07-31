@@ -588,6 +588,7 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 'suivant' => 'E jà wè',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@ octets',

@@ -612,6 +612,7 @@ pa volver a coneutate al sitiu.
 'suivant' => 'siguiente',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ KB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',

@@ -610,6 +610,7 @@ można ponownie połączyć się ze stroną.
 'suivant' => 'następny',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bytes',

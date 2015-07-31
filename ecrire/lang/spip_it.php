@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ settembre',
 'date_demain' => 'domani',
 'date_fmt_heures_minutes' => '@h@:@m@',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@ ore @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => 'il @nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'Dal',
+'date_fmt_periode_to' => 'a',
 'date_heures' => 'ore',
 'date_hier' => 'ieri',
 'date_il_y_a' => '@delai@ fa',
@@ -227,8 +227,8 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 'envoi_via_le_site' => 'Invio tramite il sito',
 'erreur' => 'Errore',
 'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'Un errore tecnico ha impedito la corretta registrazione del campo @champs@.',
+'erreur_technique_enregistrement_impossible' => 'Un errore tecnico ha impedito la registrazione.',
 'erreur_texte' => 'errore/i',
 'etape' => 'Fase',
 
@@ -249,7 +249,7 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'form_email_non_valide' => 'L\'indirizzo email non è valido.',
 'form_forum_access_refuse' => 'Non hai più accesso a questo sito.',
 'form_forum_bonjour' => 'Buongiorno @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Puoi confermare il tuo indirizzo email,vai a questo indirizzo: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Questo indirizzo email è già registrato, puoi dunque utilizzare la tua password abituale.',
 'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti è stato appena inviato tramite email.',
 'form_forum_identifiants' => 'Dati personali',
@@ -277,7 +277,7 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'form_prop_message_envoye' => 'Messaggio inviato',
 'form_prop_non_enregistre' => 'La tua proposta non è stata registrata.',
 'form_prop_sujet' => 'Argomento',
-'form_prop_url_site' => 'Indirizzo (URL) del sito', # MODIF
+'form_prop_url_site' => 'Indirizzo (URL) del sito',
 'forum_non_inscrit' => 'Non sei iscritto, oppure l\'indirizzo o la password inseriti non sono corretti.',
 'forum_par_auteur' => 'di @auteur@',
 'forum_titre_erreur' => 'Errore...',
@@ -356,11 +356,11 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
 'info_contenance' => 'Questo sito contiene:',
-'info_contribution' => 'contributi dei forum', # MODIF
+'info_contribution' => 'contributi dei forum',
 'info_copyright' => '@spip@ è un software libero distribuito @lien_gpl@.',
-'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.', # MODIF
+'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'sotto licenza GPL',
-'info_cours_edition' => 'Articoli in fase di redazione', # MODIF
+'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 'info_creer_vignette' => 'creazione automatica dell\'anteprima',
@@ -479,13 +479,13 @@ o contatta il tuo hoster.</font>',
 'infos_vos_pense_bete' => 'I tuoi memo',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-'label_poids_fichier' => 'Taille', # NEW
+'label_ajout_id_rapide' => 'Inserimento rapido',
+'label_poids_fichier' => 'Dimnesione',
 'lien_afficher_icones_seuls' => 'Mostra solo le icone',
 'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
 'lien_afficher_texte_seul' => 'Mostra solo il testo',
 'lien_liberer' => 'libera',
-'lien_liberer_tous' => 'liberare questi articoli', # MODIF
+'lien_liberer_tous' => 'liberare questi articoli',
 'lien_nouvea_pense_bete' => 'NUOVO MEMO',
 'lien_nouveau_message' => 'NUOVO MESSAGGIO',
 'lien_nouvelle_annonce' => 'NUOVO ANNUNCIO',
@@ -510,7 +510,7 @@ o contatta il tuo hoster.</font>',
 'login_espace_prive' => 'area riservata',
 'login_identifiant_inconnu' => 'L\'ID « @login@ » risulta inesistente.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (ID di connessione al sito):', # MODIF
+'login_login2' => 'Login o indirizzo email:',
 'login_login_pass_incorrect' => '(Login o password errati.)',
 'login_motpasseoublie' => 'password dimenticata?',
 'login_non_securise' => 'Attenzione, questo modulo non è sicuro.
@@ -586,7 +586,7 @@ e riconnetterti all\'area riservata.
 'pass_nouveau_pass' => 'Nuova password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Password dimenticata',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'Per modificare la tua password, dobbiamo prima verificare la tua identità. Inserisci l\'indirizzo email associato al tuo account.',
 'pass_quitter_fenetre' => 'Chiudi la finestra',
 'pass_rappel_login' => 'Ricorda: il tuo ID (login) è « @login@ ».',
 'pass_recevoir_mail' => 'Riceverai un email contenente le istruzioni per recuperare i dati di accesso al sito.',
@@ -609,6 +609,7 @@ e riconnetterti all\'area riservata.
 'suivant' => 'successivo',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ Kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ byte',
@@ -661,7 +662,7 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 'titre_statistiques' => 'Statistiche del sito',
 'titre_titre_document' => 'Titolo del documento:',
 'todo' => 'prossimo',
-'trad_reference' => '(articolo di riferimento)', # MODIF
+'trad_reference' => '(articolo di riferimento)',
 
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',

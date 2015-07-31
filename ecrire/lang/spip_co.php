@@ -609,6 +609,7 @@ Puderete tandu inserisce un nuvellu password
 'suivant' => 'In davanti',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@ oct',

@@ -227,8 +227,8 @@ Verzeichnisse zu setzen.Die Installationsanleitung erläutert die Details dazu.<
 'envoi_via_le_site' => 'Gesendet über Website ',
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'Das Feld @champs@ konnte aufgrund eines technischen Problems nicht gespeichert werden.',
+'erreur_technique_enregistrement_impossible' => 'Technisches Prolem: Speichern nicht möglich.',
 'erreur_texte' => 'Fehler',
 'etape' => 'Schritt',
 
@@ -597,6 +597,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 'suivant' => 'weiter',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ Byte',

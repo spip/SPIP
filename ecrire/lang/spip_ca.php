@@ -596,6 +596,7 @@ i tornar-vos a connectar al lloc.
 'suivant' => 'següent',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',

@@ -605,6 +605,7 @@ Akkor újabb jelszót tud beírni
 'suivant' => 'következő',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@ byte',

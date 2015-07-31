@@ -605,6 +605,7 @@ og igen få adgang til webstedet.', # MODIF
 'suivant' => 'suivant', # NEW
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ byte',

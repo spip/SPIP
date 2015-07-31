@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Trefwoord wijzigen',
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
-'afficher_calendrier' => 'Afficher le calendrier', # NEW
+'afficher_calendrier' => 'Toon kalender',
 'afficher_trad' => 'Vertalingen weergeven',
 'alerte_maj_impossible' => '<b>Waarshuwing !</b> Het updaten van de SQL-gegevensbank naar versie @version@ is niet mogelijk. Misschien wegens een probleem van wijzigingsrecht op de gegevensbank. Gelieve met uw leverancier contact op te nemen.',
 'alerte_modif_info_concourante' => 'OPGELET : Deze informatie werd voorts gewijzigd. De huidige waarde is :',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Zoeken',
 'bouton_choisir' => 'Selecteren',
 'bouton_deplacer' => 'Te verplaatsen',
-'bouton_download' => 'Downloaden', # MODIF
+'bouton_download' => 'Download',
 'bouton_enregistrer' => 'Behouden',
 'bouton_radio_desactiver_messagerie_interne' => 'Intern berichtensysteem desactiveren',
 'bouton_radio_envoi_annonces' => 'versturen van editoriale aankondigingen',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'De lijst met nieuwe bijdragen niet versturen',
 'bouton_recharger_page' => 'pagina vernieuwen',
 'bouton_telecharger' => 'Opladen',
-'bouton_upload' => 'Opladen', # MODIF
+'bouton_upload' => 'Uploaden',
 'bouton_valider' => 'Goedkeuren',
 
 // C
@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ september',
 'date_demain' => 'morgen',
 'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@u@u@m@',
 'date_fmt_jour_heure' => '@jour@ om @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => '@nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'Van',
+'date_fmt_periode_to' => 'tot',
 'date_heures' => 'uren',
 'date_hier' => 'gisteren',
 'date_il_y_a' => '@delai@ geleden',
@@ -175,28 +175,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois' => 'maanden',
 'date_mois_1' => 'Januari',
 'date_mois_10' => 'Oktober',
-'date_mois_10_abbr' => 'oct.', # NEW
+'date_mois_10_abbr' => 'okt.',
 'date_mois_11' => 'November',
-'date_mois_11_abbr' => 'nov.', # NEW
+'date_mois_11_abbr' => 'nov.',
 'date_mois_12' => 'December',
-'date_mois_12_abbr' => 'déc.', # NEW
-'date_mois_1_abbr' => 'janv.', # NEW
+'date_mois_12_abbr' => 'dec.',
+'date_mois_1_abbr' => 'janu.',
 'date_mois_2' => 'Februari',
-'date_mois_2_abbr' => 'févr.', # NEW
+'date_mois_2_abbr' => 'febr.',
 'date_mois_3' => 'Maart',
-'date_mois_3_abbr' => 'mars', # NEW
+'date_mois_3_abbr' => 'mart',
 'date_mois_4' => 'April',
-'date_mois_4_abbr' => 'avr.', # NEW
+'date_mois_4_abbr' => 'apr.',
 'date_mois_5' => 'Mei',
-'date_mois_5_abbr' => 'mai', # NEW
+'date_mois_5_abbr' => 'mei',
 'date_mois_6' => 'Juni',
-'date_mois_6_abbr' => 'juin', # NEW
+'date_mois_6_abbr' => 'juni',
 'date_mois_7' => 'Juli',
-'date_mois_7_abbr' => 'juil.', # NEW
+'date_mois_7_abbr' => 'juli',
 'date_mois_8' => 'Augustus',
-'date_mois_8_abbr' => 'août', # NEW
+'date_mois_8_abbr' => 'aug.',
 'date_mois_9' => 'September',
-'date_mois_9_abbr' => 'sept.', # NEW
+'date_mois_9_abbr' => 'sept.',
 'date_saison_1' => 'winter',
 'date_saison_2' => 'lente',
 'date_saison_3' => 'zomer',
@@ -227,8 +227,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoi_via_le_site' => 'Verzending via de site',
 'erreur' => 'Fout',
 'erreur_balise_non_fermee' => 'laatste bebakent niet opnieuw gesloten :',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'Een technische fout kon de nauwkeurige registratie van het veld @champs@.',
+'erreur_technique_enregistrement_impossible' => 'Een technische fout kon de opname.',
 'erreur_texte' => 'Fout(en)',
 'etape' => 'Etappe',
 
@@ -249,7 +249,7 @@ volgende address (andres zal uw aanvraag niet in acht genomen worden) :
 'form_email_non_valide' => 'Je e-mailadres is niet geldig.',
 'form_forum_access_refuse' => 'Je hebt geen toegang meer tot deze website.',
 'form_forum_bonjour' => 'Hallo @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Ter bevestiging uw e-mailadres, ga dan naar dit adres : @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Dit e-mailadres is reeds geregistreerd. Je kan inloggen met je gebruikelijke paswoord.',
 'form_forum_identifiant_mail' => 'Je nieuwe logingegevens werden je zonet via e-mail toegestuurd.',
 'form_forum_identifiants' => 'Persoonlijke logins',
@@ -277,7 +277,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'form_prop_message_envoye' => 'Bericht verzonden',
 'form_prop_non_enregistre' => 'Je voorstel is niet geregistreerd',
 'form_prop_sujet' => 'Onderwerp',
-'form_prop_url_site' => 'Website-adres (URL)', # MODIF
+'form_prop_url_site' => 'URL van de site',
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_par_auteur' => 'door @auteur@',
 'forum_titre_erreur' => 'Fout ...',
@@ -356,11 +356,11 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'info_connexion_refusee' => 'Verbinding geweigerd',
 'info_contact_developpeur' => 'Gelieve een ontwikkelaar te contacteren.',
 'info_contenance' => 'Deze site bevat:',
-'info_contribution' => 'Bijdragen aan het forum', # MODIF
+'info_contribution' => 'bijdragen',
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
-'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.', # MODIF
+'info_copyright_doc' => 'Voor meer informatie, bezoek <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'onder GPL licentie',
-'info_cours_edition' => 'Je artikels in redactie',
+'info_cours_edition' => 'In voorbereiding',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
 'info_creer_repertoire_2' => 'binnen in de submap <b>@repertoire@</b>, vervolgens :',
 'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
@@ -478,13 +478,13 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'infos_vos_pense_bete' => 'Uw herinneringen',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-'label_poids_fichier' => 'Taille', # NEW
+'label_ajout_id_rapide' => 'Quick Add',
+'label_poids_fichier' => 'Omvang',
 'lien_afficher_icones_seuls' => 'Toon alleen icoontjes',
 'lien_afficher_texte_icones' => 'Toon icoontjes en tekst',
 'lien_afficher_texte_seul' => 'Toon alleen tekst',
 'lien_liberer' => 'Uitgave',
-'lien_liberer_tous' => 'artikels vrijgeven', # MODIF
+'lien_liberer_tous' => 'Laat alle',
 'lien_nouvea_pense_bete' => 'NIEUWE MEMO',
 'lien_nouveau_message' => 'NIEUW BERICHT',
 'lien_nouvelle_annonce' => 'NIEUWE AANKONDIGING',
@@ -509,7 +509,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'login_espace_prive' => 'Privaat gedeelte',
 'login_identifiant_inconnu' => 'Loginnaam « @login@ » is niet bekend.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (naam voor aanmelding bij deze site):', # MODIF
+'login_login2' => 'Login of email addres :',
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
 'login_motpasseoublie' => 'Paswoord vergeten?',
 'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.
@@ -590,7 +590,7 @@ opnieuw verbinding maken met de site
 'pass_nouveau_pass' => 'Nieuw paswoord',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Paswoord vergeten',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'Om uw wachtwoord te wijzigen, moeten we eerst controleren of uw identiteit. Voor dit specificeren we het e-mailadres gekoppeld aan uw account.',
 'pass_quitter_fenetre' => 'Venster sluiten',
 'pass_rappel_login' => 'Herinnering : je aanmeldingsnaam (login) is "@login@".',
 'pass_recevoir_mail' => 'Je zal een e-mail ontvangen waarin uitgelegd staat hoe je opnieuw toegang krijgt tot de site.',
@@ -613,6 +613,7 @@ opnieuw verbinding maken met de site
 'suivant' => 'volgende',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
@@ -669,7 +670,7 @@ opnieuw verbinding maken met de site
 'titre_statistiques' => 'Statistieken van de site',
 'titre_titre_document' => 'Titel van het document:',
 'todo' => 'om te komen',
-'trad_reference' => '(referentie-artikel)', # MODIF
+'trad_reference' => '(Vertaling referentie )',
 
 // Z
 'zbug_balise_b_aval' => ' : komende opmaakcode B',

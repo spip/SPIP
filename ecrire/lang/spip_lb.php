@@ -599,6 +599,7 @@ Dir kënnt do e neit Passwuert agin an Iech um Site umelden.
 'suivant' => 'Weider',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ Byte',
