@@ -1955,12 +1955,18 @@ function table_valeur($table,$cle,$defaut=''){
 // filtre match pour faire des tests avec expression reguliere
 // [(#TEXTE|match{^ceci$,Uims})]
 // retourne le fragment de chaine qui "matche"
+// il est possible de passer en 3eme argument optionnel le numero de paranthese capturante
+// accepte egalement la syntaxe #TRUC|match{truc(...)$,1} ou le modificateur n'est pas passe en second argument
 // http://doc.spip.org/@match
-function match($texte, $expression, $modif="UimsS") {
+function match($texte, $expression, $modif="UimsS",$capte=0) {
+	if (intval($modif) AND $capte==0){
+		$capte = $modif;
+		$modif = "UimsS";
+	}
 	$expression=str_replace("\/","/",$expression);
 	$expression=str_replace("/","\/",$expression);
 	return preg_match('/' . $expression . '/' . $modif,$texte, $r)
-		? ($r[0]?$r[0]:true) : false;
+		? ($r[$capte]?$r[$capte]:true) : false;
 }
 
 // filtre replace pour faire des operations avec expression reguliere
@@ -2010,7 +2016,7 @@ function env_to_params ($texte, $ignore_params=array()) {
 	$tableau = unserialize($texte);
 	$texte = "";
 	foreach ($tableau as $i => $j)
-		if (!in_array($i,$ignore_params))
+		if (is_string($j) AND !in_array($i,$ignore_params))
 			$texte .= "<param name='".$i."'\n\tvalue='".$j."' />";
 	return $texte;
 }
@@ -2023,7 +2029,7 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 	$tableau = unserialize($texte);
 	$texte = "";
 	foreach ($tableau as $i => $j)
-		if (!in_array($i,$ignore_params))
+		if (is_string($j) AND !in_array($i,$ignore_params))
 			$texte .= $i."='".$j."' ";
 	return $texte;
 }
