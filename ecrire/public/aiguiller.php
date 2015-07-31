@@ -33,11 +33,15 @@ function traiter_appels_actions(){
 		}		
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
-		if (isset($GLOBALS['redirect'])
-		OR $GLOBALS['redirect'] = _request('redirect')) {
-			$url = urldecode($GLOBALS['redirect']);
+		if (!isset($GLOBALS['redirect'])) {
+			$GLOBALS['redirect'] = _request('redirect');
+			if ($_SERVER['REQUEST_METHOD'] == 'POST')
+				$GLOBALS['redirect'] = urldecode($v);
+		}
+		if ($url = $GLOBALS['redirect']) {
 			// si l'action est provoque par un hit {ajax}
-			// il faut transmettre l'env ajax au redirect qui a pu etre defini par l'action
+			// il faut transmettre l'env ajax au redirect 
+			// qui a pu etre defini par l'action
 			if (($v=_request('var_ajax'))
 			  AND ($v!=='form')
 			  AND ($args = _request('var_ajax_env'))) {
