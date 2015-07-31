@@ -4,14 +4,8 @@
 /* definis pour le bon fonctionnement de vos squelettes.                */
 
 
-/* Raccourcis typographiques de SPIP */
-i.spip {}
-strong.spip {}
-
-
-
 /* Intertitre */
-h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; }
+h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold;font-family: Georgia, Times, serif; }
 hr.spip { margin: 2em auto; border-style: solid; }
 
 /* Listes SPIP */
@@ -33,7 +27,7 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 .spip_surligne { background: #FF6; }
 
 /* Tableaux */
-table.spip { margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; }
+table.spip { margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal; }
 table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin-right: auto; margin-left: auto; font-weight: bold; }
 table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #EEE; }
