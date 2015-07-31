@@ -88,7 +88,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 
 	$contributions = pipeline('compter_contributions_auteur',array('args'=>array('id_auteur'=>$id_auteur,'row'=>$row),'data'=>$contributions));
 
-	$vals[] =  count($contributions)?implode('<br />',$contributions):"&nbsp;";
+	$vals[] =  (is_array($contributions) AND count($contributions))?implode('<br />',$contributions):"&nbsp;";
 
 	return $vals;
 }
