@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="aide_index.php3?aide='.
 	$aide.
-	'"></noscript><font size=\'1\' face=\'verdana, arial, helvetica, sans-serif\' style=\'background-color: white;\' color=\''.$couleur_foncee.'\'><b>&nbsp;AIDE&nbsp;</b></font></a>';
+	'"></noscript><img src=\'img_pack/aide.gif\' alt=\'AIDE\' width=\'20\' height=\'18\' border=\'0\' align=\'middle\'></a>';
 }
 
 
