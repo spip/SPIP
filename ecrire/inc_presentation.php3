@@ -664,7 +664,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 		if ($afficher) {
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
-			for ($count=2;$count<=$compteur_forum AND $count<11;$count++){
+			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
 				$fond[$count]='img_pack/rien.gif';
 				if ($i[$count]!=$nb_forum[$count]){
 					$fond[$count]='img_pack/forum-vert.gif';
@@ -676,17 +676,18 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				echo "<td width=10 valign='top' background=$fond[$count]><img src=$fleche alt='o' width=10 height=13 border=0></td>\n";
 			}
 
-			echo "\n<td width=100% bgcolor='#eeeeee' valign='top'>";
+			echo "\n<td width=100% valign='top'>";
 
 			// Si refuse, cadre rouge
 			if ($statut=="off") {
-				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td bgcolor='#FF0000'>";
+				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td>";
 			}
 			// Si propose, cadre jaune
 			else if ($statut=="prop") {
-				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td bgcolor='#FFFF00'>";
+				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td>";
 			}
-
+			
+			if ($compteur_forum == 1) echo debut_cadre_relief("forum-interne-24.gif");
 			echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre)."</b></font></td></tr>";
 			echo "<tr><td bgcolor='#EEEEEE'>";
 			echo "<font size=2 face='Georgia,Garamond,Times,serif'>";
@@ -749,6 +750,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 			echo "</font>";
 			echo "</td></tr></table>";
+			if ($compteur_forum == 1) echo fin_cadre_relief();
 			if ($statut == "off" OR $statut == "prop") {
 				echo "</td></tr></table>";
 			}			
