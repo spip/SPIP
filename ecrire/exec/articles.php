@@ -1038,7 +1038,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		echo "<div style='width: 200px;'>";
 		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 		$titre = urlencode($cherche_auteur);
-		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
 		// message pour ne pas afficher le second bouton "creer un auteur"
