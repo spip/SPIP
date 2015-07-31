@@ -1577,6 +1577,23 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
+// La fonction suivante ne sert plus aujourd'hui qu'aux squelettes des
+// balises dynamiques, en attendant une nouvelle conception qui permettra
+// d'eviter les redondances de calcul et d'ecriture qu'elle induit.
+// Elle fournit la suite de Input-Hidden correspondant aux parametres de 
+// l'URL donnee en argument. Ce besoin de ne devrait pas apparaitre,
+// utiliser plutot generer_post_ecrire.
+// http://doc.spip.org/@form_hidden
+function form_hidden($action) {
+	$hidden = '';
+	if (false !== ($p = strpos($action, '?')))
+		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
+			$hidden .= "\n<input name='" .
+				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
+				"' type='hidden' />";
+	}
+	return $hidden;
+}
 
 // http://doc.spip.org/@calcul_bornes_pagination
 function calcul_bornes_pagination($courante, $nombre, $max = 10) {
