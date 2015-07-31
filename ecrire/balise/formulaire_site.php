@@ -35,24 +35,27 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
-	if (!_request('nom_site'))
+	$nom = _request('nom_site');
+	if (!$nom)
 		return array('formulaire_site', $GLOBALS['delais'],
 			array('self' => str_replace('&amp;', '&', self())
 		));
 
 	// Tester le nom du site
-	if (strlen (_request('nom_site')) < 2){
+	if (strlen ($nom) < 2){
 		return _T('form_prop_indiquer_nom_site');
 	}
 
 	// Tester l'URL du site
 	include_spip('inc/sites');
-	if (!recuperer_page(_request('url_site')))
+	$url = _request('url_site');
+	if (!recuperer_page($url))
 		return _T('form_pet_url_invalide');
 
 	// Integrer a la base de donnees
 
-	spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "('" . addslashes(_request('nom_site')) . "', '" . addslashes(_request('url_site')). "', " . intval($id_rubrique) .", '" . addslashes(_request('description_site')) . "', NOW(), NOW(), 'prop', 'non')");
+	$desc = _request('description_site');
+	spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "('" . addslashes($nom) . "', '" . addslashes($url). "', " . intval($id_rubrique) .", '" . addslashes($desc) . "', NOW(), NOW(), 'prop', 'non')");
 
 	return  _T('form_prop_enregistre');
 }

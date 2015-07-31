@@ -269,8 +269,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	define('_LOCK_TIME', intval(time()/3600-316982));
 	$nom .= _LOCK_TIME;
 
-	$nom = addslashes($nom);
-	$q = spip_query("SELECT GET_LOCK('$nom', $timeout)");
+	$q = spip_query("SELECT GET_LOCK('" . addslashes($nom) . "', $timeout)");
 	list($lock_ok) = spip_fetch_array($q);
 
 	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
@@ -284,8 +283,7 @@ function spip_release_lock($nom) {
 
 	$nom .= _LOCK_TIME;
 
-	$nom = addslashes($nom);
-	spip_query("SELECT RELEASE_LOCK('$nom')");
+	spip_query("SELECT RELEASE_LOCK('" . addslashes($nom) . "')");
 }
 
 function spip_mysql_version() {

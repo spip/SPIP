@@ -115,7 +115,7 @@ function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
 	if (is_string($declaration))
 		return  $declaration;
 
-	$row = spip_query("SELECT statut, id_auteur, login, email FROM spip_auteurs WHERE email='". addslashes($declaration['email']) .	"'");
+	$row = spip_query("SELECT statut, id_auteur, login, email FROM spip_auteurs WHERE email='". addslashes($declaration['email']) . "'");
 	$row = spip_fetch_array($row);
 
 	if (!$row) 

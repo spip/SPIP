@@ -1560,16 +1560,16 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS par defaut /spip_style.css
 	$res = '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('spip_style.css').'" />'
+	. find_in_path('spip_style.css').'" />'  . "\n"
 
 	// CSS de secours en cas de non fonct de la suivante
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'style_prive_defaut.css" />'
+	. 'style_prive_defaut.css" />'  . "\n"
 	
 	// CSS espace prive : la vrai
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $args) .'" />
-'
+	. generer_url_public('style_prive', $args) .'" />' . "\n"
+
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('calendrier.css') .'" />' . "\n"
@@ -1596,18 +1596,19 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	if ($spip_display == 4) return $res . $js;
 
-	$res .= "<link rel='alternate' type='application/rss+xml'
-			title=\"".entites_html($nom_site_spip)."\" href='"
+	$nom = entites_html($nom_site_spip);
+
+	$res .= "<link rel='alternate' type='application/rss+xml' title=\"$nom\" href='"
 			. generer_url_public('backend') . "' />\n";
 	$res .= "<link rel='help' type='text/html' title=\""._T('icone_aide_ligne') . 
 			"\" href='"
 			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
 			."' />\n";
 	if ($GLOBALS['meta']["activer_breves"] != "non")
-		$res .= "\n<link rel='alternate' type='application/rss+xml' title='"
-			. addslashes($nom_site_spip)
+		$res .= "<link rel='alternate' type='application/rss+xml' title=\""
+			. $nom
 			. " ("._T("info_breves_03")
-			. ")' href='" . generer_url_public('backend-breves') . "' />\n";
+			. ")\" href='" . generer_url_public('backend-breves') . "' />\n";
 
 	return $res . $js;
 }
@@ -2850,9 +2851,9 @@ function fin_page($credits='') {
 function debloquer_article($arg, $texte) {
 	$lien = _DIR_RESTREINT_ABS . parametre_url(self(), 'debloquer_article', $arg, '&');
 	return "<a href='" . generer_action_auteur('instituer', "collaboration $arg", $lien) .
-	  "' title='" .
-	  addslashes($texte) .
-	  "'>$texte&nbsp;" .
+	  "' title=\"" .
+	  entites_html($texte) .
+	  "\">$texte&nbsp;" .
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
 			"width='7' height='7' align='middle'") .
 	  "</a>";

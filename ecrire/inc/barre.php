@@ -61,15 +61,15 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$col ++;
 
 	// Lien hypertexte, notes de bas de page, citations
-	$ret .= bouton_barre_racc ("barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)",
+	$js = addslashes(_T('barre_lien_input'));
+	$ret .= bouton_barre_racc ("barre_demande('[','->',']', '$js', $champ)",
 		"lien.png", _T('barre_lien'), $champhelp);
 	if (!$forum) {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $champhelp);
-	}
-	if ($forum) {
-		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>\n<td>";
+	} else {
 		$col ++;
-		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $champhelp);
+		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>\n<td>"
+		  . bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $champhelp);
 	}
 
 	$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";

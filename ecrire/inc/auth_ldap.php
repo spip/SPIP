@@ -121,20 +121,17 @@ class Auth_ldap {
 	}
 
 	function activer() {
-		$nom = addslashes($this->nom);
-		$login = strtolower(addslashes($this->login));
-		$email = addslashes($this->email);
-		$bio = addslashes($this->bio);
+		$login = strtolower(($this->login));
 		$statut = $GLOBALS['meta']["ldap_statut_import"];
 
 		if (!$statut) return false;
 
 		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
 
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'"));
+		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='" . addslashes($login) . "'"));
 		if ($n) return false;
 
-		$n = spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')");
+		$n = spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', '" . addslashes($this->nom) . "', '" . addslashes($login) . "', '" . addslashes($this->email) . "', '" . addslashes($this->bio) . "', '$statut', '')");
 		return $n;
 
 	}

@@ -133,13 +133,13 @@ function install_6()
 	if ($login) {
 		include_spip('inc/charsets');
 
-		$nom = addslashes(importer_charset($nom, _DEFAULT_CHARSET));
-		$login = addslashes(importer_charset($login, _DEFAULT_CHARSET));
-		$email = addslashes(importer_charset($email, _DEFAULT_CHARSET));
+		$nom = (importer_charset($nom, _DEFAULT_CHARSET));
+		$login = (importer_charset($login, _DEFAULT_CHARSET));
+		$email = (importer_charset($email, _DEFAULT_CHARSET));
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
 		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
-		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'");
+		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='" . addslashes($login) . "'");
 
 		unset($id_auteur);
 		if ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
@@ -148,10 +148,10 @@ function install_6()
 		$htpass = generer_htpass($pass);
 
 		if ($id_auteur) {
-			spip_query("UPDATE spip_auteurs SET nom='$nom', email='$email', login='$login', pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
+			spip_query("UPDATE spip_auteurs SET nom='" . addslashes($nom) . "', email='" . addslashes($email) . "', login='" . addslashes($login) . "', pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
 		}
 		else {
-			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES('$nom','$email','$login','$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')");
+			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES('" . addslashes($nom) . "','" . addslashes($email) . "','" . addslashes($login) . "','$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')");
 		}
 
 		// inserer email comme email webmaster principal

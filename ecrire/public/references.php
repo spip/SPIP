@@ -209,7 +209,8 @@ function calculer_balise($nom, $p) {
 	// il faut recracher {...} quand ce n'est finalement pas des args
 	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1])
 
-	  {$p->code .= " . '" . addslashes($p->fonctions[0][1]) . "'";}
+	  {	$code = addslashes($p->fonctions[0][1]);
+		$p->code .= " . '$code'";}
 	// ne pas passer le filtre securite sur les id_xxx
 	if (strpos($nom, 'ID_') === 0)
 		$p->interdire_scripts = false;
