@@ -94,7 +94,9 @@ function inc_petitionner_dist($id_article, $script, $args)
 		$res .=entites_html($texte_petition);
 		$res .="</textarea>\n";
 		$class = '';
-	} else $class =" visible_au_chargement";
+	} else {
+		$class = _request('var_ajaxcharset') ? '' : ' visible_au_chargement';
+	}
 
 	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
 

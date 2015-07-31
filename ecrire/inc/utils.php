@@ -551,6 +551,8 @@ function id_table_objet($type) {
 		return 'id_forum';
 	else if ($type=='doc' OR $type=='img' OR $type=='emb') # pour les modeles
 		return 'id_document';
+	else if ($type == 'petition')
+		return 'id_article';
 	else
 		return 'id_'.$type;
 }
