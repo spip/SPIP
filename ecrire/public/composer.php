@@ -534,7 +534,7 @@ function calculer_select ($select = array(), $from = array(),
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
 			array_push($where_simples,$sous[2]);
 			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
-			$sous[1],
+			array($sous[1]." AS id"),
 			$from,
 			$from_type,
 			array($sous[2],'0=0'), // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
@@ -672,7 +672,14 @@ function calculer_select ($select = array(), $from = array(),
 	    $newcle = explode('.',$nfrom[4]);
 	    $newcle = end($newcle);
 	    if ($newcle!=$oldcle){
-	    	$alias = ", ".$nfrom[4]." AS $oldcle";
+		    // si l'ancienne cle etait deja dans le select avec un AS
+		    // reprendre simplement ce AS
+		    $as = '/\b'.preg_quote($nfrom[6]).'\s+(AS\s+\w+)\b/';
+		    if (preg_match($as,implode(',',$select),$m)){
+			    $alias = "";
+		    }
+		    else
+					$alias = ", ".$nfrom[4]." AS $oldcle";
 	    }
 	    $select = remplacer_jointnul($t . $alias, $select, $e);
 	    $join = remplacer_jointnul($t, $join, $e);
