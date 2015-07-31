@@ -176,14 +176,12 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 	# On nettoie celui de la page retournee car le systeme vient d'y acceder:
 	# il y a de bonnes chances qu'il l'ait toujours dans son cache.
 
-	if ($page['naissance'] && (time() - lire_meta('date_purge_cache') > 3600))
- 	{
+	if ($page['naissance'] && (time() - lire_meta('date_purge_cache') > 3600)) {
 		ecrire_meta('date_purge_cache', time());
 		retire_vieux_caches($cle, $delais);
 	}
 
 	# Mise a jour des fichiers langues de l'espace public
-
 	if ($cache_lang_modifs) {
 		include_ecrire('inc_lang.php3');
 		ecrire_caches_langues();
