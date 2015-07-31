@@ -207,15 +207,28 @@ function appliquer_modifs_config() {
 
 		'documents_article',
 		'documents_rubrique',
-		'charset',
-
-		'secu_stricte',
-		'creer_htpasswd'
-	);
+		'charset'	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
 	ecrire_metas();
 
+	$liste_meta = array(
+		'secu_stricte',
+		'creer_htpasswd'
+	);
+	while (list(,$i) = each($liste_meta))
+		if (isset($GLOBALS[$i]))
+			$modif_secu=true;
+	if ($modif_secu) {
+		include_ecrire('inc_admin.php3');
+		$admin = "modifications des param&egrave;tres de s&eacute;curit&eacute;";
+		debut_admin($admin);
+		reset($liste_meta);
+		while (list(,$i) = each($liste_meta))
+			if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
+		ecrire_metas();
+		fin_admin($admin);
+	}
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");
 		@header ("Location:../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($clean_link->getUrl()));

@@ -12,10 +12,8 @@ function fichier_admin($action) {
 }
 
 function debut_admin($action, $commentaire='') {
-	global $clean_link;
+	global $this_link;
 	global $connect_statut;
-
-	$lien = $clean_link->getUrl();
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_ecrire ("inc_presentation.php3");
@@ -33,7 +31,7 @@ function debut_admin($action, $commentaire='') {
 			echo "<p>".propre($commentaire)."</p>";
 		}	
 
-		echo "<FORM ACTION='$lien' METHOD='post'>";
+		echo $this_link->getForm('POST');
 		echo "<P><B>Authentification (par FTP).</B>";
 		echo aide("ftp_auth");
 		echo "<P>Veuillez cr&eacute;er un fichier ou un r&eacute;pertoire nomm&eacute;&nbsp;:";

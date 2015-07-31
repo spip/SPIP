@@ -3,18 +3,8 @@
 include ("inc.php3");
 
 include_ecrire ("inc_config.php3");
-
-debut_page("Configuration du site", "administration", "configuration");
-
-echo "<br><br><br>";
-gros_titre("Configuration du site");
-barre_onglets("configuration", "securite");
-
-debut_gauche();
-
-debut_droite();
-
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	debut_page("Configuration du site", "administration", "configuration");
 	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
 	fin_page();
 	exit;
@@ -26,6 +16,17 @@ if ($changer_config == 'oui') {
 }
 
 lire_metas();
+
+debut_page("Configuration du site", "administration", "configuration");
+
+echo "<br><br><br>";
+gros_titre("Configuration du site");
+barre_onglets("configuration", "securite");
+
+debut_gauche();
+
+debut_droite();
+
 
 
 echo "<form action='config-securite.php3' method='post'>";
