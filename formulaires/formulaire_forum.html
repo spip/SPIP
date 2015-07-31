@@ -62,7 +62,9 @@
 	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
 	</fieldset>
 
-	<input type="text" style="display:none;" name="nobot" value="#ENV{nobot}" size="40" />
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" value="#ENV{nobot}" size="10" /></p>
 
 	<div class="spip_bouton_div"><input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" /></div>
 ]
