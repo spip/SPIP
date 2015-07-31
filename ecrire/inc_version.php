@@ -200,7 +200,6 @@ $spip_pipeline = array(
 	'pre_propre' => '|extraire_multi',
 	'pre_syndication' => '',
 	'pre_typo' => '|extraire_multi',
-	'traiter_raccourci_lien' => '',
 	'post_propre' => '',
 	'post_syndication' => '',
 	'post_typo' => '|quote_amp',

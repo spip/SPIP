@@ -235,21 +235,18 @@ function nettoyer_raccourcis_typo($texte){
 	// remplacer les liens
 	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],S', $texte, $regs, PREG_SET_ORDER))
 		foreach ($regs as $reg) {
-			if (strlen($reg[1]))
-				$titre = $reg[1];
-			else
-				$titre = calculer_url($reg[3], $reg[1], 'titre');
+			$titre = supprimer_tags(traiter_raccourci_lien($reg));
 			$texte = str_replace($reg[0], $titre, $texte);
 		}
 
 	// supprimer les notes
-	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
+	$texte = preg_replace(",\[\[([^]]|\][^]])*\]\],sS", "", $texte);
 
 	// supprimer les codes typos
-	$texte = ereg_replace("[}{]", "", $texte);
+	$texte = str_replace(array('}','{'), '', $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
+	$texte = preg_replace(",(^|\r)\|.*\|\r,s", "\r", $texte);
 	return $texte;
 }
 
@@ -669,7 +666,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 			}
 
 			$res = $f($id, $texte, $ancre);
-			$res[2] = supprimer_numero($res[2]);
+			$res[2] = $res[2];
 			if ($pour == 'titre')
 				return $res[2];
 			if ($params)
@@ -710,74 +707,70 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	if (substr($lien,0,1) == '#')
 		$class = 'spip_ancre';
 
-	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
+	return ($pour == 'url') ? $lien : array($lien, $class, $texte, $lang);
 }
 
 // http://doc.spip.org/@calculer_url_article
 function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
-	if (!$texte) {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
-		$texte = $row['titre'];
-	}
-	return array($lien, 'spip_in', $texte);
+	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id"));
+	if ($texte=='')
+		$texte = supprimer_numero($row['titre']);
+	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
 // http://doc.spip.org/@calculer_url_rubrique
 function calculer_url_rubrique($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
-	if (!$texte) {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id"));
-		$texte = $row['titre'];
-	}
-	return array($lien, 'spip_in', $texte);
+	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id"));
+	if ($texte=='')
+		$texte = supprimer_numero($row['titre']);
+	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
 // http://doc.spip.org/@calculer_url_mot
 function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
-	if (!$texte) {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
-		$texte = $row['titre'];
-	}
-	return array($lien, 'spip_in', $texte);
+	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_mots WHERE id_mot=$id"));
+	if ($texte=='')
+		$texte = supprimer_numero($row['titre']);
+	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
 // http://doc.spip.org/@calculer_url_breve
 function calculer_url_breve($id, $texte='')
 {
 	$lien = generer_url_breve($id);
-	if (!$texte) {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id"));
-		$texte = $row['titre'];
-	}
-	return array($lien, 'spip_in', $texte);
+	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id"));
+	if ($texte=='')
+		$texte = supprimer_numero($row['titre']);
+	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
 // http://doc.spip.org/@calculer_url_auteur
 function calculer_url_auteur($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
-	if (!$texte) {
+	if ($texte=='') {
 		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
 		$texte = $row['nom'];
 	}
-	return array($lien, 'spip_in', $texte);
+	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
 // http://doc.spip.org/@calculer_url_document
 function calculer_url_document($id, $texte='')
 {
 	$lien = generer_url_document($id);
-	if (!$texte) {
+	if ($texte=='') {
 		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
 		$texte = $row['titre'];
-		if (!$texte)
-			$texte = ereg_replace("^.*/","",$row['fichier']);
+		if ($texte=='')
+			$texte = preg_replace(",^.*/,","",$row['fichier']);
 	}
-	return array($lien, 'spip_in', $texte);
+	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
 // http://doc.spip.org/@calculer_url_site
@@ -785,13 +778,13 @@ function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
-	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id"));
+	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site,lang FROM spip_syndic WHERE id_syndic=$id"));
 	if ($row) {
 		$lien = $row['url_site'];
-		if (!$texte)
-			$texte = $row['nom_site'];
+		if ($texte=='')
+			$texte = supprimer_numero($row['nom_site']);
 	}
-	return array($lien, 'spip_out', $texte);
+	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
 //
@@ -1114,14 +1107,40 @@ function paragrapher($letexte) {
 // Inserer un lien a partir du preg_match du raccourci [xx->url]
 // $regs:
 // 0=>tout le raccourci
-// 1=>texte
+// 1=>texte (ou texte|hreflang ou texte|bulle ou texte|bulle{hreflang})
 // 2=>double fleche (historiquement, liens ouvrants)
 // 3=>url
 //
 function traiter_raccourci_lien($regs) {
-	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
+
+	// title et hreflang donnes par le raccourci ?
+	if (preg_match(',^(.*?)([|](.*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
+		// |infobulle ?
+		if ($m[2])
+			$bulle = ' title="'.texte_backend($m[3]).'"';
+		// {hreflang} ?
+		if ($m[4])
+			$hlang = $m[5];
+		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
+		// est peut-etre une langue
+		else if (preg_match(',^[a-z_]+$,', $m[3])) {
+			// si c'est un code de langue connu, on met un hreflang
+			include_spip('inc/lang');
+			if (traduire_nom_langue($m[3]) <> $m[3]) {
+				$hlang = $m[3];
+			}
+		}
+		$regs[1] = $m[1];
+	}
+
+	list ($lien, $class, $texte, $lang) = calculer_url($regs[3], $regs[1], 'tout');
+
+	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
+	if (!$hlang AND $lang AND ($lang!=$GLOBALS['spip_lang'])) $hlang=$lang;
+	$hreflang = $hlang ? ' hreflang="'.$hlang.'"' : '';
+
 	# ici bien passer le lien pour traiter [<doc3>->url]
-	return typo("<a href=\"$lien\" class=\"$class\">"
+	return typo("<a href=\"$lien\" class=\"$class\"$hreflang$bulle>"
 		. $texte
 		. "</a>");
 }
@@ -1294,9 +1313,7 @@ function traiter_raccourcis($letexte) {
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			$insert = traiter_raccourci_lien($regs);
-			$inserts[++$i] = pipeline('traiter_raccourci_lien',
-				array('data'=>$insert, 'args'=>$regs));
+			$inserts[++$i] = traiter_raccourci_lien($regs);
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
 				$letexte);
 		}
