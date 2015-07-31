@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_recherche" id="formulaire_recherche">
 <form action="[(#ENV{lien})]" method="get" class='noajax'><div>
-	#ACTION_FORMULAIRE{#ENV{lien}}
+	[(#ENV{lien}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="recherche"><:info_rechercher:></label>
 	<input type="text" class="forml" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
