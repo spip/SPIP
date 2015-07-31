@@ -1390,7 +1390,7 @@ function extraire_trads($bloc) {
 // http://www.spip.net/@unique
 // http://doc.spip.org/@unique
 function unique($donnee, $famille='', $cpt = false) {
-	static $mem;
+	static $mem = array();
 	// permettre de vider la pile et de la restaurer
 	// pour le calcul de introduction...
 	if ($famille=='_spip_raz_'){
@@ -1401,11 +1401,20 @@ function unique($donnee, $famille='', $cpt = false) {
 		$mem = $donnee;
 		return;
 	}
-
-	if ($cpt)
+	// eviter une notice
+	if (!isset($mem[$famille])) {
+		$mem[$famille] = array();
+	}
+	if ($cpt) {
 		return count($mem[$famille]);
-	if (!($mem[$famille][$donnee]++))
+	}
+	// eviter une notice
+	if (!isset($mem[$famille][$donnee])) {
+		$mem[$famille][$donnee] = 0;
+	}
+	if (!($mem[$famille][$donnee]++)) {
 		return $donnee;
+	}
 }
 
 //

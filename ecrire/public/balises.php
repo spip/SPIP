@@ -1524,7 +1524,7 @@ function balise_PRODUIRE_dist($p){
 function balise_LARGEUR_ECRAN_dist($p){
 	$_class = interprete_argument_balise(1,$p);
 	if (!$_class) $_class='null';
-	$p->code = "(is_string($_class)?vide(\$GLOBALS['largeur_ecran']=$_class):\$GLOBALS['largeur_ecran'])";
+	$p->code = "(is_string($_class)?vide(\$GLOBALS['largeur_ecran']=$_class):(isset(\$GLOBALS['largeur_ecran'])?\$GLOBALS['largeur_ecran']:''))";
 	return $p;
 }
 ?>
