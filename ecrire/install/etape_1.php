@@ -24,8 +24,8 @@ function install_etape_1_dist()
 
 	$chmod = (isset($_GET['chmod']) AND preg_match(',^[0-9]+$,', $_GET['chmod']))? sprintf('%04o', $_GET['chmod']):'0777';
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
-		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
+	if (@file_exists(_FILE_CONNECT_TMP)) {
+		$s = @join('', @file(_FILE_CONNECT_TMP));
 		if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
@@ -36,8 +36,8 @@ function install_etape_1_dist()
 			$login_db = $regs[3];
 		}
 	}
-	if(@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php')){
-		$s = @join('', @file(_FILE_CHMOD_INS . _FILE_TMP . '.php'));
+	if(@file_exists(_FILE_CHMOD_TMP)){
+		$s = @join('', @file(_FILE_CHMOD_TMP));
 		if(preg_match("#define\('_SPIP_CHMOD', (.*)\)#", $s, $regs)) {
 			$chmod = $regs[1]; 
 		}

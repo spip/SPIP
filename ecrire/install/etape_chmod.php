@@ -68,7 +68,7 @@ function test_ecrire($my_dir) {
 
 //
 // tester les droits en ecriture sur les repertoires
-// rajouter celui passer dans l'url ou celui du source (a l'installation)
+// rajouter celui passe dans l'url ou celui du source (a l'installation)
 //
 
 function install_etape_chmod_dist()
@@ -82,7 +82,7 @@ function install_etape_chmod_dist()
 		if (!in_array($test_dir, $test_dirs)) $test_dirs[] = _DIR_RACINE  . $test_dir;
 	} else {
 		if (!_FILE_CONNECT)
-			$test_dirs[] = dirname(_FILE_CONNECT_INS).'/';
+			$test_dirs[] = _DIR_ETC;
 	}
 
 	$bad_dirs = array();

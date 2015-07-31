@@ -246,11 +246,9 @@ function spip_connect($serveur='') {
 	$install = (_request('exec') == 'install');
 
 	$f = (!preg_match('/^\w*$/', $serveur))	? ''
-	  : (($serveur AND !$install) ?
-	  (_FILE_CONNECT_INS . $serveur . '.php')
-	  : (_FILE_CONNECT ?  _FILE_CONNECT 
-	    : ($install ? (_FILE_CONNECT_INS .  '.php')
-	       : '')));
+	: (($serveur AND !$install) ?
+		( _DIR_ETC . _FILE_CONNECT_INS . $serveur . '.php')
+		: (_FILE_CONNECT ? _FILE_CONNECT : _FILE_CONNECT_TMP));
 
 	unset($GLOBALS['db_ok']);
 	unset($GLOBALS['spip_connect_version']);
@@ -268,6 +266,7 @@ function spip_connect($serveur='') {
 	// initialisation de l'alphabet utilise dans les connexions SQL
 	// si l'installation l'a determine.
 	// Celui du serveur principal l'impose aux serveurs secondaires
+	// s'ils le connaissent
 
 	if (!$serveur) {
 		$charset = spip_connect_main($GLOBALS['db_ok']);
@@ -282,7 +281,8 @@ function spip_connect($serveur='') {
 	}
 	if ($charset != -1) {
 		$f = $GLOBALS['db_ok']['set_charset'];
-		$f($charset, $serveur);
+		if (function_exists($f))
+			$f($charset, $serveur);
 	}
 	return $connexions[$index];
 }
@@ -1196,18 +1196,23 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS', _DIR_ETC . 'connect');
+	// tient compte des anciennes versions (inc_connect...)
+	define('_FILE_CONNECT_INS', 'connect');
 	define('_FILE_CONNECT',
-		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
+		(@is_readable($f = _DIR_ETC . _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
 
 	// Le fichier de reglages des droits
-	define('_FILE_CHMOD_INS', _DIR_ETC . 'chmod');
+	define('_FILE_CHMOD_INS', 'chmod');
 	define('_FILE_CHMOD',
-		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
+		(@is_readable($f = _DIR_ETC . _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
+
+	define('_FILE_TMP_SUFFIX', '.tmp.php');
+	define('_FILE_CONNECT_TMP', _DIR_ETC . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
+	define('_FILE_CHMOD_TMP', _DIR_ETC . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
 
 	// Definition des droits d'acces en ecriture
 	if (!defined('_SPIP_CHMOD')) {

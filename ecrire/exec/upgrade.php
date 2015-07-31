@@ -24,16 +24,17 @@ function exec_upgrade_dist() {
 
 	// Si reinstallation necessaire, message ad hoc
 	if (_request('reinstall') == 'oui') {
-
-		@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
-
-		echo minipres(_T('titre_page_upgrade'),
+		include_spip('inc/minipres');
+		$r = minipres(_T('titre_page_upgrade'),
 				"<p><b>"
 				. _T('texte_nouvelle_version_spip_1')
 				. "</b><p> "
 				. _T('texte_nouvelle_version_spip_2',
 				   array('connect' => '<tt>' . _FILE_CONNECT . '</tt>'))
 				. generer_form_ecrire('upgrade', "<input type='hidden' name='reinstall' value='non' />",'',	_T('bouton_relancer_installation')));
+		echo $r;
+		
+		@rename(_FILE_CONNECT, _FILE_CONNECT_TMP);
 		exit;
 	}
 

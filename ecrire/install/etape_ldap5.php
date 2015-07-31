@@ -18,8 +18,8 @@ function install_etape_ldap5_dist()
 {
 	//  _FILE_CONNECT n'existe pas encore
 
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
-		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+	if (@file_exists(_FILE_CONNECT_TMP))
+		include(_FILE_CONNECT_TMP);
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
