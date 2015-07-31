@@ -35,8 +35,12 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		$table_prefix = _INSTALL_TABLE_PREFIX;
 	}
 
+	if (preg_match(',(.*):(.*),', $adresse_db, $r))
+		list(,$adresse_db, $port) = $r;
+	else $port = '';
+
 	$GLOBALS['connexions'][$server_db]
-	= spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+	= spip_connect_db($adresse_db, $port, $login_db, $pass_db, '', $server_db);
 
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
 	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
@@ -143,10 +147,6 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	if ($chmod_db) {
 		install_fichier_connexion(_FILE_CHMOD_TMP, "if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod_db).");\n");
 	}
-
-	if (preg_match(',(.*):(.*),', $adresse_db, $r))
-		list(,$adresse_db, $port) = $r;
-	else $port = '';
 
 	// si ce fichier existe a cette etape c'est qu'il provient
 	// d'une installation qui ne l'a pas cree correctement.
