@@ -473,7 +473,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_ps' => 'P.S.',
 	'info_publier' => 'publikigi',
 	'info_publies' => 'Viaj artikoloj rete publikigitaj',
-	'info_question_accepter_visiteurs' => 'Se via skeleto ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la ĉi-suban opcion :',
+	'info_question_accepter_visiteurs' => 'Se viaj skeletoj ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la ĉi-suban opcion :',
 	'info_question_inscription_nouveaux_redacteurs' => 'Ĉu vi akceptas la registriĝadon de novaj redaktantoj ekde
   la publika spaco ? Se vi akceptas tion, la vizitantoj povos registriĝi
   per aŭtomata aliĝilo kaj tiam aliros al la privata spaco por
