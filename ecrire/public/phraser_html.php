@@ -39,38 +39,26 @@ define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
 
 // http://doc.spip.org/@phraser_arguments_inclure
-function phraser_arguments_inclure($p,$rejet_filtres = false){
-	$champ = new Inclure;
+function phraser_arguments_inclure($param,$rejet_filtres = false){
 	// on assimile {var=val} a une liste de un argument sans fonction
-	foreach ($p->param as $k => $v) {
+	foreach ($param as $k => $v) {
 		$var = $v[1][0];
 		if ($var==NULL){
 			if ($rejet_filtres)
 				break; // on est arrive sur un filtre sans argument qui suit la balise
-			else
-				$champ->param[$k] = $v;
-		}
-		else
-		if ($var->type != 'texte') {
+		} elseif ($var->type != 'texte') {
 			if ($rejet_filtres)
 				break; // on est arrive sur un filtre sans argument qui suit la balise
 			else
 				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
-		} else {
-			$champ->param[$k] = $v;
-			preg_match(",^([^=]*)(=)?(.*)$,", $var->texte,$m);
-			if ($m[2]) {
-				$champ->param[$k][0] = $m[1];
-				$val = $m[3];
-				if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
-				$champ->param[$k][1][0]->texte = $val;
-			}
-			else
-				$champ->param[$k] = array($m[1]);
-
+		} elseif (preg_match(",^([^=]*)=?(.*)$,", $var->texte,$m)) {
+			$param[$k][0] = $m[1];
+			$val = $m[2];
+			if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
+			$param[$k][1][0]->texte = $val;
 		}
 	}
-	return $champ;
+	return $param;
 }
 
 // http://doc.spip.org/@phraser_inclure
@@ -88,8 +76,6 @@ function phraser_inclure($texte, $ligne, $result) {
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,"/>","",$result,$champ);
-		$champ_ = phraser_arguments_inclure($champ);
-		$champ->param = $champ_->param;
 		$texte = substr($champ->apres, strpos($champ->apres, '>')+1);
 		$champ->apres = "";
 		$texte = preg_replace(',^</INCLU[DR]E>,', '', $texte);
@@ -618,8 +604,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
-			$args = phraser_arguments_inclure($result);
-			$args = $args->param;
+			$args = phraser_arguments_inclure($result->param);
 
 			array_unshift($args,
 				      substr($type, strlen(TYPE_RECURSIF)));
