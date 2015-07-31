@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@affiche_arbre_plugins
-function plugins_afficher_repertoires_dist($liste_plugins, $liste_plugins_actifs){
+function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plugins_actifs){
 	$ligne_plug = charger_fonction('afficher_plugin','plugins');
 	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
@@ -54,7 +54,7 @@ function plugins_afficher_repertoires_dist($liste_plugins, $liste_plugins_actifs
 				$plug = $liste_plugins[$key];
 				$actif = @isset($fast_liste_plugins_actifs[$plug]);
 				$id = substr(md5($plug),0,16);
-				$res .= $ligne_plug(str_replace(_DIR_PLUGINS, '', _DIR_RACINE.$plug), $actif, 'menu-entree') . "\n";
+				$res .= $ligne_plug($url_page, str_replace(_DIR_PLUGINS, '', _DIR_RACINE.$plug), $actif, 'menu-entree') . "\n";
 				unset($liste_plugins[$key]);
 			}
 	}

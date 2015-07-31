@@ -25,17 +25,17 @@ h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-re
 
 
 /* listes */
-.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
-.liste_items li.item.odd {background:#eee;}
-.liste_items li.item:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
-.liste_items li.court:hover {background-color:#eee;}
-.liste_items li.item.on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
-.liste_items li.item.on:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
-.liste_items li.item h3 {margin:0;}
+.liste_items,.liste-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+.liste_items .item,.liste-items .item  {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
+.liste_items .item.odd,.liste-items .item.odd  {background:#eee;}
+.liste_items .item:hover,.liste-items .item:hover  {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.liste_items .court:hover,.liste-items .court:hover  {background-color:#eee;}
+.liste_items .item.on,.liste-items .item.on  {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
+.liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.liste_items .item h3,.liste-items .item h3  {margin:0;}
 
 
-.liste_items li.item .actions {float:none;margin:0;clear:both;text-align:#GET{right};}
+.liste_items .item .actions,.liste-items .item .actions  {float:none;margin:0;clear:both;text-align:#GET{right};}
 
 .tri, .pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 11px; font-weight: bold; text-align: #GET{right}; white-space: nowrap;margin-top:1em; }
 .tri {text-align:#GET{left};}
