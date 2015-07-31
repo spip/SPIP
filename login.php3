@@ -1,6 +1,6 @@
 <?php
 
-include ("inc_version.php3");
+include ("ecrire/inc_version.php3");
 include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_presentation.php3");
@@ -12,7 +12,7 @@ include_ecrire ("inc_texte.php3");
 $nom_site = lire_meta('nom_site');
 if (!$nom_site) $nom_site = 'Mon site SPIP';
 $url_site = lire_meta('adresse_site');
-if (!$url_site) $url_site = '../';
+if (!$url_site) $url_site = './index.php3';
 if ($erreur=='pass') $erreur = "Erreur de mot de passe.";
 
 // Le login est memorise dans le cookie d'admin eventuel
@@ -32,7 +32,7 @@ if ($login) {
 	} else {
 		$erreur = "L'identifiant ".chr(171)." $login ".chr(187)." est inconnu.";
 		$login = '';
-		// ici penser a supprimer le cookie d'admin s'il existe (sinon blocage possible)
+		@setcookie("spip_admin", "", time() - 3600);
 	}
 }
 
@@ -69,13 +69,12 @@ while (list(,$img) = each ($images)) {
 
 echo "<p>&nbsp;<p>";
 
-$redirect = ereg_replace ("/login\.php3", "/index.php3", $GLOBALS['REQUEST_URI']);
+$redirect = ereg_replace ("/login\.php3", "/ecrire/index.php3", $GLOBALS['REQUEST_URI']);
 
 if ($login) {
 	// affiche formulaire de login en incluant le javascript MD5
-	$dir = "../";
-	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-	echo "<form action='$dir"."spip_cookie.php3' method='post'";
+	echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
+	echo "<form action='spip_cookie.php3' method='post'";
 	echo " onSubmit='if (this.session_password.value) {
 			this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 			this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
@@ -91,9 +90,9 @@ if ($login) {
 	debut_cadre_enfonce($icone);
 	if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 
-	if (file_exists("../IMG/auton$id_auteur.gif")) $logo = "../IMG/auton$id_auteur.gif";
-	else if (file_exists("../IMG/auton$id_auteur.jpg")) $logo = "../IMG/auton$id_auteur.jpg";
-	else if (file_exists("../IMG/auton$id_auteur.png")) $logo = "../IMG/auton$id_auteur.png";
+	if (file_exists("IMG/auton$id_auteur.gif")) $logo = "IMG/auton$id_auteur.gif";
+	else if (file_exists("IMG/auton$id_auteur.jpg")) $logo = "IMG/auton$id_auteur.jpg";
+	else if (file_exists("IMG/auton$id_auteur.png")) $logo = "IMG/auton$id_auteur.png";
 
 
 	echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
@@ -101,7 +100,7 @@ if ($login) {
 	echo "<td width=100%>";
 	// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 	echo "<script type=\"text/javascript\"><!--
-			document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
+			document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&redirect=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
 		//--></script>\n";
 	echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
@@ -116,7 +115,7 @@ if ($login) {
 	echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
 	echo "</td>";
 	if ($logo) {
-		echo "<td width=10><img src='img_pack/rien.gif' width=10></td>";
+		echo "<td width=10><img src='ecrire/img_pack/rien.gif' width=10></td>";
 		echo "<td valign='top'>";
 		echo "<img src='$logo'>";
 		echo "</td>";
@@ -131,7 +130,7 @@ if ($login) {
 
 else {
 	// demander seulement le login
-	echo "<form action='./login.php3' method='get'>\n";
+	echo "<form action='login.php3' method='get'>\n";
 	debut_cadre_enfonce("redacteurs-24.gif");
 	//echo "<div style='border: 1px dashed #999999; padding: 10px;'>\n";
 	if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
@@ -144,7 +143,7 @@ else {
 }
 
 if ($echec_cookie == "oui" AND $php_module) {
-	echo "<form action='../spip_cookie.php3' method='get'>";
+	echo "<form action='spip_cookie.php3' method='get'>";
 	echo "<fieldset>\n";
 	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
 	echo "non s&eacute;curis&eacute;e est &agrave; votre disposition&nbsp;: \n";

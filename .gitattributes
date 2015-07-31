@@ -148,6 +148,6 @@ ecrire/img_pack/triangle.gif -text
 ecrire/img_pack/visiter-48.gif -text
 ecrire/img_pack/warning-24.gif -text
 ecrire/img_pack/warning.gif -text
-ecrire/login-dist.png -text
 ecrire/puce.gif -text
+/login-dist.png svneol=native#unset
 /puce.gif -text
