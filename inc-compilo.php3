@@ -146,19 +146,22 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$primary = $boucle->primary;
 	$id_field = $id_table . "." . $primary;
 	// La boucle doit-elle selectionner la langue ?
-	// 1. par defaut 
-	$lang_select = (
+	// 1. par defaut, les boucles suivantes le font
+	// "peut-etre", c'est-a-dire si forcer_lang == false.
+	if (
 		$type_boucle == 'articles'
 		OR $type_boucle == 'rubriques'
 		OR $type_boucle == 'hierarchie'
 		OR $type_boucle == 'breves'
-	);
-	// 2. si forcer_lang, le defaut est non
-	if ($GLOBALS['forcer_lang']) $lang_select = false;
-	// 3. demande explicite
-	if ($boucle->lang_select == 'oui') $lang_select = true;
+	) $lang_select = 'maybe';
+	else
+		$lang_select = false;
+
+	// 2. a moins d'une demande explicite
+	if ($boucle->lang_select == 'oui') $lang_select = 'oui';
 	if ($boucle->lang_select == 'non') $lang_select = false;
-	// 4. penser a demander le champ lang
+
+	// Penser a demander le champ lang
 	if ($lang_select)
 		$boucle->select[] = 
 			// cas des tables SPIP
@@ -204,9 +207,14 @@ function calculer_boucle($id_boucle, &$boucles) {
 		if ($compteur_boucle-1 >= $debut_boucle
 		AND $compteur_boucle-1 <= $fin_boucle) {';
 	
-	if ($lang_select AND !$constant)
-		$debut .= '
-			if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x; // lang_select';
+	if ($lang_select AND !$constant) {
+		$selecteur = 
+			(($lang_select == 'maybe') ? 
+			'if (!$GLOBALS["forcer_lang"]) ':'')
+			. 'if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x;'
+			. ' // lang_select';
+		$debut .= "\n			".$selecteur;
+	}
 
 	$debut .= $invalide;
 
