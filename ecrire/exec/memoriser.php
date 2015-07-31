@@ -36,6 +36,7 @@ function exec_memoriser_dist()
 		include_spip('inc/presentation');
 		$res = afficher_articles_trad($t, $r, $f, $hash, $cpt, $trad);
 	} else spip_log("memoriser $q vide");
+	include_spip('inc/actions');
 	ajax_retour($res);
 }
 

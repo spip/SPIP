@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_configurer_notifications_forum_dist()
 {
 	$f = charger_fonction('notifications_forum', 'configuration');
+	include_spip('inc/actions');
 	ajax_retour($f());
 }
 ?>
