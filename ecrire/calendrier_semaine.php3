@@ -24,7 +24,7 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
-		$largeur_gauche = 130;
+		$largeur_gauche = 170;
 	} else {
 		$largeur_table = 750;
 		$largeur_gauche = 100;
@@ -77,7 +77,7 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 		echo "&nbsp;";
 		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='border: 1px solid black'>";
 		echo "&nbsp;";
-		echo "<a href='calendrier.php3?mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		echo "<a href='calendrier.php3?mois=$mois_today&annee=$annee_today&jour=$jour_today'><img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo aide ("messcalen");
 		echo "</div>";
 
