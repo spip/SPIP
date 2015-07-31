@@ -294,11 +294,17 @@ function calculer_params($idb, &$boucles) {
 							$val3[] = "'$v'";
 					}
 					$val = join(',', $val3);
-					$boucle->where[] = "$col IN ($val)";
-					$boucle->select[] = "FIND_IN_SET($col, \\\"$val\\\")
-						AS rang";
-					if (!$boucle->order)
-						$boucle->order = 'rang';
+					$where = "$col IN ($val)";
+					if ($match[4] == '!') {
+						$where = "NOT ($where)";
+					} else {
+						if (!$boucle->order) {
+							$boucle->order = 'rang';
+							$boucle->select[] =
+							"FIND_IN_SET($col, \\\"$val\\\") AS rang";
+						}
+					}
+					$boucle->where[] = $where;
 					$op = '';
 				}
 	
