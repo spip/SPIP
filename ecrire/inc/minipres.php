@@ -119,10 +119,14 @@ function minipres($titre='', $corps="", $onload='', $all_inline = false)
 		$titre = ($titre == 'install')
 		  ?  _T('avis_espace_interdit')
 		  : $titre . '&nbsp;: '. _T('info_acces_interdit');
+
+		$statut = isset($GLOBALS['visiteur_session']['statut']) ? $GLOBALS['visiteur_session']['statut'] : '';
+		$nom    = isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] : '';
+
 		$corps = generer_form_ecrire('accueil', '','',
-						$GLOBALS['visiteur_session']['statut']?_T('public:accueil_site'):_T('public:lien_connecter')
+						$statut ? _T('public:accueil_site') : _T('public:lien_connecter')
 		);
-		spip_log($GLOBALS['visiteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
+		spip_log($nom . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 
 	if (!_AJAX)
