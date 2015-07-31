@@ -1,9 +1,10 @@
 <?php
 
 include ("inc_version.php3");
+
 // Recuperer les infos de langue (preferences auteur), si possible
 if (file_exists("inc_connect.php3")) {
-    include_ecrire ("inc_auth.php3");
+	include_ecrire ("inc_auth.php3");
 }
 
 include_ecrire("inc_lang.php3");
