@@ -31,55 +31,46 @@ function affiche_config_fonctions_dist()
 //
 // Activer/desactiver la creation automatique de vignettes
 //
-
 	vignettes_config();
 
 //
 // Indexation pour moteur de recherche
 //
-
 	moteur_config();
 
 //
 // Activer les statistiques
 //
-
 	statistiques_config();
 
 //
 // Notification de modification des articles
 //
-
 	if ($options == "avancees") notification_config();
 
 //
 // Gestion des revisions des articles
 //
-
 	if ($flag_revisions AND $options == "avancees") versions_config();
 
 //
 // Correcteur d'orthographe
 //
-	
 	correcteur_config();
 
 //
 // Previsualisation sur le site public
 //
-
 	previsu_config();
 
 //
 // Utilisation d'un proxy pour aller lire les sites syndiques
 //
-
 	if ($options == 'avancees') proxy_config();
 
 //
 // Creer fichier .htpasswd ?
 //
-
 	if ($options == "avancees") htpasswd_config();
 
 //
@@ -117,7 +108,7 @@ function afficher_choix_vignette($process) {
 
 function vignettes_config()
 {
-	global $image_process, $flag_gd, $flag_imagick, $convert_command, $flag_ImageCreateTrueColor;
+  global $image_process, $flag_gd, $flag_imagick, $convert_command, $flag_ImageCreateTrueColor, $spip_lang_left, $spip_lang_right;
 
 	debut_cadre_trait_couleur("image-24.gif");
 
