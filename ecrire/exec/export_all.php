@@ -62,11 +62,17 @@ function exec_export_all_dist()
 
 	list($tables_for_dump,) = export_all_list_tables();
 	
-	// en mode partiel, commence par les articles pour savoir quelles
-	// parties des tables s'y rattachant sont a sauvegarder
-	if ($rub AND $t = array_search('spip_articles', $tables_for_dump)) {
-		unset($tables_for_dump[$t]);
-		array_unshift($tables_for_dump, 'spip_articles');
+	// en mode partiel, commencer par les articles et les rubriques
+	// pour savoir quelles parties des autres tables sont a sauver
+	if ($rub) {
+		if ($t = array_search('spip_rubriques', $tables_for_dump)) {
+			unset($tables_for_dump[$t]);
+			array_unshift($tables_for_dump, 'spip_rubriques');
+		}
+		if ($t = array_search('spip_articles', $tables_for_dump)) {
+			unset($tables_for_dump[$t]);
+			array_unshift($tables_for_dump, 'spip_articles');
+		}
 	}
 	  
 	// concatenation des fichiers crees a l'appel precedent
@@ -102,9 +108,10 @@ function exec_export_all_dist()
 	if ($rub) {
 		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
 		$les_rubriques = complete_fils(array($rub));
+		$les_meres  = complete_secteurs(array($rub));
 	} else {
 		$GLOBALS['chercher_logo'] = false;
-		$les_rubriques = '';
+		$les_rubriques = $les_meres = '';
 	}
 
 	foreach($tables_for_dump as $table){
@@ -113,7 +120,7 @@ function exec_export_all_dist()
 		  echo_flush( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
 		  if (!$r) echo_flush( _T('texte_vide'));
 		  else
-		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques, $rub, $meta);
+		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques, $les_meres, $rub, $meta);
 		  $sous_etape = 0;
 		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
 		  $tables_sauvegardees[$table] = 1;
@@ -131,26 +138,25 @@ function exec_export_all_dist()
 	echo_flush(install_fin_html());
 }
 
-/* A reutiliser
+
 // http://doc.spip.org/@complete_secteurs
 function complete_secteurs($les_rubriques)
 {
+	$res = array();
 	foreach($les_rubriques as $r) {
 		do {
 			$r = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$r");
 			$r = sql_fetch($r);
 			if ($r AND $r = $r['id_parent']) {
-				if (isset($les_rubriques[$r]))
+				if ((isset($les_rubriques[$r])) OR isset($res[$r]))
 					$r = false;
-				else  $les_rubriques[$r] = $r;
+				else  $res[$r] = $r;
 			}
 		} while ($r);
 	}
-	return $les_rubriques;
+	return $res;
 }
-*/
 
-// http://doc.spip.org/@complete_fils
 function complete_fils($rubriques)
 {
 	$r = $rubriques;
