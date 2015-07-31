@@ -97,70 +97,72 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 			$id_auteur = $row['id_auteur'];
 			$date = $row['date'];
 			$id_article = $row['id_article'];
-			$statut = $row['statut'];
-			$titre = typo($row['titre']);
-			
-			// l'id_auteur peut etre un numero IP (edition anonyme)
-			if ($row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
-				$nom = typo($row_auteur["nom"]);
-				$email = $row_auteur['email'];
-			} else {
-				$nom = $id_auteur;
-				$email = '';
-			}
-	
-			if (!$rss) {
-				$logo_statut = "puce-".puce_statut($statut).".gif";
-				$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
-	
-				$revisions .= "<span class='arial2'>";
-				if (!$court) $revisions .= bouton_block_visible("$id_version-$id_article-$id_auteur");
-				$revisions .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
-				$revisions .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
-				$revisions .= "</span>";
-				$revisions .= "<span class='arial1'$dir_lang>";
-				$revisions .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
-				if (strlen($nom)>0) $revisions .= "($nom)";
-				$revisions .= "</span>";
-			} else {
-				$item = array(
-					'title' => $titre,
-					'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
-					'date' => $date,
-					'author' => $nom,
-					'email' => $email
-				);
-			}
-
-			// "court" n'affiche pas les modifs
-			if (!$court) {
-				$textes = revision_comparee($id_article, $id_version, 'diff');
-				if (!$rss)
-					$revisions .= debut_block_visible("$id_version-$id_article-$id_auteur");
-
-				if (is_array($textes))
-				foreach ($textes as $var => $t) {
-					if (strlen($t) > 0) {
-						if (!$rss) $revisions .= "<blockquote class='serif1'>";
-						$aff = propre_diff($t);
-						if ($GLOBALS['les_notes']) {
-							$aff .= '<p>'.$GLOBALS['les_notes'];
-							$GLOBALS['les_notes'] = '';
-						}
-						if (!$rss) {
-							$revisions .= $aff;
-							$revisions .= "</blockquote>";
-						} else
-							$item['description'] = $aff;
-					}
+			if (autoriser('voir','article',$id_article)){
+				$statut = $row['statut'];
+				$titre = typo($row['titre']);
+				
+				// l'id_auteur peut etre un numero IP (edition anonyme)
+				if ($row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
+					$nom = typo($row_auteur["nom"]);
+					$email = $row_auteur['email'];
+				} else {
+					$nom = $id_auteur;
+					$email = '';
 				}
-				if (!$rss) $revisions .= fin_block();
+		
+				if (!$rss) {
+					$logo_statut = "puce-".puce_statut($statut).".gif";
+					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
+		
+					$revisions .= "<span class='arial2'>";
+					if (!$court) $revisions .= bouton_block_visible("$id_version-$id_article-$id_auteur");
+					$revisions .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
+					$revisions .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+					$revisions .= "</span>";
+					$revisions .= "<span class='arial1'$dir_lang>";
+					$revisions .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
+					if (strlen($nom)>0) $revisions .= "($nom)";
+					$revisions .= "</span>";
+				} else {
+					$item = array(
+						'title' => $titre,
+						'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
+						'date' => $date,
+						'author' => $nom,
+						'email' => $email
+					);
+				}
+	
+				// "court" n'affiche pas les modifs
+				if (!$court) {
+					$textes = revision_comparee($id_article, $id_version, 'diff');
+					if (!$rss)
+						$revisions .= debut_block_visible("$id_version-$id_article-$id_auteur");
+	
+					if (is_array($textes))
+					foreach ($textes as $var => $t) {
+						if (strlen($t) > 0) {
+							if (!$rss) $revisions .= "<blockquote class='serif1'>";
+							$aff = propre_diff($t);
+							if ($GLOBALS['les_notes']) {
+								$aff .= '<p>'.$GLOBALS['les_notes'];
+								$GLOBALS['les_notes'] = '';
+							}
+							if (!$rss) {
+								$revisions .= $aff;
+								$revisions .= "</blockquote>";
+							} else
+								$item['description'] = $aff;
+						}
+					}
+					if (!$rss) $revisions .= fin_block();
+				}
+				
+				if (!$rss) $revisions .= "</div>";
+	
+				if ($rss)
+					$items[] = $item;
 			}
-			
-			if (!$rss) $revisions .= "</div>";
-
-			if ($rss)
-				$items[] = $item;
 		}		
 		if (!$rss) $revisions .= "</div>";
 	}

@@ -723,7 +723,9 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 
 	$q = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 	$t = '';
-	while ($r = spip_fetch_array($q)) $t .= $formater($r);
+	while ($r = spip_fetch_array($q))
+		if (autoriser('voir','article',$r['id_article']))
+			$t .= $formater($r);
 	spip_free_result($q);
 
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
@@ -897,53 +899,54 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$vals = '';
 
 	$id_breve = $row['id_breve'];
-	$tous_id[] = $id_breve;
-	$date_heure = $row['date_heure'];
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-	$statut = $row['statut'];
-	if (isset($row['lang']))
-	  changer_typo($lang = $row['lang']);
-	else $lang = $langue_defaut;
-	$id_rubrique = $row['id_rubrique'];
-			
-	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && autoriser('publierdans','rubrique',$id_rubrique)));
-
-	$s = "\n<div>";
-	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
-	if ($voir_logo) {
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			include_spip('inc/filtres_images');
-			$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
-			if ($logo)
-				$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
+	if (autoriser('voir','breve',$id_breve)){
+		$tous_id[] = $id_breve;
+		$date_heure = $row['date_heure'];
+		$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+		$statut = $row['statut'];
+		if (isset($row['lang']))
+		  changer_typo($lang = $row['lang']);
+		else $lang = $langue_defaut;
+		$id_rubrique = $row['id_rubrique'];
+				
+		$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && autoriser('publierdans','rubrique',$id_rubrique)));
+	
+		$s = "\n<div>";
+		$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
+		if ($voir_logo) {
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				include_spip('inc/filtres_images');
+				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
+				if ($logo)
+					$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
+			}
+		}
+		$s .= typo($titre);
+		if ($afficher_langue AND $lang != $langue_defaut)
+			$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
+		$s .= "</a>";
+	
+	
+		$s .= "</div>";
+		$vals[] = $s;
+	
+		$s = "";
+		if ($affrub) {
+			$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$id_rubrique = $rub['id_rubrique'];
+			$s .= "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style=\"display:block;\">".typo($rub['titre'])."</a>";
+		} else if ($statut != "prop")
+				$s = affdate_jourcourt($date_heure);
+			else
+				$s .= _T('info_a_valider');
+		$vals[] = $s;
+				
+		if ($options == "avancees") {
+			$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
 		}
 	}
-	$s .= typo($titre);
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
-	$s .= "</a>";
-
-
-	$s .= "</div>";
-	$vals[] = $s;
-
-	$s = "";
-	if ($affrub) {
-		$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$id_rubrique = $rub['id_rubrique'];
-		$s .= "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style=\"display:block;\">".typo($rub['titre'])."</a>";
-	} else if ($statut != "prop")
-			$s = affdate_jourcourt($date_heure);
-		else
-			$s .= _T('info_a_valider');
-	$vals[] = $s;
-			
-	if ($options == "avancees") {
-		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
-	}
-			
 	return $vals;
 }
 
