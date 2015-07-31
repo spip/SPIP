@@ -296,7 +296,7 @@ function fin_boite_info($return=false) {
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
-	return "\n<div>&nbsp;</div>"
+	return "\n"
 	. creer_colonne_droite('',true)
 	. debut_cadre_enfonce('',true)
 	. (($spip_display != 4)
