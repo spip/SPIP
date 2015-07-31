@@ -327,7 +327,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 }
 .formulaire_editer li {
 	margin: 0;
-	padding: 10px 10px 10px 130px;
+	padding: 10px 10px 10px 10px;
+	padding-#GET{left}:130px;
 	clear:both;
 	overflow:auto;
 	border-top: 1px solid #[(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
@@ -339,7 +340,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 .formulaire_editer input.password,
 .formulaire_editer textarea,
 .formulaire_editer select {
-	width: 90%;
+	width: 96%;
 	font-size:1em;
 	margin:0;
 }
@@ -375,9 +376,9 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 	padding:0 0 5px 0;
 	border:0;
 }
-.formulaire_editer ul fieldset {
-	border:1px solid #888;
-	background:white;
+.formulaire_editer li fieldset {
+	border:1px #aaa dashed;
+	background:transparent;
 	margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */
 }
 .formulaire_editer fieldset legend {
@@ -386,13 +387,19 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 	font-style:italic;
 	font-size:1.2em;
 }
-.formulaire_editer ul fieldset legend {
+.formulaire_editer li fieldset legend {
 	font-style:normal;
 	font-size:1em;
-	margin-#GET{left}:10px;
-	border:1px solid #888;
-	background:white;
+	margin-#GET{left}:0px;
+	background:#GET{claire};
 	line-height:0.6em;
+}
+.formulaire_editer li fieldset h3.legend {
+	font-size:1.1em;
+	color:#333;
+	margin-top:0;
+	background:#GET{claire};
+	padding:2px 5px;
 }
 
 /* champ des radio/checkbox
@@ -403,12 +410,12 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 *  pour l'avoir horizontale, il faut specifier :
 *  .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_editer .champ label{float:none; margin-left:5px; display:inline;}
-.formulaire_editer .champ input.radio,
-.formulaire_editer .champ input.checkbox {width:auto;}
+.formulaire_editer .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
+.formulaire_editer .choix input.radio,
+.formulaire_editer .choix input.checkbox {width:auto;}
 
 /* icone d'aide */
-.formulaire_editer li em.aide { float:right;margin-right:1px;}
+.formulaire_editer li em.aide { float:right;margin-right:-10px;}
 
 /* boutons */
 .formulaire_editer .boutons {

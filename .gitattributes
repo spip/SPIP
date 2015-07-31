@@ -12,6 +12,8 @@ dist/formulaires/editer_auteur.html -text
 dist/formulaires/editer_auteur.php -text
 dist/formulaires/editer_breve.html -text
 dist/formulaires/editer_breve.php -text
+dist/formulaires/editer_groupe_mot.html -text
+dist/formulaires/editer_groupe_mot.php -text
 dist/formulaires/editer_mot.html -text
 dist/formulaires/editer_mot.php -text
 dist/formulaires/editer_rubrique.html -text
@@ -326,6 +328,7 @@ dist/prive/contenu/site.html -text
 dist/prive/editer/article.html -text
 dist/prive/editer/auteur.html -text
 dist/prive/editer/breve.html -text
+dist/prive/editer/groupe_mot.html -text
 dist/prive/editer/mot.html -text
 dist/prive/editer/rubrique.html -text
 dist/prive/editer/site.html -text
@@ -458,6 +461,7 @@ ecrire/action/editer_article.php -text
 ecrire/action/editer_auteur.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
+ecrire/action/editer_groupe_mot.php -text
 ecrire/action/editer_message.php -text
 ecrire/action/editer_mot.php -text
 ecrire/action/editer_mots.php -text

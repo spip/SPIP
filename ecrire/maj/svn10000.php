@@ -133,4 +133,12 @@ $GLOBALS['maj'][11911] = array(array('maj_11911'));
 // penser a ajouter ici destruction des tables spip_documents_articles etc
 // une fois qu'on aura valide la procedure d'upgrade ci-dessus
 
+$GLOBALS['maj'][11918] = array(
+array('sql_alter',"TABLE spip_groupes_mots ADD tables text DEFAULT '' NOT NULL AFTER obligatoire"),
+array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'articles,')"),"articles='oui'"),
+array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'breves,')"),"breves='oui'"),
+array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'rubriques,')"),"rubriques='oui'"),
+array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'syndic,')"),"syndic='oui'"),
+);
+
 ?>
