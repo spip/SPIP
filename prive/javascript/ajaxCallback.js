@@ -32,7 +32,7 @@ if(!jQuery.load_handlers) {
 				params = null;
 			}
 		}
-		var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status);};
+		var callback2 = function(res,status) {triggerAjaxLoad(this);callback.call(this,res,status);};
 
 		return this._ACBload( url, params, callback2 );
 	};
