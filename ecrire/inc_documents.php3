@@ -386,14 +386,16 @@ function integre_image($id_document, $align, $type_aff) {
 //
 // Traitement des images et documents <IMGxx|right> pour inc_texte
 //
-function inserer_documents($letexte, $matches) {
+function inserer_documents($letexte) {
 	# HACK: empecher les boucles infernales lorsqu'un document est mentionne
 	# dans son propre descriptif (on peut citer un document dans un autre,
 	# mais il faut pas trop pousser...)
 	static $pile = 0;
 	if (++$pile > 5) return '';
 
-	foreach ($matches as $match) {
+	foreach (
+	preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)
+	as $match) {
 		$type = strtoupper($match[1]);
 		if ($type == 'EMB')
 			$rempl = embed_document($match[2], $match[4]);

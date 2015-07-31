@@ -476,9 +476,9 @@ function typo($letexte, $echapper=true) {
 	//
 	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
 	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
+	if (preg_match(__preg_img, $letexte)) {
 		include_ecrire('inc_documents');
-		$letexte = inserer_documents($letexte, $matches);
+		$letexte = inserer_documents($letexte);
 	}
 
 	// Appeler les fonctions de post-traitement
