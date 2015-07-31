@@ -99,9 +99,11 @@ function balise_PUCE_dist($p) {
 // http://www.spip.net/fr_article1971.html
 // http://doc.spip.org/@balise_DATE_dist
 function balise_DATE_dist ($p) {
-	$_date = champ_sql('date', $p);
-	$p->code = "$_date";
-	$p->interdire_scripts = false;
+	$d = champ_sql('date', $p);
+#	if ($d === "@\$Pile[0]['date']")
+#		$d = "isset(\$Pile[0]['date']) ? $d : time()";
+	$p->code = "normaliser_date($d)";
+	spip_log("balise_DATE retourne $d");
 	return $p;
 }
 
@@ -109,8 +111,10 @@ function balise_DATE_dist ($p) {
 // http://www.spip.net/fr_article1971.html
 // http://doc.spip.org/@balise_DATE_REDAC_dist
 function balise_DATE_REDAC_dist ($p) {
-	$_date = champ_sql('date_redac', $p);
-	$p->code = "$_date";
+	$d = champ_sql('date_redac', $p);
+#	if ($d === "@\$Pile[0]['date_redac']")
+#		$d = "isset(\$Pile[0]['date_redac']) ? $d : time()";
+	$p->code = "normaliser_date($d)";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -1053,20 +1057,20 @@ function balise_INCLURE_dist($p) {
 			unset($_contexte['env']);
 		} else $flag_env = false;
 
-		$l = 'array(' . join(",\n\t", $_contexte) .')';
-		if ($flag_env) {
-			$l = "array_merge(\$Pile[0],$l)";
-		}
+		$_l = 'array(' . join(",\n\t", $_contexte) .')';
+		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
 
-		$connect = !$id_boucle ? '' 
-		  : $p->boucles[$id_boucle]->sql_serveur;
+		$_connect = _q(!$id_boucle ? '' : $p->boucles[$id_boucle]->sql_serveur);
 
-		$page = '$p = evaluer_fond("", $l = ' . $l. ", " . _q($connect) .')';
+		$page = $p->etoile
+		  ? "evaluer_fond('', \$l = $_l, $_connect)"
+		  : "recuperer_fond('',\$l =  $_l, array('raw'=>true), $_connect)";
+
 		$retour = !isset($_contexte['ajax']) ? 
 		  "\$p['texte']" :
 		  'encoder_contexte_ajax($l,"",$p["texte"])';
 
-		$p->code = "(!($page) ? '' :\n\t$retour)";
+		$p->code = "(!(\$p = $page) ? '' :\n\t$retour)";
 
 	} else {
 		$n = interprete_argument_balise(1,$p);

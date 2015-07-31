@@ -1428,6 +1428,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	$pages = array();
 	if (isset($contexte['fond']))
 		$fond = $contexte['fond'];
+
 	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
 	if (!isset($contexte['lang']))
 		$contexte['lang'] = $GLOBALS['spip_lang'];
@@ -1435,6 +1436,16 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	if ($contexte['lang'] != $GLOBALS['meta']['langue_site']) {
 		$lang_select = lang_select($contexte['lang']);
 	} else $lang_select ='';
+
+	// idem pour les dates
+	include_spip('inc/filtres'); // pour normaliser_date
+	if (!isset($contexte['date']))
+		$contexte['date'] = date("Y-m-d H:i:s");
+	else $contexte['date'] = normaliser_date($contexte['date']);
+
+	if (!isset($contexte['date_redac']))
+		$contexte['date_redac'] = date("Y-m-d H:i:s");
+	else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
 
 	@$GLOBALS['_INC_PUBLIC']++;
 
