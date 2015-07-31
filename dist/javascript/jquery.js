@@ -493,7 +493,7 @@ jQuery.extend({
 		data = jQuery.trim( data );
 		if ( data ) {
 			if ( window.execScript )
-				window.execScript( data );
+				window.execScript( data.replace(/^<!--.*/,"") );
 			else if ( jQuery.browser.safari )
 				// safari doesn't provide a synchronous global eval
 				window.setTimeout( data, 0 );
