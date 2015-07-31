@@ -76,14 +76,14 @@
 <!ELEMENT necessite EMPTY>
 <!ATTLIST necessite
           id %NAME; #REQUIRED
-          version %VNUM; #IMPLIED
+          version %INTERVAL; #IMPLIED
           src %URI; #IMPLIED
 >
 
 <!ELEMENT utilise EMPTY>
 <!ATTLIST utilise
           id %NAME; #REQUIRED
-          version %VNUM; #IMPLIED
+          version %INTERVAL; #IMPLIED
 >
 
 <!ELEMENT pipeline (action|nom|inclure)*>
