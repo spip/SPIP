@@ -1083,7 +1083,15 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)){
 		list(, $table, $col) = $r;
 		$col_alias = $col;
-		$table = trouver_jointure_champ($col, $boucle, array($table), ($crit->cond OR $op!='='));
+
+		$trouver_table = charger_fonction('trouver_table','base');
+		if ($desc = $trouver_table($table, $boucle->sql_serveur)
+		  AND isset($desc['field'][$col])
+		  AND $cle = array_search($desc['table'],$boucle->from))
+			$table = $cle;
+		else {
+			$table = trouver_jointure_champ($col, $boucle, array($table), ($crit->cond OR $op!='='));
+		}
 		#$table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op!='='), true);
 		if (!$table) return '';
 	}
