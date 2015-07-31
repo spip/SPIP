@@ -542,15 +542,15 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$id_rubrique = $row['id_rubrique'];
 			switch ($statut) {
 			case 'prop':
-				$puce = "puce-blanche";
+				$puce = "puce-blanche-breve";
 				$title = _T('titre_breve_proposee');
 				break;
 			case 'publie':
-				$puce = "puce-verte";
+				$puce = "puce-verte-breve";
 				$title = _T('titre_breve_publiee');
 				break;
 			case 'refuse':
-				$puce = "puce-rouge";
+				$puce = "puce-rouge-breve";
 				$title = _T('titre_breve_refusee');
 				break;
 			}
