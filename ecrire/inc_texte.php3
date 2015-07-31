@@ -144,12 +144,12 @@ function echappe_html($letexte,$source) {
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 
-		if ($code = $regs[1]) {
+		if ($regs[1]) {
 			// Echapper les <html>...</ html>
 			$les_echap[$num_echap] = $regs[2];
 		}
 		else
-		if ($code = $regs[4]) {
+		if ($regs[4]) {
 			// Echapper les <code>...</ code>
 			$lecode = entites_html($regs[5]);
 
@@ -162,7 +162,7 @@ function echappe_html($letexte,$source) {
 			$les_echap[$num_echap] = "<tt>".$lecode."</tt>";
 		}
 		else
-		if ($cadre = $regs[7]) {
+		if ($regs[7]) {
 			// Echapper les <cadre>...</cadre>
 			$lecode = trim(entites_html($regs[8]));
 			$total_lignes = count(explode("\n", $lecode)) + 1;
