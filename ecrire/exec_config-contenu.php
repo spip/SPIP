@@ -45,7 +45,7 @@ debut_gauche();
 
 debut_droite();
 
- echo generer_url_post_ecrire("config-contenu");
+ echo generer_url_post_ecrire("config_contenu");
  echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
