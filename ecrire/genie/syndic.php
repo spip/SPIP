@@ -239,7 +239,8 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		array(
 			$le_lien,
 			$now_id_syndic,
-			$data
+			$data,
+			$ajout
 		)
 	);
 
