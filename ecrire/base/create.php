@@ -33,13 +33,11 @@ function creer_base($serveur='') {
 
 	foreach($tables_auxiliaires as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], false, false, $serveur);
-
-	creer_base_types_doc($tables_principales['spip_types_documents'], $serveur);
 }
 
 
 // http://doc.spip.org/@creer_base_types_doc
-function creer_base_types_doc($desc, $serveur='') {
+function creer_base_types_doc($serveur='') {
 	global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 	// Init ou Re-init ==> replace pas insert
 
@@ -53,12 +51,13 @@ function creer_base_types_doc($desc, $serveur='') {
 		      $titre = $tables_documents[$extension];
 		    else  $titre = '';
 		}
+
 		$freplace('spip_types_documents',
 			  array('mime_type' => $type_mime,
 				'titre' => $titre,
 				'inclus' => $inclus,
 				'extension' => $extension),
-			  $desc, $serveur);
+			  '', $serveur);
 	}
 }
 ?>
