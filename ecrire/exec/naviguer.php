@@ -59,14 +59,14 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 		   $id_rubrique);
 
 	echo debut_grand_cadre(true);
-	if ($id_rubrique  > 0) 
+	if ($id_rubrique  > 0)
 		echo afficher_hierarchie($id_parent,_T('titre_cadre_interieur_rubrique'),$id_rubrique,'rubrique',$id_secteur,(!$GLOBALS['connect_toutes_rubriques']));
 	else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
-	
+
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);
-	
+
 	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
 
 	if ($flag_editable AND !$id_parent) {
@@ -85,7 +85,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 
 	echo creer_colonne_droite('', true);
 	echo raccourcis_naviguer($id_rubrique, $id_parent);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 	echo debut_droite('', true);
 
 	$haut = montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable);
@@ -110,17 +110,17 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
-	$onglet_proprietes = 
+	$onglet_proprietes =
 		$editer_mots
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	;
 
-	$onglet_contenu = 
+	$onglet_contenu =
 		$afficher_contenu_objet('rubrique', $id_rubrique,$id_rubrique)
 		. (_INTERFACE_ONGLETS? $boucles:"");
 
-	$onglet_enfants = 
+	$onglet_enfants =
 	  afficher_enfant_rub($id_rubrique, false, true)
 	  .(_INTERFACE_ONGLETS?"":
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
@@ -131,10 +131,10 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
 
-	$onglet_documents = 
+	$onglet_documents =
 		($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	;
-	
+
 	if ($n_forums)
 	  $onglet_interactivite = icone_inline(_T('icone_suivi_forum', array('nb_forums' => $n_forums)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "", 'center');
 	else $onglet_interactivite = "";
@@ -144,11 +144,11 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 		$haut.
 		(_INTERFACE_ONGLETS?
 		 afficher_onglets_pages(array(
-			'sousrub'=>_L('Sous-rubriques'),
-			'voir' =>_L('Contenu'),
-			'props' => _L('Propri&eacute;t&eacute;s'),
-			'docs' => _L('Documents'),
-			'interactivite' => _L('Interactivit&eacute;')),
+			'sousrub'=> _T('onglet_sous_rubriques'),
+			'voir' => _T('onglet_contenu'),
+			'props' => _T('onglet_proprietes'),
+			'docs' => _T('onglet_documents'),
+			'interactivite' => _T('onglet_interactivite')),
 					array(
 			'voir'=>$onglet_contenu,
 			'sousrub'=>$onglet_enfants,
@@ -180,7 +180,7 @@ function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 	$res = "";
 	while ($row = sql_fetch($q)) {
 		$id = $row['id_auteur'];
-		$res .= 
+		$res .=
 			http_img_pack('admin-12.gif','','') .
 			    " <a href='" . generer_url_ecrire('auteur_infos', "id_auteur=$id") .
 				"'>" .
@@ -199,12 +199,12 @@ function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
-	
+
 	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", false);
-	
+
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
 		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", false);
@@ -232,7 +232,7 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		if ($id_parent) {
 			$row = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_parent");
 			$langue_parent = $row['lang'];
-		} 
+		}
 		if (!$langue_parent)
 			$langue_parent = $GLOBALS['meta']['langue_site'];
 		if (!$langue_rubrique)
@@ -309,14 +309,14 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		//
 		if ($GLOBALS['meta']['activer_sites'] != 'non'
 		AND autoriser('publierdans','rubrique',$id_rubrique)) {
-	
+
 			$res .= afficher_objets('site','<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 		}
 
 		// Les articles syndiques en attente de validation
-		if ($id_rubrique == 0 
+		if ($id_rubrique == 0
 		AND autoriser('publierdans','rubrique',$id_rubrique)) {
-	
+
 			$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
 			if ($cpt)
 				$res .= "<br /><small><a href='" .
@@ -339,7 +339,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
-	
+
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
 		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", $spip_lang_right)
@@ -349,7 +349,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 	}
-	
+
 	//////////  Les articles en cours de redaction
 	/////////////////////////
 
@@ -437,7 +437,7 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 	else
 		$actions = ''; // rubrique non editable
 
-	return 
+	return
 	  "<div class='bandeau_actions'>$actions</div>" .
 	  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 	  http_img_pack("admin-12.gif",'', "width='12' height='12'",

@@ -72,7 +72,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$date_redac = $row["date_redac"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
-	
+
 	$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' :
 		chapo_redirige(substr($row["chapo"], 1));
 
@@ -114,7 +114,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
-	
+
 	$extra = creer_colonne_droite('', true)
 		. $meme_rubrique($id_rubrique, $id_article, 'article')
 	  . pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
@@ -122,8 +122,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	// affecter les globales dictant les regles de typographie de la langue
 	changer_typo($row['lang']);
-	
-	$actions = 
+
+	$actions =
 	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
 
 	$haut =
@@ -147,20 +147,20 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 
 	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
-	
 
-	return 
+
+	return
 	  $navigation
-	  . $extra 
+	  . $extra
 	  . "<div class='fiche_objet'>"
-	  . $haut 
+	  . $haut
 	  . afficher_onglets_pages(
 	  	array(
-	  	'voir' =>_L('Contenu'),
-	  	'props' => _L('Propri&eacute;t&eacute;s'),
-	  	'docs' => _L('Documents'),
-	  	'interactivite' => _L('Interactivit&eacute;'),
-	  	'discuter' => _L('Discuter')),
+	  	'voir' => _T('onglet_contenu'),
+	  	'props' => _T('onglet_proprietes'),
+	  	'docs' => _T('onglet_documents'),
+	  	'interactivite' => _T('onglet_interactivite'),
+	  	'discuter' => _T('onglet_discuter')),
 	  	array(
 	    'props'=>$onglet_proprietes,
 	    'voir'=>$onglet_contenu,
@@ -246,7 +246,7 @@ function boites_de_config_articles($id_article)
 	. aide('confforums')
 	. "</b>";
 
-	return 
+	return
 		cadre_depliable("forum-interne-24.gif",
 		  $invite,
 		  true,//$visible = strstr($masque, '<!-- visible -->')

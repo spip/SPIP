@@ -59,7 +59,7 @@ function exec_config_contenu_dist()
 	 */
 
 
-	echo "<h3>"._L('Sur le site public')."</h3>\n";
+	echo "<h3>"._T('titre_config_contenu_public')."</h3>\n";
 
 	// Mode de participation aux forums
 	echo $participants();
@@ -82,7 +82,7 @@ function exec_config_contenu_dist()
 	 *
 	 */
 
-	echo "<h3>"._L('Dans l&#8217;espace priv&#233;')."</h3>\n";
+	echo "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
 
 	// Forums prives
 	echo $forums_prives();
@@ -95,7 +95,7 @@ function exec_config_contenu_dist()
 	 * mails automatiques
 	 *
 	 */
-	echo "<h3>"._L('Notifications')."</h3>\n";
+	echo "<h3>"._T('titre_config_contenu_notifications')."</h3>\n";
 
 	echo  $annonces(), "<br />\n";
 	echo  $notifications_forum(), "<br />\n";

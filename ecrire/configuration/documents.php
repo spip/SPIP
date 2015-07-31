@@ -27,7 +27,7 @@ function configuration_documents_dist(){
 	$res .= _T('texte_documents_joints');
 	$res .= _T('texte_documents_joints_2');
 	$res .= "</td></tr>";
-	
+
 	$res .= "<tr>";
 	$res .= "<td align='$spip_lang_left' class='verdana2'>";
 	$res .= afficher_choix('documents_article',
@@ -42,13 +42,13 @@ function configuration_documents_dist(){
 	$res .= "<br /><br />\n";
 	$res .= afficher_choix('documents_date',
 		$GLOBALS['meta']["documents_date"],
-		array('oui' => _L('Pouvoir s&eacute;lectionner la date de mise en ligne de chaque document'),
-			'non' => _L('Ne pas pouvoir changer manuellement la date des documents')), "<br />\n");
+		array('oui' => _T('item_autoriser_selectionner_date_en_ligne'),
+			'non' => _T('item_non_autoriser_selectionner_date_en_ligne')), "<br />\n");
 	$res .= "</td></tr>";
 	$res .= "</table>\n";
 
 	$res = debut_cadre_trait_couleur("doc-24.gif", true, "", _T('titre_documents_joints'))
-	. ajax_action_post('configurer', 'documents', 'configuration','',$res) 
+	. ajax_action_post('configurer', 'documents', 'configuration','',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-documents', '', $res);

@@ -33,15 +33,13 @@ function configuration_notifications_forum_dist()
 	}
 
 	$res = "<div class='verdana2'>"
-#		. _T('info_option_email')
-# leger changement du texte 
-	  . _L('Lorsqu\'un visiteur du site poste un nouveau message dans le forum associ&eacute; &agrave; un article, les auteurs de l\'article peuvent &ecirc;tre pr&eacute;venus de ce message par e-mail. Indiquer pour chaque type de forum s\'il faut utiliser cette option.')
+		. _T('info_option_email')
 	  . "<br /><br />"
-	  . $res 
+	  . $res
 	  . "</div>\n";
 
 	$res = debut_cadre_trait_couleur("mail-forum-24.gif", true, "", _T('info_envoi_forum'))
-	. ajax_action_post('configurer_notifications_forum', 0, 'config_contenu','',$res) 
+	. ajax_action_post('configurer_notifications_forum', 0, 'config_contenu','',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer_notifications_forum', 0, $res);

@@ -52,14 +52,14 @@ function configuration_contenu_forums_dist(){
 	. "</td></tr>\n"
 
 	. "<tr>"
-	. "<td align='$spip_lang_left' class='verdana2'>"
-	. _L('- avec sa barre d\'outil ?')
+	. "<td align='$spip_lang_left' class='verdana2'>- "
+	. _T('info_barre_outils')
 	. "</td>"
 	. "<td align='$spip_lang_left' class='verdana2'>"
 	. afficher_choix('forums_afficher_barre', $forums_afficher_barre,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
 	. "</td></tr>\n"
-	
+
 	. "<tr>"
 	. "<td align='$spip_lang_left' class='verdana2'>"
 	. _T('info_urlref')
@@ -72,10 +72,10 @@ function configuration_contenu_forums_dist(){
 
 	. "<tr>"
 	. "<td align='$spip_lang_left' class='verdana2' colspan='2'>"
-	. _L('Souhaitez-vous autoriser les visiteurs &#224; joindre des documents (images, sons...) &#224; leurs messages de forums&nbsp;?')
+	. _T('info_question_visiteur_ajout_document_forum')
 	. "<div class='spip_xx-small'>"
-	. _L('Le cas &#233;ch&#233;ant, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).')
-	.'</div>'
+	. _T('info_question_visiteur_ajout_document_forum_format')
+	. "</div>"
 	. "<input type='text' name='formats_documents_forum' id='formats_documents_forum' size='40' class='forml' value=\""
 		.entites_html($GLOBALS['meta']['formats_documents_forum'])
 		."\" />"

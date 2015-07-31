@@ -69,13 +69,13 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
-	
+
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
 	echo fin_grand_cadre(true);
-	
+
 	echo debut_gauche('', true);
-	
+
 	echo debut_boite_info(true)
 	  . pipeline ('boite_infos', array('data' => '',
 		'args' => array(
@@ -126,9 +126,9 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 
 	$onglet_contenu = $afficher_contenu_objet('breve', $id_breve,$id_rubrique);
 
-	
 
-	$onglet_proprietes = 
+
+	$onglet_proprietes =
 		afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 		. ($dater
 			? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure)
@@ -143,27 +143,27 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		  ;
 
 	$onglet_documents = "";
-	
+
 	$onglet_interactivite = "";
-		
+
 	$discuter = charger_fonction('discuter', 'inc');
 	$onglet_discuter = $discuter($id_breve, 'breves_voir', 'id_breve');
 
 	echo debut_droite('', true)
 	  . "<div class='fiche_objet'>"
-	  . $haut 
+	  . $haut
 	  . afficher_onglets_pages(array(
-	  	'voir' =>_L('Contenu'),
-	  	'props' => _L('Propri&eacute;t&eacute;s'),
-	  	'docs' => _L('Documents'),
-	  	'interactivite' => _L('Interactivit&eacute;'),
-	  	'discuter' => _L('Discuter')),
+	  	'voir' => _T('onglet_contenu'),
+	  	'props' => _T('onglet_proprietes'),
+	  	'docs' => _T('onglet_documents'),
+	  	'interactivite' => _T('onglet_interactivite'),
+	  	'discuter' => _T('onglet_discuter')),
 	  _INTERFACE_ONGLETS?
 	  array(
 	    'props'=>$onglet_proprietes,
 	    'voir'=>$onglet_contenu,
 	    'docs'=>$onglet_documents,
-	    'interactivite'=>$onglet_interactivite,	    
+	    'interactivite'=>$onglet_interactivite,
 	    'discuter'=>$onglet_discuter)
 	    :
 	  array(
@@ -185,13 +185,13 @@ function langue_breve($id_breve, $row){
 	//
 	$row2 = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_rubrique");
 	$langue_parent = $row2['lang'];
-	
+
 	$langue_breve = $row['lang'];
-	
+
 	$res = "";
 	$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
 	$res .= debut_cadre_enfonce('langues-24.gif',true,'',$bouton);
-	
+
 	$res .= debut_block_depliable(false,'languesbreve');
 	$res .= "<div class='langue'>";
 
@@ -203,7 +203,7 @@ function langue_breve($id_breve, $row){
 	$res .= redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);
 	$res .= "</div>\n";
 	$res .= fin_block();
-	
+
 	$res .= fin_cadre_enfonce(true);
 	return $res;
 }
@@ -216,21 +216,21 @@ function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 	global $spip_lang_right;
 	$aider = charger_fonction('aider', 'inc');
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	
+
 	$form = $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 	if (strpos($form,'<select')!==false) {
 		$form .= "<div style='text-align: $spip_lang_right;'>"
 			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
 			. "</div>";
 	}
-	
+
 	$form = generer_action_auteur('editer_breve', $id_breve, generer_url_ecrire('breves_voir'), $form, " method='post' class='submit_plongeur'"	);
 
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	else $logo = "secteur-24.gif";
 
-	return 
+	return
 		debut_cadre_couleur($logo, true, "",_T('entree_interieur_rubrique').$aider ("brevesrub"))
 		. $form
 		. fin_cadre_couleur(true);

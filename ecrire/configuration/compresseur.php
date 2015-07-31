@@ -25,27 +25,24 @@ function configuration_compresseur_dist()
 	if (!function_exists('ob_gzhandler')) {
 		$GLOBALS['meta']['auto_compress_http'] = 'non';
 	} else {
-		$res .= debut_cadre_relief("", true, "", _L('Compression du flux HTTP'))
+		$res .= debut_cadre_relief("", true, "", _T('titre_compresser_flux_http'))
 			.  "<p class='verdana2'>"
-			. _L("SPIP peut compresser automatiquement chaque page qu'il envoie aux
-visiteurs du site. Ce r&#233;glage permet d'optimiser la bande passante (le
-site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
-demande plus de puissance au serveur.")
+			. _T('texte_compresseur_page')
 			. "</p>"
 			. "<p class='verdana2'>"
-			. _L("<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@", array('testgzip' => propre('[->http://www.gidnetwork.com/tools/gzip-test.php]'))
+			. _T('info_compresseur_gzip', array('testgzip' => propre('[->http://www.gidnetwork.com/tools/gzip-test.php]'))
 			)
 			. "</p>"
 
 			. "<div class='verdana2'>"
 			. "<p class='verdana2'>"
-			. _L('Voulez-vous activer la compression du flux HTTP ?')
+			. _T('info_question_activer_compresseur')
 			. "</p>"
 			. afficher_choix('auto_compress_http',
 				($GLOBALS['meta']['auto_compress_http'] != 'non') ? 'oui' : 'non',
 				array(
-					'oui' => _T('info_compresseur_activer'),
-					'non' => _T('info_compresseur_desactiver')
+					'oui' => _T('item_compresseur'),
+					'non' => _T('item_non_compresseur')
 				)
 			)
 			. "</div>"
@@ -54,39 +51,39 @@ demande plus de puissance au serveur.")
 
 
 	// Compression des scripts et css
-	$res .= debut_cadre_relief("", true, "", _L('Compactage des scripts et CSS'))
+	$res .= debut_cadre_relief("", true, "", _T('titre_compacter_script_css'))
 		.  "<p class='verdana2'>"
-		. _L("SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l'affichage du site.")
+		. _T('texte_compacter_script_css')
 		. " "
 		. "</p>"
 
 		. "<div class='verdana2'>"
 		. "<p class='verdana2'>"
-		. _L('Souhaitez-vous activer le compactage des scripts (javascript) ?')
+		. _T('info_question_activer_compactage_js')
 		. "</p>"
 		. afficher_choix('auto_compress_js',
 			($GLOBALS['meta']['auto_compress_js'] != 'non') ? 'oui' : 'non',
 			array(
-				'oui' => _T('info_compresseur_activer'),
-				'non' => _T('info_compresseur_desactiver')
+				'oui' => _T('item_compresseur'),
+				'non' => _T('item_non_compresseur')
 			)
 		)
 		. "</div>"
 
 		. "<div class='verdana2'>"
 		. "<p class='verdana2'>"
-		. _L('Souhaitez-vous activer le compactage des feuilles de style (CSS) ?')
+		. _T('info_question_activer_compactage_css')
 		. "</p>"
 		. afficher_choix('auto_compress_css',
 			($GLOBALS['meta']['auto_compress_css'] != 'non') ? 'oui' : 'non',
 			array(
-				'oui' => _T('info_compresseur_activer'),
-				'non' => _T('info_compresseur_desactiver')
+				'oui' => _T('item_compresseur'),
+				'non' => _T('item_non_compresseur')
 			)
 		)
 		. "</div>"
 
-		. "<p><em>"._L("Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.")."</em></p>"
+		. "<p><em>"._T('texte_compacter_avertissement')."</em></p>"
 
 
 		. fin_cadre_relief(true);
@@ -171,7 +168,7 @@ mémorisés, ainsi que ceux qui sont interdits.)
 
 
 
-	$res = debut_cadre_trait_couleur("", true, "", 
+	$res = debut_cadre_trait_couleur("", true, "",
 		_T('info_compresseur_titre'))
 	.  ajax_action_post('configurer', 'compresseur', 'config_fonctions', '', $res)
 	.  fin_cadre_trait_couleur(true);

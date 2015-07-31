@@ -19,7 +19,7 @@ function install_fichier_connexion($nom, $texte)
 {
 	$texte = "<"."?php\n"
 	. "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n"
-	. $texte 
+	. $texte
 	. "?".">";
 
 	ecrire_fichier($nom, $texte);
@@ -42,7 +42,7 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 // http://doc.spip.org/@analyse_fichier_connection
 function analyse_fichier_connection($file)
 {
-  
+
 	$s = @join('', file($file));
 	if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 		array_shift($regs);
@@ -166,34 +166,34 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
 	$debut = 1; $etat = "ok";
-	$last = count($liste); 
-//	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
-	
+	$last = count($liste);
+//	$texte_etat = array('ok'=>'OK','encours'=>_T('en_cours'),'todo'=>_T('todo'));
+
 	$intitule_etat["etape_"][1] = _T('info_connexion_base_donnee');
 	$intitule_etat["etape_"][2] = _T('menu_aide_installation_choix_base');
 	$intitule_etat["etape_"][3] = _T('info_informations_personnelles');
 	$intitule_etat["etape_"][4] = _T('info_derniere_etape');
-	
+
 	$intitule_etat["etape_ldap"][1] = _T('titre_connexion_ldap');
 	$intitule_etat["etape_ldap"][2] = _T('titre_connexion_ldap');
 	$intitule_etat["etape_ldap"][3] = _T('info_chemin_acces_1');
 	$intitule_etat["etape_ldap"][4] = _T('info_reglage_ldap');
 	$intitule_etat["etape_ldap"][5] = _T('info_ldap_ok');
-	
+
 //	$aff_etapes = "<span id='etapes'>";
 
 	$aff_etapes = "<ol id='infos_etapes'>";
-	
+
 	foreach($liste as $etape=>$fichier){
 /*		if ($etape=="$phase$en_cours.php"){
 			$etat = "encours";
 		}
 		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><span>"._L('Etape')." </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
+			? "<span class='$etat'><span>"._T('etape')." </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
 			: '';
 		if ($etat == "encours")
 			$etat = 'todo';
-*/		
+*/
 		if ($debut < $last) {
 			if ($debut == $en_cours && $erreur) $class = "erreur";
 			else if ($debut == $en_cours) $class = "encours";
@@ -247,7 +247,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		$versions = spip_versions_pg();
 		$pg = !!$versions;
 	}
-	
+
 	// demander les version dispo de mysql
 	if (include_spip('req/mysql')) {
 		$versions = spip_versions_mysql();
@@ -278,13 +278,13 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	}
 
 	return generer_form_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='$etape' />" 
+	  "\n<input type='hidden' name='etape' value='$etape' />"
 	. $hidden
 	. (_request('echec')?
 			("<p><b>"._T('avis_connexion_echec_1').
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
-			
+
 	. http_script('',  'jquery.js')
 	. '<script language="javascript"><!--
 		$(document).ready(function() {
@@ -308,7 +308,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			});
 		});
 		// --></script>'
-	
+
 	. ($server_db
 		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
 			. (($predef[0])
@@ -344,7 +344,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	)
 	)
 	. '</div>'
-	
+
 	. '<div id="install_login_base_hebergeur">'
 	. ($predef[2]
 	? '<h3>'._T('install_login_base_hebergeur').'</h3>'
@@ -358,7 +358,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	)
 	)
 	. '</div>'
-	
+
 	. '<div id="install_pass_base_hebergeur">'
 	. ($predef[3]
 	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
@@ -372,7 +372,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	)
 	)
 	. '</div>'
-	
+
 	. bouton_suivant()));
 
 }

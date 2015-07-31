@@ -116,7 +116,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		  "' />" .
 		  "\n<input type='hidden' name='changer_lang' value='" .
 		  $config['langue'] .
-		  "' />")) 
+		  "' />"))
 		  . $hidden
 		  . $md5;
 
@@ -168,7 +168,7 @@ function editer_texte_recolle($texte, $att_text)
 	if ((strlen($texte)<29*1024)
 	 OR (include_spip('inc/layer') AND ($GLOBALS['browser_name']!="MSIE")) )
 	 return array($texte,"");
-	 
+
 	include_spip('inc/barre');
 	$textes_supplement = "<br /><span style='color: red'>"._T('info_texte_long')."</span>\n";
 	$nombre = 0;
@@ -360,11 +360,11 @@ function signaler_conflits_edition($conflits, $redirect='') {
 		$d = propre_diff(
 			afficher_para_modifies(afficher_diff($diff->comparer($n,$o))));
 		$diffs[] = "<h2>$champ</h2>\n"
-			. "<h3>"._L('Diff&#233;rences&nbsp;:')."</h3>\n"
+			. "<h3>"._T('info_conflit_edition_differences')."</h3>\n"
 			. "<div style='max-height:8em; overflow: auto; width:99%;'>".$d."</div>\n"
-			. "<h4>"._L('Votre version&nbsp;:')."</h4>"
+			. "<h4>"._T('info_conflit_edition_votre_version')."</h4>"
 			. display_conflit_champ($a['post'])
-			. "<h4>"._L('La version enregistr&#233;e&nbsp;:')."</h4>"
+			. "<h4>"._T('info_conflit_edition_version_enregistree')."</h4>"
 			. display_conflit_champ($a['base']);
 	}
 
@@ -388,7 +388,7 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	}
 
 	echo minipres(
-		_L('Conflit lors de l\'&#233;dition'),
+		_T('titre_conflit_edition'),
 
 		'<style>
 .diff-para-deplace { background: #e8e8ff; }
@@ -401,12 +401,12 @@ function signaler_conflits_edition($conflits, $redirect='') {
 .diff-para-deplace .diff-supprime { background: #ffb8b8; border: 1px solid #808080; }
 .diff-para-deplace .diff-deplace { background: #b8b8ff; border: 1px solid #808080; }
 </style>'
-		.'<p>'._L('Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.').'</p>'
-		.'<p>'._L('Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.').'</p>'
+		.'<p>'._T('info_conflit_edition_avis_non_sauvegarde').'</p>'
+		.'<p>'._T('texte_conflit_edition_correction').'</p>'
 		."<div style='text-align:".$GLOBALS['spip_lang_left'].";'>"
 		. join("\n",$diffs)
 		."</div>\n"
-		
+
 		. $redirect
 	);
 }

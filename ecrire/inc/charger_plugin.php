@@ -91,11 +91,11 @@ function interface_plugins_auto($retour) {
 			$titre = $info[0];
 			$url_doc = $info[1];
 			$titre = typo('<multi>'.$titre.'</multi>'); // recuperer les blocs multi du flux de la zone (temporaire?)
-			
+
 			if ($url_doc)
 				$titre = "<a href='$url_doc' title='$url_doc'>$titre</a>";
-			
-			
+
+
 			$nick = strtolower(basename($url, '.zip'));
 			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" id="url_zip_plugin_n'.$compte.'" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
 		}
@@ -103,7 +103,7 @@ function interface_plugins_auto($retour) {
 
 		$res .= "<div id='liste_plug' class='cadre-trait-couleur'>\n";
 # <select name='url_zip_plugin' id='url_zip_plugin'>
-#			."<option>"._L('choisir...')."</option>"
+#			."<option>"._T('bouton_choisir')."</option>"
 			$res .= join("\n",$menu);
 #			."\n</select></p>\n";
 		$res .= "</div>\n";
@@ -116,7 +116,7 @@ function interface_plugins_auto($retour) {
 	}
 
 	$res .= '<p>'._T('plugin_zip_adresse').'</p>';
-	
+
 	$res .= '<p>('._T('plugin_info_automatique_exemples').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
 
 	$res .= '<label>'._T('plugin_zip_adresse_champ');
