@@ -615,8 +615,8 @@ con una color que indica el estáu:',
 	'install_serveur_hebergeur' => 'Sirvidor de base de datos conseñáu pol agospiador web',
 	'install_table_prefix_hebergeur' => 'Prefixu de tabla conseñáu pol agospiamientu:',
 	'install_tables_base' => 'Tables de la base',
-	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (la más estendida), <b>PostgreSQL</b> y <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Atención: hai dellos plugins que nun funcionen más que con MySQL',
+	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (la más estendida), <b>PostgreSQL</b> y <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Atención: hai dellos plugins que nun funcionen más que con MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redactor',
@@ -758,8 +758,8 @@ con una color que indica el estáu:',
 	'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @extensions@.',
-	'plugin_info_extension_2' => 'Estes nun pueden desactivase.',
+	'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @extensions@.', # MODIF
+	'plugin_info_extension_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
@@ -791,7 +791,7 @@ con una color que indica el estáu:',
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error nos plugins: @plugins@',
 	'plugins_liste' => 'Llista de los plugins',
-	'plugins_liste_extensions' => 'Estensiones',
+	'plugins_liste_extensions' => 'Estensiones', # MODIF
 	'plugins_recents' => 'Complementos recientes.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Xerarquía',

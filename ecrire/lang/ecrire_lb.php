@@ -578,8 +578,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'install_serveur_hebergeur' => 'Datebankserver vum Hosting zougewisen',
 	'install_table_prefix_hebergeur' => 'Préfixe vun den Tafelen deen dir vum Hosting krut:',
 	'install_tables_base' => 'Datebanktabellen',
-	'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am wäiteste verbreed), <b>PostgreSQL</b> an <b>SQLite</b> benotzen.',
-	'install_types_db_connus_avertissement' => 'Opgepasst: verschidde Plugin\'en fonktionnéiere nëmmen mat MySQL',
+	'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am wäiteste verbreed), <b>PostgreSQL</b> an <b>SQLite</b> benotzen.', # MODIF
+	'install_types_db_connus_avertissement' => 'Opgepasst: verschidde Plugin\'en fonktionnéiere nëmmen mat MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'Redakter',

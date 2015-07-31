@@ -601,8 +601,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'install_serveur_hebergeur' => 'Servis sağlayıcı tarafından sağlanan veri tabanı sunucusu',
 	'install_table_prefix_hebergeur' => 'Barındırma firması tarafından atanmış tablo ön eki',
 	'install_tables_base' => 'Veri tabanı tabloları',
-	'install_types_db_connus' => 'SPIP <b>MySQL</b> (en yaygın), <b>PostgreSQL</b> ve <b>SQLite</b> kullanmayı bilir.',
-	'install_types_db_connus_avertissement' => 'Dikkat : bir çok eklenti sadece MySQL ile çalışır',
+	'install_types_db_connus' => 'SPIP <b>MySQL</b> (en yaygın), <b>PostgreSQL</b> ve <b>SQLite</b> kullanmayı bilir.', # MODIF
+	'install_types_db_connus_avertissement' => 'Dikkat : bir çok eklenti sadece MySQL ile çalışır', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'Yazar',

@@ -584,8 +584,8 @@ amb un color que indica el seu estat:',
 	'install_serveur_hebergeur' => 'Servidor de base de dades atribuït per l\'hostatjador',
 	'install_table_prefix_hebergeur' => 'Prefix de taula donat per l\'hostatjador:',
 	'install_tables_base' => 'Taules de la base',
-	'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL',
+	'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'L\'estat ja s\'ha modificat',
 	'instituer_erreur_statut_non_autorise' => 'No podeu escollir aquest estat',
 	'intem_redacteur' => 'redactor',
@@ -727,8 +727,8 @@ amb un color que indica el seu estat:',
 	'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
-	'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.',
-	'plugin_info_extension_2' => 'No es poden desactivar.',
+	'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.', # MODIF
+	'plugin_info_extension_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_install_ok' => 'Instal·lació correcta',
 	'plugin_info_necessite' => 'Necessita:',
 	'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d\'SPIP',
@@ -760,7 +760,7 @@ amb un color que indica el seu estat:',
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error en els plugins: @plugins@',
 	'plugins_liste' => 'Llista dels connectors',
-	'plugins_liste_extensions' => 'Extensions',
+	'plugins_liste_extensions' => 'Extensions', # MODIF
 	'plugins_recents' => 'Connectors recents.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Jerarquia',
