@@ -94,6 +94,10 @@ function login_pour_tous($login, $cible, $action) {
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
 	else $echec_cookie = '';
 
+	// hack grossier pour changer le message en cas d'echec d'un visiteur(6forum) sur ecrire/
+	$echec_visiteur = _request('var_echec_visiteur')?' ':'';
+
+
 	$pose_cookie = generer_url_public('spip_cookie');
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
@@ -160,6 +164,7 @@ function login_pour_tous($login, $cible, $action) {
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
+					'echec_visiteur' => $echec_visiteur,
 					'login' => $login,
 					'login_alt' => (isset($login_alt) ? $login_alt : $login),
 					'self' => str_replace('&amp;', '&', self())

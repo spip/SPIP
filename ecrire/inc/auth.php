@@ -183,7 +183,7 @@ function inc_auth_dist() {
 	$r = auth_rubrique($connect_id_auteur, $connect_statut);
 
 	if (is_string($r)) {
-		if ($r != '1comite') return auth_arefaire();
+		if ($r != '1comite') return auth_arefaire($r);
 	} elseif (is_array($r))
 		$connect_id_rubrique = $r;
 	else $connect_toutes_rubriques = true;
@@ -234,10 +234,12 @@ function auth_areconnecter($auth_login)
 // redemande login, avec nettoyage
 
 // http://doc.spip.org/@auth_arefaire
-function auth_arefaire()
+function auth_arefaire($statut='')
 {
+	// hack grossier pour changer le message en cas d'echec d'un visiteur(6forum) sur ecrire/
+	$var_echec = $statut?'&var_echec_visiteur=true':'&var_echec_cookie=true';
 	$url = rawurlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS) . str_replace('&amp;', '&', self()))); 
-	return generer_url_public('login', "url=$url" . (isset($_GET['bonjour']) ? '&var_echec_cookie=true' : ''),true);
+	return generer_url_public('login', "url=$url" . (isset($_GET['bonjour']) ? $var_echec : ''),true);
 }
 ?>

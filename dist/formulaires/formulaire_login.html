@@ -8,6 +8,12 @@
 <p><:login_cookie_accepte:></p>
 </fieldset>]
 
+[(#ENV{echec_visiteur})
+<fieldset class="reponse_formulaire">
+<legend><:avis_erreur_visiteur:></legend>
+<p><:texte_erreur_visiteur:></p>
+</fieldset>]
+
 	<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"> </script>
 	<form id="login[_(#ENV{login})]"
 		action="[(#ENV{action2})]"
