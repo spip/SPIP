@@ -471,7 +471,8 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 		$hauteur = $size_image[1];
 
 		if ($id_vignette > 0) {
-			$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
+			creer_fichier_vignette($image);
+/*			$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
 			$result = spip_query($query);
 			if ($row = spip_fetch_array($result)) {
 				$fichier = $row['fichier'];
@@ -481,10 +482,10 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 			spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
 			spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
 			spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
-		}
+*/		}
 
 
-		spip_query("UPDATE spip_documents SET id_vignette=0, largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
+		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
 
 	}
 }
