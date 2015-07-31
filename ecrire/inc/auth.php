@@ -42,7 +42,7 @@ function acces_mots() {
 // http://doc.spip.org/@acces_article
 function acces_article($id_article)
 {
-	global $connect_id_auteur, $connect_toutes_rubriques;
+	global $auteur_session, $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques) return true;
 
@@ -51,7 +51,7 @@ function acces_article($id_article)
 
 	if (acces_rubrique($row['id_rubrique'])) return true;
 
-	$s = auteurs_article($id_article, " id_auteur=$connect_id_auteur");
+	$s = auteurs_article($id_article, " id_auteur=" . $auteur_session['id_auteur']);
 	if (!spip_num_rows($s)) return false;
 
 	$s = $row['statut'];
