@@ -199,7 +199,7 @@ function AjaxSqueeze(trig, id, f)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
 
-	// animation immédiate pour faire patienter (vivement jquery !)
+	// animation immediate pour faire patienter (vivement jquery !)
 	if (typeof ajax_image_searching != 'undefined') {
 		g = document.createElement('div');
 		g.innerHTML = ajax_image_searching;
@@ -220,6 +220,7 @@ function AjaxSqueeze(trig, id, f)
 			u += n.name+"="+ encodeURIComponent(n.value) + '&';
 		}
 	}
+	u += 'var_charset=utf-8'; // encodeURIComponent
 
 	s = trig.getAttribute('action');
 	if (typeof(s)!='string') // pour IE qui a foire la ligne precedente

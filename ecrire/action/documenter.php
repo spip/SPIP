@@ -34,25 +34,27 @@ function action_documenter_dist() {
 
 		$id_document = $r[1];
 
-		$titre_document = (corriger_caracteres($_REQUEST['titre_document']));
-		$descriptif_document = (corriger_caracteres($_REQUEST['descriptif_document']));
+		$titre_document = (corriger_caracteres(_request('titre_document')));
+		$descriptif_document = (corriger_caracteres(_request('descriptif_document')));
 
 			// taille du document (cas des embed)
-		if ($largeur_document = intval($_REQUEST['largeur_document'])
-		AND $hauteur_document = intval($_REQUEST['hauteur_document']))
+		if ($largeur_document = intval(_request('largeur_document'))
+		AND $hauteur_document = intval(_request('hauteur_document')))
 				$wh = ", largeur='$largeur_document',
 					hauteur='$hauteur_document'";
 		else $wh = "";
 
 			// Date du document (uniquement dans les rubriques)
-		if (!$_REQUEST['jour_doc'])
+		if (!_request('jour_doc'))
 		  $d = '';
 		else {
-			if ($_REQUEST['annee_doc'] == "0000")
-					$_REQUEST['mois_doc'] = "00";
-			if ($_REQUEST['mois_doc'] == "00")
-					$_REQUEST['jour_doc'] = "00";
-			$date = $_REQUEST['annee_doc'].'-'	.$_REQUEST['mois_doc'].'-'.$_REQUEST['jour_doc'];
+			$mois_doc = _request('mois_doc');
+			$jour_doc = _request('jour_doc');
+			if (_request('annee_doc') == "0000")
+					$mois_doc = "00";
+			if ($mois_doc == "00")
+					$jour_doc = "00";
+			$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
 
 			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
 		}
