@@ -2,6 +2,7 @@
 if ('[(#ID_AUTEUR|securiser_acces{#ENV{arg},ical})]' OR /* spip < 1.9 */
 	'[(#ID|securiser_acces{#ENV{cle},ical})]') {
 ?>#HTTP_HEADER{Content-Type: text/calendar}
+#HTTP_HEADER{Content-Disposition: attachment; filename=#NOM_SITE_SPIP|textebrut|replace{\W,'_'}|concat{_prive.ics}}
 #CACHE{0}
 BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
