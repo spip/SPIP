@@ -43,21 +43,30 @@ function creer_base_types_doc($serveur='') {
 
 	$freplace = sql_serveur('replace', $serveur);
 	foreach ($tables_mime as $extension => $type_mime) {
-		if (isset($tables_images[$extension])) {$titre = $tables_images[$extension]; $inclus='image';}
-		elseif (isset($tables_sequences[$extension])) {$titre = $tables_sequences[$extension]; $inclus='embed';}
+		if (isset($tables_images[$extension])) {
+			$titre = $tables_images[$extension];
+			$inclus='image';
+		}
+		else if (isset($tables_sequences[$extension])) {
+			$titre = $tables_sequences[$extension];
+			$inclus='embed';
+		}
 		else {
-		    $inclus='non';
-		    if (isset($tables_documents[$extension]))
-		      $titre = $tables_documents[$extension];
-		    else  $titre = '';
+			$inclus='non';
+			if (isset($tables_documents[$extension]))
+				$titre = $tables_documents[$extension];
+			else
+				$titre = '';
 		}
 
 		$freplace('spip_types_documents',
-			  array('mime_type' => $type_mime,
+			array('mime_type' => $type_mime,
 				'titre' => $titre,
 				'inclus' => $inclus,
-				'extension' => $extension),
-			  '', $serveur);
+				'extension' => $extension,
+				'upload' => 'oui'
+			),
+			'', $serveur);
 	}
 }
 ?>

@@ -1,18 +1,19 @@
-<BOUCLE_document (DOCUMENTS) {id_document}>
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?}>
 [(#REM)
 
 	Modele pour <img>
 
-	Si on est en mode "image" ou appele avec embed=oui,
+	Si on est en mode "image" ou "vignette", ou appele avec embed=oui,
 	on affiche l'image complete ; sinon le logo
 
 	Si un lien est passe #ENV{lien} on ajoute le a href
 	ou on truque le #URL_DOCUMENT
 
 ]
+#MODE
 [(#SET{
 	image,
-		#MODE|=={image}
+		#MODE|match{'image|vignette'}
 		|sinon{#ENV{embed}}
 		|?{' '}
 })][

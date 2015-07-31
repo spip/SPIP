@@ -93,13 +93,14 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		} else {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
-			$ext = 'zip';
 			$type_inclus_image = false;
 
 			if (!sql_countsel("spip_types_documents", "extension='zip' AND upload='oui'")) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}
+
+			$ext = 'zip';
 			if (!$tmp_dir = tempnam(_DIR_TMP, 'tmp_upload')) return;
 			spip_unlink($tmp_dir); @mkdir($tmp_dir);
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
