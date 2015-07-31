@@ -200,28 +200,23 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 
 // http://doc.spip.org/@puce_statut_site
 function puce_statut_site($id_site, $statut, $id_rubrique, $type){
+
+	$droit = autoriser('publierdans','rubrique',$id_rubrique) ?
+	  'anim' : 'breve';
 	switch ($statut) {
-		case 'publie':
-				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-verte-anim.gif';
-				else
-					$puce='puce-verte-breve.gif';
-				$title = _T('info_site_reference');
-				break;
-			case 'prop':
-				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-orange-anim.gif';
-				else
-					$puce='puce-orange-breve.gif';
-				$title = _T('info_site_attente');
-				break;
-			case 'refuse':
-				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-poubelle-anim.gif';
-				else
-					$puce='puce-poubelle-breve.gif';
-				$title = _T('info_site_refuse');
-				break;
+		case 'publie': 
+			$puce = 'puce-verte-' . $droit .'.gif';
+			$title = _T('info_site_reference');
+			break;
+		case 'prop':
+			$puce = 'puce-orange-' . $droit .'.gif';
+			$title = _T('info_site_attente');
+			break;
+		case 'refuse':
+		default:
+			$puce = 'puce-poubelle-' . $droit .'.gif';
+			$title = _T('info_site_refuse');
+			break;
 	}
 	return http_img_pack($puce, $statut, "class='puce'",$title);
 }
@@ -239,9 +234,8 @@ function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type){
 				$puce = 'puce-rouge.gif';
 		}
 	
-		else if ($statut == "off") { // feed d'un site en mode "miroir"
+		else  // i.e. $statut=="off" feed d'un site en mode "miroir"
 				$puce = 'puce-rouge-anim.gif';
-		}
 	
 		return http_img_pack($puce, $statut, "class='puce'");
 }

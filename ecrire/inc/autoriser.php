@@ -40,7 +40,6 @@ if (!function_exists('autoriser')) {
 //
 // http://doc.spip.org/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
-	static $restreint = array();
 
 	// Qui ? auteur_session ?
 	if ($qui === NULL)
@@ -50,17 +49,11 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		$qui = spip_fetch_array($s);
 	}
 
-	// Admins restreints, les verifier ici (pas generique mais...)
-	// Par convention $restreint est un array des rubriques autorisees
-	// (y compris leurs sous-rubriques), vide si admin complet
-	if (is_array($qui)
-	AND $qui['statut'] == '0minirezo'
-	AND !isset($qui['restreint'])) {
-		if (!isset($restreint[$qui['id_auteur']])) {
-			$restreint[$qui['id_auteur']] = liste_rubriques_auteur($qui['id_auteur']);
-		}
-		$qui['restreint'] = $restreint[$qui['id_auteur']];
-	}
+	// Admins restreints, on construit ici (pas generique mais...)
+	// le tableau de toutes leurs rubriques (y compris les sous-rubriques)
+	if (is_array($qui))
+		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
+
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
 
 	// Chercher une fonction d'autorisation explicite
@@ -443,9 +436,16 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Renvoie la liste des rubriques liees a cet auteur, independamment de son
 // statut (pour les admins restreints, il faut donc aussi verifier statut)
+// Memorise le resultat dans un tableau statique indexe par les id_auteur.
+// On peut reinitialiser un element en passant un 2e argument non vide
 // http://doc.spip.org/@liste_rubriques_auteur
-function liste_rubriques_auteur($id_auteur) {
-	$id_auteur = intval($id_auteur);
+function liste_rubriques_auteur($id_auteur, $raz=false) {
+	static $restreint = array();
+
+	if (!$id_auteur = intval($id_auteur)) return array();
+	if ($raz) unset($restreint[$id_auteur]);
+	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
+
 	$q = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!=0");
 
 	// Recurrence sur les sous-rubriques
@@ -466,8 +466,9 @@ function liste_rubriques_auteur($id_auteur) {
 	// Affecter l'auteur session le cas echeant
 	if ($GLOBALS['auteur_session']['id_auteur'] == $id_auteur)
 		$GLOBALS['auteur_session']['restreint'] = $rubriques;
+			
 
-	return $rubriques;
+	return $restreint[$id_auteur] = $rubriques;
 }
 
 ?>
