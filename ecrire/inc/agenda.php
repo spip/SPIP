@@ -204,6 +204,7 @@ function http_calendrier_init($time='', $type='mois', $echelle='', $partie_cal='
 	  // si on veut les forums, decommenter
 #	  quete_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
 	}
+
 	$f = 'http_calendrier_' . $type;
 	if (!function_exists($f)) $f = 'http_calendrier_mois';
 	$res =  $f($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt);
@@ -368,6 +369,7 @@ function http_calendrier_sept_un($annee, $mois, $jour,$evenements, $script, $fin
 {
 	$res = http_calendrier_mois_sept($annee, $mois, $jour, $jour,$evenements, $script, $finurl, $ancre);
 	preg_match(',^\s*<tr>\s*<td[^>]*>(.*?)</td>\s*</tr>\s*$,s', $res, $m);
+
 	return $m[1];
 }
 
@@ -553,6 +555,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 	global $spip_ecran;
 
 	$gauche = (test_espace_prive() AND ($spip_ecran == "large"));
+
 	if ($partie_cal!= DEFAUT_PARTIE_R) {
 		$gauche = !$gauche ? '' : http_calendrier_ics($annee, $mois, $jour-1, $echelle, $partie_cal, 0, $evt);
 		$mil = http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 300, $evt);
@@ -560,6 +563,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 			   http_calendrier_ics($annee, $mois, $jour+1, $echelle, $partie_cal, 0, $evt));
 	} else {
 	  list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
+
 	  if ($sansduree)
 	    foreach($sansduree as $d => $r) 
 	      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
@@ -571,7 +575,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 	}
 
 	if (!test_espace_prive())
-		return "<tr class='calendrier-3jours'><td colspan='5'>$gauche</td></tr>";
+		return "<tr class='calendrier-3jours'><td colspan='5'>$mil</td></tr>";
 	$gauche = !$gauche ? "<td colspan='3'>" : "<td>$gauche</td><td></td><td>";
 	return  "<tr class='calendrier-3jours'>$gauche$mil</td><td></td><td>$droite</td></tr>";
 }
