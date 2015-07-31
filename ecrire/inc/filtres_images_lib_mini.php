@@ -306,6 +306,16 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
+		
+	pipeline('post_ecrire_image',
+		array(
+			'args' => array(
+        		'action' => 'image_gd_output',
+        		'chemin' => $valeurs['fichier_dest']
+        	),
+        	'data' => null
+        )
+	);
 	return $ret;
 }
 
@@ -453,7 +463,7 @@ function _image_ecrire_tag($valeurs,$surcharge){
 	if (count($surcharge))
 		foreach($surcharge as $attribut=>$valeur)
 			$tag = inserer_attribut($tag,$attribut,$valeur);
-
+	
 	return $tag;
 }
 
