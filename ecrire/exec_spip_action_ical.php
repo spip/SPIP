@@ -333,3 +333,4 @@ function spip_ical_forums($id_utilisateur, $nom_site)
 		ligne ("END:VTODO");
 	}
 }
+?>

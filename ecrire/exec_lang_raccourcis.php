@@ -115,4 +115,3 @@ function afficher_raccourcis($module = "public") {
 }
 
 ?>
-
