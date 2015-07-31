@@ -46,11 +46,18 @@ function ecrire_metas() {
 	lire_metas();
 
 	if (is_array($meta)) {
-		$ok = ecrire_fichier (_DIR_SESSIONS.'meta_cache.txt', serialize($meta));
+		$file = _DIR_SESSIONS .'meta_cache.txt';
+		$ok = ecrire_fichier ($file, serialize($meta));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
-			echo "<h4 font color=red>"._T('texte_inc_meta_1')
-			." <a href='" . generer_url_public("spip_test_dirs","") . "'>"._T('texte_inc_meta_2')
-			."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
+		  echo "<h4 font color=red>",
+		    _T('texte_inc_meta_1', array('fichier' => $file)),
+		    " <a href='",
+		    generer_url_public("spip_test_dirs"),
+		    "'>",
+		    _T('texte_inc_meta_2'),
+		    "</a> ",
+		    _T('texte_inc_meta_3'),
+		    "&nbsp;</h4>\n";
 	}
 }
 
