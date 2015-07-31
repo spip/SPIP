@@ -94,7 +94,7 @@ var alea_actuel;
 var alea_futur;
 $('#pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
 $('#var_login').blur(function(){
-	$.get('#URL_ACTION{aleer}',
+	$.get('#URL_ACTION{informer_auteur}',
 		{var_login:$(this).attr('value')},
 		function (c) {
 			eval('c = '+c); // JSON
