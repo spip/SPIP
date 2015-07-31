@@ -1,5 +1,7 @@
 <div style="float:left;width:200px;">
 	#SET{close,''}
+	#SET{prev,''}
+	#SET{next,''}
 	<ul>
 	<BOUCLE_menu(DATA){source tableau,#ENV{aide}|aide_menu}>
 		[(#VALEUR{1}|=={1}|oui)
@@ -8,14 +10,16 @@
 			<ul class="liste-items">
 			#SET{close,'</ul></div>'}
 		][(#VALEUR{1}|=={2}|oui)
-			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]' class="ajax nohistory">[(#VALEUR{3})]</a></li>
+			[(#GET{next}|=={next}|oui)#SET{next,#VALEUR}]
+			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on#SET{next,next}]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]#contenu-aide' class="ajax nohistory">[(#VALEUR{3})]</a></li>
+			[(#GET{next}|non)#SET{prev,#VALEUR}]
 		]
 	</BOUCLE_menu>
 		#GET**{close}
 	</ul>
 </div>
-
-<div class="contenu-aide" lang="[(#EVAL{_request('var_lang_r')}|aide_changer_langue{#ENV{lang_r}})]" style="position:relative;margin-left:220px;">
+[(#GET{next}|non)#SET{prev,''}]
+<div class="contenu-aide" id="contenu-aide" lang="[(#EVAL{_request('var_lang_r')}|aide_changer_langue{#ENV{lang_r}})]" style="position:relative;margin-left:220px;">
 	[(#ENV{aide}|aide_extrait_section|image_reduire{500}|sinon{
 		[<div style='text-align:center;'>
 			(#CHEMIN_IMAGE{logo-spip.gif}|balise_img{SPIP})
@@ -28,6 +32,10 @@
 		<:info_copyright_doc{spipnet=#GET{doc},spipnet_affiche=#GET{doc}}:>
 		</p>]
 	})]
+	<p>
+		[<a href="[(#SELF|parametre_url{aide,#GET{prev}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">&lt; (#GET{prev}|table_valeur{3})</a> | ]
+		[<a href="[(#SELF|parametre_url{aide,#GET{next}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">(#GET{next}|table_valeur{3}) &gt;</a>]
+	</p>
 </div>
 
 
