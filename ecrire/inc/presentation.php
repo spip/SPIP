@@ -1012,7 +1012,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	}
 		
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-	echo afficher_liste_debut_tableau(), ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", "$id_ajax_fonc", $tranches);
 
 	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 

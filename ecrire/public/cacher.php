@@ -285,8 +285,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// cas sans jamais de cache pour raison interne
 	if (isset($GLOBALS['var_mode']) &&
-	    (isset($GLOBALS['_COOKIE']['spip_session'])
-	    || isset($GLOBALS['_COOKIE']['spip_admin'])
+	    (isset($_COOKIE['spip_session'])
+	    || isset($_COOKIE['spip_admin'])
 		 || @file_exists(_ACCESS_FILE_NAME))) {
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
