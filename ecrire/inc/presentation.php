@@ -463,14 +463,10 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
-	$texte = "\n<div style='position: relative;$ie_style;' class='arial1 tranches' id='a$ancre'>";
-
+	$texte = "\n<div style='$ie_style;' class='arial1 tranches' id='a$ancre'>";
 	$texte .= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $tmp_var);
 
 	$on ='';
-
-	$style = " class='arial2' style='border-bottom: 1px solid #444444; position: absolute; top: 1px; $spip_lang_right: 15px;'";
-
 	$script = parametre_url($self, $tmp_var, -1);
 	if ($url) {
 				$on = "\nonclick=\"return charger_id_url('"
@@ -482,11 +478,9 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 				. '\');"';
 	}
 	$l = htmlentities(_T('lien_tout_afficher'));
-	$texte .= "<a$style\nhref=\"$script#a$ancre\"$on><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
-	
+	$texte .= "<a href=\"$script#a$ancre\"$on class='plus'><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
 
 	$texte .= "</div>\n";
-
 	return $texte;
 }
 
