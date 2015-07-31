@@ -15,13 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Charger un fichier langue
 //
-function chercher_module_lang($module, $lang) {
+function chercher_module_lang($module, $lang = '') {
+	if ($lang)
+		$lang = '_'.$lang;
+
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = include_spip('lang/'.$module.'_'.$lang, false))
+	if ($f = include_spip('lang/'.$module.$lang, false))
 		return $f;
 
 	// 2) directement dans le chemin (old style)
-	return include_spip($module.'_'.$lang);
+	return include_spip($module.$lang, false);
 }
 
 function charger_langue($lang, $module = 'spip') {
@@ -51,15 +54,19 @@ function charger_langue($lang, $module = 'spip') {
 //
 // Surcharger le fichier de langue courant avec un autre (tordu, hein...)
 //
-function surcharger_langue($f) {
+function surcharger_langue($fichier) {
 
 	$idx_lang_normal = $GLOBALS['idx_lang'];
-	$GLOBALS['idx_lang'] .= '_temporaire';
-	include($f);
-	if (is_array($GLOBALS[$GLOBALS['idx_lang']]))
-		foreach ($GLOBALS[$GLOBALS['idx_lang']] as $var => $val)
-			$GLOBALS[$idx_lang_normal][$var] = $val;
-	unset ($GLOBALS[$GLOBALS['idx_lang']]);
+	$idx_lang_surcharge = $GLOBALS['idx_lang'].'_temporaire';
+	$GLOBALS['idx_lang'] = $idx_lang_surcharge;
+	include($fichier);
+	if (is_array($GLOBALS[$idx_lang_surcharge])) {
+		$GLOBALS[$idx_lang_normal] = array_merge(
+			$GLOBALS[$idx_lang_normal],
+			$GLOBALS[$idx_lang_surcharge]
+		);
+	}
+	unset ($GLOBALS[$idx_lang_surcharge]);
 	$GLOBALS['idx_lang'] = $idx_lang_normal;
 }
 
@@ -134,10 +141,11 @@ function traduire_chaine($code, $args) {
 		if (empty($GLOBALS[$var])) {
 			charger_langue($spip_lang, $module);
 
-			// surcharge perso -- on cherche (lang/)local(_xx).php
-			if ($f = include_spip('lang/local', false))
-				surcharger_langue($f);
+			// surcharge perso -- on cherche (lang/)local_xx.php ...
 			if ($f = chercher_module_lang('local', $spip_lang))
+				surcharger_langue($f);
+			// ... puis (lang/)local.php
+			if ($f = chercher_module_lang('local'))
 				surcharger_langue($f);
 		}
 		if (isset($GLOBALS[$var][$code])) break;

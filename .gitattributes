@@ -340,6 +340,7 @@ ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/distant.php -text
+ecrire/inc/headers.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/mini_nav.php -text
 ecrire/inc/minipres.php -text
@@ -347,7 +348,6 @@ ecrire/inc/popularites.php -text
 ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
-ecrire/inc_headers.php -text
 ecrire/inc_plugin.php -text
 ecrire/inc_utils.php -text
 ecrire/lang/ecrire_br.php -text
