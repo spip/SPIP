@@ -822,7 +822,7 @@ function parser($texte) {
 		'IP', 'VISITES', 'POPULARITE', 'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
 		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
-		'LOGIN_PRIVE', 'LOGIN_PUBLIC'
+		'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'PUCE'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1327,7 +1327,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'NOM_SITE_SPIP':
-		$code = "typo(lire_meta('nom_site'))";
+		$code = "lire_meta('nom_site')";
+		break;
+
+	case 'PUCE':
+		$code = "propre('- ')";
 		break;
 
 	case 'URL_ARTICLE':
