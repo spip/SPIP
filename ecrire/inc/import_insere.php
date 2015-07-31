@@ -89,7 +89,7 @@ function translate_init($request) {
 	include_spip('inc/chercher_logo'); // pour les noms des logos
 	include_spip('inc/distant'); // pour recuperer les logos
 
-	sql_select('*', "spip_translate");
+	$q = sql_select('*', "spip_translate");
 	$trans = array();
 	while ($r = sql_fetch($q)) {
 		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], $r['ajout']);
@@ -258,7 +258,7 @@ function importe_raccourci($v)
 	if (preg_match_all(_RACCOURCI_LIEN, $v, $m, PREG_SET_ORDER)) {
 		foreach ($m as $regs) {
 		  // supprimer 'http://' ou 'mailto:'
-		  	$lien = vider_url($regs[3]);
+		  	$lien = vider_url($regs[count($regs)-1]);
 			if ($match = typer_raccourci($lien)) {
 				list($f,$objet,$id,$params,$ancre) = $match;
 				$k = 'id_' . $f;
