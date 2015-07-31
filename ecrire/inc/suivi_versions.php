@@ -95,7 +95,7 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 			$date = $row['date'];
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
-			$titre = propre($row['titre']);
+			$titre = typo($row['titre']);
 			
 			// l'id_auteur peut etre un numero IP (edition anonyme)
 			if ($row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
