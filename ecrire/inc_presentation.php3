@@ -811,8 +811,8 @@ function debut_html($titre = "") {
 
 	if ($nom_site_spip == "") $nom_site_spip="SPIP";
 
-	$charset = lire_meta('charset') ||
-	$charset = 'iso-8859-1';
+	if (! $charset = lire_meta('charset'))
+		$charset = 'iso-8859-1';
 	
 	?>
 	<html>
