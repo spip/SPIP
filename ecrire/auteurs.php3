@@ -115,11 +115,6 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 
 		$nom_auteur = $row['nom'];
-		$premiere_lettre = addslashes(strtoupper(substr($nom_auteur,0,1)));
-		if ($premiere_lettre != $lettre_prec) {
-			$lettre[$premiere_lettre] = $nombre_auteurs-1;
-		}
-		$lettre_prec = $premiere_lettre;
 	}
 
 	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur
@@ -141,6 +136,19 @@ if ($type_requete == 'auteur') {
 				$nombre_auteurs --;
 			}
 		}
+	}
+
+	// apres avoir supprime les auteurs sans article publie
+	// generer les paires lettre/indice pour l'acces direct
+	// sur la premiere lettre
+	$lettres_nombre_auteurs = 0;
+	foreach ($auteurs as $auteur) {
+		$lettres_nombre_auteurs ++;
+		$premiere_lettre = addslashes(strtoupper(substr($auteur['nom'],0,1)));
+		if ($premiere_lettre != $lettre_prec) {
+			$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
+		}
+		$lettre_prec = $premiere_lettre;
 	}
 
 } else { // tri par nombre
