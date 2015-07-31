@@ -234,6 +234,7 @@ ecrire/inc/dater.php -text
 ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/documenter.php -text
+ecrire/inc/documenter_objet.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/editer.php -text
 ecrire/inc/editer_auteurs.php -text
