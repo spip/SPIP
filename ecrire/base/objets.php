@@ -419,9 +419,12 @@ function table_objet_sql($type,$serveur='') {
 	$nom = table_objet($type, $serveur);
 	include_spip('public/interfaces');
 	if (isset($table_des_tables[$nom])) {
-		$t = $table_des_tables[$nom];
-		$nom = 'spip_' . $t;
+		$nom = $table_des_tables[$nom];
 	}
+	$infos_tables = lister_tables_objets_sql();
+	if (isset($infos_tables["spip_$nom"]))
+		return "spip_$nom";
+
 	return $nom ;
 }
 
@@ -516,7 +519,7 @@ function objet_test_si_publie($objet,$id_objet, $serveur=''){
 		return false;
 	}
 	// voir si une fonction est definie pour faire le boulot
-	if ($f = charger_fonction($objet."test_si_publie","base"))
+	if ($f = charger_fonction($objet."_test_si_publie","base",true))
 		return $f($objet,$id_objet, $serveur);
 
 	// si pas d'info statut ni de fonction : l'objet est publie
