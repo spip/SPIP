@@ -1,3 +1,56 @@
+SPIP 3.0.2 -> SPIP 3.0.3 (03 juillet 2012)
+---------------------------------------
+
+
+r19590 | cedric    | 2012-06-13 18:15:42|le decodage des urls se fait toujours par rapport au site public (cas où l'on fournissait une url absolue qui était mal coupées si on essayait de la décoder depuis l'espace privé)
+r19593 | kent1     | 2012-06-14 16:46:09|Un jquery-ui-1.8.custom pour éviter des intéractions malheureuse avec jQuery UI
+r19595 | cedric    | 2012-06-17 18:50:27|definir _PLUGINS_HASH le plus tot possible (avant les inclusions d'options des plugins, donc, et non apres)
+r19598 | cedric    | 2012-06-18 11:03:08|sutilisation erronée de sql_quote dans recuperer_infos_distantesun fichier nommé v0.6.3 est analysé comme ayant une extension '3'. Mais sql_quote appelé sans type croit alors qu'il ne faut pas echapper ce nombre, ce qui provoque la requete avec condition extenstion=3 qui ramène le type de document '3ga' alors qu'une condition extension='3' ne ramène rien, ce qui est correct.
+r19602 | cedric    | 2012-06-19 11:29:19|gerer les multiples occurences et appel du dateur :- ne lancer qu'une seule fois le chargement ajax du js- initialiser startDate et endDate a partir des attributs data-startData et data-endDate portés par le input.date dans le html, et non passés en arguments du dateur- n'initialiser qu'une seule fois chaque input, même en cas de multiples appel de la fonction d'initialisation(xdjuj, marcimat)
+r19604 | marcimat  | 2012-06-19 11:37:21|report de r19600 : Notice PHP fort justifiée, issue de r16981, qui pouvait tromper le message de log lorsque le connect.php n'est pas disponible.
+r19620 | cedric    | 2012-06-21 00:00:54|encore un bug avec le ajax redirect sur une meme page, car on ne prenait pas l'url absolue de la redirection
+r19621 | cedric    | 2012-06-21 09:45:00|Ferme #2316 : en cas d'auth PHP il ne faut pas changer l'alea a chaque hit car cela empeche la verification des actions securiseeOn ajoute un argument $phpauth aux fonctions d'auth, qui est a true quand la fonction est appelee depuis lire_php_authPas de rupture de compat car si la methode ignore cet argument c'est qu'elle n'en a pas besoin
+r19622 | cedric    | 2012-06-21 09:47:00|cartouche a jour
+r19625 | cedric    | 2012-06-21 10:07:55|Ferme #2637 : message plus explicite lors de la reinstallation
+r19631 | cedric    | 2012-06-21 15:52:56|sReport de r19629 : HTTP_X_REQUESTED_WITH ne semble plus envoyé dans les requetes ajax de jQueryon complète la detection par la presence de var_ajax (form et inclure ajax de SPIP)
+r19632 | cedric    | 2012-06-21 15:54:28|Report de r19630 : Lorsque la constante _SET_HTML_BASE n'est pas definie quand on arrive dans page_base_href, ne pas faire un define mais renseigner une static. Cela revient au même du point de vue de la fonction, mais permet à un plugin externe de savoir si cette constante est personalisée ou non
+r19635 | cedric    | 2012-06-21 17:57:16|Report de r19633 : n'appeller spip_barre.js que dans les minipres d'admin, qui demandent la creation d'un repertoire FTP
+r19636 | cedric    | 2012-06-21 17:57:46|Report de r19634 : La page minipres est capable de se jouer en un seul hit en embarquant les css inline. Pour cela on introduit un 4e argument $all_inline a false par defaut
+r19638 | cedric    | 2012-06-21 18:15:58|Report de r19637 : debug minipres en mobile itruc : la meta viewport manquait, mais sinon toute la css est deja responsive grace a tetue. On supprime les hachures en version petit ecran aussi
+r19644 | marcimat  | 2012-06-23 10:26:09|Report de r19643 : Lorsqu'on crée une table avec un outil externe à SPIP, les échappements des colonnes de tables ne sont pas forcément les même.
+r19651 | marcimat  | 2012-06-25 19:25:04|Reports de r19649 et r19650Standards stricts avec PHP 5.4
+r19658 | cedric    | 2012-06-28 16:56:06|Report de r19610 : ne pas raler fichier quand c'est pas grave
+r19659 | cedric    | 2012-06-28 17:06:04|Report de r19605 r19607 et r19658 : ne pas compter systematiquement le total d'une boucle, et compter plus vite sous sqlite
+r19660 | cedric    | 2012-06-29 16:42:04|inclusion manquante (Vince_)
+r19666 | denisb    | 2012-07-02 23:40:23|compiler.php : on nettoie $connect qui peut arriver par url (arnault pachot) ; report de r19665
+r19669 | cedric    | 2012-07-03 11:14:07|Ferme #2779 : la modification de l'email par un redacteur echouait car l'url de retour n'etait pas une url mais du javascript. On retablit l'url, et tant pis pour le retour tout ajax apres saisie
+r19671 | denisb    | 2012-07-03 14:21:28|ecrire/req : dans la tentative de retrouver des KEY éventuelles dans la description des tables, le requéteur prenait en compte un 'nom de champ' contenant littéralement 'KEY' . (report de r19663 et r19664)
+r19672 | denisb    | 2012-07-03 15:29:24|ecran_securite : éviter injection sur connect (Arnault Pachot)
+
+
+PLUGINS-DIST SPIP 3.0.2 -> SPIP 3.0.3 (03 juillet 2012)
+----------------------------------------------------
+r62619 | eric      | 2012-06-17 16:37:01 |Une regexp plus précise pour éviter de traiter la balise <archives>
+r62656 | cedric    | 2012-06-18 14:18:02 |on reinverse r59705 car cela semble contre-intuitif à l'usage :quand on veut activer un nouveau plugin, on cherche dans une liste dans laquelle sont mis en avant (blanc) les plugins déjà actif donc non selectionnable.Il est plus naturel que soient mis en avant tous les plugins activables. A confirmer à l'usage.
+r62710 | cedric    | 2012-06-19 11:41:33 |Ferme http://core.spip.org/issues/2765 : Coquille qui generait des urls page à la place des urls simples (Yffic)
+r62738 | cedric    | 2012-06-20 10:06:58 |l'action instituer_forum peut recevoir son $arg en argumentla fonction email_notification_forum accepte un contexte personalise en 3eme argument, qui sera passé au squelettes de calcul de l'email
+r62777 | rasta     | 2012-06-20 17:17:45 |Bug : le plugin ne prenait pas en compte sa propre config. On a le droit de modifier la date que si c'est enregistré comme ça dans la meta.
+r62866 | denisb    | 2012-06-22 20:26:18 |medias ajouter_documents : coquille malvenue résout http://core.spip.org/issues/2772
+r62877 | kent1     | 2012-06-23 13:02:06 |Pouvoir rediriger le formulaire #FORMULAIRE_ADMIN_PLUGIN autre part que sur ecrire/?exec=admin_plugin
+r62878 | kent1     | 2012-06-23 13:02:27 |Petit incrément
+r62881 | kent1     | 2012-06-23 13:13:19 |Report pour le phpdoc à jour
+r62929 | marcimat  | 2012-06-24 14:54:00 |Report de r62628 (sauf le numéro de version)
+r63008 | kent1     | 2012-06-26 11:06:54 |une class editer manquante et on utilise |oui |non
+r63013 | kent1     | 2012-06-26 14:18:03 |Des éléments non internationnalisés...Des restes de code de BoOz ça encore
+r63035 | cedric    | 2012-06-27 12:16:01 |Report de r63034
+r63055 | cedric    | 2012-06-28 11:55:54 |Upgrade de CSSTidy en v1.4 qui corrige divers bugs (format() sur @font-face, url sur @import...)
+r63058 | kent1     | 2012-06-28 12:36:28 |indentation
+r63078 | kent1     | 2012-06-28 23:06:58 |Deux nouveaux types de documents -* Lyx issus de http://www.lyx.org/-* y4m cf http://wiki.multimedia.cx/index.php?title=YUV4MPEG2Un peu d'indentation sur 2 fichiersOn incrémente le numéro de version à 2.7.29 et le schema de base à 1.2.1
+r63221 | kent1     | 2012-07-03 14:14:19 | Ajout de l'array champs_editables pour la description de l'objet document (du coup peut être complété par des plugins) et utilisation dans action/editer_documentOn utilise objet_info dans inc/renseigner_document pour récupérer ses metadatas lors de l'insertion en base de documentUn peu d'indentationPassage en version 2.7.30
+
+
+
+
 SPIP 3.0.0 -> SPIP 3.0.2 (12 juin 2012)
 ---------------------------------------
 r19429 | cedric    | (sam. 19 mai 2012) | Eviter une réentrance infinie lors de l'upgrade depuis une SPIP 2.x qui n'a pas de table spip_jobs
