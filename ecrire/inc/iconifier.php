@@ -48,13 +48,11 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 				. "<div class='cadre_padding'>"
 				. $clic . $survol . "</div>" . fin_block();
 		} else {
-			if ($flag_modif) {
-				list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script, $flag_modif);
-				$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
-				$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
-				. "<div class='cadre_padding'>".$imgoff.$masque."</div>";
-				$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
-			}
+			list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script, $flag_modif);
+			$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
+			$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
+			. "<div class='cadre_padding'>".$imgoff.$masque."</div>";
+			$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
 		}
 
 		$res = "$img$masque";
