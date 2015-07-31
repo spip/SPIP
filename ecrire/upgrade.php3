@@ -26,8 +26,8 @@ include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
-$spip_lang = lire_meta($langue_site);
-if (!$spip_lang) $spip_lang = "fr";
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
