@@ -353,7 +353,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Aquí atoparás a todos os autores do web.
   O seu status indícase coa cor da súa ícona (xestor = verde; redactor = amarela).',
 	'info_gauche_auteurs_exterieurs' => 'Os colaboradores exteriores, sen acceso ao web, indícanse por unha ícona azul;
-  os autores que foron eliminados, por unha papeleira.',
+  os autores que foron eliminados, por unha papeleira.', # MODIF
 	'info_gauche_messagerie' => 'A mensaxería permíteche intercambiar mensaxes entre o equipo de redacción, gardar notas (para o teu uso persoal) ou mostrar os anuncios na páxina de entrada do espazo privado (se estás no equipo de xestión).',
 	'info_gauche_numero_auteur' => 'AUTOR/A NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta páxina presenta a lista de <i>referentes</i>,
@@ -903,8 +903,8 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
   (dende a interface do SPIP) son reindexados automaticamente:
   este comando só é útil excepcionalmente.',
 	'texte_moteur_recherche_non_active' => 'O motor de procura non está activado.',
-	'texte_multilinguisme' => 'Se desexa crear artigos en varias linguas, cunha navegación complexa, pode engadir un menú de selección da lingua dos artigos e/ou das seccións, en función da organización do seu web.',
-	'texte_multilinguisme_trad' => 'Pode igualmente activar un sistema de xestión de ligazóns entre as diferentes traducións dun artigo.',
+	'texte_multilinguisme' => 'Se desexa crear artigos en varias linguas, cunha navegación complexa, pode engadir un menú de selección da lingua dos artigos e/ou das seccións, en función da organización do seu web.', # MODIF
+	'texte_multilinguisme_trad' => 'Pode igualmente activar un sistema de xestión de ligazóns entre as diferentes traducións dun artigo.', # MODIF
 	'texte_non_compresse' => '<i>non comprimido</i> (o teu servidor non soporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensaxe',
 	'texte_nouvelle_version_spip_1' => 'Instalaches unha nova versión de SPIP.',

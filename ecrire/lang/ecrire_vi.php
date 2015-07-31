@@ -341,7 +341,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_gauche_admin_tech' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số công việc bảo trì. Một số việc cần phải có chứng nhận đặc biệt, cần phải dùng FTP để vào trang web.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số công việc bảo trì. Một số việc cần phải có chứng nhận đặc biệt, và cần phải dùng FTP để vào trang web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Danh sách tất cả tác giả được liệt kê nơi đây. Trách nhiệm của mỗi người được biểu hiện qua màu của icon (chủ bút=màu xanh lá cây; quản lý=màu vàng).',
-	'info_gauche_auteurs_exterieurs' => 'Các tác giả bên ngoài (không được phép vào trang web) được biểu hiện bằng icon màu xanh dương; Tác giả nào bị xóa tên được biểu hiện bằng icon thùng rác.',
+	'info_gauche_auteurs_exterieurs' => 'Các tác giả bên ngoài (không được phép vào trang web) được biểu hiện bằng icon màu xanh dương; Tác giả nào bị xóa tên được biểu hiện bằng icon thùng rác.', # MODIF
 	'info_gauche_messagerie' => 'Phương tiện thư tín cho phép bạn trao đổi thư tín giữa các chủ bút với nhau, lưu trữ bản ghi nhớ (để sử dụng riêng) hoặc hiển thị thông báo trên trang nhà của vùng riêng (nếu bạn là người quản trị).',
 	'info_gauche_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ:',
 	'info_gauche_statistiques_referers' => 'Trang này liệt kê danh sách <i>referrers</i>, tức là các trang có chứa điểm nối đến trang của bạn, chỉ cho hôm nay mà thôi: thật ra danh sách này được soạn mỗi 24 giờ.',
@@ -848,8 +848,8 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'texte_modifier_article' => 'Sửa bài:',
 	'texte_moteur_recherche_active' => '<b>Cơ phận tìm kiếm được chạy.</b> Dùng mệnh lệnh này nếu bạn muốn re-indexing cho lẹ (sau khi phục hồi các hồ sơ dự trữ chẳng hạn). Lưu ý là trong trường hợp bài được sửa đổi một cách bình thường (dùng giao diện SPIP) thì bài đó được tự động đánh chỉ số (index) lần nữa: do đó mệnh lệnh này chỉ hữu dụng trong trường hợp rất ư đặc biệt. ',
 	'texte_moteur_recherche_non_active' => 'Cơ phận tìm kiếm đã bị tắt, không được phép chạy.',
-	'texte_multilinguisme' => 'Nếu bạn muốn quản trị các bài vỡ này trong nhiều ngôn ngữ, bạn có thể thêm vào bài/đề mục một mục lục chọn ngôn ngữ.',
-	'texte_multilinguisme_trad' => 'Đồng thời, bạn có thể mở lên một hệ thống quản trị cho các bản dịch của một bài.',
+	'texte_multilinguisme' => 'Nếu bạn muốn quản trị các bài vỡ này trong nhiều ngôn ngữ, bạn có thể thêm vào bài/đề mục một mục lục chọn ngôn ngữ.', # MODIF
+	'texte_multilinguisme_trad' => 'Đồng thời, bạn có thể mở lên một hệ thống quản trị cho các bản dịch của một bài.', # MODIF
 	'texte_non_compresse' => '<i>Giản ra</i> (server của bạn không dùng đặc tính này)',
 	'texte_nouveau_message' => 'Thư tín mới',
 	'texte_nouvelle_version_spip_1' => 'Bạn vừa thiết trí ấn bản mới của SPIP.',

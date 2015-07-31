@@ -355,7 +355,7 @@ fonctions de maintenance technique. Certaines d\'entre elles donnent lieu à un 
 exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Här hittar du alla redaktörer på sajten.
  Status på var och en av dem visas av färgen på ikonen (administratör = grön; redaktör = gul).',
-	'info_gauche_auteurs_exterieurs' => 'Externa redaktörer utan behörighet på sajten, visas med en blå ikon; raderade redaktörer med en soptunna.',
+	'info_gauche_auteurs_exterieurs' => 'Externa redaktörer utan behörighet på sajten, visas med en blå ikon; raderade redaktörer med en soptunna.', # MODIF
 	'info_gauche_messagerie' => 'La messagerie vous permet d\'échanger des messages entre rédacteurs, de conserver des pense-bêtes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace privé (si vous êtes administrateur).', # NEW
 	'info_gauche_numero_auteur' => 'REDAKTÖR NUMMER:',
 	'info_gauche_statistiques_referers' => 'Cette page présente la liste des <i>referers</i>, c\'est-à-dire des sites contenant des liens menant vers votre propre site, uniquement pour hier et aujourd\'hui ; cette liste est remise à zéro toutes les 24 heures.', # NEW
@@ -900,8 +900,8 @@ installera om SPIP för att skapa en ny databas och den första administratören
   det normala sättet (från gränssnittet i SPIP ) automatiskt
   indexeras igen: därför är kommandot bara användbart i speciella omständigheter.',
 	'texte_moteur_recherche_non_active' => 'Sökfunktionen är inte aktiverad.',
-	'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.',
-	'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.',
+	'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.', # MODIF
+	'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.', # MODIF
 	'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
 	'texte_nouveau_message' => 'Nytt meddelande',
 	'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',

@@ -371,7 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Truverete quì tutti l\'autori di u situ.
 U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amministratore = verde).',
 	'info_gauche_auteurs_exterieurs' => 'L\'autori esterni, senza accessu à u situ, sò signalati da un\'icona turchina ;
-		l\'autori sguassati da una rumènzula.',
+		l\'autori sguassati da una rumènzula.', # MODIF
 	'info_gauche_messagerie' => 'A messageria vi permette di scambià messagi trà scrittori, di tene vi certi mementi(à usu propriu persunale) 
   o di pubblicà annunci in a pàgina d\'accogliu di u spaziu privatu (sè vo site amministratore).',
 	'info_gauche_numero_auteur' => 'AUTORE NÙMERU',
@@ -925,8 +925,8 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	autumàticu. Vale à dì chì sta cumanda hè ùtule solu in casi eccezziunali.',
 	'texte_moteur_recherche_non_active' => 'Ùn hè attivatu u mutore di ricerca.',
 	'texte_multilinguisme' => 'Sè vo vulete gestisce artìculi in parechje lingue, con un sistema di navigazione cumplessu, pudete puru aghjunghje un menù
-		di scelta di lingua in l\'artìculi è/o in e rùbbriche, secondu cum\'ellu hè strutturatu u vostru situ.',
-	'texte_multilinguisme_trad' => 'Pudete dinù attivà un sistema di gestione di lee frà e diverse traduzzioni d\'un artìculu.',
+		di scelta di lingua in l\'artìculi è/o in e rùbbriche, secondu cum\'ellu hè strutturatu u vostru situ.', # MODIF
+	'texte_multilinguisme_trad' => 'Pudete dinù attivà un sistema di gestione di lee frà e diverse traduzzioni d\'un artìculu.', # MODIF
 	'texte_non_compresse' => '<i>micca cumpressu</i> (u vostru servore ùn pussede micca sta funziunalità)',
 	'texte_nouveau_message' => 'Novu messagiu',
 	'texte_nouvelle_version_spip_1' => 'Avete stallatu una nova versione di SPIP.',

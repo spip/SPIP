@@ -343,7 +343,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Je vindt hier alle auteurs van de site.
  Hun status is te herkennen aan de kleur van het icoontje (beheerder = groen; redacteur = geel).',
 	'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
-  Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.',
+  Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.', # MODIF
 	'info_gauche_messagerie' => 'Het berichtensysteem laat toe om berichten uit te wisselen tussen redacteurs, memo\'s (voor persoonlijk gebruik) te bewaren of aankondigingen te tonen op de beginpagina van de privé-ruimte (als je beheerder bent).',
 	'info_gauche_numero_auteur' => 'NUMMER AUTEUR',
 	'info_gauche_statistiques_referers' => 'Deze pagina toont een lijst met <i>referers</i>, tw. sites die een koppeling bevatten naar je eigen site, enkel voor vandaag en gisteren: de lijst wordt elke 24 uur opnieuw aangemaakt.',
@@ -877,8 +877,8 @@ Als u geen nut ervan hebt, kunt u deze keuze
 	'texte_modifier_article' => 'Wijzigen artikel:',
 	'texte_moteur_recherche_active' => '<b>De zoekmotor is geactiveerd.</b> Voer deze taak uit als je een snelle herindexatie wil doorvoeren (na het terugzetten van een reservekopie bijvoorbeeld). Documenten die via de normale weg worden gewijzigd (vanaf de SPIP interface) worden automatisch geherindexeerd: deze taak is dus enkel nuttig in uitzonderlijke omstandigheden.',
 	'texte_moteur_recherche_non_active' => 'De zoekmachine is niet geactiveerd.',
-	'texte_multilinguisme' => 'Als je graag artikels in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij de artikels en/of de rubrieken, i.f.v de organisatie van je site.',
-	'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.',
+	'texte_multilinguisme' => 'Als je graag artikels in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij de artikels en/of de rubrieken, i.f.v de organisatie van je site.', # MODIF
+	'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.', # MODIF
 	'texte_non_compresse' => '<i>niet gecomprimeerd</i> (de server ondersteunt deze functionaliteit niet)',
 	'texte_nouveau_message' => 'Nieuw bericht',
 	'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP geïnstalleerd.',

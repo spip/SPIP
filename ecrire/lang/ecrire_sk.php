@@ -357,7 +357,7 @@ k rôznym funkciám údržby. Niektoré z nich si vyžadujú špeciálne prihl�
 cez FTP.</p>',
 	'info_gauche_auteurs' => 'Tu nájdete všetkých autorov stránky.
  Funkcia každého z nich je označená farbou ikony (administrátor = zelená, redaktor = žltá).',
-	'info_gauche_auteurs_exterieurs' => 'Externí autori bez prístupu na stránku sú označení modrou farbou, odstránení autori obrázkom koša.',
+	'info_gauche_auteurs_exterieurs' => 'Externí autori bez prístupu na stránku sú označení modrou ikonou, odstránení autori sivou ikonou.',
 	'info_gauche_messagerie' => 'Odkazovač vám umožní posielať správy v rámci redakcie, ukladať si pri­pomienky (pre osobnú potrebu) alebo zobrazovať oznamy na úvodnej stránke súkromnej zóny (ak ste administrátor).',
 	'info_gauche_numero_auteur' => 'AUTOR ČÍSLO',
 	'info_gauche_statistiques_referers' => 'Na tejto stránke je zoznam <i>refererov,</i> t.j. stránok, na ktorých sú odkazy na vašu vlastnú stránku zo včerajška a dneška. Tento zoznam sa obnovuje každých 24 hodín.',
@@ -897,8 +897,8 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   bežným spôsobom (cez rozhranie SPIPu) sa automaticky
   preindexujú. Preto je tento príkaz užitočný iba za zvláštnych okolností.',
 	'texte_moteur_recherche_non_active' => 'Vyhľadávač nie je aktivovaný.',
-	'texte_multilinguisme' => 'Ak chcete mať články v niekoľkých jazykoch, môžete menu na výber jazyka pridať do článkov a/lebo rubrík v závislosti od organizácie vašej stránky. To bude mať za následok zložitejšiu hierarchiu stránky.',
-	'texte_multilinguisme_trad' => 'Môžete tiež aktivovať systém na správu prepojení medzi rôznymi prekladmi článku.',
+	'texte_multilinguisme' => 'Ak chcete mať redakčné objekty v rôznych jazykoch, môžete do nich pridať menu na výber jazyka v závislosti od organizácie vašej stránky.',
+	'texte_multilinguisme_trad' => 'Môžete tiež aktivovať systém na správu prepojení medzi rôznymi prekladmi niektorých objektov.',
 	'texte_non_compresse' => '<i>rozbalené</i> (váš server nepodporuje túto funkciu)',
 	'texte_nouveau_message' => 'Nová správa',
 	'texte_nouvelle_version_spip_1' => 'Práve ste nainštalovali novú verziu SPIPu.',

@@ -356,7 +356,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'info_gauche_auteurs' => 'Isit, genyen tout zotè sit sa-a.
 Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 	'info_gauche_auteurs_exterieurs' => 'Tout lòtè andèyò, ki genyen pa aksè sit-la, se afiche pa yon ikòn blè ;
- lòtè yo ki te kraze se yon bwat poubèl.',
+ lòtè yo ki te kraze se yon bwat poubèl.', # MODIF
 	'info_gauche_messagerie' => 'Mesajri rann w kapab voye tout mesaj ant redaktè, gade pansbèt (pèsonel) osnon fè parèt annons sou paj akey nan espas prive (si w se komandè).',
 	'info_gauche_numero_auteur' => 'LOTE NIMEWO',
 	'info_gauche_statistiques_referers' => 'Paj-la se paj ki done lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit w, yer ak jodila ; li repar zéwo tout 24èr la.',
@@ -906,8 +906,8 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
   nòmalman (depi  lentèfas SPIP) se endeksé
   otomatikman : komand-la selman itil nan tan ésepsyonel.',
 	'texte_moteur_recherche_non_active' => 'Motè-lachèche ki pa aktive.',
-	'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konplèks,  w kapab ajoute yon meni-dewoulè pou chwazi lalang tout atik ak ribrik yo, selon kouman w te òganize sit aw.',
-	'texte_multilinguisme_trad' => 'Ou kap mèt yon sistèm pou okipe kèk lyen ant plizyè tradiksyon yon mèm atik.',
+	'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konplèks,  w kapab ajoute yon meni-dewoulè pou chwazi lalang tout atik ak ribrik yo, selon kouman w te òganize sit aw.', # MODIF
+	'texte_multilinguisme_trad' => 'Ou kap mèt yon sistèm pou okipe kèk lyen ant plizyè tradiksyon yon mèm atik.', # MODIF
 	'texte_non_compresse' => '<i>ki pa konprese</i> (sèvè w ki pa soutni nan fonksyon la)',
 	'texte_nouveau_message' => 'Nouvo mesaj',
 	'texte_nouvelle_version_spip_1' => 'W te enstalé yon nouvo vésyon SPIP.',

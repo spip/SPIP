@@ -350,7 +350,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_gauche_auteurs' => 'Itt található a honlap összes szerzője.
  Saját státuszuk az ikon színe szerint van jelölve ( adminisztrátor = zöld; szerző = sárga).',
 	'info_gauche_auteurs_exterieurs' => 'A külső szerzők, melyek nem férhetnek a honlaphoz, kék ikonnal vannak jelölve ;
-a törölt szerzők pedig kukával vannak jelölve.',
+a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_gauche_messagerie' => 'A levelezés lehetővé tesz szerzők közti üzenetcserét, emlékeztetők (saját használatra) megtartását, vagy hírdetések megjelenítését a privát rész főoldalán (amennyiben Ön adminisztrátor).',
 	'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
 	'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',
@@ -877,8 +877,8 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
  ha gyors újraindexálást szeretne (például egy mentés resztaurálása után).
  Jegyezze meg, hogy a rendesen (az SPIP    felületen) módosított dokumentumok automatikusan vannak újra indexelve : ez a parancs tehát csak rendkivül esetben hasznos.',
 	'texte_moteur_recherche_non_active' => 'A kereső motor nincs aktiválva.',
-	'texte_multilinguisme' => 'Amennyiben több nyelvű cikkeket szeretne kezelni, komplex böngészés mellett, egy nyelvi menüt lehet tenni a cikkekhez és/vagy a rovatokhoz, a honlapja felépítésétől függően.',
-	'texte_multilinguisme_trad' => 'Egy linkeket kezelő rendszert is lehet aktiválni egy cikk különböző fordításai között.',
+	'texte_multilinguisme' => 'Amennyiben több nyelvű cikkeket szeretne kezelni, komplex böngészés mellett, egy nyelvi menüt lehet tenni a cikkekhez és/vagy a rovatokhoz, a honlapja felépítésétől függően.', # MODIF
+	'texte_multilinguisme_trad' => 'Egy linkeket kezelő rendszert is lehet aktiválni egy cikk különböző fordításai között.', # MODIF
 	'texte_non_compresse' => '<i>nincs tömörítve</i> (az Ön szervere nem él azzal a lehetőséggel)',
 	'texte_nouveau_message' => 'Új üzenet',
 	'texte_nouvelle_version_spip_1' => 'Az SPIP egyik újabb verzióját telepítette.',

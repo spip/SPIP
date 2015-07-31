@@ -110,11 +110,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'dumane',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ à @heure@',
+	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
+	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ di u @annee@',
 	'date_fmt_mois_annee' => '@nommois@ di u @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'u @nomjour@ @date@',
+	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
+	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
 	'date_fmt_periode_from' => 'Du', # NEW
 	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'ore',
@@ -422,7 +428,7 @@ sera ignorée) :
 	'info_multi_herit' => 'Lingua predefinita',
 	'info_multi_langues_soulignees' => 'E <u>lingue sottufrisgiate</u> godenu d\'una traduzzione di tutti i testi di l\'interfaccia. 
 		Sè vo sceglite ste lingue, seranu tradutti in autumàticu assai elementi di u situ pùbblicu (date, furmulari, ...). 
-		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.',
+		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.', # MODIF
 	'info_multilinguisme' => 'Multilinguìsimu',
 	'info_nom_non_utilisateurs_connectes' => 'U vostru nome ùn cumparisce micca in a lista di l\'utilizatori cunnessi.',
 	'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l\'utilizatori cunnessi.',

@@ -358,7 +358,7 @@ ou da rede',
 	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do site.
 Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde; redactor = amarelo).',
 	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao sítio, são indicados por um ícone azul ;
- os autores apagados, por um caixote de lixo.',
+ os autores apagados, por um caixote de lixo.', # MODIF
 	'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado ( se for administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
@@ -910,8 +910,8 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
  maneira normal (a partir da interface SPIP) são automaticamente
  reindexados : este comando portanto só é útil de maneira excepcional',
 	'texte_moteur_recherche_non_active' => 'O motor de pesquisa não está activado.',
-	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.',
-	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.',
+	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.', # MODIF
+	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.', # MODIF
 	'texte_non_compresse' => '<i>não comprimido</i> ( o seu sezrvidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
 	'texte_nouvelle_version_spip_1' => 'Instalou uma nova versão de SPIP.',

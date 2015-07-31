@@ -361,7 +361,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_gauche_auteurs' => 'Equí s\'alcuentren tolos autores del sitiu.
  El so estatutu vien indicáu pola color de l\'iconu (alministrador = verde; redactor = mariellu).',
 	'info_gauche_auteurs_exterieurs' => 'Los autores esternos, ensin accesu al sitiu, vienen indicaos con un iconu azul;
-  los autores esborráos con un calderu de basoria.',
+  los autores esborráos con un calderu de basoria.', # MODIF
 	'info_gauche_messagerie' => 'La mensaxería permite mandase mensaxes ente redactores, conservar recordatorioss (pa usu personal) o amosar anuncies na páxina principal de l\'espaciu priváu (si yes alministrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMBERU',
 	'info_gauche_statistiques_referers' => 'Esta páxina presenta la llista de los <i>referers</i>, que son sitios que contienen enllaces que apunten pa esti mesmu sitiu, namái d\'ayeri y de güei; esta llista ponse a cero cada 24 hores.',
@@ -907,8 +907,8 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
   de mou normal (dende la interfaz SPIP) reindexense automáticamente:
   esta orde, poro, nun ye afayadiza sinon de mou esceicional.',
 	'texte_moteur_recherche_non_active' => 'El motor de restolar nun ta activáu.',
-	'texte_multilinguisme' => 'Si quiés xuestionar artículos en delles llingües, con una ñavegación complexa, pues amestar un menú de seleición de llingua nos articulos y/o nes estayes, al aldu de la organización del sitiu.',
-	'texte_multilinguisme_trad' => 'Igualmente pues activar un sistema de xestión de enllaces ente les distintes traducciones d\'un artículu.',
+	'texte_multilinguisme' => 'Si quiés xuestionar artículos en delles llingües, con una ñavegación complexa, pues amestar un menú de seleición de llingua nos articulos y/o nes estayes, al aldu de la organización del sitiu.', # MODIF
+	'texte_multilinguisme_trad' => 'Igualmente pues activar un sistema de xestión de enllaces ente les distintes traducciones d\'un artículu.', # MODIF
 	'texte_non_compresse' => '<i>non comprimíu</i> (el to sirvidor nun soporta esta carauterística)',
 	'texte_nouveau_message' => 'Mensaxe nuevu',
 	'texte_nouvelle_version_spip_1' => 'Vienes d\'instalar una versión nueva de SPIP.',

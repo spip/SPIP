@@ -378,7 +378,7 @@ néséser pou sanz inn sizé sir lo sit.', # MODIF
 	'info_gauche_admin_vider' => '<b>Pazwèb-la, lé sèlman ouvèr pou inndé responsab lo sit.</b><p> Li donn laksé sir bann fonksyon pou lantrotyen tèknik. Nana désertin sak i domann aou fé zwé inn prosésus spésyal pou lotantifikasyon. Dann ka-la inn laksé FTP lé néséser pou sanz inn sizé sir lo sit.', # MODIF
 	'info_gauche_auteurs' => 'Ou va trouv tèrla tout bann lotèr lo sitwèb.
  Bann drwa pou bann dalon lé kadré èk la koulèr likonn azot (komandèr= vèr;lotèr = zonn).',
-	'info_gauche_auteurs_exterieurs' => 'Bann lotèr-déor, sak nana pwinn laksé sir lo sitwèb, lé présizé èk inn likonn blé ; bann lotèr dégréné lé kadré èk inn korbéy.',
+	'info_gauche_auteurs_exterieurs' => 'Bann lotèr-déor, sak nana pwinn laksé sir lo sitwèb, lé présizé èk inn likonn blé ; bann lotèr dégréné lé kadré èk inn korbéy.', # MODIF
 	'info_gauche_messagerie' => 'Kazmodékri-la i permé azot mèt ansanm pou lanvwa inndé modékri antrozot, gard out prop bann gardandèt, ou byin sa ankor : afis tout bann zanons sir pazlakèy dann zéspas privé (si ou lé komandèr).',
 	'info_gauche_numero_auteur' => 'LOTÈR NIMÉRO',
 	'info_gauche_statistiques_referers' => 'Pazwèb-la i prézant lo fil <i>bann référèr</i>, ou poutoudir lo fil bann sit sak i gatir out prop sitwèb. Rannkont-la lé selman valab po yèr é zordi : fil-la i ropat zéro tout bann 24H.',
@@ -913,8 +913,8 @@ si ou vé fè zwé inn rapid nouvèl indéksasyon (dann ka-la pa égsanp: aprè 
 inn sovgard. Gard an tèt sak bann dokiman ou la sanz normalman (dopwi lafigirwèb lo SPIP), zot lé otomatikman 
 réindéksé : é litilité la komand-la lé donk ésépsyonèl.',
 	'texte_moteur_recherche_non_active' => 'Rodèr do SPIP lé pa an mars.',
-	'texte_multilinguisme' => 'Si ou vé zèr out bann zartik dann plizyèr lang, èk inn sistèm navigasyon konplèks, ou pé azout inn ménidswa lalang lartik ou laribrik.',
-	'texte_multilinguisme_trad' => 'Ou pé osi azout inn sistèm lazéstyon bann gatir ant tout bann tradiksyon inn minm lartik.',
+	'texte_multilinguisme' => 'Si ou vé zèr out bann zartik dann plizyèr lang, èk inn sistèm navigasyon konplèks, ou pé azout inn ménidswa lalang lartik ou laribrik.', # MODIF
+	'texte_multilinguisme_trad' => 'Ou pé osi azout inn sistèm lazéstyon bann gatir ant tout bann tradiksyon inn minm lartik.', # MODIF
 	'texte_non_compresse' => '<i>Lé pa konpèrsé</i> (akoz out servèr i pé pa fé zwé lafonksyon-la)',
 	'texte_nouveau_message' => 'Nouvo modékri',
 	'texte_nouvelle_version_spip_1' => 'Ou la finn instal inn nouvèl versyon do SPIP.',

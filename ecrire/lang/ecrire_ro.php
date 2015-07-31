@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Găsiţi aici toţi autorii acestui site.
  Starea lor este indicată prin codul de culori al iconiţei asociate (administrator = verde; redactor = galben).',
 	'info_gauche_auteurs_exterieurs' => 'Autorii existenţi, fără acces la site, sunt indicaţi cu ajutorul unei iconiţe albastre ;
-  iar autorii şterşi - printr-o iconiţă ce simbolizează un coş de gunoi.',
+  iar autorii şterşi - printr-o iconiţă ce simbolizează un coş de gunoi.', # MODIF
 	'info_gauche_messagerie' => 'Mesageria vă permite să schimbaţi mesaje între redactori, să conservaţi ciorne (pentru folosul dumneavoastră personal) sau pentru a afişa anunţuri pe pagina de gardă a spaţiului privat (dacă sunteţi administrator).',
 	'info_gauche_numero_auteur' => 'AUTORUL NUMĂRUL',
 	'info_gauche_statistiques_referers' => 'Această pagină prezintă lista <i>referers</i>, adică a site-urilor care conţin legături către acest site, doar pentru ieri şi astăzi ; această listă este re-iniţializată la fiecare 24 de ore.',
@@ -882,8 +882,8 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
   modificate în mod normal (adică cu ajutorul interfeţei SPIP) sunt în mod automat
   reindexate : aşadar, această comandă nu este utilă decât în mod excepţional.',
 	'texte_moteur_recherche_non_active' => 'Motorul de căutare nu este activat.',
-	'texte_multilinguisme' => 'Dacă doriţi să gestionaţi articole în mai multe limbi, cu o navigare complexă, puteţi să adăugaţi un meniu de selectare a limbii pentru articole şi/sau rubrici, în funcţie de organizarea site-ului dumneavoastră.',
-	'texte_multilinguisme_trad' => 'Puteţi, de asemenea, să activaţi sistemul de gestiune a legăturilor între diferitele traduceri ale unui articol.',
+	'texte_multilinguisme' => 'Dacă doriţi să gestionaţi articole în mai multe limbi, cu o navigare complexă, puteţi să adăugaţi un meniu de selectare a limbii pentru articole şi/sau rubrici, în funcţie de organizarea site-ului dumneavoastră.', # MODIF
+	'texte_multilinguisme_trad' => 'Puteţi, de asemenea, să activaţi sistemul de gestiune a legăturilor între diferitele traduceri ale unui articol.', # MODIF
 	'texte_non_compresse' => '<i>necomprimat</i> (server-ul dumneavoastră nu suportă această funcţionalitate)',
 	'texte_nouveau_message' => 'Mesaj nou',
 	'texte_nouvelle_version_spip_1' => 'Aţi instalat o nouă versiune SPIP.',

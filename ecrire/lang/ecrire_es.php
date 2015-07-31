@@ -344,7 +344,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_vider' => '<b>Esta página sólo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento técnico. Algunas de ellas dan lugar a un proceso de autentificación para el cual es necesario tener acceso por FTP al sitio web.</p>',
 	'info_gauche_auteurs' => 'Aquí figuran todos los autores y autoras del sitio.
  Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',
-	'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, están indicados con un icono azul; los que están borrados con una papelera.',
+	'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, están indicados con un icono azul; los que están borrados con una papelera.', # MODIF
 	'info_gauche_messagerie' => 'La mensajería permite comunicarse, crear recordatorios para traer a la memoria algo o publicar anuncios (en el caso de pertenecer al grupo de administración).',
 	'info_gauche_numero_auteur' => 'AUTOR O AUTORA NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página presenta la lista de los <i>referers</i>, es decir de los sitios que contienen enlaces que llevan a tu propio sitio, sólo para ayer y hoy; esta lista se pone a cero cada 24 horas.',
@@ -773,10 +773,10 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	// Q
 	'queue_executer_maintenant' => 'Ejecutar ahora',
 	'queue_info_purger' => 'Puedes eliminar todos los trabajos pendientes y reinicializar la lista con los trabajos periódicos',
-	'queue_nb_jobs_in_queue' => '@nb@ trabajos en esperanza',
+	'queue_nb_jobs_in_queue' => '@nb@ trabajos en espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabajo en @nb@ s',
-	'queue_no_job_in_queue' => 'Ningún trabajo en esperanza',
-	'queue_one_job_in_queue' => '1 trabajo en esperanza',
+	'queue_no_job_in_queue' => 'Ningún trabajo en espera',
+	'queue_one_job_in_queue' => '1 trabajo en espera',
 	'queue_purger_queue' => 'Purgar la lista de trabajos',
 	'queue_titre' => 'Lista de trabajos',
 
@@ -862,8 +862,8 @@ Utiliza este formulario con precaución...',
 	'texte_modifier_article' => 'Modificar el artículo:',
 	'texte_moteur_recherche_active' => '<b>El motor de búsqueda está activado.</b> Utiliza este comando si deseas proceder a una reindexación rápida (después de la restauración de una copia de respaldo, por ejemplo). Nota que los documentos modificados de modo normal (mediante la interfaz SPIP) se vuelven a indexar automáticamente: esta orden sólo es útil excepcionalmente.',
 	'texte_moteur_recherche_non_active' => 'El motor de búsqueda no está activado.',
-	'texte_multilinguisme' => 'Si deseas manejar artículos en varios idiomas, con una navegación compleja, puedes agregar un menú de selección de lengua para los artículos y/o para las secciones en función de la organización de tu sitio.',
-	'texte_multilinguisme_trad' => 'También puedes activar un sistema de enlaces entre las diferentes traducciones de un artículo. ',
+	'texte_multilinguisme' => 'Si deseas manejar objetos en varios idiomas, con una navegación compleja, puedes agregar un menú de selección de idioma para esos objetos, en función de la organización de tu sitio.',
+	'texte_multilinguisme_trad' => 'También puedes activar un sistema de gestión de enlaces entre las diferentes traducciones de ciertos objetos. ',
 	'texte_non_compresse' => '<i>no comprimido</i> (tu servidor no soporta esta funcionalidad)',
 	'texte_nouveau_message' => 'Nuevo mensaje',
 	'texte_nouvelle_version_spip_1' => 'Has instalado una versión nueva de SPIP.',

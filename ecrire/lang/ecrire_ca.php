@@ -343,7 +343,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_gauche_auteurs' => 'Aquí hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (administrador = verd; redactor = groc).',
 	'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense accés al lloc, estan indicats amb una icona blava;
- els autors esborrats amb una paperera.',
+ els autors esborrats amb una paperera.', # MODIF
 	'info_gauche_messagerie' => 'La missatgeria us permet intercanviar missatges entre els redactors, conservar recordatoris (pel vostre ús personal) o mostrar avisos a la pàgina inicial de l\'espai privat (si sóu administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Aquesta pàgina mostra la llista de  <i>referidors</i>, és a dir, dels llocs que contenen enllaços cap al vostre propi lloc Web, únicament per ahir i avui; aquesta llista es posa a zero cada 24 hores. ',
@@ -865,8 +865,8 @@ Useu aquest formulari amb precaució...',
  d\'una còpia de seguretat, per exemple). Heu d\'adonar-vos que els documents modificats de forma normal(des de la interfície d\'SPIP) són automàticament
 reindexats: aquesta comanda no és útil només que de manera excepcional.',
 	'texte_moteur_recherche_non_active' => 'El motor de recerca no està activat.',
-	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l\'idioma dels articles i/o de les seccions, en funció de l\'organització del lloc web.',
-	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d\'enllaços entre les diferents traduccions d\'un article.',
+	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l\'idioma dels articles i/o de les seccions, en funció de l\'organització del lloc web.', # MODIF
+	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d\'enllaços entre les diferents traduccions d\'un article.', # MODIF
 	'texte_non_compresse' => ' <i>no comprimit</i> (el servidor no suporta aquesta funcionalitat)',
 	'texte_nouveau_message' => 'Missatge nou',
 	'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versió d\'SPIP.',

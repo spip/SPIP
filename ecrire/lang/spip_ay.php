@@ -108,11 +108,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'Arumanthi',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a las @heure@',
+	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
+	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
+	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
+	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
 	'date_fmt_periode_from' => 'Du', # NEW
 	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'Uras',
@@ -428,7 +434,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 	'info_multi_herit' => 'Armaqat aru',
 	'info_multi_langues_soulignees' => '&lt;u&gt;Arunakaxa  sirqitanakaxa&lt;/u&gt; ajanutxa taqpach sawutanak mä jaqukipaw churi.
 
-Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ laphinaka) justupak jaqukiptatani. Jani aru sirqitanakataki, qamawit arun  uñstani.',
+Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ laphinaka) justupak jaqukiptatani. Jani aru sirqitanakataki, qamawit arun  uñstani.', # MODIF
 	'info_multilinguisme' => 'Walja arunaka',
 	'info_nom_non_utilisateurs_connectes' => 'Sutimax janiw uñstkiti  jaqi tantanakan chinuta',
 	'info_nom_utilisateurs_connectes' => 'Sutimax uñstiw jaqi tantanakan chinuta',

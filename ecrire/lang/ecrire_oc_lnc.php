@@ -342,7 +342,7 @@ L\'administrator del sistèma o de la ret vos deu poder fornir
 	'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i pòdon accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. D\'unas que i a implican un procès d\'autentificacion especific, que necessita un accès FTP al sit web.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i pòdon accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. D\'unas que i a implican un procès d\'autentificacion especific, que necessita un accès FTP al sit web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Trobaretz aicí totes los autors del sit. La color de las icònas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
-	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès al sit, son indicats per una icòna blava; los autors escafats per un bordilhièr.',
+	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès al sit, son indicats per una icòna blava; los autors escafats per un bordilhièr.', # MODIF
 	'info_gauche_messagerie' => 'La messatjariá vos permet d\'escambiar de messatges entre redactors, de servar de mementos (per vòstre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acuèlh de l\'espaci privat (se sètz administrator/tritz).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMÈRO',
 	'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <i>referidors</i>, valent a dire dels sits que contenon de ligams menant cap a vòstre quite sit, mas unicament per ièr e uèi: aquela lista s\'actualiza cada 24 oras.',
@@ -883,8 +883,8 @@ una color indica lor estat:',
   biais normal (a partir de l\'interfàcia SPIP) se tornan indexar
   automaticament: donc aquesta comanda es utila pas que d\'un biais excepcional.',
 	'texte_moteur_recherche_non_active' => 'Lo cercador es pas activat.',
-	'texte_multilinguisme' => 'Se desiratz de gerir d\'articles en mai d\'una lenga, amb una navigacion complèxa, podètz apondre un menut per causir la lenga dels articles e/o de las rubricas, en foncion de l\'organizacion de vòstre sit.',
-	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistèma de gestion dels ligams entre las diferentas reviradas d\'un article.',
+	'texte_multilinguisme' => 'Se desiratz de gerir d\'articles en mai d\'una lenga, amb una navigacion complèxa, podètz apondre un menut per causir la lenga dels articles e/o de las rubricas, en foncion de l\'organizacion de vòstre sit.', # MODIF
+	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistèma de gestion dels ligams entre las diferentas reviradas d\'un article.', # MODIF
 	'texte_non_compresse' => '<i>non comprimit</i> (pr\'amor que vòstre servidor supòrta pas aquela foncionalitat)',
 	'texte_nouveau_message' => 'Messatge nòu',
 	'texte_nouvelle_version_spip_1' => 'Avètz installada una version novèla d\'SPIP.',

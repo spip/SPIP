@@ -350,7 +350,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_gauche_auteurs' => 'Vi trovos ĉi tie ĉiujn aŭtorojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 	'info_gauche_auteurs_exterieurs' => 'La eksteraj aŭtoroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo ;
- la aŭtoroj forviŝitaj per bildo de rubujo.',
+ la aŭtoroj forviŝitaj per bildo de rubujo.', # MODIF
 	'info_gauche_messagerie' => 'La mesaĝilo ebligas al vi interŝanĝi mesaĝojn inter aŭtoroj, konservi memorigilojn (por via propra uzado) aŭ afiŝi anoncojn ĉe la hejmpaĝo de la privata spaco (se vi estas mastrumanto).',
 	'info_gauche_numero_auteur' => 'AŬTORA NUMERO',
 	'info_gauche_statistiques_referers' => 'Tiu paĝo prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hieraŭ kaj hodiaŭ : tiu listo estas prastatigita ĉiujn 24 horojn.',
@@ -887,8 +887,8 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   (ekde la SPIP-interfaco) estas aŭtomate reindeksitaj:
   tiu ĉi komando estas do nur escepte utila.',
 	'texte_moteur_recherche_non_active' => 'La serĉilo ne estas aktivgita.',
-	'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.',
-	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
+	'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.', # MODIF
+	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.', # MODIF
 	'texte_non_compresse' => '<i>ne densigita</i> (ĉar via servilo ne eltenas tiun funkcion)',
 	'texte_nouveau_message' => 'Nova mesaĝo',
 	'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',

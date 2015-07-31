@@ -357,7 +357,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_gauche_auteurs' => 'Zde jsou uvedeni všichni autoři webu.
  Jsou rozlišeni barvou ikony (správce = zelená; redaktor = žlutá).',
 	'info_gauche_auteurs_exterieurs' => 'Externí autoři bez přístupu k webu jsou označeni modrou ikonou;
-  odstranění autoři symbolem odpadkového koše.',
+  odstranění autoři symbolem odpadkového koše.', # MODIF
 	'info_gauche_messagerie' => 'Systém zpráv umožňuje zasílat zprávy mezi redaktory, ukládat interní poznámky a zveřejňovat oznámení na hlavní stánce interní části webu (jste-li správce).',
 	'info_gauche_numero_auteur' => 'ČÍSLO AUTORA',
 	'info_gauche_statistiques_referers' => 'Na této stránce je seznam <i>referencí</i>, to je webů, ze kterých vede odkaz na váš vlastní web. Údaje jsou pouze za včerejšek a dnešek. Seznam se každých 24 hodin vynuluje.',
@@ -899,8 +899,8 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
   (pomocí rozhraní systému SPIP) jsou reindexovány automaticky:
   Příkaz je tedy vhodné používat pouze výjimečně.',
 	'texte_moteur_recherche_non_active' => 'Vyhledávač je vypnut.',
-	'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.',
-	'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.',
+	'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.', # MODIF
+	'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.', # MODIF
 	'texte_non_compresse' => '<i>nekomprimováno</i> (váš server tuto funkci nepodporuje)',
 	'texte_nouveau_message' => 'Nová zpráva',
 	'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi systému SPIP.',
