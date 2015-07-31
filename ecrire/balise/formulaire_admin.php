@@ -79,6 +79,8 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	if (isset($debug['validation'])) {
 		$env['xhtml_error'] = $debug['validation'];
 	}
+	
+	$env['_pipeline'] = 'formulaire_admin';
 
 	return array('formulaires/administration', 0, $env);
 }
