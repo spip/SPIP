@@ -20,10 +20,9 @@ function recuperer_page($url) {
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
 
-	$f = ($http_proxy) ? 0 : @fopen($url, "rb");
+	spip_log("syndication $http_proxy$url"); 
 
-	if (!$f) {
-		for (;;) {
+	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 			$t = @parse_url($url);
 			$host = $t['host'];
 			if (!($port = $t['port'])) $port = 80;
@@ -40,11 +39,16 @@ function recuperer_page($url) {
 
 			if (!$f) return;
 
-			if ($http_proxy) {
-				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
-			}
+			if ($http_proxy)
+				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\n");
 			else
-				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\n");
+
+			fputs($f, "Host: $host\n");
+			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.uzine.net/spip)\n");
+			if ($referer = lire_meta("adresse_site"))
+				fputs($f, "Referer: $referer/\n");
+			fputs($f,"\n");
 
 			$s = trim(fgets($f, 16384));
 			if (ereg('^HTTP/[0-9]+\.[0-9]+ ([0-9]+)', $s, $r)) {
@@ -60,8 +64,14 @@ function recuperer_page($url) {
 			else if ($status != 200) return;
 			else break;
 			fclose($f);
-		}
 	}
+
+	if (!$f AND !$http_proxy)	// methode fopen
+		$f = fopen($url, "rb");
+
+	if (!f)
+		spip_log("ECHEC syndication $http_proxy$url");
+
 	while (!feof($f)) {
 		$result .= fread($f, 16384);
 	}
