@@ -6,6 +6,10 @@ if (defined("_ECRIRE_INC_MAIL")) return;
 define("_ECRIRE_INC_MAIL", "1");
 
 
+//
+// Chez lyconiania, envoyer un mail coupe la connection MySQL (sic)
+//
+
 $GLOBALS['queue_mails'] = '';
 
 function envoyer_queue_mails() {
@@ -21,10 +25,6 @@ function envoyer_queue_mails() {
 	}
 }
 
-//
-// Chez lyconiania, envoyer un mail coupe la connection MySQL (sic)
-//
-
 if ($GLOBALS['hebergeur'] == 'lycos') {
 	register_shutdown_function(envoyer_queue_mails);
 }
@@ -36,14 +36,15 @@ function tester_mail() {
 	return $test_mail;
 }
 
+
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
 
 	if (!$from) $from = $email;
-	if (! email_valide ($email) ) return false;
+	if (!email_valide($email)) return false;
 	if ($email == "vous@fournisseur.com") return false;
 
-	spip_log("mail <$email>: $sujet");
+	spip_log("mail ($email): $sujet");
 
 	if (!$charset = lire_meta('charset'))$
 		$charset='iso-8859-1';
@@ -79,6 +80,9 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 }
 
 function extrait_article($row) {
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
+
 	$adresse_site = lire_meta("adresse_site");
 
 	$id_article = $row[0];
@@ -110,7 +114,7 @@ function extrait_article($row) {
 
 function nettoyer_titre_email($titre) {
 	$titre = ereg_replace("\n", ' ', supprimer_tags($titre));
-	return ($titre); 
+	return ($titre);
 }
 
 function envoyer_mail_publication($id_article) {

@@ -333,7 +333,7 @@ function extraire_lien ($regs) {
 		include_local('inc-urls-dist.php3');
 	} else {
 		include_ecrire('inc_urls.php3');
-	} 
+	}
 
 	$lien_texte = $regs[1];
 	$ouvrant = ($regs[2] == '>');

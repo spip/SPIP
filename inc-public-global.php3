@@ -383,7 +383,8 @@ if (lire_meta("activer_statistiques") != "non") {
 //
 
 $majnouv = lire_meta('majnouv');
-if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide($adresse_neuf = lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
+if (lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta('jours_neuf')
+	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - $majnouv) > 3600 * 24 * $jours_neuf) {
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
 		// lock && indication du prochain envoi
