@@ -545,8 +545,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 					." ?\n\t$tab($res) :\n\t$tab($altern))";
 			}
 			if ($ahah_out!==false){
-				$code = "(\$ahah = '<div id=\"$ahah_out[0]_$ahah_out[1]\" class=\"bloc_ahah_pagination $ahah_out[0] $ahah_out[1]\">'.$code.'</div>').
-				((\$_GET['ahah_id']=='$ahah_out[0]_$ahah_out[1]')?die(\$ahah):'')";
+				$code = "'<div id=\"$ahah_out[0]_$ahah_out[1]\" class=\"bloc_ahah_pagination\">'
+				.(\$ahah = $code).
+				((\$_GET['ahah_id']=='$ahah_out[0]_$ahah_out[1]')?die(\$ahah):'').'</div>'";
 			}
 		}
 		if ($code != "''")
