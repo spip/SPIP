@@ -1808,23 +1808,24 @@ function filtre_find($array, $val) {
 // http://doc.spip.org/@filtre_pagination_dist
 function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='', $env=array()) {
 	static $ancres = array();
-	$bloc_ancre = "";
-	
-	if ($pas<1) return;
-
-	$debut = 'debut'.$nom; // 'debut_articles'
+	if ($pas<1) return '';
 	$ancre = 'pagination'.$nom; // #pagination_articles
+	$debut = 'debut'.$nom; // 'debut_articles'
+
+	// n'afficher l'ancre qu'une fois
+	if (!isset($ancres[$ancre]))
+		$ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+	// liste = false : on ne veut que l'ancre
+	if (!$liste)
+		return $ancres[$ancre];
 
 	// Si le contexte ne contient pas de debut_xx, on regarde les globales
 	// (de facon a permettre la pagination dans les modeles) ; c'est une
 	// legere entorse au schema de base (squelette+contexte => page), mais
 	// sinon il faut une usine a gaz pour passer debut_xx dans propre()...
+
 	if ($position === NULL)
 		$position = _request($debut);
-
-	// n'afficher l'ancre qu'une fois
-	if (!isset($ancres[$ancre]))
-		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
 
 	$pagination = array(
 		'debut' => $debut,
@@ -1835,7 +1836,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		'nombre_pages' => floor(($total-1)/$pas)+1,
 		'page_courante' => floor(intval($position)/$pas)+1,
 		'ancre' => $ancre,
-		'bloc_ancre' => $bloc_ancre
+		'bloc_ancre' => $ancres[$ancre]
 	);
 	if (is_array($env))
 		$pagination = array_merge($env,$pagination);
@@ -1843,10 +1844,6 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 	// Pas de pagination
 	if ($pagination['nombre_pages']<=1)
 		return '';
-
-	// liste = false : on ne veut que l'ancre
-	if (!$liste)
-		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
 
