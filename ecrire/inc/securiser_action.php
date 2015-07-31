@@ -12,11 +12,26 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// interface d'appel:
-// - au moins un argument: retourne une URL ou un formulaire securises
-// - sans argument: verifie la securite et retourne _request('arg'), ou exit.
-
-// http://doc.spip.org/@inc_securiser_action_dist
+/**
+ * interface d'appel:
+ * - au moins un argument: retourne une URL ou un formulaire securises
+ * - sans argument: verifie la securite et retourne _request('arg'), ou exit.
+ *
+ * http://doc.spip.org/@inc_securiser_action_dist
+ *
+ * @param string $action
+ * @param string $arg
+ * @param string $redirect
+ * @param bool|int|string $mode
+ *   -1 : renvoyer action, arg et hash sous forme de array()
+ *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   string : renvoyer un formulaire
+ * @param string|int $att
+ *   id_auteur pour lequel generer l'action en mode url ou array()
+ *   atributs du formulaire en mode formulaire
+ * @param bool $public
+ * @return array|string
+ */
 function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='', $public=false)
 {
 	if ($action)
@@ -33,24 +48,39 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 	}
 }
 
-// Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
-// cf http://fr.php.net/urldecode#48481
-// http://doc.spip.org/@securiser_action_auteur
-function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='', $public=false)
-{
-	static $id_auteur=0, $pass;
-	if (!$id_auteur) {
-		list($id_auteur, $pass) =  caracteriser_auteur();
-	}
-	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
+/**
+ * Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
+ * cf http://fr.php.net/urldecode#48481
+ * http://doc.spip.org/@securiser_action_auteur
+ *
+ * @param string $action
+ * @param string $arg
+ * @param string $redirect
+ * @param bool|int|string $mode
+ *   -1 : renvoyer action, arg et hash sous forme de array()
+ *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   string : renvoyer un formulaire
+ * @param string|int $att
+ *   id_auteur pour lequel generer l'action en mode url ou array()
+ *   atributs du formulaire en mode formulaire
+ * @param bool $public
+ * @return array|string
+ */
+function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='', $public=false) {
+
+	// mode URL ou array
 	if (!is_string($mode)){
+		$hash = calculer_action_auteur("$action-$arg",is_numeric($att)?$att:null);
+
 		$r = rawurlencode($redirect);
 		if ($mode===-1)
 			return array('action'=>$action,'arg'=>$arg,'hash'=>$hash);
 		else
-			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $att);
+			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $public);
 	}
 
+	// mode formulaire
+	$hash = calculer_action_auteur("$action-$arg");
 	$att .= " style='margin: 0px; border: 0px'";
 	if ($redirect)
 		$redirect = "\n\t\t<input name='redirect' type='hidden' value='". str_replace("'", '&#39;', $redirect) ."' />";
@@ -61,14 +91,18 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 	return generer_form_action($action, $mode, $att, $public);
 }
 
-// http://doc.spip.org/@caracteriser_auteur
-function caracteriser_auteur() {
-	global $visiteur_session;
+/**
+ * Caracteriser un auteur : l'auteur loge si $id_auteur=null
+ *
+ * http://doc.spip.org/@caracteriser_auteur
+ *
+ * @param int|null $id_auteur
+ * @return array
+ */
+function caracteriser_auteur($id_auteur=null) {
 	static $caracterisation = array();
 
-	if ($caracterisation) return $caracterisation;
-
-	if (!isset($visiteur_session['id_auteur'])) {
+	if (is_null($id_auteur) AND !isset($GLOBALS['visiteur_session']['id_auteur'])) {
 	// si l'auteur courant n'est pas connu alors qu'il peut demander une action
 	// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
 	// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
@@ -80,14 +114,19 @@ function caracteriser_auteur() {
 		} else return array('0','');
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
-	$id_auteur = $visiteur_session['id_auteur'];
-	if (isset($visiteur_session['pass']) AND $visiteur_session['pass'])
-		return $caracterisation = array($id_auteur, $visiteur_session['pass']); 
-	else if ($id_auteur>0) {
+	if (is_null($id_auteur)){
+		$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0;
+		if (isset($GLOBALS['visiteur_session']['pass']) AND $GLOBALS['visiteur_session']['pass'])
+			return $caracterisation[$id_auteur] = array($id_auteur, $GLOBALS['visiteur_session']['pass']);
+	}
+
+	if ($caracterisation[$id_auteur]) return $caracterisation[$id_auteur];
+
+	if ($id_auteur) {
 		include_spip('base/abstract_sql');
 		$t = sql_fetsel("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t)
-			return $caracterisation = array($t['id_auteur'], $t['pass']);
+			return $caracterisation[$id_auteur] = array($t['id_auteur'], $t['pass']);
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
@@ -98,7 +137,19 @@ function caracteriser_auteur() {
 	}
 }
 
-// http://doc.spip.org/@_action_auteur
+/**
+ * Calcule une cle securisee pour une action et un auteur donnes
+ * utilisee pour generer des urls personelles pour executer une action qui modifie la base
+ * et verifier la legitimite de l'appel a l'action
+ *
+ * http://doc.spip.org/@_action_auteur
+ *
+ * @param string $action
+ * @param int $id_auteur
+ * @param string $pass
+ * @param string $alea
+ * @return string
+ */
 function _action_auteur($action, $id_auteur, $pass, $alea) {
 	static $sha = array();
 	if (!isset($sha[$id_auteur.$pass.$alea])){
@@ -121,18 +172,34 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 		return md5($action.$sha[$id_auteur.$pass.$alea]);
 }
 
-// http://doc.spip.org/@calculer_action_auteur
-function calculer_action_auteur($action) {
-	list($id_auteur, $pass) = caracteriser_auteur();
+/**
+ * Calculer le hash qui signe une action pour un auteur
+ * http://doc.spip.org/@calculer_action_auteur
+ *
+ * @param string $action
+ * @param int|null $id_auteur
+ * @return string
+ */
+function calculer_action_auteur($action, $id_auteur=null) {
+	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
 	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
 }
 
-// http://doc.spip.org/@verifier_action_auteur
-function verifier_action_auteur($action, $valeur) {
+
+/**
+ * Verifier le hash de signature d'une action
+ * toujours exclusivement pour l'auteur en cours
+ * http://doc.spip.org/@verifier_action_auteur
+ *
+ * @param $action
+ * @param $hash
+ * @return bool
+ */
+function verifier_action_auteur($action, $hash) {
 	list($id_auteur, $pass) = caracteriser_auteur();
-	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
+	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
 		return true;
-	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
+	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
 		return true;
 	return false;
 }
@@ -142,9 +209,15 @@ function verifier_action_auteur($action, $valeur) {
 // par exemple que l'URL d'un document a la bonne cle de lecture
 //
 
-// Le secret du site doit rester aussi secret que possible, et est eternel
-// On ne doit pas l'exporter
-// http://doc.spip.org/@secret_du_site
+/**
+ * Renvoyer le secret du site, et le generer si il n'existe pas encore
+ * Le secret du site doit rester aussi secret que possible, et est eternel
+ * On ne doit pas l'exporter
+ *
+ * http://doc.spip.org/@secret_du_site
+ *
+ * @return string
+ */
 function secret_du_site() {
 	if (!isset($GLOBALS['meta']['secret_du_site'])){
 		include_spip('base/abstract_sql');
@@ -160,7 +233,13 @@ function secret_du_site() {
 	return $GLOBALS['meta']['secret_du_site'];
 }
 
-// http://doc.spip.org/@calculer_cle_action
+/**
+ * Calculer une signature valable pour une action et pour le site
+ * http://doc.spip.org/@calculer_cle_action
+ *
+ * @param string $action
+ * @return string
+ */
 function calculer_cle_action($action) {
 	if (function_exists('sha1'))
 		return sha1($action . secret_du_site());
@@ -168,7 +247,14 @@ function calculer_cle_action($action) {
 		return md5($action . secret_du_site());
 }
 
-// http://doc.spip.org/@verifier_cle_action
+/**
+ * Verifier la cle de signature d'une action valable pour le site
+ * http://doc.spip.org/@verifier_cle_action
+ *
+ * @param string $action
+ * @param string $cle
+ * @return bool
+ */
 function verifier_cle_action($action, $cle) {
 	return ($cle == calculer_cle_action($action));
 }

@@ -1347,11 +1347,20 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	. "</div></form>\n";
 }
 
-// Attention, JS/Ajax n'aime pas le melange de param GET/POST
-// On n'applique pas la recommandation ci-dessus pour les scripts publics
-// qui ne sont pas destines a etre mis en signets
-
-// http://doc.spip.org/@generer_form_action
+/**
+ * Generer un formulaire pour lancer une action vers $script
+ *
+ * Attention, JS/Ajax n'aime pas le melange de param GET/POST
+ * On n'applique pas la recommandation ci-dessus pour les scripts publics
+ * qui ne sont pas destines a etre mis en signets
+ * http://doc.spip.org/@generer_form_action
+ *
+ * @param string $script
+ * @param string $corps
+ * @param string $atts
+ * @param bool $public
+ * @return string
+ */
 function generer_form_action($script, $corps, $atts='', $public=false) {
 	// si l'on est dans l'espace prive, on garde dans l'url
 	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
