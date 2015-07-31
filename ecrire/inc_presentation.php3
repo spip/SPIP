@@ -1285,6 +1285,10 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	   }
 	}
 	
+	function setvisibility (objet, statut) {
+		findObj(objet).style.visibility = statut;
+	}
+	
 	function getHeight(obj) {
 		if (obj == "window") {
 			return hauteur_fenetre();

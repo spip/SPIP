@@ -285,7 +285,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$s = "<form action='$url_base#mots' method='post' style='margin:0px; padding: 0px'>";
 				$s .= "<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
 				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
-				$s .= "<select name='nouv_mot' CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
+				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
 	
 				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe";
 				$result_autres_mots = spip_query($query_autres_mots);
@@ -299,7 +299,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				}
 				$s .= "</select>";
 				$s .= "<INPUT TYPE='Hidden' NAME='supp_mot' VALUE='$id_mot'>";
+				$s .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
 				$s .= " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>";
+				$s .= "</span>";
 				$s .= "</form>";
 	
 			} else {
@@ -410,16 +412,18 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "</td>\n<td>";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20'>";
 					else if ($unseul == "oui")
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20'>";
 					else
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; ' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; ' VALUE=\"$titre_groupe\" SIZE='20'>";
 
 					echo "</td>\n<td>";
 					echo "<INPUT TYPE='hidden' NAME='select_groupe'  VALUE='$id_groupe'>";
 
+					echo "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
 					echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo' STYLE='font-size:10px'>";
+					echo "</span>";
 					echo "</td></FORM>";
 					echo "</tr>";
 				}
@@ -432,11 +436,11 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "</td>\n<td>";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
 					else if ($unseul == "oui")
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
 					else
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; ' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; ' CLASS='fondl'>";
 
 					$ifond == 0;
 					echo "<OPTION VALUE='x' style='font-variant: small-caps;'>$titre_groupe";
@@ -450,7 +454,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					}
 					echo "</SELECT>";
 					echo "</td>\n<td>";
+					echo "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
 					echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_choisir')."' CLASS='fondo'>";
+					echo "</span>";
 					echo "</td></FORM>";
 					echo "</tr>";
 				}
