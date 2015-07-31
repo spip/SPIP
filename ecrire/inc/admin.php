@@ -24,8 +24,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * exécute l'action (en base) demandée si c'est le cas.
  * 
  * Demande / vérifie le droit de création de répertoire par le demandeur;
- * Mémorise dans les meta que ce script est en cours d'execution.
- * Ii elle y est déjà c'est qu'il y a eu suspension du script, on reprend.
+ * Mémorise dans les meta que ce script est en cours d'exécution.
+ * Si elle y est déjà c'est qu'il y a eu suspension du script, on reprend.
  *
  * @uses debut_admin()
  * @uses admin_verifie_session()

@@ -11,10 +11,9 @@
 \***************************************************************************/
 
 /**
- *
  * Fonctions de base pour la sauvegarde
- * Boite a outil commune, sans prejuger de la methode de sauvegarde
- *
+ * 
+ * Boîte à outil commune, sans préjuger de la méthode de sauvegarde
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -37,9 +36,30 @@ if (@is_readable(_CACHE_PLUGINS_FCT)){
 	include_once(_CACHE_PLUGINS_FCT);
 }
 
+/**
+ * Retourne un nom de meta pour une rubrique et l'auteur connecté.
+ *
+ * Ce nom servira pour le stockage dans un fichier temporaire des informations
+ * sérialisées sur le statut de l'export.
+ *
+ * @param int $rub
+ * @return string 
+**/
 function base_dump_meta_name($rub){
 	return $meta = "status_dump_{$rub}_"  . abs($GLOBALS['visiteur_session']['id_auteur']);
 }
+
+/**
+ * Crée un répertoire recevant la sauvegarde de la base de données
+ * et retourne son chemin.
+ *
+ * @note
+ *   Utilisé uniquement dans l'ancienne sauvegarde XML (plugin dump_xml)
+ *   À supprimer ?
+ * 
+ * @param string $meta
+ * @return string 
+**/
 function base_dump_dir($meta){
 	include_spip('inc/documents');
 	// determine upload va aussi initialiser l'index "restreint"

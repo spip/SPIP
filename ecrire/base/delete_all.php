@@ -10,9 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage de la page de destruction des tables de SPIP
+ * @package SPIP\Core\Base
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@base_delete_all_dist
+/**
+ * Destruction des tables SQL de SPIP
+ * 
+ * La liste des tables à supprimer est à poster sur le nom (tableau) `delete`
+ *
+ * @pipeline_appel delete_tables
+ * @param string $titre Inutilisé
+**/
 function base_delete_all_dist($titre)
 {
 	$delete = _request('delete');

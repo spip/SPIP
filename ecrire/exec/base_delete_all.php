@@ -10,9 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage de la page de destruction des tables de SPIP
+ * @package SPIP\Core\Exec
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@exec_delete_all_dist
+/**
+ * Exec de la page de destruction des tables de SPIP
+**/
 function exec_base_delete_all_dist()
 {
 	include_spip('inc/autoriser');
