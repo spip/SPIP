@@ -483,7 +483,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	  $where :
 	 ("\".(" . 
 	  calculer_argument_precedent($idb, $col, $boucles) .
-	  "? \"$where\" : 'TRUE').\"");
+	  "? \"$where\" : '0=0').\"");
 }
 
 function calculer_critere_infixe($idb, &$boucles, $crit) {
