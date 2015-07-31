@@ -24,41 +24,42 @@ define(BALISE_DE_BOUCLE,
        ')*)[[:space:]]*>');
 
 function parser_texte($texte) {
-  while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>", $texte, $match)) {
-    $s = $match[0];
-    $p = strpos($texte, $s);
-    $debut = substr($texte, 0, $p);
-    $texte = substr($texte, $p + strlen($s));
-    if ($debut)
-      {
-	$champ = new Texte;
-	$champ->texte = $debut;
-	$result[] = $champ;
-      }
-    $champ = new Inclure;
-    $champ->fichier = $match[1];
-    $p = trim($match[2]);
-    if (!$p)
-      $champ->params = '';
-    else {
-      if (!(ereg('^\\{(.*)\\}$', $p, $params)))
-	{
-	  include_local("inc-debug-squel.php3");
-	  erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $p,
-				$champ->fichier);
-	}
-      else $champ->params = split("\}[[:space:]]*\{", $params[1]);
-    }
-    $result[] = $champ;
-  }
-  if ($texte)
-    {
-	$champ = new Texte;
-	$champ->texte = $texte;
-	$result[] = $champ;
-    }
+	while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>", $texte, $match)) {
+		$s = $match[0];
+		$p = strpos($texte, $s);
+		$debut = substr($texte, 0, $p);
+		$texte = substr($texte, $p + strlen($s));
 
-  return $result;
+		if ($debut) {
+			$champ = new Texte;
+			$champ->texte = $debut;
+			$result[] = $champ;
+		}
+		$champ = new Inclure;
+		$champ->fichier = $match[1];
+
+		$p = trim($match[2]);
+		if (!$p)
+			$champ->params = '';
+		else {
+			if (!(ereg('^\\{(.*)\\}$', $p, $params))) {
+				include_local("inc-debug-squel.php3");
+				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"),
+					$p, $champ->fichier);
+			}
+			else
+				$champ->params = split("\}[[:space:]]*\{", $params[1]);
+		}
+		$result[] = $champ;
+	}
+
+	if ($texte) {
+		$champ = new Texte;
+		$champ->texte = $texte;
+		$result[] = $champ;
+	}
+
+	return $result;
 }
 
 function parser_champs($texte) {
@@ -184,55 +185,51 @@ function parser_champs_interieurs($texte, $sep, $nested)
 }
 
 function parser_param($params, &$result, $idb) {
-      $params2 = Array();
-      $i = 1;
-      while (ereg('^[[:space:]]*\{[[:space:]]*([^ \}])([^\"\}]*)([\"\}])(.*)$', $params, $args)) {
-	if ($args[3] == "}")
-	  {
-	    $params = $args[4];
-	    ereg("^(.*[^ \t\n])[[:space:]]*$", $args[2], $m);
-	    $param = $args[1] . $m[1];
-	    if (($param == 'tout') OR ($param == 'tous')) {
-	      $result->tout = true;
-	    }
-	    else if ($param == 'plat') {
-	      $result->plat = true;
-	    }
-	    else $params2[] = $param;
-	  }
-	else
-	  { 
-	    if ($args[1] == '"')
-	      {
-		if (!ereg("[[:space:]]*\}(.*)$", $params, $m))
-		  break;
-		else
-		  {
-		    $params = $m[1];
-		    $result->separateur = 
-		      ereg_replace("'","\'",$args[2]);
-		  }
-	      }
-	    else
-	      {
-		if (!ereg("([^\"]*\"[[:space:]]*)\}(.*)$", $args[4], $m))
-		  break;
-		else
-		  {
-		    $params = $m[2];
-		    $params2[] = $args[1] . $args[2] . '"' . $m[1];
-		  }
-	      }
-	  }
-	$i++;
-      }
-      if ($params)
-	{
-	  include_local("inc-debug-squel.php3");
-	  erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"),
-				$params, $idb);
+	$params2 = Array();
+	$i = 1;
+	while (ereg('^[[:space:]]*\{[[:space:]]*([^ \}])([^\"\}]*)([\"\}])(.*)$', $params, $args)) {
+		if ($args[3] == "}") {
+			$params = $args[4];
+			ereg("^(.*[^ \t\n])[[:space:]]*$", $args[2], $m);
+			$param = $args[1] . $m[1];
+			if (($param == 'tout') OR ($param == 'tous')) {
+				$result->tout = true;
+			}
+			else if ($param == 'plat') {
+				$result->plat = true;
+			}
+			else
+				$params2[] = $param;
+		}
+		else {
+			if ($args[1] == '"') {
+				if (!ereg("[[:space:]]*\}(.*)$", $params, $m))
+					break;
+				else {
+					$params = $m[1];
+					$result->separateur = 
+					ereg_replace("'","\'",$args[2]);
+				}
+			}
+			else {
+				if (!ereg("([^\"]*\"[[:space:]]*)\}(.*)$", $args[4], $m))
+					break;
+				else {
+					$params = $m[2];
+					$params2[] = $args[1] . $args[2] . '"' . $m[1];
+				}
+			}
+		}
+		$i++;
 	}
-      $result->param = $params2;
+
+	if ($params) {
+		include_local("inc-debug-squel.php3");
+		erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"),
+			$params, $idb);
+	}
+
+	$result->param = $params2;
 }
 
 function parser($texte, $id_parent, &$boucles) {
