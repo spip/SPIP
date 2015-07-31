@@ -829,7 +829,7 @@ med en f&auml;rg som visar deras status:',
 'mois_non_connu' => 'non connu', # NEW
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Inneh&aring;ll',

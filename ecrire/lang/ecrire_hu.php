@@ -815,7 +815,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'mois_non_connu' => 'ismeretlen',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

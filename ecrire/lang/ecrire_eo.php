@@ -818,7 +818,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'mois_non_connu' => 'nekonata',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Enhavo',

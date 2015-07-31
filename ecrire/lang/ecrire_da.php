@@ -811,7 +811,7 @@ i en farve, der angiver deres status:',
 'mois_non_connu' => 'ukendt',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

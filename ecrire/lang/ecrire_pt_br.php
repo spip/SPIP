@@ -792,7 +792,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'mois_non_connu' => 'desconhecido',
 
 // N
-'nouvelles_versions' => 'H&aacute; novas vers&otilde;es do SPIP dispon&iacute;veis',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Conte&uacute;do',

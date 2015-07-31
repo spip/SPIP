@@ -836,7 +836,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'mois_non_connu' => 'ki pa koni',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

@@ -794,7 +794,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'mois_non_connu' => 'desconocido',
 
 // N
-'nouvelles_versions' => 'Est&aacute;n disponibles nuevas versiones de SPIP',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenido',
@@ -840,7 +840,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'plugin_info_automatique_creer' => 'que hay que crear en la ra&iacute;z del sitio.',
 'plugin_info_automatique_exemples' => 'ejemplos:',
 'plugin_info_automatique_ftp' => 'Puedes instalar plugins, por FTP, en la carpeta <tt>@rep@</tt>',
-'plugin_info_automatique_lib' => 'Ciertos plugins tambi&eacute;n requieren que se pueda subir archivos a la carpeta <code>lib/</code>, que habr&aacute; que crear, si es el caso, en la ra&iacute;z del sitio.',
+'plugin_info_automatique_lib' => 'Ciertos plugins tambi&eacute;n requieren que se pueda descargar archivos a la carpeta <code>lib/</code>, que habr&aacute; que crear, si es el caso, en la ra&iacute;z del sitio.',
 'plugin_info_automatique_liste' => 'Tus listas de plugins:',
 'plugin_info_automatique_liste_officielle' => 'los plugins oficiales',
 'plugin_info_automatique_liste_update' => 'Actualizar las listas',

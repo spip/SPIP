@@ -810,7 +810,7 @@ SPIP&#12489;&#12461;&#12517;&#12513;&#12531;&#12488;</a>&#12434;&#12372;&#35239;
 'mois_non_connu' => '&#26410;&#23450;&#32681;',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

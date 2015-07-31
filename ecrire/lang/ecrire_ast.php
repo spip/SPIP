@@ -840,7 +840,7 @@ con una color que indica el est&aacute;u:',
 'mois_non_connu' => 'desconoc&iacute;u',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Conten&iacute;u',

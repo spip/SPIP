@@ -799,7 +799,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'mois_non_connu' => 'ezezagun',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Edukia',

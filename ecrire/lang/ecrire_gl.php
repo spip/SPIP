@@ -832,7 +832,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'mois_non_connu' => 'desco&ntilde;ecido',
 
 // N
-'nouvelles_versions' => 'Est&aacute;n dispo&ntilde;&iacute;beis novas versi&oacute;ns de SPIP',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contido',
