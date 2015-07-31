@@ -23,7 +23,7 @@ function action_preferer_dist() {
 		$arg = $securiser_action();
 	} else $arg = $_GET['arg'];
 
-	if (!preg_match(",^(.+):(.+)$,", $arg, $r))
+	if (!preg_match(",^(.+):(.*)$,", $arg, $r))
 		spip_log("action_preferer_dist: $arg pas compris");
 	else {
 	$prefs_mod = false;
