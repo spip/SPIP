@@ -986,7 +986,6 @@ function parser($texte) {
 	);
 	$rows_groupes_mots = array(
 		'ID_GROUPE' => 'id_groupe',
-		'TYPE' => 'type',
 		'TITRE' => 'titre'
 	);
 	$rows_rubriques = array(
