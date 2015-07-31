@@ -86,12 +86,17 @@ function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour="",$e
 				$publiable = false;
 		}
 	}
+	$statuts = lister_statuts_proposes($desc, $editable?$publiable:true);
+	if (count($statuts)==1  AND isset($statuts[$v['statut']])){
+		$editable = false;
+	}
+
 	$valeurs = array(
 		'editable' => $editable,
 		'statut' => $v['statut'],
 		'_objet' => $objet,
 		'_id_objet' => $id_objet,
-		'_statuts' => lister_statuts_proposes($desc, $editable?$publiable:true),
+		'_statuts' => $statuts,
 		'_publiable' => $publiable,
 		'_label' => isset($desc['texte_changer_statut'])?$desc['texte_changer_statut']:'texte_article_statut',
 		'_aide' => isset($desc['aide_changer_statut'])?$desc['aide_changer_statut']:'',
