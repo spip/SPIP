@@ -470,13 +470,23 @@ function gadget_messagerie() {
 }
 
 function repercuter_gadgets($id_rubrique) {
-	if ($_COOKIE['spip_accepte_ajax'] != -1) {
-	  return ";
-		AjaxSqueeze('./?exec=gadgets&amp;gadget=rubriques&amp;id_rubrique=$id_rubrique', 'gadget-rubriques');
-		AjaxSqueeze('./?exec=gadgets&amp;gadget=navigation&amp;id_rubrique=$id_rubrique', 'gadget-navigation');
-		AjaxSqueeze('./?exec=gadgets&amp;gadget=agenda&amp;id_rubrique=$id_rubrique', 'gadget-agenda');
-		AjaxSqueeze('./?exec=gadgets&amp;gadget=messagerie&amp;id_rubrique=$id_rubrique', 'gadget-messagerie');";
-	}
+	if ($_COOKIE['spip_accepte_ajax'] == -1) return '';
+
+	$rub = $id_rubrique ? "&amp;id_rubrique=$id_rubrique" : '';
+
+	return
+	 "
+	$('#gadget-rubriques')
+	.load('./?exec=gadgets&amp;gadget=rubriques');" #pas de $rub
+	."
+	$('#gadget-navigation')
+	.load('./?exec=gadgets&amp;gadget=navigation$rub');"
+	."
+	$('#gadget-agenda')
+	.load('./?exec=gadgets&amp;gadget=agenda$rub');"
+	."
+	$('#gadget-messagerie')
+	.load('./?exec=gadgets&amp;gadget=messagerie$rub');";
 }
 
 ?>
