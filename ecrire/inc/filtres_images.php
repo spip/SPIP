@@ -883,7 +883,6 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 	if (strpos($position,'left')!==FALSE){
 		if (preg_match(';left=(\d{1}\d+);', $position, $left)){
 			$offset_width=$left[1];	
-			spip_log($offset_width,"photospip");
 		}
 		else{
 			$offset_width=0;
@@ -897,7 +896,6 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 	if (strpos($position,'top')!==FALSE){
 		if (preg_match(';top=(\d{1}\d+);', $position, $top)){
 			$offset_height=$top[1];
-			spip_log($offset_height,"photospip");
 		}
 		else{
 			$offset_height=0;
