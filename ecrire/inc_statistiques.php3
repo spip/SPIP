@@ -289,7 +289,7 @@ function calculer_popularites() {
 	reset ($count_article);
 	while (list($count,$articles) = each($count_article)) {
 		$query = "UPDATE spip_articles
-			SET popularite = popularite + $b * $count
+			SET popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
 		spip_query($query);
 	}
@@ -305,7 +305,7 @@ function calculer_popularites() {
 	reset ($count_article);
 	while (list($count,$articles) = each($count_article)) {
 		$query = "UPDATE spip_articles
-			SET popularite = popularite + $b * $count
+			SET popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
 		spip_query($query);
 	}
