@@ -42,10 +42,9 @@ function login_explicite($login, $cible) {
 	global $auteur_session;
 
 	$action = str_replace('&amp;', '&', self());
-
 	if ($cible) {
-		$cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
-		$cible = ereg_replace("[?&]var_login=[^&]*", '', $cible);
+		$cible = parametre_url($cible, 'var_erreur', '', '&');
+		$cible = parametre_url($cible, 'var_login', '', '&');
 	} else {
 		if (ereg("[?&]url=([^&]*)", $action, $m))
 			$cible = urldecode($m[1]);
