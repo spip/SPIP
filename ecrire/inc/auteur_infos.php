@@ -27,8 +27,8 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	$id_auteur = intval($auteur['id_auteur']);
 
 	if (
-	  	(!$auth = autoriser('modifier', 'auteur', $id_auteur,null,array('statut'=>$auteur['statut']))) 
-	  OR $quoi=='infos') {
+	  	(!$auth = autoriser('modifier', 'auteur', $id_auteur,null))
+		OR $quoi=='infos') {
 		if ($quoi!='edit' AND $auth){
 			// Formulaire de statut
 			// Calculer le bloc de statut (non modifiable)
@@ -36,7 +36,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 			// car le plonguer de rubrique repose sur son unicite -> a reecrire
 			$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
 			$bloc_statut = $instituer_auteur($auteur, false);
-			$bloc_statut = $bloc_statut? "<div class='statut'>$bloc_statut</div>":$bloc_statut;
+			$bloc_statut = $bloc_statut? "<div class='statut'>$bloc_statut</div>":$bloc_statut.' ';
 		} else {
 			$bloc_statut = "";
 		}

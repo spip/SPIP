@@ -58,7 +58,9 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 function traduire_statut_auteur($statut){
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
-		       "info_visiteurs" => _T('item_visiteur'));
+		       "info_visiteurs" => _T('item_visiteur'),
+		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
+		       );
 	if (isset($recom[$statut]))
 		return $recom[$statut];
 	
