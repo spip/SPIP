@@ -16,7 +16,7 @@ include_ecrire ("inc_admin.php3");
 // Vignette pour les documents lies
 //
 
-function vignette_par_defaut($type_extension) {
+function vignette_par_defaut($type_extension, $size=true) {
 
 	$filename = _DIR_IMG_ICONES . "$type_extension";
 
@@ -31,6 +31,8 @@ function vignette_par_defaut($type_extension) {
 	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.png")) 
 	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.gif")) 
 	$v = _DIR_IMG_ICONES . "/defaut-dist.gif";
+
+	if (!$size) return $v;
 
 	if ($size = @getimagesize($v)) {
 		$largeur = $size[0];

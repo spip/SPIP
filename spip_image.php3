@@ -7,11 +7,6 @@ include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 
-function creer_repertoire_documents($ext) {
-# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
-}
-
 function copier_document($ext, $orig, $source) {
 	$dest = creer_repertoire_documents($ext) .
 		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
@@ -210,11 +205,7 @@ function ajout_image($source, $dest) {
 //
 
 function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true) {
-	$doc_vignette=''; $titre_vignette=''; $descriptif_vignette=''; 
-
 	global $hash_id_auteur, $hash, $id_article, $type;
-
-	//die ("<li>$orig<li>$source<li>$dest<li>$mode<li>$id_document");
 
 	//
 	// Securite
@@ -288,11 +279,6 @@ function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true)
 				$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
 				spip_query($query);
 				$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
-			}
-
-			if ($doc_vignette){
-				$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='', descriptif='' WHERE id_document=$id_document";
-				spip_query($query);
 			}
 
 	// Creer la vignette

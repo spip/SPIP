@@ -199,27 +199,46 @@ function calcul_branche ($generation) {
 	}
 }
 
+# fonction appelée par la balise #LOGO_DOCUMENT
+
 function calcule_document($id_document, $doubdoc, &$doublons){
-  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
-  $row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
-  if (!$row) return '';
-  if ($id_vignette = $row['id_vignette']) {
-		if ($row_vignette = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
-			if (@file_exists($row_vignette['fichier']))
-				return generer_url_document($id_vignette);
-			}
-  } else if ($row['mode'] == 'vignette') {
-	return generer_url_document($id_document);
-  }
-// si pas de vignette, utiliser la vignette par defaut
-// ou essayer de creer une preview (images)
-  list($extension) = @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = " .$row['id_type']));
-  if (!ereg(",$extension,", ','.lire_meta('formats_graphiques').',')) {
-	list($url, $w, $h) = vignette_par_defaut($extension);
-	return $url;
-  } else {
-	return 'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $row['fichier']));
-  }
+	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+
+	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('documents AS documents'), array("id_document = $id_document"))))
+// pas de document. Ne devrait pas arriver
+		return ''; 
+
+	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
+	if ($id_vignette) {
+		if ($res = spip_abstract_select(array('fichier'), array('documents AS documents'), array("id_document = $id_vignette"))) {
+			list($fichier) = spip_abstract_fetch($res);
+			if (@file_exists($fichier))
+			  return generer_url_document($id_vignette);
+#			  return ($fichier); # en std g_u_d fait ça
+		}
+	} else if ($mode == 'vignette') 
+			  return generer_url_document($id_document);
+# return $fichier; # en std g_u_d fait ça
+
+// calcul de l'extension par tous les moyens
+	if ($id_type) {
+		list($ext) = spip_abstract_fetch(spip_abstract_select(array('extension'), array('types_documents AS documents'), array("id_type = " . intval($id_type))));
+	} else {
+		eregi('\.([a-z0-9]+)$', $fichier, $regs);
+		$ext = $regs[1];
+	}
+// Pas de vignette mais une extension:
+// prendre la vignette de celle-ci dans IMG/icones sauf si on peut faire mieux
+	$formats = ','.lire_meta('formats_graphiques').',';
+	if ((strpos($formats, ",$ext,") === false) || 
+	    !$fichier || (lire_meta("creer_preview") != 'oui')) {
+		return  vignette_par_defaut($ext ? $ext : 'txt', false);
+	}
+// on peut faire mieux dans le cas des images: une previsualisation
+// on devrait verifier que le fichier existe dans IMG/vignette
+// et sinon lancer creer_vignette (qui fera un UPDATE sur spip_documents)
+// mais on risque de dépasser le temps alloue au processus
+	return 'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
 }
 
 
