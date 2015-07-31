@@ -2052,8 +2052,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		$retour = "<li><a$lien>$texte</a></li>";
 	}
 
-	if ($echo) echo $retour;
-	return $retour;
+	if ($echo) echo $retour; else return $retour;
 }
 
 
@@ -2754,7 +2753,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo = true) {
 	global $connect_statut;
 
 	$en_ligne = $message = '';
@@ -2801,7 +2800,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+	  return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $echo);
 
 }
 

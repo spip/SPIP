@@ -116,7 +116,7 @@ function controle_un_forum($row) {
 	$forum_date_heure = $row['date_heure'];
 	$forum_titre = echapper_tags($row['titre']);
 	$forum_texte = $row['texte'];
-	$forum_auteur = echapper_tags($row['auteur']);
+	$forum_auteur = echapper_tags(extraire_multi($row['auteur']));
 	$forum_email_auteur = echapper_tags($row['email_auteur']);
 	$forum_nom_site = echapper_tags($row['nom_site']);
 	$forum_url_site = echapper_tags($row['url_site']);
