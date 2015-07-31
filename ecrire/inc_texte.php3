@@ -68,7 +68,7 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 //
 // vignette pour les documents lies
 //
-function vignette_par_defaut($type_extension, $align = '') {
+function vignette_par_defaut($type_extension) {
 	if ($GLOBALS['flag_ecrire'])
 		$img = "../IMG/icones";
 	else
@@ -102,12 +102,12 @@ function vignette_par_defaut($type_extension, $align = '') {
 		$vig = "$img/defaut-dist.gif";
 	}
 
-	$texte = "<img src='$vig' alt='$type_extension' border='0'";
-	if ($size = @getimagesize($vig)) $texte .= " ".$size[3];
-	if ($align) $texte .= " align='$align'";
-	$texte .= ">";
+	if ($size = @getimagesize($vig)) {
+		$largeur = $size[0];
+		$hauteur = $size[1];
+	}
 
-	return $texte;
+	return array($vig, $largeur, $hauteur);
 }
 
 // Mise de cote des echappements
@@ -262,6 +262,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$extension = $type->extension;
 		}
 
+		// recuperer la vignette pour affichage inline
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = mysql_query($query_vignette);
@@ -277,14 +278,15 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$hauteur_vignette = $hauteur;
 		}
 
-/*		if (eregi("(left|right|center)",$align,$regs))
-			$align = " align='".$regs[1]."'";
-		else
-			unset($align);*/
-
+		// ajuster chemin d'acces au fichier
 		if ($GLOBALS['flag_ecrire']) {
 			if ($fichier) $fichier = "../$fichier";
 			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
+		}
+
+		// si pas de vignette, utiliser la vignette par defaut du type du document
+		if (!$fichier_vignette) {
+			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
 		}
 
 		if ($fichier_vignette) {
@@ -303,13 +305,11 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				if ($align == 'center') $vignette = "<p align='center'>$vignette</p>";
 			}
 		}
-		else {
-			$vignette = vignette_par_defaut($extension);
-		}
 
 		if ($mode == 'document')
 			$vignette = "<a href='$fichier'>$vignette</a>";
 
+		// si affichage detaille ('DOC'), ajouter une legende
 		if ($affichage_detaille) {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = mysql_query($query_type);

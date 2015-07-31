@@ -265,7 +265,10 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 		else {
 			// pas de vignette
 			echo "<div align='center' style='border: 0px; padding: 2px; background-color: #f0e8e4'>\n";
-			echo vignette_par_defaut ($type_extension, 'right');
+			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($extension);
+			if ($icone) {
+				echo "<img src='$icone' width='$largeur_icone' height='$hauteur_icone' align='right'>\n";
+			}
 			echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
 			echo "</div>\n";
 
