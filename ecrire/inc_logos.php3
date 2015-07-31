@@ -55,7 +55,7 @@ function decrire_logo($racine) {
 }
 
 
-function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
+function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $redirect="") {
 	global $spip_display;
 
 	$logon = $type.'on'.$id;
@@ -67,12 +67,12 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 		debut_cadre_relief("image-24.gif");
 		echo "<div class='verdana1' style='text-align: center;'>";
 		$desc = decrire_logo($logon);
-		afficher_logo($logon, $texteon, $desc, $id_objet, $id);
+		afficher_logo($logon, $texteon, $desc, $id_objet, $id, $redirect);
 
 		if ($desc AND $texteoff) {
 			echo "<br /><br />";
 			$desc = decrire_logo($logoff);
-			afficher_logo($logoff, $texteoff, $desc, $id_objet, $id);
+			afficher_logo($logoff, $texteoff, $desc, $id_objet, $id, $redirect);
 		}
 	
 		echo "</div>";
@@ -82,13 +82,13 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 }
 
 
-function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
+function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 	global $connect_id_auteur;
 	global $clean_link, $spip_lang_right;
 
 	include_ecrire('inc_session.php3');
  
-	$redirect = $clean_link->getUrl();
+	if (!$redirect) $redirect = $clean_link->getUrl();
 
 	echo "<b>";
 	echo bouton_block_invisible(md5($titre));

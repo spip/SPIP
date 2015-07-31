@@ -253,10 +253,12 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	if (!$lien) $lien = $GLOBALS['clean_link'];
 
 	if ($nom_select == 'changer_lang') {
-		$lien->delvar('changer_lang');
-		$lien->delvar('url');
-		$post = $lien->getUrl();
 		$cible = '';
+		if (is_object($lien)) {
+			$lien->delvar('changer_lang');
+			$lien->delvar('url');
+			$lien = $lien->getUrl();
+		    }
 	} else {
 		// eviter un bug a l'installation ; mais, dans le cas general,
 		// pourquoi aurait-on besoin ici d'une URL absolue ?
@@ -271,19 +273,24 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 
 		if (!_DIR_RESTREINT && _FILE_CONNECT) {
 			include_ecrire('inc_session.php3');
-			$cible = _DIR_RESTREINT_ABS . $lien->getUrl();
-			$post = "$site/spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			$cible = _DIR_RESTREINT_ABS . 
+			  (is_object($lien) ? $lien->getUrl() : $lien);
+			$lien = "$site/spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 		} else {
 			$cible = $lien->getUrl();
-			$post = "$site/spip_cookie.php3";
+			$lien = "$site/spip_cookie.php3";
 		}
 	}
 
-	$postcomplet = new Link($post);
-	if ($cible) $postcomplet->addvar('url', $cible);
-
+	if (!$cible)
+	  $postcomplet = $lien;
+	else {
+	  $postcomplet = new Link($lien);
+	  $postcomplet->addvar('url', $cible);
+	  $postcomplet = $postcomplet->geturl();
+	}
 	return "<form action='"
-	  . $post
+	  . $lien
 	  . "' method='post' style='margin:0px; padding:0px;'>"
 	  . (!$cible ? '' : "<input type='hidden' name='url' value='".quote_amp($cible)."' />")
 	  . $texte
@@ -295,7 +302,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
 	  . " onchange=\"document.location.href='"
-	  . $postcomplet->geturl()
+	  . $postcomplet
 	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
 	  . $ret
 	  . "</select>\n"
