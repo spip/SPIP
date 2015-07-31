@@ -57,10 +57,10 @@ if ($changer_config == 'oui') {
 	ecrire_meta("accepter_inscriptions", $accepter_inscriptions);
 	ecrire_meta("forums_publics","$forums_publics");
 
-	if (ereg(".@.+\...",$email_webmaster))
+	if ($email_webmaster=='' OR email_valide($email_webmaster))
 		ecrire_meta("email_webmaster", $email_webmaster);
 
-	ecrire_metas();	
+	ecrire_metas();
 
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");

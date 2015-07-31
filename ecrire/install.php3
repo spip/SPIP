@@ -34,10 +34,10 @@ if ($etape6) {
 		$htpass = generer_htpass($pass);
 
 		if ($id_auteur) {
-			$query = "UPDATE spip_auteurs SET nom=\"$nom\", email=\"$email\", login=\"$login\", pass=\"$mdpass\", htpass=\"$htpass\", statut=\"0minirezo\" WHERE id_auteur=$id_auteur";
+			$query = "UPDATE spip_auteurs SET nom=\"$nom\", email=\"$email\", login=\"$login\", pass=\"$mdpass\", alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass=\"$htpass\", statut=\"0minirezo\" WHERE id_auteur=$id_auteur";
 		}
 		else {
-			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",\"0minirezo\")";
+			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",FLOOR(32000*RAND()),\"0minirezo\")";
 		}
 		spip_query($query);
 

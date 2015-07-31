@@ -78,23 +78,26 @@ function ajouter_session($auteur, $id_session) {
 //
 function verifier_session($id_session) {
 	// Tester avec alea courant
-	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
 	$ok = false;
-	if (file_exists($fichier_session)) {
-		include($fichier_session);
-		$ok = true;
-	}
-	else {
-		// Sinon, tester avec alea precedent
-		$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+	if ($id_session) {
+		$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
 		if (file_exists($fichier_session)) {
-			// Renouveler la session (avec l'alea courant)
 			include($fichier_session);
-			supprimer_session($id_session);
-			ajouter_session($GLOBALS['auteur_session'], $id_session);
 			$ok = true;
 		}
+		else {
+			// Sinon, tester avec alea precedent
+			$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+			if (file_exists($fichier_session)) {
+				// Renouveler la session (avec l'alea courant)
+				include($fichier_session);
+				supprimer_session($id_session);
+				ajouter_session($GLOBALS['auteur_session'], $id_session);
+				$ok = true;
+			}
+		}
 	}
+
 	// Valider le brouteur
 	if ($ok) $ok = (hash_env() == $GLOBALS['auteur_session']['hash_env']);
 	return $ok;
@@ -118,18 +121,32 @@ function supprimer_session($id_session) {
 // Creer une session et retourne le cookie correspondant (a poser)
 //
 function creer_cookie_session($auteur) {
-	global $flag_mt_rand;
 	if ($id_auteur = $auteur['id_auteur']) {
-		$seed = (double) (microtime() + 1) * time();
-		if ($flag_mt_rand) mt_srand($seed);
-		srand($seed);
-		if ($flag_mt_rand) $s = mt_rand();
-		if (!$s) $s = rand();
-		$id_session = md5(uniqid($s));
+		$id_session = md5(creer_uniqid($s));
 		ajouter_session($auteur, $id_session);
 		return $id_session;
 	}
 }
+
+//
+// Creer un identifiant aleatoire
+//
+function creer_uniqid() {
+	static $seeded;
+	global $flag_mt_rand;
+
+	if (!$seeded) {
+		$seed = (double) (microtime() + 1) * time();
+		if ($flag_mt_rand) mt_srand($seed);
+		srand($seed);
+		$seeded = true;
+	}
+
+	if ($flag_mt_rand) $s = mt_rand();
+	if (!$s) $s = rand();
+	return uniqid($s);
+}
+
 
 //
 // sessions a zapper (login, zapper oui/non)
@@ -155,6 +172,54 @@ function zap_sessions ($login, $zap) {
 			}
 		}
 	}
+}
+
+//
+// reconnaitre un utilisateur authentifie en php_auth
+//
+function verifier_php_auth() {
+	global $PHP_AUTH_USER, $PHP_AUTH_PW;
+	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+		include_ecrire("inc_connect.php3"); // uniquement si appel depuis espace public
+		$login = addslashes($PHP_AUTH_USER);
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
+		$row = mysql_fetch_array($result);
+		$auth_mdpass = md5($row['alea_actuel'] . $PHP_AUTH_PW);
+		if ($auth_mdpass != $row['pass']) {
+			$PHP_AUTH_USER='';
+			return false;
+		} else {
+			$GLOBALS['auteur_session']['id_auteur'] = $row['id_auteur'];
+			$GLOBALS['auteur_session']['nom'] = $row['nom'];
+			$GLOBALS['auteur_session']['login'] = $row['login'];
+			$GLOBALS['auteur_session']['email'] = $row['email'];
+			$GLOBALS['auteur_session']['statut'] = $row['statut'];
+			$GLOBALS['auteur_session']['hash_env'] = '';
+			return true;
+		}
+	}
+}
+
+//
+// entete php_auth
+//
+function ask_php_auth($text_failure) {
+	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
+	@Header("HTTP/1.0 401 Unauthorized");
+	echo $text_failure;
+	exit;
+}
+
+//
+// verifie si on a un cookie de session ou un auth_php correct
+// et charge ses valeurs dans $GLOBALS['auteur_session']
+//
+function verifier_visiteur() {
+	return (
+			verifier_session($GLOBALS['HTTP_COOKIE_VARS']['spip_session'])
+		OR
+			verifier_php_auth ()
+	);
 }
 
 ?>

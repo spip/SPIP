@@ -13,11 +13,11 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 // version de la base
-$spip_version = 1.422;
+$spip_version = 1.423;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
-$spip_version_affichee = "1.4c8 CVS";
+$spip_version_affichee = "1.4d1 CVS";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];

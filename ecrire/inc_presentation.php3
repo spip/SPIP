@@ -319,23 +319,24 @@ function afficher_tranches_requete(&$query, $colspan) {
 			$deb = $i + 1;
 			$fin = $i + $nb_aff;
 			if ($fin > $num_rows) $fin = $num_rows;
+			if ($deb > 1) $texte .= " | ";
 			if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
-				$texte .= "[<B>$deb-$fin</B>] ";
+				$texte .= "<B>$deb</B>";
 			}
 			else {
 				$link = new Link;
 				$link->addTmpVar($tmp_var, strval($deb - 1));
-				$texte .= "[<A HREF=\"".$link->getUrl()."\">$deb-$fin</A>] ";
+				$texte .= "<A HREF=\"".$link->getUrl()."\">$deb</A>";
 			}
 		}
 		$texte .= "</td>\n";
 		$texte .= "<td background=\"\" class=\"arial2\" colspan=\"1\" align=\"right\" valign=\"top\">";
 		if ($deb_aff == -1) {
-			$texte .= "[<B>Tout afficher</B>]";
+			$texte .= "<B>Tout afficher</B>";
 		} else {
 			$link = new Link;
 			$link->addTmpVar($tmp_var, -1);
-			$texte .= "[<A HREF=\"".$link->getUrl()."\">Tout afficher</A>]";
+			$texte .= "<A HREF=\"".$link->getUrl()."\">Tout afficher</A>";
 		}		
 	
 		$texte .= "</td>\n";
@@ -385,7 +386,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$statut = $row['statut'];
 			$visites = $row['visites'];
 			$descriptif = $row['descriptif'];
-			if ($descriptif) $descriptif = " title='".attribut_html(typo($descriptif))."'";
+			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 
 			$query_petition = "SELECT COUNT(*) AS cnt FROM spip_petitions WHERE id_article=$id_article";
 			$row_petition = mysql_fetch_array(spip_query($query_petition));
@@ -1018,7 +1019,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 }
 
 
-function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique){
+function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
 
 	if ($spip_display == 1){
@@ -1066,6 +1067,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</table>";
 		if ($spip_display != 3){
 			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			if (strlen($aide)>0) echo "<br>".aide($aide);
 		}
 		echo "</td>";
 	}	
@@ -1192,6 +1194,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_toutes_rubriques;
 	global $REQUEST_URI;
 	global $requete_fichier;
+	global $auth_can_disconnect, $connect_login;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	
 	if (!$requete_fichier) {
@@ -1208,18 +1211,18 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	debut_html($titre);
 	
 		echo "\n<map name='map_couleur'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=6' alt='bleu' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=1' alt='bleu' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=2' alt='bleu' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=3' alt='bleu' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=4' alt='bleu' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=5' alt='bleu' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=7' alt='bleu' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=8' alt='bleu' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=9' alt='bleu' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=10' alt='bleu' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=11' alt='bleu' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=12' alt='bleu' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=6' alt='X' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=1' alt='X' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=2' alt='X' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=3' alt='X' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=4' alt='X' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=5' alt='X' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=7' alt='X' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=8' alt='X' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=9' alt='X' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=10' alt='X' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=11' alt='X' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=12' alt='X' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
@@ -1245,10 +1248,16 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td background=''>";
 		icone_bandeau_principal ("Forums et messagerie", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 	echo "</td>";
-	if ($connect_statut == '0minirezo'){
+	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
 	bandeau_barre_verticale();
 		echo "<td background=''>";
-			icone_bandeau_principal ("Administration du site", "statistiques.php3", "administration-48.gif", "administration", $rubrique);
+			icone_bandeau_principal ("Administration du site", "configuration.php3", "administration-48.gif", "administration", $rubrique);
+		echo "</td>";
+	}
+	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques){
+	bandeau_barre_verticale();
+		echo "<td background=''>";
+			icone_bandeau_principal ("Statistiques du site", "statistiques.php3", "administration-48.gif", "administration", $rubrique);
 		echo "</td>";
 	}
 	echo "<td background='' width='100%'>   </td>";
@@ -1295,7 +1304,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		else if ($rubrique == "redacteurs"){
 			icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
 			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
-			icone_bandeau_secondaire ("Responsables Žditoriaux", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
+			icone_bandeau_secondaire ("Responsables &eacute;ditoriaux", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
 			if ($connect_statut == "0minirezo"){
 				bandeau_barre_verticale();
 				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
@@ -1323,12 +1332,27 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				icone_bandeau_secondaire ("Gestion de la base", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 			}
 		}
+
+
+
+
 	echo "<td width='100%'>   </td>";
+
+
 	echo "<td>";
 	echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 	echo '<input type="text" size="18" value="Chercher" name="recherche" class="spip_recherche">';
 	echo "</form>";
 	echo "</td>";
+
+	if ($auth_can_disconnect) {
+		echo "<td width='5'>&nbsp;</td>";
+		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
+	}
+
+
+
+
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 

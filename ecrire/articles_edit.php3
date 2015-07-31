@@ -148,7 +148,7 @@ debut_gauche();
 //
 
 if ($new != 'oui'){
-	afficher_documents_colonne($id_article,"article");
+	afficher_documents_colonne($id_article,"articles_edit.php3?id_article=$id_article");
 }
 
 debut_droite();

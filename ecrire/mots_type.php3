@@ -4,32 +4,38 @@ include ("inc.php3");
 
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
-	spip_query("INSERT INTO spip_groupes_mots 
-		(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
-		VALUES (\" Nouveau groupe\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
-
-	$id_groupe = mysql_insert_id();
-
+	$id_groupe = '';
+	$type = htmlspecialchars("Nouveau groupe");
+	$ancien_type = '';
+	$unseul = 'non';
+	$obligatoire = 'non';
+	$articles = 'oui';
+	$breves = 'oui';
+	$rubriques = 'non';
+	$syndic = 'oui';
+	$acces_minirezo = 'oui';
+	$acces_comite = 'oui';
+	$acces_forum = 'non';
+} else {
+	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'";
+	$result_groupes = spip_query($query_groupes);
+	while($row = mysql_fetch_array($result_groupes)) {
+		$id_groupe = $row['id_groupe'];
+		$type = htmlspecialchars($row['titre']);
+		$ancien_type = $type;
+		$unseul = $row['unseul'];
+		$obligatoire = $row['obligatoire'];
+		$articles = $row['articles'];
+		$breves = $row['breves'];
+		$rubriques = $row['rubriques'];
+		$syndic = $row['syndic'];
+		$acces_minirezo = $row['0minirezo'];
+		$acces_comite = $row['1comite'];
+		$acces_forum = $row['6forum'];
+	}
 }
 
-$query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'";
-$result_groupes = spip_query($query_groupes);
-while($row = mysql_fetch_array($result_groupes)) {
-	$id_groupe = $row['id_groupe'];
-	$titre = htmlspecialchars($row['titre']);
-	$unseul = $row['unseul'];
-	$obligatoire = $row['obligatoire'];
-	$articles = $row['articles'];
-	$breves = $row['breves'];
-	$rubriques = $row['rubriques'];
-	$syndic = $row['syndic'];
-	$acces_minirezo = $row['0minirezo'];
-	$acces_comite = $row['1comite'];
-	$acces_forum = $row['6forum'];
-
-}
-
-debut_page("&laquo; $titre &raquo;", "documents", "mots");
+debut_page("&laquo; $type &raquo;", "documents", "mots");
 
 debut_gauche();
 
@@ -52,7 +58,7 @@ echo "<tr width='100%'>";
 
 echo "<td width='100%' valign='top'>";
 echo "<font face='verdana,arial,helvetica' size=1><b>GROUPE DE MOTS :</b><br></font>";
-gros_titre($titre);
+gros_titre($type);
 echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){
@@ -61,10 +67,10 @@ if ($connect_statut =="0minirezo"){
 	echo "<FORM ACTION='mots_tous.php3' METHOD='post'>\n";
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
-	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$titre\">\n";
+	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
 	debut_cadre_formulaire();
-	echo "<b>Changer le titre de ce groupe :</b><br>\n";
-	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$titre\">\n";
+	echo "<b>Changer le nom de ce groupe :</b><br>\n";
+	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\">\n";
 	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></div>";
 	fin_cadre_formulaire();
 }
@@ -107,19 +113,24 @@ if ($connect_statut =="0minirezo"){
 
 	$config_precise_groupes = lire_meta("config_precise_groupes");
 	if ($config_precise_groupes == "oui" OR $unseul == "oui" OR $obligatoire == "oui"){
-		echo "<p>";
-	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
-			
-			if ($unseul == "oui") $checked = "checked";
-			else $checked = "";
-			echo "<input type='checkbox' name='unseul' value='oui' $checked id='unseul'> <label for='unseul'>On ne peut s&eacute;lectionner qu'<b>un seul mot-cl&eacute; &agrave;</b> la fois dans ce groupe.</label>";
-			echo "<br>";
-			if ($obligatoire == "oui") $checked = "checked";
-			else $checked = "";
-			echo "<input type='checkbox' name='obligatoire' value='oui' $checked id='obligatoire'> <label for='obligatoire'><b>Groupe important&nbsp;:</b> il est fortement conseill&eacute; de s&eacute;lectionner un mot-cl&eacute; dans ce groupe.</label>";
+		echo "<p><div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 
+		if ($unseul == "oui")
+			$checked = "checked";
+		else
+			$checked = "";
+		echo "<input type='checkbox' name='unseul' value='oui' $checked id='unseul'> <label for='unseul'>On ne peut s&eacute;lectionner qu'<b>un seul mot-cl&eacute; &agrave;</b> la fois dans ce groupe.</label>";
+		echo "<br>";
+
+		if ($obligatoire == "oui")
+			$checked = "checked";
+		else $checked = "";
+		echo "<input type='checkbox' name='obligatoire' value='oui' $checked id='obligatoire'> <label for='obligatoire'><b>Groupe important&nbsp;:</b> il est fortement conseill&eacute; de s&eacute;lectionner un mot-cl&eacute; dans ce groupe.</label>";
 
 		echo "</div>";
+	} else {
+		echo "<input type='hidden' name='unseul' value='non'>";
+		echo "<input type='hidden' name='obligatoire' value='non'>";
 	}
 
 
@@ -165,11 +176,6 @@ if ($connect_statut =="0minirezo"){
 	echo "<H3>Vous n'avez pas acc&egrave;s &agrave; cette page.</H3>";
 
 }
-
-
-
-
-
 
 
 fin_page();
