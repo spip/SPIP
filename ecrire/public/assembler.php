@@ -627,7 +627,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// avec un lien vers l'objet ; sinon on passe la main au suivant
 	if (!find_in_path($fond.'.html')) {
 		if (!$lien)
-			$lien = calculer_url("$type$id", '', 'tout');
+			$lien = calculer_url("$type$id", '', 'tout', $connect);
 		if (strpos($lien[1],'spip_url') !== false)
 			return false;
 		else
