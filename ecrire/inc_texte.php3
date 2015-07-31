@@ -134,14 +134,22 @@ function nettoyer_chapo($chapo){
 
 // Mise de cote des echappements
 function echappe_html($letexte,$source) {
+	global $flag_preg_replace;
 
-	$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
-	$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
-	$regexp_echap_cadre = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
+	if ($flag_preg_replace) {	// beaucoup plus rapide si on a pcre
+		$regexp_echap_html = "<html>((.*?))<\/html>";
+		$regexp_echap_code = "<code>((.*?))<\/code>";
+		$regexp_echap_cadre = "<cadre>((.*?))<\/cadre>";
+		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)/si";
+	} else {
+		$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
+		$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
+		$regexp_echap_cadre = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
+		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
+	}
 
-	$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
-
-	while (eregi($regexp_echap, $letexte, $regs)) {
+	while (($flag_preg_replace && preg_match($regexp_echap, $letexte, $regs))
+		|| (!$flag_preg_replace && eregi($regexp_echap, $letexte, $regs))) {
 		$num_echap++;
 
 		if ($regs[1]) {
