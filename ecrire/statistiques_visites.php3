@@ -299,7 +299,7 @@ if (!$origine) {
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
 		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
-		if ($aff_jours > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
+		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
 		
 		
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
