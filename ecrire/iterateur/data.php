@@ -541,7 +541,6 @@ function inc_plugins_to_array_dist() {
  * @return array
  */
 function inc_xml_to_array_dist($u) {
-	var_dump(XMLObjectToArray(new SimpleXmlIterator($u)));die();
 	return @XMLObjectToArray(new SimpleXmlIterator($u));
 }
 
