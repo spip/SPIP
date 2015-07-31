@@ -536,19 +536,38 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	$params = $crit->param;
 
 	if (count($params) < 1)
-		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
+		return array('zbug_critere_inconnu', array('critere' => $crit->op . " ?"));
 
-	$parent = $boucles[$idb]->id_parent;
-
-	// les valeurs $date et $type doivent etre connus a la compilation
-	// autrement dit ne pas etre des champs
+	$boucle = &$boucles[$idb];
+	$parent = $boucle->id_parent;
+	$fields = $boucle->show['field'];
 
 	$date = array_shift($params);
-	$date = $date[0]->texte;
-
 	$type = array_shift($params);
+
+	// la valeur $type doit etre connue a la compilation
+	// donc etre forcement reduite a un litteral unique dans le source
+
 	$type = $type[0]->texte;
 
+	// La valeur date doit designer un champ de la table SQL.
+	// Si c'est un litteral unique dans le source, verifier a la compil,
+	// sinon synthetiser le test de verif pour execution ulterieure
+	// On prendra arbitrairement le premier champ si test negatif.
+
+	if ((count($date) == 1)  AND ($date[0]->type == 'texte')) {
+		$date = $date[0]->texte;
+		if (!isset($fields[$date]))
+		  return array('zbug_critere_inconnu', array('critere' => $crit->op . " " . $date));
+	} else  {
+		$a = calculer_liste($date, array(), $boucles, $parent);
+		$noms = array_keys($fields);
+		$defaut = $noms[0];
+		$noms = join(" ", $noms);
+		# bien laisser 2 espaces avant $nom pour que strpos<>0
+		$cond = "(\$a=strval($a))AND\nstrpos(\"  $noms \",\" \$a \")";
+		$date = "'.(($cond)\n?\$a:\"$defaut\").'";
+	}
 	$annee = $params ? array_shift($params) : "";
 	$annee = "\n" . 'sprintf("%04d", ($x = ' .
 		calculer_liste($annee, array(), $boucles, $parent) .
@@ -579,7 +598,6 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 		calculer_liste($jour2, array(), $boucles, $parent) .
 		') ? $x : date("d"))';
 
-	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
 
 	if ($type == 'jour')
