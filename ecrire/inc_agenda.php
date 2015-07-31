@@ -31,9 +31,11 @@ define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
 
 // utilitaire de separation script / ancre
 // et de retrait des arguments a remplacer
-
+// (a mon avis cette fonction ne sert a rien, puisque parametre_url()
+// sait remplacer les arguments au bon endroit -- Fil)
 function calendrier_retire_args_ancre($script)
 {
+	$script = str_replace('&amp;', '&', $script);
   $script = str_replace('?bonjour=oui&?','?',$script);
   if (ereg('^(.*)(#[^=&]*)$',$script, $m)) {
 	  $script = $m[1];
