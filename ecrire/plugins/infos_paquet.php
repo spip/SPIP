@@ -197,12 +197,31 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
 		$mail = '';
 
 	if (isset($attrs['lien']))
-		$lien = "<a href='".$attrs['lien']."'>".$texte."</a>";
+		$lien = "<a href='".$attrs['lien']."' class='spip_out'>".$texte."</a>";
 	else
 		$lien = $texte;
 
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['auteur'][$texte] = $lien.$mail;
+}
+
+/**
+ * Cas particulier de la balise credit
+ * peupler le lien vers le site externe si necessaire
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+ */
+function info_paquet_credit($phraseur, $attrs, $texte) {
+
+	if (isset($attrs['lien']))
+		$lien = "<a href='".$attrs['lien']."' class='spip_out'>".$texte."</a>";
+	else
+		$lien = $texte;
+
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['credit'][$texte] = $lien;
 }
 
 ?>
