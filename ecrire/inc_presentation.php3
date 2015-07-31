@@ -1066,7 +1066,7 @@ function barre_onglets($rubrique, $onglet){
 		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "replang", $onglet, "langues-24.gif");
 		
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref != "non")	onglet(_T('onglet_origine_visites'), "statistiques_visites.php3?origine=oui", "referers", $onglet, "referers-24.gif");
+		if ($activer_statistiques_ref != "non")	onglet(_T('onglet_origine_visites'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 
 	if ($rubrique == "administration"){

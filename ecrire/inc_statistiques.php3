@@ -430,9 +430,9 @@ function aff_referers ($query, $limit=10, $plus = true) {
 			$visites = pos($nbvisites);
 			$ret = "\n<li>";
 		
-			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('lnfo_liens')."</font> ";
-			else if ($visites > 1) $ret .= "$visites "._T('lnfo_liens')." ";
-			else $ret .= "<font color='#999999'>$visites "._T('info_lien')."</font> ";
+			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('info_visites')."</font> ";
+			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
+			else $ret .= "<font color='#999999'>$visites "._T('info_visite')."</font> ";
 			
 			if (count($lesreferers[$numero]) > 1) {
 				$referers = join ($lesreferers[$numero],"</li><li>");
@@ -444,9 +444,8 @@ function aff_referers ($query, $limit=10, $plus = true) {
 				$aff .= "</li><p />\n";
 			} else {
 				$aff .= $ret;
-				$aff .= "<a href='".$lesliens[$numero]."'><b>".$lesdomaines[$numero]."</b></a>";
-				if ($lien = ereg_replace(" \([0-9]+\)$", "",$lesreferers[$numero][0]));
-					$aff .= "<font size='1'>$lien</font>";
+				$lien = $lesdomaines[$numero].ereg_replace(" \([0-9]+\)$", "",$lesreferers[$numero][0]);
+				$aff .= "<a href='".$lesliens[$numero]."'><b>$lien</b></a>";
 				$aff .= "</li>";
 			}
 		}
