@@ -285,10 +285,10 @@ function trouver_objet_exec($exec){
 		$infos = lister_tables_objets_sql();
 		foreach($infos as $t=>$info){
 			if ($exec==$info['url_edit']){
-				return $objet_exec[$exec] = array('edition'=>$exec==$info['url_voir']?'':true,'table_objet_sql'=>$t,'table'=>$info['type'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
+				return $objet_exec[$exec] = array('edition'=>$exec==$info['url_voir']?'':true,'table_objet_sql'=>$t,'table'=>$info['table_objet'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
 			}
 			if ($exec==$info['url_voir']){
-				return $objet_exec[$exec] = array('edition'=>false,'table_objet_sql'=>$t,'table'=>$info['type'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
+				return $objet_exec[$exec] = array('edition'=>false,'table_objet_sql'=>$t,'table'=>$info['table_objet'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
 			}
 		}
 	}
