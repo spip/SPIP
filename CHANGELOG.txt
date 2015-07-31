@@ -1,8 +1,17 @@
-2.0.14 -> 2.0.15 ( 06 avril 2011 )  
+2.0.15 -> 2.0.17 ( 16 novembre 2011 )
+
+r18628 | cedric    | 2011-10-22 18:02:46 | verifier le droit de l'auteur connecte a modifier le statut de l'auteur modifie (merci Ã  Davy Douhine)
+r18553 | ben       | 2011-09-19 17:33:43 | SPIP 2.0.16
+r18464 | cedric    | 2011-09-08 16:00:34 | report de r18461 : securite : email_valide() refuse tout ce qui n'est pas une chaine (eviter un full path disclosure sur le preg_match qui suit)
+r18463 | cedric    | 2011-09-08 15:57:41 | email ne peut Ãªtre qu'une chaÃ®ne, forÃ§ons le avant de l'envoyer dans la fonction de validation (Laurent Estieux)
+r17978 | guy       | 2011-06-08 11:16:31 | report de r17977
+r17659 | ben       | 2011-04-06 23:00:30 | SPIP 2.0.15
+
+2.0.14 -> 2.0.15 ( 06 avril 2011 )
 
 r17654 | b_b  | 2011-04-06 20:24:17 +0200 (mer, 06 avr 2011) | report de
-r17653 : un auteur ne doit pas pouvoir lancer la procédure de reinstall sans
-accès ftp (merci arnault)
+r17653 : un auteur ne doit pas pouvoir lancer la procï¿½dure de reinstall sans
+accï¿½s ftp (merci arnault)
 
 2.0.13 -> 2.0.14 ( 25 mars 2011 ) 
 
@@ -12,20 +21,20 @@ XSS suite a r4837 (remerciements pour Arnault)
 
 2.0.12 -> 2.0.13 ( Janvier 2011 ) 
 
-r15897 | esj       | 2010-08-02 18:00:30 +0200 (lun, 02 aoû 2010) | La simplification du code autour du cookie de session dans [13435] reporté par [13436]  ne prenait plus en compte la saisie {{{session_remember}}} du formulaire de login géré par la fonction {{{formulaires_login_verifier_dist}}}. Ca c'était aggravé avec la 2.1 par l'introduction de la fonction {{{auth_loger}}}. Rétablissement de l'intention d'origine (mais est-elle toujours pertinente ?).
-r15926 | fil       | 2010-08-12 10:43:10 +0200 (jeu, 12 aoû 2010) | retour des controles md5 supprimes par erreur en [14148]
-r15932 | davux     | 2010-08-13 14:27:52 +0200 (ven, 13 aoû 2010) | Report de [15931]
-r15967 | esj       | 2010-08-22 07:29:59 +0200 (dim, 22 aoû 2010) | Bug dans le squelette privé de suivi RSS de forum, report de [15966]
-r15972 | esj       | 2010-08-25 11:04:56 +0200 (mer, 25 aoû 2010) | Report, dans la branche 2.0, de [15959] (":" intempestif dans les raccourcis de tableau), [15945] (erreur Postgres), [15935] (traiter l'indirection pour trouver le titre d'un raccourci de lien).
-r15974 | esj       | 2010-08-25 12:02:40 +0200 (mer, 25 aoû 2010) | PG-like is not like MySQL-like repôrt de [15973] (M. Moy)
-r15982 | fil       | 2010-08-28 17:13:41 +0200 (sam, 28 aoû 2010) | report de [15981] : compatibilite fichiers de langues utf-8 pour les sites non-utf-8
-r15998 | esj       | 2010-08-30 16:17:03 +0200 (lun, 30 aoû 2010) | Report de [15986] pour que les stats puissent marche en PG.
-r15999 | esj       | 2010-08-30 16:17:58 +0200 (lun, 30 aoû 2010) | Report de [15990] fiabilisant le portage en PG.
-r16372 | davux     | 2010-10-02 19:52:39 +0200 (sam, 02 oct 2010) | Correction de generer_url_public() en relatif dans le priveReport de [16362]: Utiliser _DIR_RACINE pour redescendre d'un niveau quandon appelle generer_url_public() depuis l'espace privé avec $rel=true.
-r16608 | davux     | 2010-11-26 05:35:11 +0100 (ven, 26 nov 2010) | Report de r16605 (mise à jour de l'URL des changesets)
-r16619 | davux     | 2010-12-02 00:01:47 +0100 (jeu, 02 déc 2010) | Report de r16616: ajout de langue Nasa Yuwe (pbb)
-r16622 | davux     | 2010-12-03 20:07:13 +0100 (ven, 03 déc 2010) | Dans les flux RSS, encoder en entités XML, pas HTMLReport de http://zone.spip.org/trac/spip-zone/changeset/42644
-r16644 | davux     | 2010-12-07 23:06:04 +0100 (mar, 07 déc 2010) | Report de r16639
+r15897 | esj       | 2010-08-02 18:00:30 +0200 (lun, 02 aoï¿½ 2010) | La simplification du code autour du cookie de session dans [13435] reportï¿½ par [13436]  ne prenait plus en compte la saisie {{{session_remember}}} du formulaire de login gï¿½rï¿½ par la fonction {{{formulaires_login_verifier_dist}}}. Ca c'ï¿½tait aggravï¿½ avec la 2.1 par l'introduction de la fonction {{{auth_loger}}}. Rï¿½tablissement de l'intention d'origine (mais est-elle toujours pertinente ?).
+r15926 | fil       | 2010-08-12 10:43:10 +0200 (jeu, 12 aoï¿½ 2010) | retour des controles md5 supprimes par erreur en [14148]
+r15932 | davux     | 2010-08-13 14:27:52 +0200 (ven, 13 aoï¿½ 2010) | Report de [15931]
+r15967 | esj       | 2010-08-22 07:29:59 +0200 (dim, 22 aoï¿½ 2010) | Bug dans le squelette privï¿½ de suivi RSS de forum, report de [15966]
+r15972 | esj       | 2010-08-25 11:04:56 +0200 (mer, 25 aoï¿½ 2010) | Report, dans la branche 2.0, de [15959] (":" intempestif dans les raccourcis de tableau), [15945] (erreur Postgres), [15935] (traiter l'indirection pour trouver le titre d'un raccourci de lien).
+r15974 | esj       | 2010-08-25 12:02:40 +0200 (mer, 25 aoï¿½ 2010) | PG-like is not like MySQL-like repï¿½rt de [15973] (M. Moy)
+r15982 | fil       | 2010-08-28 17:13:41 +0200 (sam, 28 aoï¿½ 2010) | report de [15981] : compatibilite fichiers de langues utf-8 pour les sites non-utf-8
+r15998 | esj       | 2010-08-30 16:17:03 +0200 (lun, 30 aoï¿½ 2010) | Report de [15986]ï¿½pour que les stats puissent marche en PG.
+r15999 | esj       | 2010-08-30 16:17:58 +0200 (lun, 30 aoï¿½ 2010) | Report de [15990]ï¿½fiabilisant le portage en PG.
+r16372 | davux     | 2010-10-02 19:52:39 +0200 (sam, 02 oct 2010) | Correction de generer_url_public() en relatif dans le priveReport de [16362]: Utiliser _DIR_RACINE pour redescendre d'un niveau quandon appelle generer_url_public() depuis l'espace privï¿½ avec $rel=true.
+r16608 | davux     | 2010-11-26 05:35:11 +0100 (ven, 26 nov 2010) | Report de r16605 (mise ï¿½ jour de l'URL des changesets)
+r16619 | davux     | 2010-12-02 00:01:47 +0100 (jeu, 02 dï¿½c 2010) | Report de r16616: ajout de langue Nasa Yuwe (pbb)
+r16622 | davux     | 2010-12-03 20:07:13 +0100 (ven, 03 dï¿½c 2010) | Dans les flux RSS, encoder en entitï¿½s XML, pas HTMLReport de http://zone.spip.org/trac/spip-zone/changeset/42644
+r16644 | davux     | 2010-12-07 23:06:04 +0100 (mar, 07 dï¿½c 2010) | Report de r16639
 r16900 | cedric    | 2011-01-06 11:09:49 +0100 (jeu, 06 jan 2011) | Report de r16879 : divers bugs de secu permettant a un redacteur de faire du grabuge
 r16902 | cedric    | 2011-01-06 11:27:20 +0100 (jeu, 06 jan 2011) | report de r16884 pour interdire la redirection absolue depuis la page login, sauf contre-ordre du webmestre
 r16950 | cedric    | 2011-01-13 11:51:07 +0100 (jeu, 13 jan 2011) | report de r16948 et r16949
@@ -36,22 +45,22 @@ r15861 correction de la generer_url_entite
 r15849 securite du js informer_auteur (credit: Dotsafe)
 r15845 Report de [15843] dans la branche 2.0 car le bug datait de cette branche
 r15836 report de [15835] et revert de [15833] qui masquait le probleme sans le resoudre
-r15833 Changement identique ˆ [15832], car bug Žgalement prŽsent
-r15831 RevŽrifier les droits lors de la destruction d'un mot clŽ  ...
-r15826 Mauvais contr™le des droits  sur le logo d'un mot-clŽ
-r15813 Mme chose que [15797] pour les stats de referers + corrections  ...
-r15811 Cette fois-ci tout le monde semble tre d'accord sur le champ  ...
-r15797 AmŽliorer le comptage des liens entrants dans les stats (merci  ...
-r15795 Mettre ˆ jour les comptes de visite correctement dans la  ...
-r15793 Page privŽe des signatures, complŽment ˆ [15789]: un bout de navigation  ...
-r15791 Empche certaines visites de compter double (merci Daniel DŽchelotte)
-r15789 Pourquoi la page privŽe des pŽtitions n'avait pas ses styles spŽcifiques  ...
-r15766 [15355]  Žtait une bien mauvaise idŽe. sql_updateq ne retourne  ...
+r15833 Changement identique ï¿½ [15832], car bug ï¿½galement prï¿½sent
+r15831 Revï¿½rifier les droits lors de la destruction d'un mot clï¿½  ...
+r15826 Mauvais contrï¿½le des droits  sur le logo d'un mot-clï¿½
+r15813 Mï¿½me chose que [15797] pour les stats de referers + corrections  ...
+r15811 Cette fois-ci tout le monde semble ï¿½tre d'accord sur le champ  ...
+r15797 Amï¿½liorer le comptage des liens entrants dans les stats (merci  ...
+r15795 Mettre ï¿½ jour les comptes de visite correctement dans la  ...
+r15793 Page privï¿½e des signatures, complï¿½ment ï¿½ [15789]: un bout de navigation  ...
+r15791 Empï¿½che certaines visites de compter double (merci Daniel Dï¿½chelotte)
+r15789 Pourquoi la page privï¿½e des pï¿½titions n'avait pas ses styles spï¿½cifiques  ...
+r15766 [15355]  ï¿½tait une bien mauvaise idï¿½e. sql_updateq ne retourne  ...
 r15747 la balise INTRODUCTION prend en compte le DESCRIPTIF aussi pour  ...
-r15741 La rŽfŽrence ˆ la classe {{{spip-large}}} dans le bouton  ...
+r15741 La rï¿½fï¿½rence ï¿½ la classe {{{spip-large}}} dans le bouton  ...
 r15735 Si le premier argument de {{{spip_connect}}} n'est pas une  ...
 r15719 Include manquant.
-r15699 Un bout de [15007] non reportŽ.
+r15699 Un bout de [15007] non reportï¿½.
 
 2.0.10 -> 2.0.11
 r14702 precaution pour eviter de faire une double decompression de page stockee en cache
