@@ -20,6 +20,7 @@ $compteur_block = 0;
 if (_request('var_ajaxcharset') || _request("iframe")=="iframe")
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
+// http://doc.spip.org/@cadre_depliable
 function cadre_depliable($icone,$titre,$deplie,$contenu,$ids='',$style_cadre='r'){
 	$bouton = bouton_block_depliable($titre,$deplie,$ids);
 	return 
@@ -41,6 +42,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 	. fin_block();
 }
 
+// http://doc.spip.org/@debut_block_depliable
 function debut_block_depliable($deplie,$id=""){
 	$class=' deplie';
 	// si on n'accepte pas js, ne pas fermer
@@ -55,6 +57,7 @@ function fin_block() {
 // $texte : texte du bouton
 // $deplie : true (deplie) ou false (plie) ou -1 (inactif)
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
+// http://doc.spip.org/@bouton_block_depliable
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
 	$bouton_id = 'b'.substr(md5($texte.microtime()),8);
