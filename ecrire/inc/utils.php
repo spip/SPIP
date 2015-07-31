@@ -615,12 +615,11 @@ function id_table_objet($type) {
 	else if ($type == 'type')
 		return 'extension';
 	else {
+		if (!$type) return;
 		$t = table_objet($type);
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table($t);
-		if ($desc)
-			return $desc['key']["PRIMARY KEY"];
-		else return 'id_'.$type;
+		return @$desc['key']["PRIMARY KEY"];
 	}
 }
 
