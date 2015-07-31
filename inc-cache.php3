@@ -43,16 +43,15 @@ function utiliser_cache($chemin_cache, $delais) {
 
 	$use_cache = true;
 	if (file_exists($chemin_cache)) {
+		$t = filemtime($chemin_cache);
+		$ledelais = time() - $t;
+		$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
+		// Inclusions multiples : derniere modification
+		if ($lastmodified < $t) $lastmodified = $t;
+
 		// Eviter de recalculer pour les moteurs de recherche, proxies...
 		if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD') {
 			$use_cache = true;
-		}
-		else {
-			$t = filemtime($chemin_cache);
-			$ledelais = time() - $t;
-			$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
-			// Inclusions multiples : derniere modification
-			if ($lastmodified < $t) $lastmodified = $t;
 		}
 	}
 	else {
