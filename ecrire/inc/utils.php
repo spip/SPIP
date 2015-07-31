@@ -1259,6 +1259,81 @@ function spip_initialisation_suite() {
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
 	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 	define('_IMG_GD_QUALITE', 85);
+	init_var_mode();
+}
+
+// Reperer les variables d'URL qui conditionnent la perennite du cache, des urls
+// ou d'autres petit caches (trouver_table, css et js compactes ...)
+// http://doc.spip.org/@init_var_mode
+function init_var_mode(){
+	static $done = false;
+	if (!$done) {
+		// On fixe $GLOBALS['var_mode']
+		$GLOBALS['var_mode'] = false;
+		$GLOBALS['var_preview'] = false;
+		$GLOBALS['var_images'] = false;
+		$GLOBALS['var_noisettes'] = false;
+		$GLOBALS['var_urls'] = false;
+		if (isset($_GET['var_mode'])) {
+			// tout le monde peut calcul/recalcul
+			if ($_GET['var_mode'] == 'calcul'
+			OR $_GET['var_mode'] == 'recalcul')
+				$GLOBALS['var_mode'] = $_GET['var_mode'];
+		
+			// preview, debug, blocs, urls et images necessitent une autorisation
+			else if (in_array($_GET['var_mode'],array('preview','debug','blocs','urls','images'))) {
+				include_spip('inc/autoriser');
+				if (autoriser(
+					($_GET['var_mode'] == 'preview')
+						? 'previsualiser'
+						: 'debug'
+				)) {
+					switch($_GET['var_mode']){
+						case 'preview':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'recalcul';
+							// truquer les boucles et ne pas enregistrer de cache
+							$GLOBALS['var_preview'] = true;
+							break;
+						case 'blocs':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							$GLOBALS['var_noisettes'] = true;
+							break;
+						case 'urls':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							$GLOBALS['var_urls'] = true;
+							break;
+						case 'images':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							// indiquer qu'on doit recalculer les images
+							$GLOBALS['var_images'] = true;
+							break;
+						default :
+							$GLOBALS['var_mode'] = $_GET['var_mode'];
+							break;
+					}
+					spip_log($GLOBALS['visiteur_session']['nom']
+						. " ".$GLOBALS['var_mode']);
+				}
+				// pas autorise ?
+				else {
+					// si on n'est pas connecte on se redirige
+					if (!$GLOBALS['visiteur_session']) {
+						include_spip('inc/headers');
+						redirige_par_entete(generer_url_public('login',
+						'url='.rawurlencode(
+						parametre_url(self(), 'var_mode', $_GET['var_mode'], '&')
+						), true));
+					}
+					// sinon tant pis
+				}
+			}
+		}
+		$done = true;
+	}
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
