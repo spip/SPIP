@@ -141,18 +141,24 @@ function supprimer_fichier($fichier) {
 
 //
 // Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
-// $base/${subdir}_ sinon ; le flag $nobase signale qu'on ne veut pas de $base/
+// $base/${subdir}_ sinon ; $nobase signale qu'on ne veut pas de $base/
+// On peut aussi ne donner qu'un seul argument, 
+// subdir valant alors ce qui suit le dernier / dans $base
 //
 // http://doc.spip.org/@sous_repertoire
-function sous_repertoire($base, $subdir, $nobase = false) {
-	if (!preg_match(',[/_]$,', $base)) $base .= '/';
+function sous_repertoire($base, $subdir='', $nobase = false) {
 	$base = str_replace("//", "/", $base);
+	if (preg_match(',[/_]$,', $base)) $base = substr($base,0,-1);
+	if (!strlen($subdir)) {
+		$n = strrpos($base, "/");
+		if ($n === false) return $nobase ? '' : ($base .'/');
+		$subdir = substr($base, $n+1);
+		$base = substr($base, 0, $n+1);
+	} else {
+		$base .= '/';
+		$subdir = str_replace("/", "", "$subdir");
+	}
 	$baseaff = $nobase ? '' : $base;
-	# $base = 'IMG/distant/' ou 'IMG/distant_'
-
-	if (!strlen($subdir)) return $baseaff;
-
-	$subdir = str_replace("/", "", "$subdir");
 
 	if (@file_exists("$base${subdir}.plat"))
 		return "$baseaff${subdir}_";; 

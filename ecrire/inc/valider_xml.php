@@ -67,7 +67,8 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	if ($avail == 'SYSTEM')
 	  $file = $grammaire;
 	else
-	  $file = _DIR_CACHE . preg_replace('/[^\w.]/','_', $grammaire);
+	  $file = sous_repertoire(_DIR_DTD);
+	  $file .= preg_replace('/[^\w.]/','_', $grammaire);
 
 	if (@is_readable($file)) {
 		lire_fichier($file, $dtd);
