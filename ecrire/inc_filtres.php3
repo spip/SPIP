@@ -214,8 +214,8 @@ function PtoBR($texte){
 function majuscules($texte) {
 	// Cas du turc
 	if ($GLOBALS['spip_lang'] == 'tr') {
-		# remplacer hors des tags
-		if (preg_match_all(',<[^<>]+>,', $texte, $regs, PREG_SET_ORDER))
+		# remplacer hors des tags et des entites
+		if (preg_match_all(',<[^<>]+>|&[^;]+;,', $texte, $regs, PREG_SET_ORDER))
 			foreach ($regs as $n => $match)
 				$texte = str_replace($match[0], "@@SPIP_TURC$n@@", $texte);
 
