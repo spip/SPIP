@@ -719,9 +719,13 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 				$boucles[$id]->type_requete = '';
 				$x = $boucles[$id]->sql_serveur;
 				$x = $x ? "$x:$type" : $type;
-				erreur_squelette(_T('zbug_table_inconnue',
-						    array('table' => $x )),
-						 $id);
+				// ne pas renvoyer d'erreur si la table est optionnelle
+				// declare par ? avant ) dans <BOUCLE_A(table ?)>
+				if (!$boucles[$id]->table_optionnelle) {
+					erreur_squelette(_T('zbug_table_inconnue',
+								array('table' => $x )),
+							 $id);
+				}
 			}
 		}
 	}
