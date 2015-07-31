@@ -63,7 +63,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		  	if ($select = charger_fonction($type."_select",'inc',true))
 				$row = $select($id, $id_parent, $lier_trad);
 			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
-			if ($row)
+			if (!$new)
 				$md5 = controles_md5($row);
 		}
 		if (!$row) {
