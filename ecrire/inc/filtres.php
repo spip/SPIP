@@ -1396,7 +1396,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	$debut = 'debut'.$nom;
 
 	$pagination = array(
-		'lien_base' => parametre_url(self(),'ahah_id',''), // nettoyer l'id ahah eventuel
+		'lien_base' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
 		'total' => $total,
 		'position' => intval(_request($debut)),
 		'pas' => $pas,

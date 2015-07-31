@@ -435,7 +435,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
 
-		$ahah_out = false;
+		$fragment = false;
 		switch($p->type) {
 		// texte seul
 		case 'texte':
@@ -492,6 +492,11 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle);
+			if ($boucles[$nom]->fragment)
+				$fragment = $boucles[$nom]->fragment;
+			// si le nom du fragment n'a pas ete impose,
+			// ajouter le hash du squelette pour assurer l'unicite dans la page html produite
+			if ($fragment==$nom) $fragment.=$descr['nom'];
 			break;
 
 		case 'idiome':
@@ -544,13 +549,13 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			}
 
 			// gestion d'une boucle-fragment (ahah)
-			if (strlen($p->fragment)) {
+			if ($fragment) {
 				$code = '(($fragment = '.$code.')?
-				\'<div id="'.$p->fragment.'" class="fragment">\'
+				\'<div id="'.$fragment.'" class="fragment">\'
 				.$fragment
 				."</div>":"").
-				(($_GET["fragment"]=="'.$p->fragment.'")?
-					die(charset2unicode($fragment)):""
+				(($_GET["fragment"]=="'.$fragment.'")?
+					exporter_fragment($fragment):""
 				)';
 			}
 
