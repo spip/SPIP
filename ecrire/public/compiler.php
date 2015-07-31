@@ -234,9 +234,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$table_sql = $boucle->from[$id_table];
-	if (isset($GLOBALS['table_statut'][$table_sql])){
-		foreach($GLOBALS['table_statut'][$table_sql] as $k=>$s){
+	$show = $boucle->show;
+	if (isset($show['statut']) AND $show['statut']){
+		foreach($show['statut'] as $k=>$s){
 			// Restreindre aux elements publies si pas de {statut} ou autre dans les criteres
 			$filtrer = true;
 			if (isset($s['exception'])) {
