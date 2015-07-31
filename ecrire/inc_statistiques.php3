@@ -63,6 +63,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$url   = parse_url( $kw_referer );
 	$query = $url['query'];
 	$host  = $url['host'];
+	$path  = $url['path'];
 
 	parse_str($query);
 
@@ -91,21 +92,27 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				include_ecrire('inc_charsets.php3');
 				$keywords = unicode2charset(charset2unicode($keywords,'utf-8'));
 			}
+			$buffer["host"] = $kw_referer_host;
 		}
 	}
+	//$nom_url = ereg_replace("http://","", strip_tags($kw_referer_host));
+	//if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
 
-	$nom_url = ereg_replace("http://","", strip_tags($kw_referer_host));
-	if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
-
-	$buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
+	//if (strlen($nom_url) > 0) $buffer["host"] = $nom_url;
+	if (!$buffer["host"]) $buffer["host"] = $host;
+	
+	$buffer["path"] = substr($path, 1, strlen($path));
+	$buffer["query"] = $query;
+	//$buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
 
 	if ($keywords != '')
 	{
 		if (strlen($keywords) > 50) $keywords = substr($keywords, 0, 48);
-		$buffer .= "(<b>" .trim(htmlspecialchars(stripslashes($keywords)))."</b>)\n";
+		//$buffer .= "(<b>" .trim(htmlspecialchars(stripslashes($keywords)))."</b>)\n";
+		$buffer["keywords"] = trim(htmlspecialchars(stripslashes($keywords)));
 	}
-
-	return( $buffer );
+	
+	return $buffer;
 
 }
 
