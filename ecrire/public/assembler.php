@@ -95,11 +95,11 @@ function assembler_page ($fond) {
 
 	// une perennite valide a meme reponse qu'une requete HEAD
 
-	if (isset($GLOBALS['HTTP_IF_MODIFIED_SINCE']) AND !$var_mode
-	AND $chemin_cache AND !$flag_dynamique) {
-		if (!preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) {
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) AND !$var_mode
+	AND $chemin_cache AND !$flag_dynamique AND !$_COOKIE['spip_admin']) {
+		if (!strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])) {
 			$since = preg_replace('/;.*/', '',
-				$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
 			$since = str_replace('GMT', '', $since);
 			if (trim($since) == gmdate("D, d M Y H:i:s", $lastmodified)) {
 				$page['status'] = 304;
