@@ -35,7 +35,8 @@ function existe_formulaire($form)
 
 	if (!$form) return ''; // on ne sait pas, le nom du formulaire n'est pas fourni ici
 
-	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : false;
+	$path = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
+	return $path ? $path : false;
 }
 
 
@@ -59,8 +60,7 @@ function balise_FORMULAIRE__dist($p) {
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
-	$form = existe_formulaire($form);
-	if (!$form) return '';
+	if (!existe_formulaire($form)) return '';
 
 	// deux moyen d'arriver ici : 
 	// soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
