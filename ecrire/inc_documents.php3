@@ -392,13 +392,14 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 		$hauteur_vignette = 110;
 		$largeur_vignette = ceil($largeur_vignette * $rapport);
 	}
-	
-	$fid = "?date=".@filemtime($fichier_vignette);
+
+# ça ne marche pas toujours car fichier_vignette peut etre n'importe quoi
+#	$fid = "?date=".@filemtime($fichier_vignette);
 
 	if ($fichier_document)
-		return "<a href='$fichier_document'><img src='$fichier_vignette$fid' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
+		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
 	else
-		return "<img src='$fichier_vignette$fid' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
+		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
 }
 
 
