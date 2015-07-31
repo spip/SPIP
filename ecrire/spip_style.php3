@@ -1352,6 +1352,11 @@ h3.spip {
 
 table.spip {
 }
+
+table.spip caption{
+	caption-side: top;
+}
+
 table.spip tr.row_first {
 	background-color: #FCF4D0;
 }
