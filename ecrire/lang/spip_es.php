@@ -23,11 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar esta palabra clave',
 'admin_modifier_rubrique' => 'Modificar esta secci&oacute;n',
 'admin_recalculer' => 'Actualizar esta p&aacute;gina',
-'afficher_trad' => 'Mostrar las traducciones',
-'alerte_maj_impossible' => '<<b>&iexcl;Alerta!</b> La actualizaci&oacute;n de la base SQL hacia la versi&oacute;n  @version@ es imposible, quiz&aacute;s por un problema de derechos de modificaci&oacute;n de la base de datos. Por favor, contacta a tu hospedaje.',
-'alerte_modif_info_concourante' => 'ATENCI&Oacute;N: Esta informaci&oacute;n se ha modificado en otra parte. El valor actual es:',
+'afficher_trad' => 'mostrar las traducciones',
+'alerte_maj_impossible' => '<<b>&iexcl;Alerta!</b> La actualizaci&oacute;n de la base SQL a la versi&oacute;n @version@ es imposible, quiz&aacute;s por un problema de derechos de modificaci&oacute;n de la base de datos. Por favor, contacta a tu hospedaje.',
+'alerte_modif_info_concourante' => 'ATENCI&Oacute;N: Esta informaci&oacute;n fue modificada por otro lado. El valor actual es:',
 'analyse_xml' => 'An&aacute;lisis XML',
-'annuler' => 'Anular',
+'annuler' => 'Cancelar',
 'antispam_champ_vide' => 'Por favor, deje este campo vac&iacute;o&nbsp;:',
 'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
 'avis_archive_incorrect' => 'El archivo de respaldo no es un archivo SPIP.',
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'Selecci&oacute;n de la interfase',
 'colonne' => 'Columna',
-'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
+'confirm_changer_statut' => 'Cuidado, est&aacute;s cambiando el estado de este elemento. &iquest;Lo confirmas?',
 'correcte' => 'correcta',
 
 // D
@@ -239,23 +239,22 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Ratifica tu firma: ',
 'form_pet_deja_enregistre' => 'Este sitio ya est&aacute; registrado',
 'form_pet_deja_signe' => 'Ya has firmado este texto.',
-'form_pet_envoi_mail_confirmation' => 'Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n a @email@. Tienes que visitar la direcci&oacute;n Web mencionada en ese mensaje para validar tu firma.',
+'form_pet_envoi_mail_confirmation' => 'Se acaba de enviar un mensaje de confirmaci&oacute;n a @email@. Tienes que ingresar a la direcci&oacute;n Web que contiene para validar tu firma.',
 'form_pet_mail_confirmation' => 'Hola,
 
-Has solicitado firmar la petici&oacute;n:
+Has solicitado a&ntilde;adir tu firma a:
 @titre@.
 
-Has facilitado la siguient informaci&oacute;n:
+Con la siguiente informaci&oacute;n:
 
     Nombre: @nom_email@
     Sitio: @nom_site@ - @url_site@
     @message@
 
 IMPORTANTE...
-
-Para validar tu firma, basta con conectarte a
-la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, tu firma
-no ser&aacute; tomada en cuenta):
+Para confirmar tu firma, debes ingresar a
+la direcci&oacute;n web indicada a continuaci&oacute;n (de lo contrario, tu firma
+no podr&aacute; ser tomada en cuenta):
 
     @url@
 
@@ -264,7 +263,7 @@ Gracias por tu participaci&oacute;n
 ',
 'form_pet_message_commentaire' => '&iquest;Un mensaje, un comentario?',
 'form_pet_nom_site2' => 'Nombre de tu sitio Web',
-'form_pet_probleme_liens' => 'Pon otra vez tu mensaje, quitando los caracteres html.',
+'form_pet_probleme_liens' => 'Ingresa nuevamente tu mensaje, quitando los enlaces hypertexto.',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, las firmas est&aacute;n temporalmente suspendidas.',
 'form_pet_signature_pasprise' => 'Tu firma no ha sido tomada en cuenta.',
 'form_pet_signature_validee' => 'Tu firma est&aacute; validada. &iexcl;Gracias!',
@@ -288,7 +287,7 @@ Gracias por tu participaci&oacute;n
 'forum_acces_refuse' => 'Ya no tienes acceso a estos foros.',
 'forum_attention_dix_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> tu mensaje debe tener al menos diez caracteres.',
 'forum_attention_trois_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> el t&iacute;tulo debe tener al menos tres caracteres.',
-'forum_attention_trop_caracteres' => '<b>&iexcl;Atenci&oacute;n&nbsp;!</b> su mensaje es demasiado largo (@compte@ caracteres)&nbsp;: para poder registrarlo, no debe sobrepasar los @max@ caracteres.',
+'forum_attention_trop_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> el mensaje es demasiado largo (@compte@ caracteres): para poder guardarlo, no debe sobrepasar los @max@ caracteres.',
 'forum_avez_selectionne' => 'Has seleccionado:',
 'forum_cliquer_retour' => 'Pinchar <a href=\'@retour_forum@\'>aqu&iacute;</a> para continuar.',
 'forum_forum' => 'foro',
@@ -352,7 +351,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_repartition_debut' => 'Mostrar el reparto desde el comienzo',
 'icone_repartition_visites' => 'Distribuci&oacute;n de las visitas',
 'icone_rubriques' => 'Secciones',
-'icone_sauver_site' => 'Hacer una copia de seguridad del sitio',
+'icone_sauver_site' => 'Respaldo del sitio',
 'icone_site_entier' => 'Todo el sitio',
 'icone_sites_references' => 'Sitios referenciados',
 'icone_statistiques' => 'Estad&iacute;sticas del sitio',
@@ -470,7 +469,7 @@ se puede activar o desactivar .',
 'info_mois_courant' => 'En el mes actual de: ',
 'info_mot_cle_ajoute' => 'La palabra clave siguiente ha sido a&ntilde;adida al art&iacute;culo',
 'info_multi_herit' => 'Idioma por omisi&oacute;n',
-'info_multi_langues_soulignees' => 'Los <u>idiomas subrayados</u> ofrecen una traducci&oacute;n de todos los textos de la interfaz. Si seleccionas dichos idiomas, varios elementos del sitio p&uacute;blico (fechas, formularios) se traducir&aacute;n autom&aacute;ticamente. Para los idiomas no subrayados, los elementos aparecer&aacute;n en la lengua principal del sitio.',
+'info_multi_langues_soulignees' => 'Los <u>idiomas subrayados</u> disponen de una traducci&oacute;n los textos de la interfaz. Si los seleccionas, diversos elementos del sitio p&uacute;blico (fechas, formularios) ser&aacute;n traducidos autom&aacute;ticamente. En los idiomas no subrayados, dichos elementos aparecer&aacute;n en la lengua principal del sitio.',
 'info_multilinguisme' => 'Multiling&uuml;ismo',
 'info_nom_non_utilisateurs_connectes' => 'Tu nombre no aparece en la lista de personas conectadas',
 'info_nom_utilisateurs_connectes' => 'Tu nombre aparece en la lista de personas conectadas.',
@@ -484,7 +483,7 @@ se puede activar o desactivar .',
 'info_panne_site_syndique' => 'El sitio sindicado tiene problemas',
 'info_pense_bete' => 'Recordatorio para memorizar',
 'info_petit_ecran' => 'Pantalla peque&ntilde;a',
-'info_petition_close' => 'Petici&oacute;n cerrada',
+'info_petition_close' => 'Ya no se firma',
 'info_pixels' => 'p&iacute;xeles',
 'info_plusieurs_mots_trouves' => 'Hemos encontrado varias palabras clave para "@cherche_mot@":',
 'info_popularite_5' => 'Popularidad:',
@@ -513,7 +512,7 @@ se puede activar o desactivar .',
 'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un documento...',
 'info_signature_supprimee' => 'Firma eliminada',
-'info_signature_supprimee_erreur' => 'Error&nbsp;: este c&amp;oacute;digo de eliminaci&amp;oacute;n no se corresponde a ninguna firma',
+'info_signature_supprimee_erreur' => 'Error: este c&oacute;digo de eliminaci&oacute;n no  corresponde a ninguna firma',
 'info_site_attente' => 'Sitio Web en espera de validaci&oacute;n',
 'info_site_reference' => 'Sitio referenciado en l&iacute;nea',
 'info_site_refuse' => 'Sitio Web rechazado',
@@ -574,15 +573,16 @@ se puede activar o desactivar .',
 'login_espace_prive' => 'espacio privado',
 'login_identifiant_inconnu' => 'El nombre de usuario &laquo;@login@&raquo; es desconocido.',
 'login_login' => 'Nombre de usuario:',
-'login_login2' => 'Login (nombre de usuario para conexi&oacute;n al sitio)&nbsp;:',
-'login_login_pass_incorrect' => '(Nombre de usuario o contrase&ntilde;a incorrecta.)',
+'login_login2' => 'Login (identificador de conexi&oacute;n al sitio):',
+'login_login_pass_incorrect' => '(Identificador o contrase&ntilde;a incorrecta.)',
 'login_motpasseoublie' => '&iquest;contrase&ntilde;a&nbsp;olvidada?',
-'login_non_securise' => 'Atenci&oacute;n, este formulario no est&aacute; asegurado. Si no deseas que tu contrase&ntilde;a pueda ser interceptada en la red, activa JavaScript en tu navegador y',
+'login_non_securise' => 'Atenci&oacute;n, este formulario no est&aacute; asegurado.
+ Si no deseas que tu contrase&ntilde;a pueda ser interceptada en la red, activa JavaScript en tu navegador y',
 'login_nouvelle_tentative' => 'Nuevo intento',
 'login_par_ici' => 'Est&aacute;s registrado o registrada... por aqu&iacute;...',
 'login_pass2' => 'Contrase&ntilde;a:',
 'login_preferez_refuser' => '<b>Si prefieres rechazar las "cookies"</b>, otro m&eacute;todo de conexi&oacute;n (menos seguro) est&aacute; a tu disposici&oacute;n:',
-'login_recharger' => 'recargar esta p&aacute;gina',
+'login_recharger' => 'actualizar esta p&aacute;gina',
 'login_rester_identifie' => 'Quedar identificado unos d&iacute;as',
 'login_retour_public' => 'Volver al sitio p&uacute;blico',
 'login_retour_site' => 'Volver al sitio p&uacute;blico',
@@ -593,7 +593,7 @@ se puede activar o desactivar .',
 'login_verifiez_navigateur' => '(No obstante, comprueba que tu navegador no memoriz&oacute; tu contrase&ntilde;a...)',
 
 // M
-'masquer_colonne' => 'Esconder esta columna',
+'masquer_colonne' => 'Ocultar esta columna',
 'masquer_trad' => 'Ocultar las traducciones',
 'module_fichiers_langues' => 'Archivos de idioma',
 
@@ -652,7 +652,7 @@ volver a conectarte al sitio.
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Contrase&ntilde;a olvidada',
 'pass_quitter_fenetre' => 'Abandonar esta ventana',
-'pass_rappel_login' => 'Recuerda: tu nombre de usuario (login) es &laquo;@login@&raquo;.',
+'pass_rappel_login' => 'Recuerda: tu identificador (login) es &laquo;@login@&raquo;.',
 'pass_recevoir_mail' => 'Recibir&aacute;s un mensaje de correo electr&oacute;nico indicando como recuperar tu acceso al sitio.',
 'pass_retour_public' => 'Volver al sitio p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Nada que hacer aqu&iacute;.',
@@ -662,7 +662,7 @@ volver a conectarte al sitio.
 'previsualiser' => 'Previsualizar',
 
 // R
-'retour' => 'Retorno',
+'retour' => 'Volver',
 
 // S
 'spip_conforme_dtd' => 'SPIP considera este documento como conforme a su DOCTYPE:',
@@ -685,8 +685,8 @@ volver a conectarte al sitio.
 La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
 'texte_erreur_visiteur' => 'Has intentado entrar al espacio privado con un identificador que no lo permite.',
-'texte_inc_auth_1' => 'Te identificaste con el
- login  <b>@auth_login@</b>, pero &eacute;ste no existe (ya) en la base.
+'texte_inc_auth_1' => 'Est&aacute;s identificado con el
+ login  <b>@auth_login@</b>, pero &eacute;ste (ya) no existe en la base.
 Intenta',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
@@ -716,7 +716,7 @@ Intenta',
 'titre_joindre_document' => 'A&ntilde;adir un documento',
 'titre_liens_entrants' => 'Los enlaces entrantes ',
 'titre_mots_cles' => 'Palabras clave',
-'titre_probleme_technique' => 'Atenci&oacute;n: una dificultad t&eacute;cnica (servidor SQL) impide el acceso a esta parte del sitio. Se agradece su comprensi&oacute;n hasta resolver el problema.',
+'titre_probleme_technique' => 'Atenci&oacute;n: una problema t&eacute;cnico (servidor SQL) impide el acceso a esta parte del sitio. Se agradece su comprensi&oacute;n.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENTO EN ESTA SECCION',
 'titre_signatures_attente' => 'Firmas esperando validaci&oacute;n',
 'titre_signatures_confirmees' => 'Firmas confirmadas',
@@ -752,10 +752,10 @@ Intenta',
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n de un orden inexistente',
 'zbug_pagination_sans_critere' => '#PAGINATION sin criterio {pagination} o empleado en un bucle recurssivo',
 'zbug_parametres_inclus_incorrects' => 'Par&aacute;metreos de inclusi&oacute;n incorrectos',
-'zbug_profile' => 'Duraci&oacute;n de c&aacute;lculo&nbsp;: @time@',
+'zbug_profile' => 'Duraci&oacute;n del c&aacute;lculo: @time@',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'servidor SQL indefinido',
-'zbug_statistiques' => 'Estad&iacute;stica de las peticiones SQL ordenadas por duraci&oacute;n',
+'zbug_statistiques' => 'Estad&iacute;stica de las consultas SQL ordenadas por duraci&oacute;n',
 'zbug_table_inconnue' => 'Tabla SQL &laquo;@table@&raquo; desconocida',
 'zxml_connus_attributs' => 'atributos conocidos',
 'zxml_de' => 'de',

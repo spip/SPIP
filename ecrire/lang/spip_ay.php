@@ -1,17 +1,17 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = ay
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-es   ',
 '0_langue' => 'aymara [ay]   ',
 '0_liste' => 'spip-es@rezo.net   ',
 '0_mainteneur' => 'spip-dev@rezo.net   ',
-
 
 // A
 'access_interface_graphique' => 'Phuqata ajanu apnaqawir kutta&ntilde;a',
@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'MySQL Pantjawi',
 'avis_erreur_sauvegarde' => '&iexcl;Yaqha qillqatat lurasinxa pantjawiw utji (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Jark\'at qamawir mantawjirux m&auml; jan wali utji',
-
 
 // B
 'barre_a_accent_grave' => 'M&auml; jach\'aptata A jach\'at arsuriyimpi uchanta&ntilde;a',
@@ -73,7 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Apkata&ntilde;a',
 'bouton_valider' => 'Iyaw sa&ntilde;a',
 
-
 // C
 'cal_apresmidi' => 'Jayp\'u',
 'cal_jour_entier' => 'Jurnala',
@@ -81,15 +79,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'Urut urut pacha chimpu',
 'cal_par_mois' => 'Phaxsit phaxsit pacha chimpu',
 'cal_par_semaine' => 'Simanat simanat pacha chimpu',
-'calendrier_synchro_prive' => 'Arkir calindaryux, khitix lurki jupaki, aka qamaw qillqat luraw ukxat yatiytam (lurawinakampi ukhamarak sapa maynit sawipa, qillqatanak ukhamarak jisk\'aptatanak kunamtix luraskani ukhama).',
-'calendrier_synchro_public' => 'Aka pacha chimpux taqpach lurawipa ka qamawin sarantayaskakiw (qillqatanakamp ukhamarak jisk\'aptatanak taqir yatiyata). Aka pacha chimpux taqpachan lurawipa aka qamawin sarantayaskakiw (qillqatanakamp ukhamarak jisk\'aptatanak taqir yatiyata).',
-'calendrier_synchro_sync' => 'Q\'ipi pacha kikikipa&ntilde;a &lt;i&gt;iCal&lt;/i&gt;&lt;br /&gt; (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'Kulura',
 'choix_interface' => 'Ajanut ajllawi',
 'colonne' => 'Sayt\'ata',
 'confirm_changer_statut' => 'U&ntilde;jataw, estado de elemento maytaw mayjaptaya&ntilde; &iquest;munaskaktati saranta&ntilde;xa?',
 'correcte' => 'Walikiwa',
-
 
 // D
 'date_aujourdhui' => 'Jichhuru',
@@ -201,7 +195,6 @@ Uk lurasinsti jutir ima&ntilde; q\'ipinaka jikitawa.&lt;/p&gt;
 &lt;p&gt;Una vez terminado este proceso, podr&aacute;s ',
 'double_occurrence' => 'P&auml; lurawi',
 
-
 // E
 'entree_dimensions' => 'Ukch\'anaka',
 'entree_titre_document' => 'Qillqa q&acute;ipin sutinchatapa',
@@ -210,7 +203,6 @@ Uk lurasinsti jutir ima&ntilde; q\'ipinaka jikitawa.&lt;/p&gt;
 'erreur' => 'Pantjawi',
 'erreur_balise_non_fermee' => 'Qhipir markhax jan jist\'antata:',
 'erreur_texte' => 'Pantjawinaka',
-
 
 // F
 'fichier_introuvable' => 'Q\'ipix janiw jiskiskiti @fichier@',
@@ -227,9 +219,9 @@ Uk lurasinsti jutir ima&ntilde; q\'ipinaka jikitawa.&lt;/p&gt;
 'form_forum_pass' => 'Imt\'awi:',
 'form_forum_probleme_mail' => 'Aruskipayirix jan waliwa: janiw u&ntilde;acht\'ayirix apaya&ntilde;jamakiti',
 'form_forum_voici1' => 'Esta es tu identificaci&oacute;n para participar
-en los foros del sitio \&quot;@nom_site_spip@\&quot; (@adresse_site@):',
+en los foros del sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_site@):',
 'form_forum_voici2' => 'Esta es tu identificaci&oacute;n para proponer art&iacute;culos
-en el sitio \&quot;@nom_site_spip@\&quot; (@adresse_login@):   ',
+en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'form_indiquer_email' => 'Utjawi aruskipayirimat u&ntilde;achayam',
 'form_indiquer_nom' => 'Sutim u&ntilde;achayam',
 'form_indiquer_nom_site' => 'Web qamawimat suti u&ntilde;achayam',
@@ -311,7 +303,6 @@ Arsusiwitamatxa yuspagara
 'forum_vous_enregistrer' => 'Aka aruskipa&ntilde;an arsu&ntilde;atakix, naraqatax qillqayasisma. Ukjarux juman u&ntilde;t\'irim churapksma u&ntilde;achawimatxa yuspagara. Jan qillqataktax ukjax, ',
 'forum_vous_inscrire' => 'qillqayasi&ntilde;ama.',
 
-
 // I
 'ical_texte_rss_articles' => '&laquo;Backend&raquo; q\'ipix aka qamawin qillqatanakata, utjawin jikisi:',
 'ical_texte_rss_articles2' => 'Ukhamarak &laquo;backend&raquo; q\'ipinak jikismaw qillqatanakatakix sapa t\'aqat aka sutinchatata: ',
@@ -326,7 +317,6 @@ Arsusiwitamatxa yuspagara
 'icone_brouteur' => 'Jank\'aki tuyuwi',
 'icone_configuration_site' => 'Qamaw u&ntilde;tayawi',
 'icone_configurer_site' => 'Qamaw u&ntilde;taya&ntilde;a',
-'icone_creer_mot_cle' => 'Machaq imt\'at aru u&ntilde;staya&ntilde;a ukatxa aka qillqatar mayacham',
 'icone_creer_nouvel_auteur' => 'M&auml; machaq qillqir u&ntilde;staya&ntilde;a',
 'icone_creer_rubrique' => 'M&auml; t\'aqa u&ntilde;staya&ntilde;a',
 'icone_creer_sous_rubrique' => 'M&auml; sullkir t\'aq u&ntilde;staya&ntilde;a
@@ -435,7 +425,7 @@ Arsusiwitamatxa yuspagara
 'info_grand_ecran' => 'Phuqat salta',
 'info_image_aide' => 'Yanapa',
 'info_image_process_titre' => 'Kunjams jisk\'aptatanak u&ntilde;staya&ntilde;a',
-'info_impossible_lire_page' => '&iexcl;Pantjata! &lt;/b&gt; Janiw laphi u&ntilde;naq liyi&ntilde;jamakiti &lt;tt&gt;&lt;html&gt;@test_proxy@&lt;/html&gt;&lt;/tt&gt;  \&quot;proxy\&quot; &lt;tt&gt; ukampi',
+'info_impossible_lire_page' => '&iexcl;Pantjata! &lt;/b&gt; Janiw laphi u&ntilde;naq liyi&ntilde;jamakiti &lt;tt&gt;&lt;html&gt;@test_proxy@&lt;/html&gt;&lt;/tt&gt;  \\&quot;proxy\\&quot; &lt;tt&gt; ukampi',
 'info_inclusion_directe' => 'Chiqaq apthapiwi',
 'info_inclusion_vignette' => 'Saltat apthapiwi',
 'info_installation_systeme_publication' => 'Apnaqaw yatiyat uchantawipa',
@@ -472,7 +462,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'info_nom_non_utilisateurs_connectes' => 'Sutimax janiw u&ntilde;stkiti  jaqi tantanakan chinuta',
 'info_nom_utilisateurs_connectes' => 'Sutimax u&ntilde;stiw jaqi tantanakan chinuta',
 'info_nombre_en_ligne' => 'Jichhax naktatawa',
-'info_non_resultat' => 'Thaqawitaqix janiw askichawinak jikiskiti \&quot;@cherche_mot@\&quot;',
+'info_non_resultat' => 'Thaqawitaqix janiw askichawinak jikiskiti \\&quot;@cherche_mot@\\&quot;',
 'info_non_utilisation_messagerie' => 'Manqhax yatiyaw jan apnaqa&ntilde;a.',
 'info_nouveau_message' => '&lt;b&gt;&iexcl;Ma machaq yatiyawinitawa!&lt;/b&gt;',
 'info_nouveaux_messages' => 'Utjtam @total_messages@ machaq yatiyawinaka',
@@ -491,10 +481,10 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'info_propose_1' => '[@nom_site_spip@] Amtata: @titre@',
 'info_propose_2' => 'Amtat qillqatanak
 -----------------',
-'info_propose_3' => 'Qillqataxa \&quot;@titre@\&quot; amtatawa yatiyasi&ntilde;apataki.',
+'info_propose_3' => 'Qillqataxa \\&quot;@titre@\\&quot; amtatawa yatiyasi&ntilde;apataki.',
 'info_propose_4' => 'Jawsthapitataw jiskht\'a&ntilde;ataki ukhamarak arst\'a&ntilde;ataki',
 'info_propose_5' => 'aruskipayirina. Utjawinx wakitaw:',
-'info_publie_01' => 'Qillqatax \&quot;@titre@\&quot; iyaw sataxiw luririta @connect_nom@.',
+'info_publie_01' => 'Qillqatax \\&quot;@titre@\\&quot; iyaw sataxiw luririta @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] YATIYATA: @titre@',
 'info_publie_2' => 'Qillqat yatiyata
 ----------------',
@@ -524,7 +514,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'info_tout_afficher' => 'Taqpach u&ntilde;achaya&ntilde;a',
 'info_travaux_texte' => 'Aka qamawix janiraw kamachitakiti. Juk\'amp nayraqatar kuttam.',
 'info_travaux_titre' => 'Qamawix mayxt\'ayataskiw',
-'info_trop_resultat' => 'Thaqawitakix anchapuniw askichawinakax utji \&quot;@cherche_mot@\&quot;. Amuyunak u&ntilde;achayam.',
+'info_trop_resultat' => 'Thaqawitakix anchapuniw askichawinakax utji \\&quot;@cherche_mot@\\&quot;. Amuyunak u&ntilde;achayam.',
 'info_utilisation_messagerie_interne' => 'Qamawit manqhax yatiyaw apnaqta.',
 'info_valider_lien' => 'Aka chinu iyaw sa&ntilde;a',
 'info_verifier_image' => ', sumti saltanak inxtayapxi uk mayampi u&ntilde;tam.',
@@ -537,12 +527,10 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'infos_vos_pense_bete' => 'Amtatanakama',
 'item_breve_proposee' => 'Jisk\'aptat amtawi',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Jisk\'a saltanakak u&ntilde;achaya&ntilde;a',
 'lien_afficher_texte_icones' => 'Jisk\'a saltanakampi sawutanakampi u&ntilde;achaya&ntilde;a',
 'lien_afficher_texte_seul' => 'Sawuk u&ntilde;achaya&ntilde;a',
-'lien_icones_interface' => 'Ajanutxa jisk\'a saltanakak lurasiwayi &lt;a href=\'http://jimmac.musichall.cz/\'&gt;Jakub \'Jimmac\' Steiner&lt;/a&gt;.',
 'lien_liberer' => 'Antutja&ntilde;a',
 'lien_liberer_tous' => 'aka qillqatanak antutja&ntilde;a',
 'lien_nouvea_pense_bete' => 'Machaq amtawirinaka',
@@ -561,9 +549,8 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'ligne' => 'Naktawi',
 'login_acces_prive' => 'ch\'usawx jark\'at mantawi',
 'login_autre_identifiant' => 'yaqha sutimpi yatiyt\'asi&ntilde;a',
-'login_connexion_refusee' => 'Yatiyt\'aw janiw sata.',
 'login_cookie_accepte' => 'Iyaw sa&ntilde;apatakix tuyuri kamachim (aka qamawitaki).',
-'login_cookie_oblige' => 'Aka qamawin u&ntilde;t\'ayasi&ntilde;atakix, iyaw sa&ntilde;amaw \&quot;cookies\&quot; ukanakaru.',
+'login_cookie_oblige' => 'Aka qamawin u&ntilde;t\'ayasi&ntilde;atakix, iyaw sa&ntilde;amaw \\&quot;cookies\\&quot; ukanakaru.',
 'login_deconnexion_ok' => 'Jan yatiyt\'ir lurata.',
 'login_erreur_pass' => 'Imt\'aw pantjata.',
 'login_espace_prive' => 'ch\'usawx jark\'ata',
@@ -576,27 +563,24 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'login_nouvelle_tentative' => 'Mayamp yant\'awi',
 'login_par_ici' => 'Akhanakan qillqatatawa...',
 'login_pass2' => 'Imt\'awi:',
-'login_preferez_refuser' => '&lt;b&gt;Janitix munktaxa \&quot;cookies\&quot;&lt;/b&gt;, yaqha chinuwit thakhi (jan sum jark\'ata) ukax jumataxiw:',
+'login_preferez_refuser' => '&lt;b&gt;Janitix munktaxa \\&quot;cookies\\&quot;&lt;/b&gt;, yaqha chinuwit thakhi (jan sum jark\'ata) ukax jumataxiw:',
 'login_recharger' => 'Aka laphi u&ntilde;naq phuqantaskaki&ntilde;a',
 'login_rester_identifie' => 'M&auml; qawqha urunak u&ntilde;t\'ayasi&ntilde;a',
 'login_retour_public' => 'Jach\'a qamaw utar kutta&ntilde;a',
 'login_retour_site' => 'Jach\'a qamaw utar kutta&ntilde;a',
 'login_retoursitepublic' => 'jach\'a qamaw uta',
-'login_sans_cookiie' => 'U&ntilde;icht\'aw jan \&quot;cookie\&quot;',
+'login_sans_cookiie' => 'U&ntilde;icht\'aw jan \\&quot;cookie\\&quot;',
 'login_sinscrire' => 'qillqayasi&ntilde;a',
 'login_test_navigateur' => 'tuyur yant\'a/mayamp yatiyt\'awi',
 'login_verifiez_navigateur' => '(Tuyurimax janiw imt\'atam sum katkiti uk qhanstayam...)',
-
 
 // M
 'masquer_trad' => 'Jaqukipawinak imt\'a&ntilde;a',
 'module_fichiers_langues' => 'Aru q\'ipinaka',
 
-
 // N
 'navigateur_pas_redirige' => 'Janitix tuyurimax justupak chiqa&ntilde;chkitix, akjawx limt\'am sarantaskaki&ntilde;ataki.',
 'numero' => 'Jakhuwi',
-
 
 // O
 'occurence' => 'Amuyuwi',
@@ -618,7 +602,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'onglet_save_restaur_base' => 'Yanapat qillqaqa ukhamarak yatqalltawit sumachawi',
 'onglet_vider_cache' => 'Cach&eacute; ukax ch\'usaya&ntilde;a',
 'ortho_trop_de_fautes2' => 'Kunayman jan walinak u&ntilde;jktax ukanak askicham ukhamarak mayamp yant\'am.',
-
 
 // P
 'pass_choix_pass' => 'Machaq imt\'awim ajllima:',
@@ -649,7 +632,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 ',
 'previsualiser' => 'Nayt\'at u&ntilde;ja&ntilde;a',
 
-
 // S
 'spip_conforme_dtd' => 'SPIP ukax aka qillqa q\'ip kipkakikix DOCTYPE ukhama amuyi:',
 'squelette' => 'ch\'akha ch\'akha',
@@ -657,7 +639,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'squelette_ligne' => 'ch\'akha ch\'akha, naktawi',
 'stats_visites_et_popularite' => '@visites@ tumpatanaka; juk\'amp tumpata: @popularite@ ',
 'suivant' => 'arkiri',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;KB',
@@ -706,16 +687,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'titre_titre_document' => 'Qillqa q\'ipin sutinchawi',
 'trad_reference' => '(aytat q\'ipi)',
 
-
-// U
-'upload_fichier_zip' => 'Q\'ipi ZIP',
-'upload_fichier_zip_texte' => 'Q\'ipi uka uchanta&ntilde; munktaxa m&auml; ZIP q\'ipiwa.',
-'upload_fichier_zip_texte2' => 'Aka q\'ipix ukaspaw:',
-'upload_limit' => 'Jalanuqiritakix aka q\'ipix sinti jach\'awa, ukch\'axa iyaw sata &lt;i&gt;upload&lt;/i&gt; ukatawa @max@.',
-'upload_zip_decompacter' => 'Jan jitthapita ukhamaraki qamawin uchantata utjiri sapa maya. Q\'ipinakaxa uchantaskani qamawinx ukanakawa:',
-'upload_zip_telquel' => 'ukham uchantata, Zip q\'ipjama jiphtapita;   ',
-
-
 // Z
 'zbug_balise_b_aval' => ': bucle B chimputa juk\'amp nayraru',
 'zbug_boucle' => 'bucle',
@@ -757,8 +728,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'zxml_valeur_attribut' => 'u&ntilde;t\'awi',
 'zxml_vide_balise' => 'ch\'usa chimpu',
 'zxml_vu' => 'nayra u&ntilde;jata '
-
-
 );
 
 ?>
