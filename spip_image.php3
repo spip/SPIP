@@ -469,12 +469,14 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }
 if ($id_document)
 	$link->addVar('id_document',$id_document);
+if ($type == 'rubrique')
+	$link->delVar('id_article');
 
 @header ("Location: ".$link->getUrl());
 

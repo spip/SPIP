@@ -1384,7 +1384,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				icone_bandeau_secondaire ("Sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
 
 			if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 0,1")) > 0) {
-				icone_bandeau_secondaire ("Documents", "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
+				icone_bandeau_secondaire ("Documents des rubriques", "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
 			}
 		}
 	}
