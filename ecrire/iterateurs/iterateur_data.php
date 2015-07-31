@@ -110,8 +110,9 @@ class IterateurDATA extends IterateurSPIP {
 						}
 						break;
 					case 'json':
-						if (is_array($json = json_decode($u))) {
-							$this->tableau = $json;
+						if (is_array($json = json_decode($u))
+						OR is_object($json)) {
+							$this->tableau = (array) $json;
 							$this->ok = true;
 						}
 						break;
