@@ -64,7 +64,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 			. fin_cadre_relief(true);
 
 		if(_request("exec")!="iconifier") {
-		  $js .= http_script(_DIR_JAVASCRIPT . 'async_upload.js')
+		  $js .= http_script('', _DIR_JAVASCRIPT . 'async_upload.js')
 		    . http_script('$("form.form_upload_icon").async_upload(async_upload_icon)');
 
 		} else $js = "";
