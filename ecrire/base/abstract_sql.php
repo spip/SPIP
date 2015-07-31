@@ -188,6 +188,7 @@ function sql_select ($select = array(), $from = array(), $where = array(),
 		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
 
+	// en cas d'erreur
 	if (!is_string($res)) return $res;
 	// denoncer l'erreur SQL dans sa version brute
 	spip_sql_erreur($serveur);
@@ -666,7 +667,7 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 
 
 /**
- * Retourne la derniere erreur connue
+ * Retourne la dernière erreur connue
  *
  * @api
  * @param string $serveur
@@ -681,7 +682,16 @@ function sql_error($serveur='') {
 	return $f('query inconnue', $serveur);
 }
 
-// http://doc.spip.org/@sql_errno
+/**
+ * Retourne le numéro de la derniere erreur connue
+ *
+ * @api
+ * @param string $serveur
+ *      Nom du connecteur
+ * @return bool|int
+ *      Numéro de l'erreur
+ *      False si le serveur est indisponible
+ */
 function sql_errno($serveur='') {
 	$f = sql_serveur('errno', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;

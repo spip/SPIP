@@ -291,7 +291,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	$boucle = &$boucles[$id_boucle];
 	instituer_boucle($boucle);
-
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 
 	// en mode debug memoriser les premiers passages dans la boucle,
@@ -913,8 +912,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$f = charger_fonction('phraser_' . $gram, 'public');
 
 	$squelette = $f($squelette, '', $boucles, $descr);
-
 	$boucles = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+
 	// restituer les echappements
 	if ($esc)
 		foreach($boucles as $i=>$boucle) {
@@ -1044,7 +1043,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
-	foreach($boucles as $id => $boucle) { 
+	foreach($boucles as $id => $boucle) {
 		if ($boucle->type_requete == TYPE_RECURSIF AND $boucle->param) {
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
