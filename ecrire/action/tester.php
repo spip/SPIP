@@ -16,7 +16,7 @@ include_spip('inc/meta');
 // Tester nos capacites
 // http://doc.spip.org/@action_tester_dist
 function action_tester_dist() {
-	global $arg;
+	$arg = _request('arg');
 
 	// verifier les formats acceptes par GD
 	if ($arg == "gd1") {
@@ -91,33 +91,33 @@ function action_tester_dist() {
 		$vignette = _ROOT_IMG_PACK."test.jpg";
 		$dest = _DIR_VAR . "test-jpg.jpg";
 		$commande = "$jpegtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
-		spip_log($commande);
+		spip_log("tester $arg exec $commande");
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
 		}
+		spip_log("tester resultat exec " . join(', ', $netpbm_formats));
 		$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
 		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);
 		$vignette = _ROOT_IMG_PACK."test.gif";
 		$dest = _DIR_VAR . "test-gif.jpg";
 		$commande = "$giftopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
-		spip_log($commande);
+		spip_log("tester $arg exec $commande");
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "gif";
 		}
-
+		spip_log("tester resultat exec " . join(', ', $netpbm_formats));
 		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
 		$vignette = _ROOT_IMG_PACK."test.png";
 		$dest = _DIR_VAR . "test-gif.jpg";
 		$commande = "$pngtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
-		spip_log($commande);
+		spip_log("tester $arg exec $commande");
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "png";
 		}
-		
-
+		spip_log("tester resultat exec " . join(', ', $netpbm_formats));
 		if ($netpbm_formats)
 			$netpbm_formats = join(",", $netpbm_formats);
 		else
@@ -127,7 +127,7 @@ function action_tester_dist() {
 	}
 
 	// et maintenant envoyer la vignette de tests
-	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $arg)) {
+	if (preg_match("/^(gd1|gd2|imagick|convert|netpbm)$/", $arg)) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];
