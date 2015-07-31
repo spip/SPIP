@@ -67,7 +67,9 @@
 	<langue code="ja" />
 	<langue code="km" />
 	<langue code="la" />
-	<langue code="lb" />
+	<langue code="lb" url="http://trad.spip.org/tradlang_module/public?lang_cible=lb">
+		<traducteur nom="jwander" lien="http://trad.spip.org/auteur/jwander" />
+	</langue>
 	<langue code="lt" />
 	<langue code="my" />
 	<langue code="ne" />
