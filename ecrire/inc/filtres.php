@@ -1303,7 +1303,23 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 	return $letexte;
 }
 
+// convertit le contenu d'une balise multi en un tableau
+// http://doc.spip.org/@extraire_trad
+function extraire_trads($bloc) {
+	$lang = '';
+// ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
+//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
+	while (preg_match("/^(.*?)[\[]([a-z_]+)[\]]/siS", $bloc, $regs)) {
+		$texte = trim($regs[1]);
+		if ($texte OR $lang)
+			$trads[$lang] = $texte;
+		$bloc = substr($bloc, strlen($regs[0]));
+		$lang = $regs[2];
+	}
+	$trads[$lang] = $bloc;
 
+	return $trads;
+}
 
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
