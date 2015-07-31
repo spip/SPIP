@@ -1,10 +1,11 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = ay
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Plugin uk naktaya&ntilde;a
@@ -41,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Aka apxasit qamawinakax jan walt\'anakaniwa',
 'avis_suppression_base' => '&iexcl;AMUYAM, apaqat yatiyawinakax janiw askichaskaspati!',
 'avis_version_mysql' => 'U&ntilde;jatamaxa MySQL (@version_mysql@) uyu uyunakat pirwanxa janiw justup askichaw munkiti.',
-
 
 // B
 'bouton_acces_ldap' => 'M&auml; mantaw yapa&ntilde;a LDAP',
@@ -100,12 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_voir_message' => 'Janir apbbaykasinxa yatiyaw u&ntilde;ja&ntilde;a
 ',
 
-
 // C
 'cache_mode_compresse' => 'Cache ukat q\'ipinakaxa jitthapit ukham imasi.',
 'cache_mode_non_compresse' => 'Cache ukat q\'ipinakaxa jan jitthapit imasi.',
 'cache_modifiable_webmestre' => 'Aka amuykipawix mayxt\'ataspaw webmistress qamawit ukata.',
-
 
 // D
 'date_mot_heures' => 'urasa
@@ -117,7 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Jan y&auml;qat sawu',
 'diff_texte_supprime' => 'Apaqat sawu',
 'double_clic_inserer_doc' => 'P&auml; limt\'aw luram  aka jisk\'a thakhi uchanta&ntilde;ataki sawut ukan',
-
 
 // E
 'email' => 'aruskipayiri',
@@ -165,15 +162,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => 'Janiw utjkiti &lt;plugin&gt; qhanstayawin q\'ipita',
 'erreur_plugin_version_manquant' => 'Pluguin ukat u&ntilde;jata jan utjkiti',
 
-
 // F
 'forum_info_original' => 'nayriri',
-
 
 // I
 'ical_info1' => 'Aka qamawinxa kunayman lurawinak chinusi&ntilde;ataki utji qamaw utjawipampi',
 'ical_info2' => 'Aka taqpach lurawinakxat juk\'amp yatxata&ntilde;atakix, yatxata&ntilde;atakix jan p&auml;chasimti 
-&lt;a href=\&quot;\&quot;http://www.spip.net/fr_suivi&gt;SPIP ukat qillqanakawi&lt;/a&gt;.',
+&lt;a href=\\&quot;\\&quot;http://www.spip.net/fr_suivi&gt;SPIP ukat qillqanakawi&lt;/a&gt;.',
 'ical_info_calendrier' => 'P&auml; pachachimpuw utjtam. Mayirix qamawit m&auml; laphi u&ntilde;naqawa kunanti taqpach yatiyat qillqatank yatiyi: jumakiw u&ntilde;jtax uka m&auml; suti imt\'awi ukata, ukatxa mayjt\'ayasmaw kuna pachtix munktax ukja imt\'awim mayjt\'ayasa.',
 'ical_lien_rss_breves' => 'Qamawit jisk\'aptatanak apxasiwi ',
 'ical_methode_http' => 'Apaqa&ntilde;a',
@@ -211,7 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_retour' => 'Kuti&ntilde;a',
 'icone_retour_article' => 'Qillqatar kuti&ntilde;a',
 'icone_suivi_forum' => 'Jichhaptat aruski&ntilde;at yatiyata: @nb_forums@yanapawinaka',
-'icone_supprimer_cookie' => '\&quot;Cookie\&quot; uk apaqa&ntilde;a yatiyawinakata ',
+'icone_supprimer_cookie' => '\\&quot;Cookie\\&quot; uk apaqa&ntilde;a yatiyawinakata ',
 'icone_supprimer_groupe_mots' => 'Apaqaya&ntilde;a aka tama',
 'icone_supprimer_rubrique' => 'Aka t\'aqa a paqaya&ntilde;a',
 'icone_supprimer_signature' => 'Aka iyawsa apaqa&ntilde;a',
@@ -345,8 +340,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_lien' => 'Amta&ntilde;anak mayjt\'awinakat u&ntilde;achaya&ntilde;a',
 'info_historique_titre' => 'U&ntilde;akipawinakat u&ntilde;ch\'ukiwi',
 'info_identification_publique' => 'U&ntilde;acht\'ayawima...'
-
-
 );
 
 ?>
