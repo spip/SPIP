@@ -1195,7 +1195,7 @@ function balise_INCLURE_dist($p) {
 		if ($flag_env) {
 			$l = "array_merge(\$Pile[0],$l)";
 		}
-		$p->code = "recuperer_fond('',".$l.")";
+		$p->code = "recuperer_fond('',".$l.",true)";
 	} else {
 		$n = interprete_argument_balise(1,$p);
 		$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
