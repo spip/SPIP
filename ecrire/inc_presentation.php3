@@ -3011,10 +3011,10 @@ function fin_page($credits='') {
 //
 // Afficher la hierarchie des rubriques
 //
-function afficher_parents($id_rubrique) {
-	global $parents, $couleur_foncee, $lang_dir;
 
-	$parents = ereg_replace("(~+)","\\1~",$parents);
+function afficher_hierarchie($id_rubrique, $parents="") {
+	global $couleur_foncee, $spip_lang_left, $lang_dir;
+
 	if ($id_rubrique) {
 		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
 		$result = spip_query($query);
@@ -3025,19 +3025,28 @@ function afficher_parents($id_rubrique) {
 			$titre = $row['titre'];
 			changer_typo($row['lang']);
 
-			$parents = " <a href='naviguer.php3?coll=$id_rubrique'><span class='verdana3' style='color: $couleur_foncee;' dir='$lang_dir'>".typo($titre)."</span></a><br>\n".$parents;
 			if (acces_restreint_rubrique($id_rubrique))
-				$parents = " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ".$parents;
+				$logo = "admin-12.gif";
 			if (!$id_parent)
-				$parents = "~ <IMG SRC='img_pack/secteur-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ".$parents;
+				$logo = "secteur-12.gif";
 			else
-				$parents = "~ <IMG SRC='img_pack/rubrique-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ".$parents;
+				$logo = "rubrique-12.gif";
+
+
+			$parents = "<div class='verdana3' style='padding-$spip_lang_left: 15px; background: url(img_pack/$logo) $spip_lang_left center no-repeat;'><a href='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+
+
 		}
-		afficher_parents($id_parent);
+		afficher_hierarchie($id_parent, $parents);
+	}
+	else {
+		$logo = "racine-site-12.gif";
+		$parents = "<div class='verdana3' style='padding-$spip_lang_left: 15px; background: url(img_pack/$logo) $spip_lang_left center no-repeat;'><a href='naviguer.php3?coll=$id_rubrique'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+	
+		echo $parents;
+		
 	}
 }
-
-
 
 
 //

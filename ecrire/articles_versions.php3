@@ -83,11 +83,7 @@ debut_page(_T('info_historique')." &laquo; $titre &raquo;", "documents", "articl
 
 debut_grand_cadre();
 
-afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle' alt='' /> <a href='naviguer.php3?coll=0'><b> "._T('lien_racine_site')."</b> </a>  ".aide ("rubhier")."<br /> ".$parents;
-$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
-$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
-echo "$parents";
+afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
