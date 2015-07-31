@@ -50,12 +50,11 @@ function calcule_header_et_page ($fond) {
 	if ($var_mode=='debug') {
 		if ($auteur_session['statut'] == '0minirezo')
 			spip_log('debug !');
-		else {
-			$link = new Link();
-			$link->addvar('var_mode', 'debug');
-			redirige_par_entete(generer_url_public('login'), 'url='.urlencode($link->getUrl()), true);
-			exit;
-		}
+		else
+			redirige_par_entete(generer_url_public('login',
+			'url='.urlencode(
+			parametre_url(self(), 'var_mode', 'debug', '&')
+			), true));
 	}
 
 	return afficher_page_globale ($fond);

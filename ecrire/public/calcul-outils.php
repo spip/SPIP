@@ -194,18 +194,22 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 # NB : a l'exception des fonctions pour les balises dynamiques
 
 function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
-	if (!$id_rubrique)
+	$hierarchie = array();
+	if (!$id_rubrique = intval($id_rubrique))
 		return '0';
 	if (!$exclure_feuille)
-		$hierarchie = ",$id_rubrique";
+		array_unshift($hierarchie, $id_rubrique);
 
 	do {
 		$q = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 		list($id_rubrique) = spip_fetch_array($q);
-		$hierarchie = "," . intval($id_rubrique) . $hierarchie;
+		if ($id_rubrique) $hierarchie[] = $id_rubrique;
 	} while ($id_rubrique);
 
-	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'
+	if ($hierarchie)
+		return join (',', $hierarchie);
+	else
+		return '0';
 }
 
 
@@ -231,7 +235,7 @@ function calcul_exposer ($id, $type, $reference) {
 array('id_rubrique'), 
 array($table),
 array("$element=$id_element"));
-				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
+				$hierarchie = calculer_hierarchie($id_rubrique);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
 				}
