@@ -55,7 +55,7 @@ function exec_admin_effacer_dist()
 	$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
 
 	echo 
-		'<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="',
+		'<img src="' .  chemin_image('warning.gif') . '" alt="',
 	  	_T('info_avertissement'),
 		"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
 		_T('texte_admin_effacer_01'),
@@ -76,7 +76,7 @@ function exec_admin_effacer_dist()
 	$res = generer_form_ecrire('delete_statistiques', "", '', _T('bouton_effacer_statistiques'));
 
 	echo 
-		'<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="',
+		'<img src="' .  chemin_image('warning.gif') . '" alt="',
 	  	_T('info_avertissement'),
 		"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
 	  _T('texte_admin_effacer_stats'),

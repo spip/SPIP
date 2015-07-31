@@ -31,15 +31,17 @@ define('_DIR_RESTREINT',
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
 // Icones
+# nom du dossier images
+define('_NOM_IMG_PACK', 'images/');
 # le chemin http (relatif) vers les images standard
-define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
+define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/' . _NOM_IMG_PACK));
 # le chemin des vignettes de type de document
 define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/vignettes/");
 # le chemin des icones de la barre d'edition des formulaires
 define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
 
 # le chemin php (absolu) vers les images standard (pour hebergement centralise)
-define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/dist/images/');
+define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/dist/' . _NOM_IMG_PACK);
 define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/dist/vignettes/');
 
 # le nom du repertoire des  bibliotheques JavaScript

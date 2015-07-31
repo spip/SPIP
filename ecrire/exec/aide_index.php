@@ -139,8 +139,8 @@ table.spip td {
 function help_panneau() {
 
 	  return "<div align='center'>
-			<img src='" . _DIR_IMG_PACK.
-		  "logo-spip.gif' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
+			<img src='" . chemin_image('logo-spip.gif') .
+		  "' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
 			<br />
 			<div align='center' style='font-variant: small-caps;'>
 			Syst&egrave;me de publication pour l'Internet
@@ -246,7 +246,7 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 		float: '.$GLOBALS['spip_lang_left'].';
 		text-align: '.$GLOBALS['spip_lang_left'].';
 		width: 80%;
-		background: ' . "url(" . _DIR_IMG_PACK . 'triangle'.$GLOBALS['spip_lang_rtl'].'.gif) ' . $GLOBALS['spip_lang_left'].' center no-repeat;
+		background: ' . "url(" . chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_left'].' center no-repeat;
 		margin: 2px;
 		padding: 0px;
 		padding-'.$GLOBALS['spip_lang_left'].': 20px;
@@ -257,7 +257,7 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 		float: '.$GLOBALS['spip_lang_right'].';
 		text-align: '.$GLOBALS['spip_lang_right'].';
 		width: 80%;
-		background: ' . "url(" . _DIR_IMG_PACK . 'triangle'.$GLOBALS['spip_lang_rtl'].'.gif) ' . $GLOBALS['spip_lang_right'].' center no-repeat;
+		background: ' . "url(" .  chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_right'].' center no-repeat;
 		margin: 4px;
 		padding: 0px;
 		padding-'.$GLOBALS['spip_lang_right'].': 20px;

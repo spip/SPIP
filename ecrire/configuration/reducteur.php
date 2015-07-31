@@ -115,7 +115,7 @@ function format_choisi()
 		if ($GLOBALS['meta']['image_process']=='gd1' OR $GLOBALS['meta']['image_process']=='gd2') {
 		  $res .= "<p>"._T('info_taille_maximale_images')."</p>";
 			
-			$res .= "<div dir='ltr' id='teste_memory_size_gd' style='text-align:left;float:$spip_lang_right;width:196px;background:url("._DIR_IMG_PACK . "jauge-test-gd.gif) no-repeat top left;'>";
+			$res .= "<div dir='ltr' id='teste_memory_size_gd' style='text-align:left;float:$spip_lang_right;width:196px;background:url(". chemin_image('jauge-test-gd.gif') . ") no-repeat top left;'>";
 			$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:(500*500);
 			$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
 			$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
@@ -135,7 +135,7 @@ function format_choisi()
 				$top -= 8;
 				for ($i = 480;$i*$i<$max_size && $i<=$maxtest;$i+=$j) $lok += $l;
 				if ($lok-$l+2>0) 
-					$res .= "<img src='"._DIR_IMG_PACK . 'jauge-vert.gif'."' width='".($lok-$l+2)."' style='margin-right:".($l-2)."px;' height='8' alt='' />";
+					$res .= "<img src='". chemin_image('jauge-vert.gif') . "' width='".($lok-$l+2)."' style='margin-right:".($l-2)."px;' height='8' alt='' />";
 				for (;(!$max_size_echec OR $i*$i<$max_size_echec) && $i<=$maxtest;$i+=$j){
 					if (!isset($test[$i])){
 						$url = generer_url_action("tester_taille", "arg=$i&time=$time");
@@ -146,7 +146,7 @@ function format_choisi()
 					else $margin_left += $l;
 				}
 				for (;$i<=$maxtest;$i+=$j) $lbad += $l;
-				if ($lbad) $res .= "<img src='"._DIR_IMG_PACK . 'jauge-rouge.gif'."' width='$lbad' height='8' style='margin-left:{$margin_left}px;' alt='' />";
+				if ($lbad) $res .= "<img src='" . chemin_image('jauge-rouge.gif') . "' width='$lbad' height='8' style='margin-left:{$margin_left}px;' alt='' />";
 				$res .= "</div>";
 			}
 			$res .= "</div><br style='clear:both;' />";

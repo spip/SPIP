@@ -249,7 +249,7 @@ function exec_brouteur_frame_dist() {
 function frame_background_image($f)
 {
 	return "background-image: url(" . 
-		_DIR_IMG_PACK . $f .
+		chemin_image($f) .
 		")";
 }
 ?>
