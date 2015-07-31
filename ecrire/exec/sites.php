@@ -132,9 +132,9 @@ debut_gauche();
 
 	debut_boite_info();
 
-	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>"
+	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
 		  .  _T('titre_site_numero')
-		  . "<br /><span style='font-size: 32px;'>"
+		  . "<br /><span class='spip_xx-large'>"
 		  . $id_syndic
 		  . '</span></div>';
 	echo $res;
@@ -184,7 +184,7 @@ gros_titre($nom_site, $logo_statut);
 echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
-	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 14px; ' class='verdana1'>";
+	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; ' class='verdana1 spip_small'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -209,7 +209,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<br />\n<span style='font-size: 16px;' class='verdana1'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></span>";
+		echo "<br />\n<span class='verdana1 spip_medium'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></span>";
 	}
 }
 
@@ -254,7 +254,7 @@ if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p style='font-size: 16px; ' class='verdana1'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
+	echo "<p class='verdana1 spip_medium'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
 	if ($erreur_syndic)
 		echo "<p style='color: red; font-weight: bold;'>",$erreur_syndic,"</p>";
@@ -270,7 +270,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			"<input type='hidden' name='reload' value='oui' />
 			<input type='submit' value=\""
 			. attribut_html(_T('lien_nouvelle_recuperation'))
-			. "\" class='fondo' style='font-size: 10px;' />"
+			. "\" class='fondo spip_xx-small' />"
 		);
 		fin_boite_info();
 	}
@@ -281,7 +281,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 	if ($date_syndic)
 		echo "<div align='left'>".
-		  "<span style='font-size: 14px;' class='verdana1'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)	.".</span></div>\n";
+		  "<span class='verdana1 spip_small'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)	.".</span></div>\n";
 
 
 	echo "<div align='right'>\n";
@@ -291,7 +291,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		"<input type='hidden' name='reload' value='oui' />
 		<input type='submit' value=\""
 		. attribut_html(_T('lien_mise_a_jour_syndication'))
-		. "\" class='fondo' style='font-size: 10px;' />",
+		. "\" class='fondo spip_xx-small' />",
 		" method='post'"
 	);
 	echo "</div>\n";

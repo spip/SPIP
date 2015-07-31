@@ -74,7 +74,7 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 
 	$r .= "<div align='$spip_lang_right' id='valider_regler_moderation_$id_article'"
 	. " class='visible_au_chargement'"
-	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
+	. ">\n\t<input type='submit' class='fondo spip_xx-small' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";
 

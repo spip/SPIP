@@ -83,7 +83,7 @@ function exec_mots_type_dist()
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
-	  . "<span style='font-size: 12px;' class='verdana1'><b>". _T('titre_groupe_mots') . "</b></span><br />"
+	  . "<span class='verdana1 spip_x-small'><b>". _T('titre_groupe_mots') . "</b></span><br />"
 	  . gros_titre($titre,'',false)
 	. aide("motsgroupes")
 	. "<div class='verdana1'>"

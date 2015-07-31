@@ -105,7 +105,7 @@ function exec_naviguer_dist()
 
 
 	if (strlen($texte) > 1) {
-		echo "\n<div style='font-size: 16px; ' class='verdana1'>", justifier(propre($texte)), "</div>";
+		echo "\n<div class='verdana1 spip_medium'>", justifier(propre($texte)), "</div>";
 	}
 	
 	langue_naviguer($id_rubrique, $id_parent, $flag_editable);
@@ -134,9 +134,9 @@ function exec_naviguer_dist()
 function infos_naviguer($id_rubrique, $statut)
 {
 	if ($id_rubrique > 0) {
-		$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>"
+		$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
 		  .  _T('titre_numero_rubrique')
-		  . "<br /><span style='font-size: 32px;'>"
+		  . "<br /><span class='spip_xx-large'>"
 		  . $id_rubrique
 		  . '</span></div>';
 
@@ -417,7 +417,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</tr>\n";
 
   if (strlen($descriptif) > 1) {
-	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; font-size: 14px; ' class='verdana1'>", propre($descriptif."~"), "</div></td></tr>\n";
+	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", propre($descriptif."~"), "</div></td></tr>\n";
   }
   echo "</table>\n";
 }

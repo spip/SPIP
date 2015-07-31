@@ -69,7 +69,7 @@ function exec_admin_tech_dist()
 
  echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
    "<tr><td style='background-color: ", $couleur_foncee, ";'><b>",
-   "<span style='font-size: 16px; color: #FFFFFF;' class='verdana1'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
+   "<span style='color: #FFFFFF;' class='verdana1 spip_medium'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
    generer_url_post_ecrire("export_all", "reinstall=non"),
    "\n<div><p style='text-align: justify;'>",
    http_img_pack('warning.gif', _T('info_avertissement'), 
@@ -129,7 +129,7 @@ echo "</table>";
 
 	echo	"\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">",
 	"<tr><td style='background-color: #eeeecc;'><b>",
-	"<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_restaurer_base')."</span></b></td></tr>",
+	"<span style='color: #000000;' class='verdana1 spip_medium'>", _T('texte_restaurer_base')."</span></b></td></tr>",
 	"<tr><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
 	"\n<p style='text-align: justify;'> ",
@@ -138,7 +138,7 @@ echo "</table>";
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
 	$liste_choix,
 	"\n<li><input type='radio' name='archive' value='' />",
-	"\n<span style='font-size: 16px;'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
+	"\n<span class='spip_medium'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
 	  
 	debut_cadre_relief();
 	echo  "<p><input name='insertion' type='radio' />&nbsp;",
@@ -167,7 +167,7 @@ if ($options == "avancees" AND 	$connect_toutes_rubriques) {
 	if ($res >= '3.23.14') {
 		echo "<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
 		echo "<tr><td style='background-color: #eeeecc;'><b>";
-		echo "<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
+		echo "<span style='color: #000000;' class='verdana1 spip_medium'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
 			"<tr><td class='serif'>",
 			generer_url_post_ecrire("admin_repair"),
 			"\n<p style='text-align: justify;'>"._T('texte_crash_base'),

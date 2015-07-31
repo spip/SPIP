@@ -49,7 +49,7 @@ function exec_admin_effacer_dist()
 	debut_cadre_relief();
 
 	echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
-		"<tr><td style='background-color: $couleur_foncee; font-weight: bold; font-size: 16px; color: #FFFFFF;' class='verdana1'>",
+		"<tr><td style='background-color: $couleur_foncee; font-weight: bold; color: #FFFFFF;' class='verdana1 spip_medium'>",
 		_T('texte_effacer_base'),
 		"</td></tr>",
 		"<tr><td class='serif'>\n",

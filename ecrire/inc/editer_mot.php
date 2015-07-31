@@ -141,7 +141,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 			$nouveaux_mots[] = $resultat[0];
 			$row = spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
 			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br /><ul>";
-			$res .= "<li><span style='font-size: 14px;' class='verdana1'><b><span style='font-size: 16px;'>".typo($row['titre'])."</span></b></span></li>\n";
+			$res .= "<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>\n";
 			$res .= "</ul>";
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);
@@ -255,13 +255,13 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 	return ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", (
 	"<select name='nouv_mot' onchange=\"$jscript1\""
-	. " class='fondl' style='font-size:10px; width:90px;'>"
+	. " class='fondl spip_xx-small' style='width:90px;'>"
 	. $s
 	. "</select>"
 	. "<span class='visible_au_chargement' id='$ancre'>"
 	. "\n&nbsp; <input type='submit' value='"
 	. _T('bouton_changer')
-	. "' class='fondo' style='font-size: 10px;' />"
+	. "' class='fondo spip_xx-small' />"
 	. "</span>"),"&id_objet=$id_objet&objet=$objet");
 }
 
@@ -376,7 +376,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px' />";
+		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo spip_xx-small' />";
 		$res .= "</span>"; 
 	} else {
 

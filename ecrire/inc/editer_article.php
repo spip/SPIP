@@ -106,7 +106,7 @@ function editer_article_titre($titre, $onfocus, $config, $aider)
 	return	"\n<p>" .
 		_T('texte_titre_obligatoire') .
 		$aider("arttitre") .
-		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 14px;' class='formo' value=\"" .
+		"\n<br /><input type='text' name='titre' style='font-weight: bold; ' class='formo spip_small' value=\"" .
 	  	entites_html($titre) .
 		"\" size='40' " .
 	  	$onfocus. // effacer le titre lorsque nouvel article
@@ -265,7 +265,7 @@ function editer_article_chapo($chapo, $config, $aider)
 		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
 			"<table width='100%' cellspacing='0' cellpadding='0' border='0'>" .
 			"<tr><td valign='top'>" .
-			"<span style='font-size: 14px;' class='verdana1'><b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
+			"<span class='verdana1 spip_small'><b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
 			"</td>" .
 			"<td style='width: 10px'>&nbsp;</td>" .
 			"<td valign='top' style='width: 50%'>" .
@@ -273,7 +273,7 @@ function editer_article_chapo($chapo, $config, $aider)
 		style='font-size: 10px;' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
-			"<span style='font-size: 14px;' class='verdana1'>" . _T('texte_article_virtuel_reference') . "</span>" .
+			"<span class='verdana1 spip_small'>" . _T('texte_article_virtuel_reference') . "</span>" .
 			"</div>\n";
 	} else {
 

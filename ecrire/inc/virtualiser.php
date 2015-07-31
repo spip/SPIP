@@ -23,11 +23,11 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 
 	$http = ($virtuel ? "" : "http://");
 	$t = _T('texte_reference_mais_redirige');
-	$res = "<input type='text' name='virtuel' class='formo' style='font-size: 10px;' value='"
+	$res = "<input type='text' name='virtuel' class='formo spip_xx-small' value='"
 	. $http
 	. $virtuel
 	. "' size='40' /><br />\n"
-	. "<span style='font-size: 14px;' class='verdana1'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
+	. "<span class='verdana1 spip_small'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
 	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"
 	. _T('bouton_changer')
 	. "' style='font-size:10px' /></div>";

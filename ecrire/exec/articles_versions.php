@@ -117,12 +117,12 @@ else if ($statut_article == 'poubelle') {
 echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr><td style='width: 100%' valign='top'>";
 if ($surtitre) {
-	echo "<span $dir_lang><span style='font-size: 16px;' class='arial1'><b>", propre_diff($surtitre), "</b></span></span>\n";
+	echo "<span $dir_lang><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
 }
  gros_titre(propre_diff($titre), $logo_statut);
 
 if ($soustitre) {
-	echo "<span $dir_lang><span style='font-size: 16px;' class='arial1'><b>", propre_diff($soustitre), "</b></span></span>\n";
+	echo "<span $dir_lang><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";
 }
 
 
@@ -130,7 +130,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<span style='font-size: 14px; ' class='verdana1'>", propre($texte_case), "</span>";
+	echo "<span class='verdana1 spip_small'>", propre($texte_case), "</span>";
 	echo "</div>";
 }
 
@@ -235,14 +235,14 @@ if ($id_version) {
 	
 		if ($ps) {
 			echo debut_cadre_enfonce();
-			echo "<div $dir_lang style='font-size: 14px; ' class='verdana1'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
+			echo "<div $dir_lang class='verdana1 spip_small'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
 			echo fin_cadre_enfonce();
 		}
 		$revision_nbsp = false;
 	
 		if ($les_notes) {
 			echo debut_cadre_relief();
-			echo "<div $dir_lang><span style='font-size: 14px;'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
+			echo "<div $dir_lang><span class='spip_small'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
 			echo fin_cadre_relief();
 		}
 	

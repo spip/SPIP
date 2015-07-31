@@ -66,7 +66,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	$res .= document_et_vignette($document, $url, true);
 	$res .= "</div>\n";
 
-	$res .= "<div style='text-align: center; font-size: 12px; color: 333333;' class='verdana1'>&lt;doc"
+	$res .= "<div style='text-align: center; color: 333333;' class='verdana1 spip_x-small'>&lt;doc"
 	.  $id_document
 	. "&gt;</div>";
 

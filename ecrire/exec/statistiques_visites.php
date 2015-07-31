@@ -80,7 +80,7 @@ function exec_statistiques_visites_dist()
 
 
   $titre = $pourarticle = "";
-  $style = "class='arial1' style='font-size: 12px; color: #999999'";
+  $style = "class='arial1 spip_x-small' style='color: #999999'";
 
 if ($id_article = intval($id_article)){
 	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
@@ -557,31 +557,31 @@ if ($GLOBALS['accepte_svg']) {
 			echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
 			echo "<table cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td height='15' valign='top'>";		
-			echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph)."</b></span>";
+			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle' $style>";		
 			echo round(7*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-size: 12px;' class='arial1'>".round(3*($maxgraph/4))."</span>";
+			echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle' $style>";		
 			echo round(5*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph/2)."</b></span>";
+			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle' $style>";		
 			echo round(3*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-size: 12px;' class='arial1'>".round($maxgraph/4)."</span>";
+			echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle' $style>";		
 			echo round(1*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='10' valign='bottom'>";		
-			echo "<span style='font-size: 12px;' class='arial1'><b>0</b></span>";
+			echo "<span class='arial1 spip_x-small'><b>0</b></span>";
 			echo "</td>";
 			
 			
@@ -615,7 +615,7 @@ if ($GLOBALS['accepte_svg']) {
 		// (desactive au profit de la moeynne "glissante")
 		# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
-		echo "<span style='font-size: 12px;' class='arial1'>"._T('texte_statistiques_visites')."</span>";
+		echo "<span class='arial1 spip_x-small'>"._T('texte_statistiques_visites')."</span>";
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
 		echo "<td valign='top' style='width: 33%; ' class='verdana1'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
 		echo "<td valign='top' style='width: 33%; ' class='verdana1'>";
@@ -636,14 +636,14 @@ if ($GLOBALS['accepte_svg']) {
 				echo "<br />".$classement[$id_article].$ch;
 			}
 		} else {
-		  echo "<span style='font-size: 12px'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
+		  echo "<span class='spip_x-small'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
 		}
 		echo "</td></tr></table>";	
 	}		
 	
 	if (count($log) > 60) {
 		echo "<br />";
-		echo "<span style='font-size: 14px;' class='verdana1'><b>"._T('info_visites_par_mois')."</b></span>";
+		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		echo "<div align='left'>";
 		///////// Affichage par mois
@@ -749,31 +749,31 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
 		echo "<table cellpadding='0' cellspacing='0' border='0'>";
 		echo "<tr><td height='15' valign='top'>";		
-		echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph)."</b></span>";
+		echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(7*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-size: 12px;' class='arial1'>".round(3*($maxgraph/4))."</span>";
+		echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(5*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph/2)."</b></span>";
+		echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(3*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-size: 12px;' class='arial1'>".round($maxgraph/4)."</span>";
+		echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(1*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='10' valign='bottom'>";		
-		echo "<span style='font-size: 12px;' class='arial1'><b>0</b></span>";
+		echo "<span class='arial1 spip_x-small'><b>0</b></span>";
 		echo "</td>";
 
 		echo "</tr></table>";

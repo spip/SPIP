@@ -43,7 +43,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 			if ($c > 1) $res .= " | ";
 			$date = (affdate_court($row['date_time']));
 			if ($c == ($debut+1))
-				$res .= "<span style='font-size: 16px;'><b>$c</b></span>";
+				$res .= "<span class='spip_medium'><b>$c</b></span>";
 			else {
 				$h = generer_url_ecrire($script, $args ."debut=".($c-1));
 				if ($evt)
@@ -109,15 +109,15 @@ function signatures_edit($script, $id, $debut, $row) {
 				false);
 		}
 		
-		$res .= "<span style='font-size: 14px;'>".date_interface($date_time)."</span><br />";
+		$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />";
 		if ($statut=="poubelle"){
-			$res .= "<span style='font-size: 12px; color: red;'>"._T('info_message_efface')."</span><br />";
+			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />";
 		}
 		if (strlen($url_site)>6 AND strlen($nom_site)>0){
-			$res .= "<span style='font-size: 12px;'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />";
+			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />";
 		}
 		if (strlen($ad_email)>0){
-			$res .= "<span style='font-size: 12px;'>"._T('info_adresse_email')."</span> <a href='mailto:$ad_email'>$ad_email</a><br />";
+			$res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:$ad_email'>$ad_email</a><br />";
 		}
 
 		$res .= '<br />' . message_de_signature($row);

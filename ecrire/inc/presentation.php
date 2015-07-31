@@ -837,7 +837,7 @@ function afficher_articles_trad_boucle($row)
 	$s .= typo($titre);
 
 	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
+		$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
 
 	$s .= "</a>";
 	$s .= "</div>";
@@ -921,7 +921,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	}
 	$s .= typo($titre);
 	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
+		$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
 	$s .= "</a>";
 
 
@@ -1536,7 +1536,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
 	else {
-		$res = "\n<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>" .
+		$res = "\n<div class='verdana2 spip_large' style='color: $couleur_foncee; font-weight: bold;'>" .
 		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "style='vertical-align: bottom'") . " &nbsp; ")) .
 		  typo($titre) .
 		  "</div>\n";
@@ -1720,7 +1720,7 @@ function liste_articles_bloques()
 				$res .= "\n<div class='$statut'><a style='font-size: 10px;' href='" 
 				. generer_url_ecrire("articles","id_article=$ze_article")
 				. "'>$ze_titre</a>"
-				. "\n<div style='text-align:right; font-size: 10px;'>"
+				. "\n<div class='spip_xx-small' style='text-align:right; '>"
 				. debloquer_article($ze_article,_T('lien_liberer'))
 				. "</div>"
 				. "</div>";
@@ -1748,7 +1748,7 @@ function fin_page()
 			. "'>"
 			.  _T("access_interface_graphique")
 			. "</a></div>")
-		: ("<div style='text-align: right; font-size: 10px' class='verdana1'>"
+		: ("<div style='text-align: right; ' class='verdana1 spip_xx-small'>"
 			. info_copyright()
 			. "<br />"
 			. _T('info_copyright_doc')
@@ -1821,7 +1821,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	. '&nbsp;<b>' . _T('info_meme_rubrique')  . '</b>';
 
 	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
-	. "\n<table style='font-size: 12px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
+	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
 	. (($limit <= 0) ? ''
 	 : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
