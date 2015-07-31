@@ -273,6 +273,7 @@ function effacer_config($cfg){
 
 
 function lister_configurer($exclure = array()){
+	return array();
 	// lister les pages de config deja dans les menus
 	$deja = array();
 	foreach($exclure as $id=>$b) {
@@ -319,6 +320,7 @@ function lister_configurer($exclure = array()){
 		// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
 		// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
 		$config = basename(substr($file,0,-strlen("."._EXTENSION_SQUELETTES)));
+		spip_log('Calcul de '."prive/squelettes/contenu/$config");
 		$fond = recuperer_fond("prive/squelettes/contenu/$config",array("exec"=>$config));
 		if (is_array($inputs = extraire_balises($fond,"input")))
 			foreach($inputs as $i)
