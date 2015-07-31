@@ -608,7 +608,7 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 'login_retour_site' => 'Voltar ao site p&uacute;blico',
 'login_retoursitepublic' => 'voltar&nbsp;ao&nbsp;site&nbsp;p&uacute;blico',
 'login_sans_cookiie' => 'Identifica&ccedil;&atilde;o sem cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login seguro',
 'login_sinscrire' => 'cadastrar-se',
 'login_test_navigateur' => 'testar navegador/reconex&atilde;o',
 'login_verifiez_navigateur' => '(Verifique sempre se o seu navegador n&atilde;o est&aacute; memorizando a sua senha...)',
