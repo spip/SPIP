@@ -296,10 +296,7 @@ function calcul_exposer ($id, $type, $reference) {
 				list($table,$hierarchie) = $x;
 				$exposer[$element][$id_element] = true;
 				if ($hierarchie) {
-					list ($id_rubrique) = spip_abstract_fetsel(
-array('id_rubrique'), 
-array($table),
-array("$element=$id_element"));
+					list ($id_rubrique) = spip_abstract_fetsel(array('id_rubrique'), array($table), array("$element=$id_element"));
 				$hierarchie = calculer_hierarchie($id_rubrique);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
@@ -506,10 +503,7 @@ function spip_optim_select ($select = array(), $from = array(),
 		else { unset($from[$cle]); unset($join[$k]);}
 	}
 
-	$fromas = array();
-	foreach($from as $k => $v) $fromas[]= "$v AS `$k`";
-
-	return spip_abstract_select($select, $fromas, $where,
+	return spip_abstract_select($select, $from, $where,
 		  $groupby, array_filter($orderby), $limit,
 		  $sousrequete, $cpt,
 		  $table, $id, $serveur);

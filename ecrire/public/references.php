@@ -60,35 +60,63 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	return('$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
-function index_tables_en_pile($idb, $nom_champ, &$boucles)
-{
-	global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
-	$r = $boucles[$idb]->type_requete;
-	$s = $boucles[$idb]->sql_serveur;
-	if (!$s) 
-		{ $s = 'localhost';
-    // indirection (pour les rares cas ou le nom de la table!=type)
-		    $t = $table_des_tables[$r];
-		  }
-		// pour les tables non Spip
-	if (!$t) {$nom_table = $t = $r; } else $nom_table = 'spip_' . $t;
+/**
+ * retourne la description de la table associee a un type de boucle
+ * retourne un tableau avec les entrees field et key (comme dans serial.php)
+ * et type = type de boucle, serveur = serveur bdd associe et table = nom de
+ * la table concernee
+ * retourne null si on ne trouve pas la table
+ */
+function description_type_requete($type, $serveur) {
+	global $table_des_tables, $tables_des_serveurs_sql;
+
+	if (!$serveur) {
+		$s = 'localhost';
+    	// indirection (pour les rares cas ou le nom de la table!=type)
+		$t = $table_des_tables[$type];
+	}
+	// pour les tables non Spip
+	if (!$t) {
+		$nom_table = $t = $type;
+	} else {
+		$nom_table = 'spip_' . $t;
+	}
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
-#		spip_log("Go: idb='$idb' r='$r' nom='$nom_champ' s=$s t=$t desc=" . array_keys($desc));
-
 	if (!isset($desc['field'])) {
-		$desc = $table_des_tables[$r] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $t) : $nom_table;
+		$desc = $table_des_tables[$type] ?
+			(($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip')
+				. '_' . $t) : $nom_table;
 
-		$desc = spip_abstract_showtable($desc, $boucles[$idb]->sql_serveur);
-		if (!isset($desc['field'])) {
-			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
-					   "'$idb'");
-# continuer pour chercher l'erreur suivante
-			return  array("'#" . $r . ':' . $nom_champ . "'",'');
-		}
-		$tables_des_serveurs_sql[$s][$nom_table] = $desc;
+		$desc = spip_abstract_showtable($desc, $serveur);
+		if (!isset($desc['field']))
+			return null;
+		$tables_des_serveurs_sql[$s][$nom_table]= $desc;
 	}
-	
+	$desc['serveur']= $s;
+	$desc['type']= $t;
+	$desc['table']= $nom_table;
+
+	return $desc;
+}
+
+function index_tables_en_pile($idb, $nom_champ, &$boucles) {
+	global $exceptions_des_tables;
+
+	$r = $boucles[$idb]->type_requete;
+	$s = $boucles[$idb]->sql_serveur;
+
+	$desc= description_type_requete($r, $s);
+
+	if(!desc) {
+		erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
+				   "'$idb'");
+		# continuer pour chercher l'erreur suivante
+		return  array("'#" . $r . ':' . $nom_champ . "'",'');
+	}
+
+	$t= $desc['type'];
+
 	$excep = $exceptions_des_tables[$r][$nom_champ];
 	if ($excep) {
 		// entite SPIP alias d'un champ SQL
@@ -100,7 +128,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles)
 			if (!$t = array_search($e, $boucles[$idb]->from)) {
 				$t = 'J' . count($boucles[$idb]->from);
 				$boucles[$idb]->from[$t] = $e;
-				$j = $tables_des_serveurs_sql[$s][$e]['key']['PRIMARY KEY'];
+				$j = $tables_des_serveurs_sql[$desc['serveur']][$e]['key']['PRIMARY KEY'];
 				$boucles[$idb]->where[]= $boucles[$idb]->id_table . ".$j=" . $t . ".$j";
 			}
 		}

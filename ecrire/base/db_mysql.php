@@ -78,7 +78,7 @@ function spip_mysql_select($select, $from, $where,
 			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
-	$q = ($from ? ("\nFROM " . join(",\n\t", $from)) : '')
+	$q = ($from ? ("\nFROM " . spip_select_as($from)) : '')
 		. ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
 		. ($groupby ? "\nGROUP BY $groupby" : '')
 		. ($having ? "\nHAVING $having" : '')
@@ -108,6 +108,15 @@ function spip_mysql_select($select, $from, $where,
 	}
 #	 spip_log($serveur . spip_num_rows($res) . $q);
 	return $res;
+}
+
+function spip_select_as($args)
+{
+	$argsas = "";
+	foreach($args as $k => $v) {
+		$argsas .= ', ' . $v . (is_numeric($k) ? '' : " AS `$k`");
+	}
+	return substr($argsas,2);
 }
 
 //
