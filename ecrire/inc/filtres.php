@@ -1656,6 +1656,7 @@ function extraire_balises($texte, $tag='a') {
 
 // http://doc.spip.org/@in_any
 function in_any($val, $vals, $def='') {
+	if (!is_array($vals) AND $v=unserialize($vals)) $vals = $v;
   return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
 }
 
