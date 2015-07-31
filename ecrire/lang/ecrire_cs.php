@@ -1061,7 +1061,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'titre_syndication' => 'Syndikace web&#367;',
 'tout_dossier_upload' => 'Cel&aacute; slo&#382;ka @upload@',
 'trad_article_inexistant' => '&#268;l&aacute;nek tohoto &#269;&iacute;sla neexistuje.',
-'trad_article_traduction' => 'V&#353;echny verze tohoto &#269;l&aacute;nku:',
+'trad_article_traduction' => 'Dostupn&eacute; p&#345;eklady tohoto &#269;l&aacute;nku:',
 'trad_deja_traduit' => 'Chyba: tento &#269;l&aacute;nek nen&iacute; mo&#382;n&eacute; propojit s po&#382;adovan&yacute;m &#269;&iacute;slem',
 'trad_delier' => 'Tento &#269;l&aacute;nek nad&aacute;le s p&#345;eklady nespojovat',
 'trad_lier' => 'Toto je p&#345;eklad &#269;l&aacute;nku &#269;&iacute;slo:',

@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modifu tiun &#265;i &#349;losilvorton',
 'admin_modifier_rubrique' => 'Modifu tiun &#265;i rubrikon',
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
+'afficher_trad' => 'afi&#349;i la tradukojn',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
 'analyse_xml' => 'XML analizo',
 'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'tag-kalendaro',
 'cal_par_mois' => 'monat-kalendaro',
 'cal_par_semaine' => 'semajn-kalendaro',
+'choix_couleur_interface' => 'koloro',
+'choix_interface' => 'elekto de interfaco',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuton de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 'correcte' => 'korekta',
 
@@ -183,12 +186,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' por vere komenci la instalprocezon',
 'dirs_preliminaire' => 'Anta&#365;faro: <b>Difinu la alir-rajtojn</b>',
 'dirs_probleme_droits' => 'Alir-rajta problemo',
-'dirs_repertoires_absents' => '<MODIF><b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />La problemo ver&#349;ajne rilatas al majuskligo de literoj.
   Kontrolu ke la majuskloj ja kongruas kun tio kio estas afi&#349;ita &#265;i-supre;
   se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
   <p />Post tio, vi povos',
-'dirs_repertoires_suivants' => '<MODIF><b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
+'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
 <ul>@bad_dirs@.</ul></b>
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigis en la instalgvidlibro.
@@ -284,7 +287,7 @@ Dankon pro via partopreno
 'forum_non_inscrit' => 'Vi ne estas registrita, a&#365; la adreso a&#365; la pasvorto ne &#285;ustas.',
 'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties ret-adreson.)',
 'forum_par_auteur' => 'de @auteur@',
-'forum_poste_par' => 'Mesa&#285;o poste@parauteur@ post via artikolo.',
+'forum_poste_par' => '<MODIF>Mesa&#285;o post&eacute;@parauteur@ post via artikolo &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Datenbazo-problemo, via mesa&#285;o ne estas registrita.',
 'forum_qui_etes_vous' => '<b>Kiu vi estas?</b> (nedeviga)',
 'forum_texte' => 'Teksto de via mesa&#285;o:',
@@ -580,6 +583,7 @@ Dankon pro via partopreno
 
 
 // M
+'masquer_trad' => 'ka&#349;i la tradukojn',
 'module_fichiers_langues' => 'Dosieroj de lingvo',
 
 

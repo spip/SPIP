@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Kemm ar ger-alc\'hwez-ma&ntilde;',
 'admin_modifier_rubrique' => 'Kemm ar rummad-ma&ntilde;',
 'admin_recalculer' => 'Hizivaat ar bajenn',
+'afficher_trad' => 'diskouez an droidigezhio&ugrave;',
 'alerte_maj_impossible' => '<b>Diwallit&nbsp;!</b> N\'eus ket tu da hizivaat an diaz MySQL etrezek ar stumm @version@, marteze abalamour d\'ur gudenn aotre evit kemm an diaz titouro&ugrave;. Mar plij kit en darempred gant ho poder.',
 'analyse_xml' => 'Dielfenna&ntilde; XML',
 'antispam_champ_vide' => 'Na lakait netra ama&ntilde;&nbsp;:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'deiziataer deiz-ha-deiz',
 'cal_par_mois' => 'deiziataer miz-ha-miz',
 'cal_par_semaine' => 'deiziataer sizhun-ha-sizhun',
+'choix_couleur_interface' => 'liv',
+'choix_interface' => 'dibab ar c\'hetal',
 'confirm_changer_statut' => 'Diwallit, goulennet ho peus ma vo kemmet statud an elfenn-ma&ntilde;. Ha c\'hoant ho peus da genderc\'hel ?',
 'correcte' => 'reizh',
 
@@ -282,7 +285,7 @@ Trugarez da gemer perzh
 'forum_non_inscrit' => 'N\'oc\'h ket enskrivet, pe direizh eo ar ger-tremen pe ar chomlec\'h.',
 'forum_page_url' => '(Ma ra ho kemmennadenn menneg ouzh ur pennad all war Internet pe ouzh ur bajenn warni muioc\'h a ditouro&ugrave; e c\'hellit skriva&ntilde; ama&ntilde;-goude titl ar bajenn hag he zeskrivadur.)',
 'forum_par_auteur' => 'gant @auteur@',
-'forum_poste_par' => 'Kemennadenn kaset @parauteur@ da-heul ho pennad.',
+'forum_poste_par' => 'Kemennadenn kaset @parauteur@ da-heul ar pennad &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Dre fazi ur gudenn gant an diaz-titouro&ugrave;, n\'eo ket bet enrollet ho kemennadenn.',
 'forum_qui_etes_vous' => '<b>Piv oc\'h-hu ?</b> (Ket Rediet)',
 'forum_texte' => 'Testenn ho kemennadenn :',
@@ -574,6 +577,7 @@ Trugarez da gemer perzh
 
 
 // M
+'masquer_trad' => 'kuzhat an droidigezhio&ugrave;',
 'module_fichiers_langues' => 'Restro&ugrave;-yezh',
 
 

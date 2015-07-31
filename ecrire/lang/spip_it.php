@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modifica la parola chiave',
 'admin_modifier_rubrique' => 'Modifica la rubrica',
 'admin_recalculer' => 'Rigenera la pagina',
+'afficher_trad' => 'visualizzare le traduzioni',
 'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database MySQL alla versione @version@ &egrave; impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
 'analyse_xml' => 'Analisi XML',
 'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
@@ -82,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_prive' => '<NEW>Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
 'calendrier_synchro_public' => '<NEW>Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
 'calendrier_synchro_sync' => '<NEW>Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'choix_couleur_interface' => 'colore',
+'choix_interface' => 'scelta dell\'interfaccia',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 'correcte' => 'corretto',
 
@@ -582,6 +585,7 @@ devi attivare Javascript nel tuo browser e',
 
 
 // M
+'masquer_trad' => 'nascondere le traduzioni',
 'module_fichiers_langues' => 'File lingua',
 
 

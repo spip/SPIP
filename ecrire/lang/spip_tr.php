@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Bu anahtar s&ouml;zc&uuml;&#287;&uuml; de&#287;i&#351;tir',
 'admin_modifier_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; de&#287;i&#351;tir',
 'admin_recalculer' => 'Bu sayfay&#305; yeniden olu&#351;tur',
+'afficher_trad' => '&ccedil;evirileri listele',
 'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> MySQL veri taban&#305;n&#305;n @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkans&#305;z. Sorun veritaban&#305; de&#287;i&#351;tirme haklar&#305;ndan kaynaklan&#305;yor olabilir, l&uuml;tfen sitenizi bar&#305;nd&#305;ran &#351;irkete ba&#351;vurunuz.',
 'analyse_xml' => 'XML analizi',
 'antispam_champ_vide' => 'L&uuml;tfen bu alan&#305; bo&#351; b&#305;rak&#305;n&#305;z&nbsp;:',
@@ -79,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'g&uuml;nl&uuml;k takvim',
 'cal_par_mois' => 'ayl&#305;k takvim',
 'cal_par_semaine' => 'haftal&#305;k takvim',
+'choix_couleur_interface' => 'renk',
+'choix_interface' => 'aray&uuml;z se&ccedil;imi',
 'confirm_changer_statut' => 'Dikkat, bu eleman&#305;n durumunu de&#287;i&#351;tirmek istediniz. Devam etmek istiyor musunuz ?',
 'correcte' => 'do&#287;ru',
 
@@ -360,7 +363,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_tous_articles' => 'T&uuml;m makaleleriniz',
 'icone_tous_auteur' => 'T&uuml;m yazarlar',
 'icone_valider_message' => '&#304;letiyi onayla',
-'icone_visiter_site' => 'www.spip.net',
+'icone_visiter_site' => 'Ziyaret et',
 'icone_voir_en_ligne' => '&Ccedil;evrimi&ccedil;i g&ouml;ster',
 'image_tourner_180' => '180&deg; d&ouml;nd&uuml;r',
 'image_tourner_droite' => '90&deg; sa&#287;a d&ouml;nd&uuml;r',
@@ -612,6 +615,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 
 // M
+'masquer_trad' => '&ccedil;evirileri gizle',
 'module_fichiers_langues' => 'Dil dosyalar&#305;',
 
 
