@@ -665,7 +665,7 @@ and their status is colour-coded:',
 	'plugin_info_upgrade_ok' => 'Successful update',
 	'plugin_librairies_installees' => 'Libraries installed',
 	'plugin_necessite_lib' => 'This plugin requires the library @lib@',
-	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # MODIF
+	'plugin_necessite_plugin' => 'Version @version@ of the plugin @plugin@ is required.',
 	'plugin_necessite_plugin_sans_version' => 'Requires the plugin @plugin@',
 	'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.',
 	'plugin_source' => 'source: ',
