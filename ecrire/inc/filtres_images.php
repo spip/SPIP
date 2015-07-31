@@ -132,7 +132,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 function image_imagepng($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
-	@unlink($fichier); // le fichier peut deja exister
+	if (file_exists($fichier))
+		unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -141,7 +142,8 @@ function image_imagepng($img,$fichier) {
 function image_imagegif($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
-	@unlink($fichier); // le fichier peut deja exister
+	if (file_exists($fichier))
+		unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -149,7 +151,8 @@ function image_imagegif($img,$fichier) {
 function image_imagejpg($img,$fichier,$qualite=85) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
-	@unlink($fichier); // le fichier peut deja exister
+	if (file_exists($fichier))
+		unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
