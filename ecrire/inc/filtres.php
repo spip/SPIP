@@ -1816,6 +1816,7 @@ function form_hidden($action) {
 			list($var,$val) = explode('=', $c, 2);
 			if ($var) {
 				$val =  rawurldecode($val);
+				$var =  rawurldecode($var); // decoder les [] eventuels
 				if (preg_match(',\[\]$,S', $var))
 					$values[] = array($var, $val);
 				else if (!isset($values[$var]))
