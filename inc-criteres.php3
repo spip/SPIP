@@ -288,7 +288,7 @@ function critere_statut_dist($idb, &$boucles, $param, $not) {
 	$boucle = &$boucles[$idb];
 	$boucle->where['statut'] = '1';
 
-	return calculer_critere_DEFAUT($idb, &$boucles, $param, $not);
+	return calculer_critere_DEFAUT($idb, $boucles, $param, $not);
 }
 
 function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
