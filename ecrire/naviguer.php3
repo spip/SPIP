@@ -17,6 +17,9 @@ function enfant($collection){
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 
+
+	if ($spip_display == 4) $les_enfants .= "<ul>";
+	
 	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -28,9 +31,13 @@ function enfant($collection){
 		changer_typo($row['lang']);
 		$descriptif=propre($row['descriptif']);
 
+		if ($spip_display == 4) $les_enfants .= "<li>";
 		$les_enfants.= "<div class='enfants'>";
+		
+		
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
+
 
 
 		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
@@ -51,14 +58,9 @@ function enfant($collection){
 			}
 		}
 
-
-
-
-
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants .= $bouton_layer;
 		}
-		//$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
 
 		if (acces_restreint_rubrique($id_rubrique))
 			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
@@ -68,13 +70,16 @@ function enfant($collection){
 			$les_enfants .= "<div class='verdana1'>$descriptif</div>";
 		}
 
-		//$les_enfants.= "</FONT>";
-
-		$les_enfants .= $les_sous_enfants;
+		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;		
 		$les_enfants .= "<div style='clear:both;'></div>";
+
+
 		$les_enfants .= fin_cadre_relief(true);
 		$les_enfants .= "</div>";
+		if ($spip_display == 4) $les_enfants .= "</li>";
 	}
+	if ($spip_display == 4) $les_enfants .= "</ul>";
+	
 }
 
 function sous_enfant($collection2){
