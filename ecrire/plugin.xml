@@ -1,7 +1,28 @@
 <plugin>
 	<nom>SPIP</nom>
-	<version></version>
 	<prefix>spip</prefix>
+
+	<auteur>Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James</auteur>
+	<licence>GNU/GPL</licence>
+	<version>3.0.0-dev</version>
+	<version_base>17743</version_base>
+	<icon></icon>
+	<etat>dev</etat>
+    <slogan>Syst&egrave;me de publication pour l'Internet</slogan>
+    <description>
+SPIP est un syst&egrave;me de publication pour l'Internet qui s'attache particuli&egrave;rement au fonctionnement collectif, au multilinguisme et &agrave; la facilit&eacute; d'emploi. 
+C’est un logiciel libre, distribu&eacute; sous la licence GNU/GPL. Il peut ainsi être utilis&eacute; pour tout site Internet, qu'il soit associatif ou institutionnel, personnel ou marchand.
+
+SPIP est d&eacute;velopp&eacute; (programm&eacute;, document&eacute;, traduit, etc.) et utilis&eacute; par une communaut&eacute; de personnes que chacun est invit&eacute; &agrave; rejoindre (ou simplement &agrave; contacter) sur diff&eacute;rents sites Web, 
+listes de discussion par email et rencontres (les fameux « Ap&eacute;ros-SPIP »). 
+
+Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un collectif d&eacute;fendant le Web ind&eacute;pendant et la libert&eacute; d'expression sur Internet. Il est actuellement utilis&eacute; sur des dizaines de milliers de sites tr&egrave;s divers.
+</description>
+	<lien>http://www.spip.net</lien>
+
+	<traduire gestionnaire="salvatore" module="spip" reference="fr" />
+	<traduire gestionnaire="salvatore" module="ecrire" reference="fr" />
+	<traduire gestionnaire="salvatore" module="public" reference="fr" />
 
 	<procure id="iterateurs" version="0.3.0" />
 	<procure id="queue" version="0.6.4" />
@@ -86,8 +107,6 @@
 		<icone>images/queue-process-16.png</icone>
 		<titre>queue_titre</titre>
 	</bouton>
-
-	
 	
 	<bouton id="bando_configuration">
 		<icone>images/configuration-48.png</icone>
@@ -182,8 +201,6 @@
 		<titre>plugin_titre_automatique_ajouter</titre>
 		<url>charger_plugin</url>
 	</onglet>
-
-
 
 	<pipeline><nom>accueil_encours</nom><action></action></pipeline>
 	<pipeline><nom>accueil_informations</nom><action></action></pipeline>
