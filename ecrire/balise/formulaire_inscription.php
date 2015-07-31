@@ -79,9 +79,12 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 
 function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
 
-	if (!($nom = trim($nom))) return _T('ecrire:info_login_trop_court');
+	include_spip('inc/filtres');
+	$nom = trim(corriger_caracteres($nom));
+	if (!$nom || strlen($nom) > 64)
+	    return _T('ecrire:info_login_trop_court');
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
-	return array('email' => $r, 'nom' => $nom);
+	return array('email' => $r, 'nom' => ($nom));
 }
 
 // cree un nouvel utilisateur et renvoie un message d'impossibilite ou la
