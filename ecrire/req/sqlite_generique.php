@@ -988,41 +988,19 @@ function _sqlite_remplacements_definitions_table($query){
  * ALTER TABLE table MODIFY column definition
  * 
  * (MODIFY transforme en CHANGE columnA columnA) par spip_sqlite_alter()
+ * 
+ * 1) creer une table B avec le nouveau format souhaite
+ * 2) copier la table d'origine A vers B
+ * 3) supprimer la table A
+ * 4) renommer la table B en A
+ * 
  */
-function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_destination='', $def='', $serveur=''){
+function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_destination='', $def_col_destination='', $serveur=''){
 	
-	// creer une table temporaire identique
 	$def_origine = sql_showtable($table, $serveur);
+	$table_tmp = $table . '_tmp';
 
-	if (!sql_create(
-			$table_tmp = $table.'_tmp', 
-			$def_origine['field'], 
-			$def_origine['key'], 
-			$autoinc=false, 
-			$temporary=true, 
-			$serveur)){
-				spip_log("SQLite : ALTER TABLE table $ordre column :"
-					.' La creation de la table temporaire a echouee','sqlite');
-				return false;
-	}
-	
-	// y copier tous les champs
-	// Aie Aie Aie, risque de timeout ?
-	if (!sql_query("INSERT INTO $table_tmp SELECT * FROM $table")){
-		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' La copie de la table d\'origine a echouee','sqlite');
-		return false;					
-	} 
-	
-	// supprimer la table d'origine (gasp, gloups !)
-	if (!sql_query("DROP TABLE $table")){
-		// ouf, ca s'est mal passe ;)
-		spip_log('SQLite : ALTER TABLE table DROP column :'
-				.' La suppression de la table d\'origine a echouee','sqlite');
-		return false;						
-	}
-	
-	// recreer la table d'origine avec les modifications :
+	// 1) creer une table temporaire avec les modifications	
 	// - DROP : suppression de la colonne
 	// - CHANGE : modification de la colonne
 	// (foreach pour conserver l'ordre des champs)
@@ -1037,7 +1015,7 @@ function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_
 		if ($c == $colonne_origine) {
 			// si pas DROP
 			if ($colonne_destination){
-				$fields[$colonne_destination] = $def;
+				$fields[$colonne_destination] = $def_col_destination;
 				$fields_correspondances[$colonne_destination] = $c;
 			}	
 		} else {
@@ -1057,39 +1035,44 @@ function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_
 		}
 	}
 	
-	$def_destination = array('field'=>$fields, 'key'=>$keys);
 
 	if (!sql_create(
-			$table, 
-			$def_destination['field'], 
-			$def_destination['key'], 
+			$table_tmp, 
+			$fields, 
+			$keys, 
 			$autoinc=false,
 			$temporary=false, 
 			$serveur)){
 				spip_log("SQLite : ALTER TABLE table $ordre column :"
-					.' La creation de la table nouvelle table a echouee','sqlite');
+					.' La creation de la table temporaire a echouee','sqlite');
 				// si on arrive la, on est plutot mal barre !
 				return false;
 	}
 	
-
-	// y copier les champs qui vont bien
+	// 2) y copier les champs qui vont bien
 	$champs_dest = join(', ', array_keys($fields_correspondances));
 	$champs_ori = join(', ', $fields_correspondances);
-	if (!sql_query("INSERT INTO $table ($champs_dest) SELECT $champs_ori FROM $table_tmp")){
+	if (!sql_query("INSERT INTO $table_tmp ($champs_dest) SELECT $champs_ori FROM $table")){
 		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' La copie de la table temporaire vers la nouvelle table a echouee','sqlite');
-		return false;						
-	}
-
-
-	// supprimer la table temporaire 
-	if (!sql_query("DROP TABLE $table_tmp")){
-		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' La suppression de la table temporaore a echouee','sqlite');
+				.' La copie de la table d\'origine vers la table temporaire a echouee','sqlite');
 		return false;						
 	}
 	
+	
+	// 3) supprimer la table d'origine
+	if (!sql_query("DROP TABLE $table")){
+		spip_log("SQLite : ALTER TABLE table $ordre column :"
+				.' La suppression de la table d\'origine a echouee','sqlite');
+		return false;						
+	}
+	
+	// 4) renommer la table temporaire avec le nom de la table d'origine
+	if (!sql_query("ALTER TABLE $table_tmp RENAME TO $table")){
+		spip_log("SQLite : ALTER TABLE table $ordre column :"
+				.' Le renommage de la table temporaire avec le nom de la table d\'origine a echoue','sqlite');
+		return false;						
+	}
+		
 	return true;					
 }
 
