@@ -58,9 +58,13 @@ function action_legender_post($r)
 			$heure_doc = "00"; 
 			$minute_doc = "00"; 
 		} 
-		$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc.' '.$heure_doc.':'.$minute_doc; 
-		if (preg_match('/^[0-9-: ]+$/', $date))
-			$modifs['date'] = $date;
+		$date = sprintf('%04d',intval(_request('annee_doc')))
+			.'-'.sprintf('%02d', intval($mois_doc))
+			.'-'.sprintf('%02d',intval($jour_doc))
+			.' '.sprintf('%02d',intval($heure_doc))
+			.':'.sprintf('%02d',intval($minute_doc))
+			.':00'; 
+		$modifs['date'] = $date;
 	}
 	
 	if (($t = _request('titre_document')) !== NULL)
