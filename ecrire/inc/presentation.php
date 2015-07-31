@@ -2030,7 +2030,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		if ($spip_display != 1) {
 			$retour .= "<a class='cellule-h' $javascript$lien>"
 			. "\n<table cellpadding='0' valign='middle'>"
-			. "\n<tr><td>"
+			. "\n<tr><td><a$lien class='cellule-h'>"
 			. "<div class='cell-i'>" ;
 			if ($fonction){
 				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
@@ -2038,10 +2038,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</div></td>"
-			. "\n<td class='cellule-h-lien'>"
+			$retour .= "</a></div></td>"
+			. "\n<td class='cellule-h-lien'><a$lien class='cellule-h'>"
 			. $texte
-			. "</td></tr></table></a>\n";
+			. "</a></td></tr></table></a>\n";
 		}
 		else {
 			$retour .= "<a class='cellule-h-texte' $javascript$lien><div>$texte</div></a>\n";

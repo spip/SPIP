@@ -643,11 +643,11 @@ function affiche_raccourci_doc($doc, $id, $align) {
 		$pipe = "|$align";
 
 		if ($GLOBALS['browser_barre'])
-			$onclick = " ondblclick='barre_inserer(\"&lt;$doc$id$pipe&gt;\", document.formulaire.texte);' title=\"". entites_html(_T('double_clic_inserer_doc'))."\"";
+			$onclick = "\nondblclick='barre_inserer(\"&lt;$doc$id$pipe&gt;\", document.formulaire.texte);'\ntitle=\"". entites_html(_T('double_clic_inserer_doc'))."\"";
 	} else {
 		$align='center';
 	}
-	return "<div align='$align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
+	return "\n<div align='$align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
 }
 
 
@@ -730,26 +730,26 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 
 		// Affichage du raccourci <doc...> correspondant
 		if (!$doublon) {
-			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
+			echo "\n<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<b>"._T('info_inclusion_vignette')."</b><br />";
 			}
-			echo "<font color='333333'>"
+			echo "<div style='color: 333333'>"
 			. affiche_raccourci_doc('doc', $id_document, 'left')
 			. affiche_raccourci_doc('doc', $id_document, 'center')
 			. affiche_raccourci_doc('doc', $id_document, 'right')
-			. "</font>\n";
-			echo "</font></div>";
+			. "</div>\n";
+			echo "</div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
+				echo "<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
 				echo "<b>"._T('info_inclusion_directe')."</b></br>";
-				echo "<font color='333333'>"
+				echo "<div style='color: 333333'>"
 				. affiche_raccourci_doc('emb', $id_document, 'left')
 				. affiche_raccourci_doc('emb', $id_document, 'center')
 				. affiche_raccourci_doc('emb', $id_document, 'right')
-				. "</font>\n";
-				echo "</font></div>";
+				. "</div>\n";
+				echo "</div></div>";
 			}
 		} else {
 			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>",
@@ -830,9 +830,9 @@ function date_formulaire_documenter($date, $id_document) {
 		$annee = $regs[1];
 	}
 	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
-		afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_jour($jour, "name='jour_doc' size='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_mois($mois, "name='mois_doc' size='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_annee($annee, "name='annee_doc' size='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
 		"<br />\n";
 }
 
@@ -907,7 +907,7 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	  "<b>$label</b><br />\n" .
 
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
-	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"><br />\n" .
+	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
 	  '<br />' . 
 	  date_formulaire_documenter($date, $id_document) .
 	  "<br /><b>".
