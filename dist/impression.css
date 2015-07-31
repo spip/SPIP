@@ -97,6 +97,6 @@ ul .message { background: #FAFAFA; border: 1pt solid #CCCCCC; padding: 1em; marg
 
 /*  Plan du site
 ---------------------------------------------- */
-#contenu.plan h2 { font-size: 1.15em; font-weight: bold; }
-#contenu.plan ul { margin-left: 1em; margin-bottom: 1em; }
-#contenu.plan li { list-style: square; }
+#page_plan #contenu h2 { font-size: 1.15em; font-weight: bold; }
+#page_plan #contenu ul { margin-left: 1em; margin-bottom: 1em; }
+#page_plan #contenu li { list-style: square; }
