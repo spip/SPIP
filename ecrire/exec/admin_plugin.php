@@ -34,7 +34,10 @@ function exec_admin_plugin_dist($retour='') {
 		if ($new AND _request('actualise')<2) {
 			include_spip('inc/headers');
 			redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
-		} else admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
+		}
+		else {
+			admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
+		}
 	}
 }
 
