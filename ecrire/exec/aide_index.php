@@ -28,23 +28,7 @@ function generer_url_aide($args)
 	return generer_url_ecrire('aide_index', $args, false, true);
 }
 
-// Trouver l'aide correspondant a la langue demandee. 
-// On gere un cache fonde sur la date du fichier indiquant la version
-// (approximatif, mais c'est deja qqch)
-
-function help_fichier($lang_aide, $path, $help_server) {
-
-	$fichier_aide = _DIR_AIDE . $path;
-	$lastm = @filemtime($fichier_aide);
-	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
-	$here = @(is_readable($fichier_aide) AND ($lastm >= $lastversion));
-	$contenu = '';
-
-	if ($here) {
-		lire_fichier($fichier_aide, $contenu);
-		return array($contenu, help_lastmodified($lastm));
-	}
-
+function help_fichier_contenu ($lang_aide, $path, $help_server) {
 	$contenu = array();
 	include_spip('inc/distant');
 	foreach ($help_server as $k => $server) {
@@ -71,11 +55,12 @@ function help_fichier($lang_aide, $path, $help_server) {
 			    // Si le complement a des sous-sections,
 			    // ne pas en tenir compte quand on les rencontrera
 			    // lors des prochains passages dans la boucle
-			    preg_match_all(_SECTIONS_AIDE, $corps, $s, PREG_PATTERN_ORDER);
-			    if ($s) {$vus = array_merge($vus, $s[2]);}
-			    $contenu[$k] .= $corps;
-			    $corps = '';
-			    break;
+			    if (preg_match_all(_SECTIONS_AIDE, $corps, $m, PREG_PATTERN_ORDER)) {
+				    if ($m) {$vus = array_merge($vus, $m[2]);}
+				    $contenu[$k] .= $corps;
+				    $corps = '';
+				    break;
+			    } else spip_log("aide $server $section incorrecte");
 			  }
 			}
 			// Si totalement nouveau, inserer le titre
@@ -88,22 +73,17 @@ function help_fichier($lang_aide, $path, $help_server) {
 		}
 	}
 
-	$contenu = '<div>' . join('',$contenu) . '</div>';
-
 	// Renvoyer les liens vraiment externes dans une autre fenetre
 	$contenu = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@',
 				'<a href="\\1"\\2 target="_blank">',
-				$contenu);
+				join('',$contenu));
+
+
+	if (strlen($contenu) <= 75) return array(false, false);
 
 	// Correction typo dans la langue demandee
 	changer_typo($lang_aide);
-	$contenu = '<body>' . justifier($contenu) . '</body>';
-
-	if (strlen($contenu) <= 100) return array(false, false);
-	// mettre en cache (tant pis si echec)
-	sous_repertoire(_DIR_AIDE,'','',true);
-	ecrire_fichier ($fichier_aide, $contenu);
-	return array($contenu, help_lastmodified(time()));
+	return '<body>' . justifier("<div>$contenu</div>") . '</body>';
 }
 
 // http://doc.spip.org/@help_lastmodified
@@ -197,7 +177,6 @@ function help_section($aide, $contenu, $prof=2)
 
 	if (preg_match($r, $contenu, $m))
 	  return $m[1];
-#	spip_log("aide inconnue $r dans " . substr($contenu, 0, 150));
 	return '';
 }
 
@@ -377,16 +356,31 @@ function aide_index_frame($var_lang_r, $lang_r, $frame, $aide, $help_server)
 		changer_langue($lang = $lang_r);
 	else $lang = $spip_lang;
 
+	// L'aide correspondant a la langue demandee est dans un cache
+	// reposant sur la date du fichier indiquant la version de SPIP
+	// (approximatif, mais c'est deja qqch)
+
+	$path = $spip_lang . "-aide.html";
+	$fichier = _DIR_AIDE . $path;
+	$lastm = is_readable($fichier) ? filemtime($fichier) : 0;
+	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
+	if (!($lastm AND ($lastm >= $lastversion))) {
+		$contenu = help_fichier_contenu($spip_lang, $path, $help_server);
+		// mettre en cache (tant pis si echec)
+		sous_repertoire(_DIR_AIDE,'','',true);
+		if ($contenu) ecrire_fichier ($fichier, $contenu);
+		$lastm = time();
+	}
 	$titre = _T('info_aide_en_ligne');
 	if (!$frame) {
 		echo _DOCTYPE_AIDE, html_lang_attributes();
 		echo help_frame_frame($titre, $aide, $lang);
 		echo "\n</html>";
 	} else {
-		$path = $spip_lang . "-aide.html";
-		list($contenu, $lastm) = 
-			help_fichier($spip_lang, $path, $help_server);
 		header("Content-Type: text/html; charset=utf-8");
+		if (!isset($contenu)) {
+			lire_fichier($fichier, $contenu);
+		}
 		if (!$contenu) {
 			include_spip('inc/minipres');
 			echo  minipres(_T('forum_titre_erreur'),
@@ -399,15 +393,17 @@ function aide_index_frame($var_lang_r, $lang_r, $frame, $aide, $help_server)
 			"</div><br /><div align='right'>".
 			menu_langues('var_lang_ecrire').
 			"</div>");
-		// Si pas de not-modified-since, envoyer tout
-		} elseif (!$lastm) {
+		// Envoie le not-modified-since si possible, sinon envoie tout
+		} elseif (!help_lastmodified($lastm)) {
 			echo _DOCTYPE_AIDE, html_lang_attributes();
 			if ($frame === 'menu') {
 			  $contenu = help_menu_rubrique($aide, $contenu);
 			  echo help_frame_menu($titre, $contenu, $lang);
 			} else  {
-			  if ($aide) 
+			  if ($aide) {
 				  $contenu = help_section($aide, $contenu);
+				  if (!$contenu) spip_log("aide inconnue $aide dans " . substr($contenu, 0, 150));
+			  }
 			  echo help_frame_body($titre, $aide, $contenu, $lang);
 			}
 			echo "\n</html>";
