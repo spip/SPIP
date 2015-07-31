@@ -419,7 +419,8 @@ function f_admin ($texte) {
 // http://doc.spip.org/@f_msie
 function f_msie ($texte) {
 	if (!$GLOBALS['html']) return $texte;
-
+	if ($GLOBALS['flag_preserver']) return $texte;
+	
 	// test si MSIE et sinon quitte
 	if (
 		strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
