@@ -82,7 +82,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 // http://doc.spip.org/@squelette_obsolete
 function squelette_obsolete($skel, $squelette) {
 	return (
-		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
+		in_array($GLOBALS['var_mode'], array('recalcul','preview'))
 		OR !@file_exists($skel)
 		OR ((@file_exists($squelette)?@filemtime($squelette):0)
 			> ($date = @filemtime($skel)))

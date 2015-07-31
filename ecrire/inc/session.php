@@ -46,7 +46,11 @@ function inc_session_dist($auteur=false)
 
 // http://doc.spip.org/@ajouter_session
 function ajouter_session($auteur) {
-	$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
+	// Si le client a deja une session valide pour son id_auteur
+	// on conserve le meme fichier
+	if (!isset($_COOKIE['spip_session'])
+	OR !preg_match(',^'.$auteur['id_auteur'].'_,', $_COOKIE['spip_session']))
+		$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
 
 	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere']);
 
@@ -67,6 +71,7 @@ function ajouter_session($auteur) {
 		include_spip('inc/cookie');
 		spip_setcookie('spip_session', $_COOKIE['spip_session'],
 			2 * _RENOUVELLE_ALEA);
+		spip_log("ajoute session $fichier_session");
 		return $_COOKIE['spip_session'];
 	}
 }
