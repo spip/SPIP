@@ -22,7 +22,8 @@ function genie_maintenance_dist ($t) {
 	verifier_htaccess(_DIR_TMP);
 
 	// Verifier qu'aucune table n'est crashee
-	verifier_crash_tables();
+	if (!_request('reinstall'))
+		verifier_crash_tables();
 
 	return 1;
 }

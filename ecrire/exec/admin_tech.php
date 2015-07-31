@@ -192,7 +192,7 @@ function exec_admin_tech_dist()
 	// Lien vers la reparation
 	//
 
-	if (autoriser('detruire')) {
+	if (autoriser('detruire') AND !_request('reinstall')) {
 		if (version_compare(sql_version(),'3.23.14','>=')) {
 			$res = "\n<p style='text-align: justify;'>".
 				_T('texte_crash_base') .
