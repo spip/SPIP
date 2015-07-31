@@ -56,9 +56,13 @@ function ecrire_tableau_edition($edition) {
 
 // J'edite tel objet
 // http://doc.spip.org/@signale_edition
-function signale_edition ($id, $id_auteur, $type='article') {
+function signale_edition ($id, $auteur, $type='article') {
 	$edition = lire_tableau_edition();
-	$edition[$type.$id] = array ($id_auteur, time());
+	if ($id_a = $auteur['id_auteur'])
+		$nom = $auteur['nom'];
+	else
+		$nom = $GLOBALS['ip'];
+	$edition[$type.$id] = array ($id_a, time(), $nom);
 	ecrire_tableau_edition($edition);
 }
 
@@ -66,14 +70,12 @@ function signale_edition ($id, $id_auteur, $type='article') {
 // http://doc.spip.org/@qui_edite
 function qui_edite ($id, $type='article') {
 	$edition = lire_tableau_edition();
-	if (list($id_auteur, $date) = $edition[$type.$id]
+
+	if (list($id, $date, $nom) = $edition[$type.$id]
 	AND $date > time() - 3600) {
 
 		$date_diff = floor( (time()-$date) / 60);
-		$row_auteur = spip_fetch_array(spip_query(
-			"SELECT nom FROM spip_auteurs WHERE id_auteur='$id_auteur'"
-		));
-		$nom_auteur_modif = typo($row_auteur["nom"]);
+		$nom_auteur_modif = typo($nom);
 
 		// attention ce format est lie a la chaine de langue
 		return array(
@@ -125,6 +127,7 @@ function debloquer_tous($id_auteur) {
 // http://doc.spip.org/@debloquer_edition
 function debloquer_edition($id_auteur, $debloquer_article, $type='article') {
 	$edition = lire_tableau_edition();
+var_dump($edition);
 	foreach ($edition as $objet => $data)
 		if ($data[0] == $id_auteur
 		AND $objet == $type.$debloquer_article) {
