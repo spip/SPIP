@@ -122,7 +122,7 @@ if ($jour && $flag_editable) {
 }
 
 if ($jour_redac && $flag_editable) {
-	if ($annee_redac < 1001) $annee_redac += 9000;
+	if ($annee_redac<>'' AND $annee_redac < 1001) $annee_redac += 9000;
 
 	if ($mois_redac == "00") $jour_redac = "00";
 
