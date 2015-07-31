@@ -4,7 +4,7 @@ include ("inc.php3");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
-
+include_ecrire ("inc_listes.php3");
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
@@ -71,6 +71,7 @@ echo "<br><br><br>";
 gros_titre($nom);
 
 if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
+	$statut_auteur=$statut;
 	barre_onglets("auteur", "auteur");
 }
 

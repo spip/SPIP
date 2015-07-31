@@ -62,6 +62,8 @@ function creer_base() {
 		alea_actuel tinytext NOT NULL,
 		alea_futur tinytext NOT NULL,
 		prefs tinytext NOT NULL,
+		abonne text NOT NULL,
+		abonne_pass tinytext NOT NULL,
 		cookie_oubli tinytext NOT NULL,
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		PRIMARY KEY (id_auteur),
@@ -212,7 +214,6 @@ function creer_base() {
 		KEY url (url))";
 	$result = spip_query($query);
 
-
 	//
 	// Elements interactifs
 	//
@@ -269,6 +270,17 @@ function creer_base() {
 		PRIMARY KEY (id_signature),
 		KEY id_article (id_article),
 		KEY statut(statut))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_listes (
+		id_liste bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		titre text NOT NULL,
+		statut VARCHAR(10) NOT NULL,
+		descriptif blob NOT NULL,
+		droits text NOT NULL,
+		maj TIMESTAMP,
+		KEY id_liste (id_liste)
+		)";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites_temp (
@@ -1040,6 +1052,12 @@ function maj_base() {
 
 	if ($version_installee < 1.466) {
 		spip_query("ALTER TABLE spip_auteurs ADD source VARCHAR(10) DEFAULT 'spip' NOT NULL");
+	}
+
+	if ($version_installee < 1.467) {
+		// gestion de listes de diff
+		spip_query("ALTER TABLE spip_auteurs ADD abonne TEXT NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs ADD abonne_pass TINYTEXT NOT NULL");
 	}
 
 	//

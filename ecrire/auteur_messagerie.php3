@@ -4,13 +4,7 @@ include ("inc.php3");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
-
-
-function supp_auteur($id_auteur) {
-	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
-	$result=spip_query($query);
-}
-
+include_ecrire ("inc_listes.php3");
 
 function afficher_auteur_rubriques($leparent){
 	global $id_parent;
@@ -49,8 +43,6 @@ if ($connect_id_auteur == $id_auteur) {
 }
 
 
-
-
 $query = "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'";
 $result = spip_query($query);
 
@@ -68,7 +60,8 @@ if ($row = spip_fetch_array($result)) {
 	$pgp=$row["pgp"];
 	$messagerie=$row["messagerie"];
 	$imessage=$row["imessage"];
-
+	$abonne = $row['abonne'];
+	$abonne_pass = $row['abonne_pass'];
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom_auteur, "redacteurs", "perso");
 else if (ereg("5poubelle",$statut)) debut_page("$nom_auteur","redacteurs","redac-poubelle");
@@ -80,7 +73,8 @@ else debut_page("$nom_auteur","redacteurs","redacteurs");
 echo "<br><br><br>";
 gros_titre($nom);
 
-if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
+if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
+	$statut_auteur=$statut;
 	barre_onglets("auteur", "messagerie");
 }
 
@@ -199,6 +193,100 @@ function mySel($varaut,$variable) {
 
 	echo "</form>";
 	}
+
+	//
+	// Listes de diffusion
+	//
+	if (($connect_id_auteur == $id_auteur) OR ($connect_statut == '0minirezo')) {
+		$res = get_listes($statut_auteur);
+		$nb_liste = mysql_num_rows($res);
+		if ($nb_liste > 0) {
+
+			echo "<FORM ACTION='auteur_messagerie.php3?id_auteur=$id_auteur' METHOD='post'>";
+			echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
+
+			debut_cadre_formulaire();
+		
+			echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+			echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Liste".(($nb_liste>1)?"s":"")." de diffusion</FONT></B>".aide ("listes")."</TD></TR>";
+			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Vous pouvez vous inscrire aux listes suivantes :</FONT>";
+			echo "</TD></TR>";
+
+			$mes_abos = explode(",",$abonne);
+			$mes_abos_new = array();
+			while ($row = mysql_fetch_array($res)) {
+				$id_liste = $row['id_liste'];
+
+				// suis-je abonne ?
+				$abo = false;
+				while (list(,$id) = each($mes_abos))
+					if ($id == $id_liste)	// j'etais abonne
+						$abo = true;
+				$change_liste = "abo_liste$id_liste";
+				if ($$change_liste == 'oui') // je m'abonne
+					$abo = true;
+				else if ($$change_liste == 'non') // me desabonne
+					$abo = false;
+
+				if ($abo) $mes_abos_new[] = $id_liste;
+
+				if ($abo)
+					echo debut_cadre_relief();
+				else
+					echo debut_cadre_enfonce();
+
+				echo "<table width='100%'><tr><td valign='top'>\n";
+				echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+				echo $row['titre'];
+				echo "</FONT><br>\n";
+				echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+
+				echo "<p>".propre($row['descriptif'])."</p></font>\n</td><td valign='top'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+
+				echo "<INPUT TYPE='radio' NAME='abo_liste$id_liste' VALUE='oui' id='on_liste$id_liste'";
+				if ($abo) echo " CHECKED><B>";
+				else echo ">";
+				echo " <label for='on_liste$id_liste'>Abonn&eacute;</label>";
+				if ($abo) echo "</B>";
+				echo "<BR><INPUT TYPE='radio' NAME='abo_liste$id_liste' VALUE='non' id='off_liste$id_liste'";
+				if (!$abo) echo " CHECKED><B>";
+				else echo ">";
+				echo " <label for='off_liste$id_liste'>D&eacute;sabonn&eacute;</label>";
+				if (!$abo) echo "</B>";
+
+				echo "</font></td></tr></table>\n";
+
+				if ($abo)
+					echo fin_cadre_relief();
+				else
+					echo fin_cadre_enfonce();
+			}
+
+			// maj de la base
+			$abonne_new = join(",", $mes_abos_new);
+			if ($abonne_new <> $abonne)
+				spip_query("UPDATE spip_auteurs SET abonne='$abonne_new' WHERE id_auteur=$id_auteur");
+
+			// gestion d'un mot de passe de listes
+			if ($abonne_pass == '')
+				$abonne_pass = substr(creer_uniqid(),0,8);
+			if ($abonne_pass)
+				spip_query("UPDATE spip_auteurs SET abonne_pass='$abonne_pass' WHERE id_auteur=$id_auteur");
+			if ((lire_meta('donner_abonne_pass') == 'oui') AND ($connect_id_auteur == $id_auteur))
+				echo propre("<small>Si le gestionnaire de listes vous demande un mot de passe, indiquez <code>$abonne_pass</code></small>");
+
+			echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></DIV>";
+
+			echo "</TABLE>\n";
+		}
+
+		fin_cadre_formulaire();
+
+	echo "</form>";
+	}
+
+
 }
 
 

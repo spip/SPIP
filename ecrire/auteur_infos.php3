@@ -5,6 +5,7 @@ include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
+include_ecrire ("inc_listes.php3");
 
 // securite
 $id_auteur = floor($id_auteur);
@@ -201,6 +202,7 @@ echo "<br><br><br>";
 gros_titre($auteur['nom']);
 
 if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
+	$statut_auteur=$auteur['statut'];
 	barre_onglets("auteur", "infos");
 }
 
