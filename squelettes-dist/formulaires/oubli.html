@@ -8,7 +8,7 @@
 	<fieldset>
 		<legend><:pass_nouveau_pass:></legend>
 		<ul>
-			<li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+			<li class="editer saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
 				<label for="oubli"><:entree_adresse_email:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
 				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV**{oubli}" />

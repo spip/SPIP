@@ -12,12 +12,12 @@
 		]<legend><:form_forum_identifiants:></legend>
 		<p class='explication'><:form_forum_indiquer_nom_email:></p>
 		<ul>
-			<li class='saisie_nom_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
+			<li class='editer saisie_nom_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
 				<label for="nom_inscription"><:entree_nom_pseudo:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_inscription})</span>]
 				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" [(#HTML5) [(#ENV{focus}|=={nom_inscription}|oui)autofocus="autofocus" ]required="required"] />
 			</li>
-			<li class='saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
+			<li class='editer saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
 				<label for="mail_inscription"><:entree_adresse_email:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
 				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] />
