@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
-* Fonction Page automatique a partir de contenu/xx
+ * Fonction Page automatique a partir de contenu/xx
  *
  * @param array $flux
  * @return array
@@ -25,18 +25,18 @@ function public_styliser_par_z_dist($flux){
 	static $z_blocs;
 	static $apl_constant;
 	static $page;
+	static $disponible = array();
 
 	if (!isset($prefix_path)) {
+		$z_blocs = z_blocs(test_espace_prive());
 		if (test_espace_prive ()){
 			$prefix_path = "prive/squelettes/";
 			$prefix_length = strlen($prefix_path);
-			$z_blocs = isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top');
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
 			$echaffauder = ""; // pas d'echaffaudage dans ecrire/ pour le moment
 		}
 		else {
-			$z_blocs = isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head');
 			$prefix_path = "";
 			$prefix_length = 0;
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
@@ -52,18 +52,22 @@ function public_styliser_par_z_dist($flux){
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
 
-		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera an ajax
+		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera en ajax
 		if (defined('_Z_AJAX_PARALLEL_LOAD_OK')
 			AND $dir = explode('/',$fond)
 			AND count($dir)==2 // pas un sous repertoire
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs) // verifier deja qu'on est dans un bloc Z
 			AND in_array($dir,explode(',',constant($apl_constant))) // et dans un demande en APL
-			AND $pipe = find_in_path("$prefix_path$dir/z_apl.$ext") // et qui contient le squelette APL
+			AND $pipe = z_trouver_bloc($prefix_path,$dir,'z_apl',$ext) // et qui contient le squelette APL
 			){
-			$flux['data'] = substr($pipe, 0, - strlen(".$ext"));
+			$flux['data'] = $pipe;
 			return $flux;
 		}
+
+		// surcharger aussi les squelettes a la racine venant de squelettes-dist/
+		if (preg_match(',squelettes-dist/[^/]+$,',$squelette))
+			$squelette = "";
 
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
@@ -72,17 +76,15 @@ function public_styliser_par_z_dist($flux){
 
 			// si on est sur un ?page=XX non trouve
 			if ($flux['args']['contexte'][$page] == $fond OR $flux['args']['contexte']['type'] == $fond) {
-				// se brancher sur contenu/xx si il existe
+
 				// si on est sur un ?page=XX non trouve
-				$base = "$prefix_path$z_contenu/".$fond.".".$ext;
-				if ($base = find_in_path($base)){
+				// se brancher sur contenu/xx si il existe
+				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
+				if (!isset($disponible[$fond]))
+					$disponible[$fond] = z_contenu_disponible($prefix_path,$z_contenu,$fond,$ext);
+
+				if ($disponible[$fond])
 					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
-				}
-				// si c'est un objet spip, associe a une table, utiliser le fond homonyme
-				// objet.html et page.html sont a priori equivalent
-				elseif (echaffaudable($fond)){
-					$flux['data'] = substr(find_in_path($prefix_path."objet.$ext"), 0, - strlen(".$ext"));
-				}
 			}
 
 			// echaffaudage :
@@ -93,7 +95,11 @@ function public_styliser_par_z_dist($flux){
 				AND isset($GLOBALS['visiteur_session']['statut']) // performance
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
-				if ($echaffauder AND $is = echaffaudable($type))
+				if (!isset($disponible[$type]))
+					$disponible[$type] = z_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+				if ($echaffauder
+					AND $is = $disponible[$type]
+					AND is_array($is))
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
 			}
 
@@ -106,8 +112,10 @@ function public_styliser_par_z_dist($flux){
 					AND $dir !== $z_contenu
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
-					if ($type=='page' OR find_in_path($prefix_path."$z_contenu/$type.$ext") OR echaffaudable($type))
-						$flux['data'] = substr(find_in_path($prefix_path."$dir/dist.$ext"), 0, - strlen(".$ext"));
+					if ($type!=='page' AND !isset($disponible[$type]))
+						$disponible[$type] = z_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+					if ($type=='page' OR $disponible[$type])
+						$flux['data'] = z_trouver_bloc($prefix_path,$dir,'dist',$ext);
 				}
 			}
 			$squelette = $flux['data'];
@@ -141,7 +149,56 @@ function public_styliser_par_z_dist($flux){
 	return $flux;
 }
 
+/**
+ * Lister les blocs de la page selon le contexte prive/public
+ *
+ * @param bool $espace_prive
+ * @return array
+ */
+function z_blocs($espace_prive=false) {
+	if ($espace_prive)
+		return (isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top'));
+	return (isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head','head_js'));
+}
 
+/**
+ * Verifier qu'un type a un contenu disponible,
+ * soit parcequ'il a un fond, soit parce qu'il est echaffaudable
+ *
+ * @param string $prefix_path
+ * @param string $z_contenu
+ * @param string $type
+ * @param string $ext
+ * @return mixed
+ */
+function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
+	if ($d = z_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
+		return $d;
+	return z_echaffaudable($type);
+}
+
+/**
+ * Trouver un bloc qui peut etre sous le nom
+ * contenu/article.html
+ * ou
+ * contenu/contenu.article.html
+ *
+ * @param string $prefix_path
+ *	chemin de base qui prefixe la recherche
+ * @param string $bloc
+ *	nom du bloc cherche
+ * @param string $fond
+ *	nom de la page (ou 'dist' pour le bloc par defaut)
+ * @param <type> $ext
+ *	extension du squelette
+ * @return string
+ */
+function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
+	if ($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext")
+		OR $f = find_in_path("$prefix_path$bloc/$fond.$ext"))
+		return substr($f, 0, - strlen(".$ext"));
+	return "";
+}
 /**
  * Tester si un type est echaffaudable
  * cad si il correspond bien a un objet en base
@@ -150,7 +207,7 @@ function public_styliser_par_z_dist($flux){
  * @param string $type
  * @return bool
  */
-function echaffaudable($type){
+function z_echaffaudable($type){
 	static $echaffaudable = array();
 	if (isset($echaffaudable[$type]))
 		return $echaffaudable[$type];
