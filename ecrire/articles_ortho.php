@@ -6,14 +6,7 @@ include_spip("ecrire.php");
 include_spip("ortho.php");
 include_spip("layer.php"); // Pour $browser_name
 
-$articles_surtitre = lire_meta("articles_surtitre");
-$articles_soustitre = lire_meta("articles_soustitre");
-$articles_descriptif = lire_meta("articles_descriptif");
-$articles_urlref = lire_meta("articles_urlref");
-$articles_chapeau = lire_meta("articles_chapeau");
-$articles_ps = lire_meta("articles_ps");
-$articles_redac = lire_meta("articles_redac");
-$articles_mots = lire_meta("articles_mots");
+//charset_texte('utf-8');
 
 
 //
@@ -65,33 +58,33 @@ $ortho = "";
 // Gros hack IE pour le "position: fixed"
 $code_ie = "<!--[if IE]>
 <style type=\"text/css\" media=\"screen\">
-body {
-	height: 100%; margin: 0px; padding: 0px;
-	overflow: hidden;
-}
-.ortho-content {
-	position: absolute; left: 0px;
-	height: 100%; margin: 0px; padding: 0px;
-	width: 72%;
-	overflow-y: auto;
-}
-#ortho-fixed {
-	position: absolute; right: 0px; width: 25%;
-	height: 100%; margin: 0px; padding: 0px;
-	overflow: hidden;
-}
-.ortho-padding {
-	padding: 12px;
-}
+	body {
+		height: 100%; margin: 0px; padding: 0px;
+		overflow: hidden;
+	}
+	.ortho-content {
+		position: absolute; left: 0px;
+		height: 100%; margin: 0px; padding: 0px;
+		width: 72%;
+		overflow-y: auto;
+	}
+	#ortho-fixed {
+		position: absolute; right: 0px; width: 25%;
+		height: 100%; margin: 0px; padding: 0px;
+		overflow: hidden;
+	}
+	.ortho-padding {
+		padding: 12px;
+	}
 </style>
 <script type=\"text/javascript\">
-onload = function() { ortho-content.focus(); }
+	onload = function() { document.getElementById('ortho-content').focus(); }
 </script>
 <![endif]-->";
 
 debut_html(_T('ortho_orthographe'), $code_ie);
 
-changer_typo('','article'.$id_article);
+changer_typo($lang_article);
 
 // Ajouts et suppressions de mots par l'utilisateur
 gerer_dico_ortho($lang_article);
@@ -105,9 +98,9 @@ echo "<div class='ortho-padding serif'>";
 debut_cadre_enfonce();
 
 foreach ($champs as $champ) {
-	$$champ = preparer_ortho($$champ, $lang_article);
 	$ortho .= $$champ." ";
 }
+$ortho = preparer_ortho($ortho, $lang_article);
 $result_ortho = corriger_ortho($ortho, $lang_article);
 if (is_array($result_ortho)) {
 	$mots = $result_ortho['mauvais'];
@@ -120,12 +113,6 @@ if (is_array($result_ortho)) {
 	}
 
 	panneau_ortho($result_ortho);
-
-	foreach ($champs as $champ) {
-		list($$champ, $echap[$champ]) = echappe_html($$champ);
-		$$champ = souligner_ortho($$champ, $lang_article, $result_ortho);
-		$echap[$champ] = afficher_ortho($echap[$champ]);
-	}
 }
 else {
 	$erreur = $result_ortho;
@@ -133,9 +120,6 @@ else {
 	echo traduire_nom_langue($lang_article);
 	echo "). ";
 	echo _T('ortho_verif_impossible')."</b>";
-	foreach ($champs as $champ) {
-		$$champ = afficher_ortho($$champ);
-	}
 }
 
 fin_cadre_enfonce();
@@ -146,21 +130,54 @@ echo "</div>";
 //
 // Colonne de gauche : textes de l'article
 //
-echo "<div class='ortho-content'>";
+echo "<div class='ortho-content' id='ortho-content'>";
 echo "<div class='ortho-padding serif'>";
+
+// Traitement des champs : soulignement des mots mal orthographies
+foreach ($champs as $champ) {
+	switch ($champ) {
+	case 'texte':
+	case 'chapo':
+	case 'descriptif':
+	case 'ps':
+		// Mettre de cote les <code>, <cadre>, etc.
+		list($$champ, $echap) = echappe_html($$champ, "ORTHO");
+		$$champ = propre($$champ);
+		break;
+	default:
+		$echap = "";
+		$$champ = typo($$champ);
+		break;
+	}
+	// On passe en UTF-8 juste pour la correction
+	$$champ = preparer_ortho($$champ, $lang_article);
+	if (is_array($result_ortho))
+		$$champ = souligner_ortho($$champ, $lang_article, $result_ortho);
+	// Et on repasse dans le charset original pour remettre les echappements
+	$$champ = afficher_ortho($$champ);
+	if ($echap)
+		$$champ = echappe_retour($$champ, $echap, "ORTHO");
+}
+// Traitement identique pour les notes de bas de page
+if ($les_notes) {
+	$les_notes = preparer_ortho($les_notes, $lang_article);
+	if (is_array($result_ortho))
+		$les_notes = souligner_ortho($les_notes, $lang_article, $result_ortho);
+	$les_notes = afficher_ortho($les_notes);
+}
 
 debut_cadre_relief();
 
 if ($surtitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo typo($surtitre);
+	echo $surtitre;
 	echo "</b></font></span>\n";
 }
 gros_titre($titre);
 
 if ($soustitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo typo($soustitre);
+	echo $soustitre;
 	echo "</b></font></span>\n";
 }
 
@@ -169,16 +186,13 @@ if ($descriptif OR $url_site OR $nom_site) {
 	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo propre($texte_case, $echap['descriptif']);
+	echo $descriptif;
 	echo "</font>";
 	echo "</div>";
 }
 
 
-
-//////////////////////////////////////////////////////
 // Corps de l'article
-//
 
 echo "\n\n<div align='justify'>";
 
@@ -189,15 +203,18 @@ if ($virtuel) {
 }
 else {
 	echo "<div $dir_lang><b>";
-	echo justifier(propre($chapo, $echap['chapo']));
+	echo $chapo;
 	echo "</b></div>\n\n";
 
-	echo "<div $dir_lang>".justifier(propre($texte, $echap['texte']))."</div>";
+	echo "<div $dir_lang>";
+	echo $texte;
+	echo "</div>";
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
 		echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-		echo justifier("<b>"._T('info_ps')."</b> ".propre($ps, $echap['ps']));
+		echo "<b>"._T('info_ps')."</b> ";
+		echo $ps;
 		echo "</font></div>";
 		echo fin_cadre_enfonce();
 	}
@@ -205,7 +222,7 @@ else {
 	if ($les_notes) {
 		echo debut_cadre_relief();
 		echo "<div $dir_lang><font size='2'>";
-		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+		echo "<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes;
 		echo "</font></div>";
 		echo fin_cadre_relief();
 	}

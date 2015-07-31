@@ -2160,7 +2160,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
-		$charset=lire_meta('charset');
+		$charset = lire_meta('charset');
 
 	switch($charset) {
 	case 'utf-8':
@@ -2170,23 +2170,31 @@ function unicode2charset($texte, $charset='AUTO') {
 	default:
 		$charset = load_charset($charset);
 
-		// array_flip
 		if (!is_array($CHARSET_REVERSE[$charset])) {
-			$trans = $GLOBALS['CHARSET'][$charset];
-			foreach ($trans as $chr => $uni) 
-				$CHARSET_REVERSE[$charset][$uni] = $chr;
+			$CHARSET_REVERSE[$charset] = array_flip($GLOBALS['CHARSET'][$charset]);
 		}
 
-		while ($a = strpos(' '.$texte, '&')) {
-			$traduit .= substr($texte,0,$a-1);
-			$texte = substr($texte,$a-1);
-			if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
-				$texte = str_replace($match[0], chr($s), $texte);
-			// avancer d'un cran
-			$traduit .= $texte[0];
-			$texte = substr($texte,1);
+		$trans = array();
+		// Construire la table de remplacements
+		// 1. Entites decimales (type "&#123;")
+		if (preg_match_all(',&#([0-9]+);,', $texte, $regs, PREG_PATTERN_ORDER)) {
+			$entites = array_flip($regs[1]);
+			foreach ($entites as $e => $v) {
+				if ($s = ($e < 128) ? $e : $CHARSET_REVERSE[$charset][intval($e)])
+					$trans['&#'.$e.';'] = chr($s);
+			}
 		}
-		return $traduit.$texte;
+		// 2. Entites hexadecimales (type "&#xD;")
+		if (preg_match_all(',&#x([0-9a-zA-Z]+);,', $texte, $regs, PREG_PATTERN_ORDER)) {
+			$entites = array_flip($regs[1]);
+			foreach ($entites as $e => $v) {
+				$h = hexdec($e);
+				if ($s = ($h < 128) ? $h : $CHARSET_REVERSE[$charset][$h])
+					$trans['&#x'.$e.';'] = chr($s);
+			}
+		}
+		$texte = strtr($texte, $trans);
+		return $texte;
 	}
 }
 
@@ -2279,16 +2287,39 @@ function utf_8_to_unicode($source) {
 
 // UTF-32 : utilise en interne car plus rapide qu'UTF-8
 function utf_32_to_unicode($source) {
-	$texte = "";
-	// Plusieurs iterations pour eviter l'explosion memoire
-	while ($source) {
+	/*while ($source) {
 		$words = unpack("V*", substr($source, 0, 1024));
 		$source = substr($source, 1024);
 		foreach ($words as $word) {
 			if ($word < 128) $texte .= chr($word);
 			else if ($word != 65279) $texte .= '&#'.$word.';';
 		}
+	}*/
+
+	// Attention, cette implementation peut produire des erreurs dans de tres rares cas :
+	// caracteres multiples de 256 et superieurs a 0x900
+	$chars = array();
+	$len = strlen($source);
+	$chunk_len = 16384;
+	// Extraire la liste des caracteres utilises
+	// (plusieurs iterations pour eviter l'explosion memoire)
+	for ($i = 0; $i <= $len; $i += $chunk_len) {
+		$chars = $chars + array_flip(unpack("V*", substr($source, $i, $chunk_len)));
 	}
+	$cherche = $remplace = array();
+	foreach ($chars as $c => $v) {
+		$from = pack("V", $c);
+		if ($c < 128)
+			$to = chr($c);
+		else if ($c != 65279)
+			$to = '&#'.$c.';';
+		else 
+			$to = '';
+		$cherche[] = $from;
+		$remplace[] = $to;
+	}
+	$texte = str_replace($cherche, $remplace, $source);
+	
 	return $texte;
 }
 

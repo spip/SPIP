@@ -153,9 +153,21 @@ function post_ortho($url, $texte, $lang) {
 
 	$t = parse_url($url);
 	if ($t['scheme'] != 'http') return false;
-	$host = $t['host'];
-	$port = $t['port'] ? $t['port'] : 80;
-	$path = $t['path'] ? $t['path'] : "/";
+
+	$http_proxy = lire_meta("http_proxy");
+	if (eregi("^http://([^:]*)(:(.*))?", $http_proxy, $rr)) {
+		$host= $rr[1];
+		if($rr[2]) {
+			$port= $rr[3];
+		} else {
+			$port= 80;
+		}
+		$path= $url;
+	} else {
+		$host = $t['host'];
+		$port = $t['port'] ? $t['port'] : 80;
+		$path = $t['path'] ? $t['path'] : "/";
+	}
 
 	// Envoyer la requete en POST
 	$f = @fsockopen($host, $port, $errno, $errstr, 2);
@@ -410,15 +422,21 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 		// Caracteres ASCII non-alphanumeriques
 		$texte = preg_replace(",[^-a-zA-Z0-9\x80-\xFF']+,", ' ', $texte);
 	}
-	$texte = preg_replace(',\s[-\']+,', ' ', $texte); // tirets de typo
-	$texte = preg_replace(',\'\s,', ' ', $texte); // apostrophes utilisees comme guillemets
-	$texte = preg_replace(',\s+,', ' ', $texte);
+
+	### ici j'ai un bug de sorcellerie si je laisse le \s du lab : un caractere
+	### accentue comme "a`" se fait decouper en deux : le second octet de sa
+	### representation utf-8 est mange par le preg_replace !! Or, je ne vois
+	### pas de difference entre spip-stable et spip-lab a ce niveau, et le bug
+	### n'est pas dans le lab.
+	$texte = preg_replace(', [-\']+,', ' ', $texte); // tirets de typo
+	$texte = preg_replace(',\' ,', ' ', $texte); // apostrophes utilisees comme guillemets
+	#$texte = preg_replace(', +,', ' ', $texte);	# inutile
 
 	// Virer les mots contenant au moins un chiffre
 	$texte = preg_replace(', ([^ ]*\d[^ ]* )+,', ' ', $texte);
 
 	// Melanger les mots
-	$mots = preg_split(',\s+,u', $texte);
+	$mots = preg_split(', +,u', $texte);
 	sort($mots);
 	$mots = array_unique($mots);
 
@@ -597,6 +615,38 @@ function panneau_ortho($ortho_result) {
 	}
 }
 
+
+function souligner_match_ortho(&$texte, $cherche, $remplace) {
+	// Eviter les &mdash;, etc.
+	if ($cherche{0} == '&' AND $cherche{strlen($cherche) - 1} == ';') return;
+
+	if ($cherche{0} == '>') 
+		$texte = str_replace($cherche, $remplace, $texte);
+	else {
+		// Ne pas remplacer a l'interieur des tags HTML
+		$table = explode($cherche, $texte);
+		unset($avant);
+		$texte = '';
+		foreach ($table as $s) {
+			if (!isset($avant)) {
+				$avant = $s;
+				continue;
+			}
+			$ok = true;
+			$texte .= $avant;
+			// Detecter si le match a eu lieu dans un tag HTML
+			if (is_int($deb_tag = strrpos($texte, '<'))) {
+				if (strrpos($texte, '>') <= $deb_tag)
+					$ok = false;
+			}
+			if ($ok) $texte .= $remplace;
+			else $texte .= $cherche;
+			$avant = $s;
+		}
+		$texte .= $avant;
+	}
+}
+
 function souligner_ortho($texte, $lang, $ortho_result) {
 	global $id_suggest;
 	$vu = array();
@@ -619,29 +669,7 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 				$vu[$cherche] = 1;
 				$html = "<a class='ortho' onclick=\"suggest($id);return false;\" href=''>$mot_html</a>";
 				$remplace = str_replace($mot, $html, $cherche);
-				$table = explode($cherche, $texte);
-				unset($avant);
-				$texte = '';
-				foreach ($table as $s) {
-					if (!isset($avant)) {
-						$avant = $s;
-						continue;
-					}
-					$ok = true;
-					$texte .= $avant;
-					if (is_int($deb_tag = strrpos($texte, '<'))) {
-						if (strrpos($texte, '>') <= $deb_tag)
-							$ok = false;
-					}
-					if ($ok) {
-						$texte .= $remplace;
-					}
-					else {
-						$texte .= $cherche;
-					}
-					$avant = $s;
-				}
-				$texte .= $avant;
+				souligner_match_ortho($texte, $cherche, $remplace);
 			}
 		}
 	}
@@ -656,29 +684,7 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 				$vu[$cherche] = 1;
 				$html = "<a class='ortho-dico' onclick=\"suggest($id);return false;\" href=''>$mot_html</a>";
 				$remplace = str_replace($mot, $html, $cherche);
-				$table = explode($cherche, $texte);
-				unset($avant);
-				$texte = '';
-				foreach ($table as $s) {
-					if (!isset($avant)) {
-						$avant = $s;
-						continue;
-					}
-					$ok = true;
-					$texte .= $avant;
-					if (is_int($deb_tag = strrpos($texte, '<'))) {
-						if (strrpos($texte, '>') <= $deb_tag)
-							$ok = false;
-					}
-					if ($ok) {
-						$texte .= $remplace;
-					}
-					else {
-						$texte .= $cherche;
-					}
-					$avant = $s;
-				}
-				$texte .= $avant;
+				souligner_match_ortho($texte, $cherche, $remplace);
 			}
 		}
 	}
@@ -687,7 +693,6 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	//echo "<div style='font-weight: bold; color: red;'>$dt s.</div>";
 	
 	$texte = preg_replace(',(^ | $),', '', $texte);
-	$texte = afficher_ortho($texte);
 	return $texte;
 }
 
