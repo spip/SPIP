@@ -398,10 +398,7 @@ function calculer_dump_join($a)
 {
   $res = "";
   foreach($a as $k => $v) 
-  	if (count($v)==3)
-	  	$res .= ", '$k' => array($v[0], $v[1], $v[2])";
-  	else
-  		$res .= ", '$k' => array($v[0], $v[1])";
+		$res .= ", '$k' => array(".implode(',',$v).")";
   return 'array(' . substr($res,2) . ')';
 }
 
