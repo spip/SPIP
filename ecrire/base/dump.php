@@ -91,6 +91,7 @@ function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = arra
  */
 function base_saisie_tables($name, $tables, $exclude = array(), $post=null, $serveur='') {
 	include_spip('inc/filtres');
+	$res = array();
 	foreach ($tables as $k => $t) {
 		// par defaut tout est coche sauf les tables dans $exclude
 		if (is_null($post))
