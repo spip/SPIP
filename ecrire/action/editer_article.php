@@ -28,7 +28,7 @@ function action_editer_article_dist($arg=null) {
 		if (!$id_parent)
 			$err = _L("creation interdite d'un article sans rubrique");
 		elseif(!autoriser('creerarticledans','rubrique',$id_parent))
-			$err = _L("vous n'avez pas le droit de creer un article");
+			$err = _T("info_creerdansrubrique_non_autorise");
 		else
 			$id_article = article_inserer($id_parent);
 	}
