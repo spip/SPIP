@@ -18,7 +18,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@formulaire_discuter
 function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $args, $mute=false)
 {
-	$res = $nav ='';
+	$nav ='';
 	if ($total > $total_afficher) {
 		$evt = $_COOKIE['spip_accepte_ajax'] == 1;
 		$nav = "<div class='serif2' align='center'>";
@@ -32,7 +32,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 					$h = generer_url_ecrire($script, $a);
 				} else {
 					$h = generer_url_ecrire('discuter', $a);
-					$evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"forum\")'";
+					$evt = "\nonclick=" . ajax_action_declencheur("\"$h\"",'forum');
 				}
 				$nav .= "[<a href='$h#forum'$evt>$i-$y</a>] ";
 			}
@@ -40,12 +40,10 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 		$nav .= "</div>";
 	}
 
-	$res = $nav 
+	return $nav 
 	. afficher_forum($query, $script, $args, $mute)
 	. "<br />"
 	. $nav;
-
-	return $res;
 }
 
 function inc_discuter_dist($id_article, $flag, $debut=1)
@@ -65,6 +63,6 @@ function inc_discuter_dist($id_article, $flag, $debut=1)
 		$res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
 	} else $res ='';
 
-	return greffe_action_ajax("forum", $res);
+	return ajax_action_greffe("forum", $res);
 }
 ?>

@@ -26,7 +26,7 @@ function exec_legender_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('legender', 'inc');
-	return $f($id_document, array(), $script, $type, $id, $ancre);
+	$legender = charger_fonction('legender', 'inc');
+	ajax_retour($legender($id_document, array(), $script, $type, $id, $ancre));
 }
 ?>

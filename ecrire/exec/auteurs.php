@@ -58,7 +58,7 @@ while ($auteur = spip_fetch_array($result)) {
 
  $res = auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
 
-  if (_request('var_ajaxcharset')) return $res;
+ if (_request('var_ajaxcharset')) ajax_retour($res);
 
   pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
@@ -225,12 +225,10 @@ function auteurs_href($clic, $args='', $att='')
 {
 	$h = generer_url_ecrire('auteurs', $args);
 	$a = 'auteurs';
-	if ($_COOKIE['spip_accepte_ajax'] != 1 )
-		$evt = '';
-        else 
-		$evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$a\")'";
+	if ($_COOKIE['spip_accepte_ajax'] == 1 )
+		$att .= ("\nonclick=" . ajax_action_declencheur("\"$h\"",$a));
 
-	return "<a$att href='$h#$a'$evt>$clic</a>";
+	return "<a href='$h#$a'$att>$clic</a>";
 }
 
 // http://doc.spip.org/@requete_auteurs

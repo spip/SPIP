@@ -119,7 +119,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 	. block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag)
 	. "</div>";
 
-	return greffe_action_ajax("legender-$id_document", $corps);
+	return ajax_action_greffe("legender-$id_document", $corps);
 }
 
 

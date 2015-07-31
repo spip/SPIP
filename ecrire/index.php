@@ -160,23 +160,6 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 define('_TRANCHES', 10);
 
 //
-// Fragment (ajax) ?
-//
-// var_ajaxcharset repere les requetes de fragments, et indique en plus
-// le charset [utf-8] utilise par le client, utile a _request.
-if (isset($var_ajaxcharset)) {
-	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
-	$var_f = charger_fonction($exec, 'exec');
-	$fragment = $var_f();
-	echo "<","?xml version='1.0' encoding='",
-		$GLOBALS['meta']["charset"],
-		"'?",">\n",
-		$fragment;
-	exit;
-}
-
-
-//
 // Gestion d'une page normale de l'espace prive
 //
 
@@ -207,9 +190,8 @@ AND $l = @unserialize($l)) {
 		}
 	}
 }
+
 // Trouver la fonction eventuellement surchagee et l'appeler.
-// Elle envoie parfois des en-tetes http,
-// et en mode Ajax retourne un resultat.
 $var_f = charger_fonction($exec);
 $var_f();
 

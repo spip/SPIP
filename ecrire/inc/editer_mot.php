@@ -93,7 +93,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 	  . $form
 	  . fin_cadre_enfonce(true);
 
-	return greffe_action_ajax("editer_mot-$id_objet", $res);
+	return ajax_action_greffe("editer_mot-$id_objet", $res);
 }
 
 // http://doc.spip.org/@inserer_mot

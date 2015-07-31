@@ -42,7 +42,7 @@ function exec_editer_mot_dist()
 
 	$ch = _request('cherche_mot');
 	$id_groupe = _request('select_groupe');
-	$f = charger_fonction('editer_mot', 'inc');
-	return $f($objet, $id_objet, $ch, $id_groupe, 'ajax'); 
+	$editer_mot = charger_fonction('editer_mot', 'inc');
+	ajax_retour($editer_mot($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
 }
 ?>

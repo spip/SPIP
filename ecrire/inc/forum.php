@@ -17,7 +17,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 {
 	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");
 
-	$evt = ($_COOKIE['spip_accepte_ajax'] == 1 );
+	$e = ($_COOKIE['spip_accepte_ajax'] == 1 );
 
 	$n = spip_num_rows($query);
 
@@ -27,9 +27,9 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 			if ($i == $debut)
 				$nav .= "<font size=3><b>$i</b></font> |\n";
 			else {
-				$h = generer_url_ecrire($script, $args . "&debut=$i", $evt);
-				if ($evt) $evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
-				$nav .= "<a href='$h'$evt>$i</a> |\n";
+				$h = generer_url_ecrire($script, $args . "&debut=$i", $e);
+				if ($e)	$e = "\nonclick=" . ajax_action_declencheur("\"$h\"",$ancre);
+				$nav .= "<a href='$h'$e>$i</a> |\n";
 			}
 		}
 		$i ++;
@@ -37,9 +37,9 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 
 	$h = generer_url_ecrire($script, $args . "&debut=$i");
 
-	if ($evt) $evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
+	if ($e)	$e = "\nonclick=" . ajax_action_declencheur("\"$h\"",$ancre);
 
-	return "$nav<a href='$h'$evt>...</a> |";
+	return "$nav<a href='$h'$e>...</a> |";
 }
 
 

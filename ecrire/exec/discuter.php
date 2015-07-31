@@ -16,7 +16,7 @@ function exec_discuter_dist()
 {
 	$debut = _request('debut');
 	$id_article = _request('id_article');
-	$f = charger_fonction('discuter', 'inc');
-	return $f($id_article, 'ajax', $debut);
+	$discuter = charger_fonction('discuter', 'inc');
+	ajax_retour($discuter($id_article, 'ajax', $debut));
 }
 ?>

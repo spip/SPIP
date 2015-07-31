@@ -63,6 +63,6 @@ function inc_poster_dist($id_article, $script, $args, $flag=false) {
 
 	$r = ajax_action_auteur('poster', $id_article, $script, $args, $r);
 
-	return greffe_action_ajax("poster-$id_article", $r);
+	return ajax_action_greffe("poster-$id_article", $r);
 }
 ?>

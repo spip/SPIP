@@ -16,13 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_informer_dist()
 {
-
 	$id = intval(_request('id'));
 	$col = intval(_request('col'));
 	$exclus = intval(_request('exclus'));
 
-	$f = charger_fonction('informer', 'inc');
-	return $f($id, $col, $exclus, _request('rac'), _request('type'));
+	$informer = charger_fonction('informer', 'inc');
+	ajax_retour($informer($id, $col, $exclus, _request('rac'), _request('type')));
 }
 
 ?>

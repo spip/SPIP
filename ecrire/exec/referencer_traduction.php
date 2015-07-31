@@ -24,7 +24,7 @@ function exec_referencer_traduction_dist()
 
 	$row = spip_fetch_array(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
 
-	$f = charger_fonction('referencer_traduction', 'inc');
-	return $f($id_article, 'ajax', $row['id_rubrique'], $row['id_trad']); 
+	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
+	ajax_retour($referencer_traduction($id_article, 'ajax', $row['id_rubrique'], $row['id_trad'])); 
 }
 ?>

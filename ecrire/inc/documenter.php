@@ -107,5 +107,5 @@ function inc_documenter_dist(
 	. $res
 	. "</table>";	  
 
-	return greffe_action_ajax("documenter-$s$doc", $res, $flag==='ajax');
+	return ajax_action_greffe("documenter-$s$doc", $res, $flag==='ajax');
 }

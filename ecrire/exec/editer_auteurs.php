@@ -22,7 +22,7 @@ function exec_editer_auteurs_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('editer_auteurs', 'inc');
-	return $f($id_article, 'ajax', _request('cherche_auteur'), _request('ids'));
+	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
+	ajax_retour($editer_auteurs($id_article, 'ajax', _request('cherche_auteur'), _request('ids')));
 }
 ?>

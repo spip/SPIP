@@ -95,12 +95,10 @@ function exec_rechercher_dist()
 			}
 				
 		}
-		if ($ret)
-			return $ret;
-		else
-			return "<div style='padding: 5px; color: red;'><b>"
+		if (!$ret)
+			$ret =  "<div style='padding: 5px; color: red;'><b>"
 			.htmlentities($type)
 			."</b> :  "._T('avis_aucun_resultat')."</div>";
-
+		ajax_retour($ret);
 }
 ?>

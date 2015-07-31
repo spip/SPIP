@@ -21,7 +21,7 @@ function exec_rubriquer_dist()
 
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
-	return mini_nav ($id, "aff_nav_recherche", 
+	ajax_retour(mini_nav($id, "aff_nav_recherche", 
 			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
-			"';", 0, true);
+			      "';", 0, true));
 }
