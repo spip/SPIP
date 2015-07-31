@@ -243,6 +243,7 @@ function instituer_boucle(&$boucle, $echapper=true){
 					}
 					$jointures[0][0] = $id_table;
 					if (!array_search($id, $boucle->from)){
+						include_spip('public/jointures');
 						fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table, '', $echapper);
 					}
 					// trouver l'alias de la table d'arrivee qui porte le statut
@@ -254,6 +255,7 @@ function instituer_boucle(&$boucle, $echapper=true){
 				}
 				$mstatut = $id .'.'.$statut;
 
+				include_spip('public/quete');
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
