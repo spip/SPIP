@@ -3,7 +3,7 @@
 ][<p>(#ENV*{modere})</p>
 ][(#ENV*{afficher_texte_hidden})
 ][(#ENV*{afficher_texte_input})
-	[(#ENV*{previsu})
+	[(#ENV*{previsu}|safehtml)
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_titre:></b></legend>
 		<label><input type="text" name="titre" 
@@ -14,7 +14,7 @@
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_texte:></b></legend>
 		<p><:info_creation_paragraphe:></p>
-		[(#ENV{texte}|barre_forum)]
+		[(#ENV**{texte}|barre_forum)]
 		</fieldset>
 		<br />
 		[<p>(#ENV*{table})</p>]

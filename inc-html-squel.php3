@@ -30,7 +30,7 @@ define('TYPE_RECURSIF', 'boucle');
 define('SPEC_BOUCLE','[[:space:]]*\(([^)]*)\)');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
-define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
+define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');

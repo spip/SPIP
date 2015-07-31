@@ -273,6 +273,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 function barre_forum($texte)
 {
 	include_ecrire('inc_layer.php3');
+	$texte = entites_html($texte);
 
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
