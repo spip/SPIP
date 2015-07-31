@@ -117,8 +117,8 @@ function avertissement_config() {
 	return debut_boite_info(true)
 	. "\n<div class='verdana2' style='text-align: justify'>
 	<p style='text-align: center'><b>"._T('avis_attention')."</b></p>"
-	. http_img_pack("warning.gif", (_T('avis_attention')),
-		"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
+	. http_img_pack(chemin_image("warning-48.png"), (_T('avis_attention')),
+		" style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
 	. _T('texte_inc_config')
 	. "</div>"
 	. fin_boite_info(true)

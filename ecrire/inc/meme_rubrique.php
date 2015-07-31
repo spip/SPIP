@@ -73,7 +73,7 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=
 	$bouton = bouton_block_depliable(_T('info_meme_rubrique'),true,'memerub');
 
 	$retour = 
-		debut_cadre('meme-rubriques',"article-24.gif",'',$bouton)
+		debut_cadre('meme-rubriques',"article-24.png",'',$bouton)
 		. debut_block_depliable(true,'memerub')
 		. $retour;
 	

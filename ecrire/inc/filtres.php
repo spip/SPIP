@@ -1561,8 +1561,8 @@ function afficher_enclosures($tags) {
 		AND $t = extraire_attribut($tag, 'href')) {
 			$s[] = preg_replace(',>[^<]+</a>,S', 
 				'>'
-				.http_img_pack('attachment.gif', $t,
-					'height="15" width="15" title="'.attribut_html($t).'"')
+				.http_img_pack(chemin_image('attachment-16.png'), $t,
+					'title="'.attribut_html($t).'"')
 				.'</a>', $tag);
 		}
 	}
@@ -2232,9 +2232,9 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$form = $chercher_rubrique($id_parent, $type, $restreint, ($type=='rubrique')?$id:0);
 
-	if ($id_parent == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";
-	else $logo = "rubrique-24.gif";
+	if ($id_parent == 0) $logo = "racine-24.png";
+	elseif ($id_secteur == $id_parent) $logo = "secteur-24.png";
+	else $logo = "rubrique-24.png";
 
 	$confirm = "";
 	if ($type=='rubrique') {

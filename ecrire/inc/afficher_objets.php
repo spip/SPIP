@@ -16,10 +16,10 @@ $GLOBALS['my_sites']=array();
 
 // http://doc.spip.org/@icone_table
 function icone_table($type){
-	$derog = array('document'=> 'doc-24.gif', 'mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif', 'message' => 'messagerie-24.gif', 'groupes_mot'=>'mot-cle-24.gif');
+	$derog = array('document'=> 'doc-24.png','syndic_article'=>'site-24.png', 'groupes_mot'=>'groupes-mot-24.png');
 	if (isset($derog[$type]))
 		return $derog[$type];
-	return "$type-24.gif";
+	return "$type-24.png";
 }
 
 // http://doc.spip.org/@lien_editer_objet
@@ -413,7 +413,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, 
 	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
 	$url = generer_url_ecrire('memoriser', "$arg&trad=$trad");
-	$res = $presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
+	$res = $presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.png", $url, $cpt);
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }

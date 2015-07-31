@@ -27,7 +27,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 {
 	if (!$id_rubrique) {
 		$lang = $statut = $titre = $extra = $id_parent=$id_secteur='';
-		$ze_logo = "racine-site-24.gif";
+		$ze_logo = "racine-24.png";
 		$row = array();
 	} else {
 		$row = sql_fetsel('id_parent, id_secteur, titre, statut, lang, descriptif, texte', 'spip_rubriques', "id_rubrique=$id_rubrique");
@@ -42,8 +42,8 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 			$statut = $row['statut'];
 			$lang = $row["lang"];
 
-			if ($id_parent == 0) $ze_logo = "secteur-24.gif";
-			else $ze_logo = "rubrique-24.gif";
+			if ($id_parent == 0) $ze_logo = "secteur-24.png";
+			else $ze_logo = "rubrique-24.png";
 		}
 	}
 
@@ -129,8 +129,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	  .(_INTERFACE_ONGLETS?"":
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
-		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right)
-		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right))
+		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "creer.gif",$spip_lang_right)
+		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "creer.gif",$spip_lang_right))
 	    ."</div>":""))
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
@@ -194,7 +194,7 @@ function infos_naviguer($id_rubrique, $statut, $row)
 	}
 
 	if ($res)
-		$navigation .= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('info_administrateurs')). $res . fin_cadre_relief(true);
+		$navigation .= debut_cadre_relief("information-perso-24.png", true, '', _T('info_administrateurs')). $res . fin_cadre_relief(true);
 
 	return $navigation;
 }
@@ -203,16 +203,16 @@ function infos_naviguer($id_rubrique, $statut, $row)
 // http://doc.spip.org/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
-	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
+	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.png", '',false);
 
 	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", false);
+		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","creer.gif", false);
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
-		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", false);
+		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","creer.gif", false);
 		}
 	}
 	else {
@@ -343,16 +343,16 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	$bouton_article = $bouton_breves = $bouton_sites = "";
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_right)
+		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
-		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", $spip_lang_right)
+		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
 		if (autoriser('creersitedans','rubrique',$id_rubrique))
-			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif", $spip_lang_right)
+			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.png", "creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 	}
 

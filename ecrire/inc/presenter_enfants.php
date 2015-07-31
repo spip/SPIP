@@ -63,7 +63,7 @@ function enfant_rub($collection){
 				  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique");
 
 			$les_enfants = "\n<div class='enfants'>" .
-			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true, "", $titre) .
+			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.png" : "secteur-24.png"), true, "", $titre) .
 			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
 			  (($spip_display == 4) ? '' : $les_sous_enfants) .
 			  "\n<div style='clear:both;'></div>"  .
@@ -139,8 +139,8 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. ";position:relative;'>"
 	. (!$bouton ? ''
 		 : (!$id_rubrique
-		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right, false)
-		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right,false)))
+		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "creer.gif",$spip_lang_right, false)
+		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "creer.gif",$spip_lang_right,false)))
 	. "</div>";
 
 	if ($return) return $res; else echo_log('afficher_enfant_rub',$res);

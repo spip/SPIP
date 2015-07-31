@@ -33,7 +33,7 @@ function exec_menu_navigation_dist() {
 	}
 	if ($vos) {
 		$t = _T('info_en_cours_validation');
-		$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
+		$gadget .= debut_cadre('bandeau-rubriques',"article-24.png",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
 		. "\n<div class='plan-articles'>\n"
 		. $vos
 		. "</div>"
@@ -50,7 +50,7 @@ function exec_menu_navigation_dist() {
 		$vos .= "<a class='$statut' href='$h'>$titre</a>";
 	}
 	if ($vos) {
-		$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'))
+		$gadget .= debut_cadre('bandeau-rubriques',"article-24.png",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'))
 		. "<div class='plan-articles'>"
 		. $vos
 		. "</div>"
@@ -66,7 +66,7 @@ function exec_menu_navigation_dist() {
 		$vos .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
 	}
 	if ($vos) {
-		$gadget .= debut_cadre('bandeau-rubriques',"breve-24.gif",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'))
+		$gadget .= debut_cadre('bandeau-rubriques',"breve-24.png",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'))
 		. "<div class='plan-articles'>"
 		. $vos
 		. "</div>"
@@ -84,24 +84,24 @@ function exec_menu_navigation_dist() {
 		if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {	
 #			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 			if ($id_rubrique > 0)
-				$gadget .= icone_horizontale_display(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);
+				$gadget .= icone_horizontale_display(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.png", "creer.gif", false);
 			else 
-				$gadget .= icone_horizontale_display(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
+				$gadget .= icone_horizontale_display(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.png", "creer.gif", false);
 #			$gadget .= "</div>";
 		}		
 #		$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-		$gadget .= icone_horizontale_display(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
+		$gadget .= icone_horizontale_display(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.png","creer.gif", false);
 #		$gadget .= "</div>";
 			
 		if ($GLOBALS['meta']["activer_breves"] != "non") {
 #			$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
-			$gadget .= icone_horizontale_display(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
+			$gadget .= icone_horizontale_display(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.png","creer.gif", false);
 #			$gadget .= "</div>";
 		}
 			
 		if (autoriser('creersitedans', 'rubrique', $une_rubrique)) {
 			$gadget .= # "<div style='width: 140px; float: $spip_lang_left;'>" .
-			 icone_horizontale_display(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.gif","creer.gif", false)
+			 icone_horizontale_display(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.png","creer.gif", false)
 			#. "</div>"
 ;
 		}

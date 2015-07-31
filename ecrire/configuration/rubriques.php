@@ -51,7 +51,7 @@ function configuration_rubriques_dist(){
 
 	. "</table>";
 
-	$res = debut_cadre_trait_couleur("rubrique-24.gif", true, "", _T('icone_rubriques'))
+	$res = debut_cadre_trait_couleur("rubrique-24.png", true, "", _T('icone_rubriques'))
 	. ajax_action_post('configurer', 'rubriques', 'configuration','',$res)
 	. fin_cadre_trait_couleur(true);
 

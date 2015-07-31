@@ -46,7 +46,7 @@ function configuration_accueil_dist()
 	$res = configuration_bloc_votre_site();
 
 	$res = 
-	debut_cadre_couleur("racine-site-24.gif", true).
+	debut_cadre_couleur("racine-24.png", true).
 	ajax_action_post('configurer', 'accueil', 'configuration','',$res)
 	. fin_cadre_couleur(true)
 	;

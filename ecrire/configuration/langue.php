@@ -40,7 +40,7 @@ function configuration_langue_dist()
 			 '',
 			 " class='fondo'");
 
- $res =  debut_cadre_couleur("langues-24.gif", true, "", _T('info_langue_principale') . "&nbsp;:&nbsp;" . $langue_site) .
+ $res =  debut_cadre_couleur("langue-24.png", true, "", _T('info_langue_principale') . "&nbsp;:&nbsp;" . $langue_site) .
 	   _T('texte_selection_langue_principale') .
 	  $res .
 	   fin_cadre_couleur(true);

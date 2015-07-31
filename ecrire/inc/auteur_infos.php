@@ -57,7 +57,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	}
 
 	$contexte = array(
-		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.gif","rien.gif",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
+		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.png","",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
 		'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true),
 		'titre'=>($auteur['nom']?$auteur['nom']:_T('nouvel_auteur')),
 		'new'=>$new == "oui"?$new:$id_auteur,
@@ -93,7 +93,7 @@ function afficher_erreurs_auteur($echec) {
 
 	$corps = debut_cadre_relief('', true)
 	.  "<span style='color: red; left-margin: 5px'>"
-	.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
+	.  http_img_pack("warning-24.png", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
 	. $corps
 	.  _T('info_recommencer')
 	.  "</span>\n"
@@ -128,7 +128,7 @@ function apparait_auteur_infos($id_auteur, $auteur) {
 	}
 
 	return 
-		debut_cadre_enfonce("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
+		debut_cadre_enfonce("messagerie-24.png", true, "", _T('info_liste_redacteurs_connectes'))
 		. "\n<div>"
 		. _T('texte_auteur_messagerie')
 		. "</div>"
@@ -159,7 +159,7 @@ function legender_auteur_voir($auteur) {
 
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
 		$h = "<a\nhref='$h'>$clic</a>";
-		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
+		$res .= icone_inline($clic, $h, "auteur-24.gif", "edit.gif", $spip_lang_right);
 
 		$res .= http_script("
 		var intitule_bouton = "._q($retour).";

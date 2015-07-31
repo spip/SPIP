@@ -104,7 +104,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			.  "<br /><span class='spip_xx-large'>"
 			.  $id_mot
 			.  '</span></div>';
-			$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false, false);
+			$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.png', false, false);
 			$out .= fin_boite_info(true);
 			
 			// Logos du mot-clef
@@ -120,12 +120,12 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$res ='';
 		
 		if ($id_groupe AND autoriser('modifier','groupemots',$id_groupe)) {
-			$res = icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", false)
-			  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
+			$res = icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.png", "edit.gif", false)
+			  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-24.png",  "creer.gif", false);
 		}
 
 	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))
-	.  bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false))
+	.  bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-24.png", "", false))
 	.  creer_colonne_droite('',true)
 	.  pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))
 	.  debut_droite('',true);
@@ -133,9 +133,9 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	
 	// --- Voir le mot ----
 	
-	$out .= debut_cadre_relief("mot-cle-24.gif",true,'','','mot-voir',$editer?'none':'');
+	$out .= debut_cadre_relief("mot-24.png",true,'','','mot-voir',$editer?'none':'');
 	if ($flag_editable)
-		$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
+		$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-24.png", "",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
 	$out .= gros_titre(sinon($titre_mot,_T('texte_nouveau_mot')),'',false);
 	$out .= "<div class='nettoyeur'></div>";
 	
@@ -202,7 +202,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	if ($autoriser_editer){
 		$out .= "<div id='mot-editer'".($editer?"":" class='none'").'>';
 		$contexte = array(
-			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot,false,true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
+			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot,false,true), "mot-24.png", "",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
 			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot,'&',true),
 			'titre'=>sinon($titre_mot,$titre),
 			'new'=>$new == "oui"?$new:$id_mot,

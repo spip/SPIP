@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/boutons');
 
 function inc_icone_renommer_dist($fond,$fonction){
-
 	$size = 24;
 	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
 		$size = $match[1];
@@ -47,21 +46,27 @@ function inc_icone_renommer_dist($fond,$fonction){
 			AND file_exists($dir.'/'.$fr))
 			$type = "$type-rtl";
 
-		$action = "";
-		if ($fonction=="supprimer.gif"){
+		$action = $fonction;
+		if ($action=="supprimer.gif"){
 			$action = "del";
 		}
-		elseif ($fonction=="creer.gif"){
+		elseif ($action=="creer.gif"){
 			$action = "new";
 		}
-		elseif ($fonction=="edit.gif"){
+		elseif ($action=="edit.gif"){
 			$action = "edit";
 		}
-		if ($action
-			AND $fa = "$type-$action-$size.png"
+		if (!in_array($action,array('del','new','edit')))
+			$action = "";
+		if ($action){
+			if ($fa = "$type-$action-$size.png"
 			AND file_exists($dir.'/'.$fa)){
-			$fond = $dir .'/'. $fa;
-			$fonction = "";
+				$fond = $dir .'/'. $fa;
+				$fonction = "";
+			}
+			else {
+				$fonction = "$action-$size.png";
+			}
 		}
 		// c'est bon !
 		return array($fond,$fonction);

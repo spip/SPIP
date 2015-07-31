@@ -50,7 +50,7 @@ function exec_convert_utf8_dist() {
 		$commentaire = _T('utf8_convert_avertissement',
 			array('orig' => $charset_orig,'charset' => 'utf-8'));
 		$commentaire .=  "<small>"
-		. http_img_pack('warning.gif', _T('info_avertissement'), "style='width: 48px; height: 48px; float: right;margin: 10px;'");
+		. http_img_pack(chemin_image("warning-48.png"), _T('info_avertissement'), "style='float: right;margin: 10px;'");
 		$commentaire .= _T('utf8_convert_backup', array('charset' => 'utf-8'))
 		."</small>";
 		$commentaire .= '<br />'._T('utf8_convert_timeout');

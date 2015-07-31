@@ -285,7 +285,7 @@ function liste_articles_bloques()
 		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
 		if (count($articles_ouverts)) {
 			$res .=
-				debut_cadre('bandeau-rubriques',"article-24.gif",'',_T('info_cours_edition'))
+				debut_cadre('bandeau-rubriques',"article-24.png",'',_T('info_cours_edition'))
 				. "\n<div class='plan-articles-bloques'>";
 			foreach ($articles_ouverts as $row) {
 				$ze_article = $row['id_article'];
@@ -405,15 +405,15 @@ function debloquer_article($arg, $texte) {
 	  attribut_html($texte) .
 	  "\">"
 	  . ($arg == 'tous' ? "$texte&nbsp;" : '')
-	  . http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
-			"width='7' height='7' ") .
+	  . http_img_pack(chemin_image('supprimer-8.png'), ($arg=='tous' ? "" : "X"),
+			"") .
 	  "</a>";
 }
 
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true, $inline=true) {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.png', $af = true, $inline=true) {
 
 	$en_ligne = $message = '';
 	switch ($type) {
@@ -463,8 +463,8 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	$h = generer_url_action('redirect', "type=$type&id=$id&var_mode=$en_ligne");
 
 	return $inline  
-	  ? icone_inline($message, $h, $image, "rien.gif", $GLOBALS['spip_lang_left'])
-	: icone_horizontale($message, $h, $image, "rien.gif",$af);
+	  ? icone_inline($message, $h, $image, "", $GLOBALS['spip_lang_left'])
+	: icone_horizontale($message, $h, $image, "",$af);
 
 }
 

@@ -141,7 +141,7 @@ function action_charger_plugin_dist() {
 				$retour = "<img src='".$image2."' style='float:right;' />"
 					. $retour;
 			} else 
-				$retour = "<img src='".find_in_path('images/plugin-24.gif')."' style='float:right;' />"
+				$retour = "<img src='".chemin_image('plugin-24.png')."' style='float:right;' />"
 					. $retour;
 
 			if (_request('extract')) {

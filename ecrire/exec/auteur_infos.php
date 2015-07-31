@@ -102,7 +102,7 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 			      );
 	echo debut_droite('', true);
 
-	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo debut_cadre_relief("auteur-24.png", true,'','','auteur-voir');
 
 	// $fiche est vide si on demande par exemple
 	// a creer un auteur alors que c'est interdit

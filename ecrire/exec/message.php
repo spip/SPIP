@@ -144,7 +144,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 		. "\n</div>";
 	  }
 	$bouton = bouton_block_depliable(_T('info_nombre_partcipants'),true,"auteurs,ajouter_auteur");
-	echo debut_cadre_enfonce("redacteurs-24.gif", true, '', $bouton, 'participants');
+	echo debut_cadre_enfonce("auteur-24.png", true, '', $bouton, 'participants');
 
 	//
 	// Liste des participants
@@ -219,7 +219,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// affichage des caracteristiques du message
 
 	echo "<div style='border: 1px solid $la_couleur; background-color: $fond; padding: 5px;'>"; // debut cadre de couleur
-	//echo debut_cadre_relief("messagerie-24.gif", true);
+	//echo debut_cadre_relief("messagerie-24.png", true);
 	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	echo "<tr><td>"; # uniques
 
@@ -263,7 +263,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	    echo "<p style='color: #666666; text-align: right;' class='verdana1 spip_small'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
 	  } else {
 	    echo "\n<div class='centered'>";
-	    echo icone_inline(_T('icone_envoyer_message'), redirige_action_auteur('editer_message', "$id_message/publie", "message","id_message=$id_message"), "messagerie-24.gif", "creer.gif");
+	    echo icone_inline(_T('icone_envoyer_message'), redirige_action_auteur('editer_message', "$id_message/publie", "message","id_message=$id_message"), "messagerie-24.png", "creer.gif");
 	    echo "</div>";
 	  }
 	}
@@ -282,19 +282,19 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// bouton de suppression
 
 	if ($aut AND ($statut == 'redac' OR $type == 'pb') OR $aff) {
-	  echo icone_inline(_T('icone_supprimer_message'), redirige_action_auteur("editer_message","-$id_message", 'messagerie'), "messagerie-24.gif", "supprimer.gif", 'left');
+	  echo icone_inline(_T('icone_supprimer_message'), redirige_action_auteur("editer_message","-$id_message", 'messagerie'), "messagerie-24.png", "supprimer.gif", 'left');
 	}
 
 	// bouton retrait de la discussion
 
 	if ($statut == 'publie' AND $type == 'normal') {
-	  echo icone_inline(_T('icone_arret_discussion'), redirige_action_auteur("editer_message","$id_message/-$connect_id_auteur", 'messagerie', "id_message=$id_message"), "messagerie-24.gif", "supprimer.gif", 'left');
+	  echo icone_inline(_T('icone_arret_discussion'), redirige_action_auteur("editer_message","$id_message/-$connect_id_auteur", 'messagerie', "id_message=$id_message"), "messagerie-24.png", "supprimer.gif", 'left');
 	}
 
 	// bouton modifier ce message
 
 	if ($aut OR $aff) {
-	  echo icone_inline(_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.gif", "edit.gif", 'right');
+	  echo icone_inline(_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.png", "edit.gif", 'right');
 	}
 	echo "</td></tr></table>";
 }

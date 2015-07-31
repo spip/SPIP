@@ -278,7 +278,7 @@ function afficher_plus($lien) {
 
 	if ($spip_display != 4) {
 			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
-			  http_img_pack("plus.gif", "+", "") ."</a>";
+			  http_img_pack(chemin_image("plus-info-16.png"), "+", "") ."</a>";
 	}
 }
 

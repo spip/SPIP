@@ -101,7 +101,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	echo $meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
 	/* raccourcis ont disparu */
-	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", 0));
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.png","creer.gif", 0));
 
 	$actions = $flag_editable
 		? icone_inline(
@@ -109,7 +109,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 			!$modif ? _T('icone_modifier_breve')
 				: _T('texte_travail_article', $modif),
 			generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"),
-			!$modif ? "breve-24.gif" : "warning-24.gif",
+			!$modif ? "breve-24.png" : "warning-24.png",
 			!$modif ? "edit.gif" : '',
 			$GLOBALS['spip_lang_right']
 			)
@@ -195,7 +195,7 @@ function langue_breve($id_breve, $row){
 
 	$res = "";
 	#$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
-	$res .= debut_cadre_enfonce('langues-24.gif',true/*,'',$bouton*/);
+	$res .= debut_cadre_enfonce('langue-24.png',true/*,'',$bouton*/);
 
 	#$res .= debut_block_depliable(false,'languesbreve');
 	$res .= "<div class='langue'>";
@@ -232,8 +232,8 @@ function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 	$form = redirige_action_post('editer_breve', $id_breve, 'breves_voir', "id_breve=$id_breve", $form, " class='submit_plongeur'"	);
 
 
-	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
-	else $logo = "secteur-24.gif";
+	if ($id_rubrique == 0) $logo = "racine-24.png";
+	else $logo = "secteur-24.png";
 
 	return
 		debut_cadre_couleur($logo, true, "",_T('entree_interieur_rubrique').$aider ("brevesrub"))

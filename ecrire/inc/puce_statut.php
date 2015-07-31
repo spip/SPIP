@@ -18,12 +18,12 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 	OR function_exists($f = "puce_statut_${type}_dist"))
 		return $f($id_objet, $statut, $id_rubrique, $type, $ajax);
 	else
-		return "<img src='" . chemin_image("$type-24.gif") . "' alt='' />";
+		return "<img src='" . chemin_image("$type-24.png") . "' alt='' />";
 }
 
 // http://doc.spip.org/@puce_statut_document_dist
 function puce_statut_document_dist($id, $statut, $id_rubrique, $type, $ajax='') {
-	return "<img src='" . chemin_image("attachment.gif") . "' alt=''  />";
+	return "<img src='" . chemin_image("attachment-16.png") . "' alt=''  />";
 }
 
 // http://doc.spip.org/@puce_statut_auteur_dist
@@ -62,9 +62,9 @@ function puce_statut_auteur_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 	$alt = $titre_des_statuts[$index];
 
 	if ($type != 'auteur') {
-	  $img2 = "croix-rouge.gif";
+	  $img2 = chemin_image('del-16.png');
 	  $titre = _T('titre_image_redacteur');
-	  $fond = http_style_background($img2, 'top right no-repeat; padding-right: 4px');
+	  $fond = http_style_background($img2, 'top left no-repeat;');
 	} else {$fond = ''; $titre = $alt;}
 	  
 	return http_img_pack($img, $alt, $fond, $titre);
@@ -79,13 +79,13 @@ function bonhomme_statut($row) {
 
 // http://doc.spip.org/@puce_statut_mot_dist
 function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='') {
-	return "<img src='" . chemin_image('petite-cle.gif') . "' alt='' />";
+	return http_img_pack(chemin_image('mot-16.png'), "");
 }
 
 // http://doc.spip.org/@puce_statut_rubrique_dist
 function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 
-	return "<img src='" . chemin_image('rubrique-12.gif') . "' alt='' />";
+	return "<img src='" . chemin_image('rubrique-12.png') . "' alt='' />";
 }
 
 // http://doc.spip.org/@puce_statut_article_dist

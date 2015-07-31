@@ -85,7 +85,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 
 	if ($points) {
 		arsort($points);
-		$style = " style='background-image: url(" . chemin_image('secteur-12.gif') . ")'";
+		$style = " style='background-image: url(" . chemin_image('secteur-12.png') . ")'";
 		foreach($rub as $k => $v) {
 			$rub[$k]['atts'] = ($v["id_parent"] ? $style : '')
 			. " class='arial11 petite-rubrique'";

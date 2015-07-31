@@ -198,7 +198,7 @@ function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 	} else {
 
 		$menu =  "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
-			. chemin_image("rubrique-12.gif")
+			. chemin_image("rubrique-12.png")
 			. ")'>"
 			. $restreint
 			. "</ul>\n";

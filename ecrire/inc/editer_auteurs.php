@@ -67,7 +67,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$reponse .="<div style='width: 200px;'>"
-			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
+			. icone_horizontale($clic, $legende, "auteur-24.png", "creer.gif", false)
 			. "</div> ";
 
 			$bouton_creer_auteur = false;
@@ -95,7 +95,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
-			$res = icone_horizontale_display($clic, $legende, "redacteurs-24.gif", "creer.gif", false);
+			$res = icone_horizontale_display($clic, $legende, "auteur-24.png", "creer.gif", false);
 		}
 
 		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
@@ -106,7 +106,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 	$idom = "auteurs_$type" . "_$id";
 	$bouton = bouton_block_depliable($titre_boite,$flag ?($flag === 'ajax'):-1,$idom);
-	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+	$res = debut_cadre_enfonce("auteur-24.png", true, "", $bouton)
 	. $reponse
 	. debut_block_depliable($flag === 'ajax',$idom)
 	. $res
@@ -203,7 +203,7 @@ function afficher_auteurs_objet($type, $id, $edit, $cond, $script, $arg_ajax)
 	if (!$formater = charger_fonction("formater_auteur_$type", 'inc',true))
 		$formater = charger_fonction('formater_auteur', 'inc');
 
-	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'"));
+	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack(chemin_image('supprimer-8.png'), "X", " class='puce' style='vertical-align: bottom;'"));
 
 	$styles = array(array('arial11', 14), array('arial2'), array('arial11'), array('arial11'), array('arial11'), array('arial1'));
 

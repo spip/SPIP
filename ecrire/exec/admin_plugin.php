@@ -82,7 +82,7 @@ function exec_admin_plugin_dist($retour='') {
 		$plugins_interessants = array();
 
 	if ($lpf) {
-		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
+		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_T('plugins_liste'),
 		'liste_plugins');
 		echo _T('texte_presente_plugin');
 

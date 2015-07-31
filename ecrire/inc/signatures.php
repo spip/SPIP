@@ -69,21 +69,21 @@ function signatures_edit($script, $id, $arg, $row) {
 		if  ($statut=="poubelle"){
 			$res = icone_inline (_T('icone_valider_signature'),
 				$retour_s,
-				"petition-interne-24.gif", 
+				"petition-24.png",
 				"creer.gif",
 				"right",
 				false);
 		} else {
 			$res = icone_inline (_T('icone_supprimer_signature'),
 				$retour_a,
-				"petition-interne-24.gif", 
+				"petition-24.png",
 				"supprimer.gif",
 				"right",
 				false);
 			if ($statut<>"publie") {
 				$res .= icone_inline (_T('icone_relancer_signataire'),
 				$retour_s,
-				"petition-interne-24.gif", 
+				"petition-24.png",
 				"creer.gif",
 				"right",
 				false);

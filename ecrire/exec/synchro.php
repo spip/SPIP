@@ -19,8 +19,8 @@ include_spip('inc/acces'); // pour low_sec (iCal)
 function afficher_liens_calendrier($lien, $icone, $texte) {
 
 	global $spip_display;
-	$charge = icone_horizontale_display(_T('ical_methode_http'), $lien, "calendrier-24.gif","", false);
-	$abonne = icone_horizontale_display (_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "calendrier-24.gif", "", false);
+	$charge = icone_horizontale_display(_T('ical_methode_http'), $lien, "agenda-24.png","", false);
+	$abonne = icone_horizontale_display (_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "agenda-24.png", "", false);
 
 	echo debut_cadre_enfonce($icone, true);
 	echo $texte;
@@ -73,7 +73,7 @@ function exec_synchro_dist()
 ///
 
 	if ($GLOBALS['meta']["suivi_edito"] == "oui" AND strlen($GLOBALS['meta']["adresse_suivi"]) > 3 AND strlen($adresse_suivi_inscription) > 3) {
-		echo debut_cadre_enfonce("racine-site-24.gif", true, "", _T('ical_titre_mailing'));
+		echo debut_cadre_enfonce("racine-24.png", true, "", _T('ical_titre_mailing'));
 		echo _T('info_config_suivi_explication'), 
 		propre("<b style='text-align: center'>[->$adresse_suivi_inscription]</b>");
 		echo fin_cadre_enfonce(true);
@@ -84,7 +84,7 @@ function exec_synchro_dist()
 /// Suivi par agenda iCal (taches + rendez-vous)
 ///
 
-	echo debut_cadre_relief("agenda-24.gif", true, "", _T('icone_calendrier'));
+	echo debut_cadre_relief("agenda-24.png", true, "", _T('icone_calendrier'));
 
 	echo _T('calendrier_synchro');
 	echo '<p>'._T('ical_info_calendrier').'</p>';
@@ -93,7 +93,7 @@ function exec_synchro_dist()
 
 	afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 
-	afficher_liens_calendrier(generer_url_public("ical_prive", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
+	afficher_liens_calendrier(generer_url_public("ical_prive", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.png',  _T('ical_texte_prive'));
 
 	echo fin_cadre_relief(true);
 
@@ -101,7 +101,7 @@ function exec_synchro_dist()
 /// Suivi par RSS
 ///
 
-	echo debut_cadre_relief("site-24.gif", true, "", _T('ical_titre_rss'));
+	echo debut_cadre_relief("site-24.png", true, "", _T('ical_titre_rss'));
 
 	echo _T('ical_texte_rss');
 

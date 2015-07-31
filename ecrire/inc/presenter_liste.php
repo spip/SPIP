@@ -114,7 +114,7 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 	  . "<a href='$script#a$ancre' class='plus'"
 	  . (!$url ? '' : generer_onclic_ajax($url, $idom,-1))
 	  . "><img title=\"$l\" alt=\"$l\"\nsrc=\""
-	  . chemin_image("plus.gif")
+	  . chemin_image("plus-16.png")
 	  . "\" /></a></div>\n";
 }
 

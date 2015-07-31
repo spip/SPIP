@@ -64,7 +64,7 @@ function exec_admin_tech_dist()
 		$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
 
 		echo
-			'<img src="' .  chemin_image('warning.gif') . '" alt="',
+			'<img src="' . chemin_image("warning-48.png") . '" alt="',
 			_T('info_avertissement'),
 			"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
 			_T('texte_admin_effacer_01'),

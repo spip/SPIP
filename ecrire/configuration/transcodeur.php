@@ -46,7 +46,7 @@ function configuration_transcodeur_dist()
 				'',
 				$res);
 
-	$res = debut_cadre_relief("breve-24.gif", true, "", _T('info_jeu_caractere')) .
+	$res = debut_cadre_relief("breve-24.png", true, "", _T('info_jeu_caractere')) .
 	  $res .
 	  fin_cadre_relief(true);
 

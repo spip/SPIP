@@ -254,7 +254,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 		$nav .= "</td></tr></table>\n";
 	}
 
-	return 	debut_cadre('liste','auteur-24.gif','','','lesauteurs')
+	return 	debut_cadre('liste','auteur-24.png','','','lesauteurs')
 	. "\n<br /><table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>\n"
 	. $res
 	. $auteurs

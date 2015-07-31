@@ -123,7 +123,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	changer_typo($row['lang']);
 
 	$actions =
-	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
+	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.png", "edit.gif",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>".
@@ -258,7 +258,7 @@ function boite_article_virtuel($id_article, $virtuel)
 
 	$virtualiser = charger_fonction('virtualiser', 'inc');
 
-	return cadre_depliable("site-24.gif",
+	return cadre_depliable("site-24.png",
 		$invite,
 		$virtuel,
 		$virtualiser($id_article, $virtuel, "articles", "id_article=$id_article"),
@@ -273,7 +273,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 		. "<span class='arial1 spip_small'>$mode</span>"
 		. aide("artmodif");
 	}
-	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align);
+	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.png", "edit.gif", $align);
 }
 
 // http://doc.spip.org/@afficher_corps_articles
