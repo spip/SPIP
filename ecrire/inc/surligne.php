@@ -56,7 +56,7 @@ function surligner_mots($page) {
       include_spip('inc/filtres');
       $script = "
       <script type='text/javascript' src='".url_absolue(find_in_path('javascript/SearchHighlight.js'))."'></script>
-      <script type='text/javascript'>
+      <script type='text/javascript'>/*<![CDATA[*/
       if (window.jQuery)
         (function(\$){\$(function(){
           \$(document).SearchHighlight({
@@ -72,7 +72,7 @@ function surligner_mots($page) {
           })
         });
       })(jQuery);
-      </script>
+      /*]]>*/</script>
       ";
       // on l'insere juste avant </head>, sinon tout en bas
        if (is_null($l = strpos($page,'</head>')))
