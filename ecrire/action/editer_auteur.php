@@ -170,10 +170,10 @@ function instituer_auteur($id_auteur, $c) {
 
 	
 	$champs = array();
-	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
+	$statut = $statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
 	if (isset($c['statut'])
-	  AND autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => '?')))
+	AND (($statut_ancien == 'nouveau') OR autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => '?'))))
 		$statut = $champs['statut'] = $c['statut'];
 
 	// Restreindre avant de declarer l'auteur
