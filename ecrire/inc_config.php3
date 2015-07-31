@@ -53,7 +53,7 @@ function init_config() {
 		'charset' => 'iso-8859-1',
 		
 		'secu_stricte' => 'non',
-		'creer_htpasswd' => 'oui'
+		'creer_htpasswd' => 'non'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
