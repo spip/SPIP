@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'signatures_petition' => 'Zifre',
-'site_realise_avec_spip' => 'Site fattu c&ugrave; SPIP',
+'site_realise_avec_spip' => 'Situ fattu c&ugrave; SPIP',
 'sites_web' => 'Siti Web',
 'sous_rubriques' => 'Sottur&ugrave;bbriche',
 'spam' => 'Spam',
