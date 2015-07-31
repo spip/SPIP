@@ -90,7 +90,7 @@ function spip_pg_query($query, $serveur='')
 }
 
 // Alter en PG ne traite pas les index
-// http://doc.spip.org/@spip_pg_selectdb
+// http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='') {
 
 	if (!preg_match('/^\s*TABLE\s+(\w+)\s+(ADD|DROP)\s+(UNIQUE\s*|\s+)(INDEX|\w*\s*KEY)\s*(\w+)(.*)$/', $query, $r))
