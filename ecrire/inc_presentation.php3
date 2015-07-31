@@ -984,14 +984,20 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 		}
 		else {
 			onglet_relief_inter();
+			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" height='40' valign='middle'>\n";
+			echo "<table border='0' cellspacing='0' cellpadding='0'><tr>\n";
+
 			if (strlen($icone)>3){
-				echo "\n<td class='reliefblanc' height=40 valign='middle'>";
+				echo "\n<td height=40 valign='middle'>";
 				echo "<a href='$lien' class='icone'><img src='img_pack/$icone' border=0></a>";
 				echo "</td>";
 			}
-			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
-			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>$texte</b></font></a> &nbsp;";
+			echo "\n<td height=40 valign='middle'>";
+			echo "<a href='$lien' class='icone'>&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>$texte</b></font></a> &nbsp;";
 			echo "</td>";
+
+			echo "\n</tr></table>";
+			echo "\n</td>\n";
 		}
 	}
 }
@@ -1050,17 +1056,17 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	if ($spip_display == 1){
 		$hauteur = 20;
 		$largeur = 80;
-		$alt = " alt=\"o\"";
 	}
 	else if ($spip_display == 3){
 		$hauteur = 50;
 		$largeur = 52;
-		$title = " title = \"$texte\" ";
-		$alt = " alt=\"$texte\"";
+		$title = " title=\"$texte\" ";
+		$alt = " alt=\"$texte\" ";
 	}
 	else {
 		$hauteur = 80;
 		$largeur = 80;
+		$alt = " alt=\"o\" ";
 	}
 
 	if (eregi("^javascript:",$lien)){
@@ -1103,7 +1109,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1) {
-			echo "$a_href<img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
+			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
 			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
@@ -1120,17 +1126,17 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	if ($spip_display == 1){
 		$hauteur = 20;
 		$largeur = 80;
-		$alt = " alt=\"o\"";
 	}
 	else if ($spip_display == 3){
 		$hauteur = 26;
 		$largeur = 28;
-		$title = " title = \"$texte\" ";
+		$title = " title=\"$texte\"";
 		$alt = " alt=\"$texte\"";
 	}
 	else {
 		$hauteur = 70;
 		$largeur = 80;
+		$alt = " alt=\"o\"";
 	}
 
 	if ($rubrique_icone == $rubrique){
@@ -1156,7 +1162,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond' $title width='24' height='24' border='0' align='middle'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
@@ -1692,34 +1698,36 @@ function debut_droite() {
 	global $options;
 	global $connect_id_auteur, $clean_link;
 
-	// liste des articles bloques
-	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
-	$result = spip_query($query);
-	$num_articles_ouverts = mysql_num_rows($result);
-	if ($num_articles_ouverts) {
-		echo "<p>";
-		debut_cadre_enfonce('warning-24.gif');
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-
-		if ($num_articles_ouverts == 1)
-			echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
-		else
-			echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
-		echo typo("avant une heure.").aide("artmodif");
-		while ($row = @mysql_fetch_array($result)) {
-			$ze_article = $row['id_article'];
-			$ze_titre = typo($row['titre']);
-			echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
-			// ne pas proposer de debloquer si c'est l'article en cours d'edition
-			if ($ze_article != $GLOBALS['id_article_bloque']) {
-				$lien = $clean_link;
-				$lien->addVar('debloquer_article', $ze_article);
-				echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+	if ($options == "avancees") {
+		// liste des articles bloques
+		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+		$result = spip_query($query);
+		$num_articles_ouverts = mysql_num_rows($result);
+		if ($num_articles_ouverts) {
+			echo "<p>";
+			debut_cadre_enfonce('warning-24.gif');
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	
+			if ($num_articles_ouverts == 1)
+				echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
+			else
+				echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
+			echo typo("avant une heure.").aide("artmodif");
+			while ($row = @mysql_fetch_array($result)) {
+				$ze_article = $row['id_article'];
+				$ze_titre = typo($row['titre']);
+				echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+				// ne pas proposer de debloquer si c'est l'article en cours d'edition
+				if ($ze_article != $GLOBALS['id_article_bloque']) {
+					$lien = $clean_link;
+					$lien->addVar('debloquer_article', $ze_article);
+					echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+				}
+				echo "</div>";
 			}
-			echo "</div>";
+	
+			fin_cadre_enfonce();
 		}
-
-		fin_cadre_enfonce();
 	}
 
 	echo '<br></font>&nbsp;</td><td width=50 rowspan=1>&nbsp;</td><td width=500 valign="top" rowspan=2><font face="Georgia,Garamond,Times,serif" size=3>';

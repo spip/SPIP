@@ -71,7 +71,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	}
 
 	$nom_url = strip_tags($kw_referer_host);
-	$title = htmlspecialchars("Go to ".$kw_referer);
+	$title = "Aller &agrave; ".$kw_referer;
 	if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
 
 	$buffer = "&nbsp;<a title=\"$title\" href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
