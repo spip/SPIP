@@ -391,8 +391,8 @@ function creer_contexte_de_modele($args) {
 				$contexte[$var] = $val;
 			} else {
 				$args = explode('=', $val);
-				if (count($args)==2)
-					$contexte[$args[0]] = $args[1];
+				if (count($args)>=2) // Flashvars=arg1=machin&arg2=truc genere plus de deux args
+					$contexte[$args[0]] = substr($val,strlen($args[0])+1);
 			}
 		}
 		else
