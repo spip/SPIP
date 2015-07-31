@@ -261,7 +261,6 @@ ecrire/inc_ajax.php3 -text
 ecrire/inc_articles.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
-ecrire/inc_connect.php3 -text
 ecrire/inc_controle_forum.php -text
 ecrire/inc_cookie.php -text
 ecrire/inc_headers.php -text
