@@ -965,6 +965,12 @@ function maj_base() {
 		maj_version(1.812);
 	}
 
+	// Mise a jour des types MIME
+	if ($version_installee < 1.813) {
+		# rien a faire car c'est creer_base() qui s'en charge
+		maj_version(1.813);
+	}
+
 	return true;
 }
 
