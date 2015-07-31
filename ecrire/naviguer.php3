@@ -319,32 +319,27 @@ debut_cadre_relief($ze_logo);
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 gros_titre($titre);
-
-
-if (strlen($descriptif) > 1) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
-	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<b>Descriptif :</b> ";
-	echo propre($descriptif);
-	echo "&nbsp; ";
-	echo "</font>";
-	echo "</div>";
-}
-
-
-
 echo "</td>";
-
-
-
 
 if ($coll > 0 AND $connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right'>";
+	echo "<td  align='right' valign='top'>";
 	icone("Modifier cette rubrique", "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
 	echo "</td>";
 }
-echo "</tr></table>\n";
+echo "</tr>\n";
+
+if (strlen($descriptif) > 1) {
+	echo "<tr><td>\n";
+	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
+	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+//	echo "<b>Descriptif :</b> ";
+	echo propre($descriptif."~");
+	echo "</font>";
+	echo "</div></td></tr>\n";
+}
+
+echo "</table>\n";
 
 
 /// Mots-cles
@@ -354,7 +349,6 @@ if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($co
 }
 
 
-
 if (strlen($texte) > 1) {
 	echo "\n<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><div align='justify'>";
 	echo justifier(propre($texte));
@@ -362,11 +356,6 @@ if (strlen($texte) > 1) {
 }
 
 fin_cadre_relief();
-
-
-
-
-
 
 
 echo "<DIV align=left>";

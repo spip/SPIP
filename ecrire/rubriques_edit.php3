@@ -134,7 +134,11 @@ gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
 
-echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
+if ($id_rubrique>0)
+	echo "<FORM ACTION='naviguer.php3?coll=$id_rubrique' METHOD='post'>";
+else
+	echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
+
 echo "<INPUT TYPE='Hidden' NAME='coll' VALUE=\"$id_rubrique\">";
 if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
