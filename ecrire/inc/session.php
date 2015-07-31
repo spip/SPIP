@@ -65,15 +65,16 @@ function ajouter_session($auteur) {
 	$texte .= "?".">\n";
 
 	if (!ecrire_fichier($fichier_session, $texte)) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_test_dirs(_DIR_SESSIONS,true));
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
 	} else {
 		include_spip('inc/cookie');
 		spip_setcookie(
 			'spip_session',
 			$_COOKIE['spip_session'],
 			time() + 20 * _RENOUVELLE_ALEA
-		);
+			);
 		spip_log("ajoute session $fichier_session");
 		return $_COOKIE['spip_session'];
 	}

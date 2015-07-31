@@ -84,36 +84,49 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	AND !$ecrire_quand_meme)
 		return;
 
-	$gzip = (substr($fichier, -3) == '.gz');
-
 	#spip_timer('ecrire_fichier');
 
 	// verrouiller le fichier destination
-	if ($fp = @fopen($fichier, 'a'))
+	if ($fp = @fopen($fichier, 'a')) {
 		@flock($fp, LOCK_EX);
-	else
-		return false;
-
 	// ecrire les donnees, compressees le cas echeant
 	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
 	// de le recreer si le locker qui nous precede l'avait supprime...)
-	if ($gzip) $contenu = gzencode($contenu);
-	if ($truncate)
-		@ftruncate($fp,0);
-	$s = @fputs($fp, $contenu, $a = strlen($contenu));
+		if (substr($fichier, -3) == '.gz')
+			$contenu = gzencode($contenu);
+		if ($truncate)
+			@ftruncate($fp,0);
+		$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
-	$ok = ($s == $a);
+		$ok = ($s == $a);
 
 	// liberer le verrou et fermer le fichier
-	@flock($fp, LOCK_UN);
-	@fclose($fp);
-	@chmod($fichier, _SPIP_CHMOD & 0666);
-	if (!$ok) {
-		spip_log("echec ecriture fichier $fichier");
-		@unlink($fichier);
+		@flock($fp, LOCK_UN);
+		@fclose($fp);
+		@chmod($fichier, _SPIP_CHMOD & 0666);
+		if ($ok) return $ok;
 	}
 
-	return $ok;
+	include_spip('inc/autoriser');
+	if (autoriser('chargerftp'))
+		raler_fichier($fichier);
+	@unlink($fichier);
+	return false;
+}
+
+function raler_fichier($fichier)
+{
+	include_spip('inc/minipres');
+	$dir = dirname($fichier);
+	echo minipres(_T('texte_inc_meta_2'), "<h4 style='color: red'>"
+		. _T('texte_inc_meta_1', array('fichier' => $fichier))
+		. " <a href='" . generer_test_dirs($dir) . "'>"
+		. _T('texte_inc_meta_2')
+		. "</a> "
+		. _T('texte_inc_meta_3',
+		     array('repertoire' => joli_repertoire($dir)))
+		. "</h4>\n");
+	exit;
 }
 
 //

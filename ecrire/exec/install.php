@@ -46,8 +46,7 @@ function install_fichier_connexion($nom, $texte)
 	. $texte 
 	. "?".">";
 
-	if (!ecrire_fichier($nom, $texte))
-		redirige_par_entete(generer_url_ecrire('install'));
+	ecrire_fichier($nom, $texte);
 }
 
 //
