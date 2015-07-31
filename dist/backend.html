@@ -27,10 +27,8 @@
 
 	[<description>(#INTRODUCTION|texte_backend)</description>]
 
-	<B_mots>
-	<dc:subject><BOUCLE_mots(MOTS){id_article}{" "}>[(#TITRE|former_tag)]</BOUCLE_mots></dc:subject>
-	</B_mots>
-
+	<BOUCLE_mots(MOTS){id_article}>
+	<dc:subject>[(#TITRE|texte_backend)]</dc:subject></BOUCLE_mots>
 [(#REM)
 	Lorsque ce fichier backend est appele avec un parametre ?full=1,
 	il diffuse aussi le texte integral de l'article, ce qui permet une
