@@ -43,13 +43,8 @@ function base_upgrade_dist($titre='', $reprise='')
 		$res = maj_base();
 
 		if ($res) {
-			if (!is_array($res))
-				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
-			else {
-				include_spip('inc/minipres');
-				echo minipres(_T('avis_operation_echec') . ' ' . join(' ', $res));
-				exit;
-			}
+			// on arrete tout ici !
+			exit;
 		}
 	}
 	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config","maj."._LOG_INFO_IMPORTANTE);
@@ -124,7 +119,16 @@ function maj_base($version_cible = 0) {
 
 	include_spip('maj/svn10000');
 	ksort($GLOBALS['maj']);
-	return maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta', '', true);
+	$res = maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta', '', true);
+	if ($res) {
+		if (!is_array($res))
+			spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
+		else {
+			echo _T('avis_operation_echec') . ' ' . join(' ', $res);
+			echo install_fin_html();
+		}
+	}
+	return $res;
 }
 
 /**
@@ -163,14 +167,12 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 		include_spip('inc/plugin'); // pour spip_version_compare
 		uksort($maj,'spip_version_compare');
 
-		include_spip('base/create');
-		include_spip('base/abstract_sql');
 		$res = maj_while($current_version, $version_cible, $maj, $nom_meta_base_version, $table_meta, generer_url_ecrire('admin_plugin'));
 		if ($res) {
 			if (!is_array($res))
 				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
 			else {
-				echo _T('avis_operation_echec') . ' ' . join(' ', $res);
+				echo "<p>"._T('avis_operation_echec') . ' ' . join(' ', $res)."</p>";
 			}
 		}
 	}
@@ -263,6 +265,9 @@ define('_UPGRADE_TIME_OUT', 20);
  */
 function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect='', $debut_page = false)
 {
+	# inclusions pour que les procedures d'upgrade disposent des fonctions de base
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	$trouver_table = charger_fonction('trouver_table','base');
 	include_spip('inc/plugin'); // pour spip_version_compare
 	$n = 0;
@@ -281,6 +286,8 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 			echo "MAJ $v";
 			$etape = serie_alter($v, $maj[$v], $meta, $table, $redirect);
 			$trouver_table(''); // vider le cache des descriptions de table
+			# echec sur une etape en cours ?
+			# on sort
 			if ($etape) return array($v, $etape);
 			$n = time() - $time;
 			spip_log( "$table $meta: $v en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
@@ -344,8 +351,15 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect=''
 				ecrire_meta($meta2, $i+1, 'non', $table);
 				spip_log( "$meta2: ok", 'maj.'._LOG_INFO_IMPORTANTE);
 			}
-			else
+			else {
+				if (!is_array($r))
+					spip_log("maj $i format incorrect","maj."._LOG_ERREUR);
+				else
+					spip_log("maj $i fonction $f non definie","maj."._LOG_ERREUR);
+				// en cas d'erreur serieuse, on s'arrete
+				// mais on permet de passer par dessus en rechargeant la page.
 				return $i+1;
+			}
 		}
 	}
 	effacer_meta($meta2, $table);
