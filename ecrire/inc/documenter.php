@@ -25,7 +25,6 @@ function inc_documenter_dist(
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
-	global $spip_lang_left, $spip_lang_right;
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
@@ -59,6 +58,8 @@ function inc_documenter_dist(
 		propre(join(" ",$r));
 	}*/
 
+	$show_docs = explode(',', _request('show_docs'));
+
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
 
@@ -70,7 +71,7 @@ function inc_documenter_dist(
 
 		$vu = ($document['vu']=='oui') ? ' vu':'';
 
-		$deplier = in_array($id_document, explode(',', _request('show_docs')));
+		$deplier = in_array($id_document, $show_docs);
 
 		if (!$case)
 			$res .= "<tr>";

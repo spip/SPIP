@@ -42,7 +42,7 @@ function definir_puce() {
 	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
 	// celle du texte) et public (spip_lang est la langue du texte)
 
-	$dir = _DIR_RESTREINT ? lang_dir() : $GLOBALS['lang_dir'];
+	$dir = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
 	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
 
 	if (!isset($les_puces[$p])) {
@@ -715,6 +715,8 @@ function traiter_tableau($bloc) {
 	// Decouper le tableau en lignes
 	preg_match_all(',([|].*)[|]\n,UmsS', $bloc, $regs, PREG_PATTERN_ORDER);
 	$lignes = array();
+	$debut_table = $summary = '';
+	$l = 0;
 
 	// Traiter chaque ligne
 	foreach ($regs[1] as $ligne) {
@@ -780,6 +782,7 @@ function traiter_tableau($bloc) {
 
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
+	$html = '';
 	for($l=count($lignes)-1; $l>=0; $l--) {
 		$cols= $lignes[$l];
 		$colspan=1;
