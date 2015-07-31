@@ -41,6 +41,8 @@ function parametres_css_prive(){
 	$v = "&v=".$GLOBALS['spip_version_code'];
 
 	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
+
+	$skin = "&skins=".implode(',',get_skins());
 	
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
@@ -48,7 +50,8 @@ function parametres_css_prive(){
 		: 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $v . $p . $ie ;
+	$recalcul = _request('var_mode')=='recalcul' ? '&var_mode=recalcul':'';
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $skin . $v . $p . $ie . $recalcul ;
 }
 
 
