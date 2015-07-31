@@ -1180,13 +1180,13 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 	if ($nom_site) {
 		if (strlen($url_site) > 10)
-			$res .= "\n<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
+			$res .= "\n<div style='text-align: left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
 		else $res .= "<b>$nom_site</b>";
 	}
 
 	if (!$controle_id_article) {
 	  	$tm = rawurlencode($titre);
-		$res .= "\n<div align='right' class='verdana1'>"
+		$res .= "\n<div style='text-align: right' class='verdana1'>"
 		. "<b><a href='"
 		  . generer_url_ecrire("forum_envoi", "id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
 		. "'>"
@@ -1425,7 +1425,12 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 }
 
 // http://doc.spip.org/@icone
-function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
+function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
+	$retour = "<table style='padding-top: 20px; width: 100%'><tr><td class='icone36'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</td></tr></table>";
+	if ($echo) echo $retour; else return $retour;
+}
+
+function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
@@ -1466,25 +1471,23 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		}
 	} else $icone = '';
 
-	if ($spip_display != 3)	$icone .= "<span>$texte</span>";
-
 	// cas d'ajax_action_auteur: faut defaire le boulot 
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
 		list($x,$lien,$atts,$texte)= $r;
 	else $atts = '';
 	
-	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
-	. ($align ? " align='$align'" : '')
-	. ">\n<tr><td class='$style'><a"
+	if ($align) $align = "float: $align; ";
+	$icone = "\n<a style='width: 72px;$align' class='$style'"
 	. $atts
 	. "\nhref='"
 	. $lien
 	. "'>"
 	. $icone
-	. "</a></td></tr></table>\n";
+	. (($spip_display == 3)	? '' : "<span>$texte</span>")
+	. "</a>\n";
 
-	if ($afficher == 'oui')	echo $icone; else return $icone;
+	return $icone;
 }
 
 // http://doc.spip.org/@icone_horizontale
@@ -1789,7 +1792,7 @@ function debloquer_article($arg, $texte) {
 	  "\">"
 	  . ($arg == 'tous' ? "$texte&nbsp;" : '')
 	  . http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
-			"width='7' height='7' align='baseline'") .
+			"width='7' height='7' ") .
 	  "</a>";
 }
 
@@ -2062,8 +2065,8 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "'>"
 	. (!$bouton ? ''
 		 : (!$id_rubrique
-		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",'', false)
-		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",'',false)))
+		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right, false)
+		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right,false)))
 	. "</div></td></tr></table>";
 
 	if ($return) return $res; else echo $res;

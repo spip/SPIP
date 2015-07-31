@@ -139,7 +139,7 @@ function exec_naviguer_dist()
 
 ////// Supprimer cette rubrique (si vide)
 
-	bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
+	echo bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
 	echo fin_gauche(), fin_page();
 }
@@ -257,7 +257,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 // http://doc.spip.org/@contenu_naviguer
 function contenu_naviguer($id_rubrique, $id_parent) {
 
-	global  $connect_toutes_rubriques, $spip_lang_right;
+	global  $connect_toutes_rubriques, $spip_lang_right, $spip_lang_left;
 
 //
 // Verifier les boucles a mettre en relief
@@ -342,9 +342,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	  $res .= afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
 
 	if (autoriser('creerarticledans','rubrique',$id_rubrique)){
-	  $res .= "<div align='$spip_lang_right'>"
-	  . icone(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif", '', 'non')
-	 . "</div>";
+	  $res .= icone(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif", $spip_lang_right, 'non');
 	}
 
 //// Les breves
@@ -353,9 +351,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 
 	if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))){
-	  $res .= "<br /><div align='$spip_lang_right'>"
-	  . icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif",'','non')
-	  . "</div>";
+	  $res .= icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif",$spip_lang_right, 'non');
 	}
 
 //// Les sites references
@@ -366,10 +362,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 		if ($id_rubrique > 0
 		AND (autoriser('creersitedans','rubrique',$id_rubrique))) {
-	
-		$res .= "<br /><div align='$spip_lang_right'>"
-		. icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif",'', 'non')
-		. "</div>";
+			$res .= icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif",$spip_lang_right, 'non');
 		}
 	}
 	return $res;
@@ -377,7 +370,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 // http://doc.spip.org/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
-	global $spip_lang_left;
+	global $spip_lang_left, $spip_lang_right;
 
 	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
 
@@ -389,12 +382,11 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	// eviter le formulaire upload qui se promene sur la page
 	// a cause des position:relative incompris de MSIE
 
-	  if (!($align = $GLOBALS['browser_name']=="MSIE")) {
-		$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
-		$align = " align='right'";
+	  if ($GLOBALS['browser_name']!="MSIE") {
+		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td width='50%' style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
 	  }
-	  $res = "<div$align>$res</div>";
-	      $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+
+	  $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
     $res .= <<<EOF
     <script type='text/javascript'>
     $(".form_upload").async_upload(async_upload_portfolio_documents);
@@ -424,9 +416,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 
   if ($id_rubrique > 0 AND $flag_editable) {
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
-	echo "<td  align='$spip_lang_right' valign='top'>";
-	icone(_T('icone_modifier_rubrique'), generer_url_ecrire("rubriques_edit","id_rubrique=$id_rubrique&retour=nav"), $logo, "edit.gif");
-	echo "</td>";
+	echo "<td  valign='top'>", icone_inline(_T('icone_modifier_rubrique'), generer_url_ecrire("rubriques_edit","id_rubrique=$id_rubrique&retour=nav"), $logo, "edit.gif", $spip_lang_right), "</td>";
 }
   echo "</tr>\n";
 
@@ -461,9 +451,7 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 
-		echo "<div align='center'>";
-		icone(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif");
-		echo "</div>";
+	  return "<br /><div class='centered'>" . icone_inline(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif") . "</div>";
 	}
 }
 

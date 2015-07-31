@@ -121,22 +121,25 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	}
 
 	$lien = str_replace('&amp;', '&', self()) . "#id$id_forum";
+	$boutons ='';
 	if ($suppression)
-	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", _DIR_RESTREINT_ABS . $lien),
+	  $boutons .= icone_inline(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", _DIR_RESTREINT_ABS . $lien),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
-	  $controle .= icone(_T('icone_valider_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", _DIR_RESTREINT_ABS . $lien),
+	  $boutons .= icone_inline(_T('icone_valider_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", _DIR_RESTREINT_ABS . $lien),
 			$logo,
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
 	  $dblret =  rawurlencode(_DIR_RESTREINT_ABS . $lien);
-	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true)),
+	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
 	}
+
+	if ($boutons) $controle .= "<div style='float:".$GLOBALS['spip_lang_right'] ."; width: 70%;'>". $boutons . "</div>";
 
 	// TODO: un bouton retablir l'original ?
 	if ($original) {

@@ -131,19 +131,18 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$res = '';
 
 	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
-	  spip_log  (" cherche $cherche_mot");
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
-		$res .= "<p>" . debut_boite_info(true);
+		$res .= "<br />" . debut_boite_info(true);
 		if (!$resultat) {
-			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => htmlspecialchars($cherche_mot)))."</b><br /></p>";
+			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => htmlspecialchars($cherche_mot)))."</b><br />";
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
 			$row = spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
-			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br /><ul>";
-			$res .= "<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>\n";
-			$res .= "</ul>";
+			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br />\n<ul>";
+			$res .= "\n<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>";
+			$res .= "\n</ul>";
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);
 
@@ -155,7 +154,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 		}
 */
 
-		$res .= fin_boite_info(true) . "<p>";
+		$res .= fin_boite_info(true) . "<br />";
 	  }
 	}
 	return array($res, $nouveaux_mots);
@@ -254,11 +253,10 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
-	$corps = "<select name='nouv_mot' onchange=\"$jscript1\""
+	$corps = "\n<select name='nouv_mot' onchange=\"$jscript1\""
 	. " class='fondl spip_xx-small' style='width:90px;'>"
 	. $s
-	. "</select>" 
-	. "<span >\n&nbsp;" ;
+	. "</select>\n&nbsp;" ;
 
 	$t =  _T('bouton_changer');
 
@@ -295,7 +293,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	} else $res = debut_block_invisible("lesmots");
 
 	if ($nombre_mots_associes > 3) {
-		$res .= "<div align='right' class='arial1'>"
+		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
 	}

@@ -147,10 +147,11 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	} else {
 		$image = '';
 	}
+
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
 		$image = "<img src='$fichier'\n\theight='$hauteur' width='$largeur' alt=' ' />";
-	}
+	} else $image = inserer_attribut($image, 'alt', ' ');
 
 	if (!$url)
 		return $image;
@@ -260,7 +261,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 	} else {
 		$align='center';
 	}
-	return "\n<div align='$align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
+	return "\n<div style='text-align: $align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
 }
 
 

@@ -35,9 +35,9 @@ function exec_articles_dist()
 
 		$res = debut_gauche('accueil',true)
 		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
-		. "<br /><br />"
-		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", 'center', false)
-		. "<br />"
+		  . "<br /><br /><div class='centered'>"
+		  . icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif")
+		. "</div>"
 		. $discuter($id_article, false,  _request('debut'))
 		. fin_gauche()
 ;
@@ -131,8 +131,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	return $res
 	. debut_cadre_relief('', true)
 	. titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
-	. "\n<div>&nbsp;</div>"
-	. "\n<div class='serif' align='$spip_lang_left'>"
+	. "\n<div style='margin-top: 10px' class='serif'>"
 
 	. $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 
@@ -153,9 +152,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra)
 
 	. (!$flag_editable ? ''
-	: ("\n<div align='$spip_lang_right'><br />"
-	.  bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "")
-	   . "</div>"))
+	:  bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right'))
 	. (($spip_display == 4) ? ''
 	 : articles_documents($flag_editable, 'article', $id_article))
 
@@ -170,7 +167,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 // http://doc.spip.org/@articles_documents
 function articles_documents($flag_editable, $type, $id)
 {
-	global $spip_lang_left;
+	global $spip_lang_left, $spip_lang_right;
 	
 	if  ($GLOBALS['meta']["documents_$type"]=='non' OR !$flag_editable)
 
@@ -186,7 +183,7 @@ function articles_documents($flag_editable, $type, $id)
 	// a cause des position:relative incompris de MSIE
 
 	if ($GLOBALS['browser_name']!='MSIE') {
-		$res = "\n<table align='right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
 	}
 
 	$res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>
@@ -342,8 +339,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	$res = "\n<td valign='top'>$res</td>";
 
 	if ($flag_editable) {
-		$res .= "\n<td style='width: 130px;' valign='top' align='$spip_lang_right'>"
-		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif")
+		$res .= "\n<td style='width: 36px;' valign='top'>"
+		  . bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right)
 		. "</td>\n";
 	}
 

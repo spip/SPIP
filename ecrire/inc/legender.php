@@ -98,7 +98,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$att_bouton = " class='fondo spip_xx-small'";
 	$att_span = " id='valider_doc$id_document' "
 	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
-	.  "style='text-align:"
+	.  " style='text-align:"
 	.  $GLOBALS['spip_lang_right']
 	. ($flag == 'ajax' ? ';display:block' : "")
 	. "'";

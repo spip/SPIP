@@ -36,9 +36,7 @@ debut_droite();
  echo afficher_sites('<b>' . _T('titre_sites_proposes') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY' => "nom_site"));
 
 if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
-	echo "<div align='right'>";
-	icone(_T('icone_referencer_nouveau_site'), generer_url_ecrire('sites_edit'), "site-24.gif", "creer.gif");
-	echo "</div>";
+	echo icone(_T('icone_referencer_nouveau_site'), generer_url_ecrire('sites_edit'), "site-24.gif", "creer.gif", 'right');
 }
 
 echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  

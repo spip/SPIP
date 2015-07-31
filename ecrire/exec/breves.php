@@ -48,9 +48,7 @@ function exec_breves_dist()
 
 		if ($editable) {
 		  if (!$res) echo bandeau_titre_boite2($titre, "breve-24.gif", 'toile_foncee', "ligne_blanche");
-		  echo "<div align='$spip_lang_right'>";
-		  icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
-		  echo "</div>";
+		  echo icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif", $spip_lang_right);
 		}
 
 	}

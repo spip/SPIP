@@ -92,14 +92,14 @@ function signatures_edit($script, $id, $debut, $row) {
 		.  "<tr><td style='background-color: #ffffff' class='serif'>";
 				
 		if ($statut=="publie"){
-			$res .= icone (_T('icone_supprimer_signature'),
+			$res .= icone_inline (_T('icone_supprimer_signature'),
 				redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id&debut=$debut"),
 				"forum-interne-24.gif", 
 				"supprimer.gif",
 				"right",
 				false);
 		} elseif ($statut=="poubelle"){
-			$res .= icone (_T('icone_valider_signature'),
+			$res .= icone_inline (_T('icone_valider_signature'),
 				redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id&debut=$debut"),
 				"forum-interne-24.gif", 
 				"creer.gif",

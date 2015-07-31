@@ -106,8 +106,8 @@ function exec_rubriques_edit_dist()
 	echo "<tr>";
 	echo "<td>";
 
-	if ($id_rubrique) icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
-	else icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
+	if ($id_rubrique) echo icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
+	else echo icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
 
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";

@@ -102,7 +102,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr>";
 	echo "<td>";
-	icone(_T('icone_retour'),
+	echo icone(_T('icone_retour'),
 		generer_url_ecrire($script, $args),
 		"article-24.gif", "rien.gif");
 	echo "</td>";
