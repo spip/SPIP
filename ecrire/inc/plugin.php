@@ -344,11 +344,24 @@ function plugin_donne_erreurs($raw=false, $raz=true) {
 	return $list;
 }
 
+/**
+ * Teste des dependances
+ * Et verifie que chaque dependance est presente
+ * dans la liste de plugins donnee
+ *
+ * @param array $n
+ * 		Tableau de dependances dont on souhaite verifier leur presence
+ * @param array $liste
+ * 		Tableau des plugins presents
+ * @return array
+ * 		Tableau des messages d'erreurs recus. Il sera vide si tout va bien.
+ * 
+**/
 function plugin_necessite($n, $liste) {
 	$msg = array();
 	foreach($n as $need){
 		$id = strtoupper($need['nom']);
-		if ($r = plugin_controler_necessite($liste, $id, $need['version'])) {
+		if ($r = plugin_controler_necessite($liste, $id, $need['compatibilite'])) {
 			$msg[] = $r;
 		}
 	}
@@ -363,7 +376,7 @@ function plugin_necessite($n, $liste) {
  * @param $nom
  * 		Le plugin donc on cherche la presence
  * @param $version
- * 		L'éventuelle version minimum de la dependance.
+ * 		L'éventuelle intervalle de compatibilité de la dependance. ex: [1.1.0;]
  * @return string.
  * 		Vide si ok,
  * 		Message d'erreur lorsque la dependance est absente.
@@ -373,10 +386,14 @@ function plugin_controler_necessite($liste, $nom, $version)
 	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'])) {
 		return '';
 	}
-	if ($version) {
-		return _T('plugin_necessite_plugin', array(
-			'plugin' => $nom,
-			'version' => $version));
+	// retrouver le minimum
+	if (preg_match(_EXTRAIRE_INTERVALLE, $version, $regs)) {
+		$minimum = $regs[1];
+		if ($minimum) {
+			return _T('plugin_necessite_plugin', array(
+				'plugin' => $nom,
+				'version' => $minimum));
+		}
 	}
 	return _T('plugin_necessite_plugin_sans_version', array('plugin' => $nom));
 }
