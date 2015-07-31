@@ -74,16 +74,22 @@ function exec_fond_dist(){
 	}
 	
 	echo debut_gauche("exec_$exec",true);
+	$contexte = array('exec'=>$exec);
+	$objet = objet_type(preg_replace(",_edit$,","",$exec));
+	$id = id_table_objet($objet);
+	if (_request($id))
+		$contexte[$id] = _request($id);
+	
 	echo $navigation;
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>$contexte,'data'=>''));
 
 	echo creer_colonne_droite("exec_$exec",true);
 	echo $extra;
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>$contexte,'data'=>''));
 
 	echo debut_droite("exec_$exec",true);
 	echo $fond;
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>$contexte,'data'=>''));
 
 	echo fin_gauche(),fin_page();
 	}
