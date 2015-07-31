@@ -290,12 +290,13 @@ function parser_boucle($texte, $id_parent) {
 						$total_parties = $match[2];
 					}
 					else if ($param == 'recherche') {
-						if ($type == 'syndication') $req_from[] = "spip_index_syndic AS idx";
-						else $req_from[] = "spip_index_$type AS idx";
-						$req_select[] = "SUM(idx.points + 100*(idx.hash IN (\$hash_recherche_strict))) AS points";
-						$req_where[] = "idx.$id_objet=$table.$id_objet";
+						if ($type == 'syndication') $req_from[] = "spip_index_syndic AS rec";
+						else if ($type == 'forums') $req_from[] = "spip_index_forum AS rec";
+						else $req_from[] = "spip_index_$type AS rec";
+						$req_select[] = "SUM(rec.points + 100*(rec.hash IN (\$hash_recherche_strict))) AS points";
+						$req_where[] = "rec.$id_objet=$table.$id_objet";
 						$req_group = " GROUP BY $table.$id_objet";
-						$req_where[] = "idx.hash IN (\$hash_recherche)";
+						$req_where[] = "rec.hash IN (\$hash_recherche)";
 					}
 					else $params2[] = $param;
 				}
