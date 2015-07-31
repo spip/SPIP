@@ -98,7 +98,7 @@ function login_pour_tous($login, $cible, $action) {
 	$echec_visiteur = _request('var_echec_visiteur')?' ':'';
 
 
-	$pose_cookie = generer_url_public('spip_cookie');
+	$pose_cookie = generer_url_action('cookie');
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
 		if (($GLOBALS['flag_sapi_name']
@@ -151,6 +151,10 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
+	// Ne pas proposer de "rester connecte quelques jours"
+	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
+	$rester_connecte = (_RENOUVELLE_ALEA < 12*3600) ? '' : ' ';
+
 	// Appeler le squelette formulaire_login
 	return array('formulaires/login', $GLOBALS['delais'],
 		array_merge(
@@ -165,7 +169,8 @@ function login_pour_tous($login, $cible, $action) {
 					'echec_visiteur' => $echec_visiteur,
 					'login' => $login,
 					'login_alt' => (isset($login_alt) ? $login_alt : $login),
-					'self' => str_replace('&amp;', '&', self())
+					'self' => str_replace('&amp;', '&', self()),
+					'rester_connecte' => $rester_connecte
 					)
 				)
 			);

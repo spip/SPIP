@@ -69,11 +69,11 @@ function ajouter_session($auteur) {
 		redirige_par_entete(generer_test_dirs(_DIR_SESSIONS,true));
 	} else {
 		include_spip('inc/cookie');
-		preg_match(',^[^/]*//[^/]*(.*)/.*/$,', url_de_base(), $r);
-
-		spip_setcookie('spip_session', $_COOKIE['spip_session'],
-			       time() + 20 * _RENOUVELLE_ALEA,
-			       $r[1]);
+		spip_setcookie(
+			'spip_session',
+			$_COOKIE['spip_session'],
+			time() + 20 * _RENOUVELLE_ALEA
+		);
 		spip_log("ajoute session $fichier_session");
 		return $_COOKIE['spip_session'];
 	}

@@ -82,11 +82,6 @@ function init_config() {
 		$modifs = true;
 	}
 
-	/*if (isset($GLOBALS['meta']['nouvelle_install']) && $GLOBALS['meta']['nouvelle_install'] == 'oui') {
-		effacer_meta('nouvelle_install');
-		$modifs = true;
-	}*/
-
 	if ($modifs) ecrire_metas();
 
 	include_spip('inc/rubriques');

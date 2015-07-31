@@ -70,7 +70,8 @@ function action_cookie_dist() {
 			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
 				$redirect = generer_url_public('login',
 					"var_login=$session_login", true);
-			if (_request('session_password') OR _request('session_password_md5'))
+			if (_request('session_password')
+			OR _request('session_password_md5'))
 				$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
 			$redirect .= '&url=' . rawurlencode($url);
 			spip_log("echec login: $session_login");

@@ -93,10 +93,9 @@ $taille_des_logs = 100;
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
 
-// Prefixe et chemin des cookies
+// Prefixe des cookies
 // (a modifier pour installer des sites SPIP dans des sous-repertoires)
 $cookie_prefix = "spip";
-$cookie_path = "";
 
 // Dossier des squelettes
 // (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)

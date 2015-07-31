@@ -299,7 +299,7 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	$ici = generer_url_ecrire();
 	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
 	if ($url) {
-		echo "[<a href='", generer_url_public('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
+		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
 	}
 	
 	if ($lien)

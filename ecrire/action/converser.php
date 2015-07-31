@@ -31,10 +31,11 @@ function action_converser_dist()
 			$GLOBALS['auteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
 			if ($spip_session = $session($GLOBALS['auteur_session'])) {
-				preg_match(',^[^/]*//[^/]*(.*)/$,',
-					   url_de_base(),
-					   $r);
-				spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
+				spip_setcookie(
+					'spip_session',
+					$spip_session,
+					time() + 3600 * 24 * 14
+				);
 			}
 		}
 		action_converser_post($lang, 'spip_lang_ecrire');
