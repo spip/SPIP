@@ -501,7 +501,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 'login_espace_prive' => 'espace privé',
 'login_identifiant_inconnu' => 'L\'identifiant « @login@ » est inconnu.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identifiant de connexion au site) :',
+'login_login2' => 'Login ou adresse email :',
 'login_login_pass_incorrect' => '(Login ou mot de passe incorrect.)',
 'login_motpasseoublie' => 'mot de passe oublié ?',
 'login_non_securise' => 'Attention, ce formulaire n\'est pas sécurisé.
