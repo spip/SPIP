@@ -286,7 +286,15 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
-
+/**
+ * Autoriser a creer un article :
+ * Il faut qu'une rubrique existe et qu'on est le statut nécessaire pour creer
+ * 
+ * @return bool
+ */
+function autoriser_article_creer_dist($faire, $type, $id, $qui, $opt) {
+	return (sql_countsel('spip_rubriques')>0 AND in_array($qui['statut'], array('0minirezo', '1comite')));
+}
 
 /**
  * Autoriser a voir un article :
