@@ -27,14 +27,15 @@
 [<script type="text/javascript"><!--
 document.inscription.(#ENV{focus}).focus()
 --></script>]
+</div>
 [(#ENV{focus}|?{' ',''})
+<div align="#LANG_RIGHT">
 <script type="text/javascript"><!--
-document.write("<a href='")
+document.write("<a style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>
 <noscript>
 	&#91;<a href='./'><:pass_retour_public:></a>&#93;
-</noscript>]
-
-</div>
+</noscript>
+</div>]

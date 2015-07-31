@@ -20,13 +20,14 @@
 </form>
 ]
 </div>
-<div align="right">
+
+<div align="#LANG_RIGHT">
 <script type="text/javascript"><!--
 [
 (#ENV*{message}|?{'',' '})
 document.oubli_form.oubli.focus()
 ]
-document.write("<a  style='color: #e86519' href='")
+document.write("<a style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>

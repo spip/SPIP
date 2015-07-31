@@ -2769,6 +2769,40 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	return $bloc_ancre.$texte;
 }
 
+// recuperere le chemin d'une css existante et :
+// 1. regarde si une css inversee droite-gauche existe dans le meme repertoire
+// 2. sinon la cree (ou la recree) dans IMG/cache_css/
+function direction_css ($css) {
+	if ($GLOBALS['spip_lang_left'] == 'left')
+		return $css;
+
+	// 1.
+	if (@file_exists($f = preg_replace(',\.css$,', '_rtl.css', $css)))
+		return $f;
+
+	// 2.
+	$f = sous_repertoire (_DIR_IMG, 'cache-css')
+		. preg_replace(',.*/(.*)\.css,', '\1', $css)
+		. '.' . substr(md5($css), 0,4) . '.css';
+
+	if ((@filemtime($f) > @filemtime($css))
+	AND ($GLOBALS['var_mode'] != 'recalcul'))
+		return $f;
+
+	if (!lire_fichier($css, $contenu))
+		return $css;
+
+	$contenu = str_replace(
+		array('right', 'left', '@@@@L E F T@@@@'),
+		array('@@@@L E F T@@@@', 'right', 'left'),
+		$contenu);
+
+	if (!ecrire_fichier($f, $contenu))
+		return $css;
+
+	return $f;
+}
+
 ### fonction depreciee, laissee ici pour compat ascendante 1.9
 function entites_unicode($texte) { return charset2unicode($texte); }
 
