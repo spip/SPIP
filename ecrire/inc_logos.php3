@@ -118,7 +118,7 @@ function afficher_logo($racine, $titre) {
 				echo $element.'='.$$element.'&';
 			}
 		}
-		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>supprimer</A>]";
+		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>"._T('lien_supprimer')."</A>]";
 		echo fin_block();
 		echo "</CENTER>";
 	}

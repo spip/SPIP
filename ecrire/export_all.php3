@@ -23,7 +23,7 @@ if (!$debut_limit) $debut_limit = 0;
 
 install_debut_html(_T('info_sauvegarde'));
 
-if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='export_all.php3?etape=1&gz=$gz'>"._T('info_procedez-par_etape')."</a></font></blockquote><p>";
+if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='export_all.php3?etape=1&gz=$gz'>"._T('info_procedez_par_etape')."</a></font></blockquote><p>";
 
 
 if ($etape < 2){
@@ -90,7 +90,7 @@ if (!$etape OR $etape == 13){
 
 
 
-	echo "<p>"._T('info_sauvegarde-reussi_01')."</b><p>"._T('info_sauvegarde-reussi_02', array('archive' => $archive))."<a href='index.php3'>"._T('info_sauvegarde-reussi_03')."</a>"._T('info_sauvegarde-reussi_04')."\n";
+	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))."<a href='index.php3'>"._T('info_sauvegarde_reussi_03')."</a>"._T('info_sauvegarde_reussi_04')."\n";
 }
 else {
 	$etape_suivante = $etape + 1;

@@ -199,7 +199,7 @@ function auth() {
 		// il n'existe pas.
 		include_ecrire('inc_presentation.php3');
 		include_ecrire('inc_texte.php3');
-		install_debut_html("Erreur de connexion");
+		install_debut_html(_T('avis_erreur_connexion'));
 		echo "<br><br><p>"._T('texte_inc_auth_1', array('auth_login' => $auth_login))."<A HREF='../spip_cookie.php3?logout=$auth_login'>".
                 _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');
 		install_fin_html();

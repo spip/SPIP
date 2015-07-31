@@ -99,7 +99,7 @@ function enfants($id_parent, $decalage = 0) {
 
 		//$flag_active = ereg("(^|,)$id_rubrique(\$|,)", $coll_actives);
 		if (tester_rubrique_vide("$id_rubrique") ==  true) {
-			$sucrer="[<A HREF='articles_tous.php3?liste_coll=$liste_coll&supp_rubrique=$id_rubrique'><font color='white'>supprimer</font></A>]";
+			$sucrer="[<A HREF='articles_tous.php3?liste_coll=$liste_coll&supp_rubrique=$id_rubrique'><font color='white'>"._T('lien_supprimer')."</font></A>]";
 		}
 		$flag_liste = ereg("(^|,)$id_rubrique(\$|,)", $liste_coll);
 		if ($flag_liste) {

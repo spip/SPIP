@@ -275,17 +275,17 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 				$texte_lie = array();
 
 				if ($nb_articles[$id_mot] == 1)
-					$texte_lie[] = "1 article";
+					$texte_lie[] = _T('info_1_article');
 				else if ($nb_articles[$id_mot] > 1)
 					$texte_lie[] = $nb_articles[$id_mot]._T('info_articles_02');
 
 				if ($nb_breves[$id_mot] == 1)
-					$texte_lie[] = "1 br&egrave;ve";
+					$texte_lie[] = _T('info_1_breve');
 				else if ($nb_breves[$id_mot] > 1)
 					$texte_lie[] = $nb_breves[$id_mot]._T('info_breves_03');
 
 				if ($nb_sites[$id_mot] == 1)
-					$texte_lie[] = "1 site";
+					$texte_lie[] = _T('info_1_site');
 				else if ($nb_sites[$id_mot] > 1)
 					$texte_lie[] = $nb_sites[$id_mot]._T('info_sites');
 

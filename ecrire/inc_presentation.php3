@@ -1297,7 +1297,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre);
 
-	$ctitre = "Changer la couleur de l'interface";
+	$ctitre = _T('titre_changer_couleur_interface');
 	echo "\n<map name='map_couleur'>";
 	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
 	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
@@ -1470,7 +1470,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>VOUS AVEZ UN NOUVEAU MESSAGE</b></font></a>";
+					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>"._T('info_nouveau_message')."</b></font></a>";
 				}
 			}
 			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a>";
@@ -1918,7 +1918,10 @@ function afficher_parents($id_rubrique) {
 // Presentation des pages d'installation et d'erreurs
 //
 
-function install_debut_html($titre="Installation du syst&egrave;me de publication...", $onload='') {
+function install_debut_html($titre='AUTO', $onload='') {
+
+	if ($titre=='AUTO')
+		$titre=_T('info_installation_systeme_publication');
 	?>
 <html>
 <head>

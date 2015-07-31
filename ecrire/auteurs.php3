@@ -295,7 +295,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 			echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
 		if ($connect_statut=="0minirezo")
 			if (strlen($row['email'])>3)
-				echo "<A HREF='mailto:".$row['email']."'>email</A>";
+				echo "<A HREF='mailto:".$row['email']."'>"._T('lien_email')."</A>";
 			else
 				echo "&nbsp;";
 

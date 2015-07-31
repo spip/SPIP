@@ -696,7 +696,7 @@ if ($soustitre) {
 if ($descriptif) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<b>Descriptif :</b> ";
+	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
 	echo "</font>";
@@ -923,7 +923,7 @@ if ($cherche_auteur) {
 				echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 			
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur\">Ajouter cet auteur</A>";
+				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur\">"._T('lien_ajouter_auteur')."</A>";
 			
 				if (trim($bio_auteur)) {
 					echo "<BR><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n";
@@ -1025,13 +1025,13 @@ if (spip_num_rows($result)) {
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
-		if ($url_site_auteur) echo "<A HREF='$url_site_auteur'>site</A>";
+		if ($url_site_auteur) echo "<A HREF='$url_site_auteur'>"._T('info_site_min')."</A>";
 		else echo "&nbsp;";
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2' ALIGN='right'>";
 		if ($nombre_articles > 1) echo "$nombre_articles articles";
-		else if ($nombre_articles == 1) echo "1 article";
+		else if ($nombre_articles == 1) echo _T('info_1_article');
 		else echo "&nbsp;";
 		echo "</TD>\n";
 
@@ -1113,7 +1113,7 @@ if ($flag_editable AND $options == 'avancees') {
 			}
 			
 			echo "</SELECT>";
-			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE=_T('bouton_ajouter') CLASS='fondo'>";
+			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE="._T('bouton_ajouter')." CLASS='fondo'>";
 		}
 		echo "</div></FORM>";
 	}

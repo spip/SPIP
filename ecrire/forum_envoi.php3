@@ -113,7 +113,7 @@ echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><
 echo "</TD>";
 
 echo "<TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
-echo "<B>Titre :</B><BR>";
+echo "<B>"._T('info_titre')."</B><BR>";
 $titre_message = entites_html($titre_message);
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";
 echo "</TD></TR></TABLE>";
@@ -145,7 +145,7 @@ if ($statut != 'perso' AND $options == "avancees") {
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"$nom_site\" SIZE='40'><BR>";
 
 	$lien_url="http://";
-	echo "URL :<BR>";
+	echo _T('info_url')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
 }
 

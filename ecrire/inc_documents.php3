@@ -319,7 +319,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 
 			if ($afficher_texte_ftp){
 				if ($dossier_complet){
-					echo "\n<p><b>Portfolio automatique&nbsp;:</b>";
+					echo "\n<p><b>"._T('info_portfolio_automatique')."</b>";
 					echo "\n<br>"._T('info_installer_documents');
 					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo' style='font-size:9px;'></div>";
 				}
@@ -542,7 +542,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			else echo debut_block_invisible($block);
 
 			echo "<b>"._T('info_vignette_personnalisee')."</b>";
-			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
+			echo "<center>$largeur_vignette x $hauteur_vignette "._T('info_pixels')."</center>";
 			if ($flag_modif)
 				echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 			echo fin_block();
@@ -986,7 +986,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
 
 		if ($descriptif OR $options == "avancees") {
-			echo "<b>Description&nbsp;:</b><br>\n";
+			echo "<b>"._T('info_description_2')."</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
@@ -995,7 +995,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		if (($type_inclus == "embed" OR $type_inclus == "image") AND $options == "avancees") {
 			echo "<br><b>"._T('entree_dimensions')."</b><br>\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		}
 
 		echo "<div align='right'>";
@@ -1088,7 +1088,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
 
 		if ($descriptif OR $options == "avancees") {
-			echo "<b>Description&nbsp;:</b><br>\n";
+			echo "<b>"._T('info_description_2')."</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' style='font-size:9px;' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
