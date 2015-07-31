@@ -1382,16 +1382,12 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 	if (function_exists("pagination"))
 		return pagination($total, $nom, $pas, $liste);
 
-	$separateur = '&nbsp;| ';
-
 	$debut = 'debut'.$nom;
 	$ancre='pagination'.$nom;
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
 		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
-		
-	$nombre_pages = floor(($total-1)/$pas)+1;
 
 	$pagination = array(
 		'debut' => 'debut'.$nom,
@@ -1399,7 +1395,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 		'total' => $total,
 		'position' => intval(_request($debut)),
 		'pas' => $pas,
-		'nombre_pages' => $nombre_pages,
+		'nombre_pages' => floor(($total-1)/$pas)+1,
 		'page_courante' => floor(intval(_request($debut))/$pas)+1,
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
