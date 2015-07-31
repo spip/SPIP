@@ -340,6 +340,9 @@ function optimiser_base() {
 	spip_log("optimisation ok");
 }
 
-optimiser_base();
+	## debug
+	if ($GLOBALS['auteur_session']['statut'] == '0minirezo'
+	AND $GLOBALS['_GET']['optimiser'] == 'oui')
+		optimiser_base();
 
 ?>
