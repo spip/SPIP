@@ -214,6 +214,17 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $order = "'alea'";
 		}
 
+	// par date_thread
+		else if ($par == 'date_thread') {
+			//date_thread est la date la plus recente d'un message dans un fil de discussion
+			$boucle->select[] = "MAX(".$boucle->id_table.".".
+				$GLOBALS['table_date'][$boucle->type_requete]
+				.") AS date_thread";
+			$boucle->group[] = $boucle->id_table.".id_thread";
+			$order = "'date_thread'";
+			$boucle->plat = true;
+		}
+	
 	// par titre_mot ou type_mot voire d'autres
 		else if ($m = ($exceptions_des_jointures[$par])) {
 		  $order = critere_par_jointure($boucle, $m);
