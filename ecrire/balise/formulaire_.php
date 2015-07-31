@@ -63,6 +63,8 @@ function balise_FORMULAIRE__dyn($form)
 	if ($post_form = _request('formulaire_action')
 	AND $post_args = _request('formulaire_action_args')) {
 		$post_args = decoder_contexte_ajax($post_args,$post_form);
+		// enlever le faux attribut de langue masque
+		array_shift($post_args);
 		if ($args === $post_args){
 			$je_suis_poste = true;
 		}
@@ -148,6 +150,10 @@ function balise_FORMULAIRE__dyn($form)
 		"<input type='hidden' name='arg' value='".$secu['arg']."' />"
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
+	
+	// empiler la lang en tant que premier argument implicite du CVT
+	// pour permettre de la restaurer au moment du Verifier et du Traiter
+	array_unshift($args, $GLOBALS['spip_lang']);
 
 	return array("formulaires/$form",
 		3600,
