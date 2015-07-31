@@ -37,7 +37,7 @@ function vertebrer_sort($fields, $direction)
 		$url = vertebrer_sanstri($tri)
 		.  "|parametre_url{" . $tri . ",'" . $n . "'}";
 
-		$res .= "\n\t\t<th><a href='[(#SELF$url)]'>$n</a></th>";
+		$res .= "\n\t\t<th style='text-align: center'><a href='[(#SELF$url)]'>$n</a></th>";
 	}
 	return $res;
 }
@@ -57,15 +57,16 @@ function vertebrer_form($fields)
 {
 	$res = '';
 	$url = join('|', array_keys($fields));
-	$url = "#SELF|parametre_url{'$url',''}";
+	$url = "#SELF|\n\t\t\tparametre_url{'$url',''}";
 	foreach($fields as $n => $t) {
 		$s = test_sql_int($t) ? 11
 		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
 
-		$res .= "\n\t\t<td><form action='./' method='get'><div>"
+		$res .= "\n\t\t<td><form action='./' method='get'>"
+		 . "<div style='text-align: center;' >"
 		 . "\n\t\t\t<input name='$n'"
 		 . ($s ? " size='$s'" : '')
-		 . " />\n\t\t\t[($url|form_hidden)]"
+		 . " />\n\t\t\t[($url|\n\t\t\tform_hidden)]"
 		 . "\n\t\t</div></form></td>";
 	}
 	return $res;
@@ -97,7 +98,8 @@ function vertebrer_cell($fields)
 	$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
 	$texte = "<a href='$url'>" . $texte . "</a>";
       }
-      $res .= "\n\t\t<td>$texte</td>";
+      $s = test_sql_int($t) ? " style='text-align: right;'" : '';
+      $res .= "\n\t\t<td$s>$texte</td>";
     }
   }
   return $res;
@@ -146,7 +148,7 @@ function public_vertebrer_dist($desc)
 <BOUCLE1($surnom){pagination} 
 		{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}$crit>
 	<tr class='[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]'>
-		<td>#COMPTEUR_BOUCLE</td>$cell
+		<td style='text-align: right;'>#COMPTEUR_BOUCLE</td>$cell
 	</tr>
 </BOUCLE1>
 	<tr>

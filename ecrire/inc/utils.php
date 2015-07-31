@@ -279,7 +279,7 @@ function spip_connect($serveur='') {
 		}
 	} else {
 		$charset = isset($GLOBALS['meta']['charset_sql_connexion']) ?
-		  $GLOBALS['meta']['charset_sql_connexion'] : -1;
+		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
 	}
 	if ($charset != -1) {
 		$f = $GLOBALS['db_ok']['set_charset'];
