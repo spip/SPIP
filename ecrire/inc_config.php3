@@ -137,6 +137,7 @@ function appliquer_modifs_config() {
 	if ($forums_publics_appliquer == 'saufnon') {
 		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
 	} else if ($forums_publics_appliquer == 'tous') {
+		ecrire_meta('accepter_visiteurs', 'oui');
 		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
 	}
 	if ($requete_appliquer) spip_query($requete_appliquer);
@@ -232,7 +233,6 @@ function appliquer_modifs_config() {
 		ecrire_meta('langues_proposees', $langues_proposees);
 		ecrire_metas();
 	}
-
 
 	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
