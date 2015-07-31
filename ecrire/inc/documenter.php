@@ -26,10 +26,12 @@ function inc_documenter_dist(
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
 	$table = 'spip_documents_' . $type . 's';
-	$prim = id_table_objet($table);
-	if (!$prim) return '';
+	if (!id_table_objet($table)) {
+			spip_log("documenter: $type table inconnue");
+			$type = 'article';
+			$table = 'spip_documents_' . $type . 's';
+	}
 	$prim = 'id_' . $type;
-
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
 		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, l.vu, l." .$prim, "spip_documents AS D, $table AS l", "l.$prim=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");

@@ -27,8 +27,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	}
 
 	$table = 'spip_documents_' . $type . 's';
-	$prim = id_table_objet($table);
-	if (!$prim) {
+	if (!id_table_objet($table)) {
 		spip_log("tourner: $type table inconnue");
 		$type = 'article';
 		$table = 'spip_documents_' . $type . 's';

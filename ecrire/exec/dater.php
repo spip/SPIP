@@ -25,13 +25,14 @@ function exec_dater_args($id, $type)
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$table = table_objet_sql($type);
-		if (!$table) {
-			spip_log("dater, type inconnu: $type");
+		$table = 'spip_documents_' . $type . 's';
+		if (!id_table_objet($table)) {
+			spip_log("dater: $type table inconnue");
 			$type = 'article';
-			$table = table_objet_sql($type);
+			$table = 'spip_documents_' . $type . 's';
 		}
-		$row = sql_fetsel("*", $table, "id_$type=$id");
+		$prim = 'id_' . $type;
+		$row = sql_fetsel("*", $table, "$prim=$id");
 		$statut = $row['statut'];
 		$date = $row[($type!='breve')?"date":"date_heure"];
 		$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';

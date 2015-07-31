@@ -19,10 +19,12 @@ include_spip('inc/date');
 // http://doc.spip.org/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
-	exec_message_edit_args(intval(_request('id_message')), intval(_request('dest')), _request('new'));
+	exec_message_edit_args(intval(_request('id_message')), 
+			       _request('new'),
+			       intval(_request('dest')));
 }
 // http://doc.spip.org/@exec_message_edit_args
-function exec_message_edit_args($id_message,$dest, $new)
+function exec_message_edit_args($id_message, $new, $dest)
 {
 	global  $connect_id_auteur, $connect_statut;
 

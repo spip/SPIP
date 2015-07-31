@@ -24,12 +24,13 @@ include_spip('inc/date');
 // http://doc.spip.org/@inc_legender_dist
 function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre, $deplier=false) {
 
-	// + securite (avec le script exec=legender ca vient de dehors)
 	$table = 'spip_documents_' . $type . 's';
-	$prim = id_table_objet($table);
-	if (!$prim) return '';
+	if (!id_table_objet($table)) {
+		spip_log("legender: $type table inconnue");
+		$type = 'article';
+		$table = 'spip_documents_' . $type . 's';
+	}
 	$prim = 'id_' . $type;
-
 	// premier appel
 	if ($document) {
 		$flag = $deplier;
@@ -44,7 +45,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$flag = 'ajax';
 	}
 	else
-		return;
+		return '';
 
 	$descriptif = $document['descriptif'];
 	$titre = $document['titre'];
