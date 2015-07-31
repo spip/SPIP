@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'lapaz dovan',
+'page_suivante' => 'Lapaz d&eacute;y&egrave;r',
 'par_auteur' => 'sanm',
 'participer_site' => 'Ou p&eacute; m&egrave;t ansanm bann zot dalon po la vi lo sit-la, &egrave; propoz&eacute; out prop bann zartik, si ou l&eacute; inskri anba-la. Inskri aou : ou sar gayn inn lim&egrave;l i don aou out bann kodlaks&eacute; po l&eacute;spas priv&eacute; lo sit. ',
 'plan_site' => 'Lakart lo sit',
