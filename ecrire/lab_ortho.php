@@ -27,9 +27,10 @@ function maj_miroirs_ortho() {
 
 	// TODO: recuperer la liste dynamiquement depuis ortho.spip.net
 	$urls = array(
-		'http://tony.ortho.spip.net/ortho_serveur.php',
-		'http://spip-ortho.linagora.org:18080/ortho_serveur.php',
-		'http://ortho.spip.net/ortho_serveur.php'
+#		'http://tony.ortho.spip.net/ortho_serveur.php',
+		'http://spip.destination-linux.org/ortho_serveur.php',
+#		'http://spip-ortho.linagora.org:18080/ortho_serveur.php',
+#		'http://ortho.spip.net/ortho_serveur.php'
 	);
 	$liste = array();
 	$miroirs_new = array();
@@ -213,9 +214,12 @@ function post_ortho($url, $texte, $lang) {
 		fclose($f);
 		return false;
 	}
+	$gz_deflate=false; //le serveur web compresse en gz ?
 	while ($s = trim(fgets($f, 1000))) {
 		if (preg_match(',Content-Length:(.*),i', $s, $r))
 			$length = intval($r[1]);
+		if (preg_match(',Content-Encoding:(.*)gzip,i', $s, $r))
+			$gz_deflate = true;
 	}
 	$r = "";
 
@@ -226,6 +230,8 @@ function post_ortho($url, $texte, $lang) {
 	else while (!feof($f) AND $r .= fread($f, 1024));
 
 	fclose($f);
+
+	if ($gz_deflate) $r = gzinflate(substr($r,10)); // decompression de GZ apache
 	if ($gz) $r = gzuncompress($r);
 	return $r;
 }
