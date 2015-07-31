@@ -419,8 +419,8 @@ function analyse_js_ajoutee($page) {
         push_script($scripts_a_ajouter,$script);
     }
   //ajoute le scripts trouvee
-  $scripts_a_ajouter = join("|",$scripts_a_ajouter);
   if(count($scripts_a_ajouter)) {
+    $scripts_a_ajouter = join("|",$scripts_a_ajouter);
     list($pos_script,$appelle) = $jquery_chargee;
     $params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts_a_ajouter; 
     $corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
