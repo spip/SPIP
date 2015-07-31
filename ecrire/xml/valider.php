@@ -175,6 +175,7 @@ function valider_idref($nom, $ligne, $col)
 		. $col;
 }
 
+// http://doc.spip.org/@valider_passe2
 function valider_passe2()
 {
 	if (!$this->err) {
