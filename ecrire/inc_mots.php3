@@ -31,7 +31,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 	$nb = 0;
 	$opt = 1000000;
 	$mot_opt = '';
-	$mot = strtolower(trim($mot));
+	$mot = translitteration(strtolower(trim($mot)));
 	$len = strlen($mot);
 
 	if (!$table_mots) return '';
@@ -45,11 +45,18 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 			$val2 = trim($val);
 			if ($val2) {
 				if (!($m = $distance[$id])) {
-					$val2 = strtolower($val2);
+					$val2 = translitteration(strtolower($val2));
 					$len2 = strlen($val2);
-					if (substr($val2, 0, $len) == $mot) $m = -1;
-					else if ($len2 > $len) $m = levenshtein255($val2, $mot) + $len - $len2;
-					else $m = levenshtein255($val2, $mot);
+					if ($val2 == $mot)
+						$m = -2; # resultat exact
+					else if (substr($val2, 0, $len) == $mot)
+						$m = -1; # sous-chaine
+					else {
+						# distance
+						$m = levenshtein255($val2, $mot);
+						# ne pas compter la distance due a la longueur
+						$m -= max(0, $len2 - $len); 
+					}
 					$distance[$id] = $m;
 				}
 				if ($m <= $lim) {
@@ -180,11 +187,16 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			}
 			echo "</UL>";
 		}
-		else if (count($resultat) < 16) {
+		else {
 			reset($resultat);
 			unset($les_mots);
-			while (list(, $id_mot) = each($resultat)) $les_mots[] = $id_mot;
+			while (list(, $id_mot) = each($resultat)
+			AND $nombre ++ < 17)
+				$les_mots[] = $id_mot;
 			if ($les_mots) {
+				if (count($resultat) > 17) {
+					echo "<br /><b>"._T('info_trop_resultat', array('cherche_mot' => $cherche_mot))."</b><p />\n";
+				}
 				$les_mots = join(',', $les_mots);
 				echo "<B>"._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))."</B><BR>";
 				$query = "SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre";
@@ -208,9 +220,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				}
 				echo "</UL>";
 			}
-		}
-		else {
-			echo "<B>"._T('info_trop_resultat', array('cherche_mot' => $cherche_mot))."<BR>";
 		}
 
 		if ($GLOBALS['connect_statut'] == '0minirezo') {
