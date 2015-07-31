@@ -184,7 +184,6 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	. "</div>"
 	. "</div>\n";
 
-	$res .= "<div style='height: 18px;'>&nbsp;</div>";
 	return $res;
 }
 
