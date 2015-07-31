@@ -57,7 +57,7 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 				if (($row['statut'] == '5poubelle') AND !$declaration['pass'])
 					// irrecuperable
 					$erreurs['message_erreur'] = _T('form_forum_access_refuse');	
-				if (($row['statut'] != 'nouveau') AND !$declaration['pass'])
+				elseif (($row['statut'] != 'nouveau') AND !$declaration['pass'])
 					// deja inscrit
 					$erreurs['message_erreur'] = _T('form_forum_email_deja_enregistre');
 				spip_log($row['id_auteur'] . " veut se resinscrire");
