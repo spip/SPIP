@@ -42,10 +42,12 @@ function changestyle(id_couche, element, style) {
 function decalerCouche(id_couche) {
 	if (!(layer = findObj(id_couche))) return;
 	if (bug_offsetwidth && ( parseInt(layer.style.left) > 0)) {
-
+		demilargeur = Math.floor( layer.offsetWidth / 2 );
+		if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
 		gauche = parseInt(layer.style.left)
-		  - Math.floor( layer.offsetWidth / 2 )
+		  - demilargeur
 		  + Math.floor(largeur_icone / 2);
+		  		  
 		if (gauche < 0) gauche = 0;
 
 		layer.style.left = gauche+"px";
