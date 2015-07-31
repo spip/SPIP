@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 global $balise_FORMULAIRE_ADMIN_collecte ;
-$balise_FORMULAIRE_ADMIN_collecte = array('id_article', 'id_breve', 'id_rubrique', 'id_mot', 'id_auteur');
+$balise_FORMULAIRE_ADMIN_collecte = array();
 
 # on ne peut rien dire au moment de l'execution du squelette
 
@@ -18,8 +18,9 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Pas question de recompiler: ca fait boucler !
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
-function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $float='', $debug='') {
+function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	global $var_preview, $use_cache, $forcer_debug;
+	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	static $dejafait = false;
 
 	if ($GLOBALS['flag_preserver'] || !$GLOBALS['spip_admin'])

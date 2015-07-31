@@ -33,11 +33,8 @@ function affiche_boutons_admin($contenu) {
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
-		balise_FORMULAIRE_ADMIN_dyn(
-		$GLOBALS['id_article'], $GLOBALS['id_breve'],
-		$GLOBALS['id_rubrique'], $GLOBALS['id_mot'],
-		$GLOBALS['id_auteur'], 'div'
-	), false);
+		balise_FORMULAIRE_ADMIN_dyn('div'),
+	false);
 
 	lang_dselect();
 
