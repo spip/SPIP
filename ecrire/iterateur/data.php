@@ -131,9 +131,12 @@ class IterateurDATA implements Iterator {
 			if (isset($this->command['datacache']))
 				$ttl = intval($this->command['datacache']);
 			if ($cache
-			AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl']))
-				> time()
-			) {
+			AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl'])
+				> time())
+			AND !(_request('var_mode') === 'recalcul'
+				AND include_spip('inc/autoriser')
+				AND autoriser('recalcul')
+			)) {
 				$this->tableau = $cache['data'];
 			}
 			else {
