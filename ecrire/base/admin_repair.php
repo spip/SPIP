@@ -37,6 +37,7 @@ function base_admin_repair_dist($titre='', $reprise='') {
 			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 }
 
+// http://doc.spip.org/@admin_repair_plat
 function admin_repair_plat(){
 	$out = "";
 	$repertoire = array();
