@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/filtres');
+
 //
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
