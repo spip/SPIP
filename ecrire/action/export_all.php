@@ -35,11 +35,11 @@ function action_export_all_dist()
 		  // d'avec l'appel initial sinon FireFox croit malin
 		  // d'optimiser la redirection
 		redirige_par_entete(generer_url_ecrire('export_all',"rub=$rub", true));
-	} elseif ($quoi=='end') export_all_fin($file, $meta);
+	} elseif ($quoi=='end') export_all_fin($file, $meta, $rub);
 }
 
 // http://doc.spip.org/@export_all_fin
-function export_all_fin($file, $meta)
+function export_all_fin($file, $meta, $rub)
 {
 	global $spip_lang_left,$spip_lang_right;
 
@@ -72,9 +72,22 @@ function export_all_fin($file, $meta)
 
 		$n = _T('taille_octets', array('taille' => number_format($size, 0, ' ', ' ')));
 		
+		// cette chaine est a refaire car il y a double ambiguite:
+		// - si plusieurs SPIP dans une base SQL (cf table_prefix)
+		// - si on exporte seulement une rubrique
+#			  _T('info_sauvegarde_reussi_02',		
+
+		if ($rub) {
+			$titre = sql_getfetsel('titre', 'spip_rubriques', "id_rubrique=$rub");
+			$titre = _L('Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
+				    array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)", 'titre' => "<b>$titre</b>"));
+		}
+		else
+			$titre = _L('Les tables du site ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
+			      array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)"));
+
 		$corps = "<p style='text-align: $spip_lang_left'>".
-			  _T('info_sauvegarde_reussi_02',
-			     array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)")) .
+			  $titre .
 			  " <a href='" . generer_url_ecrire() . "'>".
 			_T('info_sauvegarde_reussi_03')
 			. "</a> "
