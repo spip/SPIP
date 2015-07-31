@@ -141,6 +141,18 @@ function revision_auteur($id_auteur, $c=false) {
 		$c);
 }
 
+
+// http://doc.spip.org/@revision_mot
+function revision_mot($id_mot, $c=false) {
+
+	modifier_contenu('mot', $id_mot,
+		array(
+			'champs' => array('titre', 'descriptif', 'texte'),
+			'nonvide' => array('titre' => _T('info_sans_titre'))
+		),
+		$c);
+}
+
 // Nota: quand on edite un forum existant, il est de bon ton d'appeler
 // au prealable conserver_original($id_forum)
 // http://doc.spip.org/@revision_forum

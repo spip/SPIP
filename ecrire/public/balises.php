@@ -514,11 +514,11 @@ function balise_SPIP_CRON_dist ($p) {
 // http://www.spip.net/@introduction
 // http://doc.spip.org/@balise_INTRODUCTION_dist
 function balise_INTRODUCTION_dist ($p) {
-	$_type = $p->type_requete;
+	$type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
 	$_chapo = champ_sql('chapo', $p);
 	$_descriptif = champ_sql('descriptif', $p);
-	$p->code = "calcul_introduction('$_type', $_texte, $_chapo, $_descriptif)";
+	$p->code = "calcul_introduction('$type', $_texte, $_chapo, $_descriptif)";
 
 	#$p->interdire_scripts = true;
 	return $p;
