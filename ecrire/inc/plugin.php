@@ -345,7 +345,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				$plug = $plugin_valides[$p]['dir'];
 				$dir = $dir_type.".'"
 					. str_replace(constant($dir_type), '', $plug)
-					."'";
+					."/'";
 				$info = $infos[$dir_type][$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
