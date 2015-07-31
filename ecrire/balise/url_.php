@@ -94,7 +94,9 @@ function balise_URL_ARTICLE_dist($p) {
 		$code = champ_sql('url', $p);
 	} else  $code = generer_generer_url('article', $p);
 
-	$p->code = "vider_url($code)";
+	$p->code = $code;
+	if (!$p->etoile)
+		$p->code = "vider_url($code)";
 	$p->interdire_scripts = false;
 	return $p;
 }
