@@ -154,7 +154,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		$moderation = 'publie';	// en ligne sans validation
 
 	// Section critique : n'autoriser qu'une seule syndication simultanee pour un site donne
-	if (!timeout("syndication $url_syndic")) return;
+	if (!spip_get_lock("syndication $url_syndic")) return;
 
 	include_ecrire("inc_filtres.php3");
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");

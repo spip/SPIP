@@ -1,7 +1,8 @@
 <?php
-	@header ("Content-Type: text/css");
-	@Header ("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600)." GMT");
 	include ("inc_version.php3");	// pour le register_globals
+	@Header ("Content-Type: text/css");
+	@Header ("Expires: ".gmdate("D, d M Y H:i:s", time() + 7 * 24 * 3600)." GMT");
+	@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", @filemtime("spip_style.php3"))." GMT");
 	if (!isset($couleur_claire))
 		$couleur_claire = "#EDF3FE";
 	if (!isset($couleur_foncee))

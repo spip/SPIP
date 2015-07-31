@@ -71,8 +71,8 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 function deja_indexe($type, $id_objet) {
 	$table_index = 'spip_index_'.$type.'s';
 	$col_id = 'id_'.$type;
-	$query = "SELECT COUNT(*) FROM $table_index WHERE $col_id=$id_objet";
-	list($n) = @spip_fetch_array(@spip_query($query));
+	$query = "SELECT $col_id FROM $table_index WHERE $col_id=$id_objet LIMIT 0,1";
+	$n = @spip_num_rows(@spip_query($query));
 	return ($n > 0);
 }
 
