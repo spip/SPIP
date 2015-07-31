@@ -67,7 +67,7 @@ function admin_verifie_session($script) {
 		ecrire_metas();
 	} else {
 		if (($s = $row['valeur']) != $signal) {
-			if (intval(susbtr($s, strpos($s,'_')+1))<>
+			if (intval(substr($s, strpos($s,'_')+1))<>
 			    $GLOBALS['auteur_session']['id_auteur']) {
 			  include_spip('inc/minipres');
 			  echo minipres(_T('info_travaux_texte'));
