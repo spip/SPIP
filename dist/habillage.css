@@ -247,5 +247,6 @@ a.spip_out {} /* liens sortants */
 a.spip_url {} /* liens url sortants */
 a.spip_glossaire {} /* liens vers encyclopedie */
 .spip_out, .spip_url, .spip_glossaire { padding-right: 12px; background: url(out.gif) no-repeat right; text-decoration: underline; }
+.feed { background: url(feed.png) no-repeat left center; padding-left: 18px; }
 .on { font-weight: bold; } /* liens exposes */
 a:hover { color: #F57900; text-decoration: underline; }
