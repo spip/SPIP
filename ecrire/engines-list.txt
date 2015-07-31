@@ -16,7 +16,7 @@ rien=
 
 [Google]
 (q|as_q)=
-www\.google\.(.*)
+(www|ww)\.google\.(.*)
 (web|www).toile.com
 
 [Voila]
@@ -71,20 +71,17 @@ name=
 recherche\.francite\.com
 
 [MSN]
-s=
-leguide(.*)\.msn\.([a-z]+)$
-
-[MSN]
-q=
+(q|s)=
 search(.*)\.msn\.([a-z]+)$
+leguide(.*)\.msn\.([a-z]+)$
+search\.ninemsn\.com\.au
 
 [Excite]
 search=
 www\.excite\.fr
 
-### nota bene : sur AOL il existe aussi des requetes avec &r=xxxxxx
 [AOL France]
-q=
+(q|r)=
 (.*)recherche\.aol\.fr
 
 [AOLsearch]
@@ -141,7 +138,30 @@ www\.reacteur\.com
 q=
 www\.francesurf\.net
 
+[n9uf]
+Keywords=
+(www\.)?neuf\.fr
 
+[MozBot]
+q=
+www\.mozbot\.([a-z]+)$
+
+[Cegetel]
+q=
+(www\.)?cegetel\.([a-z]+)$
+
+[MyWay]
+searchfor=
+kf\.mysearch\.myway\.com
+www\.mywebsearch\.com
+
+[MonGenie]
+Keywords=
+www\.mongenie\.com
+
+[Need2Find]
+searchfor=
+kx\.search\.need2find\.com
 
 #
 # Dmoz
@@ -149,7 +169,6 @@ www\.francesurf\.net
 [dmoz.org]
 rien=
 (.*\.)?dmoz\.org
-
 
 
 #
@@ -165,4 +184,3 @@ courrielweb\.cmaisonneuve\.qc\.ca
 webmail([0-9]*)\.wanadoo\.fr
 www\.laposte\.net
 mail([0-9]*)\.voila\.fr
-
