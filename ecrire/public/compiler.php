@@ -696,6 +696,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 // mais si EXP est de la forme (t ? 'C' : '') on produit (t ? (p . C . s) : a)
 // de meme si EXP est de la forme (t ? '' : 'C')
 
+// http://doc.spip.org/@compile_retour
 function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 {
 	if ($avant == "''") $avant = '';
