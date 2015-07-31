@@ -49,29 +49,73 @@ function action_charger_plugin_dist() {
 		unset($syndic_plug[$url]);
 		ecrire_meta('syndic_plug', serialize($syndic_plug));
 	}
+	elseif (in_array($arg,array('charger_zip','lib','plugins'))) {
+		// la verification que c'est bien un zip sera faite apres
+		$zip = _request('url_zip_plugin');
+	}
+	elseif (strlen($arg)) {
+		// la verification que c'est bien un zip sera faite apres
+		$zip = $arg;
+	}
+	else {
+		// indetermine : c'est un zip ou une liste
+		$arg = 'charger_liste_ou_zip';
+		$zip = _request('url_zip_plugin2');
+	}
 
-	if (!preg_match(',^(https?|ftp)://.*\.zip,', $zip = $arg)
-		AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin'))
-	  AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin2')))
-	{
-		essaie_ajouter_liste_plugins($zip);
+	# si premiere lecture, destination temporaire des fichiers
+	$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
+	# on ne se contenten pas du basename qui peut etre un simple v1
+	# exemple de l'url http://nodeload.github.com/kbjr/Git.php/zipball/v0.1.1-rc
+
+	$fichier = (_request('fichier')?
+		_request('fichier')
+		:"h".substr(md5($zip),0,8)."-".basename($zip)
+		);
+	# basename par securite notamment dans le cas ou $fichier viens de l'exterieur
+	$fichier = $tmp.basename($fichier);
+	$extension = ""; // a verifier
+
+	# au second tour, le zip designe directement le fichier au lieu de l'url
+	# initiale
+	if (!file_exists($fichier)) {
+		# si on ne dispose pas encore du fichier
+		# verifier que le zip en est bien un (sans se fier a son extension)
+		#	en chargeant son entete car l'url initiale peut etre une simple
+		# redirection et ne pas comporter d'extension .zip
+		include_spip('inc/distant');
+		$head = recuperer_page($zip, false, true, 0);
+
+		if (preg_match(",^Content-Type:\s*application/zip$,Uims",$head))
+			$extension = "zip";
+
+		# si ce n'est pas un zip dans un format connu,
+		# c'est sans doute une liste de plugins
+		# si on est dans le bon scenario
+		if (!$extension) {
+			if ($arg == 'charger_liste_ou_zip') {
+				essaie_ajouter_liste_plugins($zip);
+			}
+		}
+	}
+	else {
+		$extension = pathinfo($zip, PATHINFO_EXTENSION);
+	}
+
+	# format de fichier inconnu
+	if (!$extension) {
 		include_spip('inc/headers');
 		redirige_url_ecrire('charger_plugin');
 	}
-
-	## si ici on n'est pas en POST c'est qu'il y a un loup
-	//if (!$_POST) die('pas en POST ?');
 
 	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
 	# facons jamais pu venir ici avec toutes les securisations faites :^)
 	if (!_DIR_PLUGINS_AUTO) die('jamais');
 
-	# si premiere lecture, destination temporaire des fichiers
-	$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
-
 	# dispose-t-on du fichier ?
 	$status = null;
-	$fichier = $tmp.basename($zip);
+	# forcer l'extension du fichier par securite
+	$fichier = $tmp.basename($fichier,".$extension").".$extension";
 	if (!@file_exists($fichier)) {
 		include_spip('inc/distant');
 		$contenu = recuperer_page($zip, $fichier, false,_COPIE_LOCALE_MAX_SIZE);
@@ -106,9 +150,9 @@ function action_charger_plugin_dist() {
 		$get_infos = charger_fonction('get_infos','plugins');
 		$infos = $get_infos($status['tmpname'], true, '');
 		if ($infos) {
-			$nom = spip_xml_aplatit($infos['nom']);
-			$image = trim($infos['icon']);
-			$description = spip_xml_aplatit($infos['description']);
+			$nom = $infos['nom'];
+			$image = $infos['icon'];
+			$description = $infos['description'];
 			$type = 'plugin';
 			$dest = _DIR_PLUGINS_AUTO;
 		} else {
@@ -209,7 +253,7 @@ function action_charger_plugin_dist() {
 				$suite,
 				$redirect_action,
 				'',
-					form_hidden('?url_zip_plugin='.urlencode($zip).'&extract=oui')
+					form_hidden('?url_zip_plugin='.urlencode($zip).'&extract=oui&fichier='.urlencode($fichier))
 					.$texte
 					."<a class='suivant' href='"
 						.$redirect_annul
