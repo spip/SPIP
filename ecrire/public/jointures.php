@@ -53,8 +53,14 @@ function trouver_champs_decomposes($champ,$desc){
 // http://doc.spip.org/@calculer_jointure
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
-
-  $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
+	// les jointures minimales sont optimales :
+	// on contraint le nombre d'etapes en l'augmentant
+	// jusqu'a ce qu'on trouve une jointure ou qu'on atteigne la limite maxi 
+	$max_liens = 1;
+	while($max_liens<=5 AND !$res) {
+		$res = calculer_chaine_jointures($boucle, $depart, $arrivee,array(),array(),$max_liens);
+		$max_liens++;
+	}
   if (!$res) return "";
 
   list($nom,$desc) = $depart;
