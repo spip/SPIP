@@ -22,7 +22,7 @@ include_spip('public/interfaces'); // pour table_jointures
 // donc il faut l'inclure "en globals"
 if ($f = find_in_path('mes_fonctions.php')) {
 	global $dossier_squelettes;
-	@include_once ($f);
+	@include_once(_ROOT_CWD . $f);
 }
 
 if (@is_readable(_CACHE_PLUGINS_FCT)){
