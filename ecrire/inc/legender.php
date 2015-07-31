@@ -81,8 +81,8 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	if ($date) $contenu .= "<br />\n" . affdate($date);
 
-	$corps =
-	  (!$contenu ? '' :
+	include_spip('inc/editer');
+	$corps = (!$contenu ? '' :
 	   "<div class='verdana1' style='text-align: center;'>$contenu</div>") .
 	  "<label for='titre_document$id_document'><b>$label</b></label><br />\n" .
 
@@ -95,7 +95,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
-	  $taille;
+	  $taille
+	  
+	  .controles_md5($document);
 
 	$att_bouton = " class='fondo spip_xx-small'";
 	$att_span = " id='valider_doc$id_document' "

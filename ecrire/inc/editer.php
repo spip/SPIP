@@ -128,10 +128,22 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	}
 
 	if ($redirect) {
-		$redirect = "<form action='$redirect' method='get' style='float:".$GLOBALS['spip_lang_right']."; margin-top:2em;'>\n"
+		$id = uniqid();
+		$redirect = "<form action='$redirect' method='get'
+			id='$id'
+			style='float:".$GLOBALS['spip_lang_right']."; margin-top:2em;'>\n"
 		.form_hidden($redirect)
 		."<input type='submit' value='"._T('icone_retour')."' />
 		</form>\n";
+
+		// pour les documents, on est probablement en ajax : il faut ajaxer
+		if (_request('var_ajaxcharset'))
+			$redirect .= '<script type="text/javascript">'
+			.'setTimeout(function(){$("#'.$id.'")
+			.ajaxForm({target:$("#'.$id.'").parent()});
+			}, 200);'
+			."</script>\n";
+
 	}
 
 	echo minipres(
