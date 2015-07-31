@@ -148,7 +148,7 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 	if (_request('tout_voir'))
 		set_request('recherche','');
 
-
+	include_spip('inc/autoriser');
 	if (autoriser('modifier',$objet,$id_objet)) {
 		// annuler les suppressions du coup d'avant !
 		if (_request('annuler_oups')
