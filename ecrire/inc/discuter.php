@@ -16,8 +16,6 @@ include_spip('inc/forum');
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@formulaire_discuter
-
-// http://doc.spip.org/@formulaire_discuter
 function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $objet)
 {
 	$nav = '';
@@ -56,8 +54,10 @@ function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=NULL, $
 
 	if ($id_parent) {
 	  $id_t = sql_getfetsel('id_thread', 'spip_forum', "id_forum=$id_parent");
-	  $res = afficher_forum(sql_select('*', 'spip_forum', "id_forum=$id_t"), $script, $args);
-#	  $res = afficher_forum_thread(sql_fetsel('*', 'spip_forum', "id_forum=$id"), false,0,0,0,$script, $args);
+	  $query = array('SELECT' => "*", 'FROM' => "spip_forum", 'WHERE' => "id_forum=$id_t");
+
+	  $res = afficher_forum($query, $script, $args);
+
 	} else {
 		$clic = _T('icone_poster_message');
 		$logo = ($script == 'forum_admin') ?
@@ -74,9 +74,8 @@ function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=NULL, $
 			$nav = ($n <= $pas) ? '' :
 			  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
 
-			$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
-			
-			$q = afficher_forum($q, $script,  $args, false);
+			$query = array('SELECT' => "*", 'FROM' => "spip_forum", 'WHERE' =>  $where, 'ORDER BY' => "date_heure DESC", 'LIMIT' => "$debut,$pas");
+			$q = afficher_forum($query, $script,  $args, false);
 			$res .= $nav . $q	. "<br />" . $nav;
 		}
 	}
