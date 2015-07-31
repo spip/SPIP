@@ -25,12 +25,12 @@ else $login = "";
 
 if ($echec_cookie == "oui") {
 	install_debut_html("$nom_site : probl&egrave;me de cookie");
-	echo "<p><b>Pour vous identifier de fa&ccedil;on sûre sur ce site, vous devez accepter les cookies.</b> ";
+	echo "<p><b>Pour vous identifier de fa&ccedil;on s&ucirc;re sur ce site, vous devez accepter les cookies.</b> ";
 	echo "Veuillez r&eacute;gler votre navigateur pour qu'il les accepte (au moins pour ce site).\n";
 }
 else {
 	install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;", "document.forms[0].elements[1].focus();");
-	echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
+	echo "&lt;p&gt;Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 	echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 	echo "fournis lors de votre inscription.";
 }
@@ -43,7 +43,7 @@ if ($echec_cookie == "oui" AND $php_module) {
 	echo "<form action='index.php3' method='get'>";
 	echo "<fieldset>\n";
 	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
-	echo "non s&eacute;curis&eacute;e est à votre disposition&nbsp;: \n";
+	echo "non s&eacute;curis&eacute;e est &agrave; votre disposition&nbsp;: \n";
 	echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 	echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
 	echo "</fieldset></form>\n";
