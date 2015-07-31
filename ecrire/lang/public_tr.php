@@ -36,13 +36,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernieres_breves' => 'Son eklenen k&#305;sa haberler',
 'derniers_articles' => 'Son eklenen makaleler',
 'derniers_commentaires' => 'Son eklenen yorumlar',
-'derniers_messages_forum' => 'Forumlarda yay&#305;nlanan son iletiler',
+'derniers_messages_forum' => 'Forumlarda yay&#305;nlanan son mesajlar',
 
 // E
 'edition_mode_texte' => 'Metin &#351;eklinde de&#287;i&#351;tir',
 'en_reponse' => 'Yan&#305;tt&#305;r&nbsp;:',
 'en_resume' => '&Ouml;zet',
-'envoyer_message' => 'Bir ileti g&ouml;nder',
+'envoyer_message' => 'Bir mesaj g&ouml;nder',
 'espace_prive' => '&Ouml;zel alan',
 
 // F
@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Ayn&#305; b&ouml;l&uuml;mde',
 'memes_auteurs' => 'Ayn&#305; yazarlardan',
 'message' => '&#304;leti',
-'messages_forum' => 'Forum iletileri',
-'messages_recents' => 'Son forum iletileri',
+'messages_forum' => 'Forum mesajlar&#305;',
+'messages_recents' => 'Son forum mesajlar&#305;',
 'mots_clefs' => 'Anahtar s&ouml;zc&uuml;k',
 'mots_clefs_meme_groupe' => 'Ayn&#305; grupta anahtar s&ouml;zc&uuml;k',
 
@@ -79,16 +79,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => '&ouml;nceki sayfa',
 'page_suivante' => 'sonraki sayfa',
 'par_auteur' => 'yazan',
-'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. An&#305;nda sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir iletiyi alabilirsiniz.',
+'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. Bu durumda hemen sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir mesaj al&#305;rs&#305;n&#305;z.',
 'plan_site' => 'Site plan&#305;',
 'popularite' => 'Pop&uuml;lerlik',
-'poster_message' => 'Bir ileti g&ouml;nder',
+'poster_message' => 'Bir mesaj g&ouml;nder',
 'proposer_site' => 'Bu b&ouml;l&uuml;me eklenecek bir site &ouml;nerebilirsiniz&nbsp;:',
 
 // R
 'repondre_article' => 'Bu makaleyi yan&#305;tla',
 'repondre_breve' => 'Bu k&#305;sa haberi yan&#305;tla',
-'repondre_message' => 'Bu iletiyi yan&#305;tla',
+'repondre_message' => 'Bu mesaj&#305; yan&#305;tla',
 'resultats_recherche' => 'Arama sonu&ccedil;lar&#305;',
 'retour_debut_forums' => 'Forumlar&#305;n ba&#351;&#305;na d&ouml;n',
 'rubrique' => 'B&ouml;l&uuml;m',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // S
 'signatures_petition' => '&#304;mzalar',
 'site_realise_avec_spip' => 'SPIP ile ger&ccedil;ekle&#351;tirilmi&#351; site',
-'sites_web' => 'Web siteleri',
+'sites_web' => 'web sitesi',
 'sous_rubriques' => 'Alt-b&ouml;l&uuml;mler',
 'spam' => 'Spam',
 'suite' => 'devam&#305;',
