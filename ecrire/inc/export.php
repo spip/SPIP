@@ -139,6 +139,7 @@ function text_to_xml($string) {
 
 // production de l'entete du fichier d'archive
 
+// http://doc.spip.org/@export_entete
 function export_entete()
 {
 	return
@@ -154,6 +155,7 @@ $GLOBALS['meta']['charset']."\"?".">\n" .
 >\n";
 }
 
+// http://doc.spip.org/@export_enpied
 function export_enpied () { return  "</SPIP>\n";}
 
 ?>

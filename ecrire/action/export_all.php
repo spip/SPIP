@@ -16,6 +16,7 @@ include_spip('inc/export');
 include_spip('inc/actions');
 include_spip('inc/minipres');
 
+// http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
 {
 	global $connect_toutes_rubriques ;
