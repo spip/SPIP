@@ -50,13 +50,13 @@ function install_etape_ldap4_dist()
 				       . _FILE_LDAP
 				       . substr($conn, $p+1));
 		}
-		$adresse_ldap = addslashes($adresse_ldap);
-		$login_ldap = addslashes($login_ldap);
-		$pass_ldap = addslashes($pass_ldap);
-		$port_ldap = addslashes($port_ldap);
-		$tls_ldap = addslashes($tls_ldap);
-		$protocole_ldap = addslashes($protocole_ldap);
-		$base_ldap = addslashes($base_ldap);
+		$adresse_ldap = addcslashes($adresse_ldap,"'\\");
+		$login_ldap = addcslashes($login_ldap,"'\\");
+		$pass_ldap = addcslashes($pass_ldap,"'\\");
+		$port_ldap = addcslashes($port_ldap,"'\\");
+		$tls_ldap = addcslashes($tls_ldap,"'\\");
+		$protocole_ldap = addcslashes($protocole_ldap,"'\\");
+		$base_ldap = addcslashes($base_ldap,"'\\");
 
 		$conn = "\$GLOBALS['ldap_base'] = '$base_ldap';\n"
 			. "\$GLOBALS['ldap_link'] = @ldap_connect('$adresse_ldap','$port_ldap');\n"
