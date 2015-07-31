@@ -88,6 +88,7 @@ function minipres($titre='', $corps="", $onload='')
 		. install_fin_html();
 	else {
 		include_spip('inc/headers');
+		include_spip('inc/actions');
 		$url = self('&',true);
 		foreach ($_POST as $v => $c)
 			$url = parametre_url($url, $v, $c, '&');

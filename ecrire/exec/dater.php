@@ -38,6 +38,7 @@ function exec_dater_args($id, $type)
 		$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';
 		$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
 		$dater = charger_fonction('dater', 'inc');
+		include_spip('inc/actions');
 		ajax_retour($dater($id, 'ajax', $statut, $type, $script, $date, $date_redac));
 	}
 }

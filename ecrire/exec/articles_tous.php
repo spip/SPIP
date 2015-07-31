@@ -37,6 +37,7 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang)
 
 	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art, lang_dir());
 	if (_AJAX AND $id_rubrique) 
+		include_spip('inc/actions');
 		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, $id_rubrique, $flag_trad, 2));
 	else {
 

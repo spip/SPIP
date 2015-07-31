@@ -30,6 +30,7 @@ function exec_meme_rubrique_args($id, $type, $order)
 	// on connait pas le vrai 2e arg mais c'est pas dramatique
 		if (!$order) $order = 'date';
 		$res = $meme_rubrique($id, 0, $type, $order, NULL, true);
+		include_spip('inc/actions');
 		ajax_retour($res);
 	}
 }

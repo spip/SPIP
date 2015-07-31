@@ -17,6 +17,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_plonger_dist
 function exec_plonger_dist()
 {
+	include_spip('inc/actions');
+	
 	$rac = _request('rac');
 	$id = intval(_request('id'));
 	$exclus = intval(_request('exclus'));
@@ -25,7 +27,6 @@ function exec_plonger_dist()
 	if (preg_match('/^\w*$/', $do)) {
 		if (!$do) $do = 'aff';
 
-		include_spip('inc/actions');
 		$plonger = charger_fonction('plonger', 'inc');
 		$r = $plonger($id, htmlentities($rac), array(), $col, $exclus, $do);
 	} else $r = '';

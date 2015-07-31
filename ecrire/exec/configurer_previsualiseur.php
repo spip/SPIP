@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_configurer_previsualiseur_dist()
 {
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
+	include_spip('inc/actions');
 	ajax_retour($previsualiseur());
 }
 ?>

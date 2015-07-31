@@ -30,6 +30,7 @@ function exec_menu_rubriques_dist() {
 		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
 		http_status(304);
 	} else {
+		include_spip('inc/actions');
 		$ret = menu_rubriques();
 		ajax_retour($ret);
 	}
