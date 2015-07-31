@@ -28,9 +28,9 @@ function inc_documenter_dist(
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
-			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+		  $lies = spip_abstract_select("docs.*,l.id_$type,l.vu", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png')",'',  "0+docs.titre, docs.date");
 		} else {
-			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+		  $lies = spip_abstract_select("docs.*,l.id_$type,l.vu", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension NOT IN ('gif', 'jpg', 'png')",'', "0+docs.titre, docs.date");
 		}
 
 		$documents = array();

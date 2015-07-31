@@ -72,7 +72,7 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 	foreach ($fragments as $id_fragment => $texte) {
 		$nouveau = true;
 		// Recuperer la version la plus recente
-		$result = spip_query("SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ORDER BY version_min DESC LIMIT 0,1");
+		$result = spip_query("SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ORDER BY version_min DESC LIMIT 1");
 
 		if ($row = spip_fetch_array($result)) {
 			$fragment = $row['fragment'];
@@ -392,10 +392,10 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
 	// definie, on enregistre alors le numero IP
 	if (!$id_auteur = intval($id_auteur))
-		$id_auteur = $GLOBALS['ip'];
+		$id_auteur = _q($GLOBALS['ip']);
 
 	// Examiner la derniere version
-	$result = spip_query("SELECT id_version, (id_auteur='$id_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 0,1");
+	$result = spip_query("SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 1");
 
 	if ($row = spip_fetch_array($result)) {
 		$nouveau = !$row['flag'];
@@ -416,7 +416,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 		$nouveau = true;
 		$id_version_new = 1;
 	}
-	$result = spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 0,1");
+	$result = spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1");
 
 	if ($row = spip_fetch_array($result))
 		$id_fragment_next = $row['id_fragment'] + 1;
@@ -459,12 +459,13 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	if (!$codes) $codes = array();
 	$codes = (serialize($codes));
 	$permanent = empty($titre_version) ? 'non' : 'oui';
+
 	if ($nouveau) {
-		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, " . _q($titre_version) . ", '$permanent', NOW(), '$id_auteur', " . _q($codes) . ")");
+		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, " . _q($titre_version) . ", '$permanent', NOW(), $id_auteur, " . _q($codes) . ")");
 
 	}
 	else {
-		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur='$id_auteur', champs=" . _q($codes) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
+		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs=" . _q($codes) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
 	}
 	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");
