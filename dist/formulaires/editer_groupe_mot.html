@@ -40,13 +40,17 @@
 	    	<div class='choix'><input type='checkbox' name='tables&#91;&#93;' value='syndic'[(#VAL{syndic}|in_array{#ENV{tables}}|oui)checked="checked"] id='syndic' /><label for='syndic'><:item_mots_cles_association_sites:></label></div>
 	    	<!--choix_tables-->
 	    	</li></ul></fieldset>
-	    	[(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
+	    </li>
+	    [(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
+		<li>
 	    	<fieldset><ul><li>
 	    	<div class='choix'><input type='checkbox' name='unseul' value='oui'[(#ENV{unseul}|=={oui}|oui)checked="checked"] id='unseul' /><label for='unseul'><:info_selection_un_seul_mot_cle:></label></div>
 	    	<div class='choix'><input type='checkbox' name='obligatoire' value='oui'[(#ENV{obligatoire}|=={oui}|oui)checked="checked"] id='obligatoire' /><label for='obligatoire'><:avis_conseil_selection_mot_cle:></label></div>
     		</li></ul></fieldset>
-    		]
-				<fieldset><h3 class='legend'><:info_qui_attribue_mot_cle:></h3><ul><li>
+    	</li>
+    	]
+    	<li>
+			<fieldset><h3 class='legend'><:info_qui_attribue_mot_cle:></h3><ul><li>
 	    	<div class='choix'><input type='checkbox' name='acces_minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked="checked"] id='acces_minirezo' /><label for='acces_minirezo'><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
 	    	<div class='choix'><input type='checkbox' name='acces_comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked="checked"] id='acces_comite' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
 				[(#ENV{config}|table_valeur{forums_publics}|=={non}|non)
