@@ -68,6 +68,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 		$equiv="";
 	} else {
 		@header("Refresh: 0; url=" . $url);
+		if (isset($GLOBALS['meta']['charset'])) @header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 		$equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
 	}
 	include_spip('inc/lang');
@@ -78,6 +79,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 <head>',
 	  $equiv,'
 <title>HTTP '.$status.'</title>
+'.((isset($GLOBALS['meta']['charset']))?'<meta http-equiv="Content-Type" content="text/html;charset='.$GLOBALS['meta']['charset'].'">':'').'
 </head>
 <body>
 <h1>HTTP '.$status.'</h1>
