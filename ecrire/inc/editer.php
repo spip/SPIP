@@ -344,18 +344,24 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	include_spip('inc/suivi_versions');
 	include_spip('inc/diff');
 	foreach ($conflits as $champ=>$a) {
+		// probleme de stockage ou conflit d'edition ?
+		$base = isset($a['save']) ? $a['save'] : $a['base'];
+
 		$diff = new Diff(new DiffTexte);
 		$n = preparer_diff($a['post']);
-		$o = preparer_diff($a['base']);
+		$o = preparer_diff($base);
 		$d = propre_diff(
 			afficher_para_modifies(afficher_diff($diff->comparer($n,$o))));
-		$diffs[] = "<h2>$champ</h2>\n"
+
+		$titre = isset($a['save']) ? _L('Echec lors de l\'enregistrement du champ @champ@', array('champ' => $champ)) : $champ;
+
+		$diffs[] = "<h2>$titre</h2>\n"
 			. "<h3>"._T('info_conflit_edition_differences')."</h3>\n"
 			. "<div style='max-height:8em; overflow: auto; width:99%;'>".$d."</div>\n"
 			. "<h4>"._T('info_conflit_edition_votre_version')."</h4>"
 			. display_conflit_champ($a['post'])
 			. "<h4>"._T('info_conflit_edition_version_enregistree')."</h4>"
-			. display_conflit_champ($a['base']);
+			. display_conflit_champ($base);
 	}
 
 	if ($redirect) {

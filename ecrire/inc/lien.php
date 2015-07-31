@@ -70,7 +70,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$rel = trim("$rel external");
 	if ($rel) $rel = " rel='$rel'";
 
-	$lien = "<a href='$lien' class='$class'$lang$title$rel$mime>$texte</a>";
+	$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
 
 	# ceci s'execute heureusement avant les tableaux et leur "|".
 	# Attention, le texte initial est deja echappe mais pas forcement
@@ -370,7 +370,6 @@ function typer_raccourci ($lien) {
 		$f = 'document';
 	else if (preg_match('/^br..?ve$/S', $f)) $f = 'breve'; # accents :(
 	$match[0] = $f;
-	$match[2] = entites_html($match[2]);
 	return $match;
 }
 
@@ -405,7 +404,7 @@ define('_RACCOURCI_MODELE',
 	.'\s*(<\/a>)?' # eventuel </a>
        );
 
-define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@is');
+define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@isS');
 
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens = null) {
