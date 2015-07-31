@@ -121,7 +121,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<div><b>$titre</b></div>";
+			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
 			
 			if ($descriptif) $retour .= "<div style='text-align: left;'>$descriptif</div>";
 			
@@ -239,7 +239,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<div><b>$titre</b></div>";
+			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
 			if ($descriptif) $retour .= "<div style='text-align:left;'>$descriptif</div>";
 
 			if ($mode == 'document')

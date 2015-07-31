@@ -241,7 +241,7 @@ function liste_rv($query, $type) {
 
 	$result = spip_query($query);
 	if (spip_num_rows($result) > 0){
-		echo "<p /><div style='border: 1px solid #999999; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
+		echo "<div>&nbsp;</div><div style='border: 1px solid #999999; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
 		echo "<div style='background-color: $couleur_titre; padding: 3px; color: $couleur_texte;'>";
 		echo "<b class='verdana1'>$titre</b>";
 		echo "</div>";
