@@ -113,12 +113,12 @@ $tables_trans = array(
 );
 
 // http://doc.spip.org/@import_init_tables
-function import_init_tables()
+function import_init_tables($request)
 {
   global $IMPORT_tables_noerase, $connect_id_auteur;
 	// grand menage
 	// on vide toutes les tables dont la restauration est demandee
-	$tables = import_table_choix();
+	$tables = import_table_choix($request);
 	foreach($tables as $table){
 
 		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase)))
@@ -126,6 +126,7 @@ function import_init_tables()
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
+	spip_log("la bidouille");
 	spip_query("UPDATE spip_auteurs SET id_auteur=0, extra=$connect_id_auteur WHERE id_auteur=$connect_id_auteur");
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
 
@@ -236,8 +237,6 @@ function import_tables($request, $dir, $trans=array()) {
 			import_tables($request, $dir, $trans);
 			spip_query("DROP TABLE spip_translate");
 		}
-		detruit_restaurateur();
-		ecrire_acces();	// Mise a jour du fichier htpasswd
 		if ($charset = $GLOBALS['meta']['charset_restauration']) {
 			ecrire_meta('charset', $charset);
 			ecrire_metas();
@@ -246,6 +245,8 @@ function import_tables($request, $dir, $trans=array()) {
 		calculer_rubriques();
 		$res = '';
 	}
+	detruit_restaurateur();
+	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
 	return $res . "</body></html>\n";;
 }
 
@@ -304,7 +305,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 
 
 // http://doc.spip.org/@import_table_choix
-function import_table_choix()
+function import_table_choix($request)
 {
 	// construction de la liste des tables pour le dump :
 	// toutes les tables principales

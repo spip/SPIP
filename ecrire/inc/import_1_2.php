@@ -39,14 +39,14 @@ function description_table($nom){
 // pour le support des vieux dump
 // http://doc.spip.org/@inc_import_1_2_dist
 function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
-  global $import_ok, $abs_pos, $my_pos;
+  global $import_ok;
 	static $field_desc = array ();
 
-	// detruire les tables a restaurer
-	if (!$my_pos) import_init_tables();
-
 	static $tables;
-	if (!$tables) $tables = array(
+	if (!$tables) {
+		$init = $request['init'];
+		$init($request);
+		$tables = array(
 		'article' => 'spip_articles',
 		'auteur' => 'spip_auteurs',
 		'breve' => 'spip_breves',
@@ -61,8 +61,8 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 		'syndic' => 'spip_syndic',
 		'syndic_article' => 'spip_syndic_articles',
 		'type_document' => 'spip_types_documents'
-	);
-
+		);
+	}
 	$import_ok = false;
 	$b = '';
 	// Lire le type d'objet
@@ -75,6 +75,7 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 	if (!isset($field_desc[$table])){
 		// recuperer la description de la table pour connaitre ses champs valides
 		list($nom,$desc) = description_table($table);
+
 		if (isset($desc['field']))
 			$field_desc[$table] = $desc['field'];
 		else
