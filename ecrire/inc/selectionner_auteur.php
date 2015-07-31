@@ -46,13 +46,6 @@ function selectionner_auteur_boucle($query, $idom)
 	while ($row = spip_fetch_array($query)) {
 
 		$id = $row["id_auteur"];
-		$titre = typo(extraire_multi($row["nom"]));
-
-		$email = $row["email"];
-		$statut = $row["statut"];
-
-		$commun = "findObj_forcer('nouv_auteur').value="
-		. $id;
 
 		// attention, les <a></a> doivent etre au premier niveau
 		// et se suivrent pour que changerhighligth fonctionne
@@ -62,13 +55,17 @@ function selectionner_auteur_boucle($query, $idom)
 
 		$res .= "<a class='pashighlight'"
 		. "\nonclick=\"changerhighlight(this);"
-		. $commun
+		. "findObj_forcer('nouv_auteur').value="
+		. $id
 		. "; aff_selection($id,$args); return false;"
 		. "\"\nondbclick=\""
-		. $commun  
-		  . ";findObj_forcer('selection_auteur').style.display="
+		. "findObj_forcer('nouv_auteur').value="
+		. $id
+		. ";findObj_forcer('selection_auteur').style.display="
 		. "'none'; return false"
-		. "\"><b>$titre</b></a>";
+		. "\"><b>"
+		. typo(extraire_multi($row["nom"]))
+		. "</b></a>";
 	}
 
 	return $res;

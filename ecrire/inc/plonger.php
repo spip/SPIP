@@ -43,33 +43,37 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 		$args = "'$idom',this,$col,'$spip_lang_left','$info'";
 		while (list($id, $titrebrut) = each($ordre)) {
 
-			$titre = "<div class='"
-			. ($id_rubrique ? 'petite-rubrique' : "petit-secteur")
-			. "'>"
-			. supprimer_numero($titrebrut)
-			. "</div>";
+			$titre = supprimer_numero($titrebrut);
 
+			$classe1 = $id_rubrique ? 'petite-rubrique' : "petit-secteur";
 			if (isset($rub[$id]["enfants"])) {
-				$titre = "<div class='rub-ouverte'>$titre</div>";
-				$acces = "firstChild.";
+				$classe2 = " class='rub-ouverte'";
 				$url = "\nhref='$rec&amp;id=$id'" ;
-			} else {  $url = $acces = ''; }
+			} else {  $url = $classe2 = '' ; }
 
-			$ret .= "<a class='"
-			. (($id == $next) ? "highlight" : "pashighlight")
-			. "'"
-			. $url
-			.  "\nonClick=\"changerhighlight(this);return "
+			$click = "\nonclick=\"changerhighlight(this.parentNode.parentNode.parentNode);\nreturn "
 			. (!is_array($list) ? ' false' 
 			   : "aff_selection_provisoire($id,$args)")
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 			. "\"\nondblclick=\""
 			. "aff_selection_titre(this."
-			. $acces
-			. "firstChild.firstChild.nodeValue,$id,'selection_rubrique','id_parent');"
-			. "return aff_selection_provisoire($id,$args);"
-			. "\">$titre</a>";
+			. "firstChild.nodeValue,"
+			. $id
+			. ",'selection_rubrique','id_parent');"
+			. "\nreturn aff_selection_provisoire($id,$args);"
+			. "\"";
+
+			$ret .= "<div class='"
+			. (($id == $next) ? "highlight" : "pashighlight")
+			. "'><div class='"
+			. $classe1
+			. "'><div$classe2><a"
+			. $url
+			. $click
+			. ">"
+			. $titre
+			. "</a></div></div></div>";
 		}
 	}
 
