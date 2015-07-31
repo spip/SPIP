@@ -181,6 +181,11 @@ $GLOBALS['i18n_spip_da'] = array(
 'dirs_commencer' => ' for at kunne begynde installationen',
 'dirs_preliminaire' => 'Forberedelser: <B>Ops&aelig;tning af adgangsrettigheder</b>',
 'dirs_probleme_droits' => '<b>Problem med adgangsrettigheder</b>',
+'dirs_repertoires_absents' => '<B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
+  <P>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
+  Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist o venfor.
+  Hvis ikke, s&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
+  <P>Derefter kan du',
 'dirs_repertoires_suivants' => '<b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
 
 		<P>For at &aelig;ndre dette skal du benytte din FTP-klient til at s&aelig;tte adgangsrettigheder
@@ -662,10 +667,10 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_mots_cles_association' => 'N&oslash;gleord i denne gruppe kan forbindes med:',
 'info_moyenne' => 'gennemsnit:',
 'info_multi_articles' => 'Muligg&oslash;re valg af sprog til artiklerne?',
-'info_multi_cet_article' => 'Denne artikel er p&aring;:',
+'info_multi_cet_article' => '<MODIF> Denne artikel er p&aring;:',
 'info_multi_cette_rubrique' => 'Dette afsnit er p&aring;:',
 'info_multi_herit' => '<MODIF> langue du parent',
-'info_multi_langues_choisies' => 'V&aelig;lg de sprog der skal v&aelig;re til r&aring;dighed for redakt&oslash;rer p&aring; webstedet.
+'info_multi_langues_choisies' => '<MODIF> V&aelig;lg de sprog der skal v&aelig;re til r&aring;dighed for redakt&oslash;rer p&aring; webstedet.
   Sprog der allerede er i brug p&aring; webstedet (de f&oslash;rstn&aelig;vnte) kan ikke frav&aelig;lges.
   Bem&aelig;rk&nbsp;: kun de sprog som er fremh&aelig;vet med fede typer kan fuldt ud h&aring;ndteres af  systemet.',
 'info_multi_rubriques' => 'Muligg&oslash;re sprogvalg til afsnit?',

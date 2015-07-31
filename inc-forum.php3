@@ -157,7 +157,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$ret .= "<div class='spip_encadrer'>";
 			if ($afficher_texte != "non"){
 				$ret .= "<font size=4 color='#aaaaaa'><b>".typo($titre)."</b></font>";
-				$ret .= "<p><b><a href='mailto:$email_auteur'>".typo($auteur)."</a></b>";
+				$ret .= "<p><b><a href='mailto:".entites_html($email_auteur)."'>".typo($auteur)."</a></b>";
 				$ret .= "<p>".propre($texte)."<p>";
 			}
 
@@ -339,7 +339,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "<br />\n<input type='text' class='forml' name='auteur' value=\"".entites_html($auteur)."\" size='40'$disabled /><br />\n";
 
 		$ret .= _T('forum_votre_email');
-		$ret .= "<br />\n<input type='text' class='forml' name='email_auteur' value=\"$email_auteur\" size='40'$disabled /></div>";
+		$ret .= "<br />\n<input type='text' class='forml' name='email_auteur' value=\"".entites_html($email_auteur)."\" size='40'$disabled /></div>";
 	}
 
 	if ($afficher_texte !="non") $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_voir_avant')."' /></div>";
