@@ -28,6 +28,13 @@ function install_etape_4_dist()
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 	echo info_progression_etape(4,'etape_','install/');
 
+	echo "<div class='success'><h3>"
+		. _T('info_derniere_etape')
+		. "</h3><p>"
+		. _T('info_utilisation_spip')
+		. "</p></div>";
+
+
 	echo "<p>"
 			._T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
 			."</p>";
@@ -38,10 +45,6 @@ function install_etape_4_dist()
 	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
 
 	plugin_installes_meta();
-
-	echo info_etape(_T('info_derniere_etape'),
-			_T('info_utilisation_spip')
-	);
 
 	// mettre a jour si necessaire l'adresse du site
 	// securite si on arrive plus a se loger

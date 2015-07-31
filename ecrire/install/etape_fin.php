@@ -70,6 +70,6 @@ function install_verifier_htaccess()
 			'constantes' =>  '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
 			'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'));
 
-	return "<p class='resultat echec'>$titre</p><p>$averti</p>";
+	return "<div class='error'><h3>$titre</h3><p>$averti</p></div>";
 }
 ?>

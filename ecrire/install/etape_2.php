@@ -61,7 +61,7 @@ function install_etape_2_dist()
 	//echo "\n-->\n";
 
 	if (($db_connect=="0") && $link) {
-		echo "<p class='resultat ok'><b>"._T('info_connexion_ok')."</b></p>\n";
+		echo "<div class='success'><h3>"._T('info_connexion_ok')."</h3></div>";
 		echo info_progression_etape(2,'etape_','install/');
 
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
@@ -80,17 +80,16 @@ function install_etape_2_dist()
 
 		echo install_etape_2_form($hidden, $checked, $res, 3);
 	} else  {
-		echo info_etape(_T('info_connexion_base'));
-
 		echo info_progression_etape(1,'etape_','install/',true);
 
-		echo "<p class='resultat echec'><b>",
-		  _T('avis_connexion_echec_1'),
-		  "</b></p>";
+		echo "<div class='error'>";
+		echo info_etape(_T('info_connexion_base'));
+		echo "<h3>" . _T('avis_connexion_echec_1') . "</h3>";
 		echo "<p>"._T('avis_connexion_echec_2')."</p>";
+
 		echo "<p style='font-size: small;'>",
 		  _T('avis_connexion_echec_3'),
-		  "</p>";
+		  "</p></div>";
 	}
 	
 	echo install_fin_html();

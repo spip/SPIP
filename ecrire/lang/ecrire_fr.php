@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'La connexion  à la base de données a échoué.',
 'avis_connexion_echec_2' => 'Revenez à la page précédente, et vérifiez les informations que vous avez fournies.',
 'avis_connexion_echec_3' => '<b>N.B.</b> Sur de nombreux serveurs, vous devez <b>demander</b> l\'activation de votre accès à la base de données avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, vérifiez que vous avez effectué cette démarche.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets',
 'avis_connexion_ldap_echec_1' => 'La connexion au serveur LDAP a échoué.',
 'avis_connexion_ldap_echec_2' => 'Revenez à la page précédente, et vérifiez les informations que vous avez fournies.',
 'avis_connexion_ldap_echec_3' => 'Alternativement, n\'utilisez pas le support LDAP pour importer des utilisateurs.',
