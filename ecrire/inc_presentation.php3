@@ -1617,7 +1617,7 @@ function debut_gauche($rubrique = "asuivre") {
 	global $requete_fichier;
 	global $connect_id_auteur;
 	global $spip_ecran;
-	global $flag_3_colonnes;
+	global $flag_3_colonnes, $flag_centre_large;
 
 	$flag_3_colonnes = false;
 	$largeur = 200;
@@ -1625,15 +1625,15 @@ function debut_gauche($rubrique = "asuivre") {
 	// Ecran panoramique ?
 	if ($spip_ecran == "large") {
 		$largeur_ecran = 974;
+		
 		// Si edition de texte, formulaires larges
 		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $REQUEST_URI)) {
-			$largeur = 250;
+			$flag_centre_large = true;
 		}
-		// Sinon, trois colonnes
-		else {
-			$flag_3_colonnes = true;
-			$rspan = " rowspan=2";
-		}
+		
+		$flag_3_colonnes = true;
+		$rspan = " rowspan=2";
+
 	}
 	else {
 		$largeur_ecran = 750;
@@ -1743,16 +1743,27 @@ function creer_colonne_droite(){
 	global $options;
 	global $requete_fichier;
 	global $connect_id_auteur, $spip_ecran;
-	global $flag_3_colonnes;
+	global $flag_3_colonnes, $flag_centre_large;
 
 
 	
 	if ($flag_3_colonnes AND !$deja_colonne_droite) {
 		$deja_colonne_droite = true;
-		echo "<td width=37 rowspan=2>&nbsp;</td>";
+		
+		if ($flag_centre_large) {
+			$espacement = 27;
+			$largeur = 140;
+		}
+		else {
+			$espacement = 37;
+			$largeur = 200;
+		}
+		
+		
+		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
-		echo "<td width=37 rowspan=2>&nbsp;</td>";
-		echo "<td width=200 rowspan=2 valign='top'><p />";
+		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
+		echo "<td width=$largeur rowspan=2 valign='top'><p />";
 
 		if ($changer_config!="oui") {
 			$activer_messagerie=lire_meta("activer_messagerie");
@@ -1802,7 +1813,7 @@ function creer_colonne_droite(){
 function debut_droite() {
 	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $clean_link;
-	global $flag_3_colonnes;
+	global $flag_3_colonnes, $flag_centre_large;
 
 	if ($options == "avancees") {
 		if (!$deja_colonne_droite) creer_colonne_droite();
@@ -1849,8 +1860,8 @@ function debut_droite() {
 		echo "</td></tr><tr>";
 	}
 
-	if ($spip_ecran == 'large' AND !$flag_3_colonnes)
-		$largeur = 674;
+	if ($spip_ecran == 'large' AND $flag_centre_large)
+		$largeur = 580;
 	else
 		$largeur = 500;
 	
