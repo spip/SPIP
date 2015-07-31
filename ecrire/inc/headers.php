@@ -29,7 +29,7 @@ function redirige_par_entete($url, $equiv='') {
 		$url = parametre_url($url, 'transformer_xml', $x, '&');
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
 
-	if (!$equiv OR (strncmp("Apache", $GLOBALS['SERVER_SOFTWARE'],6)==0)) {
+	if (!$equiv OR (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0)) {
 		@header("Location: " . $url);
 	} else {
 		@header("Refresh: 0; url=" . $url);
