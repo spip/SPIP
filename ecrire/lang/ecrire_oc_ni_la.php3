@@ -78,9 +78,9 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_moderation_priori' => 'Moderacion a pri&ograve;ri (li
  contribucions apareisson en public basta se lu administrators
  li an validadi).',
-'bouton_radio_modere_abonnement' => '<MODIF>moderat emb abonament',
-'bouton_radio_modere_posteriori' => '<MODIF>moderat a posteri&ograve;ri',
-'bouton_radio_modere_priori' => '<MODIF>moderat a pri&ograve;ri',
+'bouton_radio_modere_abonnement' => 'moderat emb abonament',
+'bouton_radio_modere_posteriori' => 'moderat a posteri&ograve;ri',
+'bouton_radio_modere_priori' => 'moderat a pri&ograve;ri',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non apar&eacute;isser dins la tiera dei redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non mandar d\'anoncis editoriaus',
 'bouton_radio_non_syndication' => 'Minga de sindicacion',
@@ -112,7 +112,7 @@ la documentacion d\'SPIP</a>.',
 // C
 'cache_mode_compresse' => 'Lu fichiers de l\'escondedor son registrats en m&ograve;de comprimit.',
 'cache_mode_non_compresse' => 'Lu fichiers de l\'escondedor son registrats en m&ograve;de non comprimit.',
-'cache_modifiable_webmestre' => '<MODIF>Lo webm&egrave;stre dau sit p&ograve;u modificar aquestu param&egrave;tres.',
+'cache_modifiable_webmestre' => 'Lo webm&egrave;stre dau sit p&ograve;u modificar aquestu param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar embai informacions d\'aquest sit.',
 
 
@@ -260,7 +260,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de la v&ograve;stra basa de donadas es installada.',
 'info_base_restauration' => 'La basa es en cors de restauracion.',
-'info_bloquer' => '<NEW>bloquer',
+'info_bloquer' => 'blocar',
 'info_breves' => 'Lo v&ograve;stre sit utiliza lo sist&egrave;ma de br&egrave;vas?',
 'info_breves_03' => 'br&egrave;vas',
 'info_breves_liees_mot' => 'Li br&egrave;vas ligadi a aqueu mot clau',
@@ -293,7 +293,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_creer_base' => '<B>Crear</b> una basa de donadas nov&egrave;la:',
 'info_dans_groupe' => 'Dins lo grop:',
 'info_dans_rubrique' => 'Dins la rubrica:',
-'info_date_publication_anterieure' => '<MODIF>Data anteriora de publicacion:',
+'info_date_publication_anterieure' => 'Data anteriora de publicacion:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENT D\'AQUEU SIT:',
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
  <B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es ligat a
@@ -464,7 +464,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_procedure_maj_version' => 'Cau lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version nov&egrave;la d\'SPIP.',
 'info_ps' => 'P.S.',
-'info_publier' => '<NEW>publier',
+'info_publier' => 'publicar',
 'info_publies' => 'Lu v&ograve;stres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'ai esqueletas dau v&ograve;stre sit web si prev&eacute; lo registrament de vesitaires sensa acc&egrave;s a l\'espaci privat, vorgatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, lo v&ograve;stre sit, li estadisticas dei vesitas?',
@@ -726,12 +726,12 @@ un color indica lo sieu estat:',
 
 // S
 'statut_admin_restreint' => '(admin. restrench)',
-'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
-'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
-'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
-'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
-'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
-'syndic_options' => '<NEW>Options de syndication&nbsp;:',
+'syndic_choix_moderation' => 'Que si p&ograve;u far embai ligams venents que provenon d\'aqueu sit?',
+'syndic_choix_oublier' => 'Que si p&ograve;u far embai ligams que figuran pus dins lo fichier de sindicacion?',
+'syndic_lien_obsolete' => 'ligam obsolet',
+'syndic_option_miroir' => 'lu blocar sus lo c&ograve;up',
+'syndic_option_oubli' => 'lu escafar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindicacion:',
 
 
 // T
@@ -788,8 +788,8 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
  automatica.',
 'texte_creer_rubrique' => 'Avans de poder escriure d\'articles,<BR> dev&egrave;tz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
-'texte_date_publication_anterieure' => '<MODIF>DATA DE PUBLICACION ANTERIORA:',
-'texte_date_publication_anterieure_nonaffichee' => '<MODIF>Afichar minga de data de publicacion anteriora.',
+'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA:',
+'texte_date_publication_anterieure_nonaffichee' => 'Afichar minga de data de publicacion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA:',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',

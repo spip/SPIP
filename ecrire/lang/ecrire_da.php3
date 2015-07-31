@@ -239,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'F&oslash;lgende deltager er tilf&oslash;jet:',
 'info_ajouter_rubrique' => 'Tilf&oslash;j endnu et afsnit at administrere:',
 'info_annonce_nouveautes' => 'Seneste annonceringer',
-'info_annuler_blocage_priori' => 'Oph&aelig;v forh&aring;ndssp&aelig;rring',
 'info_anterieur' => 'forrige',
 'info_appliquer_choix_moderation' => 'Anvend denne godkendelsesprocedure:',
 'info_article' => 'artikel',
@@ -298,7 +297,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Du har &oslash;nsket at slette n&oslash;gleordet
 	<B>@titre_mot@</b> (@type_mot@). Da n&oslash;gleordet er knyttet til 
 	<b>@texte_lie@</b>skal du bekr&aelig;fte sletningen:',
-'info_demander_blocage_priori' => 'Forlang forh&aring;ndssp&aelig;rring',
 'info_derniere_etape' => 'Sidste skridt: <B>Det er overst&aring;et!',
 'info_derniere_syndication' => 'Sidste syndikering af dette websted blev udf&oslash;rt den',
 'info_derniers_articles_publies' => 'Dine senest offentliggjorte artikler',
@@ -769,7 +767,6 @@ i en farve, der angiver deres status:',
 'texte_date_publication_anterieure' => 'DATO FOR TIDLIGERE OFFENTLIGG&Oslash;RELSE',
 'texte_date_publication_anterieure_nonaffichee' => 'Skjul dato for tidligere offentligg&oslash;relse.',
 'texte_date_publication_article' => 'DATO FOR ONLINE OFFENTLIGG&Oslash;RELSE:',
-'texte_demander_blocage_priori' => 'Links der i fremtiden kommer fra dette websted vil blive sp&aelig;rret autmatisk.',
 'texte_descriptif_petition' => 'Beskrivelse af appellen',
 'texte_descriptif_rapide' => 'Kort beskrivelse',
 'texte_documents_joints' => 'Du kan tillade at dokumenter (kontorfiler, billeder,
@@ -795,7 +792,6 @@ i en farve, der angiver deres status:',
 'texte_lien_hypertexte' => '(Hvis din meddelelse henviser til en artikel der er offentliggjort p&aring; webben, eller til en side der giver flere oplysninger, s&aring; indtast her artiklens overskrift og dens URL.)',
 'texte_liens_sites_syndiques' => 'Links til syndikerede sider kan sp&aelig;rres p&aring; forh&aring;nd; f&oslash;lgende indstilling er standardindstillingen for syndikerede websteder, n&aring;r de er oprettet.
 			Det er s&aring;ledes p&aring; trods heraf muligt at sp&aelig;rre hvert link individuelt eller at v&aelig;lge for hver websted at sp&aelig;rre de links der kommer fra en givet websted.',
-'texte_liens_syndication' => 'Fremtidige links fra dette websted vil straks blive vist i webstedets offentlige omr&aring;de.',
 'texte_login_ldap_1' => '(Efterlad tom for anonym adgang eller indtast en fuldst&aelig;ndig sti, f.eks. &laquo;<tt>uid=hansen, ou=brugere, dc=mit-dom&aelig;ne, dc=dk</tt>&raquo;.)',
 'texte_login_precaution' => 'Advarsel! Dette er den login, du er koblet p&aring; med nu.
 	Brug denne formular med forsigtighed ...',

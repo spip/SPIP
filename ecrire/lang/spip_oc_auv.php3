@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Quo es impossible d\'actualizar la basa MySQL v&egrave;rs la version @version@; benl&egrave;u i a un probl&egrave;ma relatiu au dreit de modificar la basa de donadas. Volhatz contactar v&ograve;stre auberjador.',
+'analyse_xml' => 'Analisi XML',
 'avis_archive_incorrect' => 'lo fich&egrave;ir archiu z-es pas un fich&egrave;ir SPIP',
 'avis_archive_invalide' => 'lo fich&egrave;ir archiu z-es pas valid',
 'avis_attention' => 'ATENCION!',

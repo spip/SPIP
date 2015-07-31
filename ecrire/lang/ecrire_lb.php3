@@ -230,7 +230,6 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_ajout_participant' => 'De folgenden gouf derb&auml;i gesat:',
 'info_ajouter_rubrique' => 'Eng aner Rubrik fir ze administr&eacute;ieren derb&auml;i setzen:',
 'info_annonce_nouveautes' => 'D\'Neiegkeeten annonc&eacute;ieren',
-'info_annuler_blocage_priori' => 'D&euml;se Bloquage ophiewen',
 'info_anterieur' => 'viirdrun',
 'info_appliquer_choix_moderation' => 'D&euml;s Moderatiouns-Method iwwerhuelen:',
 'info_article' => 'Artikel',
@@ -289,7 +288,6 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_delet_mots_cles' => 'Dir w&euml;llt d\'Schl&euml;sselwuert
 <B>@titre_mot@</B> (@type_mot@) l&auml;schen. D&euml;st Wuert ass un
 <b>@texte_lie@</b> gebonnen, dir musst d&euml;s Decisioun valid&eacute;ieren:',
-'info_demander_blocage_priori' => 'Bloquage &agrave; priori fro&euml;n',
 'info_derniere_etape' => 'L&auml;schte Schr&euml;tt: <B>&Euml;t ass f&auml;rdeg!',
 'info_derniere_syndication' => 'L&auml;scht Syndicatioun vun d&euml;sem Site den',
 'info_derniers_articles_publies' => '&Auml;r l&auml;scht publiz&eacute;iert Artikelen',
@@ -745,7 +743,6 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_date_publication_anterieure' => '&Eacute;ISCHTEN REDAKTIOUNS-DATUM:',
 'texte_date_publication_anterieure_nonaffichee' => '&Eacute;ischten Redaktiouns-Datum n&euml;t weisen.',
 'texte_date_publication_article' => 'PUBLIZ&Eacute;IRT DEN:',
-'texte_demander_blocage_priori' => 'D&eacute;i n&auml;chst Linken vun d&euml;sem Site ginn fir d\'&eacute;ischt emol block&eacute;iert.',
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',
 'texte_descriptif_rapide' => 'Kuerz Beschreiwung',
 'texte_documents_joints' => 'Dir k&euml;nnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. D&euml;s Fichier\'en k&euml;nnen dann am Artikel gelinkt oder separat ugewisen ginn.<p />',
@@ -765,7 +762,6 @@ An dem Fall ass et besser den Default g&eacute;int de richtegen Character-Set ze
 'texte_jeu_caractere_2' => 'D&euml;s Astellung ass n&euml;t retroaktiv. D&eacute;i al Texter k&euml;nnen falsch ugewisen ginn no enger &Auml;nnerung. Dir kommt awer ouni Schued er&euml;m op d&eacute;i l&auml;scht Astellung zer&euml;ck.',
 'texte_lien_hypertexte' => '(Wann &auml;re Message sech op een Artikel um Internet, oder op eng S&auml;it mat m&eacute;i Informatiounen bezitt, da gitt hei s&auml;in Titel an seng URL an.)',
 'texte_liens_sites_syndiques' => 'D\'Linken vun de syndiqu&eacute;ierten Siten k&euml;nnen fir d\'&eacute;ischt mol block&eacute;iert ginn; d&eacute;i Astellung ass den Default fir d&eacute;i nei syndiqu&eacute;iert Siten. Duerno kann een all Link eenzel deblock&eacute;ieren, oder Site fir Site block&eacute;ieren oder n&euml;t.',
-'texte_liens_syndication' => 'D&eacute;i n&auml;chst Linken vun d&euml;sem Site ginn direkt online gewisen.',
 'texte_login_ldap_1' => '(Eidel loossen fir en anonymen Zougang,  oder de kompletten Wee ugin, z.B. "&nbsp;<tt>uid=muller, ou=users, dc=domain, dc=com</tt>&nbsp;".)',
 'texte_login_precaution' => 'Opgepasst! D&euml;st ass de Login mat dem dier ugemeld sidd.
 Benotzt d&euml;sen Formulaire viirsichteg...',

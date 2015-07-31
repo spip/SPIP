@@ -246,8 +246,6 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_ajout_participant' => 'Nast&#281;puj&#261;cy uczestnik zosta&#322; dodany:',
 'info_ajouter_rubrique' => 'Dodaj dzia&#322; do zarz&#261;dzania&nbsp;:',
 'info_annonce_nouveautes' => 'Zapowiedzi najnowszych news&oacute;w',
-'info_annuler_blocage_priori' => 'Anulowa&#263;
-    domy&#347;lnie ustawion&#261; blokad&#281;',
 'info_anterieur' => 'poprzedni',
 'info_appliquer_choix_moderation' => 'Wybierze ten spos&oacute;b moderowania:',
 'info_article' => 'artyku&#322;',
@@ -306,8 +304,6 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_delet_mots_cles' => 'Zarz&#261;da&#322;e&#347; usuni&#281;cia s&#322;owa kluczowego
 <B>@titre_mot@</b> (@type_mot@). To s&#322;owo jest powi&#261;zane z
 <b>@texte_lie@</b>musisz potwierdzi&#263; swoj&#261; decyzj&#281;:',
-'info_demander_blocage_priori' => 'Zapytaj
-    ustawienia domy&#347;lnej blokady',
 'info_derniere_etape' => 'Ostatni krok: <B>Zako&#324;czone!',
 'info_derniere_syndication' => 'Ostatnia syndykacja tego serwisu zosta&#322;a dokonana',
 'info_derniers_articles_publies' => 'Twoje ostatnie opublikowane artyku&#322;y',
@@ -809,8 +805,6 @@ od pocz&#261;tku opublikowania artyku&#322;u pojawi si&#281; kiedy najedziesz my
 'texte_date_publication_anterieure' => 'Data poprzedniej publikacji&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ukryj dat&#281; poprzedniej publikacji.',
 'texte_date_publication_article' => 'DATA PUBLIKACJI ONLINE:',
-'texte_demander_blocage_priori' => 'Kolejne linki pochodz&#261;ce
-z tej strony, zostan&#261; automatycznie zablokowane.',
 'texte_descriptif_petition' => 'Opis og&#322;oszenia',
 'texte_descriptif_rapide' => 'Kr&oacute;tki opis',
 'texte_documents_joints' => 'Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
@@ -848,7 +842,6 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
    stron syndykowanych po ich stworzeniu. Jest
    mo&#380;liwe p&oacute;&#378;niejsze odblokowanie, &#322;&#261;czy indywidualnie, lub
    wyb&oacute;r, strona po stronie, blokady link&oacute;w pochodz&#261;cych z danych stron.',
-'texte_liens_syndication' => 'Kolejne linki pochodz&#261;ce z tej strony b&#281;d&#261; wy&#347;wietlane automatycznie w serwisie publicznym.',
 'texte_login_ldap_1' => '(Pozostaw puste przy dost&#281;pie anonimowym, lub wpisz pe&#322;n&#261; &#347;cie&#380;k&#281;, np. &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Uwaga&nbsp;! To jest login, z kt&oacute;rego pomoc&#261; jeste&#347; teraz po&#322;&#261;czony.
  U&#380;ywaj tego formularza ostro&#380;nie...',

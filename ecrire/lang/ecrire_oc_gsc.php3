@@ -239,7 +239,6 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_ajout_participant' => 'Lo participant seguent qu\'ei ajustat:',
 'info_ajouter_rubrique' => 'Ajustar ua auta rubrica d\'administrar:',
 'info_annonce_nouveautes' => 'Anonci de las nautats',
-'info_annuler_blocage_priori' => 'Anullar aqueth blocatge a pri&ograve;ri',
 'info_anterieur' => 'anteriora',
 'info_appliquer_choix_moderation' => 'Aplicar aquera causida de moderacion:',
 'info_article' => 'article',
@@ -261,6 +260,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de la v&ograve;sta basa de dadas qu\'ei installada.',
 'info_base_restauration' => 'La basa qu\'ei en cors de restauracion.',
+'info_bloquer' => 'blocar',
 'info_breves' => 'Utiliza, lo v&ograve;ste sit, lo sist&egrave;ma de br&egrave;vas?',
 'info_breves_03' => 'br&egrave;vas',
 'info_breves_liees_mot' => 'Las br&egrave;vas ligadas a aqueth mot clau',
@@ -298,7 +298,6 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_delet_mots_cles' => 'Qu\'avetz demandat de suprimir lo mot clau
 <B>@titre_mot@</b> (@type_mot@). Aqueth mot clau qu\'ei ligat a
  <b>@texte_lie@</b>. Que devetz confirmar aquera decision:',
-'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_derniere_etape' => 'Darr&egrave;ra estapa: <B>Qu\'ei acabat!',
 'info_derniere_syndication' => 'La darr&egrave;ra sindicacion d\'aqueth sit que\'s has&oacute; lo',
 'info_derniers_articles_publies' => 'Los v&ograve;stes darr&egrave;rs articles publicats en linha',
@@ -465,6 +464,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_procedure_maj_version' => 'Que cau lan&ccedil;ar la procedura d\'actualizacion t&agrave; adaptar
  la basa de dadas a la version nav&egrave;ra d\'SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publicar',
 'info_publies' => 'Los v&ograve;stes articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas deu v&ograve;ste sit web e\'s preved lo registrament de vesitaires shens acc&egrave;s a l\'espaci privat, volhatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'E deu gerir, lo v&ograve;ste sit, las estadisticas de las vesitas?',
@@ -726,6 +726,12 @@ ua color qu\'indica lo lor estat:',
 
 // S
 'statut_admin_restreint' => '(admin. restrent)',
+'syndic_choix_moderation' => 'Que\'s p&ograve;t har dab los ligams vienents qui provienen d\'aqueth sit?',
+'syndic_choix_oublier' => 'Que\'s p&ograve;t har dab los ligams qui figuran pas pus dens lo fichi&egrave;r de sindicacion?',
+'syndic_lien_obsolete' => 'ligam obsolet',
+'syndic_option_miroir' => 'bloc&agrave;\'us suu c&ograve;p',
+'syndic_option_oubli' => 'escaf&agrave;\'us (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindicacion:',
 
 
 // T
@@ -785,8 +791,6 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'N\'afichar pas nada data de publicacion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA&nbsp;:',
-'texte_demander_blocage_priori' => 'Los ligams seguents
- qui provienen d\'aqueth sit que ser&agrave;n blocats a pri&ograve;ri.',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_joints' => 'Que podetz autorizar que s\'ajusten documents (fichi&egrave;rs burotics, imatges,
@@ -826,8 +830,6 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
     qu\'ei possible puish de 
    desblocar cada ligam individuaument, o de
    causir, sit per sit, de blocar los ligams avieneders.',
-'texte_liens_syndication' => 'Los ligams vienents qui 
-   provienen d\'aqueth sit que s\'afichar&agrave;n suu c&ograve;p dens lo sit public.',
 'texte_login_ldap_1' => '(Deishar vueid ent&agrave; un acc&egrave;s anonim, o picar lo camin complet, per exemple &laquo;<tt>uid=fabre, ou=usanciers, dc=mon-domeni, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atencion! Aqu&ograve; qu\'ei lo login dab lo quau &egrave;tz ara connectat/ada. 
  Utilizatz aqueste formulari dab precaucion...',

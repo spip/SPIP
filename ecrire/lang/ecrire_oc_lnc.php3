@@ -78,9 +78,9 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_moderation_priori' => 'Moderacion a pri&ograve;ri (las
  contribucions apareisson en public sonque se los administrators
  las an validadas).',
-'bouton_radio_modere_abonnement' => 'moderat amb abonament',
-'bouton_radio_modere_posteriori' => 'moderat a posteri&ograve;ri',
-'bouton_radio_modere_priori' => 'moderat a pri&ograve;ri',
+'bouton_radio_modere_abonnement' => 'amb abonament',
+'bouton_radio_modere_posteriori' => 'moderacion a posteri&ograve;ri',
+'bouton_radio_modere_priori' => 'moderacion a pri&ograve;ri',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Apar&eacute;isser pas dins la ti&egrave;ra dels redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anoncis editorials',
 'bouton_radio_non_syndication' => 'Pas cap de sindicacion',
@@ -237,7 +237,6 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_ajout_participant' => 'Lo participant seguent es apondut&nbsp;:',
 'info_ajouter_rubrique' => 'Apondre una autra rubrica d\'administrar:',
 'info_annonce_nouveautes' => 'Anonci de las novetats',
-'info_annuler_blocage_priori' => 'Anullar aquel blocatge a pri&ograve;ri',
 'info_anterieur' => 'anteriora',
 'info_appliquer_choix_moderation' => 'Aplicar aquela causida de moderacion&nbsp;:',
 'info_article' => 'article',
@@ -259,6 +258,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de v&ograve;stra basa de donadas es installada.',
 'info_base_restauration' => 'La basa es en cors de restauracion.',
+'info_bloquer' => 'blocar',
 'info_breves' => 'V&ograve;stre sit utiliza lo sist&egrave;ma de br&egrave;vas?',
 'info_breves_03' => 'br&egrave;vas',
 'info_breves_liees_mot' => 'Las br&egrave;vas ligadas a aquel mot clau',
@@ -296,7 +296,6 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
 <B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
  <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
-'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_derniere_etape' => 'Darri&egrave;ra estapa: <B>Es acabat!',
 'info_derniere_syndication' => 'La darri&egrave;ra sindicacion d\'aquel sit se fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'V&ograve;stres darri&egrave;rs articles publicats en linha',
@@ -463,6 +462,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_procedure_maj_version' => 'Cal lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version nov&egrave;la d\'SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publicar',
 'info_publies' => 'Los v&ograve;stres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, volgatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, las estadisticas de las vesitas?',
@@ -724,6 +724,12 @@ una color indica lor estat:',
 
 // S
 'statut_admin_restreint' => '(admin. restrench)',
+'syndic_choix_moderation' => 'Que se p&ograve;t far amb los ligams venents que provenon d\'aquel sit?',
+'syndic_choix_oublier' => 'Que se p&ograve;t far amb los ligams que figuran pas pus dins lo fichi&egrave;r de sindicacion?',
+'syndic_lien_obsolete' => 'ligam obsolet',
+'syndic_option_miroir' => 'los blocar sus lo c&ograve;p',
+'syndic_option_oubli' => 'los escafar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindicacion:',
 
 
 // T
@@ -783,8 +789,6 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_date_publication_anterieure' => 'Data de redaccion anteriora:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar pas cap de data de redaccion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA&nbsp;:',
-'texte_demander_blocage_priori' => 'Los ligams seguents
- que provenon d\'aquel sit ser&agrave;n blocats a pri&ograve;ri.',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fichi&egrave;rs burotics, imatges,
@@ -825,8 +829,6 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
     es possible pu&egrave;i de 
    desblocar cada ligam individualament, o de
    causir, sit per sit, de blocar los ligams avenidors.',
-'texte_liens_syndication' => 'Los ligams venents que 
-   provenon d\'aquel sit s\'afichar&agrave;n sul pic dins lo sit public.',
 'texte_login_ldap_1' => '(Daissar vu&egrave;g per un acc&egrave;s anonim, o picar lo camin complet, per exemple &laquo;<tt>uid=fabre, ou=usanciers, dc=mon-domeni, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atencion! Aqu&ograve;\'s lo login amb lo qual s&egrave;tz ara connectat/ada. 
  Utilizatz aqueste formulari amb precaucion...',

@@ -235,8 +235,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'Participantul urm&#259;tor a fost ad&#259;ugat&nbsp;:',
 'info_ajouter_rubrique' => 'Ad&#259;uga&#355;i o alt&#259; rubric&#259; de administrat&nbsp;:',
 'info_annonce_nouveautes' => 'Anun&#355;ul nout&#259;&#355;ilor',
-'info_annuler_blocage_priori' => 'Anula&#355;i
-    acest blocaj &agrave; priori',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Aplica&#355;i aceast&#259; alegere de moderare&nbsp;:',
 'info_article' => 'articol',
@@ -297,8 +295,6 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_delet_mots_cles' => 'A&#355;i cerut &#351;tergerea cuv&acirc;ntului-cheie
 <b>@titre_mot@</b> (@type_mot@). Acest cuv&acirc;nt-cheie fiind legat de
 <b>@texte_lie@</b> v&#259; rug&#259;m s&#259; confirma&#355;i aceast&#259; decizie&nbsp;:',
-'info_demander_blocage_priori' => 'Cere&#355;i
-    un blocaj &agrave; priori',
 'info_derniere_etape' => 'Ultima etap&#259;: <b>Gata !</b>',
 'info_derniere_syndication' => 'Ultima sindicalizare a acestui site a fost f&#259;cuta la data de',
 'info_derniers_articles_publies' => 'Articolele dumneavoastr&#259; publicate recent',
@@ -789,8 +785,6 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_date_publication_anterieure' => 'DATA REDACT&#258;RII ANTERIOARE&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nu afi&#351;a&#355;i data redact&#259;rii anterioare.',
 'texte_date_publication_article' => 'DATA PUBLIC&#258;RII &Icirc;N LINIE&nbsp;:',
-'texte_demander_blocage_priori' => 'Urm&#259;toarele leg&#259;turi provenind de la
-   acest site vor fi blocate &agrave; priori.',
 'texte_descriptif_petition' => 'Descrierea peti&#355;iei',
 'texte_descriptif_rapide' => 'Descriere pe scurt',
 'texte_documents_joints' => 'Pute&#355;i autoriza ad&#259;ugarea de documente (fi&#351;iere de birotic&#259;, imagini, fi&#351;iere multimedia, &#351;.a.m.d.)
@@ -825,8 +819,6 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
    site-urilor sindicalizate dup&#259; crearea lor. Este
    posibil dup&#259; aceea s&#259; debloca&#355;i fiecare leg&#259;tur&#259; &icirc;n mod individual, sau s&#259;
    alege&#355;i, site cu site, s&#259; bloca&#355;i leg&#259;turile.',
-'texte_liens_syndication' => 'Urm&#259;toarele leg&#259;turi provenind de la
-    acest site vor fi afi&#351;ate imediat pe site-ul dumneavoastr&#259; public.',
 'texte_login_ldap_1' => '(L&#259;sa&#355;i gol pentru un acces anonim, sau introduce&#355;i o cale complet&#259;, de exemplu: &laquo;&nbsp;<tt>uid=ionescu, ou=utilizatori, dc=domeniul-meu, dc=ro</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Aten&#355;ie&nbsp;! Acesta este login-ul cu care sunte&#355;i conectat acum.
  Utiliza&#355;i acest formular cu precau&#355;ie...',

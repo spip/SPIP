@@ -79,9 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_annonces_adresse' => 'Sendi la anoncojn al jena adreso:',
 'bouton_radio_envoi_liste_nouveautes' => 'Sendi liston de la nova&#309;oj',
 'bouton_radio_moderation_priori' => 'Apriora mastrumado (kontribua&#309;oj estas publikigataj nur post validigo de mastrumanto).',
-'bouton_radio_modere_abonnement' => 'mastrumata nur per abono',
-'bouton_radio_modere_posteriori' => 'aposteriore mastrumata',
-'bouton_radio_modere_priori' => 'apriore mastrumata',
+'bouton_radio_modere_abonnement' => '<MODIF>mastrumata nur per abono',
+'bouton_radio_modere_posteriori' => '<MODIF>aposteriore mastrumata',
+'bouton_radio_modere_priori' => '<MODIF>apriore mastrumata',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne aperigi en listo de la redaktantoj',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne sendi &#265;efartikolajn anoncojn',
 'bouton_radio_non_syndication' => 'Neniu kunligado',
@@ -234,7 +234,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'La jena partoprenanto estas aldonita&nbsp;:',
 'info_ajouter_rubrique' => 'Aldoni alian administrendan rubrikon:',
 'info_annonce_nouveautes' => 'Anonco pri nova&#309;oj',
-'info_annuler_blocage_priori' => 'Apriore nuligi tiun blokadon',
 'info_anterieur' => 'anta&#365;a',
 'info_appliquer_choix_moderation' => 'Apliki tiun mastrum-elekton:',
 'info_article' => 'artikolo',
@@ -256,6 +255,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Averto',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
 'info_base_restauration' => 'La datenbazo estas nun resta&#365;rata.',
+'info_bloquer' => '<NEW>bloquer',
 'info_breves' => '&#264;u via teksejo uzas la informetilon ?',
 'info_breves_03' => ' informetoj',
 'info_breves_liees_mot' => 'La informetoj ligitaj kun tiu &#349;losilvorto',
@@ -291,7 +291,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Dato de anta&#365;a redaktado :',
 'info_date_referencement' => 'DATO DE REFERENCIGO DE TIU teksejo:',
 'info_delet_mots_cles' => 'Vi petis forigon de la &#349;losilvorto <B>@titre_mot@</b> (@type_mot@). Tiu &#349;losilvorto estante ligita al <b>@texte_lie@</b> vi devas konfirmi tiun decidon:',
-'info_demander_blocage_priori' => 'Peti aprioran blokadon',
 'info_derniere_etape' => 'Lasta etapo: <b>finite!',
 'info_derniere_syndication' => 'La lasta kunligado de tiu teksejo efektivi&#285;is la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste publikigitaj sur la reto',
@@ -453,6 +452,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedure_maj_version' => 'la proceduro de &#285;isdatigo devas esti lan&#265;ita por adapti
 	la datenbazon al la nova versio de SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => '<NEW>publier',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
 'info_question_accepter_visiteurs' => 'Se via skeleto permesas la registradon de vizitantoj kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-supran opcion:',
 'info_question_gerer_statistiques' => '&#264;u via retpa&#285;o devas mastrumi la statistikojn de la vizitoj&nbsp;?',
@@ -715,6 +715,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'statut_admin_restreint' => '(etrajta administranto)',
+'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
+'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
+'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
+'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => '<NEW>Options de syndication&nbsp;:',
 
 
 // T
@@ -784,8 +790,6 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTADO&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redaktado.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO&nbsp;:',
-'texte_demander_blocage_priori' => 'La venontaj ligoj devenantaj
-				de tiu teksejo estos apriore blokitaj.',
 'texte_descriptif_petition' => 'Priskribo de la subskriblisto',
 'texte_descriptif_rapide' => 'Konciza priskribo',
 'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficejajn dosierojn, bildojn,
@@ -826,8 +830,6 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 			ligon unuope, a&#365; elekti unuope la teksejojn
 			kies estontaj ligoj
 			estu blokitaj.',
-'texte_liens_syndication' => 'La sekvaj ligoj el tiu &#265;i teksejo estos tuj
-				afi&#349;itaj en la publika spaco.',
 'texte_login_ldap_1' => 'Lasu malplena por anonima aliro, a&#365; enigu la kompletan vojon, ekzemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Atentu&nbsp;! Tio &#265;i estas la salutnomo sub kiu vi estas nun konektita.
 	Uzu tiun &#265;i formularon prudente...',
