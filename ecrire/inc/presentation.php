@@ -1627,6 +1627,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	if ($return) return $res; else echo $res;
 }
 
+// http://doc.spip.org/@fin_gauche
 function fin_gauche()
 {
 	return "</td></tr></table>";
