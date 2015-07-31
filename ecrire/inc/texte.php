@@ -865,6 +865,8 @@ function traiter_retours_chariots($letexte) {
 	return $letexte;
 }
 
+define('_RACCOURCI_CHAR', "{}_-");
+define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_CHAR)."][^<>]*>,imsS");
 
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
@@ -874,7 +876,8 @@ function traiter_raccourcis($letexte) {
 	$letexte = pipeline('pre_propre', $letexte);
 
 	// Gerer les notes (ne passe pas dans le pipeline)
-	list($letexte, $mes_notes) = traite_raccourci_notes($letexte);
+	$notes = charger_fonction('notes', 'inc');
+	list($letexte, $mes_notes) = $notes($letexte);
 
 	//
 	// Tableaux
@@ -887,8 +890,8 @@ function traiter_raccourcis($letexte) {
 
 	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],UmsS', $letexte,
 	$regs, PREG_SET_ORDER))
-	foreach ($regs as $tab) {
-		$letexte = str_replace($tab[1], traiter_tableau($tab[1]), $letexte);
+	foreach ($regs as $t) {
+		$letexte = str_replace($t[1], traiter_tableau($t[1]), $letexte);
 	}
 
 	$letexte = "\n".trim($letexte);
@@ -898,15 +901,12 @@ function traiter_raccourcis($letexte) {
 		$letexte = traiter_listes($letexte);
 
 	// Proteger les caracteres actifs a l'interieur des tags html
-	$protege = "{}_-";
 	$illegal = "\x1\x2\x3\x4";
-	if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
-	$letexte, $regs, PREG_SET_ORDER)) {
+	if (preg_match_all(_RACCOURCI_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
+	// hack: on transforme les caracteres a proteger en les remplacant
+	// par des caracteres "illegaux". (cf corriger_caracteres())
 		foreach ($regs as $reg) {
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, $protege, $illegal);
+			$insert = strtr($reg[0], _RACCOURCI_CHAR, $illegal);
 			$letexte = str_replace($reg[0], $insert, $letexte);
 		}
 	}
@@ -920,7 +920,7 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
 
 	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, $illegal, $protege);
+	$letexte = strtr($letexte, $illegal, _RACCOURCI_CHAR);
 
 	// Fermer les paragraphes ; mais ne pas en creer si un seul
 	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
@@ -928,97 +928,11 @@ function traiter_raccourcis($letexte) {
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
 
-	if ($mes_notes) traiter_les_notes($mes_notes);
+	if ($mes_notes) $notes($mes_notes);
 
 	return $letexte;
 }
 
-//
-// Notes de bas de page
-//
-
-// http://doc.spip.org/@traite_raccourci_notes
-function traite_raccourci_notes($letexte)
-{
-	global $compt_note,  $marqueur_notes, $les_notes, $notes_vues;
-	global $ouvre_ref, $ferme_ref, $ouvre_note, $ferme_note; #static ok
-
-	$mes_notes = '';
-	if (preg_match_all(', *\[\[(.*?)\]\],msS', $letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-		$note_source = $regs[0];
-		$note_texte = $regs[1];
-		$num_note = false;
-
-		// note auto ou pas ?
-		if (preg_match(",^<([^>'\"]*)>,", ltrim($note_texte), $r)
-		AND strpos($note_texte, '</' . $r[1] .'>') === false) {
-			$num_note = $r[1];
-			$note_texte = substr_replace(ltrim($note_texte), '', 0, strlen($r[0]));
-		} else {
-			$compt_note++;
-			$num_note = $compt_note;
-		}
-
-		// preparer la note
-		if ($num_note) {
-			if ($marqueur_notes) // quand il y a plusieurs series
-					 // de notes sur une meme page
-				$mn = $marqueur_notes.'-';
-			// pas de '%' dans les attributs name
-			$ancre = $mn.str_replace('%','_',rawurlencode($num_note));
-
-			// ne mettre qu'une ancre par appel de note (XHTML)
-			if (!$notes_vues[$ancre]++)
-				$name_id = " name=\"nh$ancre\" id=\"nh$ancre\"";
-			else
-				$name_id = "";
-
-			$lien = "<a href=\"#nb$ancre\"$name_id class=\"spip_note\" rel=\"footnote\">";
-
-			// creer le popup 'title' sur l'appel de note
-			if ($title = supprimer_tags(propre($note_texte))) {
-				$title = $ouvre_note.$num_note.$ferme_note.$title;
-				$title = couper($title,80);
-				$lien = inserer_attribut($lien, 'title', $title);
-			}
-
-			$insert = "$ouvre_ref$lien$num_note</a>$ferme_ref";
-
-			// on l'echappe
-			$insert = code_echappement($insert);
-
-			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\" title=\"" . _T('info_notes') . " $ancre\" rev=\"footnote\">$num_note</a>$ferme_note";
-		} else {
-			$insert = '';
-			$appel = '';
-		}
-
-		// l'ajouter "tel quel" (echappe) dans les notes
-		if ($note_texte) {
-			if ($mes_notes)
-				$mes_notes .= "\n\n";
-			$mes_notes .= code_echappement($appel) . $note_texte;
-		}
-
-		// dans le texte, mettre l'appel de note a la place de la note
-		$pos = strpos($letexte, $note_source);
-		$letexte = substr($letexte, 0, $pos) . $insert
-			.  substr($letexte, $pos + strlen($note_source));
-	}
-	return array($letexte, $mes_notes);
-}
-
-
-// http://doc.spip.org/@traiter_les_notes
-function traiter_les_notes($mes_notes) {
-	$mes_notes = propre('<p>'.$mes_notes);
-
-	if ($GLOBALS['class_spip'])
-		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
-
-	$GLOBALS['les_notes'] .= $mes_notes;
-}
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
