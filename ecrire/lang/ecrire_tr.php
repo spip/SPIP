@@ -33,7 +33,7 @@ SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla
  kar&#351;&#305;la&#351;abilirsiniz: veritaban&#305;n&#305;z&#305;n kayb&#305;,
  sitenin d&uuml;zg&uuml;n &ccedil;al&#305;&#351;mamas&#305; vb.
 Bu ithal istemini onaylamay&#305;n.
-<p>Daha fazla bilgi i&ccedil;in <a href="@spipnet@">SPIP kullanma k&#305;lavuzuna bak&#305;n.</a>',
+<p>Daha fazla bilgi i&ccedil;in <a href="@spipnet@">SPIP kullanma k&#305;lavuzuna bak&#305;n.</a>', # MODIF
 'avis_espace_interdit' => '<b>Yasak alan</b><div>SPIP zaten kurulu.</div>',
 'avis_lecture_noms_bases_1' => 'Kurulum yaz&#305;l&#305;m&#305; mevcut veritabanlar&#305;n&#305;n isimlerini okuyamad&#305;.',
 'avis_lecture_noms_bases_2' => 'Ya mevcut veritaban&#305; yok, ya da veritabanlar&#305;n&#305;n listesini almaya yarayan komut g&uuml;venlik nedeniyle kullan&#305;ma kapat&#305;lm&#305;&#351; (bir &ccedil;ok bar&#305;nd&#305;rma &#351;irketinde al&#305;nan bir tedbir).',
@@ -195,6 +195,10 @@ sonradan yok edebilir).',
 // F
 'forum_info_original' => 'orijinal',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Bu sayfa bu sitenin ya&#351;am&#305; ile temas halinde kalmak i&ccedil;in bir ka&ccedil; y&ouml;ntem sunmaktad&#305;r. ',
 'ical_info2' => 'Bu teknikler hakk&#305;nda daha ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in,  <a href="@spipnet@">SPIP dok&uuml;manlar&#305;na</a> bakmaktan &ccedil;ekinmeyiniz.',
@@ -334,7 +338,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_conflit_edition_votre_version' => 'Sizin s&uuml;r&uuml;m&uuml;n&uuml;z&nbsp;:',
 'info_connexion_base' => 'Veritaban&#305;na ba&#287;lanma denemesi',
 'info_connexion_base_donnee' => 'Veri taban&#305;n&#305;za ba&#287;lant&#305;',
-'info_connexion_ldap_ok' => 'LDAP ba&#287;lant&#305;s&#305; ba&#351;ar&#305;l&#305;. Di&#287;er a&#351;amaya ge&ccedil;ebilirsiniz.',
+'info_connexion_ldap_ok' => 'LDAP ba&#287;lant&#305;s&#305; ba&#351;ar&#305;l&#305;. Di&#287;er a&#351;amaya ge&ccedil;ebilirsiniz.', # MODIF
 'info_connexion_mysql' => 'SQL ba&#287;lant&#305;n&#305;z',
 'info_connexion_ok' => 'Ba&#287;lant&#305; ba&#351;ar&#305;l&#305;. ',
 'info_contact' => '&#304;leti&#351;im',
@@ -385,9 +389,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
                         fazladan bir forumu &ccedil;al&#305;&#351;t&#305;rabilirsiniz.',
 'info_forum_statistiques' => 'Ziyaret istatistikleri',
 'info_forums_abo_invites' => 'Siteniz abone y&ouml;ntemiyle &ccedil;al&#305;&#351;an forumlar bulunduruyor&nbsp;; dolay&#305;s&#305;yla ziyaret&ccedil;iler kamu sitesine kaydolmaya davet edilirler.',
-'info_gauche_admin_effacer' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.',
-'info_gauche_admin_tech' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.',
-'info_gauche_admin_vider' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren, &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.',
+'info_gauche_admin_effacer' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.', # MODIF
+'info_gauche_admin_tech' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.', # MODIF
+'info_gauche_admin_vider' => 'Bu sayfa sadece site yetkililerinin eri&#351;imine izin verir. &Ccedil;e&#351;itli teknik bak&#305;m i&#351;levlerine eri&#351;im vermektedir. Bunlardan baz&#305;lar&#305;, Web sitesine bir FTP eri&#351;imi gerektiren, &ouml;zel bir tasdik s&uuml;recine yol a&ccedil;ar.', # MODIF
 'info_gauche_auteurs' => 'Burada t&uuml;m site yazarlar&#305;n&#305; bulacaks&#305;n&#305;z. Stat&uuml;leri simgelerinin rengi ile belirtilmi&#351;tir (y&ouml;netici = ye&#351;il; yaz&#305; i&#351;leri = sar&#305;).',
 'info_gauche_auteurs_exterieurs' => 'Siteye eri&#351;imi olmayan d&#305;&#351; yazarlar, mavi bir simgeyle belirtilmi&#351;tir ; silinen yazarlar ise bir &ccedil;&ouml;p kutusu ile belirtilmi&#351;tir.',
 'info_gauche_messagerie' => 'Mesajla&#351;ma sizin yazarlar ile ileti al&#305;&#351;veri&#351;inde bulunman&#305;z&#305;, hat&#305;rlatmalar&#305; saklaman&#305;z&#305; (ki&#351;isel ama&ccedil;l&#305;) veya &ouml;zel alan&#305;n eri&#351;im sayfas&#305;na duyuru koyman&#305;z&#305; sa&#287;lar (y&ouml;neticiyseniz).',
@@ -817,6 +821,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'module_texte_traduction' => '&laquo;&nbsp;@module@&nbsp;&raquo; dil dosyas&#305;n&#305;n bulundu&#287;u yer&nbsp;:',
 'mois_non_connu' => 'Bilinmiyor ',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => '&#304;&ccedil;erik',
 'onglet_declarer_une_autre_base' => 'Ba&#351;ka bir veri taban&#305; bildirin',
@@ -993,7 +1000,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_documents_joints' => 'Makale ve/veya b&ouml;l&uuml;mlere dok&uuml;man eklenmesine izin verebilirsiniz
     (dosya, resim, m&uuml;ltimedya, vb.)
      Bu dosyalar sonradan makalede at&#305;f konusu olabilir 
-     ya da ayr&#305; olarak g&ouml;r&uuml;nt&uuml;lenebilirler. ',
+     ya da ayr&#305; olarak g&ouml;r&uuml;nt&uuml;lenebilirler. ', # MODIF
 'texte_documents_joints_2' => 'Bu ayar, makalelere do&#287;rudan resim girilmesine engel de&#287;ildir.',
 'texte_effacer_base' => 'SPIP veritaban&#305;n&#305; sil',
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
@@ -1001,7 +1008,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_en_cours_validation' => 'A&#351;a&#287;&#305;daki makale ve k&#305;sa haberler yay&#305;n i&ccedil;in &ouml;nerilmi&#351;tir. ',
 'texte_en_cours_validation_forum' => '&#304;lgili forumlar arac&#305;l&#305;&#287;&#305;yla g&ouml;r&uuml;&#351;&uuml;n&uuml;z&uuml; belirtmekten ka&ccedil;&#305;nmay&#305;n&#305;z.',
 'texte_enrichir_mise_a_jour' => 'Metninizin sayfa d&uuml;zenini &laquo;&nbsp;tipografi k&#305;saltmalar&#305;&nbsp;&raquo; kullanarak zenginle&#351;tirebilirsiniz.',
-'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  @dossier@ dizininde yaratmas&#305; gerekir mi ? Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351;sal istatistik program&#305;). Bunun bir yarar&#305; olmad&#305;&#287;&#305;n&#305; d&uuml;&#351;&uuml;n&uuml;yorsan&#305;z bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma i&#351;lemi yap&#305;lmaz).',
+'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  @dossier@ dizininde yaratmas&#305; gerekir mi ? Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351;sal istatistik program&#305;). Bunun bir yarar&#305; olmad&#305;&#287;&#305;n&#305; d&uuml;&#351;&uuml;n&uuml;yorsan&#305;z bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma i&#351;lemi yap&#305;lmaz).', # MODIF
 'texte_informations_personnelles_1' => 'Sistem &#351;imdi size ki&#351;iselle&#351;tirilmi&#351; bir eri&#351;im (hesap) yaratacakt&#305;r.',
 'texte_informations_personnelles_2' => '(Not : e&#287;er yeniden kurulum s&ouml;zkonusu ise ve eri&#351;iminiz halen &ccedil;al&#305;&#351;&#305;yorsa, yapabilece&#287;iniz :',
 'texte_introductif_article' => '(Makalenin giri&#351; metni.)',
@@ -1031,7 +1038,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_nouveau_message' => 'Yeni ileti',
 'texte_nouveau_mot' => 'Yeni s&ouml;zc&uuml;k',
 'texte_nouvelle_version_spip_1' => 'SPIP\'in yeni bir s&uuml;r&uuml;m&uuml;n&uuml; y&uuml;klediniz.',
-'texte_nouvelle_version_spip_2' => 'Bu yeni uyarlama al&#305;&#351;&#305;lana g&ouml;re daha eksiksiz bir g&uuml;ncelle&#351;tirme gerektirir. E&#287;er siz bu sitenin A&#287; Y&ouml;neticisi iseniz l&uuml;tfen @connect@  dosyas&#305;n&#305; ecrire dizininden siliniz ve veritaban&#305;na ba&#287;lant&#305; parametrelerinizi g&uuml;ncelle&#351;tirmek amac&#305;yla y&uuml;klemeyi tekrar yap&#305;n&#305;z. <p>(Not&nbsp;: ba&#287;lant&#305; parametrelerinizi unuttuysan&#305;z, silmeden &ouml;nce @connect@ dosyas&#305;na bir g&ouml;z at&#305;n&#305;z...) </p>',
+'texte_nouvelle_version_spip_2' => 'Bu yeni uyarlama al&#305;&#351;&#305;lana g&ouml;re daha eksiksiz bir g&uuml;ncelle&#351;tirme gerektirir. E&#287;er siz bu sitenin A&#287; Y&ouml;neticisi iseniz l&uuml;tfen @connect@  dosyas&#305;n&#305; ecrire dizininden siliniz ve veritaban&#305;na ba&#287;lant&#305; parametrelerinizi g&uuml;ncelle&#351;tirmek amac&#305;yla y&uuml;klemeyi tekrar yap&#305;n&#305;z. <p>(Not&nbsp;: ba&#287;lant&#305; parametrelerinizi unuttuysan&#305;z, silmeden &ouml;nce @connect@ dosyas&#305;na bir g&ouml;z at&#305;n&#305;z...) </p>', # MODIF
 'texte_operation_echec' => 'Bir &ouml;nceki sayfaya geri d&ouml;n&uuml;p ba&#351;ka bir veri taban&#305; se&ccedil;iniz ya da yeni bir tane yarat&#305;n&#305;z. Ana bilgisayar&#305;n&#305;z taraf&#305;ndan verilen bilgilerden emin olunuz. ',
 'texte_plus_trois_car' => '3 karakterden fazla',
 'texte_plusieurs_articles' => '"@cherche_auteur@" i&ccedil;in bir ka&ccedil; yazar bulundu : ',
@@ -1048,7 +1055,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_referencement_automatique' => '<b>Otomatik site referans&#305;</b><br /> A&#351;a&#287;&#305;ya URL adresini ya da payla&#351;&#305;m dosyas&#305;n&#305;n adresini belirterek bir Web sitesine h&#305;zla at&#305;fta bulunabilirsiniz. SPIP otomatik olarak bu siteyle ilgili bilgileri toplayacakt&#305;r (ba&#351;l&#305;k, tan&#305;mlama...).',
 'texte_referencement_automatique_verifier' => 'Kaydetmeden &ouml;nce <tt>@url@</tt> taraf&#305;ndan sa&#287;lanan bilgileri do&#287;rulay&#305;n&#305;z.',
 'texte_requetes_echouent' => '<b>Baz&#305; SQL talepleri sistematik olarak ve g&ouml;r&uuml;n&uuml;rde bir neden olmaks&#305;z&#305;n ba&#351;ar&#305;s&#305;z oluyorsa bunun nedeni veri taban&#305;n&#305;n kendisi olabilir.</b> <p>
-SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i vard&#305;r. Burada bu onar&#305;m&#305; deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ederse servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.</p>',
+SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i vard&#305;r. Burada bu onar&#305;m&#305; deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ederse servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.</p>', # MODIF
 'texte_restaurer_base' => 'Veritaban&#305; yede&#287;ini geri y&uuml;kle',
 'texte_restaurer_sauvegarde' => 'Bu se&ccedil;enek, daha &ouml;nce yap&#305;lan bir veritaban&#305; yede&#287;inin geri y&uuml;klenmesini sa&#287;lar. Bunun i&ccedil;in, yedeklemeyi i&ccedil;eren dosyan&#305;n @dossier@ dizinine yerle&#351;tirilmi&#351; olmas&#305; gerekir. Bu i&#351;levi kullan&#305;rken dikkatli olunuz : <b>de&#287;i&#351;iklikler, olas&#305; kay&#305;plar, geri getirilemez.</b>',
 'texte_sauvegarde' => 'Veritaban&#305;n&#305;n i&ccedil;eri&#287;ini yedekle',

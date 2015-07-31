@@ -191,6 +191,10 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 // F
 'forum_info_original' => 'originau',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
 'ical_info2' => 'Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.', # MODIF
@@ -327,7 +331,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Pr&ograve;va de connexion &agrave; la basa',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar &agrave; la tapa seguenta.',
+'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar &agrave; la tapa seguenta.', # MODIF
 'info_connexion_mysql' => 'La voastra conexion SQL',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contact',
@@ -372,10 +376,10 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un f&ograve;ro es dub&egrave;rt &agrave; toi lu redactors registrats. Pod&egrave;tz, &ccedil;ai sota, activar un f&ograve;ro suplementari, reservat ai solets administrators.',
 'info_forum_statistiques' => 'Estadisticas dei visitas',
 'info_forums_abo_invites' => 'Lo voastre sit web poarge de f&ograve;ros per lu abonats; dins lo sit public lu visitaires son convidats de si registrar.',
-'info_gauche_admin_effacer' => '<b>A-n-aquela p&agrave;gina, son que lu responsables dau sit que poadon accedir.</b><p> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implicon un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.</p>',
+'info_gauche_admin_effacer' => '<b>A-n-aquela p&agrave;gina, son que lu responsables dau sit que poadon accedir.</b><p> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implicon un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>A-n-aquela p&agrave;gina, son que lu responsables dau sit que li poadon accedir.</b><p> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implicon un proc&egrave;ssus d\'autentificacion especific, que
- necessita d\'aver un acc&egrave;s FTP au sit web.</p>',
-'info_gauche_admin_vider' => '<b>A-n-aquela p&agrave;gina, son que lu responsables dau sit que li poadon accedir.</b><p> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implicon un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.</p>',
+ necessita d\'aver un acc&egrave;s FTP au sit web.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>A-n-aquela p&agrave;gina, son que lu responsables dau sit que li poadon accedir.</b><p> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implicon un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.</p>', # MODIF
 'info_gauche_auteurs' => 'Trobaretz aqu&iacute; toi lu autors dau sit.
  Lo sieu estatut es indicat per la color dei ic&ograve;nas sieui (administrator&nbsp;: verd; redactor&nbsp;: jaune).',
 'info_gauche_auteurs_exterieurs' => 'Lu autors exteriors, sensa acc&egrave;s au sit, son indicats per una ic&ograve;na blu; lu autors escafats per una bordilhier.',
@@ -800,6 +804,9 @@ una color indica lo sieu estat&nbsp;:',
 'module_texte_traduction' => 'Aquest fichier de lenga &laquo;&nbsp;@module@&nbsp;&raquo; es disponible en&nbsp;:',
 'mois_non_connu' => 'non conoissut',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -973,7 +980,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_joints' => 'Pod&egrave;tz autorisar l\'ajust de documents (fichiers burotics, imatges,
  multim&egrave;dia, eca.) ai articles e/&ograve; ai rubricas. Aquelu fichiers
- poadon pi &egrave;stre referen&ccedil;ats dins l\'article, &ograve; apar&eacute;isser &agrave; despart.',
+ poadon pi &egrave;stre referen&ccedil;ats dins l\'article, &ograve; apar&eacute;isser &agrave; despart.', # MODIF
 'texte_documents_joints_2' => 'Aqueu reglatge empedisse pas l\'insercion d\'imatges directament dins lu articles.',
 'texte_effacer_base' => 'Esca&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esca&ccedil;ar li donadas d\'indexacion',
@@ -988,7 +995,7 @@ demande plus de puissance au serveur.', # NEW
   (programa ext&egrave;rne d\'estadisticas, per exemple).</p><p>
  Se vos s&egrave;rve pas, pod&egrave;tz laissar aquesta opcion
   &agrave; la sieu valor predefinida (minga de creacion
-  de fichiers).</p>',
+  de fichiers).</p>', # MODIF
 'texte_informations_personnelles_1' => 'A&uuml;ra lo sistema vos va crear un acc&egrave;s personalisat au sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'agisse d\'una re&iuml;nstalacion, e se lo voastre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
@@ -1034,7 +1041,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Messatge nov&egrave;u',
 'texte_nouveau_mot' => 'Nov&egrave;u m&ograve;t',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz installat una nov&egrave;la version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualisacion mai completa que de costuma. Se si&egrave;tz webm&egrave;stre/webm&egrave;stressa dau site, vorgatz escafar lo fichier @connect@ e tornar prendre l\'installacion per fin d\'actualisar lu voastres param&egrave;tres de connexion &agrave; la basa de donadas.<p> (NB: s\'av&egrave;tz denembrat lu voastres param&egrave;tres de connexion, regarjatz lo fichier @connect@ denant de lo suprimir...)</p>',
+'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualisacion mai completa que de costuma. Se si&egrave;tz webm&egrave;stre/webm&egrave;stressa dau site, vorgatz escafar lo fichier @connect@ e tornar prendre l\'installacion per fin d\'actualisar lu voastres param&egrave;tres de connexion &agrave; la basa de donadas.<p> (NB: s\'av&egrave;tz denembrat lu voastres param&egrave;tres de connexion, regarjatz lo fichier @connect@ denant de lo suprimir...)</p>', # MODIF
 'texte_operation_echec' => 'Tornatz &agrave; la p&agrave;gina precedenta, chausiss&egrave;tz una autra basa &ograve; creatz-nen una nov&egrave;la. Verificatz li informacions que lo voastre aubergador v\'a fornidi.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mantun autor trobat per "@cherche_auteur@":',

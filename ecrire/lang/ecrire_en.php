@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     various malfunctions of your site, etc. Do not
     submit this import request.<p>For more
     information, please see <a href="@spipnet@">
-                                the SPIP documentation</a>.</p>',
+                                the SPIP documentation</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
 'avis_lecture_noms_bases_2' => 'Either no database is available, or the feature allowing the listing of the databases was disabled
@@ -202,6 +202,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'This page presents you with several methods to keep in contact with this site\'s activity.',
 'ical_info2' => 'For more information, do not hesitate to visit <a href="@spipnet@">SPIP\'s documentation</a>.',
@@ -341,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Your version:',
 'info_connexion_base' => 'Trying to connect to database',
 'info_connexion_base_donnee' => 'Connection to your database',
-'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p> You can go to the next step.</p>',
+'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p> You can go to the next step.</p>', # MODIF
 'info_connexion_mysql' => 'Your SQL connection',
 'info_connexion_ok' => 'Connection succeeded.',
 'info_contact' => 'Contact',
@@ -393,13 +397,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		extra forum reserved for the administrators.',
 'info_forum_statistiques' => 'Visits statistics',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.',
-'info_gauche_admin_effacer' => '<b>Only administrators have access to this page.</b><p> It provides access to various technical maintenance tasks. Some of them give rise to a specific authentication process requiring an FTP access to the Web site.</p>',
+'info_gauche_admin_effacer' => '<b>Only administrators have access to this page.</b><p> It provides access to various technical maintenance tasks. Some of them give rise to a specific authentication process requiring an FTP access to the Web site.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Only administrators have access to this page.</b><p> It provides access to various
 maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.</p>',
+requiring an FTP access to the Web site.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Only administrators have access to this page.</b><p> It provides access to various
 maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.</p>',
+requiring an FTP access to the Web site.</p>', # MODIF
 'info_gauche_auteurs' => 'You will find here all the site\'s authors.
  The status of each one is indicated by the colour of there icon (administrator = green; editor = yellow).',
 'info_gauche_auteurs_exterieurs' => 'External authors, without any access to the site, are indicated by a blue icon; deleted authors by a dustbin.',
@@ -830,6 +834,9 @@ in a colour indicating their status:',
 'module_texte_traduction' => 'The language file &laquo;&nbsp;@module@&nbsp;&raquo; is available in:',
 'mois_non_connu' => 'unknown',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contents',
 'onglet_declarer_une_autre_base' => 'Declare another database',
@@ -1007,7 +1014,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_documents_joints' => 'You can allow the addition of documents (office files, images,
  multimedia, etc.) to articles and/or sections. These files
  could then be referenced in
- the article or displayed separately.',
+ the article or displayed separately.', # MODIF
 'texte_documents_joints_2' => 'This setting does not stop the insertion of images directly in the articles.',
 'texte_effacer_base' => 'Delete the SPIP database',
 'texte_effacer_donnees_indexation' => 'Delete indexing data',
@@ -1022,7 +1029,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
   (for instance, external statistical programme).</p><p>
   If you have no need of such files, you can leave this option
   with its default value (no files 
-  creation).</p>',
+  creation).</p>', # MODIF
 'texte_informations_personnelles_1' => 'The system will provide you now with a custom access to the site.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
@@ -1068,7 +1075,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_nouveau_message' => 'New message',
 'texte_nouveau_mot' => 'New keyword',
 'texte_nouvelle_version_spip_1' => 'You have just installed a new version of SPIP.',
-'texte_nouvelle_version_spip_2' => 'This new version requires a more thorough update than usual. If you are the webmaster of this site, please delete the file @connect@ and restart the installation in order to update your database connection parameters. <p>(NB.: if you have forgotten your connection parameters, take a look at the file @connect@ before deleting it!)</p>',
+'texte_nouvelle_version_spip_2' => 'This new version requires a more thorough update than usual. If you are the webmaster of this site, please delete the file @connect@ and restart the installation in order to update your database connection parameters. <p>(NB.: if you have forgotten your connection parameters, take a look at the file @connect@ before deleting it!)</p>', # MODIF
 'texte_operation_echec' => 'Go back to the previous page, select another database or create a new one. Verify the information provided by your host.',
 'texte_plus_trois_car' => 'more than 3 characters',
 'texte_plusieurs_articles' => 'Several authors were found for "@cherche_auteur@":',
@@ -1097,7 +1104,7 @@ to refresh only one page, you would rather do it from the public area and use th
   the event of failure, you should keep a copy of the display, which might contain
   clues to where the problem lies.</p><p>
   If the problem persists, contact your 
-  service provider.</p>',
+  service provider.</p>', # MODIF
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => 'This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been

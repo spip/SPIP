@@ -197,6 +197,10 @@ forvi&#349;i ilin poste).',
 // F
 'forum_info_original' => 'originala',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
 'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.', # MODIF
@@ -335,7 +339,7 @@ forvi&#349;i ilin poste).',
 'info_conflit_edition_votre_version' => 'Via versio&nbsp;:',
 'info_connexion_base' => 'Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
 'info_connexion_base_donnee' => 'Konekti&#285;o al via datumbazo',
-'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p> Vi povas iri al la sekvanta etapo</p>',
+'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p> Vi povas iri al la sekvanta etapo</p>', # MODIF
 'info_connexion_mysql' => 'Via SQL-konekti&#285;o',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
@@ -385,11 +389,11 @@ La publikaj forumoj estos la&#365;kaze unu post la alia permesitaj
   plian forumon, rezervitan nur al mastrumantoj.',
 'info_forum_statistiques' => 'Statistikoj pri vizitoj',
 'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono&nbsp;; vizitantoj estas invititaj al registri&#285;o &#265;e la publika retejo.',
-'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>',
+'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.</p>',
+postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.</p>',
+postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gauche_auteurs' => 'Vi trovos &#265;i tie &#265;iujn a&#365;torojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 'info_gauche_auteurs_exterieurs' => 'La eksteraj a&#365;toroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo&nbsp;;
  la a&#365;toroj forvi&#349;itaj per bildo de rubujo.',
@@ -813,6 +817,9 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'module_texte_traduction' => 'La lingva dosiero &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
 'mois_non_connu' => 'nekonata',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Enhavo',
 'onglet_declarer_une_autre_base' => 'Deklari alian datumbazon',
@@ -994,7 +1001,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficikajn dosierojn, bildojn,
  a&#365;d-vida&#309;ojn, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
  povas poste esti referencigitaj en la artikolo
- a&#365; sendepende afi&#349;itaj.<p>',
+ a&#365; sendepende afi&#349;itaj.<p>', # MODIF
 'texte_documents_joints_2' => 'Tiu aran&#285;o ne malhelpas la inkludon de bildoj rekte en la artikolojn.',
 'texte_effacer_base' => 'Forvi&#349;i la SPIP-datenbazon',
 'texte_effacer_donnees_indexation' => 'Forvi&#349;i la indeksajn datenojn',
@@ -1053,7 +1060,7 @@ ligilojn al jena a&#365; alia retejo.',
 'texte_nouveau_message' => 'Nova mesa&#285;o',
 'texte_nouveau_mot' => 'Nova vorto',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Tiu &#265;i nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forvi&#349;i la dosieron @connect@ kaj restarigi la instalprocezon por &#285;isdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ anta&#365; ol forvi&#349;i &#285;in...)',
+'texte_nouvelle_version_spip_2' => 'Tiu &#265;i nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forvi&#349;i la dosieron @connect@ kaj restarigi la instalprocezon por &#285;isdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ anta&#365; ol forvi&#349;i &#285;in...)', # MODIF
 'texte_operation_echec' => 'Reiru al anta&#365;a pa&#285;o, selektu alian datenbazon a&#365; kreu novan. Kontrolu la informojn donitajn de via retgastiganto.',
 'texte_plus_trois_car' => 'pli ol 3 literoj',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
@@ -1085,7 +1092,7 @@ Vi povas &#265;i tie provi riparon;
 en kazo de malsukceso, faru ekrankopion.
 &#284;i eble entenas indicojn pri la misfunkcio...<p>
 Se la problemo da&#365;ras, kontaktu
-vian retgastiganton.<p>',
+vian retgastiganton.<p>', # MODIF
 'texte_restaurer_base' => 'Resta&#365;ri la enhavon de datenbaza savkopio',
 'texte_restaurer_sauvegarde' => 'Tiu opcio ebligas al vi restarigi anta&#365;e faritan savkopion de la bazo.
   Por tio, la dosiero entenanta la savkopion devas esti lokita

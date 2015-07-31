@@ -188,6 +188,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Na ovoj strani je predstavljeno nekoliko metoda kako da ostanete u toku sa aktuelnostima ove web stranice.',
 'ical_info2' => 'Za sve informacije o ovim metodama, mozete konsultovati <a href="@spipnet@"> SPIP  dokumentaciju </a>.', # MODIF
@@ -323,7 +327,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Druga etapa: <b>Pokusaj konekcije sa bazom</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Uspjesna LDAP konekcija.</b><p>  Mozete pristupiti sljedecoj etapi</p>',
+'info_connexion_ldap_ok' => 'Uspjesna LDAP konekcija.</b><p>  Mozete pristupiti sljedecoj etapi</p>', # MODIF
 'info_connexion_mysql' => 'Prva etapa: <b>Vasa SQL konekcija</b>', # MODIF
 'info_connexion_ok' => 'Uspjesna konekcija.',
 'info_contact' => 'Kontakt',
@@ -367,9 +371,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'Forum na privatnoj stranici je otvoren svim regristrovanim urednicima. Ispod mozete aktivirati dodatni forum, koji je rezervisan samo za administratore.',
 'info_forum_statistiques' => 'Statistike posjeta',
 'info_forums_abo_invites' => 'Vasa stranica obudhvata i forume za clanove; posjetioci se pozivaju na registraciju u javnom  prostoru stanice.',
-'info_gauche_admin_effacer' => '<b>Ova strana je dostupna samo  osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
-'info_gauche_admin_tech' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
-'info_gauche_admin_vider' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
+'info_gauche_admin_effacer' => '<b>Ova strana je dostupna samo  osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
 'info_gauche_auteurs' => 'Ovdje cete pronaci sve autore ove web stranice. Njihov status je naznacen bojom njihove ikone (administrator = zelena; urednik = zuta).',
 'info_gauche_auteurs_exterieurs' => 'Vanjski autori bez pristupa stranici su oznaceni plavom ikonom, a izbrisani autori sa ikonicom korpe za smece.',
 'info_gauche_messagerie' => 'Servis za slanje poruka vam omogucuje razmjenu poruka medju piscima, cuvanje biljeske (za licnu upotrebu) ili, ako ste administrator, postavljanje najava na pocetnu stranicu u privatnom prostoru.',
@@ -779,6 +783,9 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'module_texte_traduction' => 'Jezicni dokument &laquo;&nbsp;@module@&nbsp;&raquo; je na raspolaganju u:',
 'mois_non_connu' => 'nepoznato',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -937,7 +944,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_date_publication_article' => 'DATUM OBJAVLJIVANJA:',
 'texte_descriptif_petition' => 'Opis peticije',
 'texte_descriptif_rapide' => 'Brzi opis',
-'texte_documents_joints' => 'Mozete odobriti dodavanje dokumenata (birokratskih dokumenata, slika, multimedija, itd.) clancima i/ili rubrikama. Ti dokumenti mogu zatim biti preporuceni u clanku ili postavljeni odvojeno.',
+'texte_documents_joints' => 'Mozete odobriti dodavanje dokumenata (birokratskih dokumenata, slika, multimedija, itd.) clancima i/ili rubrikama. Ti dokumenti mogu zatim biti preporuceni u clanku ili postavljeni odvojeno.', # MODIF
 'texte_documents_joints_2' => 'Ova postavka ne sprijecava direktno unosenje slika u clanke.',
 'texte_effacer_base' => 'Izbrisati SPIP bazu podataka',
 'texte_effacer_donnees_indexation' => 'Izbrisati podatke indexiranja',
@@ -974,7 +981,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Nova poruka',
 'texte_nouveau_mot' => 'Nova rijec',
 'texte_nouvelle_version_spip_1' => 'Instalirali ste novu verziju SPIP-a.',
-'texte_nouvelle_version_spip_2' => 'Ovoj verziji je potrebno obnavljanje kompletnije od uobicajenog. Ako ste webmaster stranice, izbrisite dokument <tt>inc_connect.php3</tt> iz  repertoara <tt>ecrire</tt> i ponovo otpocnite instalaciju da  biste obnovili parametre konekcije sa bazom podataka.<p>  (Napomena: ako ste zaboravili parametre vase konekcije  pogledajte dokument <tt>inc_connect.php3</tt> prije nego ga  izbrisete...)</p>',
+'texte_nouvelle_version_spip_2' => 'Ovoj verziji je potrebno obnavljanje kompletnije od uobicajenog. Ako ste webmaster stranice, izbrisite dokument <tt>inc_connect.php3</tt> iz  repertoara <tt>ecrire</tt> i ponovo otpocnite instalaciju da  biste obnovili parametre konekcije sa bazom podataka.<p>  (Napomena: ako ste zaboravili parametre vase konekcije  pogledajte dokument <tt>inc_connect.php3</tt> prije nego ga  izbrisete...)</p>', # MODIF
 'texte_operation_echec' => 'Vratite se na prethodnu stranu, izaberite drugu bazu ili napravite novu. Provjerite podatke  koje vam je dao vas kompjuter.',
 'texte_plus_trois_car' => 'vise od tri karaktera',
 'texte_plusieurs_articles' => 'Pronadjeno vise autora za "@cherche_auteur@":',

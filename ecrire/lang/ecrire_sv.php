@@ -194,6 +194,10 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 // F
 'forum_info_original' => 'original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Denna sida visar flera metoder att h&aring;lla dig informerad om aktiviteter p&aring; sajten.',
 'ical_info2' => 'F&ouml;r mer information, tveka inte om att bes&ouml;ka <a href="@spipnet@">SPIP\'s dokumentation</a>.', # MODIF
@@ -333,7 +337,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'F&ouml;rs&ouml;ker att ansluta till databasen',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Din f&ouml;rbindelse till LDAP-servern lyckades.</b><p> Du kan g&aring; vidare till n&auml;sta steg.</p>',
+'info_connexion_ldap_ok' => 'Din f&ouml;rbindelse till LDAP-servern lyckades.</b><p> Du kan g&aring; vidare till n&auml;sta steg.</p>', # MODIF
 'info_connexion_mysql' => 'Din databasf&ouml;rbindelse',
 'info_connexion_ok' => 'F&ouml;rbindelsen lyckades.',
 'info_contact' => 'Kontakt',
@@ -385,13 +389,13 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
   extra forum reserverat f&ouml;r administrat&ouml;rerna.',
 'info_forum_statistiques' => 'Bes&ouml;ksstatistik',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.', # NEW
-'info_gauche_admin_effacer' => '<b>Endast administrat&ouml;rer har tillg&aring;ng till denna sida.</b><p> Den ger tillg&aring;ng till tekniska underh&aring;llsrutiner av olika slag. En del av dem kommer, om de anv&auml;nds, att kr&auml;va FTP-tillg&aring;ng till Webservern f&ouml;r autentifiering.</p>',
+'info_gauche_admin_effacer' => '<b>Endast administrat&ouml;rer har tillg&aring;ng till denna sida.</b><p> Den ger tillg&aring;ng till tekniska underh&aring;llsrutiner av olika slag. En del av dem kommer, om de anv&auml;nds, att kr&auml;va FTP-tillg&aring;ng till Webservern f&ouml;r autentifiering.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 'info_gauche_auteurs' => 'H&auml;r hittar du alla redakt&ouml;rer p&aring; sajten.
  Status p&aring; var och en av dem visas av f&auml;rgen p&aring; ikonen (administrat&ouml;r = gr&ouml;n; redakt&ouml;r = gul).',
 'info_gauche_auteurs_exterieurs' => 'Externa redakt&ouml;rer utan beh&ouml;righet p&aring; sajten, visas med en bl&aring; ikon; raderade redakt&ouml;rer med en soptunna.',
@@ -824,6 +828,9 @@ med en f&auml;rg som visar deras status:',
 'module_texte_traduction' => 'Spr&aring;kfilen &laquo;&nbsp;@module@&nbsp;&raquo; finns i:',
 'mois_non_connu' => 'non connu', # NEW
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Inneh&aring;ll',
 'onglet_declarer_une_autre_base' => 'Ange en annan databas',
@@ -1004,7 +1011,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
  multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
  peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
- l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.', # NEW
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.', # MODIF
 'texte_documents_joints_2' => 'Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.', # NEW
 'texte_effacer_base' => 'Effacer la base de donn&eacute;es SPIP', # NEW
 'texte_effacer_donnees_indexation' => 'Effacer les donn&eacute;es d\'indexation', # NEW
@@ -1064,7 +1071,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Nytt meddelande',
 'texte_nouveau_mot' => 'Nytt nyckelord',
 'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
-'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)</p>', # NEW
+'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)</p>', # MODIF
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.', # NEW
 'texte_plus_trois_car' => 'mer &auml;n tre tecken',
 'texte_plusieurs_articles' => 'Flera redakt&ouml;rer hittades f&ouml;r  "@cherche_auteur@":',
@@ -1093,7 +1100,7 @@ enbart en sida, &auml;r det b&auml;st att g&ouml;ra det fr&aring;n den publika d
   cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
   peut-&ecirc;tre des indices de ce qui ne va pas...</p><p>
   Si le probl&egrave;me persiste, prenez contact avec votre
-  h&eacute;bergeur.</p>', # NEW
+  h&eacute;bergeur.</p>', # MODIF
 'texte_restaurer_base' => '&Aring;terst&auml;ll inneh&aring;llet i databasens backup',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
 		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;

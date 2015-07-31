@@ -198,6 +198,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Denne side viser flere m&aring;der til at f&oslash;lge med i aktiviteter p&aring; dette websted.',
 'ical_info2' => 'For mere information, bes&oslash;g <a href="@spipnet@">SPIP dokumentation</a>.', # MODIF
@@ -336,7 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Andet skrift: <b>Fors&oslash;g p&aring; opkobling til databasen</b>',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => '<b>Din LDAP-opkobling lykkedes.</b><p> Du kan g&aring; til n&aelig;ste skridt.',
+'info_connexion_ldap_ok' => '<b>Din LDAP-opkobling lykkedes.</b><p> Du kan g&aring; til n&aelig;ste skridt.', # MODIF
 'info_connexion_mysql' => 'F&oslash;rste skridt: <b>Din SQL opkobling</b>',
 'info_connexion_ok' => 'Opkoblingen lykkedes.',
 'info_contact' => 'Kontakt',
@@ -383,9 +387,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_forum_ouvert' => 'I det private afsnit af webstedet er der et forum &aring;bent for alle registrerede redakt&oslash;rer. Nedenfor kan du &aring;bne et ekstra forum alene for administratorer.',
 'info_forum_statistiques' => 'Bes&oslash;gsstatistik',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.', # NEW
-'info_gauche_admin_effacer' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
-'info_gauche_admin_tech' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
-'info_gauche_admin_vider' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
+'info_gauche_admin_effacer' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.', # MODIF
+'info_gauche_admin_tech' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.', # MODIF
+'info_gauche_admin_vider' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.', # MODIF
 'info_gauche_auteurs' => 'Her finder du alle webstedets forfattere. Status p&aring; hver enkelt fremg&aring;r af farven p&aring; ikonet (redakt&oslash;r = gr&oslash;n, administrator = gul).',
 'info_gauche_auteurs_exterieurs' => 'Udenforst&aring;ende forfattere uden adgang til webstedet vises med et bl&aring;t symbol; slettede forfattere repr&aelig;senteres af en papirkurv.',
 'info_gauche_messagerie' => 'Meddelelsessystemet giver mulighed for at udveksle meddelelser mellem redakt&oslash;rer, for at gemme huskesedler (til personlig brug) 
@@ -806,6 +810,9 @@ i en farve, der angiver deres status:',
 'module_texte_traduction' => 'Sprogfilen &laquo;&nbsp;@module@&nbsp;&raquo; findes p&aring;:',
 'mois_non_connu' => 'ukendt',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -977,7 +984,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_descriptif_petition' => 'Beskrivelse af appellen',
 'texte_descriptif_rapide' => 'Kort beskrivelse',
 'texte_documents_joints' => 'Du kan tillade at dokumenter (kontorfiler, billeder,
-	multimedia, osv.) f&oslash;jes til artikler og/eller afsnit. Der kan s&aring; henvises til filerne i dokumentet, eller de kan vises separat.<p>',
+	multimedia, osv.) f&oslash;jes til artikler og/eller afsnit. Der kan s&aring; henvises til filerne i dokumentet, eller de kan vises separat.<p>', # MODIF
 'texte_documents_joints_2' => 'Denne konfiguration hindrer ikke inds&aelig;ttelse af billeder direkte i dokumenter.',
 'texte_effacer_base' => 'Slet SPIP databasen',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
@@ -1028,7 +1035,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Ny meddelelse',
 'texte_nouveau_mot' => 'Nyt n&oslash;gleord',
 'texte_nouvelle_version_spip_1' => 'Du har netop installeret en ny version af SPIP.',
-'texte_nouvelle_version_spip_2' => 'Denne nye version kr&aelig;ver en mere omfattende opdatering end s&aelig;dvanligt. Hvis du er webmaster p&aring; webstedet, s&aring; slet venligst filen <tt>inc_connect.php3</tt> i kataloget <tt>ecrire</tt> og genstart installationen for at opdatere dine opkoblingsparametre til databasen. <p>(NB.: hvis du har glemt dine opkoblingsparametre, s&aring; kast et blik p&aring; indholdet af filen <tt>inc_connect.php3</tt> f&oslash;r du sletter den...)',
+'texte_nouvelle_version_spip_2' => 'Denne nye version kr&aelig;ver en mere omfattende opdatering end s&aelig;dvanligt. Hvis du er webmaster p&aring; webstedet, s&aring; slet venligst filen <tt>inc_connect.php3</tt> i kataloget <tt>ecrire</tt> og genstart installationen for at opdatere dine opkoblingsparametre til databasen. <p>(NB.: hvis du har glemt dine opkoblingsparametre, s&aring; kast et blik p&aring; indholdet af filen <tt>inc_connect.php3</tt> f&oslash;r du sletter den...)', # MODIF
 'texte_operation_echec' => 'G&aring; tilbage til forrige side og v&aelig;lg en anden database eller opret en ny. Kontroller de oplysninger, dit webhotel har stillet til r&aring;dighed.',
 'texte_plus_trois_car' => 'mere end 3 tegn',
 'texte_plusieurs_articles' => 'Der er fundet flere forfattere til "@cherche_auteur@":',
@@ -1055,7 +1062,7 @@ demande plus de puissance au serveur.', # NEW
 		Her kan du fors&oslash;ge at igangs&aelig;tte denne reparationsfunktion; 
 		hvis den g&aring;r galt, b&oslash;r du beholde en kopi af sk&aelig;rmbilledet, 
 		som m&aring;ske kan indeholde antydninger af, hvad der er galt....
-		<p>Hvis problemet fortsat best&aring;r, s&aring; kontakt dit webhotel.',
+		<p>Hvis problemet fortsat best&aring;r, s&aring; kontakt dit webhotel.', # MODIF
 'texte_restaurer_base' => 'Genindl&aelig;s indholdet af sikkerhedskopien af databasen',
 'texte_restaurer_sauvegarde' => 'Denne valgmulighed giver dig adgang til at genindl&aelig;se en tidligere 
 		sikkerhedskopi af databasen. For at g&oslash;re det, skal filen, der indeholder sikkerhedskopien af databasen, 

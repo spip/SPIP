@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Trebuie sa indica&#355;i un destinatar &icirc;nainte de a trimite mesajul',
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune SQL',
-'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.',
+'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.', # MODIF
 'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><div>SPIP este d&eacute;j&agrave; instalat</div>.',
 'avis_lecture_noms_bases_1' => 'Programul de instalare nu a putut citi numele bazelor de date instalate.',
 'avis_lecture_noms_bases_2' => 'Fie nici o baz&#259; de date nu este disponibil&#259;, fie func&#355;ia de listare a bazelor de date a fost dezactivat&#259; pentru motive de securitate (cei mai mul&#355;i furnizori procedeaz&#259; astfel).',
@@ -191,6 +191,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Aceast&#259; pagin&#259; prezint&#259; mai multe metode pentru a r&#259;m&acirc;ne &icirc;n contact cu activitatea de pe acest site.',
 'ical_info2' => 'Pentru mai multe detalii asupra acestor tehnici, nu ezita&#355;i s&#259; consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
@@ -328,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Versiunea dumneavoastr&#259;&nbsp;:',
 'info_connexion_base' => '&Icirc;ncercarea conexiunii la baza de date',
 'info_connexion_base_donnee' => 'Conexiunea la baza dumneavoastr&#259; de date',
-'info_connexion_ldap_ok' => 'Conexiunea LDAP a reu&#351;it.</b><br /> Pute&#355;i trece la etapa urm&#259;toare.',
+'info_connexion_ldap_ok' => 'Conexiunea LDAP a reu&#351;it.</b><br /> Pute&#355;i trece la etapa urm&#259;toare.', # MODIF
 'info_connexion_mysql' => 'Conexiunea dumneavoastr&#259; SQL',
 'info_connexion_ok' => 'Conexiunea a reu&#351;it.',
 'info_contact' => 'Contact',
@@ -375,9 +379,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    Pute&#355;i activa mai jos un forum suplimentar, rezervat doar administratorilor.',
 'info_forum_statistiques' => 'Statisticile vizitelor',
 'info_forums_abo_invites' => 'Site-ul dumneavoastr&#259; are forum-uri cu abonament&nbsp;; vizitatorii sunt, a&#351;adar, invita&#355;i s&#259; se &icirc;nregistreze pe site-ul public.',
-'info_gauche_admin_effacer' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.',
-'info_gauche_admin_tech' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.',
-'info_gauche_admin_vider' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.',
+'info_gauche_admin_effacer' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.', # MODIF
+'info_gauche_admin_tech' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.', # MODIF
+'info_gauche_admin_vider' => '<b>Aceast&#259; pagin&#259; este accesibil&#259; doar responsabililor acestui site</b><br /> Ea d&#259; acces la diverse func&#355;ii de &icirc;ntre&#355;inere tehnic&#259;. Unele dintre aceste func&#355;ii cer un proces de autentificare specific, de exemplu s&#259; ave&#355;i un acces FTP la site-ul Web.', # MODIF
 'info_gauche_auteurs' => 'G&#259;si&#355;i aici to&#355;i autorii acestui site.
  Starea lor este indicat&#259; prin codul de culori al iconi&#355;ei asociate (administrator = verde; redactor = galben).',
 'info_gauche_auteurs_exterieurs' => 'Autorii existen&#355;i, f&#259;r&#259; acces la site, sunt indica&#355;i cu ajutorul unei iconi&#355;e albastre&nbsp;;
@@ -811,6 +815,9 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'module_texte_traduction' => 'Fi&#351;ierul de limb&#259; &laquo;&nbsp;@module@&nbsp;&raquo; este disponibil &icirc;n&nbsp;:',
 'mois_non_connu' => 'necunoscut',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Con&#355;inut',
 'onglet_declarer_une_autre_base' => 'Declara&#355;i o alt&#259; baz&#259; de date',
@@ -981,7 +988,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_descriptif_rapide' => 'Descriere pe scurt',
 'texte_documents_joints' => 'Pute&#355;i autoriza ad&#259;ugarea de documente (fi&#351;iere de birotic&#259;, imagini, fi&#351;iere multimedia, &#351;.a.m.d.)
    &icirc;n articole sau rubrici. Aceste fi&#351;iere pot fi referen&#355;iate &icirc;n cadrul articolelor sau afi&#351;ate separat.
-',
+', # MODIF
 'texte_documents_joints_2' => 'Aceast reglaj nu &icirc;mpiedic&#259; ad&#259;ugarea de imagini direct &icirc;n articole.',
 'texte_effacer_base' => '&#350;terge&#355;i baza de date SPIP',
 'texte_effacer_donnees_indexation' => '&#350;terge&#355;i datele de indexare',
@@ -994,7 +1001,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
   Aceste fi&#351;iere v&#259; pot servi pentru a rest&acirc;nge accesul autorilor &#351;i administratorilor &icirc;n alte locuri ale site-ului dumneavoastr&#259;
   (programe externe de statistici, de exemplu).
   Dac&#259; nu vede&#355;i utilitatea unui astfel de mecanism de protec&#355;ie, pute&#355;i l&#259;sa aceast&#259; op&#355;iune
-  la valoare ei implicit&#259; (f&#259;r&#259; crearea de fi&#351;iere).',
+  la valoare ei implicit&#259; (f&#259;r&#259; crearea de fi&#351;iere).', # MODIF
 'texte_informations_personnelles_1' => 'Sistemul v&#259; va crea acum un acces personalizat la site.',
 'texte_informations_personnelles_2' => '(Not&#259; : dac&#259; este vorba de o reinstalare, &#351;i dac&#259; accesul dumneavoastr&#259; merge &icirc;nc&#259;, pute&#355;i',
 'texte_introductif_article' => '(Text introductiv al articolului.)',
@@ -1036,7 +1043,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_nouveau_mot' => 'Cuv&acirc;nt nou',
 'texte_nouvelle_version_spip_1' => 'A&#355;i instalat o nou&#259; versiune SPIP.',
 'texte_nouvelle_version_spip_2' => 'Aceast&#259; nou&#259; versiune necesit&#259; o aducere la zi mai complet&#259; dec&acirc;t &icirc;n mod obi&#351;nuit. Dac&#259; sunte&#355;i webmaster-ul site-ului, v&#259; rugam s&#259; &#351;terge&#355;i fi&#351;ierul @connect@ &#351;i s&#259; relua&#355;i instalarea de la cap&#259;t pentru a permite aducerea la zi a parametrilor dumneavoastr&#259; de conectare la baza de date.
-(Nota Bene&nbsp;: dac&#259; cumva a&#355;i uitat parametrii de conectare, arunca&#355;i o privire la fi&#351;ierul @connect@ &icirc;nainte de a-l &#351;terge...)',
+(Nota Bene&nbsp;: dac&#259; cumva a&#355;i uitat parametrii de conectare, arunca&#355;i o privire la fi&#351;ierul @connect@ &icirc;nainte de a-l &#351;terge...)', # MODIF
 'texte_operation_echec' => '&Icirc;ntoarce&#355;i-v&#259; la pagina anterioar&#259;, selec&#355;ionazi o alt&#259; baz&#259; de date sau crea&#355;i una nou&#259;. Verifica&#355;i informa&#355;iile date de furnizorul dumneavoastr&#259; de hosting.',
 'texte_plus_trois_car' => 'mai mult de 3 caractere',
 'texte_plusieurs_articles' => 'Mai multe articole g&#259;site pentru "@cherche_auteur@":',
@@ -1057,7 +1064,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_requetes_echouent' => '<b>Atunci c&acirc;nd anumite cereri SQL e&#351;ueaz&#259; &icirc;n mod sistematic &#351;i f&#259;r&#259; un motiv evident, este posibil ca baza de date &icirc;ns&#259;&#351;i s&#259; fie cauza.</b>
 Server-ul dumneavoastr&#259; SQL dispune de o capacitate de reparare a tabelelor sale atunci c&acirc;nd acestea s-au stricat &icirc;n mod accidental.
 Pute&#355;i &icirc;ncerca aici aceast&#259; reparare&nbsp;; &icirc;n caz de e&#351;ec, conserva&#355;i o copie de ecran, care poate c&#259; con&#355;ine indicii referitor la ceea ce nu merge...
-Dac&#259; problema persist&#259;, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe furnizorul dumneavoastr&#259; de hosting.',
+Dac&#259; problema persist&#259;, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe furnizorul dumneavoastr&#259; de hosting.', # MODIF
 'texte_restaurer_base' => 'Restaura&#355;i con&#355;inutul bazei de date plec&acirc;nd de la o salvare',
 'texte_restaurer_sauvegarde' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; restaura&#355;i o copie de siguran&#355;&#259; a bazei de date pe care a&#355;i f&#259;cut-o anterior. Pentru aceasta v&#259; rug&#259;m s&#259; v&#259; asigura&#355;i ca fi&#351;ierul de copie de siguran&#355;&#259;
   se afl&#259; &icirc;n directorul @dossier@.

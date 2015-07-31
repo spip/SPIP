@@ -33,7 +33,7 @@ una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione.<p>Per ulteriori
  informazioni, vedere <a href="@spipnet@">
-la documentazione di SPIP</a>.</p>',
+la documentazione di SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
@@ -201,6 +201,10 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 // F
 'forum_info_original' => 'originale',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
 'ical_info2' => 'Per ulteriori informazioni su tutte queste tecniche, non esitate a consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
@@ -340,7 +344,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_conflit_edition_votre_version' => 'La tua versione:',
 'info_connexion_base' => 'Prova di connessione al database',
 'info_connexion_base_donnee' => 'Connessione al proprio database',
-'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p> &Egrave; possibile passare alla fase successiva.</p>',
+'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p> &Egrave; possibile passare alla fase successiva.</p>', # MODIF
 'info_connexion_mysql' => 'La connessione a SQL',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
@@ -394,9 +398,9 @@ tutti i redattori registrati. &Egrave; anche possibile attivare un
 secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrati. Nel sito pubblico &egrave; quindi presente una pagina d\'iscrizione.',
-'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
-'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
-'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>',
+'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>', # MODIF
 'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
 Il loro status &egrave; indicato dal colore dell\'icona (redattore = giallo; amministratore = verde).',
 'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
@@ -824,6 +828,9 @@ Le traduzioni sono associate all\'originale,
 'module_texte_traduction' => 'Il file lingua &laquo;@module@&raquo; &egrave; disponibile in:',
 'mois_non_connu' => 'sconosciuto',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenuto',
 'onglet_declarer_une_autre_base' => 'Dichiarare un altro database',
@@ -999,7 +1006,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
 'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
-'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.',
+'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.', # MODIF
 'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
@@ -1014,7 +1021,7 @@ e agli amministratori in particolari aree del sito
 (per esempio, per un programma esterno di statistiche).</p><p>
 Se ci&ograve; non &egrave; necessario, lasciare quest\'opzione
 al suo valore predefinito (nessuna creazione 
-di file).</p>',
+di file).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
 'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
@@ -1055,7 +1062,7 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_nouveau_message' => 'Nuovo messaggio',
 'texte_nouveau_mot' => 'Nuova parola',
 'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
-'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>',
+'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>', # MODIF
 'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
 'texte_plus_trois_car' => 'pi&ugrave; di tre caratteri',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
@@ -1080,7 +1087,7 @@ Il server SQL dispone di una funzione di ripristino delle tabelle
 danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
 in caso di errore, conservare una copia del messaggio visualizzato,
 contenente forse delle informazioni preziose...</p><p>
-Se il problema persiste, contattare il proprio fornitore di hosting.</p>',
+Se il problema persiste, contattare il proprio fornitore di hosting.</p>', # MODIF
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella @dossier@.

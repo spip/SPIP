@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Sie m&uuml;ssen einen Empf&auml;nger angeben, bevor Sie die Nachricht abschicken.',
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Verbindungsfehler (SQL)',
-'avis_erreur_version_archive' => '<b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.',
+'avis_erreur_version_archive' => '<b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.', # MODIF
 'avis_espace_interdit' => '<b>Gesperrter Bereich</b><div>SPIP ist bereits installiert.</div>',
 'avis_lecture_noms_bases_1' => 'Das Installationsprogramm konnte die Namen der vorhandenen Datenbanken nicht lesen.',
 'avis_lecture_noms_bases_2' => 'Entweder ist keine Datenbank vorhanden oder die Funktion zum Auflisten der Datenbanken ist abgeschaltet (Das ist bei vielen Webhostern der Fall).',
@@ -188,6 +188,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'Original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Diese Seite erm&ouml;glicht auf mehrere Arten an der Entwicklung der Website teilzunehmen.',
 'ical_info2' => 'Um mehr &uuml;ber diese Techniken zu erfahren, lesen Sie bitte die <a href="@spipnet@">SPIP Dokumentation</a>.',
@@ -324,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Ihre Fassung:',
 'info_connexion_base' => 'Test der Verbindung zur Datenbank',
 'info_connexion_base_donnee' => 'Verbindung mit Ihrer Datenbank',
-'info_connexion_ldap_ok' => 'Die Verbindung zum LDAP-Verzeichnis wurde hergestellt.</b><p> Sie k&ouml;nnen mit dem n&auml;chsten Schritt fortfahren.',
+'info_connexion_ldap_ok' => 'Die Verbindung zum LDAP-Verzeichnis wurde hergestellt.</b><p> Sie k&ouml;nnen mit dem n&auml;chsten Schritt fortfahren.', # MODIF
 'info_connexion_mysql' => 'Verbindung zur SQL-Datenbank',
 'info_connexion_ok' => 'Die Verbindung wurde hergestellt.',
 'info_contact' => 'Kontakt',
@@ -368,9 +372,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'Im Redaktionssystem der Website gibt es ein Forum f&uuml;r alle Redakteure. Sie k&ouml;nnen hier ein Forum <i>nur f&uuml;r Administratoren</i> einschalten.',
 'info_forum_statistiques' => 'Besucherstatistiken',
 'info_forums_abo_invites' => 'Ihre Website hat Foren f&uuml;r eingetragene Teilnehmer. Ihre Leser werden aus diesem Gund aufgefordert, sich bei Ihrer Website anzumelden.',
-'info_gauche_admin_effacer' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
-'info_gauche_admin_tech' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
-'info_gauche_admin_vider' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
+'info_gauche_admin_effacer' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
+'info_gauche_admin_tech' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
+'info_gauche_admin_vider' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
 'info_gauche_auteurs' => 'Hier sehen Sie alle Autoren der Website.
 Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Administrator = gr&uuml;n). ',
 'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gel&ouml;schte Autoren haben eine M&uuml;lltonne als Symbol.',
@@ -788,6 +792,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'module_texte_traduction' => 'Die Sprachdatei f&uuml;r &laquo;&nbsp;@module@&nbsp;&raquo; liegt vor auf&nbsp;',
 'mois_non_connu' => 'unbekannt',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Inhalt',
 'onglet_declarer_une_autre_base' => 'Weitere Datenbank deklarieen',
@@ -948,7 +955,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_date_publication_article' => 'ONLINE VER&Ouml;FFENTLICHT AM:',
 'texte_descriptif_petition' => 'Beschreibung der Petition',
 'texte_descriptif_rapide' => 'Kurzbeschreibung',
-'texte_documents_joints' => 'Sie k&ouml;nnen die Zuordnung von Dokumenten (Office-Dokumente, Bilder, Multimedia-Dateien, etc.) zu Artikeln und/oder Rubriken erlauben. Diese Dokumente k&ouml;nnen anschliessend innerhalb von Artikeln verlinkt oder separat angezeigt werden.<p>',
+'texte_documents_joints' => 'Sie k&ouml;nnen die Zuordnung von Dokumenten (Office-Dokumente, Bilder, Multimedia-Dateien, etc.) zu Artikeln und/oder Rubriken erlauben. Diese Dokumente k&ouml;nnen anschliessend innerhalb von Artikeln verlinkt oder separat angezeigt werden.<p>', # MODIF
 'texte_documents_joints_2' => 'Diese Einstellung widerspricht nicht dem Einf&uuml;gen von Bildern in Artikel.',
 'texte_effacer_base' => 'SPIP-Datenbank l&ouml;schen',
 'texte_effacer_donnees_indexation' => 'Indexe l&ouml;schen',
@@ -957,7 +964,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_en_cours_validation_forum' => 'Bitte schreiben Sie Ihre Kommentare in die entsprechenden Foren.',
 'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &#132;typografischen Abk&uuml;rzungen&#147; verwenden.',
 'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
- Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.</p><p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
+ Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.</p><p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>', # MODIF
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
 'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, k&ouml;nnen Sie',
 'texte_introductif_article' => '(Einleitender Text des Artikels.)',
@@ -992,7 +999,7 @@ ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bit
         die Verbindungsdaten zur Datenbank neu eingeben.
         <p>(Tipp: Sollten Sie Ihre Verbindungsdaten vergessen haben,
         schauen Sie in der Datei @connect@ nach,
-        bevor Sie sie l&ouml;schen ...)',
+        bevor Sie sie l&ouml;schen ...)', # MODIF
 'texte_operation_echec' => 'Gehen Sie zur vorigen Seite zur&uuml;ck und w&auml;hlen Sie eine andere Datenbank aus bzw. legen Sie eine neue an. &Uuml;berpr&uuml;fen Sie die Angaben Ihres Providers.',
 'texte_plus_trois_car' => 'mehr als 3 Zeichen',
 'texte_plusieurs_articles' => 'Mehrere Autoren f&uuml;r &bdquo;@cherche_auteur@&ldquo; gefunden:',
@@ -1014,7 +1021,7 @@ Meistens kann dieses Feld aber leer bleiben.',
 'texte_referencement_automatique_verifier' => 'Bitte &uuml;berpr&uuml;fen Sie die Informationen von <tt>@url@</tt> vor dem Speichern.',
 'texte_requetes_echouent' => '<b>Wenn manche SQL-Befehle ohne ersichtlichen Grund systematisch fehlschlagen, kann es an einer besch&auml;digten Datenbank liegen.</b><p>
 SQL kann Tabellen reparieren, die besch&auml;digt worden sind. Starten Sie hier einen Reparaturversuch. Sollte das fehlschlagen, notieren Sie bitte die Fehlermeldung, die u.U. einen Hinweis auf den Grund des Problems gibt ...<p>
-Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>',
+Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>', # MODIF
 'texte_restaurer_base' => 'Wiederherstellung des Inhalts der Datenbank',
 'texte_restaurer_sauvegarde' => 'Mit dieser Funktion k&ouml;nnen Sie eine Sicherungskopie Ihrer Datenbank wieder einspielen. Dazu muss die Sicherungsdatei in das Verzeichnis @dossier@ kopiert werden. Verwenden Sie diese Funktion mit der n&ouml;tigen Vorsicht. <b>Die &Auml;nderungen k&ouml;nnen nicht wieder r&uuml;ckg&auml;ngig gemacht werden.</b>',
 'texte_sauvegarde' => 'Inhalt der Datenbank sichern',

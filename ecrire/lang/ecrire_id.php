@@ -202,6 +202,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'asli',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Halaman ini memberikan sejumlah metode untuk mengetahui dan berhubungan dengan aktivitas situs ini.',
 'ical_info2' => 'Untuk informasi lebih lanjut, jangan segan-segan untuk mengunjungi <a href="@spipnet@">dokumentasi SPIP</a>.', # MODIF
@@ -341,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Langkah kedua: <b>Percobaan untuk koneksi ke database</B>',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Koneksi LDAP anda berhasil.</b><p> Anda dapat meneruskan ke langkah selanjutnya.</p>',
+'info_connexion_ldap_ok' => 'Koneksi LDAP anda berhasil.</b><p> Anda dapat meneruskan ke langkah selanjutnya.</p>', # MODIF
 'info_connexion_mysql' => 'Langkah pertama: <b>Koneksi SQL anda</b>',
 'info_connexion_ok' => 'Koneksi berhasil.',
 'info_contact' => 'Kontak',
@@ -393,9 +397,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		forum tambahan direservasi untuk para administrator.',
 'info_forum_statistiques' => 'Statistik kunjungan',
 'info_forums_abo_invites' => 'Situs anda berisikan forum-forum berlangganan; pengunjung dapat mendaftarkan diri pada forum-forum tersebut di situs umum.',
-'info_gauche_admin_effacer' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>',
-'info_gauche_admin_tech' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>',
-'info_gauche_admin_vider' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>',
+'info_gauche_admin_effacer' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>', # MODIF
 'info_gauche_auteurs' => 'Anda akan menemukan seluruh penulis situs di sini.
  Status dari setiap penulis ditunjukkan oleh warna icon (administrator = hijau; editor = kuning).',
 'info_gauche_auteurs_exterieurs' => 'Penulis eksternal, tanpa akses ke situs, ditunjukkan oleh icon biru; penulis yang dihapus oleh icon warna keranjang sampah.',
@@ -828,6 +832,9 @@ dalam warna yang menunjukkan statusnya:',
 'module_texte_traduction' => 'Berkas bahasa &laquo;&nbsp;@module@&nbsp;&raquo; tersedia di:',
 'mois_non_connu' => 'tidak dikenal',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -1005,7 +1012,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_descriptif_rapide' => 'Deskripsi singkat',
 'texte_documents_joints' => 'Anda dapat mengizinkan penambahan dokumen (berkas-berkas office, gambar,
  multimedia, dll.) ke artikel dan/atau bagian. Berkas-berkas ini
- kemudian dapat direferensi dalam artikel atau ditampilkan terpisah.',
+ kemudian dapat direferensi dalam artikel atau ditampilkan terpisah.', # MODIF
 'texte_documents_joints_2' => 'Pengaturan ini tidak menghentikan penambahan gambar secara langsung dalam artikel.',
 'texte_effacer_base' => 'Hapus database SPIP',
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
@@ -1066,7 +1073,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Pesan baru',
 'texte_nouveau_mot' => 'Kata kunci baru',
 'texte_nouvelle_version_spip_1' => 'Anda baru saja menginstal versi terbaru SPIP.',
-'texte_nouvelle_version_spip_2' => 'Versi terbaru ini membutuhkan pembaharuan secara menyeluruh daripada biasanya. Jika anda adalah webmaster situs ini, silakan hapus berkas @connect@ dan jalankan kembali instalasi untuk memperbaharui paramater-parameter koneksi database anda. <p>(Catatan: Jika anda lupa paramater-parameter koneksi database anda, silakan lihat berkas @connect@ sebelum menghapusnya!)</p>',
+'texte_nouvelle_version_spip_2' => 'Versi terbaru ini membutuhkan pembaharuan secara menyeluruh daripada biasanya. Jika anda adalah webmaster situs ini, silakan hapus berkas @connect@ dan jalankan kembali instalasi untuk memperbaharui paramater-parameter koneksi database anda. <p>(Catatan: Jika anda lupa paramater-parameter koneksi database anda, silakan lihat berkas @connect@ sebelum menghapusnya!)</p>', # MODIF
 'texte_operation_echec' => 'Kembali ke halaman sebelumnya, pilih database lain atau buat yang baru. Verifikasi informasi yang diberikan oleh hosting anda.',
 'texte_plus_trois_car' => 'lebih dari 3 karakter',
 'texte_plusieurs_articles' => 'Sejumla penulis ditemukan untuk "@cherche_auteur@":',
@@ -1097,7 +1104,7 @@ memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunak
   Di sini, anda dapat mencoba melakukan perbaikan tersebut;
   jika gagal, anda sebaiknya menyimpan salinan dari tampilan
   yang mungkin dapat dijadikan petunjuk apa yang salah...</p><p>
-  Jika permasalahan ini msih berlanjut, hubungi hosting anda.</p>',
+  Jika permasalahan ini msih berlanjut, hubungi hosting anda.</p>', # MODIF
 'texte_restaurer_base' => 'Pulihkan isi backup database',
 'texte_restaurer_sauvegarde' => 'Opsi ini mengizinkan anda untuk memulihkan backup database
 sebelumnya. Untuk melakukannya, berkas yang berisikan backup harus disimpan di

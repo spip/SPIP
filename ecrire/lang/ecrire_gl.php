@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   da s&uacute;a base de datos, erros no funcionamento do web, etc.
   Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
   informaci&oacute;ns, consulte <a href="@spipnet@">
-  a documentaci&oacute;n de SPIP</A>.',
+  a documentaci&oacute;n de SPIP</A>.', # MODIF
 'avis_espace_interdit' => '<b>Espazo prohibido</b><div>SPIP xa est&aacute; instalado.</div>',
 'avis_lecture_noms_bases_1' => 'O programa de instalaci&oacute;n non puido ler os nomes das bases de datos instaladas.',
 'avis_lecture_noms_bases_2' => 'Pode que non haxa ningunha base dispo&ntilde;&iacute;bel, ou que a funci&oacute;n que lista as bases estea desactivada por motivos de seguridade (caso moi frecuente en moitos provedores de servizos).',
@@ -199,6 +199,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'orixinal',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Esta p&aacute;xina presenta varios m&eacute;todos para establecer contactos coas novidades deste web.',
 'ical_info2' => 'Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
@@ -338,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'A s&uacute;a versi&oacute;n&nbsp;:',
 'info_connexion_base' => 'Proba de conexi&oacute;n coa base de datos',
 'info_connexion_base_donnee' => 'Conexi&oacute;n &aacute;s s&uacute;a base de datos',
-'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p> Pode pasar &aacute; etapa seguinte.</p>',
+'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p> Pode pasar &aacute; etapa seguinte.</p>', # MODIF
 'info_connexion_mysql' => 'A s&uacute;a conexi&oacute;n SQL',
 'info_connexion_ok' => 'Conexi&oacute;n feita.',
 'info_contact' => 'Contacto',
@@ -391,9 +395,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   complementar, reservado ao equipo de xesti&oacute;n.',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'info_forums_abo_invites' => 'O seu web disp&oacute;n de foros para se aboar&nbsp;; os visitantes est&aacute;n invitados a se rexistrar neles na parte p&uacute;blica do web.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>',
-'info_gauche_admin_tech' => '<b>Esta p&aacute;xina &eacute; unicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>',
-'info_gauche_admin_vider' => '<b>Esta p&aacute;xina &eacute; unicamente accesible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, que esixe ter un acceso por FTP ao web.</p>',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Esta p&aacute;xina &eacute; unicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Esta p&aacute;xina &eacute; unicamente accesible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, que esixe ter un acceso por FTP ao web.</p>', # MODIF
 'info_gauche_auteurs' => 'Aqu&iacute; atopar&aacute;s a todos os autores do web.
   O seu status ind&iacute;case coa cor da s&uacute;a &iacute;cona (xestor = verde; redactor = amarela).',
 'info_gauche_auteurs_exterieurs' => 'Os colaboradores exteriores, sen acceso ao web, ind&iacute;canse por unha &iacute;cona azul;
@@ -827,6 +831,9 @@ cunha cor que indica o seu estado&nbsp;:',
 'module_texte_traduction' => 'O ficheiro de lingua &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispo&ntilde;ible en&nbsp;:',
 'mois_non_connu' => 'desco&ntilde;ecido',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contido',
 'onglet_declarer_une_autre_base' => 'Declarar algunha outra base de datos',
@@ -1008,7 +1015,7 @@ demanda m&aacute;is potencia do servidor.',
 'texte_descriptif_rapide' => 'Descrici&oacute;n r&aacute;pida',
 'texte_documents_joints' => 'Pode autorizar o acompa&ntilde;amento de documentos (textos, imaxes,
   multimedia, etc.) aos artigos e/ou aos temas. Estes ficheiros
-  poden aparecer referidos no artigo ou mostrados por separado.<p>',
+  poden aparecer referidos no artigo ou mostrados por separado.<p>', # MODIF
 'texte_documents_joints_2' => 'Este axuste non impide a inserci&oacute;n de imaxes directamente nos artigos.',
 'texte_effacer_base' => 'Eliminar a base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Eliminar os datos de indexaci&oacute;n',
@@ -1023,7 +1030,7 @@ demanda m&aacute;is potencia do servidor.',
   externo de estat&iacute;sticas, por exemplo).</p><p>
   Se non o utiliza, pode deixar esta opci&oacute;n
  co seu valor predeterminado (non crear
-estes ficheiros).</p>',
+estes ficheiros).</p>', # MODIF
 'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
 'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalaci&oacute;n, e o teu acceso vai sen atrancos, podes',
 'texte_introductif_article' => '(Texto introdutorio do artigo.)',
@@ -1069,7 +1076,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'texte_nouveau_message' => 'Nova mensaxe',
 'texte_nouveau_mot' => 'Nova palabra',
 'texte_nouvelle_version_spip_1' => 'Instalaches unha nova versi&oacute;n de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nova versi&oacute;n precisa unha posta ao d&iacute;a m&aacute;is completa que a habitual. De seres webmestra/e do web, elimine o ficheiro @connect@ e retome a instalaci&oacute;n para po&ntilde;er ao d&iacute;a os par&aacute;metros de conexi&oacute;n &aacute; base de datos.<p> (NB.&nbsp;: se esqueceu os par&aacute;metros de conexi&oacute;n, b&oacute;telle un ollo ao ficheiro  @connect@ antes de borralo...)</p>',
+'texte_nouvelle_version_spip_2' => 'Esta nova versi&oacute;n precisa unha posta ao d&iacute;a m&aacute;is completa que a habitual. De seres webmestra/e do web, elimine o ficheiro @connect@ e retome a instalaci&oacute;n para po&ntilde;er ao d&iacute;a os par&aacute;metros de conexi&oacute;n &aacute; base de datos.<p> (NB.&nbsp;: se esqueceu os par&aacute;metros de conexi&oacute;n, b&oacute;telle un ollo ao ficheiro  @connect@ antes de borralo...)</p>', # MODIF
 'texte_operation_echec' => 'Volve &aacute; p&aacute;xina anterior, selecciona outra base ou crea unha nova. Verifica a informaci&oacute;n que che dera o teu aloxador.',
 'texte_plus_trois_car' => 'm&aacute;is de 3 caracteres',
 'texte_plusieurs_articles' => 'Atop&aacute;ron.se varias entradas para "@cherche_auteur@":',
@@ -1093,7 +1100,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
   SQL ten unha opci&oacute;n de reparaci&oacute;n das
  t&aacute;boas cando estas foron danadas por accidente.
   A&iacute; pode tentar esta reparaci&oacute;n; en caso de fallo, garde unha copia do resultado, que pode que conte&ntilde;a indicios do que non vai ben...<p>
-  Se o problema persiste, p&oacute;&ntilde;ase en contacto co seu provedor de aloxamento.<p>',
+  Se o problema persiste, p&oacute;&ntilde;ase en contacto co seu provedor de aloxamento.<p>', # MODIF
 'texte_restaurer_base' => 'Restaurar o contido dunha copia de seguridade da base',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n permite restaurar unha copia de seguridade precedente
   feita da base. Para isto, o ficheiro da copia de seguridade ten que

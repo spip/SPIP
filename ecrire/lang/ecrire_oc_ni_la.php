@@ -198,6 +198,10 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
 'ical_info2' => 'Per tenir mai d\'informacions sobre aqueli tecnicas, non esitetz de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
@@ -333,7 +337,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.</p>',
+'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.</p>', # MODIF
 'info_connexion_mysql' => 'Primiera estapa: <b>La v&ograve;stra connexion SQL</b>',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contacte',
@@ -379,9 +383,9 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es dub&egrave;rt a toi lu redactors registrats. Pod&egrave;tz, &ccedil;ai sota, activar un forum suplementari, reservat basta au administrators.',
 'info_forum_statistiques' => 'Estadisticas dei vesitas',
 'info_forums_abo_invites' => 'Lo v&ograve;stre sit web p&ograve;rge de forums per lu abonats; dins lo sit public lu vesitaires son convidats a si registrar.',
-'info_gauche_admin_effacer' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>',
-'info_gauche_admin_tech' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>',
-'info_gauche_admin_vider' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>',
+'info_gauche_admin_effacer' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>A aquela p&agrave;gina, basta lu responsables dau sit i p&ograve;don accedir.</b><p> Permete de trobar li diferenti foncions de mantenen&ccedil;a tecnica. D\'uni que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.</p>', # MODIF
 'info_gauche_auteurs' => 'Trobaretz aic&iacute; toi lu autors dau sit. La color dei ic&ograve;nas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Lu autors exteriors, sensa acc&egrave;s au sit, son indicats per una ic&ograve;na blava; lu autors esfa&ccedil;ats per un bordilhier.',
 'info_gauche_messagerie' => 'La messatjaria vos permete d\'escambiar de messatges entre redactors, de servar de mementos (per lo v&ograve;stre usatge personau) o d\'afichar d\'anoncis sus la p&agrave;gina d\'acuelh de l\'espaci privat (se siatz administrator/tritz).',
@@ -810,6 +814,9 @@ un color indica lo sieu estat:',
 'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -986,7 +993,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fichiers burotics, imatges,
  multim&egrave;dia, etc.) ai articles e/&ograve; ai rubricas. Aquelu fichiers,
  p&ograve;don pi &egrave;stre referenciats dins
- l\'article, &ograve; apar&eacute;isser a despart.',
+ l\'article, &ograve; apar&eacute;isser a despart.', # MODIF
 'texte_documents_joints_2' => 'Aqueu reglatge non empedisse d\'inserir d\'imatges directament dins lu articles.',
 'texte_effacer_base' => 'Esfa&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar li donadas d\'indexacion',
@@ -1085,7 +1092,7 @@ tornar calcular basta una p&agrave;gina, passatz puspr&egrave;st per l\'espaci p
   non capita, servatz una c&ograve;pia de l\'afichatge, que conten
  benl&egrave;u d\'indicis de cen que non va...</p><p>
   Se lo probl&egrave;ma persistisse, contactatz lo v&ograve;stre
-  aubergador.</p>',
+  aubergador.</p>', # MODIF
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permete de restaurar una sauvagarda 
  de la basa que l\'aviatz facha avans. Per aqu&ograve; faire, cau aver botat lo fichier que conten la sauvagarda 

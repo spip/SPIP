@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.
 Dir kommt an grouss Schwieregkeeten:
 Risiko dass &auml;r Datebank zerst&eacute;iert g&euml;t, generellen Disfonktionnement vum Site, asw. Best&auml;tegt d&euml;sen Import n&euml;t.<p>Fir m&eacute;i Informatiounen kuckt an <a href="@spipnet@">
-der Dokumentatioun vu SPIP</a>.</p>',
+der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Gespaarten Deel</b><p>SPIP ass schon install&eacute;iert.</p>',
 'avis_lecture_noms_bases_1' => 'Den Installatiouns-Programm konnt d\'Nimm vun den install&eacute;iertent Datebanken n&euml;t liesen.',
 'avis_lecture_noms_bases_2' => 'Etweder steet keng Datebank zur Verf&uuml;gung, oder d\'Fonktioun fir d\'Datebanken opzel&euml;schten ass aus S&euml;cherheetsgr&euml;nn ausgeschalt ginn (dat ass esou bei villen Provider\'en).',
@@ -192,6 +192,10 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 // F
 'forum_info_original' => 'Original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'D&euml;s S&auml;it bitt verschidde M&eacute;igl&euml;chkeeten fir mam Liewen vun d&euml;sem Site a Kontakt ze bleiwen.',
 'ical_info2' => 'Fir m&eacute;i Informatiounen iwer d&euml;s Technik, kuckt an <a href="@spipnet@">der SPIP-Dokumentatioun</a>.',
@@ -327,7 +331,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_conflit_edition_votre_version' => '&Auml;r Versioun:',
 'info_connexion_base' => 'Versichen mat der Datebank ze verbannen',
 'info_connexion_base_donnee' => 'Verbannen mat &auml;rer Datebank',
-'info_connexion_ldap_ok' => 'D\'LDAP-Verbindung huet geklappt.</b><p>Weider bei de n&auml;chsten Schr&euml;tt.</p>',
+'info_connexion_ldap_ok' => 'D\'LDAP-Verbindung huet geklappt.</b><p>Weider bei de n&auml;chsten Schr&euml;tt.</p>', # MODIF
 'info_connexion_mysql' => '&Auml;r SQL-Verbindung',
 'info_connexion_ok' => 'D\'Verbindung huet geklappt.',
 'info_contact' => 'Kontakt',
@@ -372,9 +376,9 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_forum_ouvert' => 'Am privaten Deel vum Site g&euml;t &euml;t e Forum fir d\'Redakteren. Dir k&euml;nnt hei nach e Forum, just fir d\'Administrateuren, aschalten.',
 'info_forum_statistiques' => 'Statistik vun de Visiten',
 'info_forums_abo_invites' => '&Auml;re Site huet Forum\'en wou een sech umelden muss; d\'Visiteuren ginn also agelueden s&euml;ch ze enregistr&eacute;ieren.',
-'info_gauche_admin_effacer' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>',
-'info_gauche_admin_tech' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>',
-'info_gauche_admin_vider' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>',
+'info_gauche_admin_effacer' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
 'info_gauche_auteurs' => 'Hei fannt dir all d\'Auteur\'en vum Site.
 Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Redakter = giel).',
 'info_gauche_auteurs_exterieurs' => 'D&eacute;i extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone mark&eacute;iert, d&eacute;i gel&auml;schten Auteuren mat enger Drecksk&euml;scht.',
@@ -786,6 +790,9 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'module_texte_traduction' => 'De Sprooche-Fichier &laquo;&nbsp;@module@&nbsp;&raquo; g&euml;tt et op:',
 'mois_non_connu' => 'onbekannt',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Inhalt',
 'onglet_declarer_une_autre_base' => 'Eng aner Datebank d&eacute;clar&eacute;ieren',
@@ -942,7 +949,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_date_publication_article' => 'PUBLIZ&Eacute;IRT DEN:',
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',
 'texte_descriptif_rapide' => 'Kuerz Beschreiwung',
-'texte_documents_joints' => 'Dir k&euml;nnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. D&euml;s Fichier\'en k&euml;nnen dann am Artikel gelinkt oder separat ugewisen ginn.',
+'texte_documents_joints' => 'Dir k&euml;nnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. D&euml;s Fichier\'en k&euml;nnen dann am Artikel gelinkt oder separat ugewisen ginn.', # MODIF
 'texte_documents_joints_2' => 'D&euml;s Astellung verh&euml;nnert n&euml;t Biller direkt an den Artikel derb&auml;i ze setzen.',
 'texte_effacer_base' => 'D\'SPIP-Datebank l&auml;schen',
 'texte_effacer_donnees_indexation' => 'Den Index l&auml;schen',
@@ -952,7 +959,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_enrichir_mise_a_jour' => 'Dir k&euml;nnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
 'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p>
 D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (z.B. externe Statistik-Program).</p><p>
-Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (k&eacute;ng Fichier\'en maachen).</p>',
+Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (k&eacute;ng Fichier\'en maachen).</p>', # MODIF
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
 'texte_informations_personnelles_2' => '(N.B.: wann &euml;t eng Re-Installatioun ass, a wann &auml;ren Zougang nach fonktionn&eacute;iert,',
 'texte_introductif_article' => '(Aleedung vum Artikel.)',
@@ -983,7 +990,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_nouveau_message' => 'Neie Message',
 'texte_nouveau_mot' => 'Neit Wuert',
 'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP install&eacute;iert.',
-'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier @connect@ a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p>(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier @connect@ ier d&euml;r e l&auml;scht...)</p>',
+'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier @connect@ a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p>(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier @connect@ ier d&euml;r e l&auml;scht...)</p>', # MODIF
 'texte_operation_echec' => 'Gidd op d&eacute;i l&auml;scht S&auml;it zer&euml;ck, wielt eng aner Datebank oder setzt eng derb&auml;i. Kontroll&eacute;iert d\'Informatiounen vun &auml;rem Provider.',
 'texte_plus_trois_car' => 'm&eacute;i w&eacute;i 3 Buchstawen',
 'texte_plusieurs_articles' => 'E puer Artikelen fonnt vum "@cherche_auteur@":',
@@ -999,7 +1006,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_reference_mais_redirige' => 'Artikel aus dem SPIP-Site, awer op eng aner URL &euml;mgeleed.',
 'texte_referencement_automatique' => '<b>Automat&euml;scht Referenz&eacute;ieren vun engem Site</b><br />Dir k&euml;nnt e Site s&eacute;ier referenz&eacute;ieren an dem der hei d\'URL oder d\'Adress vun sengem Syndicatiouns-Fichier ugitt. SPIP kritt dann automatesch d\'Informatiounen (Titel, Beschreiwung...).',
 'texte_referencement_automatique_verifier' => 'Kontroll&eacute;iert d\'Informatiounen d&eacute;i vun <tt>@url@</tt> koum sinn ier d&euml;r sp&auml;ichert.',
-'texte_requetes_echouent' => '<b>Wa verschidden SQL-Query\'en systematesch an ouni sichtbar Ursaach fehlschlo&euml;n, ass &euml;t m&eacute;iglech dat &euml;t un der Datebank h&auml;ngt.</b><p> SQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...</p><p> Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Hosting.</p>',
+'texte_requetes_echouent' => '<b>Wa verschidden SQL-Query\'en systematesch an ouni sichtbar Ursaach fehlschlo&euml;n, ass &euml;t m&eacute;iglech dat &euml;t un der Datebank h&auml;ngt.</b><p> SQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...</p><p> Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Hosting.</p>', # MODIF
 'texte_restaurer_base' => 'E Backup restaur&eacute;ieren',
 'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am Dossier @dossier@ sinn.
 Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&euml;ckg&auml;ngeg gemaach ginn.</b>',

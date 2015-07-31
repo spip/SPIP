@@ -198,6 +198,10 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per demorar en contacte amb la vida d\'aquel sit.',
 'ical_info2' => 'Per t&eacute;ner mai d\'informacions sobre aquelas tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
@@ -333,7 +337,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.</p>',
+'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.</p>', # MODIF
 'info_connexion_mysql' => 'Prim&egrave;ira estapa:<b>V&ograve;stra connexion SQL</b>',
 'info_connexion_ok' => 'La connexion a abotit.',
 'info_contact' => 'Contacte',
@@ -379,9 +383,9 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es bade v&egrave;rs totes los redactors registrats. Pod&egrave;tz, &ccedil;ai sos, activar un forum suplementari, reservat mas aus administrators.',
 'info_forum_statistiques' => 'Estadisticas de las vesitas',
 'info_forums_abo_invites' => 'V&ograve;stre sit web ofr&iacute;s de forums per los abonats; dins lo sit public los vesitaires son convidats a se registrar.',
-'info_gauche_admin_effacer' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>',
-'info_gauche_admin_tech' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>',
-'info_gauche_admin_vider' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>',
+'info_gauche_admin_effacer' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>A aquela pagina, mas los responsables dau sit lai p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP v&egrave;rs lo sit web.</p>', # MODIF
 'info_gauche_auteurs' => 'Trobaretz aic&iacute; totes los autors dau sit. La color de las ic&ograve;nas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens acc&egrave;s v&egrave;rs lo sit, son indicats amb una ic&ograve;na blava; los autors esfa&ccedil;ats amb un bordilh&egrave;ir.',
 'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'eschamjar de messatges entre redactors, de servar de mementos (per v&ograve;stre usatge personau) o d\'afichar d\'anoncis sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
@@ -810,6 +814,9 @@ una color indica lor estat:',
 'module_texte_traduction' => 'Lo fich&egrave;ir de lenga &laquo;@module@&raquo; z-es disponible en:',
 'mois_non_connu' => 'non conegut',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -986,7 +993,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fich&egrave;irs burotics, imatges,
  multim&egrave;dia, etc.) aus articles e/o a las rubricas. Aqueles fich&egrave;irs
  p&ograve;don pu&egrave;i &egrave;sser referenciats dins
- l\'article, o apar&eacute;isser d\'a part.<p>',
+ l\'article, o apar&eacute;isser d\'a part.<p>', # MODIF
 'texte_documents_joints_2' => 'Aquel reglatge empacha pas d\'inserir d\'imatges dir&egrave;ctament dins los articles.',
 'texte_effacer_base' => 'Esfa&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar las donadas d\'indexacion',
@@ -1054,7 +1061,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Messatge nu&ograve;u',
 'texte_nouveau_mot' => 'Mot nu&ograve;u',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz installada una version nov&egrave;la d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se s&egrave;tz webm&egrave;stre/webm&egrave;stra dau sit, volhatz esfa&ccedil;ar lo fich&egrave;ir <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'installacion a fin d\'actualizar v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p> (NB: s\'av&egrave;tz eissubliat v&ograve;stres param&egrave;tres de connexion, agaitatz lo fich&egrave;ir  <tt>inc_connect.php3</tt> avans de lo suprimir...)</p>',
+'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se s&egrave;tz webm&egrave;stre/webm&egrave;stra dau sit, volhatz esfa&ccedil;ar lo fich&egrave;ir <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'installacion a fin d\'actualizar v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p> (NB: s\'av&egrave;tz eissubliat v&ograve;stres param&egrave;tres de connexion, agaitatz lo fich&egrave;ir  <tt>inc_connect.php3</tt> avans de lo suprimir...)</p>', # MODIF
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, chausiss&egrave;tz una autra basa o creatz-ne\'n una nov&egrave;la. Verificatz las informacions que v&ograve;stre auberjador a fornidas.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
@@ -1086,7 +1093,7 @@ tornar calcular mas una pagina, passatz pusl&egrave;u per l\'espaci public e uti
   s\'abot&iacute;s pas, servatz una c&ograve;pia de l\'afichatge, que conten
  benl&egrave;u d\'indicis de &ccedil;&ograve; que vai pas...<p>
   Se lo probl&egrave;ma persist&iacute;s, contactatz v&ograve;stre
-  auberjador.<p>',
+  auberjador.<p>', # MODIF
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una sauvagarda 
  de la basa que l\'aviatz faita avans. Per aqu&ograve; faire, chau aver botat lo fich&egrave;ir que conten la sauvagarda 

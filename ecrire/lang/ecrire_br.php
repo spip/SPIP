@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b>
 Emaoc\'h o vont da zegouezhout dirak diaezamanto&ugrave; bras :
 riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all.
-Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.',
+Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>Lec\'h difennet</b><div>Staliet eo SPIP dija.</div>',
 'avis_lecture_noms_bases_1' => 'N\'eo ket bet ar programm stalia&ntilde; evit lenn anvio&ugrave; an diazo&ugrave; titouro&ugrave; staliet.',
 'avis_lecture_noms_bases_2' => 'Pe n\'eus diaz ebet da gaout, pe n\'eo ket aotreet listenna&ntilde; an diazo&ugrave; evit abego&ugrave; surentez (ar pezh a c\'hoarvez gant meur a herberc\'hier).',
@@ -193,6 +193,10 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 // F
 'forum_info_original' => 'orin',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'War ar bajenn-ma&ntilde; ez eus meur a hentenn evit chom e darempred gant buhez al lec\'hienn-ma&ntilde;.',
 'ical_info2' => 'Evit titouro&ugrave; ouzhpenn diwar-benn an tekniko&ugrave;-se, lennit <a href="@spipnet@">teuliado&ugrave; skoazell SPIP</a>.',
@@ -331,7 +335,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_conflit_edition_votre_version' => 'Ho stumm&nbsp;:',
 'info_connexion_base' => 'O klask kevrea&ntilde; ouzh an diaz titouro&ugrave;',
 'info_connexion_base_donnee' => 'Kevrea&ntilde; ouzh ho tiaz titouro&ugrave;',
-'info_connexion_ldap_ok' => 'Kevreet oc\'h dre LDAP.</b><p>Gallout a rit tremen d\'al lankad war-lerc\'h.</p>',
+'info_connexion_ldap_ok' => 'Kevreet oc\'h dre LDAP.</b><p>Gallout a rit tremen d\'al lankad war-lerc\'h.</p>', # MODIF
 'info_connexion_mysql' => 'Ho kevreadenn SQL',
 'info_connexion_ok' => 'Kevreet oc\'h.',
 'info_contact' => 'Darempred',
@@ -380,9 +384,9 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
   Ama&ntilde; dindan e c\'hellit dibab ma vo savet ur forum evit ar verourien hepken ivez.',
 'info_forum_statistiques' => 'Stadego&ugrave; gweladenni&ntilde;',
 'info_forums_abo_invites' => 'Foromo&ugrave; dre goumanant zo war ho lec\'hienn&nbsp;; pedet e vez ar weladennerien d\'en em enrolla&ntilde; war lodenn foran al lec\'hienn neuze.',
-'info_gauche_admin_effacer' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p>Warni e reer al labourio&ugrave;-kempenn teknikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar, a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>',
-'info_gauche_admin_tech' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p> Warni e reer al labourio&ugrave; kempenn teknikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>',
-'info_gauche_admin_vider' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p>Warni e reer al labourio&ugrave; kempenn tekikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>',
+'info_gauche_admin_effacer' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p>Warni e reer al labourio&ugrave;-kempenn teknikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar, a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p> Warni e reer al labourio&ugrave; kempenn teknikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-ma&ntilde;.</b><p>Warni e reer al labourio&ugrave; kempenn tekikel. Evit trao&ugrave; zo ez eus ezhomm eus un argerzh testeniekaat dibar a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
 'info_gauche_auteurs' => 'Ama&ntilde; e kavot an holl dud a skriv war al lec\'hienn.
  Diouzh liv o skeudennig e c\'hellit gouzout o c\'harg resis (merour=gwer; skridaozer=melen).',
 'info_gauche_auteurs_exterieurs' => 'E glaz ema&ntilde; diskouezet ar skridaozerien diavaez, hep moned ouzh al lec\'hienn&nbsp;;
@@ -808,6 +812,9 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'module_texte_traduction' => 'Gallout a reer kaout ar restr yezh &laquo;&nbsp;@module@&nbsp;&raquo; e&nbsp;:',
 'mois_non_connu' => 'dianav',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Endalc\'had',
 'onglet_declarer_une_autre_base' => 'Diskl&ecirc;ria&ntilde; un diaz all',
@@ -977,7 +984,7 @@ adstalia&ntilde; SPIP hag adkroui&ntilde; un diaz titouro&ugrave; nevez hag ur m
 'texte_descriptif_rapide' => 'Berr-ha-berr',
 'texte_documents_joints' => 'Gallout a rit aotren ma vo ouzhpennet restro&ugrave; (restro&ugrave; bureveg, skeudenno&ugrave;,
  liesmedia, hag all) d\'ar pennado&ugrave; ha/pe d\'ar rubrikenno&ugrave;.
-Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-ziforc\'h.',
+Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-ziforc\'h.', # MODIF
 'texte_documents_joints_2' => 'Ne vir ket ar reizhadenn-se a ensoc\'ha&ntilde; skeudenno&ugrave; er pennad war-eeun.',
 'texte_effacer_base' => 'Diverka&ntilde; diaz titouro&ugrave; SPIP',
 'texte_effacer_donnees_indexation' => 'Diverka&ntilde; ar roado&ugrave; menegeri&ntilde;',
@@ -990,7 +997,7 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
   Gant ar restro&ugrave;-se e c\'hellit herzel ouzh ar re n\'int ket skridaozer pe merour da vont war bajeno&ugrave; all zo
   (programm stadego&ugrave; diavaez, da skouer).</p><p>
   Ma n\'hoc\'h eus ket ezhomm d\'hen ober e c\'hellit lezel an trao&ugrave; evel m\'emaint lakaet dre-ziouer
-  (ne vo ket krouet ar restro&ugrave;).</p>',
+  (ne vo ket krouet ar restro&ugrave;).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Brema&ntilde; e vo krouet gant ar reizhiad ur moned personel d\'al lec\'hienn evidoc\'h.',
 'texte_informations_personnelles_2' => '(Notenn : m\'emaoc\'h oc\'h adstalia&ntilde; SPIP hag ez a c\'hoazh ho moned kozh en-dro e c\'hellit ',
 'texte_introductif_article' => '(Testenn digeri&ntilde; ar pennad)',
@@ -1025,7 +1032,7 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'texte_nouveau_message' => 'Kemennadenn nevez',
 'texte_nouveau_mot' => 'Ger nevez',
 'texte_nouvelle_version_spip_1' => 'Ur stumm nevez eus SPIP zo bet staliet ganeoc\'h.',
-'texte_nouvelle_version_spip_2' => 'Evit peurstalia&ntilde; anezha&ntilde; ez eus ezhomm un hizivadenn glokoc\'h eget boaz. Ma\'z oc\'h webmestr al lec\'hienn, diverkit ar restr @connect@ hag adkrogit gant ar staliadur a-benn hizivaat an arventenno&ugrave; kevrea&ntilde; ouzh an diaz titouro&ugrave;.<p> (NM. M\'hoc\'h eus ankouaet ho titouro&ugrave; kevrea&ntilde; , taolit ur sell ouzh ar restr @connect@ a-raok he diverka&ntilde;...)</p>',
+'texte_nouvelle_version_spip_2' => 'Evit peurstalia&ntilde; anezha&ntilde; ez eus ezhomm un hizivadenn glokoc\'h eget boaz. Ma\'z oc\'h webmestr al lec\'hienn, diverkit ar restr @connect@ hag adkrogit gant ar staliadur a-benn hizivaat an arventenno&ugrave; kevrea&ntilde; ouzh an diaz titouro&ugrave;.<p> (NM. M\'hoc\'h eus ankouaet ho titouro&ugrave; kevrea&ntilde; , taolit ur sell ouzh ar restr @connect@ a-raok he diverka&ntilde;...)</p>', # MODIF
 'texte_operation_echec' => 'Distroit d\'ar bajenn kent, diuzit un diaz all, pe krouit unan nevez. Gwiriit an titouro&ugrave; bet roet deoc\'h gant an herberc\'hier.',
 'texte_plus_trois_car' => 'ouzhpenn 3 arouezenn',
 'texte_plusieurs_articles' => 'Meur a skridaozer bet kavet evit "@cherche_auteur@":',
@@ -1045,7 +1052,7 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
   e c\'hell beza&ntilde; abalamour d\'an diaz titouro&ugrave;</b><p>
   Gant SQL e c\'hell an taolennno&ugrave; en em gempenn o-unan p\'int bet nodet dre zegouezh.
   Ama&ntilde; e c\'hellit klask adgempenn anezho. Ma c\'hwit, mirit un eilenn eus an doare diskwel, e ken kaz ma vefe titouro&ugrave; talvoudus enna&ntilde;.</p><p>
-  Kit e darempred gant an herberc\'hier ma c\'hoarvez ar gudenn adarre.</p>',
+  Kit e darempred gant an herberc\'hier ma c\'hoarvez ar gudenn adarre.</p>', # MODIF
 'texte_restaurer_base' => 'Assevel endalc\'had ur savete eus an diaz titouro&ugrave;',
 'texte_restaurer_sauvegarde' => 'Gant an dibarzh-ma&ntilde; e c\'hellit assevel ur skouerenn eus an diaz bet saveteet ganeoc\'h en a-raok.
   Evit hen ober e rank ar restr savete beza&ntilde; bet lakaet er c\'havlec\'h @dossier@.

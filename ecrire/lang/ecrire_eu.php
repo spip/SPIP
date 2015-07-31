@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @archive@ fitxategia beste SPIP bertsio bati dagokio, instalatutakoaren desberdina.
 </b>Arazo larriak edukitzeko arriskuan zaude: Zure datu-basearen suntsiketa, gunearen zenbait disfuntzio, eta abar.
 Ez balidatu inportazio galdera hau.
-<p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>',
+<p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>', # MODIF
 'avis_espace_interdit' => 'Gune helezina SPIP instalaturik dago jadanik.',
 'avis_lecture_noms_bases_1' => 'Instalazio-programak ez du lortu instalaturik dauden datu-baseen izenak irakurtzea.',
 'avis_lecture_noms_bases_2' => 'Bi aukera: Base erabilgarririk ez dago edo segurtasun arrazoiak direla medio baseen zerrenda-funtzioa desaktibatu egin da (zerbitzari ugaritan ohizkoa da). ',
@@ -193,6 +193,10 @@ Ez balidatu inportazio galdera hau.
 // F
 'forum_info_original' => 'jatorrizkoa',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Lekuarenbizitzarekin harremanetan egoteko dauden zenbait modu orrialde honetan aurkeztendira.',
 'ical_info2' => 'Teknika guzti hauen buruzko informazio gehiago lortzeko, <a href="@spipnet@">SPIP dokumentazioa</a> kontsulta dezakezu.',
@@ -328,7 +332,7 @@ Ez balidatu inportazio galdera hau.
 'info_conflit_edition_votre_version' => 'Zure bersioa&nbsp;:',
 'info_connexion_base' => 'Bigarren etapa: basera konektatzeko saialdia ',
 'info_connexion_base_donnee' => 'Zure datu-basearekin konexioa',
-'info_connexion_ldap_ok' => 'LDAP konexioak funtzionatu egin du.Hurrengo etapa edo ekinaldira pasa zaitezke.',
+'info_connexion_ldap_ok' => 'LDAP konexioak funtzionatu egin du.Hurrengo etapa edo ekinaldira pasa zaitezke.', # MODIF
 'info_connexion_mysql' => 'Lehenengo etapa: Zure SQL konexioa',
 'info_connexion_ok' => 'Konexioa ondo dabil',
 'info_contact' => 'Kontaktua',
@@ -373,10 +377,10 @@ Ez balidatu inportazio galdera hau.
  Behean, foro gehigarribat aktiba dezakezu, bakarrik administratzaileentzako erreserbatuta.',
 'info_forum_statistiques' => 'Bisiten estatistikak',
 'info_forums_abo_invites' => 'Zure guneak harpidetza beharrezkoa egiten dituen foroak hartzen ditu ; beraz, bisitariak gune publikoan erregistratzera gonbidatuta daude.',
-'info_gauche_admin_effacer' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.',
+'info_gauche_admin_effacer' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.', # MODIF
 'info_gauche_admin_tech' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. 
-Horietako batzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.',
-'info_gauche_admin_vider' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiariFTP-ren bidez sarrera edukitzea beharrezkoa da.',
+Horietako batzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.', # MODIF
+'info_gauche_admin_vider' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiariFTP-ren bidez sarrera edukitzea beharrezkoa da.', # MODIF
 'info_gauche_auteurs' => 'Guneko autore guztiak ageri dira hemen. 
 Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; administratzailea = horia).',
 'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ezdutenak, ikono urdin batez adierazten dira; ezabatuak izan direnak, berriz, paperontzibatez.',
@@ -794,6 +798,9 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'module_texte_traduction' => '« @module@ » hizkuntza artxiboaikusgai dago hemen:',
 'mois_non_connu' => 'ezezagun',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Edukia',
 'onglet_declarer_une_autre_base' => 'Beste base bat deklaratu',
@@ -951,7 +958,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 'texte_date_publication_article' => 'ARGITARAPEN DATA:',
 'texte_descriptif_petition' => 'Eskaeraren azalpena',
 'texte_descriptif_rapide' => 'Deskribapen motza',
-'texte_documents_joints' => 'Dokumentuak(fitxategi bulegotikak, irudiak, multimedia, etab.) artikuluetara eta/edo ataletara gehitzea baimendu ahal duzu. Gero fitxategi hauek artikuluan erreferientziatuak izaten ahalko dira, edo bananduta bistaratuak.',
+'texte_documents_joints' => 'Dokumentuak(fitxategi bulegotikak, irudiak, multimedia, etab.) artikuluetara eta/edo ataletara gehitzea baimendu ahal duzu. Gero fitxategi hauek artikuluan erreferientziatuak izaten ahalko dira, edo bananduta bistaratuak.', # MODIF
 'texte_documents_joints_2' => 'Konfigurazio honek ez du galarazten irudien zuzeneko txertatzea artikuluetan.',
 'texte_effacer_base' => 'Ezabatu SPIP datu-basea',
 'texte_effacer_donnees_indexation' => 'Indexazio datak ezabatu',
@@ -961,7 +968,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 'texte_enrichir_mise_a_jour' => 'Zure testuaren formatua aberastu dezakezu,"tipografia-lasterbideak" erabiliz',
 'texte_fichier_authent' => 'SPIP-ek sortu behar al ditu.htpasswd et .htpasswd-admin fitxategi bereziak ecrire/data/ direktorioan
 Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko balio ahal dute.
-Ez baduzu baliagarritasunik, aukera hau bere balio lehenetsiari utzi ahal diozu (fitxategien sortzerik ez).',
+Ez baduzu baliagarritasunik, aukera hau bere balio lehenetsiari utzi ahal diozu (fitxategien sortzerik ez).', # MODIF
 'texte_informations_personnelles_1' => 'Sistemak oraintokirako norberako sarrera sortuko du.',
 'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen duela, ahal duzu',
 'texte_introductif_article' => '(Artikuluaren sarrera.)',
@@ -993,7 +1000,7 @@ beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 'texte_nouveau_message' => 'Mezu berria',
 'texte_nouveau_mot' => 'Hitz berria',
 'texte_nouvelle_version_spip_1' => 'SPIPren bertsio berri bat instalatu duzu.',
-'texte_nouvelle_version_spip_2' => 'Bertsioberri honek ohiko eguneratze osoago bat behar du. Guneko web arduraduna bazara,mesedez ecrire direktorioko inc_connect.php3 fitxategia ezabatu eta instalazioariberriro ekin zure konexio-parametroak eguneratzeko datu-basean.(NB. : zure konexio-parametroak ahaztu badituzu, inc_connect.php3 fitxategiagainbegiratu ezabatu aurretik...)',
+'texte_nouvelle_version_spip_2' => 'Bertsioberri honek ohiko eguneratze osoago bat behar du. Guneko web arduraduna bazara,mesedez ecrire direktorioko inc_connect.php3 fitxategia ezabatu eta instalazioariberriro ekin zure konexio-parametroak eguneratzeko datu-basean.(NB. : zure konexio-parametroak ahaztu badituzu, inc_connect.php3 fitxategiagainbegiratu ezabatu aurretik...)', # MODIF
 'texte_operation_echec' => 'Lehengo orriraitzuli, beste base bat aukeratu edo base berri bat sortu. Zure ostapen zuzkitzaileakemandako argibideak egiaztatu.',
 'texte_plus_trois_car' => '3 karakter baino gehiago',
 'texte_plusieurs_articles' => '"@cherche_auteur@" irizpiderako autore bat bainogehiago aurkitu egin dira:',
@@ -1014,7 +1021,7 @@ Leku baten URL-a edo lekuaren "backend" artxiboaren helbidea, SPIP automatikoki 
 'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => 'SQL eskaera batzuk sistematikoki huts egiten dutenean eta badirudi ez dagoelaarrazoirik,posible da datu basea bera huts egiten ari dela. SQL-k gaitasun bat daukabere taulak konpontzeko istripu baten erruz hondatuak izan direnean. 
 Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... 
-Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.',
+Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.', # MODIF
 'texte_restaurer_base' => 'Ziurtasunkopiaren edukia berreskuratu',
 'texte_restaurer_sauvegarde' => 'Aukera honekin lehenago egindako ziurtasun kopia bat berrezarri ahal duzu. Hau egin ahal izateko,ziurtasun kopia daukan fitxeroa ecrire/data/ direktorioan egon behar da. Kontuz ibilifuntzionalitate honekin: aldaketak edo galtze tenporalak atzeraezinak dira.',
 'texte_sauvegarde' => 'Basean ziurtasun kopia bat sortu.',
