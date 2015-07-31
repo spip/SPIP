@@ -214,7 +214,9 @@ function ajah(method, url, flux, rappel)
 {
 	var xhr = createXmlHttp();
 	if (!xhr) return false;
-        xhr.onreadystatechange = function () {ajahReady(xhr, rappel);}
+	if (rappel) {
+		xhr.onreadystatechange = function () {ajahReady(xhr, rappel);}
+	}
         xhr.open(method, url, true);
 	// Necessaire au mode POST
 	// Il manque la specification du charset
