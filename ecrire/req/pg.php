@@ -304,7 +304,6 @@ function spip_pg_alter_add($table, $arg, $serveur='',$requeter=true) {
 				if (false!==strpos(",",$colonnes)) {
 					spip_log(_LOG_GRAVITE_ERREUR,"PG : Erreur, impossible de creer un index sur plusieurs colonnes"
 						." sans qu'il ait de nom ($table, ($colonnes))", 'pg');	
-					break;
 				} else {
 					$nom_index = $colonnes;
 				}
@@ -709,7 +708,7 @@ function spip_pg_select_as($args)
 			$argsas .= ', '. $v . $as; 
 		}
 	}
-	return substr($argsas,2) . $join;
+	return substr($argsas,2);
 }
 
 // http://doc.spip.org/@spip_pg_fetch
