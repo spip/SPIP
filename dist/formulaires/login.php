@@ -143,7 +143,12 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 		$identifier_login = charger_fonction('identifier_login','inc');
 		if (!$identifier_login($session_login, $session_password,
 		$session_md5pass, $session_md5next, $session_remember)){
-			$erreurs['password'] = _T('login_erreur_pass');
+			if (strlen($session_password) OR strlen($session_md5pass))
+				$erreurs['password'] = _T('login_erreur_pass');
+			// sinon c'est un login en deux passe old style (ou js en panne)
+			// pas de message d'erreur
+			else
+				$erreurs['password'] = ' ';
 		}
 		else {
 			# login ok
