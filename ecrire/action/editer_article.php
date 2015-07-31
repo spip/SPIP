@@ -235,10 +235,10 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+				spip_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
 		}
 	}
 
