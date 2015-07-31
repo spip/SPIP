@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/actions');
+include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
@@ -25,7 +26,8 @@ function exec_articles_dist()
 
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
-	if (!$row) {
+	if (!$row
+	OR !autoriser('voir', 'article', $id_article)) {
 		$res = $row['titre'] = _T('public:aucun_article');
 		$row['id_rubrique'] = 0;
 	} else {
@@ -74,11 +76,9 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	
 	$virtuel =  (substr($chapo, 0, 1) == '=')  ? substr($chapo, 1) : '';
 
-	$statut_rubrique = acces_rubrique($id_rubrique);
 
-	$flag_auteur = spip_num_rows(auteurs_article($id_article, " id_auteur=$connect_id_auteur"));
-
-	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+	$statut_rubrique = autoriser('publier_dans', 'rubrique', $id_rubrique);
+	$flag_editable = autoriser('modifier', 'article', $id_article);
 
 	// Est-ce que quelqu'un a deja ouvert l'article en edition ?
 	if ($flag_editable
@@ -159,7 +159,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. (($spip_display == 4) ? ''
 	 : articles_documents($flag_editable, 'article', $id_article))
 
-	. (($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique) 
+	. (($statut_article == 'prepa' AND !$statut_rubrique
+	AND spip_num_rows(auteurs_article($id_article, " id_auteur=$connect_id_auteur")))
 	 ? $instituer_article($id_article)
 	 : '')
 	. "</div></div>"
@@ -226,7 +227,11 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	. "</div>\n"
 	  . voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
 
-	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $GLOBALS['meta']["activer_statistiques"] != "non" AND $options == "avancees"){
+	if ($statut_article == 'publie'
+	AND $visites > 0
+	AND $GLOBALS['meta']["activer_statistiques"] != "non"
+	AND $options == "avancees"
+	AND autoriser('voir_stats', 'article', $id_article)) {
 		$res .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 	}
 

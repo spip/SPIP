@@ -25,17 +25,13 @@ function article_select($id_article, $id_rubrique, $lier_trad, $new) {
   $id_rubrique =  intval($id_rubrique);
   $lier_trad =  intval($lier_trad);
 
-// ESSAI pour "Joindre un document" depuis l'espace prive (UPLOAD_DIRECT)
-/*if ($GLOBALS['action'] AND $GLOBALS['doc']) {
-	global $action, $doc;
-	if ($var_nom = charger_fonction($action, 'action'))
-		$var_nom($doc);
-	else
-		spip_log("fonction $var_nom indisponible");
-#	return;
-}*/
+	include_spip('inc/autoriser');
 
-  if ($id_article) {
+if ($id_article) {
+
+	if (!autoriser('modifier','article',$id_article))
+		return false;
+
 	$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article");
 
 	if ($row = spip_fetch_array($result)) {
@@ -44,11 +40,6 @@ function article_select($id_article, $id_rubrique, $lier_trad, $new) {
 		$id_secteur = $row['id_secteur'];
 		$statut = $row['statut'];
 
-		$result_auteur = spip_query("SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur");
-
-		$flag_auteur = (spip_num_rows($result_auteur) > 0);
-
-		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
  	}
 }
 else if ($new=='oui') {
@@ -78,10 +69,7 @@ else if ($new=='oui') {
 		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$row['id_secteur'] = $row_rub['id_secteur'];
 	}
-	$flag_editable = true;
- }
-
-	if (!$flag_editable) return false;
+}
 
 	// marquer le fait que l'article est ouvert en edition par toto a telle date
 	// une alerte sera donnee aux autres redacteurs sur exec=articles

@@ -74,7 +74,7 @@ function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		AND (function_exists($f) OR function_exists($f.='_dist'))
 		)
 	)
-		$a = $f($faire,$type,$id,$qui,$opt);
+		$a = $f($faire,$type,intval($id),$qui,$opt);
 
 	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id): ".($a?'OK':'niet'));
 
@@ -110,7 +110,7 @@ function autoriser_modifier_rubrique_dist($faire, $type, $id, $qui, $opt) {
 // = admins de rubrique parente si publiee
 function autoriser_modifier_breve_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve=".intval($id));
+	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve="._q($id));
 	$r = spip_fetch_array($s);
 	return
 		($r['statut'] == 'publie')
@@ -123,15 +123,45 @@ function autoriser_modifier_breve_dist($faire, $type, $id, $qui, $opt) {
 // = ou statut 'prop,prepa' et $qui est auteur
 function autoriser_modifier_article_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article=".intval($id));
+	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
 	return
 		autoriser('publier_dans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND in_array($r['statut'], array('prop','prepa'))
+			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
 			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
+}
+
+// Lire les stats ?
+// = tous les admins
+function autoriser_voir_stats_dist($faire, $type, $id, $qui, $opt) {
+	return
+		$qui['statut'] == '0minirezo';
+}
+
+
+// Voir un objet
+function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
+	if (
+		($qui['statut'] == '0minirezo')
+		OR ($type != 'article')
+	)
+		return true;
+
+	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
+	$s = spip_query(
+	"SELECT statut FROM spip_articles WHERE id_article="._q($id));
+	$r = spip_fetch_array($s);
+		return in_array($r['statut'], array('prop', 'publie'));
+}
+
+// Voir les revisions ?
+// = voir l'objet
+function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('voir', $type, $id, $qui, $opt);
 }
 
 ?>
