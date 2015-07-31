@@ -305,9 +305,6 @@ ecrire/maj/v019_pre193.php -text
 ecrire/notifications/article_propose.html -text
 ecrire/notifications/article_publie.html -text
 ecrire/notifications/article_valide.html -text
-ecrire/notifications/forum_poste.html -text
-ecrire/notifications/forumposte.php -text
-ecrire/notifications/forumvalide.php -text
 ecrire/notifications/instituerarticle.php -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_nom_plugin.php -text
