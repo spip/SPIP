@@ -93,15 +93,20 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		list ($destWidth,$destHeight) = image_ratio($ret['largeur'], $ret['hauteur'], $maxWidth, $maxHeight);
 		$ret['largeur_dest'] = $destWidth;
 		$ret['hauteur_dest'] = $destHeight;
-		$effet = "-{$destWidth}x$destHeight";
-		$cache = "cache$effet";
-		$fichier_dest = basename($fichier_dest).'-'.substr(md5("$fichier_dest"),0,5).$effet;
+		$effet = "L{$destWidth}xH$destHeight";
+		$cache = "cache-vignettes";
+		$fichier_dest = basename($fichier_dest).'-'.substr(md5("$fichier_dest-$effet"),0,5);
 		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight))
 			$terminaison_dest = $terminaison; // on garde la terminaison initiale car image simplement copiee
+		$cache = sous_repertoire(_DIR_VAR, $cache);
+		$cache = sous_repertoire($cache, $effet);
 	}
-	else 	$fichier_dest = md5("$fichier_dest-$effet");
-
-	$fichier_dest = sous_repertoire(_DIR_VAR, $cache) . $fichier_dest . "." .$terminaison_dest;
+	else 	{
+		$fichier_dest = md5("$fichier_dest-$effet");
+		$cache = sous_repertoire(_DIR_VAR, $cache);
+	}
+	
+	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
 	if (($date_src = @filemtime($fichier)) < @filemtime($fichier_dest)) {
