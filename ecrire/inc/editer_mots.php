@@ -172,30 +172,29 @@ function editer_mots_un($row, $own)
 	$id_groupe = $row['id_groupe'];
 
 	$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
-	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; 
-	// sinon bug avec arabe
 
-	$groupe = typo(sql_getfetsel("titre", "spip_groupes_mots", "id_groupe = $id_groupe"));
+	$groupe_champs = sql_fetsel("*", "spip_groupes_mots", "id_groupe = $id_groupe");
+	$groupe = typo($groupe_champs['titre']);
 
 	if (autoriser('modifier', 'groupemots', $id_groupe))
 		$groupe = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$groupe</a>";
 
-	$retire = '';
+	$mot = "<a href='$url'>".typo($titre_mot)."</a>";
 
-	if ($flag_editable) {
+	$retire = '';
+	if ($flag_editable
+	AND autoriser('editermots', $objet, $id_objet, null, array('id_groupe'=>$id_groupe,'groupe_champs'=>$groupe_champs))
+	) {
 		$r =  _T('info_retirer_mot')
 		  . "&nbsp;"
 		  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 
 		$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");
-	}
 
-	// Changer ; si unseul, poser un petit menu
-	if (sql_getfetsel('unseul', 'spip_groupes_mots', 'id_groupe='.$id_groupe)
-	== 'oui') {
-		$mot = formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
-	} else {
-		$mot = "<a href='$url'>".typo($titre_mot)."</a>";
+		// Changer ; si unseul, poser un petit menu
+		if (sql_getfetsel('unseul', 'spip_groupes_mots', 'id_groupe='.$id_groupe)
+		== 'oui')
+			$mot = formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 	}
 
 	$cle = $puce_statut($id_mot, 'publie', $id_groupe, 'mot');
