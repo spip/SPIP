@@ -41,7 +41,7 @@ function naviguer_dist($action)
 				$descriptif,
 				$changer_lang
 			);
-			if ($res) $id_rubrique = $res;
+			if (is_int($res)) $id_rubrique = $res;
 
 			// toute action entraine ceci:
 			calculer_rubriques();
@@ -505,6 +505,7 @@ function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte,
 			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 		  }
 		}
+	return false;
 }
 
 function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
@@ -513,6 +514,7 @@ function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre
 	  // i.e. document/logo ajoute/supprime/tourne
 	  // suffit seulement de faire le calculer_rubriques() final
 	  // mais il faudrait s'en dispenser dans le cas "tourne" etc
+  return false;
 }
 
 function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
