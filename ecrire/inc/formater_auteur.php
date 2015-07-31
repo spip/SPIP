@@ -70,8 +70,9 @@ function formater_auteur_mail($email, $id_auteur)
 {
 	global $spip_lang_rtl;
 
-	if ($email) $href='mailto:' . $email;
-	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
+//	if ($email) $href='mailto:' . $email;
+//	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
+	$href = generer_action_auteur("editer_message","normal/$id_auteur");
 
 	return "<a href='$href' title=\""
 		  . _T('email')
