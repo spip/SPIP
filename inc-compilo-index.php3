@@ -390,6 +390,12 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 		index_pile($prec, $nom_champ, $boucles));
 }
 
+// a documenter svp !!
+//
+// en gros : ca ne sert que pour la balise #POINTS ; l'idee est que,
+// si on trouve le motif "recherche" dans les parametres de la boucle,
+// alors on prend $Pile[$SP]['points'] (qui vient du "SELECT XXXX AS points"
+// de la requete qu'on est en train de composer)
 function rindex_pile($p, $champ, $motif) 
 {
 	$n = 0;

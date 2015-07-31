@@ -501,16 +501,6 @@ function typo($letexte, $echapper=true) {
 	return $letexte;
 }
 
-function charger_generer_url() {
-	// Traitement des liens internes
-	if (!_DIR_RESTREINT)
-		include_ecrire('inc_urls');
-	else if (@file_exists("inc-urls" . _EXTENSIONS_PHP))
-		include_local("inc-urls");
-	else	include_local("inc-urls-".$GLOBALS['type_urls']);
-}
-
-
 
 // cette fonction est tordue : on lui passe un tableau correspondant au match
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place

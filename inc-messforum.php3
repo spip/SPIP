@@ -26,11 +26,7 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 	include_ecrire('inc_texte');
 	include_ecrire('inc_filtres');
 	include_ecrire('inc_mail');
-	// Gestionnaire d'URLs
-	if (@file_exists("inc-urls" . _EXTENSION_PHP))
-		include_local("inc-urls");
-	else
-		include_local("inc-urls-".$GLOBALS['type_urls']);
+	charger_generer_url();
 
 	if ($statut == 'prop') # forum modere
 	  $url = _DIR_RESTREINT_ABS .
@@ -217,11 +213,7 @@ function enregistre_forum() {
 
 	// Le cas echeant, calculer le retour
 	if ($calculer_retour) {
-		// Gestionnaire d'URLs
-		if (@file_exists("inc-urls" . _EXTENSION_PHP))
-			include_local("inc-urls");
-		else
-			include_local("inc-urls-".$GLOBALS['type_urls']);
+		charger_generer_url();
 
 		// le retour automatique envoie sur le thread, ce qui permet
 		// de traiter elegamment le cas des forums moderes a priori.
