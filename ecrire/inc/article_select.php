@@ -86,6 +86,7 @@ else if ($new=='oui') {
 // Si un article est demande en creation (new=oui) avec un lien de trad,
 // on initialise les donnees de maniere specifique
 //
+// http://doc.spip.org/@article_select_trad
 function article_select_trad($lier_trad) {
 	// Recuperer les donnees de l'article original
 	$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$lier_trad");
