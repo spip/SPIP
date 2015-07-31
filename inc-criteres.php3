@@ -497,7 +497,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
   global $table_des_tables, $tables_principales;
-  global  $exceptions_des_jointures;
+  global $exceptions_des_jointures, $table_date;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
