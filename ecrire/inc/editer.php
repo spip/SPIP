@@ -28,8 +28,14 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	}
 	else{
 		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
-		if ($retour)
-			$res['redirect'] = parametre_url($retour,$id_table_objet,$id);
+		if ($retour) {
+			if (strncmp($retour,'javascript:',11)==0){
+				$res['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour,11).'/*]]>*/</script>';
+				$res['editable'] = true;
+			}
+			else
+				$res['redirect'] = parametre_url($retour,$id_table_objet,$id);
+		}
 	}
 	return $res;
 }
