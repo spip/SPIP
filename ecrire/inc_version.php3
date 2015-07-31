@@ -49,9 +49,9 @@ function feed_globals($table, $insecure = true) {
 	}
 }
 
+feed_globals('HTTP_COOKIE_VARS');
 feed_globals('HTTP_GET_VARS');
 feed_globals('HTTP_POST_VARS');
-feed_globals('HTTP_COOKIE_VARS');
 feed_globals('HTTP_SERVER_VARS', false);
 
 
