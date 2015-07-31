@@ -79,6 +79,7 @@ function insert_breve($id_rubrique) {
 function revisions_breves ($id_breve, $c=false) {
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
+	include_spip('inc/autoriser');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_breves.x)
 	$champs_normaux = array('titre', 'texte', 'lien_titre', 'lien_url');
@@ -95,9 +96,6 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Changer le statut de la breve ?
-	include_spip('inc/auth');
-	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_breves WHERE id_breve=$id_breve");
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
@@ -105,7 +103,7 @@ function revisions_breves ($id_breve, $c=false) {
 
 	if (_request('statut', $c)
 	AND _request('statut', $c) != $statut
-	AND acces_rubrique($id_rubrique)) {
+	AND autoriser('publierdans', 'rubrique', $id_rubrique)) {
 		$statut = $champs['statut'] = _request('statut', $c);
 	}
 

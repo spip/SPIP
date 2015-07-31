@@ -442,7 +442,6 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1, $cherche_image=t
 			$i = cherche_image_nommee($regs[1], array($regs[2]));
 		if ($i) {
 			list(,$nom,$format) = $i;
-			include_spip('inc/chercher_logo');
 			return ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
 		}
 	}
