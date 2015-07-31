@@ -7,7 +7,7 @@ if (!defined('_FILE_CONNECT'))
 	 (@file_exists("inc_connect.php3") ? "inc_connect.php3" : ''));
 
 if (!_FILE_CONNECT) {
-	redirige_par_entete("install.php3");
+	header("Location: install.php3");
 }
 
 if (!defined('_ECRIRE_INC_VERSION')) { include ("inc_version.php3"); }
