@@ -11,7 +11,7 @@
 		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
 		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
 		<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'><a
-		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN{img_pack/frame-close.png}' alt='' /></a>
+		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN_IMAGE{fermer-16}' alt='fermer' width="16" height="16" /></a>
 		<h2><a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a></h2>
 		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
 		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
