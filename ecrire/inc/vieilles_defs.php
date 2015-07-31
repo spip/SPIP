@@ -23,6 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@debut_raccourcis
 function debut_raccourcis() {
+spip_log('debut_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
         global $spip_display;
         echo "<div>&nbsp;</div>";
         creer_colonne_droite();
@@ -39,6 +40,7 @@ function debut_raccourcis() {
 
 // http://doc.spip.org/@fin_raccourcis
 function fin_raccourcis() {
+spip_log('fin_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
         global $spip_display;
         
         if ($spip_display != 4) echo "</font>";
@@ -49,6 +51,7 @@ function fin_raccourcis() {
 
 // http://doc.spip.org/@include_ecrire
 function include_ecrire($file, $silence=false) {
+spip_log('include_ecrire() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
 	// Version new style, surchargeable
@@ -67,18 +70,24 @@ function include_ecrire($file, $silence=false) {
 }
 
 // http://doc.spip.org/@lire_meta
-function lire_meta($nom) { global $meta; return $meta[$nom];}
+function lire_meta($nom) {
+spip_log('lire_meta() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+ global $meta; return $meta[$nom];}
 
 // http://doc.spip.org/@afficher_script_layer
-function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
+function afficher_script_layer(){
+spip_log('afficher_script_layer() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+echo $GLOBALS['browser_layer'];}
 
 // http://doc.spip.org/@test_layer
-function test_layer(){return $GLOBALS['browser_layer'];}
+function test_layer(){
+spip_log('test_layer() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+return $GLOBALS['browser_layer'];}
 
 
 // http://doc.spip.org/@affiche_auteur_boucle
-function affiche_auteur_boucle($row, &$tous_id)
-{
+function affiche_auteur_boucle($row, &$tous_id){
+spip_log('affiche_auteur_boucle() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	$vals = '';
 
 	$id_auteur = $row['id_auteur'];
@@ -96,22 +105,26 @@ function affiche_auteur_boucle($row, &$tous_id)
 
 // http://doc.spip.org/@spip_abstract_quote
 function spip_abstract_quote($arg_sql) {
+spip_log('spip_abstract_quote() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	return _q($arg_sql);
 }
 
 // http://doc.spip.org/@creer_repertoire
 function creer_repertoire($base, $subdir) {
+spip_log('creer_repertoire() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	return sous_repertoire($base, $subdir, true);
 }
 
 // http://doc.spip.org/@parse_plugin_xml
 function parse_plugin_xml($texte, $clean=true){
+spip_log('parse_plugin_xml() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	include_spip('inc/xml');
 	return spip_xml_parse($texte,$clean);
 }
 
 // http://doc.spip.org/@applatit_arbre
 function applatit_arbre($arbre,$separateur = " "){
+spip_log('applatit_arbre() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	include_spip('inc/xml');
 	return spip_xml_aplatit($arbre,$separateur);
 }
@@ -122,6 +135,7 @@ function applatit_arbre($arbre,$separateur = " "){
 //
 // http://doc.spip.org/@bandeau_titre_boite
 function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true) {
+spip_log('bandeau_titre_boite() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	global $couleur_foncee;
 	if ($boite_importante) {
 		$couleur_fond = $couleur_foncee;
@@ -146,6 +160,7 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 
 // http://doc.spip.org/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "" /* ignore */, $id_rubrique = "") {
+spip_log('debut_page() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, $rubrique, $sous_rubrique, $id_rubrique);
 	if ($onLoad) spip_log("parametre obsolete onLoad=$onLoad");
@@ -155,6 +170,7 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 
 // http://doc.spip.org/@extraire_lien
 function extraire_lien ($regs) {
+spip_log('extraire_lien() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
 	// Preparer le texte du lien ; attention s'il contient un <div>
 	// (ex: [<docXX|right>->lien]), il faut etre smart
@@ -164,8 +180,8 @@ function extraire_lien ($regs) {
 
 // Prendre la fonction inc_dater_dist, qui fait du Ajax.
 // http://doc.spip.org/@afficher_formulaire_date
-function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee)
-{
+function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee){
+spip_log('afficher_formulaire_date() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
   global $couleur_foncee;
   return generer_url_post_ecrire($script, $args)
 	. "<table cellpadding='5' cellspacing='0' border='0' width='100%' background='"
