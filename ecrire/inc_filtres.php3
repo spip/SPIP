@@ -482,6 +482,7 @@ function centrer($letexte) {
 //
 
 function filtrer_ical($texte) {
+	include_ecrire('inc_charsets.php3');
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, lire_meta('charset'), 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
