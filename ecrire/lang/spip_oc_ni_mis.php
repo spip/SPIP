@@ -293,7 +293,7 @@ sera ignourada) :
 	'forum_titre_erreur' => 'Errour...',
 
 	// I
-	'ical_texte_rss_articles' => 'Lou fichié « backend » dei article d’estou sit si troba a l’adressa :',
+	'ical_texte_rss_articles' => 'Lou fichié « backend » dei article d’estou sit si trova a l’adressa :',
 	'ical_texte_rss_articles2' => 'Poudès finda outenì de fichié « backend » per lu article de cada rùbrica dóu sit :',
 	'ical_texte_rss_breves' => 'Esìsta de mai un fichié countenant li brèva dóu sit. En prechisant un nùmero de rùbrica, outendrès basta li brèva d’aquela rùbrica.',
 	'icone_a_suivre' => 'Da sègre',
