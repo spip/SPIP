@@ -8,33 +8,6 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
-// Retourne true si le sous-repertoire peut etre cree, false sinon
-# issu de l'ancienne version du cache
-
-function creer_repertoire($base, $subdir) {
-	if (file_exists("$base/.plat")) return false;
-	$path = $base.'/'.$subdir;
-	if (file_exists($path)) return true;
-
-	@mkdir($path, 0777);
-	@chmod($path, 0777);
-	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
-		@fputs($f, '<'.'?php $ok = true; ?'.'>');
-		@fclose($f);
-		include("$path/.test");
-	}
-	if (!$ok) {
-		$f = @fopen("$base/.plat", "w");
-		if ($f)
-			fclose($f);
-		else {
-			@header("Location: spip_test_dirs.php3");
-			exit;
-		}
-	}
-	return $ok;
-}
 
 $taille_preview = lire_meta("taille_preview");
 if ($taille_preview < 10) $taille_preview = 120;
@@ -299,7 +272,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
 		include_ecrire('inc_logos.php3');
 		if (eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $dest_path, $regs)) {
-			include_local('inc-cache.php3');
 			$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';
 			creer_vignette($dest_path, lire_meta('taille_preview'), lire_meta('taille_preview'), 'jpg', $destination, 'AUTO', true);
 		}
