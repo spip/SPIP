@@ -71,12 +71,12 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
 		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
-			$boucle->from["lien"] =  "spip_auteurs_articles";
-			$boucle->from["articles"] =  "spip_articles";
-			$boucle->where[]= array("'='", "'lien.id_auteur'", "'$id_table.id_auteur'");
-			$boucle->where[]= array("'='", "'lien.id_article'", "'articles.id_article'");
-			$boucle->where[]= array("'='", "'articles.statut'", "'\\'publie\\''");
-			$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
+			fabrique_jointures($boucle, array(
+				array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
+						    array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
+			$t = array_search('spip_articles', $boucle->from) . '.statut';
+			$boucle->where[]= array("'='", "'$t'", "'\\'publie\\''");
+			
 		}
 		// pas d'auteurs poubellises
 		$boucle->where[]= array("'!='", "'$mstatut'", "'\\'5poubelle\\''");
@@ -232,7 +232,6 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_rubriques";
 
 // Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
 // sauf en presence du critere {tout} (vu par phraser_html)

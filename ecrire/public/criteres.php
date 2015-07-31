@@ -839,27 +839,33 @@ function trouver_champ($champ, $where)
 }
 
 // deduction automatique d'une chaine de jointures 
-// Pour chaque cle de jointure il faut regarder si le type est numerique
-// car PG ne veut pas d'apostrophe
 
 // http://doc.spip.org/@calculer_jointure
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
-  static $num=array();
+
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
 
-  list($dnom,$ddesc) = $depart;
-	$keys = liste_champs_jointures($dnom,$ddesc);
-  $id_table = "";
-  $cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
-  foreach($res as $r) {
-    list($d, $a, $j) = $r;
-    if (!$id_table) $id_table = $d;
-    $n = ++$cpt;
-    $boucle->join[$n]= array("'$id_table'","'$j'");
-    $boucle->from[$id_table = "L$n"] = $a[0];    
-  }
+  list($nom,$desc) = $depart;
+  return fabrique_jointures($boucle, $res, $cond, $desc, $nom, $col);
+}
+
+function fabrique_jointures(&$boucle, $res, $cond=false, $desc, $nom='', $col='')
+{
+  spip_log("fj " . join(',',$res) . ' ' . join(';', $desc));
+	static $num=array();
+	$id_table = "";
+	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
+	foreach($res as $r) {
+		list($d, $a, $j) = $r;
+		spip_log("id $id_table  d $d a $a[0] j $j");
+		if (!$id_table) $id_table = $d;
+		$n = ++$cpt;
+		$boucle->join[$n]= array("'$id_table'","'$j'");
+		$boucle->from[$id_table = "L$n"] = $a[0];    
+	}
+
 
   // pas besoin de group by 
   // (cf http://article.gmane.org/gmane.comp.web.spip.devel/30555)
@@ -867,18 +873,20 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
-  if ($pk = (count($boucle->from) == 2) && !$cond) {
-  	if ($pk = $a[1]['key']['PRIMARY KEY']) {
-		$id_primary = $ddesc['key']['PRIMARY KEY'];
-		$pk = preg_match("/^$id_primary, *$col$/", $pk) OR
-			preg_match("/^$col, *$id_primary$/", $pk);
+	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
+		if ($pk = $a[1]['key']['PRIMARY KEY']) {
+			$id_primary = $desc['key']['PRIMARY KEY'];
+			spip_log("prim $id_primary $col '$pk'");
+			$pk = (preg_match("/^$id_primary, *$col$/", $pk) OR
+			       preg_match("/^$col, *$id_primary$/", $pk));
+		}
 	}
-  }
+	
   // la clause Group by est en conflit avec ORDER BY, a completer
-
-  if (!$pk)
-	foreach($keys as $id_prim){
-		$id_field = $dnom . '.' . $id_prim;
+	spip_log("pj '$pk' '$cond' " . join(',',$boucle->from) . " $desc");
+	if (!$pk) foreach(liste_champs_jointures($nom,$desc) as $id_prim){
+		$id_field = $nom . '.' . $id_prim;
+		spip_log("id_field");
 		if (!in_array($id_field, $boucle->group)) {
 			$boucle->group[] = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
@@ -887,35 +895,38 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 		}
 	}
 
-  $boucle->modificateur['lien'] = true;
-  return $n;
-}
+	$boucle->modificateur['lien'] = true;
+	return $n;
+  }
+
 
 // http://doc.spip.org/@liste_champs_jointures
 function liste_champs_jointures($nom,$desc){
-	$join = array();
+
+	static $nojoin = array('idx','maj','date','statut');
+
 	// les champs declares explicitement pour les jointures
 	if (isset($desc['join'])) return $desc['join'];
 	/*elseif (isset($GLOBALS['tables_principales'][$nom]['join'])) return $GLOBALS['tables_principales'][$nom]['join'];
 	elseif (isset($GLOBALS['tables_auxiliaires'][$nom]['join'])) return $GLOBALS['tables_auxiliaires'][$nom]['join'];*/
-	// sinon, les champs declares explicitement pour les jointures
-	elseif (isset($desc['key']['PRIMARY KEY'])) {
-		$v = $desc['key']['PRIMARY KEY'];
-		$v = preg_split('/,\s*/', $v);
-		foreach($v as $k)
-			$join[$k]=$k;
-	}
-	else { 
-		// ici on se rabat sur les cles secondaires, en eleminant celles qui sont pas pertinentes (idx, maj)
-		// si jamais le resultat n'est pas pertinent pour une table donnee, il faut declarer explicitement le champ 'join' de sa description
-		$keys = $desc['key'];
-		$v = array();
-		foreach($keys as $lk)
-			$v = array_merge($v,preg_split('/,\s*/', $lk));
-		foreach($v as $k)
-			if (!in_array($k,array('idx','maj','date','statut')))
-				$join[$k]=$k;
-	}
+	
+	// sinon la cle primaire
+	if (isset($desc['key']['PRIMARY KEY']))
+		return split_key($desc['key']['PRIMARY KEY']);
+	
+	// ici on se rabat sur les cles secondaires, 
+	// en eliminant celles qui sont pas pertinentes (idx, maj)
+	// si jamais le resultat n'est pas pertinent pour une table donnee,
+	// il faut declarer explicitement le champ 'join' de sa description
+	$join = array();
+	foreach($desc['key'] as $v) $join = split_key($v, $join);
+	foreach($join as $k) if (in_array($k, $nojoin)) unset($join[$k]);
+	return $join;
+}
+
+function split_key($v, $join = array())
+{
+	foreach (preg_split('/,\s*/', $v) as $k) $join[$k] = $k;
 	return $join;
 }
 
