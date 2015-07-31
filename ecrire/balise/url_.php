@@ -58,7 +58,7 @@ function generer_generer_url_arg($type, $p, $_id)
 	}
 	else 
 		$s = ", '', '', true";
-	return "generer_url_entite($_id, '$type'$s)";
+	return "urlencode_1738(generer_url_entite($_id, '$type'$s))";
 }
 
 
