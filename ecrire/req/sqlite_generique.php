@@ -49,7 +49,8 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqli
 	if ($addr AND strpos($addr,'/')!==false)
 		$f = rtrim($addr,'/').'/';
 
-	// un nom de base demande et impossible d'obtenir la base, on s'en va
+	// un nom de base demande et impossible d'obtenir la base, on s'en va :
+	// il faut que la base existe ou que le repertoire parent soit writable
 	if ($db AND !is_file($f .= $db . '.sqlite') AND !is_writable(dirname($f))){
 		spip_log("base $f non trouvee ou droits en ecriture manquants",'sqlite.'._LOG_HS);
 		return false;
@@ -1750,9 +1751,9 @@ class sqlite_traiter_requete{
 			$r = false;	
 		}
 
-		if (spip_sqlite_errno($serveur))
-			$err .= spip_sqlite_error($this->query, $serveur);
-		return $t ? trace_query_end($this->query, $t, $r, $err, $serveur) : $r;
+		if (spip_sqlite_errno($this->serveur))
+			$err .= spip_sqlite_error($this->query, $this->serveur);
+		return $t ? trace_query_end($this->query, $t, $r, $err, $this->serveur) : $r;
 	}
 		
 	// transformer la requete pour sqlite 
