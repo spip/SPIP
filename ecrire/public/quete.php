@@ -263,7 +263,7 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 				}
 		  }
 		  // cas de la vignette derriere un htaccess
-		} elseif ($logo) $logo = "<img src='$logo'>";
+		} elseif ($logo) $logo = "<img src='$logo' />";
 
 		// Document sans vignette ni image : vignette par defaut
 		if (!$logo) {
