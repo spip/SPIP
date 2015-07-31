@@ -81,8 +81,8 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 
 	// recuperer le secteur, pour affecter les bons champs extras
 	if (!$row['id_secteur']) {
-		$row_rub = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
-		$row['id_secteur'] = $row_rub['id_secteur'];
+		$row_rub = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . _q($id_rubrique));
+		$row['id_secteur'] = $row_rub;
 	}
 
 	return $row;
