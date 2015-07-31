@@ -30,13 +30,11 @@ while (list ($key, $val) = each ($vars)) {
 function deplacer_fichier_upload($source, $dest) {
 	// Securite
 	if (strstr($dest, "..")) {
-		@unlink($source);
 		exit;
 	}
 
 	$ok = @copy($source, $dest);
-	if ($ok) @unlink($source);
-	else $ok = @move_uploaded_file($source, $dest);
+	if (!$ok) $ok = @move_uploaded_file($source, $dest);
 	@chmod($loc, 0666);
 	return $ok;
 }
@@ -87,7 +85,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	// Securite
 	//
 	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur)) {
-		@unlink($source);
 		exit;
 	}
 
