@@ -21,7 +21,7 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 // lier_trad = l'associer a l'article numero $lier_trad
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@inc_article_select_dist
-function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
+function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
 	global $connect_id_rubrique, $spip_lang; 
 
 	if (is_numeric($id_article)) {
@@ -29,29 +29,13 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 		if (!autoriser('modifier','article',$id_article))
 			return array();
 
-// marquer le fait que l'article est ouvert en edition par toto a telle date
-// une alerte sera donnee aux autres redacteurs sur exec=articles
+		// marquer le fait que l'article est ouvert en edition par toto
+		// a telle date ; une alerte sera donnee aux autres redacteurs
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
 			include_spip('inc/drapeau_edition');
 			signale_edition ($id_article,  $GLOBALS['visiteur_session'], 'article');
 		}
-		$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
-
-		$row = pipeline('article_select', $row);
-
-	// si une ancienne revision est demandee, la charger
-	// en lieu et place de l'actuelle ; attention les champs
-	// qui etaient vides ne sont pas vide's. Ca permet de conserver
-	// des complements ajoutes "orthogonalement", et ca fait un code
-	// plus generique.
-		if ($id_version) {
-			include_spip('inc/revisions');
-			if ($textes = recuperer_version($id_article, $id_version)) {
-				foreach ($textes as $champ => $contenu)
-					$row[$champ] = $contenu;
-			}
-		}
-		return $row;
+		return sql_fetsel("*", "spip_articles", "id_article=$id_article");
 	}
 
 	// id_article non numerique, c'est une demande de creation.

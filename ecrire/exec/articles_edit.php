@@ -22,16 +22,15 @@ function exec_articles_edit_dist()
 	exec_articles_edit_args(_request('id_article'), // intval plus tard
 		intval(_request('id_rubrique')),
 		intval(_request('lier_trad')),
-		intval(_request('id_version')),
 		((_request('new') == 'oui') ? 'new' : ''));
 }
 
 
 // http://doc.spip.org/@exec_articles_edit_args
-function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
+function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad, $new)
 {
 	$article_select = charger_fonction('article_select','inc');
-	$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+	$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad);
 	$id_rubrique = $row['id_rubrique'];
 
 	if (!$row
@@ -40,11 +39,11 @@ function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_vers
 	  ) {
 		include_spip('inc/minipres');
 		echo minipres(_T('public:aucun_article'));
-	} else articles_edit($id_article, $id_rubrique,$lier_trad, $id_version, $new, 'articles_edit_config', $row);
+	} else articles_edit($id_article, $id_rubrique,$lier_trad, $new, 'articles_edit_config', $row);
 }
 
 // http://doc.spip.org/@articles_edit
-function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new, $config_fonc, $row)
+function articles_edit($id_article, $id_rubrique, $lier_trad, $new, $config_fonc, $row)
 {
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
@@ -52,8 +51,6 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
-	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
-
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
 	echo debut_grand_cadre(true);
@@ -102,11 +99,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	'id_rubrique'=>$row['id_rubrique'],
 	'id_secteur'=>$row['id_secteur'],
 	'lier_trad'=>$lier_trad,
-	'config_fonc'=>$config_fonc,
-	// passer row si c'est le retablissement d'une version anterieure
-	'row'=> $id_version
-		? $row
-		: null
+	'config_fonc'=>$config_fonc
 	);
 
 	$milieu = recuperer_fond("prive/editer/article", $contexte);

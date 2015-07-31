@@ -430,12 +430,6 @@ function exec_accueil_dist()
 
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 
-	// Dernieres modifications d'articles
-	if (($GLOBALS['meta']['articles_versions'] == 'oui')) {
-		include_spip('inc/suivi_versions');
-		echo afficher_suivi_versions (0, 0, false, "", true);
-	}
-
 	echo fin_gauche(), fin_page();
 }
 ?>
