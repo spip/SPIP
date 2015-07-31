@@ -43,7 +43,7 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='', $limit=NULL
 	if (!$n) return '';
 
 	if (!defined('_TRI_ARTICLES_RUBRIQUE')) define('_TRI_ARTICLES_RUBRIQUE', 'date DESC'); // surcharge possible dans mes_options.php
-	$order = ($order == '') ? _TRI_ARTICLES_RUBRIQUE : "$order DESC";
+	$order = ($order == '') ? ($type=='article'?_TRI_ARTICLES_RUBRIQUE:'date desc') : "$order DESC";
 	$voss = sql_select($select, $table, $where, '', "$order", $limit);
 
 	$limit = $n - $limit;
