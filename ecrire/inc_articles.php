@@ -13,7 +13,7 @@
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
 
-function affiche_articles_dist($id_article, $ajout_auteur, $articles_mots, $articles_redac, $articles_versions, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $dir_lang, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article)
+function affiche_articles_dist($id_article, $ajout_auteur, $articles_mots, $articles_redac, $articles_versions, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $dir_lang, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
 {
  global $options, $spip_display, $spip_lang_left, $spip_lang_right;
 
@@ -155,7 +155,7 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 	formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
 
-langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select);
+ langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
 
 
 afficher_statut_articles($id_article, $rubrique_article, $statut_article);
@@ -738,7 +738,7 @@ else {
 }
 
 
-function langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select)
+function langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad)
 {
 
   global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques;
