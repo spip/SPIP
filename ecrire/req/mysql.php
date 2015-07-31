@@ -61,7 +61,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'db' => $db,
 		'last' => $last,
 		'prefixe' => $prefixe ? $prefixe : $db,
-		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
+		'link' => $link,
 		);
 }
 
@@ -566,7 +566,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 
 	$res = spip_mysql_query("SELECT version() as v", $serveur);
 	if (($row = mysqli_fetch_array($res)) && (version_compare($row['v'],'5.0','>='))) {
-		spip_mysql_query("SET sql_mode=''");
+		spip_mysql_query("SET sql_mode=''", $serveur);
 	}
 
 	foreach($cles as $k => $v) {

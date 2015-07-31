@@ -195,12 +195,11 @@ if (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 # $ip = substr(md5($ip),0,16);
 
 
-// faut-il faire des connexions completes rappelant le nom du serveur et/ou de
-// la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
+// faut-il faire des connexions Mysql rappelant le nom de la base MySQL ?
+// (utile si vos squelettes appellent d'autres bases MySQL)
 // (A desactiver en cas de soucis de connexion chez certains hebergeurs)
 // Note: un test a l'installation peut aussi avoir desactive
 // $mysql_rappel_nom_base directement dans le fichier inc_connect
-$mysql_rappel_connexion = true;
 $mysql_rappel_nom_base = true;
 
 // faut-il afficher en rouge les chaines non traduites ?
