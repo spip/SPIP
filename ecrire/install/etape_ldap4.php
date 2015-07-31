@@ -62,18 +62,26 @@ function install_etape_ldap4_dist()
 				'statut_ldap' => array(
 					'label' => _T('info_statut_utilisateurs_2').'<br />',
 					'valeur' => '1comite',
-					'alternatives' => array(
-						'6forum' => "<b>"._T('info_visiteur_1')."</b> "._T('info_visiteur_2')."<br />",
-						'1comite' => "<b>"._T('info_redacteur_1')."</b> "._T('info_redacteur_2')."<br />",
-						'0minirezo' => "<b>"._T('info_administrateur_1')."</b> "._T('info_administrateur_2')."<br />"
+					'alternatives' => liste_statuts_ldap()
 					)
 				)
-			)
-		)
+			   )
 		. bouton_suivant()));
 	}
 
 	echo info_progression_etape(4,'etape_ldap','install/');
 	echo install_fin_html();
+}
+
+function liste_statuts_ldap() {
+	$recom = array("info_administrateurs" => ("<b>" ._T('info_administrateur_1')."</b> "._T('info_administrateur_2')."<br />"),
+		       "info_redacteurs" =>  ("<b>"._T('info_redacteur_1')."</b> "._T('info_redacteur_2')."<br />"),
+		       "info_visiteurs" => ("<b>"._T('info_visiteur_1')."</b> "._T('info_visiteur_2')."<br />"));
+	
+	$res = array();
+	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
+		if (isset($recom[$k])) $res[$v] = $recom[$k];
+	}
+	return $res;
 }
 ?>

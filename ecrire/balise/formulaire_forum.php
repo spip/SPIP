@@ -93,10 +93,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	if ($type == "abo") {
 		if (!$GLOBALS["auteur_session"]) {
 			return array('formulaires/login_forum', 0,
-				array('inscription' => generer_url_public('spip_inscription'),
-					'oubli' => generer_url_public('spip_pass')));
+					array('inscription' => generer_url_public('', 'action=inscription'),
+						'oubli' => generer_url_public('', 'action=pass')));
 		} else {
-		// forcer ces valeur
+		// forcer ces valeurs
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}

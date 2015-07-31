@@ -199,8 +199,8 @@ function action_legender_auteur_post($r) {
 	if ($statut = _request('statut')
 	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
 	$opt = array('statut'=>$statut))) {
-		if (!in_array($statut,$GLOBALS['liste_des_statuts'])) {
-		  spip_log("action_instituer_auteur_dist: $statut incompris  pour $id_auteur");
+		  if ($statut != addslashes($statut)) {
+		  spip_log("action_editer_auteur_dist: $statut incompris  pour $id_auteur");
 		} else {
 			spip_query("UPDATE spip_auteurs SET statut="._q($statut) . " WHERE id_auteur=" . _q($id_auteur));
 		}

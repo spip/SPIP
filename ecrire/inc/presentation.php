@@ -694,6 +694,15 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act)
   return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
 }
 
+function avoir_visiteurs() {
+
+	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
+	if ($GLOBALS['meta']['accepter_visiteurs'] == 'oui') return true;
+	$n = spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1");
+	$n = spip_fetch_array($n);
+	return $n['n'];
+}
+
 //
 // Afficher des auteurs sur requete SQL
 //
@@ -702,6 +711,9 @@ function bonhomme_statut($row) {
 	global $connect_statut;
 
 	switch($row['statut']) {
+		case "nouveau":
+			return '';
+			break;
 		case "0minirezo":
 			return http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "",
 					_T('titre_image_administrateur'));
@@ -713,14 +725,10 @@ function bonhomme_statut($row) {
 			  return http_img_pack("redac-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur_02'));
 			break;
 		case "5poubelle":
-		  return http_img_pack("poubelle.gif", _T('titre_image_auteur_supprime'), "",_T('titre_image_auteur_supprime'));
+			return http_img_pack("poubelle.gif", _T('titre_image_auteur_supprime'), "",_T('titre_image_auteur_supprime'));
 			break;
-		case "6forum":
-		  return http_img_pack("visit-12.gif", _T('titre_image_visiteur'), "",_T('titre_image_visiteur'));
-			break;
-		case "nouveau":
 		default:
-			return '';
+		  return http_img_pack("visit-12.gif", _T('titre_image_visiteur'), "",_T('titre_image_visiteur'));
 			break;
 	}
 }

@@ -19,7 +19,7 @@ function exec_auteurs_dist()
 {
 	$tri = preg_replace('/\W/', '', _request('tri'));
 	if (!$tri) $tri='nom'; 
-	$statut = preg_replace('/\W/', '', _request('statut'));
+	$statut =  _request('statut');
 
 	$result = requete_auteurs($tri, $statut);
 	$nombre_auteurs = spip_num_rows($result);
@@ -42,12 +42,18 @@ function exec_auteurs_dist()
 		echo $commencer_page(_T('info_auteurs_par_tri',
 					array('partri' => '')),
 				     "auteurs","redacteurs");
-		bandeau_auteurs($tri, $statut=='6forum');
+		bandeau_auteurs($tri, !statut_min_redac($statut));
 
 		echo "<div id='auteurs'>", $res, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 		echo fin_gauche(), fin_page();
 	}
+}
+
+function statut_min_redac($statut)
+{
+  $x = !$statut OR strpos($statut, "0minirezo") OR strpos($statut, "1comite");
+  return $statut[0] =='!' ? !$x : $x;
 }
 
 // http://doc.spip.org/@lettres_d_auteurs
@@ -106,12 +112,11 @@ function bandeau_auteurs($tri, $visiteurs)
 
 		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
 
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
-		if ($n) {
-			if ($visiteurs)
+		if (avoir_visiteurs()) {
+                        if ($visiteurs)
 				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs"), "auteur-24.gif", "", false);
 			else
-				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=6forum"), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=!1comite,0minirezo,nouveau"), "auteur-24.gif", "", false);
 		}
 		echo bloc_des_raccourcis($res);
 	}
@@ -129,11 +134,11 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 {
 	global $spip_lang_right;
 
-	$arg = $statut ? "&statut=$statut" : '';
+	$arg = $statut ? ("&statut=" .urlencode($statut)) : '';
 	$res ="\n<tr class='toile_gris_moyen'>"
 	. "\n<td style='width: 20px'>";
 
-	if ($tri=='statut' OR $statut !='')
+	if ($tri=='statut')
   		$res .= http_img_pack('admin-12.gif','', " class='lang'");
 	else {
 	  $t =  _T('lien_trier_statut');
@@ -147,10 +152,10 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	else
 		$res .= auteurs_href(_T('info_nom'), "tri=nom$arg", " title='"._T('lien_trier_nom'). "'");
 
-
 	$res .= "</td><td>";
 
-	$col = ($statut == '6forum') ? _T('message') : _T('info_articles');
+	$col = statut_min_redac($statut) ? _T('info_articles') : _T('message') ;
+
 	if ($tri=='nombre')
 		$res .= '<b>' . $col .'</b>';
 	else
@@ -167,9 +172,9 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 			if ($j == $debut)
 				$res .= "<b>$j</b>";
 			else if ($j > 0)
-				$res .= auteurs_href($j, "tri=$tri&statut=$statut&debut=$j");
+				$res .= auteurs_href($j, "tri=$tri$arg&debut=$j");
 			else
-				$res .= auteurs_href('0', "tri=$tri&statut=$statut");
+				$res .= auteurs_href('0', "tri=$tri$arg");
 			if ($debut > $j  AND $debut < $j+$max_par_page){
 				$res .= " | <b>$debut</b>";
 			}
@@ -182,7 +187,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
 				else
-					$res .= auteurs_href($key, "tri=$tri&statut=$statut&debut=$val") . "\n";
+					$res .= auteurs_href($key, "tri=$tri$arg&debut=$val") . "\n";
 			}
 			$res .= "</td></tr>\n";
 		}
@@ -196,11 +201,11 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);
-			$nav .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec&statut=$statut");
+			$nav .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec$arg");
 		}
 		$nav .= "</td><td style='text-align: $spip_lang_right'>";
 		if ($debut_suivant < $nombre_auteurs) {
-			$nav .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant&statut=$statut");
+			$nav .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant&$arg");
 		}
 		$nav .= "</td></tr></table>\n";
 	}
@@ -239,10 +244,14 @@ function requete_auteurs($tri, $statut)
 // sauf les admins, toujours visibles.
 // limiter les statuts affiches
 if ($connect_statut == '0minirezo') {
-	if ($statut) {
-		$sql_visible = "aut.statut IN ('$statut')";
-	} else {
+	if (!$statut) {
 		$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
+	} else {
+		if ($statut[0]="!") {
+		  $statut = substr($statut,1); $not = " NOT";
+		} else $not = '';
+		$statut = preg_replace('/\W+/',"','",$statut); 
+		$sql_visible = "aut.statut$not IN ('$statut')";
 	}
 } else {
 	$sql_visible = "(
@@ -270,12 +279,12 @@ default:
 	$sql_order = " multi";
 }
 
-
+ $visit = ($statut  AND ($statut!='1comite') AND ($statut != '0minirezo'));
 //
 // La requete de base est tres sympa
 // (pour les visiteurs, ca postule que les messages concernent des articles)
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . (($statut == '6forum') ? 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+ $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
  return $row;
 }
 

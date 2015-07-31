@@ -152,11 +152,9 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
-
-	if ($n)
+	if (avoir_visiteurs())
 		$sousmenu['auteurs'] = 
-			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=6forum");
+			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!1comite,0minirezo,nouveau");
 
 	$sousmenu['auteur_infos']=
 		new Bouton("auteur-24.gif", "icone_creer_nouvel_auteur", null, 'new=oui');
