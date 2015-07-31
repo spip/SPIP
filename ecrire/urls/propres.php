@@ -72,8 +72,12 @@ function _generer_url_propre($type, $id_objet) {
 	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
 	// 3) on le demande explicitement (preview) et on est admin connecte
 	$modif_url_propre = false;
-	if (function_exists('action_redirect_dist') AND
-	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
+	if (_request('action') == 'redirect'
+	AND (
+		(_request('var_mode') == 'preview' OR $row['statut'] <> 'publie')
+		OR
+		(defined('_URL_PROPRES_REGENERER') AND _URL_PROPRES_REGENERER)
+	)
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
 		$modif_url_propre = true;
 
@@ -82,7 +86,6 @@ function _generer_url_propre($type, $id_objet) {
 
 	// Sinon, creer l'URL
 	include_spip('inc/filtres');
-	include_spip('inc/charsets');
 	$url = translitteration(corriger_caracteres(
 		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
 		));
