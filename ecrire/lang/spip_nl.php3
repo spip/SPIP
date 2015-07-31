@@ -24,7 +24,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
 'avis_article_modifie' => 'Opgelet, @nom_auteur_modif@ heeft @date_diff@  minuten geleden aan dit artikel gewerkt.',
-'avis_attention' => 'OPGELET&nbsp;!',
+'avis_attention' => 'OPGELET!',
 'avis_aucun_resultat' => 'Geen resultaat.',
 'avis_champ_incorrect_type_objet' => 'Veldnaam @name@ is onjuist voor object van het type @type@',
 'avis_chemin_invalide_1' => 'De toegang die je hebt gekozen',
@@ -36,8 +36,8 @@ $GLOBALS['i18n_spip_nl'] = array(
 'avis_connexion_ldap_echec_1' => 'De verbinding met de LDAP-server is mislukt.',
 'avis_connexion_ldap_echec_2' => 'Ga terug naar de vorige pagina en kijk na of de ingevulde gegevens correct zijn.',
 'avis_connexion_ldap_echec_3' => 'Andere mogelijkheid is om de LDAP-ondersteuning om gebruikers in te voeren niet te gebruiken.',
-'avis_conseil_selection_mot_cle' => '<b>Belangrijke groep&nbsp;:</b> het is erg aan te bevelen een trefwoord uit deze groep te kiezen.',
-'avis_deplacement_rubrique' => 'Opgelet&nbsp;! Deze rubiek bevat @contient_breves@ br&egrave;ve@scb@&nbsp;: als je haar verplaatst, gelieve dit te bevestigen door hier het vakje aan te vinken.',
+'avis_conseil_selection_mot_cle' => '<b>Belangrijke groep:</b> het is erg aan te bevelen een trefwoord uit deze groep te kiezen.',
+'avis_deplacement_rubrique' => 'Opgelet! Deze rubiek bevat @contient_breves@ br&egrave;ve@scb@: als je haar verplaatst, gelieve dit te bevestigen door hier het vakje aan te vinken.',
 'avis_destinataire_obligatoire' => 'Je dient een bestemmeling op te geven vooraleer dit bericht te verzenden.',
 'avis_echec_syndication_01' => 'De syndicatie is mislukt : de aangeduide backend is niet te ontcijferen of stelt geen enkel artikel voor.',
 'avis_echec_syndication_02' => 'De syndicatie is mislukt : het is onmogelijk de backend van deze site te bereiken.',
@@ -59,13 +59,13 @@ $GLOBALS['i18n_spip_nl'] = array(
 'avis_lecture_noms_bases_1' => 'Het installatieprogramma heeft de namen van de ge&iuml;nstalleerde databanken niet kunnen lezen.',
 'avis_lecture_noms_bases_2' => 'Geen enkele database is beschikbaar, ofwel is de functie die de databases zou moeten tonen, niet geactiveerd
   omwille van veiligheidsredenen (wat vaak het geval is bij providers).',
-'avis_lecture_noms_bases_3' => 'In het andere geval is het heel waarschijnlijk dat een database met uw aanmeldingsnaam (login) bruikbaar is&nbsp;:',
+'avis_lecture_noms_bases_3' => 'In het andere geval is het heel waarschijnlijk dat een database met uw aanmeldingsnaam (login) bruikbaar is:',
 'avis_non_acces_message' => 'Je hebt geen toegang tot dit bericht.',
 'avis_non_acces_page' => 'Je hebt geen toegang tot deze pagina.',
 'avis_operation_echec' => 'De bewerking is mislukt.',
 'avis_probleme_archive' => 'Probleem om het bestand @archive@ te lezen.',
 'avis_site_introuvable' => 'Site onvindbaar.',
-'avis_site_syndique_probleme' => 'Opgelet : met de syndicatie van deze site is een probleem opgetreden&nbsp;; het systeem wordt op dit moment dus tijdelijk onderbroken. Kijk het adres van het bestand voor syndicatie van deze site na  (<b>@url_syndic@</b>), en probeer nogmaals de informatie binnen te halen.',
+'avis_site_syndique_probleme' => 'Opgelet : met de syndicatie van deze site is een probleem opgetreden; het systeem wordt op dit moment dus tijdelijk onderbroken. Kijk het adres van het bestand voor syndicatie van deze site na  (<b>@url_syndic@</b>), en probeer nogmaals de informatie binnen te halen.',
 'avis_sites_probleme_syndication' => 'Deze sites hebben een probleem met syndicatie',
 'avis_sites_syndiques_probleme' => 'Deze gesyndiceerde sites hebben een probleem',
 'avis_suppression_base' => 'OPGELET, het wissen van de gegevens is onomkeerbaar',
@@ -77,7 +77,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'bouton_ajouter' => 'Toevoegen',
 'bouton_ajouter_document' => 'EEN DOCUMENT TOEVOEGEN',
 'bouton_ajouter_image' => 'EEN AFBEELDING TOEVOEGEN',
-'bouton_ajouter_participant' => 'EEN DEELNEMER TOEVOEGEN&nbsp;:',
+'bouton_ajouter_participant' => 'EEN DEELNEMER TOEVOEGEN:',
 'bouton_annonce' => 'AANKONDIGING',
 'bouton_changer' => 'Wijzigen',
 'bouton_checkbox_envoi_message' => 'mogelijkheid om een bericht te versturen',
@@ -125,7 +125,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'bouton_radio_occidental' => 'Westers alfabet&nbsp; (<tt>iso-8859-1</tt>): ondersteund door alle browsers, maar geeft enkel 
   de West-Europese talen weer (Engels, Frans, Duits, Nederlands ...).',
 'bouton_radio_pas_petition' => 'Geen petitie',
-'bouton_radio_personnalise' => 'Gepersonaliseerde tekenset&nbsp;: kies deze optie als je een specifieke tekenset
+'bouton_radio_personnalise' => 'Gepersonaliseerde tekenset: kies deze optie als je een specifieke tekenset
  wil gebruiken.',
 'bouton_radio_petition_activee' => 'Petitie geactiveerd',
 'bouton_radio_publication_immediate' => 'Onmiddellijke publicatie van berichten
@@ -184,12 +184,12 @@ $GLOBALS['i18n_spip_nl'] = array(
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf : <B>Toegangsrechten regelen</B>',
 'dirs_probleme_droits' => '<b>Probleem met toegangsrechten</b>',
-'dirs_repertoires_absents' => '<B>De volgende mappen werden niet gevonden&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<B>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
   <P>Waarschijnlijk is te wijten aan het door elkaar halen van grote en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
  is dit niet het geval, hernoem dan mappen met je FTP-programma om de fout zo weg te nemen.
   <P>Eenmaal deze bewerking uitgevoerd is, kan je',
-'dirs_repertoires_suivants' => '<B>Je hebt geen schrijfrechten op de volgende mappen&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_suivants' => '<B>Je hebt geen schrijfrechten op de volgende mappen: <ul>@bad_dirs@.</ul> </B>
   <P>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding
   <P>Eenmaal deze wijziging doorgevoerd, kan je ',
@@ -200,22 +200,22 @@ $GLOBALS['i18n_spip_nl'] = array(
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Plaats van het adresboek',
 'entree_adresse_email' => 'Uw e-mail adres',
-'entree_adresse_fichier_syndication' => 'Adres van het &laquo;&nbsp;backend&nbsp;&raquo; bestand voor syndicatie&nbsp;:',
+'entree_adresse_fichier_syndication' => 'Adres van het &laquo;backend&raquo; bestand voor syndicatie:',
 'entree_adresse_site' => '<b>website adres</b> [verplicht]',
 'entree_base_donnee_1' => 'Adres van de databank',
 'entree_base_donnee_2' => '(Vaak komt dit adres overeen met dat van je website, soms is het gewoon de vermelding&laquo;localhost&raquo; of kan je het veld blanco laten.)',
 'entree_biographie' => 'Korte biografie in enkele woorden.',
 'entree_breve_publiee' => 'Dient dit bericht te worden gepubliceerd ?',
-'entree_chemin_acces' => '<B>Invullen</B> van de toegangscode&nbsp;:',
+'entree_chemin_acces' => '<B>Invullen</B> van de toegangscode:',
 'entree_cle_pgp' => 'Je PGP-sleutel',
 'entree_contenu_rubrique' => '(Inhoud van de rubriek in enkele woorden)',
 'entree_description_site' => 'Site beschrijving',
-'entree_dimensions' => 'Afmetingen&nbsp;:',
+'entree_dimensions' => 'Afmetingen:',
 'entree_identifiants_connexion' => 'Je verbindingsgegevens...',
 'entree_informations_connexion_ldap' => 'Vul hier de gegevens in om verbinding te maken met het LDAP adresboek.
   Deze gegevens kan je bekomen bij de systeem- of netwerkbeheerder.',
 'entree_infos_perso' => 'Wie ben je ?',
-'entree_interieur_rubrique' => 'In de rubriek&nbsp;:',
+'entree_interieur_rubrique' => 'In de rubriek:',
 'entree_liens_sites' => '<B>Hypertext link</B> (verwijzing, te bezoeken website ...)',
 'entree_login' => 'Je login',
 'entree_login_connexion_1' => 'De login voor de verbinding',
@@ -233,8 +233,8 @@ $GLOBALS['i18n_spip_nl'] = array(
 'entree_port_annuaire' => 'Het poortnummer van het adresboek',
 'entree_signature' => 'Handtekening',
 'entree_texte_breve' => 'Tekst van het bericht',
-'entree_titre_document' => 'Documenttitel&nbsp;:',
-'entree_titre_image' => 'Afbeeldingstitel&nbsp;:',
+'entree_titre_document' => 'Documenttitel:',
+'entree_titre_image' => 'Afbeeldingstitel:',
 'entree_titre_obligatoire' => '<B>Titel</b> [verplicht]BR>',
 'entree_url' => 'Je website-adres (URL)',
 
@@ -251,7 +251,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'form_forum_login' => 'login :',
 'form_forum_message_auto' => '(Dit is een automatisch verzonden bericht)',
 'form_forum_pass' => 'paswoord :',
-'form_forum_probleme_mail' => 'Probleem met e-mail&nbsp;: de logingegevens konden niet worden verstuurd.',
+'form_forum_probleme_mail' => 'Probleem met e-mail: de logingegevens konden niet worden verstuurd.',
 'form_forum_voici1' => 'Hierbij je nieuwe logingegevens voor deelname aan de fora
 van de website "@nom_site_spip@" (@adresse_site@/) :',
 'form_forum_voici2' => 'Hierbij je logingegevens om artikels voor artikels voor te stellen op
@@ -284,11 +284,11 @@ Om je gegevens te valideren, volstaat het het onderstaande adres
 
 Bedankt voor je deelname
 ',
-'form_pet_message_commentaire' => 'Een bericht, een commentaar&nbsp;?',
+'form_pet_message_commentaire' => 'Een bericht, een commentaar?',
 'form_pet_nom_site2' => '<B>Naam van je website',
 'form_pet_probleme_technique' => 'Technisch probleem. Inloggen is momenteel niet mogelijk.',
 'form_pet_signature_pasprise' => 'Met je naam wordt geen rekening gehouden.',
-'form_pet_signature_validee' => 'Je naam is goedgekeurd. Hij zal bij de volgende update van de site verschijnen. Bedankt&nbsp;!',
+'form_pet_signature_validee' => 'Je naam is goedgekeurd. Hij zal bij de volgende update van de site verschijnen. Bedankt!',
 'form_pet_site_deja_enregistre' => 'Deze website is reeds geregistreerd',
 'form_pet_url_invalide' => 'De URL die je opgaf, is ongeldig.',
 'form_pet_votre_email' => 'Je e-mailadres',
@@ -307,13 +307,13 @@ Bedankt voor je deelname
 'form_prop_sujet' => 'Onderwerp',
 'form_prop_url_site' => 'Website-adres (URL)',
 'forum_acces_refuse' => 'Je hebt geen toegang meer tot deze forums.',
-'forum_attention_dix_caracteres' => '<b>Opgelet&nbsp;!</b> : je bericht telt minder dan 10 tekens.',
-'forum_attention_trois_caracteres' => '<b>Opgelet&nbsp;!</b> : je bericht telt minder dan 3 tekens.',
-'forum_avez_selectionne' => 'Je hebt gekozen&nbsp;:',
+'forum_attention_dix_caracteres' => '<b>Opgelet!</b> : je bericht telt minder dan 10 tekens.',
+'forum_attention_trois_caracteres' => '<b>Opgelet!</b> : je bericht telt minder dan 3 tekens.',
+'forum_avez_selectionne' => 'Je hebt gekozen:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>hier</a> om door te gaan.',
 'forum_creer_paragraphes' => '(Om een nieuwe paragraaf te beginnen, laat je gewoon enkele lijnen blanco.)',
 'forum_forum' => 'forum',
-'forum_info_modere' => 'Dit forum wordt vooraf gemodereerd&nbsp;: je bijdrage zal pas verschijnen nadat een redacteur van de website het heeft goedgekeurd.',
+'forum_info_modere' => 'Dit forum wordt vooraf gemodereerd: je bijdrage zal pas verschijnen nadat een redacteur van de website het heeft goedgekeurd.',
 'forum_lien_hyper' => '<B>Hypertext link</B> (optioneel)',
 'forum_message_definitif' => 'Definitief bericht : versturen',
 'forum_message_trop_long' => 'Je bericht is te lang. De maximale lengte is 20.000 tekens.',
@@ -401,7 +401,7 @@ Bedankt voor je deelname
 'icone_sites_references' => 'Gekoppelde sites',
 'icone_statistiques' => 'Statistieken van de site',
 'icone_statistiques_visites' => 'Statistieken aantal bezoeken',
-'icone_suivi_forum' => 'Opvolging van het publieke forum&nbsp;: @nb_forums@&nbsp;bijdrage(n)',
+'icone_suivi_forum' => 'Opvolging van het publieke forum: @nb_forums@&nbsp;bijdrage(n)',
 'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
 'icone_supprimer_cookie' => 'De toegangskoekie verwijderen',
@@ -423,7 +423,7 @@ Bedankt voor je deelname
 'info_1_article' => '1 artikel',
 'info_1_breve' => '1 bericht',
 'info_1_site' => '1 site',
-'info_a_suivre' => 'TAKEN&nbsp;&raquo;',
+'info_a_suivre' => 'TAKEN&raquo;',
 'info_a_valider' => '[ter goedkeuring]',
 'info_acces_interdit' => 'Geen toegang',
 'info_acces_refuse' => 'Toegang geweigerd',
@@ -442,24 +442,24 @@ Bedankt voor je deelname
 'info_administrateurs' => 'Beheerders',
 'info_administrer_rubrique' => 'Je kan deze rubriek beheren',
 'info_administrer_rubriques' => 'Je kan deze rubriek en haar subrubrieken beheren',
-'info_adresse' => 'aan/naar het adres&nbsp;:',
+'info_adresse' => 'aan/naar het adres:',
 'info_adresse_email' => 'E-MAIL ADRES:',
-'info_adresse_non_indiquee' => 'Je hebt geen adres opgegeven om te testen&nbsp;!',
+'info_adresse_non_indiquee' => 'Je hebt geen adres opgegeven om te testen!',
 'info_adresse_url' => 'Adres (URL) van de website',
-'info_afficher_visites' => 'Toon de bezoeken voor&nbsp;:',
-'info_affichier_visites_articles_plus_visites' => 'Bezoekers tonen voor <b>de meest bezochte artikels sinds het begin&nbsp;:</b>',
+'info_afficher_visites' => 'Toon de bezoeken voor:',
+'info_affichier_visites_articles_plus_visites' => 'Bezoekers tonen voor <b>de meest bezochte artikels sinds het begin:</b>',
 'info_aide' => 'HELP:',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
 'info_ajout_image' => 'Als je afbeeldingen als bijlage aan een document toevoegt,
   kan SPIP hiervan automatisch miniaturen aanmaken.
   Hierdoor kan je bvb. automatisch een fotogalerij of portfolio aanmaken.
 ',
-'info_ajout_participant' => 'De volgende deelnemer is toegevoegd&nbsp;:',
+'info_ajout_participant' => 'De volgende deelnemer is toegevoegd:',
 'info_ajouter_mot' => 'Dit trefwoord toevoegen',
-'info_ajouter_rubrique' => 'Een nieuwe rubriek toevoegen om te beheren&nbsp;:',
+'info_ajouter_rubrique' => 'Een nieuwe rubriek toevoegen om te beheren:',
 'info_annonce' => 'AANKONDIGING',
 'info_annonce_nouveautes' => 'Aankondiging van nieuwigheden',
-'info_annonces_generales' => 'Algemene aankondigingen&nbsp;:',
+'info_annonces_generales' => 'Algemene aankondigingen:',
 'info_annuler_blocage_priori' => 'Annuleer
     deze a priori blokkage',
 'info_anterieur' => 'vorige',
@@ -483,9 +483,9 @@ Bedankt voor je deelname
 'info_articles_trouves_dans_texte' => 'Gevonden artikels (in de tekst)',
 'info_attente_validation' => 'Je artikels die op goedkeuring wachten',
 'info_aujourdhui' => 'vandaag:',
-'info_auteur_message' => 'AUTEUR VAN HET BERICHT&nbsp;:',
+'info_auteur_message' => 'AUTEUR VAN HET BERICHT:',
 'info_auteurs' => 'De auteurs',
-'info_auteurs_nombre' => 'auteur(s)&nbsp;:',
+'info_auteurs_nombre' => 'auteur(s):',
 'info_auteurs_par_tri' => 'Auteur@partri@',
 'info_auteurs_trouves' => 'Gevonden auteurs',
 'info_authentification_externe' => 'Externe authenticatie',
@@ -494,7 +494,7 @@ Bedankt voor je deelname
 'info_base_installee' => 'De structuur van je databank is ge&iuml;nstalleerd.',
 'info_base_restauration' => 'De databank wordt hersteld.',
 'info_bloquer_lien' => 'deze koppeling tegenhouden',
-'info_breves' => 'Werkt je website met het systeem van berichten&nbsp;?',
+'info_breves' => 'Werkt je website met het systeem van berichten?',
 'info_breves_02' => 'nieuwsberichten',
 'info_breves_03' => 'nieuwsberichten',
 'info_breves_2' => 'nieuwsberichten',
@@ -508,10 +508,10 @@ Bedankt voor je deelname
 'info_chemin_acces_1' => 'Opties : <B>Toegang tot het adresboek</b>',
 'info_chemin_acces_2' => 'Je dient de toegang tot de gegevens uit het adresboek in te stellen. Zonder deze instellingen is het ONmogelijk de gebruikersprofielen in dit adresboek te lezen.',
 'info_chemin_acces_annuaire' => 'Opties : <B>Toegang tot het adresboek',
-'info_choix_base' => 'Derde stap&nbsp;:',
+'info_choix_base' => 'Derde stap:',
 'info_classement_1' => '<sup>e</sup> op @liste@',
 'info_classement_2' => '<sup>e</sup> @liste@',
-'info_code_acces' => 'Vergeet je eigen toegangscode niet&nbsp;!',
+'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
 'info_confirmer_passe' => 'Bevestig het nieuwe paswoord :',
 'info_connexion_base' => 'Tweede stap : <B>Poging tot verbinding met de gegevensbank</b>',
@@ -521,7 +521,7 @@ Bedankt voor je deelname
 'info_connexion_refusee' => 'Verbinding geweigerd',
 'info_contact' => 'Contact',
 'info_contact_developpeur' => 'Gelieve een ontwikkelaar te contacteren.',
-'info_contenance' => 'Deze site bevat&nbsp;:',
+'info_contenance' => 'Deze site bevat:',
 'info_contenu_articles' => 'Inhoud van de artikels',
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
@@ -531,17 +531,17 @@ Bedankt voor je deelname
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
 'info_creation_rubrique' => 'Om artikels te kunnen schrijven,<BR> dien je minstens &eacute;&eacute;n rubriek aan te maken.<BR>',
 'info_creation_tables' => 'Stap 4 : <B>maken van tabellen in de databank</b>',
-'info_creer_base' => '<B>Cre&euml;ren</b> een nieuw gegevensbank&nbsp;:',
-'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam&nbsp;:',
-'info_creer_repertoire_2' => 'binnen in de map <b>ecrire/data/</b>, vervolgens&nbsp;:',
+'info_creer_base' => '<B>Cre&euml;ren</b> een nieuw gegevensbank:',
+'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
+'info_creer_repertoire_2' => 'binnen in de map <b>ecrire/data/</b>, vervolgens:',
 'info_dans_espace_prive' => '[in de private ruimte]',
-'info_dans_groupe' => 'In de groep&nbsp;:',
-'info_dans_rubrique' => 'In de rubriek&nbsp;:',
+'info_dans_groupe' => 'In de groep:',
+'info_dans_rubrique' => 'In de rubriek:',
 'info_date_publication_anterieure' => 'Datum van eerdere publicatie :',
 'info_date_referencement' => 'DATUM VAN DE KOPPELING VAN DEZE SITE:',
 'info_delet_mots_cles' => 'Je hebt gevraagd het trefwoord 
 <B>@titre_mot@</b> (@type_mot@) te verwijderen. Dit trefwoord is gekoppeld aan 
-<b>@texte_lie@</b>, je dient je beslissing te bevestigen&nbsp;:',
+<b>@texte_lie@</b>, je dient je beslissing te bevestigen:',
 'info_demander_blocage_priori' => 'Vraag een
     een a priori blokkage aan',
 'info_deplier' => 'Uitvouwen',
@@ -554,9 +554,9 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_desactiver_messagerie_personnelle' => 'Je kan het interne berichtensysteem op deze site aan- of uitzetten.',
 'info_descriptif' => 'Beschrijving:',
 'info_descriptif_nombre' => 'Beschrijving(en):',
-'info_description' => 'Beschrijving&nbsp;:',
-'info_description_2' => 'Beschrijving&nbsp;:',
-'info_dimension' => 'Afmetingen&nbsp;:',
+'info_description' => 'Beschrijving:',
+'info_description_2' => 'Beschrijving:',
+'info_dimension' => 'Afmetingen:',
 'info_discussion_cours' => 'Lopende discussies',
 'info_document' => 'Document',
 'info_donner_rendez_vous' => 'Via deze knop kan je een afspraak maken met een andere deelnemer.',
@@ -567,10 +567,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_email_invalide' => 'Fout e-mailadres.',
 'info_email_webmestre' => 'E-mailadres van de webmaster (optioneel)',
 'info_en_cours_validation' => 'Je artikels in redactie',
-'info_en_ligne' => 'Momenteel online&nbsp;:',
+'info_en_ligne' => 'Momenteel online:',
 'info_en_test_1' => '&nbsp;(in&nbsp;test)',
 'info_en_test_2' => '(in test)',
-'info_entrer_code_alphabet' => 'Vul de alfabetcode in die je wil gebruiken&nbsp;:',
+'info_entrer_code_alphabet' => 'Vul de alfabetcode in die je wil gebruiken:',
 'info_envoi_email_automatique' => 'Automatisch verzenden van e-mails',
 'info_envoi_forum' => 'Versturen van de forums aan de auteurs van de artikels',
 'info_envoyer_maintenant' => 'Nu versturen',
@@ -586,8 +586,8 @@ De publieke forums kunnen per artikel toegestaan worden
  met de aankondiging van vragen voor publicatie of goedgekeurde publicaties.',
 'info_fichiers_authent' => 'Verificatiebestand ".htpasswd"',
 'info_fini' => 'Het is gedaan !',
-'info_fonctionnement_forum' => 'Werking van het forum&nbsp;:',
-'info_format_image' => 'Beeldformaten die gebruikt kunnen worden om vignettes (miniatuurafbeeldingen) aan te maken&nbsp;: @gd_formats@.',
+'info_fonctionnement_forum' => 'Werking van het forum:',
+'info_format_image' => 'Beeldformaten die gebruikt kunnen worden om vignettes (miniatuurafbeeldingen) aan te maken: @gd_formats@.',
 'info_format_non_defini' => 'Ongedefinieerd formaat',
 'info_forum_administrateur' => 'Forum van de beheerders',
 'info_forum_interne' => 'intern forum',
@@ -603,12 +603,12 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_gauche_auteurs' => 'Je vindt hier de auteurs van de site.
  De kleur van het
  icoontje geeft hun status aan (redacteur = groen; beheerder = geel).',
-'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje&nbsp;;
+'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
   Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.',
 'info_gauche_messagerie' => 'Het berichtensysteem laat toe om berichten uit te wisselen tussen redacteurs, memo\'s (voor persoonlijk gebruik) te bewaren of aankondigingen te tonen op de beginpagina van de priv&eacute;-ruimte (als je beheerder bent).',
 'info_gauche_numero_auteur' => 'NUMMER AUTEUR',
 'info_gauche_numero_breve' => 'NUMMER BERICHT',
-'info_gauche_statistiques_referers' => 'Hier wordt een lijst met <I>referers</i> getoond. Dit zijn sites die een koppeling bevatten naar je eigen site, alleen voor vandaag&nbsp;: de lijst wordt namelijk elke 24 uur opnieuw aangemaakt.',
+'info_gauche_statistiques_referers' => 'Hier wordt een lijst met <I>referers</i> getoond. Dit zijn sites die een koppeling bevatten naar je eigen site, alleen voor vandaag: de lijst wordt namelijk elke 24 uur opnieuw aangemaakt.',
 'info_gauche_suivi_forum' => 'De pagina voor <I>opvolging van de forums</i> is een plek voor beheer van je site (en dus niet voor discussie of redactie). Alle bijdragen aan het publieke forum aansluitend op 1 artikel worden getoond en kan je hier beheren.',
 'info_gauche_suivi_forum_2' => 'De pagina voor <I>opvolging van de forums</i> is een plek voor beheer van je site (en dus niet voor discussie of redactie). Alle bijdragen aan de forums -zowel de publieke als de private- worden getoond en kan je hier beheren.',
 'info_gauche_visiteurs_enregistres' => 'Hier zal je de geregistreerde bezoekers van de
@@ -618,12 +618,12 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_grand_ecran' => 'Groot scherm',
 'info_groupe_important' => 'Belangrijke groep',
 'info_hebergeur_desactiver_envoi_email' => 'Sommige hostingbedrijven staan het automatisch versturen van e-mails door hun servers niet toe. In dat geval zullen de volgende functionaliteiten van SPIP niet werken.',
-'info_hier' => 'gisteren&nbsp;:',
+'info_hier' => 'gisteren:',
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_aide' => 'HELP',
 'info_impossible_lire_page' => '<B>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy<tt>',
-'info_inclusion_directe' => 'Directe insluiting&nbsp;:',
-'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding&nbsp;:',
+'info_inclusion_directe' => 'Directe insluiting:',
+'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 'info_informations_personnelles' => 'Vijfde stap : <B>Persoonlijke gegevnes</b>',
 'info_inscription_automatique' => 'Automatische inschrijving van nieuwe redacteurs',
 'info_installation_systeme_publication' => 'Installatie van het publicatiesysteem...',
@@ -637,17 +637,17 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_jeu_caractere' => 'Tekenset van de site',
 'info_joindre_document_article' => 'Aan dit artikel kan je een bijlage hechten van het type',
 'info_joindre_document_rubrique' => 'In deze rubriek kan je bijlagen toevoegen van het type',
-'info_joindre_documents_article' => 'Bij je artikels kan je bijlagen voegen van het type&nbsp;:',
+'info_joindre_documents_article' => 'Bij je artikels kan je bijlagen voegen van het type:',
 'info_jours' => 'dagen',
 'info_l_article' => 'het artikel',
 'info_la_breve' => 'het bericht',
 'info_la_rubrique' => 'de rubriek',
 'info_laisser_champs_vides' => 'velden leeglaten)',
-'info_langue_defaut' => 'Standaardtaal&nbsp;:',
+'info_langue_defaut' => 'Standaardtaal:',
 'info_langue_interface' => 'Taal van de interface',
 'info_langue_principale' => 'Hoofdtaal',
 'info_langues' => 'Talen van de site',
-'info_langues_proposees' => 'Mogelijke talen&nbsp;:',
+'info_langues_proposees' => 'Mogelijke talen:',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'De LDAP-autentificatie is ge&iuml;nstalleerd',
 'info_les_auteurs_1' => 'door @les_auteurs@',
@@ -665,7 +665,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_login_existant' => 'Deze login is reeds in gebruik',
 'info_login_trop_court' => 'Login te kort.',
 'info_mail_fournisseur' => 'jullie@provider.be',
-'info_maximum' => 'maximum&nbsp;:',
+'info_maximum' => 'maximum:',
 'info_message' => 'Bericht van',
 'info_message_efface' => 'GEWIST BERICHT',
 'info_message_en_redaction' => 'Je berichten in redactie',
@@ -678,11 +678,11 @@ De publieke forums kunnen per artikel toegestaan worden
  site bevond.: je databank loopt hierdoor het risico
  beschadigd te worden waardoor je site niet meer zal
  functioneren.<br>{{Herinstalleer de SPIP-bestanden.}}',
-'info_mise_en_ligne' => 'Datum van online publicatie&nbsp;:',
+'info_mise_en_ligne' => 'Datum van online publicatie:',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standaardwerkwijze van de publieke forums',
 'info_modification_parametres_securite' => 'Wijzigingen aan de veiligheidsinstellingen',
 'info_modifier_breve' => 'Bericht wijzigen :',
-'info_modifier_rubrique' => 'De rubriek wijzigen&nbsp;:',
+'info_modifier_rubrique' => 'De rubriek wijzigen:',
 'info_modifier_titre' => 'Wijzigen : @titre@',
 'info_mois_courant' => 'Gedurende de maand :',
 'info_mon_site_spip' => 'Mijn SPIP-site',
@@ -690,17 +690,17 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_mot_sans_groupe' => '(Woorden zonder groep...)',
 'info_moteur_recherche' => 'Ge&iuml;ntegreerde zoekmachine',
 'info_mots_cles' => 'Slautenwoords',
-'info_mots_cles_association' => 'Trefwoorden uit deze groep kunnen verbonden worden met&nbsp;:',
-'info_moyenne' => 'gemiddeld&nbsp;:',
-'info_multi_articles' => 'Taalmenu voor artikels instellen&nbsp;?',
-'info_multi_cet_article' => 'Gebruikte taal in dit artikel is&nbsp;:',
-'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is&nbsp;:',
+'info_mots_cles_association' => 'Trefwoorden uit deze groep kunnen verbonden worden met:',
+'info_moyenne' => 'gemiddeld:',
+'info_multi_articles' => 'Taalmenu voor artikels instellen?',
+'info_multi_cet_article' => 'Gebruikte taal in dit artikel is:',
+'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is:',
 'info_multi_herit' => 'Standaardtaal',
 'info_multi_langues_choisies' => '<MODIF> Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al in gebruik zijn (als eerste in de lijst getoond) kunnen niet geschrapt worden.
-  Opgelet&nbsp;: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
-'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken&nbsp;?',
-'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap&nbsp;?',
+  Opgelet: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
+'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
+'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
 'info_multilinguisme' => 'Meertaligheid',
 'info_nexen_1' => 'Je internetaanbieder is XS4ALL.',
 'info_nexen_2' => 'Het afschermen van de map <tt>ecrire/data/</tt> doe je middels',
@@ -714,7 +714,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_nom_utilisateurs_connectes' => 'Je naam komt in de lijst van de redacteuren die online zijn.',
 'info_nombre_articles' => '@nb_articles@ artikels,',
 'info_nombre_breves' => '@nb_breves@ berichten,',
-'info_nombre_en_ligne' => 'Momenteel online&nbsp;:',
+'info_nombre_en_ligne' => 'Momenteel online:',
 'info_nombre_partcipants' => 'DEELNEMERS AAN DE DISCUSSIE :',
 'info_nombre_rubriques' => '@nb_rubriques@ rubrieken, ',
 'info_nombre_sites' => '@nb_sites@ sites,',
@@ -735,7 +735,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_nouvel_article' => 'Nieuw artikel',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Verplicht]',
-'info_option_email' => 'Wanneer een bezoeker van de site een bericht post in het forum over een bepaald artikel, kan de auteur van dat artikel via e-mail verwittigd worden. Wil je van deze mogelijkheid gebruik maken&nbsp;?',
+'info_option_email' => 'Wanneer een bezoeker van de site een bericht post in het forum over een bepaald artikel, kan de auteur van dat artikel via e-mail verwittigd worden. Wil je van deze mogelijkheid gebruik maken?',
 'info_option_faire_suivre' => 'Berichten van het forum bezorgen aan de auteurs van de artikels',
 'info_option_ne_pas_faire_suivre' => 'Berichten uit de forums niet laten opvolgen',
 'info_options_avancees' => 'GEAVANCEERDE OPTIES',
@@ -756,12 +756,12 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_plus_cinq_car_2' => '(Meer dan 5 karakters)',
 'info_plus_trois_car' => '(Meer dan 3 karakters)',
 'info_plusieurs_mots_trouves' => 'Meerdere trefwoorden gevonden voor "@cherche_mot@":',
-'info_popularite' => 'populariteit&nbsp;:&nbsp;@popularite@&nbsp;; bezoeken&nbsp;:&nbsp;@visites@',
-'info_popularite_2' => 'populariteit van de site&nbsp;:',
-'info_popularite_3' => 'populariteit&nbsp;:&nbsp;@popularite@&nbsp;; bezoeken&nbsp;:&nbsp;@visites@',
-'info_popularite_4' => 'populariteit&nbsp;:&nbsp;@popularite@&nbsp;; bezoeken&nbsp;:&nbsp;@visites@',
-'info_popularite_5' => 'populariteit&nbsp;:',
-'info_portfolio_automatique' => 'Automatische portfolio&nbsp;:',
+'info_popularite' => 'populariteit:&nbsp;@popularite@; bezoeken:&nbsp;@visites@',
+'info_popularite_2' => 'populariteit van de site:',
+'info_popularite_3' => 'populariteit:&nbsp;@popularite@; bezoeken:&nbsp;@visites@',
+'info_popularite_4' => 'populariteit:&nbsp;@popularite@; bezoeken:&nbsp;@visites@',
+'info_popularite_5' => 'populariteit:',
+'info_portfolio_automatique' => 'Automatische portfolio:',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum :',
 'info_pour' => 'voor',
@@ -785,7 +785,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_publies' => 'Je gepubliceerde artikels',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteurs vanop
- de publieke site&nbsp;? Indien wel, dan kunnen bezoekers
+ de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
  toegang krijgen tot de priv&eacute;-ruimte om zelf artikels
  voor te stellen.<blockquote><i>Bij inschrijving zal een
@@ -794,14 +794,14 @@ De publieke forums kunnen per artikel toegestaan worden
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
  niet mogelijk.',
-'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site&nbsp;?',
-'info_question_proposer_site' => 'Wie kan referentiesites voorstellen&nbsp;?',
+'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
+'info_question_proposer_site' => 'Wie kan referentiesites voorstellen?',
 'info_question_referers' => 'Dient je site <i>referers</i>
  (adressen van externe koppelingen
  die naar je site verwijzen)&nbsp;bij te houden ?',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
-'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door&nbsp;:',
+'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door:',
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
@@ -817,13 +817,13 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_redirection' => 'Omleiding',
 'info_refuses' => 'Uw weigerd artikels',
 'info_reglage_ldap' => 'Opties : <B>instellen van de LDAP-invoer</B>',
-'info_remplacer_vignette' => 'Vervang de standaard mini-afbeelding door een gepersonaliseerd logo&nbsp;:',
-'info_remplacer_vignette_defaut' => 'Vervang de standaard mini-afbeelding door een gepersonaliseerd logo&nbsp;:',
+'info_remplacer_vignette' => 'Vervang de standaard mini-afbeelding door een gepersonaliseerd logo:',
+'info_remplacer_vignette_defaut' => 'Vervang de standaard mini-afbeelding door een gepersonaliseerd logo:',
 'info_renvoi_article' => '<B>Doorsturen.</B> Dit artikel verwijst naar de pagina :',
 'info_reserve_admin' => 'Alleen beheerders kunnen dit adres wijzigen.',
 'info_restauration_sauvegarde' => 'Terugzetten van de kopie @archive@',
 'info_restreindre_rubrique' => 'Beheer tot deze rubriek beperken :',
-'info_resultat_recherche' => 'onderzoek resultaats&nbsp;:',
+'info_resultat_recherche' => 'onderzoek resultaats:',
 'info_retablir_lien' => 'deze link hernieuwen',
 'info_retirer_mot' => 'Trek dat woord',
 'info_retirer_mots' => 'Alle trefwoorden intrekken',
@@ -856,10 +856,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_sauvegarde_sites_references' => 'De gekoppelde sites opslaan',
 'info_sauvegarde_type_documents' => 'Types documenten opslaan',
 'info_sauvegarde_visites' => 'Backup de bezoeken',
-'info_selection_chemin_acces' => '<b>Selecteer</b> hierna de toegangswijze tot het jaarboek&nbsp;:',
+'info_selection_chemin_acces' => '<b>Selecteer</b> hierna de toegangswijze tot het jaarboek:',
 'info_selection_un_seul_mot_cle' => 'Men kan slechts <b>&eacute;&eacute;n enkel trefwoord</b> tegelijk kiezen uit deze groep.',
 'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map <i>upload</i>',
-'info_selectionner_fichier_2' => 'Een bestand selecteren&nbsp;:',
+'info_selectionner_fichier_2' => 'Een bestand selecteren:',
 'info_signatures' => 'namen',
 'info_site' => 'Site',
 'info_site_2' => 'site :',
@@ -884,7 +884,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_statut_auteur' => 'Status van deze auteur :',
 'info_statut_efface' => 'Uitgewist',
 'info_statut_redacteur' => 'Redacteur',
-'info_statut_site_1' => 'Deze site is&nbsp;:',
+'info_statut_site_1' => 'Deze site is:',
 'info_statut_site_2' => 'Publicerd',
 'info_statut_site_3' => 'Voorgesteld',
 'info_statut_site_4' => 'Naar de vuilnisbak',
@@ -896,21 +896,21 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_sur_site_public' => '[op de publieke site]',
 'info_surtitre' => 'Opschrift',
 'info_symbole_bleu' => 'Het <B>blauwe</b> symbool wijst op een <B>memo</b>: t.t.z een bericht ten persoonlijke titel.',
-'info_symbole_jaune' => 'Het <B>gele</B> symbool wijst op een <B>aankondiging voor alle redacteurs</B>&nbsp;: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
+'info_symbole_jaune' => 'Het <B>gele</B> symbool wijst op een <B>aankondiging voor alle redacteurs</B>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
 'info_symbole_vert' => 'Het <B>groene</B> symbool wijst op <B>uitgewisselde berichten met andere gebruikers</B> van deze site.',
 'info_syndication' => 'syndicatie :',
 'info_syndication_articles' => 'artikel(s)',
-'info_taille_maximale_vignette' => 'Maximale grootte van de mini-afbeeldingen gemaakt door het systeem&nbsp;:',
-'info_telecharger' => 'Opladen vanf je computer&nbsp;:',
-'info_telecharger_nouveau_logo' => 'Een nieuw logo opladen&nbsp;:',
-'info_telecharger_ordinateur' => 'Opladen vanaf je computer&nbsp;:',
+'info_taille_maximale_vignette' => 'Maximale grootte van de mini-afbeeldingen gemaakt door het systeem:',
+'info_telecharger' => 'Opladen vanf je computer:',
+'info_telecharger_nouveau_logo' => 'Een nieuw logo opladen:',
+'info_telecharger_ordinateur' => 'Opladen vanaf je computer:',
 'info_terminer_installation' => 'Je kan de standaardinstallatieprocedure nu be&euml;indigen.',
 'info_texte' => 'Tekst',
 'info_texte_explicatif' => 'Uitleg',
-'info_texte_long' => '(de tekst is lang&nbsp;: hij zal bijgevolg in verschillende delen verschijnen die opnieuw bij elkaar worden gezet na goedkeuring van de tekst.)',
-'info_texte_message' => 'Tekst van je bericht&nbsp;:',
+'info_texte_long' => '(de tekst is lang: hij zal bijgevolg in verschillende delen verschijnen die opnieuw bij elkaar worden gezet na goedkeuring van de tekst.)',
+'info_texte_message' => 'Tekst van je bericht:',
 'info_texte_message_02' => 'Tekst van het bericht',
-'info_titre' => 'Titel&nbsp;:',
+'info_titre' => 'Titel:',
 'info_titre_mot_cle' => 'Name of titel voor slautelwoord',
 'info_total' => 'totaal :',
 'info_tous_articles_en_redaction' => 'Alle artikels in redactie',
@@ -939,17 +939,17 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_verifier_image' => ' , gelieve na te gaan of je afbeeldingen correct zijn overgezet.',
 'info_vignette_defaut' => 'standaardafbeelding',
 'info_vignette_personnalisee' => 'gepersonaliseerde afbeelding',
-'info_visite' => 'bezoek&nbsp;:',
-'info_visites' => 'bezoeke&nbsp;:',
+'info_visite' => 'bezoek:',
+'info_visites' => 'bezoeke:',
 'info_visites_par_mois' => 'Tonen per maand :',
-'info_visites_plus_populaires' => 'Toon de bezoeken voor <b>de meest populaire artikels</b> en voor <b>de laatst gepuliceerde artikels&nbsp;:</b>',
+'info_visites_plus_populaires' => 'Toon de bezoeken voor <b>de meest populaire artikels</b> en voor <b>de laatst gepuliceerde artikels:</b>',
 'info_visiteur_1' => 'Bezoeker',
 'info_visiteur_2' => 'van de publieke site',
 'info_visiteurs' => 'Bezoekers',
 'info_visiteurs_02' => 'Bezoekers van de publieke site',
 'info_vos_rendez_vous' => 'Je komende afsrpaken',
 'infos_vos_pense_bete' => 'Je memo\'s',
-'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  &laquo;&nbsp;volgende&nbsp;&raquo; om de installatie te beginnen.',
+'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  &laquo;volgende&raquo; om de installatie te beginnen.',
 'intem_redacteur' => 'redacteur',
 'item_accepter_inscriptions' => 'Inschrijvingen aanvaarden',
 'item_activer_forum_administrateur' => 'Forum van beheerders activeren',
@@ -1033,7 +1033,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'lien_liberer' => 'Uitgave',
 'lien_mise_a_jour_syndication' => 'Update nu',
 'lien_modifer_date' => 'Wijzig de datum',
-'lien_nom_site' => 'WEBSITENAME&nbsp;:',
+'lien_nom_site' => 'WEBSITENAME:',
 'lien_nouvea_pense_bete' => 'NIEUWE MEMO',
 'lien_nouveau_message' => 'NIEUW BERICHT',
 'lien_nouvelle_annonce' => 'NIEUWE AANKONDIGIGN',
@@ -1080,7 +1080,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'login_login' => 'Login :',
 'login_login2' => 'Login (naam voor aanmelding bij deze site):',
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
-'login_motpasseoublie' => 'Paswoord&nbsp;vergeten&nbsp;?',
+'login_motpasseoublie' => 'Paswoord&nbsp;vergeten?',
 'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.
 
    Als je wil dat derden je paswoord niet kunnen onderscheppen
@@ -1090,8 +1090,8 @@ De publieke forums kunnen per artikel toegestaan worden
    in je bladerprogramma en ',
 'login_nouvelle_tentative' => 'Nieuwe poging',
 'login_par_ici' => 'Je bent registreerd ... zo ...',
-'login_pass2' => 'Paswoord&nbsp;:',
-'login_preferez_refuser' => '<b>Als je verkiest om koekies te weigeren</b>, is een andere (minder veilige) methode voor verbinding mogelijk &nbsp;:',
+'login_pass2' => 'Paswoord:',
+'login_preferez_refuser' => '<b>Als je verkiest om koekies te weigeren</b>, is een andere (minder veilige) methode voor verbinding mogelijk :',
 'login_recharger' => 'Pagina hernieuwen',
 'login_rester_identifie' => 'Enkele dagen aangemeld blijven',
 'login_retour_public' => 'Terug naar de publieke site',
@@ -1284,7 +1284,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
  zoekmachine van SPIP gebruikt worden. Zo kan je schijfruimte vrijmaken.',
 'texte_comment_lire_tableau' => 'De plaats van het artikel,
  in de rangschikking volgens populariteit, is in de marge
- aangegeven&nbsp;; de populariteit(*) van het artikel en het
+ aangegeven; de populariteit(*) van het artikel en het
  aantal bezoeken sinds het het begin van de site staan in
  het vakje dat verschijnt als je met de muis over de
  titel van het artikel komt.
@@ -1300,7 +1300,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
  activeren ? Hiermee kan je bvb. een uniek trefwoord per
  groep selecteren, aangeven dat een groep trefwoorden
  belangrijk is ...',
-'texte_connexion_mysql' => 'Raadpleeg de gegevens die je van je provider hebt gekregen&nbsp;: je zal er kunnen terugvinden of je provider MySQL ondersteunt, en wat de toegangscodes zijn om verbinding te maken met de MySQL-server.',
+'texte_connexion_mysql' => 'Raadpleeg de gegevens die je van je provider hebt gekregen: je zal er kunnen terugvinden of je provider MySQL ondersteunt, en wat de toegangscodes zijn om verbinding te maken met de MySQL-server.',
 'texte_contenu_article' => '(Inhoud van het artikel in enkele woorden.)',
 'texte_contenu_articles' => 'Naargelang de opmaak van je website kan je beslissen sommige elementen van artikels
  wel of niet te gebruiken.
@@ -1326,7 +1326,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_effacer_base' => 'Verwijder de SPIP databank',
 'texte_effacer_donnees_indexation' => 'Verwijder de ge&iuml;ndexeerde gegevens',
 'texte_en_cours_validation' => 'De artikels en berichten hieronder werden voorgesteld voor publicatie. Aarzel niet om je mening te geven via de forums die er op volgen.',
-'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;&nbsp;typografische snelkoppelingen&nbsp;&raquo;.',
+'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;typografische snelkoppelingen&raquo;.',
 'texte_erreur_mise_niveau_base' => 'Fout met de databank bij het opladen.
  De afbeelding <B>@fichier@</B> is niet goed opgeladen
  (artikel @id_article@).
@@ -1360,7 +1360,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u cre&euml;ren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
-'texte_jeu_caractere' => 'Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse (of &laquo;&nbsp;westerse&nbsp;&raquo;) of zijn afgeleiden, dient weer te geven.
+'texte_jeu_caractere' => 'Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse (of &laquo;westerse&raquo;) of zijn afgeleiden, dient weer te geven.
 In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen. Vergeet ook niet je publieke site hieraan te passen (balise <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Deze instelling heeft geen terugwerkend effect. Teksten
  die reeds werden ingevoerd, zullen mogelijk foutief
@@ -1369,7 +1369,7 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
  terugkeren naar de vorige instelling.',
 'texte_lien_hypertexte' => '(Als je artikel handelt over iets dat op het web is gepubliceerd, of naar een internetpagina verwijst met meer informatie, gelieve dan hier de titel en de URL van deze pagina op te geven.)',
 'texte_liens_sites_syndiques' => 'Koppelingen komende van gesyndiceerde sites kunnen op voorhand
-   geblokkeerd worden&nbsp;; de instelling
+   geblokkeerd worden; de instelling
    hieronder zegt wat de standaardinstelling is
    voor gesyndiceerde sites als ze aangemaakt worden.
    Het is vervolgens perfect mogelijk om elke koppeling
@@ -1377,21 +1377,21 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
    te kiezen of je koppelingen wil blokkeren of niet.',
 'texte_liens_syndication' => 'De volgende koppelingen komende
  van deze site zullen meteen op de publieke site getoond worden.',
-'texte_login_ldap_1' => '(Leeg laten voor een anonieme login, of een volledig pad invullen, bijvoorbeeld &laquo;&nbsp;<tt>uid=janssen, ou=users, dc=mijn-domein, dc=com</tt>&nbsp;&raquo;.)',
-'texte_login_precaution' => 'Opgelet&nbsp;! Met deze login ben je momenteel aangemeld.
+'texte_login_ldap_1' => '(Leeg laten voor een anonieme login, of een volledig pad invullen, bijvoorbeeld &laquo;<tt>uid=janssen, ou=users, dc=mijn-domein, dc=com</tt>&raquo;.)',
+'texte_login_precaution' => 'Opgelet! Met deze login ben je momenteel aangemeld.
  Gebruik dit formulier met de nodige voorzichtigheid...',
-'texte_message_edit' => 'Opgelet&nbsp;: dit bericht kan door elke beheerder van de site gewijzigd worden en is zichtbaar voor elke redacteur. Maak enkel gebruik van deze aankondigingen om belangrijk nieuws in verband met de site kenbaar te maken.',
+'texte_message_edit' => 'Opgelet: dit bericht kan door elke beheerder van de site gewijzigd worden en is zichtbaar voor elke redacteur. Maak enkel gebruik van deze aankondigingen om belangrijk nieuws in verband met de site kenbaar te maken.',
 'texte_messages_publics' => 'Publieke berichten van dit artikel :',
 'texte_mise_a_niveau_base_1' => 'Je hebt zonet de SPIP bestanden vernieuwd. Nu dien je
  eveneens de databank te updaten.',
 'texte_modifier_article' => 'Wijzigen artikel:',
-'texte_moteur_recherche_active' => '<b>De zoekmotor is geactiveerd.</b> Voer deze taak uit als je een snelle herindexatie wil doorvoeren (na het terugzetten van een reservekopie bijvoorbeeld). Documenten die via de normale weg worden gewijzigd (vanaf de SPIP interface) worden automatisch geherindexeerd&nbsp;: deze taak is dus enkel nuttig in uitzonderlijke omstandigheden.',
+'texte_moteur_recherche_active' => '<b>De zoekmotor is geactiveerd.</b> Voer deze taak uit als je een snelle herindexatie wil doorvoeren (na het terugzetten van een reservekopie bijvoorbeeld). Documenten die via de normale weg worden gewijzigd (vanaf de SPIP interface) worden automatisch geherindexeerd: deze taak is dus enkel nuttig in uitzonderlijke omstandigheden.',
 'texte_moteur_recherche_non_active' => 'De zoekmachine is niet geactiveerd.',
 'texte_mots_cles' => 'Met behulp van trefwoorden kan je thematische verbanden leggen tussen je artikels,
  onafhankelijk van hun plaats in de rubrieken. Zo kan je
  de navigatie op je site verbeteren maar ook de weergave
  van artikels aanpassen aan de inhoud.',
-'texte_mots_cles_dans_forum' => 'Wens je het gebruik van trefwoorden, te selecteren door de bezoekers, toe te laten op de forums van de publieke site&nbsp;? (Opgelet&nbsp;: deze optie is redelijk ingewikkeld om juist te gebruiken.)',
+'texte_mots_cles_dans_forum' => 'Wens je het gebruik van trefwoorden, te selecteren door de bezoekers, toe te laten op de forums van de publieke site? (Opgelet: deze optie is redelijk ingewikkeld om juist te gebruiken.)',
 'texte_multilinguisme' => 'Als je graag artikels in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij de artikels en/of de rubrieken, i.f.v de organisatie van je site.',
 'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.',
 'texte_non_compresse' => '<i>niet gecomprimeerd</i> (de server ondersteunt deze functionaliteit niet)',
@@ -1399,7 +1399,7 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_nouveau_message' => 'Nieuw bericht',
 'texte_nouveau_mot' => 'Nieuw slautenwoord',
 'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP ge&iuml;nstalleerd.',
-'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.&nbsp;: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
+'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',
@@ -1414,7 +1414,7 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
  Meestal kan je dit vak echter leeg laten.',
 'texte_publication_articles_post_dates' => 'Hoe dient SPIP zich op te stellen ten opzichte van artikels waarvan de
   publicatiedatum is vastgelegd op een
-  toekomstige datum&nbsp;?',
+  toekomstige datum?',
 'texte_rappel_selection_champs' => '[Vergeet niet de juiste keuze te maken voor dit veld.]',
 'texte_recalcul_page' => 'Als je enkel
  &eacute;&eacute;n pagina wil vernieuwen, doe dit dan op de publieke site en gebruik de knop  &laquo; vernieuwen &raquo;.',
@@ -1436,15 +1436,15 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_restaurer_sauvegarde' => 'Deze optie laat je toe een eerder genomen reservekopie van de databank
  terug te plaatsen. Hiertoe dien je het bestand met de reservekopie
  te plaatsen in de map <i>ecrire/data/</i>.
- Wees voorzichtig als je dit doet&nbsp;: <b>alle wijzigingen, eventuele verliezen, zijn
+ Wees voorzichtig als je dit doet: <b>alle wijzigingen, eventuele verliezen, zijn
   definitief.</b>',
 'texte_sauvegarde' => 'Een reservekopie maken van de inhoud van de databank',
 'texte_sauvegarde_base' => 'Reservekopie maken van de databank',
 'texte_sauvegarde_compressee' => 'De reservekopie zal gemaakt worden in het niet-gecomprimeerde bestand <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => 'Hieronder kan je de &laquo;&nbsp;basistaal&nbsp;&raquo; van de site kiezen. Deze keuze verplicht je - gelukkig&nbsp;! - niet om artikels in deze taal te schrijven maar laat wel toe om het volgende te bepalen&nbsp;:
- <ul><li> het standaardformaat van de data op de publieke site&nbsp;;</li>
- <li> de aard van de typografische motor die SPIP dient te gebruiken om teksten te tonen&nbsp;;</li>
- <li> de taal die gebruikt moet worden op de formulieren van de publieke site&nbsp;;</li>
+'texte_selection_langue_principale' => 'Hieronder kan je de &laquo;basistaal&raquo; van de site kiezen. Deze keuze verplicht je - gelukkig! - niet om artikels in deze taal te schrijven maar laat wel toe om het volgende te bepalen:
+ <ul><li> het standaardformaat van de data op de publieke site;</li>
+ <li> de aard van de typografische motor die SPIP dient te gebruiken om teksten te tonen;</li>
+ <li> de taal die gebruikt moet worden op de formulieren van de publieke site;</li>
  <li> de taal die standaard wordt voorgesteld in het private gedeelte.</li></ul>',
 'texte_signification' => 'De rode balkjes stellen alle samengetelde bezoeken weer (totaal van alle subrubrieken), de groene balkjes het aantal bezoeken voor elke rubriek.',
 'texte_sous_titre' => 'Ondertitel',
@@ -1465,7 +1465,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
  nieuws, als de website het toelaat, binnen te halen.
  Hiervoor dien je de syndicatie (nieuwsovername) te
  activeren. <blockquote><i>Sommige hostingproviders laten
- dit niet toe&nbsp;; in dat geval kan je geen nieuwsovername
+ dit niet toe; in dat geval kan je geen nieuwsovername
  vanaf je site laten gebeuren.</i></blockquote>',
 'texte_table_ok' => ': deze tabel is OK.',
 'texte_tables_indexation_vides' => 'De indices van de zoekmachine zijn leeggemaakt.',
@@ -1477,7 +1477,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'texte_travail_article' => '@nom_auteur_modif@ heeft @date_diff@ minuten geleden aan dit artikel gewerkt',
 'texte_travail_collaboratif' => 'Als het vaak gebeurt dat meerdere redacteurs
  aan een en hetzelfde artikel werken, kan het systeem
- wel tonen welke artikels er recent &laquo;&nbsp;geopend&nbsp;&raquo; werden
+ wel tonen welke artikels er recent &laquo;geopend&raquo; werden
  om te vermijden op hetzelfde moment simultaan
  wijzigingen worden aangebracht.
  Deze optie is standaard wel niet geactiveerd om te
@@ -1527,7 +1527,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_forum' => 'Intern forum',
 'titre_forum_suivi' => 'Vervolg van de forums',
 'titre_gauche_mots_edit' => 'WOORD NUMMER:',
-'titre_groupe_mots' => 'WOORDENGROEP&nbsp;:',
+'titre_groupe_mots' => 'WOORDENGROEP:',
 'titre_image_admin_article' => 'Je kan dit artikel beheren',
 'titre_image_administrateur' => 'Beheerder',
 'titre_image_aide' => 'Help over dit onderwerp',
@@ -1548,7 +1548,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_nouveau_groupe' => 'Nieuwe groep',
 'titre_nouvelle_breve' => 'Nieuw bericht',
 'titre_nouvelle_rubrique' => 'Nieuwe rubriek',
-'titre_numero_rubrique' => 'RUBRIEKNUMMER&nbsp;:',
+'titre_numero_rubrique' => 'RUBRIEKNUMMER:',
 'titre_page_admin_effacer' => 'Technische onderhoud : de databank wissen',
 'titre_page_admin_vider' => 'Technisch onderhoud : beheer van de cache',
 'titre_page_articles_edit' => 'Wijzigen : @titre@',
@@ -1577,14 +1577,14 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_statistiques_referers' => 'Statistieken (per referer)',
 'titre_page_statistiques_visites' => 'Statistieken van de bezoeken',
 'titre_page_upgrade' => 'Bijwerken van SPIP',
-'titre_probleme_technique' => 'Opgelet&nbsp;: een technisch probleem (MySQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
+'titre_probleme_technique' => 'Opgelet: een technisch probleem (MySQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
 'titre_publication_articles_post_dates' => 'Publicatie van postgedateerde artikels',
 'titre_publier_document' => 'EEN DOCUMENT PUBLICEREN IN DEZE RUBRIEK',
 'titre_referencement_sites' => 'Koppelen van sites en syndicatie',
 'titre_referencer_site' => 'Deze site koppelen :',
 'titre_rendez_vous' => 'AFSPRAKEN :',
 'titre_reparation' => 'Herstel',
-'titre_site_numero' => 'WEBSITE NUMMER&nbsp;:',
+'titre_site_numero' => 'WEBSITE NUMMER:',
 'titre_sites_proposes' => 'Voorgestelde sites',
 'titre_sites_references_rubrique' => 'Gekoppelde sites in deze rubriek',
 'titre_sites_syndiques' => 'Gesyndiceerde sites',
@@ -1594,10 +1594,10 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_syndication' => 'Syndicatie van websites',
 'titre_titre_document' => 'Titel van het document:',
 'trad_article_inexistant' => 'Er is geen artikel met dit nummer.',
-'trad_article_traduction' => 'Alle versies van dit artikel&nbsp;:',
+'trad_article_traduction' => 'Alle versies van dit artikel:',
 'trad_deja_traduit' => 'Dit artikel is reeds een vertaling van het aanwezige artikel.',
 'trad_delier' => 'Dit artikel niet meer koppelen aan zijn vertalingen',
-'trad_lier' => 'Dit artikel is een vertaling van artikelnummer&nbsp;:',
+'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel',
 'trad_reference' => '(referentie-artikel)'
 
