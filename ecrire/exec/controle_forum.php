@@ -34,7 +34,7 @@ function forum_parent($id_forum) {
 	  $statut = $row['statut'];
 	  if ($forum_stat == "prive" OR $forum_stat == "privoff") {
 	    return array('pref' => _T('item_reponse_article'),
-			 'url' => generer_url_ecrire("articles","id_article=$id_article"),
+			 'url' => generer_url_ecrire("articles#poster_forum_prive-$id_forum","id_article=$id_article"),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre);
@@ -170,7 +170,7 @@ function controle_forum_boucle($row, $args) {
 	if ($forum_notes = safehtml(calculer_notes()))
 		$suite .= "<div class='notes controle'>".justifier(safehtml($forum_notes))."</div>";
 
-	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
+	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) >= 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
 	return 	"\n<div><br /><a id='forum$id_forum'></a></div>" .
@@ -210,12 +210,16 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 	} else {
 
 	if (!preg_match('/^\w+$/', $type)) $type = 'public';
-	$formulaire_recherche = formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
-
 	list($from,$where) = critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
+	exec_controle_forum_args2($id_rubrique, $type, $debut, $pas, $enplus, $recherche, $from, $where, intval(_request('debut_id_forum')));
+	}
+}
+
+function exec_controle_forum_args2($id_rubrique, $type, $debut, $pas, $enplus, $recherche, $from, $where, $debut_id_forum)
+{
 	// Si un id_controle_forum est demande, on adapte le debut
-	if ($debut_id_forum = intval(_request('debut_id_forum'))
+	if ($debut_id_forum
 	AND (NULL !== ($d = sql_getfetsel('date_heure', 'spip_forum', "id_forum=$debut_id_forum")))) {
 	  $debut = sql_countsel($from, $where . (" AND F.date_heure > '$d'"));
 	}
@@ -244,11 +248,7 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 	if (_AJAX) {
 		ajax_retour($res);
 	} else {
-		$ancre = 'controle_forum';
-		$res = "<div id='$ancre' class='serif2'>$res</div>";
-
 		pipeline('exec_init',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
-
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
@@ -285,14 +285,13 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
-			
 		echo debut_droite('', true);
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
-		echo $formulaire_recherche . "<div class='nettoyeur'></div>";
-		echo $res; 
+		echo formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
+		echo "<div class='nettoyeur'></div>";
+		echo "<div id='controle_forum' class='serif2'>", $res, "</div>";
 		echo fin_gauche(), fin_page();
-	}
 	}
 }
 ?>
