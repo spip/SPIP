@@ -470,7 +470,7 @@ function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='') {
 	foreach ($champs as $champ => $val)
 		$r .= ',' . $champ . "=$val";
 	if ($r = substr($r, 1))
-		spip_mysql_query("UPDATE $table SET $r" . ($where ? " WHERE $where" : ''), $serveur);
+		return spip_mysql_query("UPDATE $table SET $r" . ($where ? " WHERE $where" : ''), $serveur);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
@@ -487,12 +487,12 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 		$r .= ',' . $champ . '=' . spip_mysql_cite($val, $fields[$champ]);
 	}
 	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
-	spip_mysql_query($r, $serveur);
+	return spip_mysql_query($r, $serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_delete
 function spip_mysql_delete($table, $where='', $serveur='') {
-	spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
+	return spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_replace

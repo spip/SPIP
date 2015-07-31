@@ -509,7 +509,7 @@ function spip_pg_delete($table, $where='', $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''), $serveur);
+	return spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''), $serveur);
 }
 
 // http://doc.spip.org/@spip_pg_insert
@@ -572,7 +572,7 @@ function spip_pg_update($table, $champs, $where='', $desc='', $serveur='') {
 		$r .= ',' . $champ . '=' . $val; 
 	}
 
-	spip_pg_trace_query("UPDATE $table SET " . substr($r,1) . $where);
+	return spip_pg_trace_query("UPDATE $table SET " . substr($r,1) . $where);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
