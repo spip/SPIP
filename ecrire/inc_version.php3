@@ -160,6 +160,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 $auteur_session = '';
 $connect_statut = '';
 $dir_ecrire = '';
+$hash_recherche = '';
 
 // - le dossier des squelettes, a preciser dans mes_fonctions.php3, sous
 //   la forme : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
