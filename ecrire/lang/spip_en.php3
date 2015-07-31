@@ -697,8 +697,7 @@ requiring an FTP access to the Web site.',
 'info_multi_cette_rubrique' => '<MODIF> This section is in:',
 'info_multi_herit' => '<MODIF> parent\'s language',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.
-		Attention&nbsp;: seules les langues affich&eacute;es en gras sont int&eacute;gralement g&eacute;r&eacute;es par le syst&egrave;me de publication.',
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => 'Enable the language menu for the sections?',
 'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => 'Multilingual',
@@ -1266,10 +1265,10 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 the content of the database in a file stored in the directory <i>ecrire/data/</i>.
 Also remember to retrieve the whole <i>IMG/</i>, directory, which contains
 the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => '<MODIF> Warning: this backup can ONLY be restored
-	in a site installed under the same version of SPIP. It is a common mistake
-	to backup the database before upgrading
-	SPIP... For more information refer to <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
+'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
+ in a site installed under the same version of SPIP. It is a common mistake
+ to backup the database before upgrading
+ SPIP... For more information refer to <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_adresse_annuaire_1' => '( If your directory is installed on the same machine as your Web site, it is probably &laquo;localhost&raquo;.)',
@@ -1542,7 +1541,7 @@ entered important modifications on the graphics or the structure of the site.',
 'titre_image_redacteur_02' => 'Editor',
 'titre_image_visiteur' => 'Visitor',
 'titre_joindre_document' => 'ATTACH A DOCUMENT',
-'titre_langue_article' => '<NEW> LANGUAGE OF THE ARTICLE',
+'titre_langue_article' => '<NEW> LANGUE DE L\'ARTICLE',
 'titre_langue_breve' => '<NEW> LANGUE DE LA BR&Egrave;VE',
 'titre_langue_trad_article' => '<NEW> LANGUE ET TRADUCTIONS DE L\'ARTICLE',
 'titre_les_articles' => 'ARTICLES',

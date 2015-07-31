@@ -654,7 +654,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_multi_cet_article' => '<MODIF> Este art&iacute;culo est&aacute; en:',
 'info_multi_cette_rubrique' => '<MODIF> Esta secci&oacute;n est&aacute; en:',
 'info_multi_herit' => '<MODIF> idioma heredado',
-'info_multi_langues_choisies' => 'A continuaci&oacute;n selecciona los idiomas que quieres poner a disposici&oacute;n de los redactores de tu sitio.
+'info_multi_langues_choisies' => '<MODIF> A continuaci&oacute;n selecciona los idiomas que quieres poner a disposici&oacute;n de los redactores de tu sitio.
 Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden ser desactivados.
  OjO: el sistema de publicaci&oacute;n s&oacute;lo maneja integralmente los idiomas {{en negrita}}.',
 'info_multi_rubriques' => '&iquest;Activar el men&uacute; de idioma en las secciones?',

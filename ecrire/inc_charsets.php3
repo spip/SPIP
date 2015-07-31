@@ -527,6 +527,14 @@ function unicode_to_javascript($texte) {
 	return $texte;
 }
 
+// convertit les %uxxxx (envoyes par javascript) en unicode
+function javascript_to_unicode($texte) {
+	while (ereg("%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F])", $texte, $regs))
+		$texte = str_replace($regs[0],"&#x".$regs[1].";", $texte);
+	return $texte;
+}
+
+
 //
 // Translitteration charset => ascii (pour l'indexation)
 // Attention les caracteres non reconnus sont renvoyes en utf-8

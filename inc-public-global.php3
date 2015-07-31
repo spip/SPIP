@@ -79,6 +79,14 @@ if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
 
 
 //
+// Rendre privee la partie publique, si le meta (site_prive) est actif
+//
+if ((lire_meta('site_prive')=='oui')&&(!$auteur_session)&&($fond!="login")) {
+	@Header("Location: ./spip_login.php3?var_url=".rawurlencode($clean_link->getUrl()));
+	exit;
+}
+
+//
 // Ajouter un forum
 //
 

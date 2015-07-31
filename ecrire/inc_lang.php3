@@ -82,21 +82,15 @@ function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
  	if ($lang && ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
-		if ($lang == 'ar' OR $lang == 'fa' OR $lang == 'he')	// arabic, farsi, hebreu (cf. inc_filtres pour lang_rtl)
-			$spip_lang_rtl = '_rtl';
-		else
-			$spip_lang_rtl = '';
 
-		if ($spip_lang_rtl) {
-			$spip_lang_left = 'right';
-			$spip_lang_right = 'left';
-		} else {
-			$spip_lang_left = 'left';
-			$spip_lang_right = 'right';
-		}
+		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
+		$spip_lang_left =  lang_dir($lang, 'left', 'right');
+		$spip_lang_right = lang_dir($lang, 'right', 'left');
+
 		return true;
 	}
-	return false;
+	else
+		return false;
 }
 
 //
@@ -306,6 +300,44 @@ function traduire_nom_langue($lang) {
 	return $r;
 }
 
+
+//
+// Filtres de langue
+//
+
+// afficher 'gaucher' si la langue est arabe, hebreu, persan, 'droitier' sinon
+// utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT
+// ou encore par [(#LANG|lang_dir{"x","y"})]
+function lang_dir($lang, $droitier='', $gaucher='') {
+	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he')
+		return $gaucher;
+	else
+		return $droitier;
+}
+
+
+// selectionner une langue
+function lang_select ($lang='') {
+	global $pile_langues, $spip_lang;
+	php3_array_push($pile_langues, $spip_lang);
+	changer_langue($lang);
+}
+
+// revenir a la langue precedente
+function lang_dselect ($rien='') {
+	global $pile_langues;
+	changer_langue(php3_array_pop($pile_langues));
+}
+
+
+// traduire un machin : [(#LANG|traduire{"module:code"}|sinon{"texte non traduit"})]
+function traduire($lang, $code) {
+	lang_select($lang);
+	$texte = _T($code);
+	lang_dselect();
+	return $texte;
+}
+
 //
 // Afficher un menu de selection de langue
 //
@@ -417,5 +449,53 @@ function init_langues() {
 
 init_langues();
 utiliser_langue_site();
+
+
+//
+// array_push et array_pop pour php3 (a virer si on n'a pas besoin de la compatibilite php3
+// et a passer dans inc_version si on a besoin de ces fonctions ailleurs qu'ici)
+//
+/*
+ * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir 
+ * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de 
+ * COMMERCIALISATION ou d'UTILITE POUR UN BUT QUELCONQUE.
+ * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des 
+ * auteurs respectifs de chaque fonctions sont laisses ensembles. 
+ * En aucun cas, Nexen.net ne pourra etre tenu responsable de quelques consequences que ce soit
+ * de l'utilisation ou la mesutilisation de ces fonctions PHP.
+ */
+/****
+ * Titre : array_push() et array_pop() pour PHP3 
+ * Auteur : Cedric Fronteau 
+ * Email : charlie@nexen.net
+ * Url : 
+ * Description : Implementation de array_push() et array_pop pour PHP3
+****/
+function php3_array_push(&$stack,$value){
+	if (!is_array($stack))
+		return FALSE;
+	end($stack);
+	do {
+		$k = key($stack);
+		if (is_long($k));
+			break;
+	} while(prev($stack));
+
+	if (is_long($k))
+		$stack[$k+1] = $value;
+	else
+		$stack[0] = $value;
+	return count($stack);
+}
+
+function php3_array_pop(&$stack){
+	if (!is_array($stack) || count($stack) == 0)
+		return NULL;
+	end($stack);
+	$v = current($stack);
+	$k = key($stack);
+	unset($stack[$k]);
+	return $v;
+}
 
 ?>

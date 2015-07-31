@@ -21,6 +21,7 @@ function bouton_admin($titre, $lien) {
 function afficher_boutons_admin() {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_lang.php3");
 
 	// regler les boutons dans la langue de l'admin (sinon tant pis)
 	if ($login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']))) {
