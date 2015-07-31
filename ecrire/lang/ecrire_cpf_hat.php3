@@ -8,32 +8,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'aide_non_disponible' => 'Pati-a &egrave;d la se pa disponib ank&ograve; andan lanng la.',
 'avis_acces_interdit' => 'Ent&egrave;diksyon riv isit .',
-'avis_article_modifie' => 'Atansyon, @nom_auteur_modif@ te travaye sou atik la  @date_diff@ minit pase',
+'avis_article_modifie' => 'Atansyon, @nom_auteur_modif@ te travaye sou atik-la  @date_diff@ minit pase',
 'avis_aucun_resultat' => 'Okenn rezilta.',
-'avis_chemin_invalide_1' => 'Chemen ou te chwazi prann',
-'avis_chemin_invalide_2' => 'li samn pa bon. M&egrave;si tounyen paj d&egrave;y&egrave;  pou verifye tout enfomasyon ki ou te done.',
+'avis_chemin_invalide_1' => 'Chemen w te chwazi prann',
+'avis_chemin_invalide_2' => 'li samn pa bon. M&egrave;si tounyen paj d&egrave;y&egrave;  pou verifye tout enfomasyon ki w te done.',
 'avis_connexion_echec_1' => 'Koneksyon sou s&eacute;v&egrave; MySQL te pa mache.',
-'avis_connexion_echec_2' => 'Tounyen d&egrave;y&egrave; sou paj avan, e gad byen tout enf&ograve;masyon ou te bay isit-la m&egrave;m.',
-'avis_connexion_echec_3' => '<b>Atansyon</b> Ak enp&egrave; s&eacute;v&egrave; sa-yo f&ograve;k  ou <b>domann</b> ou l&eacute;b&egrave;rg&egrave; te aktive laks&eacute; labaz MySQL, avan ou kap itilize ali. Si ou vwa se pa posib m&egrave;m konek a w, ann gad byen si ou te domann ali avan.',
+'avis_connexion_echec_2' => 'Tounyen d&egrave;y&egrave; sou paj avan, e gad byen tout enf&ograve;masyon w te bay isit-la m&egrave;m.',
+'avis_connexion_echec_3' => '<b>Atansyon</b> Ak enp&egrave; s&eacute;v&egrave; sa-yo f&ograve;k  w <b>domann</b> ou l&eacute;b&egrave;rg&egrave; te aktive laks&eacute; labaz MySQL, avan w kap itilize ali. Si w vwa se pa posib m&egrave;m konek a w, ann gad byen si w te domann ali avan.',
 'avis_connexion_ldap_echec_1' => 'Koneksyon sou serv&egrave; LDAP te pa mache.',
-'avis_connexion_ldap_echec_2' => 'Tounyen d&egrave;y&egrave; paj avan pou ou byen gade ank&ograve; enf&ograve; masyon yo w te don&eacute;.',
+'avis_connexion_ldap_echec_2' => 'Tounyen d&egrave;y&egrave; paj avan pou ou byen gade ank&ograve; enf&ograve;masyon yo w te don&eacute;.',
 'avis_connexion_ldap_echec_3' => 'Ann itilize pa sip&ograve; LDAP pou gen enp&ograve;t itilizat&egrave; yo.',
-'avis_conseil_selection_mot_cle' => '<b>Gwoup la se enp&ograve;tan&nbsp;:</b> nou kons&egrave;y w chwazi yon mokle andan gwoup la.',
+'avis_conseil_selection_mot_cle' => '<b>Gwoup-la se enp&ograve;tan&nbsp;:</b> nou kons&egrave;y w chwazi yon mokle andan gwoup-la.',
 'avis_deplacement_rubrique' => 'Atansyon&nbsp;! Ribwik la @contient_breves@ br&egrave;ve@scb@&nbsp;: si w d&eacute;plas ali, m&eacute;si ekri yon krwa po konfirmasyon.',
 'avis_destinataire_obligatoire' => 'F&ograve;k w enskri yon destinat&egrave; avan voye mesaj la.',
 'avis_erreur_connexion_mysql' => 'Er&egrave; ak koneksyon MySQL',
 'avis_erreur_version_archive' => '<b>Atansyon! Fichye @archive@ ka koresponn
  l&ograve;t v&egrave;syon SPIP 
-.</b> Ou ke genyen gwo pwobl&egrave;m sa-yo m&egrave;m
- : ou bazdone ke pet&egrave;t kraze, ouswa sit ou-a ke pa mache. Ann
- pa konfime domann lenp&ograve;tasyon-nan    .<p />Ou ke trouve k&egrave;k enf&ograve;masyon sou paj 
+.</b> W ke genyen gwo pwobl&egrave;m sa-yo m&egrave;m
+ : bazdone ke pet&egrave;t kraze, ouswa sit w ke pa mache. Ann
+ pa konfime domann lenp&ograve;tasyon-nan    .<p />W ke trouve k&egrave;k enf&ograve;masyon sou paj 
  <a href=\'http://www.spip.net/fr_article1489.html\'>
                                  dokimantasyon SPIP la</a>.',
 'avis_espace_interdit' => '<b>Espas ent&egrave;di</b><p />SPIP se d&eacute;ja instal&eacute;.',
 'avis_lecture_noms_bases_1' => 'Pwogwam pou enstalasyon, li te pa kap f&egrave; lekti kouman ki rele bazdone yo, yo ki deja enstale.',
-'avis_lecture_noms_bases_2' => 'Ouswa okenn bazdone se disponib, oswa fonksyon-nan ki p&egrave;m&egrave; f&eacute; la lis tout bazdone te kraze ak&ograve;z sekirite
-  (genyen anpil leberg&egrave; te chwazi ka-a).',
-'avis_lecture_noms_bases_3' => 'Nan dezy&egrave;m ka, gen pet&egrave;t posib gen itilize yon l&ograve;t baz ki rele deja nonkod ou-a&nbsp;:',
+'avis_lecture_noms_bases_2' => 'Ouswa okenn bazdone se disponib, oswa fonksyon-nan ki p&egrave;m&egrave; f&eacute; lan lis tout bazdone te kraze ak&ograve;z sekirite
+  (genyen anpil leberg&egrave; te chwazi ki se ka-a).',
+'avis_lecture_noms_bases_3' => 'Nan dezy&egrave;m ka, gen pet&egrave;t posib itilize yon l&ograve;t baz ki rele deja nonkod w sa-a&nbsp;:',
 'avis_non_acces_message' => 'Aks&eacute; ent&egrave;di sou mesaj la.',
 'avis_non_acces_page' => 'Ou gen pa aks&eacute; sou paj la.',
 'avis_operation_echec' => 'Operasyon la te pa mache.',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_site_syndique_probleme' => 'Atansyon : sendikasyon pou sit sa-a gen yon pwobl&egrave;m&nbsp;; sist&egrave;m pa mache kounyen-a. Gad si ladr&egrave;s fichye sendikasyon sit-la se kor&egrave;k (<b>@url_syndic@</b>), apr&egrave;sa ann esey yon l&ograve;t rekip&eacute;rasyon enf&ograve;masyon sa-yo. ',
 'avis_sites_probleme_syndication' => 'Sit yo se sit sak gen yon pwobl&egrave;m sendikasyon',
 'avis_sites_syndiques_probleme' => 'Sit yon se sit sak t&eacute; bay yon pwobl&egrave;m',
-'avis_suppression_base' => 'ATANSYON,  sipresyon tout done an se pa kav tounen dey&eacute;',
+'avis_suppression_base' => 'ATANSYON,  sipwesyon tout done-an se pa kav tounen dey&eacute;',
 'avis_version_mysql' => 'Ou versyon MySQL (@version_mysql@) i gen pa p&eacute;mi ranje tous&egrave;l tab yo andan la bazdon&eacute;.',
 
 
@@ -93,7 +93,7 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
  afiche tout laang L&eacute;w&egrave;p de lou&egrave;s (ang&eacute;, frans&eacute;, alman...)&nbsp;;
   Nenp&ograve;t SPIP ka p&egrave;m&egrave; afiche byen &egrave;k debouye ak plisy&egrave; k&egrave;k l&ograve;t lanng.',
 'bouton_radio_pas_petition' => 'Okenn petisyon',
-'bouton_radio_personnalise' => 'Ansamn kawakt&egrave;-lenprimri pesonalize&nbsp;: ann chwazi opsyon-nan si ou vle itilize yon ansamn kawakt&egrave; espesyal',
+'bouton_radio_personnalise' => 'Ansamn kawakt&egrave;-lenprimri p&egrave;sonalize&nbsp;: ann chwazi opsyon-nan si wvle itilize yon ansamn kawakt&egrave; espesyal',
 'bouton_radio_petition_activee' => 'Petisyon ka mache',
 'bouton_radio_publication_immediate' => 'Piblikasyon imedyat pout tout mesaj
  (patisipasyon ke afiche dir&egrave;kman yo te voye, komand&egrave; r&egrave;s kapab kraze y apr&egrave;
@@ -118,7 +118,7 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
 'cache_mode_compresse' => 'Fichye yo  kach se konprese.',
 'cache_mode_non_compresse' => 'Fichye yo kach se pa konprese.',
 'cache_modifiable_webmestre' => 'Webm&egrave;t sit-la s&egrave;lman li kap chanje param&egrave;t sa-a.',
-'calendrier_synchro' => 'Si ou itilize yon logisy&egrave;l pou en lajenda ki mache ak <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...),ou p&eacute; m&egrave;t ali swiv yon ritm laktyalit&eacute; sit-la li chanje.',
+'calendrier_synchro' => 'Si w itilize yon logisy&egrave;l pou en lajenda ki mache ak <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), w p&eacute; m&egrave;t ali swiv yon ritm laktyalit&eacute; sit-la kan li chanje.',
 
 
 // D
@@ -140,8 +140,8 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
 'entree_adresse_fichier_syndication' => 'Ladr&egrave;s fichye &laquo;&nbsp;backend&nbsp;&raquo; pou la sendikasyon&nbsp;:',
 'entree_adresse_site' => '<b>Ladr&egrave;s sit la</b> [N&eacute;ses&egrave;]',
 'entree_base_donnee_1' => 'Ladr&egrave;s bazdone',
-'entree_base_donnee_2' => '(Souvan ladr&egrave;s-la se par&eacute;y sak ladr&egrave;s sitw&egrave;b ou-a, osnon l&egrave;s senpman &laquo;localhost&raquo;,  oubyen l&egrave;s ali vid.)',
-'entree_biographie' => 'Rann kont ou vi (k&egrave;l mo s&egrave;lman).',
+'entree_base_donnee_2' => '(Souvan ladr&egrave;s-la se par&eacute;y sak ladr&egrave;s sitw&egrave;b w-a, osnon l&egrave;s senpman &laquo;localhost&raquo;,  oubyen l&egrave;s ali vid.)',
+'entree_biographie' => 'Ki se w (k&egrave;k mo s&egrave;lman).',
 'entree_breve_publiee' => 'Eske tinouv&egrave;l-la gen pibliye ?',
 'entree_chemin_acces' => '<B>Rantre</B> chemen pou aks&egrave;&nbsp;:',
 'entree_cle_pgp' => 'Ou kl&eacute; PGP',
@@ -152,19 +152,19 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
 
 
 Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute;zo li dwa donn a w.',
-'entree_infos_perso' => 'Kouman ou rele ?',
+'entree_infos_perso' => 'Kouman w rele ?',
 'entree_interieur_rubrique' => 'Andan ribrik-la&nbsp;:',
 'entree_liens_sites' => '<B>Liyen ip&egrave;t&egrave;ks</B> (referans, sit pou f&egrave; yon vire...)',
 'entree_login' => 'Ou nonkod',
 'entree_login_connexion_1' => 'Nonkod pou koneksyon',
-'entree_login_connexion_2' => '(souvan se ou nondkod pou laks&eacute; FTP m&egrave;m ; m&egrave; posib l&egrave;s vid)',
+'entree_login_connexion_2' => '(souvan se nondkod-w pou laks&eacute; FTP m&egrave;m ; m&egrave; posib l&egrave;s vid)',
 'entree_login_ldap' => 'Premye nonkod LDAP ',
 'entree_mot_passe' => 'Ou modpas',
 'entree_mot_passe_1' => 'Modpas pou koneksyon',
-'entree_mot_passe_2' => '(souvan se ou nondkod pou laks&eacute; FTP m&egrave;m ; m&egrave; posib l&egrave;s vid)',
+'entree_mot_passe_2' => '(souvan se nondkod-w pou laks&eacute; FTP m&egrave;m ; m&egrave; posib l&egrave;s vid)',
 'entree_nom_fichier' => 'M&eacute;si enskri kouman fichye @texte_compresse@ i rele:',
-'entree_nom_pseudo' => 'Kouman ou rele',
-'entree_nom_pseudo_1' => '(Kouman ou rele)',
+'entree_nom_pseudo' => 'Kouman w rele',
+'entree_nom_pseudo_1' => '(Kouman w rele)',
 'entree_nom_site' => 'Kouman sit li rele',
 'entree_nouveau_passe' => 'Nouvo modpas',
 'entree_passe_ldap' => 'Modpas',
@@ -172,17 +172,17 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'entree_signature' => 'Siyati',
 'entree_texte_breve' => 'T&egrave;ks pou tinouv&egrave;l-la',
 'entree_titre_obligatoire' => '<B>Kouman i rele</B> [Neses&egrave;]<BR>',
-'entree_url' => 'Ladr&egrave;s (URL) ou sit',
+'entree_url' => 'Ladr&egrave;s (URL) sit-w',
 
 
 // I
-'ical_info1' => 'Paj-la ka donn a w kouman ou kap gen lyen ak lavi sit-la.',
-'ical_info2' => 'Si ou vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="http://www.spip.net/fr_suivi">tout paj dokimantasyon pou SPIP</a>.',
-'ical_info_calendrier' => 'Ou genyen d&eacute; kalandry&eacute;. Promy&egrave; s&eacute; kart sit-la ki anons&eacute; tout atik pibly&eacute;. L&ograve;t dezy&egrave;m se kalandry&eacute; ka kontni tout anons editoryal yo ak mesaj prive yo ki w te genyen&nbsp;: kalandry&eacute; a se r&eacute;s&egrave;v&egrave; pou ou s&egrave;lman akoz w gen ositou yon kl&eacute; p&egrave;s&ograve;nel. Kl&eacute; ou-a kap chanje nep&ograve;t kan ou vle pa chanje w modpas ou-a.',
+'ical_info1' => 'Paj-la ka donn a w kouman w kap gen lyen ak lavi sit-la.',
+'ical_info2' => 'Si w vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="http://www.spip.net/fr_suivi">tout paj dokimantasyon pou SPIP</a>.',
+'ical_info_calendrier' => 'W genyen d&eacute; kalandry&eacute;. Promy&egrave; s&eacute; kart sit-la ki anons&eacute; tout atik pibly&eacute;. L&ograve;t dezy&egrave;m se kalandry&eacute; ka kontni tout anons editoryal yo ak mesaj prive yo ki w te genyen&nbsp;: kalandry&eacute; a se r&eacute;s&egrave;v&egrave; pou w s&egrave;lman akoz w gen ositou yon kl&eacute; p&egrave;s&ograve;nel. Kl&eacute; ou-a kap chanje nep&ograve;t kan w vle pa chanje modpas w-a.',
 'ical_methode_http' => 'Telechajman',
 'ical_methode_webcal' => 'Sinkwonizasyon (webcal://)',
 'ical_texte_js' => 'Yon liy javaskrip (javascript) ka p&eacute;m&egrave; w f&eacute; par&egrave;t senpman tout atik r&eacute;san nan ki te pibliy&eacute; nan sit la, sou nep&ograve;t sit ki w genyen a w.',
-'ical_texte_prive' => 'Kalandriy&eacute; a, se s&egrave;lman p&egrave;s&ograve;nel, ki enf&ograve;m a w kisa gen laktivit&eacute; editoryal priv&eacute; sou sit la (kisa se ank&ograve; pou f&egrave;, rannkont l&ograve;t patisipan, atik yo ak tinouv&egrave;l ki pwopoz&eacute; pou pibliy&eacute;...).',
+'ical_texte_prive' => 'Kalandriy&eacute; a, se s&egrave;lman p&egrave;s&ograve;nel, ki enf&ograve;m a w kisa se laktivit&eacute; editoryal pwiv&eacute; sou sit-la (kisa se ank&ograve; pou f&egrave;, rannkont l&ograve;t patisipan, kisa se atik yo ak tinouv&egrave;l ki pwopoz&eacute; pou piblikasyon...).',
 'ical_texte_public' => 'Kalandriy&eacute; a ka p&eacute;m&egrave; w swiv laktivit&eacute; piblik sou sit la (atik yo ak tinouv&egrave;l ositou ki pibliy&eacute;).',
 'ical_texte_rss' => 'Ou kap sendik&eacute; tout nouv&egrave;lt&egrave; sou sit la nan nep&ograve;t kisa l&egrave;kt&egrave; fichy&eacute; a ki mache sou f&ograve;ma XML/RSS (Rich Site Summary). F&ograve;ma  se f&ograve;ma ka p&eacute;m&egrave; SPIP f&egrave; lekti tout nouv&egrave;lt&eacute; ki pibliy&eacute; sou l&ograve;t sit yo ka itilize yon f&ograve;ma echanj posib (konpatib konsa sit sendik&eacute; yo).',
 'ical_titre_js' => 'Javascript',
@@ -232,8 +232,8 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_admin_gere_toutes_rubriques' => 'Komand&egrave;-a kapab g&egrave;re <b>tout ribrik yo</b>.',
 'info_administrateur' => 'Komand&egrave;',
 'info_administrateur_1' => 'Komand&egrave;',
-'info_administrateur_2' => 'sit (<i>atansyon kan ou ke itilize ali</i>)',
-'info_administrateur_site_01' => 'Si ou komand&egrave; sit-la, m&egrave;si',
+'info_administrateur_2' => 'sit (<i>atansyon kan w ke itilize ali</i>)',
+'info_administrateur_site_01' => 'Si w se komand&egrave; sit-la, m&egrave;si',
 'info_administrateur_site_02' => 'klik lyen nan',
 'info_administrateurs' => 'Komand&egrave; yo',
 'info_administrer_rubrique' => 'Ou kapab g&egrave;re ribrik-la',
@@ -243,8 +243,8 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_afficher_visites' => 'F&egrave; par&egrave;t vizit yo pou&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'F&egrave; par&egrave; vizit yo <b>tout atik plis vizite depi koumansman &nbsp;:</b>',
 'info_aide_en_ligne' => 'ED an liy SPIP',
-'info_ajout_image' => 'Kan ou vl&eacute; ajoute k&egrave;k imaj tankou k&egrave;k dokiman jwenn sou yon atik,
- Spip kap kreye k&egrave;k viny&egrave;t ak imaj yo ou te m&egrave;t sou sit la(k&egrave;k piti imaj)otomatikman.Konsa gen posib
+'info_ajout_image' => 'Kan w vl&eacute; ajoute k&egrave;k imaj tankou k&egrave;k dokiman jwenn sou yon atik,
+ Spip kap kreye k&egrave;k viny&egrave;t ak imaj yo w te m&egrave;t sou sit la(k&egrave;k piti imaj)otomatikman.Konsa gen posib
  kreye yon galri ou yon p&ograve;tfolyo otomatik.
   .',
 'info_ajout_participant' => 'Patisipan swivan te fin ajoute&nbsp;:',
@@ -269,10 +269,10 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_auteurs_trouves' => 'Lot&egrave; yo ki te fin rannkont',
 'info_authentification_externe' => 'Lotantifikasyon d&eacute;&ograve;',
 'info_avertissement' => 'Mesaj pou atansyon',
-'info_base_installee' => 'Strikti ou bazdone se enstale.',
+'info_base_installee' => 'Strikti bazdone se enstale.',
 'info_base_restauration' => 'Labaz ap restore',
 'info_bloquer' => 'blok&eacute;',
-'info_breves' => 'Eske ou sit ap itlize sit&egrave;m tinouv&egrave;l yo?',
+'info_breves' => 'Eske w sit ap itlize sist&egrave;m tinouv&egrave;l yo?',
 'info_breves_03' => 'tinouv&egrave;l yo',
 'info_breves_liees_mot' => 'Tinouv&egrave;l yo ki jwenn ak mokle-a',
 'info_breves_touvees' => 'Tinouv&egrave;l yo ki te fin rannkont',
@@ -286,11 +286,11 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_choix_base' => 'Trwazi&egrave;m etap&nbsp;:',
 'info_classement_1' => '<sup>ye</sup> sou @liste@',
 'info_classement_2' => '<sup>em</sup> sou @liste@',
-'info_code_acces' => 'Oubliy pa kod laks&egrave; ou-a, pou w m&egrave;m&nbsp;!',
+'info_code_acces' => 'Oubliy pa kod laks&egrave; w-a, pou w m&egrave;m&nbsp;!',
 'info_comment_lire_tableau' => 'Kouman f&egrave; lekti tablo-a',
-'info_config_suivi' => 'Si ladr&egrave;s-la ap koresponn yon lis-lim&egrave;l, ou kap enskri isit anba lad&egrave;s tout patisapan sou sit-la yon ke kap enskri a y. Ladr&egrave;s-la p&eacute;t&egrave;t se yon URL (pa egsanp lapaj lenskrisyon sou lalis-lim&egrave;l pa Web-la), osnon yon ladr&egrave;s lim&egrave;l ki gen yon sij&eacute; sp&eacute;cifik (pa egsanp: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'Ou kap enskri w pou ou gen lalis-lim&egrave;l sit-la. Ou ke gen al&ograve; yon lim&egrave;l pou rankont tout anons pou atik la ek tinouv&egrave;l nan sit la ki, yon ki pwopoz&eacute; pou pibliy&eacute; ',
-'info_confirmer_passe' => 'Konfime ou nouvo modpas-la :',
+'info_config_suivi' => 'Si ladr&egrave;s-la ap koresponn yon lis-lim&egrave;l, w kap enskri isit anba lad&egrave;s tout patisapan sou sit-la yon ke kap enskri a y. Ladr&egrave;s-la p&eacute;t&egrave;t se yon URL (pa egsanp lapaj lenskrisyon sou lalis-lim&egrave;l pa Web-la), osnon yon ladr&egrave;s lim&egrave;l ki gen yon sij&eacute; sp&eacute;cifik (pa egsanp: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => 'W kap enskri w pou ou gen lalis-lim&egrave;l sit-la. Ou ke gen al&ograve; yon lim&egrave;l pou rankont tout anons pou atik-la ek tinouv&egrave;l nan sit-la ki pwopoz&eacute; pou piblikasyon.',
+'info_confirmer_passe' => 'Konfime nouvo modpas-la :',
 'info_connexion_base' => 'Dezyem etap : <B>Esey f&egrave; yon koneksyon sou labaz</B>',
 'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p /> Ann gen w etap swivan.',
 'info_connexion_mysql' => 'Premye etap : <B>Ou koneksyon MySQL</B>',
@@ -306,22 +306,22 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_dans_rubrique' => 'Andan ribrik :',
 'info_date_publication_anterieure' => 'Dat li te fin pibliy&eacute; avan :',
 'info_date_referencement' => 'DAT SIT-LA TE FIN REFERANSE&nbsp;:',
-'info_delet_mots_cles' => 'Ou te domann kraze yon mokle
+'info_delet_mots_cles' => 'W te domann kraze yon mokle
 <B>@titre_mot@</B> (@type_mot@).Mokle-a  se jwenn ek
-<b>@texte_lie@</b> f&ograve;k w konfime ou chwa&nbsp;:',
+<b>@texte_lie@</b> f&ograve;k w konfime chwa-a&nbsp;:',
 'info_derniere_etape' => 'D&egrave;nye etap : <B> se fin fini !',
 'info_derniere_syndication' => 'D&egrave;nye sendikasyon sit-la te fin  f&egrave; an jou',
 'info_derniers_articles_publies' => 'Denye atik w-a ki te fin pibliye an liy',
 'info_desactiver_forum_public' => 'Pou f&eacute; fowom piblik pa mache. Fowom yo ke mache yon pa yon si w vl&eacute;
 anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l yo...',
-'info_desactiver_messagerie_personnelle' => 'Ou kapab m&egrave;t oubyen suspann ou kazmod&eacute;kri (mesajri) p&eacute;son&egrave;l sou sit-la.',
+'info_desactiver_messagerie_personnelle' => 'W kapab m&egrave;t oubyen suspann lan kazmod&eacute;kri (mesajri) p&eacute;son&egrave;l sou sit-la.',
 'info_descriptif' => 'Dekrisyon :',
 'info_discussion_cours' => 'Kozman ki ap diskite',
 'info_ecrire_article' => 'Ou dwa dab&ograve; kreye yon premy&eacute; ribrik avan ekri yon atik.',
 'info_email_envoi' => 'Adr&egrave;s lim&egrave;l pour voye yon mesaj (pa oblij&eacute;)',
 'info_email_envoi_txt' => 'Ann enskri isit ladr&egrave;s f&ograve;k lim&egrave;l yo ke rive sou (osnon  ladr&egrave;s destinat&egrave; ke itilise konsa yon ladr&egrave;s pou lanvwa)&nbsp;:',
 'info_email_webmestre' => 'Ladr&egrave;s lim&egrave;l w&egrave;bm&egrave;t(pa oblije)',
-'info_entrer_code_alphabet' => 'Rantre k&ograve;d lalfabe ou vle sit-la li itilize&nbsp;:',
+'info_entrer_code_alphabet' => 'Rantre k&ograve;d lalfabe w vle sit-la li itilize&nbsp;:',
 'info_envoi_email_automatique' => 'Pou voye k&egrave;k lim&egrave;l otomatikman',
 'info_envoi_forum' => 'Voye fowom yo pou tout lot&eacute; atik yo',
 'info_envoyer_maintenant' => 'Voye kounye-a touswit',
@@ -338,10 +338,10 @@ anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l y
 'info_forum_administrateur' => 'fowom pou komand&egrave; yo',
 'info_forum_interne' => 'fowom andan sit la',
 'info_forum_ouvert' => 'Nan lespas priv&eacute; sit-la, yon fowom gen ouv&egrave; pou tout moun
- ki r&eacute;dakt&egrave; enskri. Ou kapab m&egrave;t, isit-anba, yon fowom
+ ki r&eacute;dakt&egrave; enskri. W kapab m&egrave;t, isit-anba, yon fowom
  anplis, ki r&eacute;s&egrave;v&eacute; pou komand&eacute; yo s&egrave;lman.',
 'info_forum_statistiques' => 'Estatistik tout vizit',
-'info_forums_abo_invites' => 'Sit ou genyen fowom sou abonman&nbsp;; vizit&egrave;   se invite enskri ali sou sit piblik.',
+'info_forums_abo_invites' => 'Sit w genyen fowom sou abonman&nbsp;; vizit&egrave;   se invite enskri ali sou sit piblik.',
 'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
 'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
 'info_gauche_admin_vider' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
@@ -349,12 +349,12 @@ anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l y
 Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave; = jon).',
 'info_gauche_auteurs_exterieurs' => 'Tout l&ograve;t&egrave; and&egrave;y&ograve;, ki genyen pa aks&egrave; sit-la, se afiche pa yon ik&ograve;n bl&egrave;&nbsp;;
  l&ograve;t&egrave; yo ki te kraze se yon bwat poub&egrave;l.',
-'info_gauche_messagerie' => 'Mesajri rann ou kapab voye tout mesaj ant redakt&egrave;, gade pansb&egrave;t (p&egrave;sonel) osnon f&egrave; par&egrave;t annons sou paj akey nan espas prive (si w se komand&egrave;).',
+'info_gauche_messagerie' => 'Mesajri rann w kapab voye tout mesaj ant redakt&egrave;, gade pansb&egrave;t (p&egrave;sonel) osnon f&egrave; par&egrave;t annons sou paj akey nan espas prive (si w se komand&egrave;).',
 'info_gauche_numero_auteur' => 'LOTE NIMEWO',
 'info_gauche_numero_breve' => 'TINOUV&Egrave;L NIM&Egrave;WO',
-'info_gauche_statistiques_referers' => 'Paj-la don lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit a ou,yer ak jodila&nbsp;; li repar z&eacute;wo tout 24&egrave;r la.',
-'info_gauche_suivi_forum' => 'Paj <I>swivi fowom yo</I> se outiy pou out sit (kontr&egrave; yon espas pou soutni ek ekri ant zot itlizat&egrave;). Li afich tout patispasyon nan fowom piblik yon atik ak ran aw kapab okipe yo.',
-'info_gauche_suivi_forum_2' => 'Paj <I>swivi fowom yo</I> se outiy pou out sit (kontr&egrave; yon espas pou soutni ek ekri ant zot itlizat&egrave;. Li afich tout patispasyon nan fowom sou sit piblik tankou espas priv&eacute; ak li ran aw kapab okipe yo.',
+'info_gauche_statistiques_referers' => 'Paj-la se paj ki done lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit w, yer ak jodila&nbsp;; li repar z&eacute;wo tout 24&egrave;r la.',
+'info_gauche_suivi_forum' => 'Paj <I>swivi fowom yo</I> se outiy pou sit w (kontr&egrave; yon espas pou soutni ek ekri ant zot itlizat&egrave;). Li afich tout patispasyon nan fowom piblik yon atik ak ran aw kapab okipe yo.',
+'info_gauche_suivi_forum_2' => 'Paj <I>swivi fowom yo</I> se outiy pou sit w (kontr&egrave; yon espas pou soutni ek ekri ant zot itlizat&egrave;. Li afich tout patispasyon nan fowom sou sit piblik tankou espas priv&eacute; ak li ran aw kapab okipe yo.',
 'info_gauche_visiteurs_enregistres' => 'Ou ka rannkont isit vizit&egrave; yo ki enskri
  nan espas piblik sit sa-a (fowom sou labonman).',
 'info_generation_miniatures_images' => 'Kreyasyon piti imaj la',
@@ -370,11 +370,11 @@ Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave;
 'info_historique_comparaison' => 'konparezon',
 'info_historique_desactiver' => 'Kraze swivi kisa te chanje',
 'info_historique_lien' => 'F&egrave; par&egrave;t lis listwa kisa te chanje',
-'info_historique_texte' => 'Swivi tout chanjman ran ou kapab sere yon istorik pou tout bagay ki ap chanje nan kontni yon atik. Li afich kisa ki chanje ant k&egrave;k v&egrave;syon sa-yo.',
+'info_historique_texte' => 'Swivi tout chanjman ran w kapab sere yon istorik pou tout bagay ki ap chanje nan kontni yon atik. Li afich kisa ki chanje ant k&egrave;k v&egrave;syon sa-yo.',
 'info_historique_titre' => 'Swivi kisa te chanje',
 'info_identification_publique' => 'Ou lidantit&eacute; piblik...',
 'info_image_process' => 'Tanpri chwazi m&egrave;y&egrave; m&eacute;tod pou lakreyasyon viy&egrave;t yo. Pou sa-a m&egrave;si klike sou imaj la ki koresponn.',
-'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki par&egrave;t, p&egrave;t&egrave;t se s&egrave;v&egrave; ki eb&egrave;j sit aw ki pa konfigire pou itilize outiy sa-yo. F&ograve;k ou kontak responsab teknik s&egrave;v&egrave; an pou domann tout ektansyon &laquo;GD&raquo; ou &laquo;Imagick&raquo; sa-yo.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki par&egrave;t, p&egrave;t&egrave;t se s&egrave;v&egrave; ki eb&egrave;j sit aw ki pa konfigire pou itilize outiy sa-yo. F&ograve;k w kontak responsab teknik s&egrave;v&egrave; an pou domann tout ektansyon &laquo;GD&raquo; ou &laquo;Imagick&raquo; sa-yo.</i>',
 'info_images_auto' => 'Imaj kalkil&eacute; otomatikman',
 'info_informations_personnelles' => 'Sinky&egrave;m etap : <B>Enf&ograve;masyon p&egrave;sonel</B>',
 'info_inscription_automatique' => 'Enskrisyon otomatik pou nouvo redakt&egrave; yo',
@@ -398,13 +398,13 @@ Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave;
 'info_meme_rubrique' => 'L&ograve;t dokiman nan pati sa a nan sit la',
 'info_message' => 'Mesaj nan',
 'info_message_efface' => 'MESAJ KRAZE',
-'info_message_en_redaction' => 'Mesaj ou yo ki ap ekri ank&ograve;',
+'info_message_en_redaction' => 'Mesaj w yo ki ap ekri ank&ograve;',
 'info_message_technique' => 'Mesaj t&egrave;knik :',
 'info_messagerie_interne' => 'Kazmod&eacute;kri andodan',
-'info_mise_a_niveau_base' => 'M&egrave;t baz MySQL ou bon nivo',
-'info_mise_a_niveau_base_2' => '{{Tansyon!}} Ou instal&eacute; yon v&egrave;syon
+'info_mise_a_niveau_base' => 'M&egrave;t baz MySQL nan bon nivo',
+'info_mise_a_niveau_base_2' => '{{Tansyon!}} W te instal&eacute; yon v&egrave;syon
  fichye SPIP  ki  {pli vy&eacute;} v&egrave;syon sa-a ki sou sit avant
-: genyen danje bazdon aw ke p&egrave;di osnon li ki pa mache ek sit-la
+: genyen danje bazdone aw ke p&egrave;di osnon li ki pa mache ek sit-la
 pa mache m&egrave;m.<br>{{F&ograve;k ou instal ank&ograve;
   yon lot fwa tout fichye spip resan.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Kouman tout fowom piblik mache otomatikman',
@@ -447,7 +447,7 @@ pa mache m&egrave;m.<br>{{F&ograve;k ou instal ank&ograve;
 'info_option_accepter_visiteurs' => 'Asepte vizit&egrave; yo enskri y sou sit piblik',
 'info_option_email' => 'Kan yon vizit&egrave; ap voye yon nouvo mesaj nan fowom sou yon atik
 se posib al&egrave;t tout lot&egrave; atik la
-ak yon lim&egrave;l. Ou vle itilize opsyon nan&nbsp;?',
+ak yon lim&egrave;l. W vle itilize opsyon nan&nbsp;?',
 'info_option_faire_suivre' => 'Voye mesaj yo nan fowom yo pou lot&egrave; sa-yo tout atik ki komant&eacute;',
 'info_option_ne_pas_accepter_visiteurs' => 'Refize lenskripsyon vizit&egrave; yo',
 'info_option_ne_pas_faire_suivre' => 'Voye pa mesaj fowom yo ',
@@ -476,17 +476,17 @@ ak yon lim&egrave;l. Ou vle itilize opsyon nan&nbsp;?',
 'info_preview_admin' => 'Komnad&egrave; yo s&egrave;lman kapab gad avan sit sa- kom l te an liy',
 'info_preview_comite' => 'Tout redakt&eacute; kapab gad avan sit-la kom li te an liy',
 'info_preview_desactive' => 'Sist&egrave;m pou gad avan kom te an liy tout patisipasyon, l ap pa aktive ',
-'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouv&egrave;l sa-yo (yon ki lestati  &laquo;&nbsp;se pwopoz&eacute;&nbsp;&raquo; omwen) te pibliy&eacute; an liy. Eske ou vle bay posibilite a  ouv&egrave;  pou tout komand&egrave; s&egrave;lman, oubyen tout r&eacute;dakt&egrave;, ousinon pa okenn moun sa-m&egrave;m&nbsp;?',
+'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouv&egrave;l sa-yo (yon ki lestati  &laquo;&nbsp;se pwopoz&eacute;&nbsp;&raquo; omwen) te pibliy&eacute; an liy. Eske w vle bay posibilite a ouv&egrave;  pou tout komand&egrave; s&egrave;lman, oubyen tout r&eacute;dakt&egrave;, ousinon pa okenn moun sa-m&egrave;m&nbsp;?',
 'info_principaux_correspondants' => 'Ou gwoup kowespondan pli enp&ograve;tan',
 'info_procedez_par_etape' => 'avans etap pa etap',
-'info_procedure_maj_version' => 'f&ograve;k ou koumans larnouv&egrave;lman labaz pou adapte labazdone
+'info_procedure_maj_version' => 'f&ograve;k w koumans larnouv&egrave;lman labaz pou adapte labazdone
  ansamn nouvo v&egrave;syon SPIP.',
 'info_ps' => 'Gen di ank&ograve;.',
 'info_publier' => 'pibliye',
 'info_publies' => 'Atik w-a ki ap pibliye an liy',
-'info_question_accepter_visiteurs' => 'Si leskel&egrave;t sit ou la, zot ka pwopoze lenskisyon vizit&egrave; ki pa laks&eacute; lespas priv&eacute;, m&egrave;si ou aktive lopsyon issit anba&nbsp;:',
-'info_question_gerer_statistiques' => 'Eske ou vle ou sit kapab okipe estatistik pou vizit yo&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aksepte ou pa aksepte w tout enskrisyon nouvo redakt&egrave; sou lespas piblik sit-la&nbsp;?
+'info_question_accepter_visiteurs' => 'Si leskel&egrave;t sit w la, li ka pwopoze lenskripsyon vizit&egrave; ki pa laks&eacute; lespas priv&eacute;, m&egrave;si w aktive lopsyon issit anba&nbsp;:',
+'info_question_gerer_statistiques' => 'Eske w vle sit w kapab okipe estatistik pou vizit yo&nbsp;?',
+'info_question_inscription_nouveaux_redacteurs' => 'Aksepte ounon pa aksepte w tout enskripsyon nouvo redakt&egrave; sou lespas piblik sit-la&nbsp;?
 Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
    yon f&ograve;mil&egrave;,  pou zot ke sere laks&eacute; nan espas priv&eacute; pou zot kapab pwopoze
   zot pwop atik yo a y m&egrave;m. <blockquote><i>Kann moun-la zot ap enskri azot,
@@ -495,9 +495,9 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
   l&eacute;b&egrave;j&egrave; ka enpeche lanvwa tout lim&egrave;l  depi zot s&egrave;v&egrave;&nbsp;:
   al&ograve;, lenskrisyon otomatik ke
   inposib.',
-'info_question_mots_cles' => 'Eske ou vle itilize mokle yo ou sitw&egrave;b&nbsp;?',
+'info_question_mots_cles' => 'Eske w vle itilize mokle yo nan sitw&egrave;b w&nbsp;?',
 'info_question_proposer_site' => 'Kimoun kapab pwopoze k&egrave;k sit referans&eacute;&nbsp;?',
-'info_question_utilisation_moteur_recherche' => 'Eske ou vle itilize mot&egrave; pou ch&egrave;che de SPIP&nbsp;?
+'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize mot&egrave; pou ch&egrave;che de SPIP&nbsp;?
  (enl&egrave;v ali ke rann sist&egrave;m pli rapid ek soup.)',
 'info_qui_attribue_mot_cle' => 'Kimoun se kapab m&egrave;t tout mokle gwoup la sou atik yo&nbsp;:',
 'info_racine_site' => 'Rasin sit-la',
@@ -518,7 +518,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_reserve_admin' => 'Komand&egrave; ys&egrave;lman yokapab chanje ladr&egrave;s-la',
 'info_restauration_sauvegarde' => 'Rest&ograve;wasyon las&ograve;vgad @archive@',
 'info_restreindre_rubrique' => 'Diminye drwa yo komand&eacute;-a pou li kapab debouye sou ribrik-la s&egrave;lman:',
-'info_resultat_recherche' => 'Rezilta ch&egrave;che ou-a :',
+'info_resultat_recherche' => 'Rezilta ch&egrave;che w-a :',
 'info_rubriques' => 'Ribrik yo',
 'info_rubriques_02' => 'ribrik yo',
 'info_rubriques_liees_mot' => 'Ribrik yo ki jwenn an lyen ak mokle-a',
@@ -539,7 +539,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_sauvegarde_petitions' => 'S&ograve;vgade petisyon yo ',
 'info_sauvegarde_refers' => 'S&ograve;vgade r&egrave;f&egrave;r&egrave; yo ',
 'info_sauvegarde_reussi_01' => 'S&ograve;vgad-la te mache',
-'info_sauvegarde_reussi_02' => 'Baz-la te fin sovgad&eacute; nan <b>ecrire/data/@archive@</b>. Ou kapab',
+'info_sauvegarde_reussi_02' => 'Baz-la te fin sovgad&eacute; nan <b>ecrire/data/@archive@</b>. W kapab',
 'info_sauvegarde_reussi_03' => 'tounyen d&egrave;y&egrave; okipe',
 'info_sauvegarde_reussi_04' => 'sit a w.',
 'info_sauvegarde_rubriques' => 'S&ograve;vgade ribrik yo ',
@@ -583,7 +583,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_texte' => 'T&egrave;ks',
 'info_texte_explicatif' => 'T&egrave;ks pou esplike',
 'info_texte_long' => '(akoz t&egrave;ks-la se lon&nbsp;: li afiche nan k&egrave;k pat sa-yo, zot ke kenbe ansamn apr&egrave; konfimasyon.)',
-'info_texte_message' => 'T&egrave;ks pou ou mesaj-la :',
+'info_texte_message' => 'T&egrave;ks pou mesaj-w :',
 'info_texte_message_02' => 'T&egrave;ks pou mesaj-la',
 'info_titre' => 'Tit (Kouman i rele) :',
 'info_titre_mot_cle' => 'Kouman mokle i rele',
@@ -642,7 +642,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'item_desactiver_forum_administrateur' => 'Rete fowom pou komand&eacute; yo',
 'item_gerer_annuaire_site_web' => 'Okipe yon laniye sit web yo',
 'item_gerer_statistiques' => 'Okipe lestatistik yo',
-'item_limiter_recherche' => 'Sere lach&egrave;che nan limit lenfomasyon ki kontni sit a ou. ',
+'item_limiter_recherche' => 'Sere lach&egrave;che nan limit lenfomasyon ki kontni sit a w. ',
 'item_login' => 'Nonkod',
 'item_mots_cles_association_articles' => 'nan atik yo',
 'item_mots_cles_association_breves' => 'nan tinouv&egrave;l yo',
@@ -719,11 +719,11 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 
 
 // M
-'menu_aide_installation_choix_base' => 'Chwa labaz ou-a',
+'menu_aide_installation_choix_base' => 'Chwa labaz w-a',
 'module_fichier_langue' => 'Fichye-lanng',
 'module_raccourci' => 'Tichemen',
 'module_texte_affiche' => 'T&egrave;ks ki afiche',
-'module_texte_explicatif' => 'Ou kapab m&egrave;t tout tichemen yo ki isit apr&egrave;, nan lesk&egrave;l&egrave;t sa-yo ou sit piblik. Yo k&eacute; tradwi otomatikman nan dif&eacute;ran lanng, chak ki genyen yon fichye-lanng.',
+'module_texte_explicatif' => 'W kapab m&egrave;t tout tichemen yo ki isit apr&egrave;, nan lesk&egrave;l&egrave;t sa-yo ou sit piblik. Yo k&eacute; tradwi otomatikman nan dif&eacute;ran lanng, chak ki genyen yon fichye-lanng.',
 'module_texte_traduction' => 'fichye-lanng la &laquo;&nbsp;@module@&nbsp;&raquo; se disponib nan&nbsp;:',
 'mois_non_connu' => 'ki pa koni',
 
@@ -736,7 +736,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'ortho_avis_privacy2' => 'Pou gade l&ograve;tograf yo t&egrave;ks sit-la ke voye lalis mo pou kontrolen sou yon &laquo;&nbsp;s&egrave;ve l&ograve;tograf&nbsp;&raquo; d&eacute;&ograve; ki diferan mamn kominot&eacute; SPIP ka bay laks&eacute; pou tout moun. Tout mo a-yo ki voye nan d&eacute;s&ograve;d pou sere bagay sekr&eacute;. Si w efreye done aw se pa proteje,   akti pa lopsyon an.',
 'ortho_ce_mot_connu' => 'Mo an ki rankont nan diksyon&egrave; sit-la.',
 'ortho_dico_absent' => 'Pa oken diksyon&egrave; ki pr&eacute;zan pou lalang-la',
-'ortho_mode_demploi' => 'Tout mo ki pa rokoni, yo se afiche nan liy rouj. Ou kapab klike sou chak mo sa-yo pou afiche k&egrave;k sij&eacute;syon pou korije.',
+'ortho_mode_demploi' => 'Tout mo ki pa rokoni, yo se afiche nan liy rouj. W kapab klike sou chak mo sa-yo pou afiche k&egrave;k sij&eacute;syon pou korije.',
 'ortho_mots_a_corriger' => 'k&egrave;k mo f&ograve;k zot ki korije',
 'ortho_orthographe' => 'L&ograve;tograf',
 'ortho_supprimer_ce_mot' => 'Efase mo a nan diksyon&egrave;',
@@ -773,7 +773,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
  sou machin a w osnon yon s&egrave;v&egrave; pou las&ograve;vgad &egrave; pou gad swen pa depanse tro lespas diks l&ograve;dinat&egrave;.',
 'texte_adresse_annuaire_1' => '(Si laniy&eacute; aw se enstal&eacute; sou m&egrave;m machin s&eacute;v&egrave; sit aw, se posib li rele senpman &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Lot&egrave;-a te fin ajoute pou atik-la :',
-'texte_annuaire_ldap_1' => 'Si ou gen laks&eacute; lanyi&egrave; (LDAP), ou kapab itilize ali pou enp&ograve;te otomatikman itilizat&egrave; yo sou SPIP.',
+'texte_annuaire_ldap_1' => 'Si w gen laks&eacute; lanyi&egrave; (LDAP), w kapab itilize ali pou enp&ograve;te otomatikman itilizat&egrave; yo sou SPIP.',
 'texte_article_statut' => 'Atik-la se :',
 'texte_article_virtuel' => 'Atik virtyel',
 'texte_article_virtuel_reference' => '<b>Atik virty&egrave;l&nbsp;:</b> se yon atik ki referanse nan sit SPIP aw, men ki toun&eacute; vir&eacute; sou yon l&ograve;t URL. Pou efase toun&eacute;-vir&eacute; an, ann efas w URL isit anl&egrave;r.',
@@ -781,7 +781,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_auteur_messagerie' => 'Sit-la kapab bay w lalis redakt&egrave; an liy kounyen-a, bagay-la p&egrave;m&egrave; w voye mesaj direk ansamn moun. W pe chwazi pa par&egrave;t a liy nan lis-la (w kembe &laquo;&nbsp;envisib&nbsp;&raquo; pou tout zot itilizat&egrave;).',
 'texte_auteur_messagerie_1' => 'Sit-la p&eacute;m&egrave; a w voye mesaj fowom pou pale nan kozman priv&eacute; ant tout patisipan ki soutni nan sit.W p&eacute; chwazi pa soutni pale nan kontak-la.',
 'texte_auteurs' => 'LOT&Egrave; YO',
-'texte_breves' => 'Ti-nouv&egrave;l yo se ti t&egrave;ks senp ki p&egrave;m&egrave; ou f&egrave; par&egrave;t k&egrave;k ti enf&ograve;masyon taptap, osnon debouye w ek yon revi-lapr&egrave;s, ek m&egrave;m yon kalandrye pou anonse kisa moun kap soutni.',
+'texte_breves' => 'Ti-nouv&egrave;l yo se ti t&egrave;ks senp ki p&egrave;m&egrave; w f&egrave; par&egrave;t k&egrave;k ti enf&ograve;masyon taptap, osnon debouye w ek yon revi-lapr&egrave;s, ek m&egrave;m yon kalandrye pou anonse kisa moun kap soutni.',
 'texte_choix_base_1' => 'Ann chwazi labaz aw :',
 'texte_choix_base_2' => 'S&egrave;v&egrave; MySQL-la, li ka kembe k&egrave;k bazdon&eacute;.',
 'texte_choix_base_3' => '<B>Chwazi</B> issit anba labaz ki l&eacute;b&eacute;rj&egrave;  te bay aw:',
@@ -832,7 +832,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_informations_personnelles_1' => 'Sist&egrave;m ke jodiya kreye yon laks&eacute; p&egrave;sonaliz&eacute; pou w.',
 'texte_informations_personnelles_2' => '(Gad : si genyen yon l&ograve;t enstalasyon ak laks&eacute; aw ka mache ank&ograve;, w kapab',
 'texte_introductif_article' => '(T&egrave;ks lentwodiksyon latik.)',
-'texte_jeu_caractere' => 'Lopsyon-an se itil si sitweb-la afich k&egrave;k alfabe diferan lalfab&eacute;
+'texte_jeu_caractere' => 'Lopsyon-an se itil si sitweb-la afiche k&egrave;k alfabe diferan lalfab&eacute;
  romin (ou &laquo;&nbsp;oksidantal&nbsp;&raquo;) ek tout alfabe komsa.
  Al&ograve;, f&ograve;k w chanje reglaj otomatik pou chwazi yon gwoup karakt&egrave; pwop&nbsp;;
  Se mye f&egrave; yon esey avan pou rankout yon manyen adapt&eacute; pou afich lang-la
@@ -865,14 +865,14 @@ posib blok azot dab&ograve;&nbsp;; r&eacute;glaj isit
   kiswa zot plas nan ribrik. Bagay-la p&eacute;m&egrave; rann m&eacute;y&egrave; navigasyon sou sit aw
   ak p&egrave;s&ograve;nalize prezantasyon atik yo nan leskel&egrave;t.',
 'texte_mots_cles_dans_forum' => 'Aksepte w tout vizit&eacute; kapab itilize tout mokle nan fowom yo sou sit piblik&nbsp;? (Atansyon&nbsp;: lopsyon-an se konpl&egrave;ks pou itilize.)',
-'texte_multilinguisme' => 'Si ou vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konpl&egrave;ks,  w kapab ajoute yon meni-dewoul&egrave; pou chwazi lalang tout atik ak ribrik yo, selon kouman w te &ograve;ganize sit aw.',
+'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konpl&egrave;ks,  w kapab ajoute yon meni-dewoul&egrave; pou chwazi lalang tout atik ak ribrik yo, selon kouman w te &ograve;ganize sit aw.',
 'texte_multilinguisme_trad' => 'Ou kap m&egrave;t yon sist&egrave;m pou okipe k&egrave;k lyen ant plizy&egrave; tradiksyon yon m&egrave;m atik.',
 'texte_non_compresse' => '<i>ki pa konprese</i> (s&egrave;v&egrave; w ki pa soutni nan fonksyon la)',
 'texte_non_fonction_referencement' => 'W ka vle pa itilize fonksyon otomatik la, men endike w m&egrave;m tout &eacute;l&eacute;man yo ki pale sit-la...',
 'texte_nouveau_message' => 'Nouvo mesaj',
 'texte_nouveau_mot' => 'Nouvo mo',
 'texte_nouvelle_version_spip_1' => 'W te enstal&eacute; yon nouvo v&eacute;syon SPIP.',
-'texte_nouvelle_version_spip_2' => 'F&ograve;k w f&egrave; yon arnouv&egrave;lman pli konple pou monte nivo nouvo v&egrave;syon an. Si w se webm&egrave;t sit-la, m&egrave;si efase fichye-a <tt>inc_connect.php3</tt> nan repetwar <tt>ecrire</tt> ak ropran lenstalasyon pou m&egrave;t param&egrave;t koneksyon sou basdone nan nivo.<p /> (Gad.&nbsp;: si w te oubliye param&egrave;t koneksyon aw, gad fichye <tt>inc_connect.php3</tt> avan efase ali...)',
+'texte_nouvelle_version_spip_2' => 'F&ograve;k w f&egrave; yon arnouv&egrave;lman pli konple pou monte nivo nouvo v&egrave;syon an. Si w se webm&egrave;t sit-la, m&egrave;si efase fichye-a <tt>inc_connect.php3</tt> nan repetwar <tt>ecrire</tt> ak ropran lenstalasyon pou m&egrave;t param&egrave;t koneksyon sou bazdone nan nivo.<p /> (Gad.&nbsp;: si w te oubliye param&egrave;t koneksyon aw, gad fichye <tt>inc_connect.php3</tt> avan efase ali...)',
 'texte_operation_echec' => 'M&egrave;si tounyen dey&egrave; sou paj davan, chwazi yon l&ograve;t baz osnon kreye w yon nouvo baz. Gad byin tout lenf&ograve;masyon l&eacute;bj&egrave;je w te bay aw.',
 'texte_plus_trois_car' => 'plisk 3 karakt&egrave; limprimi',
 'texte_plusieurs_articles' => 'Genyen k&egrave;k lot&egrave; pou "@cherche_auteur@":',
@@ -891,25 +891,25 @@ kalkil ank&ograve; yon sel paj selman, itilize plito lespas piblik ak bouton &la
 'texte_recapitiule_liste_documents' => 'Paj-la ka rankont tout dokiman w teplase nan ribrik yo. Si w vle chanje tout lenf&ograve;masyon chak dokiman, m&egrave;si swiv lyanaj sou paj ribrik azot.',
 'texte_recuperer_base' => 'Aranje bazdon&eacute; la',
 'texte_reference_mais_redirige' => 'atik ki referanse nan sit SPIP aou, men ki vir&eacute; direksyon sou yon lot URL.',
-'texte_referencement_automatique' => '<b>R&eacute;f&eacute;ransman otomatik pou yon sitweb</b><br>W kapab referanse fasilman yon sitweb si ou bay ladr&egrave;s URL osnon bay ladr&egrave;s fichye backend ali. SPIP ke pran otomatikman tout enf&ograve;masyon posib pou sit-la (kouman li rele, dekrisyon...).',
+'texte_referencement_automatique' => '<b>R&eacute;f&eacute;ransman otomatik pou yon sitweb</b><br>W kapab referanse fasilman yon sitweb si w bay ladr&egrave;s URL osnon bay ladr&egrave;s fichye backend ali. SPIP ke pran otomatikman tout enf&ograve;masyon posib pou sit-la (kouman li rele, dekrisyon...).',
 'texte_requetes_echouent' => '<b>kank k&egrave;k rek&egrave;t MySQL ki pa mache
   sist&eacute;matikman ak ki pa r&eacute;zon vizib, se posib bagay la ki ako bazdon&eacute;-la  li m&egrave;m
 .</b><p />
   Tounyen a kapasit&eacute; MySQL pou aranje tout tab ali kank zot se abime pa aksidan.
-Ou kapab esey issit yon aranjman&nbsp;;
+W kapab esey issit yon aranjman&nbsp;;
  Si bagay-la ki pa mache, kenbe ou yon kopi lafichaj, ki sere p&egrave;t&egrave;t indis pou rannkont ki pa mache...<p />
   Si pwobl&egrave;m la ki kenbe, m&egrave;si kontak l&eacute;b&eacute;rj&egrave;
 .<p />',
 'texte_restaurer_base' => 'Restore kontni yon sovgad baz-la',
-'texte_restaurer_sauvegarde' => 'Opsyon-nan ki p&eacute;m&egrave; ou restore yon sovgad ou t&eacute; f&eacute; avan sou baz-la.
- Akoz, fok ou plas&eacute; fichye an ki kembe sovgad-la nan r&eacute;pertwar 
+'texte_restaurer_sauvegarde' => 'Opsyon-nan ki p&eacute;m&egrave; w restore yon sovgad  ki w t&eacute; f&eacute; avan sou baz-la.
+ Akoz, fok w plas&eacute; fichye an ki kembe sovgad-la nan r&eacute;pertwar 
  <i>ecrire/data/</i>.
-  Tansyon kank ou touche fonksyonalit&eacute; an &nbsp;: <b>tout chanjman, tout bagay ki perdi, se
+  Tansyon kank w touche fonksyonalit&eacute; an &nbsp;: <b>tout chanjman, tout bagay ki perdi, se
   d&eacute;finitif.</b>',
 'texte_sauvegarde' => 'Sovgad kontni baz-la',
 'texte_sauvegarde_base' => 'Sovgad baz-la',
 'texte_sauvegarde_compressee' => 'Sovgad ke pou f&egrave; nan yon fichye pa kopr&eacute;s&eacute; sa-a, ki rele <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => 'Ou kapab chwazi  &laquo;&nbsp;lang prensipal&nbsp;&raquo; sit-la. Chwa-an se pa obligasyon - bon di&eacute;&nbsp;! - ou &eacute;kri artik aou nan lang-la, men bagay-la li p&eacute;m&egrave; d&eacute;fini&nbsp;:
+'texte_selection_langue_principale' => 'W kapab chwazi  &laquo;&nbsp;lang prensipal&nbsp;&raquo; sit-la. Chwa-an se pa obligasyon - bon di&eacute;&nbsp;! - w &eacute;kri artik-w nan lang-la, men bagay-la li p&eacute;m&egrave; d&eacute;fini&nbsp;:
  <ul><li> f&ograve;ma otomatik tout dat sou sit piblik&nbsp;;</li>
  <li> ki m&ograve;t&egrave; tipografik, f&ograve;k sist&egrave;m SPIP li itilize pou rann tout t&egrave;ks sou sit-la&nbsp;;</li>
  <li> ki lang f&ograve;k sit itilize nan tout f&ograve;mil&egrave; sou sit piblik&nbsp;;</li>
@@ -925,7 +925,7 @@ Bagay-la p&eacute;m&egrave;, pa egsanp, f&ograve;se rekalkil tout paj sa-yo, apr
 ',
 'texte_sur_titre' => 'Sir-tit',
 'texte_syndication' => 'Kank sitweb-la li p&egrave;m&egrave; bagay-sa-a, se posib pran otomatikman lis tout nouv&egrave;lt&eacute; ali. 
-F&ograve;k ou aktive sendikasyon an. 
+F&ograve;k w aktive sendikasyon an. 
   <blockquote><i>Tansyon k&egrave;k z&eacute;b&egrave;rj&egrave;, zot ka d&eacute;zaktiv fonksyonalit&eacute;-a&nbsp;; 
   akoz bagay-la, inposib pran sendikasyon-an depi sit aou
 .</i></blockquote>',
@@ -934,7 +934,7 @@ F&ograve;k ou aktive sendikasyon an.
 'texte_tentative_recuperation' => 'Esey aranj&eacute;',
 'texte_tenter_reparation' => 'Es&egrave;y yon aranjman labazdon&eacute;',
 'texte_test_proxy' => 'Pou eseye pwoksi-a (proxy), ann enskri isit ladr&egrave;s yon sit web
-    ou vle test&eacute;.',
+    w vle test&eacute;.',
 'texte_titre_02' => 'Tit (Kouman i rele) :',
 'texte_titre_obligatoire' => '<B>Tit (Kouman i rele)</B> [N&egrave;s&egrave;s&egrave;]',
 'texte_travail_article' => '@nom_auteur_modif@ t&eacute; travay&eacute; sou atik la  @date_diff@ minit pase',
@@ -942,19 +942,19 @@ F&ograve;k ou aktive sendikasyon an.
   yon m&egrave;m atik, sist&egrave;m-la kapab afiche atik yo
   ki &laquo;&nbsp;ouv&egrave;&nbsp;&raquo;
  nan tan r&eacute;san  pou evite chanjman ki kraze l&ograve;t.
- Ou kapab m&egrave;t opsyon-nan ki sispann otomatikman pou evite f&egrave; par&egrave;t toultan
+ W kapab m&egrave;t opsyon-nan ki sispann otomatikman pou evite f&egrave; par&egrave;t toultan
    mesaj yo pou atansyon.
 ',
-'texte_trop_resultats_auteurs' => 'Genyen tro rezilta pou "@cherche_auteur@" ; m&egrave;si pr&eacute;siz ch&egrave;che ou-a.',
+'texte_trop_resultats_auteurs' => 'Genyen tro rezilta pou "@cherche_auteur@" ; m&egrave;si pr&eacute;siz ch&egrave;che w-a.',
 'texte_unpack' => 't&eacute;l&eacute;chajman d&egrave;ny&egrave; v&egrave;syon',
-'texte_utilisation_moteur_syndiques' => 'Kan ou itilize mot&egrave;-rech&egrave;che andodan SPIP, ou kapab ch&egrave;che
+'texte_utilisation_moteur_syndiques' => 'Kan w itilize mot&egrave;-rech&egrave;che andodan SPIP, w kapab ch&egrave;che
     sou sit ak atik sendik&eacute; yo nan d&eacute; many&egrave; dif&eacute;ran.
  <br><img src=\'puce.gif\'> Pli senp se ch&egrave;che s&egrave;lman kouman atik yo rele (tit yo)
-ou nan d&eacute;krisyon atik sa-yo
+ou nan d&eacute;kripsyon atik sa-yo
      <br><img src=\'puce.gif\'>
     D&egrave;zy&egrave;m m&eacute;tod, pli pwisan, se f&egrave;
     SPIP ch&egrave;che ositou nan t&egrave;ks tout sit referans&eacute; yo.
-   Si ou ka referanse yon sit
+   Si w ka referanse yon sit
     SPIP ka ch&egrave;che nan t&egrave;ks sit li m&egrave;me sa-a.
     .',
 'texte_utilisation_moteur_syndiques_2' => 'M&egrave;tod la li domann SPIP vizite 
