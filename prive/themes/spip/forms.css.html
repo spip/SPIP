@@ -293,8 +293,8 @@ input[type="submit"] {font-size: inherit;}
 /* version moderne */
 .formulaire_spip.formulaire_recherche { float: [(#ENV{right})]; border:0;background:none;border: 1px solid #fff; background-color: [#(#ENV{foncee}|couleur_foncer)]; margin: 0 0 6px;position:relative;padding:0;z-index:1;}
 .box_mediabox .formulaire_spip.formulaire_recherche {z-index:1} /* focus dans la mediabox */
-.formulaire_spip.formulaire_recherche .text{ float:[(#ENV{left})];padding:3px;width: 200px;background-color:#ENV{foncee};border:none;border-right:1px solid #fff;/*font-size: 10px;*/ color: #fff;  margin:0;min-height:20px;}
-.lte8 .formulaire_spip.formulaire_recherche .text {min-height:14px} /* IE<=8 ne supporte pas -ms-box-sizing:border-box; */
+#rapides .formulaire_spip.formulaire_recherche .text{ float:[(#ENV{left})];padding:3px;width: 200px;background-color:#ENV{foncee};border:none;border-right:1px solid #fff;/*font-size: 10px;*/ color: #fff;  margin:0;min-height:20px;}
+.lte8 #rapides .formulaire_spip.formulaire_recherche .text {min-height:14px} /* IE<=8 ne supporte pas -ms-box-sizing:border-box; */
 .formulaire_spip.formulaire_recherche .text.cancelable {padding-#ENV{left}:20px}
 .formulaire_spip.formulaire_recherche .text::-webkit-input-placeholder { color:#eee; }
 .formulaire_spip.formulaire_recherche .text:-moz-placeholder { color:#eee; }
