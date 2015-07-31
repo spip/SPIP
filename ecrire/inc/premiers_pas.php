@@ -107,7 +107,7 @@ function premiers_pas_boutons_bas($etape){
 
 	$res = "<div class='verdana3' style='margin-top:2em;text-align:$spip_lang_right'>";
 	if ($etape!=='fin'){
-		$res .= "<input type='submit' class='fondl' name='cancel' style='float:$spip_lang_left' value='"._L("Quitter et utiliser directement SPIP")."' />";
+		$res .= "<input type='submit' class='fondl' name='cancel' style='cursor:pointer;position:absolute;left:376px;top:40px;' value='"._L("Pas de premiers pas, utiliser directement SPIP")."' />";
 		$res .= "<input type='submit' name='submit' class='fondo' value='"._L("Etape suivante")."' />";
 	}
 	else
