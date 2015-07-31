@@ -537,9 +537,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 # attention: reperer la premiere des 2 balises: pre_boucle ou boucle
 
-		$n = preg_match(",".BALISE_PRE_BOUCLE . '[0-9_],', $texte, $r);
-		if ($n) $n = strpos($texte, $r[0]);
-		if (($n === false) || ($n > $p)) {
+		if (!preg_match(",".BALISE_PRE_BOUCLE . '[0-9_],', $texte, $r)
+			OR ($n = strpos($texte, $r[0]))===false
+			OR ($n > $p) ) {
 		  $debut = substr($texte, 0, $p);
 		  $milieu = substr($texte, $p);
 		  $k = strpos($milieu, '(');
