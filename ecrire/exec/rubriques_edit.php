@@ -130,7 +130,7 @@ function exec_rubriques_edit_dist()
 	$form .= fin_cadre_couleur(true)
 	. "<br />";
 
-	if (($config['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
+	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 			. _T('entree_contenu_rubrique')."<br />"
 			. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
@@ -138,7 +138,7 @@ function exec_rubriques_edit_dist()
 			. "</textarea>\n";
 	}
 
-	if (($config['rubriques_texte'] == "oui") OR strlen($texte)) {
+	if (($GLOBALS['meta']['rubriques_texte'] == "oui") OR strlen($texte)) {
 		$form .= "<b>"._T('info_texte_explicatif')."</b>"
 		. aide ("raccourcis")
 		. "<br /><textarea name='texte' rows='15' class='formo' cols='40'>"
