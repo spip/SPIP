@@ -445,27 +445,30 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 	$chemins = array();
 	$contenu = "";
 	foreach($ordre as $p => $info){
-		$dir_type = $plugin_valides[$p]['dir_type'];
-		$plug = $plugin_valides[$p]['dir'];
-		// definir le plugin, donc le path avant l'include du fichier options
-		// permet de faire des include_spip pour attraper un inc_ du plugin
+		// $ordre peur contenir des plugins en attente et non valides pour ce hit
+		if (isset($plugin_valides[$p])){
+			$dir_type = $plugin_valides[$p]['dir_type'];
+			$plug = $plugin_valides[$p]['dir'];
+			// definir le plugin, donc le path avant l'include du fichier options
+			// permet de faire des include_spip pour attraper un inc_ du plugin
 
-		if($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
-			$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
-		}else{
-			$dir = $dir_type.".'" . $plug ."/'";
-		}
-		$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-		if ($prefix!=="SPIP"){
-			$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-			foreach($info['chemin'] as $chemin){
-				if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-					$dir = $chemin['dir'];
-					if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-					if (!isset($chemin['type']) OR $chemin['type']=='public')
-						$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-					if (!isset($chemin['type']) OR $chemin['type']=='prive')
-						$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+			if($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
+				$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
+			}else{
+				$dir = $dir_type.".'" . $plug ."/'";
+			}
+			$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
+			if ($prefix!=="SPIP"){
+				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
+				foreach($info['chemin'] as $chemin){
+					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+						$dir = $chemin['dir'];
+						if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+						if (!isset($chemin['type']) OR $chemin['type']=='public')
+							$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+						if (!isset($chemin['type']) OR $chemin['type']=='prive')
+							$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+					}
 				}
 			}
 		}
@@ -485,21 +488,24 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 	$onglets = array();
 
 	foreach($ordre as $p => $info){
+		// $ordre peur contenir des plugins en attente et non valides pour ce hit
+		if (isset($plugin_valides[$p])){
 		$dir_type = $plugin_valides[$p]['dir_type'];
-		$plug = $plugin_valides[$p]['dir'];
-		$dir = constant($dir_type);
-		$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
-		if ($info['menu'])
-			$boutons = array_merge($boutons,$info['menu']);
-		if ($info['onglet'])
-			$onglets = array_merge($onglets,$info['onglet']);
-		foreach($contenu as $charge => $v){
-		  if (isset($info[$charge])) foreach($info[$charge] as $file){
-		// on genere un if file_exists devant chaque include
-		// pour pouvoir garder le meme niveau d'erreur general
-				$file = trim($file);
-				$_file = $root_dir_type . ".'$plug/$file'";
-				$contenu[$charge] .= "include_once_check($_file);\n";
+			$plug = $plugin_valides[$p]['dir'];
+			$dir = constant($dir_type);
+			$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
+			if ($info['menu'])
+				$boutons = array_merge($boutons,$info['menu']);
+			if ($info['onglet'])
+				$onglets = array_merge($onglets,$info['onglet']);
+			foreach($contenu as $charge => $v){
+				if (isset($info[$charge])) foreach($info[$charge] as $file){
+			// on genere un if file_exists devant chaque include
+			// pour pouvoir garder le meme niveau d'erreur general
+					$file = trim($file);
+					$_file = $root_dir_type . ".'$plug/$file'";
+					$contenu[$charge] .= "include_once_check($_file);\n";
+				}
 			}
 		}
 	}
@@ -535,32 +541,35 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 		$liste_pipe_manquants[]=$pipe_recherche;
 
 	foreach($ordre as $p => $info){
-		$dir_type = $plugin_valides[$p]['dir_type'];
-		$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
-		$plug = $plugin_valides[$p]['dir'];
-		$prefix = (($info['prefix']=="spip")?"":$info['prefix']."_");
-		if (isset($info['pipeline']) AND is_array($info['pipeline'])){
-			foreach($info['pipeline'] as $pipe){
-				$nom = $pipe['nom'];
-				if (isset($pipe['action']))
-						$action = $pipe['action'];
-				else
-						$action = $nom;
-				$nomlower = strtolower($nom);
-				if ($nomlower!=$nom 
-				AND isset($GLOBALS['spip_pipeline'][$nom]) 
-				AND !isset($GLOBALS['spip_pipeline'][$nomlower])){
-					$GLOBALS['spip_pipeline'][$nomlower] = $GLOBALS['spip_pipeline'][$nom];
-					unset($GLOBALS['spip_pipeline'][$nom]);
-				}
-				$nom = $nomlower;
-				if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
-					$GLOBALS['spip_pipeline'][$nom]="";
-				if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
-					$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
-				if (isset($pipe['inclure'])){
-					$GLOBALS['spip_matrice']["$prefix$action"] =
-						"$root_dir_type:$plug/".$pipe['inclure'];
+		// $ordre peur contenir des plugins en attente et non valides pour ce hit
+		if (isset($plugin_valides[$p])){
+			$dir_type = $plugin_valides[$p]['dir_type'];
+			$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
+			$plug = $plugin_valides[$p]['dir'];
+			$prefix = (($info['prefix']=="spip")?"":$info['prefix']."_");
+			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
+				foreach($info['pipeline'] as $pipe){
+					$nom = $pipe['nom'];
+					if (isset($pipe['action']))
+							$action = $pipe['action'];
+					else
+							$action = $nom;
+					$nomlower = strtolower($nom);
+					if ($nomlower!=$nom
+					AND isset($GLOBALS['spip_pipeline'][$nom])
+					AND !isset($GLOBALS['spip_pipeline'][$nomlower])){
+						$GLOBALS['spip_pipeline'][$nomlower] = $GLOBALS['spip_pipeline'][$nom];
+						unset($GLOBALS['spip_pipeline'][$nom]);
+					}
+					$nom = $nomlower;
+					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
+						$GLOBALS['spip_pipeline'][$nom]="";
+					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
+						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
+					if (isset($pipe['inclure'])){
+						$GLOBALS['spip_matrice']["$prefix$action"] =
+							"$root_dir_type:$plug/".$pipe['inclure'];
+					}
 				}
 			}
 		}
