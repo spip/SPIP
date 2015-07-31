@@ -18,12 +18,12 @@ include_spip('inc/actions');
 include_spip('inc/date');
 
 // http://doc.spip.org/@inc_dater_dist
-function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
+function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='', $fct_ajax='')
 {
 	$possedeDateRedac = !preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date_redac, $regs) ? false :  (($regs[1] + $regs[2] + $regs[3]) ? $regs : false);
 
 	if ($flag) {
-		$res = dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, $date_redac);
+	  $res = dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, $date_redac, $fct_ajax);
 	} else {
 		$res = dater_lecture($date, $date_redac, $possedeDateRedac,
 				(($statut == 'publie' OR $type != 'article')
@@ -54,7 +54,7 @@ function dater_lecture($date, $date_redac, $possedeDateRedac, $label)
 	return $res;
 }
 
-function dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, $date_redac) {
+function dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, $date_redac, $fct_ajax) {
 	global $spip_lang_left, $spip_lang_right, $debut_date_publication;
 
 	if ($possedeDateRedac) {
@@ -70,7 +70,7 @@ function dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, 
 
 	if (autoriser('dater',$type,$id,null,array('statut'=>$statut))) {
 
-		$res = dater_ajax($id, $type, $script, $date, $debut_date_publication);
+		$res = dater_ajax($id, $type, $script, $date, $fct_ajax, $debut_date_publication);
 		if ($res) {
 			$invite =  "<b><span class='verdana1'>"
 			. _T('texte_date_publication_article')
@@ -97,10 +97,10 @@ function dater_ecriture($id, $possedeDateRedac, $statut, $type, $script, $date, 
 	      AND ($GLOBALS['meta']["articles_redac"] != 'non' OR $possedeDateRedac)))
 		return $res;
 
-	return $res . dater_redac($id, $type, $script, $possedeDateRedac, $date_redac);
+	return $res . dater_redac($id, $type, $script, $possedeDateRedac, $date_redac, $fct_ajax);
 }
 
-function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac)
+function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac, $fct_ajax)
 {
 	if ($possedeDateRedac)
 		$date_affichee = majuscules(affdate($date_redac));
@@ -130,12 +130,12 @@ function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac)
 		_T('bouton_radio_afficher').
 	  ' :</label> ';
 
-	$masque = dater_ajax($id, $type, $script, $date_redac, 0, '_redac', $label);
+	$masque = dater_ajax($id, $type, $script, $date_redac, $fct_ajax, 0, '_redac', $label);
 
 	return block_parfois_visible("dateredac-$id", $invite, $masque, 'text-align: left');
 }
 
-function dater_ajax($id, $type, $script, $date, $start=0, $suffixe='', $label='')
+function dater_ajax($id, $type, $script, $date, $fct_ajax, $start=0, $suffixe='', $label='')
 {
 	global $spip_lang_left, $spip_lang_right, $debut_date_publication;
 
@@ -170,6 +170,7 @@ function dater_ajax($id, $type, $script, $date, $start=0, $suffixe='', $label=''
 			_T('bouton_changer'),
 			" style=' float:$spip_lang_right;position:relative;' class='visible_au_chargement' id='$idom'",
 			"",
-			"&id=$id&type=$type");
+			"&id=$id&type=$type",
+			$fct_ajax);
 }
 ?>
