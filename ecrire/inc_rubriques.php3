@@ -193,6 +193,19 @@ function calculer_langues_rubriques() {
 		spip_query ("UPDATE spip_articles SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
 	}
 	
+	// breves
+	$s = spip_query ("SELECT fils.id_breve AS id_breve, mere.lang AS lang
+		FROM spip_breves AS fils, spip_rubriques AS mere
+		WHERE fils.id_rubrique = mere.id_rubrique
+		AND fils.langue_choisie != 'oui' AND mere.lang<>''
+		AND mere.lang<>fils.lang");
+	while ($row = spip_fetch_array($s)) {
+		$lang = addslashes(lang_supprimer_point($row['lang']));
+		$id_breve = $row['id_breve'];
+		spip_debug ("breve $id_breve = .$lang");
+		spip_query ("UPDATE spip_breves SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
+	}
+	
 }
 
 

@@ -17,8 +17,21 @@ $articles_mots = lire_meta("articles_mots");
 if ($id_article==0) {
 	if ($new=='oui') {
 		if ($titre=='') $titre = _T('info_sans_titre');
+		
+		if (lire_meta("multi_rubriques") == "oui") {
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$langue_new = $row['lang'];
+			$langue_choisie_new = 'non';
+		} else if (ereg (",".$GLOBALS['auteur_session']['lang'].",", ",".lire_meta('multi_auth').",")) { // Verifier que la langue d'interface est autorisee
+			$langue_new = $GLOBALS['auteur_session']['lang'];
+			$langue_choisie_new = 'oui';
+		} else {
+			$langue_new = lire_meta('langue_site');
+			$langue_choisie_new = 'oui';
+		}
+		
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
-		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics')");
+		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum, lang, langue_choisie) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
 		$id_article = spip_insert_id();
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
@@ -27,6 +40,7 @@ if ($id_article==0) {
 		exit;
 	}
 }
+
 
 $clean_link = new Link("articles.php3?id_article=$id_article");
 
