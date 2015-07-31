@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'plugin را فعال کنید',
 	'affichage' => 'ارايه',
 	'aide_non_disponible' => 'اين بخش كمكى براى اين زبان هنوز در دسترس نمى باشد',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'لغو جستجو', # NEW
 	'auteur' => 'نویسنده:',
 	'avis_acces_interdit' => 'دسترسى به اين بخش ممنوع مى باشد',
 	'avis_article_modifie' => 'توجه ،              @nom_auteur_modif@                                        روى اين مقاله @date_diff@ پيش كار ميكرده',
