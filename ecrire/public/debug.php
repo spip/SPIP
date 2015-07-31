@@ -477,20 +477,23 @@ function debug_dumpfile ($texte, $fonc, $type) {
 function debug_script ($t) {
 
 	debug_debut($GLOBALS['exec']);
-	if (!isset($GLOBALS['xhtml_error']))
-	  $res = '<h2>' . _L('SPIP consid&egrave;re ce document comme valide'). '</h2>';
-	else {
+	if (!isset($GLOBALS['xhtml_error'])) {
+	  $err = '<h3>' . _L('SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE&nbsp;: <br />') .
+	    substr($t,9,strpos($t,'>')-9)
+	    .'</h3>';
+	  $t ='';
+	} else {
 	  list($t, $err) = emboite_texte($t);
-	  $res = $err . $t;
 	}
 
 	echo "<div style='text-align: center'><h1>", _T('analyse_xml') . '</h1>',
-	  $res,
-	   " <a href='"
+	  $err,
+	   "<br /><a href='"
 	    . parametre_url(self(),'transformer_xml', '')
 	    . "'>"
 	    .  _T("access_interface_graphique")
 	    . "</a></div>";
+	echo $t;
 	echo "\n</div>";
 	echo '</body></html>';
 }
