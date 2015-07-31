@@ -683,7 +683,7 @@ Dankon pro via partopreno
 'info_nouveaux_message' => 'Novaj mesa&#285;oj',
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESA&#284;O(J)N',
 'info_nouvel_article' => 'Nova artikolo',
-'info_numero_article' => 'ARTIKOLO NUMERO',
+'info_numero_article' => 'ARTIKOLO NUMERO&nbsp;:',
 'info_obligatoire_02' => '[Deviga]',
 'info_option_email' => 'Kiam vizitanto de la teksejo sendas novan mesa&#285;on en la forumo ligita kun artikolo, eblas retpo&#349;te anonci pri tiu mesa&#285;o al la a&#365;toroj de la artikolo. &#264;u vi deziras uzi tiun opcion&nbsp;?',
 'info_option_faire_suivre' => 'Plusendi la mesa&#285;ojn de la forumoj al la a&#365;toroj de la artikoloj',
