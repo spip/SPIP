@@ -1442,18 +1442,17 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($options == "avancees") {
 		global $recherche;
-		if (strlen($recherche) == 0) {
-			if ($spip_display == 2) $recherche = "Titre ou num&eacute;ro";
-			else $recherche = "Rechercher";
-		}
+		if ($recherche == '' AND $spip_display != 2)
+			$recherche_aff = 'Rechercher';
+		else
+			$recherche_aff = $recherche;
 		bandeau_barre_verticale();
 		echo "<td width='5'><img src='img_pack/rien.gif' width=5></td>";
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-		if ($spip_display == "2") {
+		if ($spip_display == "2")
 			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>Rechercher&nbsp;:</b></font><br>";
-		}
-		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
+		echo '<input type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche">';
 		echo "</form>";
 		echo "</td>";
 	}
