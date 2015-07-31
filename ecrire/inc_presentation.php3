@@ -729,7 +729,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 					$fond[$count]='img_pack/forum-vert.gif';
 				}
 				$fleche='img_pack/rien.gif';
-				if ($count==$compteur_forum){		
+				if ($count==$compteur_forum){
 					$fleche='img_pack/forum-droite.gif';
 				}
 				echo "<td width=10 valign='top' background=$fond[$count]><img src='$fleche' alt='' width=10 height=13 border=0></td>\n";
@@ -745,7 +745,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			else if ($statut=="prop") {
 				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td>";
 			}
-			
+
 			if ($compteur_forum == 1) echo debut_cadre_relief("forum-interne-24.gif");
 			echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre)."</b></font></td></tr>";
 			echo "<tr><td bgcolor='#EEEEEE'>";
@@ -779,11 +779,11 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				}
 			}
 			echo justifier(propre($texte));
-			
+
 			if (strlen($url_site) > 10 AND $nom_site) {
 				echo "<p align='left'><font face='Verdana,Arial,Helvetica,sans-serif'><b><a href='$url_site'>$nom_site</a></b></font>";
 			}
-				
+
 			if ($controle != "oui") {
 				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 				$url = "forum_envoi.php3?id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)
@@ -792,17 +792,17 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			}
 
 			if ($mots_cles_forums == "oui"){
-			
+
 				$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
 				$result_mots = spip_query($query_mots);
-				
+
 				while ($row_mots = spip_fetch_array($result_mots)) {
 					$id_mot = $row_mots['id_mot'];
 					$titre_mot = propre($row_mots['titre']);
 					$type_mot = propre($row_mots['type']);
 					echo "<li> <b>$type_mot :</b> $titre_mot";
 				}
-				
+
 			}
 
 
