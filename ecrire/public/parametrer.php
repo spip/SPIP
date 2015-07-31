@@ -159,7 +159,7 @@ function sql_chapo($id_article) {
 # retourne le parent d'une rubrique
 
 function sql_parent($id_rubrique) {
-	list($id) = spip_abstract_fetsel(array(id_parent), 
+	list($id) = spip_abstract_fetsel(array('id_parent'), 
 			array('spip_rubriques'), 
 			array("id_rubrique=" . intval($id_rubrique)));
 	return $id;
@@ -179,10 +179,10 @@ function sql_profondeur($id) {
 # retourne la rubrique d'un article
 
 function sql_rubrique($id_article) {
-	$row = spip_abstract_fetsel(array('id_rubrique'),
+	list($id) = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
-	return $row['id_rubrique'];
+	return $id;
 }
 
 function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
@@ -242,7 +242,7 @@ function sql_accepter_forum($id_article) {
 }
 
 # Determine les parametres d'URL (hors réécriture) et consorts
-# En deduit un contexte disant si la page est une rediction ou 
+# En deduit un contexte disant si la page est une redirection ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
 # Aplique alors le squelette sur le contexte et le nom du cache.
 # Retourne un tableau de 3 elements:
@@ -261,6 +261,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	// 2. $fond est passe par reference, pour la meme raison
 	// Bref,  les URL dites propres ont une implementation sale.
 	// Interdit de nettoyer, faut assumer l'histoire.
+		include_spip('inc/filtres'); // pour normaliser_date
 		$contexte = calculer_contexte();
 		if (function_exists("recuperer_parametres_url")) {
 			recuperer_parametres_url($fond, nettoyer_uri());
