@@ -183,6 +183,8 @@ function image_typo() {
 // http://doc.spip.org/@taille_image
 function taille_image($img) {
 	static $largeur_img =array(), $hauteur_img= array();
+	$srcWidth = 0;
+	$srcHeight = 0;
 
 	$logo = extraire_attribut($img,'src');
 	if (!$logo) $logo = $img;
@@ -199,7 +201,6 @@ function taille_image($img) {
 	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
 
 	$srcsize = false;
-	$srcWidth = isset($largeur_img[$mem])?$largeur_img[$mem]:0;
 	if (isset($largeur_img[$mem]))
 		$srcWidth = $largeur_img[$mem];
 	if (!$srcWidth AND $srcsize = @getimagesize($logo)) {
