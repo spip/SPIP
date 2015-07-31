@@ -154,10 +154,10 @@ function exec_naviguer_dist()
 	    (!$id_rubrique
 		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right)
 		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right))
-		    :"")
-		. "</div><br class='nettoyeur' />"
-	  . contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable))
-	;
+	    :"")
+	    . "</div>")
+	  . "<br class='nettoyeur' />"
+	  . contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
 
 	// Logos de la rubrique
@@ -222,6 +222,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo, $n_forums)
 				extraire_multi($row['nom']) .
 				'</a><br />';
 	}
+
 	if ($res)
 		$navigation .= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('info_administrateurs')). $res . fin_cadre_relief(true);
 

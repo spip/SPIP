@@ -8,13 +8,13 @@
 	Lister les elements qui justifient le statut de la rubrique
 
 ]
-<p class='nb_elements'>
+<div class='nb_elements'>
 <BOUCLE_arts(ARTICLES){id_rubrique}></BOUCLE_arts><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_articles:></div><//B_arts>
 <BOUCLE_breves(BREVES){id_rubrique}></BOUCLE_breves><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_breves_02:></div><//B_breves>
 <BOUCLE_sites(SITES){id_rubrique}></BOUCLE_sites><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_sites:></div><//B_sites>
 <BOUCLE_docs(DOCUMENTS){id_rubrique}></BOUCLE_docs><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_documents:></div><//B_docs>
 <BOUCLE_rubs(RUBRIQUES){id_parent}></BOUCLE_rubs><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_rubriques:></div><//B_rubs>
-</p>
+</div>
 
 
 [(#REM)
