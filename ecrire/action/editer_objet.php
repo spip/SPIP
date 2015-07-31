@@ -178,7 +178,7 @@ function objet_inserer($objet, $id_parent=null) {
 	if (isset($desc['field']['statut']))
 		$champs['statut'] = 'prepa';
 
-	if ((isset($desc['date']) AND $d=$desc['date']) OR $desc['field'][$d='date'])
+	if ((isset($desc['date']) AND $d=$desc['date']) OR isset($desc['field'][$d='date']))
 		$champs[$d] = date('Y-m-d H:i:s');
 
 	// Envoyer aux plugins

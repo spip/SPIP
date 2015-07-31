@@ -129,8 +129,9 @@ function extraire_article($id_p, $t) {
 // http://doc.spip.org/@gen_liste_rubriques
 function gen_liste_rubriques() {
 
+	include_spip('inc/config');
 	// ici, un petit fichier cache ne fait pas de mal
-	$last = $GLOBALS['meta']["date_calcul_rubriques"];
+	$last = lire_config('date_calcul_rubriques', 0);
 	if (lire_fichier(_CACHE_RUBRIQUES, $cache)) {
 		list($date,$GLOBALS['db_art_cache']) = @unserialize($cache);
 		if ($date == $last) return false; // c'etait en cache :-)
