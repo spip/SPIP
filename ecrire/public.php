@@ -122,7 +122,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
 	// Mettre le Content-Type Html si manquant 
-	// Idem si debug, avec retrait du Content-Diposition pour voir le voir
+	// Idem si debug, avec retrait du Content-Disposition pour voir le voir
 
 	if ($debug OR !isset($page['entetes']['Content-Type'])) {
 		$page['entetes']['Content-Type'] = 
@@ -133,11 +133,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	}
 
-	$affiche_boutons_admin = ($debug OR ($html AND isset($_COOKIE['spip_admin']) AND !$flag_preserver));
+	$affiche_boutons_admin = ((!!$debug)
+		OR ($html AND isset($_COOKIE['spip_admin']) AND !$flag_preserver)
+		OR ($html AND ($_GET['var_mode']=='preview') AND !$flag_preserver)
+		);
 
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
-
 
  	// decompte des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
  	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
