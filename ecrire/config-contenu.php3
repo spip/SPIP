@@ -329,6 +329,19 @@ if (tester_mail()) {
 	}
 	echo "</TD></TR>\n";
 
+	if($options == "avancees") {
+		$email_envoi = entites_html(lire_meta("email_envoi"));
+		echo "<TR><TD>&nbsp;</TD></TR>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo _T('info_email_envoi')."</FONT></B></TD></TR>";
+
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo _T('info_email_envoi_txt');
+		echo " <input type='text' name='email_envoi' value=\"$email_envoi\" size='20' CLASS='fondl'>";
+		echo "</TD></TR>";
+		echo "<TR><TD>&nbsp;</TD></TR>";
+	}
+
 	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";

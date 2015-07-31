@@ -121,7 +121,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
 
 function appliquer_modifs_config() {
 	global $clean_link, $connect_id_auteur;
-	global $adresse_site, $email_webmaster, $post_dates, $tester_proxy, $test_proxy, $activer_moteur;
+	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
 
@@ -171,8 +171,10 @@ function appliquer_modifs_config() {
 		$GLOBALS['langues_multilingue'] = join($langues_auth, ",");
 	}
 
-	if (isset($email_webmaster) AND email_valide($email_webmaster))
+	if (isset($email_webmaster))
 		ecrire_meta("email_webmaster", $email_webmaster);
+	if (isset($email_envoi))
+		ecrire_meta("email_envoi", $email_envoi);
 	if ($charset == 'custom') $charset = $charset_custom;
 
 	$liste_meta = array(

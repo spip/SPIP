@@ -40,7 +40,11 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
 	include_ecrire("inc_filtres.php3");
 
-	if (!$from) $from = $email;
+	if (!$from) {
+		$from = $email;
+		$email_envoi = lire_meta("email_envoi");
+		$from = email_valide($email_envoi) ? $email_envoi : $email;
+	}
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false;
 

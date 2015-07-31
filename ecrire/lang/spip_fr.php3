@@ -571,6 +571,8 @@ Merci de votre participation
 		d&eacute;sactiver cette fonctionnalit&eacute;.',
 'info_ecire_message_prive' => 'Ecrire un message priv&eacute;',
 'info_ecrire_article' => 'Avant de pouvoir &eacute;crire des articles, vous devez cr&eacute;er au moins une rubrique.',
+'info_email_envoi' => 'Adresse email d\'envoi (optionnel)',
+'info_email_envoi_txt' => 'Indiquez ici l\'adresse &agrave; utiliser pour envoyer les emails (&agrave; d&eacute;faut, l\'adresse destinataire sera utilis&eacute;e comme adresse d\'envoi)&nbsp;:',
 'info_email_invalide' => 'Adresse email invalide.',
 'info_email_webmestre' => 'Adresse e-mail du webmestre (optionnel)',
 'info_en_cours_validation' => 'Vos articles en cours de r&eacute;daction',
