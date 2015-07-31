@@ -115,20 +115,11 @@ function traite_query($query) {
 		$db = '`'.$db.'`.';
 
 	// changer les noms des tables ($table_prefix)
-	if ($GLOBALS['flag_pcre']) {
-		if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
-			$suite = strstr($query, $regs[0]);
-			$query = substr($query, 0, -strlen($suite));
-		}
-		$query = preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
+	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
+		$suite = strstr($query, $regs[0]);
+		$query = substr($query, 0, -strlen($suite));
 	}
-	else {
-		if (eregi('[[:space:]](SET|VALUES|WHERE)[[:space:]]', $query, $regs)) {
-			$suite = strstr($query, $regs[0]);
-			$query = substr($query, 0, -strlen($suite));
-		}
-		$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$table_pref, $query) . $suite;
-	}
+	$query = preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
 
 	return $query;
 }

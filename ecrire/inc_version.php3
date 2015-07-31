@@ -437,7 +437,6 @@ $flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
 	&& function_exists("ob_start")); 
-$flag_pcre = function_exists("preg_replace");
 $flag_crypt = function_exists("crypt");
 $flag_wordwrap = function_exists("wordwrap");
 $flag_apc = function_exists("apc_rm");
@@ -453,7 +452,7 @@ $flag_ImagePng = function_exists("ImagePng");
 $flag_imagick = function_exists("imagick_readimage");	// http://pear.sourceforge.net/en/packages.imagick.php
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
-$flag_revisions = ($flag_pcre AND function_exists("gzcompress"));
+$flag_revisions = function_exists("gzcompress");
 
 //
 // Appliquer le prefixe cookie

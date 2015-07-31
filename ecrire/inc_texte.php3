@@ -841,7 +841,6 @@ function traiter_raccourcis_generale($letexte) {
 	global $ferme_ref;
 	global $ouvre_note;
 	global $ferme_note;
-	global $flag_pcre;
 	global $lang_dir;
 
 	// Appeler la fonction de pre_traitement
