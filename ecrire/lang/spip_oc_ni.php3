@@ -156,9 +156,9 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 
 
 // C
-'cache_mode_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
-'cache_mode_non_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
-'cache_modifiable_webmestre' => '<NEW>Ces param&egrave;tres sont modifiables par le webmestre du site.',
+'cache_mode_compresse' => 'Lu fichi&egrave;rs de l\'amagador son registrats en m&ograve;de comprimit.',
+'cache_mode_non_compresse' => 'Lu fichi&egrave;rs de l\'amagador son registrats en m&ograve;de non comprimit.',
+'cache_modifiable_webmestre' => 'Lo webm&egrave;stre dau sit p&ograve;ut modificar aquelu param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
 
 
@@ -293,7 +293,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'entree_titre_image' => 'Titre de l\'imatge:',
 'entree_titre_obligatoire' => '<B>Titre</B> [Obligat&ograve;ri]<BR>',
 'entree_url' => 'L\'adre&ccedil;a (URL) dau v&ograve;stre sit',
-'envoi_via_le_site' => '<NEW>Envoi via le site',
+'envoi_via_le_site' => 'Mandad&iacute;s emb lo biais dau sit web',
 'erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
 'erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
@@ -381,7 +381,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'forum_message_trop_long' => 'Lo v&ograve;stre messatge es tr&ograve;up l&ograve;ng. La talha maximala es de 20000 caract&egrave;rs.',
 'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail ma sus lo forum a l\'adre&ccedil;a seguenta: ',
 'forum_non_inscrit' => 'Si&egrave;tz pas inscrich(a), &ograve; l\'adre&ccedil;a &ograve; lo m&ograve;t de santa Clara son erron&egrave;us.',
-'forum_page_url' => '(se lo v&ograve;stre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina que fornisse mai d\'informacions, vorgatz marcar &ccedil;ai sota lo titre de la p&agrave;gina e la sieua adre&ccedil;a URL.)',
+'forum_page_url' => '(se lo v&ograve;stre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina que fornisse mai d\'informacions, podetz marcar &ccedil;ai sota lo titre de la p&agrave;gina e la sieu adre&ccedil;a.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ a la seguida de lo v&ograve;stre article.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, lo v&ograve;stre messatge es pas estat registrat.',
@@ -715,7 +715,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_laisser_champs_vides' => 'laissar lu camps vueis)',
 'info_langue_principale' => 'Lenga principala dau sit',
 'info_langues' => 'Lengas dau sit',
-'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
+'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'L\'autentificacion LDAP es installada.',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_lien_hypertexte' => 'Ligam ipert&egrave;xt:',
@@ -1195,19 +1195,19 @@ una color indica lo sieu estat:',
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vuar l\'amagador',
 'ortho_ajouter_ce_mot' => 'Ajustar aqueste m&ograve;t au diccionari',
-'ortho_aucune_suggestion' => '<NEW>Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.',
-'ortho_avis_privacy' => '<NEW>Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:',
+'ortho_aucune_suggestion' => 'S\'es trobat minga de suggestion per aqu&egrave;u mot.',
+'ortho_avis_privacy' => 'Un verificador d\'ortografia es integrat a SPIP. Pr\'aqu&ograve;, avant d\'activar aquela foncionalitat, vorgatz legir emb atencion lo paragraf seguent:',
 'ortho_avis_privacy2' => '<NEW>Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).',
-'ortho_ce_mot_connu' => '<NEW>Ce mot fait partie du dictionnaire du site.',
+'ortho_ce_mot_connu' => 'Aqu&egrave;u mot fa partida dau diccionari dau sit.',
 'ortho_dico_absent' => '<NEW>Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue',
-'ortho_mode_demploi' => '<NEW>Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
-'ortho_mots_a_corriger' => '<NEW>mots &agrave; corriger',
-'ortho_orthographe' => '<NEW>Orthographe',
-'ortho_supprimer_ce_mot' => '<NEW>Enlever ce mot du dictionnaire',
+'ortho_mode_demploi' => 'Lu m&ograve;ts non reconoissuts son subrelinhats de roge. Pod&egrave;tz clicar sus cada m&ograve;t per afichar de suggestions de correccion.',
+'ortho_mots_a_corriger' => 'm&ograve;ts da corregir',
+'ortho_orthographe' => 'Ortografia',
+'ortho_supprimer_ce_mot' => 'Levar aqu&egrave;u m&ograve;t dau diccionari',
 'ortho_trop_de_fautes' => '<NEW>Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
-'ortho_trop_de_fautes2' => '<NEW>Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
-'ortho_verif_impossible' => '<NEW>Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
-'ortho_verifier' => '<NEW>V&eacute;rifier l\'orthographe',
+'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir li errors mai evidenti e tornatz assajar pu&egrave;i.',
+'ortho_verif_impossible' => 'Lo sist&egrave;ma p&ograve;ut pas verificar l\'ortografia d\'aqu&egrave;u t&egrave;xte.',
+'ortho_verifier' => 'Verificar l\'ortografia',
 
 
 // P
@@ -1261,14 +1261,14 @@ e vos tornar connectar au sit.
 
 
 // T
-'taille_cache_infinie' => '<NEW>Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
+'taille_cache_infinie' => 'Aqu&egrave;u sit prevei pas de limitacion de talha dau repert&ograve;ri <code>CACHE/</code>.',
 'taille_cache_maxi' => '<NEW>SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
-'taille_cache_octets' => '<NEW>La taille du cache est actuellement de @octets@.',
-'taille_cache_vide' => '<NEW>Le cache est vide.',
+'taille_cache_octets' => 'A&uuml;ra la talha de l\'amagador despassa @octets@.',
+'taille_cache_vide' => 'L\'amagador es vu&egrave;i.',
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'taille_repertoire_cache' => '<NEW>Taille du r&eacute;pertoire cache',
+'taille_repertoire_cache' => 'Talha dau repert&ograve;ri amagador',
 'text_article_propose_publication' => 'Article prepauat per la publicacion. Esitetz pas de donar lo v&ograve;stre vejaire gra&ccedil;a au forum estacat a aquel article (en bas de p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Certans servidors LDAP acc&egrave;ptan minga d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder pi recercar d\'informacions dins l\'annuari. Lu camps seguents si podr&agrave;n qualora laissar vueis dins la m&agrave;ger part dei cas.',
 'texte_actualite_site_1' => 'Quora seretz familharisat/ada emb l\'interfa&ccedil;a, podretz clicar sus &laquo;',
@@ -1610,11 +1610,11 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 
 
 // U
-'upload_fichier_zip' => '<NEW>Fichier ZIP',
-'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
-'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
-'upload_limit' => '<NEW>Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
-'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
+'upload_fichier_zip' => 'Fichi&egrave;r ZIP',
+'upload_fichier_zip_texte' => 'Lo fichi&egrave;r que prepausatz d\'installar es un fichi&egrave;r ZIP.',
+'upload_fichier_zip_texte2' => 'Aqu&egrave;u fichi&egrave;r p&ograve;ut &egrave;stre:',
+'upload_limit' => 'Aqu&egrave;u fichi&egrave;r es tr&ograve;p gr&ograve;s per lo servidor; la talha maximala autorisada en <i>upload</i> es de @max@.',
+'upload_zip_decompacter' => 'descomprimit e cada element que conten installat sus lo sit. Alora lu fichi&egrave;rs que ser&agrave;n installats sus lo sit son:',
 'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
 
 

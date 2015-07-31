@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'access_interface_graphique' => '<NEW>Retour &agrave; l\'interface graphique compl&egrave;te',
+'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
 'admin_modifier_article' => 'Modifu tiun &#265;i artikolon',
 'admin_modifier_auteur' => 'Modifu tiun &#265;i a&#365;toron',
 'admin_modifier_breve' => 'Modifu tiun &#265;i informeton',
@@ -167,7 +169,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
+'date_aujourdhui' => '<NEW>aujourd\'hui',
 'date_avant_jc' => 'a.K.',
+'date_dans' => '<NEW>dans @delai@',
 'date_de_mois_1' => '@j@ @nommois@',
 'date_de_mois_10' => '@j@ @nommois@',
 'date_de_mois_11' => '@j@ @nommois@',
@@ -180,12 +184,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_7' => '@j@ @nommois@',
 'date_de_mois_8' => '@j@ @nommois@',
 'date_de_mois_9' => '@j@ @nommois@',
+'date_demain' => '<NEW>demain',
 'date_fmt_heures_minutes' => '@h@h@m@min',
 'date_fmt_jour_heure' => '@jour@ je la @heure@',
 'date_fmt_jour_mois' => '@jour@a @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@a @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => 'la @nomjour@ @date@',
+'date_heures' => '<NEW>heures',
+'date_hier' => '<NEW>hier',
+'date_il_y_a' => '<NEW>il y a @delai@',
 'date_jnum1' => '1',
 'date_jnum10' => '10',
 'date_jnum11' => '11',
@@ -224,6 +232,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jour_5' => '&#309;a&#365;do',
 'date_jour_6' => 'vendredo',
 'date_jour_7' => 'sabato',
+'date_jours' => '<NEW>jours',
+'date_minutes' => '<NEW>minutes',
+'date_mois' => '<NEW>mois',
 'date_mois_1' => 'januaro',
 'date_mois_10' => 'oktobro',
 'date_mois_11' => 'novembro',
@@ -241,6 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'printempo',
 'date_saison_3' => 'somero',
 'date_saison_4' => 'a&#365;tuno',
+'date_semaines' => '<NEW>semaines',
 'diff_para_ajoute' => '<NEW>Paragraphe ajout&eacute;',
 'diff_para_deplace' => '<NEW>Paragraphe d&eacute;plac&eacute;',
 'diff_para_supprime' => '<NEW>Paragraphe supprim&eacute;',

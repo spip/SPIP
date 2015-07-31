@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'access_interface_graphique' => 'Volver a la interfaz gr&aacute;fica completa',
+'access_mode_texte' => 'Mostrar la interfaz simplificada en modo texto',
 'admin_modifier_article' => 'Modificar este art&iacute;culo',
 'admin_modifier_auteur' => 'Modificar esta autora o autor',
 'admin_modifier_breve' => 'Modificar esta breve',
@@ -155,14 +157,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cache_mode_compresse' => 'Los ficheros de cach&eacute; se guardan en modo comprimido.',
-'cache_mode_non_compresse' => 'Los ficheros de cach&eacute; se guardan en modo no comprimido.',
-'cache_modifiable_webmestre' => 'Estos par&aacute;metros son modificables por la webmistress del sitio.',
 'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
 
 
 // D
+'date_aujourdhui' => 'hoy',
 'date_avant_jc' => 'aC',
+'date_dans' => 'en @delai@',
 'date_de_mois_1' => '@j@ de @nommois@',
 'date_de_mois_10' => '@j@ de @nommois@',
 'date_de_mois_11' => '@j@ de @nommois@',
@@ -175,12 +176,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_7' => '@j@ de @nommois@',
 'date_de_mois_8' => '@j@ de @nommois@',
 'date_de_mois_9' => '@j@ de @nommois@',
+'date_demain' => 'ma&ntilde;ana',
 'date_fmt_heures_minutes' => '@h@h@m@min',
 'date_fmt_jour_heure' => '@jour@ a las @heure@',
 'date_fmt_jour_mois' => '@jour@ de @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 'date_fmt_mois_annee' => '@nommois@ de @annee@',
 'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
+'date_heures' => 'horas',
+'date_hier' => 'ayer',
+'date_il_y_a' => 'hace @delai@',
 'date_jnum1' => '1ro',
 'date_jnum10' => '10',
 'date_jnum11' => '11',
@@ -219,6 +224,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jour_5' => 'Jueves',
 'date_jour_6' => 'Viernes',
 'date_jour_7' => 'S&aacute;bado',
+'date_jours' => 'd&iacute;as',
+'date_minutes' => 'minutos',
+'date_mois' => 'meses',
 'date_mois_1' => 'enero',
 'date_mois_10' => 'octubre',
 'date_mois_11' => 'noviembre',
@@ -236,6 +244,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'verano',
 'date_saison_4' => 'oto&ntilde;o',
+'date_semaines' => 'semanas',
 'diff_para_ajoute' => 'P&aacute;rrafo a&ntilde;adido',
 'diff_para_deplace' => 'P&aacute;rrafo desplazado',
 'diff_para_supprime' => 'P&aacute;rrafo suprimido',
@@ -297,7 +306,6 @@ de los directorios mencionados. El procedimiento se explica detalladamente en la
 'entree_titre_image' => 'T&iacute;tulo de la imagen',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obligatorio]<BR>',
 'entree_url' => 'La direcci&oacute;n (URL) de tu sitio',
-'envoi_via_le_site' => 'Env&iacute;o a trav&eacute;s del sitio',
 'erreur_boucle_double' => 'BOUCLE@id@: doble definici&oacute;n',
 'erreur_boucle_fermant' => 'BOUCLE@id@: falta la baliza de cierre',
 'erreur_boucle_syntaxe' => 'Sintaxis de bucle incorrecto',
@@ -487,7 +495,6 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_suivi_forum' => 'Actualidad del foro p&uacute;blico: @nb_forums@ contribuci&oacute;n(es)',
 'icone_suivi_forums' => 'Gesti&oacute;n de los foros',
 'icone_suivi_pettions' => 'Gesti&oacute;n de las peticiones',
-'icone_suivi_revisions' => 'Modificaciones de los art&iacute;culos',
 'icone_supprimer_cookie' => 'Suprimir la "cookie" de correspondencia',
 'icone_supprimer_document' => 'Suprimir este documento',
 'icone_supprimer_groupe_mots' => 'Suprimir este grupo',
@@ -671,7 +678,6 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_forum_interne' => 'foro interno',
 'info_forum_ouvert' => 'En el espacio privado del sitio hay un foro abierto a todas las personas inscritas. A continuaci&oacute;n, puedes activar un foro suplementario reservado a los administradores y administradoras.',
 'info_forum_statistiques' => 'Estad&iacute;sticas de las visitas',
-'info_forums_abo_invites' => 'Tu sitio tiene foros para abonados; en el sitio p&uacute;blico se invita a los visitantes a que se registren.',
 'info_gauche_admin_effacer' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_admin_tech' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_admin_vider' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
@@ -728,7 +734,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_laisser_champs_vides' => 'dejar estos campos vac&iacute;os)',
 'info_langue_principale' => 'Idioma principal del sitio',
 'info_langues' => 'Idiomas del sitio',
-'info_largeur_vignette' => '@largeur_vignette@ por @hauteur_vignette@ p&iacute;xeles',
+'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ p&iacute;xeles',
 'info_ldap_ok' => 'La autentificaci&oacute;n LDAP est&aacute; instalada.',
 'info_les_auteurs_1' => 'por @les_auteurs@',
 'info_lien_hypertexte' => 'Enlace hipertexto:',
@@ -806,14 +812,10 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'Art&iacute;culo:',
 'info_obligatoire_02' => '[Obligatorio]',
-'info_option_accepter_visiteurs' => 'Aceptar la inscripci&oacute;n de los visitantes del sitio p&uacute;blico',
 'info_option_email' => 'Cuando se deposita una nueva contribuci&oacute;n a un foro asociado a un art&iacute;culo, se lo puede notificar por correo electr&oacute;nico a los autores y autoras del art&iacute;culo. &iquest;Deseas utilizar esta opci&oacute;n?',
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros a los autores y autoras de art&iacute;culos',
-'info_option_ne_pas_accepter_visiteurs' => 'Rehusar la inscripci&oacute;n de visitantes',
 'info_option_ne_pas_faire_suivre' => 'No enviar los mensajes de los foros',
 'info_options_avancees' => 'Opciones avanzadas',
-'info_ortho_activer' => 'Activar el corrector ortogr&aacute;fico',
-'info_ortho_desactiver' => 'Desactivar el corrector ortogr&aacute;fico',
 'info_ou' => 'o...',
 'info_oui_suppression_mot_cle' => 'Deseo suprimir esta palabra clave',
 'info_page_interdite' => 'P&aacute;gina no accesible',
@@ -842,10 +844,6 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_pour' => 'para',
 'info_premier_resultat' => '[@debut_limit@ primeros resultados sobre @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeros resultados sobre @total@]',
-'info_preview_admin' => 'S&oacute;lo los administradores pueden previsualizar el sitio',
-'info_preview_comite' => 'Todos los redactores pueden previsualizar el sitio',
-'info_preview_desactive' => 'La previsualizaci&oacute;n est&aacute; totalmente desactivada',
-'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los art&iacute;culos y las breves (que tengan al menos el estado &laquo;&nbsp;propuesto&nbsp;&raquo;) estuviesen publicados. Esta posibilidad debe estar disponible para &iquest;&nbsp;los administradores solamente, todos los redactores, o nadie&nbsp;?',
 'info_principaux_correspondants' => 'Tus principales corresponsales',
 'info_probleme_grave' => 'problema de',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
@@ -862,7 +860,6 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_publie_2' => 'Art&iacute;culo publicado
 --------------',
 'info_publies' => 'Tus art&iacute;culos publicados',
-'info_question_accepter_visiteurs' => 'Si en los esqueletos de tu sitio est&aacute; previsto el registro de visitantes sin acceso al espacio privado, tendr&aacute;s que activar la opci&oacute;n siguiente:',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
 'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceptas inscripciones al espacio de redacci&oacute;n de nuevas personas apartir del sitio p&uacute;blico? Si aceptas, las personas que visitan el sitio podr&aacute;n inscribirse desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n, reciben un correo electr&oacute;nico autom&aacute;tico que les indica sus c&oacute;digos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus servidores: en tal caso, se hace imposible la inscripci&oacute;n autom&aacute;tica. ',
 'info_question_mots_cles' => '&iquest;Deseas utilizar las palabras clave en tu sitio?',
@@ -1199,20 +1196,6 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'onglet_repartition_rubrique' => 'Reparto por secciones',
 'onglet_save_restaur_base' => 'Crear copia de seguridad y restaurar la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
-'ortho_ajouter_ce_mot' => 'A&ntilde;adir esta palabra al diccionario',
-'ortho_aucune_suggestion' => 'No se han encontrado sugerencias para esta palabra.',
-'ortho_avis_privacy' => 'En SPIP se integra un corrector ortogr&aacute;fico. Sin embargo, antes de activar esta caracter&iacute;stica, deber&iacute;as leer atentamente el siguiente p&aacute;rrafo:',
-'ortho_avis_privacy2' => 'Para comprobar la ortograf&iacute;a de un texto, el sitio web enviar&aacute; la lista de palabras a revisar a uno de los &laquo;&nbsp;servidores ortogr&aacute;ficos&nbsp;&raquo; externos puestos a disposici&oacute;n por distintos miembros de la comunidad SPIP. Las palabras se env&iacute;an desordenadas para asegurar un m&iacute;nimo de confidencialidad. Si sientes preocupaci&oacute;n por tus datos, no actives esta opci&oacute;n (y retira enseguida tu informaci&oacute;n de la Red).',
-'ortho_ce_mot_connu' => 'Esta palabra est&aacute; en el diccionario del sitio.',
-'ortho_dico_absent' => 'No se ha encontrado ning&uacute;n diccionario para este idioma',
-'ortho_mode_demploi' => 'Se han subrayado en rojo las palabras no reconocidas. Puedes pulsar sobre cada palabra para mostrar sugerencias para su correcci&oacute;n.',
-'ortho_mots_a_corriger' => 'palabras por corregir',
-'ortho_orthographe' => 'Ortograf&iacute;a',
-'ortho_supprimer_ce_mot' => 'Suprimir esta palabra del diccionario',
-'ortho_trop_de_fautes' => 'Atenci&oacute;n: tu texto contiene demasiadas faltas de ortograf&iacute;a, no se ha sugerido ninguna correcci&oacute;n para no sobrecargar el sistema.',
-'ortho_trop_de_fautes2' => 'Comienza por corregir las faltas m&aacute;s evidentes y vuelve a intentarlo.',
-'ortho_verif_impossible' => 'El sistema no puede comprobar la ortograf&iacute;a de este texto.',
-'ortho_verifier' => 'Revisar la ortograf&iacute;a',
 
 
 // P
@@ -1248,8 +1231,6 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 'pass_retour_public' => 'Volver al sitio p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Nada que hacer aqu&iacute;.',
 'pass_vousinscrire' => 'Inscribirse en este sitio',
-'previsualisation' => 'Previsualizaci&oacute;n',
-'previsualiser' => 'Previsualizar',
 
 
 // S
@@ -1258,14 +1239,9 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 
 
 // T
-'taille_cache_infinie' => 'Este sitio no tiene previsto un l&iacute;mite del tama&ntilde;o de la carpeta <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP intenta limitar el tama&ntilde;o de la carpeta <code>CACHE/</code> de este sitio a unos <b>@octets@</b> de datos.',
-'taille_cache_octets' => 'El tama&ntilde;o de la cache es actualmente de @octets@.',
-'taille_cache_vide' => 'La cache est&aacute; vac&iacute;a.',
 'taille_ko' => '@taille@&nbsp;KB',
 'taille_mo' => '@taille@&nbsp;MB',
 'taille_octets' => '@taille@&nbsp;bytes',
-'taille_repertoire_cache' => 'Tama&ntilde;o de la carpeta cache',
 'text_article_propose_publication' => 'Art&iacute;culo propuesto a la publicaci&oacute;n.<br> No dudes en dar tu opini&oacute;n en el foro aferente, que se encuentra m&aacute;s adelante en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso debes especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
 'texte_actualite_site_1' => 'Una vez que te hayas familiarizado con la interfaz, pincha en &laquo;',
@@ -1525,20 +1501,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br><img src="puce.g
 'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ',
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
-'trad_reference' => '(art&iacute;culo de referencia)',
-
-
-// U
-'upload_fichier_zip' => 'Fichero ZIP',
-'upload_fichier_zip_texte' => 'El fichero que se propone instalar es un fichero Zip.',
-'upload_fichier_zip_texte2' => 'Este fichero puede ser:',
-'upload_limit' => 'Este fichero es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
-'upload_zip_decompacter' => 'descomprimido y cada uno de los elementos que contiene instalado en el sitio. Los ficheros que van a ser instalados en el sitio son:',
-'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
-
-
-// V
-'version_initiale' => 'Versi&oacute;n inicial'
+'trad_reference' => '(art&iacute;culo de referencia)'
 
 );
 
