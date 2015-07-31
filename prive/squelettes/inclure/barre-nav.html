@@ -20,7 +20,7 @@
 		<div class='largeur clearfix'>
 			<p class='session'><a
 				   title='<:icone_informations_personnelles:>'
-				   href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|typo)]</strong>
+				   href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong>
 				</a> |
 				<a class='menu_lang'
 					 href='#URL_ECRIRE{configurer_langage}'
@@ -34,7 +34,7 @@
 				   class='info'
 					 title='Informations sur [(#NOM_SITE|attribut_html)]'
 					 href='#URL_ECRIRE{configurer_identite}'><strong
-			 	  class='nom'> #NOM_SITE_SPIP </strong></a>|
+			 	  class='nom'>[ (#NOM_SITE_SPIP|couper{35}) ]</strong></a>|
 				<a class='voir'
 					 href='#URL_SITE_SPIP'><:icone_visiter_site:></a>
 			</p>
