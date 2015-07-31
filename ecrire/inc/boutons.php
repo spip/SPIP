@@ -281,7 +281,6 @@ function definir_barre_onglets($rubrique) {
 		$onglets['fichiers']=
 		  new Bouton('traductions-24.gif', 'module_fichiers_langues',
 			generer_url_ecrire("lang_raccourcis"));
-		}
 	break;
 
 	// inutilise
