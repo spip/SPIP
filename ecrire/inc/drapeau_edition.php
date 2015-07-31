@@ -96,7 +96,7 @@ function mention_qui_edite ($id, $type='article') {
 	if ($modif) {
 		$quand = 0;
 		foreach ($modif as $duo) {
-			$auteurs[] = typo(extraire_multi(key($duo)));
+			$auteurs[] = typo(key($duo));
 			$quand = max($quand, current($duo));
 		}
 		// format lie a la chaine de langue 'avis_article_modifie'
