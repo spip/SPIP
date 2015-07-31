@@ -69,6 +69,7 @@ function init_var_mode(){
 				$GLOBALS['var_images'] = true;
 			}
 		}		
+		$done = true;
 	}
 }
 
