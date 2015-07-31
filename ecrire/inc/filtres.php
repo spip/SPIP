@@ -1699,11 +1699,13 @@ function filtre_end($array) {
 	return filtre_valeur_tableau($array,@count($array)-1);
 }
 
+// http://doc.spip.org/@filtre_push
 function filtre_push($array, $val) {
 	if($array == '' OR !array_push($array, $val)) return '';
 	return $array;
 }
 
+// http://doc.spip.org/@filtre_find
 function filtre_find($array, $val) {
 	return ($array != '' AND in_array($val, $array));
 }
