@@ -87,6 +87,21 @@ define ('_url_arbo_minuscules',1);
 #define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
 define('_MARQUEUR_URL', false);
 
+function url_arbo_parent($type){
+	static $parents = null;
+	if (is_null($parents)){
+		$parents = array(
+			  'article'=>array('id_rubrique','rubrique'),
+			  'rubrique'=>array('id_parent','rubrique'),
+			  'breve'=>array('id_rubrique','rubrique'),
+			  'site'=>array('id_rubrique','rubrique'));
+		if (isset($GLOBALS['url_arbo_parents']) AND !isset($_REQUEST['url_arbo_parents'])){
+			$parents = array_merge($parents,$GLOBALS['url_arbo_parents']);
+		}			  
+	}
+	return (isset($parents[$type])?$parents[$type]:'');
+}
+
 function url_arbo_terminaison($type){
 	static $terminaison_types = null;
 	if ($terminaison_types==null){
@@ -229,20 +244,14 @@ function declarer_url_arbo($type, $id_objet) {
 			$champ_titre = 'titre';
 			
 		// parent
-		$champ_parent = (isset($GLOBALS['url_arbo_parents']) AND !isset($_REQUEST['url_arbo_parents']))?
-			$GLOBALS['url_arbo_parents']
-			:array(
-			  'article'=>array('id_rubrique','rubrique'),
-			  'rubrique'=>array('id_parent','rubrique'),
-			  'breve'=>array('id_rubrique','rubrique'),
-			  'site'=>array('id_rubrique','rubrique'));
-		$sel_parent = isset($champ_parent[$type])?", O.".reset($champ_parent[$type]).' as parent':'';
+		$champ_parent = url_arbo_parent($type);
+		$sel_parent = ($champ_parent)?", O.".reset($champ_parent).' as parent':'';
 	
 		//  Recuperer une URL propre correspondant a l'objet.
 		$row = sql_fetsel("U.url, U.date, O.$champ_titre $sel_parent", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
 		if ($row){
 			$urls[$type][$id_objet] = $row;
-			$urls[$type][$id_objet]['type_parent'] = isset($champ_parent[$type])?end($champ_parent[$type]):'';
+			$urls[$type][$id_objet]['type_parent'] = $champ_parent?end($champ_parent):'';
 		}
 	}
 
@@ -463,6 +472,7 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 		  .implode('|',array_map('preg_quote',$t)).')$}i', '', $url_propre);
 
 	$synonymes_types = url_arbo_type('');
+	$types_parents = array();
 	
 	// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
 	$url_arbo = explode('/',$url_propre);
@@ -494,11 +504,14 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			}*/
 	
 			$col_id = id_table_objet($type);
-			$contexte[$col_id] = $row['id_objet'];
-			if ($type!='rubrique' OR !in_array($entite,array('article','breve','site')))
-				$entite = $row['type'];
-			if ($type=='rubrique')
-				$url_arbo = array();
+			if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
+				$contexte[$col_id] = $row['id_objet'];
+			if (!$entite 
+				OR !in_array($type,$types_parents))
+				$entite = $type;
+
+			if ($p = url_arbo_parent($type))
+				$types_parents[]=end($p);
 		}
 	}
 
