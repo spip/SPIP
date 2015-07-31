@@ -405,7 +405,7 @@ function sql_errno($serveur='') {
 
 // http://doc.spip.org/@sql_explain
 function sql_explain($q, $serveur='', $option=true) {
-	$f = sql_serveur('explain', $serveur,  $option==='continue' OR $option===false);
+	$f = sql_serveur('explain', $serveur,  'continue');
 	if (!is_string($f) OR !$f) return false;
 	$r = $f($q, $serveur, $option!==false);
 	if ($r === false) spip_sql_erreur($serveur);

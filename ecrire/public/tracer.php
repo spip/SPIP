@@ -26,13 +26,12 @@ function trace_query_start()
 }
 
 // http://doc.spip.org/@trace_query_end
-function trace_query_end($query, $start, $result, $serveur='')
-{
+function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 	if ($start)
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
-	if ($err = sql_errno() AND !preg_match('/^select\b/i', $query))
-		erreur_squelette(array(sql_errno(), sql_error(), $query));
+	if ($erreur AND !preg_match('/^select\b/i', $query))
+		erreur_squelette(array(sql_errno($serveur), $erreur, $query));
 	return $result;
 }
 
@@ -89,8 +88,8 @@ function chrono_requete($temps)
 
 		if (!is_array($explain))
 			$explain = array();
-		foreach($explain as $k => $v) {
-			$explain[$k] = "<tr><th>$k</th><td>"
+		foreach($explain as $j => $v) {
+			$explain[$j] = "<tr><th>$j</th><td>"
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
@@ -104,7 +103,7 @@ function chrono_requete($temps)
 		. join('', $explain)
 		. "</table>";
 
-		$temps[$key] = array($e, $env, $boucle);
+		$temps[$key] = array($e, $env, $k);
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);

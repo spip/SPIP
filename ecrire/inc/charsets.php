@@ -788,7 +788,7 @@ $GLOBALS['CHARSET'] = Array();
 // dans les preg_replace pour ne pas casser certaines lettres accentuees :
 // en utf-8 chr(195).chr(160) = a` alors qu'en iso-latin chr(160) = nbsp
 if (!isset($GLOBALS['meta']['pcre_u'])
-OR isset($_GET['var_mode'])) {
+  OR (isset($_GET['var_mode']) AND !isset($_GET['var_profile']))) {
 	include_spip('inc/meta');
 	ecrire_meta('pcre_u',
 		$u = ($GLOBALS['meta']['charset'] == 'utf-8'
