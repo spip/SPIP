@@ -1,10 +1,37 @@
 <a id="formulaire"></a>
-<form action="[(#ENV{url})][(#ENV*{previsu}|?{'#formulaire',''})]" method="post">[
-(#ENV*{parametres_forum})
-][<p>(#ENV*{modere})</p>
-][(#ENV*{afficher_texte_hidden})
-][(#ENV*{afficher_texte_input})
-	[(#ENV*{previsu})
+<form action="[(#ENV{url})][(#ENV**{previsu}|?{'#formulaire',''})]" method="post">[
+<input type='hidden' name='id_article' value='(#ENV{id_article})' />][
+<input type='hidden' name='id_breve' value='(#ENV{id_breve})' />][
+<input type='hidden' name='id_forum' value='(#ENV{id_forum})' />][
+<input type='hidden' name='id_rubrique' value='(#ENV{id_rubrique})' />][
+<input type='hidden' name='id_syndic' value='(#ENV{id_syndic})' />][
+<input type='hidden' name='alea' value='(#ENV{alea})' />][
+<input type='hidden' name='hash' value='(#ENV{hash})' />][
+<input type='hidden' name='afficher_texte' value='(#ENV{afficher_texte})' />][
+<input type='hidden' name='retour_forum' value='(#ENV{retour_forum}|urlencode)' />][
+<p>(#ENV{modere})<:forum_info_modere:></p>
+][(#ENV*{previsu})]
+<p>
+<BOUCLE_G(GROUPES_MOTS){forum=oui}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+>[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<div class='spip_encadrer' style='font-size: 80%;'>
+	<b>#TITRE</b>
+	    <INCLURE(page.php3){fond=choix_mots}
+	      {id_groupe}
+	      {ajouter_mot}
+	      {unseul}>
+	</div>
+]</BOUCLE_G>[
+(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
+<br /><div align='right'>[
+<input type='hidden' name='titre' value='(#ENV{titre})' />]
+<input type='submit' class='spip_bouton' value="<:forum_valider:>" />
+</div>][
+(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_titre:></b></legend>
 		<label><input type="text" name="titre" 
@@ -18,7 +45,6 @@
 		[(#ENV{texte}|barre_forum)]
 		</fieldset>
 		<br />
-		[<p>(#ENV*{table})</p>]
 		<fieldset class="spip_encadrer">
 			<legend><:forum_lien_hyper:></legend>
 			<p><:forum_page_url:></p>
@@ -36,17 +62,18 @@
 			<legend><:forum_qui_etes_vous:></legend>
 			<p><label><:forum_votre_nom:>
 				<input type="text" name="auteur" value="[(#ENV{auteur})]"
-					class="forml" size="40" [(#ENV{disabled})] />
+					class="forml" size="40"[
+					disabled='(#ENV{disabled})'] />
 			</label></p>
 			<p><label><:forum_votre_email:>
 				<input type="text" name="email_auteur"
 				value="[(#ENV{email_auteur})]"
-				class="forml" size="40" [(#ENV{disabled})] />
+				class="forml" size="40" [
+				disabled='(#ENV{disabled})'] />
 			</label></p>
 		</fieldset>
-		<br />
+
 		<div align="#LANG_RIGHT">
 		<input type="submit" value="<:forum_voir_avant:>"
 		class="spip_bouton" /></div>
-	]
 ]</form>
