@@ -29,7 +29,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
 	$bandeau = "<div id='bandeau-gadgets'>".
-	"\n<table width='$largeur' cellpadding='0' cellspacing='0'><tr><td>\n<div style='position: relative; z-index: 1000;'>"
+	"\n<div style='width:{$largeur}px' class='centered'>\n<div style='position: relative; z-index: 1000; height:1%'>"
 
 	// GADGET Menu rubriques
 	. "\n<div id='bandeautoutsite' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
@@ -131,7 +131,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 
 	$bandeau .= "</div>";
-	$bandeau .= "</td></tr></table>\n";
+	$bandeau .= "</div>\n";
 
 
 	$bandeau .= '</div>';

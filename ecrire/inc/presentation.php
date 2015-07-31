@@ -1271,10 +1271,10 @@ function envoi_link($nom_site_spip) {
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', _SENS_ET_COULEURS) .'" />' . "\n"
-  . "<!-- [if IE lt 8] -->\n"
+  . "<!--[if lt IE 8]>\n"
   . '<link rel="stylesheet" type="text/css" href="'
   . generer_url_public('style_prive_ie', _SENS_ET_COULEURS) .'" />' . "\n"
-  . "<!-- [endif] -->"
+  . "<![endif]-->\n"
   
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'

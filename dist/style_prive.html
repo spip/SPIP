@@ -241,6 +241,16 @@ select.fondl {
 	position:absolute;
 }
 
+/*style for #bandeau_couleur*/
+.bandeau_couleur {text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];padding:0px;margin:0px}
+
+#bandeau_couleur {min-height:20px;padding:2px 0}
+#bandeau_couleur1 .menu-item {width:230px;text-align:#ENV{ltr}}
+#bandeau_couleur3 .menu-item {width:150px;text-align:[(#ENV{ltr}|choixsiegal{left,right,left})]}
+#bandeau_couleur4 .menu-item {width:68px;text-align:center;margin:0 5px}
+#bandeau_couleur5 .menu-item {width:114px;}
+#bandeau_couleur6 .menu-item {width:32px}
+
 /*
  * Icones et bandeaux
  */
