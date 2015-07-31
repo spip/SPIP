@@ -301,7 +301,7 @@ function parser_boucle($texte, $id_parent) {
 	
 					// Special rubriques
 					else if ($param == 'meme_parent') {
-						$req_where[] = "$table.id_parent=0\$id_parent";
+						$req_where[] = "$table.id_parent=\$id_parent";
 						if ($type == 'forums') {
 							$req_where[] = "$table.id_parent > 0";
 							$plat = true;
