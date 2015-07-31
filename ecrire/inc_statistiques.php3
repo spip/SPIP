@@ -247,8 +247,8 @@ function calculer_n_referers($nb_referers) {
 
 
 function calculer_referers() {
-	spip_log("analyse referers");
 	$encore = calculer_n_referers(100);
+	spip_log("analyse referers $encore");
 	if ($encore) {
 		include_ecrire("inc_meta.php3");
 		ecrire_meta ("calculer_referers_now", "oui");
