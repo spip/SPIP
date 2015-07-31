@@ -125,7 +125,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			"' class='fondo' style='font-size:9px' /></div>" .
 			$afficher;
 
-		$type = $GLOBALS['table_logos'][$id_objet];
+		$type = type_du_logo($id_objet);
 		return generer_action_auteur('iconifier',
 			"$id+$type$mode$id",
 			generer_url_ecrire($script, "$id_objet=$id", true), 
