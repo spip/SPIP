@@ -14,6 +14,8 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+## cette API ne sait pas gerer les aliases ; a revoir...
+
 global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
 $tables_images = array(
@@ -34,6 +36,7 @@ $tables_sequences = array(
 			  'aiff' => 'AIFF',
 			  'asf' => 'Windows Media',
 			  'avi' => 'Windows Media',
+			  'flv' => 'Flash Video',
 			  'mid' => 'Midi',
 			  'mng' => 'MNG',
 			  'mov' => 'QuickTime',
@@ -52,9 +55,11 @@ $tables_sequences = array(
 
 // Documents varies
 $tables_documents = array(
+			  'abw' => 'Abiword',
 			  'ai' => 'Adobe Illustrator',
 			  'bz2' => 'BZip',
 			  'bin' => 'Binary Data',
+			  'blend' => 'Blender',
 			  'c' => 'C source',
 			  'css' => 'Cascading Style Sheet',
 			  'deb' => 'Debian',
@@ -79,13 +84,29 @@ $tables_documents = array(
 			  'sxi' => 'OpenOffice Impress',
 			  'sxw' => 'OpenOffice',
 			  'tex' => 'LaTeX',
-			  'torrent' => 'BitTorrent',
 			  'tgz' => 'TGZ',
+			  'torrent' => 'BitTorrent',
+			  'ttf' => 'TTF Font',
 			  'txt' => 'texte',
 			  'xcf' => 'GIMP multi-layer',
 			  'xls' => 'Excel',
 			  'xml' => 'XML',
-			  'zip' => 'Zip'
+			  'zip' => 'Zip',
+
+			// open document format
+			'odt' => 'opendocument text',
+			'ods' => 'opendocument spreadsheet',
+			'odp' => 'opendocument presentation',
+			'odg' => 'opendocument graphics',
+			'odc' => 'opendocument chart',
+			'odf' => 'opendocument formula',
+			'odb' => 'opendocument database',
+			'odi' => 'opendocument image',
+			'odm' => 'opendocument text-master',
+			'ott' => 'opendocument text-template',
+			'ots' => 'opendocument spreadsheet-template',
+			'otp' => 'opendocument presentation-template',
+			'otg' => 'opendocument graphics-template'
 			  );
 
 $tables_mime = array(
@@ -103,6 +124,7 @@ $tables_mime = array(
 		'aiff'=>'audio/x-aiff',
 		'asf'=>'video/x-ms-asf',
 		'avi'=>'video/x-msvideo',
+		'flv' => 'video/x-flv',
 		'mid'=>'audio/midi',
 		'mng'=>'video/x-mng',
 		'mov'=>'video/quicktime',
@@ -120,7 +142,9 @@ $tables_mime = array(
 
 		// Documents varies
 		'ai' =>'application/illustrator',
+		'abw' =>'application/abiword',
 		'bin' => 'application/octet-stream', # le tout-venant
+		'blend' => 'application/x-blender',
 		'bz2'=>'application/x-bzip2',
 		'c'  =>'text/x-csrc',
 		'css'=>'text/css',
@@ -146,12 +170,28 @@ $tables_mime = array(
 		'sxi'=>'application/vnd.sun.xml.impress',
 		'sxw'=>'application/vnd.sun.xml.writer',
 		'tex'=>'text/x-tex',
-		'torrent' => 'application/x-bittorrent',
 		'tgz'=>'application/x-gtar',
+		'torrent' => 'application/x-bittorrent',
+		'ttf'=>'application/x-font-ttf',
 		'txt'=>'text/plain',
 		'xcf'=>'application/x-xcf',
 		'xls'=>'application/vnd.ms-excel',
 		'xml'=>'application/xml',
-		'zip'=>'application/zip'
+		'zip'=>'application/zip',
+
+		// open document format
+		'odt' => 'application/vnd.oasis.opendocument.text',
+		'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+		'odp' => 'application/vnd.oasis.opendocument.presentation',
+		'odg' => 'application/vnd.oasis.opendocument.graphics',
+		'odc' => 'application/vnd.oasis.opendocument.chart',
+		'odf' => 'application/vnd.oasis.opendocument.formula',
+		'odb' => 'application/vnd.oasis.opendocument.database',
+		'odi' => 'application/vnd.oasis.opendocument.image',
+		'odm' => 'application/vnd.oasis.opendocument.text-master',
+		'ott' => 'application/vnd.oasis.opendocument.text-template',
+		'ots' => 'application/vnd.oasis.opendocument.spreadsheet-template',
+		'otp' => 'application/vnd.oasis.opendocument.presentation-template',
+		'otg' => 'application/vnd.oasis.opendocument.graphics-template'
 	);
 ?>
