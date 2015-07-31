@@ -210,6 +210,30 @@ function editer_texte_recolle($texte, $att_text)
 	return array($texte,$textes_supplement);
 }
 
+/**
+ * Determiner un titre automatique si non renseigne,
+ * a partir des champs textes de contenu
+ *
+ * @param string $champ_titre
+ *   nom du champ titre
+ * @param array $champs_contenu
+ *   liste des champs contenu textuels
+ * @param int $longueur
+ * @return void
+ */
+function titre_automatique($champ_titre,$champs_contenu,$longueur=50){
+	// auto-renseigner le titre si il n'existe pas
+	if (!_request($champ_titre)){
+		foreach($champs_contenu as $c){
+			if ($t = _request($c))
+				break;
+		}
+		if ($t){
+			include_spip('inc/texte_mini');
+			set_request($champ_titre,couper($t,$longueur,"..."));
+		}
+	}
+}
 
 // Produit la liste des md5 d'un tableau de donnees, sous forme
 // de inputs html

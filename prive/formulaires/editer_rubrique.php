@@ -41,8 +41,10 @@ function formulaires_editer_rubrique_identifier_dist($id_rubrique='new', $id_par
 }
 
 function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
-
-	$erreurs = formulaires_editer_objet_verifier('rubrique',$id_rubrique,array('titre'));
+	// auto-renseigner le titre si il n'existe pas
+	titre_automatique('titre',array('descriptif','texte'));
+	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_rubrique si vide
+	$erreurs = formulaires_editer_objet_verifier('rubrique',$id_rubrique,array());
 	return $erreurs;
 }
 
