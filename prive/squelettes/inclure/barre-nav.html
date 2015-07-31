@@ -20,8 +20,7 @@
 		<div class='largeur clearfix'>
 			<p class='session'><a
 				   title='<:icone_informations_personnelles:>'
-				   href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong>
-				</a> |
+				   href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong></a> |
 				<a class='menu_lang'
 					 href='#URL_ECRIRE{configurer_langage}'
 					 title='<:titre_config_langage:>'>[(#CHEMIN_IMAGE{langues.png}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
