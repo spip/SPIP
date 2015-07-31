@@ -166,6 +166,7 @@ r15858 | salvatore | langues (ecrire)
 r15859 | cedric    | se placer sur les extensions de la branche 2.1
 r15860 | cedric    | permettre de reset toutes les notes a zero. Ne doit etre utilise qu'en contexte de test.
 
+field spip_forum.ip compatible ipV6 (40 caracteres #1953)
 
 -----------------------------
 
