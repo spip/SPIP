@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/date');
-include_ecrire ("inc_abstract_sql");
+include_spip('base/abstract_sql');
 
 function exec_message_edit_dist()
 {

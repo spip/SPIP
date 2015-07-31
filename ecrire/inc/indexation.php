@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/create');
-include_ecrire('inc_abstract_sql');
+include_spip('base/abstract_sql');
 
 // Quels formats sait-on extraire ?
 $GLOBALS['extracteur'] = array (
@@ -68,7 +68,7 @@ $INDEX_critere_indexation['spip_syndic']="statut='publie'";
 $INDEX_critere_indexation['spip_forum']="statut='publie'";
 $INDEX_critere_indexation['spip_signatures']="statut='publie'";
 
-// Criteres de des-indexation (optimisation dans inc_optimiser)
+// Criteres de des-indexation (optimisation dans base/optimiser)
 global $INDEX_critere_optimisation;
 $INDEX_critere_optimisation['spip_articles']="statut<>'publie'";
 $INDEX_critere_optimisation['spip_breves']="statut<>'publie'";

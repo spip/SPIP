@@ -19,7 +19,7 @@ include_spip('inc/texte');
 include_spip('inc/lang');
 include_spip('inc/mail');
 include_spip('inc/forum');
-include_ecrire("inc_abstract_sql");
+include_spip('base/abstract_sql');
 spip_connect();
 
 charger_generer_url();

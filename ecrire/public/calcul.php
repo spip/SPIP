@@ -23,9 +23,9 @@ include_spip("inc/indexation");
 include_spip('inc/texte');
 include_spip('inc/lang');
 include_spip('inc/documents');
-include_ecrire("inc_abstract_sql");
+include_spip('base/abstract_sql');
 include_spip('inc/forum');
-include_ecrire("inc_debug_sql");
+include_spip('public/debug');
 include_spip('inc/distant');
 include_spip('public/calcul-outils');
 
@@ -106,7 +106,6 @@ function charger_squelette ($squelette) {
 	else {
 
 		if ($GLOBALS['var_mode'] == 'debug') {
-			include_ecrire("inc_debug_sql");
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
 		eval('?'.'>'.$skel_code);
@@ -150,31 +149,28 @@ function cherche_page ($cache, $contexte, $fond)  {
 		lang_select($lang);
 
 	$skel = chercher_squelette($fond,
-			$id_rubrique_fond,
-			$GLOBALS['spip_lang']);
+		$id_rubrique_fond,
+		$GLOBALS['spip_lang']);
 
 	// Charger le squelette et recuperer sa fonction principale
 	// (compilation automatique au besoin) et calculer
 
 	$page = array();
 
-	if ($skel) {
-		if ($fonc = charger_squelette($skel)) {
-			spip_timer('calcul page');
-			$page = $fonc(array('cache' => $cache), array($contexte));
-			spip_log("calcul ("
-				.spip_timer('calcul page')
-				.") [$skel] ".
-				($cache ? $cache.cache_gz($page).' ' : '')
-				.'- '.strlen($page['texte']).' octets'
-			);
-		}
+	if ($fonc = charger_squelette($skel)) {
+		spip_timer('calcul page');
+		$page = $fonc(array('cache' => $cache), array($contexte));
+		spip_log("calcul ("
+			.spip_timer('calcul page')
+			.") [$skel] ".
+			($cache ? $cache.cache_gz($page).' ' : '')
+			.'- '.strlen($page['texte']).' octets'
+		);
+	}
 
-		// Passer la main au debuggueur)
-		if ($GLOBALS['var_mode'] == 'debug') {
-			include_ecrire("inc_debug_sql");
-			debug_dumpfile ($page['texte'], $fonc, 'resultat');
-		}
+	// Passer la main au debuggueur)
+	if ($GLOBALS['var_mode'] == 'debug') {
+		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
 #	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
 	// Retourner la structure de la page

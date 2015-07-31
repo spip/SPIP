@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
 include_spip('inc/minipres');
-include_spip ('base/create');
-include_ecrire("inc_db_mysql");
+include_spip('base/create');
+include_spip('base/db_mysql');
 
 function exec_install_dist()
 {
@@ -125,7 +125,7 @@ function install_6()
 		redirige_par_entete(generer_url_ecrire('install'));
 
 	# maintenant on connait le vrai charset du site s'il est deja configure
-	# sinon par defaut inc_meta reglera _DEFAULT_CHARSET
+	# sinon par defaut inc/meta reglera _DEFAULT_CHARSET
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
 	include_spip('inc/meta');
 	lire_metas();
@@ -246,7 +246,7 @@ function install_4()
 	install_debut_html();
 
 	// Necessaire pour appeler les fonctions SQL wrappees
-	include_ecrire("inc_db_mysql");
+	include_spip('base/db_mysql');
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
 	echo "<P>\n";
@@ -305,10 +305,11 @@ function install_4()
 
 
 	if ($result_ok && $maj_ok) {
+		###### format a changer, a terme...
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.2;\n";
-		$conn .= "include_ecrire('inc_db_mysql');\n";
+		$conn .= "include_spip('base/db_mysql');\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
 #		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
@@ -786,6 +787,7 @@ function install_unpack()
 
   fin_admin($action);
 
+	## ??????? a verifier
   if (@file_exists(_DIR_RACINE . "spip_loader" . _EXTENSION_PHP))
     redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else if (@file_exists(_DIR_RACINE . "spip_unpack" . _EXTENSION_PHP))

@@ -146,7 +146,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
 	return
 		('<'.'?php 
-include_ecrire(\'inc_lang\');
+include_spip(\'inc/lang\');
 lang_select("'.$lang.'");
 include_once("'
 		. $file

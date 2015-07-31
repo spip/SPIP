@@ -360,7 +360,6 @@ ecrire/lang/public_ru.php -text
 ecrire/lang/spip_br.php -text
 ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_ru.php -text
-ecrire/page.php -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
 ecrire/polices/dustismo_bold.ttf -text

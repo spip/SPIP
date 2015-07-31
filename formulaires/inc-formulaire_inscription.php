@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_ecrire('inc_abstract_sql');
+include_spip('base/abstract_sql');
 
 // Balise independante du contexte
 global $balise_FORMULAIRE_INSCRIPTION_collecte ;

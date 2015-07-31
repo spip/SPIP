@@ -21,7 +21,7 @@ include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
-include_ecrire ("inc_abstract_sql");
+include_spip('base/abstract_sql');
 
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
@@ -1638,7 +1638,7 @@ if ($titre) {
 	revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old,
 			    ($flag_auteur||$statut_rubrique),
 			    $new, $champs);
-	$id_article_bloque = $id_article;   // message pour inc_presentation
+	$id_article_bloque = $id_article;   // message pour inc/presentation
 
  }
  }

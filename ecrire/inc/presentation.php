@@ -714,7 +714,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql");
+			include_spip ('base/abstract_sql');
 			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
 		}
 	}
@@ -766,7 +766,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql");
+			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 
@@ -943,7 +943,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql");
+			include_spip('base/abstract_sql');
 			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
 		}
 
@@ -981,7 +981,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql");
+			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 

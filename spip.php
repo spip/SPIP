@@ -13,6 +13,6 @@
 # ou est l'espace prive ?
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
 # au travail...
-include _DIR_RESTREINT_ABS.'page.php';
+include _DIR_RESTREINT_ABS.'public.php';
 
 ?>

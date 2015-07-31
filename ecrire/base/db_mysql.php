@@ -102,7 +102,7 @@ function spip_mysql_select($select, $from, $where,
 	}
 
 	if (!($res = @spip_query($q))) {
-		include_ecrire('inc_debug_sql');
+		include_spip('inc/debug');
 		erreur_requete_boucle($q, $id, $table,
 				      spip_sql_errno(),
 				      spip_sql_error());

@@ -57,6 +57,7 @@ function maj_invalideurs ($fichier, &$page, $duree) {
 // pour les petitions et autres, l'invalideur est par exemple :
 // 'varia/pet60'
 function insere_invalideur($inval, $fichier) {
+	if ($inval)
 	foreach ($inval as $type => $a) {
 		if (is_array($a)) {
 			$values = array();
