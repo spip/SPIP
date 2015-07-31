@@ -193,7 +193,7 @@ function generer_htpass($pass) {
 //
 // http://doc.spip.org/@verifier_htaccess
 function verifier_htaccess($rep) {
-	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
+	$htaccess = rtrim($rep,"/") . "/" . _ACCESS_FILE_NAME;
 	if ((!@file_exists($htaccess)) AND 
 	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
 		spip_log("demande de creation de $htaccess");
