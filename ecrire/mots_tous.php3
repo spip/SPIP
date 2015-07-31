@@ -183,7 +183,7 @@ while ($row_syndic = spip_fetch_array($result_syndic)){
 // On boucle d'abord sur les groupes de mots
 //
 
-$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
+$query_groupes = "SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi";
 $result_groupes = spip_query($query_groupes);
 
 while ($row_groupes = spip_fetch_array($result_groupes)) {
@@ -239,7 +239,8 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	// Afficher les mots-cles du groupe
 	//
-	$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY titre";
+	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
+
 	$tranches = afficher_tranches_requete($query, 3);
 
 	$table = '';
@@ -248,8 +249,6 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 		echo "<div class='liste'>";
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
-		echo $tranches;
-
 		$result = spip_query($query);
 		while ($row = spip_fetch_array($result)) {
 		
@@ -257,7 +256,8 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 			
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-
+			$multi = $row['multi'];
+			
 			if ($connect_statut == "0minirezo")
 				$aff_articles="prepa,prop,publie,refuse";
 			else

@@ -256,4 +256,31 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	return "($in_sql)";
 }
 
+
+function creer_objet_multi ($objet, $lang) {
+	$retour = "(IF(INSTR(".$objet.", '<multi>') = 0 , ".
+		"     TRIM(".$objet."), ".
+		"     CONCAT( ".
+		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
+		"          IF( ".
+		"               INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
+		"               IF( ".
+		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
+		"                     INSERT( ".
+		"                          TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
+		"                          1, ".
+		"                          INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
+		"                          '' ".
+		"                     ), ".
+		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
+		"                ), ".
+		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
+		"          ) ".
+		"     ) ".
+		")) AS multi ";
+
+	return $retour;
+}
+
+
 ?>
