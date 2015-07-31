@@ -294,7 +294,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//////////  Les articles publies
 	/////////////////////////
 
-	@define('_TRI_ARTICLES_RUBRIQUE', 'date');  # 'num titre'
+	if (!defined('_TRI_ARTICLES_RUBRIQUE')) define('_TRI_ARTICLES_RUBRIQUE', 'date');  # 'num titre'
 	$res .=  $lister_objets('articles',array('titre'=>_T('info_tous_articles_presents'),'statut'=>'publie', 'id_rubrique'=>$id_rubrique,'par'=>_TRI_ARTICLES_RUBRIQUE));
 
 	// si une rubrique n'a pas/plus d'article publie, afficher les eventuels articles refuses

@@ -651,7 +651,7 @@ function lister_themes_prives(){
 	if (is_null($themes)){
 		// si pas encore definie
 		if (!defined('_SPIP_THEME_PRIVE'))
-			@define('_SPIP_THEME_PRIVE','spip');
+			define('_SPIP_THEME_PRIVE', 'spip');
 		$themes = array(_SPIP_THEME_PRIVE);
 		$prefs = $GLOBALS['visiteur_session']['prefs'];
 		if (is_string($prefs))

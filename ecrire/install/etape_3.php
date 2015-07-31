@@ -142,7 +142,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
 
 	if ($chmod_db) {
-		install_fichier_connexion(_FILE_CHMOD_TMP, "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod_db).");\n");
+		install_fichier_connexion(_FILE_CHMOD_TMP, "if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod_db).");\n");
 	}
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))

@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 # ou est l'espace prive ?
-@define('_DIR_RESTREINT_ABS', 'ecrire/');
+if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
 
 # rediriger les anciens URLs de la forme page.php3fond=xxx
