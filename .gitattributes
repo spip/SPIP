@@ -94,6 +94,8 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
+dist/javascript/jquery-1.0.1-forms.js -text
+dist/javascript/jquery-1.0.1-forms.pack.js -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text
