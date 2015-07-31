@@ -275,7 +275,7 @@ le site \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"@nom_site_spip@\\\\
 'form_indiquer_nom' => '<NEW> Veuillez indiquer votre nom.',
 'form_indiquer_nom_site' => '<NEW> Veuillez indiquer le nom de votre site.',
 'form_pet_adresse_site' => '<NEW> Adresse de votre site',
-'form_pet_aucune_signature' => '<NEW> Aucune signature ne correspond &agrave; ce code...',
+'form_pet_aucune_signature' => '<NEW> Aucune signature ne correspond à ce code...',
 'form_pet_confirmation' => '<NEW> Veuillez confirmer votre signature :',
 'form_pet_deja_enregistre' => '<NEW> Ce site est d&eacute;j&agrave; enregistr&eacute;',
 'form_pet_deja_signe' => '<NEW> Vous avez d&eacute;j&agrave; sign&eacute; ce texte.',
