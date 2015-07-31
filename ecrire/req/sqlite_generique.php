@@ -900,6 +900,39 @@ function spip_sqlite_insertq_multi($table, $tab_couples = array(), $desc = array
 }
 
 
+/**
+ * Retourne si le moteur SQL prefere utiliser des transactions.
+ *
+ * @param 
+ * @return bool true / false
+**/
+function spip_sqlite_preferer_transaction($serveur = '', $requeter = true) {
+	return true;
+}
+
+/**
+ * Demarre une transaction.
+ * Pratique pour des sql_updateq() dans un foreach,
+ * parfois 100* plus rapide s'ils sont nombreux en sqlite ! 
+ *
+**/
+function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true) {
+	if (!$requeter) return "BEGIN TRANSACTION";
+	spip_sqlite::demarrer_transaction($serveur);
+	return true;
+}
+
+/**
+ * Cloture une transaction.
+ *
+**/
+function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
+	if (!$requeter) return "COMMIT";
+	spip_sqlite::finir_transaction($serveur);
+	return true;
+}
+
+
 // http://doc.spip.org/@spip_sqlite_listdbs
 function spip_sqlite_listdbs($serveur = '', $requeter = true){
 	_sqlite_init();
@@ -1642,6 +1675,9 @@ function _sqlite_ref_fonctions(){
 		'showtable' => 'spip_sqlite_showtable',
 		'update' => 'spip_sqlite_update',
 		'updateq' => 'spip_sqlite_updateq',
+		'preferer_transaction' => 'spip_sqlite_preferer_transaction',
+		'demarrer_transaction' => 'spip_sqlite_demarrer_transaction',
+		'terminer_transaction' => 'spip_sqlite_terminer_transaction',
 	);
 
 	// association de chaque nom http d'un charset aux couples sqlite 
