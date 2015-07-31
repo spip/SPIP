@@ -23,34 +23,45 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 
 
 // http://doc.spip.org/@puce_statut_auteur
+// Hack de compatibilite: les appels directs ont un  $type != 'auteur'
+// si l'auteur ne peut pas se connecter
 function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
-	return bonhomme_statut(array('statut' => $statut));
-}
-
-// http://doc.spip.org/@bonhomme_statut
-function bonhomme_statut($row) {
-	switch($row['statut']) {
+	switch($statut) {
 		case "nouveau":
 			return '';
 			break;
 		case "0minirezo":
-			return http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "",
-					_T('titre_image_administrateur'));
+			$img = "admin-12.gif";
+			$alt = _T('titre_image_administrateur');
+			$titre = _T('titre_image_administrateur');
 			break;
 		case "1comite":
-			if (($GLOBALS['auteur_session']['statut'] == '0minirezo')
-			AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
-			  return http_img_pack("visit-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur'));
-			else
-			  return http_img_pack("redac-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur_02'));
+			$img = "redac-12.gif";
+			$alt = _T('titre_image_redacteur');
+			$titre = _T('titre_image_redacteur_02');
 			break;
 		case "5poubelle":
-			return http_img_pack("poubelle.gif", _T('titre_image_auteur_supprime'), "",_T('titre_image_auteur_supprime'));
+			$img = "poubelle.gif";
+			$alt = _T('titre_image_auteur_supprime');
+			$titre = _T('titre_image_auteur_supprime');
 			break;
 		default:
-		  return http_img_pack("visit-12.gif", _T('titre_image_visiteur'), "",_T('titre_image_visiteur'));
+			$img = "visit-12.gif";
+			$alt = _T('titre_image_visiteur');
+			$titre = _T('titre_image_visiteur');
 			break;
 	}
+	if ($type != 'auteur') {
+	  $img2 = "croix-rouge.gif";
+	  $fond = http_style_background($img2, 'top right no-repeat; padding-right: 4px');
+	} else $fond = '';
+	  
+	return http_img_pack($img, $alt, $fond, $titre);
+}
+
+// http://doc.spip.org/@bonhomme_statut
+function bonhomme_statut($row) {
+	return puce_statut_auteur(0, $row['statut'], 0, ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])) ? '' : 'auteur');
 }
 
 
