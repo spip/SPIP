@@ -1462,7 +1462,7 @@ function balise_SESSION_dist($p) {
  * Compile la balise `#SESSION_SET` qui d’insérer dans la session
  * des données supplémentaires
  * 
- * @balise SESSION
+ * @balise SESSION_SET
  * @link http://www.spip.net/3984
  * @see balise_AUTORISER_dist()
  * @see balise_SESSION_SET_dist()
