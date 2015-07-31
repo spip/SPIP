@@ -13,16 +13,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-include_spip('inc/filtres');
+include_spip('inc/texte');
 
 // http://doc.spip.org/@exec_rechercher_dist
 function exec_rechercher_dist()
 {
 	global $id, $exclus, $type, $rac;
 
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$rac = htmlentities($rac);
+	$id = intval(_request('id'));
+	$exclus = intval(_request('exclus'));
+	$rac = htmlentities(_request('rac'));
+	$type = _request('type');
 
 	$where = split("[[:space:]]+", $type);
 	if ($where) {
@@ -58,14 +59,18 @@ function exec_rechercher_dist()
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-		$points[$id_rubrique] = $points[$id_rubrique] + 2;
+		if (isset($points[$id_rubrique]))
+		  $points[$id_rubrique] += 2;
+		else $points[$id_rubrique] = 0;
 	}
 	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_desc$where_exclus");
 	while ($row = spip_fetch_array($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-		$points[$id_rubrique] = $points[$id_rubrique] + 1;
+		if (isset($points[$id_rubrique]))
+		  $points[$id_rubrique] += 1;
+		else $points[$id_rubrique] = 0;
 	}
 		
 
