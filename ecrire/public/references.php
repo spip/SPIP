@@ -15,16 +15,27 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// index_pile retourne la position dans la pile du champ SQL $nom_champ 
-// en prenant la boucle la plus proche du sommet de pile (indique par $idb).
-// Si on ne trouve rien, on considere que ca doit provenir du contexte 
-// (par l'URL ou l'include) qui a ete recopie dans Pile[0]
-// (un essai d'affinage a debouche sur un bug vicieux)
-// Si ca reference un champ SQL, on le memorise dans la structure $boucles
-// afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
-
-// http://doc.spip.org/@index_pile
-function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
+/**
+ * index_pile retourne la position dans la pile du champ SQL $nom_champ
+ * en prenant la boucle la plus proche du sommet de pile (indique par $idb).
+ * Si on ne trouve rien, on considere que ca doit provenir du contexte
+ * (par l'URL ou l'include) qui a ete recopie dans Pile[0]
+ * (un essai d'affinage a debouche sur un bug vicieux)
+ * Si ca reference un champ SQL, on le memorise dans la structure $boucles
+ * afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
+ *
+ * http://doc.spip.org/@index_pile
+ *
+ * @param string $idb
+ * @param string $nom_champ
+ * @param Object $boucles
+ * @param string $explicite
+ *   indique que le nom de la boucle explicite dans la balise #_nomboucletruc:CHAMP
+ * @param bool $joker
+ *   indique que l'on accepte ou refuse le Champ joker * des iterateurs DATA
+ * @return string
+ */
+function index_pile($idb, $nom_champ, &$boucles, $explicite='', $joker=true) {
 
 	$i = 0;
 	if (strlen($explicite)) {
@@ -41,7 +52,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
 	// il y a incoherences qu'il vaut mieux eviter
 	while (isset($boucles[$idb])) {
-		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles);
+		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
 
 		if ($t) {
 		  if (!in_array($t, $boucles[$idb]->select)) {
@@ -61,7 +72,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 }
 
 // http://doc.spip.org/@index_tables_en_pile
-function index_tables_en_pile($idb, $nom_champ, &$boucles) {
+function index_tables_en_pile($idb, $nom_champ, &$boucles, $joker=true) {
 	global $exceptions_des_tables;
 
 	$r = $boucles[$idb]->type_requete;
@@ -84,7 +95,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 			return array("$t.$nom_champ", $nom_champ);
 		}
 		// Champ joker * des iterateurs DATA qui accepte tout
-		else if (isset($desc['field']['*'])) {
+		else if ($joker AND isset($desc['field']['*'])) {
 			$t = $boucles[$idb]->id_table;
 			return array($nom_champ, $nom_champ);
 		}
@@ -151,11 +162,21 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 	return array("$t.$excep", $nom_champ);
 }
 
-
-// cette fonction sert d'API pour demander le champ '$champ' dans la pile
-// http://doc.spip.org/@champ_sql
-function champ_sql($champ, $p) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
+/**
+ * cette fonction sert d'API pour demander le champ '$champ' dans la pile
+ *
+ * http://doc.spip.org/@champ_sql
+ *
+ * @param string $champ
+ *   champ recherché
+ * @param object $p
+ *   contexte de compilation
+ * @param bool $joker
+ *   flag pour autoriser ou non le champ joker * des iterateurs DATA
+ * @return string
+ */
+function champ_sql($champ, $p, $joker=true) {
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $joker);
 }
 
 // cette fonction sert d'API pour demander une balise Spip avec filtres

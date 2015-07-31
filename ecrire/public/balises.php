@@ -397,7 +397,7 @@ function balise_LANG_dist ($p) {
 // http://doc.spip.org/@balise_LESAUTEURS_dist
 function balise_LESAUTEURS_dist ($p) {
 	// Cherche le champ 'lesauteurs' dans la pile
-	$_lesauteurs = champ_sql('lesauteurs', $p);
+	$_lesauteurs = champ_sql('lesauteurs', $p, false);
 
 	// Si le champ n'existe pas (cas de spip_articles), on applique
 	// le modele lesauteurs.html en passant id_article dans le contexte;
