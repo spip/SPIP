@@ -1482,6 +1482,7 @@ function spip_desinfecte(&$t) {
 
 //  retourne le statut du visiteur s'il s'annonce
 
+
 // http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
 
@@ -1516,8 +1517,8 @@ function verifier_visiteur() {
 		return 0;
 	}
 
-	if (isset($_COOKIE['spip_session']) OR isset($_COOKIE[$GLOBALS['cookie_prefix'].'_session']) OR
-	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
+	$h = (isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http']);
+	if ($h OR isset($_COOKIE['spip_session']) OR isset($_COOKIE[$GLOBALS['cookie_prefix'].'_session'])) {
 
 		// Rq: pour que cette fonction marche depuis mes_options
 		// il faut forcer l'init si ce n'est fait
@@ -1535,8 +1536,14 @@ function verifier_visiteur() {
 		if ($session()) {
 			return $GLOBALS['visiteur_session']['statut'];
 		}
-		include_spip('inc/actions');
-		return verifier_php_auth();
+		if ($h  AND isset($_SERVER['PHP_AUTH_PW'])) {
+			include_spip('inc/auth');
+			$h = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+		}
+		if ($h) {
+			$GLOBALS['visiteur_session'] = $h;
+			return $GLOBALS['visiteur_session']['statut'];
+		}
 	}
 	// au moins son navigateur nous dit la langue preferee de cet inconnu
 	include_spip('inc/lang');
