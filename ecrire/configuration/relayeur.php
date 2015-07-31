@@ -104,14 +104,43 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 	return $retour_proxy;
 }
 
+// Function glue_url : le pendant de parse_url 
+// http://doc.spip.org/@glue_url
+function glue_url ($url){
+	if (!is_array($url)){
+		return false;
+	}
+	// scheme
+	$uri = (!empty($url['scheme'])) ? $url['scheme'].'://' : '';
+	// user & pass
+	if (!empty($url['user'])){
+		$uri .= $url['user'].':'.$url['pass'].'@';
+	}
+	// host
+	$uri .= $url['host'];
+	// port
+	$port = (!empty($url['port'])) ? ':'.$url['port'] : '';
+	$uri .= $port;
+	// path
+	$uri .= $url['path'];
+// fragment or query
+	if (isset($url['fragment'])){
+		$uri .= '#'.$url['fragment'];
+	} elseif (isset($url['query'])){
+		$uri .= '?'.$url['query'];
+	}
+	return $uri;
+}
+
+
 // Ne pas afficher la partie 'password' du proxy
 // http://doc.spip.org/@no_password_proxy_url
 function no_password_proxy_url($http_proxy) {
-        if ($p = @parse_url($http_proxy)
-        AND $p['pass']) {
-                $p['pass'] = '****';
-                $http_proxy = glue_url($p);
-        }
-        return $http_proxy;
+	if ($p = @parse_url($http_proxy)
+	AND $p['pass']) {
+		$p['pass'] = '****';
+		$http_proxy = glue_url($p);
+	}
+	return $http_proxy;
 }
 ?>
