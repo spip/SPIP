@@ -10,6 +10,7 @@ function ecrire_stats() {
 	global $id_article;
 	global $admin_ok;
 
+
 	$my_ref = $HTTP_REFERER;
 	$my_ref = "\n".substr(md5($my_ref), 0, 15);
 
@@ -19,7 +20,7 @@ function ecrire_stats() {
 	if ($row = mysql_fetch_array($result)) {
 		$visites = $row['visites'];
 		$referers = $row['referers'];
-
+		
 		$visites++;
 
 		if (!ereg($my_ref, $referers)) {
@@ -31,7 +32,9 @@ function ecrire_stats() {
 		}
 
 		$num_ref = strlen($referers) / 16;
-		if ($admin_ok) echo "<small>[$visites visites - $num_ref referers]</small>";
+		if ($admin_ok) {
+			return "<small>[$visites visites - $num_ref referers]</small>";
+		}
 	}
 }
 

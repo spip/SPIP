@@ -140,7 +140,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
 	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
-	$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
+	//$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
 	
 	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
@@ -196,7 +196,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	
 		
 	
-	if (!$nouveau_document){
+	if (!$nouveau_document AND $afficher_texte != 'non'){
 		$ret .= "<div class='spip_encadrer'>";
 		if ($afficher_texte != "non"){
 			$ret .= "<font size=4 color='#aaaaaa'><b>".propre($titre)."</b></font>";
@@ -230,17 +230,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "</div>\n<p>";
 	}
 	
-	/*
-	if ($forums_publics == "pri") {
-		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
-	}	
-	
-	if ($forums_publics == "abo") {
-		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?'.'>';
-	}
-	*/
-	
 	$ret .= "\n";
+	
+	
 
 	$seed = (double) (microtime() + 1) * time() * 1000000;
 	@mt_srand($seed);
@@ -385,7 +377,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'></div>";
 	}
 
-	$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Voir ce message avant de le poster'></DIV>";
+	if ($afficher_texte !="non") $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Voir ce message avant de le poster'></DIV>";
+	else  $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Valider ce choix'></DIV>";
+	
 	$ret .= "</FORM>";
 	
 	return $ret;
@@ -398,7 +392,8 @@ function ajout_forum() {
 	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_auteur, $forum_id_syndic, $alea, $hash;
 	global $hash_email, $email_forum_abo, $pass_forum_abo, $ajouter_mot;
 	global $HTTP_HOST, $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
-
+	$afficher_texte = $GLOBALS['afficher_texte'];
+	
 	if (!$GLOBALS['db_ok']) {
 		die ("<h4>Probl&egrave;me de base de donn&eacute;es, votre message n'a pas &eacute;t&eacute; enregistr&eacute;.</h4>");
 	}
@@ -538,7 +533,7 @@ function ajout_forum() {
 
 
 	
-	if (strlen($confirmer) > 0) {
+	if (strlen($confirmer) > 0 OR ($afficher_texte=='non' AND $ajouter_mot)) {
 		spip_query("UPDATE spip_forum SET statut=\"$etat\" WHERE id_forum='$id_message'");
 	
 
