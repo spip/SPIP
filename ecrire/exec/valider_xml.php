@@ -148,6 +148,7 @@ function valider_script($transformer_xml, $f, $dir)
 	if ($script == $GLOBALS['exec'] OR $script=='index')
 		return array('/', 0, '', $script,''); 
 
+	$dir = basename($dir);
 	$f = charger_fonction($script, $dir, true);
 	if(!$f) return false;
 	list($texte, $err) = $transformer_xml($f, true);
