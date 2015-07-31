@@ -1699,6 +1699,14 @@ function filtre_end($array) {
 	return filtre_valeur_tableau($array,@count($array)-1);
 }
 
+function filtre_push($array, $val) {
+	if($array == '' OR !array_push($array, $val)) return '';
+	return $array;
+}
+
+function filtre_find($array, $val) {
+	return ($array != '' AND in_array($val, $array));
+}
 
 //
 // fonction standard de calcul de la balise #PAGINATION
@@ -2150,11 +2158,12 @@ function http_style_background($img, $att='')
 // http://doc.spip.org/@filtre_foreach_dist
 function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	$texte = '';
-	foreach($balise_deserializee as $k => $v)
-		$texte .= recuperer_fond(
-			'modeles/'.$modele,
-			array('cle' => $k, 'valeur' => $v)
-		);
+	if(is_array($balise_deserializee))
+		foreach($balise_deserializee as $k => $v)
+			$texte .= recuperer_fond(
+				'modeles/'.$modele,
+				array_merge(array('cle' => $k), (is_array($v) ? $v : array('valeur' => $v)))
+			);
 	return $texte;
 }
 
