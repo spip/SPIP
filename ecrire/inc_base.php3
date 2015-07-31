@@ -1071,10 +1071,12 @@ function maj_base() {
 		maj_version (1.414);
 	}
 
+	/*
 	if ($version_installee == 1.415) {
 		spip_query("ALTER TABLE spip_documents DROP inclus");
 		maj_version (1.415);
 	}
+	*/
 
 	if ($version_installee < 1.417) {
 		spip_query("ALTER TABLE spip_syndic_articles DROP date_index");
@@ -1494,6 +1496,11 @@ function maj_base() {
 		spip_query("UPDATE spip_breves SET idx='1' where lang IN ('de','vi')");
 		spip_query("UPDATE spip_auteurs SET idx='1' where lang IN ('de','vi')");
 		maj_version (1.731);
+	}
+
+	if ($version_installee < 1.732) {	// en correction d'un vieux truc qui avait fait sauter le champ inclus sur les bases version 1.415
+		spip_query ("ALTER TABLE spip_documents ADD inclus  VARCHAR(3) DEFAULT 'non'");
+		maj_version (1.732);
 	}
 
 	return true;
