@@ -1,0 +1,21 @@
+[(#ENV**{exec}|=={#OBJET|objet_info{url_voir}|oui})
+	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|sinon_interdire_acces)]
+
+	#BOITE_OUVRIR{'','info'}
+	#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type',#OBJET,'id',#ID_OBJET}}}
+	#BOITE_FERMER
+
+	#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,#OBJET,id,#ID_OBJET},data,''}}
+	#SET{ok,' '}
+][
+
+	(#ENV**{exec}|=={#OBJET|objet_info{url_edit}|oui})
+
+	#INCLURE{fond=prive/squelettes/navigation/#ENV**{exec},redirect='',env,retourajax=oui}
+	#SET{ok,' '}
+
+][
+
+(#GET{ok}|sinon_interdire_acces})
+
+]

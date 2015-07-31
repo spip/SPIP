@@ -265,6 +265,13 @@ local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
 prive/cfg.html -text
+prive/echafaudage/contenu/objet.html -text
+prive/echafaudage/contenu/objet_edit.html -text
+prive/echafaudage/contenu/objet_edit.sans_rubrique.html -text
+prive/echafaudage/contenu/objets.html -text
+prive/echafaudage/extra/objet.html -text
+prive/echafaudage/navigation/objet.html -text
+prive/echafaudage/navigation/objet_edit.html -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
@@ -703,9 +710,7 @@ prive/objets/contenu/rubrique-enfants.html -text
 prive/objets/contenu/rubrique.html -text
 prive/objets/editer/liens.html -text
 prive/objets/editer/logo.html -text
-prive/objets/editer/objet.html -text
 prive/objets/editer/rediriger_article.html -text
-prive/objets/editer/rubrique.html -text
 prive/objets/editer/traductions.html -text
 prive/objets/infos/article.html -text
 prive/objets/infos/article_fonctions.php -text

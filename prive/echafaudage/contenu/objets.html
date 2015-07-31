@@ -1,0 +1,5 @@
+<h1>[(#OBJET|objet_info{texte_objets}|_T)]</h1>
+<INCLURE{fond=prive/objets/liste/clusters,sinon=#OBJET|objet_info{info_aucun_objet}|_T} />
+[(#AUTORISER{creer,#OBJET})
+	[(#REM|generer_url_ecrire_entite_edit{#OBJET}|parametre_url{new,oui}|icone_verticale{[(#OBJET|objet_info{texte_creer}|_T)],#OBJET,edit,right})]
+]
