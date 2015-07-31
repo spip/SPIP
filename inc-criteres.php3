@@ -518,10 +518,11 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
-	AND preg_match(",^(date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
+	AND preg_match(",^((age|jour|mois|annee)_relatif|"
+	."date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
 	$col, $regs)) {
 		list($col, $col_table) =
-		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
+		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[3]);
 	}
 
 	// HACK : selection des documents selon mode 'image'
@@ -773,10 +774,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 	if ($suite) {
 	# NOTE : A transformer en recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		if ($suite == '_relatif') {
-			$col = $col.'_relatif';
-		}
-		else if ($suite =='_redac' OR $suite=='_modif')
+		if ($suite =='_redac' OR $suite=='_modif')
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
