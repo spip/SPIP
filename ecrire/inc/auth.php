@@ -54,22 +54,48 @@ function acces_statut($id_auteur, $statut, $bio)
 }
 
 // Fonction d'authentification. Retourne:
-//  1 si on ne sait encore rien (pas de cookie, pas Auth_user);
-//  un tableau si visiteur sans droit de redaction (tableau = sa ligne SQL)
-//  une chaine non vide a afficher disant pourquoi SQL pas utilisable;
-//  une chaine vide si autorisation a penetrer dans l'espace prive.
+//  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
+//  - un tableau si visiteur sans droit (tableau = sa ligne SQL)
+//  - code numerique d'erreur SQL
+//  - une chaine vide si autorisation a penetrer dans l'espace prive.
 
 // http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
+
+	global $connect_login ;
+
+	$row = auth_mode();
+
+	if ($row) return auth_init_droits($row);
+
+	if (!$connect_login) return auth_a_loger();
+
+	// Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
+	// C'est soit parce que le serveur MySQL ne repond pas,
+	// soit parce que la table des auteurs a changee (restauration etc)
+	// Pas la peine d'insister.  Envoyer un message clair au client.
+
+	if (spip_connect()) return array('nom' => $connect_login);
+
+	$n = intval(sql_errno());
+	spip_log("Erreur base de donnees $n " . sql_error());
+	return $n ? $n : 1;
+}
+
+// Retourne la description d'un authentifie par cookie ou http_auth
+// Et affecte la globale $connect_login
+
+function auth_mode()
+{
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
-	global $connect_id_auteur, $connect_login ;
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
+	global $connect_login ;
+
 	//
 	// Initialiser variables (eviter hacks par URL)
 	//
 
 	$connect_login = '';
-	$connect_id_auteur = NULL;
+	$id_auteur = NULL;
 	$auth_can_disconnect = false;
 
 	//
@@ -79,10 +105,11 @@ function inc_auth_dist() {
 	// Session valide en cours ?
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
-		if ($connect_id_auteur = $session() 
-		OR $connect_id_auteur===0 // reprise sur restauration
+		if ($id_auteur = $session() 
+		OR $id_auteur===0 // reprise sur restauration
 		) {
 			$auth_can_disconnect = true;
+			$connect_login = $GLOBALS['visiteur_session']['login'];
 		} else unset($_COOKIE['spip_session']);
 	}
 
@@ -93,17 +120,17 @@ function inc_auth_dist() {
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
 			include_spip('inc/actions');
 			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
-				if (!$connect_id_auteur) {
+				if (!$id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
 					$auth_can_disconnect = true;
 					$GLOBALS['visiteur_session'] = $r;
 					$connect_login = $GLOBALS['visiteur_session']['login'];
 				} else {
 				  // cas de la session en plus de PHP_AUTH
-				  /*				  if ($connect_id_auteur != $r['id_auteur']){
-				    spip_log("vol de session $connect_id_auteur" . join(', ', $r));
+				  /*				  if ($id_auteur != $r['id_auteur']){
+				    spip_log("vol de session $id_auteur" . join(', ', $r));
 					unset($_COOKIE['spip_session']);
-					$connect_id_auteur = '';
+					$id_auteur = '';
 					} */
 				}
 			}
@@ -113,42 +140,36 @@ function inc_auth_dist() {
 			$connect_login = $_SERVER['REMOTE_USER'];
 	}
 
-	$where = (is_numeric($connect_id_auteur)
-	/*AND $connect_id_auteur>0*/ // reprise lors des restaurations
+	$where = (is_numeric($id_auteur)
+	/*AND $id_auteur>0*/ // reprise lors des restaurations
 	) ?
-	  "id_auteur=$connect_id_auteur" :
+	  "id_auteur=$id_auteur" :
 	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login));
 
-	// pas authentifie par cookie ni http_auth:
-	if (!$where) return 1;
+	if (!$where) return '';
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
-	$row = sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 
-	if (!$row) {
-		// il n'est PLUS connu. c'est SQL qui est desynchro ;
-		// donner un message si on dispose d'un (mauvais) login
-		if (strlen($connect_login)) {
-			return auth_areconnecter($connect_login);
-		}
-		// sinon dire qu'il faut renvoyer vers le formulaire de login
-		else
-			return 1;
-	}
+	return sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
+}
 
-	// Le visiteur est connu
-	// Des globales pour tout l'espace prive
+// 
+// Init des globales pour tout l'espace prive si visiteur connu
+// Le tableau global visiteur_session contient toutes les infos pertinentes et
+// a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
+// s'il est pris dans le fichier de session)
+// Les plus utiles sont aussi dans les variables simples ci-dessus
+// si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
+
+function auth_init_droits($row)
+{
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique, $connect_login, $connect_id_auteur;
+
 	$connect_id_auteur = $row['id_auteur'];
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
-	// Le tableau global visiteur_session contient toutes les infos pertinentes
-	// et a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
-	// s'il est pris dans le fichier de session)
-	// Les plus utiles sont aussi dans les variables simples ci-dessus
-	
-    //si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
 	
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
@@ -202,6 +223,25 @@ function inc_auth_dist() {
 	return ''; // i.e. pas de pb.
 }
 
+function auth_a_loger()
+{
+	$redirect = generer_url_public('login',
+	"url=" . rawurlencode(self('&',true)), '&');
+
+	// un echec au "bonjour" (login initial) quand le statut est
+	// inconnu signale sans doute un probleme de cookies
+	if (isset($_GET['bonjour']))
+		$redirect = parametre_url($redirect,
+			'var_erreur',
+			(!isset($GLOBALS['visiteur_session']['statut'])
+					? 'cookie'
+					: 'statut'
+			 ),
+					  '&'
+					  );
+	return $redirect;
+}
+
 // http://doc.spip.org/@auth_trace
 function auth_trace($row, $date='NOW()')
 {
@@ -211,25 +251,6 @@ function auth_trace($row, $date='NOW()')
 	
 	if ((time() - $connect_quand)  >= 60) {
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
-	}
-}
-
-
-// Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
-// C'est soit parce que le serveur MySQL ne repond pas,
-// soit parce que la table des auteurs a changee (restauration etc)
-// Pas la peine d'insister.  Envoyer un message clair au client.
-
-// http://doc.spip.org/@auth_areconnecter
-function auth_areconnecter($auth_login)
-{
-	include_spip('inc/minipres');
-	if (!spip_connect()) {
-		spip_log("Erreur base de donnees");
-
-		return minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
-	} else {
-		return minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
 	}
 }
 ?>
