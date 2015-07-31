@@ -44,7 +44,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		include($f);
 		return $charset;
 	} else {
-		spip_log("Charset '$charset' non supporte !");
+		spip_log("Erreur: pas de fichier de conversion 'charsets/$charset'");
 		$GLOBALS['CHARSET'][$charset] = array();
 		return false;
 	}
