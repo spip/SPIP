@@ -458,7 +458,7 @@ function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
 		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $w;
-		foreach($w as $sw)
+		foreach(array_filter($w,'is_array') as $sw)
 			if ($m=match_self($sw)) return $m;
 	}
 	return false;
