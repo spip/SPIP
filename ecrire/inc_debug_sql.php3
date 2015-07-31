@@ -189,10 +189,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
-	if ($texte && 
-	    ($var_mode_objet != $fonc ||
-	     ($var_mode_affiche != $type &&
-	      ($var_mode_affiche != 'validation' || $type != 'resultat'))))
+	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
 		return;
 
 	$link = new Link;
