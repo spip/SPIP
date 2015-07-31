@@ -1,4 +1,4 @@
-<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
+<BOUCLE_principale(MOTS) {id_mot} {doublons}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -86,9 +86,9 @@
         <div class="menu">
             <h2><:sites_web:></h2>
             <ul>
-                <BOUCLE_sites(SITES) {id_mot} {par nom_site}><li>
-		<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
-		</li></BOUCLE_sites>
+                <BOUCLE_sites(SITES) {id_mot} {par nom_site}>
+				<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+				</BOUCLE_sites>
             </ul>
         </div>
         </B_sites>
@@ -147,4 +147,4 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_mot_principal>
+</BOUCLE_principale>

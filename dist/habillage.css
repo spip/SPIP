@@ -13,10 +13,10 @@ body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "
 h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
 h1 { font-size: 1.70em; color: #000; }
 h2 { font-size: 1.40em; font-weight: normal; }
-h2, h2 a, h2 a:focus, h2 a:hover { color: #000033; }
+h2, h2 a, h2 a:focus, h2 a:hover { color: #003; }
 h3 { font-size: 1.20em; font-weight: bold; }
-h3.spip {} /*Cf.: spip_style.css*/
-hr.spip {} /*Cf.: spip_style.css*/
+h3.spip {} /* Cf.: spip_style.css */
+hr.spip {} /* Cf.: spip_style.css */
 
 /* Autres enrichissements typo */
 strong { font-weight: bold; }
@@ -29,8 +29,8 @@ ins { color: red !important; text-decoration: none; }
 sup, sub { font-size: .8em; font-variant: normal; }
 
 /* Listes */
-ul.spip {} /*Cf.: spip_style.css*/
-ol.spip {} /*Cf.: spip_style.css*/
+ul.spip {} /* Cf.: spip_style.css */
+ol.spip {} /* Cf.: spip_style.css */
 dl {}
 dt {}
 dd {}
@@ -39,24 +39,24 @@ dd {}
 cite {}
 q {}
 blockquote {}
-blockquote.spip {} /*Cf.: spip_style.css*/
-blockquote.spip_poesie {} /*Cf.: spip_style.css*/
-.spip_code {} /*Cf.: spip_style.css*/
-.spip_cadre {} /*Cf.: spip_style.css*/
+blockquote.spip {} /* Cf.: spip_style.css */
+blockquote.spip_poesie {} /* Cf.: spip_style.css */
+.spip_code {} /* Cf.: spip_style.css */
+.spip_cadre {} /* Cf.: spip_style.css */
 address {}
 
 /* Tableaux */
-table.spip {} /*Cf.: spip_style.css*/
+table.spip {} /* Cf.: spip_style.css */
 
 /* Logos, documents et images */
 img { margin: 0; padding: 0; border: 0; }
-.spip_logos {} /*Cf.: spip_style.css*/
-.spip_documents {} /*Cf.: spip_style.css*/
-.spip_documents_center {} /*Cf.: spip_style.css*/
-.spip_documents_left {} /*Cf.: spip_style.css*/
-.spip_documents_right {} /*Cf.: spip_style.css*/
-.spip_doc_titre {} /*Cf.: spip_style.css*/
-.spip_doc_descriptif {} /*Cf.: spip_style.css*/
+.spip_logos {} /* Cf.: spip_style.css */
+.spip_documents {} /* Cf.: spip_style.css */
+.spip_documents_center {} /* Cf.: spip_style.css */
+.spip_documents_left {} /* Cf.: spip_style.css */
+.spip_documents_right {} /* Cf.: spip_style.css */
+.spip_doc_titre {} /* Cf.: spip_style.css */
+.spip_doc_descriptif {} /* Cf.: spip_style.css */
 
 
 /* ------------------------------------------
@@ -198,4 +198,4 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /* Couleurs des liens
 ---------------------------------------------- */
 a { color: #604A7F; text-decoration: none; }
-a:focus,a:hover { color: #F57900; text-decoration: underline; }
+a:focus,a:hover,a:active { color: #F57900; text-decoration: underline; }
