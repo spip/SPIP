@@ -579,6 +579,7 @@ function actualise_plugins_actifs($pipe_recherche = false){
 // http://doc.spip.org/@spip_plugin_install
 function spip_plugin_install($action,$prefix,$version_cible){
 	$nom_meta_base_version = $prefix."_base_version";
+	echo"spip_plugin_install($action,$prefix,$version_cible";
 	switch ($action){
 		case 'test':
 			return (isset($GLOBALS['meta'][$nom_meta_base_version]) 
@@ -606,6 +607,7 @@ function desinstalle_un_plugin($plug,$infos){
 	}
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
+	echo $prefix_install, (function_exists($prefix_install));
 	if (function_exists($prefix_install)){
 		$prefix_install('uninstall',$infos['prefix'],$version_cible);
 		$ok = $prefix_install('test',$infos['prefix'],$version_cible);

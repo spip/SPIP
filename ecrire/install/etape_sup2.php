@@ -28,7 +28,7 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 	if (!sql_selectdb($sup_db, $server_db))
 		return "<!-- base inaccessible -->";
 
-	$tables = sql_alltables('%', $server_db);
+	$tables = sql_alltable('%', $server_db);
 
 	if (!$tables)
 	  $res = _T('install_pas_table');
