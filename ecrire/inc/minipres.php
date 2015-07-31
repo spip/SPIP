@@ -242,14 +242,13 @@ function exec_test_ajax_dist() {
 // http://doc.spip.org/@afficher_bouton_preview
 function afficher_bouton_preview() {
 		$x = _T('previsualisation');
-		return '<div style="
+		return '<div class="spip_large" style="
 		display: block;
 		color: #eeeeee;
 		background-color: #111111;
 		padding-right: 5px;
 		padding-top: 2px;
 		padding-bottom: 5px;
-		font-size: 18px;
 		top: 0px;
 		left: 0px;
 		position: absolute;

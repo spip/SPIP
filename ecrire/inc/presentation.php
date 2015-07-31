@@ -1717,10 +1717,10 @@ function liste_articles_bloques()
 				$ze_titre = $row['titre'];
 				$statut = $row["statut"];
 					
-				$res .= "\n<div class='$statut'><a style='font-size: 10px;' href='" 
+				$res .= "\n<div class='$statut spip_xx-small'><a  href='" 
 				. generer_url_ecrire("articles","id_article=$ze_article")
 				. "'>$ze_titre</a>"
-				. "\n<div class='spip_xx-small' style='text-align:right; '>"
+				. "\n<div style='text-align:right; '>"
 				. debloquer_article($ze_article,_T('lien_liberer'))
 				. "</div>"
 				. "</div>";
@@ -1841,7 +1841,7 @@ function afficher_numero_edit($id, $key, $type)
 	static $numero , $style='' ;
 
 	if (!$style) {
-		$style = " style='float: $spip_lang_right; padding-$spip_lang_left: 4px;font-size: 10px; color: black; '"; 
+		$style = " class='spip_xx-small' style='float: $spip_lang_right; padding-$spip_lang_left: 4px; color: black; '"; 
 
 		$numero = _T('info_numero_abbreviation');
 	}

@@ -28,9 +28,9 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 	. $virtuel
 	. "' size='40' /><br />\n"
 	. "<span class='verdana1 spip_small'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
-	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"
+	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo spip_xx-small' value='"
 	. _T('bouton_changer')
-	. "' style='font-size:10px' /></div>";
+	. "' /></div>";
 
 	$res = ajax_action_auteur('virtualiser', $id_article, $script, $args, $res);
 	return ajax_action_greffe("virtualiser-$id_article", $res);

@@ -54,8 +54,7 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 	$r .= "\n\t"
 	. _T('info_fonctionnement_forum')
 	. "\n\t<select name='change_accepter_forum'
-		class='fondl'
-		style='font-size:10px;'
+		class='fondl spip_xx-small'
 		onchange=\"findObj_forcer('valider_regler_moderation_$id_article').style.visibility='visible';\"
 		>";
 
