@@ -95,13 +95,16 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
  */
 function test_inscription_dist($statut, $mail, $nom, $options) {
 	include_spip('inc/filtres');
-	$nom = trim(corriger_caracteres($nom));
-	if((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64))
-	    return 'ecrire:info_login_trop_court';
 	if (!$r = email_valide($mail)) return 'info_email_invalide';
+	$nom = trim(corriger_caracteres($nom));
 	$res = array('email' => $r, 'nom' => $nom, 'prefs' => $statut);
-	if (isset($options['login']))
-		$res['login'] = $options['login'];
+	if (isset($options['login'])) {
+		$login = trim(corriger_caracteres($options['login']));
+		if((strlen ($login) >= _LOGIN_TROP_COURT) AND (strlen($nom) <= 64))
+			$res['login'] = $login;
+	}
+	if(!isset($res['login']) AND ((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64)))
+		return 'ecrire:info_login_trop_court';
 	return $res;
 }
 
