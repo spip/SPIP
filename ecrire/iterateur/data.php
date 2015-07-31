@@ -159,6 +159,14 @@ class IterateurDATA implements Iterator {
 				else if (preg_match(',^https?://,', $this->command['source'])) {
 					include_spip('inc/distant');
 					$u = recuperer_page($this->command['source']);
+					if (!$u) {
+						spip_log("erreur sur $u");
+						$err = sprintf(":erreur chargement %s, %s",
+							$this->command['source'],
+							$this->command['sourcemode']);
+						erreur_squelette(array($err, array()));
+						$this->err = true;
+					}
 					if (!isset($ttl)) $ttl = 24*3600;
 				} else if (@is_readable($this->command['source'])) {
 					$u = spip_file_get_contents($this->command['source']);
@@ -168,13 +176,25 @@ class IterateurDATA implements Iterator {
 					if (!isset($ttl)) $ttl = 10;
 				}
 
-				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+				if (!$this->err
+				AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
 					if (is_array($a = $g($u))) {
 						$this->tableau = $a;
-					} else {
-						$this->err = true;
-						spip_log("erreur sur $g(): $u");
 					}
+					else {
+						if (is_object($a)
+						AND method_exists($a, 'getMessage'))
+							$a = $a->getMessage();
+						spip_log("erreur sur $g(): $a");
+						$err = sprintf("[%s, %s] $a",
+							$this->command['source'],
+							$this->command['sourcemode']);
+						erreur_squelette(array($err, array()));
+					}
+				}
+
+				if (!is_array($this->tableau)) {
+					$this->err = true;
 				}
 
 				if (!$this->err AND $ttl>0)
