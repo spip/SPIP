@@ -1256,7 +1256,7 @@ function balise_CHEMIN_dist($p) {
 	} else
 	  $p->code = 'find_in_path(' . $arg .')';
 
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	return $p;
 }
 
