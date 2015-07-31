@@ -18,7 +18,6 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		$suffixe = '-'.$taille_x.'x'.$taille_y;
 		$cache_folder= creer_repertoire_documents('cache'.$suffixe);
 		$preview = creer_vignette($logo, $taille_x, $taille_y, $format, $cache_folder.$nom.$suffixe);
-
 		if ($preview) {
 			$vignette = $preview['fichier'];
 			$width = $preview['width'];
@@ -30,6 +29,7 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 			list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille_x, $taille_y);
 			//echo "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
 		$retour = $logo;
+		
 
 	// Afficher l'image resultante, meme grande...
 //	header("Content-type: image/$format");
