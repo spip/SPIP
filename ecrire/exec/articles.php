@@ -307,8 +307,11 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	}
 	else {
 		$type = 'article';
-		$id_rubrique = $row['id_rubrique'];
-		$contexte = array('id'=>$id_article,'id_rubrique'=>$id_rubrique);
+		$contexte = array(
+			'id'=>$id_article,
+			'id_rubrique'=>$row['id_rubrique'],
+			'id_secteur' => $row['id_secteur']
+		);
 		$fond = recuperer_fond("prive/contenu/$type",$contexte);
 		// permettre aux plugin de faire des modifs ou des ajouts
 		$fond = pipeline('afficher_contenu_objet',
