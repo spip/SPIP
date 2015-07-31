@@ -299,4 +299,6 @@ function test_pass() {
 	return $passw;
 }
 
+
+function balise_FORMULAIRE_SIGNATURE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_SIGNATURE');}
 ?>

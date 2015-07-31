@@ -178,4 +178,6 @@ function filtre_rester_connecte($prefs) {
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
 }
 
+
+function balise_LOGIN_PUBLIC ($p) {return declencher_balise_dynamique($p,'LOGIN_PUBLIC');}
 ?>

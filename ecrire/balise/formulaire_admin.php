@@ -179,4 +179,6 @@ function afficher_raccourci_stats($id_article) {
 }
 
 
+
+function balise_FORMULAIRE_ADMIN ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_ADMIN');}
 ?>

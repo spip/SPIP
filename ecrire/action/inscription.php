@@ -10,12 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function action_inscription_dist() {
+include_spip('balise/formulaire_inscription');
+include_spip('public/global'); 
+include_spip('inc/lang');
+include_spip('inc/headers');
 
-	include_spip('inc-formulaire_inscription');
-	include_spip('public/global'); 
-	include_spip('inc/lang');
-	include_spip('inc/headers');
+function action_inscription_dist() {
 
 	utiliser_langue_site();
 	utiliser_langue_visiteur();
@@ -33,7 +33,7 @@ function action_inscription_dist() {
 <link rel="stylesheet" type="text/css" href="'.find_in_path('spip_style.css').'" />
 </head><body>';
 
-	inclure_balise_dynamique(balise_formulaire_inscription_dyn(_request('mode'), _request('focus'), _request('id_rubrique'))
+	inclure_balise_dynamique(balise_FORMULAIRE_INSCRIPTION_dyn(_request('mode'), _request('focus'), _request('id_rubrique'))
 	);
 	echo "</body></html>";
 }
