@@ -82,10 +82,13 @@ function xmlObjToArr($obj, $utiliser_namespace=false) {
 
 		$tableau = array(
 			'name'=>$name,
-			'text'=>$text,
-			'attributes'=>$attributes,
-			'children'=>$children
 		);
+		if ($text)
+			$tableau['text'] = $text;
+		if ($attributes)
+			$tableau['attributes'] = $attributes;
+		if ($children)
+			$tableau['children'] = $children;
 	}
 
 	return $tableau;
