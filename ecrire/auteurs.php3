@@ -153,7 +153,7 @@ if ($type_requete == 'auteur') {
 	$lettres_nombre_auteurs = 0;
 	foreach ($auteurs as $auteur) {
 		$lettres_nombre_auteurs ++;
-		$premiere_lettre = addslashes(strtoupper(substr($auteur['nom'],0,1)));
+		$premiere_lettre = addslashes(strtoupper(spip_substr($auteur['nom'],0,1)));
 		if ($premiere_lettre != $lettre_prec) {
 			$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
 		}
