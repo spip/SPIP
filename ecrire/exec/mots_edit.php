@@ -160,7 +160,7 @@ debut_raccourcis();
 
 if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 		icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
-		icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_ecrire('mots_tous')), 
+		icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . urlencode(generer_url_ecrire('mots_tous'))), 
 				  "mot-cle-24.gif",
 				  "creer.gif");
  }
