@@ -33,5 +33,9 @@ function spip_sqlite3_constantes(){
 	define('SPIP_SQLITE3_BOTH', PDO::FETCH_BOTH);
 }
 
+function spip_versions_sqlite3()
+{
+	return _sqlite_charger_version(3) ? 3 : false;
+}
 
 ?>
