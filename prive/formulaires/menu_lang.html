@@ -2,7 +2,7 @@
 <form method="post" action="#ENV{url}"><div>
 	[(#ENV{url}|form_hidden)]
 	<label for="#ENV{nom}"><:info_langues:></label>
-	<select name="#ENV{nom}" id="#ENV{nom}" onchange="this.parentNode.submit()">#ENV*{langues}</select>
+	<select name="#ENV{nom}" id="#ENV{nom}" onchange="this.parentNode.parentNode.submit()">#ENV*{langues}</select>
 	<noscript style="display:block"><p class="boutons"><input type="submit" class="submit" value="&gt;&gt;" /></p></noscript>
 </div></form>
 </div>
