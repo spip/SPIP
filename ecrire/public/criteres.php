@@ -808,6 +808,105 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 	return "sql_in('$arg',sql_quote($var)".($crit2=='NOT'?",'NOT'":"").")";
 }
 
+/**
+ * {where}
+ * tout simplement, pour faire le pont entre php et squelettes
+ *
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_where_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if (isset($crit->param[0]))
+		$_where = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	else
+		$_where = '@$Pile[0]["where"]';
+
+	if ($crit->cond)
+		$_where = "(($_where) ? ($_where) : '')";
+
+	if ($crit->not)
+		$_where = "array('NOT',$_where)";
+
+	$boucle->where[]= $_where;
+}
+
+
+/**
+ * Un critere pour gerer un champ de tri qui peut etre modifie dynamiquement
+ * par la balise #TRI
+ *
+ * {tri [champ_par_defaut][,sens_par_defaut][,nom_variable]}
+ * champ_par_defaut : un champ de la table sql
+ * sens_par_defaut : -1 ou inverse pour decroissant, 1 ou direct pour croissant
+ *   peut etre un tableau pour preciser des sens par defaut associes a chaque champ
+ *   exemple : array('titre'=>1,'date'=>-1) pour trier par defaut
+ *   les titre croissant et les dates decroissantes
+ *   dans ce cas, quand un champ est utilise pour le tri et n'est pas present dans le tableau
+ *   c'est la premiere valeur qui est utilisee
+ * nom_variable : nom de la variable utilisee (par defaut tri_nomboucle)
+ *
+ * {tri titre}
+ * {tri titre,inverse}
+ * {tri titre,-1}
+ * {tri titre,-1,truc}
+ *
+ * le critere {tri} s'utilise conjointement avec la balise #TRI dans la meme boucle
+ * pour generer les liens qui permettent de changer le critere de tri et le sens du tri
+ *
+ * Exemple d'utilisation
+ *
+ * <B_articles>
+ * <p>#TRI{titre,'Trier par titre'} | #TRI{date,'Trier par date'}</p>
+ * <ul>
+ * <BOUCLE_articles(ARTICLES){tri titre}>
+ *	<li>#TITRE - [(#DATE|affdate_jourcourt)]</li>
+ * </BOUCLE_articles>
+ * </ul>
+ * </B_articles>
+ *
+ * NB :
+ * contraitement a {par ...} {tri} ne peut prendre qu'un seul champ,
+ * mais il peut etre complete avec {par ...} pour indiquer des criteres secondaires
+ *
+ * ex :
+ * {tri num titre}{par titre} permet de faire un tri sur le rang (modifiable dynamiquement)
+ * avec un second critere sur le titre en cas d'egalite des rang
+ *
+ * @param unknown_type $idb
+ * @param unknown_type $boucles
+ * @param unknown_type $crit
+ */
+function critere_tri_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+
+	// definition du champ par defaut
+	$_champ_defaut = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
+	$_sens_defaut = !isset($crit->param[1][0]) ? "1" : calculer_liste(array($crit->param[1][0]), array(), $boucles, $boucle->id_parent);
+	$_variable = !isset($crit->param[2][0]) ? "'$idb'" : calculer_liste(array($crit->param[2][0]), array(), $boucles, $boucle->id_parent);
+
+	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:$_champ_defaut)?tri_protege_champ(\$t):'')";
+
+	$_sens_defaut = "(is_array(\$s=$_sens_defaut)?(isset(\$s[\$st=$_tri])?\$s[\$st]:reset(\$s)):\$s)";
+	$_sens ="((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:$_sens_defaut)==-1 OR \$t=='inverse')?-1:1)";
+
+	$boucle->modificateur['tri_champ'] = $_tri;
+	$boucle->modificateur['tri_sens'] = $_sens;
+	$boucle->modificateur['tri_nom'] = $_variable;
+	// faut il inserer un test sur l'existence de $tri parmi les champs de la table ?
+	// evite des erreurs sql, mais peut empecher des tri sur jointure ...
+	$boucle->hash .= "
+	\$senstri = '';
+	\$tri = $_tri;
+	if (\$tri){
+		\$senstri = $_sens;
+		\$senstri = (\$senstri<0)?' DESC':'';
+	};
+	";
+	$boucle->select[] = "\".tri_champ_select(\$tri).\"";
+	$boucle->order[] = "tri_champ_order(\$tri).\$senstri";
+}
 # Criteres de comparaison
 
 // http://doc.spip.org/@calculer_critere_DEFAUT

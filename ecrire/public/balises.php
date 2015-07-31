@@ -1277,4 +1277,65 @@ function balise_HTML5_dist($p) {
 	return $p;
 }
 
+
+
+/**
+ * #TRI{champ[,libelle]}
+ * champ prend > ou < pour afficher le lien de changement de sens
+ * croissant ou decroissant (> < indiquent un sens par une fleche)
+ *
+ * @param unknown_type $p
+ * @param unknown_type $liste
+ * @return unknown
+ */
+function balise_TRI_dist($p, $liste='true') {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+
+	// s'il n'y a pas de nom de boucle, on ne peut pas trier
+	if ($b === '') {
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => '#TRI')
+			), $p->id_boucle);
+		$p->code = "''";
+		return $p;
+	}
+	$boucle = $p->boucles[$b];
+
+	// s'il n'y a pas de tri_champ, c'est qu'on se trouve
+	// dans un boucle recursive ou qu'on a oublie le critere {tri}
+	if (!isset($boucle->modificateur['tri_champ'])) {
+		erreur_squelette(
+			_T('zbug_tri_sans_critere',
+				array('champ' => '#TRI')
+			), $p->id_boucle);
+		$p->code = "''";
+		return $p;
+	}
+
+	$_champ = interprete_argument_balise(1,$p);
+	// si pas de champ, renvoyer le critere de tri utilise
+	if (!$_champ){
+		$p->code = $boucle->modificateur['tri_champ'];
+		return $p;
+	}
+
+	$_libelle = interprete_argument_balise(2,$p);
+	$_libelle = $_libelle?$_libelle:$_champ;
+
+	$_class = interprete_argument_balise(3,$p);
+	// si champ = ">" c'est un lien vers le tri croissant : de gauche a droite ==> 1
+	// si champ = "<" c'est un lien vers le tri decroissant : (sens inverse) == -1
+	$_issens = "in_array($_champ,array('>','<'))";
+	$_sens = "(strpos('< >',$_champ)-1)";
+
+	$_variable = "((\$s=$_issens)?'sens':'tri').".$boucle->modificateur['tri_nom'];
+	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
+	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
+
+	$p->code = "lien_ou_expose($_url,$_libelle,$_on".($_class?",$_class":"").")";
+	//$p->code = "''";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>

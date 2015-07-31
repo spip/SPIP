@@ -2558,4 +2558,52 @@ function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
 }
 
 
+/**
+ * Proteger les champs passes dans l'url et utiliser dans {tri ...}
+ * preserver l'espace pour interpreter ensuite num xxx et multi xxx
+ * @param string $t
+ * @return string
+ */
+function tri_protege_champ($t){
+	return preg_replace(',[^\s\w.+],','',$t);
+}
+
+/**
+ * Interpreter les multi xxx et num xxx utilise comme tri
+ * pour la clause order
+ * 'multi xxx' devient simplement 'multi' qui est calcule dans le select
+ * @param string $t
+ * @return string
+ */
+function tri_champ_order($t){
+	if (strncmp($t,'num ',4)==0){
+		$t = substr($t,4);
+		$t = preg_replace(',\s,','',$t);
+		$t = "0+$t";
+		return $t;
+	}
+	elseif(strncmp($t,'multi ',6)==0){
+		return "multi";
+	}
+	return preg_replace(',\s,','',$t);
+}
+
+/**
+ * Interpreter les multi xxx et num xxx utilise comme tri
+ * pour la clause select
+ * 'multi xxx' devient select "...." as multi
+ * les autres cas ne produisent qu'une chaine vide '' en select
+ *
+ * @param string $t
+ * @return string
+ */
+function tri_champ_select($t){
+	if(strncmp($t,'multi ',6)==0){
+		$t = substr($t,6);
+		$t = preg_replace(',\s,','',$t);
+		$t = sql_multi($t,$GLOBALS['spip_lang']);
+		return $t;
+	}
+	return "''";
+}
 ?>
