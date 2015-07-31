@@ -396,7 +396,7 @@ function parser_boucle($texte, $id_parent) {
 							$val = 'vignette';
 						}
 						// Cas particulier : lier les articles syndiques au site correspondant
-						else if ($type == 'syndic_articles' AND $col<>'id_syndic_article')
+						else if ($type == 'syndic_articles' AND !ereg("^(id_syndic_article|titre|url|date|descriptif|lesauteurs)$",$col))
 							$col_table = 'source';
 
 						// Cas particulier : id_enfant => utiliser la colonne id_objet
