@@ -91,12 +91,11 @@ function calculer_visites() {
 	while ($row_date = mysql_fetch_array($result_date)) {
 		$visites = "";
 		$referers = "";
-		
+
 		$date = $row_date['date'];
-			
-		
+
 		// Nombre de visiteurs uniques sur le site
-		$query = "SELECT ip AS total_visites FROM spip_visites_temp WHERE date='$date' GROUP BY ip";
+		$query = "SELECT INET_NTOA(ip) AS total_visites FROM spip_visites_temp WHERE date='$date' GROUP BY ip";
 		$result = spip_query($query);
 		$total_visites = mysql_num_rows($result);
 		$query_insert = "INSERT INTO spip_visites (date, type, visites) VALUES ('$date', 'tout', '$total_visites');";
@@ -104,9 +103,9 @@ function calculer_visites() {
 	
 	
 		// Recuperer les donnees du log	
-		$query = "SELECT * FROM spip_visites_temp WHERE date='$date'";
+		$query = "SELECT date, INET_NTOA(ip) AS ip, type, referer FROM spip_visites_temp WHERE date='$date'";
 		$result = spip_query($query);
-	
+
 		while ($row = mysql_fetch_array($result)) {
 			$ip = $row['ip'];
 			$type = $row['type'];
@@ -189,7 +188,6 @@ function calculer_visites() {
 
 		$query_effacer = "DELETE FROM spip_visites_temp WHERE date = '$date'";
 		$result_effacer = spip_query($query_effacer);	
-
 	}
 }
 

@@ -44,7 +44,7 @@ if ($connect_statut != '0minirezo') {
 
 		echo "<ul>";
 		// Recuperer les donnees du log	
-		$query = "SELECT * FROM spip_visites_temp";
+		$query = "SELECT date, INET_NTOA(ip) AS ip, type, referer FROM spip_visites_temp";
 		$result = spip_query($query);
 	
 		while ($row = mysql_fetch_array($result)) {

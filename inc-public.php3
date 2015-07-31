@@ -41,27 +41,6 @@ include_local ("inc-cache.php3");
 
 
 //
-// Authentification, le cas echeant
-//
-$auteur_session = '';
-if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
-	include_ecrire("inc_connect.php3");
-	include_ecrire("inc_meta.php3");
-	include_ecrire ("inc_session.php3");
-	verifier_visiteur();
-}
-
-//
-// Ajouter un forum
-//
-
-if ($ajout_forum) {
-	include_local ("inc-forum.php3");
-	ajout_forum();
-}
-
-
-//
 // Gestion du cache et calcul de la page
 //
 
@@ -83,6 +62,25 @@ if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 else {
 	include_ecrire("inc_connect.php3");
 	include_ecrire("inc_meta.php3");
+}
+
+
+//
+// Authentification, le cas echeant
+//
+$auteur_session = '';
+if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
+	include_ecrire ("inc_session.php3");
+	verifier_visiteur();
+}
+
+//
+// Ajouter un forum
+//
+
+if ($ajout_forum) {
+	include_local ("inc-forum.php3");
+	ajout_forum();
 }
 
 
@@ -327,16 +325,19 @@ if ($spip_session) {
     echo '<script src="spip_cookie.php3?rejoue=oui"></script>';
 } */
 
+
 //
 // Gestion des statistiques par article
 //
 
-if (lire_meta("activer_statistiques") != "non" AND !$flag_preserver) {
-	include_ecrire("inc_connect.php3");
-	include_local ("inc-stats.php3");
-	if ($db_ok) $stats = ecrire_stats();
-	
-	if ($admin_ok) echo $stats;
+if (lire_meta("activer_statistiques") != "non") {
+	if ($id_article || $id_rubrique || $id_breve) {
+		include_ecrire("inc_connect.php3");
+		include_local ("inc-stats.php3");
+		if ($db_ok) ecrire_stats();
+		if ($admin_ok AND $id_article AND !$flag_preserver)
+			afficher_raccourci_stats($id_article);
+	}
 }
 
 

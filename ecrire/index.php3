@@ -118,12 +118,6 @@ icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?i
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	echo "<p>";
 	icone_horizontale("Supprimer le cookie" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3"), "", "");
-
-/*	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
-	echo " <a href='../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3")."'><B>SUPPRIMER LE COOKIE</B></A>";
-		echo aide ("cookie");
-	echo "</font>";*/
 }
 
 
