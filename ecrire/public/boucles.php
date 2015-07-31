@@ -141,8 +141,8 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	array_unshift($boucle->where,array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'"));
 
 	// Supprimer les vignettes
-	if (!$boucle->modificateur['criteres']['mode']
-	AND !$boucle->modificateur['criteres']['tout']) {
+	if (!isset($boucle->modificateur['criteres']['mode'])
+	AND !isset($boucle->modificateur['criteres']['tout'])) {
 		array_unshift($boucle->where,array("'!='", "'$id_table.mode'", "'\\'vignette\\''"));
 	}
 
