@@ -58,7 +58,8 @@ function articles_set($id_article, $set=null) {
 	if (!$set){
 		foreach (array(
 			'surtitre', 'titre', 'soustitre', 'descriptif',
-			'nom_site', 'url_site', 'chapo', 'texte', 'ps'
+			'nom_site', 'url_site', 'chapo', 'texte', 'ps',
+			'changer_lang'
 		) as $champ)
 			$c[$champ] = _request($champ,$set);
 
@@ -77,6 +78,12 @@ function articles_set($id_article, $set=null) {
 	include_spip('inc/modifier');
 	revision_article($id_article, $c);
 
+	if ($changer_lang = _request('changer_lang',$c)){
+		$id_rubrique = sql_fetsel("id_rubrique", "spip_articles", "id_article=".intval($id_article));
+		$instituer_langue_objet = charger_fonction('instituer_langue_objet','action');
+		$instituer_langue_objet('article',$id_article, $id_rubrique, $changer_lang);
+	}
+
 	// Modification de statut, changement de rubrique ?
 	$c = array();
 	foreach (array(
@@ -86,7 +93,14 @@ function articles_set($id_article, $set=null) {
 	$err .= instituer_article($id_article, $c);
 
 	// Un lien de trad a prendre en compte
-	$err .= article_referent($id_article, array('lier_trad' => _request('lier_trad',$set)));
+	if ($id_trad = _request('lier_trad',$set)){
+		// referencer la traduction
+		$referencer_traduction = charger_fonction('referencer_traduction','action');
+		$referencer_traduction('article', $id_article, $id_trad);
+		// dupliquer tous les liens
+		// TODO
+		// cf API editer_liens
+	}
 
 	return $err;
 }
@@ -321,38 +335,6 @@ function trop_longs_articles() {
 	}
 }
 
-// Poser un lien de traduction vers un article de reference
-// http://doc.spip.org/@article_referent
-function article_referent ($id_article, $c) {
-
-	if (!$c = intval($c['lier_trad'])) return;
-
-	// selectionner l'article cible, qui doit etre different de nous-meme,
-	// et quitter s'il n'existe pas
-	$id_lier = sql_getfetsel('id_trad', 'spip_articles', "id_article=$c AND NOT(id_article=$id_article)");
-
-	if ($id_lier === NULL)
-	{
-		spip_log("echec lien de trad vers article incorrect ($lier_trad)");
-		return '&trad_err=1';
-	}
-
-	// $id_lier est le numero du groupe de traduction
-	// Si l'article vise n'est pas deja traduit, son identifiant devient
-	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
-	// articles
-	if ($id_lier == 0) {
-		sql_updateq("spip_articles", array("id_trad" => $c), "id_article IN ($c, $id_article)");
-	}
-	// sinon ajouter notre article dans le groupe
-	else {
-		sql_updateq("spip_articles", array("id_trad" => $id_lier), "id_article = $id_article");
-	}
-
-	return ''; // pas d'erreur
-}
-
-
 
 // obsolete, utiliser revision_article dans inc/modifier
 // http://doc.spip.org/@revisions_articles
@@ -360,6 +342,5 @@ function revisions_articles ($id_article, $c=false) {
 	include_spip('inc/modifier');
 	return revision_article($id_article,$c);
 }
-
 
 ?>

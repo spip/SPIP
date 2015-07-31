@@ -12,52 +12,65 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/filtres');
+/**
+ * Definir le lien de traduction ver sun objet de reference
+ * si id_trad=0 : dereference le lien de traduction de id_objet
+ * si id_trad=NN : reference le lien de traduction de id_objet vers NN
+ * si id_objet=id_trad actuel et id_trad=new_id_trad : modifie la reference de tout le groupe de traduction
+ * 
+ * @param string $objet
+ * @param int $id_objet
+ * @param int $id_trad
+ * @return bool
+ */
+function action_referencer_traduction_dist($objet, $id_objet, $id_trad) {
 
-// http://doc.spip.org/@action_referencer_traduction_dist
-function action_referencer_traduction_dist() {
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	// ne rien faire si id_trad est ambigu
+	if (!is_numeric($id_trad)) return;
 
-	if (preg_match(",^(\d+)$,", $arg, $r)
-	AND $trad = intval(_request('lier_trad'))) {
-		include_spip('action/editer_article');
-		if ($err = article_referent($r[1], array('lier_trad' => $trad)))
-			redirige_par_entete(urldecode(_request('redirect')) . $err);
-	} elseif (preg_match(",^(\d+)\D-(\d+)$,", $arg, $r))  {
-	  // supprimer le lien de traduction
-		sql_updateq("spip_articles", array("id_trad" => 0), "id_article=" . $r[1]);
-		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
-		$cpt = sql_countsel("spip_articles", "id_trad=" . $r[2]);
+	$table_objet_sql = table_objet_sql($objet);
+	$id_table_objet = id_table_objet($objet);
 
-		if ($cpt == 1)
-			sql_updateq("spip_articles", array("id_trad" => 0), "id_trad=" . $r[2]);
-	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
-	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
-		sql_update('spip_articles', array("id_trad" => $r[3]), "id_trad=" . $r[2]);
-	} elseif (preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) {
-		instituer_langue_article($r[1],$r[2]);
-	} else {
-		spip_log("action_referencer_traduction_dist $arg pas compris");
-	}
-}
+	// on a fourni un id_trad : affectation ou modification du groupe de trad
+	if ($id_trad) {
+		// selectionner l'objet cible, qui doit etre different de nous-meme,
+		// et quitter s'il n'existe pas
+		$id_lier = sql_getfetsel('id_trad', $table_objet_sql, "$id_table_objet=".intval($id_trad)." AND NOT($id_table_objet=".intval($id_objet).")");
+		if ($id_lier === NULL){
+			spip_log("echec lien de trad vers objet $objet/$id_objet incorrect ($id_trad)");
+			return false;
+		}
 
-// http://doc.spip.org/@instituer_langue_article
-function instituer_langue_article($id_article, $id_rubrique) {
-
-	$changer_lang = _request('changer_lang');
-
-	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $changer_lang) {
-		if ($changer_lang != "herit") {
-			sql_updateq('spip_articles', array('lang'=>$changer_lang, 'langue_choisie'=>'oui'), "id_article=$id_article");
-			include_spip('inc/rubriques');
-			$langues = calculer_langues_utilisees();
-			ecrire_meta('langues_utilisees', $langues);
-		} else {
-			$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=" . $id_rubrique);
-			sql_updateq('spip_articles', array('lang'=>$langue_parent, 'langue_choisie'=>'non'), "id_article=$id_article");
+		// $id_lier est le numero du groupe de traduction
+		// Si l'objet vise n'est pas deja traduit, son identifiant devient
+		// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
+		// objets
+		if ($id_lier == 0) {
+			sql_updateq($table_objet_sql, array("id_trad" => $id_trad), "$id_table_objet IN ($id_trad, $id_objet)");
+		}
+		// si id_lier = id_objet alors on veut changer la reference de tout le groupe de trad
+		elseif ($id_lier == $id_objet) {
+			sql_updateq($table_objet_sql, array("id_trad" => $id_trad), "id_trad = $id_lier");
+		}
+		// sinon ajouter notre objet dans le groupe
+		else {
+			sql_updateq($table_objet_sql, array("id_trad" => $id_lier), "$id_table_objet=".intval($id_objet));
 		}
 	}
+	// on a fourni un id_trad nul : sortir id_objet du groupe de trad
+	else {
+		$old_id_trad = sql_getfetsel('id_trad',$table_objet_sql,"$id_table_objet=".intval($id_objet));
+	  // supprimer le lien de traduction
+		sql_updateq($table_objet_sql, array("id_trad" => 0), "$id_table_objet=".intval($id_objet));
+
+		// Verifier si l'ancien groupe ne comporte plus qu'un seul objet. Alors mettre a zero.
+		$cpt = sql_countsel($table_objet_sql, "id_trad=".intval($old_id_trad));
+		if ($cpt == 1)
+			sql_updateq($table_objet_sql, array("id_trad" => 0), "id_trad=".intval($old_id_trad));
+	}
+
+	return true;
 }
+
+
 ?>
