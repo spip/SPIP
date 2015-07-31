@@ -61,6 +61,7 @@ function action_rss_dist()
 	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
 }
 
+// http://doc.spip.org/@rss_split_args
 function rss_split_args($args)
 {
 	$a = array();
@@ -220,6 +221,7 @@ function rss_sites($critere) {
 }
 
 
+// http://doc.spip.org/@rss_signatures
 function rss_signatures($a) {
 	$rss = sql_allfetsel("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
 	foreach ($rss as $k => $t) {
@@ -239,6 +241,7 @@ function rss_signatures($a) {
 }
 
 # forum public
+// http://doc.spip.org/@rss_forum
 function rss_forum($a)
 {
 	$a = rss_split_args($a);
@@ -274,6 +277,7 @@ function rss_forum($a)
 }
 
 # suivi prive des forums
+// http://doc.spip.org/@rss_forums
 function  rss_forums($a)
 {
 	$a = rss_split_args($a);
@@ -287,6 +291,7 @@ function  rss_forums($a)
 }
 
 # revisions des articles
+// http://doc.spip.org/@rss_revisions
 function  rss_revisions($a)
 {
 	$a = rss_split_args($a);
@@ -300,6 +305,7 @@ function  rss_revisions($a)
 }
 
 # messagerie privee
+// http://doc.spip.org/@rss_messagerie
 function  rss_messagerie($a)
 {
 	$a = rss_split_args($a);
@@ -322,6 +328,7 @@ function rss_a_suivre($a) {
 	return array($title, $rss, $url);
 }
 
+// http://doc.spip.org/@rss_erreur
 function  rss_erreur($a)
 {
 	$rss = array(array('title' => _T('login_erreur_pass')));
