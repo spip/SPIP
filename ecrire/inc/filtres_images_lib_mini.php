@@ -216,9 +216,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 	}
 	// todo: si une image png est nommee .jpg, le reconnaitre avec le bon $f
-	$f = "imagecreatefrom".$term_fonction;
-	if (!function_exists($f)) return false;
-	$ret["fonction_imagecreatefrom"] = $f;
+	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
@@ -237,6 +235,9 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		# ca evite d'essayer de le creer au prochain hit si il n'est pas la
 		#ecrire_fichier($ret['fichier_dest'].'.src',serialize($ret),true);
 	}
+
+	$ret = pipeline('_image_valeurs_trans',array('args'=>func_get_args(),'data'=>$ret));
+	if (!function_exists($ret["fonction_imagecreatefrom"])) return false;
 	return $ret;
 }
 
