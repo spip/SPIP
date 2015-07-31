@@ -221,12 +221,12 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 		$lejour=journum($row['date_heure']);
 
 		if ($type=="normal") {
-			$la_couleur = "#0A9C60";
-			$couleur_fond = "#BDF0DB";
+			$la_couleur = "#02531B";
+			$couleur_fond = "#CFFEDE";
 		}
 		elseif ($type=="pb") {
-			$la_couleur = "#0000ff";
-			$couleur_fond = "#ccccff";
+			$la_couleur = "#3874B0";
+			$couleur_fond = "#EDF3FE";
 		}
 		elseif ($type=="affich") {
 			$la_couleur = "#ccaa00";
@@ -273,15 +273,15 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 		
 		if ($bas > $bas_prec) $bas_prec = $bas;		
 		
-		if ($le_message == $id_message)	$couleur_cadre = "red";
-		else $couleur_cadre = "#999999";
+		if ($le_message == $id_message)	$couleur_cadre = "black";
+		else $couleur_cadre = "$la_couleur";
 		
 		
 		echo "<div class='dessous'  style='position: absolute; $spip_lang_left: ".$decalage."px; top: ".$haut."px; height: ".($hauteur+8)."px; width: ".($largeur+8)."px; ' onClick=\"document.location='message.php3?id_message=$id_message'\" onMouseOver=\"changeclass(this, 'dessus');\" onMouseOut=\"changeclass(this, 'dessous');\">";
 		echo "<div style='position: absolute;  height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $la_couleur; padding: 3px; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
 		echo "</div>";
 		echo "<div style='position: absolute; overflow: hidden; height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $couleur_cadre; padding: 3px; -moz-border-radius: 5px;'>";
-		echo "<div><b><a href='message.php3?id_message=$id_message' class='verdana1' style='color: black;'>$titre</a></b></div>";
+		echo "<div><b><a href='message.php3?id_message=$id_message' class='verdana1' style='color: $la_couleur;'>$titre</a></b></div>";
 		
 		if ($type == "normal") {
 			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message='$id_message' AND (auteurs.id_auteur!='$connect_id_auteur' AND lien.id_auteur=auteurs.id_auteur))");
@@ -322,14 +322,14 @@ function liste_rv($query, $type) {
 	
 	if ($type == annonces) {
 		$titre = _T('info_annonces_generales');
-		$couleur_titre = "yellow";
+		$couleur_titre = "ccaa00";
 		$couleur_texte = "black";
 		$couleur_fond = "#ffffee";
 	}
 	else if ($type == pb) {
 		$titre = _T('infos_vos_pense_bete');
-		$couleur_titre = "blue";
-		$couleur_fond = "#eeeeff";
+		$couleur_titre = "#3874B0";
+		$couleur_fond = "#EDF3FE";
 		$couleur_texte = "white";
 	}
 	else if ($type == rv) {
