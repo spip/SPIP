@@ -50,7 +50,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 	$table = isset($tables[$type]) ? $tables[$type] : $type;
 	if (in_array($table, $a_importer) AND !isset($field_desc[$table])) {
 		// recuperer la description de la table pour connaitre ses champs valides
-		list($nom,$desc) = description_table($table);
+		$desc = description_table($table);
 
 		if (isset($desc['field']))
 			$field_desc[$table] = $desc['field'];

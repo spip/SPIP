@@ -238,36 +238,6 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	return "($in_sql)";
 }
 
-
-// Une version d'abstract_showtable prenant en compte les tables predefinies
-// Faudrait tester un jour si ca accelere vraiment.
-
-// http://doc.spip.org/@description_table
-function description_table($nom){
-	global $tables_principales, $tables_auxiliaires;
-	static $tables_externes = array();
-
-	if (isset($tables_externes[$nom]))
-		return array($nom, $tables_externes[$nom]);
-
-	$nom_table = $nom;
-	include_spip('base/serial');
-	if (isset($tables_principales[$nom_table]))
-		return array($nom_table, $tables_principales[$nom_table]);
-	include_spip('base/auxiliaires');
-	if (isset($tables_auxiliaires[$nom_table]))
-		return array($nom_table, $tables_auxiliaires[$nom_table]);
-
-	$nom_table = 'spip_' . $nom; // discutable
-	if ($desc = sql_showtable($nom, '', true))
-		if (isset($desc['field'])) {
-			$tables_externes[$nom] = $desc;
-			return array($nom, $desc);
-		}
-
-	return array($nom,array());
-}
-
 // http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='') {
   	$f = sql_serveur('listdbs', $serveur);
@@ -321,6 +291,88 @@ function spip_sql_character_set($charset, $skip_verif=false){
 	}
 
 	return false;
+}
+
+// Trouve la description d'une table, en particulier celle d'une boucle
+// Si on ne la trouve pas, on demande au serveur SQL
+// retourne False si lui non plus  ne la trouve pas.
+// Si on la trouve, le tableau resultat a les entrees:
+// field (comme dans serial.php)
+// key (comme dans serial.php)
+// table = nom SQL de la table (avec le prefixe spip_ pour les stds)
+// id_table = nom SPIP de la table (i.e. type de boucle)
+// le compilateur produit  FROM $r['table'] AS $r['id_table']
+// Cette fonction intervient a la compilation, 
+// mais aussi pour la balise contextuelle EXPOSE.
+
+// http://doc.spip.org/@trouver_table
+function trouver_table($nom, $boucle='')
+{
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
+
+	$serveur = @$boucle->sql_serveur;
+	if (!spip_connect($serveur)) return null;
+	$s = $serveur ? $serveur : 0;
+	$nom_sql = $nom;
+
+	if ($connexions[$s]['spip_connect_version']) {
+		// base sous SPIP, le nom SQL peut etre autre
+		if (isset($table_des_tables[$nom])) {
+		  // indirection (table principale avec nom!=type)
+			$t = $table_des_tables[$nom];
+			$nom_sql = 'spip_' . $t;
+			if (!isset($connexions[$s]['tables'][$nom_sql])) {
+				include_spip('base/serial');
+				$connexions[$s]['tables'][$nom_sql] = $tables_principales[$nom_sql];
+				$connexions[$s]['tables'][$nom_sql]['table']= $nom_sql;
+				$connexions[$s]['tables'][$nom_sql]['id_table']= $t;
+			} # table principale deja vue, ok.
+		} else {
+			include_spip('base/auxiliaires');
+			if (isset($tables_auxiliaires['spip_' .$nom])) {
+				$nom_sql = 'spip_' . $nom;
+				if (!isset($connexions[$s]['tables'][$nom_sql])) {
+					$connexions[$s]['tables'][$nom_sql] = $tables_auxiliaires[$nom_sql];
+					$connexions[$s]['tables'][$nom_sql]['table']= $nom_sql;
+					$connexions[$s]['tables'][$nom_sql]['id_table']= $nom;
+				} # table locale a cote de SPIP: noms egaux
+			} # auxiliaire deja vue, ok.
+		}
+	}
+
+	if (isset($connexions[$s]['tables'][$nom_sql]))
+		return $connexions[$s]['tables'][$nom_sql];
+
+	$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
+	if (!$desc OR !$desc['field']) {
+		include_spip('public/debug');
+		erreur_squelette(_T('zbug_table_inconnue',
+			array('table' => $s ? "$serveur:$nom" : $nom)),
+				$boucle->id_boucle);
+		return null;
+	} else {
+		$desc['table']= $nom_sql;
+		$desc['id_table']= $nom;
+	}
+	return	$connexions[$s]['tables'][$nom_sql] = $desc;
+}
+
+// Cette fonction est vouee a disparaitre
+
+// http://doc.spip.org/@description_table
+function description_table($nom){
+
+        global $tables_principales, $tables_auxiliaires;
+
+        include_spip('base/serial');
+        if (isset($tables_principales[$nom]))
+                return $tables_principales[$nom];
+
+        include_spip('base/auxiliaires');
+        if (isset($tables_auxiliaires[$nom]))
+                return $tables_auxiliaires[$nom];
+
+	return trouver_table($nom);
 }
 
 ?>
