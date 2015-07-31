@@ -116,7 +116,7 @@ function regler_langue_navigateur() {
 //
 // Traduire une chaine internationalisee
 //
-function traduire_chaine($code, $args) {
+function traduire_chaine($code) {
 	global $spip_lang;
 
 	// modules par defaut
@@ -158,15 +158,10 @@ function traduire_chaine($code, $args) {
 		if (!$text) {
 			$spip_lang_temp = $spip_lang;
 			$spip_lang = 'fr';
-			$text = traduire_chaine($code_ori, $args);
+			$text = traduire_chaine($code_ori);
 			$spip_lang = $spip_lang_temp;
 		}
 	}
-
-	// inserer les variables
-	if (!$args) return $text;
-	while (list($name, $value) = each($args))
-		$text = str_replace ("@$name@", $value, $text);
 	return $text;
 }
 
