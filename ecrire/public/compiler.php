@@ -151,16 +151,24 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
 
-// Gerer ajax
-	$ajax = ($ajax ? "\'ajax\'=>true":"");
-
 	$code =
 		($fichier ?
 			"\tinclude \\'$path\\'"
 			:
-			("\techo recuperer_fond(\$contexte_inclus[\'fond\'], \$contexte_inclus, array($ajax), _request(\'connect\'))")
+			("\techo recuperer_fond(\$contexte_inclus[\'fond\'], \$contexte_inclus, array(), _request(\'connect\'))")
 		).
 		";";
+
+	// Gerer ajax
+	if ($ajax) {
+		$code = '	echo "<div class=\\\'ajaxbloc env-\'
+			. eval(\'return encoder_contexte_ajax('.$contexte.');\')
+			. \'\\\'>\\n";'
+			."\n"
+			.$code
+			."\n"
+			.'	echo "</div><!-- ajaxbloc -->\\n";';
+	}
 
 
 	return "\n'<".
