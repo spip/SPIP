@@ -16,8 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion des inclusions et infos repertoires
 //
 
-$included_files = array();
-
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -608,42 +606,36 @@ function texte_script($texte) {
 //
 
 function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
-	static $autopath;
-	static $count=0; # nombre de plugins ; s'il change il faut refaire le path
 
 	// Chemin standard depuis l'espace public
 	if ($path == 'AUTO') {
-		if (!$autopath
-		OR ($count != ($c = count($GLOBALS['plugins'])))) {
-			$count = $c;
-			// Depuis l'espace prive, remonter d'un cran, sauf pour :
-			// - les absolus (/) ; - les locaux (./) ; les remontees (../)
-			if (_DIR_RACINE) {
-				$autopath = array();
-				foreach (split(':', _SPIP_PATH) as $dir) {
-					if (!preg_match('@^([.]{0,2}/)@', $dir))
-						$dir = _DIR_RACINE.$dir;
-					$autopath[] = $dir;
-				}
-				$autopath = join(':', $autopath);
-			} else
-				$autopath = _SPIP_PATH;
+		$path = defined('_SPIP_PATH') ? explode(':', _SPIP_PATH) : 
+			array(
+				_DIR_RACINE,
+				_DIR_RACINE.'dist/',
+				_DIR_RACINE.'formulaires/',
+				_DIR_RESTREINT
+			);
 
-			// Ajouter les repertoires des plugins
-			foreach ($GLOBALS['plugins'] as $plug)
-				$autopath = _DIR_PLUGINS.$plug.'/:'.$autopath;
-		}
-		$path = $autopath;
+		// Ajouter les repertoires des plugins
+		foreach ($GLOBALS['plugins'] as $plug)
+			array_unshift($path, _DIR_PLUGINS.$plug.'/');
 
+		// Ajouter squelettes/
+		array_unshift($path, _DIR_RACINE.'squelettes/');
+
+		// Et le dossier des squelettes nomme
 		if ($GLOBALS['dossier_squelettes'])
-			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
+			array_unshift($path,
+			_DIR_RACINE.$GLOBALS['dossier_squelettes'].'/');
 	}
 
 	// Parcourir le chemin
 	# Attention, dans l'espace prive on a parfois sinon='' pour _DIR_INCLUDE
-	if ($sinon !== NULL) $path .= ':'.$sinon;
+	if ($sinon !== NULL)
+		array_push($path, $sinon);
 
-	foreach (split(':', $path) as $dir) {
+	foreach ($path as $dir) {
 		// ajouter un / eventuellement manquant a la fin
 		if (strlen($dir) AND substr($dir,-1) != '/') $dir .= "/";
 		if (@is_readable($f = "$dir$filename")) {
@@ -912,8 +904,6 @@ function spip_initialisation() {
 	define('_AUTH_USER_FILE', '.htpasswd');
 
 	define('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
-
-	define('_SPIP_PATH', './:squelettes/:dist/:formulaires/:ecrire/');
 
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
 	// le script index.php
