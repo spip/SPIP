@@ -10,11 +10,30 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions de modifications des rubriques
+ *
+ * @package SPIP\Rubriques\Modifications
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/rubriques');
 
-// http://doc.spip.org/@action_editer_rubrique_dist
+/**
+ * Action d'édition d'une rubrique
+ *
+ * Crée la rubrique si elle n'existe pas encore
+ * Redirige après l'action sur _request('redirect') si présent
+ *
+ * @param null|int $arg
+ *     - null : vérifie la sécurité de l'action.
+ *              Si ok, obtient l'identifiant de rubrique à éditer
+ *              (oui 'oui' pour une nouvelle rubrique)
+ *     - int  : identifiant de rubrique dont on demande l'édition
+ * @return array
+ *     Liste : identifiant de la rubrique, message d'erreur éventuel.
+ *
+ */
 function action_editer_rubrique_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -46,11 +65,13 @@ function action_editer_rubrique_dist($arg=null) {
 
 
 /**
- * Inserer une rubrique en base
- * http://doc.spip.org/@insert_rubrique
+ * Insérer une rubrique en base
  *
  * @param int $id_parent
+ *     Identifiant de la rubrique parente.
+ *     0 pour la racine.
  * @return int
+ *     Identifiant de la rubrique crée
  */
 function rubrique_inserer($id_parent) {
 	$champs = array(
@@ -85,12 +106,15 @@ function rubrique_inserer($id_parent) {
 
 /**
  * Modifier une rubrique en base
- * $set est un tableau qu'on peut proposer en lieu et place de _request()
- * http://doc.spip.org/@revisions_rubriques
- *
+ * 
  * @param int $id_rubrique
- * @param array $set
- * @return string
+ *     Identifiant de la rubrique modifiée
+ * @param array|null $set
+ *     Tableau qu'on peut proposer en lieu et place de _request()
+ * @return bool|string
+ *     - false  : Aucune modification, aucun champ n'est à modifier
+ *     - chaîne vide : Vide si tout s'est bien passé
+ *     - chaîne : Texte d'un message d'erreur
  */
 function rubrique_modifier($id_rubrique, $set=null) {
 	include_spip('inc/autoriser');
@@ -128,17 +152,23 @@ function rubrique_modifier($id_rubrique, $set=null) {
 }
 
 /**
- * si c'est une rubrique-secteur contenant des breves, ne deplacer
- * que si $confirme_deplace == 'oui', et changer l'id_rubrique des
- * breves en question
- * A deporter dans les breves via un pipeline ?
- *
- * http://doc.spip.org/@editer_rubrique_breves
+ * Déplace les brèves d'une rubrique dans le secteur d'un nouveau parent
+ * 
+ * Si c'est une rubrique-secteur contenant des brèves, on ne deplace
+ * que si $confirme_deplace == 'oui', et change alors l'id_rubrique des
+ * brèves en question
+ * 
+ * [todo] À déporter dans le plugin brèves via un pipeline ?
  *
  * @param int $id_rubrique
+ *     Identifiant de la rubrique déplacée
  * @param int $id_parent
+ *     Identifiant du nouveau parent de la rubrique
  * @param array $c
+ *     Informations pour l'institution (id_rubrique, confirme_deplace)
  * @return bool
+ *     true si le déplacement est fait ou s'il n'y a rien à faire
+ *     false si la confirmation du déplacement n'est pas présente
  */
 function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
 {
@@ -158,10 +188,19 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
 
 /**
  * Instituer une rubrique (changer son parent)
- * http://doc.spip.org/@instituer_rubrique
+ * 
+ * Change le parent d'une rubrique, si les autorisations sont correctes,
+ * mais n'accèpte pas de déplacer une rubrique dans une de ses filles, tout de même !
+ *
+ * Recalcule les secteurs, les langues et déplace les brèves au passage.
+ * 
  * @param int $id_rubrique
+ *     Identifiant de la rubrique à instituer
  * @param array $c
+ *     Informations pour l'institution (id_rubrique, confirme_deplace)
  * @return string
+ *     Chaine vide : aucune erreur
+ *     Chaîne : Texte du message d'erreur
  */
 function rubrique_instituer($id_rubrique, $c) {
 	// traitement de la rubrique parente
@@ -208,13 +247,57 @@ function rubrique_instituer($id_rubrique, $c) {
 	return ''; // pas d'erreur
 }
 
-// obsoletes
+/**
+ * Crée une rubrique 
+ *
+ * @deprecated
+ *     Utiliser rubrique_inserer()
+ * @see rubrique_inserer()
+ * 
+ * @param int $id_parent
+ *     Identifiant de la rubrique parente.
+ *     0 pour la racine.
+ * @return int
+ *     Identifiant de la rubrique crée
+**/
 function insert_rubrique($id_parent) {
 	return rubrique_inserer($id_parent);
 }
+
+
+/**
+ * Modifie les contenus d'une rubrique 
+ *
+ * @deprecated
+ *     Utiliser rubrique_modifier()
+ * @see rubrique_modifier()
+ * 
+ * @param array|null $set
+ *     Tableau qu'on peut proposer en lieu et place de _request()
+ * @return bool|string
+ *     - false  : Aucune modification, aucun champ n'est à modifier
+ *     - chaîne vide : Vide si tout s'est bien passé
+ *     - chaîne : Texte d'un message d'erreur
+**/
 function revisions_rubriques($id_rubrique, $set=null) {
 	return rubrique_modifier($id_rubrique,$set);
 }
+
+/*
+ * Institue une rubrique (change son parent)
+ *
+ * @deprecated
+ *     Utiliser rubrique_instituer()
+ * @see rubrique_instituer()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique à instituer
+ * @param array $c
+ *     Informations pour l'institution (id_rubrique, confirme_deplace)
+ * @return string
+ *     Chaine vide : aucune erreur
+ *     Chaîne : Texte du message d'erreur
+*/
 function instituer_rubrique($id_rubrique, $c) {
 	return rubrique_instituer($id_rubrique, $c);
 }

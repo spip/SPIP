@@ -10,17 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions d'aides pour les fonctions d'objets de modification de contenus
+ *
+ * @package SPIP\Objets\Modifications
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Une fonction generique pour la collecte des posts
+ * Collecte des champs postés
+ * 
+ * Fonction générique pour la collecte des posts
  * dans action/editer_xxx
  *
  * @param array $white_list
+ *     Les champs à récupérer
  * @param array $black_list
+ *     Les champs à ignorer
  * @param array|null $set
- * @param bool $tous Recuperer tous les champs de white_list meme ceux n'ayant pas ete postes
+ *     array : Tableau des champs postés
+ *     null  : Les champs sont obtenus par des _request() sur les noms de la white liste
+ * @param bool $tous
+ *     true : Recupère tous les champs de white_list meme ceux n'ayant pas ete postés
  * @return array
+ *     Tableau des champs et valeurs collectées 
  */
 function collecter_requests($white_list, $black_list, $set=null, $tous=false){
 	$c = $set;
@@ -48,25 +62,31 @@ function collecter_requests($white_list, $black_list, $set=null, $tous=false){
 }
 
 /**
- * Une fonction generique pour l'API de modification de contenu
- * $options est un array() avec toutes les options
+ * Modifie le contenu d'un objet
+ * 
+ * Fonction generique pour l'API de modification de contenu, qui se
+ * charge entre autres choses d'appeler les pipelines pre_edition
+ * et post_edition
  *
- * renvoie false si aucune modif (pas de champs a modifier)
- * renvoie une chaine vide '' si modif OK
- * renvoie un message d'erreur si probleme
- *
- * Attention, pour eviter des hacks on interdit les champs
+ * Attention, pour éviter des hacks on interdit des champs
  * (statut, id_secteur, id_rubrique, id_parent),
- * mais la securite doit etre assuree en amont
+ * mais la securite doit étre assurée en amont
  *
- * http://doc.spip.org/@modifier_contenu
- *
+ * @api
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param array $options
- * @param array $c
+ *     Toutes les options
+ * @param array|null $c
+ *     Couples champ/valeur à modifier
  * @param string $serveur
+ *     Nom du connecteur à la base de données
  * @return bool|string
+ *     - false  : Aucune modification, aucun champ n'est à modifier
+ *     - chaîne vide : Vide si tout s'est bien passé
+ *     - chaîne : Texte d'un message d'erreur
  */
 function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur='') {
 	if (!$id_objet = intval($id_objet)) {
@@ -246,17 +266,25 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 }
 
 /**
- * Depreciee :
- * Une fonction generique pour l'API de modification de contenu
- * $options est un array() avec toutes les options
- * renvoie false si rien n'a ete modifie, true sinon
+ * Modifie un contenu
+ * 
+ * Dépreciée :
+ * Fonction générique pour l'API de modification de contenu
  *
+ * @deprecated
  * @param string $type
+ *     Type d'objet
  * @param int $id
+ *     Identifiant de l'objet
  * @param array $options
- * @param array $c
+ *     Toutes les options
+ * @param array|null $c
+ *     Couples champ/valeur à modifier
  * @param string $serveur
+ *     Nom du connecteur à la base de données
  * @return bool
+ *     true si quelque chose est modifié correctement
+ *     false sinon (erreur ou aucun champ modifié)
  */
 function modifier_contenu($type, $id, $options, $c=null, $serveur='') {
 	$res = objet_modifier_champs($type, $id, $options, $c, $serveur);
@@ -264,16 +292,24 @@ function modifier_contenu($type, $id, $options, $c=null, $serveur='') {
 }
 
 /**
+ * Crée une modification d'un objet
+ * 
  * Wrapper pour remplacer tous les obsoletes revision_xxx
+ *
+ * @deprecated
+ *     Utiliser objet_modifier();
+ * @see objet_modifier();
+ * 
  * @param string $objet
+ *     Nom de l'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param array $c
+ *     Couples des champs/valeurs modifiées
  * @return mixed|string
  */
 function revision_objet($objet,$id_objet,$c=null){
 	$objet = objet_type($objet); // securite
-	if (include_spip('action/editer_'.$objet) AND function_exists($f=$objet.'_modifier'))
-		return $f($id_objet,$c);
 	include_spip('action/editer_objet');
 	return objet_modifier($objet,$id_objet,$c);
 }
