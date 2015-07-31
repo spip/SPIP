@@ -679,13 +679,30 @@ function spip_substr($c, $start=0, $end='') {
 			return mb_substr($c, $start);
 	}
 
-	// methode substr normale
-	else {
-		if ($end)
-			return substr($c, $start, $end);
-		else
-			return substr($c, $start);
+	// version manuelle
+	$re_char="(?:[\300-\377][\200-\277]*|[\1-\200])";
+	if($start==0) {
+		$restart='';
+	} else {
+		if($start<0) {
+			$start= ($l=utf_strlen($s))+$start;
+		}
+		$re_start= "(?:$re_char\{$start})";
 	}
+	
+	if($len===null) {
+		$re_end="(.*)";
+	} else {
+		if($len<0) {
+			$len= ($l?$l:utf_strlen($s))+$len-$start;
+		}
+		$re_end="($re_char\{0,$len})";
+	}
+
+	if(preg_match("/^${re_start}${re_end}/", $s, $m)) {
+		return $m[1];
+	}
+	return FALSE;
 }
 
 // http://doc.spip.org/@spip_strlen
@@ -693,7 +710,7 @@ function spip_strlen($c) {
 	if (init_mb_string())
 		return mb_strlen($c);
 	else
-		return strlen($c);
+		return strlen(preg_replace("/[\300-\377][\200-\277]*/", " ", $s));
 }
 
 
