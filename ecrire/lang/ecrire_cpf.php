@@ -862,19 +862,19 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'ast&egrave;r',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Azout&eacute; l&eacute; mo-la andann lo diksyon&egrave;r',
-'ortho_aucune_suggestion' => 'N&eacute;na pa okinn id&eacute; pou l&eacute; mo-la.',
-'ortho_avis_privacy' => 'Andann Spip n&eacute;na in v&eacute;rifikt&egrave;r lo grafi. Avann ou f&eacute; zw&eacute; ali, ni kons&egrave;y aou li byin sat l&eacute; mark&eacute; anba t&egrave;rla&nbsp;:',
-'ortho_avis_privacy2' => 'Po v&eacute;rify&eacute; la grafi lo t&egrave;ks, sit-la sar envway&eacute; lo list bann mo po kontrol&eacute; si  inn &laquo;&nbsp;serv&egrave;r  la grafi&nbsp;&raquo;  d&eacute;or, sat d&eacute;sertinn dalon l kominot&eacute; SPIP i rann piblik pou tout. N&eacute;na pwin okinn ord pou envway&eacute; tout bann mot-la. Komsala lo s&eacute;kr&eacute; l&eacute; resp&eacute;t&eacute;. Si ou l ap&egrave;r, anserv pas lopsyon-la (ou p&eacute; m&egrave;ma artir kom&eacute;la out bann zinformasyon si lo w&egrave;b).',
-'ortho_ce_mot_connu' => 'L&eacute; mo-la li l&eacute; sort pa andan lo diksyon&egrave;r lo sit.',
-'ortho_dico_absent' => 'Ni la pa trouv&eacute; okinn diksyon&egrave;r po zot lang-la.',
-'ortho_mode_demploi' => 'Bann mot l&eacute; pa konu li l&eacute; sirliny&eacute; n rouz. Ou p&eacute; klik azot po afis&eacute; bann koreksyon ni propoz aou.',
-'ortho_mots_a_corriger' => 'bann mo pou koriz&eacute;',
-'ortho_orthographe' => 'Grafi',
-'ortho_supprimer_ce_mot' => 'Artir l&eacute; mo-la andann lo diksyon&egrave;r',
-'ortho_trop_de_fautes' => 'Pangar&nbsp;: n&eacute;na trod larlik &egrave;k lo grafi, l&eacute; pa posib afis&eacute; bann zid&eacute; pou koriz&eacute; akoz lo sist&egrave;m i sr&eacute; tro kraz&eacute;.',
-'ortho_verif_impossible' => 'Sist&egrave;m-la l&eacute; pa kav v&eacute;rify&eacute; lo t&egrave;ks-la.',
-'ortho_verifier' => 'V&eacute;rify&eacute; lo grafi',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

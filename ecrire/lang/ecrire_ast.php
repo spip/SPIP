@@ -851,19 +851,19 @@ con una color que indica el est&aacute;u:',
 'onglet_proprietes' => 'Propied&aacute;es',
 'onglet_repartition_actuelle' => 'actualmente',
 'onglet_sous_rubriques' => 'So-estayes',
-'ortho_ajouter_ce_mot' => 'Amestar esta pallabra al diccionariu',
-'ortho_aucune_suggestion' => 'Nun s\'atop&oacute; suxerencia dala pa esta pallabra.',
-'ortho_avis_privacy' => 'Hai un comprebador d\'ortograf&iacute;a integr&aacute;u en SPIP. Sicas&iacute;, enantes d\'activar esta carauter&iacute;stica, has de lleer con atenci&oacute;n el p&aacute;rrafu siguiente:',
-'ortho_avis_privacy2' => 'Pa comprebar la ortograf&iacute;a d\'un testu, el sitiu va unviar la llista de pallabres a controlar a unu de los &laquo;sirvidores d\'ortograf&iacute;a&raquo; esternos que ufren diferentes miembros de la comunid&aacute; SPIP. Les pallabres unv&iacute;ense en desorde a la fin d\'asegurar un m&iacute;nimu de confidencialid&aacute;. Si tuvieres medrana de que se vean los tos datos, nun actives esta opci&oacute;n (y desanicia darr&eacute;u toa la to informaci&oacute;n de la Rede).',
-'ortho_ce_mot_connu' => 'Esta pallabra pertenez al diccionariu del sitiu.',
-'ortho_dico_absent' => 'Nun s\'atop&oacute; deng&uacute;n diccionariu pa esta llingua',
-'ortho_mode_demploi' => 'Les pallabres nun reconoc&iacute;es soll&iacute;niense en roxu. Pues calcar en cada pallabra pa amosar suxerencies de correici&oacute;n.',
-'ortho_mots_a_corriger' => 'pallabres a correxir',
-'ortho_orthographe' => 'Ortograf&iacute;a',
-'ortho_supprimer_ce_mot' => 'Desaniciar esta pallabra del diccionariu',
-'ortho_trop_de_fautes' => 'Atenci&oacute;n: el to testu conti&eacute;n abondes faltes, nun se fai suxerencia de correici&oacute;n dala pa nun sobrecargar el sistema.',
-'ortho_verif_impossible' => 'El sistema nun pue comprebar la ortograf&iacute;a d\'esti testu.',
-'ortho_verifier' => 'Verificar la ortograf&iacute;a',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Esta p&aacute;xina nun debe pasar pol proxy',

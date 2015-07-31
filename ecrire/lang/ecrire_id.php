@@ -844,19 +844,19 @@ dalam warna yang menunjukkan statusnya:',
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'sekarang',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Tambahkan kata ini ke dalam kamus',
-'ortho_aucune_suggestion' => 'Tidak ada saran yang ditemukan untuk kata ini.',
-'ortho_avis_privacy' => 'SPIP memiliki pemeriksa ejaan. Walaupun demikian, sebelum mengaktifkannya, silakan baca paragraf berikut baik-baik:',
-'ortho_avis_privacy2' => 'Untuk memerikas ejaan sebuah teks, situs akan mengirimkan daftar kata-kata yang akan diperiksa ke server pengeja eksternal, yang telah disediakan oleh komunitas SPIP. Kata-kata akan dicampur sebelum dikirim guna menjaga tingkat kerahasiaan. Jika anda khawatir dengan data anda, jangan aktifkan opsi ini (dan tarik semua informasi anda dari web sekaligus).',
-'ortho_ce_mot_connu' => 'Kata ini terdapat di dalam kamus situs.',
-'ortho_dico_absent' => 'Tidak ada kamus ditemukan untuk bahasa ini',
-'ortho_mode_demploi' => 'Kata-kata yang tidak dikenal diberi tanda merah. Klik pada kata-kata tersebut untuk melihat koreksi yang disarankan.',
-'ortho_mots_a_corriger' => 'kata yang akan dikoreksi',
-'ortho_orthographe' => 'Ejaan',
-'ortho_supprimer_ce_mot' => 'Hapus kata ini dari kamus',
-'ortho_trop_de_fautes' => 'Teks anda mengandung banyak kesalahan! Agar sistem tidak terberati oleh kesalahan tersebut, tidak ada koreksi yang diberikan.',
-'ortho_verif_impossible' => 'Sistem tidak dapat memeriksa ejaan dari teks ini.',
-'ortho_verifier' => 'Pemeriksaan ejaan',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

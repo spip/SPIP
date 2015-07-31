@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@',
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
 'info_compresseur_titre' => 'Optimisations and compression',
-'info_config_forums_prive' => 'In the editing area of the site several differnt kinds of forum may be activated:',
+'info_config_forums_prive' => 'You can activate various tupes of forums in the site\'s private area:',
 'info_config_forums_prive_admin' => 'A forum reserved for site administrators:',
 'info_config_forums_prive_global' => 'A global forum, open to all the authors:',
 'info_config_forums_prive_objets' => 'A forum attached to each article, news item, referenced site, etc.:',
@@ -846,19 +846,19 @@ in a colour indicating their status:',
 'onglet_proprietes' => 'Properties',
 'onglet_repartition_actuelle' => 'now',
 'onglet_sous_rubriques' => 'Sub-sections',
-'ortho_ajouter_ce_mot' => 'Add this word to the dictionary',
-'ortho_aucune_suggestion' => 'No suggestion was found for this word.',
-'ortho_avis_privacy' => 'Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:',
-'ortho_avis_privacy2' => 'In order to check the spelling of a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).',
-'ortho_ce_mot_connu' => 'This word is in the site\'s dictionary.',
-'ortho_dico_absent' => 'No dictionary was found for this language',
-'ortho_mode_demploi' => 'Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
-'ortho_mots_a_corriger' => 'words to correct',
-'ortho_orthographe' => 'Spelling',
-'ortho_supprimer_ce_mot' => 'Remove this word from the dictionary',
-'ortho_trop_de_fautes' => 'Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
-'ortho_verif_impossible' => 'The system cannot check the spelling of this text.',
-'ortho_verifier' => 'Spell check',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'This page shouldn\'t go through the proxy',
@@ -1051,7 +1051,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_login_precaution' => 'Warning! This is the login with which you are connected now.
 	Use this form with caution...',
 'texte_message_edit' => 'Warning: this message can be modified by all the site administrators, and it appears to all editors. Use the announcements only to stress important events in the site\'s life.',
-'texte_messagerie_agenda' => 'A messaging system allows the authors of the site to communicate directly in the editing area of the site. It is linked to a calendar.',
+'texte_messagerie_agenda' => 'A messaging system allows the authors of the site to communicate directly in the site\'s private area. It is linked to a calendar.',
 'texte_messages_publics' => 'Public Messages of the article:',
 'texte_mise_a_niveau_base_1' => 'You have just updated SPIP files.
 	Now you must upgrade the site\'s
@@ -1180,10 +1180,10 @@ you can perform searches on sites and
 'titre_compacter_script_css' => 'Compression of scripts and CSS',
 'titre_compresser_flux_http' => 'Compression of HTTP data',
 'titre_config_contenu_notifications' => 'Notifications',
-'titre_config_contenu_prive' => 'In the editing area',
+'titre_config_contenu_prive' => 'In the private area',
 'titre_config_contenu_public' => 'On the public site',
 'titre_config_fonctions' => 'Site configuration',
-'titre_config_forums_prive' => 'Forums in the editing area',
+'titre_config_forums_prive' => 'Forums in the private area',
 'titre_config_groupe_mots_cles' => 'Configuration of the keyword groups',
 'titre_configuration' => 'Site configuration',
 'titre_conflit_edition' => 'Conflict while editing',

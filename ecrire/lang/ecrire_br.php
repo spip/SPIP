@@ -824,19 +824,19 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'onglet_proprietes' => 'Perzhio&ugrave;',
 'onglet_repartition_actuelle' => 'betek-henn',
 'onglet_sous_rubriques' => 'Isrummado&ugrave;',
-'ortho_ajouter_ce_mot' => 'Ouzhpenna&ntilde; ar ger-ma&ntilde; d\'ar geriadur',
-'ortho_aucune_suggestion' => 'N\'eus bet kavet kinnig ebet evit ar ger-ma&ntilde;.',
-'ortho_avis_privacy' => 'Un difazier reizhskriva&ntilde; zo e SPIP. A-raok ober gant ar servij-ma&ntilde;, lennit gant aked ar rannbennad da-heul, mar plij&nbsp;:',
-'ortho_avis_privacy2' => 'A-benn gwiria&ntilde; reizhskrivadur un destenn e kaso SPIP ar roll gerio&ugrave; da wiria&ntilde; da &laquo;&nbsp;servijerio&ugrave; reizhskriva&ntilde;&nbsp;&raquo; diavaez, kinniget deoc\'h gant tud eus kumuniezh SPIP. En dizurzh e vez kaset ar gerio&ugrave;, evit ma ne vefe ket komprenet ar pezh zo en ho pennad. M\'hoc\'h eus aon evit ho titouro&ugrave;, na rit ket gant ar servij-ma&ntilde; (ha diverkit diouzhtu ho titouro&ugrave; diouzh ar rouedad).',
-'ortho_ce_mot_connu' => 'E geriadur al lec\'hienn ema&ntilde; ar ger-ma&ntilde;.',
-'ortho_dico_absent' => 'N\'eus bet kavet geriadur ebet evit ar yezh-ma&ntilde;',
-'ortho_mode_demploi' => 'E ruz eo bet uslinennet ar gerio&ugrave; n\'int ket bet anavezet. Klika&ntilde; war pep ger a c\'hallit ober evit lenn kinnigo&ugrave; reizha&ntilde;.',
-'ortho_mots_a_corriger' => 'gerio&ugrave; da reizha&ntilde;',
-'ortho_orthographe' => 'Reizhskriva&ntilde;',
-'ortho_supprimer_ce_mot' => 'Tenna&ntilde; ar ger-ma&ntilde; eus ar geriadur',
-'ortho_trop_de_fautes' => 'Diwallit&nbsp;: re a fazio&ugrave; zo en ho testenn. N\'eus bet kinniget reizhadenn ebet kuit da soulgarga&ntilde; ar reizhiad.',
-'ortho_verif_impossible' => 'N\'hall ket ar reizhiad gwiria&ntilde; reizhskrivadur an destenn-ma&ntilde;.',
-'ortho_verifier' => 'Gwiria&ntilde; ar reizhskriva&ntilde;',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Arabat d\'ar bajenn-ma&ntilde; tremen dre ar proksi',

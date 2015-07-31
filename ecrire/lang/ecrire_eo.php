@@ -829,19 +829,19 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'onglet_proprietes' => 'Trajtoj',
 'onglet_repartition_actuelle' => 'nun',
 'onglet_sous_rubriques' => 'Subrubrikoj',
-'ortho_ajouter_ce_mot' => 'Aldoni tiun vorton al la vortaro',
-'ortho_aucune_suggestion' => 'Neniu propono estis trovita por tiu vorto.',
-'ortho_avis_privacy' => 'SPIP enhavas ortografian kontrolilon. Tamen, anta&#365; ol aktivigi tiun funkcion, atente legu la jenan paragrafon&nbsp;:',
-'ortho_avis_privacy2' => 'Por kontroli la ortografion de teksto, la retejo sendas liston de kontrolotaj vortoj al eksteraj &laquo;&nbsp;ortografiaj serviloj&nbsp;&raquo;, kiujn disponigas al vi SPIP-anoj. Vortoj estas senditaj malorde por estigi minimuman konfidencon. Tamen, se vi timas pri via datenoj, ne aktivigu tiun elekton (kaj anka&#365; forigu tuj viajn datenoj el la reto).',
-'ortho_ce_mot_connu' => 'Tiu vorto trovi&#285;as en la vortaro de la retejo.',
-'ortho_dico_absent' => 'Neniu vortaro estis trovita por tiu lingvo',
-'ortho_mode_demploi' => 'Ne rekonitaj vortoj estas ru&#285;e substrekitaj. Vi povas musklaki &#265;iun vorton por afi&#349;i korekto-sugestojn.',
-'ortho_mots_a_corriger' => 'korektendaj vortoj',
-'ortho_orthographe' => 'Ortografio',
-'ortho_supprimer_ce_mot' => 'Forvi&#349;i tiun &#265;i vorton el la vortaro',
-'ortho_trop_de_fautes' => 'Atentu&nbsp;: via teksto enhavas tro da eraroj. Neniu korekto estas sugestita por ne super&#349;uti la sistemon.',
-'ortho_verif_impossible' => 'La sistemo ne povas kontroli la ortografion de tiu teksto.',
-'ortho_verifier' => 'Kontrolu la ortografion',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Tiu &#265;i pa&#285;o ne &#349;uti&#285;u tra la prokura servilo',

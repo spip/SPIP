@@ -810,19 +810,19 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'onglet_proprietes' => 'Proprietateak',
 'onglet_repartition_actuelle' => 'gaur egun',
 'onglet_sous_rubriques' => 'Azpi-eremuak',
-'ortho_ajouter_ce_mot' => 'Hitz hau hiztegira erantsi',
-'ortho_aucune_suggestion' => 'Ez da aurkitu proposamenik hitz honetarako.',
-'ortho_avis_privacy' => 'SPIP-ean ortografia-zuzentzaile bat txertatu da. Hala ere,funtzionalitate hau aktibatu ondoren, mesedez hurrengo paragrafoa arretaz irakurri :',
-'ortho_avis_privacy2' => 'Testu baten ortografia egiaztatzeko, guneak kontrolatzeko hitzen zerrenda bidaliko du SPIP komunitateko kide desberdinek zure eskura jarritako kanpoko ortografia-zerbitzarietako batera. Hitzak nahastuta bidaltzen dira konfidentzialtasun minimo bat ziurtatzeko. Zure datuengatik beldur bazara, ez aktibatu aukera hau (eta berehala zure datuak kendu Web-atik).',
-'ortho_ce_mot_connu' => 'Hitz hau guneko hiztegiaren parte da.',
-'ortho_dico_absent' => 'Ez da aurkitu hiztegirik hizkuntza honentzako',
-'ortho_mode_demploi' => 'Hitz ezezagunak gorrian azpimarratuta daude. Hitz bakoitzean klikatu ahal duzu zuzenketa-proposamenak erakusteko.',
-'ortho_mots_a_corriger' => 'zuzentzeko hitzak',
-'ortho_orthographe' => 'Ortografia',
-'ortho_supprimer_ce_mot' => 'Hitz hau kendu hiztegitik',
-'ortho_trop_de_fautes' => 'Erne : zure testuak akats gehiegi ditu, ez da proposatu zuzenketarik sistema gehiego ez kargatzeko.',
-'ortho_verif_impossible' => 'Sistemak ezin dutestu honetako ortografia egiaztatu.',
-'ortho_verifier' => 'Ortografia zuzendu',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Orri hau ez da proxy-tik pasa behar',

@@ -847,19 +847,19 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'kounye-a',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Ajoute mo-a nan diksyon&egrave;',
-'ortho_aucune_suggestion' => 'Pa oken sij&eacute;syon te fin rannkont pou mo sa-a.',
-'ortho_avis_privacy' => 'Nan SPIP gen yon v&eacute;rify&egrave; l&ograve;tograf. Avan m&egrave;t ali, m&egrave;si f&egrave; atansyon ek ann f&egrave; lekti ti t&egrave;ks isit anba&nbsp;:',
-'ortho_avis_privacy2' => 'Pou gade l&ograve;tograf yo t&egrave;ks sit-la ke voye lalis mo pou kontrolen sou yon &laquo;&nbsp;s&egrave;ve l&ograve;tograf&nbsp;&raquo; d&eacute;&ograve; ki diferan mamn kominot&eacute; SPIP ka bay laks&eacute; pou tout moun. Tout mo a-yo ki voye nan d&eacute;s&ograve;d pou sere bagay sekr&eacute;. Si w efreye done aw se pa proteje,   akti pa lopsyon an.',
-'ortho_ce_mot_connu' => 'Mo an ki rankont nan diksyon&egrave; sit-la.',
-'ortho_dico_absent' => 'Pa oken diksyon&egrave; ki pr&eacute;zan pou lalang-la',
-'ortho_mode_demploi' => 'Tout mo ki pa rokoni, yo se afiche nan liy rouj. W kapab klike sou chak mo sa-yo pou afiche k&egrave;k sij&eacute;syon pou korije.',
-'ortho_mots_a_corriger' => 'k&egrave;k mo f&ograve;k zot ki korije',
-'ortho_orthographe' => 'L&ograve;tograf',
-'ortho_supprimer_ce_mot' => 'Efase mo a nan diksyon&egrave;',
-'ortho_trop_de_fautes' => 'Tansyon&nbsp;: t&egrave;ks la ki sere trod f&ograve;t. Akoz bagay-la pa oken koreksyon ki pwopoze. Se pou pa sichaje sit&egrave;m la. ',
-'ortho_verif_impossible' => 'Sist&egrave;m-la se pa kapab gade l&ograve;tograf t&egrave;ks-la.',
-'ortho_verifier' => 'Gade l&ograve;tograf',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

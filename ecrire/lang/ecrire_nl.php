@@ -844,19 +844,19 @@ een kleur geeft hun status aan&nbsp;:',
 'onglet_proprietes' => 'Eigendommen',
 'onglet_repartition_actuelle' => 'nu',
 'onglet_sous_rubriques' => 'Onder-rubrieken',
-'ortho_ajouter_ce_mot' => 'Dit woord aan het woordenboek toevoegen',
-'ortho_aucune_suggestion' => 'Voor dit woord hebben we geen enkele suggestie gevonden.',
-'ortho_avis_privacy' => 'Een spellingcontrole is toegevoegd aan SPIP. Vooraleer deze functie te activeren, raden we je aan de volgende paragraaf aandachtig te lezen&nbsp;:',
-'ortho_avis_privacy2' => 'Tijdens het uitvoeren van een spellingcontrole zal de site de te controleren woordenlijst verzenden naar een van de externe &laquo;&nbsp;spellingservers&nbsp;&raquo; die door verschillende leden van de SPIP-gemeenschap ter beschikking gesteld worden. De woorden worden in willekeurige volgorde verstuurd, dit om een minimum aan geheimhouding te waarborgen. Indien uw gegevens vertrouwelijk zijn, activeer deze functie dan niet (en haal uw gegevens ook van het internet).',
-'ortho_ce_mot_connu' => 'Dit woord staat in het woordenboek van de site.',
-'ortho_dico_absent' => 'Voor deze taal werd geen woordenboek gevonden',
-'ortho_mode_demploi' => 'Niet-herkende woorden zijn rood onderlijnd. Je kan een woord aanklikken om suggesties voor verbetering weer te geven.',
-'ortho_mots_a_corriger' => 'te verbeteren woorden',
-'ortho_orthographe' => 'Spelling',
-'ortho_supprimer_ce_mot' => 'Dit woord uit het woordenboek verwijderen',
-'ortho_trop_de_fautes' => 'Opgelet&nbsp;: uw tekst bevat veel schrijffouten. Correcties worden niet voorgesteld om het systeem niet te overbelasten.',
-'ortho_verif_impossible' => 'Het systeem kan de schrijfwijze van deze tekst niet controleren.',
-'ortho_verifier' => 'Schrijfwijze controleren',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Deze bladzijde moet niet via proxy gaan',

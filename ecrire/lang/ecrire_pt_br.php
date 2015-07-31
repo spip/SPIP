@@ -803,19 +803,19 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'onglet_proprietes' => 'Propriedades',
 'onglet_repartition_actuelle' => 'atualmente',
 'onglet_sous_rubriques' => 'Subse&ccedil;&otilde;es',
-'ortho_ajouter_ce_mot' => 'Incluir esta palavra ao dicion&aacute;rio',
-'ortho_aucune_suggestion' => 'Nenhuma sugest&atilde;o foi encontrada para esta palavra.',
-'ortho_avis_privacy' => 'Um verificador de ortografia faz parte do SPIP. Por&eacute;m, antes de ativar esta funcionalidade, por favor, leia atentamente o par&aacute;grafo a seguir:',
-'ortho_avis_privacy2' => 'Para verificar a ortografia de um texto, o site ir&aacute; enviar a lista de palavras para verifica&ccedil;&atilde;o para um dos &laquo;servidores de ortografia&raquo; esternos, colocados &agrave; sua disposi&ccedil;&atilde;o por diferentes membros da comunidade SPIP. As palavras s&atilde;o enviadas desordenadamente, para garantir um m&iacute;nimo de confidencialidade. Se voc&ecirc; se preocupa com a confidencialidade dos seus dados, n&atilde;o ative esta op&ccedil;&atilde;o (e retire imediatamente as suas informa&ccedil;&otilde;es da web).',
-'ortho_ce_mot_connu' => 'Esta palavra faz parte do dicion&aacute;rio do site.',
-'ortho_dico_absent' => 'N&atilde;o foi encontrado nenhum dicion&aacute;rio para este idioma',
-'ortho_mode_demploi' => 'As palavras n&atilde;o reconhecidas est&atilde;o sublinhadas em vermelho. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
-'ortho_mots_a_corriger' => 'palavras para corrigir',
-'ortho_orthographe' => 'Ortografia',
-'ortho_supprimer_ce_mot' => 'Retirar esta palavra do dicion&aacute;rio',
-'ortho_trop_de_fautes' => 'Aten&ccedil;&atilde;o: o seu texto cont&eacute;m demasiados erros, nenhuma corre&ccedil;&atilde;o ser&aacute; sugerida de modo a n&atilde;o sobrecarregar o sistema.',
-'ortho_verif_impossible' => 'O sistema n&atilde;o pode verificar a ortografia deste texto.',
-'ortho_verifier' => 'Verificar a ortografia',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Esta p&aacute;gina n&atilde;o deve passar pelo proxy',
