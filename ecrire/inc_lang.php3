@@ -111,10 +111,6 @@ function changer_langue($lang) {
 function regler_langue_navigateur() {
 	global $HTTP_SERVER_VARS, $HTTP_COOKIE_VARS;
 
-	if ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang']) {
-		if (changer_langue($cookie_lang)) return $cookie_lang;
-	}
-
 	$accept_langs = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
 	if (is_array($accept_langs)) {
 		while(list(, $s) = each($accept_langs)) {
@@ -447,7 +443,7 @@ function gerer_menu_langues() {
 	global $var_lang;
 	if ($var_lang) {
 		if (changer_langue($var_lang)) {
-			spip_setcookie('spip_lang', $var_lang, time() + 24 * 3600);
+			spip_setcookie('spip_lang_public', $var_lang, time() + 24 * 3600);
 		}
 	}
 }
@@ -460,10 +456,19 @@ function utiliser_langue_site() {
 }
 
 function utiliser_langue_visiteur() {
+	global $var_lang, $menu_lang, $HTTP_COOKIE_VARS, $flag_ecrire;
+
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
+
 	if ($GLOBALS['auteur_session']['lang'])
 		changer_langue($GLOBALS['auteur_session']['lang']);
+
+	if (!$flag_ecrire AND $cookie_lang = $HTTP_COOKIE_VARS['spip_lang_public'])
+		changer_langue($cookie_lang);
+
+	if ($var_lang)
+		changer_langue($var_lang);
 }
 
 //
