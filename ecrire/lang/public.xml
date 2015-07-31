@@ -40,7 +40,8 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
-	<langue code="en_hx" url="http://trad.spip.net/tradlang_module/public?lang_cible=en_hx" total="78" traduits="64" relire="0" modifs="4" nouveaux="10" pourcent="82.05">
+	<langue code="en_hx" url="http://trad.spip.net/tradlang_module/public?lang_cible=en_hx" total="78" traduits="65" relire="0" modifs="3" nouveaux="10" pourcent="83.33">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/public?lang_cible=eo" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
