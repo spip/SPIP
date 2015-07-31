@@ -44,6 +44,7 @@ function creer_base() {
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
+		KEY lang (lang),
 		KEY statut (statut, date))";
 	$result = spip_query($query);
 
@@ -73,6 +74,7 @@ function creer_base() {
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut),
+		KEY lang (lang),
 		KEY en_ligne (en_ligne))";
 	$result = spip_query($query);
 
@@ -149,6 +151,7 @@ function creer_base() {
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		extra longblob NULL,
 		PRIMARY KEY (id_rubrique),
+		KEY lang (lang),
 		KEY id_parent (id_parent))";
 	$result = spip_query($query);
 
@@ -1293,6 +1296,13 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_articles ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		spip_query("ALTER TABLE spip_rubriques ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		maj_version (1.703);
+	}
+
+	if ($version_installee < 1.704) {
+		spip_query("ALTER TABLE spip_articles ADD INDEX lang (lang)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX lang (lang)");
+		spip_query("ALTER TABLE spip_rubriques ADD INDEX lang (lang)");
+		maj_version (1.704);
 	}
 
 }
