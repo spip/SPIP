@@ -1331,7 +1331,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<img src='img_pack/choix-layout.gif' alt='o' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</font></td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=1000'); void(0);", "aide-48.gif");
+		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48.gif");
 
 
 	echo "</td>";
