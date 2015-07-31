@@ -221,8 +221,11 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), $primary.'='.intval($id))))
 			{
 					$e = sql_insertq($table_lien, array('id_objet' => $id_objet, 'objet'=>$objet, $primary=>$id));
-					if ($e!==false)
+					if ($e!==false) {
 						$ins++;
+						lien_propage_date_modif($objet,$id_objet);
+						lien_propage_date_modif($objet_source,$id);
+					}
 					else
 						$echec = true;
 			}
@@ -282,9 +285,14 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
+			// lire les liens existants pour propager la date de modif
+			$liens = sql_allfetsel("$primary,id_objet",$table_lien,$where);
 			$e = sql_delete($table_lien, $where);
-			if ($e!==false)
+			if ($e!==false){
 				$dels+=$e;
+				lien_propage_date_modif($objet,array_map('end',$liens));
+				lien_propage_date_modif($objet_source,array_map('reset',$liens));
+			}
 			else
 				$echec = true;
 			$retire[] = array('source'=>array($objet_source=>$id),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
@@ -370,4 +378,21 @@ function lien_find($objet_source,$primary,$table_lien,$id,$objets){
 	return $trouve;
 }
 
+/**
+ * Propager la date_modif sur les objets dont un lien a ete modifie
+ *
+ * @param string $objet
+ * @param array/int $ids
+ */
+function lien_propage_date_modif($objet,$ids){
+	$trouver_table = charger_fonction('trouver_table','base');
+
+	$table = table_objet_sql($objet);
+	if ($desc = $trouver_table($table)
+	 AND isset($desc['field']['date_modif'])){
+		$primary = id_table_objet($objet);
+		$where = (is_array($ids)?sql_in($primary, array_map('intval',$ids)):"$primary=".intval($ids));
+		sql_updateq($table, array('date_modif'=>date('Y-m-d H:i:s')), $where);
+	}
+}
 ?>
