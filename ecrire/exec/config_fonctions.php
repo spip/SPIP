@@ -46,6 +46,7 @@ function exec_config_fonctions_dist()
 	$versionneur = charger_fonction('versionneur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
+	$compresseur = charger_fonction('compresseur', 'configuration');
 
 	echo 
 
@@ -63,6 +64,7 @@ function exec_config_fonctions_dist()
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
+	  ($GLOBALS['auto_compress']?$compresseur():''), // Compression gzip forcee sur le site public
 	'';
 
 //

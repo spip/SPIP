@@ -100,6 +100,10 @@ $dossier_squelettes = "";
 
 // faut-il autoriser SPIP a compresser les pages a la volee quand le
 // navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
+// du point de vue d'un webmestre : oui pour sa bande passante
+// du point de vue de l'ecologie generale du serveur : il faut s'en remettre a la config apache
+// true permet au webmestre de configurer dans le configurateur
+// false force a non sans permettre de l'activer
 $auto_compress = true;
 
 // Pour le javascript, trois modes : parano (-1), prive (0), ok (1)
@@ -417,7 +421,7 @@ AND $flag_ob
 AND strlen(ob_get_contents())==0
 AND !headers_sent()) {
 	if (
-	$GLOBALS['auto_compress']
+	($GLOBALS['auto_compress']!=false AND $GLOBALS['meta']['auto_compress']=='oui')
 	&& function_exists('ob_gzhandler')
 	// special bug de proxy
 	&& !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))

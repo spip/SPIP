@@ -91,7 +91,8 @@ function liste_metas()
 		'langues_multilingue' => '',
 
 		'email_envoi' => '',
-		'email_webmaster' => ''
+		'email_webmaster' => '',
+		'auto_compress'=>'non'
 	);
 }
 

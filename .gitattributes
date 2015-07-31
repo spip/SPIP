@@ -484,6 +484,7 @@ ecrire/configuration/annonces.php -text
 ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
+ecrire/configuration/compresseur.php -text
 ecrire/configuration/compteur.php -text
 ecrire/configuration/contenu_forums.php -text
 ecrire/configuration/documents.php -text
