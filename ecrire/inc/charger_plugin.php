@@ -43,10 +43,10 @@ function formulaire_charger_plugin($retour='') {
 		OR !is_writeable(_DIR_PLUGINS_AUTO)) {
 			$auto = _L("Si vous souhaitez autoriser l'installation automatique des plugins, veuillez&nbsp;:
 			<ul>
-			<li>cr&#233;er un r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code>&nbsp;;
+			<li>cr&#233;er un r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code>&nbsp;;</li>
 			<li>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.".aide("install0")."</li>
 			</ul>");
-			$auto .= "<p>"._L("Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.")."</p>";
+			$auto .= "\n<p>"._L("Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.")."</p>";
 		}
 
 		if (!$auto)

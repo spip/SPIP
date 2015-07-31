@@ -126,7 +126,6 @@ function spip_pg_alter($query, $serveur='') {
 // http://doc.spip.org/@spip_pg_alter_change
 function spip_pg_alter_change($table, $arg, $serveur='')
 {
-  spip_log("spip_pg_alter_change($table, $arg, $serveur");
 	if (!preg_match('/^`?(\w+)`?\s+`?(\w+)`?\s+(.*?)\s*(DEFAULT .*?)?(NOT\s+NULL)?$/i',$arg, $r)) {
 	  spip_log("alter change: $arg  incompris", 'pg');
 	} else {
@@ -574,8 +573,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 
 	$where = join(' AND ', $prims);
 	if (!$where) {
-		spip_log("REPLACE en PG exige de connaitre la cle primaire de $table: $prim");
-		return 0;
+		return spip_pg_insert($table, "(".join(',',array_keys($values)).")", "(".join(',', $values).")", $desc, $serveur);
 	}
 	$couples = join(',', $noprims);
 
