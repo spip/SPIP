@@ -82,6 +82,7 @@ div.bandeau_rubriques {
 	border: 1px solid #555555;
 }
 a.bandeau_rub {
+	width: 120px;
 	display: block;
 	font-size: 10px;
 	padding: 2px;
