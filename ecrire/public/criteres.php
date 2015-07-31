@@ -142,8 +142,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$debut = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
 
 	$boucle = &$boucles[$idb];
-	$boucle->mode_partie = 'p+';
-	$boucle->partie =
+	$partie =
 		 // tester si le numero de page demande est de la forme '@yyy'
 		 'isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.");\n"
 		."\tif(substr(\$debut_boucle,0,1)=='@'){\n"
@@ -155,10 +154,9 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		."\t}\n"
 		."\t".'$debut_boucle = intval($debut_boucle)';
 
-
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-
+	$boucle->mode_partie = calculer_parties($boucle, $idb, $partie, 'p+');
 	// ajouter la cle primaire dans le select pour pouvoir gerer la pagination referencee par @id
 	// sauf si pas de primaire, ou si primaire composee
 	// dans ce cas, on ne sait pas gerer une pagination indirecte
@@ -168,6 +166,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		AND !in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t;
 }
+
 
 // {recherche} ou {recherche susan}
 // http://www.spip.net/@recherche
@@ -592,11 +591,61 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 	if (($op== ',')&&(is_numeric($a11) && (is_numeric($a21))))
 	    $boucle->limit = $a11 .',' . $a21;
 	else {
-		$boucle->partie = ($a11 != 'n') ? $a11 : $a12;
 		$boucle->total_parties =  ($a21 != 'n') ? $a21 : $a22;
-		$boucle->mode_partie = (($op == '/') ? '/' :
+		$partie = ($a11 != 'n') ? $a11 : $a12;
+		$mode = (($op == '/') ? '/' :
 			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
+		$boucle->mode_partie = calculer_parties($boucle, $idb, $partie,  $mode);
 	}
+}
+
+//
+// Code specifique aux criteres {pagination}, {1,n} {n/m} etc
+//
+
+function calculer_parties($boucle, $id_boucle, $debut, $mode) {
+
+	$total_parties = $boucle->total_parties;
+	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
+	list(,$op1,$op2) = $regs;
+	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
+	// {1/3}
+	if ($op1 == '/') {
+		$pmoins1 = is_numeric($debut) ? ($debut-1) : "($debut-1)";
+		$totpos = is_numeric($total_parties) ? ($total_parties) :
+		  "($total_parties ? $total_parties : 1)";
+		$fin = "ceil(($nombre_boucle * $debut )/$totpos) - 1";
+		$debut = !$pmoins1 ? 0 : "ceil(($nombre_boucle * $pmoins1)/$totpos);";
+	} else {
+		// cas {n-1,x}
+		if ($op1 == '-') $debut = "$nombre_boucle - $debut;";
+
+		// cas {x,n-1}
+		if ($op2 == '-') {
+			$fin = '$debut_boucle + $nombre_boucle - '
+			. (is_numeric($total_parties) ? ($total_parties+1) :
+			   ($total_parties . ' - 1'));
+		} else {
+			// {x,1} ou {pagination}
+			$fin = '$debut_boucle'
+			. (is_numeric($total_parties) ?
+			     (($total_parties==1) ? "" :(' + ' . ($total_parties-1))):
+			     ('+' . $total_parties . ' - 1'));
+		}
+	}
+
+	// Notes :
+	// $debut_boucle et $fin_boucle sont les indices SQL du premier
+	// et du dernier demandes dans la boucle : 0 pour le premier,
+	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
+	// Utiliser min pour rabattre $fin_boucle sur total_boucle.
+
+	return "\n\t"
+	. '$debut_boucle = ' . $debut .   ";\n	"
+	. '$fin_boucle = min(' . $fin . ", \$Numrows['$id_boucle']['total'] - 1);\n	"
+	. '$Numrows[\''.$id_boucle. "']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
+	. '$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
+	. "\n\tif (\$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
 }
 
 // http://doc.spip.org/@calculer_critere_parties_aux
@@ -771,11 +820,11 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 	// traiter a part la date, elle est mise d'office par SPIP,
 	if ($crit->cond) {
 		$pred = calculer_argument_precedent($idb, $col, $boucles);
-    if ($col == "date" OR $col == "date_redac") {
-      if($pred == "\$Pile[0]['".$col."']") {
-        $pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
-      }
-    }
+		if ($col == "date" OR $col == "date_redac") {
+			if($pred == "\$Pile[0]['".$col."']") {
+			  $pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
+			}
+		}
 		
 		if ($op == '=' AND !$crit->not)
 		  $where = array("'?'", "(is_array($pred))", 
@@ -1018,44 +1067,43 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	// un critere conditionnel sur date est traite a part
 	// car la date est mise d'office par SPIP, 
 	      $val = calculer_argument_precedent($idb, $val, $boucles);
-        if ($crit->cond AND ($col == "date" OR $col == "date_redac")) {
+	      if ($crit->cond AND ($col == "date" OR $col == "date_redac")) {
 		      if($val == "\$Pile[0]['".$col."']") {
-            $val = "(\$Pile[0]['{$col}_default']?'':$val)";
-          }
-		    }
+			$val = "(\$Pile[0]['{$col}_default']?'':$val)";
+		      }
+	      }
 	      $val = array(kwote($val));
 	    }
 	  } else {
 	    // comparaison explicite
 	    // le phraseur impose que le premier param soit du texte
-	    $params = $crit->param;
-	    $op = $crit->op;
-	    if ($op == '==') $op = 'REGEXP';
-	    $col = array_shift($params);
-	    $col = $col[0]->texte;
+		$params = $crit->param;
+		$op = $crit->op;
+		if ($op == '==') $op = 'REGEXP';
+		$col = array_shift($params);
+		$col = $col[0]->texte;
 
-	    $val = array();
-	    $desc = array('id_mere' => $idb);
-	    $parent = $boucles[$idb]->id_parent;
+		$val = array();
+		$desc = array('id_mere' => $idb);
+		$parent = $boucles[$idb]->id_parent;
 
-			// Dans le cas {x=='#DATE'} etc, defaire le travail du phraseur, 
-			// celui ne sachant pas ce qu'est un critere infixe
-			// et a fortiori son 2e operande qu'entoure " ou '
-			if (count($params)==1
-					AND count($params[0]==3)
-					AND $params[0][0]->type == 'texte' 
-					AND @$params[0][2]->type == 'texte' 
-					AND ($p=$params[0][0]->texte) == $params[0][2]->texte
-					AND (($p == "'") OR ($p == '"'))
-					AND $params[0][1]->type == 'champ' ) {
-				$val[]= "$p\\$p#" . $params[0][1]->nom_champ . "\\$p$p";
+		// Dans le cas {x=='#DATE'} etc, defaire le travail du phraseur,
+		// celui ne sachant pas ce qu'est un critere infixe
+		// et a fortiori son 2e operande qu'entoure " ou '
+		if (count($params)==1
+		AND count($params[0]==3)
+		AND $params[0][0]->type == 'texte' 
+		AND @$params[0][2]->type == 'texte' 
+		AND ($p=$params[0][0]->texte) == $params[0][2]->texte
+		AND (($p == "'") OR ($p == '"'))
+		AND $params[0][1]->type == 'champ' ) {
+			$val[]= "$p\\$p#" . $params[0][1]->nom_champ . "\\$p$p";
+		} else 
+			foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
+				$a = calculer_liste($p, $desc, $boucles, $parent);
+				if ($op == 'IN') $val[]= $a;
+				else $val[]=kwote($a);
 			}
-			else 
-				foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
-					$a = calculer_liste($p, $desc, $boucles, $parent);
-					if ($op == 'IN') $val[]= $a;
-					else $val[]=kwote($a);
-				}
 	}
 
 	$fct = $args_sql = '';

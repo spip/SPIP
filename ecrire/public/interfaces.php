@@ -52,7 +52,7 @@ class Boucle {
 	var $jointures = array();
 	var $jointures_explicites = false;
 	var $doublons;
-	var $partie, $total_parties,$mode_partie;
+	var $partie, $total_parties,$mode_partie='';
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
 	var $select = array();

@@ -378,21 +378,19 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		$boucles[$id_boucle]->select[]= $count; 
 	}
 
+	if ($boucle->mode_partie || $boucle->cptrows)
+		$nums = "\n\t// COMPTEUR\n\t"
+		. "\$Numrows['$id_boucle']['compteur_boucle'] = 0;\n\t";
+	else $nums = '';
+
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
 			$count = "array_shift(sql_fetch(\$result$serveur))";
 		else $count = "sql_count(\$result$serveur)";
-		$count = (!$boucle->mode_partie
-		  ? "\$Numrows['$id_boucle']['total'] = @intval($count);"
-		  : calculer_parties($boucles[$id_boucle], $id_boucle, $count))
+		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
+		. $boucle->mode_partie
 		. "\n\t";
-	} else $count = '';
-	
-	if ($boucle->mode_partie || $boucle->cptrows)
-		$count .= "\$Numrows['$id_boucle']['compteur_boucle'] = 0;\n\t";
-
-	if ($boucle->mode_partie)
-		$count .= "if (isset(\$debut_boucle) AND \$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle;\n\t";
+	}
 
 	// Ne calculer la requete que maintenant
 	// car ce qui precede appelle index_pile qui influe dessus
@@ -403,7 +401,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$contexte = memoriser_contexte_compil($boucle);
 
-	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $init_lang, $corps, $fin_lang, $serveur, $trace);
+	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $nums, $init_lang, $corps, $fin_lang, $serveur, $trace);
 }
 
 
@@ -525,82 +523,6 @@ function calculer_order(&$boucle)
 				$order[$k].= $col;
 	}*/
 	return join(', ', $order);
-}
-
-//
-// Code specifique aux criteres {1,n} {n/m} etc
-//
-// http://doc.spip.org/@calculer_parties
-function calculer_parties($boucle, $id_boucle, $count) {
-
-	$partie = $boucle->partie;
-	$mode_partie = $boucle->mode_partie;
-	$total_parties = $boucle->total_parties;
-
-	// Notes :
-	// $debut_boucle et $fin_boucle sont les indices SQL du premier
-	// et du dernier demandes dans la boucle : 0 pour le premier,
-	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
-
-	// nombre total avant partition
-	$retour = "\n\n	// PARTITION\n\t" . '$nombre_boucle = @' . $count .';';
-
-	preg_match(",([+-/p])([+-/])?,", $mode_partie, $regs);
-	list(,$op1,$op2) = $regs;
-
-	// {1/3}
-	if ($op1 == '/') {
-		$pmoins1 = is_numeric($partie) ? ($partie-1) : "($partie-1)";
-		$totpos = is_numeric($total_parties) ? ($total_parties) :
-		  "($total_parties ? $total_parties : 1)";
-		$retour .= "\n	"
-		  .'$debut_boucle = ceil(($nombre_boucle * '
-		  . $pmoins1 . ')/' . $totpos . ");";
-		$fin = 'ceil (($nombre_boucle * '
-			. $partie . ')/' . $totpos . ") - 1";
-	}
-
-	// {1,x}
-	elseif ($op1 == '+') {
-		$retour .= "\n	"
-			. '$debut_boucle = ' . $partie . ';';
-	}
-	// {n-1,x}
-	elseif ($op1 == '-') {
-		$retour .= "\n	"
-			. '$debut_boucle = $nombre_boucle - ' . $partie . ';';
-	}
-	// {pagination}
-	elseif ($op1 == 'p') {
-		$retour .= "\n	"
-			. '$debut_boucle = ' . $partie . ';';
-	}
-
-	// {x,1}
-	if ($op2 == '+') {
-		$fin = '$debut_boucle'
-		  . (is_numeric($total_parties) ?
-		     (($total_parties==1) ? "" :(' + ' . ($total_parties-1))):
-		     ('+' . $total_parties . ' - 1'));
-	}
-	// {x,n-1}
-	elseif ($op2 == '-') {
-		$fin = '$debut_boucle + $nombre_boucle - '
-		  . (is_numeric($total_parties) ? ($total_parties+1) :
-		     ($total_parties . ' - 1'));
-	}
-
-	// Rabattre $fin_boucle sur le maximum
-	$retour .= "\n	"
-		.'$fin_boucle = min(' . $fin . ', $nombre_boucle - 1);';
-
-	// calcul du total boucle final
-	$retour .= "\n	"
-		.'$Numrows[\''.$id_boucle.'\']["grand_total"] = $nombre_boucle;'
-		. "\n	"
-		.'$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);';
-
-	return $retour;
 }
 
 // Production du code PHP a partir de la sequence livree par le phraseur
