@@ -37,6 +37,12 @@ function exec_fond_dist(){
 		$titre = $match[1];
 	}
 
+	// recuperer la hierarchie (au-dessus du contenu)
+	if (preg_match(",<!--#hierarchie-->.+<!--/#hierarchie-->,Uims",$fond,$match)){
+		$hierarchie = $match[0];
+		$fond = str_replace($hierarchie,"",$fond);
+	}
+	
 	// recuperer la navigation (colonne de gauche)
 	if (preg_match(",<!--#navigation-->.+<!--/#navigation-->,Uims",$fond,$match)){
 		$navigation = $match[0];
@@ -52,7 +58,21 @@ function exec_fond_dist(){
 	include_spip('inc/presentation'); // alleger les inclusions avec un inc/presentation_mini
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page($titre);
-
+	
+	if ($hierarchie){
+		echo debut_grand_cadre(true);
+		echo pipeline(
+			'affiche_hierarchie',
+			array(
+				'args' => array(
+					'exec' => $exec
+				),
+				'data' => $hierarchie
+			)
+		);
+		echo fin_grand_cadre(true);
+	}
+	
 	echo debut_gauche("exec_$exec",true);
 	echo $navigation;
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
