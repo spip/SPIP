@@ -76,7 +76,7 @@ function decompiler_idiome($struct, $fmt='', $prof=0)
 
 	$args = array();
 	foreach ($struct->arg as $k => $v) {
-		if ($k) $args[$k]= public_decompiler($v, $fmt, $prof);
+		$args[$k]= public_decompiler($v, $fmt, $prof);
 	}
 
 	$filtres =  decompiler_liste($struct->param, $fmt, $prof);

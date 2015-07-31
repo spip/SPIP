@@ -642,11 +642,15 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle){
 
 			case 'idiome':
 				$l = array();
+				$cpl = '';
 				foreach ($p->arg as $k => $v){
-					if ($k) $l[] = _q($k) . ' => ' . calculer_liste($v, $descr, $boucles, $id_boucle);
+					$_v = calculer_liste($v, $descr, $boucles, $id_boucle);
+					if ($k) 
+					  $l[] = _q($k) . ' => ' . $_v;
+					else $cpl = " . $_v";
 				}
 				$l = !$l ? '' : (", array(" . implode(",\n", $l) . ")");
-				$code = "_T('" . $p->module . ":" . $p->nom_champ . "'$l)";
+				$code = "_T('" . $p->module . ":" . $p->nom_champ . "'$cpl$l)";
 				if ($p->param){
 					$p->id_boucle = $id_boucle;
 					$p->boucles = &$boucles;
