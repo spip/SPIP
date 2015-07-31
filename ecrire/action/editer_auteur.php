@@ -214,7 +214,7 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_auteur/$id_auteur'");
+	suivre_invalideur("id='auteur/$id_auteur'");
 	
 	// Pipeline
 	pipeline('post_edition',

@@ -238,7 +238,7 @@ function revision_article ($id_article, $c=false) {
 	// Si l'article est publie, invalider les caches et demander sa reindexation
 	$t = sql_getfetsel("statut", "spip_articles", "id_article=$id_article");
 	if ($t == 'publie') {
-		$invalideur = "id='id_article/$id_article'";
+		$invalideur = "id='article/$id_article'";
 		$indexation = true;
 	}
 

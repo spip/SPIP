@@ -240,7 +240,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_article/$id_article'");
+	suivre_invalideur("id='article/$id_article'");
 
 	if ($date) {
 		$t = strtotime($date);

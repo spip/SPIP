@@ -60,7 +60,7 @@ function action_supprimer_rubrique($r)
 
 	// invalider les caches marques de cette rubrique
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_rubrique/$id_rubrique'");
+	suivre_invalideur("id='rubrique/$id_rubrique'");
 }
 
 ?>

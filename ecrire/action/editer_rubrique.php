@@ -110,7 +110,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 	// invalider les caches marques de cette rubrique
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_rubrique/$id_rubrique'");
+	suivre_invalideur("id='rubrique/$id_rubrique'");
 	// et celui de menu_rubriques 
 	effacer_meta("date_calcul_rubriques");
 
