@@ -9,10 +9,15 @@
  * Permission to use, copy, modify, and distribute this software
  * and its documentation for any purposes and without
  * fee is hereby granted provided that this copyright notice
- * appears in all copies. 
+ * appears in all copies.
  *
  * Of course, this soft is provided "as is" without express or implied
  * warranty of any kind.
+ *
+ * -------------------------------------------------------------
+ * Modified :
+ * - 2003/06/09 by Antoine Pitrou (unicode compatibility)
+ *
  *
  * $Id$
  *
@@ -49,7 +54,7 @@ function shl1(a) {
   a=a%0x80000000;
   if (a&0x40000000==0x40000000)
   {
-    a-=0x40000000;  
+    a-=0x40000000;
     a*=2;
     a+=0x80000000;
   } else
@@ -69,8 +74,8 @@ function and(a,b) {
   b=integer(b);
   var t1=(a-0x80000000);
   var t2=(b-0x80000000);
-  if (t1>=0) 
-    if (t2>=0) 
+  if (t1>=0)
+    if (t2>=0)
       return ((t1&t2)+0x80000000);
     else
       return (t1&b);
@@ -78,7 +83,7 @@ function and(a,b) {
     if (t2>=0)
       return (a&t2);
     else
-      return (a&b);  
+      return (a&b);
 }
 
 function or(a,b) {
@@ -86,8 +91,8 @@ function or(a,b) {
   b=integer(b);
   var t1=(a-0x80000000);
   var t2=(b-0x80000000);
-  if (t1>=0) 
-    if (t2>=0) 
+  if (t1>=0)
+    if (t2>=0)
       return ((t1|t2)+0x80000000);
     else
       return ((t1|b)+0x80000000);
@@ -95,7 +100,7 @@ function or(a,b) {
     if (t2>=0)
       return ((a|t2)+0x80000000);
     else
-      return (a|b);  
+      return (a|b);
 }
 
 function xor(a,b) {
@@ -127,7 +132,7 @@ function not(a) {
 	count[0] = 0;
 	count[1] = 0;                     
     var buffer = new array(64); 
-    var transformBuffer = new array(16); 
+    var transformBuffer = new array(16);
     var digestBits = new array(16);
 
     var S11 = 7;
@@ -203,7 +208,7 @@ function not(a) {
 	b = state[1];
 	c = state[2];
 	d = state[3];
-	
+
 	for (i = 0; i < 16; i++) {
 	    x[i] = and(buf[i*4+offset],0xff);
 	    for (j = 1; j < 4; j++) {
@@ -300,11 +305,11 @@ function not(a) {
 	    digestBits[i] = 0;
     }
 
-    function update(b) { 
+    function update(b) {
 	var index,i;
-	
+
 	index = and(shr(count[0],3) , 0x3f);
-	if (count[0]<0xffffffff-7) 
+	if (count[0]<0xffffffff-7)
 	  count[0] += 8;
         else {
 	  count[1]++;
@@ -319,7 +324,7 @@ function not(a) {
 
     function finish() {
 	var bits = new array(8);
-	var	padding; 
+	var	padding;
 	var	i=0, index=0, padLen=0;
 
 	for (i = 0; i < 4; i++) {
@@ -334,7 +339,7 @@ function not(a) {
 	padding[0] = 0x80;
         for (i=0;i<padLen;i++)
 	  update(padding[i]);
-        for (i=0;i<8;i++) 
+        for (i=0;i<8;i++)
 	  update(bits[i]);
 
 	for (i = 0; i < 4; i++) {
@@ -348,7 +353,7 @@ function not(a) {
 
 function hexa(n) {
  var hexa_h = "0123456789abcdef";
- var hexa_c=""; 
+ var hexa_c="";
  var hexa_m=n;
  for (hexa_i=0;hexa_i<8;hexa_i++) {
    hexa_c=hexa_h.charAt(Math.abs(hexa_m)%16)+hexa_c;
@@ -362,15 +367,20 @@ var ascii="01234567890123456789012345678901" +
           " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ"+
           "[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-function calcMD5(entree) 
+function calcMD5(entree)
 {
  var l,s,k,ka,kb,kc,kd;
 
  init();
- for (k=0;k<entree.length;k++) {
+ /*for (k=0;k<entree.length;k++) {
    l=entree.charAt(k);
    update(ascii.lastIndexOf(l));
+ }*/
+ for (k=0;k<entree.length;k++) {
+   l=entree.charCodeAt(k);
+   update(l);
  }
+
  finish();
  ka=kb=kc=kd=0;
  for (i=0;i<4;i++) ka+=shl(digestBits[15-i], (i*8));
@@ -378,5 +388,5 @@ function calcMD5(entree)
  for (i=8;i<12;i++) kc+=shl(digestBits[15-i], ((i-8)*8));
  for (i=12;i<16;i++) kd+=shl(digestBits[15-i], ((i-12)*8));
  s=hexa(kd)+hexa(kc)+hexa(kb)+hexa(ka);
- return s; 
+ return s;
 }
