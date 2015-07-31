@@ -64,14 +64,16 @@ function genie_popularites_dist($t) {
 	if (($d = $GLOBALS['meta']['date_statistiques']) != $aujourdhui) {
 		spip_log("Popularite: purger referer depuis $d");
 		ecrire_meta('date_statistiques', $aujourdhui);
-		#spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
-		// version 3 fois plus rapide, mais en 2 requetes
-		#spip_query("ALTER TABLE spip_referers CHANGE visites_jour visites_veille INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',CHANGE visites_veille visites_jour INT( 10 ) UNSIGNED NOT NULL DEFAULT '0'");
-		#spip_query("UPDATE spip_referers SET visites_jour=0");
-		// version 4 fois plus rapide que la premiere, en une seule requete
-		sql_alter("TABLE spip_referers DROP visites_veille,
-		CHANGE visites_jour visites_veille INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		ADD visites_jour INT(10) UNSIGNED NOT NULL DEFAULT '0'");
+		if (strncmp($GLOBALS['connexions'][0]['type'],'sqlite',6)==0)
+			spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
+	  	else
+			// version 3 fois plus rapide, mais en 2 requetes
+			#spip_query("ALTER TABLE spip_referers CHANGE visites_jour visites_veille INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',CHANGE visites_veille visites_jour INT( 10 ) UNSIGNED NOT NULL DEFAULT '0'");
+			#spip_query("UPDATE spip_referers SET visites_jour=0");
+			// version 4 fois plus rapide que la premiere, en une seule requete
+			sql_alter("TABLE spip_referers DROP visites_veille,
+			CHANGE visites_jour visites_veille INT(10) UNSIGNED NOT NULL DEFAULT '0',
+			ADD visites_jour INT(10) UNSIGNED NOT NULL DEFAULT '0'");
 	}
  
 	// et c'est fini pour cette fois-ci
