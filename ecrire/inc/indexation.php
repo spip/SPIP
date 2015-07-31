@@ -754,8 +754,8 @@ function requete_hash ($rech) {
 	// alors qu'en MySQL 4.1 c'est interdit !
 	$vers = spip_query("SELECT VERSION() AS v");
 	$vers = spip_fetch_array($vers);
-	if (substr($vers['v'], 0, 1) >= 4
-	AND substr($vers['v'], 2, 1) >= 1 ) {
+	if (($vers['v']{0} == 4 AND $vers['v']{2} >= 1)
+		OR $vers['v']{0} > 4) {
 		$hex_fmt = '';
 		$select_hash = 'hash AS h';
 	} else {
