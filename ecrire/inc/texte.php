@@ -407,13 +407,15 @@ function traiter_tableau($bloc) {
 			  if(($x=$rowspans[$l][$c])>1) {
 				$attr.= " rowspan='$x'";
 			  }
-				$h = (isset($hc[$c])?$hc[$c]:'').' '.(isset($hl[$l])?$hl[$l]:'');
+			  $b = ($c==0 AND isset($hl[$l]))?'th':'td';
+				$h = (isset($hc[$c])?$hc[$c]:'').' '.(($b=='td' AND isset($hl[$l]))?$hl[$l]:'');
 				if ($h=trim($h))
 					$attr.=" headers='$h'";
-				$b = ($c==0 AND isset($hl[$l]))?'th':'td';
 				// inutile de garder le strong qui n'a servi que de marqueur
-				if ($b=='th')
+				if ($b=='th') {
+					$attr.=" id='".$hl[$l]."'";
 					$cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
+				}
 			  $ligne= "\n<$b".$attr.'>'.$cols[$c]."</$b>".$ligne;
 			}
 		}
