@@ -653,7 +653,7 @@ function page_base_href(&$texte){
 function envoyer_entetes($entetes) {
 	foreach ($entetes as $k => $v)
 	#	if (strncmp($k, 'X-Spip-', 7))
-			@header("$k: $v");
+			@header(strlen($v)?"$k: $v":$k);
 }
 
 ?>
