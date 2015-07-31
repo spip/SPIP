@@ -2481,7 +2481,7 @@ function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel="", $ev
  * @param string $class
  * @return string
  */
-function balise_img($img,$alt="",$class=""){
+function filtre_balise_img_dist($img,$alt="",$class=""){
 	$taille = taille_image($img);
 	list($hauteur,$largeur) = $taille;
 	if (!$hauteur OR !$largeur)
