@@ -260,6 +260,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 		$default = $GLOBALS['spip_lang'];
 	else if ($default == '--') {
 		$premier_option = "<option value='--'>--</option>\n";
+	} else if (substr($default,0,1) == '.') {
+		$parenthese_o = '(';
+		$parenthese_f = ')';
+		$default = substr($default,1);
 	}
 
 	$langues = explode(',', $GLOBALS['all_langs']);
@@ -278,9 +282,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 	$ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
 	$ret .= $premier_option;
 	while (list(,$l) = each ($langues)) {
-		if ($l == $default) $selected = " selected";
-		else $selected = "";
-		$ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		if ($l == $default)
+			$ret .= "<option value='$l' selected>$parenthese_o".traduire_nom_langue($l)."$parenthese_f</option>\n";
+		else
+			$ret .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
 	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";

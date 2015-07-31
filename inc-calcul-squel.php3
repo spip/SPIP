@@ -916,6 +916,9 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'htmlspecialchars';
 	}
 
+	// langues : enlever le . pour les langues affectees automatiquement
+	$champs_posttraitement['LANG'][] = 'lang_supprimer_point';
+
 	//
 	// Construire un tableau associatif des champs de chaque type
 	// avec l'intitule de la colonne mysql correspondante
