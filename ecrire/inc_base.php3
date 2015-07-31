@@ -298,11 +298,6 @@ function creer_base() {
 		KEY id_mot (id_mot), KEY id_syndic (id_syndic))";
 	$result = mysql_query($query);
 
-/*	$query = "CREATE TABLE spip_mots_forum (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_forum bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_forum (id_forum))";
-	$result = mysql_query($query);*/
-	
 
 	//
 	// Gestion du site
@@ -380,8 +375,29 @@ function creer_base() {
 		"(3, 'gif', 'Image GIF', 'image')";
 	mysql_query($query);
 
-	$query = "INSERT IGNORE spip_types_documents (extension) VALUES ".
-		"('txt'), ('htm'), ('html'), ('pdf'), ('mp3'), ('mpg'), ('wav'), ('mid'), ('ra'), ('ram'), ('mov'), ('asf'), ('avi'), ('qt'), ('swf')";
+	$query = "INSERT IGNORE spip_types_documents (extension, titre) VALUES ".
+		"('txt', 'Document texte'), ".
+		"('htm', 'Fichier HTML'), ".
+		"('html', 'Fichier HTML'), ".
+		"('pdf', 'Document PDF'), ".
+		"('mp3', 'Fichier sonore MP3'), ".
+		"('wav', 'Fichier sonore WAV'), ".
+		"('mid', 'Musique au format Midi'), ".
+		"('mpg', 'Video MPEG'), ".
+		"('ra', 'Fichier RealAudio'), ".
+		"('ram', 'Fichier RealAudio'), ".
+		"('rm', 'Fichier RealAudio'), ".
+		"('mov', 'Video QuickTime'), ".
+		"('qt', 'Video QuickTime'), ".
+		"('asf', 'Video Windows'), ".
+		"('avi', 'Video Windows'), ".
+		"('doc', 'Document Word'), ".
+		"('xls', 'Document Excel'), ".
+		"('ppt', 'Document PowerPoint'), ".
+		"('zip', 'Archive Zip'), ".
+		"('gz', 'Archive GZ'), ".
+		"('tgz', 'Archive TGZ'), ".
+		"('swf', 'Animation Flash')";
 	mysql_query($query);
 }
 

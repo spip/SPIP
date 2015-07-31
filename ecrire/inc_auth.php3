@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_AUTH")) return;
 define("_ECRIRE_INC_AUTH", "1");
 
-
 function ask_php_auth($text_failure) {
 	@Header("WWW-Authenticate: Basic realm=\"administrateur\"");
 	@Header("HTTP/1.0 401 Unauthorized");

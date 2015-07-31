@@ -2,9 +2,9 @@
 
 include ("ecrire/inc_version.php3");
 
-include_local("ecrire/inc_connect.php3");
-include_local("ecrire/inc_meta.php3");
-include_local("ecrire/inc_admin.php3");
+include_ecrire("inc_connect.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_admin.php3");
 
 include_local("inc-cache.php3");
 

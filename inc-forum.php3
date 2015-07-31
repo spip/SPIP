@@ -6,13 +6,13 @@ if (defined("_INC_FORUM")) return;
 define("_INC_FORUM", "1");
 
 
-include_local ("ecrire/inc_connect.php3");
-include_local ("ecrire/inc_meta.php3");
-include_local ("ecrire/inc_admin.php3");
-include_local ("ecrire/inc_acces.php3");
-include_local ("ecrire/inc_texte.php3");
-include_local ("ecrire/inc_filtres.php3");
-include_local ("ecrire/inc_mail.php3");
+include_ecrire("inc_connect.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_admin.php3");
+include_ecrire("inc_acces.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_mail.php3");
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }
@@ -46,7 +46,7 @@ function enlever_cookie_forum() {
 
 function decoder_hash_forum($email, $hash) {
 	if (!$email OR !$hash) return false;
-	include("ecrire/inc_connect.php3");
+	include_ecrire("inc_connect.php3");
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
 	$result = mysql_query($query);
 	while ($row = mysql_fetch_array($result)) {

@@ -10,9 +10,9 @@ $GLOBALS['espace_logos'] = 3;  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_AR
 $GLOBALS['espace_images'] = 3;  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
 
 
-include_local("ecrire/inc_index.php3");
-include_local("ecrire/inc_texte.php3");
-include_local ("ecrire/inc_filtres.php3");
+include_ecrire("inc_index.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
 
 include_local("inc-forum.php3");
 
@@ -25,7 +25,7 @@ else {
 
 
 if (file_exists("mes_fonctions.php3")) {
-	include ("mes_fonctions.php3");
+	include_local("mes_fonctions.php3");
 }
 
 
