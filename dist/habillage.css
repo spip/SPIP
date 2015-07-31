@@ -109,15 +109,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  ------------------------------------------
 /*  Typographie generale du site
 /*  ------------------------------------------ */
-body {
-	font-family: "Bitstream Vera Sans", Verdana, Tahoma, Helvetica, sans-serif; }
-
-#contenu {
-	font-family: "Trebuchet MS", Helvetica, sans-serif; }
 
 /* Typo pour les menus et la navigation */
-#navigation, .encart,.formulaire_spip {
-	font-family: Verdana, Tahoma, Arial, sans-serif; }
+body, #navigation, .encart,.formulaire_spip {
+	font-family: Verdana, "Bitstream Vera Sans", Tahoma, Arial, sans-serif; }
+
+/* Typo pour le contenu */
+#contenu {
+	font-family: "Trebuchet MS", Helvetica, sans-serif; }
 
 /* Typo pour les citations et extraits introductifs */
 q, blockquote, .liste-articles li .texte, h3.spip {

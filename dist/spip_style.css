@@ -27,7 +27,7 @@ h3.spip {
 p.spip {}
 p.spip_note {}
 
-blockquote.spip, div.spip_poesie, .spip_serif { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
+blockquote.spip, .spip_serif { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 
 blockquote.spip { 
 	margin: 1em; 
@@ -38,7 +38,8 @@ blockquote.spip {
 div.spip_poesie { 
 	margin: 1em; 
 	padding-left: 1em; 
-	border-left: 1px solid; }
+	border-left: 1px solid;
+	font-family: Garamond, Georgia, Times, serif; }
 div.spip_poesie div { text-indent: -60px; margin-left: 60px; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
