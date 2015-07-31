@@ -69,9 +69,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 			$points = $p2;
 		}
 
-		// supprimer les anciens resultats de cette recherche et les resultats trop vieux avec une marge
-		// hash=0x$hash OR HEX(hash)='$hash' permet d'avoir une requete qui marche qu'on soit en mysql <4.1 ou >4.1
-		// il y a des versions ou install de mysql ou il faut l'un ou l'autre selon le hash ... !
+		// supprimer les anciens resultats de cette recherche
+		// et les resultats trop vieux avec une marge
 		sql_delete('spip_recherches','(maj<DATE_SUB(NOW(), INTERVAL '.(_DELAI_CACHE_RECHERCHES+100)." SECOND)) OR (recherche='$hash')",$serveur);
 
 		// inserer les resultats dans la table de cache des recherches
@@ -79,14 +78,10 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 			$tab_couples = array();
 			foreach ($points as $id => $p){
 				$tab_couples[] = array(
-					'recherche' => "$hash",
+					'recherche' => $hash,
 					'id' => $id,
 					'points' => $p['score']
 				);
-				if (count($tab_couples)>100) { // eviter les debordements de pile sur tres gros resultats
-					sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
-					$tab_couples = array();
-				}
 			}
 			sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
 		}

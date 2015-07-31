@@ -514,9 +514,16 @@ function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $
 		}
 		$valeurs[] = '(' .join(',', $couples) . ')';
 	}
-	$valeurs = implode(', ',$valeurs);
 
-	return	spip_mysql_insert($table, $cles, $valeurs, $desc, $serveur, $requeter);
+	// Inserer par groupes de 100 max pour eviter un debordement de pile
+	$r = false;
+	do {
+		$ins = array_slice($valeurs,0,100);
+		$valeurs = array_slice($valeurs,100);
+		$r = spip_mysql_insert($table, $cles, join(', ', $ins), $desc, $serveur, $requeter);
+	}  while (count($valeurs));
+
+	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
 
 // http://doc.spip.org/@spip_mysql_update
