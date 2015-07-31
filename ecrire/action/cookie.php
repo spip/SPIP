@@ -17,7 +17,7 @@ include_spip('inc/cookie');
 
 // http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist() {
-
+var_dump($_POST);die();
 	// La cible de notre operation de connexion
 	$url = _request('url');
 	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
@@ -84,7 +84,7 @@ function action_cookie_dist() {
 			if (_request('session_password')
 			OR _request('session_password_md5'))
 				$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
-			$redirect .= '&url=' . rawurlencode($url);
+			$redirect = parametre_url($redirect,'url',$url,'&');
 			spip_log("echec login: $session_login");
 		}
 
