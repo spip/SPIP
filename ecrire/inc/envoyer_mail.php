@@ -63,15 +63,6 @@ if ($GLOBALS['hebergeur'] == 'lycos') {
 	register_shutdown_function(envoyer_queue_mails);
 }
 
-// Apparemment free etait le dernier hebergeur connu a ne pas offrir de mail
-// cette fonction va donc pouvoir disparaitre
-// http://doc.spip.org/@tester_mail
-function tester_mail() {
-	global $hebergeur;
-	$test_mail = true;
-	return $test_mail;
-}
-
 // http://doc.spip.org/@nettoyer_caracteres_mail
 function nettoyer_caracteres_mail($t) {
 

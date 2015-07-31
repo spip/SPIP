@@ -88,12 +88,10 @@ echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left'
 	else $block= "'block', 'none'";
 	echo bouton_radio("forums_publics", "priori", _T('bouton_radio_moderation_priori'), $forums_publics == "priori", "changeVisible(this.checked, 'config-options', $block);");
 
-	if (tester_mail()) {
-		echo "<br />";
-		if ($forums_publics == "abo") $block = "'none', 'block'"; 
-		else $block= "'block', 'none'";
-		echo bouton_radio("forums_publics", "abo", _T('bouton_radio_enregistrement_obligatoire'), $forums_publics == "abo", "changeVisible(this.checked, 'config-options', $block);");
-	}
+	echo "<br />";
+	if ($forums_publics == "abo") $block = "'none', 'block'"; 
+	else $block= "'block', 'none'";
+	echo bouton_radio("forums_publics", "abo", _T('bouton_radio_enregistrement_obligatoire'), $forums_publics == "abo", "changeVisible(this.checked, 'config-options', $block);");
 
 echo "</TD></TR>\n";
 
@@ -201,7 +199,6 @@ if ($options == "avancees") {
 //
 // Activer/desactiver mails automatiques
 //
-if (tester_mail()) {
 	debut_cadre_trait_couleur("", false, "", _T('info_envoi_email_automatique').aide ("confmails"));
 
 	$prevenir_auteurs=$GLOBALS['meta']["prevenir_auteurs"];
@@ -331,7 +328,6 @@ if (tester_mail()) {
 
 	fin_cadre_trait_couleur();
 	echo "<p />";
-}
 
 // Activer forum admins
 
