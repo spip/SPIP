@@ -323,7 +323,7 @@ function _generer_url_propre($type, $id, $args='', $ancre='') {
 // retrouve le fond et les parametres d'une URL propre
 // ou produit une URL propre si on donne un parametre
 // http://doc.spip.org/@urls_propres_dist
-function urls_propres_dist(&$entite, $i, $args='', $ancre='') {
+function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	global $contexte;
 
 	if (is_numeric($i))

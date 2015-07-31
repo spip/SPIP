@@ -756,7 +756,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		// si $entite='', on veut la fonction de passage URL ==> id
 			if (!$entite) return $f; 
 		// sinon on veut effectuer le passage id ==> URL
-			$res = !$f ? '' : $f($entite, $id, $args, $ancre);
+			$res = !$f ? '' : $f($id, $entite, $args, $ancre);
 			if ($res) return $res;
 		// Sinon c'est un raccourci ou compat SPIP < 2
 			if (function_exists($f = 'generer_url_' . $entite)

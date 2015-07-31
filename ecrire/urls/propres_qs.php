@@ -32,7 +32,7 @@ if (!defined('_terminaison_urls_propres'))
 define ('_debut_urls_propres', './?');
 
 // http://doc.spip.org/@urls_propres_qs_dist
-function urls_propres_qs_dist(&$entite, $i, $args='', $ancre='') {
+function urls_propres_qs_dist($i, &$entite, $args='', $ancre='') {
 	$f = charger_fonction('propres', 'urls');
 	return $f($entite, $i, $args, $ancre);
 }
