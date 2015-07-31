@@ -372,7 +372,8 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		}
 		$fond .= $ligne ? "bordure_$spip_lang_right" :'bordure_double';
-		$ligne .= "\n<td class='$fond'>$res</td>";
+		$d = sprintf('D%4d-%02d-%02d', $annee_en_cours,$mois_en_cours,$jour);
+		$ligne .= "\n<td id='$d' class='$fond'>$res</td>";
 	}
 	return  $total . ($ligne ? "\n<tr>$ligne</tr>" : '');
 }
