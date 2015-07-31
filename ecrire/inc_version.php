@@ -41,8 +41,6 @@ define('_NOM_IMG_PACK', 'images/');
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'prive/' . _NOM_IMG_PACK));
 # le chemin des vignettes de type de document
 define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "prive/vignettes/");
-# le chemin des icones de la barre d'edition des formulaires
-define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "prive/icones_barre/");
 
 # le chemin php (absolu) vers les images standard (pour hebergement centralise)
 define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/prive/' . _NOM_IMG_PACK);
