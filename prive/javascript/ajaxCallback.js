@@ -943,8 +943,8 @@ function parametre_url(url,c,v,sep,force_vide){
 				na.push(r[1]+'='+u);
 				ajouts.push(r[1]);
 			}
-			/* Pour les tableaux ont laisse tomber les valeurs de départ, on
-			remplira à l'étape suivante */
+			/* Pour les tableaux ont laisse tomber les valeurs de dÃ©part, on
+			remplira Ã  l'Ã©tape suivante */
 			// else na.push(args[n]);
 		}
 		else
