@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/autoriser');
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN
 function balise_FORMULAIRE_ADMIN ($p) {
