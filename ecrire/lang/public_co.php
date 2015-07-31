@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Accogliu di u situ', # MODIF
 	'article' => 'Artìculu',
 	'articles' => 'Artìculi',
-	'articles_auteur' => 'Artìculi di st\'autore',
+	'articles_auteur' => 'Artìculi di st’autore',
 	'articles_populaires' => 'Artìculi i più pupulari',
 	'articles_rubrique' => 'Artìculi di sta rùbbrica',
-	'aucun_article' => 'Ùn ci hè artìculu à st\'indirizzu',
-	'aucun_auteur' => 'Ùn ci hè autore à st\'indirizzu',
-	'aucun_site' => 'Ùn ci hè situ à st\'indirizzu',
-	'aucune_breve' => 'Ùn ci hè dispacciu à st\'indirizzu',
-	'aucune_rubrique' => 'Ùn ci hè rùbbrica à st\'indirizzu',
+	'aucun_article' => 'Ùn ci hè artìculu à st’indirizzu',
+	'aucun_auteur' => 'Ùn ci hè autore à st’indirizzu',
+	'aucun_site' => 'Ùn ci hè situ à st’indirizzu',
+	'aucune_breve' => 'Ùn ci hè dispacciu à st’indirizzu',
+	'aucune_rubrique' => 'Ùn ci hè rùbbrica à st’indirizzu',
 	'auteur' => 'Autore',
 	'autres' => 'Altri',
 	'autres_breves' => 'Altri dispacci',
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'navigation' => 'Navigazione',
 	'nom' => 'Nome',
 	'nouveautes' => 'E nuvità',
-	'nouveautes_web' => 'Nuvità nant\'à u web',
+	'nouveautes_web' => 'Nuvità nant’à u web',
 	'nouveaux_articles' => 'Nuvelli artìculi',
 	'nouvelles_breves' => 'Nuvelli dispacci',
 
@@ -83,14 +83,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'pàgina dopu',
 	'par_auteur' => 'da ',
 	'participer_site' => 'Pudete puru participà à a vita di stu situ è prupone i vostri artìculi iscrivendu vi quì sottu. 
-	Riceverete sùbbitu un email cù i vostri còdici d\'accessu à u spaziu privatu di u situ.',
+	Riceverete sùbbitu un email cù i vostri còdici d’accessu à u spaziu privatu di u situ.',
 	'plan_site' => 'Pianu di u situ',
 	'popularite' => 'Pupularità',
 	'poster_message' => 'Pustà un messagiu',
 	'proposer_site' => 'Pudete puru prupone un situ da aghjunghje in sta rùbbrica :',
 
 	// R
-	'repondre_article' => 'Risponde à st\'artìculu',
+	'repondre_article' => 'Risponde à st’artìculu',
 	'repondre_breve' => 'Risponde à stu dispacciu',
 	'resultats_recherche' => 'Risultati di a ricerca',
 	'retour_debut_forums' => 'Ritornu à u principiu di i fori',
@@ -104,13 +104,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sous_rubriques' => 'Sotturùbbriche',
 	'spam' => 'Spam',
 	'suite' => 'sèguita',
-	'sur_web' => 'Nant\'à u Web',
+	'sur_web' => 'Nant’à u Web',
 	'syndiquer_rubrique' => 'Sindicà sta rùbbrica',
 	'syndiquer_site' => 'Sindicà u situ sanu',
 
 	// T
-	'texte_lettre_information' => 'Eccu a lèttera d\'infurmazione di u situ',
-	'texte_lettre_information_2' => 'Sta lèttera face u censu di l\'artìculi è i dispacci dipoi', # MODIF
+	'texte_lettre_information' => 'Eccu a lèttera d’infurmazione di u situ',
+	'texte_lettre_information_2' => 'Sta lèttera face u censu di l’artìculi è i dispacci dipoi', # MODIF
 
 	// V
 	'ver_imprimer' => 'Versione da stampà',

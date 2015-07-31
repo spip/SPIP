@@ -109,13 +109,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'De ganze Site syndikaliséieren',
 
 	// T
-	'texte_lettre_information' => 'Hei ass d\'Newsletter vum Site',
-	'texte_lettre_information_2' => 'Dës Newsletter ass d\'Lëscht vun de verëffentlechten Ännerungen zënter',
+	'texte_lettre_information' => 'Hei ass d’Newsletter vum Site',
+	'texte_lettre_information_2' => 'Dës Newsletter ass d’Lëscht vun de verëffentlechten Ännerungen zënter',
 
 	// V
 	'ver_imprimer' => 'Drock-Versioun',
 	'voir_en_ligne' => 'Online gesinn',
-	'voir_squelette' => 'd\'Skelett vun dëser Säit weisen'
+	'voir_squelette' => 'd’Skelett vun dëser Säit weisen'
 );
 
 ?>
