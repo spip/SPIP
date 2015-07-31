@@ -259,6 +259,7 @@ ecrire/img_pack/xml.gif -text
 ecrire/inc_accueil.php -text
 ecrire/inc_admin_effacer.php -text
 ecrire/inc_admin_index.php -text
+ecrire/inc_admin_repair.php -text
 ecrire/inc_admin_tech.php -text
 ecrire/inc_admin_vider.php -text
 ecrire/inc_aide_index.php -text
