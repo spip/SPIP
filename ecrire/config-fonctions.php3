@@ -28,7 +28,7 @@ if ($changer_config == 'oui') {
 			if ($page)
 				echo "<pre>".htmlspecialchars($page)."</pre>";
 			else
-				echo propre("{{Erreur !}} Le proxy <tt><html>$http_proxy</html></tt> n'a pas pu lire la page <tt><html>$test_proxy</html></tt>.") . aide('confhttpproxy');
+				echo propre("{{Erreur !}} Impossible de lire la page <tt><html>$test_proxy</html></tt> &agrave; travers le proxy <tt><html>$http_proxy</html></tt>.") . aide('confhttpproxy');
 			exit;
 		}
 	}
