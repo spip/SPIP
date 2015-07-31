@@ -244,7 +244,21 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 
 	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
 	$end_file = "}\n?".">";
-	
+
+	if (is_array($infos)){
+		// construire tableaux de boutons
+		$liste_boutons = array();
+		foreach($infos as $plug=>$info){
+				if (isset($info['bouton'])){
+				foreach($info['bouton'] as $id=>$conf){
+					$conf['icone'] = "$plug/" . $conf['icone'];
+					$info['bouton'][$id] = $conf;
+				}
+				$liste_boutons = array_merge($liste_boutons,$info['bouton']);
+			}
+		}
+	}
+
 	// generer les fichier 
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
@@ -279,14 +293,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			}
 		}
 		$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
+		if ($charge=='options'){
+			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
+		}
 		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
 			$start_file . $splugs . $s . $end_file);
 	}
 
 	if (is_array($infos)){
-		// construire tableaux de pipelines et matrices
+		// construire tableaux de pipelines et matrices et boutons
 		// $GLOBALS['spip_pipeline']
 		// $GLOBALS['spip_matrice']
+		$liste_boutons = array();
 		foreach($infos as $plug=>$info){
 			$prefix = "";
 			$prefix = $info['prefix']."_";
@@ -309,6 +327,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			}
 		}
 	}
+
 	// on ajoute les pipe qui ont ete recenses manquants
 	foreach($liste_pipe_manquants as $add_pipe)
 		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
@@ -568,6 +587,25 @@ function plugin_get_infos($plug, $force_reload=false){
 				$ret['necessite'] = $arbre['necessite'];
 				$ret['utilise'] = $arbre['utilise'];
 				$ret['path'] = $arbre['path'];
+				
+				// recuperer les boutons si necessaire
+				spip_xml_match_nodes(",^bouton\s,",$arbre,$les_boutons);
+				if (is_array($les_boutons) && count($les_boutons)){
+					$ret['bouton'] = array();
+					foreach($les_boutons as $bouton => $val) {
+						$bouton = spip_xml_decompose_tag($bouton);
+						$bouton = end($bouton);
+						if (isset($bouton['id'])){
+							$id = $bouton['id'];
+							$ret['bouton'][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
+							$val = reset($val);
+							$ret['bouton'][$id]['titre'] = isset($val['titre'])?trim(end($val['titre'])):'';
+							$ret['bouton'][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
+							$ret['bouton'][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';
+							$ret['bouton'][$id]['args'] = isset($val['url'])?trim(end($val['args'])):'';
+						}
+					}
+				}
 				
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;

@@ -208,6 +208,28 @@ function definir_barre_boutons() {
 		$boutons_admin['configuration']->sousmenu= $sousmenu;
 
 	} // fin si admin
+	
+	// ajouter les boutons issus des plugin via plugin.xml
+	if (function_exists('boutons_plugins')){
+		$liste_boutons_plugins = boutons_plugins();
+		foreach($liste_boutons_plugins as $id => $infos){
+			if (autoriser('bouton',$id)){
+				if (($parent = $infos['parent']) && isset($boutons_admin[$parent]))
+					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
+					  _DIR_PLUGINS . $infos['icone'],  // icone
+					  $infos['titre'],	// titre
+					  $infos['url']?$infos['url']:null,
+					  $infos['args']?$infos['args']:null
+					  );
+				if (!$parent)
+					$boutons_admin[$id] = new Bouton(
+					  _DIR_PLUGINS . $infos['icone'],  // icone
+					  $infos['titre'],	// titre
+					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null	
+					  );
+			}
+		}
+	}
 
 	$boutons_admin = pipeline('ajouter_boutons', $boutons_admin);
 }
