@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -265,16 +265,52 @@ function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	// si auteur pas autorise, NIET
-	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")===false)
-		return false;
+
+	// Le visiteur a-t-il un statut prevu par la config ?
+	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
+	!==false)
+		return test_previsualiser_objet_champ($type, $opt);
+
+	// Sinon, on regarde s'il a un jeton (var_token) et on lui pose
+	// le cas echeant une session contenant l'autorisation
+	// de l'utilisateur ayant produit le jeton
+	if ($token = _request('var_previewtoken')) {
+		include_spip('inc/session');
+		session_set('previewtoken', $token);
+	}
+
+	// A-t-on un token valable ?
+	if (is_array($GLOBALS['visiteur_session'])
+	AND $token = session_get('previewtoken')
+	AND preg_match('/^(\d+)\*(.*)$/', $token, $r)
+	AND $action = 'previsualiser'
+	AND (include_spip('inc/securiser_action'))
+	AND (
+		$r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere')
+	 OR $r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere_ancien')
+	)) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ *  Options de la fonction autoriser_previsualiser_dist
+ *
+ * commande l'affichage dans l'espace prive du bouton "previsualiser"
+ * voir prive/objets/infos/article.html etc.
+ *
+ */
+function test_previsualiser_objet_champ($type=null, $opt=array()) {
+
 	// si pas de type et statut fourni, c'est une autorisation generale => OK
 	if (!$type)
 		return true;
 
 	include_spip('base/objets');
 	$infos = lister_tables_objets_sql(table_objet_sql($type));
-	if (isset($infos['statut']))
+	if (isset($infos['statut'])) {
 		foreach($infos['statut'] as $c){
 			if (isset($c['publie'])){
 				if (!isset($c['previsu'])) return false; // pas de previsu definie => NIET
@@ -285,6 +321,8 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 					return false;
 			}
 		}
+	}
+
 	return true;
 }
 
@@ -673,7 +711,7 @@ function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Autorisation de prévisialiser un auteur
+ * Autorisation de prévisualiser un auteur
  *
  * Il faut être administrateur ou que l'auteur à prévisualiser
  * ait au moins publié un article
