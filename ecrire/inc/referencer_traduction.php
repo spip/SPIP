@@ -70,7 +70,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		    . "</table>\n";
 
 		$liste = "\n<div class='liste'>"
-		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'white', 'black', false)
+		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'toile_blanche', 'ligne_noire')
 		. $t
 		. "</div>";
 	} else $liste = '';
