@@ -107,7 +107,7 @@ function image_filtrer($args){
 
 	// Cas general : trier toutes les images, avec eventuellement leur <span>
 	if (preg_match_all(
-	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),UimsS',
+	',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*(<img\s.*>),UimsS',
 	$texte, $tags, PREG_SET_ORDER)) {
 		if ($inclure){
 			include_spip('inc/filtres_images');
@@ -115,19 +115,20 @@ function image_filtrer($args){
 		}
 		foreach ($tags as $tag) {
 			$class = extraire_attribut($tag[3],'class');
-			if ((!strlen($class)) || (strpos($class,'no_image_filtrer')===FALSE)){
+			if (!$class || (strpos($class,'no_image_filtrer')===FALSE)){
 				array_unshift($args,$tag[3]);
 				if ($reduit = call_user_func_array($filtre, $args)) {
 					// En cas de span spip_documents, modifier le style=...width:
-					if($tag[1]
-					AND $w = extraire_attribut($reduit, 'width')) {
-						$style = preg_replace(", width: *\d+px,S", " width: ${w}px",
-							extraire_attribut($tag[1], 'style'));
-						$replace = inserer_attribut($tag[1], 'style', $style);
-						$replace = str_replace(" style=''", '', $replace);
-						$texte = str_replace($tag[1], $replace, $texte);
+					if($tag[1]){
+						$w = extraire_attribut($reduit, 'width');
+						if (!$w AND preg_match(",width:\s*(\d+)px,S",extraire_attribut($reduit,'style'),$regs))
+							$w = $regs[1];
+						if ($w AND ($style = extraire_attribut($tag[1], 'style'))){
+							$style = preg_replace(",width:\s*\d+px,S", "width:${w}px", $style);
+							$replace = inserer_attribut($tag[1], 'style', $style);
+							$texte = str_replace($tag[1], $replace, $texte);
+						}
 					}
-	
 					$texte = str_replace($tag[3], $reduit, $texte);
 				}
 				array_shift($args);
