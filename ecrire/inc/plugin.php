@@ -265,18 +265,26 @@ function parse_plugin_xml($texte){
 		if (strlen($before)>0)
 			return $texte; // before non vide, donc on est dans du texte
 	
-		$tag = $chars[1];$closing_tag = explode(" ",trim($tag));$closing_tag=reset($closing_tag);
+		$tag = $chars[1];
+		$closing_tag = explode(" ",trim($tag));$closing_tag=reset($closing_tag);
 		$txt = $chars[2];
 	
-		// tag fermant
-		$chars = preg_split("{(</".preg_quote($closing_tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
-		if (!isset($chars[1])) { // tag fermant manquant
-			$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
-			return $out;
+		if(substr($tag,-1)=='/'){ // self closing tag
+			$tag = substr($tag,0,strlen($tag)-1);
+			$out[$tag][]="";
+			$txt = trim($txt);
 		}
-		$content = $chars[0];
-		$txt = trim($chars[2]);
-		$out[$tag][]=parse_plugin_xml($content);
+		else{
+			// tag fermant
+			$chars = preg_split("{(</".preg_quote($closing_tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+			if (!isset($chars[1])) { // tag fermant manquant
+				$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
+				return $out;
+			}
+			$content = $chars[0];
+			$txt = trim($chars[2]);
+			$out[$tag][]=parse_plugin_xml($content);
+		}
 	}
 	if (count($out)&&(strlen($txt)==0))
 		return $out;
@@ -289,8 +297,11 @@ function applatit_arbre($arbre,$separateur = " "){
 	if (is_array($arbre))
 		foreach($arbre as $tag=>$feuille){
 			if (is_array($feuille)){
-				if ($tag!==intval($tag))
-					$s.="<$tag>".applatit_arbre($feuille)."</$tag>";
+				if ($tag!==intval($tag)){
+					$f = applatit_arbre($feuille);
+					if (strlen($f))	$s.="<$tag>$f</$tag>";
+					else $s.="<$tag/>";
+				}
 				else
 					$s.=applatit_arbre($feuille);
 				$s .= $separateur;
