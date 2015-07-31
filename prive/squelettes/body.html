@@ -1,4 +1,4 @@
-<INCLURE{fond=prive/squelettes/inclure/barre-nav,env}>
+<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
 <div id="page">
 	[(#SESSION{id_auteur}|alertes_auteur)]
 	<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
@@ -26,7 +26,7 @@
 	</div>
 	<div id="pied">
 		<div class="largeur">
-		<INCLURE{fond=prive/squelettes/inclure/pied,env}>
+		<INCLURE{fond=prive/squelettes/inclure/pied}>
 		</div>
 	</div>
 </div>

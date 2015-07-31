@@ -24,8 +24,8 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 -->][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_admin.css}|url_absolue)"/>]
 [<!--
 (#REM) CSS espace prive : la vraie
-]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive.css,#REM|parametres_css_prive}" />
-[
+-->]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive.css,#ENV{paramcss}}" />
+[<!--
 (#REM) CSS optionelle minipres
 -->][(#ENV{minipres,''}|oui)
 [<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|url_absolue)" />]
