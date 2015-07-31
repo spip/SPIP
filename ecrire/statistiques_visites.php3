@@ -464,7 +464,7 @@ if (!$origine) {
 				$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
 				$hauteurprevision = ceil($prevision * $rapport);
 				$prevision = round($prevision,0)+$visites_today; // Pour affichage harmonieux
-#				$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision"));
+				$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision"));
 				echo http_img_rien($largeur, $hauteurprevision,'background-color:#eeeeee;', $tagtitle);
 	
 				echo http_img_rien($largeur, $hauteur, 'background-color:#cccccc;', $tagtitle);
