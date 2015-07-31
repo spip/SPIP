@@ -16,7 +16,7 @@ $GLOBALS['my_sites']=array();
 
 // http://doc.spip.org/@icone_table
 function icone_table($type){
-  $derog = array('document'=> 'doc-24.gif', 'mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif', 'message' => 'messagerie-24.gif');
+	$derog = array('document'=> 'doc-24.gif', 'mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif', 'message' => 'messagerie-24.gif', 'groupes_mot'=>'mot-cle-24.gif');
 	if (isset($derog[$type]))
 		return $derog[$type];
 	return "$type-24.gif";
