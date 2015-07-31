@@ -253,12 +253,13 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 	$args = ltrim(substr($suite,1)); // virer le '(' initial
 	$collecte = array();
 	while ($args && $args[0] != '}') {
+        $f1 = $f2 = 0;
 		if ($args[0] == '"')
-			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
+			$f1 = preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
-			preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
-		else {
-		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
+			$f2 = preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
+        if (!($f1 OR $f2)) {
+            preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
 			$err_f = array('zbug_erreur_filtre', array('filtre' => $args));
@@ -291,11 +292,9 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				if (preg_match('/^(.*)\($/', $pred, $m))
 					{$pred = $m[1]; $par =')';}
 				if ($pred) {
-					$champ = new Texte;
-					$champ->texte = $pred;
-					$champ->apres = $champ->avant = "";
-					$result[] = $champ;
-					$collecte[] = $champ;
+					$r2 = phraser_idiomes($pred, 0, array());
+					$result = array_merge($result, $r2);
+					$collecte =  array_merge($collecte, $r2);
 				}
 				$rec = substr($args, $n + strlen($r[0]) -1);
 				$champ = new Champ;
