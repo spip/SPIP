@@ -2,7 +2,7 @@
 <B_enfants>
 [<p class="pagination">(#PAGINATION)</p>]
 <ul class="items">
-<BOUCLE_enfants(RUBRIQUES){id_parent=#ENV{id_rubrique}}{statut?}{pagination 100 #GET{p}}>
+<BOUCLE_enfants(RUBRIQUES){id_parent=#ENV{id_rubrique}}{statut?}{id_secteur?}{pagination 100 #GET{p}}>
 	<li class="rubrique">
 		[(#ENV{bouton_selectionner}|oui)<a
 			href="#"
