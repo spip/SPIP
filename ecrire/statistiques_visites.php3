@@ -38,18 +38,14 @@ debut_gauche();
 // Afficher les boutons de creation d'article et de breve
 //
 if ($connect_statut == '0minirezo') {
-	debut_cadre_enfonce();
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<b>RACCOURCIS :</b><p>";
+	debut_raccourcis();
 	
 	if ($id_article > 0){
 	icone_horizontale("Retour &agrave; l'article", "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
 	}
 	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	
-	
-	echo "</font>";
-	fin_cadre_enfonce();
+	fin_raccourcis();
 }
 
 

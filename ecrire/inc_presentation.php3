@@ -230,6 +230,30 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 
 
 //
+// La boite raccourcis
+//
+
+function debut_raccourcis() {
+	debut_cadre_enfonce();
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<b>RACCOURCIS :</b><p>";
+
+	echo "<form method='get' action='recherche.php3'>";
+	echo "<div class='iconeon' style='padding:5px;'>";
+	echo "<input type='Hidden' name='id_article' value='$id_article'>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>Rechercher</b> un article, une rubrique, une br&egrave;ve&nbsp;:</font>";
+	echo '<input type="text" class="forml" size="*" value="" name="recherche" class="spip_recherche">';
+	echo "</div>";
+	echo "</form>";
+}
+
+function fin_raccourcis() {
+	echo "</font>";
+	fin_cadre_enfonce();
+}
+
+
+//
 // Une icone avec lien et legende (texte en-dessous)
 //
 
@@ -1416,24 +1440,20 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	echo "<td width='100%'>   </td>";
 
-
+/*
 	echo "<td>";
 	echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 	echo '<input type="text" size="18" value="Chercher" name="recherche" class="spip_recherche">';
 	echo "</form>";
 	echo "</td>";
-
+*/
 	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
 
-
-
-
 	echo "</tr></table>";
 	echo "</td></tr></table>";
-
 
 		
 	// Bandeau

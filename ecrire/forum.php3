@@ -11,14 +11,10 @@ debut_gauche();
 // Afficher les boutons de creation d'article et de breve
 //
 if ($connect_statut == '0minirezo') {
-	debut_cadre_enfonce();
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<b>RACCOURCIS :</b><p>";
-	
+	debut_raccourcis();
 	
 	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
 	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
-		
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
 	$result_petition = spip_query($query_petition);
@@ -42,10 +38,7 @@ if ($connect_statut == '0minirezo') {
 		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 	
-	
-	
-	echo "</font>";
-	fin_cadre_enfonce();
+	fin_raccourcis();
 }
 
 
