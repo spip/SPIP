@@ -1605,7 +1605,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'LOGIN_PUBLIC':
-		$lacible = "\$GLOBALS[\'clean_link\']";
+		$lacible = '\$GLOBALS[\'clean_link\']';
 		if ($fonctions) {
 			$filtres = array();
 			while (list(, $nom) = each($fonctions)) {
