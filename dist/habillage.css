@@ -109,7 +109,7 @@ q, blockquote, .introduction, h3.spip, .voirskel { font-family: Georgia, Times, 
 
 /* Cartouche et titraille */
 .cartouche { margin-bottom: 2em; }
-.cartouche .titre { font-size: 1.27em; font-weight: bold; color: #000; }
+h1 { font-size: 1.27em; font-weight: bold; color: #000; }
 #contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }

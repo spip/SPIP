@@ -32,7 +32,7 @@ a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(h
 
 .cartouche { margin-bottom: 2em; }
 .cartouche small { font-size: 0.71em; }
-.cartouche .titre { font-size: 1.27em; font-weight: bold; }
+h1 { font-size: 1.27em; font-weight: bold; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
 .cartouche .traductions { display: none; }
 .cartouche .surtitre, .cartouche .soustitre { font-size: 0.82em; font-variant: small-caps; }
