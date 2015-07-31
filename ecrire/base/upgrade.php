@@ -10,16 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_upgrade_dist
 function base_upgrade_dist($titre)
 {
-	global $spip_version;
-	$version_installee = (double) str_replace(',','.',$GLOBALS['meta']['version_installee']);
-	if ($spip_version != $version_installee) {
-
+	if ($GLOBALS['spip_version']!=$GLOBALS['meta']['version_installee']) {
 		if (!is_numeric(_request('reinstall'))) {
 			include_spip('base/create');
 			spip_log("recree les tables eventuellement disparues");
@@ -27,13 +23,110 @@ function base_upgrade_dist($titre)
 		}
 		maj_base();
 	}
-
+	spip_log("Fin de mise a jour SQL. Debu m-a-j acces et config");
 	include_spip('inc/acces');
 	ecrire_acces();
 	$config = charger_fonction('config', 'inc');
 	$config();
 }
 
+// http://doc.spip.org/@maj_base
+function maj_base($version_cible = 0) {
+	global $spip_version;
+
+	$version_installee = @$GLOBALS['meta']['version_installee'];
+	//
+	// Si version nulle ou inexistante, c'est une nouvelle installation
+	//   => ne pas passer par le processus de mise a jour.
+	// De meme en cas de version superieure: ca devait etre un test,
+	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
+	//
+	// version_installee = 1.702; quand on a besoin de forcer une MAJ
+	
+	spip_log("Version anterieure: $version_installee. Courante: $spip_version");
+	if (!$version_installee OR ($spip_version < $version_installee)) {
+		sql_replace('spip_meta', 
+		      array('nom' => 'version_installee',
+			    'valeur' => $spip_version,
+			    'impt' => 'non'));
+		return;
+	}
+	if (!upgrade_test()) return;
+	
+	$n = floor($version_installee * 10);
+	$cible = ($version_cible ? $version_cible : $spip_version) * 10;
+	while ($n < $cible) {
+		$nom  = sprintf("v%03d",$n);
+		$f = charger_fonction($nom, 'maj', true);
+		if ($f) {
+			spip_log("$f repercute les modifications de la version " . ($n/10));
+			$f($version_installee, $spip_version);
+		} else spip_log("pas de fonction pour la maj $n $nom");
+		$n++;
+	}
+}
+
+// A partir de la version 1.945, le while ci-dessus aboutit ici.
+// Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
+// (qu'on espere pas trop longue chacune).
+// Ne pas perdre son temps a creer le fichier des meta,
+// le debut de exec/upgrade le refabrique pour etre certains de repartir
+// au point de relance.
+
+define('_UPGRADE_TIME_OUT', 20);
+
+// http://doc.spip.org/@maj_while
+function maj_while($version_installee, $version_cible)
+{
+	$pref = floor($version_installee);
+	$cible = substr($version_cible*1000,-3);
+	$installee = substr($version_installee*1000,-3);
+	$time = time();
+	$n = 0;
+
+	while ($installee < $cible) {
+		$installee++;
+		$f = 'maj_'  . $pref . '_' .$installee;
+		if (function_exists($f)) {
+			$f();
+			$n = time() - $time;
+			spip_log("$f ($n secondes de $version_installee a $installee))");
+		} else spip_log("pas de MAJ $pref" . ".$installee");
+		$version = ($pref . '.' . $installee);
+		ecrire_meta('version_installee', $version,'non');
+		if ($n >= _UPGRADE_TIME_OUT) {
+			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
+		}
+	}
+}
+
+// A refaire pour PG
+// http://doc.spip.org/@convertir_un_champ_blob_en_text
+function convertir_un_champ_blob_en_text($table,$champ,$type){
+	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
+	if ($row = sql_fetch($res)){
+		if (strtolower($row['Type'])!=strtolower($type)) {
+			$default = $row['Default']?(" DEFAULT "._q($row['Default'])):"";
+			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
+			$q = "ALTER TABLE $table CHANGE $champ $champ $type $default $notnull";
+			spip_log($q);
+			spip_query($q);
+		}
+	}
+}
+
+// A refaire pour PG
+function upgrade_test() {
+	spip_query("DROP TABLE IF EXISTS spip_test");
+	spip_query("CREATE TABLE spip_test (a INT)");
+	spip_query("ALTER TABLE spip_test ADD b INT");
+	spip_query("INSERT INTO spip_test (b) VALUES (1)");
+	$result = spip_query("SELECT b FROM spip_test");
+	spip_query("ALTER TABLE spip_test DROP b");
+	return $result;
+}
+
+// pour version anterieures a 1.945
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
@@ -52,115 +145,11 @@ function maj_version ($version, $test = true) {
 	}
 }
 
+// pour version anterieures a 1.945
 // http://doc.spip.org/@upgrade_vers
 function upgrade_vers($version, $version_installee, $version_cible = 0){
 	return ($version_installee<$version
 		AND (($version_cible>=$version) OR ($version_cible==0))
 	);
 }
-
-// http://doc.spip.org/@convertir_un_champ_blob_en_text
-function convertir_un_champ_blob_en_text($table,$champ,$type){
-	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
-	if ($row = sql_fetch($res)){
-		if (strtolower($row['Type'])!=strtolower($type)) {
-			$default = $row['Default']?(" DEFAULT "._q($row['Default'])):"";
-			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
-			$q = "ALTER TABLE $table CHANGE $champ $champ $type $default $notnull";
-			spip_log($q);
-			spip_query($q);
-		}
-	}
-}
-
-// http://doc.spip.org/@maj_base
-function maj_base($version_cible = 0) {
-	global $spip_version;
-
-	//
-	// Lecture de la version installee
-	//
-
-	$version_installee = 0.0;
-	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
-	if ($result) if ($row = sql_fetch($result)) $version_installee = (double) $row['valeur'];
-
-	//
-	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit
-	// d'une nouvelle installation
-	//   => ne pas passer par le processus de mise a jour
-	// De meme en cas de version superieure: ca devait etre un test,
-	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
-	//
-	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
-	
-	spip_log("Version anterieure: $version_installee. Courante: $spip_version");
-	if (!$version_installee OR ($spip_version < $version_installee)) {
-		sql_replace('spip_meta', 
-		      array('nom' => 'version_installee',
-			    'valeur' => $spip_version,
-			    'impt' => 'non'),
-		      $GLOBALS['tables_principales']['spip_meta']);
-		spip_log("Pas necessaire de mettre a jour");
-		return true;
-	}
-
-	//
-	// Verification des droits de modification sur la base
-	//
-
-	spip_query("DROP TABLE IF EXISTS spip_test");
-	spip_query("CREATE TABLE spip_test (a INT)");
-	spip_query("ALTER TABLE spip_test ADD b INT");
-	spip_query("INSERT INTO spip_test (b) VALUES (1)");
-	$result = spip_query("SELECT b FROM spip_test");
-	spip_query("ALTER TABLE spip_test DROP b");
-	if (!$result) return false;
-	
-	$n = floor($version_installee * 10);
-	$cible = ($version_cible ? $version_cible : $spip_version) * 10;
-	while ($n < $cible) {
-		$nom  = sprintf("v%03d",$n);
-		$f = charger_fonction($nom, 'maj', true);
-		if ($f) {
-			spip_log("$f repercute les modifications de la version " . ($n/10));
-			$f($version_installee, $spip_version);
-		} else spip_log("pas de fonction pour la maj $n $nom");
-		$n++;
-	}
-}
-
-// Se relancer soi-meme pour eviter d'etre interrompu pendant une operation SQL
-// (qu'on espere pas trop longue chacune).
-// Redetruire le fichier des meta a chaque coup pour etre certains de repartir
-// au point de relance.
-
-define('_UPGRADE_TIME_OUT', 20);
-
-// http://doc.spip.org/@maj_while
-function maj_while($version_installee, $version_cible)
-{
-	$pref = floor($version_installee);
-	$cible = substr($version_cible*1000,-3);
-	$installee = substr($version_installee*1000,-3);
-	$time = time();
-	$n = 0;
-
-	@spip_unlink(_FILE_META);
-	while ($installee < $cible) {
-		$installee++;
-		$f = 'maj_'  . $pref . '_' .$installee;
-		if (function_exists($f)) {
-			$f();
-			$n = time() - $time;
-			spip_log("$f ($n secondes de $version_installee a $version_cible))");
-		} else spip_log("pas de MAJ $pref" . ".$installee");
-		$version = ($pref . '.' . $installee);
-		ecrire_meta('version_installee', $version,'non');
-		if ($n >= _UPGRADE_TIME_OUT) {
-			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
-		}
-	}
-}
-
 ?>
