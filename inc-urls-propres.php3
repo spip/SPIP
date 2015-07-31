@@ -189,7 +189,10 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 			if ($url_propre
 			AND ($url_propre<>$regs[2])) {
 				http_status(301);
-				Header("Location: $url_propre");
+				// recuperer les arguments supplementaires (&debut_xxx=...)
+				$reste = preg_replace('/^&/','?',
+					preg_replace("/[?&]id_$type=$id_objet/",'',$regs[5]));
+				Header("Location: $url_propre$reste");
 				exit;
 			}
 		}
