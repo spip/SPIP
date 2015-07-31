@@ -32,7 +32,6 @@ global
   $options,
   $redirect,
   $redirect_ok,
-  $supp_mot,
   $spip_display,
   $table,
   $texte,
@@ -43,17 +42,11 @@ global
   $type;
 
  $id_groupe = intval($id_groupe);
- $supp_mot = intval($supp_mot);
  $id_mot = intval($id_mot);
 //
 // modifications mot
 //
  if (acces_mots()) {
-	if ($supp_mot) {
-		spip_query("DELETE FROM spip_mots WHERE id_mot=$supp_mot");
-		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$supp_mot");
-	}
-
 	if (strval($titre_mot)!='') {
 		if ($new == 'oui' && $id_groupe) {
 			$id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");

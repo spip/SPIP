@@ -20,13 +20,29 @@ function action_editer_mot_dist() {
 	$var_f();
 
 	$arg = _request('arg');
+	$redirect = _request('redirect');
+	$nouv_mot = _request('nouv_mot');
+	$cherche_mot = _request('cherche_mot');
+	$select_groupe = _request('select_groupe');
 
-	if (!preg_match(',^(-?\d+)\D(\d+)\W(\w+)\W(\w+)\W(\w+)$,', $arg, $r)) 
+	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
+	if (!preg_match(',^(-?\d*)\D(\d*)\W(\w*)\W(\w*)\W(\w*)$,', $arg, $r)) 
 		spip_log("action editer_mot: $arg pas compris");
 	else {
 		list($x, $id_mot, $id_objet, $table, $table_id, $objet) = $r;
-		spip_log("$id_mot, $id_objet, $table, $table_id, $objet");
-		spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($id_mot <= 0) ?  "" :  " AND id_mot=$id_mot"));
+		if ($id_mot) {
+			if ($objet)
+			  // desassocier un/des mot d'un objet precis
+				spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($id_mot <= 0) ? "" : " AND id_mot=$id_mot"));
+			else {
+			  // disparition complete d'un mot
+			spip_query("DELETE FROM spip_mots WHERE id_mot=$id_mot");
+			spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot");
+			spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot");
+			spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot");
+			spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot");
+			}
+		}
 		if ($nouv_mot) {
 		  // recopie de:
 		  // inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
@@ -35,10 +51,15 @@ function action_editer_mot_dist() {
 				spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
 		}
 
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+		if ($objet AND $GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
 			marquer_indexer($objet, $id_objet);
 		}
 	}
+
+	$redirect = rawurldecode($redirect);
+
+	if ($cherche_mot) $redirect .= "&cherche_mot=$cherche_mot&select_groupe=$select_groupe";
+	redirige_par_entete($redirect);
 }
 ?>

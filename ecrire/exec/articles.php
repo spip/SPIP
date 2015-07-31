@@ -26,11 +26,10 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
 {
-	global $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $nouv_mot, $supp_mot, $trad_err; 
+	global $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $trad_err; 
 
 	global  $connect_id_auteur, $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
-	$supp_mot = intval($supp_mot);
 	$id_article= intval($id_article);
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -224,7 +223,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  echo formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  echo formulaire_mots('articles', $id_article, $cherche_mot, $flag_editable);
 }
 
 // Les langues
@@ -670,7 +669,8 @@ function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $
 	else
 		$titre_barre = _T('titre_langue_article');
 
-	$titre_barre .= "&nbsp; (".traduire_nom_langue($langue_article).")";
+	if ($langue_article)
+		$titre_barre .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
 	debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
 
@@ -1038,8 +1038,7 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 {
   global $spip_lang_left;
 
-  echo "<BR><BR>";
-
+  echo "<br /><br />";
   
   if (!$mute) {
     $tm = rawurlencode($titre);
@@ -1048,12 +1047,11 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
     echo "</div>";
   }
 
-  echo "<P align='$spip_lang_left'>";
+  echo "<p align='$spip_lang_left'>";
 
-  $result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0");
+  $row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0"));
 
-  $total = 0;
-  if ($row = spip_fetch_array($result_forum)) $total = $row["cnt"];
+  $total = $row ?  $row["cnt"] : 0;
 
   if (!$debut) $debut = 0;
   $total_afficher = 8;
@@ -1062,9 +1060,9 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	for ($i = 0; $i < $total; $i = $i + $total_afficher){
 		$y = $i + $total_afficher - 1;
 		if ($i == $debut)
-			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
+			echo "<font size='3'><b>[$i-$y]</b></font> ";
 		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
+			echo "[<a href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</a>] ";
 	}
 	echo "</div>";
 }

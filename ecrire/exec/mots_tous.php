@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/actions');
 include_spip('inc/mots');
 include_spip('base/abstract_sql');
 
@@ -50,7 +51,7 @@ function exec_mots_tous_dist()
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
-		  redirige_par_entete(generer_url_ecrire("mots_edit","supp_mot=$id_mot&redirect_ok=oui&redirect=" . generer_url_retour('mots_tous'), true));
+		  redirige_par_entete(redirige_action_auteur('editer_mot', "$conf_mot,,,,",'mots_tous', '', true));
 		} // else traite plus loin (confirmation de suppression)
 	}
 }
@@ -122,7 +123,8 @@ if ($conf_mot>0) {
 	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 
 	echo "<UL>";
-	echo "<LI><B><A href='", generer_url_ecrire('mots_edit', "supp_mot=$id_mot&redirect_ok=oui&redirect=" . generer_url_retour('mots_tous')),
+	echo "<LI><B><A href='", 
+	  redirige_action_auteur('editer_mot', "$id_mot,,,,",'mots_tous'),
 	  "'>",
 	  _T('item_oui'),
 	  "</A>,</B> ",
