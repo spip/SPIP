@@ -783,8 +783,8 @@ function traiter_listes ($texte) {
 				// puis les montees (y compris apres une descente un cran trop bas)
 				while ($niveau < $profond) {
 					$niveau ++;
-					$ajout .= "<$type class=\"spip\">";
-					$pile_type[$niveau] = "</$type>";
+					$ajout .= "</no p>"."<$type class=\"spip\">";
+					$pile_type[$niveau] = "</$type>"."<no p>";
 				}
 
 				$ajout .= "<li class=\"spip\">";
