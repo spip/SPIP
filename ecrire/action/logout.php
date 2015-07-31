@@ -20,6 +20,16 @@ function action_logout_dist()
 	global $visiteur_session, $ignore_auth_http;
 	$logout =_request('logout');
 	$url = _request('url');
+	// transformer l'url absolue en url relative
+	// pour ne pas echouer quand la meta adresse_site est foireuse
+	if (strncmp($url, $u = url_de_base(), strlen($u)) == 0){
+		$url = "./".substr($url, strlen($u));
+	}
+	// si c'est une url absolue, refuser la redirection
+	// sauf si cette securite est levee volontairement par le webmestre
+	elseif (preg_match(";^([a-z]+:)?//;Uims", $url) AND !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
+		$url = "";
+	}
 	// cas particulier, logout dans l'espace public
 	if ($logout == 'public' AND !$url)
 		$url = url_de_base();
