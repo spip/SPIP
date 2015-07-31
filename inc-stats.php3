@@ -6,7 +6,7 @@ if (defined("_INC_STATS")) return;
 define("_INC_STATS", "1");
 
 function ecrire_stats() {
-	global $id_article, $id_breve, $id_rubrique, $admin_ok, $timeout;
+	global $id_article, $id_breve, $id_rubrique;
 
 	$log_ip = $GLOBALS['REMOTE_ADDR'];
 	if ($id_rubrique > 0) {
@@ -32,7 +32,6 @@ function ecrire_stats() {
 	}
 	else return;
 
-
 	//
 	// Loguer la visite dans la base si possible
 	//
@@ -54,12 +53,23 @@ function ecrire_stats() {
 		}
 	}
 
+	// Traiter les referers toutes les heures
+	$date_refs = lire_meta('date_stats_referers');
+	if ((time() - $date_refs) > 3600) {
+		include_ecrire("inc_meta.php3");
+		ecrire_meta("date_stats_referers", time());
+		ecrire_meta('calculer_referers_now', 'oui');
+		ecrire_metas();
+	}
+}
+
+
+function archiver_stats() {
+	global $timeout;
 
 	//
 	// Archivage des visites temporaires
 	//
-	if ($timeout) return;
-
 	$date = date("Y-m-d");
 	$last_date = lire_meta("date_statistiques");
 
@@ -70,7 +80,8 @@ function ecrire_stats() {
 		ecrire_metas();
 		calculer_referers();
 		$timeout = true;
-	} else if ($date != $last_date) {
+	}
+	else if ($date != $last_date) {
 		include_ecrire("inc_meta.php3");
 		include_ecrire("inc_statistiques.php3");
 		ecrire_meta("date_statistiques", $date);
@@ -87,22 +98,12 @@ function ecrire_stats() {
 		$timeout = true;
 	}
 
-	// popularite, mise a jour dix minutes
+	// popularite, mise a jour une demie-heure
 	$date_popularite = lire_meta('date_stats_popularite');
-	if (!$timeout AND ((time() - $date_popularite) > 600)) {
+	if (!$timeout AND ((time() - $date_popularite) > 1800)) {
 		include_ecrire("inc_statistiques.php3");
 		calculer_popularites();
 		$timeout = true;
-	}
-
-
-	// traiter les referers toutes les heures
-	$date_refs = lire_meta('date_stats_referers');
-	if ((time() - $date_refs) > 3600) {
-		include_ecrire("inc_meta.php3");
-		ecrire_meta("date_stats_referers", time());
-		ecrire_meta('calculer_referers_now', 'oui');
-		ecrire_metas();
 	}
 }
 
