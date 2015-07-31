@@ -21,6 +21,23 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 // besoin de inc_meta
 include_spip('inc/texte');
 
+function spip_version_compare($v1,$v2,$op){
+	$v1 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v1));
+	$v2 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v2));
+	$v1 = str_replace('rc','RC',$v1); // certaines versions de PHP ne comprennent RC qu'en majuscule
+	$v2 = str_replace('rc','RC',$v2); // certaines versions de PHP ne comprennent RC qu'en majuscule
+	$v1 = explode('.',$v1);
+	$v2 = explode('.',$v2);
+	while (count($v1)<count($v2))
+		$v1[] = '0';
+	while (count($v2)<count($v1))
+		$v2[] = '0';
+	$v1 = implode('.',$v1);
+	$v2 = implode('.',$v2);
+
+	return version_compare($v1, $v2,$op);
+}
+
 // lecture des sous repertoire plugin existants
 // http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files(){
@@ -37,19 +54,19 @@ function liste_plugin_files(){
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(]([0-9.a-zRC\s]*)[;]([0-9.a-zRC\s]*)[\]\)]$,',$intervalle,$regs)) return false;
+	if (!preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,',$intervalle,$regs)) return false;
 	$mineure = $regs[1];
 	$majeure = $regs[2];
 	$mineure_inc = $intervalle{0}=="[";
 	$majeure_inc = substr($intervalle,-1)=="]";
 	#var_dump("$mineure_inc-$mineure-$majeure-$majeure_inc");
 	if (strlen($mineure)){
-		if ($mineure_inc AND version_compare($version,$mineure,'<')) return false;
-		if (!$mineure_inc AND version_compare($version,$mineure,'<=')) return false;
+		if ($mineure_inc AND spip_version_compare($version,$mineure,'<')) return false;
+		if (!$mineure_inc AND spip_version_compare($version,$mineure,'<=')) return false;
 	}
 	if (strlen($majeure)){
-		if ($majeure_inc AND version_compare($version,$majeure,'>')) return false;
-		if (!$majeure_inc AND version_compare($version,$majeure,'>=')) return false;
+		if ($majeure_inc AND spip_version_compare($version,$majeure,'>')) return false;
+		if (!$majeure_inc AND spip_version_compare($version,$majeure,'>=')) return false;
 	}
 	return true;
 }
@@ -88,7 +105,7 @@ function erreur_necessite($n, $liste) {
 		// Necessite SPIP version x ?
 		if ($id=='SPIP') {
 			if (!plugin_version_compatible($need['version'],
-			$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
+			$GLOBALS['spip_version_branche'])) {
 				$msg .= "<li>"
 				._T('plugin_necessite_spip',
 				array('version' => $need['version'])
@@ -148,7 +165,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 			$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
 			if (isset($liste_non_classee[$p=strtoupper($infos[$plug]['prefix'])])){
 				// prendre le plus recent
-				if (version_compare($version,$liste_non_classee[$p]['version'],'>'))
+				if (spip_version_compare($version,$liste_non_classee[$p]['version'],'>'))
 					unset($liste_non_classee[$p]);
 				else{
 					continue;
@@ -303,7 +320,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
 					foreach($info['path'] as $chemin){
-						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])){
+						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
 							$dir = $chemin['dir'];
 							if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
 							if (!isset($chemin['type']) OR $chemin['type']=='public')
@@ -489,7 +506,7 @@ function spip_plugin_install($action,$prefix,$version_cible){
 	switch ($action){
 		case 'test':
 			return (isset($GLOBALS['meta'][$nom_meta_base_version]) 
-			  AND version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
+			  AND spip_version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
 			break;
 		case 'install':
 			if (function_exists($upgrade = $prefix."_upgrade"))
