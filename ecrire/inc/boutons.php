@@ -59,7 +59,7 @@ function definir_barre_onglets($script) {
 			&& $parent == $script
 			&& autoriser('onglet',"_$id")) {
 				$onglets[$id] = new Bouton(
-					find_in_theme($infos['icone']),  // icone
+					isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 					$infos['titre'],	// titre
 					(isset($infos['action']) and $infos['action'])
 						? generer_url_ecrire($infos['action'],(isset($infos['parametres']) AND $infos['parametres'])?$infos['parametres']:'')
