@@ -397,14 +397,14 @@ function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true)
 function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_mysql_query("DROP TABLE$exist $table", $serveur, $requeter);
+	return spip_mysql_query("DROP TABLE$exist `$table`", $serveur, $requeter);
 }
 
 // supprime une vue 
 // http://doc.spip.org/@spip_mysql_drop_view
 function spip_mysql_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_mysql_query("DROP VIEW$exist $view", $serveur, $requeter);
+	return spip_mysql_query("DROP VIEW$exist `$view`", $serveur, $requeter);
 }
 
 // http://doc.spip.org/@spip_mysql_showbase
@@ -416,7 +416,7 @@ function spip_mysql_showbase($match, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_mysql_repair
 function spip_mysql_repair($table, $serveur='',$requeter=true)
 {
-	return spip_mysql_query("REPAIR TABLE $table", $serveur, $requeter);
+	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
 // Recupere la definition d'une table ou d'une vue MySQL
