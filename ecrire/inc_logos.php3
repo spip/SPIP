@@ -22,7 +22,12 @@ function get_image($racine) {
 
 	if ($fichier) {
 		$taille = resize_logo($fichier);
-		return array($fichier, $taille);
+
+		// contrer le cache du navigateur
+		if ($fid = @filesize("../IMG/$fichier") . @filemtime("../IMG/$fichier")) {
+			$fid = "?".md5($fid);
+		}
+		return array($fichier, $taille, $fid);
 	}
 	else return;
 }
@@ -58,26 +63,26 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 	$logo_ok = get_image($logo);
 	if ($logo_ok) $survol_ok = get_image($survol);
 
-	echo "<p>";
-	debut_cadre_relief("image-24.gif");
-	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
-	echo bouton_block_invisible(md5($texteon));
-	echo $texteon;
-	echo "</b></center></font>";
+	if ($options == 'avancees' OR $logo_ok) {
+		echo "<p>";
+		debut_cadre_relief("image-24.gif");
+		echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+		echo bouton_block_invisible(md5($texteon).",titrelogosurvol,".md5($texteoff));
+		echo $texteon;
+		echo "</b></center></font>";
+		afficher_logo($logo, $texteon);
 
-	afficher_logo($logo, $texteon);
+		if (($options == 'avancees' AND $logo_ok) OR $survol_ok) {
+			echo debut_block_invisible("titrelogosurvol");
+			echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
+			echo $texteoff;
+			echo "</b></font></p>";
+			echo fin_block();
+			afficher_logo($survol, $texteoff);
+		}
 
-	if ($logo_ok OR $survol_ok) {
-//		echo debut_block_invisible(md5($texteoff));
-		echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
-		echo bouton_block_invisible(md5($texteoff));
-		echo $texteoff;
-		echo "</b></font></p>";
-//		echo fin_block();
-		afficher_logo($survol, $texteoff);
+		fin_cadre_relief();
 	}
-
-	fin_cadre_relief();
 }
 
 function afficher_logo($racine, $titre) {
@@ -90,6 +95,7 @@ function afficher_logo($racine, $titre) {
 	if ($logo) {
 		$fichier = $logo[0];
 		$taille = $logo[1];
+		$fid = $logo[2];
 		if ($taille) {
 			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
 			$taille_txt = "$taille[0] x $taille[1] pixels";
@@ -101,7 +107,7 @@ function afficher_logo($racine, $titre) {
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<P><CENTER><IMG SRC='../IMG/$fichier' $taille_html>";
+		echo "<P><CENTER><IMG SRC='../IMG/$fichier$fid' $taille_html>";
 
 		echo debut_block_invisible(md5($titre));
 		echo "$taille_txt\n";
