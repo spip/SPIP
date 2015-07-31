@@ -17,12 +17,12 @@ include_spip('inc/filtres'); // par precaution
 // http://doc.spip.org/@cherche_image_nommee
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
-	if (ereg("^" . _DIR_IMG, $nom)) {
-		$nom = substr($nom,strlen(_DIR_IMG));
-	} else 	if (ereg("^" . _DIR_IMG_PACK, $nom)) {
-		$nom = substr($nom,strlen(_DIR_IMG_PACK));
-	} else if (ereg("^" . _DIR_IMG_ICONES_DIST, $nom)) {
-		$nom = substr($nom,strlen(_DIR_IMG_ICONES_DIST));
+	if (strncmp(_DIR_IMG, $nom,$n=strlen(_DIR_IMG))==0) {
+		$nom = substr($nom,$n);
+	} else 	if (strncmp(_DIR_IMG_PACK, $nom,$n=strlen(_DIR_IMG_PACK))==0) {
+		$nom = substr($nom,$n);
+	} else if (strncmp(_DIR_IMG_ICONE_DIST, $nom,$n=strlen(_DIR_IMG_ICONES_DIST))==0) {
+		$nom = substr($nom,$n);
 	}
 	$pos = strrpos($nom, "/");
 	if ($pos > 0) {
@@ -415,9 +415,9 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
 			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
 			# pas *ecrire*
-			$gd_formats = $GLOBALS['meta']["gd_formats"];
+			$gd_formats = explode(',',$GLOBALS['meta']["gd_formats"]);
 			foreach ($formats_sortie as $fmt) {
-				if (ereg($fmt, $gd_formats)) {
+				if (in_array($fmt, $gd_formats)) {
 					if ($format <> "gif" OR function_exists('ImageGif'))
 						$destFormat = $fmt;
 					break;
