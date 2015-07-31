@@ -139,7 +139,7 @@ echo "<P><HR><P>";
 
 	echo "<FORM ACTION=",
 	  http_php_script('articles', 
-			  ($id_article ? "?id_article=$id_article" : "")),
+			  ($id_article ? "id_article=$id_article" : "")),
 	  " method='POST' name='formulaire'>\n";
 
 	if ($id_article)
