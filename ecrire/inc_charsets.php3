@@ -220,8 +220,9 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 			$trans = load_charset($charset);
 			$s = '';
 			$len = strlen($texte);
+
 			for ($p = 0; $p <= $len; $c = substr($texte,$p++,1)) {
-			  if ((($i=ord($c))>127) and ($j=$GLOBALS['CHARSET'][$trans][$i]))
+				if ((($i=ord($c))>127) and ($j=$GLOBALS['CHARSET'][$trans][$i]))
 					$s .= "&#$j;";
 				else
 					$s .= $c;
@@ -297,6 +298,7 @@ function utf_8_to_unicode($source) {
 	$encodedString = '';
 	while ($pos < $len) {
 		$char = '';
+		$ischar = false;
 		$asciiPos = ord (substr ($source, $pos, 1));
 		if (($asciiPos >= 240) && ($asciiPos <= 255)) {
 			// 4 chars representing one unicode character
@@ -318,9 +320,10 @@ function utf_8_to_unicode($source) {
 			$thisLetter = substr ($source, $pos, 1);
 			$pos += 1;
 			$char = $thisLetter;
+			$ischar = true;
 		}
 
-		if ($char)
+		if ($ischar)
 			$encodedString .= $char;
 		else {	// process the string representing the letter to a unicode entity
 			$thisLen = strlen ($thisLetter);
