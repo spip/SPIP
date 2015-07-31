@@ -20,11 +20,11 @@ function exec_valider_xml_dist()
 	if (!autoriser('ecrire')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else valider_xml_ok(_request('var_url'));
+	} else valider_xml_ok(_request('var_url'), _request('ext'));
 }
 
 // http://doc.spip.org/@valider_xml_ok
-function valider_xml_ok($url)
+function valider_xml_ok($url, $req_ext)
 {
 	$url = urldecode($url);
 	$titre = _T('analyse_xml');
@@ -35,15 +35,18 @@ function valider_xml_ok($url)
 	} else {
 		include_spip('public/debug');
 		include_spip('inc/distant');
-		$transformer_xml = charger_fonction('valider_xml', 'inc');
-
 		if (is_dir($url)) {
-			$res = array();
-			foreach(preg_files($url, '.php$') as $f) {
-				$res[]= controle_une_url($transformer_xml, basename($f, '.php'), $url);
+			if (substr($url,-1,1) !== '/') $url .='/';
+			$ext = (!$req_ext) ? 'php' : $req_ext;
+			$files = preg_files($url,  $ext . '$',200,false);
+			if (!$files AND !$req_ext) {
+				$ext = 'html';
+				$files = preg_files($url, "$ext$", 200,false);
 			}
-			$res = valider_resultats($res);
-			$bandeau = $url;
+			if ($files)
+				$res = valider_dir($files, $ext, $url);
+			else $res = _T('texte_vide');
+			$bandeau = $url . '*' . $ext;
 		} else {
 			@list($server, $script) = preg_split('/[?]/', $url);
 			if ((!$server) OR ($server == './') 
@@ -51,7 +54,7 @@ function valider_xml_ok($url)
 			  include_spip('inc/headers');
 			  redirige_par_entete(parametre_url($url,'transformer_xml','valider_xml', '&'));
 			}
-
+			$transformer_xml = charger_fonction('valider_xml', 'inc');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			unset($GLOBALS['xhtml_error']);
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
@@ -87,18 +90,19 @@ function valider_xml_ok($url)
 }
 
 // http://doc.spip.org/@valider_resultats
-function valider_resultats($res)
+function valider_resultats($res, $ext)
 {
 	foreach($res as $k => $l) {
 		$n = preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
-			$l[0],
+			$l[3],
 			$regs,
 			PREG_SET_ORDER);
 		if ($n = intval($n)) {
-			$x = trim(substr(textebrut($l[0]),0,16)) .'  ...';
+			$x = trim(substr(textebrut($l[3]),0,16)) .'  ...';
 		} else $x = '';
+		$res[$k][3] = $x;
+		$res[$k][4] = $l[0];
 		$res[$k][0] = $n;
-		$res[$k][4] = $x;
 	}
 	$i = 0;
 	$table = '';
@@ -106,44 +110,50 @@ function valider_resultats($res)
 	foreach($res as $l) {
 		$i++;
 		$class = 'row_'.alterner($i, 'even', 'odd');
-		list($nb, $texte, $script, $args,$erreurs) = $l;
+		list($nb, $script, $appel, $erreurs, $texte) = $l;
 		if ($texte < 0) {
 			$texte = (0- $texte);
 			$color = ";color: red";
 		} else  {$color = '';}
-		$h = generer_url_ecrire('valider_xml', "var_url=$script");
+
+		$h = $ext!='php'
+		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
+		  : generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
+		
 		$table .= "<tr class='$class'>"
 		. "<td style='text-align: right'>$nb</td>"
+		. "<td style='text-align: right$color'>$texte</td>"
 		. "<td style='text-align: left'>$erreurs</td>"
-		. "<td><a href='$h'>$script</a></td>"
-		. "<td>$args</td>"
-		. "<td style='text-align: right$color'>$texte</td>";
+		. "<td>$script</td>"
+		. "<td><a href='$h'>$appel</a></td>";
 	}
 	return "<table class='spip'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
 	  . "</th><th>" 
-	  . _T('message')
-	  . "</th><th>script</th><th>args</th><th>"
 	  . _T('taille_octets', array('taille' => ' '))
+	  . "</th><th>"
+	  . _T('message')
+	  . "</th><th>Page</th><th>args"
+
 	  . "</th></tr>"
 	  . $table
 	  . "</table>";
 }
 
 // http://doc.spip.org/@controle_une_url
-function controle_une_url($transformer_xml, $script, $dir)
+function valider_script($transformer_xml, $f, $dir)
 {
 // ne pas se controler soi-meme
 // et ne pas valider les exec qui sont en fait des actions.
 
+	$script = basename($f, '.php');
 	if ($script == $GLOBALS['exec']
 	    OR $script=='index' 
 	    OR $script == 'export_all'
 	    OR $script == 'import_all')
-		return array('/', '/', $script,''); 
+		return array('/', $script,''); 
 
-	unset($GLOBALS['xhtml_error']);
 	$f = charger_fonction($script, $dir, true);
 	if(!$f) return false;
 	$page = $transformer_xml($f, true);
@@ -164,14 +174,52 @@ function controle_une_url($transformer_xml, $script, $dir)
 			unset($GLOBALS['xhtml_error']);
 			$args = array(1, 'id_article', 1);
 			$page2 = $transformer_xml($f=$g, $args);
-			$appel = join(', ', $args);
+			$appel = 'id_article=1&type=id_article&id=1';
 			if (strpos($page2, "id='minipres'")) {
 				$res = 0 - strlen($page2);
 			} else $res = strlen($page2);
 		}
 	}
-	$n = isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '';
-	spip_log("validation de $script en appelant $f : " . ($n ? " des " : "pas d'") . "erreurs.", 'valid'); 
-	return array($n, $res, $script, $appel);
+	return array($res, $script,
+		     generer_url_ecrire($script, $appel, false, true));
+}
+
+function valider_skel($transformer_xml, $f, $dir)
+{
+	if (!lire_fichier ($f, $skel)) return array('/', '/', $f,''); 
+	if (!strpos($skel, 'DOCTYPE')) return array('/', 'DOCTYPE?', $f,''); 
+	$compiler = charger_fonction('compiler', 'public');
+	$skel_code = $compiler($skel, 'tmp', 'html', $f);
+	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $skel_code, $r, PREG_SET_ORDER);
+	$contexte= array();
+	foreach($r as $v) {
+		$val = strpos($v[1],'intval') === false
+		  ? 'article'
+		  : 1;
+		if (!isset($contexte[$v[2]]) OR $val==1)
+			$contexte[$v[2]] =  $val;
+	}
+	$url = '';
+	unset($contexte['lang']);
+	foreach($contexte as $k => $v) $url .= '&' . $k . '=' . $v;
+	$skel = basename($f,'.html');
+	$url = generer_url_public($skel, substr($url,1));
+	$page = $transformer_xml(recuperer_page($url));
+	return array(strlen($page), $skel, $url);
+}
+
+function valider_dir($files, $ext, $dir)
+{
+	$res = array();
+	$transformer_xml = charger_fonction('valider_xml', 'inc');
+	$valideur = $ext=='html' ? 'valider_skel' : 'valider_script';
+	foreach($files as $f) {
+		spip_log("valider $f");
+		unset($GLOBALS['xhtml_error']);
+		$val = $valideur($transformer_xml, $f, $dir);
+		$val[]= isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '';
+		$res[]= $val;
+	}
+	return valider_resultats($res, $ext);
 }
 ?>
