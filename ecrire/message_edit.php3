@@ -17,15 +17,15 @@ if ($new=='oui') {
 		default:
 			$ok = false;
 	}
-}
 
-if (!$ok) {
-	debut_page(_T('info_acces_refuse'));
-	debut_gauche();
-	debut_droite();
-	echo "<b>"._T('avis_non_acces_message')."</b><p>";
-	fin_page();
-	exit;
+	if (!$ok) {
+		debut_page(_T('info_acces_refuse'));
+		debut_gauche();
+		debut_droite();
+		echo "<b>"._T('avis_non_acces_message')."</b><p>";
+		fin_page();
+		exit;
+	}
 }
 
 
@@ -98,6 +98,8 @@ if ($new == "oui") {
 		}
 		else if ($type == 'normal') $ajouter_auteur = true;
 	}
+
+	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 }
 
 
@@ -143,7 +145,7 @@ if ($row = spip_fetch_array($result)) {
 	echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
 	echo _T('texte_titre_obligatoire')."<BR>";
-	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'>";
+	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus />";
 
 	if ($ajouter_auteur) {
 		echo "<P><B>"._T('info_nom_destinataire')."</B><BR>";
