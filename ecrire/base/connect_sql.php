@@ -287,7 +287,20 @@ function query_echappe_textes($query){
 	$query = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
 	if (preg_match_all("/(['\"])[^']*(\\1)/S",$query,$textes)){
 		$textes = reset($textes); // indice 0 du match
-		$query = str_replace($textes,"%s",$query);
+		switch(count($textes)){
+			case 0:$replace=array();break;
+			case 1:$replace=array('%1$s');break;
+			case 2:$replace=array('%1$s','%2$s');break;
+			case 3:$replace=array('%1$s','%2$s','%3$s');break;
+			case 4:$replace=array('%1$s','%2$s','%3$s','%4$s');break;
+			case 5:$replace=array('%1$s','%2$s','%3$s','%4$s','%5$s');break;
+			default:
+				$replace = range(1,count($textes));
+				$replace = '%'.implode('$s,%',$replace).'$s';
+				$replace = explode(',',$replace);
+				break;
+		}
+		$query = str_replace($textes,$replace,$query);
 	}
 	else
 		$textes = array();
