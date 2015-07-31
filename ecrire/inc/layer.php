@@ -11,6 +11,10 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+global $numero_block, $compteur_block;
+
+$numero_block = array();
+$compteur_block = 0;
 
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
@@ -44,7 +48,6 @@ function fin_block() {
 
 function bouton_block_invisible($nom_block, $icone='') {
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
-
 	if (!$browser_layer) return '';
 	$blocks = explode(",", $nom_block);
 	$javasc = array();
@@ -69,7 +72,6 @@ function bouton_block_invisible($nom_block, $icone='') {
 
 function bouton_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
-
 	if (!$browser_layer) return '';
 	$blocks = explode(",", $nom_block);
 	$javasc = array();
