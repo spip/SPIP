@@ -1316,11 +1316,11 @@ function affdate_base($numdate, $vue, $options = array()) {
 	case 'saison':
 		$saison = '';
 		if ($mois > 0){
-			$saison = 1;
-			if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = 2;
-			if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = 3;
-			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 4;
-			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 1;
+			$saison = ($options['param'] == 'sud') ? 3 : 1;
+			if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = ($options['param'] == 'sud') ? 4 : 2;
+			if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = ($options['param'] == 'sud') ? 1 : 3;
+			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = ($options['param'] == 'sud') ? 2 : 4;
+			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = ($options['param'] == 'sud') ? 3 : 1;
 		}
 		return $saison?_T('date_saison_'.$saison):'';
 
@@ -1417,9 +1417,35 @@ function annee($numdate) {
 	return affdate_base($numdate, 'annee');
 }
 
+/**
+ * Affiche le nom boréal ou austral de la saison
+ *
+ * @filtre
+ * @link http://www.spip.net/4311
+ * @uses affdate_base()
+ * @example
+ *     En PHP
+ *     ```
+ *     saison("2008-10-11 14:08:45") affiche "automne"
+ *     saison("2008-10-11 14:08:45", "sud") affiche "printemps"
+ *     ```
+ *     En squelettes
+ *     ```
+ *     [(#DATE|saison)]
+ *     [(#DATE|saison{sud})]
+ *     ```
+ *
+ * @param string $numdate
+ *     Une écriture de date
+ * @param string $hemisphere
+ *     Nom optionnel de l'hémisphère (sud ou nord) ; par défaut nord
+ * @return string
+ *     La date formatée
+**/
 // http://doc.spip.org/@saison
-function saison($numdate) {
-	return affdate_base($numdate, 'saison');
+function saison($numdate, $hemisphere = 'nord') {
+	if ($hemisphere != 'sud') $hemisphere = 'nord';
+	return affdate_base($numdate, 'saison', $hemisphere);
 }
 
 /**
