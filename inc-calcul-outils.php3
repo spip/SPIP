@@ -37,7 +37,7 @@ function calcule_fichier_logo($on) {
 
 // Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
 
-function affiche_logos($logos, $lien, $align, $alt='logo') {
+function affiche_logos($logos, $lien, $align) {
 
 	list ($arton, $artoff) = $logos;
 
@@ -51,7 +51,7 @@ function affiche_logos($logos, $lien, $align, $alt='logo') {
 		$mouseover = " onmouseover=\"this.src='$artoff'\" "
 			."onmouseout=\"this.src='$arton'\"";
 
-	$milieu = "<img src=\"$arton\" alt=\"".entites_html(strtolower($alt)).'"'
+	$milieu = "<img src=\"$arton\" alt=\"\""
 		. ($align ? " align='$align'" : '') 
 		. $taille
 		. $mouseover
@@ -253,7 +253,7 @@ function calcul_branche ($generation) {
 }
 
 // fonction appelee par la balise #LOGO_DOCUMENT
-function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $params, $lien, $align, $alt) {
+function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $params, $lien, $align) {
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
@@ -311,7 +311,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// sinon calculer le code html de l'image, sauf si reduire_image le donne
 	if (!$lien_logo)
-		$lien_logo = affiche_logos(array($logo), $lien, $align, $alt);
+		$lien_logo = affiche_logos(array($logo), $lien, $align);
 
 	return $lien_logo;
 }
