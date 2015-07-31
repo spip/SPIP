@@ -1540,7 +1540,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= "function $func".'($contexte) {
-	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $rubriques_publiques, $id_article_img;
+	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $rubriques_publiques;
 
 	';
 
@@ -1604,11 +1604,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	return \$retour;\n}\n";
 
 	$type_boucle = $boucle->type_requete;
+	$requete = $boucle->requete;
 	$doublons = $boucle->doublons;
 	$partie = $boucle->partie;
 	$total_parties = $boucle->total_parties;
 	$lang_select = ($boucle->lang_select != "non") &&
-		($type_boucle == 'articles' OR $type_boucle == 'rubriques' OR $type_boucle == 'breves');
+		($type_boucle == 'articles' OR $type_boucle == 'rubriques'
+		OR $type_boucle == 'hierarchie' OR $type_boucle == 'breves');
 
 	//
 	// Boucle recursive : simplement appeler la boucle interieure
@@ -1620,7 +1622,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	}
 
 	//
-	// Boucle 'hierarchie' : code specifique
+	// Boucle 'hierarchie' : preparation de la requete principale
 	//
 	else if ($type_boucle == 'hierarchie') {
 		$texte .= '
@@ -1628,52 +1630,21 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		else $hierarchie = construire_hierarchie($id_parent);
 		if ($hierarchie) {
 			$hierarchie = explode("-", substr($hierarchie, 0, -1));
-			$deb_class = 0;
-			if (ereg("([0-9]+),([0-9]*)", $instance->requete, $match)){
-				$deb_class = $match[1];
-				if ($match[2]) $fin_class = $match[2] + $deb_class;
-			}
-			if (!$fin_class OR $fin_class > sizeof($hierarchie)) $fin_class = sizeof($hierarchie);
+			$hierarchie = join(",", $hierarchie);
+		}
+		else $hierarchie = "0";';
 
-			$hierarchie = join(",", $hierarchie);';
-		if ($doublons == "oui") {
-			$texte .= '
-			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie) AND id_rubrique NOT IN ($id_doublons[rubriques])";';
+		$deb_class = 0;
+		$fin_class = 10000;
+		if (ereg("([0-9]+),([0-9]*)", $boucle->requete, $match)) {
+			$deb_class = $match[1];
+			if ($match[2]) $fin_class = $match[2];
 		}
-		else {
-			$texte .= '
-			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie)";';
-		}
-		$texte .= '
-			$query .= " ORDER BY _field LIMIT $deb_class, ".($fin_class - $deb_class);
-			$result = spip_query($query);
-
-			if ($result) while ($row = spip_fetch_array($result)) {
-				$boucles[$id_boucle]->row = $row;
-		';
-		if ($boucle->separateur) {
-			$texte .= '	if ($retour) $retour .= \''.$boucle->separateur."';\n";
-		}
-		$texte .= '
-				$contexte["id_rubrique"] = $row["id_rubrique"];
-				$contexte["id_parent"] = $row["id_parent"];
-				$contexte["id_secteur"] = $row["id_secteur"];
-				$contexte["date"] = normaliser_date($row["date"]);
-				$contexte["date_redac"] = normaliser_date($row["date_redac"]);
-				if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);';
-		if ($doublons == "oui") {
-			$texte .= '
-				$id_doublons["rubriques"] .= ",".$row["id_rubrique"];';
-		}
-		$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
-		$texte .= '
-				if ($lang_dselect) lang_dselect();
-				} // if
-//			} // for
-		} // if
-		';
-		$texte .= $code_fin;
-		return $texte;
+		if ($doublons == "oui")
+			$requete = "SELECT *, FIELD(id_rubrique, \$hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN (\$hierarchie) AND id_rubrique NOT IN (\$id_doublons[rubriques])";
+		else
+			$requete = "SELECT *, FIELD(id_rubrique, \$hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN (\$hierarchie)";
+		$requete .= " ORDER BY _field LIMIT $deb_class,$fin_class";
 	}
 
 
@@ -1683,7 +1654,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 	if ($type_boucle == 'forums') {
 		$texte .= '
-		if (!$id_rubrique AND !$id_article AND !$id_breve)
+		global $fichier_cache, $requetes_cache;
+		if (!$id_rubrique AND !$id_article AND !$id_breve AND $id_forum)
 			$my_id_forum = $id_forum;
 		else
 			$my_id_forum = 0;
@@ -1691,7 +1663,6 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		if (!$id_rubrique) $id_rubrique = 0;
 		if (!$id_breve) $id_breve = 0;
 		$valeurs = "$id_article, $id_rubrique, $id_breve, $my_id_forum, \'$fichier_cache\'";
-
 		if (!$requetes_cache[$valeurs]) {
 			$query_cache = "INSERT INTO spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
 			spip_query($query_cache);
@@ -1708,41 +1679,37 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	// de resultats et de traitement des boucles par parties (e.g. 1/2)
 	//
 
-	$texte .= '	$query = "'.$boucle->requete.'";
+	$texte .= '	$query = "'.$requete.'";
 	$result = @spip_query($query);
 	if (!$result) {
 		include_local("inc-debug-squel.php3");
 		return erreur_requete_boucle($query, $instance->id_boucle);
 	}
-	$total_boucle = @spip_num_rows($result);
-	';
+	$total_boucle = @spip_num_rows($result);';
 
 	if ($partie AND $total_parties) {
 		$flag_parties = true;
 		$texte .= '
 		$debut_boucle = floor(($total_boucle * ($instance->partie - 1) + $instance->total_parties - 1) / $instance->total_parties) + 1;
 		$fin_boucle = floor(($total_boucle * ($instance->partie) + $instance->total_parties - 1) / $instance->total_parties);
-		$pile_boucles[$id_instance]->total_boucle = $fin_boucle - $debut_boucle + 1;
-		';
+		$pile_boucles[$id_instance]->total_boucle = $fin_boucle - $debut_boucle + 1;';
 	}
 	else {
 		$flag_parties = false;
 		$texte .= '
-		$pile_boucles[$id_instance]->total_boucle = $total_boucle;
-		';
+		$pile_boucles[$id_instance]->total_boucle = $total_boucle;';
 	}
 
-	$texte .= '
+	$texte_debut .= '
 	$pile_boucles[$id_instance]->compteur_boucle = 0;
-	$compteur_boucle = 0;
-	';
+	$compteur_boucle = 0;';
 
 	//
 	// Ecrire le code de recuperation des resultats
 	//
 
 	if ($lang_select)
-		$texte_debut .= '		$old_lang = $GLOBALS["spip_lang"];'."\n";
+		$texte_debut .= "\n\t\$old_lang = \$GLOBALS['spip_lang'];\n";
 	$texte_debut .= '
 	while ($row = @spip_fetch_array($result)) {';
 
@@ -1753,45 +1720,38 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	}
 	$texte_debut .= '
 		$pile_boucles[$id_instance]->compteur_boucle++;
-		$pile_boucles[$id_instance]->row = $row;
-	';
+		$pile_boucles[$id_instance]->row = $row;';
 	if ($boucle->separateur)
-		$texte_debut .= '		if ($retour) $retour .= \''.$boucle->separateur."';\n";
+		$texte_debut .= '
+		if ($retour) $retour .= \''.$boucle->separateur."';";
 	if ($lang_select)
-		$texte_debut .= '		$GLOBALS["spip_lang"] = $row["lang"];'."\n";
+		$texte_debut .= '
+		$GLOBALS["spip_lang"] = $row["lang"];';
 
-	//
 	// Traitement different selon le type de boucle
-	//
-
 	$texte_debut .= $tables_code_contexte[$type_boucle];
 	if ($doublons == "oui")
-		$texte_debut .= "\t\t\$id_doublons['$type_boucle'] .= ','.\$row['".$tables_doublons[$type_boucle]."'];\n";
+		$texte_debut .= "\n\t\t\$id_doublons['$type_boucle'] .= ','.\$row['".$tables_doublons[$type_boucle]."'];";
 
-	//
 	// Inclusion du code correspondant a l'interieur de la boucle
-	//
 	$texte_liste = calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
-	if ($texte_liste) {
+
+	// On n'ecrit la boucle "while" que si elle contient du code utile,
+	// sinon on utlise plutot spip_num_rows() pour recuperer le nombre d'iterations
+	if ($texte_liste OR $doublons == 'oui') {
 		$texte .= $texte_debut . $texte_liste;
 
 		if ($flag_parties) {
-			$texte .= '
-		}
-		';
+			$texte .= "\n\t\t}\n";
 		}
 
 		// Fermeture de la boucle spip_fetch_array et liberation des resultats
-		$texte .= '
-	}
-	@spip_free_result($result);
-';
+		$texte .= "\n\t}\n\t@spip_free_result(\$result);\n";
 		if ($lang_select)
-			$texte .= '		$GLOBALS["spip_lang"] = $old_lang;'."\n";
+			$texte .= '	$GLOBALS["spip_lang"] = $old_lang;'."\n";
 	}
 	else {
-		$texte .= '	$pile_boucles[$id_instance]->compteur_boucle = @spip_num_rows($result);
-';
+		$texte .= '	$pile_boucles[$id_instance]->compteur_boucle = $pile_boucles[$id_instance]->$total_boucle;'."\n";
 	}
 	$texte .= $code_fin;
 	return $texte;
@@ -1957,7 +1917,6 @@ function calculer_liste($tableau, $prefix_boucle, $id_boucle)
 		//
 		case 'champ':
 			$nb_milieu++;
-			$texte .= "	\$id_article_img = \$contexte[\"id_article\"];\n";
 			if ($objet->cond_avant || $objet->cond_apres) {
 				$nom_var = "milieu$nb_milieu";
 				$texte .= calculer_champ($objet->id_champ, $id_boucle, $nom_var);
