@@ -101,11 +101,11 @@ if ($bad_dirs OR $absent_dirs) {
 	  "<DIV align='right'><input type='submit' class='fondl' value='". 
 	  _T('login_recharger')."'></DIV>" .
 	  "</form>";
-	install_debut_html($titre);echo $res;	install_fin_html();
+	minipres($titre, $res);
 
  } else {
 	if (!_FILE_CONNECT)
-	  header("Location: " . generer_url_ecrire("install",  "etape=1", true));
+	  header("Location: " . generer_url_ecrire("install", "etape=1", true));
 	else
 		header("Location: " . _DIR_RESTREINT_ABS);
  }

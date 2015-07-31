@@ -122,17 +122,14 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-	install_debut_html($msg); echo '<form action="' ,
-	  _DIR_RESTREINT_ABS,
-	  urldecode($GLOBALS['redirect']),
-	  '"><div align="',
-	  $spip_lang_right,
-	  '"><input type="submit" class="fondl"  value="',
-	  _T('ecrire:bouton_suivant'),
-	  ' >>"></div>',
-	  '</form></body></html>';
-	install_fin_html();
-	exit;
+	minipres($msg, '<form action="' .
+	  _DIR_RESTREINT_ABS.
+	  urldecode($GLOBALS['redirect']).
+	  '"><div align="'.
+	  $spip_lang_right.
+	  '"><input type="submit" class="fondl"  value="'.
+	  _T('ecrire:bouton_suivant').
+		 ' >>"></div></form>');
 }
 
 
@@ -383,13 +380,13 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 }
 
 function afficher_compactes($action) {
-	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
-		_T('upload_fichier_zip_texte'),
-		"</p>",
-		"<p>",
-		_T('upload_fichier_zip_texte2'),
-							"</p>",$action;
-	install_fin_html();
+	minipres(_T('upload_fichier_zip'),
+	  "<p>" .
+		_T('upload_fichier_zip_texte') .
+	  "</p><p>" .
+		_T('upload_fichier_zip_texte2') .
+	  "</p>" .
+	  $action);
 }
 
 //
