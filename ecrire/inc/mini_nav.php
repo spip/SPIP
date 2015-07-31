@@ -49,13 +49,12 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 
 	if ($ordre) {
 		asort($ordre);
-		$place = (($col-1)*150);
 
 		while (list($id, $titre) = each($ordre)) {
 
-			$titre = "<div class='petite-rubrique'"
-#		  	. ($id_rubrique ? '' : (" style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'"))
-			. ">"
+			$titre = "<div class='"
+			. ($id_rubrique ? 'petite-rubrique' : "petit-secteur")
+			. "'>"
 			. supprimer_numero($titre)
 			. "</div>";
 
@@ -139,15 +138,13 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
 
-	$ret .= "<div id='$rac'>";
-	$ret .= "<div style='display: none;'>";
-	$ret .= "<input type='text' id='".$rac."_fonc' value=\"$fonction\" />";
-	$ret .= "</div>\n";
-	
-	$ret .= "<table width='100%' cellpadding='0' cellspacing='0'>";
-	$ret .= "<tr>";
-
-	$ret .= "<td style='vertical-align: bottom;'>";
+	$ret = "<div id='$rac'>"
+	. "<div style='display: none;'>"
+	. "<input type='text' id='".$rac."_fonc' value=\"$fonction\" />"
+	. "</div>\n"
+	. "<table width='100%' cellpadding='0' cellspacing='0'>"
+	. "<tr>"
+	. "<td style='vertical-align: bottom;'>";
 
 	if ($aff_racine) {
 		$onClick = " aff_selection('rubrique','$rac', '0');";
@@ -165,24 +162,30 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 
 	$onClick .= "charger_id_url('" . generer_url_ecrire('plonger',"&var_ajax=1&rac=$rac&exclus=$rub_exclus&id=0&col=1", true) . "', '".$rac."_col_1');";
 
-	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" ondblclick=\"$ondbClick$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
-	$ret .= _T("info_racine_site");
-	$ret .= "</div></div>";
-	$ret .= "</td>";
+	$ret .= "\n<div class='arial11 petite-racine'\nonclick=\""
+	. $onClick
+	. "\"\nondblclick=\""
+	. $ondbClick
+	. $onClick
+	. "\">\n<div class='pashighlight'>"
+	. _T("info_racine_site")
+	. "</div></div>"
+	. "</td>"	. "\n<td>"
+	. http_img_pack("searching.gif", "*", "style='visibility: hidden;' id='img_".$rac."_col_1'")
+	. "</td>"
+	. "\n<td style='text-align: $spip_lang_right'>"
+	. "<input style='width: 100px;' type='search' id='"
+	. $rac
+	. "_champ_recherche'\nonkeypress=\"t=setTimeout('lancer_recherche_rub(\'"
+	  . $rac
+	  . "_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" />"
+	. "</td></tr></table>\n"
+	. mini_nav_principal($sel, $rac, $rub_exclus)
+	. "\n<div id='"
+	.$rac
+	."_selection'></div>"
+	. "</div>\n";
 
-	$ret .= "<td>";
-	$ret .= http_img_pack("searching.gif", "*", "style='visibility: hidden;' id='img_".$rac."_col_1'");
-	$ret .= "</td>";
-
-	$ret .= "<td style='text-align: $spip_lang_right'>";
-	$ret .= "<input id='".$rac."_champ_recherche' type='search' onkeypress=\"t=setTimeout('lancer_recherche_rub(\'".$rac."_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" style='width: 100px;' />";
-	$ret .= "</td></tr></table>\n";
-	
-	$ret .= mini_nav_principal($sel, $rac, $rub_exclus);
-	
-	$ret .= "<div id='".$rac."_selection'></div>";
-	
-	$ret .= "</div>\n";
 	return $ret;
 }
 

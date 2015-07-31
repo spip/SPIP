@@ -206,7 +206,7 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 		$descriptif_mot = $row['descriptif'];
 
 		$res .="<li>"
-		.  ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "&$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
+		.  ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
 		if (strlen($descriptif_mot) > 1) {
 			$res .= "<FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT><br />\n";
 		}
@@ -318,7 +318,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 					$s =  _T('info_retirer_mot')
 					. "&nbsp;"
 					. http_img_pack('croix-rouge.gif', "X", "width='7' height='7' align='middle'");
-					$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "&$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
+					$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
 				} else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -361,7 +361,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
-	return ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "&$table_id=$id_objet", (
+	return ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", (
 	"<select name='nouv_mot' onchange=\"$jscript1\""
 	. " class='fondl' style='font-size:10px; width:90px;'>"
 	. $s
@@ -405,7 +405,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 
 	if ($nombre_mots_associes > 3) {
 		$res .= "<div align='right' class='arial1'>"
-		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "&$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
+		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</a>"
 		. "</div><br />\n";
 	}
@@ -421,7 +421,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		$g = menu_mots($row, $id_groupes_vus, $les_mots);
 		if ($g) {
 			$res .= "<tr><td>$message</td>\n<td>" 
-			. ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet", $url_base, "&$table_id=$id_objet", $g,"&id_objet=$id_objet&objet=$objet&select_groupe=" . $row['id_groupe'])
+			. ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", $g,"&id_objet=$id_objet&objet=$objet&select_groupe=" . $row['id_groupe'])
 			. "</td></tr>\n";
 			$message = "";
 		}
