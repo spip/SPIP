@@ -137,29 +137,26 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		// Obtenir la page
 		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
 		$fond, false);
+		if (!$flag_preserver) {
 		// Entete content-type: xml ou html ; charset
-		if ($xhtml) {
+			if ($xhtml) {
 			// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
 			// extremement risque: Mozilla passe en mode debugueur strict
 			// mais permet d'afficher du MathML directement dans le texte
 			// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
-			include_ecrire("inc_tidy.php");
-			if (version_tidy() > 0) {
-				if (ereg("application/xhtml\+xml", $GLOBALS['HTTP_ACCEPT'])) 
-					@header("Content-Type: application/xhtml+xml; ".
-					"charset=".lire_meta('charset'));
-				else 
-					@header("Content-Type: text/html; ".
-					"charset=".lire_meta('charset'));
-					
-				echo '<'.'?xml version="1.0" encoding="'.
-				lire_meta('charset').'"?'.">\n";
+				include_ecrire("inc_tidy.php");
+				if (version_tidy() > 0) {
+					if (ereg("application/xhtml\+xml", $GLOBALS['HTTP_ACCEPT'])) 
+						@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+					else 
+						@header("Content-Type: text/html; charset=".lire_meta('charset'));
+					echo '<'.'?xml version="1.0" encoding="'. lire_meta('charset').'"?'.">\n";
+				} else {
+					@header("Content-Type: text/html; charset=".lire_meta('charset'));
+				}
 			} else {
-				@header("Content-Type: text/html; ".
-				"charset=".lire_meta('charset'));
+				@header("Content-Type: text/html; charset=".lire_meta('charset'));
 			}
-		} else {
-			@header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
 	}
 

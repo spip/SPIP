@@ -79,21 +79,22 @@ else {
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
+	if (!$flag_preserver) {
 	// Interdire au client de cacher un login, un admin ou un recalcul
-	if ($flag_dynamique OR $var_mode
-	OR $HTTP_COOKIE_VARS['spip_admin']) {
-		@header("Cache-Control: no-cache,must-revalidate");
-		@header("Pragma: no-cache");
+		if ($flag_dynamique OR $var_mode
+		OR $HTTP_COOKIE_VARS['spip_admin']) {
+			@header("Cache-Control: no-cache,must-revalidate");
+			@header("Pragma: no-cache");
 	// Pour les autres donner l'heure de modif
-	} else if ($lastmodified)
-		@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+		} else if ($lastmodified)
+			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
 	// si le squelette est nul se rabattre sur l'entete standard
-	if ($page['texte'])
-		@header("Content-Type: text/html; charset=".lire_meta('charset'));
-	else
-		echo debut_entete($fond);
-
+		if ($page['texte']) 
+			@header("Content-Type: text/html; charset=".lire_meta('charset'));
+		else
+			echo debut_entete($fond);
+	}
 	define('spip_active_ob', $flag_ob AND
 		($var_mode == 'debug' OR $var_recherche OR $affiche_boutons_admin));
 
@@ -150,13 +151,13 @@ else {
 	// Afficher le resultat final
 	echo $contenu;
 
-	// Afficher les boutons admin
+	// Ajouter les boutons admins (les normaux) si absents
+	// (ce sera apres la balise /html mais tant pis)
 	if ($affiche_boutons_admin)
-		inclure_formulaire(
-		admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur));
+		echo inclure_formulaire(admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur));
 
 	// Taches de fin
 	terminer_public_global();
-}
+ }
 
 ?>
