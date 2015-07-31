@@ -21,6 +21,7 @@ function entites_html($texte) {
 	return corriger_entites_html(htmlspecialchars($texte));
 }
 
+
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
@@ -225,8 +226,8 @@ function affdate_base($numdate, $vue) {
 	if ($lang == "fr") {
 		if ($jour == '1') $jour = '1er';
 		$tab_mois = array('',
-			'janvier', "f\xe9vrier", 'mars', 'avril', 'mai', 'juin',
-			'juillet', "ao\xfbt", 'septembre', 'octobre', 'novembre', "d\xe9cembre");
+			'janvier', "f&eacute;vrier", 'mars', 'avril', 'mai', 'juin',
+			'juillet', "ao&ucirc;t", 'septembre', 'octobre', 'novembre', "d&eacute;cembre");
 		$avjc = ' av. J.C.';
 	}
 	elseif ($lang == "en"){
@@ -378,8 +379,13 @@ function saison($numdate) {
 	return affdate_base($numdate, 'saison');
 }
 
-function affdate($numdate) {
-	return affdate_base($numdate, 'entier');
+function affdate($numdate, $corriger_entites = false) {
+	$date = affdate_base($numdate, 'entier');
+	if ($corriger_entites) {	// special pour le mail...
+		$date = ereg_replace("&ucirc;", "\xfb", $date);
+		$date = ereg_replace("&eacute;", "\xe9", $date);
+	}
+	return $date;
 }
 
 function affdate_court($numdate) {
