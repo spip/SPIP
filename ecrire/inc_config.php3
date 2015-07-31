@@ -32,7 +32,7 @@ function init_config() {
 		'post_dates' => 'oui',
 		'creer_preview' => 'non',
 		'taille_preview' => 150,
-		'articles_modif' => 'oui',
+		'articles_modif' => 'non',
 
 		'activer_sites' => 'oui',
 		'proposer_sites' => 0,
