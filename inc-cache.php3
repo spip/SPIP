@@ -13,7 +13,7 @@ include_local('inc-dir.php3');
 function squelette_obsolete($naissance, $source)
 {
   $e = $GLOBALS['extension_squelette'];
-  $x = (($GLOBALS['recalcul_squelettes'] == 'oui')
+  $x = (($GLOBALS['recalcul'] == 'oui')
 	  OR ((filemtime($source . ".$e") > $naissance)
 	      OR (file_exists($source . '_fonctions.php3')
 		  AND (filemtime($source . '_fonctions.php3')> $naissance))
