@@ -127,6 +127,11 @@ function texte_backend($texte) {
 	return $texte;
 }
 
+// Encode du HTML pour transmission XML
+function html_backend($texte) {
+	return texte_backend(str_replace('&', '&amp;', liens_absolus($texte)));
+}
+
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = preg_replace(",^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+,", "", $texte);

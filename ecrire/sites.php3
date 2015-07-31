@@ -139,7 +139,8 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	descriptif='$descriptif', syndication='$syndication', statut='$statut'
 	$add_extra WHERE id_syndic=$id_syndic");
 
-	if ($syndication_old != $syndication OR $url_syndic != $old_syndic)
+	if ($syndication_old != $syndication
+	OR $url_syndic != $old_syndic)
 		$reload = "oui";
 
 	if ($syndication_old != $syndication AND $syndication == "non")
@@ -180,6 +181,15 @@ if ($jour AND $flag_administrable) {
 
 if ($redirect AND $redirect_ok == 'oui') {
 	redirige_par_entete($redirect);
+}
+
+// Appliquer le choix resume/fulltexte (necessite un reload)
+if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
+	list($old_resume) = spip_fetch_array(spip_query(
+		"SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"));
+	if ($old_resume <> $resume) $reload = 'oui';
+	spip_query("UPDATE spip_syndic SET resume='$resume'
+		WHERE id_syndic=$id_syndic");
 }
 
 
@@ -448,6 +458,23 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "</li>\n";
 
 		echo "</ul>\n";
+
+
+		// Prendre les resumes ou le texte integral ?
+		# appliquer les choix
+		if ($resume == 'oui' OR $resume == 'non')
+			spip_query("UPDATE spip_syndic SET resume='$resume'
+			WHERE id_syndic=$id_syndic");
+		if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
+		echo "<p><div align='$spip_lang_left'>"
+			. _T('syndic_choix_resume') . "<br />\n";
+		afficher_choix('resume', $resume,
+			array(
+				'oui' => _T('syndic_option_resume_oui'),
+				'non' => _T('syndic_option_resume_non')
+			));
+		echo "</li>\n";
+
 
 		// Bouton "Valider"
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";

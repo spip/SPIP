@@ -253,7 +253,8 @@ $spip_syndic = array(
 		"extra"			=> "longblob NULL",
 		"moderation"	=> "VARCHAR(3) DEFAULT 'non'",
 		"miroir"	=> "VARCHAR(3) DEFAULT 'non'",
-		"oubli"	=> "VARCHAR(3) DEFAULT 'non'"
+		"oubli"	=> "VARCHAR(3) DEFAULT 'non'",
+		"resume"	=> "VARCHAR(3) DEFAULT 'oui'"
 );
 
 $spip_syndic_key = array(
@@ -272,7 +273,8 @@ $spip_syndic_articles = array(
 		"lesauteurs"	=> "text NOT NULL",
 		"maj"	=> "TIMESTAMP",
 		"statut"	=> "VARCHAR(10) NOT NULL",
-		"descriptif"	=> "blob NOT NULL");
+		"descriptif"	=> "blob NOT NULL",
+		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL");
 
 $spip_syndic_articles_key = array(
 		"PRIMARY KEY"	=> "id_syndic_article",

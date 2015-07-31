@@ -379,7 +379,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.826;
+$spip_version = 1.901;
 
 // version de spip
 $spip_version_affichee = "1.9 alpha";
