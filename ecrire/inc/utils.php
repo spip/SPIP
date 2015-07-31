@@ -2037,7 +2037,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] :'';
 			$a = array('fichier'=>$fond);
-			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
+			$erreur = _T('info_erreur_squelette2', $a); // squelette introuvable
+			erreur_squelette($erreur, $c);
+			// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
+			$page = array('texte' => '', 'erreur' => $erreur);
 		}
 
 		$page = pipeline('recuperer_fond',array(
