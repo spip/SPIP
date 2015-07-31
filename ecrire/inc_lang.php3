@@ -350,10 +350,10 @@ function init_codes_langues() {
 // Filtres de langue
 //
 
-// afficher 'gaucher' si la langue est arabe, hebreu, persan, 'droitier' sinon
-// utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT
+// afficher 'gaucher' si la langue est arabe, hebreu, kurde, persan,
+// 'droitier' sinon ; utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT
 function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
-	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he')
+	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he' OR $lang == 'ku')
 		return $gaucher;
 	else
 		return $droitier;
