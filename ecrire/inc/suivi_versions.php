@@ -96,9 +96,10 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 		
 					$titre_bouton = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
-					if (!$court)
-						$revisions .= bouton_block_depliable($titre_bouton,false,"$id_version-$id_article-$id_auteur");
-					else
+					if (!$court) {
+						$bouton_id = "b$id_version-$id_article-$id_auteur";
+						$revisions .= bouton_block_depliable($titre_bouton,false,$bouton_id);
+					} else
 						$revisions .= $titre_bouton;
 				} else {
 					$item = array(
@@ -114,7 +115,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				if (!$court) {
 					$textes = revision_comparee($id_article, $id_version, 'diff');
 					if (!$rss)
-						$revisions .= debut_block_depliable(false,"$id_version-$id_article-$id_auteur");
+						$revisions .= debut_block_depliable(false,$bouton_id);
 	
 					if (is_array($textes))
 					foreach ($textes as $var => $t) {
