@@ -151,19 +151,21 @@ if (isset($_POST['tmp_lkojfghx3'])){	die();}
  * Bloque les bots quand le load deborde
  *
  */
-define('_ECRAN_SECURITE_LOAD', 4);
+if (!defined('_ECRAN_SECURITE_LOAD'))
+	define('_ECRAN_SECURITE_LOAD', 4);
+
 if (
-defined('_ECRAN_SECURITE_LOAD')
-AND _ECRAN_SECURITE_LOAD>0
-AND $_SERVER['REQUEST_METHOD'] === 'GET'
-AND strpos($_SERVER['HTTP_USER_AGENT'], 'bot')
-AND (
-  (function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
-  OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
-)
-AND rand(0, $load*$load) > _ECRAN_SECURITE_LOAD*_ECRAN_SECURITE_LOAD
-)
-{
+  defined('_ECRAN_SECURITE_LOAD')
+  AND _ECRAN_SECURITE_LOAD>0
+  AND $_SERVER['REQUEST_METHOD'] === 'GET'
+  AND strpos($_SERVER['HTTP_USER_AGENT'], 'bot')!==FALSE
+  AND (
+    (function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
+    OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
+  )
+  AND $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
+  AND rand(0, $load*$load) > _ECRAN_SECURITE_LOAD*_ECRAN_SECURITE_LOAD
+  ) {
 	header("HTTP/1.0 503 Service Unavailable");
 	header("Retry-After: 300");
 	header("Expires: 0");
