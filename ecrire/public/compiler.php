@@ -623,9 +623,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 // Si on la trouve, le tableau resultat a les entrees:
 // field (comme dans serial.php)
 // key (comme dans serial.php)
-// serveur = serveur bd associe
-// table = nom complet de la table (avec le prefixe spip_ pour les stds)
-// type = nom court (i.e. type de boucle)
+// table = nom SQL de la table (avec le prefixe spip_ pour les stds)
+// id_table = nom SPIP de la table (i.e. type de boucle)
+// le compilateur produit  FROM $r['table'] AS $r['id_table']
 
 // http://doc.spip.org/@trouver_table
 function trouver_table($type, $boucle)
@@ -640,32 +640,36 @@ function trouver_table($type, $boucle)
     	// indirection (pour les rares cas ou le nom de la table!=type)
 		$t = $table_des_tables[$type];
 		$nom_table = 'spip_' . $t;
-		if (!isset($connexions[$s]['tables'][$nom_table]))
+		if (!isset($connexions[$s]['tables'][$nom_table])) {
 			$connexions[$s]['tables'][$nom_table] = 
 				$tables_principales[$nom_table];
+			$connexions[$s]['tables'][$nom_table]['table']= $nom_table;
+			$connexions[$s]['tables'][$nom_table]['id_table']= $t;
+		}
 	} elseif ($spip AND isset($tables_auxiliaires['spip_' .$type])) {
 		$t = $type;
 		$nom_table = 'spip_' . $t;
-		if (!isset($connexions[$s]['tables'][$nom_table]))
+		if (!isset($connexions[$s]['tables'][$nom_table])) {
 			$connexions[$s]['tables'][$nom_table] = 
 				$tables_auxiliaires[$nom_table];
+			$connexions[$s]['tables'][$nom_table]['table']= $nom_table;
+			$connexions[$s]['tables'][$nom_table]['id_table']= $t;
+		}
 	} else	$nom_table = $t = $type;
-	spip_log("%%%% $t $nom_table " . isset($connexions[$s]['tables'][$nom_table]));
+
 	if (!isset($connexions[$s]['tables'][$nom_table])) {
 		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
 		if (!$desc OR !$desc['field']) {
 		  erreur_squelette(_T('zbug_table_inconnue', array('table' => $s ? "$serveur:$type" : $type)),
 					 $boucle->id_boucle);
 			return null;
+		} else {
+			$desc['table']= $nom_table;
+			$desc['id_table']= $t;
 		}
 		$connexions[$s]['tables'][$nom_table] = $desc;
-	} else $desc = $connexions[$s]['tables'][$nom_table];
-	
-	$desc['table']= $nom_table;
-	$desc['serveur']= $s;
-	$desc['type']= $t;
-
-	return $desc;
+	}
+	return $connexions[$s]['tables'][$nom_table];
 }
 
 // affichage du code produit
@@ -757,7 +761,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			$show = trouver_table($type, $boucles[$id]);
 			if ($show) {
 				$nom_table = $show['table'];
-				$boucles[$id]->id_table = $show['type'];
+				$boucles[$id]->id_table = $show['id_table'];
 				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)

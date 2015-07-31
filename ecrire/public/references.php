@@ -65,13 +65,13 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	$r = $boucles[$idb]->type_requete;
 
 	if ($r == 'boucle') return array();
-	$desc = trouver_table($r, $boucle);
+	$desc = trouver_table($r, $boucles[$idb]);
 	if(!$desc) {
 		# continuer pour chercher l'erreur suivante
 		return  array("'#" . $r . ':' . $nom_champ . "'",'');
 	}
 
-	$t= $desc['type'];
+	$t= $desc['id_table'];
 	$excep = isset($exceptions_des_tables[$r]) ? $exceptions_des_tables[$r] : '';
 	if ($excep)
 		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
@@ -123,7 +123,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 				}
 		}
 	} 
-	else $t = $desc['type'];
+	else $t = $desc['id_table'];
 	// demander a SQL de gerer le synonyme
 	// ca permet que excep soit dynamique (Cedric, 2/3/06)
 	if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
