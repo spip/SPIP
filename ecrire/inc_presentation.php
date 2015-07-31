@@ -2291,13 +2291,25 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 		if($page=='espacement') {
 			echo "<td> &nbsp; </td>";
 		} else {
+			if ($detail->url)
+				$lien_noscript = $detail->url;
+			else
+				$lien_noscript = generer_url_ecrire($page);
+
+			if ($detail->url2)
+				$lien = $detail->url2;
+			else
+				$lien = $lien_noscript;
+
 			icone_bandeau_principal(
 				_T($detail->libelle),
-				$detail->url2
-					? $detail->url2
-					: ($detail->url ? $detail->url : generer_url_ecrire($page)),
-				$detail->icone, $page, $rubrique, $detail->url2,
-				$page, $sous_rubrique);
+				$lien,
+				$detail->icone,
+				$page,
+				$rubrique,
+				$lien_noscript,
+				$page,
+				$sous_rubrique);
 		}
 	}
 	echo "</tr></table>\n";
