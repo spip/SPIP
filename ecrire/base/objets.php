@@ -547,8 +547,8 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 	if (!isset($infos['type'])){
 		// si on arrive de base/trouver_table, on a la cle primaire :
 		// s'en servir pour extrapoler le type
-		if (isset($desc['key']["PRIMARY KEY"])){
-			$primary = $desc['key']["PRIMARY KEY"];
+		if (isset($infos['key']["PRIMARY KEY"])){
+			$primary = $infos['key']["PRIMARY KEY"];
 			$primary = explode(',',$primary);
 			$primary = reset($primary);
 			$infos['type'] = preg_replace(',^spip_|^id_|s$,', '', $primary);
