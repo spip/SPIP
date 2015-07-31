@@ -47,6 +47,7 @@ $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 $chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
+$ecraser_cache = false;
 
 if (!$use_cache OR !defined("_ECRIRE_INC_META_CACHE")) {
 	include_ecrire("inc_meta.php3");
@@ -85,13 +86,16 @@ if (!$use_cache) {
 
 	$calculer_cache = true;
 
-	// redirection d'article via le chapo =http...
+	// Gestion '=chapo'
+	// + ne pas cacher si l'URL d'un article est demande avant sa publication
+	// (une seule requete, deux usages)
 	if ($id_article = intval($id_article)) {
-		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
+		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article' AND statut='publie'";
 		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
-			$chapo = $row['chapo'];
-		}
+		$row = spip_fetch_array($result);
+		if (!$row)
+			$ecraser_cache = true;
+
 		if (substr($chapo, 0, 1) == '=') {
 			include_ecrire('inc_texte.php3');
 
@@ -133,8 +137,10 @@ if ($var_recherche AND $flag_ob AND $flag_pcre AND !$flag_preserver AND !$mode_s
 // Inclusion du cache pour envoyer la page au client
 //
 
-$effacer_cache = !$delais; // $delais peut etre modifie par une inclusion de squelette...
+$effacer_cache = !$delais;
+$effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est pas publie
 
+// envoyer les entetes
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
 	if ($lastmodified) {
 		@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastmodified)." GMT");
@@ -147,25 +153,20 @@ else {
 	@Header("Pragma: no-cache");
 }
 
+// envoyer la page
 if (file_exists($chemin_cache) && ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'HEAD')) {
 	include ($chemin_cache);
 }
 
 
-//
 // suite et fin mots en rouge
-//
-
 if ($var_recherche) {
 	fin_surligne($var_recherche, $mode_surligne);
 	$timeout = true; // risque timeout
 }
 
 
-//
 // nettoie
-//
-
 if ($effacer_cache) @unlink($chemin_cache);
 
 
