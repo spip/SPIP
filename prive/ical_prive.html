@@ -10,12 +10,12 @@ VERSION:2.0
 X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
 X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]_prive<BOUCLE_article(ARTICLES){lang_select=non}{par date}{inverse}{statut="prop"}>
 BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:info_a_valider:>
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:info_a_valider|filtrer_ical:>
 UID:article#ID_ARTICLE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART;VALUE=DATE:[(#DATE|affdate{"Ymd"})]
-CATEGORIES:<:info_a_valider:>
-URL:[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE})]
+CATEGORIES:<:info_a_valider|filtrer_ical:>
+URL:[(#URL_ECRIRE*{articles, id_article=#ID_ARTICLE})]
 END:VEVENT</BOUCLE_article>
 BEGIN:VTODO
 SUMMARY:<:info_articles_a_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
@@ -24,15 +24,15 @@ DESCRIPTION:<BOUCLE_article2(ARTICLES){lang_select=non}{par date}{inverse}{statu
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 CATEGORIES:<:icone_a_suivre|filtrer_ical:>
-URL:[(#URL_ECRIRE{accueil})]
+URL:[(#URL_ECRIRE*{accueil})]
 END:VTODO</B_article><BOUCLE_breve(BREVES){lang_select=non}{par date}{inverse}{statut="prop"}>
 BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:breves:item_breve_proposee:>
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:breves:item_breve_proposee|filtrer_ical:>
 UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
-CATEGORIES:<:breves:item_breve_proposee:>
-URL:URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}
+CATEGORIES:<:breves:item_breve_proposee|filtrer_ical:>
+URL:URL_ECRIRE*{breves_voir, id_breve=#ID_BREVE}
 END:VEVENT</BOUCLE_breve>
 BEGIN:VTODO
 SUMMARY:<:breves:info_breves_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
@@ -41,7 +41,7 @@ DESCRIPTION:<BOUCLE_breve2(BREVES){lang_select=non}{par date}{inverse}{statut="p
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 CATEGORIES:<:icone_a_suivre|filtrer_ical:>
-URL:[(#URL_ECRIRE{accueil})]
+URL:[(#URL_ECRIRE*{accueil})]
 END:VTODO</B_breve>
 <BOUCLE_message_rv(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{auteurs_messages.id_auteur=#ID_AUTEUR}>
 BEGIN:VEVENT
@@ -52,7 +52,7 @@ DTSTAMP:[(#DATE_HEURE|date_ical)]
 DTSTART:[(#DATE_HEURE|date_ical)]
 DTEND:[(#DATE_FIN|date_ical)]
 CATEGORIES:<:info_pense_bete|filtrer_ical:>
-URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+URL:[(#URL_ECRIRE*{message, id_message=#ID_MESSAGE})]
 END:VEVENT</BOUCLE_message_rv>
 <BOUCLE_message_rv_tous(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{type=affich}>
 BEGIN:VEVENT
@@ -63,7 +63,7 @@ DTSTAMP:[(#DATE_HEURE|date_ical)]
 DTSTART:[(#DATE_HEURE|date_ical)]
 DTEND:[(#DATE_FIN|date_ical)]
 CATEGORIES:<:info_annonce|filtrer_ical:>
-URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+URL:[(#URL_ECRIRE*{message, id_message=#ID_MESSAGE})]
 END:VEVENT</BOUCLE_message_rv_tous>
 <BOUCLE_message_pb(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{type=pb}{id_auteur=#ID_AUTEUR}>
 BEGIN:VTODO
@@ -73,7 +73,7 @@ UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE_HEURE|date_ical)]
 DTSTART:[(#DATE_HEURE|date_ical)]
 CATEGORIES:<:info_pense_bete|filtrer_ical:>
-URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+URL:[(#URL_ECRIRE*{message, id_message=#ID_MESSAGE})]
 END:VTODO</BOUCLE_message_pb>
 <BOUCLE_message_n(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{vu=non}{type=normal}{auteurs_messages.id_auteur=#ID_AUTEUR}>
 BEGIN:VTODO
@@ -88,7 +88,7 @@ UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE_HEURE|date_ical)]
 DTSTART:[(#DATE_HEURE|date_ical)]
 CATEGORIES:<:info_message_2|filtrer_ical:>
-URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+URL:[(#URL_ECRIRE*{message, id_message=#ID_MESSAGE})]
 <BOUCLE_message_n_a(AUTEURS auteurs_messages){lang_select=non}{id_message}>[(#ID_AUTEUR
 |=={#ENV{id_auteur}}|?{ORGANIZER,ATTENDEE})]:[(#NOM|filtrer_ical)][ <(#EMAIL|filtrer_ical)>]
 </BOUCLE_message_n_a>END:VTODO</BOUCLE_message_n>
@@ -103,7 +103,7 @@ DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 DTEND:[(#DATE|date_ical{60})]
 CATEGORIES:<:icone_forum_suivi|filtrer_ical:>
-URL:[(#URL_ECRIRE{controle_forum, debut_id_forum=#ID_FORUM})]
+URL:[(#URL_ECRIRE*{controle_forum, debut_id_forum=#ID_FORUM})]
 END:VEVENT</BOUCLE_forum>
 BEGIN:TODO
 SUMMARY:[(#NOM_SITE_SPIP|filtrer_ical)]] <:icone_forum_suivi|filtrer_ical:>
@@ -111,7 +111,7 @@ UID:forum#ID_FORUM @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 CATEGORIES:<:icone_forum_suivi|filtrer_ical:>
-URL:[(#URL_ECRIRE{controle_forum})]
+URL:[(#URL_ECRIRE*{controle_forum})]
 END:TODO
 </B_forum><?php } ?>
 END:VCALENDAR
