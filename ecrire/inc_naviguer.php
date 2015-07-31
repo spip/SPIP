@@ -30,7 +30,14 @@ function naviguer_dist($action)
 	if ($flag_editable AND $action) {
 		$fonc = 'enregistre_' . $action . '_naviguer';
 		if (function_exists($fonc)) {
-			$res = $fonc($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace);
+			$res = $fonc(
+				intval($id_rubrique),
+				intval($id_parent),
+				$titre,
+				$texte,
+				$descriptif,
+				$changer_lang
+			);
 			if ($res) $id_rubrique = $res;
 
 			// toute action entraine ceci:
@@ -468,7 +475,7 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 }
 
 
-function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 	unset($_POST['id_parent']);
@@ -477,7 +484,7 @@ function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte,
 	return $id_parent;;
 }
 
-function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	if ($changer_lang
 	AND $id_rubrique>0
@@ -497,7 +504,7 @@ function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte,
 		}
 }
 
-function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	  // retour de spip_image
 	  // i.e. document/logo ajoute/supprime/tourne
@@ -505,7 +512,7 @@ function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre
 	  // mais il faudrait s'en dispenser dans le cas "tourne" etc
 }
 
-function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	$id_rubrique = spip_abstract_insert("spip_rubriques", 
 		"(titre, id_parent)",
@@ -518,19 +525,29 @@ function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $de
 	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
 }
 
-function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
-	// que si $confirme_deplace == 'oui'
-
-	if ($GLOBALS['confirme_deplace'] != 'oui') $id_parent = 0;
+	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
+	// breves en question
+	if ($GLOBALS['confirme_deplace'] == 'oui'
+	AND $id_parent > 0) {
+		list($id_secteur) = spip_fetch_array(spip_query(
+			"SELECT id_secteur FROM spip_rubriques
+			WHERE id_rubrique=$id_parent"));
+		if ($id_secteur)
+			spip_query("UPDATE spip_breves
+				SET id_rubrique=$id_secteur
+				WHERE id_rubrique=$id_rubrique");
+	} else
+		$id_parent = 0;
 
 	if ($GLOBALS['champs_extra']) {
 			  include_ecrire("inc_extra.php3");
 			  $GLOBALS['champs_extra'] = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
 		}
 	spip_query("UPDATE spip_rubriques SET " .
-		   (acces_rubrique($id_parent) ? "id_parent='$id_parent'," : "") . "
+		   (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "
 titre='" . addslashes($titre) ."',
 descriptif='" . addslashes($descriptif) . "',
 texte='" . addslashes($texte) . "'
