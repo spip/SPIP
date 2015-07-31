@@ -67,7 +67,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
  * la table concernee
  * retourne null si on ne trouve pas la table
  */
-function description_type_requete($type, $serveur) {
+function description_type_requete($type, $serveur='') {
 	global $table_des_tables, $tables_des_serveurs_sql;
 
 	if (!$serveur) {
