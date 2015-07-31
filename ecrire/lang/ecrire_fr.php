@@ -418,7 +418,6 @@ exige d’avoir un accès FTP au site Web.</p>',
 	'info_modifier_titre' => 'Modifier : @titre@',
 	'info_mon_site_spip' => 'Mon site SPIP',
 	'info_mot_sans_groupe' => '(Mots sans groupe...)',
-	'info_moteur_recherche' => 'Moteur de recherche intégré',
 	'info_moyenne' => 'moyenne :',
 	'info_multi_articles' => 'Activer le menu de langue sur les articles ?',
 	'info_multi_cet_article' => 'Langue de cet article :',
@@ -502,14 +501,10 @@ exige d’avoir un accès FTP au site Web.</p>',
   hébergeurs désactivent l’envoi de mails depuis leurs
   serveurs : dans ce cas, l’inscription automatique est
   impossible.</div>',
-	'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
-	(le désactiver accélère le fonctionnement du système.)',
 	'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d’origine des visites',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes',
 	'info_racine_site' => 'Racine du site',
 	'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.',
-	'info_recherche_auteur_a_affiner' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
-	'info_recherche_auteur_ok' => 'Plusieurs rédacteurs trouvés pour "@cherche_auteur@" :',
 	'info_recherche_auteur_zero' => 'Aucun résultat pour « @cherche_auteur@ ».',
 	'info_recommencer' => 'Veuillez recommencer.',
 	'info_redacteur_1' => 'Rédacteur',
@@ -639,7 +634,6 @@ dans une couleur qui indique leur état :',
 	'item_choix_redacteurs' => 'les rédacteurs',
 	'item_choix_visiteurs' => 'les visiteurs du site public',
 	'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd',
-	'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site',
 	'item_login' => 'Login',
 	'item_messagerie_agenda' => 'Activer la messagerie et l’agenda',
 	'item_mots_cles_association_articles' => 'aux articles',
@@ -655,16 +649,13 @@ dans une couleur qui indique leur état :',
 	'item_non_compresseur' => 'Désactiver la compression',
 	'item_non_creer_fichiers_authent' => 'Ne pas créer ces fichiers',
 	'item_non_gerer_statistiques' => 'Ne pas gérer les statistiques',
-	'item_non_limiter_recherche' => 'Étendre la recherche au contenu des sites référencés',
 	'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda',
 	'item_non_publier_articles' => 'Ne pas publier les articles avant la date de publication fixée.',
-	'item_non_utiliser_moteur_recherche' => 'Ne pas utiliser le moteur',
 	'item_nouvel_auteur' => 'Nouvel auteur',
 	'item_nouvelle_rubrique' => 'Nouvelle rubrique',
 	'item_oui' => 'Oui',
 	'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.',
 	'item_reponse_article' => 'Réponse à l’article',
-	'item_utiliser_moteur_recherche' => 'Utiliser le moteur de recherche',
 	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public',
 	'item_version_html_max_html5' => 'Permettre le HTML5',
 	'item_visiteur' => 'visiteur',
@@ -851,9 +842,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	'texte_choix_base_2' => 'Le serveur SQL contient plusieurs bases de données.',
 	'texte_choix_base_3' => '<b>Sélectionnez</b> ci-après celle qui vous a été attribuée par votre hébergeur :',
 	'texte_choix_table_prefix' => 'Préfixe des tables :',
-	'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d’indexation utilisées
-			par le moteur de recherche intégré à SPIP. Cela vous permettra
-			de gagner de l’espace disque.',
 	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d’utiliser les possibilités plus modernes du <i>HTML5</i>.',
 	'texte_compatibilite_html_attention' => 'Il n’y a aucun risque à activer l’option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt; !DOCTYPE html&gt;</code>.',
 	'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)',
@@ -904,12 +892,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	Il faut maintenant mettre à niveau la base de données
 	du site.',
 	'texte_modifier_article' => 'Modifier l’article :',
-	'texte_moteur_recherche_active' => '<b>Le moteur de recherche est activé.</b> Utilisez cette commande
-		si vous souhaitez procéder à une réindexation rapide (après restauration
-		d’une sauvegarde par exemple). Notez que les documents modifiés de
-		façon normale (depuis l’interface SPIP) sont automatiquement
-		réindexés : cette commande n’est donc utile que de façon exceptionnelle.',
-	'texte_moteur_recherche_non_active' => 'Le moteur de recherche n’est pas activé.',
 	'texte_multilinguisme' => 'Si vous souhaitez gérer des objets en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur ces objets, en fonction de l’organisation de votre site.',
 	'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions sur certains objets.',
 	'texte_non_compresse' => '<i>non compressé</i> (votre serveur ne supportant pas cette fonctionnalité)',
@@ -973,23 +955,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 		Cette option est désactivée par défaut
 		afin d’éviter d’afficher des messages d’avertissement
 		intempestifs.',
-	'texte_trop_resultats_auteurs' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
 	'texte_unpack' => 'téléchargement de la dernière version',
-	'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche intégré
-    à SPIP, vous pouvez effectuer les recherches sur les sites et
-    les articles syndiqués de deux manières
-    différentes. <br />- La plus
-    simple consiste à rechercher uniquement dans les
-    titres et les descriptifs des articles. <br />-
-    Une seconde méthode, beaucoup plus puissante, permet
-    à SPIP de rechercher également dans le texte des
-    sites référencés . Si vous
-    référencez un site, SPIP va alors effectuer la
-    recherche dans le texte du site lui-même.',
-	'texte_utilisation_moteur_syndiques_2' => 'Cette méthode oblige SPIP à visiter
-				régulièrement les sites référencés,
-				ce qui peut provoquer un léger ralentissement de votre propre
-				site.',
 	'texte_vide' => 'vide',
 	'texte_vider_cache' => 'Vider le cache',
 	'titre_admin_effacer' => 'Maintenance technique',
