@@ -186,7 +186,7 @@ i rekon&eacute; pa li ast&egrave;r.',
 
 // D
 'date_avant_jc' => 'avan J.C.',
-'date_fmt_heures_minutes' => '@heure@&egrave;r@m@min',
+'date_fmt_heures_minutes' => '@h@&egrave;r@m@min',
 'date_fmt_jour_heure' => '@jour@ a @heure@',
 'date_fmt_jour_mois' => '@jour@ @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
