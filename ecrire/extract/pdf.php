@@ -22,13 +22,13 @@ function extracteur_pdf($fichier, &$charset) {
 	$charset = 'iso-8859-1';
 
 	# metamail
-	exec('metamail -d -q -b -c application/pdf '.escapeshellarg($fichier), $r, $e);
+	@exec('metamail -d -q -b -c application/pdf '.escapeshellarg($fichier), $r, $e);
 	if (!$e) return @join(' ', $r);
 
 	# pdftotext
 	# http://www.glyphandcog.com/Xpdf.html
 	# l'option "-enc utf-8" peut echouer ... dommage !
-	exec('pdftotext '.escapeshellarg($fichier).' -', $r, $e);
+	@exec('pdftotext '.escapeshellarg($fichier).' -', $r, $e);
 	if (!$e) return @join(' ', $r);
 }
 
