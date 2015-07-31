@@ -1240,8 +1240,9 @@ else {
 	}
 
 	if ($supplement && function_exists(champs_supplement)) {
+		$champs_suppl=champs_supplement("article", $id_article, $id_rubrique);
 		include_ecrire("inc_supplement.php3");
-		supplement_affichage($supplement);
+		supplement_affichage($supplement, $champs_suppl);
 	}
 }
 
