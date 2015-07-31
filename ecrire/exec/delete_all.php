@@ -67,7 +67,6 @@ spip_query("DROP TABLE spip_ortho_cache");
 spip_query("DROP TABLE spip_ortho_dico");
 spip_query("DROP TABLE spip_versions");
 spip_query("DROP TABLE spip_versions_fragments");
-spip_query("DROP TABLE spip_ajax_fonc");
 
 
 // un pipeline pour DROP les tables installees par les plugins

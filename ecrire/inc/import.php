@@ -30,7 +30,6 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 }
 
 global $IMPORT_tables_noerase;
-$IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 

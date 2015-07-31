@@ -674,7 +674,7 @@ function afficher_articles($titre, $requete, $formater='') {
 
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
-	// memorisation des arguments pour gérer l'affichage par tranche
+	// memorisation des arguments pour gerer l'affichage par tranche
 	// et/ou par langues.
 
 	$hash = substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
@@ -682,23 +682,34 @@ function afficher_articles($titre, $requete, $formater='') {
 	$nb_aff = floor(1.5 * _TRANCHES);
 	$deb_aff = intval(_request($tmp_var));
 
-	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=0x$hash LIMIT 1");
+	//
+	// Stocke la fonction ajax dans le fichier temp pour exec=memoriser
+	//
 
-	if ($row = spip_fetch_array($res_proch)) {
-		$id_ajax = $row["id_ajax_fonc"];
-	} else  {
-		if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-		$v = serialize(array($titre, $requete, $tmp_var, $formater));
+	// on lit l'existant
+	lire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt', $ajax_fonctions);
+	$ajax_fonctions = @unserialize($ajax_fonctions);
 
-		include_spip ('base/abstract_sql');
-		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, date)", "(" . _q($v) . ", 0x$hash, NOW())");
-	}
+	// on ajoute notre fonction
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
+	$v = array(time(), $titre, $requete, $tmp_var, $formater);
+	$ajax_fonctions[$hash] = $v;
 
-	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $id_ajax, $cpt);
+	// supprime les fonctions trop vieilles
+	foreach ($ajax_fonctions as $h => $fonc)
+		if (time() - $fonc[0] > 48*3600)
+			unset($ajax_fonctions[$h]);
+
+	// enregistre
+	ecrire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt',
+		serialize($ajax_fonctions));
+
+
+	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $hash, $cpt);
 }
 
 // http://doc.spip.org/@afficher_articles_trad
-function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id_ajax, $cpt, $trad=0) {
+function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $hash, $cpt, $trad=0) {
 
 	global $options, $spip_lang_right;
 
@@ -728,7 +739,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	$texte = http_img_pack("searching.gif", "", $style . " id='img_$tmp_var'");
 
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
-		$url = generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=" . (1-$trad));
+		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
 		$texte .= 
 		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
 		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></span>";
@@ -740,7 +751,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	. bandeau_titre_boite2($texte, "article-24.gif", 'white', 'black',false)
 
 	. (($cpt <= $nb_aff) ? ''
-	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "id_ajax_fonc=$id_ajax&trad=$trad"), $nb_aff))
+	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
 	. afficher_liste_debut_tableau()
 	. $t
 	. afficher_liste_fin_tableau()

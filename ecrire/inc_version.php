@@ -284,7 +284,7 @@ $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.923;
+$spip_version = 1.924;
 
 // version de spip en chaine
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
