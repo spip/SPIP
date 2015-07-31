@@ -73,83 +73,76 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	$items = array();
 	$result = sql_select($req_sel, $req_from, $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
 	while ($row = sql_fetch($result)) {
-			$id_version = $row['id_version'];
-			$id_auteur = $row['id_auteur'];
-			$date = $row['date'];
 			$id_article = $row['id_article'];
 			if (autoriser('voir','article',$id_article)){
 				$statut = $row['statut'];
+				$id_version = $row['id_version'];
+				$id_auteur = $row['id_auteur'];
+				$date = $row['date'];
 				$titre = typo(supprime_img($row['titre'],''));
 				
 				// l'id_auteur peut etre un numero IP (edition anonyme)
 				if ($id_auteur == intval($id_auteur)
-				AND $row_auteur = sql_fetsel('nom,email', 'spip_auteurs', "id_auteur = '".addslashes($id_auteur)."'")) {
+				AND $row_auteur = sql_fetsel('nom,email', 'spip_auteurs', "id_auteur = ".sql_quote($id_auteur))) {
 					$nom = typo($row_auteur["nom"]);
 					$email = $row_auteur['email'];
 				} else {
 					$nom = $id_auteur;
 					$email = '';
 				}
-		
-				if (!$rss) {
 
-					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
-		
-					$titre_bouton = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
-					if (!$court) {
-						$bouton_id = "b$id_version-$id_article-$id_auteur";
-						$revisions .= bouton_block_depliable($titre_bouton,false,$bouton_id);
-					} else
-						$revisions .= $titre_bouton;
-				} else {
-					$item = array(
+				if ($rss) {
+					$items[] = array(
+						'texte' => revisions_diff ($id_article, $id_version),
 						'titre' => $titre,
 						'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
 						'date' => $date,
 						'nom' => $nom,
 						'email_auteur' => $email
 					);
-				}
-	
-				// "court" n'affiche pas les modifs
-				if (!$court) {
-					$textes = revision_comparee($id_article, $id_version, 'diff');
-					if (!$rss)
-						$revisions .= debut_block_depliable(false,$bouton_id);
-	
-					if (is_array($textes))
-					foreach ($textes as $var => $t) {
-						if (strlen($t) > 0) {
-							if (!$rss) $revisions .= "<blockquote class='serif1'>";
-							$aff = propre_diff($t);
-							if ($GLOBALS['les_notes']) {
-								$aff .= '<p>'.$GLOBALS['les_notes'].'</p>';
-								$GLOBALS['les_notes'] = '';
-							}
-							if (!$rss) {
-								$revisions .= $aff;
-								$revisions .= "</blockquote>";
-							} else
-								$item['texte'] = $aff;
-						}
+				} else {
+					$aff = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
+					if (!$court) {
+						$bouton_id = "b$id_version-$id_article-$id_auteur";
+						$aff = bouton_block_depliable($aff,false,$bouton_id)
+						  . debut_block_depliable(false,$bouton_id)
+						  . revisions_diff ($id_article, $id_version, $court)
+						  . fin_block();
 					}
-					if (!$rss) $revisions .= fin_block();
+					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>$aff</div>";
 				}
-				
-				if (!$rss) $revisions .= "</div>";
-	
-				else $items[] = $item;
 			}
-	}		
-
-	if ($rss)
-		return $items;
+	}
+	if ($rss) return $items;
 	elseif (!$revisions) return '';
 	else return 
 	  revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $req_from, $req_where, $uniq_auteur)
 	  . $revisions
 	  . fin_block()
 	  . fin_cadre();
+}
+
+function revisions_diff ($id_article, $id_version, $court=true)
+{
+	$textes = revision_comparee($id_article, $id_version, 'diff');
+	if (!is_array($textes)) return $textes;
+	$rev = '';
+	$nb = 0;
+	foreach ($textes as $var => $t) {
+		if ($n=strlen($t)) {
+			if ($court)
+				$nb += $n;
+			else {
+				$aff = propre_diff($t);
+				if ($GLOBALS['les_notes']) {
+					$aff .= '<p>'.$GLOBALS['les_notes'].'</p>';
+					$GLOBALS['les_notes'] = '';
+				}
+				$rev .= "<blockquote class='serif1'>$aff</blockquote>";
+			}
+		}
+	}
+	return $court ? _T('taille_octets', array('taille' => $nb)) : $rev;
 }
 
 // http://doc.spip.org/@revisions_bouton
