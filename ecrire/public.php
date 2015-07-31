@@ -92,7 +92,8 @@ if (defined('_INC_PUBLIC')) {
 
 	// est-on admin ?
 	if ($affiche_boutons_admin = (
-	$_COOKIE['spip_admin']
+	$_COOKIE['spip_admin'] 
+	AND !$flag_preserver
 	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
 	))
 		include_spip('balise/formulaire_admin');

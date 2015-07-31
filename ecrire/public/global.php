@@ -261,6 +261,9 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 
 		if (is_array($page['entetes']))
 			foreach($page['entetes'] as $k => $v) {
+			  // ceci se discute
+			  // if ((strtolower($k) != 'content-type')
+			  // OR !isset( $GLOBALS['page']['entetes'][$k])
 				$GLOBALS['page']['entetes'][$k] = $v;
 			}
 
