@@ -1780,9 +1780,9 @@ function debloquer_article($arg, $texte) {
 // http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
-	// une divergence a propos du ratio utilite/dangerosite de ce menu
-	// provoque *temporairement* l'ajout ici d'un switch
-	define('_MODE_MEME_RUBRIQUE', 'ok'); // propose de tout publier + nombre d'elements
+	// propose de tout publier + nombre d'elements
+	// du code experimental qu'on peut activer via un switch
+	define('_MODE_MEME_RUBRIQUE', 'non');
 
 	global $options;
 
@@ -1808,7 +1808,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
 
-	if (_MODE_MEME_RUBRIQUE == 'ok') {
+	if (_MODE_MEME_RUBRIQUE == 'oui') {
 		$type = 'rubrique_' . $table;
 		$statut = 'prop';// arbitraire
 		$puce_rubrique = puce_statut_article(0, $statut, $id_rubrique, $type).'&nbsp;';
@@ -1834,7 +1834,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour;
 	
-	if (_MODE_MEME_RUBRIQUE == 'ok')
+	if (_MODE_MEME_RUBRIQUE == 'oui')
 	$retour .= (($limit <= 0) ? ''
 		: "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
 
