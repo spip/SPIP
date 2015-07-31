@@ -261,7 +261,7 @@ function spip_query($query) {
 // a demenager dans base/abstract_sql a terme
 
 function spip_abstract_quote($arg_sql) {
-	return (is_numeric($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
+	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
