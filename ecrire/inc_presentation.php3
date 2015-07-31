@@ -1790,10 +1790,10 @@ function envoi_link($nom_site_spip, $rubrique="")
 
 	$res = "";
 	if ($spip_display != 4) {
-	  $res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='" . generer_url_ecrire("$adresse_site/backend","") . "'>\n";
+	  $res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='" . generer_url_public('backend') . "'>\n";
 		if ($GLOBALS['meta']["activer_breves"] != "non")
 			$res .= "\n<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").
-			  ")' href='" . generer_url_ecrire("$adresse_site/backend-breves","") . "'>\n";
+			  ")' href='" . generer_url_public('backend-breves') . "'>\n";
 	}
 
 	return $res .
