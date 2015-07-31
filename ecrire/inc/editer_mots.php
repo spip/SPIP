@@ -252,8 +252,11 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	if (count($les_mots)>= 3) {
 		$ok = true;
 		foreach ($id_groupes_vus as $id_groupe)
-			$ok &= autoriser('editermots', $objet, $id_objet, null,
-					array('id_groupe'=>$id_groupe,'groupe_champs'=>$row));
+			if (!autoriser('editermots', $objet, $id_objet, null,
+					array('id_groupe'=>$id_groupe))) {
+				$ok = false;
+				break;
+			}
 		if ($ok)
 			$res .= "<div style='text-align: right' class='arial1'>"
 				. ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")

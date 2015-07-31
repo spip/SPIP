@@ -685,17 +685,15 @@ function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_rubrique_editermots_dist
 function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	// on recupere les champs du groupe s'ils ne sont pas passes en opt
-	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	if (!isset($opts['groupe_champs'])){
 		if (!$id_groupe = $opts['id_groupe'])
 			return false;
 		include_spip('base/abstract_sql');
 		$opts['groupe_champs'] = sql_fetsel("*", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 	}
-	$droit = $opts['groupe_champs'][$droit];
 
 	return
-		($droit == 'oui')
+		($opts['groupe_champs'][substr($qui['statut'],1)] == 'oui')
 		AND
 		// on verifie que l'objet demande est bien dans les tables liees
 		in_array(
