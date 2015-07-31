@@ -137,11 +137,8 @@ function critere_fragment_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@recherche
 // http://doc.spip.org/@critere_recherche_dist
 function critere_recherche_dist($idb, &$boucles, $crit) {
-	global $table_des_tables;
+
 	$boucle = &$boucles[$idb];
-	$t = $boucle->id_table;
-	if (in_array($t,$table_des_tables))
-		$t = "spip_$t";
 
 	if (isset($crit->param[0]))
 		$quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
@@ -152,7 +149,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$boucle->hash = '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
-	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
+	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "", "'.$crit->cond.'");
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}
@@ -236,7 +233,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@branche
 // http://doc.spip.org/@critere_branche_dist
 function critere_branche_dist($idb, &$boucles, $crit) {
-	global $table_des_tables;
+
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
 
