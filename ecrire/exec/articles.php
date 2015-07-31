@@ -331,7 +331,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site OR $url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; font-size: 11px;' class='Verdana1'>"
+		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; font-size: 12px;' class='Verdana1'>"
 		. propre($texte_case)
 		. "</div>";
 	}

@@ -350,7 +350,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	echo "<tr><td>"; # uniques
 
 	echo "<span style='font-size: 14px; color: $la_couleur' class='verdana1'><b>$le_type</b></span><br />";
-	echo "<span style='font-size: 20px;' class='verdana1'><b>$titre</b></span>";
+	echo "<span style='font-size: 18px;' class='verdana1'><b>$titre</b></span>";
 	if ($statut == 'redac') {
 		echo "<br /><span style='font-size: 14px; color: red;' class='verdana1'><b>"._T('info_redaction_en_cours')."</b></span>";
 	}

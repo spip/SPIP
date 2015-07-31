@@ -134,7 +134,7 @@ function exec_naviguer_dist()
 function infos_naviguer($id_rubrique, $statut)
 {
 	if ($id_rubrique > 0) {
-		$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>"
+		$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>"
 		  .  _T('titre_numero_rubrique')
 		  . "<br /><span style='font-size: 32px;'>"
 		  . $id_rubrique

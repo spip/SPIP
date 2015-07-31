@@ -1720,7 +1720,7 @@ function liste_articles_bloques()
 				$res .= "\n<div class='$statut'><a style='font-size: 10px;' href='" 
 				. generer_url_ecrire("articles","id_article=$ze_article")
 				. "'>$ze_titre</a>"
-				. "\n<div style='text-align:right; font-size: 9px;'>"
+				. "\n<div style='text-align:right; font-size: 10px;'>"
 				. debloquer_article($ze_article,_T('lien_liberer'))
 				. "</div>"
 				. "</div>";
@@ -1748,7 +1748,7 @@ function fin_page()
 			. "'>"
 			.  _T("access_interface_graphique")
 			. "</a></div>")
-		: ("<div style='text-align: right; font-size: 11px' class='verdana1'>"
+		: ("<div style='text-align: right; font-size: 10px' class='verdana1'>"
 			. info_copyright()
 			. "<br />"
 			. _T('info_copyright_doc')
@@ -1821,7 +1821,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	. '&nbsp;<b>' . _T('info_meme_rubrique')  . '</b>';
 
 	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
-	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
+	. "\n<table style='font-size: 12px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
 	. (($limit <= 0) ? ''
 	 : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")

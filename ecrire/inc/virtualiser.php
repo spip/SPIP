@@ -23,7 +23,7 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 
 	$http = ($virtuel ? "" : "http://");
 	$t = _T('texte_reference_mais_redirige');
-	$res = "<input type='text' name='virtuel' class='formo' style='font-size:9px;' value='"
+	$res = "<input type='text' name='virtuel' class='formo' style='font-size: 10px;' value='"
 	. $http
 	. $virtuel
 	. "' size='40' /><br />\n"

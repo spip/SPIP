@@ -114,7 +114,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 
 	if (!$id_auteur) return '';
 
-	$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>" 
+	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>" 
 	. _T('titre_cadre_numero_auteur')
 	. "<br /><span style='font-size: 32px;'>"
 	. $id_auteur
