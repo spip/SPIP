@@ -27,8 +27,9 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 	if ($r = quete_rubrique_fond($contexte))
 		list($id_rubrique, $lang) = $r;
 
-
 	// trouver un squelette du nom demande
+	// ne rien dire si on ne trouve pas, 
+	// c'est l'appelant qui sait comment gerer la situation
 	$base = find_in_path("$fond.$ext");
 	
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
@@ -46,15 +47,6 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 		),
 		'data' => $squelette,
 	));
-
-	// pas de squelette : erreur !
-	if (!$squelette) {
-		erreur_squelette(array('info_erreur_squelette2',
-			array('fichier'=>"'$fond.$ext'")),
-			$GLOBALS['dossier_squelettes']);
-		// provoquer 404
-		return array(null, $ext, $ext, null);
-	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 }

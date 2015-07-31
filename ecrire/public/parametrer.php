@@ -53,27 +53,31 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	$select = ((!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang']) AND $lang <> $GLOBALS['spip_lang']);
 	if ($select) $select = lang_select($lang);
 
+	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
+
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
 		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect, _EXTENSION_SQUELETTES);
 
-	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
-	// sauver le nom de l'eventuel squelette en cours d'execution
-	// (recursion possible a cause des modeles)
-	if ($debug) {
-		$courant = @$GLOBALS['debug_objets']['courant'];
-		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
-	}
+	if ($skel) {
 
-	// charger le squelette en specifiant les langages cibles et source
-	// au cas il faudrait le compiler (source posterieure au resultat)
+		// sauver le nom de l'eventuel squelette en cours d'execution
+		// (recursion possible a cause des modeles)
+		if ($debug) {
+			$courant = @$GLOBALS['debug_objets']['courant'];
+			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
+		}
 
-	$composer = charger_fonction('composer', 'public');
-	$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
+		// charger le squelette en specifiant les langages cibles et source
+		// au cas il faudrait le compiler (source posterieure au resultat)
 
-	if (!$code) // squelette inconnu ou faux
-		$page = array();
-	else {
+		$composer = charger_fonction('composer', 'public');
+		$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
+	} else $code = '';
+
+	if (!$code) { // squelette inconnu (==='') ou faux (===false)
+		$page = $code;
+	} else {
 	// Preparer l'appel de la fonction principale du squelette 
 
 		list($fonc) = $code;
@@ -130,20 +134,20 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))
 			$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
-	}
 
-	$page['contexte'] = $contexte;
-	// faire remonter le fichier source
-	if ($GLOBALS['var_inclure'])
-		$page['sourcefile'] = $sourcefile;
+		$page['contexte'] = $contexte;
+		// faire remonter le fichier source
+		if ($GLOBALS['var_inclure'])
+			$page['sourcefile'] = $sourcefile;
+
+		// Si un modele contenait #SESSION, on note l'info dans $page
+		if (isset($GLOBALS['cache_utilise_session'])) {
+			$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
+			unset($GLOBALS['cache_utilise_session']);
+		}
+	}
 
 	if ($select) lang_select();
-
-	// Si un modele contenait #SESSION, on note l'info dans $page
-	if (isset($GLOBALS['cache_utilise_session'])) {
-		$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
-		unset($GLOBALS['cache_utilise_session']);
-	}
 
 	return $page;
 }
