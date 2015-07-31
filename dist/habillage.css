@@ -21,7 +21,6 @@ abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.90em; color: #666; }
 
 /* Listes SPIP */
-.spip_puce {} /*Cf.: spip_style.css*/
 ul.spip {} /*Cf.: spip_style.css*/
 ol.spip {} /*Cf.: spip_style.css*/
 li.spip {} /*Cf.: spip_style.css*/
@@ -33,7 +32,6 @@ blockquote.spip_poesie {} /*Cf.: spip_style.css*/
 .spip_cadre {} /*Cf.: spip_style.css*/
 
 /* Tableaux */
-table { border-collapse: collapse; border-spacing: 0; }
 table.spip {} /*Cf.: spip_style.css*/
 
 /* Logos, documents et images */
@@ -79,7 +77,8 @@ div#pied img { vertical-align: bottom; }
 /*  Habillage des elements du contenu
 /*  ------------------------------------------ */
 
-#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; color: #666; }
+#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; }
+#hierarchie, #hierarchie a { color: #666; }
 
 .surtitre, .soustitre { font-size: 0.90em; color: #999; }
 
@@ -90,7 +89,7 @@ div#pied img { vertical-align: bottom; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-.chapo { margin-bottom: 1.50em; font-weight: bold; color: #669; line-height: 1.40em; }
+.chapo { margin-bottom: 1.50em; line-height: 1.40em; font-weight: bold; color: #669; }
 .texte { line-height: 1.60em; }
 .hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 .ps, .notes { margin-bottom: 2em; line-height: 1.40em; }
