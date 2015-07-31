@@ -71,7 +71,7 @@ function renouvelle_alea() {
 	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
 	ecrire_meta('alea_ephemere', $alea, 'non');
 	ecrire_meta('alea_ephemere_date', time(), 'non');
-	spip_log("renouvellement de l'alea_ephemere: $alea");
+	spip_log("renouvellement de l'alea_ephemere");
 }
 
 //
