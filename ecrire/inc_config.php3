@@ -191,7 +191,9 @@ $test_proxy, $activer_moteur;
 
 		'activer_moteur',
 		'activer_statistiques',
-		'activer_statistiques_ref'
+		'activer_statistiques_ref',
+		
+		'charset'
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
