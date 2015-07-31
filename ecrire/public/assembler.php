@@ -425,13 +425,18 @@ function inclure_modele($squelette, $type, $id) {
 		}
 	}
 
+	// special img, doc, emb
+	if (in_array($type, array('img', 'doc', 'emb')))
+		$id_type = 'id_document';
+	else
+		$id_type = 'id_'.$type;
+
 	// en cas d'echec on passe la main au suivant
 	if (!find_in_path($fond.'.html'))
 		return false;
 
 	$contexte = array(
-		'id_'.$type => $id,
-		'fond' => $fond,
+		$id_type => $id,
 		'lang' => $GLOBALS['spip_lang']
 	);
 	if ($align)
@@ -439,7 +444,7 @@ function inclure_modele($squelette, $type, $id) {
 
 	if ($class)
 		$contexte['class'] = $class;
-
+print_r($contexte);
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte, 

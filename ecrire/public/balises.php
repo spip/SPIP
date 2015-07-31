@@ -454,17 +454,15 @@ function calculer_balise_expose($p, $on, $off)
 
 //
 // Inserer directement un document dans le squelette
-//
+// devient un alias de #EMB
 // http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
 function balise_EMBED_DOCUMENT_dist($p) {
 	balise_distante_interdite($p);
-	$_id_document = champ_sql('id_document',$p);
-	$p->code = "calcule_embed_document(intval($_id_document), " .
-	  argumenter_balise($p->fonctions, "|") .
-	  ", \$doublons, '" . $p->descr['documents'] . "')";
-	$p->param = array();
-	#$p->interdire_scripts = true;
-	return $p;
+	if (!function_exists($f = 'calculer_balise_modele'))
+		$f = 'calculer_balise_modele_dist';
+
+	$p->nom_champ = 'emb';
+	return $f($p);
 }
 
 // Debut et fin de surlignage auto des mots de la recherche
