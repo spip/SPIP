@@ -29,11 +29,10 @@ if ($cookie_session == "non") {
 }
 else if ($essai_login == "oui") {
 	// verifie l'auteur
-	if ($session_password_md5) $md5pass = $session_password_md5;
-	else $md5pass = md5($session_password);
-/*	echo "session_password = ".$session_password."<p>";
-	echo "session_password_md5 = ".$session_password_md5."<p>";
-	exit;*/
+	if ($session_password_md5)
+		$md5pass = $session_password_md5;
+	else
+		$md5pass = md5($session_password);
 
 	$login = addslashes($session_login);
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass'";
@@ -43,6 +42,7 @@ else if ($essai_login == "oui") {
 		if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
 			$cookie_admin = "@".$row_auteur['login'];
 		}
+		if ($zap_sessions) zap_sessions($row_auteur['login'], true);
 		$cookie_session = creer_cookie_session($row_auteur);
 		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
 	}

@@ -131,37 +131,30 @@ function creer_cookie_session($auteur) {
 	}
 }
 
-
-function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
-	if ($GLOBALS['flag_ecrire']) $dir = "../";
-	if (!$redirect_echec) $redirect_echec = $redirect;
-
-	// Inclure les fonctions de calcul du MD5
-	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-
-	echo "<form action='$dir"."spip_cookie.php3' method='post'";
-
-	// Javascript, calculer le MD5 au submit et vider le mot de passe en clair
-	echo " onSubmit='this.session_password_md5.value = calcMD5(this.session_password.value); this.session_password.value = \"\";'";
-
-	echo ">\n";
-	echo "<fieldset>\n";
-
-	echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
-	echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'><p>\n";
-
-	echo "<label><b>Mot de passe</b><br></label>";
-	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
-
-	echo "<input type='hidden' name='essai_login' value='oui'>\n";
-	echo "<input type='hidden' name='redirect' value='$redirect'>\n";
-	echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
-	echo "<input type='hidden' name='session_password_md5' value=''>\n";
-	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
-
-	echo "</fieldset>\n";
-
-	echo "</form>";
+//
+// sessions a zapper (login, zapper oui/non)
+// (un peu crado car lecture obligatoire de toutes les sessions... pour simplifier
+//  il faudrait renommer les sessions en session_login_alea.php3 ? Noter aussi que
+//  en attendant le login est lu directement sur la ligne 3 du fichier de session)
+function zap_sessions ($login, $zap) {
+	if ($GLOBALS['flag_ecrire']) {
+		$dirname = "data/";
+	} else {
+		$dirname = "ecrire/data/";
+	}
+	$dir = opendir($dirname);
+	while(($item = readdir($dir)) != ''){
+		if (ereg("^session_[a-z0-9]+\.php3$", $item)) {
+			$session = file("$dirname$item");
+			if (ereg("GLOBALS\['auteur_session'\]\['login'\] = '$login'", $session[3])) {
+				if ($zap) {
+					@unlink("$dirname$item");
+				} else {
+					return true;
+				}
+			}
+		}
+	}
 }
 
 ?>
