@@ -304,6 +304,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	// recuperer la base
 	$a = array_shift($url);
+	if (!$a) $a= './';
 
 	// ajout de la globale ?
 	if ($v === NULL)
