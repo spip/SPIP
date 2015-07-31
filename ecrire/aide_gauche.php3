@@ -79,12 +79,12 @@ function article($titre, $lien, $statut = "redac") {
 	global $afficher;
 	global $les_rub;
 	global $aide_statut;
-	global $spip_lang_rtl;
+	global $spip_lang, $spip_lang_rtl;
 
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$ligne++;
 		$ancre = "a$ligne_rubrique";
-		$url = "aide_index.php3?aide=$lien&les_rub=$les_rub&ancre=$ancre";
+		$url = "aide_index.php3?aide=$lien&les_rub=$les_rub&ancre=$ancre&var_lang=$spip_lang";
 
 		$rubrique[$ligne]=$larubrique;
 
@@ -203,12 +203,12 @@ for ($i=0; $i<=count($texte); $i++) {
 			$supp_rub="$larubrique";
 
 			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide#a$i",$texte[$i]);
+			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide&var_lang=$spip_lang#a$i",$texte[$i]);
 		}
 		else {
 			$ajouter_rub="$larubrique";
 			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide#a$i",$texte[$i]);
+			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide&var_lang=$spip_lang#a$i",$texte[$i]);
 
 		}
 		echo $texte[$i]."\n";
