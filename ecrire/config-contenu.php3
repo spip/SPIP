@@ -64,7 +64,6 @@ if ($changer_config == 'oui') {
 	ecrire_meta("articles_ps", $articles_ps);
 	ecrire_meta("articles_redac", $articles_redac);
 	ecrire_meta("articles_mots", $articles_mots);
-	ecrire_meta("activer_statistiques", $activer_statistiques);
 	ecrire_meta("post_dates", $post_dates);
 	ecrire_meta("creer_preview", $creer_preview);
 	ecrire_meta("taille_preview", $taille_preview);

@@ -14,22 +14,6 @@ function mySel($varaut,$variable){
 }
 
 
-debut_page("Configuration du site", "administration", "configuration");
-
-echo "<br><br><br>";
-gros_titre("Configuration du site");
-barre_onglets("configuration", "fonctions");
-
-
-debut_gauche();
-
-debut_droite();
-
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
-	fin_page();
-	exit;
-}
 
 if ($changer_config == 'oui') {
 
@@ -59,6 +43,7 @@ if ($changer_config == 'oui') {
 	ecrire_meta("prevenir_auteurs", $prevenir_auteurs);
 	ecrire_meta("activer_messagerie", $activer_messagerie);
 	ecrire_meta("activer_imessage", $activer_imessage);
+	ecrire_meta("activer_statistiques", $activer_statistiques);
 
 	ecrire_meta("suivi_edito", $suivi_edito);
 	if ($adresse_suivi) ecrire_meta("adresse_suivi", $adresse_suivi);
@@ -84,6 +69,26 @@ else {
 }
 
 lire_metas();
+
+
+
+
+debut_page("Configuration du site", "administration", "configuration");
+
+echo "<br><br><br>";
+gros_titre("Configuration du site");
+barre_onglets("configuration", "fonctions");
+
+debut_gauche();
+
+debut_droite();
+
+if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
+	fin_page();
+	exit;
+}
+
 
 
 echo "<form action='config-fonctions.php3' method='post'>";
