@@ -46,8 +46,8 @@ function action_documenter_post($r)
 			}
 	}
 	if ($type == 'rubrique') {
-			include_spip('inc/rubriques');
-			calculer_rubriques();
+		include_spip('inc/rubriques');
+		depublier_branche_rubrique_if($id);
 	}
 }
 ?>

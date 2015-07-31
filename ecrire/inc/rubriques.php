@@ -20,39 +20,81 @@ include_spip('inc/meta');
 // Si l'objet etait publie' et est deplace' ou depublie'
 // on recalcule toutes les rubriques (a ameliorer).
 // Si publication standard, ne recalculer que la branche
+// avec consequence sur ses parentes et les langues
+// (a refaire a terme par une Cascade SQL)
 
 // http://doc.spip.org/@calculer_rubriques_if
 function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 {
-	if ($statut_ancien == 'publie'
-	AND (isset($modifs['id_rubrique']) OR isset($modifs['statut'])))
-		calculer_rubriques();
-	elseif ($modifs['statut']=='publie')
-		publier_branche_rubrique($id_rubrique);
-}
 
-// Si premiere publication dans une rubrique, la passer en statut "publie"
-// avec consequence sur ses parentes et les langues
-// (a refaire a terme par une Cascade SQL)
-
-// http://doc.spip.org/@publier_branche_rubrique
-function publier_branche_rubrique($id_rubrique)
-{
-	$id_pred = $id_rubrique;
-
-	while ($r = spip_abstract_fetch(spip_query("SELECT statut, id_parent FROM spip_rubriques AS R WHERE R.id_rubrique=$id_pred AND  R.statut != 'publie'"))) {
-
-		spip_query("UPDATE spip_rubriques SET statut='publie', date=NOW() WHERE id_rubrique=$id_pred");
-		if (!($id_pred = $r['id_parent'])) break;
-	}
-
-	if (!$id_pred)
+	$neuf = false;
+	if ($statut_ancien == 'publie') {
+		if (isset($modifs['statut']) OR isset($modifs['id_rubrique']))
+			$neuf |= depublier_branche_rubrique_if($id_rubrique);
+		if (isset($modifs['id_rubrique']))
+			$neuf |= publier_branche_rubrique($modifs['id_rubrique']);
+	} elseif ($modifs['statut']=='publie')
+		$neuf |= publier_branche_rubrique($id_rubrique);
+	if ($neuf)
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
 	  ecrire_meta("date_calcul_rubriques", date("U"));
 
 	$langues = calculer_langues_utilisees();
 	ecrire_meta('langues_utilisees', $langues);
 	ecrire_metas();
+}
+
+// Si premiere publication dans une rubrique, la passer en statut "publie"
+// avec consequence sur ses parentes.
+// Retourne Vrai si le statut a change
+
+// http://doc.spip.org/@publier_branche_rubrique
+function publier_branche_rubrique($id_rubrique)
+{
+	$id_pred = $id_rubrique;
+
+	while ($r = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques AS R WHERE R.id_rubrique=$id_pred AND  R.statut != 'publie'"))) {
+
+		spip_query("UPDATE spip_rubriques SET statut='publie', date=NOW() WHERE id_rubrique=$id_pred");
+		if (!($id_pred = $r['id_parent'])) break;
+	}
+
+	return $id_pred != $id_rubrique;
+}
+
+// Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
+
+// http://doc.spip.org/@publier_branche_rubrique
+function depublier_branche_rubrique_if($id_rubrique)
+{
+	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
+		" AND date <= NOW()" : '';
+
+	$id_pred = $id_rubrique;
+	while ($id_pred) {
+
+		if (spip_abstract_countsel("spip_articles",  "id_rubrique=$id_pred AND statut='publie'$postdates", '', "1"))
+			return $id_pred != $id_rubrique;;
+	
+		if (spip_abstract_countsel("spip_breves",  "id_rubrique=$id_pred AND statut='publie'", '', "1"))
+			return $id_pred != $id_rubrique;;
+
+		if (spip_abstract_countsel("spip_syndic",  "id_rubrique=$id_pred AND statut='publie'", '', "1"))
+			return $id_pred != $id_rubrique;;
+	
+		if (spip_abstract_countsel("spip_rubriques",  "id_parent=$id_pred AND statut='publie'", '', "1"))
+			return $id_pred != $id_rubrique;;
+	
+		if (spip_abstract_countsel("spip_documents_rubriques",  "id_rubrique=$id_pred", '', "1"))
+			return $id_pred != $id_rubrique;;
+
+		spip_query("UPDATE spip_rubriques SET statut='0' WHERE id_rubrique=$id_pred");
+
+		$r = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_pred"));
+
+		$id_pred = $r['id_parent'];
+	}
+	return $id_pred != $id_rubrique;;
 }
 
 //

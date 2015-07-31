@@ -39,8 +39,8 @@ function action_editer_rubrique_dist() {
 function insert_rubrique($id_parent) {
 	include_spip('base/abstract_sql');
 	return spip_abstract_insert("spip_rubriques",
-		"(titre, id_parent)",
-		"('"._T('item_nouvelle_rubrique')."', ".intval($id_parent).")"
+		"(titre, id_parent, statut)",
+		"('"._T('item_nouvelle_rubrique')."', ".intval($id_parent).",'new')"
 	);
 }
 
@@ -83,7 +83,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 		) {
 			$champs['id_parent'] = $id_parent;
 			$statut_ancien = $s['statut'];
-		} else {
+		} elseif ($s['statut'] != 'new') {
 			spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
 		}
 	}
@@ -129,7 +129,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
 	if ($statut_ancien == 'publie')
-		calculer_rubriques();
+		calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
 
 	calculer_langues_rubriques();
 
