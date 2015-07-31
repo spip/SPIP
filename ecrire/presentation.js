@@ -224,8 +224,8 @@ function lancer_recherche(champ, cible) {
 	/*
 	valeur = findObj(champ).value;
 	if (valeur.length > 3) {
-		charger_id_url('ajax_page.php?recherche_sugg='+valeur,'sugg_recherche');
-		charger_id_url('ajax_page.php?recherche='+valeur,'resultats_recherche');
+		charger_id_url('./?exec=ajax_page&recherche_sugg='+valeur,'sugg_recherche');
+		charger_id_url('./?exec=ajax_page&recherche='+valeur,'resultats_recherche');
 	}
 	*/
 }
@@ -233,7 +233,7 @@ function lancer_recherche(champ, cible) {
 function lancer_recherche_rub(champ, rac, exclus) {
 	valeur = findObj(champ).value;
 	if (valeur.length > 0) {
-		charger_id_url('ajax_page.php?fonction=recherche&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
+		charger_id_url('./?exec=ajax_page&fonction=recherche&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
 	}
 }
 
