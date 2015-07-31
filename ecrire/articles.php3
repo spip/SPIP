@@ -1250,16 +1250,19 @@ else {
 	echo justifier(propre($texte));
 
 	if ($ps) {
-		echo "\n\n<FONT SIZE=2><P align=justify><B>P.S.</B> ";
-		echo justifier(propre($ps));
-		echo "</FONT>";
+		echo debut_cadre_enfonce();
+		echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo justifier("<b>P.S.</b> ".propre($ps));
+		echo "</font>";
+		echo fin_cadre_enfonce();
 	}
 
-
 	if ($les_notes) {
-		echo "\n\n<FONT SIZE=2>";
-		echo justifier($les_notes);
-		echo "</FONT>";
+		echo debut_cadre_relief();
+		echo "<font size=2>";
+		echo justifier("<b>Notes&nbsp;:</b> ".$les_notes);
+		echo "</font>";
+		echo fin_cadre_relief();
 	}
 }
 
@@ -1269,8 +1272,7 @@ else {
 //
 
 if ($flag_editable) {
-echo "\n\n<div align=right>";
-//	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+echo "\n\n<div align=right><br>";
 
 if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
 	$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";

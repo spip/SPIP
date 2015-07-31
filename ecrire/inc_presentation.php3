@@ -1743,7 +1743,7 @@ function debut_droite($rubrique="") {
 	if ($options == "avancees") {
 		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 		// liste des articles bloques
-		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
 		$result = spip_query($query);
 		$num_articles_ouverts = spip_num_rows($result);
 		if ($num_articles_ouverts) {
