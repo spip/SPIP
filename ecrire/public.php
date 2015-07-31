@@ -201,14 +201,18 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
+	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
+	// il faut tester a nouveau
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 	// at last
 	if ($debug) {
-		if ($affiche_boutons_admin) {
+		// en cas d'erreur, retester l'affichage
+		if ($html AND ($affiche_boutons_admin OR $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-			echo erreur_squelette();
+			echo erreur_squelette(false);
 		}
 	} else {
 
