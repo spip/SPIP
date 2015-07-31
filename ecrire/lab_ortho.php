@@ -17,15 +17,15 @@ function maj_miroirs_ortho() {
 	// TODO: recuperer la liste dynamiquement depuis ortho.spip.net
 	$urls = array(
 		'http://tony.ortho.spip.net/ortho_serveur.php',
-		'http://ortho.spip.net/ortho_serveur.php',
-		'http://spip-ortho.linagora.org:18080/ortho_serveur.php'
+		'http://spip-ortho.linagora.org:18080/ortho_serveur.php',
+		'http://ortho.spip.net/ortho_serveur.php'
 	);
 	$liste = array();
 	$miroirs_new = array();
 	$index = 1;
 	foreach ($urls as $url) {
-		if ($miroirs_old[$url]) {
-			$s = lire_meta("miroir_ortho_$index");
+		if ($index_old = $miroirs_old[$url]) {
+			$s = lire_meta("miroir_ortho_$index_old");
 		}
 		else {
 			$s = $url." ".time();
@@ -65,8 +65,9 @@ function lire_miroirs_ortho() {
 		$langs = explode(",", $s[2]);
 		// Reinitialiser periodiquement la liste des langues non-supportees
 		if ($maj < $t - $duree_cache_miroirs_ortho) {
-			foreach ($langs as $lang)
-				if (substr($lang, 0, 1) == '!') unset($langs[$lang]);
+			foreach ($langs as $key => $lang) {
+				if (substr($lang, 0, 1) == '!') unset($langs[$key]);
+			}
 			$s[1] = $t;
 			$s[2] = join(",", $langs);
 			ecrire_meta("miroir_ortho_$index", join(" ", $s));
@@ -77,6 +78,7 @@ function lire_miroirs_ortho() {
 			if ($lang) $miroirs_ortho[$url][$lang] = $lang;
 		}
 	}
+	lire_metas();
 	srand(time());
 }
 
@@ -219,7 +221,6 @@ function post_ortho($url, $texte, $lang) {
 function verifier_langue_miroir($url, $lang) {
 	// Envoyer une requete bidon
 	$result = post_ortho($url, " ", $lang);
-	//if (!$result) return false;
 	if (preg_match(',<ortho>.*</ortho>,s', $result) &&
 		!preg_match(',<erreur>.*<code>E_LANG_ABSENT</code>.*</erreur>,s', $result)) {
 		ajouter_langue_miroir($url, $lang);
@@ -395,9 +396,8 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 		// Saloperies non-conformes
 		$trans = array(chr(194).chr(133) => ' ', chr(194).chr(150) => ' ', chr(194).chr(151) => ' ');
 		$texte = strtr($texte, $trans);
-		// Plage ponctuation de 0x2000 a 0x206F
-		// (i.e. de 226-128-128 a 226-129-176)
-		$texte = preg_replace(",\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF]),", ' ', $texte);
+		// Poncutation etendue (unicode)
+		$texte = preg_replace(",".plage_punct_unicode().",", ' ', $texte);
 		// Caracteres ASCII non-alphanumeriques
 		$texte = preg_replace(",[^-a-zA-Z0-9\x80-\xFF']+,", ' ', $texte);
 	}
@@ -421,9 +421,8 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 
 	// 3. Envoyer les mots restants a un serveur
 	$mauvais = array();
-
 	if (count($mots)) {
-		#echo count($mots);
+		//echo count($mots);
 		$texte = join(' ', $mots);
 		$url = choisir_miroir_ortho($lang);
 		$xml = post_ortho($url, $texte, $lang);
@@ -650,41 +649,6 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	$texte = preg_replace(',(^ | $),', '', $texte);
 	$texte = afficher_ortho($texte);
 	return $texte;
-}
-
-// Test de fonctionnement du support UTF-8 dans PCRE
-// (contournement bug Debian Woody)
-function test_pcre_unicode() {
-	static $pcre_ok = 0;
-
-	if (!$pcre_ok) {
-		include_spip("charsets.php");
-		$s = " ".chr(195).chr(169)."t".chr(195).chr(169)." ";
-		if (preg_match(',\W\w\w\w\W,u', $s)) $pcre_ok = 1;
-		else $pcre_ok = -1;
-	}
-	return $pcre_ok == 1;
-}
-
-function pcre_lettres_unicode() {
-	static $plage_unicode;
-
-	if (!$plage_unicode) {
-		if (test_pcre_unicode()) {
-			// cf. http://www.unicode.org/charts/
-			$plage_unicode = '\w' // iso-latin
-				. '\x{100}-\x{24f}' // europeen etendu
-/*				. '\x{370}-\x{3ff}' // grec
-				. '\x{400}-\x{52f}' // cyrillique*/
-				. '\x{300}-\x{1cff}' // des tas de trucs
-			;
-		}
-		else {
-			// fallback a trois sous
-			$plage_unicode = '\w';
-		}
-	}
-	return $plage_unicode;
 }
 
 function init_ortho() {

@@ -14,15 +14,13 @@ define("_ECRIRE_INC_CHARSETS", "1");
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
-	$charset = strtolower($charset);
-
 	if (is_array($GLOBALS['CHARSET'][$charset]))
 		return $charset;
 
 	if ($langue_site == 'AUTO')
 		$langue_site = lire_meta('langue_site');
 
-	switch ($charset) {
+	switch (strtolower($charset)) {
 	case 'utf-8':
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
@@ -147,7 +145,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		0xED=>0x064D, 0xEE=>0x064E, 0xEF=>0x064F, 0xF0=>0x0650, 0xF1=>0x0651,
 		0xF2=>0x0652
 		);
-		while (list($num,$val) = each($mod))
+		foreach ($mod as $num=>$val)
 			$trans[$num]=$val;
 		$GLOBALS['CHARSET'][$charset] = $trans;
 		return $charset;
@@ -1974,7 +1972,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		// allemand
 		228=>'ae',246=>'oe',252=>'ue',196=>'Ae',214=>'Oe',220=>'Ue'
 		);
-		while (list($u,$t) = each($translit_c))
+		foreach($translit_c as $u=>$t)
 			$trans[$u] = $t;
 		$GLOBALS['CHARSET'][$charset] = $trans;
 		return $charset;
@@ -2004,6 +2002,44 @@ function test_iconv() {
 	return $iconv_ok == 1;
 }
 
+// Test de fonctionnement du support UTF-8 dans PCRE
+// (contournement bug Debian Woody)
+function test_pcre_unicode() {
+	static $pcre_ok = 0;
+
+	if (!$pcre_ok) {
+		$s = " ".chr(195).chr(169)."t".chr(195).chr(169)." ";
+		if (preg_match(',\W\w\w\w\W,u', $s)) $pcre_ok = 1;
+		else $pcre_ok = -1;
+	}
+	return $pcre_ok == 1;
+}
+
+// Plages alphanumeriques (incomplet...)
+function pcre_lettres_unicode() {
+	static $plage_unicode;
+
+	if (!$plage_unicode) {
+		if (test_pcre_unicode()) {
+			// cf. http://www.unicode.org/charts/
+			$plage_unicode = '\w' // iso-latin
+				. '\x{100}-\x{24f}' // europeen etendu
+				. '\x{300}-\x{1cff}' // des tas de trucs
+			;
+		}
+		else {
+			// fallback a trois sous
+			$plage_unicode = '\w';
+		}
+	}
+	return $plage_unicode;
+}
+
+// Plage ponctuation de 0x2000 a 0x206F
+// (i.e. de 226-128-128 a 226-129-176)
+function plage_punct_unicode() {
+	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
+}
 
 //
 // Transformer les &eacute; en &#123;
@@ -2013,18 +2049,15 @@ function html2unicode($texte) {
 	if (!$trans) {
 		global $CHARSET;
 		load_charset('html');
-		reset($CHARSET['html']);
-		while (list($key, $val) = each($CHARSET['html'])) {
+		foreach ($CHARSET['html'] as $key => $val) {
 			$trans["&$key;"] = $val;
 		}
 	}
 
 	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans);
 
-	reset($trans);
-	while (list($from, $to) = each($trans)) {
+	foreach($trans as $from => $to)
 		$texte = str_replace($from, $to, $texte);
-	}
 	return $texte;
 }
 
@@ -2037,18 +2070,15 @@ function mathml2unicode($texte) {
 		global $CHARSET;
 		load_charset('mathml');
 		
-		reset($CHARSET['mathml']);
-		while (list($key, $val) = each($CHARSET['mathml'])) {
+		foreach ($CHARSET['mathml'] as $key => $val)
 			$trans["&$key;"] = $val;
-		}
 	}
 
 	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans);
 
 	reset($trans);
-	while (list($from, $to) = each($trans)) {
+	foreach ($trans as $from => $to)
 		$texte = str_replace($from, $to, $texte);
-	}
 
 	return $texte;
 }
@@ -2058,38 +2088,56 @@ function mathml2unicode($texte) {
 // Transforme une chaine en entites unicode &#129;
 //
 function charset2unicode($texte, $charset='AUTO', $forcer = false) {
+	global $flag_multibyte;
 	static $trans;
 
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
-	$charset = strtolower($charset);
 
 	switch ($charset) {
 	case 'utf-8':
 		// Le passage par utf-32 devrait etre plus rapide
 		// (traitements PHP reduits au minimum)
 		if (test_iconv()) {
-			$s = iconv('utf-8', 'utf-32', $texte);
+			$s = iconv('utf-8', 'utf-32le', $texte);
 			if ($s) return utf_32_to_unicode($s);
+		}
+		if ($flag_multibyte) {
+			$s = @mb_convert_encoding($texte, 'utf-32le', 'utf-8');
+			if ($s && $s != $texte) return utf_32_to_unicode($s);
 		}
 		return utf_8_to_unicode($texte);
 
 	case 'iso-8859-1':
+		// corriger caracteres non-conformes issus de Windows (CP-1252)
+		$faux_latin = array(
+			chr(138) => "&#352;", // Scaron
+			chr(140) => "&#338;", // OElig
+			chr(142) => "&#381;", // Zcaron
+			chr(154) => "&#353;", // scaron
+			chr(156) => "&#339;", // oelig
+			chr(158) => "&#382;" // zcaron
+		);
+		$texte = strtr($texte, $faux_latin);
+
 		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
 		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
 		if (!$forcer) return $texte;
 
 	default:
 		if (test_iconv()) {
-			$s = iconv($charset, 'utf-32', $texte);
+			$s = iconv($charset, 'utf-32le', $texte);
 			if ($s) return utf_32_to_unicode($s);
+		}
+		if ($flag_multibyte) {
+			$s = @mb_convert_encoding($texte, 'utf-32le', $charset);
+			if ($s && $s != $texte) return utf_32_to_unicode($s);
 		}
 
 		if (!$trans[$charset]) {
 			global $CHARSET;
 			load_charset($charset);
-			reset($CHARSET[$charset]);
-			while (list($key, $val) = each($CHARSET[$charset])) {
+			foreach ($CHARSET[$charset] as $key => $val) {
 				$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
@@ -2098,9 +2146,8 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 				$texte = strtr($texte, $trans[$charset]);
 			else {
 				reset($trans[$charset]);
-				while (list($from, $to) = each($trans[$charset])) {
+				foreach ($trans[$charset] as $from => $to)
 					$texte = str_replace($from, $to, $texte);
-				}
 			}
 		}
 		return $texte;
@@ -2114,7 +2161,6 @@ function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
-	$charset = strtolower($charset);
 
 	switch($charset) {
 	case 'utf-8':
@@ -2127,7 +2173,7 @@ function unicode2charset($texte, $charset='AUTO') {
 		// array_flip
 		if (!is_array($CHARSET_REVERSE[$charset])) {
 			$trans = $GLOBALS['CHARSET'][$charset];
-			while (list($chr,$uni) = each($trans))
+			foreach ($trans as $chr => $uni) 
 				$CHARSET_REVERSE[$charset][$uni] = $chr;
 		}
 
@@ -2238,12 +2284,9 @@ function utf_32_to_unicode($source) {
 	while ($source) {
 		$words = unpack("V*", substr($source, 0, 1024));
 		$source = substr($source, 1024);
-		if (is_array($words)) {
-			reset($words);
-			while (list(, $word) = each($words)) {
-				if ($word < 128) $texte .= chr($word);
-				else if ($word != 65279) $texte .= '&#'.$word.';';
-			}
+		foreach ($words as $word) {
+			if ($word < 128) $texte .= chr($word);
+			else if ($word != 65279) $texte .= '&#'.$word.';';
 		}
 	}
 	return $texte;
@@ -2264,21 +2307,8 @@ function caractere_utf_8($num) {
 }
 
 function unicode_to_utf_8($texte) {
-	
-
-	while (ereg('&#x0*([0-9A-F]+);', $texte, $regs) AND !$vux[$regs[1]]) {
-		$num =  $regs[1];
-		$num_dec = hexdec($num);
-		$vux[$num_dec] = true;
-		$s = caractere_utf_8($num_dec);
-		echo "[$num/$num_dec/$s] ";
-
-		$texte = str_replace($regs[0], $s, $texte);
-	}
-	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$regs[1]]) {
-		$num = $regs[1];
-		$vu[$num] = true;
-		$s = caractere_utf_8($num);
+	while (preg_match(',&#0*([0-9]+);,', $texte, $regs)) {
+		$s = caractere_utf_8($regs[1]);
 		$texte = str_replace($regs[0], $s, $texte);
 	}
 	return $texte;
@@ -2286,7 +2316,7 @@ function unicode_to_utf_8($texte) {
 
 // convertit les &#264; en \u0108
 function unicode_to_javascript($texte) {
-	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$regs[1]]) {
+	while (preg_match(',&#0*([0-9]+);,', $texte, $regs) AND !$vu[$regs[1]]) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		$s = '\u'.sprintf("%04x", $num);
@@ -2317,7 +2347,6 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
-	$charset = strtolower($charset);
 
 	$table_translit ='translit'.$complexe;
 
@@ -2328,18 +2357,15 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	if (!$trans[$complexe]) {
 		global $CHARSET;
 		load_charset($table_translit);
-		reset($CHARSET[$table_translit]);
-		while (list($key, $val) = each($CHARSET[$table_translit])) {
+		foreach ($CHARSET[$table_translit] as $key => $val)
 			$trans[$complexe][caractere_utf_8($key)] = $val;
-		}
 	}
 	if ($GLOBALS['flag_strtr2'])
 		$texte = strtr($texte, $trans[$complexe]);
 	else {
 		$tr = $trans[$complexe];
-		while (list($from, $to) = each($tr)) {
+		foreach ($tr as $from => $to)
 			$texte = str_replace($from, $to, $texte);
-		}
 	}
 
 /*
