@@ -75,12 +75,12 @@ if ($new == 'oui'){
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",
 		  "<input type='hidden' name='redirect' value='",
-		  generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&new=oui"),
+		  urlencode(generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&new=oui", true)),
 		  "' />\n",
 		  "<font face='Verdana,Arial,Sans,sans-serif' size='2'>",
 		  _T('texte_referencement_automatique'),
 		  "</font>",
-		  "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\" />\n",
+		  "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n",
 		  "<input type=\"submit\"  value=\""._T('bouton_ajouter')."\" class='fondo' />\n",
 		  "</form>";		
 		fin_cadre_relief();
