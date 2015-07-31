@@ -523,11 +523,11 @@ function calculer_select ($select = array(), $from = array(),
 		 calculer_jointnul($t, $where, $e) OR
 		 calculer_jointnul($t, $having, $e))) {
 	    unset($from[$t]);
-	    preg_match('/^\s*\w*\s*JOIN\s+(.*AS\s*(\w+)\s+)USING [(]([^)]*)[)](.*)$/', $sfrom, $r);
+	    // bien garder les espaces pour le strpos ci-dessus
+	    preg_match('/^\s*\w*\s*JOIN\s+(.*AS\s+(\w+)\s+)USING [(]([^)]*)[)](.*)$/', $sfrom, $r);
 	    $sfrom = $r[1].  $r[4];
 	    $e = '/\b' . $t . '\.' . $r[3] .'\b/';
 	    $t = $r[2] . '.' . $r[3];
-	    spip_log("$e $t");
 	    $select = remplacer_jointnul($t, $select, $e);
 	    $join = remplacer_jointnul($t, $join, $e);
 	    $where = remplacer_jointnul($t, $where, $e);
@@ -536,6 +536,7 @@ function calculer_select ($select = array(), $from = array(),
 
 	  $from[-1] = $sfrom; 
 	}
+
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
 
 	$r = sql_select($select, $from, $where,
@@ -551,7 +552,7 @@ function calculer_jointnul($cle, $exp, $equiv='')
 {
 	if (!is_array($exp)) {
 		if ($equiv) $exp = preg_replace($equiv, '', $exp);
-		return preg_match('/\b$cle\./', $exp);
+		return preg_match("/\\b$cle\\./", $exp);
 	} else {
 		foreach($exp as $v) {
 			if (calculer_jointnul($cle, $v, $equiv)) return true;
@@ -560,7 +561,6 @@ function calculer_jointnul($cle, $exp, $equiv='')
 	}
 }
 
-// http://doc.spip.org/@remplacer_jointnul
 function remplacer_jointnul($cle, $exp, $equiv='')
 {
 	if (!is_array($exp)) {
