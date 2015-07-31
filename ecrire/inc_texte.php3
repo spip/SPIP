@@ -310,7 +310,13 @@ function typo_fr($letexte) {
 	return ($letexte);
 }
 
-// Typographie generale : francaise sinon rien (pour l'instant)
+// rien sauf les ~
+function typo_en($letexte) {
+	$letexte = ereg_replace("&nbsp;","~",$letexte);
+	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
+}
+
+// Typographie generale : francaise si la langue principale du site est 'fr', sinon anglaise (minimaliste)
 function typo($letexte) {
 	global $spip_lang;
 
@@ -318,6 +324,8 @@ function typo($letexte) {
 
 	if ($spip_lang == 'fr')
 		$letexte = typo_fr($letexte);
+	else
+		$letexte = typo_en($letexte);
 
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
