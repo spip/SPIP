@@ -146,7 +146,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	echo "<a name='mots'></a>";
 	if ($flag_editable){
-		if ($nouv_mot.$cherche_mot.$supp_mot)
+		if ($nouv_mot||$cherche_mot||$supp_mot)
 			$bouton = bouton_block_visible("lesmots");
 		else
 			$bouton =  bouton_block_invisible("lesmots");
@@ -158,7 +158,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	//
 
 	if ($nouv_mot)
-		$nouveaux_mots[] = $nouv_mot;
+		$nouveaux_mots = array($nouv_mot);
 
 	$tous_les_mots = split(" *[,;] *", $cherche_mot);
 	while ((list(,$cherche_mot) = each ($tous_les_mots)) AND $cherche_mot) {
@@ -244,7 +244,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		fin_boite_info();
 		echo "<P>";
 
-	}
+	} // fin de la boucle sur la recherche de mots
 
 
 	//////////////////////////////////////////////////////
@@ -282,10 +282,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	//
 	// Afficher les mots-cles
 	//
-
-	$query = "SELECT DISTINCT type FROM spip_mots";
-	$result = spip_query($query);
-	$plusieurs_types = (spip_num_rows($result) > 1);
 
 	unset($les_mots);
 
@@ -369,12 +365,12 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$vals[] = "$type_mot";
 	
 			if ($flag_editable){
-				$s = "";
 				if ($flag_groupe)
-				  $s .= "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
-				else $s .= "&nbsp;";
-			}
-			$vals[] = $s;
+				  $s = "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
+				else $s = "&nbsp;";
+				$vals[] = $s;
+			} else $vals[]= "";
+
 			
 			$tableau[] = $vals;
 	
@@ -545,7 +541,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 }
 
 function afficher_groupe_mots($id_groupe) {
-	global $connect_id_auteur, $connect_statut;
+	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 
 	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
@@ -635,7 +631,7 @@ function afficher_groupe_mots($id_groupe) {
 				$vals[] = $texte_lie;
 
 
-				if ($connect_statut=="0minirezo") {
+				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
 					$vals[] = "<div style='text-align:right;'><a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
 				} 
 

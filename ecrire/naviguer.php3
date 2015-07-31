@@ -244,7 +244,7 @@ echo "</table>\n";
 
 
 /// Mots-cles
-if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $id_rubrique > 0) {
+if ($flag_mots!= 'non' AND $id_rubrique > 0) {
 	echo "\n<p>";
 	formulaire_mots('rubriques', $id_rubrique, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }

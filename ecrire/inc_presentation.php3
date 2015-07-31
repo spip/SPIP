@@ -659,8 +659,8 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 	return $inser_puce;
 }
 
-function puce_statut_breve($id, $statut, $type, $id_rubrique=0) {
-	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+function puce_statut_breve($id, $statut, $type, $droit) {
+	global $spip_lang_left, $dir_lang;
 
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
@@ -693,8 +693,7 @@ function puce_statut_breve($id, $statut, $type, $id_rubrique=0) {
 	$type1 = "statut$type$id"; 
 	$inser_puce = http_img_pack($puce, "", "id='img$type1' border='0' style='margin: 1px;'");
 
-	if (!($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)))
-		return $inser_puce;
+	if (!$droit) return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
 	$action = "onmouseover=\"montrer('$type2');\"\n";
@@ -1187,8 +1186,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_claire, $couleur_foncee;
-	global $options;
-	
+	global $connect_statut, $options;	
 
 
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR lire_meta('multi_articles') == 'oui') {
@@ -1219,6 +1217,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$result = spip_query($requete);
 
 		$table = '';
+		$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
 
@@ -1230,7 +1229,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
 			
-			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', $id_rubrique);
+			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
 			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
