@@ -88,7 +88,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'barre_italic' => 'Formattare in {corsivo}',
 'barre_lien' => 'Trasformare in un [link ipertestuale->http://...]',
 'barre_lien_input' => 'Indicare l\'indirizzo del link (&egrave; possibile indicare l\'indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
-'barre_note' => 'Transforare in [[Nota a fondo pagina]]',
+'barre_note' => 'Trasformare in [[Nota a fondo pagina]]',
 'barre_quote' => '<quote>Citare un messaggio</quote>',
 'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP >>',
 'bouton_ajouter' => 'Aggiungi',

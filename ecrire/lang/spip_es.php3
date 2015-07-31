@@ -161,6 +161,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Los ficheros de cach&eacute; se guardan en modo no comprimido.',
 'cache_modifiable_webmestre' => 'Estos par&aacute;metros son modificables por la webmistress del sitio.',
 'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
+'calendrier_synchro_lien' => '<NEW><PLUS_UTILISE><NEW>R&eacute;cuperar el archivo <i>iCal</i>',
+'calendrier_synchro_prive' => '<NEW><PLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
+'calendrier_synchro_public' => '<NEW><PLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
+'calendrier_synchro_sync' => '<NEW><PLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estatuto de este elemento. &iquest;Deseas continuar?',
 
 

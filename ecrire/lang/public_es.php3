@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Fecha',
-'dernier_ajout' => '&Uacute;ltimo a&ntilde;adido',
+'dernier_ajout' => '&Uacute;ltima actualizaci&oacute;n',
 'dernieres_breves' => '&Uacute;ltimos breves',
 'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
 'derniers_commentaires' => '&Uacute;ltimos comentarios',

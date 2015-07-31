@@ -596,6 +596,8 @@ Merci fir &auml;r Participatioun
 'info_choix_base' => 'Dr&euml;tte Schr&euml;tt:',
 'info_classement_1' => '. an @liste@',
 'info_classement_2' => '. an @liste@',
+'info_classement_3' => '. vun @liste@',
+'info_classement_4' => '. vun @liste@',
 'info_code_acces' => 'Vergiesst &auml;r Login-Informatiounen n&euml;t!',
 'info_comment_lire_tableau' => 'W&eacute;i een d&euml;s Tabell liesen soll',
 'info_config_suivi' => 'Wann d&euml;s Adress eng Mailing-L&euml;scht ass, da k&euml;nnt dier hei d\'Adress uginn wou d\'Matarbechter vun d&euml;sem Site sech aschreiwen k&euml;nnen. D&euml;s Adress kann eng URL sinn (z.B. d\'Internets&auml;it wou een s&euml;ch aschreiwen kann), oder eng Email-Adress mat engem extra Sujet (z.B.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
