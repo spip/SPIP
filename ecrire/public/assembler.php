@@ -367,6 +367,8 @@ function recuperer_fond($fond, $contexte=array()) {
 	define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
 		$fond = $contexte['fond'];
+	
+	$contexte['fond'] = $fond; // necessaire pour calculer correctement le cache
 
 	$page = inclure_page($fond, $contexte);
 
