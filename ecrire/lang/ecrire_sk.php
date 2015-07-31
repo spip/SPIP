@@ -749,7 +749,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_credit' => 'Poďakovanie',
 	'plugin_info_erreur_xml' => 'Deklarácia tohto zásuvného modulu nie je správna',
 	'plugin_info_install_ok' => 'Inštalácia úspešná',
-	'plugin_info_necessite' => 'Treba:', # MODIF
+	'plugin_info_necessite' => 'Potrebuje:',
 	'plugin_info_non_compatible_spip' => 'Tento zásuvný modul nie je kompatibilný s touto verziou SPIPu',
 	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a boli v ňom aktivované tieto zásuvné moduly.',
 	'plugin_info_plugins_dist_2' => 'Nedajú sa deaktivovať.',
