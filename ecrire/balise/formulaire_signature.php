@@ -109,6 +109,9 @@ function reponse_confirmation($var_confirm = '') {
 	static $confirm = '';
 	if (!$var_confirm) return $confirm;
 
+	if ($var_confirm == 'publie' OR $var_confirm == 'poubelle')
+		return '';
+
 	if (spip_connect()) {
 		include_spip('inc/texte');
 		include_spip('inc/filtres');
@@ -119,6 +122,28 @@ function reponse_confirmation($var_confirm = '') {
 			$confirm= _T('form_pet_probleme_technique');
 		}
 		else {
+
+			// Suppression d'une signature par un moderateur ?
+			// Cf. plugin notifications
+			if (isset($_GET['refus'])) {
+				// verifier validite de la cle de suppression
+				// l'id_signature est dans var_confirm
+				include_spip('inc/securiser_action');
+				if ($id_signature = intval($var_confirm)
+				AND (
+					$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere')
+					OR
+					$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere_ancien')
+				)) {
+					spip_query("UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$id_signature");
+					$confirm= _T('info_message_supprime'); # _L('Signature supprimee');
+				} else {
+					$confirm = _T('forum_titre_erreur'); # _L('Erreur: ce code de suppression ne correspond a aucune signature');
+				}
+				return '';
+			}
+
+
 			$result_sign = spip_abstract_select('*', 'spip_signatures', "statut=" . _q($var_confirm));
 
 			if (spip_num_rows($result_sign) > 0) {
@@ -164,14 +189,16 @@ function reponse_confirmation($var_confirm = '') {
 					$confirm= _T('form_deja_inscrit');
 				}
 				else {
-					spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature='$id_signature'");
+					$statut = 'publie';
+					$confirm= _T('form_pet_signature_validee');
+
+					spip_query("UPDATE spip_signatures SET statut="._q($statut).", date_time=NOW() WHERE id_signature="._q($id_signature));
 
 					// invalider les pages ayant des boucles signatures
 					include_spip('inc/invalideur');
 					include_spip('inc/meta');
 					suivre_invalideur("id='varia/pet$id_article'");
 	
-					$confirm= _T('form_pet_signature_validee');
 				}
 			}
 			else {
