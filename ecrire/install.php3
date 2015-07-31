@@ -108,7 +108,7 @@ else if ($etape == 5) {
 
 	echo "<B>Votre mot de passe</B> <BR>";
 	echo "(Plus de 5 caract&egrave;res)<BR>";
-	echo "<INPUT TYPE='text' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
+	echo "<INPUT TYPE='password' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
 
 	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 	echo "</FORM>";
