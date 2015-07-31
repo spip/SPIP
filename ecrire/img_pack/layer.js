@@ -1,4 +1,8 @@
 var memo_obj = new Array();
+var url_chargee = new Array();
+var xmlhttp = new Array();
+var image_search = new Array();
+
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
@@ -8,7 +12,7 @@ function findObj_test_forcer(n, forcer) {
 		return memo_obj[n];
 	}
 
-	d = document; 
+	var d = document; 
 	if((p = n.indexOf("?"))>0 && parent.frames.length) {
 		d = parent.frames[n.substring(p+1)].document; 
 		n = n.substring(0,p);
@@ -36,14 +40,15 @@ function findObj_forcer(n) {
 }
 
 function hide_obj(obj) {
-	element = findObj(obj);
-	if(element) {
+	var element;
+	if (element = findObj(obj)){
 		if (element.style.visibility != "hidden") element.style.visibility = "hidden";
 	}
 }
 
 function swap_couche(couche, rtl, dir, no_swap) {
-	triangle = findObj('triangle' + couche);
+	var layer;
+	var triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (layer.style.display == "none"){
 		if (!no_swap && triangle) triangle.src = dir + 'deplierbas.gif';
@@ -54,13 +59,15 @@ function swap_couche(couche, rtl, dir, no_swap) {
 	}
 }
 function ouvrir_couche(couche, rtl,dir) {
-	triangle = findObj('triangle' + couche);
+	var layer;
+	var triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (triangle) triangle.src = dir + 'deplierbas.gif';
 	layer.style.display = 'block';
 }
 function fermer_couche(couche, rtl, dir) {
-	triangle = findObj('triangle' + couche);
+	var layer;
+	var triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
 	layer.style.display = 'none';
@@ -82,7 +89,7 @@ function manipuler_couches(action,rtl,first,last, dir) {
 //
 
 function slide_horizontal (couche, slide, align, depart, etape ) {
-	obj = findObj_forcer(couche);
+	var obj = findObj_forcer(couche);
 	if (!obj) return;
 	if (!etape) {
 		if (align == 'left') depart = obj.scrollLeft;
@@ -99,10 +106,9 @@ function slide_horizontal (couche, slide, align, depart, etape ) {
 }
 
 function changerhighlight (couche) {
-
-	kids = couche.parentNode.childNodes;
+	var kids = couche.parentNode.childNodes;
 	for (var i = 0; i < kids.length; i++) {
- 		kids[i].className = "pashighlight";
+		kids[i].className = "pashighlight";
 	}
 	couche.className = "highlight";
 }
@@ -118,10 +124,6 @@ function aff_selection (type, rac, id) {
 //
 // Cette fonction charge du contenu - dynamiquement - dans un 
 // Ajax
-
-var url_chargee = new Array();
-var xmlhttp = new Array();
-var image_search = new Array();
 
 function createXmlHttp() {
 	if(window.XMLHttpRequest)
@@ -241,7 +243,7 @@ function charger_id_url(myUrl, myField, jjscript)
 	}
 }
 
-
+// ne sert que pour selecteur_rubrique_ajax() dans inc/chercher_rubrique.php
 function charger_id_url_si_vide (myUrl, myField, jjscript) {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
