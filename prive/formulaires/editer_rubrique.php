@@ -37,7 +37,7 @@ function rubriques_edit_config($row)
  * ne representent pas l'objet edite
  */
 function formulaires_editer_rubrique_identifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
-	return serialize(array($id_rubrique,$lier_trad));
+	return serialize(array(intval($id_rubrique),$lier_trad));
 }
 
 function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
