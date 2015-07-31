@@ -48,14 +48,15 @@ function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
-	if (!($s = tester_config('', $bio))) return $statut;
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrire', $bio)) return $statut; //i.e. "nouveau"
 	include_spip('action/editer_auteur');
-	instituer_auteur($id_auteur,array('statut'=> $s));
+	instituer_auteur($id_auteur,array('statut'=> $bio));
 	include_spip('inc/modifier');
 	revision_auteur($id_auteur, array('bio'=>''));
 	include_spip('inc/session');
-	session_set('statut',$s);
-	return $s;
+	session_set('statut',$bio);
+	return $bio;
 }
 
 // Fonction d'authentification. Retourne:
