@@ -156,6 +156,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
 	if ($champs_extra) include_spip('inc/extra');
 
+	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	return
 		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
 		"<tr width='100%'>" .
@@ -214,7 +215,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
 		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
 
-		selecteur_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
+		$selecteur_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
 
 		fin_cadre_couleur(true) .
 	

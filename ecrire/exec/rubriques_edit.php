@@ -112,9 +112,9 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $
 debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
 
 // selecteur de rubriques
-include_spip('inc/rubriques');
+$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 $restreint = ($GLOBALS['statut'] == 'publie');
-echo selecteur_rubrique($id_parent, 'rubrique', $restreint, $id_rubrique);
+echo $selecteur_rubrique($id_parent, 'rubrique', $restreint, $id_rubrique);
 
 
 // si c'est une rubrique-secteur contenant des breves, demander la

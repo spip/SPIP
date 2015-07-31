@@ -80,8 +80,8 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 		else
 			echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
 		echo "\n<input name='id_auteur' value='$id_auteur' type='hidden' />";
-		include_spip('inc/rubriques');
-		echo selecteur_rubrique(0, 'auteur', false);
+		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+		echo $selecteur_rubrique(0, 'auteur', false);
 		echo "</div>\n";
 		echo fin_block();
 	}
