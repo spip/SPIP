@@ -20,13 +20,13 @@ utiliser_langue_visiteur();
 //
 
 function install_debut_html($titre = 'AUTO') {
-
-	if ($titre=='AUTO')
-		$titre=_T('info_installation_systeme_publication');
-
+	include_spip('inc/filtres');
 	include_spip('inc/headers');
 
 	http_no_cache();
+
+	if ($titre=='AUTO')
+		$titre=_T('info_installation_systeme_publication');
 
 	# le charset est en utf-8, pour recuperer le nom comme il faut
 	# lors de l'installation
@@ -38,7 +38,7 @@ function install_debut_html($titre = 'AUTO') {
 	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
 	  "<head>\n",
 	  "<title>",
-	  $titre,
+	  textebrut($titre),
 	  "</title>
 	  <style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
 	  "a {text-decoration: none; }",
