@@ -189,47 +189,117 @@ function spip_log($message, $logname='spip') {
 		spip_log($message);
 }
 
-// API d'appel a la base de donnees:
-// on charge le fichier du repertoire base/ donne en argument
-// et on execute la fonction homonyme censee initaliser la connexion
-// et renvoyer le nom de la fonction a connexion persistante.
-// On memorise ce nom dans une statique pour n'appeler qu'une fois.
-// On echoue si la connexion SPIP est morte (spip_meta pas lue)
+// Fonction appelee uniquement par le fichier cree dans config/ a l'instal'.
+// Il contient un appel direct a cette fonction avec comme arguments
+// les identifants de connexion.
+// Si la connexion reussit, la globale db_ok memorise le nom du serveur
+
+function spip_connect_db($host, $port, $login, $pass, $db, $serveur='mysql') {
+	global $db_ok;
+
+	$f = charger_fonction('db_' . $serveur, 'base', true);
+	if ($f AND $f = $f($host, $port, $login, $pass, $db)) {
+
+	// Version courante = 0.5 (indication du serveur comme 5e arg)
+	//
+	// La version 0.0 (non numerotee) doit etre refaite par un admin
+	// les autres fonctionnent toujours, meme si :
+	// - la version 0.1 est moins performante que la 0.2
+	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
+	//  On ne force pas la mise a niveau pour les autres.
+
+		if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
+			include_spip('inc/headers');
+			redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
+		}
+
+		$db_ok = $f;
+	}
+}
+
+// API d'appel aux bases de donnees:
+// on charge le fichier config/connect$serveur ($serveur='' pour le principal)
+// qui est cense initaliser la connexion en appelant spip_connect_db
+// laquelle met dans la globale db_ok
+// le nom de la fonction a connexion persistante.
+// On la memorise dans un tableau statique pour permettre plusieurs serveurs.
+
 // http://doc.spip.org/@spip_connect
 function spip_connect($serveur='') {
 	static $t = array();
 
-// Assimiler spip_connect() et spip_connect('') [PHP les distingue].
-// Tous deux designent le serveur SQL std "db_mysql" (obscur mais historique)
+	$index = $serveur ? $serveur : 'principal';
 
-	if (!$serveur) $serveur = 'db_mysql';
+	if (isset($t[$index])) return $t[$index];
 
-	if (isset($t[$serveur])) return $t[$serveur];
+	$f = $serveur
+	? (_FILE_CONNECT_INS . $serveur . '.php')
+	: ( _FILE_CONNECT ?  _FILE_CONNECT 
+	    : ((_request('exec') == 'install') ? (_FILE_CONNECT_INS .  '.php')
+	       : ''));
+	
+	if ($f) include($f);
 
-	$base_serveur = charger_fonction($serveur, 'base', true);
+	if (!isset($GLOBALS['db_ok']))
+		spip_log("spip_connect: serveur $index inutilisable.");
 
-	if (!$base_serveur) {
-		spip_log("serveur inconnu $serveur");
-		return $t[$serveur] = false;
-	}
-	return $t[$serveur] = $base_serveur();
+	return $t[$index] = $GLOBALS['db_ok'];
 }
 
 // http://doc.spip.org/@spip_query
 function spip_query($query, $serveur='') {
-
-	if (!($f = spip_connect($serveur))) return;  // Erreur de connexion
-
-	// executer la requete
-	return $f($query);
+	if ($f = spip_connect($serveur)) return $f($query);
 }
 
-// a demenager dans base/abstract_sql a terme
+// 2 interface de abstract_sql a demenager dans base/abstract_sql a terme
+
+// http://doc.spip.org/@spip_num_rows
+function spip_num_rows($r) {
+	include_spip('base/abstract_sql');
+	return spip_abstract_count($r);
+}
+
 // http://doc.spip.org/@_q
 function _q($a) {
 	return (is_int($a)) ? strval($a) : 
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));
+}
+
+//
+// Poser un verrou local a un SPIP donne
+//
+// http://doc.spip.org/@spip_get_lock
+function spip_get_lock($nom, $timeout = 0) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+	define('_LOCK_TIME', intval(time()/3600-316982));
+	$nom .= _LOCK_TIME;
+
+	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout)");
+	list($lock_ok) = spip_fetch_array($q,SPIP_NUM);
+
+	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
+	return $lock_ok;
+}
+
+// http://doc.spip.org/@spip_release_lock
+function spip_release_lock($nom) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	$nom .= _LOCK_TIME;
+
+	spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+}
+
+function spip_sql_version($nom) {
+	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
+	return ($row['n']);
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur

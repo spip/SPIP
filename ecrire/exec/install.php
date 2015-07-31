@@ -31,7 +31,6 @@ function exec_install_dist()
 	@unlink(_FILE_META);
 	$GLOBALS['meta'] = array();
 	include_spip('base/create');
-	include_spip('base/db_mysql');
 	$fonc = charger_fonction("etape_$etape", 'install');
 	$fonc();
 }

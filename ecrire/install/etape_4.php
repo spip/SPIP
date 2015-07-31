@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
+include_spip('inc/acces');
 
 function install_etape_4_dist()
 {
@@ -60,7 +61,6 @@ function install_etape_4_dist()
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
 	include_spip('inc/meta');
 	lire_metas();
-
 	if ($login) {
 		include_spip('inc/charsets');
 
@@ -77,16 +77,18 @@ function install_etape_4_dist()
 
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
-
+		$alea = creer_uniqid();
 		if ($id_auteur) {
-			spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
+		  spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=" . _q($alea)  . ", htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
 		}
 		else {
-			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')");
+			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass', " . _q($alea) .",'0minirezo')");
 		}
 
 		// inserer email comme email webmaster principal
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . _q($email) . ")");
+		// (sauf s'il est vide: cas de la re-installation)
+		if ($email)
+			ecrire_meta('email_webmaster', $email);
 
 		// Ici on va connecter directement celui qui vient de creer son login
 		// on ne lui met ni cookie d'admin ni connexion longue
@@ -100,7 +102,7 @@ function install_etape_4_dist()
 	$config = charger_fonction('config', 'inc');
 	$config();
 
-	include_spip('inc/acces');
+
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
 	@unlink($htpasswd);
 	@unlink($htpasswd."-admin");
