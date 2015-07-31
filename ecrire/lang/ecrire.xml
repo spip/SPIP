@@ -205,7 +205,7 @@
 		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 		<traducteur nom="vmurariu" lien="http://trad.spip.net/auteur/vmurariu" />
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ru" total="792" traduits="715" relire="0" modifs="76" nouveaux="1" pourcent="90.28">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ru" total="792" traduits="792" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
@@ -218,7 +218,7 @@
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=tr" total="792" traduits="603" relire="0" modifs="35" nouveaux="154" pourcent="76.14">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="uk" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=uk" total="792" traduits="789" relire="0" modifs="0" nouveaux="3" pourcent="99.62">
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=uk" total="792" traduits="792" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
