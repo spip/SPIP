@@ -134,7 +134,7 @@ function spip_log($message, $logname='spip') {
 	}
 	$f = @fopen($logfile, "ab");
 	if ($f) {
-		fputs($f, $message);
+		fputs($f, htmlspecialchars($message));
 		fclose($f);
 	}
 	if ($rotate) {
