@@ -122,6 +122,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
 function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576,
   $datas='', $boundary='', $refuser_gz = false) {
+  	$gz = false;
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -317,6 +318,7 @@ function recuperer_infos_distantes($source, $max=0) {
 // retourne un descripteur de fichier
 //
 function init_http($get, $url, $refuse_gz=false) {
+	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 	$http_proxy = $GLOBALS['meta']["http_proxy"];
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
@@ -332,9 +334,9 @@ function init_http($get, $url, $refuse_gz=false) {
 	} else {
 		$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
 	}
-	if (!($port = $t['port'])) $port = 80;
+	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	$query = $t['query'];
-	if (!($path = $t['path'])) $path = "/";
+	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 
 	if ($http_proxy) {
 		$t2 = @parse_url($http_proxy);

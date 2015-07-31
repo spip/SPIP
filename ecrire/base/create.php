@@ -25,7 +25,7 @@ include_spip('base/typedoc');
 // Le nom des caches doit etre inferieur a 64 caracteres
 
 function spip_create_table($nom, $champs, $cles, $autoinc=false) {
-	$query = ''; $keys = ''; $s = '';
+	$query = ''; $keys = ''; $s = ''; $p='';
 
 	foreach($cles as $k => $v) {
 		$keys .= "$s\n\t\t$k ($v)";
