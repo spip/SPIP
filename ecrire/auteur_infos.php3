@@ -70,7 +70,7 @@ if ($id_auteur) {
 		$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
 		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	}
-	$auteur['statut'] = '1comite';
+	$auteur['statut'] = '1comite'; // statut par defaut a la creation
 	$auteur['source'] = 'spip';
 }
 
@@ -405,7 +405,7 @@ if ($connect_id_auteur == $id_auteur) {
 
 
 // Afficher le formulaire de changement de statut (cf. inc_acces.php3)
-afficher_formulaire_statut_auteur ($id_auteur);
+afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut']);
 
 
 echo "<INPUT NAME='ajouter_id_article' VALUE='$ajouter_id_article' TYPE='hidden'>\n";

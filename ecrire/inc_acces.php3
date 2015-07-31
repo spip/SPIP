@@ -80,13 +80,9 @@ function effacer_low_sec($id_auteur) {
 
 
 // Une fonction service qui affiche le statut de l'auteur dans l'espace prive
-function afficher_formulaire_statut_auteur ($id_auteur, $post='') {
+function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 	global $spip_lang_right;
-
-	$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
-	$auteur = spip_fetch_array($s);
-	$statut = $auteur['statut'];
 
 	if ($post) {
 		$url_self = $post;

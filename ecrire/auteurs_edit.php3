@@ -154,6 +154,7 @@ debut_droite();
 	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
 	if ($options == 'avancees')
 		afficher_formulaire_statut_auteur ($id_auteur,
+			$row['statut'],
 			"auteurs_edit.php3?id_auteur=$id_auteur");
 
 	fin_cadre_relief();
