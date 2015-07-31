@@ -216,7 +216,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			$vignette = $destination.'.'.$fmt;
 			if ($force) @unlink($vignette);
 		}
-
+		
 	// utiliser le cache ?
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
@@ -360,7 +360,6 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 function inserer_vignette_base($image, $vignette) {
 
 	$taille = @filesize($vignette);
-	
 	
 	$size = @getimagesize($vignette);
 	$largeur = $size[0];
