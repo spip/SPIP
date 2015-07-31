@@ -69,7 +69,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// qu'on n'administre pas.
 	$statut_ancien = $parent = '';
 	if (NULL !== ($id_parent = _request('id_parent', $c))) {
-		include_spip('inc_rubrique');
+
 		$id_parent = intval($id_parent);
 		$filles = calcul_branche($id_rubrique);
 		if (strpos(",$id_parent',", "$,filles,") != false)

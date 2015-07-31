@@ -263,7 +263,7 @@ function repertoire_lang($module='spip', $lang='fr') {
 		return _DIR_LANG;
 
 	# regarder s'il existe une v.f. qq part
-	if ($f = include_spip('lang/'.$module.'_'.$lang, false))
+	if ($f = find_in_path($module.'_'.$lang . '.php', 'lang/'))
 		return dirname($f).'/';
 
 	# sinon, je ne sais trop pas quoi dire...

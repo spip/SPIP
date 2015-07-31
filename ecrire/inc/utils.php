@@ -524,11 +524,6 @@ function texte_script($texte) {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
 
-//
-// find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
-//
-
-
 // la fonction _chemin ajoute un repertoire au chemin courant si un repertoire lui est passe en parametre
 // retourne le chemin courant sinon, sous forme de array
 // seul le dossier squelette peut etre modifie en dehors de cette fonction, pour raison historique
@@ -605,26 +600,13 @@ function creer_chemin() {
 	return $path_a;
 }
 
-/*
-// Cette fonction est appelee une seule fois par hit et par dir du chemin
-// http://doc.spip.org/@memoriser_fichiers
-function memoriser_fichiers($dir) {
-	$fichiers = array();
-
-	if ($dir === '') $dir = '.';
-
-	if (@is_dir($dir)
-	AND $t = @opendir($dir)) {
-		while (($f = readdir($t)) !== false) {
-			$fichiers[$f] = true;
-		}
-	}
-	return $fichiers;
-}
-*/
+//
+// chercher un fichier $file dans le SPIP_PATH
+// si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
+// si 3e arg vrai, on inclut si ce n'est fait.
 
 // http://doc.spip.org/@find_in_path
-function find_in_path ($file, $dirname='') {
+function find_in_path ($file, $dirname='', $include=false) {
 	static $files=array(), $dirs=array();
 
 	$a = strrpos($file,'/');
@@ -633,14 +615,18 @@ function find_in_path ($file, $dirname='') {
 		$file = substr($file, $a);
 	}
 
-	if (isset($files[$dirname][$file])) return $files[$dirname][$file];
-
+	if (isset($files[$dirname][$file])) {
+		if ($include) include_once $files[$dirname][$file];
+		return  $files[$dirname][$file];
+	}
 	foreach(creer_chemin() as $dir) {
 		if (!isset($dirs[$a = $dir . $dirname]))
 			$dirs[$a] = is_dir($a);
 		if ($dirs[$a]) {
-			if (is_readable($a .= $file))
+			if (is_readable($a .= $file)) {
+				if ($include) include_once $a;
 				return $files[$dirname][$file] = $a;
+			}
 		}
 	}
 }
@@ -694,10 +680,10 @@ function charger_generer_url() {
 		// fichier inc-urls ? (old style)
 		if (@is_readable($f = _DIR_RACINE.'inc-urls.php3')
 		OR @is_readable($f = _DIR_RACINE.'inc-urls.php')
-		OR $f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3')
-		OR $f = include_spip('urls/'.$GLOBALS['type_urls'], false)
-		)
+		OR $f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3'))
 			include_once($f);
+
+		else include_spip('urls/'.$GLOBALS['type_urls']);
 	}
 }
 

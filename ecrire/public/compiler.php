@@ -831,8 +831,8 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 	$connect = ' .
 	_q($connect) . ';
 	$page = ' .
-	// ATTENTION, le calcul du l'expression $corps affectera $Cache
-	// c'est pourquoi on l'affecte a cette variable auxiliaire
+	// ATTENTION, le calcul de l'expression $corps affectera $Cache
+	// c'est pourquoi on l'affecte a la variable auxiliaire $page. 
 	// avant de referencer $Cache
 	$corps . ";
 

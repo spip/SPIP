@@ -61,7 +61,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
-		include_spip("inc/distant");
+		include_spip('inc/distant');
 		$fichier = _DIR_RACINE . copie_locale($source);
 		if (!$fichier) return "";
 	} else 	$fichier = $source;
@@ -2018,7 +2018,7 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 
 	if (!$image) return("");
 
-	include_spip("filtres");
+	include_spip('inc/filtres');
 	$couleurs = couleur_hex_to_dec($coul);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
@@ -2317,7 +2317,6 @@ function couleur_eclaircir_si_foncee ($couleur) {
 function couleur_saturation($couleur, $val) {
 	if ($couleur == "ffffff") $couleur = "eeeeee";
 
-	include_spip("inc/filtres_images");
 	$couleurs = couleur_hex_to_dec($couleur);
 	$r= 255 - $couleurs["red"];
 	$g= 255 - $couleurs["green"];

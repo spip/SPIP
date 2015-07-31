@@ -247,7 +247,7 @@ function argumenter_squelette($v) {
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
 function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
-	if (!$file = include_spip('balise/' . strtolower($nom)))
+	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true))
 		die ("pas de balise dynamique pour #". strtolower($nom)." !");
 
 	// Y a-t-il une fonction de traitement filtres-arguments ?
