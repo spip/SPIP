@@ -275,7 +275,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// decoder le cache et determiner sa validite
-	if (strlen($page) AND
+	if ($page AND
 		$page = @unserialize($page)) {
 		$use_cache = cache_valide($page, $page['lastmodified']);
 		if (!$use_cache) {
