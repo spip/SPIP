@@ -1,4 +1,26 @@
 
+SPIP-Core spip-2.1.24 -> spip-2.1.25  19 janvier 2014
+-------------------------------------------------------------
+r20969 | guytarr   |  (ven. 15 nov. 2013) | oubli problematique de r17980 dans r20926  : ne pas envoyer X-Spip-Cache:0 (erational)resout #3094
+r20972 | denisb    |  (ven. 15 nov. 2013) | filtres.php, editer_auteur.php, inscription.php : éviter un xss sur le nom (signature) d'un auteur (report de r20532).
+r20993 | esj       |  (sam. 23 nov. 2013) | Dans le critere agenda, le premier argument était traité trop à l'arrach: * on imposait qu'il soit littéral, * mais on ne vérifiait pas que c'était bien un champ de la table SQL.A présent on accepte que cet argument soit calculé, et on vérifie dans les deux cas qu'il s'agit bien d'un champ de la table. Sinon, on signale une erreur dès la compilation pour le premier cas, mais pour le second on prend arbitrairement le premier champ (c'est une erreur de l'internaute, pas de l'auteur du squelette).
+r21015 | esj       |  (mer. 27 nov. 2013) | Des indéfinis dans une boucle, c'est le commit de répétitions ?
+r21018 | denisb    |  (mer. 27 nov. 2013) | ecrire/inc/filtres.php : modification de la fonction de filtrage du nom/signature. on introduit la constante _TAGS_LOGIN (vide par défaut, définissable dans mes_options.php) qui liste les tags html acceptables en plus de <multi> .
+r21020 | esj       |  (mer. 27 nov. 2013) | Quand on tente de créer un mot de même titre qu'un mot existant, il est pénible que le message d'avertissement ne donne pas le lien vers celui-ci. On le rajoute, et comme il peut y en avoir plusieurs, on met en bulle tous leurs ID.
+r21021 | esj       |  (sam. 30 nov. 2013) | Dans le code PostGres, une utilisation de strpos sans vérifier que son 2e arg est non vide. Résoud le 2e pb de #3100.
+r21026 | esj       |  (mar. 03 déc. 2013) | Certaines des pages d'installation de la connexion Ldap avaient le focus sur le bouton de soumission et d'autes non. On unifie.
+r21031 | esj       |  (mar. 03 déc. 2013) | Complément à r20277, sur le paramétrage de l'export de la base SQL. La fonction recevant en argument une Row, le nom de la table et de la clé primaire reçoit à présent comme argument supplémentaire le nom de la base, c'est utile parfois. Rien de changé pour l'export habituel vers un ficher XML.
+r21034 | denisb    |  (sam. 07 déc. 2013) | ecrire/inc/filtres.php : _TAGS_LOGIN la mal nommée est rebaptisée _TAGS_NOM_AUTEUR (RastaPopoulos.)
+r21084 | fil       |  (dim. 22 déc. 2013) | report en 2.1 de la machinerie _PREVIEW_TOKEN
+r21094 | denisb    |  (mar. 31 déc. 2013) | ecrire/inc/getdocument.php : compatibilité pcre 8.34 (php 5.5). le tiret pour ne pas être considéré comme marque d'intervalle dans une classe de caractères doit être placé soit au début, soit à la fin de l'énumération. report de r21091.
+r21097 | denisb    |  (mer. 01 janv. 2014) | bonne année 2014 !
+
+SPIP-plugins-dist spip-2.1.24 -> spip-2.1.25  19 janvier 2014
+-------------------------------------------------------------
+r79784 | denisb    |  (mer. 01 janv. 2014) |  feliĉan novan jaron 2014 !
+
+
+
 SPIP-Core spip-2.1.22 -> spip-2.1.23  27 mai 2013
 -------------------------------------------------------------
 
