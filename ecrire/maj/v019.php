@@ -475,7 +475,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_52() || exit('echec sur maj_v019_52()'); // tentative de mieux controler les cas d'echec
 	  maj_version('1.952');
 	}
-
+	if (upgrade_vers(1.953, $version_installee, $version_cible)) {
+	  maj_v019_53();
+	  maj_version('1.953');
+	}
 }
 
 function maj_v019_45()
@@ -671,4 +674,10 @@ function maj_v019_52()
 	return $ok;
 }
 
+function maj_v019_53()
+{
+	global $tables_principales;
+	include_spip('base/create');
+	creer_base_types_doc($tables_principales['spip_types_documents']);
+}
 ?>
