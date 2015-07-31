@@ -13,6 +13,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Installe ou retire un plugin
+ * 
  * Fonction surchargeable permettant d'installer ou retirer un plugin
  * en incluant les fichiers associes et en lancant les fonctions specifiques
  * 1. d'abord sur l'argument 'test',
@@ -33,7 +35,7 @@ function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 {
 	$get_infos = charger_fonction('get_infos','plugins');
 	$infos = $get_infos($plug, false, constant($dir_type));
-	if (!$infos['install']) return false;
+	if (!isset($infos['install']) OR !$infos['install']) return false;
 	// passer en chemin absolu si possible, c'est plus efficace
 	$dir = str_replace('_DIR_','_ROOT_',$dir_type);
 	if (!defined($dir)) $dir = $dir_type;
