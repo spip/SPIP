@@ -143,11 +143,12 @@ while($row = spip_fetch_array($result_message)) {
 	
 	if ($rv == 'oui') agenda ($lemois, $lannee, $lejour, $lemois, $lannee);
 	
+	afficher_taches();
 	
-		
-	creer_colonne_droite();	
-	calendrier_jour($lejour,$lemois,$lannee, false, $id_message);
-	
+	if ($rv == "oui") {
+		creer_colonne_droite();	
+		calendrier_jour($lejour,$lemois,$lannee, false, $id_message);
+	}
 	
 	debut_droite();
 

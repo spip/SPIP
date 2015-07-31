@@ -110,31 +110,10 @@ fin_cadre_relief();
 //
 // Annonces
 //
-$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC";
-$result = spip_query($query);
-
-if (spip_num_rows($result) > 0){
-	echo "<div style='border: 1px solid #999999; background-color: #ffffee; -moz-border-radius: 5px;'>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
-	echo "<div style='background-color: yellow; padding: 3px;'>";
-	echo "<b>"._T('info_annonces_generales')."</b>";
-	echo "</div>";
-	echo "<div style='padding: 5px;'>";
-	while ($row = spip_fetch_object($result)) {
-		if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
-			$url = $match[1];
-		else
-			$url = "message.php3?id_message=".$row->id_message;
-		$titre = typo($row->titre);
-		echo "<div style='padding: 2px;'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' border=0> <a href='$url'>$titre</a></div>\n";
-	}
-	echo "</div>";
-	echo "</font>";
-	
-	echo "</div>";
+if (lire_meta('activer_messagerie') != 'non') {
+	include_ecrire("inc_agenda.php3");
+	afficher_taches();
 }
-
-
 debut_raccourcis();
 
 
@@ -204,6 +183,7 @@ if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != 
 	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
 	$mois = mois($date);
 	$annee = annee($date);
+	$jour = jour($date);
 
 	// rendez-vous personnels dans le mois
 	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
@@ -212,8 +192,16 @@ if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != 
 			"AND messages.statut='publie' LIMIT 0,1");
 	if (spip_num_rows($result_messages)) {
 		echo "<p />";
-		include_ecrire("inc_agenda.php3");
 		agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+	}
+	// rendez-vous personnels dans le mois
+	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+			"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
+			"AND messages.statut='publie' LIMIT 0,1");
+	if (spip_num_rows($result_messages)) {
+		echo "<p />";
+		calendrier_jour($jour_today,$mois_today,$annee_today, false);
 	}
 }
 

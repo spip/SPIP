@@ -53,9 +53,11 @@ if ($jour != $jour_today OR $mois != $mois_today OR $annee != $annee_today) {
 			echo "<p />";
 }
 
-agenda ($mois-1, $annee, $jour, $mois, $annee);
 agenda ($mois, $annee, $jour, $mois, $annee);
 agenda ($mois+1, $annee, $jour, $mois, $annee);
+
+
+afficher_taches ();
 
 	// afficher en reduction le tableau du jour suivant
 	creer_colonne_droite();	
