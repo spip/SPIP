@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_documents.php3");
+include_ecrire ("inc_barre.php3");
 
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
@@ -113,7 +114,7 @@ if ($new != "oui") {
 
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
-	echo "<FORM ACTION='breves_voir.php3' METHOD='post'>";
+	echo "<FORM ACTION='breves_voir.php3' METHOD='post' name='formulaire'>";
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_breve' VALUE=\"oui\">";
 	echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">";
@@ -156,7 +157,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else $rows = 15;
 	
 	echo "<B>"._T('entree_texte_breve')."</B><BR>";
-	echo "<TEXTAREA NAME='texte' ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
+	echo afficher_barre('formulaire', 'texte');
+	echo "<TEXTAREA NAME='texte' ".afficher_claret()." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 

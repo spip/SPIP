@@ -805,6 +805,34 @@ function spip_log($message) {
 	}
 }
 
+//
+// Tests sur le nom du butineur
+//
+function verif_butineur() {
+	global $HTTP_USER_AGENT, $browser_name, $browser_version, $browser_description, $browser_rev;
+	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $HTTP_USER_AGENT, $match);
+	$browser_name = $match[1];
+	$browser_version = $match[2];
+	$browser_description = $match[3];
+	
+	
+	if (eregi("opera", $browser_description)) {
+		eregi("Opera ([^\ ]*)", $browser_description, $match);
+		$browser_name = "Opera";
+		$browser_version = $match[1];
+	}
+	else if (eregi("msie", $browser_description)) {
+		eregi("MSIE ([^;]*)", $browser_description, $match);
+		$browser_name = "MSIE";
+		$browser_version = $match[1];
+	}
+	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
+		ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match);
+		$browser_rev = doubleval($match[1]);
+	}
+}
+
+
 
 function spip_debug($message) {
 	if ($GLOBALS['debug'])

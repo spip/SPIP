@@ -12,6 +12,8 @@ include_ecrire("inc_acces.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_mail.php3");
+include_ecrire("inc_barre.php3");
+
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }
@@ -109,7 +111,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= '<'.'?php { ?'.'>';
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
-	$ret .= "\n<form action='$lien' method='post'>";
+	$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 
 	if ($forums_publics == "pri") {
 		$ret.= _T('forum_info_modere')."<p>";
@@ -230,7 +232,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	if ($afficher_texte != "non"){
 		$ret .= "\n<br /><div class='spip_encadrer'><b>"._T('forum_texte')."</b><br />\n";
 		$ret .= _T('forum_creer_paragraphes');
-		$ret .= "<br>\n<textarea name='texte' rows='12' class='forml' cols='40'>";
+		$ret .= "<br />\n";
+		$ret .= afficher_barre('formulaire', 'texte', true);
+		$ret .= "<textarea name='texte' ".afficher_claret()." rows='12' class='forml' cols='40'>";
 		$ret.= $texte;
 		$ret .= "\n</textarea></div>\n";
 	}

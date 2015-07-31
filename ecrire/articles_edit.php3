@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_documents.php3");
+include_ecrire ("inc_barre.php3");
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
@@ -284,7 +285,7 @@ echo "<P><HR><P>";
 
 	$lien = 'articles.php3';
 	if ($id_article) $lien .= "?id_article=$id_article";
-	echo "<FORM ACTION='$lien' METHOD='post'>\n";
+	echo "<FORM ACTION='$lien' METHOD='post' name='formulaire'>\n";
 
 	if ($id_article)
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
@@ -407,8 +408,10 @@ echo "<P><HR><P>";
 			$nombre_textes ++;
 			list($texte1,$texte) = coupe_trop_long($texte);
 
-			$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-				" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
+			$textes_supplement .= "<BR>";
+			$textes_supplement .= afficher_barre('formulaire', 'texte'.$nombre_textes);
+			$textes_supplement .= "<TEXTAREA NAME='texte$nombre_textes'".
+				" CLASS='formo' ".afficher_claret()." ROWS='$rows' COLS='40' wrap=soft>" .
 				$texte1 . "</TEXTAREA><P>\n";
 		}
 	}
@@ -419,7 +422,9 @@ echo "<P><HR><P>";
 
 	echo $textes_supplement;
 
-	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
+	echo "<BR>";
+	echo afficher_barre('formulaire', 'texte');
+	echo "<TEXTAREA NAME='texte' ".afficher_claret()." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
