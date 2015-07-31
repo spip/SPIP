@@ -646,7 +646,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 // Afficher tableau d'articles
 //
 // http://doc.spip.org/@afficher_articles
-function afficher_articles($titre, $requete, $formater_article='') {
+function afficher_articles($titre, $requete, $formater='') {
 
 	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';
 
@@ -674,7 +674,7 @@ function afficher_articles($titre, $requete, $formater_article='') {
 		$id_ajax = $row["id_ajax_fonc"];
 	} else  {
 		if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-		$v = serialize(array($titre, $requete, $tmp_var, $formater_article));
+		$v = serialize(array($titre, $requete, $tmp_var, $formater));
 
 		include_spip ('base/abstract_sql');
 		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, date)", "(" . _q($v) . ", 0x$hash, NOW())");
@@ -684,20 +684,22 @@ function afficher_articles($titre, $requete, $formater_article='') {
 
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
-	return afficher_articles_trad($titre, $requete, $formater_article, $tmp_var, $id_ajax, $cpt);
+	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $id_ajax, $cpt);
 }
 
 // http://doc.spip.org/@afficher_articles_trad
-function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_var, $id_ajax, $cpt, $trad=0) {
+function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id_ajax, $cpt, $trad=0) {
 
 	global $options, $spip_lang_right;
 
 	if ($trad) {
-		$formater_article = 'afficher_articles_trad_boucle';
+		$formater = 'afficher_articles_trad_boucle';
 		$icone = "langues-off-12.gif";
 	} else {
-		if (!$formater_article)
+		if (!$formater) {
 			$formater_article =  charger_fonction('formater_article', 'inc');
+			$formater = $formater_article;
+		}
 		$icone = 'langues-12.gif';
 	}
 
@@ -706,7 +708,7 @@ function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_
 
 	$q = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 	$t = '';
-	while ($r = spip_fetch_array($q)) $t .= $formater_article($r);
+	while ($r = spip_fetch_array($q)) $t .= $formater($r);
 	spip_free_result($q);
 
 	$style = "style='visibility: hidden; float: $spip_lang_right'";

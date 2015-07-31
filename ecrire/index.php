@@ -82,11 +82,11 @@ if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 	$var_auth = true;
 } else {
-	$var_auth = charger_fonction('auth', 'inc');
-	$var_auth = $var_auth();
-	if ($var_auth) {
+	$auth = charger_fonction('auth', 'inc');
+	$auth = $auth();
+	if ($auth) {
 		include_spip('inc/headers');
-		redirige_par_entete($var_auth);
+		redirige_par_entete($auth);
 	}
  }
 
@@ -146,8 +146,8 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 		AND changer_langue($spip_lang_ecrire)) {
 			spip_query("UPDATE spip_auteurs SET lang = " . _q($spip_lang_ecrire) . " WHERE id_auteur = " . intval($GLOBALS['auteur_session']['id_auteur']));
 			$GLOBALS['auteur_session']['lang'] = $var_lang_ecrire;
-			$var_f = charger_fonction('session', 'inc');
-			$var_f($GLOBALS['auteur_session']);
+			$session = charger_fonction('session', 'inc');
+			$session($GLOBALS['auteur_session']);
 		}
 	}
 }
