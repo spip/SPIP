@@ -37,7 +37,7 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
 	AND !$url = _request('url') # ni d'url passee par l'utilisateur
 	)
-		$url = str_replace('&amp;', '&', self());
+		$url = parametre_url(self(), '', '', '&');
 	return login_explicite($login, $url);
 }
 
@@ -45,7 +45,7 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 function login_explicite($login, $cible) {
 	global $auteur_session;
 
-	$action = str_replace('&amp;', '&', self());
+	$action = parametre_url(self(), '', '', '&');
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_erreur', '', '&');
 		$cible = parametre_url($cible, 'var_login', '', '&');
