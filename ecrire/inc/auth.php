@@ -43,7 +43,9 @@ function acces_mots() {
 // http://doc.spip.org/@acces_article
 function acces_article($id_article)
 {
-	global $connect_id_auteur;
+	global $connect_id_auteur, $connect_toutes_rubriques;
+
+	if ($connect_toutes_rubriques) return true;
 
 	$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id_article"));
 
@@ -120,10 +122,10 @@ function inc_auth_dist() {
 		$var_f = charger_fonction('session', 'inc');
 		if ($connect_id_auteur = $var_f()) {
 			$auth_can_disconnect = true;
-		}
+		} else unset($_COOKIE['spip_session']);
 	}
 	
-	// sinon, essayer auth http si significatif
+	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
 	if (!$ignore_auth_http AND !$connect_id_auteur) {
 		if ($_SERVER['PHP_AUTH_USER'] AND $_SERVER['PHP_AUTH_PW']) {

@@ -23,27 +23,42 @@ function inc_controler_action_auteur_dist()
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$action = _request('action');
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
+	if (!verifier_action_auteur("$action-$arg", $hash)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 }
 
 // http://doc.spip.org/@caracteriser_auteur
-function caracteriser_auteur($id_auteur=0) {
+function caracteriser_auteur() {
 	global $auteur_session;
-	if (!$id_auteur = intval($id_auteur))
-		$id_auteur = $auteur_session['id_auteur'];
+	static $caracterisation = array();
 
+	if ($caracterisation) return $caracterisation;
+
+	$id_auteur = $auteur_session['id_auteur'];
+	if (!$id_auteur) {
+  // si l'auteur courant n'est pas connu alors qu'il peut demander une action
+  // c'est une connexion par php_auth, on se rabat sur le cookie.
+  // S'il n'avait pas le droit de realiser cette action, le hash sera faux.
+		if (isset($_COOKIE['spip_session'])
+		AND (preg_match('/^(\d+)/',$_COOKIE['spip_session'],$r))) {
+			  return array($r[1], '');
+			  // Necessaire aux forums anonymes.
+			  // Pour le reste, ca echouera.
+		} else return array('',''); 	  
+	}
 	// Eviter l'acces SQL si le pass est connu de PHP
+
 	if ($auteur_session['pass'])
-		return array($id_auteur, $auteur_session['pass']); 
+		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
 	else {
 		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if (!$t = spip_fetch_array($t)) die(_L("Faut pas se gener"));
-		return array($t['id_auteur'], $t['pass']);
+		if ($t = spip_fetch_array($t))
+			return $caracterisation = array($t['id_auteur'], $t['pass']);
+		spip_log("auteur $id_auteur sans caracterisation");
+		die(_T('info_acces_interdit'));
 	}
 }
 
@@ -53,14 +68,14 @@ function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
 }
 
 // http://doc.spip.org/@calculer_action_auteur
-function calculer_action_auteur($action, $id_auteur = 0) {
-	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
+function calculer_action_auteur($action) {
+	list($id_auteur, $pass) = caracteriser_auteur();
 	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
 }
 
 // http://doc.spip.org/@verifier_action_auteur
-function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
-	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
+function verifier_action_auteur($action, $valeur) {
+	list($id_auteur, $pass) = caracteriser_auteur();
 
 	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
 		return true;
@@ -226,7 +241,8 @@ function verifier_php_auth() {
 			}
 		  }
 		}
-	}
+	} 
+	return false;
 }
 
 //
