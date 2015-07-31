@@ -87,9 +87,7 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = ''){
 
 
 /**
- * Fonction de formatage du contenu renvoye en ajax
- *
- * http://doc.spip.org/@ajax_retour
+ * Fonction de formatage du contenu renvoyé en ajax
  *
  * @param string $corps
  * @param string $content_type

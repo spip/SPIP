@@ -3226,12 +3226,16 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
 
 
 /**
- * Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
- * avec le secret du site, le gziper si possible...
- * l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
+ * Encoder un contexte pour l'ajax
  *
- * http://doc.spip.org/@encoder_contexte_ajax
+ * Encoder le contexte, le signer avec une clé, le crypter
+ * avec le secret du site, le gziper si possible.
+ * 
+ * L'entrée peut-être sérialisée (le `#ENV**` des fonds ajax et ajax_stat)
  *
+ * @see decoder_contexte_ajax()
+ * @uses calculer_cle_action()
+ * 
  * @param string|array $c
  *   contexte, peut etre un tableau serialize
  * @param string $form
@@ -3241,6 +3245,7 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
  * @param string $ajaxid
  *   ajaxid pour cibler le bloc et forcer sa mise a jour
  * @return string
+ *   hash du contexte
  */
 function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if (is_string($c)
@@ -3314,8 +3319,22 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	return "<div class='$class' ".$compl."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
-// la procedure inverse de encoder_contexte_ajax()
-// http://doc.spip.org/@decoder_contexte_ajax
+/**
+ * Décoder un hash de contexte pour l'ajax
+ *
+ * Précude inverse de `encoder_contexte_ajax()`
+ *
+ * @see encoder_contexte_ajax()
+ * @uses calculer_cle_action()
+ *
+ * @param string $c
+ *   hash du contexte
+ * @param string $form
+ *   nom du formulaire eventuel
+ * @return array|string|bool
+ *   - array|string : contexte d'environnement, possiblement sérialisé
+ *   - false : erreur de décodage
+ */
 function decoder_contexte_ajax($c,$form='') {
 	if (!function_exists('calculer_cle_action'))
 		include_spip("inc/securiser_action");
@@ -3336,9 +3355,20 @@ function decoder_contexte_ajax($c,$form='') {
 	return false;
 }
 
-// encrypter/decrypter un message
-// http://www.php.net/manual/fr/language.operators.bitwise.php#81358
-// http://doc.spip.org/@_xor
+
+/**
+ * Encrypte ou décrypte un message
+ *
+ * @link http://www.php.net/manual/fr/language.operators.bitwise.php#81358
+ * 
+ * @param string $message
+ *    Message à encrypter ou décrypter
+ * @param null|string $key
+ *    Clé de cryptage / décryptage.
+ *    Une clé sera calculée si non transmise
+ * @return string
+ *    Message décrypté ou encrypté
+**/
 function _xor($message, $key=null){
 	if (is_null($key)) {
 		if (!function_exists('calculer_cle_action'))
@@ -3354,9 +3384,28 @@ function _xor($message, $key=null){
 	return $message;
 }
 
-// Les vrai fonctions sont dans le plugin forum, mais on evite ici une erreur du compilateur
-// en absence du plugin
+/**
+ * Retourne une URL de réponse de forum (aucune action ici)
+ *
+ * @see filtre_url_reponse_forum() du plugin forum (prioritaire)
+ * @note 
+ *   La vraie fonction est dans le plugin forum,
+ *   mais on évite ici une erreur du compilateur en absence du plugin
+ * @param string $texte 
+ * @return string 
+ */
 function url_reponse_forum($texte){return $texte;}
+
+/**
+ * retourne une URL de suivi rss d'un forum (aucune action ici)
+ *
+ * @see filtre_url_rss_forum() du plugin forum (prioritaire)
+ * @note 
+ *   La vraie fonction est dans le plugin forum,
+ *   mais on évite ici une erreur du compilateur en absence du plugin
+ * @param string $texte 
+ * @return string 
+ */
 function url_rss_forum($texte){return $texte;}
 
 

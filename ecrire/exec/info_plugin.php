@@ -1,9 +1,22 @@
 <?php
 
+/**
+ * Gestion d'affichage d'un descriptif de plugin en ajax
+ * @package SPIP\Core\Exec
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
-// http://doc.spip.org/@exec_info_plugin_dist
+
+/**
+ * Affichage de la description d'un plugin (en ajax)
+
+ * @uses plugins_get_infos_dist()
+ * @uses plugins_afficher_plugin_dist()
+ * @uses affiche_bloc_plugin()
+ * @uses ajax_retour()
+ */
 function exec_info_plugin_dist() {
 	if (!autoriser('configurer', '_plugins')) {
 		include_spip('inc/minipres');
