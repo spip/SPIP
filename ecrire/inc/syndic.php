@@ -120,17 +120,25 @@ function analyser_backend($rss, $url_syndic='') {
 		// Date
 		$la_date = '';
 		if (preg_match(',<(published|modified|issued)>([^<]*)<,Uims',
-		$item,$match))
+		$item,$match)) {
+			cdata_echappe_retour($match, $echappe_cdata);
 			$la_date = my_strtotime($match[2]);
+		}
 		if (!$la_date AND
-		preg_match(',<(pubdate)>([^<]*)<,Uims',$item, $match))
+		preg_match(',<(pubdate)>([^<]*)<,Uims',$item, $match)) {
+			cdata_echappe_retour($match, $echappe_cdata);
 			$la_date = my_strtotime($match[2]);
+		}
 		if (!$la_date AND
-		preg_match(',<([a-z]+:date)>([^<]*)<,Uims',$item,$match))
+		preg_match(',<([a-z]+:date)>([^<]*)<,Uims',$item,$match)) {
+			cdata_echappe_retour($match, $echappe_cdata);
 			$la_date = my_strtotime($match[2]);
+		}
 		if (!$la_date AND
-		preg_match(',<date>([^<]*)<,Uims',$item,$match))
+		preg_match(',<date>([^<]*)<,Uims',$item,$match)) {
+			cdata_echappe_retour($match, $echappe_cdata);
 			$la_date = my_strtotime($match[1]);
+		}
 
 		// controle de validite de la date
 		// pour eviter qu'un backend errone passe toujours devant
