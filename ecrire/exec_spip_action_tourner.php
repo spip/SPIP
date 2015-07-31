@@ -17,7 +17,7 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function spip_action_tourner_dist() {
 	
-	global, $var_rot, $convert_command, $redirect;
+	global $var_rot, $convert_command, $redirect;
 	global $action, $arg, $hash, $id_auteur;
 	include_ecrire("inc_session");
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
