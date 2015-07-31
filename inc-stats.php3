@@ -100,7 +100,10 @@ function afficher_raccourci_stats($id_article) {
 		if ($row = @mysql_fetch_array($result)) {
 			$visites = $visites + $row['c'];
 		}
-		echo "[$visites visites&nbsp;; popularit&eacute;&nbsp;: $popularite&nbsp;%]";
+		echo "[$visites visites";
+		if (lire_meta('activer_statistiques_ref') == 'oui')
+			echo "&nbsp;; popularit&eacute;&nbsp;: $popularite&nbsp;%";
+		echo "]";
 	}
 }
 
