@@ -21,13 +21,13 @@
 		[(#REM) Contenu principal : derniers articles publies ]
 		<div id="contenu">
 
-			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			<h1>#NOM_SITE_SPIP</h1>
 			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
 			[(#REM) Les deux derniers articles ]
 			<B_articles_recents>
 			<div class="liste-articles">
-				<h2 class="invisible"><:derniers_articles:></h2>
+				<h2><:derniers_articles:></h2>
 				<ul>
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
 					<li>
@@ -52,7 +52,7 @@
 
 				<div class="liste-articles">
 					[(#ANCRE_PAGINATION)]
-					[(#ENV{debut_articles}|?{'',' '})<h2 class="invisible"><:articles_recents:></h2>]
+					[(#ENV{debut_articles}|?{'',' '})<h2><:articles_recents:></h2>]
 					<ul>
 						<BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination}>
 						<li>
