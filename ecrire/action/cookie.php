@@ -77,7 +77,7 @@ if ($test_echec_cookie == 'oui') {
 	preg_match(',^[^/]*//[^/]*(.*)/$,',
 		   url_de_base(),
 		   $r);
-	spip_setcookie('spip_session', 'test_echec_cookie');
+	spip_setcookie('spip_session', 'test_echec_cookie',0,$r[1]);
 	redirige_par_entete(generer_url_public('login',
 			    "var_echec_cookie=oui&url="
 			    . ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS), true));
@@ -132,7 +132,7 @@ if ($essai_login == "oui") {
 		if ($session_remember == 'oui')
 			spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14,$r[1]);
 		else
-			spip_setcookie('spip_session', $cookie_session);
+			spip_setcookie('spip_session', $cookie_session, 0, $r[1]);
 
 		$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
 		$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
