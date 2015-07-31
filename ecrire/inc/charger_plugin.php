@@ -499,8 +499,10 @@ function afficher_liste_listes_plugins() {
 // sinon on donne l'url du zip
 // http://doc.spip.org/@bouton_telechargement_plugin
 function bouton_telechargement_plugin($url, $rep) {
-	if (_DIR_PLUGINS_AUTO
-	AND @is_dir(_DIR_PLUGINS_AUTO))
+	if (($rep == 'lib')?
+			is_dir(_DIR_RACINE . 'lib'):
+			(_DIR_PLUGINS_AUTO AND @is_dir(_DIR_PLUGINS_AUTO))
+		)
 		$bouton = redirige_action_auteur('charger_plugin',
 			$rep, // arg = 'lib' ou 'plugins'
 			'',
