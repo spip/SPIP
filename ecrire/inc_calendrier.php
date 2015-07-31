@@ -175,7 +175,7 @@ function http_cal_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour, 
 
 function http_calendrier_ics($evenements, $amj = "") 
 {
-	$res = '';
+  $res = '';
 	if ($evenements)
 	{
 		foreach ($evenements as $evenement)
@@ -205,7 +205,15 @@ function http_calendrier_ics($evenements, $amj = "")
 
 				$desc = propre($evenement['DESCRIPTION']);
 				$sum = $evenement['SUMMARY'];
-				if ($sum[0] != '<')
+				if (!(is_int($evenement['CATEGORIES'])))
+				  {
+				    if ($evenement['CATEGORIES'] == 'info_articles')
+				      $i = 'puce-verte-breve.gif';
+				    else
+				      $i = 'puce-blanche-breve.gif';
+				    $sum = http_img_pack($i, $desc,  "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . $sum;
+				  }
+				else 
 				{
 				  if ($sum)
 				    $sum = "<span style='color: black'>" .
@@ -275,8 +283,8 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script ,$evt)
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
 
 	if ($sansduree)
-		foreach($sansduree as $d => $v) 
-			{ $r = http_calendrier_image_et_typo($v);
+		foreach($sansduree as $d => $r) 
+			{
 			  $evenements[$d] = !$evenements[$d] ? $r : 
 			     array_merge($evenements[$d], $r); }
 	$annee = annee($date);
@@ -432,7 +440,7 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 	global $spip_lang_right, $spip_lang_left, $couleur_claire;
 	if (!isset($couleur_claire)) $couleur_claire = 'white';
 	$gadget = "<div style='position: relative;z-index: 1000;'
-			onmouseover=\"montrer('$id');\" .
+			onmouseover=\"montrer('$id');\"
 			onmouseout=\"cacher('$id');\">";
 
 	$gadget .= "<table id='$id' class='calendrier-cadreagenda' style='position: absolute; background-color: $couleur_claire'>";
@@ -640,7 +648,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 		else $border_left = "";
 		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left'>" .
 		  http_calendrier_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre) .
-			(!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
+		  (!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
 			"\n\t</td>";
 		if ($jour_semaine==0) 
 		{ 
@@ -890,25 +898,6 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 	return $total . (!$ligne ? '' : "\n<tr>$ligne\n</tr>");
 }
 
-function http_calendrier_image_et_typo($evenements)
-{
-  $res = array();
-  if ($evenements)
-    foreach($evenements as $k => $v)
-      {
-	if (!(is_int($v['CATEGORIES'])))
-	  {
-	    $v['DESCRIPTION'] = typo($v['DESCRIPTION']);
-	    if ($v['CATEGORIES'] == 'info_articles')
-	      $i = 'puce-verte-breve.gif';
-	    else
-	      $i = 'puce-blanche-breve.gif';
-	    $v['SUMMARY'] = http_img_pack($i, ".",  $style = "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . ($v['SUMMARY'] ? $v['SUMMARY'] : $v['DESCRIPTION']);
-	  }
-	$res[$k] = $v;
-      }
-  return $res;
-}
 
 # si la largeur le permet, les evenements sans duree, 
 # se placent a cote des autres, sinon en dessous
@@ -924,7 +913,7 @@ function http_calendrier_jour_trois($evt, $largeur, $dimjour, $fontsize, $border
 		$res .= "\n<div class='calendrier-verdana10 calendrier-titre'>".
 		  _T($k) .
 		  "</div>" .
-		  http_calendrier_ics(http_calendrier_image_et_typo($v));
+		  http_calendrier_ics($v);
 	}
 		
 	$pos = ((_DIR_RESTREINT || $largeur) ? "-$dimjour" : 0);
