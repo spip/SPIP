@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'D&euml;st Schl&euml;sselwuert &auml;nneren',
 'admin_modifier_rubrique' => 'D&euml;s Rubrik &auml;nneren',
 'admin_recalculer' => 'D&euml;s S&auml;it nei berechnen',
+'afficher_trad' => 'Iwersetzunge weisen',
 'alerte_maj_impossible' => '<b>Alarm&nbsp;!</b> Den Update vun der MySQL-Datekank op d\'Versioun @version@ ass onm&eacute;iglech, vill&auml;icht w&eacute;int engem Problem mat den &Auml;nnerungs-Rechter vun der Datebank. Kontakt&eacute;iert weg &auml;ren Provider.',
 'analyse_xml' => 'XML-Analyse',
 'antispam_champ_vide' => 'Loosst d&euml;st Feld eidel:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'Kalenner vum Dag',
 'cal_par_mois' => 'Kalenner vum Mount',
 'cal_par_semaine' => 'Kalenner vun der Woch',
+'choix_couleur_interface' => 'Farw',
+'choix_interface' => 'Wiel vum Interface',
 'confirm_changer_statut' => 'Opgepasst, dir w&euml;llt de Status vun d&euml;sem Element &auml;nneren. W&euml;llt dir weiderfueren?',
 'correcte' => 'richteg',
 
@@ -282,7 +285,7 @@ Merci fir &auml;r Participatioun
 'forum_non_inscrit' => 'Dir sidd n&euml;t ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 'forum_page_url' => '(Wann &auml;re Message sech op en Artikel vum Internet bezitt oder op eng S&auml;it d&eacute;i m&eacute;i Informatiounen g&euml;t, k&euml;nnt dir hei den Titel an d\'Adress vun der S&auml;it uginn.)',
 'forum_par_auteur' => 'No @auteur@',
-'forum_poste_par' => 'Message poste@parauteur@ als Suite vun &auml;rem Artikel.',
+'forum_poste_par' => 'Message gesch&eacute;ckt vun @parauteur@ als Suite vum Artikel "@titre@".',
 'forum_probleme_database' => 'Problem mat der Datebank, &auml;re Message gouf n&euml;t enregistr&eacute;iert.',
 'forum_qui_etes_vous' => '<b>Wie sidd Dir?</b> (optionnel)',
 'forum_texte' => 'Text vun &auml;rem Message:',
@@ -409,15 +412,16 @@ Merci fir &auml;r Participatioun
 'info_erreur_requete' => 'Fehler am Query:',
 'info_erreur_squelette2' => '&Euml;t g&euml;t kee Skelett <b>@fichier@</b> ...',
 'info_erreur_systeme' => 'System-Fehler (errno @errsys@)',
-'info_erreur_systeme2' => 'Den Harddisk ass vill&auml;icht voll oder d\'Datebank futti.<br>
-<font color=\'red\'>Versicht <a href=\'@script@\'>d\'Datebank ze fl&eacute;cken</a>, oder kontakt&eacute;iert &auml;re Provider.</font>',
+'info_erreur_systeme2' => 'Den Harddisk ass vill&auml;icht voll oder d\'Datebank futti.
+<span style=\'color:#f00\'>Versicht <a href=\'@script@\'>d\'Datebank ze fl&eacute;cken</a>,
+oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_fini' => '&Euml;t ass f&auml;rdeg!',
 'info_format_image' => 'Bild-Formater d&eacute;i k&euml;nnen benotzt ginn fir Vignetten ze maachen: @gd_formats@.',
 'info_format_non_defini' => 'Format n&euml;t defin&eacute;iert',
 'info_grand_ecran' => 'Groussen &Eacute;cran',
 'info_image_aide' => 'H&Euml;LLEF',
 'info_image_process_titre' => 'Fabrikatiouns-Method fir d\'Vignetten',
-'info_impossible_lire_page' => '<B>Felhler!</B> Onm&eacute;igl&euml;ch d\'S&auml;it <tt><html>@test_proxy@</html></tt> ze liesen duerch de Proxy <tt>',
+'info_impossible_lire_page' => '<b>Felhler!</b> Onm&eacute;igl&euml;ch d\'S&auml;it <tt><html>@test_proxy@</html></tt> duerch de Proxy ze liesen',
 'info_inclusion_directe' => 'Direkt Abannung:',
 'info_inclusion_vignette' => 'Ubannen vun der Vignette:',
 'info_installation_systeme_publication' => 'Installatioun vum System...',
@@ -570,6 +574,7 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 
 
 // M
+'masquer_trad' => 'Iwersetzungen verstoppen',
 'module_fichiers_langues' => 'Sprooche-Fichier\'en',
 
 
@@ -653,13 +658,13 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 'texte_creation_automatique_vignette' => 'Automatesch Vignetten maachen ass op d&euml;sem Site ageschalt. Wann dir mat engem Formulaire Biller am Format @gd_formats@ eroplued, da kr&eacute;ien se eng Vignette vun enger maximaler Gr&eacute;isst vun @taille_preview@&nbsp;Pixel.',
 'texte_documents_associes' => 'D&euml;s Dokumenter sinn un den Artikel gebonnen, awer n&euml;t direkt agef&uuml;gt. Je no Design vum Site ginn se als verlinkten Dokumenter gewisen.',
 'texte_erreur_mise_niveau_base' => 'Datebank-Fehler beim Update.
-D\'Bild <B>@fichier@</B> huet n&euml;t fonktionn&eacute;iert (Artikel @id_article@).
+D\'Bild <b>@fichier@</b> ass n&euml;t duerchgaang (Artikel @id_article@).
 Not&eacute;iert d&euml;s Referenz, prob&eacute;iert nach eng K&eacute;ier, a kontroll&eacute;iert op d\'Biller an den Artikelen gewisen ginn.',
-'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert als <B>@auth_login@</B>, awer de Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
+'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert als <b>@auth_login@</b>, awer deen Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
 Versicht',
 'texte_inc_auth_2' => 'Iech unzemelden',
 'texte_inc_auth_3' => ', eventuell nodeem der &auml;re Browser nei gestart hutt.',
-'texte_inc_config' => 'D\'&Auml;nnerungen op d&euml;se S&auml;iten beaflossen de Fonktionnement vun &auml;rem Site staark. Maacht n&auml;ischt ier d&euml;r de SPIP-System richteg kennt.<P align="justify"><B>Generell ass ungeroden, d&euml;s S&auml;iten dem Webmaster vun &auml;rem Site ze iwwerloossen.</B>',
+'texte_inc_config' => 'D\'&Auml;nnerungen op d&euml;se S&auml;iten beaflossen de Fonktionnement vun &auml;rem Site ganz staark. Maacht n&auml;ischt ier d&euml;r de SPIP-System richteg kennt.<br /><br /><b>Generell ass ungeroden, d&euml;s S&auml;iten dem Webmaster vun &auml;rem Site ze iwwerloossen.</b>',
 'texte_inc_meta_1' => 'De System huet e Fehler fonnt beim Schreiwen vum Fichier <code>@fichier@</code>. Als Administrateur vum Site,',
 'texte_inc_meta_2' => 'kontroll&eacute;iert d\'Schreiw-Rechter',
 'texte_inc_meta_3' => 'am Dossier <code>@repertoire@</code>.',

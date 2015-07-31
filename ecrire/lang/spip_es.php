@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => '<pLUS_UTILISE><NEW>Obtener el archivo <i>iCal</i>',
 'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
 'calendrier_synchro_public' => 'El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'Selecci&oacute;n de la interfase',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
@@ -424,7 +424,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_erreur_requete' => 'Error en la petici&oacute;n:',
 'info_erreur_squelette2' => 'No hay ning&uacute;n esqueleto <b>@fichier@</b>  disponible...',
 'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
-'info_erreur_systeme2' => 'El disco duro puede estar lleno o la base de datos da&ntilde;ada.<br>
+'info_erreur_systeme2' => '<MODIF>El disco duro puede estar lleno o la base de datos da&ntilde;ada.<br />
  <font color=\'red\'>Intenta <a href=\'@script@\'>reparar la base</a>,
  o contacta tu hospedaje.</font>',
 'info_fini' => '&iexcl;Terminado!',
