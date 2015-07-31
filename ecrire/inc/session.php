@@ -146,7 +146,8 @@ function ecrire_fichier_session($fichier, $auteur) {
 
 //
 // Cette fonction efface toutes les sessions appartenant a l'auteur
-// On en profite pour effacer toutes les sessions creees il y a plus de 48 h
+// On en profite pour effacer toutes les sessions
+// creees il y a plus de 4*_RENOUVELLE_ALEA
 // Tenir compte de l'ancien format ou les noms commencaient par "session_"
 // et du meme coup des repertoires plats
 
@@ -155,7 +156,7 @@ function supprimer_sessions($id_auteur, $toutes=true) {
 
 	if ($toutes) {
 		$dir = opendir(_DIR_SESSIONS);
-		$t = time()  - (48 * 3600);
+		$t = time()  - (4*_RENOUVELLE_ALEA);
 		while(($f = readdir($dir)) !== false) {
 			if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 				$f = _DIR_SESSIONS . $f;
