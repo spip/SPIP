@@ -215,7 +215,7 @@ function construire_hierarchie($id_rubrique) {
 	$id_rubrique = intval($id_rubrique);
 	while ($id_rubrique) {
 		$hierarchie = $id_rubrique."-".$hierarchie;
-		$query = "SELECT a.id_parent ida, b.id_parent idb".
+		$query = "SELECT a.id_parent AS ida, b.id_parent AS idb ".
 			"FROM spip_rubriques AS a LEFT JOIN spip_rubriques AS b ON (b.id_rubrique = a.id_parent) ".
 			"WHERE a.id_rubrique = $id_rubrique";
 		$result = spip_query($query);
