@@ -85,7 +85,7 @@ function spip_mysql_select($select, $from, $where,
 			(!is_array($from) ? $from : spip_select_as($from))))
 		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
 		. ($groupby ? "\nGROUP BY $groupby" : '')
-		. ($having ? "\nHAVING $having" : '')
+		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
 		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
 		. ($limit ? "\nLIMIT $limit" : '');
 

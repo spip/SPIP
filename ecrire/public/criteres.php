@@ -518,22 +518,21 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 
 	$boucles[$idb]->in .= $x;
 
-	$where = array("'IN'", "\"$arg\"", "'('  . join(',',$var) . ')'");
-
 	// inserer la negation (cf !...)
-	if ($crit->not) {
-			$where = array("'NOT'", $where);
-		} else {
+	if (!$crit->not) {
 			$boucles[$idb]->default_order[] = "'cpt'";
-			$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',$var) . \") AS cpt";
-		}
+			$op = '<>';
+	} else $op = '=';
 
-	 // inserer la condition (cf {lang?}) et c'est fini
+	$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',$var) . \") AS cpt";
+	$op = array("'$op'", "'cpt'", 0);
 
-	$boucles[$idb]->where[]= (!$crit->cond ? $where :
+//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
+
+	$boucles[$idb]->having[]= (!$crit->cond ? $op :
 	  array("'?'",
 		calculer_argument_precedent($idb, $col, $boucles),
-		$where,
+		$op,
 		"''"));
 }
 
