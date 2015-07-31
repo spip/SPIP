@@ -10,11 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-define('_FC_LANCEUR', 'tmp/pre_spip.inc');
-if (@file_exists(_FC_LANCEUR)) include _FC_LANCEUR;
-else {
-
 # ou est l'espace prive ?
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
@@ -27,6 +22,5 @@ if (isset($_GET['fond'])) {
 
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';
-}
 
 ?>
