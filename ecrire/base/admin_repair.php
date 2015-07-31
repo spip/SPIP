@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist($titre='', $reprise='') {
 
-	$desc = spip_connect();
-	if (function_exists($f = @$desc['repair']) AND $titre) {
+	$f = sql_repair('repair', NULL, true);
+	if ($f) {
 		$res = admin_repair_tables();
 	} else {
 		if ($titre)
@@ -57,7 +57,7 @@ function admin_repair_plat(){
 			$src = $row['fichier'];
 			$dest = $d . substr($src,strlen($d));
 			if (deplacer_fichier_upload(_DIR_IMG . $src, _DIR_IMG . $dest)) {
-				spip_mysql_updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
+				sql_updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
 				spip_unlink(_DIR_IMG . $src);
 				$out .= "$src => $dest<br />";				
 			}
