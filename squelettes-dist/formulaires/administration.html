@@ -1,22 +1,23 @@
  <div[ class="(#ENV{divclass,spip-admin-bloc})"] dir="#LANG_DIR">[
 	<a href="(#ENV{analyser})" class="spip-admin-boutons"
-		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>][
-	<a href="[(#ENV{voir_article})]" class="spip-admin-boutons"
+		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>]
+	[<a href="[(#ENV{voir_article})]" class="spip-admin-boutons"
 		id="voir_article"><:article:>
-			((#ENV{id_article}))</a>][
-	<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons"
+			((#ENV{id_article}))</a>]
+	[<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons"
 		id="voir_breve"><:breve:>
-			((#ENV{id_breve}))</a>][
-	<a href="[(#ENV{voir_rubrique})]" class="spip-admin-boutons"
+			((#ENV{id_breve}))</a>]
+	[<a href="[(#ENV{voir_rubrique})]" class="spip-admin-boutons"
 		id="voir_rubrique"><:rubrique:>
-			((#ENV{id_rubrique}))</a>][
-	<a href="[(#ENV{voir_mot})]" class="spip-admin-boutons"
+			((#ENV{id_rubrique}))</a>]
+	[<a href="[(#ENV{voir_mot})]" class="spip-admin-boutons"
 		id="voir_mot"><:mots_clef:>
-			((#ENV{id_mot}))</a>][(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
+			((#ENV{id_mot}))</a>]
+	[(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
 	<a href="[(#ENV{voir_site})]" class="spip-admin-boutons"
 		id="voir_site"><:info_site:>
-			[((#ENV{id_syndic}))]</a>]][
-	<a href="[(#ENV{voir_auteur})]" class="spip-admin-boutons"
+			[((#ENV{id_syndic}))]</a>]]
+	[<a href="[(#ENV{voir_auteur})]" class="spip-admin-boutons"
 		id="voir_auteur"><:auteur:>
 			((#ENV{id_auteur}))</a>]<!--extra-->[
 	<a href="(#ENV{ecrire})" class="spip-admin-boutons"
