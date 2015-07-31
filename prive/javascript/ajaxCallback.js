@@ -143,7 +143,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							leclk_y = leform.clk_y;
             }
         }
-				jQuery(cible).addClass('loading').animeajax().positionner(false);
+				jQuery(cible).wrap('<div />');
+				cible = jQuery(cible).parent();
+				jQuery(cible).animeajax().positionner(false);
 			},
 			success: function(c){
 				if (c=='noajax'){
@@ -166,14 +168,19 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {
-					var recu = jQuery('<div><\/div>').html(c);
-					var d = jQuery('div.ajax',recu);
-					if (d.length)
-						c = d.html();
-					jQuery(cible)
-					.removeClass('loading')
-					.html(c);
-					var a = jQuery('a:first',recu).eq(0);
+					jQuery(cible).html(c);
+					var a = jQuery('a:first',cible).eq(0);
+					var d = jQuery('div.ajax',cible);
+					if (!d.length)
+						// si pas .ajax dans le form, remettre la classe sur le div que l'on a insere
+						jQuery(cible).addClass('ajax').removeClass('loading');
+					else {
+						// sinon nettoyer les br ajaxie
+						d.siblings('br.bugajaxie').remove();
+						// desemboiter d'un niveau pour manger le div que l'on a insere
+						jQuery(":first",cible).unwrap();
+					}
+					// ne pas re-executer le js
 					if (a.length
 					  && a.is('a[name=ajax_ancre]')
 					  && jQuery(a.attr('href'),cible).length){
