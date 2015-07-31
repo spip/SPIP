@@ -12,37 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@description_table
-function description_table($nom){
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
-
-	$nom_table = $nom;
-	if (in_array($nom, $table_des_tables))
-	   $nom_table = 'spip_' . $nom;
-
-	include_spip('base/serial');
-	if (isset($tables_principales[$nom_table]))
-		return array($nom_table, $tables_principales[$nom_table]);
-
-	include_spip('base/auxiliaires');
-	$nom_table = 'spip_' . $nom;
-	if (isset($tables_auxiliaires[$nom_table]))
-		return array($nom_table, $tables_auxiliaires[$nom_table]);
-
-	if ($desc = spip_abstract_showtable($nom, '', true))
-	  if (isset($desc['field'])) {
-	    return array($nom, $desc);
-	  }
-	return array($nom,array());
-}
-
 // pour le support des vieux dump
 // http://doc.spip.org/@inc_import_1_2_dist
 function inc_import_1_2_dist($f, $request, $gz='fread') {
   global $import_ok;
 	static $field_desc = array ();
 
-	static $tables;
+	static $tables, $a_importer;
 	if (!$tables) {
 		$init = $request['init'];
 		$a_importer = $init($request);
