@@ -297,6 +297,7 @@ $spip_pipeline = array(
 	'rechercher_liste_des_jointures' => '',
 	'recuperer_fond' => '',
 	'styliser' => '',
+	'trig_calculer_prochain_postdate' => '',
 	'trig_propager_les_secteurs' => '',
 );
 

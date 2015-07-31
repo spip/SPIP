@@ -14,27 +14,41 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Fonction a appeler lorsque le statut d'un objet change dans une rubrique
-// ou que la rubrique est déplacee.
+// ou que la rubrique est dï¿½placee.
 // Le 2e arg est un tableau ayant un index "statut" (indiquant le nouveau)
 // et eventuellement un index "id_rubrique" (indiquant le deplacement)
 
 // Si le statut passe a "publie", la rubrique et ses parents y passent aussi
-// et les langues utilisées sont recalculées. 
-// Conséquences symétriques s'il est depublie'.
-// S'il est deplace' alors qu'il etait publieé, double consequence.
+// et les langues utilisï¿½es sont recalculï¿½es. 
+// Consï¿½quences symï¿½triques s'il est depublie'.
+// S'il est deplace' alors qu'il etait publieï¿½, double consequence.
 // Tout cela devrait passer en SQL, sous forme de Cascade SQL.
 
 // http://doc.spip.org/@calculer_rubriques_if
-function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
+function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postdate = false)
 {
 	$neuf = false;
 	if ($statut_ancien == 'publie') {
-		if (isset($modifs['statut']) OR isset($modifs['id_rubrique']))
+		if (isset($modifs['statut'])
+			OR isset($modifs['id_rubrique'])
+			OR ($postdate AND strtotime($postdate)>time()))
 			$neuf |= depublier_branche_rubrique_if($id_rubrique);
-		if (isset($modifs['id_rubrique']))
+		// ne publier que si c'est pas un postdate, ou si la date n'est pas dans le futur
+		if ($postdate){
+			calculer_prochain_postdate(true);
+			$neuf |= (strtotime($postdate)<=time()); // par securite
+		}
+		elseif (isset($modifs['id_rubrique']))
 			$neuf |= publier_branche_rubrique($modifs['id_rubrique']);
-	} elseif ($modifs['statut']=='publie')
-		$neuf |= publier_branche_rubrique($id_rubrique);
+	}
+	elseif ($modifs['statut']=='publie'){
+		if ($postdate){
+			calculer_prochain_postdate(true);
+			$neuf |= (strtotime($postdate)<=time()); // par securite
+		}
+		else
+			$neuf |= publier_branche_rubrique($id_rubrique);
+	}
 
 	if ($neuf)
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
@@ -105,7 +119,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 //
 // Fonction appelee apres importation:
 // calculer les meta-donnes resultantes,
-// remettre de la cohérence au cas où la base importee en manquait
+// remettre de la cohï¿½rence au cas oï¿½ la base importee en manquait
 // Cette fonction doit etre invoque sans processus concurrent potentiel.
 // http://doc.spip.org/@calculer_rubriques
 function calculer_rubriques() {
@@ -158,7 +172,7 @@ function calculer_rubriques_publiees() {
 		sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un *document* publie
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_documents AS fille, spip_documents_liens AS lien", "rub.id_rubrique = lien.id_objet AND lien.objet='rubrique' AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date AND fille.mode='document' $postdates ", "rub.id_rubrique");
+	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_documents AS fille, spip_documents_liens AS lien", "rub.id_rubrique = lien.id_objet AND lien.objet='rubrique' AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date AND fille.mode='document'", "rub.id_rubrique");
 	while ($row = sql_fetch($r))
 	  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 	
@@ -345,10 +359,14 @@ function calculer_prochain_postdate($check= false) {
 		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 			"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
-		$r = sql_select("DISTINCT A.id_rubrique AS id", "spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "R.statut != 'publie' AND A.statut='publie'$postdates");
+		$r = sql_select("DISTINCT A.id_rubrique AS id",
+			"spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "R.statut != 'publie' AND A.statut='publie'$postdates");
 		while ($row = sql_fetch($r))
 			publier_branche_rubrique($row['id']);
+
+		pipeline('trig_calculer_prochain_postdate','');
 	}
+
 	$t = sql_fetsel("date", "spip_articles", "statut='publie' AND date > ".sql_quote(date('Y-m-d H:i:s')), "", "date", "1");
 	
 	if ($t) {
