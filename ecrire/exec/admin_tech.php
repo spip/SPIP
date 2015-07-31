@@ -48,9 +48,6 @@ function exec_admin_tech_dist()
 		$dir_dump = determine_upload();
 	}
 
-	include_spip('inc/export');
-	$file = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,false));
-	$zfile = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,true));
 	$dir_dump = joli_repertoire($dir_dump);
 
  debut_droite();
@@ -80,23 +77,27 @@ function exec_admin_tech_dist()
    _T('texte_admin_tech_02'),
   "</p>";
 
-if ($flag_gz) {
+ $file = nom_fichier_dump();
+ $nom = "\n<input name='nom_sauvegarde' size='40' value='$file' />";
+ $znom = "\n<input name='znom_sauvegarde' size='40' value='$file' />";
+ if ($flag_gz) {
 
 	echo "\n<p style='text-align: justify;'>", _T('texte_admin_tech_03'), "</p>\n<p>";
 	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> ",
 	  _T('bouton_radio_sauvegarde_compressee',
-	     array('fichier'=>'<b>' . str_replace('/', ' / ',$zfile) . '</b>')), " </label><br />\n";
+	     array('fichier'=>'<br /><b>' . $dir_dump . "</b>$znom<b>.xml.gz</b>")), " </label><br />\n";
 	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> ",
 	  _T('bouton_radio_sauvegarde_non_compressee',
-	     array('fichier'=>'<b>' . str_replace('/', ' / ',$file) . '</b>')),
+	     array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")),
 	  "</label><br /></p>\n";
 }
 else {
   echo "\n<p style='text-align: justify;'>",
     _T('texte_sauvegarde_compressee',
-       array('fichier'=>'<b>' .  str_replace('/', ' / ',$file) . '</b>'));
-  echo "\n<input type='hidden' name='gz' value='0' /></p>";
+       array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>"));
+    echo "\n<input type='hidden' name='gz' value='0' /></p>";
 }
+
 
 echo "\n<div style='text-align: right'><input class='fondo' type='submit' value='", _T('texte_sauvegarde_base'), "' /></div></div></form>";
 
@@ -109,9 +110,8 @@ echo "</table>";
 //
 
  if ($connect_toutes_rubriques) {
- 	$pattern = str_replace("@nom_site@","([^.0-9]*)",_SPIP_DUMP);
- 	$pattern = str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",$pattern)."(.gz)?$";
- 	$liste_dump = preg_files(_DIR_DUMP,$pattern,50,false);
+
+ 	$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
  	$selected = end($liste_dump);
  	$liste_choix = "<ul>"; 
  	foreach($liste_dump as $key=>$fichier){
@@ -195,4 +195,27 @@ echo "<br />";
 echo fin_gauche(), fin_page();
 }
 
+
+function nom_fichier_dump()
+{
+	global $connect_toutes_rubriques;
+
+	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
+		$dir = _DIR_DUMP;
+	else $dir = determine_upload();
+
+	$site = isset($GLOBALS['meta']['nom_site'])
+	  ? preg_replace(",\W,is","_", substr(trim($GLOBALS['meta']['nom_site']),0,20))
+	  : 'spip';
+
+	$site .= '_' . date('Ymd');
+
+	$nom = $site;
+	$cpt=0;
+	while (file_exists($dir. $nom . ".xml") OR
+	       file_exists($dir. $nom . ".xml.gz")) {
+		$nom = $site . sprintf('_%03d', ++$cpt);
+	}
+	return $nom;
+}
 ?>
