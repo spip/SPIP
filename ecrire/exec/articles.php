@@ -20,11 +20,11 @@ include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/petition');
 include_spip('inc/documents');
+include_spip('base/abstract_sql');
 include_spip('exec/editer_auteurs');
 include_spip('exec/referencer_traduction');
 include_spip('exec/virtualiser');
 include_spip('exec/discuter');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
@@ -196,13 +196,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  if ($spip_display != 4) {
 
-	include_spip('exec/documenter');
-	echo	formulaire_documenter($id_article, 'article', 'portfolio', $flag_editable),
-		formulaire_documenter($id_article, 'article', 'documents', $flag_editable);
-
-	if ($GLOBALS['meta']["documents_article"] != 'non' AND $flag_editable) {
-	  echo afficher_formulaire_upload($id_article, "article", $flag_editable);
-	}
+	echo formulaire_joindre($id_article, "article", 'articles', $flag_editable);
  }
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
+include_spip('exec/documenter');
 
 //
 // Vignette pour les documents lies
@@ -205,17 +206,16 @@ function formulaire_taille($document) {
 // Construire un formulaire pour telecharger un fichier
 //
 
-// http://doc.spip.org/@formulaire_upload
-function formulaire_upload($retour, $id=0, $intitule='', $inclus = '', $mode='', $type="", $ancre='', $id_document=0) {
+function formulaire_upload($script, $args, $id=0, $intitule='', $mode='', $type='', $ancre='', $id_document=0) {
 	global $spip_lang_right;
-
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 	$distant = ($mode == 'document' AND $type);
+	if ($intitule) $intitule = "<span>$intitule</span><br />";
 
 	if (!_DIR_RESTREINT AND !$vignette_de_doc) {
 		$dir_ftp = determine_upload();
 		// quels sont les docs accessibles en ftp ?
-		$l = texte_upload_manuel($dir_ftp, $inclus, $mode);
+		$l = texte_upload_manuel($dir_ftp, '', $mode);
 		// s'il n'y en a pas, on affiche un message d'aide
 		// en mode document, mais pas en mode vignette
 		if ($l OR ($mode == 'document'))
@@ -259,18 +259,13 @@ function formulaire_upload($retour, $id=0, $intitule='', $inclus = '', $mode='',
 	else
 		$res = $res . $milieu;
 
-	$res = $debut
-	. ($intitule ? "<span>$intitule</span><br />" : '')
-	. $res
-	. $dir_ftp
-	. $distant
-	. $fin;
-
-	return generer_action_auteur('joindre',
+	$f = generer_action_auteur('joindre',
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
-		$retour,
-		$res,
+		generer_url_ecrire($script, $args),
+		"$debut$intitule$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
+
+	return $f;
 }
 
 // http://doc.spip.org/@construire_upload
@@ -297,15 +292,15 @@ function afficher_transferer_upload($texte_upload)
 {
 	$doc = array('upload' => '<b>' . joli_repertoire(determine_upload()) . '</b>');
 	if (!$texte_upload) {
-		return "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+		return "\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			_T('info_installer_ftp', $doc) .
 			aide("ins_upload") .
 			"</div>";
 		}
 	else {  return
-		"<p><div style='color: #505050;'>\n"
+		"\n<div style='color: #505050;'>"
 		._T('info_selectionner_fichier', $doc)
-		."&nbsp;:<br />" .
+		."&nbsp;:<br />\n" .
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
 		"\n</select>" .
@@ -316,6 +311,31 @@ function afficher_transferer_upload($texte_upload)
 		"' class='fondo'></div>" .
 		"</div>\n";
 	}
+}
+
+function formulaire_joindre($id, $type = "article", $script, $flag_editable) {
+	global $spip_lang_left;
+
+	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
+
+	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
+	  . formulaire_upload($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type)
+	  . fin_cadre_relief(true);
+
+	// eviter le formulaire upload qui se promene sur la page
+	// a cause des position:relative incompris de MSIE
+
+	  if (!($align = $GLOBALS['browser_name']=="MSIE")) {
+		$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		$align = " align='right'";
+	  }
+	  $res = "<div$align>$res</div>";
+	} else $res ='';
+
+	return formulaire_documenter($id, $type, 'portfolio', $flag_editable)
+	. formulaire_documenter($id, $type, 'documents', $flag_editable)
+	. $res;
+
 }
 
 // http://doc.spip.org/@formulaire_tourner
@@ -415,45 +435,6 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 			    "&id_document=$id_document&id=$id&type=$type");
 }
 
-// http://doc.spip.org/@afficher_documents_et_portfolio
-function afficher_formulaire_upload($id, $type = "article", $flag_modif) {
-	global $spip_lang_left, $spip_lang_right;
-
-	/// Ajouter nouveau document/image
-
-	if ($type == "rubrique")
-			$script = 'naviguer'; // exception
-	else
-			$script = $type.'s'; // 'exec=articles', seul cas actuellement
-	// eviter le formulaire upload qui se promene sur la page
-	// a cause des position:relative incompris de MSIE
-
-	$div = $GLOBALS['browser_name']=="MSIE";
-
-	$res = "<p>&nbsp;</p>";
-
-	if ($div) 
-			$res .= "<div>";
-	else 	 {
-			$res .= "\n<div align='right'>";
-			$res .= "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n";
-		}
-	$res .= debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'));
-	$res .= formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),
-				       $id,
-				       _T('info_telecharger_ordinateur'),
-				       '',
-				       'document',
-				       $type);
-	$res .= fin_cadre_relief(true);
-	if (!$div)
-			$res .= "</td></tr></table>";
-	$res .= "</div>";
-
-	return $res;
-}
-
-
 //
 // Afficher un document dans la colonne de gauche
 //
@@ -469,7 +450,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	echo "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
-	echo formulaire_upload(generer_url_ecrire($script, "id_$type=$id"), $id, _T('info_telecharger'),'','vignette',$type);
+	echo formulaire_upload($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type);
 
 	fin_cadre_relief();
 
@@ -504,7 +485,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		if ($GLOBALS['meta']["documents_article"] != 'non') {
 			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 			debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-			echo formulaire_upload(generer_url_ecrire($script, "id_$type=$id"), $id, _T('info_telecharger_ordinateur'), '','document',$type);
+			echo formulaire_upload($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type);
 			fin_cadre_enfonce();
 		}
 
@@ -732,7 +713,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
-	? formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),$id, _T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document)
+	? formulaire_upload($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document)
 	   : icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false));
 }
 
