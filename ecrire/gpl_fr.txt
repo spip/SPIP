@@ -12,7 +12,7 @@ _________________________________________________________________
    better.
 
    Ceci est une traduction non officielle de la GNU General Public
-   License en français. Elle n'a pas &eacute;t&eacute; publi&eacute;e par la Free Software
+   License en fran&ccedil;ais. Elle n'a pas &eacute;t&eacute; publi&eacute;e par la Free Software
    Foundation, et ne d&eacute;termine pas les termes de distribution pour les
    logiciels qui utilisent la GNU GPL--seul le texte anglais original
    de la GNU GPL en a le droit ([->http://www.gnu.org/copyleft/gpl.html]).
@@ -24,8 +24,8 @@ _________________________________________________________________
    [->http://www.april.org/gnu/gpl_french.html]
 
    Il est permis &agrave; tout le monde de reproduire et distribuer des copies
-   conformes de cette traduction, mais aucune modification ne doit y être
-   apport&eacute;e, et la pr&eacute;sente notice doit être pr&eacute;serv&eacute;e.
+   conformes de cette traduction, mais aucune modification ne doit y &ecirc;tre
+   apport&eacute;e, et la pr&eacute;sente notice doit &ecirc;tre pr&eacute;serv&eacute;e.
    Nous autorisons la FSF &agrave; apporter toute modification qu'elle jugera
    n&eacute;cessaire pour rendre la traduction plus claire.
 
@@ -41,7 +41,7 @@ _________________________________________________________________
 
    Il est permis &agrave; tout le monde de reproduire et distribuer des copies
    conformes de ce document de licence, mais aucune modification ne doit
-   y être apport&eacute;e.
+   y &ecirc;tre apport&eacute;e.
 
                                  {{{ Pr&eacute;ambule }}}
 
@@ -76,9 +76,9 @@ _________________________________________________________________
    Par exemple, si vous distribuez des copies d'un tel programme,
    gratuitement ou contre une r&eacute;mun&eacute;ration, vous devez transf&eacute;rer aux
    destinataires tous les droits dont vous disposez. Vous devez vous
-   garantir qu'eux-mêmes, par ailleurs, reçoivent ou peuvent recevoir le
+   garantir qu'eux-m&ecirc;mes, par ailleurs, re&ccedil;oivent ou peuvent recevoir le
    code source. Et vous devez leur montrer les pr&eacute;sentes dispositions, de
-   façon qu'ils connaissent leurs droits.
+   fa&ccedil;on qu'ils connaissent leurs droits.
 
    Nous prot&eacute;geons vos droits en deux &eacute;tapes :
 
@@ -87,12 +87,12 @@ _________________________________________________________________
    2. Nous vous proposons cette licence, qui vous donne l'autorisation
        l&eacute;gale de dupliquer, distribuer et/ou modifier le logiciel.
 
-   De même, pour la protection de chacun des auteurs, et pour notre
+   De m&ecirc;me, pour la protection de chacun des auteurs, et pour notre
    propre protection, nous souhaitons nous assurer que tout le monde
    comprenne qu'il n'y a aucune garantie portant sur ce logiciel libre.
    Si le logiciel est modifi&eacute; par quelqu'un d'autre puis transmis &agrave; des
    tiers, nous souhaitons que les destinataires sachent que ce qu'ils
-   poss&egrave;dent n'est pas l'original, de façon que tous probl&egrave;mes introduits
+   poss&egrave;dent n'est pas l'original, de fa&ccedil;on que tous probl&egrave;mes introduits
    par d'autres ne se traduisent pas par une r&eacute;percussion n&eacute;gative sur la
    r&eacute;putation de l'auteur original.
 
@@ -113,7 +113,7 @@ _________________________________________________________________
 
     1. Le pr&eacute;sent contrat de licence s'applique &agrave; tout programme ou autre
        ouvrage contenant un avis, appos&eacute; par le d&eacute;tenteur du droit de
-       propri&eacute;t&eacute;, disant qu'il peut être distribu&eacute; au titre des
+       propri&eacute;t&eacute;, disant qu'il peut &ecirc;tre distribu&eacute; au titre des
        dispositions de la pr&eacute;sente Licence Publique G&eacute;n&eacute;rale. Ci-apr&egrave;s,
        le "Programme" d&eacute;signe l'un quelconque de ces programmes ou
        ouvrages, et un "ouvrage fond&eacute; sur le programme" d&eacute;signe soit le
@@ -134,14 +134,14 @@ _________________________________________________________________
        de ce que fait le programme.
 
     2. Le concessionnaire peut dupliquer et distribuer des copies mot &agrave;
-       mot du code source du programme tel qu'il les reçoit, et ce sur un
+       mot du code source du programme tel qu'il les re&ccedil;oit, et ce sur un
        support quelconque, du moment qu'il appose, d'une mani&egrave;re
        parfaitement visible et appropri&eacute;e, sur chaque exemplaire, un avis
        appropri&eacute; de droits d'auteur (Copyright) et de renonciation &agrave;
        garantie ; qu'il maintient intacts tous les avis qui se rapportent
        &agrave; la pr&eacute;sente licence et &agrave; l'absence de toute garantie ; et qu'il
        transmet &agrave; tout destinataire du programme un exemplaire de la
-       pr&eacute;sente licence en même temps que le programme.
+       pr&eacute;sente licence en m&ecirc;me temps que le programme.
        Le concessionnaire peut facturer l'acte physique de transfert d'un
        exemplaire, et il peut, &agrave; sa discr&eacute;tion, proposer en &eacute;change d'une
        r&eacute;mun&eacute;ration une protection en garantie.
@@ -174,18 +174,18 @@ _________________________________________________________________
        garantie), et que les utilisateurs peuvent redistribuer le
        programme au titre de ces dispositions, et disant &agrave; l'utilisateur
        comment visualiser une copie de cette licence (exception : si le
-       programme par lui-même est interactif mais n'imprime normalement
+       programme par lui-m&ecirc;me est interactif mais n'imprime normalement
        pas une telle annonce, l'ouvrage du concessionnaire se fondant sur
        le programme n'a pas besoin d'imprimer une annonce).
 
    Les exigences ci-dessus s'appliquent &agrave; l'ouvrage modifi&eacute; pris en bloc.
    Si des sections identifiables de cet ouvrage ne d&eacute;rivent pas du
-   programme et peuvent être consid&eacute;r&eacute;es raisonnablement comme
-   repr&eacute;sentant des ouvrages ind&eacute;pendants et distincts par eux-mêmes,
+   programme et peuvent &ecirc;tre consid&eacute;r&eacute;es raisonnablement comme
+   repr&eacute;sentant des ouvrages ind&eacute;pendants et distincts par eux-m&ecirc;mes,
    alors la pr&eacute;sente licence, et ses dispositions, ne s'appliquent pas &agrave;
    ces sections quand le concessionnaire les distribue sous forme
    d'ouvrages distincts. Mais quand le concessionnaire distribue ces
-   mêmes sections en tant qu'&eacute;l&eacute;ment d'un tout qui repr&eacute;sente un ouvrage
+   m&ecirc;mes sections en tant qu'&eacute;l&eacute;ment d'un tout qui repr&eacute;sente un ouvrage
    se fondant sur le programme, la distribution de ce tout doit se faire
    conform&eacute;ment aux dispositions de la pr&eacute;sente licence, dont les
    autorisations, portant sur d'autres concessionnaires, s'&eacute;tendent &agrave; la
@@ -210,23 +210,23 @@ _________________________________________________________________
    aussi l'une des op&eacute;rations suivantes :
 
     a. Lui joindre le code source complet correspondant, exploitable par
-       une machine, code qui doit être distribu&eacute; au titre des Sections 1
+       une machine, code qui doit &ecirc;tre distribu&eacute; au titre des Sections 1
        et 2 ci-dessus sur un support couramment utilis&eacute; pour l'&eacute;change de
        logiciels ; ou bien
 
     b. Lui joindre une offre &eacute;crite, dont la validit&eacute; se prolonge pendant
        au moins 3 ans, de transmettre &agrave; un tiers quelconque, pour un
-       montant non sup&eacute;rieur au coût pour le concessionnaire, de
+       montant non sup&eacute;rieur au co&ucirc;t pour le concessionnaire, de
        r&eacute;alisation physique de la distribution de la source, un
        exemplaire complet, exploitable par une machine, du code source
-       correspondant, qui devra être distribu&eacute; au titre des dispositions
+       correspondant, qui devra &ecirc;tre distribu&eacute; au titre des dispositions
        des Sections 1 et 2 ci-dessus sur un support couramment utilis&eacute;
        pour l'&eacute;change des logiciels ; ou bien
 
-    c. Lui joindre les informations que le concessionnaire a reçues, pour
+    c. Lui joindre les informations que le concessionnaire a re&ccedil;ues, pour
        proposer une distribution du code source correspondant (cette
        variante n'est autoris&eacute;e que pour la distribution non commerciale,
-       et seulement si le concessionnaire a reçu le programme sous forme
+       et seulement si le concessionnaire a re&ccedil;u le programme sous forme
        ex&eacute;cutable ou sous forme d'un code objet, avec une telle offre,
        conform&eacute;ment &agrave; l'alin&eacute;a b) ci-dessus).
 
@@ -241,15 +241,15 @@ _________________________________________________________________
    distribu&eacute; (sous forme source ou sous forme binaire) avec les
    composants principaux (compilateur, noyau de syst&egrave;me d'exploitation,
    etc.) du syst&egrave;me d'exploitation sur lequel est ex&eacute;cut&eacute; le programme
-   ex&eacute;cutable, &agrave; moins que le composant, par lui-même, soit joint au
+   ex&eacute;cutable, &agrave; moins que le composant, par lui-m&ecirc;me, soit joint au
    programme ex&eacute;cutable.
 
    Si la distribution de lex&eacute;cutable ou du code objet est r&eacute;alis&eacute;e de
    telle sorte qu'elle offre d'acc&eacute;der &agrave; une copie &agrave; partir d'un lieu
    d&eacute;sign&eacute;, alors le fait d'offrir un acc&egrave;s &eacute;quivalent &agrave; la duplication
-   du code source &agrave; partir de ce même lieu s'entend comme distribution du
-   code source, même si des tiers ne sont pas contraints de dupliquer la
-   source en même temps que le code objet.
+   du code source &agrave; partir de ce m&ecirc;me lieu s'entend comme distribution du
+   code source, m&ecirc;me si des tiers ne sont pas contraints de dupliquer la
+   source en m&ecirc;me temps que le code objet.
 
      Le concessionnaire ne peut dupliquer, modifier, conc&eacute;der en
    sous-licence ou distribuer le programme, sauf si cela est express&eacute;ment
@@ -257,7 +257,7 @@ _________________________________________________________________
    pour autrement dupliquer, modifier, conc&eacute;der en sous-licence ou
    distribuer le programme est r&eacute;p&eacute;t&eacute;e nulle, et met automatiquement fin
    aux droits du concessionnaire au titre de la pr&eacute;sente licence.
-   Cependant, les parties qui ont reçu des copies, ou des droits, de la
+   Cependant, les parties qui ont re&ccedil;u des copies, ou des droits, de la
    part du concessionnaire au titre de la pr&eacute;sente licence, ne verront
    pas expirer leur contrat de licence, tant que ces parties agissent
    d'une mani&egrave;re parfaitement conforme.
@@ -275,7 +275,7 @@ _________________________________________________________________
    d'ouvrages se fondant sur ce dernier.
 
      Chaque fois que le concessionnaire redistribue le programme (ou tout
-   ouvrage se fondant sur le programme), le destinataire reçoit
+   ouvrage se fondant sur le programme), le destinataire re&ccedil;oit
    automatiquement une licence de l'&eacute;metteur initial de la licence, pour
    dupliquer, distribuer ou modifier le programme, sous r&eacute;serve des
    pr&eacute;sentes clauses et dispositions. Le concessionnaire ne peut imposer
@@ -291,13 +291,13 @@ _________________________________________________________________
    par convention ou autrement), qui entrent en contradiction avec les
    dispositions de la pr&eacute;sente licence, elles n'exemptent pas le
    concessionnaire de respecter les dispositions de la pr&eacute;sente licence.
-   Si le concessionnaire ne peut proc&eacute;der &agrave; la distribution de façon &agrave;
+   Si le concessionnaire ne peut proc&eacute;der &agrave; la distribution de fa&ccedil;on &agrave;
    satisfaire simultan&eacute;ment &agrave; ces obligations au titre de la pr&eacute;sente
    licence et &agrave; toutes autres obligations pertinentes, alors, en
    cons&eacute;quence de ce qui pr&eacute;c&egrave;de, le concessionnaire peut ne pas proc&eacute;der
    du tout &agrave; la distribution du programme. Par exemple, si une licence de
    brevet ne permettait pas une redistribution du programme, sans
-   redevances, par tous ceux qui reçoivent des copies directement ou
+   redevances, par tous ceux qui re&ccedil;oivent des copies directement ou
    indirectement par l'interm&eacute;diaire du concessionnaire, alors le seul
    moyen par lequel le concessionnaire pourrait satisfaire tant &agrave; cette
    licence de brevet qu'&agrave; la pr&eacute;sente licence, consisterait &agrave; s'abstenir
@@ -323,14 +323,14 @@ _________________________________________________________________
    peut imposer ce choix.
 
    La pr&eacute;sente section veut rendre parfaitement claire ce que l'on pense
-   être une cons&eacute;quence du reste de la pr&eacute;sente licence.
+   &ecirc;tre une cons&eacute;quence du reste de la pr&eacute;sente licence.
 
      Si la distribution et/ou l'utilisation du Programme est restreinte
    dans certains pays, sous l'effet de brevets ou d'interfaces pr&eacute;sentant
    un droit d'auteur, le d&eacute;tenteur du droit d'auteur original, qui soumet
    le Programme aux dispositions de la pr&eacute;sente licence, pourra ajouter
    une limitation expresse de distribution g&eacute;ographique excluant ces
-   pays, de façon que la distribution ne soit autoris&eacute;e que dans les pays
+   pays, de fa&ccedil;on que la distribution ne soit autoris&eacute;e que dans les pays
    ou parmi les pays qui ne sont pas ainsi exclus. Dans ce cas, la
    limitation fait partie int&eacute;grante de la pr&eacute;sente licence, comme si
    elle &eacute;tait &eacute;crite dans le corps de la pr&eacute;sente licence.
@@ -341,7 +341,7 @@ _________________________________________________________________
    la pr&eacute;sente version, mais pourront en diff&eacute;rer dans le d&eacute;tail, pour
    r&eacute;soudre de nouveaux probl&egrave;mes ou de nouvelles situations.
 
-   Chaque version reçoit un num&eacute;ro de version qui lui est propre. Si le
+   Chaque version re&ccedil;oit un num&eacute;ro de version qui lui est propre. Si le
    programme sp&eacute;cifie un num&eacute;ro de version de la pr&eacute;sente licence, qui
    s'applique &agrave; cette dernier et "&agrave; toute autre version ult&eacute;rieure", le
    concessionnaire a le choix de respecter les clauses et dispositions de
@@ -357,7 +357,7 @@ _________________________________________________________________
    autorisation. Pour un logiciel soumis &agrave; droit d'auteur par la Free
    Software Foundation, il devra &eacute;crire &agrave; la Free Software Foundation ;
    nous faisons quelquefois des exceptions &agrave; cette r&egrave;gle. Notre d&eacute;cision
-   va être guid&eacute;e par le double objectif de prot&eacute;ger le statut libre de
+   va &ecirc;tre guid&eacute;e par le double objectif de prot&eacute;ger le statut libre de
    tous les d&eacute;riv&eacute;s de nos logiciels libres, et de favoriser le partage
    et la r&eacute;utilisation des logiciels en g&eacute;n&eacute;ral.
 
