@@ -165,7 +165,18 @@ function revisions_sites ($id_syndic, $c=false) {
 	AND $statut != $row['statut']
 	AND autoriser('publierdans','rubrique',$id_rubrique, $id_auteur)) {
 		$champs['statut'] = $statut;
-	} else $statut = $row['statut'];
+		if ($statut == 'publie') {
+			if ($d = _request('date', $c)) {
+				$champs['date'] = $d;
+			} else {
+				# on prend la date de MySQL pour eviter un decalage cf. #975
+				$d = spip_query("SELECT NOW() AS d");
+				$d = spip_fetch_array($d);
+				$champs['date'] = $d['d'];
+			}
+		}
+	} else
+		$statut = $row['statut'];
 
 	// Changer de rubrique ?
 	// Verifier que la rubrique demandee est differente
