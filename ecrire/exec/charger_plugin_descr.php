@@ -16,7 +16,7 @@ include_spip('inc/plugin');
 
 // Un morceau d'ajax qui affiche le descriptif d'un plugin a partir
 // des listes de plugins a telecharger, dans exec=admin_plugin
-// http://doc.spip.org/@exec_admin_plugin_dist
+// http://doc.spip.org/@exec_charger_plugin_descr_dist
 function exec_charger_plugin_descr_dist() {
 
 	if (!autoriser('configurer', 'plugins')) {
