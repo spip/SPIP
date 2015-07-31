@@ -794,7 +794,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
+	. generer_url_public('style_prive', $paramcss) .'" id="cssprivee" />' . "\n"
   . "<!--[if lt IE 8]>\n"
   . '<link rel="stylesheet" type="text/css" href="'
   . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"

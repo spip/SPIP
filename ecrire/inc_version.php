@@ -217,6 +217,7 @@ $spip_pipeline = array(
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
 	'body_prive' => '',
+	'definir_session' => '',
 	'delete_all' => '',
 	'delete_statistiques' => '',
 	'exec_init' => '',

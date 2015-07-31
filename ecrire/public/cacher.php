@@ -131,6 +131,11 @@ function creer_cache(&$page, &$chemin_cache) {
 	// 'tmp/cache/a/c1234-zz.gz'
 	// en prenant soin de supprimer un eventuel cache non-sessionne
 	// si l'ajout de #SESSION dans le squelette est recent
+	// ou si un modele inclus contenait #SESSION
+	if (isset($GLOBALS['cache_utilise_session'])) {
+		$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
+		unset($GLOBALS['cache_utilise_session']);
+	}
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		supprimer_fichier(_DIR_CACHE . $chemin_cache);
