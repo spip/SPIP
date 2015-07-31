@@ -99,19 +99,14 @@ function parser_champs_etendus($debut) {
 	return parser_champs_interieurs($debut, $sep, array());
 }
 
-## TODO: cette fonction du parser buggue avec un triple emboitement
-## [x[y[z(#DATE|jour)t](#DATE|mois)u](#DATE|annee)v]
+
 function parser_champs_exterieurs($debut, $sep, $nested) {
-	#echo "DEBUT: $debut<br>\nSEP:$sep<br>\n";
 	$res = array();
 	foreach (split("%$sep",$debut) as $v) {
 		if (!ereg("^([0-9]+)@(.*)$", $v, $m))
 			$res = array_merge($res, parser_champs($v));
 		else if ($m[2] == 'Object') {
 			$res[]= $nested[$m[1]];
-			#echo "NESTED : ";
-			#var_dump($nested[$m[1]]);
-			#echo "<br>\n";
 		} else
 			$res = array_merge($res, parser_champs($m[2]));
 	}
@@ -149,7 +144,7 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 		$texte = $regs[8];
 	}
 	if ($texte)
-		$result[$i++] = $texte;
+		$result[$i] = $texte;
 
 	$x ='';
 	$j=0;
