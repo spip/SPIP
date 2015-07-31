@@ -455,13 +455,16 @@ function traiter_listes_a_puce ($texte) {
 				$niveau --;
 				$ajout .= "</ul>";
 			}
-			$ajout .= "<li>";
-			$texte .= $ajout . $regs[2];
+
+			if ($ajout)
+				$texte .= $ajout ."<li>". $regs[2];
+			else
+				$texte .= "</li><li>" . $regs[2];
 		}
 
 		// retour sur terre
 		while ($niveau -- > 0)
-			$texte .= "</ul>";
+			$texte .= "</li></ul>";
 
 		// paragraphe
 		$texte .= "\n\n";
