@@ -12,9 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function ecrire_stats() {public_decompter_dist();}
+# interface obsolete (?)
+function ecrire_stats() {public_stats_dist();}
 
-function public_decompter_dist() {
+function public_stats_dist() {
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (preg_match(
