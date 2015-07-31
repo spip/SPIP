@@ -79,7 +79,8 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	$style_cadre = " style='";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = "padding-$spip_lang_left: 38px;";
-		$style_cadre .= "margin-top: 20px;'";
+		//$style_cadre .= "margin-top: 20px;'";
+		$style_cadre .= "'";
 	} else {
 		$style_cadre .= "'";
 		$style_gauche = '';
@@ -257,8 +258,7 @@ function fin_boite_info($return=false) {
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
-	return "\n<div>&nbsp;</div>"
-	. creer_colonne_droite('',true)
+	return creer_colonne_droite('',true)
 	. debut_cadre_enfonce('',true)
 	. (($spip_display != 4)
 	     ? ("\n<div style='font-size: x-small' class='verdana1'><b>"

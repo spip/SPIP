@@ -239,7 +239,7 @@ function personnel_accueil($coockcookie)
 			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.png", "", false);
 	}
 	
-	$titre_cadre = afficher_plus_info(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
+	$titre_cadre = afficher_plus_info(generer_url_ecrire("infos_perso"));
 	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
 	
 	return debut_cadre_relief("information-perso-24.png",true, '',$titre_cadre)
@@ -374,7 +374,6 @@ function exec_accueil_dist()
 	if ($spip_display != 4) {
 		echo personnel_accueil(@$_COOKIE['spip_admin']);
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-		echo "\n<div>&nbsp;</div>";
 		$nom = typo($GLOBALS['meta']["nom_site"]);
 		if (!$nom) $nom=  _T('info_mon_site_spip');
 		echo debut_cadre_relief("racine-24.png", true, "", $nom),
@@ -385,7 +384,7 @@ function exec_accueil_dist()
 	echo creer_colonne_droite("", true);
 	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
 
-	echo "<div>&nbsp;</div>", $evtt, $evtm, $evtr;
+	echo $evtt, $evtm, $evtr;
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
