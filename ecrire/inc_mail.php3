@@ -45,9 +45,12 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	spip_log("mail <$email>: $sujet");
 
+	if (!$charset = lire_meta('charset'))$
+		$charset='iso-8859-1';
+
 	$headers = "From: $from\n".
 		"MIME-Version: 1.0\n".
-		"Content-Type: text/plain; charset=iso-8859-1\n".
+		"Content-Type: text/plain; charset=$charset\n".
 		"Content-Transfer-Encoding: 8bit\n$headers";
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
