@@ -691,7 +691,7 @@ function spip_sqlite_get_charset($charset=array(), $serveur='',$requeter=true){
 
 // http://doc.spip.org/@spip_sqlite_hex
 function spip_sqlite_hex($v){
-	return "0x" . $v;
+	return hexdec($v);
 }
 
 
@@ -838,6 +838,7 @@ function spip_sqlite_optimize($table, $serveur='', $requeter=true) {
 // avoir le meme comportement que _q()
 function spip_sqlite_quote($v, $type=''){
 	if (is_int($v)) return strval($v);
+	if (strncmp($v,'0x',2)==0 AND ctype_xdigit(substr($v,2))) return hexdec(substr($v,2));
 	if ($type === 'int' AND !$v) return '0';
 	if (is_array($v)) return join(",", array_map('spip_sqlite_quote', $v));
 
@@ -1141,14 +1142,16 @@ function _sqlite_link($serveur = '', $recharger = false){
 // renvoie les bons echappements (pas sur les fonctions now())
 // http://doc.spip.org/@_sqlite_calculer_cite
 function _sqlite_calculer_cite($v, $type) {
-	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
-	OR (sql_test_int($type)
-		 AND (is_numeric($v)
-		      OR (ctype_xdigit(substr($v,2))
-			  AND $v[0]=='0' AND $v[1]=='x'))))
+	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
+	if (sql_test_int($type)) {
+		if (is_numeric($v))
+			return $v;
+		if (ctype_xdigit(substr($v,2)) AND strncmp($v,'0x',2)==0)
+			return hexdec(substr($v,2));
+	}
 	//else return  ("'" . spip_sqlite_quote($v) . "'");
-	else return  (spip_sqlite_quote($v));
+	return  (spip_sqlite_quote($v));
 }
 
 
@@ -1480,14 +1483,12 @@ function _sqlite_ref_fonctions(){
 
 // $query est une requete ou une liste de champs
 // http://doc.spip.org/@_sqlite_remplacements_definitions_table
-function _sqlite_remplacements_definitions_table($query){
+function _sqlite_remplacements_definitions_table($query,$autoinc=false){
 	// quelques remplacements
 	$num = "(\s*\([0-9]*\))?";
 	$enum = "(\s*\([^\)]*\))?";
 	
 	$remplace = array(
-		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
-		'/(big|small|medium|tiny)?int(eger)?'.$num.'/is' => 'INTEGER',		
 		'/enum'.$enum.'/is' => 'VARCHAR',
 		'/binary/is' => '',
 		'/COLLATE \w+_bin/is' => '',
@@ -1495,6 +1496,10 @@ function _sqlite_remplacements_definitions_table($query){
 		'/(timestamp .* )ON .*$/is' => '\\1',
 		'/character set \w+/is' => '',
 	);
+
+	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
+	if ($autoinc)
+		$remplace['/(big|small|medium|tiny)?int(eger)?'.$num.'/is'] = 'INTEGER';
 
 	return preg_replace(array_keys($remplace), $remplace, $query);
 }
@@ -1529,7 +1534,7 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary
 	}
 	if ($c) $keys = "\n\t\t$pk ($c)";
 	
-	$champs = _sqlite_remplacements_definitions_table($champs);
+	$champs = _sqlite_remplacements_definitions_table($champs, $autoinc);
 	foreach($champs as $k => $v) {
 		$query .= "$s\n\t\t$k $v";
 		$s = ",";
