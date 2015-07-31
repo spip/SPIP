@@ -74,36 +74,64 @@ function ajouter_session($auteur) {
 	}
 }
 
+// Ajouter une donnee dans la session SPIP
+// http://doc.spip.org/@session_set
+function session_set($nom, $val=null) {
+	$GLOBALS['visiteur_session'][$nom] = $val;
+	ajouter_session($GLOBALS['visiteur_session']);
+	actualiser_sessions($GLOBALS['visiteur_session']);
+}
+
+// Lire une valeur dans la session SPIP
+// http://doc.spip.org/@session_get
+function session_get($nom) {
+	return $GLOBALS['visiteur_session'][$nom];
+}
+
+// Quand on modifie une fiche auteur on appelle cette fonction qui va
+// mettre a jour les fichiers de session de l'auteur en question.
+// (auteurs identifies seulement)
 // http://doc.spip.org/@actualiser_sessions
 function actualiser_sessions($auteur){
 	if (!intval($id_auteur = $auteur['id_auteur']))
 		return;
-	// .. mettre a jour les sessions de cet auteur
+
+	// memoriser l'auteur courant (celui qui modifie la fiche)
 	$sauve = $GLOBALS['visiteur_session'];
-	include_spip('inc/session');
+
+	// .. mettre a jour les sessions de l'auteur cible
 	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
 		$GLOBALS['visiteur_session'] = array();
 		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
-		foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne', 'auth', 'session_nom', 'session_email') AS $var)
-			if (isset($auteur[$var]))
-				$GLOBALS['visiteur_session'][$var] = $auteur[$var];
-		ecrire_fichier_session($session, $GLOBALS['visiteur_session']);
+
+		$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+		ecrire_fichier_session($session, $auteur);
 	}
-	if ($GLOBALS['visiteur_session']['id_auteur'] == $sauve['id_auteur'])
+
+	// restaurer l'auteur courant
+	$GLOBALS['visiteur_session'] = $sauve;
+
+	// si c'est le meme, rafraichir les valeurs
+	if ($auteur['id_auteur'] == $sauve['id_auteur'])
 		verifier_session();
-	else
-		$GLOBALS['visiteur_session']= $sauve;
-	return;
 }
 
 // http://doc.spip.org/@ecrire_fichier_session
 function ecrire_fichier_session($fichier, $auteur) {
+
+	// ne pas enregistrer ces elements de securite
+	// dans le fichier de session
+	unset($auteur['pass']);
+	unset($auteur['htpass']);
+	unset($auteur['low_sec']);
+	unset($auteur['alea_actuel']);
+	unset($auteur['alea_futur']);
+
+	// enregistrer les autres donnees du visiteur
 	$texte = "<"."?php\n";
-	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne', 'auth', 'session_nom', 'session_email') AS $var) {
-		if (isset($auteur[$var]))
-			$texte .= '$GLOBALS[\'visiteur_session\'][\''.$var.'\'] = '
-				. _q($auteur[$var]).";\n";
-	}
+	foreach ($auteur as $var => $val)
+		$texte .= '$GLOBALS[\'visiteur_session\'][\''.$var.'\'] = '
+			. _q($val).";\n";
 	$texte .= "?".">\n";
 
 	return ecrire_fichier($fichier, $texte);

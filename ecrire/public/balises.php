@@ -871,6 +871,21 @@ function balise_SESSION_dist($p) {
 	return $p;
 }
 
+//
+// #SESSION_SET{x,y}
+// Ajoute x=y dans la session du visiteur
+function balise_SESSION_SET_dist($p) {
+	$_nom = interprete_argument_balise(1,$p);
+	$_val = interprete_argument_balise(2,$p);
+	$p->code = 'session_set('.$_nom.','.$_val.')';
+
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+
+
 
 //
 // #EVAL{...}
