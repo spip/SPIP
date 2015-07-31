@@ -132,7 +132,10 @@ function creer_uniqid() {
 
 	if ($flag_mt_rand) $s = mt_rand();
 	if (!$s) $s = rand();
-	return uniqid($s, 1);
+	if ($GLOBALS['flag_uniqid2'])
+		return uniqid($s, 1);
+	else
+		return uniqid($s);
 }
 
 

@@ -94,6 +94,7 @@ $flag_ignore_user_abort = ($php_version_maj > 3 OR $php_version_min >= 7);
 $flag_levenshtein = ($php_version_maj >= 4);
 $flag_mt_rand = ($php_version_maj > 3 OR $php_version_min >= 6);
 $flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
+$flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
 $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 
