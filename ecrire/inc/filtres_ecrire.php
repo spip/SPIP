@@ -56,25 +56,25 @@ function parametres_css_prive(){
 	global $visiteur_session;
 	global $browser_name, $browser_version;
 
-	$ie = "";
-	include_spip('inc/layer');
-	if ($browser_name=='MSIE')
-		$ie = "&ie=$browser_version";
-
-	$v = "&v=".$GLOBALS['spip_version_code'];
-
-	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
-
-	$theme = "&themes=".implode(',',lister_themes_prives());
+	$args = array();
+	$args['v'] = $GLOBALS['spip_version_code'];
+	$args['p'] = substr(md5($GLOBALS['meta']['plugin']),0,4);
+	$args['themes'] = implode(',',lister_themes_prives());
+	$args['ltr'] = $GLOBALS['spip_lang_left'];
 
 	$c = (is_array($visiteur_session)
-	AND is_array($visiteur_session['prefs']))
+		AND is_array($visiteur_session['prefs']))
 		? $visiteur_session['prefs']['couleur']
 		: 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	$recalcul = _request('var_mode')=='recalcul' ? '&var_mode=recalcul':'';
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $theme . $v . $p . $ie . $recalcul ;
+	parse_str($couleurs($c),$c);
+	$args = array_merge($args, $c);
+
+	if (_request('var_mode')=='recalcul' OR _VAR_MODE=='recalcul')
+		$args['var_mode'] = 'recalcul';
+
+	return http_build_query($args);
 }
 
 
@@ -410,7 +410,7 @@ function afficher_plus_info($lien) {
 	global $spip_lang_right, $spip_display;
 
 	if ($spip_display != 4) {
-			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
+			return "\n<a href='$lien' style='position:absolute;right:10px;'>" .
 			  http_img_pack(chemin_image("information-16.png"), "+", "") ."</a>";
 	}
 }

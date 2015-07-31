@@ -15,49 +15,44 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-
 /* * ***************************************************/
 /* directives specifiques a une page */
+#navigation .sous_navigation {margin-top:[(#ENV{margin-bottom}|mult{1.5})em]}
 /* exec=admin_plugin */
 .liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
 .liste-plugins .liens {padding:6px;background:#ddd; margin-left: -6px; margin-right: -7px;}
 #liste_plugins .boutons { margin: -6px; }
 .liste-plugins .liste-items {margin-left: -6px; margin-right: -6px;}
-.liste-plugins .liste-items .item {position:relative;padding-#GET{left}:76px; padding-#GET{right}: 10px;}
+.liste-plugins .liste-items .item {position:relative;padding-#ENV{left}:76px; padding-#ENV{right}: 10px;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
 .liste-plugins .liste-items .item.erreur {background:#fdd;}
 .liste-plugins .liste-items .item.erreur .erreur {color:red;font-weight:bold;}
-.liste-plugins .liste-items .item.on {background:[#(#GET{claire}|couleur_eclaircir)];}
+.liste-plugins .liste-items .item.on {background:[#(#ENV{claire}|couleur_eclaircir)];}
 
 .liste-plugins .liste-items .item .short {color:#666;font-size:0.95em;}
 .liste-plugins .liste-items .item.on .short {display:none;}
-.liste-plugins .liste-items .item .check {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
+.liste-plugins .liste-items .item .check {float:#ENV{left};margin-#ENV{left}:-70px;position:relative;display:inline;}
 .liste-plugins .liste-items .item .check input {margin:0;}
 .liste-plugins .liste-items .item .check label {display:none;}
 
-.liste-plugins .liste-items .item .download {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
+.liste-plugins .liste-items .item .download {float:#ENV{left};margin-#ENV{left}:-70px;position:relative;display:inline;}
 
 .liste-plugins .liste-items .item .nom {font-size:1.2em;display:inline;}
 .liste-plugins .liste-items .item .nom a {color:#444;}
-.liste-plugins .liste-items .item.actif .nom a {color:#GET{foncee};}
+.liste-plugins .liste-items .item.actif .nom a {color:#ENV{foncee};}
 
-.liste-plugins .liste-items .item .icon {position:absolute;top:3px;#GET{left}:34px;width:32px;height:32px;overflow:hidden;}
-.liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
+.liste-plugins .liste-items .item .icon {position:absolute;top:3px;#ENV{left}:34px;width:32px;height:32px;overflow:hidden;}
+.liste-plugins .liste-items .item .actions {float:#ENV{right};visibility:hidden;}
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
 .liste-plugins .liste-items .item .cfg_link { position:absolute; right:4px; top:4px; }
 
 .liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;}
 .liste-plugins .liste-items .item .details .auteurs {font-style:italic;padding-bottom:5px;display:inline;}
 .liste-plugins .liste-items .item .details .licence {display:inline;}
-.liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#GET{right};text-align:#GET{right};clear:#GET{left}}
+.liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#ENV{right};text-align:#ENV{right};clear:#ENV{left}}
 
-.install-plugins {border-bottom:1px solid #ddd;color:#555;font-size:0.95em;padding:10px;position:relative;padding-#GET{right}:150px;}
+.install-plugins {border-bottom:1px solid #ddd;color:#555;font-size:0.95em;padding:10px;position:relative;padding-#ENV{right}:150px;}
 .install-plugins .ok,.install-plugins .erreur {position:absolute;top:10px;right:10px;width:130px;font-weight:bold;text-align:right;}
 .install-plugins .ok {color:green;}
 .install-plugins .erreur {color:red;}
@@ -66,23 +61,18 @@
 .erreur_message-plugins >ul {list-style:none;}
 .erreur_message-plugins .info_todo {margin:10px 0;}
 
-#liste_plug { border: solid 1px #GET{foncee}; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto; }
-
-/* lang_raccourcis */
-#raccourcis .titrem { background: #GET{claire}; }
+#liste_plug { border: solid 1px #ENV{foncee}; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto; }
 
 
 /* editer_auteurs */
-.option_separateur_statut_auteur { background: #GET{claire}; }
+.option_separateur_statut_auteur { background: #ENV{claire}; }
 .option_auteur { background: #e4e4e4; }
 
 /* exec/articles */
-.articles h1 {color: #000; font-size: large; margin-top: 5px; }
-#voir .article_prop {text-align: center; font-weight: bold; font-size: small; color: red; }
 
 /* exec/rubriques */
-#contenu div.gauche { width: 49%; float: #GET{left}; }
-#contenu div.droite { width: 49%; float: #GET{right}; }
+#contenu div.gauche { width: 49%; float: #ENV{left}; }
+#contenu div.droite { width: 49%; float: #ENV{right}; }
 
 /* exec/auteur_infos */
 .auteur .infos .statut {margin:5px 0;border-top :1px solid #eee;border-bottom :1px solid #eee;}

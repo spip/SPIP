@@ -16,13 +16,10 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-
 /* **************** GRIDS ***************** */
 .line, .lastUnit {overflow: hidden;_overflow:visible;_zoom:1; }
-.unit{float:#GET{left};_zoom:1;}
-.unitExt{float:#GET{right};}
+.unit{float:#ENV{left};_zoom:1;}
+.unitExt{float:#ENV{right};}
 .size1of1{float:none;}
 .size1of2{width:50%;}
 .size1of3{width:33.33333%;}

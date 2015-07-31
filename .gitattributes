@@ -759,7 +759,6 @@ prive/objets/liste/visiteurs.html -text
 prive/objets/liste/visiteurs_fonctions.php -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
-prive/reset.css -text
 prive/rss.html -text
 prive/rss/a_suivre.html -text
 prive/rss/signatures.html -text
@@ -846,8 +845,7 @@ prive/squelettes/top/configurer_preferences.html -text
 prive/squelettes/top/dist.html -text
 prive/squelettes/top/infos_perso.html -text
 prive/squelettes/top/plan.html -text
-prive/style_prive.html -text
-prive/style_prive_defaut.css -text
+prive/style_prive.css.html -text
 prive/themes/spip/bando.css.html -text
 prive/themes/spip/base.css -text
 prive/themes/spip/box.css -text
@@ -1076,9 +1074,10 @@ prive/themes/spip/jquery-ui.css.html -text
 prive/themes/spip/layout.css -text
 prive/themes/spip/lists.css.html -text
 prive/themes/spip/picker.css.html -text
-prive/themes/spip/plugins.css.html -text
-prive/themes/spip/plugins.css_fonctions.php -text
-prive/themes/spip/style_prive_theme.html -text
+prive/themes/spip/reset.css -text
+prive/themes/spip/style_prive.css.html -text
+prive/themes/spip/style_prive_defaut.css -text
+prive/themes/spip/theme.css.html -text
 prive/themes/spip/typo.css.html -text
 prive/themes/spip/vieilles_def.css.html -text
 prive/transmettre.html -text

@@ -15,20 +15,14 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-
 /* Listes d'objet */
 .liste-objets{
-	margin:20px 0 0;
-	font-size:.95em;
+	margin:[(#ENV{margin-bottom}|mult{1.5})em] 0;
+	/*font-size:.95em;*/
 	border: 1px solid #dfdfdf;
 	position:relative;
 }
-.liste-objets-lies,.liste-objets-associer {margin:0 0 20px;}
+.liste-objets-lies,.liste-objets-associer {margin:0;}
 
 .cadre .liste-objets{font-size:1em;}
 .liste-objets > .image_loading {position:absolute;top:0;right:0;}
@@ -38,31 +32,33 @@
 }
 .liste-objets .pagination .separateur {color:#aaa;}
 
-.liste-objets table.spip {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin-bottom:0;}
-.liste-objets table.spip caption {margin:0;text-align:left;}
-.liste-objets .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px;background:none no-repeat scroll 2px 2px #FFFFFF}
-.liste-objets table.spip tr {background:white;}
-.liste-objets table.spip tr.row_odd {background:white;}
-.liste-objets table.spip tr.row_even {background:white;}
-.liste-objets table.spip thead tr {background:#eee;}
-.liste-objets table.spip tbody tr:hover {background-color: #f8f8f8;}
-.liste-objets table.spip tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
-.liste-objets table.spip tr td {border-color:#dfdfdf; border-left:0; border-right:0;}
+.liste-objets table {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin:0;}
+.liste-objets table caption {margin:0;text-align:left;padding:0;}
+.liste-objets .caption {display:block;color:#333;font-size:1.0em;padding:[(#ENV{margin-bottom}|div{4})em] 5px;background:none no-repeat scroll 2px 2px #FFFFFF}
+.liste-objets tr {background:white;}
+.liste-objets .row_odd td {background:white;}
+.liste-objets .row_even td {background:white;}
+.liste-objets thead th {background:#eee;}
+.liste-objets tr:hover td,.liste-objets tbody tr:hover th {background-color: #f8f8f8;}
+.liste-objets tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
+.liste-objets tr td {border-color:#dfdfdf; border-left:0; border-right:0;}
 
 .liste-objets tr > .statut,.liste-objets tr > .picto {width: 16px; padding-left:2px;padding-right:2px;text-align:center;}
 .liste-objets tr > .auteur {width: 80px;}
 .liste-objets tr > .date {width: 90px;}
-.liste-objets tr > .id {width: 40px; text-align:#GET{right};}
-.liste-objets tr > .action {width: 90px; text-align:#GET{right};}
-.liste-objets tr td .spip_logos {float:#GET{right};}
+.liste-objets tr > .id {width: 40px; text-align:#ENV{right};}
+.liste-objets tr > .action {width: 90px; text-align:#ENV{right};}
+.liste-objets tr td .spip_logos {float:#ENV{right};}
 .liste-objets tr td.syndication .etat {display:block;color:red;}
 .liste-objets tr > .utilisations {width:120px;}
 .liste-objets tr.confirmation {display:none;}
 
 .liste-objets tr td {font-size:0.9em;}
 .liste-objets tr td.secondaire {font-size:0.85em;}
-.liste-objets tr td.principale {font-size:1.025em;}
+.liste-objets tr td.principale {font-size:1.0em;}
 .liste-objets tr td > span {font-size:0.85em;}
+.liste-objets table td, .liste-objets table th {[ padding: (#ENV{line-height}|div{4})em;] }
+
 .liste-objets .bouton_action_post .submit,.liste-objets .button {font-size:1em;}
 .liste-objets .action a {color:inherit;}
 
@@ -70,11 +66,11 @@
 
 .liste-objets.syndic_articles tr > .action {width: 50px;}
 .liste-objets.syndic_articles td .tags,
-.liste-objets.syndic_articles td .source {display:block;text-align:#GET{right};}
+.liste-objets.syndic_articles td .source {display:block;text-align:#ENV{right};}
 .liste-objets.syndic_articles td .tags a {color:#666;}
 
 <BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>[
-.liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}}));padding-#GET{left}:30px;}]</BOUCLE_objets>
+.liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}}));padding-#ENV{left}:30px;}]</BOUCLE_objets>
 
 .liste-objets.traductions .trad {text-align:center;}
 
@@ -89,8 +85,62 @@
 
 .en-edition {font-size:0.9em;}
 .en-edition h3 {font-size:1.1em;}
-.en-edition .bouton_action_post {float:#GET{right};margin:5px 0 0;}
+.en-edition .bouton_action_post {float:#ENV{right};margin:5px 0 0;}
 .en-edition .liste-items {margin:0;}
 .en-edition .liste-items .item {padding:2px 0;}
-.en-edition .item .icone-objet {float:#GET{left};margin-top:2px;margin-#GET{right}:5px;}
-.en-edition .item .bouton_action_post {float:#GET{right};margin-top:-1px;}
+.en-edition .item .icone-objet {float:#ENV{left};margin-top:2px;margin-#ENV{right}:5px;}
+.en-edition .item .bouton_action_post {float:#ENV{right};margin-top:-1px;}
+
+
+
+/* listes */
+.liste {margin:[(#ENV{margin-bottom})] 0;}
+.liste > h1,.liste > .h1,
+.liste > h2,.liste > .h2,
+.liste > h3,.liste > .h3,
+.liste > h4,.liste > .h4,
+.liste > h5,.liste > .h5,
+.liste > h6,.liste > .h6 {margin-bottom:0;}
+.liste_items,.liste-items {list-style:none;margin:0 0 [(#ENV{margin-bottom})];padding:0;border-top:1px solid #ddd;clear:both;}
+.liste_items .item,.liste-items .item  {border-bottom:1px solid #ddd;padding:[(#ENV{margin-bottom}|div{2})em] 0; overflow:hidden;clear:both;}
+.liste_items .odd,.liste-items .odd  {background:#eee;}
+.liste_items .item:hover,.liste-items .item:hover  {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.liste_items .court:hover,.liste-items .court:hover  {background-color:#eee;}
+.liste_items .item.on,.liste-items .item.on  {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
+.liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#ENV{claire}|couleur_eclaircir)];}
+.liste_items .item h3,.liste-items .item h3  {margin:0;}
+
+
+.liste_items .item .actions,.liste-items .item .actions  {float:none;margin:0;clear:both;text-align:#ENV{right};}
+
+.tri, .pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; /*font-size: 11px;*/ font-weight: bold; text-align: #ENV{right}; white-space: nowrap;margin-top:1em; }
+.tri {text-align:#ENV{left};}
+.tri .on, .pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+.tri img, .pagination img {vertical-align:bottom;}
+
+.pagination + .tri, .tri + .pagination {border-top:0;margin-top:0;}
+.pagination + .liste_items, .tri + .liste_items {border-top:0;margin-top:0;}
+.liste_items + .tri, .liste_items + .pagination {margin-top:-1em;margin-bottom:1em;}
+
+#navigation .pagination,#extra .pagination {font-size:9px;}
+#navigation .tri,#extra .tri {font-size:9px;}
+
+
+/* menus */
+/* listes */
+.menu-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+.menu-items .item {border-bottom:1px solid #ddd; padding:0; /*font-size: 10px;*/overflow:hidden;clear:both;}
+.menu-items .menu-items {margin:0;padding:0;margin-#ENV{left}:11px;}
+.menu-items .item >a,.menu-items .item >strong.on {display:block;padding:[(#ENV{margin-bottom}|div{2})em] 0;}
+.menu-items .item >a:hover {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.menu-items .item >.on {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
+
+/* plan de site */
+.plan .menu-items,.plan .menu-items .menu-items {border-#ENV{left}:1px solid #ddd;border-top:0;}
+.plan .menu-items .item h4{margin-#ENV{left}:11px;margin-bottom:0;border-#ENV{left}:1px solid #ddd;padding-#ENV{left}:4px;margin-top:0;padding-top:10px;}
+.plan .menu-items .item .pagination {margin-#ENV{left}:11px;border-#ENV{left}:1px solid #ddd;}
+.plan .menu-items .item {border-bottom:0;border-top:1px solid #ddd;padding-#ENV{left}:4px;}
+.plan .menu-items .item>a {padding: 0.25em 0;background-repeat:no-repeat;background-position:center #ENV{left};background-repeat:no-repeat;}
+
+<BOUCLE_objets2(DATA){source table,#REM|lister_tables_objets_sql}{cle!=spip_rubriques}>
+.plan .menu-items.[(#VALEUR{table_objet})] .item>a{padding-#ENV{left}:20px;background-image:url(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png});}</BOUCLE_objets2>

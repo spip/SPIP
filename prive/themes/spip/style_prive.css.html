@@ -1,0 +1,55 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
+[(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
+
+#INCLURE{#CHEMIN{prive/themes/spip/base.css}|direction_css{#GET{dir}}}
+#INCLURE{#CHEMIN{prive/themes/spip/layout.css}|direction_css{#GET{dir}}}
+
+<BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
+[(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#VAL{_DIR_RACINE}|constant|strlen)],[(#VAL{-5}|intval)]})]})]
+/*
+ * #VALEUR::[(#GET{fond})]
+ */
+[(#GET{fond}|oui)
+	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr,claire=#GET{claire},foncee=#GET{foncee},left=#GET{left},right=#GET{right},rtl=#GET{rtl},dir=#GET{dir},font-size=#GET{font-size},line-height=#GET{line-height},margin-bottom=#GET{margin-bottom},text-indent=#GET{text-indent},font-family=#GET{font-family},background-color=#GET{background-color},color=#GET{color}})]
+]
+</BOUCLE_css>
+
+
+/*** Plugins ***/
+
+<BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_prive_plugin_}}>
+	#SET{fond,prive/#VALEUR|basename{'.html'}}
+	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr})]
+</BOUCLE_cssplugins>
+
+/**** Plugins fin ***/
