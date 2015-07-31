@@ -11,6 +11,14 @@
 \***************************************************************************/
 
 include ("ecrire/inc_version.php3");
+
+if (isset($hash)) {
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+	  die ($action . '!!!');
+	}
+ }
+
 $var_f = include_fonction('spip_action_' . $action);
 $var_f();
 if ($redirect) redirige_par_entete($redirect);
