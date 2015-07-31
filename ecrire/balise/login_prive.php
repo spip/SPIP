@@ -25,7 +25,7 @@ function balise_LOGIN_PRIVE ($p) {
 #    <boucle(AUTEURS)>[(#LOGIN_PRIVE{#URL_ECRIRE, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE_stat
-function balise_LOGIN_PRIVE_stat ($args, $filtres) {
+function balise_LOGIN_PRIVE_stat ($args, $context_compil) {
 	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 

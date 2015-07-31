@@ -18,7 +18,7 @@ function balise_URL_LOGOUT ($p) {return calculer_balise_dynamique($p,'URL_LOGOUT
 
 // $args[0] = url destination apres logout [(#URL_LOGOUT{url})]
 // http://doc.spip.org/@balise_URL_LOGOUT_stat
-function balise_URL_LOGOUT_stat ($args, $filtres) {
+function balise_URL_LOGOUT_stat ($args, $context_compil) {
 	return array($args[0]);
 }
 
