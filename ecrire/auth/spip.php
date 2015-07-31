@@ -71,7 +71,7 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	if ($shanext) {
 
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext,$serveur,'text'), 'alea_futur' => sql_quote(creer_uniqid()),$serveur,'text'), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass,$serveur,'text').', '.sql_quote($md5pass,$serveur,'text').')','',$serveur);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext,$serveur,'text'), 'alea_futur' => sql_quote(creer_uniqid(),$serveur,'text')), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass,$serveur,'text').', '.sql_quote($md5pass,$serveur,'text').')','',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) AND defined('_ECRIRE_INSTALL'))
