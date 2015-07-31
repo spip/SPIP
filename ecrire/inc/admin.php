@@ -170,12 +170,12 @@ function fin_admin($action) {
 // http://doc.spip.org/@copy_request
 function copy_request($script, $suite, $submit='')
 {
-        include_spip('inc/filtres');
-	foreach($_POST as $n => $c) {
-	  if (($n != 'fichier') AND !is_array($c))
+	include_spip('inc/filtres');
+	foreach(array_merge($_POST,$_GET) as $n => $c) {
+		if ($n!='fichier' AND $n!='exec' AND !is_array($c))
 		$suite .= "\n<input type='hidden' name='$n' value='" .
-		  entites_html($c) .
-		  "'  />";
+			entites_html($c) .
+			"'  />";
 	}
 	return  generer_form_ecrire($script, $suite, '', $submit);
 }
