@@ -76,15 +76,15 @@ switch ($prefs['couleur']) {
 		break;
 	case 1:
 		/// Violet clair
-		$couleur_foncee="#AA015D";
-		$couleur_claire="#DF87C1";
+		$couleur_foncee="#eb68b3";
+		$couleur_claire="#ffa9e6";
 		$couleur_lien="#E95503";
 		$couleur_lien_off="#8F004D";
 		break;
 	case 2:
 		/// Orange
-		$couleur_foncee="#87585a";
-		$couleur_claire="#f78820";
+		$couleur_foncee="#fa9a00";
+		$couleur_claire="#ffc000";
 		$couleur_lien="#81A0C1";
 		$couleur_lien_off="#FF5B00";
 		break;
@@ -97,8 +97,8 @@ switch ($prefs['couleur']) {
 		break;
 	case 4:
 		/// Bleu pastelle
-		$couleur_foncee="#316a7e";
-		$couleur_claire="#629599";
+		$couleur_foncee="#31acd9";
+		$couleur_claire="#62d2e8";
 		$couleur_lien="#869100";
 		$couleur_lien_off="#5B55A0";
 		break;
@@ -113,8 +113,8 @@ switch ($prefs['couleur']) {
 		/// Jaune
 		$couleur_foncee="#9DBA00";
 		$couleur_claire="#C5E41C";
-		$couleur_lien="#116E95";
-		$couleur_lien_off="#50A4C7";
+		$couleur_lien="#657701";
+		$couleur_lien_off="#A6C113";
 }
 
 
