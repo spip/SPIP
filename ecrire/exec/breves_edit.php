@@ -33,8 +33,9 @@ function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 	// dans une liste restreinte si admin restreint
 
 	if (!$id_rubrique) {
-		$in = !$connect_id_rubrique ? ''
-		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+		$in = count($connect_id_rubrique)
+		? sql_in('id_rubrique', $connect_id_rubrique)   : '';
+
 		$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques', "id_parent=0$in",'',  "id_rubrique DESC", 1);
 
 		if (!autoriser('creerbrevedans','rubrique',$id_rubrique )){

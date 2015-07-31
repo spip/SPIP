@@ -298,8 +298,8 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 // http://doc.spip.org/@signature_entrop
 function signature_entrop($where)
 {
-	$query = sql_select('id_signature', 'spip_signatures', $where . " AND statut='publie'",'',"date_time desc");
-	$entrop = '';
+	$where .= " AND statut='publie'";
+	$query = sql_select('id_signature', 'spip_signatures', $where,'',"date_time desc");
 	$n = sql_count($query);
 	if ($n>1) {
 		$entrop = array();
@@ -307,10 +307,11 @@ function signature_entrop($where)
 			$r = sql_fetch($query);
 			$entrop[]=$r['id_signature'];
 		}
-		$entrop = " OR (id_signature IN (" . join(',',$entrop) .'))';
+		sql_free($query);
+		$where .= " OR " . sql_in('id_signature', $entrop);
 	}
 	
-	sql_delete('spip_signatures', "($where AND statut<>'publie')$entrop");
+	sql_delete('spip_signatures', $where);
 
 	return $entrop;
 }
