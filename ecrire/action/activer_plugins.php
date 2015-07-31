@@ -55,7 +55,8 @@ function action_activer_plugins_dist() {
 
 	if (!autoriser('configurer', 'plugins'))
 		die('erreur');
-
+	// forcer la maj des meta pour les cas de modif de numero de version base via phpmyadmin
+	lire_metas();
 	enregistre_modif_plugin();
 }
 
