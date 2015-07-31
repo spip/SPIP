@@ -28,9 +28,9 @@ function inc_documenter_dist(
 	if (is_int($doc)) {
 		$prim = 'id_' . $type;
 		$img = ($ancre == 'portfolio') ? '' : " NOT";
-		$select = "D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.genre,  D.distant, L.vu, L.id_objet, L.id_objet as $prim";
+		$select = "D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, L.vu, L.id_objet, L.id_objet as $prim";
 		$from = "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON  L.id_document=D.id_document"; 
-		$where = "L.id_objet=$doc AND L.objet='$type' AND D.genre='document' AND D.extension $img IN ('gif', 'jpg', 'png')";
+		$where = "L.id_objet=$doc AND L.objet='$type' AND D.mode='document' AND D.extension $img IN ('gif', 'jpg', 'png')";
 		$order = "0+D.titre, D.date";
 		$docs = sql_allfetsel($select, $from, $where, '', $order);
 		$opt = array('objet'=>$type, 'id_objet' => $doc);

@@ -374,14 +374,15 @@ $liste_des_authentifications = array(
 @umask(0);
 
 // numero de branche, utilise par les plugins 
-// pour specifier les versions de SPIP necessaire
-// il faut s'en tenir a un nombre de decimales fixe ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2 
+// pour specifier les versions de SPIP necessaires
+// il faut s'en tenir a un nombre de decimales fixe
+// ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2 
 $spip_version_branche = "2.1.0 dev";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 14588;
+$spip_version_code = 14598;
 // version de la base SQL (= numero SVN de sa derniere modif)
-$spip_version_base = 14588;
+$spip_version_base = 14598;
 
 // version de l'interface a la base
 $spip_sql_version = 1;

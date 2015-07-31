@@ -63,7 +63,7 @@ function action_documenter_post($r)
 	else {
 		$obj = "id_objet=".intval($id)." AND objet=".sql_quote($type);
 
-		$s = sql_select('D.id_document AS id_doc', "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "$obj AND D.genre='document' AND " . (sql_in('D.extension', array('gif', 'jpg', 'png'), $sign  ? '' : 'NOT')));
+		$s = sql_select('D.id_document AS id_doc', "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "$obj AND D.mode='document' AND " . (sql_in('D.extension', array('gif', 'jpg', 'png'), $sign  ? '' : 'NOT')));
 
 		while ($t = sql_fetch($s)) {
 			supprimer_lien_document($t['id_doc'], $type, $id);

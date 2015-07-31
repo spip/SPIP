@@ -40,7 +40,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$flag = 'ajax';
 	}
 
-	if ($document['genre'] == 'image') {
+	if ($document['mode'] == 'image') {
 		$supp = 'image-24.gif';
 		$label = _T('entree_titre_image');
 		$taille = $vignette = '';
@@ -187,7 +187,7 @@ function legender_image_doc($document, $id_document, $id, $type, $s, $script, $a
 	if (!_BOUTON_MODE_IMAGE
 	OR !in_array($document['extension'], array('jpg', 'gif', 'png'))) 
 		return '';
-	if ($document['genre'] == 'image') {
+	if ($document['mode'] == 'image') {
 				$texte = _T('upload_info_mode_document');
 				$mode = 'document';
 				$logo = 'doc-24.gif';

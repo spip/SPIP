@@ -186,7 +186,7 @@ function vignette_logo_document($row, $connect='')
 	}
 	$f = get_spip_doc($fichier);
 	if ($f AND @file_exists($f)) return $f;
-	if ($row['genre'] !== 'vignette') return '';
+	if ($row['mode'] !== 'vignette') return '';
 	return generer_url_entite($row['id_document'], 'document','','', $connect);
 }
 

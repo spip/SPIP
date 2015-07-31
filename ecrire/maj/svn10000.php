@@ -228,9 +228,23 @@ $GLOBALS['maj'][14558] = array(array('upgrade_types_documents'));
 // etre sur qu'ils sont bien unipotents(?)...
 $GLOBALS['maj'][14559] = $GLOBALS['maj'][13904]+$GLOBALS['maj'][13929]+$GLOBALS['maj'][14558];
 
-$GLOBALS['maj'][14588] = array(
+
+// La version 14588 etait une mauvaise piste:
+// Retour en arriere pour ceux qui l'ont subi, ne rien faire sinon
+if (@$GLOBALS['meta']['version_installee'] >= 14588) {
+
+	// "mode" est un mot-cle d'Oracle
+	$GLOBALS['maj'][14588] = array(
 	array('sql_alter',"TABLE spip_documents  DROP INDEX mode"),
 	array('sql_alter',"TABLE spip_documents  CHANGE mode genre ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
 	array('sql_alter',"TABLE spip_documents  ADD INDEX genre(genre)")
 			       );
+	// solution moins intrusive au pb de mot-clé d'Oracle, retour avant 14588
+	$GLOBALS['maj'][14598] = array(
+	array('sql_alter',"TABLE spip_documents  DROP INDEX genre"),
+	array('sql_alter',"TABLE spip_documents  CHANGE genre mode ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
+	array('sql_alter',"TABLE spip_documents  ADD INDEX mode(mode)")
+			       );
+}
+
 ?>
