@@ -72,10 +72,7 @@ if ($connect_statut == '0minirezo') {
 				WHERE id_groupe='$id_groupe'";
 			spip_query($query);
 		} else {	// creation groupe
-			$query = "INSERT INTO spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
-				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
-				minirezo='$acces_minirezo', comite='$acces_comite', forum='$acces_forum'";
-			spip_query($query);
+			spip_query("INSERT INTO spip_groupes_mots (titre, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum) VALUES ('$change_type', '$unseul', '$obligatoire', '$articles','$breves', '$rubriques', '$syndic', '$acces_minirezo',  '$acces_comite', '$acces_forum')");
 		}
 	}
 
