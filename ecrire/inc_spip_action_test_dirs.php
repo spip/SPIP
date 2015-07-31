@@ -13,7 +13,7 @@
 if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
-include("ecrire/inc_version.php3");
+#include("ecrire/inc_version.php3");
 include_ecrire("inc_minipres");
 
 //
