@@ -116,7 +116,7 @@ function forum_envoi(
 	  $objet = 'id_forum';
 	  $titre = 'titre'; 
 	  $id = 0;
-	  $titre_page = filtrer_entites(_T('texte_nouveau_message'));
+	  $titre_page = $titre_message  ? $titre_message  : _T('texte_nouveau_message');
 	  $num = '';
 	}
 
