@@ -429,7 +429,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  Divers
 /*  ------------------------------------------ */
 .invisible { position: absolute; top: -3000em; height: 1%; }
-.nettoyeur { clear: both; margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
 
 /*  ------------------------------------------
 /*  Couleurs des liens
