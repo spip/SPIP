@@ -75,7 +75,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 /* Correction des styles HTML par defaut */
 .formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: 0; background: none; }
 
-/* Styles de Spip */
+/* Styles des formulaires de Spip */
 .formulaire_spip {
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -90,9 +90,6 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 	padding: 0.77em;
 	border: 1px dotted; }
 .formulaire_spip legend { font-weight: bold; }
-
-.spip_sanscadre { border: 0; }
-.spip_sanscadre legend { display: none; }
 
 .formulaire_spip label {}
 .formulaire_spip .forml {
