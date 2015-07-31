@@ -104,7 +104,7 @@ abbr.published { border: 0; }
 #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; padding: 4px; border: 1px solid #DDD; }
 #documents_portfolio a:hover .spip_logos { border-color: #F57900; }
 #documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
-#document_actif { margin-top: 1em auto; }
+#document_actif { margin: 1em auto; }
 #document_actif img { padding: 4px; border: 1px solid #DDD; }
 
 
