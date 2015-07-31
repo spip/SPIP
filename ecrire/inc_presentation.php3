@@ -1762,7 +1762,7 @@ function creer_colonne_droite($rubrique=""){
 
 function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite;
-	global $connect_id_auteur, $clean_link;
+	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques, $clean_link;
 	global $flag_3_colonnes, $flag_centre_large;
 
 	if ($options == "avancees") {
