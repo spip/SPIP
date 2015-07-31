@@ -22,7 +22,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 	// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
 	if ($n = spip_xml_match_nodes(",^plugin(\s|$),", $arbre, $matches)){
 		// version de SPIP
-		$vspip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
+		$vspip = $GLOBALS['spip_version_branche'];
 		foreach($matches as $tag=>$sous){
 			list($tagname,$atts) = spip_xml_decompose_tag($tag);
 			if ($tagname=='plugin' AND is_array($sous)){
