@@ -188,8 +188,10 @@ select.fondl {
 
 .vcentered li {vertical-align:middle}
 .lefted {margin:0 auto 0 0;}
-.centered {margin:0 auto;}
+.centered {margin:0 auto;text-align:center;}
 .righted {margin:0 0 0 auto;}
+#page {margin:auto;text-align:center;}
+.table_page{margin:auto;text-align:[(#ENV{ltr}|choixsiegal{left,left,right})];}
 
 /*style for bandeau-principal*/
 #bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90;background:#fff}

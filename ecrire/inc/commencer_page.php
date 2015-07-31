@@ -28,7 +28,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
   
 	return init_entete($titre, $id_rubrique)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
-	. "<div id='page' class='centered' style='width:{$largeur}px'>"
+	. "<div id='page'>"
 	. avertissement_messagerie()
 	  . ((($rubrique == "messagerie") OR (_request('changer_config')!="oui"))
 	     ? auteurs_recemment_connectes() : '');
