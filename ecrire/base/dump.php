@@ -195,4 +195,165 @@ function base_liste_table_for_dump($exclude_tables = array()){
 	return array($tables_for_dump, $tables_for_link);
 }
 
+/**
+ * Vider les tables de la base de destination
+ * pour la copie dans une base
+ *
+ * peut etre utilise pour l'import depuis xml,
+ * ou la copie de base a base (mysql<->sqlite par exemple)
+ *
+ * @param array $tables
+ * @param string $serveur
+ */
+function base_vider_tables_destination_copie($tables, $serveur=''){
+	$trouver_table = charger_fonction('trouver_table', 'base');
+
+	spip_log('Vider '.count($tables) . " tables sur serveur '$serveur' : " . join(', ', $tables),'base');
+	foreach($tables as $table){
+		// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
+		if (($table!='spip_auteurs') OR $serveur!=''){
+			// regarder si il y a au moins un champ impt='non'
+			$desc = $trouver_table($table);
+			if (isset($desc['field']['impt']))
+				sql_delete($table, "impt='oui'", $serveur);
+			else
+				sql_delete($table, "", $serveur);
+		}
+	}
+
+	// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
+	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
+	if ($serveur=='') {
+		spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump');
+		sql_delete("spip_auteurs", "id_auteur=0",$serveur);
+		// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
+		sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_statut']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_statut']['id_auteur']),array(),$serveur);
+		sql_delete("spip_auteurs", "id_auteur!=0",$serveur);
+	}
+
+}
+
+
+/**
+ * Effacement de la bidouille ci-dessus
+ * Toutefois si la table des auteurs ne contient plus qu'elle
+ * c'est que la copie etait incomplete et on restaure le compte
+ * pour garder la connection au site
+ *
+ * (mais il doit pas etre bien beau
+ * et ca ne marche que si l'id_auteur est sur moins de 3 chiffres)
+ *
+ * @param string $serveur
+ */
+function base_detruire_copieur_si_besoin($serveur='')
+{
+	// rien a faire si ce n'est pas le serveur principal !
+	if ($serveur=='') {
+		if (sql_countsel("spip_auteurs", "id_auteur<>0")) {
+			spip_log("Detruire copieur id_auteur=0 pour le serveur '$serveur'",'dump');
+			sql_delete("spip_auteurs", "id_auteur=0", $serveur);
+		}
+		else {
+			spip_log("Restaurer copieur id_auteur=0 pour le serveur '$serveur' (aucun autre auteur en base)",'dump');
+			sql_update('spip_auteurs', array('id_auteur'=>'webmestre', 'webmestre'=>"'oui'"), "id_auteur=0");
+		}
+	}
+}
+
+/**
+ *
+ * @param <type> $tables
+ * @param <type> $serveur_source
+ * @param <type> $serveur_dest
+ * @param <type> $callback_progression
+ * @param <type> $max_time
+ * @param <type> $drop_source
+ * @return <type>
+ */
+function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false) {
+	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
+
+	$status_file = _DIR_TMP . "dump-copy-".md5(serialize($tables)."-$serveur_source-$serveur_dest").".txt";
+	if (!lire_fichier($status_file, $status)
+		OR !$status = unserialize($status))
+		$status = array();
+
+	// puis relister les tables a importer
+	// et les vider si besoin, au moment du premier passage ici
+	// (et seulement si ce n'est pas une fusion, comment le dit-on ?)
+	$initialisation_copie = (!isset($status["dump_status_copie"])) ? 0 :
+		$status["dump_status_copie"];
+
+	// si init pas encore faite, vider les tables du serveur destination
+	if (!$initialisation_copie) {
+		base_vider_tables_destination_copie($tables, $serveur_dest);
+		$status["dump_status_copie"]='ok';
+		ecrire_fichier($status_file,serialize($status));
+	}
+
+	spip_log("Tables a copier :".implode(", ",$tables),'dump');
+
+	// les tables auteurs et meta doivent etre copiees en dernier !
+	if (in_array('spip_auteurs',$tables)){
+		$tables = array_diff($tables,array('spip_auteurs'));
+		$tables[] = 'spip_auteurs';
+	}
+	if (in_array('spip_meta',$tables)){
+		$tables = array_diff($tables,array('spip_meta'));
+		$tables[] = 'spip_meta';
+	}
+
+	foreach ($tables as $table){
+		// verifier que la table est presente dans la base source
+		if ($desc_source = sql_showtable($table,false,$serveur_source)){
+			// $status['tables_copiees'][$table] contient l'avancement
+			// de la copie pour la $table : 0 a N et -1 quand elle est finie
+			if (!isset($status['tables_copiees'][$table]))
+				$status['tables_copiees'][$table] = 0;
+
+			// si la table n'existe pas dans la destination, la creer a l'identique !
+			if (!$desc_dest = sql_showtable($table,false,$serveur_dest)) {
+				$autoinc = (isset($desc_source['keys']['PRIMARY KEY']) AND strpos($desc_source['keys']['PRIMARY KEY'],',')===false);
+				sql_create($table, $desc_source['field'], $desc_source['key'], $autoinc, false, $serveur_dest);
+				$desc_dest = sql_showtable($table,false,$serveur_dest);
+			}
+			if ($status['tables_copiees'][$table]!==-1){
+				if ($callback_progression)
+					$callback_progression(0,0,$table);
+				while (true) {
+					$n = intval($status['tables_copiees'][$table]);
+					// on copie par lot de 400
+					$res = sql_select('*',$table,'','','',"$n,400",'',$serveur_source);
+					while ($row = sql_fetch($res,$serveur_source)){
+						// si l'enregistrement est deja en base, ca fera un echec ou un doublon
+						sql_insertq($table,$row,$desc_dest,$serveur_dest);
+						$status['tables_copiees'][$table]++;
+						if ($max_time AND time()>$_SERVER['REQUEST_TIME']+$max_time)
+							break;
+					}
+					if ($n == $status['tables_copiees'][$table])
+						break;
+					spip_log("recopie $table ".$status['tables_copiees'][$table],'dump');
+					if ($callback_progression)
+						$callback_progression($status['tables_copiees'][$table],0,$table);
+					ecrire_fichier($status_file,serialize($status));
+					if ($max_time AND time()>$_SERVER['REQUEST_TIME']+$max_time)
+						return false; // on a pas fini, mais le temps imparti est ecoule
+				}
+				if ($drop_source) {
+					sql_drop_table($table,'',$serveur_source);
+					spip_log("drop $table sur serveur source '$serveur_source'",'dump');
+				}
+				$status['tables_copiees'][$table]=-1;
+				ecrire_fichier($status_file,serialize($status));
+				spip_log("tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
+			}
+		}
+	}
+
+	base_detruire_copieur_si_besoin($serveur_dest);
+	spip_unlink($status_file);
+	// OK, copie complete
+	return true;
+}
 ?>
