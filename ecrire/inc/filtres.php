@@ -633,7 +633,9 @@ function antispam($texte) {
 	return preg_replace("/@/", " $masque ", $texte);
 }
 
-// |sinon{rien} : affiche "rien" si la chaine est vide, affiche la chaine si non vide
+// sinon{texte, rien} : affiche "rien" si la chaine est vide,
+// affiche la chaine si non vide ;
+// attention c'est compile directement dans inc/references
 // http://doc.spip.org/@sinon
 function sinon ($texte, $sinon='') {
 	if (strlen($texte))
@@ -1797,35 +1799,8 @@ function filtre_push($array, $val) {
 
 // http://doc.spip.org/@filtre_find
 function filtre_find($array, $val) {
-	return ($array != '' AND in_array($val, $array));
+	return (is_array($array) AND in_array($val, $array));
 }
-
-
-// fonctions et, ou et xou
-// pour faciliter l'ecriture de tests conditionnels
-// ces fonctions retournent un espace si la condition 
-// est verifiee, sinon une chaine vide.
-
-// Filtre et : ($a && $b) 
-// [(#BALISE|=={val}|et{[(#AUTRE|=={val})]) Condition OK ]
-// http://doc.spip.org/@filtre_et
-function filtre_et($a, $b){
-	return ($a && $b)?' ':'';	
-}
-
-// Filtre ou : ($a || $b) 
-// [(#BALISE|=={val}|ou{[(#AUTRE|=={val})]) Condition OK ]	
-// http://doc.spip.org/@filtre_ou
-function filtre_ou($a, $b){
-	return ($a || $b)?' ':'';	
-}
-	
-// Filtre xou : ($a xor $b) 
-// [(#BALISE|=={val}|xou{[(#AUTRE|=={val})]) Condition OK ]	
-// http://doc.spip.org/@filtre_xou
-function filtre_xou($a, $b){
-	return ($a XOR $b)?' ':'';	
-}	
 
 
 //
