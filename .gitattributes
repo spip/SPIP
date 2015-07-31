@@ -390,6 +390,7 @@ ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/informer.php -text
+ecrire/exec/informer_auteur.php -text
 ecrire/exec/install.php -text
 ecrire/exec/instituer_auteur.php -text
 ecrire/exec/lang_raccourcis.php -text
@@ -408,10 +409,12 @@ ecrire/exec/plonger.php -text
 ecrire/exec/poster.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
+ecrire/exec/rechercher_auteur.php -text
 ecrire/exec/referencer_traduction.php -text
 ecrire/exec/rubriquer.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
+ecrire/exec/selectionner_auteur.php -text
 ecrire/exec/sites_edit.php -text
 ecrire/exec/sites_tous.php -text
 ecrire/exec/statistiques_lang.php -text
@@ -449,6 +452,7 @@ ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
 ecrire/inc/import_1_3.php -text
 ecrire/inc/informer.php -text
+ecrire/inc/informer_auteur.php -text
 ecrire/inc/instituer_article.php -text
 ecrire/inc/instituer_auteur.php -text
 ecrire/inc/joindre.php -text
@@ -465,6 +469,7 @@ ecrire/inc/popularites.php -text
 ecrire/inc/poster.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/selectionner.php -text
+ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text

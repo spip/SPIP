@@ -111,31 +111,31 @@ function changerhighlight (couche) {
 	couche.className = "highlight";
 }
 
-function aff_selection (type, rac, id) {
-
-	findObj_forcer(rac+"_selection").style.display = "none";
-	
-	charger_id_url("./?exec=informer&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+function aff_selection (arg, idom, url)
+{
+	noeud = findObj_forcer(idom);
+	if (noeud) {
+		noeud.style.display = "none";
+		charger_node_url(url+arg, noeud);
+	}
 }
 
 // selecteur de rubrique et affichage de son titre dans le bandeau
 
-function aff_selection_titre(titre, id_rubrique)
+function aff_selection_titre(titre, id, idom)
 {
 	findObj_forcer('titreparent').value=titre;
-	findObj_forcer('id_parent').value=id_rubrique;
-	findObj_forcer('selection_rubrique').style.display='none';
+	findObj_forcer('id_parent').value=id;
+	findObj_forcer(idom).style.display='none';
 }
 
-function aff_selection_provisoire(id_rubrique, racine, url, col, sens)
+function aff_selection_provisoire(id, racine, url, col, sens,informer)
 {
     charger_id_url(url.href,
 		   racine + '_col_' + (col+1),
 		   function() {
 		     slide_horizontal(racine + 'principal', ((col-1)*150), sens);
-  // afficher le descriptif de la rubrique dans la div du dessous?
-  // si trop lent, commenter la ligne ci-dessous
-		     aff_selection('rubrique',racine,id_rubrique);
+		     aff_selection (id, racine + "_selection", informer);
 		   }
 		   );
   // empecher le chargement non Ajax
@@ -276,6 +276,7 @@ function AjaxSqueezeNode(trig, noeud, f)
 function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField);
+	// alert(myField + Field + myUrl);
 	if (!Field) return true;
 
 	if (!myUrl) {

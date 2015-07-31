@@ -21,6 +21,7 @@ function exec_rechercher_dist()
 
 		$id = intval($id);
 		$exclus = intval($exclus);
+		$rac = htmlentities($rac);
 
 		include_spip('inc/texte');
 		$where = split("[[:space:]]+", $type);
@@ -75,15 +76,14 @@ function exec_rechercher_dist()
 				// Eviter une premiere fois d'afficher la rubrique exclue
 					if ($id_parent == 0) $style = "style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
 					else $style = "";
-					$onClick = " aff_selection('rubrique','" .
-					  htmlentities($rac) .
-					  "','$id_rubrique');";
+					$info = generer_url_ecrire('informer', "type=rubrique&rac=$rac&id=");
+					$onClick = " aff_selection($id_rubrique, '$rac" ."_selection', '$info');";
 	
 					$btitre = strtr(str_replace("'", "&#8217;",
 								    str_replace('"', "&#34;", textebrut($titre))),
 							"\n\r", "  ");
 
-					$ondbClick = "aff_selection_titre('$btitre',$id_rubrique;);";
+					$ondbClick = "aff_selection_titre('$btitre',$id_rubrique,'selection_rubrique');";
 					$ret .= "<div class='pashighlight' onClick=\"changerhighlight(this); $onClick\" ondblclick=\"$ondbClick$onClick\"><div class='arial11 petite-rubrique'$style>";
 					$ret .= "&nbsp; $titre";
 					$ret .= "</div></div>";

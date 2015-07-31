@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define(_SPIP_SELECT_RUBRIQUES, 20); /* mettre 100000 pour desactiver ajax */
+define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 
 //
 // Selecteur de rubriques pour l'espace prive
@@ -204,10 +204,11 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 		$titre = _T('info_racine_site');
 
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
+	$titre = "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"" . $titre . "\" />";
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))));
 
-	return construire_selecteur($url, 'selection_rubrique', $id_rubrique, 'id_parent', $titre);
+	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $titre, $id_rubrique);
 }
 
 // construit un bloc comportant une icone clicable avec image animee a cote
@@ -216,9 +217,11 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 // (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
 // getElement en mode Ajax est trop couteux).
 
-function construire_selecteur($url, $idom, $id, $name, $titre)
+function construire_selecteur($url, $js, $idom, $name, $titre='', $id=0)
 {
-	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\"charger_node_url_si_vide('"
+	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\""
+	.  $js
+	. "charger_node_url_si_vide('"
 	. $url
 	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling)\"><img src='"
 	. _DIR_IMG_PACK
@@ -226,9 +229,9 @@ function construire_selecteur($url, $idom, $id, $name, $titre)
 	. _DIR_IMG_PACK
 	. "searching.gif' id='img_"
 	.  $idom
-	. "' style='visibility: hidden;' /></td><td><input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\""
+	. "' style='visibility: hidden;' /></td><td>"
 	. $titre
-	."\" /><input type='hidden' id='$name' name='$name' value='"
+	. "<input type='hidden' id='$name' name='$name' value='"
 	. $id
 	. "' /></td></tr></table><div id='"
 	. $idom

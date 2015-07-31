@@ -28,22 +28,23 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 
 	if ($recur) $recur = mini_hier($sel); else $sel = 0;
 
-	if ($aff_racine) {
-		$onClick = " aff_selection('rubrique','$idom', '0');";
-
-		$titre = strtr(str_replace("'", "&#8217;",
-				str_replace('"', "&#34;",
-					textebrut(_T('info_racine_site')))),
-				"\n\r", "  ");
-		$ondbClick = "aff_selection_titre('$titre',0);";
-	}
-
 	$idom1 = $idom . "_champ_recherche";
 	$idom2 = $idom . "_principal";
-	$idom3 = $idom . "_selection"; // utiliser par aff_selection
+	$idom3 = $idom . "_selection";
 	$idom4 = $idom . "_col_1";
 	$idom5 = 'img_' . $idom4;
 	$idom6 = $idom."_fonc";
+
+	if ($aff_racine) {
+		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
+		$onClick = " aff_selection(0,'$idom3', '$info');";
+
+		$ondbClick = strtr(str_replace("'", "&#8217;",
+				str_replace('"', "&#34;",
+					textebrut(_T('info_racine_site')))),
+				"\n\r", "  ");
+		$ondbClick = "aff_selection_titre('$ondbClick',0,'selection_rubrique');";
+	}
 
 	if ($recur) {
 		$plonger = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1", true);
@@ -51,13 +52,16 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	}
 
 	$plonger = charger_fonction('plonger', 'inc');
+	$plonger = $plonger($sel, $idom, $recur, 1, $exclus);
 		
+	// url completee par la fonction JS onkeypress_rechercher
+	$url = generer_url_ecrire('rechercher', "exclus=$exclus&rac=$idom&type=");
+
 	return "<div id='$idom'>"
 	. "<div style='display: none;'>"
 	. "<input type='text' id='$idom6' value=\"$fonction\" />"
 	. "</div>\n"
-	. "<table width='100%' cellpadding='0' cellspacing='0'>"
-	. "<tr>"
+	. "<table width='100%' cellpadding='0' cellspacing='0'><tr>"
 	. "<td style='vertical-align: bottom;'>"
 	. "\n<div class='arial11 petite-racine'\nonclick=\""
 	. $onClick
@@ -71,17 +75,17 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	. "</td>"
 	. "\n<td style='text-align: $spip_lang_right'>"
 	. "<input style='width: 100px;' type='search' id='$idom1'"
-	. "\nonkeypress=\"t=setTimeout('lancer_recherche_rub(\'"
+	. "\nonkeypress=\"t=setTimeout('onkeypress_rechercher(\'"
 	. $idom1
 	. "\',\'"
-	. $idom
+	. $idom4
 	. "\',\'"
-	. $exclus
+	. $url
 	. "\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" />"
 	. "</td></tr></table>\n<div id='$idom2'"
 	. " style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'><div id='$idom4'"
 	. " class='arial1'>" 
-	. $plonger($sel, $idom, $recur, 1, $exclus)
+	. $plonger
 	. "</div></div>\n<div id='$idom3'></div></div>\n";
 }
 
