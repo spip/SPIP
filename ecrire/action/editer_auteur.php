@@ -100,13 +100,10 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 	$err = '';
 
 	include_spip('inc/modifier');
+	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		array(
-		 'nom','email','bio',
-		 'nom_site','url_site',
-		 'imessage','pgp',
-		),
+		objet_info('auteur','champs_editables'),
 		// black list
 		$force_update?array():array('webmestre','pass','login'),
 		// donnees eventuellement fournies
