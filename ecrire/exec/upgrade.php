@@ -28,18 +28,13 @@ function exec_upgrade_dist() {
 
 		@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
-		echo install_debut_html(_T('titre_page_upgrade')); 
-		echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
-		  _T('texte_nouvelle_version_spip_2',
-		     array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')),
-		 "<div align='right'>",
-		  '<form action="', generer_url_ecrire("upgrade", 'reinstall=non'),
-		  '">', "<input type='submit' value=\"",
-		_T('bouton_relancer_installation'),
-		"\" class='fondl'>",
-		"</form></div>\n";
-
-		echo install_fin_html();
+		echo minipres(_T('titre_page_upgrade'),
+				"<p><b>"
+				. _T('texte_nouvelle_version_spip_1')
+				. "</b><p> "
+				. _T('texte_nouvelle_version_spip_2',
+				   array('connect' => '<tt>' . _FILE_CONNECT . '</tt>'))
+				. generer_post_ecrire('upgrade', "<input name='reinstall' value='non' />",'',	_T('bouton_relancer_installation')));
 		exit;
 	}
 

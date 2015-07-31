@@ -332,22 +332,22 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
 
-		//
-		// Affichage de la vignette
-		//
-		$ret .= "\n<div align='center'>";
-
 		// Signaler les documents distants par une icone de trombone
-		$ret .= ($document['distant'] == 'oui')
+		$dist = ($document['distant'] == 'oui')
 			? "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n"
 			:'';
 
-		$ret .= document_et_vignette($document, $url, true); 
-		$ret .= '</div>';
-		$ret .= "\n<div class='verdana1' style='text-align: center; color: black;'>\n";
-		$ret .= ($type_titre ? $type_titre : 
-		      ( _T('info_document').' '.majuscules($type_extension)));
-		$ret .= "</div>";
+		//
+		// Affichage de la vignette
+		//
+		$ret .= "\n<div style='text-align: center'>"
+		. $dist
+		. document_et_vignette($document, $url, true)
+		. '</div>'
+		. "\n<div class='verdana1' style='text-align: center; color: black;'>\n"
+		. ($type_titre ? $type_titre : 
+		      ( _T('info_document').' '.majuscules($type_extension)))
+		. "</div>";
 
 		// Affichage du raccourci <doc...> correspondant
 		$raccourci = '';

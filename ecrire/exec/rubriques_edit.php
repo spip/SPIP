@@ -106,15 +106,15 @@ function exec_rubriques_edit_dist()
 	echo "<tr>";
 	echo "<td>";
 
-	if ($id_rubrique) echo icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
-	else echo icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
+	if ($id_rubrique) echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
+	else echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
 
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 	echo "<td style='width: 100%'>";
 	echo _T('info_modifier_rubrique');
 	gros_titre($titre);
-	echo "</td></tr></table>";
+	echo "</td></tr></table><br />";
 
 	$titre = entites_html($titre);
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
@@ -161,7 +161,7 @@ function exec_rubriques_edit_dist()
 		$form .= extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-	$form .= "\n<p align='right'><input type='submit' value='"
+	$form .= "\n<div style='text-align: right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' class='fondo' />\n</p>";
 

@@ -421,7 +421,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</tr>\n";
 
   if (strlen($descriptif) > 1) {
-	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", propre($descriptif."~"), "</div></td></tr>\n";
+	echo "<tr><td align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", propre($descriptif."~"), "</td></tr>\n";
   }
   echo "</table>\n";
 }

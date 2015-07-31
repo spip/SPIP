@@ -219,21 +219,13 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	}
 
 	if (autoriser('publierdans','rubrique',$id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
-		echo "<div align='right'>";
-		
-		echo "<table><tr>";
-		echo "<td  align='right'>";
-		icone(_T('icone_publier_breve'), 
-		      redirige_action_auteur('editer_breve',"$id_breve-statut-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif");
-		echo "</td>";
-		
-		echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
-		echo "<td  align='right'>";
-		icone(_T('icone_refuser_breve'), 
+		echo "<div style='float: right; margin: 10px;'>";
+		echo icone_inline(_T('icone_refuser_breve'), 
 		      redirige_action_auteur('editer_breve', "$id_breve-statut-refuse", "breves_voir","id_breve=$id_breve"), "breve-24.gif", "supprimer.gif");
-		echo "</td></tr>";
-		echo "</table>";	
-		
+		echo "</div>";
+		echo "<div style='float: right; margin: 10px;'>";
+		echo icone_inline(_T('icone_publier_breve'), 
+		      redirige_action_auteur('editer_breve',"$id_breve-statut-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif");
 		echo "</div>";
 	}	
 
@@ -247,8 +239,8 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	echo "<br /><br />";
 	
-	echo "\n<div align='center'>";
-	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire',
+	echo "\n<div class='centered'>";
+	echo icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire',
 	     "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 	
