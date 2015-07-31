@@ -77,19 +77,20 @@ function exec_naviguer_dist()
 ///// debut de la page
 
 
-	  debut_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
-	    _T('titre_naviguer_dans_le_site')), "documents", "rubriques");
-
-	  if ($id_rubrique == 0) {
-	    $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
-	  }
+	debut_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
+		    _T('titre_naviguer_dans_le_site')),
+		   "documents",
+		   "rubriques",
+		   '',
+		   '',
+		   $id_rubrique);
 
 //////// parents
 
 	  debut_grand_cadre();
 
 	  if ($id_rubrique  > 0) afficher_hierarchie($id_parent);
-
+	  else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	  fin_grand_cadre();
 
 	  changer_typo('', 'rubrique'.$id_rubrique);
