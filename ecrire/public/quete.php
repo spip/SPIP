@@ -314,15 +314,17 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
 // Il faudrait encore completer: on ne connait pas la langue
-// pour une boucle forum sans id_article ou id_rubrique donn� par le contexte
-// et c'est signale par un message d'erreur abscons: "table inconnue forum".
-// 
+// pour une boucle forum sans id_article ou id_rubrique issu du contexte,
+// ce qui provoque un Log abscons ("table inconnue forum")
+// voire une erreur SQL dans le cas de id_syndic, qu'on neutralise 
+// in extremis mais ce n'est pas satisfaisant
 // http://doc.spip.org/@lang_parametres_forum
 function lang_parametres_forum($qs, $lang) {
 	if (is_array($lang) AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
 		$id = 'id_' . $r[1];
-		if ($t = $lang[$id])
+		if ($t = $lang[$id] AND $id != 'id_syndic')
 			$lang = sql_getfetsel('lang', $t, "$id=" . $r[2]);
+		else $lang = '';
 	}
   // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
 
