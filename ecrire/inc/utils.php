@@ -1808,8 +1808,10 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Se mefier des fichiers mal remplis!
 	if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', 0777);
 
-	// Le charset par defaut lors de l'installation
-	if (!defined('_DEFAULT_CHARSET')) define('_DEFAULT_CHARSET', 'utf-8');
+	if (!defined('_DEFAULT_CHARSET')) {
+		/** Le charset par défaut lors de l'installation */
+		define('_DEFAULT_CHARSET', 'utf-8');
+	}
 	if (!defined('_ROOT_PLUGINS')) define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
 	if (!defined('_ROOT_PLUGINS_DIST')) define('_ROOT_PLUGINS_DIST', _ROOT_RACINE . "plugins-dist/");
 	if (!defined('_ROOT_PLUGINS_SUPPL') && defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL) define('_ROOT_PLUGINS_SUPPL', _ROOT_RACINE . str_replace(_DIR_RACINE,'',_DIR_PLUGINS_SUPPL));

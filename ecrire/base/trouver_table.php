@@ -151,9 +151,11 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			// on ne sait pas lire la structure de la table :
 			// on retombe sur la description donnee dans les fichiers spip
 			$desc = $fdesc;
+			$desc['exist'] = false;
 		}
-		else
+		else {
 			$desc['exist'] = true;
+		}
 
 		$desc['table'] = $desc['table_sql'] = $nom_sql;
 		$desc['connexion']= $serveur;
