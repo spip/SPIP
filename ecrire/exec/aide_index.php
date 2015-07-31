@@ -436,8 +436,7 @@ function analyse_aide($html, $aide=false) {
 function exec_aide_index_dist()
 {
   global $img, $frame, $aide, $var_lang, $lang, $help_server, $spip_lang;
-// Recuperer les infos de langue (preferences auteur), si possible
-utiliser_langue_visiteur();
+
 if ($var_lang) changer_langue($var_lang);
 if ($lang) changer_langue($lang); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
  else $lang = $spip_lang;
