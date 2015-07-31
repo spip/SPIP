@@ -420,7 +420,7 @@ if ($auto_compress && $flag_obgz) {
 		$use_gz = false;
 
 	// special bug Apache2x + php4.2.x (versions a preciser eventuellement si on retrouve)
-	if (eregi("Apache/2", $SERVER_SOFTWARE))
+	if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
 		$use_gz = false;
 
 	if ($use_gz) {
