@@ -47,7 +47,7 @@ function ecrire_stats() {
 		if (strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
 			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
-			ereg ("/(www\.)?([^/]+)/", $r['referer'], $match);
+			ereg ("/(www\.)?([^/]+)/", $log_referer, $match);
 			$domaine = addslashes($match[2]);
 			$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, domaine, referer_md5, type, id_objet) ".
 				"VALUES ($log_ip, '$log_referer', '$domaine', $referer_md5, '$log_type', $log_id_num)";
