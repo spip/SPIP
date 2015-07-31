@@ -843,7 +843,7 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'traiter_raccourcis';
 	}
 
-	// Dates : ajouter le vidage des dates egales ý 00-00-0000
+	// Dates : ajouter le vidage des dates egales a 00-00-0000
 	$c = array('DATE', 'DATE_REDAC');
 	reset($c);
 	while (list(, $val) = each($c)) {
