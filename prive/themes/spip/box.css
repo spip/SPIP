@@ -11,7 +11,7 @@ version: 0.2
 .hd {padding:5px 10px;}
 .box .inner{position:relative;}
 .box b{display:block;background-repeat:no-repeat;font-size:1%;position:relative;z-index:10;}
-.box .inner b{display:inline;font-size:inherit;position:static;}
+.box .inner b{display:inline;font-size:1em/*inherit buggue dans XPIE7*/;position:static;}
 .box .tl, .box .tr, .box .bl, .box .br{height:10px; width:10px;float:left;}
 .box .tl{background-position: left top;}
 .box .tr{background-position: right top;}
