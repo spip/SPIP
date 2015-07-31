@@ -1459,9 +1459,14 @@ function critere_datapath_dist($idb, &$boucles, $crit) {
 function critere_si_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '$command[\'si\'] = array();'."\n";
-	foreach($crit->param as $param) {
-		$boucle->hash .= '
-			$command[\'si\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+	if ($crit->param) {
+		foreach($crit->param as $param) {
+			$boucle->hash .= '
+				$command[\'si\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+		}
+	// interdire {si 0} aussi !
+	} else {
+			$boucle->hash .= '$command[\'si\'][] = 0;';
 	}
 }
 
