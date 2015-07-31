@@ -6,6 +6,7 @@ include_local ("inc_connect.php3");
 include_local ("inc_auth.php3");
 include_local ("inc_export.php3");
 include_local ("inc_admin.php3");
+include_local ("inc_presentation.php3");
 
 if (!$archive) {
 	if ($gz) $archive = "dump.xml.gz";
@@ -22,7 +23,7 @@ $debug_limit = '';
 $f = ($gz) ? @gzopen("data/$archive", "wb") : fopen("data/$archive", "wb");
 $_fputs = ($gz) ? gzputs : fputs;
 
-$_fputs($f, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
+$_fputs($f, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
 $query = "SELECT * FROM spip_rubriques";
 export_objets(mysql_query($query), "rubrique", $f, $gz);
@@ -66,7 +67,9 @@ else fclose($f);
 
 fin_admin($action);
 
-echo "La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>.\n";
+install_debut_html("Sauvegarde");
+echo "<p>La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>.\n";
+install_fin_html();
 
 exit;
 

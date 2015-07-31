@@ -6,10 +6,6 @@ if (defined("_ECRIRE_INC_ADMIN")) return;
 define("_ECRIRE_INC_ADMIN", "1");
 
 
-function aff_aide2($aide) {
-	return " <FONT SIZE=1>[<B><A HREF='#' onMouseDown=\"window.open('aide_index.php3?aide=$aide','myWindow','scrollbars=yes,resizable=yes,width=550')\">AIDE</A></B>]</FONT>";
-}
-
 function fichier_admin($action) {
 	global $connect_login;
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
@@ -25,7 +21,9 @@ function debut_admin($action) {
 	$lien = $requete_fichier;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
-		echo "<H3>Acc&egrave;s refus&eacute;.</H3>";
+		include_local ("inc_presentation.php3");
+		install_debut_html("Acc&egrave;s refus&eacute;");
+		install_fin_html();
 		exit;
 	}
 	$fichier = fichier_admin($action);
@@ -36,7 +34,7 @@ function debut_admin($action) {
 	
 		echo "<FORM ACTION='$lien' METHOD='post'>";
 		echo "<P><B>Authentification (par FTP).</B>";
-		echo aff_aide2("ftp_auth");
+		echo aide("ftp_auth");
 		echo "<P>Veuillez cr&eacute;er un fichier ou un r&eacute;pertoire nomm&eacute;&nbsp;:";
 		echo "<P align='center'><INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"$fichier\" SIZE='30'>";
 		echo "<P> &agrave; l'int&eacute;rieur du sous-r&eacute;pertoire <b>ecrire/data/</b>, puis&nbsp;:";
