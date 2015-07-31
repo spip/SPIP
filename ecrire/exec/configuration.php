@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/config');
 include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_configuration_dist
@@ -26,7 +25,8 @@ function exec_configuration_dist(){
 		exit;
 	}
 
-	init_config();
+	$config = charger_fonction('config', 'inc');
+	$config();
 	lire_metas();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));

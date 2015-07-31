@@ -23,9 +23,9 @@ function base_upgrade_dist($titre)
 	maj_base();
 
 	include_spip('inc/acces');
-	include_spip('inc/config');
 	ecrire_acces();
-	init_config();
+	$config = charger_fonction('config', 'inc');
+	$config();
 }
 
 // http://doc.spip.org/@maj_version

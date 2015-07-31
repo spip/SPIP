@@ -91,8 +91,8 @@ function install_etape_4_dist()
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . _q($email) . ")");
 	}
 
-	include_spip('inc/config');
-	init_config();
+	$config = charger_fonction('config', 'inc');
+	$config();
 
 	include_spip('inc/acces');
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
