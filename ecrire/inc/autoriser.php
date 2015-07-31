@@ -57,12 +57,34 @@ if (!function_exists('autoriser')) {
  * La fonction se charge d'appeler des fonctions d'autorisations spécifiques
  * aux actions demandées si elles existent. Elle cherche donc les fonctions
  * dans cet ordre :
+ *
  * - autoriser_{type}_{faire}, sinon avec _dist
  * - autoriser_{type}, sinon avec _dist
  * - autoriser_{faire}, sinon avec _dist
  * - autoriser_{defaut}, sinon avec _dist
  * 
- * Seul le premier argument est obligatoire
+ * Seul le premier argument est obligatoire.
+ *
+ * @note
+ *     Le paramètre `$type` attend par défaut un type d'objet éditorial, et à ce titre,
+ *     la valeur transmise se verra appliquer la fonction 'objet_type' pour uniformiser
+ *     cette valeur. 
+ *
+ *     Si ce paramètre n'a rien n'a voir avec un objet éditorial, par exemple
+ *     'statistiques', un souligné avant le terme est ajouté afin d'indiquer
+ *     explicitement à la fonction autoriser de ne pas transformer la chaîne en type
+ *     d'objet. Cela donne pour cet exemple : `autoriser('detruire', '_statistiques')`
+ *
+ * @note
+ *     Le paramètre `$type`, en plus de l'uniformisation en type d'objet, se voit retirer
+ *     tous les soulignés du terme. Ainsi le type d'objet `livre_art` deviendra `livreart`
+ *     et SPIP cherchera une fonction `autoriser_livreart_{faire}`. Ceci permet
+ *     d'éviter une possible confusion si une fonction `autoriser_livre_art` existait : 
+ *     quel serait le type, quel serait l'action ? 
+ *
+ *     Pour résumer, si le type d'objet éditorial a un souligné, tel que 'livre_art', 
+ *     la fonction d'autorisation correspondante ne l'aura pas. 
+ *     Exemple : `function autoriser_livreart_modifier_dist(...){...}`
  *
  * @api
  * @see autoriser_dist()
