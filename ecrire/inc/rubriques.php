@@ -384,7 +384,7 @@ function calculer_prochain_postdate($check= false) {
 // NB: cette fonction est tres pratique, mais pas utilisee dans le core
 // pour rester legere elle n'appelle pas calculer_rubriques()
 // http://doc.spip.org/@creer_rubrique_nommee
-function creer_rubrique_nommee($titre, $id_parent=0) {
+function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
 
 	// eclater l'arborescence demandee
 	// echapper les </multi> et autres balises fermantes html
@@ -394,16 +394,19 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 	foreach ($arbo as $titre) {
 		// retablir les </multi> et autres balises fermantes html
 		$titre = preg_replace(",<@([a-z][^>]*)>,ims","</\\1>",$titre);
-		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent));
+		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent),
+		$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
 		if ($r !== NULL) {
 			$id_parent = $r;
 		} else {
 			$id_rubrique = sql_insertq('spip_rubriques', array(
 				'titre' => $titre,
 				'id_parent' => $id_parent,
-				'statut' => 'prive'));
+				'statut' => 'prive')
+				,$desc=array(), $serveur);
 			if ($id_parent > 0) {
-				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent");
+				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",
+				$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
 				$id_secteur = $data['id_secteur'];
 				$lang = $data['lang'];
 			} else {
@@ -411,7 +414,7 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 				$lang = $GLOBALS['meta']['langue_site'];
 			}
 
-			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique");
+			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique", $desc='', $serveur);
 
 			// pour la recursion
 			$id_parent = $id_rubrique;
