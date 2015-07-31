@@ -148,6 +148,7 @@
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/public?lang_cible=pt_br" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
 	<langue code="rn" url="http://trad.spip.net/tradlang_module/public?lang_cible=rn" total="78" traduits="62" relire="0" modifs="4" nouveaux="12" pourcent="79.49">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
