@@ -27,6 +27,7 @@ ecrire/action/editer_mot.php -text
 ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_site.php -text
+ecrire/action/etre_webmestre.php -text
 ecrire/action/export_all.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text

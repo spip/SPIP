@@ -21,7 +21,7 @@ include_spip('inc/autoriser');
 
 //  affiche le statut de l'auteur dans l'espace prive
 // les admins voient et peuvent modifier les droits d'un auteur
-// les admins restreints les voient mais 
+// les admins restreints les voient mais
 // ne peuvent les utiliser que pour mettre un auteur a la poubelle
 
 // http://doc.spip.org/@inc_instituer_auteur_dist
@@ -41,9 +41,9 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 	$res = "<$label>" . _T('info_statut_auteur')."</$label> " . $menu;
 
 	if ($modif)
-		$res .= editer_choix_webmestre($auteur);
+		$res .= "<div>".editer_choix_webmestre($auteur)."</div>";
 	else
-		$res .= afficher_webmestre($auteur);
+		$res .= (($w=afficher_webmestre($auteur))?" ($w)":"");
 
 	// Prepare le bloc des rubriques pour les admins eventuellement restreints ;
 	// si l'auteur n'est pas '0minirezo', on le cache, pour pouvoir le reveler
@@ -65,23 +65,36 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 
 function afficher_webmestre($auteur){
 	if (autoriser('webmestre','',0,$auteur['id_auteur']))
-		return "<p>"._L("Cet administrateur est <b>webmestre</b>")."</p>";
+		if ($auteur['id_auteur']==$GLOBALS['visiteur_session']['id_auteur'])
+			return _T("info_admin_je_suis_webmestre");
+		else
+			return _T("info_admin_webmestre");
+
+	// si c'est ma fiche perso, en dire un peu plus
+	if ($auteur['id_auteur']==$GLOBALS['visiteur_session']['id_auteur']) {
+		if (defined('_ID_WEBMESTRES'))
+			return _T('info_webmestre_forces',array('file_options'=>basename(_FILE_OPTIONS)));
+		else
+			return bouton_action (_T('info_admin_etre_webmestre'), generer_action_auteur('etre_webmestre', time(), self()));
+	}
 	return "";
 }
 
 function editer_choix_webmestre($auteur){
 	$res = "";
-	$style = "";
+	$style = "";	
 	if (!autoriser('modifier', 'auteur', $auteur['id_auteur'],
 	null, array('webmestre' => '?'))){
 		$res =  afficher_webmestre($auteur);
+		if (defined('_ID_WEBMESTRES'))
+			$res .= ' '._T('info_webmestre_forces',array('file_options'=>basename(_FILE_OPTIONS)));
 	}
 	else {
 		$res = "<input type='checkbox' class='checkbox' name='webmestre' id='webmestre' value='oui'"
 			. ($auteur['webmestre']=='oui'?" checked='checked'":"")
 			. " />"
 			. "<label for='webmestre'>"
-			. _L("Donner a cet administrateur les droits de webmestre")
+			. _T("info_admin_statuer_webmestre")
 			. "</label>";
 
 		$res .= "<input type='hidden' name='saisie_webmestre' value='1' />";
@@ -101,14 +114,14 @@ function traduire_statut_auteur($statut){
 		       );
 	if (isset($recom[$statut]))
 		return $recom[$statut];
-	
+
 	// retrouver directement par le statut sinon
 	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
 	  if (isset($recom[$t]))
 			return $recom[$t];
 		return $t;
 	}
-	
+
 	return '';
 }
 
@@ -121,7 +134,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	null, array('statut' => '?')))
 		return '';
 
-	// A-t-on le droit de promouvoir cet auteur comme admin 
+	// A-t-on le droit de promouvoir cet auteur comme admin
 	// et y a-t-il des visiteurs ?
 
 	$droits = $GLOBALS['liste_des_statuts'];
@@ -157,7 +170,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		$menu .= mySel('nouveau',$statut,_T('info_statut_auteur_a_confirmer'));
 
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select class='select fondl' name='statut' id='statut' size='1'
+	return "<select class='select' name='statut' id='statut' size='1'
 		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();"
 	. "(this.options[this.selectedIndex].value=='0minirezo')?jQuery('#choix-webmestre:hidden').slideDown():jQuery('#choix-webmestre:visible').slideUp();\">"
 	. $menu
@@ -175,7 +188,7 @@ function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	$result = sql_select("R.id_rubrique, " . sql_multi ("titre", $spip_lang), "spip_auteurs_rubriques AS L LEFT JOIN spip_rubriques AS R ON L.id_rubrique=R.id_rubrique", "L.id_auteur=$id_auteur", "", "multi");
+	$result = sql_select("rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . "", "spip_auteurs_rubriques AS lien LEFT JOIN spip_rubriques AS rubriques ON lien.id_rubrique=rubriques.id_rubrique", "lien.id_auteur=$id_auteur", "", "multi");
 
 	$menu = $restreint = '';
 	// L'autorisation de modifier les rubriques restreintes
@@ -200,7 +213,7 @@ function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 	} else {
 
 		$menu =  "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
-			. chemin_image("rubrique-12.png")
+			. chemin_image("rubrique-12.gif")
 			. ")'>"
 			. $restreint
 			. "</ul>\n";
@@ -238,7 +251,7 @@ function choix_rubriques_admin_restreint($auteur, $modif=true) {
 		$res .= debut_block_depliable(true,"statut$id_auteur")
 		. "\n<div id='ajax_rubrique' class='arial1'>\n"
 		. "<b>"
-		. $label 
+		. $label
 		. "</b>"
 		. "\n<input name='id_auteur' value='"
 		. $id_auteur
