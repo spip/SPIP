@@ -69,7 +69,7 @@ if ($connect_statut == "0minirezo") {
 	echo "  &agrave; la poubelle</label>";
 }
 
-echo "<DIV ALIGN='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
+echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'></div>";
 echo "</FONT>";
 fin_boite_info();
 echo "</form>";

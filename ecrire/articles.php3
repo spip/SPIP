@@ -448,10 +448,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		}
 	}
 
-
-
 	echo "<br>\n";
-
 
 	//
 	// Petitions
@@ -570,56 +567,49 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	
 	echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
 	echo "</FORM>";
-	echo "</FONT>";
 	echo fin_block();
 	echo "<br>\n";
 }
 
 
-	if ($connect_statut=="0minirezo" AND $options=="avancees"){
-		
-		if (substr($chapo, 0, 1) == '=') {
-			$virtuel = substr($chapo, 1, strlen($chapo));
-		}
-		
-		echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-		echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
-		echo bouton_block_invisible("virtuel");
-		echo "REDIRECTION";
-		echo aide ("artvirt");
-		echo "</b></font></td></tr></table></center>";
-		echo "<form action='articles.php3' method='post'>";
-		echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
-		echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
+if ($connect_statut=="0minirezo" AND $options=="avancees"){
+	
+	if (substr($chapo, 0, 1) == '=') {
+		$virtuel = substr($chapo, 1, strlen($chapo));
+	}
+	
+	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
+	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+	echo bouton_block_invisible("virtuel");
+	echo "REDIRECTION";
+	echo aide ("artvirt");
+	echo "</b></font></td></tr></table></center>";
+	echo "<form action='articles.php3' method='post'>";
+	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 
-		if (strlen($virtuel) != 0) { 
-			echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
-		}
-
-		echo debut_block_invisible("virtuel");
-		if (strlen($virtuel) == 0) { 
-			$virtuel = "http://";
-			echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
-		}
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
-		echo "</font>";
-		echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
-		echo "</form>";
-		echo fin_block();
+	if (strlen($virtuel) != 0) { 
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
 	}
 
-
-
+	echo debut_block_invisible("virtuel");
+	if (strlen($virtuel) == 0) { 
+		$virtuel = "http://";
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
+	}
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
+	echo "</font>";
+	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
+	echo "</form>";
+	echo fin_block();
+}
 
 
 if ($boite_ouverte) {
 	fin_boite_info();
 }
-
-
-
 
 
 
@@ -649,6 +639,9 @@ fin_raccourcis();
 debut_droite();
 
 
+
+// qu'est-ce que c'est que ces choses ??
+
 function mySel($varaut,$variable){
 	$retour= " VALUE=\"$varaut\"";
 
@@ -657,9 +650,6 @@ function mySel($varaut,$variable){
 	}
 	return $retour;
 }
-
-
-
 
 
 function my_sel($num,$tex,$comp){
@@ -712,29 +702,29 @@ function afficher_jour($jour){
 
 debut_cadre_relief("article-24.gif");
 echo "<CENTER>";
-echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
-echo "<TR>";
+/*echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
+echo "<TR><td width='100%'>";*/
 
 
 //
 // Titre, surtitre, sous-titre
 //
 
-	if ($statut_article=='publie') {
-		$logo_statut = "puce-verte.gif";
-	}
-	else if ($statut_article=='prepa') {
-		$logo_statut = "puce-blanche.gif";
-	}
-	else if ($statut_article=='prop') {
-		$logo_statut = "puce-orange.gif";
-	}
-	else if ($statut_article == 'refuse') {
-		$logo_statut = "puce-rouge.gif";
-	}
-	else if ($statut_article == 'poubelle') {
-		$logo_statut = "puce-poubelle.gif";
-	}
+if ($statut_article=='publie') {
+	$logo_statut = "puce-verte.gif";
+}
+else if ($statut_article=='prepa') {
+	$logo_statut = "puce-blanche.gif";
+}
+else if ($statut_article=='prop') {
+	$logo_statut = "puce-orange.gif";
+}
+else if ($statut_article == 'refuse') {
+	$logo_statut = "puce-rouge.gif";
+}
+else if ($statut_article == 'poubelle') {
+	$logo_statut = "puce-poubelle.gif";
+}
 
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
@@ -767,12 +757,7 @@ if ($statut_article == 'prop') {
 }
 
 
-
 echo "</td>";
-
-
-
-
 
 
 if ($flag_editable) {
@@ -811,9 +796,6 @@ echo "</tr></table>\n";
 
 
 
-
-
-
 echo "<P align=left>";
 echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
 
@@ -832,7 +814,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		echo aide ("artdate");
-		echo "</B></FONT></TR>";
+		echo "</B></FONT></TD></TR>";
 		echo "<TR><TD ALIGN='center'>";
 		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 		afficher_jour($jour);
@@ -851,9 +833,8 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'>DATE DE CREATION DE L'ARTICLE";
-		echo " : <B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TR>";
+		echo " : <B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
-	
 	}
 	
 	if (($options == 'avancees' AND $articles_redac != "non") OR ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00")) {
@@ -861,7 +842,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "<TR><TD BGCOLOR='#cccccc' COLSPAN=2><FONT SIZE=2 COLOR='#000000'>";
 		if ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00") $date_affichee = " : ".majuscules(affdate($date_redac));
 		echo bouton_block_invisible('dateredac');
-		echo "<B>DATE DE PUBLICATION ANT&Eacute;RIEURE$date_affichee</B></FONT></TR></table>";
+		echo "<B>DATE DE PUBLICATION ANT&Eacute;RIEURE$date_affichee</B></FONT></TD></TR></table>";
 		echo debut_block_invisible('dateredac');
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD ALIGN='left'>";
@@ -918,7 +899,7 @@ if ($flag_editable AND $options == 'avancees') {
 }
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>LES AUTEURS</B></FONT>";
 echo aide ("artauteurs");
-echo "</TABLE>";
+echo "</TD></TR></TABLE>";
 
 
 ////////////////////////////////////////////////////
@@ -1345,19 +1326,19 @@ if ($flag_editable) {
 echo "\n\n<div align=right>";
 //	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
 
-		if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-			$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
-			$result_auteur = spip_query($query_auteur);
-			while ($row_auteur = mysql_fetch_array($result_auteur)) {
-				$nom_auteur_modif = $row_auteur["nom"];
-			}
-			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
-			echo aide("artmodif");
-		}
-		else {
-			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
-		}
+if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
+	$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
+	$result_auteur = spip_query($query_auteur);
+	while ($row_auteur = mysql_fetch_array($result_auteur)) {
+		$nom_auteur_modif = $row_auteur["nom"];
+	}
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
+	echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
+	echo aide("artmodif");
+}
+else {
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+}
 
 echo "</div>";
 }
@@ -1402,26 +1383,26 @@ echo "</div>";
 echo "<P align='left'>";
 
 
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
- 	$result_forum = spip_query($query_forum);
- 	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row["cnt"];
+$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
+$result_forum = spip_query($query_forum);
+$total = 0;
+if ($row = mysql_fetch_array($result_forum)) $total = $row["cnt"];
 
-	if (!$debut) $debut = 0;
-	$total_afficher = 8;
+if (!$debut) $debut = 0;
+$total_afficher = 8;
+if ($total > $total_afficher) {
 	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	if ($total > $total_afficher) {
-		echo "<CENTER>";
-		for ($i = 0; $i < $total; $i = $i + $total_afficher){
-			$y = $i + $total_afficher - 1;
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
-			else
-				echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
-		}
-		echo "</CENTER>";
-		echo "</font>";
+	echo "<CENTER>";
+	for ($i = 0; $i < $total; $i = $i + $total_afficher){
+		$y = $i + $total_afficher - 1;
+		if ($i == $debut)
+			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
+		else
+			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
 	}
+	echo "</CENTER>";
+	echo "</font>";
+}
 
 
 
@@ -1430,24 +1411,22 @@ $result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 
 
-	if (!$debut) $debut = 0;
-	$total_afficher = 8;
+if (!$debut) $debut = 0;
+$total_afficher = 8;
+if ($total > $total_afficher) {
 	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	if ($total > $total_afficher) {
-		echo "<CENTER>";
-		for ($i = 0; $i < $total; $i = $i + $total_afficher){
-			$y = $i + $total_afficher - 1;
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
-			else
-				echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
-		}
-		echo "</CENTER>";
-		echo "</font>";
+	echo "<CENTER>";
+	for ($i = 0; $i < $total; $i = $i + $total_afficher){
+		$y = $i + $total_afficher - 1;
+		if ($i == $debut)
+			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
+		else
+			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
 	}
+	echo "</CENTER>";
+	echo "</font>";
+}
 
-
-echo "</FONT>";
 
 
 fin_page();
