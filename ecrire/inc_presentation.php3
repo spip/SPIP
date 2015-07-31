@@ -1713,9 +1713,9 @@ function debut_droite() {
 			gros_titre("Informations de s&eacute;curit&eacute;");
 			echo "<p>";
 
-			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
-			echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
-			echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
+			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><p>";
+			echo propre("Lorsque vous aurez termin&eacute; de travailler dans l'espace priv&eacute;, vous pourrez vous &laquo;d&eacute;connecter&raquo; gr&acirc;ce au bouton pr&eacute;vu &agrave; cet effet dans le bandeau de navigation ci-dessus, afin d'augmenter la s&eacute;curit&eacute; du site. Pour plus d'informations sur cette proc&eacute;dure, n'h&eacute;sitez pas &agrave; consulter l'aide en ligne: ");
+			echo aide("deconnect");
 
 			fin_cadre_enfonce();
 		}
