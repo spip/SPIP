@@ -39,7 +39,7 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	$erreurs = array();
 	if (intval($id)) {
 		$conflits = controler_contenu($type,$id);
-		if (count($conflits)) {
+		if ($conflits AND count($conflits)) {
 			foreach($conflits as $champ=>$conflit){
 				$erreurs[$champ] .= _T("alerte_modif_info_concourante")."<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>";
 			}
