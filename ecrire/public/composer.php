@@ -341,9 +341,8 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 			$nomfonction = $nomfonction_generique;
 		}
 		else {
-			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
-			  _T('zxml_inconnu_balise');
-			erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
+			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
+			erreur_squelette($msg, $context_compil);
 			return '';
 		}
 	}
@@ -363,10 +362,8 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 			array_unshift($r,$nom);
 			$nomfonction = $nomfonction_generique;
 		} else {
-
-			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
-			  _T('zxml_inconnu_balise');
-			erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
+			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
+			erreur_squelette($msg, $context_compil);
 			return '';
 		}
 	}

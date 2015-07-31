@@ -99,8 +99,7 @@ function sql_select (
 	}
 
 	if (is_resource($res)) return $res;
-	include_spip('public/compiler');
-	erreur_squelette(array(sql_errno(), sql_error(), $query), reconstruire_contexte_compil($context_compil));
+	erreur_squelette(array(sql_errno(), sql_error(), $query), $option);
 	return false;
 }
 
