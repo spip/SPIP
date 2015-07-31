@@ -150,9 +150,9 @@ function phraser_champs($texte,$ligne,$result) {
 		$champ->nom_champ = $match[3];
 		$champ->etoile = $match[5];
 		if ($suite[0] == '{') {
-		  phraser_arg($suite, '', array(), $champ);
+			phraser_arg($suite, '', array(), $champ);
+			$texte = ltrim($suite);
 		}
-		$texte = ltrim($suite);
 		$result[] = $champ;
 	  } else {
 	    // faux champ
