@@ -645,7 +645,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			if ($type_inclus == "embed" OR $type_inclus == "image") {
 				echo "<br><b>"._T('info_dimension')."</b><br>\n";
 				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 			}
 
 			echo "<div align='right'>";
@@ -1083,7 +1083,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else  echo debut_block_invisible($block);
 
 		if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
-		echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur pixels<br></font></div>\n";
+		echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br></font></div>\n";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');

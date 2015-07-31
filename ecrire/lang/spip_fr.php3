@@ -1226,6 +1226,7 @@ et vous reconnecter au site.
 
 // S
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
+'statut_admin_restreint' => '(admin restreint)',
 
 
 // T

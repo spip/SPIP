@@ -98,7 +98,7 @@ function afficher_logo($racine, $titre) {
 		$fid = $logo[2];
 		if ($taille) {
 			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
-			$taille_txt = "$taille[0] x $taille[1] pixels";
+			$taille_txt = "$taille[0] x $taille[1] "._T('info_pixels');
 		}
 	}
 
