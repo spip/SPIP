@@ -307,15 +307,6 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
 		
-	pipeline('post_ecrire_image',
-		array(
-			'args' => array(
-        		'action' => 'image_gd_output',
-        		'chemin' => $valeurs['fichier_dest']
-        	),
-        	'data' => null
-        )
-	);
 	return $ret;
 }
 
@@ -363,6 +354,10 @@ function ramasse_miettes($fichier){
 
 // http://doc.spip.org/@image_graver
 function image_graver($img){
+	// appeler le filtre post_image_filtrer qui permet de faire
+	// des traitements auto a la fin d'une serie de filtres
+	$img = pipeline('post_image_filtrer',$img);
+
 	$fichier = extraire_attribut($img, 'src');
 	if (($p=strpos($fichier,'?'))!==FALSE)
 		$fichier=substr($fichier,0,$p);

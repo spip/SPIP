@@ -278,6 +278,7 @@ $spip_pipeline = array(
 	'optimiser_base_disparus' => '',
 	'pre_boucle' => '',
 	'post_boucle' => '',
+	'post_image_filtrer' => '',
 	'pre_propre' => '|extraire_multi|traiter_poesie|traiter_retours_chariots',
 	'pre_liens' => '|traiter_raccourci_liens|traiter_raccourci_glossaire
 		|traiter_raccourci_ancre',
