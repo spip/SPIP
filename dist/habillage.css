@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /* Typo pour les menus et la navigation */
 body, #navigation, .encart, .formulaire_spip {
-	font-family: Verdana, "Bitstream Vera Sans", Tahoma, Arial, sans-serif; }
+	font-family: Verdana, Tahoma, Arial, sans-serif; }
 
 /* Typo pour le contenu */
 #contenu {
@@ -120,7 +120,7 @@ body, #navigation, .encart, .formulaire_spip {
 
 /* Typo pour les citations et extraits introductifs */
 q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
-	font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
+	font-family: Georgia, Times, serif; }
 
 
 /*  ------------------------------------------
