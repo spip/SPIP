@@ -431,6 +431,8 @@ function texte_backend($texte) {
 	$texte = preg_replace('/\s{2,}/S'.$u, " ", $texte);
 	// ne pas echapper les sinqle quotes car certains outils de syndication gerent mal
 	$texte = entites_html($texte, false, false);
+	// mais bien echapper les double quotes !
+	$texte = str_replace('"','&#034;',$texte);
 
 	// verifier le charset
 	$texte = charset2unicode($texte);
