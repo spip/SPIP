@@ -314,7 +314,7 @@ function init_langues() {
 // http://doc.spip.org/@html_lang_attributes
 function html_lang_attributes()
 {
-	return  "<html lang='"
+	return  "<html xmlns='http://www.w3.org/1999/xhtml' lang='"
 	. $GLOBALS['spip_lang']
 	. "' dir='"
 	. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
