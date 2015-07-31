@@ -13,6 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/charsets');
+
 // Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
 // et arguments
 function filtrer($filtre) {
@@ -45,17 +47,11 @@ function entites_html($texte) {
 
 // Transformer les &eacute; dans le charset local
 function filtrer_entites($texte) {
-	include_spip('inc/charsets');
+#	include_spip('inc/charsets');
 	// filtrer
 	$texte = html2unicode($texte);
 	// remettre le tout dans le charset cible
 	return unicode2charset($texte);
-}
-
-// Tout mettre en entites pour l'export backend (sauf iso-8859-1)
-function entites_unicode($texte) {
-	include_spip('inc/charsets');
-	return charset2unicode($texte);
 }
 
 // caracteres de controle - http://www.w3.org/TR/REC-xml/#charsets
@@ -101,11 +97,6 @@ function corriger_caracteres ($texte) {
 	return $texte;
 }
 
-function translitterer_caracteres ($texte, $charset='AUTO', $complex='') {
-	include_spip('inc/charsets');
-	return translitteration(corriger_caracteres($texte), $charset, $complexe);
-}
-
 // Encode du HTML pour transmission XML
 function texte_backend($texte) {
 
@@ -126,7 +117,7 @@ function texte_backend($texte) {
 	$texte = entites_html($texte);
 
 	// verifier le charset
-	$texte = entites_unicode($texte);
+	$texte = charset2unicode($texte);
 
 	// Caracteres problematiques en iso-latin 1
 	if ($GLOBALS['meta']['charset'] == 'iso-8859-1') {
@@ -194,7 +185,7 @@ function PtoBR($texte){
 function lignes_longues($texte, $l = 70) {
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
-	include_spip('inc/charsets');
+	#include_spip('inc/charsets');
 	$texte = unicode_to_utf_8(charset2unicode(
 		$texte, $GLOBALS['meta']['charset'], true));
 
@@ -652,7 +643,7 @@ function style_align($bof) {
 //
 
 function filtrer_ical($texte) {
-	include_spip('inc/charsets');
+	#include_spip('inc/charsets');
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, $GLOBALS['meta']['charset'], 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
@@ -2568,5 +2559,9 @@ function form_hidden($action) {
 	}
 	return $hidden;
 }
+
+
+### fonction depreciee, laissee ici pour compat ascendante 1.9
+function entites_unicode($texte) { return charset2unicode($texte); }
 
 ?>

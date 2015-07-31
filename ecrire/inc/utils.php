@@ -74,51 +74,30 @@ function include_fonction($nom, $dossier='exec') {
 // une fonction remplacant include_ecrire, et autorisant les surcharges
 //
 function include_spip($f, $include = true) {
-	static $included_files = array();
+
 	// deja charge (nom) ?
-	if (isset($included_files[$f]))
-		return $included_files[$f];
+	if (isset($GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f])) {
+		$s = $GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f];
+		if ($include && $s) {
+			include_once $s;
+		}
+		return $s;
+	}
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 
-
-	// chercher le fichier dans le chemin (eventuellement, surcharge)
-
-	// est-ce dans les chemins du noyau (optimises) ?
-	if (_DIR_RESTREINT) {
-		if (isset($GLOBALS['meta']['noyau'][$f])) {
-			$s = $GLOBALS['meta']['noyau'][$f];
-			if (!$s) return false;
-		}
-		// sinon on se souvient qu'il faudra ecrire le noyau dans public/global
-		else
-			define('ecrire_noyau', 1);
-	}
-
-	if (!isset($s)
-	AND !$s = find_in_path($f . '.php')
+	if (!$s = find_in_path($f . '.php')
 	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
-		if (_DIR_RESTREINT)
-			$GLOBALS['meta']['noyau'][$f] = false;
-		return $included_files[$f] = false;
+		return $GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = false;
 	}
 
-	// deja charge (chemin complet) ?
-	if (isset($included_files[$s])) {
-		if (_DIR_RESTREINT)
-			$GLOBALS['meta']['noyau'][$f] = $included_files[$s];
-		return $included_files[$f] = $included_files[$s];
-	}
-	else {
-		if (_DIR_RESTREINT)
-			$GLOBALS['meta']['noyau'][$f] = $s;
-		$included_files[$f] = $included_files[$s] = $s;
-	}
+	$GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = $s;
+	define('ecrire_noyau', 1);
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
-		include($s);
+		include_once $s;
 	}
 
 	return $s;
@@ -450,17 +429,19 @@ function lire_meta($nom) {
 // Traduction des textes de SPIP
 //
 function _T($texte, $args = '') {
-	include_spip('inc/lang');
+	# petite optimisation pour ne passer qu'une fois dans include_spip
+	static $c; $c OR $c = include_spip('inc/lang');
+
 	$text = traduire_chaine($texte, $args);
 	if (!empty($GLOBALS['xhtml'])) {
 		include_spip('inc/charsets');
 		$text = html2unicode($text, true /* secure */);
 	}
 
-	return $text ? $text : 
-	  // pour les chaines non traduites
-	  (($n = strpos($texte,':')) === false ? $texte :
-	   substr($texte, $n+1));
+	return $text ? $text :
+		// pour les chaines non traduites
+		(($n = strpos($texte,':')) === false ? $texte :
+			substr($texte, $n+1));
 }
 
 // chaines en cours de traduction
