@@ -80,7 +80,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
 	} else {
-		$loge = ($visiteur_session['auth'] != '');
+		$loge = ($GLOBALS['visiteur_session']['auth'] != '');
 	}
 
 	if ($auteur AND $loge) {
