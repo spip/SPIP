@@ -39,33 +39,39 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 		$url = generer_url_article($id_article);
 	}
 
-	$url = ereg_replace('^/', '', $url);
 	$adresse_site = lire_meta("adresse_site");
 	$nom_site_spip = lire_meta("nom_site");
-	$url = "$adresse_site/$url";
-	$parauteur = (strlen($auteur) <= 2) ? '' :
-	  (" "
-	   ._T('forum_par_auteur',
-	       array('auteur' => $auteur)) .
-	   (!$email_auteur ? '' : (' <' . $email_auteur . '>')));
-	$courr =  _T('form_forum_message_auto')."\n\n"
-		. _T('forum_poste_par',
-		     array('parauteur' => $parauteur))."\n"
-		. _T('forum_ne_repondez_pas')."\n"
+	$url = $adresse_site .'/' .  ereg_replace('^/', '', $url);
+	$corps = "\n"
 		. $url
 		. "\n\n\n".$titre."\n\n".textebrut(propre($texte))
-		. "\n\n$nom_site_forum\n$url_site\n";
-	$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-	$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs,
+		. "\n\n$nom_site_spip\n$adresse_site\n";
+
+	if ($email_auteur) 
+		$email_auteur = ' <' . $email_auteur . '>';
+	$result = spip_query("SELECT auteurs.email, auteurs.lang FROM spip_auteurs AS auteurs,
 				spip_auteurs_articles AS lien
 				WHERE lien.id_article='$id_article'
 				AND auteurs.id_auteur=lien.id_auteur");
 
-	while (list($email) = spip_fetch_array($result)) {
+	$old_lang = $GLOBALS['spip_lang'];
+	while (list($email, $salangue) = spip_fetch_array($result)) {
 		$email = trim($email);
 		if (strlen($email) < 3) continue;
+		$GLOBALS['spip_lang'] = ($salangue ? $salangue : $old_lang);
+		$parauteur = (strlen($auteur) <= 2) ? '' :
+		  (" "
+		   ._T('forum_par_auteur',
+		       array('auteur' => $auteur))
+		   . $email_auteur);
+		$courr =  _T('form_forum_message_auto')."\n\n"
+		  . _T('forum_poste_par', array('parauteur' => $parauteur))."\n"
+		  . _T('forum_ne_repondez_pas')
+		  . $corps ;
+		$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
 		envoyer_mail($email, $sujet, $courr);
 	}
+	$GLOBALS['spip_lang'] = $old_lang;	
 }
 
 
