@@ -155,19 +155,9 @@ function traite_xhtml ($buffer) {
 
 		if (lire_fichier($nomfich, $tidy)
 		AND strlen(trim($tidy)) > 0) {
-			// purger le petit cache toutes les 5 minutes (300s)
 			spip_touch($nomfich); # rester vivant
-			if (spip_touch($cache.'purger_tidy', 300, true)) {
-				if ($h = @opendir($cache)) {
-					while (($f = readdir($h)) !== false) {
-						if (preg_match(',^tidy[^.]*$,', $f)
-						AND time() - filemtime("$cache$f") > 300) {
-							@unlink("$cache$f");
-							@unlink("$cache$f.err");
-						}
-					}
-				}
-			}
+			# include_local('./inc-cache.php3'); # deja inclus
+			nettoyer_petit_cache('tidy', 300);
 
 			$tidy = preg_replace (",<[?]xml.*>,U", "", $tidy);
 			if (@file_exists("$nomfich.err")) {
