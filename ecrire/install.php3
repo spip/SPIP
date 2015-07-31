@@ -398,7 +398,7 @@ else if ($etape == 3) {
 	echo "<INPUT NAME=\"choix_db\" VALUE=\"new_spip\" TYPE=Radio id='nou'";
 	if (!$checked) echo " CHECKED";
 	echo "> <label for='nou'>"._T('info_creer_base')."</label> ";
-	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondo' VALUE=\"spip\" SIZE='20'></fieldset><P>";
+	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondl' VALUE=\"spip\" SIZE='20'></fieldset><P>";
 
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 

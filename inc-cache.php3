@@ -213,24 +213,18 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 			if (@file_exists($chemin_cache)) 
 				$use_cache = 1; // passer outre
 			else {
-				spip_log("Erreur base de donnees & "
+				if (!spip_interdire_cache) {
+					spip_log("Erreur base de donnees & "
 					. "impossible utiliser $chemin_cache");
-				if (!$GLOBALS['flag_preserver']) {
 					include_ecrire('inc_presentation.php3');
-					if (!headers_sent()) {
-						install_debut_html(_T('info_travaux_titre'));
-						echo _T('titre_probleme_technique');
-						install_fin_html();
-					}
-					else echo _T('titre_probleme_technique');
-
+					install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
 				}
+			}
 				// continuer quand meme, ca n'ira pas loin.
 
 				// mais ne plus rien signaler, ne pas mettre en cache ...
-				$GLOBALS['flag_preserver'] = true;
-				define ('spip_interdire_cache', true);
-			  }
+			$GLOBALS['flag_preserver'] = true;
+			define ('spip_interdire_cache', true);
 		}
 
 		// En cas de POST (et si la connexion est ok) supprimer le cache
