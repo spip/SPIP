@@ -60,6 +60,13 @@ function balise_FORMULAIRE__dyn($form)
 		$editable = false;
 		$valeurs = array();
 	}
+	elseif(
+		is_array($valeurs)
+	 && ((reset($valeurs)===true) OR (reset($valeurs)===false))
+	 && (count($valeurs)==2)) {
+	 $editable = reset($valeurs);
+	 $valeurs = end($valeurs);
+	}
 
 	$action = self();
 	// recuperer la saisie en cours si erreurs
