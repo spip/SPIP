@@ -840,36 +840,45 @@ function compile_inclure_doublons($lexemes)
 
 // http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
-	global $tables_jointures;
-	static $trouver_table;
-	if (!$trouver_table)
-		$trouver_table = charger_fonction('trouver_table', 'base');
-
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_spip('inc/charsets');
-	$descr = array('nom' => $nom,
-			'sourcefile' => $sourcefile,
-			'gram' => $gram,
-			'squelette' => transcoder_page($squelette));
+	$squelette = transcoder_page($squelette);
 
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
-		squelette_debug_compile($nom, $sourcefile, $descr['squelette']);
+		squelette_debug_compile($nom, $sourcefile, $squelette);
+
+	$descr = array('nom' => $nom,
+			'gram' => $gram,
+			'sourcefile' => $sourcefile,
+			'squelette' => $squelette);
+
 	// Phraser le squelette, selon sa grammaire
-	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
+
 	$boucles = array();
+	$f = charger_fonction('phraser_' . $gram, 'public');
+
+	$squelette = $f($squelette, '', $boucles, $nom);
+
+	return compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+}
+
+// Point d'entree pour arbre de syntaxe abstraite fourni
+
+function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect=''){
+	global $tables_jointures;
+	static $trouver_table;
 	spip_timer('calcul_skel');
 
-	$f = charger_fonction('phraser_'.$gram, 'public');
-
-	$squelette = $f($descr['squelette'], '', $boucles, $nom);
 	$descr['documents'] = compile_inclure_doublons($squelette);
-
 
 	// Demander la description des tables une fois pour toutes
 	// et reperer si les doublons sont demandes
 	// pour un inclure ou une boucle document
 	// c'est utile a la fonction champs_traitements
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
+
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if (!$descr['documents'] AND (
