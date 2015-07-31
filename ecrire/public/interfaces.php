@@ -115,7 +115,7 @@ class Champ {
 	var $type_requete;
 	// resultat de la compilation:  toujours une expression PHP.
 	// Chaine vide comme valeur par defaut (pour balise indefinie etc)
-	var $code ="''"; 
+	var $code = ''; 
 	var $interdire_scripts = true; // false si on est sur de cette balise
 	// tableau pour la production de code dependant du contexte
 	// id_mere;  pour TOTAL_BOUCLE hors du corps
@@ -142,7 +142,7 @@ class Idiome {
 	var $type_requete;
 	// resultat de la compilation:  toujours une expression PHP.
 	// Chaine vide comme valeur par defaut (n'arrive pas normalement)
-	var $code = "''";
+	var $code = '';
 	var $interdire_scripts = false;
 	var $descr = array();
 	var $ligne = 0;
