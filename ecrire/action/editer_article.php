@@ -12,7 +12,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_editer_article_dist
+/**
+ * Point d'entrée pour la modification d'un article
+ * 
+ * @link http://doc.spip.org/@action_editer_article_dist
+ * @param string $arg 
+ *    identifiant de l'article ou 'new' lors d'une création d'article
+ * @return array
+ */
 function action_editer_article_dist($arg=null) {
 	include_spip('inc/autoriser');
 	$err="";
@@ -44,10 +51,10 @@ function action_editer_article_dist($arg=null) {
 
 /**
  * Appelle toutes les fonctions de modification d'un article
- * $err est de la forme chaine de langue ou vide si pas d'erreur
- * http://doc.spip.org/@articles_set
- *
- * @param  $id_article
+ * La variable de retour est une chaine de langue en cas d'erreur, ou est vide sinon
+ * 
+ * @link http://doc.spip.org/@articles_set
+ * @param int $id_article
  * @param null $set
  * @return string
  */
@@ -94,9 +101,12 @@ function article_modifier($id_article, $set=null) {
 
 /**
  * Inserer un nouvel article en base
- * http://doc.spip.org/@insert_article
- *
+ * 
+ * @link http://doc.spip.org/@insert_article
  * @param int $id_rubrique
+ * @global array $GLOBALS['meta']
+ * @global array $GLOBALS['visiteur_session']
+ * @global string $GLOBALS['spip_lang']
  * @return int
  */
 function article_inserer($id_rubrique) {
@@ -175,11 +185,20 @@ function article_inserer($id_rubrique) {
 }
 
 
-// $c est un array ('statut', 'id_parent' = changement de rubrique)
-//
-// statut et rubrique sont lies, car un admin restreint peut deplacer
-// un article publie vers une rubrique qu'il n'administre pas
-// http://doc.spip.org/@instituer_article
+/** 
+ * Modification d'un article
+ * 
+ * 
+ * @link http://doc.spip.org/@instituer_article
+ * @param int $id_article 
+ * @param array $c 
+ *    un array ('statut', 'id_parent' = changement de rubrique)
+ *    statut et rubrique sont lies, car un admin restreint peut deplacer
+ *    un article publie vers une rubrique qu'il n'administre pas
+ * @param bool $calcul_rub
+ * @global array $GLOBALS['meta'] 
+ * @return string
+ */
 function article_instituer($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
@@ -289,9 +308,18 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 	return ''; // pas d'erreur
 }
 
-// fabrique la requete de modification de l'article, avec champs herites
-
-// http://doc.spip.org/@editer_article_heritage
+/**
+ * fabrique la requete de modification de l'article, avec champs herites
+ * 
+ * @link http://doc.spip.org/@editer_article_heritage
+ * @param int $id_article 
+ * @param int $id_rubrique 
+ * @param string $statut 
+ * @param array $champs 
+ * @param bool $cond 
+ * @global array $GLOBALS['meta']
+ * @return void
+ */
 function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
 
 	// Si on deplace l'article
@@ -320,11 +348,12 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 	}
 }
 
-//
-// Reunit les textes decoupes parce que trop longs
-//
-
-// http://doc.spip.org/@trop_longs_articles
+/**
+ * Reunit les textes decoupes parce que trop longs
+ * 
+ * @link http://doc.spip.org/@trop_longs_articles
+ * @return void
+ */
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n=>$t) {

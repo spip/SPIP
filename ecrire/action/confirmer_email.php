@@ -12,9 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-// Cette action permet de confirmer un changement d'email
-
+/**
+ * Confirmer un changement d'email
+ * 
+ * @global array $GLOBALS['visiteur_session']
+ * @global string $GLOBALS['redirect']
+ * @return void
+ */
 function action_confirmer_email_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');

@@ -15,7 +15,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/cookie');
 
-// http://doc.spip.org/@action_cookie_dist
+/**
+ * Cette fonction traite les cookies posés au moment de d'authentification standard
+ * ou vérifie que l'authentification HTTP est correcte
+ * 
+ * @link http://doc.spip.org/@action_cookie_dist
+ * @param string $set_cookie_admin 
+ * @param string $change_session 
+ * @global bool $GLOBALS['ignore_auth_http']
+ * @return void
+ */
 function action_cookie_dist($set_cookie_admin=null, $change_session = null) {
 	$redirect_echec = $redirect = null;
 	$test_echec_cookie = null;

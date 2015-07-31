@@ -13,7 +13,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Cette action permet de confirmer une inscription
+ * Action de confirmation d'une inscription
+ * 
+ * @global array $GLOBALS['visiteur_session']
+ * @global string $GLOBALS['redirect']
  * @return void
  */
 function action_confirmer_inscription_dist() {

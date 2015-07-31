@@ -13,8 +13,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Point d'entree d'edition d'un objet
- * on ne peut entrer que par un appel en fournissant $id et $objet
+ * Point d'entrée d'édition d'un objet
+ * 
+ * On ne peut entrer que par un appel en fournissant $id et $objet
  * mais pas pas une url
  *
  * @param int $id
@@ -125,9 +126,13 @@ function objet_modifier($objet, $id, $set=null) {
 }
 
 /**
- * Inserer en base un objet generique
- * @param  $objet
- * @param null $id_parent
+ * Insere en base un objet generique
+ * 
+ * @param string $objet
+ * @param id $id_parent
+ * @global array $GLOBALS['visiteur_session']
+ * @global array $GLOBALS['meta']
+ * @global string $GLOBALS['spip_lang']
  * @return bool|int
  */
 function objet_inserer($objet, $id_parent=null) {
@@ -223,15 +228,16 @@ function objet_inserer($objet, $id_parent=null) {
 
 
 /**
- * $c est un array ('statut', 'id_parent' = changement de rubrique)
- * statut et rubrique sont lies, car un admin restreint peut deplacer
- * un objet publie vers une rubrique qu'il n'administre pas
- *
+ * Modifie le statut et/ou la date d'un objet
+ * 
  * @param string $objet
  * @param int $id
  * @param array $c
+ *   $c est un array ('statut', 'id_parent' = changement de rubrique)
+ *   statut et rubrique sont lies, car un admin restreint peut deplacer
+ *   un objet publie vers une rubrique qu'il n'administre pas
  * @param bool $calcul_rub
- * @return mixed|string
+ * @return string
  */
 function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	if (include_spip('action/editer_'.$objet)
@@ -374,7 +380,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 }
 
 /**
- * fabrique la requete d'institution de l'objet, avec champs herites
+ * Fabrique la requete d'institution de l'objet, avec champs herites
  *
  * @param string $objet
  * @param int $id
@@ -382,7 +388,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
  * @param string $statut
  * @param array $champs
  * @param bool $cond
- * @return 
+ * @return void
  */
 function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $cond=true) {
 	$table_sql = table_objet_sql($objet);

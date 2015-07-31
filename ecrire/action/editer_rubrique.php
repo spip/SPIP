@@ -198,8 +198,9 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
  *     Identifiant de la rubrique à instituer
  * @param array $c
  *     Informations pour l'institution (id_rubrique, confirme_deplace)
+ * @global array $GLOBALS['visiteur_session']
  * @return string
- *     Chaine vide : aucune erreur
+ *     Chaîne vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
  */
 function rubrique_instituer($id_rubrique, $c) {
