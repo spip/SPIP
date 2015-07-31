@@ -16,13 +16,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_acces_interdit' => 'Доступ запрещен.',
 	'avis_article_modifie' => 'Внимание: @nom_auteur_modif@ работал над этой статьёй @date_diff@ минут назад',
 	'avis_aucun_resultat' => 'Результатов не найдено',
-	'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+	'avis_base_inaccessible' => 'Невозможно подключиться к базе @base@.',
 	'avis_chemin_invalide_1' => 'Выбранный Вами путь',
 	'avis_chemin_invalide_2' => 'похоже не верно. Пожалуйста, вернитесь на предыдущую страницу и проверьте предоставленную информацию.',
 	'avis_connexion_echec_1' => 'Не удалось подключится к SQL серверу.',
 	'avis_connexion_echec_2' => 'Пожалуйста, вернитесь на предыдущую страницу и проверьте внесенную информацию.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> На многих серверах, Вы должны сделать запрос для включения Вашего доступа к базе данных SQL  перед тем как использовать её. Если Вы не можете установить соединение, убедитесь, что этот запрос действительно был сделан.',
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
+	'avis_connexion_erreur_nom_base' => 'Название базы может состоять только из латинских букв, цифр и знака нижнего подчеркивания.',
 	'avis_connexion_ldap_echec_1' => 'Не удалось подключиться к LDAP.',
 	'avis_connexion_ldap_echec_2' => 'Вернитесь на предыдущую страницу, и проверьте внесенную Вами информацию.',
 	'avis_connexion_ldap_echec_3' => 'Кроме того, не используйте поддержку LDAP для импорта пользователей.',
@@ -106,19 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_logos_utiliser_survol' => 'Разрешить добавлять логотип для отображения "при наведении мышкой" ',
 	'config_info_logos_utiliser_survol_non' => 'Запретить добавлять логотип для отображения "при наведении мышкой" ',
 	'config_info_redirection' => 'Виртуальная статья - это возможность перенаправлять посетителей на по произвольному URL, как другую страницу этого сайта, так и на любую ссылку в интернете.',
-	'config_redirection' => 'Перенаправление',
+	'config_redirection' => 'Виртуальные статьи (редирект)',
 	'config_titre_base_sup' => 'Описание дополнительной базы данных',
 	'config_titre_base_sup_choix' => 'Выберите дополнительную базу данных',
 	'connexion_ldap' => 'Соединение:',
 	'copier_en_local' => 'Скопировать для локального сайта',
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_un_auteur' => 'Создать и добавить автора',
+	'creer_et_associer_une_rubrique' => 'Создать и добавить раздел',
 
 	// D
 	'date_mot_heures' => ':',
 
 	// E
-	'ecran_securite' => ' + écran de sécurité @version@', # NEW
+	'ecran_securite' => ' + сервис безопасности @version@',
 	'email' => 'email',
 	'email_2' => 'email:',
 	'en_savoir_plus' => 'подробнее',
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_cle_pgp_2' => 'Ключ PGP ',
 	'entree_contenu_rubrique' => '(Краткое содержание раздела.)',
 	'entree_identifiants_connexion' => 'Логин и пароль',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+	'entree_identifiants_connexion_2' => 'Информация о подключении',
 	'entree_informations_connexion_ldap' => 'Пожалуйста укажите параметры подключения к LDAP. Вы можете получить эту информацию у вашего системного администратора.',
 	'entree_infos_perso' => 'О авторе',
 	'entree_infos_perso_2' => 'Кто автор ?',
@@ -149,18 +149,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nom_fichier' => 'Пожалуйста, выберите файл с резервной копией @texte_compresse@:',
 	'entree_nom_pseudo' => 'Ваше имя или псевдоним',
 	'entree_nom_pseudo_1' => '(Ваше имя или псевдоним)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+	'entree_nom_pseudo_2' => 'Имя или псевдоним',
 	'entree_nom_site' => 'Название Вашего сайта',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
+	'entree_nom_site_2' => 'Название сайта',
 	'entree_nouveau_passe' => 'Новый пароль',
 	'entree_passe_ldap' => 'Пароль',
 	'entree_port_annuaire' => 'Номер порта в каталоге',
 	'entree_signature' => 'Подпись',
 	'entree_titre_obligatoire' => '<b>Заголовок</b> [обязательно]<br />',
 	'entree_url' => 'Адрес Вашего сайта',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
+	'entree_url_2' => 'URL',
+	'erreur_connect_deja_existant' => 'Уже существует сервер с таким названием',
+	'erreur_nom_connect_incorrect' => 'Недопустимое имя сервера',
 	'erreur_plugin_desinstalation_echouee' => 'Не удалось удалить плагин. Но вы можете отключить его.',
 	'erreur_plugin_fichier_absent' => 'Не хватает файла(ов)',
 	'erreur_plugin_fichier_def_absent' => 'Отсутствует описание файла ',
@@ -171,7 +171,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_version_manquant' => 'Отсутствует версия плагина',
 
 	// H
-	'htaccess_a_simuler' => 'Внимание: в настройках веб-сервера отключено использование @htaccess@ файлов. Для обеспечение достаточного уровня безопасности внесите изменения в настройку сервера или обратитесь в техническую поддержку хостинга. В противном случае, убедитесь, что значения @constantes@ (которые задаются в файле mes_options.php)  находятся вне папки @document_root@.', # MODIF
+	'htaccess_a_simuler' => 'Внимание: в настройках веб-сервера отключено использование @htaccess@ файлов. Для обеспечение достаточного уровня безопасности внесите изменения в настройки сервера самостоятельно или обратитесь в техническую поддержку хостинга. 
+Так же вы можете задать константы @constantes@ (в файле mes_options.php) так, что бы эти файлы находились все папки @document_root@.',
 	'htaccess_inoperant' => 'htaccess отключен',
 
 	// I
@@ -180,7 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'В Вашем распоряжении есть два календаря. Первый - это карта сайта, показывающая все опубликованные статьи. Второй содержит редакторские объявления точно также, как и Ваши последние личные сообщения: он сохранен для Вас, благодаря ключу, который Вы можете изменить в любое время подтвердив свой пароль.',
 	'ical_methode_http' => 'Загрузить',
 	'ical_methode_webcal' => 'Синхронизация (webcal://)',
-	'ical_texte_js' => 'Полоса javascript позволяет показывать новые статьи опубликованные на этом сайте.',
+	'ical_texte_js' => 'Вы можете вставить этот javascript код на любой сайт для того, что бы отображать последние опубликованные статьи и материалы вашего сайта.',
 	'ical_texte_prive' => 'Этот календарь является строго личным, он информирует Вас о работе со статьями на этом сайте (задачи, персональные настройки, отправленные статьи и новости дня ...).',
 	'ical_texte_public' => 'Этот календарь позволяет Вам следить за основной деятельностью этого сайта (публикация статей и новостей).',
 	'ical_texte_rss' => 'Вы можете отправлять последние новости этого сайта по XML/RSS (Rich Site Summary). Этот формат также позволяет SPIP читать последние новости, изданные другими сайтами, используя совместимый обменный формат (объединения сайтов).',
@@ -202,7 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_mot_cle_rubrique' => 'Создать ключ и добавить к  разделу',
 	'icone_creer_mot_cle_site' => 'Создать ключ и добавить к сайту',
 	'icone_creer_rubrique_2' => 'Новый раздел',
-	'icone_edition' => 'Édition', # NEW
+	'icone_edition' => 'Сайт',
 	'icone_envoyer_message' => 'Отправить сообщение',
 	'icone_ma_langue' => 'Язык',
 	'icone_mes_infos' => 'Профиль',
@@ -210,34 +211,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_article' => 'Изменить статью',
 	'icone_modifier_message' => 'Изменить это сообщение',
 	'icone_modifier_rubrique' => 'Изменить этот раздел',
-	'icone_publication' => 'Publication', # NEW
+	'icone_publication' => 'Публикации',
 	'icone_relancer_signataire' => 'Опять связаться с подписавшимся',
 	'icone_retour' => 'Назад',
 	'icone_retour_article' => 'Назад к статье',
 	'icone_squelette' => 'Шаблоны',
-	'icone_suivi_publication' => 'Suivi de la publication', # NEW
+	'icone_suivi_publication' => 'Свежие обновления',
 	'icone_supprimer_cookie' => 'Удалить cookie',
 	'icone_supprimer_rubrique' => 'Удалить этот раздел',
 	'icone_supprimer_signature' => 'Удалить эту подпись',
 	'icone_valider_signature' => 'Утвердить эту подпись',
 	'image_administrer_rubrique' => 'Вы можете управлять этим разделом',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+	'impossible_modifier_login_auteur' => 'Невозможно изменить логин.',
+	'impossible_modifier_pass_auteur' => 'Невозможно изменить пароль.',
 	'info_1_article' => '1 статья',
-	'info_1_article_syndique' => '1 article syndiqué', # NEW
+	'info_1_article_syndique' => '1 загруженная статья',
 	'info_1_auteur' => '1 автор',
-	'info_1_message' => '1 message', # NEW
+	'info_1_message' => '1 сообщение',
 	'info_1_mot_cle' => '1 ключ',
-	'info_1_rubrique' => '1 rubrique', # NEW
+	'info_1_rubrique' => '1 раздел',
 	'info_1_site' => '1 сайт',
-	'info_1_visiteur' => '1 visiteur', # NEW
+	'info_1_visiteur' => '1 посетитель',
 	'info_activer_cookie' => 'Вы можете включить<b>администраторский cookie</b>, который позволяет Вам 
  легко переключаться  между основной и административной частью сайта ..',
-	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
+	'info_admin_etre_webmestre' => 'Предоставить мне права вебмастера',
 	'info_admin_gere_rubriques' => 'Этот администратор управляет следующими разделами:',
 	'info_admin_gere_toutes_rubriques' => 'Администратор управляет<b> всеми разделами</b>.',
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
-	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
+	'info_admin_gere_toutes_rubriques_2' => 'Я управляю <b>всеми разделами</b>',
+	'info_admin_je_suis_webmestre' => 'Я <b>вебмастер</b>',
 	'info_admin_statuer_webmestre' => 'Сделать администратора вебмастером сайта',
 	'info_admin_webmestre' => 'Администратор является <b>вебмастером</b>',
 	'info_administrateur' => 'Администратор',
@@ -249,7 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => 'Вы можете управлять этим разделом',
 	'info_adresse' => 'на адрес:',
 	'info_adresse_url' => 'Адрес сайта (URL)',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
+	'info_afficher_par_nb' => 'Показать',
 	'info_afficher_visites' => 'Показать посещения для:',
 	'info_aide_en_ligne' => 'SPIP Oнлайн Помощь',
 	'info_ajout_image' => 'Когда Вы добавляете изображения как прикрепленные документы к  статье, 
@@ -262,22 +263,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_anterieur' => 'предыдущий',
 	'info_article' => 'статья',
 	'info_article_2' => 'статьи',
-	'info_article_a_paraitre' => 'Дата публикации статей', # MODIF
+	'info_article_a_paraitre' => 'Статьи, которые будут опубликованы в будущем',
 	'info_articles_02' => 'статьи',
 	'info_articles_2' => 'Статьи',
 	'info_articles_auteur' => 'Статьи этого автора',
-	'info_articles_miens' => 'Mes articles', # NEW
-	'info_articles_tous' => 'Tous les articles', # NEW
+	'info_articles_miens' => 'Мои статьи',
+	'info_articles_tous' => 'Все статьи',
 	'info_articles_trouves' => 'Найденные статьи',
 	'info_articles_trouves_dans_texte' => 'Статьи найденные в тексте',
 	'info_attente_validation' => 'Ваши статьи на утверждении',
-	'info_aucun_article' => 'Aucun article', # NEW
-	'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
-	'info_aucun_auteur' => 'Aucun auteur', # NEW
-	'info_aucun_message' => 'Aucun message', # NEW
-	'info_aucun_rubrique' => 'Aucune rubrique', # NEW
-	'info_aucun_site' => 'Aucun site', # NEW
-	'info_aucun_visiteur' => 'Aucun visiteur', # NEW
+	'info_aucun_article' => 'Нет статей',
+	'info_aucun_article_syndique' => 'Нет загруженных статей',
+	'info_aucun_auteur' => 'Нет авторов',
+	'info_aucun_message' => 'Нет сообщений',
+	'info_aucun_rubrique' => 'Нет разделов',
+	'info_aucun_site' => 'Нет сайтов',
+	'info_aucun_visiteur' => 'Нет посетителей',
 	'info_aujourdhui' => 'сегодня:',
 	'info_auteur_message' => 'ОТПРАВИТЕЛЬ СООБЩЕНИЯ:',
 	'info_auteurs' => 'Автора',
@@ -287,7 +288,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_avertissement' => 'Предупреждение',
 	'info_barre_outils' => 'с панелью инструментов?',
 	'info_base_installee' => 'Структура Вашей базы данных установлена.',
-	'info_bio' => 'Biographie', # NEW
+	'info_bio' => 'Био',
 	'info_chapeau' => 'Вводная',
 	'info_chapeau_2' => 'Введение:',
 	'info_chemin_acces_1' => 'Опции: <b>Путь доступа к каталогу</b>',
@@ -297,7 +298,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => ' из @liste@',
 	'info_classement_2' => ' из @liste@',
 	'info_code_acces' => 'Не забудьте Ваши собственные кода доступа!',
-	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
+	'info_compatibilite_html' => 'Использовать стандартный HTML ',
 	'info_compresseur_gzip' => 'Убедитесь, что настройки хостинга поддерживают сжатие HTML. Для этого воспользуйтесь этим сайтом: @testgzip@',
 	'info_compresseur_texte' => 'Если Ваш сервер автоматически не сжимает HTML страницы при их отправке, Вы можете попробывать вынужденное сжатие для уменьшения размера передаваемых страниц. <b>Внимание</b>: это может иметь заметный негативный эффект на производительность некоторых серверов, ',
 	'info_config_suivi' => 'Если этот адрес соответствует списку адресатов, Вы можете указать ниже адрес, где участники сайта могут зарегистрироваться. Этим адресом может быть адрес сайта(например страница списка регистрации через сеть), или адрес электронной почты с определенным предметом (например: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -314,20 +315,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_connexion_ok' => 'Соединение установлено.',
 	'info_contact' => 'Контакт',
 	'info_contenu_articles' => 'Содержание статей',
-	'info_contributions' => 'Contributions', # NEW
+	'info_contributions' => 'Contributions',
 	'info_creation_paragraphe' => '(Разделяйте абзацы пустыми строками)',
 	'info_creation_rubrique' => 'Создай те хотя бы один раздел, для того, что бы создавать статьи.<br />',
 	'info_creation_tables' => 'Четвертый этап: <b>Создание таблиц базы данных</b>',
 	'info_creer_base' => '<b>Создать</b> новую базу данных:',
 	'info_dans_rubrique' => 'В разделе:',
-	'info_date_publication_anterieure' => 'Дата более ранней публикации:',
+	'info_date_publication_anterieure' => 'Дополнительная дата:',
 	'info_date_referencement' => 'ДАТА ССЫЛКИ НА ЭТОТ САЙТ:',
 	'info_derniere_etape' => 'Следующий этап: <b>Готово!',
 	'info_derniers_articles_publies' => 'Ваши последние опубликованные статьи',
 	'info_desactiver_messagerie_personnelle' => 'Вы можете включать и отключать Ваши персональные сообщения на этом сайте.',
 	'info_descriptif' => 'Описание:',
 	'info_desinstaller_plugin' => 'удалить файлы и отключить плагин',
-	'info_discussion_cours' => 'Обсуждения в ходе работы',
+	'info_discussion_cours' => 'Текущие обсуждения',
 	'info_ecrire_article' => 'Перед тем как написать статью, Вы должны создать хотя бы один раздел.',
 	'info_email_envoi' => 'Адрес электронной почты отправителя (дополнительно)',
 	'info_email_envoi_txt' => 'Введите используемый адрес электронной почты отправителя, посылая электронные письма (по умолчанию, адрес получателя используется как адрес отправителя),  :',
@@ -339,7 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_etape_suivante_1' => 'Вы можете перейти к следующему этапу.',
 	'info_etape_suivante_2' => 'Вы можете перейти к следующему этапу.',
 	'info_exceptions_proxy' => 'Исключения для прокси',
-	'info_exportation_base' => 'перемещение базы данных в @archive@',
+	'info_exportation_base' => 'экспортировать базу данных в @archive@',
 	'info_facilite_suivi_activite' => 'Для облегчения проверки исполнения редактирования сайта;
  SPIP может рассылать уведомления по электронной почте, для редакторской почтовой рассылки например,
  прошение о публикации и утверждение статьи.',
@@ -347,9 +348,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_forums_abo_invites' => 'Ваш сайт содержит форумы по подписке; посетители могут зарегистрироваться к ним на основном сайте.',
 	'info_gauche_admin_effacer' => '<b>Только администраторы имеют доступ к этой странице. </b> <p>Она обеспечивает доступ к ряду функциям по обслуживанию сайта. Некоторые из них требуют прав доступа к FTP сайта. </p> ',
 	'info_gauche_admin_tech' => '<b>Страница только для вебмастера сайта. </b><p> Вы можете выполнять задачи по эксплуатации сайта. Часть из них может потребовать  FTP доступа к сайту.</p>',
-	'info_gauche_admin_vider' => '<b>Только администраторы имеют доступ к этой странице. </b> <p> Она обеспечивает доступ к различным 
- задачам технического обслуживания. Некоторые из них приводят к определенному процессу 
- проверки подлинности, требуемого FTP доступом к сайту.</p>', # MODIF
+	'info_gauche_admin_vider' => '<b>Только вебмастера имеют доступ к этой странице. </b> <p> Тут есть возможность выполнять разные задачи по обслуживанию сайта. Для выполнения отдельных задач необходима доступ к сайту по FTP.</p>',
 	'info_gauche_auteurs' => 'Список всех авторов сайта. 
 Статус автора обозначен цветом (администратор = зеленый; автор = желтый).',
 	'info_gauche_auteurs_exterieurs' => 'Посетители без доступа в систему управления, обозначены синим цвета; удаленные автора - иконкой корзины.',
@@ -360,7 +359,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  в основной части сайта (форумы по подписке).',
 	'info_generation_miniatures_images' => 'Создание уменьшенных изображений',
 	'info_gerer_trad' => 'Включить перевод ссылок?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+	'info_gerer_trad_objets' => '@objets@ : управление переводами',
 	'info_hebergeur_desactiver_envoi_email' => 'Некоторые хосты отключают  автоматизированную отправку писем 
   на своих серверах. В этом случае следующие возможности 
  SPIP не могут быть осуществлены.',
@@ -382,7 +381,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Языки сайта',
 	'info_ldap_ok' => 'Установление подлинности LDAP.',
 	'info_lien_hypertexte' => 'Гиперссылка:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'Информация о последних обновлениях отправлена',
 	'info_liste_redacteurs_connectes' => 'Автора онлайн',
 	'info_login_existant' => 'Этот логин уже используется.',
 	'info_login_trop_court' => 'Слишком короткий логин.',
@@ -401,7 +400,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   предварительно установлена на этом сайте: Ваша база данных подвергается риску быть потерянной 
   и Ваш сайт больше не будет работать должным образом. <br /> {{Переустановите 
  SPIP Файлы.}}',
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+	'info_modification_enregistree' => 'Ваши изменения сохранены',
 	'info_modifier_auteur' => 'Изменить автора:',
 	'info_modifier_rubrique' => 'Изменить раздел:',
 	'info_modifier_titre' => 'Изменить: @titre@',
@@ -413,17 +412,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_multi_cet_article' => 'Язык этой статьи:',
 	'info_multi_langues_choisies' => 'Выберите языки для материалов на сайте. Вы не можете отключить уже используемые языки.
   Языки, уже используемые Вашим сайтом(в верху списка) не могут быть отключены.',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+	'info_multi_objets' => '@objets@ : включить языковое меню',
 	'info_multi_rubriques' => 'Включить выбор языка в разделе?',
 	'info_multi_secteurs' => '... только для разделов в корне сайта?',
 	'info_nb_articles' => '@nb@ статей',
 	'info_nb_articles_syndiques' => '@nb@ RSS статей',
 	'info_nb_auteurs' => '@nb@ авторов',
-	'info_nb_messages' => '@nb@ messages', # NEW
-	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-	'info_nb_rubriques' => '@nb@ rubriques', # NEW
-	'info_nb_sites' => '@nb@ sites', # NEW
-	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
+	'info_nb_messages' => '@nb@ сообщений',
+	'info_nb_mots_cles' => '@nb@ ключей',
+	'info_nb_rubriques' => '@nb@ разделов',
+	'info_nb_sites' => '@nb@ сайтов',
+	'info_nb_visiteurs' => '@nb@ посетителей',
 	'info_nom' => 'Имя',
 	'info_nom_destinataire' => 'Имя получателя',
 	'info_nom_site' => 'Название Вашего сайта',
@@ -437,7 +436,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_non_envoi_liste_nouveautes' => 'Не отправлять список последних новостей',
 	'info_non_modifiable' => 'не может быть изменен',
 	'info_non_suppression_mot_cle' => 'Я не хочу удалить этот ключ.',
-	'info_note_numero' => 'Note @numero@', # NEW
+	'info_note_numero' => 'Заметка @numero@',
 	'info_notes' => 'Примечания',
 	'info_nouveaux_message' => 'Новые сообщения',
 	'info_nouvel_article' => 'Новая статья',
@@ -481,18 +480,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_publier' => 'опубликовать',
 	'info_publies' => 'Ваши статьи, опубликованные на сайте:',
 	'info_question_accepter_visiteurs' => 'Если шаблоны Вашего сайта позволяют посетителям регистрироваться, не входя в административную часть, пожалуйста включите следующую опцию:',
-	'info_question_inscription_nouveaux_redacteurs' => 'Хотели бы Вы разрешить регистрацию новых редакторов 
- с основного сайта? Если Вы согласны с этим, посетители могут зарегистрироваться 
-  используя автоматическую форму, и также получать доступ к административной части для 
-  предложения своих собственных статей. <blockquote> <i> В течение процесса регистрации, 
-  пользователи получают автоматическое сообщение 
-  которое дает им код доступа к административной части. Некоторые 
-поставщики услуг отключают отправку почты со своих 
-  серверов: в этом случае, автоматическая регистрация не может быть 
-  выполнена.', # MODIF
+	'info_question_inscription_nouveaux_redacteurs' => 'Вы хотите разрешить регистрацию новых пользователей на сайте? Если да, то посетители смогут регистрироваться самостоятельно, используя стандартную форму. Так же у них будет доступ в административную часть сайта и возможность создавать новые материалы.  <div class="notice"> Пароль для доступа будет отправлен пользователю по email автоматически. Если ваш хостинг не поддерживает отправку писем, то эта опция будет бесполезна.</div>',
 	'info_question_utilisation_moteur_recherche' => 'Использовать внутренний поиск SPIP? (Его отключение ускоряет работу системы.)',
 	'info_question_vignettes_referer_non' => 'Не показывать изображения главной страницы',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ работал над этим материалом @date_diff@ минут назад',
 	'info_racine_site' => 'Корень сайта',
 	'info_recharger_page' => 'Пожалуйста перезагрузите эту страницу через несколько минут.',
 	'info_recherche_auteur_a_affiner' => 'Слишком много результатов для "@cherche_auteur"; пожалуйста уточните запрос.',
@@ -504,8 +495,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_redacteurs' => 'Автора',
 	'info_redaction_en_cours' => 'РЕДАКТИРУЕТСЯ',
 	'info_redirection' => 'Перенаправление',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+	'info_redirection_activee' => 'Перенаправление включено.',
+	'info_redirection_desactivee' => 'Перенаправление удалено.',
 	'info_refuses' => 'Ваши отклоненные статьи',
 	'info_reglage_ldap' => 'Опции<b> Настройка импорта LDAP</b>',
 	'info_renvoi_article' => 'Посетитель будет перенаправлен по следующей ссылке',
@@ -515,7 +506,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubriques' => 'Разделы',
 	'info_rubriques_02' => 'разделы',
 	'info_rubriques_trouvees' => 'Найденные разделы',
-	'info_rubriques_trouvees_dans_texte' => 'Найденные разделы(в тексте)',
+	'info_rubriques_trouvees_dans_texte' => 'Найденные разделы (в тексте)',
 	'info_sans_titre' => 'Без названия',
 	'info_selection_chemin_acces' => '<b>Выберите</b>  путь доступа к каталогу:',
 	'info_signatures' => 'подписи',
@@ -523,7 +514,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_2' => 'Сайт:',
 	'info_site_min' => 'сайт',
 	'info_site_reference_2' => 'Ссылающийся сайт',
-	'info_site_web' => 'ВЕБСАЙТ:', # MODIF
+	'info_site_web' => 'САЙТ:',
 	'info_sites' => 'сайты',
 	'info_sites_lies_mot' => 'Сайты с этим ключем',
 	'info_sites_proxy' => 'Использовать прокси',
@@ -532,14 +523,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sous_titre' => 'Подзаголовок:',
 	'info_statut_administrateur' => 'Администратор',
 	'info_statut_auteur' => 'Права доступа:',
-	'info_statut_auteur_2' => 'Je suis', # NEW
+	'info_statut_auteur_2' => 'Я',
 	'info_statut_auteur_a_confirmer' => 'Регистрация будет подтверждена',
 	'info_statut_auteur_autre' => 'Другой статус:',
 	'info_statut_efface' => 'Удалено',
 	'info_statut_redacteur' => 'Автор',
-	'info_statut_utilisateurs_1' => 'Статус по умолчанию импортированных пользователей',
+	'info_statut_utilisateurs_1' => 'Статус по умолчанию для импортированных пользователей',
 	'info_statut_utilisateurs_2' => 'Выберите статус, характерный для  присутствующих людей в каталоге LDAP, когда они подключаются впервые. Позже, Вы можете изменить это значение для каждого автора индивидуально.',
-	'info_suivi_activite' => 'Продолжение редакторской деятельности',
+	'info_suivi_activite' => 'Работа с материалами',
 	'info_surtitre' => 'Главное название:',
 	'info_syndication_integrale_1' => 'Ваш сайт предлагает объединенные файлы  (смотрите “<a href="@url@">@titre@</a>”).',
 	'info_syndication_integrale_2' => 'Экспортировать всю статью или только первые абзацы?',
@@ -567,16 +558,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tout_site6' => '<b>Предупреждение:</b> отображаются только исходные статьи.
 Переводы связанные с оригиналом, 
  в цвете указывающем на их статус:в цвете, указывающем их статус:',
-	'info_traductions' => 'Traductions', # NEW
+	'info_traductions' => 'Переводы',
 	'info_travail_colaboratif' => 'Совместная работа над статьями',
 	'info_un_article' => 'статья,',
 	'info_un_site' => 'сайт,',
 	'info_une_rubrique' => 'раздел,',
 	'info_une_rubrique_02' => '1 раздел',
 	'info_url' => 'Адрес:',
-	'info_url_proxy' => 'URL du proxy', # NEW
+	'info_url_proxy' => 'URL прокси',
 	'info_url_site' => 'АДРЕС САЙТА:',
-	'info_url_test_proxy' => 'URL de test', # NEW
+	'info_url_test_proxy' => 'URL для проверки',
 	'info_urlref' => 'Гиперссылка:',
 	'info_utilisation_spip' => 'SPIP готов к использованию...',
 	'info_visites_par_mois' => 'Ежемесячный показ:',
@@ -584,10 +575,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_visiteur_2' => 'из основной части сайта',
 	'info_visiteurs' => 'Посетители',
 	'info_visiteurs_02' => 'Посетители основной части сайта',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
+	'info_webmestre_forces' => 'Все вебмастера указаны в файле <tt>@file_options@</tt>.',
 	'install_adresse_base_hebergeur' => 'Адрес сервера базы данных вы можете узнать у своего хостера',
 	'install_base_ok' => 'База @base@ была распознана',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+	'install_connect_ok' => 'Была объявлена новая база на сервере @connect@.',
 	'install_echec_annonce' => 'Эта установка вероятно не будет работать, или приведет к неустойчивой работе сайта...',
 	'install_extension_mbstring' => 'SPIP не работает с:',
 	'install_extension_php_obligatoire' => 'SPIP требует php расширений:',
@@ -607,8 +598,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_tables_base' => 'Таблицы баз данных',
 	'install_types_db_connus' => 'SPIP работает с <b>MySQL</b> и <b>SQLite</b>.',
 	'install_types_db_connus_avertissement' => 'Поддержка PostgreSQL пока на экспериментальном уровне. ',
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+	'instituer_erreur_statut_a_change' => 'Статус уже был изменен',
+	'instituer_erreur_statut_non_autorise' => 'Вы не можете выбрать этот статус',
 	'intem_redacteur' => 'редактор',
 	'intitule_licence' => 'Разрешение',
 	'item_accepter_inscriptions' => 'Позволить регистрацию',
@@ -622,7 +613,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_choix_generation_miniature' => 'Создавать уменьшенные копии автоматически.',
 	'item_choix_non_generation_miniature' => 'Не создавать уменьшенные копии.',
 	'item_choix_redacteurs' => 'редакторы',
-	'item_choix_visiteurs' => 'посетители основного сайта',
+	'item_choix_visiteurs' => 'посетители сайта',
 	'item_creer_fichiers_authent' => 'Создать .htpasswd файлы',
 	'item_limiter_recherche' => 'Ограничить поиск информации, содержащейся на Вашем сайте',
 	'item_login' => 'Логин',
@@ -634,7 +625,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_accepter_inscriptions' => 'Не разрешать регистрацию',
 	'item_non_activer_messages_avertissement' => 'НЕ предупреждать о совместной работе',
 	'item_non_afficher_calendrier' => 'Не показывать календарь',
-	'item_non_autoriser_documents_joints' => 'Отключить документы к статьям', # MODIF
+	'item_non_autoriser_documents_joints' => 'Запретить добавление файлов к статьям',
 	'item_non_autoriser_documents_joints_rubriques' => 'Не разрешать документов в разделах',
 	'item_non_autoriser_syndication_integrale' => 'Отправка только краткого изложения',
 	'item_non_compresseur' => 'Отключить сжатие',
@@ -642,44 +633,44 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_gerer_statistiques' => 'Не вести статистику',
 	'item_non_limiter_recherche' => 'Расширить поиск до содержания сайтов, на которые ссылаются',
 	'item_non_messagerie_agenda' => 'Отключить систему обмена сообщениями и календарь',
-	'item_non_publier_articles' => 'Не публиковать статьи заранее (до назначенной даты публикации).',
+	'item_non_publier_articles' => 'Публиковать статьи только после указанной даты публикации.',
 	'item_non_utiliser_moteur_recherche' => 'Не использовать систему',
 	'item_nouvel_auteur' => 'Новый автор',
 	'item_nouvelle_rubrique' => 'Новый раздел',
 	'item_oui' => 'Да',
-	'item_publier_articles' => 'Публиковать статьи сразу, не учитывая назначенную дату публикации.',
+	'item_publier_articles' => 'Немедленно публиковать статьи, вне зависимости от даты публикации',
 	'item_reponse_article' => 'Ответить на статью',
 	'item_utiliser_moteur_recherche' => 'Использовать поисковую систему',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
+	'item_version_html_max_html4' => 'Использовать только HTML4 на сайте',
+	'item_version_html_max_html5' => 'Разрешить HTML5',
 	'item_visiteur' => 'посетитель',
 
 	// J
 	'jour_non_connu_nc' => 'неизвестный',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+	'label_bando_outils' => 'Панель инструментов',
+	'label_bando_outils_afficher' => 'Показать инструменты',
+	'label_bando_outils_masquer' => 'Спрятать инструменты',
+	'label_choix_langue' => 'Язык интерфейса',
+	'label_nom_fichier_connect' => 'Отображать имя сервера',
 	'label_slogan_site' => 'Слоган сайта',
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
+	'label_taille_ecran' => 'Ширина рабочей области',
+	'label_texte_et_icones_navigation' => 'Главное меню',
+	'label_texte_et_icones_page' => 'Отображение страницы',
+	'ldap_correspondance' => 'наследовать поле @champ@',
+	'ldap_correspondance_1' => 'Наследовать поля LDAP',
+	'ldap_correspondance_2' => 'Укажите соответствующей LDAP поле для каждого из данных полей. Оставьте их пустыми, если вы не хотите, что бы они заполнялись. Несколько LDAP полей разделяются пробелом или запятой.',
 	'lien_ajout_destinataire' => 'Добавить этого получателя',
 	'lien_ajouter_auteur' => 'Добавить этого автора',
 	'lien_ajouter_participant' => 'Добавить участника',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Добавить раздел',
 	'lien_email' => 'Электронная почта',
 	'lien_nom_site' => 'НАЗВАНИЕ САЙТА:',
 	'lien_retirer_auteur' => 'Убрать автора',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_rubrique' => 'Убрать раздел',
+	'lien_retirer_tous_auteurs' => 'Убрать всех авторов',
+	'lien_retirer_toutes_rubriques' => 'Убрать все разделы',
 	'lien_retrait_particpant' => 'удалить этого участника',
 	'lien_site' => 'сайт',
 	'lien_supprimer_rubrique' => 'удалить этот раздел',
@@ -693,9 +684,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_article' => 'ЛОГОТИП СТАТЬИ',
 	'logo_auteur' => 'ЛОГОТИП АВТОРА',
 	'logo_rubrique' => 'ЛОГОТИП РАЗДЕЛА',
-	'logo_site' => 'ЛОГОТИП САЙТА', # MODIF
-	'logo_standard_rubrique' => 'СТАНДАРТНЫЙ ЛОГОТИП ДЛЯ РАЗДЕЛОВ', # MODIF
-	'logo_survol' => 'ПРИ НАВЕДЕНИИ МЫШКИ', # MODIF
+	'logo_site' => 'ЛОГОТИП САЙТА',
+	'logo_standard_rubrique' => 'Стандартный логотип раздела',
+	'logo_survol' => 'ПРИ НАВЕДЕНИИ МЫШКИ',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Выберите вашу базу данных',
@@ -746,24 +737,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_automatique_liste_update' => 'Обновить списки',
 	'plugin_info_automatique_ou' => 'или...',
 	'plugin_info_automatique_select' => 'Выберите плагин, SPIP скачает и установит его в каталог <code>@rep@</code>.Если плагин уже установлен существует, он будет обновлен.',
-	'plugin_info_credit' => 'Crédits', # NEW
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
-	'plugin_info_plugins_dist_1' => 'Эти компоненты установлены в папку @plugins_dist@ и активированы.', # MODIF
-	'plugin_info_plugins_dist_2' => 'Не могут быть удалены.', # MODIF
+	'plugin_info_credit' => 'Авторская информация',
+	'plugin_info_erreur_xml' => 'Неправильная декларация плагина',
+	'plugin_info_install_ok' => 'Установка прошла успешно',
+	'plugin_info_necessite' => 'Требуется :',
+	'plugin_info_non_compatible_spip' => 'Плагин не совместим с текущей версией SPIP',
+	'plugin_info_plugins_dist_1' => 'Эти плагины загружены и установлены в папке @plugins_dist@.',
+	'plugin_info_plugins_dist_2' => 'Их нельзя отключить.',
 	'plugin_info_telecharger' => 'загрузите с @url@ и установить в @rep@',
 	'plugin_librairies_installees' => 'Установленные библиотеки',
 	'plugin_necessite_lib' => 'Для этого плагина необходима библиотека  @lib@',
 	'plugin_necessite_plugin' => 'Для этого плагина необходим @plugin@  @version@ или новее.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Требуется плагин @plugin@',
 	'plugin_necessite_spip' => 'Для этого плагина требуется SPIP @version@ или новее.',
 	'plugin_source' => 'источник: ',
 	'plugin_titre_automatique' => 'Автоматическая установка',
 	'plugin_titre_automatique_ajouter' => 'Добавить плагин',
 	'plugin_titre_installation' => 'Установить плагин @plugin@ ',
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
+	'plugin_titre_modifier' => 'Мои плагины',
 	'plugin_zip_active' => 'Продолжить для активации',
 	'plugin_zip_adresse' => 'Укажите ссылку на zip файла плагина для скачки, либо адрес RSS листа плагинов.',
 	'plugin_zip_adresse_champ' => 'URL плагина (zip file) или RSS листа ',
@@ -775,13 +766,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugins_actif_aucun' => 'Нет включенных плагинов.',
 	'plugins_actif_un' => 'Включен один плагин',
 	'plugins_actifs' => '@count@ плагинов включено.',
-	'plugins_actifs_liste' => 'Включенные плагины', # MODIF
+	'plugins_actifs_liste' => 'Включенные ',
 	'plugins_compte' => '@count@ плагины',
 	'plugins_disponible_un' => 'Доступен один плагин',
 	'plugins_disponibles' => '@count@ доступно плагинов.',
 	'plugins_erreur' => 'Ошибка в плагинах: @plugins@',
 	'plugins_liste' => 'Установленные плагины',
-	'plugins_liste_dist' => 'Компоненты', # MODIF
+	'plugins_liste_dist' => 'Защищенные плагины',
 	'plugins_recents' => 'Последние плагины',
 	'plugins_tous_liste' => 'Все',
 	'plugins_vue_hierarchie' => 'Иерархия',
@@ -789,14 +780,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'protocole_ldap' => 'Версия протокола:',
 
 	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
+	'queue_executer_maintenant' => 'Запустить',
+	'queue_info_purger' => 'Вы можете удалить все текущие задачи и обнулить всю очередь задач',
+	'queue_nb_jobs_in_queue' => 'В очереди @nb@ задач',
+	'queue_next_job_in_nb_sec' => 'Следующая задача  через @nb@ s',
+	'queue_no_job_in_queue' => 'Список задач пуст',
+	'queue_one_job_in_queue' => '1 задача в очереди',
+	'queue_purger_queue' => 'Очистить список задач',
+	'queue_titre' => 'Список задач',
 
 	// R
 	'repertoire_plugins' => 'Каталог:',
@@ -806,16 +797,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(ограниченный администратор)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+	'tache_cron_asap' => 'CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'CRON @function@ (каждые @nb@ с)',
 	'taille_cache_image' => 'Кеш изображений ( автоматически пережатые картинки, изображения формул и текста, трасформированного в графику) занимает @taille@ в каталоге @dir@.',
 	'taille_cache_infinie' => 'Этот сайт не имеет ограничения для размера каталога кэша .',
 	'taille_cache_maxi' => 'SPIP  пробует ограничить размер <code> кэш/ </code> каталога приблизительно <b> @octets@ </b>.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_moins_de' => 'Размер кеша меньше  @octets@.',
 	'taille_cache_octets' => 'Приблизительный размер кеша @octets@.',
 	'taille_cache_vide' => 'Кэш пуст.',
 	'taille_repertoire_cache' => 'Текущий размер кэша',
-	'text_article_propose_publication' => 'Статья отправлена для публикации. Не стесняйтесь выражать своё мнение через форум, прикрепленный к этой статье (у основания страницы).',
+	'text_article_propose_publication' => 'Статья отправлена на утверждение администратору.',
 	'texte_acces_ldap_anonyme_1' => 'Некоторые серверы LDAP не позволяют анонимного доступа. В этом случае Вы должны указать исходный идентификатор доступа, чтобы впоследствии иметь возможность искать информацию в каталоге. Однако, в большинстве случаев следующие поля можно оставить пустыми.',
 	'texte_admin_effacer_01' => 'Эта команда удаляет <i> все </i> содержание базы данных, 
 включая <i> все </i> параметры доступа для редакторов и администраторов. После выполнения этого, Вы должны 
@@ -837,8 +828,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_commande_vider_tables_indexation' => 'Использовать эту команду для очистки индексации таблиц
 с помощью поисковой системы, интегрированной в SPIP. Это позволит Вам 
   освободить немного места на диске.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
+	'texte_compatibilite_html' => 'Вы можете установить настройки SPIP так, что бы он генерировал код, совместимый с <i>HTML4</i>, или же с поддержкой <i>HTML5</i>.',
+	'texte_compatibilite_html_attention' => 'В случае включения поддержки <i>HTML5</i> проблемы не ожидаются, но в этом случае необходимо добавить следующую строку кода на все страницы сайта: <code><!DOCTYPE html></code>.',
 	'texte_compresse_ou_non' => '(файл может быть архивом)',
 	'texte_compte_element' => '@count@ элемент',
 	'texte_compte_elements' => '@count@ элементы',
@@ -851,11 +842,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    автоматически.',
 	'texte_creer_rubrique' => 'Создайте хотя бы один раздел, для того, что бы писать статьи.<br />',
 	'texte_date_creation_article' => 'ДАТА СОЗДАНИЯ СТАТЬИ:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
-	'texte_date_publication_anterieure' => 'Дата более ранней публикации:',
+	'texte_date_creation_objet' => 'Дата создания :', # on ajoute le ":"
+	'texte_date_publication_anterieure' => 'Дополнительная дата:',
 	'texte_date_publication_anterieure_nonaffichee' => 'Скрыть дату более ранней публикации.',
 	'texte_date_publication_article' => 'ДАТА ОНЛАЙН ПУБЛИКАЦИИ:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Дата публикации :',
 	'texte_descriptif_petition' => 'Описание комментария',
 	'texte_descriptif_rapide' => 'Краткое описание',
 	'texte_effacer_base' => 'Удалить базу данных SPIP',
@@ -864,13 +855,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_en_cours_validation' => 'Материалы, требующие проверки. ',
 	'texte_enrichir_mise_a_jour' => '<!--Вы можете улучшить свой текст, используя «типографические ярлыки»-->',
 	'texte_fichier_authent' => '<b>Должен ли SPIP создавать <tt> .htpasswd </tt> 
-  и <tt> .htpasswd-admin </tt> файлы в каталоге <tt> ecrire/data / </tt>? </b> <p> 
-   Эти файлы могут использоваться для ограничения доступа к авторам 
-  и администраторам в других частях Вашего сайта 
-  (например, внешняя статистическая программа). </p><p> 
-  Если Вы не нуждаетесь в использовании таких файлов, Вы можете оставить эту опцию 
-  с ее значением по умолчанию (без файлов 
- создания). ).</p>', # MODIF
+и <tt> .htpasswd-admin </tt> файлы в папке @dossier@? </b> <p> 
+Эти файлы используются для ограничения доступа авторов и администраторов
+к другим частям  сайта (например, к папке с серверной статистикой). </p>
+<p>Если у вас нет необходимости в таких действиях, то оставьте это значение по умолчанию.</p>',
 	'texte_informations_personnelles_1' => 'Теперь система обеспечит Вам пользовательский доступ к сайту.',
 	'texte_informations_personnelles_2' => '(Примечание: если это - переустановка, и Ваш доступ все еще работает, Вы можете',
 	'texte_introductif_article' => '(Вступительный текст к статье)',
@@ -918,17 +906,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_recapitiule_liste_documents' => 'Эта страница содержит в себе список документов, которые Вы поместили в разделе. Чтобы изменить информацию каждого документа, следуйте ссылке на страницу соответствующего раздела.',
 	'texte_recuperer_base' => 'Востановить базу данных',
 	'texte_reference_mais_redirige' => 'ссылка на статью Вашего SPIP сайта, но переадресована на другой адрес.',
-	'texte_requetes_echouent' => '<b>, Когда некоторые запросы SQL неисправны 
-  систематически, без видимых на то причин,возможно,
- что база данных
-  является ошибочной. </b> <p> 
-  SQL имеет функцию ремонта таблиц,
-  которые были случайно повреждены 
-  Здесь Вы можете попробовать выполнить этот ремонт; в 
-  случае отказа, Вы должны иметь копию дисплея, который может содержать
-  ключи о том, где находится проблема ... </p><p> 
-  Если проблема остается, свяжитесь с Вашим 
-  поставщиком услуг.</p>', # MODIF
+	'texte_requetes_echouent' => '<b>В случае, если при выполнении SQL запросов часто появляются сообщения об ошибках, вполне возможно что повреждена сама база данных.  </b> 
+<p>В SQL встроенна функция ремонта и восстановления поврежденных таблиц. Вы можете попробовать выполнить процедуру восстановления или ремонта сейчас.</p>
+',
 	'texte_selection_langue_principale' => 'Вы можете задать "основной язык" сайта. Основной язык сайта определяет: 
 
 <ul> <li>формат вывода даты по умолчанию </li> 
@@ -941,9 +921,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_attente_validation' => 'в ожидании утверждения',
 	'texte_statut_publies' => 'опубликованы на сайте',
 	'texte_statut_refuses' => 'отклонено',
-	'texte_suppression_fichiers' => 'Используйте эту команду для удаления всех 
- файлов в кэше SPIP. Это позволяет Вам обновить все страницы, в случае, если Вы 
-сделали большие изменения в шаблоны или структуру сайта.', # MODIF
+	'texte_suppression_fichiers' => 'Используйте команду для удаления всех файлов из кэша SPIP.  Это позволит обновить все страницы сайта. Это очень удобно если вы изменили шаблоны или обновили значительное количество информации на сайте.',
 	'texte_sur_titre' => 'Главное название',
 	'texte_table_ok' => ': Эта таблица готова.',
 	'texte_tables_indexation_vides' => 'Индексированные таблицы системы пусты.',
@@ -954,13 +932,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_titre_02' => 'Предмет:',
 	'texte_titre_obligatoire' => '<b>Название</b> [обязательно]',
 	'texte_travail_article' => '@nom_auteur_modif@ работал над этой статьей @date_diff@ несколько минут назад',
-	'texte_travail_collaboratif' => 'Когда несколько 
- редакторов работают над одной и той же статьей, 
- система  может отметить эти статьи как недавно "открытые" 
- для предупреждения внесения одновременных изменений. 
-  Эта опция отключена по умолчанию 
- для избежания показа ненужных  предупреждений.
-Сообщения.', # MODIF
+	'texte_travail_collaboratif' => 'Если несколько авторов редактируют одну и ту же статью, то система отмечает ее как "в работе" и ограничивает доступ к ней, что бы избежать потери информации в следствии одновременного редактирования материала. По умолчанию эта возможность отключена.',
 	'texte_trop_resultats_auteurs' => 'Слишком много результатов для "@cherche_auteur"; пожалуйста очистите поиск',
 	'texte_unpack' => 'скачать последнюю версию',
 	'texte_utilisation_moteur_syndiques' => 'Когда Вы используете поисковую систему SPIP, Вы можете выполнить поиск по сайтам и статьям, объединенных двумя разными способами. <br /> <img src =\'puce.gif\'> Самый простой заключается в том, чтобы искать только в названиях и описаниях статей. <br /> <img src =\'puce.gif\'> Второй способ, намного сильнее, позволяет SPIP искать также в текстах ссылочных сайтов. Если Вы ссылаетесь на сайт, то SPIP выполнит поиск непосредственно в тексте сайта.',
@@ -984,14 +956,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_config_contenu_prive' => 'В редакторской части',
 	'titre_config_contenu_public' => 'В основном сайте',
 	'titre_config_fonctions' => 'Настройка сайта',
-	'titre_config_langage' => 'Настроить язык',
+	'titre_config_langage' => 'Выбор языка интерфейса',
 	'titre_configuration' => 'Настройка сайта',
 	'titre_configurer_preferences' => 'Изменить настройки',
 	'titre_conflit_edition' => 'Противоречие в процессе редактирования',
 	'titre_connexion_ldap' => 'Опции: <b>Ваше LDAP соединение</b>',
 	'titre_groupe_mots' => 'ГРУППА КЛЮЧЕЙ:',
 	'titre_identite_site' => 'Информация о сайте',
-	'titre_langue_article' => 'ЯЗЫК СТАТЬИ', # MODIF
+	'titre_langue_article' => 'Язык статьи',
 	'titre_langue_rubrique' => 'ЯЗЫК РАЗДЕЛА',
 	'titre_langue_trad_article' => 'ЯЗЫК СТАТЬИ И ПЕРЕВОДОВ',
 	'titre_les_articles' => 'СТАТЬИ',
@@ -1019,7 +991,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_statistiques_signatures_jour' => 'Подсчет подписей за день',
 	'titre_page_statistiques_signatures_mois' => 'Подсчет подписей за месяц',
 	'titre_page_upgrade' => 'SPIP обновления',
-	'titre_publication_articles_post_dates' => 'Публикация и дата размещения статей', # MODIF
+	'titre_publication_articles_post_dates' => 'Отложенная публикация статей',
 	'titre_referencer_site' => 'Ссылка на сайт:',
 	'titre_rendez_vous' => 'СРОКИ:',
 	'titre_reparation' => 'Восстановить',
