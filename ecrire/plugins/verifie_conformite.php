@@ -35,7 +35,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 				//    de la meme facon.
 				if (!isset($atts['spip'])
 					OR $n==1
-					OR plugin_version_compatible($atts['spip'],$vspip)) {
+					OR plugin_version_compatible($atts['spip'],$vspip,'spip')) {
 					// on prend la derniere declaration avec ce nom
 					$p = end($sous);
 					$compat_spip = isset($atts['spip']) ? $atts['spip'] : '';

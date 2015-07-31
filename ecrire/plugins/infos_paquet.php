@@ -55,7 +55,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			$vspip = $GLOBALS['spip_version_branche'];
 			foreach ($vxml->versions as $_compatibilite => $_version) {
 				if (($_version['balise'] == 'spip')
-				AND (plugin_version_compatible($_compatibilite, $vspip))) {
+				AND (plugin_version_compatible($_compatibilite, $vspip,'spip'))) {
 					// on merge les sous-balises de la balise spip compatible avec celles de la
 					// balise paquet
 					foreach ($_version as $_index => $_balise) {
