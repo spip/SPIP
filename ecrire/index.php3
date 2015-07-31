@@ -187,7 +187,8 @@ if ($options == "avancees") {
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
 		echo "<p>";
-		icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
+		if (lire_meta("activer_statistiques") == 'oui')
+			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
 		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
 		icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif","rien.gif");
 	}
