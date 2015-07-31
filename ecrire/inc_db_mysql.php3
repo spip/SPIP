@@ -50,7 +50,7 @@ function spip_query_db($query) {
 //
 function traite_query($query) {
 	if ($db = $GLOBALS['spip_mysql_db'])
-		$db .= '.';
+		$db = '`'.$db.'`.';
 
 	// changer les noms des tables ($table_prefix)
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
