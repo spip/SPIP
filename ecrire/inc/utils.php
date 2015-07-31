@@ -1355,10 +1355,10 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		$res = generer_url_ecrire_objet($entite,$id, $args, $ancre, false);
 	} else {
 		if ($type === NULL) {
-			$type = ($GLOBALS['type_urls'] === 'page'
+			$type = (!isset($GLOBALS['type_urls'])
 				AND $GLOBALS['meta']['type_urls'])
 			?  $GLOBALS['meta']['type_urls']
-			:  $GLOBALS['type_urls']; // pour SPIP <2
+			:  $GLOBALS['type_urls']; // pour surcharge via fichier d'options
 		}
 
 		$f = charger_fonction($type, 'urls', true);
