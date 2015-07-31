@@ -2,7 +2,7 @@
 
 include ("ecrire/inc_version.php3");
 include_local("inc-public-global.php3");
-include_ecrire("inc_filtres.php3");
+# include_ecrire("inc_filtres.php3"); semble inutile au 2/10/2004
 include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
@@ -12,11 +12,25 @@ function creer_repertoire_documents($ext) {
 	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
 }
 
-function effacer_repertoire_documents($nom) {
-	$d = opendir(_DIR_IMG . $nom);
+function copier_document($ext, $orig, $source) {
+	$dest = creer_repertoire_documents($ext) .
+		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
+			translitteration(ereg_replace("\.([^.]+)$", "", 
+						      ereg_replace("<[^>]*>", '', basename($orig)))));
+	# bien vu ?
+	if ($orig == ($dest . '.' . $ext)) return $orig;
+	$n = 0;
+	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
+	$r = deplacer_fichier_upload($source, $newFile);
+	return ($r ? $newFile : '');
+}
+
+function effacer_repertoire_temporaire($nom) {
+	$d = opendir($nom);
 	while ($f = readdir($d)) {
-		if (is_file($f = _DIR_IMG . "$nom/$f")) @unlink($f);
+		if (is_file($f = "$nom/$f")) @unlink($f);
 		}
+	@rmdir($nom);
 }
 
 function scinder_repertoire_documents($nom) {
@@ -195,11 +209,12 @@ function ajout_image($source, $dest) {
 // Ajouter un document
 //
 
-function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='', $titre_automatique=true) {
+function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true) {
+	$doc_vignette=''; $titre_vignette=''; $descriptif_vignette=''; 
+
 	global $hash_id_auteur, $hash, $id_article, $type;
 
 	//die ("<li>$orig<li>$source<li>$dest<li>$mode<li>$id_document");
-
 
 	//
 	// Securite
@@ -220,15 +235,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	//
 	// Recopier le fichier
 	//
-			$dest = creer_repertoire_documents($ext) .
-				ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
-					     translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
-			spip_log("spip_image '$dest' '$orig'");
-			$n = 0;
-			while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
-			$dest_path = $newFile;
-			
-			if (!deplacer_fichier_upload($source, $dest_path)) return ;
+			$dest_path = copier_document($ext,$orig, $source);
+			if (!$dest_path) return ;
 
 	//
 	// Preparation
@@ -391,7 +399,6 @@ function creer_fichier_vignette($vignette) {
 		if (!$fichier_vignette)
 			list($fichier_vignette) = vignette_par_defaut('txt');
 	}
-	spip_log($vignette . $fichier_vignette);
 	return $fichier_vignette;
 }
 
@@ -489,6 +496,69 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 	}
 }
 
+function afficher_compactes($image_name) {
+
+	$afficher_message_zip = false;
+	$zip = new PclZip($image_name);
+
+	if ($list = $zip->listContent()) {
+	// si pas possible de decompacter: installer comme fichier zip joint
+	// Verifier si le contenu peut etre uploade (verif extension)
+		for ($i=0; $i<sizeof($list); $i++) {
+			for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
+			
+				if ($key == "stored_filename") {
+					if (ereg("\.([^.]+)$", $list[$i][$key], $match)) {
+						$ext = addslashes(strtolower($match[1]));
+						$ext = corriger_extension($ext);
+
+						// Regexp des fichiers a ignorer
+						if (!ereg("^(\.|.*/\.|.*__MACOSX/)",
+						$list[$i][$key])) {
+							$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+							$result = spip_query($query);
+							if ($row = @spip_fetch_array($result)) {
+								$afficher_message_zip = true;
+								$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (!$afficher_message_zip) return false;
+	  
+		// presenter une interface pour choisir si fichier joint ou decompacter
+		include_ecrire ("inc_presentation.php3");
+		install_debut_html(_T('upload_fichier_zip'));
+	
+		
+		echo "<p>"._T('upload_fichier_zip_texte')."</p>";
+		echo "<p>"._T('upload_fichier_zip_texte2')."</p>";
+		
+		$link = new Link();
+		$link->delVar("image");
+		$link->delVar("image2");
+		$link->addVar("image_name", $image_name);
+
+		echo $link->getForm('POST');
+		
+		echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>"._T('upload_zip_telquel')."</div>";
+		echo "<div><input type='radio' name='action_zip' value='decompacter'>"._T('upload_zip_decompacter')."</div>";
+		
+		echo "<ul>$aff_fichiers</ul>";
+		
+		echo "<div>&nbsp;</div>";
+		echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
+		
+		echo "</form>";
+		install_fin_html();
+			
+		return true;
+}
+
 //
 // ajouter un document
 //
@@ -497,119 +567,47 @@ if ($ajout_doc == 'oui') {
 
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
-if (!$image_name AND $image2) {
-	$image = "ecrire/upload/".$image2;
-	$image_name = $image;
-	$supprimer_ecrire_upload = $image;
-} 
-else {
-	$supprimer_ecrire_upload = '';
-}
-	if (eregi("\.zip$",$image_name) AND !$action_zip){
-		// Pretraitement des fichiers ZIP
-		// Recopier le fichier
-		creer_repertoire_documents("tmp");
-		$dest = creer_repertoire_documents("tmp_zip");
-		
-		$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($image_name)))));
-		$dest .= ".zip";
-		$n = 0;
-		if (!deplacer_fichier_upload($image, $dest)) 
-			exit;
-
-
-		$image_name = $dest;
-
+	if (!$image_name AND $image2) {
+		$image = "ecrire/upload/".$image2;
+		$image_name = $image;
+	} 
+	if (eregi("\.zip$",$image_name))
+	  # action_zip indique un rappel par la fonction affiche_compactes
+	  if (!$action_zip){
+		// on va se rappeler: copier le fichier car PHP va le virer
+		$image_name = copier_document("zip", $image_name, $image);
+		// anormal, on se tire
+		if (!$image_name) exit;
+		// renvoyer un formulaire demandant si on deballe ou pas
 		require_once('ecrire/pclzip.lib.php');
-		$zip = new PclZip($image_name);
-
-		if (($list = $zip->listContent()) == 0) {
-			// pas possible de decompacter: installer comme fichier zip joint
-			$afficher_message_zip = false;
-		}
-		else {
-			// Verifier si le contenu peut etre uploade (verif extension)
-			for ($i=0; $i<sizeof($list); $i++) {
-				for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
-				
-					if ($key == "stored_filename") {
-						if (ereg("\.([^.]+)$", $list[$i][$key], $match)) {
-							$ext = addslashes(strtolower($match[1]));
-							$ext = corriger_extension($ext);
-
-							// Regexp des fichiers a ignorer
-							if (!ereg("^(\.|.*/\.|.*__MACOSX/)",
-							$list[$i][$key])) {
-								$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
-								$result = spip_query($query);
-								if ($row = @spip_fetch_array($result)) {
-									$afficher_message_zip = true;
-									$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		if ($afficher_message_zip) {
-			// presenter une interface pour choisir si fichier joint ou decompacter
-			include_ecrire ("inc_presentation.php3");
-			install_debut_html(_T('upload_fichier_zip'));
-		
-			
-			echo "<p>"._T('upload_fichier_zip_texte')."</p>";
-			echo "<p>"._T('upload_fichier_zip_texte2')."</p>";
-			
-		
-			if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
-			else $vars = $HTTP_GET_VARS;
-			
-			$link = new Link();
-			$link->delVar("image");
-			$link->delVar("image2");
-			$link->addVar("image_name", $image_name);
-
-			echo $link->getForm('POST');
-			
-			echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>"._T('upload_zip_telquel')."</div>";
-			echo "<div><input type='radio' name='action_zip' value='decompacter'>"._T('upload_zip_decompacter')."</div>";
-			
-			echo "<ul>$aff_fichiers</ul>";
-			
-			echo "<div>&nbsp;</div>";
-			echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
-			
-			echo "</form>";
-			install_fin_html();
-				
-			exit();
-		}
-		else {
-			$image = $image_name;
-			$supprimer_ecrire_upload = $image;
-		}
+		if (afficher_compactes($image_name)) exit;
+		// pas possible de deballer, on continue
+		$forcer_document = 'oui';
+		$image = $image_name;
 	}
-	else if (eregi("\.zip$",$image_name)) {
+	  else {
+	    // reponse au formulaire
 		if ($action_zip == "telquel") {
-			$effacer_tmp = true;
-			
-			ajout_doc($image_name, $image_name, $fichier, "document", $id_document);
+			$forcer_document = 'oui';
 			
 		} else {
-		
 			require_once('ecrire/pclzip.lib.php');
   			$archive = new PclZip($image_name);
-			$image_name = _DIR_IMG . "tmp";
-			$list = $archive->extract(PCLZIP_OPT_PATH, $image_name, PCLZIP_OPT_REMOVE_ALL_PATH);
+			$tmp_dir = creer_repertoire_documents($hash);
+			$archive->extract(PCLZIP_OPT_PATH, $tmp_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
+			# virer le zip après le déballage
+			@unlink($image_name);
+			$image_name = $tmp_dir;
 
-			$effacer_tmp = true;
 		}
-	}
+	  }
 
-
-	if (is_dir($image_name)) {
+	if (!is_dir($image_name)) {
+		ajout_doc($image_name,
+			  $image,
+			  ($forcer_document == 'oui' ? "document" : $mode),
+			  $id_document);
+	} else {
 		include_ecrire('inc_documents.php3');
 		$fichiers = fichiers_upload($image_name);
 		while (list(,$f) = each($fichiers)) {
@@ -621,24 +619,15 @@ else {
 				if ($inclus)
 					$req .= " AND inclus='$inclus'";
 				if (@spip_fetch_array(spip_query($req)))
-					ajout_doc($f, $f, '', 'document', '','','','',false);
+					ajout_doc($f, $f, 'document', false);
 			}
 		}
-	} else {
-		if ($forcer_document == 'oui')
-			ajout_doc($image_name, $image, $fichier, "document", $id_document);
-		else
-			ajout_doc($image_name, $image, $fichier, $mode, $id_document);
-	}
-	
-	
-	if ($effacer_tmp) {
-	  effacer_repertoire_documents('tmp');
-	  effacer_repertoire_documents('tmp_zip');
 
+# détruire le repertoire de deballage
+		if ($tmp_dir) effacer_repertoire_temporaire($tmp_dir);
 	}
  }
- 
+
 $redirect = '';
 
 if ($test_vignette) // appel de ecrire/config-fonction

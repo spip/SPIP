@@ -2,7 +2,6 @@
 
 include ("inc.php3");
 include_ecrire ("inc_calendrier.php");
-define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
 
@@ -52,15 +51,10 @@ if ($spip_display != 4) {
 	if ($spip_display != 1) {
 		include_ecrire("inc_logos.php3");
 	
-		$logo = get_image("rubon0");
+		$logo = decrire_logo("rubon0");
 		if ($logo) {
-			$fichier = $logo[0];
-			$taille = $logo[1];
 			$fid = $logo[2];
-			if ($taille) {
-				$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
-			}
-			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='" . _DIR_IMG . "$fichier$fid' $taille_html border='0' alt='' /></a></div>";
+			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'>$fid</a></div>";
 		}
 	}
 	echo "<div class='verdana1'>";
