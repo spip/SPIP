@@ -114,13 +114,18 @@ function critere_lang_select_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@debut_
 // http://doc.spip.org/@critere_debut_dist
 function critere_debut_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	$boucle->limit = 'intval($Pile[0]["debut' .
-	  $crit->param[0][0]->texte .
-	  '"]) . ",' .
-	  $crit->param[1][0]->texte .
-	  '"' ;
+	list($un, $deux) = $crit->param;
+	$un = $un[0]->texte;
+	$deux = $deux[0]->texte;
+	if ($deux) {
+		$boucles[$idb]->limit = 'intval($Pile[0]["debut' .
+		  $un .
+		  '"]) . ",' .
+		  $deux .
+		  '"' ;
+	} else calculer_critere_DEFAUT($idb, $boucles, $crit);
 }
+
 // {pagination}
 // {pagination 20}
 // {pagination #ENV{pages,5}} etc
