@@ -11,6 +11,11 @@
 \***************************************************************************/
 
 
+define('_LARGEUR_ICONES_BANDEAU', 
+       (($GLOBALS['spip_display'] == 3) ? 60 : 80)
+       + (($GLOBALS['spip_ecran'] == 'large') ? 30 : 0)
+       + (($GLOBALS['connect_toutes_rubriques']) ? 0 : 30));
+
 /**
  * une classe definissant un bouton dans la barre du haut de l'interface
  * privee ou dans un de ses sous menus
@@ -304,5 +309,213 @@ function definir_barre_gadgets() {
 						  // ?????????
 	);
 }
+
+
+// http://doc.spip.org/@bandeau_principal
+function bandeau_principal($rubrique, $sous_rubrique, $largeur)
+{
+	$res = '';
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if ($page=='espacement') {
+			$res .= "<td> &nbsp; </td>";
+		} else {
+			if ($detail->url)
+				$lien_noscript = $detail->url;
+			else
+				$lien_noscript = generer_url_ecrire($page);
+
+			if ($detail->url2)
+				$lien = $detail->url2;
+			else
+				$lien = $lien_noscript;
+
+			$res .= icone_bandeau_principal(
+					_T($detail->libelle),
+					$lien,
+					$detail->icone,
+					$page,
+					$rubrique,
+					$lien_noscript,
+					$page,
+					$sous_rubrique);
+		}
+	}
+
+	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n$res</tr></table></div>\n";
+}
+
+// http://doc.spip.org/@icone_bandeau_principal
+function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
+	global $spip_display, $menu_accesskey, $compteur_survol;
+
+	$largeur = _LARGEUR_ICONES_BANDEAU;
+
+	$alt = '';
+	$title = '';
+	if ($spip_display == 1){
+	}
+	else if ($spip_display == 3){
+		$title = "title=\"$texte\"";
+		$alt = $texte;
+	}
+	else {
+		$alt = ' ';
+	}
+	
+	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
+	if ($menu_accesskey < 10) {
+		$accesskey = " accesskey='$menu_accesskey'";
+		$menu_accesskey++;
+	}
+	else if ($menu_accesskey == 10) {
+		$accesskey = " accesskey='0'";
+		$menu_accesskey++;
+	}
+
+	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
+
+	if (eregi("^javascript:",$lien)) {
+		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
+	}
+	else {
+		$a_href = "\nhref=\"$lien\"$class_select";
+	}
+
+	$compteur_survol ++;
+
+	if ($spip_display != 1 AND $spip_display != 4) {
+		$class ='cellule48';
+		$texte = http_img_pack($fond, $alt, "$title width='48' height='48'")
+		. ($spip_display == 3 ? '' :  "<span>$texte</span>");
+	} else {
+		$class = 'cellule-texte';
+	}  
+		
+	return "<td class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'><a$accesskey$a_href>$texte</a></td>\n";
+}
+
+function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
+	global $spip_lang_left;
+
+	$res = '';
+	$decal=0;
+	$coeff_decalage = 0;
+	if ($GLOBALS['browser_name']=="MSIE") $coeff_decalage = 1.0;
+	$largeur_maxi_menu = $largeur-100;
+	$largitem_moy = 85;
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if (($rubrique == $page) AND ($_COOKIE['spip_accepte_ajax']==-1)) {
+			$class = "visible_au_chargement";
+		} else {
+			$class = "invisible_au_chargement";
+		}
+
+		$sousmenu= $detail->sousmenu;
+		if($sousmenu) {
+			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
+			if ($offset<0){	$offset = 0; }
+			$res .= "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			$width=0;
+			foreach($sousmenu as $souspage => $sousdetail) {
+				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){$res .= "</tr><tr>\n";$width=0;}
+				if($souspage=='espacement') {
+					if ($width>0){
+						$res .= "<td class='separateur'></td>\n";
+						$largitem = 0;
+					}
+				} else {
+				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
+				  $res .= $html;
+				}
+				$width+=$largitem+10;
+			}
+			$res .= "</tr></table></div></div>";
+		}
+		
+		$decal += _LARGEUR_ICONES_BANDEAU;
+	}
+	return $res;
+}
+
+function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
+{
+	global $spip_lang_left;
+	definir_barre_boutons();
+
+	return "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>"
+	. "<div id='haut-page'>"
+	. "<div class='bandeau-principal' align='center'>\n"
+	. bandeau_principal($rubrique, $sous_rubrique, $largeur)
+	. "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>"
+	. "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>"
+	. bandeau_principal2($rubrique, $sous_rubrique, $largeur)
+	. "</div>"
+	. "</td></tr></table>"
+	. "</div>\n"; 
+}
+
+
+// http://doc.spip.org/@icone_bandeau_secondaire
+function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
+	global $spip_display;
+	global $menu_accesskey, $compteur_survol;
+
+	$alt = '';
+	$title = '';
+	$accesskey = '';
+	if ($spip_display == 1) {
+		//$hauteur = 20;
+		$largeur = 80;
+	}
+	else if ($spip_display == 3){
+		//$hauteur = 26;
+		$largeur = 40;
+		$title = "title=\"$texte\"";
+		$alt = $texte;
+	}
+	else {
+		//$hauteur = 68;
+		if (count(explode(" ", $texte)) > 1) $largeur = 80;
+		else $largeur = 70;
+		$alt = " ";
+	}
+	if ($aide AND $spip_display != 3) {
+		$largeur += 50;
+		//$texte .= aide($aide);
+	}
+	if ($spip_display != 3 AND strlen($texte)>16) $largeur += 20;
+	
+	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
+	if ($menu_accesskey < 10) {
+		$accesskey = " accesskey='$menu_accesskey'";
+		$menu_accesskey++;
+	}
+	else if ($menu_accesskey == 10) {
+		$accesskey = " accesskey='0'";
+		$menu_accesskey++;
+	}
+	if ($spip_display == 3) $accesskey_icone = $accesskey;
+
+	$class_select =  ($rubrique_icone != $rubrique) ? '' : " class='selection'";
+	$compteur_survol ++;
+
+	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
+
+	$res = '';
+	if ($spip_display != 1) {
+		$res .= "<td class='cellule36' style='width: ".$largeur."px;'>";
+		$res .= "$a_href" .
+		  http_img_pack("$fond", $alt, "$title");
+		if ($aide AND $spip_display != 3) $res .= aide($aide)." ";
+		if ($spip_display != 3) {
+			$res .= "<span>$texte</span>";
+		}
+	}
+	else $res .= "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
+	$res .= "</a>";	
+	$res .= "</td>\n";
+	return array($res, $largeur);
+}
+
 
 ?>
