@@ -74,15 +74,10 @@ function install_bases(){
 
 	$GLOBALS['connexions'][$server_db]['prefixe'] = $table_prefix;
 	$GLOBALS['connexions'][$server_db]['db'] = $sel_db;
-	// s'il y a erreur c'est qu'elle est nouvelle
-	$nouvelle = !@$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
 
-	if ($nouvelle) {
-		// rouvrir la connexion apres l'erreur
-		$GLOBALS['connexions'][$server_db] = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
-		$GLOBALS['connexions'][$server_db]['prefixe'] = $table_prefix;
-		$GLOBALS['connexions'][$server_db]['db'] = $sel_db;
-
+	$old = sql_showbase($table_prefix  . "_meta", $server_db);
+	if ($old) $old = sql_fetch($old, $server_db);
+	if (!$old) {
 
 		// Si possible, demander au serveur d'envoyer les textes
 		// dans le codage std de SPIP,
@@ -97,8 +92,12 @@ function install_bases(){
 				$charset['collation'];
 			$GLOBALS['meta']['charset_sql_connexion'] = 
 				$charset['charset'];
-		} else spip_log(_DEFAULT_CHARSET . " inconnu du serveur SQL");
-
+			$charsetbase = $charset['charset'];
+		} else {
+			spip_log(_DEFAULT_CHARSET . " inconnu du serveur SQL");
+			$charsetbase = 'standard';
+		}
+		spip_log("Creation des tables. Codage $charsetbase");
 		creer_base($server_db); // AT LAST
 
 		// memoriser avec quel charset on l'a creee
@@ -111,7 +110,7 @@ function install_bases(){
 	} else {
 
 	  // pour recreer les tables disparues au besoin
-
+	  spip_log("Table des Meta deja la. Verification des autres.");
 	  creer_base($server_db); 
 
 	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);
@@ -130,7 +129,7 @@ function install_bases(){
 	: test_rappel_nom_base_mysql($server_db);
 
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
-	if (!$result_ok) return "<!--\n$nouvelle $ligne_rappel\n-->";
+	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
 
 	if($chmod) {
 		install_fichier_connexion(_FILE_CHMOD_TMP, "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
