@@ -39,15 +39,14 @@ function premiers_pas_etapes($etape,$titre,$texte){
 	creer_colonne_droite();
 	debut_droite();
 
-	$action = generer_action_auteur('premiers_pas', $etape, generer_url_ecrire('accueil'));
-	echo "<form action='$action' method='post'><div>", form_hidden($action);
-	echo "<input type='hidden' name='pas' value='1' />";
 	if (function_exists($f = "premiers_pas_pas_{$etape}_milieu") OR function_exists($f = $f."_dist"))
-		echo $f();
+		$res = $f();
+	else $res = '';
 		
-	echo premiers_pas_boutons_bas($etape);
-	
-	echo "</div></form>";
+	$res .= premiers_pas_boutons_bas($etape)
+	.  "<input type='hidden' name='pas' value='1' />";	
+
+	echo redirige_action_auteur('premiers_pas', $etape, 'accueil', '',$res);
 	echo fin_gauche(), fin_page();
 }
 
@@ -106,15 +105,17 @@ EOF;
 // http://doc.spip.org/@premiers_pas_boutons_bas
 function premiers_pas_boutons_bas($etape){
 	global $spip_lang_right,$spip_lang_left;
-	echo "<div class='verdana3' style='margin-top:2em;text-align:$spip_lang_right'>";
+
+	$res = "<div class='verdana3' style='margin-top:2em;text-align:$spip_lang_right'>";
 	if ($etape!=='fin'){
-		echo "<input type='submit' class='fondl' name='cancel' style='float:$spip_lang_left' value='"._L("Quitter et utiliser directement SPIP")."' />";
-		echo "<input type='submit' name='submit' class='fondo' value='"._L("Etape suivante")."' />";
+		$res .= "<input type='submit' class='fondl' name='cancel' style='float:$spip_lang_left' value='"._L("Quitter et utiliser directement SPIP")."' />";
+		$res .= "<input type='submit' name='submit' class='fondo' value='"._L("Etape suivante")."' />";
 	}
 	else
-		echo "<input type='submit' name='submit' class='fondo' value='"._L("Terminer")."' />";
-	echo "</div>";
-	return;
+		$res .= "<input type='submit' name='submit' class='fondo' value='"._L("Terminer")."' />";
+	$res .= "</div>";
+
+	return $res;
 }
 
 ?>

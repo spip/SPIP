@@ -22,7 +22,7 @@ function premiers_pas_pas_fin_dist(){
 	global $connect_id_auteur;
 		
 	$texte = "Bravo, vous avez termin&eacute; l'installation de SPIP !<br/>Vous pouvez maintenant commencer &agrave; l'utiliser.";
-	echo premiers_pas_etapes('fin',_L("Commencer &agrave; utiliser SPIP"),$texte);
+	return premiers_pas_etapes('fin',_L("Commencer &agrave; utiliser SPIP"),$texte);
 }
 
 ?>
