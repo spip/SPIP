@@ -108,19 +108,53 @@ fin_cadre_relief();
 
 
 //
-// Annonces
+// Afficher le calendrier du mois s'il y a des rendez-vous
 //
-if (lire_meta('activer_messagerie') != 'non') {
-	include_ecrire("inc_agenda.php3");
-	afficher_taches();
+include_ecrire("inc_agenda.php3");
+
+if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
+	$today = getdate(time());
+	$jour_today = $today["mday"];
+	$mois_today = $today["mon"];
+	$annee_today = $today["year"];
+	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+	$mois = mois($date);
+	$annee = annee($date);
+	$jour = jour($date);
+
+	// rendez-vous personnels dans le mois
+	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+			"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
+			"AND messages.statut='publie' LIMIT 0,1");
+	if (spip_num_rows($result_messages)) {
+		echo "<p />";
+		agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+	}
+	// rendez-vous personnels dans le mois
+	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+			"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
+			"AND messages.statut='publie' LIMIT 0,1");
+	if (spip_num_rows($result_messages)) {
+		echo "<p />";
+		calendrier_jour($jour_today,$mois_today,$annee_today, false);
+	}
 }
+
+if ($options != 'avancees') {
+	debut_boite_info();
+	echo "<div class='verdana2'>";
+	echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
+	echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
+	echo "</div>";
+	fin_boite_info();
+}
+
 debut_raccourcis();
-
-
 //
 // Afficher les boutons de creation d'article et de breve
 //
-
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
@@ -170,54 +204,14 @@ else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 
 fin_raccourcis();
 
-
 //
-// Afficher le calendrier du mois s'il y a des rendez-vous
+// Annonces
 //
+	afficher_taches();
 
-if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
-	$today = getdate(time());
-	$jour_today = $today["mday"];
-	$mois_today = $today["mon"];
-	$annee_today = $today["year"];
-	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-	$mois = mois($date);
-	$annee = annee($date);
-	$jour = jour($date);
 
-	// rendez-vous personnels dans le mois
-	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-			"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
-			"AND messages.statut='publie' LIMIT 0,1");
-	if (spip_num_rows($result_messages)) {
-		echo "<p />";
-		agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
-	}
-	// rendez-vous personnels dans le mois
-	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-			"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
-			"AND messages.statut='publie' LIMIT 0,1");
-	if (spip_num_rows($result_messages)) {
-		echo "<p />";
-		calendrier_jour($jour_today,$mois_today,$annee_today, false);
-	}
-}
 
 debut_droite();
-
-if ($options != 'avancees') {
-	debut_boite_info();
-	echo "<div class='verdana2'>";
-	echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
-	echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
-	echo "</div>";
-	fin_boite_info();
-}
-
-
-
 
 //
 // Restauration d'une archive

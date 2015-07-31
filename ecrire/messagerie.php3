@@ -41,8 +41,6 @@ echo "<p>"."<IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGH
 fin_boite_info();
 
 
-echo "<div>&nbsp;</div>";
-icone ("iCal", "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
 
 
 

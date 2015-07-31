@@ -5,6 +5,8 @@
 if (defined("_ECRIRE_INC_AGENDA")) return;
 define("_ECRIRE_INC_AGENDA", "1");
 
+include_ecrire("inc_acces.php3");
+
 
 //
 // Afficher un agenda (un mois) sous forme de petit tableau
@@ -312,7 +314,7 @@ function liste_rv($query, $type) {
 }
 
 function afficher_taches () {
-	global $connect_id_auteur;
+	global $connect_id_auteur, $options;
 	$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC";
 	liste_rv($query, "annonces");
 
@@ -321,7 +323,13 @@ function afficher_taches () {
 
 	$query = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure";
 	liste_rv($query, "rv");
-
+	
+	if ($options == "avancees") {
+		echo debut_cadre_enfonce();
+		echo "<div class='verdana1'>"._T("calendrier_synchro")."</div>";
+		icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
+		echo fin_cadre_enfonce();
+	}
 }
 
 
