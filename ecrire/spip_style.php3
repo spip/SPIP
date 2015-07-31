@@ -208,9 +208,11 @@ a.cellule-h {
 }
 a.cellule-h {
 	text-decoration: none; 
+	color: #666666;
 }
 a.cellule-h:hover {
 	text-decoration: none; 
+	color: #000000;
 }
 a.cellule-h img {
 	-moz-opacity: 0.5;
@@ -237,14 +239,12 @@ a.cellule-h td {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: #666666;
 }
 a.cellule-h:hover td {
 	text-align: <?php echo $left; ?>;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: #000000;
 }
 a.cellule-h img {
 	width: 24px;
