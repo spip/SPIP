@@ -142,7 +142,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
 		list(,$var_f,$n) = $l;
 		if ($var_f != $exec) {
-			spip_log("Le script $exec lance par $n se substitue a celui prevu");
+			spip_log("Le script $var_f lance par $n se substitue a $exec");
 			$exec = $var_f;
 		}
 	}
