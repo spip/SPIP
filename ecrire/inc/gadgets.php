@@ -87,9 +87,11 @@ function gadget_rubriques() {
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
+	$nb_col = ceil($total_lignes / 30);
+	if ($nb_col <= 1) $nb_col = ceil($total_lignes / 10);
 	$max_lignes = ceil($total_lignes / $nb_col);
-
+	$largeur = ceil(700 / $nb_col); 
+	spip_log("$total_lignes $nb_col $max_lignes $largeur");
 	$count_lignes = 0;
 	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
@@ -102,7 +104,7 @@ function gadget_rubriques() {
 			}
 			$count_lignes ++;
 			if (autoriser('voir','rubrique',$id_rubrique)){
-				$ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
+			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur);
 				$i = $i - 1;
 			}
 		}
@@ -118,7 +120,7 @@ function gadget_rubriques() {
 
 
 // http://doc.spip.org/@bandeau_rubrique
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
+function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 	static  $zdecal = 0;
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
@@ -131,22 +133,24 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	//else $image = "rubrique-12.gif";
 	else $image = '';
 	
-	if (strlen($image) > 1)
-		$image = " style='background-image:url(" . http_wrapper($image) .");'";
+	if ($image)
+		$image = " background-image: url(" . http_wrapper($image) .");";
 
-	$nav = '<a href="'
+	$nav = "<a href='"
 	. generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-	. '" class="bandeau_rub"'
+	. "'\nclass='bandeau_rub' style='width: "
+	. $largeur
+	. "px;"
 	. $image
-	. '>'
+	. "'>\n"
 	. supprimer_tags($titre_rubrique)
 	. "</a>\n";
 
-	if ($zdecal >= $zmax) return "<div>$nav</div>";
+	if ($zdecal >= $zmax) return "\n<div>$nav</div>";
 
 	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
-	if (!$i) return "<div>$nav</div>";
+	if (!$i) return "\n<div>$nav</div>";
 
 	$zdecal++;
 
@@ -171,7 +175,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 			}
 			if (autoriser('voir','rubrique',$id_rub)){
 				$titre_rub = supprimer_numero(typo($titre_rub));
-				$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i));
+				$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i), $largeur);
 				$i = $i - 1;
 			}
 		}
