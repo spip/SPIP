@@ -200,8 +200,10 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			if ($affichage_detaille)
 				$vignette .= ">";
 			else {
-				if ($align) $vignette .= " align='$align'";
-				$vignette .= " hspace='5' vspace='3'>";
+				if ($align)
+					$vignette .= " align='$align' hspace='5' vspace='3'>";
+				else
+					$vignette .= " align='middle'>";
 				if ($align == 'center') $vignette = "<p align='center'>$vignette</p>";
 			}
 		}
