@@ -723,7 +723,7 @@ a.ortho-dico:hover {
 }
 
 #ortho-fixed {
-	position: fixed; top: 0px; right: 0px; width: 25%; padding: 15px; margin: 0px;
+	position: fixed; top: 0px; <?php echo $right; ?>: 0px; width: 25%; padding: 15px; margin: 0px;
 }
 .ortho-content {
 	position: absolute; top: 0px; width: 70%; padding: 15px; margin: 0px;
