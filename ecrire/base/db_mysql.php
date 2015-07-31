@@ -78,11 +78,10 @@ function spip_mysql_query($query) {
 
 	$query = traite_query($query); // traitement du prefixe de table
 
-	$r = ($GLOBALS['mysql_rappel_connexion'] AND $GLOBALS['spip_mysql_link']);
+	$r = $GLOBALS['mysql_rappel_connexion'] ?  $GLOBALS['spip_mysql_link'] : false;
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-	$r = $r ?
-		mysql_query($query, $GLOBALS['spip_mysql_link']) :
-		mysql_query($query);
+	$r = $r ? mysql_query($query, $r) : mysql_query($query);
+
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
@@ -315,10 +314,9 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array())
 {
 	$r = spip_mysql_select('COUNT(*)', $from, $where,
-			   $groupby, $orderby, $limit,
+			   $groupby, '', $limit,
 			   $sousrequete, $having);
 	if ($r) list($r) = mysql_fetch_array($r, MYSQL_NUM);
-#	spip_log("$r  spip_mysql_countsel($from $where $limit");
 	return $r;
 }
 
@@ -373,7 +371,7 @@ function spip_mysql_delete($table, $where='') {
 
 // http://doc.spip.org/@spip_mysql_replace
 function spip_mysql_replace($table, $values, $keys=array()) {
-	return spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')');
+	return spip_mysql_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')');
 }
 
 // http://doc.spip.org/@spip_mysql_multi
