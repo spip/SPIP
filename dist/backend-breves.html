@@ -31,7 +31,11 @@
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
-		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+		[(#REM)
+			On diffuse la rubrique et les mots-cles a la mode RSS
+		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}><category[ domain="(#URL_RUBRIQUE|url_absolue)"]>[(#TITRE|supprimer_numero|texte_backend)]</category></BOUCLE_rubrique_rss>
+<BOUCLE_mots_rss(MOTS){id_breve}>
+		<dc:subject>[(#TITRE|texte_backend)]</dc:subject></BOUCLE_mots_rss>
 
 		<description>[(#INTRODUCTION|texte_backend)]
 
