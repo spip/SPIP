@@ -268,11 +268,17 @@ $tables_jointures = array();
 
 // Liste des statuts. 
 $liste_des_statuts = array(
-			   "info_administrateurs" => '0minirezo',
-			   "info_redacteurs" =>'1comite',
-			   "info_visiteurs" => '6forum',
-			   "info_statut_site_4" => '5poubelle'
-			   );
+			"info_administrateurs" => '0minirezo',
+			"info_redacteurs" =>'1comite',
+			"info_visiteurs" => '6forum',
+			"info_statut_site_4" => '5poubelle'
+			);
+
+$liste_des_forums = array(
+			'bouton_radio_modere_posteriori' => 'pos',
+			'bouton_radio_modere_priori' => 'pri',
+			'bouton_radio_modere_abonnement' => 'abo'
+);
 
 // Experimental : pour supprimer systematiquement l'affichage des numeros
 // de classement des titres, recopier la ligne suivante dans mes_options :

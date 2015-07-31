@@ -17,26 +17,31 @@ include_spip('inc/config');
 
 function configuration_notifications_forum_dist()
 {
-	global $spip_lang_left;
+	$res = '';
+	$m = $GLOBALS['meta']['prevenir_auteurs'];
+	foreach ($GLOBALS['liste_des_forums'] as $desc => $val) {
+		$name = 'prevenir_auteurs_' . $val;
+		$lib = _T($desc);
+		$vu = (($m == 'oui') OR strpos($m,",$val,")!==false);
+		$res .= "<input type='checkbox' name='$name' value='oui' id='$name'"
+			. ($vu ? " checked='checked'" : '')
+			. " /> <label for='$name'>"
+			. ($vu ? "<b>$lib</b>" : $lib)
+			.  "</label><br />";
+	}
 
 	$res = "<div class='verdana2'>"
-		. _T('info_option_email')
-		. "<br />\n";
-
-	$res .= afficher_choix(
-		'prevenir_auteurs',
-		$GLOBALS['meta']["prevenir_auteurs"],
-		array('oui' => _T('info_option_faire_suivre'),
-			'non' => _T('info_option_ne_pas_faire_suivre')
-		)
-	);
-
-	$res .= "</div>\n";
+#		. _T('info_option_email')
+# leger changement du texte 
+	  . _L('Lorsqu\'un visiteur du site poste un nouveau message dans le forum associ&eacute; &agrave; un article, les auteurs de l\'article peuvent &ecirc;tre pr&eacute;venus de ce message par e-mail. Indiquer pour chaque type de forum s\'il faut utiliser cette option.')
+	  . "<br /><br />"
+	  . $res 
+	  . "</div>\n";
 
 	$res = debut_cadre_trait_couleur("", true, "", _T('info_envoi_forum'))
-	. ajax_action_post('configurer', 'notifications_forum', 'config_contenu','',$res) 
+	. ajax_action_post('configurer_notifications_forum', 0, 'config_contenu','',$res) 
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-notifications_forum', '', $res);
+	return ajax_action_greffe('configurer_notifications_forum', 0, $res);
 }
 ?>
