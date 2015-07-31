@@ -467,4 +467,30 @@ function afficher_plus_info($lien, $titre="+") {
 	return "\n<a href='$lien' title='$titre' class='plus_info'>" .
 		http_img_pack("information-16.png", $titre) ."</a>";
 }
+
+/**
+ * Lister les id objet_source associes a l'objet id_objet
+ * via la table de lien objet_lien
+ * Utilise pour les listes de #FORMULAIRE_EDITER_LIENS
+ *
+ * @param string $objet_source
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $objet_lien
+ * @return array
+ */
+function lister_objets_lies($objet_source,$objet,$id_objet,$objet_lien){
+	include_spip('action/editer_liens');
+	$l = array();
+	if ($objet_lien==$objet){
+		$res = objet_trouver_liens(array($objet=>$id_objet),array($objet_source=>'*'));
+	}
+	else{
+		$res = objet_trouver_liens(array($objet_source=>'*'),array($objet=>$id_objet));
+	}
+	while ($row = array_shift($res))
+		$l[] = $row[$objet_source];
+
+	return $l;
+}
 ?>

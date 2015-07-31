@@ -5,7 +5,7 @@
 	compteur_articles,-1
 }})
 ]
-<BOUCLE_exclus(AUTEURS){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+#SET{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutauta,#EVAL{_request("debutauta");}}}
 <input type="hidden" name="debutauta" value="#GET{debut}" />
 <B_liste_aut>
@@ -28,7 +28,7 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 
 		#SET{p,''}
-		<BOUCLE_lettre(AUTEURS){doublons 1}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(AUTEURS){!id_auteur IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutauta,@#ID_AUTEUR}|ancre_url{paginationauta}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
@@ -48,7 +48,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_aut(AUTEURS){doublons 2}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}>
+	<BOUCLE_liste_aut(AUTEURS){!id_auteur IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
