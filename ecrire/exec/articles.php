@@ -136,7 +136,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	. $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 
-	. $editer_auteurs($id_article, $flag_editable, $cherche_auteur, $ids)
+	. $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 
 	. (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
 
