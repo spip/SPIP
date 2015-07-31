@@ -19,6 +19,9 @@
 if (defined("_ECRIRE_INC_GETDOCUMENT")) return;
 define("_ECRIRE_INC_GETDOCUMENT", "1");
 
+if (!function_exists('file_get_contents'))
+  eval('function file_get_contents($f) {return join("",file($f));}');
+
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
@@ -518,8 +521,257 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	return true;
 }
 
+//
+// Upload d'un ZIP
+//
+
+function deballer_upload($_FILES, $source, $action_zip, $hash, $hash_id_auteur, $id_article, $id_document, $mode, $redirect, $type)
+{
+  // traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
+  if ($source AND !strstr($source, '..')) # securite
+    {
+	$_FILES = array(
+		array('name' => basename($source),
+			'tmp_name' => $source)
+		);
+    }
+	
+  // traiter le zip si c'en est un tout seul
+  if (count($_FILES) == 1 AND $action_zip!='telquel') {
+	$desc = array_pop($_FILES); # recuperer la description
+	$_FILES = array($desc);
+	
+	if (preg_match('/\.zip$/i', $desc['name'])
+	    OR ($desc['type'] == 'application/zip')) {
+	
+	  // on pose le fichier dans le repertoire zip et on met
+	  // a jour $_FILES (nota : copier_document n'ecrase pas
+	  // un fichier avec lui-meme : ca autorise a boucler)
+	  $zip = copier_document("zip",
+					$desc['name'],
+					$desc['tmp_name']
+				);
+	  if (!$zip) die ('Erreur upload zip'); # pathologique
+	  $desc['tmp_name'] = $zip;	# nouvel emplacement du fichier
+	  $_FILES = array($desc);
+	
+	  // Est-ce qu'on sait le lire ?
+	  require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+	  $archive = new PclZip($zip);
+	  $contenu = verifier_compactes($archive);
+	
+	  // si non, on le force comme document
+	    // sans effet meme en global !!
+	  /*	  if (!$contenu) {
+	    	$forcer_document = 'oui';
+	    }
+	  else  */
+	  // si le deballage est demande
+	  if ($action_zip == 'decompacter') {
+	    // 1. on deballe
+	    define('_tmp_dir', creer_repertoire_documents($hash));
+	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
+	    $archive->extract(
+			      PCLZIP_OPT_PATH, _tmp_dir,
+			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+			      );
+	    $contenu = verifier_compactes($archive);
+	    // 2. on supprime le fichier temporaire
+	    @unlink($zip);
+	    
+	    $_FILES = array();
+	    foreach ($contenu as $fichier) {
+	      $_FILES[] = array(
+				'name' => basename($fichier),
+				'tmp_name' => _tmp_dir.basename($fichier));
+	    }
+	  }
+	  
+	  // sinon on demande une reponse
+	  else {
+		$link = new Link('spip_image.php3');
+		$link->addVar('ajout_doc', 'oui');
+		$link->addVar('redirect', $redirect);
+		$link->addVar('id_article', $id_article);
+		$link->addVar('mode', $mode);
+		$link->addVar('type', $type);
+		$link->addVar('hash', $hash);
+		$link->addVar('hash_id_auteur', $hash_id_auteur);
+		$link->addVar('source_zip', $zip);
+		afficher_compactes($desc, $contenu, $link);
+		exit;
+	  }
+	}
+  }
+  return $_FILES;
+}
+
+	//
+	// Traiter la liste des fichiers
+	//
+
+function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document)
+{
+	$documents_actifs = array();
+
+	foreach ($_FILES as $file) {
+
+		// afficher l'erreur 'fichier trop gros' ou autre
+		check_upload_error($file['error']);
+
+		spip_log ("ajout du document ".$file['name'].", $mode ($type $id $id_document)");
+		ajouter_un_document (
+			$file['tmp_name'],	# le fichier sur le serveur (/var/tmp/xyz34)
+			$file['name'],		# son nom chez le client (portequoi.pdf)
+			$type,				# lie a un article, une breve ou une rubrique ?
+			$id,		# identifiant de l'article (ou rubrique) lie
+			$mode,				# 'vignette' => image en mode image
+								# ou vignette personnalisee liee a un document
+								# 'document' => doc ou image en mode document
+								# 'distant' => lien internet
+			$id_document,		# pour une vignette, l'id_document de maman
+			$documents_actifs	# tableau des id_document "actifs" (par ref)
+		);
+	}	// foreach $_FILES
+
+	// Nettoyer le repertoire temporaire d'extraction des fichiers
+	if (defined('_tmp_dir'))
+		effacer_repertoire_temporaire(_tmp_dir);
+}
+
+function ajouter_par_upload($nom, $identifier, $id, $id_auteur)
+{
+
+	$upload = _DIR_TRANSFERT.$nom;
+
+		// lire le repertoire upload et remplir $_FILES
+	if (!is_dir($upload))
+	  // seul un fichier est demande
+
+		return array(
+				array ('name' => basename($upload),
+				'tmp_name' => $upload)
+				);
+	else {
+		$files = array();
+		if ($identifier)
+		  { 
+		    identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
+		    include_ecrire("inc_rubriques.php3");
+		    calculer_rubriques();
+		  }
+		else {
+			foreach (fichiers_upload($upload) as $fichier) {
+				$files[] = array (
+					'name' => basename($fichier),
+					'tmp_name' => $fichier
+					);
+			}
+		}
+		return $files;
+	}
 
 
+}
+
+function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0)
+{
+  static $exts = array();
+
+  $handle = @opendir($DIR);
+  if (!$handle) {spip_log("$DIR pas lisible") ; return 0;}
+
+  $textes = array();
+  $docs = array();
+  $rubriques = array();
+
+  // collecte des 3 sortes d'entrees
+  while (($entree = readdir($handle)) != '') {
+    $chemin = "$DIR/$entree";
+    if ($entree[0] !='.') {
+      if (is_dir($chemin)) {
+	$rubriques[$chemin] = $entree;
+    } else {
+	if (is_readable($chemin) &&
+	    (preg_match("/^([a-zA-Z0-9_].*)\.([a-zA-Z0-9]+)$/", $entree, $match))) {
+	  $ext = strtolower($match[2]);
+	  if (($ext == 'html') || ($ext == 'htm') || ($ext == 'txt'))
+	    $textes[$match[1]] = $match[2];
+	  else {
+	    if ($ext == 'jpeg') $ext = 'jpg';
+	    if (!isset($exts[$ext])) {
+	      $req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
+	      $exts[$ext] = spip_fetch_array(spip_query($req)) ? 'oui' : 'non';
+	    }
+	    if ($exts[$ext] == 'non') continue;
+	    $docs[] = $entree;
+	  }
+	}
+      }
+    }
+  }
+  closedir($handle);
+
+  // integration a la base SQL en commencant par les textes,
+  // afin de savoir combien ont ete crees, a chaque niveau.
+
+  if ($textes) {
+    ksort($textes);
+    foreach($textes as $k=>$v) {
+      
+	$titre= addslashes(trim(preg_replace('/[-_]/', ' ', $k)));
+	$chemin = "$DIR/$k." . $v;
+	$texte = file_get_contents($chemin);
+	if ($v[0] == 'h') {
+	  // cas du html
+	  if (preg_match(',<body[^>]*>(.*)</body>,is', $texte, $match))
+	    $texte = '<html>'. $match[1] . '</html>';
+	}
+	$texte = addslashes($texte);
+	$date = date("Y-m-d H:i:s", filemtime($chemin));
+	$art=spip_abstract_insert($GLOBALS['table_prefix']. "_articles",
+				  "(id_rubrique,titre,texte,date,statut)",
+				  "($id_rubrique, '$titre', '$texte', '$date', 'prop')");
+	spip_abstract_insert($GLOBALS['table_prefix']. "_auteurs_articles", 
+			     "(id_auteur,id_article)",
+			     "($id_auteur,$art)");
+    }
+  }
+
+  // si la rubrique a 0 ou 1  article, les documents sont 
+  // jointes l'article present ou de niveau superieur, sinon a la rubrique.
+
+  $n = count($textes);
+  if (($n <= 1) AND $art)
+    {$type = 'article'; $id = $art;}
+  else
+    {$type = 'rubrique'; $id = $id_rubrique; $n = count($docs);}
+
+  $actifs = array(); // a eclaircir
+  if ($docs) {
+    foreach($docs as $v) 
+	ajouter_un_document ("$DIR/$v",$v,$type,$id,'document',0,$actifs);
+  }
+
+  if ($rubriques) {
+    foreach ($rubriques as $k => $v)
+      {
+	$rub=spip_abstract_insert($GLOBALS['table_prefix'] . "_rubriques",
+				  "(titre,id_parent,statut)",
+				  "('" . addslashes($v) . "', $id_rubrique, 'prepa')");
+	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art);
+	if ($m)
+	  $n++;
+	else {
+	  // faudrait essayer de prevenir plutot que de guerir
+	  spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$rub");
+	}
+      }
+  }
+  
+  return $n;
+ 
+}
 
 //
 // Convertit le type numerique retourne par getimagesize() en extension fichier
