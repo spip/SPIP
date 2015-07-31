@@ -2108,7 +2108,9 @@ function init_entete($titre, $rubrique, $css='') {
 			'<link rel="stylesheet" href="' . entites_html($css)
 			. '" type="text/css" />'. "\n"
 		) ) ."\n";
-
+	
+	//Must find a better place to put f_jQuery function
+	include_spip('public/assembler');
 	echo "<head>\n".pipeline('header_prive', $head)
 		. "</head>\n";
 }
