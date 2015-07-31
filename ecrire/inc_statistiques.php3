@@ -250,95 +250,17 @@ function supprimer_referers($type = "") {
 }
 
 
-/*
-function optimiser_referers($type = "") {
-	$popularite_update = "";
-	$diff = 7;
-	$coeff_referer = 2;
-
-
-	// Visites ponderees par age des derniers jours
-	$query = "SELECT id_article, visites, (TO_DAYS(now())-TO_DAYS(date)) AS age FROM spip_visites_articles WHERE date > DATE_SUB(NOW(), INTERVAL 30 DAY)";
-	$result = spip_query($query);
-
-	while ($row = mysql_fetch_array($result)) {
-		$id_article = $row['id_article'];
-		$visites = $row['visites'];
-		$age = $row['age'];
-		
-		if ($age > $age_max) $age_max = $age;
-
-		$valeurs[$id_article]['valeur'] = $valeurs[$id_article]['valeur'] + ($visites/($age+$diff))*$diff;
-		$valeurs[$id_article]['visites'] = $valeurs[$id_article]['visites'] + $visites ;
-		
-		$tous_articles[$id_article] = $id_article;
-	}
-	
-	// Visites ponderees par age dans l'absolu
-	$col_age = "(LEAST((TO_DAYS(now())-TO_DAYS(date)),(DAYOFMONTH(now())-DAYOFMONTH(date))+30.4368*(MONTH(now())-MONTH(date))+365.2422*(YEAR(now())-YEAR(date))))";
-	$query = "SELECT id_article, visites, $col_age AS age FROM spip_articles WHERE statut = 'publie'";
-	$result = spip_query($query);
-
-	while ($row = mysql_fetch_array($result)) {
-		$id_article = $row['id_article'];
-		$visites = $row['visites'] - $valeurs[$id_article]['visites'];
-		$age = intval($row['age']) + $diff;
-		$periode = $age - $age_max;
-		
-		if ($periode < 1) $periode = 1;
-		if ($age < 1) $age  = 1;
-		
-		$valeur = $visites / ($age * $periode) * $diff;
-		$valeurs[$id_article]['valeur'] = $valeurs[$id_article]['valeur'] + $valeur;
-				
-		$tous_articles[$id_article] = $id_article;
-	}
-	
-	if ($tous_articles) {	
-		$tous_articles = join(",", $tous_articles);
-	
-		// Visites surponderees des referers
-		$query = "SELECT id_article, SUM(visites) AS externes, MAX((TO_DAYS(now())-TO_DAYS(date))) AS age ".
-			"FROM spip_referers_articles WHERE date > DATE_SUB(NOW(), INTERVAL 15 DAY) GROUP BY id_article";
-		$result = spip_query($query);
-	
-		while ($row = mysql_fetch_array($result)) {
-			$id_article = $row['id_article'];
-			$age = $row['age'];
-			if ($age < 1) $age = 1;
-			$externes = ($row['externes']) * $coeff_referer;
-			$visites = $valeurs[$id_article]['valeur'];
-			$nouvelle_valeur = $externes + $visites;
-			if ($nouvelle_valeur > $max_valeur) $max_valeur = $nouvelle_valeur;
-			$valeurs[$id_article]['valeur'] = $nouvelle_valeur;
-		}
-		
-		while (list($id_article) = each ($valeurs) AND $max_valeur > 0) {
-			$valeur = $valeurs[$id_article]['valeur'];
-			$popularite = round(sqrt((($valeur) / $max_valeur)) * 100);
-			$popularite_update[$popularite][] = $id_article;
-		}
-		
-		if (is_array($popularite_update)) {
-			while (list($popularite, $articles) = each($popularite_update)) {
-				$articles = join(",",$articles);
-				$query = "UPDATE spip_articles SET popularite = $popularite ".
-					"WHERE id_article IN ($articles)";
-				$result = spip_query($query);
-			}
-		}		
-	}
-	supprimer_referers();
-	supprimer_referers("article");
-}
-*/
-
 
 //
 // Popularite, modele logarithmique
 //
+
 function calculer_popularites() {
 	$date = lire_meta('date_stats_popularite');
+	include_ecrire("inc_meta.php3");
+	ecrire_meta("date_stats_popularite", time());
+	ecrire_metas();	// il faut le marquer de suite pour eviter les acces concurrents
+
 	$duree = time() - $date;
 	$demivie = 3 * 24 * 60;	// en minutes
 	$a = 1-exp(log(0.5)/$demivie);
@@ -381,12 +303,10 @@ function calculer_popularites() {
 	}
 
 	// et enregistrer les metas...
-	include_ecrire("inc_meta.php3");
 	list($maxpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite) FROM spip_articles"));
 	list($totalpop) = mysql_fetch_array(spip_query("SELECT SUM(popularite) FROM spip_articles"));
 	ecrire_meta("popularite_max", $maxpop);
 	ecrire_meta("popularite_total", $totalpop);
-	ecrire_meta("date_stats_popularite", time());
 	ecrire_metas();
 }
 
