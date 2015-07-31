@@ -665,7 +665,7 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 			$proxy_user = base64_encode($t2['user'] . ":" . $t2['pass']);
 	}
 	else
-		first_host = $noproxy . $host;
+		$first_host = $noproxy . $host;
 
 	$f = @fsockopen($first_host, $port);
 	spip_log("Recuperer $path sur $first_host:$port par $f");
