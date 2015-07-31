@@ -439,7 +439,8 @@ function inclure_modele($squelette, $type, $id) {
 
 	$contexte = array(
 		$id_type => $id,
-		'lang' => $GLOBALS['spip_lang']
+		'lang' => $GLOBALS['spip_lang'],
+		'fond' => $fond
 	);
 	if ($align)
 		$contexte['align'] = $align;
@@ -452,8 +453,19 @@ function inclure_modele($squelette, $type, $id) {
 	$contexte = array_merge($contexte, 
 		creer_contexte_de_modele(explode('|', $squelette))); 
 
+	// Un marqueur de notes unique lie a ce modele
+	$GLOBALS['marqueur_notes'] = substr(md5(serialize($contexte)),0,8);
+	$GLOBALS['compt_note'] = 0;
+
 	// Appliquer le modele avec le contexte
 	$retour = recuperer_fond($fond, $contexte);
+
+	// Si le modele n'a pas affiche ses notes, les supprimer (elles *doivent*
+	// etre dans le cache du modele, autrement elles ne seraient pas prises en
+	// compte a chaque calcul d'un texte contenant un modele, mais seulement
+	// quand le modele serait calcule)
+	$GLOBALS['les_notes'] = '';
+
 	$compteur--;
 	return $retour;
 }
