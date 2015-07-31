@@ -297,7 +297,13 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		 || @file_exists(_ACCESS_FILE_NAME))) {
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
-
+	// cas sans jamais de cache car calul d'un fond depuis l'espace prive
+	if ((_DIR_RESTREINT!=_DIR_RESTREINT_ABS)&&
+	    (isset($_COOKIE['spip_session'])
+	    || isset($_COOKIE['spip_admin']) )){
+			supprimer_fichier(_DIR_CACHE . $chemin_cache);
+	}
+	
 	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
 	$lastmodified = @filemtime(_DIR_CACHE . $chemin_cache);
 	$page = restaurer_meta_donnees ($page);

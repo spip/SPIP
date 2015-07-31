@@ -39,7 +39,12 @@ if (defined('_INC_PUBLIC')) {
 		include _DIR_RESTREINT_ABS.'inc_version.php';
 	}
 	else
-		die('stupid death...');
+		if (defined('_DIR_RESTREINT') AND
+		@file_exists(_DIR_RESTREINT.'inc_version.php')) {
+			include_once _DIR_RESTREINT.'inc_version.php';
+		}
+		else
+			die('stupid death...');
 
 
 	// Est-ce une action ?
