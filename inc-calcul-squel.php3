@@ -103,12 +103,12 @@ function calculer_boucle($id_boucle, &$boucles)
 	$texte = '';
 
 	# hack doublons documents : s'il y a quelque chose dans
-	# global[id_doublons][documents], c'est que des documents ont
+	# $GLOBALS['doublons_documents'], c'est que des documents ont
 	# ete vus par integre_image() ou autre fournisseur officiel de
 	# doublons : on les transfere alors vers la vraie variable
 	$texte .= '
-		$doublons[\'documents\'] .= $GLOBALS[\'id_doublons\'][\'documents\'];
-		unset($GLOBALS[\'id_doublons\'][\'documents\']);';
+		$doublons[\'documents\'] .= $GLOBALS[\'doublons_documents\'];
+		unset($GLOBALS[\'doublons_documents\']);';
 
 	// Recherche : recuperer les hash a partir de la chaine de recherche
 	if ($boucle->hash) {
