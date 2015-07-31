@@ -3,21 +3,6 @@
 include ("inc.php3");
 include_ecrire ("inc_documents.php3");
 
-/*
-if ($new=="oui") {
-	if (!$id_rubrique) $id_rubrique=0;
-
-	$mydate = date("YmdHis", time() - 12 * 3600);
-	$query = "DELETE FROM spip_breves WHERE (statut = 'refuse') && (maj < $mydate)";
-	$result = spip_query($query);
-
-	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('Nouvelle breve', NOW(), '$id_rubrique', 'refuse')";
-	$result=spip_query($query);
-	$id_breve=mysql_insert_id();
-}
-*/
-
-
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
 
@@ -47,7 +32,7 @@ if ($new != "oui") {
 	$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 	$result = spip_query($query);
 	
-	while($row=mysql_fetch_array($result)){
+	if ($row=mysql_fetch_array($result)) {
 		$id_breve=$row['id_breve'];
 		$date_heure=$row['date_heure'];
 		$titre=$row['titre'];
@@ -56,10 +41,13 @@ if ($new != "oui") {
 		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
-		if ($new == "oui") $statut = "prop";
 		
 		$pour_doublons = propre ("$titre.$texte");
 	}
+}
+else {
+	$titre = "Nouvelle br\xe8ve";
+	$statut = "prop";
 }
 
 if ($id_document) {
