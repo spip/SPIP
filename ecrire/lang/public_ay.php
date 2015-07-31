@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Aka utxawinx ni kuna qamawins utjkiti',
 'aucune_breve' => 'Aka utxawinx ni kuna jisk\'aptatas utjkiti',
 'aucune_rubrique' => 'Aka utxawinx ni kuna t\'aqas utjkiti',
+'autres' => '<NEW>Otros',
 'autres_breves' => 'Yaqha jisk\'aptatanaka',
 'autres_groupes_mots_clefs' => 'Imt\'aw arunakata yaqha tamanaka',
 'autres_sites' => 'Yaqha qamawinaka',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Aka qamawxat aruskipt\'a&ntilde;a',
+'copie_document_impossible' => '<NEW>Imposible copiar el documento',
 
 // D
 'date' => 'Uru',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Qhiphankir qillqatanaka',
 'derniers_commentaires' => 'Qhipha aruskipt\'awinaka',
 'derniers_messages_forum' => 'Qhipha yatiyawinak aruskipawinakan yatiyata',
+'documents_interdits_forum' => '<NEW>Documentos prohibidos en el foro',
 
 // E
 'edition_mode_texte' => 'Sawutjama lurawi',
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Ch\'usawx jark\'ata',
 
 // F
+'formats_acceptes' => '<NEW>Formatos aceptados: @formats@.',
 'forum' => 'Aruskipa&ntilde;a',
 
 // H
@@ -52,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'Urunaka',
+
+// L
+'lien_connecter' => '<NEW>Conectarse',
 
 // M
 'meme_auteur' => 'Pachpa qillqirita',
@@ -95,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Qamaw SPIP ukamp lurata',
 'sites_web' => 'web qamawinaka',
 'sous_rubriques' => 'Jutir t\'aqa',
+'spam' => '<NEW>Spam',
 'suite' => 'Sarantaskaki&ntilde;a',
 'sur_web' => 'Web ukata',
 'syndiquer_rubrique' => 'Aka t\'aqa apxasi&ntilde;a',
