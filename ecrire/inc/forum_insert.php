@@ -89,7 +89,7 @@ function tracer_erreur_forum($type='') {
 function inc_forum_insert_dist($force_statut = NULL) {
 	$id_article = intval(_request('id_article'));
 	$id_breve = intval(_request('id_breve'));
-	$id_forum = intval(_request('id_forum'));
+	$id_forum = intval(_request('id_forum'))>0?intval(_request('id_forum')):0;
 	$id_rubrique = intval(_request('id_rubrique'));
 	$id_syndic = intval(_request('id_syndic'));
 	$afficher_texte = _request('afficher_texte');
@@ -108,7 +108,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	if ($retour_forum == '!') {
 		// on calcule a priori l'adresse de retour {en cas d'echec du POST}
 		charger_generer_url(_DIR_RACINE !== '');
-		if ($id_forum)
+		if ($id_forum>0)
 			$retour_forum = generer_url_forum($id_forum);
 		elseif ($id_article)
 			$retour_forum = generer_url_article($id_article);
@@ -176,7 +176,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// Entrer le message dans la base
 	$id_message = sql_insertq('spip_forum', array('date_heure'=> 'NOW()'));
 
-	if ($id_forum) {
+	if ($id_forum>0) {
 		$id_thread = sql_fetsel("id_thread", "spip_forum", "id_forum = $id_forum");
 		$id_thread = $id_thread['id_thread'];
 	}
