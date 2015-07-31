@@ -335,7 +335,7 @@ function retour_id_url(Field, jjscript)
 	jQuery(Field).css({'visibility':'visible','display':'block'});
 	if (jjscript) jjscript();
 }
-/*
+
 function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 
 	if  (noeud.style.display !='none') {
@@ -350,4 +350,3 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 	}
   return false;
 }
-*/
