@@ -19,10 +19,13 @@ function encours_accueil()
 {
 	global $connect_statut, $connect_toutes_rubriques;
 
+
+	$res = '';
+
 	// Les articles a valider
 	//
 
-	$res =  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
+	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider
@@ -443,8 +446,19 @@ function exec_accueil_dist()
 
 	echo debut_droite("", true);
 
-	if ($GLOBALS['meta']["post_dates"] == "non" AND $connect_statut == '0minirezo') {
+	if ($GLOBALS['meta']["post_dates"] == "non"
+	AND $connect_statut == '0minirezo') {
 		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
+
+
+	// Les articles recents
+	//
+	echo afficher_objets('article',
+	#afficher_plus(generer_url_ecrire('articles_page')) .
+	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
+		? " AND date<NOW()" : ''),
+		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
+
 }
 
 //
