@@ -23,6 +23,7 @@ function supprime_invalideurs() {
 //
 function maj_invalideurs ($hache, $infosurpage) {
 	$hache = addslashes($hache); #parano
+	if ($hache == '') return;	// ne pas noter les POST et les delais=0
 	spip_query("DELETE FROM $table_caches WHERE hache='$hache'");
 
 	// invalidation des forums
@@ -81,13 +82,13 @@ function retire_cache($cache) {
 }
 
 // Supprimer les caches marques "suppr"
-function retire_caches() {
+function retire_caches($forcer = false) {
 	if ($GLOBALS['flag_ecrire']) return;
 
 	// gerer la concurrence et prendre le travail
 	include_ecrire('inc_meta.php3');
 	lire_metas();
-	if (!lire_meta('invalider')) return;
+	if (!lire_meta('invalider') AND !$forcer) return;
 	effacer_meta('invalider');
 	ecrire_metas();
 
@@ -204,9 +205,17 @@ function applique_invalideur($depart) {
 		spip_query("UPDATE spip_caches SET suppr='x'"
 		. ' WHERE ' . calcul_mysql_in('hache', $tous));
 
-		// Demander a inc-public.php3 de retirer les caches invalide's
-		ecrire_meta('invalider', 'oui');
-		ecrire_metas();
+		// Si on est dans ecrire/, demander a inc-public.php3
+		// de retirer les caches invalide's ; sinon le faire soi-meme
+		// ce qui evite des chevauchements dans la validation des forums
+		// [ A valide un forum, B obtient de purger les invalides, et A
+		//   trouve son cache avant que B n'ait eu le temps de le purger ]
+		if ($GLOBALS['flag_ecrire']) {
+			ecrire_meta('invalider', 'oui');
+			ecrire_metas();
+		} else {
+			retire_caches(true);
+		}
 	}
 }
 

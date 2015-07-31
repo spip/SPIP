@@ -121,7 +121,6 @@ if ($validation_finale) {
 		include_ecrire('inc_invalideur.php3');
 		include_ecrire('inc_forum.php3');
 		if ($statut == 'publie') {
-			include_local('inc-calcul_mysql3.php');
 			suivre_invalideur ("id='id_forum/" .
 				calcul_index_forum($forum_id_article,
 					$forum_id_breve,
