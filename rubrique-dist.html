@@ -135,7 +135,7 @@
 	<B>[<A HREF="#URL_RUBRIQUE"><FONT COLOR="#000000">(#TITRE|majuscules)</FONT></A>]</B>
 
 		<BOUCLE_art_rub(ARTICLES){id_rubrique}{0,5}{par date}{inverse}>
-		<BR><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE">#TITRE</A>
+		<BR><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A>
 		</BOUCLE_art_rub>
 	</FONT>
 	<BR>
@@ -163,7 +163,7 @@
 	<B>[<A HREF="#URL_RUBRIQUE"><FONT COLOR="#000000">(#TITRE|majuscules)</FONT></A>]</B>
 	
 		<BOUCLE_art_rub2(ARTICLES){id_rubrique}{0,5}{par date}{inverse}>
-		<BR><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE">#TITRE</A>
+		<BR><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A>
 		</BOUCLE_art_rub2>
 	</FONT>
 	<BR>
