@@ -1114,7 +1114,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		if (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
 			$val[0] = $r[1];
 		elseif (preg_match('/^sql_quote[(](.*?)(,[^)]*)?[)]\s*$/', $val[0], $r)) {
-			$r = $r[1].($r[2] ? $r[2] : ",''").",'int'";
+			$r = $r[1].($r[2] ? $r[2] : ",''").",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int')."'";
 			$val[0] = "sql_quote($r)";
 		}
 	}

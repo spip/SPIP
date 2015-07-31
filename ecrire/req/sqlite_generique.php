@@ -1319,15 +1319,18 @@ function _sqlite_link($serveur = ''){
  * @return number
  */
 function _sqlite_calculer_cite($v, $type){
-	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
+	if(is_null($v)
+		AND stripos($type,"NOT NULL")===false) return 'NULL'; // null php se traduit en NULL SQL
 
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
 	if (sql_test_int($type)){
 		if (is_numeric($v))
 			return $v;
-		if (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
+		elseif (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
 			return hexdec(substr($v, 2));
+		else
+			return intval($v);
 	}
 
 	if (function_exists('sqlite_escape_string')){
