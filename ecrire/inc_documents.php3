@@ -717,7 +717,7 @@ entites_html($document['fichier'])."\" />\n";
 			//
 			// Recuperer la vignette et afficher le doc
 			//
-			echo document_et_vignette($document, $url, true); 
+			echo document_et_vignette($document, $url, true);
 
 			echo "</div>"; // fin du bloc vignette + rotation
 
@@ -730,7 +730,7 @@ entites_html($document['fichier'])."\" />\n";
 					$triangle = bouton_block_invisible("port$id_document");
 			}
 			if (strlen($titre) > 0) {
-				echo "<div class='verdana2'><b>$triangle".typo($titre)."</b></div>";
+				echo "<div class='verdana2'>$triangle <b>".typo($titre)."</b></div>";
 			} else {
 				$nom_fichier = basename($fichier);
 				
@@ -753,6 +753,9 @@ entites_html($document['fichier'])."\" />\n";
 					'hauteur_vignette' => $hauteur));
 			else
 				echo taille_en_octets($taille);
+
+			echo " - <font size='1' face='arial,helvetica,sans-serif'><font color='333333'>&lt;doc$id_document&gt;</font></font>";
+
 			echo "</div>";
 
 
