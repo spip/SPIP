@@ -62,7 +62,7 @@ function maj_v014_dist($version_installee, $version_cible)
 				$fichier = $image[0];
 				$largeur = $image[1];
 				$hauteur = $image[2];
-				ereg("-([0-9]+)\.(gif|jpg|png)$", $fichier, $match);
+				preg_match(",-([0-9]+)\.(gif|jpg|png)$,i", $fichier, $match);
 				$id_type = intval($types[$match[2]]);
 				$num_img = $match[1];
 				$fichier = _DIR_IMG . $fichier;
