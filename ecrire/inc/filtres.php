@@ -462,15 +462,17 @@ function lignes_longues($texte, $l = 70) {
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
 	#include_spip('inc/charsets');
+	$texte = html2unicode($texte, true);
 	$texte = unicode_to_utf_8(charset2unicode(
 		$texte, $GLOBALS['meta']['charset'], true));
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.+>/UumsS', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.+>|&(amp;)?#[0-9]+;|&(amp;)?[a-zA-Z1-4]{2,6};/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
+			$space = substr($tag[0],0,1)=='&'?'':' ';
 			$tags[$n] = $tag[0];
-			$texte = str_replace($tag[0], " <---$n---> ", $texte);
+			$texte = str_replace($tag[0], "$space<---$n--->$space", $texte);
 		}
 	}
 	// casser les mots longs qui restent
