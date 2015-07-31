@@ -65,15 +65,13 @@ function action_purger_dist()
 	}
 	closedir($handle);
 	
-	include_spip('inc/filtres');
-	include_spip('inc/lang');
-	lang_select($lang);
-	echo "<html><body>\n";
-	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
-	echo "<p align='justify'>\n";
-	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
-		'taille' => "<b>".taille_en_octets($taille)."</b>"));
-	echo "</p></div></body></html>";
+	include_spip('inc/minipres');
+        include_spip('inc/filtres');
+
+	minipres('', "<div style='font-family: verdana, arial, sans; font-size: 12px;'>" .
+ _T('ecrire:taille_cache_image',
+		     array('dir' => _DIR_IMG,
+			   'taille' => "<b>".taille_en_octets($taille)."</b>")) .'</div>'); 
 	break;
   }
 }

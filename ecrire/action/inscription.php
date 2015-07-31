@@ -23,21 +23,17 @@ function action_inscription_dist() {
 	utiliser_langue_site();
 	utiliser_langue_visiteur();
 	http_no_cache();
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="', 
-  $GLOBALS['spip_lang'],
-  '" dir="',
-  ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),
-  '">
-<head><title>',
-  _T('pass_vousinscrire'), 
-  '</title>
-<link rel="stylesheet" type="text/css" href="'.find_in_path('spip_style.css').'" />
-</head><body>';
 
-	inclure_balise_dynamique(balise_FORMULAIRE_INSCRIPTION_dyn(_request('mode'), _request('focus'), _request('id_rubrique'))
-	);
+	echo _DOCTYPE_ECRIRE,
+		html_lang_attributes(),
+		'<head><title>',
+		_T('pass_vousinscrire'), 
+		'</title>',
+		'<link rel="stylesheet" type="text/css" href="',
+		find_in_path('spip_style.css'),
+		'"></head><body>';
+
+	inclure_balise_dynamique(balise_FORMULAIRE_INSCRIPTION_dyn(_request('mode'), _request('focus'), _request('id_rubrique')));
 	echo "</body></html>";
 }
 

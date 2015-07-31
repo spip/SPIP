@@ -187,12 +187,18 @@ if (ereg("^Apache", $GLOBALS['SERVER_SOFTWARE'])) {
 }
 else {
 	include_spip('inc/headers');
+	include_spip('inc/lang');
 	spip_header("Refresh: 0; url=" . $redirect);
-	echo "<html><head>";
-	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";
-	echo "</head>\n";
-	echo "<body><a href='".$redirect."'>"._T('navigateur_pas_redirige')."</a></body></html>";
-}
+	echo  html_lang_attributes(),
+	  "<head><meta http-equiv='Refresh' content='0; url=",
+	  $redirect,
+	  "'></head>\n",
+	  "<body><a href='",
+	  $redirect,
+	  "'>",
+	  _T('navigateur_pas_redirige'),
+	  "</a></body></html>";
+ }
 }
 
 ?>

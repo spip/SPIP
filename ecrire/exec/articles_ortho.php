@@ -97,7 +97,7 @@ function debut_html($titre = "", $rubrique="") {
 
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE .
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  html_lang_attributes(),
 	  "<head>\n" .
 	  "<title>[$nom_site_spip] $titre</title>\n";
 	if (strpos($rubrique, 'script>'))

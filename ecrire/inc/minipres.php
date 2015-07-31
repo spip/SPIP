@@ -35,8 +35,7 @@ function install_debut_html($titre = 'AUTO') {
 		header('Content-Type: text/html; charset=utf-8');
 
 	echo  _DOCTYPE_ECRIRE ,
-	  "<html lang='",$GLOBALS['spip_lang'],
-	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
+	  html_lang_attributes(),
 	  "<head>\n",
 	  "<title>",
 	  textebrut($titre),
@@ -63,9 +62,17 @@ function install_fin_html() {
 // http://doc.spip.org/@minipres
 function minipres($titre, $corps="")
 {
-	install_debut_html($titre);
-	echo $corps;
-	install_fin_html();
+	if (!$titre)
+		echo  _DOCTYPE_ECRIRE ,
+		  html_lang_attributes(),
+		  "<body>",
+		  $corps,
+		  '</body></html>';
+	else {
+		install_debut_html($titre);
+		echo $corps;
+		install_fin_html();
+	}
 	exit;
 }
 
