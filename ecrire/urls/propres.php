@@ -405,9 +405,17 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 		if ($recent = sql_fetsel('url, date', 'spip_urls',
 		'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
 		.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
-			spip_log('Redirige '.$url_propre.' vers '.$recent['url']);
+			// Mode compatibilite pour conserver la distinction -Rubrique-
+			if (_MARQUEUR_URL) {
+				$marqueur = unserialize(_MARQUEUR_URL);
+				$marqueur1 = $marqueur[$type.'1']; // debut '+-'
+				$marqueur2 = $marqueur[$type.'2']; // fin '-+'
+			} else
+				$marqueur1 = $marqueur2 = '';
+			$recent = $marqueur1 . $recent['url'] . $marqueur2;
+			spip_log('Redirige '.$url_propre.' vers '.$recent);
 			include_spip('inc/headers');
-			redirige_par_entete($recent['url']);
+			redirige_par_entete($recent);
 		}
 
 		$col_id = id_table_objet($type);

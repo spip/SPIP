@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-define('URLS_ARBO_EXEMPLE', '/article/Titre');
+define('URLS_ARBO_EXEMPLE', '/article/titre');
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
@@ -106,7 +106,7 @@ function url_arbo_parent($type){
 function url_arbo_terminaison($type){
 	static $terminaison_types = null;
 	if ($terminaison_types==null){
-		$terminaison_types = array('rubrique' => '/','mot' => '','defaut' => defined(_terminaison_urls_arbo)?_terminaison_urls_arbo:'.html');
+		$terminaison_types = array('rubrique' => '/','mot' => '','defaut' => defined('_terminaison_urls_arbo')?_terminaison_urls_arbo:'.html');
 		if (isset($GLOBALS['url_arbo_terminaisons']))
 			$terminaison_types = array_merge($terminaison_types,$GLOBALS['url_arbo_terminaisons']);
 	}
