@@ -30,6 +30,7 @@ function inc_icone_renommer_dist($fond,$fonction){
 		//'secteur'=>'rubrique',
 		'racine-site'=>'site',
 		'mot-cle'=>'mot',
+		'syndic'=>'site',
 	);
 	if (isset($remplacement[$type]))
 		$type = $remplacement[$type];
