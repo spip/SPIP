@@ -4,7 +4,7 @@
 	(#SESSION{id_auteur}|?{' '})| <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
 	][(#SESSION{id_auteur}|?{'',' '})| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>][
 	(#AUTORISER{ecrire})| <a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>] | 
-	<a href="#URL_PAGE{plan}"><:plan_site:></a> | 
+	<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a> | 
 	<a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a>
 </div>
 [(#REM)
