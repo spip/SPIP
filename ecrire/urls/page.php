@@ -124,7 +124,7 @@ function recuperer_parametres_url(&$fond, $url) {
 		$r = "spip_" . table_objet($fond);
 		$id = id_table_objet($fond);
 		$r = spip_query("SELECT $id AS id FROM $r WHERE url_propre = " . _q($url_propre));
-		if ($r AND $r = spip_abstract_fetch($r))
+		if ($r AND $r = sql_fetch($r))
 			$contexte[$id] = $r['id'];
 	}
 

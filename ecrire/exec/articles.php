@@ -22,7 +22,7 @@ function exec_articles_dist()
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
-	$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
 	if (!$row
 	OR !autoriser('voir', 'article', $id_article)) {

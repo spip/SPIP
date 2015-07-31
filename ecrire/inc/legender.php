@@ -35,10 +35,10 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	// retour d'Ajax
 	if ($id_document) {
 		$res = spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document));
-		$document = spip_abstract_fetch($res);
+		$document = sql_fetch($res);
 		$document['vu'] = 'non';
 		$res = spip_query("SELECT vu FROM spip_documents_".$type."s WHERE id_$type=$id AND id_document=".intval($id_document));
-		if ($row = spip_abstract_fetch($res))
+		if ($row = sql_fetch($res))
 			$document['vu'] = $row['vu'];
 		$flag = 'ajax';
 	}
@@ -205,7 +205,7 @@ function formulaire_taille($document) {
 
 	// Donnees sur le type de document
 	$extension = $document['extension'];
-	$t = spip_abstract_fetsel('inclus',
+	$t = sql_fetsel('inclus',
 		'spip_types_documents', "extension="._q($extension));
 	$type_inclus = $t['inclus'];
 

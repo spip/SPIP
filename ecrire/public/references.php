@@ -91,7 +91,7 @@ function description_type_requete($type, $serveur='') {
 			(($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip')
 				. '_' . $t) : $nom_table;
 
-		$desc = spip_abstract_showtable($desc, $serveur);
+		$desc = sql_showtable($desc, $serveur);
 		if (!isset($desc['field']))
 			return null;
 		$tables_des_serveurs_sql[$s][$nom_table]= $desc;

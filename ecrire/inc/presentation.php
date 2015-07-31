@@ -458,7 +458,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	$cpt = spip_abstract_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
+	$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
 
 	if (!($cpt OR $force)) return '';
 
@@ -475,18 +475,18 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 	}
 
-	$result = spip_abstract_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$id_liste = 't'.substr(md5(join(',',$requete)),0,8);
 
 	$bouton = bouton_block_depliable($titre,true,$id_liste);
 
 	$table = array();
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		if ($a = $skel($row, $tous_id, $voir_logo, $own))
 			$table[] = $a;
 	}
-	spip_abstract_free($result);
+	sql_free($result);
 
 	$t = afficher_liste($largeurs, $table, $styles);
 	if ($spip_display != 4)
@@ -523,7 +523,7 @@ function avoir_visiteurs() {
 
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
 	if ($GLOBALS['meta']['accepter_visiteurs'] == 'oui') return true;
-	return spip_abstract_countsel('spip_articles', "accepter_forum='abo'",'', '1');
+	return sql_countsel('spip_articles', "accepter_forum='abo'",'', '1');
 }
 
 //
@@ -543,7 +543,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	
 	$res = '';
 
- 	while($row = spip_abstract_fetch($request)) {
+ 	while($row = sql_fetch($request)) {
 		$statut=$row['statut'];
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
@@ -555,7 +555,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 		$thread[$compteur_forum]++;
 	}
 
-	spip_abstract_free($request);
+	sql_free($request);
 	$compteur_forum--;
 	if ($spip_display == 4 AND $res) $res = "<ul>$res</ul>";	
 	return $res;
@@ -696,7 +696,7 @@ function afficher_forum_mots($id_forum)
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 	$res = "";
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$res .= "\n<li> <b>"
 		. propre($row['titre'])
 		. " :</b> "
@@ -1304,18 +1304,18 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	$select = "$key AS id, titre, statut";
 
-	$n = spip_num_rows(spip_abstract_select($select, "spip_$table", $where));
+	$n = spip_num_rows(sql_select($select, "spip_$table", $where));
 
 	if (!$n) return '';
 
-	$voss = spip_abstract_select($select, "spip_$table", $where, '', "$order DESC", $limit);
+	$voss = sql_select($select, "spip_$table", $where, '', "$order DESC", $limit);
 
 	$limit = $n - $limit;
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
 	$idom = 'rubrique_' . $table;
 
-	while($row = spip_abstract_fetch($voss)) {
+	while($row = sql_fetch($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
 		$statut = $row['statut'];
@@ -1365,7 +1365,7 @@ function afficher_hierarchie($id_rubrique) {
 
 	while ($id_rubrique) {
 
-		$res = spip_abstract_fetch(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$res = sql_fetch(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 		if (!$res) break; // rubrique inexistante
 
@@ -1408,9 +1408,9 @@ function enfant_rub($collection){
 
 	$res = "";
 
-	$result = spip_abstract_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
+	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
 
-	while($row=spip_abstract_fetch($result)){
+	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -1465,11 +1465,11 @@ function enfant_rub($collection){
 function sous_enfant_rub($collection2){
 	global $spip_lang_left;
 
-	$result3 =  spip_abstract_select("*", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
+	$result3 =  sql_select("*", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
 	if (!spip_num_rows($result3)) return '';
 	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
-	while($row=spip_abstract_fetch($result3)){
+	while($row=sql_fetch($result3)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
 		$titre2=$row['titre'];
@@ -1540,7 +1540,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	switch ($type) {
 		case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
-				$n = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
+				$n = sql_fetch(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
 				if (!$n) $statut = 'prop';
 			}
 			if ($statut == 'publie')

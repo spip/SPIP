@@ -46,7 +46,7 @@ function exec_recherche_dist() {
 		AND $id = intval($recherche))
 		foreach ($tables as $table => $x) {
 			$s = spip_query($q = "SELECT ".id_table_objet($table)." FROM spip_".table_objet($table)." WHERE ".id_table_objet($table)."="._q($id));
-			if ($t = spip_abstract_fetch($s)
+			if ($t = sql_fetch($s)
 			AND autoriser('voir', $table, $id)
 			AND !isset($results[$table][$id]))
 				$results[$table][$id] = array();

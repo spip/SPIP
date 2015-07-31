@@ -23,7 +23,7 @@ function exec_memoriser_dist()
 	if ($res = $ajax_fonctions[$hash]) {
 		list(,$t,$r,$p,$f) = $res;
 
-		$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM " . $r['FROM'] . ($r['WHERE'] ? (' WHERE ' . $r['WHERE']) : '') . ($r['GROUP BY'] ? (' GROUP BY ' . $r['GROUP BY']) : '')));
+		$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM " . $r['FROM'] . ($r['WHERE'] ? (' WHERE ' . $r['WHERE']) : '') . ($r['GROUP BY'] ? (' GROUP BY ' . $r['GROUP BY']) : '')));
 
 		include_spip('inc/presentation');
 		include_spip('inc/afficher_objets');

@@ -81,13 +81,13 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
 		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
-		if (!$row = spip_abstract_fetch($q)) {
+		if (!$row = sql_fetch($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
 /*			$ext = 'bin';
 			$nom_envoye .= '.bin';
 			spip_log("Extension $ext");
-			$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='bin' AND upload='oui'"));
+			$row = sql_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='bin' AND upload='oui'"));
 			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
@@ -96,7 +96,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
-			$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
+			$row = sql_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
 			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
@@ -223,12 +223,12 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = spip_abstract_insert("spip_documents", "(extension, titre, date, distant)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant')");
+		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
-			spip_abstract_insert("spip_documents_".$type_lien."s",
+			sql_insert("spip_documents_".$type_lien."s",
 				"(id_document, id_".$type_lien.")",
 				"($id_document, $id_lien)"
 			);

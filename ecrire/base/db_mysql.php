@@ -149,7 +149,7 @@ function spip_sql_timing($m1, $m2, $query, $result)
 }
 
 // fonction appelant la precedente  specifiquement pour l'espace public
-// c'est une instance de spip_abstract_select, voir ses specs dans abstract.php
+// c'est une instance de sql_select, voir ses specs dans abstract.php
 // traite_query pourrait y est fait d'avance, à moindre cout.
 // Les \n et \t sont utiles au debusqueur.
 

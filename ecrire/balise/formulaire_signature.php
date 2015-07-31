@@ -47,7 +47,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 
 	else {
 		// aller chercher dans la base la petition associee
-		if ($r = spip_abstract_fetsel("texte, site_obli, message", 'spip_petitions', "id_article = ".intval($args[0]))) {
+		if ($r = sql_fetsel("texte, site_obli, message", 'spip_petitions', "id_article = ".intval($args[0]))) {
 			$args[2] = $r['texte'];
 			// le signataire doit-il donner un site ?
 			$args[3] = ($r['site_obli'] == 'oui') ? '':' ';
@@ -144,10 +144,10 @@ function reponse_confirmation($var_confirm = '') {
 			}
 
 
-			$result_sign = spip_abstract_select('*', 'spip_signatures', "statut=" . _q($var_confirm));
+			$result_sign = sql_select('*', 'spip_signatures', "statut=" . _q($var_confirm));
 
 			if (spip_num_rows($result_sign) > 0) {
-				while($row = spip_abstract_fetch($result_sign)) {
+				while($row = sql_fetch($result_sign)) {
 					$id_signature = $row['id_signature'];
 					$id_article = $row['id_article'];
 					$date_time = $row['date_time'];
@@ -158,9 +158,9 @@ function reponse_confirmation($var_confirm = '') {
 					$message = $row['message'];
 					$statut = $row['statut'];
 				}
-				$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
+				$result_petition = sql_select('*', 'spip_petitions', "id_article=$id_article");
 
-				while ($row = spip_abstract_fetch($result_petition)) {
+				while ($row = sql_fetch($result_petition)) {
 					$id_article = $row['id_article'];
 					$email_unique = $row['email_unique'];
 					$site_obli = $row['site_obli'];
@@ -170,7 +170,7 @@ function reponse_confirmation($var_confirm = '') {
 				}
 	
 				if ($email_unique == "oui") {
-					$result = spip_abstract_select('ad_email', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
+					$result = sql_select('ad_email', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
 						$confirm= _T('form_pet_deja_signe');
 						$refus = "oui";
@@ -178,7 +178,7 @@ function reponse_confirmation($var_confirm = '') {
 				}
 	
 				if ($site_unique == "oui") {
-					$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND statut='publie'");
+					$result = sql_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
 						$confirm= _T('form_pet_deja_enregistre');
 						$refus = "oui";
@@ -224,9 +224,9 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
-	$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
+	$result_petition = sql_select('*', 'spip_petitions', "id_article=$id_article");
 
-	if ($row = spip_abstract_fetch($result_petition)) {
+	if ($row = sql_fetch($result_petition)) {
 		$email_unique = $row['email_unique'];
 		$site_obli = $row['site_obli'];
 		$site_unique = $row['site_unique'];
@@ -245,7 +245,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		#envoyer_mail('email_moderateur@example.tld', 'spam intercepte', var_export($_POST,1));
 	} else {
 		if ($email_unique == "oui") {
-			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
+			$result = sql_select('statut', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
 			if (spip_num_rows($result) > 0) 
 				$texte = _T('form_pet_deja_signe');
 		}
@@ -260,7 +260,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 				$texte = _T('form_pet_url_invalide');
 		}
 		if (!$texte AND $site_unique == "oui") {
-			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')");
+			$result = sql_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')");
 			if (spip_num_rows($result) > 0) {
 				$texte = _T('form_pet_site_deja_enregistre');
 			}
@@ -269,7 +269,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 		$passw = test_pass();
 
-		$row = spip_abstract_fetch(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
+		$row = sql_fetch(sql_select('titre,lang', 'spip_articles', "id_article=$id_article"));
 		$l = lang_select($row['lang']);
 		$titre = textebrut(typo($row['titre']));
 		if ($l) lang_select();
@@ -283,7 +283,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
 		if ($envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
-			$id_signature = spip_abstract_insert('spip_signatures', "(id_article, date_time, statut)", "($id_article, NOW(), '$passw')");
+			$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut)", "($id_article, NOW(), '$passw')");
 			include_spip('inc/modifier');
 			revision_signature($id_signature, array(
 				'nom_email' => $nom_email,
@@ -307,7 +307,7 @@ function test_pass() {
 	include_spip('inc/acces');
 	for (;;) {
 		$passw = creer_pass_aleatoire();
-		if (!spip_num_rows(spip_abstract_select('statut', 'spip_signatures', "statut='$passw'")))
+		if (!spip_num_rows(sql_select('statut', 'spip_signatures', "statut='$passw'")))
 			return $passw;
 	}
 

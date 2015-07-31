@@ -38,7 +38,7 @@ function action_editer_rubrique_dist() {
 // http://doc.spip.org/@insert_rubrique
 function insert_rubrique($id_parent) {
 	include_spip('base/abstract_sql');
-	return spip_abstract_insert("spip_rubriques",
+	return sql_insert("spip_rubriques",
 		"(titre, id_parent, statut)",
 		"('"._T('item_nouvelle_rubrique')."', ".intval($id_parent).",'new')"
 	);
@@ -73,7 +73,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	AND $id_parent != $id_rubrique // au fou
 	) {
 		$id_parent = intval($id_parent);
-		$s = spip_abstract_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$s = sql_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$old_parent = $s['id_parent'];
 
 		if ($id_parent != $old_parent
@@ -93,7 +93,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// breves en question
 	if ($champs['id_parent']
 	AND _request('confirme_deplace', $c) == 'oui') {
-		$id_secteur = spip_abstract_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+		$id_secteur = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		if ($id_secteur= $id_secteur['id_secteur'])
 			spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
 	}

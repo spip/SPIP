@@ -95,7 +95,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 		}
 	}
    if ($values) {
-	if (!spip_abstract_replace($table, $values, $desc)) {
+	if (!sql_replace($table, $values, $desc)) {
 		echo "--><br /><span style='color: red; font-weight: bold;'>"._T('avis_erreur_mysql')."</span>\n<span style='color: black'><tt>".spip_sql_error()."</tt></span>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
@@ -132,7 +132,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 				else $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
 			else
 				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
-			spip_abstract_insert($table_lien, "($id, id_$type_lien)", join(',', $t));
+			sql_insert($table_lien, "($id, id_$type_lien)", join(',', $t));
 		}
 	}
    }

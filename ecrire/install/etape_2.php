@@ -83,9 +83,9 @@ function install_etape_2_dist()
 function install_etape_2_bases($login_db, $server_db)
 {
 
-	$flistdbs = spip_abstract_serveur('listdbs', $server_db);
-	$fselectdb = spip_abstract_serveur('selectdb', $server_db);
-	$ffetch = spip_abstract_serveur('fetch', $server_db);
+	$flistdbs = sql_serveur('listdbs', $server_db);
+	$fselectdb = sql_serveur('selectdb', $server_db);
+	$ffetch = sql_serveur('fetch', $server_db);
 
 	$result = $flistdbs();
 	$bases = $checked = '';

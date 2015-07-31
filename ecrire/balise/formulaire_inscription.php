@@ -113,7 +113,7 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 		return  $declaration;
 
 	$row = spip_query("SELECT statut, id_auteur, login, email FROM spip_auteurs WHERE email=" . _q($declaration['email']));
-	$row = spip_abstract_fetch($row);
+	$row = sql_fetch($row);
 
 	if (!$row) 
 		// il n'existe pas, creer les identifiants  
@@ -143,7 +143,7 @@ function inscription_nouveau($declaration)
 
 	$declaration['statut'] = 'nouveau';
 
-	$n = spip_abstract_insert('spip_auteurs', ('(' .join(',',array_keys($declaration)).')'), ("(" .join(", ",array_map('_q', $declaration)) .")"));
+	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($declaration)).')'), ("(" .join(", ",array_map('_q', $declaration)) .")"));
 
 	$declaration['id_auteur'] = $n;
 

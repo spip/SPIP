@@ -24,7 +24,7 @@ function exec_naviguer_dist()
 	$id_rubrique = intval(_request('id_rubrique'));
 	$select_groupe = intval(_request('select_groupe'));
 
-	$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	if ($row) {
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -162,7 +162,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
 		if (autoriser('publierdans','rubrique',$id_rubrique)) {
-			$id_parent = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$id_parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			if (!$id_parent['id_parent']) {
 			  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
 			  $n = spip_num_rows(spip_query("SELECT id_forum FROM $from" .($where ? (" WHERE $where") : '')));
@@ -175,7 +175,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 
 		$res = '';
 		$q = spip_query("SELECT A.nom, A.id_auteur FROM spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur WHERE R.id_rubrique=$id_rubrique");
-		while ($row = spip_abstract_fetch($q)) {
+		while ($row = sql_fetch($q)) {
 			  $id = $row['id_auteur'];
 
 			 $res .= 
@@ -221,11 +221,11 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 
 if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0) AND $flag_editable) {
 
-	$row = spip_abstract_fetch(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_rubrique = $row['lang'];
 	$langue_choisie_rubrique = $row['langue_choisie'];
 	if ($id_parent) {
-		$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$langue_parent = $row['lang'];
 	} 
 	if (!$langue_parent)
@@ -315,7 +315,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	if ($id_rubrique == 0 
 	AND autoriser('publierdans','rubrique',$id_rubrique)) {
 
-		$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
+		$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
 		if ($cpt = $cpt['n'])
 			$res .= "<br /><small><a href='" .
 				generer_url_ecrire("sites_tous") .
@@ -443,19 +443,19 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 
 // http://doc.spip.org/@tester_rubrique_vide
 function tester_rubrique_vide($id_rubrique) {
-	$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_rubriques WHERE id_parent=$id_rubrique LIMIT 1"));
+	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_rubriques WHERE id_parent=$id_rubrique LIMIT 1"));
 	if ($n['n'] > 0) return false;
 
-	$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1"));
+	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1"));
 	if ($n['n'] > 0) return false;
 
-	$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
+	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
 	if ($n['n'] > 0) return false;
 
-	$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
+	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
 	if ($n['n'] > 0) return false;
 
-	$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_documents_rubriques WHERE id_rubrique=$id_rubrique LIMIT 1"));
+	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_documents_rubriques WHERE id_rubrique=$id_rubrique LIMIT 1"));
 	if ($n['n'] > 0) return false;
 
 	return true;

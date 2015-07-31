@@ -38,7 +38,7 @@ function executer_une_syndication() {
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
-	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
+	$row = sql_fetch(sql_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
 		$res1 = syndic_a_jour($id_syndic, 'off');
@@ -48,7 +48,7 @@ function executer_une_syndication() {
 	$where = "syndication='oui'
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
-	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
+	$row = sql_fetch(sql_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
 
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
@@ -396,7 +396,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
 	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
 	if (spip_num_rows($s) > 1) {
-		while ($a = spip_abstract_fetch($s))
+		while ($a = sql_fetch($s))
 			if ($a['titre'] == $data['titre']
 			AND !in_array($a['id_syndic_article'], $faits)) {
 				$id_syndic_article = $a['id_syndic_article'];
@@ -406,7 +406,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// Sinon, s'il y en a un, on verifie qu'on ne vient pas de l'ecrire avec
 	// un autre item du meme feed qui aurait le meme link
-	else if ($a = spip_abstract_fetch($s)
+	else if ($a = sql_fetch($s)
 	AND !in_array($a['id_syndic_article'], $faits)) {
 		$id_syndic_article = $a['id_syndic_article'];
 	}
@@ -417,7 +417,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 			return;
 		} else {
 			include_spip('base/abstract_sql');
-			$id_syndic_article = spip_abstract_insert('spip_syndic_articles', '(id_syndic, url, date, statut)', '('._q($now_id_syndic).', '._q($le_lien). ', FROM_UNIXTIME('.$data['date'].'), '._q($statut).')');
+			$id_syndic_article = sql_insert('spip_syndic_articles', '(id_syndic, url, date, statut)', '('._q($now_id_syndic).', '._q($le_lien). ', FROM_UNIXTIME('.$data['date'].'), '._q($statut).')');
 			$ajout = true;
 		}
 	}
@@ -484,7 +484,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$now_id_syndic");
 
-	if (!$row = spip_abstract_fetch($result))
+	if (!$row = sql_fetch($result))
 		return;
 
 	$url_syndic = $row['url_syndic'];
@@ -524,7 +524,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// suppression apres 2 mois des liens qui sont sortis du feed
 		if ($row['oubli'] == 'oui') {
 
-			spip_abstract_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOT (id_syndic_article IN ($faits))");
+			sql_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOT (id_syndic_article IN ($faits))");
 		}
 	}
 

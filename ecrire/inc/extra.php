@@ -385,7 +385,7 @@ function extra_update($type, $id, $c = false) {
 	$t = preg_replace(',s$,', '', $type);
 
 	$orig = spip_query("SELECT extra FROM spip_".table_objet($t)." WHERE ".id_table_objet($t)."=".intval($id));
-	$orig = spip_abstract_fetch($orig);
+	$orig = sql_fetch($orig);
 
 	if (isset($orig['extra'])
 	AND is_array($orig = @unserialize($orig['extra']))) {

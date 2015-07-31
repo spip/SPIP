@@ -35,7 +35,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 //
 // Recupere les donnees
 //
-	$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
 	 if ($row) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
@@ -230,7 +230,7 @@ function determine_groupe_mots($table, $id_groupe) {
 	if (spip_num_rows($q)>1) {
 
 		$res = " &nbsp; <select name='id_groupe' class='fondl'>\n";
-		while ($row = spip_abstract_fetch($q)){
+		while ($row = sql_fetch($q)){
 			$groupe = $row['id_groupe'];
 			$titre_groupe = texte_backend(supprimer_tags(typo($row['titre'])));
 			$res .=  "<option".mySel($groupe, $id_groupe).">$titre_groupe</option>\n";
@@ -239,7 +239,7 @@ function determine_groupe_mots($table, $id_groupe) {
 	} else {
 	  // pas de menu si un seul groupe 
 	  // (et on est sur qu'il y en a un grace au redirect preventif)
-		$row = spip_abstract_fetch($q);
+		$row = sql_fetch($q);
 		$res = $row['titre']
 		. "<br /><input type='hidden' name='id_groupe' value='".$row['id_groupe']."' />";
 	}

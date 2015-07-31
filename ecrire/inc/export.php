@@ -202,10 +202,10 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 function build_while($debut, $table, $prim, $les_rubriques) {
 	global  $chercher_logo ;
 
-	$result = spip_abstract_select('*', $table, '', '', '', "$debut," . _EXPORT_TRANCHES_LIMITE);
+	$result = sql_select('*', $table, '', '', '', "$debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		if (export_select($row, $les_rubriques)) {
 			$attributs = "";
 			if ($chercher_logo) {
@@ -222,7 +222,7 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 			$string .= "</$table>\n\n";
 		}
 	}
-	spip_abstract_free($result);
+	sql_free($result);
 	return $string;
 }
 

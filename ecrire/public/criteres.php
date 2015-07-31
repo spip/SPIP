@@ -363,7 +363,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  	// calculer le order dynamique qui verifie les champs
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
 	    // et ajouter un champ hasard dans le select pour supporter 'hasard' comme tri dynamique
-			if (spip_abstract_select(array("RAND()")))
+			if (sql_select(array("RAND()")))
 				$par = "RAND()";
 			else
 				$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
@@ -376,7 +376,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
     // par multi champ
 	      if (preg_match(",^multi[\s]*(.*)$,",$par, $m)) {
 		  $texte = $boucle->id_table . '.' . trim($m[1]);
-		  $boucle->select[] =  "\".spip_abstract_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
+		  $boucle->select[] =  "\".sql_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
 		  $order = "multi";
 	// par num champ(, suite)
 	      }	else if (preg_match(",^num[\s]*(.*)$,",$par, $m)) {
@@ -396,7 +396,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		if ($par == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
 		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
-		  if (spip_abstract_select(array("RAND()")))
+		  if (sql_select(array("RAND()")))
 			$par = "RAND()";
 		  else
 			$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
@@ -1041,7 +1041,7 @@ function trouver_def_table($nom, &$boucle)
 	if ($desc = $tables_auxiliaires[$nom_table])
 		return array($nom_table, $desc);
 
-	if ($desc = spip_abstract_showtable($nom, $boucle->sql_serveur))
+	if ($desc = sql_showtable($nom, $boucle->sql_serveur))
 	  if (isset($desc['field'])) {
       // faudrait aussi prevoir le cas du serveur externe
 	    $tables_principales[$nom] = $desc;

@@ -128,9 +128,9 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	$lettres_nombre_auteurs =0;
 	$lettre_prec ="";
 	$i = 0;
-	while ($auteur = spip_abstract_fetch($query)) {
+	while ($auteur = sql_fetch($query)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			$auteur['restreint'] = spip_abstract_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur'],'', "1");
+			$auteur['restreint'] = sql_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur'],'', "1");
 			
 			$auteurs[] = $auteur;
 		}
@@ -320,7 +320,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	
 	case 'nom':
 	default:
-		$sql_sel = ", ".spip_abstract_multi ("nom", $spip_lang);
+		$sql_sel = ", ".sql_multi ("nom", $spip_lang);
 		$sql_order = " multi";
 	}
 	

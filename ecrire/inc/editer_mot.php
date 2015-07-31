@@ -47,11 +47,11 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		return '';
 	}
 
-	$cpt = spip_abstract_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
+	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
 
 	if (!$cpt) {
 		if (!$flag) return;
-		$cpt = spip_abstract_fetch(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"));
+		$cpt = sql_fetch(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"));
 
 		if (!$cpt['n']) return;
 	}
@@ -120,7 +120,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 
 	$table_mots = array();
 	$table_ids = array();
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 			$table_ids[] = $row['id_mot'];
 			$table_mots[] = $row['titre'];
 	}
@@ -137,7 +137,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
-			$row = spip_abstract_fetch(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
+			$row = sql_fetch(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
 			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br />\n<ul>";
 			$res .= "\n<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>";
 			$res .= "\n</ul>";
@@ -170,7 +170,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
@@ -181,7 +181,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 			$vals= array("<a href='$url'>$cle</a>");
 
-			$r = spip_abstract_fetch(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+			$r = sql_fetch(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 			$unseul = $r['unseul'];
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 			$type_mot = typo($r['titre']);
@@ -238,7 +238,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 	$s = '';
 
-	while ($row_autres = spip_abstract_fetch($result)) {
+	while ($row_autres = sql_fetch($result)) {
 		$id = $row_autres['id_mot'];
 		$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
 		$selected = ($id == $id_mot) ? " selected='selected'" : "";
@@ -283,11 +283,11 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		. "</div><br />\n";
 	}
 
-	$result = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".spip_abstract_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+	$result = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
@@ -331,7 +331,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 {
 	$id_groupe = $row['id_groupe'];
 
-	$n = spip_abstract_countsel("spip_mots", "id_groupe=$id_groupe" . ($les_mots ? " AND id_mot NOT IN ($les_mots) " : ''));
+	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . ($les_mots ? " AND id_mot NOT IN ($les_mots) " : ''));
 	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
@@ -375,7 +375,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY titre");
 
 
-		while($row = spip_abstract_fetch($result)) {
+		while($row = sql_fetch($result)) {
 			$res .= "\n<option value='" .$row['id_mot'] .
 				"'>&nbsp;&nbsp;&nbsp;" .
 				textebrut(typo($row['titre'])) .

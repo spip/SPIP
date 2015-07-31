@@ -14,8 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Chargement a la volee de la description d'un serveur de base de donnees
 
-// http://doc.spip.org/@spip_abstract_serveur
-function spip_abstract_serveur($ins_sql, $serveur) {
+function sql_serveur($ins_sql, $serveur) {
 
   // le serveur par defaut est indique par spip_connect
   // qui etablira la premiere connexion si ce n'est fait.
@@ -43,7 +42,7 @@ function spip_abstract_serveur($ins_sql, $serveur) {
 
 // http://doc.spip.org/@spip_sql_set_connect_charset
 function spip_sql_set_connect_charset($charset,$serveur=''){
-	$f = spip_abstract_serveur('set_connect_charset', $serveur);
+	$f = sql_serveur('set_connect_charset', $serveur);
 	return $f($charset);
 }
 
@@ -53,7 +52,7 @@ function spip_sql_set_connect_charset($charset,$serveur=''){
 // Elle construit et exe'cute une reque^te SQL correspondant a` une balise
 // Boucle ; elle notifie une erreur SQL dans le flux de sortie et termine
 // le processus.
-// Sinon, retourne la ressource interrogeable par spip_abstract_fetch.
+// Sinon, retourne la ressource interrogeable par sql_fetch.
 // Recoit en argument:
 // - le tableau des champs a` ramener (Select)
 // - le tableau des tables a` consulter (From)
@@ -67,14 +66,13 @@ function spip_sql_set_connect_charset($charset,$serveur=''){
 // - le nom de la boucle (pour le message d'erreur e'ventuel)
 // - le serveur sollicite (pour retrouver la connexion)
 
-// http://doc.spip.org/@spip_abstract_select
-function spip_abstract_select (
+function sql_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $having = array(),
 	$table = '', $id = '', $serveur='') {
 
-	$f = spip_abstract_serveur('select', $serveur);
+	$f = sql_serveur('select', $serveur);
 
 	return $f($select, $from, $where,
 		  $groupby, $orderby, $limit,
@@ -82,56 +80,48 @@ function spip_abstract_select (
 		  $table, $id, $serveur);
 }
 
-// http://doc.spip.org/@spip_abstract_fetch
-function spip_abstract_fetch($res, $serveur='') {
-	$f = spip_abstract_serveur('fetch', $serveur);
+function sql_fetch($res, $serveur='') {
+	$f = sql_serveur('fetch', $serveur);
 	return $f($res);
 }
 
-// http://doc.spip.org/@spip_abstract_count
-function spip_abstract_count($res, $serveur='')
+function sql_count($res, $serveur='')
 {
-	$f = spip_abstract_serveur('count', $serveur);
+	$f = sql_serveur('count', $serveur);
 	return $f($res);
 }
 
-// http://doc.spip.org/@spip_abstract_free
-function spip_abstract_free($res, $serveur='')
+function sql_free($res, $serveur='')
 {
-	$f = spip_abstract_serveur('free', $serveur);
+	$f = sql_serveur('free', $serveur);
 	return $f($res);
 }
 
-// http://doc.spip.org/@spip_abstract_insert
-function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
+function sql_insert($table, $noms, $valeurs, $serveur='')
 {
-	$f = spip_abstract_serveur('insert', $serveur);
+	$f = sql_serveur('insert', $serveur);
 	return $f($table, $noms, $valeurs);
 }
 
-// http://doc.spip.org/@spip_abstract_update
-function spip_abstract_update($table, $exp, $where, $serveur='')
+function sql_update($table, $exp, $where, $serveur='')
 {
-	$f = spip_abstract_serveur('update', $serveur);
+	$f = sql_serveur('update', $serveur);
 	return $f($table, $exp, $where);
 }
 
-// http://doc.spip.org/@spip_abstract_delete
-function spip_abstract_delete($table, $where, $serveur='')
+function sql_delete($table, $where, $serveur='')
 {
-	$f = spip_abstract_serveur('delete', $serveur);
+	$f = sql_serveur('delete', $serveur);
 	return $f($table, $where);
 }
 
-// http://doc.spip.org/@spip_abstract_replace
-function spip_abstract_replace($table, $values, $keys, $serveur='')
+function sql_replace($table, $values, $keys, $serveur='')
 {
-	$f = spip_abstract_serveur('replace', $serveur);
+	$f = sql_serveur('replace', $serveur);
 	return $f($table, $values, $keys);
 }
 
-// http://doc.spip.org/@spip_abstract_showtable
-function spip_abstract_showtable($table, $serveur='', $table_spip = false)
+function sql_showtable($table, $serveur='', $table_spip = false)
 {
 	if ($table_spip){
 		if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
@@ -139,48 +129,44 @@ function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 		$table = preg_replace('/^spip_/', $table_pref, $table);
 	}
 	
-	$f = spip_abstract_serveur('showtable', $serveur);
+	$f = sql_serveur('showtable', $serveur);
 	return $f($table);
 }
 
-// http://doc.spip.org/@spip_abstract_create
-function spip_abstract_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
-	$f = spip_abstract_serveur('create', $serveur);
+function sql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
+	$f = sql_serveur('create', $serveur);
 	return $f($nom, $champs, $cles, $autoinc, $temporary);
 }
 
-// http://doc.spip.org/@spip_abstract_multi
-function spip_abstract_multi($sel, $lang, $serveur='')
+function sql_multi($sel, $lang, $serveur='')
 {
-  	$f = spip_abstract_serveur('multi', $serveur);
+  	$f = sql_serveur('multi', $serveur);
 	return $f($sel, $lang);
 }
 
 // http://doc.spip.org/@spip_sql_error
 function spip_sql_error($serveur='') {
-  	$f = spip_abstract_serveur('error', $serveur);
+  	$f = sql_serveur('error', $serveur);
 	return $f();
 }
 
 # une composition tellement frequente...
-// http://doc.spip.org/@spip_abstract_fetsel
-function spip_abstract_fetsel(
+function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $having = array(),
 	$table = '', $id = '', $serveur='') {
-	return spip_abstract_fetch(spip_abstract_select(
+	return sql_fetch(sql_select(
 $select, $from, $where,	$groupby, $orderby, $limit,
 $sousrequete, $having, $table, $id, $serveur),
 				   $serveur);
 }
 
 # une composition tellement frequente...
-// http://doc.spip.org/@spip_abstract_countsel
-function spip_abstract_countsel($from = array(), $where = array(),
+function sql_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
 	$serveur='') {
-  	$f = spip_abstract_serveur('countsel', $serveur);
+  	$f = sql_serveur('countsel', $serveur);
 	return $f($from, $where, $groupby, $limit, $sousrequete, $having);
 }
 
@@ -230,7 +216,7 @@ function description_table($nom){
 		return array($nom_table, $tables_auxiliaires[$nom_table]);
 
 	$nom_table = 'spip_' . $nom; // discutable
-	if ($desc = spip_abstract_showtable($nom, '', true))
+	if ($desc = sql_showtable($nom, '', true))
 		if (isset($desc['field'])) {
 			$tables_externes[$nom] = $desc;
 			return array($nom, $desc);
@@ -241,7 +227,7 @@ function description_table($nom){
 
 // http://doc.spip.org/@spip_num_rows
 function spip_num_rows($r) {
-	return spip_abstract_count($r);
+	return sql_count($r);
 }
 
 
@@ -259,7 +245,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	$nom .= _LOCK_TIME;
 
 	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
-	$q = spip_abstract_fetch($q);
+	$q = @sql_fetch($q);
 	if (!$q) spip_log("pas de lock sql pour $nom");
 	return $q['n'];
 }
@@ -270,12 +256,12 @@ function spip_release_lock($nom) {
 	if ($table_prefix) $nom = "$table_prefix:$nom";
 	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
-	spip_query("SELECT RELEASE_LOCK(" . _q($nom . _LOCK_TIME) . ")");
+	@spip_query("SELECT RELEASE_LOCK(" . _q($nom . _LOCK_TIME) . ")");
 }
 
 // http://doc.spip.org/@spip_sql_version
 function spip_sql_version() {
-	$row = spip_abstract_fetch(spip_query("SELECT version() AS n"));
+	$row = sql_fetch(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }
 

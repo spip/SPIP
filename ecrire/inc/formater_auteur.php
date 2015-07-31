@@ -33,7 +33,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$id_auteur = intval($id_auteur);
 
 	if ($row===NULL)
-	  $row = spip_abstract_fetch(spip_abstract_select("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur"));
+	  $row = sql_fetch(sql_select("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur"));
 
 	$vals = array();
 
@@ -58,11 +58,11 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	else $vals[] =  "&nbsp;";
 
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
-	  $cpt = spip_abstract_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"), "lien.id_auteur");
+	  $cpt = sql_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"), "lien.id_auteur");
 	  $t = _T('info_article_2');
 	  $t1 = _T('info_1_article'); 
 	} else {
-	  $cpt = spip_abstract_countsel("spip_forum AS F", "F.id_auteur=$id_auteur");
+	  $cpt = sql_countsel("spip_forum AS F", "F.id_auteur=$id_auteur");
 	  $t = _T('public:messages_forum');
 	  $t1 = '1 ' . _T('public:message');
 	}

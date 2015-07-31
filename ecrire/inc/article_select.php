@@ -35,7 +35,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 			include_spip('inc/drapeau_edition');
 			signale_edition ($id_article,  $GLOBALS['auteur_session'], 'article');
 		}
-		$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
+		$row = sql_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 	// si une ancienne revision est demandee, la charger
 	// en lieu et place de l'actuelle ; attention les champs
 	// qui etaient vides ne sont pas vide's. Ca permet de conserver
@@ -67,13 +67,13 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0]; 
 		else {
-			$row_rub = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
+			$row_rub = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 		}
 		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
-			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = spip_abstract_fetch($res)){
+			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = sql_fetch($res)){
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 			}
 		}
@@ -81,7 +81,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 
 	// recuperer le secteur, pour affecter les bons champs extras
 	if (!$row['id_secteur']) {
-		$row_rub = spip_abstract_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row_rub = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$row['id_secteur'] = $row_rub['id_secteur'];
 	}
 
@@ -96,7 +96,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 function article_select_trad($lier_trad) {
 	// Recuperer les donnees de l'article original
 	$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$lier_trad");
-	if ($row = spip_abstract_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
 		$id_rubrique = $row['id_rubrique'];
 	}
@@ -118,11 +118,11 @@ function article_select_trad($lier_trad) {
 				$id_parent = 0;
 			} else {
 				// on cherche une rubrique soeur dans la bonne langue
-				$row_rub = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+				$row_rub = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 				$id_parent = $row_rub['id_parent'];
 			}
-			$row_rub = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent"));
+			$row_rub = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent"));
 			if ($row_rub)
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 		}

@@ -21,7 +21,7 @@ function exec_sites_edit_dist()
 	$id_syndic = intval(_request('id_syndic'));
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
 
-	if ($row = spip_abstract_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		$id_syndic = $row["id_syndic"];
 		$id_rubrique = $row["id_rubrique"];
 		$nom_site = $row["nom_site"];
@@ -39,13 +39,13 @@ function exec_sites_edit_dist()
 		if (!$id_rubrique) {
 			$in = !$connect_id_rubrique ? ''
 			  : (' WHERE id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
-			$row = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
+			$row = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
 			$id_rubrique = $row['id_rubrique'];
 		}
 		if (!autoriser('creersitedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
-			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $row_rub = spip_abstract_fetch($res)){
+			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $row_rub = sql_fetch($res)){
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
 		}
@@ -121,7 +121,7 @@ function exec_sites_edit_dist()
 	else {
 		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 
-		while($row=spip_abstract_fetch($result)){
+		while($row=sql_fetch($result)){
 			$parent_parent=$row['id_parent'];
 		}
 		if ($parent_parent == 0) $logo = "secteur-24.gif";

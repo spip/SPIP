@@ -102,13 +102,13 @@ function exec_synchro_dist()
 
 	echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
-	$result = spip_abstract_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
+	$result = sql_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
 	$h = http_img_pack( 'feed.png', 'RSS', '');
 	if (spip_num_rows($result) > 0) {
 		echo "\n<ul>";
 
-		while($row=spip_abstract_fetch($result)){
+		while($row=sql_fetch($result)){
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
 			$titre = htmlspecialchars($titre_rubrique);

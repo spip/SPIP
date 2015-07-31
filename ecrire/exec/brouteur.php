@@ -44,7 +44,7 @@ function exec_brouteur_dist()
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
 			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-			if ($row=spip_abstract_fetch($result)){
+			if ($row=sql_fetch($result)){
 				$j--;
 				$dest[$j] = $id_rubrique;
 				$id_rubrique =$row['id_parent'];
@@ -63,7 +63,7 @@ function exec_brouteur_dist()
 			$la_rubrique = $dest[0];
 			
 			$result = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
-			if ($row = spip_abstract_fetch($result)) {
+			if ($row = sql_fetch($result)) {
 				$la_rubrique =$row['id_parent'];
 			}
 			
@@ -71,7 +71,7 @@ function exec_brouteur_dist()
 			$ret = '';
 			while ($la_rubrique > 0) {
 				$result = spip_query("SELECT titre, id_parent FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
-				if ($row = spip_abstract_fetch($result)) {
+				if ($row = sql_fetch($result)) {
 					$compteur++;
 					$titre = typo($row['titre']);
 					$lien = $dest[$nb_col-$compteur-1];

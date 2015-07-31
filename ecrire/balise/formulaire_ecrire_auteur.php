@@ -38,12 +38,12 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 	// de l'article
 	if (!$args[0] AND $args[1]) {
 		unset ($args[2]);
-		$s = spip_abstract_select('email',
+		$s = sql_select('email',
 					  array('auteurs' => 'spip_auteurs',
 						'L' => 'spip_auteurs_articles'),
 					  array('auteurs.id_auteur=L.id_auteur',
 						'L.id_article='.intval($args[1])));
-		while ($row = spip_abstract_fetch($s)) {
+		while ($row = sql_fetch($s)) {
 			if ($row['email'] AND email_valide($row['email']))
 				$args[2].= ','.$row['email'];
 		}

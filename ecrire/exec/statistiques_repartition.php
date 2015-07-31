@@ -24,13 +24,13 @@ function enfants($id_parent, $critere){
 
 	$nombre = 0;
 
-	while($row = spip_abstract_fetch($result)) {
+	while($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
 		$result2 = spip_query("SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique=$id_rubrique");
 
 		$visites = 0;
-		if ($row2 = spip_abstract_fetch($result2)) {
+		if ($row2 = sql_fetch($result2)) {
 			$visites = $row2['cnt'];
 		}
 		$nombre_abs[$id_rubrique] = $visites;
@@ -53,9 +53,9 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	global $abs_total;
 	global $taille;
 
-	$result = spip_abstract_select("id_rubrique, titre, descriptif", "spip_rubriques", "id_parent=$id_parent",'', '0+titre,titre');
+	$result = sql_select("id_rubrique, titre, descriptif", "spip_rubriques", "id_parent=$id_parent",'', '0+titre,titre');
 
-	while($row = spip_abstract_fetch($result)){
+	while($row = sql_fetch($result)){
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
 		$descriptif = attribut_html(couper(typo($row['descriptif']),80));

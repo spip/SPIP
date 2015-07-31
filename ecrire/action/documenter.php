@@ -39,7 +39,7 @@ function action_documenter_post($r)
 			if ($sign)
 				$x = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png')");
 			else $x = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'  AND docs.extension NOT IN ('gif', 'jpg', 'png')");
-			while($r = spip_abstract_fetch($x)) {
+			while($r = sql_fetch($x)) {
 				//supprimer_document_et_vignette($r['id_document']);
 				// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
 				spip_query("DELETE FROM spip_documents_".$type."s WHERE id_$type=$id AND id_document=".$r['id_document']." AND vu='non'");

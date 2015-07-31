@@ -28,7 +28,7 @@ function exec_message_edit_dist()
 		$onfocus = "\nonfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	} else $onfocus = '';
 
-	$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
 
 	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
@@ -65,7 +65,7 @@ function exec_message_edit_dist()
 	debut_gauche();
 	
 	if($type == 'normal' AND $dest) {
-		$nom = spip_abstract_fetch(spip_query("SELECT nom, email FROM spip_auteurs WHERE id_auteur=$dest"));
+		$nom = sql_fetch(spip_query("SELECT nom, email FROM spip_auteurs WHERE id_auteur=$dest"));
 		if (strlen($nom['email']) > 3) {
 			echo icone(_T('info_envoyer_message_prive'), "mailto:".$nom['email'], "envoi-message-24.gif");
 		}
@@ -87,7 +87,7 @@ function exec_message_edit_dist()
 		  $res .="<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
 		}
 	} else {
-		$nom = spip_abstract_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
+		$nom = sql_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
 		$res .="<br /><b>" .
 		  _T('info_nom_destinataire') .
 		  "</b>&nbsp;:&nbsp;&nbsp; " .

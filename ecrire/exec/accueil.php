@@ -45,7 +45,7 @@ function encours_accueil()
 	}
 
 	// Les articles syndiques en attente de validation
-		$cpt = spip_abstract_countsel("spip_syndic_articles", "statut='dispo'");
+		$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
 		if ($cpt)
 			$res .= "\n<br /><small><a href='"
 			. generer_url_ecrire("sites_tous","")
@@ -59,7 +59,7 @@ function encours_accueil()
 
 	// Les forums en attente de moderation
 
-		$cpt = spip_abstract_countsel("spip_forum", "statut='prop'");
+		$cpt = sql_countsel("spip_forum", "statut='prop'");
 		if ($cpt) {
 		if ($cpt>1)
 			$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
@@ -160,7 +160,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	
 		$gadget .= "<table><tr>";
 	
-		$cpt = spip_abstract_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur=$connect_id_auteur AND art.id_article=lien.id_article", '', 1);
+		$cpt = sql_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur=$connect_id_auteur AND art.id_article=lien.id_article", '', 1);
 		if ($cpt) {
 			$gadget .= "<td>"
 			. icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page",""), "article-24.gif", "", false)
@@ -234,7 +234,7 @@ function personnel_accueil($coockcookie)
 		$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
 
 		$rubs = array();
-		while ($r = spip_abstract_fetch($q)) {
+		while ($r = sql_fetch($q)) {
 			$rubs[] = "<a title='" .
 			  typo($r['descriptif']) .
 			  "' href='" .
@@ -300,14 +300,14 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_abstract_fetch($q)) {
+	while($row = sql_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
 	if ($cpt) {
 		if ($where) {
 			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles$where GROUP BY statut");
-			while($row = spip_abstract_fetch($q)) {
+			while($row = sql_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -325,7 +325,7 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_abstract_fetch($q)) {
+	while($row = sql_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
@@ -333,7 +333,7 @@ function etat_base_accueil()
 	if ($cpt) {
 		if ($where) {
 			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves$where GROUP BY statut");
-			while($row = spip_abstract_fetch($q)) {
+			while($row = sql_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -350,7 +350,7 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_abstract_fetch($q)) {
+	while($row = sql_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
@@ -360,7 +360,7 @@ function etat_base_accueil()
 		  include_spip('inc/forum');
 		  list($f, $w) = critere_statut_controle_forum('public',$ids);
 		  $q = spip_query("SELECT COUNT(*) AS cnt, F.statut FROM $f  WHERE $w GROUP BY F.statut");
-		  while($row = spip_abstract_fetch($q)) {
+		  while($row = sql_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -390,7 +390,7 @@ function accueil_liste_participants()
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING COUNT(*)<>0 AND statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")");
 
 	$cpt = array();
-	while($row=spip_abstract_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 
+	while($row=sql_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 
 
 	if (!$cpt) return '';
 

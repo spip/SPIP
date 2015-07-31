@@ -258,7 +258,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		$corps = $init . '
 
 	// RESULTATS
-	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
+	while ($Pile[$SP] = @sql_fetch($result,"' .
 		  $boucle->sql_serveur .
 		  '")) {' . 
 		  "\n$corps\n	}\n" .
@@ -270,7 +270,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		   (!$boucle->numrows ? '' :
 		    ( "\n	\$Numrows['" .
 			$id_boucle .
-			"']['total'] = @spip_abstract_count(\$result,'" .
+			"']['total'] = @sql_count(\$result,'" .
 			$boucle->sql_serveur .
 		      "');"))) .
 		(!$flag_cpt  ? "" :
@@ -280,7 +280,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$SP++;'
 		.
 		$corps .
-		"\n	@spip_abstract_free(\$result,'" .
+		"\n	@sql_free(\$result,'" .
 		$boucle->sql_serveur . "');";
 }
 
@@ -388,7 +388,7 @@ function calculer_parties($boucles, $id_boucle) {
 
 	// nombre total avant partition
 	$retour = "\n\n	// Partition\n	" .
-		'$nombre_boucle = @spip_abstract_count($result,"' .
+		'$nombre_boucle = @sql_count($result,"' .
 		$boucle->sql_serveur .
 		'");';
 

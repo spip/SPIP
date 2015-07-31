@@ -130,7 +130,7 @@ function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
 				if ($ext == 'jpeg') $ext = 'jpg'; # cf. corriger_extension dans inc/getdocument
-				if (spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
+				if (sql_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
 			}

@@ -33,7 +33,7 @@ function action_petitionner_dist() {
 		$message =  (_request('message') == 'on') ? 'oui' : 'non';
 
 		include_spip('base/auxiliaires');
-		spip_abstract_replace('spip_petitions',
+		sql_replace('spip_petitions',
 				      array('id_article' => $id_article,
 					    'email_unique' => $email_unique,
 					    'site_obli' => $site_obli,

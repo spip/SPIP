@@ -68,7 +68,7 @@ function forum_affiche($debut, $admin=false)
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 
-	$total = spip_abstract_countsel("spip_forum", "statut='$statutforum' AND id_parent=0",'', 11);
+	$total = sql_countsel("spip_forum", "statut='$statutforum' AND id_parent=0",'', 11);
 
 	if ($total > 10)
 		echo '<small>'.liste_numeros_forum($script, $debut, $total).'</small>';
@@ -78,7 +78,7 @@ function forum_affiche($debut, $admin=false)
 	echo "\n</div>";
 
 	$limit = $debut ? "$debut,10" : "10" ;
-	$result_forum = spip_abstract_select('*', 'spip_forum', "statut='$statutforum' AND id_parent=0", '', "date_heure DESC", $limit);
+	$result_forum = sql_select('*', 'spip_forum', "statut='$statutforum' AND id_parent=0", '', "date_heure DESC", $limit);
  
 	echo afficher_forum($result_forum,$script,"&debut=$debut");
 

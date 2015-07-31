@@ -28,7 +28,7 @@ function exec_sites_dist()
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
 
-	if ($row = spip_abstract_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		$id_rubrique = $row["id_rubrique"];
 		$nom_site = $row["nom_site"];
 		$titre_page = "&laquo; $nom_site &raquo;";

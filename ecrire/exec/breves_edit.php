@@ -31,12 +31,12 @@ function exec_breves_edit_dist()
 	if (!$id_rubrique) {
 		$in = !$connect_id_rubrique ? ''
 		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
-		$row_rub = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0$in ORDER BY id_rubrique DESC LIMIT 1"));		
+		$row_rub = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0$in ORDER BY id_rubrique DESC LIMIT 1"));		
 		$id_rubrique = $row_rub['id_rubrique'];
 		if (!autoriser('creerbrevedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
-			while (!autoriser('creerbrevedans','rubrique',$id_rubrique ) && $row_rub = spip_abstract_fetch($res)){
+			while (!autoriser('creerbrevedans','rubrique',$id_rubrique ) && $row_rub = sql_fetch($res)){
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
 		}
@@ -55,7 +55,7 @@ function exec_breves_edit_dist()
 		$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
 	
-		if ($row=spip_abstract_fetch($result)) {
+		if ($row=sql_fetch($result)) {
 			$id_breve=$row['id_breve'];
 			$titre=$row['titre'];
 			$texte=$row['texte'];
@@ -78,7 +78,7 @@ function exec_breves_edit_dist()
 		$lien_titre='';
 		$lien_url='';
 		$statut = "prop";
-		$row = spip_abstract_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$id_rubrique = $row['id_secteur'];
 	}
 
@@ -123,7 +123,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else {
 		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 
-		while($row=spip_abstract_fetch($result)){
+		while($row=sql_fetch($result)){
 			$parent_parent=$row['id_parent'];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";

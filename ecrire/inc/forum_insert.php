@@ -50,7 +50,7 @@ function controler_forum($id) {
 	// Reglage forums d'article
 	if ($id) {
 		$q = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id");
-		if ($r = spip_abstract_fetch($q))
+		if ($r = sql_fetch($q))
 			$id = $r['accepter_forum'];
 	}
 
@@ -65,7 +65,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 {
 	foreach ($ajouter_mot as $id_mot)
 		if ($id_mot = intval($id_mot))
-		  spip_abstract_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
+		  sql_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
 }
 
 
@@ -180,10 +180,10 @@ function inc_forum_insert_dist() {
 	}
 
 	// Entrer le message dans la base
-	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
+	$id_message = sql_insert('spip_forum', '(date_heure)', '(NOW())');
 
 	if ($id_forum) {
-		$id_thread = spip_abstract_fetch(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
+		$id_thread = sql_fetch(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 		$id_thread = $id_thread['id_thread'];
 	}
 	else

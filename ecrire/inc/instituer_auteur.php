@@ -78,7 +78,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	$q = spip_query("SELECT statut, count(*) FROM spip_auteurs WHERE statut NOT IN (" . _q($GLOBALS['liste_des_statuts']) . ") GROUP BY statut");
 
 	$hstatut = htmlentities($statut);
-	while ($r = spip_abstract_fetch($q)) {
+	while ($r = sql_fetch($q)) {
 		$nom = htmlentities($r['statut']);
 		$autres .= mySel($nom, $hstatut, _T('info_statut_auteur_autre') . ' ' . $nom);
 	}
@@ -131,7 +131,7 @@ function choix_rubriques_admin_restreint($auteur) {
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	$result = spip_query("SELECT rubriques.id_rubrique, " . spip_abstract_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
+	$result = spip_query("SELECT rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
 
 	$restreint = (spip_num_rows($result) > 0);
 
@@ -149,7 +149,7 @@ function choix_rubriques_admin_restreint($auteur) {
 			? "<input type='hidden' name='restreintes[]' value='0' />\n"
 			: '';
 
-		while ($row_admin = spip_abstract_fetch($result)) {
+		while ($row_admin = sql_fetch($result)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 
 			$menu .= "\n<li id='rubrest_$id_rubrique'>"

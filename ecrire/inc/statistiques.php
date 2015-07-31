@@ -134,7 +134,7 @@ function aff_referers ($result, $limit, $plus) {
 	$arr_engines = stats_load_engines();
 	$nbvisites = array();
 	$aff = '';
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
 		$tmp = "";

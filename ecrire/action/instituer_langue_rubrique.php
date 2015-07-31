@@ -31,7 +31,7 @@ function action_instituer_langue_rubrique_dist() {
 			if ($id_parent == 0)
 				$langue_parent = $GLOBALS['meta']['langue_site'];
 			else {
-				$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+				$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 				$langue_parent = $row['lang'];
 			}
 			spip_query("UPDATE spip_rubriques SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_rubrique=$id_rubrique");

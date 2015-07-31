@@ -82,7 +82,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	) {
 		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
 
-		if ($row = @spip_abstract_fetch($result)) {
+		if ($row = @sql_fetch($result)) {
 			$visites = intval($row['visites']);
 			$popularite = ceil($row['popularite']);
 			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
@@ -140,7 +140,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	include_spip('base/abstract_sql');
 	$login = preg_replace(',^@,','',@$_COOKIE['spip_admin']);
-	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
+	$alang = sql_fetsel(array('lang'), array('spip_auteurs'),
 		array("login=" . _q($login)));
 	if ($alang['lang']) {
 		$l = lang_select($alang['lang']);

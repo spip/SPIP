@@ -82,13 +82,13 @@ function exec_statistiques_svg_dist()
 	
 	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
 
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$result = spip_abstract_select('UNIX_TIMESTAMP(date) AS date_unix, visites', $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
+	$result = sql_select('UNIX_TIMESTAMP(date) AS date_unix, visites', $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
 
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
 		$visites = $row['visites'];
 

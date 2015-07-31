@@ -90,7 +90,7 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 	if (preg_match(',^[a-z]*$,',$type)){
 		$res = spip_query("SELECT id_$type FROM spip_{$jointure} WHERE id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
 		if (!spip_num_rows($res))
-			spip_abstract_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
+			sql_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
 
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
@@ -116,7 +116,7 @@ function rechercher_auteurs($cherche_auteur)
 	$result = spip_query("SELECT id_auteur, nom FROM spip_auteurs");
 	$table_auteurs = array();
 	$table_ids = array();
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$table_auteurs[] = $row["nom"];
 		$table_ids[] = $row["id_auteur"];
 	}

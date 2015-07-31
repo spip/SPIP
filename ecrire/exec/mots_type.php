@@ -38,7 +38,7 @@ function exec_mots_type_dist()
 
 		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-		if ($row = spip_abstract_fetch($result_groupes)) {
+		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);

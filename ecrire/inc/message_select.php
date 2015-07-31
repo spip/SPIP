@@ -32,9 +32,9 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$res =  affiche_tranche_bandeau($requete, "messagerie-24.gif", NULL, NULL, $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
 
-	$result = spip_abstract_select('messages.id_message', $requete['FROM'], $requete['WHERE']);
+	$result = sql_select('messages.id_message', $requete['FROM'], $requete['WHERE']);
 
-	while ($r = spip_abstract_fetch($result)) {
+	while ($r = sql_fetch($result)) {
 		$r = $r['id_message'];
 		$messages_vus[$r]= $r;
 	}
@@ -95,7 +95,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 		$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
 
 		$auteurs = '';
-		while ($row_auteurs = spip_abstract_fetch($result_auteurs)) {
+		while ($row_auteurs = sql_fetch($result_auteurs)) {
 			$id_auteur = $row_auteurs['id_auteur'];
 			$auteurs[] = "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
 		}

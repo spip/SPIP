@@ -125,8 +125,8 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	//
 
 	include_spip('base/abstract_sql');
-	$q = spip_abstract_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", ($type == 'breve' ?  ' id_parent=0 ' : ''), '', "0+titre,titre");
-	while ($r = spip_abstract_fetch($q)) {
+	$q = sql_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", ($type == 'breve' ?  ' id_parent=0 ' : ''), '', "0+titre,titre");
+	while ($r = sql_fetch($q)) {
 		if (autoriser('voir','rubrique',$r['id_rubrique'])){
 			// titre largeur maxi a 50
 			$titre = couper(supprimer_tags(typo(extraire_multi($r['titre']
@@ -167,7 +167,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
        ## la verification est faite a l'arrivee des donnees (Fil)
 
 	if ($id_rubrique) {
-		$titre = spip_abstract_fetch(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$titre = sql_fetch(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$titre = $titre['titre'];
 	} else if ($type == 'auteur')
 		$titre = '&nbsp;';

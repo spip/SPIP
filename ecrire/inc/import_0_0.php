@@ -69,7 +69,7 @@ function inc_import_0_0_dist($f, $request, $gz='fread') {
 		if ($auteurs) {
 			reset ($auteurs);
 			while (list(, $auteur) = each($auteurs)) {
-			  spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($auteur, $id_article)");
+			  sql_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($auteur, $id_article)");
 			}
 		}
 	}
@@ -83,35 +83,35 @@ function inc_import_0_0_dist($f, $request, $gz='fread') {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {
 
-				spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "($id_mot, $article)");
+				sql_insert("spip_mots_articles", "(id_mot, id_article)", "($id_mot, $article)");
 			}
 		}
 		if ($breves) {
 			reset ($breves);
 			while (list(, $breve) = each($breves)) {
 
-				spip_abstract_insert("spip_mots_breves", "(id_mot, id_breve)", "($id_mot, $breve)");
+				sql_insert("spip_mots_breves", "(id_mot, id_breve)", "($id_mot, $breve)");
 			}
 		}
 		if ($forums) {
 			reset ($forums);
 			while (list(, $forum) = each($forums)) {
 
-				spip_abstract_insert("spip_mots_forum", "(id_mot, id_forum)", "($id_mot, $forum)");
+				sql_insert("spip_mots_forum", "(id_mot, id_forum)", "($id_mot, $forum)");
 			}
 		}
 		if ($rubriques) {
 			reset ($rubriques);
 			while (list(, $rubrique) = each($rubriques)) {
 
-				spip_abstract_insert("spip_mots_rubriques", "(id_mot, id_rubrique)", "($id_mot, $id_rubrique)");
+				sql_insert("spip_mots_rubriques", "(id_mot, id_rubrique)", "($id_mot, $id_rubrique)");
 			}
 		}
 		if ($syndics) {
 			reset ($syndics);
 			while (list(, $syndic) = each($syndics)) {
 
-				spip_abstract_insert("spip_mots_syndic", "(id_mot, id_syndic)", "($id_mot, $syndic)");
+				sql_insert("spip_mots_syndic", "(id_mot, id_syndic)", "($id_mot, $syndic)");
 			}
 		}
 	}

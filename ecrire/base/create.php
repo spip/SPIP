@@ -26,9 +26,9 @@ function creer_base($server='') {
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	$fcreate = spip_abstract_serveur('create', $server);
-	$finsert = spip_abstract_serveur('insert', $server);
-	$fupdate = spip_abstract_serveur('update', $server);
+	$fcreate = sql_serveur('create', $server);
+	$finsert = sql_serveur('insert', $server);
+	$fupdate = sql_serveur('update', $server);
 	foreach($tables_principales as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], true);
 
