@@ -80,9 +80,9 @@
 			</B_documents_joints>
 			
 			[(#REM) Petition :
-			La petition ayant une PAGINATION il faut absolument lui passer SELF]
+			La petition ayant une PAGINATION il faut absolument lui passer env]
 			[(#PETITION|?{' '})
-				<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+				<INCLURE{fond=inc-petition}{id_article}{env}>
 			]
 
 			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
