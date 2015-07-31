@@ -121,7 +121,8 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
  */ " ;
 
 	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n?" .'>';
-	ecrire_fichier($phpfile, $code);
+	if (!isset($GLOBALS['var_nocache']) OR !$GLOBALS['var_nocache'])
+		ecrire_fichier($phpfile, $code);
 	return $code;
 }
 
