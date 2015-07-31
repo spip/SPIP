@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_FORUM")) return;
-define("_ECRIRE_INC_FORUM", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // tous les boutons de controle d'un forum
 // nb : les forums prives (privrac ou prive), une fois effaces

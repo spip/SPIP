@@ -11,11 +11,7 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_SITES")) return;
-define("_INC_SITES", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Moderation manuelle des liens
 if (!_DIR_RESTREINT AND $GLOBALS['connect_statut'] == '0minirezo') {

@@ -18,9 +18,9 @@ if ($id && ($connect_statut == "0minirezo")) {
 	$var_f = find_in_path('inc_' . $action . '.php');
 	if ($var_f) 
 	  include($var_f);
-	elseif (is_readable($var_f = (_DIR_INCLUDE . 'inc_' . $action . '.php')))
-	  include($var_f);
-	else spip_log("pas de fichier $var_f");
+	else
+	  include_ecrire(_DIR_INCLUDE . 'inc_' . $action . '.php');
+
 	$var_nom = 'changer_statut_' . $action;
 	if (function_exists($var_nom))
 		$var_nom($id, $statut);

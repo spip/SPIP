@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_FILTRES")) return;
-define("_ECRIRE_INC_FILTRES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Transforme n'importe quel champ en une chaine utilisable
@@ -786,7 +784,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 
 function agenda_affiche($i)
 {
-  include('ecrire/inc_calendrier.php');
+  include_ecrire('inc_calendrier.php');
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);

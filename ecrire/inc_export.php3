@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_EXPORT")) return;
-define("_ECRIRE_INC_EXPORT", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 $GLOBALS['version_archive'] = '1.2';

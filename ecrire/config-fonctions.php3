@@ -13,7 +13,10 @@
 include ("inc.php3");
 
 $var_f = find_in_path("inc_config-fonctions.php");
-include($var_f ? $var_f : (_DIR_INCLUDE . "inc_config-fonctions.php"));
+if ($var_f)
+  include($var_f);
+ else
+   include_ecrire(_DIR_INCLUDE . "inc_config-fonctions.php"));
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');

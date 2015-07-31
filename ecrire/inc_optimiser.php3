@@ -11,11 +11,7 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_OPTIMISER")) return;
-define("_ECRIRE_OPTIMISER", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function optimiser_base() {
 	spip_log ("optimisation de la base");

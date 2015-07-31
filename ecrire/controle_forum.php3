@@ -17,8 +17,7 @@ $nom = "controle_forum";
 $f = find_in_path('inc_' . $nom . '.php');
 if ($f) 
   include($f);
-elseif (file_exists($f = (_DIR_INCLUDE . 'inc_' . $nom . '.php')))
-  include($f);
+else  include_ecrire(_DIR_INCLUDE . 'inc_' . $nom . '.php');
 if (function_exists($nom))
   $nom($page, $debut, $debut_id_forum, $id_rubrique);
 

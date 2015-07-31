@@ -15,9 +15,7 @@
 // Fonctions de spip_image.php3
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_GETDOCUMENT")) return;
-define("_ECRIRE_INC_GETDOCUMENT", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {

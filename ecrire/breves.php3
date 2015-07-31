@@ -20,8 +20,8 @@ $var_f = find_in_path('inc_' . $var_nom . '.php');
 
 if ($var_f) 
   include($var_f);
-elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
-  include($var_f);
+ else
+   include_ecrire(_DIR_INCLUDE . 'inc_' . $var_nom . '.php');
 
 if (function_exists($var_nom))
   $var_nom();

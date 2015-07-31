@@ -11,11 +11,7 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_RSS")) return;
-define("_INC_RSS", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // mais d'abord un tri par date (inverse)
 function trier_par_date($a, $b) {

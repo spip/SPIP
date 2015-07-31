@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_SUIVI_REVISIONS")) return;
-define("_ECRIRE_INC_SUIVI_REVISIONS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_lab.php");
 include_spip("ecrire.php");

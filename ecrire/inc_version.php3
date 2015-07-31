@@ -11,8 +11,6 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
@@ -41,15 +39,19 @@ $included_files = array();
 
 function include_local($file) {
 	if (@$GLOBALS['included_files'][$file]++) return;
-	include($file);
+	if (is_readable($file))
+	  include($file);
+	else spip_log($file . " illisble");
 }
 
 function include_ecrire($file) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$file = _DIR_INCLUDE . $file;
-	if (@$GLOBALS['included_files'][$file]++) return;
-	include($file);
+	if ($GLOBALS['included_files'][$file]++) return;
+	if (is_readable($file))
+	  include($file);
+	else spip_log($file . " illisble");
 }
 
 

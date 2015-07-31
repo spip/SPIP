@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_INDEX")) return;
-define("_ECRIRE_INC_INDEX", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction

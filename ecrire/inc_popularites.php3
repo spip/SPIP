@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_POPULARITES")) return;
-define("_ECRIRE_INC_POPULARITES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // Popularite, modele logarithmique

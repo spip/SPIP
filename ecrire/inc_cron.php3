@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_CRON")) return;
-define("_ECRIRE_INC_CRON", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // --------------------------
 // Gestion des taches de fond

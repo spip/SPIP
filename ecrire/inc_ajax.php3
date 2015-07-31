@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_AJAX")) return;
-define("_ECRIRE_INC_AJAX", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function nettoyer_ajax() {
 	$query = "DELETE FROM spip_ajax_fonc  WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)";

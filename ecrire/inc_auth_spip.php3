@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_AUTH_SPIP")) return;
-define("_ECRIRE_INC_AUTH_SPIP", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class Auth_spip {
 	var $nom, $login, $email, $md5pass, $md5next, $alea_futur, $statut;

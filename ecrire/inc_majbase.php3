@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_MAJBASE")) return;
-define("_ECRIRE_INC_MAJBASE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function maj_version ($version, $test = true) {
 	if ($test) {

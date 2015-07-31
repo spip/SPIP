@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_ABSTRACT_SQL")) return;
-define("_INC_ABSTRACT_SQL", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Cette fonction est systematiquement appelee par les squelettes
 // pour constuire une requete SQL de type "lecture" (SELECT) a partir

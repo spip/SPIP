@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_CALENDRIER")) return;
-define("_ECRIRE_INC_CALENDRIER", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3"); // inclut inc_layer
 include_ecrire("inc_texte.php3"); // inclut inc_filtre

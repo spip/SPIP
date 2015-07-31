@@ -84,9 +84,7 @@ $GLOBALS['champs_extra_proposes'] = Array (
 ////////////////////////////////////////////////////////////////////////////////////
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_EXTRA")) return;
-define("_ECRIRE_INC_EXTRA", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
 function extra_saisie($extra, $type, $ensemble='') {

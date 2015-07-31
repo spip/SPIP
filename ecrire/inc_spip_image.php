@@ -16,9 +16,7 @@
 //  Les globales sont les variables CGI.
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_SPIP_IMAGE")) return;
-define("_ECRIRE_INC_SPIP_IMAGE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // faudrait ne charger qu'a bon escient
 

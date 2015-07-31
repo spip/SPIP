@@ -19,9 +19,7 @@
  http://www.loc.gov/standards/iso639-2/langcodes.html
 */
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_LANG_LISTE")) return;
-define("_ECRIRE_INC_LANG_LISTE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['codes_langues'] = array(
 	'aa' => "Afar",

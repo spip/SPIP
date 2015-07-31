@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_DATE")) return;
-define("_ECRIRE_INC_DATE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function my_sel($num, $tex, $comp) {
   return "<option value='$num'" . (($num != $comp) ? '' : " selected='selected'") .

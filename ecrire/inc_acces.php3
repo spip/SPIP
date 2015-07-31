@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_ACCES")) return;
-define("_ECRIRE_INC_ACCES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function creer_pass_aleatoire($longueur = 8, $sel = "") {

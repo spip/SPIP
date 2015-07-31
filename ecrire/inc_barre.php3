@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_BARRE")) return;
-define("_INC_BARRE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function afficher_barre($champ, $forum=false) {
 	global $barre_typo;

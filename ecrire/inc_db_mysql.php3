@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_DB_MYSQL")) return;
-define("_ECRIRE_INC_DB_MYSQL", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // Appel de requetes SQL

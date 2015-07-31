@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_MATH")) return;
-define("_ECRIRE_INC_MATH", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // Gestion du raccourci <math>...</math> en client-serveur

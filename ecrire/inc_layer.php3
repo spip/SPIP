@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_LAYER")) return;
-define("_INC_LAYER", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
  include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 
