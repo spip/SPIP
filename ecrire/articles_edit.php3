@@ -266,6 +266,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
 	global $couleur_claire, $spip_lang_left;
+	global $browser_name;
 
 
 	$i++;
@@ -279,6 +280,7 @@ function enfant($leparent){
 		$lang_rub = $row['lang'];
 		$langue_choisie_rub = $row['langue_choisie'];
 		$style = "";
+		$espace = "";
 
 		// si l'article est publie il faut etre admin pour avoir le menu
 		// sinon le menu est present en entier (proposer un article)
@@ -288,9 +290,13 @@ function enfant($leparent){
 			$rubrique_acceptable = false;
 		}
 
-		$style .= "padding-left: 16px; ";
-		$style .= "margin-left: ".(($i-1)*16)."px;";
 
+		if (eregi("mozilla", $browser_name)) {
+			$style .= "padding-left: 16px; ";
+			$style .= "margin-left: ".(($i-1)*16)."px;";
+		} else {
+			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+		}
 		switch ($i) {
 		case 1:
 			$espace= "";
@@ -324,7 +330,7 @@ function enfant($leparent){
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
 			$titre = couper($titre." ", 50); // largeur maxi
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
+			echo "<option".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."</option>\n";
 		}
 		$premier = 0;
 		enfant($my_rubrique);

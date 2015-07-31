@@ -35,6 +35,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
 	global $couleur_claire, $spip_lang_left;
+	global $browser_name;
 
 
 	$i++;
@@ -48,6 +49,7 @@ function enfant($leparent){
 		$lang_rub = $row['lang'];
 		$langue_choisie_rub = $row['langue_choisie'];
 		$style = "";
+		$espace = "";
 
 		// si l'article est publie il faut etre admin pour avoir le menu
 		// sinon le menu est present en entier (proposer un article)
@@ -57,8 +59,12 @@ function enfant($leparent){
 			$rubrique_acceptable = false;
 		}
 
-		$style .= "padding-left: 16px; ";
-		$style .= "margin-left: ".(($i-1)*16)."px;";
+		if (eregi("mozilla", $browser_name)) {
+			$style .= "padding-left: 16px; ";
+			$style .= "margin-left: ".(($i-1)*16)."px;";
+		} else {
+			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+		}
 
 		switch ($i) {
 		case 1:

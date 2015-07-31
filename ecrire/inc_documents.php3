@@ -376,9 +376,9 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
-	if ($largeur_vignette > 110) {
-		$rapport = 110.0 / $largeur_vignette;
-		$largeur_vignette = 110;
+	if ($largeur_vignette > 120) {
+		$rapport = 120.0 / $largeur_vignette;
+		$largeur_vignette = 120;
 		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
 	}
 	if ($hauteur_vignette > 110) {
@@ -489,7 +489,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<a name='portfolio'></a>";
 		echo "<div>&nbsp;</div>";
 		echo "<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>PORTFOLIO</b></div>";
-		echo "<table width='100%' cellspacing='0' cellpadding='5'>";
+		echo "<table width='100%' cellspacing='0' cellpadding='3'>";
 		reset($images_liees);
 		while (list(, $id_document) = each($images_liees)) {
 			

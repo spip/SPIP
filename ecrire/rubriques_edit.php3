@@ -19,6 +19,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $i;
 	global $couleur_claire, $spip_lang_left;
+	global $browser_name;
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -30,11 +31,18 @@ function enfant($leparent){
 		$statut_rubrique = $row['statut'];
 		$lang_rub = $row['lang'];
 		$langue_choisie_rub = $row['langue_choisie'];
+		$style = "";
+		$espace = "";
 
 		if ($my_rubrique != $id_rubrique){
 
-			$style .= "padding-left: 16px; ";
-			$style .= "margin-left: ".($i*16)."px;";
+			if (eregi("mozilla", $browser_name)) {
+				$style .= "padding-$spip_lang_left: 16px; ";
+				$style .= "margin-$spip_lang_left: ".($i*16)."px;";
+			} else {
+				for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+
 			if ($i > 3) $style .= "color: #666666;";
 			if ($i > 4) $style .= "font-style: italic;";
 			if ($i < 3) $style .= "font-weight:bold; ";
@@ -51,7 +59,7 @@ function enfant($leparent){
 
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">".supprimer_tags($titre)."\n";
+				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
 			}
 			enfant($my_rubrique);
 		}
