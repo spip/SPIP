@@ -137,8 +137,6 @@ function balise_URL_PAGE_dist($p) {
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$p->code .= ','.$args;
 
 	if ($p->id_boucle
 	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
@@ -152,11 +150,19 @@ function balise_URL_PAGE_dist($p) {
 				$p->code = $f('page', $p->code, $s);
 				return $p;
 			}
-			$p->code .=  ", 'connect=" .  addslashes($s) . "'";
+			$connect = addslashes($s);
 		}
 	}
-
-	$p->code = 'generer_url_public(' . $p->code .')';
+	if ($args != "''" && $args!==NULL) {
+		if (defined($connect)) {
+			$args .= " . '&connect=$connect'";
+		} // sinon $args reste tel quel
+	} else { // si pas d'arguments
+		if (defined($connect)) {
+			$args = ($connect ? "'connect=$connect'" : "''");
+		}
+	}
+	$p->code = 'generer_url_public(' . $p->code . ", $args)";
 	#$p->interdire_scripts = true;
 	return $p;
 }
