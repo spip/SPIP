@@ -17,7 +17,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 // {racine}
 // http://www.spip.net/@racine
 function critere_racine_dist($idb, &$boucles, $crit) {
@@ -27,8 +26,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 	if ($not)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
 
-	$boucle->where[] = $boucle->id_table.".id_parent=0";
-
+	$boucle->where[]= array('=', "'$boucle->id_table." . "id_parent'", 0);
 }
 
 // {exclus}
@@ -42,8 +40,8 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 	if ($not OR !$id)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
 
-	$arg = calculer_argument_precedent($idb,$id, $boucles);
-	$boucle->where[] = $boucle->id_table . '.' . $id."!='\"." . $arg . ".\"'";
+	$arg = kwote(calculer_argument_precedent($idb, $id, $boucles));
+	$boucle->where[]= array('!=', "'$boucle->id_table." . "$id'", $arg);
 }
 
 // {doublons} ou {unique}
@@ -54,8 +52,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	if (!$boucle->primary)
 		erreur_squelette(_L('doublons sur une table sans index'), $param);
 	$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	$boucle->where[] = '" .' .
-	  "\ncalcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
+	$boucle->where[]= "calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
 	  '"0".$doublons[' . 
 	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
@@ -65,7 +62,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  ($nom == "''" ? '' : " . $nom") .
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
-	  "') . \n\"";
+	  "')";
 # la ligne suivante avait l'intention d'éviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
@@ -119,8 +116,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$boucle->select[]= '$rech_select as points';
 
 	// et la recherche trouve
-	$boucle->where[] = '$rech_where';
-
+	$boucle->where[]= '$rech_where';
 }
 
 // {traduction}
@@ -129,27 +125,26 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 //    OR id_article=id_article(precedent)
 function critere_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->where[] = "((".$boucle->id_table.".id_trad > 0 AND "
-			. $boucle->id_table.".id_trad ='\"."
-			. calculer_argument_precedent($idb, 'id_trad',
-				$boucles)
-			. ".\"')
-		OR
-			(" . $boucle->id_table.".".$boucle->primary." ='\"."
-			. calculer_argument_precedent($idb, $boucle->primary,
-				$boucles)
-			. ".\"'))";
+	$prim = $boucle->primary;
+	$table = $boucle->id_table;
+	$arg = calculer_argument_precedent($idb, 'id_trad', $boucles);
+	$dprim = calculer_argument_precedent($idb, $prim, $boucles);
+	$boucle->where[]= array('AND',
+		array('>', "'$table.". "id_trad'", 0),
+		array('OR',
+			array('=', "'$table." . "id_trad'", kwote($arg)),
+			array('=', "'$table.$prim'", kwote($dprim))));
 }
 
 // {origine_traduction}
 // http://www.spip.net/@origine_traduction
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$where = $boucle->id_table.".id_trad = "
-	  . $boucle->id_table . '.' . $boucle->primary;
-	if ($crit->not)
-		$where = "NOT($where)";
-	$boucle->where[] = $where;
+	$prim = $boucle->primary;
+	$table = $boucle->id_table;
+
+	$c= array('=', "'$table." . "id_trad'", "'$table.$prim'");
+	$boucle->where[]= ($crit->not ? array('NOT', $c) : $c);
 }
 
 
@@ -157,18 +152,16 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@meme_parent
 function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
+	$arg = kwote(calculer_argument_precedent($idb, 'id_parent', $boucles));
+	$mparent = $boucle->id_table . '.id_parent';
+
 	if ($boucle->type_requete == 'rubriques') {
-			$boucle->where[] = $boucle->id_table.".id_parent='\"."
-			. calculer_argument_precedent($idb, 'id_parent',
-			$boucles)
-			. ".\"'";
-		} else if ($boucle->type_requete == 'forums') {
-			$boucle->where[] = $boucle->id_table.".id_parent='\"."
-			. calculer_argument_precedent($idb, 'id_parent',
-			$boucles)
-			. ".\"'";
-			$boucle->where[] = $boucle->id_table.".id_parent > 0";
-			$boucle->plat = true;
+		$boucle->where[]= array('=', "'$mparent'", $arg);
+
+	} else if ($boucle->type_requete == 'forums') {
+			$boucle->where[]= array('=', "'$mparent'", $arg);
+			$boucle->where[]= array('>', "'$mparent'", 0);
+			$boucle->plat =  true;
 	}
 }
 
@@ -177,26 +170,24 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 function critere_branche_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
-	$c = "calcul_mysql_in('".$boucle->id_table.".id_rubrique',
-		calcul_branche(" . calculer_argument_precedent($idb,
-		'id_rubrique', $boucles) . "), '')";
-	if (!$crit->cond)
-			$where = "\". $c .\"" ;
-	else
-			$where = "\".("
-			. calculer_argument_precedent($idb, 'id_rubrique',
-			$boucles)."? $c : 1).\"";
 
+	$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
+
+	$c = "calcul_mysql_in('" .
+	  $boucle->id_table .
+	  ".id_rubrique', calcul_branche($arg), '')";
+	if ($crit->cond) $c = "($arg ? $c : 1)";
+			
 	if ($not)
-			$boucle->where[] = "NOT($where)";
+		$boucle->where[]= array("NOT", $c);
 	else
-			$boucle->where[] = $where;
+		$boucle->where[]= $c;
 }
 
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 function critere_par_dist($idb, &$boucles, $crit) {
-  critere_parinverse($idb, $boucles, $crit, '') ;
+	critere_parinverse($idb, $boucles, $crit, '') ;
 }
 
 function critere_parinverse($idb, &$boucles, $crit, $sens) {
@@ -261,9 +252,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
-			$order = "'".$boucle->id_table."."
-			.$GLOBALS['table_date'][$boucle->type_requete]
-			."'";
+			$m = $GLOBALS['table_date'][$boucle->type_requete];
+			$order = "'".$boucle->id_table ."." . $m . "'";
 		}
 		// par champ. Verifier qu'ils sont presents.
 		else if (ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) {
@@ -378,24 +368,29 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 
 	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
+
 	if ($type == 'jour')
-	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m%d') = '\" .  $annee . $mois . $jour .\"'";
+		$boucle->where[]= array('=', "'DATE_FORMAT($date, \'%Y%m%d\')'",
+					("$annee . $mois . $jour"));
 	elseif ($type == 'mois')
-	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m') = '\" .  $annee . $mois .\"'";
+		$boucle->where[]= array('=', "'DATE_FORMAT($date, \'%Y%m\')'",
+					("$annee . $mois"));
 	elseif ($type == 'semaine')
-	  $boucle->where[] = 
-	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . 
-		date_debut_semaine($annee, $mois, $jour) . \"' AND
-	  DATE_FORMAT($date, '%Y%m%d') <= '\" .
-		date_fin_semaine($annee, $mois, $jour) . \"'";
+		$boucle->where[]= array('AND', 
+					array('>=',
+					     "'DATE_FORMAT($date, \'%Y%m%d\')'", 
+					      ("date_debut_semaine($annee, $mois, $jour)")),
+					array('<=',
+					      "'DATE_FORMAT($date, \'%Y%m%d\')'",
+					      ("date_fin_semaine($annee, $mois, $jour)")));
 	elseif (count($crit->param) > 2) 
-	  $boucle->where[] = 
-	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . $annee . $mois . $jour .\"' AND
-	  DATE_FORMAT($date, '%Y%m%d') <= '\" . $annee2 . $mois2 . $jour2 .\"'";
+		$boucle->where[]= array('AND',
+					array('>=',
+					      "'DATE_FORMAT($date, \'%Y%m%d\')'",
+					      ("$annee . $mois . $jour")),
+					array('<=', "'DATE_FORMAT($date, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
 	// sinon on prend tout
 }
-
-
 
 function calculer_critere_parties($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -496,29 +491,26 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	// inserer la negation (cf !...)
 	if (strtoupper($op) == 'IN') {
 	  
-	      $where = "$ct IN ('\" . " . join(" .\n\"','\" . ", $val) . " . \"')";
-	      if ($crit->not) {
-		$where = "NOT ($where)";
-	      } else {
+		$kval = "'(\'' . " . join(" .\n\"','\" . ", $val) . " . '\')'";
+		$where = array("IN", "\"$ct\"", $kval);
+		if ($crit->not) {
+			$where = array("NOT", $where);
+		} else {
 			$boucles[$idb]->default_order[] = "'cpt'";
-			$boucles[$idb]->select[]= "FIND_IN_SET($ct, '\" . " . 
-			  join(" .\n\",\" . ", $val) . ' . "\') AS cpt';
-	      }
+			$boucles[$idb]->select[]=  "FIND_IN_SET($ct, '\" ." .
+			  join(" .','.", $val) . " .\"') AS cpt";
+		}
 	} else {
-		$val = ereg("^'[^']*'$", $val[0]) ? $val[0] :
-		  ("'\" . " . $val[0] . ' . "\'');
-		$where = "$ct $op $val";
-		if ($crit->not) $where = "NOT ($where)";
+		$where = array($op, "'$ct'", $val[0]);
+		if ($crit->not) $where = array("NOT", $where);
 	}
-
 	 // inserer la condition (cf {lang?}) et c'est fini
 
-	$boucles[$idb]->where[] = 
-	  (!$crit->cond) ?
-	  $where :
-	 ("\".(" . 
-	  calculer_argument_precedent($idb, $col, $boucles) .
-	  "? (\"$where\") : '').\"");
+	$boucles[$idb]->where[]= (!$crit->cond ? $where :
+	  array('?',
+		calculer_argument_precedent($idb, $col, $boucles),
+		$where,
+		"''"));
 }
 
 function calculer_critere_infixe($idb, &$boucles, $crit) {
@@ -751,7 +743,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    $col = $val = $crit->op;
 	    // Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 	    if ($val == 'lang')
-	      $val = array('$GLOBALS[\'spip_lang\']');
+	      $val = array(kwote('$GLOBALS[\'spip_lang\']'));
 	    else {
 	    // Si id_parent, comparer l'id_parent avec l'id_objet
 	    // de la boucle superieure.... faudrait verifier qu'il existe
@@ -762,7 +754,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	      // de la boucle superieure
 	      else if ($val == 'id_enfant')
 		$val = 'id_parent';
-	      $val = array("addslashes(" .calculer_argument_precedent($idb, $val, $boucles) .")");
+	      $val = array(kwote(calculer_argument_precedent($idb, $val, $boucles)));
 	    }
 	  } else {
 	    // comparaison explicite
@@ -774,11 +766,11 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    $col = $col[0]->texte;
 
 	    $val = array();
+	    $desc = array('id_mere' => $idb);
+	    $parent = $boucles[$idb]->id_parent;
 	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
-	      $v = calculer_liste($p, array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
-	      $val[] = (preg_match(",^(\n//[^\n]*\n)?'(.*)'$,", $v, $r) ? 
-			($r[1] . "'" . addslashes($r[2]) . "'") :
-			("addslashes(" . $v . ")"));
+	      $a = calculer_liste($p, $desc, $boucles, $parent);
+	      $val[] = $op =='IN' ? $a : kwote($a);
 	    }
 	}
 
@@ -931,21 +923,4 @@ function calculer_param_date($date_compare, $date_orig) {
 	$date_orig .
 	")))";
 }
-
-// fonction provisoirement inutilisee
-// reperer des repetitions comme {id_mot=1}{id_mot=2}
-//  pour creer une clause HAVING
-/*
-function calculer_critere_repete(&$boucle, $col, $val)
-{
-	foreach ($boucle->where as $k => $v)  {
-        	if (ereg(" *$col *(=|IN) *\(?'(.*)(\".*)[')]$",$v, $m)) {
-                  $boucle->where[$k] = "$col IN ('$m[2] \"','\" . $val . $m[3])";
-                  // esperons que c'est le meme !
-                  $boucle->having++;
-		  return true;}
-              }
-	return false;
-}
-*/
 ?>
