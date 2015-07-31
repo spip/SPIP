@@ -227,17 +227,8 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 	ecrire_acces();
 
 	// .. mettre a jour les sessions de cet auteur
-	$sauve = $GLOBALS['visiteur_session'];
 	include_spip('inc/session');
-	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
-		$GLOBALS['visiteur_session'] = array();
-		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
-		foreach (array('nom', 'login', 'email', 'statut', 'bio', 'pgp', 'nom_site', 'url_site') AS $var)
-			if (isset($auteur[$var]))
-				$GLOBALS['visiteur_session'][$var] = $auteur[$var];
-		ecrire_fichier_session($session, $GLOBALS['visiteur_session']);
-	}
-	$GLOBALS['visiteur_session'] = $sauve;
+	actualiser_sessions($auteur);
 
 	return array($id_auteur, $echec);
 }
