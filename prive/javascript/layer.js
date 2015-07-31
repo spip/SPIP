@@ -135,16 +135,24 @@ jQuery.fn.depliant = function(cible) {
 		})
 
 		// gerer le triangle clicable
-		.find("a.titremancre")
+		/*.find("a.titremancre")
 			.click(function(){
 				if (me.is('.togglewait') || t) return false;
 				me
 				.toggleother(cible);
-			})
+				return false;
+			})*/
 		.end();
 
 	}
 	return this;
+}
+jQuery.fn.depliant_clicancre = function(cible) {
+		var me = this.parent();
+		// gerer le triangle clicable
+		if (me.is('.togglewait')) return false;
+		me.toggleother(cible);
+		return false;
 }
 
 
