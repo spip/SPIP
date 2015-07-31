@@ -304,16 +304,16 @@ function calcul_exposer ($id, $type, $reference) {
 	if ($reference<>$ref_precedente) {
 		$ref_precedente = $reference;
 		$exposer = array();
-		foreach ($reference as $element=>$id) {
-			if ((strpos($element, "id_") === 0) AND $id) {
+		foreach ($reference as $element=>$v) {
+			if ((strpos($element, "id_") === 0) AND $v) {
 				$x = substr($element, 3);
 				if ($x == 'secteur') $x = 'rubrique';
 				$desc = trouver_table(table_objet($x));
 				if ($desc) {
 					$table = $desc['table'];
-					$exposer[$element][$id] = true;
+					$exposer[$element][$v] = true;
 					if (isset($desc['field']['id_rubrique'])) {
-						$row = sql_fetsel('id_rubrique', $table, ("$element=" . _q($id)));
+						$row = sql_fetsel('id_rubrique', $table, ("$element=" . _q($v)));
 						$hierarchie = calculer_hierarchie($row['id_rubrique']);
 						foreach (split(',',$hierarchie) as $id_rubrique)
 							$exposer['id_rubrique'][$id_rubrique] = true;
