@@ -103,7 +103,8 @@ function f_boite_infos($flux) {
 
 
 /**
- * pipeline recuperer_fond
+ * Utilisation du pipeline recuperer_fond dans le prive
+ * 
  * Branchement automatise de affiche_gauche, affiche_droite, affiche_milieu
  * pour assurer la compat avec les versions precedentes des exec en php
  * Branche de affiche_objet
@@ -112,8 +113,8 @@ function f_boite_infos($flux) {
  * mais la compat multi vertions pourra etre assuree
  * par une insertion au bon endroit quand le contenu de depart n'est pas vide
  * 
- * @param array $flux
- * @return array
+ * @param array $flux Données du pipeline
+ * @return array Données du pipeline
  */
 function f_afficher_blocs_ecrire($flux) {
 	static $o=array();
@@ -140,15 +141,16 @@ function f_afficher_blocs_ecrire($flux) {
 			if ($o[$exec]
 				AND $objet = $o[$exec]['type']
 			  AND $o[$exec]['edition'] == false
+			  AND isset($flux['args']['contexte'][$o[$exec]['id_table_objet']])
 			  AND $id = intval($flux['args']['contexte'][$o[$exec]['id_table_objet']])){
 				// inserer le formulaire de traduction
 				$flux['data']['texte'] = str_replace("<!--affiche_milieu-->",recuperer_fond('prive/objets/editer/traductions',array('objet'=>$objet,'id_objet'=>$id))."<!--affiche_milieu-->",$flux['data']['texte']);
 				$flux['data']['texte'] = pipeline('afficher_fiche_objet',array(
-																						'args'=>array(
-																							'contexte'=>$flux['args']['contexte'],
-																							'type'=>$objet,
-																							'id'=>$id),
-																						'data'=>$flux['data']['texte']));
+					'args'=>array(
+						'contexte'=>$flux['args']['contexte'],
+						'type'=>$objet,
+						'id'=>$id),
+					'data'=>$flux['data']['texte']));
 			}
 			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
