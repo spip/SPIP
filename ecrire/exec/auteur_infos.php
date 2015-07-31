@@ -72,7 +72,7 @@ function exec_auteur_infos_dist()
 
 	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$iconifier = $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+		$iconifier = $iconifier('id_auteur', $id_auteur, 'auteur_infos','iconifier');
 	} else $iconifier ='';
 
 	creer_colonne_droite();
