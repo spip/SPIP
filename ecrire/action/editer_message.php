@@ -46,9 +46,9 @@ function action_editer_message_dist() {
 
 // http://doc.spip.org/@action_editer_message_post_supprimer
 function action_editer_message_post_supprimer($id_message) {
-	spip_query("DELETE FROM spip_messages WHERE id_message=$id_message");
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message");
-	spip_query("DELETE FROM spip_forum WHERE id_message=id_message");
+	spip_query("DELETE FROM spip_messages WHERE id_message="._q($id_message));
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message="._q($id_message));
+	spip_query("DELETE FROM spip_forum WHERE id_message="._q($id_message));
 }
 
 // http://doc.spip.org/@action_editer_message_post_vu
