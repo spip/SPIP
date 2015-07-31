@@ -266,65 +266,6 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
-
-// Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
-// http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.png', $af = true, $inline=true) {
-
-	$en_ligne = $message = '';
-	switch ($type) {
-	case 'article':
-			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
-				$n = sql_fetsel("id_article", "spip_articles", "id_article=$id AND date<=NOW()");
-				if (!$n) $statut = 'prop';
-			}
-			if ($statut == 'publie')
-				$en_ligne = 'calcul';
-			else if ($statut == 'prop')
-				$en_ligne = 'preview';
-			break;
-	case 'rubrique':
-			if ($id > 0)
-				if ($statut == 'publie')
-					$en_ligne = 'calcul';
-				else
-					$en_ligne = 'preview';
-			break;
-	case 'breve':
-	case 'site':
-			if ($statut == 'publie')
-				$en_ligne = 'calcul';
-			else if ($statut == 'prop')
-				$en_ligne = 'preview';
-			break;
-	case 'mot':
-			$en_ligne = 'calcul';
-			break;
-	case 'auteur':
-			$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
-			if ($n) $en_ligne = 'calcul';
-			else $en_ligne = 'preview';
-			break;
-	default: return '';
-	}
-
-	if ($en_ligne == 'calcul')
-		$message = _T('icone_voir_en_ligne');
-	else if ($en_ligne == 'preview'
-	AND autoriser('previsualiser'))
-		$message = _T('previsualiser');
-	else
-		return '';
-
-	$h = generer_url_action('redirect', "type=$type&id=$id&var_mode=$en_ligne");
-
-	return $inline  
-	  ? icone_inline($message, $h, $image, "", $GLOBALS['spip_lang_left'])
-	: icone_horizontale($message, $h, $image, "",$af);
-
-}
-
-
 // http://doc.spip.org/@formulaire_recherche
 function formulaire_recherche($page, $complement=""){
 	$recherche = _request('recherche');

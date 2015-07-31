@@ -19,5 +19,17 @@
 
 	Bouton voir en ligne
 
-][(#VAL{auteur}|voir_en_ligne{#ID_AUTEUR,#STATUT,racine-24.gif,0,0})]
+]<BOUCLE_publie(AUTEURS){id_auteur}>
+	[(#VAL{redirect}
+		|generer_url_action{type=auteur&id=#ID_AUTEUR}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,auteur,#ID_AUTEUR,'',#ARRAY{statut,''}})
+		[(#VAL{redirect}
+			|generer_url_action{type=auteur&id=#ID_AUTEUR}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
 </BOUCLE_auteur>
