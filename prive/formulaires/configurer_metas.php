@@ -12,33 +12,33 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_remplir_charger_dist($form)
+function formulaires_configurer_metas_charger_dist($form)
 {
 	$f = charger_fonction('charger', "formulaires/$form", true);
 	if ($f)
 		return $f($form);
 	else {
-		$infos = formulaires_remplir_infos($form);
+		$infos = formulaires_configurer_metas_infos($form);
 		if (!is_array($infos)) return $infos;
 		return $GLOBALS[$infos['meta']];
 	}
 }
 
-function formulaires_remplir_verifier_dist($form)
+function formulaires_configurer_metas_verifier_dist($form)
 {
 	$f = charger_fonction('verifier', "formulaires/$form", true);
 	return $f ? $f($form) : array();
 }
 
-function formulaires_remplir_traiter_dist($form)
+function formulaires_configurer_metas_traiter_dist($form)
 {
 	$f = charger_fonction('traiter', "formulaires/$form", true);
 	if ($f)
 		return $f($form);
 	else {
-		$infos = formulaires_remplir_infos($form);
+		$infos = formulaires_configurer_metas_infos($form);
 		if (!is_array($infos)) return $infos; // fait ci-dessus en fait
-		$vars = formulaires_remplir_recense($infos['path'], PREG_PATTERN_ORDER);
+		$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
 		$meta = $infos['meta'];
 		foreach (array_unique($vars[2]) as $k) {
 			$v = _request($k);
@@ -55,7 +55,7 @@ define('_EXTRAIRE_SAISIES',
 
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
-function formulaires_remplir_recense($form, $opt='')
+function formulaires_configurer_metas_recense($form, $opt='')
 {
 	if (!$opt) $opt = PREG_SET_ORDER;
 	$f = file_get_contents($form);
@@ -68,7 +68,7 @@ define('_EXTRAIRE_PLUGIN', '@(?:' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([
 
 // Recuperer la version compilee de plugin.xml et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.
-function formulaires_remplir_infos($form){
+function formulaires_configurer_metas_infos($form){
 
 	$path = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
 	if (!$path) return ''; // cas traite en amont normalement.
