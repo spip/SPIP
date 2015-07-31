@@ -71,7 +71,9 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				: $lvm_directory;
 			if ($flag_utf8_decode
 				&& (($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
-				|| ($kw_referer_host == "AOL")))
+				|| ($kw_referer_host == "AOL")
+				|| ($kw_referer_host == "MSN")
+				))
 				$keywords = utf8_decode($keywords);
 		}
 	}
