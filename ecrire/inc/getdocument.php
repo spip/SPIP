@@ -426,11 +426,12 @@ function traite_svg($file)
 		$new = trim(safehtml($texte));
 		// petit bug safehtml
 		if (substr($new,0,2) == ']>') $new = ltrim(substr($new,2));
-		if ($new != $texte) ecrire_fichier($file, $new);
+		if ($new != $texte) ecrire_fichier($file, $texte = $new);
+		
 	}
 
 	$width = $height = 150;
-	if (preg_match(',<svg[^>]+>,', $new, $s)) {
+	if (preg_match(',<svg[^>]+>,', $texte, $s)) {
 		$s = $s[0];
 		if (preg_match(',\WviewBox\s*=\s*.\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+),i', $s, $r)){
 			$width = $r[3];
