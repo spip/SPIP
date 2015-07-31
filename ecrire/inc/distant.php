@@ -239,6 +239,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 // Certaines decompressions gz sont subtiles
 // cf. http://fr2.php.net/manual/fr/function.gzinflate.php#77336
 // (cas de http://files.spip.org/spip-zone/paquets.xml.gz qui ne pouvait etre recupere)
+// http://doc.spip.org/@spip_gzinflate_body
 function spip_gzinflate_body($gzData){
 	// return gzinflate(substr($gzData,10));
     if(substr($gzData,0,3)=="\x1f\x8b\x08"){

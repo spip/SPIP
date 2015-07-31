@@ -191,6 +191,7 @@ function gen_liste_rubriques() {
 // Cette fonction devrait s'integrer dans base/abstract, 
 // car en fait elle palie l'absence de  requete imbriquee dans certains SQL
 
+// http://doc.spip.org/@gen_sql_in
 function gen_sql_in($select, $from = array(), $where = array(),
 		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
 {
