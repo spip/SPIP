@@ -27,7 +27,7 @@ class Auth_ldap {
 
 		// Attributs testes pour egalite avec le login
 		$atts = array('uid', 'login', 'userid', 'cn', 'sn');
-		$login_search = ereg_replace("[^-._[:space:][:alnum:]]", "", $login); // securite
+		$login_search = ereg_replace("[^-@._[:space:][:alnum:]]", "", $login); // securite
 
 		// Tenter une recherche pour essayer de retrouver le DN
 		reset($atts);
@@ -80,7 +80,17 @@ class Auth_ldap {
 
 		// Lire les infos sur l'auteur depuis LDAP
 		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+		
+		// Si l'utilisateur ne peut lire ses infos, se reconnecter avec le compte principal
+		if (!$result) {
+			if (spip_connect_ldap())
+				$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+			else
+				return false;
+		}
 		if (!$result) return false;
+
+		// Recuperer les donnees de l'auteur
 		$info = @ldap_get_entries($ldap_link, $result);
 		if (!is_array($info)) return false;
 		for ($i = 0; $i < $info["count"]; $i++) {
