@@ -152,7 +152,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script|style)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
