@@ -170,7 +170,7 @@ function upgrade_test() {
 	sql_drop_table("spip_test", true);
 	sql_create("spip_test", array('a' => 'int'));
 	sql_alter("TABLE spip_test ADD b INT");
-	sql_insertq('spip_test', array('b' => 1), array('b' => 'int'));
+	sql_insertq('spip_test', array('b' => 1), array('field'=>array('b' => 'int')));
 	$result = sql_select('b', "spip_test");
 	// ne pas garder le resultat de la requete sinon sqlite3 
 	// ne peut pas supprimer la table spip_test lors du sql_alter qui suit
