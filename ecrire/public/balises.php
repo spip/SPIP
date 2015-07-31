@@ -1315,30 +1315,26 @@ function balise_AIDER_dist($p) {
 	return $p;
 }
 
-// creer le contexte de traitement des formulaires dynamiques en charger/valider/modifier
-// et les hidden de l'url d'action
+// Insertion du contexte des formulaires charger/verifier/traiter
+// avec les hidden de l'url d'action
 // http://doc.spip.org/@balise_ACTION_FORMULAIRE
 function balise_ACTION_FORMULAIRE($p){
-	$_url = interprete_argument_balise(1,$p);
-	if (!$_form = interprete_argument_balise(2,$p)){
-		$f = $p->descr['sourcefile'];
-		$f = basename($f, '.'  . _EXTENSION_SQUELETTES);
-		$_form = "'".addslashes($f)."'";
-	}
-	$p->code = "";
+	if (!$_url = interprete_argument_balise(1,$p))
+		$_url = "@\$Pile[0]['action']";
+	if (!$_form = interprete_argument_balise(2,$p))
+		$_form = "@\$Pile[0]['form']";
 
-	if (strlen($_url))
-		$p->code .= " . (form_hidden($_url))";
-	if (strlen($_form))
-		$p->code .=
-		// envoyer le nom du formulaire que l'on traite
-		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
-		// transmettre les eventuels args de la balise formulaire
-		. ". '<input type=\'hidden\' name=\'formulaire_action_args\' value=\'' . @\$Pile[0]['formulaire_args']. '\' />'"
-		. ". (@\$Pile[0]['_hidden']?@\$Pile[0]['_hidden']:'')";
+	// envoyer le nom du formulaire que l'on traite
+	// transmettre les eventuels args de la balise formulaire
+	$p->code = "	'<div>' .
+	form_hidden($_url) .
+	'<input name=\'formulaire_action\' type=\'hidden\'
+		value=\'' . $_form . '\' />' .
+	'<input name=\'formulaire_action_args\' type=\'hidden\'
+		value=\'' . @\$Pile[0]['formulaire_args']. '\' />' .
+	(@\$Pile[0]['_hidden']?@\$Pile[0]['_hidden']:'') .
+	'</div>'";
 
-	if (strlen($p->code))
-		$p->code = "'<div>'" . $p->code . " . '</div>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
