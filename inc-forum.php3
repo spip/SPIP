@@ -213,7 +213,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$ret .= "</div>\n<p>";
 		}
 	}
-	
+
 	$ret .= "\n";
 	
 	
@@ -256,7 +256,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	
 	if ($new != "oui" AND $redac != "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 	if ($new == "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='redac' VALUE=\"oui\">";
-	
+
 
 	
 	if ($afficher_texte !="non"){
@@ -294,12 +294,12 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$query = "SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'";
 				$result = spip_query($query);
 				$total_rows = mysql_num_rows($result);
-				
+
 				if ($total_rows > 0){
 					$ret .= "\n<p><div class='spip_encadrer'>";
 					$ret.= "<b>$titre_groupe&nbsp;:</b>";
 					
-					$ret .= "<table cellpadding=0 cellspacing=0 border=0 width='100%'>\n";	
+					$ret .= "<table cellpadding=0 cellspacing=0 border=0 width='100%'>\n";
 					$ret .= "<tr><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 					$i = 0;
 					
@@ -417,7 +417,7 @@ function ajout_forum() {
 		while ($row = mysql_fetch_array($result)) {
 			$fichier = $row["fichier"];
 			@unlink("CACHE/$fichier");
-			$fichiers[] = $fichier;
+			$fichiers[] = "'".$fichier."'";
 		}
 		if ($fichiers) {
 			$fichiers = join(',', $fichiers);
@@ -438,12 +438,12 @@ function ajout_forum() {
 			$etat = "publie";
 			break;
 	}
-	
-	
-	
+
+
+
 	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$auteur_session = $GLOBALS['auteur_session']['email'];
-	
+
 	if ($new == "oui"){
 		$nouveau_document = true;
 		if ($HTTP_GET_VARS['titre']){
@@ -467,16 +467,16 @@ function ajout_forum() {
 		$les_mots = explode(",", $les_mots);
 		for ($index = 0; $index < count($les_mots); $index++){
 			$le_mot = $les_mots[$index];
-			if ($le_mot > 0) 
+			if ($le_mot > 0)
 				spip_query("INSERT INTO spip_mots_forum (id_mot, id_forum) VALUES ('$le_mot', '$id_message')");
 		}
 
 	}
 
 	$query_forum = "UPDATE spip_forum
-		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\", 
+		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\",
 			date_heure = NOW(), titre = \"$titre\", texte = \"$texte\", nom_site = \"$nom_site_forum\", url_site = \"$url_site\", auteur = \"$auteur\",
-			email_auteur = \"$email_auteur\",  ip = \"$REMOTE_ADDR\", statut = \"redac\", id_auteur = \"$id_auteur\" 
+			email_auteur = \"$email_auteur\",  ip = \"$REMOTE_ADDR\", statut = \"redac\", id_auteur = \"$id_auteur\"
 		WHERE id_forum = '$id_message'";
 
 	$result_forum = spip_query($query_forum);
@@ -485,7 +485,7 @@ function ajout_forum() {
 	if ($forums_publics == 'abo') {
 		if ($auteur_session) {
 			$statut = $auteur_session['statut'];
-			
+
 			if (!$statut OR $statut == '5poubelle') {
 				die ("<h4>Vous n'avez plus acc&egrave;s &agrave; ces forums.</h4>Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
 			}
@@ -498,7 +498,7 @@ function ajout_forum() {
 
 	if (strlen($confirmer) > 0 OR ($afficher_texte=='non' AND $ajouter_mot)) {
 		spip_query("UPDATE spip_forum SET statut=\"$etat\" WHERE id_forum='$id_message'");
-	
+
 		$texte = stripslashes($texte);
 		$titre = stripslashes($titre);
 		$auteur = stripslashes($auteur);
