@@ -81,56 +81,69 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 // et on nettoie les GET/POST/COOKIE le cas echeant
 //
 
-function magic_unquote($table) {
+function magic_unquote($table, $http='') {
 	if (is_array($GLOBALS[$table])) {
-		reset($GLOBALS[$table]);
-		while (list($key, $val) = each($GLOBALS[$table])) {
+		foreach ($GLOBALS[$table] as $key => $val) {
 			if (is_string($val))
 				$GLOBALS[$table][$key] = stripslashes($val);
 		}
 	}
+	else {
+		// Si _GET n'existe pas, nettoyer HTTP_GET_VARS
+		if (!$http) // ne pas boucler
+			magic_unquote('HTTP'.$table.'_VARS', true);
+	}
 }
 
 @set_magic_quotes_runtime(0);
-$unquote_gpc = @get_magic_quotes_gpc();
-
-if ($unquote_gpc) {
-	magic_unquote('HTTP_GET_VARS');
-	magic_unquote('HTTP_POST_VARS');
-	magic_unquote('HTTP_COOKIE_VARS');
+if (@get_magic_quotes_gpc()) {
+	magic_unquote('_GET');
+	magic_unquote('_POST');
+	magic_unquote('_COOKIE');
 }
 
 //
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
-// A remplacer par une gestion propre des variables admissibles ;-)
+// et contre la deprecation de HTTP_GET_VARS (PHP 5.0.x)
+// A remplacer (un jour!) par une gestion propre des variables admissibles ;-)
 //
+// Attention pour compatibilite max $_GET n'est pas superglobale
 
 $INSECURE = array();
 
-function feed_globals($table, $insecure = true, $ignore_variables_contexte = false) {
+function feed_globals($table, $insecure = true, $ignore_contexte = false) {
 	global $INSECURE;
+	$http_table_vars = 'HTTP'.$table.'_VARS';
 
-	// ignorer des cookies qui contiendraient du contexte 
-	$is_contexte = array('id_parent'=>1, 'id_rubrique'=>1, 'id_article'=>1, 'id_auteur'=>1,
-		'id_breve'=>1, 'id_forum'=>1, 'id_secteur'=>1, 'id_syndic'=>1, 'id_syndic_article'=>1,
-		'id_mot'=>1, 'id_groupe'=>1, 'id_document'=>1, 'date'=>1, 'lang'=>1);
+	// identifier $GLOBALS[HTTP_GET_VARS] et $GLOBALS[_GET]
+	if (!is_array($GLOBALS[$table])) {
+		$GLOBALS[$table] = array();
+		if (is_array($GLOBALS[$http_table_vars]))
+			$GLOBALS[$table] = & $GLOBALS[$http_table_vars];
+	} else
+		$GLOBALS[$http_table_vars] = & $GLOBALS[$table];
 
-	if (is_array($GLOBALS[$table])) {
-        reset($GLOBALS[$table]);
-        while (list($key, $val) = each($GLOBALS[$table])) {
-			if ($ignore_variables_contexte AND isset($is_contexte[$key]))
+	// noter les valeurs passees en get, post ou cookie comme insecure
+	foreach ($GLOBALS[$table] as $key => $val) {
+		$GLOBALS[$key] = $val;
+		if ($insecure) $INSECURE[$key] = $val;
+	}
+
+	// ignorer des cookies qui contiendraient du contexte
+	if ($ignore_contexte) {
+		foreach (array('id_parent', 'id_rubrique', 'id_article',
+		'id_auteur', 'id_breve', 'id_forum', 'id_secteur',
+		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
+		'id_document', 'date', 'lang') as $key)
+			if (isset($GLOBALS[$key]))
 				unset ($GLOBALS[$key]);
-			else
-				$GLOBALS[$key] = $val;
-			if ($insecure) $INSECURE[$key] = $val;
-        }
 	}
 }
 
-feed_globals('HTTP_COOKIE_VARS', true, true);
-feed_globals('HTTP_GET_VARS');
-feed_globals('HTTP_POST_VARS');
-feed_globals('HTTP_SERVER_VARS', false);
+feed_globals('_COOKIE', true, true);
+feed_globals('_GET');
+feed_globals('_POST');
+feed_globals('_SERVER', false);
 
 
 //
@@ -141,12 +154,12 @@ feed_globals('HTTP_SERVER_VARS', false);
 
 function feed_post_files($table) {
 	global $INSECURE;
-	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-	                $GLOBALS[$key] = $INSECURE[$key] = $val['tmp_name'];
-	                $GLOBALS[$key.'_name'] = $INSECURE[$key.'_name'] = $val['name'];
-	        }
+	if (isset($GLOBALS[$table]) AND is_array($GLOBALS[$table])) {
+		reset($GLOBALS[$table]);
+		while (list($key, $val) = each($GLOBALS[$table])) {
+			$GLOBALS[$key] = $INSECURE[$key] = $val['tmp_name'];
+			$GLOBALS[$key.'_name'] = $INSECURE[$key.'_name'] = $val['name'];
+		}
 	}
 }
 
@@ -363,22 +376,12 @@ $hash_recherche = '';
 $hash_recherche_strict = '';
 
 
+
 //
-// Infos de version PHP
-// (doit etre au moins egale a 3.0.8)
+// Capacites php (en fonction de la version)
 //
 
-$php_version = phpversion();
-$php_version_tab = explode('.', $php_version);
-$php_version_maj = intval($php_version_tab[0]);
-$php_version_med = intval($php_version_tab[1]);
-if (ereg('([0-9]+)', $php_version_tab[2], $match)) $php_version_min = intval($match[1]);
-
-$flag_levenshtein = ($php_version_maj >= 4);
-$flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
-$flag_strtr2 = ($php_version_maj > 3);
-
 $flag_ini_get = (function_exists("ini_get")
 	&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
 $flag_gz = function_exists("gzencode"); #php 4.0.4
@@ -425,19 +428,18 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 	else
 		@setcookie ($name, $value);
 }
+
 if ($cookie_prefix != 'spip') {
-	reset ($HTTP_COOKIE_VARS);
-	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
+	foreach ($_COOKIE as $name => $value) {
 		if (ereg('^spip_', $name)) {
-			unset($HTTP_COOKIE_VARS[$name]);
+			unset($_COOKIE[$name]);
 			unset($$name);
 		}
 	}
-	reset ($HTTP_COOKIE_VARS);
-	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
+	foreach ($_COOKIE as $name => $value) {
 		if (ereg('^'.$cookie_prefix.'_', $name)) {
 			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
-			$HTTP_COOKIE_VARS[$spipname] = $INSECURE[$spipname] = $value;
+			$_COOKIE[$spipname] = $INSECURE[$spipname] = $value;
 			$$spipname = $value;
 		}
 	}
@@ -447,7 +449,7 @@ if ($cookie_prefix != 'spip') {
 //
 // Sommes-nous dans l'empire du Mal ?
 //
-if (strpos($HTTP_SERVER_VARS['SERVER_SOFTWARE'], '(Win') !== false)
+if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
 	define ('os_serveur', 'windows');
 
 
@@ -491,6 +493,8 @@ function spip_log($message, $logname='spip') {
 //
 
 // Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
+if (!$REQUEST_URI)
+	$REQUEST_URI = $_SERVER['REQUEST_URI'];
 if (!$REQUEST_URI)
 	$REQUEST_URI = $PHP_SELF;
 if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
@@ -633,7 +637,7 @@ function test_obgz () {
 	return
 	$GLOBALS['auto_compress']
 	&& $GLOBALS['flag_ob']
-	&& ($php_version<>'4.0.4')
+	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
 	&& $GLOBALS['flag_obgz']
 	// special bug de proxy
@@ -699,7 +703,7 @@ class Link {
 		// ou l'on supprime de l'URL courant les bidules inutiles
 		if (!$url) {
 			// GET variables are read from the original URL
-			// (HTTP_GET_VARS may contain additional variables
+			// (_GET may contain additional variables
 			// introduced by rewrite-rules)
 			$url = $GLOBALS['REQUEST_URI'];
 			// Warning !!!! 
@@ -712,9 +716,9 @@ class Link {
 			else $v = strrpos($url, '/');
 			$url = substr($url, $v + 1);
 			if (!$url) $url = "./";
-			if (count($GLOBALS['HTTP_POST_VARS'])) {
+			if (count($GLOBALS['_POST'])) {
 				$vars = array();
-				foreach ($GLOBALS['HTTP_POST_VARS'] as $var => $val)
+				foreach ($GLOBALS['_POST'] as $var => $val)
 					if (preg_match('/^id_/', $var))
 						$vars[$var] = $val;
 			}
@@ -940,7 +944,7 @@ function cron($delai = 2) {
 		$touch = _DIR_SESSIONS.'.background';
 		if (!($exists = @file_exists($touch))
 		OR (@filemtime($touch) < time() - $delai)) {
-			touch($touch);
+			if (!@touch($touch)) { @unlink($touch); @touch($touch); };
 			if (!$exists) chmod($touch, 0666);
 
 		include_ecrire('inc_cron.php3');
@@ -1022,5 +1026,6 @@ function debut_entete($title, $entete='') {
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
+
 
 ?>

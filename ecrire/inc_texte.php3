@@ -349,7 +349,6 @@ function interdire_scripts($source) {
 
 // Correction typographique francaise
 function typo_fr($letexte) {
-	global $flag_strtr2;
 	static $trans;
 
 	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg ; 147 = ldquo; 148 = rdquo
@@ -371,13 +370,7 @@ function typo_fr($letexte) {
 		}
 	}
 
-	if ($flag_strtr2)
-		$letexte = strtr($letexte, $trans);
-	else {
-		reset($trans);
-		while (list($c, $r) = each($trans))
-			$letexte = str_replace($c, $r, $letexte);
-	}
+	$letexte = strtr($letexte, $trans);
 
 	$cherche1 = array(
 		/* 1		'/{([^}]+)}/',  */

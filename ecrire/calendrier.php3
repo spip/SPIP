@@ -1,10 +1,10 @@
 <?php
 
-if (isset($HTTP_GET_VARS['type']))
+if (isset($_GET['type']))
 {
-	if ($HTTP_GET_VARS['type'] == 'semaine')
+	if ($_GET['type'] == 'semaine')
 		{ include ("calendrier_semaine.php3");exit;}
-	else if ($HTTP_GET_VARS['type'] == 'jour')
+	else if ($_GET['type'] == 'jour')
 		{ include ("calendrier_jour.php3");exit;}
 }
 include ("inc.php3");

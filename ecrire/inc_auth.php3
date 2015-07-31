@@ -29,7 +29,8 @@ function acces_restreint_rubrique($id_rubrique) {
 
 
 function auth() {
-	global $INSECURE, $HTTP_POST_VARS, $HTTP_GET_VARS, $HTTP_COOKIE_VARS, $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
+	global $INSECURE, $_POST, $_GET, $_COOKIE;
+	global $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
 	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
@@ -69,6 +70,7 @@ function auth() {
 			$auth_pass_ok = true;
 			$auth_can_disconnect = true;
 		}
+
 		else // normalement on n'arrive pas la sauf changement de mot de passe dans la base...
 		if ($PHP_AUTH_USER != 'root') // ... mais quelques serveurs forcent cette valeur
 		{
@@ -79,11 +81,10 @@ function auth() {
 		}
 		$PHP_AUTH_PW = '';
 		$_SERVER['PHP_AUTH_PW'] = '';
-		$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
 	}
 
 	// Authentification session
-	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
+	else if ($cookie_session = $_COOKIE['spip_session']) {
 		if (verifier_session($cookie_session)) {
 			if ($auteur_session['statut'] == '0minirezo' OR $auteur_session['statut'] == '1comite') {
 				$auth_login = $auteur_session['login'];
@@ -101,7 +102,7 @@ function auth() {
 	}
 
 	// Tentative de login echec
-	if ($HTTP_GET_VARS['bonjour'] == 'oui' AND !$auth_login) {
+	if ($_GET['bonjour'] == 'oui' AND !$auth_login) {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', _DIR_RESTREINT_ABS .$clean_link->getUrl());
@@ -153,12 +154,12 @@ function auth() {
 
 		// vieux ! on pourra supprimer post 1.6 finale...
 		if (! isset($prefs['display'])) { // recuperer les cookies ou creer defaut
-			if ($GLOBALS['set_disp'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_display']) {}
-			else $GLOBALS['set_disp'] = 2;
-			if ($GLOBALS['set_couleur'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_couleur']) {}
-			else $GLOBALS['set_couleur'] = 6;
-			if ($GLOBALS['set_options'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_options']) {}
-			else $GLOBALS['set_options'] = 'basiques';
+			if (!$GLOBALS['set_disp'] = $GLOBALS['_COOKIE']['spip_display'])
+				$GLOBALS['set_disp'] = 2;
+			if (!$GLOBALS['set_couleur'] = $GLOBALS['_COOKIE']['spip_couleur'])
+				$GLOBALS['set_couleur'] = 6;
+			if (!$GLOBALS['set_options'] = $GLOBALS['_COOKIE']['spip_options'])
+				$GLOBALS['set_options'] = 'basiques';
 		}
 
 		// Indiquer connexion

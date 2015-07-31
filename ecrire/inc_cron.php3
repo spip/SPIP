@@ -68,7 +68,10 @@ function spip_cron($taches=array()) {
 		$last = (@file_exists($lock) ? filemtime($lock) : 0);
 
 		if (($t - $frequence_taches[$tache]) > $last) {
-			@touch($lock);
+
+			# touch peut echouer si les droits sont mauvais
+			if (!@touch($lock)) { @unlink($lock); @touch($lock); }
+
 			spip_timer('tache');
 			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
 			$fonction = 'cron_' . $tache;
@@ -92,20 +95,24 @@ function spip_cron($taches=array()) {
 // Certaines ne sont pas activables de l'espace prive. A revoir.
 
 function taches_generales() {
+	$taches_generales = array();
 
-  // MAJ des rubriques publiques (cas de la publication post-datee)
+	// MAJ des rubriques publiques (cas de la publication post-datee)
+	$taches_generales[] = 'rubriques';
 
-	$taches_generales = array('rubriques');
-	
-  // cache
+	// Optimisation de la base
+	$taches_generales[] = 'optimiser';
+
+	// cache
 	if (_DIR_RESTREINT)
 	  $taches_generales[]= 'invalideur';
 
 	// nouveautes
-	if (lire_meta('adresse_neuf') AND lire_meta('jours_neuf') AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
+	if (lire_meta('adresse_neuf') AND lire_meta('jours_neuf')
+	AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
 		$taches_generales[]= 'mail';
 
-// Stat. Attention: la popularite DOIT preceder les visites
+	// Stat. Attention: la popularite DOIT preceder les visites
 	if (lire_meta("activer_statistiques") == "oui") {
 		$taches_generales[]= 'statistiques';
 		$taches_generales[]= 'popularites';
@@ -138,7 +145,8 @@ $frequence_taches = array(
 			  'rubriques' => 3600,
 			  'popularites' => 1800,
 			  'sites' => 90,
-			  'index' => 60
+			  'index' => 60,
+			  'optimiser' => 3600 * 48
 );
 
 // Fonctions effectivement appelees.
@@ -146,6 +154,11 @@ $frequence_taches = array(
 
 function cron_rubriques($t) {
 	calculer_rubriques();
+	return 1;
+}
+
+function cron_optimiser($t) {
+	optimiser_base ();
 	return 1;
 }
 

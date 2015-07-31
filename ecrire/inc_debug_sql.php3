@@ -93,7 +93,7 @@ function erreur_squelette($message='', $lieu='') {
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
 	if (++$runs > 4) {
-		if ($HTTP_COOKIE_VARS['spip_admin'] OR
+		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		    ($GLOBALS['var_mode'] == 'debug')) {
 			echo debut_entete('Debug'), '</head><body>';

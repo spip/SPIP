@@ -17,7 +17,7 @@ include_ecrire('inc_admin.php3');
 // Preferences de presentation
 //
 
-if ($spip_lang_ecrire = $GLOBALS['HTTP_COOKIE_VARS']['spip_lang_ecrire']
+if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
 AND $spip_lang_ecrire <> $auteur_session['lang']
 AND changer_langue($spip_lang_ecrire)) {
 	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($spip_lang_ecrire)
@@ -189,7 +189,7 @@ function tester_rubrique_vide($id_rubrique) {
 // Recuperation du cookie
 //
 
-$cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
+$cookie_admin = $_COOKIE['spip_admin'];
 
 // Supprimer rubrique
 if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' AND acces_rubrique($supp_rubrique)) {

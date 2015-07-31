@@ -100,7 +100,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
       echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
       echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
-      if (spip_num_rows($result_ajout_auteurs) > 50 AND $GLOBAL['flag_mots_ressemblants']) {
+      if (spip_num_rows($result_ajout_auteurs) > 50) {
 	echo "<input TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
 	echo "<input TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
       }
