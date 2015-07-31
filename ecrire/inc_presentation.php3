@@ -942,7 +942,11 @@ function debut_html($titre = "") {
 <script type='text/javascript'><!--
 function changeclass(objet, myClass)
 {
-  objet.className = myClass;
+		objet.className = myClass;
+}
+function changesurvol(iddiv, myClass)
+{
+		document.getElementById(iddiv).className = myClass;
 }
 //--></script>
 </head>
@@ -1100,7 +1104,7 @@ function barre_onglets($rubrique, $onglet){
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
 	global $spip_display, $spip_ecran ;
-	global $menu_accesskey;
+	global $menu_accesskey, $compteur_survol;
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -1145,36 +1149,37 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$a_href = "<a$accesskey href=\"$lien\" class='icone'>";
 	}
 
+	$compteur_survol ++;
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\" $onClick>";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur>";
-		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
-		echo "</td></tr>";
-		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48gris');\" $onClick>";
+		if ($spip_display == 1) {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgrison\" $onClick>";
+			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
+		}
+		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
 		if ($spip_display != 1) {
-			echo "$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a><br>";
+			echo "<div class='bouton48gris' id='survol$compteur_survol'>$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a></div>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a></div>";
 		}
-		echo "</td></tr></table>";
+		if ($spip_display == 1) echo "</td></tr></table>";
 		echo "</td>\n";
 	}
 	else {
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur>";
-		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
-		echo "</td></tr>";
-		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48off');\" $onClick>";
+		if ($spip_display == 1) {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
+			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
+		}
+		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
 		if ($spip_display != 1) {
-			echo "$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a><br>";
+			echo "<div class='bouton48off' id='survol$compteur_survol'>$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a></div>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a></div>";
 		}
-		echo "</td></tr></table>";
+		if ($spip_display == 1) echo "</td></tr></table>";
 		echo "</td>\n";
 	}
 
@@ -1187,7 +1192,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
-	global $menu_accesskey;
+	global $menu_accesskey, $compteur_survol;
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -1202,6 +1207,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	else {
 		$hauteur = 70;
 		$largeur = 80;
+		if (strlen($aide) > 0) $largeur = 120;
 		$alt = " alt=\" \"";
 	}
 
@@ -1215,40 +1221,50 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		$menu_accesskey++;
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
-
+	$compteur_survol ++;
+	
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\">";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
-		if ($spip_display != 1){
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton24gris');\">";
+		if ($spip_display == 1) {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\">";
 			echo "<tr><td background='' align='center'>";
-			echo "<a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
-			if (strlen($aide)>0) echo aide($aide);
-			echo "</td></tr>";
 		}
-		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
-		echo "</td></tr>";
-		echo "</table>";
+		if ($spip_display != 1){
+		//	echo "<div>";
+			echo "<div class='bouton24gris' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
+			//if (strlen($aide)>0) echo aide($aide);
+		//	echo "</div>";
+		}
+		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
 		if ($spip_display != 3){
-			echo "<a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a></div>";
+		}
+		if ($spip_display == 1) {
+			echo "</td></tr>";
+			echo "</table>";
 		}
 		echo "</td>";
 	}
 	else {
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
-		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
-		if ($spip_display != 1){
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton24off');\">";
+		if ($spip_display == 1) {
+			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
 			echo "<tr><td background='' align='center'>";
-			echo "<a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
-			if (strlen($aide)>0) echo aide($aide);
-			echo "</td></tr>";
 		}
-		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
-		echo "</td></tr>";
-		echo "</table>";
+		if ($spip_display != 1){
+			//echo "<div>";
+			echo "<div class='bouton24off' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
+			//echo "</div>";
+		}
+		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
 		if ($spip_display != 3){
-			echo "<a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			if (strlen($aide)>0) echo aide($aide);
+			echo "</div>";
+		}
+		if ($spip_display == 1) {
+			echo "</td></tr>";
+			echo "</table>";
 		}
 		echo "</td>";
 	}
@@ -1257,7 +1273,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
-	global $spip_display, $couleur_claire, $couleur_foncee;
+	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
 
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
 	if (strlen($align) > 2) $aligner = " ALIGN='$align' ";
@@ -1275,21 +1291,28 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	}
 	else {
 		$hauteur = 70;
-		$largeur = 70;
+		$largeur = 80;
 	}
 	
 	$style = 'iconeoff';
-	if ($fonction == "supprimer.gif") $style = 'iconedanger';
+	$classe_image = 'bouton24gris';
+	if ($fonction == "supprimer.gif") {
+		$style = 'iconedanger';
+		$classe_image = 'bouton24rouge';	
+	}
 
-	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
-	$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
-	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0>";
+	$compteur_survol ++;
+	if ($spip_display == 1) {
+		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
+		$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
+	}
+	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
 	if ($spip_display != 1){	
 		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
-			$icone .= "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
+			$icone .= "\n<div class='$classe_image' id='survol$compteur_survol'><table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
 			$icone .= "<a href='$lien'><img src='img_pack/$fonction'$alt$title width='24' height='24' border='0'></a>";
-			$icone .= "</td></tr></table>\n";
+			$icone .= "</td></tr></table></div>\n";
 		}
 		else {
 			$icone .= "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
@@ -1307,8 +1330,10 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$icone .= "</td></tr>";
 	}
 	$icone .= "</table>";
-	$icone .= "</td></tr>";
-	$icone .= "</table>";
+	if ($spip_display == 1) {
+		$icone .= "</td></tr>";
+		$icone .= "</table>";
+	}
 
 	if ($afficher == 'oui')
 		echo $icone;
@@ -1317,7 +1342,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 }
 
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
-	global $spip_display, $couleur_claire, $couleur_foncee;
+	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
 
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
 
@@ -1325,21 +1350,34 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	$largeur = "100%";
 
 	$style = "icone-h";
-	if ($fonction == "supprimer.gif") $style = "icone-h-danger";
+	$classe_image = "bouton24gris";
+	if ($fonction == "supprimer.gif") {
+		$style = "icone-h-danger";
+		$classe_image = "bouton24rouge";
+	}
+	$compteur_survol++;
 
-	echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
-	echo "<tr>";
+	if ($spip_display == 1) {
+		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
+		echo "<tr>";
+	} else {
+		echo "\n<table cellpadding='0' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
+		echo "<tr>";
+	}
 	
 	if ($spip_display != 1 AND $fond != "") {
-		echo "<td class='image' style='background-image: url(\"img_pack/$fond\")'>";
-		echo "<a href='$lien'>";
-		echo "<img src='img_pack/$fonction' alt=''>";
-		echo "</a>";
+		echo "<td>";
+		echo "<div id='survol$compteur_survol' class='$classe_image'>";
+		echo "<div style='background-image: url(\"img_pack/$fond\")'><a href='$lien'>";
+		echo "<img src='img_pack/$fonction' alt='' border='0'>";
+		echo "</a></div>";
+		echo "</div>";
 		echo "</td>";
+		echo "<td width='5'></td>";
 	}
 
 	echo "<td valign='middle'>";
-	echo "<a href='$lien'>";
+	echo "<a href='$lien' class='verdana1' style='color:#666666; font-weight:bold;'>";
 	echo "$texte";
 	echo "</a>";
 	echo "</td></tr>";

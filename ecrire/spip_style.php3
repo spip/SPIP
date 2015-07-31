@@ -31,6 +31,50 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
 .fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white; }
+.bouton48gris {
+	background:url(img_pack/pave-gris-48.png); 
+	padding: 3px; 
+	margin-bottom: 2px; 
+	width: 48px; 
+	height: 48px;
+}
+.bouton48blanc {
+	background:url(img_pack/pave-blanc-48.png); 
+	padding: 3px; 
+	margin-bottom: 2px; 
+	width: 48px; 
+	height: 48px;
+}
+.bouton48off {
+	padding: 3px; 
+	margin-bottom: 2px; 
+	width: 48px; 
+	height: 48px;
+}
+.bouton24gris {
+	background:url(img_pack/pave-gris-24.png); 
+	padding: 3px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton24blanc {
+	background:url(img_pack/pave-blanc-24.png); 
+	padding: 3px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton24rouge {
+	background:url(img_pack/pave-rouge-24.png); 
+	padding: 3px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton24off {
+	padding: 3px; 
+	width: 24px; 
+	height: 24px;
+}
+
 
 .reliefblanc { background-image: url(img_pack/barre-blanc.gif) }
 .reliefgris { background-image: url(img_pack/barre-noir.gif) }
@@ -58,18 +102,17 @@ a.icone:hover { text-decoration: none; }
  * Barre de raccourcis
  */
 
-a.spip_barre img {
-	border-left: 1px solid #ffffff;
-	border-top: 1px solid #ffffff;
-	border-right: 1px solid #666666;
-	border-bottom: 1px solid #666666;
-	padding: 3px;
-	background-color: <?php echo $couleur_claire; ?>;
+a.spip_barre {
+	border: 0px solid #666666;
+	padding: 4px;
+	margin-right: 3px;
+	background: url(img_pack/pave-gris-16.png);
 }
-a.spip_barre:hover img {
-	border: 1px solid #808080;
-	padding: 3px;
-	background-color: #f8f8f4;
+a.spip_barre:hover {
+	border: 0px solid #666666;
+	padding: 4px;
+	margin-right: 3px;
+	background: url(img_pack/pave-blanc-16.png);
 }
 
 td.icone table {
@@ -174,10 +217,6 @@ td.icone a img {
 	background-color: #f0f0f0;
 	width: 100%;
 	color: #666666;
-	text-decoration: none;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
-	font-weight: bold;
 }
 .icone-h-danger {
 	padding: 3px;
@@ -185,11 +224,6 @@ td.icone a img {
 	border: 1px dashed black;
 	background: url(img_pack/rayures-sup.gif);
 	width: 100%;
-	color: #666666;
-	text-decoration: none;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
-	font-weight: bold;
 }
 .icone-h-on {
 	cursor: pointer;
@@ -201,49 +235,8 @@ td.icone a img {
 	border-top: solid 1px #666666;
 	background-color: #eeeeee;
 	width: 100%;
-	color: #666666;
-	text-decoration: none;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
-	font-weight: bold;
 }
-.icone-h .image {
-	width: 24px;
-	height: 24px;
-	background-repeat: no-repeat;
-}
-.icone-h-on .image {
-	width: 24px;
-	height: 24px;
-	background-repeat: no-repeat;
-}
-.icone-h a {
-	color: #666666;
-	text-decoration: none;
-}
-.icone-h-danger a {
-	color: #666666;
-	text-decoration: none;
-}
-.icone-h-on a {
-	color: #666666;
-	text-decoration: none;
-}
-.icone-h .image img {
-	width: 24px;
-	height: 24px;
-	border: 0px;
-}
-.icone-h-danger .image img {
-	width: 24px;
-	height: 24px;
-	border: 0px;
-}
-.icone-h-on .image img {
-	width: 24px;
-	height: 24px;
-	border: 0px;
-}
+
 
 
 /*
