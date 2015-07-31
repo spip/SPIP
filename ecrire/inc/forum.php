@@ -178,7 +178,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 	if ($valider_repondre) {
 	  $dblret = rawurlencode(_DIR_RESTREINT_ABS . $lien);
-	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", _DIR_RACINE . generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true, true)),
+	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true, true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
 	}
