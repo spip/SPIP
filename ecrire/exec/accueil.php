@@ -59,18 +59,17 @@ function encours_accueil()
 
 	// Les forums en attente de moderation
 
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
-		if ($cpt = $cpt['n']) {
-		$lien = "\n<br /><small>$cpt";
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"), SPIP_NUM);
+		if ($cpt = $cpt[0]) {
 		if ($cpt>1)
-			$lien .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
+			$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
-			$lien .= " "._T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
-		$lien .= " "._T('info_liens_syndiques_7'). "</small>";
+			$lien = _T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
+		$lien = "<small>$cpt $lien " ._T('info_liens_syndiques_7'). "</small>";
 		if ($connect_toutes_rubriques)
 			$lien = "<a href='" . generer_url_ecrire("controle_forum","type=prop") . "' style='color: black;'>". $lien . ".</a>";
+		$res .= "\n<br />" . $lien;
 		}
-		$res .= $lien;
 	}
 
 	if (!$res) return '';

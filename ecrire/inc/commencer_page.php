@@ -201,15 +201,15 @@ function avertissement_messagerie() {
 
 // http://doc.spip.org/@alertes_auteur
 function alertes_auteur() {
-	global $connect_statut;
-	if ($connect_statut == '0minirezo'
+
+	if (autoriser('detruire')
 	AND (
-		$GLOBALS['meta']['message_crash_tables']
+		@$GLOBALS['meta']['message_crash_tables']
 		OR false // autres alertes administrateur
 	)) {
 		$alertes = array();
 
-		if ($GLOBALS['meta']['message_crash_tables']) {
+		if (@$GLOBALS['meta']['message_crash_tables']) {
 			include_spip('inc/maintenance');
 			if ($msg = message_crash_tables())
 				$alertes[] = $msg;
