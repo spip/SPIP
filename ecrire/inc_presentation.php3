@@ -462,9 +462,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = affdate($date);
 			if ($connect_statut == "0minirezo" AND $activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a></font>";
-/*				if ($activer_statistiques_ref == "oui" AND $referers > 0){
-					$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$referers&nbsp;entr&eacute;es directes</a></font>";
-				}*/
 			}
 			$vals[] = $s;
 
@@ -1015,8 +1012,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
 		onglet("Par articles", "statistiques_articles.php3", "recents", $onglet, "article-24.gif");
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref == "oui")	onglet("Les liens entrants du jour", "statistiques_referers.php3", "referers", $onglet, "");
-//		onglet("Tous les articles", "statistiques_tous.php3", "tous", $onglet, "");
+		if ($activer_statistiques_ref == "oui")	onglet("Les liens entrants du jour", "statistiques_referers.php3", "referers", $onglet, "referers-24.png");
 	}
 	
 	if ($rubrique == "administration"){
@@ -1951,7 +1947,7 @@ function fin_page() {
 <p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est un logiciel libre distribu&eacute; <a href='licence.php3'>sous licence GPL.</a>
+est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL.</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
