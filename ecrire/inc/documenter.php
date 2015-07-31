@@ -44,11 +44,14 @@ function inc_documenter_dist(
 	// On passe &$tous dans la boucle pour verifier si on a bien
 	// le droit de supprimer tous les documents
 	$tous = (count($docs) > 3);
-	$res = documenter_boucle($docs, $type, $ancre, $tous, $appelant, $opt);
-	$s = ($ancre =='documents' ? '': '-');
-
-	if (is_int($doc))
+	if (preg_match('/_edit$/', _request('script'))) {
+	  $res = " ";
+	} else {
+	  $res = documenter_boucle($docs, $type, $ancre, $tous, $appelant, $opt);
+	  if (is_int($doc))
 		$res = documenter_bloc($doc, $res, $s, $appelant, $ancre, $tous, $type);
+	}
+	$s = ($ancre =='documents' ? '': '-');
 	return ajax_action_greffe("documenter", "$s$doc", $res);
 }
 
