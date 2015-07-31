@@ -37,7 +37,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	// passer en minuscules (cf les balises de formulaires)
 	// et inclure le fichier
-	find_in_path(($d = strtolower($nom) . '.php'), $dossier, true /* include */);
+	$inc=find_in_path(($d = strtolower($nom) . '.php'), $dossier, true /* include */);
 	if (function_exists($f)) return $f;
 	if (function_exists($g)) return $g;
 
@@ -163,7 +163,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		$rotate = $nombre_de_logs;
 		$m .= "[-- rotate --]\n";
 	}
-	
+
 	$f = @fopen($logfile, "ab");
 	if ($f) {
 		fputs($f, ($logname!==NULL) ? $m : str_replace('<','&lt;',$m));
@@ -226,7 +226,7 @@ function set_request($var, $val = NULL, $c=false) {
 	unset($_POST[$var]);
 	if ($val !== NULL)
 		$_GET[$var] = $val;
-	
+
 	return false; # n'affecte pas $c
 }
 
@@ -259,7 +259,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	foreach ($url as $n => $val) {
 		if (preg_match($regexp, urldecode($val), $r)) {
 			if ($v === NULL) {
-				return $r[2]?substr($r[2],1):''; 
+				return $r[2]?substr($r[2],1):'';
 			}
 			elseif (!$v) {// suppression
 				unset($url[$n]);
@@ -277,7 +277,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 		return $v;
 	elseif ($v) {
 		foreach($ajouts as $k => $n) $url[] = $k .'=' . $u;
-	} 
+	}
 
 	// eliminer les vides
 	$url = array_filter($url);
@@ -375,7 +375,7 @@ function _T($texte, $args=array()) {
 		$traduire = charger_fonction('traduire', 'inc');
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
-	if (!$text) 
+	if (!$text)
 		// pour les chaines non traduites
 		$text =	str_replace('_', ' ',
 			 (($n = strpos($texte,':')) === false ? $texte :
@@ -445,7 +445,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 
 // Ce declencheur de tache de fond, de l'espace prive (cf inc_presentation)
 // et de l'espace public (cf #SPIP_CRON dans inc_balise), est appelee
-// par un background-image  car contrairement a un iframe vide, 
+// par un background-image  car contrairement a un iframe vide,
 // les navigateurs ne diront pas qu'ils n'ont pas fini de charger,
 // c'est plus rassurant.
 // C'est aussi plus discret qu'un <img> sous un navigateur non graphique.
@@ -459,7 +459,7 @@ function action_cron() {
 }
 
 // cron() : execution des taches de fond
-// Le premier argument indique l'intervalle demande entre deux taches 
+// Le premier argument indique l'intervalle demande entre deux taches
 // par defaut, 60 secondes (quand il est appele par public.php)
 // il vaut 2 quand il est appele par ?action=cron, voire 0 en urgence
 // On peut lui passer en 2e arg le tableau de taches attendu par inc_genie()
@@ -469,7 +469,7 @@ function action_cron() {
 function cron ($gourmand=false, $taches= array()) {
 
 	// Si base inaccessible, laisser tomber.
-	if (!spip_connect()) return false; 
+	if (!spip_connect()) return false;
 
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
@@ -483,7 +483,7 @@ function cron ($gourmand=false, $taches= array()) {
 	// ca soulage le serveur et ca evite
 	// les conflits sur la base entre taches.
 
-	if (spip_touch(_DIR_TMP.'cron.lock', 
+	if (spip_touch(_DIR_TMP.'cron.lock',
 			(is_int($gourmand) ? $gourmand : 2))) {
 			$genie = charger_fonction('genie', 'inc', true);
 			if ($genie) {
@@ -524,7 +524,7 @@ function _chemin($dir_path=NULL){
 	static $path_full = NULL;
 	if ($path_base==NULL){
 		// Chemin standard depuis l'espace public
-		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
+		$path = defined('_SPIP_PATH') ? _SPIP_PATH :
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'dist/:'.
 			_DIR_RESTREINT.':';
@@ -541,7 +541,7 @@ function _chemin($dir_path=NULL){
 		if (strlen($GLOBALS['dossier_squelettes']))
 			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
-		
+
 	}
 	if ($dir_path===NULL) return $path_full;
 
@@ -554,7 +554,7 @@ function _chemin($dir_path=NULL){
 			$tete = "";
 			if (reset($path_base)==_DIR_RACINE.'squelettes/')
 				$tete = array_shift($path_base);
-			
+
 			array_unshift($path_base,$dir_path);
 			if (strlen($tete))
 				array_unshift($path_base,$tete);
@@ -565,7 +565,7 @@ function _chemin($dir_path=NULL){
 	if (strlen($GLOBALS['dossier_squelettes']))
 		foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 			array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
-		
+
 	return $path_full;
 }
 
@@ -627,7 +627,7 @@ function find_in_path ($file, $dirname='', $include=false) {
 function find_all_in_path($dir,$pattern){
 	$liste_fichiers=array();
 	$maxfiles = 10000;
-	
+
 	// Parcourir le chemin
 	foreach (creer_chemin() as $d)
 		if (@is_dir($f = $d.$dir)){
@@ -641,7 +641,7 @@ function find_all_in_path($dir,$pattern){
 					$liste_fichiers[$nom] = $chemin;
 			}
 		}
-			
+
 	return $liste_fichiers;
 }
 
@@ -846,7 +846,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 
 // Attention, JS/Ajax n'aime pas le melange de param GET/POST
 // On n'applique pas la recommandation ci-dessus pour les scripts publics
-// qui ne sont pas destines a etre mis en signets 
+// qui ne sont pas destines a etre mis en signets
 
 // http://doc.spip.org/@generer_form_public
 function generer_form_public($script, $corps, $atts='') {
@@ -1012,12 +1012,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		else
 			define('_SPIP_CHMOD', 0777);
 	}
-	
+
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
 	define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
-	
+
 	define('_DOC_MAX_SIZE', 0); # poids en ko
 
 	define('_IMG_MAX_SIZE', 0); # poids en ko
@@ -1033,12 +1033,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
 
-	define('_DOCTYPE_ECRIRE', 
+	define('_DOCTYPE_ECRIRE',
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n");
 		"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n");
 	       // "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 //EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>\n");
-	define('_DOCTYPE_AIDE', 
+	define('_DOCTYPE_AIDE',
 	       "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
 
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
@@ -1084,7 +1084,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
 	}
 
-	define('_SPIP_AJAX',  (!isset($_COOKIE['spip_accepte_ajax'])) 
+	define('_SPIP_AJAX',  (!isset($_COOKIE['spip_accepte_ajax']))
 		? 1
 	       : (($_COOKIE['spip_accepte_ajax'] != -1) ? 1 : 0));
 
@@ -1136,7 +1136,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// charger les meta si possible et renouveller l'alea au besoin
 	// charge aussi effacer_meta et ecrire_meta
-	$inc_meta = charger_fonction('meta', 'inc'); 
+	$inc_meta = charger_fonction('meta', 'inc');
 	$inc_meta();
 
 	// nombre de repertoires depuis la racine
@@ -1158,7 +1158,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (_FILE_CONNECT) verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
-	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
+	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0);
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
