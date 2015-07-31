@@ -31,30 +31,30 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 		if ($flag_modif AND $GLOBALS['meta']['activer_logos'] != 'non') {
 			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 			$masque = "<div class='cadre_padding'>$masque</div>";
-			$bouton = bouton_block_depliable($texteon, $visible, 'on');
-			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
+			$bouton = bouton_block_depliable($texteon, $visible, "on-$id_objet-$id");
+			$res = debut_block_depliable($visible,"on-$id_objet-$id") . $masque . fin_block();
 		}
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
-		$bouton = bouton_block_depliable($texteon, $visible, 'on');
+		$bouton = bouton_block_depliable($texteon, $visible, "on-$id_objet-$id");
 
 		$survol = '';
 		$texteoff = _T('logo_survol');
 		if (!$logo = $logo_s) {
 			if ($flag_modif AND $GLOBALS['meta']['activer_logos_survol'] == 'oui') {
 				$masque = "<br />".indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
-				$survol .= "<br />".block_parfois_visible('off', $texteoff, $masque, null, $visible);
+				$survol .= "<br />".block_parfois_visible("off-$id_objet-$id", $texteoff, $masque, null, $visible);
 			}
-			$masque = debut_block_depliable($visible,'on') 
+			$masque = debut_block_depliable($visible,"on-$id_objet-$id") 
 				. "<div class='cadre_padding'>"
 				. $clic . $survol . "</div>" . fin_block();
 		} else {
 			list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script, $flag_modif);
-			$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
-			$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
+			$masque = debut_block_depliable($visible, "off-$id_objet-$id") .  $clicoff . fin_block();
+			$survol .= "<br />".bouton_block_depliable($texteoff, $visible, "off-$id_objet-$id")
 			. "<div class='cadre_padding'>".$imgoff.$masque."</div>";
-			$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
+			$masque = debut_block_depliable($visible,"on-$id_objet-$id") . $clic . fin_block() . $survol;
 		}
 
 		$res = "$img$masque";
