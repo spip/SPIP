@@ -7,7 +7,7 @@ if (defined("_INC_PUBLIC")) {
 		reset($contexte);
 		while(list($key, $val) = each($contexte)) $fichier_requete .= '&'.$key.'='.$val;
 	}
-	echo $fichier_requete."<p>";
+	//echo $fichier_requete."<p>";
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
 	$chemin_cache = "CACHE/".$fichier_cache;
 	$use_cache = utiliser_cache($chemin_cache, $delais);

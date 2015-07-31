@@ -605,6 +605,72 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$tableBeginPos = strpos($letexte, "\n\n|");
 		$tableEndPos = strpos($letexte, "|\n\n");
 	}
+
+
+	// Remplacement des debuts de ligne avec * par des listes
+	//
+	if (strpos('_'.$letexte, "*") == 1) {
+		$flag_begin_star = 1;
+		$letexte = "\n".$letexte;
+	} 
+	if (strpos('_'.$letexte, "\n*")) {
+		$prev_pos = -2; 
+		$depth = 0;
+		while (is_integer($pos = strpos($letexte, "\n*"))) {
+			
+			if ($pos > ($prev_pos+1) && $prev_pos != -2 && $depth > 0){//nouveau bloc
+				//il faut donc fermer la liste précédente
+				$close_ul = "";
+				for ($i = 0; $i < $depth; $i++) {
+					$close_ul .= "</li></ul>";
+				}
+				$letexte = substr($letexte, 0, $prev_pos+1).$close_ul.substr($letexte, $prev_pos+1);
+				$pos = $pos + strlen($close_ul);
+				$depth = 0;
+			} 
+			$prev_pos = $pos+1;
+
+			preg_match ("/\n([*]+)([^\n]+)/", $letexte, $res);
+			$new_depth = strlen($res[1]);
+			
+			if ($depth > $new_depth) {
+				//il faut fermer des ul
+				$close_ul = "";
+				for ($i = $depth - $new_depth; $i > 0; $i--) {
+					$close_ul .= "</li></ul>";
+				}
+				$close_ul .= "</li >";
+				$letexte = substr($letexte, 0, $pos).$close_ul.substr($letexte, $pos);
+				$pos = $pos + strlen($close_ul);
+				
+			} elseif ($depth < $new_depth) {
+				//il faut ouvrir des ul
+				$open_ul = "";
+				for ($i = $new_depth - $depth; $i > 0; $i--) {
+					$open_ul .= "<ul class=\"spip\">";
+				}
+				$letexte = substr($letexte, 0, $pos+1).$open_ul.substr($letexte, $pos+1);
+				$pos = $pos + strlen($open_ul);
+				
+			} else {
+				$letexte = substr($letexte, 0, $pos)."</li>".substr($letexte, $pos);
+				$pos = $pos + strlen("</li>");
+			}
+			$end_line = $pos + strlen($res[1]) + strlen($res[2]) + 1;
+			$letexte = substr($letexte, 0, $pos+1)."<li>".$res[2].substr($letexte, $end_line);
+			$prev_pos = $pos +  strlen($res[2])+ 1 + strlen("<li>");
+			$depth = $new_depth;
+		}
+		
+		$close_ul = "";
+		for ($i = $depth; $i > 0; $i--) {
+			$close_ul .= "</li></ul>";
+		}
+		$letexte = substr($letexte, 0, $prev_pos).$close_ul.substr($letexte, $prev_pos);
+	}
+	if ($flag_begin_star) {
+		$letexte = substr($letexte, 1);
+	} 
 	
 	//
 	// Ensemble de remplacements implementant le systeme de mise

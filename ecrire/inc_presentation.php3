@@ -44,7 +44,7 @@ function bouton_imessage($destinataire, $row = '') {
 	$url .= "dest=$destinataire&";
 	$url .= "new=oui&type=normal";
 	
-	$texte_bouton = "<IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'>";
+	$texte_bouton = "<IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='-'>";
 	return "<a href='$url'>$texte_bouton</a>";
 }
 
@@ -55,20 +55,20 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 	if (strlen($icone)<3) $icone = "rien.gif";
 		$retour.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
 		$retour.= "<tr>";
-		$retour.= "<td width='5'><img src='img_pack/rond-hg-24.gif' alt='rond-hg.gif' width='5' height='24'></td>";
+		$retour.= "<td width='5'><img src='img_pack/rond-hg-24.gif' alt='/' width='5' height='24'></td>";
 		$retour.= "<td background='img_pack/rond-h-24.gif'>";
 		if (strlen($fonction)>3) {
-			$retour.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='' width='24' height='24'></td></tr></table>";
+			$retour.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='\' width='24' height='24'></td></tr></table>";
 		}
 		else {
-			$retour.= "<img src='img_pack/$icone' alt='' width='24' height='24'>";
+			$retour.= "<img src='img_pack/$icone' alt='\' width='24' height='24'>";
 		}
 		$retour.= "</td>";
-		$retour.= "<td width='5'><img src='img_pack/rond-hd-24.gif' alt='rond-hg.gif' width='5' height='24'></td>";
+		$retour.= "<td width='5'><img src='img_pack/rond-hd-24.gif' alt='/' width='5' height='24'></td>";
 		$retour.= "</tr>";
 
 	$retour.= "<TR>";
-	$retour.= "<td background='img_pack/rond-g.gif' width='5'><img src='img_pack/rien.gif' alt='rond-hg.gif' width='5' height='5'></td>";
+	$retour.= "<td background='img_pack/rond-g.gif' width='5'><img src='img_pack/rien.gif' alt='/' width='5' height='5'></td>";
 	$retour.= "<TD WIDTH=\"100%\">";
 	$retour.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD BGCOLOR='#ffffff' WIDTH=\"100%\">";
 
@@ -79,14 +79,14 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 function fin_cadre_relief($return = false){
 	$retour.= "</TD></TR></TABLE>";
 	$retour.= "</TD>";
-	$retour.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='rond-hg.gif' width='5' height='5'></td>";
+	$retour.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='\' width='5' height='5'></td>";
 	$retour.= "<tr>";
-	$retour.= "<td width='5'><img src='img_pack/rond-bg.gif' alt='rond-hg.gif' width='5' height='5'></td>";
-	$retour.= "<td background='img_pack/rond-b.gif'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
-	$retour.= "<td width='5'><img src='img_pack/rond-bd.gif' alt='rond-hg.gif' width='5' height='5'></td>";
+	$retour.= "<td width='5'><img src='img_pack/rond-bg.gif' alt='\' width='5' height='5'></td>";
+	$retour.= "<td background='img_pack/rond-b.gif'><img src='img_pack/rien.gif' alt='-' width='5' height='5'></td>";
+	$retour.= "<td width='5'><img src='img_pack/rond-bd.gif' alt='/' width='5' height='5'></td>";
 	$retour.= "</tr>";
-	$retour.= "<tr><td></td><td bgcolor='#bbbbbb'><img src='img_pack/rien.gif' alt='rond-hg.gif' width='5' height='1'></td></tr>";
-	$retour.= "<tr><td><img src='img_pack/rien.gif' alt='rond-hg.gif' width='5' height='4'></td></tr>";
+	$retour.= "<tr><td></td><td bgcolor='#bbbbbb'><img src='img_pack/rien.gif' alt='\' width='5' height='1'></td></tr>";
+	$retour.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
 	$retour.= "</table>";
 	if ($return) return $retour;
 	else echo $retour;
@@ -770,7 +770,7 @@ function debut_html($titre = "") {
 		background-color: #FFFFFF; 
 		padding: 5px; 
 	}
-
+	
 	.boutonlien {
 		font-family: Verdana,Arial,Helvetica,sans-serif;
 		font-weight: bold;
