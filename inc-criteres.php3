@@ -94,18 +94,18 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 
-	$table = $boucle->id_table;	#articles
-	$id_table = 'id_'.preg_replace('/s$/', '', $table); 	#id_article
+	// Ne pas executer la requete en cas de hash vide
+	$boucle->hash =  '
+	// RECHERCHE
+	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
+	if ($rech_where) ';
 
-	// horrible hack du aux id_forum = spip_forum et id_article=spip_articleS
-	// en fait il faudrait la fonction inverse de table_objet()
-	$id = 'id_'.preg_replace('/s$/', '', $boucle->id_table);
-
-	$boucle->select[] = $boucle->id_table . '.' . $boucle->primary; # pour postgres, neuneu ici
-	$boucle->select[] = '$rech_select'; # pour les ... as points
+	$boucle->select[]= $boucle->id_table . '.' . $boucle->primary; # pour postgres, neuneu ici
+	$boucle->select[]= '$rech_select as points';
 
 	// et la recherche trouve
 	$boucle->where[] = '$rech_where';
+
 }
 
 // {inverse}
@@ -216,12 +216,12 @@ function critere_par_dist($idb, &$boucles, $crit) {
 		// tester si cette version de MySQL accepte la commande RAND()
 		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
 		  if (spip_query("SELECT RAND()"))
-			$boucle->select[] = "RAND() AS alea";
+			$tri = "RAND()";
 		  else
-			$boucle->select[] = "MOD(".$boucle->id_table.'.'.$boucle->primary
-			." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP() AS alea";
-
-		$order = "'alea'";
+			$tri = "MOD(".$boucle->id_table.'.'.$boucle->primary
+			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
+		  $boucle->select[]= $tri . " AS alea";
+		  $order = "'alea'";
 		}
 
 	// par titre_mot
@@ -559,8 +559,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		$where = "NOT ($where)";
 	      } else {
 			$boucle->default_order = 'rang';
-			$boucle->select[] =
-				"FIND_IN_SET($ct, \\\"'\" . " . $val . ' . "\'\\") AS rang';
+			$boucle->select[]= "FIND_IN_SET($ct, \\\"'\" . " . $val . ' . "\'\\") AS rang';
 	      }
 	    } else {
 		  if ($op == '==') $op = 'REGEXP';

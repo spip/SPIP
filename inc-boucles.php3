@@ -280,8 +280,6 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 			$boucle->where['statut'] = "$id_table.statut IN ('publie','prop')";
 	}
 
-	$boucle->select[]='syndic.nom_site AS nom_site'; # derogation zarbi
-	$boucle->select[]='syndic.url_site AS url_site'; # idem
 	return calculer_boucle($id_boucle, $boucles); 
 }
 

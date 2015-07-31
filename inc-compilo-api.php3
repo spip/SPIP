@@ -62,7 +62,7 @@ class Boucle {
 	var $order = '';
 	var $default_order = '';
 	var $date = 'date' ;
-	var $hash = false ;
+	var $hash = "" ;
 	var $lien = false;
 	var $sous_requete = false;
 	var $hierarchie = '';
