@@ -45,10 +45,16 @@ function auth() {
 	// Si pas MySQL, fini
 	//
 	if (!$GLOBALS['db_ok']) {
-		echo "<P><H4>"._T('titre_probleme_technique')."</H4><P><P>\n".
-		"<tt>".spip_sql_errno()." ".spip_sql_error()."</tt>";
-		return false;
+		spip_log("Erreur base de donnees");
+		include_ecrire('inc_presentation.php3');
+		install_debut_html(_T('info_travaux_titre'));
+		echo _T('titre_probleme_technique');
+		echo "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";
+		install_fin_html();
+		exit;
 	}
+
+
 	//
 	// Initialiser variables (eviter hacks par URL)
 	//
