@@ -659,7 +659,6 @@ function count_occ($regs)
 function trace_query_start()
 {
 	static $trace = '?';
-
 	if ($trace === '?') {
 		include_spip('inc/autoriser');
 		// gare au bouclage sur calcul de droits au premier appel
@@ -683,7 +682,7 @@ function trace_query_end($query, $start, $result, $err)
 		_T('info_erreur_requete'). " "  .  htmlentities($query),
 		"&laquo; " .  htmlentities($err)," &raquo;");
 	}
-	return $err;
+	return $result;
 }
 
 // http://doc.spip.org/@trace_query_chrono
@@ -703,7 +702,7 @@ function trace_query_chrono($m1, $m2, $query, $result)
 		$explain .= "<tr><td>$k</td><td>" .str_replace(';','<br />',$v) ."</td></tr>";
 	}
 	if ($explain) $explain = "<table border='1'>$explain</table>";
-	$result = str_replace('Resource id ','',$result);
+	$result = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
 	$query = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
 	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
 				     sprintf(" %3de", $nb),
