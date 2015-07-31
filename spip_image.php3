@@ -375,13 +375,13 @@ if ($doc_supp) {
 if ($vignette) {
 	// securite
 	$fichier_vignette = '';
-	if (!eregi('^IMG/.*([^\./]+)\.([a-z0-9]+)$', $vignette, $regs)) exit;
+	if (!eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $vignette, $regs)) exit;
 	$source = $regs[0];
-	$format = $regs[2];
-	// $destination = $regs[1].'-s';	// adresse old style
+	$format = $regs[3];
+	// $destination = $regs[2].'-s';	// adresse old style
 
 	include_local('inc-cache.php3');
-	$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[1].'-s';	// adresse new style
+	$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';	// adresse new style
 
 	if (lire_meta("creer_preview") == 'oui') {
 		$taille_preview = lire_meta("taille_preview");
