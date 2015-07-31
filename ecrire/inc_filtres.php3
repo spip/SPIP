@@ -393,11 +393,11 @@ function majuscules($texte) {
 
 // "127.4 ko" ou "3.1 Mo"
 function taille_en_octets ($taille) {
-	if ($taille < 1024) {$taille .= "&nbsp;octets";}
+	if ($taille < 1024) {$taille = _T('taille_octets', array('taille' => $taille));}
 	else if ($taille < 1024*1024) {
-		$taille = ((floor($taille / 102.4))/10)."&nbsp;ko";
+		$taille = _T('taille_ko', array('taille' => ((floor($taille / 102.4))/10)));
 	} else {
-		$taille = ((floor(($taille / 1024) / 102.4))/10)."&nbsp;Mo";
+		$taille = _T('taille_mo', array('taille' => ((floor(($taille / 1024) / 102.4))/10)));
 	}
 	return $taille;
 }

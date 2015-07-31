@@ -72,19 +72,13 @@ function init_config() {
 function avertissement_config() {
 	debut_boite_info();
 
-	?>
-	<FONT FACE='Georgia,Garamond,Times,serif' SIZE='3'>
-	<P align="center"><B>ATTENTION !</B>
-
-	<P align="justify">
-	<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">
-<?php
+	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE='3'>
+	<P align='center'><B>"._T('avis_attention')."</B><P align='justify'>
+	<img src='img_pack/warning.gif' alt='' width='48' height='48' align='right'>";
 
 	echo _T('texte_inc_config');
-?>
-	</FONT>
 
-	<?php
+	echo "</FONT>";
 
 	fin_boite_info();
 	echo "<p>&nbsp;<p>";

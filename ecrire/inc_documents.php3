@@ -517,7 +517,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		if ($flag_deplie) echo bouton_block_visible("doc_vignette $id_document,document $id_document");
 		else echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 
-		echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".typo($titre_aff)."</font></b>";
+		echo "<font size=1 face='arial,helvetica,sans-serif'>"._T('info_document')." - </font> <b><font size=2>".typo($titre_aff)."</font></b>";
 		echo "</div>\n";
 
 
