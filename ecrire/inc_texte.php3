@@ -332,7 +332,7 @@ function couper($texte, $taille=50) {
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 function couper_intro($texte, $long) {
-	$texte = eregi_replace("(</?)intro>", "\\1intro>", $texte); // minuscules
+	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);
 		$texte = substr($texte, $fin + strlen("</intro>"));
