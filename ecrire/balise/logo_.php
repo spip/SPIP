@@ -56,7 +56,7 @@ function balise_LOGO__dist ($p) {
 				elseif (in_array($n,array('auto','icone','apercu','vignette')))
 					$mode_logo = $n;
 			}
-			else $lien =  calculer_liste(array($a[0]), $p->descr, $p->boucles, $p->id_boucle);
+			else $lien =  calculer_liste($a, $p->descr, $p->boucles, $p->id_boucle);
 
 		}
 	}
