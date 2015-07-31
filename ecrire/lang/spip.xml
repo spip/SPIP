@@ -10,7 +10,8 @@
 	</langue>
 	<langue code="bg" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bg" total="632" traduits="479" relire="0" modifs="27" nouveaux="126" pourcent="75.79">
 	</langue>
-	<langue code="br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=br" total="632" traduits="569" relire="0" modifs="11" nouveaux="52" pourcent="90.03">
+	<langue code="br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=br" total="632" traduits="568" relire="0" modifs="12" nouveaux="52" pourcent="89.87">
+		<traducteur nom="fa_b" lien="http://trad.spip.net/auteur/fa_b" />
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bs" total="632" traduits="466" relire="0" modifs="42" nouveaux="124" pourcent="73.73">
 	</langue>
