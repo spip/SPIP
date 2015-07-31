@@ -30,7 +30,7 @@ function action_editer_groupe_mot_dist()
 
 	$c = array();
 	foreach (array(
-		'titre', 'descriptif', 'texte', 'tables'
+		'titre', 'descriptif', 'texte', 'tables_liees'
 	) as $champ)
 		$c[$champ] = _request($champ);
 	foreach (array(
@@ -42,7 +42,8 @@ function action_editer_groupe_mot_dist()
 	) as $champ)
 		$c[$champ] = _request("acces_$champ")=='oui'?'oui':'non';
 		
-	$c['tables'] = implode(',',$c['tables']);
+	if (is_array($c['tables_liees']))
+		$c['tables_liees'] = implode(',',$c['tables_liees']);
 
 	revision_groupe_mot($id_groupe, $c);
 	if ($redirect = _request('redirect')) {

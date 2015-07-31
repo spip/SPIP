@@ -160,7 +160,7 @@ $spip_groupes_mots = array(
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
 		"unseul"	=> "varchar(3) DEFAULT '' NOT NULL",
 		"obligatoire"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"tables" => "text DEFAULT '' NOT NULL",
+		"tables_liees" => "text DEFAULT '' NOT NULL",
 		# suppression des champs a faire dans la maj
 		#"articles"	=> "varchar(3) DEFAULT '' NOT NULL",
 		#"breves"	=> "varchar(3) DEFAULT '' NOT NULL",

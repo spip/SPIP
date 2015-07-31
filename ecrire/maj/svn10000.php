@@ -133,12 +133,18 @@ $GLOBALS['maj'][11911] = array(array('maj_11911'));
 // penser a ajouter ici destruction des tables spip_documents_articles etc
 // une fois qu'on aura valide la procedure d'upgrade ci-dessus
 
-$GLOBALS['maj'][11918] = array(
-array('sql_alter',"TABLE spip_groupes_mots ADD tables text DEFAULT '' NOT NULL AFTER obligatoire"),
-array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'articles,')"),"articles='oui'"),
-array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'breves,')"),"breves='oui'"),
-array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'rubriques,')"),"rubriques='oui'"),
-array('sql_update','spip_groupes_mots',array('tables'=>"concat(tables,'syndic,')"),"syndic='oui'"),
+
+$GLOBALS['maj'][11961] = array(
+array('sql_alter',"TABLE spip_groupes_mots CHANGE `tables` tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // si tables a ete cree on le renomme
+array('sql_alter',"TABLE spip_groupes_mots ADD tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // sinon on l'ajoute
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"''"),"articles REGEXP '.*'"), // si le champ articles est encore la, on reinit la conversion
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'articles,')"),"articles='oui'"), // sinon ces 4 requetes ne feront rien
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'breves,')"),"breves='oui'"),
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'rubriques,')"),"rubriques='oui'"),
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'syndic,')"),"syndic='oui'"),
 );
+
+// penser a ajouter ici destruction des champs articles breves rubriques et syndic
+// une fois qu'on aura valide la procedure d'upgrade ci-dessus
 
 ?>

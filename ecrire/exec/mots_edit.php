@@ -72,7 +72,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 			}
 			$row = sql_countsel('spip_groupes_mots', 
-			($table ? "tables REGEXP '(^|,)$table($|,)'" : '')
+			($table ? "tables_liees REGEXP '(^|,)$table($|,)'" : '')
 			//($table ? "$table='oui'" : '')
 			);
 			if (!$row) {

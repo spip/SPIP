@@ -51,7 +51,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	if (!$cpt) {
 		if (!$flag) return;
 		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND $table = 'oui'");
+		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND tables_liees REGEXP '(^|,)$table($|,)");
 
 		if (!$cpt) return;
 	}
@@ -269,7 +269,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		$cond_id_groupes_vus = '';
 	}
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	$nb_groupes = sql_countsel("spip_groupes_mots", "$droit = 'oui' AND obligatoire = 'oui' AND tables REGEXP '(^|,)$table($|,)' $cond_id_groupes_vus");
+	$nb_groupes = sql_countsel("spip_groupes_mots", "$droit = 'oui' AND obligatoire = 'oui' AND tables_liees REGEXP '(^|,)$table($|,)' $cond_id_groupes_vus");
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($flag_tous AND count($les_mots)>= 3) {
@@ -278,7 +278,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		. "</div><br />\n";
 	}
 
-	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "tables REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
+	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "tables_liees REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots non vu
 	$ajouter ='';
