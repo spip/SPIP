@@ -1500,7 +1500,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 		$tables[$table] = array();
 
 		foreach ($desc['field'] as $k=>$v){
-			if (strpos('timestamp', strtolower(ltrim($v)))===0)
+			if (strpos(strtolower(ltrim($v)), 'timestamp')===0)
 			$tables[$table][] = $k;
 		}
 	}
