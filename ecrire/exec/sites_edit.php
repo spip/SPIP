@@ -71,18 +71,15 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		echo generer_url_post_ecrire('sites', "id_rubrique=$id_rubrique"),
+		echo generer_url_post_ecrire('sites', "id_parent=$id_rubrique"),
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",
-		  "<input type='hidden' name='redirect' value='",
-		  urlencode(generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&new=oui", true)),
-		  "' />\n",
 		  "<font face='Verdana,Arial,Sans,sans-serif' size='2'>",
 		  _T('texte_referencement_automatique'),
 		  "</font>",
 		  "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n",
 		  "<input type=\"submit\"  value=\""._T('bouton_ajouter')."\" class='fondo' />\n",
-		  "</form>";		
+		  "</form>";
 		fin_cadre_relief();
 		
 		echo "\n<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";

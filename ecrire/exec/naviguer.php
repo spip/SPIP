@@ -43,16 +43,19 @@ function exec_naviguer_dist()
 				$descriptif,
 				$changer_lang
 			);
-			if (is_int($res)) $id_rubrique = $res;
+
+			// Suite a une creation, rediriger vers l'objet cree
+			if (is_int($res) AND $id_rubrique != $res)
+				redirige_par_entete(generer_url_ecrire('naviguer',
+					'id_rubrique='.$res, true));
 
 			// toute action entraine ceci:
 			calculer_rubriques();
 			calculer_langues_rubriques();
 
-			if ($GLOBALS['invalider_caches']) {
-				include_spip('inc/invalideur');
-				suivre_invalideur("id='id_rubrique/$id_rubrique'");
-			}
+			// invalider les caches marques de cette rubrique
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='id_rubrique/$id_rubrique'");
 		}
 	}
 

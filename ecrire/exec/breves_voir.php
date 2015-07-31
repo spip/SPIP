@@ -241,7 +241,7 @@ function exec_breves_voir_dist()
 global $id_breve, $id_parent, $texte, $titre, $statut,
   $annee, $mois, $jour, $lien_titre, $lien_url,$champs_extra,
   $new, $modifier_breve, $changer_lang, $cherche_mot, $nouv_mot,$supp_mot,
-  $connect_statut, $invalider_caches;
+  $connect_statut;
 
 $id_breve = intval($id_breve);
 
@@ -275,10 +275,9 @@ if (strval($titre)!='' AND $modifier_breve) {
 	spip_query("UPDATE spip_breves SET titre='$titre', texte='$texte', lien_titre='$lien_titre', lien_url='$lien_url', statut='$statut', id_rubrique='$id_rubrique' $add_extra WHERE id_breve=$id_breve");
 
 	// invalider et reindexer
-	if ($invalider_caches) {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_breve/$id_breve'");
-	}
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_breve/$id_breve'");
+
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
 		marquer_indexer('breve', $id_breve);
