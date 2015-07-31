@@ -16,7 +16,6 @@
 if (defined("_ECRIRE_INC_INDEX")) return;
 define("_ECRIRE_INC_INDEX", "1");
 
-
 function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction
 	$liste = "],:;*\"!\r\n\t\\/){}[|@<>$%";
@@ -84,12 +83,87 @@ function deja_indexe($type, $id_objet) {
 	return ($n > 0);
 }
 
-function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* full : inutilise ? */) {
+
+// Extracteur des documents 'txt'
+function extracteur_txt($fichier, &$charset) {
+	lire_fichier($fichier, $contenu);
+
+	// Reconnaitre le BOM utf-8 (0xEFBBBF)
+	include_ecrire('inc_charsets.php3');
+	if (bom_utf8($contenu))
+		$charset = 'utf-8';
+
+	return $contenu;
+}
+
+// Extracteur des documents 'html'
+function extracteur_html($fichier, &$charset) {
+	lire_fichier($fichier, $contenu);
+
+	// Importer dans le charset local
+	include_ecrire('inc_charsets.php3');
+	$contenu = transcoder_page($contenu);
+	$charset = lire_meta('charset');
+
+	return $contenu;
+}
+
+// Quels formats sait-on extraire ?
+$GLOBALS['extracteur'] = array (
+	'txt'   => 'extracteur_txt',
+	'pas'   => 'extracteur_txt',
+	'c'     => 'extracteur_txt',
+	'css'   => 'extracteur_txt',
+	'html'  => 'extracteur_html'
+);
+
+// Indexer le contenu d'un document
+function indexer_document ($row) {
+	global $extracteur;
+
+	if ($row['mode'] == 'vignette') return;
+	list($extension) = spip_fetch_array(spip_query(
+		"SELECT extension FROM spip_types_documents
+		WHERE id_type = ".$row['id_type']
+	));
+
+	// Voir si on sait lire le contenu (eventuellement en chargeant le
+	// fichier extract_pdf.php dans find_in_path() )
+	if ($plugin = find_in_path('extract_'.$extension.'.php')) {
+		include_local($plugin);
+	}
+	if (function_exists($lire = $extracteur[$extension])) {
+		// Voir si on a deja une copie du doc distant
+		// Note: si copie_locale() charge le doc, elle demande une reindexation
+		if (!$fichier = copie_locale($row['fichier'], 'test')) {
+			spip_log("pas de copie locale de '$fichier'");
+			return;
+		}
+		// par defaut, on pense que l'extracteur va retourner ce charset
+		$charset = 'iso-8859-1'; 
+		// lire le contenu
+		$contenu = $lire($fichier, $charset);
+		if (!$contenu) {
+			spip_log("Echec de l'extraction de '$fichier'");
+		} else {
+			// Ne retenir que les 50 premiers ko
+			$contenu = substr($contenu, 0, 50000);
+			// importer le charset
+			$contenu = importer_charset($contenu, $charset);
+			// Indexer le texte
+			indexer_chaine($contenu, 1);
+		}
+	} else {
+		spip_log("pas d'extracteur '$extension' fonctionnel");
+	}
+}
+
+function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	global $index, $mots, $translitteration_complexe;
 
 	$table = 'spip_'.table_objet($type);
 	$table_index = 'spip_index_'.table_objet($type);
-	$col_id = 'id_'.$type;
+	$col_id = id_table_objet($type);
 
 	if (!$id_objet) return;
 	if (!$forcer_reset AND deja_indexe($type, $id_objet)) {
@@ -126,17 +200,15 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		indexer_chaine($row['soustitre'], 5);
 		indexer_chaine($row['surtitre'], 5);
 		indexer_chaine($row['descriptif'], 4);
-		if ($full) {
-			indexer_chaine($row['chapo'], 3);
-			indexer_chaine($row['texte'], 1);
-			indexer_chaine($row['ps'], 1);
-			indexer_chaine($row['nom_site'], 1);
-			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-			$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
-			while ($row_doc = spip_fetch_array($r)) {
-				indexer_chaine($row_doc[0],2);
-				indexer_chaine($row_doc[1],1);
-			}
+		indexer_chaine($row['chapo'], 3);
+		indexer_chaine($row['texte'], 1);
+		indexer_chaine($row['ps'], 1);
+		indexer_chaine($row['nom_site'], 1);
+		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
+		$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
+		while ($row_doc = spip_fetch_array($r)) {
+			indexer_chaine($row_doc[0],2);
+			indexer_chaine($row_doc[1],1);
 		}
 
 		$query2 = "SELECT mots.* FROM spip_mots AS mots, spip_mots_articles AS lien WHERE lien.id_article=$id_objet AND mots.id_mot=lien.id_mot";
@@ -155,41 +227,33 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 
 	case 'breve':
 		indexer_chaine($row['titre'], 8);
-		if ($full) {
-			indexer_chaine($row['texte'], 2);
-			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		}
+		indexer_chaine($row['texte'], 2);
+		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		break;
 
 	case 'rubrique':
 		indexer_chaine($row['titre'], 8);
 		indexer_chaine($row['descriptif'], 5);
-		if ($full) {
-			indexer_chaine($row['texte'], 1);
-			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-			$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
-			while ($row_doc = spip_fetch_array($r)) {
-				indexer_chaine($row_doc[0],2);
-				indexer_chaine($row_doc[1],1);
-			}
+		indexer_chaine($row['texte'], 1);
+		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
+		$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
+		while ($row_doc = spip_fetch_array($r)) {
+			indexer_chaine($row_doc[0],2);
+			indexer_chaine($row_doc[1],1);
 		}
 		break;
 
-	case 'auteur':	
+	case 'auteur':
 		indexer_chaine($row['nom'], 5, 2);
-		if ($full) {
-			indexer_chaine($row['bio'], 1);
-			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		}
+		indexer_chaine($row['bio'], 1);
+		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		break;
 
 	case 'mot':
 		indexer_chaine($row['titre'], 8);
 		indexer_chaine($row['descriptif'], 5);
-		if ($full) {
-			indexer_chaine($row['texte'], 1);
-			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		}
+		indexer_chaine($row['texte'], 1);
+		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		break;
 
 	case 'signature':
@@ -203,21 +267,24 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 	case 'syndic':
 		indexer_chaine($row['nom_site'], 50);
 		indexer_chaine($row['descriptif'], 30);
-		if ($full) {
-			// Ajouter les titres des articles syndiques de ce site, le cas echeant
-			if ($row['syndication'] = "oui") {
-				$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 0,100";
-				$result_syndic = spip_query($query_syndic);
-				while ($row_syndic = spip_fetch_array($result_syndic)) {
-					indexer_chaine($row_syndic['titre'], 5);
-				}
+
+		// Ajouter les titres des articles syndiques de ce site, le cas echeant
+		if ($row['syndication'] = "oui") {
+			$query_syndic = "SELECT titre FROM spip_syndic_articles
+			WHERE id_syndic=$id_objet AND statut='publie'
+			ORDER BY date DESC LIMIT 0,100";
+			$result_syndic = spip_query($query_syndic);
+			while ($row_syndic = spip_fetch_array($result_syndic)) {
+				indexer_chaine($row_syndic['titre'], 5);
 			}
-			// Aller chercher la page d'accueil
-			if (lire_meta("visiter_sites") == "oui") {
-				include_ecrire ("inc_sites.php3");
-				spip_log ("indexation contenu syndic ".$row['url_site']);
-				indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site'], true), 0, 50000)), 1);
-			}
+		}
+		// Aller chercher la page d'accueil
+		if (lire_meta("visiter_sites") == "oui") {
+			include_ecrire ("inc_sites.php3");
+			spip_log ("indexation contenu syndic ".$row['url_site']);
+			indexer_chaine(supprimer_tags(
+				recuperer_page($row['url_site'], true, false, 50000)
+				), 1);
 		}
 		break;
 
@@ -271,6 +338,17 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 
 		break;
 
+
+	case 'document':
+		// 1. Indexer le descriptif
+		indexer_chaine($row['titre'], 20);
+		indexer_chaine($row['descriptif'], 10);
+		indexer_chaine(preg_replace(',^(IMG/|.*://),', '', $row['fichier']), 1);
+		// 2. Indexer le contenu si on sait le lire
+		indexer_document($row);
+		break;
+
+
 	} // switch
 
 	$query = "DELETE FROM $table_index WHERE $col_id=$id_objet";
@@ -304,25 +382,13 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 function marquer_indexer ($objet, $id_objet) {
 	spip_log ("demande indexation $objet $id_objet");
 	$table = 'spip_'.table_objet($objet);
-	spip_query ("UPDATE $table SET idx='1' WHERE id_$objet=$id_objet AND idx!='non'");
+	$id = id_table_objet($objet);
+	spip_query ("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
 }
+
+// A garder pour compatibilite bouton memo...
 function indexer_article($id_article) {
 	marquer_indexer('article', $id_article);
-}
-function indexer_auteur($id_auteur) {
-	marquer_indexer('auteur', $id_auteur);
-}
-function indexer_breve($id_breve) {
-	marquer_indexer('breve', $id_breve);
-}
-function indexer_mot($id_mot) {
-	marquer_indexer('mot', $id_mot);
-}
-function indexer_rubrique($id_rubrique) {
-	marquer_indexer('rubrique', $id_rubrique);
-}
-function indexer_syndic($id_syndic) {
-	marquer_indexer('syndic', $id_syndic);
 }
 
 // n'indexer que les objets publies
@@ -340,6 +406,7 @@ function critere_indexation($type) {
 			$critere = "statut IN ('0minirezo', '1comite')";
 			break;
 		case 'mot':
+		case 'document':
 		default:
 			$critere = '1=1';
 			break;
@@ -351,7 +418,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 	// chercher un objet a indexer dans chacune des tables d'objets
 	$vu = array();
-	$types = array('article','auteur','breve','mot','rubrique','signature','syndic','forum');
+	$types = array('article','auteur','breve','mot','rubrique','signature','syndic','forum','document');
 
 	while (list(,$type) = each($types)) {
 		$table_objet = 'spip_'.table_objet($type);
@@ -359,7 +426,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 		$critere = critere_indexation($type);
 
-		if ($type == 'syndic')
+		if ($type == 'syndic' /* OR $type == 'document' */)
 			$limit = 1;
 		else
 			$limit = $nombre_indexations;
@@ -384,7 +451,7 @@ function executer_une_indexation_syndic() {
 }
 
 function creer_liste_indexation() {
-	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
+	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature','document');
 	while (list(,$type) = each($types)) {
 		$table = 'spip_'.table_objet($type);
 		spip_query("UPDATE $table SET idx='1' WHERE idx!='non'");
@@ -400,6 +467,7 @@ function purger_index() {
 		spip_query("DELETE FROM spip_index_syndic");
 		spip_query("DELETE FROM spip_index_forum");
 		spip_query("DELETE FROM spip_index_signatures");
+		spip_query("DELETE FROM spip_index_documents");
 		spip_query("DELETE FROM spip_index_dico");
 }
 

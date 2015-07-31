@@ -77,7 +77,7 @@ WHERE id_rubrique=$id_rubrique");
 	}
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_rubrique($id_rubrique);
+		marquer_indexer('rubrique', $id_rubrique);
 	}
  }
 

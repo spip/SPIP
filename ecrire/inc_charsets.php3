@@ -2437,12 +2437,20 @@ function translitteration_complexe($texte) {
 	return translitteration($texte,'AUTO','complexe');
 }
 
+// Reconnaitre le BOM utf-8 (0xEFBBBF)
+function bom_utf8($texte) {
+	return (substr($texte, 0,3) == chr(0xEF).chr(0xBB).chr(0xBF));
+}
+
 // Transcode une page (probablement attrapee sur le web) en essayant
 // par tous les moyens de deviner son charset (y compris headers HTTP)
 function transcoder_page($texte, $headers='') {
 
+	// Reconnaitre le BOM utf-8 (0xEFBBBF)
+	if (bom_utf8($texte))
+		$charset = 'utf-8';
 	// charset precise par le contenu (xml)
-	if (preg_match(',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+	else if (preg_match(',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
 		$charset = trim(strtolower($regs[1]));
 	// charset precise par le contenu (html)
 	else if (preg_match(',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))

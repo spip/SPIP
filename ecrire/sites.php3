@@ -112,7 +112,7 @@ if ($nouveau_statut AND $flag_administrable) {
 	if ($statut == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
-			indexer_syndic($id_syndic);
+			marquer_indexer('syndic', $id_syndic);
 		}
 	}
 }
@@ -152,7 +152,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 		}
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
-			indexer_syndic($id_syndic);
+			marquer_indexer('syndic', $id_syndic);
 		}
 	}
 	$link = new Link('sites.php3');

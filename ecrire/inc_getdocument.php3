@@ -469,6 +469,10 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."'
 		WHERE id_document = $id_document");
 
+	// Demander l'indexation du document
+	include_ecrire('inc_index.php3');
+	marquer_indexer('document', $id_document);
+
 	return true;
 }
 

@@ -990,6 +990,11 @@ function maj_base() {
 		maj_version(1.815);
 	}
 
+	// Indexation des documents (rien a faire sauf reinstaller inc_auxbase)
+	if ($version_installee < 1.816) {
+		maj_version(1.816);
+	}
+
 
 	return true;
 }

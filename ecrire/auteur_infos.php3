@@ -200,7 +200,7 @@ modifier_statut_auteur($auteur);
 if ($nom OR $statut) {
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_auteur($id_auteur);
+		marquer_indexer('auteur', $id_auteur);
 	}
 
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin

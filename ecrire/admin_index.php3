@@ -56,7 +56,7 @@ echo "<a href='admin_index.php3?purger=oui'>"._L('Cliquez ici pour purger les ta
 
 
 // graphe des objets indexes
-$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
+$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature','document');
 while (list(,$type) = each($types)) {
 	$table = 'spip_'.table_objet($type);
 	$table_index = 'spip_index_'.table_objet($type);

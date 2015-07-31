@@ -64,7 +64,7 @@ if ($titre AND $modifier_breve) {
 	}
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_breve($id_breve);
+		marquer_indexer('breve', $id_breve);
 	}
 	calculer_rubriques();
 	
