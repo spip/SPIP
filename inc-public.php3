@@ -99,6 +99,8 @@ else {
 			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
 		// Appeler le buffer (var_recherche + compression)
+		// NOTE: COMMENTER CETTE LIGNE FERA S'AFFICHER D'EVENTUELS
+		// MESSAGES D'ERREUR DE SPIP_CRON()
 		@ob_end_flush();
 	}
 

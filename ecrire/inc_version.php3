@@ -153,6 +153,12 @@ $bouton_admin_debug = false;
 # car les forums sont toujours invalidants.
 $invalider_caches = true;
 
+// Quota : la variable $quota_cache, si elle est > 0, indique la taille
+// totale maximale desiree des fichiers contenus dans le CACHE/ ;
+// ce quota n'est pas "dur", il ne s'applique qu'une fois par heure et
+// fait redescendre le cache a la taille voulue ; valeur en Mo
+$quota_cache = 0;
+
 // Serveurs externes
 $spip_server = array (
 	'tex' => 'http://math.spip.org/tex.php',
