@@ -11,52 +11,11 @@
 \***************************************************************************/
 
 
-//
-// Si le RSS est demande on ne passe pas par l'authentification de ecrire/
-// (hack rapide en attendant une meilleure solution)
-//
-if ($_GET['rss']) {
-	include("inc_version.php3");
-
-	$debut = intval($debut);
-	$uniq_auteur = ($uniq_auteur != false);
-	include_ecrire("inc_suivi_revisions.php");
-	include_ecrire("lab_revisions.php");
-	include_ecrire("lab_diff.php");
-	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_presentation.php3");
-	include_ecrire("inc_acces.php3");
-
-
-	// verifier la securite du lien (rss = md5(arguments + low_sec(id_auteur))
-	if (!verifier_low_sec ($id_auteur, $rss,
-	"rss suivi $debut $id_secteur $uniq_auteur $lang_choisie"
-	))
-		$rss = array(array('title' => 'Erreur'));
-	else
-		$rss = afficher_suivi_versions ($debut, $id_secteur, $uniq_auteur, $lang_choisie, true, true);
-
-	include_ecrire('inc_sites.php3');
-	@header('Content-Type: text/xml; charset='.lire_meta('charset'));
-
-	$intro = array(
-		'title' => "[".lire_meta('nom_site')."] "
-			._T("icone_suivi_revisions"),
-		'url' => lire_meta('adresse_site').'/'
-			._DIR_RESTREINT_ABS .'suivi_revisions.php3'
-	);
-
-	echo affiche_rss($rss, $intro);
-	exit;
-}
-
-
 include("inc_lab.php");
 include_ecrire("inc_suivi_revisions.php");
 include_spip("ecrire.php");
 include_spip("revisions.php");
 include_spip("diff.php");
-include_ecrire("inc_acces.php3");
 
 $debut = intval($debut);
 $uniq_auteur = ($uniq_auteur != false);
@@ -133,16 +92,18 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 echo "</ul></div>\n";
 
 // lien vers le rss
-$link = new Link();
-$link->addVar('id_auteur', $connect_id_auteur);
-$link->addVar('rss', afficher_low_sec($connect_id_auteur,
-	"rss suivi $debut $id_secteur $uniq_auteur $lang_choisie"));
-
+include_ecrire('inc_sites.php3');
+$op = 'revisions';
+$args = array(
+	'id_secteur' => $id_secteur,
+	'id_auteur' => $uniq_auteur ? $connect_id_auteur : false,
+	'lang_choisie' => $lang_choisie
+);
 echo "<div style='text-align: "
 	. $GLOBALS['spip_lang_right']
-	. ";'><a href='".$link->getUrl()."'>"
-	. http_img_pack("xml.gif", 'XML', "border='0' align='middle' valign='top'")
-	. "</a></div>";
+	. ";'>"
+	. bouton_spip_rss($op, $args)
+	."</div>";
 
 
 fin_cadre_relief();
@@ -156,7 +117,9 @@ fin_cadre_relief();
 
 debut_droite();
 
-afficher_suivi_versions ($debut, $id_secteur, $uniq_auteur, $lang_choisie);
+afficher_suivi_versions ($debut, $id_secteur,
+	$uniq_auteur ? $connect_id_auteur : '',
+	$lang_choisie);
 
 fin_page();
 

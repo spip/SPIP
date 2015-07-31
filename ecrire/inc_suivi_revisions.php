@@ -32,17 +32,19 @@ function afficher_para_modifies ($texte, $court = false) {
 	return $texte;
 }
 
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
-	global $connect_id_auteur, $connect_statut, $dir_lang;
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = false, $lang = "", $court = false, $rss = false) {
+	global $dir_lang;
 	
 	$nb_aff = 10;
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 
-	if ($uniq_auteur) $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
-	else $req_where = " AND articles.statut IN ('prop','publie')"; 
+	if ($id_auteur) {
+		$req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
+		$req_where = " AND versions.id_auteur = $id_auteur";
+	} else {
+		$req_where = " AND articles.statut IN ('prop','publie')";
+	}
 	
-	if ($uniq_auteur) $req_where = " AND versions.id_auteur = $connect_id_auteur";
-
 	if (strlen($lang) > 0) $req_where .= " AND articles.lang='$lang'";
 
 	if ($id_secteur > 0) $req_where .= " AND articles.id_secteur = $id_secteur";
