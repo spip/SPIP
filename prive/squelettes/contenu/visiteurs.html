@@ -20,4 +20,8 @@
 <div class='nettoyeur'></div>
 
 #SET{filtre,#SESSION{statut}|=={0minirezo}|?{poubelle,'prepa|poubelle|refuse'}|explode{|}}
-<INCLURE{fond=prive/objets/liste/visiteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}>
+[(#INCLURE{fond=prive/objets/liste/visiteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}
+|sinon{#ENV{recherche}|?{
+#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'}
+}})
+]
