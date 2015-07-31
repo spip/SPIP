@@ -631,15 +631,44 @@ function supprime_document_et_vignette($doc_supp) {
 // Faire tourner une image
 //
 function gdRotate ($imagePath,$rtt){
-	if(preg_match("/\.(png)/i", $imagePath))
-		$src_img=ImageCreateFromPNG($imagePath);
-	else if(preg_match("/\.(jpg)/i", $imagePath))
-		$src_img=ImageCreateFromJPEG($imagePath);
-	else if(preg_match("/\.(bmp)/i", $imagePath))
-		$src_img=ImageCreateFromWBMP($imagePath);
-	$size=@getimagesize($imagePath);
+	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $imagePath, $regs)) {
+		switch($regs[1]) {
+			case 'png':
+				$src_img=ImageCreateFromPNG($imagePath);
+				$save = 'imagepng';
+				break;
+			case 'gif':
+				$src_img=ImageCreateFromGIF($imagePath);
+				$save = 'imagegif';
+				break;
+			case 'jpeg':
+			case 'jpg':
+				$src_img=ImageCreateFromJPEG($imagePath);
+				$save = 'Imagejpeg';
+				break;
+			case 'bmp':
+				$src_img=ImageCreateFromWBMP($imagePath);
+				$save = 'imagewbmp';
+				break;
+			default:
+				return false;
+		}
+	}
 
-	// Sous GD2 : ImageCreateTrueColor
+	if (!$src_img) {
+		spip_log("gdrotate: image non lue, $imagePath");
+		return false;
+	}
+
+	$size=@getimagesize($imagePath);
+	if (!($size[0] * $size[1])) return false;
+
+	if (function_exists('imagerotate')) {
+		$dst_img = imagerotate($src_img, $rtt, 0);
+	} else {
+
+	// Creer l'image destination (hauteur x largeur) et la parcourir
+	// pixel par pixel (un truc de fou)
 	$process = lire_meta('image_process');
 	if ($process == "gd2")
 		$dst_img=ImageCreateTrueColor($size[1],$size[0]);
@@ -682,9 +711,13 @@ function gdRotate ($imagePath,$rtt){
 			$b--;
 		}
 	}
+	}
 	ImageDestroy($src_img);
 	ImageInterlace($dst_img,0);
-	ImageJPEG($dst_img,$imagePath);
+
+	# obligatoire d'enregistrer dans le meme format, puisque c'est
+	# dans le fichier de depart...
+	$save($dst_img,$imagePath);
 }
 
 function tourner_document($var_rot, $doc_rotate, $convert_command) {
