@@ -56,8 +56,13 @@ function exec_upgrade_dist()
 		include_spip('inc/headers');
 		$admin = charger_fonction('admin', 'inc');
 		$res = $admin('upgrade', _T('info_mise_a_niveau_base'), $commentaire);
-		if ($res) echo $res;
+		if ($res)
+			echo $res;
 		else {
+			// effacer les alea pour forcer leur relecture
+			// si jamais ils ont change pendant l'upgrade
+			unset($GLOBALS['meta']['alea_ephemere']);
+			unset($GLOBALS['meta']['alea_ephemere_ancien']);
 			$res = redirige_action_auteur('purger', 'cache', 'admin_plugin', 'var_mode=recalcul', true);
 			echo redirige_formulaire($res);
 		}
