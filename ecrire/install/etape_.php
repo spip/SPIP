@@ -27,7 +27,7 @@ function install_etape__dist()
 			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",
 			"<p>",_T('install_select_langue'),"</p>",
 			"<div>",$menu_langues,"</div>\n",
-			generer_test_dirs(bouton_suivant());
+			generer_test_dirs('', bouton_suivant());
 		echo install_fin_html();
 	}
 }

@@ -359,15 +359,22 @@ function corriger_extension($ext) {
 	}
 }
 
-// Afficher un formulaire de choix: decompacter et/ou garder tel quel.
+// Afficher un formulaire de choix: decompacter et/ou garder tel quel
+// et reconstruire un generer_action_auteur.
 // Passer ca en squelette un de ces jours.
 
 // http://doc.spip.org/@liste_archive_jointe
 function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect)
 {
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
-	$texte =
-		"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
+
+	$texte = "
+<input name='redirect' value='$redirect' />
+<input type='hidden' name='iframe_redirect' value='$iframe_redirect' />
+<input type='hidden' name='hash' value='$hash' />
+<input type='hidden' name='chemin' value='$zip' />
+<input type='hidden' name='arg' value='$arg))' />
+<input type='radio' checked='checked' name='sousaction5' value='5'>" .
 	  	_T('upload_zip_telquel').
 		"</div>".
 		"<div><input type='radio' name='sousaction5' value='6'>".
@@ -382,55 +389,20 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		"</div>".
 		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').
-		  "'></div>";
-	$action = construire_upload($texte, array(
-					 'redirect' => $redirect,
-					 'iframe_redirect' => $iframe_redirect,
-					 'hash' => $hash,
-					 'chemin' => $zip,
-					 'arg' => $arg));
-	
+		  "'>";
+
+	$texte = "<p>" .
+		_T('upload_fichier_zip_texte') .
+		"</p><p>" .
+		_T('upload_fichier_zip_texte2') .
+		 "</p>" .
+		generer_form_public('joindre', $texte);
+
 	if(_request("iframe")=="iframe") {
-	return "<p>build form $iframe_redirect</p>" .
-	  "<div class='upload_answer upload_zip_list'><p>" .
-	  _T('upload_fichier_zip_texte') .
-	  "</p><p>" .
-	  _T('upload_fichier_zip_texte2') .
-	  "</p>" .
-	  $action.
-	  "</div>";
-	} else {
-  				 
-	return minipres(_T('upload_fichier_zip'),
-		      "<p>" .
-		      _T('upload_fichier_zip_texte') .
-		      "</p><p>" .
-		      _T('upload_fichier_zip_texte2') .
-		      "</p>" .
-		      $action);
-	}
+		return "<p>build form $iframe_redirect</p>" .
+		  "<div class='upload_answer upload_zip_list'>" .
+		  $texte .
+		  "</div>";
+	} else { return minipres(_T('upload_fichier_zip'), $texte); }
 }
-
-
-// Reconstruit un generer_action_auteur 
-
-// http://doc.spip.org/@construire_upload
-function construire_upload($corps, $args, $enctype='')
-{
-	$res = "";
-	foreach($args as $k => $v)
-	  if ($v)
-	    $res .= "\n<input type='hidden' name='$k' value='$v' />";
-
-# ici enlever $action pour uploader directemet dans l'espace prive (UPLOAD_DIRECT)
-	return "\n<form method='post' action='" . generer_url_action('joindre') .
-	  "'" .
-	  (!$enctype ? '' : " enctype='$enctype'") .
-	  " 
-	  >\n" .
-	  "<div>" .
-  	  "\n<input type='hidden' name='action' value='joindre' />" .
-	  $res . $corps . "</div></form>";
-}
-
 ?>
