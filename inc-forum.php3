@@ -135,7 +135,6 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 		boutonne('hidden', 'id_message', $id_message) .
 		boutonne('hidden', 'alea', $alea) .
 		boutonne('hidden', 'hash', $hash) .
-"ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea" .
 		(($afficher_texte == "non") ?
 		 (boutonne('hidden', 'titre', $titre) .
 		  $table .
@@ -386,10 +385,9 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	  "','".$table."', '".$accepter_forum."', '".$url."', \"
 	<input type='hidden' name='retour' value='".$retour_forum."' />
 	<input type='hidden' name='ajout_forum' value='oui' />
-	";
-	// message de moderation
-	$lacible .= (($accepter_forum != 'pri') ? '' :
-	((_T('forum_info_modere'). '<p>'))) . "\"); lang_dselect();";
+	" .
+	  (($accepter_forum != 'pri') ? '' : (_T('forum_info_modere'). '<p>')) . 
+	  "\"); lang_dselect();";
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($accepter_forum == "abo")
