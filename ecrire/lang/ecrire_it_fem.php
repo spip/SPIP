@@ -754,6 +754,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_titre_automatique' => 'Installazione automatica',
 'plugin_titre_automatique_ajouter' => 'Aggiungere dei plug-in',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Continuare per attivarlo',
 'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
 'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco ',
@@ -765,7 +766,7 @@ Le traduzioni sono associate all\'originale,
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ plug-in attivati.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ plug-in',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plug-in disponibili.',
@@ -773,6 +774,7 @@ Le traduzioni sono associate all\'originale,
 'plugins_liste' => 'Elenco dei plugin',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Struttura gerarchica',
 'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',

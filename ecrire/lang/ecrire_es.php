@@ -731,6 +731,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugin_titre_automatique' => 'Instalación automática',
 'plugin_titre_automatique_ajouter' => 'Añadir plugins',
 'plugin_titre_installation' => 'Instalación del plugin @plugin@',
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Continúa para activarlo',
 'plugin_zip_adresse' => 'indica aquí la dirección de un archivo zip de plugin a descargar, o también la dirección de una lista de plugins.',
 'plugin_zip_adresse_champ' => 'Dirección del plugin o de la lista ',
@@ -742,7 +743,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugins_actif_aucun' => 'Ningún plugin activado.',
 'plugins_actif_un' => 'Un plugin activado.',
 'plugins_actifs' => '@count@ plugins activados.',
-'plugins_actifs_liste' => 'Plugins activos',
+'plugins_actifs_liste' => 'Plugins activos', # MODIF
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'Un plugin disponible.',
 'plugins_disponibles' => '@count@ plugins disponibles.',
@@ -750,6 +751,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugins_liste' => 'Lista de plugins',
 'plugins_liste_extensions' => 'Extensiones',
 'plugins_recents' => 'Plugins recientes.',
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Jerarquía',
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Versión del protocolo:',

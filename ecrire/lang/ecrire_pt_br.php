@@ -729,6 +729,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugin_titre_automatique' => 'Instalação automática',
 'plugin_titre_automatique_ajouter' => 'Incluir plugins',
 'plugin_titre_installation' => 'Instalação do plugin @plugin@',
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Continue para o ativar',
 'plugin_zip_adresse' => 'Indique abaixo o endereço de uma arquivo zip de plugin a ser transferido, ou ainda o endereço de uma lista de plugins.',
 'plugin_zip_adresse_champ' => 'Endereço do plugin ou da lista',
@@ -740,7 +741,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugins_actif_aucun' => 'Nenhum plugin ativado.',
 'plugins_actif_un' => 'Um plugin ativado.',
 'plugins_actifs' => '@count@ plugins ativados.',
-'plugins_actifs_liste' => 'Plugins ativos',
+'plugins_actifs_liste' => 'Plugins ativos', # MODIF
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'Um plugin disponível.',
 'plugins_disponibles' => '@count@ plugins disponiveis.',
@@ -748,6 +749,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugins_liste' => 'Lista dos plugins',
 'plugins_liste_extensions' => 'Extensões',
 'plugins_recents' => 'Plugins recentes.',
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hierarquia',
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Versão do protocolo:',

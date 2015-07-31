@@ -739,6 +739,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_titre_automatique' => 'Instalazio automatikoa',
 'plugin_titre_automatique_ajouter' => 'Plugin batzu gehitu',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Aktibatzeko, segitu',
 'plugin_zip_adresse' => 'Hemen zehaz eazu deskargatu nahi duzun plugin  baten zip fitxategiaren helbidea, edo plugin zerrenda baten helbidea.',
 'plugin_zip_adresse_champ' => 'pluginaren edo zerrendaren helbidea ',
@@ -750,7 +751,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ plugin aktibatuak.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ plugin',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugin erabilgarriak',
@@ -758,6 +759,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugins_liste' => 'Pluginen zerrenda',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hierarkia',
 'plugins_vue_liste' => 'Zerrenda',
 'protocole_ldap' => 'Protokoloaren bersioa :',

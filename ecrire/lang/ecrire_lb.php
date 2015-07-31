@@ -729,6 +729,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugin_titre_automatique' => 'Automatësch Installatioun',
 'plugin_titre_automatique_ajouter' => 'Plugin\'e derbäi setzen',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Fuert weider fir ze aktivéieren',
 'plugin_zip_adresse' => 'gidd hei d\'Adress vun engem Plugin-Zip-Fichier un, oder d\'Adress vun enger Lëscht vu Plugin\'e.',
 'plugin_zip_adresse_champ' => 'Adress vum Plugin oder vun der Lëscht ',
@@ -740,7 +741,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ aktivéiert Plugin\'e.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ Plugin\'e',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ Plugin\'e verfügbar.',
@@ -748,6 +749,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugins_liste' => 'Lëscht vun de Plugin\'en',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hiérarchie',
 'plugins_vue_liste' => 'Lëscht',
 'protocole_ldap' => 'Versioun vum Protokol:',

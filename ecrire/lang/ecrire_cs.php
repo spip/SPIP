@@ -761,6 +761,7 @@ ukazuje jejich stav:',
 'plugin_titre_automatique' => 'Automatic installation', # NEW
 'plugin_titre_automatique_ajouter' => 'Add plugins', # NEW
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Continue in order to activate', # NEW
 'plugin_zip_adresse' => 'Below, give the address of a zip file of a plugin to be loaded, or else the address of a list of plugins.', # NEW
 'plugin_zip_adresse_champ' => 'Address of the plugin or of the list ', # NEW
@@ -772,7 +773,7 @@ ukazuje jejich stav:',
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ active plugins.', # NEW
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ plugins', # NEW
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ available plugins.', # NEW
@@ -780,6 +781,7 @@ ukazuje jejich stav:',
 'plugins_liste' => 'Seznam pluginů',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hierarchy', # NEW
 'plugins_vue_liste' => 'List', # NEW
 'protocole_ldap' => 'Protocol version:', # NEW
