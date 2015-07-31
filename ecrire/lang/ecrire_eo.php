@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Neniu rezulto.',
 'avis_chemin_invalide_1' => 'La alirvojo, kiun vi elektis, ',
 'avis_chemin_invalide_2' => 'ne &#349;ajnas ta&#365;gi. Bonvolu reveni al la anta&#365;a pa&#285;o kaj kontroli la entajpitajn datenojn.',
-'avis_connexion_echec_1' => 'Konekti&#285;o al MySQL-servilo malsukcesis.',
+'avis_connexion_echec_1' => 'Konekti&#285;o al SQL-servilo malsukcesis.',
 'avis_connexion_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu entajpitajn datenojn.',
-'avis_connexion_echec_3' => '<b>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al MySQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
+'avis_connexion_echec_3' => '<b>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al SQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
 'avis_connexion_ldap_echec_1' => 'Konekti&#285;o al LDAP-servilo malsukcesis.',
 'avis_connexion_ldap_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu la entajpitajn datenojn. ',
 'avis_connexion_ldap_echec_3' => 'Eventuale, provu ne uzi LDAP-materialon por importi uzantojn.',
 'avis_conseil_selection_mot_cle' => '<b>Ampleksa grupo&nbsp;:</b> Estas tre konsilate elekti &#349;losilvorton el tiu grupo.',
 'avis_deplacement_rubrique' => 'Atentu! Tiu &#265;i rubriko enhavas @contient_breves@ fulm-informon @scb@&nbsp;: se vi translokas &#285;in, bonvolu no&#265;i tiun por-konfirman no&#265;ujon. ',
 'avis_destinataire_obligatoire' => 'Vi devas indiki adresaton anta&#365; ol sendi &#265;i tiun mesa&#285;on.',
-'avis_erreur_connexion_mysql' => 'MySQL-konekta eraro ',
+'avis_erreur_connexion_mysql' => 'SQL-konekta eraro ',
 'avis_erreur_version_archive' => '<b>Atentu! La dosiero @archive@ kongruas kun
     alia versio de SPIP ol tiu, kiun vi instalis.</b>
     Vi estas alfrontonta grandegajn problemojn:
@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Okazis problemo pri abonrilato inter tiuj retejoj',
 'avis_sites_syndiques_probleme' => 'Tiuj abonligitaj retejoj okazigis problemon',
 'avis_suppression_base' => 'ATENTU, forvi&#349;o de datenoj estas definitiva',
-'avis_version_mysql' => 'Via MySQL-versio (@version_mysql@) ne ebligas memriparon de datenbazaj tabeloj.',
+'avis_version_mysql' => 'Via SQL-versio (@version_mysql@) ne ebligas memriparon de datenbazaj tabeloj.',
 
 
 // B
@@ -311,7 +311,7 @@ forvi&#349;i ilin poste).',
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
 'info_connexion_base' => 'Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
 'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p /> Vi povas iri al la sekvanta etapo',
-'info_connexion_mysql' => 'Unua etapo: <b>Via MySQL-konekti&#285;o</b>',
+'info_connexion_mysql' => 'Via SQL-konekti&#285;o',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
 'info_contenu_articles' => 'Enhavo de la artikoloj',
@@ -419,7 +419,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_message_en_redaction' => 'Viaj redaktataj mesa&#285;oj',
 'info_message_technique' => 'Teknika mesa&#285;o:',
 'info_messagerie_interne' => 'Interna mesa&#285;ilo',
-'info_mise_a_niveau_base' => 'alniveligo de via MySQL-datenbazo',
+'info_mise_a_niveau_base' => 'alniveligo de via SQL-datenbazo',
 'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
  SPIP-dosierojn.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Defa&#365;lta funkcimodo de la publikaj forumoj',
@@ -837,7 +837,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
  rapide &#265;eretigi koncizajn informojn, mastrumi
  gazetarrevuon, kalendaron de eventoj...',
 'texte_choix_base_1' => 'Elektu vian datenbazon:',
-'texte_choix_base_2' => 'La MySQL-servilo enhavas plurajn datenbazojn.',
+'texte_choix_base_2' => 'La SQL-servilo enhavas plurajn datenbazojn.',
 'texte_choix_base_3' => '<b>Elektu</b> &#265;i-poste tiun, kiun atribuis al vi via retejgastiganto:',
 'texte_choix_table_prefix' => 'Prefikso de la tabeloj&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
@@ -856,7 +856,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_config_groupe_mots_cles' => '&#264;u vi deziras aktivigi la plendetalan konfiguron de la &#349;losilvortoj,
    indikante ekzemple ke oni povas elekti po unu vorton en grupo,
    ke iu grupo estu grava... ?',
-'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto&nbsp;: de tiuj informoj vi ekscios, &#265;u via gastiganto eltenas MySQL-on, la kodojn por konekti&#285;i al la MySQL-servilo.',
+'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto&nbsp;: en ili, vi trovos la ensalutilojn necesajn por konekti&#285;i al la SQL-servilo.',
 'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
 'texte_contenu_articles' => 'La&#365; la modelo adoptita por via retejo, vi povas decidi
   ke certaj elementoj de la artikoloj ne estu uzataj.
@@ -951,11 +951,11 @@ rekalkuli ununuran pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la 
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencigita &#265;e via SPIP-retejo, sed redirektita al alia URL.',
 'texte_referencement_automatique' => '<b>A&#365;tomata retej-referenciga procezo</b><br />Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan retadreson a&#365; ties abonligon. SPIP a&#365;tomate abon&#349;utos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
-'texte_requetes_echouent' => '<b>Kiam iuj MySQL-ser&#265;petoj sisteme
+'texte_requetes_echouent' => '<b>Kiam iuj SQL-ser&#265;petoj &#265;iufoje
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
 mem.</b><p>
-MySQL disponas je ripar-kapablo pri siaj
+SQL disponas je ripar-kapablo de siaj
 tabeloj kiam ili estas akcidente difektitaj.
 Vi povas &#265;i tie provi riparon;
 en kazo de malsukceso, faru ekrankopion.

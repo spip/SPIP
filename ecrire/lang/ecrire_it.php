@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Nessun risultato.',
 'avis_chemin_invalide_1' => 'il percorso che hai scelto',
 'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
-'avis_connexion_echec_1' => 'il collegamento al server MySQL &egrave; fallito.',
+'avis_connexion_echec_1' => 'Il collegamento al server SQL &egrave; fallito.',
 'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Spesso sul server si deve <b>chiedere</b> l\'attivazione dell\'accesso al database MySQL prima di poterlo utilizzare. Se &egrave; impossibile collegarsi, verificare la configurazione per la connessione con l\'amministratore del sistema.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Su molti server si deve <b>chiedere</b> l\'attivazione dell\'accesso al database SQL prima di poterlo utilizzare. Se &egrave; impossibile collegarsi, verificare che questo passo sia stato fatto.',
 'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP &egrave; fallita.',
 'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
 'avis_conseil_selection_mot_cle' => '<b>Gruppo importante:</b> &egrave; consigliato selezionare una parola chiave in questo gruppo.',
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
-'avis_erreur_connexion_mysql' => 'Errore di connessione MySQL',
+'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
 'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
@@ -46,7 +46,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'avis_sites_probleme_syndication' => 'Si sono verificati alcuni problemi nella syndication di questi siti',
 'avis_sites_syndiques_probleme' => 'Si sono verificati alcuni problemi nella syndication di questi siti',
 'avis_suppression_base' => 'ATTENZIONE, la cancellazione dei dati &egrave; irreversibile',
-'avis_version_mysql' => 'La versione di MySQL installata (@version_mysql@)non permette la correzione automatica delle tabelle.',
+'avis_version_mysql' => 'Il vostro server SQL (@version_mysql@)non permette la correzione automatica delle tabelle del database.',
 
 
 // B
@@ -317,7 +317,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_confirmer_passe' => 'Conferma la nuova password:',
 'info_connexion_base' => 'Prova di connessione al database',
 'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
-'info_connexion_mysql' => 'La connessione a MySQL',
+'info_connexion_mysql' => 'La connessione a SQL',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
 'info_contenu_articles' => 'Contentuto degli articoli',
@@ -429,7 +429,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_message_en_redaction' => 'I tuoi messaggi in corso di redazione',
 'info_message_technique' => 'Messaggio tecnico:',
 'info_messagerie_interne' => 'Sistema di messaggistica interna',
-'info_mise_a_niveau_base' => 'aggiornamento del database MySQL',
+'info_mise_a_niveau_base' => 'aggiornamento del database SQL',
 'info_mise_a_niveau_base_2' => '{{Attenzione!}} &Egrave; stata installata una versione
 dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
 le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
@@ -852,7 +852,7 @@ i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
 di mettere on line rapidamente delle news di attualit&agrave;,
 di gestire una rassegna stampa o un calendario di eventi, ecc.',
 'texte_choix_base_1' => 'Scegli il database:',
-'texte_choix_base_2' => 'Il server MySQL contiene diversi database.',
+'texte_choix_base_2' => 'Il server SQL contiene diversi database.',
 'texte_choix_base_3' => '<b>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
 'texte_choix_table_prefix' => 'Prefisso delle tabelle:',
 'texte_commande_vider_tables_indexation' => 'Utilizza questo comando per svuotare le tabelle d\'incidizzazione utilizzate
@@ -870,7 +870,7 @@ quando si passa con il mouse sopra al titolo.',
 'texte_compte_elements' => '@count@ elementi',
 'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
 indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo o che un gruppo &egrave; importante, ecc.?',
-'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare, se il tuo dominio sopporta MySQL, i codici di collegamento al server MySQL.',
+'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare i codici di collegamento al server SQL.',
 'texte_contenu_article' => 'Contenuto dell\'articolo in poche parole (<em>abstract</em>)',
 'texte_contenu_articles' => 'A seconda del modello di presentazione adottato per il sito, puoi decidere
 che alcuni elementi degli articoli siano utilizzati oppure no.
@@ -953,14 +953,14 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_recuperer_base' => 'Ripara il database',
 'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
 'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
-'texte_requetes_echouent' => '<b>Quando alcune query MySQL falliscono
+'texte_requetes_echouent' => '<b>Quando alcune query SQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
 che sia per colpa del database stesso.</b><p />
-MySQL dispone di una funzione di ripristino delle tabelle
+Il server SQL dispone di una funzione di ripristino delle tabelle
 danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
 in caso di errore, conservare una copia del messaggio visualizzato,
 contenente forse delle informazioni preziose...<p />
-Se il problema persiste, contattare il webmaster.<p />',
+Se il problema persiste, contattare il proprio fornitore di hosting.<p />',
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella @dossier@.

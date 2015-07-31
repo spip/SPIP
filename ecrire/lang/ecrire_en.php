@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'No results found.',
 'avis_chemin_invalide_1' => 'The path you have selected',
 'avis_chemin_invalide_2' => 'does not seem valid. Please return to the previous page and verify the information provided.',
-'avis_connexion_echec_1' => 'Connection to MySQL server failed.',
+'avis_connexion_echec_1' => 'Connection to the SQL server failed.',
 'avis_connexion_echec_2' => 'Go back to the previous page, and verify the information you have provided.',
-'avis_connexion_echec_3' => '<b>N.B.</b> On a number of servers, you must <b>request</b> the activation of your access to MySQL database before you can use it. If you are unable to connect, make sure that you actually made this request.',
+'avis_connexion_echec_3' => '<b>N.B.</b> On many servers, you must <b>request</b> the activation of your access to the SQL database before you can use it. If you are unable to connect, make sure that this activation has taken place.',
 'avis_connexion_ldap_echec_1' => 'Connection to the LDAP server failed.',
 'avis_connexion_ldap_echec_2' => 'Go back to the previous page, and verify the information you have provided.',
 'avis_connexion_ldap_echec_3' => 'Alternatively, do not use LDAP support to import users.',
 'avis_conseil_selection_mot_cle' => '<b>Important group:</b> It is very strongly advised to select a keyword in this group.',
 'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it , please check this box to confirm.',
 'avis_destinataire_obligatoire' => 'You must select a recipient before sending this message.',
-'avis_erreur_connexion_mysql' => 'MySQL connection error',
+'avis_erreur_connexion_mysql' => 'SQL connection error',
 'avis_erreur_version_archive' => '<b>Warning! The file @archive@ corresponds to
     a version of SPIP other than the one you have
     installed.</b> You are facing great
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'These sites encountered a syndication problem',
 'avis_sites_syndiques_probleme' => 'These syndicated sites generated a problem',
 'avis_suppression_base' => 'WARNING, data deletion is irreversible',
-'avis_version_mysql' => 'Your version of MySQL (@version_mysql@) does not allow auto repair of the database tables.',
+'avis_version_mysql' => 'Your version of SQL (@version_mysql@) does not allow auto repair of the database tables.',
 
 
 // B
@@ -317,7 +317,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Trying to connect to database',
 'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p /> You can go to the next step.',
-'info_connexion_mysql' => 'Your MySQL connection',
+'info_connexion_mysql' => 'Your SQL connection',
 'info_connexion_ok' => 'Connection succeeded.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Articles content',
@@ -431,7 +431,7 @@ requiring an FTP access to the Web site.',
 'info_message_en_redaction' => 'Your messages in progress',
 'info_message_technique' => 'Technical message:',
 'info_messagerie_interne' => 'Internal messaging',
-'info_mise_a_niveau_base' => 'MySQL database upgrade',
+'info_mise_a_niveau_base' => 'SQL database upgrade',
 'info_mise_a_niveau_base_2' => '{{Warning!}} You have installed a version of
   SPIP files {older} than the one
   previously installed on this site: your database is at risk of being lost
@@ -855,7 +855,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 	the publication online of concise information, the management of
 	a press review, a calendar of events...',
 'texte_choix_base_1' => 'Select your database:',
-'texte_choix_base_2' => 'MySQL server contains several databases.',
+'texte_choix_base_2' => 'The SQL server contains several databases.',
 'texte_choix_base_3' => '<b>Select</b> below the one that your internet provider has attributed to you:',
 'texte_choix_table_prefix' => 'Prefix for tables:',
 'texte_commande_vider_tables_indexation' => 'Use this command to empty the indexing tables used
@@ -874,7 +874,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_config_groupe_mots_cles' => 'Do you wish to activate the advanced configuration of keyword groups,
    by specifying, for instance that a unique word
  per group could be selected, that a group is important...?',
-'texte_connexion_mysql' => 'Refer to the information provided to you by your host: it should give you, if your host supports MySQL, the connection codes to MySQL server.',
+'texte_connexion_mysql' => 'Consult the information provided by your service provider. It should contain the connection codes for the SQL server.',
 'texte_contenu_article' => '(Content of the article in a few words.)',
 'texte_contenu_articles' => 'Based on the layout chosen for your site, you can decide
 		that some articles elements are not to be used.
@@ -968,17 +968,17 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_recuperer_base' => 'Repair the database',
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
 'texte_referencement_automatique' => '<b>Automated site referencing</b><br />You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically retrieve the site\'s information (title, description...).',
-'texte_requetes_echouent' => '<b>When some MySQL queries fail
-  systematically and without any apparent reason, it is possible
+'texte_requetes_echouent' => '<b>When some SQL queries fail
+  systematically, without apparent reason, it is possible
   that the database itself
   is the culprit.</b><p />
-  MySQL has at its disposal a repair feature of its tables
-  when they have been accidentally corrupted.
+  SQL has a feature for repairing tables
+  which have been accidentally corrupted.
   Here, you can try to execute this repair; in
-  case of failure, you should keep a copy of the display, which might contain
-  clues on what went wrong...<p />
-  If the problem remains, contact your 
-  host.<p />',
+  the event of failure, you should keep a copy of the display, which might contain
+  clues to where the problem lies.<p />
+  If the problem persists, contact your 
+  service provider.<p />',
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => 'This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been
