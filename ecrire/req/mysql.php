@@ -131,7 +131,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
  
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
-	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
+	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 }
 
 // http://doc.spip.org/@spip_mysql_alter
