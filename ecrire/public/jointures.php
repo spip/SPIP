@@ -66,7 +66,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 {
 	static $num=array();
 	$id_table = "";
-	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
+	$cpt = &$num[$boucle->descr['nom']][$boucle->descr['gram']][$boucle->id_boucle];
 	foreach($res as $cle=>$r) {
 		list($d, $a, $j) = $r;
 		if (!$id_table) $id_table = $d;
@@ -95,8 +95,8 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
-	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
-		$pk = nogroupby_if($desc, $a[1], $id_primary, $col);
+	if ($pk = (isset($a[1]) && (count($boucle->from) == 2) && !$cond)) {
+		$pk = nogroupby_if($desc, $a[1], $col);
 	}
 	
 	// pas de group by 
@@ -104,6 +104,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	// et si l'index de jointure est une primary key a l'arrivee !
 	if (!$pk
 	  AND (count($boucle->from) == 2)
+	  AND isset($a[1]['key']['PRIMARY KEY'])
 	  AND ($j == $a[1]['key']['PRIMARY KEY'])
 	  )
 	  $pk = true;
@@ -125,7 +126,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 // A ameliorer, notamment voir si calculer_select ne pourrait pas la reutiliser
 // lorsqu'on sait si le critere conditionnel est finalement present
 // http://doc.spip.org/@nogroupby_if
-function nogroupby_if($depart, $arrivee, $id_primary, $col)
+function nogroupby_if($depart, $arrivee, $col)
 {
 	$pk = $arrivee['key']['PRIMARY KEY'];
 	if (!$pk) return false;
@@ -279,7 +280,7 @@ function trouver_cles_table($keys)
     if (!strpos($v,","))
       $res[$v]=1; 
     else {
-      foreach (preg_split('/ *, */', $v) as $k) {
+      foreach (preg_split("/\s*,\s*/", $v) as $k) {
 	$res[$k]=1;
       }
     }

@@ -12,10 +12,6 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-// ajouter define('_CREER_DIR_PLAT', true); dans mes_options pour restaurer
-// le fonctionnement des faux repertoires en .plat
-define('_CREER_DIR_PLAT', false);
-
 #define('_SPIP_LOCK_MODE',0); // ne pas utiliser de lock (deconseille)
 #define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 #define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip
@@ -59,10 +55,7 @@ function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
 		AND ( 
-			// quand on est sous window on ne sait pas si file_get_contents marche
-			// on essaye : si ca retourne du contenu alors c'est bon
-			// sinon on fait un file() pour avoir le coeur net
-		  ($contenu = @file_get_contents ($fichier))
+		  ($contenu = @file_get_contents ($fichier)) # windows retourne '' ?
 		  OR _OS_SERVEUR != 'windows')
 		)
 			return $contenu;
@@ -78,26 +71,20 @@ function spip_file_get_contents ($fichier) {
 // http://doc.spip.org/@lire_fichier
 function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
-	// inutile car si le fichier n'existe pas, le lock va renvoyer false juste apres
-	// economisons donc les acces disque
-	// if (!@file_exists($fichier))
-	//	return false;
+	if (!@file_exists($fichier))
+		return false;
 
 	#spip_timer('lire_fichier');
 
-	// pas de @ sur spip_fopen_lock qui est silencieux de toute facon
-	if ($fl = spip_fopen_lock($fichier, 'r', LOCK_SH)) {
-		// lire le fichier avant tout
-		$contenu = spip_file_get_contents($fichier);
-
-		// le fichier a-t-il ete supprime par le locker ?
-		// on ne verifie que si la tentative de lecture a echoue
-		// pour discriminer un contenu vide d'un fichier absent
-		// et eviter un acces disque
-		if (!$contenu AND !@file_exists($fichier)) {
+	if ($fl = @spip_fopen_lock($fichier, 'r', LOCK_SH)) {
+		// a-t-il ete supprime par le locker ?
+		if (!@file_exists($fichier)) {
 			spip_fclose_unlock($fl);
 			return false;
 		}
+
+		// lire le fichier
+		$contenu = spip_file_get_contents($fichier);
 
 		// liberer le verrou
 		spip_fclose_unlock($fl);
@@ -113,9 +100,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 
 		return $ok;
 	}
-	return false;
 }
-
 
 //
 // Ecrire un fichier de maniere un peu sure
@@ -142,14 +127,48 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	// de le recreer si le locker qui nous precede l'avait supprime...)
 		if (substr($fichier, -3) == '.gz')
 			$contenu = gzencode($contenu);
-		if ($truncate)
-			@ftruncate($fp,0);
-		$s = @fputs($fp, $contenu, $a = strlen($contenu));
+		// si c'est une ecriture avec troncation , on fait plutot une ecriture complete a cote suivie unlink+rename
+		// pour etre sur d'avoir une operation atomique
+		// y compris en NFS : http://www.ietf.org/rfc/rfc1094.txt
+		// sauf sous wintruc ou ca ne marche pas
+		$ok = false;
+		if ($truncate AND _OS_SERVEUR != 'windows'){
+			include_spip('inc/acces');
+			$id = creer_uniqid();
+			// on ouvre un pointeur sur un fichier temporaire en ecriture +raz
+			if ($fp2 = spip_fopen_lock("$fichier.$id", 'w',LOCK_EX)) {
+				$s = @fputs($fp2, $contenu, $a = strlen($contenu));
+				$ok = ($s == $a);
+				spip_fclose_unlock($fp2);
+				spip_fclose_unlock($fp);
+				// unlink direct et pas spip_unlink car on avait deja le verrou
+				@unlink($fichier);
+				// le rename aussitot, atomique quand on est pas sous windows
+				// au pire on arrive en second en cas de concourance, et le rename echoue
+				// --> on a la version de l'autre process qui doit etre identique
+				@rename("$fichier.$id",$fichier);
+				// precaution en cas d'echec du rename
+				@unlink("$fichier.$id");
+				if ($ok)
+					$ok = file_exists($fichier);
+			}
+			else
+				// echec mais penser a fermer ..
+				spip_fclose_unlock($fp);
+		}
+		// sinon ou si methode precedente a echoueee
+		// on se rabat sur la methode ancienne
+		if (!$ok){
+			// ici on est en ajout ou sous windows, cas desespere
+			if ($truncate)
+				@ftruncate($fp,0);
+			$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
-		$ok = ($s == $a);
+			$ok = ($s == $a);
+			spip_fclose_unlock($fp);
+		}
 
 	// liberer le verrou et fermer le fichier
-		spip_fclose_unlock($fp);
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) return $ok;
 	}
@@ -254,13 +273,11 @@ function spip_unlink($f) {
 //
 // Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
 // $base/${subdir}_ sinon ; $nobase signale qu'on ne veut pas de $base/
-// On peut aussi ne donner qu'un seul argument,
+// On peut aussi ne donner qu'un seul argument, 
 // subdir valant alors ce qui suit le dernier / dans $base
 //
 // http://doc.spip.org/@sous_repertoire
 function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
-	static $dirs = array();
-
 	$base = str_replace("//", "/", $base);
 	if (preg_match(',[/_]$,', $base)) $base = substr($base,0,-1);
 	if (!strlen($subdir)) {
@@ -272,19 +289,15 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		$base .= '/';
 		$subdir = str_replace("/", "", "$subdir");
 	}
-
-	if (isset($dirs[$base.$subdir]))
-		return $dirs[$base.$subdir];
-
 	$baseaff = $nobase ? '' : $base;
 
-	if (_CREER_DIR_PLAT AND @file_exists("$base${subdir}.plat"))
-		return "$baseaff${subdir}_";;
+	if (@file_exists("$base${subdir}.plat"))
+		return "$baseaff${subdir}_";; 
 
 	$path = $base.$subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
 
 	if (file_exists("$path/.ok"))
-		return ($dirs[$base.$subdir] = "$baseaff$subdir/");
+		return "$baseaff$subdir/";
 
 	@mkdir($path, _SPIP_CHMOD);
 	@chmod($path, _SPIP_CHMOD);
@@ -299,12 +312,13 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	if ($ok) {
 		@touch ("$path/.ok");
 		spip_log("creation $base$subdir/");
-		return ($dirs[$base.$subdir] = "$baseaff$subdir/");
+		return "$baseaff$subdir/";
 	}
 
 	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
 	// l'inode du fichier dir_test existe, mais impossible d'y mettre du contenu
 	// => sauf besoin express (define dans mes_options), ne pas creer le .plat
+	define('_CREER_DIR_PLAT', false);
 	if (_CREER_DIR_PLAT
 	AND $f = @fopen("$base${subdir}.plat", "w"))
 		fclose($f);
@@ -317,7 +331,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		raler_fichier($base . '/.ok');
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
-	return ($dirs[$base.$subdirs] = "$baseaff${subdir}");
+	return "$baseaff${subdir}";
 }
 
 //

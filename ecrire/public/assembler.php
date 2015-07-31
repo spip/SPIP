@@ -32,7 +32,7 @@ function assembler($fond, $connect='') {
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
-	// Les quatre derniers parametres sont modifes par la fonction:
+	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
 	// Si un resultat est retourne, c'est un message d'impossibilite
@@ -73,10 +73,18 @@ function assembler($fond, $connect='') {
 		// Informer les boutons d'admin du contexte
 		// (fourni par $renommer ci-dessous lors de la mise en cache)
 			$contexte = $page['contexte'];
+
+			// vider les globales url propres qui ne doivent plus etre utilisees en cas
+			// d'inversion url => objet
+			unset($_SERVER['REDIRECT_url_propre']);
+			unset($_ENV['url_propre']);
 		}
 		// ATTENTION, gestion des URLs transformee par le htaccess
 		// $renommer = 'urls_propres_dist';
-		// renvoie array($contexte, $fond, $url_redirect)
+		// renvoie array($contexte, $type, $url_redirect, $nfond)
+		// $nfond n'est retourne que si l'url est definie apres le ?
+		// et risque d'etre effacee par un form en get
+		// elle est utilisee par form_hidden exclusivement
 		// Compat ascendante si le retour est null:
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
@@ -85,7 +93,7 @@ function assembler($fond, $connect='') {
 			$renommer = generer_url_entite();
 			if ($renommer) {
 				$url = nettoyer_uri();
-				$a = $renommer($url, $fond);
+				$a = $renommer($url, $fond, $contexte);
 				if (is_array($a)) {
 					list($ncontexte, $type, $url_redirect, $nfond) = $a;
 					if (strlen($url_redirect)
@@ -109,6 +117,10 @@ function assembler($fond, $connect='') {
 			elseif (function_exists('recuperer_parametres_url'))
 				recuperer_parametres_url($fond, nettoyer_uri());
 
+			// vider les globales url propres qui ne doivent plus etre utilisees en cas
+			// d'inversion url => objet
+			unset($_SERVER['REDIRECT_url_propre']);
+			unset($_ENV['url_propre']);
 
 			// squelette par defaut
 			if (!strlen($fond))
@@ -119,7 +131,7 @@ function assembler($fond, $connect='') {
 			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 		}
 
-		if ($chemin_cache) $page['cache'] = $chemin_cache;
+		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
 
 		auto_content_type($page);
 
@@ -133,7 +145,9 @@ function assembler($fond, $connect='') {
 				AND $GLOBALS['var_mode'] != 'debug'
 				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
-					$page = message_erreur_404();
+				  $code = ($page !== false) ?
+				    '404 Not Found' : '503 Service Unavailable';
+				  $page = message_erreur_404('', $code);
 				}
 				// pas de cache client en mode 'observation'
 				if ($GLOBALS['var_mode']) {
@@ -179,7 +193,7 @@ function calculer_contexte() {
 }
 
 //
-// 2 fonctions pour compatibilite arriere. Sont probablement superflues
+// fonction pour compatibilite arriere, probablement superflue
 //
 
 // http://doc.spip.org/@auto_content_type
@@ -188,7 +202,7 @@ function auto_content_type($page)
 	global $flag_preserver;
 	if (!isset($flag_preserver))
 	  {
-		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type']));
+	    $flag_preserver = ($page && preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type'])));
 	  }
 }
 
@@ -199,11 +213,11 @@ function inclure_page($fond, $contexte, $connect='') {
 
 	// enlever le fond de contexte inclus car sinon il prend la main
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
+	// (cette precaution n'est probablement plus utile)
 	unset($contexte['fond']);
-	// mais le donner pour le calcul du cache
 	$page = $fond; 
 	$cacher = charger_fonction('cacher', 'public');
-	// Les quatre derniers parametres sont modifes par la fonction:
+	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
 	if ($res) {return array('texte' => $res);}
@@ -250,14 +264,33 @@ function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, 
 }
 
 
+// Fonction inseree par le compilateur dans le code compile.
+// Elle recoit un contexte pour inclure un squelette, 
+// et les valeurs du contexte de compil prepare par memoriser_contexte_compil
+// elle-meme appelee par calculer_balise_dynamique dans references.php:
+// 0: sourcefile
+// 1: codefile
+// 2: id_boucle
+// 3: ligne
+// 4: langue
 
-# Attention, un appel explicite a cette fonction suppose certains include
-# $echo = faut-il faire echo ou return
+function inserer_balise_dynamique($contexte_exec, $contexte_compil)
+{
+	if (!is_array($contexte_exec))
+		echo $contexte_exec; // message d'erreur etc
+	else {
+		if ($contexte_compil[4] AND empty($contexte_exec[2]['lang']))
+			$contexte_exec[2]['lang'] = $contexte_compil[4];
+		inclure_balise_dynamique($contexte_exec, true, $contexte_compil);
+	}
+}
+
+// Attention, un appel explicite a cette fonction suppose certains include
+// $echo = faut-il faire echo ou return
 
 // http://doc.spip.org/@inclure_balise_dynamique
-function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
-	global $contexte_inclus; # provisoire : c'est pour le debuggueur
-
+function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
+{
 	if (is_array($texte)) {
 
 		list($fond, $delainc, $contexte_inclus) = $texte;
@@ -266,15 +299,10 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
 
-		// les balises dynamiques passent toujours leur $fond
-		// si un 'fond' est present dans le contexte il vient d'autre part (de la bdd par exemple:p)
-		// et c'est le crash assure
-		$contexte_inclus['fond'] = $fond;
-		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true));
+		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true, 'compil' => $contexte_compil));
 
 		$texte = $page['texte'];
 
-		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
 		$GLOBALS['delais'] = $d;
 		// Faire remonter les entetes
 		if (is_array($page['entetes'])) {
@@ -301,9 +329,11 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		}
 	}
 
-	if ($GLOBALS['var_mode'] == 'debug')
+	if ($GLOBALS['var_mode'] == 'debug') {
+		// compatibilite : avant on donnait le numero de ligne ou rien.
+		$ligne =  intval(isset($contexte_compil[3]) ? $contexte_compil[3] : $contexte_compil);
 		$GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
-
+	}
 	if ($echo)
 		echo $texte;
 	else
@@ -314,12 +344,11 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 // Traiter var_recherche ou le referrer pour surligner les mots
 // http://doc.spip.org/@f_surligne
 function f_surligne ($texte) {
-	if ($GLOBALS['html']
-	AND (isset($_SERVER['HTTP_REFERER']) OR isset($_GET['var_recherche']))) {
-		include_spip('inc/surligne');
-		$texte = surligner_mots($texte);
-	}
-	return $texte;
+	if (!$GLOBALS['html']) return $texte;
+	$rech = _request('var_recherche');
+	if (!$rech AND !isset($_SERVER['HTTP_REFERER'])) return $texte;
+	include_spip('inc/surligne');
+	return surligner_mots($texte, $rech);
 }
 
 // Valider/indenter a la demande.
@@ -399,38 +428,25 @@ function f_msie ($texte) {
 
 
 // http://doc.spip.org/@message_erreur_404
-function message_erreur_404 ($erreur= "") {
+function message_erreur_404 ($erreur= "", $code='404 Not Found') {
 	static $deja = false;
 	if ($deja) return "erreur";
 	$deja = true;
-	if (!$erreur) {
-		if (isset($GLOBALS['id_article']))
-		$erreur = 'public:aucun_article';
-		else if (isset($GLOBALS['id_rubrique']))
-		$erreur = 'public:aucune_rubrique';
-		else if (isset($GLOBALS['id_breve']))
-		$erreur = 'public:aucune_breve';
-		else if (isset($GLOBALS['id_auteur']))
-		$erreur = 'public:aucun_auteur';
-		else if (isset($GLOBALS['id_syndic']))
-		$erreur = 'public:aucun_site';
-	}
 	$contexte_inclus = array(
 		'erreur' => _T($erreur),
+		'code' => $code,
 		'lang' => $GLOBALS['spip_lang']
 	);
 	$page = inclure_page('404', $contexte_inclus);
-	$page['status'] = 404;
+	$page['status'] = intval($code);
 	return $page;
 }
-
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
 // http://doc.spip.org/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
 	$contexte = array();
-	$params = array();
 	foreach ($args as $var=>$val) {
 		if (is_int($var)){ // argument pas formate
 			if (in_array($val, array('left', 'right', 'center'))) {
@@ -473,8 +489,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		}
 
 		if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
-			$fond = $type.'_'.$soustype;
-			if (!find_in_path('modeles/'. $fond.'.html')) {
+			if (!trouve_modele($fond = ($type.'_'.$soustype))) {
 				$fond = '';
 				$class = $soustype;
 			}
@@ -482,14 +497,13 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 			$params = array_diff($params,array($soustype));
 		}
 	}
-	// Si ca marche pas en precisant le sous-type, prendre le type
-	if (!$fond AND !find_in_path('modeles/'. ($fond = $type).'.html'))
-		return false;
 
+	// Si ca marche pas en precisant le sous-type, prendre le type
+	if (!$fond AND !trouve_modele($fond = $type))
+		return false;
+	$fond = 'modeles/'.$fond;
 	// Creer le contexte
 	$contexte = array( 
-		'lang' => $GLOBALS['spip_lang'], 
-		'fond' => 'modeles/'.$fond,
 		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
 	); 
 	// Le numero du modele est mis dans l'environnement
@@ -518,26 +532,10 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$contexte['args'] = $arg_list; // on passe la liste des arguments du modeles dans une variable args
 	$contexte = array_merge($contexte,$arg_list);
 
-	// On cree un marqueur de notes unique lie a ce modele
-	// et on enregistre l'etat courant des globales de notes...
-	$enregistre_marqueur_notes = $GLOBALS['marqueur_notes'];
-	$enregistre_les_notes = $GLOBALS['les_notes'];
-	$enregistre_compt_note = $GLOBALS['compt_note'];
-	$GLOBALS['marqueur_notes'] = substr(md5(serialize($contexte)),0,8);
-	$GLOBALS['les_notes'] = '';
-	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
 	$retour = recuperer_fond($fond, $contexte, array(), $connect);
 
-	// On restitue les globales de notes telles qu'elles etaient avant l'appel
-	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*
-	// etre dans le cache du modele, autrement elles ne seraient pas prises en
-	// compte a chaque calcul d'un texte contenant un modele, mais seulement
-	// quand le modele serait calcule, et on aurait des resultats incoherents)
-	$GLOBALS['les_notes'] = $enregistre_les_notes;
-	$GLOBALS['marqueur_notes'] = $enregistre_marqueur_notes;
-	$GLOBALS['compt_note'] = $enregistre_compt_note;
 
 	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
 	// spip_lien_ok dans les classes de son conteneur de premier niveau ;
@@ -563,13 +561,11 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 // http://doc.spip.org/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
-	if (isset($contexte['fond'])
-	AND $fond === '')
-		$fond = $contexte['fond'];
-
 	$page = inclure_page($fond, $contexte, $connect);
 
-	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+	if (!$page) return $page;
+
+	if ($page['process_ins'] != 'html') {
 		ob_start();
 		xml_hack($page, true);
 		eval('?' . '>' . $page['texte']);
@@ -614,9 +610,10 @@ function page_base_href(&$texte){
 			AND !_request('action'));
 
 	if (_SET_HTML_BASE
-	AND $GLOBALS['html']
-	AND $GLOBALS['profondeur_url']>0){
-		list($head, $body) = explode('</head>', $texte, 1);
+	AND isset($GLOBALS['html']) AND $GLOBALS['html']
+	AND $GLOBALS['profondeur_url']>0
+	AND ($poshead = strpos($texte,'</head>'))!==FALSE){
+		$head = substr($texte,0,$poshead);
 		$insert = false;
 		if (strpos($head, '<base')===false) 
 			$insert = true;
@@ -635,7 +632,7 @@ function page_base_href(&$texte){
 			$base = url_absolue('./');
 			if (($pos = strpos($head, '<head>')) !== false)
 				$head = substr_replace($head, "\n<base href=\"$base\" />", $pos+6, 0);
-			$texte = $head . (isset($body) ? '</head>'.$body : '');
+			$texte = $head . substr($texte,$poshead);
 			// gerer les ancres
 			$base = $_SERVER['REQUEST_URI'];
 			if (strpos($texte,"href='#")!==false)

@@ -12,12 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-// Pas besoin de contexte de compilation
+// Pas d'arg a compiler ==> pas besoin d'appeler calculer_balise_dynamique
 
 // http://doc.spip.org/@balise_FORMULAIRE_RECHERCHE_stat
-function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
-	// filtres[0] doit etre un script (a revoir)
-	return array($filtres[0], $args ? $args[0] : '');
+function balise_FORMULAIRE_RECHERCHE_stat($args, $context_compil) {
+	// le premier element du tableau etait auparavant un script.
+	// Voir si on ne pourrait pas simplifier maintenant
+	return array('', $args ? $args[0] : '');
 }
 
 ?>

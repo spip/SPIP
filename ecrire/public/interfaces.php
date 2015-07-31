@@ -52,7 +52,7 @@ class Boucle {
 	var $jointures = array();
 	var $jointures_explicites = false;
 	var $doublons;
-	var $partie, $total_parties,$mode_partie;
+	var $partie, $total_parties,$mode_partie='';
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
 	var $select = array();
@@ -113,7 +113,9 @@ class Champ {
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
-	var $code;	// code du calcul
+	// resultat de la compilation:  toujours une expression PHP.
+	// Chaine vide comme valeur par defaut (pour balise indefinie etc)
+	var $code = ''; 
 	var $interdire_scripts = true; // false si on est sur de cette balise
 	// tableau pour la production de code dependant du contexte
 	// id_mere;  pour TOTAL_BOUCLE hors du corps
@@ -138,7 +140,9 @@ class Idiome {
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
-	var $code;
+	// resultat de la compilation:  toujours une expression PHP.
+	// Chaine vide comme valeur par defaut (n'arrive pas normalement)
+	var $code = '';
 	var $interdire_scripts = false;
 	var $descr = array();
 	var $ligne = 0;
@@ -149,6 +153,13 @@ class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir
 	var $ligne = 0;
+}
+
+class Contexte {
+	var $descr = array();
+	var $id_boucle = '';
+	var $ligne = 0;
+	var $lang = '';
 }
 
 global $table_criteres_infixes;
@@ -169,7 +180,6 @@ function declarer_interfaces(){
 $table_des_tables['articles']='articles';
 $table_des_tables['auteurs']='auteurs';
 $table_des_tables['breves']='breves';
-$table_des_tables['forums']='forum';
 $table_des_tables['signatures']='signatures';
 $table_des_tables['documents']='documents';
 $table_des_tables['types_documents']='types_documents';
@@ -180,7 +190,6 @@ $table_des_tables['syndication']='syndic';
 $table_des_tables['syndic']='syndic';
 $table_des_tables['syndic_articles']='syndic_articles';
 $table_des_tables['hierarchie']='rubriques';
-$table_des_tables['index']='index';
 $table_des_tables['messages']='messages';
 $table_des_tables['petitions']='petitions';
 
@@ -188,10 +197,6 @@ $exceptions_des_tables['breves']['id_secteur']='id_rubrique';
 $exceptions_des_tables['breves']['date']='date_heure';
 $exceptions_des_tables['breves']['nom_site']='lien_titre';
 $exceptions_des_tables['breves']['url_site']='lien_url';
-
-$exceptions_des_tables['forums']['date']='date_heure';
-$exceptions_des_tables['forums']['nom']='auteur';
-$exceptions_des_tables['forums']['email']='email_auteur';
 
 $exceptions_des_tables['signatures']['date']='date_time';
 $exceptions_des_tables['signatures']['nom']='nom_email';
@@ -214,7 +219,6 @@ $table_titre['mots']= "titre, '' AS lang";
 $table_titre['breves']= 'titre , lang';
 $table_titre['articles']= 'titre, lang';
 $table_titre['rubriques']= 'titre, lang';
-$table_titre['forums']= "titre, '' AS lang";
 $table_titre['messages']= "titre, '' AS lang";
 $table_titre['auteurs']= "nom AS titre, '' AS lang";
 $table_titre['site']= "nom_site AS titre, '' AS lang";
@@ -224,7 +228,6 @@ $table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 $table_date['articles']='date';
 $table_date['auteurs']='date';
 $table_date['breves']='date_heure';
-$table_date['forums']='date_heure';
 $table_date['signatures']='date_time';
 $table_date['documents']='date';
 $table_date['types_documents']='date';
@@ -258,10 +261,6 @@ $tables_jointures['spip_documents'][]= 'mots_documents';
 $tables_jointures['spip_documents'][]= 'types_documents';
 $tables_jointures['spip_documents'][]= 'mots';
 
-$tables_jointures['spip_forum'][]= 'mots_forum';
-$tables_jointures['spip_forum'][]= 'mots';
-$tables_jointures['spip_forum'][]= 'documents_liens';
-
 $tables_jointures['spip_rubriques'][]= 'mots_rubriques';
 $tables_jointures['spip_rubriques'][]= 'documents_liens';
 $tables_jointures['spip_rubriques'][]= 'mots';
@@ -275,7 +274,6 @@ $tables_jointures['spip_syndic_articles'][]= 'mots';
 
 $tables_jointures['spip_mots'][]= 'mots_articles';
 $tables_jointures['spip_mots'][]= 'mots_breves';
-$tables_jointures['spip_mots'][]= 'mots_forum';
 $tables_jointures['spip_mots'][]= 'mots_rubriques';
 $tables_jointures['spip_mots'][]= 'mots_syndic';
 $tables_jointures['spip_mots'][]= 'mots_documents';
@@ -313,7 +311,6 @@ $table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['NOM_SITE'][]=  _TRAITEMENT_TYPO;
 $table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['PARAMETRES_FORUM'][]= 'htmlspecialchars(%s)';
 $table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
