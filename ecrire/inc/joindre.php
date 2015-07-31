@@ -51,12 +51,12 @@ function joindre_formulaire(&$v) {
 
 	$mode = $v['mode'];
 	$vignette_de_doc = ($mode == 'vignette' AND $v['id_document']>0);
-	$distant = ($mode == 'document' AND $v['type']);
+	$distant = (($mode == 'document' OR $mode == 'choix') AND $v['type']);
 
 	# indiquer un choix d'upload FTP
 	$dir_ftp = '';
 	if (test_espace_prive()
-	AND $mode == 'document' # si c'est pour un document
+	AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
 	AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	AND $GLOBALS['flag_upload']) {
 		if ($dir = determine_upload('documents')) {
@@ -64,7 +64,7 @@ function joindre_formulaire(&$v) {
 			$l = texte_upload_manuel($dir, $mode);
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode image
-			if ($l OR ($mode == 'document'))
+			if ($l OR ($mode == 'document' OR $mode=='choix'))
 				$dir_ftp = afficher_transferer_upload($l, $dir);
 		}
 	}
@@ -136,7 +136,7 @@ function texte_upload_manuel($dir, $mode = 'document') {
 	$texte_upload = array();
 
 	// en mode "charger une image", ne proposer que les inclus
-	$inclus = ($mode == 'document')
+	$inclus = ($mode == 'document' OR $mode =='choix')
 		? ''
 		: " AND inclus='image'";
 
