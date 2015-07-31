@@ -62,11 +62,6 @@ function articles_set($id_article, $set=null) {
 		) as $champ)
 			$c[$champ] = _request($champ,$set);
 		$c['lang'] = _request('changer_lang',$set);
-
-		if (_request('changer_virtuel',$set) == 'oui') {
-			$r = _request('virtuel',$set);
-			$c['chapo'] = (strlen($r) ? '='.$r : '');
-		}
 	}
 	else {
 		$c = $set;
