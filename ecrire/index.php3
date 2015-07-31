@@ -407,10 +407,23 @@ if ($flag_ob) {
 	if ($a) {
 		debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
 		echo $a;
-		fin_cadre_couleur_foncee();
-	}
-} else
+	} else
+		$non_affiche = true;
+}
+
+
+if (!$non_affiche) {
+	// Afficher le lien RSS
+	include_ecrire('inc_sites.php3');
+	$op = 'a-suivre';
+	$args = array();
+	echo "<div style='text-align: "
+		. $GLOBALS['spip_lang_right']
+		. ";'>"
+		. bouton_spip_rss($op, $args)
+		."</div>";
 	fin_cadre_couleur_foncee();
+}
 
 
 
