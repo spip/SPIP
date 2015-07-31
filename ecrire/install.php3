@@ -168,7 +168,7 @@ else if ($etape == 4) {
 	$deja_installe = !spip_sql_errno();
 
 	creer_base();
-	maj_base();
+	$maj_ok = maj_base();
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
 	$result = spip_query_db($query);
@@ -182,7 +182,7 @@ else if ($etape == 4) {
 	echo "-->";
 
 
-	if ($result_ok) {
+	if ($result_ok && $maj_ok) {
 		$conn = "<"."?php\n";
 		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
@@ -203,6 +203,9 @@ else if ($etape == 4) {
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 		echo "</FORM>";
+	}
+	else if (!$maj_ok) {
+		echo _T('alerte_maj_impossible', array('version' => $spip_version));
 	}
 	else {
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('texte_operation_echec');

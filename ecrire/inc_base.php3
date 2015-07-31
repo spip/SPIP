@@ -612,11 +612,12 @@ function stripslashes_base($table, $champs) {
 }
 
 
-function maj_version ($version, $test = true) {
+function maj_version($version, $test = true) {
 	if ($test) {
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
 		spip_log("mise a jour de la base vers $version");
-	} else {
+	}
+	else {
 		include_ecrire ('inc_lang.php3');
 		echo _T('alerte_maj_impossible', array('version' => $version));
 		exit;
@@ -642,13 +643,26 @@ function maj_base() {
 	if (!$version_installee) {
 		$version_installee = $spip_version;
 		maj_version($version_installee);
+		return true;
 	}
-	
+
+	//
+	// Verification des droits de modification sur la base
+	//
+
+	spip_query("DROP TABLE IF EXISTS spip_test");
+	spip_query("CREATE TABLE spip_test (a INT)");
+	spip_query("ALTER TABLE spip_test ADD b INT");
+	spip_query("INSERT INTO spip_test (b) VALUES (1)");
+	$result = spip_query("SELECT b FROM spip_test");
+	spip_query("ALTER TABLE spip_test DROP b");
+	if (!$result) return false;
+
 	//
 	// Selection en fonction de la version
 	//
 	if ($version_installee < 0.98) {
-	
+
 		spip_query("ALTER TABLE spip_articles ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_articles ADD export VARCHAR(10) DEFAULT 'oui'");
 		spip_query("ALTER TABLE spip_articles ADD images TEXT DEFAULT ''");
@@ -657,10 +671,10 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_articles ADD INDEX id_rubrique (id_rubrique)");
 		spip_query("ALTER TABLE spip_articles ADD visites INTEGER DEFAULT '0' NOT NULL");
 		spip_query("ALTER TABLE spip_articles ADD referers BLOB NOT NULL");
-	
+
 		spip_query("ALTER TABLE spip_auteurs ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_auteurs ADD pgp BLOB NOT NULL");
-	
+
 		spip_query("ALTER TABLE spip_auteurs_articles ADD INDEX id_auteur (id_auteur), ADD INDEX id_article (id_article)");
 	
 		spip_query("ALTER TABLE spip_rubriques ADD maj TIMESTAMP");
@@ -677,7 +691,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_parent (id_parent), ADD INDEX id_rubrique (id_rubrique), ADD INDEX id_article(id_article), ADD INDEX id_breve(id_breve)");
 		maj_version (0.98);
 	}
-	
+
 	if ($version_installee < 0.99) {
 	
 		$query = "SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0";
@@ -1338,7 +1352,7 @@ function maj_base() {
 		spip_query("UPDATE spip_rubriques SET lang=MID(lang,2,8) WHERE langue_choisie = 'non'");
 		maj_version (1.707);
 	}
-	
+
 	if ($version_installee < 1.708) {
 		spip_query("ALTER TABLE spip_breves ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		spip_query("ALTER TABLE spip_breves ADD langue_choisie VARCHAR(3) DEFAULT 'non'");
@@ -1399,6 +1413,7 @@ function maj_base() {
 		maj_version (1.718);
 	}
 
+	return true;
 }
 
 ?>

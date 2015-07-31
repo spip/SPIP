@@ -55,16 +55,24 @@ debut_admin($upgrade_titre, $commentaire);
 include_ecrire ("inc_base.php3");
 
 creer_base();
-maj_base();
-ecrire_acces();
+$ok = maj_base();
 
-init_config();
+if ($ok) {
+	ecrire_acces();
+	init_config();
 
-$hash = calculer_action_auteur("purger_cache");
-$redirect = rawurlencode("index.php3");
+	$hash = calculer_action_auteur("purger_cache");
+	$redirect = rawurlencode("index.php3");
+}
 
 fin_admin($upgrade_titre);
 
-@header ("Location: ../spip_cache.php3?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
+if ($ok)
+	@header ("Location: ../spip_cache.php3?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
+else {
+	include_ecrire ('inc_lang.php3');
+	echo _T('alerte_maj_impossible', array('version' => $spip_version));
+	exit;
+}
 
 ?>
