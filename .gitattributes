@@ -2,6 +2,7 @@
 /INSTALL.txt -text
 /UPGRADE.txt -text
 dist/favicon.ico -text
+dist/feed.png -text
 dist/inc-entete.html -text
 dist/inc-forum.html -text
 dist/inc-petition.html -text

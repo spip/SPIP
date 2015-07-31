@@ -102,6 +102,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	padding: 2px;
 	text-align: center; }
 #pied small { font-size: 0.77em; }
+#pied img { vertical-align: bottom; }
 
 /*  ------------------------------------------
 /*  Habillage des menus et de la navigation
