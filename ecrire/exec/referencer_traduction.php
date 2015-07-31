@@ -132,7 +132,7 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 
 	if ($langue_article)
 		$bouton .= "&nbsp; (".traduire_nom_langue($langue_article).")";
-	$bouton = bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$bouton;
+	$bouton = bouton_block_invisible('lier_traductions').$bouton;
 
 	$res = "\n<div>&nbsp;</div>\n" // place pour l'animation pendant Ajax
 	. debut_cadre_enfonce('langues-24.gif', true, "", $bouton)
