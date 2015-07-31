@@ -451,27 +451,18 @@ function maj_v019_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_documents CHANGE `hauteur` `hauteur` integer");
 		maj_version('1.944');
 	}
-	maj_v019_while($version_installee, $version_cible);
+	maj_while($version_installee, $version_cible);
 }
 
-function maj_v019_while($version_installee, $version_cible)
-{
-	$cible = substr(strval($version_cible),3);
-	$installee = substr(strval($version_installee),3);
-	while ($installee < $cible) {
-		$installee++;
-		$f = 'maj_v019_' . $installee;
-		if (function_exists($f)) $f();
-		maj_version('1.9' . $installee);
-	}
-}
-
+// Cas particulier introduit en http://trac.rezo.net/trac/spip/changeset/10335
 function maj_v019_38()
 {
 	sql_alter("TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 }
 
-function maj_v019_45()
+/* ------------ Debut de la nouvelle gestion des MAJ ------------- */
+
+function maj_1_945()
 {
 	spip_query("ALTER TABLE spip_petitions CHANGE `email_unique` `email_unique` CHAR (3) DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_petitions CHANGE `site_obli` `site_obli` CHAR (3) DEFAULT '' NOT NULL");
@@ -574,7 +565,7 @@ function maj_v019_45()
 }
 
 // http://trac.rezo.net/trac/spip/changeset/10150
-function maj_v019_46()
+function maj_1_946()
 {
 	sql_alter("TABLE spip_forum DROP INDEX `id_parent`");
 	sql_alter("TABLE spip_forum DROP INDEX `id_article`");
@@ -587,7 +578,7 @@ function maj_v019_46()
 }
 
 // http://trac.rezo.net/trac/spip/changeset/10151
-function maj_v019_47()
+function maj_1_947()
 {
 	sql_alter("TABLE spip_articles DROP INDEX `url_site`");
 	sql_alter("TABLE spip_articles DROP INDEX `date_modif`");
@@ -595,19 +586,19 @@ function maj_v019_47()
 }
 
 	// mauvaise manip
-function maj_v019_49()
+function maj_1_949()
 {
 	sql_alter("TABLE spip_versions DROP INDEX `date`");
 	sql_alter("TABLE spip_versions DROP INDEX `id_auteur`");
 }
 
-function maj_v019_50()
+function maj_1_950()
 {
   // oubli de gerer le prefixe lors l'introduction de l'abstraction
   // => on relance les dernieres MAJ en mode silencieux pour mettre au carre.
-	@maj_v019_46();
-	@maj_v019_47();
-	@maj_v019_49();
+	@maj_1_946();
+	@maj_1_947();
+	@maj_1_949();
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_urls'];
@@ -626,7 +617,7 @@ function maj_v019_50()
 		$date = ($type == 'breve') ? 'date_heure' : 
 		  (($type == 'auteur') ? 'maj' : 
 		   (($type == 'mot') ? 'maj' : 'date'));
-		$q = sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
+		$q = @sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
 		while ($r = sql_fetch($q)) sql_replace('spip_urls', $r);
 		spip_log("table $table : " . sql_count($q) . " urls propres copiees");
 		sql_alter("TABLE spip_$table DROP INDEX `url_propre`");
@@ -635,11 +626,11 @@ function maj_v019_50()
 }
 
 // http://trac.rezo.net/trac/spip/changeset/10210
-// Erreur dans maj_v019_48():
+// Erreur dans maj_1_948():
 // // http://trac.rezo.net/trac/spip/changeset/10194
 // // Gestion du verrou SQL par PHP
 
-function maj_v019_51()
+function maj_1_951()
 {
 	sql_alter("TABLE spip_versions CHANGE `id_version` `id_version` bigint(21) DEFAULT 0 NOT NULL");
 }
@@ -648,7 +639,7 @@ function maj_v019_51()
 // Transformation des documents :
 // - image => mode=image
 // - vignette => mode=vignette
-function maj_v019_52()
+function maj_1_952()
 {
 
 	$ok = sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
@@ -664,17 +655,17 @@ function maj_v019_52()
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".calcul_mysql_in('id_document', $vignettes));
 	}
-	if (!$ok) die('echec sur maj_v019_52()'); 
+	if (!$ok) die('echec sur maj_1_952()'); 
 }
 
-function maj_v019_53()
+function maj_1_953()
 {
 	global $tables_principales;
 	include_spip('base/create');
 	creer_base_types_doc($tables_principales['spip_types_documents']);
 }
 
-function maj_v019_54()
+function maj_1_954()
 {
 		//pas de psd en <img> 
 		spip_query("UPDATE spip_types_documents SET `inclus`='non' WHERE `extension`='psd'");
@@ -695,12 +686,12 @@ function maj_v019_54()
 		spip_query("UPDATE spip_types_documents SET `mime_type`='application/vnd.google-earth.kmz' WHERE `extension`='kmz'");
 }
 
-function maj_v019_55()
+function maj_1_955()
 {
 	sql_alter("TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 }
 
-function maj_v019_56()
+function maj_1_956()
 {
 	## repasser la fin de la mise a jour vers 1.938 qui contenait une erreur'
 	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY

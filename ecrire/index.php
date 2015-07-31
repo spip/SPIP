@@ -138,8 +138,11 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 	if (isset($var_ajaxcharset) OR !isset($_COOKIE['spip_admin']))
 		die(_T('info_travaux_texte'));
 	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
-	  list(,$exec,$n) = $l;
-	  spip_log("Le script $e lance par $n se substitue a celui prevu");
+		list(,$var_f,$n) = $l;
+		if ($var_f != $exec) {
+			spip_log("Le script $exec lance par $n se substitue a celui prevu");
+			$exec = $var_f;
+		}
 	}
 }
 // si nom pas plausible, prendre le script par defaut

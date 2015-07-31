@@ -13,14 +13,20 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
-
 // http://doc.spip.org/@base_upgrade_dist
 function base_upgrade_dist($titre)
 {
-	include_spip('base/create');
-	creer_base();
-	maj_base();
+	global $spip_version;
+	$version_installee = (double) str_replace(',','.',$GLOBALS['meta']['version_installee']);
+	if ($spip_version != $version_installee) {
+
+		if (!is_numeric(_request('reinstall'))) {
+			include_spip('base/create');
+			spip_log("recree les tables eventuellement disparues");
+			creer_base();
+		}
+		maj_base();
+	}
 
 	include_spip('inc/acces');
 	ecrire_acces();
@@ -121,6 +127,38 @@ function maj_base($version_cible = 0) {
 			$f($version_installee, $spip_version);
 		} else spip_log("pas de fonction pour la maj $n $nom");
 		$n++;
+	}
+}
+
+// Se relancer soi-meme pour eviter d'etre interrompu pendant une operation SQL
+// (qu'on espere pas trop longue chacune).
+// Redetruire le fichier des meta a chaque coup pour etre certains de repartir
+// au point de relance.
+
+define('_UPGRADE_TIME_OUT', 20);
+
+function maj_while($version_installee, $version_cible)
+{
+	$pref = floor($version_installee);
+	$cible = substr($version_cible*1000,-3);
+	$installee = substr($version_installee*1000,-3);
+	$time = time();
+	$n = 0;
+
+	@spip_unlink(_FILE_META);
+	while ($installee < $cible) {
+		$installee++;
+		$f = 'maj_'  . $pref . '_' .$installee;
+		if (function_exists($f)) {
+			$f();
+			$n = time() - $time;
+			spip_log("$f ($n secondes de $version_installee a $version_cible))");
+		} else spip_log("pas de MAJ $pref" . ".$installee");
+		$version = ($pref . '.' . $installee);
+		ecrire_meta('version_installee', $version,'non');
+		if ($n >= _UPGRADE_TIME_OUT) {
+			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
+		}
 	}
 }
 
