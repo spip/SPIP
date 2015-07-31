@@ -31,7 +31,7 @@
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
-<dt class='spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
-<dd class='spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
+<dt class='spip_doc_titre'[ style='width:(#GET{width}|intval|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='spip_doc_descriptif'[ style='width:(#GET{width}|intval|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>
 </BOUCLE_doc>
