@@ -468,7 +468,9 @@ function balise_RANG_dist($p) {
 	}
 	else {
 		// chercher d'abord un champ sql rang (mais pas dans le env : defaut '' si on trouve pas de champ sql)
-		$_rang = champ_sql('rang', $p, '');
+		// dans la boucle immediatement englobante uniquement
+		// sinon on compose le champ calcule
+		$_rang = champ_sql('rang', $p, '', false);
 
 		// si pas trouve de champ sql rang :
 		if (!$_rang OR $_rang == "''"){
