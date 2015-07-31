@@ -115,7 +115,7 @@ function phraser_idiomes($texte,$result) {
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
-		$result = phraser_filtres(substr($match[5],1), ":", '', $result, $champ);
+		phraser_filtres($match[5], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
 	if ($texte)  $result = phraser_champs($texte,$result);
