@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 include_spip('inc/headers');
 
+
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
 // http://doc.spip.org/@action_tester_taille_dist
 function action_tester_taille_dist() {
@@ -30,6 +31,27 @@ function action_tester_taille_dist() {
 	if (($s = $taille*$taille)>$max_size){
 		if (!$max_size_echec OR $s < $max_size_echec) {
 			include_spip('inc/filtres');
+			// des inclusions representatives d'un hit prive et/ou public pour la conso memoire
+			include_spip('public/assembler');
+			include_spip('public/balises');
+			include_spip('public/boucles');
+			include_spip('public/cacher');
+			include_spip('public/compiler');
+			include_spip('public/composer');
+			include_spip('public/criteres');
+			include_spip('public/interfaces');
+			include_spip('public/parametrer');
+			include_spip('public/phraser_html');
+			include_spip('public/references');
+
+			include_spip('inc/presentation');
+			include_spip('inc/charsets');
+			include_spip('inc/documents');
+			include_spip('inc/lang');
+			include_spip('inc/texte');
+			include_spip('inc/vieilles_def');
+			$dummy = propre("<doc1>");
+
 			$image_source = _DIR_IMG_PACK."test.png";
 			$res = spip_query("SELECT valeur FROM spip_meta WHERE nom='max_taille_vignettes_test'");
 			if ($row = spip_fetch_array($res))
