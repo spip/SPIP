@@ -65,15 +65,25 @@ function inc_session_dist($auteur=false)
  */
 function supprimer_sessions($id_auteur, $toutes=true, $actives=true) {
 
+	$nb_files = 0;
+	$nb_max_files = (defined('_MAX_NB_SESSIONS_OUVERTES')?_MAX_NB_SESSIONS_OUVERTES:1000);
 	spip_log("supprimer sessions auteur $id_auteur");
 	if ($toutes OR $id_auteur!==$GLOBALS['visiteur_session']['id_auteur']) {
 		if ($dir = opendir(_DIR_SESSIONS)){
-			$t = time()  - (4*_RENOUVELLE_ALEA);
+			$t = $_SERVER['REQUEST_TIME']  - (4*_RENOUVELLE_ALEA); // 48h par defaut
+			$t_short = $_SERVER['REQUEST_TIME']  - max(_RENOUVELLE_ALEA/4,3*3600); // 3h par defaut
 			while(($f = readdir($dir)) !== false) {
+				$nb_files++;
 				if (preg_match(",^[^\d-]*(-?\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 					$f = _DIR_SESSIONS . $f;
-					if (($actives AND $regs[1] == $id_auteur) OR ($t > filemtime($f)))
+					if (($actives AND $regs[1] == $id_auteur) OR ($t > filemtime($f))){
 						spip_unlink($f);
+					}
+					// si il y a trop de sessions ouvertes, on purge les sessions anonymes de plus de 3H
+					// cd http://core.spip.org/issues/3276
+					elseif($nb_files>$nb_max_files AND !intval($regs[1]) AND ($t_short > filemtime($f))){
+						spip_unlink($f);
+					}
 				}
 			}
 		}
