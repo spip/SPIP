@@ -78,15 +78,15 @@ function erreur_necessite($n, $liste) {
 		}
 
 		// Necessite une librairie ?
-		else if (preg_match(',^LIB:(.*),i', $id, $r)) {
-			$lib = trim($r[1]);
-			if (!find_lib($lib)) {
+		else if (preg_match(',^(lib):(.*),i', $need['id'], $r)) {
+			$lib = trim($r[2]);
+			if (!find_in_path('lib/'.$lib)) {
 				$lien_download = '';
 				if (isset($n[0]['src'])) {
 					$url = $n[0]['src'];
 					include_ecrire('inc/charger_plugin');
 					$lien_download = '<br />'
-						.bouton_telechargement_plugin($url);
+						.bouton_telechargement_plugin($url, strtolower($r[1]));
 				}
 				$msg .= "<li>"
 				._L('Ce plugin n&#233;cessite la librairie '.$lib)

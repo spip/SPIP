@@ -119,7 +119,7 @@ function interface_plugins_auto($retour) {
 		.  "</div>\n";
 
 	$res = redirige_action_auteur('charger_plugin',
-				'auto', // arg = _DIR_PLUGINS_AUTO
+				'', // arg = 'plugins' / 'lib', a priori
 				'',
 				'',
 				$res,
@@ -145,17 +145,32 @@ function chargeur_charger_zip($quoi = array())
 		$quoi['zip'] = $quoi['depot'] . $quoi['nom'] . '.zip';
 	}
 	foreach (array(	'remove' => 'spip',
-					'dest' => _DIR_RACINE,
+					'arg' => 'lib',
 					'plugin' => null,
 					'cache_cache' => null,
 					'rename' => array(),
 					'edit' => array(),
 					'root_extract' => false, # extraire a la racine de dest ?
-					'tmp' => sous_repertoire(_DIR_TMP, 'chargeur')
+					'tmp' => sous_repertoire(_DIR_CACHE, 'chargeur')
 				)
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
+
+
+	# destination finale des fichiers
+	switch($quoi['arg']) {
+		case 'lib':
+			$quoi['dest'] = 'lib/';
+			break;
+		case 'plugins':
+			$quoi['dest'] = _DIR_PLUGINS_AUTO;
+			break;
+		default:
+			$quoi['dest'] = '';
+			break;
+	}
+
 
 	if (!@file_exists($fichier = $quoi['fichier']))
 		return 0;
@@ -194,7 +209,7 @@ function chargeur_charger_zip($quoi = array())
 		? $quoi['dest']
 		: $quoi['dest'] . $nom.'/';
 
-	$tmpname = $quoi['tmp'].$nom;
+	$tmpname = $quoi['tmp'].$nom.'/';
 
 	// On extrait, mais dans tmp/ si on ne veut pas vraiment le faire
 	$ok = $zip->extract(
@@ -210,7 +225,8 @@ function chargeur_charger_zip($quoi = array())
 	if ($zip->error_code < 0) {
 		spip_log('charger_decompresser erreur zip ' . $zip->error_code .
 			' pour paquet: ' . $quoi['zip']);
-		return $zip->error_code;
+		return //$zip->error_code
+			$zip->errorName(true);
 	}
 
 /*
@@ -332,6 +348,7 @@ function chargeur_activer_plugin($plugin)
 // http://doc.spip.org/@liste_fichiers_pclzip
 function liste_fichiers_pclzip($status) {
 	$list = $status['files'];
+
 	$ret = '<b>'._L('Il contient les fichiers suivants ('
 		.taille_en_octets($status['size']).'),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>'.$status['dirname']).'</code></b>';
 
@@ -439,12 +456,13 @@ function afficher_liste_listes_plugins() {
 	return $ret;
 }
 
-function bouton_telechargement_plugin($url) {
-	// pas de chargement auto : on donne l'url du zip
+// Si le chargement auto est autorise, un bouton
+// sinon on donne l'url du zip
+function bouton_telechargement_plugin($url, $rep) {
 	if (_DIR_PLUGINS_AUTO
 	AND @is_dir(_DIR_PLUGINS_AUTO))
 		$bouton = redirige_action_auteur('charger_plugin',
-			'auto', // arg = _DIR_PLUGINS_AUTO, a priori
+			$rep, // arg = 'lib' ou 'plugins'
 			'',
 			'',
 			"<input type='hidden' name='url_zip_plugin' value='$url' />"

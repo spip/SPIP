@@ -62,24 +62,14 @@ function action_charger_plugin_dist() {
 	}
 
 	## si ici on n'est pas en POST c'est qu'il y a un loup
-	if (!$_POST) die('pas normal');
+	if (!$_POST) die('pas en POST ?');
 
-	# destination finale des fichiers
-	switch($arg) {
-		case 'lib':
-			$dest = sous_repertoire(_DIR_PLUGINS_AUTO, 'lib');
-			break;
-		case 'auto':
-		default:
-			$dest = _DIR_PLUGINS_AUTO;
-			break;
-	}
+	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
+	# facons jamais pu venir ici avec toutes les securisations faites :^)
+	if (!_DIR_PLUGINS_AUTO) die('jamais');
 
 	# si premiere lecture, destination temporaire des fichiers
-	$tmp = _request('extract')
-		? $dest
-		: sous_repertoire(_DIR_CACHE,'chargeur');
-	
+	$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
 
 	# dispose-t-on du fichier ?
 	$status = null;
@@ -91,7 +81,7 @@ function action_charger_plugin_dist() {
 		if (!$contenu
 		OR !ecrire_fichier($fichier, $contenu)) {
 			spip_log('charger_decompresser impossible de charger '.$zip);
-			$status = 0;
+			$status = -1;
 		}
 	}
 
@@ -99,7 +89,7 @@ function action_charger_plugin_dist() {
 		$status = chargeur_charger_zip(
 			array(
 				'zip' => $zip,
-				'dest' => $dest,
+				'arg' => $arg,
 				'fichier' => $fichier,
 				'tmp' => $tmp,
 				'extract' => _request('extract')
@@ -116,8 +106,31 @@ function action_charger_plugin_dist() {
 	// le fichier .zip est la et bien forme
 	if (is_array($status)) {
 
+		// Reconnaitre un plugin par son plugin.xml
+		if (@file_exists($status['tmpname'].'/plugin.xml')) {
+			$type = 'plugin';
+			$dest = _DIR_PLUGINS_AUTO;
+		} else {
+			$type = 'lib';
+			$dest = 'lib/';
+		}
+
+		// Fixer son emplacement d&#233;finitif
+		$status['dirname'] = $dest
+			. basename($status['tmpname']) . '/';
+
+		// repertoire parent accessible en ecriture ?
+		if (!@is_dir($dest)
+		OR !@is_writeable($dest)) {
+			$retour = _L("Erreur");
+			$texte = "<p>"._L("Le r&#233;pertoire $dest n'est pas accessible en &#233;criture.")."</p>"
+				. "<p>"._L("Veuillez v&#233;rifier les droits sur ce r&#233;pertoire et recommencer, ou installer les fichiers par FTP.")."</p>";
+		}
+		else
+
 		// C'est un plugin ?
-		if (lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml)) {
+		if ($type == 'plugin') {
+			lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml);
 
 			include_spip('inc/xml');
 			$arbre = spip_xml_load($xml);
@@ -143,15 +156,16 @@ function action_charger_plugin_dist() {
 				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
 				$texte .= liste_fichiers_pclzip($status);
 				$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'installer.</h2>");
-				$suite = 'auto';
+				$suite = 'plugins';
 			}
 		}
 
 		// C'est un paquet quelconque
 		else {
 			$retour = _L('Chargement du paquet') . ' '.basename($status['tmpname']);
+
 			if (_request('extract')) {
-				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le répertoire '.$dest).'</p>';
+				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire '.$status['dirname']).'</p>';
 			} else {
 				$texte = "<p>"._L("Le fichier ".$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;.')."</p>\n";
 				$texte .= liste_fichiers_pclzip($status);
@@ -160,17 +174,18 @@ function action_charger_plugin_dist() {
 		}
 	}
 
+	// fichier absent
+	else if ($status == -1) {
+		$retour = _T('erreur');
+		$texte = _L('erreur : impossible de charger '.$zip);
+	}
+
 	// fichier la mais pas bien dezippe
-	else if ($status < 0) {
+	else {
 		$retour = _T('erreur');
 		$texte = _L("echec pclzip : erreur ").$status;
 	}
 
-	// fichier absent
-	else if ($status == 0) {
-		$retour = _T('erreur');
-		$texte = _L('erreur : impossible de charger '.$zip);
-	}
 
 	include_spip('exec/install'); // pour bouton_suivant()
 
