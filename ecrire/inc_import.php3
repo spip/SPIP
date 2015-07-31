@@ -18,7 +18,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 	$p = $pos;
 
 	$q = @strpos($buf, '<', $p);
-	while (!$q AND $buf{$p} != '<') {
+	while (!$q AND substr($buf, $p, 1) != '<') {
 		if ($_feof($f)) return false;
 		$before .= substr($buf, $p);
 		$buf = $_fread($f, $buf_len);
@@ -29,7 +29,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 	$tag = '';
 	$p = ++$q;
 	$q = @strpos($buf, '>', $p);
-	while (!$q AND $buf{$p} != '>') {
+	while (!$q AND substr($buf, $p, 1) != '>') {
 		if ($_feof($f)) return false;
 		$tag .= substr($buf, $p);
 		$buf = $_fread($f, $buf_len);
