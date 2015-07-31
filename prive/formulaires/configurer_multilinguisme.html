@@ -11,9 +11,9 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="multi_objets&#91;&#93;" value="" />
 		<input type="hidden" name="gerer_trad_objets&#91;&#93;" value="" />
-	  <ul>
+	  <ul class="editer-groupe">
 			<li class="fieldset">
-				<fieldset><ul>
+				<fieldset><ul class="editer-groupe">
 					#SET{objets,#VAL{rubrique}|objet_info{texte_objets}|_T}
 					#SET{val,spip_rubriques}
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -55,7 +55,7 @@
 			<li class="fieldset">
 				<fieldset>
 					#SET{objets,#VALEUR{texte_objets}|_T}
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label>#GET{objets}</label>[
@@ -81,7 +81,7 @@
 	[(#ENV{editable})
 		</ul>
 		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-		<ul>
+		<ul class="editer-groupe">
 			[<li class="fieldset">
 				<fieldset>
 					<legend><:icone_gestion_langues:></legend>

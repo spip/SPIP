@@ -10,7 +10,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='submit' class='submit' value='<:bouton_enregistrer:>' style="display:none;"/>
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,http_proxy}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_url_proxy:></label>[

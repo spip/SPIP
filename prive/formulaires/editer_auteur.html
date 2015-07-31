@@ -8,7 +8,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_auteur' value='#ENV{id_auteur}' />
 		[<input type='hidden' name='redirect' value='(#ENV**{redirect})' />]
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
@@ -51,7 +51,7 @@
 			<li class='editer_liens_sites fieldset'>
 				<fieldset>
 					<legend><:info_site_web:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
 							[<label for="nom_site">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_site:>,<:entree_nom_site_2:>})</label>][
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>
@@ -77,7 +77,7 @@
 						|and{#SESSION{id_auteur}|=={#ENV{id_auteur}}}|oui)
 						<div class='notice'><:texte_login_precaution:></div>
 					]
-					<ul>
+					<ul class="editer-groupe">
 						[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
 						<li class='editer editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
 							[(#ENV{config}|table_valeur{edit_login}|oui)

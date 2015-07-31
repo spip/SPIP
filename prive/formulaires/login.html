@@ -19,7 +19,7 @@
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		[<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:></label>[
 				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>

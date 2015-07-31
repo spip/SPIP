@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset><legend><:info_contenu_articles:>#AIDER{confart}</legend>
 			<p><:texte_contenu_articles:></p>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,articles_surtitre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_surtitre:></label>[
@@ -109,7 +109,7 @@
 			</ul>
 		</fieldset>
 		<fieldset><legend><:titre_publication_articles_post_dates:>#AIDER{confdates}</legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,post_dates}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:texte_publication_articles_post_dates:></label>[
@@ -126,7 +126,7 @@
 			</ul>
 		</fieldset>
 		<fieldset><legend><:config_redirection:>#AIDER{artvirt}</legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,articles_redirection}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:config_info_redirection:></label>[

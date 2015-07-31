@@ -8,7 +8,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,suivi_edito}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:info_suivi_activite:></label>[
@@ -29,7 +29,7 @@
 					/><label for="#GET{name}_oui"><:bouton_radio_envoi_annonces_adresse:></label>
 				</div>
 				<fieldset id="suivi_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,adresse_suivi}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:info_adresse:></label>[
@@ -68,7 +68,7 @@
 					/><label for="#GET{name}_oui"><:bouton_radio_envoi_liste_nouveautes:></label>
 				</div>
 				<fieldset id="neuf_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,adresse_neuf}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:info_adresse:></label>[

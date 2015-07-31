@@ -11,7 +11,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:config_info_base_sup:></p>
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,sql_serveur_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:install_select_type_db:></label>[

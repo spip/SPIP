@@ -1,6 +1,6 @@
 #SET{p,pa_#ID_RUBRIQUE}<B_articles>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-<ul>
+<ul class="editer-groupe">
 <BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 100 #GET{p}}><li
 	class='article[ (#EXPOSE)]'>[(#ENV{picker_article,1}|oui)<a
 	href='#'

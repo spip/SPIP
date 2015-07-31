@@ -12,7 +12,7 @@
 		[(#REM) un submit pour attraper la touche entree]
 		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_logo_on[ (#ENV{logo_on}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 				[(#ENV{logo_on}|oui)
 					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
