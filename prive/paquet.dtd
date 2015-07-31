@@ -27,6 +27,7 @@
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
 <!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets separes par un point-virgule -->
 <!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
+<!ENTITY % SOURCE "CDATA"> <!-- un chemin au format %PATH ou un lien au format %URI -->
 
 <!ENTITY % ETAT "(experimental|dev|test|stable)" >
 
@@ -34,7 +35,7 @@
 
 <!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % IMPLEMENTATION "(menu|chemin|lib|necessite|onglet|procure|pipeline|utilise)*" >
+<!ENTITY % IMPLEMENTATION "(menu|chemin|lib|necessite|onglet|procure|pipeline|utilise|style|script)*" >
 
 <!ELEMENT paquet (nom, %CREDITS;, traduire*, %IMPLEMENTATION;, spip*) >
 <!ATTLIST paquet
@@ -142,3 +143,15 @@
 	  icone %PATH; #IMPLIED
 >
 
+<!ELEMENT style EMPTY>
+<!ATTLIST style
+	  source %SOURCE; #REQUIRED
+	  type %NAME; #IMPLIED
+	  media %NAME; #IMPLIED
+>
+
+<!ELEMENT script EMPTY>
+<!ATTLIST script
+	  source %SOURCE; #REQUIRED
+	  type %NAME; #IMPLIED
+>
