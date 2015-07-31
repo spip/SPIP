@@ -695,10 +695,9 @@ function spip_mysql_hex($v)
 	return "0x" . $v;
 }
 
-// http://doc.spip.org/@spip_mysql_quote
-function spip_mysql_quote($v)
+function spip_mysql_quote($v, $type='')
 {
-	return _q($v);
+	return ($type === 'int' AND !$v) ? '0' :  _q($v);
 }
 
 //
