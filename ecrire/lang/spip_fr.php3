@@ -279,7 +279,7 @@ Merci de votre participation
 		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
 		d\'indiquer ci-dessous l\'identifiant personnel qui vous a
 		&eacute;t&eacute; fourni. Si vous n\'&ecirc;tes pas enregistr&eacute;, vous devez',
-'forum_vous_inscrire' => 'vous inscrire </a> au pr&eacute;alable.',
+'forum_vous_inscrire' => 'vous inscrire.',
 
 
 // I
@@ -370,8 +370,9 @@ Merci de votre participation
 'info_contact_developpeur' => 'Veuillez contacter un developpeur.',
 'info_contenance' => 'Ce site contient&nbsp;:',
 'info_contribution' => 'contributions de forum',
-'info_copyright' => 'est un logiciel libre distribu&eacute; <a href=\'copyright_fr.html\'>sous licence GPL.</a>',
+'info_copyright' => '<b>@spip@</b> est un logiciel libre distribu&eacute; @lien_gpl@.',
 'info_copyright_doc' => 'Pour plus d\'informations, voir le site <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
+'info_copyright_gpl' => 'sous licence GPL',
 'info_cours_edition' => 'Vos articles en cours de r&eacute;daction',
 'info_creer_repertoire' => 'Veuillez cr&eacute;er un fichier ou un r&eacute;pertoire nomm&eacute;&nbsp;:',
 'info_creer_repertoire_2' => '&agrave; l\'int&eacute;rieur du sous-r&eacute;pertoire <b>ecrire/data/</b>, puis&nbsp;:',
