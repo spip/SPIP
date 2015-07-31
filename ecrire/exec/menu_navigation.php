@@ -26,9 +26,7 @@ function exec_menu_navigation_dist() {
 
 	if (spip_num_rows($vos_articles) > 0) {
 			$t = _T('info_en_cours_validation');
-			$gadget .= "<div>&nbsp;</div>"
-			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
-			. bandeau_titre_boite2(afficher_plus(generer_url_ecrire('articles_page')) . '<b>' . $t . '</b>', "article-24.gif", 'toile_foncee', 'ligne_blanche')
+			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
 			. "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -37,31 +35,26 @@ function exec_menu_navigation_dist() {
 				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
 			}
 			$gadget .= "</div>";
-			$gadget .= "</div>";
+			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 	
 	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
 	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire()) . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif",  'toile_foncee', 'ligne_blanche');
+			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'));
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
-	
-				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
+				$gadget .= "<a class='$statut' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
 			}
 			$gadget .= "</div>";
-			$gadget .= "</div>";
+			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 
 	$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ORDER BY date_heure DESC LIMIT 5");
 	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif",  'toile_foncee', 'ligne_blanche');
+			$gadget .= debut_cadre('bandeau-rubriques',"breve-24.gif",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'));
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];
@@ -71,7 +64,7 @@ function exec_menu_navigation_dist() {
 				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
 			}
 			$gadget .= "</div>";
-			$gadget .= "</div>";
+			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 
 	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");

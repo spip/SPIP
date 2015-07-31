@@ -250,26 +250,6 @@ function fin_boite_info($return=false) {
 	if ($return) return $r; else echo $r;
 }
 
-//
-// une autre boite
-//
-// http://doc.spip.org/@bandeau_titre_boite2
-function bandeau_titre_boite2($titre, $logo="", $fond="toile_blanche", $texte="ligne_noire") {
-	global $spip_lang_left, $spip_display, $browser_name;
-	
-	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
-
-		return "\n<div style='position: relative;$ie_style'>"
-		. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>"
-		. http_img_pack($logo, "", "")
-		. "</div>"
-		. "\n<div style='padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2 $fond $texte'>$titre</div>"
-		. "</div>";
-	} else {
-		return "<h3 style='padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2 $fond $texte'>$titre</h3>";
-	}
-}
 
 //
 // La boite des raccourcis
@@ -1157,17 +1137,15 @@ function liste_articles_bloques()
 		include_spip('inc/drapeau_edition');
 		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
 		if (count($articles_ouverts)) {
-			$res .= "\n<div>&nbsp;</div>"
-			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
-			. bandeau_titre_boite2('<b>' . _T('info_cours_edition')  . '</b>', "article-24.gif", 'toile_foncee', 'ligne_blanche')
-			. "\n<div class='plan-articles-bloques'>";
-
+			$res .= 
+				debut_cadre('bandeau-rubriques',"article-24.gif",'',_T('info_cours_edition'))
+				. "\n<div class='plan-articles-bloques'>";
 			foreach ($articles_ouverts as $row) {
 				$ze_article = $row['id_article'];
 				$ze_titre = $row['titre'];
 				$statut = $row["statut"];
 
-				$res .= "\n<div class='$statut spip_xx-small'>"
+				$res .= "\n<div class='$statut'>"
 				. "\n<div style='float:right; '>"
 				. debloquer_article($ze_article,_T('lien_liberer'))
 				. "</div>"
@@ -1178,15 +1156,11 @@ function liste_articles_bloques()
 			}
 
 			if (count($articles_ouverts) >= 4) {
-				$res .= "\n<div class='spip_x-small'>"
-				. "\n<div style='text-align:right; '>"
+				$res .= "\n<div style='text-align:right; '>"
 				. debloquer_article('tous', _T('lien_liberer_tous'))
-				. "</div>"
 				. "</div>";
 			}
-
-
-			$res .= "</div></div>";
+			$res .= fin_cadre('bandeau-rubriques') . "</div>";
 		}
 	}
 	return $res;
@@ -1328,23 +1302,27 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	}
 
 	$icone =  $puce_rubrique . '<b>' . _T('info_meme_rubrique')  . '</b>';
-	
+	$bouton = bouton_block_depliable(_T('info_meme_rubrique'),true,'memerub');	
 
-	$retour = bandeau_titre_boite2($icone,  'article-24.gif', 'toile_blanche', 'ligne_noire')
-	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
-	. $retour;
+	$retour = 
+		debut_cadre('meme-rubriques',"article-24.gif",'',$bouton)
+		. debut_block_depliable(true,'memerub')
+		. "\n<table style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
+		. $retour;
 	
 	if (_MODE_MEME_RUBRIQUE == 'oui')
 	$retour .= (($limit <= 0) ? ''
 		: "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
 
-	$retour .= "</table>";
+	$retour .= "</table>"
+		. fin_block()
+		. fin_cadre('meme-rubriques');
 
 	if ($ajax) return $retour;
 
 	// id utilise dans puce_statut_article
 	return "\n<div>&nbsp;</div>"
-	. "\n<div id='imgstatut$idom$id_rubrique' class='bandeau_rubriques' style='z-index: 1;'>$retour</div>";
+	. "\n<div id='imgstatut$idom$id_rubrique'>$retour</div>";
 }
 
 //

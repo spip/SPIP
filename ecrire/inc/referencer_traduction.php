@@ -74,10 +74,9 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		    . $t
 		    . "</table>\n";
 
-		$liste = "\n<div class='liste'>"
-		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'toile_blanche', 'ligne_noire')
+		$liste = debut_cadre('liste','','',_T('trad_article_traduction'))
 		. $t
-		. "</div>";
+		. fin_cadre('liste');
 	} else $liste = '';
 
 	// changer les globales de direction de langue
