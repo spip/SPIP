@@ -25,7 +25,7 @@ function analyser_site($url) {
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 
-	if (preg_match(',<(channel|feed)([:[:space:]][^>]*)?'
+	if (preg_match(',<(channel|feed)([\:[:space:]][^>]*)?'
 	.'>(.*)</\1>,ims', $texte, $regs)) {
 		$result['syndication'] = 'oui';
 		$result['url_syndic'] = $url;

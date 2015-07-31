@@ -20,6 +20,8 @@ function formulaires_editer_site_charger_dist($id_syndic='new', $id_rubrique=0, 
 	# pour recuperer le logo issu d'analyse auto
 	$valeurs['logo']='';
 	$valeurs['format_logo']='';
+	if (!$valeurs['id_rubrique'])
+		unset($valeurs['id_rubrique']); // pour ne pas perdre id_rubrique dans l'url apres un submit
 	return $valeurs;
 }
 
