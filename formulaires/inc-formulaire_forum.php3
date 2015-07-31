@@ -291,9 +291,10 @@ ondbclick='storeCaret(this);'>$texte</textarea>";
 function table_des_mots($table, $les_mots) {
 	global $afficher_groupe;
 
-	if (!is_array($afficher_groupe)) return;
-
-	$in_group = " AND id_groupe IN (" . join($afficher_groupe, ", ") .")";
+	if (is_array($afficher_groupe))
+		$in_group = " AND id_groupe IN (" . join($afficher_groupe, ", ") .")";
+	else
+		$in_group = '';
 
 	$result_groupe = spip_query("SELECT * FROM spip_groupes_mots
 	WHERE forum = 'oui' AND $table = 'oui'". $in_group);
