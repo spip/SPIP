@@ -108,7 +108,7 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		return $vals;
 }
 
-function admin_plugin(){
+function exec_admin_plugin_dist(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
