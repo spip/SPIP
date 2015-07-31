@@ -238,8 +238,10 @@ function verifier_session($change=false) {
 	if (isset($GLOBALS['visiteur_session'])
 	AND defined('_AGE_SESSION_MAX')
 	AND _AGE_SESSION_MAX > 0
-	AND time() - @$GLOBALS['visiteur_session']['date_session'] > _AGE_SESSION_MAX)
+	AND time() - @$GLOBALS['visiteur_session']['date_session'] > _AGE_SESSION_MAX) {
+		unset($GLOBALS['visiteur_session']);
 		return false;
+	}
 
 	return is_numeric($GLOBALS['visiteur_session']['id_auteur'])
 		? $GLOBALS['visiteur_session']['id_auteur']
