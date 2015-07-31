@@ -142,7 +142,7 @@ function insert_article($id_rubrique) {
 	$id_article = sql_insertq("spip_articles", $champs);
 
 	// controler si le serveur n'a pas renvoye une erreur
-	if ($id_article > 0) 
+	if ($id_article > 0 AND $GLOBALS['visiteur_session']['id_auteur'])
 		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_article));;
 
 	return $id_article;

@@ -269,24 +269,6 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // * retailler les input
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
 function verifForm(racine) {
-	if(!jQuery.browser.mozilla) return;
-	jQuery("input.forml,input.formo,textarea.forml,textarea.formo", racine||document)
-	.each(function() {
-		var jField = jQuery(this);
-		var w = jField.css('width');
-		if (!w || w == '100%') {
-			jField.css('width','95%');
-		} else {
-			w = parseInt(w) -
-			(parseInt(jField.css("borderLeftWidth")) +
-				parseInt(jField.css("borderRightWidth")) +
-				parseInt(jField.css("paddingLeft")) +
-				parseInt(jField.css("paddingRight")
-			));
-			jField.width(w+'px');
-		}
-	});
-
 	// Clavier pour sauver (cf. crayons)
 	jQuery('form', racine||document)
 	.keypress(function(e){
@@ -303,6 +285,20 @@ function verifForm(racine) {
 			return false;
 		}
 	});
+	
+	// vieux fonctionnement verifForm, desormais uniquement sur MSIE < 8:
+	// forcer la largeur des elements de formulaires a 100%
+	// (desormais, on utilise la CSS box-sizing pour brouteurs recents).
+	if(jQuery.browser.msie && jQuery.browser.version.substr(0,3) < 8) {
+		jQuery(".formulaire_spip", racine||document).find("input.text, input.password, textarea")
+		.each(function() {
+			if(this.currentStyle && this.currentStyle.width=="100%") {
+				var jField = jQuery(this);
+				jField.width(2*jField.width()-jField.outerWidth());
+			}
+		});	
+	}
+
 }
 
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
