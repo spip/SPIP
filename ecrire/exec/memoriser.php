@@ -20,14 +20,13 @@ function exec_memoriser_dist()
 	$hash = _request('hash');
 	lire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt', $ajax_fonctions);
 	$ajax_fonctions = @unserialize($ajax_fonctions);
+
 	if ($res = $ajax_fonctions[$hash]) {
 		list(,$t,$r,$p,$f) = $res;
-
-		$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM " . $r['FROM'] . ($r['WHERE'] ? (' WHERE ' . $r['WHERE']) : '') . ($r['GROUP BY'] ? (' GROUP BY ' . $r['GROUP BY']) : '')));
-
+		$cpt = sql_countsel($r['FROM'], $r['WHERE'], $r['GROUP BY']);
 		include_spip('inc/presentation');
 		include_spip('inc/afficher_objets');
-		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $hash, $cpt['n'], _request('trad')));
+		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $hash, $cpt, _request('trad')));
 
 	} else
 		spip_log("memoriser $q vide");
