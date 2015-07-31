@@ -673,11 +673,21 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 // Gestion du raccourci <math>...</math> en client-serveur
 //
 function image_math($tex) {
+	// Correction pour forcer la ligne de base
+	$tex = "\large\\setbox1=\\hbox{\$\\displaystyle ".$tex."\$}\n"
+		."\\newdimen\\haut\n\\newdimen\prof\n"
+		."\\haut=\\ht1\n\\prof=\\dp1\n"
+		."\\ifdim\\haut>\\prof\\prof=\\haut\\else\\haut=\\prof\\fi\n"
+		."\\advance\haut by .5em\n"
+		."\\color{white}\\vrule height \\haut depth \\prof width 0.1pt\\color{black}\\box1";
+	
+
 	// Regarder dans le repertoire local des images TeX
 	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';
 	if (!@is_dir($dir))
 		@mkdir ($dir, 0777);
 	$fichier = "$dir/".md5(trim($tex)).'.png';
+	
 
 	if (!@file_exists($fichier)) {
 		// Aller chercher l'image sur le serveur
@@ -692,6 +702,7 @@ function image_math($tex) {
 			}
 		}
 	}
+
 
 	// Composer la reponse selon presence ou non de l'image
 	$tex = entites_html($tex);
