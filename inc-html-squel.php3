@@ -188,12 +188,14 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
       if ($fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
       $res = array($fonc);
       $args = $suite ;
-      if (($suite[0] != '{') /* || !eregi("^[?A-Z0-9_]*$", $fonc) */)
-	{ if (!$match[1])
+      // cas du filtre sans argument ou du critere /
+      if (($suite[0] != '{')  || ($fonc  && $fonc[0] == '/'))
+	{ 
+	  // si pas d'argument, alors il faut une fonction ou un double |
+	  if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
-	  // suite zarbi, c'est un critere infixe comme "/"
-	  /* ca serait pas mal d'expliquer, la c'est abscons */
-	  if (!preg_match(',^[)|],', $suite)) break;
+	  // pas d'arg et pas d'autres filtres ==> critere infixe comme "/"
+          if ((!$suite) || strpos(")|", $suite[0]) === false) break;
 	} else {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
