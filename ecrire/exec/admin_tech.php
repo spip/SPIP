@@ -171,6 +171,9 @@ function exec_admin_tech_dist()
 		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
 		  _T('sauvegarde_fusionner') .
 		  '</label><br />' .
+		 "<input name='statut' id='statut' type='checkbox' />&nbsp; <label for='statut'>". 
+		  _L('D&eacute;publier les objets fusionn&eacute;s') .
+		  '</label><br />' .
 		  "<label ='url_site'>" .
 		  _T('sauvegarde_url_origine') .
 		  "</label>" .

@@ -35,6 +35,9 @@ function insere_1_init($request) {
 	}
 	// au cas ou la derniere fois ce serait terminee anormalement
 	spip_query("DELETE FROM spip_translate");
+	// pour PG
+	$GLOBALS['tables_principales']['spip_translate'] = 
+		array('field' => $field, 'key' => $key);
 	return insere_1bis_init($request);
 }
 
@@ -176,14 +179,29 @@ function import_translate_std($values, $table, $desc, $request, $atts) {
 		if ($k=='id_parent' OR $k=='id_secteur')
 				$type = 'id_rubrique';
 		else $type = $k;
-		if (($k=='chapo') AND ($v[0]=='=') AND preg_match(_RACCOURCI_CHAPO, substr($v,1), $m))
-			$v = '=[->' . substr($v,1) . ']';
 
 		$values[$k]= importe_raccourci(importe_translate_maj($type, $v));
 	}
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
+function import_translate_spip_articles($values, $table, $desc, $request, $atts) {
+	$v = $values['chapo']; 
+	if ($v[0]=='=' AND preg_match(_RACCOURCI_CHAPO, substr($v,1)))
+		$values['chapo'] = '=[->' . substr($v,1) . ']';
+	if ($request['statut'] == 'on' AND $values['statut'] == 'publie')
+		$values['statut'] = 'prop';
+	import_translate_std($values, $table, $desc, $request, $atts);
+}
+
+function import_translate_spip_breves($values, $table, $desc, $request, $atts) {
+	if ($request['statut'] == 'on' AND $values['statut'] == 'publie')
+		$values['statut'] = 'prop';
+	import_translate_std($values, $table, $desc, $request, $atts);
+}
+
+// Les doc importes deviennent distants.
+// Gerer les vieilles sauvegardes où le Path etait en dur
 // http://doc.spip.org/@import_translate_spip_documents
 function import_translate_spip_documents($values, $table, $desc, $request, $atts) {
 
@@ -323,9 +341,7 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 					    'id_new' => $r,
 					    'titre' => $titre,
 					    'type' => 'id_mot',
-					    'ajout' => 1),
-			$GLOBALS['tables_principales']['spip_translate']
-		    );
+					    'ajout' => 1));
 	else spip_log("Impossible d'inserer dans spip_mots");
 	return $r;
 }

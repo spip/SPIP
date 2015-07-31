@@ -172,7 +172,7 @@ function import_init_tables($request)
 // http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
-	if (sql_countsel("spip_auteurs") > 1)
+	if (sql_countsel("spip_auteurs", "id_auteur<>0"))
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 	else {
 	  	spip_query("UPDATE spip_auteurs SET id_auteur=extra WHERE id_auteur=0");
