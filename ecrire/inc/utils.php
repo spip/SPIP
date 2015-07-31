@@ -971,6 +971,19 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	return '';
 }
 
+function generer_url_ecrire_entite_edit($id, $entite, $args='', $ancre=''){
+	// provisoire en attendant un point d'entree
+	$entite = $entite."_edit";
+	$url = generer_url_ecrire($entite,$args);
+	if (intval($id))
+		$url = parametre_url($url,id_table_objet($entite),$id);
+	else
+		$url = parametre_url($url,'new','oui');
+	if ($ancre)
+		$url = ancre_url($url,$ancre);
+	return $url;
+}
+
 // Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
 function urlencode_1738($url) {
 	$uri = '';
