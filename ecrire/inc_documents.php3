@@ -212,6 +212,9 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
 
+		// type d'affichage : IMG, DOC
+		$affichage_detaille = (strtoupper($type_aff) == 'DOC');
+
 		// on construira le lien en fonction du type de doc
 		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
 		if ($type = @spip_fetch_object($result_type)) {
