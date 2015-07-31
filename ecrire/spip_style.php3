@@ -1294,7 +1294,7 @@ a.spip_in {
 }
 a.spip_out {
 	background: url(<?php echo http_img_pack('spip_out.gif'), ') ', $right; ?> center no-repeat;
-	padding-$right: 10px;
+	padding-<?php echo $right; ?>: 10px;
 	border-bottom: 1px solid;
 }
 a.spip_url {
