@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_aucun_resultat' => 'Minga de resultat.',
 	'avis_chemin_invalide_1' => 'Lo camin qu’avètz chausit',
 	'avis_chemin_invalide_2' => 'non sembla valid. Vorgatz tornar a la pàgina anteriora per verificar li informacions fornidi.',
-	'avis_connexion_echec_1' => 'La connexion au servidor SQL s’es encalada.', # MODIF
+	'avis_connexion_echec_1' => 'La conexion au servidor SQL s’es encalada.',
 	'avis_connexion_echec_2' => 'Tornatz a la pàgina anteriora, e verificatz li informacions qu’avètz fornidi.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Sus tot plen de servidors, devètz <b>demandar</b> qu’activen lo vòstre accès a la basa SQL avans de la poder utilizar. Se non vos podètz connectar, verificatz qu’augatz ben realizat aqueu procediment.', # MODIF
 	'avis_connexion_ldap_echec_1' => 'La connexion au servidor LDAP s’es encalada.',
@@ -125,7 +125,7 @@ L’administrator dau sistèma ò de la ret vos deu poder fornir
 	'info_1_article' => '1 article',
 	'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondéncia</b>; aquò vos permetrà de passar aisat dau sit public au sit privat.',
 	'info_admin_gere_rubriques' => 'Aquel administrator gerisse li rubricas seguenti:',
-	'info_admin_gere_toutes_rubriques' => 'Aquel administrator gerisse <b>toti li rubricas</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Aquel administrator gera <b>toti li rubricas</b>.',
 	'info_administrateur' => 'Administrator',
 	'info_administrateur_1' => 'Administrator',
 	'info_administrateur_2' => 'dau sit(<i>d’utilizar emb precaucion</i>)',
