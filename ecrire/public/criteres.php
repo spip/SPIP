@@ -283,11 +283,21 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 // par exemple <boucle(articles){fusion lang}>
 // http://doc.spip.org/@critere_fusion_dist
 function critere_fusion_dist($idb,&$boucles, $crit) {
-	if (isset($crit->param[0])) {
+	if ($t = isset($crit->param[0])) {
 		$t = $crit->param[0];
-		if ($t[0]->type == 'texte')
+		if ($t[0]->type == 'texte') {
 			$t = $t[0]->texte;
-		else 	$t = '".' . calculer_critere_arg_dynamique($idb, $boucles, $t) . '."';
+			if (preg_match("/^(.*)\.(.*)$/", $t, $r)) {
+				$t = table_objet_sql($r[1]);
+				$t = array_search($t, $boucles[$idb]->from);
+				if ($t) $t .= '.' . $r[2];
+			}
+		} else { $t = '".'
+		    . calculer_critere_arg_dynamique($idb, $boucles, $t)
+		    . '."';
+		}
+	}
+	if ($t) {
 		$boucles[$idb]->group[] = $t; 
 		if (!in_array($t, $boucles[$idb]->select))
 		    $boucles[$idb]->select[] = $t;
