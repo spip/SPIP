@@ -51,10 +51,13 @@ function action_editer_auteur_dist($arg=null) {
 			# ils ont un id = 0-id_auteur de la session
 			$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
-				rename($logo, str_replace($id_hack, $id_auteur, $logo));
-			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
-				rename($logo, str_replace($id_hack, $id_auteur, $logo));
+			foreach (array('on', 'off') as $type) {
+				if ($logo = $chercher_logo($id_hack, 'id_auteur', $type)) {
+					if ($logo = reset($logo)) {
+						rename($logo, str_replace($id_hack, $id_auteur, $logo));
+					}
+				}
+			}
 		}
 	}
 
