@@ -27,6 +27,12 @@ arbo_articles_tous();
 debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
 debut_gauche();
 
+
+if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') 
+	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+ else
+	$langues = array();  
+
 $sel_lang[$spip_lang] = $spip_lang;
 
 if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles ORDER BY date DESC";
@@ -50,15 +56,11 @@ while($row = spip_fetch_array($result)) {
 	$text_article[$id_article]["date_modif"] = $date_modif;
 	$GLOBALS['langues_utilisees'][$lang] = true;
 
-
-		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
-		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') {
-			if (count($langues) > 1) {
-				while (list(, $l) = each ($langues)) {
-				  if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
-				}
-			}
+	if (count($langues) > 1) {
+		while (list(, $l) = each ($langues)) {
+			if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
 		}
+	}
 		
 	if ($id_trad == $id_article OR $id_trad == 0) {
 		$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
@@ -120,7 +122,7 @@ while ($row = spip_fetch_array($result)) {
 }
 
 
-//  checkbox avec imgage
+//  checkbox avec image
 
 function http_label_img($statut, $etat, $var, $img, $texte) {
   return "<label for='$statut'>". 
@@ -242,14 +244,16 @@ function couche_formulaire_tous($first_couche, $last_couche)
 }
 
 function afficher_rubriques_filles($id_parent) {
-	global $enfant, $article, $text_article;
-	global $spip_lang_left, $spip_lang_right, $spip_lang, $direction_generale;
+	global $enfant, $article;
+	global $spip_lang_left, $spip_lang_right, $spip_lang;
 	global $couleur_claire;
 	global $decal;
 	
 	
 
-	
+	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
+			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
+		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 	$decal = $decal + 1;
 	$droite = 500 - (10 * $decal);
 	
@@ -267,39 +271,23 @@ function afficher_rubriques_filles($id_parent) {
 			
 			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . _DIR_IMG_PACK . "$icone) $spip_lang_left center no-repeat;$bgcolor'>";
 			
-			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
-			
-			echo "<b class='verdana2'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>";
-			echo $titre;
-			echo "</b></a></div>\n";
-			
+			$lesarticles = $article[$id_rubrique];
 
-			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) {
-				echo debut_block_invisible("rubrique$id_rubrique");			
+			if ($enfant[$id_rubrique] OR $lesarticles) echo bouton_block_invisible("rubrique$id_rubrique");
+			
+			echo "<b class='verdana2'><a href='",
+			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
+			  "'>",
+			  $titre,
+			  "</b></a></div>\n";
 
+			if ($enfant[$id_rubrique] OR $lesarticles) {
+				echo debut_block_invisible("rubrique$id_rubrique");
 				echo "<div class='plan-rubrique'>";
-				if ($article[$id_rubrique]) {
+				if ($lesarticles) {
 					echo "<div class='plan-articles'>";
-					while(list(,$zarticle) = each($article[$id_rubrique]) ) {
-						$zelang = $text_article[$zarticle]["lang"];
-						$text_article[$zarticle]["trad"]["$zelang"] = "";
-						if (count($text_article[$zarticle]["trad"]) > 0) {
-							ksort($text_article[$zarticle]["trad"]);
-							$traductions = join ($text_article[$zarticle]["trad"], "");
-						} else {
-							$traductions = "";
-						}
-						if ($text_article[$zarticle]["id_trad"] == 0 OR $text_article[$zarticle]["id_trad"] == $zarticle) {
-							//echo "<div style='position: relative;'$direction_generale>";
-							if (strlen($traductions)>0) echo "<div class='trad_float'>$traductions</div>";
-							echo "<a class='".$text_article[$zarticle]["statut"]."' href='" . generer_url_ecrire("articles","id_article=$zarticle") . "'>";
-							if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') echo "<span class='lang_base'$direction_generale>".$text_article[$zarticle]["lang"]."</span> ";
-							echo "<span>".$text_article[$zarticle]["titre"]."</span></a>";	
-							//echo "</div>\n";
-						}
-					}
+					article_tous_rubrique($lesarticles, $id_rubrique, $flag_trad);
 					echo "</div>";
-								
 				}
 
 				afficher_rubriques_filles($id_rubrique);	
@@ -314,4 +302,44 @@ function afficher_rubriques_filles($id_parent) {
 	
 }
 
+function article_tous_rubrique($tous, $id_rubrique, $flag_trad) 
+{
+	global $text_article;
+
+	while(list(,$zarticle) = each($tous) ) {
+		$attarticle = &$text_article[$zarticle];
+		$zelang = $attarticle["lang"];
+		unset ($attarticle["trad"][$zelang]);
+		if ($attarticle["id_trad"] == 0 OR $attarticle["id_trad"] == $zarticle) {
+			$auteurs = trouve_auteurs_articles($zarticle);
+			/* pas loin du but, mais mise en page horrible
+$statuts= puce_statut_article($zarticle, $attarticle['statut'], $id_rubrique);
+			*/
+			if (count($attarticle["trad"]) > 0) {
+				ksort($attarticle["trad"]);
+				$traductions = join ($attarticle["trad"], "");
+			echo "<span class='trad_float'>", $traductions, "</span>";
+			}
+			echo "<a   class='",
+			  $attarticle["statut"],
+			  "' href='", 
+			  generer_url_ecrire("articles","id_article=$zarticle"),
+			  "'",
+			  ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :''),
+			  ">",
+			  ($flag_trad ? "<span class='lang_base'>$zelang</span> " : ''),
+			  "<span>",
+			  $attarticle["titre"],
+			  "</span></a>";
+		}
+	}
+}
+
+function trouve_auteurs_articles($id_article)
+{
+	$result = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ORDER BY auteurs.nom");
+	$res = array();
+	while ($row = spip_fetch_array($result))  $res[] = $row["nom"];
+	return join(", ", $res);
+}
 ?>
