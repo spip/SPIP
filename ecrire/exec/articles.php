@@ -100,7 +100,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		$iconifier = charger_fonction('iconifier', 'inc');
 	else $iconifier = '';
 
-	if ($flag_editable)
+	if ($statut_rubrique)
 		$instituer_article = charger_fonction('instituer_article', 'inc');
 	else
 		$instituer_article ='';
