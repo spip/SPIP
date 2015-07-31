@@ -44,7 +44,8 @@ function base_convert_sql_utf8_dist($titre, $reprise=false)
 // http://doc.spip.org/@convert_sql_utf8
 function convert_sql_utf8(){
 	include_spip('base/db_mysql');
-	
+
+	define(_DEBUG_CONVERT, true);
 	$charset_spip = $GLOBALS['meta']['charset'];
 	$charset_supporte = false;
 	$utf8_supporte = false;	
@@ -59,10 +60,11 @@ function convert_sql_utf8(){
 		while ($row = spip_fetch_array($res)){
 			if ($row['Charset']=='utf8') $utf8_supporte = true;
 		}
-		echo _L("le Charset SPIP actuel $charset_spip n'est pas supporte par votre serveur mySql<br/>");
+		echo install_debut_html();
+		echo _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");
 		if ($utf8_supporte)
 			echo _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
-			echo install_fin_html();
+		echo install_fin_html();
 		exit;
 	}
 	echo _L("Charset Actuel du site SPIP : $charset_spip<br/>");
@@ -76,6 +78,9 @@ function convert_sql_utf8(){
 	
 	$count = 0;
 	// lister les tables spip
+	include_spip('base/serial');
+	include_spip('base/auxiliaires');
+
 	$res = spip_query("SHOW TABLES");
 	while (($row = spip_fetch_array($res,SPIP_NUM)) /*&& ($count<1)*/){
 		$nom = $row[0];
@@ -89,23 +94,41 @@ function convert_sql_utf8(){
 				$collation = $row2['Collation'];
 				$champ = $row2['Field'];
 				if ($collation!="NULL" 
-					&& isset($charset2collations[$collation]) 
-					&& $charset2collations[$collation]=='latin1'){
+				&& isset($charset2collations[$collation]) 
+				&& $charset2collations[$collation]=='latin1'){
 					echo "Conversion de '$champ' depuis $collation (".$charset2collations[$collation]."):";
 					// conversion de latin1 vers le charset reel du contenu
 					$type_texte= $row2['Type'];
 					$type_blob = "blob";
-					if (strpos($type_texte,"text")!==FALSE) $type_blob = str_replace("text","blob",$type_texte);
-					
-					$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
-					$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
-					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob $default $notnull")." ";
-					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_texte CHARACTER SET $sql_charset COLLATE $sql_collation  $default $notnull")." ";
-					echo "<br/>";
+					if (strpos($type_texte,"text")!==FALSE)
+						$type_blob = str_replace("text","blob",$type_texte);
+
+					// sauf si blob expressement demande dans la description !
+					if ((
+					$a = $GLOBALS['tables_principales']['spip_'.$nom]['field'][$champ]
+					OR $a = $GLOBALS['tables_auxiliaires']['spip_'.$nom]['field'][$champ])
+					) AND preg_match(',blob,i', $a)) {
+						echo "On ignore le champ blob `$nom`.$champ <hr />\n";
+					} else {
+
+						$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
+						$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
+						$q = "ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob $default $notnull";
+						if (!_DEBUG_CONVERT)
+							$a = spip_query($q);
+						echo "<pre>$q</pre>$a<hr />\n";
+						$q = "ALTER TABLE spip_$nom CHANGE $champ $champ $type_texte CHARACTER SET $sql_charset COLLATE $sql_collation  $default $notnull";
+						if (!_DEBUG_CONVERT)
+							$a = spip_query($q);
+						echo "<pre>$q</pre>$a<hr />\n";
+					}
 				}
 			}
 			// on ne change le charset par defaut de la table que quand tous ses champs sont convertis
-			spip_query("ALTER TABLE spip_$nom DEFAULT CHARACTER SET $sql_charset COLLATE $sql_collation");
+			$q = "ALTER TABLE spip_$nom DEFAULT CHARACTER SET $sql_charset COLLATE $sql_collation";
+			if (!_DEBUG_CONVERT)
+				$a = spip_query($q);
+			echo "<pre>$q</pre>$a<hr />\n";
 		}
 	}
 	ecrire_meta('charset_sql_base',$sql_charset,'non');

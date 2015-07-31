@@ -52,10 +52,10 @@ function exec_convert_sql_utf8_dist() {
 			while ($row = spip_fetch_array($res)){
 				if ($row['Charset']=='utf8') $utf8_supporte = true;
 			}
-			echo _L("le Charset SPIP actuel $charset_spip n'est pas supporte par votre serveur mySql<br/>");
+			echo _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");
 			if ($utf8_supporte)
 				echo _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
-				echo install_fin_html();
+			echo install_fin_html();
 			exit;
 		}
 
