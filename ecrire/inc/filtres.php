@@ -2360,13 +2360,14 @@ function filtre_cache_static($scripts,$type='js'){
 
 // http://doc.spip.org/@compacte_head
 function compacte_head($flux){
-	$url_page = substr(generer_url_public('A'), 0, -1);
-	$dir = preg_quote($url_page,',').'|'.preg_quote(url_absolue($url_page,','));
 	$url_base = url_de_base();
+	$url_page = substr(generer_url_public('A'), 0, -1);
+	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
 
+	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
 	// rechercher les js, les agglomerer et les compacter, et mettre le tout dans un cache statique
 	$scripts = array();
-	foreach (extraire_balises($flux,'script') as $s) {
+	foreach (extraire_balises($flux_nocomment,'script') as $s) {
 		if (extraire_attribut($s, 'type') === 'text/javascript'
 		AND $src = extraire_attribut($s, 'src')
 		AND !strlen(strip_tags($s))
@@ -2394,7 +2395,7 @@ function compacte_head($flux){
 
 	// rechercher les css, les agglomerer et les compacter, par type de media
 	$css = array();
-	foreach (extraire_balises($flux, 'link') as $s) {
+	foreach (extraire_balises($flux_nocomment, 'link') as $s) {
 		if (extraire_attribut($s, 'rel') === 'stylesheet'
 		AND (!($type = extraire_attribut($s, 'type'))
 			OR $type == 'text/css')
