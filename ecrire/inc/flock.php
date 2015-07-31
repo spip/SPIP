@@ -273,18 +273,18 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		$subdir = str_replace("/", "", "$subdir");
 	}
 
-	if (isset($dirs[$base.$subdir]))
-		return $dirs[$base.$subdir];
-
 	$baseaff = $nobase ? '' : $base;
+	if (isset($dirs[$base.$subdir]))
+		return $baseaff.$dirs[$base.$subdir];
+
 
 	if (_CREER_DIR_PLAT AND @file_exists("$base${subdir}.plat"))
-		return "$baseaff${subdir}_";;
+		return $baseaff.($dirs[$base.$subdir] = "${subdir}_");
 
 	$path = $base.$subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
 
 	if (file_exists("$path/.ok"))
-		return ($dirs[$base.$subdir] = "$baseaff$subdir/");
+		return $baseaff.($dirs[$base.$subdir] = "$subdir/");
 
 	@mkdir($path, _SPIP_CHMOD);
 	@chmod($path, _SPIP_CHMOD);
@@ -299,7 +299,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	if ($ok) {
 		@touch ("$path/.ok");
 		spip_log("creation $base$subdir/");
-		return ($dirs[$base.$subdir] = "$baseaff$subdir/");
+		return $baseaff.($dirs[$base.$subdir] = "$subdir/");
 	}
 
 	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
@@ -317,7 +317,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		raler_fichier($base . '/.ok');
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
-	return ($dirs[$base.$subdirs] = "$baseaff${subdir}");
+	return $baseaff.($dirs[$base.$subdirs] = "${subdir}_");
 }
 
 //
