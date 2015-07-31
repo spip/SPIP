@@ -87,7 +87,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postd
  * Fonction à appeler lorsqu'on dépublie ou supprime quelque chose
  * dans une rubrique. 
  *
- * [fixme] Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
+ * @todo Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
  * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique
@@ -114,7 +114,7 @@ function publier_branche_rubrique($id_rubrique)
  * Fonction à appeler lorsqu'on dépublie ou supprime quelque chose
  * dans une rubrique. 
  *
- * [fixme] Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
+ * @todo Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
  * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique

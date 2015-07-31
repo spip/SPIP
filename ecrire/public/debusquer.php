@@ -126,7 +126,7 @@ function debusquer_compose_message($msg){
 			$msg = debusquer_requete($msg);
 		}
 	}
-	// [fixme] le fond n'est pas la si on n'est pas dans un squelette
+	// FIXME: le fond n'est pas la si on n'est pas dans un squelette
 	// cela dit, ca serait bien d'indiquer tout de meme d'ou vient l'erreur
 	$fond = isset($GLOBALS['fond']) ? $GLOBALS['fond']  : "";
 	// une erreur critique sort $message en array
@@ -250,7 +250,7 @@ function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
 function debusquer_requete($message){
 	list($errno, $msg, $query) = $message;
 
-	// [fixme] ces écritures mélangent divers syntaxe des moteurs SQL
+	// FIXME: ces écritures mélangent divers syntaxe des moteurs SQL
 	// il serait plus prudent certainement d'avoir une fonction d'analyse par moteur
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs)){
 		$errno = $regs[2];

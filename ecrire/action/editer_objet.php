@@ -116,7 +116,7 @@ function objet_modifier($objet, $id, $set=null) {
 		return $err;
 
 	// Modification de statut, changement de rubrique ?
-	// [fixme] Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
+	// FIXME: Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
 	//         le tableau $set hors black liste, mais du coup on a possiblement des champs en trop. 
 	$c = collecter_requests(array($champ_date, 'statut', 'id_parent'),array(),$set);
 	$err = objet_instituer($objet, $id, $c);
