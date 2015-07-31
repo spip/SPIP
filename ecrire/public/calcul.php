@@ -31,7 +31,7 @@ include_spip('inc/distant');
 // donc il faut l'inclure "en globals"
 if ($f = include_spip('mes_fonctions', false)) {
 	global $dossier_squelettes;
-	include ($f);
+	@include ($f); 
 }
 if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
 	// chargement optimise precompile
