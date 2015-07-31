@@ -1578,15 +1578,11 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
 
-	// CSS pour le code genere par Spip
-	$res = '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style.css" >'  . "\n"
-
 	// CSS de secours en cas de non fonct de la suivante
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
+	$res = '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
 	. 'style_prive_defaut.css" >'  . "\n"
 	
-	// CSS espace prive : la vrai
+	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $args) .'" >' . "\n"
 
