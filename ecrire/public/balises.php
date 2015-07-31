@@ -168,7 +168,7 @@ function balise_NOM_SITE_dist($p) {
 		$p->code = "supprimer_numero(calculer_url(" .
 		champ_sql('url_site',$p) ."," .
 		champ_sql('nom_site',$p) .
-		", 'titre', \$connect))";
+		", 'titre', \$connect, false))";
 	} else
 		$p->code = champ_sql('nom_site',$p);
 
