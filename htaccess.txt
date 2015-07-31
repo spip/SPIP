@@ -74,27 +74,11 @@ RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
 ###
 
 ###
-# URLs "propres" et "propres2"
-# pensez a regler $type_urls='propres' ou 'propres2'
-# dans ecrire/mes_options.php
-# (fichier associe : ecrire/urls/propres.php)
+# URLs "propres", "propres2", "libres", "arbo"
 
-RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
+RewriteRule ^[^\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 
 # Fin URLs "propres" et "propres2"
-###
-
-###
-# URLs "arbo"
-# pensez a ajouter
-# $type_urls='arbo'
-# define('_SET_HTML_BASE',1); // si vos squelette sont en url relatives
-# dans ecrire/mes_options.php
-# (fichier associe : ecrire/urls/arbo.php)
-
-RewriteRule ^[^\.]+(\.html)?$           spip.php?page=type_urls [QSA,E=url_propre:$0,L]
-
-# Fin URLs "arbo"
 ###
 
 ###

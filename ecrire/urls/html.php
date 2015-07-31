@@ -75,7 +75,7 @@ function generer_url_document($id_document, $args='', $ancre='') {
 
 // retrouver les parametres d'une URL dite "html"
 // http://doc.spip.org/@urls_html_dist
-function urls_html_dist($fond, $url) {
+function urls_html_dist(&$fond, $url) {
 	global $contexte;
 
 
@@ -92,12 +92,14 @@ function urls_html_dist($fond, $url) {
 		(isset($_ENV['url_propre']) ?
 			$_ENV['url_propre'] :
 			'');
-	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
+	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $fond)) {
 		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
-
-		$r = sql_fetsel("id_objet", "spip_urls", "url=" . _q($url_propre));
-		if ($r)	$contexte[id_table_objet($fond)] = $r['id_objet'];
+		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . _q($url_propre));
+		if ($r) {
+			$fond = ($r['type'] == 'syndic') ?  'site' : $r['type'];
+			$contexte[id_table_objet($fond)] = $r['id_objet'];
+		}
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
