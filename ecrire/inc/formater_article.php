@@ -18,14 +18,13 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 {
 	global $dir_lang, $options, $spip_lang_right, $spip_display;
 	static $pret = false;
-	static $chercher_logo, $img_admin, $bouton_auteur, $nb;
+	static $chercher_logo, $img_admin, $formater_auteur, $nb;
 
 	if (!$pret) {
 		$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		if ($chercher_logo) 
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($afficher_auteurs)
-			$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$img_admin = http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 		$nb = ($options != "avancees")
 		  ? ''
@@ -69,7 +68,7 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 	. "</a>"
 	. "</div>";
 	
-	if ($formater_auteur) {
+	if ($afficher_auteurs) {
 
 		$result = auteurs_article($id_article);
 		$les_auteurs = "";

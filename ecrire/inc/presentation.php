@@ -698,7 +698,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$hash = "0x".substr(md5($connect_id_auteur.$requete.$titre_table), 0, 31);
 	$tmp_var = 't' . substr($hash, 2, 7);
 
-	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
+	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur LIMIT 1");
 	if ($row = spip_fetch_array($res_proch)) {
 		$id_ajax = $row["id_ajax_fonc"];
 	} else  {
@@ -736,9 +736,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	else $ajout_col = 0;
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
-	$tous_id = array();
+
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
+	if (! ($obligatoire OR ($cpt = $cpt['n']))) return '' ;
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$nb_aff = floor(1.5 * _TRANCHES);
@@ -755,14 +755,14 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	} else 	$tranches = '';
 
-	$result = spip_query($q = "SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 
 	$table = array();
 	$formater_article = charger_fonction('formater_article', 'inc');
+
 	while ($row = spip_fetch_array($result)) {
 	  	$id = $row['id_article'];
-		$tous_id[]= $id;
 		$table[]= $formater_article($id, $row, $afficher_auteurs, $afficher_langue, $langue_defaut);
 	}
 	spip_free_result($result);
@@ -787,9 +787,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$res = afficher_article_logo_trad($titre_table, $tranches, $largeurs, $table, $styles, $tmp_var, $id_ajax, 1); 
 
-	echo ajax_action_greffe($tmp_var,$res);
-
-	return $tous_id;
+	return ajax_action_greffe($tmp_var,$res);
 }
 
 function afficher_article_logo_trad($titre, $tranches, $largeurs, $table, $styles, $tmp_var, $id_ajax, $queltrad)

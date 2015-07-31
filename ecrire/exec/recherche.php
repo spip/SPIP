@@ -71,6 +71,7 @@ function exec_recherche_dist()
 	$query_sites['ORDER BY']= "maj DESC";
 	
 	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
+
 	if ($activer_moteur) {	// texte integral
 		include_spip('inc/indexation');
 		list($hash_recherche,) = requete_hash(str_replace("%","\%",$recherche));
@@ -82,13 +83,14 @@ function exec_recherche_dist()
 	}
 	
 	$nba = afficher_articles (_T('info_articles_trouves'), $query_articles);
+	echo $nba;
 
 	if ($activer_moteur) {
-		if ($nba) {
-			$doublons = join($nba, ",");
-			$query_articles_int['WHERE'] .= " AND objet.id_article NOT IN ($doublons)";
-		}
+		if ($nba) 
+			$query_articles_int['WHERE'] .= " AND NOT (" . $query_articles['WHERE'] . ")";
+
 		$nba1 = afficher_articles (_T('info_articles_trouves_dans_texte'), $query_articles_int);
+		echo $nba1;
 	}
 	
 	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
@@ -124,9 +126,7 @@ function exec_recherche_dist()
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
 	}
-
 	}
-
 echo fin_page();
 }
 ?>
