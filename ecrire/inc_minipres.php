@@ -31,6 +31,7 @@ function install_debut_html($titre = 'AUTO') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
+	include_ecrire('inc_headers.php');
 	http_no_cache();
 	echo  _DOCTYPE_ECRIRE .
 	  "<html lang='".$GLOBALS['spip_lang'].

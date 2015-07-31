@@ -1807,6 +1807,7 @@ function bouton($titre,$lien) {
 // point d'entree/hack pour spip-lab (duplication de debut_page)
 
 function debut_html($titre = "", $rubrique="") {
+	include_ecrire('inc_headers.php');
 
 	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
@@ -2305,13 +2306,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
        init_body($rubrique, $sous_rubrique);
 }
  
-function init_entete($titre, $rubrique, $css)
-{
+function init_entete($titre, $rubrique, $css) {
 	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 
 	// envoi des en-tetes, du doctype et du <head><title...
+	include_ecrire('inc_headers.php');
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .

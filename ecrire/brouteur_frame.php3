@@ -17,6 +17,7 @@ include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
+include_ecrire('inc_headers.php');
 
 http_no_cache();
 echo '<html lang="', 

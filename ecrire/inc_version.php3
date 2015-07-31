@@ -445,7 +445,7 @@ define_once('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Tra
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.902;
+$spip_version = 1.903;
 
 // version de spip
 $spip_version_affichee = "1.9 alpha";
@@ -505,7 +505,7 @@ function spip_log($message, $logname='spip') {
 	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
 
 	$message = date("M d H:i:s")." $ip $pid "
-		.ereg_replace("\n*$", "\n", $message);
+		.preg_replace("/\n*$/", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
 	if (@file_exists($logfile) && (@filesize($logfile) > 10*1024)) {
@@ -593,12 +593,13 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
 	// special bug de proxy
-	&& !eregi("NetCache|Hasd_proxy", $GLOBALS['HTTP_VIA'])
+	&& !preg_match(",NetCache|Hasd_proxy,i", $GLOBALS['HTTP_VIA'])
 	// special bug Netscape Win 4.0x
-	&& !eregi("Mozilla/4\.0[^ ].*Win", $GLOBALS['HTTP_USER_AGENT'])
+	&& !preg_match(",Mozilla/4\.0[^ ].*Win,i", $GLOBALS['HTTP_USER_AGENT'])
 	// special bug Apache2x
-	&& !eregi("Apache(-[^ ]+)?/2", $GLOBALS['SERVER_SOFTWARE'])
-	&& !($GLOBALS['flag_sapi_name'] AND ereg("^apache2", @php_sapi_name()))
+	&& !preg_match(",Apache(-[^ ]+)?/2,i", $GLOBALS['SERVER_SOFTWARE'])
+	&& !($GLOBALS['flag_sapi_name']
+		AND preg_match(",^apache2,", @php_sapi_name()))
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
@@ -634,7 +635,7 @@ class Link {
 					list($name, $value) = split('=', $var, 2);
 					$name = urldecode($name);
 					$value = urldecode($value);
-					if (ereg('^(.*)\[\]$', $name, $regs)) {
+					if (preg_match(',^(.*)\[\]$,', $name, $regs)) {
 						$this->arrays[$regs[1]][] = $value;
 					}
 					else {
@@ -681,7 +682,7 @@ class Link {
 				list($name, $value) = split('=', $var, 2);
 				$name = urldecode($name);
 				$value = urldecode($value);
-				if (ereg('^(.*)\[\]$', $name, $regs))
+				if (preg_match(',^(.*)\[\]$,', $name, $regs))
 					$vars[$regs[1]][] = $value;
 				else
 					$vars[$name] = $value;
@@ -754,13 +755,17 @@ class Link {
 		if ($enctype) $form .= " enctype='$enctype'";
 		$form .= " style='border: 0px; margin: 0px;'>\n";
 		foreach ($this->vars as $name => $value) {
-			$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-			$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\" />\n";
+			$value = preg_replace(',&amp;(#[0-9]+;),', '&\1',
+				htmlspecialchars($value));
+			$form .= "<input type=\"hidden\" name=\"$name\" "
+				. "value=\"$value\" />\n";
 		}
 		foreach ($this->arrays as $name => $table)
 		foreach ($table as $value) {
-			$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-			$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"".$value."\" />\n";
+			$value = preg_replace(',&amp;(#[0-9]+;),', '&\1',
+				htmlspecialchars($value));
+			$form .= "<input type=\"hidden\" name=\"".$name."[]\" "
+				. "value=\"".$value."\" />\n";
 		}
 
 		return $form;
@@ -905,7 +910,7 @@ function cron($gourmand = false) {
 
 
 //
-// Entetes (voir aussi inc_headers.php)
+// Entetes les plus courants (voir inc_headers.php pour les autres)
 //
 
 function http_gmoddate($lastmodified) {
@@ -930,24 +935,6 @@ function http_last_modified($lastmodified, $expire = 0) {
 	if ($expire) 
 		@Header ("Expires: ".http_gmoddate($expire)." GMT");
 	return $headers_only;
-}
-
-function http_no_cache()
-{
-	if (headers_sent()) return;
-	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
-
-	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
-	// il faudrait aussi pour Safari
-	// header("Cache-Control: post-check=0, pre-check=0", false)
-	// mais ca ne respecte pas
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-
-	header("Content-Type: text/html; charset=$charset");
-	header("Expires: 0");
-	header("Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT");
-	header("Cache-Control: no-store, no-cache, must-revalidate");
-	header("Pragma: no-cache");
 }
 
 // envoyer le navigateur sur une nouvelle adresse
