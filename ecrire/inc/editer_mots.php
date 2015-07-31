@@ -121,7 +121,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$nouveaux_mots = array();
 	$res = '';
 
-	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
+	foreach (preg_split(" *[,;] *", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 		$res .= "<br />" . debut_boite_info(true);
