@@ -926,6 +926,10 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_tous_resultats_enregistres' => '[toi lu resultats son registrats]',
 'info_tout_afficher' => 'Far par&eacute;isser tot',
 'info_tout_site' => 'Tot lo sit',
+'info_tout_site1' => '<NEW> Langue de l\'article.',
+'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
+'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
+'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
 'info_travail_colaboratif' => 'Travalh collaboratiu sus lu articles',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz plus tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1004,6 +1008,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'item_non_utiliser_breves' => 'Utilisar pas li br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Utilisar pas la configuracion avan&ccedil;ada dei grops de m&ograve;ts claus',
 'item_non_utiliser_moteur_recherche' => 'Utilisar pas lo motor',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
 'item_non_utiliser_mots_cles' => 'Utilisar pas lu m&ograve;ts claus',
 'item_non_utiliser_syndication' => 'Utilisar pas la sindicacion automatica',
 'item_nouvel_auteur' => 'Nov&egrave;l autor',
@@ -1017,6 +1022,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'item_utiliser_breves' => 'Utilisar li br&egrave;vas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilisar la configuracion avan&ccedil;ada dei grops de m&ograve;ts claus',
 'item_utiliser_moteur_recherche' => 'Utilisar lo motor de recerca',
+'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
 'item_utiliser_mots_cles' => 'Utilisar lu m&ograve;ts claus',
 'item_utiliser_syndication' => 'Utilisar la sindicacion automatica',
 'item_visiteur' => 'visitaire',
@@ -1189,6 +1195,10 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'module_texte_explicatif' => 'Pod&egrave;tz inserir li escorchas seguenti dins li esqueletas dau v&ograve;stre sit public. Se revirar&agrave;n automaticament dins li diferenti lengas per las qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Aquest fichier de lenga &laquo;&nbsp;@module@&nbsp;&raquo; es disponible en&nbsp;:',
 'mois_non_connu' => 'non conoissut',
+
+
+// N
+'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 
 
 // O

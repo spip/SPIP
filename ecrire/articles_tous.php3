@@ -206,7 +206,7 @@ if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'ou
 	$langues = explode(',', lire_meta('langues_multilingue'));
 	if (count($langues) > 1) {
 		sort($langues);
-		echo "<hr /><B>"._T('titre_cadre_afficher_traductions')."&nbsp;:</B><BR>";
+		echo "<hr /><B>"._T('titre_cadre_afficher_traductions')."</B><BR>";
 		while (list(, $l) = each ($langues)) {
 			if ($sel_lang[$l])
 				echo "<div><input type='checkbox' name='sel_lang[$l]' value='$l' CHECKED> <span class='lang_base'$direction_generale>$l</span> ".traduire_nom_langue($l)." </div>\n"; 
