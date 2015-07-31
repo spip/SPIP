@@ -20,27 +20,26 @@ include_ecrire ("inc_presentation.php3");
 $connect_statut = '0minirezo';
 
 
-
 function verifier_base() {
-	if (! $res1= mysql_query("SHOW TABLES"))
+	if (! $res1= spip_query("SHOW TABLES"))
 		return false;
 
-	while ($tab = mysql_fetch_row($res1)) {
+	while ($tab = spip_fetch_row($res1)) {
 		echo "<p><b>".$tab[0]."</b> ";
 
-		if (!($result_repair = mysql_query("REPAIR TABLE ".$tab[0])))
+		if (!($result_repair = spip_query("REPAIR TABLE ".$tab[0])))
 			return false;
 
-		if (!($result = mysql_query("SELECT COUNT(*) FROM ".$tab[0])))
+		if (!($result = spip_query("SELECT COUNT(*) FROM ".$tab[0])))
 			return false;
 
-		list($count) = mysql_fetch_row($result);
+		list($count) = spip_fetch_row($result);
 		if ($count)
 			echo "($count &eacute;l&eacute;ment".($count>1 ? 's':'').")\n";
 		else
 			echo "(vide)\n";
 
-		$row = mysql_fetch_row($result_repair);
+		$row = spip_fetch_row($result_repair);
 		$ok = ($row[3] == 'OK');
 
 		if (!$ok)
@@ -54,10 +53,10 @@ function verifier_base() {
 }
 
 // verifier version MySQL
-if (! $res1= mysql_query("SELECT version()"))
+if (! $res1= spip_query("SELECT version()"))
 	$message = "Erreur de connexion MySQL";
 else {
-	$tab = mysql_fetch_row($res1);
+	$tab = spip_fetch_row($res1);
 	$version_mysql = $tab[0];
 	if ($version_mysql < '3.23.14')
 		$message = "Votre version de MySQL ($version_mysql) ne permet pas l'auto-r&eacute;paration des tables de la base.";
@@ -87,7 +86,7 @@ if ($ok) {
 
 	debut_cadre_relief();
 	if (! verifier_base())
-		echo "<br><br><font color='red'><b><tt>Erreur MySQL ". mysql_errno().": ".mysql_error() ."</tt></b></font><br><br>\n";
+		echo "<br><br><font color='red'><b><tt>Erreur MySQL ". spip_sql_errno().": ".spip_sql_error() ."</tt></b></font><br><br>\n";
 	fin_cadre_relief();
 	echo "<br>";
 

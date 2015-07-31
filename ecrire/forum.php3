@@ -17,7 +17,7 @@ if ($connect_statut == '0minirezo') {
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
 	$result_petition = spip_query($query_petition);
-	if ($row = mysql_fetch_array($result_petition)) {
+	if ($row = spip_fetch_array($result_petition)) {
 		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
@@ -29,7 +29,7 @@ if ($connect_statut == '0minirezo') {
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
 	$result_petition = spip_query($query_petition);
-	if ($row = mysql_fetch_array($result_petition)){
+	if ($row = spip_fetch_array($result_petition)){
 		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
@@ -54,7 +54,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='privrac' AND id_parent=0";
  	$result_forum = spip_query($query_forum);
  	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+ 	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";

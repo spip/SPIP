@@ -22,7 +22,7 @@ function afficher_auteur_rubriques($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row["id_rubrique"];
 		$titre=typo($row["titre"]);
 	
@@ -45,7 +45,7 @@ $query = "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'";
 $result = spip_query($query);
 
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_auteur=$row['id_auteur'];
 	$nom=$row['nom'];
 	$bio=$row['bio'];

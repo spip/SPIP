@@ -24,7 +24,7 @@ function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 		
@@ -71,7 +71,7 @@ if ($new == "oui") {
 else {
 	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$id_parent = $row['id_parent'];
 		$titre = $row['titre'];
@@ -89,7 +89,7 @@ if ($id_parent == 0) $logo_parent = "racine-site-24.gif";
 else {
 	$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_parent'";
  	$result=spip_query($query);
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$parent_parent=$row['id_parent'];
 	}
 	if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
@@ -161,7 +161,7 @@ if ($options=="avancees") {
 
 	// si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
 	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
-	$row = mysql_fetch_array(spip_query($query));
+	$row = spip_fetch_array(spip_query($query));
 	$contient_breves = $row['cnt'];
 	if ($contient_breves > 0) {
 		echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";

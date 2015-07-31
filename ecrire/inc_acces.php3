@@ -64,7 +64,7 @@ function ecrire_acces() {
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
 	$result = spip_query($query);
 	unset($logins);
-	while($row = mysql_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
+	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
 
 	$fichier = @fopen($htpasswd, "w");
 	if ($fichier) {
@@ -79,7 +79,7 @@ function ecrire_acces() {
 	$result = spip_query($query);
 
 	unset($logins);
-	while($row = mysql_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
+	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
 
 	$fichier = fopen("$htpasswd-admin", "w");
 	ecrire_logins($fichier, $logins);

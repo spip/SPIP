@@ -33,7 +33,7 @@ if ($etape == 6) {
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
 		$result = spip_query($query);
 		unset($id_auteur);
-		while ($row = mysql_fetch_array($result)) $id_auteur = $row['id_auteur'];
+		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
 		
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
@@ -150,7 +150,7 @@ else if ($etape == 4) {
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
 	$result = spip_query($query);
-	$result_ok = (mysql_num_rows($result) > 0);
+	$result_ok = (spip_num_rows($result) > 0);
 
 	echo "-->";
 
@@ -162,7 +162,7 @@ else if ($etape == 4) {
 		$conn .= "\$GLOBALS['db_ok'] = true;\n";
 		$conn .= "@mysql_connect('$adresse_db','$login_db','$pass_db');\n";
 		$conn .= "@mysql_select_db('$sel_db');\n";
-		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_num_rows(@spip_query('SELECT COUNT(*) FROM spip_meta'));\n";
+		$conn .= "\$GLOBALS['db_ok'] &= !!@spip_num_rows(@spip_query('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
 		$myFile = fopen("inc_connect_install.php3", "wb");
 		fputs($myFile, $conn);
@@ -205,12 +205,12 @@ else if ($etape == 3) {
 
 	echo "<fieldset><label><B>Choisissez votre base :</B><BR></label>";
 
-	if ($result AND (@mysql_num_rows($result) > 0)) {
+	if ($result AND (@spip_num_rows($result) > 0)) {
 		echo "<B>Le serveur MySQL contient plusieurs bases de donn&eacute;es.</B><P> <B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:";
 		echo "<UL>";	
 		$i=0;
 		$bases = "";
-		while ($i < mysql_num_rows($result)) {
+		while ($i < spip_num_rows($result)) {
 			$table_nom = mysql_dbname($result, $i);
 			$base = "<INPUT NAME=\"choix_db\" VALUE=\"".$table_nom."\" TYPE=Radio id='tab$i'";
 			$base_fin = "><label for='tab$i'>".$table_nom."</label><BR>\n";
@@ -262,7 +262,7 @@ else if ($etape == 2) {
 
 	echo "<!--";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
-	$db_connect = mysql_errno();
+	$db_connect = spip_sql_errno();
 	echo "-->";
 	
 	echo "<P>";

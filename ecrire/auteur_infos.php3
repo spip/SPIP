@@ -31,7 +31,7 @@ function afficher_auteur_rubriques($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent=$leparent ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 	
@@ -71,7 +71,7 @@ if ($connect_statut != "0minirezo" AND $connect_id_auteur != $id_auteur) {
 unset($auteur);
 
 if ($id_auteur) {
-	$auteur = mysql_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 } else if ($new == 'oui') {	// creation
 	$auteur['nom'] = 'Nouvel auteur';
 	$auteur['statut'] = '1comite';
@@ -94,7 +94,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 		if ($login) {
 			if (strlen($login) < 4)
 				$echec .= "<p>Login trop court.";
-			else if (mysql_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
+			else if (spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
 				$echec .= "<p>Ce login existe d&eacute;j&agrave;.";
 			else if ($login != $old_login) {
 				$modif_login = true;
@@ -152,7 +152,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
 			spip_query("INSERT INTO spip_auteurs (nom) VALUES ('temp')");
-			$auteur['id_auteur'] = mysql_insert_id();
+			$auteur['id_auteur'] = spip_insert_id();
 			$id_auteur = $auteur['id_auteur'];
 
 			if (settype($ajouter_id_article,'integer') AND ($ajouter_id_article>0))
@@ -363,12 +363,12 @@ if ($statut == '0minirezo') {
 	$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
 	$result_admin = spip_query($query_admin);
 
-	if (mysql_num_rows($result_admin) == 0) {
+	if (spip_num_rows($result_admin) == 0) {
 		echo "Cet administrateur g&egrave;re <b>toutes les rubriques</b>.";
 	} else {
 		echo "Cet administrateur g&egrave;re les rubriques suivantes :\n";
 		echo "<ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
-		while ($row_admin = mysql_fetch_array($result_admin)) {
+		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 			$titre = typo($row_admin["titre"]);
 			echo "<li>$titre";
@@ -382,7 +382,7 @@ if ($statut == '0minirezo') {
 	}
 
 	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-		if (mysql_num_rows($result_admin) == 0) {
+		if (spip_num_rows($result_admin) == 0) {
 			echo "<p><B>Restreindre la gestion &agrave; la rubrique :</b><BR>";
 		} else {
 			echo "<p><B>Ajouter une autre rubrique &agrave; administrer :</b><BR>";

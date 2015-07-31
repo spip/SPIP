@@ -28,7 +28,7 @@ if ($id_article) {
 	$query = "SELECT * FROM spip_articles WHERE id_article=$id_article";
 	$result = spip_query($query);
 
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_article = $row["id_article"];
 		$surtitre = $row["surtitre"];
 		$titre = $row["titre"];
@@ -50,7 +50,7 @@ if ($id_article) {
 		
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
-		$flag_auteur = (mysql_num_rows($result_auteur) > 0);
+		$flag_auteur = (spip_num_rows($result_auteur) > 0);
 
 		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
 	}
@@ -67,7 +67,7 @@ if (!$flag_editable) {
 if ($id_article && $id_document) {
 	$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_article=$id_article";
 	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
+	$flag_document_editable = (spip_num_rows($result_doc) > 0);
 } else {
 	$flag_document_editable = false;
 }
@@ -200,7 +200,7 @@ function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 		$statut_rubrique=$row['statut'];
@@ -315,7 +315,7 @@ echo "<P><HR><P>";
 	else {
 		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
-		while($row=mysql_fetch_array($result)){
+		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";

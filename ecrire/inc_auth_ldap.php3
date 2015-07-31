@@ -67,7 +67,7 @@ class Auth_ldap {
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($this->login)."' AND source='ldap'";
 		$result = spip_query($query);
 
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$this->nom = $row['nom'];
 			$this->email = $row['email'];
 			$this->statut = $row['statut'];
@@ -112,7 +112,7 @@ class Auth_ldap {
 		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
-		if (mysql_num_rows($result)) return false;
+		if (spip_num_rows($result)) return false;
 
 		$query = "INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) ".
 			"VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')";

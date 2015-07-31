@@ -50,7 +50,7 @@ $query = "SELECT referer, visites FROM spip_referers ".
 	"GROUP BY referer_md5 ORDER BY visites DESC, referer";
 $result = spip_query($query);
 
-while ($row = @mysql_fetch_array($result)) {
+while ($row = @spip_fetch_array($result)) {
 	$referer = $row['referer'];
 	$count = $row['visites'];
 

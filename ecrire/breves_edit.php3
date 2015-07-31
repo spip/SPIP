@@ -19,7 +19,7 @@ function enfant($leparent) {
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=$row['titre'];
 		$descriptif=$row['descriptif'];
@@ -32,7 +32,7 @@ if ($new != "oui") {
 	$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 	$result = spip_query($query);
 	
-	if ($row=mysql_fetch_array($result)) {
+	if ($row=spip_fetch_array($result)) {
 		$id_breve=$row['id_breve'];
 		$date_heure=$row['date_heure'];
 		$titre=$row['titre'];
@@ -53,7 +53,7 @@ else {
 if ($id_document) {
 	$query_doc = "SELECT * FROM spip_documents_breves WHERE id_document=$id_document AND id_breve=$id_breve";
 	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
+	$flag_document_editable = (spip_num_rows($result_doc) > 0);
 } else {
 	$flag_document_editable = false;
 }
@@ -131,7 +131,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else {
 		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
-		while($row=mysql_fetch_array($result)){
+		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";

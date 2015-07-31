@@ -107,7 +107,7 @@ if ($type_requete == 'auteur') {
 		FROM spip_auteurs AS auteurs
 		WHERE 1 $sql_statut_auteurs
 		$sql_order");
-	while ($row = mysql_fetch_array($result_auteurs)) {
+	while ($row = spip_fetch_array($result_auteurs)) {
 		$auteurs[$row['id_auteur']] = $row;
 		$nombre_auteurs ++;
 
@@ -125,7 +125,7 @@ if ($type_requete == 'auteur') {
 		$sql_statut_auteurs $sql_statut_articles
 		GROUP BY auteurs.id_auteur
 		$sql_order");
-	while ($row = mysql_fetch_array($result_nombres))
+	while ($row = spip_fetch_array($result_nombres))
 		$auteurs[$row['id_auteur']]['compteur'] = $row['compteur'];
 
 	// si on n'est pas minirezo, supprimer les auteurs sans article publie
@@ -148,7 +148,7 @@ if ($type_requete == 'auteur') {
 		GROUP BY auteurs.id_auteur
 		$sql_order");
 	unset($vus);
-	while ($row = mysql_fetch_array($result_nombres)) {
+	while ($row = spip_fetch_array($result_nombres)) {
 		$auteurs[$row['id_auteur']] = $row;
 		$vus .= ','.$row['id_auteur'];
 		$nombre_auteurs ++;
@@ -166,7 +166,7 @@ if ($type_requete == 'auteur') {
 		WHERE id_auteur NOT IN (0$vus)
 		$sql_statut_auteurs_ajout
 		$sql_order");
-	while ($row = mysql_fetch_array($result_auteurs)) {
+	while ($row = spip_fetch_array($result_auteurs)) {
 		$auteurs[$row['id_auteur']] = $row;
 		$nombre_auteurs ++;
 	}
@@ -176,7 +176,7 @@ if ($type_requete == 'auteur') {
 unset ($rub_restreinte);
 if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 	$restreint = spip_query("SELECT * FROM spip_auteurs_rubriques");
-	while ($row = mysql_fetch_array($restreint))
+	while ($row = spip_fetch_array($restreint))
 		$rub_restreinte[$row['id_auteur']] .= ','.$row['id_rubrique'];
 }
 

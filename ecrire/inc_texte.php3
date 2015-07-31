@@ -351,7 +351,7 @@ function extraire_lien ($regs) {
 				$lien_url = generer_url_rubrique($id_lien);
 				if (!$lien_texte) {
 					$req = "select titre from spip_rubriques where id_rubrique=$id_lien";
-					$row = @mysql_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 				}
 				break;
@@ -359,7 +359,7 @@ function extraire_lien ($regs) {
 				$lien_url = generer_url_breve($id_lien);
 				if (!$lien_texte) {
 					$req = "select titre from spip_breves where id_breve=$id_lien";
-					$row = @mysql_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 				}
 				break;
@@ -367,7 +367,7 @@ function extraire_lien ($regs) {
 				$lien_url = generer_url_auteur($id_lien);
 				if (!$lien_texte) {
 					$req = "select nom from spip_auteurs where id_auteur = $id_lien";
-					$row = @mysql_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['nom'];
 				}
 				break;
@@ -375,12 +375,12 @@ function extraire_lien ($regs) {
 				$lien_url = generer_url_mot($id_lien);
 				if (!$lien_texte) {
 					$req = "select titre from spip_mots where id_mot=$id_lien";
-					$row = @mysql_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 				}
 				break;
 			case 'si':
-				$row = @mysql_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
+				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
 				if ($row) {
 					$lien_url = $row['url_site'];
 					if (!$lien_texte)
@@ -391,7 +391,7 @@ function extraire_lien ($regs) {
 				$lien_url = generer_url_article($id_lien);
 				if (!$lien_texte) {
 					$req = "select titre from spip_articles where id_article=$id_lien";
-					$row = @mysql_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 				}
 				break;

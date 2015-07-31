@@ -9,7 +9,7 @@ include_ecrire ("inc_logos.php3");
 $query = "SELECT titre, id_rubrique FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
-while($row = mysql_fetch_array($result)) {
+while($row = spip_fetch_array($result)) {
 	$titre = $row["titre"];
 	$id_rubrique = $row["id_rubrique"];
 }

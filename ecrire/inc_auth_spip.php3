@@ -16,7 +16,7 @@ class Auth_spip {
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$mdpass_actuel' AND statut<>'5poubelle'";
 		$result = spip_query($query);
 
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$this->nom = $row['nom'];
 			$this->login = $row['login'];
 			$this->email = $row['email'];

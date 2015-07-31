@@ -8,7 +8,7 @@ if ($id_article){
 	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
 	$result = spip_query($query);
 
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$titre = typo($row['titre']);
 		$total_absolu = $row['visites'];
 		$val_popularite = round($row['popularite']);
@@ -18,7 +18,7 @@ else {
 	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites";
 	$result = spip_query($query);
 
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$total_absolu = $row['total_absolu'];
 	}
 }
@@ -59,7 +59,7 @@ debut_gauche();
 	$articles_recents[] = "0";
 	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 0,10";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$articles_recents[] = $row['id_article'];
 	}
 	$articles_recents = join($articles_recents, ",");
@@ -68,7 +68,7 @@ debut_gauche();
 	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC";
 	$result = spip_query($query);
 
-	$nombre_articles = mysql_num_rows($result);
+	$nombre_articles = spip_num_rows($result);
 	if ($nombre_articles > 0) {
 		echo "<p>";
 		echo "<div class='iconeoff' style='padding: 5px;'>";
@@ -76,7 +76,7 @@ debut_gauche();
 		echo typo("Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publi&eacute;s&nbsp;:</b>");
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
@@ -100,9 +100,9 @@ debut_gauche();
 		$query_suite = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC";
 		$result_suite = spip_query($query_suite);
 		
-		if (mysql_num_rows($result_suite) > 0) {
+		if (spip_num_rows($result_suite) > 0) {
 			echo "<br><br>[...]<br><br>";
-			while ($row = mysql_fetch_array($result_suite)) {
+			while ($row = spip_fetch_array($result_suite)) {
 				$titre = typo($row['titre']);
 				$l_article = $row['id_article'];
 				$visites = $row['visites'];
@@ -147,7 +147,7 @@ debut_gauche();
 	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 0,30";
 	$result = spip_query($query);
 		
-	if (mysql_num_rows($result) > 0) {
+	if (spip_num_rows($result) > 0) {
 	creer_colonne_droite();
 
 		echo "<div class='iconeoff' style='padding: 5px;'>";
@@ -156,7 +156,7 @@ debut_gauche();
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
 
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
@@ -225,7 +225,7 @@ $query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
 	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 420 DAY) ORDER BY date";
 $result=spip_query($query);
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = spip_fetch_array($result)) {
 	$date = $row['date_unix'];
 	$visites = $row['visites'];
 
@@ -243,7 +243,7 @@ else {
 	$query = "SELECT COUNT(DISTINCT ip) AS visites FROM spip_visites_temp";
 	$result = spip_query($query);
 }
-if ($row = @mysql_fetch_array($result)) {
+if ($row = @spip_fetch_array($result)) {
 	$visites_today = $row['visites'];
 }
 else
@@ -458,7 +458,7 @@ if ($activer_statistiques_ref != "non"){
 	$result = spip_query($query);
 	
 	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$referer = $row['referer'];
 		$visites = $row['visites'];
 	

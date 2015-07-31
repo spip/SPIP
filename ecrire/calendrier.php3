@@ -59,7 +59,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	// articles du jour
 	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee_today-$mois_today-0' AND date < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date";
 	$result=spip_query($query);
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$id_article=$row['id_article'];
 		$titre=typo($row['titre']);
 		$lejour=jour($row['date']);
@@ -72,7 +72,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	// breves du jour
 	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee_today-$mois_today-0' AND date_heure < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date_heure";
 	$result=spip_query($query);
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$id_breve=$row['id_breve'];
 		$titre=typo($row['titre']);
 		$lejour=jour($row['date_heure']);
@@ -83,7 +83,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 
 	// rendez-vous personnels ou annonces
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-	while($row=mysql_fetch_array($result_messages)){
+	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
 		$titre=typo($row["titre"]);

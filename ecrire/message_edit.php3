@@ -18,7 +18,7 @@ if ($new == "oui") {
 
 	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('Nouveau message', NOW(), '$statut', '$type', $connect_id_auteur)";
 	$result = spip_query($query);
-	$id_message = mysql_insert_id();
+	$id_message = spip_insert_id();
 	
 	if ($rv) {
 		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00' WHERE id_message = $id_message");
@@ -37,7 +37,7 @@ if ($new == "oui") {
 $query = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result = spip_query($query);
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
 	$titre = entites_html($row["titre"]);

@@ -22,7 +22,7 @@ function enfant($collection){
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 	
-	while($row=mysql_fetch_array($result2)){
+	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -60,9 +60,9 @@ function sous_enfant($collection2){
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
-	if (mysql_num_rows($result3) > 0){
+	if (spip_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
-		while($row=mysql_fetch_array($result3)){
+		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
@@ -125,13 +125,13 @@ fin_cadre_relief();
 $query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie' ORDER BY date_heure DESC";
 $result = spip_query($query);
 
-if (mysql_num_rows($result) > 0){
+if (spip_num_rows($result) > 0){
 	debut_cadre_enfonce("messagerie-24.gif");
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
 	echo "<div style='background-color: yellow; padding: 3px;'>";
 	echo "<b>Annonces g&eacute;n&eacute;rales :</b>";
 	echo "</div>";
-	while ($row = mysql_fetch_object($result)) {
+	while ($row = spip_fetch_object($result)) {
 		if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
 			$url = $match[1];
 		else
@@ -155,7 +155,7 @@ debut_raccourcis();
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
-if (mysql_num_rows($result) > 0) {
+if (spip_num_rows($result) > 0) {
 	icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
 
 	$activer_breves = lire_meta("activer_breves");
@@ -307,25 +307,25 @@ $relief = false;
 if (!$relief) {
 	$query = "SELECT id_article FROM spip_articles WHERE statut='prop'$vos_articles LIMIT 0,1";
 	$result = spip_query($query);
-	$relief = (mysql_num_rows($result) > 0);
+	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief) {
 	$query = "SELECT id_breve FROM spip_breves WHERE statut='prop' LIMIT 0,1";
 	$result = spip_query($query);
-	$relief = (mysql_num_rows($result) > 0);
+	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non') {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1";
 	$result = spip_query($query);
-	$relief = (mysql_num_rows($result) > 0);
+	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1";
 	$result = spip_query($query);
-	$relief = (mysql_num_rows($result) > 0);
+	$relief = (spip_num_rows($result) > 0);
 }
 
 
@@ -368,14 +368,14 @@ if ($relief) {
 	// Les articles syndiques en attente de validation
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
-		if (($row = mysql_fetch_array($result)) AND $row['compte'])
+		if (($row = spip_fetch_array($result)) AND $row['compte'])
 			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." liens syndiqu&eacute;s</a> sont en attente de validation.</small>";
 	}
 
 	// Les forums en attente de moderation
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
-		if (($row = mysql_fetch_array($result)) AND $row['compte']) {
+		if (($row = spip_fetch_array($result)) AND $row['compte']) {
 			echo "<br><small><a href='controle_forum.php3'>".$row['compte']." forum";
 			if ($row['compte']>1)
 				echo "s</a> sont";

@@ -184,7 +184,7 @@ function verifier_php_auth() {
 	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
 		$login = addslashes($PHP_AUTH_USER);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
-		$row = mysql_fetch_array($result);
+		$row = spip_fetch_array($result);
 		$auth_mdpass = md5($row['alea_actuel'] . $PHP_AUTH_PW);
 		if ($auth_mdpass != $row['pass']) {
 			$PHP_AUTH_USER='';

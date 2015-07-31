@@ -97,10 +97,10 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	}
 	
 	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot";
-	$nombre_mots = mysql_num_rows(spip_query($query));
+	$nombre_mots = spip_num_rows(spip_query($query));
 
 	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui'";
-	$nombre_groupes = mysql_num_rows(spip_query($query_groupes));
+	$nombre_groupes = spip_num_rows(spip_query($query_groupes));
 
 
 
@@ -133,7 +133,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$result = spip_query($query);
 			unset($table_mots);
 			unset($table_ids);
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = spip_fetch_array($result)) {
 				$table_ids[] = $row['id_mot'];
 				$table_mots[] = $row['titre'];
 			}
@@ -153,7 +153,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$query = "SELECT * FROM spip_mots WHERE id_mot=$nouv_mot";
 				$result = spip_query($query);
 				echo "<UL>";
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = spip_fetch_array($result)) {
 					$id_mot = $row['id_mot'];
 					$titre_mot = $row['titre'];
 					$type_mot = $row['type'];
@@ -174,7 +174,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					$query = "SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre";
 					$result = spip_query($query);
 					echo "<UL>";
-					while ($row = mysql_fetch_array($result)) {
+					while ($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = $row['titre'];
 						$type_mot = $row['type'];
@@ -210,7 +210,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
 				$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $id_table=$id_objet";
 				$result = spip_query($query);
-				if (!mysql_num_rows($result)) {
+				if (!spip_num_rows($result)) {
 					$query = "INSERT INTO spip_mots_$table (id_mot,$id_table) VALUES ($nouv_mot, $id_objet)";
 					$result = spip_query($query);
 				}
@@ -229,7 +229,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 		$query = "SELECT DISTINCT type FROM spip_mots";
 		$result = spip_query($query);
-		$plusieurs_types = (mysql_num_rows($result) > 1);
+		$plusieurs_types = (spip_num_rows($result) > 1);
 	
 		unset($les_mots);
 	
@@ -240,7 +240,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 		$ifond=0;
 		
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
 			$type_mot = $row['type'];
@@ -249,7 +249,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE id_groupe = $id_groupe";
 			$result_groupe = spip_query($query_groupe);
-			while($row_groupe = mysql_fetch_array($result_groupe)) {
+			while($row_groupe = spip_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
 				$titre_groupe = entites_html($row_groupe['titre']);
 				$unseul = $row_groupe['unseul'];
@@ -290,7 +290,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				
 				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe";
 				$result_autres_mots = spip_query($query_autres_mots);
-				while ($row_autres = mysql_fetch_array($result_autres_mots)) {
+				while ($row_autres = spip_fetch_array($result_autres_mots)) {
 					$le_mot = $row_autres['id_mot'];
 					$le_titre_mot = $row_autres['titre'];
 					
@@ -340,7 +340,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		else $id_groupes_vus = "0";
 		
 		$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)";
-		$nb_groupes = mysql_num_rows(spip_query($query_groupes));
+		$nb_groupes = spip_num_rows(spip_query($query_groupes));
 
 		if ($flag_editable) {
 			if ($nouveaux_mots.$cherche_mot.$supp_mot)
@@ -376,7 +376,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 
 
-		while($row_groupes = mysql_fetch_array($result_groupes)) {
+		while($row_groupes = spip_fetch_array($result_groupes)) {
 			$id_groupe = $row_groupes['id_groupe'];
 			$titre_groupe = entites_html($row_groupes['titre']);
 			$unseul = $row_groupes['unseul'];
@@ -393,8 +393,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				if ($les_mots) $query .= "AND id_mot NOT IN ($les_mots) ";
 				$query .= "ORDER BY type, titre";
 				$result = spip_query($query);
-				if (mysql_num_rows($result) > 0) {
-					if (mysql_num_rows($result) > 50 AND $flag_mots_ressemblants) {
+				if (spip_num_rows($result) > 0) {
+					if (spip_num_rows($result) > 50 AND $flag_mots_ressemblants) {
 						if (! $case_recherche) {
 							echo $form_mot;
 							echo $message_ajouter_mot;
@@ -429,7 +429,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 						$ifond == 0;
 						$label = majuscules($titre_groupe);
 						echo "<OPTION VALUE='x'>$label";
-						while($row = mysql_fetch_array($result)) {
+						while($row = spip_fetch_array($result)) {
 							$id_mot = $row['id_mot'];
 							$titre_mot = $row['titre'];		
 							$texte_option = entites_html(couper($titre_mot, 50));

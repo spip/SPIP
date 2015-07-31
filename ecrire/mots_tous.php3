@@ -5,7 +5,7 @@ include ("inc.php3");
 if ($conf_mot>0) {
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$conf_mot'";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = typo($row['titre']);
 		$type_mot = typo($row['type']);
@@ -14,23 +14,23 @@ if ($conf_mot>0) {
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
 
-		$nb_articles = mysql_fetch_row(spip_query(
+		$nb_articles = spip_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article
 			WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article
 			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"
 			));
 		$nb_articles = $nb_articles[0];
-		$nb_rubriques = mysql_fetch_row(spip_query(
+		$nb_rubriques = spip_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
 			WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"
 			));
 		$nb_rubriques = $nb_rubriques[0];
-		$nb_breves = mysql_fetch_row(spip_query(
+		$nb_breves = spip_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_breves AS lien, spip_breves AS breve
 			WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve
 			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
 		$nb_breves = $nb_breves[0];
-		$nb_sites = mysql_fetch_row(spip_query(
+		$nb_sites = spip_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_syndic AS lien, spip_syndic AS syndic
 			WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic
 			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));
@@ -132,7 +132,7 @@ if ($conf_mot>0) {
 			WHERE lien.id_mot=mots.id_mot AND article.id_article=lien.id_article
 			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse' GROUP BY mots.id_mot"
 			);
-		while ($row_articles =  mysql_fetch_array($result_articles)){
+		while ($row_articles =  spip_fetch_array($result_articles)){
 			$id_mot = $row_articles['id_mot'];
 			$total_articles = $row_articles['cnt'];
 			$nb_articles[$id_mot] = $total_articles;
@@ -143,7 +143,7 @@ if ($conf_mot>0) {
 			"SELECT COUNT(*) AS cnt, mots.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique, spip_mots AS mots
 			WHERE lien.id_mot=mots.id_mot AND rubrique.id_rubrique=lien.id_rubrique GROUP BY mots.id_mot"
 			);
-		while ($row_rubriques = mysql_fetch_array($result_rubriques)){
+		while ($row_rubriques = spip_fetch_array($result_rubriques)){
 			$id_mot = $row_rubriques['id_mot'];
 			$total_rubriques = $row_rubriques['cnt'];
 			$nb_rubriques[$id_mot] = $total_rubriques;
@@ -154,7 +154,7 @@ if ($conf_mot>0) {
 			WHERE lien.id_mot=mots.id_mot AND breve.id_breve=lien.id_breve
 			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse' GROUP BY mots.id_mot"
 			);
-		while ($row_breves = mysql_fetch_array($result_breves)){
+		while ($row_breves = spip_fetch_array($result_breves)){
 			$id_mot = $row_breves['id_mot'];
 			$total_breves = $row_breves['cnt'];
 			$nb_breves[$id_mot] = $total_breves;
@@ -165,7 +165,7 @@ if ($conf_mot>0) {
 			WHERE lien.id_mot=mots.id_mot AND syndic.id_syndic=lien.id_syndic
 			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse' GROUP BY mots.id_mot"
 			);
-		while ($row_syndic = mysql_fetch_array($result_syndic)){
+		while ($row_syndic = spip_fetch_array($result_syndic)){
 			$id_mot = $row_syndic['id_mot'];
 			$total_sites = $row_syndic['cnt'];
 			$nb_sites[$id_mot] = $total_sites;
@@ -180,7 +180,7 @@ $result_groupes = spip_query($query_groupes);
 
 
 
-while($row_groupes = mysql_fetch_array($result_groupes)) {
+while($row_groupes = spip_fetch_array($result_groupes)) {
 	$id_groupe = $row_groupes['id_groupe'];
 	$titre_groupe = $row_groupes['titre'];
 	$unseul = $row_groupes['unseul'];
@@ -231,11 +231,11 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY titre";
 	$result = spip_query($query);
 
-	if (mysql_num_rows($result) > 0) {
+	if (spip_num_rows($result) > 0) {
 		debut_cadre_relief("mot-cle-24.gif");
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 		// Afficher les mots-cles
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
 			$type_mot = $row['type'];
@@ -248,7 +248,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 
 			$query2 = "SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$id_mot AND article.id_article=lien.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'";
 			$result2 = spip_query($query2);
-			list($nombre_mots) = mysql_fetch_array($result2);
+			list($nombre_mots) = spip_fetch_array($result2);
 
 			if ($nombre_articles>0) $nombre_articles++;
 			

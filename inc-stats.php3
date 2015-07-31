@@ -104,7 +104,7 @@ function ecrire_stats() {
 function afficher_raccourci_stats($id_article) {
 	$query = "SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
 	$result = spip_query($query);
-	if ($row = @mysql_fetch_array($result)) {
+	if ($row = @spip_fetch_array($result)) {
 		$visites = intval($row['visites']);
 		$popmax = lire_meta('popularite_max');
 		settype($popmax, 'double');
@@ -114,7 +114,7 @@ function afficher_raccourci_stats($id_article) {
 
 		$query = "SELECT COUNT(DISTINCT ip) AS c FROM spip_visites_temp WHERE type='article' AND id_objet=$id_article";
 		$result = spip_query($query);
-		if ($row = @mysql_fetch_array($result)) {
+		if ($row = @spip_fetch_array($result)) {
 			$visites = $visites + $row['c'];
 		}
 		echo "[$visites visites";

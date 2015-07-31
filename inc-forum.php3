@@ -25,7 +25,7 @@ function get_forums_publics($id_article=0) {
 	if ($id_article) {
 		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
 		$res = spip_query($query);
-		if ($obj = mysql_fetch_object($res))
+		if ($obj = spip_fetch_object($res))
 			$forums_publics = $obj->accepter_forum;
 	} else {
 		$forums_publics = substr(lire_meta("forums_publics"),0,3);
@@ -84,7 +84,7 @@ function decoder_hash_forum($email, $hash) {
 	if (!$email OR !$hash) return false;
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		if (verifier_action_auteur("forum public $email", $hash, $row['id_auteur'])) {
 			$ok = true;
 			break;
@@ -157,7 +157,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		else
 			$titre_select = "SELECT 'Erreur...' AS titre";	
 
-		$res = mysql_fetch_object(spip_query($titre_select));
+		$res = spip_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
 	
@@ -167,7 +167,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
 		$result_forum=spip_query($query_forum);
 		
-		while($row = mysql_fetch_array($result_forum)) {
+		while($row = spip_fetch_array($result_forum)) {
 			$titre=$row['titre'];
 			$texte=$row['texte'];
 			$auteur=$row['auteur'];
@@ -190,8 +190,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			// Verifier mots associes au message	
 			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
 			$result_mots = spip_query($query_mots);
-			if (mysql_num_rows($result_mots)>0) $ret .= "<p>Vous avez s&eacute;lectionn&eacute;&nbsp;:";
-			while ($row = mysql_fetch_array($result_mots)) {
+			if (spip_num_rows($result_mots)>0) $ret .= "<p>Vous avez s&eacute;lectionn&eacute;&nbsp;:";
+			while ($row = spip_fetch_array($result_mots)) {
 				$id_mot = $row['id_mot'];
 				$type_mot = $row['type'];
 				$titre_mot = $row['titre'];
@@ -285,14 +285,14 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if ($table){
 			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE 6forum = 'oui' AND $table = 'oui' $selectionner_groupe";
 			$result_groupe = spip_query($query_groupe);
-			while ($row_groupe = mysql_fetch_array($result_groupe)) {
+			while ($row_groupe = spip_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
 				$titre_groupe = $row_groupe['titre'];
 				$unseul_groupe = $row_groupe['unseul'];
 				
 				$query = "SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'";
 				$result = spip_query($query);
-				$total_rows = mysql_num_rows($result);
+				$total_rows = spip_num_rows($result);
 
 				if ($total_rows > 0){
 					$ret .= "\n<p><div class='spip_encadrer'>";
@@ -302,7 +302,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 					$ret .= "<tr><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 					$i = 0;
 					
-					while ($row = mysql_fetch_array($result)) {
+					while ($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = propre($row['titre']);
 						$type_mot = propre($row['type']);
@@ -413,7 +413,7 @@ function ajout_forum() {
 		$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
 		$result = spip_query($query);
 		unset($fichiers);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$fichier = $row["fichier"];
 			@unlink("CACHE/$fichier");
 			$fichiers[] = "'".$fichier."'";
@@ -451,7 +451,7 @@ function ajout_forum() {
 		$query_forum = "INSERT INTO spip_forum (date_heure, titre, ip, statut)
 			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
 		$result_forum = spip_query($query_forum);
-		$id_message = mysql_insert_id();
+		$id_message = spip_insert_id();
 	}
 
 	// Ajouter les mots-cles
@@ -529,7 +529,7 @@ function ajout_forum() {
 				$query = "SELECT spip_auteurs.* FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article='$id_article' AND spip_auteurs.id_auteur=lien.id_auteur";
 				$result = spip_query($query);
 
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = spip_fetch_array($result)) {
 					$email_auteur = trim($row["email"]);
 					if (strlen($email_auteur) < 3) continue;
 					envoyer_mail($email_auteur, $sujet, $courr);

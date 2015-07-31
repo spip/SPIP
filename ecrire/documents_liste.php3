@@ -32,7 +32,7 @@ debut_droite();
 	$query = "SELECT docs.id_document AS id_doc, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC";
 	$result = spip_query($query);
 	
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 			$titre=$row['titre'];
 			$descriptif=$row['descriptif'];
 			$date=$row['date'];

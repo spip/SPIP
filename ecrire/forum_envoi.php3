@@ -31,7 +31,7 @@ debut_droite();
 if ($id_parent) {
 	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_parent";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_article = $row['id_article'];
 		$id_breve = $row['id_breve'];
 		$id_rubrique = $row['id_rubrique'];

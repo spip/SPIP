@@ -7,12 +7,12 @@ include_ecrire ("inc_mots.php3");
 
 $query = "SELECT COUNT(*) FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message";
 $result = spip_query($query);
-list($n) = mysql_fetch_array($result);
+list($n) = spip_fetch_array($result);
 if (!$n) {
 
 	$query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 	$result_message = spip_query($query_message);
-	while($row = mysql_fetch_array($result_message)) {
+	while($row = spip_fetch_array($result_message)) {
 		$type = $row['type'];
 	}
 	if ($type != "affich"){
@@ -102,7 +102,7 @@ if ($supp_dest) {
 $query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result_message = spip_query($query_message);
 
-while($row = mysql_fetch_array($result_message)) {
+while($row = spip_fetch_array($result_message)) {
 	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
 	$titre = typo($row["titre"]);
@@ -173,7 +173,7 @@ while($row = mysql_fetch_array($result_message)) {
 		//		
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$expediteur");
 
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>AUTEUR DU MESSAGE :</B></FONT>";
@@ -228,7 +228,7 @@ while($row = mysql_fetch_array($result_message)) {
 			$result = spip_query($query);
 			unset($table_auteurs);
 			unset($table_ids);
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = spip_fetch_array($result)) {
 				$table_auteurs[] = $row['nom'];
 				$table_ids[] = $row['id_auteur'];
 			}
@@ -244,7 +244,7 @@ while($row = mysql_fetch_array($result_message)) {
 				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
 				$result = spip_query($query);
 				echo "<UL>";
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = spip_fetch_array($result)) {
 					$id_auteur = $row['id_auteur'];
 					$nom_auteur = $row['nom'];
 					$email_auteur = $row['email'];
@@ -265,7 +265,7 @@ while($row = mysql_fetch_array($result_message)) {
 					$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
 					$result = spip_query($query);
 					echo "<UL>";
-					while ($row = mysql_fetch_array($result)) {
+					while ($row = spip_fetch_array($result)) {
 						$id_auteur = $row['id_auteur'];
 						$nom_auteur = $row['nom'];
 						$email_auteur = $row['email'];
@@ -307,7 +307,7 @@ while($row = mysql_fetch_array($result_message)) {
 		$query_auteurs = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur";
 		$result_auteurs = spip_query($query_auteurs);
 		
-		$total_dest = mysql_num_rows($result_auteurs);
+		$total_dest = spip_num_rows($result_auteurs);
 		
 		if ($total_dest > 0) {
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' colspan=2>";
@@ -315,7 +315,7 @@ while($row = mysql_fetch_array($result_message)) {
 			echo "</td></tr>";
 			
 			$ifond = 0;
-			while($row = mysql_fetch_array($result_auteurs)) {
+			while($row = spip_fetch_array($result_auteurs)) {
 				$id_auteur = $row["id_auteur"];
 				$nom_auteur = typo($row["nom"]);
 				$statut_auteur = $row["statut"];
@@ -381,13 +381,13 @@ while($row = mysql_fetch_array($result_message)) {
 				$query_ajout_auteurs .= " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom";
 				$result_ajout_auteurs = spip_query($query_ajout_auteurs);
 
-				if (mysql_num_rows($result_ajout_auteurs) > 0) {
+				if (spip_num_rows($result_ajout_auteurs) > 0) {
 
 					echo "<FORM ACTION='message.php3' METHOD='post'>";
 					echo "<DIV align=left><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>AJOUTER UN PARTICIPANT : &nbsp; </B></FONT>\n";
 					echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
-					if (mysql_num_rows($result_ajout_auteurs) > 50 AND $flag_mots_ressemblants) {
+					if (spip_num_rows($result_ajout_auteurs) > 50 AND $flag_mots_ressemblants) {
 						echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
 						echo "<INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo'>";
 					}
@@ -396,7 +396,7 @@ while($row = mysql_fetch_array($result_message)) {
 						$group = false;
 						$group2 = false;
 				
-						while($row=mysql_fetch_array($result_ajout_auteurs)) {
+						while($row=spip_fetch_array($result_ajout_auteurs)) {
 							$id_auteur = $row['id_auteur'];
 							$nom = $row['nom'];
 							$email = $row['email'];

@@ -111,12 +111,12 @@ function calculer_100_referers() {
 		"FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nombre_de_refs";
 	$result = spip_query($query);
 
-	$encore = (mysql_num_rows($result) == $nombre_de_refs);
+	$encore = (spip_num_rows($result) == $nombre_de_refs);
 
 	$referer_insert = "";
 	$referer_update = "";
 
-	while ($row = @mysql_fetch_array($result)) {
+	while ($row = @spip_fetch_array($result)) {
 		$visites = $row['visites'];
 		$referer = addslashes($row['referer']);
 		$referer_md5 = '0x'.$row['md5'];
@@ -150,7 +150,7 @@ function calculer_100_referers() {
 	$referer_insert = "";
 	$referer_update = "";
 
-	while ($row = @mysql_fetch_array($result)) {
+	while ($row = @spip_fetch_array($result)) {
 		$id_article = $row['id_objet'];
 		$visites = $row['visites'];
 		$referer = addslashes($row['referer']);
@@ -208,7 +208,7 @@ function calculer_visites($date = "") {
 	// Sur tout le site, nombre de visiteurs uniques pendant la journee
 	$query = "SELECT COUNT(DISTINCT ip) AS total_visites FROM spip_visites_temp";
 	$result = spip_query($query);
-	if ($row = @mysql_fetch_array($result))
+	if ($row = @spip_fetch_array($result))
 		$total_visites = $row['total_visites'];
 	else
 		$total_visites = 0;
@@ -223,7 +223,7 @@ function calculer_visites($date = "") {
 	$visites_insert = "";
 	$visites_update = "";
 
-	while ($row = @mysql_fetch_array($result)) {
+	while ($row = @spip_fetch_array($result)) {
 		$id_article = $row['id_objet'];
 		$visites = $row['visites'];
 
@@ -265,7 +265,7 @@ function supprimer_referers($type = "") {
 		$col_id = 'id_' . $type;
 		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
 		$result = spip_query($query);
-		if ($row = @mysql_fetch_array($result)) {
+		if ($row = @spip_fetch_array($result)) {
 			$count = $row['count'];
 		}
 	}
@@ -275,7 +275,7 @@ function supprimer_referers($type = "") {
 		"ORDER BY visites LIMIT ".intval($count * 100).",1";
 	$result = spip_query($query);
 	$visites_min =  1;
-	if ($row = @mysql_fetch_array($result)) {
+	if ($row = @spip_fetch_array($result)) {
 		$visites_min = $row['visites'];
 	}
 
@@ -316,7 +316,7 @@ function calculer_popularites() {
 	$count_article = Array();
 	$query = "SELECT COUNT(*) as count,id_objet FROM spip_visites_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
 	$res = spip_query($query);
-	while ($row = @mysql_fetch_array($res)) {
+	while ($row = @spip_fetch_array($res)) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count visites
 	}
 
@@ -332,7 +332,7 @@ function calculer_popularites() {
 	$count_article = Array();
 	$query = "SELECT COUNT(*) as count,id_objet FROM spip_referers_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
 	$res = spip_query($query);
-	while ($row = @mysql_fetch_array($res)) {
+	while ($row = @spip_fetch_array($res)) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count referers
 	}
 
@@ -345,7 +345,7 @@ function calculer_popularites() {
 	}
 
 	// et enregistrer les metas...
-	list($maxpop, $totalpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite), SUM(popularite) FROM spip_articles"));
+	list($maxpop, $totalpop) = spip_fetch_array(spip_query("SELECT MAX(popularite), SUM(popularite) FROM spip_articles"));
 	ecrire_meta("popularite_max", $maxpop);
 	ecrire_meta("popularite_total", $totalpop);
 	ecrire_metas();

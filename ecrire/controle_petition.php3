@@ -30,7 +30,7 @@ if ($connect_statut == '0minirezo') {
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
 	$result_petition = spip_query($query_petition);
-	if ($row = mysql_fetch_array($result_petition)) {
+	if ($row = spip_fetch_array($result_petition)) {
 		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
@@ -50,9 +50,9 @@ function controle_forum($request,$adresse_retour) {
 	global $debut;
 	global $couleur_foncee;
 	
-	$nb_forum[$compteur_forum] = mysql_num_rows($request);
+	$nb_forum[$compteur_forum] = spip_num_rows($request);
 	$i[$compteur_forum] = 1;
- 	while($row=mysql_fetch_array($request)){
+ 	while($row=spip_fetch_array($request)){
 		$id_signature = $row['id_signature'];
 		$id_article = $row['id_article'];
 		$date_time = $row['date_time'];
@@ -97,7 +97,7 @@ function controle_forum($request,$adresse_retour) {
 		
 		$query_article="SELECT * FROM spip_articles WHERE id_article=$id_article";
 		$result_article=spip_query($query_article);
-		while($row=mysql_fetch_array($result_article)){
+		while($row=spip_fetch_array($result_article)){
 			$id_article = $row['id_article'];
 			$titre = typo($row["titre"]);
 		}
@@ -139,7 +139,7 @@ if ($connect_statut == "0minirezo") {
 	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)$signature_article";
 	$result_forum = spip_query($query_forum);
 	$total = 0;
-	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";

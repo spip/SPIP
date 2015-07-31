@@ -19,7 +19,7 @@ $inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
 if ($p = addslashes($p)) {
 	$oubli_pass = 'oui';
 	$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli='$p' AND statut<>'5poubelle' AND pass<>''");
-	if ($row = mysql_fetch_array($res)) {
+	if ($row = spip_fetch_array($res)) {
 		if ($pass) {
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
@@ -50,7 +50,7 @@ if ($email_oubli) {
 	if (email_valide($email_oubli)) {
 		$email = addslashes($email_oubli);
 		$res = spip_query("SELECT * FROM spip_auteurs WHERE email ='$email'");
-		if ($row = mysql_fetch_array($res)) {
+		if ($row = spip_fetch_array($res)) {
 			if ($row['statut'] == '5poubelle')
 				$erreur = "<b>Erreur :</b> vous n'avez plus acc&egrave;s &agrave; ce site.";
 			else {

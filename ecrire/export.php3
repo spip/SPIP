@@ -7,7 +7,7 @@ include ("inc_export.php3");
 function liste_objets($result, $type) {
 	global $maj;
 	global $articles;
-	if ($result) while ($row = mysql_fetch_array($result)) {
+	if ($result) while ($row = spip_fetch_array($result)) {
 		$t_id = $row["id_$type"];
 		$t_statut = $row["statut"];
 		$t_maj = mysql_timestamp_to_time($row["maj"]);
@@ -16,7 +16,7 @@ function liste_objets($result, $type) {
 			if ($type == "article") $articles[]=$t_id;
 		}
 	}
-	mysql_free_result($result);
+	spip_free_result($result);
 }
 
 // Liste un sommaire recursif de rubriques
@@ -24,7 +24,7 @@ function liste_objets($result, $type) {
 function liste_rubriques($result) {
 	global $maj;
 	global $rubriques;
-	if ($result) while ($row=mysql_fetch_array($result)) {
+	if ($result) while ($row=spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$id_parent = $row['id_parent'];
 		$titre = $row['titre'];
@@ -36,7 +36,7 @@ function liste_rubriques($result) {
 		}
 		$t_rubriques[] = $id_rubrique;
 	}
-	mysql_free_result($result);
+	spip_free_result($result);
  	if ($t_rubriques) {
  		$t_rubriques = join(",", $t_rubriques);
  		$rubriques[] = $t_rubriques;

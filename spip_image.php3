@@ -234,7 +234,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$query .= " AND inclus='image'";
 
 	$result = spip_query($query);
-	if ($row = @mysql_fetch_array($result)) {
+	if ($row = @spip_fetch_array($result)) {
 		$id_type = $row['id_type'];
 		$type_inclus = $row['inclus'];
 	}
@@ -253,7 +253,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if (!$id_document) {
 		$query = "INSERT INTO spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
 		spip_query($query);
-		$id_document = mysql_insert_id();
+		$id_document = spip_insert_id();
 		$nouveau = true;
 		if ($id_article) {
 			$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
@@ -297,7 +297,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		
 		$query = "INSERT INTO spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
 		spip_query($query);
-		$id_preview = mysql_insert_id();
+		$id_preview = spip_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
 		spip_query($query);
 	}
@@ -371,7 +371,7 @@ if ($ajout_doc == 'oui') {
 					$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
 					if ($inclus)
 						$req .= " AND inclus='$inclus'";
-					if (@mysql_fetch_array(spip_query($req)))
+					if (@spip_fetch_array(spip_query($req)))
 						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '','','','',false);
 				}
 			}
@@ -425,7 +425,7 @@ if ($doc_supp) {
 	}
 	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$fichier = $row['fichier'];
 		$id_vignette = $row['id_vignette'];
 		spip_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
@@ -439,7 +439,7 @@ if ($doc_supp) {
 	if ($id_vignette > 0) {
 		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
 		$result = spip_query($query);
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
 			@unlink($fichier);
 
