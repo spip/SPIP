@@ -48,7 +48,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			return '';
 	} else {
 		if ($dejafait) {
-			$res = '';
+			if (empty($debug['sourcefile'])) return '';
 			foreach($debug['sourcefile'] as $k => $v) {
 				if (strpos($v,'administration.') !== false)
 					return $debug['resultat'][$k . 'tout'];

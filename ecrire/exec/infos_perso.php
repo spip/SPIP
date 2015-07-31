@@ -17,28 +17,28 @@ function exec_infos_perso_dist(){
 	if (!$auteur) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+
+		pipeline('exec_init',
+			array('args' => array(
+				'exec'=> 'auteur_infos',
+				'id_auteur'=>$auteur['id_auteur']),
+				'data'=>''
+			      )
+			 );
+
+		$commencer_page = charger_fonction('commencer_page','inc');
+		echo $commencer_page(_T('info_informations_personnelles'));
+
+		echo barre_onglets('infos_perso', 'infos_perso');
+		echo debut_gauche('', true);
+
+		charger_fonction('auteur_infos','exec');
+
+		auteur_infos_ok($auteur, $auteur['id_auteur'], _request('echec'), '', self());
+		echo auteurs_interventions($auteur);
+		echo fin_gauche(),fin_page();
 	}
-
-	pipeline('exec_init',
-		array('args' => array(
-			'exec'=> 'auteur_infos',
-			'id_auteur'=>$auteur['id_auteur']),
-			'data'=>''
-		)
-	);
-
-	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page(_T('info_informations_personnelles'));
-
-	echo barre_onglets('infos_perso', 'infos_perso');
-	echo debut_gauche('', true);
-
-	charger_fonction('auteur_infos','exec');
-
-	auteur_infos_ok($auteur, $auteur['id_auteur'], _request('echec'), '', self());
-	echo auteurs_interventions($auteur);
-	echo fin_gauche(),fin_page();
 }
 
 ?>

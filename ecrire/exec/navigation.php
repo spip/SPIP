@@ -27,29 +27,30 @@ function exec_navigation_dist()
 	if (!isset($boutons[$menu])){
 		include_spip('inc/minipres');
 		echo minipres();		
-	}
+	} else {
 	
-	$titre = _T($boutons[$menu]->libelle);
+		$titre = _T($boutons[$menu]->libelle);
 	
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre, "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($titre, "", "");
 
-	echo debut_gauche('', true);
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>''));
+		echo debut_gauche('', true);
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>''));
 
-	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>''));
+		echo creer_colonne_droite('', true);
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>''));
 			
-	echo debut_droite('', true);
-	echo gros_titre($titre,'',false);
+		echo debut_droite('', true);
+		echo gros_titre($titre,'',false);
 
-	$sous = bando_lister_sous_menu($boutons[$menu]->sousmenu,$contexte,"item");
+		$sous = bando_lister_sous_menu($boutons[$menu]->sousmenu,$contexte,"item");
 	
-	$res = $sous ? "<ul class='liste_items sous_navigation'>$sous</ul>":"";
+		$res = $sous ? "<ul class='liste_items sous_navigation'>$sous</ul>":"";
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>$res));
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>$res));
 
-	echo fin_gauche(), fin_page();
+		echo fin_gauche(), fin_page();
+	}
 }
 
 ?>
