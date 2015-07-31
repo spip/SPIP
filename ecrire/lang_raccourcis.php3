@@ -52,7 +52,7 @@ function afficher_raccourcis($module = "public") {
 	$lang = $module.'_'.$spip_lang;
 	$fichier_lang = $lang.'.php3';
 
-	if (@file_exists(_DIR_LANG . $fichier_lang) {
+	if (@file_exists(_DIR_LANG . $fichier_lang)) {
 		$GLOBALS['idx_lang'] = 'i18n_' . $lang;
 		include_lang($fichier_lang);
 	
