@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 // Distinguer une inclusion d'un appel initial
+// (cette distinction est obsolete a present, on la garde provisoirement
+// par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC'])) {
 
@@ -31,9 +33,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 
 	// $fond defini dans le fichier d'appel ?
-	// note : securise anti-injection par inc/utils.php
 
-	else if (isset($fond)) { }
+	else if (isset($fond) AND !_request('fond')) { }
 
 	// fond demande dans l'url par page=xxxx ?
 	else if (isset($_GET[_SPIP_PAGE])) {
@@ -70,13 +71,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$fond = '';
 	}
 
-	$tableau_des_erreurs = 	$tableau_des_temps = array();
+	$tableau_des_temps = array();
 
 	// Particularites de certains squelettes
 	if ($fond == 'login')
 		$forcer_lang = true;
 
-	if ($forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
+	if (isset($forcer_lang) AND $forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
@@ -142,28 +143,36 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			$pos = strlen($page['texte']);
 		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
 	}
-	// est-on admin ?
-	if ($affiche_boutons_admin = (
-	  (isset($_COOKIE['spip_admin'])
-	  OR
-		(isset($GLOBALS['visiteur_session']['id_auteur']) AND include_spip('inc/autoriser') AND autoriser('debug'))
-		OR
-		(defined('_DEBUG_ANONYME') AND _DEBUG_ANONYME)
-	)
-	AND !$flag_preserver
-	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
-	))
+
+	// Tester si on est admin et il y a des choses supplementaires a dire
+	$debug = (_request('var_mode') == 'debug') OR $tableau_des_temps;
+
+	$affiche_boutons_admin = (
+		isset($_COOKIE['spip_admin'])
+		AND !$flag_preserver
+		AND $html
+	) OR $debug;
+
+	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
+
+	// Appeler ici le debusqueur en cas de demande explicite,
+	// pour qu'il ait toute latitude dans la presentation
+	if ($debug) {
+		$var_mode_affiche = _request('var_mode_affiche');
+		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+		echo erreur_squelette();
+	}
 
 	// Execution de la page calculee
 
-	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
-	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
-	$spip_compter_visites = $html?'oui':'non';
-	if (isset($page['entetes']['X-Spip-Visites'])){
+ 	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
+ 	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
+ 	$spip_compter_visites = $html?'oui':'non';
+ 	if (isset($page['entetes']['X-Spip-Visites'])){
 		$spip_compter_visites = in_array($page['entetes']['X-Spip-Visites'],array('oui','non'))?$page['entetes']['X-Spip-Visites']:$spip_compter_visites;
 		unset($page['entetes']['X-Spip-Visites']);
-	}
+ 	}
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
@@ -187,69 +196,54 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		envoyer_entetes($page['entetes']);
 		// en cas d'erreur lors du eval,
 		// la memoriser dans le tableau des erreurs
-		// On ne revient pas ici si le nb d'erreurs > 4
-		if ($res === false AND $affiche_boutons_admin) {
-			include_spip('public/debug');
-			erreur_squelette(_T('zbug_erreur_execution_page'));
+
+		if ($res === false) {
+			$msg = array('zbug_erreur_execution_page');
+			erreur_squelette($msg);
 		}
-
 	}
-
-	// Passer la main au debuggueur le cas echeant
-
-	if ($var_mode == 'debug') {
-		include_spip('public/debug');
-		$var_mode_affiche = _request('var_mode_affiche');
-		$var_mode_objet = _request('var_mode_objet');
-		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
-			       $var_mode_objet,$var_mode_affiche);
-	} 
-
-	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
-		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs)
-			. $page['texte'];
 
 	//
 	// Post-traitements et affichage final
 	//
 	page_base_href($page['texte']);
 
-	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
+	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
 
-	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
-		include_spip('public/debug');
-		echo chrono_requete($tableau_des_temps);
-	}
-
-	// Gestion des statistiques du site public
+ 	// Gestion des statistiques du site public
 	if (($GLOBALS['meta']["activer_statistiques"] != "non")
 	AND $spip_compter_visites!='non') {
 		$stats = charger_fonction('stats', 'public');
 		$stats();
-	}
+ 	}
 
-	if (isset($GLOBALS['meta']['date_prochain_postdate'])
-	AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
-		include_spip('inc/rubriques');
-		calculer_prochain_postdate(true);
-	}
+	// Appel au debusqueur en cas d'erreurs ou de demande de trace
+
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])  AND !$flag_preserver);
+
+	if ($debug) {
+		if ($affiche_boutons_admin) {
+			$var_mode_affiche = _request('var_mode_affiche');
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+			echo erreur_squelette();
+		}
+	} else {
+		if (isset($GLOBALS['meta']['date_prochain_postdate'])
+		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
+			include_spip('inc/rubriques');
+			calculer_prochain_postdate(true);
+		}
 
 	// Effectuer une tache de fond ?
 	// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
 	// en mode texte (par exemple), et seulement sur les pages web
-	if (defined('_DIRECT_CRON_FORCE')
-		OR (
-	  !defined('_DIRECT_CRON_INHIBE')
-	  AND $html
-	  AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
-	  AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
-	  )
-		cron();
-
-	// sauver le cache chemin si necessaire
-	save_path_cache();
+		if ($html
+		AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
+		AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
+			cron();
+	}
 }
 
 ?>

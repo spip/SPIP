@@ -110,7 +110,6 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 }
 
 
-
 // Fonction de requete generale, munie d'une trace a la demande
 // http://doc.spip.org/@spip_sqlite_query
 function spip_sqlite_query($query, $serveur='',$requeter=true) {
@@ -439,8 +438,7 @@ function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', 
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_sqlite_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
-	
-	if ($r && $requeter) {
+	if ((is_resource($r) or is_object($r)) && $requeter) { // ressource : sqlite2, object : sqlite3
 		if (_sqlite_is_version(3,'',$serveur)){
 			list($r) = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
 		} else {
@@ -561,7 +559,7 @@ function spip_sqlite_errno($serveur='',$requeter=true) {
 		
 	if ($s) spip_log("Erreur sqlite $s");
 
-	return $s;
+	return $s ? 1 : 0;
 }
 
 
@@ -632,6 +630,7 @@ function spip_sqlite_seek($r, $row_number, $serveur='',$requeter=true) {
 	}
 }
 
+
 // http://doc.spip.org/@spip_sqlite_free
 function spip_sqlite_free(&$r, $serveur='',$requeter=true) {
 	unset($r);
@@ -684,19 +683,19 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-
+	if (isset($_GET['var_profile'])) {
+		include_spip('public/tracer');
+		$t = trace_query_start();
+	} else $t = 0 ;
+ 
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
 	if (!$requeter) return $query;
 	
 	if ($r = spip_sqlite_query($query, $serveur)) {
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
-	} else {
-	  if ($e = spip_sqlite_errno($serveur))	// Log de l'erreur eventuelle
-		$e .= spip_sqlite_error($query, $serveur); // et du fautif
-	}
-	return $t ? trace_query_end($query, $t, $nb, $e, $serveur) : $nb;
+	} else $nb = 0;
+	return $t ? trace_query_end($query, $t, $nb, $serveur) : $nb;
 
 }
 
@@ -773,7 +772,6 @@ function spip_sqlite_optimize($table, $serveur='',$requeter=true){
 
 
 // avoir le meme comportement que _q()
-
 function spip_sqlite_quote($v, $type=''){
 	if (is_int($v)) return strval($v);
 	if ($type === 'int' AND !$v) return '0';
@@ -846,20 +844,11 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 		. ($orderby ? ("\nORDER BY " . _sqlite_calculer_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
-	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
-		include_spip('public/debug');
-		boucle_debug_requete($query);
-	}
+	// renvoyer la requete inerte si demandee
+	if ($requeter === false) return $query;
 
-	if (!($res = spip_sqlite_query($query, $serveur, $requeter))) {
-		include_spip('public/debug');
-		erreur_requete_boucle(substr($query, 7),
-				      spip_sqlite_errno($serveur),
-				      spip_sqlite_error($query, $serveur) );
-	}
-
-	return $res;
+	$r = spip_sqlite_query($query, $serveur, $requeter);
+	return $r ? $r : $query;
 }
 
 
@@ -1600,11 +1589,18 @@ class sqlite_traiter_requete{
 	// faire le tracage si demande 
 // http://doc.spip.org/@executer_requete
 	function executer_requete(){
-		$t = $this->tracer ? trace_query_start(): 0;
+		if ($this->tracer) {
+			include_spip('public/tracer');
+			$t = trace_query_start();
+		} else $t = 0 ;
+ 
 # spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
+				// sauvegarde de la requete (elle y est deja dans $r->queryString)
+				# $r->spipQueryString = $this->query;
+
 				// comptage : oblige de compter le nombre d'entrees retournees 
 				// par une requete SELECT
 				// aucune autre solution ne donne le nombre attendu :( !
@@ -1624,12 +1620,9 @@ class sqlite_traiter_requete{
 		} else {
 			$r = false;	
 		}
-		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
-			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
-	
-		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
+
+		return $t ? trace_query_end($this->query, $t, $r, $serveur) : $r;
 	}
-	
 		
 	// transformer la requete pour sqlite 
 	// enleve les textes, transforme la requete pour quelle soit

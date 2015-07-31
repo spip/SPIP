@@ -66,25 +66,49 @@ function sql_set_charset($charset,$serveur='', $option=true){
 // - le tableau des des post-conditions a remplir (Having)
 // - le serveur sollicite (pour retrouver la connexion)
 // - option peut avoir 3 valeurs : 
-//	true -> executer la requete, 
 //	false -> ne pas l'executer mais la retourner, 
-//	continue -> ne pas echouer en cas de serveur sql indisponible
+//	continue -> ne pas echouer en cas de serveur sql indisponible,
+//	autre -> executer la requete.
+// Le cas "autre" est, pour une requete produite par le compilateur,
+// un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
+// Retourne false en cas d'erreur, apres l'avoir denoncee.
+// Les portages doivent retourner la requete elle-meme en cas d'erreur,
+// afin de disposer du texte brut.
 
 // http://doc.spip.org/@sql_select
-function sql_select (
-	$select = array(), $from = array(), $where = array(),
+function sql_select ($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='', $option=true) {
 	$f = sql_serveur('select', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option!==false);
+
+	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' );
+	if (($option !== false) AND !$debug) {
+		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, is_array($option) ? true : $option);
+	} else {
+		$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
+		if (!$option) return $query;
+		// le debug, c'est pour ce qui a ete produit par le compilateur
+		if (isset($GLOBALS['debug']['aucasou'])) {
+			list($table, $id,) = $GLOBALS['debug']['aucasou'];
+			$nom = $GLOBALS['debug_objets']['courant'] . $id;
+			$GLOBALS['debug_objets']['requete'][$nom] = $query;
+		}
+		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
+	}
+
+	if (!is_string($res)) return $res;
+	// denoncer l'erreur SQL dans sa version brute
+	spip_sql_erreur($serveur);
+	// idem dans sa version squelette (prefixe des tables non substitue)
+	erreur_squelette(array(sql_errno($serveur), sql_error($serveur), $res), $option);
+	return false;
 }
 
 // Recupere la syntaxe de la requete select sans l'executer
 // simplement $option = false au lieu de true
 // http://doc.spip.org/@sql_get_select
-function sql_get_select	(
-	$select = array(), $from = array(), $where = array(),
+function sql_get_select($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='') {
 	return sql_select ($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
@@ -98,14 +122,18 @@ function sql_countsel($from = array(), $where = array(),
 	$serveur='', $option=true) {
 	$f = sql_serveur('countsel', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($from, $where, $groupby, $having, $serveur, $option!==false);
+	$r = $f($from, $where, $groupby, $having, $serveur, $option!==false);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_alter
 function sql_alter($q, $serveur='', $option=true) {
 	$f = sql_serveur('alter', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($q, $serveur, $option!==false);
+	$r = $f($q, $serveur, $option!==false);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_fetch
@@ -115,25 +143,42 @@ function sql_fetch($res, $serveur='', $option=true) {
 	return $f($res, NULL, $serveur, $option!==false);
 }
 
+function sql_fetch_all($res, $serveur='', $option=true){
+	$rows = array();
+	if (!$res) return $rows;
+	$f = sql_serveur('fetch', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return array();
+	while ($r = $f($res, NULL, $serveur, $option!==false))
+		$rows[] = $r;
+	sql_free($res, $serveur);
+	return $rows;
+}
+
 function sql_seek($res, $row_number, $serveur='', $option=true) {
 	$f = sql_serveur('seek', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($res, $row_number, $serveur, $option!==false);
+	$r = $f($res, $row_number, $serveur, $option!==false);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='', $option=true) {
 	$f = sql_serveur('listdbs', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($serveur);
+	$r = $f($serveur);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_selectdb
-function sql_selectdb($res, $serveur='', $option=true)
+function sql_selectdb($nom, $serveur='', $option=true)
 {
 	$f = sql_serveur('selectdb', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($res, $serveur, $option!==false);
+	$r = $f($nom, $serveur, $option!==false);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_count
@@ -141,7 +186,9 @@ function sql_count($res, $serveur='', $option=true)
 {
 	$f = sql_serveur('count', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($res, $serveur, $option!==false);
+	$r = $f($res, $serveur, $option!==false);
+	if ($r===false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_free
@@ -161,7 +208,9 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option
 {
 	$f = sql_serveur('insert', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
+	$r = $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_insertq
@@ -169,15 +218,19 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $opti
 {
 	$f = sql_serveur('insertq', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_insertq_multi
-function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='', $option=true)
+function sql_insertq_multi($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('insertq_multi', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_update
@@ -185,7 +238,9 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
 {
 	$f = sql_serveur('update', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // Update est presque toujours appelee sur des constantes ou des dates
@@ -196,7 +251,9 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $optio
 {
 	$f = sql_serveur('updateq', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_delete
@@ -204,7 +261,9 @@ function sql_delete($table, $where='', $serveur='', $option=true)
 {
 	$f = sql_serveur('delete', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $where, $serveur, $option!==false);
+	$r = $f($table, $where, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_replace
@@ -212,7 +271,9 @@ function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('replace', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 
@@ -221,7 +282,9 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
 {
 	$f = sql_serveur('replace_multi', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $tab_couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_drop_table
@@ -229,7 +292,9 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_table', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exist, $serveur, $option!==false);
+	$r = $f($table, $exist, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // supprimer une vue sql
@@ -238,7 +303,9 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_view', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exist, $serveur, $option!==false);
+	$r = $f($table, $exist, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_showbase
@@ -286,9 +353,19 @@ function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true) {
 	$f = sql_serveur('create', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option!==false);
+	$r = $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
+function sql_create_base($nom, $serveur='', $option=true)
+{
+	$f = sql_serveur('create_base', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	$r = $f($nom, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
+}
 
 // Fonction pour creer une vue 
 // nom : nom de la vue,
@@ -298,27 +375,29 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
 function sql_create_view($nom, $select_query, $serveur='', $option=true) {
 	$f = sql_serveur('create_view', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($nom, $select_query, $serveur, $option!==false);
+	$r = $f($nom, $select_query, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_multi
 function sql_multi($sel, $lang, $serveur='', $option=true)
 {
-  $f = sql_serveur('multi', $serveur,  $option==='continue' OR $option===false);
+	$f = sql_serveur('multi', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return $f($sel, $lang);
 }
 
 // http://doc.spip.org/@sql_error
-function sql_error($query='requete inconnue', $serveur='', $option=true) {
-	$f = sql_serveur('error', $serveur,  $option==='continue' OR $option===false);
+function sql_error($serveur='') {
+	$f = sql_serveur('error', $serveur);
 	if (!is_string($f) OR !$f) return false;
-	return $f($query, $serveur, $option!==false);
+	return $f($serveur);
 }
 
 // http://doc.spip.org/@sql_errno
 function sql_errno($serveur='', $option=true) {
-	$f = sql_serveur('errno', $serveur,  $option==='continue' OR $option===false);
+	$f = sql_serveur('errno', $serveur);
 	if (!is_string($f) OR !$f) return false;
 	return $f($serveur);
 }
@@ -327,21 +406,27 @@ function sql_errno($serveur='', $option=true) {
 function sql_explain($q, $serveur='', $option=true) {
 	$f = sql_serveur('explain', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
+	$r = $f($q, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_optimize
 function sql_optimize($q, $serveur='', $option=true) {
 	$f = sql_serveur('optimize', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
+	$r = $f($q, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_repair
 function sql_repair($q, $serveur='', $option=true) {
 	$f = sql_serveur('repair', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
+	$r = $f($q, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // Fonction la plus generale ... et la moins portable
@@ -351,13 +436,14 @@ function sql_repair($q, $serveur='', $option=true) {
 function sql_query($ins, $serveur='', $option=true) {
 	$f = sql_serveur('query', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($ins, $serveur, $option!==false);
+	$r = $f($ins, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 # une composition tellement frequente...
 // http://doc.spip.org/@sql_fetsel
-function sql_fetsel(
-	$select = array(), $from = array(), $where = array(),
+function sql_fetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
@@ -370,23 +456,17 @@ function sql_fetsel(
 
 // Retourne le tableau de toutes les lignes d'une requete Select
 // http://doc.spip.org/@sql_allfetsel
-function sql_allfetsel(
-	$select = array(), $from = array(), $where = array(),
+function sql_allfetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
 	if ($option===false) return $q;
-	if (!$q) return array();
-	$res = array();
-	while ($r = sql_fetch($q, $serveur)) $res[] = $r;
-	sql_free($q, $serveur);
-	return $res;
+	return sql_fetch_all($q, $serveur, $option);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
-function sql_getfetsel(
-		       $select, $from = array(), $where = array(), $groupby = array(), 
+function sql_getfetsel($select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
 	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
 	elseif (!preg_match('/\W/', $select)) $id = $select;
@@ -420,6 +500,12 @@ function sql_quote($val, $serveur='', $type='')
 	return $f($val, $type);
 }
 
+function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
+{
+	$f = sql_serveur('date_proche', $serveur, true);
+	if (!is_string($f) OR !$f) return false;
+	return $f($champ, $interval, $unite);
+}
 
 function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	if (is_array($valeurs)) {
@@ -463,6 +549,7 @@ function sql_test_date($type, $serveur='', $option=true)
   return (preg_match('/^datetime/i',$type)
 	  OR preg_match('/^timestamp/i',$type));
 }
+
 
 // Cette fonction devrait disparaitre
 
