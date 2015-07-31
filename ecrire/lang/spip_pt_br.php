@@ -225,8 +225,8 @@ Verifique se as maiúsculas e minúsuculas destes diretórios coincidem exatamen
 	'envoi_via_le_site' => 'Envio pelo site',
 	'erreur' => 'Erro',
 	'erreur_balise_non_fermee' => 'Última tag em aberto:',
-	'erreur_technique_enregistrement_champs' => 'A technical error prevented the right registration of the field @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'A technical error prevented the registration.', # NEW
+	'erreur_technique_enregistrement_champs' => 'Um erro técnico impediu a gravação correta do campo @champs@.',
+	'erreur_technique_enregistrement_impossible' => 'Um erro técnico impediu a gravação.',
 	'erreur_texte' => 'erro(s)',
 	'etape' => 'Etapa',
 
@@ -272,7 +272,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'form_prop_message_envoye' => 'Mensagem enviada',
 	'form_prop_non_enregistre' => 'Sua proposta não foi cadastrada.',
 	'form_prop_sujet' => 'Assunto',
-	'form_prop_url_site' => 'Endereço (URL) do site', # MODIF
+	'form_prop_url_site' => 'Endereço URL do site',
 	'forum_non_inscrit' => 'Você não está inscrito, ou o endereço ou a senha estão errados.',
 	'forum_par_auteur' => 'por @auteur@',
 	'forum_titre_erreur' => 'Erro...',
@@ -351,15 +351,15 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'info_connexion_refusee' => 'Conexão recusada',
 	'info_contact_developpeur' => 'Por favor, contate um desenvolvedor.',
 	'info_contenance' => 'Este site contém:',
-	'info_contribution' => 'contribuições de fórum', # MODIF
+	'info_contribution' => 'contribuições',
 	'info_copyright' => '@spip@ é um software livre distribuído @lien_gpl@.',
-	'info_copyright_doc' => 'Para mais informações, veja o site <a href="@spipnet@">http://www.spip.net/</a>.', # MODIF
+	'info_copyright_doc' => 'Para mais informações, veja o site <a href="@spipnet@">@spipnet_affiche@</a>.',
 	'info_copyright_gpl' => 'sob licença GPL',
 	'info_cours_edition' => 'Em fase de redação',
 	'info_creer_repertoire' => 'Por favor, crie um arquivo ou diretório com o nome:',
 	'info_creer_repertoire_2' => 'dentro do subdiretório <b>@repertoire@</b>, e depois:',
 	'info_creer_vignette' => 'criação automática do ícone',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Você não tem permissão para criar um conteúdo nesta seção',
 	'info_deplier' => 'Expandir',
 	'info_descriptif_nombre' => 'descrição(ões):',
 	'info_description' => 'Resumo:',
@@ -473,7 +473,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'infos_vos_pense_bete' => 'Seus lembretes',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+	'label_ajout_id_rapide' => 'Ajuda rápida',
 	'label_poids_fichier' => 'Tamanho',
 	'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
 	'lien_afficher_texte_icones' => 'Exibir ícones e texto',
@@ -504,7 +504,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'login_espace_prive' => 'espaço privado',
 	'login_identifiant_inconnu' => 'O identificador « @login@ » não está cadastrado.',
 	'login_login' => 'Login:',
-	'login_login2' => 'Login (identificador para conexão ao site):', # MODIF
+	'login_login2' => 'Login',
 	'login_login_pass_incorrect' => '(Login ou senha incorreta.)',
 	'login_motpasseoublie' => 'esqueceu sua senha?',
 	'login_non_securise' => 'Atenção, este formulário não é seguro.
@@ -575,7 +575,7 @@ e reconectar-se com o site.
 	'pass_nouveau_pass' => 'Nova senha',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Esquecimento de senha',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+	'pass_procedure_changer' => 'Para alterar a sua senha, é necessário verificar a sua identidade. Para isso, informe o endereço de e-mail associado a esta sua conta.',
 	'pass_quitter_fenetre' => 'Fechar esta janela',
 	'pass_rappel_login' => 'Lembrete: seu login é «@login@».',
 	'pass_recevoir_mail' => 'Você receberá um e-mail explicando como você pode recuperar o acesso ao site.',
@@ -598,7 +598,7 @@ e reconectar-se com o site.
 	'suivant' => 'seguinte',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
+	'taille_go' => '@taille@ GB',
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => ' @taille@ bytes',
