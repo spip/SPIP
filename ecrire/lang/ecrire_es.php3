@@ -283,7 +283,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Crear</B> una base de datos:',
 'info_dans_groupe' => 'En el grupo',
 'info_dans_rubrique' => 'En la secci&oacute;n...',
-'info_date_publication_anterieure' => 'Fecha de publicaci&oacute;n anterior',
+'info_date_publication_anterieure' => 'Fecha de redacci&oacute;n anterior:',
 'info_date_referencement' => 'Fecha de referenciamiento de este sitio',
 'info_delet_mots_cles' => 'Has solicitado la supresi&oacute;n de la palabra clave 
 <B>@titre_mot@</b> (@type_mot@) que esta ligada a 
@@ -742,8 +742,8 @@ No olvides igualmente recuperar la totalidad de la carpeta <i>IMG/</i>, que cont
 'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de repararla.',
 'texte_creer_rubrique' => 'Antes de escribir un art&iacute;culo, debes crear una secci&oacute;n.',
 'texte_date_creation_article' => 'FECHA DE CREACI&Oacute;N DEL ART&Iacute;CULO:',
-'texte_date_publication_anterieure' => 'Fecha de publicaci&oacute;n anterior',
-'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de publicaci&oacute;n anterior.',
+'texte_date_publication_anterieure' => 'Fecha de redacci&oacute;n anterior:',
+'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de redacci&oacute;n anterior.',
 'texte_date_publication_article' => 'Fecha de publicaci&oacute;n en l&iacute;nea:',
 'texte_demander_blocage_priori' => 'Los pr&oacute;ximos enlaces procedentes de este sitio ser&aacute;n, a priori, bloqueados.',
 'texte_descriptif_petition' => 'Descripci&oacute;n de la petici&oacute;n',

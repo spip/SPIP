@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'A liga&ccedil;&atilde;o falhou:imposs&iacute;vel aceder ao  backend deste s&iacute;tio.',
 'avis_erreur' => 'Erro: ver mais acima ',
 'avis_erreur_connexion' => 'Erro de liga&ccedil;&atilde;o ',
+'avis_erreur_cookie' => 'problema de cookie',
 'avis_erreur_fonction_contexte' => 'Erro de programa&ccedil;&atilde;o. N&atilde;o se deve chamar esta fun&ccedil;&atilde;o neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro na salvaguarda  (@type@ @id_objet@) !',
@@ -58,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Mudar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
-'bouton_enregistrer' => '<NEW>Gravar',
+'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a caixa de correio interno',
 'bouton_radio_envoi_annonces' => 'Enviar os an&uacute;ncios editoriais',
 'bouton_radio_non_envoi_annonces' => 'N&atilde;o enviar an&uacute;ncios',
@@ -184,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'fichier_introuvable' => '<NEW>Imposs&iacute;vel localizar ficheiro @fichier@',
+'fichier_introuvable' => 'Ficheiro @fichier@ n&atilde;o localizado',
 'form_deja_inscrit' => 'J&aacute; est&aacute; inscrito',
 'form_email_non_valide' => 'O seu endere&ccedil;o email n&atilde;o &eacute; v&aacute;lido',
 'form_forum_access_refuse' => 'Voc&ecirc; j&aacute; n&atilde;o tem acesso a este s&iacute;tio',
