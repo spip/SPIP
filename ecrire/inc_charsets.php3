@@ -212,8 +212,9 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 		if (!isset($trans[$charset])) {
 			global $CHARSET;
 			load_charset($charset);
-			foreach ($CHARSET[$charset] as $key => $val) {
-				$trans[$charset][chr($key)] = '&#'.$val.';';
+			if (is_array($CHARSET[$charset]))
+				foreach ($CHARSET[$charset] as $key => $val) {
+					$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
 		if (count($trans[$charset]))
