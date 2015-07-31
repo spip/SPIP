@@ -52,7 +52,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$class = 'spip_ancre';
 	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
 		$class = "spip_mail";
-	elseif (preg_match('/^<html>/',$lien)) # cf traiter_lien_explicite
+	elseif (preg_match('/^<html>/',$texte)) # cf traiter_lien_explicite
 		$class = "spip_url spip_out";
 	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
 
@@ -135,7 +135,11 @@ function nettoyer_raccourcis_typo($texte, $connect='')
 			if (!$titre) {
 				$match = typer_raccourci($reg[count($reg)-1]);
 				@list($type,,$id,,,,) = $match;
-				if ($type) $titre = traiter_raccourci_titre($id, $type, $connect);
+				if ($type) {
+					$url = generer_url_entite($id,$type,'','',true);
+					if (is_array($url)) list($type, $id) = $url;
+					$titre = traiter_raccourci_titre($id, $type, $connect);
+				}
 				$titre = $titre ? $titre['titre'] : $match[0];
 			}
 			$titre = corriger_typo(supprimer_tags($titre));
@@ -334,7 +338,6 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	if (!$url)
 		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
 	if (!$url) return false;
-
 	if (is_array($url)) {
 		@list($type,$id) = $url;
 		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
@@ -418,8 +421,8 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 	if ($doublons===true)
 		$doublons = array('documents'=>array('doc','emb','img'));
 	// detecter les modeles (rapide)
-	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
-	$texte, $matches, PREG_SET_ORDER)) {
+	if (strpos($texte,"<")!==false AND
+	  preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $match) {
 			// Recuperer l'appel complet (y compris un eventuel lien)
