@@ -57,7 +57,7 @@ function definir_barre_onglets($script) {
 	foreach($liste_onglets as $id => $infos){
 		if (($parent = $infos['parent'])
 			&& $parent == $script
-			&& autoriser('onglet',$id)) {
+			&& autoriser('onglet',"_$id")) {
 				$onglets[$id] = new Bouton(
 					find_in_theme($infos['icone']),  // icone
 					$infos['titre'],	// titre
