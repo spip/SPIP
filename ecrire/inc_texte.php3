@@ -144,14 +144,15 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			$lecode = ereg_replace("^\n+|\n+$", "", $lecode);
 
 			// ne pas mettre le <div...> s'il n'y a qu'une ligne
-			if (is_int(strpos($lecode,"\n")))
-				$lecode = nl2br("<div align='left' class='spip_code' dir='ltr'>".$lecode."</div>");
-			else
-				$lecode = "<span class='spip_code' dir='ltr'>".$lecode."</span>";
+			if (is_int(strpos($lecode,"\n"))) {
+				$lecode = nl2br("<div align='left' class='spip_code' dir='ltr'><tt>".$lecode."</tt></div>");
+				$marqueur_echap = "</no p>$marqueur_echap<no p>";
+			} else
+				$lecode = "<span class='spip_code' dir='ltr'><tt>".$lecode."</tt></span>";
 
 			$lecode = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
 			$lecode = str_replace("  ", " &nbsp;", $lecode);
-			$les_echap[$num_echap] = "<tt>".$lecode."</tt>";
+			$les_echap[$num_echap] = $lecode;
 		}
 		else
 		if ($regs[7]) {
