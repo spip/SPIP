@@ -40,14 +40,14 @@
 		]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
-	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=}|oui)
+	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=,Uis}|oui)
 		<label for='virtuel'><:info_redirection:><em class="aide">#AIDER{artvirt}</em></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>
 		]<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
 		<input type='hidden' name='changer_virtuel' value='oui' />
 		<p class='explication'><:texte_article_virtuel_reference:></p>
 		</li>]
-		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=}|non)
+		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=,Uis}|non)
 			<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{arttitre}</em></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
 			]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
