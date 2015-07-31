@@ -208,17 +208,19 @@ function corriger_extension($ext) {
 
 function ajout_image($source, $dest) {
 	global $redirect_url, $hash_id_auteur, $hash, $num_img;
+
 	// Securite
 	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
 
-	// analyse le type de l'image (on ne fait pas confiance au nom de
-	// fichier envoye par le browser : pour les Macs c'est plus sur)
-
-		$size = @getimagesize($source);
+		// analyse le type de l'image (on ne fait pas confiance au nom de
+		// fichier envoye par le browser : pour les Macs c'est plus sur)
+		deplacer_fichier_upload($source, _DIR_DOC . $dest . '.tmp');
+		$size = @getimagesize(_DIR_DOC . $dest . '.tmp');
 		$type = decoder_type_image($size[2], true);
-
-		if ($type) deplacer_fichier_upload($source,
-						   _DIR_DOC . $dest . ".$type");
+		if ($type)
+			@rename (_DIR_DOC . $dest . '.tmp', _DIR_DOC . $dest . ".$type");
+		else
+			@unlink (_DIR_DOC . $dest . '.tmp');
 	}
 }
 
@@ -644,5 +646,8 @@ if (!$redirect) {
 	
 	$redirect = $link->getUrl();
 }
+
+
 redirige_par_entete($redirect);
+
 ?>
