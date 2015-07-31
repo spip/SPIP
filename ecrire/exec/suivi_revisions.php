@@ -68,9 +68,7 @@ while ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	$titre = propre($row['titre']);
 	
-	$result_rub = spip_query("SELECT versions.*, articles.statut, articles.titre
-FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1");
+	$result_rub = spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1");
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
 	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a>";
@@ -83,9 +81,7 @@ if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_a
 	foreach ($langues as $lang) {
 		$titre = traduire_nom_langue($lang);
 	
-		$result_lang = spip_query("SELECT versions.*
-FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 1");
+		$result_lang = spip_query("SELECT versions.* FROM spip_versions AS versions, spip_articles AS articles WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 1");
 
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
 		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a>";

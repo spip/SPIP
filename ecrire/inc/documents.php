@@ -86,15 +86,17 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	// a supprimer avec spip_types_documents
 	$extension = spip_fetch_array(spip_query("SELECT extension FROM	spip_types_documents WHERE id_type=".$document['id_type']));
 	$extension = $extension['extension'];
+	$vignette = $document['id_vignette'];
 
-	if ($document['id_vignette'] > 0
-	AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$document['id_vignette']))) {
-		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
-			$image = image_pattern($vignette);
-		} else {
-			include_spip('inc/logos');
-			$image = reduire_image_logo((_DIR_RACINE . $vignette['fichier']), 120, 110);
-		}
+	if ($vignette) 
+		$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$vignette));
+	if ($vignette) {
+			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
+				$image = image_pattern($vignette);
+			} else {
+				include_spip('inc/logos');
+				$image = reduire_image_logo((_DIR_RACINE . $vignette['fichier']), 120, 110);
+			}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');

@@ -313,8 +313,8 @@ fin_page();
 
 function un_seul_mot_dans_groupe($id_groupe)
 {
-	list($u) = spip_fetch_array(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
-	return ($u == 'oui');
+	$u = spip_fetch_array(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+	return ($u['unseul'] == 'oui');
 }
 
 function supprime_mot_de_groupe($id_groupe, $table)
