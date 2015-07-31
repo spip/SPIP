@@ -432,14 +432,17 @@ if (lire_meta('calculer_rubriques') == 'oui') {
 $maj_alea = $meta_maj['alea_ephemere'];
 $t_jour = substr($maj_alea, 6, 2);
 if ($t_jour != date('d')) {
-	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
-	$seed = (double) (microtime() + 1) * time();
+	include_ecrire("inc_session.php3");
+
+/*	$seed = (double) (microtime() + 1) * time();
 	@mt_srand($seed);
 	$alea = @mt_rand();
 	if (!$alea) {
 		srand($seed);
 		$alea = rand();
-	}
+	}*/
+	$alea = md5(creer_uniqid());
+	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
 	ecrire_meta('alea_ephemere', $alea);
 	ecrire_metas();
 }

@@ -75,62 +75,7 @@ if ($options == 'avancees') {
 
 }
 
-
 fin_page();
-
-
-//
-// Si necessaire, recalculer les rubriques
-//
-
-if (lire_meta('calculer_rubriques') == 'oui') {
-	calculer_rubriques();
-	effacer_meta('calculer_rubriques');
-	ecrire_metas();
-}
-
-
-//
-// Renouvellement de l'alea utilise pour valider certaines operations
-// (ajouter une image, etc.)
-//
-
-$maj_alea = $meta_maj['alea_ephemere'];
-$t_jour = substr($maj_alea, 6, 2);
-if ($t_jour != date('d')) {
-	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
-	$seed = (double) (microtime() + 1) * time();
-	@mt_srand($seed);
-	$alea = @mt_rand();
-	if (!$alea) {
-		srand($seed);
-		$alea = rand();
-	}
-	ecrire_meta('alea_ephemere', $alea);
-	ecrire_metas();
-}
-
-//
-// Optimisation periodique de la base de donnees
-//
-
-$date_opt = $meta['date_optimisation'];
-$date = time();
-if (($date - $date_opt) > 24 * 3600) {
-	ecrire_meta("date_optimisation", "$date");
-	ecrire_metas();
-	include ("optimiser.php3");
-}
-
-
-include_ecrire ("inc_mail.php3");
-include_ecrire ("inc_sites.php3");
-include_ecrire ("inc_index.php3");
-
-envoyer_mail_quoi_de_neuf();
-
-executer_une_syndication();
-executer_une_indexation_syndic();
 
 
 ?>
