@@ -1,3 +1,15 @@
+
+// Un petit plugin jQuery pour ajouter une classe au survol d'un element
+$.fn.hoverClass = function(c) {
+	return this.each(function(){
+		$(this).hover(
+			function() { $(this).addClass(c); },
+			function() { $(this).removeClass(c); }
+		);
+	});
+};
+
+
 var bandeau_elements = false;
 var dir_page = $("html").attr("dir");
 
@@ -56,28 +68,27 @@ function selec_statut(id, type, decal, puce, script) {
 
 	if (!accepter_change_statut || !node) return;
 
-	bloc = 'statutdecal'+type+id;
-	changestyle (bloc, 'marginLeft', decal+'px');
-	cacher (bloc);
+	$('#statutdecal'+type+id)
+	.css('marginLeft', decal+'px')
+	.removeClass('on');
 
-	$.get(script, function (c) {if (!c)node.src = puce; else {
-				      r = window.open();
-				      r.document.write(c);
-				      r.document.close();}})
+	$.get(script, function(c) {
+		if (!c)
+			node.src = puce;
+		else {
+			r = window.open();
+			r.document.write(c);
+			r.document.close();
+		}
+	});
 }
 
 function prepare_selec_statut(nom, type, id, action)
 {
-	var hide=false;
 	$('#' + nom + type + id)
-	.hover(function(){hide=false;},function(){hide=true;})
-	.load(action + '&type='+type+'&id='+id,
-		function(){ 
-			$('#' + nom + type + id)
-			.hover(function(){},function(){cacher('statutdecal'+type+id);});
-			if (hide) cacher('statutdecal'+type+id);;
-		}
-	);
+	.hoverClass('on')
+	.addClass('on')
+	.load(action + '&type='+type+'&id='+id);
 }
 
 function changeclass(objet, myClass) {
@@ -86,19 +97,6 @@ function changeclass(objet, myClass) {
 function changesurvol(iddiv, myClass) {
 	document.getElementById(iddiv).className = myClass;
 }
-
-function setvisibility (objet, statut) {
-	element = findObj(objet);
-	if (element.style.visibility != statut) element.style.visibility = statut;
-}
-
-function montrer(objet) {
-	setvisibility(objet, 'visible');
-}
-function cacher(objet) {
-	setvisibility(objet, 'hidden');
-}
-
 
 function getHeight(obj) {
 	if (obj == "window") {

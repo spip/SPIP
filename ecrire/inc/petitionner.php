@@ -65,7 +65,7 @@ function petitionner_choisir($petition)
 
 	return "<select name='change_petition' id='change_petition'
 		class='fondl spip_xx-small'
-		onchange=\"setvisibility('valider_petition', 'visible');\"
+		onchange=\"\$('#valider_petition').css('visibility','visible');\"
 		>\n$res</select><br />\n";
 }
 
