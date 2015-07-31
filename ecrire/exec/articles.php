@@ -175,8 +175,7 @@ function articles_documents($flag_editable, $type, $id)
 	global $spip_lang_left, $spip_lang_right;
 	
 	if  ($GLOBALS['meta']["documents_$type"]=='non' OR !$flag_editable)
-
-	  $res = '';
+		$res = '';
 	else {
 		$joindre = charger_fonction('joindre', 'inc');
 
@@ -196,14 +195,13 @@ function articles_documents($flag_editable, $type, $id)
 			'iframe_script' => generer_url_ecrire("documenter","id_article=$id&type=$type",true)
 		));
 
-	// eviter le formulaire upload qui se promene sur la page
-	// a cause des position:relative incompris de MSIE
+		// eviter le formulaire upload qui se promene sur la page
+		// a cause des position:relative incompris de MSIE
+		if ($GLOBALS['browser_name']!='MSIE') {
+			$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		}
 
-	if ($GLOBALS['browser_name']!='MSIE') {
-		$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
-	}
-
-	$res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>
+		$res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>
 <script type='text/javascript'>
 $(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
 </script>";

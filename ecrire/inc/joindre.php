@@ -110,7 +110,7 @@ function inc_joindre_dist($v) {
 			. $fin_cadre(true);
 	}
 
-	return $res;
+	return "\n<div class='joindre'>".$res."</div>\n";
 }
 
 
