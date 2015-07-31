@@ -475,8 +475,6 @@ eller kontakt din internetudbyder.</font><br></b>',
 'info_publie_1' => '[@nom_site_spip@] OFFENTLIGG&Oslash;R: @titre@',
 'info_publie_2' => 'Artikel offentliggjort
 -----------------',
-'info_question_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'S&oslash;gning',
 'info_rechercher_02' => 'S&oslash;gning:',
 'info_remplacer_vignette' => 'Erstatte standardpiktogrammet med et eget ikon:',
@@ -521,12 +519,8 @@ eller kontakt din internetudbyder.</font><br></b>',
 'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Nyhed indsendt',
 'item_efface' => 'Slettet',
-'item_gerer_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
 'item_premier' => '1.',
 'item_redacteur' => 'Redakt&oslash;r',
-'item_utiliser_moteur_recherche_forum' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
