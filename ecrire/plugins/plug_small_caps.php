@@ -8,4 +8,6 @@ function avant_typo_smallcaps($texte) {
 	return $texte;
 }
 
+completer_fonction("avant_typo", "avant_typo_smallcaps", "");
+
 ?>

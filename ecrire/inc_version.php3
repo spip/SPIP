@@ -483,23 +483,31 @@ function spip_query($query) {
 }
 
 function appliquer_fonction($lafonction, $entree) {
-	global $arr_functions;
-	
-	$sortie = $entree;
 
-	if (@function_exists($lafonction)) $sortie = $lafonction($sortie);
+	$sortie = $entree;
 	
-	if (!$arr_functions) $arr_functions = get_defined_functions();
-	
-	asort($arr_functions[user]);
-	// tester la presence de fonctions "_hello_"
-	foreach($arr_functions['user'] as $key => $value) {
-		if (ereg("^".$lafonction."_",$value)) $sortie = $value($sortie);
+	foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
+		if (@function_exists($value)) $sortie = $value($sortie);
 	}
-	if (function_exists($lafonction)) $sortie = $lafonction($sortie);
+	
+	if (@function_exists($lafonction)) $sortie = $lafonction($sortie);
+
+	foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
+		if (@function_exists($value)) $sortie = $value($sortie);
+	}
+		
 	return $sortie;
 }
 
+
+// Destine a "completer" une fonction
+function completer_fonction($fonction_base, $fonction_avant="", $fonction_apres="") {
+	if (strlen($fonction_avant) > 0) 
+		$GLOBALS["fonctions"]["$fonction_base"]["avant"][] = $fonction_avant;
+		
+	if (strlen($fonction_apres) > 0) 
+		$GLOBALS["fonctions"]["$fonction_base"]["apres"][] = $fonction_apres;	
+}
 
 
 //
