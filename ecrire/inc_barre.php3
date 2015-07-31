@@ -43,7 +43,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champhelp = "document.$formulaire.helpbox$texte";
 	return "<a href=\"".$action."\" class='spip_barre' title=\"".attribut_html($help)."\" "
 		."onMouseOver=\"helpline('$help',$champhelp)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">"
-		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='24' align='middle'></a>";
+		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' align='middle'></a>";
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
@@ -52,9 +52,9 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 	if (test_barre()) {
 		$ret = afficher_script_barre();
 		$champ = "document.$formulaire.$texte";
-		$ret .= "<table style='background-color: #e8e8e4; margin-top:2px; padding-left: 2px; padding-top: 2px; border: 0px solid #eeeeee; border-left: 1px solid #ffffff; border-top: 1px solid #ffffff; border-bottom: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa;' cellpadding='0' cellspacing='0' border='0' width='100%'>";
-		$ret .= "<tr width='100%' class='spip_barre'>";
-		$ret .= "<td align='left'>";
+		$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+		$ret .= "<tr width='100%'>";
+		$ret .= "<td align='left' style='padding-top: 4px; padding-bottom: 2px;'>";
 		$col++;
 
 		// Italique, gras, intertitres
@@ -73,11 +73,9 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		}
 		if ($forum) {
 			$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "guillemets.png", "<quote>Citer un message</quote>", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "quote.png", "<quote>Citer un message</quote>", $formulaire, $texte);
 		}
-		else if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
-		}
+
 		if ($options == "avancees") {
 			/*$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[?',']',$champ)", "barre-wiki.png", "Entr&eacute;e du [?glossaire] (Wikipedia)", $formulaire, $texte);
@@ -90,7 +88,9 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		// Insertion de caracteres difficiles a taper au clavier
 		$ret .= "<td align='center'>";
 		$col++;
-		if ($spip_lang == "fr") {
+		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
+			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", "Ins&eacute;rer un A accent grave majuscule", $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", "Ins&eacute;rer un E accent aigu majuscule", $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);
@@ -113,7 +113,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 
 		// Sur les forums publics, petite barre d'aide en survol des icones
 		if ($forum)
-			$ret .= "<tr><td colspan='$col'><input type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:10px; background-color: #e8e8e4; border: 0px solid #dedede;' value='Utilisez les raccourcis typographiques pour enrichir votre mise en page' /></td></tr>";
+			$ret .= "<tr><td colspan='$col'><input type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:10px; background-color: #e4e4e4; border: 0px solid #dedede;' value='Utilisez les raccourcis typographiques pour enrichir votre mise en page' /></td></tr>";
 		$ret .= "</table>";
 	}
 	return $ret;
