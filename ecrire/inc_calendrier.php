@@ -88,7 +88,8 @@ elseif ($type == 'jour') {
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
 
-  debut_page($titre,  "redacteurs", "calendrier");
+ debut_page($titre, "redacteurs", "calendrier");
+ echo "<div>&nbsp;</div>" ;
 }
 
 // utilitaire de separation script / ancre
@@ -411,7 +412,6 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 	  http_href_img($script . "type=$type&echelle=$echelle&$arguments",
 			"cal-today.gif",
 			(" onmouseover=\"montrer('$id');\"" .
-			 " onmouseout=\"cacher('$id');\"" .
 			 ($condition ? " class='calendrier-opacity'" : "")),
 			_T("info_aujourdhui")) .
 	  "&nbsp;" .
@@ -431,7 +431,9 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 {
 	global $spip_lang_right, $spip_lang_left, $couleur_claire;
 	if (!isset($couleur_claire)) $couleur_claire = 'white';
-	$gadget = "<div style='position: relative;z-index: 1000;'>";
+	$gadget = "<div style='position: relative;z-index: 1000;'
+			onmouseover=\"montrer('$id');\" .
+			onmouseout=\"cacher('$id');\">";
 
 	$gadget .= "<table id='$id' class='calendrier-cadreagenda' style='position: absolute; background-color: $couleur_claire'>";
 	$gadget .= "\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
@@ -543,7 +545,6 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	list($purscript, $ancre) = http_calendrier_script($script);
 
       return 
-	"<div>&nbsp;</div>" .
 	"<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
 	"\n<tr><td colspan='7'>" .
 	http_calendrier_navigation($j,
@@ -1122,7 +1123,6 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script, $evt)
 	list($script, $ancre) = http_calendrier_script($script);
 	$gauche = (_DIR_RESTREINT  || ($spip_ecran != "large"));
 	return 	
-	  "<div>&nbsp;</div>" .
 	  "\n<table class='calendrier-table-$spip_ecran'>" .
 	  "\n<tr><td class='calendrier-td-gauche'> " .
 	  "</td><td colspan='5' class='calendrier-td-centre'>" .
@@ -1168,7 +1168,6 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $ev
 	list($script, $ancre) = http_calendrier_script($script);
 
 	return 
-	  "<div>&nbsp;</div>" .
 	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
 	  http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, $articles, $messages, $partie_cal, $echelle, $script, $ancre) .
 	  "</table>" .
