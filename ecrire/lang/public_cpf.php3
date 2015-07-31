@@ -73,15 +73,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 'navigation' => 'Bat-kar&eacute; si lo sit',
-'nom' => '<NEW> Nom',
-'nouveautes' => '<NEW> Les nouveaut&eacute;s',
-'nouveautes_web' => '<NEW> Nouveaut&eacute;s sur le Web',
-'nouveaux_articles' => '<NEW> Nouveaux articles',
-'nouvelles_breves' => '<NEW> Nouvelles br&egrave;ves',
+'nom' => 'Non',
+'nouveautes' => 'Bann nouv&egrave;lt&eacute;',
+'nouveautes_web' => 'Bann nouv&egrave;lt&eacute; si lo sitw&egrave;b',
+'nouveaux_articles' => 'Bann nouvo lartik',
+'nouvelles_breves' => 'Bann nouv&egrave;l tite-nouv&egrave;l',
 
 
 // P
-'par_auteur' => '<NEW> par ',
+'par_auteur' => 'sanm',
 'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
 'plan_site' => '<NEW> Plan du site',
 'popularite' => '<NEW> Popularit&eacute;',
@@ -93,19 +93,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
 'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
 'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',
-'retour_debut_forums' => '<NEW> Retour au d&eacute;but des forums',
-'rubrique' => '<NEW> Rubrique',
-'rubriques' => '<NEW> Rubriques',
+'retour_debut_forums' => 'Artourn bann d&eacute;bi bann forom',
+'rubrique' => 'Ribrik',
+'rubriques' => 'Bann ribrik',
 
 
 // S
-'signatures_petition' => '<NEW> Signatures',
-'site_realise_avec_spip' => '<NEW> Site r&eacute;alis&eacute; avec SPIP',
-'sites_web' => '<NEW> Sites Web',
-'sous_rubriques' => '<NEW> Sous-rubriques',
-'suite' => '<NEW> suite',
-'sur_web' => '<NEW> Sur le Web',
-'syndiquer_rubrique' => '<NEW> Syndiquer cette rubrique',
+'signatures_petition' => 'Bann sinyatir',
+'site_realise_avec_spip' => 'Sit-la ni la f&eacute; &egrave;k SPIP',
+'sites_web' => 'Bann sitw&egrave;b',
+'sous_rubriques' => 'Bann souribrik',
+'suite' => 'laswit',
+'sur_web' => 'Si lo w&egrave;b',
+'syndiquer_rubrique' => 'Po sindik&eacute; ribrik-la',
 'syndiquer_site' => '<NEW> Syndiquer tout le site',
 
 
