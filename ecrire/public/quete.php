@@ -139,26 +139,29 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 		$exposer[$m][$type] = array();
 		$parent = intval($parent);
 		if ($principal) {
-			$exposer[$m][$type][$principal] = true;
-			if ($type == 'id_mot'){
-				if (!$parent) {
-					$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
-					$parent = $parent['id_groupe'];
+			$principaux = is_array($principal)?$principal:array($principal);
+			foreach($principaux as $principal){
+				$exposer[$m][$type][$principal] = true;
+				if ($type == 'id_mot'){
+					if (!$parent) {
+						$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
+						$parent = $parent['id_groupe'];
+					}
+					if ($parent)
+						$exposer[$m]['id_groupe'][$parent] = true;
 				}
-				if ($parent)
-					$exposer[$m]['id_groupe'][$parent] = true;
-			}
-			else if ($type != 'id_groupe') {
-			  if (!$parent) {
-			  	if ($type == 'id_rubrique')
-			  		$parent = $principal;
-			  	if ($type == 'id_article') {
-						$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
-						$parent = $parent['id_rubrique'];
-			  	}
-			  }
-			  do { $exposer[$m]['id_rubrique'][$parent] = true; }
-			  while ($parent = quete_parent($parent, $connect));
+				else if ($type != 'id_groupe') {
+				  if (!$parent) {
+				  	if ($type == 'id_rubrique')
+				  		$parent = $principal;
+				  	if ($type == 'id_article') {
+							$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
+							$parent = $parent['id_rubrique'];
+				  	}
+				  }
+				  do { $exposer[$m]['id_rubrique'][$parent] = true; }
+				  while ($parent = quete_parent($parent, $connect));
+				}
 			}
 		}
 	}
