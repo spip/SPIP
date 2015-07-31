@@ -128,9 +128,10 @@ function debut_admin($script, $action='', $corps='') {
 			. "</legend>\n<label for='fichier'>"
 			. _T('info_creer_repertoire')
 			. "</label>\n"
-			. "<input class='formo' size='40' id='fichier' name='fichier' value='"
+			. "<span class='formo'>".$signal."</span>"
+			. "<input type='hidden' id='fichier' name='fichier' value='"
 			. $signal
-			. "' /><br />"
+			. "' />"
 			. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
 			. "</fieldset>";
 
