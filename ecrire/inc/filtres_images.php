@@ -88,14 +88,23 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
-	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
-	if (!($ret["hauteur"] OR $ret["largeur"])) return false;
-
-	$date_src = 0;
-	$date_dest = 0;
-	if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
+	
+	if (@file_exists($f = $fichier)){
+		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 		$date_src = @filemtime($f);
+	}
+	elseif (@file_exists($f = "$fichier.src")
+		AND lire_fichier($f,$valeurs)
+		AND $valeurs=unserialize($valeurs)) {
+		$ret["hauteur"] = $valeurs["hauteur"];
+		$ret["largeur"] = $valeurs["largeur"];
+		$date_src = $valeurs["date"];
+	}
 
+	// pas de fichier source par la
+	if (!($ret["hauteur"] OR $ret["largeur"]))
+		return false;
+	
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
 	// cas particulier de reduire :
@@ -113,10 +122,9 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			// on garde la terminaison initiale car image simplement copiee
 			// et on postfixe son nom avec la date
 			$terminaison_dest = $terminaison;
-			$fichier_dest .= "-$date_src";
 		}
 		else
-			$fichier_dest .= '-'.substr(md5("$fichier-$effet".($date_src?"-$date_src":"")),0,5);
+			$fichier_dest .= '-'.substr(md5("$fichier-$effet"),0,5);
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
 		# cherche un cache existant
@@ -126,7 +134,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			}*/
 	}
 	else 	{
-		$fichier_dest = md5("$fichier-$effet".($date_src?"-$date_src":""));
+		$fichier_dest = md5("$fichier-$effet");
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 	}
 	
@@ -140,8 +148,15 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$images_recalcul[$fichier_dest] = true;
 	}
 	else {
-		if (@file_exists($f = $fichier_dest) OR @file_exists($f = "$fichier_dest.src"))
-			$creer = false;
+		if (@file_exists($f = $fichier_dest)){
+			if (filemtime($f)>=$date_src)
+				$creer = false;
+		}
+		else if (@file_exists($f = "$fichier_dest.src")
+		  AND lire_fichier($f,$valeurs)
+		  AND $valeurs=unserialize($valeurs)
+			AND $valeurs["date"]>=$date_src)
+				$creer = false;
 	}
 	if ($creer) {
 		if (!file_exists($fichier)) {
@@ -237,7 +252,10 @@ function image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 			  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
 			  && !$lock
 	  )
-		if (file_exists($valeurs['fichier_dest'])) ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
+		if (file_exists($valeurs['fichier_dest'])){
+			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
+			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
+		}
 	return $ret;
 }
 
