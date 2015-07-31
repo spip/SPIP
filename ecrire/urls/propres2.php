@@ -1,6 +1,5 @@
 <?php
 
-
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -11,14 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 /*
-
 Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
 le suffixe '.html' aux adresses ;
-
 */
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+
+define('URLS_PROPRES2_EXEMPLE', 'Titre-de-l-article.html -Rubrique-.html');
 
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '.html');
