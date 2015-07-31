@@ -65,14 +65,15 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 		}
 		switch($objet){
 			case 'article':
-			case 'auteur':
 				$libelle .= " " . aide ("logoart");
 				break;
 			case 'breve':
 				$libelle .= " " . aide ("breveslogo");
 				break;
-			default:
+			case 'rubrique':
 				$libelle .= " " . aide ("rublogo");
+				break;
+			default:
 				break;
 		}
 
