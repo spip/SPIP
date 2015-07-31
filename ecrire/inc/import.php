@@ -260,6 +260,7 @@ function import_tables($request, $dir) {
 	return $res ;
 }
 
+// http://doc.spip.org/@import_init_meta
 function import_init_meta($tag, $atts, $charset, $request)
 {
 	$version_archive = $atts['version_archive'];
