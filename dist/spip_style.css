@@ -92,9 +92,9 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.77em; }
-.formulaire_spip p {  
-    margin: 0.5em 0;  
-    padding: 0; }
+.formulaire_spip p {
+	margin: 0.5em 0;  
+	padding: 0; }
 
 .formulaire_spip fieldset, .spip_encadrer {
     display: block;
@@ -126,12 +126,11 @@ input.spip_bouton {
 
 /* * Reponse du formulaire (erreur) */
 .reponse_formulaire { font-weight: bold; color: #FF0000; }
-fieldset.reponse_formulaire { border: 1px solid; }
+fieldset.reponse_formulaire { border: 1px dotted; }
 fieldset.reponse_formulaire legend { font-weight: normal; }
 
 /* * Previsualisation du message */
-fieldset.previsu {  
-	margin-bottom: 16px;  
+fieldset.previsu {
 	padding: 12px;
 	border: 1px solid; }
 
@@ -168,15 +167,11 @@ div.choix_mots label { display: inline; }
 .formulaire_menu_lang label { display: none; }
 .formulaire_menu_lang select.forml { margin: 0; padding: 0; }
 
-#page_login .formulaire_menu_lang { float: right; }
-
 /* Formulaire de login
 ----------------------------------------------- */
-#page_login .formulaire_login { clear: both; font-size: 0.90em; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0; }
-#page_login .formulaire_login fieldset { width: 100%; clear: both; text-align: left; }
+#page_login .formulaire_menu_lang { float: right; }
 #page_login .formulaire_login .forml, .formulaire_login_forum .forml { width: 12em; }
 #page_login .formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
-#page_login a { color: #e86519; }
 
 /*  Couleurs des liens de Spip
 ----------------------------------------------- */

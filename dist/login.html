@@ -13,24 +13,27 @@
 	<meta name="generator" content="SPIP" />
 	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<style>a { color: #e86519; }</style>
 </head>
-<body id="page_login" style="background: #FFF; text-align: center;">
+<body id="page_login" style="background: #FFF; text-align: center; font-size: 1em;">
 
-<div class="formulaire_spip formulaire_login">
+<div style="clear: both; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
 
-		<h3 class="spip">#NOM_SITE_SPIP<br />
+		<h3 class="spip" style="color: #970038;">#NOM_SITE_SPIP<br />
 			<small><:login_acces_prive:></small>
 		</h3>
 
 		#MENU_LANG_ECRIRE
 
-		#LOGIN_PRIVE
+		<div class="formulaire_spip formulaire_login" style="clear: both;">
+			#LOGIN_PRIVE
 
-		<p><small>
+			<p style="clear: both; text-align: center;">
 			[&#91;<a href="#URL_PAGE{spip_inscription,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;]
 			&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 			&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
-		</small></p>
+			</p>
+		</div>
 
 </div>
 
