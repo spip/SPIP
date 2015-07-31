@@ -19,20 +19,13 @@ include_spip ('inc/barre');
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
-global
-  $connect_statut,
-  $connect_id_rubrique,
-  $id_breve,
-  $id_rubrique,
-  $lien_titre,
-  $lien_url,
-  $new,
-  $spip_ecran,
-  $texte;
+	global $connect_statut, $connect_id_rubrique, $spip_ecran;
 
-$id_breve = intval($id_breve);
+    $id_breve = intval(_request('id_breve'));
+    $id_rubrique  = intval(_request('id_rubrique'));
+    $new = _request('new');
 
-if ($new != "oui") {
+    if ($new != "oui") {
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
 	
@@ -45,9 +38,9 @@ if ($new != "oui") {
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
 		$extra = $row['extra'];
-	}
-}
-else {
+	} else die ("<h3>"._T('info_acces_interdit')."</h3>");
+
+    } else {
 	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
 	$texte = "";
 	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
@@ -85,8 +78,8 @@ debut_cadre_formulaire();
 
 
 if ($new != "oui") {
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "\n<tr width='100%'>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+	echo "\n<tr>";
 	echo "<td>";
 		icone(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
 	
@@ -95,8 +88,7 @@ if ($new != "oui") {
 	echo "<td width='100%'>";
 	echo _T('info_modifier_breve');
 	gros_titre($titre);
-	echo "</td></tr></table>";
-	echo "\n<p>";
+	echo "</td></tr></table><br />";
 }
 
 
