@@ -164,6 +164,18 @@ function email_notification_forum ($t, $email) {
 	{
 		if ($t['id_article'])
 			$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$t['id_forum'];
+		else if ($t['id_breve'])
+			$url = generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']).'#id'.$t['id_forum'];
+		else if ($t['id_syndic'])
+			$url = generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']).'#id'.$t['id_forum'];
+	}
+	else if ($t['statut'] == 'privrac') # forum general
+	{
+		$url = generer_url_ecrire('forum').'#id'.$t['id_forum'];
+	}
+	else if ($t['statut'] == 'privadm') # forum des admins
+	{
+		$url = generer_url_ecrire('forum_admin').'#id'.$t['id_forum'];
 	}
 	else if (function_exists('generer_url_forum')) {
 		$url = generer_url_forum($t['id_forum']);
