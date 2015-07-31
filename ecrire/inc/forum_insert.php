@@ -130,7 +130,6 @@ function inc_forum_insert_dist() {
 	$alea = _request('alea');
 	$hash = _request('hash');
 	$auteur = _request('auteur');
-	$confirmer_forum = _request('confirmer_forum');
 	$email_auteur = _request('email_auteur');
 	$id_auteur = _request('id_auteur');
 	$nom_site_forum = _request('nom_site_forum');
@@ -155,11 +154,11 @@ function inc_forum_insert_dist() {
 		include_spip('inc/session');
 
 // Recalcule la signature faite dans formulaires/inc-formulaire-forum
-// en fonction des input du formulaire
+// en fonction des input POST du formulaire (gaffe a ce qui passe par l'URL)
 		$ids = array();
 
 		foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-			$ids[$o] = ($x = intval($$o)) ? $x : '';
+			$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
 		}
 
 		if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
@@ -254,11 +253,6 @@ function inc_forum_insert_dist() {
 	// Prevenir les auteurs de l'article
 	if ($GLOBALS['meta']["prevenir_auteurs"] == "oui" AND ($afficher_texte != "non"))
 		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
-
-	// Poser un cookie pour ne pas retaper le nom / email
-	include_spip('inc/cookie');
-	spip_setcookie('spip_forum_user',
-		       serialize(array('nom' => $auteur, 'email' => $email_auteur)));
 
 	if ($statut == 'publie') {
 	//
