@@ -1,4 +1,4 @@
-[(#PIPELINE{body_prive,[(#VAL{<body class="#ENV{type-page,page}[(#ENV{type-page,page}|match{_edit$}|oui)edition][ #ENV{type-page,page}_(#ENV{composition,''})][ statut_(#SESSION{statut})][ auteur_(#SESSION{id_auteur})] [(#REM|init_body_class)]">})]})]
+[(#PIPELINE{body_prive,[(#VAL{<body class="#ENV{type-page,page}[ #ENV{type-page,page}_(#ENV{composition,''})][ statut_(#SESSION{statut})][ auteur_(#SESSION{id_auteur})] [(#REM|init_body_class)][(#ENV{type-page,page}|match{_edit$}|oui)edition]">})]})]
 	<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
 	<div id="page">
 		<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
