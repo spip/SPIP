@@ -255,6 +255,7 @@ function description_table($nom){
 	include_spip('base/serial');
 	if (isset($tables_principales[$nom_table]))
 		return array($nom_table, $tables_principales[$nom_table]);
+	include_spip('base/auxiliaires');
 	if (isset($tables_auxiliaires[$nom_table]))
 		return array($nom_table, $tables_auxiliaires[$nom_table]);
 
