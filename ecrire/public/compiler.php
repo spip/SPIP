@@ -121,8 +121,19 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 
-	// si ce champ est present, ce n'est pas un squelette
-	if ($fichier = $p->texte) {
+	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
+	if (is_string($p->texte)) {
+		$fichier = $p->texte;
+		$code = "'$fichier'";
+	} else {
+		$code = calculer_liste($p->texte, $descr, $boucles, $id_boucle);
+		if (preg_match("/^'([^']*)'/s", $code, $r))
+			$fichier = $r[1];
+		else $fichier = '';
+	}
+
+	// s'il y a une extension .php, ce n'est pas un squelette
+	if (preg_match('/^.+[.]php$/s', $fichier)) {
 		// si inexistant, on essaiera a l'execution
 		if ($path = find_in_path($fichier))
 			$path = "\"$path\"";
@@ -132,10 +143,10 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	else { include_spip(\"public/debug\");
 			erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
 				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
-	} else 	$code = 'include _DIR_RESTREINT . "public.php";';
-
-	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
-
+	} else 	{
+		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette(" . $code  . ") . '";
+		$code = 'include _DIR_RESTREINT . "public.php";';
+	}
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
@@ -182,19 +193,20 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 
-  if ($boucles[$id_boucle]->type_requete == 'boucle')  {
-    $corps = calculer_boucle_rec($id_boucle, $boucles);
-    $req = "";
-    } else {
-      $corps = calculer_boucle_nonrec($id_boucle, $boucles);
-      // attention, ne calculer la requete que maintenant
-      // car la fonction precedente appelle index_pile qui influe dessus
-      $req =	(($init = $boucles[$id_boucle]->doublons) ?
-			("\n\t$init = array();") : '') .
-		calculer_requete_sql($boucles[$id_boucle]);
-    }
-  $notrace = (_request('var_mode_affiche') != 'resultat');
-  return $req . $corps 
+	if ($boucles[$id_boucle]->type_requete == 'boucle')  {
+		$corps = calculer_boucle_rec($id_boucle, $boucles);
+		$req = "";
+	} else {
+		$corps = calculer_boucle_nonrec($id_boucle, $boucles);
+		// attention, ne calculer la requete que maintenant
+		// car la fonction precedente appelle index_pile qui influe dessus
+		$req = (($init = $boucles[$id_boucle]->doublons)
+			? ("\n\t$init = array();") : '')
+		. calculer_requete_sql($boucles[$id_boucle]);
+	}
+
+	$notrace = (_request('var_mode_affiche') != 'resultat');
+	return $req . $corps 
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
 	.  "\n	return \$t0;";
@@ -370,7 +382,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 
 // http://doc.spip.org/@calculer_requete_sql
-function calculer_requete_sql(&$boucle)
+function calculer_requete_sql($boucle)
 {
 	if (!$boucle->select) return ""; // l'optimiseur a fait fort
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')

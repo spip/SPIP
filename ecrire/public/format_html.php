@@ -21,11 +21,14 @@ function format_boucle_html ($avant, $nom, $type, $crit, $corps, $apres, $altern
 	return "$avant<BOUCLE$nom($type)$crit$corps$apres$altern";
 }
 
-function format_inclure_html ($file, $fond, $args, $prof)
+function format_inclure_html ($file, $args, $prof)
 {
- 	$t = $file ? ("(" . $file . ")") : "" ;
-	if ($fond) array_unshift($args, "fond=" . $fond);
-	if ($args) $args = "{" . join(", ",$args) . "}";
+	if (strpos($file, '#')===false)
+	 	$t = $file ? ("(" . $file . ")") : "" ;
+	else {
+		$t = "{fond=" . $file . '}';
+	}
+	$args = !$args ? '' : ("{" . join(", ",$args) . "}");
 	return ("<INCLURE" . $t . $args  . ">");
 }
 

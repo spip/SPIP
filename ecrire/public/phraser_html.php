@@ -59,6 +59,10 @@ function phraser_inclure($texte, $ligne, $result) {
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,"/>","",$result,$champ);
+		if (!$champ->texte OR count($champ->param) > 1) {
+			include_spip('public/normaliser');
+			normaliser_inclure($champ);
+		}
 		$texte = substr($champ->apres, strpos($champ->apres, '>')+1);
 		$champ->apres = "";
 		$texte = preg_replace(',^</INCLU[DR]E>,', '', $texte);

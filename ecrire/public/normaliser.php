@@ -167,4 +167,24 @@ function normaliser_args_inclumodel($p)
 	array_unshift($p->param, $args);
 }
 
+function normaliser_inclure($champ)
+{
+	normaliser_args_inclumodel($champ);
+	$l = $champ->param[0];
+	if (!$l[0]) foreach ($l as $k => $p) {
+		if ($p[0]->type != 'texte' OR 
+		    !preg_match('/^fond\s*=\s*(.*)$/',$p[0]->texte, $r))
+			continue;
+		if ($r[1])
+			$p[0]->texte = $r[1];
+		else unset($p[0]);
+		$champ->texte = $p;
+		unset($champ->param[0][$k]);
+		if (count($champ->param[0]) ==1) 
+			array_shift($champ->param);
+		return;
+	}
+	spip_log("inclure sans fond ni fichier");
+}
+
 ?>
