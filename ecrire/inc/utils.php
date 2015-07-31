@@ -1621,7 +1621,7 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT :
 			('./'  . _SPIP_ECRIRE_SCRIPT);
 
-	@list($script, $ancre) = explode('#', $script);
+	list($script, $ancre) = array_pad(explode('#', $script), 2, null);
 	if ($script AND ($script<>'accueil' OR $rel))
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)
@@ -2160,11 +2160,11 @@ function spip_initialisation_suite(){
 	// La requete est-elle en ajax ?
 	if (!defined('_AJAX')) define('_AJAX',
 		(isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
-			OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
-				OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
-					OR @$_REQUEST['var_ajax'] # forms ajax & inclure ajax de spip
+			OR !empty($_REQUEST['var_ajax_redir']) # redirection 302 apres ajax jQuery
+			OR !empty($_REQUEST['var_ajaxcharset']) # compat ascendante pour plugins
+			OR !empty($_REQUEST['var_ajax']) # forms ajax & inclure ajax de spip
 		)
-		AND !@$_REQUEST['var_noajax'] # horrible exception, car c'est pas parce que la requete est ajax jquery qu'il faut tuer tous les formulaires ajax qu'elle contient
+		AND empty($_REQUEST['var_noajax']) # horrible exception, car c'est pas parce que la requete est ajax jquery qu'il faut tuer tous les formulaires ajax qu'elle contient
 	);
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
@@ -2539,7 +2539,11 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		}
 	}
 
-	@$GLOBALS['_INC_PUBLIC']++;
+	if (!isset($GLOBALS['_INC_PUBLIC'])) {
+		$GLOBALS['_INC_PUBLIC'] = 0;
+	} else {
+		$GLOBALS['_INC_PUBLIC']++;
+	}
 
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
