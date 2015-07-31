@@ -232,6 +232,9 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 // qui recevra a l'execution la valeur des arguments, 
 // ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
 // mais on traite le vrai parametre si present.
+// Pour empecher la mesinterpretation des pseudo-filtres tout en gardant acces
+// a leur representation abstraite, on les deplace dans le champ "fonctions"
+// qui sert une fois de plus aux bidouillages pour cause de syntaxe mal fichue.
 
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
@@ -247,7 +250,8 @@ function calculer_balise_dynamique($p, $nom, $l) {
 		return $p;
 	}
 	$param = "";
-	if ($a = $p->param) {
+	$source = $a = $p->param;
+	if ($a) {
 		$c = array_shift($a);
 		if  (!array_shift($c)) {
 		  $p->fonctions = $a;
@@ -263,7 +267,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 		$p->ligne);
 
 	$p->interdire_scripts = false;
-	$p->fonctions = array();
+	$p->fonctions = $source;
 	$p->param = array();
 
 	return $p;
