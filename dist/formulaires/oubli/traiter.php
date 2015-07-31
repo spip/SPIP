@@ -12,26 +12,47 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@message_oubli
+function message_oubli($email, $param)
+{
+	if (function_exists('test_oubli'))
+		$f = 'test_oubli';
+	else 
+		$f = 'test_oubli_dist';
+	$declaration = $f($email);
+
+	if (is_array($declaration)
+	  AND $res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']))
+	  AND $row = sql_fetch($res)
+	  ) {
+		include_spip('inc/acces'); # pour creer_uniqid
+		$cookie = creer_uniqid();
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $row['id_auteur']);
+	
+		$nom = $GLOBALS['meta']["nom_site"];
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	
+		if ($envoyer_mail($email,
+				  ("[$nom] " .  _T('pass_oubli_mot')),
+				  _T('pass_mail_passcookie',
+				     array('nom_site_spip' => $nom,
+					   'adresse_site' => url_de_base(),
+					   'sendcookie' => generer_url_public('spip_pass', 
+					   "$param=$cookie&formulaire_action="._request('formulaire_action')
+					   ."&formulaire_action_cle="._request('formulaire_action_cle')
+					   ."&formulaire_action_args="._request('formulaire_action_args')
+					   , true)))) )
+		  return _T('pass_recevoir_mail');
+		else
+		  return  _T('pass_erreur_probleme_technique');
+	}
+  return  _T('pass_erreur_probleme_technique');
+}
+
 // la saisie a ete validee, on peut agir
 function formulaires_oubli_traiter_dist(){
 
-	$message = "";
-	if (
-	    ($p = _request('p'))
-	 && ($oubli = _request('oubli'))) {
-		include_spip('inc/acces');
-		$mdpass = md5($oubli);
-		$htpass = generer_htpass($oubli);
-		include_spip('base/abstract_sql');
-		$res = sql_select("login", "spip_auteurs", "cookie_oubli=" . sql_quote($p) . " AND statut<>'5poubelle' AND pass<>''");
-		$row = sql_fetch($res);
-		sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . sql_quote($p));
-		
-	
-		$login = $row['login'];
-		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
-		"<p>" . _T('pass_rappel_login', array('login' => $login));
-	}
+	$message = message_oubli(_request('oubli'),'p');
 	return $message;
 }
 

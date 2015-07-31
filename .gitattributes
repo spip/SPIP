@@ -25,6 +25,8 @@ dist/formulaires/forum_bloc_choix_mots.html -text
 dist/formulaires/login.php -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
+dist/formulaires/mot_de_passe.html -text
+dist/formulaires/mot_de_passe.php -text
 dist/formulaires/oubli/charger.php -text
 dist/formulaires/oubli/traiter.php -text
 dist/formulaires/oubli/verifier.php -text

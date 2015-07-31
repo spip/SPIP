@@ -61,9 +61,11 @@
 .formulaire_erreur {
   color: red;
 }
-.formfx li .erreur {color:red;}
+.formfx li .erreur {color:red;display:block;}
 
 /* messages de retour */
 .formulaire_message {
   color: green;
 }
+
+.formfx .spip_bouton {text-align:right;}

@@ -12,6 +12,7 @@
 [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{formfx.css}|direction_css)]" type="text/css" />
 
 </head>
 <body class='pass' >
@@ -21,7 +22,12 @@
 	<h3 class="spip">#NOM_SITE_SPIP</h3>
 		
 	<div class="formulaire_spip pass">
-		#FORMULAIRE_OUBLI
+		[(#ENV{p}|non)
+		  #FORMULAIRE_OUBLI
+		]
+		[(#ENV{p}|oui)
+		  #FORMULAIRE_MOT_DE_PASSE
+		]
 	</div>
 	<div style='text-align:#LANG_RIGHT'>
 	<script type="text/javascript"><!--

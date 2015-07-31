@@ -37,13 +37,13 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 		$conflits = controler_contenu($type,$id);
 		if (count($conflits)) {
 			foreach($conflits as $champ=>$conflit){
-				$erreurs[$champ] .= _L("ATTENTION : Ce champ a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est :<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>");
+				$erreurs[$champ] .= _T("alerte_modif_info_concourante")."<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>";
 			}
 		}
 	}
 	foreach($oblis as $obli){
 		if (!_request($obli))
-			$erreurs[$obli] .= _L("Cette information est obligatoire");;
+			$erreurs[$obli] .= _T("info_obligatoire");
 	}
 	return $erreurs;
 }
