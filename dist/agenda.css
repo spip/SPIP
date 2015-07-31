@@ -40,7 +40,7 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-mozbottom6 {}
 
 .calendrier-opacity { -moz-opacity: 0.3; filter: alpha(opacity=30); }
-.calendrier-png { width: 12px; height: 12px; behavior: url(win_png.htc); } /* URL a revoir */
+.calendrier-png { width: 12px; height: 12px; }
 .calendrier-icone { width: 14px; height: 7px; border: 0; }
 .calendrier-noir  { color: #000; } /* style anar */
 .calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; } /* style cinemat(yp)ographe */

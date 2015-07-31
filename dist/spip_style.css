@@ -50,9 +50,6 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left: auto; margin-right: auto; }
 .spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left: auto; margin-right: auto; }
 
-/* Images typographiques (via image_typo), URL a revoir... */
-.format_png { behavior: url(win_png.htc); }
-
 /* modeles par defaut */
 .spip_modele { float: right; display: block; border: 1px dotted #666; width: 180px; }
 

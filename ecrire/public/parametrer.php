@@ -266,9 +266,9 @@ function generer_generer_url($type, $p)
 }
 
 
-# Determine les parametres d'URL (hors réécriture) et consorts
+# Determine les parametres d'URL (hors reecriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
-# exige un squelette deductible de $fond et du contexte linguistique.
+# exige un squelette deductible de $fond et du contexte de langue.
 # Applique alors le squelette sur le contexte et le nom du cache.
 # Retourne un tableau ainsi construit
 # 'texte' => la page calculee

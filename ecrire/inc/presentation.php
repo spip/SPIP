@@ -1255,6 +1255,20 @@ function fin_page()
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';
 
+	include_spip('public/assembler');
+
+	// cf. public/assembler, fonction f_msie()
+	// test si MSIE et sinon quitte
+	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'MSIE')
+	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
+	$fix_png = $msie
+		? "<script type='text/javascript'><!--
+			if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '"
+			.find_in_path('jquery.iepnghack.1.5.js')
+			."' , function() { jQuery('img').pngfix(); } );
+			// --></script>"
+		: '';
+
 	return debut_grand_cadre(true)
 	. (($spip_display == 4)
 		? ("<div><a href='"
@@ -1270,6 +1284,7 @@ function fin_page()
 
 	. fin_grand_cadre(true)
 	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
+	. $fix_png
 	. $GLOBALS['rejoue_session']
 	. '<div style="background-image: url(\''
 	. generer_url_action('cron')

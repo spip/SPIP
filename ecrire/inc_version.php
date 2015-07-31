@@ -230,8 +230,9 @@ $controler_dates_rss = true;
 $spip_pipeline = array(
 	'accueil_encours' => '',
 	'accueil_gadgets' => '',
-	'acceuil_informations' => '',
-	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
+	'accueil_informations' => '',
+	 # cf. public/assembler
+	'affichage_final' => '|f_surligne|f_tidy|f_admin|f_msie',
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
