@@ -273,6 +273,8 @@ ecrire/xml/valider.php -text
 local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
+prive/ajax_item_pick.html -text
+prive/ajax_item_pick_fonctions.php -text
 prive/echafaudage/contenu/objet.html -text
 prive/echafaudage/contenu/objet_edit.html -text
 prive/echafaudage/contenu/objet_edit.sans_rubrique.html -text
