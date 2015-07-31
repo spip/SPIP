@@ -185,11 +185,12 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 
 	$vals[] = $s;
 
-	// $my_sites cache les resultats des requetes sur les sites
-	if (!$my_sites[$id_syndic])
-		$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT nom_site, moderation, miroir FROM spip_syndic WHERE id_syndic=$id_syndic"));
+	// on n'affiche pas la colonne 'site' lorsqu'on regarde un site precis
+	if ($GLOBALS['exec'] != 'sites') {
+		// $my_sites cache les resultats des requetes sur les sites
+		if (!$my_sites[$id_syndic])
+			$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT nom_site, moderation, miroir FROM spip_syndic WHERE id_syndic=$id_syndic"));
 
-	if (!$id) {
 		$aff = $my_sites[$id_syndic]['nom_site'];
 		if ($my_sites[$id_syndic]['moderation'] == 'oui')
 			$aff = "<i>$aff</i>";
