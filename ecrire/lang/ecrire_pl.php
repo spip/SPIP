@@ -917,8 +917,6 @@ odświeżyć tylko jedną stronę, zrób to z obszaru publicznego, używając pr
   Domyślnie ta opcja jest wyłączona
   w celu wyeliminowania niepotrzebnych komunikatów.',
 'texte_trop_resultats_auteurs' => 'Zbyt dużo rezultatów dla "@cherche_auteur@" ; spróbuj sprecyzować kryteria wyszukiwania.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'ściąganie najnowszej wersji',
 'texte_utilisation_moteur_syndiques' => 'Jeśli korzystasz z wyszukiwarki zintegrowanej ze    SPIP, możesz dokonywać przeszukiwania
     dołączonych artykułów na dwa sposoby.
@@ -990,7 +988,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_rendez_vous' => 'SPOTKANIA:',
 'titre_reparation' => 'Napraw',
 'titre_suivi_petition' => 'Archiwum ogłoszeń',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Nie ma artykułu o tym numerze.',
 'trad_article_traduction' => 'Wszystkie wersje tego artykułu:',

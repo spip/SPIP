@@ -903,8 +903,6 @@ s\'avètz bravament modificat lo grafisme o l\'estructura del sit.',
   per tal d\'evitar d\'afichar de messatges d\'avertiment
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tròp de resultats per "@cherche_auteur@" ; volgatz afinar la cèrca.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'telecargament de la darrièra version',
 'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
     a SPIP, podètz far las cèrcas suls sits e
@@ -979,7 +977,6 @@ s\'avètz bravament modificat lo grafisme o l\'estructura del sit.',
 'titre_rendez_vous' => 'RENDÈTZ-VOS:',
 'titre_reparation' => 'Reparacion',
 'titre_suivi_petition' => 'Seguit de las peticions',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'I a pas cap d\'article que pòrte aquel numèro.',
 'trad_article_traduction' => 'Totas las versions d\'aquel article:',

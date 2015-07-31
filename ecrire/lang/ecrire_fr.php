@@ -924,8 +924,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 		afin d\'éviter d\'afficher des messages d\'avertissement
 		intempestifs.',
 'texte_trop_resultats_auteurs' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.',
 'texte_unpack' => 'téléchargement de la dernière version',
 'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche intégré
     à SPIP, vous pouvez effectuer les recherches sur les sites et
@@ -1000,7 +998,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_rendez_vous' => 'RENDEZ-VOUS :',
 'titre_reparation' => 'Réparation',
 'titre_suivi_petition' => 'Suivi des pétitions',
-'titre_type_urls' => 'Type d\'adresses URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce numéro.',
 'trad_article_traduction' => 'Toutes les versions de cet article :',

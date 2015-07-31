@@ -919,8 +919,6 @@ significant modifications to the site\'s graphics or structure.',
   This option is disabled by default to avoid displaying unnecessary warning
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
-'texte_type_urls' => 'You may choose how page URLs are to be calculated.',
-'texte_type_urls_attention' => 'Warning: this setting will only work if the file @htaccess@ is correctly installed in the site\'s root directory.',
 'texte_unpack' => 'downloading the latest version',
 'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on syndicated sites and
@@ -991,7 +989,6 @@ you can perform searches on syndicated sites and
 'titre_rendez_vous' => 'APPOINTMENTS:',
 'titre_reparation' => 'Repair',
 'titre_suivi_petition' => 'Petitions follow-up',
-'titre_type_urls' => 'Type of URL addresses',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'There is no article with this number',
 'trad_article_traduction' => 'All the versions of this article:',

@@ -906,8 +906,6 @@ di recente al fine di evitare modifiche simultanee.
 Questa opzione è disattivata di default
 per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
-'texte_type_urls' => 'È possibile scegliere qui sotto il modo di elaborazione dell\'indirizzo delle pagine.',
-'texte_type_urls_attention' => 'Attenzione: questa impostazione funziona solamente se il file @htaccess@ è installato correttamente alla radice del sito.',
 'texte_unpack' => 'scarica l\'ultima versione',
 'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
 puoi effettuare le ricerche sui siti e
@@ -978,7 +976,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_rendez_vous' => 'APPUNTAMENTO:',
 'titre_reparation' => 'Riparazione',
 'titre_suivi_petition' => 'Monitoraggio delle petizioni',
-'titre_type_urls' => 'Tipo di indirizzi URL',
 'tls_ldap' => 'Transport Layer Security:',
 'trad_article_inexistant' => 'Non esiste un articolo con questo numero.',
 'trad_article_traduction' => 'Tutte le versioni di questo articolo:',

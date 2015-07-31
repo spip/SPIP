@@ -919,8 +919,6 @@ gjort viktiga förändringar i sajtens utseende eller struktur.',
 		afin d\'éviter d\'afficher des messages d\'avertissement
 		intempestifs.', # NEW
 'texte_trop_resultats_auteurs' => 'För många resultat för "@cherche_auteur@"; Var vänlig att smalna av frågan.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'téléchargement de la dernière version', # NEW
 'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
@@ -994,7 +992,6 @@ you can perform searches on sites and
 'titre_rendez_vous' => 'MÖTEN:',
 'titre_reparation' => 'Reparera',
 'titre_suivi_petition' => 'Uppföljning av namninasamlingar',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Det finns ingen artikel med det här numret',
 'trad_article_traduction' => 'Alla versioner av den här artikeln:',

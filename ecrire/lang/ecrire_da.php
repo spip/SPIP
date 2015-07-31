@@ -894,8 +894,6 @@ i en farve, der angiver deres status:',
 		vise «åbne» artikler for at undgå samtidige ændringer. Denne indstilling er som standard
 		slået fra for at undgå utidige advarselsmeddelelser.',
 'texte_trop_resultats_auteurs' => 'For mange resultater til "@cherche_auteur@"; vær venlig at afgrænse søgningen yderligere.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'download af seneste version',
 'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP\'s indbyggede søgefunktion, kan du på forskellig vis foretage
 		søgninger på websteder og i syndikerede artikler. <br /><img src=\'puce.gif\'> Den enkleste består i kun at 
@@ -962,7 +960,6 @@ i en farve, der angiver deres status:',
 'titre_rendez_vous' => 'AFTALER:',
 'titre_reparation' => 'Reparer',
 'titre_suivi_petition' => 'Opfølgning på appeller',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Der findes ingen artikel med dette nummer.',
 'trad_article_traduction' => 'Alle udgaver af denne artikel :',

@@ -864,8 +864,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_travail_article' => '@nom_auteur_modif@は、@date_diff@分前、この記事で働いていた',
 'texte_travail_collaboratif' => '同じ記事上で数人のエディターが頻繁に働くと、システムは記事が同時に修正されるのを防ぐために最近«開かれた»と表示することができます。このオプションはたくさん警告メッセージが表示されるのを防ぐため、初めは無効になっています。',
 'texte_trop_resultats_auteurs' => '"@cherche_auteur@"に対する結果が多すぎます; キーワードをひねって検索してください。',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => '最新バージョンをダウンロード',
 'texte_utilisation_moteur_syndiques' => 'あなたがSPIPに結合された検索エンジンを使うとき、サイト上と供給（シンジケート）されている記事を違った態度で検索することができます。<br /><img src=\'puce.gif\'>最も簡単なのは記事のタイトルと記述だけを検索することです。<br /><img src=\'puce.gif\'>もっと強力な２番目の方法は、同じように参照されているサイト内の文も検索できます。もしあなたがサイトを参照するなら、SPIPはサイトの文自体の検索を行うでしょう。', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'この方法は定期的に参照しているサイトへ訪問することを強います。あなた自身のサイトに少々負担を掛けます。',
@@ -927,7 +925,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_rendez_vous' => '約束:',
 'titre_reparation' => '修理',
 'titre_suivi_petition' => '署名の把握',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'この番号には記事はありません',
 'trad_article_traduction' => '記事のすべてのバージョン:',

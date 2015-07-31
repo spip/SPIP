@@ -913,8 +913,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
  vermijden dat er teveel waarschuwingsberichten op het
  scherm verschijnen.',
 'texte_trop_resultats_auteurs' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
-'texte_type_urls_attention' => 'Aandacht zal dit regelen slechts werken als het bestand @htaccess@ juist aan de wortel van de site wordt geplaatst.',
 'texte_unpack' => 'binnenhalen van de laatste versie',
 'texte_utilisation_moteur_syndiques' => 'Wanneer u de geïntegreerdeb de zoekmotor van
  SPIP, kunt u het onderzoek naar de site en
@@ -987,7 +985,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_rendez_vous' => 'AFSPRAKEN :',
 'titre_reparation' => 'Herstel',
 'titre_suivi_petition' => 'Vervolg van de petities',
-'titre_type_urls' => 'Soort adressen URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Er is geen artikel met dit nummer.',
 'trad_article_traduction' => 'Alle versies van dit artikel:',

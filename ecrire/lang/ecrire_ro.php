@@ -892,8 +892,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
   Această opţiune este dezactivată în mod implicit
   pentru a evita afişarea de mesaje intempensive de avertisment.',
 'texte_trop_resultats_auteurs' => 'Prea multe rezultate pentru "@cherche_auteur@" ; vă rugăm să rafinaţi termenii căutării.',
-'texte_type_urls' => 'Puteţi alege mai jos modul de calcul a adreselor paginilor.',
-'texte_type_urls_attention' => 'Atenţie: acest reglaj nu va funcţiona corect decât dacă fişierul @htaccess@  este instalat în rădăcina site-ului.',
 'texte_unpack' => 'descărcarea ultimei versiuni',
 'texte_utilisation_moteur_syndiques' => 'Atunci când folosiţi motorul de căutare integrat
 în SPIP, puteţi efectua căutari în articolele şi site-urile sindicalizate cu două metode diferite
@@ -961,7 +959,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_rendez_vous' => 'ÎNTÂLNIRE :',
 'titre_reparation' => 'Reparare',
 'titre_suivi_petition' => 'Urmărirea petiţiilor',
-'titre_type_urls' => 'Tip de adrese URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Nu există un articol care să aibă acest numar.',
 'trad_article_traduction' => 'Toate versiunile acestui articol :',

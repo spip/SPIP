@@ -915,8 +915,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
   modificacións simultáneas. Esta opción está 
   desactivada por defecto para evitar mostrar mensaxes de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Resultados de máis para "@cherche_auteur@"; por favor, afine a procura.',
-'texte_type_urls' => 'Pode escoller aquí o modo de calcular o enderezo das páxinas.',
-'texte_type_urls_attention' => 'Aviso, esta regraxe non funcionará se o ficheiro @htaccess@ non está correctamente instalado na raíz do web.',
 'texte_unpack' => 'descarga da última versión',
 'texte_utilisation_moteur_syndiques' => 'Cando emprega o motor de procura integrado
   no SPIP, pode efectuar as procuras nos webs e nos artigos afiliados
@@ -988,7 +986,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_rendez_vous' => 'CITA:',
 'titre_reparation' => 'Reparación',
 'titre_suivi_petition' => 'Seguimento das peticións',
-'titre_type_urls' => 'Tipo de enderezos URL',
 'tls_ldap' => 'Capa de seguridade de transporte (Transport Layer Security) :',
 'trad_article_inexistant' => 'Non hai artigo que leve este número.',
 'trad_article_traduction' => 'Todas as versións deste artigo :',

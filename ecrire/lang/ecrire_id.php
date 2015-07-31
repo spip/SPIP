@@ -919,8 +919,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_travail_collaboratif' => 'Jika beberapa editor sering bekerja sama dalam artikel yang sama, sistem dapat menandai artikel-artikel yang saat itu sedang «dibuka» guna menghindari konflik saat diedit.
   Opsi ini dinonaktifkan secara standar untuk menghindri pesan-pesan peringatan yang tidak perlu.',
 'texte_trop_resultats_auteurs' => 'Terlalu banyak hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'mengunduh versi terakhir',
 'texte_utilisation_moteur_syndiques' => 'Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br>- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br>- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Metode ini memaksa SPIP untuk mengunjungi situs-situs referensi secara teratur, yang mungkin dapat menurunkan kinerja situs anda.',
@@ -982,7 +980,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_rendez_vous' => 'JANJI:',
 'titre_reparation' => 'Perbaikan',
 'titre_suivi_petition' => 'Tindak lanjut petisi',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Pengamanan layer transportasi:',
 'trad_article_inexistant' => 'Tidak ada artikel dengan nomor ini',
 'trad_article_traduction' => 'Semua versi artikel ini:',

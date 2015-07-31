@@ -861,8 +861,6 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_travail_article' => '@nom_auteur_modif@ hat diesen Artikel vor @date_diff@ Minuten bearbeitet',
 'texte_travail_collaboratif' => 'Wenn es öfter vorkommt, dass mehrere Redakteure gemeinsam an Artikeln arbeiten, kann SPIP die vor kurzem „geöffneten“ Artikel anzeigen, um gleichzeitige Änderungen vorzubeugen. Diese Funktion ist normalerweise abgeschaltet, um störende Meldungen zu reduzieren.',
 'texte_trop_resultats_auteurs' => 'Zu viele Ergebnisse für „@cherche_auteur@“. Bitte präzisieren Sie Ihre Suchanfrage.',
-'texte_type_urls' => 'Hier können Sie von SPIP verwendeten Typ URL (Adresse) der Seiten wählen.',
-'texte_type_urls_attention' => 'Achtung: Diese Einstellung wird nur wirksam, wenn die Datei @htaccess@ im Wurzelverzeichnis der Website vorhanden ist.',
 'texte_unpack' => 'neue Version laden.',
 'texte_utilisation_moteur_syndiques' => 'Wenn Sie die Suchmaschine von SPIP einsetzen,
  können Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br />- Im einfachsten Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br />-
@@ -927,7 +925,6 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_rendez_vous' => 'TERMIN:',
 'titre_reparation' => 'Reparatur',
 'titre_suivi_petition' => 'Petitionen verwalten',
-'titre_type_urls' => 'URL-Typ',
 'tls_ldap' => 'Transport Layer Security:',
 'trad_article_inexistant' => 'Es gibt keinen Artikel mit dieser Nummer.',
 'trad_article_traduction' => 'Alle Fassungen dieses Artikels:',

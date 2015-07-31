@@ -908,8 +908,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
   por eviti maloportunajn
   averto-mesaĝojn.',
 'texte_trop_resultats_auteurs' => 'Tro da rezultoj por "@cherche_auteur@" ; bonvolu fajnigi la serĉokriteriojn.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'Elŝuto de la lasta versio',
 'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan serĉilon,
     vi povas fari serĉprocezojn ĉe retejoj abonligigitaj laŭ du malsamaj manieroj.
@@ -983,7 +981,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_rendez_vous' => 'RENDEVUO:',
 'titre_reparation' => 'Riparo',
 'titre_suivi_petition' => 'Kontrolo de la petskriboj',
-'titre_type_urls' => 'Tipo de retadreso',
 'tls_ldap' => 'Transŝuta tavolsekureco (TLS):',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => 'Ĉiuj versioj de tiu ĉi artikolo :',

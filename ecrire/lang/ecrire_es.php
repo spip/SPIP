@@ -855,8 +855,6 @@ Si el problema persiste, contacta a tu hospedaje.</p>',
 'texte_travail_collaboratif' => 'Es frecuente que varios redactores y redactoras trabajen sobre el mismo artículo, el sistema puede mostrar los artículos recientemente «abiertos» para  evitar las modificaciones simultáneas.
  Esta opción está desactivada por omisión para evitar mostrar mensajes de advertencia intempestivos.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para la búsqueda de "@cherche_auteur@". Precise los criterios.',
-'texte_type_urls' => 'Abajo puedes elegir el modo de calcular la dirección de las páginas.',
-'texte_type_urls_attention' => 'Atención, este ajuste sólo funcionará si el fichero @htaccess@ está correctamente instalado en la raíz del sitio web.',
 'texte_unpack' => 'Descarga de la última versión',
 'texte_utilisation_moteur_syndiques' => 'Cuando utilizas el motor de búsqueda integrado
     en SPIP, puedes efectuar las búsquedas sobre los sitios y
@@ -923,7 +921,6 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_rendez_vous' => 'CITAS:',
 'titre_reparation' => 'Reparación',
 'titre_suivi_petition' => 'Gestión de las peticiones',
-'titre_type_urls' => 'Tipo de direcciones URL',
 'tls_ldap' => 'Transport Layer Security:',
 'trad_article_inexistant' => 'No hay ningún artículo con ese número.',
 'trad_article_traduction' => 'Todas las versiones de este artículo:',

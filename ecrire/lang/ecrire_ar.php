@@ -926,8 +926,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 لتجنب عرض رسائل تحذير
 مفاجئة.',
 'texte_trop_resultats_auteurs' => 'تم العثور على عدد كبير جداً من النتائج لـ "@cherche_auteur@"، الرجاء زيادة دقة البحث.',
-'texte_type_urls' => 'يمكنك اختيار أسلوب حساب عناوين الصفحات.',
-'texte_type_urls_attention' => 'تنبيه، لن يعمل هذا الاعداد الا اذا كان ملف @htaccess@ مثبتاً بشكل سليم في أصل الموقع.',
 'texte_unpack' => 'تحميل الإصدار الأخير',
 'texte_utilisation_moteur_syndiques' => 'عندما تستخدم محرك البحث المدمج
 في SPIP، يمكنك تنفيذ عمليات بحث في المواقع
@@ -1002,7 +1000,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_rendez_vous' => 'مواعيد:',
 'titre_reparation' => 'إصلاح',
 'titre_suivi_petition' => 'متابعة العرائض',
-'titre_type_urls' => 'نوع عناوين URL',
 'tls_ldap' => 'أمان طبقة النقل:',
 'trad_article_inexistant' => 'لا يوجد اي مقال يحمل هذا الرقم.',
 'trad_article_traduction' => 'كل اصدارات هذا المقال:',

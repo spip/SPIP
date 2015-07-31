@@ -916,8 +916,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
   Tato možnost je standardně vypnuta, aby se předešlo
   zobrazování zbytečných varovných hlášení.',
 'texte_trop_resultats_auteurs' => 'Pro "@cherche_auteur@" bylo zobrazeno příliš mnoho výsledků. Zpřesněte vyhledávací kritéria.',
-'texte_type_urls' => 'You can choose, below, the calculation mode of the pages URLs.', # NEW
-'texte_type_urls_attention' => 'Warning, this setting will only work if the file @htaccess@ is correctly installed at the site\'s root.', # NEW
 'texte_unpack' => 'odesílání/stahování poslední verze',
 'texte_utilisation_moteur_syndiques' => 'Vestavěný prohledávací nástroj systému SPIS,
     můžete vyhledávat i na syndikovaných webech a v syndikovaných
@@ -987,7 +985,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_rendez_vous' => 'SCHŮZKA:',
 'titre_reparation' => 'Oprava',
 'titre_suivi_petition' => 'Sledování peticí',
-'titre_type_urls' => 'Typ adres URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Článek tohoto čísla neexistuje.',
 'trad_article_traduction' => 'Dostupné překlady tohoto článku:',
