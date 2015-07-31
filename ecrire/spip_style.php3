@@ -237,3 +237,5 @@ table.spip td {
 	text-align: left;
 	vertical-align: center;
 }
+
+BODY,DIV,TD,TR,INPUT,SELECT,OPTION,TEXTAREA { font-family: Verdana,Arial,Helvetica,sans-serif; }
