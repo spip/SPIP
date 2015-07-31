@@ -1018,6 +1018,18 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_referers_temp ADD maj TIMESTAMP");
 	}
 
+	// l'upgrade < 1.462 ci-dessus etait fausse, d'ou correctif
+	if (($version_installee < 1.464) AND ($version_installee >= 1.462)) {
+		$res = spip_query("SELECT id_type, extension FROM spip_types_documents WHERE id_type NOT IN (1,2,3)");
+		while ($row = mysql_fetch_array($res)) {
+			$extension = $row['extension'];
+			$id_type = $row['id_type'];
+			spip_query("UPDATE spip_documents SET id_type=$id_type
+				WHERE fichier like '%.$extension'");
+		}
+	}
+	exit;
+
 	//
 	// Mettre a jour le numero de version installee
 	//
