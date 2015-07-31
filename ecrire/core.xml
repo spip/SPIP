@@ -243,6 +243,7 @@
 		<action>f_jQuery_prive</action>
 		<inclure>inc/pipelines_ecrire.php</inclure>
 	</pipeline>
+	<pipeline><nom>header_prive_css</nom><action></action></pipeline>
 	<pipeline><nom>image_preparer_filtre</nom><action></action></pipeline>
 	<pipeline><nom>insert_head</nom>
 		<action>f_jQuery</action>
