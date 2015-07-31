@@ -50,11 +50,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // le fichier de verrouillage (avec la valeur absolue du code de retour).
 // La fonction executant la tache est un homonyme de prefixe "cron_"
 // Le fichier homonyme de prefixe "inc_" et de suffixe _EXTENSION_PHP
-// est automatiquement charge et est supposee la definir si ce n'est fait ici.
+// est automatiquement charge si besoin, et est supposee la definir si ce
+// n'est fait ici.
 
 function spip_cron($taches = array()) {
 	$t = time();
-
 	if (@file_exists(_FILE_MYSQL_OUT)
 	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
 		return;
@@ -71,7 +71,6 @@ function spip_cron($taches = array()) {
 	foreach ($taches as $nom => $periode) {
 		$lock = _DIR_SESSIONS . $nom . '.lock';
 		$date_lock = @filemtime($lock);
-
 		if ($date_lock + $periode < $tmin) {
 			$tmin = $date_lock + $periode;
 			$tache = $nom;
@@ -84,7 +83,6 @@ function spip_cron($taches = array()) {
 		// pour si peu)
 		else if ($date_lock > $t + 3600)
 			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
-
 	}
 	if (!$tache) return;
 
@@ -160,8 +158,10 @@ function taches_generales() {
 		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
 	// stats : toutes les 5 minutes on peut vider un panier de visites
-	if ($GLOBALS['meta']["activer_statistiques"] == "oui")
+	if ($GLOBALS['meta']["activer_statistiques"] == "oui") {
 		$taches_generales['visites'] = 300; 
+		$taches_generales['popularites'] = 7200; # calcul lourd
+	}
 
 	// syndication
 	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
@@ -222,11 +222,18 @@ function cron_visites($t) {
 	// pour etre prioritaire lors du cron suivant
 	if ($encore)
 		return (0 - $t);
-	else {
-		calculer_popularites();
-		return 1;
-	}
+
+	return 1;
 }
+
+//
+// Applique la regle de decroissance des popularites
+//
+function cron_popularites($t) {
+	calculer_popularites();
+	return 1;
+}
+
 
 //
 // Mail des nouveautes
