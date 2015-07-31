@@ -4,3 +4,4 @@ session_*
 .htpasswd-admin
 spip.log*
 inc_meta_cache.php3
+.index
