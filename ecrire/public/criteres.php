@@ -496,6 +496,9 @@ function critere_branche_dist($idb, &$boucles, $crit){
  * Compile le critère {logo} 
  *
  * Liste les objets qui ont un logo
+ *
+ * @uses lister_objets_avec_logos()
+ *     Pour obtenir les éléments qui ont un logo
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette

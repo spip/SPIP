@@ -28,23 +28,47 @@ include_spip('public/parametrer'); // charger les fichiers fonctions
  * - on inclue tous les fichiers fonctions des plugins et du skel
  * - on appelle chercher_filtre
  *
- * @param string $fonc
- * @param string $default
- * @return string
+ * Pour éviter de perdre le texte si le filtre demandé est introuvable,
+ * on transmet `filtre_identite_dist` en filtre par défaut.
+ *
+ * @uses filtre_identite_dist() Comme fonction par défaut
+ * 
+ * @param string $fonc Nom du filtre
+ * @param string $default Filtre par défaut
+ * @return string Fonction PHP correspondante du filtre
  */
 function charger_filtre($fonc, $default='filtre_identite_dist') {
 	include_spip('public/parametrer'); // inclure les fichiers fonctions
 	return chercher_filtre($fonc, $default);
 }
 
+/**
+ * Retourne le texte tel quel
+ *
+ * @param string $texte Texte
+ * @return string Texte
+**/
 function filtre_identite_dist($texte){return $texte;}
 
 /**
- * http://doc.spip.org/@chercher_filtre
+ * Cherche un filtre
  *
+ * Pour une filtre `F` retourne la première fonction trouvée parmis :
+ *
+ * - filtre_F
+ * - filtre_F_dist
+ * - F
+ *
+ * Peut gérer des appels par des fonctions statiques de classes tel que `Foo::Bar`
+ * 
+ * En absence de fonction trouvée, retourne la fonction par défaut indiquée.
+ * 
  * @param string $fonc
+ *     Nom du filtre
  * @param null $default
+ *     Nom du filtre appliqué par défaut si celui demandé n'est pas trouvé
  * @return string
+ *     Fonction PHP correspondante du filtre demandé
  */
 function chercher_filtre($fonc, $default=NULL) {
 	if (!$fonc) return $default;

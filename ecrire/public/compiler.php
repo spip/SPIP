@@ -371,14 +371,15 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
  * Compilation d'une boucle non recursive.
  * 
  * La constante donne le cadre systématique du code:
- * %s1: initialisation des arguments de calculer_select
- * %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
- * %s3: initialisation du sous-tableau Numrows[id_boucle]
- * %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
- * %s5: boucle while sql_fetch ou str_repeat si corps monotone
- * %s6: restauration de la langue
- * %s7: liberation de la ressource, en tenant compte du serveur SQL 
- * %s8: code de trace eventuel avant le retour
+ *
+ * - %s1: initialisation des arguments de calculer_select
+ * - %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
+ * - %s3: initialisation du sous-tableau Numrows[id_boucle]
+ * - %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
+ * - %s5: boucle while sql_fetch ou str_repeat si corps monotone
+ * - %s6: restauration de la langue
+ * - %s7: liberation de la ressource, en tenant compte du serveur SQL 
+ * - %s8: code de trace eventuel avant le retour
 **/
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
@@ -562,12 +563,12 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
  * Calcule le code PHP d'une boucle contenant les informations qui produiront une requête SQL
  *
  * Le code produit est un tableau associatif $command contenant les informations
- * pour que la boucle produise ensuite sa requête, tel que $command['from'] = 'spip_articles';
+ * pour que la boucle produise ensuite sa requête, tel que `$command['from'] = 'spip_articles';`
  *
  * @param Boucle $boucle
- * 		AST de la boucle 
+ *     AST de la boucle 
  * @return string
- * 		Code PHP compilé définissant les informations de requête
+ *     Code PHP compilé définissant les informations de requête
 **/
 function calculer_requete_sql($boucle)
 {
@@ -673,6 +674,7 @@ function reconstruire_contexte_compil($context_compil)
  * @param string $val
  *    Code PHP décrivant la valeur à affecter
  * @return array
+ * 
  *    - index 0 : Code pour une affectation statique. Si non rempli, la propriété devra
  *                être ré-affectée à chaque appel de la boucle.
  *    - index 1 : Code de l'affectation

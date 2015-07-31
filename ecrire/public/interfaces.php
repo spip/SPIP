@@ -38,6 +38,7 @@ class Contexte {
 	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
+	 * 
 	 * - nom : Nom du fichier de cache
 	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
 	 * - sourcefile : Chemin du squelette
@@ -343,6 +344,7 @@ class Boucle {
 	 * 
 	 * Ces 3 valeurs sont des expressions PHP. L'index 0 désigne l'opérateur
 	 * à réaliser tel que :
+	 * 
 	 * - "'='" , "'>='", "'<'", "'IN'", "'REGEXP'", "'LIKE'", ... :
 	 *    val1 et val2 sont des champs et valeurs à utiliser dans la comparaison
 	 *    suivant cet ordre : "val1 operateur val2".
@@ -426,6 +428,7 @@ class Boucle {
 	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
+	 * 
 	 * - nom : Nom du fichier de cache
 	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
 	 * - sourcefile : Chemin du squelette
@@ -543,6 +546,7 @@ class Champ {
 
 	/**
 	 * Arguments et filtres explicites sur la balise
+	 * 
 	 * - $param[0] contient les arguments de la balise
 	 * - $param[1..n] contient les filtres à appliquer à la balise
 	 * @var array */
@@ -587,6 +591,7 @@ class Champ {
 	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
+	 * 
 	 * - nom : Nom du fichier de cache
 	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
 	 * - sourcefile : Chemin du squelette
