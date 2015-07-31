@@ -482,7 +482,7 @@ function vider_url($url, $entites = true) {
 // http://doc.spip.org/@url_var_recherche
 function url_var_recherche($url) {
 	if (_request('recherche')
-	AND (strpos($url,"var_recherche")!==false)) {
+	AND (strpos($url,"var_recherche")===false)) {
 
 		list ($url,$ancre) = preg_split(',#,', $url, 2);
 		if ($ancre) $ancre='#'.$ancre;
