@@ -121,7 +121,7 @@ function info_plugin_normalise_necessite($necessite) {
 				$res['compatible'] = $v;
 			} else if (preg_match(',^lib:\s*([^\s]*),i', $id, $r)) {
 				$res['lib'][] = array('nom' => $r[1], 'id' => $r[1], 'lien' => $need['src']);
-			} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v);
+			} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v, 'compatibilite' => $v);
 		}
 	}
 	
@@ -134,7 +134,8 @@ function info_plugin_normalise_utilise($utilise) {
 	if (is_array($utilise)) {
 		foreach($utilise as $need){
 			$id = $need['id'];
-		$res[]= array('nom' => $id, 'id' => $id, 'version' => $need['version']);
+			$v = $need['version'];
+			$res[]= array('nom' => $id, 'id' => $id, 'version' => $v, 'compatibilite' => $v);
 		}
 	}
 	return $res;
