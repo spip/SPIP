@@ -266,6 +266,10 @@ dist/prive/article_infos_fonctions.php -text
 dist/prive/auteur_infos.html -text
 dist/prive/breve_infos.html -text
 dist/prive/breve_infos_fonctions.php -text
+dist/prive/contenu/article.html -text
+dist/prive/contenu/breve.html -text
+dist/prive/contenu/rubrique.html -text
+dist/prive/contenu/site.html -text
 dist/prive/rubrique_infos.html -text
 dist/prive/site_infos.html -text
 dist/prive/site_infos_fonctions.php -text
