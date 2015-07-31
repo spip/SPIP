@@ -299,7 +299,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 		$corps .= 
 		  (($boucle->lang_select != 'oui') ? 
-			"\t\tif (isset(\$GLOBALS['forcer_lang']) AND !\$GLOBALS['forcer_lang'])\n\t " : '')
+			"\t\tif (!(isset(\$GLOBALS['forcer_lang']) AND \$GLOBALS['forcer_lang']))\n\t " : '')
 		  . "\t\tif (\$x = "
 		  . index_pile($id_boucle, 'lang', $boucles)
 		  . ') $GLOBALS["spip_lang"] = $x;';
