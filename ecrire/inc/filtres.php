@@ -1743,7 +1743,7 @@ function url_absolue_css ($css) {
 	
 	$f = basename($css,'.css');
 	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
+		. preg_replace(",^(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
 		. '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
