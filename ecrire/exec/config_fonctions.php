@@ -175,8 +175,8 @@ function vignettes_config()
 					$image_process = 'non';
 					break;
 			}
-		ecrire_meta('formats_graphiques', $formats_graphiques);
-		ecrire_meta('image_process', $image_process);
+		ecrire_meta('formats_graphiques', $formats_graphiques,'non');
+		ecrire_meta('image_process', $image_process,'non');
 		ecrire_metas();
 	} else 	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
 
