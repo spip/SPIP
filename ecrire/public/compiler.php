@@ -152,7 +152,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	}
 
 // Gerer ajax
-	$ajax = ($ajax ? "'ajax'=>true":"");
+	$ajax = ($ajax ? "\'ajax\'=>true":"");
 
 	$code =
 		($fichier ?
