@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_supprimer_document_dist($id_document) {
 	if (!autoriser('supprimer','document',$id_document))
 		return false;
-		
+
 	include_spip('inc/documents');
 	if (!$doc = sql_fetsel('*', 'spip_documents', 'id_document='.$id_document))
 		return false;
@@ -39,6 +39,17 @@ function action_supprimer_document_dist($id_document) {
 	else spip_unlink(get_spip_doc($doc['fichier']));
 
 	sql_delete('spip_documents', 'id_document='.$id_document);
+
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'operation' => 'supprimer_document',
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+			),
+			'data' => null
+		)
+	);
 }
 
 ?>

@@ -38,6 +38,19 @@ function supprimer_lien_document($id_document, $objet, $id_objet) {
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
 	sql_updateq("spip_documents", array('id_vignette' => 0), "id_vignette=".$id_document);
 
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'operation' => 'delier_document',
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+				'objet' => $objet,
+				'id' => $id_objet
+			),
+			'data' => null
+		)
+	);
+
 	// On supprime ensuite s'il est orphelin
 	// (autorisation verifiee dans l'action)
 	$supprimer_document = charger_fonction('supprimer_document','action');

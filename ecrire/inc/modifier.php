@@ -195,6 +195,18 @@ function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_obj
 			if (!sql_updateq("spip_documents_liens", array("vu" => 'oui'), "id_objet=$id AND objet=".sql_quote($type)." AND id_document=".$row['id_document']) OR
 			!sql_getfetsel("id_document", "spip_documents_liens", "id_document=".$row['id_document']." AND id_objet=$id AND objet=".sql_quote($type))) {
 				sql_insertq("spip_documents_liens", array('id_objet' => $id, 'objet' => $type, 'id_document' => $row['id_document'], 'vu' => 'oui'));
+				pipeline('post_edition',
+					array(
+						'args' => array(
+							'operation' => 'lier_document',
+							'table' => 'spip_documents',
+							'id_objet' => $row['id_document'],
+							'objet' => $type,
+							'id' => $id
+						),
+						'data' => null
+					)
+				);
 			}
 		}
 	}
@@ -363,7 +375,7 @@ function revision_forum($id_forum, $c=false) {
 	// s'il y a vraiment eu une modif, on
 	// enregistre le nouveau date_thread,
 	// si le message est bien publie ou si c'est un thread non public
-	if ($r AND 
+	if ($r AND
 		($t['statut'] == 'publie' OR !sql_countsel("spip_forum", "statut='publie' AND id_thread=".intval($id_thread)))) {
 		// on ne stocke ni le numero IP courant ni le nouvel id_auteur
 		// dans le message modifie (trop penible a l'usage) ; mais du
