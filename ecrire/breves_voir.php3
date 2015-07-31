@@ -63,8 +63,8 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	if ($row = spip_fetch_array($result_lang_rub)) {
 		$langue_new = $row["lang"];
 	}
-	$langue_choisie_new = 'non';
 	if (!$langue_new) $langue_new = lire_meta('langue_site');
+	$langue_choisie_new = 'non';
 
 	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut, lang, langue_choisie) VALUES ('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')";
 	$result=spip_query($query);
@@ -309,12 +309,13 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 	echo bouton_block_invisible('languesbreve');
 	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
 	echo _T('titre_langue_breve');
+	echo "&nbsp; (".traduire_nom_langue($langue_breve).")";
 	echo "</B></FONT>";
 	echo "</TD></TR></TABLE>";
 
 	echo debut_block_invisible('languesbreve');
 	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	echo menu_langues('changer_lang', $langue_breve, _T('info_multi_cet_breve').' ', $herit);
+	echo menu_langues('changer_lang', $langue_breve, _T('info_multi_cet_breve').' ', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();
 
