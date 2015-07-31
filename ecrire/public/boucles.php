@@ -45,7 +45,8 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!isset($boucle->modificateur['criteres']['statut'])) {
+	if (!isset($boucle->modificateur['criteres']['statut'])
+    AND !isset($boucle->modificateur['tout'])) {
 		if (!$GLOBALS['var_preview']) {
 			if ($GLOBALS['meta']["post_dates"] == 'non')
 				array_unshift($boucle->where,array("'<'", "'$id_table" . ".date'", "sql_quote(quete_date_postdates())"));
