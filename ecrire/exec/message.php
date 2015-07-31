@@ -354,7 +354,9 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest);
 
 	// reponses et bouton poster message
-
+	// appel de la fonction discuter() de l'extension forum, si presente uniquement
+	// a revoir au profit d'un pipeline
+	// ou a evacuer completement, meme (formu sur messages = messages de reponse)
 	$discuter = charger_fonction('discuter', 'inc', true);
 	if ($discuter) echo $discuter($id_message, 'message', 'id_message', "perso");
   }
