@@ -26,9 +26,9 @@ if ($f = find_in_path('mes_fonctions.php')) {
 	@include_once ($f); 
 }
 
-if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
+if (@is_readable(_CACHE_PLUGINS_FCT)){
 	// chargement optimise precompile
-	include_once(_DIR_TMP."charger_plugins_fonctions.php");
+	include_once(_CACHE_PLUGINS_FCT);
 }
 
 // par defaut tout est exporte sauf les tables ci-dessous

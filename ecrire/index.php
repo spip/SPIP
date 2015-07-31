@@ -113,7 +113,7 @@ elseif ($exec!='upgrade'
 AND !$var_auth
 AND !_DIR_RESTREINT
 AND autoriser('configurer')
-AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
+AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
 		if (!@is_readable($fichier)) {
