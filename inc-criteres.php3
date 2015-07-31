@@ -537,25 +537,6 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			}
 
 		} // fin du if sur les restrictions de valeurs
-
-		// Special rubriques
-		else if ($param == 'meme_parent') {
-			$boucle->where[] = "$id_table.id_parent='\"." .
-				calculer_argument_precedent($idb, 'id_parent', $boucles) . ".\"'";
-			if ($type == 'forums') {
-				$boucle->where[] = "$id_table.id_parent > 0";
-				$boucle->plat = true;
-			}
-		}
-		else if (ereg("^branche *(\??)", $param, $regs)) {
-			$c = "calcul_mysql_in('$id_table.id_rubrique',
-			calcul_branche(" . calculer_argument_precedent($idb, 'id_rubrique',
-			$boucles) . "), '')";
-			if (!$regs[1])
-				$boucle->where[] = "\". $c .\"" ;
-			else
-				$boucle->where[] = "\".(".calculer_argument_precedent($idb, 'id_rubrique', $boucles)."? $c : 1).\"";
-		}
 }
 
 
