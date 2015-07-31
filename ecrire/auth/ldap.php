@@ -15,11 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // Attributs LDAP correspondants a ceux de SPIP, notamment pour le login
-$GLOBALS['ldap_attributes'] = array(
-	'login' => array('sAMAccountName', 'uid', 'login', 'userid', 'cn','sn'),
-	'nom' => "cn",
-	'email' => "mail", 
-	'bio' => "description");
+// ne pas ecraser une definition perso dans mes_options
+if (!isset($GLOBALS['ldap_attributes']) OR !is_array($GLOBALS['ldap_attributes'])){
+	$GLOBALS['ldap_attributes'] = array(
+		'login' => array('sAMAccountName', 'uid', 'login', 'userid', 'cn','sn'),
+		'nom' => "cn",
+		'email' => "mail",
+		'bio' => "description");
+}
 
 /**
  * Fonction principale d'authentification du module auth/ldap
