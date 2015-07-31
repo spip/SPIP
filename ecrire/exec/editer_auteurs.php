@@ -96,7 +96,7 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 	. ajouter_auteurs_articles($id_article, $les_auteurs, $bouton_creer_auteur)
 	."</div>\n"
 	. $ajouter;
-	if ($flag_editable!='ajax')
+	if ($flag_editable!=='ajax')
 		$res .= fin_block();
  }
  
