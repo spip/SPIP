@@ -131,32 +131,38 @@ function balise_URL_SITE_SPIP_dist($p) {
 // #URL_PAGE{backend} -> backend.php3 ou ?page=backend selon les cas
 // Pour les pages qui commencent par "spip_", il faut eventuellement
 // aller chercher spip_action.php?action=xxxx
-//
+// Sans argument, #URL_PAGE retourne l'URL courante.
+// #URL_PAGE* retourne l'URL sans convertir les & en &amp;
 // http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
-	$p->code = interprete_argument_balise(1,$p);
+	$code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 
 	$s = !$p->id_boucle ? '' :  $p->boucles[$p->id_boucle]->sql_serveur;
 
 	if ($s) {
 		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
-			$p->code = "404";
+			$code = "404";
 		} else {
 			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 			// elle devra aussi traiter le cas derogatoire type=page
 			if (function_exists($f = 'generer_generer_url_'.$s)){
-				if ($args) $p->code .= ", $args";
-				$p->code = $f('page', $p->code, $s);
+				if ($args) $code .= ", $args";
+				$code = $f('page', $code, $s);
 				return $p;
 			}
 			$s = 'connect=' .  addslashes($s);
 			$args = $args ? "$args . '&$s'" : "'$s'";
 		}
 	}
-	if (!$args) $args = "''";
-	$p->code = 'generer_url_public(' . $p->code . ", $args)";
+	if (!$code) {
+	  $code = "''";
+	  $args = "preg_replace(array(',^.*[?],', ',^./,'), '', self('&'))";
+	} elseif (!$args) $args = "''";
+
+	$noentities = $p->etoile ? ", true" : '';
+	$p->code = "generer_url_public($code, $args$noentities)";
 	#$p->interdire_scripts = true;
 	return $p;
 }
