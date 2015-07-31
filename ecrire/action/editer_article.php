@@ -125,7 +125,7 @@ function revisions_articles ($id_article, $c=false) {
 		$indexation = true;
 	}
 
-	return modifier_contenu('article', $id_article,
+	$r = modifier_contenu('article', $id_article,
 		array(
 			'champs' => array(
 				'surtitre', 'titre', 'soustitre', 'descriptif',
@@ -133,10 +133,15 @@ function revisions_articles ($id_article, $c=false) {
 			),
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
-			'indexation' => $indexation,
-			'supplement_sql' => 'date_modif=NOW()'
+			'indexation' => $indexation
 		),
 		$c);
+
+	if ($r) {
+		spip_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
+	}
+	
+	return $r;
 }
 
 

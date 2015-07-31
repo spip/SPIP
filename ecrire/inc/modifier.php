@@ -17,7 +17,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // $options est un array() avec toutes les options
 //
 // Pour l'instant fonctionne pour les types :
-//   article, document
+//   article, auteur, document, forum
+// renvoie false si rien n'a ete modifie, true sinon
 //
 // http://doc.spip.org/@modifier_contenu
 function modifier_contenu($type, $id, $options, $c=false) {
@@ -64,10 +65,8 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	foreach ($champs as $champ => $val)
 		$update[] = $champ . '=' . _q($val);
 
-	if (!count($update)) return;
-
-	if ($options['supplement_sql'])
-		$update[] = $options['supplement_sql'];
+	if (!count($update))
+		return false;
 
 	spip_query($q = "UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
 
@@ -101,6 +100,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		)
 	);
 
+	return true;
 }
 
 // http://doc.spip.org/@revision_document
@@ -118,7 +118,6 @@ function revision_document($id_document, $c=false) {
 
 // http://doc.spip.org/@revision_auteur
 function revision_auteur($id_auteur, $c=false) {
-	include_spip('inc/modifier');
 
 	return modifier_contenu('auteur', $id_auteur,
 		array(
@@ -127,6 +126,53 @@ function revision_auteur($id_auteur, $c=false) {
 		),
 		$c);
 
+}
+
+// Quand on edite un forum, on tient a conserver l'original
+// sous forme d'un forum en reponse, de statut 'original'
+function conserver_original($id_forum) {
+	$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent="._q($id_forum)." AND statut='original'");
+
+	if (spip_num_rows($s))
+		return true;
+
+	// recopier le forum
+	$t = spip_fetch_array(
+		spip_query("SELECT date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread FROM spip_forum WHERE id_forum="._q($id_forum))
+	);
+
+	if ($t
+	AND spip_query("INSERT spip_forum (date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread) VALUES (".join(',',array_map('_q', $t)).")")) {
+		$id_copie = spip_insert_id();
+		spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
+		return true;
+	}
+
+	return false;
+}
+
+// http://doc.spip.org/@revision_auteur
+function revision_forum($id_forum, $c=false) {
+
+	if (!conserver_original($id_forum)) {
+		spip_log("erreur de sauvegarde de l'original");
+		return;
+	}
+
+	$r = modifier_contenu('forum', $id_forum,
+		array(
+			'champs' => array('titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site', 'ip'),
+			'nonvide' => array('titre' => _T('info_sans_titre'))
+		),
+		$c);
+
+	// s'il y a vraiment eu une modif, on stocke le numero IP courant
+	// ainsi que le nouvel id_auteur dans le message modifie
+	if ($r) {
+		spip_query("UPDATE spip_forum SET ip="._q($GLOBALS['ip']).", id_auteur="._q($GLOBALS['auteur_session']['id_auteur'])." WHERE id_forum="._q($id_forum));
+	}
+
+	return $r;
 }
 
 
