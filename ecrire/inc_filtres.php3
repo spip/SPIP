@@ -357,4 +357,41 @@ function centrer($letexte) {
 	return aligner($letexte,'center');
 }
 
+// utilise avec ob_start() et ob_get_contents() pour
+// mettre en rouge les mots passes dans $var_s
+function mots_surligne($page) {
+	global $var_s;
+
+	// s'il y a des accents dans les mots, nettoyer la page
+	// ne prendre en consideration que les mots > 3 lettres
+	// et pas plus de 5 mots
+	$trans = get_html_translation_table(HTML_ENTITIES);
+	$mots = split(" +",$var_s);
+	while (list(,$mot) = each ($mots)) {
+		if (strlen($mot)>3) {
+			if ($trans) {
+				$motx = strtr($mot, $trans);
+				if ($motx != $mot) {
+					$trans = array_flip($trans);
+					$page = strtr($page,$trans);
+					$trans = false;
+				}
+			}
+			$mots_surligne[] = $mot;
+			if ($nb_mots ++ > 4) break;
+		}
+	}
+
+	// remplacer 4 occurrences maxi de chaque mot
+	reset ($mots_surligne);
+	if ($mots_surligne AND eregi('<html', $page)) {
+		while (list(,$mot) = each($mots_surligne)) {
+			$regexp = "/(>([^<]*[^[:alnum:]])?)(($mot)"."[[:alnum:]]*?)/Uis";
+			$page = preg_replace($regexp,"$1<span class='spip_surligne'>$3</span>", $page, 4);
+		}
+	}
+
+	return $page;
+}
+
 ?>
