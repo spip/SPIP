@@ -134,7 +134,9 @@ function avoir_visiteurs($past=false, $accepter=true) {
 	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
 	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
 	if (!$past) return false;
-	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
+	return sql_countsel('spip_auteurs',
+	                    "statut NOT IN ('0minirezo','1comite', '5poubelle')
+	                    AND (statut<>'nouveau' OR prefs NOT IN ('0minirezo','1comite', '5poubelle'))");
 }
 
 /**

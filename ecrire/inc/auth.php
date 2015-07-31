@@ -38,26 +38,6 @@ function auteurs_autorises($in, $cond='')
 	  . (!$in ? '' : (" AND ". sql_in("id_auteur", $in, 'NOT')));
 }
 
-// Un nouvel inscrit prend son statut definitif a la 1ere connexion.
-// Le statut a ete memorise dans bio (cf formulaire_inscription).
-// On le verifie, car la config a peut-etre change depuis,
-// et pour compatibilite avec les anciennes versions n'utilisait pas "bio".
-
-// http://doc.spip.org/@acces_statut
-function acces_statut($id_auteur, $statut, $bio)
-{
-	if ($statut != 'nouveau') return $statut;
-	include_spip('inc/filtres');
-	if (!($s = tester_config('', $bio))) return $statut;
-	include_spip('action/editer_auteur');
-	// en deux fois pour changer d'abord le statut, puis la bio
-	auteur_modifier($id_auteur,array('statut'=> $s));
-	auteur_modifier($id_auteur, array('bio'=>''));
-	include_spip('inc/session');
-	session_set('statut',$s);
-
-	return $s;
-}
 
 // Fonction d'authentification. Retourne:
 //  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
@@ -210,15 +190,23 @@ function auth_init_droits($row)
 {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique, $connect_login, $connect_id_auteur;
 
+	if ($row['statut']=='nouveau'){
+		include_spip('action/inscrire_auteur');
+		$row = confirmer_statut_inscription($row);
+	}
+
 	$connect_id_auteur = $row['id_auteur'];
 	$connect_login = $row['login'];
-	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
-
+	$connect_statut = $row['statut'];
 
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
+
 	$r = @unserialize($row['prefs']);
-	$GLOBALS['visiteur_session']['prefs'] =
-	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
+	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : array());
+	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])){
+		$GLOBALS['visiteur_session']['prefs']['couleur'] = 1;
+		$GLOBALS['visiteur_session']['prefs']['display'] = 0;
+	}
 
 	// au cas ou : ne pas memoriser les champs sensibles
 	unset($GLOBALS['visiteur_session']['pass']);
@@ -447,26 +435,26 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 	return $auteur;
 }
 
- /**
-  * Loger un auteur suite a son identification
-  *
-  * @param array $auteur
-  */
- function auth_loger($auteur){
+/**
+* Loger un auteur suite a son identification
+*
+* @param array $auteur
+*/
+function auth_loger($auteur){
 	if (!is_array($auteur) OR !count($auteur))
 		return false;
 
-	$session = charger_fonction('session', 'inc');
-	$session($auteur);
-	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
-	$p['cnx'] = ($auteur['cookie'] == 'oui') ? 'perma' : '';
-	$p = array('prefs' => serialize($p));
-	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
+	// initialiser et poser le cookie de session
+	unset($_COOKIE['spip_session']);
+	auth_init_droits($auteur);
 
-	if ($auteur['statut'] == 'nouveau') {
-		$session(); // charger la session car on va la modifier
-		$auteur['statut'] = acces_statut($auteur['id_auteur'], $auteur['statut'], $auteur['bio']);
-	}
+	// initialiser les prefs
+	$p = $GLOBALS['visiteur_session']['prefs'];
+	$p['cnx'] = ($auteur['cookie'] == 'oui') ? 'perma' : '';
+
+	sql_updateq('spip_auteurs',
+	            array('prefs' => serialize($p)),
+	            "id_auteur=" . $auteur['id_auteur']);
 
 	// Si on est admin, poser le cookie de correspondance
 	include_spip('inc/cookie');
