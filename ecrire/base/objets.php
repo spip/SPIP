@@ -253,6 +253,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_objet' => 'public:rubrique',
 				'texte_modifier' => 'icone_modifier_rubrique',
 				'texte_creer' => 'icone_creer_rubrique',
+				'texte_ajouter' => 'titre_ajouter_une_rubrique',
+				'texte_creer_associer' => 'creer_et_associer_une_rubrique',
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
 				'info_nb_objets' => 'info_nb_rubriques',

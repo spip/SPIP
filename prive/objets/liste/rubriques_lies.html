@@ -4,38 +4,43 @@
 	id_rubrique,1,
 	points,-1
 }})
-]<B_liste_rub>
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<B_liste_rub>
 #ANCRE_PAGINATION
-<div class="liste-objets rubriques">
+<div class="liste-objets liste-objets-lies rubriques">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_rubrique,info_nb_rubriques}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
 			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
-			<th class='langue' scope='col'></th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique?}{id_parent?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique IN #GET{selection}}{tout}{where?}{statut?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][(#ID_RUBRIQUE|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='picto'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
-			<td class='langue'></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
 				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
 				#ID_RUBRIQUE
 			})]</td>
+			<td class='action'><button class="button link delete" name="supprimer_lien[rubrique-#ID_RUBRIQUE-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_rubrique:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
 		</tr>
 	</BOUCLE_liste_rub>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}rubrique-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:lien_retirer_toutes_rubriques:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
-</B_liste_rub>[
-<div class="liste-objets rubriques caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_rub>
+</B_liste_rub>
+<div class="liste-objets liste-objets-lies rubriques caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:info_aucun_rubrique:>}) ]</strong>
+</div>
+<//B_liste_rub>
