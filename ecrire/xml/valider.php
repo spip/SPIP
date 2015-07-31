@@ -307,6 +307,88 @@ function phraserTout($phraseur, $data)
 
 }
 
+// http://doc.spip.org/@emboite_texte
+function emboite_texte($res, $fonc='',$self='')
+{
+	list($texte, $errs) = $res;
+	if (!$texte)
+		return array(ancre_texte('', array('','')), false);
+	if (!$errs)
+		return array(ancre_texte($texte, array('', '')), true);
+
+	if (!isset($GLOBALS['debug_objets'])) {
+
+		$colors = array('#e0e0f0', '#f8f8ff');
+		$encore = count_occ($errs);
+		$encore2 = array();
+		$fautifs = array();
+
+		$err = '<tr><th>'
+		.  _T('numero')
+		. "</th><th>"
+		. _T('occurrence')
+		. "</th><th>"
+		. _T('ligne')
+		. "</th><th>"
+		. _T('colonne')
+		. "</th><th>"
+		. _T('erreur')
+		. "</th></tr>";
+
+		$i = 0;
+		foreach($errs as $r) {
+			$i++;
+			list($msg, $ligne, $col) = $r;
+			spip_log("$r = list($msg, $ligne, $col");
+			if (isset($encore2[$msg]))
+			  $ref = ++$encore2[$msg];
+			else {$encore2[$msg] = $ref = 1;}
+			$err .= "<tr  style='background-color: "
+			  . $colors[$i%2]
+			  . "'><td style='text-align: right'><a href='#debut_err'>"
+			  . $i
+			  . "</a></td><td  style='text-align: right'>"
+			  . "$ref/$encore[$msg]</td>"
+			  . "<td  style='text-align: right'><a href='#L"
+			  . $ligne
+			  . "' id='T$i'>"
+			  . $ligne
+			  . "</a></td><td  style='text-align: right'>"
+			  . $col
+			  . "</td><td>$msg</td></tr>\n";
+			$fautifs[]= array($ligne, $col, $i, $msg);
+		}
+		$err = "<h2 style='text-align: center'>"
+		.  $i
+		. "<a href='#fin_err'>"
+		.  " "._T('erreur_texte')
+		.  "</a></h2><table id='debut_err' style='width: 100%'>"
+		. $err
+		. " </table><a id='fin_err'></a>";
+		return array(ancre_texte($texte, $fautifs), $err);
+	} else {
+		list($msg, $fermant, $ouvrant) = $errs[0];
+		$rf = reference_boucle_debug($fermant, $fonc, $self);
+		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		$err = $msg .
+		  "<a href='#L" . $fermant . "'>$fermant</a>$rf<br />" .
+		  "<a href='#L" . $ouvrant . "'>$ouvrant</a>$ro";
+		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
+	}
+}
+
+// http://doc.spip.org/@count_occ
+function count_occ($regs)
+{
+	$encore = array();
+	foreach($regs as $r) {
+		if (isset($encore[$r[0]]))
+			$encore[$r[0]]++;
+		else $encore[$r[0]] = 1;
+	}
+	return $encore;
+}
+
 // Retourne un tableau formee de la page analysee et du tableau des erreurs,
 // ce dernier ayant comme entrees des sous-tableaux [message, ligne, colonne]
 
