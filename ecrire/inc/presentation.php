@@ -2289,7 +2289,7 @@ if (true /*$gadgets*/) {
 	afficher_menu_rubriques();
 
 //	echo "<div id='nav-recherche' style='width: 450px; visibility: hidden;'></div>";
-	echo "</div></div>";
+	echo "</div>";
 	// FIN GADGET Menu rubriques
 	
 	
@@ -2536,7 +2536,7 @@ if (true /*$gadgets*/) {
 		echo "</div>";
 	
 	
-	echo "</div>";
+	echo "</div></div>";
 	echo "</td></tr></table>";
 
 } // fin des gadgets
