@@ -332,7 +332,7 @@ if (!$relief AND lire_meta('activer_syndic') != 'non') {
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND syndication='off' LIMIT 0,1";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
@@ -369,7 +369,7 @@ if ($relief) {
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(_T('avis_sites_syndiques_probleme'),
-			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND syndication='off' AND statut='publie' ORDER BY nom_site");
+			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
 
 	// Les articles syndiques en attente de validation
@@ -424,7 +424,7 @@ if ($id_parent == "0" AND $id_rubrique != "0" AND $activer_breves!="non"){
 
 if (lire_meta("activer_sites") == 'oui') {
 	include_ecrire("inc_sites.php3");
-	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication != 'off' ORDER BY nom_site");
+	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus') ORDER BY nom_site");
 
 	$proposer_sites=lire_meta("proposer_sites");
 	if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
