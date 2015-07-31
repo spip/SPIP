@@ -151,7 +151,7 @@ define('_EXTENSION_PARTIES', '.gz');
 // et on memorise dans le serveur qu'on va passer a la table suivante.
 
 // http://doc.spip.org/@export_objets
-function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
+function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques) {
 	global $tables_principales;
 
 	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
@@ -163,7 +163,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 	include_spip('inc/meta');
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
-		$string = build_while($debut, $table, $prim);
+		$string = build_while($debut, $table, $prim, $les_rubriques);
 		$cpt++;
 		$debut +=  _EXPORT_TRANCHES_LIMITE;
 		$status_dump = "$gz::$archive::$etape::$cpt";
@@ -197,40 +197,50 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 // Construit la version xml  des champs d'une table
 
 // http://doc.spip.org/@build_while
-function build_while($debut, $table, $prim) {
-	global $connect_toutes_rubriques, $chercher_logo ;
+function build_while($debut, $table, $prim, $les_rubriques) {
+	global  $chercher_logo ;
 
 	$result = spip_query("SELECT * FROM $table LIMIT $debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
-	  if ((!isset($row['impt'])) OR $row['impt']=='oui') {
-			if (!($ok = $connect_toutes_rubriques)) {
-				if (isset($row['id_rubrique']))
-				  $ok = autoriser('publierdans','rubrique',$row['id_rubrique']);
-				elseif (isset($row['id_article']))
-				  $ok = autoriser('modifier','article',$row['id_article']);
-				else $ok = true;
+		if (export_select($row, $les_rubriques)) {
+			$attributs = "";
+			if ($chercher_logo) {
+				if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
+					$attributs .= ' on="' . $logo[3] . '"';
+				if ($logo = $chercher_logo($row[$prim], $prim, 'off'))
+					$attributs .= ' off="' . $logo[3] . '"';
 			}
-			if ($ok) {
-			  $attributs = "";
-				if ($chercher_logo) {
-					if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
-					  $attributs .= ' on="' . $logo[3] . '"';
-					if ($logo = $chercher_logo($row[$prim], $prim, 'off'))
-					  $attributs .= ' off="' . $logo[3] . '"';
-				}
 
-				$string .= "<$table$attributs>\n";
-				foreach ($row as $k => $v) {
-					$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
-			  }
-				$string .= "</$table>\n\n";
+			$string .= "<$table$attributs>\n";
+			foreach ($row as $k => $v) {
+				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
 			}
-	  }
+			$string .= "</$table>\n\n";
+		}
 	}
 	spip_free_result($result);
 	return $string;
+}
+
+// dit si Row est exportable, 
+// en particulier quand on se restreint a un tableau non vide de rubriques
+
+function export_select($row, $les_rubriques) {
+
+	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
+	if (!$les_rubriques) return true;
+	// if (isset($row['id_auteur'])) return false; # pour les ignorer
+	if (!isset($row['id_rubrique'])) {
+		if (isset($row['id_article']))
+			return autoriser('modifier','article',$row['id_article']);
+		if (isset($row['id_breve']))
+			return autoriser('modifier','breve',$row['id_breve']);
+	}
+	if (isset($row['id_article']) OR isset($row['id_breve']))
+		return autoriser('publierdans','rubrique',$row['id_rubrique']);
+	return isset($les_rubriques[$row['id_rubrique']]);
 }
 
 // Conversion texte -> xml (ajout d'entites)
