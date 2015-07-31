@@ -227,6 +227,9 @@ if ($controle_forum AND $id_controle_forum) {
 			case 'valid_forum':
 				changer_statut_forum($id_controle_forum, 'publie');
 				break;
+			// nb : les forums prives (privrac ou prive), une fois effaces
+			// (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
+			// n'est pas effacable
 		}
 
 		if ($redirect)
