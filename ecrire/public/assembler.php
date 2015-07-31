@@ -666,8 +666,12 @@ function page_base_href(&$texte){
 			include_spip('inc/filtres_mini');
 			// ajouter un base qui reglera tous les liens relatifs
 			$base = url_absolue('./');
+			$bbase = "\n<base href=\"$base\" />";
 			if (($pos = strpos($head, '<head>')) !== false)
-				$head = substr_replace($head, "\n<base href=\"$base\" />", $pos+6, 0);
+				$head = substr_replace($head, $bbase, $pos+6, 0);
+			elseif(preg_match(",<head[^>]*>,i",$head,$r)){
+				$head = str_replace($r[0], $r[0].$bbase, $head);
+			}
 			$texte = $head . substr($texte,$poshead);
 			// gerer les ancres
 			$base = $_SERVER['REQUEST_URI'];
