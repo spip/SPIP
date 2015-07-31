@@ -223,7 +223,6 @@ function repercuter_gadgets($id_rubrique) {
 
 	 "
 	jQuery('#boutonbandeautoutsite')
-	.parent()
 	.one('mouseover',function(){
 		changestyle('bandeautoutsite');
 		jQuery('#gadget-rubriques')
@@ -233,7 +232,6 @@ function repercuter_gadgets($id_rubrique) {
 
 	."
 	jQuery('#boutonbandeaunavrapide')
-	.parent()
 	.one('mouseover',function(){
 		changestyle('bandeaunavrapide');
 		jQuery('#gadget-navigation')
@@ -243,7 +241,6 @@ function repercuter_gadgets($id_rubrique) {
 
 	."
 	jQuery('#boutonbandeauagenda')
-	.parent()
 	.one('mouseover',function(){
 		changestyle('bandeauagenda');
 		jQuery('#gadget-agenda')
