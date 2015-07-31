@@ -115,51 +115,54 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 {
 	$ancre = "$action-" . intval($id);
 
-	// Methode traditionnelle
-	if ($_COOKIE['spip_accepte_ajax'] != 1) {
-		if (is_string($corps)) {
+	// Formulaire (POST)
+	// methodes traditionnelle et ajax a unifier...
+	if (is_string($corps)) {
+
+		// Methode traditionnelle
+		if ($_COOKIE['spip_accepte_ajax'] != 1) {
 			return redirige_action_auteur($action,
 				$id,
 				$script,
 				"$args#$ancre",
 				$corps,
 				"\nmethod='post'");
-		} else {
-			list($clic, $att) = $corps;
-
-			$clic = "<a href='"
-			.  redirige_action_auteur($action,
-						  $id,
-						  $script,
-						  "$args#$ancre",
-						  false)
-			. "'>$clic</a>";
-
-			return (!$att)
-			? $clic
-			: "<div$att'>$clic</div>";
 		}
-	}
 
-	//
-	// Ajax
-	//
-	$ancre = '"' . $ancre . '"';
-	if ($args AND !$args_ajax) $args_ajax = "&$args";
-	if (is_string($corps)) {
-		return redirige_action_auteur($action,
+		// Methode Ajax
+		else {
+			if ($args AND !$args_ajax) $args_ajax = "&$args";
+			return redirige_action_auteur($action,
 				$id,
 				$action,
 				"var_ajax=1&script=$script$args_ajax",
 				$corps,
-				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $ancre)'");
-	} else {
+				"\nmethod='post'
+				onsubmit='return AjaxSqueeze(this, \"$ancre\")'");
+		}
+	}
+
+	// Lien (GET)
+	else {
 		list($clic, $att) = $corps;
+
 		$href = redirige_action_auteur($action,
-				$id,
-				$action,
-				"var_ajax=1&script=$script$args_ajax");
-		return "<div$att><a onclick='AjaxSqueeze(\"$href\",$ancre)'>$clic</a></div>";
+			$id,
+			$script,
+			"$args#$ancre",
+			false);
+
+		if ($args AND !$args_ajax) $args_ajax = "&$args";
+		$ajax = redirige_action_auteur($action,
+			$id,
+			$action,
+			"var_ajax=1&script=$script$args_ajax");
+
+		$clic = "<a href='$href' onclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+
+		return (!$att)
+		? $clic
+		: "<div$att'>$clic</div>";
 	}
 }
 

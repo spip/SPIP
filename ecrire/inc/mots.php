@@ -106,8 +106,8 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable) {
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
-	$visible = $cherche_mot OR ($flag_editable === 'ajax');
-	spip_log("fm '$cherche_mot' '$flag_editable' '$visible' '$select_groupe'");
+	$visible = ($cherche_mot OR ($flag_editable === 'ajax'));
+#	spip_log("fm '$cherche_mot' '$flag_editable' '$visible' '$select_groupe'");
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';
@@ -164,10 +164,17 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 		}
 	}
 
-	$res .= afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
-	. fin_cadre_enfonce(true);
+	$form = afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 
-	return  ($flag_editable === 'ajax') ? $res : "<div id='editer_mot-$id_objet'>$res</div>";
+	// n'envoyer que le formulaire si on est appele par ajax
+	if ($flag_editable === 'ajax')
+		return $form;
+
+	// Envoyer titre + div-id + formulaire + fin
+	return $res
+		. "<div id='editer_mot-$id_objet'>".$form."</div>"
+		. fin_cadre_enfonce(true);
+
 }
 
 // http://doc.spip.org/@inserer_mot
