@@ -601,7 +601,7 @@ se puede activar o desactivar .',
 
 
 // O
-'occurence' => 'Ocurrencia',
+'occurence' => '<MODIF>Ocurrencia',
 'onglet_affacer_base' => 'Borrar la base',
 'onglet_auteur' => 'La autor/a',
 'onglet_contenu_site' => 'Contenido del sitio',

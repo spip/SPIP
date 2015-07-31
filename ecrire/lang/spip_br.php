@@ -594,7 +594,7 @@ Trugarez da gemer perzh
 
 
 // O
-'occurence' => 'Reveziadenn',
+'occurence' => 'Kavadenn',
 'onglet_affacer_base' => 'Diverka&ntilde; an diaz',
 'onglet_auteur' => 'Ar skridaozer',
 'onglet_contenu_site' => 'Endalc\'had al lec\'hienn',

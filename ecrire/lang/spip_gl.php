@@ -194,7 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
  aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.</p>
   <p>Logo de facer este cambio, poder&aacute; ',
-'dirs_repertoires_suivants' => '<MODIF><p><b>Non se pode acceder para escribir nos directorios seguintes:</b></p><ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>Os directorios seguintes impiden o acceso para escritura&nbsp;:</b></p><ul>@bad_dirs@.</ul>
   <p>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
   deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.</p>
   <p>Unha vez feito isto, poder&aacute; ',
