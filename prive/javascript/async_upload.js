@@ -52,7 +52,7 @@ function async_upload_before_submit(data,form) {
    .val("");
 };
 
-function async_upload_article_edit(res,s,jForm){
+function async_upload_article_edit(res,s,xhr,jForm){
       res = iframeHandler(res,jForm,async_upload_article_edit);
       if(!res) return true;
       var cont;
@@ -95,7 +95,7 @@ function async_upload_article_edit(res,s,jForm){
       return true;
 }
 
-function async_upload_icon(res,s,jForm) {
+function async_upload_icon(res,s,xhr,jForm) {
   res = iframeHandler(res,jForm);
   if(!res) return true;
   res.find(">div").each(function(){
@@ -107,7 +107,7 @@ function async_upload_icon(res,s,jForm) {
   return true;                     
 }
 
-function async_upload_portfolio_documents(res,s,jForm){
+function async_upload_portfolio_documents(res,s,xhr,jForm){
   res = iframeHandler(res,jForm,async_upload_portfolio_documents);
 
   if(!res) return true;
