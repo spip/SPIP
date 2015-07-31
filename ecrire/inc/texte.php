@@ -457,28 +457,31 @@ function typo($letexte, $echapper=true) {
 	// Caracteres de controle "illegaux"
 	$letexte = corriger_caracteres($letexte);
 
-	// Proteger les caracteres typographiques a l'interieur des tags html
-	$protege = "!':;?~%";
-	$illegal = "\x1\x2\x3\x4\x5\x6\x7";
-	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~%][^<>]*>,imsS",
-	$letexte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $reg) {
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, $protege, $illegal);
-			$letexte = str_replace($reg[0], $insert, $letexte);
+	// Charger & appliquer la fonction de typographie
+	if ($typographie = charger_fonction(lang_typo(), 'typographie')) {
+
+		// Proteger les caracteres typographiques a l'interieur des tags html
+		$protege = "!':;?~%";
+		$illegal = "\x1\x2\x3\x4\x5\x6\x7";
+		if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~%][^<>]*>,imsS",
+		$letexte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $reg) {
+				$insert = $reg[0];
+				// hack: on transforme les caracteres a proteger en les remplacant
+				// par des caracteres "illegaux". (cf corriger_caracteres())
+				$insert = strtr($insert, $protege, $illegal);
+				$letexte = str_replace($reg[0], $insert, $letexte);
+			}
 		}
+
+
+		$letexte = $typographie($letexte);
+
+		// Retablir les caracteres proteges
+		$letexte = strtr($letexte, $illegal, $protege);
+
 	}
 
-
-	$lang = lang_typo();
-	lang_select($lang);
-	$typographie = charger_fonction($lang, 'typographie');
-
-	$letexte = $typographie($letexte);
-	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, $illegal, $protege);
 
 	//
 	// Installer les modeles, notamment images et documents ;
@@ -494,9 +497,6 @@ function typo($letexte, $echapper=true) {
 	// old style
 	if (function_exists('apres_typo'))
 		$letexte = apres_typo($letexte);
-
-	// remettre la langue precedente
-	if ($lang) lang_select();
 
 	// reintegrer les echappements
 	if ($echapper)
