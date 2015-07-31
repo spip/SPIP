@@ -243,7 +243,7 @@ function lang_dselect ($rien='') {
 // - 'var_lang' = langue de l'article, espace public
 // - 'changer_lang' = langue de l'article, espace prive
 // 
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
 	global $couleur_foncee, $couleur_claire, $connect_id_auteur;
 	include_ecrire('inc_filtres.php3');
 
@@ -253,7 +253,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
-	$lien = $GLOBALS['clean_link'];
+	if (!$lien) $lien = $GLOBALS['clean_link'];
 
 	if ($nom_select == 'changer_lang') {
 		$lien->delvar('changer_lang');

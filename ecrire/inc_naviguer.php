@@ -8,13 +8,13 @@ include_ecrire ("inc_abstract_sql.php3");
 
 function naviguer_dist($action)
 {
-	global $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre;
+  global $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
 	// si action vide, simple visite
 	if ($flag_editable AND $action) 
-		$id_rubrique = maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable);
+	  $id_rubrique = maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable, $changer_lang);
 
 //
 // recuperer les infos sur cette rubrique
@@ -220,7 +220,8 @@ if ($id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('mul
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent);
+	$link = new Link("naviguer.php3?action=coloniser&id_rubrique=$id_rubrique");
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, $link);
 	echo "</div>\n";
 	echo fin_block();
 
@@ -373,7 +374,7 @@ if ($relief) {
 	supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 }
 
-function maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable)
+function maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable, $changer_lang)
 {
 	if ($action == 'supprimer') {
 		  spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
@@ -382,6 +383,24 @@ function maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descri
 		  $_POST['id_rubrique'] = $id_rubrique;
 		  $GLOBALS['clean_link'] = new Link();
 		}
+	elseif ($action == 'coloniser') {
+		if ($changer_lang
+		    AND $id_rubrique>0
+		    AND lire_meta('multi_rubriques') == 'oui'
+		    AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0)) {
+		  if ($changer_lang != "herit")
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
+		  else {
+			if ($id_parent == 0)
+				$langue_parent = lire_meta('langue_site');
+			else {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+				$langue_parent = $row['lang'];
+			}
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+		  }
+		}
+	}
 	  // pour le cas 'calculer_rubriques' (retour de spip_image),
 	  // i.e. document/logo ajoute/supprime/tourne
 	  // suffit seulement de faire le calculer_rubriques() final
@@ -426,32 +445,12 @@ WHERE id_rubrique=$id_rubrique");
 
 	// toute action entraine ceci:
 	calculer_rubriques();
+	calculer_langues_rubriques();
 
-	  // invalider et reindexer
 	if ($GLOBALS['invalider_caches']) {
 			include_ecrire ("inc_invalideur.php3");
 			suivre_invalideur("id='id_rubrique/$id_rubrique'");
 	}
-//
-// Appliquer le changement de langue
-//
-	if ($GLOBALS['changer_lang']
-		    AND $id_rubrique>0
-		    AND lire_meta('multi_rubriques') == 'oui'
-		    AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0)) {
-		  if ($changer_lang != "herit")
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
-		  else {
-			if ($id_parent == 0)
-				$langue_parent = lire_meta('langue_site');
-			else {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-				$langue_parent = $row['lang'];
-			}
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
-		  }
-	}
-	calculer_langues_rubriques();
 	return $id_rubrique;
 }
 
