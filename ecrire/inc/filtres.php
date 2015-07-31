@@ -151,7 +151,7 @@ function version_svn_courante($dir) {
 	AND $v = max($r1[1])
 	)
 	OR
-	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
+	(preg_match(',^\d.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
 	AND $v = $r1[1]
 	)))
 		return -$v;
