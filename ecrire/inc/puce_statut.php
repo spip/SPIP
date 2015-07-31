@@ -27,35 +27,41 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 // si l'auteur ne peut pas se connecter
 // http://doc.spip.org/@puce_statut_auteur
 function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
-	switch($statut) {
-		case "nouveau":
-			return '';
-			break;
-		case "0minirezo":
-			$img = "admin-12.gif";
-			$alt = _T('titre_image_administrateur');
-			$titre = _T('titre_image_administrateur');
-			break;
-		case "1comite":
-			$img = "redac-12.gif";
-			$alt = _T('titre_image_redacteur');
-			$titre = _T('titre_image_redacteur_02');
-			break;
-		case "5poubelle":
-			$img = "poubelle.gif";
-			$alt = _T('titre_image_auteur_supprime');
-			$titre = _T('titre_image_auteur_supprime');
-			break;
-		default:
-			$img = "visit-12.gif";
-			$alt = _T('titre_image_visiteur');
-			$titre = _T('titre_image_visiteur');
-			break;
+
+	static $titre_des_statuts ='';
+	static $images_des_statuts ='';
+
+	// eviter de retraduire a chaque appel
+	if (!$titre_des_statuts) {
+	  $titre_des_statuts = array(
+		"info_administrateurs" => _T('titre_image_administrateur'),
+		"info_redacteurs" => _T('titre_image_redacteur_02'),
+		"info_visiteurs" =>  _T('titre_image_visiteur'),
+		"info_statut_site_4" => _T('titre_image_auteur_supprime')
+		);
+
+	  $images_des_statuts = array(
+			   "info_administrateurs" => 'admin-12.gif',
+			   "info_redacteurs" =>'redac-12.gif',
+			   "info_visiteurs" => 'visit-12.gif',
+			   "info_statut_site_4" => 'poubelle.gif'
+			   );
 	}
+
+	if ($statut == 'nouveau') return '';
+
+	$index = array_search($statut, $GLOBALS['liste_des_statuts']);
+
+	if (!$index) $index = 'info_visiteurs';
+
+	$img = $images_des_statuts[$index];
+	$alt = $titre_des_statuts[$index];
+
 	if ($type != 'auteur') {
 	  $img2 = "croix-rouge.gif";
+	  $titre = _T('titre_image_redacteur');
 	  $fond = http_style_background($img2, 'top right no-repeat; padding-right: 4px');
-	} else $fond = '';
+	} else {$fond = ''; $titre = $alt;}
 	  
 	return http_img_pack($img, $alt, $fond, $titre);
 }
