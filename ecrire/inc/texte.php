@@ -201,6 +201,28 @@ function echappe_retour($letexte, $source='') {
 	return $letexte;
 }
 
+function nettoyer_raccourcis_typo($texte){
+	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
+	// remplacer les liens
+	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],', $texte, $regs, PREG_SET_ORDER))
+		foreach ($regs as $reg) {
+			if (strlen($reg[1]))
+				$titre = $reg[1];
+			else
+				list(,,$titre) = extraire_lien($reg);
+			$texte = str_replace($reg[0], $titre, $texte);
+		}
+
+	// supprimer les notes
+	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
+
+	// supprimer les codes typos
+	$texte = ereg_replace("[}{]", "", $texte);
+
+	// supprimer les tableaux
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
+	return $texte;
+}
 
 function couper($texte, $taille=50) {
 	$offset = 400 + 2*$taille;
@@ -231,24 +253,7 @@ function couper($texte, $taille=50) {
 	// travailler en accents charset
 	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
 
-	// remplacer les liens
-	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],', $texte, $regs, PREG_SET_ORDER))
-		foreach ($regs as $reg) {
-			if (strlen($reg[1]))
-				$titre = $reg[1];
-			else
-				list(,,$titre) = extraire_lien($reg);
-			$texte = str_replace($reg[0], $titre, $texte);
-		}
-
-	// supprimer les notes
-	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
-
-	// supprimer les codes typos
-	$texte = ereg_replace("[}{]", "", $texte);
-
-	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
+	$texte = nettoyer_raccourcis_typo($texte);
 
 	// corriger la longueur de coupe 
 	// en fonction de la presence de caracteres utf
