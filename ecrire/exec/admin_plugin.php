@@ -66,9 +66,6 @@ div.cadre-padding ul li li div.nomplugin a {
 	outline:0 !important;
 	-moz-outline:0 !important;
 }
-div.cadre-padding ul li li div.nomplugin_on {
-	background: #edf3fe /* couleur claire a remettre avec une CSS */
-}
 div.cadre-padding ul li li div.nomplugin_on>a {
 	font-weight:bold;
 }
@@ -272,7 +269,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
+	$s = "<div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div class='toile_claire'>";
 		$erreur = true;
