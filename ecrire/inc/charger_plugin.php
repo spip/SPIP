@@ -518,7 +518,7 @@ function bouton_telechargement_plugin($url, $rep) {
 		sous_repertoire(_DIR_RACINE . 'lib','',false,true);
 
 	if (($rep == 'lib')?
-			is_dir(_DIR_RACINE . 'lib'):
+			(_DIR_PLUGINS_AUTO AND is_dir(_DIR_RACINE . 'lib')):
 			(_DIR_PLUGINS_AUTO AND @is_dir(_DIR_PLUGINS_AUTO))
 		)
 		$bouton = redirige_action_post('charger_plugin',
