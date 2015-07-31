@@ -310,14 +310,25 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 //
 debut_raccourcis();
 
-icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
-
-// pas de rubrique ?
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
-if (spip_num_rows($result) == 0)
-	if ($connect_statut == '0minirezo')
+
+icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
+
+if (spip_num_rows($result) > 0) {
+	if ($coll > 0)
+		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
+
+	$activer_breves = lire_meta("activer_breves");
+	if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
+		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
+	}
+}
+else {
+	if ($connect_statut == '0minirezo') {
 		echo "<p>"._T('info_creation_rubrique');
+	}
+}
 
 fin_raccourcis();
 
@@ -442,13 +453,13 @@ echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
 if (strlen($les_enfants2) > 0) echo "<p>";
 echo "</td></tr>";
 
-echo "<tr><td align='right' valign='bottom'>";
+echo "<tr><td style='text-align: right;' valign='bottom'><div align='right'>";
 if ($flag_editable) {
 	if ($coll == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
 	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
 }
-echo "</td></tr>";
+echo "</div></td></tr>";
 echo "</table>";
 
 
