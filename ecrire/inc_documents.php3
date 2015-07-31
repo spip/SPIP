@@ -44,7 +44,7 @@ function vignette_par_defaut($type_extension, $size=true) {
 function document_et_vignette($url, $document) {
 	eregi('\.([a-z0-9]+)$', $document, $regs);
 	list($fichier, $largeur, $hauteur) =
-		vignette_par_defaut($extension, true);
+		vignette_par_defaut($regs[1]);
 	$doc = "<a href='$url'><img src='$fichier' border='0' /></a>";
 	return $doc;
 }
@@ -240,7 +240,7 @@ function integre_image($id_document, $align, $type_aff) {
 
 		if (!$url_fichier_vignette) 
 			list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette)
-			= vignette_par_defaut($extension, true);
+			= vignette_par_defaut($extension);
 
 		if ($url_fichier_vignette) {
 			$vignette = "<img src='$url_fichier_vignette' border='0'";
@@ -1099,7 +1099,8 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		// Pas de vignette : afficher un formulaire d'ajout
 		echo "<div align='center'>\n";
 		$block = "doc_vignette $id_document";
-		list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
+		list($icone, $largeur_icone, $hauteur_icone) =
+			vignette_par_defaut($type_extension);
 		if ($icone) {
 			echo "<a href='$url'><img src='$icone' border='0' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
 		}
@@ -1412,7 +1413,8 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			// pas de vignette
 			echo "<div align='center'>\n";
 			$block = "doc_vignette $id_document";
-			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
+			list($icone, $largeur_icone, $hauteur_icone) =
+				vignette_par_defaut($type_extension);
 			if ($icone) {
 				echo "<a href='$url'><img src='$icone' border='0' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
 			}

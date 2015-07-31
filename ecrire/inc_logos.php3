@@ -120,7 +120,7 @@ function afficher_logo($racine, $titre, $logo) {
 
 	if ($logo) {
 		list($fichier, $taille, $img) =  $logo;
-		$hash = calculer_action_auteur("supp_image $fichier");
+		$hash = calculer_action_auteur("supp_logo $fichier");
 
 		echo "<p><center><div>$img</div>";
 		echo debut_block_invisible(md5($titre));
@@ -137,7 +137,7 @@ function afficher_logo($racine, $titre, $logo) {
 		echo "</center></p>";
 	}
 	else {
-		$hash = calculer_action_auteur("ajout_image $racine");
+		$hash = calculer_action_auteur("ajout_logo $racine");
 		echo debut_block_invisible(md5($titre));
 
 		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
