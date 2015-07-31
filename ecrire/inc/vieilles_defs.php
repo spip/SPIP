@@ -559,7 +559,7 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
 'spip_abstract_showtable' => '($table, $serveur=\'\', $table_spip = false) {
 	vieilles_log(\'spip_abstract_showtable()\');
-    return sql_showtable($table, $serveur, $table_spip);
+    return sql_showtable($table, $table_spip, $serveur);
   }
 
   ',
