@@ -980,8 +980,8 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 }
 
 function generer_url_ecrire_entite_edit($id, $entite, $args='', $ancre=''){
-	$entite = objet_info($entite,'url_edit');
-	$url = generer_url_ecrire($entite,$args);
+	$exec = objet_info($entite,'url_edit');
+	$url = generer_url_ecrire($exec,$args);
 	if (intval($id))
 		$url = parametre_url($url,id_table_objet($entite),$id);
 	else
