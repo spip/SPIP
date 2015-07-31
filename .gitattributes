@@ -5,6 +5,7 @@ dist/favicon.ico -text
 dist/feed.png -text
 dist/inc-entete.html -text
 dist/inc-forum.html -text
+dist/inc-head.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text

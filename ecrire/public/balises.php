@@ -1089,4 +1089,16 @@ function balise_CACHE_dist($p) {
 	return $p;
 }
 
+//
+// #INSERT_HEAD
+// pour permettre aux plugins d'inserer des styles, js ou autre
+// dans l'entete sans modification du squelette
+// #INSERT_HEAD
+//
+function balise_INSERT_HEAD_dist($p) {
+	$p->code = "pipeline('insert_head','')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
