@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_calendrier_dist
 function exec_calendrier_dist()
 {
-  global $type;
+  $type = _request('type');
 
   $date = date("Y-m-d", time()); 
   if ($type == 'semaine') {
@@ -41,7 +41,6 @@ function exec_calendrier_dist()
   if (_request('var_ajaxcharset')) 
     ajax_retour($r);
   else {
-
 	  $commencer_page = charger_fonction('commencer_page', 'inc');
 	  echo $commencer_page($titre, "accueil", "calendrier");
 	  echo debut_grand_cadre(true);
