@@ -140,10 +140,19 @@ class IterateurDATA implements Iterator {
 	 * @return void
 	 */
 	protected function select($command) {
+
+		// l'iterateur DATA peut etre appele en passant (data:type)
+		// le type se retrouve dans la commande 'from'
+		// dans ce cas la le critere {source} n'a pas besoin du 1er argument
+		if (isset($this->command['from'][0])) {
+			array_unshift($this->command['source'], $this->command['sourcemode']);
+			$this->command['sourcemode'] = $this->command['from'][0];
+		}
+		
 		// les commandes connues pour l'iterateur DATA
 		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
 		// {source format, [URL], [arg2]...}
-
+		
 		if (isset($this->command['source'])
 		AND isset($this->command['sourcemode'])) {
 

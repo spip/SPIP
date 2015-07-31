@@ -1002,18 +1002,13 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			preg_replace('/\W/', '_', $boucle->type_requete), 'iterateur', true)) {
 				$boucles[$id] = $g($boucle);
 
-			// sinon, en cas de requeteur "php" existe-t-il un iterateur PHP
-			} else if ($boucle->sql_serveur == 'php') {
-				if (class_exists($boucle->type_requete)) {
-					$g = charger_fonction('php', 'iterateur');
-					$boucles[$id] = $g($boucle, $boucle->type_requete);
-				} else {
-					$x = $boucle->type_requete;
-					$boucle->type_requete = false;
-					$msg = array('zbug_iterateur_inconnu',
-							array('iterateur' => $x));
-					erreur_squelette($msg, $boucle);
-				}
+			// sinon, en cas de requeteur d'un type predefini,
+			// utiliser les informations donnees par le requeteur
+			// cas "php:xx" et "data:xx".
+			// "php" existe-t-il un iterateur PHP
+			} else if ($requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true)) {
+				$requeteur($boucles, $boucle, $id);
+
 			// utiliser la description des champs transmis
 			} else if ($show) {
 				$boucles[$id]->show = $show;
@@ -1169,6 +1164,66 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 	$boucles[''] = $code;
 	return $boucles;
+}
+
+
+/**
+ * Requeteur pour les boucles (php:nom_iterateur)
+ * 
+ * Analyse si le nom d'iterateur correspond bien a une classe PHP existante
+ * et dans ce cas charge la boucle avec cet iterateur.
+ * Affichera une erreur dans le cas contraire.
+ *
+ * @param $boucles Liste des boucles
+ * @param $boucle  La boucle parcourue
+ * @param $id      L'identifiant de la boucle parcourue
+ * 
+**/
+function requeteur_php_dist(&$boucles, &$boucle, &$id) {
+	if (class_exists($boucle->type_requete)) {
+		$g = charger_fonction('php', 'iterateur');
+		$boucles[$id] = $g($boucle, $boucle->type_requete);
+	} else {
+		$x = $boucle->type_requete;
+		$boucle->type_requete = false;
+		$msg = array('zbug_iterateur_inconnu',
+				array('iterateur' => $x));
+		erreur_squelette($msg, $boucle);
+	}
+}
+
+
+/**
+ * Requeteur pour les boucles (data:type de donnee)
+ * note: (DATA) tout court ne passe pas par ici.
+ * 
+ * Analyse si le type de donnee peut etre traite
+ * et dans ce cas charge la boucle avec cet iterateur.
+ * Affichera une erreur dans le cas contraire.
+ *
+ * @param $boucles Liste des boucles
+ * @param $boucle  La boucle parcourue
+ * @param $id      L'identifiant de la boucle parcourue
+ * 
+**/
+function requeteur_data_dist(&$boucles, &$boucle, &$id) {
+	include_spip('iterateur/data');
+	if ($h = charger_fonction($boucle->type_requete . '_to_array' , 'inc', true)) {
+		$g = charger_fonction('data', 'iterateur');
+		$boucles[$id] = $g($boucle);
+		// from[0] stocke le type de data (rss, yql, ...)
+		$boucles[$id]->from[] = $boucle->type_requete;
+		
+	} else {
+		$x = $boucle->type_requete;
+		$boucle->type_requete = false;
+		$msg = array('zbug_requeteur_inconnu',
+				array(
+				'requeteur' => 'data',
+				'type' => $x
+		));
+		erreur_squelette($msg, $boucle);
+	}
 }
 
 ?>
