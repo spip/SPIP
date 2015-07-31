@@ -39,40 +39,40 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 // Si le 2e argument (passe par reference) est non vide
 // ce qui precede cette balise y est mis.
 // Les balises commencant par <! sont ignorees
+// $abs_pos est globale pour pouvoir etre reinitialisee a la meta
+// status_restauration en cas d'interruption sur TimeOut.
 
 // http://doc.spip.org/@xml_fetch_tag
-function xml_fetch_tag($f, &$before, $gz=false, $skip='!') {
-	global $buf, $abs_pos;
-	static $_fread,$_feof,$_ftell;
+function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
+	global $abs_pos;
+	static $buf='';
 	static $ent = array('&amp;','&lt;');
 	static $brut = array('&','<');
 
-	if (!$_fread){
-		$_fread = ($gz) ? 'gzread' : 'fread';
-		$_feof = ($gz) ? 'gzeof' : 'feof';
-		$_ftell = ($gz) ? 'gztell' : 'ftell';
+	while (($b=strpos($buf,'<'))===false) {
+		if (!($x = $_fread($f, 1024))) return '';
+		$buf .= $x;
 	}
-	
-	while (($b=strpos($buf,'<'))===false) 
-		$buf .= $_fread($f, 1024);
-
 	if ($before) $before = str_replace($ent,$brut,substr($buf,0,$b));
-
+#	else { spip_log("position: $abs_pos" . substr($buf,0,12));flush();}
 	// pour ignorer un > de raccourci Spip avant un < de balise XML
 
-	$buf = substr($buf,$b+1); 
+	$buf = substr($buf,++$b); 
 
-	while (($e=strpos($buf,'>'))===false)
-		$buf .= $_fread($f, 1024);
+	while (($e=strpos($buf,'>'))===false) {
+		if (!($x = $_fread($f, 1024))) return '';
+		$buf .= $x;
+	}
+	if ($buf[0]!=$skip) {
+		$tag = substr($buf, 0, $e);
+		$buf = substr($buf,++$e);
+		$abs_pos += $e + $b;
+		return $tag;
+	}
 
-	$tag = substr($buf, 0, $e);
-	$buf = substr($buf,$e+1);
-
-	$abs_pos = $_ftell($f) - strlen($buf);
-	
-	if ($tag[0]!=$skip) return $tag;
-
-	return xml_fetch_tag($f,$before,$gz,$skip_comment);
+	$buf = substr($buf,++$e);
+	$abs_pos += $e + $b;
+	return xml_fetch_tag($f,$before,$_fread,$skip);
 }
 
 // http://doc.spip.org/@xml_parse_tag
@@ -97,14 +97,14 @@ function xml_parse_tag($texte) {
 
 
 // http://doc.spip.org/@import_debut
-function import_debut($f, $gz=false) {
+function import_debut($f, $gz='fread') {
 
 //  Pour les anciennes archives, indiquer le charset par defaut:
 	$charset = 'iso-8859-1'; 
 //  les + recentes l'ont en debut de ce fichier 
 	$flag_phpmyadmin = false;
 	$b = false;
-	while ($t = xml_fetch_tag($f, $b, $gz, false)) {
+	while ($t = xml_fetch_tag($f, $b, $gz, '')) {
 		$r = xml_parse_tag($t);
 		if ($r[0] == '?xml' AND $r[1]['encoding'])
 			$charset = strtolower($r[1]['encoding']);
@@ -171,7 +171,7 @@ function detruit_restaurateur()
 function import_tables($request, $dir) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
 
-	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
+	$abs_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
 		$GLOBALS['meta']["status_restauration"];
 
 	// au premier appel destruction des tables a restaurer
@@ -180,12 +180,12 @@ function import_tables($request, $dir) {
 
 	if ($request['insertion']=='on') {
 		include_spip('inc/import_insere');
-		$request['init'] = (!$my_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
+		$request['init'] = (!$abs_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
 	} elseif ($request['insertion']=='passe2') {
 		$request['init'] = 'insere_2_init';
 		$request['boucle'] = 'import_translate';
 	} else {
-		$request['init'] = (!$my_pos) ? 'import_init_tables' : 'import_table_choix';
+		$request['init'] = (!$abs_pos) ? 'import_init_tables' : 'import_table_choix';
 		$request['boucle'] = 'import_replace';
 	}
 
@@ -193,17 +193,17 @@ function import_tables($request, $dir) {
 
 	if (ereg("\.gz$", $archive)) {
 			$size = false;
-			$taille = taille_en_octets($my_pos);
+			$taille = taille_en_octets($abs_pos);
 			$file = gzopen($archive, 'rb');
-			$gz = true;
+			$gz = 'gzread';
 	} else {
 			$size = @filesize($archive);
-			$taille = floor(100 * $my_pos / $size)." %";
+			$taille = floor(100 * $abs_pos / $size)." %";
 			$file = fopen($archive, 'rb');
-			$gz = false;
+			$gz = 'fread';
 	}
 
-	if ($my_pos==0) {
+	if ($abs_pos==0) {
 		list($tag, $r, $charset) = import_debut($file, $gz);
 // tag ouvrant du Dump:
 // 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
@@ -214,12 +214,12 @@ function import_tables($request, $dir) {
 			ecrire_meta('charset_restauration', $charset);
 		else	ecrire_meta('charset_insertion', $charset);
 		ecrire_metas();
-		spip_log("Debut de l'importation (charset: $charset, archive: $version_archive)" . ($i ? " insertion $i" : ''));
+		spip_log("Debut de l'importation de $archive (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
 	} else {
-		spip_log("Reprise de l'importation interrompue en $my_pos");
-		$_fseek = ($gz) ? gzseek : fseek;
-		$_fseek($file, $my_pos);
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
+		spip_log("Reprise de l'importation de $archive interrompue en $abs_pos");
+		$_fseek = ($gz=='gzread') ? 'gzseek' : 'fseek';
+		$_fseek($file, $abs_pos);
 	}
 
 	$fimport = import_charge_version($version_archive);
@@ -231,12 +231,11 @@ function import_tables($request, $dir) {
 
 	$oldtable ='';
 	while ($table = $fimport($file, $request, $gz)) {
-	// Pas d'ecriture SQL car sinon le temps double.
-	// Il faut juste faire attention a bien lire_metas()
-	// au debut de la restauration
+	  // memoriser pour pouvoir reprendre en cas d'interrupt,
+	  // mais pas d'ecriture sur fichier, ca ralentit trop
 		ecrire_meta("status_restauration", "$abs_pos");
 		if ($oldtable != $table) {
-			spip_log("Restauration de $table");
+			spip_log("Restauration de $table (commence en $abs_pos)");
 			affiche_progression_javascript($abs_pos,$size,$table);
 			$oldtable = $table;
 		}
