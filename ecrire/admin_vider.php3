@@ -39,6 +39,9 @@ if ($purger_index == "oui") {
 		spip_query("DELETE FROM spip_index_syndic");
 
 		spip_query("DELETE FROM spip_index_dico");
+
+		include_ecrire('inc_index.php3');
+		creer_liste_indexation();
 	}
 }
 
@@ -103,7 +106,7 @@ l'espace disque si vous avez d&eacute;sactiv&eacute; le moteur de recherche. Cel
 SPIP) sont automatiquement r&eacute;index&eacute;s, cette commande n'est donc utile que de fa&ccedil;on exceptionnelle.";
 
 
-echo "\n<FORM ACTION='admin_tech.php3' METHOD='post'>";
+echo "\n<FORM ACTION='admin_vider.php3' METHOD='post'>";
 
 $hash = calculer_action_auteur("purger_index");
 
