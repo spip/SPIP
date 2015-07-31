@@ -61,7 +61,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 
 	$message = $commentaire ? '' : _T('form_forum_identifiant_mail');
 
-	// #ENV*{message} doit etre non vide lorsque tout s'est bien passé
+	// #ENV*{message} doit etre non vide lorsque tout s'est bien passe
 	// #ENV*{commentaire} doit etre non vide pour afficher le formulaire
 	// et il indique si on s'inscrit a l'espace public ou prive 
 	// ou donne un message d'erreur aux appels suivants si pb
@@ -80,7 +80,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
-// et donner des infos supplémentaires
+// et donner des infos supplementaires
 // Std: controler que le nom (qui sert a calculer le login) est plausible
 // et que l'adresse est valide (et on la normalise)
 // Retour: une chaine message d'erreur 
@@ -99,7 +99,8 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
 // cree un nouvel utilisateur et renvoie un message d'impossibilite 
 // ou le tableau representant la ligne SQL le decrivant.
-
+// $mode = 'forum' ou 'redac' selon ce a quoi on s'inscrit
+// $id = une id_rubrique eventuelle (?)
 // http://doc.spip.org/@message_inscription
 function message_inscription($mail, $nom, $mode, $id=0) {
 
