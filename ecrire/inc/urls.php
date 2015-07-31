@@ -79,6 +79,8 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 				$fond = $type;
 			if (isset($ncontexte))
 				$contexte = $ncontexte;
+			if (defined('_DEFINIR_CONTEXTE_TYPE') AND _DEFINIR_CONTEXTE_TYPE)
+				$contexte['type'] = $type;
 		}
 	}
 	// compatibilite <= 1.9.2
