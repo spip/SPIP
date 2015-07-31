@@ -403,16 +403,22 @@ function f_msie ($texte) {
 	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
 	if (!$msie) return $texte;
 
-	// Si jQuery n'est pas la on ne fixe pas les PNG
-	// et comme MSIE est goret, on n'a pas honte d'inserer comme un goret
+	// Comme MSIE est goret, on n'a pas honte d'inserer comme un goret
 	// en fin de page
+
+	// fixer les images background
+	$texte .= "<script type='text/javascript'><!--
+	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
+	// --></script>\n";
+
+	// Si jQuery n'est pas la on ne fixe pas les PNG
 	if (strpos(strtolower($texte), 'jquery.js')
 	AND strpos(strtolower($texte), '.png')
 	AND true /* ... autres tests si on veut affiner ... */) {
 		$texte .=
 "<script type='text/javascript'><!--
 if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('jquery.iepnghack.1.5.js')."' , function() { jQuery('img').pngfix(); } );
-// --></script>";
+// --></script>\n";
 	}
 
 	return $texte;

@@ -1263,6 +1263,7 @@ function fin_page()
 	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
 	$fix_png = $msie
 		? "<script type='text/javascript'><!--
+			try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 			if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '"
 			.find_in_path('jquery.iepnghack.1.5.js')
 			."' , function() { jQuery('img').pngfix(); } );
