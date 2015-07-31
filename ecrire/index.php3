@@ -194,12 +194,13 @@ debut_droite();
 if ($options != 'avancees') {
 	debut_boite_info();
 	echo "<div class='verdana2'>";
-	echo "<p><center><b>&Agrave; SUIVRE</b></center>";
+	echo "<p><center><b>&laquo;&nbsp;&Agrave; SUIVRE&nbsp;&raquo;</b></center>";
 	echo "<p>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. ".
 		"Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves ".
 		"pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos ".
 		"pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec ".
-		"l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.");
+		"l'interface, vous pourrez cliquer sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; ".
+		"pour ouvrir plus de possibilit&eacute;s.");
 	echo "</div>";
 	fin_boite_info();
 }

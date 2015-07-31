@@ -6,11 +6,13 @@ include ("inc.php3");
 debut_page("Maintenance technique", "administration", "base");
 
 
-echo "<br><br><br>";
-gros_titre("Maintenance technique");
+echo "<br>";
 
-if ($options == "avancees")
+if ($options == "avancees") {
+	echo "<br><br>";
+	gros_titre("Maintenance technique");
 	barre_onglets("administration", "sauver");
+}
 
 
 debut_gauche();
