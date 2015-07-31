@@ -301,42 +301,60 @@ function argumenter_squelette($v) {
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
 function executer_balise_dynamique($nom, $args, $context_compil) {
-	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true)) {
-		// regarder si une fonction generique n'existe pas
-		if (($p = strpos($nom,"_"))
-		&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
-			// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
+
+	$p = strpos($nom,"_");
+	$nom2 = substr($nom,0,$p+1);
+	if ($file = include_spip("balise/". strtolower($nom))) {
+		$f = 'balise_' . $nom . '_stat';
+	} else {
+		// pas de fichier associe, passer au traitement generique
+		$file = include_spip("balise/" .strtolower($nom2));
+		if ($file) {
+			// et injecter en premier arg le nom de la balise 
 			array_unshift($args,$nom);
-			$nom = substr($nom,0,$p+1);
+			$f = 'balise_' . $nom2 . '_stat';
 		}
-		else
-			die ("pas de balise dynamique pour #". strtolower($nom)." !");
+		else {
+			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
+			  _T('zxml_inconnu_balise');
+			return denoncer_balise_dynamique($msg, $context_compil);
+		}
 	}
 	// Y a-t-il une fonction de traitement des arguments ?
-	$f = 'balise_' . $nom . '_stat';
-	if (function_exists($f))
-		$r = $f($args, $context_compil); 
-	else
-		$r = $args;
-	if (!is_array($r))
-		return $r;
-	else {
-		// verifier que la fonction dyn est la, sinon se replier sur la generique si elle existe
-		if (!function_exists('balise_' . $nom . '_dyn')){
-			// regarder si une fonction generique n'existe pas
-			if (($p = strpos($nom,"_"))
-			&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
-				// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
-				array_unshift($r,$nom);
-				$nom = substr($nom,0,$p+1);
-			}
-			else
-				die ("pas de balise dynamique pour #". strtolower($nom)." !");
+
+	$r = !function_exists($f) ? $args : $f($args, $context_compil); 
+
+	if (!is_array($r)) return $r;
+
+	// verifier que la fonction dyn est la, 
+	// sinon se replier sur la generique si elle existe
+	if (!function_exists('balise_' . $nom . '_dyn')) {
+		if (function_exists('balise_' . $nom2 . '_dyn')) {
+			// et lui injecter en premier arg le nom de la balise 
+			array_unshift($args,$nom);
+			$nom = $nom2;
+		} else {
+		echo "\n<br>@@@@$nom2";
+			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
+			  _T('zxml_inconnu_balise');
+			return denoncer_balise_dynamique($msg, $context_compil);
 		}
-		if (!_DIR_RESTREINT) 
-			$file = _DIR_RESTREINT_ABS . $file;
-		return synthetiser_balise_dynamique($nom, $r, $file, $context_compil);
 	}
+	if (!_DIR_RESTREINT) 
+		$file = _DIR_RESTREINT_ABS . $file;
+	return synthetiser_balise_dynamique($nom, $r, $file, $context_compil);
+}
+
+function denoncer_balise_dynamique($msg, $context_compil)
+{
+	include_spip('public/interfaces');
+	$p = new Contexte;
+	$p->descr = array('sourcefile' => $context_compil[0],
+				  'nom' => $context_compil[1]);
+	$p->id_boucle = $context_compil[2];
+	$p->ligne = $context_compil[3];
+	$p->lang = $context_compil[4];
+	return erreur_squelette($msg, $p);
 }
 
 // http://doc.spip.org/@lister_objets_avec_logos
