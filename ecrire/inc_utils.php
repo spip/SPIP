@@ -51,15 +51,16 @@ function include_ecrire($file, $silence=false) {
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
-	# fichiers old-style, ecrire/inc_truc.php
-	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
-		return include_local($f, $silence);
-
 	# cas special inc/index => indexation
 	if ($r[3] == 'index') return include_spip('inc/indexation');
 
 	# new style, surchargeable
-	return include_spip('inc/'.$r[3]);
+	if ($f=include_spip('inc/'.$r[3]))
+		return $f;
+
+	# fichiers old-style, ecrire/inc_truc.php
+	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
+		return include_local($f, $silence);
 }
 
 
