@@ -2485,7 +2485,7 @@ function barre_textarea($texte, $rows, $cols) {
 	static $num_textarea = 0;
 	include_spip('inc/layer');
 
-	$texte = safehtml(entites_html($texte));
+	$texte = entites_html($texte);
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
 
