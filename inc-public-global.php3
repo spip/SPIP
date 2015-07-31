@@ -121,9 +121,12 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		}
 
 		//
-		// Calculer le body
+		// Ajouter au besoin les boutons admins
 		//
-		$page['texte'] = admin_page($use_cache, $page['texte']);
+		if ($page_boutons_admin = admin_page($use_cache, $page['texte'])) {
+			$page['texte'] = $page_boutons_admin;
+			$page['process_ins'] = 'php';
+		}
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
@@ -203,7 +206,7 @@ function admin_page($cached, $texte) {
 		include_local('inc-admin.php3');
 		return calcul_admin_page($cached, $texte);
 	}
-	return $texte;
+	return false; // pas de boutons admin
 }
 
 // Si l'admin a demande un affichage

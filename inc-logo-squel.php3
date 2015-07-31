@@ -37,7 +37,7 @@ function balise_EXTRA_dist ($p) {
 // non documente ?
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
-	$p->code = '($_lang ? $_lang : $GLOBALS[spip_lang])';
+	$p->code = "($_lang ? $_lang : \$GLOBALS['spip_lang'])";
 	return $p;
 }
 
