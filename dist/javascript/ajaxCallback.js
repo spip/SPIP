@@ -18,7 +18,7 @@ if(!jQuery.load_handlers) {
 	
 	jQuery.fn._load = jQuery.fn.load;
 	
-	jQuery.fn.load = function( url, params, callback, ifModified ) {
+	jQuery.fn.load = function( url, params, callback ) {
 	
 		callback = callback || function(){};
 	
@@ -33,28 +33,25 @@ if(!jQuery.load_handlers) {
 		}
 		var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status);};
 		
-		return this._load( url, params, callback2, ifModified );
+		return this._load( url, params, callback2 );
 	};
 
 	jQuery._ajax = jQuery.ajax;
 	
 	jQuery.ajax = function(type) {
-	  
-	  //If called by _load exit now because the callback has already been set
-    if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type);
-		
-    var orig_complete = type.complete || function() {}; 
-    type.complete = function(res,status) {
-      //Do not fire OnAjaxLoad if the dataType is not html
-      var dataType = type.dataType;
-			var ct = res.getResponseHeader("content-type");
-			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
-			orig_complete(res,status);
-      if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
+		//If called by _load exit now because the callback has already been set
+		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type);
+			var orig_complete = type.complete || function() {};
+			type.complete = function(res,status) {
+				// Do not fire OnAjaxLoad if the dataType is not html
+				var dataType = type.dataType;
+				var ct = (res && res.getResponseHeader)
+					? res.getResponseHeader("content-type"): '';
+				var xml = !dataType && ct && ct.indexOf("xml") >= 0;
+				orig_complete(res,status);
+				if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 		};
-	
-	  return jQuery._ajax(type); 
-	
+		return jQuery._ajax(type); 
 	};
 
 }
