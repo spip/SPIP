@@ -18,8 +18,6 @@ function install_etape_ldap3_dist()
 	$login_ldap = _request('login_ldap');
 	$pass_ldap = _request('pass_ldap');
 	$port_ldap = _request('port_ldap');
-	$tls_ldap = _request('tls_ldap');
-	$protocole_ldap = _request('protocole_ldap');
 
 	$base_ldap_text = defined('_INSTALL_BASE_LDAP')
 		? _INSTALL_BASE_LDAP
@@ -66,22 +64,17 @@ function install_etape_ldap3_dist()
 		$res .= " checked=\"checked\"";
 		$checked = true;
 	}
+
 	$res .= " />"
-	. "\n<label for='manuel'>"._T('entree_chemin_acces')."</label> ";
-
-	echo generer_form_ecrire('install', ($res
-	. "\n<input type='hidden' name='etape' value='ldap4' />"
-	. "\n<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />"
-	. "\n<input type='hidden' name='port_ldap' value=\"$port_ldap\" />"
-	. "\n<input type='hidden' name='login_ldap' value=\"$login_ldap\" />"
-	. "\n<input type='hidden' name='pass_ldap' value=\"$pass_ldap\" />"
-	. "\n<input type='hidden' name='protocole_ldap' value=\"$protocole_ldap\" />"
-	. "\n<input type='hidden' name='tls_ldap' value=\"$tls_ldap\" />"
-
+	. "\n<label for='manuel'>"._T('entree_chemin_acces')."</label> "
 	. "\n<fieldset>"
 	. "<input type='text' name='base_ldap_text' class='text' value=\"$base_ldap_text\" size='40' />"
 	. "\n</fieldset>"
-	. bouton_suivant()));
+	. "\n<input type='hidden' name='etape' value='ldap4' />"
+	. install_propager(array('adresse_ldap','port_ldap','login_ldap','pass_ldap','protocole_ldap','tls_ldap'))
+	. bouton_suivant();
+
+	echo generer_form_ecrire('install', $res);
 
 	echo install_fin_html();
 }

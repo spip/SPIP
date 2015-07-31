@@ -10,6 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('auth/ldap');
+
 // http://doc.spip.org/@install_etape_ldap4_dist
 function install_etape_ldap4_dist()
 {
@@ -17,16 +21,13 @@ function install_etape_ldap4_dist()
 	$login_ldap = _request('login_ldap');
 	$pass_ldap = _request('pass_ldap');
 	$port_ldap = _request('port_ldap');
-	$tls_ldap = _request('tls_ldap');
-	$protocole_ldap = _request('protocole_ldap');
 	$base_ldap = _request('base_ldap');
 	$base_ldap_text = _request('base_ldap_text');
+	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
 	echo install_debut_html();
 
-	if (!$base_ldap) $base_ldap = $base_ldap_text;
-
-	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
+	$ldap_link = ldap_connect($adresse_ldap, $port_ldap);
 	@ldap_bind($ldap_link, $login_ldap, $pass_ldap);
 
 	// Essayer de verifier le chemin fourni
@@ -43,29 +44,15 @@ function install_etape_ldap4_dist()
 		info_etape(_T('info_reglage_ldap'));
 		echo info_progression_etape(4,'etape_ldap','install/');
 
-		lire_fichier(_FILE_CONNECT_TMP, $conn);
-		if ($p = strpos($conn, "'');")) {
-			ecrire_fichier(_FILE_CONNECT_TMP, 
-				       substr($conn, 0, $p+1) 
-				       . _FILE_LDAP
-				       . substr($conn, $p+1));
-		}
-		$conn = "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n"
-		. "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
-		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
-		. (($tls_ldap != 'oui') ? '' :
-		   "@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
-		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n";
-
-		install_fichier_connexion(_DIR_CONNECT . _FILE_LDAP, $conn);
 		$statuts = liste_statuts_ldap();
 		$statut_ldap = defined('_INSTALL_STATUT_LDAP')
 		? _INSTALL_STATUT_LDAP
 		  : $GLOBALS['liste_des_statuts']['info_redacteurs'];
 
-		echo generer_form_ecrire('install', (
-		"<input type='hidden' name='etape' value='ldap5' />"
-		
+
+		$res = install_propager(array('adresse_ldap','port_ldap','login_ldap','pass_ldap','protocole_ldap','tls_ldap'))
+		. "<input type='hidden' name='etape' value='ldap5' />"
+		. "<input type='hidden' name='base_ldap' value='" . htmlentities($base_ldap) . "' />"
 		. fieldset(_T('info_statut_utilisateurs_1'),
 			array(
 				'statut_ldap' => array(
@@ -75,7 +62,10 @@ function install_etape_ldap4_dist()
 					)
 				)
 			   )
-		. bouton_suivant()));
+		. install_ldap_correspondances()
+		. bouton_suivant();
+
+		echo generer_form_ecrire('install', $res); 
 	}
 
 	echo install_fin_html();
@@ -92,5 +82,20 @@ function liste_statuts_ldap() {
 		if (isset($recom[$k])) $res[$v] = $recom[$k];
 	}
 	return $res;
+}
+
+function install_ldap_correspondances()
+{
+	$champs = array();
+	foreach (is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : array() as $champ => $v ) {
+			$nom = 'ldap_' . $champ;
+			$val = is_array($v) ? join(',', $v) : strval($v);
+			$champs[$nom]= array(
+				'label' => _T('ldap_correspondance', array('champ' => "<tt>$champ</tt>")).'<br />',
+				'valeur' => $val
+						  );
+	}
+
+	return !$champs ? '' : fieldset(_T('ldap_correspondance_1'), $champs, '', _T('ldap_correspondance_2') . '<br /><br />');
 }
 ?>

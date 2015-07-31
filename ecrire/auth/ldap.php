@@ -78,6 +78,8 @@ function auth_ldap_connect($serveur='') {
 				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
 					'base' => $GLOBALS['ldap_base']);
 			else spip_log("connection LDAP $serveur mal definie dans $f");
+			if (isset($GLOBALS['ldap_champs']))
+				$connexion['ldap']['attributes'] = $GLOBALS['ldap_champs'];
 		} else spip_log("connection LDAP $serveur inconnue");
 	}
 	return $connexions_ldap[$serveur]=$connexion['ldap'];
