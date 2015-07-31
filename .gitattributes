@@ -11,8 +11,8 @@ dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
 dist/formulaires/oubli/charger.php -text
-dist/formulaires/oubli/modifier.php -text
-dist/formulaires/oubli/valider.php -text
+dist/formulaires/oubli/traiter.php -text
+dist/formulaires/oubli/verifier.php -text
 dist/formulaires/recherche/charger.php -text
 dist/icones_barre/agrave-maj.png -text
 dist/icones_barre/blanc.png -text

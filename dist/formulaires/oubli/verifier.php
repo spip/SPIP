@@ -69,7 +69,7 @@ function message_oubli($email, $param)
 	  return  _T('pass_erreur_probleme_technique');
 }
 
-function formulaires_oubli_valider_dist(){
+function formulaires_oubli_verifier_dist(){
 	$erreurs = array();
 	$p = _request('p');
 	$oubli= _request('oubli');
