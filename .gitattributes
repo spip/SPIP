@@ -257,6 +257,7 @@ ecrire/img_pack/warning-24.gif -text
 ecrire/img_pack/warning.gif -text
 ecrire/img_pack/xml.gif -text
 ecrire/inc_accueil.php -text
+ecrire/inc_admin_index.php -text
 ecrire/inc_aide_index.php -text
 ecrire/inc_ajax.php3 -text
 ecrire/inc_ajax_page.php -text
