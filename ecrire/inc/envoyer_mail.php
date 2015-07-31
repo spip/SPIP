@@ -158,7 +158,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 
 	// Ajouter le \n final
 	if ($headers = trim($headers)) $headers .= "\n";
-	if (function_exists('wordwrap'))
+	if (function_exists('wordwrap') && (preg_match('/multipart\/mixed/',$headers) == 0))
 		$texte = wordwrap($texte);
 
 	if (_OS_SERVEUR == 'windows') {
