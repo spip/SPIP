@@ -474,7 +474,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	  . '</a>';
 
 	if ($spip_display == 4) {
-		$res = $titre_boite ."<br />";
+		$res = $titre_boite ."<br id='id$id_forum' />";
 	} else {
 		if ($id_auteur AND $voir_logo) {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
@@ -488,7 +488,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		}
 
 
-		$res = "<tr>"
+		$res = "<tr id='id$id_forum'>"
 		. afficher_forum_4($compteur_forum, $nb_forum, $i)
 		. "\n<td style='width: 100%' valign='top'>"
 		. (($compteur_forum == 1)
