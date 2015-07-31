@@ -134,15 +134,17 @@ else {
 $visites_today = mysql_num_rows($result);
 
 if (count($log)>0){
+
 	$max = max(max($log),$visites_today);
 	$date_today = time();
-	
+
 	$nb_jours = floor(($date_today-$date_debut)/(3600*24));
 
 	
 	$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
+	
 	if ($maxgraph < 10) $maxgraph = 10;
-	if ($maxgraph < $max) $maxgraph.="0";	
+	if (1.1 * $maxgraph < $max) $maxgraph.="0";	
 
 	if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
 
