@@ -197,6 +197,13 @@ div.pos_r {
 	position: relative;
 }
 
+option.selec_rub {
+	background-position: <?php echo $left; ?> center;
+	background-image: url(img_pack/rubrique-12.gif);
+	background-repeat: no-repeat;
+	padding-<?php echo $left; ?>: 16px;
+}
+
 
 div.messages {
 	padding: 5px;

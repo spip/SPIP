@@ -4,10 +4,10 @@ include ("inc.php3");
 
 
 function mySel($varaut,$variable){
-	$retour= " VALUE=\"$varaut\"";
+	$retour= " value=\"$varaut\"";
 
 	if ($variable==$varaut){
-		$retour.= " SELECTED";
+		$retour.= " selected";
 	}
 
 	return $retour;
@@ -37,7 +37,7 @@ function enfant($leparent){
 		if ($my_rubrique != $id_rubrique){
 
 			if (eregi("mozilla", $browser_name)) {
-				$style .= "padding-$spip_lang_left: 16px; ";
+				//$style .= "padding-$spip_lang_left: 16px; ";
 				$style .= "margin-$spip_lang_left: ".($i*16)."px;";
 			} else {
 				for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -47,17 +47,17 @@ function enfant($leparent){
 			if ($i > 4) $style .= "font-style: italic;";
 			if ($i < 3) $style .= "font-weight:bold; ";
 			if ($i==1) {
-				$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
+				$style .= "background-image: url(img_pack/secteur-12.gif);";
 				$style .= "background-color: $couleur_claire;";
 				$style .= "font-weight: bold;";
 			}
 			else if ($i==2) {
-				$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//	$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 				$style .= "border-bottom: 1px solid $couleur_claire;";
 				$style .= "font-weight: bold;";
 			}
 			else {
-				$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//	$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 			}
 
 			if ($statut_rubrique!='publie') $titre = "($titre)";
@@ -65,7 +65,7 @@ function enfant($leparent){
 
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
+				echo "<option".mySel($my_rubrique,$id_parent)." class='selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."\n";
 			}
 			enfant($my_rubrique);
 		}
