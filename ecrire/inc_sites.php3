@@ -87,7 +87,7 @@ function recuperer_page($url) {
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3");
 
-	$texte = unicode2charset(recuperer_page($url));
+	$texte = unicode2charset(iso_8859_1_to_unicode(recuperer_page($url)));
 	if (!$texte) return false;
 	$result = '';
 	if (ereg('<channel[^>]*>(.*)</channel>', $texte, $regs)) {
@@ -146,7 +146,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	$le_retour = unicode2charset(recuperer_page($la_query));
+	$le_retour = unicode2charset(iso_8859_1_to_unicode(recuperer_page($la_query)));
 
 	if (strlen($le_retour)>10){
 
