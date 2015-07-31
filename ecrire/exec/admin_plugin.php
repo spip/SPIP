@@ -41,6 +41,7 @@ function exec_admin_plugin() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	echo "<style type='text/css'>\n";
+	$dir_img_pack = _DIR_IMG_PACK;
 	echo <<<EOF
 div.cadre-padding ul li {
 	list-style:none ;
@@ -94,6 +95,14 @@ div.detailplugin hr {
 	border-left:0;
 	border-right:0;
 	}
+span.dev{	background:url({$dir_img_pack}puce-poubelle.gif) top left no-repeat;}
+span.test{	background:url({$dir_img_pack}puce-orange.gif) top left  no-repeat;}
+span.stable{	background:url({$dir_img_pack}puce-verte.gif) top left  no-repeat;}
+span.experimental{	background:url({$dir_img_pack}puce-rouge.gif) top left  no-repeat;}
+span.dev,span.test,span.stable,span.experimental{
+	display:block;float:left;
+	width:9px; height:9px;margin-right:5px;margin-top:5px;
+}
 EOF;
 	echo "</style>";
 
@@ -104,7 +113,13 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo _T('info_gauche_admin_tech');
+	$s = "";
+	$s .= _T('info_gauche_admin_tech');
+	$s .= "<p><span class='dev'>&nbsp;</span>"._T('plugin_etat_developpement')."</p>";
+	$s .= "<p><span class='test'>&nbsp;</span>"._T('plugin_etat_test')."</p>";
+	$s .= "<p><span class='stable'>&nbsp;</span>"._T('plugin_etat_stable')."</p>";
+	$s .= "<p><span class='experimental'>&nbsp;</span>"._T('plugin_etat_experimental')."</p>";
+	echo $s;
 	fin_boite_info();
 	/*echo "<a href='#' onclick=\"$('input.selection').attr('checked','checked');\">"._L("tout_activer")."</a><br/>";
 	echo "<a href='#' onclick=\"$('input.selection').attr('checked','');\">"._L("tout_desactiver")."</a><br/>";*/
@@ -263,28 +278,7 @@ function ligne_plug($plug_file, $actif, $id){
 
 	// puce d'etat du plugin
 	// <etat>dev|experimental|test|stable</etat>
-	$etat = 'dev';
-	if (isset($info['etat']))
-		$etat = $info['etat'];
-	switch ($etat) {
-		case 'experimental':
-			$puce = 'puce-rouge.gif';
-			$titre_etat = _T('plugin_etat_experimental');
-			break;
-		case 'test':
-			$puce = 'puce-orange.gif';
-			$titre_etat = _T('plugin_etat_test');
-			break;
-		case 'stable':
-			$puce = 'puce-verte.gif';
-			$titre_etat = _T('plugin_etat_stable');
-			break;
-		default:
-			$puce = 'puce-poubelle.gif';
-			$titre_etat = _T('plugin_etat_developpement');
-			break;
-	}
-	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
+	$s .= "<span class='$etat'>&nbsp;</span>";
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
