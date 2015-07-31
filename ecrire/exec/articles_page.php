@@ -70,7 +70,7 @@ echo debut_droite('', true);
 //  Vos articles refuses
 //
 
-	echo afficher_objets('article',_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
+	echo afficher_objets('article',_T('info_refuses'),	array('FROM' =>"spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='refuse'",  'ORDER BY' => "A.date DESC"));
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 
