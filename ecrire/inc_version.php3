@@ -840,7 +840,6 @@ function verif_butineur() {
 }
 
 
-
 function spip_debug($message) {
 	if ($GLOBALS['debug'])
 		spip_log($message);
