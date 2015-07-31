@@ -77,7 +77,6 @@ function brouteur_frame_dist()
 				$id_breve=$row['id_breve'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				$puce = "puce-orange-breve.gif";
 				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve"),"\"'>",$titre,"</a>";
 			}
 			echo "</div>";
@@ -115,24 +114,22 @@ function brouteur_frame_dist()
 			$id_parent=$row['id_parent'];
 			
 			echo "<div class='brouteur_rubrique'
-onMouseOver=\"Changeclass(this, 'brouteur_rubrique_on');\"
+onMouseOver=\"changeclass(this, 'brouteur_rubrique_on');\"
 onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 			if ($id_parent == '0') 	{
-			  echo "<div style='background-image: url(",
-			    _DIR_IMG_PACK,
-			    "secteur-24.gif);'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
+			  echo "<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
 			    $titre,
 			    "</a></div>";
 			}
 			else {
 				if ($frame+1 < $nb_col)
-				  echo "<div style='background-image: url(",
-				    _DIR_IMG_PACK,
-				    "rubrique-24.gif);'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+				  echo "<div style='",
+				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
 				    ($frame+1),
 				    "'>$titre</a></div>";
-				else  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "rubrique-24.gif);'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
+				else  echo "<div style='",
+				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
 			}
 			echo "</div>\n";
 		}
@@ -163,24 +160,6 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 					$id_breve=$row['id_breve'];
 					$titre = typo($row['titre']);
 					$statut = $row['statut'];
-					switch ($statut) {
-						case 'publie':
-							$puce = 'verte';
-								break;
-						case 'prepa':
-							$puce = 'blanche';
-							break;
-						case 'prop':
-							$puce = 'orange';
-							break;
-						case 'refuse':
-							$puce = 'rouge';
-							break;
-						case 'poubelle':
-							$puce = 'poubelle';
-							break;
-					}
-					$puce = "puce-$puce-breve.gif";
 					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve")."\"'>",$titre,"</a>";
 				}
 				echo "</div>";
@@ -199,23 +178,6 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 					$id_syndic=$row['id_syndic'];
 					$titre = typo($row['nom_site']);
 					$statut = $row['statut'];
-					switch ($statut) {
-						case 'publie':
-							$puce = 'verte';
-								break;
-						case 'prepa':
-							$puce = 'blanche';
-							break;
-						case 'prop':
-							$puce = 'orange';
-							break;
-						case 'refuse':
-							$puce = 'rouge';
-							break;
-						case 'poubelle':
-							$puce = 'poubelle';
-							break;
-					}
 					echo "<div " . http_style_background('site-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><b><a href='javascript:window.parent.location=\"", generer_url_ecrire('sites',"id_syndic=$id_syndic"),"\"'>",$titre,"</a></b></div>";
 				}
 			}
@@ -252,5 +214,12 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 	echo "</div>";
 
 echo "</body></html>";
+}
+
+function frame_background_image($f)
+{
+	return "background-image: url(" . 
+		generer_url_ecrire(_DIR_IMG_PACK . $f) .
+		")";
 }
 ?>
