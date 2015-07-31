@@ -1733,7 +1733,8 @@ function form_hidden($action) {
 
 	$fond = ''; // inutilise mais necessaire
 	$contexte = array();
-	if ($renommer = generer_url_entite()
+	if (
+			($renommer = generer_url_entite() OR $renommer = charger_fonction('page','urls'))
 	AND $p = $renommer($action, $fond, $contexte)
 	AND $p[3]) {
 		$contexte = $p[0];
