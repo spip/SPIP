@@ -350,7 +350,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) 
 		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	      else {
-		if ($match[2]) { $par = substr($match[2],1,-1); $fct = $match[1]; }
+		if (count($match)>2) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()

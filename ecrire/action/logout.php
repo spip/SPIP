@@ -34,7 +34,7 @@ function action_logout_dist()
 			$session($auteur_session['id_auteur']);
 			spip_setcookie('spip_session', '', 0);
 		}
-		if ($_SERVER['PHP_AUTH_USER'] AND !$ignore_auth_http) {
+		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http) {
 			include_spip('inc/actions');
 			if (verifier_php_auth()) {
 			  ask_php_auth(_T('login_deconnexion_ok'),

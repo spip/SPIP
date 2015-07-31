@@ -300,7 +300,7 @@ $spip_version_affichee = '1.9.3 dev';
 $spip_version_code = '1.9251';
 
 // ** Securite **
-$auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = '';
+$auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
 $connect_id_rubrique = array();
 
 // definition des lots de fichier precharges en blocs pour reduire les find_in_path en usage courant

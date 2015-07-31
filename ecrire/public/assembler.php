@@ -104,6 +104,7 @@ function assembler_page ($fond) {
 	AND !$var_mode
 	AND $chemin_cache
 	AND isset($page['entetes'])
+	AND isset($page['entetes']['Cache-Control'])
 	AND strstr($page['entetes']['Cache-Control'],'max-age=')
 	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')
 	) {

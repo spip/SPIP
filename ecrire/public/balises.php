@@ -698,7 +698,7 @@ function calculer_balise_logo_dist ($p) {
 
 	preg_match(",^LOGO_([A-Z]+)(_.*)?$,i", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
-	$suite_logo = $regs[2];	
+	$suite_logo = @$regs[2];	
 
 	// cas de #LOGO_SITE_SPIP
 	if (preg_match(",^_SPIP(.*)$,", $suite_logo, $regs)) {
@@ -1018,7 +1018,7 @@ function balise_CHEMIN_dist($p) {
 // http://doc.spip.org/@balise_ENV_dist
 function balise_ENV_dist($p, $src = NULL) {
 	// le tableau de base de la balise (cf #META ci-dessous)
-	if (!$src) $src = '$Pile[0]';
+	if (!$src) $src = '@$Pile[0]';
 
 	$_nom = interprete_argument_balise(1,$p);
 	$_sinon = interprete_argument_balise(2,$p);

@@ -549,7 +549,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
 
 	if ($match = typer_raccourci ($lien)) {
-		list($f,$objet,$id,$params,$ancre) = $match;
+		@list($f,$objet,$id,$params,$ancre) = $match;
 		// chercher la fonction nommee generer_url_$raccourci
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;

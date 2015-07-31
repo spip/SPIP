@@ -102,21 +102,23 @@ function action_cookie_dist() {
 		}
 	}
 
+	$cook = isset($_COOKIE['spip_admin']) ? $_COOKIE['spip_admin'] : '';
 	// Suppression cookie d'admin ?
 	if (_request('cookie_admin') == "non") {
 		if (!$retour = _request('retour'))
 			$retour = generer_url_public('login',
 				'url='.rawurlencode($url), true);
 	
-		spip_setcookie('spip_admin', $_COOKIE['spip_admin'], time() - 3600 * 24);
+		if ($cook)
+			spip_setcookie('spip_admin', $cook, time() - 3600 * 24);
 		$redirect = parametre_url($retour,'var_login','','&');
 		$redirect = parametre_url($redirect,'var_erreur','','&');
 		$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
 			. "var_login=-1";
 	}
 	// Ajout de cookie d'admin
-	else if (($set_cookie_admin OR $set_cookie_admin = _request('cookie_admin'))
-	AND $set_cookie_admin != $_COOKIE['spip_admin']) {
+	else if ((isset($set_cookie_admin) OR $set_cookie_admin = _request('cookie_admin'))
+	AND $set_cookie_admin != $cook) {
 		spip_setcookie('spip_admin', $set_cookie_admin, time() + (_RENOUVELLE_ALEA << 1));
 	}
 
