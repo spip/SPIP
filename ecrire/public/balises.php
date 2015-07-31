@@ -859,7 +859,7 @@ function balise_CACHE_dist($p) {
 		// cas #CACHE{0}
 		if ($duree == 0)
 			$code .= '.\'<'
-			.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+			.'?php header("Cache-Control: no-cache, must-revalidate"); ?'
 			.'><'
 			.'?php header("Pragma: no-cache"); ?'
 			.'>\'';
