@@ -392,4 +392,40 @@ $tables_auxiliaires  =
 					 'key' => &$spip_ortho_dico_key)
 	);
 
+	
+//
+// tableau des tables de relations,
+// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
+// transposee en tables_jointures pour le code moderne
+//
+global $tables_jointures;
+
+$tables_jointures['spip_articles']['id_mot']='mots_articles';
+$tables_jointures['spip_articles']['id_auteur']='auteurs_articles';
+$tables_jointures['spip_articles']['id_document']='documents_articles';
+
+$tables_jointures['spip_auteurs']['id_article']='auteurs_articles';
+
+$tables_jointures['spip_breves']['id_mot']='mots_breves';
+$tables_jointures['spip_breves']['id_document']='documents_breves';
+
+$tables_jointures['spip_documents']['id_article']='documents_articles';
+$tables_jointures['spip_documents']['id_rubrique']='documents_rubriques';
+$tables_jointures['spip_documents']['id_breve']='documents_breves';
+
+$tables_jointures['spip_forums']['id_mot']='mots_forum';
+
+$tables_jointures['spip_mots']['id_article']='mots_articles';
+$tables_jointures['spip_mots']['id_breve']='mots_breves';
+$tables_jointures['spip_mots']['id_forum']='mots_forum';
+$tables_jointures['spip_mots']['id_rubrique']='mots_rubriques';
+$tables_jointures['spip_mots']['id_syndic']='mots_syndic';
+
+$tables_jointures['spip_groupes_mots']['id_groupe']='mots';
+
+$tables_jointures['spip_rubriques']['id_mot']='mots_rubriques';
+$tables_jointures['spip_rubriques']['id_document']='documents_rubriques';
+
+$tables_jointures['spip_syndication']['id_mot']='mots_syndic';
+
 ?>
