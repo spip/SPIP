@@ -232,16 +232,12 @@ if ($changer_virtuel && $flag_editable) {
 }
 
 if ($titre && !$ajout_forum && $flag_editable) {
-	$surtitre = addslashes(corriger_caracteres($surtitre));
-	$titre = addslashes(corriger_caracteres($titre));
-	$soustitre = addslashes(corriger_caracteres($soustitre));
-	$descriptif = addslashes(corriger_caracteres($descriptif));
-	$nom_site = addslashes(corriger_caracteres($nom_site));
-	$url_site = addslashes(corriger_caracteres($url_site));
-	$chapo = addslashes(corriger_caracteres($chapo));
-	$texte = addslashes(corriger_caracteres($texte));
-	$ps = addslashes(corriger_caracteres($ps));
-
+	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+	$champs_version = array();
+	foreach ($champs as $nom_champ) {
+		$t = $champs_versions[$nom_champ] = corriger_caracteres($$nom_champ);
+		$$nom_champ = addslashes($t);
+	}
 
 	// recoller les champs du extra
 	if ($champs_extra) {
@@ -266,7 +262,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	// Stockage des versions
 	if ($articles_versions != 'non') {
 		include_ecrire("inc_diff.php3");
-		ajouter_version($id_article, stripslashes($chapo), stripslashes($texte), stripslashes($ps), '');
+		ajouter_version($id_article, $champs_versions);
 	}
 
 	// Changer la langue heritee
@@ -338,6 +334,7 @@ if ($row = spip_fetch_array($result)) {
 	$referers = $row["referers"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
+	$id_version = $row["id_version"];
 }
 
 // pour l'affichage du virtuel
@@ -420,6 +417,10 @@ $activer_statistiques = lire_meta("activer_statistiques");
 
 if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+}
+
+if ($articles_versions != 'non' AND $connect_statut == "0minirezo" AND $id_version>1) {
+	icone_horizontale(_L('Afficher les r&eacute;visions...'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
 echo "</div>\n";
