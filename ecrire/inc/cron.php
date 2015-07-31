@@ -59,7 +59,6 @@ function inc_cron_dist($taches = array()) {
 	// Quelle est la tache la plus urgente ?
 	$tache = '';
 	$tmin = $t = time();
-	clearstatcache();
 	foreach ($taches as $nom => $periode) {
 		$celock = _DIR_TMP . $nom . '.lock';
 		$date_lock = @filemtime($celock);

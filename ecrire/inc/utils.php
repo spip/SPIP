@@ -558,22 +558,20 @@ function spip_timer($t='rien') {
 }
 
 
-// spip_touch : verifie si un fichier existe et n'est pas vieux (duree en s)
-// et le cas echeant le touch() ; renvoie true si la condition est verifiee
-// et fait touch() sauf si ca n'est pas souhaite
-// (regle aussi le probleme des droits sur les fichiers touch())
+// Renvoie False si un fichier n'est pas plus vieux que $duree secondes,
+// sinon renvoie True et le date sauf si ca n'est pas souhaite
 // http://doc.spip.org/@spip_touch
 function spip_touch($fichier, $duree=0, $touch=true) {
-	if (!($exists = @is_readable($fichier))
-	|| ($duree == 0)
-	|| (@filemtime($fichier) < time() - $duree)) {
-		if ($touch) {
-			if (!@touch($fichier)) { spip_unlink($fichier); @touch($fichier); };
-			if (!$exists) @chmod($fichier, _SPIP_CHMOD & ~0111);
-		}
-		return true;
+	if ($duree) {
+		clearstatcache();
+		if ((@$f=filemtime($fichier)) AND ($f >= time() - $duree))
+			return false;
 	}
-	return false;
+	if ($touch) {
+		if (!@touch($fichier)) { spip_unlink($fichier); @touch($fichier); };
+		@chmod($fichier, _SPIP_CHMOD & ~0111);
+	}
+	return true;
 }
 
 // Ce declencheur de tache de fond, de l'espace prive (cf inc_presentation)
