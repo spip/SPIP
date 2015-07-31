@@ -114,8 +114,12 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 			$contexte['id_parent'] = $contexte['id_rubrique'];
 			unset($contexte['id_rubrique']);
 		}
-		else
+		else{
 			$contexte['id_parent'] = '';
+		}
+		if (!$contexte['id_parent']
+			AND $preselectionner_parent_nouvel_objet = charger_fonction("preselectionner_parent_nouvel_objet","inc",true))
+			$contexte['id_parent'] = $preselectionner_parent_nouvel_objet($type,$row);
 	}
 
 	if ($config_fonc)
