@@ -10,7 +10,6 @@ define("_ECRIRE_INC_LANG", "1");
 // Charger un fichier langue
 //
 function charger_langue($lang) {
-	global $dir_ecrire;
 	include_ecrire ("lang/spip_$lang.php3");
 }
 
@@ -19,7 +18,7 @@ function charger_langue($lang) {
 //
 function changer_langue($lang) {
 	global $all_langs;
- 	if (ereg(",$lang,", ",$all_langs,")) {
+ 	if (ereg(",$lang,", $all_langs)) {
 		$GLOBALS['spip_lang'] = $lang;
 		return true;
 	}

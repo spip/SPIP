@@ -861,6 +861,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 
 
 // L
+'langue_fr' => 'fran&ccedil;ais',
+'langue_zg' => 'zorglub',
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
 'lien_afficher_texte_icones' => 'Afficher les icones et le texte',
 'lien_afficher_texte_seul' => 'Afficher uniquement le texte',

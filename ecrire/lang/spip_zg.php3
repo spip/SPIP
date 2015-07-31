@@ -861,6 +861,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 
 
 // L
+'langue_fr' => 'Zranzouski',
+'langue_zg' => 'zorGGlub',
 'lien_afficher_icones_seuls' => 'Afficher uniquement les iconesZORG',
 'lien_afficher_texte_icones' => 'Afficher les icones et le texteZORG',
 'lien_afficher_texte_seul' => 'Afficher uniquement le texteZORG',
