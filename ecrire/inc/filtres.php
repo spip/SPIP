@@ -2232,7 +2232,7 @@ function compacte_js($flux) {
 
 	// en cas d'echec (?) renvoyer l'original
 	if (strlen($t = $packer->pack()))
-		return $t;
+		return ";\n$t";
 
 	// erreur
 	spip_log('erreur de compacte_js');
