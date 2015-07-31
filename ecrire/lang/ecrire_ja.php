@@ -677,8 +677,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 
 	// U
 	'utf8_convert_erreur_orig' => 'エラー: その文字セット　@charset@　は、対応していません。',
-	'utf8_convert_termine' => '完了しました!!',
-	'utf8_convertir_votre_site' => 'あなたのサイトをutf-8に変換します。',
 
 	// V
 	'version' => 'バージョン:'

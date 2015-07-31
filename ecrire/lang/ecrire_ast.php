@@ -992,15 +992,7 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	// U
 	'upload_info_mode_document' => 'Dexar esta imaxe nel maletu',
 	'upload_info_mode_image' => 'Desaniciar esta imaxe del maletu',
-	'utf8_convert_attendez' => 'Espera dellos instantes y recarga esta páxina.',
-	'utf8_convert_avertissement' => 'Dispóneste a convertir el conteníu de la to base de datos (artículos, breves, etc) del xuegu de carauteres <b>@orig@</b> al xuegu de carauteres <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Nun escaezas de facer enantes una copia de seguridá completa del to sitiu. También tendríes que verificar si les cadarmes y archivos de llingües son compatibles con @charset@.',
-	'utf8_convert_erreur_deja' => 'Esti sitiu ya ta en @charset@, ye inútil facer la conversión...',
 	'utf8_convert_erreur_orig' => 'Error: el xuegu de carautéres @charset@ nun ta soportáu.',
-	'utf8_convert_termine' => '¡Terminose!',
-	'utf8_convert_timeout' => '<b>Importante:</b> en casu de <i>timeout</i> del sirvidor, tendrás que recargar la páxina mientres que nun apaeza «terminao».',
-	'utf8_convert_verifier' => 'Agora tienes que vaciar la caché, y verificar que too se vea bien nes páxines públiques del sitiu. En casu de problemes graves, fízose una copia de seguridá de los datos (en formatu SQL) nel direutoriu @rep@.',
-	'utf8_convertir_votre_site' => 'Convertir esti sitiu a utf-8',
 
 	// V
 	'version' => 'Versión:'

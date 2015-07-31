@@ -738,15 +738,7 @@ you can perform searches on sites and
 	'trad_new' => 'Skriv en ny översättning av den här artikeln', # MODIF
 
 	// U
-	'utf8_convert_attendez' => 'Vänta några sekunder och ladda sedan om den här sidan.',
-	'utf8_convert_avertissement' => 'Du håller på att konvertera innehållet i din databas (artiklar, notiser, etc) från teckenkodningen <b>@orig@</b> till teckenkodningen <b>@charset@</b>',
-	'utf8_convert_backup' => 'Glöm inte bort att göra en fullständig säkerhetskopia av din webbplats. Du behöver också kontrollera att dina dokumentmallar och språkfiler är kompatibla med @charset@. Om spårning av revideringar är påslaget kommer den hur som helst att bli skadad.', # MODIF
-	'utf8_convert_erreur_deja' => 'Din webbplats är redan i @charset@, det är ingen mening med att konvertera.',
 	'utf8_convert_erreur_orig' => 'Fel: teckenkodningen @charset@ stöds inte.',
-	'utf8_convert_termine' => 'Klart!',
-	'utf8_convert_timeout' => '<b>Viktigt:</b> Om servern svarar med <i>timeout</i>, ladda om sidan tills du får meddelandet "Klart!".',
-	'utf8_convert_verifier' => 'Nu behöver du tömma webbplatsens cache och sedan kontrollera att allt är bra med de offentliga delarna av webbplatsen. Om du upplever allvarliga problem har en säkerhetskopia av ditt ursprungliga data (i SQL-format) placerats i @rep@-katalogen.',
-	'utf8_convertir_votre_site' => 'Konvertera din webbplats till utf-8',
 
 	// V
 	'version' => 'Version:'

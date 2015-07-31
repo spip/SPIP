@@ -845,15 +845,7 @@ SQL’in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu
 	// U
 	'upload_info_mode_document' => 'Bu resmi portföye ekle',
 	'upload_info_mode_image' => 'Bu resmi portföyden çıkar',
-	'utf8_convert_attendez' => 'Bir süre bekleyip sayfayı yeniden yükleyiniz.',
-	'utf8_convert_avertissement' => 'Veritabanınızın içeriğini (makaleler, kısa haberler vs.) <b>@orig@</b> karakter setinden <b>@charset@</b> karakter setine dönüştürmektesiniz .',
-	'utf8_convert_backup' => 'Önceden sitenizin tam bir yedeğini almayı unutmayınız. Ayrıca iskeletlerinizin ve dil dosyalarınızın @charset@ karakter setiyle uyumlu olup olmadığını doğrulamalısınız. ',
-	'utf8_convert_erreur_deja' => 'Siteniz zaten @charset@ karakter setinde, dönüştürmeniz gereksiz...',
 	'utf8_convert_erreur_orig' => 'Hata : @charset@ karakter seti desteklenmiyor.',
-	'utf8_convert_termine' => 'Tamamlandı !',
-	'utf8_convert_timeout' => '<b>Önemli :</b> sunucuda <i>zaman aşımı</i> oluşursa sayfayı « tamamlandı » yazana kadar tekrar yükleyiniz.',
-	'utf8_convert_verifier' => 'Şimdi önbelleği boşaltmalı ve sitenin kamusal sayfalarında herşeyin yolunda olduğunu doğrulamalısınız. Büyük bir soun varsa, @rep@ dizininde verilerinizin bir yedeği (SQL formatında) alınmıştır.',
-	'utf8_convertir_votre_site' => 'Sitenizi utf-8’e dönüştürmek',
 
 	// V
 	'version' => 'Sürüm :'

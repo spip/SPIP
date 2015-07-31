@@ -952,15 +952,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'upload_info_mode_document' => 'Dëst Bild am Portfolio ofleeën',
 	'upload_info_mode_image' => 'Dëst Bild aus dem Portfolio läschen',
-	'utf8_convert_attendez' => 'Waart e bësschen a luet dann dës Säit nei.',
-	'utf8_convert_avertissement' => 'Dir wäert elo den Inhalt vun ärer Datebank (Artikelen, Kuerzmeldungen, asw) vum Character-Set <strong>@orig@</strong> ob <strong>@charset@</strong> änneren.',
-	'utf8_convert_backup' => 'Vergiesst net virdrun e komplette Backup vun ärem Site ze maachen. Dir musst och kontrolléieren ob är Skeletter a Sproch-Fichier’en @charset@ kompatibel sinn.',
-	'utf8_convert_erreur_deja' => 'Äre Site ass schon ob @charset@, kee Wäert ze konvertéieren...',
 	'utf8_convert_erreur_orig' => 'Fehler: de Character-Set @charset@ gëtt net ënnerstëtzt.',
-	'utf8_convert_termine' => 'Et ass fäerdeg!',
-	'utf8_convert_timeout' => '<strong>Wichteg:</strong> wann ären Server en <em>Timeout</em> mécht, Lued dës Säit nei bis se "Fäerdeg" weist.',
-	'utf8_convert_verifier' => 'Dir musst elo de Cache läschen a kontrolléieren ob alles ob dem ëffentlechen Site richteg ass. Fir de Fall vu grousse Problemer läit am Dossier @rep@ e Backup am Format SQL.',
-	'utf8_convertir_votre_site' => 'Ären Site ob UTF-8 konvertéieren',
 
 	// V
 	'version' => 'Versioun:'

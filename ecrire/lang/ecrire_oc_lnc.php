@@ -790,15 +790,7 @@ s’avètz bravament modificat lo grafisme o l’estructura del sit.',
 	'trad_new' => 'Escriure una revirada novèla d’aqueste article', # MODIF
 
 	// U
-	'utf8_convert_attendez' => 'Esperatz un momenton e tornatz cargar aquesta pagina.',
-	'utf8_convert_avertissement' => 'Sètz a mand de convertir lo  contengut de vòstra basa de donadas (articles, brèvas, etc) del jòc de caractèrs <b>@orig@</b> cap al jòc de caractèrs <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Doblidètz pas de far d’en primièr un salvament complet de vòstre sit. Vos cal tanben verificar que vòstras esqueletas e fichièrs de lenga son compatibles @charset@. ',
-	'utf8_convert_erreur_deja' => 'Vòtre sit es ja en @charset@, inutil de lo convertir...',
 	'utf8_convert_erreur_orig' => 'Error : lo jòc de caractèrs @charset@ es pas suportat.',
-	'utf8_convert_termine' => 'Es acabat !',
-	'utf8_convert_timeout' => '<b>Important :</b> en cas de <i>timeout</i> del servidor, volgatz recargar la pagina fins a çò qu’indique « acabat ».',
-	'utf8_convert_verifier' => 'Vos cal ara vojar l’escondedor, e verificar que tot va plansus las paginas publicas del sit. En cas de gròs problèma, un salvament de vòstras donadas s’es realizat (de format SQL) dins lo repertòri @rep@.',
-	'utf8_convertir_votre_site' => 'Convertir vòstre sit en utf-8',
 
 	// V
 	'version' => 'Version :'

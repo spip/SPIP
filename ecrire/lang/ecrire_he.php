@@ -449,9 +449,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'trad_delier' => 'לא לקשור את המאמר לתרגומיו',
 	'trad_new' => 'כתיבת תרגום חדש של המאמר',
 
-	// U
-	'utf8_convert_termine' => 'סיימת!',
-
 	// V
 	'version' => 'מספר :'
 );
