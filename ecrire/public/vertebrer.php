@@ -42,6 +42,7 @@ function vertebrer_sort($fields, $direction)
 	return $res;
 }
 
+// http://doc.spip.org/@vertebrer_sanstri
 function vertebrer_sanstri($sauf='')
 {
 	$url ="";
@@ -53,6 +54,7 @@ function vertebrer_sanstri($sauf='')
 
 // Autant de formulaire que de champs (pour les criteres conditionnels) 
 
+// http://doc.spip.org/@vertebrer_form
 function vertebrer_form($fields)
 {
 	$res = '';

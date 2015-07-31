@@ -484,6 +484,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	exit;
 }
 
+// http://doc.spip.org/@debug_affiche
 function debug_affiche($fonc, $tout, $objet, $affiche)
 {
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
