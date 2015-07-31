@@ -10,12 +10,6 @@ include_local ("inc-cache.php3");
 //
 
 function inclure_fichier($fond, $delais, $contexte_inclus = "") {
-	static $seed = 0;
-	if (!$seed) {
-		$seed = (double) (microtime() + 1) * time();
-		srand($seed);
-	}
-
 	$fichier_requete = $fond;
 	if (is_array($contexte_inclus)) {
 		reset($contexte_inclus);
@@ -31,13 +25,8 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
 		$page = calculer_page($fond, $contexte_inclus);
 		if ($page) {
-			if ($GLOBALS['flag_apc']) {
-				apc_rm($chemin_cache);
-			}
 			spip_log("calcul($delais): $chemin_cache");
-			$f = fopen($chemin_cache, "wb");
-			fwrite($f, $page);
-			fclose($f);
+			ecrire_fichier_cache($chemin_cache, $texte);
 		}
 	}
 	return $chemin_cache;
@@ -61,7 +50,7 @@ $use_cache = utiliser_cache($chemin_cache, $delais);
 if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 	include_ecrire("inc_meta_cache.php3");
 }
-if (! defined("_ECRIRE_INC_META_CACHE")) {
+if (!defined("_ECRIRE_INC_META_CACHE")) {
 	include_ecrire("inc_meta.php3");
 }
 
@@ -114,13 +103,8 @@ if (!$use_cache) {
 
 			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
-			if ($GLOBALS['flag_apc']) {
-				apc_rm($chemin_cache);
-			}
 			spip_log("redirection: $url");
-			$file = fopen($chemin_cache, "wb");
-			fwrite($file, $texte);
-			fclose($file);
+			ecrire_fichier_cache($chemin_cache, $texte);
 		}
 	}
 
@@ -128,13 +112,8 @@ if (!$use_cache) {
 		include_local ("inc-calcul.php3");
 		$page = calculer_page_globale($fond);
 		if ($page) {
-			if ($GLOBALS['flag_apc']) {
-				apc_rm($chemin_cache);
-			}
 			spip_log("calcul($delais): $chemin_cache");
-			$file = fopen($chemin_cache, "wb");
-			fwrite($file, $page);
-			fclose($file);
+			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
 }

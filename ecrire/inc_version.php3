@@ -74,8 +74,6 @@ $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 $flag_strtr2 = ($php_version_maj > 3);
 
-$flag_mysql_delayed = false;	// tant qu'on ne sait pas detecter si les INSERT DELAYED sont autorises...
-
 if ($flag_function_exists) {
 	$flag_ini_get = (function_exists("ini_get")
 		&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
@@ -91,6 +89,7 @@ if ($flag_function_exists) {
 	$flag_sapi_name = function_exists("php_sapi_name");
 	$flag_utf8_decode = function_exists("utf8_decode");
 	$flag_ldap = function_exists("ldap_connect");
+	$flag_flock = function_exists("flock");
 }
 else {
 	$flag_ini_get = false;
@@ -104,6 +103,7 @@ else {
 	$flag_sapi_name = false;
 	$flag_utf8_decode = false;
 	$flag_ldap = false;
+	$flag_flock = false;
 }
 
 
