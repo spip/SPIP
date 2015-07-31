@@ -19,7 +19,7 @@
 	Vos articles en cours
 
 ]
-[(#SET{titre,#URL_ECRIRE{mes_articles}|afficher_plus_info|concat{<:info_en_cours_validation:>}})]
+[(#SET{titre,#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}|afficher_plus_info|concat{<:info_en_cours_validation:>}})]
 <INCLURE{fond=prive/objets/liste/articles,titre=#GET{titre},statut=prepa,id_auteur=#SESSION{id_auteur},par=date,env,ajax} />
 
 [(#REM)
