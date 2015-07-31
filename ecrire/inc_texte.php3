@@ -289,7 +289,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		}
 
 		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette' border=0$align";
+			$vignette = "<img src='$fichier_vignette' border=0";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre)
@@ -297,7 +297,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			if ($affichage_detaille)
 				$vignette .= ">";
 			else
-				$vignette .= " hspace='5' vspace='3'>";
+				$vignette .= " hspace='5' vspace='3'$align>";
 		}
 		else {
 			$vignette = vignette_par_defaut($extension);
