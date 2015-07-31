@@ -25,9 +25,8 @@ function balise_LOGO__dist ($p) {
 	$suite_logo = $regs[2];
 
 	// cas de #LOGO_SITE_SPIP
-	if (preg_match(",^_SPIP(.*)$,", $suite_logo, $regs)) {
+	if ($type_objet == 'SITE_SPIP') {
 		$type_objet = 'SITE';
-		$suite_logo = $regs[1];
 		$_id_objet = "\"'0'\"";
 		$id_objet = 'id_syndic'; # parait faux mais donne bien "siteNN"
 	} else {
