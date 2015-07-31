@@ -189,7 +189,7 @@ function controle_forum_boucle($row, $args) {
 	  safehtml(lignes_longues($suite)) .
 	  $mots .
 	  join(', ', $documents) .
-	  "</div>".
+	  "<div class='nettoyeur'></div></div>".
 	  fin_cadre_thread_forum(true);
 }
 
