@@ -145,10 +145,16 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 //
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
-function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id_rubrique=::sel::';", $rub_exclus=0, $aff_racine=false) {
+function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false) {
+
+	if (!$fonction)
+		$fonction = "document.location=" .
+			http_php_script('naviguer', "id_rubrique=::sel::") .
+			';';
+
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
-	spip_log("$sel, $rac, $fonction, $rub_exclus, $aff_racine");
+
 	$ret .= "<div id='$rac'>";
 	$ret .= "<div style='display: none;'>";
 	$ret .= "<input type='text' id='".$rac."_fonc' value=\"$fonction\" />";
