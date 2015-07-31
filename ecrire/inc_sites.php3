@@ -19,8 +19,10 @@ function recuperer_page($url) {
 	$http_proxy = lire_meta("http_proxy");
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
+	else
+		$via_proxy = " (proxy $http_proxy)";
 
-	spip_log("syndication $http_proxy$url"); 
+	spip_log("syndication $url$via_proxy"); 
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		$t = @parse_url($url);
@@ -65,19 +67,20 @@ function recuperer_page($url) {
 			fclose($f);
 		}
 		else {
-			$f = @fopen($url, "rb");
+			if (! $GLOBALS['tester_proxy'])
+				$f = @fopen($url, "rb");
 			break;
 		}
 	}
 
-	if (!f)
-		spip_log("ECHEC syndication $http_proxy$url");
-
-	while (!feof($f)) {
-		$result .= fread($f, 16384);
+	if (!$f)
+		spip_log("ECHEC syndication $url$via_proxy");
+	else {
+		while (!feof($f))
+			$result .= fread($f, 16384);
+		fclose($f);
+		return $result;
 	}
-	fclose($f);
-	return $result;
 }
 
 
