@@ -1,14 +1,7 @@
-#SET{boutons,#ENV**|definir_barre_contexte|definir_barre_boutons{0}}
-
-<BOUCLE_menu(POUR){tableau #GET{boutons}}{cle=bando_configuration}>
-	<div class='navigation'>
-		<ul class='liste_items sous_navigation'>
-		<BOUCLE_menusous(POUR){tableau #VALEUR{sousmenu}}>[<li class="item"><a
-							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
-							class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_menusous>
-		</ul>
-	</div>
-</BOUCLE_menu>
+<INCLURE{fond=prive/squelettes/inclure/menu-navigation, 
+	menu=bando_configuration, 
+	bloc=navigation,
+	env} />
 
 [(#BOITE_OUVRIR{#VAL{avis_attention}|_T|wrap{<h4>},'info'})]
 <p><:texte_inc_config:></p>
