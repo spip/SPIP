@@ -28,8 +28,7 @@ include_spip('inc/getdocument');
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
-// http://doc.spip.org/@ajouter_un_document
-function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
+function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
@@ -251,48 +250,6 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 }
 
 
-//
-// Traiter la liste des fichiers (action joindre3)
-//
-
-// http://doc.spip.org/@inc_ajouter_documents
-function inc_ajouter_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
-{
-	if (function_exists('gzopen') 
-	AND !($mode == 'distant')
-	AND (count($files) == 1)) {
-
-		$desc = $files[0];
-		if (preg_match('/\.zip$/i', $desc['name'])
-		    OR ($desc['type'] == 'application/zip')) {
-	
-	  // on pose le fichier dans le repertoire zip 
-	  // (nota : copier_document n'ecrase pas un fichier avec lui-meme
-	  // ca autorise a boucler)
-			$zip = copier_document("zip",
-					$desc['name'],
-					$desc['tmp_name']
-				);
-			if (!$zip) die ('Erreur upload zip'); # pathologique
-			// Est-ce qu'on sait le lire ?
-			include_spip('inc/pclzip');
-			$archive = new PclZip($zip);
-			if ($archive) {
-			  $valables = verifier_compactes($archive);
-			  if ($valables) {
-			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect);
-			    exit;
-			  }
-			}
-		}
-	}
-	foreach ($files as $arg) {
-		check_upload_error($arg['error']);
-		$x = ajouter_un_document($arg['tmp_name'], $arg['name'], 
-				    $type, $id, $mode, $id_document, $actifs);
-	}
-	return $x;
-}
 
 
 // http://doc.spip.org/@verifier_compactes
@@ -309,28 +266,6 @@ function verifier_compactes($zip) {
 	sort($aff_fichiers);
 	return $aff_fichiers;
 }
-
-// http://doc.spip.org/@joindre_deballes
-function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
-{
-	    define('_tmp_dir', creer_repertoire_documents($hash));
-	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_spip('inc/pclzip');
-	    $archive = new PclZip($path);
-	    $archive->extract(
-			      PCLZIP_OPT_PATH, _tmp_dir,
-			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
-			      );
-	    $contenu = verifier_compactes($archive);
-	    
-	    foreach ($contenu as $fichier)
-		$x = ajouter_un_document(_tmp_dir.basename($fichier),
-				    basename($fichier),
-				    $type, $id, $mode, $id_document, $actifs);
-	    effacer_repertoire_temporaire(_tmp_dir);
-	    return $x;
-}
-
 
 //
 // Convertit le type numerique retourne par getimagesize() en extension fichier
@@ -449,8 +384,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
 		_T('bouton_valider').
 		  "'></div>";
-	echo "<p>build form $iframe_redirect</p>";
-  $action = construire_upload($texte, array(
+	$action = construire_upload($texte, array(
 					 'redirect' => $redirect,
 					 'iframe_redirect' => $iframe_redirect,
 					 'hash' => $hash,
@@ -458,25 +392,24 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 					 'arg' => $arg));
 	
 	if(_request("iframe")=="iframe") {
-    echo "<div class='upload_answer upload_zip_list'><p>" .
-		_T('upload_fichier_zip_texte') .
+	return "<p>build form $iframe_redirect</p>" .
+	  "<div class='upload_answer upload_zip_list'><p>" .
+	  _T('upload_fichier_zip_texte') .
 	  "</p><p>" .
-		_T('upload_fichier_zip_texte2') .
+	  _T('upload_fichier_zip_texte2') .
 	  "</p>" .
 	  $action.
 	  "</div>";
-    exit;
-  }
+	} else {
   				 
-	echo minipres(_T('upload_fichier_zip'),
-	  "<p>" .
-		_T('upload_fichier_zip_texte') .
-	  "</p><p>" .
-		_T('upload_fichier_zip_texte2') .
-	  "</p>" .
-	  $action);
-	exit;
-	// a tout de suite en joindre4, joindre5, ou joindre6
+	return minipres(_T('upload_fichier_zip'),
+		      "<p>" .
+		      _T('upload_fichier_zip_texte') .
+		      "</p><p>" .
+		      _T('upload_fichier_zip_texte2') .
+		      "</p>" .
+		      $action);
+	}
 }
 
 

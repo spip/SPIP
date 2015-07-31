@@ -93,8 +93,7 @@ function action_joindre_dist()
 // http://doc.spip.org/@spip_action_joindre2
 function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	return $ajouter_documents(array(
+	return joindre_documents(array(
 				   array('name' => basename($path),
 					 'tmp_name' => $path)
 				   ), 'distant', $type, $id, $id_document,
@@ -106,7 +105,6 @@ function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre1
 function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$files = array();
 	if (is_array($path))
 	  foreach ($path as $file) {
@@ -114,7 +112,7 @@ function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $red
 			$files[]=$file;
 	}
 
-	return $ajouter_documents($files, $mode, $type, $id, $id_document,
+	return joindre_documents($files, $mode, $type, $id, $id_document,
 			     $hash, $redirect, $actifs, $iframe_redirect);
 } 
 
@@ -144,17 +142,60 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 	  }
 	}
 
+	return joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
+}
+
+//
+// Charger la fonction surchargeable receptionnant un fichier
+// et l'appliquer sur celui ou ceux indiques.
+
+// http://doc.spip.org/@inc_ajouter_documents
+function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
+{
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	return $ajouter_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
+
+	if (function_exists('gzopen') 
+	AND !($mode == 'distant')
+	AND (count($files) == 1)) {
+
+		$desc = $files[0];
+		if (preg_match('/\.zip$/i', $desc['name'])
+		    OR ($desc['type'] == 'application/zip')) {
+	
+	  // on pose le fichier dans le repertoire zip 
+	  // (nota : copier_document n'ecrase pas un fichier avec lui-meme
+	  // ca autorise a boucler)
+			$zip = copier_document("zip",
+					$desc['name'],
+					$desc['tmp_name']
+				);
+			if (!$zip) die ('Erreur upload zip'); # pathologique
+			// Est-ce qu'on sait le lire ?
+			include_spip('inc/pclzip');
+			$archive = new PclZip($zip);
+			if ($archive) {
+			  $valables = verifier_compactes($archive);
+			  if ($valables) {
+			    echo liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect);
+	// a tout de suite en joindre4, joindre5, ou joindre6
+			    exit;
+			  }
+			}
+		}
+	}
+	foreach ($files as $arg) {
+		check_upload_error($arg['error']);
+		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
+				    $type, $id, $mode, $id_document, $actifs);
+	}
+	return $x;
 }
 
 #-----------------------------------------------------------------------
 
 // sous-actions suite a l'envoi d'un Zip:
-// la fonction ajouter_documents standard a construit un formulaire 
+// la fonction joindre_documents ci-dessus a construit un formulaire 
 // qui renvoie sur une des 3 sous-actions qui suivent. 
-// On recharge ajouter_document sans l'appeler, car son fichier doit
-// contenir les acolytes qui nous interessent (pas bien beau)
 
 //  Zip avec confirmation "tel quel"
 
@@ -166,7 +207,7 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $red
 	if (!$pos) {
 		$pos = strpos($path, '/zip_');
 	}
-	return ajouter_un_document($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
+	return $ajouter_documents($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
 }
 
 // Zip a deballer. 
@@ -174,7 +215,6 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre6
 function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
 	@unlink($path);
@@ -186,9 +226,33 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre4
 function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
+}
+
+// http://doc.spip.org/@joindre_deballes
+function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+{
+	    $ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+	    define('_tmp_dir', creer_repertoire_documents($hash));
+
+	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
+
+	    include_spip('inc/pclzip');
+	    $archive = new PclZip($path);
+	    $archive->extract(
+			      PCLZIP_OPT_PATH, _tmp_dir,
+			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+			      );
+	    $contenu = verifier_compactes($archive);
+
+	    foreach ($contenu as $fichier) {
+		$f = basename($fichier);
+		$x = $ajouter_documents(_tmp_dir. $f, $f,
+				    $type, $id, $mode, $id_document, $actifs);
+	    }
+	    effacer_repertoire_temporaire(_tmp_dir);
+	    return $x;
 }
 
 
