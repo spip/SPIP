@@ -227,14 +227,12 @@ feed_post_files('HTTP_POST_FILES');
 //
 // Appliquer le prefixe cookie
 //
-function spip_setcookie ($name='', $value='', $expire='', $path='', $domain='', $secure='') {
+function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $secure='') {
 	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
 	
-	// patch safari beta 51
-    if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT'])) {  
-        $path = "/";
-        $expire = time()+36000;
-    }
+	// patch safari beta 51-60
+    if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT']))
+        $path = ereg_replace("/[^/]+", "/", $GLOBALS['REQUEST_URI']);
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
