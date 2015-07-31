@@ -121,7 +121,7 @@ $test_i18n = false;
 //
 
 
-$flag_ecrire = !file_exists('ecrire/inc_version.php3');
+$flag_ecrire = !file_exists('./ecrire/inc_version.php3');
 
 if ($flag_ecrire) {
 	if (file_exists('mes_options.php3')) {
