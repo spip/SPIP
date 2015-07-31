@@ -21,10 +21,6 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 		return "<img src='" . chemin_image("$type-24.png") . "' alt='' />";
 }
 
-// http://doc.spip.org/@puce_statut_document_dist
-function puce_statut_document_dist($id, $statut, $id_rubrique, $type, $ajax='') {
-	return "<img src='" . chemin_image("attachment-16.png") . "' alt=''  />";
-}
 
 // http://doc.spip.org/@puce_statut_auteur_dist
 // Hack de compatibilite: les appels directs ont un  $type != 'auteur'
@@ -70,17 +66,6 @@ function puce_statut_auteur_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 	return http_img_pack($img, $alt, $fond, $titre);
 }
 
-// http://doc.spip.org/@bonhomme_statut
-function bonhomme_statut($row) {
-	$puce_statut = charger_fonction('puce_statut', 'inc');
-	return $puce_statut(0, $row['statut'], 0, 'auteur');
-}
-
-
-// http://doc.spip.org/@puce_statut_mot_dist
-function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='') {
-	return http_img_pack(chemin_image('mot-16.png'), "");
-}
 
 // http://doc.spip.org/@puce_statut_rubrique_dist
 function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='') {
