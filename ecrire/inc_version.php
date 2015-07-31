@@ -23,7 +23,8 @@ define('_EXTENSION_PHP', '.php3');
 #define('_EXTENSION_PHP', '');
 #mettre a true pour compatibilite PHP3
 define('_FEED_GLOBALS', false);
-
+# compat php < 5.1
+if (!isset($_SERVER['REQUEST_TIME'])) $_SERVER['REQUEST_TIME'] = time();
 
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
