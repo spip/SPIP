@@ -833,7 +833,7 @@ function afficher_articles_trad_boucle($row)
 	$s .= typo($titre);
 
 	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
+		$s .= " <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
 
 	$s .= "</a>";
 	$s .= "</div>";
@@ -919,7 +919,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 	$s .= typo($titre);
 	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
+		$s .= " <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
 	$s .= "</a>";
 
 	$s .= "</div>";
@@ -980,7 +980,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 	$s .= "</a>";
 	$vals[] = $s;
 	
-	$s = "\n<div align=\"right\">";
+	$s = "\n<div style='text-align: right'>";
 	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 		if ($langue_choisie == "oui") $s .= "<b>$lang</b>";
 		else $s .= "($lang)";
@@ -1753,7 +1753,7 @@ function fin_page()
 			. '</div>'))
 
 	. fin_grand_cadre(true)
-	. "</div>" // cf. <div center> ouverte dans conmmencer_page()
+	. "</div>" // cf. div align = center ouverte dans conmmencer_page()
 	. $GLOBALS['rejoue_session']
 	. '<div style="background-image: url(\''
 	. generer_url_action('cron')
@@ -1927,9 +1927,9 @@ function enfant_rub($collection){
 		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
 		  " <span dir='$lang_dir'><b><a href='" . 
 		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
-		  "'><font color='$couleur_foncee'>".
+		  "'>".
 		  typo($titre) .
-		  "</font></a></b></span>" .
+		  "</a></b></span>" .
 		  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
 		  (($spip_display == 4) ? '' : $les_sous_enfants) .
 		  "\n<div style='clear:both;'></div>"  .
