@@ -229,6 +229,7 @@ function exec_breves_voir_dist()
 }
 
 
+// http://doc.spip.org/@afficher_breve_rubrique
 function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 {
 	global $spip_lang_right;

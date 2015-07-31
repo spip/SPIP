@@ -498,6 +498,7 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 	return "";
 }
 
+// http://doc.spip.org/@afficher_rubrique_rubrique
 function afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
 {
 	global $spip_lang_right;

@@ -321,6 +321,7 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_site_rubrique
 function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 {
 	global $spip_lang_right;
