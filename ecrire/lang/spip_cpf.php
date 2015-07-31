@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Sanz molaklé-la',
 	'admin_modifier_rubrique' => 'Sanz rubrik-la',
 	'admin_recalculer' => 'Arkalkil pazwèb-la',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'Afich\' bann tradiksyon',
 	'alerte_maj_impossible' => '<b>Tansyon !</b> Larnouvèlman labazdodné SQL zizka lo vèrsyon @version@ lé pa posib, peut-être à cause d\'un problème de droit de modification sur la base de données. Veuillez contacter votre hébergeur.', # MODIF
 	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
@@ -68,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Sanz',
 	'bouton_chercher' => 'Rod',
 	'bouton_choisir' => 'Swazi',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Trapé', # MODIF
 	'bouton_enregistrer' => 'Anrozistré',
 	'bouton_radio_desactiver_messagerie_interne' => 'Dégrèn lakazmodékri',
@@ -111,20 +109,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'domin',
 	'date_fmt_heures_minutes' => '@h@èr@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'lo @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'èr',
 	'date_hier' => 'yèr',
 	'date_il_y_a' => 'néna @delai@',
@@ -185,39 +174,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'mwa',
 	'date_mois_1' => 'zanvié',
 	'date_mois_10' => 'octob',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'novanm',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'désanm',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'févrié',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'mars',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'avril',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'mé',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'zwin',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'zwiyé',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'out',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'séptanm',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'livèrnaz an Frans - débu la grandsézon la Réinyon  ',
 	'date_saison_2' => 'printan fransé - find la grandsézon /débud séson sèk la Réinyon',
 	'date_saison_3' => 'été fransé - sézon sèk la Réinyon',
 	'date_saison_4' => 'otonn an Frans - find sézon sèk / débu dla grandsézon la Réinyon',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'semèn',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => 'pou komans fransvérité linstalasyon ',
 	'dirs_preliminaire' => 'Dabor : <b> Règ out bann drwa-laksé</b>',
 	'dirs_probleme_droits' => 'Astèr, néna inn larlik èk out bann drwa-laksé',
@@ -239,35 +210,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => 'Dé lokirans', # MODIF
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'Envwa samn lo sit',
 	'erreur' => 'Kanard',
 	'erreur_balise_non_fermee' => 'dernyé baliz lé pa fermé :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'kanard(s)',
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => 'Fisyé-la @fichier@ ni pa kav trouv ali',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Ou lé déza inskri.',
 	'form_email_non_valide' => 'Out ladrès imèl la pa marsé.',
 	'form_forum_access_refuse' => 'Ou néna plid drwa pou akost dann sitwèb-la.',
 	'form_forum_bonjour' => 'Oté @nom@,,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Ladrès imèl-la lé déza anrozistré : ou  pé anserv modpas sa-minm sak nana labitid.',
 	'form_forum_identifiant_mail' => 'Inn nouvo kod-lidentité la finn dèt anvwayé dann out kazimèl.',
 	'form_forum_identifiants' => 'Out bann kod-lidantité',
@@ -339,7 +292,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Dégrèn limaz-la',
 	'icone_tous_articles' => 'Tout bann zartik aou',
 	'icone_tous_auteur' => 'Tout bann lotèr',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Bat-karé ', # MODIF
 	'icone_voir_en_ligne' => 'Vwar an liyn',
 	'img_indisponible' => 'zimaj-la lé pa posib giny ali',
@@ -361,14 +313,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Lartik lé dégréné',
 	'info_articles' => 'Bann zartik',
 	'info_articles_a_valider' => 'Bann zartik pou konfirmé',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Bann zartik sak lé propozé',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => '(bann) lotèr :',
 	'info_authentification_ftp' => 'Lotantificasyon (èk FTP).',
 	'info_breves_2' => 'bann tit-nouvèl',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Lakostaz lé arfizé',
 	'info_contact_developpeur' => 'Mersi kontak inn dévlopèr.',
 	'info_contenance' => 'Dann sit-la nana :',
@@ -380,14 +328,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Mersi kré inn fisyé o inn répertwar èk non-la :',
 	'info_creer_repertoire_2' => 'andann lo sou-répertwar <b>@repertoire@</b>, é aprè :',
 	'info_creer_vignette' => 'pou kréy inn tite-limaz otomatikman',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Dépliy',
 	'info_descriptif_nombre' => 'Bann zafèr sak i kontyin :',
 	'info_description' => 'Kosa ou va trouv isi :',
 	'info_description_2' => 'Kosa ou va trouv isi :',
 	'info_dimension' => 'Dimansyon :',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Pou kré inn modékri privé',
 	'info_email_invalide' => 'Out ladrès imèl lé pa bon.',
 	'info_en_cours_validation' => 'Out bann zartik-la lé apré lékritir',
@@ -427,8 +372,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'out@fournisèr.com',
 	'info_message_2' => 'MODEKRI',
 	'info_message_supprime' => 'MODÉKRI SUPRIMÉ',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Dat pou mèt an liyn :',
 	'info_modification_parametres_securite' => 'bann sanzman bann paramèt lasékirité',
 	'info_mois_courant' => 'Dann kouran lo mwa :',
@@ -444,10 +387,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'OU NA INN NOUVO MODÉKRI',
 	'info_nouveaux_messages' => 'OU NÈNA @total_messages@ BANN MODÉKRI',
 	'info_numero_abbreviation' => 'N° ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'GARDANTÈT',
 	'info_petit_ecran' => 'Tit ékran',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'bann piksèl',
 	'info_plusieurs_mots_trouves' => 'Nana plizièr bann molaklé pou "@cherche_mot@":',
 	'info_portfolio_automatique' => 'Livzimaz otomatik :',
@@ -466,13 +407,9 @@ sera ignorée) :
 	'info_rechercher' => 'Rod',
 	'info_rechercher_02' => 'Rod :',
 	'info_remplacer_vignette' => 'Sanz lavinyèt sanswa kont out prop logo :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'néna pwinn titr',
 	'info_selectionner_fichier' => 'Ou i pé swazi in fisyé dann dosyé @upload@',
 	'info_selectionner_fichier_2' => 'Swazi inn fisyé :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'dégrèn vinyèt-la',
 	'info_symbole_bleu' => 'Lo sinbol <b>blé</b> li mark <b>inn gardantèt</b>: inn modékri pour out prop lisaz.', # MODIF
 	'info_symbole_jaune' => 'Lo sinbol <b>zon</b> li mark <b>inn zanons pou tout bann lotèr</b> : banna i pé vwar ali an liyn ; bann komandèr i pé sanz ali.', # MODIF
@@ -494,8 +431,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'Out bann gardantèt', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Afis sèlman bann zikon',
 	'lien_afficher_texte_icones' => 'Afis bann zikon èk lo tèks',
 	'lien_afficher_texte_seul' => 'Afis sèlman lo tèks',
@@ -514,8 +449,6 @@ sera ignorée) :
 	'lien_visite_site' => 'vizit lo sit-la',
 	'lien_visites' => '@visites@ bann vizit',
 	'lien_voir_auteur' => 'Gèt lotèr-la',
-	'ligne' => 'Ligne', # NEW
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'laksé pou léspas privé',
 	'login_autre_identifiant' => 'Akost lo sit èk inn nouvèl nondkod',
 	'login_cookie_accepte' => 'Mersi règl a zot navigatèr pou li asèpt azot (mwindreman pou sitwèb-la).',
@@ -542,22 +475,17 @@ dann out navigatèr é',
 	'login_retour_site' => 'Artourn sir figirwèb',
 	'login_retoursitepublic' => 'artourn sir figirwèb',
 	'login_sans_cookiie' => 'Lidantifikasyon san lo gatomakro',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'inskri aou',
 	'login_test_navigateur' => 'test navigatèr/nouvo lakostaz',
 	'login_verifiez_navigateur' => '(Somansa gét byin out navigatèr la pa gardantèt out modpass...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => 'Bann fisyé lang',
 
 	// N
 	'navigateur_pas_redirige' => 'Si out navigatèr lé pa rotourné, apiy tèrla pou kontinyé.',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => 'Dégrèn labazdodné',
 	'onglet_auteur' => 'Lotèr',
 	'onglet_contenu_site' => 'Sak lo sit i kontyin',
@@ -601,7 +529,6 @@ Aprésa, ou i poura mèt in nouvo modpas
 	'pass_nouveau_pass' => 'Nouvo modpas',
 	'pass_ok' => 'Dakor',
 	'pass_oubli_mot' => 'Modpas oublyé',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Défalk finèt-la',
 	'pass_rappel_login' => 'Rapèl aou : out lidantifyan (nondkod) lé « @login@ ».',
 	'pass_recevoir_mail' => 'Ou sava giny inn limèl sak i indik aou kouk sa i pé artrouv out laksé sir lo sit.',
@@ -612,11 +539,7 @@ Aprésa, ou i poura mèt in nouvo modpas
 	'previsualisation' => 'Po vwar avann komsi lé an liny',
 	'previsualiser' => 'Po vwar avan',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
 	'squelette' => 'léskelèt',
 	'squelette_inclus_ligne' => 'leskélèt dodan, liny',
 	'squelette_ligne' => 'léskelèt, liny',
@@ -624,7 +547,6 @@ Aprésa, ou i poura mèt in nouvo modpas
 	'suivant' => 'dèryèr',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@  bann zokté',
@@ -638,7 +560,6 @@ zot i sra pou aparèt kom bann dokiman zwinn.',
 	'texte_erreur_mise_niveau_base' => 'Kanard do bazdodné dann tan larmizanivo .
 Limaz <b>@fichier@</b> la pa pasé dann (article @id_article@).
 Gard byin an tèt référans-la, ésèy inn ot fwa inn larmizanivo, é véy byin sak bann zimaz i aparé touzour dann bann zartik.', # MODIF
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'Ou lé konu sir lo sit èk lo
  nondkod <b>@auth_login@</b>, mé li lé pa/pli prézan astèr dann labaz. 
 Esèy', # MODIF
@@ -667,26 +588,20 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'titre_image_auteur_supprime' => 'Lotèr lé dégréné',
 	'titre_image_redacteur' => 'Lotèr san laksé',
 	'titre_image_redacteur_02' => 'Lotèr',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitèr',
 	'titre_joindre_document' => 'POU ZWIND INN DOKIMAN',
 	'titre_mots_cles' => 'BANN MOLAKLÉ',
 	'titre_probleme_technique' => 'Pangar : inn larlik tèknik (servèr SQL) i défann permisyon lakostaz dan landrwa la. Éskiz anou.', # MODIF
 	'titre_publier_document' => 'PUBLIY INN DOKIMAN DANN RUBRIK-LA',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'Sifklé lo sitwèb',
 	'titre_titre_document' => 'Lo non dokiman-la :',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(Lartik-péi de référans)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' : baliz B anlèr',
 	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'boukl',
 	'zbug_boucle_recursive_undef' => 'boukl rékirsiv-la lé pa défini', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'lo chan @champ@ lé andéor in boukl',
 	'zbug_champ_hors_motif' => 'Lo chan @champ@ lé an déor in boukl-motif @motif@', # MODIF
 	'zbug_code' => 'kod',
@@ -697,37 +612,17 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'zbug_erreur_boucle_double' => 'BOUCLE@id@: néna dé définisyon', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: néna in "tag" sat i mank po tak in boukl.', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Sintask lo boukl-là lé pa korèk', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'néna in larlik pou léxékisyon paj-la', # MODIF
 	'zbug_erreur_filtre' => 'Néna in kanar andan lo filt <b>« @filtre@ »</b> sat lé pa défini', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} li aplik sèlman pou bann boukl (FORUMS) ou (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'néna (bann) larlik andan léskélèt',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'Kanar sir lo sit',
 	'zbug_inversion_ordre_inexistant' => 'lord existan lé inversè', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
 	'zbug_parametres_inclus_incorrects' => 'Bann paramèt pou linklizyon lé pa korèk', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => 'rézilta',
 	'zbug_serveur_indefini' => 'servèr SQL la lé pa défini', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'Lo tab SQL « @table@ »  la , li lé pa konu',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'Lo tab SQL « @table@ »  la , li lé pa konu'
 );
 
 ?>
