@@ -126,6 +126,9 @@
 ]#FIN_SURLIGNE
 [(#DATE|nom_jour)] [(#DATE|affdate).]
 </div>
+
+[<img src="spip_imagestring.php?texte=(#TITRE)&police=dustismo_bold.ttf&couleur=000000&taille=36&largeur=350">]
+
 <div style="line-height: 0em">&nbsp;</div><!-- Bug Mozilla http://bugzilla.mozilla.org/show_bug.cgi?id=200510 -->
 
 	<div class="encart">
@@ -202,7 +205,7 @@
 <div><hr>
 <BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
-	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{500,60})</a>]
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{0,60})</a>]
 [<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
