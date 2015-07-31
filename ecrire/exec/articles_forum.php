@@ -92,9 +92,9 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  "</p>";
 
 	$img = http_img_pack('feed.png', 'RSS', '', 'RSS');
-	$url = generer_url_public('rss_forum_article', "id_article=$id_article");
+	$url = bouton_spip_rss('forums_public', array("id_article" => $id_article));
 
-	echo "<div style='text-align: $spip_lang_right;'><a href='$url'>$img</a></div>";
+	echo "<div style='text-align: $spip_lang_right;'>", $url, "</div>";
 
 	echo fin_boite_info(true);
 
