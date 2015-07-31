@@ -277,59 +277,39 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	$les_mots = array();
 	$id_groupes_vus = array();
 	$groupes_vus = array();
-	$result = spip_query("SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
-
-
+	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
 	if (spip_num_rows($result) > 0) {
 		echo "<div class='liste'>";
 		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 	
-		$ifond=0;
-			
-		$tableau= '';
+		$tableau= array();
+		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
+		$ret = rawurlencode(generer_url_ecrire($url_base, "$table_id=$id_objet#mots"));
 		while ($row = spip_fetch_array($result)) {
-			$vals = '';
-		
+
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
-			$result_groupe = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe = $id_groupe");
 
-			while($row_groupe = spip_fetch_array($result_groupe)) {
-				$id_groupe = $row_groupe['id_groupe'];
-				$titre_groupe = entites_html($row_groupe['titre']);
-				// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
-				$type_mot = typo($row_groupe['titre']);
-				$unseul = $row_groupe['unseul'];
-				$obligatoire = $row_groupe['obligatoire'];
-				$acces_admin =  $row_groupe['minirezo'];
-				$acces_redacteur = $row_groupe['comite'];
-	
-				$flag_groupe = ($flag_editable AND (($connect_statut == '1comite' AND $acces_redacteur == 'oui') OR ($connect_statut == '0minirezo' AND $acces_admin == 'oui')));
-			}
-	
 			$groupes_vus[$id_groupe] = true;
 			$id_groupes_vus[] = $id_groupe;
-	
-			if ($ifond==0){
-				$ifond=1;
-				$couleur="#FFFFFF";
-			}else{
-				$ifond=0;
-				$couleur="#EDF3FE";
-			}
-	
-			$url = "href='" . generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(generer_url_ecrire($url_base, "$table_id=$id_objet#mots"))) . "'";
-
-			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12'") ."</A>";
+			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
+			$vals= array("<A href='$url'>$cle</A>");
 			
-	
+
+			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+			$titre_groupe = entites_html($row_groupe['titre']);
+	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+			$type_mot = typo($row_groupe['titre']);
+			$obligatoire = $row_groupe['obligatoire'];
+			$flag_groupe = ($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui');
 			// Changer
-			if ($unseul == "oui" AND $flag_groupe) {
+			if (($row_groupe['unseul'] == "oui") AND ($flag_editable AND $flag_groupe)) {
+
 				$s =  generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots") . 
 					"<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
-				$result_autres_mots = spip_query("SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
+				$result_autres_mots = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
 
 				while ($row_autres = spip_fetch_array($result_autres_mots)) {
 					$le_mot = $row_autres['id_mot'];
@@ -339,19 +319,19 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					else $selected = "";
 					$s .= "<option value='$le_mot' $selected> $le_titre_mot</option>";
 				}
-				$s .= "</select>";
-				$s .= "<input type='hidden' name='supp_mot' VALUE='$id_mot' />";
-				$s .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
-				$s .= " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>";
-				$s .= "</span>";
-				$s .= "</form>";
+				$s .= "</select>".
+				"<input type='hidden' name='supp_mot' VALUE='$id_mot' />".
+				"<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>".
+				" &nbsp; <input type='submit' value='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>".
+				"</span>".
+				"</form>";
 	
 			} else {
-				$s = "<A $url>".typo($titre_mot)."</A>";
+				$s = "<A href='$url'>".typo($titre_mot)."</A>";
 			}
 			$vals[] = $s;
 	
-			$vals[] = "$type_mot";
+			$vals[] = $type_mot;
 	
 			if ($flag_editable){
 				if ($flag_groupe)
@@ -360,7 +340,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$vals[] = $s;
 			} else $vals[]= "";
 
-			
 			$tableau[] = $vals;
 	
 			$les_mots[] = $id_mot;
