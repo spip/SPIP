@@ -396,50 +396,65 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
 
 function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic)
 {
-	$class_dispose = 'border-bottom: 1px solid #aaaaaa;'; 
+	global $couleur_claire;
+	
+	$class_dispose = "border-bottom: 1px solid $couleur_claire; border-right: 1px solid $couleur_claire;"; 
   
-// affichage du debut de semaine hors periode
-  $jour_semaine = date("w",mktime(1,1,1,$mois_today,$premier_jour,$annee_today));
-  if ($jour_semaine==0) $jour_semaine=7;
+	// affichage du debut de semaine hors periode
+	$jour_semaine = date("w",mktime(1,1,1,$mois_today,$premier_jour,$annee_today));
+	if ($jour_semaine==0) $jour_semaine=7;
 
-  $total = '';
-  $ligne = '';
-  for ($i=1;$i<$jour_semaine;$i++){$ligne .= "\n\t<td></td>";}
-
-  $ce_jour=date("Ymd");
-
-  for ($j=$premier_jour; $j<=$dernier_jour; $j++){
-    $nom = mktime(1,1,1,$mois_today,$j,$annee_today);
-    $jour = date("d",$nom);
-    $jour_semaine = date("w",$nom);
-    $mois_en_cours = date("m",$nom);
-    $annee_en_cours = date("y",$nom);
-    $amj = date("Y",$nom) . $mois_en_cours . $jour;
-
-    if ($amj == $ce_jour) {
-      $couleur_lien = "red";
-      $couleur_fond = "white";
-    }
-    else {
-      $couleur_lien = "black";
-      $couleur_fond = "#e4e4e4";
-    }
-
-    $jour_mois = 
-       ("<span style='font-family: arial,helvetica,sans-serif; font-size: 16px; color: black'>" .
-      (($dernier_jour <= 31) ? 	$jour : "$jour/$mois_en_cours") .
-	"</span>");
-
-    $ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond; height: 100px; width: 14%; vertical-align: top'>" .
-      $fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois) .
-      (!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
-      "\n\t</td>";
-    if ($jour_semaine==0) 
-      { $total .= "\n<tr>$ligne\n</tr>";
+	$total = '';
 	$ligne = '';
-      }
-  }
-  return  $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
+	for ($i=1;$i<$jour_semaine;$i++){$ligne .= "\n\t<td style=\"border-bottom: 1px solid $couleur_claire;\">&nbsp;</td>";}
+
+	$ce_jour=date("Ymd");
+	$premier = true;
+	for ($j=$premier_jour; $j<=$dernier_jour; $j++){
+		$nom = mktime(1,1,1,$mois_today,$j,$annee_today);
+		$jour = date("d",$nom);
+		$jour_semaine = date("w",$nom);
+		$mois_en_cours = date("m",$nom);
+		$annee_en_cours = date("y",$nom);
+		$amj = date("Y",$nom) . $mois_en_cours . $jour;
+
+		if ($jour_semaine == 0) {
+			$couleur_lien = "black";
+			$couleur_fond = $couleur_claire;
+		}
+		else {
+			$couleur_lien = "black";
+			$couleur_fond = "#eeeeee";
+		}
+
+		if ($amj == $ce_jour) {
+			$couleur_lien = "red";
+			$couleur_fond = "white";
+		}
+
+		$jour_mois = 
+			("<span style='font-family: arial,helvetica,sans-serif; font-size: 16px; color: black'>" .
+			(($dernier_jour <= 31) ? 	$jour : "$jour/$mois_en_cours") .
+			"</span>");
+
+		if ($premier) {
+			$border_left = " border-left: 1px solid $couleur_claire;";
+			$premier = false;
+		}
+		else $border_left = "";
+
+		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left height: 100px; width: 14%; vertical-align: top'>" .
+			$fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois) .
+			(!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
+			"\n\t</td>";
+		if ($jour_semaine==0) 
+		{ 
+			$total .= "\n<tr>$ligne\n</tr>";
+			$ligne = '';
+			$premier = true;
+		}
+	}
+	return  $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
 }
 
 # 3 fonctions pour servir de parametre a la precedente
