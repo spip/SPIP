@@ -7,7 +7,6 @@ define("_INC_LOGIN", "1");
 
 
 include_ecrire ("inc_meta.php3");
-//include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_texte.php3");
@@ -54,7 +53,7 @@ function ferme_login() {
 
 function login($cible = '', $prive = 'prive', $message_login='') {
 	$login = $GLOBALS['var_login'];
-	$erreur = $GLOBALS['var_erreur'];
+	$erreur = '';
 	$essai_auth_http = $GLOBALS['var_essai_auth_http'];
 	$logout = $GLOBALS['var_logout'];
 
@@ -97,7 +96,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	if (!$nom_site) $nom_site = _T('info_mon_site_spip');
 	$url_site = lire_meta('adresse_site');
 	if (!$url_site) $url_site = "./";
-	if ($erreur=='pass') $erreur = _T('login_erreur_pass');
+	if ($GLOBALS['var_erreur'] =='pass') $erreur = _T('login_erreur_pass');
 
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
@@ -119,7 +118,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 			$alea_actuel = $row['alea_actuel'];
 			$alea_futur = $row['alea_futur'];
 		} else if (!$flag_autres_sources) {
-			$erreur = _T('login_identifiant_inconnu', array('login' => $login));
+			$erreur = _T('login_identifiant_inconnu', array('login' => htmlspecialchars($login)));
 			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
 		}
