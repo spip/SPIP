@@ -30,13 +30,13 @@ function configuration_compteur_dist()
 	  . "</div>";
 	if ($GLOBALS['meta']["activer_statistiques"]=='oui'){
 		$res .= "<br /><div class='verdana2' id='captures_voir'>"
-		. _L('Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites')
+		. _T('info_question_vignettes_referer')
 		. "</div>"
 		. "<div class='verdana2'>"
 		.  afficher_choix('activer_captures_referers', 
 				  $GLOBALS['meta']["activer_captures_referers"],
-				  array('oui' => _L('Afficher les captures des sites d\'origine des visites'),
-					'non' => _L('Ne pas afficher les captures des sites d\'origine des visites')))
+				  array('oui' => _T('info_question_vignettes_referer_oui'),
+					'non' => _T('info_question_vignettes_referer_non')))
 		  . "</div>";
 	}
 

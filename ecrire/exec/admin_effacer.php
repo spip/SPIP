@@ -71,16 +71,15 @@ function exec_admin_effacer_dist()
 
 	echo fin_cadre_relief(true);
 	
-	echo debut_cadre_trait_couleur('',true,'',_L('Effacer les statistiques') /*_T('texte_effacer_statistiques')*/);
+	echo debut_cadre_trait_couleur('',true,'',_T('texte_effacer_statistiques'));
 
-	$res = generer_form_ecrire('delete_statistiques', "", '', _L('Effacer les statistiques')/*_T('bouton_effacer_statistiques')*/);
+	$res = generer_form_ecrire('delete_statistiques', "", '', _T('bouton_effacer_statistiques'));
 
 	echo 
 		'<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="',
 	  	_T('info_avertissement'),
 		"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
-		//_T('texte_admin_effacer_stats'),
-		_L('Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.'),
+	  _T('texte_admin_effacer_stats'),
 		"<br class='nettoyeur' />",
 		"\n<div style='text-align: center'>",
 		"\n<div class='serif'>",

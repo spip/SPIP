@@ -83,13 +83,11 @@ function install_etape_2_dist()
 		echo info_progression_etape(1,'etape_','install/',true);
 
 		echo "<p class='resultat echec'><b>",
-#		  _T('avis_connexion_echec_1'),
-		  _L('La connexion &agrave; la base de donn&eacute;es a &eacute;chou&eacute;.'),
+		  _T('avis_connexion_echec_1'),
 		  "</b></p>";
 		echo "<p>"._T('avis_connexion_echec_2')."</p>";
 		echo "<p style='font-size: small;'>",
-#		  _T('avis_connexion_echec_3'),
-		  _L('<b>N.B.</b> Sur de nombreux serveurs, vous devez <b>demander</b> l\'activation de votre acc&egrave;s &agrave; la base  de donn&eacute;es avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.'),
+		  _T('avis_connexion_echec_3'),
 		  "</p>";
 	}
 	

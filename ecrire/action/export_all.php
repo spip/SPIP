@@ -79,11 +79,11 @@ function export_all_fin($file, $meta, $rub)
 
 		if ($rub) {
 			$titre = sql_getfetsel('titre', 'spip_rubriques', "id_rubrique=$rub");
-			$titre = _L('Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
+			$titre = _T('info_sauvegarde_rubrique_reussi',
 				    array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)", 'titre' => "<b>$titre</b>"));
 		}
 		else
-			$titre = _L('Les tables du site ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
+			$titre = _T('info_sauvegarde_reussi_02',
 			      array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)"));
 
 		$corps = "<p style='text-align: $spip_lang_left'>".

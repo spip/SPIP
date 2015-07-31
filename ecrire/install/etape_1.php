@@ -51,14 +51,14 @@ function install_etape_1_dist()
 
 	// ces deux chaines de langues doivent etre reecrites
 #	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
-	echo info_etape(_L('Connexion &agrave; votre base de donn&eacute;es'),
+	echo info_etape(_T('info_connexion_base_donnee'),
 			'<p>'
-			. _L("Consultez les informations fournies par votre h&eacute;bergeur : vous devez y trouver le serveur de base de donn&eacute;es qu'il propose et vos identifiants personnels pour vous y connecter.")
+					. _T('texte_connexion_mysql')
 			.'</p>'
 			.'<p>'
-			. _L("SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>*.")
+			. _T('install_types_db_connus')
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
-			. _L("<br />  (*Attention: pour l'instant la plupart des plugins SPIP ne sont pas compatibles avec SQLite. )")
+					. "*<br />"._T('install_types_db_connus_avertissement')
 			.'</p>'
 			);
 	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);

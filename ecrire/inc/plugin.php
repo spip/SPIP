@@ -108,7 +108,7 @@ function erreur_necessite($n, $liste) {
 						.bouton_telechargement_plugin($url, strtolower($r[1]));
 				}
 				$msg .= "<li>"
-				._L('Ce plugin n&#233;cessite la librairie '.$lib)
+				  ._T('plugin_necessite_lib',array('lib'=>$lib))
 				. $lien_download
 				."</li>";
 			}
@@ -801,7 +801,7 @@ function message_crash_plugins() {
 		if ($err) {
 			$err = array_map('joli_repertoire', array_unique($err));
 			return "<a href='".generer_url_ecrire('admin_plugin')."'>"
-				._L("Erreur dans les plugins : @plugins@",
+				._T('plugins_erreur',
 					array('plugins' => join(', ', $err)))
 				.'</a>';
 		}
@@ -889,7 +889,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 	// source zip le cas echeant
 	$source = (lire_fichier(_DIR_PLUGINS.$plug_file.'/install.log', $log)
 	AND preg_match(',^source:(.*)$,m', $log, $r))
-		? '<br />'._L('source:').' '.trim($r[1])
+		? '<br />'._T('plugin_source').' '.trim($r[1])
 		:'';
 
 	$s .= "<div style='text-align:$spip_lang_right' class='spip_pack'>"

@@ -307,7 +307,7 @@ function barre_onglets_administration() {
 				generer_url_ecrire("admin_effacer"));
 
 			$onglets['declarer']=
-			  new Bouton('base-24.gif', 'declarer_une_autre_base',
+			  new Bouton('base-24.gif', 'onglet_declarer_une_autre_base',
 				generer_url_ecrire("admin_declarer"));
 		}
 	return $onglets;

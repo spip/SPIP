@@ -82,7 +82,7 @@ function exec_admin_tech_dist()
 	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech');
 
 	$res .= "\n<label for='id_parent'>" .
-		  _L("Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ") .
+		  _T('texte_admin_tech_04') .
 		  "</label><br /><br />" .
 		  $form . '<br />';
 
@@ -173,7 +173,7 @@ function exec_admin_tech_dist()
 		  _T('sauvegarde_fusionner') .
 		  "</label><br />\n" .
 		 "<input name='statut' id='statut' type='checkbox' />&nbsp; <label for='statut'>\n". 
-		  _L('D&eacute;publier les objets fusionn&eacute;s') .
+		  _T('sauvegarde_fusionner_depublier') .
 		  "</label><br />\n" .
 		  "<label for='url_site'>" .
 		  _T('sauvegarde_url_origine') .
