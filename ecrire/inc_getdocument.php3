@@ -52,23 +52,21 @@ function effacer_repertoire_temporaire($nom) {
 function copier_document($ext, $orig, $source) {
 
 	$dir = creer_repertoire_documents($ext);
-	$dest = $dir .
-		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
+	$dest = ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
 
 	// Si le document "source" est deja au bon endroit, ne rien faire
-	if ($source == ($dest . '.' . $ext))
+	if ($source == ($dir . $dest . '.' . $ext))
 		return $source;
 
 	// sinon tourner jusqu'a trouver un numero correct
 	$n = 0;
-	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
+	while (@file_exists($dir.($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext)));
 
 	$newFile = preg_replace('/[.]+/', '.', $newFile);
-
-	if ($r = deplacer_fichier_upload($source, $newFile))
-		return $newFile;
+	if ($r = deplacer_fichier_upload($source, $dir.$newFile))
+		return $dir.$newFile;
 }
 
 //
@@ -77,6 +75,7 @@ function copier_document($ext, $orig, $source) {
 
 function deplacer_fichier_upload($source, $dest) {
 	// Securite
+	## !! interdit pour le moment d'uploader depuis l'espace prive (UPLOAD_DIRECT)
 	if (strstr($dest, "..")) {
 		spip_log("stop deplacer_fichier_upload: '$dest'");
 		exit;
