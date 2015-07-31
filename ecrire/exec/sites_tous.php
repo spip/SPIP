@@ -34,7 +34,7 @@ echo debut_droite('', true);
 
  echo afficher_objets('site','<b>' . _T('titre_sites_proposes') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY' => "nom_site"));
 
-if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
+if (autoriser('bouton','site_creer')) {
 	echo  "<div style='float:$spip_lang_right'>",
 	  icone_inline(_T('icone_referencer_nouveau_site'), generer_url_ecrire('sites_edit'), "site-24.png", "new", 'right'),
 	  "</div><br class='nettoyeur' />";
