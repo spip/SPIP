@@ -114,7 +114,7 @@ function pipeline($action, $val=null) {
 	}
 
 	// appliquer notre fonction si elle existe
-	$fonc = 'execute_pipeline_'.$action;
+	$fonc = 'execute_pipeline_'.strtolower($action);
 	if (function_exists($fonc)) {
 		$val = $fonc($val);
 	}
@@ -123,7 +123,7 @@ function pipeline($action, $val=null) {
 		include_spip('inc/plugin');
 		// on passe $action en arg pour creer la fonction meme si le pipe
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
-		verif_plugin($action);
+		verif_plugin(strtolower($action));
 		spip_log("fonction $fonc absente : pipeline desactive");
 	}
 
