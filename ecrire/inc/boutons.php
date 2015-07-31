@@ -63,7 +63,7 @@ function definir_barre_boutons() {
 	$boutons_admin['naviguer'] = new Bouton(
 		"documents-48$spip_lang_rtl.png", 'icone_edition_site');
 
-	if ($GLOBALS['meta']['forum_prive'] != 'non')
+	if ($GLOBALS['meta']['forum_prive'] != 'non' OR sql_countsel('spip_forum'))
 		$boutons_admin['forum'] = new Bouton(
 			'messagerie-48.png', 'titre_forum');
 
