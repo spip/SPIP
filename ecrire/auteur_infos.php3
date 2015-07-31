@@ -153,13 +153,13 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	} else
 		$query_pass = '';
 
-	// recoller les champs du supplement
-	if (function_exists('champs_supplement')) {
-		$champs_suppl=champs_supplement("auteur", $id_auteur, $statut);
-		include_ecrire("inc_supplement.php3");
-		$auteur['supplement'] = serialize(supplement_recup_saisie($champs_suppl));
+	// recoller les champs du extra
+	if (function_exists('champs_extra')) {
+		$champs_suppl=champs_extra("auteur", $id_auteur, $statut);
+		include_ecrire("inc_extra.php3");
+		$auteur['extra'] = serialize(extra_recup_saisie($champs_suppl));
 	} else
-		$auteur['supplement'] = '';
+		$auteur['extra'] = '';
 
 	// l'entrer dans la base
 	if (!$echec) {
@@ -181,7 +181,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			url_site='".addslashes($auteur['url_site'])."',
 			pgp='".addslashes($auteur['pgp'])."',
 			statut='".addslashes($auteur['statut'])."',
-			supplement='".addslashes($auteur['supplement'])."'
+			extra='".addslashes($auteur['extra'])."'
 			WHERE id_auteur=".$auteur['id_auteur'];
 		spip_query($query) OR die($query);
 	}
@@ -280,10 +280,10 @@ echo "<TEXTAREA NAME='bio' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 echo entites_html($auteur['bio']);
 echo "</TEXTAREA>\n";
 
-if (function_exists(champs_supplement)) {
-	$champs_suppl=champs_supplement("auteur", $id_auteur, $statut);
-	include_ecrire("inc_supplement.php3");
-	supplement_saisie(unserialize($auteur['supplement']), $champs_suppl);
+if (function_exists(champs_extra)) {
+	$champs_suppl=champs_extra("auteur", $id_auteur, $statut);
+	include_ecrire("inc_extra.php3");
+	extra_saisie(unserialize($auteur['extra']), $champs_suppl);
 }
 
 fin_cadre_relief();

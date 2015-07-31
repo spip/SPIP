@@ -152,16 +152,16 @@ if ($titre) {
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
 
-	// recoller les champs du supplement
-	if (function_exists('champs_supplement')) {
-		$champs_suppl=champs_supplement("rubrique", $coll, $id_parent);
-		include_ecrire("inc_supplement.php3");
-		$supplement = serialize(supplement_recup_saisie($champs_suppl));
+	// recoller les champs du extra
+	if (function_exists('champs_extra')) {
+		$champs_suppl=champs_extra("rubrique", $coll, $id_parent);
+		include_ecrire("inc_extra.php3");
+		$extra = serialize(extra_recup_saisie($champs_suppl));
 	} else
-		$supplement='';
+		$extra='';
 
 	if ($flag_editable) {
-		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\", supplement=\"".addslashes($supplement)."\" WHERE id_rubrique=$coll";
+		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\", extra=\"".addslashes($extra)."\" WHERE id_rubrique=$coll";
 		$result = spip_query($query);
 	}
 
@@ -188,7 +188,7 @@ while($row=spip_fetch_array($result)){
 	$descriptif=$row['descriptif'];
 	$texte=$row['texte'];
 	$statut = $row['statut'];
-	$supplement = unserialize($row["supplement"]);
+	$extra = unserialize($row["extra"]);
 }
 
 if ($titre)
@@ -353,10 +353,10 @@ if (strlen($descriptif) > 1) {
 
 echo "</table>\n";
 
-if ($supplement && function_exists(champs_supplement)) {
-	$champs_suppl=champs_supplement("rubrique", $id_rubrique, $id_parent);
-	include_ecrire("inc_supplement.php3");
-	supplement_affichage($supplement, $champs_suppl);
+if ($extra && function_exists(champs_extra)) {
+	$champs_suppl=champs_extra("rubrique", $id_rubrique, $id_parent);
+	include_ecrire("inc_extra.php3");
+	extra_affichage($extra, $champs_suppl);
 }
 
 

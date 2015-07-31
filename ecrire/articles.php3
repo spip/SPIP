@@ -179,15 +179,15 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$texte = addslashes(corriger_caracteres($texte));
 	$ps = addslashes(corriger_caracteres($ps));
 
-	// recoller les champs du supplement
-	if (function_exists('champs_supplement')) {
-		$champs_suppl=champs_supplement("article", $id_article, $id_rubrique);
-		include_ecrire("inc_supplement.php3");
-		$supplement=supplement_recup_saisie($champs_suppl);
-		$ser_supplement = addslashes(serialize($supplement));
+	// recoller les champs du extra
+	if (function_exists('champs_extra')) {
+		$champs_suppl=champs_extra("article", $id_article, $id_rubrique);
+		include_ecrire("inc_extra.php3");
+		$extra=extra_recup_saisie($champs_suppl);
+		$ser_extra = addslashes(serialize($extra));
 	} else {
-		$supplement=array();
-		$ser_supplement = "";
+		$extra=array();
+		$ser_extra = "";
 	}
 
 
@@ -198,7 +198,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", supplement=\"$ser_supplement\" WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", extra=\"$ser_extra\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
@@ -255,7 +255,7 @@ if ($row = spip_fetch_array($result)) {
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
 	$referers = $row["referers"];
-	$supplement = unserialize($row["supplement"]);
+	$extra = unserialize($row["extra"]);
 }
 
 // pour l'affichage du virtuel
@@ -1239,10 +1239,10 @@ else {
 		echo fin_cadre_relief();
 	}
 
-	if ($supplement && function_exists(champs_supplement)) {
-		$champs_suppl=champs_supplement("article", $id_article, $id_rubrique);
-		include_ecrire("inc_supplement.php3");
-		supplement_affichage($supplement, $champs_suppl);
+	if ($extra && function_exists(champs_extra)) {
+		$champs_suppl=champs_extra("article", $id_article, $id_rubrique);
+		include_ecrire("inc_extra.php3");
+		extra_affichage($extra, $champs_suppl);
 	}
 }
 

@@ -71,15 +71,15 @@ if ($titre AND $modifier_breve) {
 	$texte = addslashes($texte);
 	$lien_titre = addslashes($lien_titre);
 
-	// recoller les champs du supplement
-	if (function_exists('champs_supplement')) {
-		$champs_suppl=champs_supplement("breve", $id_breve, $id_secteur);
-		include_ecrire("inc_supplement.php3");
-		$supplement = serialize(supplement_recup_saisie($champs_suppl));
+	// recoller les champs du extra
+	if (function_exists('champs_extra')) {
+		$champs_suppl=champs_extra("breve", $id_breve, $id_secteur);
+		include_ecrire("inc_extra.php3");
+		$extra = serialize(extra_recup_saisie($champs_suppl));
 	} else
-		$supplement = '';
+		$extra = '';
 
-	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\", supplement=\"".addslashes($supplement)."\" WHERE id_breve=$id_breve";
+	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\", extra=\"".addslashes($extra)."\" WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
@@ -107,7 +107,7 @@ while ($row = spip_fetch_array($result)) {
 	$titre_breve=$row['titre'];
 	$titre=$row['titre'];
 	$texte=$row['texte'];
-	$supplement=$row['supplement'];
+	$extra=$row['extra'];
 	$lien_titre=$row['lien_titre'];
 	$lien_url=$row['lien_url'];
 	$statut=$row['statut'];
@@ -269,10 +269,10 @@ if ($les_notes) {
 	echo "<hr width='70%' height=1 align='left'><font size=2>$les_notes</font>\n";
 }
 
-if ($supplement && function_exists(champs_supplement)) {
-	$champs_suppl=champs_supplement("breve", $id_breve, $id_secteur);
-	include_ecrire("inc_supplement.php3");
-	supplement_affichage(unserialize($supplement), $champs_suppl);
+if ($extra && function_exists(champs_extra)) {
+	$champs_suppl=champs_extra("breve", $id_breve, $id_secteur);
+	include_ecrire("inc_extra.php3");
+	extra_affichage(unserialize($extra), $champs_suppl);
 }
 
 if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){

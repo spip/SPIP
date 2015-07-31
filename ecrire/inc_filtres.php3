@@ -428,10 +428,10 @@ function centrer($letexte) {
 }
 
 //
-// Recuperation de donnees dans le champ supplement
-// Ce filtre n'a de sens qu'avec la balise #SUPPLEMENT
+// Recuperation de donnees dans le champ extra
+// Ce filtre n'a de sens qu'avec la balise #EXTRA
 //
-function champ($letexte,$champ) {
+function extra ($letexte,$champ) {
 	$champs = unserialize($letexte);
 	return interdire_scripts($champs[$champ]);
 }
