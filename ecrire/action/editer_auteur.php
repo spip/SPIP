@@ -322,7 +322,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 		)
 	);
 	
-	if (is_array($c['restreintes'])
+	if (isset($c['restreintes']) and is_array($c['restreintes'])
 	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes']))) {
 		$rubriques = array_map('intval',$c['restreintes']);
 		$rubriques = array_unique($rubriques);
