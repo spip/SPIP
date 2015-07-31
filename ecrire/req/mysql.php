@@ -490,7 +490,7 @@ function _mysql_traite_query($query, $db='', $prefixe='') {
 	$r = preg_replace(_SQL_PREFIXE_TABLE_MYSQL, '\1'.$pref, $query) . $suite;
 
 	// en option, remplacer les emoji (que mysql ne sait pas gérer) en &#128169;
-	if (defined('_MYSQL_NOPLANES') && _MYSQL_NOPLANES) {
+	if (defined('_MYSQL_NOPLANES') AND _MYSQL_NOPLANES AND lire_meta('charset_sql_connexion') == 'utf8') {
 		include_spip('inc/charsets');
 		$r = utf8_noplanes($r);
 	}
