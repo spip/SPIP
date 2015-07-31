@@ -131,15 +131,6 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 	return array($v, $largeur, $hauteur);
 }
 
-// Fonction obsolete
-function image_pattern($vignette) {
-	return "<img src='"
-			. get_spip_doc($vignette['fichier'])."'
-			alt=' '
-			width='".$vignette['largeur']."'
-			height='".$vignette['hauteur']."' />";
-}
-
 // http://doc.spip.org/@document_et_vignette
 function document_et_vignette($document, $url, $portfolio=false) {
 	$image = $document['id_vignette'];
@@ -180,10 +171,20 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	include_spip('inc/distant');
 	include_spip('inc/filtres');
 	include_spip('inc/filtres_images_mini');
+	$gd = ($GLOBALS['meta']['creer_preview'] === 'oui');
+	$e = $doc['extension'];
 	if (!$img) {
-		$img = image_du_document($doc);
+		if (!$img = image_du_document($doc)) {
+			if (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+				$img = get_spip_doc($doc['fichier']);
+			else {
+				$img = vignette_par_defaut($e, false);
+				$x = $y = 0;
+				$class = '';
+			}
+		}
 	}
-	if ($GLOBALS['meta']['creer_preview'] === 'oui') {
+	if ($gd) {
 		if ($x OR $y) {
 			$img = image_reduire($img, $x, $y);
 		} else 	$img = image_reduire($img);
@@ -204,10 +205,11 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	$titre = " - " .taille_en_octets($doc['taille'])
 	  . ($titre ? " - $titre" : "");
 
-	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($doc['extension']));
+	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($e));
 
 	$mime = $type['mime_type'];
 	$titre = attribut_html(couper($type['titre'] . $titre, 80));
+
 	return "<a href='$lien' type='$mime' title='$titre'>$img</a>";
 }
 
@@ -221,13 +223,13 @@ function image_du_document($document)
 {
 	$e = $document['extension'];
 	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
-	AND  $GLOBALS['meta']['creer_preview'] == 'oui') {
+	AND  $GLOBALS['meta']['creer_preview'] === 'oui') {
 		if ($document['distant'] == 'oui') {
 			$image = _DIR_RACINE.copie_locale($document['fichier']);
 		} else 	$image = get_spip_doc($document['fichier']);
 		if (@file_exists($image)) return $image;
 	}
-	return vignette_par_defaut($e, false);
+	return '';
 }
 
 //

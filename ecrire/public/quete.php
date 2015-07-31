@@ -85,13 +85,13 @@ function quete_date_postdates() {
 # retourne le fichier d'un document
 
 // http://doc.spip.org/@quete_fichier
-function quete_fichier($id_document, $serveur) {
+function quete_fichier($id_document, $serveur='') {
 	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
 # Toute les infos sur un document
 
-function quete_document($id_document, $serveur) {
+function quete_document($id_document, $serveur='') {
 	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
@@ -129,6 +129,75 @@ function quete_meta($nom, $serveur) {
 			     '','','','',$serveur);
 }
 
+//
+// Retourne le logo d'un objet, eventuellement par heritage
+// Si flag <> false, retourne le chemin du fichier
+// sinon retourne un tableau de 3 elements:
+// le chemin du fichier, celui du logo de survol, l'attribut style=w/h
+
+function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	$nom = strtolower($onoff);
+
+	while (1) {
+		$on = $chercher_logo($id, $type, $nom);
+		if ($on) {
+			if ($flag)
+				return "$on[2].$on[3]";
+			else {
+				$taille = @getimagesize($on[0]);
+				$off = ($onoff != 'ON') ? '' :
+					$chercher_logo($id, $type, 'off');
+				// on retourne une url du type IMG/artonXX?timestamp
+				// qui permet de distinguer le changement de logo
+				// et placer un expire sur le dossier IMG/
+				return array ($on[0].($on[4]?"?$on[4]":""),
+					($off ? $off[0] . ($off[4]?"?$off[4]":"") : ''),
+					(!$taille ? '' : (" ".$taille[3])));
+			}
+		}
+		else if ($id_rubrique) {
+			$type = 'id_rubrique';
+			$id = $id_rubrique;
+			$id_rubrique = 0;
+		} else if ($id AND $type == 'id_rubrique')
+			$id = quete_parent($id);
+		else return '';
+	}
+}
+
+// fonction appelee par la balise #LOGO_DOCUMENT
+// http://doc.spip.org/@calcule_logo_document
+function quete_logo_file($row, $connect=NULL) {
+	include_spip('inc/documents');
+	$logo = vignette_logo_document($row['id_vignette'], $connect);
+	if (!$logo) $logo = image_du_document($row);
+	if (!$logo) $logo = vignette_par_defaut($row['extension'], false);
+	return get_spip_doc($logo);
+}
+
+function quete_logo_document($row, $lien, $align, $x, $y, $connect=NULL) {
+	include_spip('inc/documents');
+	$logo = vignette_logo_document($row['id_vignette'], $connect);
+	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
+}
+
+// Retourne la vignette explicitement attachee a un document
+// le resutat est un fichier local existant, ou une URL
+function vignette_logo_document($row, $connect='')
+{
+	if (!$row['id_vignette']) return '';
+	$fichier = quete_fichier($row['id_vignette'], $connect);
+	if ($connect) {
+		$site = quete_meta('adresse_site', $connect);
+		$dir = quete_meta('dir_img', $connect);
+		return "$site/$dir$fichier";
+	}
+	$f = get_spip_doc($fichier);
+	if ($f AND @file_exists($f)) return $f;
+	if ($row['mode'] !== 'vignette') return '';
+	return generer_url_entite($row['id_document'], 'document','','', $connect);
+}
 
 // http://doc.spip.org/@calcul_exposer
 function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
@@ -183,48 +252,6 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
-// fonction appelee par la balise #LOGO_DOCUMENT
-// http://doc.spip.org/@calcule_logo_document
-function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params='', $connect='') {
-	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
-	if (!$row = quete_document($id_document, $connect)) {
-		// pas de document. Ne devrait pas arriver
-		spip_log("Erreur du compilateur doc $id_document inconnu");
-		return ''; 
-	}
-
-	include_spip('inc/documents');
-	$logo = vignette_logo_document($row['id_vignette'], $connect);
-	if (!$logo AND $row['mode'] == 'vignette') {
-		$logo = generer_url_entite($id_document, 'document','','', $connect ? $connect : NULL);
-	}
-	// flag_fichier : seul le fichier est demande
-	if ($flag_fichier) {
-		return set_spip_doc($logo ? $logo : image_du_document($row));
-	}
-	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
-		$x = intval($r[1]);
-		$y = intval($r[2]);
-	} else $x = $y = 0;
-
-	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
-}
-
-// Retourne la vignette explicitement attachee a un document
-// le resutat est un fichier local existant, ou une URL
-function vignette_logo_document($id_vignette, $connect='')
-{
-	if (!$id_vignette) return '';
-	$fichier = quete_fichier($id_vignette, $connect);
-	if ($connect) {
-		$site = quete_meta('adresse_site', $connect);
-		$dir = quete_meta('dir_img', $connect);
-		return "$site/$dir$fichier";
-	}
-	$f = get_spip_doc($fichier);
-	return ($f AND @file_exists($f)) ? $f : '';
-}
 
 // Ajouter "&lang=..." si la langue du forum n'est pas celle du site.
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
