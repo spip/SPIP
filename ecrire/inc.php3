@@ -183,10 +183,6 @@ if ($version_installee <> $spip_version) {
 // Gestion de la configuration globale du site
 //
 
-if ($envoi_now) {
-	effacer_meta('majnouv');
-}
-
 if (!$adresse_site) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
