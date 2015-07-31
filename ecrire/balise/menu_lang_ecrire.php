@@ -10,32 +10,86 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère la balise dynamique `#MENU_LANG_ECRIRE`
+ * 
+ * @package SPIP\Core\Compilateur\Balises
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// #MENU_LANG_ECRIRE affiche le menu des langues de l'espace priv�
-// et preselectionne celle la globale $lang
-// ou de l'arguemnt fourni: #MENU_LANG_ECRIRE{#ENV{malangue}} 
-
-// http://doc.spip.org/@balise_MENU_LANG_ECRIRE
+/**
+ * Compile la balise dynamique `#MENU_LANG_ECRIRE` qui affiche
+ * un sélecteur de langue pour l'interface privée
+ *
+ * Affiche le menu des langues de l'espace privé
+ * et présélectionne celle la globale `$lang`
+ * ou de l'arguemnt fourni: `#MENU_LANG_ECRIRE{#ENV{malangue}}`
+ * 
+ * @balise MENU_LANG_ECRIRE
+ * @link http://www.spip.net/4626
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
+**/
 function balise_MENU_LANG_ECRIRE ($p) {
 	return calculer_balise_dynamique($p,'MENU_LANG_ECRIRE', array('lang'));
 }
 
-// s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
-// http://doc.spip.org/@balise_MENU_LANG_ECRIRE_stat
+/**
+ * Calculs de paramètres de contexte automatiques pour la balise MENU_LANG_ECRIRE
+ *
+ * S'il n'y a qu'une langue proposée, pas besoin du formulaire
+ * (éviter une balise ?php inutile)
+ * 
+ * @param array $args
+ *   Liste des arguments demandés obtenus du contexte (lang)
+ *   complétés de ceux fournis à la balise
+ * @param array $context_compil
+ *   Tableau d'informations sur la compilation
+ * @return array
+ *   Liste (lang) des arguments collectés et fournis.
+ */
 function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil) {
 	include_spip('inc/lang');
 	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
 	return $args;
 }
 
-// normalement $opt sera toujours non vide suite au test ci-dessus
-// http://doc.spip.org/@balise_MENU_LANG_ECRIRE_dyn
+/**
+ * Exécution de la balise dynamique `#MENU_LANG_ECRIRE`
+ *
+ * @use menu_lang_pour_tous()
+ * @note
+ *   Normalement `$opt` sera toujours non vide suite au test ci-dessus
+ * 
+ * @param string $opt
+ *     Langue par défaut
+ * @return array
+ *     Liste : Chemin du squelette, durée du cache, contexte
+**/
 function balise_MENU_LANG_ECRIRE_dyn($opt) {
 	return menu_lang_pour_tous('var_lang_ecrire', $opt);
 }
 
-// http://doc.spip.org/@menu_lang_pour_tous
+/**
+ * Calcule l'environnement et le squelette permettant d'afficher
+ * le formulaire de sélection de changement de langue
+ *
+ * Le changement de langue se fait par l'appel à l'action `converser`
+ * 
+ * @use lang_select()
+ * @see action_converser_dist()
+ * 
+ * @param string $nom
+ *     Nom de la variable qui sera postée par le formulaire
+ * @param string $default
+ *     Valeur par défaut de la langue
+ * @return array
+ *     Liste : Chemin du squelette, durée du cache, contexte
+**/
 function menu_lang_pour_tous($nom, $default) {
 	include_spip('inc/lang');
 
