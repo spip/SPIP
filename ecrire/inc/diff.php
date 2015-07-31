@@ -323,7 +323,18 @@ class DiffPhrase {
 			$punct = $regs[1] ? $regs[1] : $regs[6];
 			$milieu = "";
 			if ($punct) {
+				// notes
+				if ($punct == '[[') {
+					$avant = substr($texte, 0, $p) . $regs[5] . $punct;
+					$texte = $regs[4] . substr($texte, $p + $l);
+				}
+				else
+				if ($punct == ']]') {
+					$avant = substr($texte, 0, $p) . $regs[5] . $punct;
+					$texte = substr($texte, $p + $l);
+				}
 				// Attacher les raccourcis fermants au mot precedent
+				else
 				if (preg_match(',^[\]}]+$,', $punct)) {
 					$avant = substr($texte, 0, $p) . $regs[5] . $punct;
 					$texte = $regs[4] . substr($texte, $p + $l);

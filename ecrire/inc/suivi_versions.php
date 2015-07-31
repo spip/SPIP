@@ -257,7 +257,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 			AND isset($old[$champ])) {
 				// cas particulier : id_rubrique
 				if (in_array($champ, array('id_rubrique'))) {
-				  $textes[$champ] = _T('version_deplace_rubrique',
+					$textes[$champ] = _T('version_deplace_rubrique',
 										 array('from'=> titre_rubrique($old[$champ])
 											   ,'to'=>titre_rubrique($new[$champ]))
 										 );
@@ -269,7 +269,6 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 					$n = preparer_diff($new[$champ]);
 					$o = preparer_diff($old[$champ]);
 					$textes[$champ] = afficher_diff($diff->comparer($n,$o));
-
 					if ($format == 'diff' OR $format == 'apercu')
 						$textes[$champ] = afficher_para_modifies($textes[$champ], ($format == 'apercu'));
 				}
