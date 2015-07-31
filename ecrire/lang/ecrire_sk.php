@@ -877,9 +877,9 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   Tieto súbory sa dajú použiť na obmedzenie prístupu autorom
   a administrátorom na ostatné časti vašej stránky
   (napr. externý štatistický program).</p><p>
-  Ak takéto súbory nepotrebujete, môžete ponechať túto možnosť
+  Ak to nepotrebujete, môžete nechať túto možnosť
   s predvolenou hodnotou (žiadne 
-  vytváranie súborov).</p>', # MODIF
+  vytváranie súborov).</p>',
 	'texte_informations_personnelles_1' => 'Systém vám teraz vytvorí osobný účet pre túto stránku.',
 	'texte_informations_personnelles_2' => '(Poznámka: ide o preinštaláciu, ak vám stále funguje prístup ',
 	'texte_introductif_article' => '(Úvodný text článku.)',
