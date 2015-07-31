@@ -59,9 +59,8 @@ function afficher_boutons_admin($pop) {
 
 	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 	// puis celle du squelette (.spip-admin, cf. impression.css)
-	$ret .= "<link rel='stylesheet' href='spip_admin.css' type='text/css'>\n";
-	if (@file_exists('spip_admin_perso.css'))
-		$ret .= "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css'>\n";
+	$ret .= "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
+	if (@file_exists('spip_admin_perso.css')) echo "\t<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
 	$ret .= '<div class="spip-admin-float">
 	<div class="spip-admin-bloc" dir="'.lang_dir($lang,'ltr','rtl').'">
 	<div class="spip-admin">
@@ -115,8 +114,8 @@ function page_debug($type,$texte,$fichier) {
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
 	echo "<html><head><title>Debug $type : $fichier</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-	<link rel='stylesheet' href='spip_admin.css' type='text/css'>\n";
-	if (@file_exists('spip_admin_perso.css')) echo "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css'>\n";
+	<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
+	if (@file_exists('spip_admin_perso.css')) echo "\t<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
 	echo "</head><body>\n";
 	echo "<code>$fichier</code>\n";
 	echo '<div class="spip-admin-bloc">
