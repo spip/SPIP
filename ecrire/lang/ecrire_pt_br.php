@@ -661,7 +661,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'install_select_langue' => 'Escolha um idioma e clique no bot&atilde;o &laquo;avan&ccedil;ar&raquo; para iniciar o procedimento de instala&ccedil;&atilde;o.',
 'install_select_type_db' => 'Indicar o tipo de base de dados:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servidor de base de dados atribu&iacute;do pelo servi&ccedil;o de hospedagem',

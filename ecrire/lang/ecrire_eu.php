@@ -662,7 +662,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'install_select_langue' => 'Hizkuntza bat aukeratu eta &laquo; hurrengoa &raquo; botoian klikatu instalazio-prozedura hasteko.',
 'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
 'install_select_type_mysql' => '<NEW>MySQL',
-'install_select_type_pgsql' => '<NEW>PostgreSQL',
+'install_select_type_pg' => '<NEW>PostgreSQL',
 'install_select_type_sqlite2' => '<NEW>SQLite 2',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
