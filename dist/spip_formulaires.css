@@ -249,3 +249,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 #formulaire_recherche label { display: inline; font-size: 1em; }
 #formulaire_recherche input.text { width: 12em; }
 #formulaire_recherche input.bouton { vertical-align: middle; }
+
+
+/* formulaire site */
+.formulaire_site li.saisie_description_site {padding-left:5px;}
+.formulaire_site li.saisie_description_site label {display:block;margin:0.5em 0;float:none;width:auto;}
