@@ -127,19 +127,21 @@ function cherche_page_incluante($cache, $contexte)
 
   if ($id_article = intval($GLOBALS['id_article'])) {
     $page = query_chapo($id_article);
-    if (!$page) return '';
-    $page = $page['chapo'];
-    if (substr($page, 0, 1) == '=') {
-      include_ecrire('inc_texte.php3');
-      list(,$page) = extraire_lien(array('','','',substr($page, 1)));
-      if ($page) // sinon les navigateurs pataugent
-	{
-	  $page = addslashes($page);
-	  return array('texte' =>
-		       ("<". "?php header(\"Location: $page\"); ?" . ">"),
-		       'process_ins' => 'php');
+    if ($page) 
+      {
+	$page = $page['chapo'];
+	if (substr($page, 0, 1) == '=') {
+	  include_ecrire('inc_texte.php3');
+	  list(,$page) = extraire_lien(array('','','',substr($page, 1)));
+	  if ($page) // sinon les navigateurs pataugent
+	    {
+	      $page = addslashes($page);
+	      return array('texte' =>
+			   ("<". "?php header(\"Location: $page\"); ?" . ">"),
+			   'process_ins' => 'php');
+	    }
 	}
-    }
+      }
   }
   return calculer_page_globale( $cache,
 				$contexte['contexte'],
