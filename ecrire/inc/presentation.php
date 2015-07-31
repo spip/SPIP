@@ -1153,8 +1153,7 @@ function sous_enfant_rub($collection2){
 		changer_typo($row['lang']);
 		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir','rubrique',$id_rubrique2))
-			$retour.="\n<li><div class='arial11' " .
-			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div></li>\n";
+			$retour.="\n<li class='arial11 rubrique_12' dir='$lang_dir'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'>".typo($titre2)."</a></li>\n";
 	}
 
 	if (!$retour) return '';
