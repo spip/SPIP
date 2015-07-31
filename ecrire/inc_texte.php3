@@ -389,7 +389,7 @@ function typo($letexte) {
 		$letexte = typo_en($letexte);
 
 
-	$letexte = str_replace("'", "&#146;", $letexte);
+	//$letexte = str_replace("'", "&#146;", $letexte);
 
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
