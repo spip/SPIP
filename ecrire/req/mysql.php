@@ -242,7 +242,7 @@ function spip_mysql_select_as($args)
 		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS `$k`") . $join;
 		$join = '';
 	}
-	return substr($res,2);
+	return substr($res,2) . $join;
 }
 
 //

@@ -350,7 +350,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	$extension = $row['extension'];
 	$id_vignette = $row['id_vignette'];
-	$fichier = get_spip_doc($row['fichier']);
+	$fichier = $row['fichier'];
 	$mode = $row['mode'];
 	$logo = '';
 
@@ -384,7 +384,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
 		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
-		  if ($img = _DIR_RACINE.copie_locale($fichier)
+		  if ($img = _DIR_RACINE.copie_locale(get_spip_doc($fichier))
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
 					$logo = reduire_image($img);
@@ -495,19 +495,47 @@ function calculer_select ($select = array(), $from = array(),
 // si elle est seulement utile a Ln+1 elle meme inutile
 	
 	$sfrom = '';
+	$equiv = array();
 	for($k = count($join); $k > 0; $k--) {
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
-		OR strpos($sfrom, "$cle.")
+		OR strpos($sfrom, " $cle ")
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
-		OR calculer_jointnul($cle, $where))
-      $sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
-		else { unset($join[$k]);}
+		OR calculer_jointnul($cle, $having)
+		OR calculer_jointnul($cle, $where)) {
+			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle USING ($c)" . $sfrom;
+			$equiv[]= $c;
+		} else { unset($join[$k]);}
 		unset($from[$cle]);
 	}
-	if ($sfrom) $from[-1] = $sfrom;
+
+	// Regarder si la table principale ne sert finalement a rien comme dans
+	// <BOUCLE1(ARTICLES){id_mot} />#TOTAL_BOUCLE<//B1>
+	if ($sfrom) {
+	  list($t,$c) = each($from);
+	  reset($from);
+	  $e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
+	  if (!( count($equiv) <> 1 OR // a faire sauter un jour
+		 calculer_jointnul($t, $select, $e) OR
+		 calculer_jointnul($t, $join, $e) OR
+		 calculer_jointnul($t, $where, $e) OR
+		 calculer_jointnul($t, $having, $e))) {
+	    unset($from[$t]);
+	    preg_match('/^\s*\w*\s*JOIN\s+(.*AS\s*(\w+)\s+)USING [(]([^)]*)[)](.*)$/', $sfrom, $r);
+	    $sfrom = $r[1].  $r[4];
+	    $e = '/\b' . $t . '\.' . $r[3] .'\b/';
+	    $t = $r[2] . '.' . $r[3];
+	    spip_log("$e $t");
+	    $select = remplacer_jointnul($t, $select, $e);
+	    $join = remplacer_jointnul($t, $join, $e);
+	    $where = remplacer_jointnul($t, $where, $e);
+	    $having = remplacer_jointnul($t, $having, $e);
+	  }
+
+	  $from[-1] = $sfrom; 
+	}
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
 
 	$r = sql_select($select, $from, $where,
@@ -516,18 +544,31 @@ function calculer_select ($select = array(), $from = array(),
 	return $r;
 }
 
-//condition suffisante (mais non necessaire) pour qu'une jointure soit inutile
+//condition suffisante (mais non necessaire) pour qu'une table soit utile
 
 // http://doc.spip.org/@calculer_jointnul
-function calculer_jointnul($cle, $exp)
+function calculer_jointnul($cle, $exp, $equiv='')
 {
-	if (!is_array($exp))
-		return	(strpos($exp, "$cle.") === false) ? false : true;
-	else {
+	if (!is_array($exp)) {
+		if ($equiv) $exp = preg_replace($equiv, '', $exp);
+		return preg_match('/\b$cle\./', $exp);
+	} else {
 		foreach($exp as $v) {
-			if (calculer_jointnul($cle, $v)) return true;
+			if (calculer_jointnul($cle, $v, $equiv)) return true;
 		}
 		return false;
+	}
+}
+
+function remplacer_jointnul($cle, $exp, $equiv='')
+{
+	if (!is_array($exp)) {
+		return preg_replace($equiv, $cle, $exp);
+	} else {
+		foreach($exp as $k => $v) {
+		  $exp[$k] = remplacer_jointnul($cle, $v, $equiv);
+		}
+		return $exp;
 	}
 }
 ?>
