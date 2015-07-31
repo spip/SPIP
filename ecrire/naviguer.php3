@@ -11,6 +11,9 @@ $flag_mots = lire_meta("articles_mots");
 
 function enfant($collection){
 	global $les_enfants, $couleur_foncee, $lang_dir;
+	global $spip_display, $spip_lang_left, $spip_lang_right;
+	global $connect_id_auteur;
+	
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 
@@ -28,6 +31,30 @@ function enfant($collection){
 		$les_enfants.= "<div class='enfants'>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
+
+
+		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			$logo = get_image("rubon$id_rubrique");
+			if ($logo) {
+				$fichier = $logo[0];
+				$taille = $logo[1];
+				$taille_x = $taille[0];
+				$taille_y = $taille[1];
+				$taille = image_ratio($taille_x, $taille_y, 48, 36);
+				$w = $taille[0];
+				$h = $taille[1];
+				$fid = $logo[2];
+				$hash = calculer_action_auteur ("reduire $w $h");
+
+				$les_enfants.= "<div style='float: $spip_lang_right; margin-top: -6px;  margin-$spip_lang_right: -6px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>";
+				
+			}
+		}
+
+
+
+
+
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants .= $bouton_layer;
 		}
