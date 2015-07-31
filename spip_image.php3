@@ -177,7 +177,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
 $effacer_si_ok = false;
-if (!$image_name AND ereg("^ecrire/upload/...", $image)) {
+if (!$image_name AND $image2) {
+	$image = "ecrire/upload/".$image2;
 	$image_name = $image;
 	$effacer_si_ok = true;
 }
@@ -187,7 +188,7 @@ if (!$image_name AND ereg("^ecrire/upload/...", $image)) {
 //
 if ($ajout_doc == 'oui') {
 	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
-	if ($ok AND $effacer_si_ok) @unlink($image);
+	// if ($ok AND $effacer_si_ok) @unlink($image); // vraiment souhaitable ?
 }
 
 

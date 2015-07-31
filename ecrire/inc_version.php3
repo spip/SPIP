@@ -389,6 +389,10 @@ class Link {
 			$this->vars[$name] = $value;
 	}
 
+	function getVar($name) {
+		return $this->vars[$name];
+	}
+
 	//
 	// Ajouter une variable de session
 	// (variable dont la valeur est transmise d'un lien a l'autre)
@@ -467,9 +471,11 @@ class Link {
 	// (tag ouvrant + entrees cachees representant les variables)
 	//
 
-	function getForm($method = 'GET', $anchor = '') {
+	function getForm($method = 'GET', $anchor = '', $enctype = '') {
 		if ($anchor) $anchor = '#'.$anchor;
-		$form = "<form method='$method' action='".$this->file.$anchor."'>\n";
+		$form = "<form method='$method' action='".$this->file.$anchor."'";
+		if ($enctype) $form .= " enctype='$enctype'";
+		$form .= ">\n";
 		$vars = $this->getAllVars();
 		if (is_array($vars)) {
 			reset($vars);
