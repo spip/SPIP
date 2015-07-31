@@ -25,7 +25,9 @@ if ($p = addslashes($p)) {
 			spip_query ("UPDATE spip_auteurs SET htpass='$htpass', pass='$mdpass', alea_actuel='',
 				cookie_oubli='' WHERE cookie_oubli='$p'");
 
-			$erreur = "Votre nouveau mot de passe a &eacute;t&eacute; pris en compte.";
+			$login = $row['login'];
+			$erreur = "Votre nouveau mot de passe a &eacute;t&eacute; pris en compte.".
+			"<p>Rappel : votre login est &laquo; $login &raquo;.";
 		} else {
 			install_debut_html("Nouveau mot de passe");
 			echo "<p><br>";
@@ -59,11 +61,11 @@ if ($email_oubli) {
 
 				$message = "(ceci est un message automatique)\n\n";
 				$message .= "Pour retrouver votre acc\xe8s au site\n";
-				$message .= "$nom_site_spip ($adresse_site),\n";
+				$message .= "$nom_site_spip ($adresse_site)\n\n";
 				$message .= "Veuillez vous rendre \xe0 l'adresse suivante :\n\n";
 				$message .= "   <$adresse_site/spip_pass.php3?p=$cookie>\n\n";
 				$message .= "Vous pourrez alors entrer un nouveau mot de passe\n";
-				$message .= "et vous reconnecter au site.";
+				$message .= "et vous reconnecter au site.\n";
 
 				if (envoyer_mail($email, "[$nom_site_spip] Oubli du mot de passe", $message))
 					$erreur = "Vous allez recevoir un email vous indiquant comment retrouver votre acc&egrave;s au site.";
