@@ -33,63 +33,6 @@ function exec_admin_plugin_dist() {
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo "<style type='text/css'>\n";
-	echo <<<EOF
-div.cadre-padding ul li {
-	list-style:none ;
-}
-div.cadre-padding ul {
-	padding-left:1em;
-	margin:.5em 0 .5em 0;
-}
-div.cadre-padding ul ul {
-	border-left:5px solid #DFDFDF;
-}
-div.cadre-padding ul li li {
-	margin:0;
-	padding:0 0 0.25em 0;
-}
-div.cadre-padding ul li li div.nomplugin {
-	border:1px solid #AFAFAF;
-	padding:.3em .3em .6em .3em;
-	font-weight:normal;
-}
-div.cadre-padding ul li li div.nomplugin a {
-	outline:0;
-	outline:0 !important;
-	-moz-outline:0 !important;
-}
-div.cadre-padding ul li li div.nomplugin_on>a {
-	font-weight:bold;
-}
-
-div.cadre-padding div.droite label {
-	padding:.3em;
-	background:#EFEFEF;
-	border:1px dotted #95989F !important;
-	border:1px solid #95989F;
-	cursor:pointer;
-	margin:.2em;
-	display:block;
-	width:10.1em;
-}
-div.cadre-padding input {
-	cursor:pointer;
-}
-div.detailplugin {
-	border-top:1px solid #B5BECF;
-	padding:.6em;
-	background:#F5F5F5;
-}
-div.detailplugin hr {
-	border-top:1px solid #67707F;
-	border-bottom:0;
-	border-left:0;
-	border-right:0;
-	}
-div.nomplugin label {display:none;}
-EOF;
-	echo "</style>\n";
 	echo "<br/><br/><br/>";
 	
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
@@ -115,13 +58,7 @@ EOF;
 		effacer_meta('plugin_erreur_activation');
 	}
 
-	echo debut_cadre_relief('',true);
-
-	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td class='toile_foncee' colspan='4'><b>";
-	echo "<span style='color: #ffffff;' class='verdana1 spip_medium'>", _T('plugins_liste')."</span></b></td></tr>";
-
-	echo "<tr><td class='serif' colspan='4'>";
+	echo debut_cadre_trait_couleur('',true,'',_T('plugins_liste'),'liste_plugins');
 	echo _T('texte_presente_plugin');
 
 	$lpf = liste_plugin_files();
@@ -138,8 +75,7 @@ EOF;
 
 	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
 
-	echo "</td></tr></table><br />\n";
-	echo fin_cadre_relief(true);
+	echo fin_cadre_trait_couleur(true);
 	echo fin_gauche(), fin_page();
 
 }
@@ -270,9 +206,9 @@ function ligne_plug($plug_file, $actif, $id){
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ?
 			$versions[$info['prefix']] + 1 : '';
 	$s = "<a name='" . $info['prefix'] . $versions[$info['prefix']] . 
-		"'></a><div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
+		"'></a><div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
-		$s .=  "<div class='toile_claire'>";
+		$s .=  "<div class='plugin_erreur'>";
 		$erreur = true;
 		foreach($info['erreur'] as $err)
 			$s .= "/!\ $err <br/>";

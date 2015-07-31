@@ -14,6 +14,11 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
 body {
 	color: #000000;
 	background-color: #f8f7f3; 
@@ -22,10 +27,10 @@ body {
 	scrollbar-face-color: #fff;
 	scrollbar-shadow-color: #fff;
 	scrollbar-highlight-color: #fff;
-	scrollbar-3dlight-color: ##ENV{couleur_claire,edf3fe};
+	scrollbar-3dlight-color: #GET{claire};
 	scrollbar-darkshadow-color: #fff;
-	scrollbar-track-color: ##ENV{couleur_foncee,3874b0};
-	scrollbar-arrow-color: ##ENV{couleur_foncee,3874b0};
+	scrollbar-track-color: #GET{foncee};
+	scrollbar-arrow-color: #GET{foncee};
 }
 body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 
@@ -50,94 +55,33 @@ body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 
 /* * */
 .toile_claire {
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 }
 
-.toile_foncee {
-	background-color: ##ENV{couleur_foncee,3874b0};
-}
+.toile_foncee {	background-color: #GET{foncee};}
+.toile_blanche {	background-color: white;}
+.toile_noire {	background-color: black;}
+.toile_gris_sombre {	background-color: #333333;}
+.toile_gris_fort {	background-color: #999999;}
+.toile_gris_moyen {	background-color: #cccccc;}
+.toile_gris_leger {	background-color: #eeeeee;}
 
-.toile_blanche {
-	background-color: white;
-}
+.bordure_claire {	border: 1px solid #GET{claire};}
+.bordure_foncee {	border: 1px solid #GET{foncee};}
+.bordure_claire_basse {	border-bottom: 1px solid #GET{claire};}
+.bordure_claire_left {	border-#GET{left}: 1px solid #GET{claire};}
+.bordure_claire_right {	border-#GET{right}: 1px solid #GET{claire};}
+.bordure_grise_basse {	border-bottom: 1px solid #999999;}
+.bordure_grise_left {	border-#GET{left}: 1px solid #999999;}
+.bordure_grise_right {	border-#GET{right}: 1px solid #999999;}
+.bordure_foncee_pointillee {	border: 2px;	border-style: dotted;	border-color: #GET{foncee};}
 
-.toile_noire {
-	background-color: black;
-}
+.ligne_claire {	color: #GET{claire};}
+.ligne_foncee {	color: #GET{foncee};}
+.ligne_noire {	color: black;}
+.ligne_blanche {	color: white;}
 
-.toile_gris_sombre {
-	background-color: #333333;
-}
-
-.toile_gris_fort {
-	background-color: #999999;
-}
-
-.toile_gris_moyen {
-	background-color: #cccccc;
-}
-
-.toile_gris_leger {
-	background-color: #eeeeee;
-}
-
-.bordure_claire {
-	border: 1px solid ##ENV{couleur_claire,edf3fe};
-}
-
-.bordure_foncee {
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
-}
-
-.bordure_claire_basse {
-	border-bottom: 1px solid ##ENV{couleur_claire,edf3fe};
-}
-
-.bordure_claire_left {
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid ##ENV{couleur_claire,edf3fe};
-}
-
-.bordure_claire_right {
-	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
-}
-
-.bordure_grise_basse {
-	border-bottom: 1px solid #999999;
-}
-
-.bordure_grise_left {
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid #999999;
-}
-
-.bordure_grise_right {
-	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid #999999;
-}
-
-.bordure_foncee_pointillee {
-	border: 2px;
-	border-style: dotted;
-	border-color: ##ENV{couleur_foncee,3874b0};
-}
-
-.ligne_claire {
-	color: ##ENV{couleur_claire,edf3fe};
-}
-
-.ligne_foncee {
-	color: ##ENV{couleur_foncee,3874b0};
-}
-
-.ligne_noire {
-	color: black;
-}
-
-.ligne_blanche {
-	color: white;
-}
-
-td {
-	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
-}
+td {	text-align: #GET{left};}
 
 /*
  * Formulaires
@@ -147,7 +91,7 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
+	border: 1px solid #GET{claire}; 
 	background-position: center bottom; 
 	float: none;
 	behavior: url(../dist/win_width.htc);
@@ -157,18 +101,18 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: #FFF; 
-	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
+	border: 1px solid #GET{claire}; 
 	background-position: center bottom; float: none; 
 	behavior: url(../dist/win_width.htc);
 	font-size: 12px;}
 .fondl { 
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
+	border: 1px solid #GET{claire}; 
 	background-position: center bottom; 
 	float: none;
 	font-size: 11px;}
-.fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
+.fondo { background-color: #GET{foncee}; 
 	background-position: center bottom; float: none; color: #FFF;
 	font-size: 11px;font-weight: bold;
 }
@@ -202,14 +146,14 @@ select.fondl {
 .centered {margin:0 auto;text-align:center;}
 .righted {margin:0 0 0 auto;}
 #page {margin:auto;text-align:center;}
-.table_page{margin:auto;text-align:[(#ENV{ltr}|choixsiegal{left,left,right})];}
+.table_page{margin:auto;text-align:#GET{left};}
 
 /*style for bandeau-principal*/
 #bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90;background:#fff}
 #bandeau-principal .h-list .menu-item {margin:0 auto}
 
 #bandeau-principal a .icon_fond {
-	background:##ENV{couleur_claire,edf3fe};
+	background:#GET{claire};
 	height:48px;
 	width:48px;
 	margin:auto;
@@ -253,11 +197,11 @@ select.fondl {
 }
 
 /*style for #bandeau_couleur*/
-.bandeau_couleur {text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];padding:0px;margin:0px}
+.bandeau_couleur {text-align: #GET{left};padding:0px;margin:0px}
 
 #bandeau_couleur {min-height:20px;padding:2px 0}
 #bandeau_couleur1 .menu-item {width:230px;text-align:#ENV{ltr}}
-#bandeau_couleur3 .menu-item {width:150px;text-align:[(#ENV{ltr}|choixsiegal{left,right,left})]}
+#bandeau_couleur3 .menu-item {width:150px;text-align:#GET{right}}
 #bandeau_couleur4 .menu-item {width:68px;text-align:center;margin:0 5px}
 #bandeau_couleur5 .menu-item {width:114px;}
 #bandeau_couleur6 .menu-item {width:32px}
@@ -322,7 +266,7 @@ select.fondl {
 	position: absolute; 
 	visibility: hidden;
 	top: 0; 
-	background-color: ##ENV{couleur_claire,edf3fe}; 
+	background-color: #GET{claire}; 
 	color: #000;
 	padding: 5px;
 	padding-top: 2px;
@@ -348,8 +292,8 @@ a.bandeau_rub {
 	display: block;
 	font-size: 10px;
 	padding: 2px;
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 13px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
+	padding-#GET{right}: 13px;
+	padding-#GET{left}: 16px;
 	color: #666;
 	text-decoration: none;
 	border-bottom: 1px solid #ccc;
@@ -366,7 +310,7 @@ a.bandeau_rub:hover {
 }
 div.bandeau_rub {
 	position: absolute;
-	[(#ENV{ltr}|choixsiegal{left,left,right})]: 120px;
+	#GET{left}: 120px;
 	background-color: #eee;
 	padding: 0;
 	border: 1px solid #555555;
@@ -375,23 +319,23 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
 }
 div.pos_r {
 	position: relative;
 }
 
 option.selec_rub {
-	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] center;
+	background-position: #GET{left} center;
 	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
 	background-repeat: no-repeat;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
+	padding-#GET{left}: 16px;
 }
 
 
 div.messages {
 	padding: 5px;
-	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-bottom: 1px solid #GET{foncee};
 	font-size: 10px;
 	font-weight: bold;
 }
@@ -406,7 +350,7 @@ a.icone26 {
 	color: #000;
 	text-decoration: none;
 	padding: 1px; 
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 2px;
+	margin-#GET{right}: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;
@@ -414,7 +358,7 @@ a.icone26:hover {
 a.icone26 img {
 	vertical-align: middle;
 	behavior: url(../win_png.htc);
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 }
 a.icone26:hover img {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
@@ -437,7 +381,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 4px;
 	background-color: #eee;
-	border: 2px solid ##ENV{couleur_foncee,3874b0};
+	border: 2px solid #GET{foncee};
 }
 .icone36 a:hover img {
 	margin: 0; 
@@ -469,7 +413,7 @@ a.icone26:hover img {
 .icone36 span {
 	font-weight: bold;
 	font-size: 10px;
-	color: ##ENV{couleur_foncee,3874b0}; 
+	color: #GET{foncee}; 
 	display: block; 
 	margin: 2px;
 	width: 100%
@@ -514,7 +458,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0;
 	border: none;
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 }
 
 .cellule48 a.selection img {
@@ -554,7 +498,7 @@ a.icone26:hover img {
 	padding: 3px;
 	background-color: #e4e4e4;
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 }
 .cellule36 a span, .cellule48 a span {
 	color: #666; display: block; margin: 1px;
@@ -609,13 +553,13 @@ img.aide {
 }
 .cellule-texte a.selection {
 	padding: 3px; margin: 1px; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
-	background-color: ##ENV{couleur_claire,edf3fe};
+	border: 1px solid #GET{foncee}; 
+	background-color: #GET{claire};
 	color: #000;
 }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
+	border: 1px solid #GET{foncee}; 
 	background-color: #fff;
 	color: #333;
 }
@@ -639,14 +583,14 @@ a.cellule-h {
 a.cellule-h {
 	font-weight: bold;
 	font-size: 10px;
-	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+	text-align: #GET{left};
 	text-decoration: none; 
 	color: #666;
 }
 a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover {
 	font-weight: bold;
 	font-size: 10px;
-	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+	text-align: #GET{left};
 	text-decoration: none; 
 	color: #000;
 }
@@ -654,14 +598,14 @@ a.cellule-h div.cell-i {
 	padding: 0;
 	border: 1px solid #fff;
 	margin: 0;
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
+	margin-#GET{right}: 3px;
 }
 a.cellule-h:hover div.cell-i {
 	padding: 0;
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 	margin: 0;
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
+	margin-#GET{right}: 3px;
 }
 
 table.cellule-h-table {
@@ -687,7 +631,7 @@ a.cellule-h a.aide img {
 a.cellule-h-texte {
 	display: block;
 	clear: both;
-	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+	text-align: #GET{left};
 	font-family: Trebuchet Sans MS, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -753,26 +697,26 @@ div.onglet {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	margin-right: 3px;
 	padding: 5px;
 	background-color: #fff;
 }
 div.onglet a {
-	color: ##ENV{couleur_foncee,3874b0};
+	color: #GET{foncee};
 }
 
 div.onglet_on {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	margin-right: 3px;
 	padding: 5px;
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 }
 div.onglet_on a, div.onglet_on a:hover {
-	color: ##ENV{couleur_foncee,3874b0};
+	color: #GET{foncee};
 	text-decoration: none;
 }
 
@@ -780,10 +724,10 @@ div.onglet_off {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	margin-right: 3px;
 	padding: 5px;
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 	color: #fff;
 }
 
@@ -827,7 +771,7 @@ div.onglet_off {
 
 
 /* Liens hypertexte */
-a { text-decoration: none; color: ##ENV{couleur_foncee,3874b0} }
+a { text-decoration: none; color: #GET{foncee} }
 a:hover { text-decoration: none; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
@@ -866,7 +810,7 @@ a.ortho-dico:hover {
 }
 
 #ortho-fixed {
-	position: fixed; top: 0; [(#ENV{ltr}|choixsiegal{left,right,left})]: 0; width: 25%; padding: 15px; margin: 0;
+	position: fixed; top: 0; #GET{right}: 0; width: 25%; padding: 15px; margin: 0;
 }
 .ortho-content {
 	position: absolute; top: 0; width: 70%; padding: 15px; margin: 0;
@@ -953,20 +897,20 @@ a.ortho-dico:hover {
 
 table.spip_barre {
 	width: 100%;
-	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
+	border-#GET{right}: 1px solid #GET{claire};
 }
 
 table.spip_barre td {
-	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
-	border-top: 1px solid ##ENV{couleur_claire,edf3fe};
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid ##ENV{couleur_claire,edf3fe};
+	text-align: #GET{left};
+	border-top: 1px solid #GET{claire};
+	border-#GET{left}: 1px solid #GET{claire};
 }
 
 table.spip_barre a img {
 	padding: 3px;
 	margin: 0;
 	background-color: #eee;
-	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
+	border-#GET{right}: 1px solid #GET{claire};
 }
 table.spip_barre a:hover img {
 	background-color: #fff;
@@ -991,11 +935,11 @@ td.icone a img {
 	padding: 1px;
 	margin-bottom: 1px;
 	background-color: #eee;
-	border: 1px solid ##ENV{couleur_claire,edf3fe};
+	border: 1px solid #GET{claire};
 }
 
 .bouton_rotation:hover {
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 }
 
 
@@ -1022,7 +966,7 @@ td.icone a img {
 }
 
 .cadre-fonce {
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 }
 
 .cadre-gris-fonce {
@@ -1035,16 +979,16 @@ td.icone a img {
 }
 
 .cadre-couleur {
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 }
 .cadre-couleur div.cadre-titre {
-	background-color: ##ENV{couleur_foncee,3874b0};
-	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
+	border-bottom: 2px solid #GET{foncee};
 	color: #fff;	
 }
 
 .cadre-couleur-foncee {
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 }
 .cadre-couleur-foncee div.cadre-titre {
 	color: #fff;	
@@ -1052,11 +996,11 @@ td.icone a img {
 
 .cadre-trait-couleur {
 	background-color: #fff;
-	border: 2px solid ##ENV{couleur_foncee,3874b0};
+	border: 2px solid #GET{foncee};
 }
 .cadre-trait-couleur div.cadre-titre {
-	background-color: ##ENV{couleur_foncee,3874b0};
-	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
+	border-bottom: 2px solid #GET{foncee};
 	color: #fff;	
 }
 
@@ -1081,7 +1025,7 @@ td.icone a img {
 }
 
 .cadre-e div.cadre-titre {
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 	border-bottom: 1px solid #666;
 	color: #000;	
 }
@@ -1092,7 +1036,7 @@ td.icone a img {
 	margin-bottom:0;
 }
 .cadre-forum div.cadre-titre {
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 	border-bottom: 1px solid #aaa;
 	color: #000;	
 }
@@ -1116,13 +1060,13 @@ td.icone a img {
 
 .cadre-info{
 	background-color: #fff;
-	border: 2px solid ##ENV{couleur_foncee,3874b0};
+	border: 2px solid #GET{foncee};
 	padding: 5px;
 }
 
 
 .cadre-formulaire {
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	background-color: #ddd;
 	padding: 5px;
 	color: #444;
@@ -1137,14 +1081,14 @@ td.icone a img {
  */
 
 .plan-rubrique {
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #888;
+	margin-#GET{left}: 12px;
+	padding-#GET{left}: 10px;
+	border-#GET{left}: 1px dotted #888;
 }
 .plan-secteur {
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #404040;
+	margin-#GET{left}: 12px;
+	padding-#GET{left}: 10px;
+	border-#GET{left}: 1px dotted #404040;
 }
  
 .plan-articles, .plan-articles-bloques {
@@ -1155,7 +1099,7 @@ td.icone a img {
 .plan-articles a, .plan-articles-bloques .publie, .plan-articles-bloques .prepa, .plan-articles-bloques .prop, .plan-articles-bloques .refuse, .plan-articles-bloques .poubelle {
 	display: block;
 	padding: 2px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 18px;
+	padding-#GET{left}: 18px;
 	border-bottom: 1px solid #ccc;
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-color: #e0e0e0;
@@ -1197,14 +1141,14 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 
 }
 a.foncee, a.foncee:hover {
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 	color: #fff;
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 }
 a.claire, a.claire:hover {
-	background-color: ##ENV{couleur_claire,edf3fe};
-	color: ##ENV{couleur_foncee,3874b0};
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{claire};
+	color: #GET{foncee};
+	border: 1px solid #GET{foncee};
 }
 span.lang_base {
 	color: #666;
@@ -1217,7 +1161,7 @@ span.creer {
 	background-color: #fff;
 }
 .trad_float {
-	float: [(#ENV{ltr}|choixsiegal{left,right,left})];
+	float: #GET{right};
 	z-index: 20;
 	margin-top: 4px;
 }
@@ -1236,9 +1180,9 @@ div.cadre-liste .tranches{border-top:1px solid black;}
 	list-style: none;
 }
 .tout-site #page ul {
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #888;
+	margin-#GET{left}: 10px;
+	padding-#GET{left}: 12px;
+	border-#GET{left}: 1px dotted #888;
 }
 .tout-site #page ul,.tout-site #page li {clear:both;}
 li.sec, li.rub {display:inline;}
@@ -1249,53 +1193,53 @@ li.sec a.titre,  li.rub a.titre {
 	margin:0px;
 	padding: 0; 
 	padding-top: 4px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 5px; 
+	padding-#GET{left}: 5px; 
 	margin-bottom:5px;
 	height:20px;
 }
 li.art {display:block; height:24px;}
-li.sec a.titre {background-color: ##ENV{couleur_claire};}
+li.sec a.titre {background-color: #GET{claire};}
 li.rub a.titre {background-color: transparent;}
 li.art a.titre {
 	display:inline;
 	background-color: transparent;
 	font-weight:normal;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 5px; 
+	padding-#GET{left}: 5px; 
 	padding-top: 4px;
 	height:20px;
 }
 span.icone {
-	float:[(#ENV{ltr}|choixsiegal{left,left,right})];
+	float:#GET{left};
 	position:relative;
 	display:block;
 	width:28px;
 	height:24px;
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:-14px;	
+	margin-#GET{left}:-14px;	
 }
-li.art span.icone {	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:0px;}
+li.art span.icone {	margin-#GET{left}:0px;}
 
 span.holder {}
-li.sec span.icone { background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] bottom no-repeat;}
-li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
-li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
+li.sec span.icone { background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) #GET{left} bottom no-repeat;}
+li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) #GET{left} top no-repeat;}
+li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) #GET{left} top no-repeat;}
 li.sec ul{display:none;}
 li.rub ul{display:none;}
 
-li .puce_statut{float:[(#ENV{ltr}|choixsiegal{left,left,right})];	padding-top: 5px;}
+li .puce_statut{float:#GET{left};	padding-top: 5px;}
 li .puce_article_popup {padding:0px;}
 li img.expandImage{
 	display:block;
-	float:[(#ENV{ltr}|choixsiegal{left,left,right})];
+	float:#GET{left};
 	position:relative;
-	[(#ENV{ltr}|choixsiegal{left,left,right})]:-20px;
+	#GET{left}:-20px;
 	width:16px;
 	height:16px;
 }
-li.selected {background-color: ##ENV{couleur_claire}}
+li.selected {background-color: ##GET{claire}}
 
 a.liste-mot {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) #GET{left} center no-repeat; 
+	padding-#GET{left}: 30px;
 }
 
 .tr_liste {
@@ -1363,24 +1307,24 @@ img.lang {
 div.brouteur_rubrique {
 	display: block;
 	padding: 3px;
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
-	border-top: 0px solid ##ENV{couleur_foncee,3874b0};
-	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
-	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
-	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	padding-#GET{right}: 10px;
+	border-top: 0px solid #GET{foncee};
+	border-bottom: 1px solid #GET{foncee};
+	border-left: 1px solid #GET{foncee};
+	border-right: 1px solid #GET{foncee};
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)#GET{right} center no-repeat;
 	background-color: #fff;
 }
 
 div.brouteur_rubrique_on {
 	display: block;
 	padding: 3px;
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
-	border-top: 0px solid ##ENV{couleur_foncee,3874b0};
-	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
-	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
-	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	padding-#GET{right}: 10px;
+	border-top: 0px solid #GET{foncee};
+	border-bottom: 1px solid #GET{foncee};
+	border-left: 1px solid #GET{foncee};
+	border-right: 1px solid #GET{foncee};
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1391,16 +1335,16 @@ xdiv.brouteur_rubrique:hover {
 div.brouteur_rubrique div, div.brouteur_rubrique_on div {
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px; 
+	padding-#GET{left}: 28px; 
 	background-repeat: no-repeat;
-	background-position: center [(#ENV{ltr}|choixsiegal{left,left,right})];
+	background-position: center #GET{left};
 	font-weight: bold;
 	font-family: Arial, Sans, sans-serif;
 	font-size: 12px;
 }
 
 div.brouteur_rubrique div a {
-	color: ##ENV{couleur_foncee,3874b0};
+	color: #GET{foncee};
 }
 
 div.brouteur_rubrique_on div a {
@@ -1408,40 +1352,40 @@ div.brouteur_rubrique_on div a {
 }
 
 .brouteur_icone_racine {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-24.gif) #GET{left} no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_secteur {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) #GET{left} no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_rubrique {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) #GET{left} no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_article {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) #GET{left} no-repeat;
 	margin: 3px;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_site {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=site-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=site-24.gif) #GET{left} center no-repeat;
 	margin: 3px;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+	padding-#GET{left}: 28px
 }
 
 .iframe-brouteur {
@@ -1484,7 +1428,7 @@ p.spip {
 p.spip_note {
 	margin-bottom: 3px;
 	margin-top: 3px;
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 17px;
+	margin-#GET{left}: 17px;
 	text-indent: -17px;
 }
 
@@ -1493,8 +1437,8 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=spip_out.gif)#GET{right} center no-repeat;
+	padding-#GET{right}: 10px;
 	border-bottom: 1px solid;
 }
 
@@ -1510,7 +1454,7 @@ a.spip_glossaire:hover {
 	width: 100%; 
 	font-size: 10px;
 	border: 1px solid #fff;
-	background-color: ##ENV{couleur_foncee,3874b0};
+	background-color: #GET{foncee};
 	color: #fff;
 }
 
@@ -1518,8 +1462,8 @@ a.spip_glossaire:hover {
 q, blockquote.spip, .spip_poesie, .spip_serif { font-family: Georgia, Times, serif; }
 
 blockquote.spip {
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 0;
+	margin-#GET{left}: 40px;
+	margin-#GET{right}: 0;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: solid 1px #aaa;
@@ -1529,13 +1473,13 @@ blockquote.spip {
 }
 
 div.spip_poesie {
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
-	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid #999;
+	margin-#GET{left}: 10px;
+	padding-#GET{left}: 10px;
+	border-#GET{left}: 1px solid #999;
 }
 div.spip_poesie div {
 	text-indent: -60px;
-	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 60px;
+	margin-#GET{left}: 60px;
 }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
@@ -1603,7 +1547,7 @@ a.boutonlien {
 a.triangle_block {
 	margin-top: -3px;
 	margin-bottom: -3px;
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: -3px;
+	margin-#GET{right}: -3px;
 	filter:alpha(opacity=70);
 	-moz-opacity:0.7;
 	opacity: 0.7;	
@@ -1615,10 +1559,10 @@ a.triangle_block:hover {
 }
 
 .fond-agenda {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-agenda.gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
-	float: [(#ENV{ltr}|choixsiegal{left,left,right})]; 
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 4px;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-agenda.gif) #GET{right} center no-repeat;
+	float: #GET{left}; 
+	margin-#GET{right}: 3px;
+	padding-#GET{right}: 4px;
 	line-height: 12px;
 	color: #666; 
 }
@@ -1626,7 +1570,7 @@ a.triangle_block:hover {
 a.highlight, div.highlight {
 	color: #000;
 	padding: 2px;
-	background-color: ##ENV{couleur_claire,edf3fe};
+	background-color: #GET{claire};
 	display:block;
 }
 
@@ -1646,31 +1590,31 @@ a.highlight:hover, a.pashighlight:hover {
 div.petite-racine, a.petite-racine {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-12.gif);
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
+	padding-#GET{left}: 15px;
 	background-color: white; 
-	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border: 1px solid #GET{foncee};
 	border-bottom: 0;
 	width: 134px;
 }
 div.petite-rubrique, a.petite-rubrique {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
+	padding-#GET{left}: 15px;
 }
 div.petit-secteur, a.petit-secteur {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-12.gif);
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
+	padding-#GET{left}: 15px;
 }
 div.rub-ouverte, a.rub-ouverte {
-	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	padding-#GET{right}: 10px;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
 }
 
 a.ical {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=synchro-24.gif) no-repeat;
 	background-position: top center;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
+	padding-#GET{left}: 30px;
 	padding-bottom: 20px;
 }
 
@@ -1686,38 +1630,38 @@ a.ical {
 	font-weight: bold;
 	padding-top: 6px; padding-bottom: 4px;
 	background-repeat: no-repeat;
-	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 6px;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
+	background-position: #GET{left} 6px;
+	padding-#GET{left}: 16px;
 
 	}
 
-.cadre-couleur-foncee .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
-.cadre-couleur-foncee .cadre .titrem {color:#000;}
+.cadre-couleur-foncee .titrem {background-color:#GET{foncee};color:#fff;}
+.cadre-couleur-foncee .cadre_padding .titrem {color:#000;}
 
-.cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
-.cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
+.cadre-trait-couleur .titrem {background-color:#GET{foncee};color:#fff;}
+.cadre-trait-couleur .cadre_padding .titrem {background-color: #eee;color:#000;}
 
 .ajax-action {padding-top:1px;clear:both;position:relative;}
 
 .dater {position:relative;}
-.dater,.dater .titrem {background-color:##ENV{couleur_claire,edf3fe};}
+.dater,.dater .titrem {background-color:#GET{claire};}
 .dater .titrem {}
-.dater .hover {background-color:##ENV{couleur_foncee,3874b0};}
+.dater .hover {background-color:#GET{foncee};}
 
-#contenu .ajax-action .cadre .titrem {background-color:##ENV{couleur_claire,edf3fe};}
-#contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
-.mots_tous #contenu .titrem.impliable {background-color:##ENV{couleur_claire,edf3fe};}
+#contenu .ajax-action .cadre .titrem {background-color:#GET{claire};}
+#contenu .ajax-action .titrem.hover {background-color:#GET{foncee};}
+.mots_tous #contenu .titrem.impliable {background-color:#GET{claire};}
 
 .configuration #contenu .ajax-action .cadre .titrem {background-color:#eee;}
-.configuration #contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_claire,edf3fe};}
-.configuration #contenu .ajax-action .cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
-.configuration #contenu .ajax-action .cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
+.configuration #contenu .ajax-action .titrem.hover {background-color:#GET{claire};}
+.configuration #contenu .ajax-action .cadre-trait-couleur .titrem {background-color:#GET{foncee};color:#fff;}
+.configuration #contenu .ajax-action .cadre-trait-couleur .cadre_padding .titrem {background-color: #eee;color:#000;}
 
 .cadre-liste .titrem,
 #contenu .ajax-action .cadre-liste .titrem {background-color:#fff;}
 .cadre-liste .titrem.hover,
 #contenu .ajax-action .cadre-liste .titrem.hover 
-{background-color:##ENV{couleur_claire,edf3fe}}
+{background-color:#GET{claire}}
 .cadre-liste .tr_liste .titrem {background-color:#eee;}
 
 #navigation .titrem {text-align:center;}
@@ -1726,7 +1670,7 @@ a.ical {
 
 /* Deplier / Replier */
 .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
-.hover { background-color: ##ENV{couleur_claire,edf3fe}; }
+.hover { background-color: #GET{claire}; }
 .deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .impliable {}
 .blocreplie { display: none; }
@@ -1748,3 +1692,60 @@ td.message, a.message {
 }
 
 .enfants ul {list-style:none;}
+
+/* exec=admin_plugin */
+#liste_plugins ul li {
+	list-style:none ;
+}
+#liste_plugins ul {
+	padding-left:1em;
+	margin:.5em 0 .5em 0;
+}
+#liste_plugins ul ul {
+	border-left:5px solid #DFDFDF;
+}
+#liste_plugins ul li li {
+	margin:0;
+	padding:0 0 0.25em 0;
+}
+#liste_plugins ul li li div.nomplugin {
+	border:1px solid #AFAFAF;
+	padding:.3em .3em .6em .3em;
+	font-weight:normal;
+}
+#liste_plugins ul li li div.nomplugin a {
+	outline:0;
+	outline:0 !important;
+	-moz-outline:0 !important;
+}
+#liste_plugins ul li li div.nomplugin_on>a {
+	font-weight:bold;
+}
+
+#liste_plugins div.droite label {
+	padding:.3em;
+	background:#EFEFEF;
+	border:1px dotted #95989F !important;
+	border:1px solid #95989F;
+	cursor:pointer;
+	margin:.2em;
+	display:block;
+	width:10.1em;
+}
+#liste_plugins input {
+	cursor:pointer;
+}
+#liste_plugins div.detailplugin {
+	border-top:1px solid #B5BECF;
+	padding:.6em;
+	background:#F5F5F5;
+}
+#liste_plugins div.detailplugin hr {
+	border-top:1px solid #67707F;
+	border-bottom:0;
+	border-left:0;
+	border-right:0;
+	}
+#liste_plugins div.nomplugin label {display:none;}
+#liste_plugins .nomplugin_on {background:#GET{claire};}
+#liste_plugins .plugin_erreur {background:red;}
