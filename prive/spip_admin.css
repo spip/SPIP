@@ -50,7 +50,7 @@ a:active.spip-admin-boutons,
 	background-color: #FDFF1F !important;
 }
 
-#debug-nav {position:absolute;top:90px;left:10px;width:200px;border:0; background:#f0d9d9; padding:20px; filter:alpha(opacity=90); -moz-opacity:0.9; opacity: 0.90; z-index: 1000; text-align: left; }
+#debug-nav {position:absolute;top:90px;right:10px;width:200px;border:0; background:#f0d9d9; padding:20px; filter:alpha(opacity=90); -moz-opacity:0.9; opacity: 0.90; z-index: 1000; text-align: left; }
 #debug-nav caption {background:red;color:#fff;font-size:1.3em;font-weight:bold;padding:7px;}
 #debug-nav td,#debug-nav th {border-collapse: collapse;border:1px solid #999;}
 #debug-nav th {background:#000;color:#fff;font-weight:bold;border-color:#333;}
