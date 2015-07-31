@@ -119,7 +119,8 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	if ($GLOBALS['meta']['forum_prive_admin'] == 'oui')
+	if ($GLOBALS['meta']['forum_prive_admin'] == 'oui'
+	AND autoriser('forum_admin'))
 		$sousmenu['forum_admin']=
 		  new Bouton('forum-admin-24.gif', 'icone_forum_administrateur');
 
@@ -176,31 +177,33 @@ function definir_barre_boutons() {
 	}
 
 	// sous menu configuration
-	$sousmenu = array();
-	if (autoriser('configurer', 'lang')) {
-		$sousmenu['config_lang'] =
-			new Bouton("langues-24.gif", "icone_gestion_langues");
-		//$sousmenu['espacement'] = null; // les espacements debloquent si on a des icones sur 2 lignes
-	}
+	if (autoriser('configurer')) {
+		$sousmenu = array();
+		if (autoriser('configurer', 'lang')) {
+			$sousmenu['config_lang'] =
+				new Bouton("langues-24.gif", "icone_gestion_langues");
+			//$sousmenu['espacement'] = null; // les espacements debloquent si on a des icones sur 2 lignes
+		}
 
-	if (autoriser('sauvegarder')) {
-		$sousmenu['admin_tech']=
-			new Bouton("base-24.gif", "icone_maintenance_site");
-	}
-	if (autoriser('configurer', 'admin_vider')) {
-		$sousmenu['admin_vider']=
-			new Bouton("cache-24.gif", "onglet_vider_cache");
-	}
+		if (autoriser('sauvegarder')) {
+			$sousmenu['admin_tech']=
+				new Bouton("base-24.gif", "icone_maintenance_site");
+		}
+		if (autoriser('configurer', 'admin_vider')) {
+			$sousmenu['admin_vider']=
+				new Bouton("cache-24.gif", "onglet_vider_cache");
+		}
 
-	// Si _DIR_PLUGINS est definie a '', pas de bouton
-	if (_DIR_PLUGINS
-	AND autoriser('configurer', 'admin_plugin')) {
-		$sousmenu['admin_plugin']=
-			new Bouton("plugin-24.gif", "icone_admin_plugin");
-	}
+		// Si _DIR_PLUGINS est definie a '', pas de bouton
+		if (_DIR_PLUGINS
+		AND autoriser('configurer', 'admin_plugin')) {
+			$sousmenu['admin_plugin']=
+				new Bouton("plugin-24.gif", "icone_admin_plugin");
+		}
 
-	if ($sousmenu)
-		$boutons_admin['configuration']->sousmenu= $sousmenu;
+		if ($sousmenu)
+			$boutons_admin['configuration']->sousmenu= $sousmenu;
+	}
 
 	} // fin si admin
 

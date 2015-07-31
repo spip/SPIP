@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_forum_admin_dist
 function exec_forum_admin_dist() {
 
-  if (!autoriser('configurer')) {
+  if (!autoriser('forum_admin')) {
 	include_spip('inc/minipres');
 	echo minipres();
   } else {
