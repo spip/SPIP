@@ -21,9 +21,18 @@
 //   this software the author can not be responsible.
 //   The use of this software is at the risk of the user.
 //
-// --------------------------------------------------------------------------------
-// $Id$
-// --------------------------------------------------------------------------------
+
+
+  // personnalisations spip
+  if (!defined('PCLZIP_TEMPORARY_DIR')) {
+    define('PCLZIP_TEMPORARY_DIR', _DIR_TMP);
+  }
+  if (!function_exists('gzopen') && function_exists('gzopen64')) {
+    function gzopen(string $filename, string $mode, int $use_include_path = 0) {
+      return gzopen64($filename, $mode, $use_include_path);
+    }
+  }
+  // fin personnalisations spip
 
   // ----- Constants
   if (!defined('PCLZIP_READ_BLOCK_SIZE')) {
@@ -63,7 +72,7 @@
   // define( 'PCLZIP_TEMPORARY_DIR', '/temp/' );
   // define( 'PCLZIP_TEMPORARY_DIR', 'C:/Temp/' );
   if (!defined('PCLZIP_TEMPORARY_DIR')) {
-    define( 'PCLZIP_TEMPORARY_DIR', _DIR_TMP );
+    define( 'PCLZIP_TEMPORARY_DIR', '' );
   }
 
   // ----- Optional threshold ratio for use of temporary files
