@@ -411,7 +411,7 @@ function phraser_criteres($params, &$result) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
 			  } elseif (ereg('^(' . CHAMP_SQL_PLUS_FONC . 
 					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)(.*)$', $param, $m)) {
-			    $a2 = $m[7];
+			    $a2 = trim($m[7]);
 			    if (ereg("^'.*'$", $a2) OR ereg('^".*"$', $a2))
 			      $a2 = substr($a2,1,-1);
 			    $crit = phraser_critere_infixe($m[1], $a2, $v,
