@@ -14,6 +14,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('iterateurs/iterateur');
 
+
+//
+// creer une boucle sur un iterateur DATA
+// annonce au compilo les "champs" disponibles
+//
+function iterateurs_DATA_dist($b) {
+	$b->iterateur = 'DATA'; # designe la classe d'iterateur
+	$b->show = array(
+		'field' => array(
+			'cle' => 'STRING',
+			'valeur' => 'STRING',
+		)
+	);
+	return $b;
+}
+
+
 /**
  * IterateurDATA pour iterer sur des donnees
  */

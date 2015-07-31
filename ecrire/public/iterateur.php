@@ -22,9 +22,9 @@ class IterFactory{
 
 		// chercher la classe d'iterateur
 		// IterateurXXX
-		// definie dans le fichier iterateurs/iterateur_xxx.php
+		// definie dans le fichier iterateurs/xxx.php
 		$class = "Iterateur".$iterateur;
-		if (!include_spip("iterateurs/iterateur_" . strtolower($iterateur))
+		if (!include_spip("iterateurs/" . strtolower($iterateur))
 		  OR !class_exists($class)) {
 
 			die("Iterateur $iterateur non trouve");

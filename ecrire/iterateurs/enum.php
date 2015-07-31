@@ -14,6 +14,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('iterateurs/iterateur');
 
+//
+// creer une boucle sur un iterateur ENUM
+// annonce au compilo les "champs" disponibles
+//
+function iterateurs_ENUM_dist($b) {
+	$b->iterateur = 'ENUM'; # designe la classe d'iterateur
+	$b->show = array(
+		'field' => array(
+			'cle' => 'STRING',
+			'valeur' => 'STRING',
+		)
+	);
+	return $b;
+}
+
+
 /**
  * IterateurENUM pour iterer sur un intervalle de nombre
  * repondant eventuellement a des conditions de filtrage

@@ -10,11 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+include_spip('iterateurs/data');
+
+
 //
 // creer une boucle sur un iterateur POUR
 // annonce au compilo les "champs" disponibles
 //
-function public_creer_boucle_POUR_dist($b) {
+function iterateurs_POUR_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
