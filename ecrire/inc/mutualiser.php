@@ -17,7 +17,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Options :
 // creer_site => on va creer les repertoires qui vont bien (defaut: false)
 // cookie_prefix, table_prefix => regler les prefixes (defaut: true)
-function demarrer_site($site, $options = array()) {
+function demarrer_site($site = '', $options = array()) {
+	if (!$site) return;
+
 	$options = array_merge(
 		array(
 			'creer_site' => false,
