@@ -256,29 +256,33 @@ function renouvelle_alea()
 	}
 }
 
-
-function _action_auteur($action, $id_auteur, $nom_alea) {
+function caracteriser_auteur($id_auteur) {
 	if (!($id_auteur = intval($id_auteur))) {
 		global $connect_id_auteur, $connect_pass;
-		$id_auteur = $connect_id_auteur;
-		$pass = $connect_pass;
+		return array($connect_id_auteur, $connect_pass);
 	}
 	else {
-		$result = spip_query("SELECT pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if ($result) if ($row = spip_fetch_array($result)) $pass = $row['pass'];
+		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		return spip_fetch_array($result);
 	}
+}
+
+function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
 	return md5($action.$id_auteur.$pass .$GLOBALS['meta'][$nom_alea]);
 }
 
 function calculer_action_auteur($action, $id_auteur = 0) {
 	renouvelle_alea();
-	return _action_auteur($action, $id_auteur, 'alea_ephemere');
+	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
+	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
 }
 
 function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere'))
+	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
+
+	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
 		return true;
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere_ancien'))
+	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
 		return true;
 	spip_log("verifier action $action $id_auteur : echec");
 	return false;
@@ -286,11 +290,13 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 
 function generer_action_auteur($action, $arg, $redirect="", $no_entites=false)
 {
-	global $connect_id_auteur;
-	$hash = calculer_action_auteur("$action-$arg");
+	renouvelle_alea();
+	list($id_auteur, $pass) = 
+		caracteriser_auteur($GLOBALS['connect_id_auteur']);
+	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
 	if ($redirect) $redirect = "&redirect=" . rawurlencode($redirect);
 
-	return generer_url_action($action, "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash$redirect", $no_entites);
+	return generer_url_action($action, "arg=$arg&id_auteur=$id_auteur&hash=$hash$redirect", $no_entites);
 }
 
 function redirige_action_auteur($action, $arg, $ret, $gra)
