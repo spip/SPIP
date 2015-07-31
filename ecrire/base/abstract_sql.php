@@ -119,7 +119,7 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='')
 // Update est presque toujours appelee sur des constantes ou des dates
 // Cette fonction est donc plus utile que la precedente,d'autant qu'elle
 // permet de gerer les differences de representation des constantes.
-// http://doc.spip.org/@sql_update
+// http://doc.spip.org/@sql_updateq
 function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 {
 	$f = sql_serveur('updateq', $serveur);

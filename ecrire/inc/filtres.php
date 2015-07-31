@@ -293,6 +293,7 @@ function corriger_toutes_entites_html($texte) {
 	return preg_replace(',&amp;(#?[a-z0-9]+;),iS', '&\1', $texte);
 }
 
+// http://doc.spip.org/@proteger_amp
 function proteger_amp($texte){
 	return str_replace('&','&amp;',$texte);
 }

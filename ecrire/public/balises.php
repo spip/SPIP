@@ -1073,6 +1073,7 @@ function balise_EVAL_dist($p) {
 // permet de recuperer par exemple un champ notes dans une table sql externe
 // (impossible via #NOTES qui est une balise calculee)
 // ne permet pas de passer une expression pour x qui ne peut etre qu'un texte statique !
+// http://doc.spip.org/@balise_CHAMP_SQL_dist
 function balise_CHAMP_SQL_dist($p){
 	$p->code = '';
 	if (isset($p->param[0][1][0]) AND $champ = ($p->param[0][1][0]->texte))
