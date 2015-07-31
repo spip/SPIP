@@ -25,8 +25,8 @@ function exec_breves_edit_dist()
 	$id_rubrique  = intval(_request('id_rubrique'));
 	$new = _request('new');
 
-	if ( (!$new AND !autoriser('voir','breve',$id_breve))
-		OR ($new AND !autoriser('voir','rubrique',$id_rubrique)) ) {
+	if ( (!$new AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
+		OR ($new AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) ) {
 		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
