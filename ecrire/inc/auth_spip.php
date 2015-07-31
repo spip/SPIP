@@ -15,13 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_spip_dist
-function inc_auth_spip_dist ($login, $pass) {
+function inc_auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
 
-  // recuperer le cryptage par JavaScript
-	$md5pass = $_POST['session_password_md5']; 
-	$md5next = $_POST['next_session_password_md5'];
-
-	  // si envoi non crypte, crypter maintenant
+  // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {
 			$result = sql_select("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
 

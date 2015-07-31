@@ -1,3 +1,5 @@
+#CACHE{0}
+#FILTRE{compacte_head}
 [(#REM)
 	Eviter les boutons d'admin sur la page de login
 ]
@@ -11,26 +13,35 @@
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{formfx.css}|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
 <style type="text/css">
 <!--
 	body.page_login { text-align: center; font: 1em Verdana, Tahoma, Geneva, Helvetica, sans-serif; }
 	#minipres { width: 30em; }
-	.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.8em; }
-	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
+	.formulaire_login { text-align: #LANG_LEFT; font-size: 0.8em; }
+	.formulaire_login fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
 	.formulaire_menu_lang { float: #LANG_RIGHT; }
 	.formulaire_menu_lang label { display: none; }
 	.formulaire_login { clear: both; }
+	.formulaire_login fieldset li label,
+	.formulaire_login fieldset li .erreur,
+	.formulaire_login fieldset li .details {display:block;width:auto;}
+	.formulaire_login fieldset li label.nofx {display:inline;}
+	.formulaire_login fieldset li input.text,
+	.formulaire_login fieldset li input.password {width:20em;}
 	.spip_logos { float: right; padding-left: 10px; }
 	.forml,input { font-size: 1.0em; }
+	#var_lang_ecrire {font-size:0.8em;}
 	p .forml { width: 20em; font-family: inherit; }
 	.spip_bouton input { float: #LANG_RIGHT; }
 	.reponse_formulaire { font-weight: bold; color: red; }
 	a { color: #e86519; text-decoration: none; }
-	.formulaire_login .retour { text-align: center; }
+	.retour { text-align: center;font-size:0.8em; }
+	formulaire_login.retour { font-size:1em; }
 -->
 </style>
-[<script type='text/javascript' src='(#URL_PAGE{jquery.js})'></script>]
+[(#REM|f_jQuery)]
 </head>
 <body class='page_login' >
 
@@ -44,20 +55,16 @@
 	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
 	[(#ENV{url}|match{'^ecrire/'}|?{#SET{prive,' '}})]
 	[(#GET{prive}) <small><:login_acces_prive:></small>]
-	[(#GET{prive}|?{'',' '}) <!-- ?? -->]
 	
 	</h3>
 	
 	#MENU_LANG_ECRIRE
 	
-	<div class="formulaire_spip formulaire_login">
-		[(#GET{prive}|?{'',' '}) #LOGIN_PUBLIC]
-		[(#GET{prive}|?{' '}) #LOGIN_PRIVE]
+		[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 		<p class="retour">
 		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
 		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
 		</p>
-	</div>
 	
 </div><!--#minipres-->
 
