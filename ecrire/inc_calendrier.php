@@ -476,7 +476,10 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	  $purscript = $m[1];
 	  $ancre = $m[2];
 	} else { $ancre = ''; $purscript = $script; }
-      $nav = http_calendrier_navigation($j,
+	if ($purscript[strlen($purscript)-1] == '?') 
+	  $purscript = substr($purscript,0,-1);
+	spip_log($purscript);
+	$nav = http_calendrier_navigation($j,
 					$mois,
 					$annee,
 					$partie_cal,
@@ -500,7 +503,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 			    _T('date_jour_1')),
 		      $couleur_claire,
 		      $couleur_foncee) .
-	http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic, $script) .
+	http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic, $purscript) .
 	'</table>';
 }
 
@@ -884,7 +887,7 @@ function http_calendrier_image_et_typo($evenements)
 
 # liste les articles & les breves
 
-function http_calendrier_articles_et_breves($articles, $breves, $style)
+function http_calendrier_articles_et_breves($articles, $breves)
 {
   if ($articles)
     {
@@ -1241,18 +1244,18 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, 
 		"height: ${dimjour}px; " .
 		"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;".
 		' border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;' .
-		"'>" .
-	  ((!($articles[$j] OR $breves[$j])) ? '' :
-	   ("<div style='position: absolute; z-index: 2; $spip_lang_left: "
-	    . ($largeur - $padding + 35)
-	    . "px; top: 0px;'>"
-	    . http_calendrier_articles_et_breves($articles[$j], $breves[$j])
-	    . '</div>'))
+		"'>"
 	  . http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 
 				     'http_calendrier_message',
 				     $echelle,
 				     $messages[$j],
 				     $j) .
+	  ((!($articles[$j] OR $breves[$j])) ? '' :
+	   ("<div style='position: absolute; z-index: 2; $spip_lang_left: "
+	    . ($largeur - $padding + 35)
+	    . "px; top: 0px;'>"
+	    . http_calendrier_articles_et_breves($articles[$j], $breves[$j])
+	    . '</div>')) .
 	  "\n</div>";
 }
 
