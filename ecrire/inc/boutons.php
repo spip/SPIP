@@ -113,7 +113,8 @@ function definir_barre_boutons() {
 			$sousmenu['sites_tous']=
 			  new Bouton('site-24.gif', 'icone_sites_references');
 
-		if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1")) > 0) {
+		$n = spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1"));
+		if ($n) {
 			$sousmenu['documents_liste']=
 			  new Bouton('doc-24.gif', 'icone_doc_rubrique');
 		}

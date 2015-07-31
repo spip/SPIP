@@ -91,20 +91,15 @@ function calculer_visites($t) {
 	$date = date("Y-m-d", time() - 1800);
 
 	// 1. les visites du site (facile)
-	spip_query("INSERT IGNORE INTO spip_visites
-	(date) VALUES ('$date')");
-	spip_query("UPDATE spip_visites SET visites = visites+$visites
-	WHERE date='$date'");
+	spip_query("INSERT IGNORE INTO spip_visites (date) VALUES ('$date')");
+	spip_query("UPDATE spip_visites SET visites = visites+$visites WHERE date='$date'");
 
 	// 2. les visites des articles (en deux passes pour minimiser
 	// le nombre de requetes)
 	if ($articles) {
 		// s'assurer qu'un slot (date, visites, id) existe pour
 		// chaque article vu
-		spip_query("INSERT IGNORE INTO spip_visites_articles
-		(date, id_article) VALUES ('$date',"
-		. join("), ('$date',", $articles)
-		. ")");
+		spip_query("INSERT IGNORE INTO spip_visites_articles (date, id_article) VALUES ('$date',". join("), ('$date',", $articles) . ")");
 
 		// enregistrer les visites dans les deux tables
 		$ar = array();	# tableau num -> liste des articles ayant num visites
@@ -126,14 +121,9 @@ function calculer_visites($t) {
 			$sumref = ' + '.calcul_mysql_in('id_article',
 			join(',',array_keys($referers_a)));
 
-		spip_query("UPDATE spip_visites_articles
-			SET visites = visites $sum
-			WHERE date='$date' AND $tous");
-		spip_query("UPDATE spip_articles
-			SET visites = visites $sum$sumref,
-			popularite = popularite $sum,
-			maj = maj
-			WHERE $tous");
+		spip_query("UPDATE spip_visites_articles SET visites = visites $sum WHERE date='$date' AND $tous");
+
+		spip_query("UPDATE spip_articles SET visites = visites $sum$sumref, popularite = popularite $sum, maj = maj WHERE $tous");
 			## Ajouter un JOIN sur le statut de l'article ?
 	}
 
@@ -147,15 +137,11 @@ function calculer_visites($t) {
 				$referer_md5)";
 			$ar[$num][] = $referer_md5;
 		}
-		spip_query("INSERT IGNORE INTO spip_referers
-			(date, referer, referer_md5) VALUES "
-			. join(', ', $insert));
+		spip_query("INSERT IGNORE INTO spip_referers (date, referer, referer_md5) VALUES " . join(', ', $insert));
 		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers
-				SET visites = visites+$num, visites_jour = visites_jour+$num
-				WHERE ".calcul_mysql_in('referer_md5',join(',',$liste)));
+			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',join(',',$liste)));
 		}
 	}
 	
@@ -171,15 +157,11 @@ function calculer_visites($t) {
 				$referer_md5, $id_article)";
 			$ar[$num][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
 		}
-		spip_query("INSERT IGNORE INTO spip_referers_articles
-			(date, referer, referer_md5, id_article) VALUES "
-			. join(', ', $insert));
+		spip_query("INSERT IGNORE INTO spip_referers_articles (date, referer, referer_md5, id_article) VALUES " . join(', ', $insert));
 		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers_articles
-			SET visites = visites+$num
-			WHERE ".join(" OR ", $liste));
+			spip_query("UPDATE spip_referers_articles SET visites = visites+$num	WHERE ".join(" OR ", $liste));
 			## Ajouter un JOIN sur le statut de l'article ?
 		}
 	}

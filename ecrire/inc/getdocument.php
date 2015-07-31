@@ -241,7 +241,8 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
 
-			if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"))) {
+			$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
+			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}
@@ -339,11 +340,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	}
 
 	// Mise a jour des donnees
-	spip_query("UPDATE spip_documents
-		SET $update
-		taille='$taille', largeur='$largeur', hauteur='$hauteur',
-		fichier='$fichier'
-		WHERE id_document=$id_document");
+	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$fichier' WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");

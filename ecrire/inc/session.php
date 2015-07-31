@@ -49,8 +49,7 @@ function ajouter_session($auteur, $id_session, $lang='') {
 	global $connect_id_auteur, $auteur_session;
 
 	if ($lang) {
-		spip_query("UPDATE spip_auteurs SET lang = '".	addslashes($lang) .
-				"' WHERE id_auteur = $connect_id_auteur");
+		spip_query("UPDATE spip_auteurs SET lang = '".	addslashes($lang) . "' WHERE id_auteur = $connect_id_auteur");
 		$auteur_session['lang'] = $lang;
 	}
 

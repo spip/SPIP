@@ -61,7 +61,6 @@ function exec_recherche_dist()
 	$query_breves['WHERE']= ($testnum ? "(id_breve = $recherche)" : '') . $where;
 	$query_rubriques['WHERE']= ($testnum ? "(id_rubrique = $recherche)" : '') . $where;
 	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . ereg_replace("titre LIKE", "nom_site LIKE",$where);
-	}
 
 	$query_articles['ORDER BY']= "date_modif DESC";
 	$query_breves['ORDER BY']= "maj DESC";
@@ -80,6 +79,7 @@ function exec_recherche_dist()
 	}
 	
 	$nba = afficher_articles (_T('info_articles_trouves'), $query_articles);
+
 	if ($activer_moteur) {
 		if ($nba) {
 			$doublons = join($nba, ",");
@@ -89,6 +89,7 @@ function exec_recherche_dist()
 	}
 	
 	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
+
 	if ($activer_moteur) {
 		if ($nbb) {
 			$doublons = join($nbb, ",");
@@ -96,7 +97,7 @@ function exec_recherche_dist()
 		}
 		$nbb1 = afficher_breves (_T('info_breves_touvees_dans_texte'), $query_breves_int, true);
 	}
-	
+
 	$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
 	if ($activer_moteur) {
 		if ($nbr) {
@@ -121,7 +122,7 @@ function exec_recherche_dist()
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
 	}
 
-echo "<p>";
+	}
 
 fin_page();
 }

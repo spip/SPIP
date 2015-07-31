@@ -154,9 +154,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					$confirm= (_T('form_deja_inscrit'));
 				}
 				else {
-					$result = spip_query("UPDATE spip_signatures
-					SET statut='publie', date_time=NOW()
-					WHERE id_signature='$id_signature'");
+					spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature='$id_signature'");
 
 					// invalider les pages ayant des boucles signatures
 					include_spip('inc/invalideur');

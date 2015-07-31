@@ -150,25 +150,18 @@ function calculer_threads() {
 	do {
 		$discussion = "0";
 		$precedent = 0;
-		$r = spip_query("SELECT fille.id_forum AS id,
-		maman.id_thread AS thread
-		FROM spip_forum AS fille, spip_forum AS maman
-		WHERE fille.id_parent = maman.id_forum
-		AND fille.id_thread <> maman.id_thread
-		ORDER BY thread");
+		$r = spip_query("SELECT fille.id_forum AS id,	maman.id_thread AS thread	FROM spip_forum AS fille, spip_forum AS maman	WHERE fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread	ORDER BY thread");
 		while (list($id, $thread) = spip_fetch_array($r)) {
 			if ($thread == $precedent)
 				$discussion .= ",$id";
 			else {
 				if ($precedent)
-					spip_query("UPDATE spip_forum SET id_thread=$precedent
-					WHERE id_forum IN ($discussion)");
+					spip_query("UPDATE spip_forum SET id_thread=$precedent WHERE id_forum IN ($discussion)");
 				$precedent = $thread;
 				$discussion = "$id";
 			}
 		}
-		spip_query("UPDATE spip_forum SET id_thread=$precedent
-		WHERE id_forum IN ($discussion)");
+		spip_query("UPDATE spip_forum SET id_thread=$precedent	WHERE id_forum IN ($discussion)");
 	} while ($discussion != "0");
 }
 
@@ -229,9 +222,7 @@ function get_forums_publics($id_article=0) {
 
 // Modifier le reglage des forums publics de l'article x
 function modifier_forums_publics($id_article, $forums_publics) {
-		spip_query("UPDATE spip_articles
-			SET accepter_forum='$forums_publics'
-			WHERE id_article=".intval($id_article));
+		spip_query("UPDATE spip_articles SET accepter_forum='$forums_publics'	WHERE id_article=".intval($id_article));
 		if ($forums_publics == 'abo') {
 			ecrire_meta('accepter_visiteurs', 'oui');
 			ecrire_metas();
