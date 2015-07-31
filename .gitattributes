@@ -726,13 +726,9 @@ prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
 prive/squelettes/contenu/page-configurer_langue.html -text
 prive/squelettes/contenu/page-configurer_preferences.html -text
+prive/squelettes/contenu/page-debug.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
-prive/squelettes/hierarchie/dist.html -text
-prive/squelettes/hierarchie/page-configurer_identite.html -text
-prive/squelettes/hierarchie/page-configurer_langage.html -text
-prive/squelettes/hierarchie/page-configurer_preferences.html -text
-prive/squelettes/hierarchie/page-typo.html -text
 prive/squelettes/inclure/admin_autres_bases.html -text
 prive/squelettes/inclure/admin_autres_bases_fonctions.php -text
 prive/squelettes/inclure/admin_vider_cache.html -text
@@ -748,6 +744,11 @@ prive/squelettes/navigation/page-configurer_identite.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text
+prive/squelettes/top/dist.html -text
+prive/squelettes/top/page-charte.html -text
+prive/squelettes/top/page-configurer_identite.html -text
+prive/squelettes/top/page-configurer_langage.html -text
+prive/squelettes/top/page-configurer_preferences.html -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text
