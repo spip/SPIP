@@ -109,6 +109,7 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	}
 }
 
+// $rappel n'est pas utilise. Pourquoi ?
 
 function controle_un_forum($row, $rappel) {
 
@@ -212,21 +213,20 @@ function controle_forum_dist()
 //  barre_onglets("suivi_forum", $page); 
 // on expanse
   
-  $rappel = 'controle_forum.php3?' .
-    ($id_rubrique ? "id_rubrique=$id_rubrique&" : "") .
-    'page=';
+  $id_rubrique = intval($id_rubrique);
+  $args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'page=';
 
   debut_onglet();
-  onglet(_T('onglet_messages_publics'), $rappel . "public", "public", $onglet, "forum-public-24.gif");
-  onglet(_T('onglet_messages_internes'), $rappel . "interne", "interne", $onglet, "forum-interne-24.gif");
+  onglet(_T('onglet_messages_publics'), http_php_scriptnq('controle_forum', $args . "public"), "public", $onglet, "forum-public-24.gif");
+  onglet(_T('onglet_messages_internes'), http_php_scriptnq('controle_forum', $args . "interne"), "interne", $onglet, "forum-interne-24.gif");
 
     if (spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1")))
-    onglet(_T('onglet_messages_vide'), $rappel . "vide", "vide", $onglet);
+      onglet(_T('onglet_messages_vide'), http_php_scriptnq('controle_forum', $args . "vide"), "vide", $onglet);
 
     if (spip_fetch_array(spip_query("SELECT F.id_forum " .
 				    critere_statut_controle_forum('prop', $id_rubrique) .
 				    " LIMIT 1")))
-      onglet(_T('texte_statut_attente_validation'), $rappel . "prop", "prop", $onglet);
+      onglet(_T('texte_statut_attente_validation'), http_php_scriptnq('controle_forum', $args . "prop"), "prop", $onglet);
 
   fin_onglet();
 
@@ -244,7 +244,7 @@ WHERE id_forum=$debut_id_forum"))) {
 	$result_forum = spip_query("SELECT F.id_forum " . $query_forum . " AND F.date_heure > '".$d['date_heure']."'");
 	$debut = spip_num_rows($result_forum);
 }
-if (!$debut=intval($debut)) $debut = 0;
+ $debut= intval($debut);
 
  $pack = 20;	// nb de forums affiches par page
  $enplus = 200;	// intervalle affiche autour du debut
@@ -278,24 +278,21 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 
   // Afficher le lien RSS
   include_ecrire('inc_rss');
-  $op = 'forums';
-  $args = array(
-		'page' => $page
-		);
+
   echo "<div style='text-align: "
     . $GLOBALS['spip_lang_right']
-	. ";'>"
-    . bouton_spip_rss($op, $args)
+    . ";'>"
+    . bouton_spip_rss('forums', array('page' => $page))
     ."</div>";
 
   fin_boite_info();
   debut_droite();
+  $args .= $page;
 
   echo "<div class='serif2'>";
   $i = $limitdeb;
-  if ($i>0) echo "<a href='$rappel'>0</a> ... | ";
+  if ($i>0) echo "<a href=", http_php_script('controle_forum', $args),">0</a> ... | ";
   $controle = '';
-  $rappel .= $page;
 
   while ($row = spip_fetch_array($result_forum)) {
 
@@ -304,17 +301,20 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-			echo "<a href='$rappel&debut=$i'>$i</a>";
+		  echo "<a href=", http_php_script('controle_forum',
+						   $args . "&debut=$i"),
+		    ">$i</a>";
 		echo " | ";
 	}
 	// est-ce que ce message doit s'afficher dans la liste ?
 	if (($i>=$debut) AND ($i<($debut + $pack)))
-	  $controle .= controle_un_forum($row, "$rappel&debut=$debut");
+	  $controle .= controle_un_forum($row, http_php_scriptnq('controle_forum', $args . "&debut=$debut"));
 	$i ++;
  }
 
-echo "<a href='$rappel&debut=$i'>...</a>$controle</div>";
-fin_page();
+  echo "<a href=", http_php_scriptnq('controle_forum', $args . "&debut=$i"),
+    ">...</a>$controle</div>";
+  fin_page();
 }
 
 ?>
