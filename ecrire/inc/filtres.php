@@ -23,7 +23,8 @@ include_spip('base/objets');
 include_spip('public/parametrer'); // charger les fichiers fonctions
 
 /**
- * Charger un filtre depuis le php :
+ * Charger un filtre depuis le php
+ * 
  * - on inclue tous les fichiers fonctions des plugins et du skel
  * - on appelle chercher_filtre
  *
@@ -386,13 +387,17 @@ function corriger_caracteres ($texte) {
 }
 
 /**
- * Encode du HTML pour transmission XML
- * notamment dans les flux RSS
+ * Encode du HTML pour transmission XML notamment dans les flux RSS
  *
- * http://doc.spip.org/@texte_backend
+ * Ce filtre transforme les liens en liens absolus, importe les entitées html et échappe les tags html.
  *
- * @param $texte
- * @return mixed
+ * @filtre texte_backend
+ * @link http://www.spip.net/4287
+ * 
+ * @param string $texte
+ *     Texte à transformer
+ * @return string
+ *     Texte encodé pour XML
  */
 function texte_backend($texte) {
 
@@ -436,16 +441,50 @@ function texte_backendq($texte) {
 	return addslashes(texte_backend($texte));
 }
 
-// Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
-// http://doc.spip.org/@supprimer_numero
+
+/**
+ * Enlève un numéro préfixant un texte
+ *
+ * Supprime `10. ` dans la chaine `10. Titre`
+ *
+ * @filtre supprimer_numero
+ * @link http://www.spip.net/4314
+ * @see recuperer_numero() Pour obtenir le numéro
+ * @example
+ *     ```
+ *     [<h1>(#TITRE|supprimer_numero)</h1>]
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte
+ * @return int|string
+ *     Numéro de titre, sinon chaîne vide
+**/
 function supprimer_numero($texte) {
 	return preg_replace(
 	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
 	"", $texte);
 }
 
-// et la fonction inverse
-// http://doc.spip.org/@recuperer_numero
+/**
+ * Récupère un numéro préfixant un texte
+ *
+ * Récupère le numéro `10` dans la chaine `10. Titre`
+ *
+ * @filtre recuperer_numero
+ * @link http://www.spip.net/5514
+ * @see supprimer_numero() Pour supprimer le numéro
+ * @see balise_RANG_dist() Pour obtenir un numéro de titre
+ * @example
+ *     ```
+ *     [(#TITRE|recuperer_numero)]
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte
+ * @return int|string
+ *     Numéro de titre, sinon chaîne vide
+**/
 function recuperer_numero($texte) {
 	if (preg_match(
 	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
@@ -455,8 +494,28 @@ function recuperer_numero($texte) {
 		return '';
 }
 
-// Suppression basique et brutale de tous les <...>
-// http://doc.spip.org/@supprimer_tags
+/**
+ * Suppression basique et brutale de tous les tags `<...>`
+ *
+ * Utilisé fréquemment pour écrire des RSS.
+ * 
+ * @filtre supprimer_tags
+ * @link http://www.spip.net/4315
+ * @example
+ *     ```
+ *     <title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+ *     ```
+ *
+ * @note
+ *     Ce filtre supprime aussi les signes inférieurs `<` rencontrés.
+ * 
+ * @param string $texte
+ *     Texte à échapper
+ * @param string $rempl
+ *     Inutilisé.
+ * @return string
+ *     Texte converti
+**/
 function supprimer_tags($texte, $rempl = "") {
 	$texte = preg_replace(",<[^>]*>,US", $rempl, $texte);
 	// ne pas oublier un < final non ferme
@@ -465,15 +524,47 @@ function supprimer_tags($texte, $rempl = "") {
 	return $texte;
 }
 
-// Convertit les <...> en la version lisible en HTML
-// http://doc.spip.org/@echapper_tags
+/**
+ * Convertit les chevrons `<...>` en la version lisible en HTML
+ *
+ * @filtre echapper_tags
+ * @link http://www.spip.net/5515
+ * @example
+ *     ```
+ *     <pre>[(#TEXTE|echapper_tags)]</pre>
+ *     ```
+ *
+ * 
+ * 
+ * @param string $texte
+ *     Texte à échapper
+ * @param string $rempl
+ *     Inutilisé.
+ * @return string
+ *     Texte converti
+**/
 function echapper_tags($texte, $rempl = "") {
 	$texte = preg_replace("/<([^>]*)>/", "&lt;\\1&gt;", $texte);
 	return $texte;
 }
-
-// Convertit un texte HTML en texte brut
-// http://doc.spip.org/@textebrut
+ 
+/**
+ * Convertit un texte HTML en texte brut
+ *
+ * Enlève les tags d'un code HTML, élimine les doubles espaces.
+ *
+ * @filtre textebrut
+ * @link http://www.spip.net/4317
+ * @example
+ *     ```
+ *     <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+ *     ```
+ *
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function textebrut($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = preg_replace('/\s+/S'.$u, " ", $texte);
@@ -488,15 +579,38 @@ function textebrut($texte) {
 	return $texte;
 }
 
-// Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
-// http://doc.spip.org/@liens_ouvrants
+
+/**
+ * Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
+ *
+ * @filtre liens_ouvrants
+ * @link http://www.spip.net/4297
+ * 
+ * @param string $texte
+ *     Texte avec des liens 
+ * @return string
+ *     Texte avec liens ouvrants
+**/
 function liens_ouvrants ($texte) {
 	return preg_replace(",<a\s+([^>]*https?://[^>]*class=[\"']spip_(out|url)\b[^>]+)>,",
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
-// Transformer les sauts de paragraphe en simples passages a la ligne
-// http://doc.spip.org/@PtoBR
+/**
+ * Transforme les sauts de paragraphe HTML `p` en simples passages à la ligne `br`
+ *
+ * @filtre PtoBR
+ * @link http://www.spip.net/4308
+ * @example
+ *     ```
+ *     [<div>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte à transformer
+ * @return string
+ *     Texte sans paraghaphes
+**/
 function PtoBR($texte){
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = preg_replace("@</p>@iS", "\n", $texte);
@@ -507,19 +621,24 @@ function PtoBR($texte){
 
 
 /**
- * lignes_longues assure qu'un texte ne vas pas deborder d'un bloc
+ * Assure qu'un texte ne vas pas déborder d'un bloc
  * par la faute d'un mot trop long (souvent des URLs)
- * Ne devrait plus etre utilise et fait directement en CSS par un style
- * word-wrap:break-word;
- * cf http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
+ * 
+ * Ne devrait plus être utilisé et fait directement en CSS par un style
+ * `word-wrap:break-word;`
+ * 
+ * @see http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
  *
- * Pour assurer la compatibilite du filtre, on encapsule le contenu par
- * un div ou span portant ce style inline.
- *
- * http://doc.spip.org/@lignes_longues
- *
- * @param string $texte
- * @return string
+ * @note
+ *   Pour assurer la compatibilité du filtre, on encapsule le contenu par
+ *   un `div` ou `span` portant ce style CSS inline.
+ * 
+ * @filtre lignes_longues
+ * @link http://www.spip.net/4298
+ * @deprecated Utiliser le style CSS `word-wrap:break-word;`
+ * 
+ * @param string $texte Texte
+ * @return string Texte encadré du style CSS
  */
 function lignes_longues($texte) {
 	if (!strlen(trim($texte))) return $texte;
@@ -530,8 +649,21 @@ function lignes_longues($texte) {
 	return "<$tag style='word-wrap:break-word;'>$texte</$tag>";
 }
 
-// Majuscules y compris accents, en HTML
-// http://doc.spip.org/@majuscules
+/**
+ * Passe un texte en majuscules, y compris les accents, en HTML
+ *
+ * Encadre le texte du style CSS `text-transform: uppercase;`.
+ * Le cas spécifique du i turc est géré.
+ * 
+ * @filtre majuscules
+ * @example
+ *     ```
+ *     [(#EXTENSION|majuscules)]
+ *     ```
+ *
+ * @param string $texte Texte
+ * @return string Texte en majuscule
+ */
 function majuscules($texte) {
 	if (!strlen($texte)) return '';
 
@@ -622,21 +754,25 @@ function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
 }
 
 /**
- * La fonction sinon retourne le second parametre lorsque
- * le premier est considere vide, sinon retourne le premier parametre.
+ * Retourne le second paramètre lorsque
+ * le premier est considere vide, sinon retourne le premier paramètre.
  *
- * En php sinon($a, 'rien') retourne $a ou 'rien' si $a est vide.
- * En filtre spip |sinon{#TEXTE, rien} : affiche #TEXTE ou "rien" si #TEXTE est vide,
+ * En php `sinon($a, 'rien')` retourne `$a`, ou `'rien'` si `$a` est vide.
+ * En filtre SPIP `|sinon{#TEXTE, rien}` : affiche `#TEXTE` ou `rien` si `#TEXTE` est vide,
  *
- * Note : l'utilisation de |sinon en tant que filtre de squelette
- * est directement compile dans public/references par la fonction filtre_logique()
+ * @filtre sinon
+ * @see filtre_logique() pour la compilation du filtre dans un squelette
+ * @link http://www.spip.net/4313
+ * @note
+ *     L'utilisation de `|sinon` en tant que filtre de squelette
+ *     est directement compilé dans `public/references` par la fonction `filtre_logique()`
  * 
  * @param mixed $texte
- * 		Contenu de reference a tester
+ *     Contenu de reference a tester
  * @param mixed $sinon
- * 		Contenu a retourner si le contenu de reference est vide
+ *     Contenu a retourner si le contenu de reference est vide
  * @return mixed
- * 		Retourne $texte, sinon $sinon.
+ *     Retourne $texte, sinon $sinon.
 **/
 function sinon ($texte, $sinon='') {
 	if ($texte OR (!is_array($texte) AND strlen($texte)))
@@ -1072,24 +1208,28 @@ function affdate_heure($numdate) {
 }
 
 /**
- * Afficher de facon textuelle les dates de debut et fin en fonction des cas
+ * Afficher de facon textuelle les dates de début et fin en fonction des cas
+ * 
  * - Lundi 20 fevrier a 18h
  * - Le 20 fevrier de 18h a 20h
  * - Du 20 au 23 fevrier
  * - Du 20 fevrier au 30 mars
  * - Du 20 fevrier 2007 au 30 mars 2008
- * $horaire='oui' ou true permet d'afficher l'horaire, toute autre valeur n'indique que le jour
- * $forme peut contenir une ou plusieurs valeurs parmi
- *  - abbr (afficher le nom des jours en abbrege)
- *  - hcal (generer une date au format hcal)
- *  - jour (forcer l'affichage des jours)
- *  - annee (forcer l'affichage de l'annee)
+ *
+ * `$horaire='oui'` ou `true` permet d'afficher l'horaire,
+ * toute autre valeur n'indique que le jour
+ * `$forme` peut contenir une ou plusieurs valeurs parmi
+ *  - `abbr` (afficher le nom des jours en abbrege)
+ *  - `hcal` (generer une date au format hcal)
+ *  - `jour` (forcer l'affichage des jours)
+ *  - `annee` (forcer l'affichage de l'annee)
  *
  * @param string $date_debut
  * @param string $date_fin
  * @param string $horaire
  * @param string $forme
  * @return string
+ *     Texte de la date
  */
 function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	$abbr = $jour = '';
@@ -2503,20 +2643,33 @@ function url_rss_forum($texte){return $texte;}
 
 
 /**
- * une fonction pour generer des menus avec liens
- * ou un <strong class='on'> non clicable lorsque l'item est selectionne
+ * Génère des menus avec liens ou `<strong class='on'>` non clicable lorsque
+ * l'item est sélectionné
+ *
+ * @filtre lien_ou_expose
+ * @link http://www.spip.net/4004
+ * @example
+ *   ```
+ *   [(#URL_RUBRIQUE|lien_ou_expose{#TITRE, #ENV{test}|=={en_cours}})]
+ *   ```
  *
  * @param string $url
+ *   URL du lien
  * @param string $libelle
- *   le texte du lien
+ *   Texte du lien
  * @param bool $on
- *   etat expose (genere un strong) ou non (genere un lien)
+ *   État exposé (génère un strong) ou non (génère un lien)
  * @param string $class
+ *   Classes CSS ajoutées au lien
  * @param string $title
+ *   Title ajouté au lien
  * @param string $rel
+ *   Attribut `rel` ajouté au lien
  * @param string $evt
- *   complement a la balise a pour gerer un evenement javascript, de la forme " onclick='...'"
+ *   Complement à la balise `a` pour gérer un événement javascript,
+ *   de la forme ` onclick='...'`
  * @return string
+ *   Code HTML
  */
 function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel="", $evt=''){
 	if ($on) {
@@ -2653,28 +2806,46 @@ function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class
 
 
 /**
- * filtre explode pour les squelettes permettant d'ecrire
- * #GET{truc}|explode{-}
+ * Explose un texte en tableau suivant un séparateur
  *
- * @param strong $a
- * @param string $b
- * @return array
+ * @note
+ *     Inverse l'écriture de la fonction PHP de même nom
+ *     pour que le filtre soit plus pratique dans les squelettes
+ * 
+ * @filtre explode
+ * @example
+ *     ```
+ *     [(#GET{truc}|explode{-})]
+ *     ```
+ *
+ * @param string $a Texte
+ * @param string $b Séparateur
+ * @return array Liste des éléments
  */
 function filtre_explode_dist($a,$b){return explode($b,$a);}
 
 /**
- * filtre implode pour les squelettes permettant d'ecrire
- * #GET{truc}|implode{-}
+ * Implose un tableau en chaine en liant avec un séparateur
  *
- * @param array $a
- * @param string $b
- * @return string
+ * @note
+ *     Inverse l'écriture de la fonction PHP de même nom
+ *     pour que le filtre soit plus pratique dans les squelettes
+ * 
+ * @filtre implode
+ * @example
+ *     ```
+ *     [(#GET{truc}|implode{-})]
+ *     ```
+ *
+ * @param array $a Tableau 
+ * @param string $b Séparateur
+ * @return string Texte
  */
 function filtre_implode_dist($a,$b){return is_array($a)?implode($b,$a):$a;}
 
 /**
- * Produire les styles prives qui associent item de menu avec icone en background
- * @return string
+ * Produire les styles privés qui associent item de menu avec icone en background
+ * @return string Code CSS
  */
 function bando_images_background(){
 	include_spip('inc/bandeau');

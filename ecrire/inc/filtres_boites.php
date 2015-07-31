@@ -10,16 +10,37 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier regroupe la gestion des filtres et balises gérant des
+ * boîtes de contenu
+ * 
+ * @package SPIP\Core\Compilateur\Filtres
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 
 /**
- * #BOITE_OUVRIR{titre[,type]}
- * Racourci pour ouvrir une boite (info, simple, pour noisette ...)
+ * Compile la balise `#BOITE_OUVRIR` ouvrant une boîte de contenu
+ * 
+ * Racourci pour ouvrir une boîte (info, simple, pour noisette ...)
  *
- * @param <type> $p
- * @return <type>
+ * @package SPIP\Core\Compilateur\Balises
+ * @balise BOITE_OUVRIR
+ * @see balise_BOITE_PIED_dist() Pour passer au pied de boîte
+ * @see balise_BOITE_FERMER_dist() Pour fermer une boîte
+ * @example
+ *   ```
+ *   #BOITE_OUVRIR{titre[,type]}
+ *   [(#BOITE_OUVRIR{<:titre_cadre_interieur_rubrique:>,simple})]
+ *   #BOITE_OUVRIR{'',raccourcis}
+ *   ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_BOITE_OUVRIR_dist($p) {
 	$_titre = interprete_argument_balise(1,$p);
@@ -36,11 +57,20 @@ function balise_BOITE_OUVRIR_dist($p) {
 }
 
 /**
- * #BOITE_PIED{class}
- * Racourci pour passer au pied de la boite, avant sa fermeture
+ * Compile la balise `#BOITE_PIED` cloturant une boîte de contenu
+ * 
+ * Racourci pour passer au pied de la boite, avant sa fermeture. On peut
+ * lui transmettre une classe CSS avec `#BOITE_PIED{class}`
  *
- * @param <type> $p
- * @return <type>
+ * @package SPIP\Core\Compilateur\Balises
+ * @balise BOITE_PIED
+ * @see balise_BOITE_OUVRIR_dist() Pour ouvrir une boîte
+ * @see balise_BOITE_FERMER_dist() Pour fermer une boîte
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_BOITE_PIED_dist($p) {
 	$_class = interprete_argument_balise(1,$p);
@@ -52,12 +82,21 @@ function balise_BOITE_PIED_dist($p) {
 	return $p;
 }
 
+
 /**
- * #BOITE_FERMER
- * Racourci pour fermer une boite ouverte
+ * Compile la balise `#BOITE_FERMER` clôturant une boîte de contenu
+ * 
+ * Racourci pour fermer une boîte ouverte
  *
- * @param <type> $p
- * @return <type>
+ * @package SPIP\Core\Compilateur\Balises
+ * @balise BOITE_FERMER
+ * @see balise_BOITE_OUVRIR_dist() Pour ouvrir une boîte
+ * @see balise_BOITE_PIED_dist() Pour passer au pied de boîte
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_BOITE_FERMER_dist($p) {
 	$f = chercher_filtre('boite_fermer');
@@ -67,12 +106,22 @@ function balise_BOITE_FERMER_dist($p) {
 }
 
 /**
- * Ouvrir une boite
- * peut etre surcharge par filtre_boite_ouvrir_dist, filtre_boite_ouvrir
+ * Ouvrir une boîte
+ * 
+ * Peut-être surchargé par `filtre_boite_ouvrir_dist` ou `filtre_boite_ouvrir`
  *
+ * @filtre boite_ouvrir
+ * @see balise_BOITE_OUVRIR_dist() qui utilise ce filtre
  * @param string $titre
+ *     Titre de la boîte
  * @param string $class
- * @return <type>
+ *     Classes CSS de la boîte
+ * @param string $head_class
+ *     Classes CSS sur l'entête
+ * @param string $id
+ *     Identifiant HTML de la boîte
+ * @return string
+ *     HTML du début de la boîte
  */
 function boite_ouvrir($titre, $class='', $head_class='', $id=""){
 	$class = "box $class";
@@ -87,12 +136,18 @@ function boite_ouvrir($titre, $class='', $head_class='', $id=""){
 	.'<div class="bd">';
 }
 
+
 /**
- * Passer au pied d'une boite
- * peut etre surcharge par filtre_boite_pied_dist, filtre_boite_pied
+ * Passer au pied d'une boîte
+ * 
+ * Peut-être surchargé par `filtre_boite_pied_dist` ou `filtre_boite_pied`
  *
- * @param <type> $class
- * @return <type>
+ * @filtre boite_ouvrir
+ * @see balise_BOITE_PIED_dist() qui utilise ce filtre
+ * @param string $class
+ *     Classes CSS de la boîte
+ * @return string
+ *     HTML de transition vers le pied de la boîte
  */
 function boite_pied($class='act'){
 	$class = "ft $class";
@@ -100,11 +155,16 @@ function boite_pied($class='act'){
 	.'<div class="'.$class.'">';
 }
 
+
 /**
- * Fermer une boite
- * peut etre surcharge par filtre_boite_fermer_dist, filtre_boite_fermer
+ * Fermer une boîte
+ * 
+ * Peut-être surchargé par `filtre_boite_fermer_dist` ou `filtre_boite_fermer`
  *
- * @return <type>
+ * @filtre boite_ouvrir
+ * @see balise_BOITE_FERMER_dist() qui utilise ce filtre
+ * @return string
+ *     HTML de fin de la boîte
  */
 function boite_fermer(){
 	return '<div class="nettoyeur"></div></div></div>'
