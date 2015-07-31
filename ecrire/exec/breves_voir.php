@@ -48,7 +48,7 @@ debut_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", "", $id_rub
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_rubrique);
+echo afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 if (!$row) {echo _T('public:aucune_breve'); exit;}

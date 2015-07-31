@@ -111,7 +111,7 @@ debut_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "article
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_rubrique);
+echo afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 

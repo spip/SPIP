@@ -71,7 +71,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 {
 	debut_grand_cadre();
 
-	afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique);
 
 	fin_grand_cadre();
 

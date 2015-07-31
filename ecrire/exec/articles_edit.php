@@ -298,7 +298,7 @@ function exec_articles_edit_dist()
 			$id_rubrique);
 
 	debut_grand_cadre();
-	afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique);
 	fin_grand_cadre();
 
 	debut_gauche();

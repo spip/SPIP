@@ -2464,20 +2464,19 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 //
 
 // http://doc.spip.org/@debut_grand_cadre
-function debut_grand_cadre(){
+function debut_grand_cadre($return=false){
 	global $spip_ecran;
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	echo "\n<br><br><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>";
-	echo "\n<tr>";
-	echo "<td width='$largeur' class='serif'>";
-
+	$res =  "\n<br /><br /><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
+	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@fin_grand_cadre
-function fin_grand_cadre(){
-	echo "\n</td></tr></table>";
+function fin_grand_cadre($return=false){
+	$res = "\n</td></tr></table>";
+	if ($return) return $res; else echo $res;
 }
 
 // Cadre formulaires
@@ -2707,43 +2706,42 @@ function debloquer_article($arg, $texte) {
 //
 
 // http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_rubrique, $parents="") {
+function afficher_hierarchie($id_rubrique) {
 	global $spip_lang_left;
 
-	if ($id_rubrique) {
-		$result = spip_query("SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$parents = '';
+	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
+	$style2 = "margin-$spip_lang_left: 15px;";
 
-		while ($row = spip_fetch_array($result)) {
-			$id_rubrique = $row['id_rubrique'];
-			$id_parent = $row['id_parent'];
-			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-			changer_typo($row['lang']);
+	while ($id_rubrique) {
 
-			if (acces_restreint_rubrique($id_rubrique))
-				$logo = "admin-12.gif";
-			if (!$id_parent)
-				$logo = "secteur-12.gif";
-			else
-				$logo = "rubrique-12.gif";
+		$res = spip_fetch_array(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
+		if (!$res) break; // rubrique inexistante
 
-			$parents = "<div class='verdana3' ". 
-			  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-			  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+		$id_parent = $res['id_parent'];
+		changer_typo($res['lang']);
 
+		$logo = (!$id_parent) ? "secteur-12.gif"
+		: (acces_restreint_rubrique($id_rubrique)
+		? "admin-12.gif" : "rubrique-12.gif");
 
-		}
-		afficher_hierarchie($id_parent, $parents);
+		$parents = "<div class='verdana3' "
+		. http_style_background($logo, $style1)
+		. "><a href='"
+		. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+		. "'>"
+		. typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))
+		. "</a></div>\n<div style='$style2'>"
+		. $parents
+		. "</div>";
+
+		$id_rubrique = $id_parent;
 	}
-	else {
-		$logo = "racine-site-12.gif";
-		$parents = "<div class='verdana3' " .
-		  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
-	
-		echo $parents;
-		
-	}
+
+	return "<div class='verdana3' " .
+		  http_style_background("racine-site-12.gif", $style1). 
+		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
 }
 
 // Pour construire des menu avec SELECTED

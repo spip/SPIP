@@ -91,7 +91,7 @@ function exec_naviguer_dist()
 
 	  debut_grand_cadre();
 
-	  if ($id_rubrique  > 0) afficher_hierarchie($id_parent);
+	  if ($id_rubrique  > 0) echo afficher_hierarchie($id_parent);
 	  else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	  fin_grand_cadre();
 

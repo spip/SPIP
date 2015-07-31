@@ -46,7 +46,7 @@ debut_page(_T('info_site_reference_2'), "naviguer", "sites", "", "", $id_rubriqu
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_rubrique);
+echo afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
