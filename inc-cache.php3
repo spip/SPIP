@@ -62,7 +62,7 @@ function utiliser_cache($chemin_cache, $delais) {
 	$use_cache &= empty($HTTP_POST_VARS);
 
 	if (!$use_cache) {
-		include_ecrire("inc_mysql.php3");
+//		include_ecrire("inc_mysql.php3");
 		include_ecrire("inc_connect.php3");
 		if (!$GLOBALS['db_ok']) $use_cache = true;
 	}

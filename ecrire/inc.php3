@@ -376,7 +376,7 @@ function calculer_rubriques_publiques() {
 		$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut = 'publie'";
 	}
 	else {
-		$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut = 'publie' AND date < NOW()";
+		$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut = 'publie' AND date <= NOW()";
 	}
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {

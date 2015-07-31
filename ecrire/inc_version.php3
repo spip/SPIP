@@ -32,14 +32,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 $table_prefix = "spip";
 
-function spip_query($query) {
-	include_ecrire("inc_mysql.php3");
-	include_ecrire("inc_connect.php3");
-	if (!$GLOBALS['db_ok'])
-		return;
-	return spip_query_db($query);
-}
-
 //
 // Infos de version PHP
 //
@@ -238,6 +230,27 @@ function include_ecrire($file) {
 	include($file);
 	$GLOBALS['included_files'][$file] = 1;
 }
+
+
+$flag_connect = file_exists(($flag_ecrire ? "" : "ecrire/")."inc_connect.php3");
+
+function spip_query($query) {
+	if ($GLOBALS['flag_connect'] && !$GLOBALS['db_ok']) {
+		include_ecrire("inc_connect.php3");
+		if (!$GLOBALS['db_ok'])
+			return;
+		if ($GLOBALS['spip_connect_version'] < 0.1) {
+			if (!$GLOBALS['flag_ecrire']) {
+				$GLOBALS['db_ok'] = false;
+				return;
+			}
+			@Header("Location: upgrade.php3?reinstall=oui");
+			exit;
+		}
+	}
+	return spip_query_db($query);
+}
+
 
 //
 // Infos de config PHP
@@ -609,13 +622,13 @@ function email_valide($adresse) {
 		return $valide;
 	}
 
-	return (eregi( 
+	return (eregi(
 		'^[-!#$%&\'*+\\./0-9=?a-z^_`{|}~]+'.	// nom d'utilisateur
 		'@'.									// @
 		'([-0-9a-z]+\.)+' .						// hote, sous-domaine
-		'([0-9a-z]){2,4}$',						// tld 
+		'([0-9a-z]){2,4}$',						// tld
 		trim($adresse)));
-} 
+}
 
 
 ?>

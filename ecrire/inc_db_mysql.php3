@@ -2,20 +2,23 @@
 
 //
 // Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_MYSQL")) return;
-define("_ECRIRE_INC_MYSQL", "1");
+if (defined("_ECRIRE_INC_DB_MYSQL")) return;
+define("_ECRIRE_INC_DB_MYSQL", "1");
 
-function spip_query_db($query) {
-	// return spip_query_profile($query);	// a decommenter pour chronometrer les requetes
-	// return spip_query_debug($query);		// a decommenter pour afficher toutes les erreurs
-	$suite = "";
-	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
-		$suite = $regs[0];
-		$query = substr($query, 0, -strlen($suite));
-	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
-	return mysql_query($query);
+//
+// Connexion a la base
+//
+
+function spip_connect_db($host, $port, $login, $pass, $db) {
+	if ($port > 0) $host = "$host:$port";
+	@mysql_connect($host, $login, $pass);
+	return @mysql_select_db($db);
 }
+
+
+//
+// Appel de requetes SQL
+//
 
 function spip_query_profile($query) {
 	static $tt = 0;
@@ -52,17 +55,34 @@ function spip_query_debug($query) {
 	return $r;
 }
 
-function spip_fetch_array($r='') {
+function spip_query_db($query) {
+	// return spip_query_profile($query);	// a decommenter pour chronometrer les requetes
+	// return spip_query_debug($query);		// a decommenter pour afficher toutes les erreurs
+	$suite = "";
+	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
+		$suite = $regs[0];
+		$query = substr($query, 0, -strlen($suite));
+	}
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	return mysql_query($query);
+}
+
+
+//
+// Recuperation des resultats
+//
+
+function spip_fetch_array($r) {
 	if ($r)
 		return mysql_fetch_array($r);
 }
 
-function spip_fetch_object($r='') {
+function spip_fetch_object($r) {
 	if ($r)
 		return mysql_fetch_object($r);
 }
 
-function spip_fetch_row($r='') {
+function spip_fetch_row($r) {
 	if ($r)
 		return mysql_fetch_row($r);
 }
@@ -75,12 +95,12 @@ function spip_sql_errno() {
 	return mysql_errno();
 }
 
-function spip_num_rows($r='') {
+function spip_num_rows($r) {
 	if ($r)
 		return mysql_num_rows($r);
 }
 
-function spip_free_result($r='') {
+function spip_free_result($r) {
 	if ($r)
 		return mysql_free_result($r);
 }
@@ -88,5 +108,7 @@ function spip_free_result($r='') {
 function spip_insert_id() {
 	return mysql_insert_id();
 }
+
+
 
 ?>
