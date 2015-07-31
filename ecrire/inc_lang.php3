@@ -258,17 +258,6 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			$lien = $lien->getUrl();
 		    }
 	} else {
-		// eviter un bug a l'installation ; mais, dans le cas general,
-		// pourquoi aurait-on besoin ici d'une URL absolue ?
-		if (!defined('_ECRIRE_INSTALL')
-		AND !defined('_TEST_DIRS'))
-			$site = $GLOBALS['meta']["adresse_site"];
-		if (!$site)
-			if (_DIR_RESTREINT)
-				$site = '.';
-			else
-				$site = '..';
-
 		$args = "";
 		if (!_DIR_RESTREINT) {
 			$cible = _DIR_RESTREINT_ABS . 
@@ -281,7 +270,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		} else {
 			$cible = $lien->getUrl();
 		}
-		$lien = generer_url_ecrire("$site/spip_cookie", $args);
+		$lien = generer_url_public("spip_cookie", $args);
 	}
 
 	return "<form action='"
