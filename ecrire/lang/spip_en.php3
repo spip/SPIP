@@ -898,17 +898,6 @@ requiring an FTP access to the Web site.',
 
 
 // L
-'langue_ar' => 'Arabic',
-'langue_de' => 'German',
-'langue_en' => 'English',
-'langue_eo' => 'Esperanto',
-'langue_es' => 'Spanish',
-'langue_fr' => 'French',
-'langue_it' => 'Italian',
-'langue_ja' => 'Japanese',
-'langue_oc' => '',
-'langue_ro' => 'Romanian',
-'langue_vi' => 'Vietnamese',
 'lien_afficher_icones_seuls' => 'Show icons only',
 'lien_afficher_texte_icones' => 'Show icons and text',
 'lien_afficher_texte_seul' => 'Show text only',
