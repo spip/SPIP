@@ -12,7 +12,11 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/**
+ * Nettoyer les echappements
+ * @param $val
+ * @return string
+ */
 function autosave_clean_value($val){
 	return stripslashes(urldecode($val));
 }
