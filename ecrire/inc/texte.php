@@ -227,24 +227,24 @@ $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
 
-	if (preg_match_all($preg ? $preg : _PROTEGE_BLOCS,
-	$letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-		// echappements tels quels ?
-		if ($no_transform) {
-			$echap = $regs[0];
+	if (($preg OR strpos($letexte,"<")!==false)
+	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs) {
+			// echappements tels quels ?
+			if ($no_transform) {
+				$echap = $regs[0];
+			}
+
+			// sinon les traiter selon le cas
+			else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
+				$echap = $f($regs);
+			else if (function_exists($f = $f.'_dist'))
+				$echap = $f($regs);
+
+			$letexte = str_replace($regs[0],
+				code_echappement($echap, $source, $no_transform),
+				$letexte);
 		}
-
-		// sinon les traiter selon le cas
-		else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
-			$echap = $f($regs);
-		else if (function_exists($f = $f.'_dist'))
-			$echap = $f($regs);
-
-		$letexte = str_replace($regs[0],
-			code_echappement($echap, $source, $no_transform),
-			$letexte);
-	}
 
 	if ($no_transform)
 		return $letexte;
@@ -256,7 +256,7 @@ $preg='') {
 	}
 
 	// Echapper le php pour faire joli (ici, c'est pas pour la securite)
-	if (preg_match_all(',<[?].*($|[?]>),UisS',
+	if (strpos($letexte,"<"."?")!==false AND preg_match_all(',<[?].*($|[?]>),UisS',
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$letexte = str_replace($regs[0],
@@ -275,7 +275,8 @@ $preg='') {
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
-		if (preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
+		if (strpos($letexte,"<")!==false AND
+		  preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
@@ -781,6 +782,7 @@ function traiter_listes ($texte) {
 	// chaque paragraphe est traite a part
 	while (list(,$para) = each($parags)) {
 		$niveau = 0;
+		$pile_li = $pile_type = array();
 		$lignes = explode("\n-", "\n" . $para);
 
 		// ne pas toucher a la premiere ligne
@@ -820,6 +822,10 @@ function traiter_listes ($texte) {
 				// puis les montees (y compris apres une descente un cran trop bas)
 				while ($niveau < $profond) {
 					if ($niveau == 0) $ajout .= "\n\n";
+					elseif (!isset($pile_li[$niveau])) {
+						$ajout .= "<li$class_spip>";
+						$pile_li[$niveau] = "</li>";
+					}
 					$niveau ++;
 					$ajout .= "<$type$class_spip_plus>";
 					$pile_type[$niveau] = "</$type>";
