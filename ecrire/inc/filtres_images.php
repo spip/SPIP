@@ -1245,6 +1245,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
 	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
 	return "<img src='$dest'$tags />";
 }
