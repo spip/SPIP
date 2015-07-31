@@ -23,12 +23,26 @@ function inc_petitionner_dist($id_article, $script, $args)
 
 	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
-	$email_unique=$petition["email_unique"];
-	$site_obli=$petition["site_obli"];
-	$site_unique=$petition["site_unique"];
-	$message=$petition["message"];
-	$texte_petition=$petition["texte"];
+	$res = petitionner_choisir($petition);
 
+	if ($petition) {
+		$res .= petitionner_decompte($id_article, $petition)
+		. petitionner_params($petition)
+		. petitionner_message($petition);
+		$class = '';
+	} else {
+		$class = _request('var_ajaxcharset') ? '' : ' visible_au_chargement';
+	}
+
+	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
+
+	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
+
+	return ajax_action_greffe("petitionner-$id_article", $res);
+}
+
+function petitionner_choisir($petition)
+{
 	if ($petition) {
 		$menu = array(
 			'on' => _T('bouton_radio_petition_activee'),
@@ -48,60 +62,65 @@ function inc_petitionner_dist($id_article, $script, $args)
 		$res .= "<option" . (($val_menu == $val) ? " selected='selected'" : '') . " value='$val'>".$desc."</option>\n";
 	}
 
-	$res = "<select name='change_petition'
+	return "<select name='change_petition'
 		class='fondl spip_xx-small'
 		onchange=\"setvisibility('valider_petition', 'visible');\"
 		>\n$res</select><br />\n";
+}
 
+function petitionner_decompte($id_article, $petition)
+{
+	$signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
+	$signatures = $signatures['count'];
+	if (!$signatures) return '';
 
-	if ($petition) {
-		$nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
-		$nb_signatures = $nb_signatures['count'];
-		if ($nb_signatures) {
-			$res .= '<!-- visible -->' // message pour l'appelant
-			. icone_horizontale(
-				$nb_signatures.'&nbsp;'. _T('info_signatures'),
-				generer_url_ecrire("controle_petition", "id_article=$id_article",'', false),
-				"suivi-petition-24.gif",
-				"",
-				false
-			);
-		}
+	return '<!-- visible -->' // message pour l'appelant
+		. icone_horizontale(
+			$signatures.'&nbsp;'. _T('info_signatures'),
+			generer_url_ecrire("controle_petition", "id_article=$id_article",'', false),
+			"suivi-petition-24.gif",
+			"",
+			false
+		);
+}
 
-		if ($email_unique=="oui")
+function petitionner_message($petition)
+{
+	return "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />"
+	. "<textarea name='texte_petition' class='forml' rows='4' cols='10'>"
+	. entites_html($petition["texte"])
+	. "</textarea>\n";
+}
+
+function petitionner_params($petition)
+{
+	$email_unique=$petition["email_unique"];
+	$site_obli=$petition["site_obli"];
+	$site_unique=$petition["site_unique"];
+	$message=$petition["message"];
+
+	$res ='';
+	if ($email_unique=="oui")
 			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked' />";
-		else
+	else
 			$res .="<input type='checkbox' name='email_unique'  id='emailunique' />";
-		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
-		if ($site_obli=="oui")
+	$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
+	if ($site_obli=="oui")
 			$res .="<input type='checkbox' name='site_obli' id='siteobli' checked='checked' />";
-		else
+	else
 			$res .="<input type='checkbox' name='site_obli'  id='siteobli' />";
-		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><br />";
-		if ($site_unique=="oui")
-			$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked' />";
-		else
+	$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><br />";
+	if ($site_unique=="oui")
+		$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked' />";
+	else
 			$res .="<input type='checkbox' name='site_unique'  id='siteunique' />";
-		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><br />";
-		if ($message=="oui")
+	$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><br />";
+	if ($message=="oui")
 			$res .="<input type='checkbox' name='message' id='message' checked='checked' />";
-		else
+	else
 			$res .="<input type='checkbox' name='message'  id='message' />";
-		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
+	$res .= " <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
-		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />";
-		$res .="<textarea name='texte_petition' class='forml' rows='4' cols='10'>";
-		$res .=entites_html($texte_petition);
-		$res .="</textarea>\n";
-		$class = '';
-	} else {
-		$class = _request('var_ajaxcharset') ? '' : ' visible_au_chargement';
-	}
-
-	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
-
-	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
-
-	return ajax_action_greffe("petitionner-$id_article", $res);
+	return $res;
 }
 ?>
