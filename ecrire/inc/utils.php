@@ -1396,7 +1396,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_CACHE_PLUGINS_PATH')) define('_CACHE_PLUGINS_PATH', _DIR_CACHE . "charger_plugins_chemins.php");
 	if (!defined('_CACHE_PLUGINS_OPT')) define('_CACHE_PLUGINS_OPT', _DIR_CACHE . "charger_plugins_options.php");
 	if (!defined('_CACHE_PLUGINS_FCT')) define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
-	if (!defined('_CACHE_PLUGINS_VERIF')) define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
 	if (!defined('_CACHE_PIPELINES')) define('_CACHE_PIPELINES',  _DIR_CACHE."charger_pipelines.php");
 	if (!defined('_CACHE_CHEMIN')) define('_CACHE_CHEMIN',  _DIR_CACHE."chemin.txt");
 
