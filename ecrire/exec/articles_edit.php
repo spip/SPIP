@@ -31,7 +31,8 @@ function exec_articles_edit_dist()
 function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
 {
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-	
+	$id_rubrique = $row['id_rubrique'];
+
 	if (!$row
 	  OR ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
 	  OR (!$new AND (!autoriser('voir', 'article', $id_article)	OR !autoriser('modifier','article', $id_article))) 
