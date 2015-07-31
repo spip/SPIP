@@ -88,6 +88,7 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 		return false;
 	
 	// L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
+	include_spip('inc/autoriser');
 	$editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet));
 	
 	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))
@@ -147,7 +148,7 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 	if (_request('tout_voir'))
 		set_request('recherche','');
 
-
+	include_spip('inc/autoriser');
 	if (autoriser('modifier',$objet,$id_objet)) {
 		// annuler les suppressions du coup d'avant !
 		if (_request('annuler_oups')
