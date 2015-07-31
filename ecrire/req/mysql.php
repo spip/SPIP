@@ -438,9 +438,12 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE $table", $serveur, $requeter);
 }
 
-// Recupere la definition d'une table ou d'une vue MySQL
+// Pour recuperer la definition d'une table ou d'une vue MySQL
 // colonnes, indexes, etc.
 // au meme format que la definition des tables de SPIP
+
+define('_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
+
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 {
@@ -449,9 +452,9 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (!$requeter) return $s;
 
 	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
-	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
+	if (preg_match(_RE_SHOW_TABLE, $a, $r)){
 		$dec = $r[1];
-		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
+		if (preg_match("/^(.*?),([^,]*\sKEY[ (].*)$/s", $dec, $r)) {
 		  $namedkeys = $r[2];
 		  $dec = $r[1];
 		}
@@ -463,10 +466,10 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 		  preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
 		  $fields[strtolower($r[1])] = $r[2];
 		}
-		$keys = array();
 
+		$keys = array();
 		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-		  if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+		  if (preg_match("/^\s*([^(]*)\(([^(]*)$/",$v,$r)) {
 			$k = str_replace("`", '', trim($r[1]));
 			$t = strtolower(str_replace("`", '', $r[2]));
 			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
