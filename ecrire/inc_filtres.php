@@ -1362,9 +1362,7 @@ function image_flou($im,$niveau=3)
 		}
 	
 		$image["fonction_image"]($temp2, "$dest");
-		imagedestroy($temp1);
-		imagedestroy($im);
-	
+		imagedestroy($temp1);	
 	}
 	
 	$class = $image["class"];
