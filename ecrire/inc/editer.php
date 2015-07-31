@@ -369,7 +369,7 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	}
 
 	if ($redirect) {
-		$id = uniqid();
+		$id = uniqid(rand());
 		$redirect = "<form action='$redirect' method='get'
 			id='$id'
 			style='float:".$GLOBALS['spip_lang_right']."; margin-top:2em;'>\n"
