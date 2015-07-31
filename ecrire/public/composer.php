@@ -602,8 +602,10 @@ function calculer_select ($select = array(), $from = array(),
 			array_push($where_simples,$sous[2]);
 			$wheresub = array($sous[2],'0=0'); // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
 			$jsub = $join;
+			// reinjecter dans le where de la sous requete les conditions supplementaires des jointures qui y sont mentionnees
+			// ie L1.objet='article'
 			foreach ($join as $cle=>$wj){
-				if (count($wj)==4){
+				if (count($wj)==4  AND strpos(calculer_where_to_string($sous[2]),"{$cle}.")!==FALSE){
 					$wheresub[] = $wj[3];
 					unset($jsub[$cle][3]);
 				}
@@ -771,6 +773,28 @@ function calculer_select ($select = array(), $from = array(),
 	unset($GLOBALS['debug']['aucasou']);
 	return $r;
 }
+
+/**
+ * Analogue a calculer_mysql_expression et autre (a unifier ?)
+ * @param string|array $v
+ * @param string $join
+ * @return string
+ */
+function calculer_where_to_string($v, $join = 'AND'){
+	if (empty($v))
+		return '';
+
+	if (!is_array($v)) {
+		return $v;
+	} else {
+		$exp = "";
+		if (strtoupper($join) === 'AND')
+			return $exp . join(" $join ", array_map('calculer_where_to_string', $v));
+		else
+			return $exp . join($join, $v);
+	}
+}
+
 
 //condition suffisante (mais non necessaire) pour qu'une table soit utile
 
