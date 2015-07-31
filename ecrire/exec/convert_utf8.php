@@ -68,6 +68,17 @@ function demander_conversion($tables_a_convertir, $action) {
 	exit;
 }
 
+// stocker le nouvel extra
+function convert_extra($v) {
+	if ($extra = @unserialize($v)) {
+		foreach ($extra as $key=>$val)
+			$extra[$key] = unicode_to_utf_8(
+			charset2unicode($val, $charset_source));
+			return ", extra=".spip_abstract_quote(serialize($extra));
+	}
+}
+
+
 function exec_convert_utf8_dist() {
 	include_spip('inc/meta');
 	include_spip('inc/charsets');
@@ -137,49 +148,49 @@ function exec_convert_utf8_dist() {
 		// lire les donnees dans un array
 		while ($t = spip_fetch_array($s, SPIP_ASSOC)) {
 			$query = array();
-			$mod_extra = false;
+			$query_no_convert = '';
+			$query_extra = '';
 			foreach ($t as $c => $v) {
 				if ($c == $champ) {
 					preg_match(',^<CONVERT (.*?)>,', $v, $reg);
 					$v = substr($v, strlen($reg[0]));
 					$charset_source = $reg[1];
-				}
-				if (!is_numeric($v)
-				AND !is_ascii($v)) {
 					$query[] = "$c=" . spip_abstract_quote($v);
-					# traitement special car donnees serializees
-					if ($c == 'extra') $mod_extra = $v;
+				} else {
+					if (!is_numeric($v)
+					AND !is_ascii($v)) {
+						// traitement special car donnees serializees
+						if ($c == 'extra') {
+							$query_no_convert .= ", $c=".spip_abstract_quote($v);
+							$query_extra = convert_extra($v);
+						} else
+							$query[] = "$c=" . spip_abstract_quote($v);
+					} else
+						# pour le backup
+						$query_no_convert .= ", $c=".spip_abstract_quote($v);
 				}
 			}
 
 			$set = join(', ', $query);
 			$where = "$id_champ = ".$t[$id_champ];
 
-			// Cette query ne fait que retablir les donnees existantes
-			if ($set) {
-				$query = "UPDATE $table SET $set WHERE $where" ;
+			// On l'enregistre telle quelle sur le fichier de sauvegarde
+			if ($f) fwrite($f,
+				"UPDATE $table SET $set$query_no_convert"
+				." WHERE $where;\n"
+			);
 
-				// On l'enregistre telle quelle sur le fichier de sauvegarde
-				if ($f) fwrite($f, $query.";\n");
+			// Mais on la transcode
+			// en evitant une double conversion
+			if ($charset_source != 'utf-8') {
+				$query = "UPDATE $table SET "
+				. unicode_to_utf_8(charset2unicode($set, $charset_source))
+				. $query_extra
+				. " WHERE $where AND $champ LIKE '<CONVERT %'";
+				#echo $query;
+				spip_query($query);
+				echo '.           '; flush();
 
-				// Mais on la transcode
-				// en evitant une double conversion
-				if ($charset_source != 'utf-8') {
-					spip_query("UPDATE $table SET " . unicode_to_utf_8(charset2unicode($set, $charset_source)) . " WHERE $where AND $champ LIKE '<CONVERT %'");
-					echo '.           '; flush();
-
-					// stocker le nouvel extra
-					if ($mod_extra) {
-						$extra = unserialize($mod_extra);
-						foreach ($extra as $key=>$val)
-							$extra[$key] = unicode_to_utf_8(
-							charset2unicode($val, $charset_source));
-						spip_query("UPDATE $table SET extra="
-							. spip_abstract_quote(serialize($extra))
-							. " WHERE $where"
-						);
-					}
-				}
 			}
 		}
 		spip_free_result($s);
