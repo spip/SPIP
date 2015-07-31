@@ -1087,6 +1087,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_AUTH_USER_FILE', '.htpasswd');
 	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
+	define('_CACHE_RUBRIQUES_MAX', 500);
 
 	define('_DOCTYPE_ECRIRE',
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
