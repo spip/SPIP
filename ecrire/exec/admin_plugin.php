@@ -21,11 +21,9 @@ include_spip('inc/securiser_action');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_admin_plugin() {
-	global $connect_statut;
-	global $connect_toutes_rubriques;
 	global $spip_lang_right;
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	if (!autoriser('configurer', 'plugins')) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');

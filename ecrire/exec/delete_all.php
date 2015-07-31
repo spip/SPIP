@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_delete_all_dist()
 {
 	include_spip('inc/autoriser');
-	if (!autoriser('destroy')) {
+	if (!autoriser('detruire')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

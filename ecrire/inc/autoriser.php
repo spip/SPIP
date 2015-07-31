@@ -333,8 +333,8 @@ function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 
 // Effectuer un backup ?
 // admins y compris restreints
-// http://doc.spip.org/@autoriser_backup_dist
-function autoriser_backup_dist($faire, $type, $id, $qui, $opt) {
+// http://doc.spip.org/@autoriser_sauvegarder_dist
+function autoriser_sauvegarder_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		;
@@ -343,8 +343,8 @@ function autoriser_backup_dist($faire, $type, $id, $qui, $opt) {
 // Effacer la base de donnees ?
 // admins seulement (+auth ftp)
 // a transformer en webmestre quand la notion sera fixee
-// http://doc.spip.org/@autoriser_destroy_dist
-function autoriser_destroy_dist($faire, $type, $id, $qui, $opt) {
+// http://doc.spip.org/@autoriser_detruire_dist
+function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		AND !$qui['restreint']

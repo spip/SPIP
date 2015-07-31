@@ -76,7 +76,7 @@ function definir_barre_boutons() {
 	}
 	// autres admins (restreints ou non webmestres) peuvent aller sur les backups
 	else
-	if (autoriser('backup', 'admin_tech')) {
+	if (autoriser('sauvegarder', 'admin_tech')) {
 		$boutons_admin['admin_tech']=
 		  new Bouton('administration-48.png', 'icone_maintenance_site');
 	}
@@ -190,7 +190,7 @@ function definir_barre_boutons() {
 		$soumenu['espacement'] = null;
 	}
 
-	if (autoriser('backup')) {
+	if (autoriser('sauvegarder')) {
 		$sousmenu['admin_tech']= 
 			new Bouton("base-24.gif", "icone_maintenance_site");
 	}
@@ -263,12 +263,12 @@ function definir_barre_onglets($rubrique) {
 	break;
 
 	case 'administration':
-		if (autoriser('backup')) {
+		if (autoriser('sauvegarder')) {
 			$onglets['sauver']=
 			  new Bouton('base-24.gif', 'onglet_save_restaur_base',
 				generer_url_ecrire("admin_tech"));
 		}
-		if (autoriser('destroy')) {
+		if (autoriser('detruire')) {
 			$onglets['effacer']=
 			  new Bouton('supprimer.gif', 'onglet_affacer_base',
 				generer_url_ecrire("admin_effacer"));

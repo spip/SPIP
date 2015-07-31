@@ -46,7 +46,7 @@ function exec_admin_effacer_dist()
 	debut_droite();
 
 
-	if (!autoriser('destroy')) {
+	if (!autoriser('detruire')) {
 		echo _T('avis_non_acces_page');
 		echo fin_gauche(), fin_page();
 		exit;
