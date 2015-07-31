@@ -152,7 +152,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra)
 
 	. (!$flag_editable ? ''
-	:  bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right'))
+	   :  (bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right') . "<br class='nettoyeur'>"))
 	. (($spip_display == 4) ? ''
 	 : articles_documents($flag_editable, 'article', $id_article))
 
@@ -296,11 +296,11 @@ function boite_article_virtuel($id_article, $virtuel, $flag)
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
-		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, $align, false)
+		return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, $align, false)
 		. "<span class='arial1 spip_small'>$mode</span>"
 		. aide("artmodif");
 	}
-	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
+	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
 }
 
 // http://doc.spip.org/@titres_articles

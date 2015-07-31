@@ -12,9 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/charsets');	# pour le nom de fichier
-include_spip('base/abstract_sql');
-
 // http://doc.spip.org/@action_tourner_dist
 function action_tourner_dist() {
 	include_spip('inc/distant'); # pour copie_locale
@@ -36,6 +33,9 @@ function action_tourner_post($r)
 	if (!$row = spip_fetch_array($result))
 		return;
 
+	include_spip('inc/charsets');	# pour le nom de fichier
+	include_spip('inc/documents'); 
+	include_spip('base/abstract_sql');
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $r[2];
 	$src = copie_locale(get_spip_doc($row['fichier']));

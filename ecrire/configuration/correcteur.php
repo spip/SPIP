@@ -31,10 +31,10 @@ function configuration_correcteur_dist()
 			'non' => _T('info_ortho_desactiver')))
 	. "</div>";
 
- 	return  ajax_action_greffe("configurer-correcteur", 
-	 debut_cadre_trait_couleur("ortho-24.gif", true, "", _T('ortho_orthographe').aide("corrortho"))
+	$res = debut_cadre_trait_couleur("ortho-24.gif", true, "", _T('ortho_orthographe').aide("corrortho"))
 	.  ajax_action_post('configurer', 'correcteur', 'config_fonctions', '', $res)
-	.  fin_cadre_trait_couleur(true)
-	.  "<br />");
+	.  fin_cadre_trait_couleur(true);
+
+ 	return  ajax_action_greffe("configurer-correcteur", $res);
 }
 ?>

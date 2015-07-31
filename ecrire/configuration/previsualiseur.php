@@ -33,11 +33,11 @@ function configuration_previsualiseur_dist()
 			 )
 	. "</div>";
 
-	return ajax_action_greffe("configurer-previsualiseur", 
-	 debut_cadre_trait_couleur("naviguer-site.png", true, "", _T('previsualisation')
+	$res = debut_cadre_trait_couleur("naviguer-site.png", true, "", _T('previsualisation')
 	. aide("previsu"))
 	. ajax_action_post('configurer', 'previsualiseur', 'config_fonctions', '', $res)
-	. fin_cadre_trait_couleur(true)
-	. "<br />");
+	. fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe("configurer-previsualiseur", $res);
 }
 ?>

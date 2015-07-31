@@ -28,10 +28,10 @@ function configuration_versionneur_dist()
 			'non' => _T('info_historique_desactiver')))
 	. "</div>";
 
-	return ajax_action_greffe("configurer-versionneur", 
-	 debut_cadre_trait_couleur("historique-24.gif", true, "", _T('info_historique_titre').aide("suivimodif"))
+	$res = debut_cadre_trait_couleur("historique-24.gif", true, "", _T('info_historique_titre').aide("suivimodif"))
 	.  ajax_action_post('configurer', 'versionneur', 'config_fonctions', '', $res)
-	.  fin_cadre_trait_couleur(true)
-	.  "<br />");
+	.  fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe("configurer-versionneur", $res);
 }
 ?>

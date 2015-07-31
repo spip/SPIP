@@ -85,7 +85,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<b>$label</b><br />\n" .
 
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
-	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br /><br />\n" .
+	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
 	  date_formulaire_legender($date, $id_document) .
 	  "<br />\n<b>".
 	  _T('info_description_2').
@@ -150,7 +150,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	. block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag)
 	. "</div>";
 
-	return ajax_action_greffe("legender-$id_document", $corps);
+	return ajax_action_greffe("legender-$id_document", $corps,'');
 }
 
 

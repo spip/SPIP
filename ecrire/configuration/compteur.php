@@ -29,11 +29,12 @@ function configuration_compteur_dist()
 				'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ')
 	  . "</div>";
 
-	return ajax_action_greffe("configurer-compteur", 
-	  debut_cadre_trait_couleur("statistiques-24.gif", true, "", _T('info_forum_statistiques').aide ("confstat"))
+
+	$res = debut_cadre_trait_couleur("statistiques-24.gif", true, "", _T('info_forum_statistiques').aide ("confstat"))
 	.  ajax_action_post('configurer', 'compteur', 'config_fonctions', '', $res)
-	.  fin_cadre_trait_couleur(true)
-	.  "<br />");
+	.  fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe("configurer-compteur", $res);
 }
 
 ?>
