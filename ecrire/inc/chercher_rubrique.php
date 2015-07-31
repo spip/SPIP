@@ -201,7 +201,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	## la verification est faite a l'arrivee des donnees (Fil)
 
 	if ($idem)
-		$exclus = "&exclus=$idem&rac=oui";
+		$exclus = "&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui');
 
 	if ($id_rubrique)
 		list($titre_parent) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);

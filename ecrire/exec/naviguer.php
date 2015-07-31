@@ -17,51 +17,15 @@ include_spip('inc/texte');
 include_spip('inc/rubriques');
 include_spip('inc/actions');
 include_spip('inc/forum');
-include_spip('inc/mots');
-include_spip('inc/documents');
-include_spip('base/abstract_sql');
-charger_generer_url();
 
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	global $new, $id_parent, $id_rubrique, $spip_display, $champs_extra, $cherche_mot,  $select_groupe, $descriptif, $texte, $titre;
-
+	global $id_rubrique, $spip_display, $cherche_mot,  $select_groupe;
 
 	$id_rubrique = intval($id_rubrique);
-	$id_parent = intval($id_parent);
-	if ($id_parent == $id_rubrique && $id_parent) exit;
 
-	$flag_editable = (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique)); // id_parent necessaire en cas de creation de sous-rubrique
-
-	if ($flag_editable AND $new) {
-		if ($new == 'oui')
-			$id_rubrique = enregistre_creer_naviguer($id_parent);
-		enregistre_modifier_naviguer($id_rubrique,
-					     $id_parent,
-					     $titre,
-					     $texte,
-					     $descriptif
-					     );
-
-		calculer_rubriques();
-		calculer_langues_rubriques();
-
-			// invalider les caches marques de cette rubrique
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_rubrique/$id_rubrique'");
-
-		// pour avoir id_rubrique dans l'URL
-		if ($new == 'oui') {
-			redirige_par_entete(generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique, true));
-		} 
-	}
-
-//
-// recuperer les infos sur cette rubrique
-//
-
-	$row=spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
 	if ($row) {
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -69,13 +33,15 @@ function exec_naviguer_dist()
 		$texte=$row['texte'];
 		$statut = $row['statut'];
 		$extra = $row["extra"];
-	} else $statut = $titre = $descriptif = $texte = $extra = '';
+	} elseif ($id_rubrique)
+		die();
+	else $statut = $titre = $descriptif = $texte = $extra = '';
 
 	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
 	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 	else $ze_logo = "rubrique-24.gif";
 
-///// debut de la page
+	$flag_editable = acces_rubrique($id_rubrique);
 
 	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
@@ -86,8 +52,6 @@ function exec_naviguer_dist()
 		   '',
 		   '',
 		   $id_rubrique);
-
-//////// parents
 
 	  debut_grand_cadre();
 
@@ -126,7 +90,7 @@ function exec_naviguer_dist()
 
 	  montre_naviguer($id_rubrique, $titre, $descriptif, $ze_logo, $flag_editable);
 
-	  if ($champs_extra AND $extra) {
+	  if ($extra) {
 		include_spip('inc/extra');
 		extra_affichage($extra, "rubriques");
 	  }
@@ -143,19 +107,9 @@ function exec_naviguer_dist()
 	      echo "\n<p><div align='justify'><font size=3 face='Verdana,Arial,Sans,sans-serif'>", justifier(propre($texte)), "&nbsp;</font></div>";
 	    }
 
-
-//
-// Langue de la rubrique
-//
-
 	    langue_naviguer($id_rubrique, $id_parent, $flag_editable);
 	    
 	    fin_cadre_relief();
-
-
-//
-// Gerer les modifications...
-//
 
 	    contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
@@ -504,43 +458,6 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 		icone(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif");
 		echo "</div><p>";
 	}
-}
-
-
-// http://doc.spip.org/@enregistre_creer_naviguer
-function enregistre_creer_naviguer($id_parent)
-{
-	return spip_abstract_insert("spip_rubriques", 
-			"(titre, id_parent)",
-			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
-}
-
-// http://doc.spip.org/@enregistre_modifier_naviguer
-function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif)
-{
-	// si c'est une rubrique-secteur contenant des breves, ne deplacer
-	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
-	// breves en question
-	if ($GLOBALS['confirme_deplace'] == 'oui'
-	AND $id_parent > 0) {
-		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-		if ($id_secteur= $id_secteur['id_secteur'])
-			spip_query("UPDATE spip_breves	SET id_rubrique=$id_secteur	WHERE id_rubrique=$id_rubrique");
-	} else
-		$id_parent = 0;
-
-	if ($GLOBALS['champs_extra']) {
-			include_spip('inc/extra');
-			$extra = extra_recup_saisie("rubriques");
-	}
-	else $extra = '';
-
-	spip_query("UPDATE spip_rubriques SET " .  (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "titre=" . spip_abstract_quote($titre) . ", descriptif=" . spip_abstract_quote($descriptif) . ", texte=" . spip_abstract_quote($texte) . (!$extra ? '' :  ", extra = " . spip_abstract_quote($extra) . "") . "WHERE id_rubrique=$id_rubrique");
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_rubriques', $id_rubrique);
-	}
-	propager_les_secteurs();
 }
 
 ?>
