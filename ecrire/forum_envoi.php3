@@ -136,7 +136,7 @@ else {
 	echo "<div>&nbsp;</div>";
 
 
-debut_cadre_formulaire();
+debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;');
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
 $forum_stat = $statut;

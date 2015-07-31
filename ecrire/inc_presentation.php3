@@ -2746,8 +2746,10 @@ function fin_grand_cadre(){
 
 // Cadre formulaires
 
-function debut_cadre_formulaire(){
-	echo "\n<div class='cadre-formulaire'>";
+function debut_cadre_formulaire($style=''){
+	echo "\n<div class='cadre-formulaire'" .
+	  (!$style ? "" : "style='$style'") .
+	   ">";
 }
 
 function fin_cadre_formulaire(){
