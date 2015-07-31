@@ -305,11 +305,11 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_titre_image' => 'T&iacute;tol de la imatge:',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</B> [Obligatori]<BR>',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: doble definici&oacute;',
+'erreur_boucle_fermant' => ' BOUCLE@id@: falta tag que tanque',
+'erreur_boucle_syntaxe' => 'Sintaxi incorrecta del bucle',
+'erreur_boucle_syntaxe2' => 'El boucle @milieu@ &eacute;s incorrecte.',
+'erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> no definit',
 
 
 // F
@@ -1357,7 +1357,7 @@ i tornar-vos a connectar al lloc.
 'texte_admin_effacer_01' => 'Aquesta comanda esborra <i>tot</i> el contingut de la base de dades,
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
 'texte_admin_tech_01' => 'Aquesta opci&oacute; permet desar el contigut de la base a un fitxer que ser&agrave; guardat al directori <i>ecrire/data/</i>. No oblide igualment recuperar integrament el directori <i>IMG/</i>, que cont&eacute; les imatges i els documents utilitzats als articles i les seccions.',
-'texte_admin_tech_02' => 'Atenci&oacute;: aquesta c&ograve;pia de seguritat no podr&agrave; ser restaurada
+'texte_admin_tech_02' => '<MODIF> Atenci&oacute;: aquesta c&ograve;pia de seguritat no podr&agrave; ser restaurada
  sino &eacute;s en un lloc que estiga fet amb la mateixa versi&oacute; de SPIP.L\'error
 consisteix en fer una c&ograve;pia de seguritat abans d\'actualitzaci&oacute;
 d\'SPIP... Per m&eacute;s detalls consultar <a href="http://www.spip.net/fr_article1489.html">la documentaci&oacute; d\'SPIP</a>.',

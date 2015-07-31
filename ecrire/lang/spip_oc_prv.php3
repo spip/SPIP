@@ -1357,9 +1357,7 @@ e vos tornar connectar au sit.
  incl&uacute;s <i>totei</i> leis acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primier acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
 Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten leis imatges e lei documents utilizats dins leis articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se podr&agrave; restaurar
- REN QUE dins un sit installat amb la meteissa version d\'SPIP. L\'error
- que consist&iacute;s a far una sauvagarda avans de far una actualizacion d\'SPIP es correnta... Per mai de detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se podr&agrave; restaurar REN QUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cau pas "vujar la basa" en esperant de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
  d\'abrivar son transferiment au v&ograve;stre o a un servidor de sauvagardas, e per fin d\'esparnhar d\'espaci disc.',
 'texte_adresse_annuaire_1' => '(Se v&ograve;stre annuari es installat sus la meteissa maquina qu\'aqueu sit web, s\'ag&iacute;s probable de "localhost".)',
