@@ -271,7 +271,9 @@ ul.forum-total {
 	color: #303030;
 	font-size: 80%;
 }
-
+.forum-repondre-message {
+	text-align: right;
+}
 
 /* Boite d'un forum : eclaircissement progressif des bords */
 
