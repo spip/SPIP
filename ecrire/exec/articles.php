@@ -231,11 +231,11 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 // http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article, $modifiable)
 {
-	$poster = charger_fonction('poster', 'inc');
+	$regler_moderation = charger_fonction('regler_moderation', 'inc');
 	$petitionner = charger_fonction('petitionner', 'inc');
-	$poster = $poster($id_article,"articles","id_article=$id_article", $modifiable);
+	$regler_moderation = $regler_moderation($id_article,"articles","id_article=$id_article", $modifiable);
 	$petitionner = $petitionner($id_article,"articles","id_article=$id_article",$modifiable);
-	$masque = $poster . $petitionner;
+	$masque = $regler_moderation . $petitionner;
 
 	if (!$masque) return '';
 

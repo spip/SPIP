@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_poster_dist
-function exec_poster_dist()
+// http://doc.spip.org/@exec_regler_moderation_dist
+function exec_regler_moderation_dist()
 {
 	global $id_article, $script;
 	$id_article = intval($id_article);
@@ -24,7 +24,7 @@ function exec_poster_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$poster = charger_fonction('poster', 'inc');
-	ajax_retour($poster($id_article, $script, "&id_article=$id_article", true));
+	$regler_moderation = charger_fonction('regler_moderation', 'inc');
+	ajax_retour($regler_moderation($id_article, $script, "&id_article=$id_article", true));
 }
 ?>

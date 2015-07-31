@@ -308,7 +308,6 @@ ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
-ecrire/action/editer_forum.php -text
 ecrire/action/editer_mot.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_signatures.php -text
@@ -327,10 +326,11 @@ ecrire/action/legender.php -text
 ecrire/action/legender_auteur.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
-ecrire/action/poster.php -text
+ecrire/action/poster_forum_prive.php -text
 ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
+ecrire/action/regler_moderation.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/test_dirs.php -text
@@ -411,11 +411,11 @@ ecrire/exec/mots_type.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/petitionner.php -text
 ecrire/exec/plonger.php -text
-ecrire/exec/poster.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
 ecrire/exec/rechercher_auteur.php -text
 ecrire/exec/referencer_traduction.php -text
+ecrire/exec/regler_moderation.php -text
 ecrire/exec/rubriquer.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
@@ -474,8 +474,8 @@ ecrire/inc/petitionner.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
-ecrire/inc/poster.php -text
 ecrire/inc/referencer_traduction.php -text
+ecrire/inc/regler_moderation.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/sites_voir.php -text

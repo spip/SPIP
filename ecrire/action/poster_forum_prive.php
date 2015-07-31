@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_editer_mot_dist
-function action_editer_forum_dist() {
+function action_poster_forum_prive_dist() {
 
 	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -22,12 +22,12 @@ function action_editer_forum_dist() {
 	$arg = _request('arg');
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
 	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)\W(\w+)\W(\w+)$,', $arg, $r)) 
-		spip_log("action editer_forum: $arg pas compris");
-	else action_editer_forum_post($r);
+		spip_log("action poster_forum_prive: $arg pas compris");
+	else action_poster_forum_prive_post($r);
 }
 
 // http://doc.spip.org/@action_editer_mot_post
-function action_editer_forum_post($r)
+function action_poster_forum_prive_post($r)
 {
 	global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;
 
@@ -54,7 +54,7 @@ function action_editer_forum_post($r)
 		redirige_par_entete($redirect);
 		
 	 } else {
-	   // on ne fait que passer .... 
+	   // previsualisation : on ne fait que passer .... 
 	   // et si les clients HTTP respectaient le RFC HTTP selon lequel
 	   // une redirection d'un POST doit etre en POST et pas en GET
 	   // on n'aurait pas a faire l'horreur ci-dessous.

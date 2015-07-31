@@ -160,7 +160,7 @@ function forum_envoi(
 
 	echo  $parent,
 	  "\n<div>&nbsp;</div>"
-	  . redirige_action_auteur('editer_forum',$cat, $script, "$objet=$id", $corps, "")
+	  . redirige_action_auteur('poster_forum_prive',$cat, $script, "$objet=$id", $corps, "")
 	  .  "<a id='formulaire'></a>"
 	  . fin_page();
 }
