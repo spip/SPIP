@@ -99,7 +99,7 @@ function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 	$texte_upload = array();
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
-		if (ereg("\.([^.]+)$", $f, $match)) {
+		if (preg_match(",\.([^.]+)$,", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
 				if ($ext == 'jpeg') $ext = 'jpg'; # cf. corriger_extension dans inc/getdocument

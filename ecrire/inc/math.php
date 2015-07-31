@@ -95,7 +95,7 @@ function traiter_math($letexte, $source='') {
 			$fin+strlen("</math>"), strlen($texte_a_voir));
 
 		// Les doubles $$x^2$$ en mode 'div'
-		while((ereg("[$][$]([^$]+)[$][$]",$texte_milieu, $regs))) {
+		while((preg_match(",[$][$]([^$]+)[$][$],",$texte_milieu, $regs))) {
 			$echap = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[1])."</p>\n";
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)
@@ -104,7 +104,7 @@ function traiter_math($letexte, $source='') {
 		}
 
 		// Les simples $x^2$ en mode 'span'
-		while((ereg("[$]([^$]+)[$]",$texte_milieu, $regs))) {
+		while((preg_match(",[$]([^$]+)[$],",$texte_milieu, $regs))) {
 			$echap = image_math($regs[1]);
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)

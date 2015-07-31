@@ -407,7 +407,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
+		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
 		  if ($img = _DIR_RACINE.copie_locale($fichier)
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {

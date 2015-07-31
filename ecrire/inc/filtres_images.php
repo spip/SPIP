@@ -17,11 +17,11 @@ include_spip('inc/filtres'); // par precaution
 // http://doc.spip.org/@cherche_image_nommee
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
-	if (ereg("^" . _DIR_IMG, $nom)) {
+	if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG))==0) {
 		$nom = substr($nom,strlen(_DIR_IMG));
-	} else 	if (ereg("^" . _DIR_IMG_PACK, $nom)) {
+	} else 	if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG_PACK))==0) {
 		$nom = substr($nom,strlen(_DIR_IMG_PACK));
-	} else if (ereg("^" . _DIR_IMG_ICONES_DIST, $nom)) {
+	} else if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG_ICONES_DIST))==0) {
 		$nom = substr($nom,strlen(_DIR_IMG_ICONES_DIST));
 	}
 	$pos = strrpos($nom, "/");
@@ -379,7 +379,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 	
 	// liste des formats qu'on sait lire
 	$img = isset($GLOBALS['meta']['formats_graphiques'])
-	  ? in_array($format,explode(',',$GLOBALS['meta']['formats_graphiques']))
+	  ? (strpos($GLOBALS['meta']['formats_graphiques'], $format)!==false)
 	  : false;
 
 	// si le doc n'est pas une image, refuser
@@ -995,9 +995,9 @@ function image_masque($im, $masque, $pos="") {
 	$arg_list = func_get_args();
 	$texte = $arg_list[0];
 	for ($i = 1; $i < $numargs; $i++) {
-		if (ereg("\=", $arg_list[$i])) {
-			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
-			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
+		if ( ($p = strpos($arg_list[$i],"=")) !==false) {
+			$nom_variable = substr($arg_list[$i], 0, $p);
+			$val_variable = substr($arg_list[$i], $p+1);
 			$variable["$nom_variable"] = $val_variable;
 			$defini["$nom_variable"] = 1;
 		}
@@ -2053,6 +2053,7 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 	
 	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
+	$terminaison = $cache["format_source"];
 	
 	$creer = $cache["creer"];
 	if ($creer) {
@@ -2066,9 +2067,9 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 			
 				$thumb = imagecreate($newwidth, $newheight);
 	
-				if (ereg("\.jpg", $fichier)) $source = imagecreatefromjpeg($fichier);
-				if (ereg("\.gif", $fichier)) $source = imagecreatefromgif($fichier);
-				if (ereg("\.png", $fichier)) $source = imagecreatefrompng($fichier);
+				if (strncmp($terminaison,"jpg",3)) $source = imagecreatefromjpeg($fichier);
+				if (strncmp($terminaison,"gif",3)) $source = imagecreatefromgif($fichier);
+				if (strncmp($terminaison,"png",3)) $source = imagecreatefrompng($fichier);
 				imagepalettetotruecolor($source);
 
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
@@ -2232,7 +2233,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// C'est dommage, parce que la rasterisation des caracteres est autrement plus jolie qu'avec TTF.
 	// A garder sous le coude en attendant que ca ne soit plus une grosse bouse.
 	// Si police Postscript et que fonction existe...
-	if (ereg("\.pfb$", $font) AND function_exists("imagepstext") AND 1==2) {
+	if ((strncomp(substr($font,-4),".pfb",4)==0) AND function_exists("imagepstext") AND 1==2) {
 		// Traitement specifique pour polices PostScript (experimental)
 		$textSizePs = round(1.32 * $textSize);
 		if ($GLOBALS["font"]["$font"]) {

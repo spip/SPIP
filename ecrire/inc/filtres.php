@@ -481,7 +481,7 @@ function vider_url($url, $entites = true) {
 // http://doc.spip.org/@url_var_recherche
 function url_var_recherche($url) {
 	if (_request('recherche')
-	AND !ereg("var_recherche", $url)) {
+	AND (strpos($url,"var_recherche")!==false)) {
 
 		list ($url,$ancre) = preg_split(',#,', $url, 2);
 		if ($ancre) $ancre='#'.$ancre;
@@ -501,7 +501,7 @@ function url_var_recherche($url) {
 // http://doc.spip.org/@extraire_date
 function extraire_date($texte) {
 	// format = 2001-08
-	if (ereg("([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2])",$texte,$regs))
+	if (preg_match(",([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2]),",$texte,$regs))
 		return $regs[1]."-".sprintf("%02d", $regs[2])."-01";
 }
 
@@ -543,11 +543,11 @@ function choixsiegal($a1,$a2,$v,$f) {
 function normaliser_date($date) {
 	if ($date) {
 		$date = vider_date($date);
-		if (ereg("^[0-9]{8,10}$", $date))
+		if (preg_match("/^[0-9]{8,10}$/", $date))
 			$date = date("Y-m-d H:i:s", $date);
-		if (ereg("^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$", $date, $regs))
+		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs))
 			$date = $regs[1]."-01-01".$regs[3];
-		else if (ereg("^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$", $date, $regs))
+		else if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs))
 			$date = preg_replace("@/@","-",$regs[1])."-01".$regs[3];
 		else
 			$date = date("Y-m-d H:i:s", strtotime($date));
@@ -557,8 +557,8 @@ function normaliser_date($date) {
 
 // http://doc.spip.org/@vider_date
 function vider_date($letexte) {
-	if (ereg("^0000-00-00", $letexte)) return;
-	if (ereg("^1970-01-01", $letexte)) return;	// eviter le bug GMT-1
+	if (strncmp("0000-00-00", $letexte,10)==0) return;
+	if (strncmp("1970-01-01", $letexte,10)==0) return;	// eviter le bug GMT-1
 	return $letexte;
 }
 
@@ -566,7 +566,7 @@ function vider_date($letexte) {
 function recup_heure($numdate){
 	if (!$numdate) return '';
 
-	if (ereg('([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})', $numdate, $regs)) {
+	if (preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $numdate, $regs)) {
 		$heures = $regs[1];
 		$minutes = $regs[2];
 		$secondes = $regs[3];
@@ -606,7 +606,7 @@ function heures_minutes($numdate) {
 // http://doc.spip.org/@recup_date
 function recup_date($numdate){
 	if (!$numdate) return '';
-	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})', $numdate, $regs)) {
+	if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})#', $numdate, $regs)) {
 		$jour = $regs[1];
 		$mois = $regs[2];
 		$annee = $regs[3];
@@ -616,12 +616,12 @@ function recup_date($numdate){
 			$annee = 1900 + $annee ;
 		}
 	}
-	elseif (ereg('([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})',$numdate, $regs)) {
+	elseif (preg_match('#([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})#',$numdate, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];
 	}
-	elseif (ereg('([0-9]{4})-([0-9]{2})', $numdate, $regs)){
+	elseif (preg_match('#([0-9]{4})-([0-9]{2})#', $numdate, $regs)){
 		$annee = $regs[1];
 		$mois = $regs[2];
 	}
@@ -1075,7 +1075,7 @@ function post_autobr($texte, $delim="\n_ ") {
 			$debut .= $delim;
 		else
 			$debut .= "\n";
-		if (ereg("^\n+", $suite, $regs)) {
+		if (preg_match(",^\n+,", $suite, $regs)) {
 			$debut.=$regs[0];
 			$suite = substr($suite, strlen($regs[0]));
 		}
@@ -1104,7 +1104,7 @@ function multi_trad ($trads) {
 		return $trads[$spip_lang];
 
 	}	// cas des langues xx_yy
-	else if (ereg('^([a-z]+)_', $spip_lang, $regs) AND isset($trads[$regs[1]])) {
+	else if (preg_match(',^([a-z]+)_,', $spip_lang, $regs) AND isset($trads[$regs[1]])) {
 		return $trads[$regs[1]];
 	}	
 	// sinon, renvoyer la premiere du tableau

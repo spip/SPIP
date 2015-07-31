@@ -88,7 +88,7 @@ function xml_parse_tag($texte) {
 	  $result[1]=preg_replace(",(.*?)--$,s",'\\1',$atts);
 	}
 	else {
-		while (ereg('^([^[:space:]]+)[[:space:]]*=[[:space:]]*"([^"]*)"([[:space:]]+(.*))?', $atts, $regs)) {
+		while (preg_match(',^([^\s]+)[\s]*=[\s]*"([^"]*)"([\s]+(.*))?,', $atts, $regs)) {
 			$result[1][$regs[1]] = $regs[2];
 			$atts = $regs[4];
 		}
@@ -198,7 +198,7 @@ function import_tables($request, $dir) {
 
 	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
 
-	if (ereg("\.gz$", $archive)) {
+	if (strncmp(".gz", substr($archive,-3),3)==0) {
 			$size = false;
 			$taille = taille_en_octets($abs_pos);
 			$file = gzopen($archive, 'rb');

@@ -87,7 +87,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = filtrer('image_reduire', _DIR_RACINE .$vignette['fichier'], 120, 110, false, true);
 			}
 	}
-	else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
+	else if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/filtres');
