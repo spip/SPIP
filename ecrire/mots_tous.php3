@@ -88,7 +88,7 @@ if ($conf_mot>0) {
 	if ($nb_articles == 1) {
 		$texte_lie = _T('info_un_article')." ";
 	} else if ($nb_articles > 1) {
-		$texte_lie = $nb_articles articles.", ";
+		$texte_lie = _T('info_nombre_articles', array('nb_articles' => $nb_articles)) ." ";
 	} 
 	if ($nb_breves == 1) {
 		$texte_lie .= _T('info_une_breve')." ";
