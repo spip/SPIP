@@ -34,7 +34,7 @@ function charger_filtre($fonc, $default='filtre_identite_dist') {
 function filtre_identite_dist($texte){return $texte;}
 
 /**
- * http://adoc.spip.org/@chercher_filtre
+ * http://doc.spip.org/@chercher_filtre
  *
  * @param string $fonc
  * @param null $default
