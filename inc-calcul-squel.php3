@@ -1262,8 +1262,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 				list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 			';
 		}
-		if ($flag_fichier) $milieu .= "		\$$nom_var = \$logon;\n";
-		else $milieu .= "		\$$nom_var = affiche_logos(\$logon, \$logoff, \$lien, '".addslashes($align)."');\n";
+		if ($flag_fichier)
+			$milieu .= "		\$$nom_var = ereg_replace('^/?IMG/','',\$logon);\n"; // compatibilite ascendante : pas de 'IMG/'
+		else
+			$milieu .= "		\$$nom_var = affiche_logos(\$logon, \$logoff, \$lien, '".addslashes($align)."');\n";
 		break;
 
 	//

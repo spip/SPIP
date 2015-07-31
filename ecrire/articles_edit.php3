@@ -286,7 +286,7 @@ echo "<P><HR><P>";
 	else if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
 
-	if (($articles_surtitre != "non") OR strlen($surtitre) > 0) {
+	if (($articles_surtitre != "non") OR $surtitre) {
 		echo "<B>Sur-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
@@ -299,7 +299,7 @@ echo "<P><HR><P>";
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
 
-	if (($articles_soustitre != "non") OR strlen($soustitre) > 0) {
+	if (($articles_soustitre != "non") OR $soustitre) {
 		echo "<B>Sous-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
@@ -331,7 +331,7 @@ echo "<P><HR><P>";
 	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
 	fin_cadre_relief();
 
-	if (($options == "avancees" AND $articles_descriptif != "non") OR strlen($descriptif) > 0) {
+	if (($options == "avancees" AND $articles_descriptif != "non") OR $descriptif) {
 		echo "<P><B>Descriptif rapide</B>";
 		echo aide ("artdesc");
 		echo "<BR>(Contenu de l'article en quelques mots.)<BR>";
@@ -344,11 +344,11 @@ echo "<P><HR><P>";
 	}
 
 	if (substr($chapo, 0, 1) == '=') {
-		$virtuel = substr($chapo, 1, strlen($chapo));
+		$virtuel = substr($chapo, 1);
 		$chapo = "";
 	}
 
-	if ($connect_statut=="0minirezo" AND strlen($virtuel) > 0){
+	if ($connect_statut=="0minirezo" AND $virtuel){
 		echo "<p><div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>";
 		echo "<table width=100% cellspacing=0 cellpadding=0 border=0>";
 		echo "<tr><td valign='top'>";
@@ -359,7 +359,7 @@ echo "<P><HR><P>";
 		echo "</td>";
 		echo "<td width=10>&nbsp;</td>";
 		echo "<td valign='top' width='50%'>";
-		if (strlen($virtuel) == 0) $virtuel = "http://";
+		if (!$virtuel) $virtuel = "http://";
 		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>";
 		echo "<input type='hidden' name='changer_virtuel' value='oui'>";
 		echo "</td></tr></table>\n";
@@ -372,7 +372,7 @@ echo "<P><HR><P>";
 	else {
 		echo "<HR>";
 
-		if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
+		if (($articles_chapeau != "non") OR $chapo) {
 			if ($spip_ecran == "large") $rows = 8;
 			else $rows = 5;
 			echo "<B>Chapeau</B>";
@@ -415,7 +415,7 @@ echo "<P><HR><P>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
-	if (($articles_ps != "non" AND $options == "avancees") OR strlen($ps) > 0) {
+	if (($articles_ps != "non" AND $options == "avancees") OR $ps) {
 		echo "<B>Post-Scriptum</B><BR>";
 		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
 		echo $ps;
