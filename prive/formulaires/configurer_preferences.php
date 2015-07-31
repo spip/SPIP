@@ -16,9 +16,10 @@ function formulaires_configurer_preferences_charger_dist(){
 	// travailler sur des meta fraiches
 	include_spip('inc/meta');
 	lire_metas();
-
+	
 	$valeurs = array();
 	$valeurs['display_navigation'] = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])?$GLOBALS['visiteur_session']['prefs']['display_navigation']:'navigation_avec_icones';
+	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
 	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:1;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
@@ -48,6 +49,9 @@ function formulaires_configurer_preferences_traiter_dist(){
 	if ($display_navigation = _request('display_navigation')) {
 		$GLOBALS['visiteur_session']['prefs']['display_navigation'] = $display_navigation;
 	}
+	if (!is_null($display_outils = _request('display_outils'))) {
+		$GLOBALS['visiteur_session']['prefs']['display_outils'] = $display_outils;
+	}
 
 	if (intval($GLOBALS['visiteur_session']['id_auteur'])){
 		include_spip('inc/modifier');
@@ -65,7 +69,7 @@ function formulaires_configurer_preferences_traiter_dist(){
 		include_spip('inc/cookie');
 		spip_setcookie('spip_ecran', $_COOKIE['spip_ecran'] = $spip_ecran, time() + 365 * 24 * 3600);
 	}
-
+	
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
 

@@ -843,6 +843,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'label_bando_outils' => 'Barre d\'outils',
+'label_bando_outils_afficher' => 'Afficher les outils',
+'label_bando_outils_masquer' => 'Masquer les outils',
 'label_choix_langue' => 'Selectionnez votre langue',
 'label_slogan_site' => 'Slogan du site',
 'label_taille_ecran' => 'Largeur de l\'ecran',

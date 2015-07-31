@@ -7,8 +7,8 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <ul>
-	  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+		<ul>
+		  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_taille_ecran:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -38,7 +38,22 @@
 					<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
 				</div>
 			</li>
-	  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			#SET{name,display_outils}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:label_bando_outils:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|oui)checked="checked" ]value="oui" 
+					onchange="if (this.checked) jQuery('body').addClass('navigation_avec_outils').removeClass('navigation_sans_outils'); else jQuery('body').removeClass('navigation_avec_outils').addClass('navigation_sans_outils');"/>
+					<label for="[(#GET{name})]_1"><:label_bando_outils_afficher:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|non)checked="checked" ]value=""
+					onchange="if (!this.checked) jQuery('body').addClass('navigation_avec_outils').removeClass('navigation_sans_outils'); else jQuery('body').removeClass('navigation_avec_outils').addClass('navigation_sans_outils');"/>
+					<label for="[(#GET{name})]_2"><:label_bando_outils_masquer:></label>
+				</div>
+			</li>
+		  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_texte_et_icones_page:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -172,10 +187,10 @@
 					<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
 				</div>
 			</li>
-	  </ul>
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 	<script type="text/javascript">

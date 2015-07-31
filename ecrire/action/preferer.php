@@ -37,6 +37,10 @@ function action_preferer_dist() {
 		$GLOBALS['visiteur_session']['prefs']['display'] = $val;
 		$prefs_mod = true;
 	}
+	elseif ($op == 'display_outils') {
+		$GLOBALS['visiteur_session']['prefs']['display_outils'] = $val;
+		$prefs_mod = true;
+	}
 
 	if ($prefs_mod AND intval($GLOBALS['visiteur_session']['id_auteur']))
 		sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
