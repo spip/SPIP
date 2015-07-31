@@ -106,7 +106,7 @@ function gadget_rubriques() {
 			}
 			$count_lignes ++;
 			if (autoriser('voir','rubrique',$id_rubrique)){
-			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur);
+			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, 1, $largeur);
 				$i = $i - 1;
 			}
 		}
@@ -122,19 +122,18 @@ function gadget_rubriques() {
 
 
 // http://doc.spip.org/@bandeau_rubrique
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
-	static  $zdecal = 0;
+function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
 	// Limiter volontairement le nombre de sous-menus 
-	$zmax = 5;
+	$zmax = 6;
 
-	if ($zdecal == 0) $image = "secteur-12.gif";
+	if ($zdecal == 1) $image = "secteur-12.gif";
 	//else $image = "rubrique-12.gif";
 	else $image = '';
-	
+
 	if ($image)
 		$image = " background-image: url(" . http_wrapper($image) .");";
 
@@ -149,21 +148,23 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 	. "</a>\n";
 
 	if ($zdecal >= $zmax) return "\n<div>$nav</div>";
+	$zdecal++;
 
 	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
 	if (!$i) return "\n<div>$nav</div>";
 
-	$zdecal++;
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 	$idom = 'b_' . $id_rubrique;
 
-	$ret = "<div class='pos_r'\nonmouseover=\"montrer('$idom');\"\nonmouseout=\"cacher('$idom');\">"
+	$ret = "<div class='pos_r' \nonmouseover=\"montrer('$idom');\"\nonmouseout=\"cacher('$idom');\">"
 	. '<div class="brt">'
 	. $nav
 	. "</div>\n<div class='bandeau_rub' style='top: 14px; left: "
 	. $pxdecal
-	. "; z-index: 1;' id='"
+	. "; z-index: "
+	  . $zdecal
+	. ";' id='"
 	. $idom
 	. "'><table cellspacing='0' cellpadding='0'><tr><td valign='top'>";
 
@@ -183,11 +184,10 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 			}
 			if (autoriser('voir','rubrique',$id_rub)){
 				$titre_rub = supprimer_numero(typo($titre_rub));
-				$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i), $largeur);
+				$ret .= bandeau_rubrique($id_rub, $titre_rub, $zdecal, $largeur);
 				$i = $i - 1;
 			}
 		}
-	$zdecal--;
 	$ret .= "</td></tr></table>\n";
 	$ret .= "</div></div>\n";
 	return $ret;
