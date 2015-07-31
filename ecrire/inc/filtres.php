@@ -870,7 +870,8 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	if ($forcer_format) $terminaison_dest = $forcer_format;
 	
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
-	$fichier_dest = "$nom_fichier-$effet.$terminaison_dest";
+
+	$fichier_dest = "$nom_fichier-$effet";
 	
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
@@ -881,7 +882,8 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	if (ereg("\/", $fichier_dest)) {
 		$fichier_dest = substr($fichier_dest, strrpos($fichier_dest,"/")+1, strlen($fichier_dest));
 	}
-	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest;
+	$fichier_dest = md5($fichier_dest);
+	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
 	
 	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
 	$fonction_image = "image".$term_fonction_dest;
