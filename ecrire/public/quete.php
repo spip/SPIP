@@ -226,17 +226,26 @@ function quete_meta($nom, $serveur) {
 }
 
 /**
- * Retourne le logo d'un objet, eventuellement par heritage
- * Si flag <> false, retourne le chemin du fichier
- * sinon retourne un tableau de 3 elements:
- * le chemin du fichier, celui du logo de survol, l'attribut style=w/h
+ * Retourne le logo d'un objet, éventuellement par héritage
+ *
+ * Si flag != false, retourne le chemin du fichier, sinon retourne un tableau 
+ * de 3 elements :
+ * le chemin du fichier, celui du logo de survol, l'attribut style=w/h.
  *
  * @param string $type
+ *     Type de l'objet dont on veut chercher le logo.
  * @param string $onoff
+ *     Sélectionne quel(s) logo(s) : "on" pour le logo normal, "off" pour le logo de survol, ou "ON" pour l'ensemble.
  * @param int $id
+ *     Identifiant de l'objet dont on veut chercher le logo.
  * @param int $id_rubrique
+ *     Identifiant de la rubrique parente si l'on veut aller chercher son logo 
+ *     dans le cas où l'objet demandé n'en a pas.
  * @param bool $flag
+ *     Lorsque le drapeau est évalué comme "true", la fonction ne renvoie 
+ *     que le chemin du fichier, sinon elle renvoie le tableau plus complet.
  * @return array|string
+ *     Retourne soit un tableau, soit le chemin du fichier.
  */
 function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 	static $chercher_logo;
