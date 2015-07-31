@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'rinsignà per forza un situ web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'l\'amministratori di u situ',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'i scrittori',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'i visitori di u situ pùbblicu quand\'elli scrivenu un messagiu in un foru.',
 'bouton_checkbox_signature_unique_email' => 'una sola zifra per indirizzu email',
 'bouton_checkbox_signature_unique_site' => 'una sola zifra per situ Web',
 'bouton_demande_publication' => 'Dumandà a pubblicazione di st\'artìculu',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'MANDÀ UN MESSAGIU',
 'bouton_envoyer_message' => 'Messagiu definitivu : mandà',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORU È PETIZIONE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Mudificà',
 'bouton_pense_bete' => 'MEMENTU À USU PERSUNALE',
@@ -185,9 +183,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Spaziu per u nome di u plugin indefinitu',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inesistente in u schedariu di definizione',
 'erreur_plugin_version_manquant' => 'Versione di u plugin inesistente',
-
-// F
-'forum_info_original' => 'uriginale',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -392,10 +387,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		prucede à invii d\'email, per esempiu à una mailing-list di i scrittori, l\'annunciu di e dumande di 
 		pubblicazione è cunvalidazione d\'artìculi.',
 'info_fichiers_authent' => 'Schedari d\'autentificazione ".htpasswd"',
-'info_forum_administrateur' => 'foru di l\'amministratori',
-'info_forum_interne' => 'foru internu',
-'info_forum_ouvert' => 'In u spaziu privatu di u situ, hè apertu un foru à tutti i scrittori arregistrati.
-	Pudete dinù attivà un altru foru quì sottu, riservatu solu à l\'amministratori.',
 'info_forum_statistiques' => 'Statìstiche di e vìsite',
 'info_forums_abo_invites' => 'U vostru situ cumporta fori accessìbuli solu à l\'abbunati. Per ciò esiste una pàgina d\'iscrizzione in u situ pùbblicu.',
 'info_gauche_admin_effacer' => '<b>Sta pàgina hè accessìbule solu à i rispunsèvuli di u situ.</b><p> 
@@ -414,8 +405,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_gauche_numero_auteur' => 'AUTORE NÙMERU',
 'info_gauche_statistiques_referers' => 'sta pàgina dà una lista di i <i>referers</i>, vale à dì i siti chì cuntenenu lee versu u vostru situ. Vale sta 
 		lista solu per eri è oghje , chì Vene sviutata ogni 24 ore.',
-'info_gauche_suivi_forum' => 'A pàgina di <i>guardia di i fori</i> hè un arnese di gestione di u situ (è micca un spaziu di ragiunata o di scrittura). 
-		Nentru ci venenu pubblicati tutti i cuntributi di u foru pùbblicu di st\'artìculu, è vi permette a gestione di sti cuntributi.',
 'info_gauche_visiteurs_enregistres' => 'Truverete quì i visitori arregistrati in u spaziu pùbblicu di u situ (foru pè l\'abbunati).',
 'info_generation_miniatures_images' => 'Creazione di figurette da l\'imàgini',
 'info_gerer_trad' => 'Gestisce e lee di traduzzione?',
@@ -513,7 +502,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_option_accepter_visiteurs' => 'Accettà l\'iscrizzione di visitori di u situ pùbblicu',
 'info_option_faire_suivre' => 'Signalà i novi messagi à l\'autori dil\'artìculi',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifiutà l\'iscrizzione di i visitori',
-'info_option_ne_pas_faire_suivre' => 'Ùn signalà micca i novi messagi',
 'info_options_avancees' => 'OPZIONI AVANZATE ',
 'info_ortho_activer' => 'Attivà a verìfica urtugràfica',
 'info_ortho_desactiver' => 'Disattivà a verìfica urtugràfica',
@@ -778,7 +766,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Aghjunghje un participante',
 'lien_email' => 'email',
-'lien_forum_public' => 'Gestisce u foru pùbblicu di st\'artìculu',
 'lien_mise_a_jour_syndication' => 'Aghjurnà avà',
 'lien_nom_site' => 'NOME DI U SITU :',
 'lien_nouvelle_recuperation' => 'Pruvà torna di ricuarà i dati',
@@ -1149,8 +1136,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_page_controle_petition' => 'Guardia di e petizioni',
 'titre_page_delete_all' => 'sguassamentu tutale senza ritornu',
 'titre_page_documents_liste' => 'I ducumenti di e rùbbriche',
-'titre_page_forum' => 'Foru di l\'amministratori',
-'titre_page_forum_envoi' => 'Mandà un messagiu',
 'titre_page_index' => 'U vostru spaziu privatu',
 'titre_page_message_edit' => 'Scrive un messagiu',
 'titre_page_messagerie' => 'I vostri messagi',
@@ -1158,7 +1143,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_page_recherche' => 'Risultati di a ricerca @recherche@',
 'titre_page_sites_tous' => 'I siti riferiti',
 'titre_page_statistiques' => 'Statìstiche per rùbbrica',
-'titre_page_statistiques_messages_forum' => 'Messagi di i fori',
 'titre_page_statistiques_referers' => 'Statìstiche (lee versu u vostru situ)',
 'titre_page_statistiques_signatures_jour' => 'Nùmeru di zifre à u ghjornu',
 'titre_page_statistiques_signatures_mois' => 'Nùmeru di zifre à u mese',

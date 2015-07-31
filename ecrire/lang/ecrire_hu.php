@@ -63,7 +63,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'bouton_checkbox_indiquer_site' => 'Honlapot kötelezően kell kijelölni',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'a honlap adminisztrátorai',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'a szerzők',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'a nyilvános honlap látogatói, ha küldenek üzenetet a fórumba.',
 'bouton_checkbox_signature_unique_email' => 'csak egy aláírás emailcímenként',
 'bouton_checkbox_signature_unique_site' => 'csak egy aláírás honlaponként',
 'bouton_demande_publication' => 'Kérni e cikk publikálását',
@@ -75,7 +74,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'bouton_envoi_message_02' => 'ÜZENET KÜLDÉS',
 'bouton_envoyer_message' => 'Végleges üzenet: küldés',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FÓRUM ÉS ALÁÍRÁSGYŰJTÉS (Petició)', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Módosítás',
 'bouton_pense_bete' => 'EMLÉKEZTETŐ SZEMÉLYES HASZNÁLATHOZ',
@@ -183,9 +181,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'erreur_plugin_prefix_manquant' => 'Nem definiált plugin név terület',
 'erreur_plugin_tag_plugin_absent' => 'hiányzó &lt;plugin&gt; a definiáló fájlban',
 'erreur_plugin_version_manquant' => 'Hiányzó plugin verzió',
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -375,9 +370,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_exportation_base' => 'Adatbázis exportálása @archive@ felé',
 'info_facilite_suivi_activite' => 'Ahhoz, hogy könnyebben lehessen figyelemmel követni a honlap szerkesztői tevékenységét, SPIP emailen küldheti például a publikálási, ill. cikkjóváhagyási kéréseket egy szerzői levelezőlistára.',
 'info_fichiers_authent' => 'Azonosítási fájlok « .htpasswd »',
-'info_forum_administrateur' => 'adminisztrátorok fóruma',
-'info_forum_interne' => 'belső fórum',
-'info_forum_ouvert' => 'Minden regisztrált szerző részére van fórum a honlap privát részében.Lejjebb aktiválhat egy újabb fórumot, ami csak az adminisztrátoroknak lesz elérhető.',
 'info_forum_statistiques' => 'Statisztikák a látógatásokról',
 'info_forums_abo_invites' => 'A honlapja beiratkozásos fórumokat tartalmaz ; tehát a látogatók beíratkozhatnak a nyilvános részen.',
 'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai részére elérhető.</b><p> A különböző műszaki karbantartási feladatokra ad lehetőséget. Ezek közül néhany igényel olyan specifikus azonosítási eljárást, ami a honlaphoz FTP elérést követel.</p>', # MODIF
@@ -390,7 +382,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_gauche_messagerie' => 'A levelezés lehetővé tesz szerzők közti üzenetcserét, emlékeztetők (saját használatra) megtartását, vagy hírdetések megjelenítését a privát rész főoldalán (amennyiben Ön adminisztrátor).',
 'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
 'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',
-'info_gauche_suivi_forum' => 'A <i>fórumok megfigyelése</i> nevű oldal  a honlap egyik kezelési eszkőze (és nem pedig egy vitás, vagy szerzői rész). A cikk nyilvános fórumának összes hozzzászólását jeleníti meg és lehetővé teszi e hozzászólások kezelését.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Itt találhatók a honlap nyilvános részén regisztrált látogatók (beíratkozásos fórumok).',
 'info_generation_miniatures_images' => 'Bélyegképek generálása a képekről',
 'info_gerer_trad' => 'Fordítasi linkek kezelése ?',
@@ -483,7 +474,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_option_accepter_visiteurs' => 'A látogatói beíratkozás engedélyezése ',
 'info_option_faire_suivre' => 'A fórumok üzenetei továbbítása a cikkek szerzői felé',
 'info_option_ne_pas_accepter_visiteurs' => 'Látogatói beíratkozás tiltása',
-'info_option_ne_pas_faire_suivre' => 'Nem továbbítani a fórumok üzeneteit',
 'info_options_avancees' => 'B?VÍTETT OPCIÓK',
 'info_ortho_activer' => 'A helyesírás ellenőrző aktiválása',
 'info_ortho_desactiver' => 'A helyesírás ellenőrző leállítása',
@@ -743,7 +733,6 @@ ami állapotát jelzi :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Egy résztvevő hozzáadása',
 'lien_email' => 'email',
-'lien_forum_public' => 'A cikk nyilvános fórumának kezelése',
 'lien_mise_a_jour_syndication' => 'Frissítés most',
 'lien_nom_site' => 'HONLAP NEVE :',
 'lien_nouvelle_recuperation' => 'Újabb kisérlet az adatok megszerzésére',
@@ -1111,8 +1100,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_page_controle_petition' => 'Aláírásgyűjtések megfigyelése',
 'titre_page_delete_all' => 'Teljes és visszavonhatatlan törlés',
 'titre_page_documents_liste' => 'A rovatok dokumentumai',
-'titre_page_forum' => 'Adminisztrátori fórum',
-'titre_page_forum_envoi' => 'Üzenet küldés',
 'titre_page_index' => 'Az Ön privát része',
 'titre_page_message_edit' => 'Üzenet szerkesztése',
 'titre_page_messagerie' => 'Az Ön levelezése',
@@ -1120,7 +1107,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_page_recherche' => 'A @recherche@ alapú keresés eredménye',
 'titre_page_sites_tous' => 'A felvett honlapok',
 'titre_page_statistiques' => 'Rovatok szerinti statisztikák',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statisztikák (bejövő linkek)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

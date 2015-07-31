@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'indicar obligatoriamente un sitio Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administradores y administradoras del sitio',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Redactoras y redactores',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'visitantes del sitio púbico, cuando se expresan en los foros públicos.',
 'bouton_checkbox_signature_unique_email' => 'una sola firma por correo electrónico',
 'bouton_checkbox_signature_unique_site' => 'una sola firma por sitio Web',
 'bouton_demande_publication' => 'Pedir la publicación de este artículo',
@@ -73,7 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ENVIAR UN MENSAJE',
 'bouton_envoyer_message' => 'Mensaje definitivo: enviar',
 'bouton_fermer' => 'Cerrar',
-'bouton_forum_petition' => 'FORO &amp; FIRMAS', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORIO PERSONAL',
@@ -180,9 +178,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espacio de nombres del plugin no definido',
 'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; en el archivo de  definición',
 'erreur_plugin_version_manquant' => 'Falta la versión del plugin',
-
-// F
-'forum_info_original' => 'original',
 
 // H
 'htaccess_a_simuler' => 'Advertencia: la configuración de tu servidor HTTP no toma en ceunta los archivos @htaccess@. Para poder asegurar una buena seguridad, debes modificar la configuración correspondiente, o si no que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.', # MODIF
@@ -370,9 +365,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'exportación de la base hacia @archive@',
 'info_facilite_suivi_activite' => 'Para facilitar el seguimiento de la actividad editorial, SPIP puede enviar por correo electrónico, por ejemplo a un lista de redactores y redactoras, anuncios de solicitudes de publicación y de validación de artículos.',
 'info_fichiers_authent' => 'Archivos de autentificación «.htpasswd»',
-'info_forum_administrateur' => 'Foro del grupo de administración ',
-'info_forum_interne' => 'foro interno',
-'info_forum_ouvert' => 'En el espacio privado del sitio hay un foro abierto a todas las personas inscritas. A continuación, puedes activar un foro suplementario reservado a los administradores y administradoras.',
 'info_forum_statistiques' => 'Estadísticas de las visitas',
 'info_forums_abo_invites' => 'Tu sitio tiene foros para abonados; en el sitio público se invita a los visitantes a que se registren.',
 'info_gauche_admin_effacer' => '<b>A esta página sólo pueden acceder  los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento técnico. Algunas de ellas comprenden un proceso de autenticación, que requiere un acceso FTP al sitio web.</p>',
@@ -384,7 +376,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'La mensajería permite comunicarse, crear recordatorios para traer a la memoria algo o publicar anuncios (en el caso de pertenecer al grupo de administración).',
 'info_gauche_numero_auteur' => 'AUTOR O AUTORA NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta página presenta la lista de los <i>referers</i>, es decir de los sitios que contienen enlaces que llevan a tu propio sitio, sólo para ayer y hoy; esta lista se pone a cero cada 24 horas.',
-'info_gauche_suivi_forum' => 'La página de <i>seguimiento de los foros</i> es una herramienta de gestión de tu sitio (y no un espacio de diálogo o de redacción). Muestra todas las contribuciones del foro público de este artículo y te permite administrarlas.',
 'info_gauche_visiteurs_enregistres' => 'Aquí se encuentran las personas registradas en el espacio público del sitio (foros con suscripción).',
 'info_generation_miniatures_images' => 'Generación de las miniaturas de imágenes',
 'info_gerer_trad' => 'Manejar los enlaces de traducción?',
@@ -477,7 +468,6 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_option_accepter_visiteurs' => 'Aceptar la inscripción de los visitantes del sitio público',
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros a los autores y autoras de artículos',
 'info_option_ne_pas_accepter_visiteurs' => 'Rehusar la inscripción de visitantes',
-'info_option_ne_pas_faire_suivre' => 'No enviar los mensajes de los foros',
 'info_options_avancees' => 'Opciones avanzadas',
 'info_ortho_activer' => 'Activar el corrector ortográfico',
 'info_ortho_desactiver' => 'Desactivar el corrector ortográfico',
@@ -730,7 +720,6 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'lien_ajouter_mot' => 'Añadir esta palabra-clave',
 'lien_ajouter_participant' => 'Añadir un/una participante',
 'lien_email' => 'correo electrónico',
-'lien_forum_public' => 'Gestionar el foro de este artículo',
 'lien_mise_a_jour_syndication' => 'Actualizar ahora',
 'lien_nom_site' => 'Nombre del sitio',
 'lien_nouvelle_recuperation' => 'Intentar recuperar nuevamente los datos',
@@ -1069,8 +1058,6 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_page_controle_petition' => 'Seguimiento de las peticiones',
 'titre_page_delete_all' => 'Supresión total e irreversible',
 'titre_page_documents_liste' => 'Los documentos de las secciones',
-'titre_page_forum' => 'Foro de los administradores',
-'titre_page_forum_envoi' => 'Enviar un mensaje',
 'titre_page_index' => 'Tu espacio privado',
 'titre_page_message_edit' => 'Redactar un mensaje',
 'titre_page_messagerie' => 'Tu mensajería',
@@ -1078,7 +1065,6 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_page_recherche' => 'Resultados de la búsqueda @recherche@',
 'titre_page_sites_tous' => 'Los sitios referenciados',
 'titre_page_statistiques' => 'Estadísticas por sección',
-'titre_page_statistiques_messages_forum' => 'Mensajes del foro',
 'titre_page_statistiques_referers' => 'Estadísticas (enlaces entrantes)',
 'titre_page_statistiques_signatures_jour' => 'Número de firmas por día',
 'titre_page_statistiques_signatures_mois' => 'Número de firmas por mes',

@@ -63,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'la retejaj mastrumantoj',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'la redaktantoj',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'la vizitantoj de la publika retejo kiam ili sendas mesaĝon en forumon. ',
 'bouton_checkbox_signature_unique_email' => 'po unu subskribo por retpoŝtadreso',
 'bouton_checkbox_signature_unique_site' => 'po unu subskribo por retejo',
 'bouton_demande_publication' => 'Peti publikigon de tiu ĉi artikolo',
@@ -75,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'SENDI MESAĜON',
 'bouton_envoyer_message' => 'Definitiva mesaĝo: sendi',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUMO &amp; PETSKRIBO', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modifi',
 'bouton_pense_bete' => 'PROPRA MEMORIGILO',
@@ -182,9 +180,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Nedifinita nom-spaco de kromprogramo',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mankas en tiu difina dosiero',
 'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
-
-// F
-'forum_info_original' => 'originala',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
@@ -374,11 +369,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
 'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja ĉefartikola aktiveco, SPIP povas transdoni per retmesaĝoj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 'info_fichiers_authent' => 'Aŭtentokontrolaj dosieroj « .htpasswd »',
-'info_forum_administrateur' => 'forumo de la mastrumantoj',
-'info_forum_interne' => 'interna forumo',
-'info_forum_ouvert' => 'En la privata spaco de la retejo, forumo estas malfermita al ĉiuj
-  registritaj redaktantoj. Vi povas, ĉi-sube, aktivigi
-  plian forumon, rezervitan nur al mastrumantoj.',
 'info_forum_statistiques' => 'Statistikoj pri vizitoj',
 'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono ; vizitantoj estas invititaj al registriĝo ĉe la publika retejo.',
 'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
@@ -392,7 +382,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gauche_messagerie' => 'La mesaĝilo ebligas al vi interŝanĝi mesaĝojn inter aŭtoroj, konservi memorigilojn (por via propra uzado) aŭ afiŝi anoncojn ĉe la hejmpaĝo de la privata spaco (se vi estas mastrumanto).',
 'info_gauche_numero_auteur' => 'AŬTORA NUMERO',
 'info_gauche_statistiques_referers' => 'Tiu paĝo prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hieraŭ kaj hodiaŭ : tiu listo estas prastatigita ĉiujn 24 horojn.',
-'info_gauche_suivi_forum' => 'La paĝo pri <i>superkontrolo de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo aŭ redaktejo). Ĝi afiŝas ĉiujn kontribuaĵojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribuaĵojn.',
 'info_gauche_visiteurs_enregistres' => 'Vi trovos ĉi tie la vizitantojn registritajn
  en la publika spaco de la retejo (forumoj laŭ abono).',
 'info_generation_miniatures_images' => 'Bildoj-miniaturigo',
@@ -486,7 +475,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_option_accepter_visiteurs' => 'Permesi registriĝojn de vizitantoj el la publika spaco',
 'info_option_faire_suivre' => 'Plusendi la mesaĝojn de la forumoj al la aŭtoroj de la artikoloj',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifuzi registriĝon de vizitantoj',
-'info_option_ne_pas_faire_suivre' => 'Ne plusendi la mesaĝojn de la forumoj',
 'info_options_avancees' => 'PLENDETALAJ AGORDOJ',
 'info_ortho_activer' => 'Aktivigi la ortografian kontrolilon',
 'info_ortho_desactiver' => 'Malaktivigi la ortografian kontrolilon',
@@ -748,7 +736,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
 'lien_email' => 'retpoŝtadreso',
-'lien_forum_public' => 'Mastrumi la publikan forumon de tiu ĉi artikolo',
 'lien_mise_a_jour_syndication' => 'Ĝisdatigi nun',
 'lien_nom_site' => 'NOMO DE LA RETEJO:',
 'lien_nouvelle_recuperation' => 'Provi novan reakiron de la datenoj',
@@ -1142,8 +1129,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_controle_petition' => 'Kontrolo de petskriboj',
 'titre_page_delete_all' => 'tuta kaj malfarebla forviŝo',
 'titre_page_documents_liste' => 'La dokumentoj de la rubrikoj',
-'titre_page_forum' => 'Forumo de la mastrumantoj',
-'titre_page_forum_envoi' => 'Sendi mesaĝon',
 'titre_page_index' => 'Via privata spaco',
 'titre_page_message_edit' => 'Skribi mesaĝon',
 'titre_page_messagerie' => 'Via mesaĝilo',
@@ -1151,7 +1136,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_recherche' => 'Serĉrezulto @recherche@',
 'titre_page_sites_tous' => 'La referencigitaj retejoj',
 'titre_page_statistiques' => 'Statistikoj laŭ rubrikoj',
-'titre_page_statistiques_messages_forum' => 'Forumaj mesaĝoj',
 'titre_page_statistiques_referers' => 'Statistikoj (eniraj ligoj)',
 'titre_page_statistiques_signatures_jour' => 'Subskribnombro en tago',
 'titre_page_statistiques_signatures_mois' => 'Subskribnombro en monato',

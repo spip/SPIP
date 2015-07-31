@@ -61,7 +61,6 @@ Ez balidatu inportazio galdera hau.
 'bouton_checkbox_indiquer_site' => 'Web toki bat derrigorrezadierazi',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'gunearen administratzaileak',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Idazlariak',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'toki publikoaren bisitariak, foro publikoetan hitz egiten dutenean.',
 'bouton_checkbox_signature_unique_email' => 'Posta elektroniko bakoitzeko sinadura bana',
 'bouton_checkbox_signature_unique_site' => 'sinadura bakar bat Web gune bakoitzako ',
 'bouton_demande_publication' => 'Artikulu honen argitaratzea eskatu',
@@ -73,7 +72,6 @@ Ez balidatu inportazio galdera hau.
 'bouton_envoi_message_02' => 'MEZUBAT IGORRI',
 'bouton_envoyer_message' => 'Behin-betiko mezua: igorri',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'Foroa eta eskaera', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Aldatu',
 'bouton_pense_bete' => 'OROIGARRI PERTSONALA',
@@ -180,9 +178,6 @@ Ez balidatu inportazio galdera hau.
 'erreur_plugin_prefix_manquant' => 'Plugin-aren izendatze eremua ez da definitua',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; eskas definizioen fitxategian',
 'erreur_plugin_version_manquant' => 'Plugin-aren bersioa eskas',
-
-// F
-'forum_info_original' => 'jatorrizkoa',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -368,10 +363,6 @@ Ez balidatu inportazio galdera hau.
 'info_exportation_base' => 'basearen esportazioa @archive@-ra',
 'info_facilite_suivi_activite' => 'Jarduera editorialaren jarraipena errazteko, SPIP-ekkorreo elektronikoaren bidez bidali ahal dizkio, adibidez erredaktoreen zerrenda bati,artikuluen baliaztapen eta argitarapenen eskaeren iragarkiak.',
 'info_fichiers_authent' => '« .htpasswd » autentifikazio-fitxategiak',
-'info_forum_administrateur' => 'Administrazio taldearen foroa ',
-'info_forum_interne' => 'Barruko forua',
-'info_forum_ouvert' => 'Gunearen eremu pribatuan,erregistratuta dauden idazlari guztientzako foro bat zabalik dago.
- Behean, foro gehigarribat aktiba dezakezu, bakarrik administratzaileentzako erreserbatuta.',
 'info_forum_statistiques' => 'Bisiten estatistikak',
 'info_forums_abo_invites' => 'Zure guneak harpidetza beharrezkoa egiten dituen foroak hartzen ditu ; beraz, bisitariak gune publikoan erregistratzera gonbidatuta daude.',
 'info_gauche_admin_effacer' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.', # MODIF
@@ -384,7 +375,6 @@ Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; 
 'info_gauche_messagerie' => 'Mezularitzak idazlarien artean mezuak trukatzen,abisuak kontserbatzen (zure erabilera pertsonalarentzat), edo eremu pribatuko orri nagusian iragarpenak jartzen (administratzailea bazara) uzten dizu.',
 'info_gauche_numero_auteur' => 'IDAZLEA ',
 'info_gauche_statistiques_referers' => 'Orri honetan referers-en zerrenda dago, hau da, zure web-gunera eramaten dituztenloturak dauzkaten tokien zerrenda, bakarrik atzo eta gaurko; zerrenda honek egunerozerora jartzen da.',
-'info_gauche_suivi_forum' => 'Foroak jarraitzeko orrialdea zureguneko kudeaketa-tresna bat da (eta ez eztabaida edo idazketa-eremu bat). Artikulu honen foro publikoko kontribuzio guztiak bistaratzen ditu eta kontribuzio hauek administratzen uzten dizu.',
 'info_gauche_visiteurs_enregistres' => 'Hemen guneko eremu publikoan erregistratutako bisitariak aurkituko dituzu (foroak aurretiko harpidetzaz).',
 'info_generation_miniatures_images' => 'Irudien miniatura-sorkuntza',
 'info_gerer_trad' => 'Itzulpen-estekak kudeatu?',
@@ -476,7 +466,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_option_accepter_visiteurs' => 'Gune publikoko bisitarien inskripzioa onartu',
 'info_option_faire_suivre' => 'Foroetako mezuak artikuluen idazleei jarraituak izateaegin',
 'info_option_ne_pas_accepter_visiteurs' => 'Bisitarien inskripzioa ezetsi',
-'info_option_ne_pas_faire_suivre' => 'Ez bidali foroetako mezuak',
 'info_options_avancees' => 'Aukera aurreratuak',
 'info_ortho_activer' => 'Zuzentzaile ortografikoa aktibatu',
 'info_ortho_desactiver' => 'Zuzentzaile ortografikoa desaktibatu',
@@ -735,7 +724,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
 'lien_email' => 'posta elektronikoa',
-'lien_forum_public' => 'Artikulu honen foroa kudeatu',
 'lien_mise_a_jour_syndication' => 'Orain gaurkotu',
 'lien_nom_site' => 'Lekuaren izena',
 'lien_nouvelle_recuperation' => 'Datuak berreskuratzen berriro saiatu',
@@ -1061,8 +1049,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_controle_petition' => 'Eskaeren jarraipena',
 'titre_page_delete_all' => 'Itzuliezin eta erabateko ezabapena',
 'titre_page_documents_liste' => 'Atalendokumentuak',
-'titre_page_forum' => 'Administratzaileen eztabaida-lekua',
-'titre_page_forum_envoi' => 'Mezu bat bidali',
 'titre_page_index' => 'Zure gune pribatua',
 'titre_page_message_edit' => 'Mezu bat idatzi',
 'titre_page_messagerie' => 'Zure mezularitza',
@@ -1070,7 +1056,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_recherche' => 'Bilaketaren emaitzak @recherche@',
 'titre_page_sites_tous' => 'Erreferentziatutako tokiak',
 'titre_page_statistiques' => 'Atalez atal estatistikak',
-'titre_page_statistiques_messages_forum' => 'Foroko mezuak',
 'titre_page_statistiques_referers' => 'Estatistikak (sartu direnloturak)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

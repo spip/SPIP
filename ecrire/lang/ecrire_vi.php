@@ -59,7 +59,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_checkbox_indiquer_site' => 'Qúy vị phải ghi tên một trang Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'quản trị viên',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'tác giả',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'Độc giả lúc gửi góp ý trên diễn đàn.',
 'bouton_checkbox_signature_unique_email' => 'Chỉ một chữ ký cho một địa chỉ email ',
 'bouton_checkbox_signature_unique_site' => 'Chỉ một chữ ký cho một địa chỉ Web',
 'bouton_demande_publication' => 'Đề nghị bài này cho ban biên tập',
@@ -71,7 +70,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_envoi_message_02' => 'GỬI THƯ TÍN',
 'bouton_envoyer_message' => 'Tin thư đầy đủ: Gửi đi ',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'DIỄN ĐÀN &amp; THỈNH NGUYỆN THƯ', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Thay đổi',
 'bouton_pense_bete' => 'GHI NHỚ CÁ NHÂN',
@@ -178,9 +176,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'erreur_plugin_prefix_manquant' => 'Plugin\'s namespace undefined', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file', # NEW
 'erreur_plugin_version_manquant' => 'Missing version of the plugin', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -368,9 +363,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_exportation_base' => 'Đem database ra ngoài vào @archive@',
 'info_facilite_suivi_activite' => 'Để làm nhẹ công việc của Ban Biên Tập, SPIP gửi bằng email các thông báo xin phép đăng và chấp thuận bài vở (đến mailing list của chủ bút chẳng hạn) ',
 'info_fichiers_authent' => 'Hồ sơ xác nhận ".htpasswd"',
-'info_forum_administrateur' => 'Diễn đàn quản trị viên',
-'info_forum_interne' => 'Diễn đàn nội bộ',
-'info_forum_ouvert' => 'Trong vùng riêng, một diễn đàn được mở ra cho mọi chủ bút đã có ghi danh. Bạn có thể tắt/mở một diễn đàn phụ trội dành riêng cho các quản trị viên.',
 'info_forum_statistiques' => 'Thống kê thăm viếng',
 'info_forums_abo_invites' => 'Trang web có các diễn đàn cần ghi danh; khách có thể vào ghi danh ở trang công cộng.',
 'info_gauche_admin_effacer' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số việc quản trị kỹ thuật. Một số việc đòi hỏi phải có chứng nhận đặc biệt, và cần phải dùng FTP để vào trang web.</p>', # MODIF
@@ -381,7 +373,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_gauche_messagerie' => 'Phương tiện thư tín cho phép bạn trao đổi thư tín giữa các chủ bút với nhau, lưu trữ bản ghi nhớ (để sử dụng riêng) hoặc hiển thị thông báo trên trang nhà của vùng riêng (nếu bạn là người quản trị).',
 'info_gauche_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ:',
 'info_gauche_statistiques_referers' => 'Trang này liệt kê danh sách <i>referrers</i>, tức là các trang có chứa điểm nối đến trang của bạn, chỉ cho hôm nay mà thôi: thật ra danh sách này được soạn mỗi 24 giờ.',
-'info_gauche_suivi_forum' => 'Trang <i>Quản trị Diễn Đàn</i> là một phương tiện quản trị của trang web (không dùng để trao đổi hay sửa đổi). Trang này liệt kê tất cả mọi thư tín trong diễn đàn công cộng của bài này và cho phép bạn quản trị những thư tín này.',
 'info_gauche_visiteurs_enregistres' => 'Danh sách những người khách ghi danh trong vùng công cộng của trang web (theo diễn đàn)',
 'info_generation_miniatures_images' => 'Hình mẫu xem trước (thumbnail)',
 'info_gerer_trad' => 'Quản trị phần nối dịch thuật?',
@@ -473,7 +464,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_option_accepter_visiteurs' => 'Cho phép khách ghi danh từ trang công cộng',
 'info_option_faire_suivre' => 'Chuyển thư tín trong diễn đàn đến tác giả bài',
 'info_option_ne_pas_accepter_visiteurs' => 'Từ chối khách ghi danh',
-'info_option_ne_pas_faire_suivre' => 'Đừng chuyển thư tín của diễn đàn',
 'info_options_avancees' => 'ĐẶC TÍNH PHỤ TRỘI',
 'info_ortho_activer' => 'Mở lên cơ phận xét lỗi chính tả',
 'info_ortho_desactiver' => 'Tắt cơ phận xét lỗi chính tả',
@@ -727,7 +717,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Thêm một tham dự viên',
 'lien_email' => 'email',
-'lien_forum_public' => 'Quản trị diễn đàn công của bài này',
 'lien_mise_a_jour_syndication' => 'Cập nhật bây giờ',
 'lien_nom_site' => 'TÊN WEBSITE:',
 'lien_nouvelle_recuperation' => 'Thử tìm cách thu hồi dữ kiện',
@@ -1053,8 +1042,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_controle_petition' => 'Tiếp theo Thỉnh nguyện thư',
 'titre_page_delete_all' => 'xóa luôn và không lấy lại được',
 'titre_page_documents_liste' => 'Tài liệu của đề mục',
-'titre_page_forum' => 'Diễn đàn cho các quản lý',
-'titre_page_forum_envoi' => 'Gửi thư tín',
 'titre_page_index' => 'Vùng riêng của bạn',
 'titre_page_message_edit' => 'Viết thư tín',
 'titre_page_messagerie' => 'Thư tín của bạn',
@@ -1062,7 +1049,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_recherche' => 'Kết quả tìm kiếm @recherche@',
 'titre_page_sites_tous' => 'Trang nối kết',
 'titre_page_statistiques' => 'Thống kê theo từng đề mục',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Thống kê (các điểm nối vào)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

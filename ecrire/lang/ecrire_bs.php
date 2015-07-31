@@ -56,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'obavezno naznaciti jednu web stranicu',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratori stranice',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'urendici',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'posjetitelji stranice za publiku, ako postavljaju poruku u  forum.',
 'bouton_checkbox_signature_unique_email' => 'samo jedan potpis po e-mail adresi',
 'bouton_checkbox_signature_unique_site' => 'samo jedan potpis po web stranici',
 'bouton_demande_publication' => 'Trazi publikaciju ovog clanka',
@@ -68,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'POSALJI PORUKU',
 'bouton_envoyer_message' => 'Definitivna poruka: posalji',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'PETICIJA & FORUM', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Izmijeni',
 'bouton_pense_bete' => 'LICNA BILJESKA',
@@ -175,9 +173,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
 'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -363,9 +358,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'eksportuj baze u @archive@',
 'info_facilite_suivi_activite' => 'U svrhu posmatranja  editorijalne aktivnosti stranice, SPIP moze elektronskom postom  (npr. mailing listom urednika) proslijedjivati najave zahtijeva za publikaciju i ovjeru clanaka.',
 'info_fichiers_authent' => 'Dokument autentifikacije « .htpasswd »',
-'info_forum_administrateur' => 'forum administratora',
-'info_forum_interne' => 'interni forum',
-'info_forum_ouvert' => 'Forum na privatnoj stranici je otvoren svim regristrovanim urednicima. Ispod mozete aktivirati dodatni forum, koji je rezervisan samo za administratore.',
 'info_forum_statistiques' => 'Statistike posjeta',
 'info_forums_abo_invites' => 'Vasa stranica obudhvata i forume za clanove; posjetioci se pozivaju na registraciju u javnom  prostoru stanice.',
 'info_gauche_admin_effacer' => '<b>Ova strana je dostupna samo  osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
@@ -376,7 +368,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Servis za slanje poruka vam omogucuje razmjenu poruka medju piscima, cuvanje biljeske (za licnu upotrebu) ili, ako ste administrator, postavljanje najava na pocetnu stranicu u privatnom prostoru.',
 'info_gauche_numero_auteur' => 'BROJ AUTORA',
 'info_gauche_statistiques_referers' => 'Ova strana predstavlja  listu <i>referenci</i>, sto znaci stranice koje sadrze linkove  sa vasom licnom stranicom, ali samo za jucer i danas; ova lista se vraca na nulu svaka 20 sata.',
-'info_gauche_suivi_forum' => 'Strana <i>pracenja foruma</i> je alatka za rukovodjene vasom stranicom (ne prostor za diskusiju  i redakciju). Ona izlistava sve doprinose javnog foruma ovog clanka i dozvoljava rukovodjenje tim doprinosima.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Ovdje mozete pronaci posjetioce koji su registrovani na javnoj stranici (forumi za clanove).',
 'info_generation_miniatures_images' => 'Obradjivanje minijaturnih slika',
 'info_gerer_trad' => 'Zelite li ukljuciti linkove za prevod?',
@@ -467,7 +458,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Prihvati upisivanje posjetioca na javnoj stranici',
 'info_option_faire_suivre' => 'Omoguci autorima clanaka pracenje poruka na forumima',
 'info_option_ne_pas_accepter_visiteurs' => 'Odbij upisivanje posjetioca',
-'info_option_ne_pas_faire_suivre' => 'Onemoguci prosljedjivanje poruka na forumima',
 'info_options_avancees' => 'NAPREDNE OPCIJE',
 'info_ortho_activer' => 'Aktiviraj ortografsku provjeru',
 'info_ortho_desactiver' => 'Dezaktiviraj ortografsku provjeru',
@@ -720,7 +710,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Dodaj ucesnika',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Uredi javni forum ovog clanka',
 'lien_mise_a_jour_syndication' => 'Osvjezi sada',
 'lien_nom_site' => 'IME STRANICE:',
 'lien_nouvelle_recuperation' => 'Pokusaj ponovno dobavljanje podataka',
@@ -1033,8 +1022,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_page_controle_petition' => 'Pracenje peticija',
 'titre_page_delete_all' => 'cjelokupno i nepovratno otklanjanje',
 'titre_page_documents_liste' => 'Dokumenti rubrike',
-'titre_page_forum' => 'Forum administratora',
-'titre_page_forum_envoi' => 'Posalji poruku',
 'titre_page_index' => 'Vas privatni prostor',
 'titre_page_message_edit' => 'Napisi poruku',
 'titre_page_messagerie' => 'Vas transfer poruka',
@@ -1042,7 +1029,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_page_recherche' => 'Rezultati pretrage @recherche@',
 'titre_page_sites_tous' => 'Preporucene stranice',
 'titre_page_statistiques' => 'Statistike po rubrikama',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistike (linkovi unosenja)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

@@ -57,7 +57,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'אתה חייב לרשום שם של אתר אינטרנט',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'מנהלי האתר',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'עורכים',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'אורחים של אתר ציבורי כשהם מוסיפים הודעה בפורום ',
 'bouton_checkbox_signature_unique_email' => 'רק חתימה אחת לדוא"ל אחד',
 'bouton_checkbox_signature_unique_site' => 'רק חתימה אחת לאתר אינטרנט אחד',
 'bouton_demande_publication' => 'בקשה להופיע את המאמר',
@@ -69,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'שליחת הודעה',
 'bouton_envoyer_message' => 'הודעה סופית : שלח',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'פורום ועצומה', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'תיקון',
 'bouton_pense_bete' => 'תזכיר אישי',
@@ -176,9 +174,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'אזור קריאת שם PLUGIN לא מוגדר',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; חסר בקובץ ההגדרה',
 'erreur_plugin_version_manquant' => 'גרסת PLUGIN חסרה',
-
-// F
-'forum_info_original' => 'מקורי',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -373,11 +368,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		à une mailing-list des rédacteurs, l\'annonce des demandes de
 		publication et des validations d\'articles.', # NEW
 'info_fichiers_authent' => '".htpasswd" אישור קובץ',
-'info_forum_administrateur' => 'פורום אחראים',
-'info_forum_interne' => 'פורום פנימי',
-'info_forum_ouvert' => 'Dans l\'espace privé du site, un forum est ouvert à tous
-		les rédacteurs enregistrés. Vous pouvez, ci-dessous, activer un
-		forum supplémentaire, réservé aux seuls administrateurs.', # NEW
 'info_forum_statistiques' => 'סטטיסטיקות מבקרים',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement ; les visiteurs sont donc invités à s\'enregistrer sur le site public.', # NEW
 'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu à un processus d\'authentification spécifique, qui exige d\'avoir un accès FTP au site Web.</p>', # MODIF
@@ -393,7 +383,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_gauche_messagerie' => 'התכתבות מאפשרת לך להחליף הודעות בין עורכים, כדי לשמר תזכירים (לשימושך האישי) או להציג מודעות בדף הבית של (.האזור הפרטי (אם אתה אחראי',
 'info_gauche_numero_auteur' => ':מספר מחבר',
 'info_gauche_statistiques_referers' => 'הדף הזה מציג רשימה של <i>referrers</i>, כלומר האתר מכיל קישורים לאתרך, רק להיום: למעשה הרשימה הזאת מתעדכנת כל 24 שעות.',
-'info_gauche_suivi_forum' => 'ה<i>forums follow-up</i> דף הוא לא אמצעי ניהול של אתרך (לא אזור דיון או עריכה). הוא מציג את כל התרומות של הפורום הציבורי של המאמר הזה ומאפשר לך לנהל את התרומות האלה.',
 'info_gauche_visiteurs_enregistres' => 'Vous trouverez ici les visiteurs enregistrés
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => 'יוצר תמונות ממוזערות',
@@ -493,7 +482,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_option_accepter_visiteurs' => 'Accepter l\'inscription de visiteurs du site public', # NEW
 'info_option_faire_suivre' => 'להעביר הלאה הודעות פורומים למחברי המאמרים',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuser l\'inscription des visiteurs', # NEW
-'info_option_ne_pas_faire_suivre' => 'אל תעביר הלאה הודעות פורומים',
 'info_options_avancees' => 'אפשרויות מתקדמות',
 'info_ortho_activer' => 'Activer le vérificateur d\'orthographe', # NEW
 'info_ortho_desactiver' => 'Désactiver le vérificateur d\'orthographe', # NEW
@@ -757,7 +745,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajouter un participant', # NEW
 'lien_email' => 'דואר אלקטרוני',
-'lien_forum_public' => 'Gérer le forum public de cet article', # NEW
 'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
 'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
@@ -1152,8 +1139,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_controle_petition' => 'Suivi des pétitions', # NEW
 'titre_page_delete_all' => 'suppression totale et irréversible', # NEW
 'titre_page_documents_liste' => 'Les documents des rubriques', # NEW
-'titre_page_forum' => 'Forum des administrateurs', # NEW
-'titre_page_forum_envoi' => 'Envoyer un message', # NEW
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
@@ -1161,7 +1146,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
 'titre_page_sites_tous' => 'Les sites référencés', # NEW
 'titre_page_statistiques' => 'Statistiques par rubriques', # NEW
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)', # NEW
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

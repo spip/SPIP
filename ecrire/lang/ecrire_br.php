@@ -60,7 +60,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'bouton_checkbox_indiquer_site' => 'merkañ ul lec\'hienn web dre ret',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'merourien ar lec\'hienn',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'ar skridaozerien',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'gweladennerien al lec\'hienn foran pa bostont ur gemennadenn er forom',
 'bouton_checkbox_signature_unique_email' => 'ur sinadur hepken dre chomlec\'h postel ',
 'bouton_checkbox_signature_unique_site' => 'ur sinadur hepken dre lec\'hienn Web',
 'bouton_demande_publication' => 'Goulenn ma vo embannet ar pennad-mañ',
@@ -72,7 +71,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'bouton_envoi_message_02' => 'KAS UR GEMENNADENN',
 'bouton_envoyer_message' => 'Kemennadenn ziwezhañ : kas',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOROM HA SINADEG', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Kemmañ',
 'bouton_pense_bete' => 'NOTENNIG EÑVORIÑ PERSONEL',
@@ -180,9 +178,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'erreur_plugin_prefix_manquant' => 'N\'eo ket termenet tachenn envel an adveziant',
 'erreur_plugin_tag_plugin_absent' => '&lt;Adveziant&gt; ezvezant er restr termeniñ',
 'erreur_plugin_version_manquant' => 'Mankout a ra stumm an adveziant',
-
-// F
-'forum_info_original' => 'orin',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -375,10 +370,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
   d\'ul roll-skignañ enni ar skridaozerien da skouer,
   ar goulennoù embann ha kadarnaat ar pennadoù.',
 'info_fichiers_authent' => 'Restroù gwiriekaat « .htpasswd »',
-'info_forum_administrateur' => 'forom ar verourien',
-'info_forum_interne' => 'forom diabarzh',
-'info_forum_ouvert' => 'E lodenn brevez al lec\'hienn ez eus ur forom digor d\'an holl skridaozerien enrollet.
-  Amañ dindan e c\'hellit dibab ma vo savet ur forum evit ar verourien hepken ivez.',
 'info_forum_statistiques' => 'Stadegoù gweladenniñ',
 'info_forums_abo_invites' => 'Foromoù dre goumanant zo war ho lec\'hienn ; pedet e vez ar weladennerien d\'en em enrollañ war lodenn foran al lec\'hienn neuze.',
 'info_gauche_admin_effacer' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-mañ.</b><p>Warni e reer al labourioù-kempenn teknikel. Evit traoù zo ez eus ezhomm eus un argerzh testeniekaat dibar, a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
@@ -391,7 +382,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_gauche_messagerie' => 'Dre ar postelerezh e c\'hellit eskemm kemennadennoù gant skridaozerien all, derc\'hel notennigoù-eñvor, pe, ma\'z oc\'h merour, skignañ kemennoù war bajenn degemer al lodenn brevez.',
 'info_gauche_numero_auteur' => 'SKRIDAOZER NIVERENN',
 'info_gauche_statistiques_referers' => 'War ar bajenn-mañ emañ roll ar <i>referers</i>, da lavaret eo al lec\'hiennoù enno liammoù a gas davet ho lec\'hienn deoc\'h, evit dec\'h hag hiziv hepken. Riñset e vez ar roll-mañ bemdez.',
-'info_gauche_suivi_forum' => 'Pajenn <i>heuliañ ar foromoù</i> a dalvez da verañ ho lec\'hienn, ha ket da dabutal pe da skridaozañ. Warni emañ an holl evezhiadennoù graet war ar forom foran diwar-benn ar pennad-mañ, deoc\'h da c\'hallout o merañ.',
 'info_gauche_visiteurs_enregistres' => 'Amañ emañ ar weladennerien enrollet evit gallout kemer perzh e foromoù dre goumanant lodenn foran al lec\'hienn.',
 'info_generation_miniatures_images' => 'Krouiñ skeudennoùigoù',
 'info_gerer_trad' => 'Merañ al liammoù treiñ ?',
@@ -485,7 +475,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_option_accepter_visiteurs' => 'Aotren enrolladennoù gweladennerien al lec\'hienn foran',
 'info_option_faire_suivre' => 'Lakaat skridaozerien ar pennadoù da heuliañ evezhiadennoù ar forom',
 'info_option_ne_pas_accepter_visiteurs' => 'Nac\'hañ enrolladennoù ar weladennerien',
-'info_option_ne_pas_faire_suivre' => 'Arabat heuliañ kemennadennoù ar foromoù',
 'info_options_avancees' => 'DIBARZHIOÙ PISHOC\'H',
 'info_ortho_activer' => 'Ober gant an difazier reizhskrivañ',
 'info_ortho_desactiver' => 'Na implijout an difazier',
@@ -747,7 +736,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ouzhpennañ ur perzhiad',
 'lien_email' => 'postel',
-'lien_forum_public' => 'Merañ forom foran ar pennad-mañ',
 'lien_mise_a_jour_syndication' => 'Hizivaat bremañ',
 'lien_nom_site' => 'ANV AL LEC\'HIENN :',
 'lien_nouvelle_recuperation' => 'Klask adtapout an titouroù en-dro',
@@ -1101,8 +1089,6 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_page_controle_petition' => 'Heuliañ ar sinadegoù',
 'titre_page_delete_all' => 'diverket e vo pep tra, ne vo ket tu da zont war-gil',
 'titre_page_documents_liste' => 'Teuliadoù ar rubrikennoù',
-'titre_page_forum' => 'Forom ar verourien',
-'titre_page_forum_envoi' => 'Kas ur gemennadenn',
 'titre_page_index' => 'Ho lodenn brevez',
 'titre_page_message_edit' => 'Skrivañ ur gemennadenn',
 'titre_page_messagerie' => 'Ho postelerezh',
@@ -1110,7 +1096,6 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_page_recherche' => 'Disoc\'hoù an enklask @recherche@',
 'titre_page_sites_tous' => 'Al lec\'hiennoù menegeret',
 'titre_page_statistiques' => 'Stadegoù dre rubrikennoù',
-'titre_page_statistiques_messages_forum' => 'Kemennadennoù forom',
 'titre_page_statistiques_referers' => 'Stadegoù (liammoù davet al lec\'hienn-mañ)',
 'titre_page_statistiques_signatures_jour' => 'Niver a sinadurioù bemdez',
 'titre_page_statistiques_signatures_mois' => 'Niver a sinadurioù bep miz',

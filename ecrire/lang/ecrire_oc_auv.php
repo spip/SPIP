@@ -58,7 +58,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_checkbox_indiquer_site' => 'indicar obligatoriament un sit web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administrators dau sit',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'los redactors',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'los vesitaires dau sit public quand mandan un messatge dins un forum.',
 'bouton_checkbox_signature_unique_email' => 'Mas una signatura per adreiça e-mail',
 'bouton_checkbox_signature_unique_site' => 'Mas una signatura per sit web',
 'bouton_demande_publication' => 'Demandar la publicacion d\'aqueste article',
@@ -70,7 +69,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM E PETICION', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMENTO (D\'USATGE PERSONAU)',
@@ -179,9 +177,6 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
 'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -369,9 +364,6 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_exportation_base' => 'exportacion de la basa vèrs @archive@',
 'info_facilite_suivi_activite' => 'Per facilitar lo segut de l\'activitat editoriala dau sit, SPIP vos pòt fornir per e-mail, per exemple a una lista de corrèir daus redactors, l\'anonci de las demandas de publicacion e de las validacions d\'articles.',
 'info_fichiers_authent' => 'Fichèirs d\'autentificacion « .htpasswd »',
-'info_forum_administrateur' => 'forum daus administrators',
-'info_forum_interne' => 'forum intèrne',
-'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es bade vèrs totes los redactors registrats. Podètz, çai sos, activar un forum suplementari, reservat mas aus administrators.',
 'info_forum_statistiques' => 'Estadisticas de las vesitas',
 'info_forums_abo_invites' => 'Vòstre sit web ofrís de forums per los abonats; dins lo sit public los vesitaires son convidats a se registrar.',
 'info_gauche_admin_effacer' => '<b>A aquela pagina, mas los responsables dau sit lai pòdon accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. Quauques unas implican un procès d\'autentificacion especific, que necessita un accès FTP vèrs lo sit web.</p>', # MODIF
@@ -382,7 +374,6 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_gauche_messagerie' => 'La messatjariá vos permet d\'eschamjar de messatges entre redactors, de servar de mementos (per vòstre usatge personau) o d\'afichar d\'anoncis sus la pagina d\'acuèlh de l\'espaci privat (se sètz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUMÈRO',
 'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista daus <i>referidors</i>, quò vòu dire daus sits que contenon de liams que menan vèrs vòstre quite sit, mas unicament per ièr e anuèi lo jorn: aquela lista s\'actualiza chasca 24 oras.',
-'info_gauche_suivi_forum' => 'La pagina de <i>segut daus forums</i> es un espleit de gestion de vòstre sit (mas z-es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aquí los vesitaires registrats
  dins l\'espaci public dau sit (forums amb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas daus imatges',
@@ -482,7 +473,6 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion daus vesitaires dau sit public',
 'info_option_faire_suivre' => 'Far sègre los messatges daus forums aus autors daus articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de vesitaires',
-'info_option_ne_pas_faire_suivre' => 'Pas far sègre los messatges daus forums',
 'info_options_avancees' => 'OPCIONS AVANÇADAS',
 'info_ortho_activer' => 'Activar lo verificador d\'ortografia',
 'info_ortho_desactiver' => 'Desactivar lo verificador d\'ortografia',
@@ -743,7 +733,6 @@ una color indica lor estat:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Apondre un participant',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Gerir lo forum public d\'aquel article',
 'lien_mise_a_jour_syndication' => 'Actualizar ara',
 'lien_nom_site' => 'NOM DAU SIT:',
 'lien_nouvelle_recuperation' => 'Assajar una novèla recuperacion de las donadas',
@@ -1144,8 +1133,6 @@ s\'avètz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_page_controle_petition' => 'Segut de las peticions',
 'titre_page_delete_all' => 'supression totala e irreversibla',
 'titre_page_documents_liste' => 'Los documents de las rubricas',
-'titre_page_forum' => 'Forum per los administrators',
-'titre_page_forum_envoi' => 'Mandar un messatge',
 'titre_page_index' => 'Vòstre espaci privat',
 'titre_page_message_edit' => 'Redigir un messatge',
 'titre_page_messagerie' => 'Vòstra messatjariá',
@@ -1153,7 +1140,6 @@ s\'avètz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_page_recherche' => 'Resultats de la cèrcha @recherche@',
 'titre_page_sites_tous' => 'Los sits referenciats',
 'titre_page_statistiques' => 'Estadisticas per rubricas',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Estadisticas (liams entrants)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

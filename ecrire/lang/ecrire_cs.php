@@ -63,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Musíte zadat název webu',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'správci webu',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktoři',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'návštěvníci veřejného webu, když posílají zprávu do diskusní skupiny.',
 'bouton_checkbox_signature_unique_email' => 'pouze jeden podpis na jednu elektronickou adresu',
 'bouton_checkbox_signature_unique_site' => 'pouze jeden podpis na jeden web',
 'bouton_demande_publication' => 'Požádat o zveřejnění článku',
@@ -75,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ODESLAT ZPRÁVU',
 'bouton_envoyer_message' => 'Konečná zpráva: odeslat',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FÓRUM A PETICE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Změnit',
 'bouton_pense_bete' => 'INTERNÍ POZNÁMKA',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Jmenný prostor pluginu není definovaný',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; chybí v definičním souboru',
 'erreur_plugin_version_manquant' => 'Chybí informace o verzi pluginu',
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -380,11 +375,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a o schválení článků. Tím se ulehčí sledování publikační činnosti
   na webu. ',
 'info_fichiers_authent' => 'Autentifikační soubor ".htpasswd"',
-'info_forum_administrateur' => 'diskusní skupina správců',
-'info_forum_interne' => 'interní diskusní skupina',
-'info_forum_ouvert' => 'V privátní části webu je diskusní skupina otevřena všem
-  zaregistrovaným redaktorům. Zde můžete aktivovat další diskusní
-  skupinu vyhrazenou pouze pro správce.',
 'info_forum_statistiques' => 'Statistiky návštěvnosti',
 'info_forums_abo_invites' => 'Na vašem webu existují diskusní skupiny vyhrazené přihlášeným účastníkům; návštěvníci se musí tedy zaregistrovat na veřejné části webu.',
 'info_gauche_admin_effacer' => '<b>Tato stránka je přístupná pouze těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím určeným pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduje FTP přístup k webu.</p>', # MODIF
@@ -399,7 +389,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_gauche_messagerie' => 'Systém zpráv umožňuje zasílat zprávy mezi redaktory, ukládat interní poznámky a zveřejňovat oznámení na hlavní stánce interní části webu (jste-li správce).',
 'info_gauche_numero_auteur' => 'ČÍSLO AUTORA',
 'info_gauche_statistiques_referers' => 'Na této stránce je seznam <i>referencí</i>, to je webů, ze kterých vede odkaz na váš vlastní web. Údaje jsou pouze za včerejšek a dnešek. Seznam se každých 24 hodin vynuluje.',
-'info_gauche_suivi_forum' => 'Stránka pro <i>sledování diskusních skupin</i> je určena ke správě vašeho webu (nejedná se o prostor pro diskusi ani pro redigování). Jsou na ní zobrazeny všechny diskusní příspěvky z veřejné skupiny a umožňuje vám jejich správu.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Zde naleznete návštěvníky zaregistrované
  ve veřejné části webu (diskusní skupiny, do kterých je nutno se přihlásit).',
 'info_generation_miniatures_images' => 'Generování náhledů',
@@ -498,7 +487,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_option_accepter_visiteurs' => 'Schválit přihlášení návštěvníků veřejného webu',
 'info_option_faire_suivre' => 'Sledovat zprávy z diskusní skupiny autory článků',
 'info_option_ne_pas_accepter_visiteurs' => 'Odmítnout přihlášky návštěvníků',
-'info_option_ne_pas_faire_suivre' => 'Nesledovat zprávy z diskusní skupiny',
 'info_options_avancees' => 'ROZŠÍŘENÉ MOŽNOSTI',
 'info_ortho_activer' => 'Zapnout kontrolu překlepů',
 'info_ortho_desactiver' => 'Vypnout kontrolu překlepů',
@@ -762,7 +750,6 @@ ukazuje jejich stav:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Přidat účastníka',
 'lien_email' => 'email',
-'lien_forum_public' => 'Správa veřejné diskusní skupiny k tomuto článku',
 'lien_mise_a_jour_syndication' => 'Aktualizovat',
 'lien_nom_site' => 'NÁZEV WEBU:',
 'lien_nouvelle_recuperation' => 'Pokusit se znovu získat data',
@@ -1142,8 +1129,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_controle_petition' => 'Sledování peticí',
 'titre_page_delete_all' => 'kompletní a nevratné odstranění',
 'titre_page_documents_liste' => 'Dokumenty v sekcích',
-'titre_page_forum' => 'Diskusní skupina správců',
-'titre_page_forum_envoi' => 'Odeslat zprávu',
 'titre_page_index' => 'Váš privátní prostor',
 'titre_page_message_edit' => 'Upravit zprávu',
 'titre_page_messagerie' => 'Váš systém zpráv',
@@ -1151,7 +1136,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
 'titre_page_sites_tous' => 'Odkazované weby',
 'titre_page_statistiques' => 'Statistiky podle sekcí',
-'titre_page_statistiques_messages_forum' => 'Forum messages', # NEW
 'titre_page_statistiques_referers' => 'Statistiky (příchozí odkazy)',
 'titre_page_statistiques_signatures_jour' => 'Signatures count by day', # NEW
 'titre_page_statistiques_signatures_mois' => 'Signatures count by month', # NEW

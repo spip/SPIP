@@ -62,7 +62,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_checkbox_indiquer_site' => 'Du måste ange ett namn på en webbplats',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Webbplats administratörer',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktörer',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'besökare av den offentliga webbplatsen när de skriver ett meddelande i ett forum.',
 'bouton_checkbox_signature_unique_email' => 'endast en signatur per e-postadress',
 'bouton_checkbox_signature_unique_site' => 'endast en signatur per webbplats',
 'bouton_demande_publication' => 'Begär att den här artikeln ska publiceras',
@@ -74,7 +73,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_envoi_message_02' => 'SKICKA ETT MEDDELANDE',
 'bouton_envoyer_message' => 'Färdigt meddelande: skicka',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; NAMNINSAMLINGAR', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Ändra',
 'bouton_pense_bete' => 'PERSONLIG MINNESANTECKNING',
@@ -181,9 +179,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'erreur_plugin_prefix_manquant' => 'Pluginens prefix odefinierad',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; saknas i definitionsfilen',
 'erreur_plugin_version_manquant' => 'Denna plugin saknar version.',
-
-// F
-'forum_info_original' => 'original',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -377,11 +372,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista för redaktörer,
   angående publiceringar och godkännanden.',
 'info_fichiers_authent' => 'Lösenordsfil ".htpasswd"',
-'info_forum_administrateur' => 'Administratörernas forum',
-'info_forum_interne' => 'Internt forum',
-'info_forum_ouvert' => 'I sajtens privata del är ett forum öppet för alla
-  redaktörer. Nedan kan du aktivera ett
-  extra forum reserverat för administratörerna.',
 'info_forum_statistiques' => 'Besöksstatistik',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement ; les visiteurs sont donc invités à s\'enregistrer sur le site public.', # NEW
 'info_gauche_admin_effacer' => '<b>Endast administratörer har tillgång till denna sida.</b><p> Den ger tillgång till tekniska underhållsrutiner av olika slag. En del av dem kommer, om de används, att kräva FTP-tillgång till Webservern för autentifiering.</p>', # MODIF
@@ -397,7 +387,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_gauche_messagerie' => 'La messagerie vous permet d\'échanger des messages entre rédacteurs, de conserver des pense-bêtes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace privé (si vous êtes administrateur).', # NEW
 'info_gauche_numero_auteur' => 'REDAKTÖR NUMMER:',
 'info_gauche_statistiques_referers' => 'Cette page présente la liste des <i>referers</i>, c\'est-à-dire des sites contenant des liens menant vers votre propre site, uniquement pour hier et aujourd\'hui ; cette liste est remise à zéro toutes les 24 heures.', # NEW
-'info_gauche_suivi_forum' => 'Sidna för<i>forumuppföljning</i> är ett administrationsverktyg för din sajt (inte en diskussions- eller redigeringsida). Den visar alla bidrag till det publika forum som hör till artikeln och där kan du hantera bidragen contributions.',
 'info_gauche_visiteurs_enregistres' => 'Vous trouverez ici les visiteurs enregistrés
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => 'Skapande av tumnagelbilder.',
@@ -497,7 +486,6 @@ funktioner hos SPIP inte användas.',
 'info_option_accepter_visiteurs' => 'Tillåt besökare registrera sig på den publika delen',
 'info_option_faire_suivre' => 'Vidarebefordra forummeddelanden till artikelredaktören',
 'info_option_ne_pas_accepter_visiteurs' => 'Avvisa besökarregistrering',
-'info_option_ne_pas_faire_suivre' => 'Vidarebefordra inte forummeddelanden',
 'info_options_avancees' => 'AVANCERADE INSTÄLLNINGAR',
 'info_ortho_activer' => 'Aktivera stavningskontrollen.',
 'info_ortho_desactiver' => 'Avaktivera stavningskontrollen.',
@@ -761,7 +749,6 @@ med en färg som visar deras status:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Lägg till en deltagare',
 'lien_email' => 'e-post',
-'lien_forum_public' => 'Hantera den här artikelns publika forum',
 'lien_mise_a_jour_syndication' => 'Uppdatera nu',
 'lien_nom_site' => 'SAJTENS NAMN:',
 'lien_nouvelle_recuperation' => 'Försök att hämta datum igen',
@@ -1154,8 +1141,6 @@ you can perform searches on sites and
 'titre_page_controle_petition' => 'Suivi des pétitions', # NEW
 'titre_page_delete_all' => 'total och oåterkallelig radering',
 'titre_page_documents_liste' => 'Bifogade dokument',
-'titre_page_forum' => 'Administratörernas forum',
-'titre_page_forum_envoi' => 'Sänd ett meddelande',
 'titre_page_index' => 'Din privata del',
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
@@ -1163,7 +1148,6 @@ you can perform searches on sites and
 'titre_page_recherche' => 'Sökresultat @recherche@',
 'titre_page_sites_tous' => 'Refererade webbplatser',
 'titre_page_statistiques' => 'Statistik uppdelat på avdelning',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistik (inkommande länkar)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

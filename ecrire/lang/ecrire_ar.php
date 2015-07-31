@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'يجب إدخال إسم موقع',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'مدراء الموقع',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'المحررون',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'زوار الموقع العمومي حين يرسلون مشاركة الى المنتدى',
 'bouton_checkbox_signature_unique_email' => 'توقيع واحد فقط لكل عنوان بريد الكتروني',
 'bouton_checkbox_signature_unique_site' => 'توقيع واحد فقط لكل موقع',
 'bouton_demande_publication' => 'طلب نشر هذا المقال',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'بعث برسالة',
 'bouton_envoyer_message' => 'صيغة نهائية : إرسال',
 'bouton_fermer' => 'إغلاق',
-'bouton_forum_petition' => 'المنتدى والعرائض',
 'bouton_mettre_a_jour_base' => 'تحديث قاعدة البيانات',
 'bouton_modifier' => 'تغيير',
 'bouton_pense_bete' => 'مذكرة للاستخدام الشخصي',
@@ -185,9 +183,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'حقل تسمية الملحق غير محدد',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; غير موجود في ملف التعريف',
 'erreur_plugin_version_manquant' => 'اصدار الملحق غير موجود',
-
-// F
-'forum_info_original' => 'اصلي',
 
 // H
 'htaccess_a_simuler' => 'تحذير: إن إعداد خادم HTTP لديك يتجاهل ملفات @htaccess@. لتوفير أمان فعّال لموقعك، يجب تغيير الإعداد بخصوص هذه المسألة، او ان تكون قيم الثوابت @constantes@ (التي يمكن تحديدها في ملف mes_options.php) مجلدات من خارج @document_root@.',
@@ -382,11 +377,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 الإعلان عن
 طلبات النشر وتصديق المقالات.',
 'info_fichiers_authent' => 'ملف التحقق «.htpasswd»',
-'info_forum_administrateur' => 'منتدى الإدارة',
-'info_forum_interne' => 'المنتدى الداخلي',
-'info_forum_ouvert' => 'في مجال الموقع الخاص، هناك منتدى مفتوح لجميع
-المحررين المسجلين. يمكنك أدناه، تفعيل
-منتدى إضافي محصور بالمدراء.',
 'info_forum_statistiques' => 'إحصاءات الزيارات',
 'info_forums_abo_invites' => 'يحتوي موقعك على منتديات بالاشتراك. يشترك الزوار اذاً من الموقع العمومي.',
 'info_gauche_admin_effacer' => '<b>لا يحق إلا لمسؤولي الموقع الوصول الى هذه الصفحة. </b><p>إنها توفر الوصول الى وظائف متنوعة للصيانة التقنية. وتتطلب بعض هذه الوظائف عملية تحقق محددة تحتاج الى الوصول الى الموقع عبر بروتوكول FTP .</p>',
@@ -403,7 +393,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'تتيح المراسلة تبادل الرسائل بين المحررين والحفاظ على المذكرات (لاستخدامك الشخصي) وعرض الإعلانات في الصفحة الرئيسية للمجال الخاص (إذا كنت مديراً).',
 'info_gauche_numero_auteur' => 'المؤلف رقم',
 'info_gauche_statistiques_referers' => 'تعرض هذه الصفحة قائمة <i>مواقع المصدر</i>، أي المواقع التي تحتوي على وصلات تقود الى موقعك، fبين البارحة واليوم فقط: فيتم تأصيل هذه القائمة كل 24 ساعة.',
-'info_gauche_suivi_forum' => 'تشكل صفحة <b>متابعة المنتديات</b> أداة إدارة للموقع (وليست مجالاً للنقاش أو التحرير). تعرض هذه الصفحة كل مشاركات المنتدى العام وتتيح إدارة هذه المشاركات.',
 'info_gauche_visiteurs_enregistres' => 'ستجد هنا الزوار المسجلين
 في مجال الموقع العام (المنتديات بالاشتراك).',
 'info_generation_miniatures_images' => 'إنشاء مصغرات الصور',
@@ -503,7 +492,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'قبول تسجيل الزوار من الموقع العمومي',
 'info_option_faire_suivre' => 'تمرير مشاركات المنتديات الى مؤلفي المقالات',
 'info_option_ne_pas_accepter_visiteurs' => 'رفض تسجيل الزوار من الموقع العمومي',
-'info_option_ne_pas_faire_suivre' => 'عدم تمرير مشاركات المنتديات',
 'info_options_avancees' => 'الخيارات المتطورة',
 'info_ortho_activer' => 'تفعيل مدقق الاملاء',
 'info_ortho_desactiver' => 'تعطيل مدقق الاملاء',
@@ -767,7 +755,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_mot' => 'إضافة هذا المفتاح',
 'lien_ajouter_participant' => 'إضافة مشارك',
 'lien_email' => 'البريد الالكتروني',
-'lien_forum_public' => 'إدارة المنتدى العمومي لهذا المقال',
 'lien_mise_a_jour_syndication' => 'تحديث الآن',
 'lien_nom_site' => 'إسم الموقع:',
 'lien_nouvelle_recuperation' => 'محاولة تنفيذ إسترجاع جديد للبيانات',
@@ -1162,8 +1149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_controle_petition' => 'متابعة العرائض',
 'titre_page_delete_all' => 'حذف تام ونهائي',
 'titre_page_documents_liste' => 'مستندات الأقسام',
-'titre_page_forum' => 'منتدى الإدارة',
-'titre_page_forum_envoi' => 'إرسال مشاركة',
 'titre_page_index' => 'مجالك الخاص',
 'titre_page_message_edit' => 'كتابة رسالة',
 'titre_page_messagerie' => 'مراسلاتك',
@@ -1171,7 +1156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_recherche' => 'نتائج البحث @recherche@',
 'titre_page_sites_tous' => 'المواقع المبوبة',
 'titre_page_statistiques' => 'الاحصاءات حسب القسم',
-'titre_page_statistiques_messages_forum' => 'مشاركات المنتدى',
 'titre_page_statistiques_referers' => 'الاحصاءات (الوصلات الآتية)',
 'titre_page_statistiques_signatures_jour' => 'عدد التوقيعات في اليوم',
 'titre_page_statistiques_signatures_mois' => 'عدد التوقيعات في الشهر',
