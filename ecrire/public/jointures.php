@@ -188,7 +188,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		$v = array_intersect(array_values($keys), $akeys);
 	}
 	if ($v)
-		return array(array($dnom, $arrivee, array_shift($v)));
+		return array(array($dnom, array($adesc['table'],$adesc), array_shift($v)));
 
 	// regarder si l'on a (id_objet,objet) au depart et si on peut le mapper sur un id_xx
 	if (count(array_intersect(array('id_objet','objet'),$keys))==2){
@@ -200,7 +200,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 				$objet = array_shift($v);// objet,'article'
 				array_unshift($v,$key); // id_article,objet,'article'
 				array_unshift($v,$objet); // id_objet,id_article,objet,'article'
-				return array(array($dnom, $arrivee, $v));
+				return array(array($dnom, array($adesc['table'],$adesc), $v));
 			}
 		}
 	}
@@ -213,7 +213,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 				if (count($v)==count(array_intersect($v, $akeys)))
 					$v = decompose_champ_id_objet($key); // id_objet,objet,'article'
 					array_unshift($v,$key); // id_article,id_objet,objet,'article'
-					return array(array($dnom, $arrivee, $v));
+					return array(array($dnom, array($adesc['table'],$adesc), $v));
 			}
 		}
 	}
@@ -229,7 +229,9 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 			// ie la cle de la jointure precedente
 			$test_cles = $milieu_exclus;
 			$new[] = $v;
-			while ($jointure_directe_possible = calculer_chaine_jointures($boucle,$depart,array($v, $def),$vu,$test_cles,true)) {
+			$max_iter = 50; // securite
+			while (count($jointure_directe_possible = calculer_chaine_jointures($boucle,$depart,array($v, $def),$vu,$test_cles,true))
+			  AND $max_iter--) {
 				$jointure_directe_possible = reset($jointure_directe_possible);
 				$milieu = end($jointure_directe_possible);
 				$test_cles[] = $milieu;
