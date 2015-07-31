@@ -1,7 +1,7 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique}{statut==.*}>
 	#BOITE_OUVRIR{'','note'}
 		<a class='annule_filtre[(#EVAL{_AJAX}|oui)ajax]'
-			 href='[(#SELF|parametre_url{id_rubrique,''})]' title="<:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:tout_voir:>})]</a>
+			 href='[(#SELF|parametre_url{id_rubrique,''})]' title="<:lien_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:lien_tout_afficher:>})]</a>
 		<:entree_interieur_rubrique:>
 		<h3><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
 	#BOITE_FERMER
