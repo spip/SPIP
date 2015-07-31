@@ -35,11 +35,12 @@ if ($id_article) {
 	if ($row = spip_fetch_array($result)) {
 		$id_article = $row["id_article"];
 		$titre = $row["titre"];
+		$statut = $row["statut"];
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
 		$flag_auteur = (spip_num_rows($result_auteur) > 0);
-
+				
 		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
 	}
 }
