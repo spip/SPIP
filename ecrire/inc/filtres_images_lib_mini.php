@@ -570,7 +570,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 			} else {
 				// php4-imagemagick
 				$handle = imagick_readimage($image);
-				imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
+				imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 				imagick_write($handle, $vignette);
 			}
 			if (!@file_exists($vignette)) {
