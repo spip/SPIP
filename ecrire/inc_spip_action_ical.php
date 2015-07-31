@@ -27,7 +27,6 @@ function ligne ($texte) {
 function spip_action_ical_dist()
 {
 	global $id_auteur, $arg, $action;
-	spip_log("fonction spipcal $id_auteur, $arg, $action");
 	if (verifier_low_sec($id_auteur, $arg, $action)) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($id_auteur));
 

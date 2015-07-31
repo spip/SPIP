@@ -3261,7 +3261,7 @@ function fin_page($credits='') {
 	    "</a></div>";
 	} else {
 	  echo '<div style="text-align: right; font-family: Verdana; font-size: 8pt">',
-	    info_copyright(), "<br />"._T('info_copyright_doc'),'</div>' ;
+	    info_copyright(), "<br />",_T('info_copyright_doc'),'</div>' ;
 	}
 
 	fin_grand_cadre();
@@ -3386,7 +3386,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_public('spip_redirect',"id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+		icone_horizontale($message, generer_url_public('spip_action.php', "action=redirect&id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
 }
 
 
