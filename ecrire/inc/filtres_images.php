@@ -146,9 +146,9 @@ function image_imagegif($img,$fichier) {
 	return $ret;
 }
 // http://doc.spip.org/@image_imagejpg
-function image_imagejpg($img,$fichier) {
+function image_imagejpg($img,$fichier,$qualite=85) {
 	$tmp = $fichier.".tmp";
-	$ret = imagejpeg($img,$tmp, 85);
+	$ret = imagejpeg($img,$tmp, $qualite);
 	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
@@ -1809,10 +1809,19 @@ function image_renforcement($im, $k=0.5)
 // 1/ Aplatir une image semi-transparente (supprimer couche alpha)
 // en remplissant la transparence avec couleur choisir $coul.
 // 2/ Forcer le format de sauvegarde (jpg, png, gif)
+// pour le format jpg, $qualite correspond au niveau de compression (defaut 85)
+// pour le format gif, $qualite correspond au nombre de couleurs dans la palette (defaut 128)
+// pour le format png, $qualite correspond au nombre de couleur dans la palette ou si 0 a une image truecolor (defaut truecolor)
+// attention, seul 128 est supporte en l'etat (production d'images avec palette reduite pas satisfaisante)
 // http://doc.spip.org/@image_aplatir
-function image_aplatir($im, $format='jpg', $coul='000000')
+function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 {
-	$image = image_valeurs_trans($im, "aplatir-$coul", $format);
+	if ($qualite===NULL){
+		if ($format=='jpg') $qualite=85;
+		elseif ($format=='png') $qualite=0;
+		else $qualite=128;
+	}
+	$image = image_valeurs_trans($im, "aplatir-$format-$coul-$qualite", $format);
 
 	if (!$image) return("");
 
@@ -1821,7 +1830,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
 	$db= $couleurs["blue"];
-	
+
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
@@ -1844,11 +1853,9 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 			@ImageCopyResampled($im_, $im, 0, 0, 0, 0, $x_i, $y_i, $x_i, $y_i);
 			imagedestroy($im);
 			$im = $im_;
-			$im_ = imagecreatetruecolor($x_i, $y_i);
 		}
-		@imagealphablending($im_, false);
-		@imagesavealpha($im_,true);
-		$color_t = ImageColorAllocateAlpha( $im_, $dr, $dv, $db , 0 );
+		// allouer la couleur de fond
+		$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
 		imagefill ($im_, 0, 0, $color_t);
 
 		$dist = abs($trait);
@@ -1860,24 +1867,47 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 				$r = ($rgb >> 16) & 0xFF;
 				$g = ($rgb >> 8) & 0xFF;
 				$b = $rgb & 0xFF;
-				
+
 				$a = (127-$a) / 127;
 				
 				if ($a == 1) { // Limiter calculs
 					$r = $r;
 					$g = $g;
 					$b = $b;
+				}
+				else if ($a == 0) { // Limiter calculs
+					$r = $dr;
+					$g = $dv;
+					$b = $db;
 				} else {
 					$r = round($a * $r + $dr * (1-$a));
 					$g = round($a * $g + $dv * (1-$a));
 					$b = round($a * $b + $db * (1-$a));
 				}
-								
-				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , 0 );
+						
+				$color = ImageColorAllocate( $im_, $r, $g, $b);
 				imagesetpixel ($im_, $x, $y, $color);	
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+
+		// rester en truecolor si demande (jpg ou png par defaut)
+		if ($format=='jpg' OR ($format=='png' && $qualite==0)){
+			$image["fonction_image"]($im_, "$dest",$qualite);
+		}
+		// passer en palette si besoin
+		else {
+			// creer l'image finale a palette (on recycle l'image initiale)
+			imagetruecolortopalette($im,true,$qualite);
+			//$im = imagecreate($x_i, $y_i);
+			// copier l'image true color vers la palette
+			imagecopy($im, $im_, 0, 0, 0, 0, $x_i, $y_i);
+			// matcher les couleurs au mieux par rapport a l'image initiale
+			imagecolormatch($im_, $im);
+			// produire le resultat
+			$image["fonction_image"]($im, "$dest");
+		}
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 
 	return image_ecrire_tag($image,array('src'=>$dest));
