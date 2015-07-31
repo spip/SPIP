@@ -382,10 +382,12 @@ if (lire_meta("activer_statistiques") != "non") {
 //
 // Envoi du mail quoi de neuf
 //
-$majnouv = lire_meta('majnouv');
-if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide(lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
-	include_ecrire('inc_mail.php3');
-	envoyer_mail_quoi_de_neuf();
+if ($db_ok) {
+	$majnouv = lire_meta('majnouv');
+	if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide(lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
+		include_ecrire('inc_mail.php3');
+		envoyer_mail_quoi_de_neuf();
+	}
 }
 
 ?>
