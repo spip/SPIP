@@ -22,7 +22,8 @@ include_spip('inc/headers');
 function inc_admin_dist($script, $titre, $comment='', $retour='')
 {
 	$reprise = true;
-	if (!isset($GLOBALS['meta'][$script])) {
+	if (!isset($GLOBALS['meta'][$script])
+	OR  !isset($GLOBALS['meta']['admin'])) {
 		$reprise = false;
 		debut_admin($script, $titre, $comment); 
 		spip_log("meta: $script " . join(',', $_POST));
@@ -71,7 +72,7 @@ function admin_verifie_session($script) {
 			}
 		}
 	}
-	spip_log("admin $pref" . ($row ? " (reprise)" : ''));
+	spip_log("admin $pref" . ($row ? " (reprise)" : ' (init)'));
 }
 
 // http://doc.spip.org/@dir_admin
@@ -167,7 +168,7 @@ function copy_request($script, $suite, $submit='')
 {
         include_spip('inc/filtres');
 	foreach($_POST as $n => $c) {
-	  if ($n != 'fichier')
+	  if (($n != 'fichier') AND !is_array($c))
 		$suite .= "\n<input type='hidden' name='$n' value='" .
 		  entites_html($c) .
 		  "'  />";

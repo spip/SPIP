@@ -27,9 +27,19 @@ function exec_delete_all_dist()
 	$res = '';
 	while ($r = sql_fetch($q)) {
 		$t = array_shift($r);
-		$res .= "<li><input type='checkbox' checked='checked' name='delete[]' id='delete_$t' value='$t' /> $t\n</li>";
+		$res .= "<li>"
+		.  "<input type='checkbox' checked='checked' name='delete[]' id='delete_$t' value='$t'/>\n"
+		. $t
+		. "\n</li>";
 	}
 	  
+	if (!$res) {
+	  	include_spip('inc/minipres');
+		spip_log("Erreur base de donnees");
+		echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+		exit;
+	} else spip_log($res);
+
 	$res = "<ol style='text-align:left'>$res</ol>";
 	$r = generer_url_ecrire('install','',true);
 	$admin = charger_fonction('admin', 'inc');
