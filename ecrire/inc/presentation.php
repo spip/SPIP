@@ -326,8 +326,6 @@ function afficher_plus($lien) {
 	}
 }
 
-
-
 //
 // Fonctions d'affichage
 //
@@ -336,65 +334,6 @@ function afficher_plus($lien) {
 function afficher_objets($type, $titre_table,$requete,$formater='',$force=false){
 	$afficher_objets = charger_fonction('afficher_objets','inc');
 	return $afficher_objets($type, $titre_table,$requete,$formater,$force);
-}
-
-// http://doc.spip.org/@afficher_liste
-function afficher_liste($largeurs, $table, $styles = '') {
-	global $spip_display;
-
-	if (!$table OR !is_array($table)) return "";
-
-	if ($spip_display != 4) {
-		$res = '';
-		foreach ($table as $t) {
-			$res .= afficher_liste_display_neq4($largeurs, $t, $styles);
-		}
-	} else {
-		$res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
-		foreach ($table as $t) {
-			$res .= afficher_liste_display_eq4($largeurs, $t, $styles);
-		}
-		$res .= "\n</ul>";
-	}
-
-	return $res;
-}
-
-// http://doc.spip.org/@afficher_liste_display_neq4
-function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
-
-	global $browser_name;
-
-	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
-
-	reset($largeurs);
-	if ($styles) reset($styles);
-	$res ='';
-	while (list(, $texte) = each($t)) {
-		$style = $largeur = "";
-		list(, $largeur) = each($largeurs);
-		if ($styles) list(, $style) = each($styles);
-		if (!trim($texte)) $texte .= "&nbsp;";
-		$res .= "\n<td" .
-			($largeur ? (" style='width: $largeur" ."px;'") : '') .
-			($style ? " class=\"$style\"" : '') .
-			">" . lignes_longues($texte) . "\n</td>";
-	}
-
-	return "\n<tr class='tr_liste'$evt>$res</tr>";
-}
-
-// http://doc.spip.org/@afficher_liste_display_eq4
-function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
-
-	reset($largeurs);
-	while (list(, $texte) = each($t)) {
-		$largeur = "";
-		list(, $largeur) = each($largeurs);
-		if (!$largeur) $res .= $texte." ";
-	}
-
-	return "\n<li>$res</li>\n";
 }
 
 // http://doc.spip.org/@navigation_pagination
@@ -480,14 +419,10 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	return $texte;
 }
 
-// $fg et $bg ne sont plus utilisees
-// http://doc.spip.org/@affiche_tranche_bandeau
-function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
+function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
 {
 	global $spip_display ;
 	$res = "";
-
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process'])) ? ($GLOBALS['meta']['image_process'] != "non") : false;
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
@@ -502,53 +437,58 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	else if (!($deb_aff = intval(_request($tmp_var))))
 		 $requete['LIMIT'] = $nb_aff;
 
-	$tranches = "";
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
+		return afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 	}
+	return '';
+}
 
-	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+function xhtml_table_id_type($table, $largeurs, $styles, $tranches = '', $title='', $icone='')
+{
+	global $spip_display, $spip_lang_left;
 
-	$id_liste = 't'.substr(md5(join(',',$requete)),0,8);
+	if ($table) {
+	if ($spip_display != 4) {
+		$evt = !preg_match(",msie,i", $GLOBALS['browser_name']) ? ''
+		: "
+			onmouseover=\"changeclass(this,'tr_liste_over');\"
+			onmouseout=\"changeclass(this,'tr_liste');\"" ;
 
-	$bouton = bouton_block_depliable($titre,true,$id_liste);
+		foreach ($table as $vals) {
+			reset($largeurs);
+			reset($styles);
+			$res = '';
+			foreach ($vals as $t) {
+				list(, $largeur) = each($largeurs);
+				list(, $style) = each($styles);
+				if ($largeur) $largeur = " style='width: $largeur" ."px;'";
+				if ($style) $style = " class=\"$style\"";
+				$t = !trim($t) ? "&nbsp;" : lignes_longues($t);
+				$res .= "\n<td$class$style>$t</td>";
+			}
+			$tranches .= "\n<tr class='tr_liste'$evt>$res</tr>";
+		}
 
-	$table = $tous_id = array(); // $tous_id obsolete.
-	while ($row = sql_fetch($result)) {
-		if ($a = $skel($row, $tous_id, $voir_logo, $own))
-			$table[] = $a;
+		$tranches = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$tranches</table>";
 	}
-	sql_free($result);
+	else {
+		foreach ($table as $t) 
+			if ($t)
+			  	$tranches = '<li>' . join('</li><li>', $t) . '</li>';
+		$tranches = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>"
+		. $tranches
+		. "</ul>";
+	}
+	}
+	$id = 't'.substr(md5($title),0,8);
+	$bouton = !$icone ? '' : bouton_block_depliable($title, true, $id);
 
-	$t = afficher_liste($largeurs, $table, $styles);
-	if (($spip_display != 4) AND $t)
-	  $t = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
-	    . $t
-	    . "</table>";
-	return
-	  debut_cadre('liste',$icone,'',$bouton)
-	  . debut_block_depliable(true,$id_liste)
+	return debut_cadre('liste', $icone, "", $bouton, "", "", false)
+	  . debut_block_depliable(true,  $id)
 	  . $tranches
-	  . $t
 	  . fin_block()
-	  . fin_cadre();
-}
-
-
-// http://doc.spip.org/@afficher_liste_debut_tableau
-function afficher_liste_debut_tableau() {
-	global $spip_display;
-
-	if ($spip_display != 4) return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-	else return '<ul>';
-}
-
-// http://doc.spip.org/@afficher_liste_fin_tableau
-function afficher_liste_fin_tableau() {
-	global $spip_display;
-	if ($spip_display != 4) return "</table>";
-	else return '</ul>';
+	  . fin_cadre('liste');
 }
 
 // http://doc.spip.org/@avoir_visiteurs

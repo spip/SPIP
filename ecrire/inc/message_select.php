@@ -30,25 +30,28 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	}
 
 
-	$res =  affiche_tranche_bandeau($requete, "messagerie-24.gif", NULL, NULL, $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
+	$tranches =  affiche_tranche_bandeau(&$requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
 
-	$result = sql_select('messages.id_message', $requete['FROM'], $requete['WHERE']);
+	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
-	while ($r = sql_fetch($result)) {
-		$r = $r['id_message'];
-		$messages_vus[$r]= $r;
+	$table = array();
+	while ($row = sql_fetch($result)) {
+		$table[]= afficher_message_boucles($row, $messages_vus, $afficher_auteurs);
 	}
-	
-	if (!$important OR !strlen($res)) return $res;
+	sql_free($result);
+
+	$res = xhtml_table_id_type($table, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
+
+	if (!$important AND !$table) return '';
 	else
-		return
-			debut_cadre_couleur('',true)
+	  return 
+	    (debut_cadre_couleur('',true)
 			. $res
-			. fin_cadre_couleur(true);
+	     . fin_cadre_couleur(true));
 }
 
 // http://doc.spip.org/@afficher_message_boucles
-function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_auteurs)
+function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
 

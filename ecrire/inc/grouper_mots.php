@@ -50,19 +50,13 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	if ($connect_statut=="0minirezo") {
 			$largeurs = array('', 100, 130);
 			$styles = array('arial11', 'arial1', 'arial1');
-		}
-	else {
+	} else {
 			$largeurs = array('', 100);
 			$styles = array('arial11', 'arial1');
 	}
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . "<div class='cadre-liste'>"
-	  . $tranches
-	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
-	  . afficher_liste($largeurs, $table, $styles)
-	  . "</table>"
-	  . "</div>";
+	  . xhtml_table_id_type($table, $largeurs, $styles, $tranches);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
