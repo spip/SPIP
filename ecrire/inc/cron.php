@@ -49,7 +49,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Les taches les plus longues sont tronconnees, ce qui impose d'antidater
 // le fichier de verrouillage (avec la valeur absolue du code de retour).
 // La fonction executant la tache est un homonyme de prefixe "cron_"
-// Le fichier homonyme de prefixe "inc_" et de suffixe _EXTENSION_PHP
+// Le fichier homonyme de prefixe "inc_"
 // est automatiquement charge si besoin, et est supposee la definir si ce
 // n'est fait ici.
 
