@@ -93,7 +93,6 @@ ecrire/genie/maintenance.php -text
 ecrire/genie/mise_a_jour.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/aider.php -text
-ecrire/inc/article_select.php -text
 ecrire/inc/autoriser.php -text
 ecrire/inc/bandeau.php -text
 ecrire/inc/boutons.php -text
@@ -111,7 +110,6 @@ ecrire/inc/cvt_multietapes.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/editer.php -text
-ecrire/inc/editer_select.php -text
 ecrire/inc/envoyer_mail.php -text
 ecrire/inc/filtres_boites.php -text
 ecrire/inc/filtres_ecrire.php -text
@@ -142,6 +140,8 @@ ecrire/inc/pipelines.php -text
 ecrire/inc/pipelines_ecrire.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
+ecrire/inc/precharger_article.php -text
+ecrire/inc/precharger_objet.php -text
 ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text

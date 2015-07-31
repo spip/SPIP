@@ -80,11 +80,10 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
 	$new = !is_numeric($id);
-
 	// Appel direct dans un squelette
 	if (!$row) {
 		if  (!$new OR $lier_trad) {
-			if ($select = charger_fonction($type."_select",'inc',true))
+			if ($select = charger_fonction("precharger_" . $type, 'inc', true))
 				$row = $select($id, $id_parent, $lier_trad);
 			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
 			if (!$new)
