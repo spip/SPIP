@@ -260,6 +260,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$hash = calculer_action_auteur("ajout_forum $id_rubrique $id_parent $id_article $id_breve $id_syndic $alea");
 
 	$titre = htmlspecialchars($titre);
+	$texte = htmlspecialchars($texte);
 	
 	if ($afficher_texte == "non"){
 		$ret .= "\n<INPUT TYPE='hidden' NAME='titre' VALUE=\"$titre\">";
@@ -473,7 +474,7 @@ function ajout_forum() {
 
 	
 	
-
+	
 	$query_forum = "UPDATE spip_forum
 		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\", 
 			date_heure = NOW(), titre = \"$titre\", texte = \"$texte\", nom_site = \"$nom_site_forum\", url_site = \"$url_site\", auteur = \"$auteur\",
