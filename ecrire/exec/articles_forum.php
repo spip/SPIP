@@ -34,27 +34,35 @@ function exec_articles_forum_dist()
 		$id_rubrique = $row["id_rubrique"];
 	}
 	
+	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+	$limitnb = $debut + $enplus - $limitdeb;
+
+	$ancre = 'navigation-forum';
+	$result = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" . 	" LIMIT $limitdeb, $limitnb");
+#	" LIMIT  $limitnb OFFSET $limitdeb" # PG
+
+	$res = spip_query("SELECT pied.*, max(thread.date_heure) AS date FROM spip_forum AS pied, spip_forum AS thread WHERE pied.id_article='$id_article' AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop') AND thread.id_thread=pied.id_forum	GROUP BY id_thread ORDER BY date DESC 	LIMIT $debut, $pack");
+
+	$mess = affiche_navigation_forum("articles_forum", "id_article=$id_article", $debut, $limitdeb, $pack, $ancre, $result)
+	. '<br />'
+	. afficher_forum($res,"", '', $id_article);
+
+	$droit= $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique);
+
+	if (_request('var_ajax') AND $droit) return $mess;
+
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
 	debut_page($titre, "naviguer", "articles", "", "", $id_rubrique);
 
 	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article");
 
-	if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
-		return;
+	if (!$droit) return;
 
-	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-	$limitnb = $debut + $enplus - $limitdeb;
+	echo "<div class='serif2' id='$ancre'>";
+	echo $mess;
+	echo '</div>';
 
-	$result = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" . 	" LIMIT $limitdeb, $limitnb");
-#	" LIMIT  $limitnb OFFSET $limitdeb" # PG
-
-	articles_forum_liens(spip_num_rows($result), "articles_forum", "id_article=$id_article", $debut, $pack, $limitdeb);
-
-	$res = spip_query("SELECT pied.*, max(thread.date_heure) AS date FROM spip_forum AS pied, spip_forum AS thread WHERE pied.id_article='$id_article' AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop') AND thread.id_thread=pied.id_forum	GROUP BY id_thread ORDER BY date DESC 	LIMIT $debut, $pack");
-
-	echo afficher_forum($res,"", '', $id_article);
-	
 	fin_page();
 }
 
@@ -102,7 +110,7 @@ function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 // http://doc.spip.org/@articles_forum_liens
 function articles_forum_liens($n, $script, $args, $curseur, $pack, $i)
 {
-	echo "<div class='serif2'>";
+
 
 	if ($i>0)
 		echo "<a href='" . generer_url_ecrire($script,$args) . "'>0</a> ... | ";

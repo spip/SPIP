@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 charger_generer_url();
 include_spip('inc/forum');
 
+
 // http://doc.spip.org/@forum_parent
 function forum_parent($id_forum) {
 	$row=spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
@@ -104,10 +105,8 @@ function forum_parent($id_forum) {
 	}
 }
 
-// $rappel n'est pas utilise. Pourquoi ?
-
 // http://doc.spip.org/@controle_un_forum
-function controle_un_forum($row, $rappel) {
+function controle_un_forum($row) {
 
 	$id_forum = $row['id_forum'];
 	$forum_id_parent = $row['id_parent'];
@@ -199,41 +198,11 @@ function exec_controle_forum_dist()
 
   global $type, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
 
-  debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
+	$debut= intval($debut);
+	$id_rubrique = intval($id_rubrique);
+	if (!preg_match('/^\w+$/', $type)) $type = "public";
 
-  if (!preg_match('/^\w+$/', $type)) $type = "public";
-
-  echo "<br><br><br>";
-  gros_titre(_T('titre_forum_suivi'));
-
-// faut rajouter id_rubrique donc on n'appelle plus
-//  barre_onglets("suivi_forum", $type); 
-// on expanse
-  
-  $id_rubrique = intval($id_rubrique);
-  $args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
-
-  debut_onglet();
-  onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", $onglet, "forum-public-24.gif");
-  onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", $onglet, "forum-interne-24.gif");
-
-  $n = spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1"));
-  if ($n) onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $onglet);
-
-    list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
-    $f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
-    if ($f)
-      onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $onglet);
-
-    fin_onglet();
-
-  if (($connect_statut != "0minirezo") OR 
-      (!$connect_toutes_rubriques AND
-       (!$id_rubrique OR !acces_rubrique($id_rubrique)))) {
-	echo "<B>"._T('avis_non_acces_page')."</B>";
-	exit;
-  }
-  list($from,$where) = critere_statut_controle_forum($type, $id_rubrique);
+	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique);
 
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval($debut_id_forum)
@@ -242,59 +211,84 @@ function exec_controle_forum_dist()
 		$debut = $debut['n'];
 	}
 
- $debut= intval($debut);
+	$pack = 20;	// nb de forums affiches par page
+	$enplus = 200;	// intervalle affiche autour du debut
+	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+	$limitnb = $debut + $enplus - $limitdeb;
+	$args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
 
- $pack = 20;	// nb de forums affiches par page
- $enplus = 200;	// intervalle affiche autour du debut
- $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
- $limitnb = $debut + $enplus - $limitdeb;
-
- $result_forum = spip_query("SELECT F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur FROM $from " . (!$where ? '' : "WHERE $where ") . "ORDER BY F.date_heure DESC LIMIT $limitdeb, $limitnb");
+	$query = spip_query("SELECT F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur FROM $from " . (!$where ? '' : "WHERE $where ") . "ORDER BY F.date_heure DESC LIMIT $limitdeb, $limitnb");
 # LIMIT $limitnb OFFSET $limitdeb" #PG
+  
+	$ancre = 'controle_forum';
+	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $limitdeb, $pack, $ancre, $query)
+	. affiche_tranche_forum($debut, $limitdeb, $pack, $query);
 
-  debut_gauche();
-  debut_boite_info();
-  echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
-  echo _T('info_gauche_suivi_forum_2');
-  echo aide("suiviforum");
-  echo "</FONT>";
+	$droit = (($connect_statut != "0minirezo") OR 
+		  (!$connect_toutes_rubriques AND
+		   (!$id_rubrique OR !acces_rubrique($id_rubrique))));
 
-  // Afficher le lien RSS
+	if (_request('var_ajax') AND !$droit) {
+		return $mess;
+	} else {
 
-  echo "<div style='text-align: "
-    . $GLOBALS['spip_lang_right']
-    . ";'>"
-    . bouton_spip_rss('forums', array('page' => $type))
-    ."</div>";
+		debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
-  fin_boite_info();
-  debut_droite();
-  $args .= $type;
+		echo "<br><br><br>";
+		gros_titre(_T('titre_forum_suivi'));
 
-  echo "<div class='serif2'>";
-  $i = $limitdeb;
-  if ($i>0) echo "<a href='", generer_url_ecrire('controle_forum', $args),"'>0</a> ... | ";
-  $controle = '';
+		debut_onglet();
+		onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", '', "forum-public-24.gif");
+		onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
 
-  while ($row = spip_fetch_array($result_forum)) {
+		$n = spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1"));
+		if ($n) onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
 
-	// barre de navigation
-	if ($i == $pack*floor($i/$pack)) {
-		if ($i == $debut)
-			echo "<FONT SIZE=3><B>$i</B></FONT>";
-		else
-		  echo "<a href='", generer_url_ecrire('controle_forum', $args . "&debut=$i"), "'>$i</a>";
-		echo " | ";
+		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
+		$f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
+		if ($f)
+		  onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", '');
+
+		fin_onglet();
+
+		if ($droit) {
+		  echo "<B>"._T('avis_non_acces_page')."</B>";
+		} else {
+
+			debut_gauche();
+			debut_boite_info();
+			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
+			echo _T('info_gauche_suivi_forum_2');
+			echo aide("suiviforum");
+			echo "</FONT>";
+
+			// Afficher le lien RSS
+
+			echo "<div style='text-align: "
+			. $GLOBALS['spip_lang_right']
+			. ";'>"
+			. bouton_spip_rss('forums', array('page' => $type))
+			. "</div>";
+
+			fin_boite_info();
+			debut_droite();
+
+			echo "<div id='$ancre' class='serif2'>$mess</div>";
+
+			fin_page();
+		}
 	}
-	// est-ce que ce message doit s'afficher dans la liste ?
-	if (($i>=$debut) AND ($i<($debut + $pack)))
-	  $controle .= controle_un_forum($row, generer_url_ecrire('controle_forum', $args . "&debut=$debut"));
-	$i ++;
- }
-
-  echo "<a href=", generer_url_ecrire('controle_forum', $args . "&debut=$i"),
-    ">...</a>$controle</div>";
-  fin_page();
 }
 
+function affiche_tranche_forum($debut, $i, $pack, $query)
+{
+
+  $res = '';
+  while ($row = spip_fetch_array($query)) {
+	if (($i>=$debut) AND ($i<($debut + $pack)))
+		$res .= controle_un_forum($row);
+	$i ++;
+  }
+  return $res;
+}
 ?>
