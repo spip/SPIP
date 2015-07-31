@@ -28,6 +28,14 @@ function formulaires_configurer_visiteurs_charger_dist(){
 
 function formulaires_configurer_visiteurs_traiter_dist(){
 	$res = array('editable'=>true);
+	// Modification du reglage accepter_inscriptions => vider le cache
+	// (pour repercuter la modif sur le panneau de login)
+	if (($i = _request('accepter_visiteurs')
+		AND $i != $GLOBALS['meta']['accepter_visiteurs'])) {
+		include_spip('inc/invalideur');
+		suivre_invalideur("1"); # tout effacer
+	}
+
 	foreach(array(
 		"accepter_visiteurs",
 		) as $m)

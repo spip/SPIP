@@ -33,6 +33,10 @@ function formulaires_configurer_articles_charger_dist(){
 
 function formulaires_configurer_articles_traiter_dist(){
 	$res = array('editable'=>true);
+	// Purger les squelettes si un changement de meta les affecte
+	if ($i = _request('post_dates') AND ($i != $GLOBALS['meta']["post_dates"]))
+		$purger_skel = true;
+
 	foreach(array(
 		"articles_surtitre",
 		"articles_soustitre",
@@ -47,6 +51,11 @@ function formulaires_configurer_articles_traiter_dist(){
 		) as $m)
 		if (!is_null($v=_request($m)))
 			ecrire_meta($m, $v=='oui'?'oui':'non');
+
+	if ($purger_skel) {
+		include_spip('inc/invalideur');
+		purger_repertoire(_DIR_SKELS);
+	}
 
 	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;

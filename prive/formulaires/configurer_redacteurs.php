@@ -24,6 +24,14 @@ function formulaires_configurer_redacteurs_charger_dist(){
 
 function formulaires_configurer_redacteurs_traiter_dist(){
 	$res = array('editable'=>true);
+	// Modification du reglage accepter_inscriptions => vider le cache
+	// (pour repercuter la modif sur le panneau de login)
+	if (($i = _request('accepter_inscriptions')
+		AND $i != $GLOBALS['meta']['accepter_inscriptions'])) {
+		include_spip('inc/invalideur');
+		suivre_invalideur("1"); # tout effacer
+	}
+
 	foreach(array(
 		"accepter_inscriptions",
 		) as $m)

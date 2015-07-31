@@ -478,44 +478,11 @@ function appliquer_modifs_config($purger_skel=false) {
 		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
 	}
 
-	// provoquer l'envoi des nouveautes en supprimant le fichier lock
-	if (_request('envoi_now')) {
-		spip_unlink(_DIR_TMP . 'mail.lock');
-	}
-
-	// Purger les squelettes si un changement de meta les affecte
-	if ($i = _request('post_dates') AND ($i != $GLOBALS['meta']["post_dates"]))
-		$purger_skel = true;
-
-	if ($i = _request('langues_auth') AND is_array($i)) {
-		set_request('langues_multilingue', join($i, ","));
-	}
-
-	// Modification du reglage accepter_inscriptions => vider le cache
-	// (pour repercuter la modif sur le panneau de login)
-	if (($i = _request('accepter_inscriptions')
-		AND $i != $GLOBALS['meta']['accepter_inscriptions'])
-		OR ($i = _request('accepter_visiteurs')
-		AND $i != $GLOBALS['meta']['accepter_visiteurs'])) {
-		include_spip('inc/invalideur');
-		suivre_invalideur("1"); # tout effacer
-	}
-
 	foreach(liste_metas() as $i => $v) {
 		if (($x =_request($i))!==NULL)
 			ecrire_meta($i, $x);
 		elseif  (!isset($GLOBALS['meta'][$i]))
 			ecrire_meta($i, $v);
-	}
-
-	if ($lang = _request('changer_langue_site')) {
-		include_spip('inc/lang');
-		// verif que la langue demandee est licite
-		if (changer_langue($lang)) {
-			ecrire_meta('langue_site', $lang);
-		}
-		// le test a defait ca:
-		utiliser_langue_visiteur();
 	}
 
 	if ($purger_skel) {
