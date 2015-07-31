@@ -123,7 +123,7 @@ echo "<td width='20'>";
 if ($tri=='statut')
   echo http_img_pack('admin-12.gif','', "border='0'");
  else
-   echo http_href_img('auteurs.php3?tri=statut','admin-12.gif', "border='0'", _T('lien_trier_statut'));
+   echo http_href_img(http_php_scriptnq('auteurs','tri=statut'),'admin-12.gif', "border='0'", _T('lien_trier_statut'));
 
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
@@ -306,7 +306,7 @@ global  $connect_statut, $options,
 
 	// nom
 	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
-	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
+	echo "<a href=", http_php_script('auteurs_edit',"id_auteur=".$row['id_auteur']), ">",typo($row['nom']),'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
