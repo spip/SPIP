@@ -164,7 +164,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			return;
 	}
 
-	$lien =  generer_url_ecrire($script, $args, true, true) . "#id$id_forum";
+	$lien =  generer_url_ecrire($script, $args, true, true) . "#forum$id_forum";
 	$boutons ='';
 	if ($suppression)
 	  $boutons .= icone_inline(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", $lien),
@@ -466,7 +466,10 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$statut=$row['statut'];
 	$ip=$row["ip"];
 	
-	$titre_boite = "<a href='#id$id_forum' id='id$id_forum'>"
+	$h = (!$id_article ? '' : generer_url_entite($id_article, 'article'))
+	  . "#forum$id_forum";
+
+	$titre_boite = "<a href='$h' id='forum$id_forum'>"
 	  . typo($titre)
 	  . '</a>';
 
