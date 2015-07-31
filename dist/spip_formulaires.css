@@ -11,7 +11,8 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
-.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.10em; font-weight: bold; color: #330; } /* Preciser la couleur des legend pour IE/Win */
+.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.10em; font-weight: bold; }
+* html .formulaire_spip fieldset legend { background-color: #EEC; color: #330; } /* Preciser la couleur des legend et du fond pour IE6/Win */
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
@@ -23,7 +24,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 .formulaire_spip ul li { clear: both; margin: 0; padding: 0.50em 0; }
 
 /* Labels */
-.formulaire_spip label { display: block; text-align: left; color: #444; font-weight: bold; /* for IE */ position: relative;  }
+.formulaire_spip label { display: block; text-align: left; color: #444; font-weight: bold; /* pour IE/Win */ position: relative;  }
 .formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
 /* Champs de saisie */
@@ -34,7 +35,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Boutons */
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
 .formulaire_spip .boutons input { margin-left: 1em; }
-.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; font-weight: normal; color: #FFF; }
+.formulaire_spip .boutons input, input.submit {}
 
 
 /* Reponses, previsu et erreurs
@@ -48,7 +49,6 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
 fieldset.previsu legend { padding: 0 0.50em; color: #F57900; font-weight: bold; }
 fieldset.previsu li { padding: 3px; border: none; }
-fieldset.previsu .boutons input { background-color: #F57900; border-color: #F57900; color: #FFF; }
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.20em; }
@@ -82,8 +82,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 /* Formulaires de recherche (site / petitions) */
 .formulaire_recherche { margin: 0; padding: 0; background: none; }
 .formulaire_recherche * { display: inline; vertical-align: middle; }
-.formulaire_recherche label { display: none; }
-.formulaire_recherche input.text { padding-left: 25px; background: #fff url(rechercher.gif) no-repeat left center; }
+.formulaire_recherche label {}
+.formulaire_recherche input.text { width: 10em; padding-left: 25px; background: url(rechercher.gif) no-repeat left center; }
 .formulaire_recherche input.submit {}
 
 .spip_surligne {} /*Cf.: spip_style.css*/
