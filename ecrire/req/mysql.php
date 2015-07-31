@@ -515,7 +515,8 @@ function spip_mysql_countsel($from = array(), $where = array(),
 function spip_mysql_error($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	return ($link ? mysql_error($link) : mysql_error()) . $connexion['last'];
+	$e = ($link ? mysql_error($link) : mysql_error());
+	return  ($e ? $e . $connexion['last']:'');
 }
 
 // A transposer dans les portages
