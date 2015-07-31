@@ -75,6 +75,21 @@ $GLOBALS['i18n_spip_fr'] = array(
 
 
 // B
+'barre_aide' => 'Utilisez les raccourcis typographiques pour enrichir votre mise en page',
+'barre_aide_rac' => 'En savoir plus sur les raccourcis typographiques',
+'barre_italic' => 'Mettre en {italique}',
+'barre_gras' => 'Mettre en {{gras}}',
+'barre_intertitre' => 'Transformer en {{{intertitre}}}',
+'barre_lien' => 'Transformer en [lien hypertexte->http://...]',
+'barre_lien_input' => 'Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
+'barre_note' => 'Transformer en [[Note de bas de page]]',
+'barre_quote' => '<quote>Citer un message</quote>',
+'barre_guillemets' => 'Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_simples' => 'Entourer de &ldquo;guillemets&rdquo;',
+'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
+'barre_e_accent_aigu' => 'Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => 'Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => 'Ins&eacute;rer un Edans l\'O majuscule',
 'bouton_acces_ldap' => 'Ajouter l\'acc&egrave;s &agrave; LDAP >>',
 'bouton_ajouter' => 'Ajouter',
 'bouton_ajouter_document' => 'AJOUTER UN DOCUMENT',

@@ -42,7 +42,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champ = "document.$formulaire.$texte";
 	$champhelp = "document.$formulaire.helpbox$texte";
 	return "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\" "
-		."onMouseOver=\"helpline('$help',$champhelp)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">"
+		."onMouseOver=\"helpline('".addslashes($help)."',$champhelp)\" onMouseOut=\"helpline('"._T('barre_aide')."', $champhelp)\">"
 		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16'></a>";
 }
 
@@ -58,22 +58,22 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$col++;
 
 		// Italique, gras, intertitres
-		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{','}',$champ)", "italique.png", "Mettre en {italique}", $formulaire, $texte);
-		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{{','}}',$champ)", "gras.png", "Mettre en {{gras}}", $formulaire, $texte);
+		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{','}',$champ)", "italique.png", _T('barre_italic'), $formulaire, $texte);
+		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{{','}}',$champ)", "gras.png", _T('barre_gras'), $formulaire, $texte);
 		if (!$forum) {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", "Transformer en {{{intertitre}}}", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", _T('barre_intertitre'), $formulaire, $texte);
 		}
 		$ret .= "&nbsp;&nbsp;&nbsp;";
 
 		// Lien hypertexte, notes de bas de page, citations
-		$ret .= bouton_barre_racc ("javascript:barre_demande('[','->',']','Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',$champ)",
-			"lien.png", "Transformer en [lien hypertexte->http://...]", $formulaire, $texte);
+		$ret .= bouton_barre_racc ("javascript:barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)",
+			"lien.png", _T('barre_lien'), $formulaire, $texte);
 		if (!$forum) {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[[',']]',$champ)", "notes.png", "Transformer en [[Note de bas de page]]", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $formulaire, $texte);
 		}
 		if ($forum) {
 			$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "quote.png", "<quote>Citer un message</quote>", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "quote.png", _T('barre_quote'), $formulaire, $texte);
 		}
 
 		if ($options == "avancees") {
@@ -89,18 +89,18 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "<td align='right' style='padding-top: 4px; padding-bottom: 2px;'>";
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
 		}
 		else {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", "Entourer de &ldquo;guillemets&rdquo;", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
 		$ret .= "&nbsp;&nbsp;&nbsp;";
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 			$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", "Ins&eacute;rer un A accent grave majuscule", $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", "Ins&eacute;rer un E accent aigu majuscule", $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "oelig-maj.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", _T('barre_a_accent_grave'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", _T('barre_e_accent_aigu'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", _T('barre_eo'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "oelig-maj.png", _T('barre_eo_maj'), $formulaire, $texte);
 		}
 		//$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
 		$ret .= "</td>";
@@ -109,7 +109,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= "<td> &nbsp; </td>";
 			$col++;
 
-			$ret .= "<td align='right' onMouseOver=\"helpline('En savoir plus sur les raccourcis typographiques',helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
+			$ret .= "<td align='right' onMouseOver=\"helpline(_T('barre_aide_rac'),helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
 			$col++;
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= aide("raccourcis");
