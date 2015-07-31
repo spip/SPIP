@@ -326,37 +326,35 @@ if ($spip_display != 4) {
 	if(strlen(propre($GLOBALS['meta']["descriptif_site"])))
 	echo "<div>".propre($GLOBALS['meta']["descriptif_site"])."</div><br />";
 
-    $res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut");
+	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut HAVING cnt <>0");
   
-  while($row = spip_fetch_array($res)) {
-    $var  = 'nb_art_'.$row['statut'];
-    $$var = $row['cnt']; 
-  }
+	while($row = spip_fetch_array($res)) {
+	    	$cpt[$row['statut']] = $row['cnt']; 
+	}
   
-	if ($nb_art_prepa OR $nb_art_prop OR $nb_art_publie) {
+	if ($cpt) {
 
 		echo afficher_plus(generer_url_ecrire("articles_page",""))."<b>"._T('info_articles')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if ($nb_art_prepa) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_prepa;
-		if ($nb_art_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_art_prop;
-		if ($nb_art_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_art_publie."</b>";
+		if (isset($cpt['prepa'])) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$cpt['prepa'], '</li>';
+		if (isset($cpt['prop'])) echo "<li>"._T("texte_statut_attente_validation").": ".$cpt['prop'], '</li>';
+		if (isset($cpt['publie'])) echo "<li><b>"._T("texte_statut_publies").": ".$cpt['publie']."</b>", '</li>';
 		echo "</ul>";
 
 	}
 
-	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut");
+	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut HAVING cnt <>0");
 
-
+	$cpt = array();
 	while($row = spip_fetch_array($res)) {
-		$var  = 'nb_bre_'.$row['statut'];
-		$$var = $row['cnt']; 
+		$cpt[$row['statut']] = $row['cnt']; 
 	}
  
-	if ($nb_bre_prop OR $nb_bre_publie) {
+	if ($cpt) {
 		echo afficher_plus(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if ($nb_bre_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_bre_prop;
-		if ($nb_bre_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_bre_publie."</b>";
+		if (isset($cpt['prop'])) echo "<li>"._T("texte_statut_attente_validation").": ".$cpt['prop'], '</li>';
+		if (isset($cpt['publie'])) echo "<li><b>"._T("texte_statut_publies").": ".$cpt['publie'], "</b>",'</li>';
 		echo "</ul>";
 	}
 
@@ -370,19 +368,17 @@ if ($spip_display != 4) {
 		echo "</ul>";
 	}
 
-	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut");
+	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0");
 
-	while($row = spip_fetch_array($res)) {
-		$var  = 'nb_aut_'.$row['statut'];
-		$$var = $row['cnt']; 
-	}
+	$cpt = array();
+	while($row=spip_fetch_array($res)) $cpt[$row['statut']] = $row['cnt']; 
 
-	if ($nb_aut_0minirezo OR $nb_aut_1comite OR $nb_aut_6forum) {
+	if ($cpt) {
 		echo afficher_plus(generer_url_ecrire("auteurs",""))."<b>"._T('icone_auteurs')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if ($nb_aut_0minirezo) echo "<li>"._T("info_administrateurs").": ".$nb_aut_0minirezo;
-		if ($nb_aut_1comite) echo "<li>"._T("info_redacteurs").": ".$nb_aut_1comite;
-		if ($nb_aut_6forum) echo "<li>"._T("info_visiteurs").": ".$nb_aut_6forum;
+		if (isset($cpt['0minirezo'])) echo "<li>",_T("info_administrateurs"),": ",$cpt['0minirezo'], '</li>';
+		if (isset($cpt['1comite'])) echo "<li>",_T("info_redacteurs"),": ",$cpt['1comite'], '</li>';
+		if (isset($cpt['6forum'])) echo "<li>",_T("info_visiteurs"),": ",$cpt['6forum'], '</li>';
 		echo "</ul>";
 	}
 
@@ -491,17 +487,5 @@ echo "<p>";
 
 
  fin_page("jimmac");
-
-
-//
-// Symetrique du debut: apres restauration ou MAJ, recalculer les rubriques
-//
-
-	if (isset($GLOBALS['meta']['calculer_rubriques'])) {
-		calculer_rubriques();
-		effacer_meta('calculer_rubriques');
-		ecrire_metas();
-	}
-
 }
 ?>

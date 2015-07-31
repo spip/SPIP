@@ -109,5 +109,7 @@ function exec_import_all_dist()
 	// au rappel, on commence (voire on continue)
 	include_spip('inc/import');
 	import_all_continue();
+	include_spip('inc/rubriques');
+	calculer_rubriques();
 }
 ?>
