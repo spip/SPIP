@@ -61,9 +61,13 @@ function filtre_text_csv_dist($t)
 	else	{ $sep = ';'; $hs = '&#59;'; $virg = $pvirg;}
 	if ($tab > $virg) {$sep = "\t"; $hs = "\t";}
 
-	$t = str_replace('""','&#34;',
-			 preg_replace('/\r?\n/', "\n",
-				      preg_replace('/[\r\n]+/', "\n", $t)));
+	$t = preg_replace('/\r?\n/', "\n",
+				      preg_replace('/[\r\n]+/', "\n", $t));
+	// un separateur suivi de 3 guillemets attention !
+	// attention au ; suceptible d'etre confondu avec un separateur
+	// on substitue un # et on remplacera a la fin
+	$t = preg_replace("/([\n$sep])\"\"\"/",'\\1"&#34#',$t);
+	$t = str_replace('""','&#34#',$t);
 	preg_match_all('/"[^"]*"/', $t, $r);
 	foreach($r[0] as $cell)
 		$t = str_replace($cell,
@@ -113,12 +117,15 @@ function filtre_text_csv_dist($t)
 	  foreach($lignes as $k=>$v) $lignes[$k] = substr($v,0,-1);
 	}
 	$corps = join("\n", $lignes) . "\n";
-	return propre($caption .
+	$corps = $caption .
 		"\n|{{" .
 		str_replace($sep,'}}|{{',$entete) .
 		"}}|" .
 		"\n|" .
-		str_replace($sep,'|',str_replace("\n", "|\n|",$corps)));
+		str_replace($sep,'|',str_replace("\n", "|\n|",$corps));
+	$corps = str_replace('&#34#','&#34;',$corps);
+	include_spip('inc/texte');
+	return propre($corps);
 }
 
 // Incrustation de HTML, si on est capable de le securiser
