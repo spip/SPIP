@@ -162,8 +162,8 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
  * spip_log($message,'recherche')
  * spip_log($message,_LOG_DEBUG)
  * spip_log($message,'recherche.'._LOG_DEBUG)
-    # cette derniere notation est controversee mais le 3eme
-    # parametre est plante pour cause de compat ascendante.
+ *  cette derniere notation est controversee mais le 3eme
+ *  parametre est plante pour cause de compat ascendante.
  * le niveau par defaut est _LOG_INFO
  * 
  * http://doc.spip.org/@spip_log
