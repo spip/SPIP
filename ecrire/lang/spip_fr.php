@@ -359,7 +359,7 @@ Merci de votre participation
 'icone_sauver_site' => 'Sauvegarde du site',
 'icone_site_entier' => 'Tout le site',
 'icone_sites_references' => 'Sites r&eacute;f&eacute;renc&eacute;s',
-'icone_statistiques' => 'Statistiques du site',
+'icone_statistiques' => 'Statistiques',
 'icone_statistiques_visites' => 'Statistiques',
 'icone_suivi_activite' => 'Suivre la vie du site',
 'icone_suivi_actualite' => '&Eacute;volution du&nbsp;site',
