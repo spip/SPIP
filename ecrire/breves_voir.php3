@@ -149,7 +149,7 @@ $arton = "breveon$id_breve";
 $artoff = "breveoff$id_breve";
 
 if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
-	afficher_boite_logo($arton, $artoff, "LOGO DE LA BREVE".aide ("breveslogo"), "LOGO POUR SURVOL");
+	afficher_boite_logo($arton, $artoff, "LOGO DE LA BR&Egrave;VE".aide ("breveslogo"), "LOGO POUR SURVOL");
 
 debut_raccourcis();
 icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
