@@ -47,6 +47,7 @@ function recuperer_parametres_url($fond, $url) {
 
 // a mettre dans ecrire/inc_threads.php3 avec les autres trucs de forum
 function racine_forum($id_forum){
+	if (!$id_forum = intval($id_forum)) return;
 	$query = "SELECT id_parent, id_rubrique, id_article, id_breve FROM spip_forum WHERE id_forum=".$id_forum;
 	$result = spip_query($query);
 	if($row = spip_fetch_array($result)){
