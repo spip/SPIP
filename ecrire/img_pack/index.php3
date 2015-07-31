@@ -1,3 +1,10 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Index of img_pack</title>
+</head>
+<body>
+<h1>Index of img_pack</h1>
 <table>
 <?php
 	$myDir = opendir('.');
@@ -7,3 +14,5 @@
 	}
 ?>
 </table>
+</body>
+</html>
