@@ -1001,6 +1001,11 @@ function verif_butineur() {
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 	}
+	else if (eregi("KHTML", $browser_description)) {
+		eregi("Safari/([^;]*)", $browser_description, $match);
+		$browser_name = "Safari";
+		$browser_version = $match[1];
+	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
 		// Numero de version pour Mozilla "authentique"
 		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
