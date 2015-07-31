@@ -568,6 +568,8 @@ function calculer_select ($select = array(), $from = array(),
 		// <BOUCLE7(ARTICLES){id_mot>0}{statut?} />#TOTAL_BOUCLE<//B7>
 		// penser a regarder aussi la clause orderby pour ne pas simplifier abusivement
 		// <BOUCLE9(ARTICLES){recherche truc}{par titre}>#ID_ARTICLE</BOUCLE9>
+		// penser a regarder aussi la clause groubpy pour ne pas simplifier abusivement
+		// <BOUCLE10(EVENEMENTS){id_rubrique} />#TOTAL_BOUCLE<//B10>
 		
 	  list($t,$c) = each($from);
 	  reset($from);
@@ -577,6 +579,7 @@ function calculer_select ($select = array(), $from = array(),
 		 calculer_jointnul($t, $join, $e) OR
 		 calculer_jointnul($t, $where, $e) OR
 		 calculer_jointnul($t, $orderby, $e) OR
+		 calculer_jointnul($t, $groupby, $e) OR
 		 calculer_jointnul($t, $having, $e))
 		 && count($afrom[$t])) {
 		 	reset($afrom[$t]);
