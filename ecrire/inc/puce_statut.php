@@ -72,41 +72,20 @@ function puce_statut_rubrique($id, $statut, $id_rubrique, $type) {
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
 	global $lang_objet;
 	
+	static $coord = array('publie' => 2,
+			      'prepa' => 0,
+			      'prop' => 1,
+			      'refuse' => 3,
+			      'poubelle' => 4);
+
 	$lang_dir = lang_dir($lang_objet);
 	if (!$id) {
 	  $id = $id_rubrique;
 	  $ajax_node ='';
 	} else	$ajax_node = " id='imgstatut$type$id'";
 
-	switch ($statut) {
-	case 'publie':
-		$clip = 2;
-		$puce = 'puce-verte.gif';
-		$title = _T('info_article_publie');
-		break;
-	case 'prepa':
-		$clip = 0;
-		$puce = 'puce-blanche.gif';
-		$title = _T('info_article_redaction');
-		break;
-	case 'prop':
-		$clip = 1;
-		$puce = 'puce-orange.gif';
-		$title = _T('info_article_propose');
-		break;
-	case 'refuse':
-		$clip = 3;
-		$puce = 'puce-rouge.gif';
-		$title = _T('info_article_refuse');
-		break;
-	case 'poubelle':
-		$clip = 4;
-		$puce = 'puce-poubelle.gif';
-		$title = _T('info_article_supprime');
-		break;
-	}
 
-	$inser_puce = http_img_pack($puce, $title, " style='margin: 1px;'$ajax_node");
+	$inser_puce = puce_statut($statut, " style='margin: 1px;'$ajax_node");
 
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique)
 	OR !_ACTIVER_PUCE_RAPIDE)
@@ -118,12 +97,15 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 			  "verte" => _T('texte_statut_publie'),
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
+
+	$clip = 1+ (11*$coord[$statut]);
+
 	if ($ajax){
 		$action = "\nonmouseover=\"montrer('statutdecal$type$id');\"";
 		return 	"<span class='puce_article_fixe'\n$action>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -".((11*$clip)+1)."px;'>"
+		. "<span class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -$clip"."px;'>"
 		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
@@ -247,19 +229,30 @@ function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type){
 
 // La couleur du statut
 // http://doc.spip.org/@puce_statut
-function puce_statut($statut, $type='article') {
+function puce_statut($statut, $atts='') {
 	switch ($statut) {
 		case 'publie':
-			return 'verte';
+			$img = 'puce-verte.gif';
+			$alt = _T('info_article_publie');
+			return http_img_pack($img, $alt, $atts);
 		case 'prepa':
-			return 'blanche';
+			$img = 'puce-blanche.gif';
+			$alt = _T('info_article_redaction');
+			return http_img_pack($img, $alt, $atts);
 		case 'prop':
-			return 'orange';
+			$img = 'puce-orange.gif';
+			$alt = _T('info_article_propose');
+			return http_img_pack($img, $alt, $atts);
 		case 'refuse':
-			return 'rouge';
+			$img = 'puce-rouge.gif';
+			$alt = _T('info_article_refuse');
+			return http_img_pack($img, $alt, $atts);
 		case 'poubelle':
-			return 'poubelle';
+			$img = 'puce-poubelle.gif';
+			$alt = _T('info_article_supprime');
+			return http_img_pack($img, $alt, $atts);
 	}
+	return http_img_pack($img, $alt, $atts);
 }
 
 // http://doc.spip.org/@afficher_script_statut

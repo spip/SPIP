@@ -314,7 +314,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
 	}
 	 
-	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", false);
+	$res .= gros_titre($titre, puce_statut($statut_article, " style='vertical-align: bottom'") . " &nbsp; ", false);
+
 	
 	if ($soustitre) {
 		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";

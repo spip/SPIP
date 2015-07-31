@@ -1014,7 +1014,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 	}
 	else {
 		$res = "\n<div class='verdana2 spip_large ligne_foncee' style='font-weight: bold;'>" .
-		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "style='vertical-align: bottom'") . " &nbsp; ")) .
+		  $ze_logo .
 		  typo($titre) .
 		  "</div>\n";
 	}

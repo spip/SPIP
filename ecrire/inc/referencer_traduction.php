@@ -163,7 +163,7 @@ function articles_traduction($id_article, $id_trad)
 		$lang_dir = lang_dir($lang_trad);
 		$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
 
-		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", " class='puce'");
+		$vals[] = puce_statut($statut_trad, " class='puce'");
 		
 		if ($id_article_trad == $id_trad) {
 			$vals[] = http_img_pack('langues-12.gif', "", " class='lang'");
