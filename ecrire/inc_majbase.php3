@@ -1039,6 +1039,12 @@ function maj_base() {
 		spip_query("UPDATE spip_articles SET idx='1' WHERE idx='oui'");
 		maj_version(1.821);
 	}
+	// le «type» des mots doit etre du texte, sinon on depasse en champ multi
+	if ($version_installee < 1.822) {
+		spip_query("ALTER TABLE spip_mots DROP INDEX type");
+		spip_query("ALTER TABLE spip_mots CHANGE type type TEXT NOT NULL");
+		maj_version(1.822);
+	}
 
 	return true;
 }

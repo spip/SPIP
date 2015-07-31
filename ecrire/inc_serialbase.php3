@@ -135,11 +135,11 @@ $spip_messages_key = array(
 
 $spip_mots = array(
 		"id_mot"	=> "bigint(21) NOT NULL",
-		"type"	=> "VARCHAR(100) NOT NULL",
 		"titre"	=> "text NOT NULL",
 		"descriptif"	=> "text NOT NULL",
 		"texte"	=> "longblob NOT NULL",
 		"id_groupe"	=> "bigint(21) NOT NULL",
+		"type"	=> "text NOT NULL",
 		"extra"	=> "longblob NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"url_propre" => "VARCHAR(255) NOT NULL",
@@ -148,7 +148,6 @@ $spip_mots = array(
 $spip_mots_key = array(
 		"PRIMARY KEY"	=> "id_mot",
 		"KEY idx"	=> "idx",
-		"KEY type"	=> "type",
 		"KEY url_propre"	=> "url_propre");
 
 $spip_groupes_mots = array(
