@@ -31,14 +31,14 @@ function install_fichier_connexion($nom, $texte)
 // http://doc.spip.org/@install_connexion
 function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $ldap='')
 {
-	$adr = addslashes($adr);
-	$port = addslashes($port);
-	$login = addslashes($login);
-	$pass = addslashes($pass);
-	$base = addslashes($base);
-	$type = addslashes($type);
-	$pref = addslashes($pref);
-	$ldap = addslashes($ldap);
+	$adr = addcslashes($adr,"'\\");
+	$port = addcslashes($port,"'\\");
+	$login = addcslashes($login,"'\\");
+	$pass = addcslashes($pass,"'\\");
+	$base = addcslashes($base,"'\\");
+	$type = addcslashes($type,"'\\");
+	$pref = addcslashes($pref,"'\\");
+	$ldap = addcslashes($ldap,"'\\");
 	return "\$GLOBALS['spip_connect_version'] = 0.7;\n"
 	. "spip_connect_db("
 	. "'$adr','$port','$login','$pass','$base'"
