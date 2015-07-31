@@ -550,7 +550,7 @@ function corriger_typo($letexte, $lang='') {
 	}
 
 	// trouver les blocs multi et les traiter a part
-	$letexte = extraire_multi($e = $letexte, $lang);
+	$letexte = extraire_multi($e = $letexte, $lang, true);
 	$e = ($e === $letexte);
 
 	// Charger & appliquer les fonctions de typographie
