@@ -172,6 +172,11 @@ function balise_URL_SITE_SPIP_dist($p) {
 
 // http://doc.spip.org/@balise_URL_ARTICLE_dist
 function balise_URL_ARTICLE_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_type = $p->type_requete;
 
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
@@ -193,6 +198,11 @@ function balise_URL_ARTICLE_dist($p) {
 
 // http://doc.spip.org/@balise_URL_RUBRIQUE_dist
 function balise_URL_RUBRIQUE_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_rubrique = interprete_argument_balise(1,$p);
 	if (!$_id_rubrique)
 		$_id_rubrique = champ_sql('id_rubrique',$p);
@@ -204,6 +214,11 @@ function balise_URL_RUBRIQUE_dist($p) {
 
 // http://doc.spip.org/@balise_URL_BREVE_dist
 function balise_URL_BREVE_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_breve = interprete_argument_balise(1,$p);
 	if (!$_id_breve)
 		$_id_breve = champ_sql('id_breve',$p);
@@ -215,6 +230,11 @@ function balise_URL_BREVE_dist($p) {
 
 // http://doc.spip.org/@balise_URL_MOT_dist
 function balise_URL_MOT_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_mot = interprete_argument_balise(1,$p);
 	if (!$_id_mot)
 		$_id_mot = champ_sql('id_mot',$p);
@@ -246,6 +266,11 @@ function balise_NOM_SITE_dist($p) {
 
 // http://doc.spip.org/@balise_URL_FORUM_dist
 function balise_URL_FORUM_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_forum = interprete_argument_balise(1,$p);
 	if (!$_id_forum)
 		$_id_forum = champ_sql('id_forum',$p);
@@ -257,6 +282,11 @@ function balise_URL_FORUM_dist($p) {
 
 // http://doc.spip.org/@balise_URL_DOCUMENT_dist
 function balise_URL_DOCUMENT_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_document = interprete_argument_balise(1,$p);
 	if (!$_id_document)
 		$_id_document = champ_sql('id_document',$p);
@@ -268,6 +298,11 @@ function balise_URL_DOCUMENT_dist($p) {
 
 // http://doc.spip.org/@balise_URL_AUTEUR_dist
 function balise_URL_AUTEUR_dist($p) {
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$_id_auteur = interprete_argument_balise(1,$p);
 	if (!$_id_auteur)
 		$_id_auteur = champ_sql('id_auteur',$p);
@@ -422,7 +457,6 @@ function calculer_balise_expose($p, $on, $off)
 //
 // http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
 function balise_EMBED_DOCUMENT_dist($p) {
-	balise_distante_interdite($p);
 
 	if (!is_array($p->param))
 		$p->param=array();
@@ -922,6 +956,11 @@ function balise_SELF_dist($p) {
 // http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
@@ -942,6 +981,11 @@ function balise_URL_PAGE_dist($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
@@ -961,6 +1005,11 @@ function balise_URL_ECRIRE_dist($p) {
 //
 // http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
 function balise_URL_ACTION_AUTEUR_dist($p) {
+
+	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
