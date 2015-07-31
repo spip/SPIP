@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_session.php3"); // action_auteur
 include_ecrire ("inc_date.php3");
-include_ecrire ("inc_urls.php3");
 
 //
 // Vignette pour les documents lies
@@ -113,7 +112,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
 	global $id_doublons;
-
+	charger_generer_url();
 	$id_doublons['documents'] .= ",$id_document";
 
 	if ($les_parametres) {
@@ -237,7 +236,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 function integre_image($id_document, $align, $type_aff) {
 	global $id_doublons;
-
+	charger_generer_url();
 	$id_doublons['documents'] .= ",$id_document";
 
 	$s = spip_query("SELECT * FROM spip_documents
@@ -588,7 +587,7 @@ function afficher_transferer_upload($type, $texte_upload)
 // Afficher les documents non inclus
 // (page des articles)
 
-function afficher_portfolio (
+function afficher_portfolio(
 	$documents = array(),	# liste des documents, avec toutes les donnees
 	$id_article, 			# numero de l'article ou de la rubrique
 	$type = "article",		# article ou rubrique ?
@@ -598,6 +597,7 @@ function afficher_portfolio (
 	$redirect_url,			# adresse du retour apres spip-image
 	$couleur				# couleur des cases du tableau
 ) {
+	charger_generer_url();
 	global $connect_id_auteur, $connect_statut;
 	global $id_doublons, $options,  $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
@@ -1085,7 +1085,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	global $id_doublons;
 	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
-
+	charger_generer_url();
 	$flag_deplie = teste_doc_deplie($id_document);
 
  	$doublons = $id_doublons['documents'].",";
