@@ -31,11 +31,14 @@ function changer_langue($lang) {
 function regler_langue_navigateur() {
 	global $HTTP_SERVER_VARS;
 	$accept_langs = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
+	if (!$langues_proposees = lire_meta('langues_proposees'))
+		$langues_proposees = $GLOBALS['all_langs'];
+
 	if (is_array($accept_langs)) {
 		while(list(, $s) = each($accept_langs)) {
 			if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
 				$lang = strtolower($r[1]);
-				if (changer_langue($lang)) return $lang;
+				if (ereg(",$lang,", ",$langues_proposees,") && changer_langue($lang)) return $lang;
 			}
 		}
 	}
