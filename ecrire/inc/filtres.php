@@ -1735,9 +1735,9 @@ function form_hidden($action) {
 				? ''
 				: ' value="'.entites_html($val).'"'
 				)
-			. ' type="hidden" />';
+			. ' type="hidden"'."\n />";
 	}
-	return join("\n", $hidden);
+	return join("", $hidden);
 }
 
 // http://doc.spip.org/@filtre_bornes_pagination_dist
