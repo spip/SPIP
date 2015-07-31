@@ -983,18 +983,15 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // quand il est appele par inc-public il n'est pas gourmand
 //
 function cron($gourmand = false) {
-	$touch = _DIR_SESSIONS.'background';
-	$touch_gourmand = $touch.'-gourmand';
-
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
-	// (ou est trop vieux), on va voir si un cron est necessaire.
+	// (ou est trop vieux -> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
-	if (spip_touch($touch_gourmand, 60, $gourmand)
+	if (spip_touch(_FILE_CRON_LOCK.'-gourmand', 60, $gourmand)
 	OR $gourmand) {
 
 		// Faut-il travailler ? Pas tous en meme temps svp
 		// Au passage si on travaille on bloque les autres
-		if (spip_touch($touch, 1)) {
+		if (spip_touch(_FILE_CRON_LOCK, 1)) {
 			include_ecrire('inc_cron.php3');
 			spip_cron();
 		}
