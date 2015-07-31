@@ -31,7 +31,7 @@
 /* Style des formulaires d'edition
 ----------------------------------------------- */
 .formulaire_spip {
-	padding:0 10px;
+	padding:0 10px 0;
 	border: 1px solid #ENV{foncee};
 	color: #333;
 	background-color: #f8f8f8;
@@ -144,7 +144,7 @@ h3.titrem {position:relative;}
 /* reponses succes/erreur */
 
 .formulaire_spip .reponse_formulaire,
-.error,.success,.notice {border:2px solid;color:#333;font-weight: normal;padding:[(#ENV{margin-bottom}|div{2})em] 10px;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;margin-bottom:#ENV{margin-bottom};}
+.error,.success,.notice {border:2px solid;color:#333;font-weight: normal;padding:[(#ENV{margin-bottom}|div{2})em] 10px;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;margin-bottom:#ENV{margin-bottom};margin-top:#ENV{margin-bottom};}
 .formulaire_spip .reponse_formulaire_ok, .success {color: #264409;border-color: #C6D880;background-color:#E6EFC2;background-image:url(#CHEMIN_IMAGE{ok-24.png});}
 .formulaire_spip .reponse_formulaire_erreur, .error {color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;background-image:url(#CHEMIN_IMAGE{erreur-24.png});}
 .notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;background-image:url(#CHEMIN_IMAGE{warning-24.png});}
