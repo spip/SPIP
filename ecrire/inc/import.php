@@ -231,9 +231,9 @@ function import_tables($request, $dir) {
 	}
 	
 	// placer la connexion sql dans le bon charset
-	spip_log('meta restauration_charset_sql_connexion:'.$GLOBALS['meta']['restauration_charset_sql_connexion']);
+
 	if (isset($GLOBALS['meta']['restauration_charset_sql_connexion']))
-		sql_set_connect_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
+		sql_set_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
 
 	@define('_DEBUG_IMPORT',false);
 	if (_DEBUG_IMPORT)
@@ -289,11 +289,12 @@ function import_init_meta($tag, $atts, $charset, $request)
 	// ou si le charset de la base est iso-xx
 	// (on ne peut garder une connexion utf dans ce cas)
 	// on laisse sql gerer la conversion de charset !
+
 	if (isset($GLOBALS['meta']['charset_sql_connexion'])
 		OR (strncmp($charset,'iso-',4)==0)
 		){
 		include_spip('base/abstract_sql');
-		if ($sql_char = spip_sql_character_set($charset)){
+		if ($sql_char = sql_get_charset($charset)){
 			$sql_char = $sql_char['charset'];
 			ecrire_meta('restauration_charset_sql_connexion',$sql_char);
 		}

@@ -12,9 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
+// Cette couche n'est pour le moment qu'un ensemble de fonctions ecrites
+// rapidement pour generaliser le code strictement MySQL de SPIP < 1.9.3.
+// Une reconception generale est a prevoir apres l'experience des premiers
+// portages.
+
 // Chargement a la volee de la description d'un serveur de base de donnees
 // via la fonction spip_connect()
 // qui etablira la premiere connexion si ce n'est fait.
+// Erreur fatale si la fonctionnalite est absente
 
 // http://doc.spip.org/@sql_serveur
 function sql_serveur($ins_sql, $serveur='') {
@@ -26,10 +33,23 @@ function sql_serveur($ins_sql, $serveur='') {
 	exit;
 }
 
-// http://doc.spip.org/@sql_set_connect_charset
-function sql_set_connect_charset($charset,$serveur=''){
-	$f = sql_serveur('set_connect_charset', $serveur);
+// Regler le codage de connexion
+
+function sql_set_charset($charset,$serveur=''){
+	$f = sql_serveur('set_charset', $serveur);
 	return $f($charset, $serveur);
+}
+
+// Demande si un charset est disponible. 
+// Pas d'erreur fatale ==> ne pas utiliser la fonction generale
+
+function sql_get_charset($charset, $serveur=''){
+  // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
+	$desc = spip_connect($serveur);
+	$c = @$desc['charsets'][$charset];
+	if (!$c) return false;
+	if (!function_exists($f=@$desc['get_charset'])) return false;
+	if ($f($c, $serveur)) return $c;
 }
 
 // Cette fonction est systematiquement appelee par les squelettes
@@ -92,7 +112,6 @@ function sql_selectdb($res, $serveur='')
 	return $f($res, $serveur);
 }
 
-// http://doc.spip.org/@sql_free
 // http://doc.spip.org/@sql_count
 function sql_count($res, $serveur='')
 {
@@ -274,35 +293,6 @@ function test_sql_int($type)
 	return (strpos($type, 'bigint') === 0
 	OR strpos($type, 'int') === 0
 	OR strpos($type, 'tinyint') === 0);
-}
-
-// donner le character set sql fonction de celui utilise par spip
-// $skip_verif permet de ne pas faire de verif a l'install car la bd n'est pas configuree
-// le script d'install se charge des verif lui meme
-// http://doc.spip.org/@spip_sql_character_set
-function spip_sql_character_set($charset, $skip_verif=false){
-	$sql_charset_coll = array(
-	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),
-	'cp1251'=>array('charset'=>'cp1251','collation'=>'cp1251_general_ci'),
-	'cp1256'=>array('charset'=>'cp1256','collation'=>'cp1256_general_ci'),
-	
-	'iso-8859-1'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	//'iso-8859-6'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	'iso-8859-9'=>array('charset'=>'latin5','collation'=>'latin5_turkish_ci'),
-	//'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	
-	'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
-	);
-	if (isset($sql_charset_coll[$charset])){
-		if ($skip_verif)
-			return $sql_charset_coll[$charset];
-		// verifier que le character set vise est bien supporte par mysql
-		$res = spip_query($q="SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
-		if ($res AND ($row = sql_fetch($res)))
-			return $sql_charset_coll[$charset];
-	}
-
-	return false;
 }
 
 // Trouve la description d'une table, en particulier celle d'une boucle

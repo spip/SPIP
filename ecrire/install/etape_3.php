@@ -83,20 +83,31 @@ function install_bases(){
 		$GLOBALS['connexions'][$server_db]['prefixe'] = $table_prefix;
 		$GLOBALS['connexions'][$server_db]['db'] = $sel_db;
 
-		// mettre les nouvelles install en utf-8 si mysql le supporte
 
-		if (($server_db == 'mysql') 
-		AND ($charset = spip_sql_character_set('utf-8', true))
-		AND ($res = $fquery("SHOW CHARACTER SET LIKE "._q($charset['charset']), $server_db))
-		AND ($row = sql_fetch($res, $server_db))
-		  ){
-			$GLOBALS['meta']['charset_sql_base'] = $charset['charset'];
-			$GLOBALS['meta']['charset_collation_sql_base'] = $charset['collation'];
-			$GLOBALS['meta']['charset_sql_connexion'] = $charset['charset'];
-			$fquery("SET NAMES "._q($charset['charset']), $server_db);
+		// Si possible, demander au serveur d'envoyer les textes
+		// dans le codage std de SPIP,
+
+		$charset = sql_get_charset(_DEFAULT_CHARSET, $server_db);
+
+		if ($charset) {
+			sql_set_charset($charset['charset'], $server_db);
+			$GLOBALS['meta']['charset_sql_base'] = 
+				$charset['charset'];
+			$GLOBALS['meta']['charset_collation_sql_base'] = 
+				$charset['collation'];
+			$GLOBALS['meta']['charset_sql_connexion'] = 
+				$charset['charset'];
+		} else spip_log(_DEFAULT_CHARSET . " inconnu du serveur SQL");
+
+		creer_base($server_db); // AT LAST
+
+		// memoriser avec quel charset on l'a creee
+		if ($charset) {
+			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_base', '".$charset['charset']."', 'non')", '', $server_db);
+			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_collation_sql_base', '".$charset['collation']."', 'non')", '', $server_db);
+			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_connexion', '".$charset['charset']."', 'non')", '', $server_db);
 		}
-		creer_base($server_db); // create car not exists
-		sql_insert('spip_meta', '(nom, valeur,impt)', "('version_installee', '$spip_version','non')", array(), $server_db);
+		sql_insert('spip_meta', '(nom, valeur,impt)', "('version_installee', '$spip_version','non')", array(), $server_db);		@sql_insert("spip_meta", "(nom, valeur)", "('nouvelle_install', '1')",  array(), $server_db);
 	} else {
 
 	  // pour recreer les tables disparues au besoin
@@ -110,25 +121,12 @@ function install_bases(){
 	  if (!$version_installee OR ($spip_version < $version_installee))
 		$fquery("UPDATE spip_meta SET valeur=$spip_version, impt='non'
 			WHERE nom='version_installee'", $server_db);
-	}
+	  // eliminer la derniere operation d'admin mal terminee
+	  // notamment la mise a jour 
+	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);	}
 
 	$ligne_rappel = ($server_db != 'mysql') ? ''
 	: test_rappel_nom_base_mysql($server_db);
-
-	if ($nouvelle) {
-		if (isset($GLOBALS['meta']['charset_sql_base']))
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_base', '".$GLOBALS['meta']['charset_sql_base']."', 'non')", '', $server_db);
-		if (isset($GLOBALS['meta']['charset_collation_sql_base']))
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_collation_sql_base', '".$GLOBALS['meta']['charset_collation_sql_base']."', 'non')", '', $server_db);
-		if (isset($GLOBALS['meta']['charset_sql_connexion']))
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_connexion', '".$GLOBALS['meta']['charset_sql_connexion']."', 'non')", '', $server_db);
-       
-		@sql_insert("spip_meta", "(nom, valeur)", "('nouvelle_install', '1')",  array(), $server_db);
-	} else {
-	  // eliminer la derniere operation d'admin mal terminee
-	  // notamment la mise a jour 
-		@$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
-	}
 
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
 	if (!$result_ok) return "<!--\n$nouvelle $ligne_rappel\n-->";
