@@ -16,7 +16,7 @@ $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
 
 if ($id_article==0) {
-	if ($new=='oui') {
+	if (($new=='oui') AND ($titre!='')) {
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
 		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics')");
 		$id_article = mysql_insert_id();
