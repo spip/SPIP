@@ -594,10 +594,23 @@ function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
 	return verifier_low_sec($id_auteur, $cle, $dir);
 }
 
-// sinon{texte, rien} : affiche "rien" si la chaine est vide,
-// affiche la chaine si non vide ;
-// attention c'est compile directement dans inc/references
-// http://doc.spip.org/@sinon
+/**
+ * La fonction sinon retourne le second parametre lorsque
+ * le premier est considere vide, sinon retourne le premier parametre.
+ *
+ * En php sinon($a, 'rien') retourne $a ou 'rien' si $a est vide.
+ * En filtre spip |sinon{#TEXTE, rien} : affiche #TEXTE ou "rien" si #TEXTE est vide,
+ *
+ * Note : l'utilisation de |sinon en tant que filtre de squelette
+ * est directement compile dans public/references par la fonction filtre_logique()
+ * 
+ * @param mixed $texte
+ * 		Contenu de reference a tester
+ * @param mixed $sinon
+ * 		Contenu a retourner si le contenu de reference est vide
+ * @return mixed
+ * 		Retourne $texte, sinon $sinon.
+**/
 function sinon ($texte, $sinon='') {
 	if ($texte OR (!is_array($texte) AND strlen($texte)))
 		return $texte;
@@ -1963,15 +1976,31 @@ function url_absolue_css ($css) {
 	return $f;
 }
 
-// filtre table_valeur
-// permet de recuperer la valeur d'un tableau pour une cle donnee
-// prend en entree un tableau serialise ou non (ce qui permet d'enchainer le filtre)
-// ou un objet
-// Si la cle est de la forme a/b, on renvoie $table[a][b]
-// http://doc.spip.org/@table_valeur
-function table_valeur($table,$cle,$defaut=''){
+
+
+/**
+ * Le filtre table_valeur
+ * permet de recuperer la valeur d'une cle donnee
+ * dans un tableau (ou un objet).
+ * 
+ * @param mixed $table
+ * 		Tableau ou objet
+ * 		(ou chaine serialisee de tableau, ce qui permet d'enchainer le filtre)
+ * 		
+ * @param string $cle
+ * 		Cle du tableau (ou parametre public de l'objet)
+ * 		Cette cle peut contenir des caracteres / pour selectionner
+ * 		des sous elements dans le tableau, tel que "sous/element/ici"
+ * 		pour obtenir la valeur de $tableau['sous']['element']['ici']
+ *
+ * @param mixed $defaut
+ * 		Valeur par defaut retournee si la cle demandee n'existe pas
+ * 
+ * @return mixed Valeur trouvee ou valeur par defaut.
+**/
+function table_valeur($table, $cle, $defaut='') {
 	foreach (explode('/', $cle) as $k) {
-		$table= is_string($table) ? unserialize($table) : $table;
+		$table = is_string($table) ? unserialize($table) : $table;
 
 		if (is_object($table))
 			$table =  (($k !== "") and isset($table->$k)) ? $table->$k : $defaut;
