@@ -742,6 +742,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 // et une suite de noms N.
 // Elle demande a la fonction la precedente son tableau
 // et affiche selon le type les elements indexes par N dans ce tableau.
+// Si le suite de noms est vide, tout le tableau est pris
 // Ces noms N sont aussi des classes CSS utilisees par http_calendrier_init
 
 function agenda_affiche($i)
@@ -753,12 +754,12 @@ function agenda_affiche($i)
   $type = array_shift($args);
   $agenda = agenda_memo(0);
   $evt = array();
-  foreach ($args as $k) {  
+  foreach (($args ? $args : array_keys($agenda)) as $k) {  
       if (is_array($agenda[$k]))
 	foreach($agenda[$k] as $d => $v) { 
 	  $evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
 	}
-  }
+    }
   if ($type != 'periode')
       $evt = array('', $evt);
   else
@@ -1378,5 +1379,8 @@ function image_typo() {
 
 }
 
-
+function modulo($nb, $mod, $add=0)
+{
+  return ($nb%$mod)+$add;
+}
 ?>
