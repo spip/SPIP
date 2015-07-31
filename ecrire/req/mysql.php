@@ -486,9 +486,9 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		return;
 
 	$res = spip_mysql_query("SELECT version() as v");
-	if ($row = mysql_fetch_array($res)
-	 && (version_compare($row['v'],'5.0','>=')))
+	if (($row = mysql_fetch_array($res)) && (version_compare($row['v'],'5.0','>='))) {
 		spip_mysql_query("SET sql_mode=''");
+	}
 
 	foreach($cles as $k => $v) {
 		$keys .= "$s\n\t\t$k ($v)";
