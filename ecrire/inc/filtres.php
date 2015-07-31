@@ -1766,6 +1766,11 @@ function form_hidden($action) {
 			$action = preg_replace('/([?]'.preg_quote($fond).'[^&=]*[0-9]+)(&|$)/', '?&', $action);
 		}
 	}
+	// defaire ce qu'a injecte urls_decoder_url : a revoir en modifiant la signature de urls_decoder_url
+	if (defined('_DEFINIR_CONTEXTE_TYPE') AND _DEFINIR_CONTEXTE_TYPE)
+		unset($contexte['type']);
+	if (defined('_DEFINIR_CONTEXTE_TYPE_PAGE') AND _DEFINIR_CONTEXTE_TYPE_PAGE)
+		unset($contexte['type-page']);
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
 	// ecraser les elements de la forme mots[]=1&mots[]=2
