@@ -12,8 +12,24 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-// http://doc.spip.org/@generer_action_auteur
+/**
+ * retourne une URL ou un formulaire securises
+ *
+ * http://doc.spip.org/@generer_action_auteur
+ *
+ * @param string $action
+ * @param string $arg
+ * @param string $redirect
+ * @param bool|int|string $mode
+ *   -1 : renvoyer action, arg et hash sous forme de array()
+ *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   string : renvoyer un formulaire
+ * @param string|int $att
+ *   id_auteur pour lequel generer l'action en mode url ou array()
+ *   atributs du formulaire en mode formulaire
+ * @param bool $public
+ * @return array|string
+ */
 function generer_action_auteur($action, $arg, $redirect = "", $mode = false, $att = '', $public = false){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	return $securiser_action($action, $arg, $redirect, $mode, $att, $public);
