@@ -261,23 +261,11 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 			spip_query($query);
 		}
 	}
-/*	if (!$dest) {
-		if ($id_document_lie)
-			$dest = "doc-$id_document_lie-prv";
-		else
-			$dest = "doc-$id_document";
-	}
-	$dest = ereg_replace("\.([^.]+)$", "", $dest) . ".$ext";
 
-	if (creer_repertoire("IMG", $ext))
-		$dest_path = "IMG/$ext/$dest";
-	else
-		$dest_path = "IMG/$dest";
-*/
 	$dest = 'IMG/';
 	if (creer_repertoire('IMG', $ext))
 		$dest .= $ext.'/';
-	$dest .= ereg_replace("([^a-zA-Z0-9_=-]|\.)", "_",
+	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_",
 	nettoyer_chaine_indexation(ereg_replace("\.([^.]+)$", "",
 	basename($orig))));
 	$n = 0;
