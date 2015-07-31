@@ -765,13 +765,29 @@ function calculer_critere_parties_aux($idb, &$boucles, $param){
 	}
 }
 
-//
-// La fonction d'aiguillage sur le nom du critere dans leur liste
-// Si l'une au moins des fonctions associees retourne une erreur 
-// (i.e. un tableau), on propage l'information
-// Sinon, ne retourne rien (affectation directe dans l'arbre)
 
-// http://doc.spip.org/@calculer_criteres
+/**
+ * Compile les critères d'une boucle
+ * 
+ * Cette fonction d'aiguillage cherche des fonctions spécifiques déclarées
+ * pour chaque critère demandé, dans l'ordre ci-dessous :
+ * 
+ * - critere_{serveur}_{table}_{critere}, sinon avec _dist
+ * - critere_{serveur}_{critere}, sinon avec _dist
+ * - critere_{table}_{critere}, sinon avec _dist
+ * - critere_{critere}, sinon avec _dist
+ * - critere_defaut, sinon avec _dist
+ *
+ * Émet une erreur de squelette si un critère retourne une erreur.
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @return string|array
+ *     string : Chaine vide sans erreur
+ *     array : Erreur sur un des critères
+**/
 function calculer_criteres($idb, &$boucles){
 	$msg = '';
 	$boucle = $boucles[$idb];
