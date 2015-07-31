@@ -4064,6 +4064,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	if (!$etoile
 		AND is_array($traitement)
 	  AND (isset($traitement[$table_sql]) OR isset($traitement[0]))){
+	  	include_spip('inc/texte');
 		$traitement = $traitement[isset($traitement[$table_sql]) ? $table_sql : 0];
 		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
 		// FIXME: $connect et $Pile[0] font souvent partie des traitements.
