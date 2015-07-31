@@ -142,6 +142,7 @@ function exec_import_all_dist()
 	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
 }
 
+// http://doc.spip.org/@import_all_milieu
 function import_all_milieu($request, $dir)
 {
 	global $trans;

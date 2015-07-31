@@ -1194,6 +1194,7 @@ function traiter_raccourci_lien($regs) {
 
 define('_RACCOURCI_CHAPO', ',^(\W*)(\W*)(\w*\d+([?#].*)?)$,');
 
+// http://doc.spip.org/@chapo_redirige
 function chapo_redirige($chapo)
 {
 	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
