@@ -124,7 +124,7 @@ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 echo "<div class='serif' align='$spip_lang_left'>";
 
-dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date,$annee, $mois, $jour, $heure, $minute,  $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
+dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
 
 //
 // Liste des auteurs de l'article
@@ -638,7 +638,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
-function dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date,$annee, $mois, $jour, $heure, $minute,  $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
+function dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
 {
 
   global $spip_lang_left, $spip_lang_right, $options;
