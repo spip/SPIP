@@ -1403,7 +1403,7 @@ function enfant_rub($collection){
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
 		
 	if ($voir_logo) {
-		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
+		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: 0px; margin-top: 0px;";
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	} else $logo ='';
 
@@ -1441,10 +1441,12 @@ function enfant_rub($collection){
 			  "'>".
 			  typo($titre) .
 			  "</a></span>";
+			  
+			  $titre = (is_string($logo) ? $logo : '') .
+				  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique");
+			  
 			$les_enfants = "\n<div class='enfants'>" .
-			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
-			  (is_string($logo) ? $logo : '') .
-			  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique") .
+			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true, "", $titre) .
 			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
 			  (($spip_display == 4) ? '' : $les_sous_enfants) .
 			  "\n<div style='clear:both;'></div>"  .

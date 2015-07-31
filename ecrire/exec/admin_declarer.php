@@ -56,11 +56,11 @@ function autres_bases()
 	$tables =  bases_referencees(_FILE_CONNECT_TMP);
 
 	if ($tables)
-		$tables = '<br /><br />'
-		  .  _T('config_info_base_sup_disponibles')
+		$tables = "<br /><br /><fieldset style='margin-bottom: 10px;'>"
+		  .  "<legend>"._T('config_info_base_sup_disponibles')."</legend>"
 		  . "<ul>\n<li>"
 		  . join("</li>\n<li>",  $tables)
-		  . "</li>\n</ul>";
+		  . "</li>\n</ul></fieldset>";
 	else $tables ='';
 
 	list($adresse, $login, $pass, $sel, $server)
@@ -78,10 +78,10 @@ function autres_bases()
 		? ''
 	: ("\n<input type='hidden' name='sel_db' value='" . $sel . "' />\n");
 
-	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
+	return debut_cadre_trait_couleur('',true,'',_T('onglet_declarer_une_autre_base'))
 	  .  _T('config_info_base_sup')
 	  . $tables
 	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array($server_db), $hidden, 'sup1')
-	  .  "</div>";
+	  . fin_cadre_trait_couleur(true);
 }
 ?>
