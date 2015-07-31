@@ -115,7 +115,7 @@ function sql_fetch($res, $serveur='', $option=true) {
 	return $f($res, NULL, $serveur, $option!==false);
 }
 
-function sql_fetchall($res, $serveur='', $option=true){
+function sql_fetch_all($res, $serveur='', $option=true){
 	$rows = array();
 	if (!$res) return $rows;
 	$f = sql_serveur('fetch', $serveur,  $option==='continue' OR $option===false);
@@ -382,7 +382,7 @@ function sql_allfetsel(
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
 	if ($option===false) return $q;
-	return sql_fetchall($q, $serveur, $option);
+	return sql_fetch_all($q, $serveur, $option);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
