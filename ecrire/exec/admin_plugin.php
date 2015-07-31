@@ -7,6 +7,7 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
+include_spip('inc/securiser_action');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_admin_plugin() {
