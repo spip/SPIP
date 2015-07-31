@@ -29,7 +29,7 @@ function formulaires_configurer_relayeur_verifier_dist(){
 	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
 
-	if ($http_proxy AND !preg_match(",https?://,", $http_proxy)){
+	if ($http_proxy AND !tester_url_absolue($http_proxy)){
 		$erreurs['http_proxy'] = _L('format_proxy_incorrect');
 	}
 
