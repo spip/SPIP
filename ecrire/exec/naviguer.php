@@ -385,9 +385,6 @@ function tester_rubrique_vide($id_rubrique) {
 	if (sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND (statut<>'poubelle')"))
 		return false;
 
-	if (sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop')"))
-		return false;
-
 	if (sql_countsel('spip_documents_liens', "id_objet=".intval($id_rubrique)." AND objet='rubrique'"))
 		return false;
 

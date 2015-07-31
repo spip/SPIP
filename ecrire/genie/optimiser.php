@@ -109,15 +109,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
 
-	# les breves qui sont dans une id_rubrique inexistante
-	$res = sql_select("B.id_breve AS id",
-		        "spip_breves AS B
-		        LEFT JOIN spip_rubriques AS R
-		          ON B.id_rubrique=R.id_rubrique",
-			"R.id_rubrique IS NULL
-		         AND B.maj < $mydate");
-
-	$n+= optimiser_sansref('spip_breves', 'id_breve', $res);
 
 	# les droits d'auteurs sur une id_rubrique inexistante
 	# (plusieurs entrees seront eventuellement detruites pour chaque rub)
@@ -143,14 +134,6 @@ function optimiser_base_disparus($attente = 86400) {
 			"A.id_article IS NULL");
 
 	$n+= optimiser_sansref('spip_auteurs_articles', 'id_article', $res);
-
-
-	//
-	// Breves
-	//
-
-	sql_delete("spip_breves", "statut='refuse' AND maj < $mydate");
-
 
 
 

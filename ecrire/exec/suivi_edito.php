@@ -23,11 +23,6 @@ function encours_suivi()
 
 	$res .=  $lister_objets('articles',array('titre'=>_T('info_articles_proposes'),'statut'=>'prop', 'par'=>'date'));
 
-	//
-	// Les breves a valider
-	//
-	$res .= $lister_objets('breves',array('titre'=>afficher_plus_info(generer_url_ecrire('breves'))._T('info_breves_valider'),'statut'=>array('prepa','prop'), 'par'=>'date_heure'));
-
 
 	return pipeline('accueil_encours',$res);
 
@@ -69,32 +64,6 @@ function etat_base_suivi()
 		$res .= "</div>";
 	}
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', '', 'statut', '','', "COUNT(*)<>0");
-
-	$cpt = array();
-	$cpt2 = array();
-	$defaut = $where ? '0/' : '';
-	while($row = sql_fetch($q)) {
-	  $cpt[$row['statut']] = $row['cnt'];
-	  $cpt2[$row['statut']] = $defaut;
-	}
- 
-	if ($cpt) {
-		if ($where) {
-			$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', $where, "statut");
-			while($row = sql_fetch($q)) {
-				$r = $row['statut'];
-				$cpt2[$r] = intval($row['cnt']) . '/';
-			}
-		}
-		$res .= "<div class='accueil_informations breves verdana1'>";
-		$res .= afficher_plus(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'].$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
-		$res .= "</ul>";
-		$res .= "</div>";
-	}
 
 	$res .= "<div class='accueil_informations auteurs verdana1'>";
 	$res .= suivi_liste_participants();
