@@ -42,6 +42,10 @@ function liste_plugin_files($dir_plugins = null){
 			}
 		}
 		sort($plugin_files[$dir_plugins]);
+		// et on lit le XML de tous les plugins pour le mettre en cache
+		// et en profiter pour nettoyer ceux qui n'existent plus du cache
+		$get_infos = charger_fonction('get_infos','plugins');
+		$get_infos($plugin_files[$dir_plugins],false,$dir_plugins,true);
 	}
 	return $plugin_files[$dir_plugins];
 }

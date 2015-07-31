@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $dir
  * @return array
  */
-function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS){
+function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS, $clean_old=false){
 	static $cache='';
 	static $filecache = '';
 
@@ -50,6 +50,12 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS)
 		if (!$reload) $reload = -1;
 		foreach($plug as $nom)
 		  $res |= plugins_get_infos_un($nom, $reload, $dir, $cache);
+		// Nettoyer le cache des vieux plugins qui ne sont plus la
+		if ($clean_old){
+			foreach(array_keys($cache[$dir]) as $p)
+				if (!in_array($p,$plug))
+					unset($cache[$dir][$p]);
+		}
 	}
 	if ($res) {
 		ecrire_fichier($filecache, serialize($cache));
