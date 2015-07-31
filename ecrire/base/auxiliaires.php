@@ -57,7 +57,6 @@ $spip_referers_key = array(
 $spip_referers_articles = array(
 		"id_article"	=> "int UNSIGNED NOT NULL",
 		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
-		"date"		=> "DATE NOT NULL",
 		"referer"	=> "VARCHAR (255) DEFAULT '' NOT NULL",
 		"visites"	=> "int UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
