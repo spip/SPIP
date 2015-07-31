@@ -65,6 +65,72 @@ function no_password_proxy_url($http_proxy) {
 }
 
 //
+// Demarre une transaction HTTP (s'arrete a la fin des entetes)
+// retourne un descripteur de fichier
+//
+function init_http($get, $url) {
+	$http_proxy = lire_meta("http_proxy");
+	if (!eregi("^http://", $http_proxy))
+		$http_proxy = '';
+	else
+		$via_proxy = " (proxy $http_proxy)";
+
+	spip_log("http $get $url$via_proxy");
+
+	$t = @parse_url($url);
+	$host = $t['host'];
+	if ($t['scheme'] == 'http') {
+		$scheme = 'http'; $scheme_fsock='';
+	} else {
+		$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
+	}
+	if (!($port = $t['port'])) $port = 80;
+	$query = $t['query'];
+	if (!($path = $t['path'])) $path = "/";
+
+	if ($http_proxy) {
+		$t2 = @parse_url($http_proxy);
+		$proxy_host = $t2['host'];
+		$proxy_user = $t2['user'];
+		$proxy_pass = $t2['pass'];
+		if (!($proxy_port = $t2['port'])) $proxy_port = 80;
+		$f = @fsockopen($proxy_host, $proxy_port);
+	} else
+		$f = @fsockopen($scheme_fsock.$host, $port);
+
+	if ($f) {
+		if ($http_proxy)
+			fputs($f, "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
+		else
+			fputs($f, "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
+
+		fputs($f, "Host: $host\r\n");
+		fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
+
+		// Proxy authentifiant
+		if ($proxy_user) {
+			fputs($f, "Proxy-Authorization: Basic "
+			. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
+		}
+		// Referer = c'est nous !
+		if ($referer = lire_meta("adresse_site"))
+			fputs($f, "Referer: $referer/\r\n");
+
+	}
+	// fallback : fopen
+	else if (!$GLOBALS['tester_proxy']) {
+		$f = @fopen($url, "rb");
+		$fopen = true;
+	}
+	// echec total
+	else {
+		$f = false;
+	}
+
+	return array($f, $fopen);
+}
+
+//
 // Recupere une page sur le net
 // et au besoin l'encode dans le charset local
 //
@@ -72,59 +138,21 @@ function no_password_proxy_url($http_proxy) {
 // taille_max : arreter le contenu au-dela (0 = seulement les entetes)
 // Par defaut taille_max = 1Mo.
 function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576) {
-	$http_proxy = lire_meta("http_proxy");
-	if (!eregi("^http://", $http_proxy))
-		$http_proxy = '';
-	else
-		$via_proxy = " (proxy $http_proxy)";
 
-	spip_log("chargement $url$via_proxy");
+	if ($taille_max == 0)
+		$get = 'HEAD';
+	else
+		$get = 'GET';
+
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
-		$t = @parse_url($url);
-		$host = $t['host'];
-		if ($t['scheme'] == 'http') {
-			$scheme = 'http'; $scheme_fsock='';
+		list($f, $fopen) = init_http($get, $url);
+
+		// si on a utilise fopen() - passer a la suite
+		if ($fopen) {
+			spip_log('connexion via fopen');
+			break;
 		} else {
-			$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
-		}
-		if (!($port = $t['port'])) $port = 80;
-		$query = $t['query'];
-		if (!($path = $t['path'])) $path = "/";
-
-		if ($http_proxy) {
-			$t2 = @parse_url($http_proxy);
-			$proxy_host = $t2['host'];
-			$proxy_user = $t2['user'];
-			$proxy_pass = $t2['pass'];
-			if (!($proxy_port = $t2['port'])) $proxy_port = 80;
-			$f = @fsockopen($proxy_host, $proxy_port);
-		} else
-			$f = @fsockopen($scheme_fsock.$host, $port);
-
-		if ($taille_max == 0)
-			$get = 'HEAD';
-		else
-			$get = 'GET';
-
-		if ($f) {
-			if ($http_proxy)
-				fputs($f, "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
-			else
-				fputs($f, "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
-
-			fputs($f, "Host: $host\r\n");
-			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
-
-			// Proxy authentifiant
-			if ($proxy_user) {
-				fputs($f, "Proxy-Authorization: Basic "
-				. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
-			}
-			// Referer = c'est nous !
-			if ($referer = lire_meta("adresse_site"))
-				fputs($f, "Referer: $referer/\r\n");
-
 			// Fin des entetes envoyees par SPIP
 			fputs($f,"\r\n");
 
@@ -145,22 +173,20 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 					spip_log("Location: $location");
 				}
 			}
-			if ($status >= 300 AND $status < 400 AND $location) $url = $location;
-			else if ($status != 200) return;
-			else break; # ici on est content
+			if ($status >= 300 AND $status < 400 AND $location)
+				$url = $location;
+			else if ($status != 200)
+				return;
+			else
+				break; # ici on est content
 			fclose($f);
 			$f = false;
-		}
-		else {
-			if (!$GLOBALS['tester_proxy'])
-				$f = @fopen($url, "rb");
-			break;
 		}
 	}
 
 	// Contenu de la page
 	if (!$f) {
-		spip_log("ECHEC chargement $url$via_proxy");
+		spip_log("ECHEC chargement $url");
 		$result = '';
 	} else {
 		while (!feof($f) AND strlen($result)<$taille_max)
