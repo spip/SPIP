@@ -891,12 +891,7 @@ function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 
 // http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
-	// remplacer le prefixe de table
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$prefixe = $connexion['prefixe'];
-
-	if ($prefixe) $nom_table = preg_replace('/^spip/', $prefixe, $nom_table);
-		
+	
 	$query = 
 			'SELECT sql, type FROM'
    			. ' (SELECT * FROM sqlite_master UNION ALL'
