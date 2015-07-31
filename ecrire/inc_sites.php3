@@ -200,7 +200,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
 				$result_deja = spip_query($query_deja);
-				if ($result_deja AND (spip_num_rows($result_deja)==0)){
+				if (spip_num_rows($result_deja) == 0 and !spip_sql_error()) {
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
 						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', FROM_UNIXTIME($la_date), '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
