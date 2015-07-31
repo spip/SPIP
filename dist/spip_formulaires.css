@@ -34,7 +34,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Boutons */
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
 .formulaire_spip .boutons input { margin-left: 1em; }
-.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; font-weight: normal; color: #FFF; }
+.formulaire_spip .boutons input, input.submit {}
 
 
 /* Reponses, previsu et erreurs
@@ -48,7 +48,6 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
 fieldset.previsu legend { padding: 0 0.50em; color: #F57900; font-weight: bold; }
 fieldset.previsu li { padding: 3px; border: none; }
-fieldset.previsu .boutons input { background-color: #F57900; border-color: #F57900; color: #FFF; }
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.20em; }
