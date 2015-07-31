@@ -128,7 +128,9 @@ function decompiler_liste($sources, $fmt, $prof=0) {
 function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 	$res = '';
 	$f = 'format_critere_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
+
 	foreach($sources as $crit) {
+		if (!is_array($crit)) continue; // boucle recursive
 		array_shift($crit);
 		$args = array();
 		foreach($crit as $v) {
