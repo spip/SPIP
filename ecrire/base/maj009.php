@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_maj009_dist
 function base_maj009_dist($version_installee, $version_cible)
 {
 	if (upgrade_vers(0.98, $version_installee, $version_cible)) {

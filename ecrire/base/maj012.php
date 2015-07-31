@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_maj012_dist
 function base_maj012_dist($version_installee, $version_cible)
 {
 	// Correction de l'oubli des modifs creations depuis 1.04
