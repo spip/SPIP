@@ -605,6 +605,7 @@ Dankon pro via partopreno
 'info_joindre_document_article' => 'Vi povas ligi kun tiu artikolo dokumentojn de la tipo',
 'info_joindre_document_rubrique' => 'Vi povas ligi en tiu rubriko dokumentojn de la tipo',
 'info_joindre_documents_article' => 'Vi povas ligi kun tiu artikolo dokumentojn de la tipo:',
+'info_jours' => 'tagoj',
 'info_l_article' => 'la artikolo',
 'info_la_breve' => 'la informeto',
 'info_la_rubrique' => 'la rubriko',
