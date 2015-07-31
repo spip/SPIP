@@ -183,7 +183,7 @@ function echappe_html($letexte,$source) {
 		}
 
 		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."___SPIP_$source$num_echap ___"
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
 
@@ -195,7 +195,7 @@ function echappe_html($letexte,$source) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
 		$pos = strpos($letexte, $les_echap[$num_echap]);
-		$letexte = substr($letexte,0,$pos)."___SPIP_$source$num_echap ___"
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($les_echap[$num_echap]));
 	}
 
@@ -204,7 +204,7 @@ function echappe_html($letexte,$source) {
 
 // Traitement final des echappements
 function echappe_retour($letexte, $les_echap, $source) {
-	while(ereg("___SPIP_$source([0-9]+) ___", $letexte, $match)) {
+	while (ereg("@@SPIP_$source([0-9]+)@@", $letexte, $match)) {
 		$lenum = $match[1];
 		$cherche = $match[0];
 		$pos = strpos($letexte, $cherche);
@@ -267,20 +267,34 @@ function interdire_scripts($source) {
 
 // Correction typographique francaise
 function typo_fr($letexte) {
-	include_ecrire('inc_charsets.php3');
+	global $flag_strtr2;
+	static $trans = '';
 
-	// nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
-	$chars = array (160 => '~', 187 => '&#187;', 171 => '&#171;', 176 => '&#176;');
-	while (list($c,$r) = each($chars)) {
-		$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
-		$letexte = ereg_replace($c,$r,$letexte);
+	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
+	if (!$trans) {
+		$trans = array(
+			"&nbsp;" => "~",
+			"&raquo;" => "&#187;",
+			"&laquo;" => "&#171;",
+			"&deg;" => "&#176;"
+		);
+		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 176 => '&#176;');
+		$charset = lire_meta('charset');
+		include_ecrire('inc_charsets.php3');
+
+		while (list($c, $r) = each($chars)) {
+			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
+			$trans[$c] = $r;
+		}
 	}
 
-	// unifier sur la representation unicode
-	$letexte = ereg_replace("&nbsp;","~",$letexte);
-	$letexte = ereg_replace("&raquo;","&#187;",$letexte);
-	$letexte = ereg_replace("&laquo;","&#171;",$letexte);
-	$letexte = ereg_replace("&deg;","&#176;",$letexte);
+	if ($flag_strtr2)
+		$letexte = strtr($letexte, $trans);
+	else {
+		reset($trans);
+		while (list($c, $r) = each($trans))
+			$letexte = str_replace($c, $r, $letexte);
+	}
 
 	$cherche1 = array(
 		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
@@ -292,7 +306,6 @@ function typo_fr($letexte) {
 		/* 3 */		'~\0',
 		/* 4 */		'\0~'
 	);
-
 	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
@@ -304,22 +317,14 @@ function typo_fr($letexte) {
 		'\1:',
 		'&nbsp;'
 	);
-
 	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
-
-	// remettre le caractere simple ??
-	if (lire_meta('charset') == 'iso-8859-1') {
-		$chars = array (187,171,176);
-		while (list(,$c) = each($chars))
-			$letexte = ereg_replace("&#$c;",chr($c),$letexte);
-	}
 
 	return ($letexte);
 }
 
 // rien sauf les ~
 function typo_en($letexte) {
-	$letexte = ereg_replace("&nbsp;","~",$letexte);
+	$letexte = str_replace("&nbsp;", "~", $letexte);
 	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
 }
 
@@ -717,13 +722,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   sans pcre ; toutefois les elements ci-dessous sont un peu optimises (str_replace
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
-		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "___SPIP_ligne_horizontale___", $letexte);
+		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
 		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
-		$letexte = str_replace("{{{", "___SPIP_debut_intertitre___", $letexte);
-		$letexte = str_replace("}}}", "___SPIP_fin_intertitre___", $letexte);
+		$letexte = str_replace("{{{", "@@SPIP_debut_intertitre@@", $letexte);
+		$letexte = str_replace("}}}", "@@SPIP_fin_intertitre@@", $letexte);
 		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
 		$letexte = str_replace("}}", "</b>", $letexte);
 		$letexte = str_replace("{", "<i class=\"spip\">", $letexte);
@@ -755,13 +760,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 16 */	"/<\/quote>/"
 		);
 		$remplace1 = array(
-			/* 0 */ 	"___SPIP_ligne_horizontale___",
+			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
 			/* 1 */ 	"$puce&nbsp;",
 			/* 2 */ 	"\n<br />$puce&nbsp;",
 			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"\n<p>",
-			/* 5 */ 	"___SPIP_debut_intertitre___",
-			/* 6 */ 	"___SPIP_fin_intertitre___",
+			/* 5 */ 	"@@SPIP_debut_intertitre@@",
+			/* 6 */ 	"@@SPIP_fin_intertitre@@",
 			/* 7 */ 	"<b class=\"spip\">",
 			/* 8 */ 	"</b>",
 			/* 9 */ 	"<i class=\"spip\">",
@@ -781,9 +786,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
 
 	// intertitres & hr compliants
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*___SPIP_debut_intertitre___', $debut_intertitre, $letexte);
-	$letexte = ereg_replace('___SPIP_fin_intertitre___[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*___SPIP_ligne_horizontale___[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
+	$letexte = ereg_replace('@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
