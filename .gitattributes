@@ -1,5 +1,6 @@
 * text=auto !eol
 /INSTALL.txt -text
+config/ecran_securite.php -text
 config/remove.txt -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
