@@ -58,6 +58,7 @@ function surligner_mots($page, $surcharge_surligne='') {
       if (window.jQuery)
         (function(\$){\$(function(){
           \$(document).SearchHighlight({
+            tag_name:'".(html5_permis()?'mark':'span')."',
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
