@@ -457,7 +457,7 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 /**
  * Autorisation de créer un article dans une rubrique $id
  *
- * Il faut pouvoir voir la rubrique
+ * Il faut pouvoir voir la rubrique et pouvoir créer un article…
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -469,7 +469,8 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
-		AND autoriser('voir','rubrique',$id);
+		AND autoriser('voir','rubrique', $id)
+		AND autoriser('creer', 'article');
 }
 
 
