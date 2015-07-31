@@ -338,6 +338,7 @@ $spip_pipeline = array(
 	'recuperer_fond' => '',
 	'styliser' => '||styliser_par_rubrique|styliser_par_langue',
 	'trig_calculer_prochain_postdate' => '',
+	'trig_calculer_langues_rubriques' => '',
 	'trig_propager_les_secteurs' => '',
 	'trig_supprimer_objets_lies' => '',
 );
