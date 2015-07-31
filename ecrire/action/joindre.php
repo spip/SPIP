@@ -194,7 +194,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
 				    $type, $id, $mode, $id_document, $actifs);
 	}
-	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
+	// un invalideur a la hussarde qui doit marcher au moins pour article, rubrique, ...
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='$type/$id'");
 	return $x;

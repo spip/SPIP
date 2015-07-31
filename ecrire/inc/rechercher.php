@@ -26,9 +26,6 @@ function liste_des_champs() {
 				'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
 				'descriptif' => 4
 			),
-			'breve' => array(
-				'titre' => 8, 'texte' => 2, 'lien_titre' => 1, 'lien_url' => 1
-			),
 			'rubrique' => array(
 				'titre' => 8, 'descriptif' => 5, 'texte' => 1
 			),
@@ -53,9 +50,6 @@ function liste_des_jointures() {
 			array(
 			'article' => array(
 				'auteur' => array('nom' => 10),
-				'document' => array('titre' => 2, 'descriptif' => 1)
-			),
-			'breve' => array(
 				'document' => array('titre' => 2, 'descriptif' => 1)
 			),
 			'rubrique' => array(
