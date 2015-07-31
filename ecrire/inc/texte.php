@@ -1144,7 +1144,7 @@ function paragrapher($letexte, $forcer=true) {
 			$letexte);
 
 		// Renommer les paragraphes normaux
-		$letexte = str_replace('<p >', '<p$class_spip>',
+		$letexte = str_replace('<p >', "<p$class_spip>",
 			$letexte);
 
 	}

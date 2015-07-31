@@ -159,6 +159,7 @@ function inc_auth_dist() {
 	if (!$_COOKIE['spip_session']) {
 		$session = charger_fonction('session', 'inc');
 		if ($spip_session = $session($row)) {
+			include_spip('inc/cookie');
 			preg_match(',^[^/]*//[^/]*(.*)/$,',
 				   url_de_base(),
 				   $r);
