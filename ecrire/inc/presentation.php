@@ -1533,7 +1533,6 @@ function mySel($varaut,$variable, $option = NULL) {
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true) {
-	global $connect_statut;
 
 	$en_ligne = $message = '';
 	switch ($type) {
@@ -1569,12 +1568,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 
 	if ($en_ligne == 'calcul')
 		$message = _T('icone_voir_en_ligne');
-	else if ($en_ligne == 'preview') {
-		if (autoriser('previsualiser'))
-			$message = _T('previsualiser');
-		else
-			return '';
-	}
+	else if ($en_ligne == 'preview'
+	AND autoriser('previsualiser'))
+		$message = _T('previsualiser');
+	else
+		return '';
 
 	return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $af);
 
