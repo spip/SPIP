@@ -10,7 +10,7 @@ define("_ECRIRE_INC_FILTRES", "1");
 //
 
 
-// echappement des entites HTML avec correction des entites "brutes"
+// Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres non-latins)
 function corriger_entites_html($texte) {
 	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
@@ -20,13 +20,13 @@ function entites_html($texte) {
 	return corriger_entites_html(htmlspecialchars($texte));
 }
 
-// pour les titres numerotes ("1. Titre" -> "Titre")
+// Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
 	return $texte;
 }
 
-// suppression basique et brutale de tous les <...>
+// Suppression basique et brutale de tous les <...>
 function supprimer_tags($texte, $rempl = "") {
 	// super gavant : la regexp ci-dessous plante sous php3, genre boucle infinie !
 	// $texte = ereg_replace("<([^>\"']*|\"[^\"]*\"|'[^']*')*>", $rempl, $texte);
@@ -34,7 +34,7 @@ function supprimer_tags($texte, $rempl = "") {
 	return $texte;
 }
 
-// texte au kilometre
+// Convertit un texte HTML en texte brut
 function textebrut($texte) {
 	$texte = ereg_replace("[\n\r]+", " ", $texte);
 	$texte = eregi_replace("<(p|br)([[:space:]][^>]*)?".">", "\n\n", $texte);
@@ -46,26 +46,26 @@ function textebrut($texte) {
 	return $texte;
 }
 
-// pour ceux qui aiment les liens qui ouvrent une nouvelle fenetre
+// Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
 function liens_ouvrants ($texte) {
 	return ereg_replace("<a ([^>]*class=\"spip_(out|url)\")>",
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
-// corrige les caracteres degoutants
+// Corrige les caracteres degoutants utilises par les Windozeries
 function corriger_caracteres($texte) {
 	// 145,146,180 = simple quote ; 147,148 = double quote ; 150 = tiret long
 	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150), "'''".'""-');
 }
 
-// resserrer les paragraphes pour l'intro
+// Transformer les sauts de paragraphe en simples passages a la ligne
 function PtoBR($texte){
 	$texte = eregi_replace("</p>", "\n", $texte);
 	$texte = eregi_replace("<p([[:space:]][^>]*)?".">", "<br>", $texte);
 	return $texte;
 }
 
-// majuscules y compris accents
+// Majuscules y compris accents, en HTML
 function majuscules($texte) {
 	$suite = htmlentities($texte);
 	$suite = ereg_replace('&amp;', '&', $suite);
@@ -73,7 +73,7 @@ function majuscules($texte) {
 	$suite = ereg_replace('&gt;', '>', $suite); 
 	$texte = '';
 	if (ereg('^(.*)&([A-Za-z])([a-zA-Z]*);(.*)$', $suite, $regs)) {
-		$texte .= majuscules($regs[1]);
+		$texte .= majuscules($regs[1]); // quelle horrible recursion
 		$suite = $regs[4];
 		$carspe = $regs[2];
 		$accent = $regs[3];
@@ -98,22 +98,23 @@ function taille_en_octets ($taille) {
 }
 
 
-// transforme n'importe quel champ en une chaine utilisable dans php en toute securite
-// < ? php $x = '[(#TEXTE|chainephp)]'; ? >
-function chainephp ($texte) {
-	$texte = str_replace ('\\', '\\\\', $texte);
-	$texte = str_replace ('\'', '\\\'', $texte);
+// Transforme n'importe quel champ en une chaine utilisable
+// en PHP ou Javascript en toute securite
+// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
+function texte_script($texte) {
+	$texte = str_replace('\\', '\\\\', $texte);
+	$texte = str_replace('\'', '\\\'', $texte);
 	return $texte;
 }
 
 
-// rend une chaine utilisable sans dommage comme attribut HTML
-function attribut_html ($texte) {
+// Rend une chaine utilisable sans dommage comme attribut HTML
+function attribut_html($texte) {
 	$texte = ereg_replace('"', '&quot;', supprimer_tags($texte));
 	return $texte;
 }
 
-// extraire une date de n'importe quel champ (a completer...)
+// Extraire une date de n'importe quel champ (a completer...)
 function extraire_date($texte) {
 	// format = 2001-08
 	if (ereg("([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2])",$texte,$regs))
