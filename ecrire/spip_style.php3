@@ -675,6 +675,16 @@ blockquote.spip {
 	padding: 5px;
 }
 
+div.spip_poesie {
+	margin-<?php echo $left; ?>: 10px;
+	padding-<?php echo $left; ?>: 10px;
+	border-<?php echo $left; ?>: 1px solid #999999;
+}
+div.spip_poesie div {
+	text-indent: -60px;
+	margin-<?php echo $left; ?>: 60px;
+}
+
 .spip-nbsp {
 	border-bottom: 2px solid #c8c8c8;
 	padding-left: 2px;
