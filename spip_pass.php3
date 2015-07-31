@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php3");
+include ("ecrire/inc_version.php");
 include_ecrire("inc_session"); # pour creer_uniq_id
 include_ecrire('inc_minipres'); # charge lang et execute utiliser_lang
 include_ecrire("inc_mail"); # pour envoyer_mail

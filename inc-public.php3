@@ -25,7 +25,7 @@ if (defined("_INC_PUBLIC")) {
 } else {
 	define ("_INC_PUBLIC", 1);
 	if (!function_exists('include_local')) { # cas du script page
-		include ("ecrire/inc_version.php3");
+		include ("ecrire/inc_version.php");
 	}
 	include_local('inc-public-global');
 

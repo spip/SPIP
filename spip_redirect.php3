@@ -13,7 +13,7 @@
 // pour compatibilite. voir dans le fichier inclus comment remplacer
 
 define ('_SPIP_REDIRECT', 1);
-include ("ecrire/inc_version.php3");
+include ("ecrire/inc_version.php");
 include_ecrire("inc_spip_action_redirect.php");
 spip_action_redirect_dist();
 ?>
