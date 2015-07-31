@@ -291,6 +291,7 @@ $spip_pipeline = array(
 	'declarer_tables_principales'=>'',
 	'declarer_tables_auxiliaires'=>'',
 	'declarer_tables_objets_surnoms' => '',
+	'declarer_type_surnoms' => '',
 	'declarer_url_objets' => '',
 	'definir_session' => '',
 	'delete_tables' => '',
