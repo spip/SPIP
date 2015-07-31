@@ -174,6 +174,10 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 function image_imagepng($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
+	
+	$taille_test = getimagesize($tmp);
+	if ($taille_test[0] < 1) return false;
+
 	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
@@ -183,6 +187,11 @@ function image_imagepng($img,$fichier) {
 function image_imagegif($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
+
+	$taille_test = getimagesize($tmp);
+	if ($taille_test[0] < 1) return false;
+
+
 	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
@@ -191,6 +200,10 @@ function image_imagegif($img,$fichier) {
 function image_imagejpg($img,$fichier,$qualite=85) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
+
+	$taille_test = getimagesize($tmp);
+	if ($taille_test[0] < 1) return false;
+
 	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
