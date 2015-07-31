@@ -713,6 +713,9 @@ function url_de_base() {
 	# note : HTTP_HOST contient le :port si necessaire
 	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
 
+	# supprimer la chaine de GET
+	$myself = preg_replace(',\?.*$,','', $myself);
+
 	# supprimer n sous-repertoires
 	$supprime_preg = '/+';
 	for ($i=0; $i<$GLOBALS['profondeur_url']; $i++)
