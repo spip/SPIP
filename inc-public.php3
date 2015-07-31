@@ -67,7 +67,7 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 
 	$contexte = $GLOBALS['HTTP_GET_VARS'];
 	if ($GLOBALS['date'])
-		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
+		$contexte['date'] = $contexte['date_redac'] = date($GLOBALS['date']);
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
