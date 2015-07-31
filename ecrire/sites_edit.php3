@@ -115,10 +115,10 @@ $result = spip_query($query);
 if ($row = spip_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
 	$id_rubrique = $row["id_rubrique"];
-	$nom_site = stripslashes($row["nom_site"]);
-	$url_site = stripslashes($row["url_site"]);
-	$url_syndic = stripslashes($row["url_syndic"]);
-	$descriptif = stripslashes($row["descriptif"]);
+	$nom_site = $row["nom_site"];
+	$url_site = $row["url_site"];
+	$url_syndic = $row["url_syndic"];
+	$descriptif = $row["descriptif"];
 	$syndication = $row["syndication"];
 }
 else {
