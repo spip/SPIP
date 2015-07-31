@@ -130,75 +130,30 @@ function calcul_admin_page($cached, $texte) {
 	return $texte;
 }
 
-//
-// Appelee si le squelette donne une page generant des erreurs 
-//
-function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
-	global $tableau_des_erreurs, $page;
 
-	// On ne veut intercepter que les erreurs des $page['texte'],
-	// et pas celles de SPIP :^)
-	if (($errno & (E_ERROR | E_WARNING | E_PARSE))
-	&& (!strpos($filename, 'ecrire/'))) {
-
-		# si $filename = inc-public + eval, denoncer le squelette,
-		# sinon c'est un appel du handler explicitement par le compilateur 
-		# qui donne les bons arguments tout de suite, mais avec linenum = ''
-		$tableau_des_erreurs[] = array($errno,
-			  $errmsg,
-			  ($linenum ? "ligne $linenum" : ''),
-			  ((!strpos($filename, 'inc-public.php3(')) ? 
-			   $filename :
-			   (($page_principale['squelette']!=$page['squelette'])?
-			    (", fichier inclus " . $page['squelette']) :
-			    '')),
-			  (!$linenum ? '' :
-			   affiche_contexte_erreur($page['texte'])));
-	}
-}
-
-// affiche qq lignes de source autour de l'erreur
-
-function affiche_contexte_erreur($texte) {
-	$tableau = explode("\n", $texte);
-	$format = "%0".strlen(count($tableau))."d";
-	for($i=max(1,$linenum-3); $i<=min(count($tableau),$linenum+3); $i++) {
-		$l = propre("<code>".sprintf($format, $i).'. '.$tableau[$i-1]."</code>");
-		if ($i == $linenum) $l = "<b><font color='red'>$l</font></b>";
-		$contexte .= "<br />".$l;
-	}
-}
-
-
-//
 // Si le code php produit des erreurs, on les affiche en surimpression
-// sauf pour un visiteur non admin, ou on lui dit que c'est en travaux
+// sauf pour un visiteur non admin (lui ne voit rien de special)
 // ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
+function affiche_erreurs_page($tableau_des_erreurs) {
+	include_ecrire('inc_presentation.php3');
 
-function affiche_erreurs_execution_page() {
-	global $tableau_des_erreurs, $affiche_boutons_admin;
-
-	if ($affiche_boutons_admin) {
-		include_ecrire('inc_presentation.php3');
-
-		echo "<div id='spip-debug' style='position: absolute; top: 20;",
-		" z-index: 1000;'><ul><li>",
-		_L("Erreur(s) dans le squelette"),
+	echo "<div id='spip-debug' style='position: absolute; top: 20;",
+	" z-index: 1000;'><ul><li>",
+	_L("Erreur(s) dans le squelette"),
 
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
 
-		"<br /></li>",
-		"<ul>";
-		foreach ($tableau_des_erreurs as $err) {
-			echo "<li>$err[2] $err[3]  $err[1]",
-			"<small>$err[4]</small><br />",
-			"</li>\n";
-		}
-		echo "</ul>";
-		echo "</ul></div>";
-		$GLOBALS['bouton_admin_debug'] = true;
+	"<br /></li>",
+	"<ul>";
+	foreach ($tableau_des_erreurs as $err) {
+		echo "<li>".$err[0],
+		", <small>".$err[1]."</small><br />",
+		"</li>\n";
 	}
+	echo "</ul>";
+	echo "</ul></div>";
+	$GLOBALS['bouton_admin_debug'] = true;
 }
 
 //
@@ -247,7 +202,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		spip_log("Erreur MySQL BOUCLE$id_boucle (".$GLOBALS['fond'].".html)");
 	}
 
-	  spip_error_handler(1,$retour,'','','');
+	erreur_squelette($retour);
 }
 
 
@@ -255,6 +210,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 // Erreur de syntaxe des squelettes : memoriser le code fautif
 //
 function erreur_squelette($message='', $lieu='') {
+	global $tableau_des_erreurs;
 	global $auteur_session;
 	static $runs;
 
@@ -263,14 +219,14 @@ function erreur_squelette($message='', $lieu='') {
 	spip_log("Erreur squelette: $message | $lieu ("
 		. $GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
-	spip_error_handler(1," $message $lieu ", '','','?');
+	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
 	if (++$runs > 4) {
 		if ($HTTP_COOKIE_VARS['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
-		$GLOBALS['var_debug'])
-			die ("<div style='position: fixed; top: 10px; left: 10px;
-			z-index: 10000; background-color: pink;'>$message</div>");
+		$GLOBALS['var_debug']) {
+			die(affiche_erreurs_page($tableau_des_erreurs));
+		}
 	}
 }
 
