@@ -3262,27 +3262,30 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 	$plugin = strtoupper($plugin);
 	$plugins_actifs = liste_plugin_actifs();
 
-	if (!$plugin)
+	if (!$plugin) {
 		return serialize(array_keys($plugins_actifs));
-	elseif (empty($plugins_actifs[$plugin]))
+	} elseif (empty($plugins_actifs[$plugin])) {
 		return '';
-	elseif ($type_info == 'est_actif')
+	} elseif ($type_info == 'est_actif') {
 		return $plugins_actifs[$plugin] ? 1 : 0;
-	elseif (isset($plugins_actifs[$plugin][$type_info]))
+	} elseif (isset($plugins_actifs[$plugin][$type_info])) {
 		return $plugins_actifs[$plugin][$type_info];
-	else {
+	} else {
 		$get_infos = charger_fonction('get_infos','plugins');
 		// On prend en compte les extensions
-		if (!is_dir($plugins_actifs[$plugin]['dir_type']))
+		if (!is_dir($plugins_actifs[$plugin]['dir_type'])) {
 			$dir_plugins = constant($plugins_actifs[$plugin]['dir_type']);
-		else
+		} else {
 			$dir_plugins = $plugins_actifs[$plugin]['dir_type'];
-		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], false, $dir_plugins))
+		}
+		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], false, $dir_plugins)) {
 			return '';
-		if ($type_info == 'tout')
+		}
+		if ($type_info == 'tout') {
 			return $infos;
-		else
+		} else {
 			return strval($infos[$type_info]);
+		}
 	}
 }
 
