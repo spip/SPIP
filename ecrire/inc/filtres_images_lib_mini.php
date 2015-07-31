@@ -189,7 +189,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 	}
 	// todo: si une image png est nommee .jpg, le reconnaitre avec le bon $f
-	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
+	$ret["fonction_imagecreatefrom"] = "_imagecreatefrom".$term_fonction;
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
@@ -225,6 +225,36 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	if (!function_exists($ret["fonction_imagecreatefrom"])) return false;
 	return $ret;
+}
+
+function _imagecreatefromjpeg($filename){
+	$img = @imagecreatefromjpeg($filename);
+	if (!$img) {
+		spip_log("Erreur lecture imagecreatefromjpeg $filename",_LOG_CRITIQUE);
+		erreur_squelette("Erreur lecture imagecreatefromjpeg $filename");
+		$img = imagecreate(10,10);
+	}
+	return $img;
+}
+
+function _imagecreatefrompng($filename){
+	$img = @imagecreatefrompng($filename);
+	if (!$img) {
+		spip_log("Erreur lecture imagecreatefrompng $filename",_LOG_CRITIQUE);
+		erreur_squelette("Erreur lecture imagecreatefrompng $filename");
+		$img = imagecreate(10,10);
+	}
+	return $img;
+}
+
+function _imagecreatefromgif($filename){
+	$img = @imagecreatefromgif($filename);
+	if (!$img) {
+		spip_log("Erreur lecture imagecreatefromgif $filename",_LOG_CRITIQUE);
+		erreur_squelette("Erreur lecture imagecreatefromgif $filename");
+		$img = imagecreate(10,10);
+	}
+	return $img;
 }
 
 // http://doc.spip.org/@image_imagepng
