@@ -399,6 +399,10 @@ function extraire_lien ($regs) {
 					$req = "select titre from spip_articles where id_article=$id_lien";
 					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
+
+					// supprimer les numeros des titres d'articles
+					include_ecrire("inc_filtres.php3");
+					$lien_texte = supprimer_numero($lien_texte);
 				}
 				break;
 		}
