@@ -214,9 +214,9 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	if (!$prefixe) 
 		$prefixe = isset($GLOBALS['table_prefix'])
 		? $GLOBALS['table_prefix'] : $db;
-	$h = charger_fonction($g = 'db_' . $type, 'base', true);
+	$h = charger_fonction($type, 'req', true);
 	if (!$h) {
-		spip_log("$g est indefinie");
+		spip_log("les reqûetes $type ne sont pas fournies");
 		return;
 	}
 	  
