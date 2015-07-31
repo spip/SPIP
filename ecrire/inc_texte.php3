@@ -749,10 +749,18 @@ function traiter_raccourcis_generale($letexte) {
 
 		// preparer la note
 		if ($num_note) {
-			if ($marqueur_notes) // ??????
+			if ($marqueur_notes) // quand il y a plusieurs series
+								 // de notes sur une meme page
 				$mn = $marqueur_notes.'-';
 			$ancre = $mn.urlencode($num_note);
-			$insert = "$ouvre_ref<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\">$num_note</a>$ferme_ref";
+
+			// creer le popup 'title' sur l'appel de note
+			$title = supprimer_tags(propre($note_texte));
+			if ($title)
+				$title = ' title="<html>'
+				. texte_backend(couper($title,200)).'</html>"';
+
+			$insert = "$ouvre_ref<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\"$title>$num_note</a>$ferme_ref";
 			$appel = "<html>$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note</html>";
 		} else {
 			$insert = '';
