@@ -57,10 +57,16 @@
 [(#REM) javascript qui gere la securite du login en evitant de faire circuler le pass en clair]
 <script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"></script>
 <script type='text/javascript'>
-var alea_actuel='#ENV{_alea_actuel,''}';
-var alea_futur='#ENV{_alea_futur,''}';
+var alea_actuel='#ENV{_alea_actuel}';
+var alea_futur='#ENV{_alea_futur}';
 var login='#ENV{var_login,''}';
 var informe_auteur_en_cours = false;
+function affiche_login_secure() {
+	if (alea_actuel)
+		jQuery('#pass_securise').show();
+	else
+		jQuery('#pass_securise').hide();
+}
 function informe_auteur(c){
 	informe_auteur_en_cours = false;
 	eval('c = '+c); // JSON
@@ -75,6 +81,7 @@ function informe_auteur(c){
 		jQuery('#spip_logo_auteur').html('');
 		alea_actuel = '';
 	}
+	affiche_login_secure();
 }
 function calcule_md5_pass(pass){
 	if (alea_actuel) {
@@ -90,14 +97,16 @@ function actualise_auteur(){
 		$.get('#URL_ACTION{informer_auteur}',{var_login:login},informe_auteur);
 	}
 }
-jQuery('#password').after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
+jQuery('#password')
+.after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
+affiche_login_secure();
 
 jQuery('#var_login').change(actualise_auteur);
 
 jQuery('form#formulaire_login').submit(function(){
 	actualise_auteur();
 	pass = jQuery('input[@name=password]').attr('value');
-	// ne jamais laisser le pass circuler en clair
+	// ne pas laisser le pass d'un auteur "auth=spip" circuler en clair
 	if (pass) {
 		// si l'information est en cours, retenter sa chance
 		if (informe_auteur_en_cours) {
@@ -112,14 +121,7 @@ jQuery('form#formulaire_login').submit(function(){
 			calcule_md5_pass(pass);
 		}
 		// sinon c'est que l'auteur n'existe pas
-		else {
-			var alert = jQuery("<div class='formulaire_erreur'>"
-				+ (<:login_identifiant_inconnu|_q:>.replace(/@login@/, login))
-				+ "<\/div>")
-				.appendTo(jQuery("#var_login").parent());
-			setTimeout(function() {alert.slideUp();}, 3000);
-			return false;
-		}
+		// OU qu'il sera accepte par LDAP ou autre auth
 	}
 });
 </script>
