@@ -42,10 +42,12 @@ function exec_export_all_dist()
 	lire_metas();
 
 	if (!isset($GLOBALS['meta']["status_dump"])) {
-		$gz = _request('gz');
+		$gz = _request('gz') ? '.gz' : '';
 		$archive = $gz 
-		?  (_request('znom_sauvegarde') . '.xml.gz')
-		:  (_request('nom_sauvegarde') . '.xml');
+		?  _request('znom_sauvegarde') 
+		:  _request('nom_sauvegarde');
+		if (!$archive) $archive = 'dump';
+		$archive .= '.xml' . $gz;
 
 		//  creer l'en tete du fichier a partir de l'espace public
 		include_spip('inc/headers');

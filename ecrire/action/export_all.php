@@ -31,7 +31,7 @@ function action_export_all_dist()
 	list($quoi, $gz, $archive) = split(',', $arg);
 	
 	$file =  $dir . $archive;
-	spip_log("action $arg $file");
+
 	include_spip('inc/meta');
 	utiliser_langue_visiteur();
 	if ($quoi =='start'){
@@ -42,7 +42,10 @@ function action_export_all_dist()
 		  ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
 		  ecrire_metas();
 		  include_spip('inc/headers');
-		  redirige_par_entete(generer_url_ecrire('export_all'));
+		  // suite=1 ne sert qu'a distinguer cette redirection
+		  // d'avec l'appel initial sinon FireFox croit malin
+		  // d'optimiser la redirection
+		  redirige_par_entete(generer_url_ecrire('export_all',"&suite=1"));
 		} else {
 		  echo minipres(_T('info_sauvegarde'),
 				"<p>".
