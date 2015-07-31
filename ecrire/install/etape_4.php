@@ -44,7 +44,14 @@ function install_etape_4_dist()
 	$afficher = charger_fonction("afficher_liste",'plugins');
 	echo $afficher(self(), liste_plugin_files(_DIR_PLUGINS_DIST),array(), array(), _DIR_PLUGINS_DIST,'afficher_nom_plugin');
 
-	plugin_installes_meta();
+	// si la base de SPIP est up, on peut installer les plugins, sinon on passe cette etape
+	// car les plugins supposent que la base de SPIP est dans son etat normal (mise a jour)
+	// au premier passage dans l'espace prive on aura une demande d'upgrade qui se poursuit sur la page plugin
+	// et procede alors a l'installation
+	if (!isset($GLOBALS['meta']['version_installee'])
+		OR ($GLOBALS['spip_version_base'] == (str_replace(',','.',$GLOBALS['meta']['version_installee'])))){
+		plugin_installes_meta();
+	}
 
 	// mettre a jour si necessaire l'adresse du site
 	// securite si on arrive plus a se loger
