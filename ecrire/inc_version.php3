@@ -6,7 +6,9 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
 
-/////////////// PARAMETRAGE UTILISATEUR ///////////////
+//
+// 	*** Parametrage de SPIP ***
+//
 
 // Prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
@@ -15,7 +17,9 @@ $table_prefix = "spip";
 // faut-il loger les infos de debug dans data/spip.log ?
 $debug = false;
 
-///////////////////////////////////////////////////////
+//
+// 	*** Fin du parametrage ***
+//
 
 
 // Version courante de SPIP
@@ -643,11 +647,13 @@ function email_valide($adresse) {
 //
 
 function logrotate() {
+	global $flag_ecrire;
+
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
 	@unlink($logfile.'.3');
-	@rename($logfile.'.2',$logfile.'.3'); 
-	@rename($logfile.'.1',$logfile.'.2'); 
-	@rename($logfile,$logfile.'.1'); 
+	@rename($logfile.'.2',$logfile.'.3');
+	@rename($logfile.'.1',$logfile.'.2');
+	@rename($logfile,$logfile.'.1');
 }
 
 function spip_debug($message) {
@@ -658,13 +664,11 @@ function spip_debug($message) {
 function spip_log($message) {
 	global $flag_ecrire;
 
-	if (!$pid = @getmypid()) $pid ='-';
-	if (!$uid = @getmyuid()) $uid = '-';
-	if (!$gid = @getmygid()) $gid = '-';
-	if (!$ip = $GLOBALS['HTTP_SERVER_VARS']['REMOTE_ADDR']) $ip = '-';
+	$pid = '(pid '.@getmypid().')';
+	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
 
-	$message = date("M d H:i:s")." $ip $uid/$gid"."[$pid] "
-	.ereg_replace("\n*$", "\n", $message);
+	$message = date("M d H:i:s")." $ip $pid "
+		.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
 	if (@filesize($logfile) > 10*1024) {
