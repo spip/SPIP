@@ -142,8 +142,4 @@ function verif_butineur() {
 
 verif_butineur();
 
-	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
-	// meme principe que le behavior win_width.htc pour MSIE
-$GLOBALS['browser_verifForm'] = (preg_match(",mozilla,i", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
-
 ?>
