@@ -1251,30 +1251,41 @@ function balise_ACTION_FORMULAIRE($p){
 	return $p;
 }
 
+
 /**
  * Generer un bouton d'action en post, ajaxable
  * a utiliser a la place des liens action_auteur, sous la forme
  * #BOUTON_ACTION{libelle,url}
  * ou
  * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
+ * ou
+ * #BOUTON_ACTION{libelle,url,ajax,message_confirmation} pour utiliser un message de confirmation
  *
  * @param unknown_type $p
  * @return unknown
  */
-function balise_BOUTON_ACTION_dist($p){
-	
+function balise_BOUTON_ACTION($p){
+
 	$_label = interprete_argument_balise(1,$p);
 	if (!$_label) $_label="''";
+
 	$_url = interprete_argument_balise(2,$p);
 	if (!$_url) $_url="''";
 
 	$_class = interprete_argument_balise(3,$p);
 	if (!$_class) $_class="''";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.$_url.'\'><span>'.form_hidden($_url).'<input type=\'submit\' class=\'submit\' value=\''.$_label.'\' /></span></form>'";
+	$_confirm = interprete_argument_balise(4,$p);
+	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
+	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
+
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
+.'<button type=\'submit\' class=\'submit\' $_onclick>' . $_label . '</button>'
+.'</span></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
+
 
 
 function balise_SLOGAN_SITE_SPIP_dist($p) {
