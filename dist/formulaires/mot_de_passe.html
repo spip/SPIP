@@ -1,4 +1,4 @@
-<div class="formfx formulaire_mot_de_passe">[
+<div class="formulaire_spip formulaire_mot_de_passe">[
 (#ENV*{message_erreur})
 ][
 (#ENV*{message_ok})
@@ -9,17 +9,17 @@
 	[(#REM) activer le traitement auto et dispatch sur charger/verifier/traiter]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
-	<legend><:pass_nouveau_pass:></legend><ol>
-  <li class="obligatoire">
+	<legend><:pass_nouveau_pass:></legend><ul>
+  <li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
     <label for="oubli"><:pass_choix_pass:></label>
-    <input type='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
 		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
+    <input type='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
   </li>
-	</ol></fieldset>
+	</ul></fieldset>
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
 	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
-	<p class="spip_bouton"><input type="submit" value="<:pass_ok:>" /></p>
+	<p class="boutons"><input type="submit" value="<:pass_ok:>" /></p>
 	</fieldset>
 </form>
 <script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/

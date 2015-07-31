@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_forum formfx"  id="formulaire_forum">
+<div class="formulaire_spip formulaire_forum"  id="formulaire_forum">
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='spacer' />
 
 [(#ENV{login_forum_abo})
@@ -125,7 +125,6 @@
 	Sauver les donnees du formulaire dans un cookie, si on quitte la page,
 	et les remettre quand on revient (dans les limites de 4ko etc)
 ]
-<script type='text/javascript' src='#CHEMIN{javascript/formfx.js}'></script>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery)(function($){
 	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
