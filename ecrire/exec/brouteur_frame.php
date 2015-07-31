@@ -240,12 +240,7 @@ function exec_brouteur_frame_dist() {
 		}
 	}
    }
-	if (count($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/debug');
-		echo chrono_requete($GLOBALS['tableau_des_temps']);
-	}
 	echo "</div>";
-
 
 	echo "</body></html>";
 }
