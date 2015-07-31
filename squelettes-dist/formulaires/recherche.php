@@ -12,9 +12,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// chargement des valeurs par defaut des champs du formulaire
-function formulaires_recherche_charger_dist($lien_filtre = NULL,$lien_arg = NULL){
-	$lien = $lien_filtre ? $lien_filtre : $lien_arg;
+/**
+ * chargement des valeurs par defaut des champs du #FORMULAIRE_RECHERCHE
+ * on peut lui passer l'url de destination en premier argument
+ *
+ * @param string $lien
+ * @return array
+ */
+function formulaires_recherche_charger_dist($lien = ''){
 	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
 		$lang = $GLOBALS['spip_lang'];
 	else
