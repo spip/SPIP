@@ -220,10 +220,10 @@ function liste_plugin_inactifs(){
 	return array_diff (liste_plugin_files(),liste_chemin_plugin_actifs());
 }
 
-// mise à jour du meta en fonction de l'état du répertoire
-// penser à faire une maj du cache =>  ecrire_meta()
-// en principe cela doit aussi initialiser la valeur à vide si elle n'esite pas 
-// risque de pb en php5 à cause du typage ou de null (vérifier dans la doc php)
+// mise a jour du meta en fonction de l'etat du repertoire
+// penser a faire une maj du cache =>  ecrire_meta()
+// en principe cela doit aussi initialiser la valeur a vide si elle n'esite pas
+// risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
 // http://doc.spip.org/@verif_plugin
 function verif_plugin($pipe_recherche = false){
 	$plugin_actifs = liste_chemin_plugin_actifs();
@@ -233,7 +233,7 @@ function verif_plugin($pipe_recherche = false){
 	ecrire_metas();
 }
 
-// mise à jour des données si envoi via formulaire
+// mise a jour des donnees si envoi via formulaire
 // http://doc.spip.org/@enregistre_modif_plugin
 function enregistre_modif_plugin(){
   // recuperer les plugins dans l'ordre des $_POST
@@ -484,7 +484,8 @@ function affiche_bloc_plugin($plug_file, $info) {
 
 	if (isset($info['auteur']))
 		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
-	if (isset($info['lien'])) {
+
+	if (trim($info['lien'])) {
 		if (preg_match(',^https?://,iS', $info['lien']))
 			$s .= "<hr/>" . _T('info_url') .' '. propre("[->".$info['lien']."]") . "<br/>";
 		else

@@ -149,20 +149,16 @@ EOF;
 
 	echo generer_url_post_ecrire(_request('exec'));
 
-	echo "<ul>";
 	affiche_arbre_plugins(liste_plugin_files(),liste_chemin_plugin_actifs());
-	echo "</ul>";
-
-	echo "</table></div>\n";
 
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
-	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
-	echo "\n<input type='hidden' name='changer_plugin' value='oui'>";
+	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "' />";
+	echo "\n<input type='hidden' name='changer_plugin' value='oui' />";
 
-	echo "\n<p>";
+	echo "\n<p />";
 
 	echo "<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 	echo "</div>";
 
 	echo "</form></tr></table>\n";
@@ -187,8 +183,9 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 	}
 	// fermer les repertoires courant jusqu'au point de fork
 	while($close = array_pop($tcur)){
+		$output .= "</ul>\n";
 		$output .= fin_block();
-		$output .= "</ul></li>\n";
+		$output .= "</li>\n";
 	}
 	$chemin = "";
 	if (count($tcom))
@@ -199,9 +196,11 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 		$chemin .= $open . "/";
 		$output .= "<li>";
 		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
-		$output .= "<span onclick=\"jQuery(this).prev().click();\">$chemin</span>\n<ul>";
-			
+		$output .= "<span onclick=\"jQuery(this).prev().click();\">$chemin</span>\n";
+
 		$output .= $visible? debut_block_visible($chemin):debut_block_invisible($chemin);
+
+		$output .= "<ul>\n";
 	}
 	$current = $target;
 	return $output;
@@ -241,7 +240,9 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$(document).ready(function(){
 		$('div.nomplugin a[@rel=info]').click(function() {
 			if (!$(this).siblings('div.info').html()) {
-				$(this).siblings('div.info').prepend(ajax_image_searching).load($(this).name());
+				$(this).siblings('div.info').prepend(ajax_image_searching).load(
+					$(this).href().replace(/admin_plugin/, 'info_plugin')
+				);
 			} else {
 				$(this).siblings('div.info').toggle();
 			}
@@ -249,6 +250,8 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 		});
 	});
 	");
+
+	echo "<ul>";
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
@@ -268,6 +271,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 			}
 	}
 	echo tree_open_close_dir($current_dir,$init_dir);
+	echo "</ul>";
 }
 
 // http://doc.spip.org/@ligne_plug
@@ -277,7 +281,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<div id='$plug_file' class='nomplugin ".($actif?'nomplugin_on':'')."'>";
+	$s = "<div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -302,9 +306,8 @@ function ligne_plug($plug_file, $actif, $id){
 	$id_input++;
 
 	//$s .= bouton_block_invisible("$plug_file");
-	$url_stat = generer_url_ecrire(_request('exec'),"plug=$plug_file",'&');
-	$url_dyn = generer_url_ecrire('info_plugin',"plug=$plug_file");
-	$s .= "<a href='$url_stat' rel='info' name='$url_dyn'>$nom</a>";
+	$url_stat = generer_url_ecrire(_request('exec'),"plug=$plug_file");
+	$s .= "<a href='$url_stat' rel='info'>$nom</a>";
 
 	$s .= "<div class='info'>";
 	// afficher les details d'un plug en secours
