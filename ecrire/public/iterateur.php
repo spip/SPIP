@@ -192,7 +192,7 @@ class IterDecorator extends FilterIterator {
 		}
 
 		// Par defaut chercher en xpath dans la valeur()
-		return table_valeur($this->valeur(), $nom);
+		return table_valeur($this->valeur(), $nom, null);
 	}
 
 	

@@ -35,50 +35,74 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   indique que l'on accepte ou refuse le Champ joker * des iterateurs DATA
  * @return string
  */
-function index_pile($idb, $nom_champ, &$boucles, $explicite='', $joker=true) {
+function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
+	if (!is_string($defaut))
+		$defaut = '@$Pile[0][\''. strtolower($nom_champ) . '\']';
 
 	$i = 0;
 	if (strlen($explicite)) {
-	// Recherche d'un champ dans un etage superieur
+		// Recherche d'un champ dans un etage superieur
 	  while (($idb !== $explicite) && ($idb !=='')) {
-#		spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
+			#	spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
 		}
 	}
 
-#	spip_log("Cherche: $nom_champ a partir de '$idb'");
+	#	spip_log("Cherche: $nom_champ a partir de '$idb'");
 	$nom_champ = strtolower($nom_champ);
+	$conditionnel = array();
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
 	// il y a incoherences qu'il vaut mieux eviter
 	while (isset($boucles[$idb])) {
+		$joker = true;
 		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
-
 		if ($t) {
-		  if (!in_array($t, $boucles[$idb]->select)) {
-		    $boucles[$idb]->select[] = $t;
-		  }
-		  return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
+			if (!in_array($t, $boucles[$idb]->select)) {
+				$boucles[$idb]->select[] = $t;
+			}
+			$champ = '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
+			if (!$joker)
+				return index_compose($conditionnel,$champ);
+
+			$conditionnel[] = "isset($champ)?$champ";
 		}
-#		spip_log("On remonte vers $i");
+		#	spip_log("On remonte vers $i");
 		// Sinon on remonte d'un cran
 		$idb = $boucles[$idb]->id_parent;
 		$i++;
 	}
 
-#	spip_log("Pas vu $nom_champ");
+	#	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
-	return('@$Pile[0][\''. strtolower($nom_champ) . '\']');
+	// on qu'on a fourni une valeur par "defaut" plus pertinent
+	return index_compose($conditionnel,$defaut);
+}
+
+/**
+ * Reconstuire la cascade de condition avec la valeur finale par defaut
+ * pour les balises dont on ne saura qu'a l'execution si elles sont definies ou non
+ * (boucle DATA)
+ * 
+ * @param array $conditionnel
+ * @param string $defaut
+ * @return string
+ */
+function index_compose($conditionnel,$defaut){
+	while ($c = array_pop($conditionnel))
+		$defaut = "($c:($defaut))";
+	return $defaut;
 }
 
 // http://doc.spip.org/@index_tables_en_pile
-function index_tables_en_pile($idb, $nom_champ, &$boucles, $joker=true) {
+function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 	global $exceptions_des_tables;
 
 	$r = $boucles[$idb]->type_requete;
 
 	if ($r == 'boucle') return array();
 	if (!$r) {
+		$joker = false; // indiquer a l'appelant
 		# continuer pour chercher l'erreur suivante
 		return  array("'#" . $r . ':' . $nom_champ . "'",'');
 	}
@@ -88,29 +112,33 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, $joker=true) {
 	if ($excep)
 		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
 	if ($excep) {
+		$joker = false; // indiquer a l'appelant
 	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
-	} else {
+	}
+	else {
 		if (isset($desc['field'][$nom_champ])) {
 			$t = $boucles[$idb]->id_table;
+			$joker = false; // indiquer a l'appelant
 			return array("$t.$nom_champ", $nom_champ);
 		}
 		// Champ joker * des iterateurs DATA qui accepte tout
-		else if ($joker AND isset($desc['field']['*'])) {
-			$t = $boucles[$idb]->id_table;
+		elseif (/*$joker AND */isset($desc['field']['*'])) {
+			$joker = true; // indiquer a l'appelant
 			return array($nom_champ, $nom_champ);
 		}
 		else {
+			$joker = false; // indiquer a l'appelant
 		  if ($boucles[$idb]->jointures_explicites) {
 		    $t = trouver_champ_exterieur($nom_champ, 
 						 $boucles[$idb]->jointures,
 						 $boucles[$idb]);
 		    if ($t) 
-			return index_exception($boucles[$idb], 
+					return index_exception($boucles[$idb],
 					       $desc,
 					       $nom_champ,
 					       array($t[1]['id_table'], $nom_champ));
 		  }
-		  return array('','');
+			return array('','');
 		}
 	}
 }
@@ -175,8 +203,8 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
  *   flag pour autoriser ou non le champ joker * des iterateurs DATA
  * @return string
  */
-function champ_sql($champ, $p, $joker=true) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $joker);
+function champ_sql($champ, $p, $defaut = null) {
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut);
 }
 
 // cette fonction sert d'API pour demander une balise Spip avec filtres
