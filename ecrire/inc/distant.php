@@ -50,7 +50,6 @@ function copie_locale($source, $mode='auto') {
 	}
 	$local = fichier_copie_locale($source);
 	$localrac = _DIR_RACINE.$local;
-	spip_log(_REGEXP_COPIE_LOCALE . " ne reconnait pas $source en mode $mode");
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
