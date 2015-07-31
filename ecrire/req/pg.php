@@ -976,7 +976,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	$r = @pg_query($link, $q);
 
 	if (!$r)
-		spip_log("creation de la table $nom impossible (deja la ?)");
+		spip_log("Impossible de creer cette table: $q");
 	else {
 		foreach($keys as $index) {pg_query($link, $index);}
 	} 
@@ -1035,7 +1035,7 @@ function mysql2pg_type($v)
 		preg_replace("/unsigned/i", '', 	
 		preg_replace("/double/i", 'double precision', 	
 		preg_replace("/tinyint/i", 'int', 	
-		preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'varchar(\1)', 
+		preg_replace('/VARCHAR\((\d+)\)\s+BINARY/i', 'varchar(\1)', 
 		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
 			     )))))))))))));

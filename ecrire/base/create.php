@@ -24,9 +24,10 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 	static $fcreate = null;
 	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
 
-	if (!$upgrade OR !($sql_desc = sql_showtable($table,true,$serveur)))
+	$sql_desc = sql_showtable($table,true,$serveur);
+	if (!$upgrade OR !$sql_desc)
 		$fcreate($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
-	if ($upgrade && ($sql_desc OR $sql_desc = sql_showtable($k,true,$serveur))) {
+	else {
 		// ajouter les champs manquants
 		$last = '';
 		foreach($desc['field'] as $field=>$type){
