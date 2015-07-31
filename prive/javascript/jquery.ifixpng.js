@@ -18,7 +18,7 @@
   * optional if location of pixel.gif if different to default which is images/pixel.gif
   * $.ifixpng('media/pixel.gif');
   *
-  * $('img[@src$=.png], #panel').ifixpng();
+  * $('img[src$=.png], #panel').ifixpng();
   *
   * @apply hack to all png images and #panel which icluded png img in its css
   *
@@ -52,10 +52,10 @@
 	/**
 	 * Applies ie png hack to selected dom elements
 	 *
-	 * $('img[@src$=.png]').ifixpng();
+	 * $('img[src$=.png]').ifixpng();
 	 * @desc apply hack to all images with png extensions
 	 *
-	 * $('#panel, img[@src$=.png]').ifixpng();
+	 * $('#panel, img[src$=.png]').ifixpng();
 	 * @desc apply hack to element #panel and all images with png extensions
 	 *
 	 * @name ifixpng
@@ -96,10 +96,10 @@
 	/**
 	 * Removes any png hack that may have been applied previously
 	 *
-	 * $('img[@src$=.png]').iunfixpng();
+	 * $('img[src$=.png]').iunfixpng();
 	 * @desc revert hack on all images with png extensions
 	 *
-	 * $('#panel, img[@src$=.png]').iunfixpng();
+	 * $('#panel, img[src$=.png]').iunfixpng();
 	 * @desc revert hack on element #panel and all images with png extensions
 	 *
 	 * @name iunfixpng
