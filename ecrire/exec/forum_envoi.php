@@ -19,49 +19,32 @@ include_spip('inc/barre');
 function exec_forum_envoi_dist()
 {
 	forum_envoi(  
-		    intval(_request('id_article')),
-		    intval(_request('id_breve')),
-		    intval(_request('id_message')),
+		    intval(_request('id')),
 		    intval(_request('id_parent')),
-		    intval(_request('id_rubrique')),
-		    intval(_request('id_syndic')),
-
 		    _request('modif_forum'),
 		    _request('nom_site'),
 		    _request('statut'),
 		    _request('texte'),
 		    _request('titre_message'),
 		    _request('url_site'),
-		    _request('url'),
+		    _request('script'),
 		    _request('valider_forum'));
 }
 
 function forum_envoi(  
-		     $id_article,
-		     $id_breve,
-		     $id_message,
+		     $id,
 		     $id_parent,
-		     $id_rubrique,
-		     $id_syndic,
-		     
 		     $modif_forum,
 		     $nom_site,
 		     $statut,
 		     $texte,
 		     $titre_message,
 		     $url_site,
-		     $url,
+		     $script,
 		     $valider_forum)
 {
 	global     $options, $spip_lang_rtl;
 
-	if ($id_message) debut_page(_T('titre_page_forum_envoi'), "accueil", "messagerie");
-	else debut_page(_T('titre_page_forum_envoi'), "accueil");
-	debut_gauche();
-	debut_droite();
-
-	$titre_parent = '';
-	$parent = '';
 	if ($id_parent) {
 		$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_parent");
 		if ($row = spip_fetch_array($result)) {
@@ -71,18 +54,16 @@ function forum_envoi(
 			$id_message = $row['id_message'];
 			$id_syndic = $row['id_syndic'];
 			$statut = $row['statut'];
-			$titre_parent = $row['titre'];
+			$titre_parent = typo($row['titre']);
 			$texte_parent = $row['texte'];
 			$auteur_parent = $row['auteur'];
 			$id_auteur_parent = $row['id_auteur'];
 			$date_heure_parent = $row['date_heure'];
 			$nom_site_parent = $row['nom_site'];
 			$url_site_parent = $row['url_site'];
-		}
 
-		if ($titre_parent) {
-			$parent = debut_cadre_forum("forum-interne-24.gif", true, "", typo($titre_parent))
-			  . "<span class='arial2'>$date_heure_parent</span> ";
+			$parent = debut_cadre_forum("forum-interne-24.gif", true, "", $titre_parent)
+			. "<span class='arial2'>$date_heure_parent</span> ";
 
 			if ($id_auteur_parent) {
 				$formater_auteur = charger_fonction('formater_auteur', 'inc');
@@ -95,10 +76,66 @@ function forum_envoi(
 			if (strlen($url_site_parent) > 10 AND $nom_site_parent) {
 				$parent .="<p align='left'><font face='Verdana,Arial,Sans,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font></p>";
 			}
-
 			$parent .= fin_cadre_forum(true);
 		}
+
+	} else $parent = $titre_parent = '';
+
+	if ($script == 'articles') {
+	  $table ='articles';
+	  $objet = 'id_article';
+	  $titre = 'titre';
+	  $num = _T('info_numero_article');
+	  if (!$id)  $id = $id_article;
+	} elseif ($script == 'breves_voir') {
+	  $table = 'breves';
+	  $objet = 'id_breve';
+	  $titre = 'titre';
+	  $num = _T('info_gauche_numero_breve');
+	  if (!$id)  $id = $id_breve;
+	} elseif ($script == 'message') {
+	  $table = 'messages';
+	  $objet = 'id_message';
+	  $titre = 'titre';
+	  $num = _T('message') . ' ' ._T('info_numero_abbreviation');
+	  if (!$id)  $id = $id_message;
+	} elseif ($script == 'rubriques') {
+	  $table = 'rubriques';
+	  $objet = 'id_rubrique';
+	  $titre = 'titre';
+	  $num = _T('titre_numero_rubrique');
+	  if (!$id)  $id = $id_rubrique;
+	} elseif ($script == 'sites') {
+	  $table = 'syndic';
+	  $objet = 'id_syndic';
+	  $titre = 'nom_site';
+	  $num = _T('titre_site_numero');
+	  if (!$id)  $id = $id_syndic;
+	} else {
+	  $table = 'forum';
+	  $objet = 'id_forum';
+	  $titre = 'titre'; 
+	  $id = 0;
+	  $titre_page = filtrer_entites(_T('texte_nouveau_message'));
+	  $num = '';
 	}
+
+	if ($num) {
+		$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
+		$q = spip_fetch_array($q);
+		$titre_page = $q['titre'];
+		$num  = "<br />("
+		  . str_replace(':','',strtolower($num))
+		  . $id
+		  . ", "
+		  ._T('info_forum_interne') . ')';
+	}
+
+	if ($id_message) debut_page(_T('titre_page_forum_envoi'), "accueil", "messagerie");
+	else debut_page(_T('titre_page_forum_envoi'), "accueil");
+	debut_gauche();
+	debut_droite();
+	gros_titre($titre_page . $num);
 
 	if ($statut == "prive") $logo = "forum-interne-24.gif";
 	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
@@ -106,14 +143,14 @@ function forum_envoi(
 	else $logo = "forum-public-24.gif";
 
 	$corps = "\n<table border='0' cellpadding='0' cellspacing='0' background='' width='100%'><tr><td>"
-	  . icone(_T('icone_retour'), rawurldecode($url), $logo, '','', false)
+	  . icone(_T('icone_retour'), generer_url_ecrire($script, "$objet=$id"), $logo, '','', false)
 	  ."</td>"
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
 	  . "rien.gif' width='10' border='0' /></td><td width=\"100%\">"
 	  ."<b>"._T('info_titre')."</b><br />"
 	  . "<input type='text' class='formo' name='titre_message' value=\""
-	  . entites_html($titre_message)
+	  . entites_html($titre_message ? $titre_message : $titre_page)
 	  . "\" size='40' />\n"
 	  . "</td></tr></table>"
 	  .
@@ -155,15 +192,15 @@ function forum_envoi(
 		 
 		 "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
-		. "\n<tr><td width='10' height='13' valign='top'"
-		. (!$titre_parent ? ''
-			: (" background='"
-				. _DIR_IMG_PACK
-				. "forum-vert.gif'" ))
-		. ">"
-		. http_img_pack('rien.gif', ' ', "width='10' height='13' border='0'")
-		. "</td>\n"
-		.  "<td width='100%' valign='top' rowspan='2'>"
+		. "\n<tr>"
+		. (!$parent ? "<td colsan='2'"
+			: (" <td width='10' height='13' valign='top' background='"
+			   . _DIR_IMG_PACK
+			   . "forum-vert.gif'" 
+			   . ">"
+			   . http_img_pack('rien.gif', ' ', "width='10' height='13' border='0'")
+			   . "</td>\n<td "))
+		.  " width='100%' valign='top' rowspan='2'>"
 		.  debut_cadre_thread_forum("", true, "", typo($titre_message))
 		. propre($texte)
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
@@ -173,7 +210,7 @@ function forum_envoi(
 		. fin_cadre_thread_forum(true)
 		. "</td>"
 		. "</tr>\n"
-		. (!$titre_parent ? ''
+		. (!$parent ? ''
 			: ("<tr><td width='10' valign='top' background='"
 			  . _DIR_IMG_PACK
 			  . "rien.gif'>"
@@ -185,17 +222,16 @@ function forum_envoi(
 		$parent = '';
 	}
 
-	$arg = intval($id_rubrique) . '/'
+	$cat = intval($id) . '/'
 	  . intval($id_parent) . '/'
-	  . intval($id_article) . '/'
-	  . intval($id_breve) . '/'
-	  . intval($id_message) . '/'
-	  . intval($id_syndic) . '/'
-	  . $statut;
+	  . $statut . '/'
+	  . $script . '/'
+	  . $objet;
 
 	echo  $parent,
 	  "\n<div>&nbsp;</div>"
-	  . generer_action_auteur('editer_forum',$arg, urldecode($url), $corps, " name='formulaire'")
+	  . redirige_action_auteur('editer_forum',$cat, $script, "$objet=$id", $corps, "")
+	  .  "<a id='formulaire'></a>"
 	  . fin_page();
 }
 
