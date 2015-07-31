@@ -1874,7 +1874,7 @@ function f_jQuery ($texte) {
 	if ($doublon++) {
 		include_spip('public/debug');
 		$texte = affiche_erreurs_page(array(
-			array("#INSERT_HEAD",_L("Double occurence")))
+			array("#INSERT_HEAD",_T('double_occurence')))
 		) . $texte;
 	} else {
 		$texte = "\n<script src=\"".generer_url_public('jquery.js')
