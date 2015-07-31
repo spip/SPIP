@@ -416,7 +416,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 			 (".=" . substr($return,4)) :
 			 ('= ' . $return)) .
 		  ";\n\t\t" .
-		  '$t0 .= (($t1 && $t0) ? ' . $code_sep . " : '') . \$t1;"));
+		  '$t0 .= ((strlen($t1) && strlen($t0)) ? ' . $code_sep . " : '') . \$t1;"));
      
 	// Calculer les invalideurs si c'est une boucle non constante et si on
 	// souhaite invalider ces elements
