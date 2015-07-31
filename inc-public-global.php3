@@ -48,8 +48,7 @@ function calcule_header_et_page ($fond, $delais) {
 	// Si envoi pour un forum, enregistrer puis rediriger
 
 	if (strlen($_POST['confirmer_forum']) > 0
-	OR ($_POST['afficher_texte']=='non'
-		AND $_POST['ajouter_mot'])) {
+	OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
 		include('inc-messforum.php3');
 		redirige_par_entete(enregistre_forum());
 	}
