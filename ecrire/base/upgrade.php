@@ -1448,7 +1448,6 @@ function maj_base($version_cible = 0) {
 		spip_query("UPDATE spip_meta SET valeur = '' WHERE nom='preview' AND valeur='non' ");
 		spip_query("UPDATE spip_meta SET valeur = ',0minirezo,1comite,' WHERE nom='preview' AND valeur='1comite' ");
 		spip_query("UPDATE spip_meta SET valeur = ',0minirezo,' WHERE nom='preview' AND valeur='oui' ");
-		spip_query("DROP TABLE spip_caches");
 		maj_version('1.941');
 	}
 }

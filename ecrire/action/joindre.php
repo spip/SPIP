@@ -173,17 +173,15 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 					$desc['name'],
 					$desc['tmp_name']
 				);
-		if (!$zip)
-			{include_spip('inc/minipres'); echo minipres('Erreur upload zip'); exit;} # pathologique
-			// Est-ce qu'on sait le lire ?
+		// Est-ce qu'on sait le lire ?
 		include_spip('inc/pclzip');
-		$archive = new PclZip($zip);
+		$archive = $zip ? new PclZip($zip) '';
 		if ($archive) {
 			$valables = verifier_compactes($archive);
 			if ($valables) {
-			  echo $ajouter_documents($valables, $zip, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
+				echo $ajouter_documents($valables, $zip, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
 	// a tout de suite en joindre4, joindre5, ou joindre6
-			    exit;
+				exit;
 			}
 		}
 	}
