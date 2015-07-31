@@ -1382,7 +1382,7 @@ et vous reconnecter au site.
 'pass_retour_public' => 'Retour sur le site public',
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
-'previsualisation' => 'PR&Eacute;VISUALISATION',
+'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 
 
