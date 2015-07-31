@@ -148,7 +148,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 // http://doc.spip.org/@editer_rubrique_breves
 function editer_rubrique_breves($id_rubrique, $id_parent)
 {
-	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',1);
+	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique");
 	if (!$t) return true;
 	$t = (_request('confirme_deplace', $c) <> 'oui');
 	if ($t) return false;

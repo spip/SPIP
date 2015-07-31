@@ -82,7 +82,7 @@ function action_legender_auteur_post($r) {
 			if (strlen($new_login) < 4)
 				$echec[]= 'info_login_trop_court';
 			else {
-				$n = sql_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'",'',1);
+				$n = sql_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'");
 				if ($n)
 					$echec[]= 'info_login_existant';
 				else if ($new_login != $old_login) {

@@ -60,16 +60,17 @@ function exec_suivi_revisions_dist()
 
 		if ($id_rubrique == $id_secteur)  echo "\n<li><b>$titre</b>";
 		else {
-			$result_rub = spip_query("SELECT articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where LIMIT 1");
-			if (spip_num_rows($result_rub) > 0) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a></li>";
+		  if (sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where"))
+		    echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a></li>";
 		}
 		foreach ($langues as $lang) {
 			$titre = traduire_nom_langue($lang);
 	
-			$result_lang = spip_query("SELECT versions.id_article FROM spip_versions AS versions, spip_articles AS articles WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where LIMIT 1");
-
 			if ($lang == $lang_choisie)  echo "\n<li><b>$titre</b></li>";
-			else if (spip_num_rows($result_lang) > 0) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
+			else {
+				$n = sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where");
+				if ($n) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
+			}
 		}
 	}
 	echo "</ul></div>\n";

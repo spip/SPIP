@@ -123,7 +123,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	$i = 0;
 	while ($auteur = sql_fetch($query)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			$auteur['restreint'] = sql_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur'],'', "1");
+			$auteur['restreint'] = sql_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur']);
 			
 			$auteurs[] = $auteur;
 		}

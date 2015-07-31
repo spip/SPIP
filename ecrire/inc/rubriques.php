@@ -77,19 +77,19 @@ function depublier_branche_rubrique_if($id_rubrique)
 	$id_pred = $id_rubrique;
 	while ($id_pred) {
 
-		if (sql_countsel("spip_articles",  "id_rubrique=$id_pred AND statut='publie'$postdates", '', "1"))
+		if (sql_countsel("spip_articles",  "id_rubrique=$id_pred AND statut='publie'$postdates"))
 			return $id_pred != $id_rubrique;;
 	
-		if (sql_countsel("spip_breves",  "id_rubrique=$id_pred AND statut='publie'", '', "1"))
+		if (sql_countsel("spip_breves",  "id_rubrique=$id_pred AND statut='publie'"))
 			return $id_pred != $id_rubrique;;
 
-		if (sql_countsel("spip_syndic",  "id_rubrique=$id_pred AND statut='publie'", '', "1"))
+		if (sql_countsel("spip_syndic",  "id_rubrique=$id_pred AND statut='publie'"))
 			return $id_pred != $id_rubrique;;
 	
-		if (sql_countsel("spip_rubriques",  "id_parent=$id_pred AND statut='publie'", '', "1"))
+		if (sql_countsel("spip_rubriques",  "id_parent=$id_pred AND statut='publie'"))
 			return $id_pred != $id_rubrique;;
 	
-		if (sql_countsel("spip_documents_rubriques",  "id_rubrique=$id_pred", '', "1"))
+		if (sql_countsel("spip_documents_rubriques",  "id_rubrique=$id_pred"))
 			return $id_pred != $id_rubrique;;
 
 		spip_query("UPDATE spip_rubriques SET statut='0' WHERE id_rubrique=$id_pred");

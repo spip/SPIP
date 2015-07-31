@@ -31,16 +31,15 @@ function exec_articles_page_dist()
 //
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_page'),'data'=>''));
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
 
-	if (spip_num_rows($result) > 0) {
+	if (sql_countsel('spip_rubriques')) {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif", "creer.gif", false));
 	} else {
-		  if (autoriser('creerrubriquedans', 'rubrique')) {
+		if (autoriser('creerrubriquedans', 'rubrique')) {
 			echo _T('texte_creer_rubrique');
 			echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.gif", "creer.gif",false));
+		}
 	}
-}
 
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
