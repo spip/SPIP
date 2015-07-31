@@ -108,7 +108,7 @@ function plugin_checkbox($id_input, $file, $actif)
 function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	$prefix = $info['prefix'];
 	$dir = "$dir_plugins$plug_file";
-	$slogan = plugin_propre($info['slogan'], "$dir/lang/$prefix");
+	$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
 	// une seule ligne dans le slogan : couper si besoin
 	if (($p=strpos($slogan, "<br />"))!==FALSE)
 		$slogan = substr($slogan, 0,$p);
@@ -158,14 +158,10 @@ function plugin_etat_en_clair($etat){
 
 // http://doc.spip.org/@plugin_propre
 function plugin_propre($texte, $module='') {
-	$mem = $GLOBALS['toujours_paragrapher'];
-	$GLOBALS['toujours_paragrapher'] = false;
 	if (preg_match("|^\w+_[\w_]+$|", $texte)) {
 		$texte = _T(($module ? "$module:" : '') . $texte);
 	}
-	$texte = propre($texte);
-	$GLOBALS['toujours_paragrapher'] = $mem;
-	return $texte;
+	return propre($texte);
 }
 
 
@@ -176,7 +172,7 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 		$dir_plugins = _DIR_PLUGINS;
 
 	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file/lang/$prefix";
+	$dir = "$dir_plugins$plug_file/lang/paquet-$prefix";
 
 	$s = "";
 	// TODO: le traiter_multi ici n'est pas beau
@@ -193,10 +189,16 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 		$s .= "</dd>\n";
 	}
 
-	if (isset($info['auteur']) AND trim($info['auteur']))
-	  $s .= "<dt class='auteurs'>" . _T('public:par_auteur') ."</dt><dd class='auteurs'>". plugin_propre($info['auteur'], $dir) . "</dd>\n";
+	if (isset($info['auteur'])){
+		if (is_array($info['auteur']))
+			$a = implode(', ',$info['auteur']);
+		else
+			$a = trim($info['auteur']);
+		if ($a)
+			$s .= "<dt class='auteurs'>" . _T('public:par_auteur') ."</dt><dd class='auteurs'>". PtoBR(plugin_propre($a, $dir)) . "</dd>\n";
+	}
 	if (isset($info['licence']))
-	  $s .= "<dt class='licence'>" . _T('intitule_licence') ."</dt><dd class='licence'>". plugin_propre($info['licence'], $dir) . "</dd>\n";
+	  $s .= "<dt class='licence'>" . _T('intitule_licence') ."</dt><dd class='licence'>". PtoBR(plugin_propre($info['licence'], $dir)) . "</dd>\n";
 	$s = "<dl>$s</dl>";
 
 	//
