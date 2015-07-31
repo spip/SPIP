@@ -104,7 +104,7 @@ function chrono_requete($temps)
 		. join('', $explain)
 		. "</table>";
 
-		$temps[$key] = array($e, $env);
+		$temps[$key] = array($e, $env, $boucle);
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);
@@ -113,13 +113,13 @@ function chrono_requete($temps)
 	$t = array();
 	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach($temps as $k => $v) {
-		$titre = strip_tags($v[1]);
+		$titre = strip_tags($v[2]);
 		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
 
-		$t[$v[1]][]= "<span class='spip-debug-arg'> "
+		$t[$v[2]][]= "<span class='spip-debug-arg'> "
 		. "<a title='$titre' href='$href'>$i</a>"
 		. '</span>'
-		. ((count($t[$v[1]]) % 10 == 9) ?  "<br />" : '');
+		. ((count($t[$v[2]]) % 10 == 9) ?  "<br />" : '');
 		$i++;
 	}
 
