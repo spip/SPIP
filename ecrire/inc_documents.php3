@@ -735,7 +735,7 @@ function afficher_documents_colonne($id_article) {
 		//// Images sans documents
 		$query = "SELECT * FROM #table AS docs, spip_documents_articles AS l ".
 				"WHERE l.id_article=$id_article AND l.id_document=docs.id_document ".$docs_exclus.
-				"AND docs.mode='vignette' AND docs.titre!='' ORDER BY docs.id_document";
+				"AND docs.mode='vignette' ORDER BY docs.id_document";
 		
 		$images_liees = fetch_document($query);
 		
