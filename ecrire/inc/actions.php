@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
+// http://doc.spip.org/@generer_action_auteur
 function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');

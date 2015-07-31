@@ -27,6 +27,7 @@ function exec_articles_edit_dist()
 		articles_edit_config());
 }
 
+// http://doc.spip.org/@articles_edit_config
 function articles_edit_config()
 {
 	global $champs_extra, $spip_ecran, $options, $spip_lang;
@@ -52,6 +53,7 @@ function articles_edit_config()
 	return $config;
 }
 
+// http://doc.spip.org/@articles_edit
 function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config)
 {
 
@@ -110,6 +112,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	echo fin_page();
 }
 
+// http://doc.spip.org/@articles_edit_presentation
 function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {
 	$oups = ($lier_trad ?
