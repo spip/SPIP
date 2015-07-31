@@ -121,7 +121,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 				$desc['exist'] = true;
 		}
 
-		$desc['table']= $nom_sql;
+		$desc['table'] = $desc['table_sql'] = $nom_sql;
 		$desc['connexion']= $serveur;
 
 		// charger les infos declarees pour cette table
