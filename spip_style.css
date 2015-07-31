@@ -38,8 +38,8 @@ h3.spip {
 	font-size : 70%;
 }
 
-.spip_documents_center{
-	margin: auto; 
+.spip_documents_center {
+	margin: auto;
 	text-align: center;
 	width: 80%;
 }
@@ -167,7 +167,7 @@ input.formrecherche {
 /*
  *  Images typographiques (via image_typo)
  */
-.image_typo {
+.format_png {
 	behavior: url("win_png.htc");
 }
 

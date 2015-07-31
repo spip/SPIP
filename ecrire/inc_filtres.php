@@ -2013,7 +2013,7 @@ function image_typo() {
 		$dimensions = getimagesize($image);
 		$largeur = $dimensions[0];
 		$hauteur = $dimensions[1];
-		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo' />", 'alt', $alt);
+		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
 	} else {
 		return $texte;
 	}
