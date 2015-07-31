@@ -162,7 +162,7 @@ else if ($ajout_doc == 'oui') {
 				else if ($action_zip == 'decompacter') {
 					// 1. on deballe
 					define('_tmp_dir', creer_repertoire_documents($hash));
-					if (!_tmp_dir) redirige_par_entete("spip_test_dirs.php3");
+					if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
 					$archive->extract(
 						PCLZIP_OPT_PATH, _tmp_dir,
 						PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
