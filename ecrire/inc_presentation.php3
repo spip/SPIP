@@ -905,6 +905,7 @@ function debut_html($titre = "") {
 	@Header("Content-Type: text/html; charset=$charset");
 	
 	echo "<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
+	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
 	echo "spip_style.php3?couleur_claire=".urlencode($couleur_claire)."&couleur_foncee=" . urlencode($couleur_foncee) ."\">\n";
