@@ -3,29 +3,37 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère l'obtention de données distantes
+ * 
+ * @package SPIP\Core\Distant
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
 if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
 
+define('_REGEXP_COPIE_LOCALE', ',' . 
+       preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
+       . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
+
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 
 /**
- * Cree au besoin la copie locale d'un fichier distant
- *
+ * Crée au besoin la copie locale d'un fichier distant
  *
  * Prend en argument un chemin relatif au rep racine, ou une URL
  * Renvoie un chemin relatif au rep racine, ou false
  *
- * http://doc.spip.org/@copie_locale
+ * @link http://www.spip.net/4155
  *
  * @param $source
  * @param string $mode
@@ -37,25 +45,25 @@ if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP
  *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
  * @return bool|string
  */
-function copie_locale($source, $mode = 'auto', $local = null){
+function copie_locale($source, $mode='auto', $local = null) {
 
-	// si c'est la protection de soi-meme
-	$reg = ',' . $GLOBALS['meta']['adresse_site']
-		. "/?spip.php[?]action=acceder_document.*file=(.*)$,";
-
-	if (preg_match($reg, $source, $m)) return substr(_DIR_IMG, strlen(_DIR_RACINE)) . urldecode($m[1]);
+	// si c'est la protection de soi-meme, retourner le path
+	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $match)) {
+		$source = substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($match[1]);
+		return @file_exists($source) ? $source : false;
+	}
 
 	if (is_null($local))
 		$local = fichier_copie_locale($source);
 	else {
-		if (_DIR_RACINE
-			AND strncmp(_DIR_RACINE, $local, strlen(_DIR_RACINE))==0
-		)
+		if (_DIR_RACINE AND strncmp(_DIR_RACINE, $local, strlen(_DIR_RACINE))==0) {
 			$local = substr($local, strlen(_DIR_RACINE));
+		}
 	}
-	$localrac = _DIR_RACINE . $local;
 
-	$t = ($mode=='force') ? false : @file_exists($localrac);
+
+	$localrac = _DIR_RACINE.$local;
+	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
 	if ($mode=='test') return $t ? $local : '';
@@ -97,7 +105,7 @@ function copie_locale($source, $mode = 'auto', $local = null){
 }
 
 // http://doc.spip.org/@prepare_donnees_post
-function prepare_donnees_post($donnees, $boundary = ''){
+function prepare_donnees_post($donnees, $boundary = '') {
 
 	// permettre a la fonction qui a demande le post de formater elle meme ses donnees
 	// pour un appel soap par exemple
@@ -106,8 +114,8 @@ function prepare_donnees_post($donnees, $boundary = ''){
 	if (is_string($donnees) && strlen($donnees)){
 		$entete = "";
 		// on repasse tous les \r\n et \r en simples \n
-		$donnees = str_replace("\r\n", "\n", $donnees);
-		$donnees = str_replace("\r", "\n", $donnees);
+		$donnees = str_replace("\r\n","\n",$donnees);
+		$donnees = str_replace("\r","\n",$donnees);
 		// un double retour a la ligne signifie la fin de l'entete et le debut des donnees
 		$p = strpos($donnees, "\n\n");
 		if ($p!==FALSE){
@@ -140,8 +148,8 @@ function prepare_donnees_post($donnees, $boundary = ''){
 			// fabrique une chaine HTTP pour un POST avec boundary
 			$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
 			$chaine = '';
-			if (is_array($donnees)){
-				foreach ($donnees as $cle => $valeur){
+			if (is_array($donnees)) {
+				foreach ($donnees as $cle => $valeur) {
 					$chaine .= "\r\n--$boundary\r\n";
 					$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
 					$chaine .= "\r\n";
@@ -151,16 +159,16 @@ function prepare_donnees_post($donnees, $boundary = ''){
 			}
 		} else {
 			// fabrique une chaine HTTP simple pour un POST
-			$entete = 'Content-Type: application/x-www-form-urlencoded' . "\r\n";
+			$entete = 'Content-Type: application/x-www-form-urlencoded'."\r\n";
 			$chaine = array();
-			if (is_array($donnees)){
-				foreach ($donnees as $cle => $valeur){
-					if (is_array($valeur)){
-						foreach ($valeur as $val2){
-							$chaine[] = rawurlencode($cle) . '=' . rawurlencode($val2);
+			if (is_array($donnees)) {
+				foreach ($donnees as $cle => $valeur) {
+					if (is_array($valeur)) {
+						foreach ($valeur as $val2) {
+							$chaine[] = rawurlencode($cle).'='.rawurlencode($val2);
 						}
 					} else {
-						$chaine[] = rawurlencode($cle) . '=' . rawurlencode($valeur);
+						$chaine[] = rawurlencode($cle).'='.rawurlencode($valeur);
 					}
 				}
 				$chaine = implode('&', $chaine);
@@ -209,7 +217,7 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 	else
 		$get = 'GET';
 
-	if (!empty($datas)){
+	if (!empty($datas)) {
 		$get = 'POST';
 		list($type, $postdata) = prepare_donnees_post($datas, $boundary);
 		$datas = $type . 'Content-Length: ' . strlen($postdata) . "\r\n\r\n" . $postdata;
@@ -382,8 +390,10 @@ function recuperer_entetes($f, $date_verif = ''){
 // des filesystems
 // http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension){
-
-	include_spip('inc/documents');
+	if (version_compare($spip_version_branche,"3.0.0") < 0)
+		include_spip('inc/getdocument');
+	else
+		include_spip('inc/documents');
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
@@ -417,9 +427,9 @@ function fichier_copie_locale($source){
 	$path_parts = pathinfo($source);
 	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext
-		AND preg_match(',^\w+$,', $ext) // pas de php?truc=1&...
-		AND $f = nom_fichier_copie_locale($source, $ext)
-		AND file_exists(_DIR_RACINE . $f)
+	AND preg_match(',^\w+$,', $ext) // pas de php?truc=1&...
+	AND $f = nom_fichier_copie_locale($source, $ext)
+	AND file_exists(_DIR_RACINE . $f)
 	)
 		return $f;
 
@@ -526,7 +536,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 			AND $mime_type!='text/plain'
 			AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 		){
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text'));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text')); # eviter xxx.3 => 3gp (> SPIP 3)
 		}
 
 
