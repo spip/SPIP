@@ -149,7 +149,7 @@
     buildReplaceTools : function(query) {
         var re = [], regex;
         $.each(query,function(i,n){
-            if(SearchHighlight.options.min_length && n.length>=SearchHighlight.options.min_length)
+            if(!SearchHighlight.options.min_length || n.length>=SearchHighlight.options.min_length)
               if(n = SearchHighlight.replaceAccent(n).replace(SearchHighlight.escapeRegEx,"$1\\$2"))
                 re.push(n);        
         });
