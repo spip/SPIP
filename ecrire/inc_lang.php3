@@ -484,7 +484,10 @@ function utiliser_langue_visiteur() {
 	if ($GLOBALS['auteur_session']['lang'])
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
-	if ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang'])
+	if (!$flag_ecrire AND ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang']))
+		changer_langue($cookie_lang);
+
+	if ($flag_ecrire AND ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang_ecrire']))
 		changer_langue($cookie_lang);
 
 }

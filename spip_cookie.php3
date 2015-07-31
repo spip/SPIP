@@ -179,8 +179,11 @@ if ($cookie_session) {
 if ($var_lang) {
 	include_ecrire('inc_lang.php3');
 
-	if (changer_langue($var_lang))
+	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
+		$cible->delvar('lang');
+		$cible->addvar('lang', $var_lang);
+	}
 }
 
 // changer de langue espace prive (ou login)
