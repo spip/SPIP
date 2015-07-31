@@ -414,7 +414,7 @@ if ($flag_ob) {
 
 if (!$non_affiche) {
 	// Afficher le lien RSS
-	include_ecrire('inc_sites.php3');
+	include_ecrire('inc_rss.php3');
 	$op = 'a-suivre';
 	$args = array();
 	echo "<div style='text-align: "

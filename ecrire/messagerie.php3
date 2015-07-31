@@ -102,7 +102,7 @@ afficher_messages(_T('info_discussion_cours'), $query_message, true, false);
 
 
 // Afficher le lien RSS
-include_ecrire('inc_sites.php3');
+include_ecrire('inc_rss.php3');
 $op = 'messagerie';
 $args = array(
 	'id_auteur' => $connect_id_auteur

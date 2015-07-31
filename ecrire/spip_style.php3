@@ -1383,3 +1383,14 @@ table.spip td {
 	vertical-align: center;
 	margin: 1px;
 }
+
+.rss-button {
+	border: 1px solid;
+	border-color: #FC9 #630 #330 #F96;
+	padding: 0 3px;
+	font: bold 10px verdana,sans-serif;
+	color: #FFF;
+	background: #F60;
+	text-decoration: none;
+	margin: 0;
+}

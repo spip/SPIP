@@ -207,7 +207,7 @@ echo aide("suiviforum");
 echo "</FONT>";
 
 // Afficher le lien RSS
-include_ecrire('inc_sites.php3');
+include_ecrire('inc_rss.php3');
 $op = 'forums';
 $args = array(
 	'page' => $page

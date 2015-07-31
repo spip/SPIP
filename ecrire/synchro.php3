@@ -125,7 +125,8 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 			$titre = htmlspecialchars($titre_rubrique);
 			
 			echo "<li>", http_href("$adresse_site/backend.php3?id_rubrique=$id_rubrique", 
-					       http_img_pack("xml.gif", $titre, "border='0' align='middle' valign='top'") . "&nbsp; $titre_rubrique",
+	'<span class="rss-button">RSS</span>'
+	. "&nbsp; $titre_rubrique",
 					       $titre),
 			  "</li>\n";
 		}
