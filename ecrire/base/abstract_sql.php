@@ -122,12 +122,14 @@ function spip_abstract_create($nom, $champs, $cles, $autoinc=false, $temporary=f
 	return $f($nom, $champs, $cles, $autoinc, $temporary);
 }
 
+// http://doc.spip.org/@spip_abstract_multi
 function spip_abstract_multi($sel, $lang, $serveur='')
 {
   	$f = spip_abstract_serveur('multi', $serveur);
 	return $f($sel, $lang);
 }
 
+// http://doc.spip.org/@spip_sql_error
 function spip_sql_error($serveur='') {
   	$f = spip_abstract_serveur('error', $serveur);
 	return $f();
