@@ -51,12 +51,11 @@ function acces_statut($id_auteur, $statut, $bio)
 	return $s;
 }
 
-// Fonction d'authentification
-// retourne -1 si authentification impossible a cause du serveur SQL 
-// retourne une chaine vide si authentification reussie
-// retourne une chaine non vide expliquant l'echec sinon:
-//	"rien" ==> nouvel arrivant, envoyer le formulaire
-//	autre  ==> statut incompatible
+// Fonction d'authentification. Retourne:
+//  1 si on ne sait encore rien (pas de cookie, pas Auth_user);
+//  un tableau si visiteur sans droit de redaction (tableau = sa ligne SQL)
+//  une chaine non vide a afficher disant pourquoi SQL pas utilisable;
+//  une chaine vide si autorisation a penetrer dans l'espace prive.
 
 // http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
@@ -119,22 +118,21 @@ function inc_auth_dist() {
 	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login));
 
 	// pas authentifie par cookie ni http_auth:
-	if (!$where) return "inconnu";
+	if (!$where) return 1;
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
-	$result = sql_select("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
+	$row = sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 
-	if (!$row = sql_fetch($result)) {
+	if (!$row) {
 		// il n'est PLUS connu. c'est SQL qui est desynchro ;
 		// donner un message si on dispose d'un (mauvais) login
 		if (strlen($connect_login)) {
-			auth_areconnecter($connect_login);
-			return -1;
+			return auth_areconnecter($connect_login);
 		}
-		// sinon renvoyer vers le login
+		// sinon dire qu'il faut renvoyer vers le formulaire de login
 		else
-			return 'inconnu';
+			return 1;
 	}
 
 	// Le visiteur est connu
@@ -148,7 +146,7 @@ function inc_auth_dist() {
 	// s'il est pris dans le fichier de session)
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
 	
-    //si la globale est vide ce n'est pas un tableau, on la force pour empecher une warning
+    //si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
 	
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
@@ -178,16 +176,18 @@ function inc_auth_dist() {
 	// Etablir les droits selon le codage attendu
 	// dans ecrire/index.php ecrire/prive.php
 
-	// Pas autorise a acceder a ecrire ? on renvoie le statut
+	// Pas autorise a acceder a ecrire ? renvoyer le tableau
 	// A noter : le premier appel a autoriser() a le bon gout
 	// d'initialiser $GLOBALS['visiteur_session']['restreint'],
 	// qui ne figure pas dans le fichier de session
 	include_spip('inc/autoriser');
 
 	if (!autoriser('ecrire'))
-		return $connect_statut;
+		return $row;
 
 	// autoriser('ecrire') ne laisse passer que les Admin et les Redac
+
+	auth_trace($row);
 
 	// Administrateurs
 	if ($connect_statut == '0minirezo') {
@@ -197,17 +197,20 @@ function inc_auth_dist() {
 	} 
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
 
+	return ''; // i.e. pas de pb.
+}
+
+function auth_trace($row, $date='NOW()')
+{
 	// Indiquer la connexion. A la minute pres ca suffit.
 	if (!is_numeric($connect_quand = $row['quand']))
 		$connect_quand = strtotime($connect_quand);
 	
 	if ((time() - $connect_quand)  >= 60) {
-		unset($result); // sinon sqlite ne peut pas faire l'update (database table is locked)
-		sql_update("spip_auteurs", array("en_ligne" => "NOW()"), "id_auteur=$connect_id_auteur");
+		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
 	}
-
-	return ''; // i.e. pas de pb.
 }
+
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
 // C'est soit parce que le serveur MySQL ne repond pas,
@@ -221,10 +224,9 @@ function auth_areconnecter($auth_login)
 	if (!spip_connect()) {
 		spip_log("Erreur base de donnees");
 
-		echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+		return minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
 	} else {
-		echo minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
+		return minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
 	}
-	exit();
 }
 ?>
