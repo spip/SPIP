@@ -43,7 +43,7 @@ function champs_traitements ($p) {
 		'NOM_SITE_SPIP' => 'typo(%s)',
 		'NOM_SITE' => 'typo(%s)',
 		'NOM' => 'typo(%s)',
-		'PARAMETRES_FORUM' => 'htmlspecialchars(%s)',
+		'PARAMETRES_FORUM' => 'htmlspecialchars(lang_parametres_forum(%s))',
 		'PS' => 'traiter_raccourcis(%s)',
 		'SOUSTITRE' => 'typo(%s)',
 		'SURTITRE' => 'typo(%s)',
