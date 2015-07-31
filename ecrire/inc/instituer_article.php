@@ -18,44 +18,39 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	if ($statut == -1) return demande_publication($id_article);
 
 	// menu de date pour les articles post-dates (plugin)
+	/* un branchement sauvage ?
 	if ($statut <> 'publie'
 	AND $GLOBALS['meta']['post_dates'] == 'non'
 	AND function_exists('menu_postdates'))
 		list($postdates,$postdates_js) = menu_postdates();
+	else $postdates = $postdates_js = '';*/
 
-	else $postdates = $postdates_js = '';
+	$liste_statuts = array(
+	  // statut => array(titre,image)
+		'prepa' => array(_T('texte_statut_en_cours_redaction'),''),
+		'prop' => array(_T('texte_statut_propose_evaluation'),''),	
+		'publie' => array(_T('texte_statut_publie'),''),	
+		'poubelle' => array(_T('texte_statut_poubelle'),''),	
+		'refuse' => array(_T('texte_statut_refuse'),'')	
+	);
+
 	$res =
-	"\n<div style='text-align: center;' id='instituer_article-$id_article'>" .
-	"<label for='statut_nouv'><b>" .
-	_T('texte_article_statut') .
-	"</b></label>" .
-	"\n<select name='statut_nouv' id='statut_nouv' size='1' class='fondl'\n" .
-	"onchange=\"this.nextSibling.nextSibling.src='" .
-	_DIR_IMG_PACK .
-	"' + puce_statut(options[selectedIndex].value);" .
-	" setvisibility('valider_statut', 'visible');"
-	. $postdates_js
-	. "\">\n" .
-	"<option"  . mySel("prepa", $statut)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
-	"<option"  . mySel("prop", $statut)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
-	"<option"  . mySel("publie", $statut)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
-	"<option"  . mySel("poubelle", $statut)
-	. " class='danger'>"  ._T('texte_statut_poubelle') ."</option>\n" .
-	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
-	"</select>" .
-	" &nbsp; " .
-	puce_statut($statut, " class='puce'") .
-	"  &nbsp;\n" .
-	"<span class='visible_au_chargement' id='valider_statut'>" .
-	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
-	"</span>" .
-	aide("artstatut")
-	. $postdates
-	. '</div>';
-  
-	return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
-}
+	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
+	  . "<li>" . _T('texte_article_statut') 
+		. aide("artstatut")
+	  ."<ul>";
+	
+	$href = redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article");
+	foreach($liste_statuts as $s=>$affiche){
+		$href = parametre_url($href,'statut_nouv',$s);
+		$sel = ($s==$statut) ? " selected":"";
+		$res .= "<li class='$s$sel'><a href='$href'>" . puce_statut($s) . $affiche[0] . '</a></li>';
+	}
 
+	$res .= "</ul></li></ul>";
+  
+	return $res;
+}
 
 // http://doc.spip.org/@demande_publication
 function demande_publication($id_article)

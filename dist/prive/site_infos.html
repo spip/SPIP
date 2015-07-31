@@ -1,0 +1,9 @@
+<BOUCLE_site(SITES){id_syndic=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:titre_site_numero:><p>#ID_SYNDIC</p></div>
+[(#ID_SYNDIC|instituer_site{#ID_RUBRIQUE,#STATUT})]
+<BOUCLE_docs(DOCUMENTS){id_syndic}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
+<p class='forums'>xx messages de forums</p>
+<p class='signatues'>xx signatures</p>
+</div>
+</BOUCLE_site>

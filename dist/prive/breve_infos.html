@@ -1,0 +1,9 @@
+<BOUCLE_breve(BREVES){id_breve=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:info_gauche_numero_breve:><p>#ID_BREVE</p></div>
+[(#ID_BREVE|instituer_breve{#ID_RUBRIQUE,#STATUT})]
+<p class='origine'>[(#DATE|affdate)]</span><p>
+<BOUCLE_docs(DOCUMENTS){id_breve}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
+<p class='forums'>xx messages de forums</p>
+</div>
+</BOUCLE_breve>

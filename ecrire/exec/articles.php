@@ -29,15 +29,12 @@ function exec_articles_dist()
 		$res = $row['titre'] = _T('public:aucun_article');
 		$row['id_rubrique'] = 0;
 	} else {
-		$discuter = charger_fonction('discuter', 'inc');
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
 		$res = debut_gauche('accueil',true)
 		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
 		  . "<br /><br /><div class='centered'>"
-		  . icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif")
 		. "</div>"
-		. $discuter($id_article, false,  _request('debut'))
 		. fin_gauche()
 ;
 	}
@@ -98,6 +95,18 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$editer_mot = charger_fonction('editer_mot', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
+	$discuter = charger_fonction('discuter', 'inc');
+
+	$logo = '';
+ 	$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	if ($chercher_logo) {
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			include_spip('inc/filtres_images');
+			$logo = image_reduire("<img src='$fid' alt='' />", 75, 60);
+		}
+	}
 
 	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
@@ -114,59 +123,81 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		)
 	));
 
-	$res =
-		debut_boite_info(true). $boite . fin_boite_info(true)
-	.	$icone
+	$navigation =
+	  debut_boite_info(true). $boite . fin_boite_info(true)
+	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
+	  . meme_rubrique($id_rubrique, $id_article, 'article')
+	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
+	
+	$extra = creer_colonne_droite('', true)
+	  . pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
+	  . debut_droite('',true);
 
-	.	boites_de_config_articles($id_article)
-	.	($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
-	.	meme_rubrique($id_rubrique, $id_article, 'article')
-
-	.	 pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
-
-	.	creer_colonne_droite('', true)
-
-	.	pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
-
-	.	debut_droite('',true);
-
-// affecter les globales dictant les regles de typographie de la langue
+	// affecter les globales dictant les regles de typographie de la langue
 	changer_typo($row['lang']);
+	
+	$actions = 
+		voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false)
+	 . ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "")
+	 . icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", $spip_lang_left);
+	 
+	// revisions d'articles
+	if (($GLOBALS['meta']["articles_versions"]=='oui')
+		AND $row['id_version']>1
+		AND autoriser('voirrevisions', 'article', $id_article))
+			$actions .= icone_inline(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", $spip_lang_left);
 
-	return $res
-	. debut_cadre_relief('', true)
-	. titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
-	. "\n<div style='margin-top: 10px' class='serif'>"
+	// statistiques
+	if ($row['statut'] == 'publie'
+		AND $row['visites'] > 0
+		AND $GLOBALS['meta']["activer_statistiques"] != "non"
+		AND autoriser('voirstats', $type, $id))
+			$actions .= icone_inline(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", $spip_lang_left);
 
-	. $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
+	$actions .= "<div class='nettoyeur'></div>";
+	
+	$haut =
+		($logo ? "<div class='logo_titre'>$logo</div>" : "")
+		. gros_titre($titre, '' , false)
+		. "<div class='bandeau_actions'>$actions</div>";
 
-	. $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
+	$onglet_contenu = array(_L('Contenu'),
+	  afficher_corps_articles($virtuel,$statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $chapo, $texte, $ps, $extra)
+	  );
 
-	. (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
+	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
+	  $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
+	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
+	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
+	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
+	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
+	  );
 
-	. (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
+	$onglet_documents = array(_L('Documents'),
+	  $icone
+	  . articles_documents('article', $id_article)
+	  );
+	
+	$onglet_interactivite = array(_L('Interactivit&eacute;'),
+	  boites_de_config_articles($id_article)
+		);
+		
+	$onglet_discuter = array(_L('Discuter'),
+		$discuter($id_article, false,  _request('debut'))
+		);
 
-	. pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 
-	. (!$statut_rubrique ? ''
-	 : (debut_cadre_relief('', true)
-		. $instituer_article($id_article, $statut_article)
-		. fin_cadre_relief(true)))
-
-	. "\n<div style='text-align: justify; padding: 10px;'>"
-	. afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra)
-
-	. (!$flag_editable ? ''
-	   :  (bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right') . "<br class='nettoyeur' />"))
-	. (($spip_display == 4) ? ''
-	 : articles_documents('article', $id_article))
-
-	. (($statut_article == 'prepa' AND !$statut_rubrique
-	AND spip_num_rows(auteurs_article($id_article, " id_auteur=$connect_id_auteur")))
-	 ? $instituer_article($id_article)
-	 : '')
-	. "</div></div>"
-	. fin_cadre_relief(true);
+	return 
+	  $navigation
+	  . $extra 
+	  . $haut 
+	  . afficher_onglets_pages(array(
+	    //'resume'=>$onglet_resume,
+	    'voir'=>$onglet_contenu,
+	    'props'=>$onglet_proprietes,
+	    'docs'=>$onglet_documents,
+	    'interactivite'=>$onglet_interactivite,	    
+	    'discuter'=>$onglet_discuter));
 }
 
 // http://doc.spip.org/@articles_documents
@@ -285,48 +316,8 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align);
 }
 
-// http://doc.spip.org/@titres_articles
-function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
-{
-	global  $lang_objet, $spip_lang_left, $spip_lang_right;
-
-	$lang_dir = lang_dir($lang_objet);
-
-	$res = '';
-	if ($flag_editable) {
-		$res .= bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right);
-	}
-
-	if ($surtitre) {
-		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
-	}
-	 
-	$res .= gros_titre($titre, puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", false);
-
-	
-	if ($soustitre) {
-		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";
-	}
-	$res .= "<div class='nettoyeur'></div>";
-	if ($descriptif OR $url_site OR $nom_site) {
-
-		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-
-		$texte_case .=  ($nom_site OR $url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-
-		$res .= "<br />\n<div  dir='$lang_dir' style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; text-align: $spip_lang_left;' class='Verdana1 spip_x-small'>"
-		. propre($texte_case)
-		. "</div>";
-	}
-	
-	if ($statut_article == 'prop')
-		$res .= "<p style='color: red' class='verdana1 spip_small'><b>"._T('text_article_propose_publication')."</b></p>";
-	
-	return $res;
-}
-
 // http://doc.spip.org/@afficher_corps_articles
-function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
+function afficher_corps_articles($virtuel, $statut_article, $surtitre, $soustitre, $descriptif, $url_site, $nom_site, $chapo, $texte, $ps,  $extra)
 {
   global $champs_extra, $les_notes, $lang_objet;
 
@@ -335,6 +326,9 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 global $id_article;
 
 	$res = '';
+	
+	if ($statut_article == 'prop')
+		$res .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";
 
 	if ($virtuel) {
 		$res .= debut_boite_info(true)
@@ -344,36 +338,48 @@ global $id_article;
 		.  propre("[->$virtuel]")
 		. '</div>'
 		.  fin_boite_info(true);
-	} else {
+	}
+	else {
+		if (strlen($surtitre)>0)
+			$res .= 
+			  "<span class='label'>"._T('texte_sur_titre')."</span>"
+			  . "<span  dir='$lang_dir' class='surtitre crayon article-surtitre-$id_article'>" . typo($surtitre) . "</span>\n";
 
-		if (strlen($chapo) > 0) {
-			$res .= "\n<div  dir='$lang_dir' style='font-weight: bold;' class='spip_small crayon article-chapo-$id_article'>"
-			. propre($chapo)
-			. "</div>";
-		}
+		if (strlen($soustitre)>0)
+			$res .= 
+			  "<span class='label'>"._T('texte_sous_titre')."</span>"
+			  . "<span  dir='$lang_dir' class='soustitre crayon article-soustitre-$id_article'>" . typo($soustitre) . "</span>\n";
 
-		if (strlen($texte) > 0) {
-			$res .= "\n<div  dir='$lang_dir' class='crayon article-texte-$id_article'>"
-			.  propre($texte)
-			.  "<div class='nettoyeur'></div>"
-			.  "</div>";
-		}
+		if (strlen($descriptif)>0)
+			$res .= 
+			  "<span class='label'>"._T('info_descriptif')."</span>"
+			  . "<span  dir='$lang_dir' class='descriptif crayon article-descriptif-$id_article'>" . propre($descriptif) . "</span>\n";
+			
+		if ($url_site OR $nom_site)
+			$res .= 
+			  "<span class='label'>"._T('entree_liens_sites')."</span>"
+			  . "<span  dir='$lang_dir' class='url_site crayon article-url_site-$id_article'>" . propre("[".$nom_site."->".$url_site."]") . "</span>\n";
+	
+		if (strlen($chapo) > 0) 
+			$res .= 
+			  "<span class='label'>"._T('info_chapeau')."</span>"
+			  . "<span  dir='$lang_dir' class='chapo crayon article-chapo-$id_article'>" . propre($chapo) . "</span>\n";
 
-		if (strlen($ps)) {
-			$res .= debut_cadre_enfonce('',true)
-			. "\n<div  dir='$lang_dir' style='font-size: small;' class='verdana1 crayon article-ps-$id_article'>"
-			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))
-			. "</div>"
-			. fin_cadre_enfonce(true);
-		}
+		if (strlen($texte) > 0)
+			$res .= 
+			  "<span class='label'>"._T('info_texte')."</span>"
+			  . "<span  dir='$lang_dir' class='texte crayon article-texte-$id_article'>" . propre($texte) . "</span>\n";
 
-		if ($les_notes) {
-			$res .= debut_cadre_relief('',true)
-			. "\n<div  dir='$lang_dir' class='arial11'>"
-			. justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes)
-			. "</div>"
-			. fin_cadre_relief(true);
-		}
+		if (strlen($ps) > 0)
+			$res .= 
+			  "<span class='label'>"._T('info_ps')."</span>"
+			  . "<span  dir='$lang_dir' class='ps crayon article-ps-$id_article'>" . propre($ps) . "</span>\n";
+
+		if ($les_notes)
+			$res .= 
+			  "<span class='label'>"._T('info_notes')."</span>"
+			  . "<span  dir='$lang_dir' class='notes'>"
+			  . justifier($les_notes);
 		
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
