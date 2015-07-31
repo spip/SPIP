@@ -219,7 +219,8 @@ function ajax_retour($corps,$xml = true)
 
 // http://doc.spip.org/@determine_upload
 function determine_upload($type='') {
-
+	include_spip('inc/autoriser');
+	
 	if (!autoriser('chargerftp')
 	OR $type == 'logos') # on ne le permet pas pour les logos
 		return false;
