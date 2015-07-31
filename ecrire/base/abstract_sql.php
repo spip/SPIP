@@ -536,6 +536,40 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
 	return sql_in($in, $liste);
 }
 
+/**
+ * Implementation securisee du saut en avant,
+ * qui ne depend pas de la disponibilite de la fonction sql_seek
+ * ne fait rien pour une valeur negative ou nulle de $saut
+ * retourne la position apres le saut
+ *
+ * @param resource $res
+ * @param int $pos
+ *   position courante
+ * @param int $saut
+ *   saut demande
+ * @param int $count
+ *   position maximale
+ *   (nombre de resultat de la requete OU position qu'on ne veut pas depasser)
+ * @param <type> $serveur
+ * @param <type> $option
+ * @return int
+ */
+function sql_skip($res, $pos, $saut, $count, $serveur='', $option=true){
+	// pas de saut en arriere qu'on ne sait pas faire sans sql_seek
+	if (($saut=intval($saut))<=0) return $pos;
+
+	$seek = $pos + $saut;
+	// si le saut fait depasser le maxi, on libere la resource
+	// et on sort
+	if ($seek>=$count) {sql_free($res, $serveur, $option); return $count;}
+
+	if (sql_seek($res, $seek))
+		$pos = $seek;
+	else
+		while ($pos<$seek AND sql_fetch($res, $serveur, $option))
+			$pos++;
+	return $pos;
+}
 
 // http://doc.spip.org/@sql_test_int
 function sql_test_int($type, $serveur='', $option=true)
