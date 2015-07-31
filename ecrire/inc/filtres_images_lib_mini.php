@@ -228,6 +228,8 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	else 	{
 		$fichier_dest = md5("$fichier-$effet");
 		$cache = sous_repertoire(_DIR_VAR, $cache);
+		$cache = sous_repertoire($cache, substr($fichier_dest,0,2));
+		$fichier_dest = substr($fichier_dest,2);
 	}
 	
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
