@@ -93,7 +93,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	}
 	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
 	if ($env) {
-		$contexte = "array_merge('.spip_var_export(\$Pile[0]).',$contexte)";
+		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
 
 	return "\n'<".
