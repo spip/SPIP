@@ -22,12 +22,18 @@ function protege_champ($texte){
 /* prendre en charge par defaut les balises formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
-	preg_match(",^FORMULAIRE_(.*)?$,", $p->nom_champ, $regs);
-	if (!strlen($form = $regs[1])){
-		//$form = interprete_argument_balise(1,$p);
+	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
+	$form = $p->nom_champ;
+	if (substr($form,0,11)=="FORMULAIRE_"
+	AND $form = strtolower(substr($form,11))
+	AND !find_in_path($form.'.html')) {
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
 	}
-	
-	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
+
+	// sinon renvoyer un code php dnamique
+	return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
 
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
