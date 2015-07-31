@@ -90,7 +90,7 @@ function gadget_rubriques() {
 	$nb_col = ceil($total_lignes / 30);
 	if ($nb_col <= 1) $nb_col = ceil($total_lignes / 10);
 	$max_lignes = ceil($total_lignes / $nb_col);
-	$largeur = ceil(700 / $nb_col); 
+	$largeur = max(200, ceil(700 / $nb_col)); 
 	$count_lignes = 0;
 	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
@@ -141,7 +141,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 	. $largeur
 	. "px;"
 	. $image
-	. "'>\n"
+	. "'>\n&nbsp;"
 	. supprimer_tags($titre_rubrique)
 	. "</a>\n";
 
