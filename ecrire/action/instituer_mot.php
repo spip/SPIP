@@ -44,7 +44,7 @@ function action_instituer_mot_post($r)
 
 	$c = array();
 	foreach (array(
-		'titre', 'descriptif', 'texte', 'id_groupe', 'type', 'id_groupe'
+		'titre', 'descriptif', 'texte', 'id_groupe'
 	) as $champ)
 		$c[$champ] = _request($champ);
 

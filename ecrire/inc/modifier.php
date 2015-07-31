@@ -251,7 +251,7 @@ function revision_mot($id_mot, $c=false) {
 
 	// regler le groupe
 	if (isset($c['id_groupe']) OR isset($c['type'])) {
-		$result = sql_select("titre", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
+		$result = sql_select("titre", "spip_groupes_mots", "id_groupe=".intval($c['id_groupe']));
 		if ($row = sql_fetch($result))
 			$c['type'] = $row['titre'];
 		else
