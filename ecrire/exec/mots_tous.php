@@ -86,9 +86,10 @@ function exec_mots_tous_dist()
 		$tables_liees = explode(',',$tables_liees);
 		
 		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
+		$libelles = pipeline('libelle_association_mots',$libelles);
 		foreach($tables_liees as $table)
 			if (strlen($table))
-				$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"info_$table") . " &nbsp;&nbsp;";
+				$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table") . " &nbsp;&nbsp;";
 
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
 		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
