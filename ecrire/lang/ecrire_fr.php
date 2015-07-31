@@ -497,7 +497,7 @@ exige d\'avoir un accès FTP au site Web.</p>',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes',
 'info_racine_site' => 'Racine du site',
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.',
 'info_recherche_auteur_a_affiner' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
