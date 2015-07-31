@@ -51,7 +51,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	if (!$cpt) {
 		if (!$flag) return;
 		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND tables_liees REGEXP '(^|,)$table($|,)");
+		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND tables_liees REGEXP '(^|,)$table($|,)'");
 
 		if (!$cpt) return;
 	}
