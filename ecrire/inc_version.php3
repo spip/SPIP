@@ -1037,31 +1037,56 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 
 
 //
-// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+// Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
+// $base/${subdir}_ sinon ; le flag $nobase signale qu'on ne veut pas de $base/
 //
+function sous_repertoire($base, $subdir, $nobase = false) {
+	if (!preg_match(',[/_]$,', $base)) $base .= '/';
+	$base = str_replace("//", "/", $base);
+	$baseaff = $nobase ? '' : $base;
+	# $base = 'IMG/distant/' ou 'IMG/distant_'
 
-function creer_repertoire($base, $subdir) {
-	if (@file_exists("$base/.plat")) return '';
-	$path = $base.'/'.$subdir;
-	if (@file_exists($path)) return "$subdir/";
+	if (!strlen($subdir)) return $baseaff;
+
+	$subdir = str_replace("/", "", "$subdir");
+
+	if (@file_exists("$base${subdir}.plat"))
+		return "$baseaff${subdir}_";; 
+
+	$path = $base.$subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
+
+	if (@file_exists("$path/.ok"))
+		return "$baseaff$subdir/";
 
 	@mkdir($path, 0777);
 	@chmod($path, 0777);
+
 	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
+	if ($f = @fopen("$path/dir_test.php", "w")) {
 		@fputs($f, '<'.'?php $ok = true; ?'.'>');
 		@fclose($f);
-		include("$path/.test");
+		@include("$path/dir_test.php");
+		@unlink("$path/dir_test.php");
 	}
-	if (!$ok) {
-		$f = @fopen("$base/.plat", "w");
-		if ($f)
-			fclose($f);
-		else {
-			redirige_par_entete("spip_test_dirs.php3");
-		}
+	if ($ok) {
+		@touch ("$path/.ok");
+		spip_log("creation $base$subdir/");
+		return "$baseaff$subdir/";
 	}
-	return ($ok? "$subdir/" : '');
+
+	$f = @fopen("$base${subdir}.plat", "w");
+	if ($f)
+		fclose($f);
+	else {
+		spip_log("echec creation $base${subdir}_");
+		redirige_par_entete("spip_test_dirs.php3?test_dir=$base${subdir}_");
+	}
+	spip_log("faux sous-repertoire $base${subdir}_");
+	return "$baseaff${subdir}_";
+}
+// compatibilite ascendante
+function creer_repertoire($base, $subdir) {
+	return sous_repertoire($base, $subdir, true);
 }
 
 
