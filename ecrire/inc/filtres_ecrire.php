@@ -457,16 +457,27 @@ function filtre_afficher_enfant_rub_dist($id_rubrique){
 /**
  * Afficher un petit "i" pour lien vers autre page
  *
- * http://doc.spip.org/@afficher_plus
- *
  * @param string $lien
+ * 		URL du lien desire
  * @param string $titre
+ * 		Titre au survol de l'icone pointant le lien
+ * @param string $titre_lien
+ * 		Si present, ajoutera en plus apres l'icone
+ * 		un lien simple, vers la meme URL,
+ * 		avec le titre indique
+ * 
  * @return string
  */
-function afficher_plus_info($lien, $titre="+") {
+function afficher_plus_info($lien, $titre="+", $titre_lien="") {
 	$titre = attribut_html($titre);
-	return "\n<a href='$lien' title='$titre' class='plus_info'>" .
+	$icone = "\n<a href='$lien' title='$titre' class='plus_info'>" .
 		http_img_pack("information-16.png", $titre) ."</a>";
+
+	if (!$titre_lien) {
+		return $icone;
+	} else {
+		return $icone .  "\n<a href='$lien'>$titre_lien</a>";
+	}
 }
 
 /**
