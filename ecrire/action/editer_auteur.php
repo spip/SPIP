@@ -63,6 +63,7 @@ function action_editer_auteur_dist() {
 	}
 }
 
+
 // http://doc.spip.org/@action_legender_auteur_post
 function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_auteur, $url_site, $new_login, $new_pass, $new_pass2, $perso_activer_imessage, $pgp, $lier_id_article=0, $id_parent=0, $restreintes= NULL, $id_auteur=0) {
 	global $visiteur_session;
@@ -237,12 +238,72 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 }
 
 
+// Appelle toutes les fonctions de modification d'un auteur
+function auteur_set($id_auteur) {
+	$err = '';
+
+	// unifier $texte en cas de texte trop long
+	trop_longs_articles();
+
+	$c = array();
+	foreach (array(
+		'nom','email','bio',
+		'nom_site_auteur','url_site',
+		'perso_activer_imessage','pgp',
+	) as $champ)
+		$c[$champ] = _request($champ);
+
+	include_spip('inc/modifier');
+	revision_auteur($id_auteur, $c);
+
+	// Modification de statut, changement de rubrique ?
+	$c = array();
+	foreach (array(
+		'statut', 'new_login','new_pass','new_pass2'
+	) as $champ)
+		$c[preg_replace(',^new_,','',$champ)] = _request($champ);
+	$err .= instituer_auteur($id_auteur, $c);
+
+	// Un lien auteur a prendre en compte ?
+	$err .= auteur_referent($id_auteur, array('article' => _request('lier_id_article')));
+
+	return $err;
+}
+
+function auteur_referent($id_auteur,$c){
+	foreach($c as $objet => $id_objet){
+		if ($id_objet=intval($id_objet)){
+			$table = table_objet($objet);
+			$primary = id_table_objet($objet);
+			// Lier a un article sur lequel on a une liaison possible
+			if (in_array($table, array('articles','rubriques','messages'))){
+				sql_insertq("spip_auteurs_$table", array($primary => $id_objet, 'id_auteur' =>$id_auteur));
+			}
+		}
+	}
+
+	return ''; // pas d'erreur
+}
+
 // http://doc.spip.org/@instituer_auteur
 function instituer_auteur($id_auteur, $c) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
-	$champs = array();
+	// commencer par traiter les cas particuliers des logins et pass
+	// avant le changement de statut eventuel
+	if (isset($c['login']) OR isset($c['pass'])){
+		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+		include_spip('inc/auth');
+		if (isset($c['login']))
+			auth_modifier_login($auth_methode, $c['login'], $id_auteur);
+		if (isset($c['pass'])){
+			$c['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
+			auth_modifier_pass($auth_methode, $c['login'], $c['pass'], $id_auteur);
+		}
+	}
+
 	
+	$champs = array();
 	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
 	if (isset($c['statut']))
@@ -256,8 +317,6 @@ function instituer_auteur($id_auteur, $c) {
 		else
 			$c['restreintes'] = array($c['id_parent']);
 	}
-
-
 
 	if (isset($c['webmestre']) AND autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?')))
 		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
@@ -312,5 +371,6 @@ function instituer_auteur($id_auteur, $c) {
 	return ''; // pas d'erreur
 
 }
+
 
 ?>
