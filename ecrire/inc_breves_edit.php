@@ -93,7 +93,7 @@ if ($new != "oui") {
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($id_breve) $lien = "?id_breve=$id_breve";
-	echo "<FORM ACTION='breves_voir.php3$lien' METHOD='post' name='formulaire'>";
+	echo "<FORM action=" . http_php_script("breves_voir","$lien") . " METHOD='post' name='formulaire'>";
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_breve' VALUE=\"oui\">";
 	echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">";

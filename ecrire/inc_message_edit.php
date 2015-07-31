@@ -109,7 +109,7 @@ if ($type == 'affich') {
   $logo = "annonce";
  }
 
-echo "<form action='message.php3?id_message=$id_message' method='post'>";
+echo "<form action=" . http_php_script("message","id_message=$id_message") . " method='post'>";
 
  debut_gauche();
 
