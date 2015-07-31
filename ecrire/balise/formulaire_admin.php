@@ -115,7 +115,8 @@ function admin_objet()
 				$env['voir_'.$obj] = 
 				  str_replace('&amp;', '&', $g($id, '','', 'prop'));
 				if ($desc = $trouver_table(table_objet_sql($type))
-					AND isset($desc['field']['id_rubrique'])) {
+					AND isset($desc['field']['id_rubrique'])
+					AND $type != 'rubrique') {
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
 					if (admin_preview($type, $id, $desc))
