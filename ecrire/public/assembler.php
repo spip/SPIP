@@ -168,8 +168,6 @@ function calculer_contexte() {
 			$contexte[$var] = $val;
 	}
 
-	$contexte['var_uri'] = nettoyer_uri();
-
 	return $contexte;
 }
 
