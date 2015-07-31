@@ -13,6 +13,7 @@
 # ou est l'espace prive ?
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
+spip_log(var_export($_POST, true));
 
 # rediriger les anciens URLs de la forme page.php3fond=xxx
 if (isset($_GET['fond'])) {
