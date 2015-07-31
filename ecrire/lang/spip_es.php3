@@ -285,7 +285,7 @@ Gracias por vuestra participaci&oacute;n
 'forum_attention_dix_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> vuestro mensaje tiene menos de diez caracteres.',
 'forum_attention_trois_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> vuestro t&iacute;tulo tiene menos de tres caracteres.',
 'forum_avez_selectionne' => 'Hab&eacute;is seleccionado:',
-'forum_cliquer_retour' => 'Pulsar <a href=\\\'@retour_forum@\\\'>aqu&iacute;</a> para continuar.',
+'forum_cliquer_retour' => 'Pulsar <a href=\'@retour_forum@\'>aqu&iacute;</a> para continuar.',
 'forum_creer_paragraphes' => '(Para crear p&aacute;rrafos, simplemente dejad l&iacute;neas vac&iacute;as.)',
 'forum_forum' => 'foro',
 'forum_info_modere' => 'Este foro est&aacute; moderado a priori: vuestra contribuci&oacute;n no aparecer&aacute; hasta haber sido validada por un administrador del sitio.',
