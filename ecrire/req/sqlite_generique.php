@@ -1684,7 +1684,7 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 
 	if ($autoinc OR is_string($query)){
 		$query = preg_replace(array_keys($remplace), $remplace, $query);
-		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query)){
+		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query))
 			$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
 	}
 	elseif(is_array($query))
