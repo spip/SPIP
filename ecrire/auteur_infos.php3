@@ -229,7 +229,7 @@ if ($echec){
 	debut_cadre_relief();
 	echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="left">';
 	echo "<font color='red'>$echec <p>Veuillez recommencer.</font>";
-	fin_cadre_relief();	
+	fin_cadre_relief();
 	echo "<p>";
 }
 
@@ -243,7 +243,7 @@ echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
 // Infos personnelles
 //
 
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE='3'>";
 
 debut_cadre_relief("fiche-perso-24.gif");
 
@@ -251,37 +251,43 @@ echo "<B>Signature</B> [Obligatoire]<BR>";
 echo "(Votre nom ou votre pseudo)<BR>";
 echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
 
+echo "<B>Votre adresse email</B> <BR>";
+if ($connect_statut == "0minirezo") {
+	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
+}
+else {
+	echo "<B>".$auteur['email']."</B><P>";
+}
+
 echo "<B>Qui &ecirc;tes-vous ?</B><BR>";
 echo "(Courte biographie en quelques mots.)<BR>";
 echo "<TEXTAREA NAME='bio' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 echo entites_html($auteur['bio']);
 echo "</TEXTAREA>\n";
 fin_cadre_relief();
+echo "<p>";
 
-debut_cadre_relief();
-
-echo "<B>Votre adresse email</B> <BR>";
-
-if ($connect_statut == "0minirezo") {
-	echo "<INPUT TYPE='text' NAME='email' CLASS='forml' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
-} else {
-	echo "<B>".$auteur['email']."</B><P>";
+if ($options == "avancees") {
+	debut_cadre_relief("cadenas-24.gif");
+	echo "<B>Votre cl&eacute; PGP</B><BR>";
+	echo "<TEXTAREA NAME='pgp' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+	echo entites_html($auteur['pgp']);
+	echo "</TEXTAREA>\n";
+	fin_cadre_relief();
+	echo "<p>";
+}
+else {
+	echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">";
 }
 
-echo "<B>Votre cl&eacute; PGP</B><BR>";
-echo "<TEXTAREA NAME='pgp' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
-echo entites_html($auteur['pgp']);
-echo "</TEXTAREA>\n";
-fin_cadre_relief();
-
 debut_cadre_relief("site-24.gif");
-
 echo "<B>Le nom de votre site</B><BR>";
 echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".entites_html($auteur['nom_site'])."\" SIZE='40'><P>\n";
 
 echo "<B>L'adresse (URL) de votre site</B><BR>";
 echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($auteur['url_site'])."\" SIZE='40'>\n";
 fin_cadre_relief();
+echo "<p>";
 
 
 //
@@ -310,11 +316,11 @@ debut_cadre_relief("base-24.gif");
 
 // Avertissement en cas de modifs de ses propres donnees
 if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
-	debut_cadre_enfonce();	
+	debut_cadre_enfonce();
 	echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
 	echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-	<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
-	fin_cadre_enfonce();	
+	Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</b>\n";
+	fin_cadre_enfonce();
 	echo "<p>";
 }
 
@@ -326,7 +332,7 @@ if ($edit_login) {
 }
 else {
 	echo "<fieldset style='padding:5'><legend><B>Login</B><BR></legend><br><b>".$auteur['login']."</b> ";
-	echo "<i> (ne peut pas &ecirc;tre modifi&eacute;)</i>";
+	echo "<i> (ne peut pas &ecirc;tre modifi&eacute;)</i><p>";
 }
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
@@ -338,6 +344,7 @@ if ($edit_pass) {
 	echo "<INPUT TYPE='password' NAME='new_pass2' CLASS='formo' VALUE=\"\" SIZE='40'><P>\n";
 }
 fin_cadre_relief();
+echo "<p>";
 
 
 //
@@ -348,8 +355,8 @@ fin_cadre_relief();
 $statut = $auteur['statut']; // pour aller plus vite
 
 if ($connect_statut == "0minirezo"
-AND ($connect_toutes_rubriques OR $statut != "0minirezo")
-AND $connect_id_auteur != $id_auteur) {
+	AND ($connect_toutes_rubriques OR $statut != "0minirezo")
+	AND $connect_id_auteur != $id_auteur) {
 	debut_cadre_relief();
 	echo "<center><B>Statut de cet auteur : </B> ";
 	echo " <SELECT NAME='statut' SIZE=1 CLASS='fondl'>";
@@ -358,7 +365,7 @@ AND $connect_id_auteur != $id_auteur) {
 		echo "<OPTION".mySel("0minirezo",$statut).">administrateur";
 
 	echo "<OPTION".mySel("1comite",$statut).">r&eacute;dacteur";
-	
+
 	if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
 		echo "<OPTION".mySel("6forum",$statut).">visiteur";
 	echo "<OPTION".mySel("5poubelle",$statut).">&gt; &agrave; la poubelle";
@@ -417,6 +424,9 @@ echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
 echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></DIV>";
+
+echo "</font>";
+
 echo "</form>";
 fin_cadre_formulaire();
 echo "&nbsp;<p>";
