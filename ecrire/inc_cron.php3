@@ -60,7 +60,6 @@ function spip_cron() {
 
 	include_ecrire("inc_meta.php3");
 	$t = time();
-
 	//
 	// Envoi du mail quoi de neuf
 	
@@ -168,17 +167,6 @@ function spip_cron() {
 	}
 
 	//
-	// Gerer l'indexation quand on appelle de l'espace public
-	//
-	if (_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
-		if (timeout('indexation')) {
-			include_ecrire("inc_index.php3");
-			effectuer_une_indexation();
-		}
-	}
-
-
-	//
 	// Toutes les heures, menage des vieux fichiers du cache
 	// marques par l'invalideur 't' = date de fin de fichier
 	//
@@ -200,6 +188,16 @@ function spip_cron() {
 				include_ecrire("inc_index.php3");
 				executer_une_indexation_syndic();
 			}
+		}
+	}
+
+	//
+	// Gerer l'indexation quand on appelle de l'espace prive
+	//
+	if (!_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
+		if (timeout('indexation')) {
+			include_ecrire("inc_index.php3");
+			effectuer_une_indexation();
 		}
 	}
 
