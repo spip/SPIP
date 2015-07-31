@@ -2779,7 +2779,7 @@ if (true /*$gadgets*/) {
 			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_parent&target=" . generer_url_ecrire("sites")), "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_parent"), "site-24.gif","creer.gif", false);
 					$gadget .= "</div>";
 				}
 			}

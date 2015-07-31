@@ -389,7 +389,7 @@ if ($relief) {
 	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
 	
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&target=" . generer_url_ecrire('sites') . '&redirect=' . urlencode($clean_link->getUrl())), "site-24.gif", "creer.gif");
+		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . urlencode($clean_link->getUrl())), "site-24.gif", "creer.gif");
 		echo "</div><p>";
 	  }
 	}

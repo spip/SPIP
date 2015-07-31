@@ -15,7 +15,7 @@ include_ecrire("inc_presentation");
 
 function sites_edit_dist()
 {
-  global $champs_extra, $clean_link, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $target, $url_site, $url_syndic;
+  global $champs_extra, $clean_link, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic;
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic);
 $result = spip_query($query);
@@ -88,22 +88,15 @@ if ($new == 'oui'){
 		echo "<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";
 		$cadre_ouvert = true;
 		debut_cadre_enfonce("site-24.gif");
-		
 	}
-
 }
-
-$link = new Link($target);
-$link->addVar('new');
-$link->addVar('modifier_site', 'oui');
-$link->addVar('syndication_old', $syndication);
-echo $link->getForm('POST');
 
 $nom_site = entites_html($nom_site);
 $url_site = entites_html($url_site);
 $url_syndic = entites_html($url_syndic);
 
-echo _T('info_nom_site_2')."<br>";
+ echo generer_url_post_ecrire('sites', ($id_syndic ? "id_syndic=$id_syndic" : "new=oui") . "&modifier_site=oui&syndication_old=$syndication");
+echo _T('info_nom_site_2')."<br />";
 echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'><p>";
 if (strlen($url_site)<8) $url_site="http://";
 echo _T('entree_adresse_site')."<br>";
