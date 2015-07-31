@@ -432,16 +432,16 @@ function import_all($f, $gz=false) {
 
 function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
-
+	include_ecrire('inc_charsets.php3');
 	flush();
 	echo " --><script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
 		if ($GLOBALS['erreur_restauration'])
-			echo "document.progression.recharge.value='"._T('avis_erreur')."';\n";
+			echo "document.progression.recharge.value='".unicode_to_javascript(_T('avis_erreur'))."';\n";
 		else
-			echo "document.progression.recharge.value='"._T('info_fini')."';\n";
+			echo "document.progression.recharge.value='".unicode_to_javascript(_T('info_fini'))."';\n";
 	}
 	else if (! $affiche_progression_pourcent)
 		$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));

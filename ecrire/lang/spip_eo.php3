@@ -557,7 +557,7 @@ Dankon pro via partopreno
 'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
 'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la &#265;efartikola funkciado de la TTT-ejo, SPIP povas transdoni per retmesa&#285;oj - ekzemple al dissendolisto de redaktantoj -  la anoncon de la petoj pri publikigo kaj validigoj de artikoloj.',
 'info_fichiers_authent' => 'Dosieroj de a&#365;tentokontrolo &laquo; .htpasswd &raquo;',
-'info_fini' => '\\u108io estas finita !',
+'info_fini' => '&#264;io estas finita !',
 'info_fonctionnement_forum' => 'Funkciado de la forumo:',
 'info_format_image' => 'Formatoj de bildoj uzebla por krei bildetojn: @gd_formats@.',
 'info_format_non_defini' => 'nedefinita formato',
