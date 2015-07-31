@@ -216,12 +216,12 @@ echo "</TD></TR>";
 // langue du site
 echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _L('Langue principale du site&nbsp;:');
-echo "\n<select name='langue_site' class='fondl'>\n";
-echo "<option value='$langue_site' style='background-image: url(lang/drap_$langue_site.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;' selected>".traduire_nom_langue($langue_site)."</option>\n";
+echo "\n<select name='changer_langue_site' class='fondl'>\n";
+echo "<option value='$langue_site' selected>".traduire_nom_langue($langue_site)."</option>\n";
 reset ($langues_prop);
 while (list(,$l) = each ($langues_prop)) {
 	if ($l <> $langue_site)
-		echo "<option value='$l' style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
+		echo "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 }
 echo "</select><br>\n";
 echo "</TD></TR>";

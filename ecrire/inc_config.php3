@@ -55,8 +55,7 @@ function init_config() {
 
 		'creer_htpasswd' => 'non',
 		
-		'langue_site' => 'fr',
-		'langues_proposees' => $GLOBALS['langues_ok']
+		'langue_site' => 'fr'
 		
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
@@ -65,6 +64,7 @@ function init_config() {
 			$modifs = true;
 		}
 	}
+
 	if ($modifs) ecrire_metas();
 }
 
@@ -212,27 +212,17 @@ function appliquer_modifs_config() {
 
 		'documents_article',
 		'documents_rubrique',
-		'charset',
 
-		'langue_site'
+		'charset'
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
+
+	// langue_site : la globale est mangee par inc_version
+	if ($l = $GLOBALS['changer_langue_site'] AND changer_langue($l))
+		ecrire_meta('langue_site', $l);
+
 	ecrire_metas();
-
-
-	// modifs tableau 'langues_proposees'
-	global $langues_prop;
-	if (is_array($langues_prop)) {
-		$langues_proposees = Array(lire_meta('langue_site'));
-		while (list(,$l) = each ($langues_prop)) {
-			if (ereg(",$l,", ",".$GLOBALS['all_langs'].",") AND $l <> lire_meta('langue_site'))
-				$langues_proposees[] = $l;
-		}
-		$langues_proposees = join(',', $langues_proposees);
-		ecrire_meta('langues_proposees', $langues_proposees);
-		ecrire_metas();
-	}
 
 	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
