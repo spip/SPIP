@@ -275,6 +275,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertissement',
 'info_barre_outils' => 'avec sa barre d\'outils ?',
 'info_base_installee' => 'La structure de votre base de données est installée.',
+'info_bio' => 'Biographie',
 'info_chapeau' => 'Chapeau',
 'info_chapeau_2' => 'Chapeau :',
 'info_chemin_acces_1' => 'Options : <b>Chemin d\'accès dans l\'annuaire</b>',
