@@ -2746,7 +2746,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 		include_spip('base/connect_sql');
 		$objets[$type_objet][$id_objet] = sql_fetsel(
 			'*'.$champ_titre,
-			table_objet_sql($type_objet),
+			$desc['table_sql'],
 			id_table_objet($type_objet).' = '.intval($id_objet)
 		);
 	}
