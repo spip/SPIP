@@ -210,6 +210,7 @@ while ($row = mysql_fetch_array($result)) {
 	$syndication = $row["syndication"];
 	$statut = $row["statut"];
 	$date_heure = $row["date"];
+	$mod = $row['moderation'];
 }
 
 
@@ -413,6 +414,28 @@ if ($syndication == "oui" OR $syndication == "off") {
 	}
 	afficher_syndic_articles("Articles syndiqu&eacute;s tir&eacute;s de ce site",
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
+
+	// modifier la moderation
+	if ($flag_administrable && $options=='avancees') {
+		if ($moderation == 'oui' OR $moderation == 'non')
+			spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
+		else
+			$moderation = $mod;
+
+		if ($moderation == 'non' || $moderation =='')
+			echo "<br><div align='right'><font size=2>Les prochains liens en
+				provenance de ce site ne seront a priori pas
+				bloqu&eacute;s.<br> <a
+				href='sites.php3?id_syndic=$id_syndic&moderation=oui'>Demander
+				un blocage a priori</a></font>" . aide('artsyn') .
+				"</div>\n";
+		else if ($moderation == 'oui')
+			echo "<br><div align='right'><font size=2>Les prochains liens en
+				provenance de ce site seront a priori bloqu&eacute;s. <a
+				href='sites.php3?id_syndic=$id_syndic&moderation=non'>Annuler
+				ce blocage a priori</a></font>" . aide('artsyn') .
+				"</div>\n";
+	}
 }
 
 fin_cadre_relief();
