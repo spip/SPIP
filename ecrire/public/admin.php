@@ -22,12 +22,20 @@ function affiche_boutons_admin($contenu) {
 	// Compatibilite : on utilise stripos/strripos() qui n'existent pas en php4
 	if (!function_exists('strripos')) {
 		function strripos($botte, $aiguille) {
-			return strrpos(strtolower($botte), $aiguille);
+			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@is',
+			$botte, $regs)) { 
+				return strlen($regs[1]);
+			}
+			return false;
 		}
 	}
 	if (!function_exists('stripos')) {
 		function stripos($botte, $aiguille) {
-			return strpos(strtolower($botte), $aiguille);
+			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU',
+			$botte, $regs)) { 
+				return strlen($regs[1]);
+			}
+			return false;
 		}
 	}
 
