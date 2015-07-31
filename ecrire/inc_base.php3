@@ -19,7 +19,6 @@ include_ecrire("inc_majbase.php3");
 
 function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 	$query = ''; $keys = ''; $s = '';
-	$nom = 'spip_' . $nom;
 
 	foreach($cles as $k => $v) {
 		$keys .= "$s\n\t\t$k ($v)";

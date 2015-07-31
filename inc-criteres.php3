@@ -245,7 +245,8 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 			$s = $boucles[$idb]->sql_serveur;
 			if (!$s) $s = 'localhost';
 			$t = $table_des_tables[$r];
-			if (!$t) $t = $r; // pour les tables non Spip
+			// pour les tables non Spip
+			if (!$t) $t = $r; else $t = "spip_$t";
 			$desc = $tables_des_serveurs_sql[$s][$t];
 			if ($desc['field'][$tri])
 				$order = "'".$boucle->id_table.".".$tri."'";
@@ -272,7 +273,8 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 
 
 function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
-  global $tables_relations, $table_des_tables, $table_date, $tables_des_serveurs_sql;
+  global $tables_relations, $table_date, $tables_des_serveurs_sql;
+
 	$boucle = &$boucles[$idb];
 	list(,$a1,$op,$a2) = $match;
 	list($a11,$a12) = calculer_critere_parties_aux($idb, $boucles, $a1);
@@ -331,7 +333,7 @@ function calculer_criteres ($idb, &$boucles) {
 # Criteres numeriques et de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
-	global $table_des_tables, $table_date, $tables_des_serveurs_sql;
+	global $table_date, $tables_des_serveurs_sql;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
@@ -404,8 +406,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 					$col_lien = "syndic";
 				else
 					$col_lien = $type;
-				$boucle->from[] = "mots_$col_lien AS lien_mot";
-				$boucle->from[] = 'mots AS mots';
+				$boucle->from[] = "spip_mots_$col_lien AS lien_mot";
+				$boucle->from[] = 'spip_mots AS mots';
 				$boucle->where[] = "$id_field=lien_mot." . $primary;
 				$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
 				$boucle->group = $id_field;
@@ -552,7 +554,7 @@ function calculer_critere_externe(&$boucle, $id_field, $col, $type)
 		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
 
 			$boucle->lien = true;
-			$boucle->from[] = "$col_table AS $col_table";
+			$boucle->from[] = "spip_$col_table AS $col_table";
 			$boucle->where[] = $externe;
 			$boucle->group = $id_field;
 		// postgres exige que le champ pour GROUP soit dans le SELECT

@@ -86,7 +86,7 @@ function spip_abstract_free($res, $serveur='')
 
 function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 {
-  $f = (!$serveur ? 'spip_insert' :
+  $f = (!$serveur ? 'spip_mysql_insert' :
 	spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur));
   return $f($table, $noms, $valeurs);
 }

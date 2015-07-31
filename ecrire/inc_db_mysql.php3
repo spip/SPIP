@@ -54,16 +54,15 @@ function spip_query_db($query) {
 // fonction appelant la precedente 
 // specifiquement pour les select des squelettes
 // c'est une instance de spip_abstract_select, voir ses specs dans inc_calcul
-// a noter qu'on pourrait y réaliser traite_query à moindre cout
 // les \n et \t sont utiles au debusqueur
+// traite_query pourrait y est fait d'avance, à moindre cout
 
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
 			   $sousrequete, $cpt,
 			   $table, $id, $serveur) {
 
-	$DB = 'spip_';
-	$q = "\nFROM $DB" . join(",\n\t$DB", $from)
+	$q = "\nFROM " . join(",\n\t", $from)
 	. ($where ? "\nWHERE " . join("\n\tAND ", $where) : '')
 	. ($groupby ? "\nGROUP BY $groupby" : '')
 	. ($orderby ? "\nORDER BY $orderby" : '')
@@ -80,7 +79,7 @@ function spip_mysql_select($select, $from, $where,
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
 	if ($GLOBALS['var_mode'] == 'debug') {
-	  boucle_debug_resultat($id, '', $q);
+		boucle_debug_resultat($id, '', $q);
 	}
 
 	if (!($res = @spip_query($q))) {
@@ -94,7 +93,8 @@ function spip_mysql_select($select, $from, $where,
 
 //
 // Passage d'une requete standardisee
-//
+// Quand tous les appels SQL seront abstraits on pourra l'ameliorer
+
 function traite_query($query) {
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "";
@@ -120,7 +120,6 @@ function traite_query($query) {
 
 	return $query;
 }
-
 
 //
 // Connexion a la base
@@ -175,8 +174,8 @@ function spip_free_result($r) {
 		return mysql_free_result($r);
 }
 
-function spip_insert($table, $champs, $valeurs) {
-	spip_query("INSERT INTO spip_$table $champs VALUES $valeurs");
+function spip_mysql_insert($table, $champs, $valeurs) {
+	spip_query("INSERT INTO $table $champs VALUES $valeurs");
 	return  mysql_insert_id();
 }
 

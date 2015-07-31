@@ -138,7 +138,7 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	}
 	if (!$id_document) {
 		$id_type = $row['id_type'];
-		$id_document = spip_abstract_insert("documents", "(id_type, titre, date)", "($id_type, '', NOW())");
+		$id_document = spip_abstract_insert("spip_documents", "(id_type, titre, date)", "($id_type, '', NOW())");
 		$nouveau = true;
 		if ($id_article && isset($type)) {
 			$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";

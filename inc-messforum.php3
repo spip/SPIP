@@ -125,7 +125,7 @@ OR ($afficher_texte=='non' AND $ajouter_mot)) {
 	unlink($f);
 
 	// Entrer le message dans la base
-	$id_message = spip_abstract_insert('forum', '(date_heure)', '(NOW())');
+	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
 
 	$statut =
 		($forums_publics == 'non') ? 'off' :
