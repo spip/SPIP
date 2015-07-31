@@ -303,5 +303,23 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	exit;
 }
 
+// Verifie si le visiteur est authentifie en http,
+// sinon lui renvoie une demande (status 401)
+// http://doc.spip.org/@auth_http
+function auth_http($url) {
+
+	if (verifier_php_auth())
+		redirige_par_entete($url);
+	else {
+		ask_php_auth(_T('login_connexion_refusee'),
+			     _T('login_login_pass_incorrect'),
+			     _T('login_retour_site'),
+			     "url=".rawurlencode($url),
+			     _T('login_nouvelle_tentative'),
+			     (strpos($url,_DIR_RESTREINT_ABS)!==false));
+		exit;
+	}
+}
+
 
 ?>
