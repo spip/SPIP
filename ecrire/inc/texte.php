@@ -383,11 +383,14 @@ function echappe_js($t,$class='') {
 }
 // http://doc.spip.org/@protege_js_modeles
 function protege_js_modeles($t) {
-	if (isset($GLOBALS['auteur_session']['alea_actuel'])){
-		$a = $GLOBALS['auteur_session']['alea_actuel'];
+	if (isset($GLOBALS['auteur_session'])){
+		if (!defined('_PROTEGE_JS_MODELES')){
+			include_spip('inc/acces');
+			define('_PROTEGE_JS_MODELES',creer_uniqid());
+		}
 		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 			foreach ($r as $regs)
-				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'.$a),$t);
+				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'._PROTEGE_JS_MODELES),$t);
 	}
 	return $t;
 }
@@ -1532,8 +1535,8 @@ function propre($letexte) {
 		$letexte = interdire_scripts($letexte);
 
 	// Reinserer le javascript de confiance (venant des modeles)
-	if (isset($GLOBALS['auteur_session']['alea_actuel']))
-		$letexte = echappe_retour($letexte,"javascript".$GLOBALS['auteur_session']['alea_actuel']);
+	if (defined('_PROTEGE_JS_MODELES'))
+		$letexte = echappe_retour($letexte,"javascript"._PROTEGE_JS_MODELES);
 
 	return $letexte;
 }
