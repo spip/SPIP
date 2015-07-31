@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 // http://doc.spip.org/@inc_install_1
-function inc_install_1()
+function install_etape_1_dist()
 {
 	global $spip_lang_right;
 

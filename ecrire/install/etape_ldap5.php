@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 // http://doc.spip.org/@inc_install_ldap5
-function inc_install_ldap5()
+function install_etape_ldap5_dist()
 {
 	global $spip_lang_right, $statut_ldap;
 

@@ -18,7 +18,7 @@ define('_FILE_TMP', '_install');
 // http://doc.spip.org/@exec_install_dist
 function exec_install_dist()
 {
-	global $etape;
+	$etape = _request('etape');
 	if (_FILE_CONNECT && $etape != 'unpack') 
 		minipres(_T('avis_espace_interdit'));
 	else {
@@ -34,7 +34,7 @@ function exec_install_dist()
 	include_spip('base/create');
 	include_spip('base/db_mysql');
 
-	$fonc = charger_fonction("install_$etape", 'inc');
+	$fonc = charger_fonction("etape_$etape", 'install');
 	$fonc();
 	}
 }

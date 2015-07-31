@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_install_unpack
-function inc_install_unpack()
+function install_etape_unpack_dist()
 {
   global  $connect_id_auteur;
 
