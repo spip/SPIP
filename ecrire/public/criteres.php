@@ -342,11 +342,11 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 // http://www.spip.net/@par
 // http://doc.spip.org/@critere_par_dist
 function critere_par_dist($idb, &$boucles, $crit) {
-	critere_parinverse($idb, $boucles, $crit, '') ;
+	critere_parinverse($idb, $boucles, $crit) ;
 }
 
 // http://doc.spip.org/@critere_parinverse
-function critere_parinverse($idb, &$boucles, $crit, $sens) {
+function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	global $table_des_tables, $tables_des_serveurs_sql,  $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
@@ -354,7 +354,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 	foreach ($crit->param as $tri) {
 
-	  $fct = ""; // en cas de fonction SQL
+	  $order = $fct = ""; // en cas de fonction SQL
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
 	    // on sait pas faire pour les serveurs externes. A revoir.
@@ -430,15 +430,13 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      }
 	  }
 
-	  if ($order) {
-	    if (preg_match("/^'(.*)'$/", $order, $m)) {
+	  if (preg_match("/^'(.*)'$/", $order, $m)) {
 	      $t = $m[1];
 	      if (strpos($t,'.') AND !in_array($t, $boucle->select)) {
 		$boucle->select[] = $t;
 	      }
-	    }
 	  } else $sens ='';
-	  
+
 	  $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order)
 	    . $collecte
 	    . $sens;
@@ -475,7 +473,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// Classement par ordre inverse
 	if ($crit->not)
-		critere_parinverse($idb, $boucles, $crit, " . ' DESC'");
+		critere_parinverse($idb, $boucles, $crit);
 	else
 	  {
 	  	$order = "' DESC'";
@@ -484,7 +482,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 			$critere = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 			$order = "(($critere)?' DESC':'')";
 		}
-	  	
+
 	    $n = count($boucle->order);
 	    if ($n)
 	      $boucle->order[$n-1] .= " . $order";
