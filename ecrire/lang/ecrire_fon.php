@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -457,7 +457,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_inscription_nouveaux_redacteurs' => 'Mi yí gbè nú nyɔwántɔ yɔyɔ lɛ à.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'mi jló ná zán mɔbìbàtɔ supipù tɔn à',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'gblogblojí ɔ sín dɔ',
 'info_recharger_page' => 'mi lɛ vɔ jlɔ wémà é lɔ ɖò cɛjú ywɛywɛmɛ.',
 'info_recherche_auteur_a_affiner' => 'xókwìn lɛ súkpɔ ɖí"@cherche_auteur@" ; mi lɛ vɔ bà',
@@ -537,7 +537,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_un_site' => 'Gblògblòjí ,',
 'info_une_rubrique' => 'àkpáxwé,',
 'info_une_rubrique_02' => 'àkpáxwé',
-'info_url' => 'URL :',
+'info_url' => 'URL :',
 'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL Gblògblòjí ɔ tɔn :',
 'info_url_test_proxy' => 'URL de test', # NEW

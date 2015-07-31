@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -464,7 +464,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_question_utilisation_moteur_recherche' => 'Wëllt dir de Sich-Motor vu SPIP benotzen?
 (ausschalten mëcht de System méi séier.)',
 'info_question_vignettes_referer_non' => 'D\'Preview vun den Ausgangs-Site nët weisen',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Wuerzel vum Site',
 'info_recharger_page' => 'Lued dës Säit an e puer Sekonnen nei.',
 'info_recherche_auteur_a_affiner' => 'Zevill Resultater fir "@cherche_auteur@"; verbessert är Sich.',

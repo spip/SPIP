@@ -169,6 +169,7 @@ ecrire/iterateur/enum.php -text
 ecrire/iterateur/php.php -text
 ecrire/iterateur/pour.php -text
 ecrire/iterateur/sql.php -text
+ecrire/lang/ecrire.xml -text
 ecrire/lang/ecrire_ast.php -text
 ecrire/lang/ecrire_ay.php -text
 ecrire/lang/ecrire_br.php -text

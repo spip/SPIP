@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -491,7 +491,7 @@ impossibile.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
 'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
@@ -745,7 +745,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @extensions@.',
-'plugin_info_extension_2' => 'Questo non pu&amp;ugrave; essere disinstallato.',
+'plugin_info_extension_2' => 'Questo non pu&ugrave; essere disinstallato.',
 'plugin_info_install_ok' => 'Installation réussie', # NEW
 'plugin_info_necessite' => 'Necessite :', # NEW
 'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW

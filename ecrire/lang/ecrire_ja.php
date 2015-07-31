@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -474,7 +474,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@"の検索結果が多すぎます; もうちょっとキーワードをひねって検索して下さい。',
@@ -523,7 +523,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_statut_utilisateurs_2' => '始めて接続したときにLDAPディレクトリに存在・属している人たちの状態を選択してください。後で、それぞれの著者ごとにケースバイケースで値を変更できます。',
 'info_suivi_activite' => '編集活動の手伝い',
 'info_surtitre' => 'トップタイトル:',
-'info_syndication_integrale_1' => 'Your site offers syndication files (see &#147;<a href="@url@">@titre@</a>”).', # NEW
+'info_syndication_integrale_1' => 'Your site offers syndication files (see <a href="@url@">@titre@</a>”).', # NEW
 'info_syndication_integrale_2' => 'Do you wish to send whole articles or only a summary of a few hundred characters?', # NEW
 'info_table_prefix' => 'Vous pouvez modifier le préfixe du nom des tables de données (ceci est indispensable lorsque l\'on souhaite installer plusieurs sites dans la même base de données). Ce préfixe s\'écrit en lettres minuscules, non accentuées, et sans espace.', # NEW
 'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas réduites.', # NEW

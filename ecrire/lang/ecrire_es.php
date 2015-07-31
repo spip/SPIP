@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_contenu_rubrique' => '(Contenido de la sección, en pocas palabras)',
 'entree_identifiants_connexion' => 'Tus identificadores de conexión...',
 'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
-'entree_informations_connexion_ldap' => 'Escriba en este formulario los datos de conexi&amp;oacute;n a tu directorio LDAP. Tales informaciones te serán transmitidas por el administrador del sistema o de la red.',
+'entree_informations_connexion_ldap' => 'Escriba en este formulario los datos de conexi&oacute;n a tu directorio LDAP. Tales informaciones te serán transmitidas por el administrador del sistema o de la red.',
 'entree_infos_perso' => '¿Quién eres?',
 'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'En el interior de la sección...',
@@ -496,7 +496,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_site_2' => 'sitio:',
 'info_site_min' => 'sitio',
 'info_site_reference_2' => 'Sitio referenciado',
-'info_site_web' => 'Sitio Web:', # MODIF
+'info_site_web' => 'Sitio Web:',
 'info_sites' => 'sitios',
 'info_sites_lies_mot' => 'Los sitios referenciados ligados a esta palabra clave',
 'info_sites_proxy' => 'Utilizar un proxy',

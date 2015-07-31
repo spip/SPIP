@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -499,7 +499,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiz del sitiu',
 'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
 'info_recherche_auteur_a_affiner' => 'Hai resultaos asgaya pa "@cherche_auteur@", apurre más criterios a la gueta.',
@@ -633,7 +633,7 @@ con una color que indica el estáu:',
 'item_creer_fichiers_authent' => 'Crear los archivos .htpasswd',
 'item_limiter_recherche' => 'Llendar la gueta a les informaciones conteníes nesti sitiu',
 'item_login' => 'Login',
-'item_messagerie_agenda' => 'Activar la mensaxer&iacute;a y l’axenda',
+'item_messagerie_agenda' => 'Activar la mensaxería y l’axenda',
 'item_mots_cles_association_articles' => 'a los artículos',
 'item_mots_cles_association_rubriques' => 'a les estayes',
 'item_mots_cles_association_sites' => 'a los sitios referenciaos o sindicaos.',

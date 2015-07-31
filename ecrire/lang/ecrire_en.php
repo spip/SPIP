@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     or serious site malfunctions. Do not
     submit this import request.<p>For more
     information, please see <a href="@spipnet@">
-                                the SPIP documentation</a>.</p>',
+    the SPIP documentation</a>.</p>',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of any databases already installed.',
 'avis_lecture_noms_bases_2' => 'Either no database is available, or the option for listing databases was disabled
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_version_mysql' => 'Your version of SQL (@version_mysql@) does not allow autorepair of the database tables.',
 
 // B
-'bouton_acces_ldap' => 'Add LDAP access >>',
+'bouton_acces_ldap' => 'Add LDAP access',
 'bouton_ajouter' => 'Add',
 'bouton_ajouter_participant' => 'ADD A PARTICIPANT:',
 'bouton_annonce' => 'ANNOUNCEMENT',
@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => ' out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_compatibilite_html' => 'HTML norm to apply',
-'info_compresseur_gzip' => 'It is advisable to check first whether your hosting provider already systematically compresses PHP scripts. To do this you can use a service such as @testgzip@', # MODIF
+'info_compresseur_gzip' => 'It is advisable to check first whether your hosting provider already systematically compresses PHP scripts. To do this you can use a service such as @testgzip@',
 'info_compresseur_texte' => 'If your server does not compress HTML pages before sending them, you can attempt to force compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
 'info_config_suivi' => 'If this address corresponds to a mailing list, you can indicate the subscription address for this list. This may be a URL (e.g. a webpage enabling subscription online), or an email address with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can subscribe to the mailing-list for this site. You will then receive email announcements concerning articles and news items submitted for publication.',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Before writing any articles, you must create at least one section.',
 'info_email_envoi' => 'Sender\'s email address (optional)',
 'info_email_envoi_txt' => 'Enter the sender\'s email address used for sending emails (by default, the recipient\'s address is used as the sender\'s address) :',
-'info_email_webmestre' => 'Webmaster\'s email address (optional)', # MODIF
+'info_email_webmestre' => 'Webmaster\'s email address',
 'info_entrer_code_alphabet' => 'Enter the code of the character set to be used:',
 'info_envoi_email_automatique' => 'Automated mailing',
 'info_envoyer_maintenant' => 'Send now',
@@ -375,7 +375,7 @@ via FTP.</p>',
 'info_historique_texte' => 'Revision tracking allows you to view changes  made to an article and displays the differences between successive versions.',
 'info_identification_publique' => 'Your public identity...',
 'info_image_process' => 'Select the best method to create thumbnails by clicking on the corresponding picture.',
-'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any images, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # MODIF
+'info_image_process2' => 'If you can\'t see any images, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.',
 'info_images_auto' => 'Images calculated automatically',
 'info_informations_personnelles' => 'Personal information',
 'info_inscription_automatique' => 'Automatic registration for new editors',
@@ -486,12 +486,11 @@ via FTP.</p>',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow new editors to register
  via the public site? If you agree to this, visitors will be able to  register
   using an automatic form, and then access the private area to
-  write their own articles. <blockquote><i>During the registration process,
-  users receive an automatic email
+  write their own articles. <div class="notice">During the registration process, users receive an automatic email
   giving them their access code for the private area. Some
   service providers disallow the sending of email from their
   servers: in that case, automated registration cannot be
-  implemented.</i></blockquote>', # MODIF
+  implemented.</div>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',

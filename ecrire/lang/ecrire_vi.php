@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -461,7 +461,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Bạn có muốn dùng cơ phận tìm kiếm có sẵn của SPIP? (<i>Nếu tắt nó đi sẽ làm hệ thống chạy lẹ hơn</i>) ',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Gốc của website',
 'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
 'info_recherche_auteur_a_affiner' => 'Quá nhiều kết quả cho "@cherche_auteur@"; Xin lọc lựa lại việc tìm kiếm.',
@@ -781,7 +781,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'text_article_propose_publication' => 'Bài nộp để chuẩn bị phát hành. Xin đừng ngần ngại cho ý kiến của bạn qua diễn đàn đính kèm theo bài này (ở cuối trang).', # MODIF
 'texte_acces_ldap_anonyme_1' => 'Một số server LDAP không cho phép vào ẩn danh. Trong trường hợp này bạn phải dùng một ký danh đầu tiên để có thể đi tìm tòi dữ kiện trong danh bạ sau đó. Tuy nhiên, trong hầu hết trường hợp, những khoảng sau đây có thể để trống.',
 'texte_admin_effacer_01' => 'Mệnh lệnh này xóa <i>tất cả</i> nội dung của database, luôn cả login/mật mã của các chủ bút và quản lý. Sau khi chạy mệnh lệnh này xong, bạn nên thiết trí lại SPIP để tái lập lại một database mới cùng với login/mật mã của quản trị viên đầu tiên.',
-'texte_adresse_annuaire_1' => '(Nếu ngăn của bạn được thiết trí trên cùng máy với website của bạn, tên nó thường là &laquo;localhost&raquo;.)',
+'texte_adresse_annuaire_1' => '(Nếu ngăn của bạn được thiết trí trên cùng máy với website của bạn, tên nó thường là «localhost».)',
 'texte_ajout_auteur' => 'Tác giả sau đây được thêm vào cho bài: ',
 'texte_annuaire_ldap_1' => 'Nếu bạn vào được một danh bạ (LDAP), bạn có thể dùng nó để nhập vào tự động những người sử dụng trong SPIP.',
 'texte_article_statut' => 'Tình trạng bài vở:',
@@ -829,7 +829,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_jeu_caractere_4' => 'If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:', # NEW
 'texte_jeu_caractere_conversion' => 'Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.', # NEW
 'texte_lien_hypertexte' => '(Nếu thư tín có đề cập đến bài đã đăng tải trên web, hay đề cập đến một trang web có thêm dữ kiện, xin điền vào đây tựa đề và địa chỉ.)',
-'texte_login_ldap_1' => '(Để trống nếu muốn ra/vào ẩn danh hoặc cho biết trọn vẹn lộ tuyến, lấy thí dụ &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
+'texte_login_ldap_1' => '(Để trống nếu muốn ra/vào ẩn danh hoặc cho biết trọn vẹn lộ tuyến, lấy thí dụ «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 'texte_login_precaution' => 'Cảnh báo! Đây là login bạn dùng để vào. Dùng mẫu này cẩn thận...',
 'texte_message_edit' => 'Cảnh báo: thư tín này có thể được sửa bởi bất cứ người quản lý nào, và mọi chủ bút đều xem được. Chỉ nên thông báo để nhấn mạnh những việc quan trọng đối với website.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW

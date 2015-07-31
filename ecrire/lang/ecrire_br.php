@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -480,7 +480,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant hoc\'h eus da ober gant lusker enklask diabarzh SPIP ?
  (diweredekaat anezhañ a laka ar reizhiad da vont buanoc\'h.)',
 'info_question_vignettes_referer_non' => 'Chom hep diskouez skeudennoùigoù lec\'hiennoù orin ar weladennerien',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Gwrizienn al lec\'hienn',
 'info_recharger_page' => 'Adkargit ar-bajenn-mañ a-raok pell, mar plij.',
 'info_recherche_auteur_a_affiner' => 'Re a zisoc\'hoù zo evit "@cherche_auteur@" ; resisait hoc\'h enklask mar plij.',
