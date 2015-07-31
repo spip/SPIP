@@ -21,7 +21,7 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-#bando_haut { font-size: 110%; position: relative; z-index: 99;}
+#bando_haut { font-size: 110%; position: relative; z-index: 9;}
 #bando_haut a { text-decoration: none; }
 
 
@@ -112,7 +112,7 @@
 #bando_navigation ul li ul {min-width: 85px; max-width:250px;z-index:1;}
 #bando_navigation ul li ul li {width: auto;float:none;text-align:#GET{left};position:static;}
 
-#bando_navigation { position: relative; }
+#bando_navigation { position: relative;z-index: 10; }
 #bando_navigation { clear:both; background: #fff; border-bottom: 1px solid #aaa; }
 #bando_navigation ul li a { display: block; padding: .8em 0.5em; font-weight: bold; }
 #bando_navigation ul li a:hover,
