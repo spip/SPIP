@@ -13,75 +13,73 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@exec_configuration_dist
-function exec_configuration_dist()
-{
-  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config, $spip_display;
+function exec_configuration_dist(){
+	global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config, $spip_display;
 
-include_spip('inc/presentation');
-include_spip('inc/config');
+	include_spip('inc/presentation');
+	include_spip('inc/config');
 
- if ($connect_statut != '0minirezo') {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
-
- if (!$connect_toutes_rubriques) {
-	include_spip('inc/headers');
-	redirige_par_entete(generer_url_ecrire('admin_tech','',true));
- }
-
-//
-// Modifications
-//
-
-
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-}
-else {
-	$forums_publics = $GLOBALS['meta']["forums_publics"];
-	if (!$forums_publics) {
-		ecrire_meta("forums_publics", "posteriori");
-		ecrire_metas();
+	if ($connect_statut != '0minirezo') {
+		echo _T('avis_non_acces_page');
+		echo fin_gauche(), fin_page();
+		exit;
 	}
- }
-lire_metas();
 
-pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
+	if (!$connect_toutes_rubriques) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('admin_tech','',true));
+	}
 
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
+	//
+	// Modifications
+	//
 
-echo "<br /><br /><br />\n";
-gros_titre(_T('titre_configuration'));
-echo barre_onglets("configuration", "contenu");
+	init_config();
+	if ($changer_config == 'oui') {
+		appliquer_modifs_config();
+	}
+	else {
+		$forums_publics = $GLOBALS['meta']["forums_publics"];
+		if (!$forums_publics) {
+			ecrire_meta("forums_publics", "posteriori");
+			ecrire_metas();
+		}
+	}
+	lire_metas();
 
+	pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
 
-debut_gauche();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
+	
+	echo "<br /><br /><br />\n";
+	gros_titre(_T('titre_configuration'));
+	echo barre_onglets("configuration", "contenu");
+	
+	
+	debut_gauche();
 
-//
-// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
-//
- if ($spip_display != 4) {
-	  $iconifier = charger_fonction('iconifier', 'inc');
-	  echo $iconifier('id_syndic', 0, 'configuration');
- }
+	//
+	// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
+	//
+	if ($spip_display != 4) {
+		$iconifier = charger_fonction('iconifier', 'inc');
+		echo $iconifier('id_syndic', 0, 'configuration');
+	}
 
-echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
-creer_colonne_droite();
-echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
-debut_droite();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
+	debut_droite();
 
-echo avertissement_config();
+	echo avertissement_config();
 
-//
-// Afficher les options de config
-//
+	//
+	// Afficher les options de config
+	//
 	$action = generer_url_ecrire('configuration');
 
-        echo "<form action='$action' method='post'><div>", form_hidden($action);
+	echo "<form action='$action' method='post'><div>", form_hidden($action);
 	echo "<input type='hidden' name='changer_config' value='oui' />";
 	debut_cadre_couleur("racine-site-24.gif");
 
@@ -119,19 +117,15 @@ echo avertissement_config();
 
 	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
-fin_cadre_couleur();
+	fin_cadre_couleur();
 
-echo "<p>&nbsp;</p>";
+	echo "<p>&nbsp;</p>";
 
+	//
+	// Options des articles
+	//
 
-//
-// Options des articles
-//
-
-if ($options == 'avancees') {
 	debut_cadre_trait_couleur("article-24.gif", false, "", _T('titre_les_articles'));
-
-
 	//
 	// Champs optionnels des articles
 	//
@@ -249,48 +243,41 @@ if ($options == 'avancees') {
 	fin_cadre_relief();
 
 	fin_cadre_trait_couleur();
-}
 
+	echo "<br />\n";
 
+	//
+	// Actives/desactiver les breves
+	//
 
-echo "<br />\n";
+	debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
+	$activer_breves = $GLOBALS['meta']["activer_breves"];
 
-//
-// Actives/desactiver les breves
-//
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	echo "<tr><td class='verdana2'>";
+	echo _T('texte_breves')."<br />\n";
+	echo _T('info_breves');
+	echo "</td></tr>";
+	
+	echo "<tr><td align='center' class='verdana2'>";
+	echo afficher_choix('activer_breves', $activer_breves,
+		array('oui' => _T('item_utiliser_breves'),
+			'non' => _T('item_non_utiliser_breves')), " &nbsp; ");
+	echo "</td></tr>\n";
+	
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
+	echo "</td></tr>";
+	echo "</table>\n";
+	
+	fin_cadre_trait_couleur();
+	
+	echo "<br />\n";
 
-debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
-
-$activer_breves = $GLOBALS['meta']["activer_breves"];
-
-echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-echo "<tr><td class='verdana2'>";
-echo _T('texte_breves')."<br />\n";
-echo _T('info_breves');
-echo "</td></tr>";
-
-echo "<tr><td align='center' class='verdana2'>";
-echo afficher_choix('activer_breves', $activer_breves,
-	array('oui' => _T('item_utiliser_breves'),
-		'non' => _T('item_non_utiliser_breves')), " &nbsp; ");
-echo "</td></tr>\n";
-
-echo "<tr><td style='text-align:$spip_lang_right;'>";
-echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-echo "</td></tr>";
-echo "</table>\n";
-
-fin_cadre_trait_couleur();
-
-echo "<br />\n";
-
-
-//
-// Gestion des mots-cles
-//
-
-if ($options == "avancees") {
+	//
+	// Gestion des mots-cles
+	//
 
 	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
@@ -309,56 +296,54 @@ if ($options == "avancees") {
 	echo "<td align='center' class='verdana2'>";
 
 
-		echo bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');");
-		echo " &nbsp;";
-		echo bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
+	echo bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');");
+	echo " &nbsp;";
+	echo bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
 
-
-//	echo afficher_choix('articles_mots', $articles_mots,
-//		array('oui' => _T('item_utiliser_mots_cles'),
-//			'non' => _T('item_non_utiliser_mots_cles')), "<br />");
+	//	echo afficher_choix('articles_mots', $articles_mots,
+	//		array('oui' => _T('item_utiliser_mots_cles'),
+	//			'non' => _T('item_non_utiliser_mots_cles')), "<br />");
 	echo "</td></tr></table>";
 
 	if ($articles_mots != "non") $style = "display: block;";
 	else $style = "display: none;";
 	
-		echo "<div id='mots-config' style='$style'>";
-		
-		echo "<br />\n";
-		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
+	echo "<div id='mots-config' style='$style'>";
+	
+	echo "<br />\n";
+	debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
 
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	echo "<tr><td class='verdana2'>";
+	echo _T('texte_config_groupe_mots_cles');
+	echo "</td></tr>";
+
+	echo "<tr>";
+	echo "<td align='$spip_lang_left' class='verdana2'>";
+	echo afficher_choix('config_precise_groupes', $config_precise_groupes,
+		array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
+			'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
+	echo "</td></tr></table>";
+	fin_cadre_relief();
+
+	if ($forums_publics != "non"){
+		echo "<br />\n";
+		debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
 		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "<tr><td class='verdana2'>";
-		echo _T('texte_config_groupe_mots_cles');
+		echo _T('texte_mots_cles_dans_forum');
 		echo "</td></tr>";
 
 		echo "<tr>";
 		echo "<td align='$spip_lang_left' class='verdana2'>";
-		echo afficher_choix('config_precise_groupes', $config_precise_groupes,
-			array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
-				'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
-		echo "</td></tr></table>";
+		echo afficher_choix('mots_cles_forums', $mots_cles_forums,
+			array('oui' => _T('item_ajout_mots_cles'),
+				'non' => _T('item_non_ajout_mots_cles')));
+		echo "</td></tr>";
+		echo "</table>";
 		fin_cadre_relief();
-
-		if ($forums_publics != "non"){
-			echo "<br />\n";
-			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
-			echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-			echo "<tr><td class='verdana2'>";
-			echo _T('texte_mots_cles_dans_forum');
-			echo "</td></tr>";
-
-			echo "<tr>";
-			echo "<td align='$spip_lang_left' class='verdana2'>";
-			echo afficher_choix('mots_cles_forums', $mots_cles_forums,
-				array('oui' => _T('item_ajout_mots_cles'),
-					'non' => _T('item_non_ajout_mots_cles')));
-			echo "</td></tr>";
-			echo "</table>";
-			fin_cadre_relief();
-		}
-		echo "</div>";
-	
+	}
+	echo "</div>";	
 
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
@@ -369,191 +354,177 @@ if ($options == "avancees") {
 	fin_cadre_trait_couleur();
 
 	echo "<br />\n";
-}
 
+	//
+	// Actives/desactiver systeme de syndication
+	//
 
-//
-// Actives/desactiver systeme de syndication
-//
-
-debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
-
-$activer_sites = $GLOBALS['meta']['activer_sites'];
-$activer_syndic = $GLOBALS['meta']["activer_syndic"];
-$proposer_sites = $GLOBALS['meta']["proposer_sites"];
-$visiter_sites = $GLOBALS['meta']["visiter_sites"];
-$moderation_sites = $GLOBALS['meta']["moderation_sites"];
-
-echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-
-echo "<tr><td align='$spip_lang_left' class='verdana2'>";
-
-		echo bouton_radio("activer_sites", "oui", _T('item_gerer_annuaire_site_web'), $activer_sites == "oui", "changeVisible(this.checked, 'config-site', 'block', 'none');");
-		echo " &nbsp;";
-		echo bouton_radio("activer_sites", "non", _T('item_non_gerer_annuaire_site_web'), $activer_sites == "non", "changeVisible(this.checked, 'config-site', 'none', 'block');");
-
-echo "</td></tr></table>\n";
+	debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
+	
+	$activer_sites = $GLOBALS['meta']['activer_sites'];
+	$activer_syndic = $GLOBALS['meta']["activer_syndic"];
+	$proposer_sites = $GLOBALS['meta']["proposer_sites"];
+	$visiter_sites = $GLOBALS['meta']["visiter_sites"];
+	$moderation_sites = $GLOBALS['meta']["moderation_sites"];
+	
+	echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	
+	echo "<tr><td align='$spip_lang_left' class='verdana2'>";
+	
+	echo bouton_radio("activer_sites", "oui", _T('item_gerer_annuaire_site_web'), $activer_sites == "oui", "changeVisible(this.checked, 'config-site', 'block', 'none');");
+	echo " &nbsp;";
+	echo bouton_radio("activer_sites", "non", _T('item_non_gerer_annuaire_site_web'), $activer_sites == "non", "changeVisible(this.checked, 'config-site', 'none', 'block');");
+	
+	echo "</td></tr></table>\n";
 
 
 
-if ($activer_sites != 'non') $style = "display: block;";
-else $style = "display: none;";
+	if ($activer_sites != 'non') $style = "display: block;";
+	else $style = "display: none;";
 
 	echo "<div id='config-site' style='$style'>";
 	
 	// Utilisateurs autorises a proposer des sites references
 	//
-		echo "<br />\n";
-		debut_cadre_relief();
-		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		echo "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
-		echo _T('info_question_proposer_site');
-		echo "\n<div style='text-align: center'><select name='proposer_sites' class='fondo' size='1'>\n";
-		echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
-		echo "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
-		echo "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
-		echo "</select></div>\n";
-		echo "</td></tr></table>\n";
-		fin_cadre_relief();
+	echo "<br />\n";
+	debut_cadre_relief();
+	echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	echo "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
+	echo _T('info_question_proposer_site');
+	echo "\n<div style='text-align: center'><select name='proposer_sites' class='fondo' size='1'>\n";
+	echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
+	echo "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
+	echo "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
+	echo "</select></div>\n";
+	echo "</td></tr></table>\n";
+	fin_cadre_relief();
 
-
-	if ($options == "avancees") {
-		debut_cadre_relief("", false, "", _T('titre_syndication').aide ("rubsyn"));
+	debut_cadre_relief("", false, "", _T('titre_syndication').aide ("rubsyn"));
 	
-		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		//
-		// Reglage de la syndication
-		//
-		echo "<tr><td class='verdana2'>";
-		echo _T('texte_syndication');
-		echo "</td></tr>";
-	
-		echo "<tr><td align='$spip_lang_left' class='verdana2'>";
+	echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	//
+	// Reglage de la syndication
+	//
+	echo "<tr><td class='verdana2'>";
+	echo _T('texte_syndication');
+	echo "</td></tr>";
 
-			echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
-			echo "<br />\n";
-			echo bouton_radio("activer_syndic", "non", _T('item_non_utiliser_syndication'), $activer_syndic == "non", "changeVisible(this.checked, 'config-syndic', 'none', 'block');");
+	echo "<tr><td align='$spip_lang_left' class='verdana2'>";
 
+	echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
+	echo "<br />\n";
+	echo bouton_radio("activer_syndic", "non", _T('item_non_utiliser_syndication'), $activer_syndic == "non", "changeVisible(this.checked, 'config-syndic', 'none', 'block');");
 
-
-	
-		if ($activer_syndic != "non") $style = "display: block;";
-		else $style = "display: none;";
+	if ($activer_syndic != "non") $style = "display: block;";
+	else $style = "display: none;";
 			
-			echo "<div id='config-syndic' style='$style'>";
+	echo "<div id='config-syndic' style='$style'>";
 		
-			// Moderation par defaut des sites syndiques
-			echo "<hr /><p align='$spip_lang_left'>";
-			echo _T('texte_liens_sites_syndiques')."</p>";
+	// Moderation par defaut des sites syndiques
+	echo "<hr /><p align='$spip_lang_left'>";
+	echo _T('texte_liens_sites_syndiques')."</p>";
+
+	echo afficher_choix('moderation_sites', $moderation_sites,
+		array('oui' => _T('item_bloquer_liens_syndiques'),
+		'non' => _T('item_non_bloquer_liens_syndiques')));
 	
-			echo afficher_choix('moderation_sites', $moderation_sites,
-				array('oui' => _T('item_bloquer_liens_syndiques'),
-				'non' => _T('item_non_bloquer_liens_syndiques')));
-	
-			// Si indexation, activer/desactiver pages recuperees
-	
-			$activer_moteur = $GLOBALS['meta']["activer_moteur"];
-			if ($activer_moteur == "oui") {
-				echo "<hr /><p align='$spip_lang_left'>";
-				echo _T('texte_utilisation_moteur_syndiques')." ";
-				echo "</p><blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote>";
-	
-				echo afficher_choix('visiter_sites', $visiter_sites,
-					array('non' => _T('item_limiter_recherche'),
-						'oui' => _T('item_non_limiter_recherche')));
-			}
-			echo "</div>";
-		
-		echo "</td></tr>\n";
-	
-		echo "</table>\n";
-	
-		fin_cadre_relief();
+	// Si indexation, activer/desactiver pages recuperees
+
+	$activer_moteur = $GLOBALS['meta']["activer_moteur"];
+	if ($activer_moteur == "oui") {
+		echo "<hr /><p align='$spip_lang_left'>";
+		echo _T('texte_utilisation_moteur_syndiques')." ";
+		echo "</p><blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote>";
+
+		echo afficher_choix('visiter_sites', $visiter_sites,
+			array('non' => _T('item_limiter_recherche'),
+				'oui' => _T('item_non_limiter_recherche')));
 	}
 	echo "</div>";
+		
+	echo "</td></tr>\n";
 
+	echo "</table>\n";
 
-//
-// Gestion des flux RSS
-//
+	fin_cadre_relief();
+	echo "</div>";
 
-debut_cadre_relief("feed.png", false, "", _T('ical_titre_rss'));
+	//
+	// Gestion des flux RSS
+	//
 
-echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	debut_cadre_relief("feed.png", false, "", _T('ical_titre_rss'));
+	
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	
+	echo "<tr><td class='verdana2'>";
+	echo _T('info_syndication_integrale_1',
+			array('url' => generer_url_ecrire('synchro'),
+			'titre' => _T("icone_suivi_activite"))
+		),
+		'<p>',
+	  _T('info_syndication_integrale_2'),
+	  '</p>';
+	echo "</td></tr>";
+	
+	echo "<tr>";
+	echo "<td align='$spip_lang_left' class='verdana2'>";
+	echo afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
+		array('oui' => _T('item_autoriser_syndication_integrale'),
+			'non' => _T('item_non_autoriser_syndication_integrale')), "<br />\n");
+	echo "</td></tr>";
+	echo "</table>\n";
+	
+	fin_cadre_relief();
 
-echo "<tr><td class='verdana2'>";
-echo _T('info_syndication_integrale_1',
-		array('url' => generer_url_ecrire('synchro'),
-		'titre' => _T("icone_suivi_activite"))
-	),
-	'<p>',
-  _T('info_syndication_integrale_2'),
-  '</p>';
-echo "</td></tr>";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
+	echo "</td></tr>";
+	echo "</table>\n";
+	
+	fin_cadre_trait_couleur();
+	
+	echo "<br />\n";
 
-echo "<tr>";
-echo "<td align='$spip_lang_left' class='verdana2'>";
-echo afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
-	array('oui' => _T('item_autoriser_syndication_integrale'),
-		'non' => _T('item_non_autoriser_syndication_integrale')), "<br />\n");
-echo "</td></tr>";
-echo "</table>\n";
+	//
+	// Gestion des documents joints
+	//
 
-fin_cadre_relief();
-
-
-echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-echo "<tr><td style='text-align:$spip_lang_right;'>";
-echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-echo "</td></tr>";
-echo "</table>\n";
-
-fin_cadre_trait_couleur();
-
-echo "<br />\n";
-
-
-//
-// Gestion des documents joints
-//
-
-debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
-
-$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
-$documents_article = $GLOBALS['meta']["documents_article"];
-
-echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-
-echo "<tr><td class='verdana2'>";
-echo _T('texte_documents_joints');
-echo _T('texte_documents_joints_2');
-echo "</td></tr>";
-
-echo "<tr>";
-echo "<td align='$spip_lang_left' class='verdana2'>";
-echo afficher_choix('documents_article', $documents_article,
-	array('oui' => _T('item_autoriser_documents_joints'),
-		'non' => _T('item_non_autoriser_documents_joints')), "<br />\n");
-echo "<br /><br />\n";
-echo afficher_choix('documents_rubrique', $documents_rubrique,
-	array('oui' => _T('item_autoriser_documents_joints_rubriques'),
-		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />\n");
-echo "</td></tr>";
-
-echo "<tr><td style='text-align:$spip_lang_right;'>";
-echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-echo "</td></tr>";
-echo "</table>\n";
-
-fin_cadre_trait_couleur();
-
-
-echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
-
-echo "</div></form>";
-
-
-echo fin_gauche(), fin_page();
-
+	debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
+	
+	$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
+	$documents_article = $GLOBALS['meta']["documents_article"];
+	
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	
+	echo "<tr><td class='verdana2'>";
+	echo _T('texte_documents_joints');
+	echo _T('texte_documents_joints_2');
+	echo "</td></tr>";
+	
+	echo "<tr>";
+	echo "<td align='$spip_lang_left' class='verdana2'>";
+	echo afficher_choix('documents_article', $documents_article,
+		array('oui' => _T('item_autoriser_documents_joints'),
+			'non' => _T('item_non_autoriser_documents_joints')), "<br />\n");
+	echo "<br /><br />\n";
+	echo afficher_choix('documents_rubrique', $documents_rubrique,
+		array('oui' => _T('item_autoriser_documents_joints_rubriques'),
+			'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />\n");
+	echo "</td></tr>";
+	
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
+	echo "</td></tr>";
+	echo "</table>\n";
+	
+	fin_cadre_trait_couleur();	
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
+	
+	echo "</div></form>";
+	
+	echo fin_gauche(), fin_page();
 }
 ?>
