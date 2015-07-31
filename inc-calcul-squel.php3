@@ -1444,7 +1444,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 				while (list(,$champ) = each ($liste_champs)) {
 					if ($contexte[$champ]) $element[] = "$champ=$contexte[$champ]";
 				}
-				$'.$nom_var.' = join("&",$element);
+				if ($element) $'.$nom_var.' = join("&",$element);
 				break;
 
 			}
