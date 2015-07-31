@@ -1475,7 +1475,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		include("lab_revisions.php");
+		include_ecrire("lab_revisions.php");
 		if  ($new != 'oui') {
 			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
 			if (!spip_num_rows(spip_query($query))) {

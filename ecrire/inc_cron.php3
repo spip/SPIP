@@ -87,7 +87,7 @@ function spip_cron($taches = array()) {
 	if (!$tache) return;
 
 	// Connexion DB
-	include(_FILE_CONNECT);
+	include_ecrire(_FILE_CONNECT);
 	if (!$GLOBALS['db_ok']) {
 		spip_log('pas de connexion DB pour taches de fond (cron)');
 		return;

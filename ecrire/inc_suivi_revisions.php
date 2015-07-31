@@ -14,9 +14,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_lab.php");
-include_spip("ecrire.php");
-
 function afficher_para_modifies ($texte, $court = false) {
 	// Limiter la taille de l'affichage
 	if ($court) $max = 200;

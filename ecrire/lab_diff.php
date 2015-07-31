@@ -11,10 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_DIFF")) return;
-define("_ECRIRE_INC_DIFF", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // LCS (Longest Common Subsequence) en deux versions
@@ -369,7 +366,7 @@ class DiffPhrase {
 
 
 function preparer_diff($texte) {
-	include_spip("charsets.php");
+	include_ecrire("inc_charsets.php");
 
 	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8')

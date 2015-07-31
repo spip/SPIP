@@ -10,13 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_ecrire("inc_presentation.php3");
-
-// faut-il vraiment tout ca ?
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_acces.php3");
-
 
 //
 // Lire les auteurs qui nous interessent

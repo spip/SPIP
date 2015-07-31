@@ -590,7 +590,7 @@ function spip_query($query) {
 	if (!$GLOBALS['db_ok']) {
 		// Essaie de se connecter
 		if (_FILE_CONNECT)
-			include_local(_FILE_CONNECT);
+			include_ecrire(_FILE_CONNECT);
 	}
 
 	// Erreur de connexion

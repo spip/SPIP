@@ -285,8 +285,7 @@ function install_4()
 
 	if ($result_ok && $maj_ok) {
 		$conn = "<"."?php\n";
-		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
-		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
+		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.2;\n";
 		$conn .= "include_ecrire('inc_db_mysql.php3');\n";
 		$conn .= $ligne_rappel;
