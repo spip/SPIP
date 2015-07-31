@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => '&ccedil;evirileri listele',
 'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> MySQL veri taban&#305;n&#305;n @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkans&#305;z. Sorun veritaban&#305; de&#287;i&#351;tirme haklar&#305;ndan kaynaklan&#305;yor olabilir, l&uuml;tfen sitenizi bar&#305;nd&#305;ran &#351;irkete ba&#351;vurunuz.',
 'analyse_xml' => 'XML analizi',
+'annuler' => '&#304;ptal et',
 'antispam_champ_vide' => 'L&uuml;tfen bu alan&#305; bo&#351; b&#305;rak&#305;n&#305;z&nbsp;:',
 'avis_archive_incorrect' => 'ar&#351;iv dosyas&#305; SPIP dosyas&#305; de&#287;il',
 'avis_archive_invalide' => 'bu ar&#351;iv dosyas&#305; ge&ccedil;erli de&#287;il',
@@ -701,6 +702,10 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'precedent' => '&ouml;nceki',
 'previsualisation' => '&Ouml;ng&ouml;r&uuml;nt&uuml;le',
 'previsualiser' => '&Ouml;ng&ouml;r&uuml;nt&uuml;le',
+
+
+// R
+'retour' => 'Geri d&ouml;n',
 
 
 // S
