@@ -81,10 +81,10 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 	$lastmodified = cv_du_cache($cle, $delais);
 	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
 
-	spip_log($HTTP_SERVER_VARS['REQUEST_METHOD'] . " $HTTP_IF_MODIFIED_SINCE $GLOBALS[PHP_SELF]");
+	spip_log($HTTP_SERVER_VARS['REQUEST_METHOD'] . " $HTTP_IF_MODIFIED_SINCE $GLOBALS[PHP_SELF]" .  $GLOBALS['recalcul']);
 
 	// Code inoperant si le serveur HTTP traite ce champ en amont.
-	if ($HTTP_IF_MODIFIED_SINCE && $GLOBALS['recalcul'])
+	if ($HTTP_IF_MODIFIED_SINCE && ($GLOBALS['recalcul'] != oui))
 	{
 		$headers_only = (trim(str_replace('GMT', '', ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE))) == $gmoddate);
 		if ($headers_only) http_status(304);
