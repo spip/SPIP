@@ -918,9 +918,11 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				AND is_array($x = $tables_jointures[$nom_table]))
 					$boucles[$id]->jointures = $x;
 			} else {
-				$boucles[$id]->type_requete = '';
 				// Pas une erreur si la table est optionnelle
-				if (!$boucles[$id]->table_optionnelle) {
+				if ($boucles[$id]->table_optionnelle)
+					$boucles[$id]->type_requete = '';
+				else  {
+					$boucles[$id]->type_requete = false;
 					$boucle = $boucles[$id];
 					$x = (!$boucle->sql_serveur ? '' :
 					      ($boucle->sql_serveur . ":")) .
@@ -943,6 +945,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				$msg = array('zbug_boucle_recursive_undef',
 					array('nom' => $boucle->param[0]));
 				erreur_squelette($msg, $boucle);
+				$boucles[$id]->type_requete = false;
 			} else {
 				$rec->externe = $id;
 				$descr['id_mere'] = $id;
@@ -960,7 +963,6 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		if ($type AND $type != 'boucle') {
 			if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
-				if (is_array($res)) return false; # erreur
 			}
 			$descr['id_mere'] = $id;
 			$boucles[$id]->return =
@@ -968,6 +970,10 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 					 $descr,
 					 $boucles,
 					 $id);
+			// Si les criteres se sont mal compiles
+			// laisser tomber la suite
+			if (is_array($res))
+				$boucles[$id]->type_requete = false;
 		}
 	}
 
@@ -1011,7 +1017,11 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
 	}
 
+	// Au final, si un critere au moins s'est mal compile
+	// retourner False, sinon inserer leur decompilation
+	
 	foreach($boucles as $id => $boucle) {
+		if ($boucle->type_requete === false) return false;
 		$boucle->return = "\n\n/* BOUCLE " .
 			$boucle->type_requete .
 			" " .
