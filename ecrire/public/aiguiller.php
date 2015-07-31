@@ -14,13 +14,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function securiser_redirect_action($redirect){
 	if (tester_url_absolue($redirect) AND !defined('_AUTORISER_ACTION_ABS_REDIRECT')){
-		$base = $GLOBALS['meta']['adresse_site']."/";
 		// si l'url est une url du site, on la laisse passer sans rien faire
 		// c'est encore le plus simple
+		$base = $GLOBALS['meta']['adresse_site']."/";
 		if (strlen($base) AND strncmp($redirect,$base,strlen($base))==0)
 			return $redirect;
-		else
-			return "";
+		$base = url_de_base();
+		if (strlen($base) AND strncmp($redirect,$base,strlen($base))==0)
+			return $redirect;
+		return "";
 	}
 	return $redirect;
 }
