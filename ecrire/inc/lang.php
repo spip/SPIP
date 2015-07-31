@@ -217,7 +217,7 @@ function lang_typo($lang) {
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
 // http://doc.spip.org/@changer_typo
 function changer_typo($lang = '', $source = '') {
-	global $lang_typo, $lang_dir, $dir_lang;
+	global $lang_objet, $lang_dir, $dir_lang;
 
 	if (ereg("^(article|rubrique|breve|auteur)([0-9]+)", $source, $regs)) {
 		$r = spip_fetch_array(spip_query("SELECT lang FROM spip_".$regs[1]."s WHERE id_".$regs[1]."=".$regs[2]));
@@ -227,26 +227,10 @@ function changer_typo($lang = '', $source = '') {
 	if (!$lang)
 		$lang = $GLOBALS['meta']['langue_site'];
 
-	$lang_typo = lang_typo($lang);
+	$lang_objet = $lang;
 	$lang_dir = lang_dir($lang);
 	$dir_lang = " dir='$lang_dir'";
 }
-
-// selectionner une langue
-// http://doc.spip.org/@lang_select
-function lang_select ($lang='') {
-	global $pile_langues, $spip_lang;
-	array_push($pile_langues, $spip_lang);
-	changer_langue($lang);
-}
-
-// revenir a la langue precedente
-// http://doc.spip.org/@lang_dselect
-function lang_dselect ($rien='') {
-	global $pile_langues;
-	changer_langue(array_pop($pile_langues));
-}
-
 
 //
 // Afficher un menu de selection de langue
@@ -459,11 +443,11 @@ function repertoire_lang($module='spip', $lang='fr') {
 // http://doc.spip.org/@init_langues
 function init_langues() {
 	global $all_langs, $langue_site;
-	global $pile_langues, $lang_typo, $lang_dir;
+	global $pile_langues, $lang_objet, $lang_dir;
 
 	$all_langs = $GLOBALS['meta']['langues_proposees'];
 	$pile_langues = array();
-	$lang_typo = '';
+	$lang_objet = '';
 	$lang_dir = '';
 
 	$toutes_langs = Array();

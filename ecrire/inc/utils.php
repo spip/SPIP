@@ -1121,4 +1121,24 @@ function verifier_visiteur() {
 	return false;
 }
 
+// selectionner une langue
+// http://doc.spip.org/@lang_select
+function lang_select ($lang='') {
+	array_push($GLOBALS['pile_langues'], $GLOBALS['spip_lang']);
+	if ($lang != $GLOBALS['spip_lang']) {
+		include_spip('inc/lang');
+		changer_langue($lang);
+	}
+}
+
+// revenir a la langue precedente
+// http://doc.spip.org/@lang_dselect
+function lang_dselect ($rien='') {
+	$lang = array_pop($GLOBALS['pile_langues']);
+	if ($lang != $GLOBALS['spip_lang']) {
+		include_spip('inc/lang');
+		changer_langue($lang);
+	}
+}
+
 ?>

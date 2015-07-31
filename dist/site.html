@@ -6,7 +6,7 @@
 <head>
 	<title>[(#NOM_SITE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
-	<INCLURE{fond=inc-head}{lang}>
+	<INCLURE{fond=inc-head}>
 	<meta name="robots" content="none" />
 </head>
 
@@ -14,7 +14,7 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
+	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
@@ -62,7 +62,7 @@
 			<h1 class="invisible"><:navigation:></h1>
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 
 			[(#REM) Autres sites web ]
 			<B_sites>
@@ -95,7 +95,7 @@
 	</div><!-- fin conteneur -->
 
 	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{lang}>
+	<INCLURE{fond=inc-pied}>
 
 </div><!-- fin page -->
 </body>

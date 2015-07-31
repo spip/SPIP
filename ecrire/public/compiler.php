@@ -68,12 +68,25 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	}
 
 	$l = array();
+	$lang = '';
 	foreach($struct->param as $val) {
 		$var = array_shift($val);
-		$l[] = "\'$var\' => ' .  argumenter_squelette(" . 
-		  ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($id_boucle, $var, $boucles)))
-		  . ") . '";
+		if ($var == 'lang')
+			$lang = $val;
+		else
+			$l[$var] = "\'$var\' => ' .  argumenter_squelette(" .
+			($val
+				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
+				: index_pile($id_boucle, $var, $boucles)
+			) . ") . '";
 	}
+	// Cas particulier de la langue : si {lang=xx} est definie, on
+	// la passe, sinon on passe la langue courante au moment du calcul
+	$l['lang'] = "\'lang\' => ' . argumenter_squelette(" .
+		($lang
+			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
+			: '$GLOBALS["spip_lang"]'
+		) . ") . '";
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
