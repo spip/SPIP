@@ -123,7 +123,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	include_spip('inc/rubriques');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_syndic.x)
-	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication');
+	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication', 'url_propre');
 
 	// ne pas accepter de titre vide
 	if (_request('nom_site', $c) === '')
