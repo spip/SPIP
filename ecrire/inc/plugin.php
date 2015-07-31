@@ -43,6 +43,7 @@ function liste_plugin_actifs(){
 
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 	static $liste_pipe_manquants=array();
+	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
 	
@@ -77,8 +78,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 				if ($charge=='options')
 					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';'."\n";
 				if (isset($info[$charge])){
-					foreach($info[$charge] as $file)
-						$s .= "include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
+					foreach($info[$charge] as $file){
+						$s .= "@include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
+						$liste_fichier_verif[] = "_DIR_PLUGINS.'$plug/".trim($file)."'";
+					}
 				}
 			}
 		}
@@ -115,12 +118,15 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
 			$GLOBALS['spip_pipeline'][$add_pipe]= '';
 
-	pipeline_precompile();
+	$liste_fichier_verif2 = pipeline_precompile();
+	$liste_fichier_verif = array_merge($liste_fichier_verif,$liste_fichier_verif2);
+	verification_precompile($liste_fichier_verif);
 }
 
-// precompilsation des pipelines
+// precompilation des pipelines
 function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
+	$liste_fichier_verif = array();
 	
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
@@ -134,16 +140,21 @@ function pipeline_precompile(){
 			$s_call .= '$val = minipipe(\''.$fonc.'\', $val);'."\n";
 			if (isset($spip_matrice[$fonc])){
 				$file = $spip_matrice[$fonc];
-				$s_inc .= 'include_once(';
+				$s_inc .= '@include_once(';
 				// si _DIR_PLUGINS est dans la chaine, on extrait la constante
 				if (($p = strpos($file,'_DIR_PLUGINS'))!==FALSE){
+					$f = "";
 					if ($p)
-						$s_inc .= "'".substr($file,0,$p)."'.";
-					$s_inc .= "_DIR_PLUGINS.";
-					$s_inc .= "'".substr($file,$p+12)."'";
+						$f .= "'".substr($file,0,$p)."'.";
+					$f .= "_DIR_PLUGINS.";
+					$f .= "'".substr($file,$p+12)."'";
+					$s_inc .= $f;
+					$liste_fichier_verif[] = $f;
 				}
-				else
+				else{
 					$s_inc .= "'$file'";
+					$liste_fichier_verif[] = "'$file'";
+				}
 				$s_inc .= ');'."\n";
 			}
 		}
@@ -154,6 +165,23 @@ function pipeline_precompile(){
 		$content .= "return \$val;\n}\n\n";
 	}
 	ecrire_fichier(_DIR_SESSIONS."charger_pipelines.php",
+		$start_file . $content . $end_file);
+	return $liste_fichier_verif;
+}
+
+function verification_precompile($liste_fichier_verif){
+	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;
+	function verifier_presence_plugins(){
+		\$ok = true;";
+	$end_file = "
+		return \$ok;
+	}\n?".">";
+	$content = "";
+	foreach($liste_fichier_verif as $fichier){
+		$content .= "
+		\$ok = \$ok & @is_readable($fichier);";
+	}
+	ecrire_fichier(_DIR_SESSIONS."verifier_presence_plugins.php",
 		$start_file . $content . $end_file);
 }
 
@@ -391,4 +419,28 @@ function plugin_verifie_conformite($plug,&$arbre){
 	}
 }
 
+function verifie_include_plugins(){
+	global $auteur_session;
+	if ($auteur_session['statut']!='0minirezo') return;
+	// verifier la presence des plugins (on a pu en deplacer un)
+	if (@is_readable(_DIR_SESSIONS."verifier_presence_plugins.php")){
+		// verification precompile
+		include_once(_DIR_SESSIONS."verifier_presence_plugins.php");
+		$ok = verifier_presence_plugins();
+		if ($ok) return;
+	}
+	if (_request('exec')!="admin_plugin"){
+		if (@is_readable(_DIR_PLUGINS)){
+			redirige_par_entete(generer_url_ecrire("admin_plugin"));
+			exit;
+		}
+		// plus de repertoire plugin existant, le menu n'existe plus
+		// on fait une mise a jour silencieuse
+		include_spip('inc/plugin');
+		// generer les fichiers php precompiles
+		// de chargement des plugins et des pipelines
+		verif_plugin();
+		spip_log("desactivation des plugins suite a suppression du repertoire");
+	}
+}
 ?>

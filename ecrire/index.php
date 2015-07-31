@@ -170,6 +170,12 @@ if ($GLOBALS['_COOKIE']['spip_admin']
 AND $GLOBALS['meta']["debut_restauration"]
 AND !($exec=='js_menu_rubriques'))
 	$exec = 'import_all';
+else // ne pas interrompre une restauration par un redirect inoportun
+	if ($auteur_session['statut']=='0minirezo') {
+		// on verifie la configuration des plugins
+		include_spip('inc/plugin');
+		verifie_include_plugins();
+	}
 
 $var_f = charger_fonction($exec);
 $var_f();
