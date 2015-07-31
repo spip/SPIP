@@ -16,7 +16,7 @@ include_spip('inc/texte');
 include_spip('plugins/afficher_plugin');
 
 // http://doc.spip.org/@ligne_plug
-function plugins_afficher_nom_plugin_dist($url_page, $plug_file, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS){
+function plugins_afficher_nom_plugin_dist($url_page, $plug_file, $checked, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS){
 	static $id_input=0;
 	static $versions = array();
 
@@ -35,7 +35,7 @@ function plugins_afficher_nom_plugin_dist($url_page, $plug_file, $actif, $expose
 	$class .= $expose?" on":"";
 	$erreur = isset($info['erreur']);
 	if ($erreur)
-		$class .= " erreur";
+		$class .= " error";
 	$s .= "<li id='$id' class='$class'>";
 
 	// Cartouche Resume
@@ -52,10 +52,7 @@ function plugins_afficher_nom_plugin_dist($url_page, $plug_file, $actif, $expose
 	$s .= "</div>";
 
 	if ($erreur){
-		$s .=  "<div class='erreur'>";
-		foreach($info['erreur'] as $err)
-			$s .= "$err <br/>";
-		$s .=  "</div>";
+		$s .= "<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>";
 	}
 
 	$s .= "</li>";
