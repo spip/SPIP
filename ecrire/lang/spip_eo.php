@@ -183,12 +183,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' por vere komenci la instalprocezon',
 'dirs_preliminaire' => 'Anta&#365;faro: <b>Difinu la alir-rajtojn</b>',
 'dirs_probleme_droits' => 'Alir-rajta problemo',
-'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<MODIF><b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />La problemo ver&#349;ajne rilatas al majuskligo de literoj.
   Kontrolu ke la majuskloj ja kongruas kun tio kio estas afi&#349;ita &#265;i-supre;
   se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
   <p />Post tio, vi povos',
-'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
+'dirs_repertoires_suivants' => '<MODIF><b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
 <ul>@bad_dirs@.</ul></b>
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigis en la instalgvidlibro.
@@ -272,7 +272,7 @@ Dankon pro via partopreno
 'forum_acces_refuse' => 'Vi ne plu havas alir-rajton al tiuj &#265;i forumoj.',
 'forum_attention_dix_caracteres' => '<b>Atentu&nbsp;!</b> via mesa&#285;o devas enhavi almena&#365; dek signojn.',
 'forum_attention_trois_caracteres' => '<b>Atentu&nbsp;!</b> via titolo devas enhavi almena&#365; tri signojn.',
-'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
+'forum_attention_trop_caracteres' => '<b>Atentu&nbsp;!</b> via mesa&#285;o estas tro longa (@compte@ signoj)&nbsp;: por esti registrita, &#285;i ne preteratingu @max@ signojn.',
 'forum_avez_selectionne' => 'Vi selektis&nbsp;:',
 'forum_cliquer_retour' => 'Musklaku <a href=\'@retour_forum@\'>&#265;i tie</a> por da&#365;rigi.',
 'forum_forum' => 'forumo',

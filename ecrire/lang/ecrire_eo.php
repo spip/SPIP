@@ -679,6 +679,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 
 // L
+'les_deux' => 'amba&#365;',
 'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 'lien_ajouter_auteur' => 'Aldoni tiun a&#365;toron',
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
