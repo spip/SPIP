@@ -393,12 +393,12 @@ $spip_lang = $langue_site;
 // Installer Spip si pas installe... sauf si justement on est en train
 //
 if (!(_FILE_CONNECT
-OR defined('_TEST_DIRS')
-OR autoriser_sans_cookie($SCRIPT_NAME))) {
+OR autoriser_sans_cookie($SCRIPT_NAME)
+OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
 
 	// Si on peut installer, on lance illico
-	if (@file_exists($f = generer_url_ecrire("install")))
-		header("Location: $f" , "?reinstall=non");
+	if (@file_exists('inc_version.php3'))
+		 header("Location: " . generer_url_ecrire("install") . "?reinstall=non");
 	else if (defined("_INC_PUBLIC")) {
 	// Si on est dans le site public, dire que qq s'en occupe
 		include_ecrire('inc_upgrade');

@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_minipres");
-include_ecrire ("inc_base");
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
+include_ecrire ("inc_minipres");
+include_ecrire ("inc_base");
 
 function install()
 {

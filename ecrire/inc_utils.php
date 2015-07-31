@@ -615,7 +615,10 @@ function charger_generer_url() {
 
 function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 	$site = $GLOBALS['meta']["adresse_site"];
-	$site .= ((substr($site, -1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
+	if ($site)
+	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
+	else $site =  _DIR_RESTREINT;
+
 	$args = str_replace('&', '&amp;', $args);
 	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
 
@@ -626,14 +629,13 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 }
 
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
-// il faudra substituer a l'appel ci-dessous la definition ci-dessus
-// lorsque celle-ci deviendra generique
 
 function generer_url_public($script, $args="") {
-	if (!($site = $GLOBALS['meta']["adresse_site"]))
-		$site = _DIR_RACINE;
-	$site .= (($site[strlen($site)-1] <> '/') ?'/':'') . $script;
-	return $site . 
+	$site = $GLOBALS['meta']["adresse_site"];
+	if ($site && (substr($site,-1) <> '/')) $site .= '/';
+	$site = _DIR_RACINE;
+
+	return $site . $script .
 	  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP) .
 	  (!$args ? "" : ('?'  .str_replace('&', '&amp;', $args)));
 }
