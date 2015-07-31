@@ -36,7 +36,7 @@ $auto_compress = true;
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.472;
+$spip_version = 1.473;
 
 // version de spip
 $spip_version_affichee = "1.5b3 CVS";

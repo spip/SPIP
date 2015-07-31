@@ -1202,6 +1202,11 @@ function maj_base() {
 		maj_version (1.472);
 	}
 
+	if ($version_installee < 1.473) {
+		spip_query("UPDATE spip_syndic_articles SET url = REPLACE(url, '&amp;', '&')");
+		spip_query("UPDATE spip_syndic SET url_site = REPLACE(url_site, '&amp;', '&')");
+		maj_version (1.473);
+	}
 }
 
 ?>
