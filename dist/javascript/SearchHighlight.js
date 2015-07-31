@@ -40,7 +40,7 @@
  *  - keys (string, default:null)
  *    Disable the analisys of the referrer and search for the words given as argument    
  *    
- *  - min_length (number, defalt:null)
+ *  - min_length (number, default:null)
  *    Set the minimun length of a key  
  *   
  */
