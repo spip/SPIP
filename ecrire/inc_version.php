@@ -359,6 +359,9 @@ define('SPIP_ERREUR_REPORT',E_ALL ^ E_NOTICE);
 define('SPIP_ERREUR_REPORT_INCLUDE_PLUGINS',0);
 error_reporting(SPIP_ERREUR_REPORT);
 
+// Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
+if (addslashes("'") !== "\\'") die('SPIP incompatible magic_quotes_sybase');
+
 //
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 //
