@@ -14,6 +14,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_objets(DATA){source sql,#GET{req}}{pagination #ENV{nb,10}}>
+		[(#INFO_LANG{#ENV{objet},#VALEUR{id}}|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>#GET{picto}</td>
 			<td class='titre principale'><a
@@ -26,6 +27,7 @@
 			})]</td>
 		</tr>
 	</BOUCLE_objets>
+	[(#REM|changer_typo)]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
