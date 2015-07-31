@@ -40,10 +40,6 @@ function definir_barre_boutons() {
 	$boutons_admin['naviguer'] = new Bouton(
 		"documents-48$spip_lang_rtl.png", 'icone_edition_site');
 
-	if ($GLOBALS['meta']['forum_prive'] != 'non' OR sql_countsel('spip_forum'))
-		$boutons_admin['forum'] = new Bouton(
-			'messagerie-48.png', 'titre_forum');
-
 	$boutons_admin['auteurs'] = new Bouton(
 		'redacteurs-48.png', 'icone_auteurs');
 
@@ -109,16 +105,8 @@ function definir_barre_boutons() {
 	$boutons_admin['naviguer']->sousmenu= $sousmenu;
 
 	// sous menu forum
-
 	$sousmenu=array();
 
-	if ($GLOBALS['meta']['forum_prive_admin'] == 'oui')
-		$sousmenu['forum_admin']=
-		  new Bouton('forum-admin-24.gif', 'icone_forum_administrateur');
-
-	if (sql_countsel('spip_forum'))
-		$sousmenu['controle_forum']=
-			new Bouton("suivi-forum-24.gif", "icone_suivi_forums");
 	if (sql_countsel('spip_signatures'))
 		$sousmenu['controle_petition']=
 			new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
@@ -191,13 +179,14 @@ function definir_barre_boutons() {
 					  $infos['args']?$infos['args']:null
 					  );
 				if (!$parent) {
-					$boutons_admin = array_slice($boutons_admin,0,-4,true)
+					$position = $infos['position']?$infos['position']:-4;
+					$boutons_admin = array_slice($boutons_admin,0,$position,true)
 					+array($id=> new Bouton(
 					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  ))
-					+ array_slice($boutons_admin,-4,4,true);
+					+ array_slice($boutons_admin,$position,100,true);
 				}
 			}
 		}

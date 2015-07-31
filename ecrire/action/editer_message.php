@@ -47,7 +47,9 @@ function action_editer_message_dist() {
 function action_editer_message_post_supprimer($id_message) {
 	sql_delete("spip_messages", "id_message=".sql_quote($id_message));
 	sql_delete("spip_auteurs_messages", "id_message=".sql_quote($id_message));
-	sql_delete("spip_forum", "id_message=".sql_quote($id_message));
+	pipeline('supprimer_objets_lies',array(
+		array('type'=>'message','id'=>$id_message)
+	));
 }
 
 // http://doc.spip.org/@action_editer_message_post_vu

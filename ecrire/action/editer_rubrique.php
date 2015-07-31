@@ -45,10 +45,22 @@ function action_editer_rubrique_dist() {
 
 // http://doc.spip.org/@insert_rubrique
 function insert_rubrique($id_parent) {
-	$id_rubrique = sql_insertq("spip_rubriques", array(
+	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
-		id_parent => intval($id_parent),
-		'statut' => 'new'));
+		'id_parent' => intval($id_parent),
+		'statut' => 'new');
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_rubriques',
+			),
+			'data' => $champs
+		)
+	);
+	
+	$id_rubrique = sql_insertq("spip_rubriques", $champs);
 	propager_les_secteurs();
 	calculer_langues_rubriques();
 	return $id_rubrique;

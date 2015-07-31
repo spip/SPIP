@@ -68,7 +68,6 @@ function exec_config_fonctions_dist()
 	$res = pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	if ($res)
 		echo $res;
-		#echo ajax_action_post('config_fonctions', '', 'config_fonctions', '', $res);
 
 	echo fin_gauche(), fin_page();
 	}

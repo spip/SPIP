@@ -68,7 +68,7 @@ function barre_onglets_configuration() {
 		  new Bouton('racine-site-24.gif', 'onglet_contenu_site',
 			generer_url_ecrire("configuration"));
 	$onglets['interactivite']=
-		  new Bouton('forum-interne-24.gif', 'onglet_interactivite',
+		  new Bouton('interactivite-24.gif', 'onglet_interactivite',
 			generer_url_ecrire("config_contenu"));
 	$onglets['fonctions']=
 		  new Bouton('image-24.gif', 'onglet_fonctions_avances',

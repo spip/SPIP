@@ -317,7 +317,12 @@ function champs_traitements ($p) {
 			$type = $p->boucles[$p->nom_boucle]->type_requete;
 		else
 			$type = $p->type_requete;
-		$ps = $ps[isset($ps[$type]) ? $type : 0];
+		// le traitement peut n'etre defini que pour une table en particulier
+		if (isset($ps[$type]))
+			$ps = $ps[$type];
+		elseif(isset($ps[0]))
+			$ps = $ps[0];
+		else $ps=false;
 	}
 
 	if (!$ps) return $p->code;
@@ -338,13 +343,14 @@ function champs_traitements ($p) {
 
 	// Passer |safehtml sur les boucles "sensibles"
 	// sauf sur les champs dont on est surs
+	// ces exceptions doivent etre ventilees dans les plugins fonctionnels concernes
+	// dans la globale table_des_traitements
 	switch ($p->type_requete) {
-		case 'forums':
 		case 'signatures':
 		case 'syndic_articles':
 			$champs_surs = array(
-			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx',
-			'parametres_forum');
+			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx'
+			);
 			if (!in_array(strtolower($p->nom_champ), $champs_surs)
 			AND !preg_match(',^ID_,', $p->nom_champ))
 				$ps = 'safehtml('.$ps.')';

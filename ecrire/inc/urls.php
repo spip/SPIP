@@ -84,19 +84,6 @@ function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connec
 	return $h;
 }
 
-// http://doc.spip.org/@generer_url_ecrire_forum
-function generer_url_ecrire_forum($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_forum=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_forum', $a,'','','','',$connect);
-	}
-	$h = ($statut == 'publie' OR $connect)
-	?  generer_url_entite_absolue($id, 'forum', $args, $ancre, $connect)
-	: (generer_url_ecrire('controle_forum', "debut_id_forum=$id" . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
-
 // http://doc.spip.org/@generer_url_ecrire_document
 function generer_url_ecrire_document($id, $args='', $ancre='', $statut='', $connect='') {
 	include_spip('inc/documents');

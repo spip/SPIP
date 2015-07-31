@@ -41,9 +41,6 @@ function liste_des_champs() {
 			'auteur' => array(
 				'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
 			),
-			'forum' => array(
-				'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
-			),
 			'document' => array(
 				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
 			),

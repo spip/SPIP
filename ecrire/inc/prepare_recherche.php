@@ -59,15 +59,11 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 					    $serveur);
 		$points = $points[$x];
 
-		# Pour les forums, unifier par id_thread et forcer statut='publie'
-		if ($x == 'forum' AND $points) {
-			$p2 = array();
-			$s = sql_select("id_thread, id_forum", "spip_forum", "statut='publie' AND ".sql_in('id_forum', array_keys($points)), '','','','', $serveur);
-			while ($t = sql_fetch($s, $serveur))
-				$p2[intval($t['id_thread'])]['score']
-					+= $points[intval($t['id_forum'])]['score'];
-			$points = $p2;
-		}
+		// permettre aux plugins de modifier le resultat
+		$points = pipeline('prepare_recherche',array(
+			'args'=>array('type'=>$x,'recherche'=>$recherche,'serveur'=>$serveur),
+			'data'=>$points
+		));
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge

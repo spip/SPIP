@@ -28,6 +28,8 @@ function exec_recherche_dist() {
 
 		$tables = liste_des_champs();
 		//unset($tables['document']);
+		// on ne veut chercher ni fans les forums ni dans les sites syndiques si ils sont present
+		// on unset a tout hasard
 		unset($tables['forum']);
 		unset($tables['syndic_article']);
 

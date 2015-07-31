@@ -119,16 +119,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_breves', 'id_breve', $res);
 
-	# les forums lies a une id_rubrique inexistante
-	$res = sql_select("forum.id_forum AS id",
-			"spip_forum AS forum
-		        LEFT JOIN spip_rubriques AS rubriques
-		          ON forum.id_rubrique=rubriques.id_rubrique",
-			"rubriques.id_rubrique IS NULL
-		         AND forum.id_rubrique>0");
-
-	$n+= optimiser_sansref('spip_forum', 'id_forum', $res);
-
 	# les droits d'auteurs sur une id_rubrique inexistante
 	# (plusieurs entrees seront eventuellement detruites pour chaque rub)
 	$res = sql_select("auteurs_rubriques.id_rubrique AS id",
@@ -172,16 +162,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_mots_articles', 'id_article', $res);
 
-	# les forums lies a des articles effaces
-	$res = sql_select("forum.id_forum AS id",
-		        "spip_forum AS forum
-		        LEFT JOIN spip_articles AS articles
-		          ON forum.id_article=articles.id_article",
-			"articles.id_article IS NULL
-		         AND forum.id_article>0");
-
-	$n+= optimiser_sansref('spip_forum', 'id_forum', $res);
-
 	//
 	// Breves
 	//
@@ -197,17 +177,6 @@ function optimiser_base_disparus($attente = 86400) {
 			"breves.id_breve IS NULL");
 
 	$n+= optimiser_sansref('spip_mots_breves', 'id_breve', $res);
-
-	# les forums lies a des breves effacees
-	$res = sql_select("forum.id_forum AS id",
-		        "spip_forum AS forum
-		        LEFT JOIN spip_breves AS breves
-		          ON forum.id_breve=breves.id_breve",
-			"breves.id_breve IS NULL
-		         AND forum.id_breve>0");
-
-	$n+= optimiser_sansref('spip_forum', 'id_forum', $res);
-
 
 	//
 	// Sites
@@ -233,16 +202,6 @@ function optimiser_base_disparus($attente = 86400) {
 			"syndic.id_syndic IS NULL");
 
 	$n+= optimiser_sansref('spip_mots_syndic', 'id_syndic', $res);
-
-	# les forums lies a des sites effaces
-	$res = sql_select("forum.id_forum AS id",
-		        "spip_forum AS forum
-		        LEFT JOIN spip_syndic AS syndic
-		          ON forum.id_syndic=syndic.id_syndic",
-			"syndic.id_syndic IS NULL
-		         AND forum.id_syndic>0");
-
-	$n+= optimiser_sansref('spip_forum', 'id_forum', $res);
 
 	//
 	// Auteurs
@@ -352,15 +311,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_mots_breves', 'id_mot', $res);
 
-	# les liens mots-forum sur des mots effaces
-	$res = sql_select("mots_forum.id_mot AS id",
-		        "spip_mots_forum AS mots_forum
-		        LEFT JOIN spip_mots AS mots
-		          ON mots_forum.id_mot=mots.id_mot",
-			"mots.id_mot IS NULL");
-
-	$n+= optimiser_sansref('spip_mots_forum', 'id_mot', $res);
-
 	# les liens mots-rubriques sur des mots effaces
 	$res = sql_select("mots_rubriques.id_mot AS id",
 		      "spip_mots_rubriques AS mots_rubriques
@@ -380,21 +330,7 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_mots_syndic', 'id_mot', $res);
 
 
-	//
-	// Forums
-	//
-
-	sql_delete("spip_forum", "statut='redac' AND maj < $mydate");
-
-
-	# les liens mots-forum sur des forums effaces
-	$res = sql_select("mots_forum.id_forum AS id",
-		        "spip_mots_forum AS mots_forum
-		        LEFT JOIN spip_forum AS forum
-		          ON mots_forum.id_forum=forum.id_forum",
-			"forum.id_forum IS NULL");
-
-	$n+= optimiser_sansref('spip_mots_forum', 'id_forum', $res);
+	$n = pipeline('optimiser_base_disparus',$n);
 
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }

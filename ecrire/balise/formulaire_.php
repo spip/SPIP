@@ -92,7 +92,7 @@ function balise_FORMULAIRE__dyn($form)
 	
 	// si $valeurs===false, alors le formulaire n'est pas applicable
 	// on n'affiche rien. C'est plus fort qu'editable qui est geree
-	// par le squelette du forumaire lui meme
+	// par le squelette du formulaire lui meme
 	if ($valeurs===false) return '';
 	
 	

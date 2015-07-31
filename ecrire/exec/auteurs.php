@@ -316,12 +316,14 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// tri
 	switch ($tri) {
 	case 'nombre':
-		$sql_sel = "COUNT(lien.id_article) AS compteur";
-		$sql_order = 'compteur DESC, unom';
-		$join = $visit ?
-		 "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur"
-		 : ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" 
-		. (strpos($sql_visible,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
+		if (!$visit OR defined('_DIR_PLUGIN_FORUM')){
+			$sql_sel = "COUNT(lien.id_article) AS compteur";
+			$sql_order = 'compteur DESC, unom';
+			$join = $visit ?
+			 "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur"
+			 : ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" 
+			. (strpos($sql_visible,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
+		}
 		break;
 	
 	case 'site':

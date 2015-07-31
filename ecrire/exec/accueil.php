@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-	global $connect_statut, $connect_toutes_rubriques;
+	global $connect_statut;
 
 
 	$res = '';
@@ -60,19 +60,6 @@ function encours_accueil()
 			. _T('info_liens_syndiques_2')
 			. "</a></small>";
 
-	// Les forums en attente de moderation
-
-		$cpt = sql_countsel("spip_forum", "statut='prop'");
-		if ($cpt) {
-		if ($cpt>1)
-			$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
-		else
-			$lien = _T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
-		$lien = "<small>$cpt $lien " ._T('info_liens_syndiques_7'). "</small>";
-		if ($connect_toutes_rubriques)
-			$lien = "<a href='" . generer_url_ecrire("controle_forum","type=prop") . "' style='color: black;'>". $lien . ".</a>";
-		$res .= "\n<br />" . $lien;
-		}
 	}
 	
 	$res = pipeline('accueil_encours',$res);
@@ -81,11 +68,7 @@ function encours_accueil()
 
 	return 
 	"<div style='position:relative;display:inline;'>" 
-	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation')
-		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? ' '._T('texte_en_cours_validation_forum')
-			: '' )
-		)
+	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
 	. $res
 	. bouton_spip_rss('a_suivre')
 	. fin_cadre_couleur_foncee(true)
@@ -265,7 +248,7 @@ function personnel_accueil($coockcookie)
 	. fin_cadre_relief(true);
 }
 
-// Cartouche du site, avec le nombre d'articles, breves et messages de forums
+// Cartouche du site, avec le nombre d'articles, breves et autres objets ajoutes par les plugins
 
 // http://doc.spip.org/@etat_base_accueil
 function etat_base_accueil()
@@ -287,8 +270,6 @@ function etat_base_accueil()
 				$res ="<div style='text-align:center; margin-bottom: 5px;'>$r</div>";
 		}
 	}
-	$res .= "<div class='verdana1'>";
-
 	$res .= propre($GLOBALS['meta']["descriptif_site"]);
 
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_articles', '', 'statut', '','', "COUNT(*)<>0");
@@ -308,12 +289,14 @@ function etat_base_accueil()
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
 		}
+		$res .= "<div class='accueil_informations articles verdana1'>";
 		$res .= afficher_plus(generer_url_ecrire("articles_page",""))."<b>"._T('info_articles')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prepa'])) $res .= "<li>"._T("texte_statut_en_cours_redaction").": ".$cpt2['prepa'] . $cpt['prepa'] .'</li>';
 		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] . $cpt['prop'] . '</li>';
 		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'].$cpt['publie'] ."</b>" . '</li>';
 		$res .= "</ul>";
+		$res .= "</div>";
 	}
 
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', '', 'statut', '','', "COUNT(*)<>0");
@@ -334,45 +317,18 @@ function etat_base_accueil()
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
 		}
+		$res .= "<div class='accueil_informations breves verdana1'>";
 		$res .= afficher_plus(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'].$cpt['prop'] . '</li>';
 		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
 		$res .= "</ul>";
+		$res .= "</div>";
 	}
 
-	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', sql_in('statut', array('publie', 'prop')), 'statut', '','', "COUNT(*)<>0");
-
-	$cpt = array();
-	$cpt2 = array();
-	$defaut = $where ? '0/' : '';
-	while($row = sql_fetch($q)) {
-	  $cpt[$row['statut']] = $row['cnt'];
-	  $cpt2[$row['statut']] = $defaut;
-	}
-
-	if ($cpt) {
-		if ($where) {
-		  include_spip('inc/forum');
-		  list($f, $w) = critere_statut_controle_forum('public');
-		  $q = sql_select("COUNT(*) AS cnt, F.statut", "$f", "$w ", "F.statut");
-		  while($row = sql_fetch($q)) {
-				$r = $row['statut'];
-				$cpt2[$r] = intval($row['cnt']) . '/';
-			}
-		}
-
-		if (autoriser('modererforum'))
-			$res .= afficher_plus(generer_url_ecrire("controle_forum",""));
-		$res .= "<b>" ._T('onglet_messages_publics') ."</b>";
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] .$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
-		$res .= "</ul>";
-	}
-	
-	$res .= accueil_liste_participants()
-	. "</div>";
+	$res .= "<div class='accueil_informations auteurs verdana1'>";
+	$res .= accueil_liste_participants();
+	$res .= "</div>";
 
 	return pipeline('accueil_informations',$res) ;
 }

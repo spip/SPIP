@@ -75,7 +75,7 @@ function exec_mots_tous_dist()
 		$tables_liees = $row_groupes['tables_liees'];
 		$acces_minirezo = $row_groupes['minirezo'];
 		$acces_comite = $row_groupes['comite'];
-		$acces_forum = $row_groupes['forum'];
+		$acces_visiteur = $row_groupes['forum'];
 
 		// Afficher le titre du groupe
 		echo "<div id='mots_tous-$id_groupe' class='mots_tous'>";
@@ -98,7 +98,7 @@ function exec_mots_tous_dist()
 		$res .= "<br />";
 		if ($acces_minirezo == "oui") $res .= "> "._T('info_administrateurs')." &nbsp;&nbsp;";
 		if ($acces_comite == "oui") $res .= "> "._T('info_redacteurs')." &nbsp;&nbsp;";
-		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
+		if ($acces_visiteur == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
 		if (strlen($descriptif)) {

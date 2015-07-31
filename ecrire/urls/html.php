@@ -38,10 +38,8 @@ define('URLS_HTML_EXEMPLE', 'article12.html');
 // http://doc.spip.org/@_generer_url_html
 function _generer_url_html($type, $id, $args='', $ancre='') {
 
-	if ($type == 'forum') {
-		include_spip('inc/forum');
-		return generer_url_forum_dist($id, $args, $ancre);
-	}
+	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true))
+		return $generer_url_externe($id, $args, $ancre);
 
 	if ($type == 'document') {
 		include_spip('inc/documents');

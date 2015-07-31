@@ -228,7 +228,6 @@ function table_objet($type) {
 				'doc' => 'documents', # pour les modeles
 				'img' => 'documents',
 				'emb' => 'documents',
-				'forum' => 'forums', # hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
 				'groupe_mots' => 'groupes_mots', # hum
 				'groupe_mot' => 'groupes_mots', # hum
 				'groupe' => 'groupes_mots', # hum (EXPOSE)
@@ -264,9 +263,7 @@ function table_objet_sql($type) {
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type) {
 	$type = preg_replace(',^spip_|s$,', '', $type);
-	if ($type == 'forum')
-		return 'id_forum';
-	else if ($type == 'type')
+	if ($type == 'type')
 		return 'extension';
 	else {
 		if (!$type) return;

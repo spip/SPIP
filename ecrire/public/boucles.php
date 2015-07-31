@@ -110,31 +110,6 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 
 
 //
-// <BOUCLE(FORUMS)>
-//
-// http://doc.spip.org/@boucle_FORUMS_dist
-function boucle_FORUMS_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
-	// Par defaut, selectionner uniquement les forums sans mere
-	// Les criteres {tout} et {plat} inversent ce choix
-	if (!isset($boucle->modificateur['tout']) AND !isset($boucle->modificateur['plat'])) {
-		array_unshift($boucle->where,array("'='", "'$id_table." ."id_parent'", 0));
-	}
-	// Restreindre aux elements publies
-	if (!$boucle->modificateur['criteres']['statut']) {
-		if ($GLOBALS['var_preview'])
-			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prive\\')'"));		
-		else
-			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
-	}
-
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
-
-//
 // <BOUCLE(SIGNATURES)>
 //
 // http://doc.spip.org/@boucle_SIGNATURES_dist
@@ -191,12 +166,12 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 			LEFT JOIN spip_breves AS bb
 				ON (l.id_objet=bb.id_breve AND l.objet=\"breve\")
 			LEFT JOIN spip_rubriques AS rr
-				ON (l.id_objet=rr.id_rubrique AND l.objet=\"rubrique\")
-			LEFT JOIN spip_forum AS ff
-				ON (l.id_objet=ff.id_forum AND l.objet=\"forum\")
-		";
+				ON (l.id_objet=rr.id_rubrique AND l.objet=\"rubrique\")"
+			// test conditionne par la presence du plugin forum, en attendant le champ statut sur la table documents
+			. (_DIR_PLUGIN_FORUM?" LEFT JOIN spip_forum AS ff	ON (l.id_objet=ff.id_forum AND l.objet=\"forum\")":"");
+
 		$boucle->group[] = "$id_table.id_document";
-		
+
 		if ($GLOBALS['var_preview']) {
 			array_unshift($boucle->where,"'(aa.statut IN (\"publie\",\"prop\") OR bb.statut  IN (\"publie\",\"prop\") OR rr.statut IN (\"publie\",\"prive\") OR ff.statut IN (\"publie\",\"prop\"))'");
 		} else {

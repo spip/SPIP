@@ -178,15 +178,6 @@ function retire_caches($chemin = '') {
 }
 
 
-// Pour que le compilo ajoute un invalideur a la balise #PARAMETRES_FORUM
-// Noter l'invalideur de la page contenant ces parametres,
-// en cas de premier post sur le forum
-// http://doc.spip.org/@code_invalideur_forums
-function code_invalideur_forums($p, $code) {
-	return $code;
-}
-
-
 // Fonction permettant au compilo de calculer les invalideurs d'une page
 // (note: si absente, n'est pas appellee)
 /*

@@ -81,7 +81,7 @@ function exec_configuration_dist(){
 
 	$res = pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
 	if ($res)
-		echo ajax_action_post('configuration', '', 'configuration', '', $res);
+		echo $res;
 
 	echo fin_gauche(), fin_page();
 	}

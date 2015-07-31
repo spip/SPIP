@@ -364,23 +364,6 @@ function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('voir', $type, $id, $qui, $opt);
 }
 
-// Moderer le forum ?
-// = modifier l'objet correspondant (si forum attache a un objet)
-// = droits par defaut sinon (admin complet pour moderation complete)
-// http://doc.spip.org/@autoriser_modererforum_dist
-function autoriser_modererforum_dist($faire, $type, $id, $qui, $opt) {
-	return
-		autoriser('modifier', $type, $id, $qui, $opt);
-}
-
-// Modifier un forum ?
-// = jamais !
-// http://doc.spip.org/@autoriser_forum_modifier_dist
-function autoriser_forum_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return
-		false;
-}
-
 // Modifier une signature ?
 // = jamais !
 // http://doc.spip.org/@autoriser_signature_modifier_dist

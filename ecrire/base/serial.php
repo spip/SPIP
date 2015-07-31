@@ -296,44 +296,6 @@ $spip_syndic_articles_join = array(
 		"id_syndic_article"=>"id_syndic_article",
 		"id_syndic"=>"id_syndic");
 
-$spip_forum = array(
-		"id_forum"	=> "bigint(21) NOT NULL",
-		"id_parent"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_thread"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"date_heure"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"date_thread"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"texte"	=> "mediumtext DEFAULT '' NOT NULL",
-		"auteur"	=> "text DEFAULT '' NOT NULL",
-		"email_auteur"	=> "text DEFAULT '' NOT NULL",
-		"nom_site"	=> "text DEFAULT '' NOT NULL",
-		"url_site"	=> "text DEFAULT '' NOT NULL",
-		"statut"	=> "varchar(8) DEFAULT '0' NOT NULL",
-		"ip"	=> "varchar(16) DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP",
-		"id_auteur"	=> "bigint DEFAULT '0' NOT NULL",
-		"id_message"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_syndic"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_forum_key = array(
-		"PRIMARY KEY"	=> "id_forum",
-		"KEY id_auteur"	=> "id_auteur",
-		"KEY id_parent"	=> "id_parent",
-		"KEY id_thread"	=> "id_thread",
-		"KEY optimal" => "statut,id_parent,id_article,date_heure,id_breve,id_syndic,id_rubrique");
-
-$spip_forum_join = array(
-		"id_forum"=>"id_forum",
-		"id_parent"=>"id_parent",
-		"id_article"=>"id_article",
-		"id_breve"=>"id_breve",
-		"id_message"=>"id_message",
-		"id_syndic"=>"id_syndic",
-		"id_rubrique"=>"id_rubrique");
-
 $spip_signatures = array(
 		"id_signature"	=> "bigint(21) NOT NULL",
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -379,8 +341,6 @@ $tables_principales['spip_syndic'] =
 	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key, 'join' => &$spip_syndic_join);
 $tables_principales['spip_syndic_articles']	=
 	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key, 'join' => &$spip_syndic_articles_join);
-$tables_principales['spip_forum'] =
-	array('field' => &$spip_forum,	'key' => &$spip_forum_key, 'join' => &$spip_forum_join);
 $tables_principales['spip_signatures'] =
 	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key, 'join' => &$spip_signatures_join);
 	

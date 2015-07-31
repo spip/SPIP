@@ -40,73 +40,55 @@ function exec_config_contenu_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 	echo debut_droite('', true);
 
-	$participants = charger_fonction('participants', 'configuration');
-	$contenu_forums = charger_fonction('contenu_forums', 'configuration');
 
 	$redacteurs = charger_fonction('redacteurs', 'configuration');
 	$visiteurs = charger_fonction('visiteurs', 'configuration');
 
-	$forums_prives = charger_fonction('forums_prives', 'configuration');
 	$messagerie_agenda = charger_fonction('messagerie_agenda', 'configuration');
 
 	$annonces = charger_fonction('annonces', 'configuration');
-	$notifications_forum = charger_fonction('notifications_forum', 'configuration');
+
+	$res = "<div class='contenu_public'>";
 
 
-	/*
-	 * Forums publics
-	 *
-	 */
+	$res.= "<h3>"._T('titre_config_contenu_public')."</h3>\n";
 
 
-	echo "<h3>"._T('titre_config_contenu_public')."</h3>\n";
 
-	// Mode de participation aux forums
-	echo $participants();
+	$res.= "</div>";
 
-	// Champs actives sur les forums
-	echo $contenu_forums();
-
-	echo "<br />";
-
+	$res.= "<div class='contenu_prive'>";
 
 	/*
 	 * Inscriptions de redacteurs et visiteurs depuis le site public
 	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
 	 */
-	echo  $redacteurs(),  $visiteurs(), "<br />";
+	$res.=  $redacteurs() .  $visiteurs() . "<br />";
 
 
-	/*
-	 * Forums prives
-	 *
-	 */
 
-	echo "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
+	$res.= "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
 
-	// Forums prives
-	echo $forums_prives();
-	echo $messagerie_agenda();
+	$res.= $messagerie_agenda();
 
-	echo "<br />";
+	$res.= "</div>";
 
+	$res.= "<div class='contenu_notifications'>";
 
 	/*
 	 * mails automatiques
 	 *
 	 */
-	echo "<h3>"._T('titre_config_contenu_notifications')."</h3>\n";
+	$res.= "<h3>"._T('titre_config_contenu_notifications')."</h3>\n";
 
-	echo  $annonces(), "<br />\n";
-	echo  $notifications_forum(), "<br />\n";
+	$res.=  $annonces();
 
+	$res.= "</div>";
 
 //
 // Choix supplementaires proposees par les plugins
 //
-	$res = pipeline('affiche_milieu',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
-	if ($res)
-		echo ajax_action_post('config_contenu', '', 'config_contenu', '', $res);
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_contenu'),'data'=>$res));
 
 	echo fin_gauche(), fin_page();
 	}

@@ -24,8 +24,6 @@ function configuration_mots_dist(){
 
 	$articles_mots = $GLOBALS['meta']["articles_mots"];
 	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
-	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
-	$forums_publics = $GLOBALS['meta']["forums_publics"];
 
 	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 	. "<tr><td class='verdana2'>"
@@ -61,21 +59,26 @@ function configuration_mots_dist(){
 	. "</td></tr></table>"
 	. fin_cadre_relief(true);
 
-	if ($forums_publics != "non"){
-		$res .= "<br />\n"
-		. debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'))
-		. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
-		. "<tr><td class='verdana2'>"
-		. _T('texte_mots_cles_dans_forum')
-		. "</td></tr>"
-		. "<tr>"
-		. "<td align='$spip_lang_left' class='verdana2'>"
-		. afficher_choix('mots_cles_forums', $mots_cles_forums,
-			array('oui' => _T('item_ajout_mots_cles'),
-				'non' => _T('item_non_ajout_mots_cles')))
-		. "</td></tr>"
-		. "</table>"
-		. fin_cadre_relief(true);
+	// la configuration des mots cles dans les forums est liee a la presence du plugin homonyme
+	if (defined('_DIR_PLUGIN_FORUM')){
+		$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
+		$forums_publics = $GLOBALS['meta']["forums_publics"];
+		if ($forums_publics != "non"){
+			$res .= "<br />\n"
+			. debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'))
+			. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+			. "<tr><td class='verdana2'>"
+			. _T('texte_mots_cles_dans_forum')
+			. "</td></tr>"
+			. "<tr>"
+			. "<td align='$spip_lang_left' class='verdana2'>"
+			. afficher_choix('mots_cles_forums', $mots_cles_forums,
+				array('oui' => _T('item_ajout_mots_cles'),
+					'non' => _T('item_non_ajout_mots_cles')))
+			. "</td></tr>"
+			. "</table>"
+			. fin_cadre_relief(true);
+		}
 	}
 	$res .= "</div>";	
 
