@@ -34,7 +34,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 // envoi du doctype et du <head><title>...</head>
 // http://doc.spip.org/@init_entete
 function init_entete($titre='', $dummy=0, $minipres=false) {
-
+	include_spip('inc/texte');
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
@@ -52,6 +52,7 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 
 function init_head($titre='', $dummy=0, $minipres=false) {
 	include_spip('inc/gadgets');
+	include_spip('inc/presentation_mini');
 
 	$head = ($titre?"<title>$titre</title>\n":"")
 		. "<meta http-equiv='Content-Type' content='text/html"
