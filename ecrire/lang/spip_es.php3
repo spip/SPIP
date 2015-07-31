@@ -155,6 +155,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cache_mode_compresse' => 'Los ficheros de cach&eacute; se guardan en modo comprimido.',
+'cache_mode_non_compresse' => 'Los ficheros de cach&eacute; se guardan en modo no comprimido.',
+'cache_modifiable_webmestre' => 'Estos par&aacute;metros son modificables por la webmistress del sitio.',
 'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
 
 
@@ -669,7 +672,8 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_gauche_admin_effacer' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_admin_tech' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_admin_vider' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
-'info_gauche_auteurs' => 'Aqu&iacute; figuran todos los autores y autoras del sitio. Su estado se indica con el color de su icono (redactor/a = verde; administrador/a = amarillo).',
+'info_gauche_auteurs' => 'Aqu&iacute; figuran todos los autores y autoras del sitio.
+ Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',
 'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, est&aacute;n indicados con un icono azul; los que est&aacute;n borrados con una papelera.',
 'info_gauche_messagerie' => 'La mensajer&iacute;a permite comunicarse, crear recordatorios para traer a la memoria algo o publicar anuncios (en el caso de pertenecer al grupo de administraci&oacute;n).',
 'info_gauche_numero_auteur' => 'AUTOR O AUTORA N&Uacute;MERO',
@@ -807,6 +811,8 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros a los autores y autoras de art&iacute;culos',
 'info_option_ne_pas_faire_suivre' => 'No enviar los mensajes de los foros',
 'info_options_avancees' => 'Opciones avanzadas',
+'info_ortho_activer' => 'Activar el corrector ortogr&aacute;fico',
+'info_ortho_desactiver' => 'Desactivar el corrector ortogr&aacute;fico',
 'info_ou' => 'o...',
 'info_oui_suppression_mot_cle' => 'Deseo suprimir esta palabra clave',
 'info_page_interdite' => 'P&aacute;gina no accesible',
@@ -835,6 +841,10 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_pour' => 'para',
 'info_premier_resultat' => '[@debut_limit@ primeros resultados sobre @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeros resultados sobre @total@]',
+'info_preview_admin' => 'S&oacute;lo los administradores pueden previsualizar el sitio',
+'info_preview_comite' => 'Todos los redactores pueden previsualizar el sitio',
+'info_preview_desactive' => 'La previsualizaci&oacute;n est&aacute; totalmente desactivada',
+'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los art&iacute;culos y las breves (que tengan al menos el estado &laquo;&nbsp;propuesto&nbsp;&raquo;) estuviesen publicados. Esta posibilidad debe estar disponible para &iquest;&nbsp;los administradores solamente, todos los redactores, o nadie&nbsp;?',
 'info_principaux_correspondants' => 'Tus principales corresponsales',
 'info_probleme_grave' => 'problema de',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
@@ -1252,6 +1262,20 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'onglet_repartition_rubrique' => 'Reparto por secciones',
 'onglet_save_restaur_base' => 'Crear copia de seguridad y restaurar la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
+'ortho_ajouter_ce_mot' => 'A&ntilde;adir la palabra al diccionario',
+'ortho_aucune_suggestion' => 'No se han encontrado sugerencias para esta palabra.',
+'ortho_avis_privacy' => 'En SPIP se integra un corrector ortogr&aacute;fico. Sin embargo, antes de activar esta caracter&iacute;stica, deber&iacute;a leer atentamente el siguiente p&aacute;rrafo:',
+'ortho_avis_privacy2' => 'Para comprobar la ortograf&iacute;a de un texto, el sitio web enviar&aacute; la lista de palabras a revisar a uno de los &laquo;&nbsp;servidores ortogr&aacute;ficos&nbsp;&raquo; externos puestos a su disposici&oacute;n por distintos miembros de la comunidad SPIP. Las palabras se env&iacute;an desordenadas para asegurar un m&iacute;nimo de confidencialidad. Si siente preocupaci&oacute;n por sus datos, no active esta opci&oacute;n (y despu&eacute;s retire su informaci&oacute;n de la Red).',
+'ortho_ce_mot_connu' => 'Esta palabra forma parte del diccionario del sitio.',
+'ortho_dico_absent' => 'No se ha encontrado ning&uacute;n diccionario para este idioma',
+'ortho_mode_demploi' => 'Las palabras no reconocidass se han subrayado en rojo. Puede pulsar sobre cada palabra para mostrar sugerencias para su correcci&oacute;n.',
+'ortho_mots_a_corriger' => 'palabras a corregir',
+'ortho_orthographe' => 'Ortograf&iacute;a',
+'ortho_supprimer_ce_mot' => 'Suprimir esta palabra en el diccionario',
+'ortho_trop_de_fautes' => 'Atenci&oacute;n: su texto contiene demasiadas faltas de ortograf&iacute;a, no se ha sugerido ninguna correcci&oacute;n para no sobrecargar el sistema.',
+'ortho_trop_de_fautes2' => 'Comience por corregir las faltas m&aacute;s evidentes y vuelva a intentarlo.',
+'ortho_verif_impossible' => 'El sistema no puede comprobar la ortograf&iacute;a de este texto.',
+'ortho_verifier' => 'Revisar la ortograf&iacute;a',
 
 
 // P
@@ -1287,6 +1311,8 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 'pass_retour_public' => 'Volver al sitio p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Nada que hacer aqu&iacute;.',
 'pass_vousinscrire' => 'Inscribirse en este sitio',
+'previsualisation' => 'Previsualizaci&oacute;n',
+'previsualiser' => 'Previsualizar',
 
 
 // S
@@ -1295,9 +1321,14 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 
 
 // T
+'taille_cache_infinie' => 'Este sitio no tiene previsto un l&iacute;mite del tama&ntilde;o de la carpeta <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP intenta limitar el tama&ntilde;o de la carpeta <code>CACHE/</code> de este sitio a una media de <b>@octets@</b> de datos.',
+'taille_cache_octets' => 'El tama&ntilde;o de la cache es actualmente de @octets@.',
+'taille_cache_vide' => 'La cache est&aacute; vac&iacute;a.',
 'taille_ko' => '@taille@&nbsp;KB',
 'taille_mo' => '@taille@&nbsp;MB',
 'taille_octets' => '@taille@&nbsp;bytes',
+'taille_repertoire_cache' => 'Tama&ntilde;o de la carpeta cache',
 'text_article_propose_publication' => 'Art&iacute;culo propuesto a la publicaci&oacute;n.<br> No dudes en dar tu opini&oacute;n en el foro aferente, que se encuentra m&aacute;s adelante en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso debes especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
 'texte_actualite_site_1' => 'Una vez que te hayas familiarizado con la interfaz, pincha en &laquo;',
@@ -1362,9 +1393,9 @@ Debes intentar',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
 'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al o a la webmestre principal de tu sitio. </b>',
-'texte_inc_meta_1' => 'Proceder, como administrador del sitio,',
+'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>ecrire/data/meta_cache.php3</code>.Como administradorA del sitio, procede',
 'texte_inc_meta_2' => 'a verificar los derechos de escritura',
-'texte_inc_meta_3' => 'del directorio ecrire/',
+'texte_inc_meta_3' => 'del directorio <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
@@ -1557,7 +1588,20 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br><img src="puce.g
 'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ',
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
-'trad_reference' => '(art&iacute;culo de referencia)'
+'trad_reference' => '(art&iacute;culo de referencia)',
+
+
+// U
+'upload_fichier_zip' => 'Fichero ZIP',
+'upload_fichier_zip_texte' => 'El fichero que se propone instalar es un fichero Zip.',
+'upload_fichier_zip_texte2' => 'Este fichero puede ser:',
+'upload_limit' => 'Estee fichero es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
+'upload_zip_decompacter' => 'descomprimido y cada uno de los elementos que contiene instalado en el sitio. Los ficheros que van a ser instalados en el sitio son:',
+'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
+
+
+// V
+'version_initiale' => 'Versi&oacute;n inicial'
 
 );
 

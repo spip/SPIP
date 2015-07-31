@@ -161,6 +161,9 @@ la documentacion d\'SPIP</a>.',
 
 
 // C
+'cache_mode_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de comprimit.',
+'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
+'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aquestes param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
 
 
@@ -677,7 +680,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_gauche_admin_effacer' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
 'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
 'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
-'info_gauche_auteurs' => 'Trobaretz aic&iacute; totes los autors del sit. La color de las ic&ograve;nas n\'indica l\'estatut (redactor: verd; administrator: jaune).',
+'info_gauche_auteurs' => 'Trobaretz aic&iacute; totes los autors del sit. La color de las ic&ograve;nas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens acc&egrave;s al sit, son indicats per una ic&ograve;na blava; los autors escafats per un bordilhi&egrave;r.',
 'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'escambiar de messatges entre redactors, de servar de n&ograve;tas per se remembrar (per v&ograve;stre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUM&Egrave;RO',
@@ -824,6 +827,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_option_faire_suivre' => 'Far seguir los messatges dels forums als autors dels articles',
 'info_option_ne_pas_faire_suivre' => 'Far pas seguir los messatges dels forums',
 'info_options_avancees' => 'OPCIONS AVAN&Ccedil;ADAS',
+'info_ortho_activer' => 'Activar lo verificador d\'ortografia',
+'info_ortho_desactiver' => 'Desactivar lo verificador d\'ortografia',
 'info_ou' => 'o... ',
 'info_oui_suppression_mot_cle' => 'V&ograve;li suprimir aquel mot clau definitivament.',
 'info_page_interdite' => 'Pagina pro&iuml;bida',
@@ -852,6 +857,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_pour' => 'per',
 'info_premier_resultat' => '[@debut_limit@ primi&egrave;rs resultats de @total@]',
 'info_premier_resultat_sur' => ' [@debut_limit@ primi&egrave;rs resultats de @total@]',
+'info_preview_admin' => 'Solament los administrators p&ograve;don previsualizar lo sit',
+'info_preview_comite' => 'Totes los redactors p&ograve;don previsualizar lo sit',
+'info_preview_desactive' => 'La previsualizacion es del tot desactivada',
+'info_preview_texte' => 'Es possible de previsualizar lo sit coma s\'avi&aacute;n publicat totes los articles e br&egrave;vas (que tenon almens l\'estatut "prepausat"). La cal dobrir, aquela possibilitat, als administrators sonque, a totes los redactors, o pas a degun?',
 'info_principaux_correspondants' => 'V&ograve;stres correspondents principals',
 'info_probleme_grave' => 'probl&egrave;ma de',
 'info_procedez_par_etape' => 'procediss&egrave;tz estapa per estapa',
@@ -1280,6 +1289,20 @@ una color indica lor estat:',
 'onglet_repartition_rubrique' => 'Reparticion per rubricas',
 'onglet_save_restaur_base' => 'Salvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vojar l\'escondedor',
+'ortho_ajouter_ce_mot' => 'Ajustar aqueste mot al diccionari',
+'ortho_aucune_suggestion' => 'S\'es pas trobat cap de suggestion per aqueste mot.',
+'ortho_avis_privacy' => 'Un verificador d\'ortografia es integrat a SPIP. Pr\'aqu&ograve;, abans d\'activar aquela foncionalitat, volgatz legir amb atencion lo paragraf seguent:',
+'ortho_avis_privacy2' => 'Per verificar l\'ortografia d\'un t&egrave;xt, lo sit mandar&agrave; la lista dels mots de contrarotlar v&egrave;rs un dels "servidors d\'ortografia" ext&egrave;rnes que los diferents s&ograve;cis de la comunitat SPIP los an botats a v&ograve;stra disposicion. Se manda los mots dins lo des&ograve;rdre per fin de garentir un minim de confidencialitat. Se vos fas&egrave;tz de lagui per las donadas v&ograve;stras, activetz pas aquela opcion (e levatz sul pic v&ograve;stras informacions del web).',
+'ortho_ce_mot_connu' => 'Aqueste mot fa partida del diccionari del sit.',
+'ortho_dico_absent' => 'S\'es pas trobat ges de diccionari per aquesta lenga',
+'ortho_mode_demploi' => 'Los mots non reconeguts son subrelinhats de roge. Pod&egrave;tz clicar sus cada mot per afichar de suggestions de correccion.',
+'ortho_mots_a_corriger' => 'mots de corregir',
+'ortho_orthographe' => 'Ortografia',
+'ortho_supprimer_ce_mot' => 'Levar aquel mot del diccionari',
+'ortho_trop_de_fautes' => 'Atencion: v&ograve;stre t&egrave;xt ten tr&ograve;p d\'errors, lai se sugger&iacute;s pas ges de correccion per tal de  subrecargar pas lo sist&egrave;ma.',
+'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir las errors mai evidentas e tornatz assajar pu&egrave;i.',
+'ortho_verif_impossible' => 'Lo sist&egrave;ma p&ograve;t pas verificar l\'ortografia d\'aqueste t&egrave;xt.',
+'ortho_verifier' => 'Verificar l\'ortografia',
 
 
 // P
@@ -1323,6 +1346,8 @@ e vos tornar connectar al sit.
 'pass_retour_public' => 'Tornar al sit public',
 'pass_rien_a_faire_ici' => 'Pas res a faire aic&iacute;.',
 'pass_vousinscrire' => 'S\'inscriure sus aqueste sit',
+'previsualisation' => 'Previsualizacion',
+'previsualiser' => 'Previsualizar',
 
 
 // S
@@ -1331,9 +1356,14 @@ e vos tornar connectar al sit.
 
 
 // T
+'taille_cache_infinie' => 'Aquel sit prevei pas cap de limitacion de talha del repert&ograve;ri <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP assaja de limitar la talha del repert&ograve;ri <code>CACHE/</code> d\'aquel sit a <b>@octets@</b> de donadas aperaqu&iacute;.',
+'taille_cache_octets' => 'Ara la talha de l\'escondedor compassa @octets@.',
+'taille_cache_vide' => 'L\'escondedor es void.',
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
+'taille_repertoire_cache' => 'Talha del repert&ograve;ri escondedor',
 'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre vejaire gr&agrave;cias al forum estacat a aquel article (en bas de pagina).',
 'texte_acces_ldap_anonyme_1' => 'D\'unes servidors LDAP acc&egrave;ptan pas ges d\'acc&egrave;s anonim. En aquel cas, cal especificar un identificant d\'acc&egrave;s inicial per poder pu&egrave;i recercar d\'informacions dins l\'annuari. Pasmens, los camps seguents se poir&agrave;n daissar vu&egrave;ges dins la m&agrave;ger part dels cases.',
 'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
@@ -1428,9 +1458,9 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
  acostumat/ada al foncionament del sist&egrave;ma SPIP. <P align="justify"><B>
  En general, se conselha f&ograve;rt
  de daissar la carga d\'aquestas paginas al webm&egrave;stre principal de v&ograve;stre sit.</b>',
-'texte_inc_meta_1' => 'Volgatz, coma administrator/tritz del sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura del fichi&egrave;r <code>ecrire/data/meta_cache.php3</code>.Volgatz, coma administrator/tritz del sit,',
 'texte_inc_meta_2' => 'verificar los dreches d\'escritura',
-'texte_inc_meta_3' => 'dins lo repert&ograve;ri ecrire/',
+'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'Ara lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat al sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
@@ -1682,7 +1712,20 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_delier' => 'Ligar pas mai aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// U
+'upload_fichier_zip' => 'Fichi&egrave;r ZIP',
+'upload_fichier_zip_texte' => 'Lo fichi&egrave;r que prepausatz d\'installar es un fichi&egrave;r Zip.',
+'upload_fichier_zip_texte2' => 'Aquel fichi&egrave;r p&ograve;t &egrave;sser:',
+'upload_limit' => 'Aquel fichi&egrave;r es tr&ograve;p gr&ograve;s pel servidor; la talha maxima autorizada en <i>upload</i> es de @max@.',
+'upload_zip_decompacter' => 'descomprimit e cada element que conten installat sul sit. Alara los fichi&egrave;rs que ser&agrave;n installats sul sit son:',
+'upload_zip_telquel' => 'installat tal coma es, coma archiu comprimit Zip;',
+
+
+// V
+'version_initiale' => 'Version iniciala'
 
 );
 

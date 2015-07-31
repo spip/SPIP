@@ -712,7 +712,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
 exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_gauche_auteurs' => 'Vous trouverez ici tous les auteurs du site.
-	Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur = jaune).',
+ Leur statut est indiqu&eacute; par la couleur de leur icone (administrateur = vert; r&eacute;dacteur = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
 		les auteurs effac&eacute;s par une poubelle.',
 'info_gauche_messagerie' => 'La messagerie vous permet d\'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace priv&eacute; (si vous &ecirc;tes administrateur).',
