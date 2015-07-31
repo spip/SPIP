@@ -48,8 +48,6 @@ function exec_admin_plugin_dist($retour='') {
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo "<br />\n";
-	echo "<br />\n";
 
 	$quoi = _request('voir');
 	$quoi = $quoi ? $quoi : 'actifs';

@@ -29,8 +29,6 @@ function exec_charger_plugin_dist($retour='') {
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo "<br />\n";
-		echo "<br />\n";
 
 		echo gros_titre(_T('icone_admin_plugin'),'',false);
 		echo barre_onglets("plugins", "charger_plugin");
