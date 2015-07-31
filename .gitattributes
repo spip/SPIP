@@ -316,6 +316,7 @@ ecrire/inc_rubriques_edit.php -text
 ecrire/inc_sites_edit.php -text
 ecrire/inc_sites_tous.php -text
 ecrire/inc_spip_action_autoriser.php -text
+ecrire/inc_spip_action_ical.php -text
 ecrire/inc_spip_action_iconifier.php -text
 ecrire/inc_spip_action_joindre.php -text
 ecrire/inc_spip_action_purger.php -text
@@ -323,7 +324,6 @@ ecrire/inc_spip_action_supprimer.php -text
 ecrire/inc_spip_action_test_dirs.php -text
 ecrire/inc_spip_action_tester.php -text
 ecrire/inc_spip_action_tourner.php -text
-ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_style.php -text
 ecrire/inc_statistiques_lang.php -text
 ecrire/inc_statistiques_referers.php -text
