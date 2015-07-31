@@ -16,17 +16,38 @@ if ($ajouter_lien = $GLOBALS["ajouter_lien"]) {
 
 
 function recuperer_page($url) {
-	$f = @fopen($url, "rb");
-	if (!$f) {
+	$http_proxy=lire_meta("http_proxy");
+	if (!eregi("^http://", $http_proxy))
+		$http_proxy = '';
+
+	if ($http_proxy)
+		$f = @fopen($http_proxy, "rb");
+	else
+		$f = @fopen($url, "rb");
+
+	if (!$f) { // (pas d'erreur)
 		for (;;) {
 			$t = @parse_url($url);
 			$host = $t['host'];
 			if (!($port = $t['port'])) $port = 80;
 			$query = $t['query'];
 			if (!($path = $t['path'])) $path = "/";
-			$f = @fsockopen($host, $port);
+
+			if ($http_proxy) {
+				$t2 =  @parse_url($http_proxy);
+				$proxy_host = $t2['host'];
+				if (!($proxy_port = $t['proxy_port'])) $proxy_port = 80;
+				$f = @fsockopen($proxy_host, $proxy_port);
+			} else
+				$f = @fsockopen($host, $port);
+
 			if (!$f) return;
-			fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+
+			if ($http_proxy)
+				fputs($f, "GET http://$host:$port/$path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+			else
+				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+
 			$s = trim(fgets($f, 16384));
 			if (ereg('^HTTP/[0-9]+\.[0-9]+ ([0-9]+)', $s, $r)) {
 				$status = $r[1];

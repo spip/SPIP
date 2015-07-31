@@ -17,6 +17,22 @@ function mySel($varaut,$variable){
 
 if ($changer_config == 'oui') {
 
+	// test du proxy : $tester_proxy est le bouton "submit"
+	if ($tester_proxy) {
+		if (!$test_proxy) {
+			echo "Vous n'avez pas indiqu&eacute; d'adresse &agrave; tester !";
+			exit;
+		} else {
+			include_ecrire("inc_sites.php3");
+			$page = recuperer_page($test_proxy);
+			if ($page)
+				echo "<pre>".htmlspecialchars($page)."</pre>";
+			else
+				echo propre("{{Erreur !}} Le proxy <tt><html>$http_proxy</html></tt> n'a pas pu lire la page <tt><html>$test_proxy</html></tt>.") . aide('confhttpproxy');
+			exit;
+		}
+	}
+
 	// purger les squelettes si un changement de meta les affecte
 	if (($post_dates AND ($post_dates != lire_meta("post_dates")))
 		OR ($forums_publics AND ($forums_publics != lire_meta("forums_publics"))))
@@ -39,8 +55,7 @@ if ($changer_config == 'oui') {
 		creer_liste_indexation();
 	}
 
-	$adresse_site = ereg_replace("/$", "", $adresse_site);
-
+	ecrire_meta("http_proxy", $http_proxy);
 	ecrire_meta("activer_moteur", $activer_moteur);
 	ecrire_meta("prevenir_auteurs", $prevenir_auteurs);
 	ecrire_meta("activer_messagerie", $activer_messagerie);
@@ -428,6 +443,55 @@ debut_cadre_relief();
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
 	echo "</TD></TR>";
+	echo "</TABLE>";
+
+fin_cadre_relief();
+
+
+//// Utilisation d'un proxy pour aller lire les sites syndiques
+debut_cadre_relief();
+
+	$http_proxy=htmlspecialchars(lire_meta("http_proxy"));
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Utiliser un proxy</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
+		. propre("Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...), il peut &ecirc;tre n&eacute;cessaire
+		d'utiliser un {proxy HTTP} pour atteindre les sites syndiqu&eacute;s. Le cas &eacute;ch&eacute;ant,
+		indiquez ci-dessous son adresse, sous la forme <tt><html>http://proxy:8080</html></tt>. En g&eacute;n&eacute;ral,
+		vous laisserez cette case vide.") . "</FONT>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+	echo "<INPUT TYPE='text' NAME='http_proxy' VALUE='$http_proxy' size='40' class='forml'>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	if ($http_proxy) {
+		echo "<p align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
+			. propre("Pour faire un essai de ce proxy, indiquez ici une adresse quelconque sur le Web, et
+			v&eacute;rifiez que vous y avez acc&egrave;s.<br>{{Attention:}} il faut
+			faire ce test sur un fichier au format texte brut. Nous vous
+			sugg&eacute;rons d'utiliser un des {backend} que vous souhaitez syndiquer,
+			par exemple celui du site uZine.");
+		echo "</TD></TR>";
+
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://www.uzine.net/backend.php3' size='40' class='forml'>";
+		echo "</TD></TR>";
+
+		echo "<TR><TD ALIGN='right'>";
+
+		echo "</font><div align='right'><INPUT TYPE='submit' NAME='tester_proxy'
+		VALUE='Essayer le proxy' CLASS='fondo'></div>";
+		
+	}
+	echo "</TD></TR>";
+
+
 	echo "</TABLE>";
 
 fin_cadre_relief();
