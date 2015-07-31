@@ -1043,7 +1043,8 @@ function image_masque($im, $masque, $pos="") {
 	}
 	if ($defini["mode"]) $mode = $variable["mode"];
 
-	$pos = md5(serialize($variable));
+	$masque = find_in_path($masque);
+	$pos = md5(serialize($variable).@filemtime($masque));
 
 	$fonction = array('image_masque', func_get_args());
 	$image = image_valeurs_trans($im, "masque-$masque-$pos", "png",$fonction);
@@ -1065,7 +1066,6 @@ function image_masque($im, $masque, $pos="") {
 
 	if ($creer) {
 		
-		$masque = find_in_path($masque);
 		$mask = image_valeurs_trans($masque,"");
 		if (!is_array($mask)) return("");
 		$im_m = $mask["fichier"];
