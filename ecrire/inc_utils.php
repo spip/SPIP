@@ -564,7 +564,7 @@ function find_in_path ($filename, $path='AUTO') {
 // charger les definitions des plugins
 function charger_plugins($plugins) {
 	foreach ($plugins as $plug) {
-		include(_DIR_RACINE.'plugins/'.$plug.'/version.php');
+		include(_DIR_PLUGINS.$plug.'/version.php');
 	}
 #var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
 }
