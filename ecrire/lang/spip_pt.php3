@@ -171,6 +171,10 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 
 // C
 'calendrier_synchro' => '<MODIF> Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>  (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), pode sincroniz&aacute;-lo com a actualidade deste s&iacute;tio.',
+'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
+'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
+'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -365,6 +369,18 @@ Obrigado pela sua participa&ccedil;&atilde;o
 
 
 // I
+'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
+'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
+'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
+'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
+'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
+'ical_titre_js' => '<NEW> Javascript',
+'ical_titre_mailing' => '<NEW> Mailing-list',
+'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
 'icone_a_suivre' => 'A continuar',
 'icone_activer_cookie' => 'Activar o cookie de correspond&ecirc;ncia',
 'icone_admin_site' => 'Administra&ccedil;&atilde;o do s&iacute;tio',
@@ -1666,14 +1682,7 @@ a SPIP pesquisar igualmente no texto dos
 'trad_delier' => 'N&atilde;o mais ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
-'trad_reference' => '(artigo de refer&ecirc;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
-'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
-'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(artigo de refer&ecirc;ncia)'
 
 );
 
