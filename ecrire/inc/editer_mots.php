@@ -266,7 +266,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		? " AND " . sql_in('id_mot', $les_mots, 'NOT')
 		: '';
 
-	define('_TRI_GROUPES_MOTS', 'id_groupe');  # 0+titre,titre // multi
+	define('_TRI_GROUPES_MOTS', '0+titre,titre');  
 	foreach(sql_allfetsel('*,' . sql_multi ("titre", $spip_lang), 'spip_groupes_mots', '', '', _TRI_GROUPES_MOTS) as $row) {
 		$id_groupe = $row['id_groupe'];
 		if (autoriser('editermots', $objet, $id_objet, null,
