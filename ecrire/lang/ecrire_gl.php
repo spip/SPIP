@@ -353,8 +353,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_syndication' => 'A &uacute;ltima afiliaci&oacute;n deste web f&iacute;xose o',
 'info_derniers_articles_publies' => 'Os teus &uacute;ltimos artigos publicados en li&ntilde;a',
 'info_desactiver_forum_public' => 'Desactivar o uso dos foros
-		p&uacute;blicos. Os foros p&uacute;blicos poder&aacute;n ser autorizados caso por caso
-		nos artigos; ser&aacute;n prohibidos nos temas, nas breves, etc.',
+  p&uacute;blicos. Os foros p&uacute;blicos poder&aacute;n ser autorizados caso por caso
+  nos artigos; ser&aacute;n prohibidos nos temas, nas breves, etc.',
 'info_desactiver_messagerie_personnelle' => 'Pode activar ou desactivar a s&uacute;a mensaxer&iacute;a persoal neste web.',
 'info_descriptif' => 'Descrici&oacute;n:',
 'info_desinstaller_plugin' => 'elimina os datos e desactiva o plugin',
