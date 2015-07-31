@@ -566,14 +566,14 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
 	. "</ul></div>\n"
   . "</div>"
   //script to show the submenus in IE6, not supporting :hover on li elements
-  . "<script type='text/javascript'>\n"
-  . "var boutons_admin = jQuery('#bandeau-principal li.boutons_admin');\n"
+  . '<script type="text/javascript"><!--'
+  . "\nvar boutons_admin = jQuery('#bandeau-principal li.boutons_admin');\n"
   . "if(jQuery.browser.msie) boutons_admin.hover(\n"
   . "function(){jQuery(this).addClass('sfhover')},\n"
   . "function(){jQuery(this).removeClass('sfhover')}\n"
   . ");\n"
   . "boutons_admin.one('mouseover',decaleSousMenu);\n"
-  . "</script>\n"; 
+  . "// --></script>\n"; 
 }
 
 

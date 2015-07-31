@@ -53,6 +53,30 @@ function filtre_text_csv_dist($t)
 		"|\n");
 }
 
+// Incrustation de HTML, si on est capable de le securiser
+// sinon, afficher le source
+function filtre_text_html_dist($t)
+{
+	if (!preg_match(',<head>(.*?)</head>.*<body[^>]*>(.*)</body>,is', $t, $r))
+		return filtre_text_txt_dist($t);
+
+	list(,$h,$t) = $r;
+	$style = '';
+	// recuperer les styles internes
+	if (preg_match_all(',<style>([^>]*)</style>,is', $h, $r, PREG_PATTERN_ORDER))
+		$style =  join("\n",$r[1]);
+	// ... et externes
+	if (preg_match_all(',<link[^>]*text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER))
+		foreach($r[0] as $l) {
+			preg_match("/href='([^']*)'/", str_replace('"',"'",$l), $m);
+			$style .= "\n/* $l */\n"
+			. str_replace('<','',recuperer_page($m[1]));
+		}
+	// Pourquoi SafeHtml transforme-t-il en texte les scripts dans Body ?
+	$t = safehtml(preg_replace(',<script.*?</script>,is','',$t));
+	return (!$style ? '' : "\n<style>$style</style>") . $t;
+}
+
 // http://doc.spip.org/@filtre_audio_x_pn_realaudio
 function filtre_audio_x_pn_realaudio($id)
 {
