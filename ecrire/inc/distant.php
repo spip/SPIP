@@ -389,9 +389,9 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 	// recharger le document en GET et recuperer des donnees supplementaires...
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
 		if ($max == 0
-		    AND $a['taille'] < 1024*1024
-		    AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false)
-		    AND $charger_si_petite_image ){
+		AND $a['taille'] < 1024*1024
+		AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false)
+		AND $charger_si_petite_image) {
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {
@@ -403,7 +403,15 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 			$a['type_image'] = true;
 		}
 	}
-	
+
+	// Fichier swf, si on n'a pas la taille, on va mettre 425x350 par defaut
+	// ce sera mieux que 0x0
+	if ($a['extension'] == 'swf'
+	AND !$a['largeur']) {
+		$a['largeur'] = 425;
+		$a['hauteur'] = 350;
+	}
+
 	if ($mime_type == 'text/html') {
 		include_spip('inc/filtres');
 		$page = recuperer_page($source, true, false, 1024*1024);
