@@ -285,8 +285,9 @@ function conserver_original($id_forum) {
 
 	if ($t) {
 		unset($t['id_forum']);
-		if (spip_query("INSERT spip_forum (".join(',',array_keys($t)).") VALUES (".join(',',array_map('_q', $t)).")")) {
-			$id_copie = spip_insert_id();
+		include_spip('base/abstract_sql');
+		$id_copie = spip_abstract_insert('spip_forum', "(" . join(',',array_keys($t)).")", "(" . join(',',array_map('_q', $t)). ")");
+		if ($id_copie) {
 			spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
 			return ''; // pas d'erreur
 		}

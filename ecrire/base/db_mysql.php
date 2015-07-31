@@ -364,11 +364,6 @@ function spip_mysql_insert($table, $champs, $valeurs) {
 	return  mysql_insert_id();
 }
 
-// http://doc.spip.org/@spip_insert_id
-function spip_insert_id() {
-	return mysql_insert_id();
-}
-
 //
 // Poser un verrou local a un SPIP donne
 //
