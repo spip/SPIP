@@ -229,7 +229,7 @@ function personnel_accueil($coockcookie)
 
 	$res = '';
 
-	if ($connect_id_rubrique) {
+	if (count($connect_id_rubrique)) {
 
 		$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
 
@@ -273,10 +273,11 @@ function personnel_accueil($coockcookie)
 // http://doc.spip.org/@etat_base_accueil
 function etat_base_accueil()
 {
-	global $spip_display, $spip_lang_left, $connect_statut, $connect_id_rubrique;
+	global $spip_display, $spip_lang_left, $connect_id_rubrique;
 
-	$ids = join(",", $connect_id_rubrique);
-	$where = $ids ? (" WHERE id_rubrique IN ($ids)") : '';
+	$where = count($connect_id_rubrique)
+		? ' WHERE id_rubrique IN ('.join(',', $connect_id_rubrique).')'
+		: '';
 
 	$res = '';
 
@@ -365,7 +366,7 @@ function etat_base_accueil()
 			}
 		}
 
-		if ($connect_statut == "0minirezo" AND !$connect_id_rubrique)
+		if (autoriser('modererforum'))
 			$res .= afficher_plus(generer_url_ecrire("controle_forum",""));
 		$res .= "<b>" ._T('onglet_messages_publics') ."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
