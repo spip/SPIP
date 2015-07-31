@@ -731,9 +731,9 @@ function balise_SELF_dist($p) {
 // #ENV
 // l'"environnement", id est le $contexte (ou $contexte_inclus)
 //
-// en standard on applique |entites_html, mais attention si
-// vous utilisez [(#ENV*{toto})] il *faut* vous assurer vous-memes
-// de la securite anti-php et anti-javascript
+// en standard on applique |entites_html, mais si vous utilisez
+// [(#ENV*{toto})] il *faut* vous assurer vous-memes de la securite
+// anti-javascript (par exemple en filtrant avec |safehtml)
 //
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
@@ -753,7 +753,6 @@ function balise_ENV_dist($p) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
 		$p->code = 'serialize($Pile[0])';
-		#$p->interdire_scripts = true;
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
 		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
@@ -762,8 +761,8 @@ function balise_ENV_dist($p) {
 				$p->code
 				. compose_filtres_args($p, $sinon, ',')
 				. ')';
-		$p->interdire_scripts = false;
 	}
+	#$p->interdire_scripts = true;
 
 	return $p;
 }
