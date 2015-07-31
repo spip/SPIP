@@ -142,6 +142,23 @@ function purger_repertoire($dir) {
 
 // http://doc.spip.org/@cron_invalideur
 function cron_invalideur($t) {
+
+	// A revoir: il semble y avoir une desynchro ici.
+	// Avant tout s'assurer que le cache n'a pas explose,
+	// et purger tout sans finesse dans ce cas
+	$t = spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')");
+	$t = spip_fetch_array($t);
+	$total_cache = $t['n'];
+	spip_log("Taille du CACHE: $total_cache octets");
+	global $quota_cache;
+	if ($total_cache>5*$quota_cache){
+		spip_log("Taille explose (max $quota_cache)/ purge totale");
+		// on purge d'abord le repertoire (le plus long, qui ne tiendra peut etre pas en un hit)
+		purger_repertoire(_DIR_CACHE);
+		// on solde les invalideurs
+		supprime_invalideurs();		
+	}
+
 	//
 	// menage des vieux fichiers du cache
 	// marques par l'invalideur 't' = date de fin de fichier
@@ -150,13 +167,6 @@ function cron_invalideur($t) {
 	retire_vieux_caches();
 
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-
-	// A revoir: il semble y avoir une desynchro ici.
-	$t = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')"));
-	$total_cache = $t['n'];
-	spip_log("Taille du CACHE: $total_cache octets");
-
-	global $quota_cache;
 	$total_cache -= $quota_cache*1024*1024;
 	if ($quota_cache > 0 AND $total_cache > 0) {
 		$taille_supprimee = 0;
