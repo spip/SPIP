@@ -24,7 +24,7 @@ function informer_auteur($bof)
 	else {
 		// piocher les infos sur un autre login
 		$n = sql_countsel('spip_auteurs',"login<>''");
-		$n = (abs(crc32(_request('var_login')))%$n);
+		$n = (abs(crc32(strval(_request('var_login'))))%$n);
 		$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
 		if ($row AND is_array($row)){
 			unset($row['id_auteur']);
