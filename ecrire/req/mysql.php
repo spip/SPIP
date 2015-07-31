@@ -418,7 +418,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 {
-	$s = spip_mysql_query("SHOW CREATE TABLE $nom_table", $serveur, $requeter);
+	$s = spip_mysql_query("SHOW CREATE TABLE `$nom_table`", $serveur, $requeter);
 	if (!$s) return '';
 	if (!$requeter) return $s;
 
@@ -450,7 +450,7 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 		return array('field' => $fields, 'key' => $keys);
 	}
 
-	$res = spip_mysql_query("SHOW COLUMNS FROM $nom_table", $serveur);
+	$res = spip_mysql_query("SHOW COLUMNS FROM `$nom_table`", $serveur);
 	if($res) {
 	  $nfields = array();
 	  $nkeys = array();
