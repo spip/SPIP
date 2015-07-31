@@ -1020,7 +1020,8 @@ function parser($texte) {
 		'URL_SITE' => 'url_site',
 		'URL_SYNDIC' => 'url_syndic',
 		'DESCRIPTIF' => 'descriptif',
-		'DATE' => 'date'
+		'DATE' => 'date',
+		'POINTS' => 'points'
 	);
 	$rows_syndic_articles = array(
 		'ID_SYNDIC_ARTICLE' => 'id_syndic_article',

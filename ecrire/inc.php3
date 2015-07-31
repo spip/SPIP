@@ -76,11 +76,6 @@ if ($prefs['spip_lang']) {
 	changer_langue($prefs['spip_lang']);
 }
 
-/*
-else if ... Nicolas, quel est l'entete http a verifier contre $all_langs ?
-
-*/
-
 switch ($prefs['couleur']) {
 	case 1:
 		/// Vert
