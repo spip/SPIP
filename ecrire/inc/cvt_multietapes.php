@@ -218,6 +218,12 @@ function cvtmulti_formulaire_verifier($flux){
 			#var_dump("prochaine etape $etape");
 			// retourner les erreurs de l'etape ciblee
 			$flux['data'] = isset($erreurs[$etape]) ? $erreurs[$etape] : array() ;
+			// Ne pas se tromper dans le texte du message d'erreur : la clé '_etapes' n'est pas une erreur !
+			if ($flux['data']) {
+				$flux['data']['message_erreur'] = singulier_ou_pluriel(count($flux['data']), 'avis_1_erreur_saisie', 'avis_nb_erreurs_saisie');
+			} else {
+				$flux['data']['message_erreur'] = "";
+			}
 			$flux['data']['_etapes'] = "etape suivante $etape";
 			set_request('_etape',$etape);
 		}
