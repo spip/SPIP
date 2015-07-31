@@ -26,13 +26,13 @@ include_spip('inc/filtres_images_mini'); // par precaution
  * Transforme une couleur vectorielle R,G,B en hexa (par exemple pour usage css)
  *
  * @param int $red
- * 		Valeur du rouge de 0 à 255.
+ *     Valeur du rouge de 0 à 255.
  * @param int $green
- * 		Valeur du vert de 0 à 255.
+ *     Valeur du vert de 0 à 255.
  * @param int $blue
- * 		Valeur du bleu de 0 à 255.
+ *     Valeur du bleu de 0 à 255.
  * @return string
- * 		le code de la couleur en hexadécimal.
+ *     Le code de la couleur en hexadécimal.
  */
 function _couleur_dec_to_hex($red, $green, $blue) {
 	$red = dechex($red);
@@ -50,9 +50,9 @@ function _couleur_dec_to_hex($red, $green, $blue) {
  * Transforme une couleur hexa en vectorielle R,G,B
  *
  * @param string $couleur
- * 		Code couleur en hexa (#000000 à #FFFFFF).
+ *     Code couleur en hexa (#000000 à #FFFFFF).
  * @return array
- * 		Un tableau des 3 éléments : rouge, vert, bleu.
+ *     Un tableau des 3 éléments : rouge, vert, bleu.
  */
 function _couleur_hex_to_dec($couleur) {
 	$couleur = couleur_html_to_hex($couleur);
@@ -68,14 +68,15 @@ function _couleur_hex_to_dec($couleur) {
 /**
  * Donne un statut au fichier-image intermédiaire servant au traitement d'image
  * selon qu'il doit être gravé (fichier .src) ou pas.
- * Un appel php direct aux fonctions de filtre d'image produira ainsi une image
+ * 
+ * Un appel PHP direct aux fonctions de filtre d'image produira ainsi une image
  * permanente (gravée) ; un appel généré par le compilateur via
- * filtrer('image_xx, ...) effacera automatiquement le fichier-image temporaire.
+ * `filtrer('image_xx, ...)` effacera automatiquement le fichier-image temporaire.
  *
  * @param bool|string $stat
- * 		true, false ou le statut déjà défini si traitements enchaînés.
+ *     true, false ou le statut déjà défini si traitements enchaînés.
  * @return bool
- * 		true si il faut supprimer le fichier temporaire ; false sinon.
+ *     true si il faut supprimer le fichier temporaire ; false sinon.
  */
 function statut_effacer_images_temporaires($stat){
 	static $statut = false; // par defaut on grave toute les images
@@ -86,34 +87,38 @@ function statut_effacer_images_temporaires($stat){
 
 /**
  * Fonctions de traitement d'image
+ * 
  * Uniquement pour GD2.
  *
+ * @pipeline_appel image_preparer_filtre
+ * 
  * @param string $img
- * 		Un tag html <img src=... />.
+ *     Un tag html `<img src=... />`.
  * @param string $effet
- * 		Les nom et paramètres de l'effet à apporter sur l'image
- * 		(par exemple : reduire-300-200).
+ *     Les nom et paramètres de l'effet à apporter sur l'image
+ *     (par exemple : reduire-300-200).
  * @param bool|string $forcer_format
- * 		Un nom d'extension spécifique demandé (par exemple : jpg, png, txt...
- * 		par défaut false : GD se débrouille seule).
+ *     Un nom d'extension spécifique demandé (par exemple : jpg, png, txt...).
+ *     Par défaut false : GD se débrouille seule).
  * @param array $fonction_creation
- * 		Un tableau à 2 éléments. Le premier (string) indique le nom du
- * 		filtre de traitement demandé (par exemple : image_reduire) ; le
- * 		second (array) est lui-même un tableau reprenant la valeur de $img
- * 		et chacun des paramètres passés au filtre.
+ *     Un tableau à 2 éléments. Le premier (string) indique le nom du
+ *     filtre de traitement demandé (par exemple : image_reduire) ; le
+ *     second (array) est lui-même un tableau reprenant la valeur de $img
+ *     et chacun des paramètres passés au filtre.
  * @param bool $find_in_path
- * 		false (par défaut) indique que l'on travaille sur un fichier
- * 		temporaire (.src) ; true, sur un fichier définitif déjà existant.
+ *     false (par défaut) indique que l'on travaille sur un fichier
+ *     temporaire (.src) ; true, sur un fichier définitif déjà existant.
  * @return bool|string|array
- * 		false si pas de tag <img,
- * 		    si l'extension n'existe pas,
- * 		    si le fichier source n'existe pas,
- * 		    si les dimensions de la source ne sont pas accessibles,
- * 		    si le fichier temporaire n'existe pas,
- * 		    si la fonction _imagecreatefrom{extension} n'existe pas ;
- * 		"" (chaîne vide) si le fichier source est distant et n'a pas
- * 		    réussi à être copié sur le serveur ;
- * 		l'appel à la fonction pipeline image_preparer_filtre.
+ *
+ *     - false si pas de tag `<img`,
+ *       -   si l'extension n'existe pas,
+ *       -   si le fichier source n'existe pas,
+ *       -   si les dimensions de la source ne sont pas accessibles,
+ *       -   si le fichier temporaire n'existe pas,
+ *       -   si la fonction `_imagecreatefrom{extension}` n'existe pas ;
+ *     - "" (chaîne vide) si le fichier source est distant et n'a pas
+ *       réussi à être copié sur le serveur ;
+ *     - l'appel à la fonction pipeline `image_preparer_filtre`.
  */
 function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL, $find_in_path = false) {
 	static $images_recalcul = array();
@@ -148,7 +153,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$fichier = $source;
 	}
 
-	$terminaison_dest = "";
+	$terminaison = $terminaison_dest = "";
 	if (preg_match(",\.(gif|jpe?g|png)($|[?]),i", $fichier, $regs)) {
 		$terminaison = strtolower($regs[1]);
 		$terminaison_dest = $terminaison;
@@ -298,13 +303,14 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 /**
  * Crée une image depuis un fichier ou une URL
+ * 
  * Utilise les fonctions spécifiques GD.
  *
  * @param string $filename
- * 		Le path vers l'image à traiter (par exemple : IMG/distant/jpg/image.jpg
- * 		ou local/cache-vignettes/L180xH51/image.jpg).
+ *     Le path vers l'image à traiter (par exemple : IMG/distant/jpg/image.jpg
+ *     ou local/cache-vignettes/L180xH51/image.jpg).
  * @return ressource
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  */
 function _imagecreatefromjpeg($filename){
 	$img = @imagecreatefromjpeg($filename);
@@ -317,14 +323,15 @@ function _imagecreatefromjpeg($filename){
 }
 
 /**
- * Crée une image depuis un fichier ou une URL
+ * Crée une image depuis un fichier ou une URL (au format png)
+ * 
  * Utilise les fonctions spécifiques GD.
  *
  * @param string $filename
- * 		Le path vers l'image à traiter (par exemple : IMG/distant/png/image.png
- * 		ou local/cache-vignettes/L180xH51/image.png).
+ *     Le path vers l'image à traiter (par exemple : IMG/distant/png/image.png
+ *     ou local/cache-vignettes/L180xH51/image.png).
  * @return ressource
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  */
 function _imagecreatefrompng($filename){
 	$img = @imagecreatefrompng($filename);
@@ -337,14 +344,15 @@ function _imagecreatefrompng($filename){
 }
 
 /**
- * Crée une image depuis un fichier ou une URL
+ * Crée une image depuis un fichier ou une URL (au format gif)
+ * 
  * Utilise les fonctions spécifiques GD.
  *
  * @param string $filename
- * 		Le path vers l'image à traiter (par exemple : IMG/distant/gif/image.gif
- * 		ou local/cache-vignettes/L180xH51/image.gif).
+ *     Le path vers l'image à traiter (par exemple : IMG/distant/gif/image.gif
+ *     ou local/cache-vignettes/L180xH51/image.gif).
  * @return ressource
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  */
 function _imagecreatefromgif($filename){
 	$img = @imagecreatefromgif($filename);
@@ -358,15 +366,17 @@ function _imagecreatefromgif($filename){
 
 /**
  * Affiche ou sauvegarde une image au format PNG
+ * 
  * Utilise les fonctions spécifiques GD.
  *
  * @param ressource $img
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  * @param string $fichier
- * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.png).
+ *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.png).
  * @return bool
- * 		false si l'image créée a une largeur nulle ou n'existe pas ;
- * 		true si une image est bien retournée.
+ *
+ *     - false si l'image créée a une largeur nulle ou n'existe pas ;
+ *     - true si une image est bien retournée.
  */
 function _image_imagepng($img, $fichier) {
 	if (!function_exists('imagepng')) return false;
@@ -385,15 +395,17 @@ function _image_imagepng($img, $fichier) {
 
 /**
  * Affiche ou sauvegarde une image au format GIF
+ *
  * Utilise les fonctions spécifiques GD.
  *
  * @param ressource $img
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  * @param string $fichier
- * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.gif).
+ *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.gif).
  * @return bool
- * 		false si l'image créée a une largeur nulle ou n'existe pas ;
- * 		true si une image est bien retournée.
+ * 
+ *     - false si l'image créée a une largeur nulle ou n'existe pas ;
+ *     - true si une image est bien retournée.
  */
 function _image_imagegif($img,$fichier) {
 	if  (!function_exists('imagegif')) return false;
@@ -412,20 +424,22 @@ function _image_imagegif($img,$fichier) {
 
 /**
  * Affiche ou sauvegarde une image au format JPG
+ *
  * Utilise les fonctions spécifiques GD.
  *
  * @param ressource $img
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  * @param string $fichier
- * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
+ *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
  * @param string $qualite
- * 		Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
- * 		fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
- * 		valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
- * 		mes_options.php).
+ *     Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
+ *     fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
+ *     valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
+ *     mes_options.php).
  * @return bool
- * 		false si l'image créée a une largeur nulle ou n'existe pas ;
- * 		true si une image est bien retournée.
+ * 
+ *     - false si l'image créée a une largeur nulle ou n'existe pas ;
+ *     - true si une image est bien retournée.
  */
 function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
 	if (!function_exists('imagejpeg')) return false;
@@ -445,14 +459,15 @@ function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
 
 /**
  * Crée un fichier-image au format ICO
+ * 
  * Utilise les fonctions de la classe phpthumb_functions.
  *
  * @param ressource $img
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  * @param string $fichier
- * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
+ *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
  * @return bool
- * 		true si le fichier a bien été créé ; false sinon.
+ *     true si le fichier a bien été créé ; false sinon.
  */
 function _image_imageico($img, $fichier) {
 	$gd_image_array = array($img);
@@ -462,23 +477,25 @@ function _image_imageico($img, $fichier) {
 
 /**
  * Finalise le traitement GD
+ * 
  * Crée un fichier_image temporaire .src ou vérifie que le fichier_image
  * définitif a bien été créé.
  *
  * @param ressource $img
- * 		Une ressource de type Image GD.
+ *     Une ressource de type Image GD.
  * @param array $valeurs
- * 		Un tableau des informations (tailles, traitement, path...) accompagnant
- * 		l'image.
+ *     Un tableau des informations (tailles, traitement, path...) accompagnant
+ *    l'image.
  * @param string $qualite
- * 		N'est utilisé que pour les images jpg.
- * 		Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
- * 		fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
- * 		valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
- * 		mes_options.php).
+ *     N'est utilisé que pour les images jpg.
+ *     Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
+ *     fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
+ *     valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
+ *     mes_options.php).
  * @return bool
- * 		true si le traitement GD s'est bien finalisé ;
- * 		false sinon.
+ * 
+ *     - true si le traitement GD s'est bien finalisé ;
+ *     - false sinon.
  */
 function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 	$fonction = "_image_image".$valeurs['format_dest'];
@@ -502,7 +519,13 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 	return $ret;
 }
 
-// http://doc.spip.org/@reconstruire_image_intermediaire
+/**
+ * Reconstruit une image à partir des sources de contrôle de son ancienne
+ * construction
+ *
+ * @param string $fichier_manquant
+ *     Chemin vers le fichier manquant
+**/
 function reconstruire_image_intermediaire($fichier_manquant){
 	$reconstruire = array();
 	$fichier = $fichier_manquant;
@@ -526,7 +549,22 @@ function reconstruire_image_intermediaire($fichier_manquant){
 	ramasse_miettes($fichier_manquant);
 }
 
-// http://doc.spip.org/@ramasse_miettes
+/**
+ * Indique qu'un fichier d'image calculé est à conserver
+ *
+ * Permet de rendre une image définitive et de supprimer les images
+ * intermédiaires à son calcul.
+ * 
+ * Supprime le fichier de contrôle de l’image cible (le $fichier.src)
+ * ce qui indique que l'image est définitive.
+ * 
+ * Remonte ensuite la chaîne des fichiers de contrôle pour supprimer
+ * les images temporaires (mais laisse les fichiers de contrôle permettant
+ * de les reconstruire).
+ *
+ * @param string $fichier
+ *     Chemin du fichier d'image calculé
+**/
 function ramasse_miettes($fichier){
 	if (!lire_fichier($src = "$fichier.src",$source) 
 		OR !$valeurs=unserialize($source)) return;
@@ -544,7 +582,29 @@ function ramasse_miettes($fichier){
 	}
 }
 
-// http://doc.spip.org/@image_graver
+
+/**
+ * Clôture une série de filtres d'images 
+ *
+ * Ce filtre est automatiquement appelé à la fin d'une série de filtres
+ * d'images dans un squelette.
+ * 
+ * @filtre image_graver
+ * @link http://doc.spip.org/@image_graver
+ * 
+ * @uses reconstruire_image_intermediaire()
+ *     Si l'image finale a déjà été supprimée car considérée comme temporaire
+ *     par une autre série de filtres images débutant pareil
+ * @uses ramasse_miettes()
+ *     Pour déclarer l'image définitive et nettoyer les images intermédiaires.
+ *
+ * @pipeline_appel post_image_filtrer
+ * 
+ * @param string $img
+ *     Code HTML de l'image
+ * @return string
+ *     Code HTML de l'image
+**/
 function image_graver($img){
 	// appeler le filtre post_image_filtrer qui permet de faire
 	// des traitements auto a la fin d'une serie de filtres
@@ -997,14 +1057,15 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		return $img;
 }
 
-//
-// Produire des fichiers au format .ico
-// avec du code recupere de :
-//
-//////////////////////////////////////////////////////////////
-///  phpThumb() by James Heinrich <info@silisoftware.com>   //
-//        available at http://phpthumb.sourceforge.net     ///
-//////////////////////////////////////////////////////////////
+
+/**
+ * Produire des fichiers au format .ico
+ *
+ * Avec du code récupéré de phpThumb()
+ *
+ * @author James Heinrich <info@silisoftware.com>
+ * @link http://phpthumb.sourceforge.net
+ */
 class phpthumb_functions {
 // http://doc.spip.org/@GetPixelColor
 	function GetPixelColor(&$img, $x, $y) {
