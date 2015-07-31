@@ -54,6 +54,43 @@ function supprimer_caracteres_illegaux($texte) {
 	return strtr($texte, $from, $to);
 }
 
+// Corrige les caracteres degoutants utilises par les Windozeries
+function corriger_caracteres_windows($texte) {
+	static $trans;
+	if (!$trans) {
+		// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
+		$trans['iso-8859-1'] = array(
+			chr(146) => "'",
+			chr(180) => "'",
+			chr(147) => '&#8220;',
+			chr(148) => '&#8221;',
+			chr(150) => '-',
+			chr(151) => '-',
+			chr(133) => '...'
+		);
+		$trans['utf-8'] = array(
+			chr(194).chr(146) => "'",
+			chr(194).chr(180) => "'",
+			chr(194).chr(147) => '&#8220;',
+			chr(194).chr(148) => '&#8221;',
+			chr(194).chr(150) => '-',
+			chr(194).chr(151) => '-',
+			chr(194).chr(133) => '...'
+		);
+	}
+	$charset = lire_meta('charset');
+	if (!$trans[$charset]) return $texte;
+	return strtr($texte, $trans[$charset]);
+}
+
+// Supprimer caracteres windows et les caracteres de controle ILLEGAUX
+function corriger_caracteres ($texte) {
+	$texte = corriger_caracteres_windows($texte);
+	$texte = supprimer_caracteres_illegaux($texte);
+	return $texte;
+}
+
+
 // Nettoyer les backend
 function texte_backend($texte) {
 
@@ -146,37 +183,6 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
 
-// Corrige les caracteres degoutants utilises par les Windozeries
-function corriger_caracteres($texte) {
-	static $trans;
-	if (!$trans) {
-		// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
-		$trans['iso-8859-1'] = array(
-			chr(146) => "'",
-			chr(180) => "'",
-			chr(147) => '&#8220;',
-			chr(148) => '&#8221;',
-			chr(150) => '-',
-			chr(151) => '-',
-			chr(133) => '...'
-		);
-		$trans['utf-8'] = array(
-			chr(194).chr(146) => "'",
-			chr(194).chr(180) => "'",
-			chr(194).chr(147) => '&#8220;',
-			chr(194).chr(148) => '&#8221;',
-			chr(194).chr(150) => '-',
-			chr(194).chr(151) => '-',
-			chr(194).chr(133) => '...'
-		);
-	}
-
-	$texte = supprimer_caracteres_illegaux($texte);
-
-	$charset = lire_meta('charset');
-	if (!$trans[$charset]) return $texte;
-	return strtr($texte, $trans[$charset]);
-}
 
 // Transformer les sauts de paragraphe en simples passages a la ligne
 function PtoBR($texte){
