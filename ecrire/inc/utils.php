@@ -853,7 +853,9 @@ function tester_url_ecrire($nom){
 	// compat skels orthogonaux version precedente
 	elseif (find_in_path('prive/exec/' . $nom . '.html'))
 		return 'fond_monobloc';
-	return charger_fonction($nom,'exec',true)?$nom:'';
+	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
+	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
+	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
 }
 
 // Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
