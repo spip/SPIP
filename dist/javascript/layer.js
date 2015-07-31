@@ -171,6 +171,8 @@ function aff_selection_titre(titre, id, idom, nid)
 	jQuery(t).trigger('change'); // declencher le onchange
 	t=findObj_forcer(idom);
 	t.style.display='none';
+	p = $(t).parents('form');
+	if (p.is('.submit_plongeur')) p.get(p.length-1).submit();
 }
 
 function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
