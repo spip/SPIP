@@ -229,9 +229,9 @@
 <table class="signatures">
 <thead class="structure">
 <tr>
-	<td><:date:></td>
-	<td><:nom:></td>
-	<td><:message:></td>
+	<th><:date:></th>
+	<th><:nom:></th>
+	<th><:message:></th>
 </tr>
 </thead>
 <tbody>]
@@ -239,7 +239,7 @@
 <BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {debut_signatures,30}>
 <tr>
 	<td class="signature-date">[(#DATE|affdate_court)]</td>
-	<td class="signature-nom">#NOM[<br><a href="#URL_SITE">(#NOM_SITE)</a>]</td>
+	<td class="signature-nom">#NOM[ <a href="#URL_SITE">(#NOM_SITE)</a>]</td>
 	[<td class="signature-message">(#MESSAGE)</td>]
 </tr>
 </BOUCLE_signatures>
