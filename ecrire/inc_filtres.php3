@@ -676,7 +676,7 @@ function image_math($tex) {
 	// Regarder dans le repertoire local des images TeX
 	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';
 	if (!@is_dir($dir))
-		@mkdir ($dir);
+		@mkdir ($dir, 0777);
 	$fichier = "$dir/".md5(trim($tex)).'.png';
 
 	if (!@file_exists($fichier)) {
