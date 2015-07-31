@@ -689,6 +689,23 @@ function bonhomme_statut($row) {
 	return $image;
 }
 
+// La couleur du statut
+function puce_statut($statut, $type='article') {
+	switch ($statut) {
+		case 'publie':
+			return 'verte';
+		case 'prepa':
+			return 'blanche';
+		case 'prop':
+			return 'orange';
+		case 'refuse':
+			return 'rouge';
+		case 'poubelle':
+			return 'poubelle';
+	}
+}
+
+
 function afficher_auteurs ($titre_table, $requete) {
 	$tranches = afficher_tranches_requete($requete, 2);
 

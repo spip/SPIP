@@ -92,6 +92,27 @@ $suivi_edito = lire_meta("suivi_edito");
 $reindexer = false;
 
 $ok_nouveau_statut = false;
+
+function terminer_changement_statut() {
+	global $statut_nouv, $statut_ancien, $id_article, $reindexer;
+
+	calculer_rubriques();
+	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_publication($id_article);
+	}
+	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_proposition($id_article);
+	}
+	if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
+
+	if ($reindexer AND (lire_meta('activer_moteur') == 'oui')) {
+		include_ecrire ("inc_index.php3");
+		indexer_article($id_article);
+	}
+}
+
 if ($statut_nouv) {
 	if (acces_rubrique($rubrique_article)) $ok_nouveau_statut = true;
 	else if ($flag_auteur) {
@@ -111,6 +132,14 @@ if ($statut_nouv) {
 		$statut_article = $statut_nouv;
 		$flag_editable = (acces_rubrique($rubrique_article)
 			OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop')));
+
+		if ($methode == 'image') {
+			spip_log ("statut article $id_article : $statut_article");
+			header ("Content-Type: image/gif");
+			readfile ("img_pack/puce-".puce_statut($statut_article).".gif");
+			terminer_changement_statut();
+			exit;
+		}
 	}
 }
 
@@ -707,22 +736,7 @@ echo "<CENTER>";
 // Titre, surtitre, sous-titre
 //
 
-if ($statut_article=='publie') {
-	$logo_statut = "puce-verte.gif";
-}
-else if ($statut_article=='prepa') {
-	$logo_statut = "puce-blanche.gif";
-}
-else if ($statut_article=='prop') {
-	$logo_statut = "puce-orange.gif";
-}
-else if ($statut_article == 'refuse') {
-	$logo_statut = "puce-rouge.gif";
-}
-else if ($statut_article == 'poubelle') {
-	$logo_statut = "puce-poubelle.gif";
-}
-
+$logo_statut = "puce-".puce_statut($statut_article).".gif";
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
@@ -1296,16 +1310,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 				$ret .= "<tr bgcolor='$bgcolor'>";
 				$ret .= "<td width='7'>";
-				if ($statut_trad=='publie')
-					$ret .= "<img src='img_pack/puce-verte.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
-				else if ($statut_trad=='prepa')
-					$ret .= "<img src='img_pack/puce-blanche.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
-				else if ($statut_trad=='prop')
-					$ret .= "<img src='img_pack/puce-orange.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
-				else if ($statut_trad == 'refuse')
-					$ret .= "<img src='img_pack/puce-rouge.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
-				else if ($statut_trad == 'poubelle')
-					$ret .= "<img src='img_pack/puce-poubelle.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+				$ret .= "<img src='img_pack/puce-".puce_statut($statut_trad).".gif' alt='' width='7' height='7' border='0' NAME='statut'>";
 				$ret .= "</td>";
 
 				$ret .= "<td width='12'>";
@@ -1394,12 +1399,12 @@ if ((lire_meta('multi_articles') == 'oui')
 ?>
 <script type='text/javascript'>
 <!--
-function change_bouton(selObj){
+function change_bouton(selObj,urlbase){
 
 	var selection=selObj.options[selObj.selectedIndex].value;
 
 	if (selection=="publie"){
-		document.statut.src="img_pack/puce-verte.gif";
+		document.statut.src=urlbase+;
 	}
 	if (selection=="prepa"){
 		document.statut.src="img_pack/puce-blanche.gif";
@@ -1427,36 +1432,18 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	echo "<B>"._T('texte_article_statut')."</B> ";
 
-	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange='change_bouton(this)'>";
-
+	$statut_url_javascript="\"articles.php3?id_article=$id_article&methode=image&alea=\"+Math.random()+\"&statut_nouv=\"+options[selectedIndex].value";
+	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange='document.statut.src=$statut_url_javascript;'>";
 	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
 	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
 	echo "<OPTION" . mySel("publie", $statut_article) . " style='background-color: #B4E8C5'>"._T('texte_statut_publie')."\n";
 	echo "<OPTION" . mySel("poubelle", $statut_article) . " style='background:url(img_pack/rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n";
 	echo "<OPTION" . mySel("refuse", $statut_article) . " style='background-color: #FFA4A4'>"._T('texte_statut_refuse')."\n";
-
 	echo "</SELECT>";
 
-	echo " \n";
+	echo "<img src='img_pack/puce-".puce_statut($statut_article).".gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 
-	if ($statut_article=='publie') {
-		echo "<img src='img_pack/puce-verte.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
-	}
-	else if ($statut_article=='prepa') {
-		echo "<img src='img_pack/puce-blanche.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
-	}
-	else if ($statut_article=='prop') {
-		echo "<img src='img_pack/puce-orange.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
-	}
-	else if ($statut_article == 'refuse') {
-		echo "<img src='img_pack/puce-rouge.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
-	}
-	else if ($statut_article == 'poubelle') {
-		echo "<img src='img_pack/puce-poubelle.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
-	}
-	echo " \n";
-
-	echo "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
+	echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
 	echo aide ("artstatut");
 	echo "</CENTER>";
 	fin_cadre_relief();
@@ -1623,25 +1610,9 @@ echo "</div>\n";
 fin_page();
 
 
-// choses lentes reportees en fin de page
-@flush();
-
 if ($ok_nouveau_statut) {
-	calculer_rubriques();
-	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_publication($id_article);
-	}
-	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_proposition($id_article);
-	}
-	if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
-}
-
-if ($reindexer AND (lire_meta('activer_moteur') == 'oui')) {
-	include_ecrire ("inc_index.php3");
-	indexer_article($id_article);
+	@flush();
+	terminer_changement_statut();
 }
 
 ?>
