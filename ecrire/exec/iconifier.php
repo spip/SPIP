@@ -35,7 +35,7 @@ function exec_iconifier_args($id, $type, $script, $iframe=false)
 			$droit = autoriser('publierdans','rubrique',$id);
 		elseif ($type == 'id_auteur')
 			$droit = (($id == $connect_id_auteur) OR $connect_toutes_rubriques);
-		elseif ($type == 'id_mot')
+		elseif (in_array($type, array('id_mot', 'id_groupe')))
 			$droit = $connect_toutes_rubriques;
 		else {
 			$table=substr($type, 3) . (($type == 'id_syndic') ? '' : 's');
