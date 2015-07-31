@@ -140,7 +140,7 @@ function verifier_session($change=false) {
 		preg_match(',^[^/]*//[^/]*(.*)/$,',
 			   url_de_base(),
 			   $r);
-		spip_setcookie('spip_session', $cookie,$r[1]);
+		spip_setcookie('spip_session', $cookie,0,$r[1]);
 	  }
 	}
 	return 	$auteur_session['id_auteur'];
