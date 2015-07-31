@@ -641,6 +641,7 @@ Modu orokorrean, orrialde hauetako kudeaketa zure guneko web arduradun nagusiari
 	'titre_image_auteur_supprime' => 'Egile ezabatuta',
 	'titre_image_redacteur' => 'Baimenik gabeko idazlaria',
 	'titre_image_redacteur_02' => 'Idazlaria',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Bisitaria',
 	'titre_joindre_document' => 'Dokumentu bat erantsi',
 	'titre_mots_cles' => 'Gako-hitzak',

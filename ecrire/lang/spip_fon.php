@@ -627,6 +627,7 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'titre_image_auteur_supprime' => 'nyɔwlántɔn ɖê yé sùnsùn',
 	'titre_image_redacteur' => 'nyɔwlántɔn  mà ɖò àcɛ',
 	'titre_image_redacteur_02' => 'nyɔwlántɔn  ',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Jónɔ',
 	'titre_joindre_document' => 'Zé wěmà gɔná ',
 	'titre_mots_cles' => 'gbètákɛn',

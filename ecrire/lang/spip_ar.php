@@ -665,6 +665,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_image_auteur_supprime' => 'مؤلف محذوف',
 	'titre_image_redacteur' => 'محرر دون إذن دخول',
 	'titre_image_redacteur_02' => 'محرر',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'زائر',
 	'titre_joindre_document' => 'إرفاق مستند',
 	'titre_mots_cles' => 'المفاتيح',

@@ -671,6 +671,7 @@ and connect again to the site.
 	'titre_image_auteur_supprime' => 'Автор удален',
 	'titre_image_redacteur' => 'Редактор без доступа',
 	'titre_image_redacteur_02' => 'Редактор',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Посетитель',
 	'titre_joindre_document' => 'ПРИЛОЖИТЬ ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧИ',

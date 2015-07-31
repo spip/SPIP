@@ -663,6 +663,7 @@ a znovu se ke stránkám připojíte.
 	'titre_image_auteur_supprime' => 'Autor odstraněn',
 	'titre_image_redacteur' => 'Redaktor bez přístupu',
 	'titre_image_redacteur_02' => 'Redaktor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Návštěvník',
 	'titre_joindre_document' => 'PŘIPOJIT DOKUMENT',
 	'titre_mots_cles' => 'KLÍČOVÁ SLOVA',

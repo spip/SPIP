@@ -621,6 +621,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'စာရေးသူကို ပယ်ဖျက်ပြီးဖြစ်သည်',
 	'titre_image_redacteur' => 'ဝင်ခွင့်မရှိဘဲနှင့် တည်းဖြတ်နိုင်သူ',
 	'titre_image_redacteur_02' => 'စာတည်း',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'လာလည်သူ',
 	'titre_joindre_document' => 'ပူးတွဲစာ တင်သွင်းရန်',
 	'titre_mots_cles' => 'စကားစု',

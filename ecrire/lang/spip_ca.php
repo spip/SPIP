@@ -643,6 +643,7 @@ i tornar-vos a connectar al lloc.
 	'titre_image_auteur_supprime' => 'Autor/a suprimit/da',
 	'titre_image_redacteur' => 'Redactor/a sense accés',
 	'titre_image_redacteur_02' => 'Redactor/a',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitant',
 	'titre_joindre_document' => 'INTRODUIR UN DOCUMENT',
 	'titre_mots_cles' => 'PARAULES CLAU',

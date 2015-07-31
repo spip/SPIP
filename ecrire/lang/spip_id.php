@@ -666,6 +666,7 @@ dan mengakses situs kembali.
 	'titre_image_auteur_supprime' => 'Penulis dihapus',
 	'titre_image_redacteur' => 'Editor tanpa akses',
 	'titre_image_redacteur_02' => 'Editor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Pengunjung',
 	'titre_joindre_document' => 'LAMPIRKAN SEBUAH DOKUMEN',
 	'titre_mots_cles' => 'KATA-KATA KUNCI',

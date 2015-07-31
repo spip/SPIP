@@ -655,6 +655,7 @@ Próbáljon', # MODIF
 	'titre_image_auteur_supprime' => 'Szerző törölve',
 	'titre_image_redacteur' => 'Hozzáférés nélküli szerző',
 	'titre_image_redacteur_02' => 'Szerző',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vendég',
 	'titre_joindre_document' => 'DOKUMENTUM CSATOLÁSA',
 	'titre_mots_cles' => 'KULCSSZAVAK',
