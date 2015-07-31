@@ -1092,9 +1092,10 @@ function traiter_raccourcis($letexte) {
 		$i = 0;
 		foreach ($matches as $regs) {
 			list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
-			$inserts[++$i] = "<a href=\"$lien\" class=\"$class\">"
-				. typo(supprimer_numero($texte))
-				. "</a>";
+			# ici ibne passer le lien pour traiter [<doc3>->url]
+			$inserts[++$i] = typo("<a href=\"$lien\" class=\"$class\">"
+				. supprimer_numero($texte)
+				. "</a>");
 
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
 				$letexte);
@@ -1107,26 +1108,6 @@ function traiter_raccourcis($letexte) {
 		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
 	}
 
-	// XHTML : remplacer par une <div onclick> le lien
-	// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-	// pas de bonne solution en XHTML pour produire un lien
-	// sur une div (!!)...
-	if (preg_match_all(',(<a [^>]+>)(<div .*)</a>,Uims', $letexte, $regs,
-		PREG_SET_ORDER))
-	foreach ($regs as $r) {
-		if (!strlen($lien = extraire_attribut($r[1], 'href'))) next;
-		$b = $r[2];
-		if (preg_match(',^(<div [^>]*>)(<img[^>]*>)(.*)$,Uims', $b, $m))
-			$b = $m[1].$r[1].$m[2].'</a>'.$m[3];
-		$re = '<div style="cursor:pointer;cursor:hand;" '
-			.'onclick="document.location=\''.$lien
-			.'\'"'
-##			.' href="'.$lien.'"' # href deviendra legal en XHTML2
-			.'>'
-			.$b
-			.'</div>';
-		$letexte = str_replace($r[0], $re, $letexte);
-	}
 
 	//
 	// Tableaux

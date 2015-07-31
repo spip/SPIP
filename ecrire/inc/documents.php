@@ -436,11 +436,37 @@ function inserer_documents($letexte) {
 		else
 			$rempl = integre_image($match[2], $match[4], $type);
 
+		// Temporaire : un pis-aller pour eviter que des paragraphes dans
+		// le descriptif d'un document ne soient doublonnes en <br /> :
+		// le probleme est que propre() est passe deux fois...
+		$rempl = preg_replace(",\n+,", " ", $rempl);
+
+		// XHTML : remplacer par une <div onclick> le lien
+		// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+		// pas de bonne solution en XHTML pour produire un lien
+		// sur une div (!!)...
+		if (substr($rempl, 0, 5) == '<div '
+		AND preg_match(',(<a [^>]+>)'.preg_quote($match[0]).'</a>,Uims',
+		$letexte, $r)) {
+			$lien = extraire_attribut($r[1], 'href');
+			$re = '<div style="cursor:pointer;cursor:hand;" '
+				.'onclick="document.location=\''.$lien
+				.'\'"'
+##				.' href="'.$lien.'"' # href deviendra legal en XHTML2
+				.'>'
+				.$rempl
+				.'</div>';
+			$letexte = str_replace($r[0], $re, $letexte);
+		}
+
+		// cas normal
 		// Installer le document ; les <div> sont suivies de deux \n de maniere
 		// a provoquer un paragraphe a la suite ; les span, non, sinon les liens
 		// [<img|left>->URL] ne fonctionnent pas.
-		$saut = preg_match(',<div ,', $rempl) ? "\n\n" : "";
-		$letexte = str_replace($match[0], $rempl . $saut, $letexte);
+		else {
+			$saut = preg_match(',<div ,', $rempl) ? "\n\n" : "";
+			$letexte = str_replace($match[0], $rempl . $saut, $letexte);
+		}
 	}
 
 	$pile--;
