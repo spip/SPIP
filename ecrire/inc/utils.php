@@ -1070,13 +1070,13 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	define('_DIR_IMG', $pa);
 	define('_DIR_LOGOS', $pa);
-	define('_DIR_IMG_ICONES', $pa . "icones/");
+	define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
 
 	define('_DIR_DUMP', $ti . "dump/");
 	define('_DIR_SESSIONS', $ti . "sessions/");
 	define('_DIR_TRANSFERT', $ti . "upload/");
 	define('_DIR_CACHE', $ti . "cache/");
-	define('_DIR_CACHE_XML', $ti . "cache/xml/");
+	define('_DIR_CACHE_XML', _DIR_CACHE . "xml/");
 	define('_DIR_SKELS', $ti . "cache/skel/");
 	define('_DIR_TMP', $ti);
 
