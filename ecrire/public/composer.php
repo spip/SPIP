@@ -604,13 +604,21 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
-			//$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)" . $sfrom;
-			$afrom[$t][$cle] = (isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)";
+			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
+			$afrom[$t][$cle] = array(
+				(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN",
+				$from[$cle],
+				"AS $cle",
+				"ON (",
+				"$cle.$c",
+				"=",
+				"$t.$carr",
+				")");
 			if (isset($afrom[$cle])){
 				$afrom[$t] = $afrom[$t] + $afrom[$cle];
 				unset($afrom[$cle]);
 			}
-			$equiv[]= $c;
+			$equiv[]= $carr;
 		} else { unset($join[$cledef]);}
 		unset($from[$cle]);
 		$k--;
@@ -618,11 +626,15 @@ function calculer_select ($select = array(), $from = array(),
 
 	if (count($afrom)) {
 		// Regarder si la table principale ne sert finalement a rien comme dans
-		// <BOUCLE1(ARTICLES){id_mot} />#TOTAL_BOUCLE<//B1>
-		// cette optimisation ne peut s'appliquer dans aucune boucle par defaut de SPIP
-		// en raison de where ajoutes sur le statut ou autre par SPIP lui meme.
-		// on desactive ce morceau de code pour le moment
-		/*
+		//<BOUCLE3(MOTS){id_article}{id_mot}> class='on'</BOUCLE3>
+		//<BOUCLE2(MOTS){id_article} />#TOTAL_BOUCLE<//B2>
+		//<BOUCLE5(RUBRIQUES){id_mot}{tout} />#TOTAL_BOUCLE<//B5>
+		// ou dans
+		//<BOUCLE8(HIERARCHIE){id_rubrique}{tout}{type='Squelette'}{inverse}{0,1}{lang_select=non} />#TOTAL_BOUCLE<//B8>
+		// qui comporte plusieurs jointures
+		// cette optimisation ne peut s'appliquer dans aucune boucle articles
+		// en raison de where ajoutes sur le statut par SPIP lui meme.
+		
 	  list($t,$c) = each($from);
 	  reset($from);
 	  $e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
@@ -630,13 +642,17 @@ function calculer_select ($select = array(), $from = array(),
 		 calculer_jointnul($t, $select, $e) OR
 		 calculer_jointnul($t, $join, $e) OR
 		 calculer_jointnul($t, $where, $e) OR
-		 calculer_jointnul($t, $having, $e))) {
+		 calculer_jointnul($t, $having, $e))
+		 && count($afrom[$t])) {
+		 	reset($afrom[$t]);
+		 	list($nt,$nfrom) = each($afrom[$t]);
 	    unset($from[$t]);
-	    // bien garder les espaces pour le strpos ci-dessus
-	    $x = preg_match('/^\s*\w*\s*JOIN\s+(.*?AS\s+(\w+)\s+)ON\s*[(][^.]*[.](\w+)[^)]*[)](.*)$/s', $sfrom, $r);
-	    $sfrom = $r[1].  $r[4];
-	    $e = '/\b' . $t . '\.' . $r[3] .'\b/';
-	    $t = $r[2] . '.' . $r[3];
+	    $from[$nt] = $nfrom[1];
+	    unset($afrom[$t][$nt]);
+	    $afrom[$nt] = $afrom[$t];
+	    unset($afrom[$t]);
+	    $e = '/\b'.preg_quote($nfrom[6]).'\b/';
+	    $t = $nfrom[4];
 	    $select = remplacer_jointnul($t, $select, $e);
 	    $join = remplacer_jointnul($t, $join, $e);
 	    $where = remplacer_jointnul($t, $where, $e);
@@ -644,13 +660,13 @@ function calculer_select ($select = array(), $from = array(),
 	    $groupby = remplacer_jointnul($t, $groupby, $e);
 	    $orderby = remplacer_jointnul($t, $orderby, $e);
 	  }
-	 	// $from[-1] = $sfrom; 
-  	*/
+  	
 	  // reinjecter les jointures dans le from, et dans l'ordre qui va bien
 	  $from_synth = array();
 	  foreach($from as $k=>$v){
 	  	$from_synth[$k]=$from[$k];
 	  	if (isset($afrom[$k])) {
+	  		foreach($afrom[$k] as $kk=>$vv) $afrom[$k][$kk] = implode(' ',$afrom[$k][$kk]);
 	  		$from_synth["$k@"]= implode(' ',$afrom[$k]);
 	  		unset($afrom[$k]);
 	  	}
