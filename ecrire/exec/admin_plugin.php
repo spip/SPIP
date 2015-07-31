@@ -44,10 +44,6 @@ function exec_admin_plugin_dist($retour='') {
 	echo debut_boite_info(true);
 	$s = "";
 	$s .= _T('info_gauche_admin_tech');
-	$s .= "<p><img src='". chemin_image('puce-verte.gif') . "' width='9' height='9' alt='' /> "._T('plugin_etat_stable')."</p>";
-	$s .= "<p><img src='". chemin_image('puce-orange.gif') . "' width='9' height='9' alt='' /> "._T('plugin_etat_test')."</p>";
-	$s .= "<p><img src='". chemin_image('puce-poubelle.gif') . "' width='9' height='9' alt='' /> "._T('plugin_etat_developpement')."</p>";
-	$s .= "<p><img src='". chemin_image('puce-rouge.gif') . "' width='9' height='9' alt='' /> "._T('plugin_etat_experimental')."</p>";
 	echo $s;
 	echo fin_boite_info(true);
 
@@ -63,16 +59,7 @@ function exec_admin_plugin_dist($retour='') {
 		echo fin_cadre_enfonce(true);
 	}
 
-	// Lister les librairies disponibles
-	if ($libs = liste_librairies()) {
-		debut_cadre_enfonce('', '', '', _T('plugin_librairies_installees'));
-		ksort($libs);
-		echo '<dl>';
-		foreach ($libs as $lib => $rep)
-			echo "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
-		echo '</dl>';
-		echo fin_cadre_enfonce(true);
-	}
+	echo afficher_librairies();
 
 	echo debut_droite('plugin', true);
 	
@@ -88,7 +75,7 @@ function exec_admin_plugin_dist($retour='') {
 		echo "<div class='liste_plugins'>";
 		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_T('plugins_liste'),
 		'liste_plugins');
-		echo _T('texte_presente_plugin');
+		echo "<p>"._T('texte_presente_plugin')."</p>";
 
 
 		$sub = "\n<div style='text-align:".$GLOBALS['spip_lang_right']."'>"
@@ -391,15 +378,6 @@ function ligne_plug($plug_file, $actif, $id){
 	$nom = typo($info['nom']);
 
 	$id = substr(md5("aide_$plug_file"),0,8);
-	$puce_etat = array(
-		"dev"=>"<img src='". chemin_image('puce-poubelle.gif') . "' width='9' height='9' alt='"._T('plugin_etat_developpement')."' />",
-		"test"=>"<img src='". chemin_image('puce-orange.gif') . "' width='9' height='9' alt='"._T('plugin_etat_test')."' />",
-		"stable"=>"<img src='". chemin_image('puce-verte.gif') . "' width='9' height='9' alt='"._T('plugin_etat_stable')."' />",
-		"experimental"=>"<img src='". chemin_image('puce-rouge.gif') . "' width='9' height='9' alt='"._T('plugin_etat_experimental')."' />",
-	);
-	
-	if (isset($puce_etat[$etat]))
-	$s .= $puce_etat[$etat]."\n";
 
 	// si $actif vaut -1, c'est actif, et ce n'est pas desactivable (extension)
 	if (!$erreur
@@ -424,5 +402,25 @@ function ligne_plug($plug_file, $actif, $id){
 
 	$s .= "</div>";
 	return $s;
+}
+
+/**
+ * Afficher la liste des librairies presentes
+ * 
+ * @return <type>
+ */
+function afficher_librairies(){
+	$res = "";
+	// Lister les librairies disponibles
+	if ($libs = plugins_liste_librairies()) {
+		$res .= debut_cadre_enfonce('', true, '', _T('plugin_librairies_installees'));
+		ksort($libs);
+		$res .= '<dl>';
+		foreach ($libs as $lib => $rep)
+			$res .= "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
+		$res .= '</dl>';
+		$res .= fin_cadre_enfonce(true);
+	}
+	return $res;
 }
 ?>

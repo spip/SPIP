@@ -77,11 +77,15 @@ function plugin_version_compatible($intervalle,$version){
 }
 
 
-// Faire la liste des librairies disponibles
-// retourne un array ( nom de la lib => repertoire , ... )
 
+/**
+ * Faire la liste des librairies disponibles
+ * retourne un array ( nom de la lib => repertoire , ... )
+ *
+ * @return array
+ */
 // http://doc.spip.org/@liste_librairies
-function liste_librairies() {
+function plugins_liste_librairies() {
 	$libs = array();
 	foreach (array_reverse(creer_chemin()) as $d) {
 		if (is_dir($dir = $d.'lib/')
