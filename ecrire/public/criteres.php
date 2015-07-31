@@ -237,8 +237,22 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  if ($tri[0]->type != 'texte') {
 	      $order = 
 		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
-	      $order =
-		"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
+				$r = $boucle->type_requete;
+				$s = $boucles[$idb]->sql_serveur;
+				if (!$s) $s = 'localhost';
+				$t = $table_des_tables[$r];
+				// pour les tables non Spip
+				if (!$t) $t = $r; else $t = "spip_$t";
+				$desc = $tables_des_serveurs_sql[$s][$t];
+				if (is_array($desc['field'])){
+					$liste_field = implode(',',array_map('spip_abstract_quote',array_keys($desc['field'])));
+		      $order =
+			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$sens):(\$x$sens) ) : '')";
+				}
+				else{
+		      $order =
+			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
+				}
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
