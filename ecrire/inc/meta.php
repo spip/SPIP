@@ -17,10 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function init_metas()
 {
-	// Lire les meta, en cache si disponibles.
-	if (lire_fichier(_FILE_META, $meta))
+	// Lire les meta, en cache si present, valide et lisible
+	if (@filemtime(_FILE_META) AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
-	// si cache absent, le refaire.
+	// sinon le refaire.
 	if (!$GLOBALS['meta']) {
 		if (lire_metas())
 			ecrire_fichier(_FILE_META,
@@ -46,9 +46,9 @@ function lire_metas() {
 
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL) {
+
 	if (!$nom) return;
 	$GLOBALS['meta'][$nom] = $valeur;
-
 	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 	include_spip('base/abstract_sql');
 	$res = sql_fetsel("impt,valeur", 'spip_meta', "nom=" . _q($nom));
@@ -61,12 +61,12 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 		spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
 	} else
 		spip_query("INSERT INTO spip_meta (nom,valeur,impt) VALUES (" .  _q($nom) . "," . _q($valeur) ."," .  _q($importable) . ')');
-	spip_unlink(_FILE_META);
+	@touch(_FILE_META, 0);
 }
 
 // http://doc.spip.org/@effacer_meta
 function effacer_meta($nom) {
 	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
-	spip_unlink(_FILE_META);
+	@touch(_FILE_META,0);
 }
 ?>

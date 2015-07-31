@@ -33,7 +33,7 @@ function enregistre_modif_plugin(){
 	ecrire_plugin_actifs($plugin);
 
 	// Chaque fois que l'on valide des plugins, on memorise la liste de ces plugins comme etant "interessants", avec un score initial, qui sera decremente a chaque tour : ainsi un plugin active pourra reter visible a l'ecran, jusqu'a ce qu'il tombe dans l'oubli.
-	$plugins_interessants = @unserialize(lire_meta('plugins_interessants'));
+	$plugins_interessants = @unserialize($GLOBALS['meta']['plugins_interessants']);
 	if (!is_array($plugins_interessants))
 		$plugins_interessants = array();
 

@@ -60,9 +60,9 @@ function install_etape_4_dist()
 	);
 
 	# maintenant on connait le vrai charset du site s'il est deja configure
-	# sinon par defaut inc/meta reglera _DEFAULT_CHARSET
+	# sinon par defaut lire_meta reglera _DEFAULT_CHARSET
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
-	include_spip('inc/meta');
+
 	lire_metas();
 	if ($login) {
 		include_spip('inc/charsets');

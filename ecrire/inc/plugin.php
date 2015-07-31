@@ -19,7 +19,6 @@ define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
 // besoin de inc_meta
-include_spip('inc/meta');
 include_spip('inc/texte');
 
 // lecture des sous repertoire plugin existants

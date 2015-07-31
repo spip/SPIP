@@ -14,7 +14,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
-include_spip('inc/meta');
 
 # estime la taille moyenne d'un fichier cache, pour ne pas les regarder (10ko)
 define('_TAILLE_MOYENNE_FICHIER_CACHE', 1024 * 10);

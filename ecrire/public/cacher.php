@@ -92,7 +92,6 @@ function cache_valide(&$page, $date) {
 	AND isset($GLOBALS['meta']['date_prochain_postdate'])
 	AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
 		spip_log('Un article post-date invalide le cache');
-		include_spip('inc/meta');
 		include_spip('inc/rubriques');
 		ecrire_meta('derniere_modif', time());
 		calculer_prochain_postdate();

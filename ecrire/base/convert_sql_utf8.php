@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function base_convert_sql_utf8_dist($titre, $reprise=false)
 {
 
-	include_spip('inc/meta');
 	ecrire_meta('convert_sql_utf8','oui','non');
 	echo install_debut_html($titre);
 	

@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
 
 // Fonction a appeler lorsque le statut d'un objet change dans une rubrique
 // ou que la rubrique est déplacee.
@@ -383,7 +382,6 @@ function calculer_prochain_postdate($check= false) {
 		while ($row = sql_fetch($r))
 			publier_branche_rubrique($row['id']);
 	}
-	include_spip('inc/meta');
 	$t = sql_fetch(spip_query("SELECT date FROM spip_articles WHERE statut='publie' AND date > NOW() ORDER BY date LIMIT 1"));
 	
 	if ($t) {

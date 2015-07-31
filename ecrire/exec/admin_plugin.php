@@ -82,7 +82,7 @@ function exec_admin_plugin_dist($retour='') {
 
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
-	$plugins_interessants = @array_keys(unserialize(lire_meta('plugins_interessants')));
+	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
 	if (!is_array($plugins_interessants))
 		$plugins_interessants = array();
 
