@@ -3,7 +3,7 @@
 <div class='spip_encadrer' style='color: black; font-size: 80%; font-weight: normal;'>
 [(#ENV*{texte}|propre)]
 <fieldset style='font-size: 110%; font-weight: bold;'>
-	<legend></legend>
+	<legend><:form_forum_identifiants:></legend>
 	<label>
 		<:form_pet_votre_nom:>
 		<input type="text" class="forml" name="nom_email"
@@ -19,7 +19,7 @@
 <p>
 [(#ENV{site_obli})<:form_pet_votre_site:><br />]
 <fieldset style='font-size: 110%; font-weight: bold;'>
-	<legend></legend>
+	<legend><:forum_lien_hyper:></legend>
 	<label>
 	<:form_pet_nom_site2:><br />
 	<input type="text" class="forml" name="signature_nom_site"
@@ -36,9 +36,9 @@
 (#ENV{message})
 	<br />
 	<fieldset style='font-weight: bold'>
-		<legend></legend>
+		<legend><:form_pet_message_commentaire:></legend>
 		<label>
-		<:form_pet_message_commentaire:><br />
+		<:info_texte_message:><br />
 			<textarea name="message" rows="3"
 			class="forml" cols="20"></textarea>
 		</label>
