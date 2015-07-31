@@ -136,6 +136,7 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Envoyer aux plugins
+	include_spip('inc/modifier'); # temporaire pour eviter un bug
 	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
