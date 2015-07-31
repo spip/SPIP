@@ -24,6 +24,7 @@
  * D'abord les fonctions d'abstractions de SPIP
  * 
  */
+// http://doc.spip.org/@req_sqlite_dist
 function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='', $sqlite_version=''){
 	static $last_connect = array();
 
@@ -111,12 +112,14 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 
 // obsolete, ne plus utiliser
 /*
+// http://doc.spip.org/@spip_query_db
 function spip_query_db($query, $serveur='',$requeter=true) {
 	return spip_sqlite_query($query, $serveur);
 }
 */
 
 // Fonction de requete generale, munie d'une trace a la demande
+// http://doc.spip.org/@spip_sqlite_query
 function spip_sqlite_query($query, $serveur='',$requeter=true) {
 #spip_log("spip_sqlite_query() > $query");
 	_sqlite_init();
@@ -130,6 +133,7 @@ function spip_sqlite_query($query, $serveur='',$requeter=true) {
 
 /* ordre alphabetique pour les autres */
 
+// http://doc.spip.org/@spip_sqlite_alter
 function spip_sqlite_alter($query, $serveur='',$requeter=true){
 
 	$query = _sqlite_remplacements_definitions_table($query);
@@ -274,6 +278,7 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 
 
 // Fonction de creation d'une table SQL nommee $nom
+// http://doc.spip.org/@spip_sqlite_create
 function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
 	$query = _sqlite_requete_create($nom, $champs, $cles, $autoinc, $temporary, $ifnotexists=true, $serveur, $requeter);
 	if (!$query) return false;
@@ -284,6 +289,7 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 // en PDO/sqlite3, il faut calculer le count par une requete count(*)
 // pour les resultats de SELECT
 // cela est fait sans spip_sqlite_query()
+// http://doc.spip.org/@spip_sqlite_count
 function spip_sqlite_count($r, $serveur='',$requeter=true) {
 	if (!$r) return 0;
 		
@@ -302,6 +308,7 @@ function spip_sqlite_count($r, $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_countsel
 function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', $limit = '', $sousrequete = '', $having = array(), $serveur='',$requeter=true) {
 	$r = spip_sqlite_select('COUNT(*)', $from, $where,$groupby, '', $limit,
 			$having, $serveur, $requeter);
@@ -319,6 +326,7 @@ function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', 
 
 
 
+// http://doc.spip.org/@spip_sqlite_delete
 function spip_sqlite_delete($table, $where='', $serveur='',$requeter=true) {
 	return spip_sqlite_query(
 			  _sqlite_calculer_expression('DELETE FROM', $table, ',')
@@ -327,6 +335,7 @@ function spip_sqlite_delete($table, $where='', $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_drop_table
 function spip_sqlite_drop_table($table, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
 	
@@ -341,6 +350,7 @@ function spip_sqlite_drop_table($table, $exist='', $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_error
 function spip_sqlite_error($query='', $serveur='',$requeter=true) {
 	$link  = _sqlite_link($serveur);
 	
@@ -361,6 +371,7 @@ function spip_sqlite_error($query='', $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_errno
 function spip_sqlite_errno($serveur='',$requeter=true) {
 	$link  = _sqlite_link($serveur);
 	
@@ -379,6 +390,7 @@ function spip_sqlite_errno($serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_explain
 function spip_sqlite_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 
@@ -394,6 +406,7 @@ function spip_sqlite_explain($query, $serveur='',$requeter=true){
 }
 
 
+// http://doc.spip.org/@spip_sqlite_fetch
 function spip_sqlite_fetch($r, $t='', $serveur='',$requeter=true) {
 
 	$link = _sqlite_link($serveur);
@@ -430,22 +443,26 @@ function spip_sqlite_fetch($r, $t='', $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_free
 function spip_sqlite_free($r, $serveur='',$requeter=true) {
 	//return sqlite_free_result($r);
 }
 
 
+// http://doc.spip.org/@spip_sqlite_get_charset
 function spip_sqlite_get_charset($charset=array(), $serveur='',$requeter=true){
 	//$c = !$charset ? '' : (" LIKE "._q($charset['charset']));
 	//return spip_sqlite_fetch(sqlite_query(_sqlite_link($serveur), "SHOW CHARACTER SET$c"), NULL, $serveur);
 }
 
 
+// http://doc.spip.org/@spip_sqlite_hex
 function spip_sqlite_hex($v){
 	return "0x" . $v;
 }
 
 
+// http://doc.spip.org/@spip_sqlite_in
 function spip_sqlite_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	$n = $i = 0;
 	$in_sql ="";
@@ -465,6 +482,7 @@ function spip_sqlite_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_insert
 function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -492,6 +510,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 }
 
 
+// http://doc.spip.org/@spip_sqlite_insertq
 function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
@@ -509,6 +528,7 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 
 
 
+// http://doc.spip.org/@spip_sqlite_insertq_multi
 function spip_sqlite_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 	foreach ($tab_couples as $couples) {
 		$retour = spip_sqlite_insertq($table, $couples, $desc, $serveur, $requeter);
@@ -519,6 +539,7 @@ function spip_sqlite_insertq_multi($table, $tab_couples=array(), $desc=array(), 
 
 
 
+// http://doc.spip.org/@spip_sqlite_listdbs
 function spip_sqlite_listdbs($serveur='',$requeter=true) {
 	_sqlite_init();
 	
@@ -542,6 +563,7 @@ function spip_sqlite_listdbs($serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_multi
 function spip_sqlite_multi ($objet, $lang) {
 	$r = "PREG_REPLACE("
 	  . $objet
@@ -552,6 +574,7 @@ function spip_sqlite_multi ($objet, $lang) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_optimize
 function spip_sqlite_optimize($table, $serveur='',$requeter=true){
 	spip_sqlite_query("OPTIMIZE TABLE ". $table, $serveur); // <- a verifier mais ca doit pas etre ca !
 	return true;
@@ -559,6 +582,7 @@ function spip_sqlite_optimize($table, $serveur='',$requeter=true){
 
 
 // avoir le meme comportement que _q()
+// http://doc.spip.org/@spip_sqlite_quote
 function spip_sqlite_quote($v){
 	if (is_int($v)) return strval($v);
 	if (is_array($v)) return join(",", array_map('spip_sqlite_quote', $v));
@@ -576,11 +600,13 @@ function spip_sqlite_quote($v){
 }
 
 
+// http://doc.spip.org/@spip_sqlite_repair
 function spip_sqlite_repair($table, $serveur='',$requeter=true){
 	return spip_sqlite_query("REPAIR TABLE $table", $serveur, $requeter); // <- ca m'ettonerait aussi ca !
 }
 
 
+// http://doc.spip.org/@spip_sqlite_replace
 function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
@@ -598,6 +624,7 @@ function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$reque
 
 
 
+// http://doc.spip.org/@spip_sqlite_replace_multi
 function spip_sqlite_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	
 	// boucler pour trainter chaque requete independemment
@@ -609,6 +636,7 @@ function spip_sqlite_replace_multi($table, $tab_couples, $desc=array(), $serveur
 }
 
 
+// http://doc.spip.org/@spip_sqlite_select
 function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='', $limit='', $having='', $serveur='',$requeter=true) {	
 	// version() n'est pas connu de sqlite
 	$select = str_replace('version()', 'sqlite_version()',$select);
@@ -642,6 +670,7 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 }
 
 
+// http://doc.spip.org/@spip_sqlite_selectdb
 function spip_sqlite_selectdb($db, $serveur='',$requeter=true) {
 	_sqlite_init();
 
@@ -666,17 +695,20 @@ function spip_sqlite_selectdb($db, $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_sqlite_set_charset
 function spip_sqlite_set_charset($charset, $serveur='',$requeter=true){
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
 	# return spip_sqlite_query("SET NAMES ". spip_sqlite_quote($charset), $serveur); //<-- Passe pas !
 }
 
 
+// http://doc.spip.org/@spip_sqlite_showbase
 function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 	return spip_sqlite_query('SELECT name FROM sqlite_master WHERE type LIKE "'.$match.'"', $serveur, $requeter);
 }
 
 
+// http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 
 	$query = 
@@ -726,6 +758,7 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 }
 
 
+// http://doc.spip.org/@spip_sqlite_update
 function spip_sqlite_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
@@ -742,6 +775,7 @@ function spip_sqlite_update($table, $champs, $where='', $desc='', $serveur='',$r
 }
 
 
+// http://doc.spip.org/@spip_sqlite_updateq
 function spip_sqlite_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$champs) return;
@@ -774,6 +808,7 @@ function spip_sqlite_updateq($table, $champs, $where='', $desc=array(), $serveur
 
 
 // fonction pour la premiere connexion a un serveur SQLite
+// http://doc.spip.org/@_sqlite_init
 function _sqlite_init(){
 	if (!defined('_DIR_DB')) define('_DIR_DB', _DIR_ETC . 'bases/');
 	if (!defined('_SQLITE_CHMOD')) define('_SQLITE_CHMOD', _SPIP_CHMOD);
@@ -786,6 +821,7 @@ function _sqlite_init(){
 
 
 // teste la version sqlite du link en cours
+// http://doc.spip.org/@_sqlite_is_version
 function _sqlite_is_version($version='', $link='', $serveur='',$requeter=true){
 	if ($link==='') $link = _sqlite_link($serveur);
 	if (!$link) return false;
@@ -802,6 +838,7 @@ function _sqlite_is_version($version='', $link='', $serveur='',$requeter=true){
 
 // retrouver un link (et definir les fonctions externes sqlite->php)
 // $recharger devient inutile (a supprimer ?)
+// http://doc.spip.org/@_sqlite_link
 function _sqlite_link($serveur = '', $recharger = false){
 	static $charge = array();
 	if ($recharger) $charge[$serveur] = false;
@@ -821,6 +858,7 @@ function _sqlite_link($serveur = '', $recharger = false){
 
 
 // renvoie les bons echappements (pas sur les fonctions now())
+// http://doc.spip.org/@_sqlite_calculer_cite
 function _sqlite_calculer_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
@@ -834,6 +872,7 @@ function _sqlite_calculer_cite($v, $type) {
 
 
 // renvoie grosso modo "$expression join($join, $v)"
+// http://doc.spip.org/@_sqlite_calculer_expression
 function _sqlite_calculer_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
 		return '';
@@ -854,12 +893,14 @@ function _sqlite_calculer_expression($expression, $v, $join = 'AND'){
 
 
 // pour conversion 0+x ? (pas la peine en sqlite)
+// http://doc.spip.org/@_sqlite_calculer_order
 function _sqlite_calculer_order($orderby) {
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
 }
 
 
 // renvoie des 'nom AS alias' 
+// http://doc.spip.org/@_sqlite_calculer_select_as
 function _sqlite_calculer_select_as($args){
 	$res = '';
 	foreach($args as $k => $v) {
@@ -883,6 +924,7 @@ function _sqlite_calculer_select_as($args){
 
 
 // renvoie les bonnes parentheses pour des where imbriquees
+// http://doc.spip.org/@_sqlite_calculer_where
 function _sqlite_calculer_where($v){
 	if (!is_array($v))
 	  return $v ;
@@ -910,6 +952,7 @@ function _sqlite_calculer_where($v){
  * ou, si aucune version, renvoie les versions sqlite dispo 
  * sur ce serveur dans un array
  */
+// http://doc.spip.org/@_sqlite_charger_version
 function _sqlite_charger_version($version=''){
 	$versions = array();
 	
@@ -946,6 +989,7 @@ function _sqlite_charger_version($version=''){
  * 4) renommer la table B en A
  * 
  */
+// http://doc.spip.org/@_sqlite_modifier_table
 function _sqlite_modifier_table($table_origine, $table_destination, $colonne_origine='', $colonne_destination='', $def_col_destination='', $serveur='',$requeter=true){
 	
 	// si les noms de tables sont differents, pas besoin de table temporaire
@@ -1062,6 +1106,7 @@ function _sqlite_modifier_table($table_origine, $table_destination, $colonne_ori
 /*
  * Nom des fonctions
  */
+// http://doc.spip.org/@_sqlite_ref_fonctions
 function _sqlite_ref_fonctions(){
 	$fonctions = array(
 	// tests
@@ -1119,6 +1164,7 @@ function _sqlite_ref_fonctions(){
 
 
 // $query est une requete ou une liste de champs
+// http://doc.spip.org/@_sqlite_remplacements_definitions_table
 function _sqlite_remplacements_definitions_table($query){
 	// quelques remplacements
 	$num = "\s?(\([0-9]*)\)?";
@@ -1139,6 +1185,7 @@ function _sqlite_remplacements_definitions_table($query){
  * Creer la requete pour la creation d'une table
  * retourne la requete pour utilisation par sql_create() et sql_alter()
  */
+// http://doc.spip.org/@_sqlite_requete_create
 function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $_ifnotexists=true, $serveur='',$requeter=true) {
 	$query = $keys = $s = $p = '';
 
@@ -1212,6 +1259,7 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary
  * stocke le resultat pour ne pas faire 
  * de requetes showtable intempestives
  */
+// http://doc.spip.org/@_sqlite_ajouter_champs_timestamp
 function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur=''){
 	static $tables = array();
 	
@@ -1250,6 +1298,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
  * renvoyer la liste des versions sqlite disponibles
  * sur le serveur 
  */
+// http://doc.spip.org/@spip_versions_sqlite
 function spip_versions_sqlite(){
 	return 	_sqlite_charger_version();
 }
@@ -1284,6 +1333,7 @@ class sqlite_traiter_requete{
 	
 	
 	// constructeur
+// http://doc.spip.org/@sqlite_traiter_requete
 	function sqlite_traiter_requete($query, $serveur = ''){
 		$this->query = $query;
 		$this->serveur = $serveur;
@@ -1305,6 +1355,7 @@ class sqlite_traiter_requete{
 	
 	// lancer la requete $this->query,
 	// faire le tracage si demande 
+// http://doc.spip.org/@executer_requete
 	function executer_requete(){
 		$t = $this->tracer ? trace_query_start(): 0;
 //		echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
@@ -1341,6 +1392,7 @@ class sqlite_traiter_requete{
 	// enleve les textes, transforme la requete pour quelle soit
 	// bien interpretee par sqlite, puis remet les textes
 	// la fonction affecte $this->query
+// http://doc.spip.org/@traduire_requete
 	function traduire_requete(){
 		//
 		// 1) Protection des textes en les remplacant par des codes
@@ -1446,12 +1498,14 @@ class sqlite_traiter_requete{
 
 	// les callbacks	
 	// remplacer DATE_ / INTERVAL par DATE...strtotime
+// http://doc.spip.org/@_remplacerDateParTime
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1] == 'ADD')?'+':'-';	
 		return "'".date("Y-m-d H:i:s", strtotime(" $op$matches[2] ".strtolower($matches[3])))."'";
 	}
 
 	// callback ou l'on remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
+// http://doc.spip.org/@_remplacerFieldParCase
 	function _remplacerFieldParCase($matches){
 		$fields = substr($matches[0],6,-1); // ne recuperer que l'interieur X de field(X)
 		$t = explode(',', $fields);
@@ -1467,6 +1521,7 @@ class sqlite_traiter_requete{
 	}
 
 	// callback ou l'on sauve le texte qui est cache dans un tableau $this->textes
+// http://doc.spip.org/@_remplacerTexteParCode
 	function _remplacerTexteParCode($matches){
 		$this->textes[$code = "%@##".count($this->textes)."##@%"] = $matches[1];
 		return $code;	

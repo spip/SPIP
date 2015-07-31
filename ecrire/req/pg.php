@@ -21,7 +21,7 @@ define('_DEFAULT_DB', 'spip');
 // et si ca marche toujours pas, avec "spip" (constante ci-dessus)
 // si ca ne marche toujours pas, echec.
 
-// http://doc.spip.org/@base_db_pg_dist
+// http://doc.spip.org/@req_pg_dist
 function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	static $last_connect = array();
 	charger_php_extension('pgsql');
@@ -473,6 +473,7 @@ function calculer_pg_where($v)
 }
 
 
+// http://doc.spip.org/@calculer_pg_expression
 function calculer_pg_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
 		return '';
@@ -617,6 +618,7 @@ function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$r
 
 
 
+// http://doc.spip.org/@spip_pg_insertq_multi
 function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -743,6 +745,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 }
 
 
+// http://doc.spip.org/@spip_pg_replace_multi
 function spip_pg_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	// boucler pour traiter chaque requete independemment
 	foreach ($tab_couples as $couples){
@@ -798,17 +801,19 @@ function spip_pg_cite($v, $t)
 	}
 }
 
+// http://doc.spip.org/@spip_pg_hex
 function spip_pg_hex($v)
 {
 	return "CAST(x'" . $v . "' as bigint)";
 }
 
+// http://doc.spip.org/@spip_pg_quote
 function spip_pg_quote($v)
 {
 	return _q($v);
 }
 
-// http://doc.spip.org/@calcul_pg_in
+// http://doc.spip.org/@spip_pg_in
 function spip_pg_in($val, $valeurs, $not='', $serveur) {
 //
 // IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
@@ -1007,6 +1012,7 @@ function mysql2pg_type($v)
 }
 
 // Renvoie false si on n'a pas les fonctions pg (pour l'install)
+// http://doc.spip.org/@spip_versions_pg
 function spip_versions_pg(){
 	charger_php_extension('pgsql');
 	return function_exists('pg_connect');	
