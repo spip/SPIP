@@ -20,6 +20,10 @@ include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
+define("_DIR_LOGIN", _DIR_RESTREINT ? "" : "../");
+define("_DIR_LOGED_IN",   _DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS);
+
+
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
@@ -116,9 +120,9 @@ function auth() {
 
 	// Tentative de login echec
 	if ($_GET['bonjour'] == 'oui' AND !$auth_login) {
-		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
+		$link = new Link(_DIR_LOGIN . "spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
-		$url = str_replace('/./', '/', _DIR_RESTREINT_ABS .$clean_link->getUrl());
+		$url = str_replace('/./', '/', _DIR_LOGED_IN .$clean_link->getUrl());
 		$link->addVar('url', $url);
 		redirige_par_entete($link->getUrl());
 		exit;
@@ -126,9 +130,9 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = str_replace('/./', '/',  _DIR_RESTREINT_ABS
+		$url = str_replace('/./', '/',  _DIR_LOGED_IN
 			. $clean_link->getUrl());
-		redirige_par_entete("../spip_login.php3?url=".urlencode($url));
+		redirige_par_entete(_DIR_LOGIN . "spip_login.php3?url=".urlencode($url));
 		exit;
 	}
 
@@ -214,14 +218,17 @@ function auth() {
 		include_ecrire('inc_presentation.php3');
 		include_ecrire('inc_texte.php3');
 		install_debut_html(_T('avis_erreur_connexion'));
-		echo "<br><br><p>"._T('texte_inc_auth_1', array('auth_login' => $auth_login))." <A HREF='../spip_cookie.php3?logout=$auth_login'>".
+		echo "<br><br><p>".
+		  _T('texte_inc_auth_1', array('auth_login' => $auth_login)).
+		  " <a href='" .
+		  _DIR_LOGIN . "spip_cookie.php3?logout=$auth_login'>".
                 _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');
 		install_fin_html();
 		exit;
 	}
 
 	if (!$auth_pass_ok) {
-		redirige_par_entete("../spip_login.php3?var_erreur=pass");
+		redirige_par_entete(_DIR_LOGIN . "spip_login.php3?var_erreur=pass");
 	}
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
