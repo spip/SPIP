@@ -42,6 +42,7 @@ function stats_load_engines() {
 
 function stats_show_keywords($kw_referer, $kw_referer_host) {
 	global $arr_engines;
+	gloabl $flag_utf8_decode;
 	
 	if (sizeof($arr_engines) == 0) {
 		// Charger les moteurs de recherche
@@ -65,8 +66,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			$keywords = ereg('=', $arr_engines[$cnt][1])
 				? ${str_replace('=', '', $arr_engines[$cnt][1])}
 				: $lvm_directory;
-//			if ($kw_referer_host == "Google" && ereg('oe=UTF-8', $query))
-//				$keywords = utf8_decode($keywords);
+			if ($flag_utf8_decode && $kw_referer_host == "Google" && ereg('oe=UTF-8', $query))
+				$keywords = utf8_decode($keywords);
 		}
 	}
 
