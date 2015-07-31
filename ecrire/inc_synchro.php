@@ -166,7 +166,7 @@ echo _T('ical_texte_js').'<p />';
 
 echo propre('<cadre><script type="text/javascript" src="'.
 	    generer_url_ecrire($adresse_site."/distrib") .
-	    '"</script></cadre>');
+	    '"></script></cadre>');
 
 fin_cadre_relief();
 
