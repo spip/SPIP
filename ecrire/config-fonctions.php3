@@ -46,6 +46,12 @@ function afficher_choix_vignette($process) {
 	else
 		$border=0;
 
+	// Ici on va tester les capacites de GD independamment des tests realises
+	// dans les images spip_image -- qui servent neanmoins pour la qualite
+	/* if (function_exists('imageformats')) {
+		
+	} */
+
 	echo "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";

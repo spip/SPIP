@@ -330,6 +330,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			// Choisir le format destination
 			// - on sauve de preference en JPEG (meilleure compression)
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
+			# pas *ecrire*
 			$gd_formats = lire_meta("gd_formats");
 			foreach ($formats_sortie as $fmt) {
 				if (ereg($fmt, $gd_formats)) {
@@ -392,7 +394,7 @@ function inserer_vignette_base($image, $vignette) {
 	$hauteur = $size[1];
 	$type = $size[2];
 
-	if ($type == "2") $format = 1;
+	if ($type == "2") $format = 1;			# spip_types_documents
 	else if ($type == "3") $format = 2;
 	else if ($type == "1") $format = 3;
 	else return;
@@ -401,14 +403,15 @@ function inserer_vignette_base($image, $vignette) {
 
 	spip_log("creation vignette($image) -> $vignette");
 
-	if ($t = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($image)."'"))
-	{
+	if ($t = spip_query("SELECT id_document FROM spip_documents
+	WHERE fichier='".addslashes($image)."'")) {
 		if ($row = spip_fetch_array($t)) {
 			$id_document = $row['id_document'];
 			$id_vignette = spip_abstract_insert("spip_documents", 
-						   "(mode)",
-						   "('vignette')");
-			spip_query("UPDATE spip_documents SET id_vignette=$id_vignette WHERE id_document=$id_document");
+				"(mode)",
+				"('vignette')");
+			spip_query("UPDATE spip_documents
+				SET id_vignette=$id_vignette WHERE id_document=$id_document");
 			spip_query("UPDATE spip_documents SET
 				id_type = '$format',
 				largeur = '$largeur',

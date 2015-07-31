@@ -51,14 +51,15 @@ function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_m
 	AND $id_article
 	AND !$var_preview
 	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-		if (spip_fetch_array(spip_query("SELECT id_article
+		if ($s = spip_query("SELECT id_article
 		FROM spip_articles WHERE statut='publie'
-		AND id_article =".intval($id_article)))) {
+		AND id_article =".intval($id_article))
+		AND spip_fetch_array($s)) {
 			include_local ("inc-stats.php3");
 			$r = afficher_raccourci_stats($id_article);
 			$visites = $r['visites'];
 			$popularite = $r['popularite'];
-			$statistiques = 'statistiques_visites.php3?';
+			$statistiques = 'statistiques_visites.php3?'; # lien si connecte
 		}
 	}
 
@@ -85,7 +86,7 @@ function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_m
 				'id_mot' => $id_mot,
 				'action' => $action,
 				'debug' => $debug,
-				'popularite' => intval($popularite),
+				'popularite' => ceil($popularite),
 				'statistiques' => $statistiques,
 				'visites' => intval($visites),
 				'use_cache' => ($use_cache ? ' *' : ''),
