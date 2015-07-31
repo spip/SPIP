@@ -56,8 +56,7 @@ else {
 			spip_query("UPDATE spip_breves
 				SET id_rubrique=$id_secteur
 				WHERE id_rubrique=$id_rubrique");
-	} else
-		$id_parent = 0;
+	}
 
 	if ($flag_editable) {
 
