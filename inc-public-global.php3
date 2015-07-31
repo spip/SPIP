@@ -77,9 +77,9 @@ function calcule_header_et_page ($fond, $delais) {
 	}
 
 	// est-on admin ?
-	if ($affiche_boutons_admin = (!$flag_preserver
-	AND ($GLOBALS['_COOKIE']['spip_admin']
-	OR $GLOBALS['_COOKIE']['spip_debug'])))
+	if ($affiche_boutons_admin = (
+	(!$flag_preserver AND $GLOBALS['_COOKIE']['spip_admin'])
+	OR $var_mode == 'debug'))
 		include_local(find_in_path('inc-formulaire_admin.php3'));
 
 	$tableau_des_erreurs = array();

@@ -331,7 +331,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($flag_cpt)
 		$init .= "\n	\$compteur_boucle = 0;";
 
-
 	if ($boucle->mode_partie)
 		$init .= calculer_parties($boucle->partie,
 			$boucle->mode_partie,
