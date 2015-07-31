@@ -6,7 +6,7 @@ include_ecrire ("inc_presentation.php3");
 
 utiliser_langue_visiteur();
 
-if (@file_exists("inc_connect.php3")) {
+if (_FILE_CONNECT) {
 	install_debut_html();
 	echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
 
@@ -16,6 +16,7 @@ if (@file_exists("inc_connect.php3")) {
 
 include_ecrire ("inc_base.php3");
 
+define('_FILE_TMP', '_install');
 
 //
 // Etapes de l'installation standard
@@ -29,8 +30,8 @@ if ($etape == 6) {
 	echo "<B>"._T('info_code_acces')."</B>";
 	echo "<P>"._T('info_utilisation_spip');
 
-	include_ecrire ("inc_connect_install.php3");
-
+	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	spip_log(_FILE_CONNECT_INS);
 	include_ecrire ("inc_meta.php3");
 
 	if ($login) {
@@ -62,11 +63,13 @@ if ($etape == 6) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
-	@unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
-	@unlink(_DIR_SESSIONS . 'meta_cache.php3');
-	if (!@rename("inc_connect_install.php3", "inc_connect.php3")) {
-		copy("inc_connect_install.php3", "inc_connect.php3");
-		@unlink("inc_connect_install.php3");
+	unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
+	unlink(_DIR_SESSIONS . 'meta_cache.php3');
+	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
+		    _FILE_CONNECT_INS . _EXTENSION_PHP)) {
+		copy(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, 
+		     _FILE_CONNECT_INS . _EXTENSION_PHP);
+		@unlink(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	}
 
 	echo "<FORM ACTION='index.php3' METHOD='post'>";
@@ -81,44 +84,44 @@ if ($etape == 6) {
 else if ($etape == 5) {
 	install_debut_html();
 
-	include_ecrire ("inc_connect_install.php3");
+	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
-	echo "<P>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
+	echo "<P>\n";
 
 	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
 	echo aide ("install5");
-	echo "<p>"._T('texte_informations_personnelles_2')." ";
+	echo "<p>\n"._T('texte_informations_personnelles_2')." ";
 	echo _T('info_laisser_champs_vides');
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6'>";
 
-	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR></label>";
-	echo "<B>"._T('entree_signature')."</B><BR>";
-	echo _T('entree_nom_pseudo_1')."<BR>";
-	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"$nom\" SIZE='40'><P>";
+	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR />\n</label>";
+	echo "<B>"._T('entree_signature')."</B><BR />\n";
+	echo _T('entree_nom_pseudo_1')."<BR />\n";
+	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"$nom\" SIZE='40'><P>\n";
 
-	echo "<B>"._T('entree_adresse_email')."</B><BR>";
+	echo "<B>"._T('entree_adresse_email')."</B><BR />\n";
 	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"$email\" SIZE='40'></fieldset><P>\n";
 
-	echo "<fieldset><label><B>"._T('entree_identifiants_connexion')."</B><BR></label>";
-	echo "<B>"._T('entree_login')."</B><BR>";
-	echo _T('info_plus_trois_car')."<BR>";
+	echo "<fieldset><label><B>"._T('entree_identifiants_connexion')."</B><BR />\n</label>";
+	echo "<B>"._T('entree_login')."</B><BR />\n";
+	echo _T('info_plus_trois_car')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"$login\" SIZE='40'><P>\n";
 
-	echo "<B>"._T('entree_mot_passe')."</B> <BR>";
-	echo _T('info_plus_cinq_car_2')."<BR>";
+	echo "<B>"._T('entree_mot_passe')."</B> <BR />\n";
+	echo _T('info_plus_cinq_car_2')."<BR />\n";
 	echo "<INPUT TYPE='password' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
 
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
-	echo "<p>";
+	echo "<p>\n";
 
 	if ($flag_ldap AND !$ldap_present) {
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
 		echo "<b>"._T('info_authentification_externe')."</b>";
-		echo "<p>"._T('texte_annuaire_ldap_1');
+		echo "<p>\n"._T('texte_annuaire_ldap_1');
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE=\""._T('bouton_acces_ldap')."\">";
@@ -136,8 +139,8 @@ else if ($etape == 4) {
 	// Necessaire pour appeler les fonctions SQL wrappees
 	include_ecrire("inc_db_mysql.php3");
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
-	echo "<P>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
+	echo "<P>\n";
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
 
@@ -180,11 +183,11 @@ else if ($etape == 4) {
 		$conn .= "@spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
 		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
-		$myFile = fopen("inc_connect_install.php3", "wb");
+		$myFile = fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb");
 		fputs($myFile, $conn);
 		fclose($myFile);
 
-		echo "<B>"._T('info_base_installee')."</B><P>"._T('info_etape_suivante_1');
+		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
@@ -208,21 +211,21 @@ else if ($etape == 3) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
 	echo aide ("install2");
-	echo "<P>";
+	echo "<P>\n";
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
-	echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>";
+	echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>\n";
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$result = @mysql_list_dbs();
 
-	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B><BR></label>";
+	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B><BR />\n</label>";
 
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
 		echo "<B>"._T('texte_choix_base_2')."</B><P> "._T('texte_choix_base_3');
@@ -231,7 +234,7 @@ else if ($etape == 3) {
 		for ($i = 0; $i < $n; $i++) {
 			$table_nom = mysql_dbname($result, $i);
 			$base = "<INPUT NAME=\"choix_db\" VALUE=\"".$table_nom."\" TYPE=Radio id='tab$i'";
-			$base_fin = "><label for='tab$i'>".$table_nom."</label><BR>\n";
+			$base_fin = "><label for='tab$i'>".$table_nom."</label><BR />\n\n";
 			if ($table_nom == $login_db) {
 				$bases = "$base CHECKED$base_fin".$bases;
 				$checked = true;
@@ -250,7 +253,7 @@ else if ($etape == 3) {
 			echo _T('avis_lecture_noms_bases_3');
 			echo "<UL>";
 			echo "<INPUT NAME=\"choix_db\" VALUE=\"".$login_db."\" TYPE=Radio id='stand' CHECKED>";
-			echo "<label for='stand'>".$login_db."</label><BR>\n";
+			echo "<label for='stand'>".$login_db."</label><BR />\n";
 			echo "</UL>";
 			echo _T('info_ou')." ";
 			$checked = true;
@@ -274,7 +277,7 @@ else if ($etape == 2) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
 
 	echo "<!--";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
@@ -307,7 +310,7 @@ else if ($etape == 2) {
 else if ($etape == 1) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
 
 	echo "<P>"._T('texte_connexion_mysql');
 
@@ -318,8 +321,8 @@ else if ($etape == 1) {
 	$pass_db = '';
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	if (@file_exists("inc_connect_install.php3")) {
-		$s = @join('', @file("inc_connect_install.php3"));
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)) {
+		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
 		if (ereg("mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)", $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
@@ -333,16 +336,16 @@ else if ($etape == 1) {
 
 	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2'>";
-	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR></label>";
-	echo _T('entree_base_donnee_2')."<BR>";
+	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR />\n</label>";
+	echo _T('entree_base_donnee_2')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='adresse_db' CLASS='formo' VALUE=\"$adresse_db\" SIZE='40'></fieldset><P>";
 
-	echo "<fieldset><label><B>"._T('entree_login_connexion_1')."</B><BR></label>";
-	echo _T('entree_login_connexion_2')."<BR>";
+	echo "<fieldset><label><B>"._T('entree_login_connexion_1')."</B><BR />\n</label>";
+	echo _T('entree_login_connexion_2')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='login_db' CLASS='formo' VALUE=\"$login_db\" SIZE='40'></fieldset><P>";
 
-	echo "<fieldset><label><B>"._T('entree_mot_passe_1')."</B><BR></label>";
-	echo _T('entree_mot_passe_2')."<BR>";
+	echo "<fieldset><label><B>"._T('entree_mot_passe_1')."</B><BR />\n</label>";
+	echo _T('entree_mot_passe_2')."<BR />\n";
 	echo "<INPUT TYPE='password' NAME='pass_db' CLASS='formo' VALUE=\"$pass_db\" SIZE='40'></fieldset><P>";
 
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
@@ -390,7 +393,7 @@ else if (!$etape) {
 else if ($etape == 'ldap5') {
 	install_debut_html();
 
-	include_ecrire('inc_connect_install.php3');
+	include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	include_ecrire('inc_meta.php3');
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();
@@ -419,17 +422,17 @@ else if ($etape == 'ldap4') {
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
+		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
 		echo "<P>";
 
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
 		echo "</tt>) "._T('avis_chemin_invalide_2');
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
+		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
 		echo "<P>";
 
-		$conn = join('', file("inc_connect_install.php3"));
+		$conn = join('', file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
 		if ($p = strpos($conn, '?'.'>')) 
 			$conn = substr($conn, 0, $p);
 		if (!strpos($conn, 'spip_connect_ldap')) {
@@ -442,21 +445,21 @@ else if ($etape == 'ldap4') {
 			$conn .= "\$GLOBALS['ldap_present'] = true;\n";
 		}
 		$conn .= "?".">";
-		$myFile = fopen("inc_connect_install.php3", "wb");
+		$myFile = fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb");
 		fputs($myFile, $conn);
 		fclose($myFile);
 
 		echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
-		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR>";
+		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR />\n";
 		echo _T('info_statut_utilisateurs_2')." ";
 		echo "<p>";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"6forum\" id='visit'>";
-		echo "<label for='visit'><b>"._T('info_visiteur_1')."</b></label> "._T('info_visiteur_2')."<br>";
+		echo "<label for='visit'><b>"._T('info_visiteur_1')."</b></label> "._T('info_visiteur_2')."<br />\n";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"1comite\" id='redac' CHECKED>";
-		echo "<label for='redac'><b>"._T('info_redacteur_1')."</b></label> "._T('info_redacteur_2')."<br>";
+		echo "<label for='redac'><b>"._T('info_redacteur_1')."</b></label> "._T('info_redacteur_2')."<br />\n";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"0minirezo\" id='admin'>";
-		echo "<label for='admin'><b>"._T('info_administrateur_1')."</b></label> "._T('info_administrateur_2')."<br>";
+		echo "<label for='admin'><b>"._T('info_administrateur_1')."</b></label> "._T('info_administrateur_2')."<br />\n";
 	
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
@@ -469,7 +472,7 @@ else if ($etape == 'ldap4') {
 else if ($etape == 'ldap3') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
 
 	echo "<P>"._T('info_chemin_acces_2');
 
@@ -505,7 +508,7 @@ else if ($etape == 'ldap3') {
 						$checked = true;
 					}
 					echo ">";
-					echo "<label for='tab$n'>".htmlspecialchars($names[$j])."</label><BR>\n";
+					echo "<label for='tab$n'>".htmlspecialchars($names[$j])."</label><BR />\n\n";
 				}
 			}
 		}
@@ -531,7 +534,7 @@ else if ($etape == 'ldap3') {
 else if ($etape == 'ldap2') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
 	echo "<P>";
 
@@ -554,7 +557,7 @@ else if ($etape == 'ldap2') {
 	else {
 		echo "<B>"._T('avis_connexion_ldap_echec_1')."</B>";
 		echo "<P>"._T('avis_connexion_ldap_echec_2');
-		echo "<br>"._T('avis_connexion_ldap_echec_3');
+		echo "<br />\n"._T('avis_connexion_ldap_echec_3');
 	}
 
 	install_fin_html();
@@ -564,7 +567,7 @@ else if ($etape == 'ldap2') {
 else if ($etape == 'ldap1') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
+	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
 	echo "<P>"._T('entree_informations_connexion_ldap');
 
@@ -572,8 +575,8 @@ else if ($etape == 'ldap1') {
 	$port_ldap = 389;
 
 	// Recuperer les anciennes donnees (si presentes)
-	if (@file_exists("inc_connect_install.php3")) {
-		$s = @join('', @file("inc_connect_install.php3"));
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)) {
+		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
 		if (ereg('ldap_connect\("(.*)","(.*)"\)', $s, $regs)) {
 			$adresse_ldap = $regs[1];
 			$port_ldap = $regs[2];
@@ -582,21 +585,21 @@ else if ($etape == 'ldap1') {
 
 	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
-	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR></label>";
-	echo _T('texte_adresse_annuaire_1')."<BR>";
+	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR />\n</label>";
+	echo _T('texte_adresse_annuaire_1')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='adresse_ldap' CLASS='formo' VALUE=\"$adresse_ldap\" SIZE='20'><P>";
 
-	echo "<label><B>"._T('entree_port_annuaire')."</B><BR></label>";
-	echo _T('texte_port_annuaire')."<BR>";
+	echo "<label><B>"._T('entree_port_annuaire')."</B><BR />\n</label>";
+	echo _T('texte_port_annuaire')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"$port_ldap\" SIZE='20'><P></fieldset>";
 
 	echo "<p><fieldset>";
 	echo _T('texte_acces_ldap_anonyme_1')." ";
-	echo "<label><B>"._T('entree_login_ldap')."</B><BR></label>";
-	echo _T('texte_login_ldap_1')."<br>";
+	echo "<label><B>"._T('entree_login_ldap')."</B><BR />\n</label>";
+	echo _T('texte_login_ldap_1')."<br />\n";
 	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
 
-	echo "<label><B>"._T('entree_passe_ldap')."</B><BR></label>";
+	echo "<label><B>"._T('entree_passe_ldap')."</B><BR />\n</label>";
 	echo "<INPUT TYPE='password' NAME='pass_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
 
 	echo "<p><DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";

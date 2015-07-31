@@ -16,6 +16,17 @@ if (defined("_INC_PUBLIC")) {
 else {
 	define("_INC_PUBLIC", "1");
 	include ("ecrire/inc_version.php3");
+
+
+	if (!_FILE_CONNECT) {
+		$db_ok = 0;
+		include_ecrire ("inc_presentation.php3");
+		install_debut_html(_T('info_travaux_titre'));
+		echo "<P>"._T('info_travaux_texte')."</P>";
+		install_fin_html();
+		exit;
+	}
+
 	//
 	// Initialisations
 	//
@@ -71,12 +82,13 @@ else {
 	// demande de debug ?
 	if ($var_debug AND ($code_activation_debug == $var_debug
 		OR $auteur_session['statut'] == '0minirezo'
-	)) {
+			    ))
+ {
 		$recalcul = 'oui';
 		$var_debug = true;
 		spip_log('debug !');
-	} else
-		$var_debug = false;
+			} else
+			   $var_debug = false; 
 
 	// Faut-il preparer les boutons d'admin ?
 	$affiche_boutons_admin = (!$flag_preserver
