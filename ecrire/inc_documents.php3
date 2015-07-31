@@ -752,9 +752,9 @@ entites_html($document['fichier'])."\" />\n";
 					array('largeur_vignette' => $largeur,
 					'hauteur_vignette' => $hauteur));
 			else
-				echo taille_en_octets($taille);
+				echo taille_en_octets($taille) . ' - ';
 
-			echo " - <font size='1' face='arial,helvetica,sans-serif'><font color='333333'>&lt;doc$id_document&gt;</font></font>";
+			echo " <font size='1' face='arial,helvetica,sans-serif'><font color='333333'>&lt;doc$id_document&gt;</font></font>";
 
 			echo "</div>";
 
