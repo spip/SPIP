@@ -12,7 +12,16 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
-if (autoriser_sans_cookie($SCRIPT_NAME))
+//
+// Determiner l'action demandee
+//
+
+if ($_GET['exec'] AND
+preg_match(',^[0-9a-z_]*$,i', $_GET['exec']))
+	$exec = $_GET['exec'];
+ else $exec = $SCRIPT_NAME;
+
+if (autoriser_sans_cookie($exec))
 	unset($GLOBALS['_COOKIE']);
 else {
 	include_ecrire ("inc_session");
@@ -141,16 +150,7 @@ if (!isset($reinstall)) {
  }
 
 
-//
-// Determiner la fonction qui fabriquera la page demandee, et l'appeler
-//
-
-## temporaire en attendant un truc general qui evitera $SCRIPT_NAME
-if ($_GET['page'] AND
-preg_match(',^[0-9a-z_]*$,i', $_GET['page']))
-	$SCRIPT_NAME = $_GET['page'];
-
-$var_f = include_fonction($SCRIPT_NAME);
+$var_f = include_fonction($exec);
 $var_f();
 
 ?>
