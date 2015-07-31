@@ -564,7 +564,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
   leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
   h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
   serveurs&nbsp;: dans ce cas, l\'inscription automatique est
-  impossible.',
+  impossible.</i></blockquote>',
 'info_question_mots_cles' => 'Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?',
 'info_question_proposer_site' => 'Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP&nbsp;?
