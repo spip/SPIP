@@ -175,11 +175,18 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 }
 
 
-// si le champ chapo commence par '=' c'est une redirection.
-// avec un eventuel raccourci Spip
-// si le raccourci a un titre il sera pris comme corps du 302
-
-// http://doc.spip.org/@tester_redirection
+/**
+ * si le champ chapo commence par '=' c'est une redirection.
+ * avec un eventuel raccourci Spip
+ * si le raccourci a un titre il sera pris comme corps du 302
+ *
+ * http://doc.spip.org/@tester_redirection
+ *
+ * @param string $fond
+ * @param array $contexte
+ * @param string $connect
+ * @return array|bool
+ */
 function tester_redirection($fond, $contexte, $connect)
 {
 	if ($fond == 'article'
@@ -188,14 +195,23 @@ function tester_redirection($fond, $contexte, $connect)
 		if ($m[0]=='=') {
 			include_spip('inc/texte');
 			// les navigateurs pataugent si l'URL est vide
-			if ($url = chapo_redirige(substr($m,1), true))
+			if ($url = chapo_redirige(substr($m,1), true)){
+				// passer en url absolue car cette redirection pourra
+				// etre utilisee dans un contexte d'url qui change
+				// y compris url arbo
+				if (!preg_match(',^\w+:,', $url)) {
+					include_spip('inc/filtres_mini');
+					$url = url_absolue($url);
+				}
+				$url = str_replace('&amp;', '&', $url);
 				return array('texte' => "<"
 				. "?php header('Location: "
-				. texte_script(str_replace('&amp;', '&', $url))
+				. texte_script($url)
 				. "'); echo '"
-				.  addslashes($m[1])
-				. "'?" . ">",
+				.  addslashes($url)
+				. "'.\"\n\"?" . ">",
 					'process_ins' => 'php');
+			}
 		}
 	}
 	return false;
