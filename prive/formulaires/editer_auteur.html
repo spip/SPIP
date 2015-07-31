@@ -75,7 +75,7 @@
 		[(#REM) accessibles seulement aux admins non restreints et l'auteur lui-meme ]
 		#SET{ok,0}
 		[(#SET{connecte,[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|oui)]})]
-		[(#ENV{source}|!={spip}|et{#VAL|spip_connect_ldap})
+		[(#ENV{source}|!={spip})
 				#SET{edit_login,0}
 				#SET{edit_pass,0}
 				#SET{ok,1}

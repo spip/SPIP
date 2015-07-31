@@ -1,5 +1,17 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2010                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/actions');
 include_spip('inc/editer');
 
@@ -15,6 +27,8 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $l
 	// forcer la prise en compte du post, sans verifier si c'est bien le meme formulaire,
 	// c'est trop hasardeux selon le contenud de $row
 	$valeurs['_forcer_request'] = true;
+	if (!isset($valeurs['source']))
+		$valeurs['source'] = spip_connect_ldap() ? 'ldap' : 'spip';
 	return $valeurs;
 }
 
