@@ -445,7 +445,7 @@ while($row = spip_fetch_array($result_message)) {
 			afficher_annee(annee($date_heure));
 			echo "</SELECT>\n";
 			
-			echo " &Agrave;&nbsp;<INPUT TYPE='text' CLASS='fondl' NAME='heures' VALUE=\"".heures($date_heure)."\" SIZE='3'>&nbsp;HEURES&nbsp;";
+			echo " - &nbsp;<INPUT TYPE='text' CLASS='fondl' NAME='heures' VALUE=\"".heures($date_heure)."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
 			echo "<INPUT TYPE='text' CLASS='fondl' NAME='minutes' VALUE=\"".minutes($date_heure)."\" SIZE='3'> ";
 
 			echo "</center>";

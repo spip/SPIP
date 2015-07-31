@@ -170,6 +170,7 @@ $GLOBALS['i18n_fr'] = array(
 'date_mois_7' => 'juillet',
 'date_mois_8' => 'ao&ucirc;t',
 'date_mois_9' => 'septembre',
+'date_mot_heures' => 'heures',
 'date_saison_1' => 'hiver',
 'date_saison_2' => 'printemps',
 'date_saison_3' => '&eacute;teacute;',

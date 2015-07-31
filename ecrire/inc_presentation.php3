@@ -911,8 +911,8 @@ function changeclass(objet, myClass)
 }
 //--></script>
 </head>
-<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php
-
+<?php
+	echo "<body text='#000000' bgcolor='#e4e4e4' background='img_pack/degrade.jpg' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'";
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	echo ">";
@@ -1573,7 +1573,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	// choix de la couleur
 	echo "<td align='right'>";
-	echo "<img src='img_pack/barre-couleurs.gif' alt='couleurs' width='70' height='21' border='0' usemap='#map_couleur'>";
+	echo "<img src='img_pack/barre-couleurs.gif' alt='".addslashes(_T('titre_changer_couleur_interface'))."' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";

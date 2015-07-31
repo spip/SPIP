@@ -77,13 +77,13 @@ function forum_abonnement($retour) {
 	else {
 		include_local("inc-login.php3");
 
-		$message_login = propre("Pour participer &agrave;
+		$message_login = _L("Pour participer &agrave;
 		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
 		d'indiquer ci-dessous l'identifiant personnel qui vous a
 		&eacute;t&eacute; fourni. Si vous n'&ecirc;tes pas enregistr&eacute;, vous devez").
 ' <script language="JavaScript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>vous inscrire</a> au pr&eacute;alable.<br>';
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>'._L("vous inscrire </a> au pr&eacute;alable.").'<br>';
 		login('', false, $message_login);
 		return false;
 	} 
@@ -115,7 +115,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
 	
 	if ($forums_publics == "pri") {
-		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
+		$ret.= _L("Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.")."<p>";
 	}
 	
 	// recuperer le titre
@@ -131,7 +131,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		else if ($id_syndic)
 			$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
 		else
-			$titre_select = "SELECT 'Erreur...' AS titre";	
+			$titre_select = "SELECT '".addslashes(_L('Erreur...'))."' AS titre";	
 
 		$res = spip_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
@@ -155,18 +155,18 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$nouveau_document AND $afficher_texte != 'non'){
 			$ret .= "<div class='spip_encadrer'>";
 			if ($afficher_texte != "non"){
-				$ret .= "<font size=4 color='#aaaaaa'><b>".propre($titre)."</b></font>";
-				$ret .= "<p><b><a href='mailto:$email_auteur'>".propre($auteur)."</a></b>";
+				$ret .= "<font size=4 color='#aaaaaa'><b>".typo($titre)."</b></font>";
+				$ret .= "<p><b><a href='mailto:$email_auteur'>".typo($auteur)."</a></b>";
 				$ret .= "<p>".propre($texte)."<p>";
 			}
 			
-			$ret .= "<a href='$url_site'>".propre($nom_site_forum)."</a>";
+			$ret .= "<a href='$url_site'>".typo($nom_site_forum)."</a>";
 	
 	
 			// Verifier mots associes au message	
 			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
 			$result_mots = spip_query($query_mots);
-			if (spip_num_rows($result_mots)>0) $ret .= "<p>Vous avez s&eacute;lectionn&eacute;&nbsp;:";
+			if (spip_num_rows($result_mots)>0) $ret .= "<p>"._L("Vous avez s&eacute;lectionn&eacute;&nbsp;:");
 			while ($row = spip_fetch_array($result_mots)) {
 				$id_mot = $row['id_mot'];
 				$type_mot = $row['type'];
@@ -179,11 +179,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			}
 		
 			if (strlen($texte) < 10 AND !$presence_mots)
-				$ret .= "<p><div align='right'><font color=red><b>Attention&nbsp;!</b> votre message fait moins de dix caract&egrave;res.</font></div>\n";
+				$ret .= "<p><div align='right'><font color=red>"._L("<b>Attention&nbsp;!</b> votre message fait moins de dix caract&egrave;res.")."</font></div>\n";
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
-				$ret .= "<p><div align='right'><font color=red><b>Attention&nbsp;!</b> votre titre fait moins de trois caract&egrave;res.</font></div>\n";
+				$ret .= "<p><div align='right'><font color=red>"._L("<b>Attention&nbsp;!</b> votre titre fait moins de trois caract&egrave;res.")."</font></div>\n";
 			else
-				$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='Message d&eacute;finitif : envoyer au site'></DIV>";
+				$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='"._L("Message d&eacute;finitif : envoyer au site")."'></DIV>";
 	
 			$ret .= "</div>\n<p>";
 		}
@@ -214,7 +214,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\n<INPUT TYPE='hidden' NAME='titre' VALUE=\"$titre\">";
 	}
 	else {
-		$ret .= "\n<div class='spip_encadrer'><B>Titre :</B><BR>";
+		$ret .= "\n<div class='spip_encadrer'><B>"._L("Titre :")."</B><BR>";
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='titre' VALUE=\"$titre\" SIZE='40'></div>";
 	}
 	
@@ -234,9 +234,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	
 	if ($afficher_texte !="non"){
-		$ret .= "\n<p><div class='spip_encadrer'><B>Texte de votre message :</B><BR>";
-		$ret .= "\n(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
-		$ret .= "\n<TEXTAREA NAME='texte' ROWS='12' CLASS='forml' COLS='40' wrap=soft>";
+		$ret .= "\n<p><div class='spip_encadrer'><B>"._L("Texte de votre message :")."</B><BR>\n";
+		$ret .= _L("(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)");
+		$ret .= "<br>\n<TEXTAREA NAME='texte' ROWS='12' CLASS='forml' COLS='40' wrap=soft>";
 		$ret.= $texte;
 		$ret .= "\n</TEXTAREA></div>\n";
 	}
@@ -315,16 +315,16 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 
 	if ($afficher_texte != "non"){
-		$ret .= "\n<p><div class='spip_encadrer'><B>Lien hypertexte</B> (optionnel)<BR>";
-		$ret .= "\n(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
-		$ret .= "\nTitre :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".entites_html($nom_site_forum)."\" SIZE='40'><BR>";
+		$ret .= "\n<p><div class='spip_encadrer'>"._L("<B>Lien hypertexte</B> (optionnel)")."<BR>\n";
+		$ret .= _L("(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)");
+		$ret .= "<br>\n"._L("Titre :");
+		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".entites_html($nom_site_forum)."\" SIZE='40'><BR>";
 
 		if (!$url_site) $url_site = "http://";
-		$ret .= "\nURL :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'></div>";
+		$ret .= "\n"._L("URL :");
+		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'></div>";
 
-		$ret .= "\n<p><div class='spip_encadrer'><B>Qui &ecirc;tes-vous ?</B> (optionnel)<BR>";
+		$ret .= "\n<p><div class='spip_encadrer'>"._L("<B>Qui &ecirc;tes-vous ?</B> (optionnel)")."<BR>";
 
 		$nom_session = $GLOBALS['auteur_session']['nom'];
 		$nom_email = $GLOBALS['auteur_session']['email'];
@@ -332,15 +332,15 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$auteur) $auteur = $nom_session;
 		if (!$email_auteur) $email_auteur = $nom_email;
 
-		$ret .= "\nVotre nom (ou pseudonyme) :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'><BR>";
+		$ret .= "\n"._L("Votre nom (ou pseudonyme) :");
+		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'><BR>\n";
 
-		$ret .= "\nVotre adresse email :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'></div>";
+		$ret .= _L("Votre adresse email :");
+		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'></div>";
 	}
 
-	if ($afficher_texte !="non") $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Voir ce message avant de le poster'></DIV>";
-	else  $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Valider ce choix'></DIV>";
+	if ($afficher_texte !="non") $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='"._L("Voir ce message avant de le poster")."'></DIV>";
+	else  $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='"._L("Valider ce choix")."'></DIV>";
 	
 	$ret .= "</FORM>";
 
@@ -360,7 +360,7 @@ function ajout_forum() {
 	$afficher_texte = $GLOBALS['afficher_texte'];
 	
 	if (!$GLOBALS['db_ok']) {
-		die ("<h4>Probl&egrave;me de base de donn&eacute;es, votre message n'a pas &eacute;t&eacute; enregistr&eacute;.</h4>");
+		die ("<h4>"._L("Probl&egrave;me de base de donn&eacute;es, votre message n'a pas &eacute;t&eacute; enregistr&eacute;.")."</h4>");
 	}
 
 	$texte = addslashes($texte);
@@ -375,8 +375,8 @@ function ajout_forum() {
 		exit;
 	}
 	if (strlen($confirmer) > 0 AND ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024)) {
-		die ("<h4>Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.</h4>
-		Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
+		die ("<h4>"._L("Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.")."</h4>\n" .
+		_L("Cliquez <a href='$retour_forum'>ici</a> pour continuer.")."<p>");
 	}
 
 	unset($where);
@@ -461,12 +461,12 @@ function ajout_forum() {
 			$statut = $auteur_session['statut'];
 
 			if (!$statut OR $statut == '5poubelle') {
-				die ("<h4>Vous n'avez plus acc&egrave;s &agrave; ces forums.</h4>Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
+				die ("<h4>"._L("Vous n'avez plus acc&egrave;s &agrave; ces forums."). "</h4>" . _L("Cliquez <a href='$retour_forum'>ici</a> pour continuer."). "<p>");
 			}
 		}
 		else {
-			die ("<h4>Vous n'&ecirc;tes pas inscrit, ou l'adresse ou le mot de passe sont erron&eacute;s.</h4>
-			Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
+			die ("<h4>"._L("Vous n'&ecirc;tes pas inscrit, ou l'adresse ou le mot de passe sont erron&eacute;s."). "</h4>" .
+			_L("Cliquez <a href='$retour_forum'>ici</a> pour continuer.")."<p>");
 		}
 	}
 
@@ -485,17 +485,17 @@ function ajout_forum() {
 				$adresse_site = lire_meta("adresse_site");
 				$nom_site_spip = lire_meta("nom_site");
 				$url = "$adresse_site/$url";
-				$courr = "(ceci est un message automatique)\n\n";
-				$courr .= "Message poste ";
+				$courr = _L("(ceci est un message automatique)")."\n\n";
+				$parauteur = '';
 				if (strlen($auteur) > 2) {
-					$courr .= "par $auteur ";
-					if ($email_auteur) $courr .= "<$email_auteur> ";
+					$parauteur = " "._L("par $auteur");
+					if ($email_auteur) $parauteur .= " <$email_auteur>";
 				}
-				$courr .= "a la suite de votre article.\n";
-				$courr .= "Ne repondez pas a ce mail mais sur le forum a l'adresse suivante :\n";
+				$courr .= _L("Message poste$parauteur a la suite de votre article.")."\n";
+				$courr .= _L("Ne repondez pas a ce mail mais sur le forum a l'adresse suivante :")."\n";
 				$courr .= "$url\n";
 				$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte))."\n\n$nom_site_forum\n$url_site\n";
-				$sujet = "[$nom_site_spip] [forum] $titre";
+				$sujet = "[$nom_site_spip] ["._L("forum")."] $titre";
 				$query = "SELECT spip_auteurs.* FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article='$id_article' AND spip_auteurs.id_auteur=lien.id_auteur";
 				$result = spip_query($query);
 
