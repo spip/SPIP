@@ -13,10 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'access_interface_graphique' => 'Tam g&ouml;rsel aray&uuml;ze geri d&ouml;n',
+'access_interface_graphique' => 'Tam grafik aray&uuml;ze geri d&ouml;n',
 'access_mode_texte' => 'Basitle&#351;tirilmi&#351; metin aray&uuml;z&uuml;n&uuml; g&ouml;ster',
 'admin_debug' => 'hata ay&#305;kla',
-'admin_modifier_article' => 'Bu metni de&#287;i&#351;tir',
+'admin_modifier_article' => 'Bu makaleyi de&#287;i&#351;tir',
 'admin_modifier_auteur' => 'Bu yazar&#305; de&#287;i&#351;tir',
 'admin_modifier_breve' => 'Bu k&#305;sa haberi de&#287;i&#351;tir',
 'admin_modifier_mot' => 'Bu anahtar s&ouml;zc&uuml;&#287;&uuml; de&#287;i&#351;tir',
@@ -26,35 +26,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'XML analizi',
 'antispam_champ_vide' => 'L&uuml;tfen bu alan&#305; bo&#351; b&#305;rak&#305;n&#305;z&nbsp;:',
 'avis_archive_incorrect' => 'ar&#351;iv dosyas&#305; SPIP dosyas&#305; de&#287;il',
-'avis_archive_invalide' => 'dosya ge&ccedil;erli de&#287;il',
+'avis_archive_invalide' => 'bu ar&#351;iv dosyas&#305; ge&ccedil;erli de&#287;il',
 'avis_attention' => 'D&#304;KKAT&nbsp;!',
-'avis_champ_incorrect_type_objet' => '@type@ tipindeki bir nesne i&ccedil;in @name@ ismi ge&ccedil;ersiz',
+'avis_champ_incorrect_type_objet' => '@type@ tipindeki nesne i&ccedil;in @name@ ismi ge&ccedil;ersiz',
 'avis_colonne_inexistante' => '@col@ isimli s&uuml;tun yok',
 'avis_echec_syndication_01' => 'Haber payla&#351;&#305;m&#305; ba&#351;ar&#305;s&#305;z: girdi&#287;iniz sunucu &ccedil;&ouml;z&uuml;lemedi veya hi&ccedil; bir haber sunmuyor.',
 'avis_echec_syndication_02' => 'Haber payla&#351;&#305;m&#305; ba&#351;ar&#305;s&#305;z: bu sitenin sunucusuna ula&#351;&#305;lamad&#305;.',
 'avis_erreur' => 'Hata: a&#351;a&#287;&#305;daki a&ccedil;&#305;klamaya bak&#305;n&#305;z',
 'avis_erreur_connexion' => 'Ba&#287;lant&#305; hatas&#305;',
 'avis_erreur_cookie' => '&ccedil;erez sorunu',
-'avis_erreur_fonction_contexte' => 'Yaz&#305;l&#305;m hatas&#305;. Bu fonksiyon burada kullan&#305;lmamal&#305;.',
+'avis_erreur_fonction_contexte' => 'Yaz&#305;l&#305;m hatas&#305;. Bu i&#351;lev burada kullan&#305;lmamal&#305;.',
 'avis_erreur_mysql' => 'MySQL hatas&#305;',
-'avis_erreur_sauvegarde' => 'Yedekleme hatas&#305; (@type@ @id_objet@) !',
+'avis_erreur_sauvegarde' => 'Yedeklemede hata (@type@ @id_objet@) !',
 
 
 // B
 'barre_a_accent_grave' => 'A harfinin &uuml;st&uuml;ne aksan ekle (T&uuml;rk&ccedil;ede anlams&#305;z)',
 'barre_aide' => 'Sayfa d&uuml;zenini zenginle&#351;tirmek i&ccedil;in tipografik k&#305;sayollar&#305; kullan&#305;n&#305;z',
 'barre_aide_rac' => '-vide-',
-'barre_e_accent_aigu' => 'E harfinin &uuml;st&uuml;ne aksan ekle (T&uuml;rk&ccedil;ede anlams&#305;z)',
-'barre_eo' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
-'barre_eo_maj' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
+'barre_e_accent_aigu' => 'E harfinin &uuml;st&uuml;ne aksan ekle (T&uuml;rk&ccedil;e\'de anlams&#305;z)',
+'barre_eo' => 'T&uuml;rk&ccedil;e\'de anlams&#305;z',
+'barre_eo_maj' => 'T&uuml;rk&ccedil;e\'de anlams&#305;z',
 'barre_euro' => '&euro; i&#351;aretini girin',
 'barre_gras' => '{{Kal&#305;n}} yaz',
 'barre_guillemets' => '&laquo; T&#305;rnak &raquo; i&ccedil;ine al',
-'barre_guillemets_simples' => '&#147;&#304;kinci bi&ccedil;imde t&#305;rnak” i&ccedil;ine al',
-'barre_intertitre' => '{{{Ba&#351;l&#305;k aral&#305;&#287;&#305;na}}} d&ouml;n&uuml;&#351;t&uuml;r',
+'barre_guillemets_simples' => '&#147;&#304;kinci bi&ccedil;imde t&#305;rnak&#148; i&ccedil;ine al',
+'barre_intertitre' => '{{{Araba&#351;l&#305;k\'a}}} d&ouml;n&uuml;&#351;t&uuml;r',
 'barre_italic' => '{Yana yat&#305;k (italik)} yaz',
-'barre_lien' => '[Ba&#287;lant&#305;ya->http://...] d&ouml;n&uuml;&#351;t&uuml;r',
-'barre_lien_input' => 'L&uuml;tfen ba&#287;lant&#305;n&#305;z&#305;n adresini girin (adresi http://www.adresim.com veya bu sitede bulunan bir metnin numaras&#305; &#351;eklinde girebilirsiniz.',
+'barre_lien' => '[Hipermetin ba&#287;lant&#305;s&#305;na->http://...] d&ouml;n&uuml;&#351;t&uuml;r',
+'barre_lien_input' => 'L&uuml;tfen ba&#287;lant&#305;n&#305;z&#305;n adresini girin (adresi http://www.adresim.com veya bu sitede bulunan bir metnin numaras&#305; &#351;eklinde girebilirsiniz).',
 'barre_note' => '[[Sayfa sonu notuna]] d&ouml;n&uuml;&#351;t&uuml;r',
 'barre_quote' => '<quote>Bir iletiden al&#305;nt&#305; yap</quote>',
 'bouton_ajouter_document' => 'BELGE EKLE',
@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_choisir' => 'Se&ccedil;',
 'bouton_enregistrer' => 'Kaydet',
 'bouton_radio_desactiver_messagerie_interne' => '&#304;&ccedil; iletileri kapat',
-'bouton_radio_envoi_annonces' => 'Yazar a&ccedil;&#305;klamalar&#305;n&#305; yolla',
-'bouton_radio_non_envoi_annonces' => 'A&ccedil;&#305;klama yollama',
+'bouton_radio_envoi_annonces' => 'Yazar duyurular&#305;n&#305; yolla',
+'bouton_radio_non_envoi_annonces' => 'Duyurular&#305; yollama',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Yenilikler listesini g&ouml;nderme',
 'bouton_recharger_page' => 'bu sayfay&#305; yeniden y&uuml;kle',
 'bouton_telecharger' => '&#304;ndir',
@@ -184,15 +184,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' y&uuml;klemeye ger&ccedil;ekten ba&#351;lamak i&ccedil;in',
 'dirs_preliminaire' => '&Ouml;n bilgi : <b>Eri&#351;im haklar&#305;n&#305; ayarlay&#305;n&#305;z</b>',
 'dirs_probleme_droits' => 'Eri&#351;im haklar&#305; sorunu ',
-'dirs_repertoires_absents' => '<b>&#350;u dizinler bulunamad&#305;&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />B&uuml;y&uuml;k k&uuml;&ccedil;&uuml;k harf hatas&#305;na ba&#287;l&#305; olabilir.
-  K&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harflerin yukar&#305;da g&ouml;sterilenlerle uyu&#351;tu&#287;unu kontrol edin
-  e&#287;er uyu&#351;muyorsa FTP program&#305;n&#305;zla hatay&#305; d&uuml;zeltin.
-  <p />Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
-'dirs_repertoires_suivants' => '<b>A&#351;a&#287;&#305;daki dizinlerde yazma izni yoktur&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Bu sorunu &ccedil;&ouml;zmek i&ccedil;in FTP program&#305;n&#305;zla herbir dizine eri&#351;im haklar&#305;n&#305;
-  ayarlay&#305;n. Bu yordam kurulum kitap&ccedil;&#305;&#287;&#305;nda detayl&#305; bi&ccedil;imde a&ccedil;&#305;klanm&#305;&#351;t&#305;r. .
-  <p />Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
+'dirs_repertoires_absents' => '<p><b>&#350;u dizinler bulunamad&#305;&nbsp;: </b></p><ul>@bad_dirs@</ul> </b>
+  <p>B&uuml;y&uuml;k k&uuml;&ccedil;&uuml;k harf hatas&#305;na ba&#287;l&#305; olabilir.
+  Dizinlerin k&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harflerle yaz&#305;l&#305;&#351;lar&#305;n&#305;n yukar&#305;da g&ouml;sterilenlerle uyu&#351;tu&#287;unu kontrol edin;  e&#287;er uyu&#351;muyorsa FTP program&#305;n&#305;zla dizin isimlerini d&uuml;zeltin.</p>
+  <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
+'dirs_repertoires_suivants' => '<p><b>A&#351;a&#287;&#305;daki dizinlere yazma izni yoktur&nbsp;: </b></p><ul>@bad_dirs@.</ul> 
+  <p>Bu sorunu &ccedil;&ouml;zmek i&ccedil;in FTP program&#305;n&#305;zla her bir dizine eri&#351;im haklar&#305;n&#305; d&uuml;zenleyin. Bu yordam, kurulum kitap&ccedil;&#305;&#287;&#305;nda detayl&#305; bi&ccedil;imde a&ccedil;&#305;klanm&#305;&#351;t&#305;r./p> 
+  <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
 
 
 // E
@@ -210,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_bonjour' => 'Merhaba @nom@,',
 'form_forum_email_deja_enregistre' => 'Bu e-posta adresi zaten kay&#305;tl&#305;, kullanmakta oldu&#287;unuz &#351;ifrenizi kullanmaya devam edebilirsiniz.',
 'form_forum_identifiant_mail' => 'Yeni tan&#305;mlay&#305;c&#305;n&#305;z e-posta yoluyla g&ouml;nderildi.',
-'form_forum_identifiants' => 'Ki&#351;isel bilgiler',
+'form_forum_identifiants' => 'Ki&#351;isel tan&#305;mlay&#305;c&#305;lar',
 'form_forum_indiquer_nom_email' => 'Buraya isminizi ve e-posta adresinizi giriniz. Yeni tan&#305;mlay&#305;c&#305;n&#305;z size bir e-posta ile hemen g&ouml;nderilecektir.',
 'form_forum_login' => 'kullan&#305;c&#305; ismi :',
 'form_forum_message_auto' => '(bu otomatik bir iletidir)',
@@ -251,7 +249,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'form_pet_message_commentaire' => 'Bir ileti, bir yorum&nbsp;?',
 'form_pet_nom_site2' => 'Sitenizin ismi',
 'form_pet_probleme_technique' => 'Teknik bir sorun var, imzalar ge&ccedil;ici olarak iptal edildi.',
-'form_pet_signature_pasprise' => '&#304;mzan&#305;z dikkat al&#305;nmad&#305;.',
+'form_pet_signature_pasprise' => '&#304;mzan&#305;z dikkate al&#305;nmad&#305;.',
 'form_pet_signature_validee' => '&#304;mzan&#305;z onayland&#305;. Te&#351;ekk&uuml;rler&nbsp;!',
 'form_pet_site_deja_enregistre' => 'Bu site zaten kay&#305;tl&#305;',
 'form_pet_url_invalide' => 'Belirtti&#287;iniz Url ge&ccedil;erli de&#287;il.',
@@ -273,7 +271,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'forum_acces_refuse' => 'Art&#305;k bu forumlara eri&#351;iminiz yok.',
 'forum_attention_dix_caracteres' => '<b>Dikkat&nbsp;!</b> iletiniz on karakterden k&#305;sa.',
 'forum_attention_trois_caracteres' => '<b>Dikkat&nbsp;!</b> ba&#351;l&#305;&#287;&#305;n&#305;z &uuml;&ccedil; karakterden k&#305;sa.',
-'forum_attention_trop_caracteres' => '<b>Dikkart&nbsp;!</b> mesaj&#305;n&#305;z &ccedil;ok uzun (@compte@ caract&egrave;res)&nbsp;: kaydedilebilmesi i&ccedil;in @max@ karakteri a&#351;mamal&#305;.',
+'forum_attention_trop_caracteres' => '<b>Dikkat&nbsp;!</b> mesaj&#305;n&#305;z &ccedil;ok uzun (@compte@ caract&egrave;res)&nbsp;: kaydedilebilmesi i&ccedil;in @max@ karakteri a&#351;mamal&#305;.',
 'forum_avez_selectionne' => '&#350;unu se&ccedil;tiniz&nbsp;:',
 'forum_cliquer_retour' => 'Devam etmek i&ccedil;in <a href=\'@retour_forum@\'>buraya t&#305;klay&#305;n&#305;z</a>.',
 'forum_forum' => 'forum',
@@ -285,7 +283,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'forum_non_inscrit' => 'Kay&#305;tl&#305; de&#287;ilsiniz veya adresiniz veya &#351;ifreniz hatal&#305;.',
 'forum_page_url' => '(E&#287;er mesaj&#305;n&#305;z Web\'de yay&#305;nlanan bir makaleye, ya da daha fazla bilgi i&ccedil;eren bir sayfaya at&#305;fta bulunuyorsa, l&uuml;tfen buraya sayfan&#305;n ba&#351;l&#305;&#287;&#305;n&#305; ve URL adresini belirtiniz.)',
 'forum_par_auteur' => 'yazan @auteur@ ',
-'forum_poste_par' => 'Makalenize ileti @parauteur@ g&ouml;nderildi.',
+'forum_poste_par' => 'Makalenize @parauteur@ ileti g&ouml;nderildi.',
 'forum_probleme_database' => 'Veritaban&#305; sorunu, mesaj&#305;n&#305;z kaydedilemedi.',
 'forum_qui_etes_vous' => '<b>Sizi tan&#305;yal&#305;m ?</b> (se&ccedil;imlik)',
 'forum_texte' => '&#304;letinizin metni :',
@@ -316,7 +314,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_breves' => 'K&#305;sa haberler',
 'icone_brouteur' => 'H&#305;zl&#305; gezinti',
 'icone_calendrier_messagerie' => '-vide-',
-'icone_configuration_site' => 'Konfig&uuml;rasyon',
+'icone_configuration_site' => 'Yap&#305;land&#305;rma',
 'icone_configurer_site' => 'Sitenizi yap&#305;land&#305;r&#305;n',
 'icone_creer_mot_cle' => 'Yeni bir anahtar s&ouml;zc&uuml;k yarat ve bu makaleye ba&#287;la',
 'icone_creer_nouvel_auteur' => 'Yeni bir yazar olu&#351;tur',
@@ -389,7 +387,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_articles_a_valider' => 'Onaylanacak makaleler',
 'info_articles_proposes' => '&Ouml;nerilen makaleler',
 'info_auteurs_nombre' => 'yazar(lar)&nbsp;:',
-'info_authentification_ftp' => 'Tasdik (FTP ile)',
+'info_authentification_ftp' => 'Onay (FTP ile)',
 'info_bloquer_lien' => 'bu ba&#287;lant&#305;y&#305; engelle',
 'info_breves_02' => 'K&#305;sa haberler',
 'info_breves_2' => 'k&#305;sa haberler',

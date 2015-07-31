@@ -183,12 +183,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <b>Setting up access permissions</b>',
 'dirs_probleme_droits' => 'Problem in access permissions',
-'dirs_repertoires_absents' => '<b>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<MODIF><b>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
   <p />The possible cause is a bad lower or upper case handling.
   Please make sure that the lower and upper case letters of these directories match what is displayed
   above; if they don\'t, rename the directories using your FTP client in order to correct the error.
   <p />Once this is done, you can',
-'dirs_repertoires_suivants' => '<b>The following directories do not have write permission: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<MODIF><b>The following directories do not have write permission: <ul>@bad_dirs@.</ul> </b>
 
   <p />To change this, use your FTP client in order to set access permissions for each
 

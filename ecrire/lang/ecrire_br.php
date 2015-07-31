@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Un degemerour a rankit diskleria&ntilde; a-raok kas ar c\'hemennadenn-ma&ntilde;.',
 'avis_erreur_connexion_mysql' => 'Fazi kennaska&ntilde; MySQL',
 'avis_erreur_version_archive' => '<b>Diwallit! Ar restr @archive@ a glot gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b> Emaoc\'h o vont da zegouezhout dirak diaesamanto&ugrave; bras: riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all. Arrabat gwiria&ntilde; ar goulenn emporzhiadur-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href=\'http://www.spip.net/fr_article1489.html\'>diello&ugrave; SPIP</a>.',
-'avis_espace_interdit' => '<B>Lec\'h difennet</B><p>Staliet eo SPIP dija.',
+'avis_espace_interdit' => '<b>Lec\'h difennet</b><div>Staliet eo SPIP dija.</div>',
 'avis_lecture_noms_bases_1' => 'Ar poellad-stalia&ntilde; n\'en deus ket gallet lenn anvio&ugrave; an diazo&ugrave; titouro&ugrave; staliet.',
 'avis_lecture_noms_bases_2' => 'Pe n\'eus diaz ebet da gaout, pe n\'eo ket aotreet da listenna&ntilde; an diazo&ugrave; evit abego&ugrave; surentez (ar pezh a zegouezh gant meur a voder).',
 'avis_lecture_noms_bases_3' => 'En eil degouezh, eo da gredi&ntilde; e c\'haller implijout un diaz o tougen ho anv login&nbsp;:',
@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <B>@titre_mot@</B> (@type_mot@). Dre ma\'z eo liammet ar ger-se ouzh
 <b>@texte_lie@</b> e rankit kadarnaat ho tiviz&nbsp;:',
 'info_demander_blocage_priori' => 'Goulenn un harza&ntilde; a-raok embann',
-'info_derniere_etape' => 'Prantad diwezha&ntilde; : <B>Echu eo !',
+'info_derniere_etape' => 'Prantad diwezha&ntilde; : Echu eo !',
 'info_derniere_syndication' => 'Sindikadur diwezha&ntilde; al lec\'hienn-ma&ntilde; a zo bet graet d\'an',
 'info_derniers_articles_publies' => 'Ar pennado&ugrave; diwezha&ntilde; bet embannet ganeoc\'h',
 'info_desactiver_forum_public' => 'Chom hep ober gant ar forumo&ugrave; foran. Gallout a raint beza&ntilde; lakaet oberiant war ar pennado&ugrave; dibabet ganeoc\'h, met n\'aint ket en-dro er rummado&ugrave;, er berrskrido&ugrave;,...',

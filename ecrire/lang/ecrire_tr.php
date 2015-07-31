@@ -30,7 +30,7 @@ SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</B> B&uuml;y&uuml;k zorluklarla
  sitenin d&uuml;zg&uuml;n &ccedil;al&#305;&#351;mamas&#305;, vb.
 Bu ithal istemini onaylamay&#305;n.
 <p>Daha fazla bilgi i&ccedil;in <A HREF=\'http://www.spip.net/fr_article1489.html\'>SPIP kullanma k&#305;lavuzuna bak&#305;n.</A> (ge&ccedil;ici bir s&uuml;re frans&#305;zca)',
-'avis_espace_interdit' => '<B>Yasak alan</B><p>SPIP zaten kurulu.</p>',
+'avis_espace_interdit' => '<b>Yasak alan</b><div>SPIP zaten kurulu.</div>',
 'avis_lecture_noms_bases_1' => 'Kurulum yaz&#305;l&#305;m&#305; mevcut veritabanlar&#305;n&#305;n isimlerini okuyamad&#305;.',
 'avis_lecture_noms_bases_2' => 'Ya mevcut veritaban&#305; yok, ya da veritabanlar&#305;n&#305;n listesini almaya yarayan komut g&uuml;venlik nedeniyle kullan&#305;ma kapat&#305;lm&#305;&#351; (bir &ccedil;ok bar&#305;nd&#305;rma &#351;irketinde al&#305;nan bir tedbir).',
 'avis_lecture_noms_bases_3' => '&#304;kinci durumda, b&uuml;y&uuml;k olas&#305;l&#305;kla kullan&#305;c&#305; isminizle ayn&#305; isimde bir veritaban&#305; var&nbsp;:',
@@ -303,7 +303,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_date_referencement' => 'BU S&#304;TEYE ATIFTA BULUNULMA TAR&#304;H&#304;&nbsp;:',
 'info_delet_mots_cles' => '<b>@titre_mot@</b>(@type_mot@) anahtar s&ouml;zc&uuml;&#287;&uuml;n&uuml; silmek istediniz. Bu anahtar s&ouml;zc&uuml;k  
 <b>@texte_lie@<b>\'e ba&#287;l&#305; oldu&#287;undan, bu karar&#305; teyid etmeniz gerekiyor&nbsp;:',
-'info_derniere_etape' => 'Son a&#351;ama : <B>Bitti !',
+'info_derniere_etape' => 'Son a&#351;ama : Bitti !',
 'info_derniere_syndication' => 'Bu sitenin son payla&#351;&#305;m tarihi:',
 'info_derniers_articles_publies' => '&Ccedil;evrimi&ccedil;i yay&#305;nlanan son makaleleriniz',
 'info_desactiver_forum_public' => 'Kamu forumlar&#305;n&#305;n kullan&#305;m&#305;n&#305;n durdurulmas&#305;.
@@ -684,6 +684,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 
 // L
+'les_deux' => 'her ikisi de',
 'lien_ajout_destinataire' => 'Bu al&#305;c&#305;y&#305; ekle',
 'lien_ajouter_auteur' => 'Bu yazar&#305;n ekle',
 'lien_ajouter_participant' => 'Bir kat&#305;l&#305;mc&#305;y&#305; ekle',

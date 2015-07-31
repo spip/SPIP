@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
   informaci&oacute;ns, consulte <A HREF=\'http://www.spip.net/fr_article1489.html\'>
   a documentaci&oacute;n de SPIP</A>.',
-'avis_espace_interdit' => '<B>Espazo prohibido</B></p>SPIP xa est&aacute; instalado.',
+'avis_espace_interdit' => '<B>Espazo prohibido</B><div>SPIP xa est&aacute; instalado.</div>',
 'avis_lecture_noms_bases_1' => 'O programa de instalaci&oacute;n non puido ler os nomes das bases de datos instaladas.',
 'avis_lecture_noms_bases_2' => 'Pode que non haxa ningunha base dispo&ntilde;&iacute;bel, ou que a funci&oacute;n que lista as bases estea desactivada por motivos de seguridade (caso moi frecuente en moitos provedores de servizos).',
 'avis_lecture_noms_bases_3' => 'Na segunda alternativa, &eacute; prob&aacute;bel que unha base co seu nome de identificador poida ser empregada:',
@@ -308,7 +308,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Solicitaches eliminar a palabra chave
 <B>@titre_mot@</B> (@type_mot@). Esta palabra chave est&aacute; ligada a
 <b>@texte_lie@</b>, tes que confirmar a t&uacute;a decisi&oacute;n:',
-'info_derniere_etape' => 'Derradeira etapa: <B>Remataches!',
+'info_derniere_etape' => 'Derradeira etapa: Acabouse!',
 'info_derniere_syndication' => 'A &uacute;ltima afiliaci&oacute;n deste web f&iacute;xose o',
 'info_derniers_articles_publies' => 'Os teus &uacute;ltimos artigos publicados en li&ntilde;a',
 'info_desactiver_forum_public' => 'Desactivar o uso dos foros
