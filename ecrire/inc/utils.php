@@ -476,6 +476,7 @@ function self($amp = '&amp;', $root = false) {
 }
 
 // Indique si on est dans l'espace prive
+// http://doc.spip.org/@test_espace_prive
 function test_espace_prive() {
 	static $prive;
 	if (!isset($prive))
