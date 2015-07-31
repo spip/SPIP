@@ -763,8 +763,8 @@ jQuery.fn.animateAppend = function(callback){
  */
 function parametre_url(url,c,v,sep){
 	// Si l'URL n'est pas une chaine, on ne peut pas travailler dessus et on quitte
-	if (typeof(url) != 'string'){
-		return url;
+	if (typeof(url) == 'undefined'){
+		url = '';
 	}
 	
 	var p;
