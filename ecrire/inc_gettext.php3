@@ -21,11 +21,10 @@ function text_merge($text, $args) {
 // i18n : our own small gettext
 //
 function spip_gettext($text, $args, $lang) {
-	global $i18n;
 	global $dir_ecrire;
 
 	// load the language file
-	if (!$i18n[$lang]) {
+	if (!$GLOBALS["i18n_$lang"]) {
 		if (file_exists($dir_ecrire."i18n/spip_$lang.php3"))
 			include_ecrire ("i18n/spip_$lang.php3");
 		else {
@@ -35,14 +34,14 @@ function spip_gettext($text, $args, $lang) {
 	}
 
 	// get the french text if the translation file is not complete
-	if (!$i18n[$lang][$text]) {
+	if (!$GLOBALS["i18n_$lang"][$text]) {
 		$lang = 'fr';
 		include_ecrire ("i18n/spip_fr.php3");
 	}
 
 	// use the translated text if found
-	if ($i18n[$lang][$text])
-		$text = $i18n[$lang][$text];
+	if ($GLOBALS["i18n_$lang"][$text])
+		$text = $GLOBALS["i18n_$lang"][$text];
 
 	// merge it with the variables
 	return text_merge($text, $args);
