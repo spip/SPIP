@@ -122,6 +122,9 @@ $mysql_rappel_connexion = false;
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
+// faut-il souligner en gris, dans ecrire/articles.php3, les espaces insecables ?
+$activer_revision_nbsp = false;
+
 // gestion des extras (voir ecrire/inc_extra.php3 pour plus d'informations)
 $champs_extra = false;
 $champs_extra_proposes = false;
