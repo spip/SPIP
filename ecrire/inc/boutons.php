@@ -47,15 +47,7 @@ class Bouton {
 function definir_barre_boutons() {
 	global $boutons_admin;
 
-	global $REQUEST_URI, $HTTP_HOST, $adresse_site;
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	if (!$adresse_site) {
-			$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/" . _DIR_RESTREINT_ABS));
-			ecrire_meta("adresse_site", $adresse_site);
-			ecrire_metas();
-	}
-	if (strlen($adresse_site)<10) $adresse_site = _DIR_RACINE;
-
+	global $REQUEST_URI, $HTTP_HOST;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$boutons_admin=array(
@@ -85,8 +77,8 @@ function definir_barre_boutons() {
 					 $urlAide, null, "javascript:window.open('$urlAide', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", 'aide_spip');
 
 	$boutons_admin['visiter']=
-	  new Bouton("visiter-48$spip_lang_rtl.png", 'icone_visiter_site',
-				 "$adresse_site/");
+		new Bouton("visiter-48$spip_lang_rtl.png", 'icone_visiter_site',
+		url_de_base());
 
 	// les sous menu des boutons, que si on est admin
 	if ($GLOBALS['connect_statut'] == '0minirezo'

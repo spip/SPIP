@@ -80,10 +80,17 @@ echo generer_url_post_ecrire('configuration');
 echo "<input type='hidden' name='changer_config' value='oui'>";
 debut_cadre_couleur("racine-site-24.gif");
 
-	$nom_site = entites_html($GLOBALS['meta']["nom_site"]);
+	// initialiser adresse_site au besoin
+	if (strlen($GLOBALS['meta']["adresse_site"])<10) {
+		ecrire_meta('adresse_site', preg_replace(",/$,", "", url_de_base()));
+		ecrire_metas();
+	}
 	$adresse_site = entites_html($GLOBALS['meta']["adresse_site"]);
+
+	$nom_site = entites_html($GLOBALS['meta']["nom_site"]);
 	$email_webmaster = entites_html($GLOBALS['meta']["email_webmaster"]);
 	$descriptif_site = entites_html($GLOBALS['meta']["descriptif_site"]);
+
 
 	debut_cadre_relief("", false, "", _T('info_nom_site').aide ("confnom"));
 	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='forml'>";

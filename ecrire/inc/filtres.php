@@ -1238,8 +1238,7 @@ function url_absolue($url, $base='') {
 	if (strlen($url = trim($url)) == 0)
 		return '';
 	if (!$base)
-		$base=$GLOBALS['meta']['adresse_site'].'/'
-		. (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
+		$base = url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
 	return suivre_lien($base, $url);
 }
 

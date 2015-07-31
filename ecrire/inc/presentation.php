@@ -2103,7 +2103,7 @@ function init_entete($titre, $rubrique, $css='') {
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
-	global $couleur_foncee, $couleur_claire, $adresse_site;
+	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur;
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -2135,7 +2135,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
-		echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
+		echo "<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a>";
 		echo "</ul>";
 
 		return;

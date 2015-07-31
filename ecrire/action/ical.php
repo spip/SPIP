@@ -24,7 +24,7 @@ include_spip('inc/acces');
 
 // http://doc.spip.org/@ligne_uid
 function ligne_uid ($texte) {
-	echo filtrer_ical("UID:$texte @ " . $GLOBALS['meta']["adresse_site"])."\n";
+	echo filtrer_ical("UID:$texte @ " . url_de_base())."\n";
 }
 
 // http://doc.spip.org/@action_ical_dist
@@ -55,9 +55,7 @@ function action_ical_dist()
 	}
 	lang_select($langue_utilisateur);
 	$nom_site = $GLOBALS['meta']["nom_site"];
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	if ($adresse_site && substr($adresse_site,-1) <> '/') 
-	  $adresse_site .= '/';
+	$adresse_site = url_de_base();
 
 	header("Content-Type: text/calendar; charset=utf-8");
 	echo	filtrer_ical ("BEGIN:VCALENDAR"), "\n",

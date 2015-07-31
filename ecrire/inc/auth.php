@@ -183,8 +183,8 @@ function inc_auth_dist() {
 	if (!$_COOKIE['spip_session']) {
 		$var_f = charger_fonction('session', 'inc');
 		if ($session = $var_f($row)) {
-			preg_match(',^[^/]*//[^/]*(.*)$,',
-				   $GLOBALS['meta']['adresse_site'],
+			preg_match(',^[^/]*//[^/]*(.*)/$,',
+				   url_de_base(),
 				   $r);
 			spip_setcookie('spip_session', $session, time() + 3600 * 24 * 14, $r[1]);
 		}
