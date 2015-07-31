@@ -32,13 +32,14 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 			$styles = array('arial2', 'arial1', 'arial1');
 	}
 
-	if ($important)  #debut_cadre_couleur();
-	 echo "<div class='cadre-couleur'><div class='cadre-padding'>";
-
 	$t = affiche_tranche_bandeau($requete, "messagerie-24.gif", $col, $couleur_foncee, "white", $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
 
-	foreach ($t as $v) $messages_vus[$v]= $v;
-	if ($important) echo '</div></div>';#fin_cadre_couleur();
+	if ($t) {
+		if ($important)  #debut_cadre_couleur();
+			echo "<div class='cadre-couleur'><div class='cadre-padding'>";
+		foreach ($t as $v) $messages_vus[$v]= $v;
+		if ($important) echo '</div></div>';#fin_cadre_couleur();
+	}
 }
 
 // http://doc.spip.org/@afficher_message_boucles

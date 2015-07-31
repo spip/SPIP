@@ -399,26 +399,32 @@ switch($op) {
 		include_spip('inc/forum');
 		if ($id = intval($a['id_article'])) {
 			$critere = "statut='publie' AND id_article=$id";
+			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_article($id);
 		}
 		else if ($id = intval($a['id_syndic'])) {
 			$critere = "statut='publie' AND id_syndic=$id";
+			$r = spip_fetch_array(spip_query("SELECT nom_site AS titre FROM spip_syndic WHERE id_article=$id"));
 			$url = generer_url_site($id);
 		}
 		else if ($id = intval($a['id_breve'])) {
 			$critere = "statut='publie' AND id_breve=$id";
+			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_breve($id);
 		}
 		else if ($id = intval($a['id_rubrique'])) {
 			$critere = "statut='publie' AND id_rubrique=$id";
+			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_rubrique($id);
 		}
 		else if ($id = intval($a['id_thread'])) {
 			$critere = "statut='publie' AND id_thread=$id";
+			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_forum($id);
 		}
 		if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
-		$title = _T("ecrire:titre_page_forum_suivi");
+
+		$title = $r['titre'] . ' (' . _T("ecrire:titre_page_forum_suivi") .')';
 		break;
 	# suivi prive des forums
 	case 'forums':
