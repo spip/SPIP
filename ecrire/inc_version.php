@@ -244,14 +244,12 @@ $xml_indent = false;
 
 // Vignettes de previsulation des referers
 // dans les statistiques
-// 3 de trouves, possibilite de switcher
-// - Thumbshots.org: le moins instrusif, quand il n'a pas, il renvoit un pixel vide
-// - Girafa semble le plus complet, bicoz renvoit toujours la page d'accueil; mais avertissement si pas de preview
+// 2 de trouves, possibilite de switcher
 // - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
 //   Pour Alexa, penser a indiquer l'url du site dans l'id.
 //   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
-$source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
-// $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
+// - apercite.fr : on conserve exactement la même expression pour insérer l'url du site
+$source_vignettes = "http://www.apercite.fr/api/apercite/120x90/oui/oui/http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
 $formats_logos =  array ('gif', 'jpg', 'png');
