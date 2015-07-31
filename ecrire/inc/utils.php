@@ -247,8 +247,12 @@ function spip_abstract_quote($arg_sql) {
 // http://doc.spip.org/@_request
 function _request($var) {
 	// set ?
-	if (func_num_args()>1)
-		$_GET[$var] = func_get_arg(1);
+	if (func_num_args()>1) {
+		unset($_GET[$var]); // au cas ou l'on fait _request('truc', NULL);
+		unset($_POST[$var]);
+		if (func_get_arg(1) !== NULL)
+			$_GET[$var] = func_get_arg(1);
+	}
 
 	if (isset($_GET[$var])) $a = $_GET[$var];
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
