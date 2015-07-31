@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	static $infos_tables = null;
 	if (is_null($infos_tables)){
-		$infos_tables = pipeline('declarer_table_objets_sql',array(
+		$infos_tables = pipeline('declarer_tables_objets_sql',array(
 			'spip_articles'=> array(
 				'texte_retour' => 'icone_retour_article',
 				'texte_modifier' => 'icone_modifier_article',
