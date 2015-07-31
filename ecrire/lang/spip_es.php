@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar esta palabra clave',
 'admin_modifier_rubrique' => 'Modificar esta secci&oacute;n',
 'admin_recalculer' => 'Actualizar esta p&aacute;gina',
+'afficher_trad' => 'Publicar las traducciones',
 'alerte_maj_impossible' => '<b>&iexcl;Alerta!</b> La actualizaci&oacute;n de la base MySQL hacia la versi&oacute;n  @version@ es imposible, quiz&aacute; por un problema de derechos de modificaci&oacute;n en la base de datos. Por favor, contacta al administrador de tu hospedaje.',
 'analyse_xml' => 'An&aacute;lisis XML',
 'antispam_champ_vide' => 'Por favor, deje este campo vac&iacute;o&nbsp;:',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'Insertar una A may&uacute;scula con acento grave',
 'barre_aide' => 'Utiliza los atajos tipogr&aacute;ficos para mejorar la paginaci&oacute;n',
+'barre_aide_rac' => '<pLUS_UTILISE>-vacio-',
 'barre_e_accent_aigu' => 'Insertar una E may&uacute;scula con tilde',
 'barre_eo' => 'Insertar una E en la O',
 'barre_eo_maj' => 'Insertar una E en la O may&uacute;scula',
@@ -78,9 +80,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendario por d&iacute;a',
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
+'calendrier_synchro_lien' => '<pLUS_UTILISE><NEW>Obtener el archivo <i>iCal</i>',
 'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
 'calendrier_synchro_public' => 'El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
 'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'choix_couleur_interface' => 'color',
+'choix_interface' => 'Selecci&oacute;n de la interfase',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 'correcte' => 'correcta',
 
@@ -186,14 +191,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <b>Regular los derechos de acceso</b>',
 'dirs_probleme_droits' => 'Problema de derechos de acceso',
-'dirs_repertoires_absents' => '<B>No se pudieron encontrar las carpetas siguientes: <ul>@bad_dirs@.</ul> </b>
-<P>Es probable que se deba a un problema de escritura entre may&uacute;sculas y min&uacute;sculas.
-  Verifica que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.
-  <P>Cuando hayas hecho esta manipulaci&oacute;n podr&aacute;s  ',
+'dirs_repertoires_absents' => '<b>No se pudieron encontrar las siguientes carpetas : <ul>@bad_dirs@.</ul> </b>
+<p>Es probable que se deba a un problema de escritura entre may&uacute;sculas y min&uacute;sculas.
+  Verifique que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.
+  <p>Cuando hayas hecho esta operaci&oacute;n podr&aacute;s  ',
 'dirs_repertoires_suivants' => '<b>Las carpetas siguientes no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
 <p>Para solucionar el problema debes utilizar un cliente FTP para cambiar los derechos de acceso a cada una
 de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
-<P>Una vez terminado este proceso, podr&aacute;s  
+<p>Una vez terminado este proceso, podr&aacute;s  
 ',
 
 
@@ -278,7 +283,7 @@ Gracias por tu participaci&oacute;n
 'forum_acces_refuse' => 'Ya no tienes acceso a estos foros.',
 'forum_attention_dix_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> tu mensaje debe tener al menos diez caracteres.',
 'forum_attention_trois_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> el t&iacute;tulo debe tener al menos tres caracteres.',
-'forum_attention_trop_caracteres' => '<NEW><b>&iexcl;Attenci&oacute;n!</b> Tu mensaje es demasiado largo (@compte@ caracteres): para poder ser aceptado, no debe sobrepasar @max@ caracteres.',
+'forum_attention_trop_caracteres' => '<b>&iexcl;Atenci&oacute;n&nbsp;!</b> su mensaje es demasiado largo (@compte@ caracteres)&nbsp;: para poder registrarlo, no debe sobrepasar los @max@ caracteres.',
 'forum_avez_selectionne' => 'Has seleccionado:',
 'forum_cliquer_retour' => 'Pinchar <a href=\'@retour_forum@\'>aqu&iacute;</a> para continuar.',
 'forum_forum' => 'foro',
@@ -290,7 +295,7 @@ Gracias por tu participaci&oacute;n
 'forum_non_inscrit' => 'No est&aacute;s inscrita o inscrito, o bien la direcci&oacute;n o la contrase&ntilde;a son err&oacute;neas.',
 'forum_page_url' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en Internet, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
 'forum_par_auteur' => 'por @auteur@',
-'forum_poste_par' => 'Mensaje enviado @parauteur@ a continuaci&oacute;n de tu art&iacute;culo.',
+'forum_poste_par' => 'Mensaje enviado @parauteur@ a como respuesta al art&iacute;culo <i>@titre@</i>.',
 'forum_probleme_database' => 'Problema de la base de datos, tu mensaje no ha sido registrado.',
 'forum_qui_etes_vous' => '<b>&iquest;Qui&eacute;n eres?</b> (opcional)',
 'forum_texte' => 'Texto de tu mensaje:',
@@ -428,7 +433,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_grand_ecran' => 'Pantalla completa',
 'info_image_aide' => 'Ayuda',
 'info_image_process_titre' => 'M&eacute;todo de creaci&oacute;n de miniaturas',
-'info_impossible_lire_page' => '<B>Error !</B> Imposible leer la p&aacute;gina <tt><html>@test_proxy@</html></tt> a trav&eacute;s del "proxy" <tt>',
+'info_impossible_lire_page' => '<b>&iexcl;Error !</b> Imposible leer la p&aacute;gina <tt><html>@test_proxy@</html></tt> a trav&eacute;s del "proxy" <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n del icono',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n del sistema de publicaci&oacute;n...',
@@ -445,6 +450,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_l_article' => 'el art&iacute;culo',
 'info_la_breve' => 'la breve',
 'info_la_rubrique' => 'la secci&oacute;n',
+'info_langue_defaut' => '<pLUS_UTILISE>Idioma por omisi&oacute;n',
 'info_langue_principale' => 'Idioma principal del sitio',
 'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ p&iacute;xeles',
 'info_les_auteurs_1' => 'por @les_auteurs@',
@@ -504,9 +510,9 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_site_refuse' => 'Sitio Web rechazado',
 'info_sites_referencer' => 'Referenciar un sitio',
 'info_supprimer_vignette' => 'Suprimir este icono',
-'info_symbole_bleu' => 'El s&iacute;mbolo <B>AZUL</B> representa un <B>recordatorio personal</B>, o sea una manera de recordar algo.',
-'info_symbole_jaune' => 'El s&iacute;mbolo <B>amarillo</b> representa un <B>anuncio para todos</b>: s&oacute;lo es modificable por las administradoras del sitio, y es visible por todos los redactores.',
-'info_symbole_vert' => 'El s&iacute;mbolo <B>verde</b> indica los  <B>mensajes intercambiados con otras personas</b> del sitio.',
+'info_symbole_bleu' => 'El s&iacute;mbolo <b>azul</b> representa un <b>recordatorio personal</b>, o sea una manera de recordar algo.',
+'info_symbole_jaune' => 'El s&iacute;mbolo <b>amarillo</b> representa un <b>anuncio para todos</b>: s&oacute;lo es modificable por las/os administradoras/es del sitio, y es visible por todos los redactores.',
+'info_symbole_vert' => 'El s&iacute;mbolo <b>verde</b> indica los  <b>mensajes intercambiados con otras personas</b> del sitio.',
 'info_syndication' => 'sindicaci&oacute;n:',
 'info_syndication_articles' => 'art&iacute;culo(s)',
 'info_telecharger' => 'Enviar desde tu ordenador...',
@@ -580,6 +586,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 
 // M
+'masquer_trad' => 'Ocultar las traducciones',
 'module_fichiers_langues' => 'Archivos de idioma',
 
 
@@ -666,13 +673,13 @@ volver a conectarte al sitio.
 'texte_creation_automatique_vignette' => 'Este sitio permite la creaci&oacute;n autom&aacute;tica de iconos en los siguientes formatos: @gd_formats@. Las im&aacute;genes que instales con este formulario tendr&aacute;n iconos de @taille_preview@ p&iacute;xeles.',
 'texte_documents_associes' => 'Los documentos siguientes est&aacute;n asociados al art&iacute;culo, pero no han sido insertados directamente. Seg&uacute;n el formato del sitio p&uacute;blico, pueden aparecer como documentos adjuntos.',
 'texte_erreur_mise_niveau_base' => 'Error de la base de datos en el curso la la actualizaci&oacute;n.
-La imagen <B>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
-Anote esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
-'texte_inc_auth_1' => 'Te identificaste con el login  <B>@auth_login@</b>, pero &eacute;ste no existe en la base.
-Debes intentar',
+La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
+Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
+'texte_inc_auth_1' => 'Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
+Intenta',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
-'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al o a la webmestre principal de tu sitio. </b>',
+'texte_inc_config' => '<MODIF>Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <p align="justify"><b> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al o a la webmestre principal de tu sitio. </b>',
 'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>@fichier@</code>. Como administrador(a) del sitio, procede',
 'texte_inc_meta_2' => 'a verificar los derechos de escritura',
 'texte_inc_meta_3' => 'del directorio <code>@repertoire@</code>.',

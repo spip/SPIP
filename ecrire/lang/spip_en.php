@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modify this keyword',
 'admin_modifier_rubrique' => 'Modify this section',
 'admin_recalculer' => 'Refresh this page',
+'afficher_trad' => 'show tranlsations',
 'alerte_maj_impossible' => '<b>Warning!</b> Failed to update the MySQL database to version @version@, maybe due to a permissions problem on the database. Please contact your ISP.',
 'analyse_xml' => 'XML parsing',
 'antispam_champ_vide' => 'Please leave this field empty:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'daily calendar',
 'cal_par_mois' => 'monthly calendar',
 'cal_par_semaine' => 'weekly calendar',
+'choix_couleur_interface' => 'colour',
+'choix_interface' => 'choice of interface',
 'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
 'correcte' => 'correct',
 
@@ -183,18 +186,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <b>Setting up access permissions</b>',
 'dirs_probleme_droits' => 'Problem in access permissions',
-'dirs_repertoires_absents' => '<MODIF><b>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
-  <p />The possible cause is a bad lower or upper case handling.
-  Please make sure that the lower and upper case letters of these directories match what is displayed
-  above; if they don\'t, rename the directories using your FTP client in order to correct the error.
-  <p />Once this is done, you can',
-'dirs_repertoires_suivants' => '<MODIF><b>The following directories do not have write permission: <ul>@bad_dirs@.</ul> </b>
-
-  <p />To change this, use your FTP client in order to set access permissions for each
-
-  of these directories. The procedure is detailed in the install guide.
-
-  <p />Once you achieve this operation, you can ',
+'dirs_repertoires_absents' => '<p><b>The following directories have not been found: </b></p><ul>@bad_dirs@.</ul>
+  <p>It is probable that this is due to inappropriate lower or upper case letters in the directory names.
+  Please check that the case of the letters in the names of these directories match what is displayed
+  above. If they don\'t, rename the directories using your FTP client in order to correct the error.</p>
+  <p>Once this is done, you can',
+'dirs_repertoires_suivants' => '<p><b>The following directories do not have write permission: </b></p><ul>@bad_dirs@.</ul>
+<p>To change this, use your FTP client to set access permissions for each
+ of these directories. The procedure is detailed in the installation guide.</p>
+  <p>Once you have done this, you can ',
 
 
 // E
@@ -286,7 +286,7 @@ Thank you for your participation!
 'forum_non_inscrit' => 'Either you are not registered or the address or password are wrong.',
 'forum_page_url' => '(If your message refers to an article published on the web or to a page providing further information, please enter the title of the page and its URL below).',
 'forum_par_auteur' => 'by @auteur@',
-'forum_poste_par' => 'Message posted@parauteur@ following your article.',
+'forum_poste_par' => 'Message posted@parauteur@ following your article "@titre@".',
 'forum_probleme_database' => 'Database problem, your message could not be recorded.',
 'forum_qui_etes_vous' => '<b>Who are you?</b> (optional)',
 'forum_texte' => 'Text of your message:',
@@ -427,7 +427,7 @@ Thank you for your participation!
 'info_grand_ecran' => 'Large display',
 'info_image_aide' => 'HELP',
 'info_image_process_titre' => 'How to create thumbnails',
-'info_impossible_lire_page' => '<B>Error!</b> The page could not be read <tt><html>@test_proxy@</html></tt> through the proxy <tt>',
+'info_impossible_lire_page' => '<b>Error!</b> The page <tt><html>@test_proxy@</html></tt>  cannot be read through the proxy',
 'info_inclusion_directe' => 'Direct inclusion:',
 'info_inclusion_vignette' => 'Include vignette:',
 'info_installation_systeme_publication' => 'Publication system installation ...',
@@ -503,9 +503,9 @@ Thank you for your participation!
 'info_site_refuse' => 'Web site rejected',
 'info_sites_referencer' => 'Referencing a site',
 'info_supprimer_vignette' => 'delete the vignette',
-'info_symbole_bleu' => 'The symbol <B>blue</B> indicates a <B>memo</B>: i.e. a message for your personal use.',
-'info_symbole_jaune' => 'The symbol <B>yellow</B> indicates an <B>announcement to all editors</B>: it can be edited by all administrators, and is visible to all editors.',
-'info_symbole_vert' => 'The symbol <B>green</B> indicates the <B>messages exchanged with other users</B> of the site.',
+'info_symbole_bleu' => 'A <b>blue</b> symbol indicates a <b>memo</b>: i.e. a message for your personal use.',
+'info_symbole_jaune' => 'A <b>yellow</b> symbol indicates an <b>announcement to all editors</b>: it can be edited by all administrators, and is visible to all editors.',
+'info_symbole_vert' => 'A <b>green</b> symbol indicates the <b>messages exchanged with other users</b> of the site.',
 'info_syndication' => 'syndication:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'Upload from your computer:',
@@ -582,6 +582,7 @@ Thank you for your participation!
 
 
 // M
+'masquer_trad' => 'hide translations',
 'module_fichiers_langues' => 'Language files',
 
 
@@ -675,22 +676,22 @@ and connect again to the site.
 				but they were not directly
 				inserted. Based on the public site\'s layout,
 				they could appear as attached documents.',
-'texte_erreur_mise_niveau_base' => 'Database error during upgrade.
-						The image <B>@fichier@</B> could not be passed (article @id_article@).<p>
-						Note carefully this reference, retry the upgrade procedure,
-						and finally make sure that the images still appear
-						in the articles.',
+'texte_erreur_mise_niveau_base' => 'Database error during the upgrade.
+      The image <b>@fichier@</b> did not pass (article @id_article@).<p>
+   Note this reference carefully, try the upgrade procedure again,
+   and check afterwards that the images still appear
+      in the articles.',
 'texte_inc_auth_1' => 'You identified yourself with the login
-		<B>@auth_login@</B>, but it does not exist in the database (anymore). 
-		Try to',
+  <b>@auth_login@</b>, but it does not exist in the database (anymore). 
+  Try to',
 'texte_inc_auth_2' => 'reconnect',
 'texte_inc_auth_3' => 'having quit then
 		restarted your browser if necessary.',
-'texte_inc_config' => 'The modifications entered below influence notably
-	 the functioning of the site. You are advised not to deal with them unless you are
-	familiar with the functioning of the SPIP system. <P align="justify"><B>More
-	generally, you are strongly advised
-	to let the main webmaster of your site deal with this page.</b>',
+'texte_inc_config' => 'Changes made to the options on these pages have a great effect on
+  the functioning of the site. You are advised not to make any changes unless you are
+ familiar with how SPIP works. <br /><br /><b>In
+ general, you are strongly advised
+ to let the main webmaster of the site deal with these pages.</b>',
 'texte_inc_meta_1' => 'The system encountered an error when trying to write the file <code>@fichier@</code>. As a site administrator, please',
 'texte_inc_meta_2' => 'verify write permissions',
 'texte_inc_meta_3' => 'of the directory <code>@repertoire@</code>.',

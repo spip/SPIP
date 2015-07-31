@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Ajouter l\'acc&egrave;s &agrave; LDAP >>',
+'bouton_acces_ldap' => 'Ajouter l\'acc&egrave;s &agrave; LDAP',
 'bouton_ajouter' => 'Ajouter',
 'bouton_ajouter_participant' => 'AJOUTER UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANNONCE',
@@ -836,8 +836,8 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_compte_element' => '@count@ &eacute;l&eacute;ment',
 'texte_compte_elements' => '@count@ &eacute;l&eacute;ments',
 'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
-			en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
-			par groupe, qu\'un groupe est important...&nbsp?',
+   en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
+   par groupe, qu\'un groupe est important...&nbsp;?',
 'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte MySQL, les codes de connexion au serveur MySQL.',
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)',
 'texte_contenu_articles' => 'Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
