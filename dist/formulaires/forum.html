@@ -129,12 +129,12 @@
 if (window.jQuery)(function($){
 	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
 	function(){
-		var a = $.cookie('spip_contenu_formulaire');
+		var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
 		var saveauto = true;
 		if (a) {
 			$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
 			.val(a);
-			$.cookie('spip_contenu_formulaire', null);
+			$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
 		}
 		$('#formulaire_forum form')
 		.bind('submit', function() {
@@ -143,7 +143,7 @@ if (window.jQuery)(function($){
 		$(window)
 		.bind('unload', function(){
 			if (saveauto)
-			$.cookie('spip_contenu_formulaire',
+			$.cookie('spip_contenu_formulaire_#ENV{_sign}',
 				$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val()
 			);
 		});
