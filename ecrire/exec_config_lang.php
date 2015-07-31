@@ -93,25 +93,18 @@ $charset = $GLOBALS['meta']["charset"];
 
 
 	echo _T('texte_jeu_caractere')."<p>";
-	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_2')."</p></blockquote>";
+	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_3'),
+		"</p><div align='center'><b><tt>".entites_html($charset)."</tt></b></div><p>",
+		_T('texte_jeu_caractere_4'),
+		" &nbsp; <input type='text' name='charset'
+			value=\"".entites_html($charset)."\" />",
+		"<br />("._T('texte_jeu_caractere_2').")",
+		"</p></blockquote>";
 
-
-	echo bouton_radio('charset', 'utf-8',
-		_T('bouton_radio_universel'), $charset == 'utf-8');
-	echo "<br>";
-
-	echo bouton_radio('charset', 'iso-8859-1',
-		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
-	echo "<br>";
-	echo bouton_radio('charset', 'custom',
-		_T('bouton_radio_personnalise'), $charset != 'utf-8' && $charset != 'iso-8859-1');
-	echo "<br>";
-	if ($charset != 'utf-8' && $charset != 'iso-8859-1') {
-		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_entrer_code_alphabet')."&nbsp;";
-		echo "<input type='text' name='charset_custom' class='fondl' value='$charset' size='15'>";
-	}
-	else
-		echo "<input type='hidden' name='charset_custom' value=''>";
+	if ($charset != 'utf-8' AND load_charset($charset))
+		echo _T('texte_jeu_caractere_conversion',
+			array('url' => generer_url_ecrire('convert_utf8'))
+		);
 
 	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
@@ -120,17 +113,6 @@ $charset = $GLOBALS['meta']["charset"];
 #} # /avancees
 
 echo "</form>";
-
-
-	if ($charset != 'utf-8'
-	AND load_charset($charset)) {
-
-		echo generer_url_post_ecrire('convert_utf8');
-		echo "\n<div align='center'><input class='fondo' type='submit' VALUE='". _L("Convertir votre site en utf-8") ."'></div></form>";
-		echo "<br>";
-	}
-
-
 
 fin_page();
 }
