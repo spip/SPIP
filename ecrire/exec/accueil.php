@@ -419,7 +419,7 @@ function exec_accueil_dist()
 	if ($spip_display != 4) {
 		echo personnel_accueil(@$_COOKIE['spip_admin']);
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-		echo "\n<div>&nbsp;</div>";
+
 		$nom = typo($GLOBALS['meta']["nom_site"]);
 		if (!$nom) $nom=  _T('info_mon_site_spip');
 		echo debut_cadre_relief("racine-site-24.gif", true, "", $nom),
@@ -430,7 +430,7 @@ function exec_accueil_dist()
 	echo creer_colonne_droite("", true);
 	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
 
-	echo "<div>&nbsp;</div>", $evtt, $evtm, $evtr;
+	echo $evtt, $evtm, $evtr;
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
