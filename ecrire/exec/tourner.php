@@ -15,9 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_tourner_dist
 function exec_tourner_dist()
 {
-	global $id_document, $script, $id, $type, $ancre;
-	$id = intval($id);
-	$id_document = intval($id_document);
+	$type = _request('type');
+	$id = intval(_request('id'));
+	$id_document = intval(_request('id_document'));
 
 	if (!($type == 'article' 
 		? autoriser('modifier','article',$id)
@@ -28,7 +28,7 @@ function exec_tourner_dist()
 	}
 	include_spip('inc/actions');
 	$tourner = charger_fonction('tourner', 'inc');
-	ajax_retour($tourner($id_document, array(), $script, 'ajax', $type));
+	ajax_retour($tourner($id_document, array(), _request('script'), 'ajax', $type));
 }
 
 ?>
