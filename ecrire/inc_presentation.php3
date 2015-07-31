@@ -12,7 +12,7 @@ utiliser_langue_visiteur();
 //
 // Aide
 //
-function aide($aide) {
+function aide($aide='') {
 	global $couleur_foncee, $spip_lang_rtl, $dir_ecrire;
 
 	if (!$aide) return;
