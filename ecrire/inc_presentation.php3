@@ -1382,7 +1382,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	if ($connect_statut == "0minirezo") {
 		bandeau_barre_verticale();
 		if ($connect_toutes_rubriques) 
-			icone_bandeau_principal (_T('icone_suivi_actualite'), "controle_forum.php3", "statistiques-48.gif", "suivi", $rubrique);
+			icone_bandeau_principal (_T('icone_suivi_actualite'), "controle_forum.php3", "suivi-48.gif", "suivi", $rubrique);
 		else if (lire_meta("activer_statistiques") != 'non') 
 			icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "suivi", $rubrique);
 	}

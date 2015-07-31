@@ -112,9 +112,15 @@ fin_cadre_relief();
 
 
 //
-// Afficher le calendrier du mois s'il y a des rendez-vous
+// Annonces
 //
 include_ecrire("inc_agenda.php3");
+afficher_taches();
+
+
+//
+// Afficher le calendrier du mois s'il y a des rendez-vous
+//
 
 if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
 	$today = getdate(time());
@@ -155,10 +161,14 @@ if ($options != 'avancees') {
 	fin_boite_info();
 }
 
+
+
+//
+// Afficher les raccourcis : boutons de creation d'article et de breve, etc.
+//
+
 debut_raccourcis();
-//
-// Afficher les boutons de creation d'article et de breve
-//
+
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
@@ -179,40 +189,12 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 }
 
-
-
-if ($options == "avancees") {
+if ($connect_statut == '0minirezo' && $connect_toutes_rubriques && $options == "avancees") {
 	echo "<p>";
-	if (lire_meta("activer_messagerie") == 'oui' AND $connect_activer_messagerie != 'non') {
-		icone_horizontale(_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif");
-	}
-
-	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
-
-	if ($connect_statut == "0minirezo") {
-		if (lire_meta('forum_prive_admin') == 'oui') {
-			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
-		}
-			echo "<p>";
-		if (lire_meta("activer_statistiques") == 'oui')
-			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
-		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
-		if ($connect_toutes_rubriques)
-			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
-	}
-}
-else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	echo "<p>";
-	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
+	icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
 }
 
 fin_raccourcis();
-
-//
-// Annonces
-//
-afficher_taches();
-
 
 
 debut_droite();
