@@ -8,21 +8,54 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
+/// verifier les formats acceptes par GD
+
+if ($test_formats=="oui"){
+	$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
+	if ($srcImage) {
+		$gd_formats[] = "jpg";
+		ImageDestroy( $srcImage ); 
+	}
+	$srcImage = @ImageCreateFromGIF("IMG/test.gif");
+	if ($srcImage) {
+		$gd_formats[] = "gif";
+		ImageDestroy( $srcImage ); 
+	}
+	$srcImage = @ImageCreateFromPNG("IMG/test.png");
+	if ($srcImage) {
+		$gd_formats[] = "png";
+		ImageDestroy( $srcImage ); 
+	}
+
+	if ($gd_formats) $gd_formats = join($gd_formats, ",");
+	ecrire_meta("gd_formats", $gd_formats);
+}
+
+
 //
 // creation automatique d'une vignette
 //
 
-function RatioResizeImg( $image, $newWidth, $newHeight){ 
 
-	if (function_exists("imagejpeg")){
+function RatioResizeImg( $image, $newWidth, $newHeight, $format){ 
 
+	if ($format == "jpg"){
 		$srcImage = @ImageCreateFromJPEG( $image );		 
+	}
+	else if ($format == "gif"){
+		$srcImage = @ImageCreateFromGIF( $image );		 
+	}
+	else if ($format == "png"){
+		$srcImage = @ImageCreateFromPNG( $image );		 
+	}
+	
+	if ($srcImage){
 		$srcWidth = ImageSX( $srcImage ); 
 		$srcHeight = ImageSY( $srcImage ); 
-
+	
 		$ratioWidth = $srcWidth/$newWidth;
 		$ratioHeight = $srcHeight/$newHeight;
-
+	
 		if( $ratioWidth < $ratioHeight){ 
 			$destWidth = $srcWidth/$ratioHeight;
 			$destHeight = $newHeight; 
@@ -40,7 +73,15 @@ function RatioResizeImg( $image, $newWidth, $newHeight){
 		
 		$destination = ereg_replace('\.(.*)$','-s.\1',$image);
 		//Header("Content-type: image/jpeg");
-		ImageJPEG($destImage, "$destination", 40);
+		if ($format == "jpg") {
+			ImageJPEG($destImage, "$destination", 40);
+		}
+		else if ($format == "gif") {
+			ImageGIF($destImage, "$destination");
+		}
+		else if ($format == "png") {
+			ImagePNG($destImage, "$destination");
+		}
 	
 		ImageDestroy( $srcImage ); 
 		ImageDestroy( $destImage ); 
@@ -48,8 +89,10 @@ function RatioResizeImg( $image, $newWidth, $newHeight){
 		$retour['width'] = $destWidth;
 		$retour['height'] = $destHeight;
 		$retour['fichier'] = $destination;
+		$retour['format'] = $format;
 		return $retour;
 	}
+
 }
 
 
@@ -226,15 +269,24 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	// Creer une vignette automatiquement
 	$creer_preview=lire_meta("creer_preview");
 	$taille_preview=lire_meta("taille_preview");
-	if ($taille_preview < 15) $taille_preview = 120;
+	$gd_formats = lire_meta("gd_formats");
+	$format_img = strtolower(substr($dest_path, strrpos($dest_path,".")+1, strlen($dest_path)));
+	if ($format_img == "jpeg") $format_img == "jpg";
+	
+	if ($taille_preview < 10) $taille_preview = 120;
 
-	if ($mode == 'document' AND ereg("\.jpg$",$dest_path) AND $creer_preview == 'oui') {
+	if ($mode == 'document' AND strlen($format_img) == 3 AND ereg("$format_img", $gd_formats) AND $creer_preview == 'oui') {
 
-		$preview = RatioResizeImg($dest_path, $taille_preview, $taille_preview);
+		$preview = RatioResizeImg($dest_path, $taille_preview, $taille_preview, $format_img);
 		$hauteur_prev = $preview['height'];
 		$largeur_prev = $preview['width'];
 		$fichier_prev = $preview['fichier'];
-		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('1', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
+		$format_prev = $preview['format'];
+		if ($format_prev == "jpg") $format_prev = 1;
+		else if ($format_prev == "png") $format_prev = 2;
+		else if ($format_prev == "gif") $format_prev = 3;
+		
+		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
 		spip_query($query);
 		$id_preview = mysql_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
