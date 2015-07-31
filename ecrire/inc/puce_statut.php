@@ -237,6 +237,7 @@ function puce_statut_breve_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 
 // http://doc.spip.org/@puce_statut_site_dist
 function puce_statut_site_dist($id, $statut, $id_rubrique, $type, $ajax=''){
+  global $lang_objet;
 	static $coord = array('publie' => 1,
 			      'prop' => 0,
 			      'refuse' => 2,

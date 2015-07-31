@@ -237,8 +237,12 @@ function repercuter_gadgets($id_rubrique) {
 
 	// comme on cache fortement ce menu,
 	// son url change en fonction de sa date de modif
+
+	$d =  isset($GLOBALS['meta']['date_calcul_rubriques']) 
+	  ? $GLOBALS['meta']['date_calcul_rubriques'] : 0;
+
 	$args = join("',\n'", array(
-		      "./?exec=menu_rubriques\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'],
+		      "./?exec=menu_rubriques\\x26date=$d",
 		      "./?exec=menu_navigation\\x26id_rubrique=$id_rubrique",
 		      "./?exec=menu_agenda",
 		      str_replace('</', '<\\/', addslashes(strtr(gadget_messagerie(),"\n\r","  ")))));
