@@ -136,8 +136,8 @@ ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
 ecrire/exec/config_lang.php -text
 ecrire/exec/config_multilang.php -text
-ecrire/exec/configuration.php -text
 ecrire/exec/configurer.php -text
+ecrire/exec/configurer_contenu.php -text
 ecrire/exec/configurer_moderniseur_html.php -text
 ecrire/exec/configurer_previsualiseur.php -text
 ecrire/exec/configurer_relayeur.php -text

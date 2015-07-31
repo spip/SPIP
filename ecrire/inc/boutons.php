@@ -45,7 +45,7 @@ function barre_onglets_configuration() {
 	$onglets = array();
 	$onglets['contenu']=
 		  new Bouton('racine-24.png', 'onglet_contenu_site',
-			generer_url_ecrire("configuration"));
+			generer_url_ecrire("configurer_contenu"));
 	$onglets['interactivite']=
 		  new Bouton('auteur-6forum-24.png', 'onglet_interactivite',
 			generer_url_ecrire("config_contenu"));
