@@ -87,19 +87,6 @@ array(
 
 ',
 
-'lire_meta' => '($nom) {
-	vieilles_log(\'lire_meta()\');
-
- global $meta; return $meta[$nom];}
-
-',
-
-'ecrire_metas' => '() {
-	vieilles_log(\'ecrire_metas()\');
-} // plus rien a faire
-
-',
-
 'afficher_script_layer' => '(){
 	vieilles_log(\'afficher_script_layer()\');
 
@@ -476,14 +463,6 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
  sql_multi($r, $l);
 }
-
-',
-
-'spip_fetch_array' => '($r, $t=MYSQL_ASSOC) {
-	vieilles_log(\'spip_fetch_array()\');
-	if ($r) return mysql_fetch_array($r, $t);
-}
-
 
 ',
 
