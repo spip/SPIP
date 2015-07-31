@@ -48,8 +48,12 @@ function exec_fond_dist(){
 
 function interdire_acces($ok=false) {
 	if ($ok) return '';
-	include_spip('inc/headers');
-	redirige_formulaire(generer_url_ecrire('403','acces='._request('exec')));
+	ob_end_clean(); // vider tous les tampons
+	$echec = charger_fonction('403','exec');
+	$echec();
+
+	#include_spip('inc/headers');
+	#redirige_formulaire(generer_url_ecrire('403','acces='._request('exec')));
 	exit;
 }
 

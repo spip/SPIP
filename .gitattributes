@@ -108,6 +108,7 @@ ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/visiteurs.php -text
+ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_backup.php -text
@@ -780,7 +781,6 @@ prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
-prive/squelettes/contenu/page-403.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-typo.html -text
 prive/squelettes/extra/dist.html -text

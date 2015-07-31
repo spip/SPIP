@@ -2068,26 +2068,23 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 }
 
 // Inserer jQuery
-// et au passage verifier qu'on ne doublonne pas #INSERT_HEAD
+// ne pas verifier ici qu'on ne doublonne pas #INSERT_HEAD
+// car cela empeche un double appel (multi calcul en cache cool, 
+// ou erreur de l'espace prive)
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
-	static $doublon=0;
-	if ($doublon++) {
-		erreur_squelette(array('double_occurrence', array('balise' => "INSERT_HEAD")));
-	} else {
-		$x = '';
-		foreach (array_unique(pipeline('jquery_plugins',
-		array(
-			'javascript/jquery.js',
-			'javascript/jquery.form.js',
-			'javascript/jquery.autosave.js',
-			'javascript/ajaxCallback.js',
-			'javascript/jquery.cookie.js'
-		))) as $script)
-			if ($script = find_in_path($script))
-				$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
-		$texte = $x.$texte;
-	}
+	$x = '';
+	foreach (array_unique(pipeline('jquery_plugins',
+	array(
+		'javascript/jquery.js',
+		'javascript/jquery.form.js',
+		'javascript/jquery.autosave.js',
+		'javascript/ajaxCallback.js',
+		'javascript/jquery.cookie.js'
+	))) as $script)
+		if ($script = find_in_path($script))
+			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
+	$texte = $x.$texte;
 	return $texte;
 }
 
