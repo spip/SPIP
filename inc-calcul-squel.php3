@@ -36,6 +36,8 @@ function calculer_boucle($id_boucle, &$boucles)
 	    return ("$corps\n\treturn  $return;");
 	}
 
+	$constant = ereg("^'[^']*'$",$return);
+
 	// La boucle doit-elle selectionner la langue ?
 	// 1. par defaut 
 	$lang_select = (
@@ -60,8 +62,8 @@ function calculer_boucle($id_boucle, &$boucles)
 
 	if ($primary_key) // sinon c'est une boucle hors Spip
 	  {
-	    // invalidation des caches si la boucle n'est pas vide
-	    if ($return == "''")
+	    // invalidation des caches si la boucle n'est pas constante
+	    if ($constant)
 	      $invalide = '';
 	    else
 	      {$id_table = $table_des_tables[$type_boucle]; 
@@ -71,12 +73,13 @@ function calculer_boucle($id_boucle, &$boucles)
 		  $primary_key . '"]]=1;';
 	      }
 	  }
+	spip_log(">>>>>>$return");
 	$corps =
 	  ((!$flag_cpt) ? "" : "\n\t\t\$compteur_boucle++;") .
 	  ((!$flag_parties) ? "" : '
 		if	($compteur_boucle >= $debut_boucle AND 
 			 $compteur_boucle <= $fin_boucle) {') .
-	  (((!$lang_select)||($return == "''")) ? "" : ('
+	  (((!$lang_select)||($constant)) ? "" : ('
 		if ($x = $Pile[$SP]["lang"]) $GLOBALS["spip_lang"] = $x;')) .
 	  $invalide .
 	  ((!$boucle->doublons) ? "" : 
@@ -84,12 +87,11 @@ function calculer_boucle($id_boucle, &$boucles)
 	    index_pile($id_boucle, $primary_key, $boucles) .
 	    ";")).
 	  $corps .
-	  (($return == "''") ? "" :
-	   ((!$boucle->separateur) ? 
-	    ("\n\t\t" . '$t0 .= ' . $return . ";") :
-	    ("\n\t\t" . '$t1 = ' . $return . ";\n\t\t" .
+	  ((!$boucle->separateur) ? 
+	   ($constant ? $return : ("\n\t\t" . '$t0 .= ' . $return . ";")) :
+	   ("\n\t\t" . '$t1 = ' . $return . ";\n\t\t" .
 	     '$t0 .= (($t1 && $t0) ? \'' . $boucle->separateur .
-	     "' : '') . \$t1;"))).
+	    "' : '') . \$t1;")).
 	  ((!$flag_parties) ? "" : "\t\t}\n");
 
 	// Recherche : recuperer les hash a partir de la chaine de recherche
@@ -102,6 +104,8 @@ function calculer_boucle($id_boucle, &$boucles)
 	else { $texte = ''; }
 
 	if ($flag_h) {
+	    $corps = '
+		 $hierarchie = $Pile[$SP][id_parent];' . $corps;
 	    $texte .= '
 	$hierarchie = ' . ($boucle->tout ?  $boucle->tout : 
 			   // sinon,  parame`tre passe' par include.
@@ -115,9 +119,29 @@ function calculer_boucle($id_boucle, &$boucles)
 	while ($hierarchie) {';
 	}
 
-	if (!($corps || $boucle->numrows))
-	  return 'return "";';
-	else
+	spip_log(">>>>>>$corps");
+	# si le corps est une constante, ne plus appeler le serveur
+	if (!ereg("^'[^']*'$",$corps))
+	  {
+	    $corps = '
+	while ($Pile[$SP] = @spip_fetch_array($result)) ' . 
+	    "\n\t\{$corps\n\t}";
+	    if ($lang_select) {
+	      $corps = '
+	$old_lang = $GLOBALS[\'spip_lang\'];' .
+		   $corps . '
+	$GLOBALS["spip_lang"] = $old_lang;';
+	    }
+	  } else {
+	  if ($corps != "''")
+	    {
+	      $boucle->numrows = true;
+	      $corps = '
+	for($x=$Numrows["' . $id_boucle . '"];$x>0;$x--) $t0.= ' . $corps .';';
+	    }
+	  else if (!$boucle->numrows) return 'return "";'; else $corps = "";
+	}
+
 	return  ($texte . '
 	$result = ' . calculer_requete($boucle) . ';
 	$t0 = "";
@@ -130,17 +154,7 @@ function calculer_boucle($id_boucle, &$boucles)
 		  ((!$boucle->numrows) ? '' : "
 	\$Numrows['$id_boucle'] = @spip_num_rows(\$result);")) .
 		 ((!$flag_cpt) ? '' : "\n\t\$compteur_boucle = 0;") .
-		 ((!$corps) ? "" :
-		  (
-		   ((!$lang_select) ? "" : '
-	$old_lang = $GLOBALS[\'spip_lang\'];') . '
-	while ($Pile[$SP] = @spip_fetch_array($result)) {' .
-		((!$flag_h) ? "" : '
-		 $hierarchie = $Pile[$SP][id_parent];') .
-		$corps .
-		"\n\t}" .
-		((!$lang_select) ? "" : '
-	$GLOBALS["spip_lang"] = $old_lang;'))) . '
+		$corps . '
 	@spip_free_result($result);' .
 		 (!($flag_h) ? '
 	return $t0;' : ('
