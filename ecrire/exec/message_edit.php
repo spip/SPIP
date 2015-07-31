@@ -117,7 +117,7 @@ function exec_message_edit_dist()
 	echo $texte;
 	echo "</textarea></p><br />\n";
 
-	echo "\n<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'/></p>";
+	echo "\n<div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>";
 	echo "</form>";
 	echo "\n</div>";
 	echo fin_gauche(), fin_page();

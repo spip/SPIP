@@ -19,21 +19,8 @@ include_spip('inc/message_select');
 function exec_messagerie_dist()
 {
 
-  global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
+global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
 
-  $id_message = intval(_request('id_message'));
-  $detruire_message = intval(_request('detruire_message'));
-  $supp_dest = intval(_request('supp_dest'));
-
-  if ($supp_dest) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
-}
-
-if ($detruire_message) {
-	spip_query("DELETE FROM spip_messages WHERE id_message=$detruire_message");
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
-	spip_query("DELETE FROM spip_forum WHERE id_message=$detruire_message");
-}
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_messagerie'), "accueil", "messagerie");

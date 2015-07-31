@@ -622,15 +622,15 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 
 	$date = date("Ymd", mktime(0,0,0,$mois, $jour, $annee));
 	list($sansheure, $avecheure) = $evt;
-	$avecheure = $avecheure[$date];
-	$sansheure = $sansheure[$date];
+	$avecheure = isset($avecheure[$date]) ? $avecheure[$date] : array();
+	$sansheure = isset($sansheure[$date]) ? $sansheure[$date] : array();
 
 	$total = '';
 
 	if ($avecheure)
     {
 		$tous = 1 + count($avecheure);
-		$i = 0;
+		$i = $bas_prec = 0;
 		foreach($avecheure as $evenement){
 
 			$d = $evenement['DTSTART'];

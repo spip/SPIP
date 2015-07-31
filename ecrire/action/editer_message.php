@@ -22,7 +22,13 @@ function action_editer_message_dist() {
 	$arg = $securiser_action();
 
 	if (preg_match(',^(\d+)$,', $arg, $r))
-	  action_editer_message_post_vieux($arg); // pas encore fait.
+		action_editer_message_post_vieux($arg); // pas encore fait.
+	elseif (preg_match(',^-(\d+)$,', $arg, $r))
+		action_editer_message_post_supprimer($r[1]);
+	elseif (preg_match(',^(\d+)\W@(\d+)$,', $arg, $r))
+		action_editer_message_post_ajouter($r[1], $r[2]);	  
+	elseif (preg_match(',^(\d+)\W-(\d+)$,', $arg, $r))
+		action_editer_message_post_retirer($r[1], $r[2]);	  
 	elseif (preg_match(',^(\w+)$,', $arg, $r))
 		action_editer_message_post_nouveau($arg);
 	elseif (preg_match(',^(\w+)\W(\d+)$,', $arg, $r))
@@ -30,6 +36,23 @@ function action_editer_message_dist() {
 	elseif (preg_match(',^(\w+)\W(\d+-\d+-\d+)$,', $arg, $r))
 		action_editer_message_post_nouveau($r[1], '', $r[2]);
 	else 	spip_log("action_editer_message_dist $arg pas compris");
+}
+
+function action_editer_message_post_supprimer($id_message) {
+	spip_query("DELETE FROM spip_messages WHERE id_message=$id_message");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message");
+	spip_query("DELETE FROM spip_forum WHERE id_message=id_message");
+}
+
+function action_editer_message_post_retirer($id_message, $id_auteur) {
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$id_auteur'");
+}
+
+function action_editer_message_post_ajouter($id_message, $id_auteur) {
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$id_auteur' AND id_message='$id_message'");
+	spip_abstract_insert('spip_auteurs_messages',
+		"(id_auteur,id_message,vu)",
+		"('$id_auteur','$id_message','non')");
 }
 
 // http://doc.spip.org/@action_editer_message_post_nouveau

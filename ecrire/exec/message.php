@@ -40,12 +40,10 @@ $mois,
 $mois_fin,
 $nouv_auteur,
 $rv,
-$supp_dest,
 $texte,
 $titre;
 
 $id_message = intval($id_message);
-$supp_dest = intval($supp_dest);
 $nouv_auteur = intval($nouv_auteur);
 charger_generer_url();
 
@@ -84,9 +82,6 @@ if ($change_statut) {
 	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
 }
 
-if ($supp_dest) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
-}
 
  exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur, $forcer_dest);
 }
@@ -151,9 +146,9 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
       $bio_auteur = $row['bio'];
       $res .= "<li><span class='spip_medium' style='class='verdana1'><b>$nom_auteur</b></span>" .
 	($email_auteur ? " ($email_auteur)" : '') .
-	" | <a href='" . generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
-	"'>" .
-	_T('lien_ajout_destinataire').
+	" | <a href='" . redirige_action_auteur("editer_message","$id_message/@$id_auteur", 'message', "id_message=$id_message")
+	. "'>" 
+	. _T('lien_ajout_destinataire').
 	"</a>" .
 	(!trim($bio_auteur) ? '' :
 	 ("<br /><span class='spip_x-small'>".propre(couper($bio_auteur, 100))."</span>\n")) .
@@ -254,7 +249,7 @@ function http_afficher_forum_perso($id_message)
 
 
 // http://doc.spip.org/@http_message_avec_participants
-function http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur)
+function http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur, $expediteur='')
 {
 	global $connect_id_auteur, $couleur_claire ;
 	echo debut_cadre_enfonce("redacteurs-24.gif", true);
@@ -297,7 +292,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
 
 				$res .= "<tr><td style='background-color: $couleur'><span class='verdana1 spip_small'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
-				  "<td style='background-color: $couleur' align='right'><span class='verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
+				  "<td style='background-color: $couleur' align='right'><span class='verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
 			}
 			echo
 			  http_visualiser_participants($auteurs_tmp),
@@ -322,19 +317,19 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 }
 
 // http://doc.spip.org/@http_affiche_message
-function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest)
+function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
   global $connect_id_auteur,$connect_statut, $les_notes;
 
 	if ($type == 'normal') {
 		$le_type = _T('info_message_2').aide ("messut");
-		$la_couleur = "#02531B";
-		$couleur_fond = "#CFFEDE";
+		$la_couleur = "#02531b";
+		$couleur_fond = "#cffede";
 	}
 	else if ($type == 'pb') {
 		$le_type = _T('info_pense_bete').aide ("messpense");
-		$la_couleur = "#3874B0";
-		$couleur_fond = "#EDF3FE";
+		$la_couleur = "#3874b0";
+		$couleur_fond = "#edf3fe";
 	}
 	else if ($type == 'affich') {
 		$le_type = _T('info_annonce');
@@ -364,7 +359,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	//
 	
 	if ($type == 'normal') {
-		$total_dest = http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur);
+	  $total_dest = http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur, $expediteur);
 	}
 
 	if ($rv != "non") http_afficher_rendez_vous($date_heure, $date_fin);
@@ -403,13 +398,16 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	
 	// Les boutons
 
+	$aut = ($expediteur == $connect_id_auteur);
+	$aff = ($type == 'affich' AND $connect_statut == '0minirezo');
+
 	echo "\n<table width='100%'><tr><td>";
 
 	// bouton de suppression
 
-	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
+	if ($aut AND ($statut == 'redac' OR $type == 'pb') OR $aff) {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_supprimer_message'), (generer_url_ecrire("messagerie","detruire_message=$id_message")), "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_supprimer_message'), redirige_action_auteur("editer_message","-$id_message", 'messagerie'), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 
@@ -417,13 +415,13 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($statut == 'publie' AND $type == 'normal') {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_arret_discussion'), generer_url_ecrire("messagerie","id_message=$id_message&supp_dest=$connect_id_auteur"), "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_arret_discussion'), redirige_action_auteur("editer_message","$id_message/-$connect_id_auteur", 'messagerie', "id_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 
 	// bouton modifier ce message
 
-	if ($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
+	if ($aut OR $aff) {
 	  echo "\n<table align='right'><tr><td>";
 	  icone (_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.gif", "edit.gif");
 	  echo "</td></tr></table>";
@@ -481,7 +479,6 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	$texte = propre($row["texte"]);
 	$type = $row["type"];
 	$statut = $row["statut"];
-	$page = $row["page"];
 	$rv = $row["rv"];
 	$expediteur = $row['id_auteur'];
 
@@ -529,7 +526,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 
 	debut_droite();
 
-	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest);
+	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest);
 
 	// reponses et bouton poster message
 
