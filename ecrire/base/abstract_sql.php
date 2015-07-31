@@ -77,6 +77,15 @@ function sql_select (
 	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option!==false);
 }
 
+// Recupere la syntaxe de la requete select sans l'executer
+// simplement $option = false au lieu de true
+function sql_get_select	(
+	$select = array(), $from = array(), $where = array(),
+	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
+	$serveur='') {
+	return sql_select ($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
+}
+
 // Comme ci-dessus, mais ramene seulement et tout de suite le nombre de lignes
 // Pas de colonne ni de tri a donner donc.
 // http://doc.spip.org/@sql_countsel
@@ -213,6 +222,14 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 	return $f($table, $exist, $serveur, $option!==false);
 }
 
+// supprimer une vue sql
+function sql_drop_view($table, $exist='', $serveur='', $option=true)
+{
+	$f = sql_serveur('drop_view', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	return $f($table, $exist, $serveur, $option!==false);
+}
+
 // http://doc.spip.org/@sql_showbase
 function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
@@ -251,6 +268,17 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
 	$f = sql_serveur('create', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option!==false);
+}
+
+
+// Fonction pour creer une vue 
+// nom : nom de la vue,
+// select_query : une requete select, idealement cree avec $req = sql_select()
+// (en mettant $option du sql_select a false pour recuperer la requete)
+function sql_create_view($nom, $select_query, $serveur='', $option=true) {
+	$f = sql_serveur('create_view', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	return $f($nom, $select_query, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_multi
