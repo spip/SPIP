@@ -50,7 +50,6 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_titre($row['titre'], $row['onfocus'], $config, $aider)
 	. editer_article_soustitre($row['soustitre'], $config, $aider)
 	. editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
-	. pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''))
 	. editer_article_descriptif($row['descriptif'], $config, $aider)
 	. editer_article_url($row['url_site'], $row['nom_site'], $config, $aider)
 	. editer_article_chapo($row['chapo'], $config, $aider)

@@ -148,7 +148,6 @@ function exec_sites_edit_dist()
 	. $chercher_rubrique($id_rubrique, 'site', false)
 	. fin_cadre_couleur(true)
 	. "\n<br />"
-	. pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''))
 	."<b>"
 	. _T('entree_description_site')
 	. "</b><br />\n"
@@ -222,8 +221,10 @@ function exec_sites_edit_dist()
 	}
 
 	echo $form;
-
+	
 	echo fin_cadre_formulaire(true);
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }

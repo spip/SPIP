@@ -142,8 +142,6 @@ function exec_rubriques_edit_dist()
 	$form .= fin_cadre_couleur(true)
 	. "<br />";
 
-	$form .= pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
-
 	if ($options == "avancees" OR $descriptif) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 		. _T('entree_contenu_rubrique')."<br />"
@@ -169,7 +167,9 @@ function exec_rubriques_edit_dist()
 
 	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
 
-	fin_cadre_formulaire();
+	echo fin_cadre_formulaire();
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 
 	echo fin_gauche(), fin_page();
 }
