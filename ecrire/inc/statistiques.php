@@ -137,6 +137,9 @@ function aff_referers ($result, $limit, $plus) {
 	while ($row = sql_fetch($result)) {
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
+		$id_article = $row['id_article'];
+		$titre_article = typo(interdire_scripts($row['titre']));
+		
 		$tmp = "";
 		
 		$buff = stats_show_keywords($referer, $referer);
@@ -162,12 +165,15 @@ function aff_referers ($result, $limit, $plus) {
 			}
 
 			if ($tmp)
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"") . (($id_article > 0)?" &rarr; <a href='".generer_url_article($id_article)."'><i>$titre_article</i></a>":"");
 			else
 				$lesliensracine[$numero] += $visites;
 			$lesdomaines[$numero] = $buff["hostname"];
+			$lesreferes[$numero] = $id_article;
+			$lesreferestitre[$numero] = $titre_article;
 			$lesurls[$numero] = $buff["host"];
 			$lesliens[$numero] = $referer;
+			
 		}
 	}
 	
@@ -177,6 +183,9 @@ function aff_referers ($result, $limit, $plus) {
 		$aff = '';
 		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
 			$dom =  $lesdomaines[$numero];
+			$id_article = $lesreferes[$numero];
+			$titre_article = $lesreferestitre[$numero];
+			
 			if (!$dom) next;
 
 			$visites = pos($nbvisites);
@@ -215,7 +224,7 @@ function aff_referers ($result, $limit, $plus) {
 						if (!strpos($lien, '</a>')) $lien .= '</a>';
 					} else
 						$lien = "<a href='http://".$dom."'>".$dom."</a>";
-					$aff .= "<b>".quote_amp($lien)."</b>";
+					$aff .= "<b>".quote_amp($lien)."</b>" . (($id_article > 0)?" &rarr; <a href='".generer_url_article($id_article)."'><i>$titre_article</i></a>":"");
 				}
 			}
 			$aff .= "</li>\n";
