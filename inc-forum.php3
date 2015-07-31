@@ -132,7 +132,9 @@ VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")
 	  $table= table_des_mots($table, $les_mots);
 	else $table = '';
 
-	return ("<form action='$url' method='post'>\n$hidden" .
+
+	$url = ereg_replace("\&", "&amp;", $url);
+	return ("<form action='$url' method='post' name='formulaire'>\n$hidden" .
 		boutonne("type='hidden'", 'id_message', $id_message) .
 		boutonne("type='hidden'", 'alea', $alea) .
                 boutonne("type='hidden'", 'hash', $hash) .
@@ -143,16 +145,14 @@ VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")
 		  boutonne("type='submit' class='spip_bouton'",
 			   'Valider',
 			   _T('forum_valider'). "</div>")) :
-		 ($bouton . "
-	<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />" .
-		  boutonne("type='text' class='forml' size='40'", 'titre', $titre) . "
-	</div>
-	\n<br /><div class='spip_encadrer'><b>" .
+		 ($bouton . "<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />".
+		  boutonne("type='text' class='forml' size='40'", 'titre', $titre) . "</div>\n<br />"
+		  ."<div class='spip_encadrer'><b>" .
 		  _T('forum_texte') .
 		  "</b>\n<br />" .
 		  _T('forum_creer_paragraphes') .
 		  "\n<br /> " .
-#		  afficher_barre('formulaire', 'texte', true) .
+		  afficher_barre('formulaire', 'texte', true) .
 		  "<textarea name='texte' " .
 		  afficher_claret() .
 		  " rows='12' class='forml' cols='40'>" .
