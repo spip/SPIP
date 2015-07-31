@@ -31,7 +31,7 @@ function configuration_visiteurs_dist()
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')))
 		. "</td></tr></table>\n";
 
-		$res = ajax_action_post('configurer', 'visiteurs', 'config_contenu','',$res);
+		$res = ajax_action_post('configuration', 'visiteurs', 'config_contenu','#configurer-visiteurs',$res);
 	} else {
 		$res = _T('info_forums_abo_invites');
 	}

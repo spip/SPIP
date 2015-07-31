@@ -30,9 +30,9 @@ function configuration_langue_dist()
 		$res .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
  }
 
- $res = ajax_action_post('configurer',
+ $res = ajax_action_post('configuration',
 			 'langue',
-			 'config_lang', '',
+			 'config_lang', '#configurer-langue',
 			 "<label for='changer_langue_site'>" .
 			 _T('info_langue_principale') .
 			 "</label>" .

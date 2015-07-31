@@ -85,7 +85,7 @@ function configuration_locuteur_dist()
 	  . "<div class='verdana1'>"._T("info_multi_langues_soulignees")."</div>";
 
 	$res = debut_cadre_relief("langue-24.png", true)
-	. ajax_action_post('configurer', 'locuteur', 'config_multilang', '', $res)
+	. ajax_action_post('configuration', 'locuteur', 'config_multilang', '#configurer-locuteur', $res)
 	. fin_cadre_relief(true);
 
 	return ajax_action_greffe("configurer-locuteur", '', $res);

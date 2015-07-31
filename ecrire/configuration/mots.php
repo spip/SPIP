@@ -83,7 +83,7 @@ function configuration_mots_dist(){
 	$res .= "</div>";	
 
 	$res = debut_cadre_trait_couleur("mot-24.png", true, "", _T('info_mots_cles'))
-	. ajax_action_post('configurer', 'mots', 'configuration','',$res) 
+	. ajax_action_post('configuration', 'mots', 'configuration','#configurer-mots',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-mots', '', $res);

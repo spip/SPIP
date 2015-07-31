@@ -128,7 +128,7 @@ function format_choisi()
 	
 	return 
 	  debut_cadre_relief("", true, "", _T('info_generation_miniatures_images'))
-	.  ajax_action_post('configurer', 'reducteur', 'config_fonctions', '', $res)
+	.  ajax_action_post('configuration', 'reducteur', 'config_fonctions', '#configurer-reducteur', $res)
 	. fin_cadre_relief(true);
 }
 

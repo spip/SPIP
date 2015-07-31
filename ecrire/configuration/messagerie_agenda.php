@@ -26,7 +26,7 @@ function configuration_messagerie_agenda_dist()
 	. "</div>";
 
 	$res = debut_cadre_trait_couleur("messagerie-24.png", true, "", _T('titre_messagerie_agenda'))
-	. ajax_action_post('configurer', 'messagerie_agenda', 'config_contenu','',$res)
+	. ajax_action_post('configuration', 'messagerie_agenda', 'config_contenu','#configurer-messagerie_agenda',$res)
 	 . fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-messagerie_agenda', '', $res);

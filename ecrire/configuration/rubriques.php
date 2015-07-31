@@ -52,7 +52,7 @@ function configuration_rubriques_dist(){
 	. "</table>";
 
 	$res = debut_cadre_trait_couleur("rubrique-24.png", true, "", _T('icone_rubriques'))
-	. ajax_action_post('configurer', 'rubriques', 'configuration','',$res)
+	. ajax_action_post('configuration', 'rubriques', 'configuration','#configurer-rubriques',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-rubriques', '', $res);

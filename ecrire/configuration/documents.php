@@ -48,7 +48,7 @@ function configuration_documents_dist(){
 	$res .= "</table>\n";
 
 	$res = debut_cadre_trait_couleur("doc-24.gif", true, "", _T('titre_documents_joints'))
-	. ajax_action_post('configurer', 'documents', 'configuration','',$res)
+	. ajax_action_post('configuration', 'documents', 'configuration','#configurer-documents',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-documents', '', $res);

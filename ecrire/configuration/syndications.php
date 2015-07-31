@@ -127,7 +127,7 @@ function configuration_syndications_dist()
 	$res .= fin_cadre_relief(true);
 
 	$res = debut_cadre_trait_couleur("site-24.png",true, "", _T('titre_referencement_sites').aide ("reference"))
-	. ajax_action_post('configurer', 'syndications', 'configuration','',$res) 
+	. ajax_action_post('configuration', 'syndications', 'configuration','#configurer-syndications',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-syndications', '', $res);
