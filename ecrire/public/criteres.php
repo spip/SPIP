@@ -520,9 +520,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
-  global $table_des_tables, $tables_principales;
-  global $exceptions_des_jointures, $table_date;
-
+	global $table_des_tables, $tables_principales, $table_date;
+	global $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$col_table = $boucle->id_table;
@@ -555,40 +554,58 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else  {
 	  $nom = $table_des_tables[$type];
 	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
-	  // si champ hors table, ca doit etre une jointure
 	  if (!array_key_exists($col, $desc['field'])) {
-	    if ($exceptions_des_jointures[$col])
-	      $col = $exceptions_des_jointures[$col];
-	    $cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
-	    if ($cle) 
-	      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
-	    if ($cle)
-		$col_table = "L$cle";
-	    else erreur_squelette(_T('zbug_info_erreur_squelette'),
-				  _T('zbug_boucle') .
-				  " $idb " .
-				  _T('zbug_critere_inconnu', 
-				     array('critere' => $crit->op)));
-
-	  } // else: champ dans la table, c'est ok.
+		if ($exceptions_des_jointures[$col])
+			$col = $exceptions_des_jointures[$col];
+		$col_table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
+	  }
 	}
-
 	return array($fct, $col, $op, $val, $col_table, $args_sql);
 }
 
+// Champ hors table, ca ne peut etre qu'une jointure.
+// On cherche la table du champ et on regarde si elle est deja jointe
+// Si oui et qu'on y cherche un champ nouveau, pas de jointure supplementaire
+// Exemple: criteres {titre_mot=...}{type_mot=...}
+// Dans les 2 autres cas ==> jointure 
+// (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
+// pour selectioner ce qui a exactement ces 2 mots-cles.
+
+function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
+{
+	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+	if ($cle) {
+		$t = array_search($cle[0], $boucle->from);
+		if ($t) {
+			$tc = "^$t" . '.' . $col . " ";
+			foreach ($boucle->where as $v) {
+				if (ereg($tc,$v)) {$t = false; break;}
+			}
+			if ($t)	return $t;
+		}
+		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
+		if ($cle) return "L$cle";
+	}
+
+	erreur_squelette(_T('zbug_info_erreur_squelette'),
+			_T('zbug_boucle') .
+			" $idb " .
+			_T('zbug_critere_inconnu', 
+			    array('critere' => $crit->op)));
+}
+
 // deduction automatique des jointures 
-// une jointure sur une table avec primary key doit se faire sur cette Key. 
+// une jointure sur une table avec primary key doit se faire sur celle-ci. 
 
 function calculer_jointure(&$boucle, $depart, $arrivee)
 {
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
   $n = "";
-  $i = count($res);
+
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $i--;
-    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j, $i);
+    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j);
   }
   return $n;
 }
@@ -598,7 +615,6 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
   list($dnom,$ddesc) = $depart;
   list($anom,$adesc) = $arrivee;
   $prim = $ddesc['key']['PRIMARY KEY'];
-#  spip_log("ccj $dnom $prim");
   $v = array_intersect($prim ? split(',',$prim): $ddesc['key'], $adesc['key']);
   if ($v)
     return array(array($dnom, $anom, array_shift($v)));
@@ -608,7 +624,6 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 	if ($v && (!in_array($v,$vu)) && 
 	    ($j = trouver_def_table($v, $boucle))) {
 	  list($table,$join) = $j;
-#	  spip_log(" trouver $table " . join(",",$join['key']));
 	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
 	  foreach ($milieu as $k)
 	    {
@@ -681,16 +696,9 @@ function trouver_champ_exterieur($cle, $joints, &$boucle)
 
 // traitement des relations externes par DES jointures.
 
-function calculer_critere_externe(&$boucle, $id_table, $lien, $join, $suite) {
+function calculer_critere_externe(&$boucle, $id_table, $lien, $join) {
 	static $num;
 	$id_field = $id_table . '.' . $join; 
-// dans certains cas on pourrait ne pas dupliquer les jointures intermediaires
-// a revoir
-/*	if ($suite)
-	  foreach ($boucle->join as $v) {
-	    if (ereg("^$id_field=L([0-9]+)\.$join$",$v, $r)) return $r[1];
-	  }
-*/
 	$num++;
 	$boucle->lien = true;
 	$boucle->from["L$num"] = $lien;
