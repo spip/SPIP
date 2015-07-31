@@ -503,7 +503,6 @@ ecrire/safehtml/readme.txt -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
 ecrire/win_png.htc -text
-formulaires/choix_mots.html -text
 /inc-public.php3 -text
 /index.php -text
 /rien.gif -text
