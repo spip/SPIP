@@ -175,7 +175,7 @@ function traiter_formulaires_dynamiques($get=false){
 						$post["editable_$form"] = $rev['editable'];
 					// si une redirection est demandee, appeler redirigae_formulaire qui choisira
 					// le bon mode de redirection (302 et on ne revient pas ici, ou javascript et on continue)
-					if (isset($rev['redirect'])){
+					if (isset($rev['redirect']) AND $rev['redirect']){
 						include_spip('inc/headers');
 						$post["message_ok_$form"] .= redirige_formulaire($rev['redirect']);
 					}
