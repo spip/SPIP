@@ -1047,12 +1047,13 @@ function affdate_heure($numdate) {
  * - Lundi 20 fevrier a 18h
  * - Le 20 fevrier de 18h a 20h
  * - Du 20 au 23 fevrier
- * - du 20 fevrier au 30 mars
- * - du 20 fevrier 2007 au 30 mars 2008
+ * - Du 20 fevrier au 30 mars
+ * - Du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' ou true permet d'afficher l'horaire, toute autre valeur n'indique que le jour
  * $forme peut contenir une ou plusieurs valeurs parmi
  *  - abbr (afficher le nom des jours en abbrege)
  *  - hcal (generer une date au format hcal)
+ *  - jour (forcer l'affichage des jours)
  *  - annee (forcer l'affichage de l'annee)
  *
  * @param string $date_debut
@@ -1066,7 +1067,8 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
 	$affdate = "affdate_jourcourt";
 	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
-
+	if (strpos($forme,'jour')!==false) $jour = 'jour';
+	
 	$dtstart = $dtend = $dtabbr = "";
 	if (strpos($forme,'hcal')!==false) {
 		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
@@ -1079,51 +1081,70 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	$d = date("Y-m-d", $date_debut);
 	$f = date("Y-m-d", $date_fin);
 	$h = ($horaire==='oui' OR $horaire===true);
-	$hd = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_debut), 'm'=> date("i",$date_debut)));
-	$hf = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_fin), 'm'=> date("i",$date_fin)));
-	$au = " " . strtolower(_T('date_fmt_periode_to')) . " ";
-	$du = _T('date_fmt_periode_from') . " ";
+
 	if ($d==$f)
 	{ // meme jour
-		$s = spip_ucfirst(nom_jour($d,$abbr))." ".$affdate($d);
-		if ($h)
-			if ($hd!=$hf)
-				$s .= " $hd";
+		$nomjour = nom_jour($d,$abbr);
+		$s = $affdate($d);
+		$s = _T('date_fmt_jour',array('nomjour'=>$nomjour,'jour' => $s));
+		if ($h){
+			if ($hd==$hf){
+				// Lundi 20 fevrier a 18h25
+				$s = spip_ucfirst(_T('date_fmt_jour_heure',array('jour'=>$s,'heure'=>$hd)));
+				$s = "$dtstart$s$dtabbr";
+			}else{
+				// Le <abbr...>lundi 20 fevrier de 18h00</abbr> a <abbr...>20h00</abbr>
+				if($dtabbr && $dtstart && $dtend)
+					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin_abbr',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf,'dtstart'=>$dtstart,'dtend'=>$dtend,'dtabbr'=>$dtabbr)));
+				// Le lundi 20 fevrier de 18h00 a 20h00
+				else
+					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf)));
+			}
+		}else{
+			if($dtabbr && $dtstart)
+				$s = $dtstart.spip_ucfirst($s).$dabbr;
 			else
-				$s = _T('date_fmt_jour_heure',array('jour'=>$s,'heure'=>$hd));
-		$s = "$dtstart$s$dtabbr";
-		if ($h AND $hd!=$hf) $s .= "-$dtend$hf$dtabbr";
+				$s = spip_ucfirst($s);
+		}
 	}
 	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
 	{ // meme annee et mois, jours differents
+		$nomjour_debut = nom_jour($d,$abbr);
+		$date_debut = jour($d);
+		$date_debut = _T('date_fmt_jour',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
+		$nomjour_fin = nom_jour($f,$abbr);
+		$date_fin = $affdate($f);
+		$date_fin = _T('date_fmt_jour',array('nomjour'=>$nomjour_fin,'jour' => $date_fin));
 		if ($h){
-			$s = $du . $dtstart . affdate_jourcourt($d,date("Y",$date_debut)) . " $hd" . $dtabbr;
-			$s .= $au . $dtend . $affdate($f);
-			if ($hd!=$hf) $s .= " $hf";
-			$s .= $dtabbr;
+			$date_debut = _T('date_fmt_jour_heure',array('jour'=>$date_debut,'heure'=>$hd));
+			$date_fin = _T('date_fmt_jour_heure',array('jour'=>$date_fin,'heure'=>$hf));
 		}
-		else {
-			$s = $du . $dtstart . jour($d) . $dtabbr;
-			$s .= $au . $dtend . $affdate($f) . $dtabbr;
+		
+		$date_debut = $dtstart.$date_debut.$dtabbr;
+		$date_fin = $dtend.$date_fin.$dtabbr;
+		
+		$s = _T('date_fmt_periode',array('date_debut' => $date_debut,'date_fin'=>$date_fin));
+	}
+	else {
+		if ((date("Y",$date_debut))==date("Y",$date_fin))
+		{ // meme annee, mois et jours differents
+			$date_debut = affdate_jourcourt($d,date("Y",$date_debut));
 		}
-	}
-	else if ((date("Y",$date_debut))==date("Y",$date_fin))
-	{ // meme annee, mois et jours differents
-		$s = $du . $dtstart . affdate_jourcourt($d,date("Y",$date_debut));
-		if ($h) $s .= " $hd";
-		$s .= $dtabbr . $au . $dtend . $affdate($f);
-		if ($h) $s .= " $hf";
-		$s .= $dtabbr;
-	}
-	else
-	{ // tout different
-		$s = $du . $dtstart . affdate($d);
+		else
+		{ // tout different
+			$date_debut = $affdate($d);
+		}
 		if ($h)
-			$s .= " ($hd)";
-		$s .= $dtabbr . $au . $dtend. affdate($f);
-		if ($h)
-			$s .= " ($hf)";
-		$s .= $dtabbr;
+			$date_debut = _T('date_fmt_jour_heure',array('jour'=>$date_debut,'heure'=>$hd));
+		
+		$date_fin = $affdate($f);
+		if ($h) 
+			$date_fin = _T('date_fmt_jour_heure',array('jour'=>$date_fin,'heure'=>$hf));
+		
+		$date_debut = $dtstart.$date_debut.$dtabbr;
+		$date_fin=$dtend.$date_fin.$dtabbr;
+		$s = _T('date_fmt_periode',array('date_debut' => $date_debut,'date_fin'=>$date_fin));
+		
 	}
 	return $s;
 }
