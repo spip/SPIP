@@ -27,15 +27,16 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	if ($intitule) $intitule = "<span>$intitule</span><br />";
 
 	if (!_DIR_RESTREINT AND !$vignette_de_doc) {
-		$dir_ftp = determine_upload();
-		// quels sont les docs accessibles en ftp ?
-		$l = texte_upload_manuel($dir_ftp, '', $mode);
-		// s'il n'y en a pas, on affiche un message d'aide
-		// en mode document, mais pas en mode vignette
-		if ($l OR ($mode == 'document'))
-			$dir_ftp = afficher_transferer_upload($l);
-		else
-			$dir_ftp = '';
+		if($dir_ftp = determine_upload()) {
+			// quels sont les docs accessibles en ftp ?
+			$l = texte_upload_manuel($dir_ftp, '', $mode);
+			// s'il n'y en a pas, on affiche un message d'aide
+			// en mode document, mais pas en mode vignette
+			if ($l OR ($mode == 'document'))
+				$dir_ftp = afficher_transferer_upload($l);
+			else
+				$dir_ftp = '';
+		}
 	}
   
   // Add the redirect url when uploading via iframe
