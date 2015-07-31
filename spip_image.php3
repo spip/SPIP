@@ -390,7 +390,7 @@ if ($ajout_doc == 'oui') {
 			}
 		}
 
-	} 
+	}
 	else {
 		if ($forcer_document == 'oui')
 			$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document);
@@ -449,13 +449,12 @@ if ($doc_supp) {
 	}
 
 	if ($id_vignette > 0) {
-		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
+		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
 			@unlink($fichier);
-
-		}	
+		}
 		spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
