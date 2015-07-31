@@ -2830,7 +2830,7 @@ if (true /*$gadgets*/) {
 			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_rub", "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_parent", "site-24.gif","creer.gif", false);
 					$gadget .= "</div>";
 				}
 			}
