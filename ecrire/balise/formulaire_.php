@@ -24,10 +24,6 @@ function balise_FORMULAIRE__dist($p) {
 	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
 }
 
-// http://doc.spip.org/@protege_valeurs
-function protege_valeurs($valeur){
-	return is_string($valeur)?entites_html($valeur):$valeur;
-}
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
@@ -108,7 +104,9 @@ function balise_FORMULAIRE__dyn($form)
 							$valeurs[$champ] = $v;
 			}
 			$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
-			$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
+			// proteger les ' et les " dans les champs que l'on va injecter
+			if (is_string($valeurs[$champ]))
+				$valeurs[$champ] = entites_html($valeurs[$champ]);
 		}
 	}
 
