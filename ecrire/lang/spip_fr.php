@@ -771,7 +771,23 @@ et vous reconnecter au site.
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects',
 'zbug_resultat' => 'r&eacute;sultat',
 'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue',
+'zxml_connus_attributs' => 'attributs connus',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'attribut inconnu',
+'zxml_inconnu_balise' => 'balise inconnue',
+'zxml_inconnu_entite' => 'entit&eacute; inconnue',
+'zxml_inconnu_id' => 'ID inconnu',
+'zxml_mais_de' => 'mais de',
+'zxml_non_conforme' => 'n\'est pas conforme au motif',
+'zxml_non_fils' => 'n\'est pas un fils de',
+'zxml_nonvide_balise' => 'balise non vide',
+'zxml_obligatoire_attribut' => 'ttribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte',
+'zxml_survoler' => 'survoler pour voir les corrects',
+'zxml_valeur_attribut' => 'valeur de l\'attribut',
+'zxml_vide_balise' => 'balise vide',
+'zxml_vu' => 'vu auparavant'
 
 );
 
