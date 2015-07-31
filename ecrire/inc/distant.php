@@ -537,6 +537,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	return array($f, $fopen);
 }
 
+// http://doc.spip.org/@lance_requete
 function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
 	$http_proxy = need_proxy($host);
