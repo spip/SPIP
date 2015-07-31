@@ -2066,7 +2066,9 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 			// copier l'image true color vers la palette
 			imagecopy($im, $im_, 0, 0, 0, 0, $x_i, $y_i);
 			// matcher les couleurs au mieux par rapport a l'image initiale
-			imagecolormatch($im_, $im);
+			// si la fonction est disponible (php>=4.3)
+			if (function_exists('imagecolormatch'))
+				imagecolormatch($im_, $im);
 			// produire le resultat
 			$image["fonction_image"]($im, "$dest");
 		}
