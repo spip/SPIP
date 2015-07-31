@@ -118,7 +118,7 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 // http://doc.spip.org/@rechercher_auteurs
 function rechercher_auteurs($cherche_auteur)
 {
-	include_spip('inc/mots');
+	include_spip('inc/ressembler');
 	include_spip('inc/charsets'); // pour tranlitteration
 	$result = sql_select("id_auteur, nom", "spip_auteurs");
 	$table_auteurs = array();
