@@ -36,9 +36,10 @@ function action_instituer_forum_dist() {
 
 	// changer le statut de toute l'arborescence dependant de ce message
 	$id_messages = array($id_forum);
+	$old = $row['statut'];
 	while ($id_messages) {
 		$id_messages = join(',', $id_messages);
-		spip_query("UPDATE spip_forum SET statut='$statut' WHERE id_forum IN ($id_messages)");
+		spip_query("UPDATE spip_forum SET statut='$statut' WHERE id_forum IN ($id_messages) AND statut = '$old'");
 
 		$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($id_messages)");
 		$id_messages = array();
