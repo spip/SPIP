@@ -400,33 +400,18 @@ function f_msie ($texte) {
 	if (!$GLOBALS['html']) return $texte;
 
 	// test si MSIE et sinon quitte
-	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
-	if (!$msie) return $texte;
-
-	// Comme MSIE est goret, on n'a pas honte d'inserer comme un goret
-	// en fin de page
-
-	// fixer les images background
-	$texte .= "<script type='text/javascript'><!--
-	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
-	// --></script>\n";
-
-	// Si jQuery n'est pas la on ne fixe pas les PNG
-	if (strpos(strtolower($texte), 'jquery.js')
-	AND strpos(strtolower($texte), '.png')
-	AND true /* ... autres tests si on veut affiner ... */) {
-		include_spip('inc/filtres'); # pour url_absolue :(
-		$texte .=
-"<script type='text/javascript'><!--
-if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".url_absolue(find_in_path('javascript/jquery.ifixpng.js'))."' , function() { $.ifixpng('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').ifixpng(); } );
-// --></script>\n";
-	}
-
-	return $texte;
+	if (
+		strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
+		AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
+		AND $msiefix = charger_fonction('msiefix', 'inc')
+	)
+		return $msiefix($texte);
+	else
+		return $texte;
 }
 
-//ajoute a la volee scripts a le squelette jquery.js.html
+
+// Ajoute a la volee scripts a le squelette jquery.js.html
 // http://doc.spip.org/@ajouter_js_affichage_final
 function ajouter_js_affichage_final($page,$scripts,$inline = false) {
 	if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
