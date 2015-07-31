@@ -92,12 +92,8 @@ function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 		$return .= "<$mode class=\"base64$source\" title=\"$base64\"></$mode>";
 	}
 
-	return $return
-		. ((!$no_transform AND $mode == 'div')
-			? "\n\n"
-			: ''
-		);
-;
+	return $return;
+
 }
 
 
