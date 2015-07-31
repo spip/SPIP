@@ -306,7 +306,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 			if ($etape) return array($v, $etape);
 			$n = time() - $time;
 			spip_log( "$table $meta: $v en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
-			if ($meta) ecrire_meta($meta, $installee=$v,'non', $table);
+			if ($meta) ecrire_meta($meta, $installee=$v,'oui', $table);
 			echo "<br />";
 		}
 		if (time() >= _TIME_OUT) {
@@ -316,7 +316,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 	$trouver_table(''); // vider le cache des descriptions de table
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
-	if ($meta) ecrire_meta($meta, $cible,'non',$table);
+	if ($meta) ecrire_meta($meta, $cible,'oui',$table);
 	spip_log( "MAJ terminee. $meta: $installee",'maj.'._LOG_INFO_IMPORTANTE);
 	return array();
 }
@@ -413,7 +413,7 @@ function upgrade_test() {
 function maj_version ($version, $test = true) {
 	if ($test) {
 		if ($version>=1.922)
-			ecrire_meta('version_installee', $version, 'non');
+			ecrire_meta('version_installee', $version, 'oui');
 		else {
 			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
 			$GLOBALS['meta']['version_installee'] = $version;
