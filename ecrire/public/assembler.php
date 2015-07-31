@@ -435,23 +435,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 			$params = array_diff($params,array($soustype));
 		}
 	}
-
-	// en cas d'echec : si l'objet demande a une url, on cree un petit encadre
-	// avec un lien vers l'objet ; sinon on passe la main au suivant
-	if (!$fond) {
-		$fond = $type;
-		if (!find_in_path('modeles/'.$fond.'.html')) {
-			if (!$lien)
-				$lien = calculer_url("$type$id", '', 'tout', $connect);
-			if (strpos($lien[1],'spip_url') !== false)
-				return false;
-			else
-				return '<a href="'.$lien[0].'" class="spip_modele'
-				. ($class ? " $class" : '')
-				. '">'.sinon($lien[2], _T('ecrire:info_sans_titre'))."</a>";
-		}
-	}
-
+	// Si ca marche pas en precisant le sous-type, prendre le type
+	if (!$fond AND !find_in_path('modeles/'. ($fond = $type).'.html'))
+		return false;
 
 	// Creer le contexte
 	$contexte = array( 
