@@ -215,6 +215,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 }
 
 
+// http://doc.spip.org/@instituer_auteur
 function instituer_auteur($id_auteur, $c) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
