@@ -47,9 +47,9 @@
 		<B_documents_portfolio>
         <div id="documents_portfolio">
             <h2><:info_portfolio:></h2>
-            <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
-            [<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"][ class="(#_article_principal:EXPOSE)"]>[(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>]
-            </BOUCLE_documents_portfolio>
+            <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>[
+		<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"][ class="(#_article_principal:EXPOSE)"]>[(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>
+	]</BOUCLE_documents_portfolio>
         </div>
         </B_documents_portfolio>
         <BOUCLE_afficher_document(DOCUMENTS) {id_article}{id_document} {mode=document}{extension IN png,jpg,gif}>
@@ -76,7 +76,7 @@
             <ul>
                 <BOUCLE_documents_joints(DOCUMENTS){!doublons A} {par num titre, date}>[
                 <li>
-                    <strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+                    <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
                     <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
                     #DESCRIPTIF
                 ]</li>
