@@ -30,7 +30,7 @@ include(_DIR_RESTREINT . 'inc/vieilles_defs.php');
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (substr($dossier,-1) != '/') $dossier .= '/';
-	
+
 	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
 		return $f;
 	if (function_exists($g = $f . '_dist'))
@@ -1100,8 +1100,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!isset($GLOBALS['meta']) AND _FILE_CONNECT) {
 		include_spip('inc/meta');
 		ecrire_metas();
-		$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
 	}
+	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
 
 	// supprimer le noyau si on recalcule
 	if (isset($_REQUEST['var_mode']))
