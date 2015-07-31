@@ -497,7 +497,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		case 'include':
 			$code = calculer_inclure($p, $descr, $boucles, $id_boucle);
 			
-			$commentaire = '<INCLURE ' . str_replace("\n", ' ', $code) . '>';
+			$commentaire = '<INCLURE ' . addslashes(str_replace("\n", ' ', $code)) . '>';
 			$avant='';
 			$apres='';
 			$altern = "''";
