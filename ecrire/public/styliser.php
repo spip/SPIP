@@ -277,37 +277,22 @@ function styliser_par_langue($flux) {
 
 // http://doc.spip.org/@quete_rubrique_fond
 function quete_rubrique_fond($contexte) {
-
-	if (isset($contexte['id_rubrique'])
-	AND $id = intval($contexte['id_rubrique'])
-	AND $row = quete_parent_lang('spip_rubriques',$id)) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array ($id, $lang);
+	static $liste_objets = null;
+	if (!$liste_objets) {
+		include_spip('inc/urls');
+		$liste_objets = urls_liste_objets(false);
+		$liste_objets = array_diff($liste_objets,array('rubrique'));
+		array_unshift($liste_objets, 'rubrique');
 	}
 
-	if (isset($contexte['id_breve'])
-	AND $id = intval($contexte['id_breve'])
-	AND $row = quete_parent_lang('spip_breves',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if (isset($contexte['id_syndic'])
-	AND $id = intval($contexte['id_syndic'])
-	AND $row = quete_parent_lang('spip_syndic',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']
-	AND $row = quete_parent_lang('spip_rubriques',$id_rubrique_fond)) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if (isset($contexte['id_article'])
-	AND $id = intval($contexte['id_article'])
-	AND $row = quete_parent_lang('spip_articles',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
+	foreach($liste_objets as $objet) {
+		$_id = id_table_objet($objet);
+		if (isset($contexte[$_id])
+		AND $id = intval($contexte[$_id])
+		AND $row = quete_parent_lang(table_objet_sql($objet),$id)) {
+			$lang = isset($row['lang']) ? $row['lang'] : '';
+			return array ($id, $lang);
+		}
 	}
 }
 ?>
