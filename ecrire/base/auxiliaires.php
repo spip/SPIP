@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function base_auxiliaires(&$tables_principales){
+function base_auxiliaires(&$tables_auxiliaires){
 $spip_petitions = array(
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"email_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
