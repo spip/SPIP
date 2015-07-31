@@ -744,7 +744,11 @@ function spip_pg_delete($table, $where='', $serveur='',$requeter=true) {
 	// renvoyer la requete inerte si demandee
 	if (!$requeter) return $query;
 	
-	return spip_pg_trace_query($query, $serveur);
+	$res = spip_pg_trace_query($query, $serveur);
+	if ($res)
+		pg_affected_rows($res);
+	else
+		return false;
 }
 
 // http://doc.spip.org/@spip_pg_insert
