@@ -28,9 +28,9 @@ function stats_load_engines() {
 		{
 			$data = trim(chop($data));
 
-			if (strncmp('#',$data,1)==0 && $data != '')
+			if (strncmp('#',$data,1) AND $data != '')
 			{
-				if (preg_match(',^\[(.*)\]$,', $data, $engines))
+				if (preg_match(',^\[(.*)\]$,m', $data, $engines))
 				{
 					// engine
 					$engine = $engines[1];
@@ -90,8 +90,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
-		if ( $found = (strpos($host,$arr_engines[$cnt][2])!==false) 
-		  OR $found = (strpos($path,$arr_engines[$cnt][2])!==false))
+		if ( $found = preg_match(','.$arr_engines[$cnt][2].',', $host)
+		  OR $found = preg_match(','.$arr_engines[$cnt][2].',', $path))
 		{
 			$kw_referer_host = $arr_engines[$cnt][0];
 			
@@ -102,7 +102,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
-					if (preg_match(",".preg_quote($arr_engines[$cnt][1],',')."([^\&]*),", $query, $vals)) {
+					if (preg_match(",".$arr_engines[$cnt][1]."([^\&]*),", $query, $vals)) {
 						$keywords = urldecode($vals[2]);
 					}
 				}
