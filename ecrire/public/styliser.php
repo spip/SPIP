@@ -19,21 +19,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour des raisons historiques, ce qui est trompeur
 
 // http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang, $ext='html') {
+function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
 	
-	// Accrocher un squelette de base dans le chemin, sinon erreur
+	// Trouver un squelette de base dans le chemin
 	if (!$base = find_in_path("$fond.$ext")) {
+		// Si pas de squelette regarder si c'est une table
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$table = $trouver_table($fond, $connect);
+		if ($table) {
+			$base = _DIR_TMP . $fond . ".$ext";
+			if (!file_exists($base)
+			OR  $GLOBALS['var_mode'] == 'recalcul') {
+				$vertebrer = charger_fonction('vertebrer', 'public');
+				$f = fopen($base, 'w');
+				fwrite($f, $vertebrer($table));
+				fclose($f);
+			}
+		} else { // on est gentil, mais la ...
 		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>"'$fond'")),
-			$GLOBALS['dossier_squelettes']);
+				    array('fichier'=>"'$fond'")),
+				 $GLOBALS['dossier_squelettes']);
 		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
 		return array(substr($f, 0, -strlen(".$ext")),
 			     $ext,
 			     $ext,
 			     $f);
+		}
 	}
-
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
