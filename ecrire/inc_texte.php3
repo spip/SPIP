@@ -307,7 +307,7 @@ function couper($texte, $taille=50) {
 
 	// sauts de ligne et paragraphes
 	$texte = ereg_replace("\n\n+", "\r", $texte);
-	$texte = ereg_replace("<(p|br)( [^>]*)?>", "\r", $texte);
+	$texte = ereg_replace("<(p|br)( [^>]*)?".">", "\r", $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
@@ -963,7 +963,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$les_notes .= interdire_scripts($mes_notes);
 	}
 
-	return $letexte;
+	return trim($letexte);
 }
 
 
