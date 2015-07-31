@@ -19,10 +19,6 @@ div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770
 .large #extra { float: right; clear:none; width: 200px; }
 .large #contenu { float: left; margin-left: 17px; width: 540px; }
 
-/* une seule colonne centrale */
-.pleine_largeur #navigation,.pleine_largeur #extra {display:none;}
-.pleine_largeur #contenu {margin-left:0 !important;width:100% !important;}
-
 /* les formulaires sont en 600px en config large */
 body.large.edition #contenu,
 .articles_edit.large #contenu,
@@ -34,6 +30,12 @@ body.large.edition #extra,
 .mots_edit.large #extra,
 .breves_edit.large #extra,
 .rubriques_edit.large #extra {width:140px;}
+
+/* une seule colonne centrale */
+.pleine_largeur #navigation,.pleine_largeur #extra,
+body.large .pleine_largeur #navigation,body.large .pleine_largeur #extra {display:none;}
+.pleine_largeur #contenu,
+body.large .pleine_largeur #contenu {margin-left:0;width:100%;}
 
 /*fix all layout problems of IE6 and IE7*/
 .lte7 .cadre,
