@@ -5,7 +5,11 @@
 <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
 [<link rel="canonical" href="(#URL_AUTEUR|url_absolue)" />]
-<INCLURE{fond=inc-head}{favicon=#LOGO_AUTEUR} />
+<INCLURE{fond=inc-head} />
+
+[(#REM) Favicon personnalisee a partir du logo (si filtres d'image) ]
+[(#MODELE{favicon}{favicon=#LOGO_AUTEUR})]
+
 [(#REM) Lien vers le flux RSS des articles de l'auteur ]
 <link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
 </head>
