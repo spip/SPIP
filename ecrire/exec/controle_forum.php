@@ -299,7 +299,7 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 
 		// Afficher le lien RSS
 
-		echo bouton_spip_rss('forums', array('page' => $type));
+		echo bouton_spip_rss("forums_$type");
 
 		echo fin_boite_info(true);
 			

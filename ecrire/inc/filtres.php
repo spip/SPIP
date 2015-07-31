@@ -1478,7 +1478,7 @@ function url_rss_forum($param) {
 	if (!preg_match(',.*(id_(\w*?))=([0-9]+),S', $param, $regs)) return '';
 	list(,$k,$t,$v) = $regs;
 	if ($t == 'forum') $k = 'id_' . ($t = 'thread');
-	return generer_url_public("rss_forum_$t", array('op'=>$t, $k => $v));
+	return generer_url_public("rss_forum_$t", array($k => $v));
 }
 
 //
