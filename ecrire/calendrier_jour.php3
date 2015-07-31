@@ -74,15 +74,6 @@ debut_page(nom_jour("$annee-$mois-$jour")." ".affdate_jourcourt("$annee-$mois-$j
 
 
 
-echo "<div align='center'>";
-	echo "<font size='1'>";
-	echo " <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb' style='color: blue;'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvea_pense_bete")."</a>";
-	echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal' style='color: green;'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouveau_message")."</a>";
-
-	if ($connect_statut == "0minirezo")
-		echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich' style='color: #ff9900;'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvelle_annonce")."</a>\n";
-	echo "</font>";
-echo "</div>\n";	
 
 
 debut_gauche();

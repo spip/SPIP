@@ -48,7 +48,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 	
 	echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier.php3?mois=$mois&&annee=$annee' style='color: black;'>".affdate_mois_annee("$annee-$mois-1")."</a></b></div>";
 	
-	echo "<table width='100%' cellspacing='1' cellpadding='2'>";
+	echo "<table width='100%' cellspacing='0' cellpadding='0'>";
 
 	echo "<tr>";
 	for ($i=1;$i<$jour_semaine;$i++){
@@ -63,11 +63,13 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 		if (checkdate($mois,$j,$annee)){
 
 			if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
-				echo "<td class='arial2' style='background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>";
-				echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
+				if ($semaine) $lien = "calendrier_jour.php3";
+				else $lien = "calendrier_semaine.php3";
+				echo "<td class='arial2' style='margin: 1px; padding: 2px; background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>";
+				echo "<a href='$lien?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
-				echo "<td class='arial2' style='background-color: white; text-align: center;'>";
+				echo "<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center;'>";
 				echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else {
@@ -87,9 +89,11 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 						$couleur = "black";
 					}
 				}
-				echo "<td class='arial2' style='background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>";
+				echo "<td>";
+				echo "<div class='arial2' style='margin-left: 1px; margin-top: 1px; padding: 2px; background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>";
 				if ($semaine) echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
 				else echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
+				echo "</div>";
 				echo "</td>";
 			}			
 			
@@ -148,9 +152,18 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	$jour_semaine = date("w",$nom);
 	if ($jour_semaine == 0) $bgcolor = $couleur_claire;
 
-	if ($large == "col" ) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate_jourcourt("$annee-$mois-$jour")."</a></b></div>";
-	else if ($large == "large") echo "<div align='center' style='padding: 5px;'><b class='verdana1'>&nbsp;</b></div>";
-	
+	if ($large == "col" ) {
+		echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate_jourcourt("$annee-$mois-$jour")."</a></b></div>";
+	}
+	else if ($large == "large") {
+		echo "<div align='center' style='padding: 5px;'>";
+		echo " <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb' class='arial1' style='color: blue;'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvea_pense_bete")."</a>";
+		echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal' class='arial1' style='color: green;'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouveau_message")."</a>";
+
+		if ($connect_statut == "0minirezo")
+			echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich' class='arial1' style='color: #ff9900;'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvelle_annonce")."</a>\n";
+		echo "</div>";
+	}
 	if ($large != "etroit") echo "<div style='background-color: $bgcolor; border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
 	else echo "<div style='background-color: $bgcolor;'>"; // bordure
 
