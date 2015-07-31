@@ -410,8 +410,8 @@ function info_maj ()
 #	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
 	include_spip('inc/distant');
 	$liste = _VERSIONS_SERVEUR . _VERSIONS_LISTE;
-	if (!$page = recuperer_page($liste)) return '';
-
+	if (!$page = copie_locale($liste, 'modif')) return '';
+	$page = file_get_contents(_DIR_RACINE . $page);
 	// reperer toutes les versions de numero majeur superieur ou egal
 	// (a revoir quand on arrivera a SPIP V10 ...)
 	$p = substr("0123456789", intval($maj));
