@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
+include_spip('base/abstract_sql');
 
 // On prend l'email dans le contexte de maniere a ne pas avoir a le
 // verifier dans la base ni a le devoiler au visiteur
@@ -35,13 +36,15 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 	// de l'article
 	if (!$args[0] AND $args[1]) {
 		unset ($args[2]);
-		$s = spip_query("SELECT auteurs.email AS email
-		FROM spip_auteurs as auteurs, spip_auteurs_articles as lien
-		WHERE lien.id_article=".intval($args[1])
-		. " AND auteurs.id_auteur = lien.id_auteur");
-		while ($row = spip_fetch_array($s))
+		$s = spip_abstract_select('email',
+					  array('auteurs' => 'spip_auteurs',
+						'L' => 'spip_auteurs_articles'),
+					  array('auteurs.id_auteur=L.id_auteur',
+						'L.id_article='.intval($args[1])));
+		while ($row = spip_fetch_array($s)) {
 			if ($row['email'] AND email_valide($row['email']))
 				$args[2].= ','.$row['email'];
+		}
 		$args[2] = substr($args[2], 1);
 	}
 
@@ -55,7 +58,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	include_spip('inc/texte');
-	$puce = $GLOBALS['puce'.$GLOBALS['spip_lang_rtl']];
+	$puce = definir_puce();
 
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
 	$id = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
