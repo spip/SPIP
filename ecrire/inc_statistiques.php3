@@ -71,12 +71,9 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$found = false;
 
 	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
-		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs)) {
-			$keywords = $regs[2];
-			include_ecrire('inc_charsets.php3');
-			$keywords = javascript_to_binary($keywords);	// nettoyer les %A3
-			$kw_referer_host = "SPIP";
-		} else
+		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
+			$keywords = urldecode($regs[2]);
+		else
 			return '';
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
