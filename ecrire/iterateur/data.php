@@ -85,6 +85,10 @@ class IterateurDATA implements Iterator {
 		list($this->cle, $this->valeur) = each($this->tableau);
 	}
 
+	public function exception_des_criteres() {
+		return array('tableau');
+	}
+	
 	protected function select($command) {
 		// les commandes connues pour l'iterateur POUR
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
