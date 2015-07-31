@@ -1,4 +1,4 @@
-<BOUCLE_auteur(AUTEURS){id_auteur}{tout}{si #ENV{exec}|=={auteur}}>
+<BOUCLE_auteur(AUTEURS){id_auteur}{statut==.*}{si #ENV{exec}|=={auteur}}>
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
