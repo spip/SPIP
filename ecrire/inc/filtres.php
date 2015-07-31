@@ -2027,7 +2027,7 @@ function match($texte, $expression, $modif="UimsS",$capte=0) {
 	$expression=str_replace("\/","/",$expression);
 	$expression=str_replace("/","\/",$expression);
 	return preg_match('/' . $expression . '/' . $modif,$texte, $r)
-		? ($r[$capte]?$r[$capte]:true) : false;
+		? (isset($r[$capte])?$r[$capte]:true) : false;
 }
 
 // filtre replace pour faire des operations avec expression reguliere
