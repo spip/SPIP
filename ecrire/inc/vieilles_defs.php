@@ -244,6 +244,9 @@ function lang_dselect () {
 // toujours disponible pour PHP > 4.0.1
 $GLOBALS['flag_revisions'] = function_exists("gzcompress");
 
+// eviter de planter les plugins qui le testent
+$GLOBALS['options'] = 'avancees';
+
 // http://doc.spip.org/@generer_url_post_ecrire
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
 	spip_log("generer_url_post_ecrire utiliser generer_post_ecrire");
