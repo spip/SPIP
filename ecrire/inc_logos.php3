@@ -489,9 +489,9 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	// attributs deprecies. Transformer en CSS
 	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
 	if ($espace) 
-	  $attributs .= " style='margin: $espace" . "px; border-width: 0px'";
+	  $attributs .= " style='margin: $espace" . "px; border-width: 0px;'";
 	else 
-	  $attributs .=  " class='spip_logos'";
+	  $attributs .=  " style='border-width: 0px;' class='spip_logos'";
 	// attribut deprecie mais equivalent CSS pas clair
 	if (eregi("align='([^']+)'", $img, $regs)) $align = $regs[1];
 	if ($align)  $attributs .= " align='$align'";

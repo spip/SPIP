@@ -26,7 +26,7 @@ function enfant($collection){
 	global $spip_display, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 	
-	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY titre";
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre";
 	$result2 = spip_query($query2);
 
 
@@ -96,7 +96,7 @@ function enfant($collection){
 
 function sous_enfant($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
-	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY titre";
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
