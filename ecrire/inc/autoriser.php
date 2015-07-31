@@ -281,7 +281,7 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 				$champ = $c['champ'];
 				if (!isset($opt[$champ])) return false; // pas de champ passe a la demande => NIET
 				$previsu = explode(',',$c['previsu']);
-				// regarder si ce statut est autoriser pour l'auteur
+				// regarder si ce statut est autorise pour l'auteur
 				if (in_array($opt[$champ]."/auteur",$previsu)){
 					if (!sql_countsel("spip_auteurs_liens","id_auteur=".intval($qui['id_auteur'])." AND objet=".sql_quote($type)." AND id_objet=".intval($id)))
 						return false;  // pas auteur de cet objet => NIET
