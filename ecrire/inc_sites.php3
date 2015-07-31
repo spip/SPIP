@@ -57,7 +57,7 @@ function recuperer_page($url) {
 			}
 			else return;
 			while ($s = trim(fgets($f, 16384))) {
-				if (ereg('^Location: (.*)', $s, $r)) {
+				if (eregi('^Location: (.*)', $s, $r)) {
 					$location = $r[1];
 				}
 			}
