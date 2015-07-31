@@ -238,7 +238,7 @@ function racine_forum($id_forum){
 		return false;
 
 	if ($row['id_parent']
-	AND $row['id_thread'] != $id_forum)) // eviter boucle infinie
+	AND $row['id_thread'] != $id_forum) // eviter boucle infinie
 		return racine_forum($row['id_thread']);
 
 	if ($row['id_rubrique'])
