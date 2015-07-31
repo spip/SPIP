@@ -232,7 +232,7 @@ function filtrer($filtre) {
 function image_filtrer($args){
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
-	if (!$texte) return;
+	if (!strlen($texte)) return;
 	find_in_path('filtres_images.php','inc/', true);
 	statut_effacer_images_temporaires(true); // activer la suppression des images temporaires car le compilo finit la chaine par un image_graver
 	// Cas du nom de fichier local
