@@ -768,7 +768,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'texte_admin_effacer_01' => 'Gant se e tiverkoc\'h <i>PEP TRA</i> en ho tiaz titouro&ugrave;,
 da lavaret eo <i>an holl</i> aotreo&ugrave; evit ar merourien hag ar skridaozerien. Goude beza&ntilde; bet graet se e rankoc\'h
 adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an nebeuta&ntilde; un aotre evit ar merour',
-'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh @dossier@. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul <i>IMG/</i>, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
+'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh @dossier@. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul @img@, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
 'texte_admin_tech_02' => 'Diwallit : war ul lec\'hienn warna&ntilde; ar memes arreval HEPKEN ouzh SPIP e c\'hello ar restr-savete-ma&ntilde; beza&ntilde; implijet. Arabat neuze &laquo;&nbsp;goullonderi&ntilde; an diaz&nbsp;&raquo; o so&ntilde;jal adstalia&ntilde; ar savete goude beza&ntilde; bet nevesaet SPIP... Sellit ouzh <a href="http://www.spip.net/fr_article1489.html">diello&ugrave; SPIP</a>.',
 'texte_admin_tech_03' => 'Gallout a rit dibab savetei&ntilde; stumm gwaeget ar restr evit berraat ar saveteadur, ha ma kemerfe nebeutoc\'h a blas.',
 'texte_adresse_annuaire_1' => '(Ma \'z eo staliet ar roll dud er memes lec\'h hag ho lec\'hienn, ema&ntilde; moarvat e-barzh &laquo;localhost&raquo;.)',
