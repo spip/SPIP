@@ -1211,40 +1211,6 @@ function balise_LISTE_dist($p) {
 	return $p;
 }
 
-//#FOREACH
-//
-// http://doc.spip.org/@balise_FOREACH_dist
-function balise_FOREACH_dist($p) {
-	$_tableau = interprete_argument_balise(1,$p);
-	$_tableau = str_replace("'", "", strtoupper($_tableau));
-	$_tableau = sinon($_tableau, 'ENV');
-	$f = 'balise_'.$_tableau;
-	$balise = function_exists($f) ? $f : (function_exists($g = $f.'_dist') ? $g : '');
-
-	if($balise) {
-		$_modele = interprete_argument_balise(2,$p);
-		$_modele = str_replace("'", "", strtolower($_modele));
-		$__modele = 'foreach_'.strtolower($_tableau);
-		$_modele = (!$_modele AND trouve_modele($__modele)) ?
-			$__modele :
-			($_modele ? $_modele : 'foreach');
-
-		// on passe a la balise seulement les parametres
-		// mais on enleve les 2 deja utilise
-		// [(#FOREACH{CONFIG,'',suivants}|filtre)]
-		$p->param[0] = array_merge(array(""),array_slice($p->param[0],3));
-		$p = $balise($p);
-		$filtre = chercher_filtre('foreach');
-		$p->code = $filtre . "(unserialize(" . $p->code . "), '" . $_modele . "')";
-	}
-	//On a pas trouve la balise correspondant au tableau a traiter
-	else {
-		$msg = array('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau));
-		erreur_squelette($msg, $p);
-	}
-	return $p;
-}
-
 // Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
 // A noter : la priorite des operateurs exige && plutot que AND
 // Cette balise cree un cache par session
