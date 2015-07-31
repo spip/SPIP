@@ -79,7 +79,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 function init_body_class() {
 	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 		? $GLOBALS['visiteur_session']['prefs']['display']
-		: 0;
+		: 2;
 	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
 		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
 		: 'navigation_avec_icones';
@@ -88,7 +88,7 @@ function init_body_class() {
 		: 'navigation_avec_outils';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
-	$display_class=array(1=>'icones_texte',2=>'icones_img_texte',3=>'icones_img');
+	$display_class=array(0=>'icones_img_texte'/*init*/,1=>'icones_texte',2=>'icones_img_texte',3=>'icones_img');
 	return $GLOBALS['spip_ecran'] . " $spip_display_navigation $spip_display_outils ".$display_class[$GLOBALS['spip_display']];
 }
 
