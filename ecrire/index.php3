@@ -361,6 +361,13 @@ if ($relief) {
 			"SELECT * FROM spip_syndic WHERE syndication='off' ORDER BY nom_site");
 	}
 	
+	// Les articles syndiques en attente de validation
+	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
+		if (($row = mysql_fetch_array($result)) AND $row['compte'])
+			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." articles syndiqu&eacute;s</a> sont en attente de validation.</small>";
+	}
+
 	fin_cadre_enfonce();	
 }	
 
@@ -398,6 +405,7 @@ if ($options == 'avancees') {
 		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
+
 
 }
 

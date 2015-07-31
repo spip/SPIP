@@ -105,9 +105,9 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 
 		$moderation = $row['moderation'];
 		if ($moderation == 'oui')
-			$moderation = 'refuse';
+			$moderation = 'dispo';	// a valider
 		else
-			$moderation = 'publie';
+			$moderation = 'publie';	// en ligne sans validation
 	}
 
 	$le_retour=recuperer_page($la_query);
@@ -405,18 +405,22 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 							$puce = 'puce-poubelle.gif';
 					}
 
-					else if ($statut == "off") {
+					else if ($statut == "dispo") { // moderation : a valider
+							$puce = 'puce-rouge.gif';
+					}
+
+					else if ($statut == "off") { // vieillerie
 							$puce = 'puce-rouge-anim.gif';
 					}
 
 					echo "<img src='img_pack/$puce' width='7' height='7' border='0'>";
-					if ($statut == "refuse") echo "<font color='black'>";
-					if ($statut == "off") echo "<font color='red'>";
-					echo "&nbsp;&nbsp;".$titre;
 
-					if ($statut == "refuse" OR $statut == "off") echo "</font>";
+					if ($statut == "refuse")
+						echo "<font color='black'>&nbsp;&nbsp;$titre</font>";
+					else
+						echo "&nbsp;&nbsp;".$titre;
+
 					echo "</A>";
-					
 
 					if (strlen($lesauteurs)>0) echo "<br>auteur(s)&nbsp;: <font color='#336666'>$lesauteurs</font>";
 					if (strlen($descriptif)>0) echo "<br>descriptif(s)&nbsp;: <font color='#336666'>$descriptif</font>";
@@ -445,9 +449,8 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 						else if ($statut == "refuse"){
 							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>r&eacute;tablir ce lien</a>]";
 						}
-						else if ($statut == "off") {
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>r&eacute;tablir ce lien</a>]";
-							echo "<br>[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'>bloquer ce lien</a>]";
+						else if ($statut == "dispo") {
+							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>valider ce lien</a>]";
 						}
 					}else{
 						echo "&nbsp;";
