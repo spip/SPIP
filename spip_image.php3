@@ -314,7 +314,7 @@ function gdRotate($imagePath,$rtt){
 	if(preg_match("/\.(png)/i", $imagePath)) $src_img=ImageCreateFromPNG($imagePath);
 	elseif(preg_match("/\.(jpg)/i", $imagePath)) $src_img=ImageCreateFromJPEG($imagePath);
 	elseif(preg_match("/\.(bmp)/i", $imagePath)) $src_img=ImageCreateFromWBMP($imagePath);
-	$size=GetImageSize($imagePath);
+	$size=@getimagesize($imagePath);
 	//note: to make it work on GD 2.xx properly change ImageCreate to ImageCreateTrueColor
 
 	$process = lire_meta('image_process');

@@ -25,7 +25,7 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 			//echo "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
 			$retour = $vignette;
 		}
-		else if ($taille_origine = getimagesize($logo)) {
+		else if ($taille_origine = @getimagesize($logo)) {
 			//list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille_x, $taille_y);
 			$retour = $logo;
 		}	
