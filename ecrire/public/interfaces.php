@@ -75,6 +75,7 @@ class Boucle {
 	var $numrows = false; 
 	var $cptrows = false; 
 	var $ligne = 0; 
+	var $descr =  array(); # noms des fichiers source et but etc
 }
 
 // sous-noeud du precedent
