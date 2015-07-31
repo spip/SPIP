@@ -221,4 +221,30 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	return index_pile ($boucles[$idb]->id_parent, $nom_champ, $boucles);
 }
 
+function rindex_pile($p, $champ, $motif) 
+{
+	$n = 0;
+	$b = $p->id_boucle;
+	$p->code = '';
+	while ($b != '') {
+	if ($s = $p->boucles[$b]->param) {
+	  foreach($s as $v) {
+		if (strpos($v,$motif) !== false) {
+		  $p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
+			"]['$champ']";
+		  $b = '';
+		  break;
+		}
+	  }
+	}
+	$n++;
+	$b = $p->boucles[$b]->id_parent;
+	}
+	if (!$p->code) {
+	  erreur_squelette(_L("Champ #" . strtoupper($champ) . " hors d'une boucle de motif $motif"), $p->id_boucle);
+	}
+	$p->statut = 'php';
+	return $p;
+}
+
 ?>

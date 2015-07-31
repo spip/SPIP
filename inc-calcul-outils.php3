@@ -87,8 +87,8 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 				$afflien = "<div";
 				$afflien2 = "div>";
 			}
-			$milieu = "$afflien onMouseOver=\"image$num_survol.src=".
-				"'$artoff'\" onMouseOut=\"image$num_survol.src=".
+			$milieu = "$afflien onmouseover=\"image$num_survol.src=".
+				"'$artoff'\" onmouseout=\"image$num_survol.src=".
 				"'$arton'\">$milieu</$afflien2";
 		}
 		else if ($lien) {
