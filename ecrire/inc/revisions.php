@@ -53,6 +53,7 @@ function replace_fragment($id_article, $version_min, $version_max, $id_fragment,
 		     'fragment' => $fragment);
 }
 
+// http://doc.spip.org/@envoi_replace_fragments
 function envoi_replace_fragments($replaces) {
 	$desc = $GLOBALS['tables_auxiliaires']['spip_versions_fragments'];
 	foreach($replaces as $r)
@@ -60,6 +61,7 @@ function envoi_replace_fragments($replaces) {
 }
 
 
+// http://doc.spip.org/@envoi_delete_fragments
 function envoi_delete_fragments($id_article, $deletes) {
 	if (count($deletes)) {
 		spip_query("DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND ((".	join(") OR (", $deletes)."))");
@@ -369,6 +371,7 @@ function recuperer_version($id_article, $id_version) {
 			 recuperer_fragments($id_article, $id_version));
 }
 
+// http://doc.spip.org/@reconstuire_version
 function reconstuire_version($champs, $fragments, $res=array()) {
 
 	static $msg;

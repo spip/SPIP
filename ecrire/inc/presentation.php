@@ -1099,6 +1099,7 @@ function fin_cadre_formulaire($return=false){
 }
 
 
+// http://doc.spip.org/@formulaire_recherche
 function formulaire_recherche($page, $complement=""){
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
