@@ -88,13 +88,15 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 // Changer la langue courante
 //
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
  	if ($lang && ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
 
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
 		$spip_lang_left =  lang_dir($lang, 'left', 'right');
 		$spip_lang_right = lang_dir($lang, 'right', 'left');
+		$spip_lang_dir =   lang_dir($lang);
+		$spip_dir_lang = " dir='$spip_lang_dir'";
 
 		return true;
 	}

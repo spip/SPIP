@@ -11,7 +11,7 @@ debut_gauche();
 
 
 function enfant($collection){
-	global $les_enfants, $couleur_foncee;
+	global $les_enfants, $couleur_foncee, $lang_dir;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 
@@ -19,50 +19,54 @@ function enfant($collection){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
-		$descriptif=propre($row['descriptif']);
 
 		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
+		changer_typo($row['lang']);
+		$descriptif=propre($row['descriptif']);
+
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
-
 		if (strlen($les_sous_enfants) > 0){
-			$les_enfants.= $bouton_layer;
+			$les_enfants .= $bouton_layer;
 		}
-		if  (acces_restreint_rubrique($id_rubrique))
-			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ";
-		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
-		if (strlen($descriptif)>1)
-			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
+		$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
+
+		if (acces_restreint_rubrique($id_rubrique))
+			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
+
+		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
+		if (strlen($descriptif)>1) {
+			$les_enfants .= "<br><FONT SIZE=1><span dir='$lang_dir'>$descriptif</span></FONT>";
+		}
 
 		$les_enfants.= "</FONT>";
 
-		$les_enfants.="<FONT FACE='arial, helvetica'>";
 		$les_enfants .= $les_sous_enfants;
-		$les_enfants .="</FONT>&nbsp;";
 		$les_enfants .= fin_cadre_relief(true);
 	}
 }
 
 function sous_enfant($collection2){
+	global $lang_dir, $spip_lang_dir;
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>\n<FONT SIZE=1 face='arial,helvetica,sans-serif'>";
 		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
+			changer_typo($row['lang']);
 
-			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'>$titre2</A>\n";
+			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></A>\n";
 		}
 		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
 	}
-
+	
 	return $retour;
 }
 
@@ -72,7 +76,7 @@ function sous_enfant($collection2){
 //
 
 
-echo "<p align='left'>";
+echo "<p>";
 debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 if ($bonjour == "oui" OR $spip_ecran == "large") echo bouton_block_visible("info_perso");
@@ -207,7 +211,7 @@ fin_raccourcis();
 //
 // Annonces
 //
-	afficher_taches();
+afficher_taches();
 
 
 
@@ -292,7 +296,7 @@ if ($connect_statut == "0minirezo") {
 $post_dates = lire_meta("post_dates");
 
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
-	echo "<P align=left>";
+	echo "<p>";
 	afficher_articles(_T('info_article_a_paraitre'),
 		"WHERE statut='publie' AND date>NOW() ORDER BY date");
 }
@@ -302,7 +306,7 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 // Vos articles en cours de redaction
 //
 
-echo "<P align=left>";
+echo "<p>";
 $vos_articles = afficher_articles(_T('info_en_cours_validation'),
 	", spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
 	"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");

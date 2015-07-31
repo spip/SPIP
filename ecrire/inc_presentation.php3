@@ -455,9 +455,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif><span $dir_lang>".typo($titre)."</span></a>";
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang>".typo($titre)."</a>";
 			if ($afficher_langue AND $lang != $langue_defaut)
-				$s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 			if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
 
 			$vals[] = $s;
@@ -498,7 +498,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 //
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global $connect_id_auteur;
+	global $connect_id_auteur, $spip_lang_right, $dir_lang;
 
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
@@ -556,14 +556,15 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 			$s = "<a href='breves_voir.php3?id_breve=$id_breve' title=\"$title\">";
 			$s .= "<img src='img_pack/$puce.gif' alt='' width='8' height='9' border='0'></a>&nbsp;&nbsp;";
-			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'>";
+			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang>";
 			$s .= typo($titre);
 			$s .= "</a>";
-			if ($afficher_langue AND $lang != $langue_defaut) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+			if ($afficher_langue AND $lang != $langue_defaut)
+				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 
 			$vals[] = $s;
 
-			$s = "<div align=\"right\">";
+			$s = "<div align='$spip_lang_right'>";
 			if ($affrub) {
 				$rub = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$s .= typo($rub['titre']);
