@@ -1,93 +1,53 @@
 <script type='text/javascript'>/*<![CDATA[*/
 function date_picker_options(){
 	return {
-							buttonText: '<:afficher_calendrier|texte_script:>',
-							buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
-							buttonImageOnly: true,
-							closeText: '<:bouton_fermer|texte_script:>',
-							prevText: '<:precedent|texte_script:>',
-							nextText: '<:suivant|texte_script:>',
-							currentText: '<:date_aujourdhui|texte_script:>',
-							closeText: '<:bouton_fermer|texte_script:>',
-							monthNames: [
-								'<:date_mois_1|texte_script:>',
-								'<:date_mois_2|texte_script:>',
-								'<:date_mois_3|texte_script:>',
-								'<:date_mois_4|texte_script:>',
-								'<:date_mois_5|texte_script:>',
-								'<:date_mois_6|texte_script:>',
-								'<:date_mois_7|texte_script:>',
-								'<:date_mois_8|texte_script:>',
-								'<:date_mois_9|texte_script:>',
-								'<:date_mois_10|texte_script:>',
-								'<:date_mois_11|texte_script:>',
-								'<:date_mois_12|texte_script:>'],
-							monthNamesShort: [
-								'<:date_mois_1_abbr|texte_script:>',
-								'<:date_mois_2_abbr|texte_script:>',
-								'<:date_mois_3_abbr|texte_script:>',
-								'<:date_mois_4_abbr|texte_script:>',
-								'<:date_mois_5_abbr|texte_script:>',
-								'<:date_mois_6_abbr|texte_script:>',
-								'<:date_mois_7_abbr|texte_script:>',
-								'<:date_mois_8_abbr|texte_script:>',
-								'<:date_mois_9_abbr|texte_script:>',
-								'<:date_mois_10_abbr|texte_script:>',
-								'<:date_mois_11_abbr|texte_script:>',
-								'<:date_mois_12_abbr|texte_script:>'],
-							dayNames: [
-								'<:date_jour_1|texte_script:>',
-								'<:date_jour_2|texte_script:>',
-								'<:date_jour_3|texte_script:>',
-								'<:date_jour_4:|texte_script>',
-								'<:date_jour_5|texte_script:>',
-								'<:date_jour_6|texte_script:>',
-								'<:date_jour_7|texte_script:>'],
-							dayNamesShort: [
-								'<:date_jour_1_abbr|texte_script:>',
-								'<:date_jour_2_abbr|texte_script:>',
-								'<:date_jour_3_abbr|texte_script:>',
-								'<:date_jour_4_abbr|texte_script:>',
-								'<:date_jour_5_abbr|texte_script:>',
-								'<:date_jour_6_abbr|texte_script:>',
-								'<:date_jour_7_abbr|texte_script:>'],
-							dayNamesMin: [
-								'<:date_jour_1_initiale|texte_script:>',
-								'<:date_jour_2_initiale|texte_script:>',
-								'<:date_jour_3_initiale|texte_script:>',
-								'<:date_jour_4_initiale|texte_script:>',
-								'<:date_jour_5_initiale|texte_script:>',
-								'<:date_jour_6_initiale|texte_script:>',
-								'<:date_jour_7_initiale|texte_script:>'],
-							dateFormat: 'dd/mm/yy',
-							firstDay: 1,
-							isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
-							changeMonth: true,
-							changeYear: true,
-							showOtherMonths: true,
-							selectOtherMonths: true
+		buttonText: '<:afficher_calendrier|texte_script:>',
+		buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
+		buttonImageOnly: true,
+		closeText: '<:bouton_fermer|texte_script:>',
+		prevText: '<:precedent|texte_script:>',
+		nextText: '<:suivant|texte_script:>',
+		currentText: '<:date_aujourdhui|texte_script:>',
+		closeText: '<:bouton_fermer|texte_script:>',
+		monthNames: [
+			'<:date_mois_1|texte_script:>','<:date_mois_2|texte_script:>','<:date_mois_3|texte_script:>','<:date_mois_4|texte_script:>','<:date_mois_5|texte_script:>','<:date_mois_6|texte_script:>',
+			'<:date_mois_7|texte_script:>','<:date_mois_8|texte_script:>','<:date_mois_9|texte_script:>','<:date_mois_10|texte_script:>','<:date_mois_11|texte_script:>','<:date_mois_12|texte_script:>'],
+		monthNamesShort: [
+			'<:date_mois_1_abbr|texte_script:>','<:date_mois_2_abbr|texte_script:>','<:date_mois_3_abbr|texte_script:>','<:date_mois_4_abbr|texte_script:>','<:date_mois_5_abbr|texte_script:>','<:date_mois_6_abbr|texte_script:>',
+			'<:date_mois_7_abbr|texte_script:>','<:date_mois_8_abbr|texte_script:>','<:date_mois_9_abbr|texte_script:>','<:date_mois_10_abbr|texte_script:>','<:date_mois_11_abbr|texte_script:>','<:date_mois_12_abbr|texte_script:>'],
+		dayNames: [
+			'<:date_jour_1|texte_script:>','<:date_jour_2|texte_script:>','<:date_jour_3|texte_script:>','<:date_jour_4:|texte_script>',
+			'<:date_jour_5|texte_script:>','<:date_jour_6|texte_script:>','<:date_jour_7|texte_script:>'],
+		dayNamesShort: [
+			'<:date_jour_1_abbr|texte_script:>','<:date_jour_2_abbr|texte_script:>','<:date_jour_3_abbr|texte_script:>','<:date_jour_4_abbr|texte_script:>',
+			'<:date_jour_5_abbr|texte_script:>','<:date_jour_6_abbr|texte_script:>','<:date_jour_7_abbr|texte_script:>'],
+		dayNamesMin: [
+			'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
+			'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
+		dateFormat: 'dd/mm/yy',
+		firstDay: 1,
+		isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
+		changeMonth: true,
+		changeYear: true,
+		showOtherMonths: true,
+		selectOtherMonths: true
 	};
 }
 
 if (window.jQuery){
 	jQuery(function(){
-		if (jQuery('input.date').length)
-			jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.widget.js}',function(){
-				jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.datepicker.js}',function(){
-					jQuery('input.date')
-						.addClass('datePicker')
-						.datepicker(jQuery.extend(date_picker_options(),
-							{
-							showOn: 'button'[,
-							minDate:'(#ENV{startDate})'][,
-							maxDate:'(#ENV{endDate})']
-							})
-						)
-						.trigger('datePickerLoaded');
-				});
-			});
-		if (jQuery('input.heure').length)
-			jQuery.getScript('#CHEMIN{formulaires/dateur/jquery.time_picker.js}',function(){
+		if (jQuery('input.date,input.heure').length)
+			jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}',function(){
+				jQuery('input.date')
+					.addClass('datePicker')
+					.datepicker(jQuery.extend(date_picker_options(),
+						{
+						showOn: 'button'[,
+						minDate:'(#ENV{startDate})'][,
+						maxDate:'(#ENV{endDate})']
+						})
+					)
+					.trigger('datePickerLoaded');
 				jQuery("input.heure").addClass('timePicker').timePicker();
 			});
 	});

@@ -328,6 +328,7 @@ prive/formulaires/configurer_visiteurs.php -text
 prive/formulaires/dater.html -text
 prive/formulaires/dater.php -text
 prive/formulaires/dateur/inc-dateur.html -text
+prive/formulaires/dateur/jquery.dateur.js.html -text
 prive/formulaires/dateur/jquery.time_picker.js -text
 prive/formulaires/dateur/time_picker.css -text
 prive/formulaires/declarer_bases.html -text
