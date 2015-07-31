@@ -32,9 +32,20 @@ if ($spip_display != 4) {
 	$titre_cadre = afficher_plus("auteurs_edit.php3?id_auteur=$connect_id_auteur");
 	$titre_cadre .= majuscules(typo($connect_nom));
 	
-	debut_cadre_couleur_foncee("fiche-perso-24.gif", false, '', '');
-	echo "<center><b>".$titre_cadre."</b></center>";
-	fin_cadre_couleur_foncee();
+	debut_cadre_relief("fiche-perso-24.gif", false, '',$titre_cadre);
+	if ($connect_statut) {
+		$result_admin = spip_query("SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$connect_id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique");
+		if (spip_num_rows($result_admin)) {
+		  echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+			while ($row_admin = spip_fetch_array($result_admin)) {
+				$id_rubrique = $row_admin["id_rubrique"];
+				echo "<li><a href='naviguer.php3?id_rubrique=$id_rubrique'>", typo($row_admin["titre"]), '</a></li>';
+			}
+			echo "</ul></b>";
+		}
+	}
+
+	fin_cadre_relief();
 	
 
 	//
