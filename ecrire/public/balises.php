@@ -1233,4 +1233,13 @@ function balise_PLUGIN_dist($p) {
 	return $p;
 }
 
+// Appelle la fonction inc_aider_dist
+function balise_AIDER_dist($p) {
+	$_motif = interprete_argument_balise(1,$p);
+	$aider = charger_fonction('aider','inc');
+	$f = chercher_filtre('info_plugin');
+	$p->code = "((\$aider=charger_fonction('aider','inc'))?\$aider($_motif):'')";
+	return $p;
+}
+
 ?>
