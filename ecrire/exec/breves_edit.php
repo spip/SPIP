@@ -69,19 +69,10 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	if ($new != 'oui') {
 		$id_breve=$row['id_breve'];
 		$titre=$row['titre'];
-		$texte=$row['texte'];
-		$lien_titre=$row['lien_titre'];
-		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
-		$extra = $row['extra'];
-		$onfocus = '';
 	} else {
 		$titre = filtrer_entites(_T('titre_nouvelle_breve'));
-		$texte = "";
-		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		$lien_titre='';
-		$lien_url='';
 		$statut = "prop";
 		$row = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$id_rubrique = $row['id_secteur'];
