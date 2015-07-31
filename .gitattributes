@@ -71,7 +71,6 @@ ecrire/charsets/translitcomplexe.php -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/admin_plugin.php -text
-ecrire/exec/articles_tous.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
 ecrire/exec/charger_plugin.php -text
@@ -455,7 +454,6 @@ prive/informer_auteur.html -text
 prive/informer_auteur_fonctions.php -text
 prive/javascript/SearchHighlight.js -text
 prive/javascript/ajaxCallback.js -text
-prive/javascript/articles_tous_edite.js -text
 prive/javascript/gadgets.js -text
 prive/javascript/jquery.autosave.js -text
 prive/javascript/jquery.colors.js -text
