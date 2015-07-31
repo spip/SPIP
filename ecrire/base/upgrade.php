@@ -111,7 +111,7 @@ function maj_while($installee, $cible)
 			ecrire_meta('version_installee', $installee,'non');
 		} // rien pour SQL
 		if ($n >= _UPGRADE_TIME_OUT) {
-			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
+			redirige_url_ecrire('upgrade', "reinstall=$installee");
 		}
 	}
 	// indispensable pour les chgt de versions qui n'écrivent pas en base

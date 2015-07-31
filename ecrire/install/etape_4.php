@@ -47,10 +47,10 @@ function install_etape_4_dist()
 	if (@file_exists(_FILE_CHMOD_TMP))
 		include(_FILE_CHMOD_TMP);
 	else
-		redirige_par_entete(generer_url_ecrire('install'));
+		redirige_url_ecrire('install');
 
 	if (!@file_exists(_FILE_CONNECT_TMP))
-		redirige_par_entete(generer_url_ecrire('install'));
+		redirige_url_ecrire('install');
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 

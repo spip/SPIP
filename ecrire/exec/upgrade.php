@@ -20,7 +20,7 @@ function exec_upgrade_dist() {
 
 	global $spip_version;
 	if (!_FILE_CONNECT)
-		redirige_par_entete(generer_url_ecrire("install"));
+		redirige_url_ecrire("install");
 
 	// Si reinstallation necessaire, message ad hoc
 	if (_request('reinstall') == 'oui') {

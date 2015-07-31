@@ -74,7 +74,7 @@ function action_editer_site_dist() {
 	}
 	// Erreur
 	else {
-		redirige_par_entete(generer_url_ecrire());
+		redirige_url_ecrire();
 	}
 
 	// Re-syndiquer le site

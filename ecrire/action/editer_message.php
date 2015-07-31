@@ -154,7 +154,7 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 		}
 	}
 
-	redirige_par_entete(generer_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest",true));
+	redirige_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest");
 }
 
 // http://doc.spip.org/@action_editer_message_post_vieux

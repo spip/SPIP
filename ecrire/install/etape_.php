@@ -18,7 +18,7 @@ function install_etape__dist()
 	utiliser_langue_visiteur();
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues) {
-		redirige_par_entete(generer_url_ecrire('install', "etape=chmod", true));
+		redirige_url_ecrire('install', "etape=chmod");
 	} else {
 		include_spip('inc/presentation'); // pour info_copyright
 
