@@ -90,6 +90,23 @@ function auth() {
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}
+	// Peut-etre sommes-nous en auth http?
+	else if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+		if ($GLOBALS['logout'] == $PHP_AUTH_USER)
+			ask_php_auth($auth_text_failure);
+		else {
+			$auth_login = $PHP_AUTH_USER;
+			$auth_mdpass = md5($PHP_AUTH_PW);
+			$check_mdpass = " AND pass='$auth_mdpass'";
+			$auth_can_disconnect = true;
+			$PHP_AUTH_PW = '';
+			$_SERVER['PHP_AUTH_PW'] = '';
+			$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
+		}
+	}
+	else if ($GLOBALS['essai_auth_http'] == 'oui') {
+		ask_php_auth($auth_text_failure);
+	}
 	// Authentification session
 	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 		include_local ("inc_meta.php3");
@@ -106,20 +123,9 @@ function auth() {
 			}
 		}
 	}
-
-	// peut-etre sommes-nous en auth http?
-	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-		if ($GLOBALS['logout'] == $PHP_AUTH_USER)
-			ask_php_auth($auth_text_failure);
-		else {
-			$auth_login = $PHP_AUTH_USER;
-			$auth_mdpass = md5($PHP_AUTH_PW);
-			$check_mdpass = " AND pass='$auth_mdpass'";
-			$auth_can_disconnect = true;
-			$PHP_AUTH_PW = '';
-			$_SERVER['PHP_AUTH_PW'] = '';
-			$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
-		}
+	else if ($GLOBALS['essai_cookie'] == 'oui') {
+		@header("Location: ./login.php3?echec_cookie=oui");
+		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp

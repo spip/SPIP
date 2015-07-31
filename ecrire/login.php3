@@ -23,27 +23,10 @@ if (ereg("^@(.*)$", $spip_admin, $regs)) $login = $regs[1];
 else $login = "";
 
 
-// tentative de connexion en auth http
-if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-	@header("Location: ./index.php3");
-	exit;
-}
-else if ($essai_auth_http == "oui") {
-	ask_php_auth("Connexion refus&eacute;e...");
-	exit;
-}
-else if ($essai_cookie == "oui") {
-	if (! verifier_session($spip_session)) {
-		install_debut_html("$nom_site : probl&egrave;me de cookie");
-		echo "<p>La m&eacute;thode pr&eacute;f&eacute;r&eacute;e de spip pour l'authentification implique
-			que vous acceptiez les cookies. Vous pouvez r&eacute;gler votre navigateur
-			pour qu'il les accepte (au moins pour ce site).
-			<a href='./login.php3?essai_auth_http=oui'>Sinon cliquez ici pour tenter
-			une autre m&eacute;thode de connexion (par http).</a>";
-	} else {
-		@header("Location: ./index.php3");   // connecte
-		exit;
-	}
+if ($echec_cookie == "oui") {
+	install_debut_html("$nom_site : probl&egrave;me de cookie");
+	echo "<p><b>Pour vous identifier de fa&ccedil;on sûre sur ce site, vous devez accepter les cookies.</b> ";
+	echo "Veuillez r&eacute;gler votre navigateur pour qu'il les accepte (au moins pour ce site).\n";
 }
 else {
 	install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;", "document.forms[0].elements[1].focus();");
@@ -53,7 +36,19 @@ else {
 }
 
 echo "<p>";
-affiche_formulaire_login($login, './ecrire/login.php3?essai_cookie=oui', './ecrire/login.php3');
+affiche_formulaire_login($login, './ecrire/index.php3?essai_cookie=oui', './ecrire/login.php3');
+
+
+if ($echec_cookie == "oui") {
+	echo "<form action='index.php3' method='get'>";
+	echo "<fieldset>\n";
+	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
+	echo "non s&eacute;curis&eacute;e est à votre disposition&nbsp;: \n";
+	echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
+	echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
+	echo "</fieldset></form>\n";
+}
+
 
 if ($url_site) {
 	echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
