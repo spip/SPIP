@@ -17,6 +17,7 @@ if (defined("_ECRIRE_INC_DOCUMENTS")) return;
 define("_ECRIRE_INC_DOCUMENTS", "1");
 
 include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_date.php3");
 
 //
 // Vignette pour les documents lies
