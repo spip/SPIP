@@ -321,6 +321,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
 	if ($id_rubrique
+	  AND isset($c['id_parent'])
 	  AND $id_parent = $c['id_parent']
 	  AND $id_parent != $id_rubrique
 	  AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=".intval($id_parent)))) {
