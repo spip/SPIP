@@ -186,22 +186,6 @@ function calculer_balise($nom, $p) {
 	return $p;
 }
 
-function declencher_balise_dynamique($p, $nom)
-{
-	$f = $GLOBALS['balise_' . $nom . '_collecte'];
-
-	if (is_array($f)) {
-		$res = calculer_balise_dynamique($p, $nom, $f);
-
-			// ajouter un code particulier ?
-		if (function_exists('balise_' . $nom . '_traitement'))
-			$res = call_user_func('balise_' . $nom . '_traitement', $res);
-
-		if ($res !== NULL)
-		  return $res;
-	}
-}
-
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
 // Inclusion du fichier associe a son nom.

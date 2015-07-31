@@ -17,13 +17,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // (attention, ne fonctionnera pas en INCLURE)
 
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
-  spip_log("bLP $nom");
-	return calculer_balise_dynamique($p, $nom, array('url'));
-	$p->code = '\'<'
+	$p = calculer_balise_dynamique($p, $nom, array('url'));
+	/*	$p->code = '\'<'
 		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
 		.'><'
-		.'?php header("Pragma: no-cache"); ?'
-		.'>\'.' . $p->code;
+		.'?php header("Pragma: no-cache"); spip_log("envoi du pragma"); ?'
+		.'>\'.' . $p->code; */
 	return $p;
 }
 
