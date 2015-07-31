@@ -671,7 +671,7 @@ opnieuw verbinding maken met de site
 'pass_recevoir_mail' => 'Je zal een e-mail ontvangen waarin uitgelegd staat hoe je opnieuw toegang krijgt tot de site.',
 'pass_retour_public' => 'Terrug aan publiek site',
 'pass_rien_a_faire_ici' => 'Niets te zoeken hier.',
-'pass_vousinscrire' => 'Bezig met registreren bij de site',
+'pass_vousinscrire' => 'U inschrijven in de site',
 'precedent' => 'vorige',
 'previsualisation' => 'voorafkijk',
 'previsualiser' => 'Vooraf tonen',
