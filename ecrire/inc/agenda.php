@@ -87,6 +87,16 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
 	return $script . $finurl;
 }
 
+function calendrier_args_time($time, $script, $type, $fin='')
+{
+	if (!is_numeric($time)) $time = strtotime($time);
+	$jour = date("d",$time);
+	$mois = date("m",$time);
+	$annee = date("Y",$time);
+
+	return calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
+}
+
 /// utilise la precedente pour produire une balise A avec tous les accessoires
 
 // http://doc.spip.org/@calendrier_href
@@ -101,12 +111,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 		: '';
 	}
 	$d = mktime (1,1,1, $mois, $jour, $annee);
-	$jour = date("d",$d);
-	$mois = date("m",$d);
-	$annee = date("Y",$d);
-
-	$h = calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
-	$url = $h . ($ancre ? "#$ancre" : '');
+	$url = calendrier_args_time($d, $script, $type, $fin) . ($ancre ? "#$ancre" : '');
 	$c = ($class ? " class=\"$class\"" : '');
 	
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
