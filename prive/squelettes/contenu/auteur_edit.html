@@ -16,7 +16,7 @@
 
 	#SET{redirect,#ENV{redirect,#ID_AUTEUR|generer_url_entite{auteur}}}
 	[(#ENV{retourajax,''}|oui)
-		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		#SET{redirect,#GET{retour}}
 		<div class="ajax">
 	]
 	#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#GET{redirect},#ENV{associer_objet}}
