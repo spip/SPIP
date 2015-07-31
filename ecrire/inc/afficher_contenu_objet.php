@@ -74,6 +74,11 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 					? $table_des_traitements[$balise][$table]
 					: $table_des_traitements[$balise][0];
 				$filtre = str_replace('%s','$valeur', $filtre);
+
+				# dans l'espace prive on veut afficher le rang
+				# (temporaire, en attendant un vrai champ rang ??)
+				$filtre = str_replace('supprimer_numero(','(', $filtre);
+
 				$valeur = eval("return $filtre;");
 			}
 		}
@@ -86,8 +91,8 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 
 	}
 
-	// il serait temps de s'en debarasser, non ? pas de squelette pour eux ...
-	if ($champs_extra AND $row['extra']) {
+	// pas de squelette pour les champs extra (vieillissants)
+	if ($GLOBALS['champs_extra'] AND $row['extra']) {
 		include_spip('inc/extra');
 		$contenu_objet .= extra_affichage($row['extra'], $table);
 	}
