@@ -280,9 +280,9 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.302) {
-		spip_query("ALTER TABLE spip_forum_cache DROP PRIMARY KEY");
-		spip_query("ALTER TABLE spip_forum_cache DROP INDEX fichier");
-		spip_query("ALTER TABLE spip_forum_cache ADD PRIMARY KEY (fichier, id_forum, id_article, id_rubrique, id_breve, id_syndic)");
+		# spip_query("ALTER TABLE spip_forum_cache DROP PRIMARY KEY");
+		# spip_query("ALTER TABLE spip_forum_cache DROP INDEX fichier");
+		# spip_query("ALTER TABLE spip_forum_cache ADD PRIMARY KEY (fichier, id_forum, id_article, id_rubrique, id_breve, id_syndic)");
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_syndic (id_syndic)");
 		maj_version (1.302);
 	}
@@ -847,7 +847,25 @@ function maj_base() {
 		maj_version(1.801);
 	}
 
-
+	// Nouvelles tables d'invalidation
+	if ($version_installee < 1.802) {
+		spip_query("DROP TABLE spip_forum_cache");
+		spip_query("DROP TABLE spip_id_article_caches");
+		spip_query("DROP TABLE spip_id_auteur_caches");
+		spip_query("DROP TABLE spip_id_breve_caches");
+		spip_query("DROP TABLE spip_id_document_caches");
+		spip_query("DROP TABLE spip_id_forum_caches");
+		spip_query("DROP TABLE spip_id_groupe_caches");
+		spip_query("DROP TABLE spip_id_message_caches");
+		spip_query("DROP TABLE spip_id_mot_caches");
+		spip_query("DROP TABLE spip_id_rubrique_caches");
+		spip_query("DROP TABLE spip_id_signature_caches");
+		spip_query("DROP TABLE spip_id_syndic_article_caches");
+		spip_query("DROP TABLE spip_id_syndic_caches");
+		spip_query("DROP TABLE spip_id_type_caches");
+		spip_query("DROP TABLE spip_inclure_caches");
+		maj_version(1.802);
+	}
 
 	return true;
 }

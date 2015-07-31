@@ -105,16 +105,6 @@ WHERE	id_article='" . ($ida ? $ida : substr(lire_meta("forums_publics"),0,3)) . 
   return array($titre, $table, $forum);
 }
 
-# Index arbitraire mais ressemblant aux md5 utilisés ailleurs
-function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic)
-{
-  return 
-    'a' . ($id_article ? $id_article : '0') .
-    'b' . ($id_breve ? $id_breve : '0') .
-    'c' . ($id_rubrique ? $id_rubrique : '0') . 
-    'd' . ($id_syndic ? $id_syndic : '0');
-}
-
 function calcul_exposer ($id, $type, $reference) {
 	static $exposer;
 	static $ref_precedente;

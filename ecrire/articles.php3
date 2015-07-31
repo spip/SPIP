@@ -112,10 +112,16 @@ if ($statut_nouv) {
 	}
 }
 
-// reindexer
+// 'publie' => reindexer
 if ($ok_nouveau_statut AND $statut_nouv == 'publie' AND $statut_nouv != $statut_ancien AND (lire_meta('activer_moteur') == 'oui')) {
 	include_ecrire ("inc_index.php3");
 	indexer_article($id_article);
+}
+
+// 'dŽpublie' => invalider les caches
+if ($ok_nouveau_statut AND $statut_ancien == 'publie' AND $statut_nouv != $statut_ancien AND $invalider_caches) {
+	include_ecrire ("inc_invalideur.php3");
+	suivre_invalideur("id='id_article/$id_article'", 'spip_caches');
 }
 
 if ($jour && $flag_editable) {
@@ -229,9 +235,17 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_site=\"$url_site\", nom_site=\"$nom_site\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
-	if ($statut_article == 'publie' AND lire_meta('activer_moteur') == 'oui') {
-		include_ecrire ("inc_index.php3");
-		indexer_article($id_article);
+
+	// invalider et reindexer
+	if ($statut_article == 'publie') {
+		if ($invalider_caches) {
+			include_ecrire ("inc_invalideur.php3");
+			suivre_invalideur("id='id_article/$id_article'", 'spip_caches');
+		}
+		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
+			indexer_article($id_article);
+		}
 	}
 
 	// -- Experimental --

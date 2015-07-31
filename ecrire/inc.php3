@@ -17,6 +17,7 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_calendrier.php");
+include_ecrire("inc_forum.php3");
 
 
 if (!@file_exists("data/inc_meta_cache.php3")) ecrire_metas();
@@ -259,5 +260,23 @@ if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' A
 	calculer_rubriques();
 }
 
+// Modifs forum
+if ($controle_forum AND $id_controle_forum) {
+	include_ecrire('inc_admin.php3');
+	if (verifier_action_auteur("$controle_forum$id_controle_forum",
+	$hash, $connect_id_auteur)) {
+		switch($controle_forum) {
+			case 'supp_forum':
+				changer_statut_forum($id_controle_forum, 'off');
+				break;
+			case 'supp_forum_priv':
+				changer_statut_forum($id_controle_forum, 'privoff');
+				break;
+			case 'valid_forum':
+				changer_statut_forum($id_controle_forum, 'publie');
+				break;
+		}
+	}
+}
 
 ?>

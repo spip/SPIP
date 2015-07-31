@@ -3,7 +3,6 @@
 include_ecrire('inc_texte.php3');
 include_ecrire('inc_filtres.php3');
 include_ecrire('inc_mail.php3');
-include_local('inc-calcul_mysql3.php');
 
 if (file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
 else {include_local ("inc-urls-dist.php3"); }
@@ -120,14 +119,16 @@ if ($validation_finale) {
 		// INVALIDATION DES CACHES LIES AUX FORUMS
 		//
 		include_ecrire('inc_invalideur.php3');
+		include_ecrire('inc_forum.php3');
 		if ($statut == 'publie') {
-			suivre_invalideur ("id_forum='" .
+			include_local('inc-calcul_mysql3.php');
+			suivre_invalideur ("id='id_forum/" .
 				calcul_index_forum($forum_id_article,
 					$forum_id_breve,
 					$forum_id_rubrique,
 					$forum_id_syndic) .
 				"'",
-				'spip_id_forum_caches');
+				'spip_caches');
 		}
 
 		$redirect = $retour_forum;

@@ -3025,20 +3025,4 @@ function install_fin_html() {
 	';
 }
 
-// Cette fonction permet de detruire des caches (publics)
-// a partir de l'espace des redacteurs (prive) 
-// utilisee aussi par controle_forum
-
-function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc) {
-	global $connect_id_auteur;
-	$hash = calculer_action_auteur("$action $id");
-	return icone($texte,
-		"../spip_cache.php3?$action=$id&hash=$hash&id_auteur=$connect_id_auteur&redirect=" .
-		rawurlencode($lien),
-		$fond,
-		$fonction,
-		"right",
-		'non');
-}
-
 ?>

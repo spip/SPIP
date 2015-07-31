@@ -287,6 +287,26 @@ $spip_versions_fragments = array(
 $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
 
+$spip_caches = array(
+		"hache" => "char (64) NOT NULL",
+		"id" => "char (64) NOT NULL",
+		"suppr" => "CHAR (1)");
+$spip_caches_key = array(
+		"PRIMARY KEY"	=> "hache, id",
+		"KEY hache" => "hache",
+		"KEY id" => "id");
+
+/*
+$spip_caches_inclus = array(
+		"hache" => "char (64) NOT NULL",
+		"id" => "char (64) NOT NULL",
+		"suppr" => "CHAR (1)");
+$spip_caches_inclus_key = array(
+		"PRIMARY KEY"	=> "hache, id",
+		"KEY hache" => "hache",
+		"KEY id" => "id");
+*/
+
 global $tables_auxiliaires;
 
 $tables_auxiliaires  = 
@@ -352,6 +372,12 @@ $tables_auxiliaires  =
 	'versions'	=> array('field' => &$spip_versions,
 					 'key' => &$spip_versions_key),
 	'versions_fragments'	=> array('field' => &$spip_versions_fragments,
-					 'key' => &$spip_versions_fragments_key)
+					 'key' => &$spip_versions_fragments_key),
+	'caches'	=> array('field' => &$spip_caches,
+					 'key' => &$spip_caches_key)
+	/*,
+	'caches_inclus'	=> array('field' => &$spip_caches_inclus,
+					 'key' => &$spip_caches_inclus_key)
+	*/
 	);
 ?>

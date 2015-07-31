@@ -66,7 +66,10 @@ function calculer_boucle($id_boucle, &$boucles)
 	  {
 	    $id_table = $table_des_tables[$type_boucle]; 
 	    $boucle->select[] = "$id_table.$primary_key";
-	    $invalide = '
+
+		if ($primary_key == 'id_forum')
+			$invalide = 'include_ecrire("inc_forum.php3");';
+	    $invalide .= '
 		$Cache["' . $primary_key . '"][' .
 	      (($primary_key != 'id_forum') ?
 	       ('$Pile[$SP]["'  .  $primary_key . '"]') :

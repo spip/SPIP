@@ -147,6 +147,12 @@ $ignore_remote_user = false;
 // Faut-il afficher les boutons d'admin 'debug cache' et 'debug squelette' ?
 $bouton_admin_debug = false;
 
+// Faut-il "invalider" les caches quand on depublie ou modifie un article ?
+# en faire une option dans l'interface de configuration ?
+# NB: cette option ne concerne que articles,breves,rubriques et site
+# car les forums sont toujours invalidants.
+$invalider_caches = true;
+
 // Serveurs externes
 $spip_server = array (
 	'tex' => 'http://math.spip.org/tex.php',
@@ -185,7 +191,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.801;
+$spip_version = 1.802;
 
 // version de spip
 $spip_version_affichee = "1.8 alpha 4 CVS";
