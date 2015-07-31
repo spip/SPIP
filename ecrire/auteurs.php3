@@ -102,8 +102,10 @@ case 'statut':
 
 case 'nom':
 default:
-	$sql_order = ' ORDER BY unom';
+//	$sql_order = ' ORDER BY unom';
 	$type_requete = 'auteur';
+	$sql_sel = ", ".creer_objet_multi ("nom", "$spip_lang");
+	$sql_order = " ORDER BY multi";
 }
 
 
@@ -117,7 +119,7 @@ unset($nombre_auteurs);
 $auteurs = Array();
 
 if ($type_requete == 'auteur') {
-	$result_auteurs = spip_query("SELECT id_auteur, statut, login, nom, email, url_site, messagerie, UPPER(nom) AS unom
+	$result_auteurs = spip_query("SELECT id_auteur, statut, login, nom, email, url_site, messagerie, UPPER(nom) AS unom$sql_sel
 		FROM spip_auteurs AS auteurs
 		WHERE 1 $sql_statut_auteurs
 		$sql_order");
@@ -126,7 +128,7 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 	}
 
-	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur
+	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur, ".creer_objet_multi ("UPPER(auteurs.nom)", "$spip_lang")." 
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
 		$sql_statut_auteurs $sql_statut_articles
@@ -153,7 +155,7 @@ if ($type_requete == 'auteur') {
 	$lettres_nombre_auteurs = 0;
 	foreach ($auteurs as $auteur) {
 		$lettres_nombre_auteurs ++;
-		$premiere_lettre = addslashes(strtoupper(spip_substr($auteur['nom'],0,1)));
+		$premiere_lettre = addslashes(strtoupper(spip_substr($auteur['multi'],0,1)));
 		if ($premiere_lettre != $lettre_prec) {
 			$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
 		}

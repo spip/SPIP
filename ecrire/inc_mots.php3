@@ -428,10 +428,10 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 
 		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 
-		$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
+		$query_groupes = "SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui'
 		AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR
 		(unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus)))
-		ORDER BY titre";
+		ORDER BY multi";
 		$result_groupes = spip_query($query_groupes);
 
 		// Afficher un menu par groupe de mots

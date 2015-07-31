@@ -860,7 +860,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 		if ($options == "avancees") { // Afficher le numero (JMB)
 			if ($afficher_auteurs) {
-				$largeurs = array(11, '', 80, 100, 35);
+				$largeurs = array(11, '', 80, 100, 50);
 				$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 			} else {
 				$largeurs = array(11, '', 100, 35);
