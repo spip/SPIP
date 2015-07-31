@@ -94,7 +94,8 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles)
 		// entite SPIP alias d'un champ SQL
 		if (is_array($excep)) {
 			// et meme d'un champ dans une jointure
-			list($e, $excep) = $excep;
+			list($e, $x) = $excep;
+			$excep = $x;
 			// qu'il faut provoquer si ce n'est fait
 			if (!$t = array_search($e, $boucles[$idb]->from)) {
 				$t = 'J' . count($boucles[$idb]->from);
