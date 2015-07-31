@@ -229,7 +229,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$corps .= 
 		((!$boucle->separateur) ? 
 			(($constant && !$corps) ? $return :
-			 	("\n\t\t" . '$t0 .= ' . $return . ";")) :
+			 (($return==="''") ? '' :
+			  ("\n\t\t" . '$t0 .= ' . $return . ";"))) :
 		 ("\n\t\t\$t1 " .
 			((strpos($return, '$t1.') === 0) ? 
 			 (".=" . substr($return,4)) :
