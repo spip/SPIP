@@ -50,8 +50,10 @@ function phraser_arguments_inclure($p,$rejet_filtres = false){
 		}
 		else {
 			if ($var->type != 'texte')
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
-					 $match[0]);
+				if ($rejet_filtres)
+					break; // on est arrive sur un filtre sans argument qui suit la balise
+				else
+					erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
 			else {
 				$champ->param[$k] = $v;
 				ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
