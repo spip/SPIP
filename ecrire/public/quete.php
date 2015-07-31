@@ -29,7 +29,7 @@ function quete_chapo($id_article, $connect) {
 
 function quete_parent_lang($table,$id,$connect=''){
 	static $cache_quete = array();
-	
+
 	if (!isset($cache_quete[$connect][$table][$id])
 	AND in_array($table,array('spip_rubriques','spip_articles','spip_syndic','spip_breves'))){
 		$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
@@ -76,7 +76,7 @@ function quete_profondeur($id, $connect='') {
 // http://doc.spip.org/@quete_date_postdates
 function quete_date_postdates() {
 	return
-	  date('Y-m-d H:i:s', 
+	  date('Y-m-d H:i:s',
 	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
 			? $GLOBALS['meta']['date_prochain_postdate']
 	       : (time()+(3600*24*10000))) ;
@@ -146,7 +146,10 @@ function quete_logo_file($row, $connect=NULL) {
 	include_spip('inc/documents');
 	$logo = vignette_logo_document($row, $connect);
 	if (!$logo) $logo = image_du_document($row);
-	if (!$logo) $logo = vignette_par_defaut($row['extension'], false);
+	if (!$logo){
+		$f = charger_fonction('vignette','inc');
+		$logo = $f($row['extension'], false);
+	}
 	return get_spip_doc($logo);
 }
 
@@ -251,7 +254,7 @@ function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 	// si on a pas trouve
 	if ($row[$primary]!=$valeur)
 		return 0;
-	
+
 	// sinon, calculer le bon numero de page
 	return floor($pos/$pas)*$pas;
 }
