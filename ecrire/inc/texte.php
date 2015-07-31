@@ -1050,7 +1050,7 @@ function traiter_raccourci_glossaire($letexte)
 //
 
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
-define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
+define('_RACCOURCI_LIEN', ",\[(.*?)->(>?)([^]]*)\],msS");
 
 // http://doc.spip.org/@expanser_liens
 function expanser_liens($letexte, $connect='')
