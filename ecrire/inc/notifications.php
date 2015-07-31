@@ -213,6 +213,7 @@ function email_notification_forum ($t, $email) {
 	$corps = _T('form_forum_message_auto') . "\n\n"
 		. $forum_poste_par
 		. (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '')
+		. (($t['statut'] == 'spam') ? _L('[SPAM]')."\n" : '')
 		. url_absolue($url)
 		. "\n\n\n** ".textebrut(typo($t['titre']))
 		."\n\n* ".textebrut(propre($t['texte']))
