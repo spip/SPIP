@@ -760,11 +760,11 @@ function install_unpack()
   fin_admin($action);
 
   if (@file_exists("../spip_loader" . _EXTENSION_PHP))
-    redirige_par_entete(generer_url_ecrire("../spip_loader"), "hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_ecrire("../spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else if (@file_exists("../spip_unpack" . _EXTENSION_PHP))
-    redirige_par_entete(generer_url_ecrire("../spip_unpack"), "hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_ecrire("../spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else
-    redirige_par_entete(generer_url_ecrire("../spip_loader"), "hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_ecrire("../spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
 }
 
 ?>

@@ -208,7 +208,7 @@ function auth_dist() {
 	}
 
 	if (!$auth_pass_ok) {
-	  redirige_par_entete(generer_url_ecrire(_DIR_LOGIN . "spip_login"),"var_erreur=pass");
+	  redirige_par_entete(generer_url_ecrire(_DIR_LOGIN . "spip_login"),"?var_erreur=pass");
 	}
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'

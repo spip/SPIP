@@ -91,7 +91,7 @@ function deplacer_fichier_upload($source, $dest) {
 			fclose ($f);
 		} else {
 		  redirige_par_entete(generer_url_ecrire("spip_test_dirs"),
-				      "test_dir=". dirname($dest));
+				      "?test_dir=". dirname($dest));
 		}
 		@unlink($dest);
 	}
