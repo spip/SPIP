@@ -72,14 +72,13 @@ if ($titre AND $modifier_breve) {
 	$lien_titre = addslashes($lien_titre);
 
 	// recoller les champs du extra
-	if (function_exists('champs_extra')) {
-		$champs_suppl=champs_extra("breve", $id_breve, $id_secteur);
+	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$extra = serialize(extra_recup_saisie($champs_suppl));
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breve"))."'";
 	} else
-		$extra = '';
+		$add_extra = '';
 
-	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\", extra=\"".addslashes($extra)."\" WHERE id_breve=$id_breve";
+	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\" $add_extra WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
@@ -269,11 +268,11 @@ if ($les_notes) {
 	echo "<hr width='70%' height=1 align='left'><font size=2>$les_notes</font>\n";
 }
 
-if ($extra && function_exists(champs_extra)) {
-	$champs_suppl=champs_extra("breve", $id_breve, $id_secteur);
-	include_ecrire("inc_extra.php3");
-	extra_affichage(unserialize($extra), $champs_suppl);
-}
+	// afficher les extra
+	if ($champs_extra AND $extra) {
+		include_ecrire("inc_extra.php3");
+		extra_affichage($extra, "breve");
+	}
 
 if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
 	echo "<div align='right'>";

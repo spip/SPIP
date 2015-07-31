@@ -195,11 +195,10 @@ echo "<BR><TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
 echo $texte;
 echo "</TEXTAREA>\n";
 
-if (function_exists(champs_extra)) {
-	$champs_suppl=champs_extra("rubrique", $id_rubrique, $id_parent);
-	include_ecrire("inc_extra.php3");
-	extra_saisie($extra, $champs_suppl);
-}
+	if ($champs_extra) {
+		include_ecrire("inc_extra.php3");
+		extra_saisie($extra, 'rubrique', $id_secteur);
+	}
 
 echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</FORM>";

@@ -47,7 +47,7 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
-		$extra=unserialize($row["extra"]);
+		$extra=$row["extra"];
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
@@ -394,13 +394,13 @@ echo "<P><HR><P>";
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
 	{
-		$textes_extra = "<br><font color='red'>"._T('info_texte_long')."</font>\n";
+		$textes_supplement = "<br><font color='red'>"._T('info_texte_long')."</font>\n";
 		while (strlen($texte)>29*1024)
 		{
 			$nombre_textes ++;
 			list($texte1,$texte) = coupe_trop_long($texte);
 
-			$textes_extra .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
+			$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
 				" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
 				$texte1 . "</TEXTAREA><P>\n";
 		}
@@ -410,7 +410,7 @@ echo "<P><HR><P>";
 	echo "<br>"._T('texte_enrichir_mise_a_jour');
 	echo aide("raccourcis");
 
-	echo $textes_extra;
+	echo $textes_supplement;
 
 	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
@@ -426,10 +426,9 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
 	}
 
-	if (function_exists(champs_extra)) {
-		$champs_suppl=champs_extra("article", $id_article, $id_rubrique);
+	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, $champs_suppl);
+		extra_saisie($extra, 'article', $id_secteur);
 	}
 
 	if ($date)

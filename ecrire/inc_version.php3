@@ -121,6 +121,11 @@ $mysql_rappel_connexion = false;
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
+// gestion des extras (voir ecrire/inc_extra.php3 pour plus d'informations)
+$champs_extra = false;
+$champs_extra_proposes = false;
+
+
 //
 // 	*** Fin du parametrage ***
 //
