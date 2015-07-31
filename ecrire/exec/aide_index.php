@@ -74,7 +74,7 @@ function help_panneau() {
 			</div></div>
 			<div style='position:absolute; bottom: 10px; right:20px;
 			font-size: 12px; '>" .
-			$copyleft .
+			preg_replace(",<a ,i", "<a class='target_blank", $copyleft) .
 			'</div>';
 }
 
@@ -162,105 +162,6 @@ function help_img_cache($img, $ext)
 	header("Expires: ".gmdate("D, d M Y H:i:s", time()+24*3600) .' GMT');
 	readfile($img);
 }
-
-define('_STYLE_AIDE_BODY', '
-<style type="text/css"><!--
-.spip_cadre {
-	width : 100%;
-	background-color: #FFFFFF;
-	padding: 5px;
-}
-.spip_quote {
-	margin-left : 40px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	border : solid 1px #aaaaaa;
-	background-color: #dddddd;
-	padding: 5px;
-}
-
-a { text-decoration: none; }
-a:focus,a:hover,a:active { color: #FF9900; text-decoration: underline; }
-
-body {
-	font-family: Georgia, Garamond, Times New Roman, serif;
-}
-h3.spip {
-	font-family: Verdana, Geneva, Sans, sans-serif;
-	font-weight: bold;
-	font-size: 115%;
-	text-align: center;
-}
-
-table.spip {
-}
-
-table.spip tr.row_first {
-	background-color: #FCF4D0;
-}
-
-table.spip tr.row_odd {
-	background-color: #C0C0C0;
-}
-
-table.spip tr.row_even {
-	background-color: #F0F0F0;
-}
-
-table.spip td {
-	padding: 1px;
-	text-align: left;
-	vertical-align: center;
-}
-
---></style>');
-
-define('AIDE_STYLE_MENU', '<style type="text/css">
-<!--
-	a {text-decoration: none; }
-	A:Hover {text-decoration: underline;}
-
-	.article-inactif {
-		float: '.$GLOBALS['spip_lang_left'].';
-		text-align: '.$GLOBALS['spip_lang_left'].';
-		width: 80%;
-		background: ' . "url(" . chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_left'].' center no-repeat;
-		margin: 2px;
-		padding: 0px;
-		padding-'.$GLOBALS['spip_lang_left'].': 20px;
-		font-family: Arial, Sans, sans-serif;
-		font-size: 12px;
-	}
-	.article-actif {
-		float: '.$GLOBALS['spip_lang_right'].';
-		text-align: '.$GLOBALS['spip_lang_right'].';
-		width: 80%;
-		background: ' . "url(" .  chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_right'].' center no-repeat;
-		margin: 4px;
-		padding: 0px;
-		padding-'.$GLOBALS['spip_lang_right'].': 20px;
-		font-family: Arial, Sans, sans-serif;
-		font-size: 12px;
-		font-weight: bold;
-		color: black;
-	}
-	.article-actif:hover {
-		text-decoration: none;
-	}
-	.rubrique {
-		width: 90%;
-		margin: 0px;
-		margin-top: 6px;
-		margin-bottom: 4px;
-		padding: 4px;
-		font-family: Trebuchet MS, Arial, Sans, sans-serif;
-		font-size: 14px;
-		font-weight: bold;
-		color: black;
-		background-color: #EEEECC;
-	}
--->
-</style>');
 
 // Affichage du menu de gauche avec analyse de l'aide demandee
 // afin d'ouvrir le sous-menu correspondant a l'affichage a droite
@@ -365,8 +266,10 @@ function help_frame($frame, $aide, $html, $lang)
 	echo _DOCTYPE_AIDE, html_lang_attributes();
 	$titre = _T('info_aide_en_ligne');
 	if ($frame === 'menu') {
-		echo "<head>\n<title>",$titre,"</title>\n",
-		  AIDE_STYLE_MENU, $GLOBALS['browser_layer'],
+		echo "<head>\n<title>",$titre,"</title>\n";
+		echo '<link rel="stylesheet" type="text/css" href="';
+		echo url_absolue(find_in_path('aide_menu.css'));
+		echo "\"/>\n", $GLOBALS['browser_layer'],
 		  http_script('', 'jquery.js'),
 		  http_script('var curr_article;
 function activer_article(id) {
@@ -385,7 +288,10 @@ function activer_article(id) {
 		help_menu_rubrique($aide, $html);
 		echo '</body>';
 	} elseif ($frame === 'body') {
-		echo "<head>\n<title>",$titre,"</title>\n",_STYLE_AIDE_BODY;
+		echo "<head>\n<title>",$titre,"</title>\n";
+		echo '<link rel="stylesheet" type="text/css" href="';
+		echo url_absolue(find_in_path('aide_body.css'));
+		echo "\"/>\n";
 		echo "</head>\n";
 		echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
 		if ($spip_lang_rtl)
