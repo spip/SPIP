@@ -92,20 +92,20 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 
 
-	$ret .= "<div style='position: relative;'>";
+	$ret .= "<div style='position: relative; z-index: 1;'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = " padding-$spip_lang_left: 32px;";
-		$logo = "<div style='position: absolute; top: -15px; left: 4px;'>";
+		$style_gauche = " padding-$spip_lang_left: 38px;";
+		$ret .= "<div style='position: absolute; top: 0px; $spip_lang_left: 10px; z-index: 2;'>";
 		if ($fonction) {
-			$logo .= "<div style='$bgright"."background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
-			$logo .= "<img src='img_pack/$fonction' alt='' />";
-			$logo .= "</div>";
+			$ret .= "<div style='$bgright"."background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
+			$ret .= "<img src='img_pack/$fonction' alt='' />";
+			$ret .= "</div>";
 		}
-		else $logo .= "<img src='img_pack/$icone' alt='' />";
-		$logo .= "</div>";
+		else $ret .= "<img src='img_pack/$icone' alt='' />";
+		$ret .= "</div>";
 
-		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px;'";
+		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px; z-index: 1;'";
 	}
 
 	if ($style == "e") {
@@ -119,13 +119,15 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		if ($spip_display == 4) {
 			$ret .= "<h3 class='cadre-titre'>$titre</h3>";
 		} else {
-			$ret .= "<div class='cadre-titre' style='margin: 0px;$style_gauche'>$logo$titre</div>";
+			$ret .= "<div class='cadre-titre' style='z-index: 1; margin: 0px;$style_gauche'>$titre</div>";
 		}
 	}
 	
 	
 	
 	$ret .= "<div class='cadre-padding'>";
+	// Gaffe: hack MSIE, sinon les floats disparaissent
+	if ($browser_name == "MSIE") $ret .= "<table width='100%' cellpadding='0' cellspacing='0'><tr><td>";
 
 	return $ret;
 }
@@ -133,6 +135,9 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 
 function fin_cadre($style="") {
 	global $browser_name;
+	
+	// Fermture du hack MSIE	
+	if ($browser_name == "MSIE") $ret = "</td></tr></table>";
 
 	if ($style == "e") $ret .= "</div>";
 	$ret .= "</div></div></div>\n";
@@ -1312,7 +1317,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$fid = $logo_auteur[2];
 					$hash = calculer_action_auteur ("reduire $w $h");
 	
-					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
+					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
 					
 				}
 			}
