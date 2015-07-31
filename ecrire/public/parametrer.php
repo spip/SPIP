@@ -55,7 +55,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
-		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
+		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect, _EXTENSION_SQUELETTES);
 
 	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
 	// sauver le nom de l'eventuel squelette en cours d'execution

@@ -1199,7 +1199,7 @@ function balise_FOREACH_dist($p) {
 		$_modele = interprete_argument_balise(2,$p);
 		$_modele = str_replace("'", "", strtolower($_modele));
 		$__modele = 'foreach_'.strtolower($_tableau);
-		$_modele = (!$_modele AND find_in_path('modeles/'.$__modele.'.html')) ?
+		$_modele = (!$_modele AND trouve_modele($__modele)) ?
 			$__modele : 
 			($_modele ? $_modele : 'foreach');
 
@@ -1268,7 +1268,7 @@ function balise_AIDER_dist($p) {
 function balise_ACTION_FORMULAIRE($p){
 	$_url = interprete_argument_balise(1,$p);
 	if (!$_form = interprete_argument_balise(2,$p)){
-		$_form = "'".addslashes(basename($p->descr['sourcefile'],'.html'))."'";
+		$_form = "'".addslashes(basename($p->descr['sourcefile'],'.'  . EXTENSION_SQUELETTES))."'";
 	}
 	$p->code = "";
 
