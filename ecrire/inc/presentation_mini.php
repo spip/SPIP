@@ -100,7 +100,8 @@ function html_tests_js(){
 		        . generer_url_ecrire('test_ajax', 'js=-1')
 		        . "' width='1' height='1' alt='' /></div></noscript>\n");
 	}
-	return $GLOBALS['rejoue_session']
+	return
+		(defined('_SESSION_REJOUER') ? _SESSION_REJOUER : '')
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
 }
 

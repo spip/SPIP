@@ -20,7 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 $GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
-$GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
 /**
  * 3 actions sur les sessions, selon le type de l'argument:
@@ -197,7 +196,7 @@ function verifier_session($change=false) {
 	// sa victime, mais se ferait deconnecter par elle.
 	if (hash_env() != $GLOBALS['visiteur_session']['hash_env']) {
 		if (!$GLOBALS['visiteur_session']['ip_change']) {
-			$GLOBALS['rejoue_session'] = rejouer_session();
+			define('_SESSION_REJOUER',rejouer_session());
 			$GLOBALS['visiteur_session']['ip_change'] = true;
 			ajouter_session($GLOBALS['visiteur_session']);
 		} else if ($change) {
@@ -357,6 +356,9 @@ function fichier_session($alea, $tantpis=false) {
 /**
  * Code a inserer par inc/presentation pour rejouer la session
  * Voir action/cookie qui sera appele.
+ * Pourquoi insere-t-on le src par js et non directement en statique dans le HTML ?
+ * Historiquement, insere par une balise <script> en r424
+ * puis modifie par <img> statique + js en r427
  *
  * http://doc.spip.org/@rejouer_session
  *
