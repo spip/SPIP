@@ -201,8 +201,8 @@ if ($flag_function_exists) {
 	$flag_utf8_decode = function_exists("utf8_decode");
 	$flag_ldap = function_exists("ldap_connect");
 	$flag_flock = function_exists("flock");
-	$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor");
-	$flag_ImageCopyResampled = function_exists("ImageCopyResampled");
+	$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor") && function_exists("gd_info");
+	$flag_ImageCopyResampled = function_exists("ImageCopyResampled") && function_exists("gd_info");
 	$flag_ImageGif = function_exists("ImageGif");
 	$flag_ImageJpeg = function_exists("ImageJpeg");
 	$flag_ImagePng = function_exists("ImagePng");
