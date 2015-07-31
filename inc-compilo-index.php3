@@ -348,10 +348,13 @@ function applique_filtres($p) {
 	return $code;
 }
 
+// Cf. function pipeline dans ecrire/inc_utils.php
 function compose_filtres($p, $code) {
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
+			// recuperer les arguments du filtre, en les separant par des
+			// virgules, *sauf* dans le cas du filtre "?" qui demande un ":"
 			$arglist = compose_filtres_args($p, $filtre,
 				($fonc == '?' ? ':' : ','));
 

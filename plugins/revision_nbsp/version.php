@@ -15,7 +15,7 @@ $version = 0.1;
 
 // s'inserer dans le pipeline 'apres_typo' @ ecrire/inc_texte.php3
 if (!_DIR_RESTREINT)
-	$GLOBALS['spip_pipeline']['post_typo'][] = 'revision_nbsp';
+	$GLOBALS['spip_pipeline']['post_typo'] .= '|revision_nbsp';
 
 // la fonction est tres legere on la definit directement ici
 function revision_nbsp($letexte) {

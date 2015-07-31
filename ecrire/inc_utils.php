@@ -78,27 +78,48 @@ function include_fonction($nom) {
 //
 // le pipeline execute les elements disponibles pour cette action,
 // les uns apres les autres, et retourne la valeur finale
+//
+// Cf. compose_filtres dans inc-compilo-index.php3, qui est le
+// pendant "compilŽ" de cette fonctionnalite
 
-function pipeline($cause, $val) {
+function pipeline($action, $val) {
 	global $spip_pipeline, $spip_matrice;
-	if (!is_array($spip_pipeline[$cause])) return $val;
+	static $pipe = array();
+	if (!strlen($spip_pipeline[$action])) return $val;
 
-	foreach ($spip_pipeline[$cause] as $plug) {
+	// Analyser le pipeline
+	// TODO - traiter les arguments  |filtre{arg1,arg2}
+	// TODO - traiter le filtre test |?{true,false}
+	if (!isset($pipe[$action]))
+		$pipe[$action] = array_filter(explode('|',$spip_pipeline[$action]));
 
-		// charger un fichier le cas echeant
-		if (!function_exists($plug)) {
-			if ($f = $spip_matrice[$plug]) {
-				include($f);
-				$ok = function_exists($plug);
-			}
-			if (!$ok) {
-				spip_log("Erreur - $plug n'est pas definie ($f)");
-				return $val;
-			}
+	// Eclater le pipeline en filtres et appliquer chaque filtre
+	foreach ($pipe[$action] as $fonc) {
+
+		// fonction
+		if (function_exists($fonc))
+			$val = $fonc($val);
+
+		// Class::Methode
+		else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
+		AND $methode = array($regs[1], $regs[2])
+		AND is_callable($methode))
+			$val = call_user_func($methode, $val);
+
+		// Charger un fichier
+		else if ($f = $spip_matrice[$fonc]) {
+			require_once($f);
+			// fonction (2eme chance)
+			if (function_exists($fonc))
+				$val = $fonc($val);
+			// Class::Methode (2eme chance)
+			else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
+			AND $methode = array($regs[1], $regs[2])
+			AND is_callable($methode))
+				$val = call_user_func($methode, $val);
+			else
+				spip_log("Erreur - '$fonc' non definie !");
 		}
-
-		// appliquer le filtre
-		$val = $plug($val);
 	}
 
 	return $val;
@@ -644,4 +665,5 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
 	return $site . $script . $ext . $args;
 }
+
 ?>
