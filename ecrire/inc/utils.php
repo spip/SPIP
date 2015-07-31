@@ -1021,30 +1021,29 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		include_spip('inc/urls');
 		$res = generer_url_ecrire_objet($entite,$id, $args, $ancre, false);
 	} else {
-		if (is_string($public) AND !is_numeric($public)) {
-			include_spip('base/connect_sql');
-			$id_type = id_table_objet($entite,$public);
-			return _DIR_RACINE . get_spip_script('./')
-			  . "?"._SPIP_PAGE."=$entite&$id_type=$id&connect=$public"
-			  . (!$args ? '' : "&$args")
-			  . (!$ancre ? '' : "#$ancre");
-		} else {
-			if ($type === NULL) {
-				$type = ($GLOBALS['type_urls'] === 'page'
-					AND $GLOBALS['meta']['type_urls'])
-				?  $GLOBALS['meta']['type_urls']
-				:  $GLOBALS['type_urls']; // pour SPIP <2
-			}
-
-			$f = charger_fonction($type, 'urls', true);
-			// se rabatre sur les urls page si les urls perso non dispo
-			if (!$f)
-				$f = charger_fonction('page', 'urls', true);
-			// si $entite='', on veut la fonction de passage URL ==> id
-			if (!$entite) return $f;
-			// sinon on veut effectuer le passage id ==> URL
-			$res = !$f ? '' : $f(intval($id), $entite, $args, $ancre);
+		if ($type === NULL) {
+			$type = ($GLOBALS['type_urls'] === 'page'
+				AND $GLOBALS['meta']['type_urls'])
+			?  $GLOBALS['meta']['type_urls']
+			:  $GLOBALS['type_urls']; // pour SPIP <2
 		}
+
+		$f = charger_fonction($type, 'urls', true);
+		// se rabattre sur les urls page si les urls perso non dispo
+		if (!$f) $f = charger_fonction('page', 'urls', true);
+
+		// si $entite='', on veut la fonction de passage URL ==> id
+		// sinon on veut effectuer le passage id ==> URL
+		if (!$entite) return $f;
+
+		// mais d'abord il faut tester le cas des urls sur une
+		// base distante
+		if (is_string($public)
+		AND $g = charger_fonction('connect', 'urls', true))
+			$f = $g;
+
+		$res = $f(intval($id), $entite, $args, $ancre, $public);
+
 	}
 	if ($res) return $res;
 	// Sinon c'est un raccourci ou compat SPIP < 2
@@ -1076,6 +1075,17 @@ function generer_url_ecrire_entite_edit($id, $entite, $args='', $ancre=''){
 		$url = ancre_url($url,$ancre);
 	return $url;
 }
+
+// http://doc.spip.org/@urls_connect_dist
+function urls_connect_dist($i, &$entite, $args='', $ancre='', $public=null) {
+	include_spip('base/connect_sql');
+	$id_type = id_table_objet($entite,$public);
+	return _DIR_RACINE . get_spip_script('./')
+	  . "?"._SPIP_PAGE."=$entite&$id_type=$i&connect=$public"
+	  . (!$args ? '' : "&$args")
+	  . (!$ancre ? '' : "#$ancre");
+}
+
 
 // Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
 function urlencode_1738($url) {
