@@ -12,19 +12,21 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Un script utile pour recalculer une URLs symbolique des son changement
+// Un script utile pour recalculer une URL symbolique des son changement
 
 function action_redirect_dist()
 {
 	$type = _request('type');
 	if (!preg_match('/^\w+$/', $type)) return;
-	$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
-	$h = generer_url_entite_absolue(intval(_request('id')),
-					$type,
-					"var_mode=" . _request('var_mode'),
-					'',
-					true);
-	redirige_par_entete(str_replace('&amp;', '&', $h));
+	if ($m = _request('var_mode')) {
+		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
+		$m = 'var_mode='.urlencode($m);
+	}
+	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m '', true);
+	if ($h)
+		redirige_par_entete(str_replace('&amp;', '&', $h));
+	else
+		redirige_par_entete('/');
 }
 
 ?>
