@@ -101,7 +101,7 @@ function test_pcre_unicode() {
 
 	if (!$pcre_ok) {
 		$s = " ".chr(195).chr(169)."t".chr(195).chr(169)." ";
-		if (preg_match(',\W\w\w\w\W,u', $s)) $pcre_ok = 1;
+		if (preg_match(',\W\w\w\w\W,uS', $s)) $pcre_ok = 1;
 		else $pcre_ok = -1;
 	}
 	return $pcre_ok == 1;
@@ -470,7 +470,7 @@ function unicode_to_utf_8($texte) {
 
 	// 1. Entites &#128; et suivantes
 	$vu = array();
-	if (preg_match_all(',&#0*([1-9][0-9][0-9]+);,',
+	if (preg_match_all(',&#0*([1-9][0-9][0-9]+);,S',
 	$texte, $regs, PREG_SET_ORDER))
 	foreach ($regs as $reg) {
 		if ($reg[1]>127 AND !isset($vu[$reg[0]]))
@@ -480,7 +480,7 @@ function unicode_to_utf_8($texte) {
 
 	// 2. Entites > &#xFF;
 	$vu = array();
-	if (preg_match_all(',&#x0*([1-9a-f][0-9a-f][0-9a-f]+);,i',
+	if (preg_match_all(',&#x0*([1-9a-f][0-9a-f][0-9a-f]+);,iS',
 	$texte, $regs, PREG_SET_ORDER))
 	foreach ($regs as $reg) {
 		if (!isset($vu[$reg[0]]))
@@ -493,7 +493,7 @@ function unicode_to_utf_8($texte) {
 // convertit les &#264; en \u0108
 function unicode_to_javascript($texte) {
 	$vu = array();
-	while (preg_match(',&#0*([0-9]+);,', $texte, $regs) AND !isset($vu[$regs[1]])) {
+	while (preg_match(',&#0*([0-9]+);,S', $texte, $regs) AND !isset($vu[$regs[1]])) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		$s = '\u'.sprintf("%04x", $num);
@@ -551,7 +551,7 @@ function translitteration_complexe($texte, $chiffres=false) {
 	$texte = translitteration($texte,'AUTO','complexe');
 
 	if ($chiffres) {
-		$texte = preg_replace("/[aeiuoyd]['`?~.^+(-]{1,2}/e",
+		$texte = preg_replace("/[aeiuoyd]['`?~.^+(-]{1,2}/eS",
 			"translitteration_chiffree('\\0')", $texte);
 	}
 	
@@ -581,13 +581,13 @@ function is_utf8($string) {
 	. '|\xF0[\x90-\xBF][\x80-\xBF]{2}'      # planes 1-3
 	. '|[\xF1-\xF3][\x80-\xBF]{3}'          # planes 4-15
 	. '|\xF4[\x80-\x8F][\x80-\xBF]{2}'      # plane 16
-	. ',s',
+	. ',sS',
 	'', $string));
 }
 function is_ascii($string) {
 	return !strlen(
 	preg_replace(
-	',[\x09\x0A\x0D\x20-\x7E],s',
+	',[\x09\x0A\x0D\x20-\x7E],sS',
 	'', $string));
 }
 
@@ -609,11 +609,11 @@ function transcoder_page($texte, $headers='') {
 
 	// charset precise par le contenu (xml)
 	else if (preg_match(
-	',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+	',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),UimsS', $texte, $regs))
 		$charset = trim(strtolower($regs[1]));
 	// charset precise par le contenu (html)
 	else if (preg_match(
-	',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims',
+	',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),UimsS',
 	$texte, $regs)
 	# eviter #CHARSET des squelettes
 	AND (($tmp = trim(strtolower($regs[2]))) != 'charset'))
