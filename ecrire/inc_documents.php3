@@ -951,7 +951,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 	if ($doublons = document_vu())
 		$query .= " AND docs.id_document NOT IN ($doublons) ";
-	$query .= " ORDER BY docs.id_document";
+	$query .= " ORDER BY 0+docs.titre, docs.titre, docs.id_document";
 
 	//
 	// recuperer tout le tableau des images du portfolio
@@ -980,7 +980,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if ($doublons = document_vu())
 		$query .= " AND docs.id_document NOT IN ($doublons) ";
 
-	$query .= " ORDER BY docs.id_document";
+	$query .= " ORDER BY 0+docs.titre, docs.titre, docs.id_document";
 
 	$documents_lies = spip_query($query);
 
