@@ -196,11 +196,6 @@ function balise_URL_ECRIRE_dist($p) {
 function balise_URL_ACTION_AUTEUR_dist($p) {
 	$p->descr['session'] = true;
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
-	}
-
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
