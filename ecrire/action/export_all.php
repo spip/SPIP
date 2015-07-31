@@ -57,7 +57,10 @@ function action_export_all_dist()
 		effacer_meta("status_dump");
 		effacer_meta("status_dump_tables");
 		ecrire_metas();
-	
+		
+		include_spip('inc/lang');
+		utiliser_langue_visiteur();
+		
 		$size = 0;
 		if (file_exists($file))
 			$size = filesize($file);

@@ -49,7 +49,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		if ($dejafait) {
 			$res = '';
 			foreach($debug['sourcefile'] as $k => $v) {
-				if (strpos($v,'formulaire_admin.') !== false)
+				if (strpos($v,'administration.') !== false)
 					return $debug['resultat'][$k . 'tout'];
 			}
 			return '';
@@ -189,7 +189,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		}
 	}
 
-	return array('formulaires/formulaire_admin', 0, $env);
+	return array('formulaires/administration', 0, $env);
 }
 
 ?>

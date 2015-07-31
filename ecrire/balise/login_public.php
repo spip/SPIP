@@ -151,7 +151,7 @@ function login_pour_tous($login, $cible, $action) {
 		$erreur = _T('login_erreur_pass');
 
 	// Appeler le squelette formulaire_login
-	return array('formulaires/formulaire_login', $GLOBALS['delais'],
+	return array('formulaires/login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(

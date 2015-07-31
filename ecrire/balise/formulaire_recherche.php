@@ -40,7 +40,7 @@ function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 	else
 		$lang='';
 
-	return array('formulaires/formulaire_recherche', 3600, 
+	return array('formulaires/recherche', 3600, 
 		array(
 			'lien' => ($lien ? $lien : generer_url_public('recherche')),
 			'recherche' => _request('recherche'),
