@@ -121,7 +121,9 @@ function calculer_boucle($id_boucle, &$boucles)
 	    $Pile[0]["id_parent"])') .
 	      ';
 	$h0 = ""; 
-	for($n=-1;' .
+	for($n=' .
+	      (($type_boucle == 'rubriques') ? -1 : 0) .
+	      ';' .
 	      (!$limit ? '$hierarchie' : ('$n<' . ($limit[1] + $limit[2]))) .
 	      ';$n++) {
 	';       
