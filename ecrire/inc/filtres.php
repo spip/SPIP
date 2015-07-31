@@ -321,7 +321,7 @@ function proteger_amp($texte){
 // http://doc.spip.org/@entites_html
 function entites_html($texte, $tout=false) {
 	if (!is_string($texte) OR !$texte
-	OR !preg_match(",[&\"'<>],S", $texte) # strpbrk($texte, "&\"'<>")!==false
+	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
 	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
