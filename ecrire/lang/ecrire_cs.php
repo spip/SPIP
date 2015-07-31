@@ -814,7 +814,8 @@ ukazuje jejich stav:',
 
 	// S
 	'sans_heure' => 'time unspecified', # NEW
-	'statut_admin_restreint' => '(admin - vyhrazeno)',
+	'statut_admin_restreint' => '(admin - vyhrazeno)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

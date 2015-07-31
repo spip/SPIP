@@ -819,7 +819,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sans_heure' => 'بدون توقيت الساعات',
-	'statut_admin_restreint' => ')إدارة محدودة(',
+	'statut_admin_restreint' => 'إدارة محدودة',
+	'statut_webmestre' => 'المشرف على الموقع',
 
 	// T
 	'tache_cron_asap' => 'مهمة CRON @function@ (في أسرع وقت)',

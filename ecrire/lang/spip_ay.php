@@ -236,6 +236,7 @@ Uk lurasinsti jutir imañ q\'ipinaka jikitawa.&lt;/p&gt;
 	'envoi_via_le_site' => 'Qamawitkam apayaña',
 	'erreur' => 'Pantjawi',
 	'erreur_balise_non_fermee' => 'Qhipir markhax jan jist\'antata:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
 	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'Pantjawinaka',

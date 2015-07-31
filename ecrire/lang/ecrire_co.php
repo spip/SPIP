@@ -834,7 +834,8 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 
 	// S
 	'sans_heure' => 'Senza l\'ore',
-	'statut_admin_restreint' => '(ammin parziale)',
+	'statut_admin_restreint' => '(ammin parziale)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

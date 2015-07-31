@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Página de abertura do sítio', # MODIF
-	'article' => 'Article', # NEW
+	'accueil_site' => 'Página inicial do sítio',
+	'article' => 'Artigo',
 	'articles' => 'Artigos',
 	'articles_auteur' => 'Artigos deste autor',
 	'articles_populaires' => 'Artigos mais populares',
@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Nenhum sítio neste endereço',
 	'aucune_breve' => 'Nenhuma notícia neste endereço',
 	'aucune_rubrique' => 'Nenhuma rubrica neste endereço',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
+	'auteur' => 'Autor',
+	'autres' => 'Outros',
 	'autres_breves' => 'Outras notícias',
 	'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
 	'autres_sites' => 'Outros sítios',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Comentar este sítio',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
+	'contact' => 'Contacto',
+	'copie_document_impossible' => 'Impossível copiar este documento',
 
 	// D
 	'date' => 'Data',
@@ -42,32 +42,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniers_messages_forum' => 'Últimas mensagens publicadas nos fóruns',
 
 	// E
-	'edition_mode_texte' => 'Edição em modo texto de',
+	'edition_mode_texte' => 'Edição apenas em modo de texto',
 	'en_reponse' => 'Em resposta a :',
 	'en_resume' => 'Em resumo',
 	'envoyer_message' => 'Enviar uma mensagem',
-	'espace_prive' => 'Espaço privado',
+	'espace_prive' => 'Área privada',
 
 	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+	'formats_acceptes' => 'Formatos válidos : @formats@.',
 
 	// H
-	'hierarchie_site' => 'Hierarquia do sítio',
+	'hierarchie_site' => 'Mapa do sítio',
 
 	// J
 	'jours' => 'dias',
 
 	// L
-	'lien_connecter' => 'Se connecter', # NEW
+	'lien_connecter' => 'Entrar',
 
 	// M
 	'meme_auteur' => 'Do mesmo autor',
 	'meme_rubrique' => 'Na mesma rubrica',
 	'memes_auteurs' => 'Dos mesmos autores',
 	'message' => 'Mensagem',
-	'messages_forum' => 'Mensagens de fórum', # MODIF
+	'messages_forum' => 'Mensagens de fórum',
 	'messages_recents' => 'Mensagens de fóruns mais recentes',
-	'mots_clef' => 'Mot-clé', # NEW
+	'mots_clef' => 'Palavra-chave',
 	'mots_clefs' => 'Palavras-chave',
 	'mots_clefs_meme_groupe' => 'Palavras-chave no mesmo grupo',
 
@@ -83,15 +83,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'página anterior',
 	'page_suivante' => 'página seguinte',
 	'par_auteur' => 'por',
-	'participer_site' => 'Pode participar na vida deste sítio e propor os seus próprios artigos, inscrevendo-se mais abaixo. Receberá imediatamente um email que indica os seus códigos de acesso ao espaço privado do sítio.',
-	'plan_site' => 'Planta do sítio',
+	'participer_site' => 'Pode participar na vida deste sítio e propor os seus próprios artigos, inscrevendo-se mais abaixo. Receberá imediatamente um email com os seus códigos de acesso ao espaço privado do sítio.',
+	'plan_site' => 'Mapa do sítio',
 	'popularite' => 'Popularidade',
 	'poster_message' => 'Enviar uma mensagem',
 	'proposer_site' => 'Você pode propor um sítio a adicionar a esta rubrica :',
 
 	// R
-	'repondre_article' => 'Responder a este artigo',
-	'repondre_breve' => 'Responder a esta notícia',
+	'repondre_article' => 'Comentar este artigo',
+	'repondre_breve' => 'Comentar esta notícia',
 	'resultats_recherche' => 'Resultados da pesquisa',
 	'retour_debut_forums' => 'Regresso ao início dos fóruns',
 	'rubrique' => 'Rubrica',
@@ -102,20 +102,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Sítio realizado com SPIP',
 	'sites_web' => 'Sítios Web',
 	'sous_rubriques' => 'Sub-rubricas',
-	'spam' => 'Spam', # NEW
+	'spam' => 'Spam',
 	'suite' => 'continuação',
 	'sur_web' => 'Na Web',
-	'syndiquer_rubrique' => 'Vincular esta rubrica',
-	'syndiquer_site' => 'Vincular todo o sítio',
+	'syndiquer_rubrique' => 'Subscrever esta rubrica',
+	'syndiquer_site' => 'Subscrever todo o sítio',
 
 	// T
 	'texte_lettre_information' => 'Eis a carta de informação do sítio',
-	'texte_lettre_information_2' => 'Esta carta recenseia os artigos e as notícias publicados desde', # MODIF
+	'texte_lettre_information_2' => 'Este sítio contém novos itens publicados desde',
 
 	// V
 	'ver_imprimer' => 'Versão para imprimir',
-	'voir_en_ligne' => 'Ver em linha',
-	'voir_squelette' => 'importar o esqueleto desta página' # MODIF
+	'voir_en_ligne' => 'Ver online',
+	'voir_squelette' => 'exibir o modelo desta página'
 );
 
 ?>

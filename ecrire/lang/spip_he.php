@@ -236,6 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'שליחה דרך האתר',
 	'erreur' => 'שגיאה',
 	'erreur_balise_non_fermee' => 'התאג האחרון אינו נגמר :',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
 	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'שגיאות',

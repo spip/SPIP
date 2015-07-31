@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage' => 'Affichage', # NEW
 	'aide_non_disponible' => '这部分在线帮助尚无中文版本.',
 	'annuler_recherche' => 'Annuler la recherche', # NEW
-	'auteur' => 'Auteur :', # NEW
+	'auteur' => 'Auteur :', # 作者 MODIF
 	'avis_acces_interdit' => '限制访问.',
 	'avis_article_modifie' => '警告, @nom_auteur_modif@在@date_diff@分钟前修改过此文',
 	'avis_aucun_resultat' => '没有结果.',
@@ -812,7 +812,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sans_heure' => 'sans heure', # NEW
-	'statut_admin_restreint' => '(受限制的管理)',
+	'statut_admin_restreint' => '(受限制的管理)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
