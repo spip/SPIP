@@ -22,7 +22,7 @@ if ($purger_squelettes == "oui") {
 if ($supp_forum OR $supp_forum_priv OR $valid_forum) {
 	$verif = $supp_forum ? "supp_forum $supp_forum" : ($supp_forum_priv ? "supp_forum_priv $supp_forum_priv" : "valid_forum $valid_forum");
 	if (verifier_action_auteur($verif, $hash, $id_auteur)) {
-		include("ecrire/Include/MySQL3/spip_cache_mysql3.php");
+		include("inc-spip_cache_mysql3.php");
 		if ($supp_forum) 
 			changer_statut_forum($supp_forum, 'off');
 		else if ($supp_forum_priv)
