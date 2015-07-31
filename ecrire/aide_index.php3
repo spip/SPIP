@@ -56,6 +56,7 @@ function help_frame ($aide) {
 
 // Selection de l'aide correspondant a la langue demandee
 function fichier_aide($lang_aide = '') {
+	$help_server = $GLOBALS['spip_server']['aide'];
 
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
@@ -70,12 +71,12 @@ function fichier_aide($lang_aide = '') {
 		// Aide internet, en cache ?
 		include_ecrire('inc_sites.php3');
 		if (@file_exists($fichier_aide = "data/aide-$lang_aide-aide.html"))
-			return array(file($fichier_aide), $lang_aide, "http://www.spip.net/aide_tmp/$lang_aide/", true);
+			return array(file($fichier_aide), $lang_aide, "$help_server/$lang_aide-aide.html", true);
 		else {
 			// sinon aller la chercher sur le site d'aide
-			if ($contenu = recuperer_page("http://www.spip.net/aide_tmp/$lang_aide-aide.html")) {
+			if ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")) {
 				$ecrire_cache = ecrire_fichier ($fichier_aide, $contenu);
-				return array($contenu, $lang_aide, "http://www.spip.net/aide_tmp/$lang_aide/", $ecrire_cache);
+				return array($contenu, $lang_aide, $help_server, $ecrire_cache);
 			} else
 				define ('erreur_langue', _L('Impossible de t&eacute;l&eacute;charger l\'aide en ligne pour cette langue. Erreur de r&eacute;seau, ou aide non traduite. Si vous utilisez ce site en-dehors d\'une connexion Internet, vous pouvez installer l\'aide en local.'));
 		}
@@ -86,6 +87,7 @@ function fichier_aide($lang_aide = '') {
 
 
 function help_body($aide) {
+	$help_server = $GLOBALS['spip_server']['aide'];
 
 	if (!$aide) $aide = 'spip';
 
@@ -96,24 +98,25 @@ function help_body($aide) {
 	// Recherche des images de l'aide
 	$suite = $html;
 	$html = "";
-	while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
-		$f = $r[1];
+	while (ereg("AIDE/([-_a-zA-Z0-9]*/?)([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
+		$f = $r[2];
 		
 		# Image installee a l'ancienne
 		if (@file_exists("AIDE/$l/$f"))
 			$f = "AIDE/$l/$f";
 		else
 		# Image telechargee
-		if (@file_exists("data/aide-${l}-$f")) $f = "aide_index.php3?img=aide/${l}-$f";
+		if (@file_exists("data/aide-${l}-$f"))
+			$f = "aide_index.php3?img=${l}-$f";
 		else
 		# Image a telecharger
 		if ($url_aide) {
 			if ($ecrire_cache AND $contenu =
-			recuperer_page("http://www.spip.net/aide_tmp/$l/$f")
+			recuperer_page("$help_server/$l/$f")
 			AND ecrire_fichier ("data/aide-${l}-$f", $contenu))
-				$f = "aide_index.php3?img=aide-${l}-$f";
+				$f = "aide_index.php3?img=${l}-$f";
 			else
-				$f = "http://www.spip.net/aide_tmp/$l/$f"; # erreur
+				$f = "$help_server/$l/$f"; # erreur
 		}
 
 		$p = strpos($suite, $r[0]);
@@ -191,7 +194,7 @@ table.spip td {
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 
 <CENTER>
-<img src="aide_index.php3?img=aide/-logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
+<img src="aide_index.php3?img=-logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
 	}
@@ -218,18 +221,20 @@ table.spip td {
 // Recuperer une image dans le cache
 //
 function help_img($regs) {
+	$help_server = $GLOBALS['spip_server']['aide'];
+
 	list ($cache, $lang, $file, $ext) = $regs;
 	header("Content-Type: image/$ext");
-	if (file_exists('data/'.$cache)) {
-		readfile('data/'.$cache);
+	if (file_exists('data/aide-'.$cache)) {
+		readfile('data/aide-'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');
 		if ($contenu =
-		recuperer_page("http://www.spip.net/aide_tmp/$lang/$file")) {
+		recuperer_page("$help_server/$lang/$file")) {
 			echo $contenu;
-			ecrire_fichier ('data/'.$cache, $contenu);
+			ecrire_fichier ('data/aide-'.$cache, $contenu);
 		} else
-			header ("Location: http://www.spip.net/aide_tmp/$lang/$file");
+			header ("Location: $help_server/$lang/$file");
 	}
 	exit;
 }
@@ -433,7 +438,7 @@ function analyse_aide($html, $aide=false) {
 //
 // Distribuer le travail
 //
-if (preg_match(',^aide/([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
+if (preg_match(',^([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
 	help_img($regs);
 else {
 	entetes_html();
