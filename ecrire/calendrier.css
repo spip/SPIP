@@ -27,8 +27,62 @@ a.calendrier-annee {
 	color: white;
 	-moz-border-radius: 5px;
 }
+
 a.calendrier-annee:hover {
 	color: black;
 	background-color: white;
 }
 
+.calendrier-table-large { 
+	border: 0px;
+	width: 975px;
+ }
+
+.calendrier-td-large-centre { 
+	width: 535px;
+  	vertical-align: top;
+ }
+
+.calendrier-td-large-bord { 
+	width: 200px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-etroit { 
+	border: 0px;
+	width: 750px;
+ }
+
+.calendrier-td-etroit-centre { 
+	width: 630px;
+  	vertical-align: top;
+ }
+
+.calendrier-td-etroit-bord { 
+	width: 100px;
+  	vertical-align: top;
+ }
+
+.calendrier-opacity { 
+	-moz-opacity: 0.3;
+	filter: alpha(opacity=30);
+}
+
+.calendrier-arial10 { 
+	font-family: Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-arial11 { 
+	font-family: Arial, Sans, sans-serif; font-size: 11px;
+}
+
+.calendrier-verdana10 {
+	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
+
+}
+
+.calendrier-png { 
+	width: 12px; 
+	height: 12px;
+	behavior: url(win_png.htc);
+}
