@@ -1185,15 +1185,12 @@ function balise_INCLURE_dist($p) {
 	$l = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	if (isset($l['fond'])) {
-		$code = "recuperer_fond('',array(".implode(',',$l)."))";
+		$p->code = "recuperer_fond('',array(".implode(',',$l)."))";
 	} else {
 		$n = interprete_argument_balise(1,$p);
-		$code = '(($c = find_in_path('.$n.')) ? spip_file_get_contents($c) : "")';
+		$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
 	}
 
-	$commentaire = '#INCLURE ' . str_replace("\n", ' ', $champ);
-
-	$p->code = "\n//$commentaire.\n$code";
 	$p->interdire_scripts = false;
 	return $p;
 }
