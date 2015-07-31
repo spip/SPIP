@@ -244,8 +244,9 @@ function exec_controle_forum_dist()
 		echo onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", '', "forum-public-24.gif");
 		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
 
-		$n = spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1"));
-		if ($n) onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
+		list($from,$where) = critere_statut_controle_forum('vide', $id_rubrique);
+		$n = spip_fetch_array(spip_query("SELECT id_forum FROM $from WHERE $where LIMIT 1"));
+		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
 
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
 		$f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
