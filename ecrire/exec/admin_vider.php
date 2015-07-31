@@ -107,9 +107,7 @@ if ($quota_cache) {
 }
 
  echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
-   generer_action_auteur('purger',
-	'cache',
-	generer_url_ecrire("admin_vider"),
+ 	redirige_action_auteur('purger', 'cache', "admin_vider", '',
 	"\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
 			 "\" /></div>",
@@ -121,9 +119,7 @@ if ($quota_cache) {
 
  echo afficher_taille_cache_vignettes();
 
- echo generer_action_auteur('purger',
-	'vignettes',
-	generer_url_ecrire("admin_vider"),
+ echo redirige_action_auteur('purger', 'vignettes', "admin_vider",'',
 	"\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
 			 "\" /></div>",
@@ -151,9 +147,7 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	echo '</p>';
-	echo generer_action_auteur('purger',
-		'index',
-		generer_url_ecrire("admin_vider"),
+	echo redirige_action_auteur('purger', 'index', "admin_vider",'',
 		"\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_effacer_index')) .
 			 "\" /></div>",
