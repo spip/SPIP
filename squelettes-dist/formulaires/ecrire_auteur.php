@@ -14,12 +14,14 @@
 function formulaires_ecrire_auteur_charger_dist($id_auteur, $id_article, $mail){
 	include_spip('inc/texte');
 	$puce = definir_puce();
+	$valeurs = array('sujet_message_auteur'=>'','texte_message_auteur'=>'','email_message_auteur'=>'');
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
-	$id = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
-	#spip_log("id formulaire = $id, "._request("valide".$id));
+	$valeurs['id'] = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
+	// passer l'id_auteur au squelette
+	$valeurs['id_auteur'] = $id_auteur;
+	$valeurs['id_article'] = $id_article;
 	
-	$valeurs = array('sujet_message_auteur'=>'','texte_message_auteur'=>'','email_message_auteur'=>'');
 	return $valeurs;
 }
 
