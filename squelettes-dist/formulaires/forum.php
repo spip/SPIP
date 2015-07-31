@@ -261,6 +261,7 @@ function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc
 {
 	$bouton = _T('forum_message_definitif');
 	include_spip('public/assembler');
+	include_spip('public/composer');
 	// supprimer les <form> de la previsualisation
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)form\b@ism",
@@ -270,6 +271,7 @@ function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc
 		      array(
 			'titre' => safehtml(typo($titre)),
 			'texte' => safehtml(propre($texte)),
+			'notes' => safehtml(calculer_notes()),
 			'url_site' => vider_url($url_site),
 			'nom_site' => safehtml(typo($nom_site)),
 			'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
