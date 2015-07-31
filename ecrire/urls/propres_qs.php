@@ -34,6 +34,6 @@ define ('_debut_urls_propres', './?');
 // http://doc.spip.org/@urls_propres_qs_dist
 function urls_propres_qs_dist($i, &$entite, $args='', $ancre='') {
 	$f = charger_fonction('propres', 'urls');
-	return preg_replace(",^\.\./\./,","../",$f($i, $entite, $args, $ancre));
+	return $f($i, $entite, $args, $ancre);
 }
 ?>

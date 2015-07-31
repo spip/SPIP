@@ -410,16 +410,19 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 	
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
-	// Compatilibite avec propres2
+	// Compatibilite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
-	
+
+	// Revenir en utf-8 si encodage type %D8%A7 (farsi)
+	$url_propre = rawurldecode($url_propre);
+
 	// Compatibilite avec les anciens marqueurs d'URL propres
 	// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
 	if (!$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='.sql_quote($url_propre))) {
 		// Sinon enlever les marqueurs eventuels
-		$url_propre = retirer_marqueurs_url_propre($url_propre);
+		$url_propre2 = retirer_marqueurs_url_propre($url_propre);
 
-		$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='.sql_quote($url_propre));
+		$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='.sql_quote($url_propre2));
 	}
 
 	if ($row) {
@@ -443,12 +446,26 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 		}
 	}
 
-	if ($entite=='type_urls') {
+	if ($entite=='' OR $entite=='type_urls' /* compat .htaccess 2.0 */) {
 		if ($type)
 			$entite =  ($type == 'syndic') ?  'site' : $type;
 		else {
 			$entite = '404';
-			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
+			$contexte['erreur'] = '';
+			// l'url n'existe pas...
+			// on ne sait plus dire de quel type d'objet il s'agit
+
+			// sauf si on a le marqueur. et la c'est un peu sale...
+			if (_MARQUEUR_URL) {
+				$fmarqueur = @array_flip(unserialize(_MARQUEUR_URL));
+				preg_match(',^([+][-]|[-+@_]),', $url_propre, $regs);
+				$objet = $regs ? substr($fmarqueur[$regs[1]],0,n-1) : 'article';
+				$contexte['erreur'] = _T(
+					($objet=='rubrique' OR $objet=='breve')
+						? 'public:aucune_'.$objet
+						: 'public:aucun_'.$objet
+				);
+			}
 		}
 	}
 
