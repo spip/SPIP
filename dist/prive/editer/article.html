@@ -87,7 +87,7 @@ $(function(){
 		</li>]
 		[<li>(#ENV**{chapo}|match{^=}|?{'',' '})
 			<label for="chapo"><:info_chapeau:><em>#AIDER{arttitre}</em></label>
-			<textarea name='chapo' id='chapo' class='forml' rows='#ENV**{config}|table_valeur{lignes}' cols='40'>[(#ENV**{chapo}|entites_html)]</textarea>
+			<textarea name='chapo' id='chapo' class='forml'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo}|entites_html)]</textarea>
 		</li>]
 		]
   	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
