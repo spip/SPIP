@@ -621,6 +621,23 @@ function inc_glob_to_array_dist($u) {
 }
 
 /**
+ * YAML -> tableau
+ * @param string $u
+ * @return bool|array
+ * @throws Exception
+ */
+function inc_yaml_to_array_dist($u){
+	include_spip('inc/yaml-mini');
+	if (!function_exists("yaml_decode")){
+		throw new Exception('YAML: impossible de trouver la fonction yaml_decode');
+		return false;
+	}
+
+	return yaml_decode($u);
+}
+
+
+/**
  * pregfiles -> tableau
  * lister des fichiers a partir d'un dossier de base et selon une regexp.
  * pour la syntaxe cf la fonction spip preg_files
