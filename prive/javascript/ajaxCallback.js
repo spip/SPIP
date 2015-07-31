@@ -347,10 +347,12 @@ jQuery.fn.ajaxbloc = function() {
 	  }).addClass('bind-ajaxReload');
 
 		jQuery(ajaxbloc_selecteur,this).not('.noajax').not('.bind-ajax').each(function(){
-			var href = this.href;
-			var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
-			if (jQuery(this).is('.preload') && !jQuery.spip.preloaded_urls[url]) {
-				jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
+			if (jQuery(this).is('.preload')){
+				var href = this.href;
+				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+				if (!jQuery.spip.preloaded_urls[url]) {
+					jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
+				}
 			}
 			jQuery(this).click(function(){
 				if (!ajax_confirm) {
@@ -361,6 +363,8 @@ jQuery.fn.ajaxbloc = function() {
 					if ((d.getTime()-ajax_confirm_date)<=2)
 						return false;
 				}
+				var href = this.href;
+				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 				jQuery.spip.loadAjax(blocfrag, url, href, jQuery(this).is('.nocache'));
 				return false;
 			});
