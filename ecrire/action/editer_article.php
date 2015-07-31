@@ -20,7 +20,7 @@ function action_editer_article_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// si id_article n'est pas un nombre, c'est une creation 
+	// si id_article n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
@@ -30,13 +30,13 @@ function action_editer_article_dist($arg=null) {
 			redirige_url_ecrire();
 		}
 		if (($id_article = insert_article($id_parent)) > 0)
-		
+
 		# cf. GROS HACK ecrire/inc/getdocument
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
 
 			sql_updateq("spip_documents_liens", array("id_objet" => $id_article), array("id_objet = ".(0-$id_auteur),"objet='article'"));
-	} 
+	}
 
 	// Enregistre l'envoi dans la BD
 	if ($id_article > 0) $err = articles_set($id_article);
@@ -44,11 +44,11 @@ function action_editer_article_dist($arg=null) {
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
 			'id_article', $id_article, '&') . $err;
-	
+
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
-	else 
+	else
 		return array($id_article,$err);
 }
 
@@ -144,8 +144,8 @@ function insert_article($id_rubrique) {
 	$id_article = sql_insertq("spip_articles", $champs);
 
 	// controler si le serveur n'a pas renvoye une erreur
-	if ($id_article > 0) 
-		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_article));;
+	if ($id_article > 0)
+		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_article));
 
 	return $id_article;
 }
@@ -284,7 +284,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 
 	sql_updateq('spip_articles', $champs, "id_article=$id_article");
 
-	// Changer le statut des rubriques concernees 
+	// Changer le statut des rubriques concernees
 
 	if ($cond) {
 		include_spip('inc/rubriques');
