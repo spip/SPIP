@@ -37,7 +37,7 @@ function description_table($nom){
 
 
 function inc_import_1_3_dist($f, $gz=false) {
-  global $import_ok, $pos, $abs_pos, $my_pos;
+  global $import_ok, $abs_pos, $my_pos;
 	static $tables = '';
 	static $field_desc = array ();
 
