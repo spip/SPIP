@@ -219,15 +219,16 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	if (!preg_match('/^<!ELEMENT\s+(\S+)\s+([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
-	list(,$nom, $val, $dtd) = $m;
+	list(,$nom, $contenu, $dtd) = $m;
 	$nom = expanserEntite($nom, $dtc->macros);
-	$val = compilerRegle(expanserEntite($val, $dtc->macros));
 
 	if (isset($dtc->elements[$nom])) {
 		spip_log("redefinition de l'element $nom dans la DTD");
 		return -4;
 	}
 	$filles = array();
+	$contenu = expanserEntite($contenu, $dtc->macros);
+	$val = compilerRegle($contenu);
 	if ($val == '(EMPTY )')
 		$dtc->regles[$nom] = 'EMPTY';
 	elseif  ($val == '(ANY )') 
@@ -248,6 +249,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 					$dtc->peres[$k][]= $nom;
 			}
 	}
+	$dtc->pcdata[$nom]= (strpos($contenu, '#PCDATA')===false);
 	$dtc->elements[$nom]= $filles;
 	return $dtd;
 }

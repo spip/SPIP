@@ -246,7 +246,20 @@ function finElement($phraseur, $name)
 
 // http://doc.spip.org/@textElement
 function textElement($phraseur, $data)
-{	xml_textElement($phraseur, $data);}
+{	
+	global $phraseur_xml;
+	if (trim($data)) {
+		$d = $phraseur_xml->depth;
+		$d = $phraseur_xml->ouvrant[$d];
+		preg_match('/^\s*(\S+)/', $d, $m);
+		if ($phraseur_xml->dtc->pcdata[$m[1]]) {
+			$phraseur_xml->err[]= " <p><b>". $m[1] . "</b> "
+			. _T('zxml_nonvide_balise') // message a affiner
+			.  coordonnees_erreur($phraseur);
+		}
+	}
+	xml_textElement($phraseur, $data);
+}
 
 // http://doc.spip.org/@PiElement
 function PiElement($phraseur, $target, $data)
