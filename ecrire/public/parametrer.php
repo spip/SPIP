@@ -343,6 +343,7 @@ function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 // avec un eventuel raccourci Spip
 // si le raccourci a un titre il sera pris comme corps du 302
 
+// http://doc.spip.org/@tester_redirection
 function tester_redirection($fond, $contexte, $connect)
 {
 	if ($fond == 'article'

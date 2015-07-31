@@ -648,6 +648,7 @@ function antispam($texte) {
 	return preg_replace("/@/", " $masque ", $texte);
 }
 
+// http://doc.spip.org/@securiser_acces
 function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
 {
 	include_spip('inc/acces');
