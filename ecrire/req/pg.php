@@ -1007,7 +1007,10 @@ function spip_pg_hex($v)
 
 function spip_pg_quote($v, $type='')
 {
-	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+	return ($type === 'int' AND !$v) ? '0' :
+		(is_numeric($v) ? strval($v) :
+			(!is_array($v) ? ("'" . pg_escape_string($v) . "'")
+			 : join(",", array_map('_q', $v))));
 }
 
 function spip_pg_date_proche($champ, $interval, $unite)
