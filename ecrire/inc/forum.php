@@ -246,12 +246,17 @@ function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
 	}
 
 	if ($recherche) {
-		include_spip('inc/rechercher');
-		if ($a = recherche_en_base($recherche, 'forum'))
-			$and .= " AND ".sql_in('id_forum',
-				array_keys(array_pop($a)));
-		else
-			$and .= " 0=1";
+		# recherche par IP
+		if (preg_match(',^\d+\.\d+\.(\*|\d+\.(\*|\d+))$,', $recherche)) {
+			$and .= " AND ip LIKE ".sql_quote(str_replace('*', '%', $recherche));
+		} else {
+			include_spip('inc/rechercher');
+			if ($a = recherche_en_base($recherche, 'forum'))
+				$and .= " AND ".sql_in('id_forum',
+					array_keys(array_pop($a)));
+			else
+				$and .= " AND 0=1";
+		}
 	}
 
 	return array($from, "$where$and");
