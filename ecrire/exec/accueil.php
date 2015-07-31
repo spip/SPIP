@@ -30,116 +30,6 @@ function encours_accueil()
 	. "</div>";
 }
 
-//
-// Raccourcis pour malvoyants
-//
-
-// http://doc.spip.org/@colonne_droite_eq4
-function colonne_droite_eq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
-	global  $connect_statut, $connect_toutes_rubriques;
-
-	$res = sql_countsel('spip_rubriques');
-	if ($res) {
-		$res = icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.png","new", false);
-
-		if ($activer_breves != "non") {
-			$res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.png","new", false);
-		}
-	}
-	else {
-		if ($connect_statut == '0minirezo') {
-			$res = "<div class='verdana2'>"._T('info_ecrire_article')."</div>";
-		}
-	}
-	if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {
-		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.png","new", false);
-	}
-	return  bloc_des_raccourcis($res);
- }
-
-//
-// Raccourcis pour voyants ...
-//
-
-// http://doc.spip.org/@colonne_droite_neq4
-function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
-  global  $connect_statut, $connect_id_auteur, $connect_login;
-
-	$gadget = '';
-
-	if ($id_rubrique > 0) {
-		$dans_rub = "&id_rubrique=$id_rubrique";
-		$dans_parent = "&id_parent=$id_rubrique";
-	} else $dans_rub = $dans_parent = '';
-
-	if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {
-		$gadget .= "<td>"
-			. icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.png", "new", false)
-			. "</td>";
-		}
-	$n = sql_countsel('spip_rubriques');
-	if ($n) {
-		$gadget .= "<td>"
-			. icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.png","new", false)
-			. "</td>";
-			
-		if ($activer_breves != "non") {
-				$gadget .= "<td>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.png","new", false);
-				$gadget .= "</td>";
-			}
-			
-		if ($activer_sites == 'oui') {
-				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
-					$gadget .= "<td>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.png","new", false);
-					$gadget .= "</td>";
-				}
-			} 
-	}
-	$gadget = "<table><tr>$gadget</tr></table>\n";
-
-	if ($connect_statut != "0minirezo") {
-	
-		$gadget .= "<table><tr>";
-	
-		$cpt = sql_countsel('spip_auteurs_articles', "id_auteur=$connect_id_auteur");
-		if ($cpt) {
-			$gadget .= "<td>"
-			. icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.png", "", false)
-			. "</td>";
-		}
-	
-		if ($activer_breves != "non"){
-			$gadget .= "<td>"
-			. icone_horizontale (_T('icone_breves'), generer_url_ecrire("breves",""), "breve-24.png", "", false)
-			. "</td>";
-		}
-	
-		if ($articles_mots != "non") {
-			$gadget .= "<td>"
-			. icone_horizontale  (_T('icone_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-24.png", "", false)
-			. "</td>";
-		}
-
-		if ($activer_sites<>'non') {
-			$gadget .= "<td>"
-			. icone_horizontale  (_T('icone_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.png", "", false)
-			. "</td>";
-		}
-		$gadget .= "</tr></table>\n";
-	}
-	$gadget = pipeline('accueil_gadgets',$gadget);
-
-	if (strlen($gadget) > 0) {
-	  $gadget = 
-	    debut_cadre_trait_couleur('', true)
-	    . $gadget
-	    . fin_cadre_trait_couleur(true);
-	}
-
-	return $gadget;
-}
 
 // Cartouche d'identification, avec les rubriques administrees
 
@@ -369,19 +259,8 @@ function exec_accueil_dist()
 
 	echo $lister_objets('articles',array('titre'=>afficher_plus_info(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),'statut'=>'prepa', 'par'=>'date','id_auteur'=>$GLOBALS['visiteur_session']['id_auteur']));
 
-	if ($spip_display == 4)
-	  echo colonne_droite_eq4($id_rubrique,
-			 $GLOBALS['meta']["activer_breves"],
-			 $GLOBALS['meta']["activer_sites"],
-			 $GLOBALS['meta']['articles_mots']);
-	else {
-	  echo colonne_droite_neq4($id_rubrique,
-			 $GLOBALS['meta']["activer_breves"],
-			 $GLOBALS['meta']["activer_sites"],
-			 $GLOBALS['meta']['articles_mots']);
 
-	  echo encours_accueil();
-	}
+	echo encours_accueil();
 
 	include_spip('inc/presenter_enfants');
 	if (!$connect_id_rubrique)
