@@ -60,10 +60,10 @@ function _generer_url_propre($type, $id_objet) {
 	if ($type == 'mot')
 		$statut = "'publie' as statut";
 	else
-		$statut = 'statut';
+		$statut = 'O.statut';
 
 	//  Recuperer une URL propre correspondant a l'objet.
-	$row = sql_fetsel("U.url, U.maj, O.$statut, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
+	$row = sql_fetsel("U.url, U.maj, $statut, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
 
 	if (!$row) return ""; # objet inexistant
 
