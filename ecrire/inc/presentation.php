@@ -379,9 +379,12 @@ function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 }
 
 // http://doc.spip.org/@afficher_tranches_requete
-function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10) {
+function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
 	static $ancre = 0;
 	global $browser_name, $spip_lang_right, $spip_display;
+	if ($old_arg!==NULL){ // eviter de casser la compat des vieux appels $cols_span ayant disparu ...
+		$tmp_var = $url;		$url = $nb_aff; $nb_aff=$old_arg;
+	}
 
 	$deb_aff = intval(_request($tmp_var));
 	$ancre++;
