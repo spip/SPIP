@@ -454,7 +454,7 @@ function calculer_page_globale($fond) {
 	while (list($key, $val) = each($contexte_defaut)) {
 		if ($contexte[$val]) {
 			$GLOBALS[$val] = $contexte[$val];
-			$signale_globals .= '<?php $GLOBALS[\''.$val.'\'] = '.(int) $contexte[$val]."; ?>\n";
+			$signale_globals .= '<'.'?php $GLOBALS[\''.$val.'\'] = '.(int) $contexte[$val]."; ?".">\n";
 		}
 	}
 
