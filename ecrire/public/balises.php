@@ -141,7 +141,13 @@ function balise_URL_ARTICLE_dist($p) {
 
 	// Cas general : chercher un id_article dans la pile
 	else {
-		$_id_article = champ_sql('id_article', $p);
+		$_id_article = 0;
+		if ($p->param && !$p->param[0][0]){
+			$quoi =  $p->param[0][1];
+			$_id_article = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		}
+		if (!$_id_article)
+			$_id_article = champ_sql('id_article', $p);
 		$p->code = "generer_url_article($_id_article)";
 
 		if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
@@ -153,9 +159,15 @@ function balise_URL_ARTICLE_dist($p) {
 }
 
 function balise_URL_RUBRIQUE_dist($p) {
-	$p->code = "generer_url_rubrique(" . 
-	champ_sql('id_rubrique',$p) . 
-	")" ;
+	$_id_rubrique = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_rubrique = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_rubrique)
+		$_id_rubrique = champ_sql('id_rubrique',$p);
+	$p->code = "generer_url_rubrique($_id_rubrique)" ;
+
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
@@ -164,9 +176,15 @@ function balise_URL_RUBRIQUE_dist($p) {
 }
 
 function balise_URL_BREVE_dist($p) {
-	$p->code = "generer_url_breve(" .
-	champ_sql('id_breve',$p) . 
-	")";
+	$_id_breve = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_breve = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_breve)
+		$_id_breve = champ_sql('id_breve',$p);
+	$p->code = "generer_url_breve($_id_breve)";
+	
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
@@ -175,9 +193,14 @@ function balise_URL_BREVE_dist($p) {
 }
 
 function balise_URL_MOT_dist($p) {
-	$p->code = "generer_url_mot(" .
-	champ_sql('id_mot',$p) .
-	")";
+	$_id_mot = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_mot = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_mot)
+		$_id_mot = champ_sql('id_mot',$p);
+	$p->code = "generer_url_mot($_id_mot)";
 
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
@@ -206,8 +229,14 @@ function balise_NOM_SITE_dist($p) {
 # a part [(#ID_SYNDIC|generer_url_site)]
 
 function balise_URL_FORUM_dist($p) {
-	$p->code = "generer_url_forum(" .
-	champ_sql('id_forum',$p) .")";
+	$_id_forum = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_forum = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_forum)
+		$_id_forum = champ_sql('id_forum',$p);
+	$p->code = "generer_url_forum($_id_forum)";
 
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
@@ -217,16 +246,29 @@ function balise_URL_FORUM_dist($p) {
 }
 
 function balise_URL_DOCUMENT_dist($p) {
-	$p->code = "generer_url_document(" .
-	champ_sql('id_document',$p) . ")";
+	$_id_document = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_document = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_document)
+		$_id_document = champ_sql('id_document',$p);
+	$p->code = "generer_url_document($_id_document)";
 
 	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_URL_AUTEUR_dist($p) {
-	$p->code = "generer_url_auteur(" .
-	champ_sql('id_auteur',$p) .")";
+	$_id_auteur = 0;
+	if ($p->param && !$p->param[0][0]){
+		$quoi =  $p->param[0][1];
+		$_id_auteur = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+	}
+	if (!$_id_auteur)
+		$_id_auteur = champ_sql('id_auteur',$p);
+	$p->code = "generer_url_auteur($_id_auteur)";
+
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
