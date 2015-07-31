@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 // Distinguer une inclusion d'un appel initial
-if (defined('_INC_PUBLIC')) {
+if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
@@ -28,7 +27,7 @@ if (defined('_INC_PUBLIC')) {
 		lang_dselect();
 
 } else {
-	define ('_INC_PUBLIC', 1);
+	$GLOBALS['_INC_PUBLIC'] = 1;
 
 	//
 	// Discriminer les appels

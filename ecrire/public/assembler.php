@@ -385,8 +385,12 @@ function message_erreur_404 ($erreur= "") {
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array()) {
 
+	$clear = false;
 	// on est peut etre dans l'espace prive au moment de l'appel
-	define ('_INC_PUBLIC', 1);
+	if (!isset($GLOBALS['_INC_PUBLIC'])) {
+		$GLOBALS['_INC_PUBLIC'] = 1;
+		$clear = true;
+	}
 	if (($fond=='')&&isset($contexte['fond']))
 		$fond = $contexte['fond'];
 	
@@ -399,7 +403,8 @@ function recuperer_fond($fond, $contexte=array()) {
 		$page['texte'] = ob_get_contents();
 		ob_end_clean();
 	}
-
+	if ($clear)
+		unset($GLOBALS['_INC_PUBLIC']);
 	return trim($page['texte']);
 }
 
