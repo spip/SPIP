@@ -371,10 +371,10 @@ function analyser_backend($rss, $url_syndic='') {
 
 	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
 	list($header) = preg_split(',<(item|entry)[:[:space:]>],', $rss, 2);
-	if (preg_match(',<((dc:)(author|creator))>(.*)</\1>,Uims',$header,$regs)) {
+	if (preg_match(',<((dc:)?(author|creator))>(.*)</\1>,Uims',$header,$regs)) {
 		$les_auteurs_du_site = trim($regs[4]);
 		if (preg_match(',<name>(.*)</name>,Uims', $les_auteurs_du_site, $regs))
-			$les_auteurs_du_site = $regs[2];
+			$les_auteurs_du_site = $regs[1];
 	}
 	if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
 	$header, $match))
@@ -454,11 +454,11 @@ function analyser_backend($rss, $url_syndic='') {
 			$data['lastbuilddate'] = $lastbuilddate;
 
 		// Auteur
-		if (preg_match(',<((dc:)(author|creator))>(.*)</\1>,Uims',$item,$regs)){
+		if (preg_match(',<((dc:)?(author|creator))>(.*)</\1>,Uims',$item,$regs)){
 			$data['lesauteurs'] = trim($regs[4]);
 			if (preg_match(',<name>(.*)</name>,Uims',
 			$data['lesauteurs'], $regs))
-				$data['lesauteurs'] = $regs[2];
+				$data['lesauteurs'] = $regs[1];
 		}
 		else
 			$data['lesauteurs'] = $les_auteurs_du_site;
