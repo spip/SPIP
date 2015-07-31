@@ -309,16 +309,22 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	// Classement par ordre inverse
-
-	if ($crit->not || $crit->param)
+	if ($crit->not)
 		critere_parinverse($idb, $boucles, $crit, " . ' DESC'");
 	else
 	  {
+	  	$order = "' DESC'";
+			// Classement par ordre inverse fonction eventuelle de #ENV{...}
+			if ($crit->param[0]){
+				$critere = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+				$order = "(($critere)?' DESC':'')";
+			}
+	  	
 	    $n = count($boucle->order);
 	    if ($n)
-	      $boucle->order[$n-1] .= " . ' DESC'";
+	      $boucle->order[$n-1] .= " . $order";
 	    else
-	      $boucle->default_order[] =  ' DESC';
+	      $boucle->default_order[] =  $order;
 	  }
 }
 
