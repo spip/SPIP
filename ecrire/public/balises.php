@@ -667,7 +667,7 @@ function balise_CHEMIN_dist($p) {
 	if (!$arg) {
 		erreur_squelette(_T('zbug_balise_sans_argument', 
 					array('balise' => ' CHEMIN')),
-			$p->bid_boucle);
+			$p->id_boucle);
 		$p->code = "''";
 	} else 
 	  $p->code = 'find_in_path(' . $arg .')';
@@ -999,7 +999,7 @@ function balise_INCLURE_dist($p) {
 		if (!$n) {
 			erreur_squelette(_T('zbug_balise_sans_argument', 
 					array('balise' => ' INCLURE')),
-			$p->bid_boucle);
+			$p->id_boucle);
 			$p->code = "''";
 		} else 
 		
