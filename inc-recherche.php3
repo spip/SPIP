@@ -5,7 +5,7 @@ $recherche_array = array();
 
 function recherche_stat($args, $filtres)
 {
-  if (lire_meta("accepter_inscriptions") != "oui")
+  if (lire_meta("activer_moteur") != "oui")
     return '';
   else {
     if (!($lien = $filtre[0])) $lien = 'recherche.php3';
