@@ -359,9 +359,9 @@ function spip_query($query) {
 // Infos de config PHP
 //
 
-$php_module = (($flag_sapi_name AND ereg("^apache", @php_sapi_name())) OR
+$php_module = (($flag_sapi_name AND eregi("^apache", @php_sapi_name())) OR
 	ereg("^Apache.* PHP", $SERVER_SOFTWARE));
-$php_cgi = ($flag_sapi_name AND ereg("^cgi", @php_sapi_name));
+$php_cgi = ($flag_sapi_name AND eregi("^cgi", @php_sapi_name()));
 
 function http_status($status) {
 	global $php_cgi, $REDIRECT_STATUS;
