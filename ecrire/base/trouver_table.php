@@ -48,7 +48,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	if (!isset($nom_cache_desc_sql[$serveur]))
 		$nom_cache_desc_sql[$serveur] =
 		  _DIR_CACHE . 'sql_desc_'
-		  . ($serveur ? "$serveur_":"")
+		  . ($serveur ? "{$serveur}_":"")
 		  . substr(md5($connexion['db'].":".$connexion['prefixe']),0,8)
 			.'.txt';
 
