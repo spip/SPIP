@@ -392,7 +392,7 @@ function spip_fetch_array($r, $t=SPIP_ASSOC) {
 }
 
 // http://doc.spip.org/@spip_sql_error
-function spip_sql_error() {
+function spip_mysql_error() {
 	return mysql_error();
 }
 
