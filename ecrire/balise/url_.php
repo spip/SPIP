@@ -158,7 +158,7 @@ function balise_URL_PAGE_dist($p) {
 	}
 	if (!$code) {
 		$noentities = $p->etoile ? "'&'" : '';
-		$code = "url_de_base() . preg_replace(',^./,', '', self($noentitites))";
+		$code = "url_de_base() . preg_replace(',^./,', '', self($noentities))";
 	} else{
 	  	if (!$args) $args = "''";
 		$noentities = $p->etoile ? ", true" : '';
