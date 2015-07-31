@@ -22,7 +22,7 @@ function spip_action_joindre_dist()
     $sousaction1,
     $sousaction2,
     $sousaction3,
-    $sousaction4,
+#    $sousaction4,  # sousaction4 = code mort a supprimer
     $sousaction5,
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
@@ -119,6 +119,7 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 			     $hash, $id_auteur, $redirect, $actifs);
 }
 
+/* code mort cf. sousaction4
 //  identifie les repertoires de upload aux rubriques Spip
 
 function spip_action_joindre4($arg, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$documents_actifs)
@@ -128,7 +129,7 @@ function spip_action_joindre4($arg, $mode, $type, $id, $id_document, $hash, $id_
 	identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
 	include_ecrire("inc_rubriques");
 	calculer_rubriques();
-}
+} */
 
 //  Zip avec confirmation "tel quel"
 

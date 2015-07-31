@@ -653,6 +653,13 @@ function charger_generer_url() {
 		// sinon fichier inc-urls-xxx
 		OR include_local(_DIR_RACINE."inc-urls-".$GLOBALS['type_urls']);
 	}
+
+	if (!function_exists('generer_url_special')) {
+		function generer_url_special($special, $args='') {
+			return _DIR_RACINE . "page.php3?fond=$special".
+				($args ? '&'.$args : '');
+		}
+	}
 }
 
 
