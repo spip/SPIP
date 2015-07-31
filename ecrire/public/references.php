@@ -156,7 +156,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 	global $tables_des_serveurs_sql;
 
 	if (is_array($excep)) {
-		// permettre aux plugins de gerer eux meme des jointures derogatoire ingérables
+		// permettre aux plugins de gerer eux meme des jointures derogatoire ingerables
 		$t = NULL;
 		if (count($excep)==3){
 			$index_exception_derogatoire = array_pop($excep);
@@ -501,8 +501,8 @@ function compose_filtres(&$p, $code) {
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 			else {
-				if($fonc = chercher_filtre($fonc))
-					$code = "$fonc($code$arglist)";
+				if($f = chercher_filtre($fonc))
+					$code = "$f($code$arglist)";
 			}
 
 			if (!isset($code))
