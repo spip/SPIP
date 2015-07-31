@@ -199,7 +199,8 @@ function chapo_redirige($chapo, $url=false)
 	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
 		if (!preg_match(_RACCOURCI_CHAPO, $chapo, $m))
 			return $chapo;
-	return !$url ? $m[3] : calculer_url($m[3]);
+
+	return !$url ? $m[3] : traiter_lien_implicite($m[3]);
 }
 
 // Ne pas afficher le chapo si article virtuel
