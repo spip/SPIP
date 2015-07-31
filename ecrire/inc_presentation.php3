@@ -1625,14 +1625,17 @@ function debut_gauche($rubrique = "asuivre") {
 			$nb_connectes = mysql_num_rows($result_auteurs);
 		}
 
-		$flag_cadre = ($nb_connectes > 0 OR $options == "avancees");
+		$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
 		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-
-		if ($options == "avancees") {
+		if ($rubrique == "messagerie") {
 			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
 			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
 			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
 			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+			if ($connect_statut == "0minirezo") {
+				echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#ff9900' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+			}
 		}
 		
 		if ($flag_cadre) {
