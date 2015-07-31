@@ -17,8 +17,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@inc_informer_dist
 function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 {
-	global $spip_display,$spip_lang_right ;
-
 	include_spip('inc/texte');
 	if ($type == "rubrique") {
 		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
@@ -32,7 +30,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 		$titre = '';
 
 	$res = '';
-	if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND isset($GLOBALS['meta']['image_process']))
+	if ($type == "rubrique" AND $GLOBALS['spip_display'] != 1 AND $GLOBALS['spip_display']!=4 AND isset($GLOBALS['meta']['image_process']))
 	  if ($GLOBALS['meta']['image_process'] != "non") {
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($res = $chercher_logo($id, 'id_rubrique', 'on'))  {
@@ -40,7 +38,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 			include_spip('inc/filtres_images_mini');
 			$res = image_reduire("<img src='$fid' alt='' />", 100, 48);
 			if ($res)
-				$res =  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>$res</div>";
+				$res =  "<div style='float: ".$GLOBALS['spip_lang_right']."; margin-".$GLOBALS['spip_lang_right'].": -5px; margin-top: -5px;'>$res</div>";
 		}
 	}
 
@@ -63,7 +61,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 	. (!$res ? '' : $res)
 	. "<p><b>".safehtml($titre)."</b></p>"
 	. (!$descriptif ? '' : "<div>".safehtml($descriptif)."</div>")
-	. "<div style='text-align: $spip_lang_right;'>"
+	. "<div style='text-align: ".$GLOBALS['spip_lang_right'].";'>"
 	. "<input type='submit' class='fondo' value='"
 	. _T('bouton_choisir')
 	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"

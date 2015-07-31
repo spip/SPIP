@@ -70,8 +70,8 @@ function filtre_text_html_dist($t)
 			. str_replace('<','',recuperer_page($m[1]));
 		}
 	// Pourquoi SafeHtml transforme-t-il en texte les scripts dans Body ?
-	$t = safehtml(preg_replace(',<script.*?</script>,is','',$t));
-	return (!$style ? '' : "\n<style>$style</style>") . $t;
+	$t = safehtml(preg_replace(',<script'.'.*?</script>,is','',$t));
+	return (!$style ? '' : "\n<style>".$style."</style>") . $t;
 }
 
 // http://doc.spip.org/@filtre_audio_x_pn_realaudio
