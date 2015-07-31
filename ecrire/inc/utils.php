@@ -160,19 +160,19 @@ function spip_log($message, $logname='spip') {
 	// accepter spip_log( Array )
 	if (!is_string($message)) $message = var_export($message, true);
 
-	$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
+	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 		.preg_replace("/\n*$/", "\n", $message);
 
 	$logfile = _DIR_TMP . $logname . '.log';
 	if (@is_readable($logfile)
 	AND (!$s = @filesize($logfile) OR $s > $taille_des_logs * 1024)) {
 		$rotate = $nombre_de_logs;
-		$message .= "[-- rotate --]\n";
+		$m .= "[-- rotate --]\n";
 	}
 	
 	$f = @fopen($logfile, "ab");
 	if ($f) {
-		fputs($f, htmlspecialchars($message));
+		fputs($f, str_replace('<','&lt;',$m));
 		fclose($f);
 	}
 
@@ -182,6 +182,9 @@ function spip_log($message, $logname='spip') {
 			@rename($logfile . ($rotate ? '.' . $rotate : ''), $logfile . '.' . ($rotate + 1));
 		}
 	}
+
+	if ($logname != 'spip')
+		spip_log($message, 'spip');
 }
 
 // Fonction appelee par le fichier cree dans config/ a l'instal'.
