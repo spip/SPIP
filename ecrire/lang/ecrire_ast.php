@@ -390,7 +390,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
   agospiadores desactiven l’unvíu d’e-mails dende los sos
   sirvidores: nesti casu, la inscripción automática ye
   imposible.</i></blockquote>', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Raiz del sitiu',
 	'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
 	'info_recherche_auteur_zero' => 'Nun hai resultaos pa «@cherche_auteur@».',

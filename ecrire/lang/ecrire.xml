@@ -3,7 +3,8 @@
 		<traducteur nom="chankalan" lien="http://trad.spip.net/auteur/chankalan" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ast" total="794" traduits="677" relire="0" modifs="38" nouveaux="79" pourcent="85.26">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ast" total="794" traduits="677" relire="0" modifs="37" nouveaux="80" pourcent="85.26">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ay" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ay" total="794" traduits="176" relire="0" modifs="7" nouveaux="611" pourcent="22.17">
