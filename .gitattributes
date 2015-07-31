@@ -652,6 +652,17 @@ ecrire/lib/safehtml/index.php -text
 ecrire/lib/safehtml/license.txt -text
 ecrire/lib/safehtml/readme-SPIP.txt -text
 ecrire/lib/safehtml/readme.txt -text
+ecrire/maj/v009.php -text
+ecrire/maj/v010.php -text
+ecrire/maj/v011.php -text
+ecrire/maj/v012.php -text
+ecrire/maj/v013.php -text
+ecrire/maj/v014.php -text
+ecrire/maj/v015.php -text
+ecrire/maj/v016.php -text
+ecrire/maj/v017.php -text
+ecrire/maj/v018.php -text
+ecrire/maj/v019.php -text
 ecrire/prive.php -text
 ecrire/public/index.php -text
 ecrire/rien.gif -text
