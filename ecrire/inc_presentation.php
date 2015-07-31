@@ -2869,7 +2869,7 @@ function fin_grand_cadre(){
 
 function debut_cadre_formulaire($style=''){
 	echo "\n<div class='cadre-formulaire'" .
-	  (!$style ? "" : "style='$style'") .
+	  (!$style ? "" : " style='$style'") .
 	   ">";
 }
 
