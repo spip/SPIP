@@ -51,13 +51,14 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 	if ($params) {
 		foreach($params as $var => $val) {
 			if ($val) {
-				$val = trim($val);
-				$val = ereg_replace('^["\'](.*)["\']$', "\\1",$val);
-				$l[] = "\'$var\' => \'" .
-					addslashes(calculer_param_dynamique($val,
-						$boucles,
-						$idb)) .
-					"\'";
+				$val = calculer_param_dynamique(
+					ereg_replace('^["\'](.*)["\']$', "\\1",trim($val)), 
+					$boucles,
+					$idb);
+				$l[] = "\'$var\' => " .
+				  (!ereg('" \. *(.*)\. "', $val, $m) ?
+				   ('"' . addslashes($val) . '"') :
+				   ("\"' . "  .  $m[1] . " .  '\""));
 			}
 			else {
 			// Cas de la langue : passer $spip_lang
