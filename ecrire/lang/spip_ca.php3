@@ -1403,9 +1403,9 @@ i <tt>.htpasswd-admin</tt>en el directori <tt>ecrire/date/</tt>? </b></p>
 funcionament de la web.Recomanem no tocar res fins que no li siga familiar el funcionament del sistema SPIP.<P align="justify"><B>
 Generalment, es molt aconsellable
  deixar la c&agrave;rrega de aquestes p&agrave;gines al webmestre/webmestressa principal de la vostra web.</B>',
-'texte_inc_meta_1' => 'Per favor, com a administrador del web,',
-'texte_inc_meta_2' => 'verifiqueu els drets d\'escriptura',
-'texte_inc_meta_3' => 'sobre el directori ecrire/',
+'texte_inc_meta_1' => '<MODIF>Per favor, com a administrador del web,',
+'texte_inc_meta_2' => '<MODIF>verifiqueu els drets d\'escriptura',
+'texte_inc_meta_3' => '<MODIF>sobre el directori ecrire/',
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
