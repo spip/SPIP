@@ -143,7 +143,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	// gerer le fichier ecrire/data/mysql_out
 	## TODO : ajouter md5(parametres de connexion)
 	if (@file_exists(_FILE_MYSQL_OUT)
-	AND (time() - @filemtime(_FILE_MYSQL_OUT) < 300)
+	AND (time() - @filemtime(_FILE_MYSQL_OUT) < 120)
 	AND !defined('_ECRIRE_INSTALL'))
 		return $GLOBALS['db_ok'] = false;
 
@@ -157,7 +157,10 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 
 	// En cas d'erreur marquer le fichier mysql_out
 	if (!$GLOBALS['db_ok']
-	AND !defined('_ECRIRE_INSTALL')) @touch(_FILE_MYSQL_OUT);
+	AND !defined('_ECRIRE_INSTALL')) {
+		spip_log("La connexion MySQL est out!");
+		@touch(_FILE_MYSQL_OUT);
+	}
 
 	return $GLOBALS['db_ok'];
 }
