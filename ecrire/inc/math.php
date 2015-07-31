@@ -46,12 +46,7 @@ function produire_image_math($tex) {
 		if ($server) {
 			spip_log($url = $server.'?'.rawurlencode($tex));
 			include_spip('inc/distant');
-			if ($image = recuperer_page($url)) {
-				if ($f = @fopen($fichier, 'w')) {
-					@fwrite($f, $image);
-					@fclose($f);
-				}
-			}
+			recuperer_page($url,$fichier);
 		}
 	}
 
