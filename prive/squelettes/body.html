@@ -8,14 +8,14 @@
 		#INCLURE{fond=prive/squelettes/top/#ENV{type},ajax=top,env}
 		</div>
 		<div id="conteneur" class="<?php echo $GLOBALS['pleine_largeur']?' pleine_largeur':''; ?>">
-			<div id="navigation">
+			<div id="navigation" role='contentinfo'>
 				<INCLURE{fond=prive/squelettes/navigation/#ENV{type},ajax=navigation,env}>
 			[(#EVAL{$GLOBALS}|table_valeur{spip_ecran}|=={large}|oui)
 			</div>
-			<div id="extra">]
+			<div id="extra" role='complementary'>]
 				<INCLURE{fond=prive/squelettes/extra/#ENV{type},ajax=extra,env}>
 			</div>
-			<div id="contenu">
+			<div id="contenu" role='main'>
 				<INCLURE{fond=prive/squelettes/contenu/#ENV{type},ajax=contenu,env}>
 			</div>
 		</div>
