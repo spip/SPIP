@@ -6,6 +6,64 @@ if (defined("_ECRIRE_INC_DB_MYSQL")) return;
 define("_ECRIRE_INC_DB_MYSQL", "1");
 
 //
+// Appel de requetes SQL
+//
+
+function spip_query_db($query) {
+	static $tt = 0;
+
+	$my_admin = (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'));
+	$my_profile = ($GLOBALS['mysql_profile'] AND $my_admin);
+	$my_debug = ($GLOBALS['mysql_debug'] AND $my_admin);
+
+	$query = traite_query($query);
+
+	if ($my_profile)
+		$m1 = microtime();
+
+	$result = mysql_query($query);
+
+	if ($my_profile) {
+		$m2 = microtime();
+		list($usec, $sec) = explode(" ", $m1);
+		list($usec2, $sec2) = explode(" ", $m2);
+		$dt = $sec2 + $usec2 - $sec - $usec;
+		$tt += $dt;
+		echo "<small>".htmlentities($query);
+		echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
+		
+	}
+
+	if ($my_debug AND $s = mysql_error()) {
+		echo "Erreur dans la requ&ecirc;te : ".htmlentities($query)."<br>";
+		echo "&laquo; ".htmlentities($s)." &raquo;<p>";
+	}
+
+	return $result;
+}
+
+
+//
+// Passage d'une requete standardisee
+//
+function traite_query($query) {
+
+	// changer les noms des tables ($table_prefix)
+	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
+		$suite = $regs[0];
+		$query = substr($query, 0, -strlen($suite));
+	}
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+
+	// supprimer les INSERT DELAYED
+	if (! $GLOBALS['flag_mysql_delayed'])
+		$query = ereg_replace('^INSERT DELAYED ', 'INSERT ', $query);
+
+	return $query;
+}
+
+
+//
 // Connexion a la base
 //
 
@@ -13,58 +71,6 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	if ($port > 0) $host = "$host:$port";
 	@mysql_connect($host, $login, $pass);
 	return @mysql_select_db($db);
-}
-
-
-//
-// Appel de requetes SQL
-//
-
-function spip_query_profile($query) {
-	static $tt = 0;
-	$suite = "";
-	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
-		$suite = $regs[0];
-		$query = substr($query, 0, -strlen($suite));
-	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
-	$m1 = microtime();
-	$result = mysql_query($query);
-	$m2 = microtime();
-	list($usec, $sec) = explode(" ", $m1);
-	list($usec2, $sec2) = explode(" ", $m2);
-	$dt = $sec2 + $usec2 - $sec - $usec;
-	$tt += $dt;
-	echo "<small>".htmlentities($query);
-	echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
-	return $result;
-}
-
-function spip_query_debug($query) {
-	$suite = "";
-	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
-		$suite = $regs[0];
-		$query = substr($query, 0, -strlen($suite));
-	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
-	$r = mysql_query($query);
-	if ($GLOBALS['connect_statut'] == '0minirezo' AND $s = mysql_error()) {
-		echo "Erreur dans la requ&ecirc;te : ".htmlentities($query)."<br>";
-		echo "&laquo; ".htmlentities($s)." &raquo;<p>";
-	}
-	return $r;
-}
-
-function spip_query_db($query) {
-	// return spip_query_profile($query);	// a decommenter pour chronometrer les requetes
-	// return spip_query_debug($query);		// a decommenter pour afficher toutes les erreurs
-	$suite = "";
-	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
-		$suite = $regs[0];
-		$query = substr($query, 0, -strlen($suite));
-	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
-	return mysql_query($query);
 }
 
 

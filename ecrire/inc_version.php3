@@ -14,8 +14,14 @@ define("_ECRIRE_INC_VERSION", "1");
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
 
-// faut-il loger les infos de debug dans data/spip.log ?
+// faut-il loger les infos de debug dans data/spip.log
 $debug = false;
+
+// faut-il passer les connexions MySQL en mode debug ?
+$mysql_debug = false;
+
+// faut-il chronometrer les requetes MySQL ?
+$mysql_profile = false;
 
 //
 // 	*** Fin du parametrage ***
@@ -39,9 +45,12 @@ if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 // Pas de warnings idiots
 error_reporting(E_ALL ^ E_NOTICE);
 
-// Securite : dossier des squelettes a preciser dans mes_fonctions.php3,
-// sous la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
+// ** Securite **
+// - le dossier des squelettes a preciser dans mes_fonctions.php3, sous
+//   la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
 $dossier_squelettes = '';
+$auteur_session = '';
+$connect_statut = '';
 
 //
 // Infos de version PHP
@@ -61,6 +70,8 @@ $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
 $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 $flag_strtr2 = ($php_version_maj > 3);
+
+$flag_mysql_delayed = false;	// tant qu'on ne sait pas detecter si les INSERT DELAYED sont autorises...
 
 if ($flag_function_exists) {
 	$flag_ini_get = (function_exists("ini_get")
