@@ -1004,7 +1004,7 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 // U
 'utf8_convert_attendez' => 'Bir s&uuml;re bekleyip sayfay&#305; yeniden y&uuml;kleyiniz.',
 'utf8_convert_avertissement' => 'Veritaban&#305;n&#305;z&#305;n i&ccedil;eri&#287;ini (makaleler, k&#305;sa haberler vs.) <b>@orig@</b> karakter setinden <b>@charset@</b> karakter setine d&ouml;n&uuml;&#351;t&uuml;rmektesiniz .',
-'utf8_convert_backup' => '&Ouml;nceden sitenizin tam bir yede&#287;ini almay&#305; unutmay&#305;n&#305;z. Ayr&#305;ca iskeletlerinizin ve dil dosyalar&#305;n&#305;z&#305;n @charset@ karakter setiyle uyumlu olup olmad&#305;&#287;&#305;n&#305; do&#287;rulamal&#305;s&#305;n&#305;z. Di&#287;er taraftan g&uuml;ncelleme takibi etkinse zarar g&ouml;recektir.',
+'utf8_convert_backup' => '&Ouml;nceden sitenizin tam bir yede&#287;ini almay&#305; unutmay&#305;n&#305;z. Ayr&#305;ca iskeletlerinizin ve dil dosyalar&#305;n&#305;z&#305;n @charset@ karakter setiyle uyumlu olup olmad&#305;&#287;&#305;n&#305; do&#287;rulamal&#305;s&#305;n&#305;z. ',
 'utf8_convert_erreur_deja' => 'Siteniz zaten @charset@ karakter setinde, d&ouml;n&uuml;&#351;t&uuml;rmeniz gereksiz...',
 'utf8_convert_erreur_orig' => 'Hata&nbsp;: @charset@ karakter seti desteklenmiyor.',
 'utf8_convert_termine' => 'Tamamland&#305;&nbsp;!',
