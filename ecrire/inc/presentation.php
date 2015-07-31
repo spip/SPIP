@@ -1041,7 +1041,10 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 
 		$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
 
-		if (!$res) break; // rubrique inexistante
+		if (!$res){  // rubrique inexistante
+			$id_rubrique = 0;
+			break;
+		}
 
 		$id_parent = $res['id_parent'];
 		changer_typo($res['lang']);
