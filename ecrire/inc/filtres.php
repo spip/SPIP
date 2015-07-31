@@ -1432,7 +1432,7 @@ function afficher_enclosures($tags) {
 		AND $t = extraire_attribut($tag, 'href')) {
 			$s[] = preg_replace(',>[^<]+</a>,S', 
 				'>'
-				.http_img_pack(chemin_image('attachment-16.png'), $t,
+				.http_img_pack('attachment-16.png', $t,
 					'title="'.attribut_html($t).'"')
 				.'</a>', $tag);
 		}
@@ -1989,47 +1989,68 @@ function charge_scripts($scripts) {
 
 
 
-// produit une balise img avec un champ alt d'office si vide
-// attention le htmlentities et la traduction doivent etre appliques avant.
-
-// http://doc.spip.org/@http_wrapper
-function http_wrapper($img){
-	if (strpos($img,'/')===FALSE) // on ne prefixe par _NOM_IMG_PACK que si c'est un nom de fichier sans chemin
-		$f = chemin_image($img);
-	else { // sinon, le path a ete fourni
-		$f = $img;
-	}
-	return $f;
-}
-
-// http://doc.spip.org/@http_img_pack
-function http_img_pack($img, $alt, $atts='', $title='') {
-
-	$img = http_wrapper($img);
-	if (strpos($atts, 'width')===FALSE){
+/**
+ * produit une balise img avec un champ alt d'office si vide
+ * attention le htmlentities et la traduction doivent etre appliques avant.
+ *
+ * http://doc.spip.org/@http_img_pack
+ *
+ * @param $img
+ * @param $alt
+ * @param string $atts
+ * @param string $title
+ * @param bool $utiliser_suffixe_size
+ *   utiliser ou non le suffixe de taille dans le nom de fichier de l'image
+ *   sous forme -xx.png (pour les icones essentiellement)
+ * @return string
+ */
+function http_img_pack($img, $alt, $atts='', $title='', $utiliser_suffixe_size = true) {
+	$img = chemin_image($img);
+	if (stripos($atts, 'width')===false){
 		// utiliser directement l'info de taille presente dans le nom
-		if (preg_match(',-([0-9]+)[.](png|gif)$,',$img,$regs)){
-			$size = array(intval($regs[1]),intval($regs[1]));
+		if ($utiliser_suffixe_size
+		    AND preg_match(',-([0-9]+)[.](png|gif)$,',$img,$regs)){
+			$largeur = $hauteur = intval($regs[1]);
 		}
-		else
-			$size = @getimagesize($img);
-		$atts.=" width='".$size[0]."' height='".$size[1]."'";
+		else{
+			$taille = taille_image($img);
+			list($hauteur,$largeur) = $taille;
+			if (!$hauteur OR !$largeur)
+				return "";
+		}
+		$atts.=" width='".$largeur."' height='".$hauteur."'";
 	}
-	return  "<img src='" . $img
-	  . ("'\nalt=\"" .
-	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
-	     . '" ')
-	  . ($title ? "title=\"$title\" " : '')
+	return  "<img src='$img' alt='" . attribut_html($alt ? $alt : $title) . "'"
+	  . ($title ? 'title="'.attribut_html($title).'"' : '')
 	  . $atts
 	  . " />";
 }
 
-// http://doc.spip.org/@http_style_background
-function http_style_background($img, $att='')
-{
-  return " style='background: url(\"".http_wrapper($img)."\")" .
-	    ($att ? (' ' . $att) : '') . ";'";
+/**
+ * generer une directive style='background:url()' a partir d'un fichier image
+ * 
+ * http://doc.spip.org/@http_style_background
+ *
+ * @param string $img
+ * @param string $att
+ * @return string
+ */
+function http_style_background($img, $att=''){
+  return " style='background: url(\"".chemin_image($img)."\")" . ($att ? (' ' . $att) : '') . ";'";
 }
+
+/**
+ * une fonction pour generer une balise img a partir d'un nom de fichier
+ *
+ * @param string $img
+ * @param string $alt
+ * @param string $class
+ * @return string
+ */
+function filtre_balise_img_dist($img,$alt="",$class=""){
+	return http_img_pack($img, $alt, $class?" class='".attribut_html($class)."'":'', '', false);
+}
+
 
 //[(#ENV*|unserialize|foreach)]
 // http://doc.spip.org/@filtre_foreach_dist
@@ -2244,27 +2265,6 @@ function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel=""
 	if ($libelle === NULL)
 		$libelle = $url;
 	return "<$bal $att>$libelle</$bal>";
-}
-
-
-/**
- * une fonction pour generer une balise img a partir d'un nom de fichier
- *
- * @param string $img
- * @param string $alt
- * @param string $class
- * @return string
- */
-function filtre_balise_img_dist($img,$alt="",$class=""){
-	$taille = taille_image($img);
-	list($hauteur,$largeur) = $taille;
-	if (!$hauteur OR !$largeur)
-		return "";
-	return 
-	"<img src='$img' width='$largeur' height='$hauteur'"
-	  ." alt='".attribut_html($alt)."'"
-	  .($class?" class='".attribut_html($class)."'":'')
-	  .' />';
 }
 
 

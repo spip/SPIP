@@ -74,7 +74,7 @@ function aider_icone($url)
 	return "\n&nbsp;&nbsp;<a class='aide popin'\nhref='"
 	.  $url
 	. "' target='_blank'>"
-	. http_img_pack(chemin_image("aide".aide_lang_dir($spip_lang,$spip_lang_rtl)."-16.png"),
+	. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl)."-16.png",
 			_T('info_image_aide'),
 			" title=\"$t\" class='aide'")
 	. "</a>";
