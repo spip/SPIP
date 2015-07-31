@@ -78,6 +78,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$host  = strtolower($url['host']);
 	$path  = $url['path'];
 
+	// Cette fonction affecte directement les variables selon la query-string !
 	parse_str($query);
 
 	$keywords = '';
@@ -117,8 +118,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				|| ($kw_referer_host == "MSN")
 				)) {
 				include_ecrire('inc_charsets.php3');
-				if (!$cset = $regs[1]) $cset = 'utf-8';
-				$keywords = unicode2charset(charset2unicode($keywords,$cset));
+				if (!$cset = $ie) $cset = 'utf-8';
+				$keywords = importer_charset($keywords,$cset);
 			}
 			$buffer["hostname"] = $kw_referer_host;
 		}
@@ -133,7 +134,11 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 	if ($keywords != '')
 	{
-		if (strlen($keywords) > 50) $keywords = substr($keywords, 0, 48);
+		if (strlen($keywords) > 150) {
+			$keywords = spip_substr($keywords, 0, 148);
+			// supprimer l'eventuelle entite finale mal coupee
+			$keywords = preg_replace('/&#?[a-z0-9]*$/', '', $keywords);
+		}
 		$buffer["keywords"] = trim(entites_html(stripslashes($keywords)));
 	}
 
