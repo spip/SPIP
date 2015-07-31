@@ -194,8 +194,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_absents' => '<p><b>No s\'han trobat els seg&uuml;ents directoris: </b></p><ul>@bad_dirs@</ul>  <p>&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
   Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixin exactament amb el que es mostra m&eacute;s amunt; si aquest no &eacute;s el cas, canvieu el nom dels directoris amb l\'ajuda del vostre programa FTP per tal de corregir l\'error.</p>
   <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
-'dirs_repertoires_suivants' => '<p><b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura:</b></p> <ul>@bad_dirs@.</ul>
-  <p>Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris. El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.</p>
+'dirs_repertoires_suivants' => '<p><b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura:</b></p> <ul>@bad_dirs@</ul>
+  <p>Per solucionar-ho, feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris. El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.</p>
   <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
 'double_occurrence' => 'Doble inst&agrave;ncia',
 
