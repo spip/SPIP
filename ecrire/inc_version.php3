@@ -9,7 +9,7 @@ function define_once ($constant, $valeur) {
 	if (!defined($constant)) define($constant, $valeur);
 }
 
-// 7 constantes incontournables et prioritaires
+// 6 constantes incontournables et prioritaires
 
 define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
@@ -563,7 +563,9 @@ function spip_log($message, $logname='spip') {
 		spip_log($message);
 }
 
+// Parano avant d'aller plus loin
 
+verifier_htaccess(_DIR_SESSIONS);
 
 //
 // Infos sur le fichier courant
@@ -1169,7 +1171,6 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 }
 
 function taches_de_fond() {
-	verifier_htaccess(_DIR_SESSIONS);
 	if (!@file_exists(_FILE_CRON_LOCK)
 	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 30)) {
 		@touch(_FILE_CRON_LOCK);
@@ -1182,7 +1183,6 @@ function taches_de_fond() {
 				spip_log('pas de connexion DB pour taches de fond (cron)');
 			} else {
 			include_ecrire('inc_cron.php3');
-#			spip_log($GLOBALS['PHP_SELF'] . ": taches de fond");
 			spip_cron();
 			}
 		}
@@ -1201,7 +1201,7 @@ function redirige_par_entete($url)
 
 // Envoi des en-tetes
 
-function debut_entete($title)
+function debut_entete($title, $entete='')
 {
   /* '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
 
@@ -1215,8 +1215,11 @@ function debut_entete($title)
 	else
 	  $base .= '/' . (_DIR_RESTREINT ? '' : _DIR_RESTREINT_ABS);
 */
-	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
-	@Header("Content-Type: text/html; charset=$charset");
+	if (!$entete) {
+		if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+		$entete = "Content-Type: text/html; charset=$charset";
+	}
+	@header($entete);
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
 	  "<head>\n" .
