@@ -1009,9 +1009,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	}
 	// Cas particulier : expressions de date
-	else if ($d = si_critere_date($boucle) 
-		 AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs)) {
-	  $col = calculer_critere_infixe_date($idb, $boucles, $regs, $d);
+	else if ($c = calculer_critere_infixe_date($idb, $boucles, $col)) {
+		$col = $c;
 		$table = '';
 	}
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)) {
@@ -1282,16 +1281,20 @@ function calculer_vieux_in($params)
 }
 
 // http://doc.spip.org/@calculer_critere_infixe_date
-function calculer_critere_infixe_date($idb, &$boucles, $regs, $date_orig)
+function calculer_critere_infixe_date($idb, &$boucles, $col)
 {
+	if (!preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs)) return '';
+
 	$boucle = $boucles[$idb];
+	$table = $boucle->show;
+	if (!$table['date']) return '';
+	$pred = $date_orig = $table['date'];
 	$col = $regs[1];
-	$pred = $date_orig;
 	if (isset($regs[3]) AND $suite=$regs[3]) {
 	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		$t = $boucle->show;
-		if ($t['field']["date$suite"])
+
+		if ($table['field']["date$suite"])
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
@@ -1380,12 +1383,4 @@ function calculer_param_date($date_compare, $date_orig) {
 	$date_orig .
 	")))";
 }
-
-function si_critere_date($boucle)
-{
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$table = $trouver_table($boucle->type_requete, $boucle->sql_serveur);
-	return $table['date'];
-}
-
 ?>
