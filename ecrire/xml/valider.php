@@ -110,6 +110,16 @@ function validerAttribut($phraseur, $name, $val, $bal)
 	}
 }
 
+function validerAttribut_NMTOKEN($phraseur, $name, $val, $bal)
+{
+	$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_NMTOKEN);
+}
+
+function validerAttribut_NMTOKENS($phraseur, $name, $val, $bal)
+{
+	$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_NMTOKENS);
+}
+
 // http://doc.spip.org/@validerAttribut_ID
 function validerAttribut_ID($phraseur, $name, $val, $bal)
 {
