@@ -10,9 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 // http://doc.spip.org/@aff_statistique_visites_popularite
 function aff_statistique_visites_popularite($serveur, $id_article, &$classement, &$liste){
@@ -113,7 +111,6 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 	return $out;
 }
 
-
 // http://doc.spip.org/@http_img_rien
 function http_img_rien($width, $height, $class='', $title='') {
 	return http_img_pack('rien.gif', $title, 
@@ -121,7 +118,6 @@ function http_img_rien($width, $height, $class='', $title='') {
 		. (!$class ? '' : (" class='$class'"))
 		. (!$title ? '' : (" title=\"$title\"")));
 }
-
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
@@ -146,9 +142,9 @@ function maxgraph($max) {
 }
 
 // http://doc.spip.org/@statistiques_jour_et_mois
-function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree, $order, $count, $serveur, $interval, $total, $popularite, $liste='', $classement=array(), $script='')
+function statistiques_jour_et_mois($id_article, $select, $table, $where, $order, $count, $serveur, $type, $duree, $interval, $total, $popularite, $liste='', $classement=array(), $script='')
 {
-	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree DAY)": '';
+	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree $type)": '';
 	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
 	$log = statistiques_collecte_date($select, "(ROUND(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
@@ -169,7 +165,11 @@ function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree,
 		"$order > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
 		. ($where ? " AND $where" : ''),
 		$serveur);
-	return array($res, statistiques_par_mois($mois, $last, $script));
+
+	// rajouter les visites du jour
+	@$mois[date("Y-m",time())] += $last;
+
+	return array($res, statistiques_par_mois($mois, $script));
 }
 
 // http://doc.spip.org/@statistiques_collecte_date
@@ -189,7 +189,7 @@ function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 // Appelee S'il y a au moins cinq minutes de stats :-)
 
 // http://doc.spip.org/@statistiques_tous
-function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, $interval, $classement, $id_article=0, $liste=0, $script='')
+function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $duree, $interval, $classement, $id_article=0, $liste=0, $script='')
 {
 	$r = array_keys($log);
 	$date_today = max($r);
@@ -207,7 +207,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 	$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
 	  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
 
-	$x = (!$aff_jours) ? 1 : (420/ $aff_jours);
+	$x = (!$duree) ? 1 : (420/ $duree);
 	$res = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_today) . $res;
 
 	// cette ligne donne la moyenne depuis le debut
@@ -265,18 +265,18 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 {
 	if ($largeur_abs > 1) {
 		$inc = ceil($largeur_abs / 5);
-		$aff_jours_plus = 420 / ($largeur_abs - $inc);
-		$aff_jours_moins = 420 / ($largeur_abs + $inc);
+		$duree_plus = 420 / ($largeur_abs - $inc);
+		$duree_moins = 420 / ($largeur_abs + $inc);
 	}
 	
 	if ($largeur_abs == 1) {
-		$aff_jours_plus = 840;
-		$aff_jours_moins = 210;
+		$duree_plus = 840;
+		$duree_moins = 210;
 	}
 	
 	if ($largeur_abs < 1) {
-		$aff_jours_plus = 420 * ((1/$largeur_abs) + 1);
-		$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
+		$duree_plus = 420 * ((1/$largeur_abs) + 1);
+		$duree_moins = 420 * ((1/$largeur_abs) - 1);
 	}
 	
 	$pour_article = $id_article ? "&id_article=$id_article" : '';
@@ -284,13 +284,13 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 	$zoom = '';
 
 	if ($date_premier < $date_debut)
-		$zoom= http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
+		$zoom= http_href(generer_url_ecrire("statistiques_visites","duree=$duree_plus$pour_article"),
 			 http_img_pack('loupe-moins.gif',
 				       _T('info_zoom'). '-', 
 				       "style='border: 0px; vertical-align: middle;'"),
 			 "&nbsp;");
 	if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		$zoom .= http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
+		$zoom .= http_href(generer_url_ecrire("statistiques_visites","duree=$duree_moins$pour_article"), 
 			 http_img_pack('loupe-plus.gif',
 				       _T('info_zoom'). '+', 
 				       "style='border: 0px; vertical-align: middle;'"),
@@ -468,10 +468,7 @@ function statistiques_nom_des_mois($date_debut, $date_today, $largeur)
 }
 
 // http://doc.spip.org/@statistiques_par_mois
-function statistiques_par_mois($entrees, $visites_today, $script){
-
-	// rajouter les visites du jour
-	@$entrees[date("Y-m",time())] += $visites_today;
+function statistiques_par_mois($entrees, $script){
 		
 	$maxgraph = maxgraph(max($entrees));
 	$rapport = 200/$maxgraph;
@@ -568,14 +565,14 @@ function statistiques_moyenne($tab)
 
 
 // http://doc.spip.org/@statistiques_signatures
-function statistiques_signatures($aff_jours, $id_article, $serveur)
+function statistiques_signatures($duree, $interval, $type, $id_article, $serveur)
 {
 	$total = sql_countsel("spip_signatures", "id_article=$id_article");
 	if (!$total) return '';
 	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, 3600*24, $total, 0, '', array(), $script);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", "date_time", "COUNT(*)", $serveur, $type, $duree, $interval, $total, 0, '', array(), $script);
 
-	return "<br />"
+	return "<br />$duree $interval"
 	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
 	. $res
 	. (!$mois ? '' : (
@@ -585,13 +582,13 @@ function statistiques_signatures($aff_jours, $id_article, $serveur)
 }
 
 // http://doc.spip.org/@statistiques_forums
-function statistiques_forums($aff_jours, $id_article, $serveur)
+function statistiques_forums($duree, $interval, $type, $id_article, $serveur)
 {
 
 	$total = sql_countsel("spip_forum", "id_article=$id_article");
 	if (!$total) return '';
 	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, 3600*24, $total, 0, '', array(), $script);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", "date_heure", "COUNT(*)", $serveur, $type, $duree, $interval, $total, 0, '', array(), $script);
 
 	return "<br />"
 	. gros_titre(_L('Messages de forum par jour'),'', false)
@@ -602,14 +599,12 @@ function statistiques_forums($aff_jours, $id_article, $serveur)
 	. $mois));
 }
 
-// Le bouton pour CSV et pour passer de svg a htm
+// Le bouton pour CSV 
 
 // http://doc.spip.org/@statistiques_mode
 function statistiques_mode($table)
 {
-
-	$lui = self();
-	$csv = parametre_url(parametre_url($lui, 'table', $table), 'format', 'csv');
+	$csv = parametre_url(parametre_url(self(), 'table', $table), 'format', 'csv');
 
 	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
 		. "<a href='"
