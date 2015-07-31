@@ -1,3 +1,18 @@
+Core 2.1.5 -> 2.1.6 ( 02/01/2011) 
+r16805 | esj       | Eviter une erreur SQL dans les URL propres, quand on indique une table dont on n'a pas précisé dans la globale {{{table_titre}}} le champ indiquant le titre de l'objet.
+r16807 | rasta     | Cohérence entre URLs arbo et propre : le champ utilisé comme titre pour les objets éditoriaux est par défaut le champ nommé "titre" dans la base si rien n'est déclaré.
+r16809 | esj       | Amélioration de r16807: gérer le champ titre par défaut au niveau de trouver_table, afind'éviter toute erreur SQL, en particulier celle potentielle dans les URL arbos.
+r16849 | esj       | Pas d'année 0000 en Postgres. Résoud #1987.
+r16857 | esj       | Sql_showtable provoquait une erreur SQL en cas de table inconnue ou sans droits de Select, ce n'est pas gérable. Mysql n'offrant pas un "IF EXISTS", on fait un appel à "showtables like" auparavant, lequel ne renvoie rien sans râler si pas de droit de Select, ou pas de réponse au Match.
+r16862 | cedric    | report de r16852
+r16870 | esj       | Enfin compris pourquoi certaines erreurs de compilation bloquaient parfois le signalement d'autres erreurs. Par ailleurs, r14404 a supprimé la fonction affiche_erreurs_page et son appel conditionné à la fin de index.php. Je ne sais pas pourquoi il a été rétabli ensuite, mais c'est du code mort.
+r16872 | esj       | Décidément, r16788 s'était bien pris les pieds dans le tapis, pas seulement le copyrightcomme l'annonçait r16775. Voici enfin le bon correctif du cas pathologique.
+r16874 | esj       | Ne pas proposer de restreindre à une certaine rubrique quand aucune n'est créée. Et validation XHTML.
+r16876 | eric      | Correction de l'info_maj de SPIP qui renvoie maintenant uniquement la version SPIP disponible la plus élevée.
+r16879 | fil       | divers bugs de secu permettant a un redacteur de faire du grabuge (securitoile)
+r16880 | fil       | xss sur une page non trouvee (securitoile, realet)
+r16884 | cedric    | bloquer les redirection absolues dans le formulaire de login, en prévoyant une constante pour les webmestres qui veulent désactiver cela pour des raisons qui leur appartiennent (ce qui permet de sécuriser en assurant tout de même une continuité de fonctionnement pour ceux qui utilisaient malheureusement cette fonctionnalité). 
+
 Core 2.1.4 -> 2.1.5 ( 21/12/2010) 
 r16784 | esj       | report de r16783. Triple bug en r15088 : la table SQL 'forums' n'existe pas, le nom de la variable n'était pas le même que dans son utilisation plus loin, et son sens n'était plus le même.
 
