@@ -216,4 +216,7 @@ function verifForm() {
 }
 
 
-var antifocus=false; // effacement titre quand new=oui
+// effacement titre quand new=oui
+var antifocus=false;
+// effacement titre des groupes de mots-cles de plus de 50 mots
+var antifocus_mots = new Array();
