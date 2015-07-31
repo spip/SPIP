@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Plugin aktivieren',
 'aide_non_disponible' => 'Teil der Online-Hilfe in dieser Sprache noch nicht verf&uuml;gbar.',
+'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Zugang verweigert.',
 'avis_article_modifie' => 'Achtung, @nom_auteur_modif@ hat vor @date_diff@ Minute(n) an diesem Artikel gearbeitet.',
 'avis_aucun_resultat' => 'Kein Ergebnis.',
@@ -52,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'eine einzige Unterschrift pro E-Mail Adresse',
 'bouton_checkbox_signature_unique_site' => 'eine einzige Unterschrift pro Website',
 'bouton_demande_publication' => 'Artikel zur Ver&ouml;ffentlichung vorschlagen',
+'bouton_desactive_tout' => 'Alles deaktivieren',
 'bouton_effacer_index' => 'Indexe l&ouml;schen',
 'bouton_effacer_tout' => 'ALLES l&ouml;schen',
 'bouton_envoi_message_02' => 'NACHRICHT SENDEN',
@@ -78,19 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ich will nicht auf dieser Liste zu sehen sein.',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Keine editorischen Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_syndication' => 'Syndikation nicht verwenden',
-'bouton_radio_occidental' => 'Westliches Alphabet (<tt>iso-8859-1</tt>): Erm&ouml;glicht im Wesentlichen
-die Anzeige von westeurop&auml;ischen Sprachen (Deutsch, Franz&ouml;sisch, Englisch ...).
- SPIP unterst&uuml;tzt auch die anderen Sprachen.',
 'bouton_radio_pas_petition' => 'Keine Petition',
-'bouton_radio_personnalise' => 'Individuelle Zeichentabelle: W&auml;hlen Sie diese Option, wenn Sie einen bestimmten Zeichensatz verwenden m&ouml;chten.',
 'bouton_radio_petition_activee' => 'Petition aktiviert',
 'bouton_radio_publication_immediate' => 'Sofortige Ver&ouml;ffentlichung von Beitr&auml;gen (sie werden sofort nach dem Absenden angezeigt und k&ouml;nnen von Administratoren nachtr&auml;glich gel&ouml;scht werden).',
 'bouton_radio_sauvegarde_compressee' => 'komprimiert sichern nach <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'unkomprimiert sichern nach <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Petition l&ouml;schen',
 'bouton_radio_syndication' => 'Syndikation:',
-'bouton_radio_universel' => 'Universelles Alphabet (<tt>utf-8</tt>): Alle Sprachen k&ouml;nnen angezeigt werden.
-Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen geben.',
 'bouton_redirection' => 'UMLEITUNG',
 'bouton_relancer_installation' => 'Installation wiederholen',
 'bouton_restaurer_base' => 'Datenbank wieder herstellen',
@@ -124,7 +121,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'email_2' => 'E-Mail:',
 'entree_adresse_annuaire' => 'Adresse des Verzeichnisses',
 'entree_adresse_email' => 'Ihre E-Mail Adresse',
-'entree_adresse_fichier_syndication' => 'Adresse der &bdquo;backend&ldquo;-Datei:',
+'entree_adresse_fichier_syndication' => 'Adresse der &#132;backend&#147;-Datei:',
 'entree_adresse_site' => '<b>Adresse der Website</b> [Pflichtfeld]',
 'entree_base_donnee_1' => 'Adresse des Datenbankservers',
 'entree_base_donnee_2' => '(Oftmals entspricht diese Adresse der Ihrer Website, sie kann auch einfach &bdquo;localhost&ldquo; lauten und gelegentlich darf das Feld leer bleiben.)',
@@ -157,6 +154,13 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'entree_texte_breve' => 'Text der Meldung',
 'entree_titre_obligatoire' => '<B>Titel</b> [Pflichtfeld]<BR>',
 'entree_url' => 'Adresse (URL) Ihrer Website',
+'erreur_plugin_fichier_absent' => 'Datei nicht vorhanden',
+'erreur_plugin_fichier_def_absent' => 'Definitionsdatei nicht vorhanden',
+'erreur_plugin_nom_fonction_interdit' => 'Unzul&auml;ssiger Funktionsname',
+'erreur_plugin_nom_manquant' => 'Name des Plugin fehlt',
+'erreur_plugin_prefix_manquant' => 'Namespace des Plugin nicht definiert',
+'erreur_plugin_tag_plugin_absent' => '&lt;Plugin&gt; fehlt in der Definitionsdatei',
+'erreur_plugin_version_manquant' => 'Version des Plugin fehlt',
 
 
 // I
@@ -173,6 +177,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'ical_titre_mailing' => 'Mailing-List',
 'ical_titre_rss' => '"Backend" Datei',
 'icone_activer_cookie' => 'Verwaltungs-Cookie setzen',
+'icone_admin_plugin' => 'Plugin-Verwaltung',
 'icone_afficher_auteurs' => 'Autoren anzeigen',
 'icone_afficher_visiteurs' => 'Besucher anzeigen',
 'icone_arret_discussion' => 'Aus dieser Diskussion aussteigen',
@@ -517,6 +522,8 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gr&uuml;n; 
 'info_sous_titre' => 'Untertitel:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Status des Autors:',
+'info_statut_auteur_a_confirmer' => 'Anmeldung best&auml;tigen',
+'info_statut_auteur_autre' => 'Anderer Status:',
 'info_statut_efface' => 'Gel&ouml;scht',
 'info_statut_redacteur' => 'Redakteur',
 'info_statut_site_1' => 'Diese Website ist:',
@@ -528,6 +535,8 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gr&uuml;n; 
 'info_suivi_activite' => 'Unterst&uuml;tzung der Redaktionsabl&auml;ufe',
 'info_supprimer_mot' => 'Wort l&ouml;schen',
 'info_surtitre' => 'Einleitender Titel:',
+'info_syndication_integrale_1' => 'Ihre Website biete Backend-Dateien zur Syndikation an (siehe &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'M&ouml;chten sie den gesamten Text der Artikel &uuml;berragen oder nur eine Zusammenfassung von ein paar hundert Zeichen?',
 'info_taille_maximale_vignette' => 'Maximale Gr&ouml;sse der Icons des Systems:',
 'info_terminer_installation' => 'Sie k&ouml;nnen jetzt die Standardinstallation abschliessen.',
 'info_texte' => 'Text',
@@ -580,6 +589,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'item_ajout_mots_cles' => 'Schlagworte der Foren erlauben',
 'item_autoriser_documents_joints' => 'Dokumente zu Artikeln erlauben',
 'item_autoriser_documents_joints_rubriques' => 'Dokumente zu Rubriken erlauben',
+'item_autoriser_syndication_integrale' => 'Vollst&auml;ndige Artikel im Feed &uuml;bertragen',
 'item_bloquer_liens_syndiques' => 'Syndizierte Websites bis zur Freigabe sperren',
 'item_breve_refusee' => 'NEIN - Meldung abgelehnt',
 'item_breve_validee' => 'JA - Meldung freigegeben',
@@ -605,6 +615,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'item_non_ajout_mots_cles' => 'Verwendung von Schlagworten f&uuml;r Foren verhindern',
 'item_non_autoriser_documents_joints' => 'Zuordnung von Dokumenten zu Artikeln abschalten',
 'item_non_autoriser_documents_joints_rubriques' => 'Verwendung von Dokumenten in Rubriken abschalten',
+'item_non_autoriser_syndication_integrale' => 'Nur Zusammenfassung &uuml;bertragen',
 'item_non_bloquer_liens_syndiques' => 'Links zu syndizierten Websites nicht sperren',
 'item_non_creer_fichiers_authent' => 'Diese Dateien nicht anlegen',
 'item_non_gerer_annuaire_site_web' => 'Website-Verzeichnis abschalten',
@@ -695,6 +706,18 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'ortho_verifier' => 'Rechtschreibung pr&uuml;fen',
 
 
+// P
+'plugin_etat_developpement' => 'In Entwicklung',
+'plugin_etat_experimental' => 'Experimentell',
+'plugin_etat_stable' => 'Stabil',
+'plugin_etat_test' => 'Im Test',
+'plugins_liste' => 'Liste der Plugins',
+
+
+// R
+'repertoire_plugins' => 'Verzeichnis:',
+
+
 // S
 'statut_admin_restreint' => '(Rubrik-Admin)',
 'syndic_choix_moderation' => 'Was soll mit weiteren Links dieser Seite geschehen?',
@@ -766,8 +789,11 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
 'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, k&ouml;nnen Sie',
 'texte_introductif_article' => '(Einleitender Text des Artikels.)',
-'texte_jeu_caractere' => 'Sie ben&ouml;tigen diese Option, wenn Ihre Website einen anderen Zeichensatz als den des r&ouml;mischen (bzw. &bdquo;westlichen&ldquo;) Alphabets und seiner Ableitungen anzeigen soll. In diesem Fall m&uuml;ssen Sie die Grundeinstellungen auf den passenden Zeichensatz &auml;ndern. Es ist empfehlenswert, dazu einige Tests durchzuf&uuml;hren. Bitte vergessen Sie nicht, den &ouml;ffentlichen Bereich entsprechend zu &auml;ndern (SPIP-Tag <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Diese Einstellung funktioniert nicht r&uuml;ckwirkend. Folglich kann es dazu kommen, dass bereits vorhandene Texte fehlerhaft angezeigt werden. Sie k&ouml;nnen dann jederzeit die vorige Einstellung wieder herstellen.',
+'texte_jeu_caractere' => 'Es empfiehlt sich, das Universalalphabet (<tt>utf-8</tt>) f&uuml;r ihre Website zu verwenden. Es erm&ouml;glicht die Darstellung der Zeichen aller Sprachen und wird nunmehr von allen modernen Webbrowsern unterst&uuml;tzt.',
+'texte_jeu_caractere_2' => 'Achtung: Diese Einstellung bewirkt keine Konvertierung der bereits gespeicherten Texte.',
+'texte_jeu_caractere_3' => 'Ihre Website verwendet zur Zeit den Zeichensatz:',
+'texte_jeu_caractere_4' => 'Wenn das nicht mit den Erfordernissen ihrer Daten &uuml;bereinstimmt (z.B. nach der Wiederherstellung einer Datensicherung), oder wenn sie die Website neu einrichten und einen anderen Zeichernsatz verwenden m&ouml;chten, stellen sie ihn bitte hier ein:',
+'texte_jeu_caractere_conversion' => 'Anmerkung: Wenn sie die texte Ihrer Website endg&uuml;ltig nach <tt>utf-8</tt> umstellen m&ouml;chten, verwenden sie bitte <a href="@url@">die Seite zur Konvertierung nach utf-8</a>.',
 'texte_lien_hypertexte' => '(Wenn sich Ihr Beitrag auf einen Artikel im WWW bezieht oder es eine Seite mit Zusatzinformationen gibt, geben Sie bitte die Bezeichnung der Seite und ihren URL an.)',
 'texte_liens_sites_syndiques' => 'Links zu syndizierten Websites k&ouml;nnen bis zur Freigabe durch einen Administrator gesperrt bleiben. Hier legen Sie die Grundeinstellung fest. Sie k&ouml;nnen diese Einstellung f&uuml;r jede Site einzeln &auml;ndern, bzw. nach und nach entscheiden, wie die neuen Links einer Website behandelt werden sollen.',
 'texte_login_ldap_1' => '(Keine Angabe bzw. vollst&auml;ndiger Pfad, z.B. &bdquo;<tt>uid=meier, ou=mitglieder, dc=MeineDom&auml;ne, dc=com</tt>&ldquo;.)',
@@ -798,6 +824,7 @@ ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bit
 'texte_plus_trois_car' => 'mehr als 3 Zeichen',
 'texte_plusieurs_articles' => 'Mehrere Autoren f&uuml;r &bdquo;@cherche_auteur@&ldquo; gefunden:',
 'texte_port_annuaire' => '(Der Standardwert kann meistens beibehalten werden.)',
+'texte_presente_plugin' => 'Diese Seite zeigt eine Liste der auf dieser Website verf&uuml;gbaren Plugins. Sie k&ouml;nnen sie aktivieren, indem sie die entsprechenden Eintr&auml;ge mit einem H&auml;cken merkieren.',
 'texte_proposer_publication' => 'Wenn Ihr Artikel fertig ist,<br> k&ouml;nnen Sie ihn zur Ver&ouml;ffentlichung vorschlagen.',
 'texte_proxy' => 'In manchen F&auml;llen (Intranet, Rechner hinter einer Firewall...), kann ein <I>HTTP-Proxy</i> erforderlich sein, um die syndizierten Websites zu erreichen. In diesem Fall geben Sie seine Adresse im Format <tt><html>http://proxy:8080</html></tt>. an. Meistens kann dieses Feld aber leer bleiben.',
 'texte_publication_articles_post_dates' => 'Wie soll SPIP Artikel behandeln, deren Erscheinungsdatum in die Zukunft gelegt wurde?',
@@ -841,7 +868,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_travail_collaboratif' => 'Wenn es &ouml;fter vorkommt, dass mehrere Redakteure gemeinsam an Artikeln arbeiten, kann SPIP die vor kurzem &bdquo;ge&ouml;ffneten&ldquo; Artikel anzeigen, um gleichzeitige &Auml;nderungen vorzubeugen. Diese Funktion ist normalerweise abgeschaltet, um st&ouml;rende Meldungen zu reduzieren.',
 'texte_trop_resultats_auteurs' => 'Zu viele Ergebnisse f&uuml;r &bdquo;@cherche_auteur@&ldquo;. Bitte pr&auml;zisieren Sie Ihre Suchanfrage.',
 'texte_unpack' => 'neue Version laden.',
-'texte_utilisation_moteur_syndiques' => 'Wenn Sie die Suchmaschine von SPIP einsetzen, k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br><img src=\'puce.gif\'> Im einfachen Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br><img src=\'puce.gif\'> Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
+'texte_utilisation_moteur_syndiques' => 'Wenn Sie die Suchmaschine von SPIP einsetzen, k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br>- Im einfachen Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br><img src=\'puce.gif\'> Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
 'texte_utilisation_moteur_syndiques_2' => 'Diese Methode zwingt SPIP, die verlinkten Websites in regelm&auml;ssigen Abst&auml;nden abzurufen, wodurch Ihre Website etwas langsamer werden kann.',
 'texte_vide' => 'leer',
 'texte_vider_cache' => 'Cache leeren',
@@ -928,7 +955,20 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
 
 
+// U
+'utf8_convert_attendez' => 'Warten sie einen Augenblick und laden sie diese Seite erneut.',
+'utf8_convert_avertissement' => 'Sie werden ihre Datenbank (Artikel, Meldungen, etc.) vom Zeichensatz <b>@orig@</b> nach <b>@charset@</b> zu konvertieren.',
+'utf8_convert_backup' => 'Vergessen sie nicht, zun&auml;chst eine Sicherung ihrer Website anzulegen. Sie sollten ebenfalls &uuml;berpr&uuml;fen, ob ihre Skeltte und Sprachdateien zum Zeichensatz @charset@ kompatibel sind. Anderenfalls wird die Versionskontrolle, sollte sie aktiviert sein, nicht mehr richtig funktionieren.',
+'utf8_convert_erreur_deja' => 'Ihre website verwendet bereits den zeichensatz @charset@. Die Konvertierung ist &uuml;berfl&uuml;ssig.',
+'utf8_convert_erreur_orig' => 'Fehler: Der Zeichensatz @charset@ wird nicht unterst&uuml;tzt.',
+'utf8_convert_termine' => 'Fertig!',
+'utf8_convert_timeout' => '<b>Wichtig:</b> Im Falle eines <i>timeout</i> des Servers, laden sie diese Seite so lange neu, bis &laquo;Fertig&raquo; angezeigt wird.',
+'utf8_convert_verifier' => 'Sie m&uuml;ssen nun den Cache leeren und  das Verhalten ihrer &ouml;ffentlich zug&auml;nglichen Seiten &uuml;berpr&uuml;fen. Falls es ernste Probleme damit geben sollte, steht ihnen eine Sicherungskopie ihrer Daten (im SQL-Format) im Verzeichnis @rep@ zur Verf&uuml;gung.',
+'utf8_convertir_votre_site' => 'Website nach utf-8 konvertieren',
+
+
 // V
+'version' => 'Version:',
 'version_initiale' => 'Urspr&uuml;ngliche Fassung'
 
 );

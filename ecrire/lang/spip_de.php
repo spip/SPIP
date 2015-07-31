@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'Monatskalender',
 'cal_par_semaine' => 'Wochenkalender',
 'confirm_changer_statut' => 'Achtung, Sie werden den Status dieses Elementes &auml;ndern. Wollen Sie fortfahren?',
+'correcte' => 'korrekt',
 
 
 // D
@@ -336,6 +337,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'image_tourner_droite' => 'Um 90&deg; nach rechts drehen',
 'image_tourner_gauche' => 'Um 90&deg; nach links drehen',
 'img_indisponible' => 'Bild nicht vorhanden',
+'impossible' => 'unm&ouml;glich',
 'info_a_suivre' => 'AUFGABEN &raquo;',
 'info_a_valider' => '[zu best&auml;tigen]',
 'info_acces_interdit' => 'Zugang gesperrt',
@@ -615,6 +617,9 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 
 
 // S
+'squelette' => 'Skelett',
+'squelette_inclus_ligne' => 'eingebettetes Skelett, Zeile',
+'squelette_ligne' => 'Skelett, Zeile',
 'stats_visites_et_popularite' => '@visites@ Besuche; Beliebtheit: @popularite@',
 'suivant' => 'weiter',
 
