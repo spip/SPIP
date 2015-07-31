@@ -98,11 +98,10 @@ function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
     "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
-function afficher_formulaire_date($action, $texte, $jour, $mois, $annee)
+function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee)
 {
   global $couleur_foncee;
-  return
-	"<form action='$action' method='POST'>"
+  return generer_url_post_ecrire($script, $args); 
 	. "<table cellpadding='5' cellspacing='0' border='0' width='100%' background='"
 	.  _DIR_IMG_PACK
 	. "rien.gif'>"
