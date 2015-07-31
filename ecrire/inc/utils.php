@@ -541,13 +541,13 @@ function cron ($gourmand=false) {
 // envoyer le navigateur sur une nouvelle adresse
 // en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
-function redirige_par_entete($url, $fin="") {
+function redirige_par_entete($url) {
 	# en theorie on devrait faire ca tout le temps, mais quand la chaine
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
 	if ($url[0]=='?')
 		$url = url_de_base().$url;
 
-	@header("Location: " . strtr("$url$fin", "\n\r", "  "));
+	@header("Location: " . strtr($url, "\n\r", "  "));
 
 	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
@@ -556,7 +556,7 @@ function redirige_par_entete($url, $fin="") {
 <body>
 <h1>302 Found</h1>
 <a href="'
-.quote_amp("$url$fin")
+.quote_amp($url)
 .'">Click here</a>.
 </body></html>';
 
@@ -731,6 +731,11 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 		$args ="?$args";
 
 	return $rel . ($no_entities ? $args : str_replace('&', '&amp;', $args));
+}
+
+function generer_url_retour($script, $args="")
+{
+	return rawurlencode(generer_url_ecrire($script, $args, true, true));
 }
 
 //

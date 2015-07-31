@@ -1381,7 +1381,7 @@ function affiche_auteur_boucle($row, &$tous_id)
 // Afficher les forums
 //
 
-function afficher_forum($request, $adresse_retour, $controle_id_article = false) {
+function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	global $spip_display;
 	static $compteur_forum = 0;
 	static $nb_forum = array();
@@ -1400,8 +1400,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {
 
-			afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $adresse_retour);
-			afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $adresse_retour, $controle_id_article);
+			afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg);
+			afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
 		}
 		$i[$compteur_forum]++;
 	}
@@ -1410,7 +1410,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	$compteur_forum--;
 }
 
-function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $adresse_retour) {
+function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
 
@@ -1504,8 +1504,9 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	}
 
 	if (!$controle_id_article) {
+	  	$tm = rawurlencode($titre);
 		echo "<div align='right' class='verdana1'>";
-		echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=" . rawurlencode($adresse_retour) . "&titre_message=".rawurlencode($titre) .'#formulaire'), 
+		echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&titre_message=$tm&url=" . generer_url_retour($retour, $arg)  .'#formulaire'), 
 		  "'>",
 		  _T('lien_repondre_message'),
 		  "</a></b></div>";

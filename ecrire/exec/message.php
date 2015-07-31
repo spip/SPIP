@@ -233,15 +233,14 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
 function http_afficher_forum_perso($id_message, $titre)
 {
-	$forum_retour = rawurlencode(generer_url_ecrire("message","id_message=$id_message", true));
 	$utitre = rawurlencode($titre);
 
 	echo "<br /><br />\n<div align='center'>";
-	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&adresse_retour=$forum_retour&id_message=$id_message&titre_message=$utitre"), "forum-interne-24.gif", "creer.gif");
+	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&id_message=$id_message&titre_message=$utitre&url=" . generer_url_retour("message","id_message=$id_message")), "forum-interne-24.gif", "creer.gif");
 	echo  "</div>\n<p align='left'>";
 
 	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
-	afficher_forum($query_forum, $forum_retour);
+	afficher_forum($query_forum, "message","id_message=$id_message");
 	echo "\n</p>";
 }
 

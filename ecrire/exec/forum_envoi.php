@@ -20,7 +20,7 @@ include_spip('base/abstract_sql');
 function exec_forum_envoi_dist()
 {
 global
-  $adresse_retour,
+  $url,
   $connect_id_auteur,
   $id_article,
   $id_breve,
@@ -48,8 +48,6 @@ global
 if ($modif_forum != "oui")
         $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
 
-$adresse_retour = rawurldecode($adresse_retour);
-
 if ($valider_forum AND ($statut!='')) {
 	$titre_message = corriger_caracteres($titre_message);
 	$texte = corriger_caracteres($texte);
@@ -62,7 +60,7 @@ if ($valider_forum AND ($statut!='')) {
 		spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'");
 
 	}
-	redirige_par_entete($adresse_retour);
+	redirige_par_entete(rawurldecode($url));
 }
 
 if ($id_message) debut_page(_T('titre_page_forum_envoi'), "asuivre", "messagerie");
@@ -155,7 +153,7 @@ if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
  else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
  else $logo = "forum-public-24.gif";
 
-icone(_T('icone_retour'), $adresse_retour, $logo);
+icone(_T('icone_retour'), rawurldecode($url), $logo);
 echo "</TD>";
 
 echo "<TD><IMG SRC='" . _DIR_IMG_PACK . "rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
@@ -168,8 +166,7 @@ if (!$modif_forum OR $modif_forum == "oui") {
 	echo "<input type='hidden' name='modif_forum' value='oui'>\n";
 }
 
- echo "<input type='hidden' name='adresse_retour' value=\"",
-   rawurlencode($adresse_retour), "\" />\n",
+ echo "<input type='hidden' name='url' value=\"$url\" />\n",
    "<input type='hidden' name='id_rubrique' value=\"", $id_rubrique, "\" />\n",
    "<input type='hidden' name='id_parent' value=\"", $id_parent, "\" />\n",
    "<input type='hidden' name='id_article' value=\"", $id_article, "\" />\n",

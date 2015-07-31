@@ -17,7 +17,7 @@ include_spip('inc/texte');
 charger_generer_url();
 include_spip('inc/rubriques');
 
-function liste_numeros_forum($urlforum, $debut, $total)
+function liste_numeros_forum($script, $debut, $total)
 {
 	echo "\n<p>";
 	for ($i = 0; $i < $total; $i = $i + 10){
@@ -25,7 +25,7 @@ function liste_numeros_forum($urlforum, $debut, $total)
 		if ($i == $debut)
 			echo "\n<FONT SIZE='3'><B>$i</B></FONT>";
 		else
-			echo "\n<A HREF='$urlforum&amp;debut=$i'>$i</A>";
+			echo "\n<a href='", generer_url_ecrire($script, "debut=$i"), "'>$i</a>";
 	}
 	echo "\n</p>\n";
 }
@@ -40,12 +40,12 @@ function exec_forum_dist()
 	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
-	$urlforum = generer_url_ecrire('forum_admin');
+	$script = 'forum_admin';
   } else {
 	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
-	$urlforum = generer_url_ecrire('forum','', true);
+	$script = 'forum';
   }
 
   debut_gauche();
@@ -68,14 +68,11 @@ function exec_forum_dist()
 
   $total =  ($row = spip_fetch_array($result_forum)) ? $row['cnt'] : 0;
 
-  if ($total > 10) liste_numeros_forum($urlforum, $debut, $total);
+  if ($total > 10) liste_numeros_forum($script, $debut, $total);
 
+  $tm = rawurlencode(filtrer_entites(_T('texte_nouveau_message')));
   echo "<p><div align='center'>";
-  icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", 
-			 "statut=$statutforum&adresse_retour=" .
-			 rawurlencode($urlforum) . 
-			 "&titre_message=" .
-			 rawurlencode(filtrer_entites(_T('texte_nouveau_message')))),
+  icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&titre_message=$tm&url=" . generer_url_retour($script)),
        $logo, "creer.gif");
   echo "</div></p>";
 
@@ -83,7 +80,7 @@ function exec_forum_dist()
   $limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
   $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit");
  
-  afficher_forum($result_forum,$urlforum);
+  afficher_forum($result_forum,$script,'');
  
   echo "</div>";
 

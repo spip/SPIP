@@ -971,9 +971,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 	AND $GLOBALS['connect_toutes_rubriques']) {
 
 		echo "<div style='width: 200px;'>";
-		$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
 		$titre = rawurlencode($cherche_auteur);
-		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=$titre&redirect=" . generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
 		// message pour ne pas afficher le second bouton "creer un auteur"
@@ -1091,8 +1090,7 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 	    AND $connect_toutes_rubriques
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
-	$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
-	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
 	}
@@ -1216,12 +1214,11 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 
   echo "<BR><BR>";
 
-  $forum_retour = generer_url_ecrire("articles","id_article=$id_article", true);
   
   if (!$mute) {
     $tm = rawurlencode($titre);
     echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . rawurlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
+    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
     echo "</div>";
   }
 
@@ -1249,7 +1246,7 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
 #				   " LIMIT $total_afficher OFFSET $debut" # PG
 
-	afficher_forum($result_forum, $forum_retour, $mute);
+	afficher_forum($result_forum, "articles","id_article=$id_article", $mute);
 
 	if (!$debut) $debut = 0;
 	$total_afficher = 8;

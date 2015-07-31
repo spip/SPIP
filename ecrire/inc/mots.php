@@ -101,11 +101,11 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  * specifie, plus le formulaire d'ajout de mot-cle
  */
 
-function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, $retour) {
+// $retour ne sert plus car deductible des autres
+
+function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, $retour='') {
 	global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang;
-
-	$retour = rawurlencode($retour);
 
 	if ($table == 'articles') {
 		$table_id = 'id_article';
@@ -199,7 +199,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		     AND $connect_toutes_rubriques ) {
 			echo "<div style='width: 200px;'>";
 			$titre = rawurlencode($cherche_mot);
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 		}
 
@@ -243,7 +243,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	//
 	$visible = $nouveaux_mots||$cherche_mot||$supp_mot;
 
-	afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_id, $url_base, $visible);
+	afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible);
 	fin_cadre_enfonce();
 }
 
@@ -277,7 +277,7 @@ function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id,
 }
 
 
-function afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_id, $url_base, $visible)
+function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
 
@@ -292,7 +292,7 @@ function afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_i
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
-		$ret = rawurlencode(generer_url_ecrire($url_base, "$table_id=$id_objet#mots"));
+		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
 		while ($row = spip_fetch_array($result)) {
 
 			$id_mot = $row['id_mot'];
@@ -420,7 +420,7 @@ function afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_i
 		if ($connect_statut == '0minirezo' AND $options == "avancees" AND $connect_toutes_rubriques) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";
 		}
@@ -617,7 +617,7 @@ function afficher_groupe_mots_boucle($row, $occurrences)
 			
 	if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 		$s = "<a href='" .
-		  generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))) .
+		  generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous')) .
 		  "' class='liste-mot'>".typo($titre_mot)."</a>";
 	else  $s = typo($titre_mot);
 

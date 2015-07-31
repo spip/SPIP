@@ -21,14 +21,11 @@ function balise_URL_LOGOUT_stat ($args, $filtres) {
 }
 
 function balise_URL_LOGOUT_dyn($cible) {
-	if (!$login = $GLOBALS['auteur_session']['login'])
+	if (!$login = rawurlencode($GLOBALS['auteur_session']['login']))
 		return '';
 
-	if (!$cible)
-		$cible = self();
+	if (!$cible) $cible = self();
 
-	return generer_url_public('spip_cookie',
-		"logout_public=".rawurlencode($login)."&amp;url=" . rawurlencode($cible)
-	);
+	return generer_url_public('spip_cookie',"logout_public=$login&url=" . rawurlencode($cible));
 }
 ?>

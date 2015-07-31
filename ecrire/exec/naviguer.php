@@ -391,7 +391,7 @@ if ($relief) {
 		if ($id_rubrique > 0 AND ($flag_editable OR $GLOBALS['meta']["proposer_sites"]> 0)) {
 	
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . rawurlencode(generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique"))), "site-24.gif", "creer.gif");
+		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . generer_url_retour('naviguer', "id_rubrique=$id_rubrique")), "site-24.gif", "creer.gif");
 		echo "</div><p>";
 	  }
 	}
