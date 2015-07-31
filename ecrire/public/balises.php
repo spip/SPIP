@@ -1152,6 +1152,22 @@ function balise_ARRAY_dist($p) {
 	return $p;
 }
 
+/**
+ * #LISTE{a,b,c,d,e} cree un array avec les valeurs, sans preciser les cles
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_LISTE_dist($p) {
+	$_code = array();
+	$n=1;
+	while ($_val = interprete_argument_balise($n++,$p))
+		$_code[] = $_val;
+	$p->code = 'array(' . join(', ',$_code).')';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 //#FOREACH
 //
 // http://doc.spip.org/@balise_FOREACH_dist
