@@ -428,10 +428,6 @@ ecrire/xml/interfaces.php -text
 ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
-plugins/mes_fichiers_2/images/mes_fichiers-24.png -text
-plugins/mes_fichiers_2/images/mes_fichiers-64.png -text
-plugins/mes_fichiers_2/images/mes_fichiers_sauver-24.png -text
-plugins/mes_fichiers_2/images/mes_fichiers_telecharger-24.png -text
 prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text
