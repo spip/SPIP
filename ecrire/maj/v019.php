@@ -694,4 +694,12 @@ function maj_1_956()
 	spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (`extension`)");
 }
 
+// PG veut une valeur par defaut a l'insertion
+// http://trac.rezo.net/trac/spip/changeset/10482
+
+function maj_1_957()
+{
+	sql_alter("TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL");
+	sql_alter("TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL");
+}
 ?>

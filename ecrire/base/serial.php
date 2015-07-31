@@ -142,7 +142,7 @@ $spip_mots = array(
 		"titre"	=> "text DEFAULT '' NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		"id_groupe"	=> "bigint(21) NOT NULL",
+		"id_groupe"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		"type"	=> "text DEFAULT '' NOT NULL",
 		"extra"	=> "longtext NULL",
 #		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
@@ -210,7 +210,7 @@ $spip_documents = array(
 		"taille"	=> "integer",
 		"largeur"	=> "integer",
 		"hauteur"	=> "integer",
-		"mode"	=> "ENUM('vignette', 'image', 'document') NOT NULL",
+		"mode"	=> "ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL",
 		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
 		"maj"	=> "TIMESTAMP");
 
