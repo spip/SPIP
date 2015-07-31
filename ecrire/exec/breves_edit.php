@@ -54,7 +54,8 @@ else {
 	$lien_titre='';
 	$lien_url='';
 	$statut = "prop";
-	$id_rubrique = intval($id_rubrique);
+	$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique = ".intval($id_rubrique)));
+	$id_rubrique = $row['id_secteur'];
 }
 
 
