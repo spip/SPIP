@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 
+include_ecrire ("inc_admin.php3");
 
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
