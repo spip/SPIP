@@ -1688,9 +1688,9 @@ function env_to_attributs ($texte){
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
 	if (!_request('jquery_debug'))
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.1-forms.pack.js\" type=\"text/javascript\"></script>\n";
+		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.pack.js\" type=\"text/javascript\"></script>\n";
 	else
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.1-forms.js\" type=\"text/javascript\"></script>\n";
+		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.js\" type=\"text/javascript\"></script>\n";
  	
  	return $js.$texte;
 }
