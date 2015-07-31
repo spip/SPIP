@@ -28,6 +28,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
 		if ($GLOBALS['meta']['activer_logos'] != 'non') {
 			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
+			$masque = "<div class='cadre_padding'>$masque</div>";
 			$bouton = bouton_block_depliable($texteon, $visible, 'on');
 			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
 		}
@@ -43,7 +44,9 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 				$masque = "<br />".indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
 				$survol .= "<br />".block_parfois_visible('off', $texteoff, $masque, null, $visible);
 			}
-			$masque = debut_block_depliable($visible,'on') . $clic . $survol . fin_block();
+			$masque = debut_block_depliable($visible,'on') 
+				. "<div class='cadre_padding'>"
+				. $clic . $survol . "</div>" . fin_block();
 		} else {
 			list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
 			$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
@@ -56,11 +59,11 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 	}
 
 	if ($res) {
-		$res = debut_cadre_relief("image-24.gif", true,'',$bouton)
-		. "<div class='verdana1' style='text-align: center;'>"
-		. $res
-		. "</div>"
-		. fin_cadre_relief(true);
+		$res = debut_cadre('r', 'image-24.gif', '', $bouton, '', '', false)
+			. "<div class='verdana1' style='text-align: center;'>"
+			. $res
+			. "</div>"
+			. fin_cadre_relief(true);
 
 		$js = "";
 		if(_request("exec")!="iconifier") {
