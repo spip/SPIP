@@ -440,7 +440,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	if (!$flag_ecrire)
 		$style = "class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;'";
 	else if ($nom_select == 'var_lang_ecrire') 
-		$style = "class='verdana1' style='background-color: $couleur_claire; color: black;'";
+		$style = "class='verdana1' style='background-color: $couleur_foncee; border: 1px solid white; color: white; width: 100px;'";
 	else
 		$style = "class='fondl'";
 

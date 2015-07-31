@@ -453,6 +453,7 @@ function afficher_taches () {
 	liste_rv($query, "rv");
 }
 
+
 // afficher l'encadre "lien iCal"
 function afficher_ical($id) {
 	echo debut_cadre_enfonce();

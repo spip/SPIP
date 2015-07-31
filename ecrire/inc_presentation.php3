@@ -1981,8 +1981,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "</a>";
 	
 	echo "</td>";
-	
+
 	echo "<td> &nbsp; </td>";
+
+
 	echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
 
 
@@ -2022,9 +2024,19 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
 			echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
 
-	
-			echo "<img src='img_pack/rien.gif' width='120' height='1' />";
+			// echo "<img src='img_pack/rien.gif' width='10' height='1' />";
 
+		echo "</td>";
+	//
+	// choix de la langue
+	//
+	if ($GLOBALS['all_langs']) {
+		echo "<td class='bandeau_couleur' style='width: 100px; text-align: $spip_lang_right;' valign='middle'>";
+		echo menu_langues('var_lang_ecrire');
+		echo "</td>";
+	}
+
+		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 			if ($auth_can_disconnect) {	
 				echo "<a href='../spip_cookie.php3?logout=$connect_login' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\"><img src='img_pack/deconnecter-24$spip_lang_rtl.gif' border='0'></a>";
@@ -2156,59 +2168,59 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "</form>";
 		echo "</div>";
 	
-		echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: 420px; $spip_lang_left: 100px;'>";
-		echo _T('icone_agenda');
 
 
-		debut_cadre_relief();
+		$today = getdate(time());
+		$jour_today = $today["mday"];
+		$mois_today = $today["mon"];
+		$annee_today = $today["year"];
+		$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+		$mois = mois($date);
+		$annee = annee($date);
+		$jour = jour($date);
+	
+		// Taches
 		
-		icone_horizontale("NOUVEAU RENDEZ-VOUS PERSONNEL","message_edit.php3?new=oui&type=pb", "pense-bete.gif", "rv.gif");
-		icone_horizontale("NOUVEAU RENDEZ-VOUS","message_edit.php3?new=oui&type=normal", "message.gif", "rv.gif");
+		$result_pb = spip_query("SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
+		$result_rv = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 		
-		if ($connect_statut == "0minirezo") {
-			icone_horizontale("NOUVEAU RENDEZ-VOUS G&Eacute;N&Eacute;RAL","message_edit.php3?new=oui&type=affich", "annonce.gif", "rv.gif");
+
+		if (spip_num_rows($result_pb) OR spip_num_rows($result_rv)) {
+			$largeur = "410px";
+			$afficher_cal = true;
 		}
-		fin_cadre_relief();
+		else {
+			$largeur = "200px";
+			$afficher_cal = false;
+		}
 
+		echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
+		echo _T('icone_agenda');
 
 			include_ecrire("inc_agenda.php3");
 			
-			echo "<table style='border= 1px solid #cccccc; background-color: #dddddd; padding: 5px; margin-top: 5px;'><tr>";
+			echo "<table><tr>";
+			echo "<td valign='top' width='200'>";
+				echo "<div>";
+				agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+				echo "</div>";
+			echo "</td>";
+			if ($afficher_cal) {
+				echo "<td valign='top' width='10'> &nbsp; </td>";
+				echo "<td valign='top' width='200'>";
+				echo "<div>&nbsp;</div>";
+				echo "<div style='color: black;'>";
+					afficher_taches();
+				echo "</div>";
+				echo "</td>";
+			}
 			
-			echo "<td valign='top' width='200'>";
-			echo "<div>&nbsp;</div>";
-			echo "<div style='color: black;'>";
-				afficher_taches();
-			echo "</div>";
-
-				$today = getdate(time());
-				$jour_today = $today["mday"];
-				$mois_today = $today["mon"];
-				$annee_today = $today["year"];
-				$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-				$mois = mois($date);
-				$annee = annee($date);
-				$jour = jour($date);
-		
-				// rendez-vous personnels dans le mois
-				$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-						"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-						"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
-						"AND messages.statut='publie' LIMIT 0,1");
-				if (spip_num_rows($result_messages)) {
-					echo "<div>";
-					agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
-					echo "</div>";
-				}
-			echo "</td>";
-			echo "<td valign='top' width='10'> &nbsp;";
-			echo "</td>";
-			echo "<td valign='top' width='200'>";
+			/*
 				echo "<div style='color: white;'>";
 				// rendez-vous personnels dans le mois
 				calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 				echo "</div>";
-			echo "</td>";
+			*/
 			echo "</tr></table>";
 		
 
@@ -2217,6 +2229,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
 		echo _T('icone_messagerie_personnelle');
 
+		echo "<div>&nbsp;</div>";
 		debut_cadre_relief();
 
 		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
@@ -2237,13 +2250,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_left: 200px;'>";
 		echo _T('icone_informations_personnelles');
 
-			//
-			// choix de la langue
-			//
-			if ($GLOBALS['all_langs']) {
-				echo "<div>&nbsp;</div>";
-				echo menu_langues('var_lang_ecrire');
-			}
 
 
 		echo "</div>";
