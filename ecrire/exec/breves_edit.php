@@ -35,7 +35,7 @@ function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 	if (!$id_rubrique) {
 		$in = !$connect_id_rubrique ? ''
 		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
-		$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques', "id_parent=0$in",'',  "id_rubrique DESC", 1);		
+		$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques', "id_parent=0$in",'',  "id_rubrique DESC", 1);
 
 		if (!autoriser('creerbrevedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
@@ -50,7 +50,7 @@ function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 	$row = false;
 	if (!( ($new!='oui' AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
 	       OR ($new=='oui' AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) )) {
-		if ($new != "oui") 
+		if ($new != "oui")
 			$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
 		else $row = true;
 	}
@@ -104,13 +104,23 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 		traiter_modeles("$titre$texte", true);
 		echo afficher_documents_colonne($id_breve, "breve");
 	}
-echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-echo creer_colonne_droite('', true);
-echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-echo debut_droite('', true);
-echo debut_cadre_formulaire("", true);
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
+	echo debut_droite('', true);
+	echo debut_cadre_formulaire("", true);
 
-
+	$contexte = array(
+	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+	'redirect'=>generer_url_ecrire("breves_voir"),
+	'titre'=>$titre,
+	'new'=>$new == "oui"?$new:$id_breve,
+	'id_rubrique'=>$id_rubrique,
+	'config_fonc'=>'breves_edit_config'
+	);
+	$page = evaluer_fond("prive/editer/breve", $contexte, $connect);
+	echo $page['texte'];
+	/*
 if ($new != "oui") {
 	echo icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$spip_lang_right);
 	echo _T('info_modifier_breve');
@@ -194,6 +204,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 }
 else
 	echo "<h2>"._T('info_page_interdite')."</h2>";
+	*/
 
 echo fin_cadre_formulaire(true);
 echo fin_gauche(), fin_page();

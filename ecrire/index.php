@@ -25,8 +25,7 @@ include_spip('inc/cookie');
 //
 
 $exec = _request('exec');
-$reinstall = _request('reinstall');
-
+$reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
 //
 // Authentification, redefinissable
 //
@@ -126,8 +125,7 @@ define('_TRANCHES', 10);
 //
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
-if ($exec!='install'
-AND !_request('reinstall')
+if (!$reinstall=='oui'
 AND !_request('var_ajaxcharset')
 AND isset($GLOBALS['meta']['version_installee'])
 AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
