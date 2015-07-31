@@ -181,11 +181,11 @@ function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
 // Rajoute <br /> en debut pour que l'animation AjaxSqueeze soit visible
 
 // http://doc.spip.org/@ajax_action_greffe
-function ajax_action_greffe($idom, $corps, $br='<br />')
+function ajax_action_greffe($idom, $corps, $br='')
 {
 	return _request('var_ajaxcharset')
 	? "$br$corps"
-	: "\n<div id='$idom'>$br$corps\n</div>\n";
+	: "\n<div id='$idom' style='padding-top:1px;'>$br$corps\n</div>\n";
 }
 
 // http://doc.spip.org/@ajax_retour
