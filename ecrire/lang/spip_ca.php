@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Anul·lar',
 	'antispam_champ_vide' => 'Si us plau, deixeu aquest camp buit:',
 	'articles_recents' => 'Els articles més recents',
+	'avis_1_erreur_saisie' => 'Hi ha una errada en la vostra entrada, comprobe les dades.',
 	'avis_archive_incorrect' => 'el fitxer no és pas un fitxer SPIP',
 	'avis_archive_invalide' => 'el fitxer no és pas vàlid',
 	'avis_attention' => 'ATENCIÓ !',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Error SQL',
 	'avis_erreur_sauvegarde' => ' Error al desar (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problema d’accés a l’espai privat',
+	'avis_nb_erreurs_saisie' => 'Hi ha @nb@ errors en la vostra entrada, comprobe les dades.',
 
 	// B
 	'barre_a_accent_grave' => 'Inserir una A majúscula amb accent greu',
@@ -108,13 +110,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'demà',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ a les @heure@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ fins @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
+	'date_fmt_periode' => 'Del @date_debut@ fins @date_fin@', # RELIRE
+	'date_fmt_periode_abbr' => 'Del @dtart@@date_debut@@dtabbr@ fins @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Del',
 	'date_fmt_periode_to' => 'al',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'hores',
 	'date_hier' => 'ahir',
 	'date_il_y_a' => 'fa @delai@',
@@ -224,6 +233,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Enviament per mitjà del lloc Web',
 	'erreur' => 'Error',
 	'erreur_balise_non_fermee' => 'última etiqueta sense tancar:',
+	'erreur_technique_ajaxform' => 'Ooops. Una errada inesperada ha impedit enviar el formulari. Pot tornar a intentar-ho.',
+	'erreur_technique_enregistrement_impossible' => 'Una errada tècnica ha impedit l’enregistrament.',
 	'erreur_texte' => 'error(s)',
 	'etape' => 'Etapa',
 
@@ -357,6 +368,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l’adreça que hi 
 	'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
 	'info_creer_repertoire_2' => 'a l’interior del subdirectori <b>@repertoire@</b>, després:',
 	'info_creer_vignette' => 'creació automàtica de la miniatura',
+	'info_creerdansrubrique_non_autorise' => 'No té autorització per a crear contingut dins d’aquesta secció',
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripció(ns):',
 	'info_description' => 'Descripció:',
@@ -409,7 +421,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l’adreça que hi 
 	'info_mois_courant' => 'Durant aquest mes:',
 	'info_mot_cle_ajoute' => 'La paraula clau següent ha estat afegida',
 	'info_multi_herit' => 'Idioma per defecte',
-	'info_multi_langues_soulignees' => 'Les <u>llengües subratllades</u> es beneficien d’una traducció de tots els textos de la interfície. Si seleccioneu aquestes llengües, molts elements del lloc públic (dates, formularis) es traduiran automàticament. En les llengües no subratllades, aquests elements es mostraran en la llengua principal del lloc.', # MODIF
+	'info_multi_langues_soulignees' => 'Les <u>llengües subratllades</u> es beneficien d’una traducció de tots els textos de la interfície. Si seleccioneu aquestes llengües, molts elements del lloc públic (dates, formularis) es traduiran automàticament. En les llengües no subratllades, aquests elements es mostraran en la llengua principal del lloc.',
 	'info_multilinguisme' => 'Multilingüisme',
 	'info_nom_non_utilisateurs_connectes' => 'El vostre nom no apareix a la llista d’usuaris/àries connectats/des.',
 	'info_nom_utilisateurs_connectes' => 'El vostre nom apareix a la llista dels usuaris connectats.',
@@ -632,6 +644,7 @@ i tornar-vos a connectar al lloc.
 	'titre_image_auteur_supprime' => 'Autor/a suprimit/da',
 	'titre_image_redacteur' => 'Redactor/a sense accés',
 	'titre_image_redacteur_02' => 'Redactor/a',
+	'titre_image_selecteur' => 'Afegir la llista',
 	'titre_image_visiteur' => 'Visitant',
 	'titre_joindre_document' => 'INTRODUIR UN DOCUMENT',
 	'titre_mots_cles' => 'PARAULES CLAU',
@@ -642,6 +655,7 @@ i tornar-vos a connectar al lloc.
 	'titre_statistiques' => 'Estadistiques de la pàgina',
 	'titre_titre_document' => 'Títol del document:',
 	'todo' => 'pròximament  ',
+	'trad_definir_reference' => 'Triar "@titre@" com referència de les traduccions',
 	'trad_reference' => '(article de referència)',
 
 	// Z
