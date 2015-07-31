@@ -57,10 +57,6 @@ div#page { width: 780px; margin: 0 auto; text-align: left; }
 
 div#top { width: 780px; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
-div#top .formulaire_recherche { float: right; width: 160px; background: none; margin: 0; padding: 1em 0; }
-div#top .formulaire_recherche label {}
-div#top .formulaire_recherche input.forml { width: 130px; }
-div#top .formulaire_recherche input.bouton { vertical-align: middle; }
 
 div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 div#contenu { padding-top: 0.30em; }
@@ -149,8 +145,10 @@ ul.choix_mots { float: left; width: 47%; margin: 0; padding: 0; list-style: none
 ul.choix_mots label { display: inline; }
 
 /* Formulaire de recherche */
-.formulaire_recherche {}
-.formulaire_recherche .forml {}
+.formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
+.formulaire_recherche label { display: inline; font-size: 1em; }
+.formulaire_recherche input.forml { width: 12em; }
+.formulaire_recherche input.bouton { vertical-align: middle; }
 
 /* Menu langues */
 .menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
