@@ -825,44 +825,53 @@ function date_relative($date, $decalage_maxi=0) {
 	} else {
 		$il_y_a = "date_il_y_a";
 	}
-	
-	if ($decal < 60) {
-		$secondes = ceil($decal);	
-		if ($secondes < 2) $retour = _T($il_y_a, array("delai"=>"$secondes "._T("date_une_seconde"))); 
-		else $retour = _T($il_y_a, array("delai"=>"$secondes "._T("date_secondes"))); 
-	}
-	else if ($decal < 3600) {
-		$minutes = floor($decal / 60);
-		if ($minutes < 2) $retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_une_minute"))); 
-		else $retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
-	}
-	else if ($decal < (3600 * 24) ) {
-		$heures = floor ($decal / 3600);
-		if ($heures < 2) $retour = _T($il_y_a, array("delai"=>"$heures "._T("date_une_heure"))); 
-		else $retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures"))); 
-	}
-	else if ($decal < (3600 * 24 * 7)) {
-		$jours = floor ($decal / (3600 * 24));
-		if ($jours < 2) $retour = _T("date_hier"); 
-		else $retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours"))); 
-	}
-	else if ($decal < (3600 * 24 * 7 * 4)) {
-		$semaines = floor ($decal / (3600 * 24 * 7));
-		if ($semaines < 2) $retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_une_semaine"))); 
-		else $retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines"))); 
-	}
-	else if ($decal < (3600 * 24 * 30 * 6)) {
+
+	if ($decal > 3600 * 24 * 30 * 6)
+		return affdate_court($date);
+
+	if ($decal > 3600 * 24 * 30) {
 		$mois = floor ($decal / (3600 * 24 * 30));
-		if ($mois < 2) $retour = _T($il_y_a, array("delai"=>"$mois "._T("date_un_mois"))); 
-		else $retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois"))); 
+		if ($mois < 2)
+			$delai = "$mois "._T("date_un_mois");
+		else
+			$delai = "$mois "._T("date_mois");
 	}
-	else {
-		$retour = affdate_court($date);
+	else if ($decal > 3600 * 24 * 7) {
+		$semaines = floor ($decal / (3600 * 24 * 7));
+		if ($semaines < 2)
+			$delai = "$semaines "._T("date_une_semaine");
+		else
+			$delai = "$semaines "._T("date_semaines");
+	}
+	else if ($decal > 3600 * 24) {
+		$jours = floor ($decal / (3600 * 24));
+		if ($jours < 2)
+			return _T("date_hier");
+		else
+			$delai = "$jours "._T("date_jours");
+	}
+	else if ($decal > 3600) {
+		$heures = floor ($decal / 3600);
+		if ($heures < 2)
+			$delai = "$heures "._T("date_une_heure");
+		else
+			$delai = "$heures "._T("date_heures");
+	}
+	else if ($decal >= 60) {
+		$minutes = floor($decal / 60);
+		if ($minutes < 2)
+			$delai = "$minutes "._T("date_une_minute");
+		else
+			$delai = "$minutes "._T("date_minutes");
+	} else {
+		$secondes = ceil($decal);
+		if ($secondes < 2)
+			$delai = "$secondes "._T("date_une_seconde");
+		else
+			$delai = "$secondes "._T("date_secondes");
 	}
 
-
-
-	return $retour;
+	return _T($il_y_a, array("delai"=> $delai));
 }
 
 
