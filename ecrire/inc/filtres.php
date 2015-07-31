@@ -320,6 +320,9 @@ function taille_image($img) {
 		$srcWidth = extraire_attribut($img,'width');
 		$srcHeight = extraire_attribut($img,'height');
 	}
+	// ne jamais operer directement sur une image distante pour des raisons de perfo
+	// la copie locale a toutes les chances d'etre la ou de resservir
+	$logo = _DIR_RACINE . copie_locale($logo);
 	
 	// pour essayer de limiter les lectures disque
 	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
