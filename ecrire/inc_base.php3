@@ -816,8 +816,17 @@ function maj_base() {
 				spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
 					"('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
 				$id_document = mysql_insert_id();
-				spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
-				$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
+				if ($id_document > 0) {
+					spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
+					$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
+				} else {
+					echo propre("Erreur de base de donn&eacute;es lors de la mise &agrave; niveau.
+						L'image {{$fichier}} n'est pas pass&eacute;e (article $id_article).\n\n
+						Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
+						niveau, et enfin v&eacute;rifiez que les images apparaissent
+						toujours dans les articles.");
+					exit;
+				}
 			}
 			$replace = "REPLACE($replace, '<IM_', '<IMG')";
 			$replace_chapo = ereg_replace('_orig_', 'chapo', $replace);
