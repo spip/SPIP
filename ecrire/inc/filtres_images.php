@@ -145,7 +145,8 @@ function image_tag_changer_taille($tag,$width,$height,$style=false){
 	// enlever le width et height du style
 	$style = preg_replace(",(^|;)\s*(width|height)\s*:\s*[^;]+,ims","",$style);
 	if ($style{0}==';') $style=substr($style,1);
-	// mettre des attributs de width et height sur les images, c'est INDISPENSABLE pour l'accessibilite
+	// mettre des attributs de width et height sur les images, 
+	// ca accelere le rendu du navigateur
 	// ca permet aux navigateurs de reserver la bonne taille 
 	// quand on a desactive l'affichage des images.
 	$tag = inserer_attribut($tag,'width',$width);
@@ -547,6 +548,8 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		//list($chemin,$nom,$format) = $cherche;
 	}
 	if (in_array($image["format_source"],array('jpg','gif','png'))){
+		$destWidth = $image['largeur_dest'];
+		$destHeight = $image['hauteur_dest'];
 		$logo = $image['fichier'];
 		$date = $image["date_src"];
 		$preview = image_creer_vignette($image, $taille, $taille_y,$process,$force);
