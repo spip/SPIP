@@ -1573,7 +1573,7 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name REGEXP "._q($match), $serveur, $requeter);
 }
 
-
+define('_SQLITE_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
 /**
  * Obtient la description d'une table ou vue SQLite
  *
@@ -1610,13 +1610,13 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 	// c'est une table
 	// il faut parser le create
 	if (!$vue){
-		if (!preg_match("/^[^(),]*\((([^()]*(\([^()]*\))?[^()]*)*)\)[^()]*$/", array_shift($a), $r))
+		if (!preg_match(_SQLITE_RE_SHOW_TABLE, array_shift($a), $r))
 			return "";
 		else {
 			$desc = $r[1];
 			// extraction d'une KEY éventuelle en prenant garde de ne pas
 			// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
-			if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)){
+			if (preg_match("/^(.*?),([^,]*\sKEY[ (].*)$/s", $desc, $r)) {
 				$namedkeys = $r[2];
 				$desc = $r[1];
 			}
@@ -1663,8 +1663,8 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 				}
 			}
 			// key inclues dans la requete
-			foreach (preg_split('/\)\s*,?/', $namedkeys) as $v){
-				if (preg_match("/^\s*([^(]*)\((.*)$/", $v, $r)){
+			foreach(preg_split('/\)\s*(,|$)/',$namedkeys) as $v) {
+				if (preg_match("/^\s*([^(]*)\(([^(]*(\(\d+\))?)$/",$v,$r)) {
 					$k = str_replace("`", '', trim($r[1]));
 					$t = trim(strtolower(str_replace("`", '', $r[2])), '"');
 					if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
