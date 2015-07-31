@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+@define('_CONTEXTE_IGNORE_VARIABLES',"/(^var_|^PHPSESSID$)/");
 //
 // calcule la page et les entetes
 // determine le contexte donne par l'URL (en tenant compte des reecritures) 
@@ -146,11 +147,11 @@ function calculer_contexte() {
 
 	$contexte = array();
 	foreach($_GET as $var => $val) {
-		if (strpos($var, 'var_') !== 0 AND $var != 'PHPSESSID')
+		if (!preg_match(_CONTEXTE_IGNORE_VARIABLES,$var))
 			$contexte[$var] = $val;
 	}
 	foreach($_POST as $var => $val) {
-		if (strpos($var, 'var_') !== 0)
+		if (!preg_match(_CONTEXTE_IGNORE_VARIABLES,$var))
 			$contexte[$var] = $val;
 	}
 
