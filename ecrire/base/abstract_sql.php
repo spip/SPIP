@@ -199,6 +199,7 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 	return $f($table, $values, $desc, $serveur);
 }
 
+// http://doc.spip.org/@sql_drop_table
 function sql_drop_table($table, $exist='', $serveur='')
 {
 	$f = sql_serveur('drop_table', $serveur);

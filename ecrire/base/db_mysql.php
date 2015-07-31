@@ -309,6 +309,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	return spip_mysql_query($q, $serveur);
 }
 
+// http://doc.spip.org/@spip_mysql_drop_table
 function spip_mysql_drop_table($table, $exist='', $serveur='')
 {
 	if ($exist) $exist =" IF EXISTS";
