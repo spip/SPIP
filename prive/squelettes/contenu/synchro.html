@@ -1,0 +1,73 @@
+<h1><:icone_suivi_activite:></h1>
+
+[(#CONFIG{suivi_edito}|=={oui}|oui)
+	[(#CONFIG{adresse_suivi}|strlen|>{3}|et{#CONFIG{adresse_suivi_inscription}|strlen|>{3}})
+		[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{racine-24.png}|balise_img{'',cadre-icone})]<:ical_titre_mailing:>})]
+		<p><:info_config_suivi_explication:></p>
+		<p class="center"><a href='mailto:#CONFIG{adresse_suivi_inscription}'>#CONFIG{adresse_suivi_inscription}</a></p>
+		#BOITE_FERMER
+	]
+]
+
+
+[(#REM)
+///
+/// Suivi par agenda iCal (taches + rendez-vous)
+///
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{agenda-24.png}|balise_img{'',cadre-icone})]<:icone_calendrier:>})]
+	<p><:calendrier_synchro:></p>
+	<p><:ical_info_calendrier:></p>
+
+	#BOITE_OUVRIR{'',raccourcis}
+		<p><:ical_texte_public:></p>
+		[(#URL_PAGE{ical}|icone_horizontale{<:ical_methode_http:>,agenda-24.png})]
+		[(#URL_PAGE{ical}|replace{'https?:\/\/','webcal://'}|icone_horizontale{<:ical_methode_webcal:>,agenda-24.png})]
+	#BOITE_FERMER
+
+	[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{cadenas-24.png}|balise_img{'',cadre-icone})],raccourcis})]
+		<p><:ical_texte_prive:></p>
+		#SET{url,#URL_PAGE{ical_prive,id_auteur=#SESSION{id_auteur}}|parametre_url{arg,#SESSION{id_auteur}|afficher_low_sec{ical}}}
+		[(#GET{url}|icone_horizontale{<:ical_methode_http:>,agenda-24.png})]
+		[(#GET{url}|replace{'https?:\/\/','webcal://'}|icone_horizontale{<:ical_methode_webcal:>,agenda-24.png})]
+	#BOITE_FERMER
+
+#BOITE_FERMER
+
+[(#REM)
+///
+/// Suivi par RSS
+///
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{site-24.png}|balise_img{'',cadre-icone})]<:ical_titre_rss:>})]
+	<p><:ical_texte_rss:></p>
+	<p><:ical_texte_rss_articles:></p>
+	<pre>[(#URL_PAGE{backend}|url_absolue)]</pre>
+
+	<p><:ical_texte_rss_articles2:></p>
+	<B_secteurs>
+		<ul class="liste-items">
+		<BOUCLE_secteurs(RUBRIQUES){racine}>
+			<li class="item"><a
+							href="#URL_PAGE{backend,id_rubrique=#ID_RUBRIQUE}"
+							title="[(#TITRE|attribut_html)]">[(#CHEMIN_IMAGE{rss-24.png}|balise_img{RSS})] #TITRE</a></li>
+		</BOUCLE_secteurs>
+		</ul>
+	</B_secteurs>
+#BOITE_FERMER
+
+
+[(#REM)
+///
+/// Suivi par Javascript
+///
+]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{document-24.png}|balise_img{'',cadre-icone})]<:ical_titre_js:>})]
+	<p><:ical_texte_js:></p>
+	<pre>
+&lt;script
+	type="text/javascript"
+	src="#URL_PAGE{distrib}">
+&lt;/script>
+	</pre>
+#BOITE_FERMER

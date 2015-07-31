@@ -1,0 +1,5 @@
+#BOITE_OUVRIR{'',info}
+	<p><:ical_info1:></p>
+	[(#SET{spipnet,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{/,#EVAL{$GLOBALS}|table_valeur{spip_lang},'_suivi'}})]
+	<p><:ical_info2{spipnet=#GET{spipnet}}:></p>
+#BOITE_FERMER
