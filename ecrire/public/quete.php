@@ -125,8 +125,8 @@ function quete_profondeur($id, $connect='') {
  * @param string $serveur
  * @return string
  */
-function quete_condition_postdates($champ_date, $serveur='') {
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
+function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=false) {
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
 		return "1=1";
 	return
 	  (isset($GLOBALS['meta']['date_prochain_postdate'])
@@ -149,9 +149,9 @@ function quete_condition_postdates($champ_date, $serveur='') {
  *  serveur de BDD
  * @return array
  */
-function quete_condition_statut($mstatut,$previsu,$publie, $serveur=''){
+function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_previsu=false){
 	$liste = $publie;
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
 		$liste = $previsu;
 	$not = false;
 	if (strncmp($liste,'!',1)==0){

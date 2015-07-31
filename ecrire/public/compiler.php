@@ -276,25 +276,26 @@ function instituer_boucle(&$boucle, $echapper=true, $ignore_previsu=false){
 				}
 				$mstatut = $id .'.'.$statut;
 
+				$arg_ignore_previsu=($ignore_previsu?",true":'');
 				include_spip('public/quete');
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
 					array_unshift($boucle->where,
 						$echapper ?
-							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur).")"
+							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur)."$arg_ignore_previsu)"
 						:
-							quete_condition_postdates($date,$boucle->sql_serveur)
+							quete_condition_postdates($date,$boucle->sql_serveur,$ignore_previsu)
 					);
 				}
 				array_unshift($boucle->where,
 					$echapper ?
 						"\nquete_condition_statut('$mstatut',"
-							. _q($ignore_previsu?$s['publie']:$s['previsu']).","
+							. _q($s['previsu']).","
 							._q($s['publie']).","
-							._q($boucle->sql_serveur).")"
+							._q($boucle->sql_serveur)."$arg_ignore_previsu)"
 					:
-						quete_condition_statut($mstatut,$ignore_previsu?$s['publie']:$s['previsu'],$s['publie'],$boucle->sql_serveur)
+						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur,$ignore_previsu)
 				);
 			}
 		}
