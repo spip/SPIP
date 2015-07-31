@@ -82,6 +82,15 @@ function inc_notes_dist($arg,$operation='traiter')
 			else
 				return '';
 			break;
+		case 'reset_all': // a n'utiliser qu'a fins de test
+			if (strlen($les_notes)) spip_log("notes perdues [reset_all]");
+			$pile = array();
+			$next_marqueur = 1;
+			$marqueur = 1;
+			$les_notes = '';
+			$compt_note = 0;
+			$notes_vues = array();
+			break;
 	}
 }
 
