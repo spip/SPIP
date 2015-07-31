@@ -237,6 +237,7 @@ $tables_jointures['spip_syndic'][]= 'mots_syndic';
 $tables_jointures['spip_syndic'][]= 'documents_syndic';
 $tables_jointures['spip_syndic'][]= 'mots';
 
+$tables_jointures['spip_syndic_articles'][]= 'syndic';
 $tables_jointures['spip_syndic_articles'][]= 'documents_syndic';
 $tables_jointures['spip_syndic_articles'][]= 'mots';
 
