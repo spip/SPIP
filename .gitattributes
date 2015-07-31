@@ -2,7 +2,6 @@
 IMG/logo_spip.jpg -text
 /INSTALL.txt -text
 /UPGRADE.txt -text
-dist/choix_mots.html -text
 dist/favicon.ico -text
 dist/inc-entete.html -text
 dist/inc-forum.html -text
@@ -393,6 +392,7 @@ ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
+formulaires/choix_mots.html -text
 /inc-public.php3 -text
 /index.php -text
 /spip.php -text
