@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'T&uuml;rk&ccedil;e [tr]',
 '0_liste' => 'spip-dev@rezo.net',
-'0_mainteneur' => 'ender.ustungel@sj.k12.tr',
+'0_mainteneur' => 'admin@inceden.net',
 
 // A
 'access_interface_graphique' => 'Tam grafik aray&uuml;ze geri d&ouml;n',
