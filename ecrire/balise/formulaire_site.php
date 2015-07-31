@@ -35,28 +35,38 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
-	$nom = _request('nom_site');
-	if (!$nom)
-		return array('formulaire_site', $GLOBALS['delais'],
-			array('self' => str_replace('&amp;', '&', self())
-		));
+	if ($nom = _request('nom_site')) {
 
-	// Tester le nom du site
-	if (strlen ($nom) < 2){
-		return _T('form_prop_indiquer_nom_site');
+		// Tester le nom du site
+		if (strlen ($nom) < 2)
+			$message_erreur = _T('form_prop_indiquer_nom_site');
+
+		// Tester l'URL du site
+		include_spip('inc/sites');
+		$url = _request('url_site');
+		if (!recuperer_page($url))
+			$message_erreur = _T('form_pet_url_invalide');
+
+		$desc = _request('description_site');
+
+		// Integrer a la base de donnees
+		if (!$message_erreur) {
+			spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "(" . spip_abstract_quote($nom) . ", " . spip_abstract_quote($url) . ", " . intval($id_rubrique) .", " . spip_abstract_quote($desc) . ", NOW(), NOW(), 'prop', 'non')");
+			$message_ok = _T('form_prop_enregistre');
+		}
 	}
 
-	// Tester l'URL du site
-	include_spip('inc/sites');
-	$url = _request('url_site');
-	if (!recuperer_page($url))
-		return _T('form_pet_url_invalide');
+	return array('formulaire_site', $GLOBALS['delais'],
+		array(
+			'self' => str_replace('&amp;', '&', self()),
+			'message_ok' => $message_ok,
+			'message_erreur' => $message_erreur,
+			'nom_site' => $nom,
+			'url_site' => $url ? $url : 'http://',
+			'descriptif_site' => $desc
+		)
+	);
 
-	// Integrer a la base de donnees
-
-	$desc = _request('description_site');
-	spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "(" . spip_abstract_quote($nom) . ", " . spip_abstract_quote($url) . ", " . intval($id_rubrique) .", " . spip_abstract_quote($desc) . ", NOW(), NOW(), 'prop', 'non')");
-
-	return  _T('form_prop_enregistre');
 }
+
 ?>
