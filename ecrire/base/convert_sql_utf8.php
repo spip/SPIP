@@ -95,8 +95,11 @@ function convert_sql_utf8(){
 					$type_texte= $row2['Type'];
 					$type_blob = "blob";
 					if (strpos($type_texte,"text")!==FALSE) $type_blob = str_replace("text","blob",$type_texte);
-					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob")." ";
-					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_texte CHARACTER SET $sql_charset COLLATE $sql_collation")." ";
+					
+					$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
+					$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
+					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob $default $notnull")." ";
+					echo spip_query("ALTER TABLE spip_$nom CHANGE $champ $champ $type_texte CHARACTER SET $sql_charset COLLATE $sql_collation  $default $notnull")." ";
 					echo "<br/>";
 				}
 			}
