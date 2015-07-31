@@ -24,6 +24,7 @@ define('_DEFAULT_DB', 'spip');
 // http://doc.spip.org/@base_db_pg_dist
 function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	static $last_connect = array();
+	charger_php_extension('pgsql');
 	
 	// si provient de selectdb
 	if (empty($addr) && empty($port) && empty($login) && empty($pass)){
@@ -1003,6 +1004,12 @@ function mysql2pg_type($v)
 		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
 			     )))))))))))));
+}
+
+// Renvoie false si on n'a pas les fonctions pg (pour l'install)
+function spip_versions_pg(){
+	charger_php_extension('pgsql');
+	return function_exists('pg_connect');	
 }
 
 ?>

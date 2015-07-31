@@ -241,8 +241,13 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 // http://doc.spip.org/@install_connexion_form
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
-	$pg = function_exists('pg_connect');
 
+	// demander les version dispo de postgres
+	if (include_spip('req/pg')) {
+		$versions = spip_versions_pg();
+		$pg = !!$versions;
+	}
+	
 	// demander les version dispo de mysql
 	if (include_spip('req/mysql')) {
 		$versions = spip_versions_mysql();
