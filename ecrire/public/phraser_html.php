@@ -217,29 +217,29 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 
 // http://doc.spip.org/@phraser_arg
 function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
-      preg_match(",^(\|?[^}{)|]*)(.*)$,ms", $texte, $match);
-      $suite = ltrim($match[2]);
-      $fonc = trim($match[1]);
-      if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
-      $res = array($fonc);
-      $err_f = '';
-      // cas du filtre sans argument ou du critere /
-      if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
-	// si pas d'argument, alors il faut une fonction ou un double |
-	if (!$match[1]) {
-		$err_f = array('zbug_erreur_filtre', array('filtre' => $texte));
-		erreur_squelette($err_f, $pointeur_champ);
-		$texte = '';
-	} else 	$texte = $suite;
-	if ($err_f) $pointeur_champ->param = false;
-	elseif ($fonc!=='') $pointeur_champ->param[] = $res;
-	  // pour les balises avec faux filtres qui boudent ce dur larbeur
-	$pointeur_champ->fonctions[] = array($fonc, '');
-	return $result;
-      }
-      $args = ltrim(substr($suite,1)); // virer le '(' initial
-      $collecte = array();
-      while ($args && $args[0] != '}') {
+	preg_match(",^(\|?[^}{)|]*)(.*)$,ms", $texte, $match);
+	$suite = ltrim($match[2]);
+	$fonc = trim($match[1]);
+	if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
+	$res = array($fonc);
+	$err_f = '';
+	// cas du filtre sans argument ou du critere /
+	if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) {
+		// si pas d'argument, alors il faut une fonction ou un double |
+		if (!$match[1]) {
+			$err_f = array('zbug_erreur_filtre', array('filtre' => $texte));
+			erreur_squelette($err_f, $pointeur_champ);
+			$texte = '';
+		} else 	$texte = $suite;
+		if ($err_f) $pointeur_champ->param = false;
+		elseif ($fonc!=='') $pointeur_champ->param[] = $res;
+		// pour les balises avec faux filtres qui boudent ce dur larbeur
+		$pointeur_champ->fonctions[] = array($fonc, '');
+		return $result;
+	}
+	$args = ltrim(substr($suite,1)); // virer le '(' initial
+	$collecte = array();
+	while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
 			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
@@ -263,71 +263,71 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
-		  if (!preg_match("/".NOM_DE_CHAMP ."([{|])/", $arg, $r)) {
-		    // 0 est un aveu d'impuissance. A completer
-		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
+			if (!preg_match("/".NOM_DE_CHAMP ."([{|])/", $arg, $r)) {
+				// 0 est un aveu d'impuissance. A completer
+				$arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
 
-		    $args = ltrim($regs[count($regs)-1]);
-		    $collecte = array_merge($collecte, $arg);
-		    $result = array_merge($result, $arg);
-		  }
-		  else {
-		    $n = strpos($args,$r[0]);
-		    $pred = substr($args, 0, $n);
-		    $par = ',}';
-		    if (preg_match('/^(.*)\($/', $pred, $m))
-		      {$pred = $m[1]; $par =')';}
-		    if ($pred) {
-			$champ = new Texte;
-			$champ->texte = $pred;
-			$champ->apres = $champ->avant = "";
-			$result[] = $champ;
-			$collecte[] = $champ;
-		    }
-		    $rec = substr($args, $n + strlen($r[0]) -1);
-		    $champ = new Champ;
-		    $champ->nom_boucle = $r[2];
-		    $champ->nom_champ = $r[3];
-		    $champ->etoile = $r[5];
-		    $next = $r[6];
-		    while ($next=='{') {
-		      phraser_arg($rec, $sep, array(), $champ);
-		      $args = ltrim($rec) ;
-		      $next = $args[0];
-		    }
-		    while ($next=='|') {
-		      phraser_args($rec, $par, $sep, array(), $champ);
-		      $args = $champ->apres ;
-		      $champ->apres = '';
-		      $next = $args[0];
-		    }
-		    // Si erreur de syntaxe dans un sous-argument, propager.
-		    if ($champ->param === false)
-		      $err_f = true;
-		    else phraser_vieux($champ);
-		    if ($par==')') $args = substr($args,1);
-		    $collecte[] = $champ;
-		    $result[] = $champ;
-		  }
+				$args = ltrim($regs[count($regs)-1]);
+				$collecte = array_merge($collecte, $arg);
+				$result = array_merge($result, $arg);
+			}
+			else {
+				$n = strpos($args,$r[0]);
+				$pred = substr($args, 0, $n);
+				$par = ',}';
+				if (preg_match('/^(.*)\($/', $pred, $m))
+					{$pred = $m[1]; $par =')';}
+				if ($pred) {
+					$champ = new Texte;
+					$champ->texte = $pred;
+					$champ->apres = $champ->avant = "";
+					$result[] = $champ;
+					$collecte[] = $champ;
+				}
+				$rec = substr($args, $n + strlen($r[0]) -1);
+				$champ = new Champ;
+				$champ->nom_boucle = $r[2];
+				$champ->nom_champ = $r[3];
+				$champ->etoile = $r[5];
+				$next = $r[6];
+				while ($next=='{') {
+					phraser_arg($rec, $sep, array(), $champ);
+					$args = ltrim($rec) ;
+					$next = $args[0];
+				}
+				while ($next=='|') {
+					phraser_args($rec, $par, $sep, array(), $champ);
+					$args = $champ->apres ;
+					$champ->apres = '';
+					$next = $args[0];
+				}
+				// Si erreur de syntaxe dans un sous-argument, propager.
+				if ($champ->param === false)
+					$err_f = true;
+				else phraser_vieux($champ);
+				if ($par==')') $args = substr($args,1);
+				$collecte[] = $champ;
+				$result[] = $champ;
+			}
 		}
 		if ($args[0] == ',') {
-		  $args = ltrim(substr($args,1));
-		  if ($collecte) {$res[] = $collecte; $collecte = array();}
+			$args = ltrim(substr($args,1));
+			if ($collecte) {$res[] = $collecte; $collecte = array();}
 		}
-      }
-      if ($collecte) {$res[] = $collecte; $collecte = array();}
-      $texte = substr($args,1);
-      $source = substr($texte, 0, strlen($texte) - strlen($args));
-      // propager les erreurs, et ignorer les param vides
-      if ($pointeur_champ->param !== false) {
-	if ($err_f)
-	  $pointeur_champ->param = false;
-	elseif ($fonc!=='' || count($res) > 1) 
-	  $pointeur_champ->param[] = $res;
-      }
-      // pour les balises avec faux filtres qui boudent ce dur larbeur
-      $pointeur_champ->fonctions[] = array($fonc, $source);
-      return $result;
+	}
+	if ($collecte) {$res[] = $collecte; $collecte = array();}
+	$texte = substr($args,1);
+	$source = substr($texte, 0, strlen($texte) - strlen($args));
+	// propager les erreurs, et ignorer les param vides
+	if ($pointeur_champ->param !== false) {
+		if ($err_f)
+			$pointeur_champ->param = false;
+		elseif ($fonc!=='' || count($res) > 1)
+			$pointeur_champ->param[] = $res;
+	}
+	// pour les balises avec faux filtres qui boudent ce dur larbeur
+	$pointeur_champ->fonctions[] = array($fonc, $source);
+	return $result;
 }
 
 

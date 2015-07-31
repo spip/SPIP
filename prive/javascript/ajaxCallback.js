@@ -161,13 +161,16 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					.removeClass('loading')
 					.html(c);
 					var a = jQuery('a:first',recu).eq(0);
-					if (a.length && a.is('a[name=ajax_ancre]')){
+					if (a.length 
+					  && a.is('a[name=ajax_ancre]')
+					  && jQuery(a.attr('href'),cible).length){
 						a = a.attr('href');
-						setTimeout(function(){
+						if (jQuery(a,cible).length)
+							setTimeout(function(){
 							jQuery(a,cible).positionner(true);
 							//a = a.split('#');
 							//window.location.hash = a[1];
-						},10);
+							},10);
 					}
 					else{
 						jQuery(cible).positionner(false);
@@ -224,9 +227,10 @@ jQuery.fn.ajaxbloc = function() {
 			.html(c)
 			.removeClass('loading');
 			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
-			if (a.length && a.is('a[name=ajax_ancre]')
-			){
-				a = a.attr('href');
+			if (a.length 
+			  && a.is('a[name=ajax_ancre]')
+			  && jQuery(a.attr('href'),blocfrag).length){
+			  	a = a.attr('href')
 				setTimeout(function(){
 					jQuery(a,blocfrag).positionner(true);
 					//a = a.split('#');

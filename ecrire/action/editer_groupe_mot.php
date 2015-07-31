@@ -43,7 +43,7 @@ function action_editer_groupe_mot_dist()
 		$c[$champ] = _request("acces_$champ")=='oui'?'oui':'non';
 		
 	if (is_array($c['tables_liees']))
-		$c['tables_liees'] = implode(',',$c['tables_liees']);
+		$c['tables_liees'] = implode(',',array_diff($c['tables_liees'],array('')));
 
 	revision_groupe_mot($id_groupe, $c);
 	if ($redirect = _request('redirect')) {
