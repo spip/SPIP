@@ -6,30 +6,24 @@
 /* Disposition a l'ecran des blocs principaux
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
-#page { text-align: left; }
+div#page { width: 48em; margin: 0 auto; text-align: left; }
+div#top { height: 5em; line-height: 5em; margin: 0; }
+div#conteneur { width: 100%; }
+div#contenu { float: left; width: 65%; }
+div#navigation { float: right; width: 30%; }
+div#extra { float: right; clear: right; width: 30%; }
+div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 1px solid #CCC; text-align: center; }
+div#pied img { vertical-align: bottom; }
 
-/*#page { width: 48em; text-align: left; margin-left: auto; margin-right: auto; }
+/* Couleurs temporaires */
+#navigation { background: #B9CAFF; }
+#extra { background: #FF8539; }
 
-#conteneur { width: 100%; }
-#conteneur #contenu { float: left; width: 33em; }
-#conteneur #navigation { float: right; width: 12em; text-align: center; }*/
-
-#navigation { background: #CCCCFF; }
-#extra { background: #FFCC66; }
-
-/* Entete */
-#entete { width: 100%; border-bottom: 2px solid #333; }
-#entete #nom_site_spip, #entete a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
-#entete a { text-decoration: none; }
-#entete .formulaire_recherche { float: right; }
-
-/* Fil d'Ariane */
-#hierarchie { clear: both; margin-bottom: 2em; /*font-size: 0.77em;*/ }
-#hierarchie a { text-decoration: none; }
-
-/* Pied de page */
-/*#pied { clear: both; width: 100%; margin-top: 4em; border-top: 1px solid #CCC; text-align: center; }
-#pied img { vertical-align: bottom; }*/
+/* top */
+#top { border-bottom: 2px solid #333; }
+#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
+#top a { text-decoration: none; }
+#top .formulaire_recherche { float: right; width: 30%; background: 0; margin: 0; padding: 0; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
@@ -54,6 +48,11 @@ body, #navigation, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans
 
 /* Blocs du contenu
 ---------------------------------------------- */
+
+/* Fil d'Ariane */
+#hierarchie { clear: both; margin-bottom: 2em; /*font-size: 0.77em;*/ }
+#hierarchie a { text-decoration: none; }
+
 .surtitre, .soustitre { /*font-size: 0.82em;*/ text-transform: uppercase; color: #666; color: #CCCC66; }
 
 .cartouche { margin-bottom: 2em; }
