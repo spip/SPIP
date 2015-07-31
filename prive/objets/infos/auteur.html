@@ -10,7 +10,7 @@
 ]
 [(#SESSION{id_auteur}|=={#ID_AUTEUR}|et{#AUTORISER{webmestre}|non}|et{#AUTORISER{etrewebmestre}|oui})
 	[(#VAL{_ID_WEBMESTRES}|defined|oui)
-		#SET{options,#VAL{_FILE_OPTIONS}|constant|basename}}
+		#SET{options,#VAL{_FILE_OPTIONS}|constant|basename}
 		<:info_webmestre_forces{file_options=#GET{options}}:>
 	]
 	[(#VAL{_ID_WEBMESTRES}|defined|non)
