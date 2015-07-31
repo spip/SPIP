@@ -58,11 +58,11 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 
 	if (!$erreur){
 		// bouton de telechargement
-		$action = redirige_action_auteur('charger_plugin',$plug_file,generer_url_ecrire('admin_plugin','voir=recents',true));
-		$s .= "<div class='actions'>[".
-		"<a href='$action'>"
-		._T('plugin_charger')
-		."</a>]</div>"
+		$action = generer_action_auteur('charger_plugin',$plug_file,generer_url_ecrire('admin_plugin','voir=recents',true));
+		$s .= "<div class='download'>".
+		"<a href='$action' title='"._T('plugin_charger')."'>"
+		. balise_img(find_in_path("images/telecharger-16.png"),_T('plugin_charger'))
+		."</a></div>"
 		;
 	}
 
@@ -76,7 +76,7 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 	$s .= "<div class='short'>".couper($desc,60)."</div>";
 	if (isset($info['icon'])) {
 		include_spip("inc/filtres_images_mini");
-		$s.= "<div class='icon'>".image_reduire(trim($info['icon']), 32)."</div>";
+		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".image_reduire(trim($info['icon']), 32)."</a></div>";
 	}
 	$s .= "</div>";
 
