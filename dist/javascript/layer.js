@@ -276,14 +276,13 @@ function AjaxSqueezeNode(trig, noeud, f)
 function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField);
-	// alert(myField + Field + myUrl);
 	if (!Field) return true;
 
 	if (!myUrl) {
 		retour_id_url('', Field, jjscript);
 		return true; // url vide, c'est un self complet
 	} else {
-		charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
+		return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
 	}
 }
 
