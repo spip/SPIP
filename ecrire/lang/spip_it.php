@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Trasformare in un [link ipertestuale->http://...]',
 'barre_lien_input' => 'Indicare l\'indirizzo del link (&egrave; possibile indicare l\'indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
 'barre_note' => 'Trasformare in [[Nota a fondo pagina]]',
+'barre_paragraphe' => 'Crea un paragrafo',
 'barre_quote' => '<quote>Citare un messaggio</quote>',
 'bouton_ajouter_document' => 'AGGIUNGI UN DOCUMENTO',
 'bouton_ajouter_image' => 'AGGIUNGI UN\'IMMAGINE',
