@@ -172,6 +172,7 @@ $GLOBALS['i18n_en'] = array(
 'date_mois_7' => 'July',
 'date_mois_8' => 'August',
 'date_mois_9' => 'September',
+'date_mot_heures' => 'H',
 'date_saison_1' => 'winter',
 'date_saison_2' => 'spring',
 'date_saison_3' => 'summer',
@@ -533,7 +534,7 @@ requiring an FTP access to the Web site.',
 'info_la_rubrique' => 'the section',
 'info_laisser_champs_vides' => 'leave these fields empty)',
 'info_langue_defaut' => 'Default language:',
-'info_langue_principale' => '<NEW> Langue principale du site',
+'info_langue_principale' => 'Main site language',
 'info_langues' => 'Site\'s languages',
 'info_langues_proposees' => 'Available languages:',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
@@ -590,7 +591,7 @@ requiring an FTP access to the Web site.',
 'info_nom_site' => 'Your site\'s name',
 'info_nom_site_2' => '<b>Site name</b> [Compulsory]',
 'info_nom_utilisateurs_connectes' => 'Your name appears in the list of connected users.',
-'info_nombre_articles' => '<NEW> @nb_articles@ articles,',
+'info_nombre_articles' => '@nb_articles@ articles,',
 'info_nombre_breves' => '@nb_breves@ news items,',
 'info_nombre_en_ligne' => 'Online now:',
 'info_nombre_partcipants' => 'PARTICIPANTS TO THE DISCUSSION:',
@@ -1298,15 +1299,11 @@ irreversible.</b>',
 'texte_sauvegarde' => 'Backup the content of the database',
 'texte_sauvegarde_base' => 'Backup the database',
 'texte_sauvegarde_compressee' => 'Backup will be done in the uncompressed file <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => '<NEW> Vous pouvez sélectionner ci-dessous la «&nbsp;langue principale&nbsp;» du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas à écrire vos articles dans la langue sélectionnée, mais permet de déterminer&nbsp;:
-
-	<ul><li> le format par défaut des dates sur le site public&nbsp;;</li>
-
+'texte_selection_langue_principale' => '<NEW> Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
+	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
-
-	<li> la langue utilisée dans les formulaires du site public&nbsp;;</li>
-
-	<li> la langue présentée par défaut dans l\'espace privé.</li></ul>',
+	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
+	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
 'texte_signification' => 'Red bars represent cumulative entries (total of sub-sections), green bars represent the number of visits for each section.',
 'texte_sous_titre' => 'Subtitle',
 'texte_statistiques_visites' => '(dark bars:  Sunday / dark curve: average evolution)',

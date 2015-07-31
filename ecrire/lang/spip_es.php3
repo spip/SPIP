@@ -17,7 +17,7 @@ $GLOBALS['i18n_es'] = array(
 'avis_archive_incorrect' => 'El fichero archivado no es un fichero SPIP.',
 'avis_archive_invalide' => 'el fichero archivado no es v&aacute;lido',
 'avis_article_modifie' => 'Atenci&oacute;n, @nom_auteur_modif@ ha trabajado en este art&iacute;culo hace @date_diff@ minutos.',
-'avis_attention' => '<NEW> ATTENTION&nbsp;!',
+'avis_attention' => '&iexcl;ATENCION!',
 'avis_aucun_resultat' => 'Ning&uacute;n resultado.',
 'avis_champ_incorrect_type_objet' => 'Nombre de campo incorrecto @name@ para objeto de tipo @type@',
 'avis_chemin_invalide_1' => 'La ruta escogida',
@@ -153,6 +153,7 @@ $GLOBALS['i18n_es'] = array(
 'date_mois_7' => 'julio',
 'date_mois_8' => 'agosto',
 'date_mois_9' => 'septiembre',
+'date_mot_heures' => 'horas',
 'date_saison_1' => 'invierno',
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'verano',
@@ -167,7 +168,7 @@ $GLOBALS['i18n_es'] = array(
 'entree_adresse_fichier_syndication' => 'Direcci&oacute;n del fichero "backend" para la sindicaci&oacute;n.',
 'entree_adresse_site' => '<b>Direcci&oacute;n del sitio</b> [Obligatorio]',
 'entree_base_donnee_1' => 'Direcci&oacute;n de la base de datos',
-'entree_base_donnee_2' => '(A menudo esta direcci&oacute;n corresponde a la de vuestro sitio, a veces corresponde a la menci&oacute;n “localhost” y, en ocasiones, se deja totalmente vac&iacute;a.)',
+'entree_base_donnee_2' => '(A menudo esta direcci&oacute;n corresponde a la de vuestro sitio, a veces corresponde a la menci&oacute;n &laquo;localhost&raquo; y, en ocasiones, se deja totalmente vac&iacute;a.)',
 'entree_biographie' => 'Una corta biograf&iacute;a, en pocas palabras...',
 'entree_breve_publiee' => '&iquest;Publicamos &eacute;sta breve?',
 'entree_chemin_acces' => '<B>Entrar</B> el camino de acceso:',
@@ -484,7 +485,7 @@ $GLOBALS['i18n_es'] = array(
 'info_la_rubrique' => 'la secci&oacute;n',
 'info_laisser_champs_vides' => 'dejar estos campos vac&iacute;os)',
 'info_langue_defaut' => 'Lengua por defecto',
-'info_langue_principale' => '<NEW> Langue principale du site',
+'info_langue_principale' => 'Idioma principal del sitio',
 'info_langues' => 'Lenguas del sitio',
 'info_langues_proposees' => 'Lenguas propuestas',
 'info_largeur_vignette' => '@largeur_vignette@ por @hauteur_vignette@ p&iacute;xeles',
@@ -537,7 +538,7 @@ $GLOBALS['i18n_es'] = array(
 'info_nom_site' => 'Nombre de vuestro sitio',
 'info_nom_site_2' => '<b>Nombre del sitio</b> [Obligatorio]',
 'info_nom_utilisateurs_connectes' => 'Vuestro nombre aparece en la lista de usuarios conectados',
-'info_nombre_articles' => '<NEW> @nb_articles@ articles,',
+'info_nombre_articles' => '@nb_articles@ art&iacute;culos,',
 'info_nombre_breves' => '@nb_breves@ breves,',
 'info_nombre_en_ligne' => 'Actualmente en l&iacute;nea',
 'info_nombre_partcipants' => 'Participan en el di&aacute;logo...',
@@ -972,9 +973,9 @@ $GLOBALS['i18n_es'] = array(
 
 
 // T
-'taille_ko' => '<NEW> @taille@&nbsp;ko',
-'taille_mo' => '<NEW> @taille@&nbsp;Mo',
-'taille_octets' => '<NEW> @taille@&nbsp;octets',
+'taille_ko' => '@taille@&nbsp;KB',
+'taille_mo' => '@taille@&nbsp;MB',
+'taille_octets' => '@taille@&nbsp;bytes',
 'text_article_propose_publication' => 'Este art&iacute;culo ha sido propuesto para ser publicado.<br> No duc&eacute;is en dar vuestra opini&oacute;n en el foro que le concierne y que se encuentra m&aacute;s abajo en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso deb&eacute;is especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
 'texte_actualite_site_1' => 'Esta p&aacute;gina contiene la actualidad del sitio y te permite seguir de cerca tus contribuciones. Encontrar&aacute;s tus art&iacute;culos en curso de redacci&oacute;n, los art&iacute;culos y las breves a las que est&aacute;s invitado a dar tu opini&oacute;n, m&aacute;s un recordatorio de tus anteriores contribuciones.<p><hr><p> Una vez que te hayas familiarizado con la interfaz, pulsa en &laquo;',
@@ -1090,11 +1091,15 @@ Sed prudentes con  esta funcionalidad: <b>las modificaciones, p&eacute;rdidas ev
 'texte_sauvegarde' => 'Crear una copia de seguridad del contenido de la base.',
 'texte_sauvegarde_base' => 'Crear una copia de seguridad de la base',
 'texte_sauvegarde_compressee' => 'La copia de seguridad ser&aacute; realizada en un fichero sin compressi&oacute;n <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => '<NEW> Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
-	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
-	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
-	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
-	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
+'texte_selection_langue_principale' => 'A continuaci&oacute;n pod&eacute;is seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! &circ; a escribir los art&iacute;culos en el idioma escogido, pero permite determinar:
+
+	<ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
+
+	<li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
+
+	<li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
+
+	<li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
 'texte_signification' => 'Las barras rojas representan las entradas acumuladas (total de las subsecciones), las barras verdes el n&uacute;mero de visitas de cada secci&oacute;n.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(Barras oscuras: domingo / curva oscura: evoluci&oacute;n del promedio)',
