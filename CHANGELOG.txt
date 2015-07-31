@@ -1,3 +1,78 @@
+
+SPIP-Core spip-3.0.11 -> spip-3.0.12  04 novembre 2013
+-------------------------------------------------------------
+
+r20758 | suske     |  (ven. 09 août 2013) | on repasse en dev pour la suite (3.0.12-dev)
+r20760 | eric      |  (sam. 10 août 2013) | Corriger l'état et la version.L'état en majuscule avait pour conséquence de rendre la version SPIP inutilisable.
+r20764 | fil       |  (mer. 14 août 2013) | filtre initiale() :  report de [20763]
+r20765 | eric      |  (sam. 17 août 2013) | Corrige la balise #URL_ACTION_AUTEUR dans le cas ou l'on ne passe pas d'arguments à l'action mais une redirection d'url.
+r20767 | eric      |  (sam. 17 août 2013) | Oups, $args est pas optionnel, il faut donc gérer le cas NULL.
+r20771 | kent1     |  (lun. 19 août 2013) | Report de r20770Permettre de surcharger une fonction de pipeline contenant _dist comme les autres fonctions de SPIP
+r20772 | kent1     |  (lun. 19 août 2013) | Revert de r20771 (Cerdic)
+r20781 | fil       |  (jeu. 29 août 2013) | report ecran de securite z75105
+r20789 | b_b       |  (mar. 03 sept. 2013)| Retour sur r20754 qui cassait le selecteur ajax. La nouvelle variable $ids_nouveaux_parents n'était pas insérée dans la variable statique $b à la ligne 637.
+r20793 | b_b       |  (mar. 03 sept. 2013)| report de r20791 et r20792 (merci marcimat)
+r20796 | marcimat  |  (mar. 03 sept. 2013)| Reports de r20794 et r20795 : notices PHP et coquille dans le calcul de $fratrie du sélecteur générique.
+r20801 | b_b       |  (mer. 04 sept. 2013)| report de r20656 pour fermer #3016 dans cette branche aussi
+r20802 | cedric    |  (jeu. 05 sept. 2013)| #3047 : retour sur r20624 qui avait introduit un bug en en corrigeant un autreOn protège simplement toutes les entites à l'aide de la fonction htmlspecialchars sans traitement particulier par rapport au contenuA tester intensivement
+r20810 | suske     |  (sam. 14 sept. 2013)| Ajout du français féminin - report de http://core.spip.org/projects/spip/repository/revisions/20809
+r20814 | suske     |  (mer. 18 sept. 2013)| langue fr_fem, report de c20811, c20812, c20813. NB: En fait, dans la procédure actuelle de release, on fait les reports de langues depuis le trunk vers la branche 3.0 avant de créer tag et branche stable. Du coup, ce report-ci n'est pas vraiment utile sauf si vous  màj votre 3.0 avec svn... C'est aussi l'occasion de créditer @touti pour la création du français féminin dans SPIP, j'avais omis ça dans le commit initial, désolé.
+r20816 | suske     |  (sam. 21 sept. 2013)| Report des langues du trunk. Que se passe-t-il ?
+r20820 | suske     |  (dim. 22 sept. 2013)| Report des langues du trunk - Manoeuvres pré-release - Salvatore is back
+r20822 | denisb    |  (lun. 23 sept. 2013)| ecrire/inc/actions.php : les URL de retour dans les query-string doivent toujours être relatives, quel que soit leur lieu de fabrication. report de r20786 (esj)
+r20824 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : suite de r20765 et r20767. traiter tous les cas tordus et fournir un message d'erreur au cas où. report de r20769 (esj)
+r20825 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : retour sur r20824. la redirection peut être passée depuis un squelette sous la forme '' (cerdic).
+r20829 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : revert de r20825 et r20824 pour cause de plein de cassages dans l'espace privé.
+r20837 | cedric    |  (ven. 27 sept. 2013)| Eviter des notice de type PHP Strict Standards:  Non-static method phpthumb_functions::GetPixelColor() should not be called statically...+ PHPDoc
+r20858 | marcimat  |  (ven. 04 oct. 2013) | Report de r20857 : Le bouton «Choisir» en haut de liste obtenue par le sélecteur générique ne retournait pas le type d'objet comme les autres boutons. Il ajoutait «rubriques|3» au lieu de «rubrique|3» par exemple. ( Troon – http://contrib.spip.net/Motus#forum470824 )
+r20867 | b_b       |  (mar. 08 oct. 2013) | Report de r20866 : Contourner un bug de #SET avec OpCode cache sous PHP 5.5.4 https://bugs.php.net/bug.php?id=65845 (cedric)
+r20877 | denisb    |  (lun. 14 oct. 2013) | prive/squelettes/navigation/accueil.html : le descriptif du site pouvant contenir des images, on réduit pour ne pas encombrer la page d'accueil de l'espace privé. résout #3073
+r20879 | denisb    |  (lun. 14 oct. 2013) | ne pas permettre n'importe quoi en url de site (report de r20876).
+r20891 | cedric    |  (jeu. 24 oct. 2013) | Bugfix : id_objet=0 est licite pour une rubrique + etre coherent et renvoyer les memes id que l'on passe type ou non !
+r20895 | cedric    |  (mar. 29 oct. 2013) | oups r20829 était un revert manuel qui a introduit une coquille : il restait un $arg surnumeraire dans le cas ou il vaut '' et un redirect est fourni (provoquait une erreur de compilation sur la page controler_urls)
+r20899 | denisb    |  (mar. 29 oct. 2013) | prive/ical_prive.html, ecrire/balise/url_.php : Deux problèmes dans le squelette du calendrier privé, avec conséquence : quelques chaînes n'étaient pas soumises au filtre encodant les entités XML (que ICS ne connaît pas), c'était très laid ; les URL avaient le caractère & encodé sous forme d'entité XML, ce qui les rendaient inopérantes sous ICS. Le dernier point a nécessité d'aligner la balise URL_ECRIRE sur URL_PAGE : si elles ont une étoile, les & ne sont pas encodées (report de r20407 - esj).
+r20900 | denisb    |  (mar. 29 oct. 2013) | ecrire/public/compiler.php, ecrire/public/decompiler.php, ecrire/public/phraser_html.php : 1) Le phrasé des arguments d'une chaîne de langue dans un squelette était à l'ouest lorsque la valeur d'un argument était une balise à plusieurs arguments. 2) Introduction de la possibilité d'écrire <pre><:module:{=#ENV{titre},x=2}:></pre>. 3) Il est désormais possible de définir dynamiquement, depuis un squelette, le nom du module de langue (report de r19989, r20035, r20415 - esj).
+r20902 | denisb    |  (mer. 30 oct. 2013) | ecrire/inc/filtres.php, prive/formulaires/editer_auteur.php : éviter un xss sur le nom (signature) d'un auteur (report de r20532).
+r20903 | denisb    |  (mer. 30 oct. 2013) | ecrire/install/etape_3.php, prive/formulaires/editer_auteur.html : prendre en compte les surcharges possibles de _LOGIN_TROP_COURT et _PASS_LONGUEUR_MINI lors de l'écran d'install et dans le formulaire auteur du privé (report de r20839).
+
+SPIP-plugins-dist spip-3.0.11 -> spip-3.0.12  04 novembre 2013
+-------------------------------------------------------------
+
+r74725 | maieul    |  (lun. 12 août 2013) | report de r74303 charger media après mots, sinon le critère {mots} sur une boucle DOCUMENTS ne fonctionne pas tout seul (on doit mettre un joint manuel)
+r74728 | maieul    |  (lun. 12 août 2013) | mettre le utilise sur la bonne version de MOTS
+r74749 | b_b       |  (mer. 14 août 2013) | report de r74748 : un crawl-delay à 1s pour éviter de se faire plomber par les bots crawlers (cf http://core.spip.org/issues/3012)
+r74791 | b_b       |  (ven. 16 août 2013) | report de r74790 : marge apdatée pour les listes spip sur les petits écrans
+r74797 | kent1     |  (sam. 17 août 2013) | Mauvaise requête sql
+r74835 | kent1     |  (lun. 19 août 2013) |
+r74842 | kent1     |  (lun. 19 août 2013) | Revenir sur ce commit parti tout seul http://zone.spip.org/trac/spip-zone/changeset/74835Grâce à http://core.spip.org/projects/spip/repository/revisions/20771 la surcharge de cette fonction devrait fonctionner correctement
+r74846 | kent1     |  (lun. 19 août 2013) | report de r74845On revient en arrière sur cette histoire de dist et on introduit le define _JQUERYUI_CSS_NON pour empêcher jqueryui d'insérer ses css
+r74920 | gilles    |  (ven. 23 août 2013) | Retablir les balises html pour afficher le lien vers ?exec=valider_xml en cas d'erreur de validite xml sur paquet.xml
+r75295 | suske     |  (jeu. 05 sept. 2013)| ferme #3051report de http://zone.spip.org/trac/spip-zone/changeset/75294passer par medias_maj_meta_documents pour exécution après mise à jour depuis plugin mediatheque up to date
+r75798 | xDe6ug    |  (jeu. 12 sept. 2013)| Patch de correction pour que l'ajout de document dans la base de données se fasse dans le même ordre que celui auquel on a procédé pour sélectionner les fichiers.
+r75873 | yohann    |  (dim. 15 sept. 2013)| assez gros bug dans le jquery ui de la branche stable qui empêchait l'affichage des sms, depuis maintenant des mois...
+r75923 | gilles    |  (mar. 17 sept. 2013)| Les flux RSS de suivi des forums n'etaient pas valides
+r75966 | kent1     |  (jeu. 19 sept. 2013)| On rattrape le retard pris dans jqueryui par rapport à la version 3.1, il y a eu de nombreuses choses entre temps, notamment jquery.ui.tooltips, jquery.ui.spinner, jquery.ui.menus.report également de z75965report des modifs de languejQuery UI est en version 1.10.3
+r75967 | kent1     |  (jeu. 19 sept. 2013)| revert de r75966 via svn merge -c -75966
+r76806 | real3t    |  (mar. 01 oct. 2013) | Un peu plus de moteurs
+r77023 | kent1     |  (dim. 06 oct. 2013) | Indentation à deux francs 50
+r77288 | denisb    |  (jeu. 17 oct. 2013) | textwheel/inc/ressource.php : report de r77287. exclure du raccourci < ressource > des écritures qui ressemblent à des modèles mais n'en sont pas : par exemple des formules mathématiques comme "1 < x < 2.5  et  x  + a >  3" (résout une partie de http://core.spip.org/issues/2855)
+r77588 | real3t    |  (lun. 21 oct. 2013) | Le charset n'était pas passé quand on passait par l'action.
+r77589 | real3t    |  (lun. 21 oct. 2013) | Pas la peine d'afficher le bouton de suppression d'une illustration si celle-ci est insérée dans l'article (#VU) (puisque de toute manière, la suppression ne se fait pas, et qu'en plus, il n'y avait pas de message d'erreur indiquant la raison de cette non suppression).
+r77639 | cedric    |  (ven. 25 oct. 2013) | pas de class ajax sur un lien mailto, ça ne marche pas (preuve que ce lien ne doit pas servir souvent…)
+r77640 | cedric    |  (ven. 25 oct. 2013) | Le lien qui permettait de voir tous les messages envoyés par une adresse mail avait été supprimé (car le lien attendu sur un email est un mailto).On le rétablit intelligemment, en comptant de manière efficace le nombre de messages N envoyés par l'email, et en affichant le lien que si N>1, avec le nombre de messages concernés dans le title. Le texte du lien est un peu verbeux mais explicite, et l'affichage du nombre de message donne déjà de l'information sans cliquer.
+r77762 | patfr     |  (mar. 29 oct. 2013) | Petit bug sur la terminaison...
+r77768 | denisb    |  (mer. 30 oct. 2013) | dist/formulaires/inscription.php : éviter un xss sur le nom (signature) d'un auteur (complément de  http://core.spip.org/projects/spip/repository/revisions/20902)
+r77794 | guytarr   |  (jeu. 31 oct. 2013) | report de z77793 : Activer l'ajout de documents pour les articles par defaut a l'installation, ce n'etait plus le cas depuis spip 2.0 (Fabrice Veronneau, Suske)Explications detaillees ici :  http://core.spip.org/issues/3015
+r77831 | b_b       |  (ven. 01 nov. 2013) | Version 1.7.9 : report de r77830 / ferme  http://core.spip.org/issues/3079 / afficher le bouton "Effacer tous les articles syndiqués" même si la syndication est désactivé
+r77841 | b_b       |  (sam. 02 nov. 2013) | report de r77840 : clearfix sur le bloc texte pour fermer  http://core.spip.org/issues/2845
+r77847 | eric      |  (sam. 02 nov. 2013) | Améliorer la fonction svp_afficher_dependances afin de pouvoir choisir le type de lien affiché :- local : lien interne au site vers la page publique du plugin- pluginspip : lien externe vers la page Plugins SPIP du plugin- non : aucun lienAinsi, il est possible d'éviter d'avoir un lien local incohérent mais préférer un lien Plugins SPIP ou aucun lien.
+r77850 | eric      |  (sam. 02 nov. 2013) | Ne pas oublier l'incrément de version
+r77858 | eric      |  (dim. 03 nov. 2013) | Eviter une notice en définissant la constante d'existence de pages publiques pour le voir en ligne
+r77906 | eric      |  (lun. 04 nov. 2013) | On insère l'ancre générale du forum dans l'inclure.Ferme le ticket #3082
+r77908 | eric      |  (lun. 04 nov. 2013) | Oubli d'incrément pour le commit précédent
+
+
+
 SPIP-Core spip-3.0.10 -> spip-3.0.11  09 août 2013
 -------------------------------------------------------------
 
