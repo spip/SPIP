@@ -373,6 +373,25 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
+ * Autorisation de créer une rubrique
+ *
+ * Il faut être administrateur pour pouvoir publier à la racine
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubrique_creer_dist($faire, $type, $id, $qui, $opt) {
+	return 
+		((!$id AND autoriser('defaut',null,null,$qui, $opt))
+		OR $id AND autoriser('creerrubriquedans','rubrique', $id, $qui, $opt)
+		);
+}
+
+/**
  * Autorisation de créer une sous rubrique dans une rubrique $id
  *
  * Il faut être administrateur et pouvoir publier dans la rubrique
