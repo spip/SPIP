@@ -343,6 +343,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		$i = 0;
 		$colors = array('#e0e0f0', '#f8f8ff');
 		$res = "";
+		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
 				$i++;
