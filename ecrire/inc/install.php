@@ -276,9 +276,7 @@ function install_select_serveur()
 // http://doc.spip.org/@install_connexion_form
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
-	if (is_string($predef[0])) {
-		$server_db = $predef[0];
-	}
+	$server_db = (is_string($predef[0])) ? $predef[0] : '';
 
 	return generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='$etape' />"
@@ -402,7 +400,7 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 // presentation des bases existantes
 
 // http://doc.spip.org/@install_etape_liste_bases
-function install_etape_liste_bases($server_db, $disabled=array())
+function install_etape_liste_bases($server_db, $login_db, $disabled=array())
 {
 	$result = sql_listdbs($server_db);
 	if (!$result) return '';
