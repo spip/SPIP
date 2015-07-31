@@ -204,13 +204,14 @@ function spip_connect($serveur='') {
 
 	if (!$serveur) $serveur = 'db_mysql';
 
-	if (isset($t[$serveur])) return $t[$serveur];
+	if (!isset($t[$serveur])) {
+		$f = charger_fonction($serveur, 'base', true);
+		$t[$serveur] = $f ? $f() : false;
 
-	$f = charger_fonction($serveur, 'base', true);
-
-	$t[$serveur] = $f ? $f() : false;
-	if(!defined('_SPIP_CHMOD')
+		// on en profite pour fixer ca si absent de connect.php (hack)
 		define('_SPIP_CHMOD', 0777);
+	}
+
 	return $t[$serveur];
 }
 
