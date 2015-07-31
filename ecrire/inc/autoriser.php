@@ -57,7 +57,8 @@ if (!function_exists('autoriser')) {
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Qui ? visiteur_session ?
-	if ($qui === NULL)
+	// si null ou '' (appel depuis #AUTORISER) on prend l'auteur loge
+	if ($qui === NULL OR $qui==='')
 	  $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
 		$qui = sql_fetsel("*", "spip_auteurs", "id_auteur=".$qui);
