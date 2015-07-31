@@ -61,7 +61,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 		} elseif ($libelle = objet_info($objet, 'texte_logo_objet')) {
 			$libelle = _T($libelle);
 		} else {
-			$libelle = $libelles['site'];
+			$libelle = _L('Logo');
 		}
 		switch($objet){
 			case 'article':
