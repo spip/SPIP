@@ -58,8 +58,7 @@ jQuery.fn.bascule = function() {
 	}
 	return jQuery(this);
 }
-jQuery.fn.insertion = function(dropped_id,origine_id){
-	dropped = jQuery('#'+dropped_id);
+jQuery.fn.insertion = function(dragged,oldParent){
 	subbranch = jQuery(this).children('ul').eq(0);
 	if (subbranch.size() == 0) {
 		jQuery(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
@@ -69,22 +68,23 @@ jQuery.fn.insertion = function(dropped_id,origine_id){
 		jQuery(this).children('img.expandImage').click(function (){jQuery(this).bascule();});
 		subbranch = jQuery(this).children('ul').eq(0);
 	}
-	if((dropped.is('li.art')) && (subbranch.children('li.rub').length>0)){
-		subbranch.end().children('li.rub').eq(0).before(dropped);
+	if((dragged.is('li.art')) && (subbranch.children('li.rub').length>0)){
+		subbranch.end().children('li.rub').eq(0).before(dragged);
 	}
 	else
-		subbranch.end().append(dropped);
+		subbranch.end().append(dragged);
 
 	if (subbranch.is(':hidden')){
 		subbranch.deplie();
 	}
 
-	oldParent = jQuery('#'+origine_id);
 	oldBranches = jQuery('li', oldParent);
 	if (oldBranches.size() == 0) {
 		oldParent.siblings('img.expandImage').remove();
 		oldParent.end().remove();
 	}
+	dragged.draggable( 'destroy' );
+	jQuery(this).set_droppables();
 }
 
 jQuery.fn.set_droppables = function(){
@@ -131,7 +131,7 @@ jQuery.fn.set_droppables = function(){
 				dep.html(dep.text()+"\n"+action);
 				jQuery("#apply").show();
 				jQuery("#cancel").show();
-				jQuery(this).parent().insertion(quoi,jQuery(ui.draggable).css('position','static').parent().attr('id'));
+				jQuery(this).parent().insertion(jQuery(ui.draggable),jQuery(ui.draggable).parent());
 			}
 		}
 	);
