@@ -23,10 +23,10 @@
 <div>
 [<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|silogoauteur)"
 	width="75"
-	alt="[(#ENV{login})]" /></div>]
+	alt="[(#ENV{login_alt})]" /></div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<b>[(#ENV{login})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
+document.write("<:login_login:>&nbsp;<b>[(#ENV{login_alt})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
 <noscript>
 	<p><font face="Georgia, Garamond, Times, serif" size="3">
