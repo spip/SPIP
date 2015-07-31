@@ -650,7 +650,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$a = substr_count($result->apres, "\n");
 
 		// envoyer la boucle au debugueur
-		if ($GLOBALS['var_mode']== 'debug') {
+		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']== 'debug') {
 		  boucle_debug ($nom, $id_parent, $id_boucle, 
 				$type . ($jointures ? ' '.$jointures : ''),
 				$params,

@@ -38,6 +38,7 @@ function enfants($id_parent, $critere){
 		$nombre += $visites;
 		$nombre += enfants($id_rubrique, $critere);
 	}
+	if (!isset($nombre_vis[$id_parent])) $nombre_vis[$id_parent]=0;
 	$nombre_vis[$id_parent] += $nombre;
 	return $nombre;
 }
@@ -115,7 +116,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 			}	
 		}
 		
-		if ($largeur_rouge > 0) {
+		if (isset($largeur_rouge) && ($largeur_rouge > 0)) {
 			$niveau++;
 			echo debut_block_depliable(false,"stats$id_rubrique");
 			enfants_aff($id_rubrique,$largeur_rouge, $critere, $visites_abs+$gauche);

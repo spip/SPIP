@@ -20,7 +20,7 @@ include_spip('inc/actions');
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
-
+	$taille = 0;
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;

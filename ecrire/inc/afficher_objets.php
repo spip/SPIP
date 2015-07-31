@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+$GLOBALS['my_sites']=array();
 
 // http://doc.spip.org/@icone_table
 function icone_table($type){
@@ -32,10 +33,9 @@ function lien_voir_objet($type,$key,$id){
 	return generer_url_ecrire($exec,"$key=$id");
 }
 
-static $my_sites;
 // http://doc.spip.org/@afficher_numero_edit
 function afficher_numero_edit($id, $key, $type,$row=NULL) {
-	global $spip_lang_right, $spip_lang_left;
+	global $spip_lang_right, $spip_lang_left,$my_sites;
 	static $numero , $style='' ;
 	if ($type=='syndic_article') {
 		$redirect = _request('id_syndic') ? 'id_syndic='._request('id_syndic') : '';
@@ -48,7 +48,7 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", _request('exec'), $redirect) . "'>"._T('info_retablir_lien')."</a>]";
 			}
 			else if ($row['statut'] == "off"
-			AND $my_sites[$id_syndic]['miroir'] == 'oui') {
+			AND isset($my_sites[$id_syndic]['miroir']) AND $my_sites[$id_syndic]['miroir'] == 'oui') {
 				$s = '('._T('syndic_lien_obsolete').')';
 			}
 			else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
@@ -194,10 +194,11 @@ function afficher_complement_site($row){
 }
 // http://doc.spip.org/@afficher_complement_syndic_article
 function afficher_complement_syndic_article($row){
+	global $my_sites;
 	if ($GLOBALS['exec'] != 'sites') {
 		$id_syndic = $row['id_syndic'];
 		// $my_sites cache les resultats des requetes sur les sites
-		if (!$my_sites[$id_syndic])
+		if (!isset($my_sites[$id_syndic]))
 			$my_sites[$id_syndic] = sql_fetsel("nom_site, moderation, miroir", "spip_syndic", "id_syndic=$id_syndic");
 
 		$aff = $my_sites[$id_syndic]['nom_site'];
