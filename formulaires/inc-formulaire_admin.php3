@@ -57,6 +57,10 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		"SELECT $id_type FROM spip_${type}s WHERE $id_type=".$$id_type)
 		AND spip_num_rows($s)))
 			$$id_type=0;
+		else {
+			$objet_affiche = $type;
+			break;
+		}
 	}
 
 	// Bouton statistiques
@@ -90,6 +94,27 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 
+	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
+	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot))
+		$ecrire = 'ecrire';
+
+	// Bouton "preview" si l'objet demande existe et est previsualisable
+	if (!$GLOBALS['var_preview'] AND (
+	((lire_meta('preview')=='1comite'
+		AND $GLOBALS['auteur_session']['statut'] =='1comite')
+	OR (lire_meta('preview')<>''
+		AND $GLOBALS['auteur_session']['statut'] =='0minirezo'))
+	)) {
+		if ($objet_affiche == 'article'
+		OR $objet_affiche == 'breve'
+		OR $objet_affiche == 'rubrique')
+			if (spip_num_rows(spip_query(
+			"SELECT id_$objet_affiche FROM spip_".$objet_affiche."s
+			WHERE id_$objet_affiche=".${"id_".$objet_affiche}."
+			AND statut IN ('prop', 'prive')")))
+				$preview = 'preview';
+	}
+
 	return array('formulaire_admin', 0,
 			array(
 				'id_article' => $id_article,
@@ -97,7 +122,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				'id_auteur' => $id_auteur,
 				'id_breve' => $id_breve,
 				'id_mot' => $id_mot,
+				'ecrire' => $ecrire,
 				'action' => $action,
+				'preview' => $preview,
 				'debug' => $debug,
 				'popularite' => ceil($popularite),
 				'statistiques' => $statistiques,
