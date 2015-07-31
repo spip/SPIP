@@ -226,7 +226,7 @@ function parse_plugin_xml($texte){
 		$txt = $chars[2];
 	
 		// tag fermant
-		$chars = preg_split("{(</$tag>)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split("{(</".preg_quote($tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 		if (!isset($chars[1])) { // tag fermant manquant
 			$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
 			return $out;
