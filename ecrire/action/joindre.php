@@ -18,19 +18,22 @@ include_spip('base/abstract_sql');
 
 function action_joindre_dist()
 {
-  global $action, $arg, $hash, $id_auteur,  $redirect,
-    $sousaction1,
-    $sousaction2,
-    $sousaction3,
-#    $sousaction4,  # sousaction4 = code mort a supprimer
-    $sousaction5,
-    $url, $chemin, $ancre, $type, $id, $id_document,
-    $_FILES,  $HTTP_POST_FILES;
+	global $hash, $id_auteur, $url, $chemin, $ancre, $type, $id, $id_document,
+	  $sousaction1,
+	  $sousaction2,
+	  $sousaction3,
+	  #    $sousaction4,  # sousaction4 = code mort a supprimer
+	  $sousaction5,
+	  $_FILES,  $HTTP_POST_FILES;
+
 	include_spip('inc/actions');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
+
+	$arg = _request('arg');
+	$redirect = _request('redirect');
+
+
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
      $sousaction = 'spip_action_joindre' .

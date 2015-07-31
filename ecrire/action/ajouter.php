@@ -16,12 +16,12 @@ include_spip('base/abstract_sql');
 
 function action_ajouter_dist() {
 	
-	global $action, $arg, $hash, $id_auteur, $redirect;
 	include_spip('inc/actions');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
+
+	$arg = _request('arg');
+	$redirect = _request('redirect');
 
 	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r)) {
 		ajouter_auteur_et_rediriger($r[1], $r[2], $redirect);
@@ -54,7 +54,6 @@ function ajouter_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 	$res = spip_query("SELECT id_article FROM spip_auteurs_articles WHERE id_auteur=" . $id_auteur . " AND id_article=" . $id_article);
 	if (!spip_num_rows($res))
 		spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "($id_auteur,$id_article)");
-
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");

@@ -15,17 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_instituer_collaboration_dist() {
 
 	include_spip('inc/actions');
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
 
 	$arg = _request('arg');
-	$hash = _request('hash');
-	$action = _request('action');
-	$redirect = _request('redirect');
 	$id_auteur = _request('id_auteur');
-
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
 
 	if ($arg AND ($id_auteur = intval($id_auteur))) {
 		include_spip('inc/drapeau_edition');

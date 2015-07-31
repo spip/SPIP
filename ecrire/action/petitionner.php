@@ -13,12 +13,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_petitionner_dist() {
-	global $action, $arg, $hash, $id_auteur;
+
 	include_spip('inc/actions');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
+
+	$arg = _request('arg');
+	$redirect = _request('redirect');
 
 	$id_article = intval($arg);
 
@@ -28,8 +29,6 @@ function action_petitionner_dist() {
 	$email_unique = _request('email_unique');
 	$texte_petition = _request('texte_petition');
 	$change_petition = _request('change_petition');
-
-	spip_log("action $action $arg $change_petition");
 
 	if ($change_petition == "on") {
 	  	$email_unique = ($email_unique == 'on') ? 'oui' : "non";

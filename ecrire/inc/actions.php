@@ -14,6 +14,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
+// fonction de securite appelee par les scripts de action/
+// cf fabrication des arguments dans genere_action
+
+function inc_controler_action_auteur_dist()
+{
+	$arg = _request('arg');
+	$hash = _request('hash');
+	$action = _request('action');
+	$id_auteur = _request('id_auteur');
+	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
+}
+
 function caracteriser_auteur($id_auteur=0) {
 	global $auteur_session;
 	if (!($id_auteur = intval($id_auteur))) {
@@ -44,6 +59,7 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 	spip_log("verifier action $action $id_auteur : echec");
 	return false;
 }
+
 
 function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
