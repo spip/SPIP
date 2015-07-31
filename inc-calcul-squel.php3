@@ -818,7 +818,7 @@ function applique_filtres ($fonctions, $code) {
 				if (function_exists($fonc))
 					$code = "$fonc($code$arglist)";
 				else
-					$code = "'Erreur : filtre <b>&laquo; $fonc &raquo;</b> non d&eacute;fini'";
+					$code = "'"._T('erreur_filtre', array('filtre' => $fonc))."'";
 			}
 		}
 	}
