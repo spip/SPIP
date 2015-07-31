@@ -2,6 +2,24 @@
 
 <h1 class="grostitre"><:titre_admin_tech:></h1>
 
+[(#REM)
+	Tester que les .htacess fonctionnent bien correctement
+	et sinon mettre un gentil message d'information...
+]
+[(#EVAL{_DIR_TMP}|verifier_htaccess{1}|et{#EVAL{_DIR_CONNECT}|verifier_htaccess{1}}|non)
+
+	#BOITE_OUVRIR{#VAL{htaccess_inoperant}|_T|wrap{'<h3>'},'notice','titrem'}
+		[(#SET{htaccess,[<tt>(#EVAL{_ACCESS_FILE_NAME})</tt>]})]
+		[(#SET{constantes,<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>})]
+		[(#SET{document_root,[<tt>(#EVAL{table_valeur($_SERVER,'DOCUMENT_ROOT')})</tt>]})]
+		<p><:htaccess_a_simuler{htaccess=#GET{htaccess},constantes=#GET{constantes},document_root=#GET{document_root}}:></p>
+	#BOITE_FERMER
+
+]
+
+
+
+
 [(#AUTORISER{reparer,base})
 	<!--reparer_base-->
 	#BOITE_OUVRIR{#VAL{texte_recuperer_base}|_T|wrap{'<h3>'},'simple','titrem'}
