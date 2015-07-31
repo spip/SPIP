@@ -37,7 +37,7 @@ class Auth_ldap {
 		if (!$login || !$pass) return false;
 
 		// Attributs testes pour egalite avec le login
-		$atts = array('uid', 'login', 'userid', 'cn', 'sn');
+		$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
 		$login_search = ereg_replace("[^-@._[:space:][:alnum:]]", "", $login); // securite
 
 		// Tenter une recherche pour essayer de retrouver le DN
@@ -126,7 +126,7 @@ class Auth_ldap {
 
 	function activer() {
 		$nom = addslashes($this->nom);
-		$login = addslashes($this->login);
+		$login = strtolower(addslashes($this->login));
 		$email = addslashes($this->email);
 		$bio = addslashes($this->bio);
 		$statut = lire_meta("ldap_statut_import");
