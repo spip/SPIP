@@ -336,7 +336,7 @@ if ($ajout_doc == 'oui') {
 							$ext = corriger_extension($ext);
 
 							// Regexp des fichiers a ignorer
-							if (!ereg("^(\.|.*/\.|.*__MACOSX/",
+							if (!ereg("^(\.|.*/\.|.*__MACOSX/)",
 							$list[$i][$key])) {
 								$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
 								$result = spip_query($query);
