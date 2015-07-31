@@ -62,6 +62,7 @@ ecrire/action/tourner.php -text
 ecrire/action/virtualiser.php -text
 ecrire/auth/sha256.inc.php -text
 ecrire/balise/formulaire_.php -text
+ecrire/balise/formulaire_configurer_plugin.php -text
 ecrire/balise/index.php -text
 ecrire/balise/logo_.php -text
 ecrire/balise/url_.php -text
@@ -464,6 +465,7 @@ prive/editer/groupe_mot.html -text
 prive/editer/mot.html -text
 prive/editer/rubrique.html -text
 prive/editer/site.html -text
+prive/formulaires/configurer_plugin.php -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
