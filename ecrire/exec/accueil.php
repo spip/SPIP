@@ -215,11 +215,10 @@ function personnel_accueil($coockcookie)
 
 	if (count($connect_id_rubrique)) {
 
-		$q = sql_select("R.id_rubrique, R.titre, R.descriptif", "spip_rubriques AS R, spip_auteurs_rubriques AS A", "A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique", "", "titre");
+		$res = sql_allfetsel("R.id_rubrique, R.titre, R.descriptif", "spip_auteurs_rubriques AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "A.id_auteur=$connect_id_auteur", "", "titre");
 
-		$rubs = array();
-		while ($r = sql_fetch($q)) {
-			$rubs[] = "<a title='" .
+		foreach ($res as $k => $r) {
+			$res[$k] = "<a title='" .
 			  typo($r['descriptif']) .
 			  "' href='" .
 			  generer_url_ecrire('naviguer', "id_rubrique=" .$r['id_rubrique']) . "'>" .
@@ -227,23 +226,21 @@ function personnel_accueil($coockcookie)
 			  '</a>';
 		}
 
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>" . join("</li>\n<li>", $rubs) . "\n</li></ul>";
+		$res = "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>" . join("</li>\n<li>", $res) . "\n</li></ul>";
 	}
 
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
 	
-	$res .= "<div class='info_cookie'>";
 	if ($coockcookie) {
 		$lien = generer_url_action('cookie', "cookie_admin=non&url=".rawurlencode('./'. _SPIP_ECRIRE_SCRIPT));
 		$t = _T('icone_supprimer_cookie');
-		$t = icone_horizontale($t, $lien, "cookie-24.gif", "supprimer-sansdanger.gif", false);
+		$lien = icone_horizontale($t, $lien, "cookie-24.gif", "supprimer-sansdanger.gif", false);
 		if ($GLOBALS['spip_display'] != 1) 
-			$t = str_replace('</td></tr></table>', 
+			$lien = str_replace('</td></tr></table>', 
 					 aide("cookie").'</td></tr></table>',
-					 $t);
-		$res .= $t;
+					 $lien);
 	}
 	//
 	// Modification du cookie
@@ -253,18 +250,18 @@ function personnel_accueil($coockcookie)
 		$cookie = rawurlencode("@$connect_login");
 		$retour = rawurlencode('./' . _SPIP_ECRIRE_SCRIPT);
 		$lien = generer_url_action('cookie', "cookie_admin=$cookie&url=$retour");
-		$res .= 
+		$lien = 
 			  _T('info_activer_cookie').
 			  aide ("cookie").
 			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.gif", "", false);
 	}
-	$res .= "</div>";
 	
 	$titre_cadre = afficher_plus(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
 	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
 	
 	return debut_cadre_relief("fiche-perso-24.gif",true, '',$titre_cadre)
 	. $res
+	. "<div class='info_cookie'>$lien</div>"
 	. fin_cadre_relief(true);
 }
 
