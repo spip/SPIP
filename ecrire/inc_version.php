@@ -288,6 +288,9 @@ $liste_des_statuts = array(
 // version de la base
 $spip_version = 1.958;
 
+// version de l'interface a la base
+$spip_sql_version = 1;
+
 // version de spip en chaine
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev

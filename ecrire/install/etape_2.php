@@ -38,6 +38,9 @@ function install_etape_2_dist()
 
 	$GLOBALS['connexions'][$server_db] = $link;
 
+	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
+	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
+
 	echo install_debut_html();
 
 // prenons toutes les dispositions possibles pour que rien ne s'affiche !

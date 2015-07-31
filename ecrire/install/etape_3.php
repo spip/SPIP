@@ -34,10 +34,13 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		$table_prefix = _INSTALL_TABLE_PREFIX;
 	}
 
-	$GLOBALS['connexions'][$server_db] = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+	$GLOBALS['connexions'][$server_db]
+	= spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+
+	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
+	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
 
 	$fquery = sql_serveur('query', $server_db);
-
 	if ($choix_db == "new_spip") {
 		if (preg_match(',^[a-z_0-9]+$,i', $sel_db))
 			$fquery("CREATE DATABASE $sel_db", $server_db);
@@ -55,7 +58,6 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 
 		// Si possible, demander au serveur d'envoyer les textes
 		// dans le codage std de SPIP,
-
 		$charset = sql_get_charset(_DEFAULT_CHARSET, $server_db);
 
 		if ($charset) {
