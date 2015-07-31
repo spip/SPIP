@@ -373,7 +373,7 @@ if (strlen($texte) > 1) {
 //
 // Langue de la rubrique
 //
-if ((lire_meta('multi_rubriques') <> 'non') AND ($connect_statut == '0minirezo')) {
+if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND ($connect_statut == '0minirezo')) {
 	if ($changer_lang)
 		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."' WHERE id_rubrique=$coll");
 
