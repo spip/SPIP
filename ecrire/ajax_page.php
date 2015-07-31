@@ -11,8 +11,8 @@
 
 
 include ("inc.php3");
-echo "<"."?xml version='1.0' encoding='UTF-8'?>";
-
+$charset = lire_meta("charset");
+echo "<"."?xml version='1.0' encoding='$charset'?>";
 
 	if ($GLOBALS["id_ajax_fonc"]) {
 		$res = spip_query("SELECT * FROM spip_ajax_fonc WHERE id_ajax_fonc = $id_ajax_fonc AND id_auteur=$connect_id_auteur");
