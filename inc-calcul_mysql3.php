@@ -41,7 +41,7 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id)
 	 "\nFROM\t(" . join(",\n\t", $s) . " ,\n\tCOUNT(" . $sous .
 	 ") AS compteur $q)\n AS S_$table\nWHERE compteur= " . 
 	 $cpt));
-#  spip_log("$id: $q");
+  spip_log("$id: $q");
 # if (!($result = @mysql_query($q)))
   if (!($result = @spip_query($q)))
     {
@@ -107,22 +107,42 @@ WHERE	id_article='" . ($ida ? $ida : substr(lire_meta("forums_publics"),0,3)) . 
 
 # Critere {branche} : recuperer les descendants d'une rubrique
 
+function calcul_mysql_in($val, $valeurs, $tobeornotobe)
+{
+  $s = split(',', $valeurs, 255);
+  if (count($s) < 255)
+    return ("$val $tobeornotobe IN ($valeurs)");
+  else 
+    {
+      $valeurs = array_pop($s);
+      return ("$val $tobeornotobe IN (" . join(',',$s) . ') AND ' .
+	      calcul_mysql_in($val, $valeurs, $tobeornotobe));
+    }
+}
+  
+
 function calcul_generation ($generation) {
 	$lesfils = array();
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($generation)");
+	$result = spip_abstract_select(array('id_rubrique'),
+				       array('spip_rubriques'),
+				       calcul_mysql_in('id_parent', 
+						       $generation,
+						       ''),
+				       '','','','','','','');
 	while ($row = spip_fetch_array($result))
-		$lesfils[] = $row['id_rubrique'];
+	  $lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
 }
 
 function calcul_branche ($generation) {
-	if ($generation) {
+	if (!$generation) 
+	  return '0';
+	else {
 		$branche[] = $generation;
 		while ($generation = calcul_generation ($generation))
 			$branche[] = $generation;
 		return join(",",$branche);
-	} else
-		return '0';
+	}
 }
 
 function query_parent($id_rubrique)
