@@ -53,7 +53,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		"img { border: 0; }\n".
 		"p { text-align: justify; }\n".
 		"ul { text-align: justify; list-style-type: none; }\n".
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n".
+		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; padding: 10px; margin-top: 1em; }\n".
 		"legend { font-weight: bold; }\n".
 		"label {}\n".
 		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
