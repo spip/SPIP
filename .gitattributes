@@ -782,6 +782,7 @@ prive/squelettes/contenu/infos_perso.html -text
 prive/squelettes/contenu/job_queue.html -text
 prive/squelettes/contenu/job_queue_fonctions.php -text
 prive/squelettes/contenu/navigation.html -text
+prive/squelettes/contenu/navigation_fonctions.php -text
 prive/squelettes/contenu/plan.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
@@ -818,6 +819,7 @@ prive/squelettes/navigation/auteur.html -text
 prive/squelettes/navigation/auteur_edit.html -text
 prive/squelettes/navigation/auteurs.html -text
 prive/squelettes/navigation/configurer.html -text
+prive/squelettes/navigation/configurer_fonctions.php -text
 prive/squelettes/navigation/configurer_langage.html -text
 prive/squelettes/navigation/configurer_preferences.html -text
 prive/squelettes/navigation/dist.html -text
