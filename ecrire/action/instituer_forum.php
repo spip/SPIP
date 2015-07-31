@@ -22,6 +22,13 @@ function action_instituer_forum_dist() {
 	$id_forum = intval($id_forum);
 	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_forum");
 	if (!$row) return;
+
+	instituer_un_forum($statut,$row);
+}
+
+function instituer_un_forum($statut,$row){
+
+	$id_forum = $row['id_forum'];
 	$old = $row['statut'];
  // rien a faire si pas de changement de statut
  	if ($old==$statut)
@@ -54,7 +61,7 @@ function action_instituer_forum_dist() {
 		$date_thread = date('Y-m-d H:i:s');
 	}
 	sql_updateq("spip_forum", array("date_thread" => $date_thread), "id_thread=".$row['id_thread']);
-	
+
 	// invalider les pages comportant ce forum
 	include_spip('inc/invalideur');
 	include_spip('inc/forum');
