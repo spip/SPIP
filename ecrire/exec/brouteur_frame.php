@@ -85,7 +85,7 @@ function exec_brouteur_frame_dist()
 	else {
 	  if ($id_rubrique !== "") {
 
-		$result=spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
+		$result=spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
 		if ($row=spip_fetch_array($result)){
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];
@@ -103,7 +103,7 @@ function exec_brouteur_frame_dist()
 		}
 
 
-		$result=spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre");
+		$result=spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre");
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
 			$titre = typo($row['titre']);
@@ -186,7 +186,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 			
 			list($tot_art) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC"));
 			
-			list($tot_brev) = spip_fetch_array(spip_query("SELECTCOUNT(*) AS cnt FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20"));
+			list($tot_brev) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20"));
 			
 			if ($tot_art + $tot_brev > 0)
 			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
