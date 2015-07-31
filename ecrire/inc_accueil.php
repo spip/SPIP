@@ -47,7 +47,7 @@ afficher_breves(afficher_plus(generer_url_ecrire('breves'))._T('info_breves_vali
 	// Les sites references a valider
 	//
 if (afficher_plus(generer_url_ecrire('sites_tous')).$GLOBALS['meta']['activer_syndic'] != 'non') {
-		include_ecrire("inc_sites_tous");
+		include_ecrire("inc_sites_voir");
 		afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
 
@@ -55,7 +55,7 @@ if (afficher_plus(generer_url_ecrire('sites_tous')).$GLOBALS['meta']['activer_sy
 	// Les sites a probleme
 	//
 if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		include_ecrire("inc_sites_tous");
+		include_ecrire("inc_sites_voir");
 		afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
 

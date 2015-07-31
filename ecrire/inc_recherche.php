@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
-include_ecrire("inc_sites_tous");
+include_ecrire("inc_sites_voir");
 
 function recherche_dist()
 {

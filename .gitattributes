@@ -316,6 +316,7 @@ ecrire/inc_recherche.php -text
 ecrire/inc_rubriques_edit.php -text
 ecrire/inc_sites_edit.php -text
 ecrire/inc_sites_tous.php -text
+ecrire/inc_sites_voir.php -text
 ecrire/inc_spip_action_autoriser.php -text
 ecrire/inc_spip_action_ical.php -text
 ecrire/inc_spip_action_iconifier.php -text
