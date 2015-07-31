@@ -957,7 +957,7 @@ calendrier_args_date($annee_today, $mois_today, $jour_today) .
 			  (" onmouseover=\"montrer('$id');\"" .
 			   (($annee == $annee_today && $mois == $mois_today && (($type == 'mois')  || ($jour == $jour_today)))
 			    ? " class='calendrier-opacity'" : "")),
-			  _T("info_aujourdhui"))
+			  _T("ecrire:info_aujourdhui"))
 	  . "&nbsp;"
 	  . (!$args_pred ? '' :
 	     http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
@@ -1113,6 +1113,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 		} else {
 		  if ($j == $jour_today AND $cemois) {
 			$style = $couleur_foncee;
+			if(!$style) $style = '#333333';
 			$couleur = "white";
 		    } else {
 			if ($jour_semaine == 7) {
