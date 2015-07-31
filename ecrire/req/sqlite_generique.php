@@ -887,14 +887,19 @@ function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 
 // http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
+	// remplacer le prefixe de table
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
 
+	if ($prefixe) $nom_table = preg_replace('/^spip/', $prefixe, $nom_table);
+		
 	$query = 
 			'SELECT sql, type FROM'
    			. ' (SELECT * FROM sqlite_master UNION ALL'
    			. ' SELECT * FROM sqlite_temp_master)'
 			. " WHERE tbl_name LIKE '$nom_table'"
 			. " AND type!='meta' AND sql NOT NULL AND name NOT LIKE 'sqlite_%'"
-			. 'ORDER BY substr(type,2,1), name';
+			. ' ORDER BY substr(type,2,1), name';
 	
 	$a = spip_sqlite_query($query, $serveur, $requeter);
 	if (!$a) return "";
@@ -1455,7 +1460,7 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary
 	if ($_ifnotexists) {
 		// simuler le IF NOT EXISTS - version 2 
 		if (_sqlite_is_version(2, '', $serveur)){
-			$a = spip_sqlite_showtable($nom, $serveur); 
+			$a = spip_sqlite_showtable($nom, $serveur);
 			if ($a) return false;
 		} 
 		// sinon l'ajouter en version 3
@@ -1672,7 +1677,7 @@ class sqlite_traiter_requete{
 		} else $suite ='';
 		$pref = ($this->prefixe) ? $this->prefixe . "_": "";
 		$this->query = preg_replace('/([,\s])spip_/', '\1'.$pref, $this->query) . $suite;
-		
+
 		// Correction zero AS x
 		// pg n'aime pas 0+x AS alias, sqlite, dans le meme style, 
 		// n'apprecie pas du tout SELECT 0 as x ... ORDER BY x
