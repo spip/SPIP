@@ -31,15 +31,14 @@ function exec_brouteur_frame_dist() {
 
 	echo _DOCTYPE_ECRIRE
 	. html_lang_attributes()
-	. "<head>\n"
-	.  "<title>brouteur_frame</title>\n"
-	. "<meta http-equiv='Content-Type' content='text/html"
-	. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
-	. "' />\n"
-	. envoi_link(_T('info_mon_site_spip'))	
-	. pipeline('header_prive')
-	. '<script type="text/javascript"><!--
-
+	. pipeline('header_prive',
+		"<head>\n"
+		.  "<title>brouteur_frame</title>\n"
+		. "<meta http-equiv='Content-Type' content='text/html"
+		. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
+		. "' />\n"
+		. envoi_link(_T('info_mon_site_spip'))	
+		. '<script type="text/javascript"><!--
 jQuery(function(){
 	jQuery("a.iframe").click(function(){
 		window.open(this.href,"iframe"+this.rel);
@@ -49,7 +48,8 @@ jQuery(function(){
 	
 //--></script>
 	'
-	. "</head>\n<body>";
+		. "</head>\n")
+	."<body>";
 
 	if ($spip_ecran == "large") {
 		$nb_col = 4;

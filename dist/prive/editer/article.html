@@ -97,9 +97,14 @@ $(function(){
       [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
       <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
       (#ENV**{browser_caret,''})]>[(#ENV**{texte}|entites_html)]</textarea>
-      <script type='text/javascript'><!--
-      jQuery(hauteurTextarea);
-      //--></script>
+
+	<script type='text/javascript'><!--
+		jQuery(function(){
+			jQuery('#text_area')
+			.height((jQuery(window).height()-80)+'px');
+		});
+	//--></script>
+
     </li>]
   	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
     <li>
