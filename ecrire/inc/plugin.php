@@ -594,6 +594,8 @@ function pipeline_precompile(){
 				$s_inc .= $file . ')){include_once($f);}'."\n";
 			}
 		}
+		if (strlen($s_inc))
+			$s_inc = "static \$inc=null;\nif (!\$inc){\n$s_inc\$inc=true;\n}\n";
 		$content .= "// Pipeline $action \n";
 		$content .= "function execute_pipeline_$action(&\$val){\n";
 		$content .= $s_inc;
