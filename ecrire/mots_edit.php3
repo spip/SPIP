@@ -19,12 +19,6 @@ function mySel($varaut, $variable) {
 // modifications mot
 //
 if ($connect_statut == '0minirezo') {
-	if ($new == 'oui') {
-		$query = "INSERT INTO spip_mots (titre,id_groupe) VALUES ('','$id_groupe')";
-		$result = spip_query($query);
-		$id_mot = mysql_insert_id();
-	}
-
 	if ($supp_mot) {
 		$query = "DELETE FROM spip_mots WHERE id_mot=$supp_mot";
 		$result = spip_query($query);
@@ -33,23 +27,28 @@ if ($connect_statut == '0minirezo') {
 	}
 
 	if ($titre) {
+		if ($new == 'oui' && $id_groupe) {
+			spip_query("INSERT INTO spip_mots (id_groupe) VALUES ($id_groupe)");
+			$id_mot = mysql_insert_id();
+		}
+
 		$titre = addslashes($titre);
 		$texte = addslashes($texte);
 		$descriptif = addslashes($descriptif);
 		$type = addslashes(corriger_caracteres($type));
-		$result = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_type'");
-		while($row = mysql_fetch_array($result)) {
-				$type = addslashes(corriger_caracteres($row['titre']));
-		}
-				
-		$query = "UPDATE spip_mots SET titre=\"$titre\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=\"$id_type\" WHERE id_mot=$id_mot";
+		$result = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'");
+		if ($row = mysql_fetch_array($result))
+			$type = addslashes(corriger_caracteres($row['titre']));
+
+		$query = "UPDATE spip_mots SET titre=\"$titre\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe WHERE id_mot=$id_mot";
 		$result = spip_query($query);
-		
-		
-		
+
 		if (lire_meta('activer_moteur') == 'oui') {
 			indexer_mot($id_mot);
 		}
+	}
+	else if ($new == 'oui') {
+		$titre = 'Nouveau mot';
 	}
 }
 
@@ -69,9 +68,9 @@ $result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$id_mot = $row['id_mot'];
-	$titre = typo($row['titre']);
-	$descriptif = propre($row['descriptif']);
-	$texte = propre($row['texte']);
+	$titre = $row['titre'];
+	$descriptif = $row['descriptif'];
+	$texte = $row['texte'];
 	$type = $row['type'];
 	$id_groupe = $row['id_groupe'];
 }
@@ -149,7 +148,7 @@ echo "<td width='100%' valign='top'>";
 gros_titre($titre);
 
 
-if (strlen($descriptif) > 1) {
+if ($descriptif) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<b>Descriptif :</b> ";
@@ -164,36 +163,38 @@ echo "</tr></table>\n";
 
 if (strlen($texte)>0){
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<P>$texte";
+	echo "<P>".propre($texte);
 	echo "</FONT>";
 }
 
 
 
-echo "<P>";
+if ($id_mot) {
+	echo "<P>";
 
-if ($connect_statut == "0minirezo") $aff_articles = "prepa,prop,publie,refuse";
-else $aff_articles = "prop,publie";
+	if ($connect_statut == "0minirezo")
+		$aff_articles = "prepa,prop,publie,refuse";
+	else
+		$aff_articles = "prop,publie";
 
+	afficher_rubriques("Les rubriques li&eacute;es &agrave; ce mot-cl&eacute;",
+	"SELECT rubrique.* FROM spip_rubriques AS rubrique, spip_mots_rubriques AS lien WHERE lien.id_mot='$id_mot'
+	AND lien.id_rubrique=rubrique.id_rubrique ORDER BY rubrique.titre");
 
-afficher_rubriques("Les rubriques li&eacute;es &agrave; ce mot-cl&eacute;",
-"SELECT rubrique.* FROM spip_rubriques AS rubrique, spip_mots_rubriques AS lien WHERE lien.id_mot='$id_mot' AND lien.id_rubrique=rubrique.id_rubrique ORDER BY rubrique.titre");
+	afficher_articles("Les articles li&eacute;s &agrave; ce mot-cl&eacute;",
+	"SELECT article.* FROM spip_articles AS article, spip_mots_articles AS lien WHERE lien.id_mot='$id_mot'
+	AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 ORDER BY article.date DESC");
 
-afficher_articles("Les articles li&eacute;s &agrave; ce mot-cl&eacute;",
-"SELECT article.* FROM spip_articles AS article, spip_mots_articles AS lien WHERE lien.id_mot='$id_mot' AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 ORDER BY article.date DESC");
+	afficher_breves("Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;",
+	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'
+	AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC LIMIT 0,10");
 
-
-
-afficher_breves("Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;",
-"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC LIMIT 0,10");
-
-
-
-afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s li&eacute;es &agrave; ce mot-cl&eacute;",
-"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC LIMIT 0,10");
+	afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s li&eacute;es &agrave; ce mot-cl&eacute;",
+	"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
+	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC LIMIT 0,10");
+}
 
 fin_cadre_relief();
-
 
 
 
@@ -201,80 +202,63 @@ if ($connect_statut =="0minirezo"){
 	echo "<P>";
 	debut_cadre_formulaire();
 
+	echo "<FORM ACTION='mots_edit.php3' METHOD='post'>";
+	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+	if ($id_mot)
+		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>";
+	else if ($new=='oui')
+		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
+	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">";
+	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>";
 
+	$titre = htmlspecialchars($titre);
+	$descriptif = htmlspecialchars($descriptif);
+	$texte = htmlspecialchars($texte);
 
-	$query = "SELECT * FROM spip_mots WHERE id_mot='$id_mot'";
-	$result = spip_query($query);
+	echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
+	echo aide ("mots");
 
+	echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'>";
 
-	while ($row = mysql_fetch_array($result)) {
-
-		$id_mot = $row['id_mot'];
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$texte = $row['texte'];
-		$groupe = $row['id_groupe'];
-
-		echo "<FORM ACTION='mots_edit.php3' METHOD='post'>";
-		echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
-		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE=\"$id_mot\">";
-		echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">";
-		echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>";
-
-		$titre = htmlspecialchars($titre);
-		$descriptif = htmlspecialchars($descriptif);
-		$texte = htmlspecialchars($texte);
-
-		echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
-		echo aide ("mots");
-
-		echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'>";
-
-
+	// dans le groupe...
+	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
+	$result = spip_query($query_groupes);
+	if (mysql_num_rows($result)>1) {
 		debut_cadre_relief("groupe-mot-24.gif");
 		echo  "Dans le groupe :</label>\n";
 		echo aide ("motsgroupes");
-		echo  " &nbsp; <SELECT NAME='id_type' class='fondl'>\n";
-
-		$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
-		$result = spip_query($query_groupes);
+		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
 		while ($row_groupes = mysql_fetch_array($result)){
-			$id_groupe = $row_groupes['id_groupe'];
+			$groupe = $row_groupes['id_groupe'];
 			$titre_groupe = htmlspecialchars($row_groupes['titre']);
-			echo  "<OPTION".mySel($id_groupe, $groupe).">$titre_groupe</OPTION>\n";
+			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
 		}			
-
-
 		echo  "</SELECT>";
 		fin_cadre_relief();
+	} else
+		if ($row_groupes = mysql_fetch_array($result))
+			echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 
-		
-	
-		echo $texte_types;
-
-		if ($options == 'avancees' OR $descriptif) {
-			echo "<B>Descriptif rapide</B><BR>";
-			echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
-			echo $descriptif;
-			echo "</TEXTAREA><P>\n";
-		}
-		else {
-			echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
-		}
-
-		if ($options == 'avancees' OR $texte) {
-			echo "<B>Texte explicatif</B><BR>";
-			echo "<TEXTAREA NAME='texte' ROWS='8' CLASS='forml' COLS='40' wrap=soft>";
-			echo $texte;
-			echo "</TEXTAREA><P>\n";
-		}
-		else {
-			echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
-		}
-
-		echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-		echo "</FORM>";
+	if ($options == 'avancees' OR $descriptif) {
+		echo "<B>Descriptif rapide</B><BR>";
+		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+		echo $descriptif;
+		echo "</TEXTAREA><P>\n";
 	}
+	else
+		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+
+	if ($options == 'avancees' OR $texte) {
+		echo "<B>Texte explicatif</B><BR>";
+		echo "<TEXTAREA NAME='texte' ROWS='8' CLASS='forml' COLS='40' wrap=soft>";
+		echo $texte;
+		echo "</TEXTAREA><P>\n";
+	}
+	else
+		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
+
+	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</FORM>";
 
 	fin_cadre_formulaire();
 }
