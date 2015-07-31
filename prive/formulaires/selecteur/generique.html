@@ -1,5 +1,6 @@
 #SET{img_unpick, #CHEMIN_IMAGE{supprimer-12.png}}
-<script type='text/javascript'>var identifiant_selecteur = 'selecteur_#ENV{name}'; var img_unpick='#GET{img_unpick}';</script>
+[(#SET{label_supprimer, <:lien_supprimer:>})]
+<script type='text/javascript'>var identifiant_selecteur = 'selecteur_#ENV{name}'; var img_unpick='#GET{img_unpick}'; var selecteur_label_supprimer='#GET{label_supprimer}';</script>
 <script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery.picker.js}'></script>
 [(#REM)
 
