@@ -827,11 +827,16 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	static $trouver_table;
 	spip_timer('calcul_skel');
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
-		squelette_debug_compile($nom, $sourcefile, $descr['squelette']);
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+		$GLOBALS['debug_objets']['squelette'][$nom] = $descr['squelette'];
+		$GLOBALS['debug_objets']['sourcefile'][$nom] = $sourcefile;
 
-	foreach ($boucles as $boucle) boucle_debug($nom, $boucle);
-
+		if (!isset($debug_objets['principal']))
+			$debug_objets['principal'] = $nom;
+	}
+	foreach ($boucles as $id => $boucle) {
+		$GLOBALS['debug_objets']['boucle'][$nom.$id] = $boucle;
+	}
 	$descr['documents'] = compile_inclure_doublons($squelette);
 
 	// Demander la description des tables une fois pour toutes
@@ -961,7 +966,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			"\n}\n\n";
 
 		if ($debug)
-			boucle_debug_compile ($id, $nom, $boucles[$id]->return);
+			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
 	}
 
 	if ($debug)

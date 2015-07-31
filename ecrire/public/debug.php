@@ -261,37 +261,6 @@ function debug_sequence($id, $nom, $niv, $sequence) {
 	return $res;	
 }
 
-// appelee a chaque compilation de boucle (compilo.php)
-// http://doc.spip.org/@boucle_debug_compile
-function boucle_debug_compile ($id, $nom, $code) {
-	global $debug_objets;
-
-	$debug_objets['code'][$nom.$id] = $code;
-}
-
-// appelee a chaque compilation de squelette (compilo.php)
-// http://doc.spip.org/@squelette_debug_compile
-function squelette_debug_compile($nom, $sourcefile, $squelette) {
-	global $debug_objets;
-
-	$debug_objets['squelette'][$nom] = $squelette;
-	$debug_objets['sourcefile'][$nom] = $sourcefile;
-
-	if (!isset($debug_objets['principal']))
-		$debug_objets['principal'] = $nom;
-}
-
-// appelee a chaque analyse syntaxique des boucles d'un squelette
-// http://doc.spip.org/@boucle_debug
-function boucle_debug ($skel, $boucle)
-{
-	global $debug_objets;
-
-	$nom = $boucle->id_boucle;
-	$debug_objets['boucle'][$skel.$nom] = decompiler_boucle($boucle);
-	$debug_objets['pretty'][$skel.$nom] = $nom . ' ' . $boucle->type_requete;
-}
-
 // http://doc.spip.org/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 {
@@ -437,12 +406,11 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 // fin de course pour unhappy-few.
 // http://doc.spip.org/@debug_dumpfile
 function debug_dumpfile ($texte, $fonc, $type, $corps='') {
-	global $debug_objets, $spip_lang_right;
-	$var_mode_objet = _request('var_mode_objet');
-	$var_mode_affiche = _request('var_mode_affiche');
+	global $debug_objets ;
 	include_spip('inc/autoriser');
 	if (autoriser('debug')) {
-
+		$var_mode_objet = _request('var_mode_objet');
+		$var_mode_affiche = _request('var_mode_affiche');
 		$debug_objets[$type][$fonc . 'tout'] = $texte;
 		if (!$debug_objets['sourcefile']) return;
 		if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
@@ -455,8 +423,9 @@ function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 		if (ob_get_length()) ob_end_clean();
 		$self = str_replace("\\'", '&#39;', self());
 		$self = parametre_url($self,'var_mode', 'debug');
+		$validation = ($var_mode_affiche == 'validation');
 		echo debug_debut($fonc, $corps);
-		if ($var_mode_affiche !== 'validation') {
+		if (!$validation) {
 			echo "<div id='spip-boucles'>\n"; 
 			debug_affiche_tables_des_boucles($self);
 			echo "</div>";
@@ -464,8 +433,8 @@ function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 		}
 		if ($texte) {
 			$err = "";
-			$titre = _request('var_mode_affiche');
-			if ($titre != 'validation') {
+			$titre = $var_mode_affiche;
+			if (!$validation) {
 			  $titre = 'zbug_' . $titre;
 			  $texte = ancre_texte($texte, array('',''));
 			} else {
@@ -512,9 +481,9 @@ function debug_affiche_tables_des_boucles($self)
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
 
-		if (isset($debug_objets['pretty']) AND is_array($debug_objets['pretty']))
+		if (isset($debug_objets['boucle']) AND is_array($debug_objets['boucle']))
 			echo "<table width='100%'>\n",
-				debug_affiche_boucles($debug_objets['pretty'], $nom_skel, $self),
+				debug_affiche_boucles($debug_objets['boucle'], $nom_skel, $self),
 				"</table>\n";
 		echo "</fieldset>\n";
 	  }
@@ -525,10 +494,11 @@ function debug_affiche_boucles($boucles, $nom_skel, $self)
 	$i = 0;
 	$res = '';
 	$var_mode_objet = _request('var_mode_objet');
-	foreach ($boucles as $objet => $pretty) {
+	foreach ($boucles as $objet => $boucle) {
 		if (substr($objet, 0, strlen($nom_skel)) == $nom_skel) {
 			$i++;
-			list($nom, $req)  = explode(' ', $pretty, 2);
+			$nom = $boucle->id_boucle;
+			$req = $boucle->type_requete;
 			$self2 = $self .  "&amp;var_mode_objet=" .  $objet;
 
 			$res .= "\n<tr style='background-color: " .
@@ -567,9 +537,10 @@ function debug_affiche($fonc, $tout)
 	$affiche = _request('var_mode_affiche');
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
 	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return '';
+	$nom = $tout['boucle'][$objet]->id_boucle;
 
 	if ($affiche == 'resultat') {
-		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
+		$res .= "<legend>" .$nom ."</legend>";
 		$req = $tout['requete'][$objet];
 		if (function_exists('traite_query')) {
 		  $c = _request('connect');
@@ -605,11 +576,11 @@ function debug_affiche($fonc, $tout)
 		}
 
 	} else if ($affiche == 'code') {
-		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
+		$res .=  "<legend>" .$nom ."</legend>";
 		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
-	  $res .=  "<legend>" . _T('boucle') . ' ' . $tout['pretty'][$objet] ."</legend>";
-		$res .= ancre_texte($quoi);
+		$res .=  "<legend>" . _T('boucle') . ' ' .  $nom ."</legend>"
+		. ancre_texte(decompiler_boucle($quoi));
 	} else if ($affiche == 'squelette') {
 		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";
 		$res .= ancre_texte($tout['squelette'][$objet]);
