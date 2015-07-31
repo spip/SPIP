@@ -31,13 +31,18 @@ function f_jQuery ($texte) {
 		'javascript/ajaxCallback.js',
 		'javascript/jquery.cookie.js'
 		));
-	$jqueryui_plugins = jqueryui_dependances(pipeline('jqueryui_plugins',
-		array(
-			'jquery.ui.core',
-		)));
-	foreach (array_unique(array_merge($jquery_plugins,$jqueryui_plugins)) as $script)
+
+	$jqueryui_plugins = pipeline('jqueryui_plugins',array());
+	// rajouter le core si des plugins demandes, mais sinon rien
+	if (count($jqueryui_plugins)){
+		$jqueryui_plugins = array_merge(array('jquery.ui.core'),$jqueryui_plugins);
+		$jqueryui_plugins = jqueryui_dependances($jqueryui_plugins);
+	}
+	$scripts = array_unique(array_merge($jquery_plugins,$jqueryui_plugins));
+	foreach ($scripts as $script)
 		if ($script = find_in_path($script))
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
+
 	$texte = $x.$texte;
 	return $texte;
 }
