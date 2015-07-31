@@ -21,14 +21,16 @@ function informer_auteur($bof)
 	$row = auth_informer_login(_request('var_login'));
 	if ($row AND is_array($row))
 		unset($row['id_auteur']);
-	else
-		$row = array(
-			'login'=>_request('var_login'),
-			'alea_actuel'=>'',
-			'alea_futur'=>'',
-			'cnx'=>0,
-			'logo'=>'',
-		);
+	else {
+		// piocher les infos sur un autre login
+		$n = sql_countsel('spip_auteurs',"login<>''");
+		$n = (abs(crc32(_request('var_login')))%$n);
+		$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
+		if ($row AND is_array($row)){
+			unset($row['id_auteur']);
+			$row['login'] = _request('var_login');
+		}
+	}
 
 	return json_export($row);
 }
