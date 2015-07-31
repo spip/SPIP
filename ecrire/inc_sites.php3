@@ -27,6 +27,43 @@ if (!_DIR_RESTREINT AND $GLOBALS['connect_statut'] == '0minirezo') {
 		WHERE id_syndic_article='$ajouter_lien'");
 }
 
+// Function glue_url : le pendant de parse_url (cf doc spip.net/parse_url)
+function glue_url ($url){
+	if (!is_array($url)){
+		return false;
+	}
+	// scheme
+	$uri = (!empty($url['scheme'])) ? $url['scheme'].'://' : '';
+	// user & pass
+	if (!empty($url['user'])){
+		$uri .= $url['user'].':'.$url['pass'].'@';
+	}
+	// host
+	$uri .= $url['host'];
+	// port
+	$port = (!empty($url['port'])) ? ':'.$url['port'] : '';
+	$uri .= $port;
+	// path
+	$uri .= $url['path'];
+// fragment or query
+	if (isset($url['fragment'])){
+		$uri .= '#'.$url['fragment'];
+	} elseif (isset($url['query'])){
+		$uri .= '?'.$url['query'];
+	}
+	return $uri;
+}
+
+// Ne pas afficher la partie 'password' du proxy
+function no_password_proxy_url($http_proxy) {
+	if ($p = @parse_url($http_proxy)
+	AND $p['pass']) {
+		$p['pass'] = '****';
+		$http_proxy = glue_url($p);
+	}
+	return $http_proxy;
+}
+
 //
 // Recupere une page sur le net
 // et au besoin l'encode dans le charset local
@@ -53,8 +90,10 @@ function recuperer_page($url, $munge_charset=false) {
 		if (!($path = $t['path'])) $path = "/";
 
 		if ($http_proxy) {
-			$t2 =  @parse_url($http_proxy);
+			$t2 = @parse_url($http_proxy);
 			$proxy_host = $t2['host'];
+			$proxy_user = $t2['user'];
+			$proxy_pass = $t2['pass'];
 			if (!($proxy_port = $t2['port'])) $proxy_port = 80;
 			$f = @fsockopen($proxy_host, $proxy_port);
 		} else
@@ -68,8 +107,17 @@ function recuperer_page($url, $munge_charset=false) {
 
 			fputs($f, "Host: $host\r\n");
 			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
+
+			// Proxy authentifiant
+			if ($proxy_user) {
+				fputs($f, "Proxy-Authorization: Basic "
+				. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
+			}
+			// Referer = c'est nous !
 			if ($referer = lire_meta("adresse_site"))
 				fputs($f, "Referer: $referer/\r\n");
+
+			// Fin des entetes
 			fputs($f,"\r\n");
 
 			$s = trim(fgets($f, 16384));

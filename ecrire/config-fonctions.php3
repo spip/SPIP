@@ -382,8 +382,12 @@ if ($options == 'avancees') {
 
 
 debut_cadre_trait_couleur("base-24.gif", false, "", _T('info_sites_proxy').aide ("confhttpproxy"));
-	$http_proxy=entites_html(lire_meta("http_proxy"));
 
+	// Masquer un eventuel password authentifiant
+	if ($http_proxy = lire_meta("http_proxy")) {
+		include_ecrire ("inc_sites.php3");
+		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
+	}
 
 	echo "<div class='verdana2'>";
 	echo _T('texte_proxy');
