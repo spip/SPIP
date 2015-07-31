@@ -152,7 +152,13 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$depart_associable = objet_associable($table);
 		foreach ($joints as $table_liee => $ids_trouves) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
-			if (!$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}","inc",true)){
+			if (
+				!(
+					$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}","inc",true)
+					or $rechercher_joints = charger_fonction("rechercher_joints_objet_${table_liee}","inc",true)
+					or $rechercher_joints = charger_fonction("rechercher_joints_${table}_objet_lie","inc",true)
+				)
+			){
 				$cle_arrivee =  id_table_objet($table_liee);
 				$table_arrivee = table_objet($table_liee,$serveur);
 				$desc_arrivee = $trouver_table($table_arrivee,$serveur);
