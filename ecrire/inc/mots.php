@@ -33,14 +33,17 @@ function reduire_mot($mot) {
 
 // http://doc.spip.org/@mots_ressemblants
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
+
+	$result = array();
+
+	if (!$table_mots) return $result;
+
 	$lim = 2;
 	$nb = 0;
 	$opt = 1000000;
 	$mot_opt = '';
 	$mot = reduire_mot($mot);
 	$len = strlen($mot);
-
-	if (!$table_mots) return '';
 
 	while (!$nb AND $lim < 10) {
 		reset($table_mots);
@@ -78,7 +81,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 		$lim += 2;
 	}
 
-	if (!$nb) return '';
+	if (!$nb) return $result;
 	reset($selection);
 	if ($opt > -1) {
 		$moy = 1;
@@ -108,7 +111,6 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
 	$visible = ($cherche_mot OR ($flag_editable === 'ajax'));
-#	spip_log("fm '$cherche_mot' '$flag_editable' '$visible' '$select_groupe'");
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';
@@ -131,7 +133,10 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 		$table = 'syndic';
 		$url_base = "sites";
 	}
-	else {$table =	$table_id = $objet = $url_base = '';}
+	else {
+		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable)");
+		return '';
+	}
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
@@ -304,8 +309,11 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+
 			$type_mot = typo($row_groupe['titre']);
-			$flag_groupe = $flag_editable AND (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
+			$flag_groupe = ($flag_editable AND
+					((($connect_statut === '1comite') AND $row_groupe['comite'] === 'oui') OR (($connect_statut === '0minirezo') AND $row_groupe['minirezo'] === 'oui')));
+
 			// Changer
 			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
