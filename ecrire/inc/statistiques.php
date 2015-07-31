@@ -235,7 +235,7 @@ function aff_referers ($result, $limit, $plus) {
 		if ($aff) $aff = "<ul class='referers'>$aff</ul>";
 
 		// Le lien pour en afficher "plus"
-		if ($plus AND (spip_num_rows($result) == $limit)) {
+		if ($plus AND (sql_count($result) == $limit)) {
 			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 		}
 	}

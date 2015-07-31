@@ -27,7 +27,7 @@ function exec_auteurs_dist()
 	$recherche = _request('recherche');
 
 	$result = requete_auteurs($tri, $statut, $recherche);
-	$nombre_auteurs = spip_num_rows($result);
+	$nombre_auteurs = sql_count($result);
 
 	$debut = intval(_request('debut'));
 	if ($debut > $nombre_auteurs-1)

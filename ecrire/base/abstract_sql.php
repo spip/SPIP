@@ -256,12 +256,6 @@ function sql_listdbs($serveur='') {
 	return $f($serveur);
 }
 
-// http://doc.spip.org/@spip_num_rows
-function spip_num_rows($r) {
-	return sql_count($r);
-}
-
-
 // http://doc.spip.org/@sql_version
 function sql_version($serveur='') {
 	$row = sql_fetch(spip_query("SELECT version() AS n", $serveur), $serveur);

@@ -221,7 +221,7 @@ function maj_v014_dist($version_installee, $version_cible)
 		while ($row = sql_fetch($result)) {
 			$type = addslashes($row['type']);
 			$res = spip_query("SELECT * FROM spip_groupes_mots WHERE titre='$type'");
-			if (spip_num_rows($res) == 0) {
+			if (sql_count($res) == 0) {
 				$s = spip_query("INSERT INTO spip_groupes_mots (titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum) VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 			  if ($id_groupe = mysql_insert_id($s))
 					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");

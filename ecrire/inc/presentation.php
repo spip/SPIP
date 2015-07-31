@@ -579,7 +579,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	static $thread = array();
 
 	$compteur_forum++;
-	$nb_forum[$compteur_forum] = spip_num_rows($request);
+	$nb_forum[$compteur_forum] = sql_count($request);
 	$thread[$compteur_forum] = 1;
 	
 	$res = '';
@@ -1531,7 +1531,7 @@ function sous_enfant_rub($collection2){
 
 	$result3 =  sql_select("*", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
-	if (!spip_num_rows($result3)) return '';
+	if (!sql_count($result3)) return '';
 	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 	while($row=sql_fetch($result3)){
 		$id_rubrique2=$row['id_rubrique'];

@@ -69,7 +69,7 @@ jQuery(function(){
 
 	if ($special == "redac") {
 		$result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien USING (id_article) WHERE articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
-		if (spip_num_rows($result)>0) {
+		if (sql_count($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
 			echo "\n<div class='plan-articles'>";
 			while($row=sql_fetch($result)){
@@ -86,7 +86,7 @@ jQuery(function(){
 	}
 	else if ($special == "valider") {
 		$result=spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut = 'prop' ORDER BY date DESC");
-		if (spip_num_rows($result)>0) {
+		if (sql_count($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "\n<div class='plan-articles'>";
 			while($row=sql_fetch($result)){
@@ -101,7 +101,7 @@ jQuery(function(){
 		}
 	
 		$result=spip_query("SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20");
-		if (spip_num_rows($result)>0) {
+		if (sql_count($result)>0) {
 			echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
 			echo "\n<div class='plan-articles'>";
 			while($row=sql_fetch($result)){
@@ -174,7 +174,7 @@ jQuery(function(){
 			else 
 				$result = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
 
-			if (spip_num_rows($result)>0) {
+			if (sql_count($result)>0) {
 				echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
 				echo "\n<div class='plan-articles'>";
 				while($row=sql_fetch($result)){
@@ -189,7 +189,7 @@ jQuery(function(){
 			}
 	
 			$result=spip_query("SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20");
-			if (spip_num_rows($result)>0) {
+			if (sql_count($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
 				echo "\n<div class='plan-articles'>";
 				while($row=sql_fetch($result)){
@@ -206,7 +206,7 @@ jQuery(function(){
 			}
 	
 			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut!='refuse' ORDER BY nom_site");
-			if (spip_num_rows($result)>0) {
+			if (sql_count($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
 				while($row=sql_fetch($result)){
 					$id_syndic=$row['id_syndic'];

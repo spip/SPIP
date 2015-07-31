@@ -142,7 +142,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
 	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
-	if (spip_num_rows($s) > 1) {
+	if (sql_count($s) > 1) {
 		while ($a = sql_fetch($s))
 			if ($a['titre'] == $data['titre']
 			AND !in_array($a['id_syndic_article'], $faits)) {

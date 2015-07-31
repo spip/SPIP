@@ -42,7 +42,7 @@ function exec_iconifier_dist()
 		$row = sql_fetch(spip_query("SELECT id_rubrique, statut FROM spip_$table WHERE $type=$id"));
 		$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
 		if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle'))
-			$droit = spip_num_rows(determiner_auteurs_objet('article',$id, "id_auteur=$connect_id_auteur"));
+			$droit = sql_count(determiner_auteurs_objet('article',$id, "id_auteur=$connect_id_auteur"));
 	}
 
 	if (!$droit) {

@@ -101,7 +101,7 @@ echo "<div style='text-align: "
 
  $result = sql_select('auteurs.id_auteur, auteurs.nom, COUNT(*) AS total', 'spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien', "(lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > NOW() )) AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur)", "auteurs.id_auteur", 'total DESC', 10);
 
-if (spip_num_rows($result) > 0) {
+if (sql_count($result) > 0) {
 
 	echo "<div style='height: 12px;'></div>";
 	$bouton = bouton_block_depliable(_T('info_principaux_correspondants'),true,'principaux');
@@ -118,7 +118,7 @@ if (spip_num_rows($result) > 0) {
 		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
 		  $nom,
 		  "</a> ($total)</div></div>";
-		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' style='width: 50%'>";
+		if ($count == ceil(sql_count($result)/2)) echo "</td><td valign='top' style='width: 50%'>";
 	}
 	echo "</td></tr></table>";
 	echo fin_block();

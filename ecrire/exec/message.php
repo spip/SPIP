@@ -113,13 +113,13 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 {	
 	$result = auteurs_autorises((!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND  ") . "messagerie<>'non'",  "statut, nom");
 
-	if (!spip_num_rows($result) > 0) return '';
+	if (!sql_count($result) > 0) return '';
 
 	$res = "<span class='verdana1 spip_small'><b><label for='id_message'>" .
 	  _T('bouton_ajouter_participant') ."</label> &nbsp; </b></span>\n" .
 	  "<input type='hidden' name='id_message' id='id_message' value=\"$id_message\" />";
 
-	if (spip_num_rows($result) > 50) {
+	if (sql_count($result) > 50) {
 		$res .=  "\n<input type='text' name='cherche_auteur' id='cherche_auteur' class='fondl' value='' size='20' />";
 		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
 	} else {
@@ -165,7 +165,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 
 	$result_auteurs = spip_query("SELECT auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang, auteurs.extra FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
-	$total_dest = spip_num_rows($result_auteurs);
+	$total_dest = sql_count($result_auteurs);
 
 	if ($total_dest > 0) {
 		$auteurs_tmp = array();
