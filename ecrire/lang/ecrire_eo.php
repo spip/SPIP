@@ -175,7 +175,7 @@ Tamen vi povas malŝalti ĝin.',
 
 	// H
 	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
-	'htaccess_inoperant' => 'htaccess inopérant', # NEW
+	'htaccess_inoperant' => 'senefika htaccess',
 
 	// I
 	'ical_info1' => 'Tiu paĝo prezentas plurajn metodojn por daŭre ricevi informojn pri la vivo de tiu retejo.',
@@ -579,7 +579,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'info_webmestre_forces' => 'La retejestroj nune estas difinita en <tt>@file_options@</tt>.',
 	'install_adresse_base_hebergeur' => 'Adreso de la datenbazo atribuita de la retejgastiganto',
 	'install_base_ok' => 'La datumbazo @base@ estis rekonita',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+	'install_connect_ok' => '﻿﻿﻿﻿La nova bazo estis bone deklarita kiel servilonomo @connect@.',
 	'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, aŭ naskos ne funkciivan retejon...',
 	'install_extension_mbstring' => 'SPIP ne funkcias per :',
 	'install_extension_php_obligatoire' => 'SPIP postulas la php-kromprogramon :',
@@ -642,7 +642,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas ties publikig-dato.',
 	'item_reponse_article' => 'Respondo al la artikolo',
 	'item_utiliser_moteur_recherche' => 'Uzi la serĉilon',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+	'item_version_html_max_html4' => 'Limiĝi al HTML4 en publika spaco',
 	'item_version_html_max_html5' => 'Permesi HTML5',
 	'item_visiteur' => 'vizitanto',
 
@@ -654,11 +654,11 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'label_bando_outils_afficher' => 'Afiŝi la ilojn',
 	'label_bando_outils_masquer' => 'Kaŝi la ilojn',
 	'label_choix_langue' => 'Elektu vian lingvon',
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+	'label_nom_fichier_connect' => 'Indiku la nomon uzita por tiu servilo',
 	'label_slogan_site' => 'Devizo de la retejo',
 	'label_taille_ecran' => 'Larĝo de la ekrano',
 	'label_texte_et_icones_navigation' => 'Naviga menuo',
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
+	'label_texte_et_icones_page' => 'Afiŝado en paĝo',
 	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
 	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
 	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -669,9 +669,9 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'lien_email' => 'retpoŝtadreso',
 	'lien_nom_site' => 'NOMO DE LA RETEJO:',
 	'lien_retirer_auteur' => 'Forviŝi la aŭtoron',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_rubrique' => 'Forviŝi la rubrikon',
+	'lien_retirer_tous_auteurs' => 'Forviŝi ĉiujn aŭtorojn',
+	'lien_retirer_toutes_rubriques' => 'Forviŝi ĉiujn rubrikojn',
 	'lien_retrait_particpant' => 'Forviŝi tiun ĉi partoprenanton',
 	'lien_site' => 'retejo',
 	'lien_supprimer_rubrique' => 'forviŝi tiun ĉi rubrikon',
@@ -716,7 +716,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'page_pas_proxy' => 'Tiu ĉi paĝo ne ŝutiĝu tra la prokura servilo',
 	'pas_de_proxy_pour' => 'Laŭbezone, indiku komputilojn aŭ domajnojn por kiuj tiu prokurservilo ne devas aplikiĝi (ekzemple : @exemple@)',
 	'plugin_charge_paquet' => 'Ŝargado de la pakaĵo @name@',
-	'plugin_charger' => 'Télécharger', # NEW
+	'plugin_charger' => 'Elŝuti',
 	'plugin_erreur_charger' => 'eraro : ne eblas ŝargi @zip@',
 	'plugin_erreur_droit1' => 'La dosierujo <code>@dest@</code> ne estas skribe alirebla.',
 	'plugin_erreur_droit2' => 'Bonvolu kontroli la rajtojn pri tiu ĉi dosierujo (kaj krei ĝin laŭkaze), aŭ instali la dosierojn per FTP.',
@@ -739,18 +739,18 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_automatique_liste_update' => 'Ĝisdatigi la listojn',
 	'plugin_info_automatique_ou' => 'aŭ...',
 	'plugin_info_automatique_select' => 'Elektu ĉi-sube kromprogramon : SPIP elŝutos ĝin kaj instalos ĝin en la dosierujo <code>@rep@</code> ; se tiu ĉi kromprogramo jam ekzistas, ĝi estos ĝisdatigita.',
-	'plugin_info_credit' => 'Crédits', # NEW
+	'plugin_info_credit' => 'Kreditoj',
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_necessite' => 'Necesas:',
+	'plugin_info_non_compatible_spip' => 'Tiu ĉi kromprogramo ne estas kongrua kun tiu SPIP-versio',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
 	'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 	'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
 	'plugin_necessite_plugin' => 'Postulas la kromprogramon @plugin@ minimume laŭ versio @version@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Necesas la kromprogramon @plugin@',
 	'plugin_necessite_spip' => 'Necesas SPIP laŭ minimume versio @version@.',
 	'plugin_source' => 'fonto: ',
 	'plugin_titre_automatique' => 'Aŭtomata instalo',
@@ -765,24 +765,24 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a été décompacté et installé dans le répertoire @rep@', # NEW
 	'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
 	'plugin_zip_telecharge' => 'Le fichier @zip@ a été téléchargé', # NEW
-	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-	'plugins_actif_un' => 'Un plugin activé.', # NEW
-	'plugins_actifs' => '@count@ plugins activés.', # NEW
+	'plugins_actif_aucun' => 'Neniu aktivata kromprogramo.',
+	'plugins_actif_un' => 'Unu aktivata kromprogramo.',
+	'plugins_actifs' => '@count@ aktivataj kromprogramoj.',
 	'plugins_actifs_liste' => 'Aktivaj',
-	'plugins_compte' => '@count@ plugins', # NEW
-	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
-	'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
-	'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
+	'plugins_compte' => '@count@ kromprogramoj',
+	'plugins_disponible_un' => 'Unu disponebla kromprogramo.',
+	'plugins_disponibles' => '@count@ disponeblaj kromprogramoj.',
+	'plugins_erreur' => 'Eraro en la kromprogramoj : @plugins@',
 	'plugins_liste' => 'Listo de kromprogramoj',
-	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
+	'plugins_liste_dist' => 'Ŝlositaj kromprogramoj',
+	'plugins_recents' => 'Freŝaj kromprogramoj.',
 	'plugins_tous_liste' => 'Ĉiuj',
-	'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
+	'plugins_vue_hierarchie' => 'Hierarkio',
 	'plugins_vue_liste' => 'Listo',
 	'protocole_ldap' => 'Protokolversio :',
 
 	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_executer_maintenant' => 'Lanĉi nun',
 	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
