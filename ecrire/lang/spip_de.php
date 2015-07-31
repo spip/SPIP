@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'In [[Fussnote]] umwandeln',
 'barre_paragraphe' => 'Neuen Absatz anlegen',
 'barre_quote' => '<quote>Nachricht zitieren</quote>',
-'bouton_ajouter_document' => '<MODIF>DOKUMENT HINZUF&Uuml;GEN',
-'bouton_ajouter_image' => '<MODIF>BILD HINZUF&Uuml;GEN',
+'bouton_ajouter_document' => 'Dokument hinzuf&uuml;gen',
+'bouton_ajouter_image' => 'Bild hinzuf&uuml;gen',
 'bouton_changer' => '&Auml;ndern',
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Ausw&auml;hlen',
@@ -202,7 +202,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'double_occurrence' => 'Dublette',
 
 // E
-'en_cours' => '<NEW>en cours',
+'en_cours' => 'l&auml;uft',
 'entree_dimensions' => 'Gr&ouml;ssenangaben:',
 'entree_titre_document' => 'Titel des Dokuments:',
 'entree_titre_image' => 'Titel des Bilds:',
@@ -210,7 +210,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
 'erreur_texte' => 'Fehler',
-'etape' => '<NEW>&Eacute;tape',
+'etape' => 'Schritt',
 
 // F
 'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
@@ -672,7 +672,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
  Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder
  in den Artikeln angezeigt werden.',
 'texte_erreur_visiteur' => 'Sie haben versucht, sich mit einer Identit&auml;t einzuloggen, die dazu nicht berechtigt.',
-'texte_inc_auth_1' => '<MODIF>Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
+'texte_inc_auth_1' => 'Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
  Versuchen Sie,',
 'texte_inc_auth_2' => 'sich erneut anzumelden',
 'texte_inc_auth_3' => ', nachdem Sie u.U. Ihren Webbrowser neu gestartet haben.',
@@ -708,7 +708,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_signatures_confirmees' => 'Best&auml;tigte Unterschriften',
 'titre_statistiques' => 'Statistiken',
 'titre_titre_document' => 'Titel des Dokuments:',
-'todo' => '<NEW>&agrave; venir',
+'todo' => 'demn&auml;chst',
 'trad_reference' => '(Referenzartikel)',
 
 // Z
