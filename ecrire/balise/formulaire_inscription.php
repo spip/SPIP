@@ -157,7 +157,8 @@ function inscription_nouveau($declaration)
 
 // http://doc.spip.org/@envoyer_inscription_dist
 function envoyer_inscription_dist($ids, $nom, $mode, $id) {
-	include_spip('inc/mail');
+
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
@@ -172,7 +173,8 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
 	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
 
-	if (envoyer_mail($ids['email'],
+
+	if ($envoyer_mail($ids['email'],
 			 "[$nom_site_spip] "._T('form_forum_identifiants'),
 			 $message))
 		return false;

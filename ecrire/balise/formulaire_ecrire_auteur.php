@@ -83,8 +83,8 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	AND $id == _request('num_formulaire_ecrire_auteur')
 	AND _request('confirmer'.$id)) { 
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
-		include_spip('inc/mail');
-		envoyer_mail($mail, $sujet, $texte, $adres,
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+		$envoyer_mail($mail, $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['ip']);
 		$mailenvoye = _T('form_prop_message_envoye');
 	}

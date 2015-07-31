@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/mail');
 include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_config_contenu_dist

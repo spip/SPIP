@@ -19,11 +19,6 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 }
 
 
-// http://doc.spip.org/@nettoyer_titre_email
-function nettoyer_titre_email($titre) {
-	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
-}
-
 
 //
 // Mail des nouveautes

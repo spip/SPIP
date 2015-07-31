@@ -39,7 +39,6 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	}
 
 	include_spip('inc/texte');
-	include_spip('inc/mail');
 
 	if ($options['statut'] == 'publie')
 		notifier_publication_article($id_article);
@@ -53,8 +52,9 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 function extrait_article($row) {
 	include_spip('inc/texte');
 	
-	$id_article = $row['id_article'];
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$titre = nettoyer_titre_email($row['titre']);
+	$id_article = $row['id_article'];
 	$chapo = $row['chapo'];
 	$texte = $row['texte'];
 	$date = $row['date'];
@@ -78,6 +78,8 @@ function extrait_article($row) {
 
 // http://doc.spip.org/@notifier_publication_article
 function notifier_publication_article($id_article) {
+
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
@@ -105,7 +107,7 @@ function notifier_publication_article($id_article) {
 				. extrait_article($row)
 				. "-> " . $url
 				. "\n";
-			envoyer_mail($adresse_suivi, $sujet, $courr);
+			$envoyer_mail($adresse_suivi, $sujet, $courr);
 
 			if ($l) lang_select();
 		}
@@ -114,6 +116,7 @@ function notifier_publication_article($id_article) {
 
 // http://doc.spip.org/@notifier_proposition_article
 function notifier_proposition_article($id_article) {
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
@@ -127,7 +130,7 @@ function notifier_proposition_article($id_article) {
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_propose_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			envoyer_mail($adresse_suivi,
+			$envoyer_mail($adresse_suivi,
 				$sujet,
 				_T('info_propose_2')
 				."\n\n" 
@@ -243,7 +246,6 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
-	include_spip('inc/mail');
 	include_spip('inc/autoriser');
 
 
@@ -281,9 +283,10 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	//
 	// Envoyer les emails
 	//
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	foreach (array_keys($destinataires) as $email) {
 		$msg = email_notification_forum($t, $email);
-		envoyer_mail($email, $msg['subject'], $msg['body']);
+		$envoyer_mail($email, $msg['subject'], $msg['body']);
 	}
 }
 
@@ -296,7 +299,6 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
-	include_spip('inc/mail');
 	include_spip('inc/autoriser');
 
 
@@ -328,9 +330,10 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	//
 	// Envoyer les emails
 	//
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	foreach (array_keys($destinataires) as $email) {
 		$msg = email_notification_forum($t, $email);
-		envoyer_mail($email, $msg['subject'], $msg['body']);
+		$envoyer_mail($email, $msg['subject'], $msg['body']);
 	}
 
 	// Notifier les autres si le forum est valide
