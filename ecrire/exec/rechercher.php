@@ -29,6 +29,7 @@ function exec_rechercher_dist()
 	ajax_retour($r);
 }
 
+// http://doc.spip.org/@exec_rechercher_args
 function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 {
 	if (!$do) $do = 'aff';
