@@ -78,8 +78,11 @@ if(!jQuery.spip.load_handlers) {
 	jQuery.ajax = function(type) {
 		var s = jQuery.extend(true, {}, jQuery.ajaxSettings, type);
 		var callbackContext = s.context || s;
-		if (jQuery.ajax.caller==jQuery.spip.intercepted.load || jQuery.ajax.caller==jQuery.spip.intercepted.ajaxSubmit)
-			return jQuery.spip.intercepted.ajax(type);
+		try {
+			if (jQuery.ajax.caller==jQuery.spip.intercepted.load || jQuery.ajax.caller==jQuery.spip.intercepted.ajaxSubmit)
+				return jQuery.spip.intercepted.ajax(type);
+		}
+		catch (err){}
 		var orig_complete = s.complete || function() {};
 		type.complete = function(res,status) {
 			// Do not fire OnAjaxLoad if the dataType is not html
