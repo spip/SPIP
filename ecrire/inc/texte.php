@@ -1094,7 +1094,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 // deuxieme argument : forcer les <p> meme pour un seul paragraphe
 //
 // http://doc.spip.org/@paragrapher
-function paragrapher($letexte, $forcer=true) {
+function paragrapher($letexte, $forcer=false) {
 	$letexte = trim($letexte);
 	if (!strlen($letexte))
 		return '';
