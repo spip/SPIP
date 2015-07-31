@@ -119,6 +119,7 @@ define ('__regexp_echappe',
 		. ")|("
 		. "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>" #poesie
 		. ")/si");
+define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
 
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	if (preg_match_all(__regexp_echappe, $letexte, $matches, PREG_SET_ORDER))
@@ -183,7 +184,6 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 
 	// Traitement des images et documents <IMGxx|right>
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
 	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $match) {
 			$num_echap++;
