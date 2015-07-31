@@ -766,7 +766,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			$show = $trouver_table($type, $boucles[$id]->sql_serveur);
 			if ($show) {
 				$boucles[$id]->show = $show;
-				// recopie des 2 infos les plus importantes
+				// recopie les infos les plus importantes
 				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->id_table = $x = $show['id_table'];
 				$boucles[$id]->from[$x] = $nom_table = $show['table'];
