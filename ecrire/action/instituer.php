@@ -143,4 +143,36 @@ function instituer_breve($arg) {
 		calculer_rubriques();
 	}
 }
+
+
+function instituer_langue($arg)
+{
+	$changer_lang = _request('changer_lang');
+	list($id_rubrique, $id_parent) = split(' ', $arg);
+
+	if ($changer_lang
+	AND $id_rubrique>0
+	AND $GLOBALS['meta']['multi_rubriques'] == 'oui'
+	AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0)) {
+		if ($changer_lang != "herit")
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
+		else {
+			if ($id_parent == 0)
+				$langue_parent = $GLOBALS['meta']['langue_site'];
+			else {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+				$langue_parent = $row['lang'];
+			}
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+		}
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+		calculer_langues_rubriques();
+
+		// invalider les caches marques de cette rubrique
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_rubrique/$id_rubrique'");
+	}
+}
+
 ?>

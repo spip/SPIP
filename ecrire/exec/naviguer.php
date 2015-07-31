@@ -24,7 +24,7 @@ charger_generer_url();
 
 function exec_naviguer_dist()
 {
-  global $action, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
+	global $new, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
@@ -32,37 +32,28 @@ function exec_naviguer_dist()
 	$id_rubrique = intval($id_rubrique);
 	$id_parent = intval($id_parent);
 	if ($id_parent == $id_rubrique && $id_parent) exit;
-	if ($flag_editable AND $action) {
-		$fonc = 'enregistre_' . $action . '_naviguer';
-		if (function_exists($fonc)) {
-			$res = $fonc(
-				$id_rubrique,
-				$id_parent,
-				$titre,
-				$texte,
-				$descriptif,
-				$changer_lang
-			);
+	if ($flag_editable AND $new) {
+		if ($new == 'oui')
+			$id_rubrique = enregistre_creer_naviguer($id_parent);
+		enregistre_modifier_naviguer($id_rubrique,
+					     $id_parent,
+					     $titre,
+					     $texte,
+					     $descriptif,
+					     $changer_lang
+					     );
 
-			// Suite a une creation, rediriger vers l'objet cree
-			if (is_int($res) AND $id_rubrique != $res) {
-				$id_rubrique = $res;
-				$redirect = generer_url_ecrire('naviguer',
-					'id_rubrique='.$res, true);
-			} else
-				$redirect = '';
-
-			// toute action entraine ceci:
-			calculer_rubriques();
-			calculer_langues_rubriques();
+		calculer_rubriques();
+		calculer_langues_rubriques();
 
 			// invalider les caches marques de cette rubrique
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='id_rubrique/$id_rubrique'");
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_rubrique/$id_rubrique'");
 
-			if ($redirect)
-				redirige_par_entete($redirect);
-		}
+		// pour avoir id_rubrique dans l'URL
+		if ($new == 'oui') {
+			redirige_par_entete(generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique, true));
+		} 
 	}
 
 //
@@ -258,8 +249,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent,
-		parametre_url(self(),'action','coloniser'));
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, generer_action_auteur('instituer', "langue $id_rubrique $id_parent", generer_url_ecrire("naviguer","id_rubrique=$id_rubrique", true)), $ze_logo, "supprimer.gif");
 	echo "</div>\n";
 	echo fin_block();
 
@@ -444,24 +434,19 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 }
 
 function tester_rubrique_vide($id_rubrique) {
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1"));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1"));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query("SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1"));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1"));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 1"));
 	if ($n > 0) return false;
 
 	return true;
@@ -469,49 +454,20 @@ function tester_rubrique_vide($id_rubrique) {
 
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
-  if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
+	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 
-	echo "<p><div align='center'>";
-	icone(_T('icone_supprimer_rubrique'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent"), $ze_logo, "supprimer.gif");
-	echo "</div><p>";
- }
+		echo "<p><div align='center'>";
+		icone(_T('icone_supprimer_rubrique'), generer_action_auteur('supprimer', "rubrique $id_rubrique", generer_url_ecrire("naviguer","id_rubrique=$id_parent", true)), $ze_logo, "supprimer.gif");
+		echo "</div><p>";
+	}
 }
 
 
-function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
+function enregistre_creer_naviguer($id_parent)
 {
-	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	return $id_parent;;
-}
-
-function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
-{
-	if ($changer_lang
-	AND $id_rubrique>0
-	AND $GLOBALS['meta']['multi_rubriques'] == 'oui'
-	AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0)) {
-		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
-		else {
-			if ($id_parent == 0)
-				$langue_parent = $GLOBALS['meta']['langue_site'];
-			else {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-				$langue_parent = $row['lang'];
-			}
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
-		  }
-		}
-	return false;
-}
-
-function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
-{
-	$id_rubrique = spip_abstract_insert("spip_rubriques", 
-		"(titre, id_parent)",
-		"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
-
-	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang);
+	return spip_abstract_insert("spip_rubriques", 
+			"(titre, id_parent)",
+			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 }
 
 function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
@@ -521,9 +477,7 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 	// breves en question
 	if ($GLOBALS['confirme_deplace'] == 'oui'
 	AND $id_parent > 0) {
-		list($id_secteur) = spip_fetch_array(spip_query(
-			"SELECT id_secteur FROM spip_rubriques
-			WHERE id_rubrique=$id_parent"));
+		list($id_secteur) = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		if ($id_secteur)
 			spip_query("UPDATE spip_breves
 				SET id_rubrique=$id_secteur
@@ -547,7 +501,6 @@ WHERE id_rubrique=$id_rubrique");
 			marquer_indexer('rubrique', $id_rubrique);
 	}
 	propager_les_secteurs();
-	return $id_rubrique;
 }
 
 ?>
