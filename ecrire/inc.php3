@@ -329,51 +329,51 @@ function calculer_secteurs() {
 }
 
 
-function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00") {
-	$query = "SELECT MAX(date_heure) as date_h FROM spip_breves WHERE id_rubrique = '$id_parent' GROUP BY id_rubrique";
-	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
-		$date_breves = $row['date_h'];
-		if ($date_breves > $date_parent) $date_parent = $date_breves;
-	}
-	
-	$query = "SELECT MAX(date) AS date_h FROM spip_syndic WHERE id_rubrique = '$id_parent' GROUP BY id_rubrique";
-	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
-		$date_syndic = $row['date_h'];
-		if ($date_syndic > $date_parent) $date_parent = $date_syndic;
-	}
-	
-	
-	
-	if ($post_dates != "non") {
-		$query = "SELECT rubrique.id_rubrique,  MAX(articles.date) FROM spip_rubriques AS rubrique, spip_articles AS articles WHERE rubrique.id_parent='$id_parent' AND articles.id_rubrique=rubrique.id_rubrique AND articles.statut = 'publie' GROUP BY rubrique.id_rubrique";
-	}
-	else {
-		$query = "SELECT rubrique.id_rubrique,  MAX(articles.date) AS date_h FROM spip_rubriques AS rubrique, spip_articles AS articles WHERE rubrique.id_parent='$id_parent' AND articles.id_rubrique=rubrique.id_rubrique AND articles.statut = 'publie' AND articles.date < NOW() GROUP BY rubrique.id_rubrique";
-	}
-	$result = spip_query($query);
-	
-	while ($row = mysql_fetch_array($result)) {
-		$id_rubrique = $row['id_rubrique'];
-		$date_rubrique = $row['date_h'];
-		
-		$date_rubrique = calculer_dates_rubriques($id_rubrique,$date_rubrique);
-		
-		if ($date_rubrique > $date_parent) $date_parent = $date_rubrique;
+function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00") {
+	$date_rubrique = "0000-00-00";
+	if ($id_rubrique) {
+		$query = "SELECT MAX(date_heure) as date_h FROM spip_breves WHERE id_rubrique=$id_rubrique AND statut='publie'";
+		$result = spip_query($query);
+		while ($row = mysql_fetch_array($result)) {
+			$date_breves = $row['date_h'];
+			if ($date_breves > $date_rubrique) $date_rubrique = $date_breves;
+		}
+		$query = "SELECT MAX(date) AS date_h FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='publie'";
+		$result = spip_query($query);
+		while ($row = mysql_fetch_array($result)) {
+			$date_syndic = $row['date_h'];
+			if ($date_syndic > $date_rubrique) $date_rubrique = $date_syndic;
+		}
+		$post_dates = lire_meta("post_dates");
+		if ($post_dates != "non") {
+			$query = "SELECT MAX(date) AS date_h FROM spip_articles ".
+				"WHERE id_rubrique=$id_rubrique AND statut = 'publie'";
+		}
+		else {
+			$query = "SELECT MAX(date) AS date_h FROM spip_articles ".
+				"WHERE id_rubrique=$id_rubrique AND statut = 'publie' AND date < NOW()";
+		}
+		$result = spip_query($query);
+		while ($row = mysql_fetch_array($result)) {
+			$date_article = $row['date_h'];
+			if ($date_article > $date_rubrique) $date_rubrique = $date_article;
+		}
 	}
 
-
-	spip_query("UPDATE spip_rubriques SET date='$date_parent' WHERE id_rubrique='$id_parent'");
-
+	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_rubrique";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$date_rubrique = calculer_dates_rubriques($row['id_rubrique'], $date_rubrique);
+	}
+	if ($id_rubrique) {
+		spip_query("UPDATE spip_rubriques SET date='$date_rubrique' WHERE id_rubrique=$id_rubrique");
+	}
+	if ($date_rubrique > $date_parent) $date_parent = $date_rubrique;
 	return $date_parent;
-
-
 }
 
 
-function calculer_rubriques_publiques()
-{
+function calculer_rubriques_publiques() {
 	$post_dates = lire_meta("post_dates");
 
 	if ($post_dates != "non") {
