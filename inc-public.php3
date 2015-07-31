@@ -40,14 +40,7 @@ include ("ecrire/inc_version.php3");
 include_local ("inc-cache.php3");
 
 
-//
-// Presence du cookie de visiteur : valider ce cookie et extraire les donnees
-//
-if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
-	include_ecrire ("inc_session.php3");
-	if ($visiteur = verifie_cookie_session ($cookie))
-		$visiteur->authentifie = true;
-} else {
+/* else {
 	$visiteur = false;
 	if (ereg("^([0-9]+)@([^@]+)", $HTTP_COOKIE_VARS['spip_admin'], $regs)) {
 		// definir $visiteur a partir du cookie
@@ -60,7 +53,7 @@ if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
 			$visiteur->htpass = '';
 		}
 	}
-}
+}*/
 
 //
 // Ajouter un forum
@@ -87,18 +80,22 @@ $chemin_cache = "CACHE/".$fichier_cache;
 $use_cache = utiliser_cache($chemin_cache, $delais);
 
 
-if ($use_cache) {
-	if (file_exists("ecrire/inc_meta_cache.php3")) {
-		include_ecrire("inc_meta_cache.php3");
-	}
-	else {
-		include_ecrire("inc_connect.php3");
-		include_ecrire("inc_meta.php3");
-	}
+if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
+	include_ecrire("inc_meta_cache.php3");
 }
 else {
+	include_ecrire("inc_connect.php3");
+	include_ecrire("inc_meta.php3");
+}
+
+if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
+	include_ecrire ("inc_session.php3");
+	verifier_session($cookie);
+}
+
+
+if (!$use_cache) {
 	$lastmodified = time();
-	include_local ("ecrire/inc_meta.php3");
 	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
 		ecrire_meta('date_purge_cache', $lastmodified);
 		$f = fopen('CACHE/.purge', 'w');
@@ -301,10 +298,10 @@ function bouton($titre, $lien) {
 
 
 //
-// Fonctionnalites administrateur (declenchees par le cookie visiteur, authentifie ou non)
+// Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
 //
 
-if ((($HTTP_COOKIE_VARS['spip_admin'] == 'oui') OR ($visiteur->statut == '0minirezo') OR ($visiteur->statut == '1comite')) AND !$flag_preserver) {
+if (($HTTP_COOKIE_VARS['spip_admin'] == 'admin' OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
 	if ($id_article) {
 		bouton("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}

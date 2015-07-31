@@ -54,6 +54,8 @@ function auth() {
 	global $connect_activer_imessage, $connect_activer_messagerie;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
+	global $auteur_session;
+
 	//
 	// Si pas MySQL, fini
 	//
@@ -76,47 +78,44 @@ function auth() {
 	$auth_pass_ok = false;
 	$auth_can_disconnect = false;
 	$auth_htaccess = false;
-	if ($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"]) {
-		ask_php_auth($auth_text_failure);
-	}
-	else $auth_login = $REMOTE_USER;
 
 	//
 	// Recuperer les donnees d'identification
 	//
 
-	// cookie de session ?
-	if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
-		include_local ("inc_session.php3");
-		if ($visiteur = verifie_cookie_session ($cookie_session)) {
-			if ($visiteur->statut == '0minirezo' OR $visiteur->statut == '1comite') {
-				$session_login = $visiteur->login;
-			}
-		}
-	}
-	// demander cookie de session - sauf si authentification via .htaccess
-	if ((! $session_login) AND (! $auth_login)) {
-		@header ("Location: ./login.php3");
-		exit;
-	}
-
-	// si on a un cookie de session
-	if ($session_login) {
-		$auth_login = $session_login;
-		$auth_pass_ok = true;
-		$auth_can_disconnect = true;
-		if ($GLOBALS['logout'] == $auth_login) {
-			@header("Location: ../spip_cookie.php3?cookie_session=-1&redirect=./ecrire/login.php3");
-			exit;
-		}
-	} else
-
-	// un .htaccess
-	if ($auth_login) {
+	// Authentification .htaccess
+	if ($REMOTE_USER &&
+		!($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"])) {
+		$auth_login = $REMOTE_USER;
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}
-	else if (($GLOBALS['logout'] == $PHP_AUTH_USER) || !$PHP_AUTH_USER) {
+	// Authentification session
+	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
+		include_local ("inc_meta.php3");
+		include_local ("inc_session.php3");
+		if (verifier_session($cookie_session)) {
+			if ($auteur_session['statut'] == '0minirezo' OR $auteur_session['statut'] == '1comite') {
+				$auth_login = $auteur_session['login'];
+				$auth_pass_ok = true;
+				$auth_can_disconnect = true;
+				if ($GLOBALS['logout'] == $auth_login) {
+					@header("Location: ../spip_cookie.php3?cookie_session=non&redirect=".rawurlencode("./ecrire/login.php3"));
+					exit;
+				}
+			}
+		}
+	}
+
+	// Si pas authentifie, demander login / mdp
+	if (!$auth_login) {
+		@header("Location: ./login.php3");
+		exit;
+	}
+
+
+
+/*	else if (($GLOBALS['logout'] == $PHP_AUTH_USER) || !$PHP_AUTH_USER) {
 		ask_php_auth($auth_text_failure);
 	}
 	else {
@@ -127,7 +126,7 @@ function auth() {
 		$PHP_AUTH_PW = '';
 		$_SERVER['PHP_AUTH_PW'] = '';
 		$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
-	}
+	}*/
 
 	//
 	// Chercher le login dans la table auteurs
