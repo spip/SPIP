@@ -368,13 +368,17 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	  if ($args) $url .= (strpos($url,'?') ? $args : ('?' . substr($args,1)));
 	}
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_login[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_url[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
+	$url = ereg_replace("[?&]retour=[^&]*", '', $url);
 	// url de retour du forum
-	$retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']);
-	if (!$retour_forum)
-	  $retour_forum = $url;
-	else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
+	if ($retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
+	  $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
+	else {
+	  if (!$retour_forum = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
+	    $retour_forum = $url;
+	}
+
 
 	// debut formulaire forum
 	$lacible = "

@@ -24,17 +24,14 @@ if ($change_session == 'oui') {
 		exit;
 	}
 }
+#spip_log("cookie: $url");
 
-// determiner ou l'on veut retomber
-if ($url)
-	$cible = new Link($url);
-else
-	$cible = new Link(_DIR_RESTREINT_ABS);
+if ($url)  $url = urldecode($url);
 
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
 	include_local ("inc-login.php3");
-	auth_http($cible, $essai_auth_http);
+	auth_http(($url ? $url : _DIR_RESTREINT_ABS), $essai_auth_http);
 	exit;
 }
 
@@ -56,7 +53,7 @@ if ($logout) {
 		}
 		if ($PHP_AUTH_USER AND !$ignore_auth_http) {
 			include_local ("inc-login.php3");
-			auth_http($cible, 'logout');
+			auth_http(($url ? $url : _DIR_RESTREINT_ABS), 'logout');
 		}
 		unset ($auteur_session);
 	}
@@ -70,14 +67,12 @@ if ($logout) {
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
 	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&var_url=" .
-			    ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS));
+			    ($url ? $url : _DIR_RESTREINT_ABS));
 }
 
 // Tentative de login
 unset ($cookie_session);
-$durl = rawurldecode($url);
-$redirect = (!$url ? _DIR_RESTREINT_ABS : (strpos($durl,"&retour=") ? ($url) : $url));
-#$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
+$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
