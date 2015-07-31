@@ -115,8 +115,10 @@ function public_debusquer_dist($message='', $lieu='') {
 		if (!$fonc) $fonc = $debug_objets['principal'];
 		$titre = !$mode ? $fonc : ($mode . ' ' . $debug_objets['sourcefile'][$fonc]);
 	}
-	if ($message===false)
+	if ($message===false) {
+		lang_select();
 		return debusquer_entete($titre, $res);
+	}
 	else
 		echo debusquer_entete($titre, $res);
 	exit;
