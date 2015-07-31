@@ -20,7 +20,8 @@
 				[(#AUTORISER{creer,#ENV{objet_source}}|oui)
 				[(#REM|generer_url_entite{#ENV{objet_source}}
 							|parametre_url{new,oui}
-							|parametre_url{associer,#ENV{objet}|concat{'|',#ENV{id_objet}}}
+							|parametre_url{associer_objet,#ENV{objet}|concat{'|',#ENV{id_objet}}}
+							|parametre_url{redirect,#SELF|parametre_url{dummy,'','&'}}
 							|icone_horizontale{[(#VAL{creer_et_associer_un_}|concat{#ENV{objet_source}}|_T)],#ENV{objet_source},new})]
 				]
 				<div class="toggle_box_link">
