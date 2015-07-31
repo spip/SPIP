@@ -101,7 +101,8 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 // Appeler cette fonction pour obtenir la page principale
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $recalcul, $var_preview, $lastmodified;
+	global $flag_preserver, $recalcul, $lastmodified;
+	global $var_preview;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
