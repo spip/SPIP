@@ -107,20 +107,15 @@ function calculer_boucle($id_boucle, &$boucles)
 	# ete vus par integre_image() ou autre fournisseur officiel de
 	# doublons : on les transfere alors vers la vraie variable
 	$texte .= '
-	#echo "(".$GLOBALS[\'id_doublons\'][\'documents\'].")\n";
-	$doublons[\'documents\'] .= $GLOBALS[\'id_doublons\'][\'documents\'];
-	unset($GLOBALS[\'id_doublons\'][\'documents\']);';
+		$doublons[\'documents\'] .= $GLOBALS[\'id_doublons\'][\'documents\'];
+		unset($GLOBALS[\'id_doublons\'][\'documents\']);';
 
 	// Recherche : recuperer les hash a partir de la chaine de recherche
 	if ($boucle->hash) {
-		$texte =  '
-		list($hash_recherche, $hash_recherche_strict) = requete_hash($GLOBALS["recherche"]);' .
-			$texte ;
+		$texte .=  '
+		list($hash_recherche, $hash_recherche_strict) = requete_hash($GLOBALS["recherche"]);
+		if (!$hash_recherche) $stop_query = true;';
 	}
-/*		$texte .= '
-		global $recherche, $hash_recherche, $hash_recherche_strict;
-		list($hash_recherche, $hash_recherche_strict) = requete_hash($recherche);';
-	}*/
 
 	// Gestion de la hierarchie (voir inc-arg-squel)
 	$texte .= $boucle->hierarchie;
@@ -148,7 +143,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	}
 
 	return  ($texte . '
-	$result = ' . calculer_requete($boucle) . '
+	if (!$stop_query) $result = ' . calculer_requete($boucle) . '
 	$t0 = "";
 	$SP++;' .
 		 (($flag_parties) ? 
