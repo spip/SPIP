@@ -176,7 +176,7 @@ function help_body($aide, $suite, $lang_aide='') {
 		window.open(this.href);
 		return false;
 	});
-});)';
+});');
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
 	echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
