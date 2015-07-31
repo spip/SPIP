@@ -800,7 +800,7 @@ function affdate_base($numdate, $vue, $param = '') {
 			$jourmois = _T('date_de_mois_'.$mois, array('j'=>$jour, 'nommois'=>$nommois));
 		else
 			$jourmois = $nommois;
-	}
+	} else $nommois = '';
 
 	if ($annee < 0) {
 		$annee = -$annee." "._T('date_avant_jc');
