@@ -62,8 +62,11 @@ function insere_invalideur($a, $type, $fichier) {
 function retire_cache($cache) {
 	if ($GLOBALS['flag_ecrire']) return;
 	# spip_log("kill $cache ?");
-	if (preg_match("|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+$|i", $cache))
-		@unlink($cache);
+	if (preg_match(
+	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+$|i",
+	$cache))
+		@unlink($cache);		// supprimer le fichier
+		@unlink($cache.'.NEW');	// et le fichier compagnon s'il existe
 }
 
 // Supprimer les caches marques "x"
