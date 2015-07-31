@@ -105,6 +105,7 @@ function arbo_articles_tous()
 	return array($enfant, $first_couche, $last_couche);
 }
 
+// http://doc.spip.org/@texte_articles_tous
 function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
 	global $spip_dir_lang, $spip_lang, $browser_layer;
@@ -299,6 +300,7 @@ function couche_formulaire_tous($first_couche, $last_couche)
 	return $out;
 }
 
+// http://doc.spip.org/@afficher_contenu_rubrique
 function afficher_contenu_rubrique(&$article, &$enfant, &$text_article, $id_rubrique, $flag_trad, $profondeur){
 	static $ajax_args=NULL;
 	$out = "";

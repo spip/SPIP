@@ -411,6 +411,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	return "<td class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'><a$accesskey$a_href>$texte</a></td>\n";
 }
 
+// http://doc.spip.org/@bandeau_principal2
 function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 	global $spip_lang_left;
 
@@ -455,6 +456,7 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 	return $res;
 }
 
+// http://doc.spip.org/@bandeau_double_rangee
 function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
 {
 	global $spip_lang_left;
