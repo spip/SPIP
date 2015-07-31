@@ -5,12 +5,13 @@
 <p>(#ENV*{message})</p>
 </fieldset>]
 
-[<fieldset>
-<legend><:pass_vousinscrire:></legend>
-<p>(#ENV*{commentaire})</p>
-</fieldset>]
-
-<form id="inscription" method="post" action="#ENV{self}#formulaire_inscription">
+[(#ENV*{message}?{'',' '})
+ [<fieldset>
+ <legend><:pass_vousinscrire:></legend>
+ <p>(#ENV*{commentaire})</p>
+ </fieldset>]
+ <br />
+ <form id="inscription" method="post" action="#ENV{self}#formulaire_inscription">
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		<p><:form_forum_indiquer_nom_email:></p>
@@ -20,14 +21,14 @@
 		  <input type="text" class="forml" name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30" /></p>
 		  <p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 	</fieldset>
-</form>
+ </form>
 
 [<script type="text/javascript"><!--
 document.getElementById('(#ENV{focus})').focus();
 --></script>]
+]
 </div>
-[(#ENV{focus???}|?{' ',''})
-<div align="#LANG_RIGHT">
+<div style="font-size: 10px; text-align: #LANG_RIGHT">
 <script type="text/javascript"><!--
 document.write("<a style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
@@ -36,4 +37,4 @@ document.write("'><:pass_quitter_fenetre:><" + "/a>");
 <noscript>
 	&#91;<a href='./'><:pass_retour_public:></a>&#93;
 </noscript>
-</div>]
+</div>
