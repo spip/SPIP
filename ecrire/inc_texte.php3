@@ -218,8 +218,8 @@ function echappe_html($letexte,$source) {
 	// Echapper les <a href>
 	//
 
-	$regexp_echap = "<a[[:space:]][^>]+>";
-	//$regexp_echap = "<[^>]+>"; // Echappement tout HTML
+	// $regexp_echap = "<a[[:space:]][^>]+>";
+	$regexp_echap = "<(a|[^>]*')[^>]+>"; // Echappement tout HTML
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
@@ -389,7 +389,7 @@ function typo($letexte) {
 		$letexte = typo_en($letexte);
 
 
-	//$letexte = str_replace("'", "&#146;", $letexte);
+	$letexte = str_replace("'", "&#146;", $letexte);
 
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
@@ -855,6 +855,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte) {
 	return interdire_scripts(traiter_raccourcis(trim($letexte)));
+//	$a=time(); $b=microtime();
+//	interdire_scripts(traiter_raccourcis(trim($letexte)));
+//	return time()-$a + microtime()-$b;
 }
 
 ?>
