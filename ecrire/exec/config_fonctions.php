@@ -432,6 +432,7 @@ fin_cadre_trait_couleur();
 function proxy_config()
 {
 	global $spip_lang_right, $spip_lang_left;
+	global $retour_proxy;
 
 	debut_cadre_trait_couleur("base-24.gif", false, "", _T('info_sites_proxy').aide ("confhttpproxy"));
 
@@ -456,6 +457,13 @@ function proxy_config()
 		echo "<p>";
 		echo "<input type='text' name='test_proxy' value='http://www.spip.net/' size='40' class='forml' />";
 		echo "</p>";
+
+		if($retour_proxy) {
+			echo debut_boite_info(true);
+			echo $retour_proxy;
+			echo fin_boite_info(true);
+		}
+
 		echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='tester_proxy' value='"._T('bouton_test_proxy')."' class='fondo' /></div>";
 
 	}
