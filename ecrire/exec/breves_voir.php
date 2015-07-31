@@ -254,23 +254,20 @@ if (($id_breve == 0) AND ($new == "oui")) {
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
 }
 
+ $calculer_rubriques = false;
+
  if (($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") AND
      strval($titre)) {
-	$titre = addslashes($titre);
-	$texte = addslashes($texte);
-	$lien_titre = addslashes($lien_titre);
-	$lien_url = addslashes($lien_url);
-	$statut = addslashes($statut); // a ameliorer
 	$id_rubrique = intval($id_parent);
 
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breves"))."'";
+		$add_extra = extra_recup_saisie("breves");
 	} else
 		$add_extra = '';
 
-	spip_query("UPDATE spip_breves SET titre='$titre', texte='$texte', lien_titre='$lien_titre', lien_url='$lien_url', statut='$statut', id_rubrique='$id_rubrique' $add_extra WHERE id_breve=$id_breve");
+	spip_query("UPDATE spip_breves SET titre='" . addslashes($titre) ."', texte='" . addslashes($texte) ."', lien_titre='" . addslashes($lien_titre) ."', lien_url='" . addslashes($lien_url) ."', statut='" . addslashes($statut) ."', id_rubrique=$id_rubrique " . (!$add_extra ? '' : (", extra = '".addslashes($add_extra)."'")) . " WHERE id_breve=$id_breve");
 
 	// invalider et reindexer
 	include_spip('inc/invalideur');

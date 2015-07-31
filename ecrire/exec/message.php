@@ -67,9 +67,7 @@ if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
 }
 
 if ($modifier_message == "oui") {
-	$titre = addslashes($titre);
-	$texte = addslashes($texte);
-	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET titre='" . addslashes($titre) ."', texte='" . addslashes($texte) ."' WHERE id_message='$id_message'");
 }
 
 if ($changer_rv) {

@@ -102,11 +102,10 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  */
 
 function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, $retour) {
-  global $connect_statut, $connect_toutes_rubriques, $options;
-	global $spip_lang_rtl, $spip_lang_right;
+	global $connect_statut, $connect_toutes_rubriques, $options;
+	global $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
 	$retour = rawurlencode($retour);
-	$select_groupe = intval($GLOBALS['select_groupe']);
 
 	if ($table == 'articles') {
 		$table_id = 'id_article';
@@ -129,6 +128,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$objet = 'syndic';
 		$url_base = "sites";
 	}
+	else {$table =	$table_id = $objet = $url_base = '';}
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
@@ -152,13 +152,12 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	// Recherche de mot-cle
 	//
 
-	if ($nouv_mot)
-		$nouveaux_mots = array($nouv_mot);
+	$nouveaux_mots = $nouv_mot ? array($nouv_mot) : array();
 
 	$tous_les_mots = split(" *[,;] *", $cherche_mot);
 	while ((list(,$cherche_mot) = each ($tous_les_mots)) AND $cherche_mot) {
 		echo "<P ALIGN='left'>";
-		$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='$select_groupe'");
+		$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=" . intval($GLOBALS['select_groupe']));
 
 		unset($table_mots);
 		unset($table_ids);
@@ -246,6 +245,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	// Appliquer les modifications sur les mots-cles
 	//
 
+	$reindexer = false;
 	if ($nouveaux_mots && $flag_editable) {
 		while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
 			$result = spip_query("SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet");
@@ -274,8 +274,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	// Afficher les mots-cles
 	//
 
-	unset($les_mots);
-
+	$les_mots = array();
+	$id_groupes_vus = array();
 	$result = spip_query("SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
 
 
@@ -376,6 +376,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$les_mots = join($les_mots, ",");
 	} else {
 		$les_mots = "0";
+		$nombre_mots_associes = 0;
 	}
 	if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
 	else $id_groupes_vus = "0";
@@ -417,7 +418,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 
-		$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY multi");
+		$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY multi");
 
 
 		// Afficher un menu par groupe de mots
@@ -599,7 +600,7 @@ function afficher_groupe_mots($id_groupe) {
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
-	}
+	} else $tranches = '';
 
 	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
 
@@ -653,25 +654,25 @@ function afficher_groupe_mots_boucle($row, $occurrences)
 
 	$texte_lie = array();
 
-	$n = $occurrences['articles'][$id_mot];
+	$n = isset($occurrences['articles'][$id_mot]) ? $occurrences['articles'][$id_mot] : 0;
 	if ($n == 1)
 		$texte_lie[] = _T('info_1_article');
 	else if ($n > 1)
 		$texte_lie[] = $n." "._T('info_articles_02');
 
-	$n = $occurrences['breves'][$id_mot];
+	$n = isset($occurrences['breves'][$id_mot]) ? $occurrences['breves'][$id_mot] : 0;
 	if ($n == 1)
 		$texte_lie[] = _T('info_1_breve');
 	else if ($n > 1)
 		$texte_lie[] = $n." "._T('info_breves_03');
 
-	$n = $occurrences['sites'][$id_mot];
+	$n = isset($occurrences['sites'][$id_mot]) ? $occurrences['sites'][$id_mot] : 0;
 	if ($n == 1)
 		$texte_lie[] = _T('info_1_site');
 	else if ($n > 1)
 		$texte_lie[] = $n." "._T('info_sites');
 
-	$n = $occurrences['rubriques'][$id_mot];
+	$n = isset($occurrences['rubriques'][$id_mot]) ? $occurrences['rubriques'][$id_mot] : 0;
 	if ($n == 1)
 		$texte_lie[] = _T('info_une_rubrique_02');
 	else if ($n > 1)
