@@ -65,7 +65,9 @@ function supprimer_tags($texte, $rempl = "") {
 }
 
 function corriger_caracteres($texte) {
-	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148), "'''".'""');
+	// corrige les caracteres degoutants
+	// 145,146,180 = simple quote ; 147,148 = double quote ; 150 = tiret long
+	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150), "'''".'""-');
 }
 
 function PtoBR($texte){
@@ -586,9 +588,6 @@ function typo($letexte) {
 
 	if ($lang == 'fr')
 		$letexte = typo_fr($letexte);
-
-	// corrige les caracteres degoutants
-	// 145,146,180 = simple quote ; 147,148 = double quote
 
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
