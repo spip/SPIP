@@ -1208,7 +1208,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 	if ($spip_display != 1) {
 		echo "<td class='cellule36' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
-			if ($aide) echo aide($aide)." ";
+		if ($aide AND $spip_display != 3) echo aide($aide)." ";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
 		}
