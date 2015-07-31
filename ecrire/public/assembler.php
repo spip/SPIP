@@ -205,7 +205,8 @@ function assembler_page ($fond, $connect='') {
 	// eviter d'etre incoherent en envoyant un lastmodified identique
 	// a celui qu'on a refuse d'honorer plus haut (cf. #655)
 	if ($lastmodified
-	AND !isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+	AND !isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	AND !isset($page['entetes']["Last-Modified"]))
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
 
 	return $page;
