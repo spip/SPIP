@@ -19,10 +19,10 @@ function extracteur_rtf($fichier, &$charset) {
 
 	# wvText
 	# http://wvware.sourceforge.net/
-	$temp = tmpfile();
+	$temp = tempnam(_DIR_CACHE, 'rtf');
 	exec('wvText '.escapeshellarg($fichier).'> '.$temp, $r, $e);
 	lire_fichier($temp, $contenu);
-	unlink($temp);
+	@unlink($temp);
 	if (!$e) return $contenu;
 
 

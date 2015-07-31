@@ -19,10 +19,10 @@ function extracteur_doc($fichier, &$charset) {
 
 	# wvText
 	# http://wvware.sourceforge.net/
-	$temp = tmpfile();
+	$temp = tempnam(_DIR_CACHE, 'doc');
 	exec('wvText '.escapeshellarg($fichier).'> '.$temp, $r, $e);
 	lire_fichier($temp, $contenu);
-	unlink($temp);
+	@unlink($temp);
 	if (!$e) return $contenu;
 
 	# antiword
