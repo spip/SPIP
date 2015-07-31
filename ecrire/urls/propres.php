@@ -85,11 +85,10 @@ function creer_chaine_url($x) {
 	@define('_URLS_PROPRES_MIN', 3);
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($objet['titre'])));
 	$url = translitteration(corriger_caracteres($titre));
-	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
-
+	$url = @preg_replace(',([^[:cntrl:][:alnum:]_]|[[:space:]])+,u', ' ', $url);
 	// S'il reste trop de caracteres non latins, les gerer comme wikipedia
 	// avec rawurlencode :
-	if (preg_match_all(",[^a-zA-Z0-9 ]+,", $url, $r, PREG_SET_ORDER)) {
+	if (preg_match_all(",[^a-zA-Z0-9 _]+,", $url, $r, PREG_SET_ORDER)) {
 		foreach ($r as $regs) {
 			$url = substr_replace($url, rawurlencode($regs[0]),
 				strpos($url, $regs[0]), strlen($regs[0]));
@@ -103,7 +102,7 @@ function creer_chaine_url($x) {
 
 	// Sinon couper les mots et les relier par des tirets
 	else {
-		$mots = preg_split(",[^a-zA-Z0-9%]+,", $url);
+		$mots = preg_split(",[^a-zA-Z0-9_%]+,", $url);
 		$url = '';
 		foreach ($mots as $mot) {
 			if (!$mot) continue;
