@@ -91,6 +91,6 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
 		"<p>" . _T('pass_rappel_login', array('login' => $login));
 	}
-	return $message;
+	return array('message_ok'=>$message);
 }
 ?>

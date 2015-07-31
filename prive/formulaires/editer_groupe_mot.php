@@ -51,20 +51,8 @@ function formulaires_editer_groupe_mot_verifier_dist($id_groupe='new',$retour=''
 
 // http://doc.spip.org/@inc_editer_groupe_mot_dist
 function formulaires_editer_groupe_mot_traiter_dist($id_groupe='new',$retour='', $config_fonc='groupes_mots_edit_config', $row=array(), $hidden=''){
-	$message = '';
 	set_request('redirect','');
-	$action_editer = charger_fonction("editer_groupe_mot",'action');
-	list($id_groupe,$err) = $action_editer();
-	if ($err){
-		$message .= $err;
-	}
-	else {
-		if ($retour) {
-			include_spip('inc/headers');
-			$message .= redirige_formulaire(parametre_url($retour,'id_groupe',$id_groupe));
-		}
-	}
-	return $message;
+	return formulaires_editer_objet_traiter('groupe_mot',$id_groupe,0,0,$retour,$config_fonc,$row,$hidden);
 }
 
 

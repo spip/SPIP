@@ -39,15 +39,14 @@ function formulaires_site_verifier_dist($id_rubrique){
 }
 
 function formulaires_site_traiter_dist($id_rubrique){
-	
-	$message = _T('titre_probleme_technique');
+	$res = array('message_erreur'=>_T('titre_probleme_technique'));
 
 	$nom = _request('nom_site');
 	$url = _request('url_site');
 	$desc = _request('description_site');
 
 	include_spip('base/abstract_sql');
-	if (sql_insertq('spip_syndic', array(
+	if ($id_syndic = sql_insertq('spip_syndic', array(
 		'nom_site' => $nom,
 		'url_site' => $url,
 		'id_rubrique' => $id_rubrique,
@@ -57,9 +56,9 @@ function formulaires_site_traiter_dist($id_rubrique){
 		'date_syndic' => 'NOW()',
 		'statut' => 'prop',
 		'syndication' => 'non')))
-			  $message = _T('form_prop_enregistre');
+			  $res = array('message_ok' => _T('form_prop_enregistre'), 'id_syndic'=>$id_syndic);
 
-	return $message;
+	return $res;
 }
 
 ?>

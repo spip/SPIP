@@ -106,7 +106,7 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 			$desc = _T('form_forum_probleme_mail');
 	}
 
-	return is_string($desc) ? $desc : _T('form_forum_identifiant_mail');
+	return array('message_ok'=>is_string($desc) ? $desc : _T('form_forum_identifiant_mail'));
 }
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,

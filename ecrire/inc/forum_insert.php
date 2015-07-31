@@ -104,14 +104,14 @@ function inc_forum_insert_dist($force_statut = NULL) {
 
 	$id_message = forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $statut, $retour);
 
-	if (!$id_message) return $retour; // echec
+	if (!$id_message) return array($retour,0); // echec
 
 	// En cas de retour sur (par exemple) {#SELF}, on ajoute quand
 	// meme #forum12 a la fin de l'url, sauf si un #ancre est explicite
 	if ($reqret !== '!')
-		return strstr('#', $retour) ?
+		return array(strstr('#', $retour) ?
 			$retour
-			: $retour.'#forum'.$id_message;
+			: $retour.'#forum'.$id_message,$id_message);
 
 	// le retour par defaut envoie sur le thread, ce qui permet
 	// de traiter elegamment le cas des forums moderes a priori.
@@ -119,7 +119,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// dans le cas des forums moderes a posteriori, ce qui n'est
 	// pas plus mal.
 
-	return generer_url_entite($id_message, 'forum');
+	return array(generer_url_entite($id_message, 'forum'),$id_message);
 }
 
 // http://doc.spip.org/@forum_insert_base

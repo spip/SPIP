@@ -141,12 +141,46 @@ function traiter_formulaires_dynamiques($get=false){
 						'args'=>array('form'=>$form,'args'=>$args),
 						'data'=>$rev)
 					);
-					// traiter peut retourner soit un message, soit un array(editable,message)
-					if (is_array($rev)) {
-						$post["editable_$form"] = reset($rev);
-						$post["message_ok_$form"] = end($rev);
-					} else
-						$post["message_ok_$form"] = $rev;
+			// le retour de traiter peut avoir 3 formats
+			// - simple message texte
+			// - tableau a deux entrees ($editable,$message)
+			// - tableau explicite ('editable'=>$editable,'message_ok'=>$message,'redirect'=>$redirect,'id_xx'=>$id_xx)
+			// le dernier format est celui conseille car il permet le pipelinage, en particulier
+			// en y passant l'id de l'objet cree/modifie
+			// si message_erreur est present, on considere que le traitement a echoue
+			// cas du message texte simple
+			if (!is_array($rev)){
+				$post["message_ok_$form"] = $rev;
+			}
+			// cas du tableau deux valeurs simple (ancien format, deconseille)
+			elseif (count($rev)==2 
+			  AND !array_key_exists('message_ok',$rev)
+			  AND !array_key_exists('message_erreur',$rev)
+			  AND !array_key_exists('redirect',$rev)) {
+				$post["editable_$form"] = reset($rev);
+				$post["message_ok_$form"] = end($rev);
+			}
+			// cas du tableau explicite (conseille)
+			else {
+				// verifier si traiter n'a pas echoue avec une erreur :
+				if (isset($rev['message_erreur'])) {
+					$post["erreurs_$form"]["message_erreur"] = $rev['message_erreur'];
+					
+				}
+				else {
+					// sinon faire ce qu'il faut :
+					if (isset($rev['message_ok']))
+						$post["message_ok_$form"] = $rev['message_ok'];
+					if (isset($rev['editable']))
+						$post["editable_$form"] = $rev['editable'];
+					// si une redirection est demandee, appeler redirigae_formulaire qui choisira
+					// le bon mode de redirection (302 et on ne revient pas ici, ou javascript et on continue)
+					if (isset($rev['redirect'])){
+						include_spip('inc/headers');
+						$post["message_ok_$form"] .= redirige_formulaire($rev['redirect']);
+					}
+				}
+			}
 		}
 		// si le formulaire a ete soumis en ajax, on le renvoie direct !
 		if (_request('var_ajax')){

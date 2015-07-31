@@ -35,11 +35,15 @@ function get_spip_doc($fichier) {
 	// gestion d'erreurs, fichier=''
 	if (!strlen($fichier))
 		return false;
+	
+	$fichier = (strpos($fichier, _DIR_IMG) === false)
+		? _DIR_IMG . $fichier
+		: $fichier ;
+	if ($m = @filemtime($fichier))
+		$fichier .= "?$m";
 
 	// fichier normal
-	return (strpos($fichier, _DIR_IMG) === false)
-		? _DIR_IMG . $fichier
-		: $fichier;
+	return $fichier;
 }
 
 // Filtre pour #ID_DOCUMENT ou #FICHIER
