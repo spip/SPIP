@@ -23,15 +23,17 @@
 #SET{cache_inhib,#CONFIG{cache_inhib}|sinon{0}|>{#REM|time}|oui}
 
 [(#GET{cache_inhib}|oui)
-<div><strong>Le cache est temporairement désactivé.</strong> [(#BOUTON_ACTION{Réactiver le cache,#URL_ACTION_AUTEUR{purger,reactive_cache,#SELF},ajax link})]
-</div>
-]
-[(#GET{cache_inhib}|non)
-<div>[(#BOUTON_ACTION{Désactiver temporairement le cache,#URL_ACTION_AUTEUR{purger,inhibe_cache,#SELF},ajax link})]
+<div><strong>Le cache est temporairement désactivé.</strong>
 </div>
 ]
 
 #BOITE_PIED
+	[(#GET{cache_inhib}|non)
+		[(#BOUTON_ACTION{Désactiver temporairement le cache,#URL_ACTION_AUTEUR{purger,inhibe_cache,#SELF},ajax})]
+	]
+	[(#GET{cache_inhib}|oui)
+ 		[(#BOUTON_ACTION{Réactiver le cache,#URL_ACTION_AUTEUR{purger,reactive_cache,#SELF},ajax})]
+	]
 	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,cache,#SELF},ajax})]
 #BOITE_FERMER
 ]
