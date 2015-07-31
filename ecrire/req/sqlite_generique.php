@@ -1285,6 +1285,8 @@ function _sqlite_link($serveur = '', $recharger = false){
  * @return number
  */
 function _sqlite_calculer_cite($v, $type){
+	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
+
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
 	if (sql_test_int($type)){
@@ -1293,8 +1295,7 @@ function _sqlite_calculer_cite($v, $type){
 		if (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
 			return hexdec(substr($v, 2));
 	}
-	//else return  ("'" . spip_sqlite_quote($v) . "'");
-	return (spip_sqlite_quote($v));
+	return spip_sqlite_quote($v,$type);
 }
 
 
