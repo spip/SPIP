@@ -80,7 +80,7 @@
 				]
 				<ul>
 				[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
-				<li class='editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
+				<li class='editer editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
 					[(#ENV{config}|table_valeur{edit_login}|oui)
 							<label for='new_login'><:item_login:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
@@ -94,13 +94,13 @@
 					]				
 				</li>
 				[(#ENV{config}|table_valeur{edit_pass}|oui)
-					<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
+					<li class='editer editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
 							<label for='new_pass'><:entree_nouveau_passe:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>
 							]<p class='explication'>(<:info_plus_cinq_car:>)</p>
 							<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
 					</li>
-					<li class='editer_new_pass2'>
+					<li class='editer editer_new_pass2'>
 							<label for='new_pass2'><:info_confirmer_passe:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>
 							]<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
