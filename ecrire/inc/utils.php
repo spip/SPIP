@@ -153,6 +153,14 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	$log( $message, $logname, $logdir, $logsuf);
 }
 
+//
+// Enregistrement des journaux
+//
+function journal($phrase, $opt = array()) {
+	$journal = charger_fonction('journal', 'inc');
+	$journal($phrase, $opt);
+}
+
 // Renvoie le _GET ou le _POST emis par l'utilisateur
 // ou pioche dans $c si c'est un array()
 // http://doc.spip.org/@_request
