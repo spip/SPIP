@@ -251,6 +251,7 @@ $spip_pipeline = array(
 	'declarer_tables_interfaces'=>'',
 	'declarer_tables_principales'=>'',
 	'declarer_tables_auxiliaires'=>'',
+	'declarer_tables_objets_surnoms' => '',
 	'definir_session' => '',
 	'delete_all' => '',
 	'delete_statistiques' => '',
