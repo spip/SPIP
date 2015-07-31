@@ -232,7 +232,7 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $
 	
 	// patch safari beta 51-60
     if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT']))
-        $path = ereg_replace("/[^/]+", "/", $GLOBALS['REQUEST_URI']);
+        $path = ereg_replace("/[^/]+$", "/", $GLOBALS['REQUEST_URI']);
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
