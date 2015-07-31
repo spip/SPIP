@@ -559,7 +559,7 @@ function afficher_liste_fin_tableau() {
 }
 
 
-function puce_statut_article($id, $statut) {
+function puce_statut_article($id, $statut, $id_rubrique) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
 	
 	switch ($statut) {
@@ -591,7 +591,7 @@ function puce_statut_article($id, $statut) {
 	}
 	$puce = "puce-$puce.gif";
 	
-	if ($connect_statut == '0minirezo' AND $options == 'avancees') {
+	if ($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)) {
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 	  $titles = array(
@@ -637,7 +637,7 @@ function puce_statut_article($id, $statut) {
 	return $inser_puce;
 }
 
-function puce_statut_breve($id, $statut, $type) {
+function puce_statut_breve($id, $statut, $type, $id_rubrique=0) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 
 	$puces = array(
@@ -671,7 +671,7 @@ function puce_statut_breve($id, $statut, $type) {
 	$type1 = "statut$type$id"; 
 	$inser_puce = http_img_pack($puce, "", "id='img$type1' border='0' style='margin: 1px;'");
 
-	if (!($connect_statut == '0minirezo' AND $options == 'avancees'))
+	if (!($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)))
 		return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
@@ -803,7 +803,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$les_auteurs = "$les_auteurs";
 
 			// La petite puce de changement de statut
-			$vals[] = puce_statut_article($id_article, $statut);
+			$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
 
 			// Le titre (et la langue)
 			$s = "<div>";
@@ -939,7 +939,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
 			
-			$vals[] = puce_statut_breve($id_breve, $statut, 'breve');
+			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', $id_rubrique);
 
 			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
