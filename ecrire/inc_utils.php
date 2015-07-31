@@ -362,7 +362,7 @@ function _T($texte, $args = '') {
 	$text = traduire_chaine($texte, $args);
 	if (!empty($GLOBALS['xhtml'])) {
 		include_ecrire("inc_charsets");
-		$text = html2unicode($text);
+		$text = html2unicode($text, true /* secure */);
 	}
 
 	return $text ? $text : 
