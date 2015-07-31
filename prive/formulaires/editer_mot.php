@@ -47,6 +47,17 @@ function mots_edit_config($row)
 function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('mot',$id_mot,array('titre'));
+	// verifier qu'un mot du meme groupe n'existe pas avec le meme titre
+	// la comparaison accepte un numero absent ou different
+	// sinon avertir
+	if (!count($erreurs) AND !_request('confirm_titre_mot')){
+		if (sql_countsel("spip_mots", 
+						"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero(_request('titre')))."$")
+						." AND id_mot<>".intval($id_mot)))
+			$erreurs['titre'] =
+						_T('avis_doublon_mot_cle')
+						." <input type='hidden' name='confirm_titre_mot' value='1' />";
+	}
 	return $erreurs;
 }
 
