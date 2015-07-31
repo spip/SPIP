@@ -527,7 +527,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 				$link->addVar($tmp_var, strval($deb - 1));
 				if ($javascript) {
 					$jj = ereg_replace("::deb::", "&$tmp_var=$deb", $javascript);
-					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
+					$texte .= "<a onClick=\"$jj; return false;\" href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
 				}
 				else $texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
 			}
@@ -548,7 +548,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 			$link->addVar($tmp_var, -1);
 				if ($javascript) {
 					$jj = ereg_replace("::deb::", "&$tmp_var=-1", $javascript);
-					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
+					$texte .= "<a onClick=\"$jj; return false; \" href=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
 				}
 				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
 		}
@@ -802,7 +802,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
 			
-	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::\',\'$tmp_var\')";
+	$javascript = "charger_id_url('ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -1030,7 +1030,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
 			
-	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::\',\'$tmp_var\')";
+	$javascript = "charger_id_url('ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
