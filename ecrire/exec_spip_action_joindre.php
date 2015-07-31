@@ -18,7 +18,7 @@ include_ecrire('inc_getdocument');
 
 function spip_action_joindre_dist()
 {
-  global $hash, $id_auteur, $arg, $redirect,
+  global $action, $arg, $hash, $id_auteur,  $redirect,
     $sousaction1,
     $sousaction2,
     $sousaction3,
@@ -27,6 +27,12 @@ function spip_action_joindre_dist()
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
 
+
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+	}
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
      $sousaction = 'spip_action_joindre' .

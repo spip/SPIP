@@ -14,7 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function spip_action_instituer_dist()
 {
-	global $arg, $action ;
+	global $action, $arg, $hash, $id_auteur;
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 
 	ereg("^([^ ]*) (.*)$", $arg, $r);
 	$var_nom = 'instituer_' . $r[1];

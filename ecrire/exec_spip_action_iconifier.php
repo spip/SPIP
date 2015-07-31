@@ -14,6 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function spip_action_iconifier_dist()
 {
+	global $action, $arg, $hash, $id_auteur;
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 		spip_image_ajouter_dist();
 	else	spip_image_effacer_dist();

@@ -14,8 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 function spip_action_purger_dist()
 {
-  global $arg;
-
+  global $action, $arg, $hash, $id_auteur;
+  include_ecrire("inc_session");
+  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+  }
   include_ecrire("inc_invalideur");
 
   switch ($arg) {
