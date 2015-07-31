@@ -167,34 +167,22 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// etre declenchee dans l'espace des globales (donc pas
 	// dans une fonction).
 	else {
-		// Si la retention du flux de sortie est impossible
-		// envoi des entetes
-		if (!$flag_ob) {
-			envoyer_entetes($page['entetes']);
-			xml_hack($page, true);
-			eval('?' . '>' . $page['texte']);
-			$page['texte'] = '';
-			// xml_hack($page); # inutile :(
-		}
-
 		// sinon, inclure_balise_dynamique nous enverra peut-etre
 		// quelques en-tetes de plus (voire qq envoyes directement)
-		else {
-			ob_start(); 
-			xml_hack($page, true);
-			$res = eval('?' . '>' . $page['texte']);
-			$page['texte'] = ob_get_contents(); 
-			xml_hack($page);
-			ob_end_clean();
+		ob_start(); 
+		xml_hack($page, true);
+		$res = eval('?' . '>' . $page['texte']);
+		$page['texte'] = ob_get_contents(); 
+		xml_hack($page);
+		ob_end_clean();
 
-			envoyer_entetes($page['entetes']);
-			// en cas d'erreur lors du eval,
-			// la memoriser dans le tableau des erreurs
-			// On ne revient pas ici si le nb d'erreurs > 4
-			if ($res === false AND $affiche_boutons_admin) {
-				include_spip('public/debug');
-				erreur_squelette(_T('zbug_erreur_execution_page'));
-			}
+		envoyer_entetes($page['entetes']);
+		// en cas d'erreur lors du eval,
+		// la memoriser dans le tableau des erreurs
+		// On ne revient pas ici si le nb d'erreurs > 4
+		if ($res === false AND $affiche_boutons_admin) {
+			include_spip('public/debug');
+			erreur_squelette(_T('zbug_erreur_execution_page'));
 		}
 
 	}
