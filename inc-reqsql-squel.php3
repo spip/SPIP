@@ -32,7 +32,7 @@ function calculer_requete(&$boucle) {
       $boucle->where[] = "lien.id_auteur=$id_table.id_auteur";
       $boucle->where[] = 'lien.id_article=articles.id_article';
       $boucle->where[] = "articles.statut='publie'";
-      $boucle->group =  "'$id_field'";
+      $boucle->group =  "$id_field";
     }
     // pas d'auteurs poubellises
     $boucle->where[] = "NOT($id_table.statut='5poubelle')";
@@ -60,7 +60,7 @@ function calculer_requete(&$boucle) {
     $boucle->where[] = "petitions.id_article=articles.id_article";
     $boucle->where[] = "petitions.id_article=$id_table.id_article";
     $boucle->where[] = "$id_table.statut='publie'";
-    $boucle->group = "'$id_field'";
+    $boucle->group = "$id_field";
     break;
     
   case 'documents':
