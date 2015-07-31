@@ -92,18 +92,20 @@ function inc_aider_dist($aide='', $skel='', $env=array(), $aide_spip_directe = f
 	return aider_icone($url);
 }
 
-function aider_icone($url)
+function aider_icone($url, $clic= '')
 {
 	global $spip_lang, $spip_lang_rtl;
 
-	$t = _T('titre_image_aide');
-
+	if (!$clic) {
+		$t = _T('titre_image_aide');
+		$clic = http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl)."-16.png",
+			_T('info_image_aide'),
+			" title=\"$t\" class='aide'");
+	}
 	return "\n&nbsp;&nbsp;<a class='aide popin'\nhref='"
 	.  $url
 	. "' target='_blank'>"
-	. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl)."-16.png",
-			_T('info_image_aide'),
-			" title=\"$t\" class='aide'")
+	. $clic
 	. "</a>";
 }
 
