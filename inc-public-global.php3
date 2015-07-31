@@ -92,19 +92,10 @@ function calcule_header_et_page ($fond, &$delais) {
 		header("Content-Type: text/html; charset=".lire_meta('charset'));
 
 		if ($flag_ob) {
-			// Si la page est vide, gerer l'erreur 404
+			// Si la page est vide, produire l'erreur 404
 			if (trim($page['texte']) === ''
 			AND $var_mode != 'debug') {
-				include_ecrire('inc_headers.php');
-				http_status(404);
-				$contexte_inclus = array(
-					'erreur_aucun' => message_erreur_404()
-				);
-				$page = array('texte' => '<'.'?php
-					$contexte_inclus = array();
-					include(\''.addslashes(find_in_path('404.php3')).'\');
-					?'.'>',
-				'process_ins' => 'php');
+				$page = message_erreur_404();	
 			}
 			// Interdire au client de cacher un login, un admin ou un recalcul
 			else if ($flag_dynamique OR $var_mode
@@ -378,21 +369,27 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 }
 
 
-function message_erreur_404 () {
-	if ($GLOBALS['id_article'])
+function message_erreur_404 ($erreur= "") {
+	if (!$erreur) {
+		if (isset($GLOBALS['id_article']))
 		$erreur = 'public:aucun_article';
-	else if ($GLOBALS['id_rubrique'])
+		else if (isset($GLOBALS['id_rubrique']))
 		$erreur = 'public:aucune_rubrique';
-	else if ($GLOBALS['id_breve'])
+		else if (isset($GLOBALS['id_breve']))
 		$erreur = 'public:aucune_breve';
-	else if ($GLOBALS['id_auteur'])
+		else if (isset($GLOBALS['id_auteur']))
 		$erreur = 'public:aucun_auteur';
-	else if ($GLOBALS['id_syndic'])
+		else if (isset($GLOBALS['id_syndic']))
 		$erreur = 'public:aucun_site';
-	else
-		$erreur = '';
+	}
+	include_ecrire('inc_headers.php');
+	http_status(404);
 
-	return _T($erreur);
+	return array('texte' => '<'.'?php
+			$contexte_inclus = array("fond" => 404,
+ 				"erreur" => _T("' . $erreur  . '"));
+			include(\'page.php3\'); ?'.'>',
+		     'process_ins' => 'php');
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
