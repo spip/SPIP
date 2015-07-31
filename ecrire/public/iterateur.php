@@ -111,6 +111,10 @@ class IterDecorator implements Iterator {
 	public function next(){
 		$this->pos++;
 		$this->iter->next();
+
+		while ($this->valid() AND !$this->accept()) {
+			$this->iter->next();
+		}
 	}
 
 	/**
@@ -213,9 +217,11 @@ class IterDecorator implements Iterator {
 	private function seek_loop($n) {
 		if ($this->pos>$n)
 			$this->rewind();
+
+		while($this->pos<$n AND $this->valid()) {
+			$this->next();	
+		}
 		
-		while($this->pos<$n AND $this->valid())
-			$this->next();
 		return true;
 	}
 
@@ -255,22 +261,27 @@ class IterDecorator implements Iterator {
 		if (method_exists($this->iter, 'fetch')) {
 			return $this->iter->fetch();
 		} else {
-			if ($this->valid()) {
-				$r = array('cle' => $this->key(), 'valeur' => $this->current());
-				if ($f = $this->func_filtre) {
-					while ($this->valid()
-					AND !$f($r['cle'], $r['valeur'])) {
-						$this->next();
-						$r = $this->valid()
-							? array('cle' => $this->key(), 'valeur' => $this->current())
-							: false;
-					}
-				}
+
+			while ($this->valid() AND !$this->accept()) {
 				$this->next();
-			} else
-				$r = false;
+			}
+			
+			if (!$this->valid()) {
+				return false;
+			}
+			
+			$r = array('cle' => $this->key(), 'valeur' => $this->current());
+			$this->next(); // $r['valeur'] avance aussi d'un cran avec DirectoryIterator ! fichtre !
+
 			return $r;
 		}
+	}
+
+	public function accept() {
+		if ($f = $this->func_filtre) {
+			return $f($this->key(), $this->current());
+		}
+		return true;
 	}
 
 	/**
@@ -298,13 +309,16 @@ class IterDecorator implements Iterator {
 			} else {
 				// compter les lignes et rembobiner
 				$total = 0;
+				$pos = $this->pos; // sauver la position
+				$this->rewind();
 				while ($this->fetch() and $total < $this->max) {
 					$total++;
 				}
-				$this->rewind();
+				$this->seek($pos);
 				$this->total = $total;
 			}
 		}
+
 		return $this->total;
 	}
 	
