@@ -48,7 +48,6 @@ if ($prefs_mod) {
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 
-if ($connect_statut == "0minirezo") $options = "avancees";
 
 switch ($prefs['couleur']) {
 	case 1:

@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="top"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>';
 }
 
 
@@ -1442,6 +1442,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
+		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+			bandeau_barre_verticale();
+			icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+		}
 	}
 	else if ($rubrique == "administration"){
 		if ($connect_toutes_rubriques) {
@@ -1453,12 +1457,27 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 	}
 
+	if ($options == "avancees") {
+		global $recherche;
+		if (strlen($recherche) == 0) {
+			if ($spip_display == 2) $recherche = "Titre ou num&eacute;ro";
+			else $recherche = "Rechercher";
+		}
+		bandeau_barre_verticale();
+		echo "<td width='5'><img src='img_pack/rien.gif' width=5></td>";
+		echo "<td>";
+		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
+		if ($spip_display == "2") {
+			echo "<font face='verdana,arial,helvetica,san-serif' size=1><b>Rechercher&nbsp;:</b></font><br>";
+		}
+		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
+		echo "</form>";
+		echo "</td>";
+	}
+
 
 	echo "<td width='100%'>   </td>";
 
-	if ($options == "avancees" AND $activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-		icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-	}
 	if ($auth_can_disconnect AND $options == "avancees") {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
@@ -1499,11 +1518,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
-	if ($connect_statut != "0minirezo") {
-		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span class='fondgrison2'><b>interface compl&egrave;te</b></span>";
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid #cccccc; color: #cccccc'><b>interface compl&egrave;te</b></span>";
 		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
-	}
-	else echo "<b><span class='fondgrison2'>Interface compl&egrave;te</span></b>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
@@ -1609,46 +1625,32 @@ function debut_gauche($rubrique = "asuivre") {
 			$nb_connectes = mysql_num_rows($result_auteurs);
 		}
 
-		$flag_cadre = ($options == "avancees" AND ($rubrique == "messagerie" OR $nb_connectes > 0));
+		$flag_cadre = ($nb_connectes > 0 OR $options == "avancees");
 		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-		if ($options == "avancees" AND $rubrique == "messagerie") {
+
+		if ($options == "avancees") {
 			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
 			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
 			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a><p>";
+			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
 		}
-
+		
 		if ($flag_cadre) {
 			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 			if ($nb_connectes > 0) {
+				if ($options == "avancees") echo "<p>";
 				echo "<b>Actuellement en ligne&nbsp;:</b>";
 				while ($row = mysql_fetch_array($result_auteurs)) {
 					$id_auteur = $row["id_auteur"];
 					$nom_auteur = typo($row["nom"]);
-					echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+					if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+					else  echo "<br> $nom_auteur";
 				}
 			}
-			else echo "Aucun utilisateur n'est en ligne actuellement.";
 			echo "</font>";
 		}
 		if ($flag_cadre) fin_cadre_relief();
 	}	
-
-	if ($options == "avancees") {
-		debut_cadre_enfonce();
-		global $recherche, $spip_display;
-		if (strlen($recherche) == 0) {
-			if ($spip_display != "3") $recherche = "Titre ou num&eacute;ro";
-			else $recherche = "Rechercher";
-		}
-		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-		if ($spip_display != "3") {
-			echo "<font face='verdana,arial,helvetica,san-serif' size=2><b>Rechercher&nbsp;:</b></font><br>";
-		}
-		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="formo">';
-		echo "</form>";
-		fin_cadre_enfonce();
-	}
 }
 
 
