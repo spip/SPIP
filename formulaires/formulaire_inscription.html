@@ -24,10 +24,10 @@
 </form>
 
 [<script type="text/javascript"><!--
-document.inscription.(#ENV{focus}).focus()
+document.getElementById('(#ENV{focus})').focus();
 --></script>]
 </div>
-[(#ENV{focus}|?{' ',''})
+[(#ENV{focus???}|?{' ',''})
 <div align="#LANG_RIGHT">
 <script type="text/javascript"><!--
 document.write("<a style='color: #e86519' href='")
