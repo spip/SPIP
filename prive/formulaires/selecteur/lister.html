@@ -4,7 +4,7 @@
 	href="#"
 	class="choisir_ici"
 	title="<:bouton_choisir:> : #GET{titre}"
-	onclick="jQuery(this).item_pick('#ENV{quoi}|#ENV{id_objet}','#ENV{name,id_item}','#GET{titre}','#ENV{quoi}');return false;"
+	onclick="jQuery(this).item_pick('[(#ENV{quoi}|objet_type)]|#ENV{id_objet}','#ENV{name,id_item}','#GET{titre}','#ENV{quoi}');return false;"
 ><span><:bouton_choisir:></span></a>
 ]
 <BOUCLE_objets(POUR){tableau #ENV{objets/afficher}}>
