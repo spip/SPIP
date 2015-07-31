@@ -716,7 +716,6 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'install_select_langue' => 'Sceglite una lingua &egrave; poi cliccate nant\'&agrave; &laquo;&nbsp;In avanti&nbsp;&raquo; per lanci&agrave; u prucedimentu di stallazione.',
 'install_select_type_db' => 'Indett&agrave; u tippu di basa di dati&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servore di basa di dati attribuitu da l\'&ograve;spite',
@@ -951,10 +950,10 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'texte_acces_ldap_anonyme_1' => 'Certi servori LDAP &ugrave;n accettanu nisun accessu an&ograve;nimu. In stu casu, si deve specific&agrave; 
 		un c&ograve;dice d\'accessu iniziale di modu &agrave; pud&egrave; dopu ricirc&agrave; infurmazioni in l\'annuariu. 
 		Ma sia cum\'ella sia, i seguenti campi puderanu esse lasciati vioti.',
-'texte_admin_effacer_stats' => 'Sta cumanda sguassa tutti i dati leati &agrave; e stat&igrave;stiche di v&igrave;site di u situ, cumpresa a pupularit&agrave; di l\'art&igrave;culi.',
 'texte_admin_effacer_01' => 'Sta cumanda sguassa u cuntenutu <i>sanu sanu</i> di a basa di dati, 
 	compresi <i>tutti</i> i login di i scrittori &egrave; amministratori. Dopu av&egrave; la eseguita, vi tuccher&agrave; &agrave; rilanci&agrave; a prucedura di stallazione 
 	per turn&agrave; &agrave; cre&agrave; una nova basa di dati &egrave; un primu ID amministrativu.',
+'texte_admin_effacer_stats' => 'Sta cumanda sguassa tutti i dati leati &agrave; e stat&igrave;stiche di v&igrave;site di u situ, cumpresa a pupularit&agrave; di l\'art&igrave;culi.',
 'texte_admin_tech_01' => 'St\'opzione vi permette di salv&agrave; u cuntenutu di a basa di dati in un schedariu ch&igrave; ser&agrave; tenutu in u cartulare @dossier@.
 		&Ugrave;n vi scurdate din&ograve; di ricuar&agrave; u cartulare @img@ sanu sanu, ch&igrave; cuntene l\'im&agrave;gini &egrave; i ducumenti usati in l\'art&igrave;culi &egrave; in e r&ugrave;bbriche.',
 'texte_admin_tech_02' => 'Attenti&nbsp;: sta copia di salvezza puder&agrave; esse ricuperata SOLU in un situ stallatu c&ugrave; listessa versione di SPIP.
