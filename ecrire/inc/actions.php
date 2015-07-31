@@ -142,8 +142,8 @@ function determine_upload()
 		$var_auth = $var_auth();
 	}
 	if ($connect_statut != '0minirezo') return false;
-	return joli_repertoire(_DIR_TRANSFERT . 
-	  ($connect_toutes_rubriques ? '' : ($connect_login . '/')));
+	return _DIR_TRANSFERT . 
+	  ($connect_toutes_rubriques ? '' : ($connect_login . '/'));
 }
 
 //

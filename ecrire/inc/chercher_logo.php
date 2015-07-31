@@ -117,11 +117,11 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 	if (!$afficher) {
 		  if ($dir_ftp) 
 			$afficher = _T('info_installer_images_dossier',
-				array('upload' => '<b>' . $dir_ftp . '</b>'));
+				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>'));
 		} else {
 		$afficher = "\n<div style='text-align: left'>" .
 			_T('info_selectionner_fichier',
-				array('upload' => '<b>' . $dir_ftp . '</b>')) .
+				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>')) .
 			":</div>" .
 			"\n<select name='source' CLASS='forml' size='1'>$afficher\n</select>" .
 			"\n<div align='" .
