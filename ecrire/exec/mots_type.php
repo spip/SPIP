@@ -76,7 +76,7 @@ function exec_mots_type_dist()
 
 	$res = debut_cadre_relief("groupe-mot-24.gif", true)
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "<tr width='100%'>"
+	. "<tr>"
 	. "<td  align='right' valign='top'>"
 	. icone(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif",'', false)
 	. "</td>"

@@ -67,6 +67,8 @@ function exec_mots_tous_dist()
 		$acces_forum = $row_groupes['forum'];
 
 		// Afficher le titre du groupe
+		echo "<a id='mots_tous-$id_groupe'></a>";
+
 		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
@@ -136,7 +138,7 @@ function exec_mots_tous_dist()
 			echo "</td>";
 			echo "<td>";
 			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')), "mot-cle-24.gif", "creer.gif");
+			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif");
 			echo "</div>";
 			echo "</td></tr></table>";
 		}	

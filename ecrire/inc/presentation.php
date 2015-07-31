@@ -305,8 +305,8 @@ function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-			return "\n<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
-			  http_img_pack("plus.gif", "+", "") ."</a></div>";
+			return "\n<span style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
+			  http_img_pack("plus.gif", "+", "") ."</a></span>";
 	}
 }
 

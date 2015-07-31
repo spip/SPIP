@@ -67,7 +67,7 @@ function encours_accueil()
 	if ($connect_toutes_rubriques) {
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
 		if ($cpt = $cpt['n']) {
-		$res .= "<br><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
+		$res .= "<br /><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
 		if ($cpt>1)
 			$res .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
