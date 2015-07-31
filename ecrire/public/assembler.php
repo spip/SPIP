@@ -108,7 +108,7 @@ function public_assembler_dist($fond, $connect='') {
 			if ($fond = $args['fond_ajax']){
 				include_spip('public/parametrer');
 				$contexte = calculer_contexte();
-				$contexte = array_merge($contexte,$args);
+				$contexte = array_merge($args, $contexte);
 				$page = evaluer_fond($fond,$contexte);
 				include_spip('inc/actions');
 				ajax_retour($page['texte']);
