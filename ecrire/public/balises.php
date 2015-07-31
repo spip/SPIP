@@ -821,9 +821,12 @@ function balise_CONFIG_dist($p) {
 // #EVAL{...}
 // evalue un code php ; a utiliser avec precaution :-)
 //
-// #EVAL*{code} fait exactement eval('code')
-// mais #EVAL{code} fait eval('return code;')
-// ce qui permet de faire #EVAL{6*50} ou #EVAL{_DIR_IMG_PACK}
+// rq: #EVAL{code} produit eval('return code;')
+// mais si le code est une expression sans balise, on se dispense
+// de passer par une construction si compliquee, et le code est
+// passe tel quel (entre parentheses, et protege par interdire_scripts)
+// Exemples : #EVAL**{6+9} #EVAL**{_DIR_IMG_PACK} #EVAL{'date("Y-m-d")'}
+// #EVAL{'str_replace("r","z", "roger")'}  (attention les "'" sont interdits)
 function balise_EVAL_dist($p) {
 	if ($p->param && !$p->param[0][0]) {
 		$php = array_shift( $p->param );
@@ -835,14 +838,17 @@ function balise_EVAL_dist($p) {
 	}
 
 	if ($php) {
-		if ($p->etoile)
-			$p->code = "eval($php)";
+		# optimisation sur les #EVAL{une expression sans #BALISE}
+		# attention au commentaire "// x signes" qui precede
+		if (preg_match(",^([[:space:]]*//[^\n]*\n)'([^']+)'$,ms",
+		$php,$r))
+			$p->code = /* $r[1]. */'('.$r[2].')';
 		else
 			$p->code = "eval('return '.$php.';')";
 	} else
 		$p->code = '';
 
-	$p->interdire_scripts = false;
+	#$p->interdire_scripts = true;
 
 	return $p;
 }
