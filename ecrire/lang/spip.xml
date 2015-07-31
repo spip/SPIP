@@ -56,7 +56,8 @@
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eo" total="636" traduits="627" relire="0" modifs="2" nouveaux="7" pourcent="98.58">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es" total="636" traduits="630" relire="0" modifs="2" nouveaux="4" pourcent="99.06">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es" total="636" traduits="632" relire="0" modifs="0" nouveaux="4" pourcent="99.37">
+		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
@@ -76,7 +77,8 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="636" traduits="630" relire="0" modifs="2" nouveaux="4" pourcent="99.06">
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
 		<traducteur nom="touti" lien="http://trad.spip.net/auteur/touti" />
