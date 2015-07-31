@@ -27,7 +27,7 @@ function premiers_pas_etapes($etape,$titre,$texte){
 	
 	echo "<div id='minipres' style='width:750px;text-align:$spip_lang_left;'>";
 	if ($etape!=='fin')
-		echo "<input type='submit' class='fondl' name='cancel' style='cursor:pointer;pointer:hand;' value='"._L("Utiliser directement SPIP")."' />";
+	  echo generer_action_auteur('premiers_pas', '', '', "<input type='submit' class='fondl' name='cancel' style='cursor:pointer;pointer:hand;' value='"._L("Utiliser directement SPIP")."' />");
 	echo debut_gauche();
 	creer_colonne_droite();
 	debut_droite();
