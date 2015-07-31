@@ -420,14 +420,17 @@ function afficher_documents_non_inclus($id_article) {
 	
 	
 		/// Ajouter nouveau document/image
-		echo debut_boite_info();
+		echo "<p><div style='padding: 5px; border : solid 1px black; background-color: #e4e4e4; text-align: center; color: black;'>";	
 		
-		echo "<div style='padding: 5px; border : dashed 1px black; background-color: #333333; text-align: center; color: white;'>";	
+		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: left; color: black;'>";
+		echo bouton_block_invisible("ajouter_document");	
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
 		echo "</div>\n";
 
 		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr><td width='150' valign='top'>";
+		echo "<tr>";
+		echo debut_block_invisible("ajouter_document");
+		echo "<td width='150' valign='top'>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 		
 		echo "<font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
@@ -441,6 +444,7 @@ function afficher_documents_non_inclus($id_article) {
 		echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
 		echo "</font>";
 		echo "</td><td width=20>&nbsp;</td>";
+		echo fin_block();
 		echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
 		$link = $image_link;
 		$link->addVar('redirect', $redirect_url);
@@ -460,7 +464,7 @@ function afficher_documents_non_inclus($id_article) {
 				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au format JPEG, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels.";
 			}
 			else {
-				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est désactiv&eacute;e sur ce site. ";
+				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). ";
 			}
 			
 			echo "Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables.";
@@ -471,7 +475,7 @@ function afficher_documents_non_inclus($id_article) {
 		echo "</font>\n";
 		echo "</td></tr></table>";
 		
-		echo fin_boite_info();
+		echo "</div>";
 
 	}
 
@@ -532,9 +536,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		if ($fichier_vignette) {
 			echo "<div align='left'>\n";
 			//echo "<font size='2'>VIGNETTE DE PR&Eacute;VISUALISATION</font>";
-			echo "<div align='center'>";
+			$block = "doc_vignette $id_document";
+			echo bouton_block_invisible($block);
+			echo "<span align='center'>";
 			echo texte_vignette_non_inclus($largeur_vignette, $hauteur_vignette, $fichier_vignette, "$fichier");
-			echo "</div>";
+			echo "</span>";
 			echo "<font size='2'>\n";
 			$hash = calculer_action_auteur("supp_doc ".$id_vignette);
 
@@ -543,10 +549,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
-			$block = "doc_vignette $id_document";
-			echo bouton_block_invisible($block);
-			echo "<b>Vignette personnalis&eacute;e</b><center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo debut_block_invisible($block);
+			echo "<b>Vignette personnalis&eacute;e</b>";
+			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='verdana,arial,helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
 			//echo $raccourci_doc;
 			echo fin_block();
@@ -554,13 +559,15 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		}
 		else {
 			// pas de vignette
-			echo "<div align='center'>\n";
+			$block = "doc_vignette $id_document";
+			echo bouton_block_invisible($block);
+			echo "<span align='center'>\n";
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
 				echo "<a href='../$fichier'><img src='$icone' width='$largeur_icone' height='$hauteur_icone'></a>\n";
 			}
 			//echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
-			echo "</div>\n";
+			echo "</span>\n";
 
 			//echo "<p>".$raccourci_doc;
 
@@ -575,11 +582,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('id_document', $id_document);
 			$link->addVar('mode', 'vignette');
 
-			$block = "doc_vignette $id_document";
-			echo bouton_block_invisible($block);
-			echo "<b>Vignette par d&eacute;faut</b>";
 	
 			echo debut_block_invisible($block);
+			echo "<b>Vignette par d&eacute;faut</b>";
 			echo "<font size=1>";
 			afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
 			echo "</font>";
@@ -592,26 +597,26 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 		echo "<div style='border: 1px dashed black; padding: 0px;'>";	
 			
-			echo "<div style='padding: 5px; background-color: #333333; text-align: center; color: white;'>";	
-			echo "<b><font size=1>DOCUMENT JOINT</font></b>";
+			$block = "document $id_document";
+			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
+			echo bouton_block_invisible($block);
+			echo "<b><font size=1>DOCUMENT JOINT : ".majuscules(propre($titre))."</font></b>";
 			echo "</div>\n";
 			
 			echo "<div style='padding: 5px; background-color: #ffffff;'>";	
-			$block = "document $id_document";
-			echo bouton_block_invisible($block);
-			echo "<b>".propre($titre)."</b>";
-			if (strlen($descriptif)>0) echo "<br>".propre($descriptif);
+			if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
 			
 			echo "<font size=1 face='arial,helvetica,sans-serif'>";
 			if ($type_titre){
-				echo "<br>$type_titre";
+				echo "$type_titre";
 			} else {
-				echo "<br>Document ".majuscules($type_extension);
+				echo "Document ".majuscules($type_extension);
 			}
 			
 			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
 			echo "</font>";
 
+			echo debut_block_invisible($block);
 			if (ereg("^jpg|gif|png$",$type_extension)){
 				$vignette = fetch_document($id_document);
 				$fichier_vignette = $vignette->get('fichier');
@@ -624,23 +629,22 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			}
 
 
-			echo debut_block_invisible($block);
 			$link = new Link($redirect_url);
 			$link->addVar('modif_document', 'oui');
 			$link->addVar('id_document', $id_document);
 			echo $link->getForm('POST');
 		
 			echo "<b>Titre&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='forml' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='6' class='formo' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='6' class='forml' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
 		
-			echo "<p align='right'>";
-			echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
-			echo "</p>";
+			echo "<div align='right'>";
+			echo "<input class='fondgris' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+			echo "</div>";
 			echo "</form>";
 
 
@@ -742,12 +746,15 @@ function afficher_documents_colonne($id_article) {
 	
 	
 		/// Ajouter nouveau document/image
-		echo debut_boite_info();
+		echo "<p><div style='border: 1px solid black; padding: 4px; background-color: #e4e4e4;'>\n";
 		
-		echo "<div style='padding: 5px; border : dashed 1px black; background-color: #333333; text-align: center; color: white;'>";	
+		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: center; color: black;'>";	
+
+		echo bouton_block_invisible("ajouter_image");
 		echo "<b><font size=1>AJOUTER UNE IMAGE<br> OU UN DOCUMENT</font></b>";
 		echo "</div>\n";
 		
+		echo debut_block_invisible("ajouter_image");
 		echo "<p><font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 		$result_types_docs = mysql_query($query_types_docs);
@@ -758,6 +765,7 @@ function afficher_documents_colonne($id_article) {
 		}
 		echo "<b>ou installer des images &agrave; ins&eacute;rer dans le texte.</b>";
 		echo "</font>";
+		echo fin_block();
 				
 		$link = $image_link;
 		$link->addVar('redirect', $redirect_url);
@@ -769,8 +777,7 @@ function afficher_documents_colonne($id_article) {
 		
 		echo "</font>\n";
 		
-		echo fin_boite_info();
-
+		echo "</div>";
 	}
 
 }
@@ -838,11 +845,10 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('doc_supp', $id_vignette);
 			$block = "doc_vignette $id_document";
 			echo bouton_block_invisible($block);
-			echo "<b>Vignette personnalis&eacute;e</b><center>$largeur_vignette x $hauteur_vignette pixels</center>";
-			//echo "<font size=1 face='arial,helvetica,sans-serif' color='#666666'><div align=left>&lt;img$id_document|left&gt;</div><div align=center>&lt;img$id_document|center&gt;</div><div align=right>&lt;img$id_document|right&gt;</div></font>\n";
+			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo debut_block_invisible($block);
+			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='verdana,arial,helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
-			//echo $raccourci_doc;
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -883,23 +889,22 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		}
 			
 			
-		echo "<p></p><div style='border: 1px dashed black; padding: 0px;'>";	
+		echo "<p></p><div style='border: 1px dashed #aaaaaa; padding: 0px;'>";	
 			
-			echo "<div style='padding: 5px; background-color: #333333; text-align: center; color: white;'>";	
-			echo "<b><font size=1>DOCUMENT JOINT</font></b>";
+			$block = "document $id_document";
+			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
+			echo bouton_block_invisible($block);
+			echo "<b><font size=2>".propre($titre)."</font></b>";
 			echo "</div>\n";
 			
 			echo "<div style='padding: 5px; background-color: #ffffff;'>";	
-			$block = "document $id_document";
-			echo bouton_block_invisible($block);
-			echo "<b>".propre($titre)."</b>";
-			if (strlen($descriptif)>0) echo "<br>".propre($descriptif);
+			if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
 			
 			echo "<font size=1 face='arial,helvetica,sans-serif'>";
 			if ($type_titre){
-				echo "<br>$type_titre";
+				echo "$type_titre";
 			} else {
-				echo "<br>Document ".majuscules($type_extension);
+				echo "Document ".majuscules($type_extension);
 			}
 			
 			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
@@ -913,16 +918,16 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo $link->getForm('POST');
 		
 			echo "<b>Titre&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='forml' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='6' class='formo' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='6' class='forml' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
 		
-			echo "<p align='right'>";
-			echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
-			echo "</p>";
+			echo "<div align='right'>";
+			echo "<input class='fondgris' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+			echo "</div>";
 			echo "</form>";
 
 
