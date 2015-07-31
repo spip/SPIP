@@ -128,7 +128,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		. gros_titre($titre,'', false);
 
 
-	$onglet_contenu = $afficher_contenu_objet('breve', $id_breve,$row);
+	$onglet_contenu = $afficher_contenu_objet('breve', $id_breve,$id_rubrique);
 
 	
 

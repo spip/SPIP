@@ -121,7 +121,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	;
 
 	$onglet_contenu = $extra
-		. $afficher_contenu_objet('rubrique', $id_rubrique,$row)
+		. $afficher_contenu_objet('rubrique', $id_rubrique,$id_rubrique)
 		. (_INTERFACE_ONGLETS? $boucles:"");
 
 	$onglet_enfants = 

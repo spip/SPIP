@@ -122,7 +122,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$onglet_contenu = 
 		(_INTERFACE_ONGLETS?
 		($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
-		. $afficher_contenu_objet('site', $id_syndic,$row):"")
+		. $afficher_contenu_objet('site', $id_syndic,$id_rubrique):"")
 
 		. (($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") ?
 		  "<p class='site_syndique'><a href='".htmlspecialchars($url_syndic)."'>"
@@ -163,7 +163,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$onglet_proprietes = 
 		(_INTERFACE_ONGLETS?"":
-		$afficher_contenu_objet('site', $id_syndic,$row)
+		$afficher_contenu_objet('site', $id_syndic,$id_rubrique)
 		. ($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
 		)
 		. afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
