@@ -19,7 +19,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($langue_site == 'AUTO')
 		$langue_site = lire_meta('langue_site');
 
-	switch($charset) {
+	switch (strtolower($charset)) {
 	case 'utf-8':
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
@@ -67,7 +67,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 
 	// cyrillic - ref. http://czyborra.com/charsets/cyrillic.html
 	case 'windows-1251':
-	case 'CP1251':
+	case 'cp1251':
 		$GLOBALS['CHARSET'][$charset] = array (
 		0x80=>0x0402, 0x81=>0x0403, 0x82=>0x201A, 0x83=>0x0453, 0x84=>0x201E,
 		0x85=>0x2026, 0x86=>0x2020, 0x87=>0x2021, 0x88=>0x20AC, 0x89=>0x2030,
