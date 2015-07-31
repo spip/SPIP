@@ -160,7 +160,7 @@ function auth_mode()
 	/*AND $id_auteur>0*/ // reprise lors des restaurations
 	) ?
 	  "id_auteur=$id_auteur" :
-	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login));
+	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login,'','text'));
 
 	if (!$where) return '';
 
@@ -377,7 +377,7 @@ function auth_retrouver_login($login, $serveur=''){
 function auth_informer_login($login, $serveur=''){
 	if (!$login
 		OR !$login = auth_retrouver_login($login, $serveur)
-		OR !$row = sql_fetsel('*','spip_auteurs','login='.sql_quote($login),'','','','',$serveur)
+		OR !$row = sql_fetsel('*','spip_auteurs','login='.sql_quote($login,$serveur,'text'),'','','','',$serveur)
 		)
 		return array();
 
@@ -619,7 +619,7 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
  */
 function lire_php_auth($login, $pw, $serveur=''){
 
-	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login),'','','','',$serveur);
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login,$serveur,'text'),'','','','',$serveur);
 
 	if (!$row) {
 		if (spip_connect_ldap($serveur)

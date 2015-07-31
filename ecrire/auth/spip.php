@@ -45,7 +45,7 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 
 	// si envoi non crypte, crypter maintenant
 	elseif ($pass) {
-		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login),'','','','',$serveur);
+		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text'),'','','','',$serveur);
 
 		if ($row) {
 			include_spip('auth/sha256.inc');
@@ -58,11 +58,11 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	// login inexistant ou mot de passe vide
 	if (!$shapass AND !$md5pass) return array();
 
-	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($shapass) . " AND statut<>'5poubelle'",'','','','',$serveur);
+	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text') . " AND pass=" . sql_quote($shapass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// compat avec les anciennes bases en md5
 	if (!$row AND $md5pass)
-		$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'",'','','','',$serveur);
+		$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text') . " AND pass=" . sql_quote($md5pass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// login/mot de passe incorrect
 	if (!$row) return array();
@@ -71,7 +71,7 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	if ($shanext) {
 
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass).', '.sql_quote($md5pass).')','',$serveur);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext,$serveur,'text'), 'alea_futur' => sql_quote(creer_uniqid()),$serveur,'text'), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass,$serveur,'text').', '.sql_quote($md5pass,$serveur,'text').')','',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) AND defined('_ECRIRE_INSTALL'))
@@ -175,7 +175,7 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
 
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
 	if (strlen($new_login)){
-		$anciens = sql_allfetsel('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'",'','','','',$serveur);
+		$anciens = sql_allfetsel('id_auteur','spip_auteurs','login='.sql_quote($new_login,$serveur,'text')." AND statut='5poubelle'",'','','','',$serveur);
 		while ($row = array_pop($anciens)){
 			auteur_modifier($row['id_auteur'], array('login'=>''), true); // manque la gestion de $serveur
 		}
@@ -196,7 +196,7 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
  */
 function auth_spip_retrouver_login($login, $serveur=''){
 	if (!strlen($login)) return null; // pas la peine de requeter
-	$l = sql_quote($login);
+	$l = sql_quote($login,$serveur,'text');
 	if ($r = sql_getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
