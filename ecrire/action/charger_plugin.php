@@ -206,7 +206,7 @@ function action_charger_plugin_dist() {
 				$suite,
 				$redirect_action,
 				'',
-					form_hidden('?url_zip_plugin='.$zip.'&extract=oui')
+					form_hidden('?url_zip_plugin='.urlencode($zip).'&extract=oui')
 					.$texte
 					."<a class='suivant' href='"
 						.$redirect_annul
