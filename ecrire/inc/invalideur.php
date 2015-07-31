@@ -91,9 +91,12 @@ function purger_repertoire($dir, $options=array()) {
 				$total ++;
 			}
 		}
-		else if (is_dir($chemin))
+		else if (is_dir($chemin)){
 			if ($fichier != 'CVS')
 				$total += purger_repertoire($chemin, $options);
+			if (isset($options['subdir']) && $options['subdir'])
+				spip_unlink($chemin);
+		}
 
 		if (isset($options['limit']) AND $total>=$options['limit'])
 			break;
