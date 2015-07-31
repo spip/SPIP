@@ -116,6 +116,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'cache_mode_non_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode no comprimit.',
 'cache_modifiable_webmestre' => 'Aquest par&agrave;metre &eacute;s modificable pel webmestre del lloc Web.',
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
+'connexion_ldap' => 'Connexi&oacute;:',
 
 
 // D
@@ -478,7 +479,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_publies' => 'Els vostres articles publicats en l&iacute;nia',
 'info_question_accepter_visiteurs' => 'Si a les plantilles (esquelets) del vostre lloc Web es preveu l\'enregistrament de visitants sense acc&eacute;s a l\'espai privat, vulgueu activar la seg&uuml;ent opci&oacute;:',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari automatitzat i accediran a l\'espai privat per proposar els seus propis articles. <blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions denous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
+ cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
 'info_question_mots_cles' => 'Voleu utilitzar les paraules clau en la vostra web&nbsp;?',
 'info_question_proposer_site' => 'Qui pot proposar llocs referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
@@ -608,6 +610,7 @@ amb un color que indica el seu estat:',
 'install_echec_annonce' => 'La instal&middot;laci&oacute; probablement fracassar&agrave;, o anir&agrave; a parar a un lloc no funcional...',
 'install_extension_mbstring' => 'SPIP no funciona amb&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP exigeix l\'extensi&oacute; php&nbsp;:',
+'install_php_version' => 'PHP versi&oacute; @version@ insuficient (m&iacute;nim = @minimum@)',
 'install_select_langue' => 'Seleccioneu un idioma i despr&eacute;s feu un clic en el bot&oacute; &laquo;&nbsp;seg&uuml;ent&nbsp;&raquo; per iniciar el proc&eacute;s d\'instal&middot;laci&oacute;.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar les inscripcions',
@@ -742,6 +745,7 @@ amb un color que indica el seu estat:',
 'plugin_etat_stable' => 'estable',
 'plugin_etat_test' => 'en prova',
 'plugins_liste' => 'Llista dels connectors',
+'protocole_ldap' => 'Versi&oacute; del protocol:',
 
 
 // R
@@ -1001,6 +1005,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_sites_tous' => 'Les webs enlla&ccedil;ades',
 'titre_suivi_petition' => 'Seguiment de les peticions',
 'titre_syndication' => 'Sindicaci&oacute; de webs',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Tot el directori @upload@',
 'trad_article_inexistant' => 'No existeix cap article que porte aquest n&uacute;mero.',
 'trad_article_traduction' => 'Totes les versions d\'aquest article:',

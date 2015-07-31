@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>To change this, use your FTP client to set access permissions for each
  of these directories. The procedure is detailed in the installation guide.</p>
   <p>Once you have done this, you can ',
-'double_occurence' => 'Two instances',
+'double_occurrence' => 'Two instances',
 
 
 // E
