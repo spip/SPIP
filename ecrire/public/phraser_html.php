@@ -494,7 +494,7 @@ function phraser_criteres($params, &$result) {
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
 
 			if ($var->type != 'texte'
-			OR preg_match("/^(n|(n-)?\d+)$/S", $param)) {
+			OR preg_match("/^(n|n-|(n-)?\d+)$/S", $param)) {
 			  $op = ',';
 			  $not = "";
 			} else {
