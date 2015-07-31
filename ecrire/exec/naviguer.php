@@ -272,37 +272,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//
 	$encours .= $lister_objets('breves',array('titre'=>_T('info_breves_valider'),'statut'=>array('prepa','prop'),'id_rubrique'=>$id_rubrique, 'par'=>'date_heure'));
 
-	//
-	// Les sites references a valider
-	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$encours .= $lister_objets('sites',array('titre'=> _T('info_site_valider') ,'statut'=>'prop','id_rubrique'=>$id_rubrique, 'par'=>'nom_site'));
-	}
-
-	//
-	// Les sites a probleme
-	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non'
-	AND autoriser('publierdans','rubrique',$id_rubrique)) {
-		$encours .= $lister_objets('sites',array('titre'=> _T('avis_sites_syndiques_probleme') ,'statut'=>'publie', 'syndication'=>array('off','sus'),'id_rubrique'=>$id_rubrique, 'par'=>'nom_site'));
-	}
-
-	// Les articles syndiques en attente de validation
-	if ($id_rubrique == 0
-	AND autoriser('publierdans','rubrique',$id_rubrique)) {
-
-		$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
-		if ($cpt)
-			$encours .= "<br /><small><a href='" .
-				generer_url_ecrire("sites_tous") .
-				"' style='color: black;'>" .
-				$cpt .
-				" " .
-				_T('info_liens_syndiques_1') .
-				" " .
-				_T('info_liens_syndiques_2') .
-				"</a></small>";
-	}
 
 	$encours = pipeline('rubrique_encours',array('args'=>array('type'=>'rubrique','id_objet'=>$id_rubrique),'data'=>$encours));
 
