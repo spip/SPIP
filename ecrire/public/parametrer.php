@@ -291,11 +291,16 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
-	if (!$GLOBALS['forcer_lang'])
+	if (!$GLOBALS['forcer_lang']
+	AND $lang <> $GLOBALS['spip_lang']
+	) {
 		lang_select($lang);
+		$lang_select = true;
+	}
 
 	$f = charger_fonction('styliser', 'public');
-	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
+	list($skel,$mime_type, $gram, $sourcefile) =
+		$f($fond, $id_rubrique_fond, $GLOBALS['spip_lang']);
 
 	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
@@ -332,6 +337,10 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
 	$page['contexte'] = $local;
+
+	if ($lang_select)
+		lang_dselect();
+
 	return $page;
 }
 
