@@ -17,6 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * API
  */
 
+/**
+ * Teste l'existence de la table xxx_liens et renvoie celle ci precedee
+ * de la cle primaire.
+ * Renvoie false si l'objet n'est pas associable.
+ *
+ * @param string $objet
+ */
 function objet_associable($objet){
 	$trouver_table = charger_fonction('trouver_table','base');
 	$table_sql = table_objet_sql($objet);
