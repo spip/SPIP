@@ -24,7 +24,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		. $a
 		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonmouseover=\"helpline('"
-		  .addslashes($a)
+		  .addslashes(str_replace('&#39;',"'",$a))
 		  ."',$champhelp)\"\nonmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
