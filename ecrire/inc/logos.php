@@ -68,7 +68,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $titre="", $script
 		"<font size='1'>" .
 		$xy .
 		"\n<br />[<a href='" .
-		generer_action_auteur("iconifier", "$nom.$format", generer_url_ecrire($script, "$id_objet=$id", true)) .
+		generer_action_auteur("iconifier", "unlink $nom.$format", generer_url_ecrire($script, "$id_objet=$id", true)) .
 		"'>".
 		_T('lien_supprimer') .
 		"</a>]</font>" .
