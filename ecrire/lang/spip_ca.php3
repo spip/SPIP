@@ -170,7 +170,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 
 // C
-'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), el podeu sincronitzar amb l\'actualitat editorial d\'aquest lloc.',
+'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
 'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
 'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
 'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
@@ -436,7 +436,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'icone_sites_references' => 'Llocs referenciats',
 'icone_statistiques' => 'Estad&iacute;stiques del lloc',
 'icone_statistiques_visites' => 'Estad&iacute;stiques de les visites',
-'icone_suivi_activite' => 'Seguir l\'activitat editorial',
+'icone_suivi_activite' => 'Seguir la vida del lloc',
 'icone_suivi_actualite' => 'Evoluci&oacute; del lloc',
 'icone_suivi_forum' => 'Seguiment del f&ograve;rum p&uacute;blic: @nb_forums@&nbsp;contribution(s)',
 'icone_suivi_forums' => 'Seguir/gestionar els f&ograve;rums',
@@ -545,7 +545,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'info_code_acces' => 'No oblideu els vostres codis d\'acc&eacute;s!',
 'info_comment_lire_tableau' => 'Com llegir aquest quadre',
 'info_config_suivi' => 'Si aquesta adre&ccedil;a correspon a una llista de correu, podeu indicar m&eacute;s avall l\'adre&ccedil;a a la que els participants es poden registrar. Aquesta adre&ccedil;a pot ser una URL (per exemple la p&agrave;gina de registre a la llista per la Web), o una adre&ccedil;a electr&ograve;nica que tingui un amb  adresse email amb un assumpte espec&iacute;fic: <tt>@adresse_suivi@?assumpte=subscriure\'s</tt>):',
-'info_config_suivi_explication' => 'Podeu rebre autom&agrave;ticament, per correu electr&ograve;nic, l\'anunci de les novetats editorials del lloc. Si ho voleu, subscriviu-vos a la llista de correu seg&uuml;ent&nbsp;:',
+'info_config_suivi_explication' => 'Us podeu subscriure a la llista de correu d\'aquest lloc. Si ho feu, rebreu per correu electr&ograve;nic els anuncis dels articles i de les breus que es proposen per ser publicats.',
 'info_confirmer_passe' => 'Confirmar la nova contrasenya:',
 'info_connexion_base' => 'Segon pas: <B>Intent de connexi&oacute; a la base de dades</B>',
 'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</B><P> Podeu passar al seg&uuml;ent pas.',
@@ -1206,7 +1206,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'module_raccourci' => 'Drecera',
 'module_texte_affiche' => 'Text publicat',
 'module_texte_explicatif' => 'Podeu inserir els recursos seg&uuml;ents a les plantilles del vostre lloc p&uacute;blic. Es traduiran autom&agrave;ticament a les diferents lleng&uuml;es per les que existeix un fitxer de llengua.',
-'module_texte_traduction' => 'Aquest fitxer de llengua es troba disponible a:',
+'module_texte_traduction' => 'El fitxer de llengua &laquo;&nbsp;@module@&nbsp;&raquo; es troba disponible a:',
 'mois_non_connu' => 'desconegut',
 
 
