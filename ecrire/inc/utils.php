@@ -1368,7 +1368,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (_FILE_CONNECT) {
 		if (verifier_visiteur()=='0minirezo'
 			// si c'est un admin sans cookie admin, il faut ignorer le cache chemin !
-		  AND !isset($COOKIE['spip_admin']))
+		  AND !isset($_COOKIE['spip_admin']))
 			clear_path_cache();
 	}
 
@@ -1805,6 +1805,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		if (isset($options['ajax'])AND $options['ajax']){
 			include_spip('inc/filtres');
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
+		}
 
 		$page = pipeline('recuperer_fond',array(
 			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
