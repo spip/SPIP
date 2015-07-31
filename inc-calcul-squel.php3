@@ -1606,14 +1606,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$lacible = '\$GLOBALS[\'clean_link\']';
 		if ($fonctions) {
 			$filtres = array();
-			while (list(, $nom) = each($fonctions)) {
-				/*if (ereg("url=(.*)", $nom, $regs))
-					$lacible = "new Link('".$regs[1]."')";
-				else
-					$filtres[] = $nom;
-				*/
+			while (list(, $nom) = each($fonctions))
 				$lacible = "new Link('".$nom."')";
-			}
 			$fonctions = $filtres;
 		}
 		$milieu = '
@@ -1825,9 +1819,11 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= '	$query = $instance->requete;
 	$result = @spip_query($query);
 	if (!$result) {
-		$retour .= "<blink>BOUCLE'.$id_boucle.'</blink> <small><i>$query</i> ";
-		$retour .= "-> ".mysql_error();
-		$retour .= "</small> <blink>BOUCLE'.$id_boucle.'</blink>"; // debugger les squelettes
+		$retour .= "<tt><br><br><blink>&lt;BOUCLE'.$id_boucle.'&gt;</blink><br>\n".
+		"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
+		"$query<br>\n<font color=\'red\'><b>&gt; ".
+		mysql_error()."</b></font><br>\n".
+		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt><br><br>\n"; // debugger les squelettes
 	}
 	$total_boucle = @mysql_num_rows($result);
 	$pile_boucles[$id_instance]->num_rows = $total_boucle;
