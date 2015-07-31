@@ -311,7 +311,7 @@ spip_log('auth_rubrique() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'
 		if (!$r) return $rubriques;
 		$r = join(',', $r);
 
-		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
+		$result = sql_select("id_rubrique", "spip_rubriques", "id_parent IN ($r) AND id_rubrique NOT IN ($r)");
 	}
 }
 

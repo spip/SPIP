@@ -158,9 +158,7 @@ function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt
 // Autoriser a creer une breve dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_creerbrevedans_dist
 function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) {
-	$s = spip_query(
-	"SELECT id_parent FROM spip_rubriques WHERE id_rubrique="._q($id));
-	$r = sql_fetch($s);
+	$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique="._q($id));
 	return
 		$id
 		AND ($r['id_parent']==0)
@@ -262,9 +260,7 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 // = admins de rubrique parente si publiee
 // http://doc.spip.org/@autoriser_breve_modifier_dist
 function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve="._q($id));
-	$r = sql_fetch($s);
+	$r = sql_fetsel("id_rubrique,statut", "spip_breves", "id_breve="._q($id));
 	return
 		($r['statut'] == 'publie')
 			? autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
@@ -276,9 +272,8 @@ function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 // = ou statut 'prop,prepa' et $qui est auteur
 // http://doc.spip.org/@autoriser_article_modifier_dist
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
-	$r = sql_fetch($s);
+	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article="._q($id));
+
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 
 	return
@@ -315,11 +310,8 @@ function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 	isset($opt['id_groupe'])
 		? autoriser('modifier', 'groupemots', $opt['id_groupe'], $qui, $opt)
 		: (
-			$s = spip_query(
-				"SELECT id_groupe FROM spip_mots WHERE id_mot="._q($id)
-			)
-			AND $t = sql_fetch($s)
-			AND autoriser('modifier', 'groupemots', $t['id_groupe'], $qui, $opt)
+			$t = sql_getfetsel("id_groupe", "spip_mots", "id_mot="._q($id))
+			AND autoriser('modifier', 'groupemots', $t, $qui, $opt)
 		);
 }
 
@@ -343,11 +335,10 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (!$id) return false;
 
 	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
-	$s = sql_select("statut", "spip_articles", "id_article="._q($id));
-	$r = sql_fetch($s);
+	$r = sql_getfetsel("statut", "spip_articles", "id_article="._q($id));
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
-		in_array($r['statut'], array('prop', 'publie'))
+		in_array($r, array('prop', 'publie'))
 		OR sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 

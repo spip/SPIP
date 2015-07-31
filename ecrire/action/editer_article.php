@@ -118,9 +118,8 @@ function revisions_articles ($id_article, $c=false) {
 	if (!is_array($c)) trop_longs_articles();
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_fetch(spip_query(
-	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
-	if ($t['statut'] == 'publie') {
+	$t = sql_getfetsel("statut", "spip_articles", "id_article=$id_article");
+	if ($t == 'publie') {
 		$invalideur = "id='id_article/$id_article'";
 		$indexation = true;
 	}
