@@ -2772,18 +2772,25 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 // recuperere le chemin d'une css existante et :
 // 1. regarde si une css inversee droite-gauche existe dans le meme repertoire
 // 2. sinon la cree (ou la recree) dans IMG/cache_css/
+// SI on lui donne a manger une feuille nommee _rtl.css il va faire l'inverse
 function direction_css ($css) {
-	if ($GLOBALS['spip_lang_left'] == 'left')
+	if (!preg_match(',(_rtl)?\.css$,i', $css, $r)) return $css;
+
+	$sens = $r[1] ? 'left' : 'right'; // sens de la css lue en entree
+	$dir = $r[1] ? 'ltr' : 'rtl'; // direction voulu en sortie
+
+	if ($GLOBALS['spip_lang_right'] == $sens)
 		return $css;
 
 	// 1.
-	if (@file_exists($f = preg_replace(',\.css$,', '_rtl.css', $css)))
+	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$dir.'.css', $css);
+	if (@file_exists($f))
 		return $f;
 
 	// 2.
 	$f = sous_repertoire (_DIR_IMG, 'cache-css')
-		. preg_replace(',.*/(.*)\.css,', '\1', $css)
-		. '.' . substr(md5($css), 0,4) . '.css';
+		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $css)
+		. '.' . substr(md5($css), 0,4) . '_' . $dir . '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
 	AND ($GLOBALS['var_mode'] != 'recalcul'))
