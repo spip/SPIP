@@ -182,11 +182,8 @@
 	[(#TEXTE|justifier)]
 
 
-<BOUCLE_portfolio(DOCUMENTS){id_article}{mode=document}{inclus=non}>
-<BOUCLE_les_types(TYPES_DOCUMENTS){id_type}{extension==jpg|png|gif}>
+<BOUCLE_portfolio(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{inclus=non}{doublons}>
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-<BOUCLE_doublons(DOCUMENTS){id_document}{id_article}{doublons}></BOUCLE_doublons>
-</BOUCLE_les_types>
 </BOUCLE_portfolio>
 
 	[<FONT SIZE=2><P>(#PS|justifier)</P></FONT>]
