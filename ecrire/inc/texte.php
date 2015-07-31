@@ -616,6 +616,8 @@ define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
 
 // http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
+	// id "unique" pour les id du tableau
+	$tabid = substr(md5($bloc),0,4);
 
 	// Decouper le tableau en lignes
 	preg_match_all(',([|].*)[|]\n,UmsS', $bloc, $regs, PREG_PATTERN_ORDER);
@@ -626,7 +628,8 @@ function traiter_tableau($bloc) {
 
 	// Traiter chaque ligne
 	$reg_line1 = ',^(\|(' . _RACCOURCI_TH_SPAN . '))+$,sS';
-	$reg_line_all = ',^'  . _RACCOURCI_TH_SPAN . '$,sS';
+	$reg_line_all = ',^('  . _RACCOURCI_TH_SPAN . ')$,sS';
+	$hc = $hl = array();
 	foreach ($regs[1] as $ligne) {
 		$l ++;
 
@@ -657,7 +660,8 @@ function traiter_tableau($bloc) {
 					  }
 					  // inutile de garder le strong qui n'a servi que de marqueur 
 					  $cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
-					  $ligne= "<th scope='col'$attr>$cols[$c]</th>$ligne";
+					  $ligne= "<th id='id{$tabid}_c$c' $attr>$cols[$c]</th>$ligne";
+						$hc[$c] = "id{$tabid}_c$c"; // pour mettre dans les headers des td
 					}
 				}
 
@@ -694,17 +698,26 @@ function traiter_tableau($bloc) {
 	$numeric_class = array('.'=>'point',','=>'virgule');
 	for($i=0;$i<$n;$i++) {
 	  $align = true;
-	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
 	  for ($j=0;$j<$k;$j++) {
-	    $cell = trim($lignes[$j][$i]);
-	    if (preg_match($reg_line_all, $cell)) {
-		if (!preg_match('/^\d+([.,]?)\d*$/', $cell, $r))
-		  { $align = ''; break;}
-		else if ($r[1]) $align = $r[1];
-	      }
+		  $rowspans[$j][$i] = 1;
+			if ($align AND preg_match('/^\d+([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
+				if ($r[1])
+					$align = $r[1];
+			}
+			else
+				$align = '';
 	  }
-	  $numeric[$i] = !$align ? '' : (" class='numeric ".$numeric_class[$align]."'");
+	  $numeric[$i] = $align ? (" class='numeric ".$numeric_class[$align]."'") : '';
 	}
+	for ($j=0;$j<$k;$j++) {
+		if (preg_match($reg_line_all, $lignes[$j][0])) {
+			$hl[$j] = "id{$tabid}_l$j"; // pour mettre dans les headers des td
+		}
+		else
+			unset($hl[0]);
+	}
+	if (!isset($hl[0]))
+		$hl = array(); // toute la colonne ou rien
 
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
@@ -732,7 +745,14 @@ function traiter_tableau($bloc) {
 			  if(($x=$rowspans[$l][$c])>1) {
 				$attr.= " rowspan='$x'";
 			  }
-			  $ligne= "\n<td".$attr.'>'.$cols[$c].'</td>'.$ligne;
+				$h = (isset($hc[$c])?$hc[$c]:'').' '.(isset($hl[$l])?$hl[$l]:'');
+				if ($h=trim($h))
+					$attr.=" headers='$h'";
+				$b = ($c==0 AND isset($hl[$l]))?'th':'td';
+				// inutile de garder le strong qui n'a servi que de marqueur
+				if ($b=='th')
+					$cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
+			  $ligne= "\n<$b".$attr.'>'.$cols[$c]."</$b>".$ligne;
 			}
 		}
 
