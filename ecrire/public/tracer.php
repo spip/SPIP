@@ -82,17 +82,17 @@ function chrono_requete($temps)
 		if  ($boucle) @++$n[$boucle];
 
 		foreach($explain as $k => $v) {
-			$explain[$k] = "<tr><td>$k</td><td>"
+			$explain[$k] = "<tr><th>$k</th><td>"
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
-		$e = "<br /><table border='1'>"
-		. "<caption style='text-align: left'>"
+		$e = "<table class='explain'>"
+		. "<caption>"
 		. $query
 		. "</caption>"
-		. "<tr><td>Time</td><td>$dt</td></tr>" 
-		. "<tr><td>Order</td><td>$nb</td></tr>" 
-		. "<tr><td>Res</td><td>$res</td></tr>" 
+		. "<tr><th>Time</th><td>$dt</td></tr>"
+		. "<tr><th>Order</th><td>$nb</td></tr>"
+		. "<tr><th>Res</th><td>$res</td></tr>"
 		. join('', $explain)
 		. "</table>";
 
@@ -108,8 +108,7 @@ function chrono_requete($temps)
 		$titre = textebrut(preg_replace(',</tr>,', "\n",$v[0]));
 		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
 
-		$t[$v[1]][]= "<span class='spip-debug-arg'>" 
-		. str_repeat('&nbsp;', 5 - strlen(strval($i)))
+		$t[$v[1]][]= "<span class='spip-debug-arg'> "
 		. "<a title='$titre' href='$href'>$i</a>"
 		. '</span>'
 		. ((count($t[$v[1]]) % 10 == 9) ?  "<br />" : '');
@@ -124,18 +123,17 @@ function chrono_requete($temps)
 	unset($d['']);
 	// Fabriquer le tableau des liens de navigation dans le grand tableau
 	foreach ($d as $k => $v) {
-		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
+		$d[$k] =  $n[$k] . "</td><td>$k</td><td class='time'>$v</td><td>"
 		  . join('',$t[$k]);
 	}
 
-	$navigation = '<br />'
-	  . _T('zbug_statistiques')
-	  . '<br />'
+	$navigation = 
+	  _T('zbug_statistiques')
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
-	  . join("</td></tr>\n<tr><td>", $d)
+		. join("</td></tr>\n<tr><td>", $d)
 	  . "</td></tr>\n"
 	  .  (# _request('var_mode_objet') ? '' : 
-	     ("<tr><td>" .  count($temps) . " </td><td> " . _T('info_total') . '</td><td>' . $total . "</td></td><td></td></tr>"))
+	     ("<tr><td>" .  count($temps) . "</td><td>" . _T('info_total') . '</td><td class="time">' . $total . "</td><td></td></tr>"))
 	  . "</table>";
 
 	return array($temps, $navigation);
