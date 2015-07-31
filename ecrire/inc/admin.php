@@ -40,11 +40,19 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 	if ($retour) redirige_par_entete($retour);
 }
 
+function dir_admin()
+{
+	if (autoriser('configurer')) {
+		return _DIR_TMP;
+	} else {
+		return  _DIR_TRANSFERT . $GLOBALS['auteur_session']['login'] . '/';
+	}
+}
 
 // http://doc.spip.org/@fichier_admin
 function fichier_admin($action) {
-	global $connect_login;
-	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
+
+	return "admin_".substr(md5($action.(time() & ~2047).$GLOBALS['auteur_session']['login']), 0, 10);
 }
 
 // demande la creation d'un repertoire et sort
@@ -52,19 +60,13 @@ function fichier_admin($action) {
 
 // http://doc.spip.org/@debut_admin
 function debut_admin($script, $action='', $commentaire='') {
-	global $connect_login, $connect_statut, $connect_toutes_rubriques;
 
-	if ((!$action) || ($connect_statut != "0minirezo")) {
+	if ((!$action) || (!autoriser('chargerftp'))) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-	if ($connect_toutes_rubriques) {
-		$dir = _DIR_TMP;
-	} else {
-		$dir = _DIR_TRANSFERT . $connect_login . '/';
-	}
-
+	$dir = dir_admin();
 	$signal = fichier_admin($script);
 	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
@@ -119,17 +121,10 @@ function debut_admin($script, $action='', $commentaire='') {
 
 // http://doc.spip.org/@fin_admin
 function fin_admin($action) {
-	global $connect_login, $connect_toutes_rubriques;
-	if ($connect_toutes_rubriques) {
-		$dir = _DIR_TMP;
-	} else {
-		$dir = _DIR_TRANSFERT . $connect_login . '/';
-	}
-	$signal = fichier_admin($action);
-	@unlink($dir . $signal);
-	@rmdir($dir . $signal);
+	$signal = dir_admin() . fichier_admin($action);
+	@unlink($signal);
+	@rmdir($signal);
 }
-
 
 // http://doc.spip.org/@copy_request
 function copy_request($script, $suite, $submit='')

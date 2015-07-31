@@ -33,12 +33,12 @@ function liste_numeros_forum($script, $debut, $total)
 // http://doc.spip.org/@exec_forum_dist
 function exec_forum_dist()
 {
-	global $connect_statut;
+	forum_affiche(intval(_request('debut')));
+}
 
+function forum_affiche($debut, $admin=false)
+{
 	pipeline('exec_init',array('args'=>array('exec'=>'forum'),'data'=>''));
-
-	$debut = intval(_request('debut'));
-	$admin = _request('admin');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if ($admin) {
@@ -64,11 +64,6 @@ function exec_forum_dist()
 		gros_titre(_T('titre_cadre_forum_administrateur'));
 	else
 		gros_titre(_T('titre_cadre_forum_interne'));
-
-	if ($admin AND $connect_statut != "0minirezo") {
-	  echo _T('avis_non_acces_page');
-	  exit;
-	}
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 
