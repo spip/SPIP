@@ -1449,9 +1449,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	if ($col=='id_enfant')
 		$col = $boucle->primary;
 
-	// Cas particulier : id_parent => verifier les exceptions de tables
-	if (in_array($col,array('id_parent','id_secteur'))
-	  AND isset($exceptions_des_tables[$table][$col]))
+	// Cas particulier : id_parent, id_secteur et autres => verifier les exceptions de tables
+	if (isset($exceptions_des_tables[$table][$col]))
 		$col = $exceptions_des_tables[$table][$col];
 
 	// et possibilite de gerer un critere secteur sur des tables de plugins (ie forums)
