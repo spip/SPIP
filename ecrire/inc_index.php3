@@ -61,12 +61,14 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 
 	$index = '';
 	$mots = "INSERT DELAYED IGNORE spip_index_dico (hash, dico) VALUES (0,'')";
+
 	if ($type != 'syndic'){
 		$table_index = 'spip_index_'.$type.'s';
 	} else {
 		$table_index = "spip_index_".$type;
 	}
 	$col_id = 'id_'.$type;
+
 
 	switch($type) {
 	case 'article':

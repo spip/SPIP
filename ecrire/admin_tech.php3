@@ -29,6 +29,8 @@ if ($purger_index == "oui") {
 		mysql_query("DELETE FROM spip_index_breves");
 		mysql_query("DELETE FROM spip_index_mots");
 		mysql_query("DELETE FROM spip_index_rubriques");
+		mysql_query("DELETE FROM spip_index_syndic");
+
 		mysql_query("DELETE FROM spip_index_dico");
 	}
 }
