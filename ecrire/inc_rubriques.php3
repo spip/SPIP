@@ -579,28 +579,25 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint) {
 	else
 		$titre_parent = _T('info_racine_site');
 
-	$onClick = "if(findObj('selection_rubrique').style.display=='none')"
-		."{charger_id_url_si_vide("
-			."'ajax_page.php?fonction=aff_rubrique"
-			."&id_rubrique=$id_rubrique$exclus',"
-			."'selection_rubrique'"
-		.");}"
-		."else {findObj('selection_rubrique').style.display='none';}";
-
-	return 	"<table width='100%'><tr width='100%'><td width='45'>"
-	. "<a href=\"#\" onClick=\"$onClick\">"
-	."<img src='img_pack/loupe.png'
-			style='border: 0px; vertical-align: middle;' /></a> "
-	. "<img src='img_pack/searching.gif'
-		id='img_selection_rubrique' style='visibility: hidden;'>"
-	. "</td><td>"
-	. "<input type='text' id='titreparent' name='titreparent'
+	return 	"<table width='100%'><tr width='100%'><td width='45'>
+	<a	href=\"#\"
+		onClick=\"if(findObj('selection_rubrique').style.display=='none')
+			{charger_id_url_si_vide(
+				'ajax_page.php?fonction=aff_rubrique"
+			."&id_rubrique=$id_rubrique$exclus',
+				'selection_rubrique');}
+			else {findObj('selection_rubrique').style.display='none';}\"
+	><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;'
+	/></a><img src='img_pack/searching.gif'
+		id='img_selection_rubrique' style='visibility: hidden;'>
+	</td><td>
+	<input type='text' id='titreparent' name='titreparent'
 		disabled='disabled' class='forml' value=\""
-	. entites_html(textebrut(typo($titre_parent)))."\" />"
-	. "<input type='hidden' id='id_parent' name='id_parent'
-		value='$id_rubrique' />"
-	. "</td></tr></table>"
-	. "<div id='selection_rubrique' style='display: none;'></div>";
+	  . entites_html(textebrut(typo($titre_parent)))
+	  ."\" />
+	<input type='hidden' id='id_parent' name='id_parent' value='$id_rubrique' />
+	</td></tr></table>
+	<div id='selection_rubrique' style='display: none;'></div>";
 
 
 }
