@@ -2,8 +2,6 @@
 
 include ("inc_version.php3");
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
-	
-	include_ecrire ("inc_meta.php3");
 	include_ecrire ("inc_session.php3");
 	verifier_visiteur();
 	$aide_statut = ($auteur_session['statut'] == '1comite') ? 'redac' : 'admin';

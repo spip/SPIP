@@ -638,6 +638,21 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 	}
 }
 
+//
+// Lire les meta cachees
+//
+if (file_exists(($flag_ecrire ? '' : 'ecrire/').'inc_meta_cache.php3')) {
+	include_ecrire('inc_meta_cache.php3');
+} else {
+	function lire_meta($nom) {
+		global $meta;
+		return $meta[$nom];
+	}
+	function lire_meta_maj($nom) {
+		global $meta_maj;
+		return $meta_maj[$nom];
+	}
+}
 
 
 // Verifier la conformite d'une ou plusieurs adresses email
