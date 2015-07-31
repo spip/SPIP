@@ -1245,7 +1245,7 @@ the images used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
 	in a site installed under the same version of SPIP. It is a common mistake
 	to backup the database before upgrading
-	SPIP... For more information refer to [SPIP documentation->http://www.uzine.net/article1489.html].',
+	SPIP... For more information refer to <a href=\'http://www.uzine.net/article1489.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_adresse_annuaire_1' => '( If your directory is installed on the same machine as your Web site, it is probably &laquo;localhost&raquo;.)',
