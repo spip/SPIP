@@ -514,6 +514,8 @@ function typo_doublon(&$doublons, $letexte)
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
+	global $flag_ecrire;
+
 	$lien_texte = $regs[1];
 
 	$lien_url = trim($regs[3]);
