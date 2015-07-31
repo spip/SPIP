@@ -13,6 +13,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
+global $logo_libelles;
+$logo_libelles['id_article'] = _T('logo_article').aide ("logoart");
+$logo_libelles['id_auteur'] = _T('logo_auteur').aide ("logoart");
+$logo_libelles['id_breve'] = _T('logo_breve').aide ("breveslogo");
+$logo_libelles['id_syndic'] = _T('logo_site')." ".aide ("rublogo");
+$logo_libelles['id_mot'] = _T('logo_mot_cle').aide("breveslogo");
+$logo_libelles['id_rubrique'] = _T('logo_rubrique')." ".aide ("rublogo");
+$logo_libelles['id_racine'] = _T('logo_standard_rubrique')." ".aide ("rublogo");
+
 
 // http://doc.spip.org/@inc_iconifier_dist
 function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modif=true) {
@@ -76,16 +85,6 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 
 }
 
-global $logo_libelles;
-$logo_libelles = array(
-		       'id_article' => _T('logo_article').aide ("logoart"),
-		       'id_auteur'  => _T('logo_auteur').aide ("logoart"),
-		       'id_breve'   => _T('logo_breve').aide ("breveslogo"),
-		       'id_syndic'  => _T('logo_site')." ".aide ("rublogo"),
-		       'id_mot'     => _T('logo_mot_cle').aide("breveslogo"),
-		       'id_rubrique' => _T('logo_rubrique')." ".aide ("rublogo"),
-		       'id_racine' => _T('logo_standard_rubrique')." ".aide ("rublogo")
-		       );
 
 // http://doc.spip.org/@indiquer_logo
 function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
