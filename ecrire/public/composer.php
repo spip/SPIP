@@ -237,7 +237,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
 				// et placer un expire sur le dossier IMG/
-				return array ($on[0].($on[4]?"?$on[4]":"") , ($off ? $off[0] . ($off[4]?"?$off[4]":"") : ''));
+				return array ($on[0] , ($off ? $off[0] : ''));
 			}
 		}
 		else if ($id_rubrique) {
@@ -437,7 +437,7 @@ function nettoyer_env_doublons($envd) {
 function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
-		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $w;
+		if (reset($w)=="SELF") return $w;
 		foreach($w as $sw)
 			if ($m=match_self($sw)) return $m;
 	}
@@ -446,7 +446,7 @@ function match_self($w){
 // http://doc.spip.org/@remplace_sous_requete
 function remplace_sous_requete($w,$sousrequete){
 	if (is_array($w)) {
-		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $sousrequete;
+		if (reset($w)=="SELF") return $sousrequete;
 		foreach($w as $k=>$sw)
 			$w[$k] = remplace_sous_requete($sw,$sousrequete);
 	}
@@ -496,36 +496,11 @@ function calculer_select ($select = array(), $from = array(),
 		$menage = true;
 		// on recupere la sous requete 
 		$sous = match_self($w);
-		if ($sous[0]=='SELF') {
-			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
-			array_push($where_simples,$sous[2]);
-			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
-			$sous[1],
-			$from,
-			$from_type,
-			array($sous[2],'0=0'), // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
-			$join,
-			array(),array(),'',
-			$having,$table,$id,$serveur,false).")");
-		}
-		if ($sous[0]=='SUBSELECT') {
-			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
-			array_push($where_simples,$sous[3]); // est-ce utile dans ce cas ?
-			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
-			$sous[1], # select
-			$sous[2], #from
-			array(), #from_type
-			$sous[3]?(is_array($sous[3])?$sous[3]:array($sous[3])):array(), #where, qui peut etre de la forme string comme dans sql_select
-			array(), #join
-			$sous[4]?$sous[4]:array(), #groupby
-			$sous[5]?$sous[5]:array(), #orderby
-			$sous[6], #limit
-			$sous[7]?$sous[7]:array(), #having
-			$table,$id,$serveur,false
-			).")");
-		}
+		array_push($where_simples,$sous[2]);
+		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,array(),array(),'',$having,$table,$id,$serveur,false).")");
 		array_pop($where_simples);
 	}
+	//var_dump($where);
 
 	foreach($having as $k => $v) { 
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
