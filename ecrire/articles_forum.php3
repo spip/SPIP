@@ -64,42 +64,42 @@ echo "</td></tr></table>";
 echo "<p>";
 
 
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
+echo "<div class='serif2'>";
 
-	// reglages
-	if (!$debut) $debut = 0;
-	$pack = 5;		// nb de forums affiches par page
-	$enplus = 200;	// intervalle affiche autour du debut
-	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-	$limitnb = $debut + $enplus - $limitdeb;
+// reglages
+if (!$debut) $debut = 0;
+$pack = 5;		// nb de forums affiches par page
+$enplus = 200;	// intervalle affiche autour du debut
+$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+$limitnb = $debut + $enplus - $limitdeb;
 
-	$query_forum = "SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') LIMIT $limitdeb, $limitnb";
-	$result_forum = spip_query($query_forum);
+$query_forum = "SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') LIMIT $limitdeb, $limitnb";
+$result_forum = spip_query($query_forum);
 
 
-	$i = $limitdeb;
-	if ($i>0)
-		echo "<A HREF='articles_forum.php3?id_article=$id_article&page=$page'>0</A> ... | ";
-	while ($row = spip_fetch_array($result_forum)) {
-	
-		// barre de navigation
-		if ($i == $pack*floor($i/$pack)) {
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>$i</B></FONT>";
-			else
-				echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>$i</A>";
-			echo " | ";
-		}
-	
-		// elements a controler
-	
-		$i ++;
+$i = $limitdeb;
+if ($i>0)
+	echo "<A HREF='articles_forum.php3?id_article=$id_article&page=$page'>0</A> ... | ";
+while ($row = spip_fetch_array($result_forum)) {
+
+	// barre de navigation
+	if ($i == $pack*floor($i/$pack)) {
+		if ($i == $debut)
+			echo "<FONT SIZE=3><B>$i</B></FONT>";
+		else
+			echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>$i</A>";
+		echo " | ";
 	}
-	echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>...</A>";
 
-	echo $controle;
+	// elements a controler
 
-	echo "</FONT>";
+	$i ++;
+}
+echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>...</A>";
+
+echo $controle;
+
+echo "</div>";
 
 
 

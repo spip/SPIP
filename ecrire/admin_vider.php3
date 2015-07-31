@@ -50,9 +50,7 @@ echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_vider_cache')."</FONT></B></TD></TR>";
 
-echo "<TR><TD BACKGROUND=''>";
-
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+echo "<TR><TD class='serif'>";
 
 echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."<p align='justify'>"._T('texte_recalcul_page');
 
@@ -66,7 +64,6 @@ echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
 echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='admin_vider.php3'>";
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_vider_cache')."'></FORM></DIV>";
 
-echo "</FONT>";
 echo "</TD></TR>";
 echo "</TABLE>";
 
@@ -81,9 +78,7 @@ echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 echo _T('texte_effacer_donnees_indexation')."</FONT></B></TD></TR>";
 
-echo "<TR><TD BACKGROUND=''>";
-
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+echo "<TR><TD class='serif'>";
 
 echo "\n<p align='justify'>";
 if (lire_meta('activer_moteur') == 'oui')
@@ -106,7 +101,6 @@ echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash'>";
 echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui'>";
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";
 
-echo "</FONT>";
 echo "</TD></TR>";
 echo "</TABLE>";
 

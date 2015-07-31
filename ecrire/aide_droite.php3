@@ -15,34 +15,29 @@ include_ecrire ("inc_filtres.php3");
 
 
 ?>
-<HTML>
+<html>
 <head>
-<style><!--
-	.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
-	.formo {width: 100%; background-color: #EDF3FE; background-position: center bottom; float: none;}
-	.fondl {background-color: #EDF3FE; background-position: center bottom; float: none; color: #000000}
-	.fondo {background-color: #044476; background-position: center bottom; float: none; color: #FFFFFF}
-	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
-	label {cursor: pointer;}
-	.arial1 {font-family: Arial, Sans, sans-serif; font-size: 10px;}
-	.arial2 {font-family: Arial, Sans, sans-serif; font-size: 12px;}
-	.spip_cadre {
-		width : 100%;
-		background-color: #FFFFFF;
-		padding: 5px;
-	}
-	.spip_quote {
-		margin-left : 40px;
-		margin-top : 10px;
-		margin-bottom : 10px;
-		border : solid 1px #aaaaaa;
-		background-color: #dddddd;
-		padding: 5px;
-	}
+<style type="text/css"><!--
+.spip_cadre {
+	width : 100%;
+	background-color: #FFFFFF;
+	padding: 5px;
+}
+.spip_quote {
+	margin-left : 40px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	border : solid 1px #aaaaaa;
+	background-color: #dddddd;
+	padding: 5px;
+}
 
-	a {text-decoration: none;}
-	a:hover {color:#FF9900; text-decoration: underline;}
+a {text-decoration: none;}
+a:hover {color:#FF9900; text-decoration: underline;}
 
+body {
+	font-family: Georgia, Garamond, Times New Roman, serif;
+}
 h3.spip {
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
@@ -79,7 +74,6 @@ echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARG
 if ($spip_lang_rtl)
 	echo " dir='rtl'";
 echo ">";
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
 if (!$aide) {
 	$aide = 'spip';
@@ -139,8 +133,6 @@ echo "<font size=2>$les_notes</font><p>";
 
 ?>
 
-</FONT>
 
-
-</BODY>
-</HTML>
+</body>
+</html>

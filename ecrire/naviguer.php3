@@ -410,18 +410,18 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 	else $langue_parent = lire_meta('langue_site');
 
 	debut_cadre_enfonce('langues-24.gif');
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 	echo bouton_block_invisible('languesrubrique');
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
+	echo "<B>";
 	echo _T('titre_langue_rubrique');
 	echo "&nbsp; (".traduire_nom_langue($langue_rubrique).")";
-	echo "</B></FONT>";
+	echo "</B>";
 	echo "</TD></TR></TABLE>";
 
 	echo debut_block_invisible('languesrubrique');
-	echo "<center><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+	echo "<div class='verdana2' align='center'>";
 	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent);
-	echo "</font></center>\n";
+	echo "</div>\n";
 	echo fin_block();
 
 	fin_cadre_enfonce();

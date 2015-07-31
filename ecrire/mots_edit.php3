@@ -204,7 +204,8 @@ if ($connect_statut =="0minirezo"){
 	debut_cadre_formulaire();
 
 	echo "<FORM ACTION='mots_edit.php3' METHOD='post'>";
-	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+	echo "<div class='serif'>";
+	
 	if ($id_mot)
 		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>\n";
 	else if ($new=='oui')
@@ -272,7 +273,9 @@ if ($connect_statut =="0minirezo"){
 		extra_saisie($extra, 'mots', $id_groupe);
 	}
 
-	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+	echo "</div>";
 	echo "</FORM>";
 
 	fin_cadre_formulaire();

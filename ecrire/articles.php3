@@ -786,9 +786,7 @@ echo "</tr></table>\n";
 
 
 
-echo "<P align=left>";
-echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
-
+echo "<div class='serif' align='left'>";
 
 //
 // Affichage date redac et date publi
@@ -876,11 +874,11 @@ else if ($statut_article == 'publie') {
 echo "<a name='auteurs'></a>";
 debut_cadre_enfonce("redacteurs-24.gif");
 
-echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 if ($flag_editable AND $options == 'avancees') {
 	echo bouton_block_invisible("auteursarticle");
 }
-echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('texte_auteurs')."</B></FONT>";
+echo "<B>"._T('texte_auteurs')."</B>";
 echo aide ("artauteurs");
 echo "</TD></TR></TABLE>";
 
@@ -1177,9 +1175,9 @@ if ((lire_meta('multi_articles') == 'oui')
 	$langue_choisie_article = $row['langue_choisie'];
 
 	debut_cadre_enfonce('langues-24.gif');
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 	echo bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions');
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
+	echo "<B>";
 	if (lire_meta('gerer_trad') == 'oui')
 		echo _T('titre_langue_trad_article');
 	else
@@ -1187,7 +1185,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 	echo "&nbsp; (".traduire_nom_langue($langue_article).")";
 
-	echo "</B></FONT>";
+	echo "</B>";
 	echo "</TD></TR></TABLE>";
 
 	// Choix langue article
@@ -1322,7 +1320,7 @@ if ((lire_meta('multi_articles') == 'oui')
 			if ($ret) {
 				echo "<div align='$spip_lang_left' style='margin-top: 5px; padding: 0px; border: 1px dashed #999999; background-color: #f0f0f0;' $dir_lang>";
 				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
-				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'><b>"._T('trad_article_traduction')."</b></font></td></tr>";
+				echo "<tr bgcolor='#eeeecc'><td colspan='4' class='serif2'><b>"._T('trad_article_traduction')."</b></td></tr>";
 				echo $ret;
 				echo "</table>";
 				echo "</div>";
@@ -1456,7 +1454,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 // Corps de l'article
 //
 
-echo "\n\n<DIV align=justify>";
+echo "\n\n<div align='justify'>";
 
 if ($virtuel) {
 	debut_boite_info();
@@ -1492,29 +1490,28 @@ else {
 	}
 }
 
-
 //
 // Bouton "modifier cet article"
 //
 
 if ($flag_editable) {
-echo "\n\n<div align=right><br>";
-
-if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-	$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
-	$result_auteur = spip_query($query_auteur);
-	while ($row_auteur = spip_fetch_array($result_auteur)) {
-		$nom_auteur_modif = $row_auteur["nom"];
+	echo "\n\n<div align=right><br>";
+	
+	if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
+		$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
+		$result_auteur = spip_query($query_auteur);
+		while ($row_auteur = spip_fetch_array($result_auteur)) {
+			$nom_auteur_modif = $row_auteur["nom"];
+		}
+		icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
+		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_travail_article', array('nom_auteur_modif' => $nom_auteur_modif, 'date_diff' => $date_diff))."</font>";
+		echo aide("artmodif");
 	}
-	icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-	echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_travail_article', array('nom_auteur_modif' => $nom_auteur_modif, 'date_diff' => $date_diff))."</font>";
-	echo aide("artmodif");
-}
-else {
-	icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
-}
-
-echo "</div>";
+	else {
+		icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+	}
+	
+	echo "</div>";
 }
 
 
@@ -1569,8 +1566,7 @@ if ($row = spip_fetch_array($result_forum)) $total = $row["cnt"];
 if (!$debut) $debut = 0;
 $total_afficher = 8;
 if ($total > $total_afficher) {
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	echo "<CENTER>";
+	echo "<div class='serif2' align='center'>";
 	for ($i = 0; $i < $total; $i = $i + $total_afficher){
 		$y = $i + $total_afficher - 1;
 		if ($i == $debut)
@@ -1578,8 +1574,7 @@ if ($total > $total_afficher) {
 		else
 			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
 	}
-	echo "</CENTER>";
-	echo "</font>";
+	echo "</div>";
 }
 
 
@@ -1592,8 +1587,7 @@ afficher_forum($result_forum, $forum_retour);
 if (!$debut) $debut = 0;
 $total_afficher = 8;
 if ($total > $total_afficher) {
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	echo "<CENTER>";
+	echo "<div class='serif2' align='center'>";
 	for ($i = 0; $i < $total; $i = $i + $total_afficher){
 		$y = $i + $total_afficher - 1;
 		if ($i == $debut)
@@ -1601,10 +1595,11 @@ if ($total > $total_afficher) {
 		else
 			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
 	}
-	echo "</CENTER>";
-	echo "</font>";
+	echo "</div>";
 }
 
+
+echo "</div>\n";
 
 fin_page();
 

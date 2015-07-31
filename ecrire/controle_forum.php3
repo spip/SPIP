@@ -168,14 +168,13 @@ function controle_forum($row) {
 	$controle .= "<TD WIDTH=100% VALIGN='top'>";
 
 	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
-	$controle .= "<TR><TD>";
-	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
+	$controle .= "<TR><TD class='serif'>";
 
-	$controle .= "<FONT FACE='arial,helvetica'>".affdate_heure($forum_date_heure)."</FONT>";
+	$controle .= "<span class='arial2'>".affdate_heure($forum_date_heure)."</span>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)
 			$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
-		$controle .= "<FONT FACE='arial,helvetica'> / <B>$forum_auteur</B></FONT>";
+		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
 	}
 
 	if ($forum_stat != "off" AND $forum_stat != "privoff") {
@@ -198,7 +197,7 @@ function controle_forum($row) {
 	$controle .= "<P align='justify'>".propre($forum_texte);
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$controle .= "<P align='left'><FONT FACE='Verdana,Arial,Sans,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
+		$controle .= "<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
 
 	if ($mots_cles_forums == "oui") {
 		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
@@ -212,7 +211,6 @@ function controle_forum($row) {
 		}
 	}
 
-	$controle .= "</FONT>";
 	$controle .= "</TD></TR></TABLE>";
 
 	$controle .= "</TD></TR></TABLE>\n";
@@ -230,7 +228,7 @@ function controle_forum($row) {
 // Debut de la page de controle
 //
 
-echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
+echo "<div class='serif2'>";
 
 if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
 	echo "<B>"._T('avis_non_acces_page')."</B>";
@@ -296,7 +294,7 @@ echo "<A HREF='controle_forum.php3?debut=$i&page=$page'>...</A>";
 
 echo $controle;
 
-echo "</FONT>";
+echo "</div>";
 
 fin_page();
 

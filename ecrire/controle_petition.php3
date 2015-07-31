@@ -37,17 +37,14 @@ function controle_forum($request,$adresse_retour) {
 		$message = propre(echapper_tags($row['message']));
 		$statut = $row['statut'];
 		
-		
-		
 		echo "<P>";
 		
+		if ($statut=="poubelle"){
+			echo "<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR='#FF0000'>";
+		}
 		
-	if ($statut=="poubelle"){
-		echo "<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR='#FF0000'>";
-	}
-		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>$nom_site / $nom_email</B></FONT></TD></TR>";
-		echo "<TR><TD BGCOLOR='#FFFFFF'>";
-		echo "<FONT SIZE=3 FACE='Georgia,Garamond,Times,serif'>";
+		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee' class='verdana2' style='color: white;'><B>$nom_site / $nom_email</B></TD></TR>";
+		echo "<TR><TD BGCOLOR='#FFFFFF' class='serif'>";
 				
 		if ($statut=="publie"){
 			icone (_T('icone_supprimer_signature'), "controle_petition.php3?supp_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
@@ -76,17 +73,17 @@ function controle_forum($request,$adresse_retour) {
 			$titre = typo($row["titre"]);
 		}
 		echo "<P align='right'><A HREF='../spip_redirect.php3?id_article=$id_article&recalcul=oui'>$titre</A>";
-
-		echo "</FONT></TD></TR></TABLE>";
-	if ($statut=="poubelle"){
+	
 		echo "</TD></TR></TABLE>";
-	}
-
+		
+		if ($statut=="poubelle"){
+			echo "</TD></TR></TABLE>";
+		}
 	}
 }
 
   
-echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
+echo "<div class='serif2'>";
  
 if ($connect_statut == "0minirezo") {
 	gros_titre(_T('titre_suivi_petition'));
@@ -135,11 +132,10 @@ if ($connect_statut == "0minirezo") {
 }
 else {
 	echo "<B>"._T('avis_non_acces_page')."</B>";
-}	
-		
+}
 
-echo "</FONT>";
 
+echo "</div>";
 
 fin_page();
 

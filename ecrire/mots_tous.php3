@@ -107,14 +107,14 @@ if ($conf_mot>0) {
 	}
 
 	debut_boite_info();
-	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+	echo "<div class='serif'>";
 	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 
 	echo "<UL>";
 	echo "<LI><B><A HREF='mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3'>"._T('item_oui')."</A>,</B> "._T('info_oui_suppression_mot_cle');
 	echo "<LI><B><A HREF='mots_tous.php3'>"._T('item_non')."</A>,</B> "._T('info_non_suppression_mot_cle');
 	echo "</UL>";
-	echo "</FONT>";
+	echo "</div>";
 	fin_boite_info();
 	echo "<P>";
 }
@@ -246,15 +246,13 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				else
 					echo "<img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'>";
 				echo "</TD>";
-				echo "<TD>";
-				echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+				echo "<TD class='serif2'>";
 				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
 					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'>$titre_mot</A>";
 				else
 					echo "$titre_mot";
-				echo "</FONT></TD>";
-				echo "<TD ALIGN='right'>";
-				echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
+				echo "</TD>";
+				echo "<TD ALIGN='right' class='verdana2'>";
 
 				$texte_lie = array();
 
@@ -286,7 +284,6 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				} else
 					echo "&nbsp;";
 
-				echo "</FONT>";
 				echo "</TD>";
 				echo "</TR>\n";
 			}

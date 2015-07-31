@@ -120,7 +120,7 @@ if ($row = spip_fetch_array($result)) {
 
 		debut_boite_info();
 		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='$couleur_foncee' colspan=2>";
-		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif' color='#FFFFFF'><B>"._T('titre_rendez_vous')."</B></FONT>";
+		echo "<span class='serif2' color='#FFFFFF'><B>"._T('titre_rendez_vous')."</B></span>";
 		echo "</td></tr></table>";
 		echo "<input type='hidden' name='id_message' value='$id_message'>";
 		echo "<input type='hidden' name='changer_rv' value='$id_message'>";
