@@ -2067,7 +2067,7 @@ function calculer_param_date($date_compare, $date_orig){
 
 	return
 		// optimisation : mais prevoir le support SQLite avant
-		"TIMESTAMPDIFF(DAY,$date_orig,$init)";
+		"TIMESTAMPDIFF(HOUR,$date_orig,$init)/24";
 }
 
 /**
