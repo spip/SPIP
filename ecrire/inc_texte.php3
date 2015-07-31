@@ -793,16 +793,6 @@ function traiter_raccourcis_generale($letexte) {
 
 
 	//
-	// Raccourcis ancre [#ancre<-]
-	//
-	$regexp = "|\[#?([^][]*)<-\]|";
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs)
-		$letexte = str_replace($regs[0],
-		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
-
-
-	//
 	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
 	// Note : complique car c'est ici qu'on applique la typo() !
 	//
@@ -928,10 +918,11 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<ul', "<ul", $letexte);
 	$letexte = ereg_replace('</ul>[[:space:]]*(</p>)?', '</ul>', $letexte);
 
-	// Appeler la fonction de post-traitement
-	$letexte = spip_apres_propre ($letexte);
 	// Appeler les fonctions complementaires
 	$letexte = appliquer_fonction_apres("propre", $letexte);
+
+	// Appeler la fonction de post-traitement
+	$letexte = spip_apres_propre ($letexte);
 
 	return array($letexte,$mes_notes);
 }
