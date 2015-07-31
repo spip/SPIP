@@ -14,37 +14,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $messages_vus en reference pour interdire l'affichage de message en double
 
-function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
+function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
 	$tmp_var = substr(md5($where.$from), 0, 4);
-	$from =  "spip_messages AS messages$from";
-	$where .= (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')');
-
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
-	if (!($cpt = $cpt['n'])) return ;
-
-	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, ($afficher_auteurs ? 4 : 3), $tmp_var, '', $nb_aff);
-	}
-	if ($important)  debut_cadre_couleur();
-	// ie: echo "<div class='cadre-couleur'><div class='cadre-padding'>";
+	$requete = array('FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure');
 
-	echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
-	echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
-	echo $tranches;
-
-	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT $deb_aff, $nb_aff");
-;
-	while($row = spip_fetch_array($result_message)) {
-		$table[]= afficher_message_boucles($row, $messages_vus, $afficher_auteurs);
-	}
+	$col = ($afficher_auteurs ? 4 : 3);
 
 	if ($afficher_auteurs) {
 			$largeurs = array('', 130, 20, 120);
@@ -53,15 +31,17 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 			$largeurs = array('', 20, 120);
 			$styles = array('arial2', 'arial1', 'arial1');
 	}
-	spip_free_result($result_message);
-	echo afficher_liste($largeurs, $table, $styles);
 
-	echo "</TABLE>";
-	echo "</div>\n\n";
-	if ($important) fin_cadre_couleur();
+	if ($important)  #debut_cadre_couleur();
+	 echo "<div class='cadre-couleur'><div class='cadre-padding'>";
+
+	$t = affiche_tranche_bandeau($requete, "messagerie-24.gif", $col, $couleur_foncee, "white", $tmp_var, $deb_aff, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
+
+	foreach ($t as $v) $messages_vus[$v]= $v;
+	if ($important) echo '</div></div>';#fin_cadre_couleur();
 }
 
-function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
+function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
 

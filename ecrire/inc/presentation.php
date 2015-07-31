@@ -505,7 +505,7 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $de
 	$tous_id = array();
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($obligatoire OR ($cpt = $cpt['n']))) return  ;
+	if (! ($obligatoire OR ($cpt = $cpt['n']))) return  array();
 
 	if (!$requete["SELECT"]) $requete["SELECT"]= "*";
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);

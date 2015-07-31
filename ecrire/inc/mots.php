@@ -563,12 +563,9 @@ else $aff_articles = "'prop','publie'";
 	      'syndic' => $syndic);
 }
 
-   
-
 function afficher_groupe_mots($id_groupe) {
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
+	global $connect_id_auteur, $connect_statut;
 	global $spip_lang_right, $couleur_claire, $spip_lang;
-
 
 	$jjscript = array("fonction" => "afficher_groupe_mots",
 			  "id_groupe" => $id_groupe);
@@ -586,22 +583,22 @@ function afficher_groupe_mots($id_groupe) {
 
 	if (! ($cpt = $cpt['n'])) return true ;
 
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
-
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
-	}
-
 	$occurrences = calculer_liens_mots();
-	$table = '';
+
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 	if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
+	}
+
+	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
 	}
 
 	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
@@ -613,65 +610,10 @@ function afficher_groupe_mots($id_groupe) {
 
 	echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
+	$table = array();
 	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $deb_aff, $nb_aff");
 	while ($row = spip_fetch_array($result)) {
-		
-			$vals = '';
-			
-			$id_mot = $row['id_mot'];
-			$titre_mot = $row['titre'];
-			
-			if ($connect_statut == "0minirezo")
-				$aff_articles="prepa,prop,publie,refuse";
-			else
-				$aff_articles="prop,publie";
-
-			if ($id_mot!=$conf_mot) {
-				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
-				$ifond = $ifond ^ 1;
-
-				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
-				  $s = "<a href='" .
-				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))) .
-				    "' class='liste-mot'>".typo($titre_mot)."</a>";
-				else
-					$s = typo($titre_mot);
-
-				$vals[] = $s;
-
-				$texte_lie = array();
-
-				if ($occurrences['articles'][$id_mot] == 1)
-					$texte_lie[] = _T('info_1_article');
-				else if ($occurrences['articles'][$id_mot] > 1)
-					$texte_lie[] = $occurrences['articles'][$id_mot]." "._T('info_articles_02');
-
-				if ($occurrences['breves'][$id_mot] == 1)
-					$texte_lie[] = _T('info_1_breve');
-				else if ($occurrences['breves'][$id_mot] > 1)
-					$texte_lie[] = $occurrences['breves'][$id_mot]." "._T('info_breves_03');
-
-				if ($occurrences['sites'][$id_mot] == 1)
-					$texte_lie[] = _T('info_1_site');
-				else if ($occurrences['sites'][$id_mot] > 1)
-					$texte_lie[] = $occurrences['sites'][$id_mot]." "._T('info_sites');
-
-				if ($occurrences['rubriques'][$id_mot] == 1)
-					$texte_lie[] = _T('info_une_rubrique_02');
-				else if ($occurrences['rubriques'][$id_mot] > 1)
-					$texte_lie[] = $occurrences['rubriques'][$id_mot]." "._T('info_rubriques_02');
-
-				$texte_lie = join($texte_lie,", ");
-				
-				$vals[] = $texte_lie;
-
-
-				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-					$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' /></a></div>";
-				} 
-
-				$table[] = $vals;			
-			}
+		$table[] = afficher_groupe_mots_boucle($row, $occurrences);
 	}
 	if ($connect_statut=="0minirezo") {
 			$largeurs = array('', 100, 130);
@@ -690,6 +632,61 @@ function afficher_groupe_mots($id_groupe) {
 	if (!$deb_aff) echo "</div>";
 
 	return false;
+}
+
+function afficher_groupe_mots_boucle($row, $occurrences)
+{
+	global $connect_statut, $connect_toutes_rubriques;
+
+	$vals = '';
+			
+	$id_mot = $row['id_mot'];
+	$titre_mot = $row['titre'];
+			
+	if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
+		$s = "<a href='" .
+		  generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))) .
+		  "' class='liste-mot'>".typo($titre_mot)."</a>";
+	else  $s = typo($titre_mot);
+
+	$vals[] = $s;
+
+	$texte_lie = array();
+
+	$n = $occurrences['articles'][$id_mot];
+	if ($n == 1)
+		$texte_lie[] = _T('info_1_article');
+	else if ($n > 1)
+		$texte_lie[] = $n." "._T('info_articles_02');
+
+	$n = $occurrences['breves'][$id_mot];
+	if ($n == 1)
+		$texte_lie[] = _T('info_1_breve');
+	else if ($n > 1)
+		$texte_lie[] = $n." "._T('info_breves_03');
+
+	$n = $occurrences['sites'][$id_mot];
+	if ($n == 1)
+		$texte_lie[] = _T('info_1_site');
+	else if ($n > 1)
+		$texte_lie[] = $n." "._T('info_sites');
+
+	$n = $occurrences['rubriques'][$id_mot];
+	if ($n == 1)
+		$texte_lie[] = _T('info_une_rubrique_02');
+	else if ($n > 1)
+		$texte_lie[] = $n." "._T('info_rubriques_02');
+
+	$texte_lie = join($texte_lie,", ");
+				
+	$vals[] = $texte_lie;
+
+
+	if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
+		$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' /></a></div>";
+	} 
+	
+	return $vals;			
 }
 
 ?>
