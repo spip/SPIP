@@ -721,7 +721,7 @@ function traiter_tableau($bloc) {
 		if ($l) {
 			// definition du tr
 			if ($l == 1
-			AND ereg("^(\|[[:space:]]*{{[^}]+}}[[:space:]]*)+$", $ligne)) {
+			AND ereg("^(\|[[:space:]]*[{][{][^}]+[}][}][[:space:]]*)+$", $ligne)) {
 				$class = 'row_first';
 			} else {
 				$class = 'row_'.alterner($l, 'even', 'odd');
