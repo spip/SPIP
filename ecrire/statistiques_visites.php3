@@ -51,8 +51,19 @@ while ($row = mysql_fetch_array($result)) {
 	$log[$date] = $visites;
 }
 
+// Visites du jour
+if ($id_article) {
+	$query = "SELECT * FROM spip_visites_temp WHERE type = 'article$id_article' GROUP BY ip";
+	$result = spip_query($query);
+}
+else {
+	$query = "SELECT * FROM spip_visites_temp GROUP BY ip";
+	$result = spip_query($query);
+}
+$visites_today = mysql_num_rows($result);
 
-$max = max($log);
+
+$max = max(max($log),$visites_today);
 
 
 if ($max>10) $maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
@@ -60,7 +71,7 @@ else $maxgraph = 10;
 
 $rapport = 200 / $maxgraph;
 
-if (count($log) < 365) $largeur = floor(365 / count($log));
+if (count($log) < 365) $largeur = floor(365 / (count($log)+1));
 if ($largeur < 1) $largeur = 1;
 
 
@@ -71,24 +82,32 @@ echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 
 // Presentation graphique
 while (list($key, $value) = each($log)) {
-	
 	$hauteur = round($value * $rapport)	- 1;
-	
 	echo "<td valign='bottom' width=5>";
-	
 	if ($hauteur > 0){
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
 		echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;'>";
 	}
 	echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
-	
 	echo "</td>";
-	
-	$jour_precedent = $key;
 }
+	// Dernier jour
+	$hauteur = round($visites_today * $rapport)	- 1;
+	echo "<td valign='bottom' width=5>";
+	if ($hauteur > 0){
+		echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+		echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#e4e4e4;'>";
+	}
+	echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
+	echo "</td>";
+
+
 echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
 echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
-echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>max&nbsp;: $max</font></td>";
+echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "max&nbsp;: $max";
+	echo "<br>aujourd'hui&nbsp;: $visites_today";
+echo "</font></td>";
 echo "</tr></table>";
 
 fin_cadre_relief();
