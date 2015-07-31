@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'ALDONI PARTOPRENONTON :',
 	'bouton_annonce' => 'ANONCO',
 	'bouton_annuler' => 'Nuligi',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'eblas sendi mesaĝon',
 	'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
 	'bouton_checkbox_signature_unique_email' => 'po unu subskribo por retpoŝtadreso',
@@ -289,6 +291,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 	'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
 	'info_bio' => 'Biografio',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Ĉapo',
 	'info_chapeau_2' => 'Ĉapo :',
 	'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',

@@ -55,6 +55,8 @@ französischen SPIP-Dokumentation</a>.',
 	'bouton_ajouter_participant' => 'TEILNEHMER HINZUFÜGEN:',
 	'bouton_annonce' => 'ANKÜNDIGUNG',
 	'bouton_annuler' => 'Abbrechen',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'Verschicken einer Nachricht ermöglichen',
 	'bouton_checkbox_indiquer_site' => 'obligatorische Angabe einer Website',
 	'bouton_checkbox_signature_unique_email' => 'eine einzige Unterschrift pro E-Mail Adresse',
@@ -286,6 +288,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_barre_outils' => 'mit Symbolleiste?',
 	'info_base_installee' => 'Die Struktur Ihrer Datenbank wurde angelegt.',
 	'info_bio' => 'Biographie',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Kopf',
 	'info_chapeau_2' => 'Kopf:',
 	'info_chemin_acces_1' => 'Optionen: <b>Pfad im Verzeichnis</b>',

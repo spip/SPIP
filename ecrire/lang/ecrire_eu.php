@@ -53,6 +53,8 @@ Ez balidatu inportazio galdera hau.
 	'bouton_ajouter_participant' => 'PARTEHARTZAILE BAT GEHITU:',
 	'bouton_annonce' => 'IRAGARKIA',
 	'bouton_annuler' => 'Ezeztatu',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'mezu bat bidaltzeko aukera',
 	'bouton_checkbox_indiquer_site' => 'Web toki bat derrigorrezadierazi',
 	'bouton_checkbox_signature_unique_email' => 'Posta elektroniko bakoitzeko sinadura bana',
@@ -286,6 +288,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_barre_outils' => 'bere tresna-barrarekin ?',
 	'info_base_installee' => 'Zure datubasearen egitura instalatua izan da',
 	'info_bio' => 'Biografia',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Idazpurua',
 	'info_chapeau_2' => 'Epigrafea:',
 	'info_chemin_acces_1' => 'Aukerak: sarbidea urtekarian',

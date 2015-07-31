@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'AJOUTE YON PATISIPAN :',
 	'bouton_annonce' => 'ANONS',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'posibilite voye yon mesaj',
 	'bouton_checkbox_indiquer_site' => 'fòk enskri yon sitwèb',
 	'bouton_checkbox_signature_unique_email' => 'yon sèl siyati pou yon ladrès imèl ',
@@ -293,6 +295,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Strikti bazdone se enstale.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Chapo',
 	'info_chapeau_2' => 'Chapo :',
 	'info_chemin_acces_1' => 'Opsyion sa-yo: <b>Chemen pou laksè nan laniyè</b>',

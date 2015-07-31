@@ -55,6 +55,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'bouton_ajouter_participant' => 'ÚJ RÉSZTVEVŐ :',
 	'bouton_annonce' => 'HÍRDETÉS',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'Lehetőség üzenetküldéshez',
 	'bouton_checkbox_indiquer_site' => 'Honlapot kötelezően kell kijelölni',
 	'bouton_checkbox_signature_unique_email' => 'csak egy aláírás emailcímenként',
@@ -289,6 +291,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Az Ön adatbázisának struktúrája telepítve van.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Bevezető',
 	'info_chapeau_2' => 'Bevezető :',
 	'info_chemin_acces_1' => 'Opciók : <b>Elérési út a címtárban</b>', # MODIF

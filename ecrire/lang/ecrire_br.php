@@ -52,6 +52,8 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 	'bouton_ajouter_participant' => 'OUZHPENNAÑ UR PERZHIAD :',
 	'bouton_annonce' => 'KEMENN',
 	'bouton_annuler' => 'Nullañ',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'galloud da gas ur gemennadenn',
 	'bouton_checkbox_indiquer_site' => 'merkañ ul lec\'hienn web dre ret',
 	'bouton_checkbox_signature_unique_email' => 'ur sinadur hepken dre chomlec\'h postel ',
@@ -287,6 +289,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 	'info_barre_outils' => 'gant e varrenn ostilhoù ?',
 	'info_base_installee' => 'Staliet eo framm ho tiaz-titouroù.',
 	'info_bio' => 'Buhezskrid',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Tog',
 	'info_chapeau_2' => 'Tog :',
 	'info_chemin_acces_1' => 'Dibarzhioù : <b>hent moned er rollad tud</b>',

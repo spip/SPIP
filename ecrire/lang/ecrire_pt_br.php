@@ -50,6 +50,8 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 	'bouton_ajouter_participant' => 'INCLUIR UM PARTICIPANTE:',
 	'bouton_annonce' => 'AVISO',
 	'bouton_annuler' => 'Anular',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilidade de enviar uma mensagem',
 	'bouton_checkbox_indiquer_site' => 'informar obrigatoriamente um website',
 	'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço de e-mail',
@@ -282,6 +284,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_barre_outils' => 'com sua barra de ferramentas?',
 	'info_base_installee' => 'A estrutura da sua base de dados foi instalada.',
 	'info_bio' => 'Biografia',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Introdução',
 	'info_chapeau_2' => 'Introdução:',
 	'info_chemin_acces_1' => 'Opções: <b>Caminho de acesso no diretório</b>',

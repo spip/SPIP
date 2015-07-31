@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'AJUSTAR UN PARTICIPANT :',
 	'bouton_annonce' => 'ANONÇA',
 	'bouton_annuler' => 'Anular',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un sit web',
 	'bouton_checkbox_signature_unique_email' => 'una soleta signatura per adreça e-mail',
@@ -280,6 +282,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'L\'estructura de la voastra basa de donadas es installada.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Capèu',
 	'info_chapeau_2' => 'Capèu :',
 	'info_chemin_acces_1' => 'Opcions: <b>camin d\'accès dins l\'annuari</b>',
