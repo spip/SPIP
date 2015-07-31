@@ -1371,6 +1371,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '$'.$nom_var.' = $GLOBALS["les_notes"];
 			$GLOBALS["les_notes"] = "";
 			$GLOBALS["compt_note"] = 0;
+			$GLOBALS["marqueur_notes"] ++;
 			';
 		break;
 

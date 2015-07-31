@@ -32,6 +32,7 @@ tester_variable('ferme_ref', ']');
 tester_variable('ouvre_note', '[');
 tester_variable('ferme_note', '] ');
 tester_variable('les_notes', '');
+$marqueur_notes='';
 tester_variable('compt_note', 0);
 tester_variable('nombre_surligne', 4);
 
@@ -531,6 +532,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $debut_intertitre, $fin_intertitre;
 	global $compt_note;
 	global $les_notes;
+	global $marqueur_notes;
 	global $ouvre_ref;
 	global $ferme_ref;
 	global $ouvre_note;
@@ -569,8 +571,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 		// preparer la note
 		if ($num_note) {
-			$insert = "$ouvre_ref<a href='#nb$num_note' name='nh$num_note' class='spip_note'>$num_note</a>$ferme_ref";
-			$appel = "<html>$ouvre_note<a href='#nh$num_note' name='nb$num_note' class='spip_note'>$num_note</a>$ferme_note</html>";
+			if ($marqueur_notes)
+				$mn = $marqueur_notes.'-';
+			$insert = "$ouvre_ref<a href='#nb$mn$num_note' name='nh$mn$num_note' class='spip_note'>$num_note</a>$ferme_ref";
+			$appel = "<html>$ouvre_note<a href='#nh$mn$num_note' name='nb$mn$num_note' class='spip_note'>$num_note</a>$ferme_note</html>";
 		} else {
 			$insert = '';
 			$appel = '';
