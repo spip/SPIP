@@ -489,20 +489,37 @@ function trouver_sous_requetes($where){
 	return array($where_simples,$where_sous);
 }
 
-// La fonction presente dans les squelettes compiles
 
-// http://doc.spip.org/@calculer_select
+/**
+ * La fonction presente dans les squelettes compiles
+ *
+ * http://doc.spip.org/@calculer_select
+ *
+ * @param array $select
+ * @param array $from
+ * @param array $from_type
+ * @param array $where
+ * @param array $join
+ * @param array $groupby
+ * @param array $orderby
+ * @param string $limit
+ * @param array $having
+ * @param string $table
+ * @param string $id
+ * @param string $serveur
+ * @param bool $requeter
+ * @return resource
+ */
 function calculer_select ($select = array(), $from = array(), 
 			$from_type = array(),
       $where = array(), $join=array(),
 			$groupby = array(), $orderby = array(), $limit = '',
 			$having=array(), $table = '', $id = '', $serveur='', $requeter=true) {
 
-// retirer les criteres vides:
-// {X ?} avec X absent de l'URL
-// {par #ENV{X}} avec X absent de l'URL
-// IN sur collection vide (ce dernier devrait pouvoir etre fait a la compil)
-
+	// retirer les criteres vides:
+	// {X ?} avec X absent de l'URL
+	// {par #ENV{X}} avec X absent de l'URL
+	// IN sur collection vide (ce dernier devrait pouvoir etre fait a la compil)
 	$menage = false;
 	foreach($where as $k => $v) { 
 		if (is_array($v)){
@@ -515,6 +532,10 @@ function calculer_select ($select = array(), $from = array(),
 			$menage = true;
 		}
 	}
+
+	// evacuer les eventuels groupby vide issus d'un calcul dynamique
+	$groupby = array_diff($groupby,array(''));
+
 	// remplacer les sous requetes recursives au calcul
 	list($where_simples,$where_sous) = trouver_sous_requetes($where);
 	foreach($where_sous as $k=>$w) {
@@ -558,10 +579,10 @@ function calculer_select ($select = array(), $from = array(),
 		}
 	}
 
-// Installer les jointures.
-// Retirer celles seulement utiles aux criteres finalement absents mais
-// parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
-// si elle est seulement utile a Ln+1 elle meme inutile
+	// Installer les jointures.
+	// Retirer celles seulement utiles aux criteres finalement absents mais
+	// parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
+	// si elle est seulement utile a Ln+1 elle meme inutile
 	
 	$afrom = array();
 	$equiv = array();
