@@ -18,7 +18,7 @@
 // souvent utilisee pour faire de la concatenation lors de la compilation
 // plutot qu'a l'execution, i.e. pour remplacer 'x'.'y' par 'xy'
 
-define('_CODE_QUOTE', ",^(?:\n//[^\n]*\n)? *'(.*)' *$,");
+define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -144,7 +144,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	if (!preg_match(_CODE_QUOTE, $pas, $r)) {
 		$pas = "((\$a = intval($pas)) ? \$a : 10)";
 	} else {
-		$r = intval($r[1]);
+		$r = intval($r[2]);
 		$pas = strval($r ? $r : 10);
 	}
 	$type = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucle->id_parent);
