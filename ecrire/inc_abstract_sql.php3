@@ -52,7 +52,7 @@ function spip_abstract_select (
 		}
 	}
 	return $f($select, $from, $where,
-		  $groupby, $orderby, $limit,
+		  $groupby, array_filter($orderby), $limit,
 		  $sousrequete, $cpt,
 		  $table, $id, $serveur);
 }
