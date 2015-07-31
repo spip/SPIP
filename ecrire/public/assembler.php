@@ -20,7 +20,7 @@ function public_assembler_dist($fond) {
 	  global $auteur_session, $forcer_lang, $ignore_auth_http, $var_mode;
 
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
+	if ($forcer_lang AND ($forcer_lang!=='non')) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
