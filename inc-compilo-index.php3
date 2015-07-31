@@ -85,7 +85,8 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	global $exceptions_des_tables, $table_des_tables, $tables_principales;
 
 	$i = 0;
-	if ($explicite === false) {
+
+	if ($explicite != '') {
 	// Recherche d'un champ dans un etage superieur
 		while (($idb != $explicite) && $idb) {
 			$i++;
@@ -179,7 +180,7 @@ function calculer_champ($p) {
 	else {
 	// On regarde ensuite s'il y a un champ SQL homonyme,
 	// et on definit le type et les traitements
-	$p->code = index_pile($p->id_boucle, $nom_champ, $p->boucles, $p->explicite);
+	$p->code = index_pile($p->id_boucle, $nom_champ, $p->boucles, $p->nom_boucle);
 	if (($p->code) && ($p->code != '$Pile[0][\''.$nom_champ.'\']')) {
 
 		// Par defaut basculer en numerique pour les #ID_xxx

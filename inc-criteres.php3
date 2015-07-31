@@ -395,6 +395,7 @@ function calculer_criteres ($idb, &$boucles) {
 				$val = calculer_param_dynamique($match[6], $boucles, $idb);
 				// erreur
 				if (is_array($val)) return $val;
+
 			}
 			
 			else {
@@ -408,12 +409,12 @@ function calculer_criteres ($idb, &$boucles) {
 				else if ($val == 'id_enfant')
 					$val = 'id_parent';
 				$val = calculer_argument_precedent($idb, $val, $boucles) ;
-			}
+				if (ereg('^\$',$val))
+					$val = '" . addslashes(' . $val . ') . "';
+				else
+					$val = addslashes($val);
 
-			if (ereg('^\$',$val))
-				$val = '" . addslashes(' . $val . ') . "';
-			else
-				$val = addslashes($val);
+			}
 
 			// Traitement general des relations externes
 			if ($s = relations_externes($type, $col)) {
@@ -666,23 +667,25 @@ function calculer_param_date($date_compare, $date_orig) {
 // Calculer les parametres
 //
 function calculer_param_dynamique($val, &$boucles, $idb) {
-	if (ereg("^#([A-Za-z0-9_-]+)$", $val, $m)) {
-	  	$p = new Champ;
-		$p->nom_champ = $m[1];
-		$p->id_boucle = $idb;
-		$p->boucles = &$boucles;
-		$p->id_mere = $idb;
-		$p = calculer_champ($p, $idb, $boucles,$idb);
-		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $p, $v))
+	if (ereg(NOM_DE_CHAMP, $val, $regs)) {
+	  	$champ = new Champ;
+		$champ->nom_boucle = $regs[2];
+		$champ->nom_champ = $regs[3];
+		$champ->etoile = $regs[4];
+		$champ->id_boucle = $idb;
+		$champ->boucles = &$boucles;
+		$champ->id_mere = $idb;
+		$champ = calculer_champ($champ);
+		return '" . addslashes(' . $champ . ') . "';
+/*
+		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $champ, $v))
 			return $v[0];
-		else { return array(L("parametre dynamique inexistant ?"), 
-				    $val);
-		}
+			else return $val; */
 	} else {
-		if (ereg('^\$(.*)$',$val,$m))
-			return '$Pile[0][\''. $m[1] ."']";
+		if (ereg('^\$(.*)$',$val,$regs))
+		  return '" . addslashes($Pile[0][\''. $regs[1] ."']') . ";
 		else
-			return $val;
+		  return addslashes($val);
 	}
 }
 

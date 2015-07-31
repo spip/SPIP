@@ -303,28 +303,6 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	return $page;
 }
 
-
-
-
-
-// Fonction appelee par le skel pour assembler les balises
-function _f($push = false, $texte='') {
-	static $pile_f = array();
-
-	// push et teste si nul
-	if ($push) {
-		array_push($pile_f, $texte);
-		if ($texte)
-			return true;
-	}
-	// ou pop
-	// Attention "return array_pop($pile_f)" provoquerait
-	// l'affichage du chiffre zero pour, par exemple, #TOTAL_BOUCLE
-	else
-		if ($texte = array_pop($pile_f))
-			return $texte;
-}
-
 ### A passer peut-etre dans inc_db_mysql
 // Cette fonction est systematiquement appelee par les squelettes
 // pour constuire une requete SQL de type "lecture" (SELECT) a partir
