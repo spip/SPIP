@@ -64,17 +64,23 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			}
 			$bandeau = $dir . '*' . $ext . $err;
 		} else {
-			if (preg_match('/^([^?]*)[?]([0-9a-z_]+)=(.*)$/', $url, $r)) {
-				list(,$server, $dir, $script) = $r;
+			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
+			  list(,$server, $dir, $script, $args) = $r;
 				if (((!$server) OR ($server == './') 
 				    OR strpos($server, url_de_base()) === 0)
-				    AND is_dir($dir))
+				    AND is_dir($dir)) {
 				  $url = $script;
-			} else { $dir = 'exec'; $script = $url;}
+				  // Pour quand le validateur saura simuler 
+				  // une query-string...
+				  // $args = preg_split('/&(amp;)?[a-z0-9_]+=/', $args);
+				  $args = true;
+				}
+			} else { $dir = 'exec'; $script = $url; $args = true;}
+
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
-				$res = $transformer_xml(charger_fonction($url, $dir), true);
+				$res = $transformer_xml(charger_fonction($url, $dir), $args);
 				$url_aff = valider_pseudo_url($dir, $script);
 			} else {
 				$res = $transformer_xml(recuperer_page($url));
