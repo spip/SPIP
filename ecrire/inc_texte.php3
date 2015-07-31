@@ -120,10 +120,6 @@ define ('__regexp_echappe',
 		. "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>" #poesie
 		. ")/si");
 
-define ('__regexp_img_echappe', "<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">");
-define ('__regexp_img_seule_echappe', "<(IMG)([0-9]+)(\|([^\>]*))?".">");
-define ('__regexp_doc_echappe', "<(DOC|EMB)([0-9]+)(\|([^\>]*))?".">");
-
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	if (preg_match_all(__regexp_echappe, $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
@@ -185,37 +181,16 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		$letexte = traiter_math($letexte, $les_echap, $num_echap, $source);
 	}
 
-	//
-	// Reperages d'images et de documents utilisateur 
+	// Traitement des images et documents <IMGxx|right>
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)
-	if (eregi(__regexp_img_echappe, $letexte)) {
-		$letexte = str_replace("\r\n", "\n", $letexte);
-		$letexte = str_replace("\r", "\n", $letexte);
-
-		// Attention certains raccourcis impliquent un paragraphe
-		// (a completer, ou faire autrement !)
-		$letexte = str_replace('}}}', "}}}\n\n", $letexte);
-
-		$paragraphes = explode("\n\n", $letexte);
-		
-		foreach ($paragraphes as $para) {
-			while (eregi(__regexp_doc_echappe, $para, $match)) {
-				$num_echap++;	
-#				$para = "</no p>@@SPIP_$source$num_echap@@<no p>\n\n".str_replace($match[0], "", $para);
-				$para = str_replace($match[0], "</no p>@@SPIP_$source$num_echap@@<no p>", $para);
-				$les_echap[$num_echap] = $match;
-				
-			}
-			while (eregi(__regexp_img_seule_echappe, $para, $match)) {
-				$num_echap++;	
-				$para = str_replace($match[0], "@@SPIP_$source$num_echap@@", $para);
-				$les_echap[$num_echap] = $match;
-				
-			}
-			$paragraphe[] = "$para";
+	define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
+	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $match) {
+			$num_echap++;
+			$letexte = str_replace($match[0],
+				"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
+			$les_echap[$num_echap] = $match;
 		}
-		$letexte= join("\n\n",$paragraphe);
 	}
 
 	return array($letexte, $les_echap);
@@ -250,9 +225,7 @@ function echappe_retour($letexte, $les_echap, $source='') {
 
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	while (eregi(__regexp_img_echappe, $letexte, $match)) {
-	  $letexte = str_replace($match[0], "($message)", $letexte);
-	}
+	preg_replace(__preg_img, "($message)", $letexte);
 	return $letexte;
 }
 
