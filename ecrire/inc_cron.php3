@@ -36,7 +36,7 @@ define("_ECRIRE_INC_CRON", "1");
 // de suffixe ".lock", modifie a chaque intervention et des le debut
 // de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
 // Les taches les plus longues sont tronconnees, ce qui impose d'antidater
-// le fichier de verrouillage.
+// le fichier de verrouillage (avec la valeur absolue du code de retour).
 // La fonction executant la tache est un homonyme de prefixe "cron_"
 // Le fichier homonyme de prefixe "inc_" et de suffixe _EXTENSION_PHP
 // est automatiquement charge et est supposee la definir si ce n'est fait ici.
@@ -92,7 +92,7 @@ function spip_cron($taches=array()) {
 
 function taches_generales() {
 
-  // recalcul des rubriques publiques (cas de la publication post-datee)
+  // MAJ des rubriques publiques (cas de la publication post-datee)
 
 	$taches_generales = array('rubriques');
 	

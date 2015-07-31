@@ -121,7 +121,7 @@ function utiliser_cache($chemin_cache, $delais) {
 
 	//  calcul par forcage
 
-	if ($GLOBALS['var_debug'] &&
+	if ($GLOBALS['var_mode'] &&
 	    ($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
 	     || $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
 	     || @file_exists(_ACCESS_FILE_NAME))) # insuffisant...

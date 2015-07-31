@@ -28,8 +28,7 @@ define('_FILE_CONNECT',
 $included_files = array();
 
 function include_local($file) {
-	if (!empty($GLOBALS['included_files'][$file])) return;
-	$GLOBALS['included_files'][$file] = 1;
+	if ($GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
@@ -37,23 +36,20 @@ function include_ecrire($file) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$file = _DIR_INCLUDE . $file;
-	if (!empty($GLOBALS['included_files'][$file])) return;
-	$GLOBALS['included_files'][$file] = 1;
+	if ($GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
 function include_lang($file) {
 	$file = _DIR_LANG . $file;
-	if (!empty($GLOBALS['included_files'][$file])) return;
-	$GLOBALS['included_files'][$file] = 1;
+	if ($GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
 function include_plug($file) {
 	$file = _DIR_RESTREINT . $file;
-	if (!empty($GLOBALS['included_files'][$file])) return;
+	if ($GLOBALS['included_files'][$file]++) return;
 	if (file_exists($file)) include($file);
-	$GLOBALS['included_files'][$file] = 1;
 }
 
 
@@ -248,7 +244,7 @@ $invalider_caches = false;
 // Si la variable vaut 0 aucun quota ne s'applique
 $quota_cache = 5;
 
-// code a fournir pour obtenir le debuggueur (urls &var_debug=xxxx)
+// code a fournir pour obtenir le debuggueur (urls &var_mode=debug)
 // par defaut seuls les admins : $code_activation_debug='';
 // pour mettre un mot de passe : $code_activation_debug='x5g8jk9';
 $code_activation_debug = '';
@@ -744,7 +740,7 @@ class Link {
 				if (!preg_match('/^('.
 				(!_DIR_RESTREINT ?
 					'|lang|set_options|set_couleur|set_disp|set_ecran':
-					'|submit|recalcul')
+					'|submit|var_mode')
 				. ')$/i', $name)) {
 					if (is_array($value))
 						$this->arrays[$name] = $value;

@@ -71,6 +71,20 @@ function champs_traitements ($p) {
 			   $ps);				
 }
 
+function param_balise(&$p) 
+{
+	$a = $p->fonctions;
+	if ($a) list(,$nom) = each($a) ; else $nom = '';
+	if (!ereg(' *\{ *([^}]+) *\} *',$nom, $m))
+	  return '';
+	else {
+		$filtres= array();
+		while (list(, $f) = each($a)) if ($f) $filtres[] = $f;
+		$p->fonctions = $filtres;
+		return $m[1];
+	}
+}
+
 //
 // Definition des balises
 //
@@ -705,17 +719,13 @@ function balise_SELF_dist($p) {
 // reference aux parametres GET & POST
 
 function balise_HTTP_VARS_dist($p) {
-	$a = $p->fonctions;
-	if ($a) list(,$nom) = each($a) ; else $nom = '';
-	if (!ereg(' *\{ *([][a-zA-Z0-9_-]+) *\} *',$nom, $m))
-		erreur_squelette(_L("Champ #HTTP_VARS argument '$nom' fautif"),
+	$nom = param_balise($p);
+	if (!$nom)
+		erreur_squelette(_L("Champ #HTTP_VARS argument manquant"),
 				$p->id_boucle);
 	else {
-		$p->code = '$Pile[0]["' . addslashes($m[1]) . '"]';
+		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
 		$p->statut = 'php';
-		$filtres= array();
-		while (list(, $nom) = each($a)) if ($nom) $filtres[] = $nom;
-		$p->fonctions = $filtres;
 	}
 	return $p;
 }

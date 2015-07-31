@@ -80,7 +80,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
 	global $flag_preserver, $flag_dynamique, $lastmodified;
-	global $var_preview, $var_debug;
+	global $var_preview, $var_mode;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
@@ -91,7 +91,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$statut = $GLOBALS['auteur_session']['statut'];
 		if ($statut=='0minirezo' OR
 		(lire_meta('preview')=='1comite' AND $statut=='1comite')) {
-			$var_debug = 'recalcul';
+			$var_mode = 'recalcul';
 			$delais = 0;
 			$var_preview = true;
 			spip_log('preview !');
@@ -116,7 +116,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	// (ici on ne tient pas compte d'une obsolence du cache ou des
 	// eventuels fichiers inclus modifies depuis la date
 	// HTTP_IF_MODIFIED_SINCE du client)
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_debug
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_mode
 	    AND $chemin_cache AND !$flag_dynamique) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
@@ -198,19 +198,20 @@ function terminer_public_global() {
 		ecrire_caches_langues();
 	}
 
-	// S'il n'y a pas eu plus de 3 executions de squelette
-	// il reste du temps pour une tache de fond, 
-	if ($GLOBALS['included_files']['inc-calcul.php3'] <= 3) {
-		include_ecrire('inc_cron.php3');
-		spip_cron();
-	}
-
 	// Gestion des statistiques du site public
-	// (a la fin pour ne pas forcer le $db_ok)
+
 	if (lire_meta("activer_statistiques") != "non") {
 		include_local ("inc-stats.php3");
 		ecrire_stats();
 	}
+
+	// S'il n'y a pas eu de compilation de squelette
+	// il reste du temps pour une tache de fond, 
+	// ... Les serveurs etant devenus ce qu'il sont, precaution inutile
+	#	if (empty($GLOBALS['included_files']['inc-compilo.php3'])) {
+		include_ecrire('inc_cron.php3');
+		spip_cron();
+	# }
 }
 
 // Cette fonction sert au dernier ob_start() de inc-public : elle

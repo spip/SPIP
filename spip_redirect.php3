@@ -37,7 +37,7 @@ if (strpos($url,'?')) {
 else {
 	$super='?';
 }
-if ($recalcul) $url .= $super."var_debug=recalcul";
+if ($recalcul) $url .= $super."var_mode=recalcul";
 else if ($preview) $url .= $super."var_preview=oui";
 @header("Location: $url");
 

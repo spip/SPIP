@@ -511,9 +511,6 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	include_local("inc-$gram-squel.php3");
 
 	$racine = parser($squelette, '',$boucles, $nom);
-#	include_local('inc-compilo-debug.php3');
-#	 afftable($racine);
-#	 affboucles($boucles);
 
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'documents' => false);
@@ -626,7 +623,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			##    compile vers boucle_debug_compile()
 			## 2) le resultat de la boucle, lui, sera plus tard envoye vers
 			##    boucle_debug_resultat()
-			if ($GLOBALS['var_debug'] == 'oui') {
+			if ($GLOBALS['var_mode'] == 'debug') {
 				boucle_debug_compile ($id, $nom, $pretty,
 					$sourcefile, $codeboucle.$fincode);
 				$codedebug = "\n	boucle_debug_resultat
@@ -670,7 +667,7 @@ function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 
 ?".">";
 
-	if ($GLOBALS['var_debug'] == 'oui')
+	if ($GLOBALS['var_mode'] == 'debug')
 		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
 
 	return $squelette_compile;

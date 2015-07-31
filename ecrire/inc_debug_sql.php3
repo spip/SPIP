@@ -7,7 +7,7 @@ define("_INC_DEBUG_SQL", "1");
 
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
-// ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
+// ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
 function affiche_erreurs_page($tableau_des_erreurs) {
 
 	echo "<div id='spip-debug' style='position: absolute; top: 20;",
@@ -96,7 +96,7 @@ function erreur_squelette($message='', $lieu='') {
 	if (++$runs > 4) {
 		if ($HTTP_COOKIE_VARS['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
-		$GLOBALS['var_debug']) {
+		$GLOBALS['var_mode']) {
 			echo debut_entete('Debug'), '</head><body>';
 			die(affiche_erreurs_page($tableau_des_erreurs));
 		}
@@ -112,8 +112,8 @@ function boucle_debug_resultat ($nom, $resultat) {
 	global $debug_objets;
 
 	// ne pas memoriser plus de 3 tours d'une meme boucle
-	if (count($debug_objets['resultats'][$nom]) < 3)
-		$debug_objets['resultats'][$nom][] = $resultat;
+	if (count($debug_objets['resultat'][$nom]) < 3)
+		$debug_objets['resultat'][$nom][] = $resultat;
 }
 
 // appelee a chaque compilation de boucle (inc-compilo)
@@ -127,7 +127,6 @@ function boucle_debug_compile ($id, $nom, $pretty, $sourcefile, $code) {
 // appelee a chaque compilation de squelette (inc-compilo)
 function squelette_debug_compile($nom, $sourcefile, $squelette) {
 	global $debug_objets;
-
 	$debug_objets['squelettes'][$nom] = $squelette;
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
 }
@@ -140,64 +139,68 @@ function boucle_debug ($id, $nom, $boucle) {
 }
 
 // l'environnement graphique du debuggueur 
-function debug_dumpfile ($texte) {
-  spip_log("dump $texte");
-	global $debug_objets, $debug_objet, $debug_affiche;
-	if (!$GLOBALS['debug_objets']['sourcefile']) return;
-	spip_setcookie('spip_debug', 'oui', time()+12*3600);
-	echo debut_entete('Debug');
-        $page = "</head>\n<body>";
-        echo calcul_admin_page('', $page),
-	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
+function debug_dumpfile ($texte, $fonc, $type) {
 
+	global $debug_objets, $var_mode_objet, $var_mode_affiche;
+	$debug_objets[$type][$fonc . 'tout'] = $texte;
+	if (!$debug_objets['sourcefile']) return;
+	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
+	    return;
+	spip_setcookie('spip_debug', 'oui', time()+12*3600);
+
+	$link = new Link;
+	$link->delvar('var_mode_affiche');
+	$link->delvar('var_mode_objet');
+	$link->addvar('var_mode','debug');
+	$self = $link->getUrl();
+
+	echo debut_entete('Debug'), 
+	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
+	  "</head>\n<body>",
+	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
-		echo "<li><b>".$sourcefile."</b>";
-		$link = new Link;
-		$link->addvar('debug_objet', $nom_skel);
-		$link->delvar('debug_affiche');
-		echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
-		echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
+		echo "<li><b>",$sourcefile,"</b>";
+		echo " <a href='",$self, "&var_mode_objet=$nom_skel&var_mode_affiche=resultat'>resultat</a>";
+		echo " <a href='", $self, "&var_mode_objet=$nom_skel&var_mode_affiche=code'>code</a>";
 		echo "<ul>\n";
 
 		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
-				echo "<li>";
 				$aff = "&lt;".$pretty."&gt;";
-				if ($debug_objet == $nom)
+				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
+				echo "<li>";
 				echo $aff;
-				$link = new Link;
-				$link->addvar('debug_objet', $nom);
-				$link->delvar('debug_affiche');
-				echo " <a href='".$link->getUrl()."&debug_affiche=boucle' class='debug_link_boucle'>boucle</a>";
-				echo " <a href='".$link->getUrl()."&debug_affiche=resultat' class='debug_link_resultat'>resultat</a>";
-				echo " <a href='".$link->getUrl()."&debug_affiche=code' class='debug_link_code'>code</a>";
+				echo " <a href='",$self,"&var_mode_objet=$nom&var_mode_affiche=boucle' class='debug_link_boucle'>boucle</a>";
+				echo " <a href='",$self, "&var_mode_objet=$nom&var_mode_affiche=resultat' class='debug_link_resultat'>resultat</a>";
+				echo " <a href='", $self, "&var_mode_objet=$nom&var_mode_affiche=code' class='debug_link_code'>code</a>";
 				echo "</li>\n";
 			}
 		echo "</ul>\n</li>\n";
 	}
-    echo "</ul>\n";
-
-	if ($debug_objet AND $debug_affiche == 'resultat' AND ($res = $debug_objets['resultats'][$debug_objet])) {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
+	echo "</ul>\n";
+	if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
+	  if ($var_mode_affiche == 'resultat') {
+		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		echo "<p class='spip-admin-bloc'>les premiers appels &agrave; cette boucle ont donn&eacute;&nbsp;:</p>";
 		foreach ($res as $view)
-			echo "<ul><fieldset>".interdire_scripts($view)."</fieldset></ul>";
+			echo "<ul><fieldset>",interdire_scripts($view),"</fieldset></ul>";
 		echo "</fieldset></div>";
 
-	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['code'][$debug_objet]) {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
+      } else if ($var_mode_affiche == 'code') {
+		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		highlight_string("<"."?php\n".$res."\n?".">");
 		echo "</fieldset></div>";
-	} else if ($debug_objet AND $debug_affiche == 'boucle' AND $res = $debug_objets['boucle'][$debug_objet]) {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
+	} else if ($var_mode_affiche == 'boucle') {
+		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		highlight_string($res);
 		echo "</fieldset></div>";
-	}
+  }
+    }
 
 	if ($texte) {
-	  echo "<div id=\"debug_boucle\"><fieldset><legend>".$GLOBALS['debug_affiche']."</legend>";
+	  echo "<div id=\"debug_boucle\"><fieldset><legend>",$GLOBALS['var_mode_affiche'],"</legend>";
 	  ob_start();
 	  highlight_string($texte);
 	  $s = ob_get_contents();
@@ -215,8 +218,10 @@ function debug_dumpfile ($texte) {
 
 	  echo "</fieldset></div>";
 	}
-	echo "\n</div></body>";
-	if ($texte) exit;
+	echo "\n</div>";
+	echo inclure_formulaire(admin_dyn('','','','','',$debug_objets));
+	echo '</body>';
+	exit;
 }
 
 ?>

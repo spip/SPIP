@@ -37,7 +37,7 @@ else
 // Le squelette compile est-il trop vieux ?
 function squelette_obsolete($skel, $squelette) {
 	return (
-		$GLOBALS['var_debug']
+		$GLOBALS['var_mode']
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php3') > $date)
@@ -94,7 +94,7 @@ function charger_squelette ($squelette) {
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
-		if ($GLOBALS['var_debug'] == 'oui') {
+		if ($GLOBALS['var_mode'] == 'debug') {
 			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
@@ -152,7 +152,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 		  $page = $fonc(array('cache' => $cache), array($contexte));
 
 		// Passer la main au debuggueur)
-		if ($GLOBALS['var_debug'] == 'oui')
+		if ($GLOBALS['var_mode'] == 'debug')
 		  {
 			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($page['texte'], $fonc, 'resultat');
@@ -268,7 +268,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
-	if ($delais > 0 AND $GLOBALS['var_debug'] != 'oui'
+	if ($delais > 0 AND $GLOBALS['var_mode'] != 'debug'
 	AND empty($GLOBALS['HTTP_POST_VARS']))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
