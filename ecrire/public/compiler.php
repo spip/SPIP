@@ -903,8 +903,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				if (!$boucles[$nom]->milieu
 				AND $boucles[$nom]->type_requete <> TYPE_RECURSIF) {
 					if ($altern != "''") $code .= "\n. $altern";
-					if ($avant<>"''" OR $apres<>"''")
-					  spip_log("boucle $nom toujours vide, code superflu dans $id");
+					if ($avant<>"''" OR $apres<>"''") {
+						spip_log("boucle $nom toujours vide, code superflu dans $descr[sourcefile]");
+					}
 					$avant = $apres = $altern = "''";
 				} else if ($altern != "''") $altern = "($altern)";
 			}
