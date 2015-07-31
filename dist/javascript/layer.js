@@ -82,12 +82,12 @@ jQuery.fn.showonhover = function(cible) {
 			var me = this;
 			var t = setTimeout(function(){
 				jQuery(me)
-				.addClass('dejahover')
-				.showother(cible);
-			}, 750);
+				//.addClass('dejahover')
+				.toggleother(cible);
+			}, 350);
 			jQuery(me).one('mouseout', function() {
 				clearTimeout(t);
-			});
+			}).click(function(){clearTimeout(t);});
 		});
 }
 
