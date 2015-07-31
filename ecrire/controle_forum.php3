@@ -2,142 +2,103 @@
 
 include ("inc.php3");
 
-
-debut_page(_T('titre_page_forum_suivi'), "suivi", "forum-controle");
-
-$requete_base_controle = "statut!='perso' AND statut != 'redac'";
-
-if (!$page) $page = "public";
-
-echo "<br><br><br>";
-gros_titre(_T('titre_forum_suivi'));
-
-barre_onglets("suivi_forum", $page);
-
-
-debut_gauche();
-
-debut_boite_info();
-
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
-echo _T('info_gauche_suivi_forum_2');
-
-echo aide ("suiviforum");
-echo "</FONT>";
-
-fin_boite_info();
-
-//
-// Raccourcis
-//
-
-
-debut_droite();
-	$mots_cles_forums = lire_meta("mots_cles_forums");
-
-
-
 function forum_parent($id_forum) {
-	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'";
- 	$result_forum = spip_query($query_forum);
+	$row=spip_fetch_array(spip_query("
+SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'
+"));
+	if (!$row) return '';
+	$id_forum=$row['id_forum'];
+	$forum_id_parent=$row['id_parent'];
+	$forum_id_rubrique=$row['id_rubrique'];
+	$forum_id_article=$row['id_article'];
+	$forum_id_breve=$row['id_breve'];
+	$forum_id_syndic=$row['id_syndic'];
+	$forum_stat=$row['statut'];
 
- 	while($row=spip_fetch_array($result_forum)){
-		$id_forum=$row['id_forum'];
-		$forum_id_parent=$row['id_parent'];
-		$forum_id_rubrique=$row['id_rubrique'];
-		$forum_id_article=$row['id_article'];
-		$forum_id_breve=$row['id_breve'];
-		$forum_id_syndic=$row['id_syndic'];
-		$forum_date_heure=$row['date_heure'];
-		$forum_titre=$row['titre'];
-		$forum_texte=$row['texte'];
-		$forum_auteur=$row['auteur'];
-		$forum_email_auteur=$row['email_auteur'];
-		$forum_nom_site=$row['nom_site'];
-		$forum_url_site=$row['url_site'];
-		$forum_stat=$row['statut'];
-		$forum_ip=$row['ip'];
-
-		if ($forum_id_article > 0) {
-	
-			$query = "SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'";
-		 	$result = spip_query($query);
-
-			while($row=spip_fetch_array($result)) {
-				$id_article = $row['id_article'];
-				$titre = $row['titre'];
-				$statut = $row['statut'];
-			}
-
-			if ($forum_stat == "prive" OR $forum_stat == "privoff") {
-				return $retour."<B>"._T('item_reponse_article')." <A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
-			}
-			else {
-				$retour .= "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>"._T('lien_forum_public')."</font></a><br>";
-				return $retour."<B>"._T('lien_reponse_article')." <A HREF='".generer_url_article($id_article)."'>$titre</A></B>";
-			}
-		}
-		else if ($forum_id_rubrique > 0) {
-			$query2 = "SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\"";
-			$result2 = spip_query($query2);
-
-			while($row = spip_fetch_array($result2)){
-				$id_rubrique = $row['id_rubrique'];
-				$titre = $row['titre'];
-			}
-			return "<B>"._T('lien_reponse_rubrique')." <A HREF='".generer_url_rubrique($id_rubrique)."'>$titre</A></B>";
-		}
-		else if ($forum_id_syndic > 0) {
-			$query2 = "SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\"";
-			$result2 = spip_query($query2);
-
-			while($row = spip_fetch_array($result2)){
-				$id_syndic = $row['id_syndic'];
-				$titre = $row['nom_site'];
-				$statut = $row['statut'];
-			}
-			return "<B>"._T('lien_reponse_site_reference')." <A HREF='sites.php3?id_syndic=$id_syndic'>$titre</A></B>";
-		}
-		else if ($forum_id_breve > 0) {
-			$query2 = "SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\"";
-		 	$result2 = spip_query($query2);
-
-		 	while($row = spip_fetch_array($result2)){
-				$id_breve = $row['id_breve'];
-				$date_heure = $row['date_heure'];
-				$titre = $row['titre'];
-			}
-			if ($forum_stat == "prive") {
-				return "<B>"._T('lien_reponse_breve')." <A HREF='breves_voir.php3?id_breve=$id_breve'>$titre</A></B>";
-			}
-			else {
-				return "<B>"._T('lien_reponse_breve_2')." <A HREF='".generer_url_breve($id_breve)."'>$titre</A></B>";
-			}
-		}
-		else if ($forum_stat == "privadm") {
-			$retour = forum_parent($forum_id_parent);
-			
-			if (strlen($retour)>0) return $retour;
-			else return "<B>"._T('info_message')." <A HREF='forum_admin.php3'>"._T('info_forum_administrateur')."</A></B>";
-		}
-		else {
-			$retour = forum_parent($forum_id_parent);
-
-			if (strlen($retour)>0) return $retour;
-			else return "<B>"._T('info_message')." <A HREF='forum.php3'>"._T('info_forum_interne')."</A></B>";
-		}
+	if ($forum_id_article > 0) {
+	  $row=spip_fetch_array(spip_query("
+SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'"));
+	  $id_article = $row['id_article'];
+	  $titre = $row['titre'];
+	  $statut = $row['statut'];
+	  if ($forum_stat == "prive" OR $forum_stat == "privoff") {
+	    return array('pref' => _T('item_reponse_article'),
+			 'url' => "articles.php3?id_article=$id_article",
+			 'type' => 'id_article',
+			 'valeur' => $id_article,
+			 'titre' => $titre);
+	  } else {
+	    return array('pref' =>  _T('lien_reponse_article'),
+			 'url' => generer_url_article($id_article),
+			 'type' => 'id_article',
+			 'valeur' => $id_article,
+			 'titre' => $titre,
+			 'avant' => "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>"._T('lien_forum_public'). "</font></a><br>");
+	  }
 	}
-
+	else if ($forum_id_rubrique > 0) {
+	  $row = spip_fetch_array(spip_query("
+SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\""));
+	  $id_rubrique = $row['id_rubrique'];
+	  $titre = $row['titre'];
+	  return array('pref' => _T('lien_reponse_rubrique'),
+		       'url' => generer_url_rubrique($id_rubrique),
+		       'type' => 'id_rubrique',
+		       'valeur' => $id_rubrique,
+		       'titre' => $titre);
+	}
+	else if ($forum_id_syndic > 0) {
+	  $row = spip_fetch_array(spip_query("
+SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\""));
+	  $id_syndic = $row['id_syndic'];
+	  $titre = $row['nom_site'];
+	  $statut = $row['statut'];
+	  return array('pref' => _T('lien_reponse_site_reference'),
+		       'url' => "sites.php3?id_syndic=$id_syndic",
+		       'type' => 'id_syndic',
+		       'valeur' => $id_syndic,
+		       'titre' => $titre);
+	}
+	else if ($forum_id_breve > 0) {
+	  $row = spip_fetch_array(spip_query("
+SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\""));
+	  $id_breve = $row['id_breve'];
+	  $date_heure = $row['date_heure'];
+	  $titre = $row['titre'];
+	  if ($forum_stat == "prive") {
+	    return array('pref' => _T('lien_reponse_breve'),
+			 'url' => "breves_voir.php3?id_breve=$id_breve",
+			 'type' => 'id_breve',
+			 'valeur' => $id_breve,
+			 'titre' => $titre);
+	  } else {
+	    return array('pref' => _T('lien_reponse_breve_2'),
+			 'url' => generer_url_breve($id_breve),
+			 'type' => 'id_breve',
+			 'valeur' => $id_breve,
+			 'titre' => $titre);
+	  }
+	}
+	else if ($forum_stat == "privadm") {
+	  $retour = forum_parent($forum_id_parent);
+	  if ($retour) return $retour;
+	  else return array('pref' => _T('info_message'),
+			    'url' => 'forum_admin.php3',
+			    'titre' => _T('info_forum_administrateur'));
+	}
+	else {
+	  $retour = forum_parent($forum_id_parent);
+	  if ($retour) return $retour;
+	  else return array('pref' => _T('info_message'),
+			    'url' => 'forum.php3',
+			    'titre' => _T('info_forum_interne'));
+	}
 }
 
 
-function controle_forum($row) {
+function controle_forum($row, $rappel) {
 	global $couleur_foncee;
 	global $mots_cles_forums;
-	global $controle_sans;
-	global $debut, $page;
-
-	$controle = "<BR><BR>";
 
 	$id_forum = $row['id_forum'];
 	$forum_id_parent = $row['id_parent'];
@@ -155,34 +116,54 @@ function controle_forum($row) {
 	$forum_ip = $row['ip'];
 	$forum_id_auteur = $row["id_auteur"];
 
+	$r = forum_parent($id_forum);
+	$avant = $r['avant'];
+	$url = $r['url'];
+	$titre = $r['titre'];
+	$type = $r['type'];
+	$valeur = $r['valeur'];
+	$pref = $r['pref'];
+
+	$controle = "\n<br /><br /><a id='$id_forum'></a>";
+
 	if ($forum_stat=="off" OR $forum_stat == "privoff")
 		$controle .= "<div style='border: 2px #ff0000 dashed; background-color: white;'>";
 	else if ($forum_stat=="prop")
 		$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
 	else {
-		$controle .= "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>";
-		$controle .= "<div style='border: 1px #999999 dashed; background-color: white;'>";
+		$controle .= "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>"  .
+		  "<div style='border: 1px #999999 dashed; background-color: white;'>";
 	}
 
-	$controle .= "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR>";
-	$controle .= "<TD WIDTH=100% VALIGN='top'>";
-
-	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
-	$controle .= "<TR><TD class='serif'>";
-
-	$controle .= "<span class='arial2'>".affdate_heure($forum_date_heure)."</span>";
+	$controle .= "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% valign='top'><table width=100% cellpadding=5 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='verdana,arial,sans,sans-serif' size=2 color='#ffffff'><b>" .
+	  typo($forum_titre).
+	  "</b></font></td></tr><tr><td class='serif'><span class='arial2'>" .
+	  affdate_heure($forum_date_heure) .
+	  "</span>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)
-			$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
+			$forum_auteur="<a href=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
 		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
 	}
 
 	if ($forum_stat != "off" AND $forum_stat != "privoff") {
 		if ($forum_stat == "publie" OR $forum_stat == "prop")
-			$controle .= icone(_T('icone_supprimer_message'), "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+			$controle .= 
+		  controle_cache_forum('supp_forum',
+				       $id_forum,
+				       _T('icone_supprimer_message'), 
+				       "controle_forum.php3?$rappel#$id_forum",
+				       "forum-interne-24.gif",
+				       "supprimer.gif");
 		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-			$controle .= icone(_T('icone_supprimer_message'), "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
-	}
+			$controle .= 
+		  controle_cache_forum('supp_forum_priv',
+				       $id_forum,
+				       _T('icone_supprimer_message'), 
+				       "controle_forum.php3?$rappel#$id_forum",
+				       "forum-interne-24.gif",
+				       "supprimer.gif");
+		    }
 	else {
 		$controle .= "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 		if($forum_id_auteur>0)
@@ -190,11 +171,28 @@ function controle_forum($row) {
 	}
 
 	if ($forum_stat=="prop")
-		$controle .= icone(_T('icone_valider_message'), "controle_forum.php3?valid_forum=$id_forum&debut=$debut&page=$page", "forum-interne-24.gif", "creer.gif", "right", 'non');
-
-	$controle .= "<BR>".forum_parent($id_forum);
-
-	$controle .= "<P align='justify'>".propre($forum_texte);
+	  {
+		$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
+		$controle .=
+		  controle_cache_forum('valid_forum',
+				       $id_forum,
+				       _T('icone_valider_message'), 
+				       "controle_forum.php3?$rappel&#$id_forum",
+				       "forum-interne-24.gif",
+				       "creer.gif") .
+		  controle_cache_forum('valid_forum',
+				       $id_forum,
+				       _T('icone_valider_message') . " &amp; " .
+				       _T('lien_repondre_message'),
+				       "../$appelant&url=" .
+				       rawurlencode($appelant) . 
+				       "&retour=" .
+				       rawurlencode("ecrire/controle_forum.php3?$rappel&#$id_forum"), 
+				       "../img_pack/messagerie-24.gif",
+				       "creer.gif");
+	  }
+	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
+	  "<P align='justify'>".propre($forum_texte);
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$controle .= "<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
@@ -204,7 +202,6 @@ function controle_forum($row) {
 		$result_mots = spip_query($query_mots);
 
 		while ($row_mots = spip_fetch_array($result_mots)) {
-			$id_mot = $row_mots['id_mot'];
 			$titre_mot = propre($row_mots['titre']);
 			$type_mot = propre($row_mots['type']);
 			$controle .= "<li> <b>$type_mot :</b> $titre_mot";
@@ -212,91 +209,90 @@ function controle_forum($row) {
 	}
 
 	$controle .= "</TD></TR></TABLE>";
-
 	$controle .= "</TD></TR></TABLE>\n";
-
 	if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop'))
 		$controle .= "</div>";
-
 	$controle .= "</div>";
-
 	return $controle;
 }
 
+debut_page(_T('titre_page_forum_suivi'), "suivi", "forum-controle");
+
+if (!$page) $page = "public";
+
+echo "<br><br><br>";
+gros_titre(_T('titre_forum_suivi'));
+barre_onglets("suivi_forum", $page);
+debut_gauche();
+debut_boite_info();
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
+echo _T('info_gauche_suivi_forum_2');
+echo aide("suiviforum");
+echo "</FONT>";
+
+fin_boite_info();
+debut_droite();
 
 //
 // Debut de la page de controle
 //
-
-echo "<div class='serif2'>";
 
 if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
 	echo "<B>"._T('avis_non_acces_page')."</B>";
 	exit;
 }
 
-
-// reglages
-if (!$debut) $debut = 0;
-$pack = 20;		// nb de forums affiches par page
-$enplus = 200;	// intervalle affiche autour du debut
-$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-$limitnb = $debut + $enplus - $limitdeb;
-$wheretexte = $controle_sans ? "texte=''" : "texte!=''";
-
-
-$query_forum = "SELECT * FROM spip_forum WHERE ";
 switch ($page) {
 case 'public':
-	$query_forum .= "statut IN ('publie', 'off', 'prop') AND texte!=''";
+	$query_forum = "statut IN ('publie', 'off', 'prop') AND texte!=''";
 	break;
 case 'interne':
-	$query_forum .= "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
+	$query_forum = "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
 	break;
 case 'vide':
-	$query_forum .= "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
+	$query_forum = "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
 	break;
 default:
-	$query_forum .= "0=1";
+	$query_forum = "0=1";
 	break;
 }
 
-$query_forum .= " ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
-$result_forum = spip_query($query_forum);
-
+if (!$debut) $debut = 0;
+$pack = 20;	// nb de forums affiches par page
+$enplus = 200;	// intervalle affiche autour du debut
+$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+$limitnb = $debut + $enplus - $limitdeb;
+$rappel = "page=$page";
+$mots_cles_forums = lire_meta("mots_cles_forums");
 $controle = '';
 
+echo "<div class='serif2'>";
 $i = $limitdeb;
-if ($i>0)
-	echo "<A HREF='controle_forum.php3?page=$page'>0</A> ... | ";
+if ($i>0) echo "<a href='controle_forum.php3?$rappel'>0</a> ... | ";
+
+$result_forum = spip_query("
+SELECT	*
+FROM	spip_forum
+WHERE " . $query_forum . "
+ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb"
+);
 
 while ($row = spip_fetch_array($result_forum)) {
-	// est-ce que ce message doit s'afficher dans la liste ?
-	$ok_controle = (($i>=$debut) AND ($i<$debut + $pack));
 
 	// barre de navigation
 	if ($i == $pack*floor($i/$pack)) {
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-			echo "<A HREF='controle_forum.php3?debut=$i&page=$page'>$i</A>";
+			echo "<a href='controle_forum.php3?$rappel&debut=$i'>$i</a>";
 		echo " | ";
 	}
-
-	// elements a controler
-	if ($ok_controle)
-		$controle .= controle_forum($row);
-
+	// est-ce que ce message doit s'afficher dans la liste ?
+	if (($i>=$debut) AND ($i<($debut + $pack)))
+	  $controle .= controle_forum($row, "$rappel&debut=$debut");
 	$i ++;
-}
+ }
 
-echo "<A HREF='controle_forum.php3?debut=$i&page=$page'>...</A>";
-
-echo $controle;
-
-echo "</div>";
-
+echo "<a href='controle_forum.php3?$rappel&debut=$i'>...</a>$controle</div>";
 fin_page();
-
 ?>
-
