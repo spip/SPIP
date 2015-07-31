@@ -233,4 +233,48 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 	}
 }
 
+// Fonctions pour le cache des images (vues reduites)
+
+
+function calculer_taille_dossier ($dir) {
+	$handle = @opendir($dir);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) != '') {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_file("$dir/$fichier")) {
+			$taille += filesize("$dir/$fichier");
+		}
+	}
+	closedir($handle);
+	return $taille;
+}
+
+function calculer_cache_vignettes() {
+	$handle = @opendir(_DIR_IMG);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) != '') {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_dir(_DIR_IMG."/$fichier") AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier(_DIR_IMG."/$fichier");
+		}
+	}
+	closedir($handle);
+	
+	include_ecrire("inc_filtres.php3");
+	echo "<html><body><div style='font-family: verdana, arial, sans; font-size: 12px;'><b>".taille_en_octets($taille)."</b></div></body></html>";
+
+}
+
+function purger_cache_images() {
+	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
+}
+
+
+
 ?>

@@ -26,6 +26,20 @@ if ($purger_squelettes == "oui") {
 	if (verifier_action_auteur("purger_squelettes", $hash, $id_auteur))
 	  purger_squelettes();
 }
-redirige_par_entete($redirect);
+
+
+if ($afficher_cache_images == "oui") {
+	if (verifier_action_auteur("afficher_cache_images", $hash, $id_auteur))
+	calculer_cache_vignettes();
+}
+
+if ($purger_cache_images == "oui") {
+	if (verifier_action_auteur("purger_cache_images", $hash, $id_auteur))
+	purger_cache_images();
+
+}
+
+
+if ($redirect) redirige_par_entete($redirect);
 
 ?>

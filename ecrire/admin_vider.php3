@@ -54,17 +54,12 @@ if ($purger_index == "oui") {
 // Purger le cache
 //
 
-debut_cadre_relief();
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-echo _T('texte_vider_cache')."</FONT></B></TD></TR>";
+debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
 
-echo "<TR><TD class='serif'>";
 
-echo "\n<p align='justify'>"._T('texte_suppression_fichiers'),
-	"<p align='justify'>"._T('texte_recalcul_page');
+echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."</p>",
+	"<p align='justify'>"._T('texte_recalcul_page')."</p>";
 
 echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
 echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
@@ -72,23 +67,17 @@ echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purg
 echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
 echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='" . _DIR_RESTREINT_ABS . "admin_vider.php3'>";
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
-echo "</TD></TR>";
-echo "</TABLE>";
+
+echo "\n<div>&nbsp;</div>";
+
 
 
 //
 // Quota et taille du cache
 //
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-echo _T('taille_repertoire_cache')."</FONT></B></TD></TR>";
+debut_cadre_relief("", false, "", _T('taille_repertoire_cache'));
 
-
-echo "<TR><TD class='serif'>";
-
-list ($taille) = spip_fetch_array(spip_query(
-"SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
+list ($taille) = spip_fetch_array(spip_query("SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
 
 if ($taille>0) {
 	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($taille)));
@@ -110,48 +99,54 @@ if ($quota_cache) {
 		_T('cache_mode_non_compresse');
 	echo ' ('._T('cache_modifiable_webmestre').')</p>';
 
-echo "</TD></TR>";
-echo "</TABLE>";
+fin_cadre_relief();
 
 
+debut_cadre_relief("image-24.gif", false, "", "Images calcul&eacute;es automatiquement");
+	echo "<div style='text-align: center;'>";
+	echo "<iframe width='100px' height='40px' src='../spip_cache.php3?id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui'></iframe>";
+	echo "</div>";
+
+echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
+echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
+echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache_images") . "'>";
+echo "\n<INPUT TYPE='hidden' NAME='purger_cache_images' VALUE='oui'>";
+echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='" . _DIR_RESTREINT_ABS . "admin_vider.php3'>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
+fin_cadre_relief();
+
+fin_cadre_trait_couleur();
 
 //
 // Purger la base d'indexation
 //
+debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_donnees_indexation'));
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-echo _T('texte_effacer_donnees_indexation')."</FONT></B></TD></TR>";
+	echo "\n<p align='justify'>";
+	if (lire_meta('activer_moteur') == 'oui')
+		echo _T('texte_moteur_recherche_active');
+	else {
+		echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
+		$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index_articles"));
+		if ($row['cnt'])
+			echo _T('texte_commande_vider_tables_indexation');
+		else
+			echo _T('texte_tables_indexation_vides');
+	
+	}
+	
+	echo "\n<FORM ACTION='admin_vider.php3' METHOD='post'>";
+	
+	$hash = calculer_action_auteur("purger_index");
+	
+	echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash'>";
+	echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui'>";
+	echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";
 
-echo "<TR><TD class='serif'>";
-
-echo "\n<p align='justify'>";
-if (lire_meta('activer_moteur') == 'oui')
-	echo _T('texte_moteur_recherche_active');
-else {
-	echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
-	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index_articles"));
-	if ($row['cnt'])
-		echo _T('texte_commande_vider_tables_indexation');
-	else
-		echo _T('texte_tables_indexation_vides');
-
-}
-
-echo "\n<FORM ACTION='admin_vider.php3' METHOD='post'>";
-
-$hash = calculer_action_auteur("purger_index");
-
-echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash'>";
-echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui'>";
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";
-
-echo "</TD></TR>";
-echo "</TABLE>";
+fin_cadre_trait_couleur();
 
 
-fin_cadre_relief();
+
 
 echo "<BR>";
 
