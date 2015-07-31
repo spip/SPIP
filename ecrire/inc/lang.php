@@ -268,6 +268,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		}
 	}
 
+	// truc special pour le menu ajax sinon l'url onchange explose... a revoir
 	$change = ($lien === 'ajax')
 	? "\nonchange=\"this.nextSibling.style.visibility='visible';\""
 	: ("\nonchange=\"document.location.href='"
@@ -286,9 +287,11 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . ">\n"
 	  . $ret
 	  // attention, le input doit etre le frere direct du select
-	  . "</select><input type='submit' class='visible_au_chargement fondo' value='"
-	  . _T('bouton_changer')
-	  ."' />";
+	  . "</select>"
+	  . (($lien === 'ajax')
+	  	? "<input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' />"
+		: "<noscript><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></noscript>"
+		);
 
 	if ($lien === 'ajax') return $ret;
 	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
