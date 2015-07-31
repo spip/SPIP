@@ -584,7 +584,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	else
 		$nom_boucle = $b;
 
-	$p->code = "pagination(
+	$p->code = "calcul_pagination(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), '$nom_boucle', "
