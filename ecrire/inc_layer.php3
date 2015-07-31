@@ -68,11 +68,11 @@ var vis = new Array();
 
 function swap_couche(couche){
 	if (vis[couche] == 'hide'){
-		MM_swapImage('triangle'+couche,'','IMG2/deplierbas.gif?'+couche,1)
+		MM_swapImage('triangle'+couche,'','IMG2/deplierbas.gif',1)
 		MM_showHideLayers('Layer'+couche,'','show');
 		vis[couche] = 'show';
 	} else {
-		MM_swapImage('triangle'+couche,'','IMG2/deplierhaut.gif?'+couche,1)
+		MM_swapImage('triangle'+couche,'','IMG2/deplierhaut.gif',1)
 		MM_showHideLayers('Layer'+couche,'','hide');
 		vis[couche] = 'hide';
 	}
