@@ -32,7 +32,8 @@ $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' b
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'");
 
 // Conversion en HTML d'un tableau de champ ics
-// Le champ URL devient une balise a href=URL entourant les champs SUMMARY et DESC
+// Le champ URL devient une balise A 
+// 	avec href=URL et clic sur les champs SUMMARY et DESC
 // Le champ CATEGORIES indique les couleurs pour le style CSS
 
 function http_calendrier_ics($evenements, $amj = "") 
@@ -319,7 +320,10 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 {
 	global $spip_lang_right, $spip_lang_left, $couleur_claire;
 
-	$gadget = "<div id='$id' onmouseover=\"montrer('$id');\" onmouseout=\"cacher('$id');\" style='position: relative; visibility: hidden;z-index: 1000; '><div style='position: absolute; padding: 5px; background-color: $couleur_claire; margin-bottom: 5px; -moz-border-radius-bottomleft: 8px; -moz-border-radius-bottomright: 8px;'>";
+	$gadget = "<div
+id='$id' style='position: relative; visibility: hidden;z-index: 1000; '
+onmouseover=\"montrer('$id');\" onmouseout=\"cacher('$id');\"><div 
+style='position: absolute; padding: 5px; background-color: $couleur_claire; margin-bottom: 5px; -moz-border-radius-bottomleft: 8px; -moz-border-radius-bottomright: 8px;'>";
 			//$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
 			//$gadget .= _T('icone_agenda');
 			//$gadget .= "</a>";
@@ -330,7 +334,7 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 			
 
 	$gadget .= "<table cellpadding='0' cellspacing='5' border='0' width='100%'>";
-	$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+	$gadget .= "\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
@@ -344,12 +348,11 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 	$gadget .= "</td></tr>"
-		. "\n<tr>"
-		. "<td valign='top' width='33%'>"
+		. "\n<tr><td valign='top' width='33%'>"
 		. http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script,$ancre) 
-		. "</td><td valign='top' width='33%'>"
+		. "</td>\n<td valign='top' width='33%'>"
 		. http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script,$ancre) 
-		. "</td><td valign='top' width='33%'>"
+		. "</td>\n<td valign='top' width='33%'>"
 		. http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script,$ancre) 
 		. "</td>"
 		. "</tr>"
@@ -729,18 +732,31 @@ function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved
 		       '',
 		       'color: black;') .
     "<table width='100%' cellspacing='0' cellpadding='0'>" .
-    http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, 
-			       $semaine, 
-			       sql_calendrier_agenda($mois, $annee),
-			       $script,
-			       $ancre) .
+    http_calendrier_agenda_rv ($annee, $mois, 
+				sql_calendrier_agenda($mois, $annee),
+			        'http_jour_clic', array($script, $ancre),
+			        $jour_ved, $mois_ved, $annee_ved, 
+				$semaine) .
     "</table>" .
     "</div>";
 }
 
+function http_jour_clic($annee, $mois, $jour, $type, $couleur, $perso)
+{
+
+  list($script, $ancre) = $perso;
+
+  return http_href($script . "type=$type&jour=$jour&mois=$mois&annee=$annee$ancre", 
+		   "<b>$jour</b>",
+		   '',
+		   "color: $couleur");
+}
+
 // typographie un mois sous forme d'un tableau de 7 colonnes
 
-function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $script, $ancre='') {
+function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
+				    $jour_ved='', $mois_ved='', $annee_ved='',
+				    $semaine='') {
 	global $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
@@ -756,7 +772,6 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		$debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
 		$fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
 	} else { $debut = $fin = '';}
-		  
 	
 	$today=getdate(time());
 	$jour_today = $today["mday"];
@@ -778,10 +793,7 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		if (checkdate($mois,$j,$annee)){
 		  if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 1px; padding: 2px; background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>" .
-		      http_href($script . "type=jour&jour=$j&mois=$mois&annee=$annee$ancre", 
-				"<b>$j</b>",
-				'',
-				"color: black") .
+		      $fclic($annee,$mois, $j,"jour","black", $perso) .
 		      "</td>";
 		  } else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center; " .
@@ -790,10 +802,7 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		       (($jour_semaine==7) ?
 			$style7 : '')) .
 		      "'>" .
-		      http_href($script . "type=" . ($semaine ? 'semaine' : 'jour') . "&jour=$j&mois=$mois&annee=$annee$ancre", 
-				"<b>$j</b>",
-				'',
-				"color: black") .
+		      $fclic($annee,$mois, $j,($semaine ? 'semaine' : 'jour'),"black", $perso) .
 		      "</td>";
 		  } else {
 		    if ($j == $jour_today AND $mois == $mois_today AND $annee == $annee_today) {
@@ -812,10 +821,7 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 			}
 		    }
 		    $ligne .= "\n\t<td><div class='arial2' style='margin-left: 1px; margin-top: 1px; padding: 2px; background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>" .
-		      http_href($script . "type=" . ($semaine ? 'semaine' : 'jour') . "&jour=$j&mois=$mois&annee=$annee$ancre", 
-				"<b>$j</b>",
-				'',
-				"color: $couleur") .
+		      $fclic($annee,$mois, $j,($semaine ? 'semaine' : 'jour'),$couleur, $perso) .
 		      "</div></td>";
 		  }
 		  if ($jour_semaine==7) 
