@@ -1,21 +1,22 @@
-<div class='spip_serif'>[
+<div class="formulaire_spip formulaire_oubli">[
 (#ENV*{message})
 ][
 (#ENV*{message}|?{'',' '})
 
-<form id="oubli_form" action='[(#ENV{action})]' method="post">
-	<fieldset class='spip_sanscadre'>
+<form id="oubli_form" action="[(#ENV{action})]" method="post">
+	<fieldset class="spip_sanscadre">
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type="hidden" name="p" value="(#ENV{p})" />
-	<label><:pass_choix_pass:></label>
-	    <input type="password" name="oubli" />
+	<p><label for="oubli"><:pass_choix_pass:></label>
+	<input type="password" name="oubli" id="oubli" /></p>
 	][
 	(#ENV{p}|?{'',' '})
-	<label><:pass_indiquez_cidessous:></label>
-	  <input type="text" name="oubli" />
+	<p><:pass_indiquez_cidessous:></p>
+	<p><label for="oubli"><:form_pet_votre_email:></label><br />
+	<input type="text" name="oubli" id="oubli" /></p>
 	]
-	<input type="submit" class="fondl" value="<:pass_ok:>" />
-      </fieldset>
+	<input type="submit" class="spip_bouton" value="<:pass_ok:>" />
+	</fieldset>
 </form>
 ]
 </div>
@@ -30,6 +31,6 @@ document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>
 <noscript>
-	&#91;<a style='color: #e86519' href='./'><:pass_retour_public:></a>&#93;
+	&#91;<a style="color: #e86519" href='./'><:pass_retour_public:></a>&#93;
 </noscript>
 </div>
