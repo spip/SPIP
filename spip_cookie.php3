@@ -31,7 +31,7 @@ if ($change_session == "oui") {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
 		if ($zap_session)
-			zap_sessions($auteur_session['login'], true);
+			zap_sessions($auteur_session['id_auteur'], true);
 //		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
 		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
@@ -44,9 +44,8 @@ if ($change_session == "oui") {
 }
 
 // zapper les mauvaises sessions
-if ($zap_session && verifier_session($spip_session)){
-	zap_sessions($auteur_session['login'], true);
-}
+if ($zap_session && verifier_session($spip_session))
+	zap_sessions($auteur_session['id_auteur'], true);
 
 // tentative de login
 if ($cookie_session == "non") {

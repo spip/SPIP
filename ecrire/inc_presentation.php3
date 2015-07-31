@@ -1695,7 +1695,7 @@ function debut_droite() {
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
 	if ($GLOBALS['spip_session'] && ($GLOBALS['bonjour'] == 'oui' || $GLOBALS['secu'] == 'oui')) {
-		if (zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+		if (zap_sessions($GLOBALS['auteur_session']['id_auteur'], false)) {
 			debut_cadre_enfonce();
 			gros_titre("Informations de s&eacute;curit&eacute;");
 			echo "<p>";
