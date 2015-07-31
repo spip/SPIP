@@ -274,7 +274,7 @@ function compose_filtres_args($p, $args, $sep)
 	$arglist = "";
 	foreach ($args as $arg) {
 		$arglist .= $sep . 
-		  calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle, $p->descr['niv']);
+		  calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
 	}
 	return $arglist;
 }

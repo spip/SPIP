@@ -412,11 +412,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    }
 	    $val = array();
 	    foreach ($params as $param) {
-	      $res = calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent);
-	      // suffisant pour les specs avant 1.8.2 mais à compléter.
-	      if (strpos("'(", $res[0]) === false)
-		$res = "addslashes($res)";
-	      $val[] = $res;
+	      $val[] = "addslashes(" .
+		calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) .
+		")";
 	    }
 	  }
 
