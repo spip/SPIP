@@ -9,12 +9,12 @@ else {
 	include ("ecrire/inc_version.php3");
 	include_local('inc-public-global.php3');
 
-	list($header404, $page) = calcule_header_et_page($fond, $delai);
+	list($http_status, $page) = calcule_header_et_page($fond, $delai);
 
 	// Si le 404 a ete renvoye (page vide), donner un message approprie
 	// Page n'est plus necessairement vide a cause des boutons admin
 
-	if ($header404) {
+	if ($http_status == 404) {
 		$qcq = _T('public:aucun_' . $fond);
 		if (!$qcq) $qcq = _T('public:aucune_' . $fond);
 		if (!$qcq) $qcq = _T('public:texte_vide');

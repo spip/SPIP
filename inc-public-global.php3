@@ -64,14 +64,14 @@ function calcule_header_et_page($fond, $delais) {
 		include_local(find_in_path('inc-formulaire_admin.php3'));
 
 	$tableau_des_erreurs = array();
-	$header404 = false;
+	$http_status = 200;
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
 	if (!$flag_preserver) {
 
 		// si la page est vide, envoi d'un 404
 		if (preg_match('/^[[:space:]]*$/', $page['texte'])) {
-			$header404 = true;
+			$http_status = 404;
 			header("HTTP/1.0 404");
 			header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
@@ -137,7 +137,7 @@ function calcule_header_et_page($fond, $delais) {
 		$page = surligner_mots($page, $var_recherche);
 	}
 
-	return array($header404, $page);
+	return array($http_status, $page);
 	}
 
 //
