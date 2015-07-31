@@ -42,7 +42,7 @@ if ($change_session == 'oui') {
 
 
 // tentative de connexion en auth_http
-if ($essai_auth_http) {
+if ($essai_auth_http AND !$ignore_auth_http) {
 	include_local ("inc-login.php3");
 	auth_http($cible, $essai_auth_http);
 	exit;
@@ -58,7 +58,7 @@ if ($logout) {
 			zap_sessions($auteur_session['id_auteur'], true);
 			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
-		if ($PHP_AUTH_USER) {
+		if ($PHP_AUTH_USER AND !$ignore_auth_http) {
 			include_local ("inc-login.php3");
 			auth_http($cible, 'logout');
 		}
