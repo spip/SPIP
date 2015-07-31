@@ -30,6 +30,8 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 		return false;
 
 	$champ_date = $desc['date']?$desc['date']:'date';
+	if (!isset($desc['field'][$champ_date]))
+		return false;
 
 	$valeurs = array(
 		'objet'=>$objet,
