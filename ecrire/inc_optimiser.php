@@ -12,7 +12,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire('inc_index');
+include_spip('inc/indexation');
 
 function optimiser_base() {
 	spip_log ("optimisation de la base");

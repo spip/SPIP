@@ -310,9 +310,7 @@ function indexer_contenu_document ($row) {
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
 	// fichier extract/pdf.php dans find_in_path() )
-	if ($plugin = find_in_path('extract/'.$extension, _DIR_INCLUDE)) {
-		include_local($plugin);
-	}
+	include_spip('extract/'.$extension);
 	if (function_exists($lire = $extracteur[$extension])) {
 		// Voir si on a deja une copie du doc distant
 		// Note: si copie_locale() charge le doc, elle demande une reindexation

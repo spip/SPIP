@@ -646,7 +646,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.600) {
-		include_ecrire('inc_index');
+		include_spip('inc/indexation');
 		purger_index();
 		creer_liste_indexation();
 		maj_version (1.600);

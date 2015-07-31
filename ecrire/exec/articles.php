@@ -515,7 +515,7 @@ function cron_articles($id_article, $statut, $statut_ancien)
 
 	if ($statut == 'publie') {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index");
+			include_spip("inc/indexation");
 			marquer_indexer('article', $id_article);
 		}
 		include_ecrire("inc_mail");
@@ -1064,7 +1064,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 	}
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index");
+		include_spip("inc/indexation");
 		marquer_indexer('article', $id_article);
 	}
   }
@@ -1074,7 +1074,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index");
+		include_spip("inc/indexation");
 		marquer_indexer('article', $id_article);
 	}
   }

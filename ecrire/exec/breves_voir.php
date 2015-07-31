@@ -18,7 +18,7 @@ include_ecrire ("inc_logos");
 include_ecrire ("inc_mots");
 include_ecrire ("inc_date");
 include_ecrire ("inc_abstract_sql");
-include_ecrire ("inc_index");
+include_spip("inc/indexation");
 
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot )
 {
@@ -280,7 +280,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 		suivre_invalideur("id='id_breve/$id_breve'");
 	}
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index");
+		include_spip("inc/indexation");
 		marquer_indexer('breve', $id_breve);
 	}
 	calculer_rubriques();

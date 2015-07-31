@@ -372,7 +372,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		WHERE id_document = $id_document");
 
 	// Demander l'indexation du document
-	include_ecrire('inc_index');
+	include_spip('inc/indexation');
 	marquer_indexer('document', $id_document);
 
 	return true;

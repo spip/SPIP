@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 include_ecrire("inc_meta");
-include_ecrire("inc_index");
+include_spip("inc/indexation");
 include_ecrire("inc_texte");
 include_ecrire("inc_lang");
 include_spip('inc/documents');

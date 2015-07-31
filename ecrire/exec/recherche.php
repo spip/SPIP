@@ -71,7 +71,7 @@ if (strlen($recherche) > 0) {
 	
 	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($activer_moteur) {	// texte integral
-		include_ecrire ('inc_index');
+		include_spip('inc/indexation');
 		list($hash_recherche,) = requete_hash ($recherche);
 		$query_articles_int = requete_txt_integral('spip_articles', $hash_recherche);
 		$query_breves_int = requete_txt_integral('spip_breves', $hash_recherche);

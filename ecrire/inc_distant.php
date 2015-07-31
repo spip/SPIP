@@ -39,7 +39,7 @@ function copie_locale($source, $mode='auto') {
 					WHERE fichier='".addslashes($source)."'");
 				list($id_document) = spip_fetch_array($a);
 				if ($id_document) {
-					include_ecrire('inc_index');
+					include_spip('inc/indexation');
 					marquer_indexer('document', $id_document);
 				}
 			}
