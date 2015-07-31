@@ -67,10 +67,9 @@ function balise_FORMULAIRE__dyn($form)
 
 	// si le formulaire vient d'etre poste, on recupere les erreurs
 	if ($je_suis_poste){
-		isset($_POST["erreurs_$form"]) || ($erreurs = $_POST["erreurs_$form"]);
-		isset($_POST["message_ok_$form"]) || ($message_ok = $_POST["message_ok_$form"]);
-		isset($erreurs['message_erreur']) || ($message_erreur = $erreurs['message_erreur']);
-	
+		$erreurs = isset($_POST["erreurs_$form"])?$_POST["erreurs_$form"]:array();
+		$message_ok = isset($_POST["message_ok_$form"])?$_POST["message_ok_$form"]:"";
+		$message_erreur = isset($erreurs['message_erreur'])?$erreurs['message_erreur']:"";
 		$editable = (!isset($_POST["erreurs_$form"])) || count($erreurs) || 
 			(isset($_POST["editable_$form"]) && $_POST["editable_$form"]);
 	}
