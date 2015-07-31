@@ -27,7 +27,6 @@ function inc_icone_renommer_dist($fond,$fonction){
 	}
 
 	$remplacement = array(
-		'historique'=>'revision',
 		//'secteur'=>'rubrique',
 		'racine-site'=>'site',
 		'mot-cle'=>'mot',

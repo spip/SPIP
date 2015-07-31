@@ -40,7 +40,6 @@ function exec_config_fonctions_dist()
 
 	$reducteur = charger_fonction('reducteur', 'configuration');
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
-	$versionneur = charger_fonction('versionneur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
 
@@ -49,8 +48,6 @@ function exec_config_fonctions_dist()
 	  $reducteur(), // Creation automatique de vignettes
 
 	  $avertisseur(), // Notification de modification des articles
-
-	  $versionneur(), // Gestion des revisions des articles
 
 	  $previsualiseur(), // Previsualisation sur le site public
 

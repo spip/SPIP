@@ -751,7 +751,6 @@ prive/rss.html -text
 prive/rss/a_suivre.html -text
 prive/rss/messagerie.html -text
 prive/rss/signatures.html -text
-prive/rss_fonctions.php -text
 prive/skins/spip/images/SEARCH.png -text
 prive/skins/spip/images/accueil-48.png -text
 prive/skins/spip/images/activite-48.png -text
