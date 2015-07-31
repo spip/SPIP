@@ -242,4 +242,7 @@ $GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 // Type de fichiers : webm http://en.wikipedia.org/wiki/Flv#File_formats
 $GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
 
+// IP en 40 caracteres pour IP v6
+$GLOBALS['maj'][15828] = array(array('sql_alter',"TABLE spip_forum CHANGE `ip` `ip` VARCHAR(40) DEFAULT '' NOT NULL"));
+
 ?>
