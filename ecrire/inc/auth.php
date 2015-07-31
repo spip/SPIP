@@ -149,7 +149,6 @@ function inc_auth_dist() {
 	}
 
 	// connu. Mais avec quels droits ?
-	$connect_login = $row['login'];
 	$connect_quand = $row['quand'];
 	$connect_id_auteur = $row['id_auteur'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
@@ -184,6 +183,7 @@ function inc_auth_dist() {
 		$connect_id_rubrique = $droits;
 	else $connect_toutes_rubriques = true;
 
+	$connect_login = $row['login'];
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";
 }
