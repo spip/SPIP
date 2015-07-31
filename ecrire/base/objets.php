@@ -403,6 +403,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * statut_images
  * statut_titres
  * statut_textes_instituer
+ * texte_changer_statut
+ * aide_changer_statut
  *
  * modeles : permet de declarer les modeles associes a cet objet
  * 
