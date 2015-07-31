@@ -582,7 +582,9 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		  $c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
 		  $req = traite_query($req,'', $c);
 		}
-		$res .= ancre_texte($req, array(), true);
+		//  permettre le copier/coller facile
+		// $res .= ancre_texte($req, array(), true);
+		$res .= "<div id='T".md5($req)."'>\n<pre>\n" . $req . "</pre>\n</div>\n";
 		//  formatage et affichage des resultats bruts de la requete
 		$ress_req = spip_query($req);
 		$brut_sql = '';
