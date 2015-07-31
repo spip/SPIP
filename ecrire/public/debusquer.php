@@ -427,7 +427,7 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
 		// Si erreur, signaler leur nombre dans le formulaire admin
-		$debug_objets['validation'] = $val[1] ? count($val[1]):'';
+		$debug_objets['validation'] = $val->err ? count($val->err):'';
 		list($texte, $err) = emboite_texte($val, $fonc, $self);
 		if ($err === false)
 			$err = _T('impossible');
@@ -445,6 +445,92 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		. $texte
 		. "</fieldset></div>"
 		. "</div>");
+}
+
+
+// http://doc.spip.org/@emboite_texte
+function emboite_texte($res, $fonc='',$self='')
+{
+	$errs = $res->err;
+	$texte = $res->entete . ($errs ? $errs : $res->page);
+
+	if (!$texte)
+		return array(ancre_texte('', array('','')), false);
+	if (!$errs)
+		return array(ancre_texte($texte, array('', '')), true);
+
+	if (!isset($GLOBALS['debug_objets'])) {
+
+		$colors = array('#e0e0f0', '#f8f8ff');
+		$encore = count_occ($errs);
+		$encore2 = array();
+		$fautifs = array();
+
+		$err = '<tr><th>'
+		.  _T('numero')
+		. "</th><th>"
+		. _T('occurrence')
+		. "</th><th>"
+		. _T('ligne')
+		. "</th><th>"
+		. _T('colonne')
+		. "</th><th>"
+		. _T('erreur')
+		. "</th></tr>";
+
+		$i = 0;
+		$style = "style='text-align: right; padding-right: 5px'";
+		foreach($errs as $r) {
+			$i++;
+			list($msg, $ligne, $col) = $r;
+			#spip_log("$r = list($msg, $ligne, $col");
+			if (isset($encore2[$msg]))
+			  $ref = ++$encore2[$msg];
+			else {$encore2[$msg] = $ref = 1;}
+			$err .= "<tr  style='background-color: "
+			  . $colors[$i%2]
+			  . "'><td $style><a href='#debut_err'>"
+			  . $i
+			  . "</a></td><td $style>"
+			  . "$ref/$encore[$msg]</td>"
+			  . "<td $style><a href='#L"
+			  . $ligne
+			  . "' id='T$i'>"
+			  . $ligne
+			  . "</a></td><td $style>"
+			  . $col
+			  . "</td><td>$msg</td></tr>\n";
+			$fautifs[]= array($ligne, $col, $i, $msg);
+		}
+		$err = "<h2 style='text-align: center'>"
+		.  $i
+		. "<a href='#fin_err'>"
+		.  " "._T('erreur_texte')
+		.  "</a></h2><table id='debut_err' style='width: 100%'>"
+		. $err
+		. " </table><a id='fin_err'></a>";
+		return array(ancre_texte($texte, $fautifs), $err);
+	} else {
+		list($msg, $fermant, $ouvrant) = $errs[0];
+		$rf = reference_boucle_debug($fermant, $fonc, $self);
+		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		$err = $msg .
+		  "<a href='#L" . $fermant . "'>$fermant</a>$rf<br />" .
+		  "<a href='#L" . $ouvrant . "'>$ouvrant</a>$ro";
+		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
+	}
+}
+
+// http://doc.spip.org/@count_occ
+function count_occ($regs)
+{
+	$encore = array();
+	foreach($regs as $r) {
+		if (isset($encore[$r[0]]))
+			$encore[$r[0]]++;
+		else $encore[$r[0]] = 1;
+	}
+	return $encore;
 }
 
 function debusquer_navigation_squelettes($self)
