@@ -587,7 +587,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			    str_replace(array("\\","'"),array("\\\\","\\'"), $v) .
 			    "'";
 			}
-			$code = "multi_trad(array(" .
+			$code = "choisir_traduction(array(" .
  			  substr($code,1) .
 			  "))";
 			$commentaire= '&';
