@@ -70,7 +70,7 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 // une fonction pour aider...
 // http://doc.spip.org/@chemin_plug
 function chemin_plug($racine, $plug) {
-	return preg_replace(',[^/]+/[.][.]/,', '', "$racine/$plug");
+	return preg_replace(',[^/]+/\.\./,', '', "$racine/$plug");
 }
 
 // http://doc.spip.org/@tree_open_close_dir
