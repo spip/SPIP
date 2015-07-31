@@ -145,12 +145,12 @@ function auteurs_set($id_auteur, $set = null) {
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
  *
  * @param int $id_auteur
- * @param array $c
+ * @param array $objets
  * @param array $qualif
  * @return string
  */
-function auteur_associer($id_auteur,$c, $qualif = null){
-	foreach($c as $objet => $id_objet){
+function auteur_associer($id_auteur,$objets, $qualif = null){
+	foreach($objets as $objet => $id_objet){
 		if ($id_objet=intval($id_objet)
 			AND !sql_getfetsel(
 							'id_auteur',
@@ -159,9 +159,9 @@ function auteur_associer($id_auteur,$c, $qualif = null){
 		{
 				sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
 		}
-		if ($qualif)
-			auteur_qualifier($id_auteur, $objet, $id_objet, $qualif);
 	}
+	if ($qualif)
+		auteur_qualifier($id_auteur, $objets, $qualif);
 
 	return ''; // pas d'erreur
 }
@@ -179,28 +179,28 @@ function auteur_referent($id_auteur,$c){
 
 /**
  * Dossocier un auteur des objets listes sous forme
- * array('objet'=>$id_objet,...)
+ * array($objet=>$id_objet,...)
  *
- * 'objet'=>'*' permet de supprimer tous les liens avec un type d'objet
- * '*'=>'*' permet de supprimer tous les liens de cet auteur
+ * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
  *
  * @param int $id_auteur
- * @param array $c
+ * @param array $objets
  * @return string
  */
-function auteur_dissocier($id_auteur,$c){
-	foreach($c as $objet => $id_objet){
-		if ($objet=='*'){
-			if ($id_objet=='*')
-				sql_delete("spip_auteurs_liens", 'id_auteur='.intval($id_auteur));
-		}
-		elseif ($id_objet=='*'){
-			sql_delete("spip_auteurs_liens", array('objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur)));
-		}
-		elseif ($id_objet=intval($id_objet)){
-			sql_delete("spip_auteurs_liens", array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur)));
-		}
+function auteur_dissocier($id_auteur,$objets){
+	$retire = array();
+	foreach($objets as $objet => $id_objet){
+		$where = array();
+		if ($id_auteur AND $id_auteur!=='*')
+			$where[] = "id_auteur=".intval($id_auteur);
+		if ($objet AND $objet!=='*')
+			$where[] = "objet=".sql_quote($objet);
+		if ($id_objet AND $id_objet!=='*')
+			$where[] = "id_objet=".intval($id_objet);
+		sql_delete("spip_auteurs_liens", $where);
+		$retire[] = array('source'=>array('auteur'=>$id_auteur),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
 	}
+	pipeline('trig_supprimer_objets_lies',$retire);
 
 	return ''; // pas d'erreur
 }
@@ -212,20 +212,21 @@ function auteur_dissocier($id_auteur,$c){
  * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
  *
  * @param int $id_auteur
- * @param string $objet
- * @param int $id_objet
- * @param array $c
+ * @param array $objets
+ * @param array $qualif
  */
-function auteur_qualifier($id_auteur,$objet,$id_objet,$c){
-	$where = array();
-	if ($id_auteur AND $id_auteur!=='*')
-		$where[] = "id_auteur=".intval($id_auteur);
-	if ($objet AND $objet!=='*')
-		$where[] = "objet=".sql_quote($objet);
-	if ($id_objet AND $id_objet!=='*')
-		$where[] = "id_objet=".intval($id_objet);
-	if ($c)
-		sql_updateq("spip_auteurs_liens",$c,$where);
+function auteur_qualifier($id_auteur,$objets,$qualif){
+	foreach($objets as $objet => $id_objet){
+		$where = array();
+		if ($id_auteur AND $id_auteur!=='*')
+			$where[] = "id_auteur=".intval($id_auteur);
+		if ($objet AND $objet!=='*')
+			$where[] = "objet=".sql_quote($objet);
+		if ($id_objet AND $id_objet!=='*')
+			$where[] = "id_objet=".intval($id_objet);
+		if ($c)
+			sql_updateq("spip_auteurs_liens",$qualif,$where);
+	}
 }
 
 
