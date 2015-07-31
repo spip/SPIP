@@ -665,7 +665,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$arg = "FIELD($arg,\" . join(',',array_map('_q', $var)) . \")";
+	$arg = "FIELD($arg,\" . _q($var) . \")";
 	if ($boucles[$idb]->group) $arg = "SUM($arg)";
 	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
 	$op = array("'$op'", "'cpt$cpt'", 0);

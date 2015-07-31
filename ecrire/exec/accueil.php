@@ -386,7 +386,8 @@ function etat_base_accueil()
 function accueil_liste_participants()
 {
 	global $spip_lang_left;
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0 AND statut IN ('" . join("','", $GLOBALS['liste_des_statuts']) . "')");
+
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0 AND statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")");
 
 	$cpt = array();
 	while($row=spip_fetch_array($q)) $cpt[$row['statut']] = $row['cnt']; 
