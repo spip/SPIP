@@ -88,201 +88,7 @@ h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margi
 
 td { text-align: #GET{left}; }
 
-/* * Formulaires */
-.forml { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #f0f0f0; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
-.formo { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #FFF; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
-.fondl { margin-top: 0px; padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; font-size: 11px; }
-.fondo { 
-	margin-top: 0px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee})], center center })]
-	border: 1px outset #GET{claire};
-	float: none; 
-	color: #FFF; 
-	font-size: 11px;
-	font-weight: bold; 
-}
-
-input[type="submit"] {
-	/*[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center center })]
-	border: 1px outset [(#GET{couleur_foncee}|couleur_foncer)];*/
-	font-weight: bold;
-	margin-top: 3px;
-}
-.fondf { margin-top: 0px; background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
-
-
-hr.fin_article_presentation {
-	clear: #GET{right};
-	color: #GET{foncee};
-	background-color: #GET{foncee};
-	border: 0px;
-	height: 1px;
-	margin-left: -5px;
-	margin-right: -5px;
-	
-}
-
-.formfx fieldset {border:0;margin:0;padding:0;}
-.formfx span.erreur {color:red;font-weight:bold;}
-ol.formfx,.formfx ol {
-	line-height: normal;
-	padding: 0px;
-	margin: 0px;
-	list-style-type: none;
-}
-ol.formfx .commentaire, ol.formfx .commentaire_bas {
-	margin-top: 0px;
-	border: 1px solid #GET{claire};
-	padding: 5px;
-	background-color: #999999;
-	color: #[(#GET{claire}|couleur_eclaircir)];
-}
-ol.formfx .commentaire {
-	border-bottom: 0px;
-}
-ol.formfx .commentaire_bas{
-	border-top: 0px;
-}
-.confirmer_deplacement {
-	margin-#GET{left}: 20px;
-}
-.confirmer_deplacement input {
-	float: #GET{left};
-	margin-#GET{left}: -20px;	
-}
-ol.formfx li textarea {
-	padding: 7px;
-	font-family: verdana, arial, sans;
-	font-size: 12px;
-	line-height: 1.3em;
-}
-ol.formfx li.obligatoire label {
-	font-weight: bold;
-}
-ol.formfx li label em {
-	float: #GET{right};
-	padding-#GET{right}: 5px;
-}
-ol.formfx li.gauche {
-	position: relative;
-	clear: #GET{left};
-	display: block;
-	list-style: none;
-	margin: 0px;
-	margin-top: 2px;
-	padding: 0px;
-	margin-left: 120px;
-}
-ol.formfx li.gauche label {
-	float: left;
-	margin-left: -120px;
-	
-	display: block;
-	width: 110px;
-	
-	
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{#ENV{couleur_claire,3874b0}, center [(#GET{right})] no-repeat })]
-
-	font-size: 9px;
-	color: #[(#GET{foncee}|couleur_foncer)];
-	line-height: 11px;
-	text-transform: uppercase;
-	font-family: verdana, arial, helvetica, sans;
-
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-}
-ol.formfx li.gauche.obligatoire label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
-	color: white;
-}
-ol.formfx li.gauche input, ol.formfx li.gauche textarea {
-}
-ol.formfx li.obligatoire input {
-	font-weight: bold;
-	border-color: #GET{foncee};
-}
-
-ol.formfx li.haut {
-	margin-#GET{left}: 0px;
-	clear: #GET{left};
-	padding: 0px;
-	padding-top: 7px;
-}
-
-ol.formfx li.haut label {
-		font-size: 9px;
-		display: -moz-inline-box;
-		display: inline-block;
-		color: white;
-		line-height: 11px;
-		text-transform: uppercase;
-		font-family: verdana, arial, helvetica, sans;
-
-		width: auto;
-
-		padding-top: 6px;
-		padding-bottom: 9px;
-		padding-left: 5px;
-		padding-right: 5px;
-
-		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
-
-		color: #[(#GET{foncee}|couleur_foncer)];
-
-}
-ol.formfx li.haut.obligatoire label {
-		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
-		color: white;
-}
-ol.formfx fieldset {
-	margin-top: 7px;
-	border: 1px solid #GET{foncee};
-	padding-top: 0px;
-	padding: 10px;
-	padding-top: 5px;
-}
-ol.formfx fieldset legend {
-
-		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
-
-		font-size: 9px;
-		color: white;
-		line-height: 11px;
-		text-transform: uppercase;
-		font-family: verdana, arial, helvetica, sans;
-
-		padding-top: 6px;
-		padding-bottom: 10px;
-		padding-left: 5px;
-		padding-right: 5px;
-		margin-bottom: 0px;
-}
-table.spip_barre {
-	background-color: #GET{foncee};
-	border-left: 1px solid #GET{claire};
-	border-right: 1px solid #GET{claire};
-	padding: 3px;
-	padding-bottom: 0px;
-}
-
-table.spip_barre a img { 
-	/*[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire})], center center })]*/
-
-	padding: 3px; border: 1px outset #GET{claire}; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
-
-/* cas particuliers */
-.formfx.editer_breve fieldset li.champ_statut label {width:250px;}
-
-
-
-
-/******** Formulaires editer, autre proposition  **************/
-
+/******** Formulaires **************/
 
 .entete-formulaire{
 	background:white;
@@ -292,7 +98,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 	overflow:auto;
 	zoom:1; /* correction IE6 */
 }
-.formulaire_editer .cadre{border: 1px solid #GET{foncee};}
+.formulaire_spip .cadre{border: 1px solid #GET{foncee};}
 
 /*
 	Note sur ecran large et etroit, en [11846]
@@ -302,7 +108,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 /* Style des formulaires d'edition
 ----------------------------------------------- */
-.formulaire_editer {
+.formulaire_spip {
 	font-size:11px;
 	line-height: 1.4em;
 	padding:0;
@@ -320,12 +126,12 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 */
 
 /* ul li */
-.formulaire_editer ul {
+.formulaire_spip ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
-.formulaire_editer li {
+.formulaire_spip li {
 	margin: 0;
 	padding: 10px 10px 10px 10px;
 	padding-#GET{left}:130px;
@@ -333,26 +139,26 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 	overflow:auto;
 	border-top: 1px solid #[(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
 }
-.formulaire_editer ul fieldset li {border:0; padding-top:5px; padding-bottom:5px;}
+.formulaire_spip li fieldset li {border:0; padding-top:5px; padding-bottom:5px;}
 
 /* elements du formulaire */
-.formulaire_editer input.text,
-.formulaire_editer input.password,
-.formulaire_editer textarea,
-.formulaire_editer select {
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
 	width: 96%;
 	font-size:1em;
 	margin:0;
 }
-.formulaire_editer input.submit, 
-.formulaire_editer input.reset, 
-.formulaire_editer input.button {
+.formulaire_spip input.submit, 
+.formulaire_spip input.reset, 
+.formulaire_spip input.button {
 	width: auto;
 }
 
 
 /* intitules (label) */
-.formulaire_editer label {
+.formulaire_spip label {
 	width: 120px;
 	float:#GET{left};
 	margin-#GET{left}:-125px; 
@@ -365,36 +171,36 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 	display:inline;
 }
 
-.formulaire_editer li p {
+.formulaire_spip li p {
 	margin-top:0;
 	margin-bottom:0;
 }
 
 /* fieldset */
-.formulaire_editer fieldset {
+.formulaire_spip fieldset {
 	margin:0;
 	padding:0 0 5px 0;
 	border:0;
 }
-.formulaire_editer li fieldset {
+.formulaire_spip li fieldset {
 	border:1px #aaa dashed;
 	background:transparent;
 	margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */
 }
-.formulaire_editer fieldset legend {
+.formulaire_spip fieldset legend {
 	padding:0.5em;
 	font-weight:bold;
 	font-style:italic;
 	font-size:1.2em;
 }
-.formulaire_editer li fieldset legend {
+.formulaire_spip li fieldset legend {
 	font-style:normal;
 	font-size:1em;
 	margin-#GET{left}:0px;
 	background:#GET{claire};
 	line-height:0.6em;
 }
-.formulaire_editer li fieldset h3.legend {
+.formulaire_spip li fieldset h3.legend {
 	font-size:1.1em;
 	color:#333;
 	margin-top:0;
@@ -408,23 +214,23 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 *
 *  La liste par defaut est verticale
 *  pour l'avoir horizontale, il faut specifier :
-*  .formulaire_editer .editer_qqc .champ{display:inline;}
+*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_editer .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
-.formulaire_editer .choix input.radio,
-.formulaire_editer .choix input.checkbox {width:auto;}
+.formulaire_spip .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
 
 /* icone d'aide */
-.formulaire_editer li em.aide { float:right;margin-right:-10px;}
+.formulaire_spip li em.aide { float:right;margin-right:-10px;}
 
 /* boutons */
-.formulaire_editer .boutons {
+.formulaire_spip .boutons {
 	margin:0; clear:both;
 	text-align: #GET{right};
 	font-size: 1.2em;
 	margin: 7px 1em;
 }
-.formulaire_editer .boutons input.submit {
+.formulaire_spip .boutons input.submit {
 	margin-#GET{right}: 1em;
 	padding: 0 1em;
 	font-weight:normal;
@@ -432,46 +238,46 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 
 /* obligatoire */
-.formulaire_editer li.obligatoire {
+.formulaire_spip li.obligatoire {
 	background-color: #CDDF3F;
 	background-color: #GET{claire};
 }
-.formulaire_editer li.obligatoire label {
+.formulaire_spip li.obligatoire label {
 	font-weight: bold;
 	color:#000;
 }
 
 
 /* erreur */
-.formulaire_editer li.erreur input.text,
-.formulaire_editer li.erreur textarea {
+.formulaire_spip li.erreur input.text,
+.formulaire_spip li.erreur textarea {
 	background-color: #FFCCCC;
 	border-style: solid;
 	border-color: #C30;
 }
-.formulaire_editer li.erreur .erreur,
-.formulaire_editer em.attention,
-.formulaire_editer .formulaire_erreur{
+.formulaire_spip li.erreur .erreur,
+.formulaire_spip em.attention,
+.formulaire_spip .formulaire_erreur{
 	color: #C30;
 	font-weight: bold;
 }
-.formulaire_editer .formulaire_erreur{
+.formulaire_spip .formulaire_erreur{
 	display:block;
 	margin-#GET{left}:0.5em;
 }
 
 /* message reussite ? */
-.formulaire_editer .formulaire_message{
+.formulaire_spip .formulaire_message{
 	color: #53AD20;
 	font-weight: bold;
 }
 
 /* commentaires */
-.formulaire_editer .explication{
+.formulaire_spip .explication{
 	font-size:10px;
 }
 /* remarques importantes */
-.formulaire_editer em.attention{
+.formulaire_spip em.attention{
 	display:block;
 	margin:0.5em;
 	font-weight:normal;
@@ -479,26 +285,26 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 
 /* barre d'outil */
-.formulaire_editer table.spip_barre{
+.formulaire_spip table.spip_barre{
 	background:#aaa;
 	border: 1px solid #666;
 	width:90%; /* pour mettre a la meme taille que les champs de formulaire */
 	background:none; border:0; margin:0; padding:0;/**/
 }
-.formulaire_editer table.spip_barre a img { 
+.formulaire_spip table.spip_barre a img { 
 	background-color:#ccc;
 	padding: 2px;
 	border: 1px solid #666;
 	margin-right:1px;
 }
-.formulaire_editer table.spip_barre a:hover img{
+.formulaire_spip table.spip_barre a:hover img{
 	background:white;
 }
 
 
 
 /*
- * Champs speciaux
+ * Cas particuliers
  */
 .formulaire_editer .editer_titre input,
 .formulaire_editer .editer_nom input{font-size:1.2em; font-weight:bold;}
@@ -541,11 +347,32 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 .formulaire_editer_breve .editer_statut label{width:240px;margin-#GET{left}:-245px;}
 
 
-/******** /Formulaires editer, fin autre proposition  **************/
+/* navigateur de rubrique */
+.confirmer_deplacement input {
+	float: #GET{left};
+	margin-#GET{left}: -20px;	
+}
+
+/* barre typo */
+
+table.spip_barre {
+	background-color: #GET{foncee};
+	border-left: 1px solid #GET{claire};
+	border-right: 1px solid #GET{claire};
+	padding: 3px;
+	padding-bottom: 0px;
+}
+
+table.spip_barre a img { 
+	/*[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire})], center center })]*/
+
+	padding: 3px; border: 1px outset #GET{claire}; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+/******** Formulaires fin  **************/
 
 
-
-	
 select.fondl { padding: 0; }
 .maj-debut:first-letter { text-transform: uppercase; }
 
