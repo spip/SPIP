@@ -450,7 +450,10 @@ $spip_auteurs_liens = array(
 
 $spip_auteurs_liens_key = array(
 		"PRIMARY KEY"		=> "id_auteur,id_objet,objet",
-		"KEY id_auteur"	=> "id_auteur");
+		"KEY id_auteur"	=> "id_auteur",
+		"KEY id_objet"	=> "id_objet",
+		"KEY objet"	=> "objet",
+);
 
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
