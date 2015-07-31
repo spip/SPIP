@@ -340,7 +340,7 @@ function calculer_param_dynamique($val, &$boucles, $idb)
   else
     {if (ereg('^\$(.*)$',$val,$m))
 	return '$Pile[0][\''. $m[1] ."']";
-      else return $val;
+      else return "'".addslashes($val)."'";
     }
 }
 ?>
