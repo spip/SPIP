@@ -107,8 +107,12 @@ onblur="changestyle(\'bandeauinterface\');"';
 		$bloc .= "<script type='text/javascript'><!--
 			$('#selecteur_couleur a')
 			.click(function(){
-				$('#cssprivee')
-				.attr('href', $(this).attr('rel'));
+				$('head>link#cssprivee')
+				.clone()
+				.removeAttr('id')
+				.attr('href', $(this).attr('rel'))
+				.appendTo($('head'));
+
 				$.get($(this).attr('href'));
 				return false;
 			});
