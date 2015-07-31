@@ -239,11 +239,10 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	}
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-	$largeurs = array('7','', '', '', '100', '38');
-	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
+	$styles = array(array('arial11', 7), array('arial11'), array('arial1'), array('arial1'), array('arial1 centered', 100), array('arial1', 38));
 
 	$tableau = array(); // ne sert pas ici
-	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tmp_var, $titre, icone_table($type));
+	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $styles, $tmp_var, $titre, icone_table($type));
 }
 
 // http://doc.spip.org/@charger_fonction_logo_if
@@ -432,11 +431,10 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
-	$largeurs = array(11, '', 80, 100, 50);
-	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+	$styles = array(array('', 11), array('arial2',''), array('arial1', 80), array('arial1', 100), array('arial1', 50));
 	$tableau = array();
 	$url = generer_url_ecrire('memoriser', "hash=$hash&trad=$trad");
-	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
+	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }

@@ -163,14 +163,13 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	
 	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 	$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
-	$largeurs = array('25', '', '', '');
-	$styles = array('arial11', 'arial2', 'arial2', 'arial1');
+	$styles = array(array('arial11',25), array('arial2'), array('arial2'), array('arial1'));
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_mots = 'id_mot'; 
-	$res = 	$presenter_liste($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $largeurs, $styles);
+	$res = 	$presenter_liste($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $styles);
 
 	if ($flag_editable)
 	  $res .= formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);

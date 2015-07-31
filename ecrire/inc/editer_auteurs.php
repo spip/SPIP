@@ -211,11 +211,10 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit,
 
 	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'"));
 
-	$largeurs = array('14', '', '', '', '', '');
-	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
+	$styles = array(array('arial11', 14), array('arial2'), array('arial11'), array('arial11'), array('arial11'), array('arial1'));
 
 	$tableau = array(); // ne sert pas
-	return 	$presenter_liste($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag_editable, $id, $type, $script_edit), false, $largeurs, $styles, $tmp_var, '','', $url);
+	return 	$presenter_liste($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag_editable, $id, $type, $script_edit), false, $styles, $tmp_var, '','', $url);
 }
 
 // http://doc.spip.org/@ajouter_auteur_un

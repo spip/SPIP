@@ -193,7 +193,7 @@ function avertissement_messagerie($id_auteur) {
 	if ($total_messages == 1) {
 		$row = @sql_fetch($result_messages);
 		$ze_message=$row['id_message'];
-		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' classe='ligne_foncee'>"._T('info_nouveau_message')."</a>";
+		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' class='ligne_foncee'>"._T('info_nouveau_message')."</a>";
 	} elseif ($total_messages > 1)
 		return "<a href='" . generer_url_ecrire("messagerie") . "' classe='ligne_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a>";
 	else return '';

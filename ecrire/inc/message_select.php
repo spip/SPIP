@@ -20,11 +20,9 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	$requete = array('SELECT' => 'messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.type, messages.rv', 'FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
 	if ($afficher_auteurs) {
-			$largeurs = array('', 130, 20, 120);
-			$styles = array('arial2', 'arial1', 'arial1', 'arial1');
+		$styles = array(array('arial2'), array('arial1', 130), array('arial1', 20), array('arial1', 120));
 	} else {
-			$largeurs = array('', 20, 120);
-			$styles = array('arial2', 'arial1', 'arial1');
+		$styles = array(array('arial2'), array('arial1', 20), array('arial1', 120));
 	}
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
@@ -32,7 +30,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_messages = 'id_message'; 
-	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tmp_var, $titre,  "messagerie-24.gif");
+	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $styles, $tmp_var, $titre,  "messagerie-24.gif");
 	$messages_vus =  array_merge($messages_vus, $les_messages);
 
 	if (!$res) return '';
