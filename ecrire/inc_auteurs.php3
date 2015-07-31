@@ -73,7 +73,7 @@ else if ($tri=='nombre')
 
 if ($visiteurs == "oui") {
 	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
-	$visiteurs .= '&visiteurs=oui';
+	$visiteurs = '&visiteurs=oui';
  } else {
 	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"auteurs","redacteurs");
 	$visiteurs = "";
@@ -184,6 +184,7 @@ echo "<a name='bas'>";
 echo "<table width='100%' border='0'>";
 
 $debut_suivant = $debut + $max_par_page;
+ if ($visiteurs) $visiteurs = "\n<input type='hidden' name='visiteurs' value='oui' />";
 if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	echo "<tr height='10'></tr>";
 	echo "<tr bgcolor='white'><td align='left'>";
@@ -193,6 +194,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_prec' />",
 		  "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
+		  $visiteurs,
 		  "\n</form>";
 	}
 	echo "</td><td style='text-align: $spip_lang_right'>";
@@ -201,6 +203,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_suivant' />",
 		  "\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
+		  $visiteurs,
 		  "\n</form>";
 	}
 	echo "</td></tr>\n";
