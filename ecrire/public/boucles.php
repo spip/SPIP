@@ -71,9 +71,12 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
 		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
-			fabrique_jointures($boucle, array(
-				array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
-							  array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$def = $trouver_table('spip_auteurs_articles');
+			$def = array('spip_auteurs_articles', $def);
+			$def = array($id_table, $def, 'id_auteur');
+			$def2 = array('', array('spip_articles'), 'id_article');
+			fabrique_jointures($boucle, array($def, $def2), true, $boucle->show, $id_table);
 			$t = array_search('spip_articles', $boucle->from);
 			array_unshift($boucle->where,
 				array("'='", "'$t.statut'", "'\\'publie\\''"));
@@ -301,7 +304,11 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	else {
 		$jointure = array_search("spip_syndic", $boucle->from);
 		if (!$jointure) {
-			fabrique_jointures($boucle, array(array($id_table, array('spip_syndic'), 'id_syndic')), true, $boucle->show, $id_table);
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$def = $trouver_table('spip_syndic');
+			$def = array('spip_syndic', $def);
+			$def = array($id_table, $def, 'id_syndic');
+			fabrique_jointures($boucle, array($def), true, $boucle->show, $id_table);
 			$jointure = array_search('spip_syndic', $boucle->from);
 		}
 		array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
