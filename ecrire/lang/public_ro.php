@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Prima pagină',
-'article' => 'Article', # NEW
+'article' => 'Articol',
 'articles' => 'Articole',
 'articles_auteur' => 'Articole de acelaşi autor',
 'articles_populaires' => 'Cele mai populare articole',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nu există nici un site la această adresă',
 'aucune_breve' => 'Nu există nici o ştire la această adresă',
 'aucune_rubrique' => 'Nu există nici o rubrică la această adresă',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Autor',
 'autres' => 'Altele',
 'autres_breves' => 'Alte ştiri',
 'autres_groupes_mots_clefs' => 'Alte grupuri de cuvinte-cheie',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mesaj',
 'messages_forum' => 'Mesajele forum-ului',
 'messages_recents' => 'Cele mai recente mesaje de forum',
-'mots_clef' => 'Mot-clé', # NEW
+'mots_clef' => 'Cuvânt-cheie',
 'mots_clefs' => 'Cuvinte-cheie',
 'mots_clefs_meme_groupe' => 'Cuvinte-cheie în acelaşi grup',
 
