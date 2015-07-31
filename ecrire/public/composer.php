@@ -472,7 +472,7 @@ function lang_parametres_forum($qs, $lang) {
 // http://doc.spip.org/@calculer_select
 function calculer_select ($select = array(), $from = array(), 
 			$where = array(), $join=array(),
-			$groupby = '', $orderby = array(), $limit = '',
+			$groupby = array(), $orderby = array(), $limit = '',
 			$having=array(), $table = '', $id = '', $serveur='') {
 
 // retirer les criteres vides:
@@ -507,7 +507,7 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $where))
-			$sfrom = " INNER JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
+			$sfrom = "\n\tINNER JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
 		else { unset($join[$k]);}
 		unset($from[$cle]);
 	}
