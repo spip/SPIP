@@ -160,7 +160,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = substr_count($lecode, "\n");
 
-			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><div><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></div></form>";
 			// Les marques ci-dessous indiquent qu'on ne veut pas paragrapher
 			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
 		}
