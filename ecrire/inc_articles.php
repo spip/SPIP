@@ -1164,7 +1164,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A href=" . http_php_script("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . ">"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1358,7 +1358,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
+			echo "[<A href=" . http_php_script("articles","id_article=$id_article&debut=$i") . ">$i-$y</A>] ";
 	}
 	echo "</div>";
 }
@@ -1376,7 +1376,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A HREF='articles.php3?id_article=$id_article&debut=$i'>$i-$y</A>] ";
+			echo "[<A href=" . http_php_script("articles","id_article=$id_article&debut=$i") . ">$i-$y</A>] ";
 	  }
 	  echo "</div>";
 	}
