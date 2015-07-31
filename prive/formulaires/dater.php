@@ -61,7 +61,14 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 		$jour_redac = $regs[2];
 		$heure_redac = $regs[3];
 		$minute_redac = $regs[4];
-		$possedeDateRedac= ($annee_redac + $mois_redac + $jour_redac);
+		$possedeDateRedac = true;
+		// attention : les vrai dates de l'annee 1 sont stockee avec +9000 => 9001
+		// mais reviennent ici en annee 1 par recup_date
+		// on verifie donc que le intval($row['date_redac']) qui ressort l'annee
+		// est bien lui aussi <=1 : dans ce cas c'est une date sql 'nulle' ou presque, selon
+		// le gestionnnaire sql utilise (0001-01-01 pour PG par exemple)
+		if (intval($row['date_redac'])<=1 AND ($annee_redac<=1) AND ($mois_redac<=1) AND ($jour_redac<=1))
+			$possedeDateRedac = false;
 	}
 	else
 		$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
@@ -94,6 +101,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 }
 
 function dater_formater_saisie_jour($jour,$mois,$annee,$sep="/"){
+	$annee = str_pad($annee,4,'0',STR_PAD_LEFT);
 	if (intval($jour)){
 		$jour = str_pad($jour,2,'0',STR_PAD_LEFT);
 		$mois = str_pad($mois,2,'0',STR_PAD_LEFT);
