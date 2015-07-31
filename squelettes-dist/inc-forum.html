@@ -21,6 +21,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 			</div>
 			<div class="#EDIT{texte} forum-texte">
 				[(#TEXTE|lignes_longues)]
+				[<div class="notes surlignable">(#NOTES|lignes_longues)</div>]
 				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 
 				<BOUCLE_doc(DOCUMENTS){id_forum}>
@@ -47,6 +48,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 					</div>
 					<div class="#EDIT{texte} forum-texte">
 						[(#TEXTE|lignes_longues)]
+						[<div class="notes surlignable">(#NOTES|lignes_longues)</div>]
 						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 
 				<BOUCLE_doc2(DOCUMENTS){id_forum}>
