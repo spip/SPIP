@@ -1159,7 +1159,7 @@ les images utilis&eacute;es dans les articles et les rubriques.',
 	les cas, vous pourrez sans dommage revenir au r&eacute;glage pr&eacute;c&eacute;dent.',
 'texte_lien_hypertexte' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
 'texte_liens_sites_syndiques' => 'Les liens issus des sites syndiqu&eacute;s peuvent
-			&ecirc;tre bloqu&eacute;s a priori ; le r&eacute;glage
+			&ecirc;tre bloqu&eacute;s a priori&nbsp;; le r&eacute;glage
 			ci-dessous indique le r&eacute;glage par d&eacute;faut des
 			sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
 			est ensuite possible, de toutes fa&ccedil;ons, de
