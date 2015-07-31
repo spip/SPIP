@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
+include_spip('inc/charsets');
 
 // http://doc.spip.org/@PhraseurXML
 class PhraseurXML {
@@ -76,10 +77,11 @@ function finElement($parser, $name)
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
-  // fusion <balise></balise> en <balise />
-  // ATTENTION, ne pas le faire s'il y a des attributs
-  // ca trompe completement les clients http 
-  if ($t || ($ouv !=$name))
+  // fusion <balise></balise> en <balise />.
+  // ATTENTION, en presence d'attributs ne le faire que si la DTD le dit:
+  // pour les autres, certains clients http croient que fusion ==> pas d'att
+  // en particulier pour les balises Script et A.
+  if ($t || (($ouv !=$name) AND $phraseur_xml->elements[$name][0] != 'EMPTY'))
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
     $res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
@@ -151,21 +153,19 @@ function xml_parsestring($xml_parser, $data)
 	if (!xml_parse($xml_parser, $data, true)) {
 	  // ne pas commencer le message par un "<" (cf inc_sax_dist)
 	  $r = xml_error_string(xml_get_error_code($xml_parser)) .
-	    _L(" ligne ") .
-	    xml_get_current_line_number($xml_parser) .
-	    _L(" colonne ") .
-	    xml_get_current_column_number($xml_parser) .
+	    coordonnees_erreur($xml_parser) . '<br />' .
 	    (!$phraseur_xml->depth ? '' :
-	     ('<br />' .
+	     (
 	      _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
 	      "<tt>" .
 	      $phraseur_xml->ouvrant[$phraseur_xml->depth] .
 	      "</tt>" .
 	      _L(" ligne ") .
-	      $phraseur_xml->reperes[$phraseur_xml->depth]));
+	      $phraseur_xml->reperes[$phraseur_xml->depth] .
+	      '<br />' ));
 
 	} else if ($phraseur_xml->err)
-	  $r = join(', ', $phraseur_xml->err);
+	  $r = join('<br />', $phraseur_xml->err) . '<br />';
 	else $r = $phraseur_xml->res;
 
 	return $r;
@@ -181,8 +181,6 @@ function xml_parsestring($xml_parser, $data)
  var $attributs = array();
  var $err = array();
 }
-
-
 
 // http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page, $apply=false) {
@@ -205,18 +203,29 @@ function inc_sax_dist($page, $apply=false) {
 		ob_end_clean();
 	}
 	if ($GLOBALS['xml_validation']
-	AND $validateur = charger_fonction('validateur', 'inc', true))
+	AND $validateur = charger_fonction('validateur', 'inc', true)) {
 		$validateur($page);
+		if (isset($phraseur_xml->entites['HTMLsymbol']))
+			$page = unicode2charset(html2unicode($page, true));
+	}
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
 	xml_parser_free($xml_parser);
+
 	if ($res[0] != '<')
 		$GLOBALS['xhtml_error'] = $res;
 	else
-	  $page = $res;
+		$page = $res;
 	return $page;
 }
 
-
+function coordonnees_erreur($xml_parser)
+{
+  return
+	_L(" ligne ") .
+	xml_get_current_line_number($xml_parser) .
+	_L(" colonne ") .
+	xml_get_current_column_number($xml_parser);
+}
 
 $GLOBALS['phraseur_xml'] = new PhraseurXML();
 // exemple d'appel en ligne de commande:

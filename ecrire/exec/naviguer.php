@@ -190,7 +190,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	}
 	else {
 		if ($connect_statut == '0minirezo') {
-			$res .= "<p>"._T('info_creation_rubrique');
+			$res .= "<br />"._T('info_creation_rubrique');
 		}
 	}
 	
@@ -342,7 +342,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 		include_spip('inc/sites_voir');
-		$res .= '<p>' . afficher_sites('<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site')) . '</p>';
+		$res .= '<br />' . afficher_sites('<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
 
 		if ($id_rubrique > 0
 		AND ($GLOBALS['meta']["proposer_sites"]> 0 OR acces_rubrique($id_rubrique))) {

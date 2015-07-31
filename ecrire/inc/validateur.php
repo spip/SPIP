@@ -41,13 +41,13 @@ function inc_validateur_dist($data)
 
 	$res = array();
 
-	// on ignore les entites publiques. A ameliorer a terme
-	if (preg_match_all('/<!ENTITY\s+%\s+([.\w]+)\s+"([^"]*)"\s*>/', $dtd, $r, PREG_SET_ORDER)) {
+	// les entites publiques sont declarees vides. A ameliorer a terme
+	if (preg_match_all('/<!ENTITY\s+%\s+([.\w]+)\s+(PUBLIC)?\s*"([^"]*)"\s*("[^"]*")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
-	    list(,$nom, $val) = $m;
-	    $res[$nom] =  expanserEntite($val, $res);
+	    list(,$nom, $type, $val) = $m;
+	    $res[$nom] =  $type ? '': expanserEntite($val, $res) ;
 	  }
-	}
+	} 
 	$phraseur_xml->entites = $res;
 
 	// reperer pour chaque noeud ses fils potentiels, sans repetitions,
@@ -57,7 +57,7 @@ function inc_validateur_dist($data)
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
 	    $val = expanserEntite($val, $phraseur_xml->entites);
-	    $val = array_values(preg_split('/\W+/', $val));
+	    $val = array_values(preg_split('/\W+/', $val,-1,PREG_SPLIT_NO_EMPTY));
 	    $res[$nom]= $val;
 	  }
 	}
@@ -101,12 +101,9 @@ function validerElement($parser, $name, $attrs)
 
 	if (!isset($phraseur_xml->elements[$name]))
 
-		$phraseur_xml->err[]= $name 
-		. '&nbsp;:&nbsp;'
-		. _L('balise inconnue ')
-		. _L('ligne ')
-		. xml_get_current_line_number($parser)
-		. '<br />';
+		$phraseur_xml->err[]= " <b>$name</b>"
+		. _L(' balise inconnue ')
+		.  coordonnees_erreur($parser);
 	else {
 	  $depth = $phraseur_xml->depth;
 	  $ouvrant = $phraseur_xml->ouvrant;
@@ -114,24 +111,21 @@ function validerElement($parser, $name, $attrs)
 	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
 	      $pere = $r[1];
 	      if (!@in_array($name, $phraseur_xml->elements[$pere]))
-		$phraseur_xml->err[]= $name 
-		. '&nbsp;:&nbsp;'
-		. _L(" n'est pas un fils de <b>")
-		. $pere
-		. _L('</b> ligne ')
-		. xml_get_current_line_number($parser)
-		. '<br />';
+		$phraseur_xml->err[]= " <b>$name</b>" 
+		. _L(" n'est pas un fils de ")
+		. '<b>'
+		.  $pere
+		. '</b>'
+		.  coordonnees_erreur($parser);
 	    }
 	  }
 	  foreach ($phraseur_xml->attributs[$name] as $n => $v)
 	    { if (($v == '#REQUIRED') AND (!isset($attrs[$n])))
-		$phraseur_xml->err[]= $n 
+		$phraseur_xml->err[]= " <b>$n</b>"
 		. '&nbsp;:&nbsp;'
-		. _L(" attribut obligatoire mais absent dans <b>")
-		. $name
-		. _L('</b> ligne ')
-		. xml_get_current_line_number($parser)
-		. '<br />';
+                . _L(" attribut obligatoire mais absent dans ")
+                . "<b>$name</b>"
+		.  coordonnees_erreur($parser);
 	    }
 	}
 }
@@ -145,13 +139,10 @@ function validerAttribut($parser, $name, $val, $bal)
 	if ($a = $phraseur_xml->attributs[$bal] 
 	    AND !isset($a[$name]))
 
-		$phraseur_xml->err[]= $name 
-		. '&nbsp;:&nbsp;'
-		. _L('attribut inconnu de ')
-		. $bal 
-		. _L(' ligne ')
-		. xml_get_current_line_number($parser)
-		. '<br />';
+		$phraseur_xml->err[]= " <b>$name</b>"
+		. _L(' attribut inconnu de ')
+		. "<b>$bal</b>"
+		.  coordonnees_erreur($parser);
 }
 
 

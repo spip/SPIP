@@ -437,6 +437,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 				$err = _T('impossible');
 			elseif ($err === true)
 			  $err = _T('correcte');
+			else $err = ": $err";
 		}
 
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",
@@ -506,11 +507,24 @@ function debug_fin()
 // http://doc.spip.org/@emboite_texte
 function emboite_texte($texte, $fonc='',$self='')
 {
+ 
 	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
-	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
-		     $GLOBALS['xhtml_error'],
-		     $r))
+	elseif (preg_match_all(",([^0-9]* )([0-9]+)(.*?<br />),",
+				$GLOBALS['xhtml_error'],
+				$regs,
+				PREG_SET_ORDER)) {
+		$err = '';
+		$fautifs = array();
+		foreach($regs as $r) {
+			$err .= $r[1] .
+			  "<a href='#L" . $r[2] . "'>$r[2]</a>$r[3]";
+			$fautifs[]=$r[2];
+		}
+		return array(ancre_texte($texte, $fautifs), $err);
+	} elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
+                     $GLOBALS['xhtml_error'],
+                     $r))
 		return array(ancre_texte($texte, array('', '')), true);
 	else {
 		$fermant = $r[2];
@@ -519,11 +533,10 @@ function emboite_texte($texte, $fonc='',$self='')
 		  $rf = reference_boucle_debug($fermant, $fonc, $self);
 		  $ro = reference_boucle_debug($ouvrant, $fonc, $self);
 		} else $rf = $ro = '';
-		$err = ": " . $r[1] .
+		$err = $r[1] .
 		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
 		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
 		return array(ancre_texte($texte, array($ouvrant, $fermant)), $err);
 	}
 }
-
 ?>
