@@ -2121,12 +2121,12 @@ function f_jQuery ($texte) {
 		erreur_squelette(array('double_occurrence', array('balise' => "INSERT_HEAD")));
 	} else {
 		$x = '';
-		foreach (pipeline('jquery_plugins',
+		foreach (array_unique(pipeline('jquery_plugins',
 		array(
 			'javascript/jquery.js',
 			'javascript/jquery.form.js',
 			'javascript/ajaxCallback.js'
-		)) as $script)
+		))) as $script)
 			if ($script = find_in_path($script))
 				$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
 		$texte = $x.$texte;
