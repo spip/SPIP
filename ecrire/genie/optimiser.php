@@ -395,6 +395,13 @@ function optimiser_base_disparus($attente = 86400) {
 			"forum.id_forum IS NULL");
 
 	$n+= optimiser_sansref('spip_mots_forum', 'id_forum', $res);
+	
+	$n = pipeline('optimiser_base_disparus', array(
+			'args'=>array(
+				'attente' => $attente,
+				'date' => $mydate),
+			'data'=>$n
+	));
 
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }

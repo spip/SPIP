@@ -32,6 +32,7 @@ function base_admin_repair_dist($titre='', $reprise='') {
 		propager_les_secteurs();
 	}
 	include_spip('inc/minipres');
+	$res .= pipeline('base_admin_repair',$res);
 	$res .= admin_repair_plat();
 	echo minipres(_T('texte_tentative_recuperation'),
 			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
