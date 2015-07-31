@@ -58,15 +58,12 @@ function exec_discuter_dist($id_article=-1, $debut=-1)
   $row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0"));
   $total = $row["cnt"];
 
-  if ($total) {
+  if (!$total) return '';
 
- 	$total_afficher = 8;
-	$forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
+  $total_afficher = 8;
+  $forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
 #				   " LIMIT $total_afficher OFFSET $debut" # PG
 
-	$total = formulaire_discuter($forum, $total, $debut, $total_afficher, 'articles', "id_article=$id_article");
-
-  }
-  return $total;
+  return formulaire_discuter($forum, $total, $debut, $total_afficher, 'articles', "id_article=$id_article");
 }
 ?>

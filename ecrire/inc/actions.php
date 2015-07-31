@@ -137,8 +137,7 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 				$action,
 				"var_ajax=1&script=$script$args_ajax",
 				$corps,
-				"\nmethod='post'
-				onsubmit='return AjaxSqueeze(this, \"$ancre\")'");
+				" method='post'\nonsubmit='return AjaxSqueeze(this, \"$ancre\")'");
 		}
 	}
 

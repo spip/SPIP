@@ -175,7 +175,7 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 	} else $bouton = '';
 
 	return debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton._T('titre_mots_cles').aide ("artmots"))
-		. "<div id='editer_mot-$id_objet'>".$form."</div>"
+		. "\n<div id='editer_mot-$id_objet'>".$reponse.$form."</div>"
 		. fin_cadre_enfonce(true);
 
 }
@@ -331,8 +331,8 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
-		$res = "<div class='liste'>"
-		. "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
+		$res = "\n<div class='liste'>"
+		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
 		. afficher_liste($largeurs, $tableau, $styles)
 		. "</table></div>";
 	} else $res ='';
@@ -416,13 +416,12 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 
 	$message = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span> &nbsp;\n";
 
-	$res .=  "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
+	$res .=  "\n<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 	while ($row = spip_fetch_array($result_groupes)) {
 		$g = menu_mots($row, $id_groupes_vus, $les_mots);
 		if ($g) {
-			$res .= "<tr><td>$message</td>\n<td>" 
-			. ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", $g,"&id_objet=$id_objet&objet=$objet&select_groupe=" . $row['id_groupe'])
-			. "</td></tr>\n";
+			$g = "\n<tr><td>$message</td>\n<td>$g</td></tr>\n" ;
+			$res .= ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", $g,"&id_objet=$id_objet&objet=$objet&select_groupe=" . $row['id_groupe']);
 			$message = "";
 		}
 	}
@@ -430,11 +429,9 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	if (acces_mots()) {
 		$titre = _request('cherche_mot')
 			? "&titre=".rawurlencode(_request('cherche_mot')) : '';
-		$res .= "<tr><td></td><td colspan='2'>"
-		. "<div style='width: 200px;'>"
+		$res .= "\n<tr><td></td><td colspan='2'>\n<div style='width: 200px;'>"
 		. icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
-		. "</div> "
-		. "</td></tr>";
+		. "\n</div></td></tr>";
 	}
 		
 	return $res . "</table>" . fin_block();
@@ -473,7 +470,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript>";
 
 		$res .= "</td>\n<td>";
-		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe'>";
+		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
 		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px'>";
 		$res .= "</span>"; 
@@ -498,7 +495,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$res .= "</SELECT>";
 		$res .= "</td>\n<td>";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= " &nbsp; <input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'>";
+		$res .= "\n&nbsp;<input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo' />";
 		$res .= "</span>";
 	}
 
