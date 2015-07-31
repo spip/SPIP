@@ -38,18 +38,46 @@ include_spip('inc/filtres_mini');
  */
 defined('_DEBUG_MAX_SQUELETTE_ERREURS') || define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 
-//
-// Point d'entree general, 
-// pour les appels involontaires ($message non vide => erreur)
-// et volontaires (var_mode et var_profile) 
-// Si pas d'autorisation, les erreurs ne sont pas affichees
-// (mais seront dans les logs)
-// Si l'erreur vient de SPIP,  en parler sur spip@rezo.net
 
-function public_debusquer_dist($message = '', $lieu = ''){
+/**
+ * Point d'entrée pour les erreurs de compilation
+ *
+ * Point d'entrée pour les appels involontaires ($message non vide => erreur)
+ *  et volontaires (var_mode et var_profile)
+ * 
+ * Si pas d'autorisation, les erreurs ne sont pas affichées
+ * (mais seront dans les logs)
+ *
+ * Si l'erreur vient de SPIP,  en parler sur `spip@rezo.net`
+ * 
+ * @param bool|string|array $message
+ *     - Message d'erreur (string|array)
+ *     - false pour retourner le texte des messages d'erreurs
+ *     - vide pour afficher les messages d'erreurs
+ * @param string|Contexte $lieu
+ *     Contexte : lieu d'origine de l'erreur
+ * @param array $opt
+ *     Options pour debug ou tests unitaires
+ *     - 'erreurs' = 'get' : Retourne le tableau des erreurs
+ *     - 'erreurs' = 'reset' : Efface le tableau des erreurs
+ * @return null|string
+ *     - string si $message à false.
+**/
+function public_debusquer_dist($message = '', $lieu = '', $opt = array()){
 	global $visiteur_session;
 	global $debug_objets;
 	static $tableau_des_erreurs = array();
+
+	// Pour des tests unitaires, pouvoir récupérer les erreurs générées
+	if (isset($opt['erreurs'])) {
+		if ($opt['erreurs'] == 'get') {
+			return $tableau_des_erreurs;
+		}
+		if ($opt['erreurs'] == 'reset') {
+			$tableau_des_erreurs = array();
+			return true;
+		}
+	}
 
 	// Erreur ou appel final ?
 	if ($message){
