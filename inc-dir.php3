@@ -101,4 +101,16 @@ function dir_of_file_cache($cle, $delai)
   return subdir_cache($hache[16],$delai);
 }
 
+# teste si son argument est un ficher du re'pertoire de cache
+
+function is_cache($path, $dir)
+{
+  $n = strlen($dir);
+  return
+    ((strpos($path, $dir) === 0) && 
+     (strpos("abcdef0123456789", $path[$n])) &&
+     ($path[$n+1] == '/') &&
+     (strpos($path, '../') === false) );
+}
+
 ?>

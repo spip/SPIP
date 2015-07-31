@@ -62,6 +62,7 @@ function ramener_squelette($squelette)
 		{
 		  spip_log("Squelette $squelette:\t($nom) chargé");
 		  flock($lock, LOCK_UN);
+		  fclose($lock);
 		  return $nom;
 		}
 	    }
@@ -78,7 +79,8 @@ function ramener_squelette($squelette)
     }
   if (!$r)
     {
-      if ($lock) flock($lock, LOCK_UN);
+      if ($lock) 
+	{ flock($lock, LOCK_UN); fclose($lock);}
       include_ecrire ("inc_presentation.php3");
       install_debut_html(_T('info_erreur_systeme'));
       echo $sourcefile, _L(' squelette illisible');
@@ -97,6 +99,7 @@ function ramener_squelette($squelette)
   fwrite($f,'?'.'>');
   fclose($f);
   flock($lock, LOCK_UN);
+  fclose($lock);
   spip_log("Squelette $squelette: ($nom)"  . strlen($r) . " octets, $timer ms");
   eval($r); # + rapide qu'un include puisqu'on l'a
   return $nom;
@@ -255,6 +258,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   if (!function_exists($calcul))
       {
 	flock($lock2, LOCK_UN);
+#      spip_log("libère verrou $cle (Compilateur absent)");
 	return(array('texte' => 'Compilateur absent'));
       }
   $page = $calcul($file, $contexte);
@@ -263,11 +267,12 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   if (!$n)
     {
       flock($lock2, LOCK_UN);
+#      spip_log("libère verrou $cle (Page vide)");
       @unlink($file);
     }
   else
     {
-      spip_log("Ecriture ($cle): $n octets (validité: $fraicheur sec.)");
+      spip_log("libère verrou $cle ($n octets, $fraicheur sec de validité.)");
       fseek($lock2,0);
       fwrite($lock2, "<!-- $fraicheur\t" . 
 	     $page['process_ins'] .
@@ -405,9 +410,9 @@ function retire_caches($caches)
     {
       $dir = dir_var();
       foreach ($caches as $path)
-	{ if ((strpos($path, $dir) === 0) && (strpos($path, '../') === false))
+	{ if (is_cache($path, $dir))
 	    @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);
-	  else die("PIRATE");
+	  else die(_T('info_acces_refuse') . ": $path");
 	}
     }
 }
