@@ -1789,8 +1789,9 @@ function f_jQuery ($texte) {
 			array("#INSERT_HEAD",_L("Double occurence")))
 		) . $texte;
 	} else {
-		$texte .= "\n<script src=\"".generer_url_public('jquery.js')
-			. "\" type=\"text/javascript\"></script>\n";
+		$texte = "\n<script src=\"".generer_url_public('jquery.js')
+			. "\" type=\"text/javascript\"></script>\n"
+			. $texte;
 	}
 	return $texte;
 }
