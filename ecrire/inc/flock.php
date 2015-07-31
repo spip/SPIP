@@ -225,7 +225,7 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 			AND $f != 'remove.txt'
 			AND is_readable($f = "$dir/$f")) {
 				if (is_file($f)) {
-					if (preg_match(",$pattern,iS", $f))
+					if (preg_match(";$pattern;iS", $f))
 					{
 						$fichiers[] = $f;
 						$nbfiles++;
