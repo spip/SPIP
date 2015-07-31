@@ -206,7 +206,7 @@ function alertes_auteur() {
 
 	if (isset($GLOBALS['meta']['message_crash_tables'])
 	AND autoriser('detruire')) {
-		include_spip('cron/maintenance');
+		include_spip('genie/maintenance');
 		if ($msg = message_crash_tables())
 			$alertes[] = $msg;
 	}

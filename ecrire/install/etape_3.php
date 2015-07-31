@@ -93,11 +93,11 @@ function install_bases(){
 			$GLOBALS['meta']['charset_sql_connexion'] = $charset['charset'];
 			$fquery("SET NAMES "._q($charset['charset']));
 		}
-
-		creer_base($server_db);
+		creer_base($server_db); // create car not exists
 		$finsert('spip_meta', '(nom, valeur,impt)', "('version_installee', '$spip_version','non')");
 	} else {
 
+	  creer_base($server_db); // pour recrer les tables disparues au besoin
 	  $r = $fquery ("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	  if ($r) $r = $ffetch($r);
 	  if ($r) $version_installee = (double) $r['valeur'];
