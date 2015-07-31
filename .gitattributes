@@ -748,6 +748,7 @@ prive/modeles/pagination.html -text
 prive/modeles/pagination_page.html -text
 prive/modeles/pagination_page_precedent_suivant.html -text
 prive/modeles/pagination_precedent_suivant.html -text
+prive/modeles/pagination_prive.html -text
 prive/modeles/paginationitem.html -text
 prive/modeles/text.html -text
 prive/modeles/video.html -text
