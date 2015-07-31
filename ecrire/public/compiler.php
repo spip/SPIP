@@ -341,7 +341,7 @@ function calculer_dump_array($a)
 function calculer_dump_join($a)
 {
   $res = "";
-  foreach($a as $k => $v) $res .= ", $k => array('$v[0]', '$v[1]')";
+  foreach($a as $k => $v) $res .= ", $k => array($v[0], $v[1])";
   return 'array(' . substr($res,2) . ')';
 }
 
