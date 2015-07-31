@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_echec_1' => 'A ligação ao servidor SQL falhou.',
 	'avis_connexion_echec_2' => 'Volte à página anterior e verifique as informações que forneceu. ',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, precisa <b>solicitar</b> a activação do seu acesso à base de dados SQL antes de poder utilizá-la. Se não consegue ligar-se à sua base de dados, verifique se efectuou esse pedido.',
-	'avis_connexion_erreur_nom_base' => 'O nome da base de dados só pode conter letras, números e hífen.', # MODIF
+	'avis_connexion_erreur_nom_base' => 'O nome da base de dados só pode conter letras, números e hífen.',
 	'avis_connexion_ldap_echec_1' => 'A ligação ao servidor LDAP falhou.',
 	'avis_connexion_ldap_echec_2' => 'Volte à página anterior e verifique as informações que forneceu ',
 	'avis_connexion_ldap_echec_3' => 'Alternativamente, não utilize o suporte LDAP para importar utilizadores.',
@@ -34,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     tem instalada.</b> Enfrentará grandes
     dificuldades: risco de destruição da sua
     base de dados, mau funcionamento
-    generalizado do site etc.
+    generalizado do sítio etc.
     Não valide este pedido de importação.
     <p>Para mais informações, leia
-    <a href="@spipnet@">a documentação do SPIP</a>.</p>', # MODIF
+    <a href="@spipnet@">a documentação do SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Espaço interdito</b><p>SPIP já está instalado.', # MODIF
 	'avis_lecture_noms_bases_1' => 'O programa de instalação não conseguiu ler os nomes das bases de dados instaladas. ',
 	'avis_lecture_noms_bases_2' => 'Ou nenhuma base de dados está disponível, ou a função que permite listá-las foi desactivada
@@ -46,7 +46,7 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'avis_non_acces_message' => 'Não tem acesso a esta mensagem. ',
 	'avis_non_acces_page' => 'Não tem acesso a esta página. ',
 	'avis_operation_echec' => 'A operação falhou. ',
-	'avis_operation_impossible' => 'Operação impossivel', # MODIF
+	'avis_operation_impossible' => 'Operação impossivel',
 	'avis_probleme_archive' => 'Erro na leitura do ficheiro @archive@',
 	'avis_suppression_base' => 'Atenção, a supressão dos dados é irreversível',
 	'avis_version_mysql' => 'A sua versão de SQL (@version_mysql@) não permite a auto-reparação das tabelas da base.', # MODIF
@@ -64,13 +64,13 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço email',
 	'bouton_checkbox_signature_unique_site' => 'uma única assinatura por sítio Web',
 	'bouton_demande_publication' => 'Pedir a publicação deste artigo ',
-	'bouton_desactive_tout' => 'Desactivar tudo', # MODIF
+	'bouton_desactive_tout' => 'Desactivar tudo',
 	'bouton_desinstaller' => 'Desinstalar', # MODIF
 	'bouton_effacer_index' => 'Apagar os índices',
 	'bouton_effacer_tout' => 'Apagar TUDO',
 	'bouton_envoi_message_02' => 'ENVIAR UMA MENSAGEM',
 	'bouton_envoyer_message' => 'Mensagem definitiva: enviar',
-	'bouton_fermer' => 'Fechar', # MODIF
+	'bouton_fermer' => 'Fechar',
 	'bouton_mettre_a_jour_base' => 'Actualizar a base de dados',
 	'bouton_modifier' => 'Modificar',
 	'bouton_pense_bete' => 'MEMORANDO DE USO PESSOAL',
@@ -82,9 +82,9 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'bouton_radio_desactiver_messagerie' => 'Desactivar a caixa de correio',
 	'bouton_radio_envoi_annonces_adresse' => 'Enviar os anúncios para o endereço:',
 	'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista das novidades',
-	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Não aparecer na lista dos redatores online',
+	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Não aparecer na lista dos redactores online',
 	'bouton_radio_non_envoi_annonces_editoriales' => 'Não enviar anúncios editoriais',
-	'bouton_radio_pas_petition' => 'Não há petição',
+	'bouton_radio_pas_petition' => 'Sem petição',
 	'bouton_radio_petition_activee' => 'Petição activada',
 	'bouton_radio_supprimer_petition' => 'Suprimir a petição',
 	'bouton_redirection' => 'REDIRECCIONAR',
@@ -105,7 +105,7 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis', # MODIF
 	'config_info_base_sup' => 'Se precisar de consultar outras bases de dados usando SPIP, quer seja neste servidor SQL ou noutro, use este formulário para as declarar. Se deixar alguns campos por preencher, os identificadores de conexão à base de dados principal serão usados.',
 	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem consultar:',
-	'config_info_enregistree' => 'A nova configuração foi guardada', # MODIF
+	'config_info_enregistree' => 'A nova configuração foi guardada',
 	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo assim como um « mover o rato sobre o logo »', # MODIF
 	'config_info_logos_utiliser' => 'Utilizar os logos',
 	'config_info_logos_utiliser_non' => 'Não utilizar os logos',
@@ -152,7 +152,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'entree_login_ldap' => 'Login LDAP inicial',
 	'entree_mot_passe' => 'A sua palavra-passe',
 	'entree_mot_passe_1' => 'A palavra-passe de ligação',
-	'entree_mot_passe_2' => '(Corresponde, às vezes, à sua palavra-passe para o FTP; outras vezes, vazio)',
+	'entree_mot_passe_2' => '(Corresponde, às vezes, à sua palavra-passe para o FTP; outras vezes fica vazio)',
 	'entree_nom_fichier' => 'Por favor introduza o nome do ficheiro @texte_compresse@:',
 	'entree_nom_pseudo' => 'O seu nome ou o seu pseudónimo',
 	'entree_nom_pseudo_1' => '(O seu nome ou o seu pseudónimo)',
@@ -395,7 +395,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_login_existant' => 'Este login já existe.',
 	'info_login_trop_court' => 'Login demasiado curto.',
 	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
-	'info_logos' => 'Les logos', # NEW
+	'info_logos' => 'Os logos', # MODIF
 	'info_maximum' => 'máximo :',
 	'info_meme_rubrique' => 'Na mesma rubrica',
 	'info_message' => 'Mensagem do',
@@ -410,7 +410,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  e o seu sítio já não funcionará .<br />{{Re-instalar os
  ficheiros de SPIP.}}', # MODIF
 	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
-	'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
+	'info_modifier_auteur' => 'Modifcar o autor :',
 	'info_modifier_rubrique' => 'Modificar a rubrica :',
 	'info_modifier_titre' => 'Modificar : @titre@',
 	'info_mon_site_spip' => 'O meu sítio SPIP',
@@ -426,7 +426,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_multi_secteurs' => '... só para as rubricas situadas na raíz ?',
 	'info_nb_articles' => '@nb@ articles', # NEW
 	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
-	'info_nb_auteurs' => '@nb@ auteurs', # NEW
+	'info_nb_auteurs' => '@nb@ autores',
 	'info_nb_messages' => '@nb@ messages', # NEW
 	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 	'info_nb_rubriques' => '@nb@ rubriques', # NEW
