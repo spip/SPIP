@@ -62,7 +62,17 @@ function fast_find_plugin_dirs($dir,$max_prof=100) {
 	if ($max_prof<=0)
 		return $fichiers;
 
-	$subdirs = glob("$dir/*",GLOB_ONLYDIR);
+	$subdirs = array();
+	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
+		while (($f = readdir($d)) !== false) {
+			if ($f[0] != '.' # ignorer . .. .svn etc
+			AND $f != 'CVS'
+			AND is_dir($f = "$dir/$f"))
+				$subdirs[] = $f;
+		}
+		closedir($d);
+	}
+
 	foreach($subdirs as $d){
 		$fichiers = array_merge($fichiers,fast_find_plugin_dirs("$d/",--$max_prof));
 	}
@@ -86,11 +96,12 @@ function is_plugin_dir($dir,$dir_plugins = null){
 		$search[] = $ds."$dir/plugin.xml";
 		$search[] = $ds."$dir/paquet.xml";
 	}
-	$search = "{".implode(",",$search)."}";
-	if (glob($search,GLOB_BRACE))
-		return $dir;
-	else
-		return '';
+	foreach($search as $s){
+		if (file_exists($s)){
+			return $dir;
+		}
+	}
+	return '';
 }
 
 // http://doc.spip.org/@plugin_version_compatible
