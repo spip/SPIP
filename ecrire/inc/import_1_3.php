@@ -138,9 +138,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 					if (!sql_updateq($table, $values, $where)) {
 						$GLOBALS['erreur_restauration'] = sql_error();
 					}
-				}else{
-				  sql_insert($table, "(".join(',',array_keys($values)).")", "(".join(',',array_map('_q', $values)).")");
-				}
+				} else sql_insertq($table, $valeurs);
 			}
 		}
 	}

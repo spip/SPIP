@@ -126,11 +126,20 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 
 	$titre = filtrer_entites(_T('texte_nouveau_message'));
 
-	$id_message = sql_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . _q($titre) . ", NOW(), '$statut', '$type', $id_auteur)");
-	
-	if ($rv) {
-		spip_query("UPDATE spip_messages SET rv='oui', date_heure=" . _q($rv . ' 12:00:00') . ", date_fin= " . _q($rv . ' 13:00:00') . " WHERE id_message = $id_message");
+	$vals = array('titre' => $titre,
+		      'statut' => $statut,
+		      'type' => $type,
+		      'id_auteur' => $id_auteur);
+
+	if (!$rv)
+		$vals['date_heure'] = 'NOW()';
+	else {
+		$vals['date_heure'] = "$rv 12:00:00";
+		$vals['date_fin'] = "$rv 13:00:00";
+		$vals['rv'] = 'oui';
 	}
+
+	$id_message = sql_insertq("spip_messages", $vals);
 
 	if ($type != "affich"){
 		sql_insert('spip_auteurs_messages',

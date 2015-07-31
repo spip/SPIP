@@ -317,7 +317,7 @@ function conserver_original($id_forum) {
 	if ($t) {
 		unset($t['id_forum']);
 		include_spip('base/abstract_sql');
-		$id_copie = sql_insert('spip_forum', "(" . join(',',array_keys($t)).")", "(" . join(',',array_map('_q', $t)). ")");
+		$id_copie = sql_insertq('spip_forum', $t);
 		if ($id_copie) {
 			spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
 			return ''; // pas d'erreur

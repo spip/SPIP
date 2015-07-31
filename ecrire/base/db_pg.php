@@ -38,6 +38,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'fetsel' => 'spip_pg_fetsel',
 		'free' => 'spip_pg_free',
 		'insert' => 'spip_pg_insert',
+		'insertq' => 'spip_pg_insertq',
 		'listdbs' => 'spip_pg_listdbs',
 		'multi' => 'spip_pg_multi',
 		'query' => 'spip_pg_query',
@@ -359,16 +360,32 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$r = pg_query($link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
+
 	if ($r) {
 		if (!$ret) return 0;
-		if ($r = pg_fetch_array($r, NULL, PGSQL_NUM))
-			return $r[0];
+		if ($r2 = pg_fetch_array($r, NULL, PGSQL_NUM))
+			return $r2[0];
 	}
-	spip_log("Erreur $q", 'pg'); // trace a minima
+	spip_log("Erreur $q '$r' '$r2'", 'pg'); // trace a minima
 	return -1;
-
 }
 
+function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
+
+	if (!$desc) {
+		global $tables_principales;
+		include_spip('base/serial');
+		$desc = @$tables_principales[$table];
+	}
+	if (!$desc) die("insertion sans description");
+	$fields =  $desc['field'];
+		
+	foreach ($couples as $champ => $val) {
+		$couples[$champ]=  spip_pg_cite($val, $fields[$champ]);
+	}
+
+	return spip_pg_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
+}
 // http://doc.spip.org/@spip_pg_update
 function spip_pg_update($table, $champs, $where='', $desc=array()) {
 
@@ -441,6 +458,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 		return 0;
 	}
 	$set = join(',', $noprims);
+
 	if ($set) {
 	  $set = pg_query($link, $q = "UPDATE $table SET $set WHERE $where");
 	  if (!$set) {
@@ -450,6 +468,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	    $set = pg_affected_rows($set);
 	  }
 	}
+
 	if (!$set) {
 	    $set = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
 	    if (!$set) {

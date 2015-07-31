@@ -101,7 +101,10 @@ function insert_article($id_rubrique) {
 		"($id_rubrique, $id_secteur, 'prepa', NOW(), '"
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
-	sql_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
+
+	// controler si le serveur n'a pas renvoye une erreur
+	if ($id_article > 0) 
+		sql_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
 
 	return $id_article;
 }

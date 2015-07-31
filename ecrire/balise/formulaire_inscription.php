@@ -143,7 +143,7 @@ function inscription_nouveau($declaration)
 
 	$declaration['statut'] = 'nouveau';
 
-	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($declaration)).')'), ("(" .join(", ",array_map('_q', $declaration)) .")"));
+	$n = sql_insertq('spip_auteurs', $declaration);
 
 	$declaration['id_auteur'] = $n;
 

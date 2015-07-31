@@ -46,6 +46,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'fetsel' => 'spip_mysql_fetsel',
 		'free' => 'spip_mysql_free',
 		'insert' => 'spip_mysql_insert',
+		'insertq' => 'spip_mysql_insertq',
 		'listdbs' => 'spip_mysql_listdbs',
 		'multi' => 'spip_mysql_multi',
 		'query' => 'spip_mysql_query',
@@ -371,6 +372,15 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	if (mysql_query("INSERT INTO $table $champs VALUES $valeurs", $link))
 		$r = mysql_insert_id($link);
 	return $r ? $r : (($r===0) ? -1 : 0);
+}
+
+function spip_mysql_insertq($table, $couples, $desc=array(), $serveur='') {
+
+	foreach ($couples as $champ => $val) {
+		$couples[$champ]= _q($val);
+	}
+
+	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_update

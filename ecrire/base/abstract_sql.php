@@ -22,11 +22,11 @@ function sql_serveur($ins_sql, $serveur='') {
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc[$ins_sql])) return $f;
 	include_spip('inc/minipres');
-	echo minipres("'$serveur' " ._T('zbug_serveur_indefini') . " ($ins_sql )");
+	echo minipres("'$serveur' " ._T('zbug_serveur_indefini') .  " ($ins_sql)");
 	exit;
 }
 
-// http://doc.spip.org/@sql_set_connect_charset
+// http://doc.spip.org/@spip_sql_set_connect_charset
 function sql_set_connect_charset($charset,$serveur=''){
 	$f = sql_serveur('set_connect_charset', $serveur);
 	return $f($charset, $serveur);
@@ -100,6 +100,12 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('insert', $serveur);
 	return $f($table, $noms, $valeurs, $desc, $serveur);
+}
+
+function sql_insertq($table, $couples, $desc=array(), $serveur='')
+{
+	$f = sql_serveur('insertq', $serveur);
+	return $f($table, $couples, $desc, $serveur);
 }
 
 // http://doc.spip.org/@sql_update

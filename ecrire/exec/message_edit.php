@@ -41,6 +41,7 @@ function exec_message_edit_dist()
 	$expediteur = $row["id_auteur"];
 
 	if (!($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
