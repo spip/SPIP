@@ -249,7 +249,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 				return index_exception($boucles[$idb],
 					$desc,
 					$nom_champ,
-					array($t[1]['id_table'], $nom_champ));
+					array($t[1]['id_table'], reset($t[2])));
 			}
 			return array('','');
 		}
