@@ -449,25 +449,34 @@ function balise_RANG_dist($p) {
 		erreur_squelette($msg, $p);
 	}
 	else {
-		$boucle = &$p->boucles[$b];
-		$trouver_table = charger_fonction('trouver_table','base');
-		$desc = $trouver_table($boucle->id_table);
-		if (isset($desc['titre'])){
-			$t=$desc['titre'];
-		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
-			  $m = preg_replace(",as\s+titre$,i","",$m[2]);
-			  $m = trim($m) . " AS titre_rang";
-			  if (strpos($m,"(")===false)
-				  $m = $boucle->id_table . ".$m";
+		// chercher d'abord un champ sql rang (mais pas dans le env : defaut '' si on trouve pas de champ sql)
+		$_rang = champ_sql('rang', $p, '');
 
-			  $boucle->select[] = $m;
-			  $_titre = '$Pile[$SP][\'titre_rang\']';
-		  }
+		// si pas trouve de champ sql rang :
+		if (!$_rang){
+			$boucle = &$p->boucles[$b];
+			$trouver_table = charger_fonction('trouver_table','base');
+			$desc = $trouver_table($boucle->id_table);
+			if (isset($desc['titre'])){
+				$t=$desc['titre'];
+			  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
+				  $m = preg_replace(",as\s+titre$,i","",$m[2]);
+				  $m = trim($m);
+				  if ($m!="''"){
+					  if (!preg_match(",\W,",$m))
+						  $m = $boucle->id_table . ".$m";
+					  $m .= " AS titre_rang";
+
+					  $boucle->select[] = $m;
+					  $_titre = '$Pile[$SP][\'titre_rang\']';
+				  }
+			  }
+			}
+			if (!$_titre)
+				$_titre = champ_sql('titre', $p);
+			$_rang = "recuperer_numero($_titre)";
 		}
-		if (!$_titre)
-			$_titre = champ_sql('titre', $p);
-		$_rang = champ_sql('rang', $p);
-		$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
+		$p->code = $_rang;
 		$p->interdire_scripts = false;
 	}
 	return $p;
