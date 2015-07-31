@@ -1155,7 +1155,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 	$compteur_survol ++;
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48gris');\" $onClick>";
+		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48gris');\" $onClick>";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgrison\" $onClick>";
 			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
@@ -1171,7 +1171,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td>\n";
 	}
 	else {
-		echo "\n<td background='' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48off');\" $onClick>";
+		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48off');\" $onClick>";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
@@ -1181,7 +1181,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "<div class='bouton48off' id='survol$compteur_survol'>$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a></div>";
 		}
 		if ($spip_display != 3) {
-			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>$texte</b></font></a></div>";
+			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#444444'><b>$texte</b></font></a></div>";
 		}
 		if ($spip_display == 1) echo "</td></tr></table>";
 		echo "</td>\n";
@@ -1235,7 +1235,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	$compteur_survol ++;
 
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36gris');\" $onClick>";
+		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36gris');\" $onClick>";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\">";
 			echo "<tr><td background='' align='center'>";
@@ -1254,7 +1254,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td>";
 	}
 	else {
-		echo "\n<td background='' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36off');\" $onClick>";
+		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36off');\" $onClick>";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
 			echo "<tr><td background='' align='center'>";
@@ -1264,7 +1264,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		}
 		echo "<div><img src='img_pack/rien.gif' $width height=1></div>";
 		if ($spip_display != 3){
-			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='#999999'><b>$texte</b></font></a>";
+			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='#444444'><b>$texte</b></font></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</div>";
 		}
@@ -1312,7 +1312,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 		$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
 	}
-	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
+	$icone .= "\n<table cellpadding=0 class='pointeur' cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
 	if ($spip_display != 1){
 		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
@@ -1368,7 +1368,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 		echo "<tr>";
 	} else {
-		echo "\n<table cellpadding='0' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
+		echo "\n<table cellpadding='0' class='pointeur' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
 		echo "<tr>";
 	}
 
