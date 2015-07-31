@@ -215,14 +215,20 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 	// ne pas tenir compte des notes ;
 	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
-	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']);
+	foreach(array('les_notes','compt_note','marqueur_notes','notes_vues') as $k)
+		if (isset($GLOBALS[$k]))
+			$mem[$k] = $GLOBALS[$k];
 
 
 	$texte = propre($texte,$connect);
 
 
 	// restituer les notes comme elles etaient avant d'appeler propre()
-	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']) = $mem;
+	foreach(array('les_notes','compt_note','marqueur_notes','notes_vues') as $k)
+		if (isset($mem[$k]))
+			$GLOBALS[$k] = $mem[$k];
+		else 
+			unset($GLOBALS[$k]);
 
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
@@ -475,8 +481,9 @@ function calculer_select ($select = array(), $from = array(),
 		$cle = $cledef;
 		// le format de join est :
 		// array(table depart, cle depart [,cle arrivee[,condition optionnelle and ...]])
+		if (count($join[$cle])==2) $join[$cle][] = $join[$cle][1];
+		if (count($join[$cle])==3) $join[$cle][] = '';
 		list($t,$c,$carr,$and) = $join[$cle];
-		if (!$carr) $carr = $c;
 		// si le nom de la jointure n'a pas ete specifiee, on prend Lx avec x sont rang dans la liste
 		// pour compat avec ancienne convention
 		if (is_numeric($cle))

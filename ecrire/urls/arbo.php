@@ -261,7 +261,9 @@ function declarer_url_arbo($type, $id_objet) {
 	$url_propre = $urls[$type][$id_objet]['url'];
 
 	if (!is_null($url_propre) AND !$modifier_url)
-		return declarer_url_arbo_rec($url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+		return declarer_url_arbo_rec($url_propre,$type,
+		  isset($urls[$type][$id_objet]['parent'])?$urls[$type][$id_objet]['parent']:null,
+		  isset($urls[$type][$id_objet]['type_parent'])?$urls[$type][$id_objet]['type_parent']:null);
 
 	// Sinon, creer une URL
 	$url = pipeline('creer_chaine_url',

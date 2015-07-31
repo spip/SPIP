@@ -581,7 +581,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
 	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
 	$params = array();
-	if ($p->param[0]) {
+	if (isset($p->param[0]) AND $p->param[0]) {
 		while (count($p->param[0])>2){
 			array_unshift($params,array(0=>NULL,1=>array_pop($p->param[0])));
 		}
@@ -608,7 +608,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), $type,
-		\$Pile[0][$modif],"
+		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
 	. $p->boucles[$b]->total_parties
 	  . ", $liste$__modele," . _q($connect) 
 	  . ", array(" . implode(',',$code_contexte) . ")" 

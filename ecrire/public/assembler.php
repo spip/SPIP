@@ -563,9 +563,10 @@ function page_base_href(&$texte){
 			AND !_request('action'));
 
 	if (_SET_HTML_BASE
-	AND $GLOBALS['html']
-	AND $GLOBALS['profondeur_url']>0){
-		list($head, $body) = explode('</head>', $texte, 1);
+	AND isset($GLOBALS['html']) AND $GLOBALS['html']
+	AND $GLOBALS['profondeur_url']>0
+	AND ($poshead = strpos($texte,'</head>'))!==FALSE){
+		$head = substr($texte,0,$poshead);
 		$insert = false;
 		if (strpos($head, '<base')===false) 
 			$insert = true;
@@ -584,7 +585,7 @@ function page_base_href(&$texte){
 			$base = url_absolue('./');
 			if (($pos = strpos($head, '<head>')) !== false)
 				$head = substr_replace($head, "\n<base href=\"$base\" />", $pos+6, 0);
-			$texte = $head . (isset($body) ? '</head>'.$body : '');
+			$texte = $head . substr($texte,$poshead);
 			// gerer les ancres
 			$base = $_SERVER['REQUEST_URI'];
 			if (strpos($texte,"href='#")!==false)

@@ -152,8 +152,8 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	// S'il y a un critere de lien {id_article} par exemple, on zappe
 	// ces complications (et tant pis si la boucle n'a pas prevu de
 	// verification du statut de l'article)
-	if (!$boucle->modificateur['tout']
-	AND !$boucle->modificateur['criteres']['id_objet']
+	if ((!isset($boucle->modificateur['tout']) OR !$boucle->modificateur['tout'])
+	AND (!isset($boucle->modificateur['criteres']['id_objet']) OR !$boucle->modificateur['criteres']['id_objet'])
 	) {
 		# Espace avant LEFT JOIN indispensable pour insertion de AS
 		# a refaire plus proprement
@@ -236,7 +236,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle->where[]= array("'IN'", "'$id_table'", '"($hierarchie)"');
 
         $order = "FIELD($id_table, \$hierarchie)";
-	if ($boucle->default_order[0] != " DESC")
+	if (!isset($boucle->default_order[0]) OR $boucle->default_order[0] != " DESC")
 		$boucle->default_order[] = "\"$order\"";
 	else
 		$boucle->default_order[0] = "\"$order DESC\"";
@@ -274,7 +274,7 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies, sauf critere contraire
-	if ($boucle->modificateur['criteres']['statut']) {}
+	if (isset($boucle->modificateur['criteres']['statut']) AND $boucle->modificateur['criteres']['statut']) {}
 	else if ($GLOBALS['var_preview'])
 		array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
 	else {
