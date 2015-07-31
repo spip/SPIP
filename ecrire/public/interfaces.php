@@ -186,9 +186,6 @@ $table_des_tables['breves']='breves';
 $table_des_tables['documents']='documents';
 $table_des_tables['types_documents']='types_documents';
 $table_des_tables['rubriques']='rubriques';
-$table_des_tables['syndication']='syndic';
-$table_des_tables['syndic']='syndic';
-$table_des_tables['syndic_articles']='syndic_articles';
 $table_des_tables['hierarchie']='rubriques';
 $table_des_tables['messages']='messages';
 
@@ -203,20 +200,12 @@ $exceptions_des_tables['documents']['extension_document']=array('types_documents
 $exceptions_des_tables['documents']['mime_type']=array('types_documents'
 , 'mime_type');
 
-# ne sert plus ? verifier balise_URL_ARTICLE
-$exceptions_des_tables['syndic_articles']['url_article']='url';
-# ne sert plus ? verifier balise_LESAUTEURS
-$exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs';
-$exceptions_des_tables['syndic_articles']['url_site']=array('syndic', 'url_site');
-$exceptions_des_tables['syndic_articles']['nom_site']=array('syndic', 'nom_site');
 
 $table_titre['breves']= 'titre , lang';
 $table_titre['articles']= 'titre, lang';
 $table_titre['rubriques']= 'titre, lang';
 $table_titre['messages']= "titre, '' AS lang";
 $table_titre['auteurs']= "nom AS titre, '' AS lang";
-$table_titre['site']= "nom_site AS titre, '' AS lang";
-$table_titre['syndic']= "nom_site AS titre, '' AS lang";
 $table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
 $table_date['articles']='date';
@@ -225,8 +214,6 @@ $table_date['breves']='date_heure';
 $table_date['documents']='date';
 $table_date['types_documents']='date';
 $table_date['rubriques']='date';
-$table_date['syndication']='date';
-$table_date['syndic_articles']='date';
 
 //
 // tableau des tables de jointures
@@ -245,8 +232,6 @@ $tables_jointures['spip_documents'][]= 'documents_liens';
 $tables_jointures['spip_documents'][]= 'types_documents';
 
 $tables_jointures['spip_rubriques'][]= 'documents_liens';
-
-$tables_jointures['spip_syndic_articles'][]= 'syndic';
 
 
 
@@ -272,7 +257,6 @@ $table_des_traitements['LIEN_TITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['LIEN_URL'][]= 'vider_url(%s)';
 $table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['NOM_SITE'][]=  _TRAITEMENT_TYPO;
 $table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
@@ -286,13 +270,6 @@ $table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
-
-// Articles syndiques : passage des donnees telles quelles, sans traitement typo
-// A noter, dans applique_filtres la securite et conformite XHTML de ces champs
-// est assuree par safehtml()
-foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
-	if (!isset($table_des_traitements[$balise]['syndic_articles']))
-		$table_des_traitements[$balise]['syndic_articles'] = '%s';
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
 	$interfaces = pipeline('declarer_tables_interfaces',

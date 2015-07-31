@@ -249,9 +249,6 @@ function table_objet($type) {
 				'petition' => 'petitions',
 				'rubrique' => 'rubriques',
 				'signature' => 'signatures',
-				'syndic' => 'syndic',
-				'site' => 'syndic', # hum hum
-				'syndic_article' => 'syndic_articles',
 				'type_document' => 'types_documents', # hum
 				'extension' => 'types_documents' # hum
 			));

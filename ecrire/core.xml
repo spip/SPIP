@@ -309,8 +309,6 @@
 	<pipeline><nom>post_edition</nom><action></action></pipeline>
 	<pipeline><nom>pre_insertion</nom><action></action></pipeline>
 	<pipeline><nom>post_insertion</nom><action></action></pipeline>
-	<pipeline><nom>pre_syndication</nom><action></action></pipeline>
-	<pipeline><nom>post_syndication</nom><action></action></pipeline>
 	<pipeline><nom>pre_indexation</nom><action></action></pipeline>
 	<pipeline><nom>propres_creer_chaine_url</nom><action></action></pipeline>
 	<pipeline><nom>requete_dico</nom><action></action></pipeline>

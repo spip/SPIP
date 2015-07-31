@@ -229,25 +229,6 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 			    ($qui['statut']=='1comite' ? 1 : 2)));
 }
 
-// Autoriser a modifier un site
-// http://doc.spip.org/@autoriser_site_modifier_dist
-function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut'] == '0minirezo' AND !$qui['restreint'])
-		return true;
-
-	$t = sql_fetsel("id_rubrique,statut", "spip_syndic", "id_syndic=".sql_quote($id));
-	return ($t
-		AND autoriser('voir','rubrique',$t['id_rubrique'])
-		AND ($t['statut'] == 'prop'
-			OR autoriser('modifier', 'rubrique', $t['id_rubrique'])
-		)
-	);
-}
-// Autoriser a voir un site $id_syndic
-// http://doc.spip.org/@autoriser_site_voir_dist
-function autoriser_site_voir_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt);
-}
 
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id

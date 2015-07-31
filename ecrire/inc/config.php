@@ -366,11 +366,6 @@ function liste_metas()
 		'rubriques_descriptif' => 'non',
 		'rubriques_texte' => 'oui',
 
-		'activer_sites' => 'non',
-		'proposer_sites' => 0,
-		'activer_syndic' => 'oui',
-		'moderation_sites' => 'non',
-
 		'accepter_inscriptions' => 'non',
 		'accepter_visiteurs' => 'non',
 		'prevenir_auteurs' => 'non',
