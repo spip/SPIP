@@ -21,22 +21,23 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-body { font-size: 0.625em; font-family: Verdana, Geneva, Sans, sans-serif; line-height: 1.5em; }
+body { font-size: 0.625em; font-family: Verdana, Geneva, sans-serif; line-height: 1.5em; }
 
 #contenu { font-size:12px; }
 
-h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 16px 0 0.25em 0; }
-h2 { color: #000; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
-h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
+h1,h2,h3 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+h1 { margin: 16px 0 0.25em 0; font-size: large; color: #GET{foncee}; }
+h2 { margin: 0.5em 0 0.25em 0; font-size: medium; color: #000; }
+h3 { margin: 0.5em 0 0.25em 0; font-size: medium; color: #666; }
 /* Raccourcis pour les polices (utile pour les tableaux) */
-.arial0 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
-.arial1 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
-.arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
-.arial2 { font-family: Arial, Sans, sans-serif; font-size: 12px; }
-.verdana1 { font-size: 10px; }
-.verdana2 { font-size: 11px; }
-.verdana12 {font-size: 12px; }
-.verdana3 { font-size: 13px; }
+.arial0 { font-family: Arial, Helvetica, sans-serif; font-size: 9px; }
+.arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
+.arial11 { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+.arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+.verdana1 { font-family: Verdana, Geneva, sans-serif; font-size: 10px; }
+.verdana2 { font-family: Verdana, Geneva, sans-serif; font-size: 11px; }
+.verdana12 { font-family: Verdana, Geneva, sans-serif; font-size: 12px; }
+.verdana3 { font-family: Verdana, Geneva, sans-serif; font-size: 13px; }
 .serif { font-family: Georgia, Garamond, Times New Roman, serif; }
 .serif1 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 11px; }
 .serif2 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 13px; }
@@ -48,4 +49,4 @@ h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margi
 .spip_small { font-size: 14px; }
 .spip_x-small { font-size: 12px; }
 .spip_xx-small { font-size: 10px; }
-#wysiwyg { font-size: 1em; line-height: 1.4em; }
+#wysiwyg { font-size: 1em; }
