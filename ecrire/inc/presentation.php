@@ -2119,7 +2119,7 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 // envoi du doctype et du <head><title>...</head> 
 // http://doc.spip.org/@init_entete
 function init_entete($titre='', $id_rubrique=0) {
-	include_spip('inc/gadgets');
+  include_spip('inc/gadgets');
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
@@ -2137,14 +2137,7 @@ function init_entete($titre='', $id_rubrique=0) {
 	$head .= '
 	<script type="text/javascript"><!--
 	$(document).ready(function(){
-		$("input.forml,input.formo,textarea.forml,textarea.formo")
-		.each(function(){
-			var w = $(this).width();
-			if (w > 48)
-				$(this).width((w - 16) + "px");
-			else
-				$(this).width("95%");
-		});
+		verifForm();
 	'
 	.
 	repercuter_gadgets($id_rubrique)

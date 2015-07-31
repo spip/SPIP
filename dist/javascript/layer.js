@@ -155,6 +155,19 @@ function createXmlHttp() {
 		return new ActiveXObject("Microsoft.XMLHTTP");
 }
 
+function verifForm(racine) {
+	if(!jQuery.browser.mozilla) return;
+  racine = racine || document;
+  $("input.forml,input.formo,textarea.forml,textarea.formo",racine)
+  .each(function(){
+  	var jField = $(this);
+    var w = jField.width();
+    w -= (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
+  	parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
+  	jField.width(w+"px");
+  });
+}
+
 //
 // Add a function to the list of those to be executed on ajax load complete
 //
