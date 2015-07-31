@@ -17,7 +17,7 @@ function aide ($aide='') {
 
 	if (!$aide) return;
 
-/*	return "&nbsp;&nbsp;<script><!--\n".
+	return "&nbsp;&nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
@@ -26,13 +26,12 @@ function aide ($aide='') {
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif" alt="'._T('info_image_aide').'" title="'._T('titre_image_aide').'" width="12" height="12" border="0" align="middle"></a>'; // "
-	*/
-	return "&nbsp;&nbsp;<script><!--\n".
+	/*return "&nbsp;&nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
 	'void(0);\"><img src=\"'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif\" alt=\"'._T('info_image_aide').'\" title=\"'._T('titre_image_aide').'\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"></a>");'.
-	"\n// --></script>";
+	"\n// --></script>";*/
 }
 
 
@@ -931,7 +930,7 @@ function debut_html($titre = "") {
 	@Header("Cache-Control: no-cache,no-store");
 	@Header("Pragma: no-cache");
 	@Header("Content-Type: text/html; charset=$charset");
-	
+
 	echo "<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 	echo '<link rel="stylesheet" type="text/css" href="';
@@ -942,7 +941,7 @@ function debut_html($titre = "") {
 ?>
 <script type='text/javascript'><!--
 function changeclass(objet, myClass)
-{ 
+{
   objet.className = myClass;
 }
 //--></script>
