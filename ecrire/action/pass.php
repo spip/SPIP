@@ -105,8 +105,8 @@ $message = '';
 // http://doc.spip.org/@action_pass_dist
 function action_pass_dist()
 {
-	install_debut_html( _T('pass_mot_oublie'));
+	echo install_debut_html( _T('pass_mot_oublie'));
 	inclure_balise_dynamique(formulaire_oubli_dyn(_request('p'), _request('oubli')));
-	install_fin_html();
+	echo install_fin_html();
 }
 ?>

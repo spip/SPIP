@@ -27,7 +27,7 @@ function install_etape_ldap1_dist()
 			$port_ldap = $regs[2];
 		}
 	}
-	install_debut_html();
+	echo install_debut_html();
 
 	echo info_etape(_T('titre_connexion_ldap'), _T('entree_informations_connexion_ldap'));
 
@@ -80,7 +80,7 @@ function install_etape_ldap1_dist()
 	echo bouton_suivant();
 	echo "</form>";
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

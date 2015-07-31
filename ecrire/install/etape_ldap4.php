@@ -15,7 +15,7 @@ function install_etape_ldap4_dist()
 {
 	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $base_ldap, $base_ldap_text, $spip_lang_right;
 
-	install_debut_html();
+	echo install_debut_html();
 
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
@@ -75,6 +75,6 @@ function install_etape_ldap4_dist()
 		echo "</form>";
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 }
 ?>

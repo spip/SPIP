@@ -15,7 +15,7 @@ function install_etape_3_dist()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod;
 
-	install_debut_html();
+	echo install_debut_html();
 
 	echo info_etape(_T('info_choix_base')." "._T('menu_aide_installation_choix_base').aide ("install2"));
 
@@ -84,7 +84,7 @@ function install_etape_3_dist()
 	echo bouton_suivant();
 	echo "</form>";
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

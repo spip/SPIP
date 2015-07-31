@@ -19,7 +19,7 @@ function install_etape_5_dist()
 {
 	global $email, $ldap_present, $login, $nom, $pass, $spip_lang_right;
 
-	install_debut_html();
+	echo install_debut_html();
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -86,7 +86,7 @@ function install_etape_5_dist()
 		echo "</form>\n";
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

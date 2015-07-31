@@ -18,7 +18,7 @@ function install_etape_ldap5_dist()
 {
 	global $spip_lang_right, $statut_ldap;
 
-	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	// simuler ecrire_meta/s pour pouvoir sauver le statut
 	// car _FILE_CONNECT est defa a False a ce moment.
@@ -38,6 +38,8 @@ function install_etape_ldap5_dist()
 
 	echo bouton_suivant();
 	echo "</form>";
+
+	echo install_fin_html();
 }
 
 ?>

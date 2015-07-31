@@ -15,7 +15,7 @@ function install_etape_1_dist()
 {
 	global $spip_lang_right;
 
-	install_debut_html();
+	echo install_debut_html();
 
 	// stopper en cas de grosse incompatibilite de l'hebergement
 	tester_compatibilite_hebergement();
@@ -78,7 +78,7 @@ function install_etape_1_dist()
 	echo bouton_suivant();
 	echo "</form>";
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

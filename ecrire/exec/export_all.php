@@ -93,7 +93,7 @@ function exec_export_all_dist()
 			$start = ($status_dump[2]==0)&&($status_dump[3]==0);
 	}
 
-	install_debut_html(_T('info_sauvegarde'));
+	echo install_debut_html(_T('info_sauvegarde'));
 
 	$file = $dir . $archive;
 	$partfile = $file . ".part";
@@ -252,7 +252,7 @@ function exec_export_all_dist()
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".str_replace("&amp;","&",generer_url_ecrire("export_all","archive=$archive&gz=$gz"))."\";',0);</script>\n");
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 
 }
 ?>

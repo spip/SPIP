@@ -28,7 +28,7 @@ function exec_upgrade_dist() {
 
 		@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
-		install_debut_html(_T('titre_page_upgrade')); 
+		echo install_debut_html(_T('titre_page_upgrade')); 
 		echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
 		  _T('texte_nouvelle_version_spip_2',
 		     array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')),
@@ -39,7 +39,7 @@ function exec_upgrade_dist() {
 		"\" class='fondl'>",
 		"</form>\n";
 
-		install_fin_html();
+		echo install_fin_html();
 		exit;
 	}
 
