@@ -143,16 +143,26 @@ function fin_block() {
 }
 
 function bouton_block_invisible($nom_block) {
+	global $numero_block;
+	global $compteur_block;
+	
+	$num_triangle = $compteur_block + 1;
+
 	if (test_layer()) {
-		global $numero_block;
-		global $compteur_block;
+		
+		$blocks = explode(",", $nom_block);
+		
+		for ($index=0; $index < count($blocks); $index ++){
+			$nom_block = $blocks[$index];
 
-		if (!$numero_block["$nom_block"] > 0){
-			$compteur_block++;
-			$numero_block["$nom_block"] = $compteur_block;
+			if (!$numero_block["$nom_block"] > 0){
+				$compteur_block++;
+				$numero_block["$nom_block"] = $compteur_block;
+			}
+
+			$javasc .= "swap_couche('$compteur_block');";
 		}
-
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><img name='triangle".$numero_block["$nom_block"]."' src='IMG2/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
+		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='IMG2/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 
