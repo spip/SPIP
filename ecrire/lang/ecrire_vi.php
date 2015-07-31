@@ -70,7 +70,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_envoi_message_02' => 'GỬI THƯ TÍN',
 'bouton_envoyer_message' => 'Tin thư đầy đủ: Gửi đi ',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'DIỄN ĐÀN &amp; THỈNH NGUYỆN THƯ',
+'bouton_forum_petition' => 'DIỄN ĐÀN &amp; THỈNH NGUYỆN THƯ', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Thay đổi',
 'bouton_pense_bete' => 'GHI NHỚ CÁ NHÂN',

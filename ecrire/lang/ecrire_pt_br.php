@@ -69,7 +69,7 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'bouton_envoi_message_02' => 'ENVIAR UMA MENSAGEM',
 'bouton_envoyer_message' => 'Mensagem definitiva: enviar',
 'bouton_fermer' => 'Fechar',
-'bouton_forum_petition' => 'FÓRUM E PETIÇÃO',
+'bouton_forum_petition' => 'FÓRUM E PETIÇÃO', # MODIF
 'bouton_mettre_a_jour_base' => 'Atualizar a base de dados',
 'bouton_modifier' => 'Alterar',
 'bouton_pense_bete' => 'LEMBRETE DE USO PESSOAL',

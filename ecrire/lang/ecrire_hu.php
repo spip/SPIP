@@ -74,7 +74,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'bouton_envoi_message_02' => 'ÜZENET KÜLDÉS',
 'bouton_envoyer_message' => 'Végleges üzenet: küldés',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FÓRUM ÉS ALÁÍRÁSGYŰJTÉS (Petició)',
+'bouton_forum_petition' => 'FÓRUM ÉS ALÁÍRÁSGYŰJTÉS (Petició)', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Módosítás',
 'bouton_pense_bete' => 'EMLÉKEZTETŐ SZEMÉLYES HASZNÁLATHOZ',

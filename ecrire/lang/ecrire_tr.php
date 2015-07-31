@@ -72,7 +72,7 @@ Bu ithal istemini onaylamayın.
 'bouton_envoi_message_02' => 'İLETİ YOLLA',
 'bouton_envoyer_message' => 'İletinin son hali : yolla',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; İMZA KAMPANYASI',
+'bouton_forum_petition' => 'FORUM &amp; İMZA KAMPANYASI', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Değiştir',
 'bouton_pense_bete' => 'KiŞiSEL NOT DEFTERi',

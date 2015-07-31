@@ -74,7 +74,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
 'bouton_fermer' => 'Chiudi',
-'bouton_forum_petition' => 'FORUM E PETIZIONE',
+'bouton_forum_petition' => 'FORUM E PETIZIONE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modifica',
 'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',

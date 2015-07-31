@@ -68,7 +68,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'bouton_envoi_message_02' => 'ENVIAR UN MISSATGE',
 'bouton_envoyer_message' => 'Missatge definitiu : enviar',
 'bouton_fermer' => 'Tancar',
-'bouton_forum_petition' => 'FÒRUM &amp; PETICIÓ',
+'bouton_forum_petition' => 'FÒRUM &amp; PETICIÓ', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORI D\'ÚS PERSONAL',

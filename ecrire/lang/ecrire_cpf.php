@@ -85,7 +85,7 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_envoi_message_02' => 'ANVWA INN MODÉKRI',
 'bouton_envoyer_message' => 'Modékri-la lé fini : anvwa ali',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOROM &amp; FILSINYATIR',
+'bouton_forum_petition' => 'FOROM &amp; FILSINYATIR', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Sanz',
 'bouton_pense_bete' => 'OUT PROP GARDANTÈT
