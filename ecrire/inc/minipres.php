@@ -95,22 +95,22 @@ function info_etape($titre, $complement = ''){
 }
 
 // http://doc.spip.org/@fieldset
-function fieldset($legend, $champs = array()) {
+function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
 	foreach($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
 		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."' value='".$contenu['valeur']."' />\n";
+		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
 	}
-	$fieldset .= "</fieldset>\n";
+	$fieldset .= "$horchamps</fieldset>\n";
 	return $fieldset;
 }
 
 // http://doc.spip.org/@bouton_suivant
 function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
+	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl'\nvalue=\"" .
 		_T($code) .
 		" >>\" /></span>\n";
 }

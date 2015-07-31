@@ -33,6 +33,7 @@ function debut_admin($script, $action, $commentaire='') {
 
 	}
 	$signal = fichier_admin($action);
+	spip_log("debut_admin $signal");
 	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
 		return true;
@@ -51,15 +52,12 @@ function debut_admin($script, $action, $commentaire='') {
 				'fichier' => array(
 					'label' => _T('info_creer_repertoire'),
 					'valeur' => ''
-				),
-				'bouton' => array(
-					'label' => _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir))) .bouton_suivant(_T('bouton_recharger_page')),
-					'valeur' => 'bouton',
-					'hidden' => true
-				)
-			)
-		)
-		 . "</form>";
+					)),
+			('<br />'
+			 . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
+			 . bouton_suivant(_T('bouton_recharger_page'))))
+		. "</form>";
+
 	minipres(_T('info_action', array('action' => $action)),
 		 $form,
 		 " onload='barre_inserer(\"$signal\", document.forms[0].fichier)'");
@@ -83,9 +81,11 @@ function fin_admin($action) {
 function copy_request($script)
 {
 	$hidden = ""; 
-	$_POST['exec'] = $script;
+	$args = $_POST;
+	$args['exec'] = $script;
+	unset($args['fichier']);
         include_spip('inc/filtres');
-	foreach($_POST as $n => $c) {
+	foreach($args as $n => $c) {
 		$hidden .= "\n<input type='hidden' name='$n' value='" .
 		  entites_html($c) .
 		  "'  />";
