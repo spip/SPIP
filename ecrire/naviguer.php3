@@ -374,6 +374,7 @@ if (strlen($texte) > 1) {
 // Langue de la rubrique
 //
 if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
+
 	if ($changer_lang) {
 		spip_log ("rubrique $id_rubrique = $changer_lang");
 		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."' WHERE id_rubrique=$coll");
@@ -386,10 +387,9 @@ if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
 	$langue_default = ($langue_rubrique ? $langue_rubrique : '--');
 	
 	debut_cadre_enfonce("langues-24.gif");
-	
-	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	echo menu_langues('changer_lang', $langue_default, _T('info_multi_cette_rubrique').' ');
-	echo "</font></center>\n";
+		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+		echo menu_langues('changer_lang', $langue_default, _T('info_multi_cette_rubrique').' ');
+		echo "</font></center>\n";
 	fin_cadre_enfonce();
 }
 
