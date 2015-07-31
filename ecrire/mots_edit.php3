@@ -28,7 +28,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query($query);
 	}
 
-	if ($titre_mot) {
+	if (strval($titre_mot)!='') {
 		if ($new == 'oui' && $id_groupe) {
 		  $id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
 

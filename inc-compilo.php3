@@ -487,20 +487,22 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
 		  erreur_squelette(_T('zbug_info_erreur_squelette'));
 		} // switch
 
-		if ($avant == "''") $avant = '';
-		if ($apres == "''") $apres = '';
-		if ($avant||$apres||($altern!="''"))
-		  {
-		    $t = '$t' . $descr['niv'];
-		    $res = (!$avant ? "" : "$avant . ") . 
-		      $t .
-		      (!$apres ? "" : " . $apres");
-		    $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
-		  }
+		if ($avant == "''")
+			$avant = '';
+		if ($apres == "''")
+			$apres = '';
+		if ($avant||$apres||($altern!="''")) {
+			$t = '$t' . $descr['niv'];
+			$res = (!$avant ? "" : "$avant . ") . 
+				$t .
+				(!$apres ? "" : " . $apres");
+			$code = "((strval($t = $code)!='')"
+				." ?\n\t$tab($res) :\n\t$tab($altern))";
+		}
 		if ($code != "''")
-		  $codes[]= (($GLOBALS['var_mode_affiche'] == 'validation') ?
-			     "array(" . $p->ligne . ", '$commentaire', $code)"
-			     : (($GLOBALS['var_mode_affiche'] == 'code') ?
+			$codes[]= (($GLOBALS['var_mode_affiche'] == 'validation') ?
+				"array(" . $p->ligne . ", '$commentaire', $code)"
+				: (($GLOBALS['var_mode_affiche'] == 'code') ?
 				"\n// $commentaire\n$code" :
 				$code));
 	} // foreach

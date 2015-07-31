@@ -209,7 +209,7 @@ if ($changer_virtuel && $flag_editable) {
 	$result = spip_query($query);
 }
 
-if ($titre && !$ajout_forum && $flag_editable) {
+if (strval($titre)!=='' AND !$ajout_forum AND $flag_editable) {
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 	$champs_version = array();
 	foreach ($champs as $nom_champ) {

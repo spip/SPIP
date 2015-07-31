@@ -118,7 +118,7 @@ if ($nouveau_statut AND $flag_administrable) {
 	}
 }
 
-if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
+if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	$nom_site = addslashes($nom_site);
 	$url_site = addslashes($url_site);
 	$descriptif = addslashes($descriptif);
