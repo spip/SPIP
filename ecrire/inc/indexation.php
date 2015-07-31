@@ -824,6 +824,11 @@ function requete_hash ($rech) {
 					$h_and[$mot_and][] = $hex_fmt.$row2['h'];
 			}
 		}
+		//store hash 0 for words without any hashes
+		foreach($dico["AND"] as $key=>$val) {
+			$mot_and = substr($key,1);
+			if(!$h_and[$mot_and]) $h_and[$mot_and][] = 0;
+		}
 	}
 		
 	$cond = "";
