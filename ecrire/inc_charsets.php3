@@ -233,19 +233,27 @@ function html2unicode($texte) {
 // transforme une chaine en entites unicode &#129;
 function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	if ($charset == 'AUTO')
-		$charset=lire_meta('charset');
+		$charset = lire_meta('charset');
 
-	switch($charset) {
+	switch ($charset) {
 		case 'utf-8':
+			if ($GLOBALS['flag_iconv']) {
+				$s = iconv('utf-8', 'utf-32', $texte);
+				if ($s) return utf_32_to_unicode($s);
+			}
 			return utf_8_to_unicode($texte);
-			break;
 
 		case 'iso-8859-1':
-		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
-		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
+			// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
+			// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
 			if (!$forcer) return $texte;
 
 		default:
+			if ($GLOBALS['flag_iconv']) {
+				$s = iconv($charset, 'utf-32', $texte);
+				if ($s) return utf_32_to_unicode($s);
+			}
+
 			$trans = load_charset($charset);
 			$s = '';
 			$len = strlen($texte);
@@ -271,7 +279,7 @@ function unicode2charset($texte, $charset='AUTO') {
 		case 'utf-8':
 			return unicode_to_utf_8($texte);
 			break;
-		
+
 		default:
 			$charset = load_charset($charset);
 
@@ -286,7 +294,7 @@ function unicode2charset($texte, $charset='AUTO') {
 				$traduit .= substr($texte,0,$a-1);
 				$texte = substr($texte,$a-1);
 				if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
-					$texte = str_replace($match[0], chr($s), $texte); 
+					$texte = str_replace($match[0], chr($s), $texte);
 				// avancer d'un cran
 				$traduit .= $texte[0];
 				$texte = substr($texte,1);
@@ -295,6 +303,11 @@ function unicode2charset($texte, $charset='AUTO') {
 	}
 }
 
+
+// Importer un texte depuis un charset externe vers le charset du site
+function importer_charset($texte, $charset = 'AUTO', $forcer = false) {
+	return unicode2charset(charset2unicode($texte, $charset, $forcer));
+}
 
 // UTF-8
 function utf_8_to_unicode($source) {
@@ -375,6 +388,20 @@ function utf_8_to_unicode($source) {
 	}
 	return $encodedString;
 }
+
+// UTF-32 : utilise en interne car plus rapide qu'UTF-8
+function utf_32_to_unicode($source) {
+	$words = unpack("V*", $source);
+	if (is_array($words)) {
+		reset($words);
+		while (list(, $word) = each($words)) {
+			if ($word < 128) $texte .= chr($word);
+			else $texte .= '&#'.$word.';';
+		}
+	}
+	return $texte;
+}
+
 
 
 function unicode_to_utf_8($texte) {
