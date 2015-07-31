@@ -133,6 +133,7 @@ function import_all_debut($request) {
 function import_all_fin() {
 
 	effacer_meta("charset_restauration");
+	effacer_meta("charset_insertion");
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");

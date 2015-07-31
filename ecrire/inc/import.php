@@ -84,12 +84,15 @@ function xml_parse_tag($texte) {
 // http://doc.spip.org/@import_debut
 function import_debut($f, $gz=false) {
 	$b = "";
+//  Pour les anciennes archives, indiquer le charset par defaut:
+	$charset = 'iso-8859-1'; 
+//  les + recentes l'ont en debut de ce fichier 
 	$flag_phpmyadmin = false;
 	while ($t = xml_fetch_tag($f, $b, $gz, false)) {
 		$r = xml_parse_tag($t);
 		if ($r[0] == '?xml' AND $r[1]['encoding'])
-			ecrire_meta('charset_restauration', strtolower($r[1]['encoding']));
-		if ($r[0] == "SPIP") return $r;
+			$charset = strtolower($r[1]['encoding']);
+		elseif ($r[0] == "SPIP") {$r[2] = $charset; return $r;}
 		if (($r[0] == "!--") && (preg_match(",phpmyadmin\sxml\sdump,is",$r[1]))){
 			// c'est un dump xml phpmyadmin
 			// on interprete le commentaire pour recuperer la version de phpmydadmin
@@ -97,12 +100,13 @@ function import_debut($f, $gz=false) {
 			$flag_phpmyadmin = true;
 		}
 		if (($r[0] != "!--") && ($flag_phpmyadmin == true)){
-		  $r[1] = array('version_archive'=>"phpmyadmin::$version");
+			$r[1] = array('version_archive'=>"phpmyadmin::$version");
+			$r[2] = $charset;
 			return $r;
 		}
 		$b = "";
 	}
-	// improbable: fichier correct avant le debut_admin et plus apres
+	// improbable: fichier correct avant debut_admin et plus apres
 	import_all_fin();
 	die(_T('info_erreur_restauration'));
 }
@@ -118,7 +122,7 @@ function import_init_tables($request)
   global $IMPORT_tables_noerase, $connect_id_auteur;
 	// grand menage
 	// on vide toutes les tables dont la restauration est demandee
-	$tables = import_table_choix($request);
+	$tables = import_table_choix($request);
 	foreach($tables as $table){
 
 		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase)))
@@ -126,7 +130,6 @@ function import_init_tables($request)
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-	spip_log("la bidouille");
 	spip_query("UPDATE spip_auteurs SET id_auteur=0, extra=$connect_id_auteur WHERE id_auteur=$connect_id_auteur");
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
 
@@ -161,6 +164,7 @@ function import_tables($request, $dir, $trans=array()) {
 	// ou initialisation de la table des translations,
 	// mais pas lors d'une reprise.
 
+	include_spip('inc/import_insere');
 	if ($request['insertion']=='on') {
 		$request['init'] = (!$my_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
 	} elseif ($request['insertion']=='passe2') {
@@ -186,15 +190,15 @@ function import_tables($request, $dir, $trans=array()) {
 	}
 
 	if ($my_pos==0) {
-//  Pour les anciennes archives, indiquer le charset par defaut:
-		ecrire_meta('charset_restauration', 'iso-8859-1'); 
-//  les + recentes l'ont en debut de fichier et import_debut fera ecrire_meta
-		list($tag, $r) = import_debut($file, $gz);
+		list($tag, $r, $charset) = import_debut($file, $gz);
 // tag ouvrant du Dump:
 // 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
 		$version_archive = $r['version_archive'];
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag);
+		if ($request['insertion']=='off')
+			ecrire_meta('charset_restauration', $charset);
+		else	ecrire_meta('charset_insertion', $charset);
 		ecrire_metas();
 	} else {
 		// Reprise de l'importation

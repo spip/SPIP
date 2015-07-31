@@ -475,6 +475,7 @@ ecrire/inc/iconifier.php -text
 ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
 ecrire/inc/import_1_3.php -text
+ecrire/inc/import_insere.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/informer_auteur.php -text
 ecrire/inc/instituer_article.php -text

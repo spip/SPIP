@@ -45,7 +45,7 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 	static $tables;
 	if (!$tables) {
 		$init = $request['init'];
-		$init($request);
+		$a_importer = $init($request);
 		$tables = array(
 		'article' => 'spip_articles',
 		'auteur' => 'spip_auteurs',
@@ -72,7 +72,7 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 	$id_objet = 0;
 
 	$table = isset($tables[$type]) ? $tables[$type] : $type;
-	if (!isset($field_desc[$table])){
+	if (in_array($table, $a_importer) AND !isset($field_desc[$table])) {
 		// recuperer la description de la table pour connaitre ses champs valides
 		list($nom,$desc) = description_table($table);
 
@@ -83,6 +83,10 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 	}
 	$fields = $field_desc[$table];
 
+	$char = $GLOBALS['meta']['charset_insertion'];
+	if ($char == $GLOBALS['meta']['charset_restauration']) $char = '';
+
+	$values = array();
 	// Lire les champs de l'objet
 	for (;;) {
 		$b = '';
@@ -107,12 +111,14 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 				}
 			}
 			else if ($fields==NULL or isset($fields[$col])) {
+				if ($char) 
+					$value = importer_charset($value, $charset);
 				$values[$col] = _q($value);
 				if ($col == $id) $id_objet = $value;
 			}
 		}
 	}
-
+   if ($values) {
 	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', $values) . ')')) {
 		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
@@ -153,8 +159,8 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 			spip_abstract_insert($table_lien, "($id, id_$type_lien)", join(',', $t));
 		}
 	}
-
-	return $import_ok = "    ";
+   }
+   return $import_ok = "    ";
 }
 
 ?>
