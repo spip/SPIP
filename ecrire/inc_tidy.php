@@ -127,15 +127,21 @@ function traite_xhtml ($buffer) {
 			$tmp = "$nomfich.".@getmypid().".tmp";
 			ecrire_fichier($tmp, $buffer, true); # ecrire meme en mode preview
 
+			// Experimental : on peut definir ses propres options tidy
+			if (!defined('_TIDY_OPTIONS'))
+				$options = "--output-xhtml true";   # a.k.a. -asxhtml
+			else
+				$options = _TIDY_OPTIONS;
+
 			$c = _TIDY_COMMAND
 				." --tidy-mark false"
-				." --char-encoding $enc_char"
 				." --quote-nbsp false"
 				." --show-body-only false"
 				." --indent true"
 				." --wrap false"
-				." --output-xhtml true"
 				." --add-xml-decl false"
+				." --char-encoding $enc_char"
+				." ".$options
 				." -m $tmp"
 				." 2>&1";
 			spip_log(nettoyer_uri(), 'tidy');
