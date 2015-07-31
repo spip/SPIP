@@ -146,13 +146,11 @@ function spip_mysql_explain($query, $serveur=''){
 // traite_query pourrait y etre fait d'avance ce serait moins cher
 // Les \n et \t sont utiles au debusqueur.
 
-// La parametre sous_requete n'est plus utilise
 
 // http://doc.spip.org/@spip_mysql_select
 function spip_mysql_select($select, $from, $where='',
-			   $groupby='', $orderby='', $limit='',
-			   $sousrequete='', $having='',
-			   $table='', $id='', $serveur='') {
+			   $groupby='', $orderby='', $limit='', $having='',
+			   $serveur='') {
 
 	$query = 'SELECT ' .
 		(!is_array($select) ? $select : join(", ", $select)) .
@@ -174,7 +172,7 @@ function spip_mysql_select($select, $from, $where='',
 
 	if (!($res = spip_mysql_query($query, $serveur))) {
 		include_spip('public/debug');
-		erreur_requete_boucle(substr($query, 7), $id, $table,
+		erreur_requete_boucle(substr($query, 7),
 				      spip_mysql_errno(),
 				      spip_mysql_error($query) );
 	}
@@ -385,9 +383,8 @@ function spip_mysql_fetch($r, $t='', $serveur='') {
 function spip_mysql_countsel($from = array(), $where = array(),
 			     $groupby = '', $limit = '', $sousrequete = '', $having = array(), $serveur='')
 {
-	$r = spip_mysql_select('COUNT(*)', $from, $where,
-			$groupby, '', $limit,
-			$sousrequete, $having, $serveur);
+	$r = spip_mysql_select('COUNT(*)', $from, $where,$groupby, '', $limit,
+			$having, $serveur);
 	if ($r) list($r) = mysql_fetch_array($r, MYSQL_NUM);
 	return $r;
 }

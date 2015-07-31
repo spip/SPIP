@@ -161,15 +161,9 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		$a = array();
 		// Recherche fulltext
 		foreach ($champs as $champ => $poids) {
-			// il est possible de passer des elements de requete par la table des champs
-			// (jointure par exemple)
-			// pourquoi pas, mais pas vu ou ca sert... ??
 			if (is_array($champ)){
-				foreach($champ as $sousreq=>$partie)
-					foreach($partie as $elt)
-						$requete[$sousreq][] = $elt;
-			}
-			else {
+			  spip_log("requetes imbriquees interdites");
+			} else {
 				if (strpos($champ,".")===FALSE)
 					$champ = "t.$champ";
 				$requete['SELECT'][] = $champ;
@@ -179,10 +173,10 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		$requete['WHERE'][] = join(" OR ", $a);
 		$requete['FROM'][] = table_objet_sql($table).' AS t';
 
-		$s = sql_select (
+		$s = sql_select(
 			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
 			implode(" ",$requete['GROUPBY']),
-			$requete['ORDERBY'], $requete['LIMIT'], '',
+			$requete['ORDERBY'], $requete['LIMIT'],
 			$requete['HAVING']
 		);
 

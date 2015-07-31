@@ -169,12 +169,12 @@ function quete_rubrique($id_article) {
 
 // http://doc.spip.org/@quete_fichier
 function quete_fichier($id_document, $serveur) {
-	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(),'','','', '', '', $serveur);
+	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = sql_getfetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','','', $table, $id_boucle, $serveur);
+	$retour = sql_getfetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','', $serveur);
 
 	if ($retour === NULL) return '';
 	# cette page est invalidee par toute petition
