@@ -22,7 +22,7 @@ function exec_rechercher_dist()
 	$rac = htmlentities($rac);
 
 	include_spip('inc/texte');
-	$where = split("[[:space:]]+", $type);
+	$where = preg_split('/\s+/', $type);
 	if ($where) {
 		foreach ($where as $k => $v) 
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";

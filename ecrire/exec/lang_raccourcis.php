@@ -82,10 +82,10 @@ function afficher_raccourcis($module = "public") {
 
 	echo "<div class='arial2'>"._T('module_texte_explicatif')."</div>";
 	echo "<div>&nbsp;</div>";
-
+	$regexp = "/^".$module."\_([a-z_]+)\.php[3]?$/";
 	foreach (preg_files(repertoire_lang().$module.'_[a-z_]+\.php[3]?$') as $f)
-		if (ereg("^".$module."\_([a-z_]+)\.php[3]?$", $f, $regs))
-				$langue_module[$regs[1]] = traduire_nom_langue($regs[1]);
+		if (preg_match($regexp, $f, $r))
+			$langue_module[$r[1]] = traduire_nom_langue($r[1]);
 
 	if (isset($langue_module) && ($langue_module)) {
 		ksort($langue_module);

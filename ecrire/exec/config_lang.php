@@ -61,7 +61,7 @@ lire_metas();
 
 debut_cadre_couleur("langues-24.gif", false, "", _T('info_langue_principale'));
 
-$langues_prop = split(",",$all_langs);
+$langues_prop = preg_split("/,/",$all_langs);
 $langue_site = $GLOBALS['meta']['langue_site'];
 
 echo _T('texte_selection_langue_principale');

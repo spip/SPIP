@@ -29,7 +29,7 @@ function action_export_all_dist()
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
-	list($quoi, $gz, $archive) = split(',', $arg);
+	list($quoi, $gz, $archive) = preg_split('/,/', $arg);
 	
 	$file =  $dir . $archive;
 	spip_log("action $arg $file");

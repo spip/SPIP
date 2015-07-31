@@ -49,11 +49,11 @@ function exec_recherche_dist()
 	$query_breves['FROM'] = 'spip_breves';
 	$query_rubriques['FROM'] = 'spip_rubriques';
 	$query_sites['FROM'] = 'spip_syndic';
-	$testnum = ereg("^[0-9]+$", $recherche);
+	$testnum = preg_match("/^[0-9]+$/", $recherche);
 
 	// Eviter les symboles '%', caracteres SQL speciaux
 
-	$where = split("[[:space:]]+", $recherche);
+	$where = preg_split('/\s+/', $recherche);
 	if ($where) {
 		foreach ($where as $k => $v) 
 		  $where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
@@ -64,7 +64,7 @@ function exec_recherche_dist()
 	$query_articles['WHERE']= ($testnum ? "(articles.id_article = $recherche)" :'') . $where;
 	$query_breves['WHERE']= ($testnum ? "(id_breve = $recherche)" : '') . $where;
 	$query_rubriques['WHERE']= ($testnum ? "(id_rubrique = $recherche)" : '') . $where;
-	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . ereg_replace("titre LIKE", "nom_site LIKE",$where);
+	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . preg_replace("/titre LIKE/", "nom_site LIKE",$where);
 
 	$query_articles['ORDER BY']= "date_modif DESC";
 	$query_breves['ORDER BY']= "maj DESC";

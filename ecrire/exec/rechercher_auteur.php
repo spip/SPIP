@@ -24,7 +24,7 @@ function exec_rechercher_auteur_dist()
 		exit;
 	      }
 
-	$where = split("[[:space:]]+", _request('nom'));
+	$where = preg_split('/\s+/', _request('nom'));
 	if ($where) {
 		foreach ($where as $k => $v) 
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";

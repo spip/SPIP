@@ -212,8 +212,8 @@ if (!verifier_low_sec ($id, $cle,
 	unset($a);
 } else {
 	$a = array();
-	foreach (split(':', $args) as $bout) {
-		list($var, $val) = split('-', $bout, 2);
+	foreach (preg_split('/:/', $args) as $bout) {
+		list($var, $val) = preg_split('/-/', $bout, 2);
 		$a[$var] = $val;
 	}
 	include_spip('inc/lang');
