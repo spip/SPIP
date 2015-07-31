@@ -137,15 +137,26 @@ function avoir_visiteurs($past=false, $accepter=true) {
 /**
  * lister les status d'article visibles dans l'espace prive
  * en fonction du statut de l'auteur
+ * pour l'extensibilie de SPIP, on se repose sur autoriser('voir','article')
+ * en testant un a un les status presents en base
+ *
+ * on memorise en static pour eviter de refaire plusieurs fois
  * 
  * @param string $statut_auteur
  * @return array
  */
 function statuts_articles_visibles($statut_auteur){
-	if ($statut_auteur == "0minirezo")
-		return array('prepa','prop','publie','refuse');
-	else
-		return array('prop','publie');
+	static $auth = array();
+	if (!isset($auth[$statut_auteur])){
+		$auth[$statut_auteur] = array();
+		$statuts = array_map('reset',sql_allfetsel('distinct statut','spip_articles'));
+		foreach($statuts as $s){
+			if (autoriser('voir','article',0,array('statut'=>$statut_auteur),array('statut'=>$s)))
+				$auth[$statut_auteur][] = $s;
+		}
+	}
+
+	return $auth[$statut_auteur];
 }
 
 function affiche_nom_table($table){
