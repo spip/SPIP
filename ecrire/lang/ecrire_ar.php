@@ -236,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_attente_validation' => 'مقالاتك المنتظرة التصديق',
 	'info_aucun_article' => 'لا مقال',
 	'info_aucun_auteur' => 'لا مؤلف',
-	'info_aucun_message' => 'لا رسالة',
+	'info_aucun_message' => 'لا توجد رسائل',
 	'info_aucun_rubrique' => 'لا أقسام',
 	'info_aujourdhui' => 'اليوم:',
 	'info_auteurs' => 'المؤلفون',
@@ -317,9 +317,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 في مجال الموقع العام (المنتديات بالاشتراك).',
 	'info_generation_miniatures_images' => 'إنشاء مصغرات الصور',
 	'info_gerer_trad_objets' => '@objets@: إدارة روابط الترجمة',
-	'info_hebergeur_desactiver_envoi_email' => '</i>بعض خدام المواقع يوقفون إرسال البريد الآلي
+	'info_hebergeur_desactiver_envoi_email' => 'بعض خدام المواقع يوقفون إرسال البريد الآلي
 في أجهزتهم. في هذه الحال، لا يمكن تفعيل
-وظائف SPIP التالية.<i>',
+وظائف SPIP التالية.',
 	'info_hier' => 'البارحة:',
 	'info_identification_publique' => 'هويتك العمومية...',
 	'info_image_process' => 'الرجاء اختيار افضل طريقة لإنشاء المصغرات بالنقر على الصورة المناسبة.',
