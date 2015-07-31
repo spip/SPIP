@@ -34,6 +34,12 @@ function supprimer_tags($texte, $rempl = "") {
 	return $texte;
 }
 
+// Convertit les <...> en la version lisible en HTML
+function echapper_tags($texte, $rempl = "") {
+	$texte = ereg_replace("<([^>]*)>", "&lt;\\1&gt;", $texte);
+	return $texte;
+}
+
 // Convertit un texte HTML en texte brut
 function textebrut($texte) {
 	$texte = ereg_replace("[\n\r]+", " ", $texte);
