@@ -536,6 +536,7 @@ if ($options == "avancees") {
 
 	debut_cadre_relief("site-24.gif");
 
+	unset($virtuel);
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1, strlen($chapo));
 	}
@@ -559,10 +560,9 @@ if ($options == "avancees") {
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 
-	if (!$virtuel) {
-		$virtuel = "http://";
-	}
-	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
+	$virtuelhttp = ($virtuel ? "" : "http://");
+
+	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuelhttp$virtuel\" SIZE='40'><br>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
 	echo "</font>";
