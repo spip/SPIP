@@ -143,7 +143,9 @@ function texte_upload_manuel($dir, $mode = 'document') {
 
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
-		if (preg_match(",\.([^.]+)$,", $f, $match)) {
+		if (!preg_match(",\.([^.]+)$,", $f, $match))
+		  if (strtolower($f) === 'makefile') $match = array(0,'txt');
+		if ($match) {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
 				include_spip('inc/ajouter_documents');
