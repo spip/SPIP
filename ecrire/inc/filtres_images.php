@@ -83,7 +83,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
 	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
-	if (!$ret["hauteur"] OR $ret["largeur"]) return false;
+	if (!($ret["hauteur"] OR $ret["largeur"])) return false;
 
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
