@@ -139,11 +139,6 @@ function auth() {
 	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
 	$result = @spip_query($query);
 	
-	if (!@mysql_num_rows($result)) {
-		@header("Location: ../spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/");
-		exit;
-	}
-	
 	if ($row = mysql_fetch_array($result)) {
 		$connect_id_auteur = $row['id_auteur'];
 		$connect_nom = $row['nom'];

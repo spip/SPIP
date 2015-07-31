@@ -88,13 +88,18 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	if ($nom)	// pas de nom vide
 		$auteur['nom'] = corriger_caracteres($nom);
 
+	// login et mot de passe
+	unset ($modif_login);
+	$old_login = $auteur['login'];
 	if ($login) {
 		if (strlen($login) < 4)
 			$echec .= "<p>Login trop court.";
 		else if (mysql_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
 			$echec .= "<p>Ce login existe d&eacute;j&agrave;.";
-		else
+		else if ($login != $old_login) {
+			$modif_login = true;
 			$auteur['login'] = $login;
+		}
 	} else if ($connect_statut == '0minirezo') // suppression du login
 			$auteur['login'] = '';
 
@@ -103,10 +108,20 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			$echec .= "<p>Les deux mots de passe ne sont pas identiques.";
 		else if ($new_pass AND strlen($new_pass) < 6)
 			$echec .= "<p>Mot de passe trop court.";
-		else
+		else {
+			$modif_login = true;
 			$auteur['new_pass'] = $new_pass;
+		}
 	}
 
+	if ($modif_login) {
+		include_ecrire('inc_session.php3');
+		zap_sessions ($old_login, true);
+		if ($connect_id_auteur == $auteur['id_auteur'])
+			supprimer_session($GLOBALS['spip_session']);
+	}
+
+	// email
 	if ($connect_statut == '0minirezo') { // seuls les admins peuvent modifier l'email
 		if ($email!='' AND ! email_valide($email)) {
 			$echec .= "<p>Adresse email invalide.";
@@ -158,11 +173,6 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
 
-	// Mettre a jour les donnees de session si on a modifie sa propre fiche auteur
-	// ici encore, comme dans zap_session, on aurait besoin d'un acces direct a toutes les
-	// sessions de l'auteur id_auteur pour les regenerer !..
-	if (($connect_id_auteur == $id_auteur) AND $session = $GLOBALS['spip_session'])
-		ajouter_session($auteur, $session);
 }
 
 
