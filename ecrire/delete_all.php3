@@ -50,6 +50,7 @@ spip_query("DROP TABLE spip_types_documents");
 spip_query("DROP TABLE spip_visites");
 spip_query("DROP TABLE spip_visites_articles");
 spip_query("DROP TABLE spip_visites_temp");
+spip_query("DROP TABLE spip_test");
 
 @unlink(".htaccess");
 @unlink("inc_connect.php3");
