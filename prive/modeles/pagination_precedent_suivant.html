@@ -7,7 +7,7 @@
 
 [(#ENV{page_courante}|>{1}|oui)
 	[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
-	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_precedente:>,#ENV{page_courante}|=={1},lien_pagination,'',nofollow})]
+	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_precedente:>,#ENV{page_courante}|=={1},lien_pagination,'',nofollow})]
 
 	[(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
 		[<span class='sep separateur'>(#GET*{separateur})</span>]
@@ -15,5 +15,5 @@
 ]
 [(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
 	[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
-	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_suivante:>,#ENV{page_courante}|=={#ENV{nombre_pages}},lien_pagination,'',nofollow})]
+	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_suivante:>,#ENV{page_courante}|=={#ENV{nombre_pages}},lien_pagination,'',nofollow})]
 ]

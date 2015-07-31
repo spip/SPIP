@@ -3,13 +3,37 @@
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
-#SET{separateur,#ENV{separateur,'-'}}
+#SET{sep,#ENV{separateur,' | '}}
 <B_pages>
-[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{premiere}|>{1}|?{'...',''})</a> [<span class='sep separateur'>(#GET*{separateur})</span>]]
-<BOUCLE_pages(DATA){tableau #GET{pages}}>
-[(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })]
-[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|lien_ou_expose{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})]
-[<span class='sep separateur'>(#VALEUR|<{#GET{derniere}}|?{#GET{separateur}})</span>]
-</BOUCLE_pages>
-[[<span class='sep separateur'>(#GET*{separateur})</span>] <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
+	[<span
+  class='label'>(#ENV{label,''})</span>][
+
+	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
+
+	]<span
+	class="pages">[<a
+	href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}'
+	class='lien_pagination'
+	rel='nofollow'>(#GET{premiere}|>{1}|?{1})</a><span
+	class="tbc">[<span
+	class='sep'>(#GET*{sep})</span>]...[<span
+	class='sep'>(#GET*{sep})</span>]</span
+
+		>]<BOUCLE_pages(POUR){tableau #GET{pages}}>[
+		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
+		][(#ENV{url}
+		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+		|ancre_url{#ENV{ancre}}
+		|lien_ou_expose{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})][<span
+		class='sep'>(#VALEUR|<{#GET{derniere}}|?{#GET{sep}})</span
+		>]</BOUCLE_pages>[<span
+
+	class="tbc">[<span
+	class='sep'>(#GET*{sep})</span>]...[<span
+	class='sep'>(#GET*{sep})</span>]</span><a
+	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
+	class='lien_pagination'
+	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a>]</span>[
+	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
+	]
 </B_pages>
