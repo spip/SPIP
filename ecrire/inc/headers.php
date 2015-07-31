@@ -70,7 +70,7 @@ function http_status($status) {
 
 	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
 
-	$php_cgi = ($flag_sapi_name AND eregi("cgi", @php_sapi_name()));
+	$php_cgi = ($flag_sapi_name AND preg_match(",cgi,i", @php_sapi_name()));
 	if ($php_cgi)
 		header("Status: ".$status_string[$status]);
 	else

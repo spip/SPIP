@@ -29,11 +29,11 @@ function install_etape_1_dist()
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
 		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
-		if (ereg("mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)", $s, $regs)) {
+		if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
 		}
-		else if (ereg("spip_connect_db\('(.*)','(.*)','(.*)','(.*)','(.*)'\)", $s, $regs)) {
+		else if (preg_match("#spip_connect_db\('(.*)','(.*)','(.*)','(.*)','(.*)'\)#", $s, $regs)) {
 			$adresse_db = $regs[1];
 			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
 			$login_db = $regs[3];
@@ -41,7 +41,7 @@ function install_etape_1_dist()
 	}
 	if(@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php')){
 		$s = @join('', @file(_FILE_CHMOD_INS . _FILE_TMP . '.php'));
-		if(ereg("define\('_SPIP_CHMOD', (.*)\)", $s, $regs)) {
+		if(preg_match("#define\('_SPIP_CHMOD', (.*)\)#", $s, $regs)) {
 			$chmod = $regs[1]; 
 		}
 	}

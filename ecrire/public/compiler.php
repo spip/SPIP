@@ -18,7 +18,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // reperer un code ne calculant rien, meme avec commentaire
-define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
+define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
@@ -152,7 +152,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$return = $boucle->return;
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
-	$constant = ereg(CODE_MONOTONE,$return);
+	$constant = preg_match(CODE_MONOTONE,$return);
 
 	// Cas {1/3} {1,4} {n-2,1}...
 
@@ -233,7 +233,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
-	if (ereg(CODE_MONOTONE,$corps, $r)) {
+	if (preg_match(CODE_MONOTONE,$corps, $r)) {
 		if (!$r[2]) {
 			if (!$boucle->numrows)
 				return 'return "";';
@@ -371,7 +371,7 @@ function calculer_parties($boucles, $id_boucle) {
 		$boucle->sql_serveur .
 		'");';
 
-	ereg("([+-/p])([+-/])?", $mode_partie, $regs);
+	preg_match(",([+-/p])([+-/])?,", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
 
 	// {1/3}

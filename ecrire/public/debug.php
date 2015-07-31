@@ -75,10 +75,10 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
-	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
+	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $erreur, $regs))
 		$errno = $regs[2];
 	else if (($errno == 1030 OR $errno <= 1026)
-		AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
+		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $erreur, $regs))
 	$errno = $regs[1];
 
 	// Erreur systeme
@@ -278,7 +278,7 @@ function trouve_squelette_inclus($script)
   $incl = $reg[1] . '.html$';
 
   foreach($debug_objets['sourcefile'] as $k => $v) {
-    if (ereg($incl,$v)) return $k;
+    if (preg_match(",$incl,",$v)) return $k;
   }
   return "";
 }
@@ -527,7 +527,7 @@ function emboite_texte($texte, $fonc='',$self='')
  
 	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
-	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
+	elseif (!preg_match(",^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$,",
                      $GLOBALS['xhtml_error'],
                      $eregs))
 

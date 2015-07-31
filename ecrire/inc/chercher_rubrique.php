@@ -47,7 +47,7 @@ function style_menu_rubriques($i) {
 	global $couleur_claire, $spip_lang_left;
 
 	$espace = '';
-	if (eregi("mozilla", $browser_name)) {
+	if (preg_match(",mozilla,i", $browser_name)) {
 		$style = "padding-$spip_lang_left: 16px; "
 		. "margin-$spip_lang_left: ".(($i-1)*16)."px;";
 	} else {
