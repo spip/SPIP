@@ -152,7 +152,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 
 function exec_js_menu_rubriques_dist()
 {
-	if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
+	if (http_last_modified(@filemtime(__FILE__), time() + 24 * 3600)) 
 		exit;
 	header('Content-type: text/javascript; charset='.$GLOBALS['meta']['charset']);
 	include_spip('inc/texte');

@@ -164,9 +164,11 @@ function assembler_page ($fond) {
 			}
 		}
 	}
-	// toujours utile
-	$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
-	$page['status'] = $status;
+
+	if ($lastmodified)
+		$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
+	if ($status)
+		$page['status'] = $status;
 
 	return $page;
 }

@@ -520,12 +520,13 @@ function http_gmoddate($lastmodified) {
 }
 
 function http_last_modified($lastmodified, $expire = 0) {
+	if (!$lastmodified) return false;
 	$gmoddate = http_gmoddate($lastmodified);
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']
+	if ($_SERVER['HTTP_IF_MODIFIED_SINCE']
 	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
 	{
 		$if_modified_since = preg_replace('/;.*/', '',
-			$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
 			include_spip('inc/headers');
