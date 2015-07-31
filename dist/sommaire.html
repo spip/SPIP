@@ -26,7 +26,7 @@
 
 			[(#REM) Les deux derniers articles ]
 			<B_articles_recents>
-			<div class="liste-articles">
+			<div class="menu articles">
 				<h2><:derniers_articles:></h2>
 				<ul>
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
@@ -48,7 +48,7 @@
 
 			[(#REM) Articles suivants ]
 			<B_articles>
-            <div class="liste-articles">
+            <div class="menu articles">
                 [(#ANCRE_PAGINATION)]
                 [(#ENV{debut_articles}|?{'',' '})<h2><:articles_recents:></h2>]
                 <ul>
@@ -65,8 +65,8 @@
             
             [(#REM) Breves ]
             <B_breves>
-            <div class="breves">
-                <h2 class="menu-titre"><:dernieres_breves:></h2>
+            <div class="menu breves">
+                <h2><:dernieres_breves:></h2>
                 <ul>
                     <BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
                     <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
@@ -77,8 +77,8 @@
 
             [(#REM) Liens des forums ]
             <B_forums_liens>
-            <div class="forums">
-                <h2 class="menu-titre"><:derniers_commentaires:></h2>
+            <div class="menu forums">
+                <h2><:derniers_commentaires:></h2>
                 <p><:messages_recents:></p>
                 <ul>
                     <BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
@@ -90,8 +90,8 @@
 
             [(#REM) Sur le Web ]
             <B_syndic>
-            <div class="syndic">
-                <h2 class="menu-titre"><:nouveautes_web:></h2>
+            <div class="menu syndic">
+                <h2><:nouveautes_web:></h2>
                 <ul>
                 <BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
                     <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>

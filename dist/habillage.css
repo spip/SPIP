@@ -32,9 +32,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #page { width: 48em; text-align: left; margin-left: auto; margin-right: auto; }
 
 #conteneur { width: 100%; }
-
 #conteneur #contenu { float: left; width: 33em; }
-
 #conteneur #navigation { float: right; width: 12em; text-align: center; }
 
 /* Entete */
@@ -71,40 +69,14 @@ body, #navigation, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans
 q, blockquote, .introduction, h3.spip, .voirskel { font-family: Georgia, Times, serif; }
 
 
-/* Habillage des menus et de la navigation
----------------------------------------------- */
-
-/* Habillage general des menus de navigation */
-.rubriques, .breves, .syndic, .forums, .divers { min-width: 10em; border: 1px solid #CCC; margin-bottom: 1em; font-size: 0.77em; }
-
-/*.menu-titre { padding: 0.2em 0.4em; border-bottom: 1px dotted #CCC; text-align: center; font-weight: bold; }*/
-
-#navigation p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
-#navigation ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
-#navigation li { margin: 0; padding: 0 0.7em; }
-
-/* Des couleurs specifiques selon les types de menus */
-.rubriques { background: #EAFFEA; }
-.rubriques .menu-titre { background: #F2FFF2; }
-
-.breves { background: #FFEAEA; }
-.breves .menu-titre { background: #FFF2F2; }
-
-.syndic { background: #E8F8F8; }
-.syndic .menu-titre { background: #F0FCFC; }
-
-.forums { background: #EAEAFF; }
-.forums .menu-titre { background: #F2F2FF; }
-
-.divers { background: #F8F8E8; }
-.divers .menu-titre { background: #FCFCF0; }
-
 /* Habillage du contenu
 ---------------------------------------------- */
 
 /* Cartouche et titraille */
 .cartouche { margin-bottom: 2em; }
 h1 { font-size: 1.27em; font-weight: bold; color: #000; }
+h2 { margin: 0; padding: .2em; background: #99CC66; font-size: 1em; text-transform: uppercase; }
+h2, h2 a { color: #fff; }
 #contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
@@ -113,7 +85,6 @@ h1 { font-size: 1.27em; font-weight: bold; color: #000; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-
 /* Mise en forme des textes du contenu */
 .chapo { margin-bottom: 1.5em; font-weight: bold; line-height: 1.4em; }
 
@@ -121,44 +92,55 @@ h1 { font-size: 1.27em; font-weight: bold; color: #000; }
 
 .texte { color: #000; font-size: 0.96em; }
 
-.ps, .notes { margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
+.ps, .notes { margin-top: 1.4em; padding-top: 2px; }
 .ps { font-size: 0.82em; }
 .notes { clear: both; font-size: 0.77em; }
-.ps h2, .notes h2 { font-size: 1.19em; font-weight: bold; }
+
+
+/* Habillage des menus
+---------------------------------------------- */
+
+/* Habillage general des menus de navigation */
+.menu { margin-bottom: 2em; text-align: left; }
+#contenu .menu { font-size: 0.82em; }
+#navigation .menu { min-width: 10em; font-size: 0.77em; }
+
+.menu p { margin: .2em 0; padding: .2em .1em; }
+.menu ul { margin: 0; padding: 0; list-style: none; }
+.menu ul li { margin: .2em 0; padding: .2em .1em; border-bottom: 1px solid #CCC; }
+.menu ul li ul { margin-left: 1em; }
+.menu ul li ul li { margin: 0; padding: 0; border: 0; }
+
+/*#navigation p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
+#navigation ul { margin: 0; padding: 0.2em 0; text-align: left; }
+#navigation li { margin: 0; padding: 0 0.7em; }*/
+
+.pagination { text-align: right; font-size: 0.90em; }
+.pagination a { color: #99CC66; }
+.pagination .on { font-weight: bold; }
+
+/* Listes d'articles et extraits introductifs */
+.articles ul {}
+.articles li { margin-bottom: 1em; clear: both; }
+.articles li .titre { /*font-size: 1.03em;*/ font-weight: bold; }
+.articles li .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; clear: right; }
+.articles li p { margin: 0; padding: 0; }
+.articles li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
+.articles li small { display: block; /*font-size: 0.71em;*/ }
+.articles li .introduction { margin-top: 5px; margin-bottom: 2em; /*font-size: 0.82em;*/ line-height: 1.4em; }
 
 /* Portfolio */
-#documents_portfolio { clear: both; margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
-#documents_portfolio h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
+#documents_portfolio { clear: both; margin-top: 1.4em; padding-top: 2px; }
 
 #document_actif { margin-top: 1em; }
 
 /* Listes de documents joints (a un article ou une rubrique) */
-#documents_joints { margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
-#documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
-#documents_joints ul { margin: 0; padding: 0; list-style: none; }
+#documents_joints { margin-top: 1.4em; padding-top: 2px; }
+#documents_joints ul {}
 #documents_joints li { margin-bottom: 0.4em; }
 #documents_joints li .spip_doc_titre {}
 #documents_joints li .spip_doc_titre small { font-weight: normal; }
 #documents_joints li .spip_doc_descriptif {}
-
-/* Listes d'articles et extraits introductifs
------------------------------------------------ */
-.liste-articles ul { margin: 0; padding: 0; list-style: none; }
-.liste-articles li { margin-bottom: 1em; clear: both; }
-.liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
-.liste-articles li .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; clear: right; }
-.liste-articles li p { margin: 0; padding: 0; }
-.liste-articles li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
-.liste-articles li small { display: block; font-size: 0.71em; }
-.liste-articles li .introduction { margin-top: 5px; margin-bottom: 2em; border: 1px solid #CCC; padding: 0.9em; font-size: 0.82em; line-height: 1.4em; }
-
-.pagination { font-size: 0.90em; }
-
-/* Habillage specifique du plan du site
----------------------------------------------- */
-
-.page_plan .cartouche { display: none; }
-.page_plan #contenu h2 { clear: both; background: #EEE; border: 1px solid #CCC; padding: 0.5em; margin-bottom: 1em; font-weight: bold; text-align: center; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
@@ -196,7 +178,7 @@ ul.choix_mots label { display: inline; }
 /* Habillage des forums
 ---------------------------------------------- */
 
-.forum-repondre, .forum-decompte { clear: both; margin-top: 2.5em; padding-top: 2px; border-top: 2px solid #CCC; font-size: 0.88em; font-weight: bold; }
+.forum-repondre, .forum-decompte { clear: both; margin-top: 2.5em; padding-top: 2px; font-size: 0.88em; font-weight: bold; }
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }

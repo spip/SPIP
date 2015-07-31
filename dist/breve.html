@@ -37,7 +37,7 @@
 			[(#REM) Forum de la breve
 			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
 			<a href="#forum" name="forum" id="forum"></a>
-			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></h2>]
+			[<span class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></span>]
 			<INCLURE{fond=inc-forum}{id_breve}>
 
 		</div><!-- fin contenu -->
@@ -50,8 +50,8 @@
 
 			[(#REM) Breves dans la meme rubrique ]
 			<B_breves>
-			<div class="breves">
-				<h2 class="menu-titre"><:autres_breves:></h2>
+			<div class="menu breves">
+				<h2><:autres_breves:></h2>
 				<ul>
 					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
 					<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
@@ -62,8 +62,8 @@
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
-			<div class="divers">
-				<h2 class="menu-titre"><:mots_clefs:></h2>
+			<div class="menu divers">
+				<h2><:mots_clefs:></h2>
 				<ul>
 				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
 					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>

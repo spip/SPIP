@@ -34,7 +34,7 @@
 
 			[(#REM) Articles issus de la syndication ]
 			<B_articles>
-			<div class="liste-articles">
+			<div class="menu articles">
 				#ANCRE_PAGINATION
 				<h2><:articles:></h2>
 				<ul>
@@ -64,22 +64,22 @@
 
 			[(#REM) Autres sites web ]
 			<B_sites>
-			<div class="syndic">
+			<div class="menu syndic">
 				#ANCRE_PAGINATION
-				<h2 class="menu-titre"><:sites_web:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
+				<h2><:sites_web:></h2>
 				<ul>
 					<BOUCLE_sites(SITES) {par nom_site} {pagination 20}>
 					<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
 					</BOUCLE_sites>
 				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
 			</div>
 			</B_sites>
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
-			<div class="divers">
-				<h2 class="menu-titre"><:mots_clefs:></h2>
+			<div class="menu divers">
+				<h2><:mots_clefs:></h2>
 				<ul>
 					<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
 					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>

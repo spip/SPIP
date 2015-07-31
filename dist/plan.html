@@ -26,68 +26,70 @@
 			<div class="cartouche">
 				<h1><:plan_site:></h1>
 			</div>
+			
+            <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
-				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+            <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
 
-				<h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+            [(#REM) Articles et sous-rubriques ]
+            <B_articles_racine>
+            <div class="menu">
+            <h3><:articles:></h3>
+            <ul>
+                <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+                <li><a href="#URL_ARTICLE">#TITRE</a></li>
+                </BOUCLE_articles_racine>
+            </ul>
+            </div>
+            </B_articles_racine>
 
-				[(#REM) Articles et sous-rubriques ]
-                <B_articles_racine>
-                <h3><:articles:></h3>
+            <B_rubriques>
+            <div class="menu">
+            <ul>
+                <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+                <li><strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+
+                    <B_articles>
+                    <ul>
+                        <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+                        <li><a href="#URL_ARTICLE">#TITRE</a></li>
+                        </BOUCLE_articles>
+                    </ul>
+                    </B_articles>
+
+                    <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+
+                </li>
+                </BOUCLE_rubriques>
+            </ul>
+            </div>
+            </B_rubriques>
+
+            [(#REM) Breves ]
+            <B_breves>
+            <div class="menu breves">
+                <h3><:breves:></h3>
                 <ul>
-                    <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
-                    <li><a href="#URL_ARTICLE">#TITRE</a></li>
-                    </BOUCLE_articles_racine>
+                    <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
+                    <li><a href="#URL_BREVE">#TITRE</a></li>
+                    </BOUCLE_breves>
                 </ul>
-                </B_articles_racine>
+            </div>
+            </B_breves>
 
-                <B_rubriques>
+            [(#REM) Sur le Web ]
+            <B_sites>
+            <div class="menu syndic">
+                <h3><:sites_web:></h3>
                 <ul>
-                    <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
-                    <li><strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
-
-                        <B_articles>
-                        <ul>
-                            <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
-                            <li><a href="#URL_ARTICLE">#TITRE</a></li>
-                            </BOUCLE_articles>
-                        </ul>
-                        </B_articles>
-
-                        <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-
-                    </li>
-                    </BOUCLE_rubriques>
+                    <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+                    <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
+                    </BOUCLE_sites>
                 </ul>
-                </B_rubriques>
+            </div>
+            </B_sites>
 
-				[(#REM) Breves ]
-				<B_breves>
-				<div class="breves">
-					<h3 class="menu-titre"><:breves:></h3>
-					<ul>
-						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
-						<li><a href="#URL_BREVE">#TITRE</a></li>
-						</BOUCLE_breves>
-					</ul>
-				</div>
-				</B_breves>
-
-				[(#REM) Sur le Web ]
-				<B_sites>
-				<div class="syndic">
-					<h3 class="menu-titre"><:sites_web:></h3>
-					<ul>
-						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
-						</BOUCLE_sites>
-					</ul>
-				</div>
-				</B_sites>
-
-				
-
-				</BOUCLE_secteurs>
+            </BOUCLE_secteurs>
 
 		</div><!-- fin contenu -->
 
