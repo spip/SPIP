@@ -13,7 +13,6 @@ $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
-$articles_modif = lire_meta("articles_modif");
 
 if ($id_article==0) {
 	if ($new=='oui') {
@@ -214,11 +213,8 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$titre_article = stripslashes($titre);
 
 	// marquer l'article (important pour les articles nouvellement crees)
-	if ($articles_modif == 'oui') {
-		$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article";
-		$result = spip_query($query);
-		$id_article_bloque = $id_article;   // message pour inc_presentation
-	}
+	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+	$id_article_bloque = $id_article;   // message pour inc_presentation
 }
 
 
@@ -725,7 +721,7 @@ if ($flag_editable) {
 	$flag_modif = false;
 
 	// Recuperer les donnees de l'article
-	if ($articles_modif == 'oui') {
+	if (lire_meta('articles_modif') == 'oui') {
 		$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 
