@@ -53,7 +53,6 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 // attention: boucle->doublons designe une variable qu'on affecte
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$NOT_IN = $crit->not ? '' : 'NOT';
 	$boucle->where[] = '" .' .
 	  "calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
@@ -64,8 +63,9 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  "' . " .
 	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) .
 	  ')], \'' . 
-	  $NOT_IN . 
+	  ($crit->not ? '' : 'NOT') .
 	  " ') . \"";
+	if ($crit->not) $boucle->doublons = "";
 }
 
 // {lang_select}
