@@ -21,7 +21,7 @@ include_ecrire("inc_debug_sql.php3");
 include_local("inc-calcul-outils.php3");
 
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
-// le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
+// le repertoire du source des squelettes (les pseudo-html avec BOUCLE...)
 
 if (@file_exists("mes_fonctions.php3")) 
     include_local ("mes_fonctions.php3");
@@ -59,7 +59,7 @@ function charger_squelette ($squelette) {
 	$nom = $ext . '_' . md5($squelette);
 	$sourcefile = $squelette . ".$ext";
 
-	// le squelette est-il deja en memoire (<inclure> a repetition)
+	// le squelette est-il deja en memoire (INCLURE  a repetition)
 	if (function_exists($nom))
 		return $nom;
 

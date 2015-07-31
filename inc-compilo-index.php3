@@ -151,7 +151,6 @@ function calculer_balise($nom, $p) {
 	return $p;
 }
 
-
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
 // Inclusion du fichier associe a son nom.
@@ -163,10 +162,10 @@ function calculer_balise($nom, $p) {
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
 	$param = param_balise($p);
-	$p->code = "executer_balise_dynamique('" . $nom . "', array("
+	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
 	  . join(',',collecter_balise_dynamique($l, $p))
 	  . filtres_arglist($param, $p)
-	  . '), array('
+	  . "),\n\tarray("
 	  . (!$p->fonctions ? '' : ("'" . join("','", $p->fonctions) . "'"))
 	  . "))";
 	$p->statut = 'php';

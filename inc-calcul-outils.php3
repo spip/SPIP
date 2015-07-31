@@ -15,16 +15,6 @@
 if (defined("_INC_CALCUL_OUTILS")) return;
 define("_INC_CALCUL_OUTILS", "1");
 
-
-#
-# AFFREUX !!  Passer tout ca en CSS au plus vite !
-#
-tester_variable('espace_logos',3);
-// HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
-tester_variable('espace_images',3);
-// HSPACE=xxx VSPACE=xxx pour les images integrees
-
-
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
 // remarquable, mais a conserver pour compatibilite ascendante.
@@ -34,57 +24,17 @@ function calcule_fichier_logo($on) {
 	return $r;
 }
 
+// Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
+// utilise la globale ci-dessous pour les attributs hspace & vspace
 
-//
-// Retrouver le logo d'un objet (et son survol)
-//
+tester_variable('espace_logos',3);
 
-function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff) {
-	include_ecrire('inc_logos.php3');
-
-	$table_logos = array (
-	'ARTICLE' => 'art',
-	'AUTEUR' =>  'aut',
-	'BREVE' =>  'breve',
-	'MOT' => 'mot',
-	'RUBRIQUE' => 'rub',
-	'SITE' => 'site'
-	);
-	$type = $table_logos[$type];
-	$nom = strtolower($onoff);
-	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
-	while (1) {
-		$on = cherche_image_nommee($type . $nom . intval($id));
-		if ($on) {
-			if ($ff)
-				return  ("$on[1].$on[2]");
-			else {
-				$off = ($onoff != 'ON') ? '' :
-					cherche_image_nommee($type . 'off' . $id);
-				return affiche_logos(("$on[0]$on[1].$on[2]"),
-					($off ? ("$off[0]$off[1].$off[2]") : ''),
-					$lien,
-					$align);
-			}
-		}
-		else if ($id_rubrique) {
-			$type = 'rub';
-			$id = $id_rubrique;
-			$id_rubrique = 0;
-		} else if ($id AND $type == 'rub')
-			$id = sql_parent($id);
-		else return '';
-	}
-}
-
-
-// Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
-function affiche_logos($arton, $artoff, $lien, $align) {
-	global $num_survol;
+function affiche_logos($logos, $lien, $align) {
+	static $num_survol=0;
 	global $espace_logos;
-
+	list ($arton, $artoff) = $logos;
 	$num_survol++;
-	if (!$arton) return '';
+	if (!$arton) return $artoff;
 	$milieu = "<img src='$arton'"
 		. ($align ? " align='$align' " : '') 
 		. " name='image$num_survol' border='0' "
@@ -109,6 +59,46 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 		}
 
 	return $milieu;
+}
+
+//
+// Retrouver le logo d'un objet (et son survol)
+//
+
+function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
+	include_ecrire('inc_logos.php3');
+
+	$table_logos = array (
+	'ARTICLE' => 'art',
+	'AUTEUR' =>  'aut',
+	'BREVE' =>  'breve',
+	'MOT' => 'mot',
+	'RUBRIQUE' => 'rub',
+	'SITE' => 'site'
+	);
+	$type = $table_logos[$type];
+	$nom = strtolower($onoff);
+	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+	while (1) {
+		$on = cherche_image_nommee($type . $nom . intval($id));
+		if ($on) {
+			if ($ff)
+			  return  (array('', "$on[1].$on[2]"));
+			else {
+				$off = ($onoff != 'ON') ? '' :
+					cherche_image_nommee($type . 'off' . $id);
+				return array ("$on[0]$on[1].$on[2]",
+					      ($off ? ("$off[0]$off[1].$off[2]") : ''));
+			}
+		}
+		else if ($id_rubrique) {
+			$type = 'rub';
+			$id = $id_rubrique;
+			$id_rubrique = 0;
+		} else if ($id AND $type == 'rub')
+			$id = sql_parent($id);
+		else return array('','');
+	}
 }
 
 //

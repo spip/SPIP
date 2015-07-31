@@ -447,44 +447,38 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		}
 	}
 
-	$ret = "<form action='$post' method='post' style='margin:0px; padding:0px;'>";
-	if ($cible)
-		$ret .= "<input type='hidden' name='url' value='".quote_amp($cible)."' />";
-
-	if ($texte)
-		$ret .= $texte;
-
-	if (_DIR_RESTREINT)
-		$style = "class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'";
-	else if ($nom_select == 'var_lang_ecrire') 
-		$style = "class='verdana1' style='background-color: $couleur_foncee; max-height: 24px; border: 1px solid white; color: white; width: 100px;'";
-	else
-		$style = "class='fondl'";
-
 	$postcomplet = new Link($post);
 	if ($cible) $postcomplet->addvar('url', $cible);
 
-	$lien_post = $postcomplet->geturl();
-	$ret .= "\n<select name='$nom_select' $style onchange=\"document.location.href='".$lien_post."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n";
-
+	$ret = '';
 	sort($langues);
 	while (list(, $l) = each ($langues)) {
-		if ($l == $default) {
-			$selected = ' selected=\'selected\'';
-		}
-		else {
-			$selected = '';
-		}
+		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
 		if ($l == $herit) {
 			$ret .= "<option class='maj-debut' style='font-weight: bold;' value='herit'$selected>"
 				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
 		}
 		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
-	$ret .= "</select>\n";
-	$ret .= "<noscript><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></noscript>";
-	$ret .= "</form>";
-	return $ret;
+	return "<form action='"
+	  . $post
+	  . "' method='post' style='margin:0px; padding:0px;'>"
+	  . (!$cible ? '' : "<input type='hidden' name='url' value='".quote_amp($cible)."' />")
+	  . $texte
+	  . "<select name='$nom_select' "
+	  . (_DIR_RESTREINT ?
+	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :
+	     (($nom_select == 'var_lang_ecrire')  ?
+	      ("class='verdana1' style='background-color: " . $couleur_foncee
+	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
+	      "class='fondl'"))
+	  . " onchange=\"document.location.href='"
+	  . $postcomplet->geturl()
+	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
+	  . $ret
+	  . "</select>\n"
+	  . "<noscript><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></noscript>"
+	  . "</form>";
 }
 
 

@@ -24,7 +24,6 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $nom_email, $adresse_email
 	}
 }
 
-function choixsiegal($a1,$a2,$v,$f) {return ($a1 == $a2) ? $v : $f;}
 
 //
 // Retour a l'ecran du lien de confirmation d'une signature de petition.

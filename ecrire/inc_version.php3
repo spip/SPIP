@@ -1059,13 +1059,4 @@ function debut_entete($title, $entete='') {
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
 
-function http_script($script, $src='', $noscript='') {
-	return '<script type="text/javascript"'
-		. ($src ? " src=\"$src\"" : '')
-		. ">"
-		. ($script ? "<!--\n$script\n//-->" : '')
-		. "</script>\n"
-		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
-}
-
 ?>

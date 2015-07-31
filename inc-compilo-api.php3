@@ -72,7 +72,7 @@ class Champ {
 			// -> definira les pre et post-traitements obligatoires
 	// champs pour la production de code dependant du contexte
 	var $id_mere;    // pour TOTAL_BOUCLE hors du corps
-	var $document;   // pour embed et <img dans les textes
+	var $document;   // pour embed et img dans les textes
 }
 
 

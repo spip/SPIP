@@ -102,7 +102,7 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 				       'url' => $cible,
 				       'auth' => $auth,
 				       'mode' => $mode,
-				       'oubli' => (tester_mail() ? 'spip_pass.php3?mode=oubli_pass' : ''),
+				       'oubli' => (tester_mail() ? ' ' : ''),
 				       'echec_cookie' => ($echec_cookie ? ' ' : ''),
 				       'spip_lang_left' => $spip_lang_left,
 				       'message' => ($message ? ' ' : ''),
