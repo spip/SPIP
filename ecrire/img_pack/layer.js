@@ -235,22 +235,28 @@ function AjaxSqueezeNode(trig, noeud, f)
 }
 
 
+// Comme AjaxSqueeze, 
+// mais avec un cache sur le noeud et un cache sur la reponse
+// De plus, la fonction optionnelle n'a pas besoin de greffer la reponse.
+
 function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField);
-	if (!Field) return;
+	if (!Field) return true;
 
-	if (!myUrl) 
+	if (!myUrl) {
 		retour_id_url('', Field, jjscript);
-	else {
+		return true; // url vide, c'est un self complet
+	} else {
 	  var r = url_chargee[myUrl];
 	// disponible en cache ?
 	  if (r) {
 		retour_id_url(r, Field, jjscript);
+		return false; 
 	  } else {
 		var img = findObj_forcer('img_' + myField);
 		if (img) img.style.visibility = "visible";
-		AjaxSqueezeNode(myUrl,
+		return AjaxSqueezeNode(myUrl,
 			'',
 			function (r) {
 				if (img) img.style.visibility = "hidden";
