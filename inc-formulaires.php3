@@ -505,8 +505,8 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 		echo  "<input type=\"text\" class=\"forml\" name=\"email_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\" />\n";
 		echo  "<p><b>"._T('form_prop_sujet')."</b><br />";
 		echo  "<input type=\"text\" class=\"forml\" name=\"sujet_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\" /></p>\n";
-		echo  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
-		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" />";
+		echo  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></p>\n";
+		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" /></div>";
 		echo  "</div></form>";
 	}
 }
