@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  ------------------------------------------ */
 
 /* Typo pour les menus et la navigation */
-body, #navigation, .encart,.formulaire_spip {
+body, #navigation, .encart, .formulaire_spip {
 	font-family: Verdana, "Bitstream Vera Sans", Tahoma, Arial, sans-serif; }
 
 /* Typo pour le contenu */
@@ -146,9 +146,9 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 	font-weight: bold;
 }
 
-.rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
-.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { padding: 0.2em 0; text-align: left; }
-.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding: 0 0.7em; }
+#navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
+#navigation ul, .encart ul { padding: 0.2em 0; text-align: left; }
+#navigation li, .encart li { padding: 0 0.7em; color: red; }
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
@@ -334,7 +334,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 .formulaire_spip .forml {
 	width: 99%;
 	padding: 1px;
-	border: 1px solid;
+	border: 1px inset;
 	font-family: inherit;
 	font-size: inherit; }
 
