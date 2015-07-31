@@ -86,7 +86,7 @@ function urls_propres_creer_chaine_url($x) {
 
 	include_spip('action/editer_url');
 	if (!$url = url_nettoyer($objet['titre'],_URLS_PROPRES_MAX,_URLS_PROPRES_MIN,'-',_url_minuscules?'strtolower':''))
-		$url = $objet['type'].$objet['id_objet'];
+		$url = $objet['type'].','.$objet['id_objet'];
 
 	$x['data'] = $url;
 
