@@ -1880,6 +1880,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
 	echo "</a>";	
 	echo "</td>\n";
+	return $largeur;
 }
 
 
@@ -2129,8 +2130,13 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 	// Icones secondaires
 
+	global $browser_name;
+	$coeff_decalage = 0;
+	if ($browser_name=="MSIE")
+		$coeff_decalage = 1.0;
 	$decal=0;
-
+	$largitem_moy = 85;
+	$largeur_maxi_menu = $largeur-100;
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if ($rubrique == $page) {
 			$class = "visible_au_chargement";
@@ -2140,25 +2146,22 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 		$sousmenu= $detail->sousmenu;
 		if($sousmenu) {
-			$largitem = 85;
-			$offset = $decal;
-			$offset -= max(0,($offset+count($sousmenu)*$largitem-($largeur-100)));
-			$widthatt="";
-			if ($offset<0){
-				$widthatt="width:".($largeur-100).";";
-				$offset = 0;
-			}
-			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;$widthatt'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			//var_dump($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
+			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
+			if ($offset<0){	$offset = 0; }
+			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 			$width=0;
 			foreach($sousmenu as $souspage => $sousdetail) {
-				if ($width+$largitem>$largeur-100){echo "</tr><tr>\n";$width=0;}
+				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){echo "</tr><tr>\n";$width=0;}
 				if($souspage=='espacement') {
-					if ($width>0)
+					if ($width>0){
 						echo "<td class='separateur'></td>\n";
+						$largitem = 0;
+					}
 				} else {
-					icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
+					$largitem = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
 				}
-				$width+=$largitem;
+				$width+=$largitem+10;
 			}
 			echo "</tr></table></div></div>";
 		}
