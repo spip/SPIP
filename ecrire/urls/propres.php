@@ -24,17 +24,17 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
 Definissez ensuite dans ecrire/mes_options.php3 :
-	type_urls = 'propres';
+	< ?php $type_urls = 'propres'; ? >
 SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
 
 Variante 'propres2' :
-	type_urls = 'propres2';
+	< ?php $type_urls = 'propres2'; ? >
 ajoutera '.html' aux adresses generees : "Mon-titre-d-article.html"
 
-Variante 'qs' : ce systeme fonctionne en "Query-String", c'est-a-dire
-sans utilisation de .htaccess ; les adresses sont de la forme
+Variante 'qs' (experimentale) : ce systeme fonctionne en "Query-String",
+c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 "/?Mon-titre-d-article"
-	type_urls = 'qs';
+	< ?php $type_urls = 'qs'; ? >
 
 */
 
