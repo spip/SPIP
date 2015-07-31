@@ -187,8 +187,6 @@ $help_server = $home_server . '/aide';
 $tex_server = 'http://math.spip.org/tex.php';
 # MathML (pas pour l'instant: manque un bon convertisseur)
 // $mathml_server = 'http://arno.rezo.net/tex2mathml/latex.php';
-# Orthographe (serveurs multiples) [pas utilise pour l'instant]
-$ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
