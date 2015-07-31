@@ -23,14 +23,21 @@ if (http_last_modified(@filemtime("spip_style.php3"), time() + 24 * 3600))
 	@Header ("Content-Type: text/css; charset=iso-8859-1");
 
 	// parano XSS
-	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
-	list (,$couleur_claire,$couleur_foncee,$left,$right) = $regs;
+	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left", $regs);
+	list (,$couleur_claire,$couleur_foncee,$left) = $regs;
+
+	// Sommes-nous en rtl ou ltr ?
 	$ltr = ($left == 'left');
-	$rtl = ($right == 'left');
-	
-	if ($left == 'left') $_rtl = "";
-	else $_rtl = "_rtl";
-	
+	if ($ltr) {
+		$left = 'left';
+		$right = 'right';
+		$_rtl = '';
+	} else {
+		$left = 'right';
+		$right = 'left';
+		$_rtl = '_rtl';
+	}
+
 	// Envoyer la feuille de style
 	if (!isset($couleur_claire))
 		$couleur_claire = "#EDF3FE";
@@ -1282,18 +1289,21 @@ p.spip_note {
 }
 
 
-a.spip_in  {
+a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(<?php echo http_img_pack('spip_out.gif'), ')', $right; ?> center no-repeat;
-	padding-<?php echo $right; ?>: 10px;
+	background: url(<?php echo http_img_pack('spip_out.gif'), ') ', $right; ?> center no-repeat;
+	padding-$right: 10px;
 	border-bottom: 1px solid;
 }
+a.spip_url {
+}
+
+
 a.spip_note {
 	background-color:#eeeeee;
 }
-a.spip_url {}
 a.spip_glossaire:hover {text-decoration: underline overline;}
 
 .spip_recherche {

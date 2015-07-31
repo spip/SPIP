@@ -277,6 +277,56 @@ function echappe_retour_doublon($letexte, $les_echap, $source, &$doublons)
   return echappe_retour($letexte, $les_echap, $source);
 }
 
+//
+// Gerer les outils mb_string
+//
+function init_mb_string() {
+	static $mb;
+
+	// verifier que tout est present et que le charset est connu de mb_string
+	if (!$mb) {
+		if (function_exists('mb_internal_encoding')
+		AND function_exists('mb_detect_order')
+		AND function_exists('mb_substr')
+		AND function_exists('mb_strlen')
+		AND mb_detect_order(lire_meta('charset'))
+		) {
+			mb_internal_encoding('utf-8');
+			$mb = 1;
+		} else
+			$mb = -1;
+	}
+
+	return ($mb == 1);
+}
+
+function spip_substr($c, $start=0, $end='') {
+
+	if (init_mb_string()) {
+		if ($end)
+			return mb_substr($c, $start, $end);
+		else
+			return mb_substr($c, $start);
+	}
+
+	// methode substr normale
+	else {
+		if ($end)
+			return substr($c, $start, $end);
+		else
+			return substr($c, $start);
+	}
+}
+
+function spip_strlen($c) {
+	if (init_mb_string())
+		return mb_strlen($c);
+	else
+		return strlen($c);
+}
+// fin mb_string
+
+
 function couper($texte, $taille=50) {
 	$texte = substr($texte, 0, 400 + 2*$taille); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
 
@@ -313,17 +363,17 @@ function couper($texte, $taille=50) {
 	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 
 	// couper au mot precedent
-	$long = substr($texte, 0, max($taille-4,1));
+	$long = spip_substr($texte, 0, max($taille-4,1));
 	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
 	$points = '&nbsp;(...)';
 
 	// trop court ? ne pas faire de (...)
-	if (strlen($court) < max(0.75 * $taille,2)) {
+	if (spip_strlen($court) < max(0.75 * $taille,2)) {
 		$points = '';
-		$long = ereg_replace("&#?[a-z0-9]*;?$", "", substr($texte, 0, $taille));
+		$long = spip_substr($texte, 0, $taille);
 		$texte = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $long);
 		// encore trop court ? couper au caractere
-		if (strlen($texte) < 0.75 * $taille)
+		if (spip_strlen($texte) < 0.75 * $taille)
 			$texte = $long;
 	} else
 		$texte = $court;
@@ -333,6 +383,9 @@ function couper($texte, $taille=50) {
 
 	// remettre les paragraphes
 	$texte = ereg_replace("\r+", "\n\n", $texte);
+
+	// supprimer l'eventuelle entite finale mal coupee
+	$texte = preg_replace('/&#?[a-z0-9]*;?$/', '', $texte);
 
 	return trim($texte).$points;
 }
@@ -501,7 +554,6 @@ function typo_doublon(&$doublons, $letexte)
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
-
 	$lien_texte = $regs[1];
 
 	$lien_url = entites_html(trim($regs[3]));
