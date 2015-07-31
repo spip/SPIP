@@ -21,8 +21,7 @@ function exec_admin_tech_dist()
 	if (!autoriser('sauvegarder')){
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
@@ -209,6 +208,7 @@ function exec_admin_tech_dist()
 	echo "<br />";
 
 	echo fin_gauche(), fin_page();
+	}
 }
 
 // http://doc.spip.org/@liste_sauvegardes

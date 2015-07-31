@@ -25,8 +25,7 @@ function exec_statistiques_referers_dist()
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
@@ -68,6 +67,6 @@ function exec_statistiques_referers_dist()
 	echo "</div><br />";
 
 	echo fin_gauche(), fin_page();
+	}
 }
-
 ?>

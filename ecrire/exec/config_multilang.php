@@ -22,8 +22,7 @@ function exec_config_multilang_dist()
 	if (!autoriser('configurer', 'multilang')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$config = charger_fonction('config', 'inc');
 	$config();
@@ -55,5 +54,6 @@ echo debut_droite('', true);
 	}
 
 	echo fin_gauche(), fin_page();
+	}
 }
 ?>

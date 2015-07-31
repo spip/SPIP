@@ -10,12 +10,11 @@ function exec_info_plugin_dist() {
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+		$plug = _request('plug');
+		$info = plugin_get_infos($plug);
+		ajax_retour(affiche_bloc_plugin($plug, $info));
 	}
-
-	$plug = _request('plug');
-	$info = plugin_get_infos($plug);
-	ajax_retour(affiche_bloc_plugin($plug, $info));
 }
 
 ?>

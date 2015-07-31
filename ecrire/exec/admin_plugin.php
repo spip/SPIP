@@ -25,8 +25,7 @@ function exec_admin_plugin_dist($retour='') {
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 	
 	$format = '';
 	if (_request('format')!==NULL)
@@ -144,8 +143,7 @@ function exec_admin_plugin_dist($retour='') {
 	}
 
 	echo fin_gauche(), fin_page();
-
-
+	}
 }
 
 // http://doc.spip.org/@affiche_les_plugins

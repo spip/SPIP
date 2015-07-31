@@ -20,8 +20,7 @@ function exec_config_fonctions_dist()
 	if (!autoriser('configurer', 'fonctions')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$config = charger_fonction('config', 'inc');
 	$config();
@@ -74,6 +73,7 @@ function exec_config_fonctions_dist()
 		echo ajax_action_post('config_fonctions', '', 'config_fonctions', '', $res);
 
 	echo fin_gauche(), fin_page();
+	}
 }
 
 ?>
