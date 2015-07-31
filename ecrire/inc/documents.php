@@ -49,7 +49,21 @@ function get_spip_doc($fichier) {
 // http://doc.spip.org/@contenu_document
 function contenu_document($arg)
 {
-	return spip_file_get_contents(get_spip_doc($arg));
+	if (is_numeric($arg)) {
+		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($arg));
+		if (!$r) return '';
+		$f = $r['fichier'];
+		$f = ($r['distant'] =='oui') ? _DIR_RACINE . copie_locale($f) : get_spip_doc($f);
+	}
+	else {
+		if (!@file_exists($f=$arg)){
+			if (!$f = copie_locale($f))
+				return '';
+			$f = _DIR_RACINE . $f;
+		}
+	}
+
+	return spip_file_get_contents($f);
 }
 
 // http://doc.spip.org/@generer_url_document_dist
