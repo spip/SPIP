@@ -1,9 +1,11 @@
-[
+<h3 class='spip'><:pass_mot_oublie:></h3>
+<div class='spip_serif'>[
 (#ENV*{message})
 ][
 (#ENV*{message}|?{'',' '})
+
 <form id="oubli_form" action='spip_pass.php3' method='post'>
-	<fieldset style="border: none;">
+	<fieldset class='spip_sanscadre'>
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type='hidden' name="p" value="(#ENV{p})" />
 	<label>
@@ -13,25 +15,24 @@
 	(#ENV{p}|?{'',' '})
 	<label>
 	  <:pass_indiquez_cidessous:>
-	  <input type="texte" name="oubli" />
+	  <input type="text" name="oubli" />
 	</label>]
 	<input type="submit" class="fondl" value="<:pass_ok:>" />
       </fieldset>
 </form>
 ]
-<br />
+</div>
 <div align="right">
 <script type="text/javascript"><!--
 [
 (#ENV*{message}|?{'',' '})
 document.oubli_form.oubli.focus()
 ]
-document.write("<a href='")
+document.write("<a  style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>
 <noscript>
-	&#91;<a href='./'><:pass_retour_public:></a>&#93;
+	&#91;<a style='color: #e86519' href='./'><:pass_retour_public:></a>&#93;
 </noscript>
 </div>
-<br />

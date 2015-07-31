@@ -12,7 +12,7 @@
 
 
 include ("ecrire/inc_version.php3");
-include_ecrire("inc_presentation.php3"); # pour install_debut
+include_ecrire("inc_presentation.php3"); # pour debut_entete
 include_ecrire("inc_session.php3"); # pour creer_uniq_id
 include_ecrire("inc_mail.php3"); # pour envoyer_mail
 include_ecrire("inc_acces.php3"); # pour generer_htpass
@@ -83,7 +83,9 @@ if ($p = addslashes($p)) {
  return array('formulaire_oubli', 0, array('p' => $p, 'message' => $message));
 }
 
-install_debut_html(_T('pass_mot_oublie'));
+echo debut_entete(_T('pass_mot_oublie')),
+  '<link rel="stylesheet" type="text/css" href="spip_style.css">',
+  "\n</head><body>";
 inclure_balise_dynamique(formulaire_oubli_dyn($p, $oubli));
-install_fin_html();
+echo "</body></html>";
 ?>
