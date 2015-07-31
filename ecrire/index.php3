@@ -141,11 +141,13 @@ if ($spip_display != 4) {
 // Afficher les raccourcis : boutons de creation d'article et de breve, etc.
 //
 
-debut_raccourcis();
 
 //
 // Afficher les boutons de creation d'article et de breve
 //
+
+/*
+debut_raccourcis();
 
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
@@ -168,7 +170,7 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 }
 
 
-/* La nouvelle interface rend ces raccourcis inutiles
+// La nouvelle interface rend ces raccourcis inutiles
 if ($options == "avancees") {
 	echo "<p>";
 	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
@@ -189,11 +191,14 @@ else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 	echo "<p>";
 	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
 }
-*/
+
 
 fin_raccourcis();
-
+*/
+	creer_colonne_droite();
 	echo "<div>&nbsp;</div>";	
+
+
 	
 	//
 	// Annonces
@@ -293,27 +298,6 @@ if ($meta["debut_restauration"]) {
 
 
 //
-// Modification du cookie
-//
-
-if ($connect_statut == "0minirezo" AND $spip_display != 4) {
-	if (!$cookie_admin) {
-		echo "<table width=100%><tr width=100%>";
-		echo "<td width=100%>";
-		echo _T('info_activer_cookie');
-		echo aide ("cookie");
-		echo "</td>";
-		echo "<td width=10><img src='img_pack/rien.gif' width=10 alt='' />";
-		echo "</td>";
-		echo "<td width='250'>";
-		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
-		echo "</td></tr></table>";
-		echo "<p><hr><p>";
-	}
-}
-
-
-//
 // Articles post-dates en attente de publication
 //
 
@@ -338,7 +322,8 @@ $vos_articles = afficher_articles(afficher_plus('articles_page.php3')._T('info_e
 
 if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos_articles,',').')';
 
-
+echo "<div>&nbsp;</div>";
+echo debut_cadre_trait_couleur();
 
 //
 // Raccourcis pour malvoyants
@@ -365,8 +350,71 @@ if ($spip_display == 4) {
 		icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 	}
 	fin_raccourcis();
+} else {
+
+		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+		$result = spip_query($query);
+		$gadget = "";
+		
+		if (spip_num_rows($result) > 0) {
+			$id_rubrique = $GLOBALS['id_rubrique'];
+			if ($id_rubrique > 0) {
+				$dans_rub = "&id_rubrique=$id_rubrique";
+				$dans_parent = "&id_parent=$id_rubrique";
+			}
+			$gadget = "<table width='95%'><tr>";
+			if ($connect_statut == "0minirezo") {
+				$gadget .= "<td>";
+				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+				$gadget .= "</td>";
+			}
+			
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
+			$gadget .= "</td>";
+			
+			$activer_breves = lire_meta("activer_breves");
+			if ($activer_breves != "non") {
+				$gadget .= "<td>";
+				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif", false);
+				$gadget .= "</td>";
+			}
+			
+			if (lire_meta("activer_sites") == 'oui') {
+				if ($connect_statut == '0minirezo' OR lire_meta("proposer_sites") > 0) {
+					$gadget .= "<td>";
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif", false);
+					$gadget .= "</td>";
+				}
+			}
+			
+		}
+
+		$gadget .= "</tr></table>";
+
+	echo $gadget;
 }
 
+//
+// Modification du cookie
+//
+
+if ($connect_statut == "0minirezo" AND $spip_display != 4) {
+	if (!$cookie_admin) {
+		echo "<div>&nbsp;</div>";
+		echo "<table width=95%><tr>";
+		echo "<td width=100%>";
+		echo _T('info_activer_cookie');
+		echo aide ("cookie");
+		echo "</td>";
+		echo "<td width=10><img src='img_pack/rien.gif' width=10 alt='' />";
+		echo "</td>";
+		echo "<td width='250'>";
+		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+		echo "</td></tr></table>";
+	}
+}
+		echo fin_cadre_trait_couleur();
 
 
 
