@@ -1247,11 +1247,11 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_new' => '&Eacute;crire une nouvelle traduction de cet article',
 
 // U
-'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio',
-'upload_info_mode_image' => 'Retirer cette image du portfolio',
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
 'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:',
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio',
+'upload_info_mode_image' => 'Retirer cette image du portfolio',
 'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
 'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction',
 'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
