@@ -1319,7 +1319,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else $largeur = 750;
 	
 	// nettoyer le lien global
-	$clean_link->delVar('set_lang');
+	$clean_link->delVar('var_lang');
 	$clean_link->delVar('set_options');
 	$clean_link->delVar('set_couleur');
 	$clean_link->delVar('set_disp');

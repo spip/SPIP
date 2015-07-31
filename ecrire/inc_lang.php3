@@ -225,12 +225,13 @@ function traduire_nom_langue($lang) {
 //
 function menu_langues() {
 		$lien = $GLOBALS['clean_link'];
-		$lien->delVar('set_lang');
+		$lien->delVar('var_lang');
 		$lien = $lien->getUrl();
-		$amp = (strpos($lien,'?') ? '&' : '?');
+
+		$amp = (strpos(' '.$lien,'?') ? '&' : '?');
 
 		$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
-		$ret .= "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."set_lang='+this.options[this.selectedIndex].value\">\n";
+		$ret .= "\n<select name='var_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."var_lang='+this.options[this.selectedIndex].value\">\n";
 		$langues = explode(',', $GLOBALS['all_langs']);
 		while (list(,$l) = each ($langues)) {
 			if ($l == $GLOBALS['spip_lang']) $selected = " selected";
@@ -246,10 +247,10 @@ function menu_langues() {
 
 // menu dans l'espace public
 function gerer_menu_langues() {
-	global $set_lang;
-	if ($set_lang) {
-		if (changer_langue($set_lang)) {
-			spip_setcookie('spip_lang', $set_lang, time() + 365 * 24 * 3600);
+	global $var_lang;
+	if ($var_lang) {
+		if (changer_langue($var_lang)) {
+			spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
 
 		}
 	}
@@ -282,6 +283,7 @@ function init_langues() {
 				$all_langs[] = $regs[1];
 		}
 		closedir($d);
+		sort($all_langs);
 		$GLOBALS['all_langs'] = join(',', $all_langs);
 		ecrire_meta('langues_proposees', $GLOBALS['all_langs']);
 	} else
