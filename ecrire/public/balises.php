@@ -1283,10 +1283,6 @@ function balise_MODELE_dist($p) {
 	// recupere le premier argument, qui est obligatoirement le nom du modele
 	if (!is_array($p->param))
 		die("erreur de compilation #MODELE{nom du modele}");
-	$modele = array_shift($p->param);
-	$nom = strtolower($modele[1][0]->texte);
-	if (!$nom)
-		die("erreur de compilation #MODELE{nom du modele}");
 
 	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
 	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
@@ -1296,6 +1292,10 @@ function balise_MODELE_dist($p) {
 			$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
 		}
 	}
+	$modele = array_shift($p->param);
+	$nom = strtolower($modele[1][0]->texte);
+	if (!$nom)
+		die("erreur de compilation #MODELE{nom du modele}");
 
 	$champ = phraser_arguments_inclure($p, true); 
 
