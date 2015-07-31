@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -798,6 +798,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'jour_non_connu_nc' => 'unbekannt',
 
 // L
+'label_bando_outils' => 'Barre d\'outils', # NEW
+'label_bando_outils_afficher' => 'Afficher les outils', # NEW
+'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Ihre Sprache w&auml;hlen',
 'label_slogan_site' => 'Slogan der Website',
 'label_taille_ecran' => 'Bildschirmbreite',
