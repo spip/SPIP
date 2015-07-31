@@ -75,10 +75,32 @@ else {
 
 	afficher_page_si_demande_admin ('page', $page['texte'], $page['cache']);
 
+	// Recuperer la resultat dans un buffer
+	// a la fois pour le content-length et le var_recherche
+	if ($flag_ob)
+		ob_start();
+
+	// envoyer la page
 	if ($page['process_ins'] == 'php')
 		eval('?' . '>' . $page['texte']); // page 'php'
 	else
 		echo $page['texte']; // page tout 'html'
+
+	// surlignement des mots recherches
+	unset ($envoi);
+	if ($flag_ob) {
+		$envoi = ob_get_clean();
+		if ($var_recherche AND $flag_pcre AND !$flag_preserver) {
+			include_ecrire("inc_surligne.php3");
+			$envoi = surligner_mots($envoi, $var_recherche);
+		}
+	}
+
+	if ($envoi) {
+		@header("Content-Length: ".strlen($envoi));
+		@header("Connection: close");
+		echo $envoi;
+	}
 
 	terminer_public_global($use_cache, $page['cache']);
 }

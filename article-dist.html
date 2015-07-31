@@ -126,10 +126,14 @@
 <div class="contenu" id="principal">
 
 <div class="cartouche">
+#DEBUT_SURLIGNE
+
 [(#LOGO_ARTICLE|left)]
 [<div class="surtitre">(#SURTITRE)</div>]
 <h1 class="titre-texte">#TITRE</h1>
 [<div class="surtitre">(#SOUSTITRE)</div>]
+
+#FIN_SURLIGNE
 [(#DATE|nom_jour)] [(#DATE|affdate).]
 </div>
 <div style="line-height: 0em">&nbsp;</div><!-- Bug Mozilla http://bugzilla.mozilla.org/show_bug.cgi?id=200510 -->
@@ -187,12 +191,14 @@
 
 	</div>
 
+#DEBUT_SURLIGNE
 
 [<div class="chapo">(#CHAPO)</div>]
 [<div class="texte">(#TEXTE)</div>]
 [<div class="ps">(#PS)</div>]
 [<div class="notes">(#NOTES)</div>]
 
+#FIN_SURLIGNE
 
 <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons} {"<br>"}>
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
