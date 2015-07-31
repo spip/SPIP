@@ -847,17 +847,11 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE CREATION DE L'ARTICLE";
-		echo " :</B></FONT></TR>";
-
-		echo "<TR><TD ALIGN='center'>";
-		echo "<B>";
-		echo affdate($date);
-		echo aide ("artdate");
-		echo "</TD></TR></TABLE>";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF' face='verdana,arialn,helvetica,sans-serif'>DATE DE CREATION DE L'ARTICLE";
+		echo " : <B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TR>";
+		echo "</TABLE>";
 	
 	}
-	
 	
 	if (($options == 'avancees' AND $articles_redac != "non") OR ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00")) {
 		echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
