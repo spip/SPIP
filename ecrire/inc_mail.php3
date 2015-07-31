@@ -37,7 +37,7 @@ function tester_mail() {
 }
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
-	global $hebergeur, $queue_mails, $flag_wordwrap;
+	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
 
 	if (!$from) $from = $email;
 	if (! email_valide ($email) ) return false;
@@ -48,6 +48,11 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		"Content-Type: text/plain; charset=iso-8859-1\n".
 		"Content-Transfer-Encoding: 8bit\n$headers";
 	if ($flag_wordwrap) $texte = wordwrap($texte);
+
+	if ($os_serveur == 'windows') {
+		$texte = ereg_replace ("\r*\n","\r\n", $texte);
+		$headers = ereg_replace ("\r*\n","\r\n", $headers);
+	}
 
 	switch($hebergeur) {
 	case 'lycos':
