@@ -663,6 +663,7 @@ function traiter_tableau($bloc) {
 	$lignes = array();
 	$debut_table = $summary = '';
 	$l = 0;
+	$numeric = true;
 
 	// Traiter chaque ligne
 	foreach ($regs[1] as $ligne) {
@@ -729,6 +730,7 @@ function traiter_tableau($bloc) {
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
 	$html = '';
+
 	for($l=count($lignes)-1; $l>=0; $l--) {
 		$cols= $lignes[$l];
 		$colspan=1;
@@ -751,15 +753,17 @@ function traiter_tableau($bloc) {
 				$attr.= " rowspan='$rowspans[$c]'";
 				$rowspans[$c]=1;
 			  }
-			  $ligne= '<td'.$attr.'>'.$cols[$c].'</td>'.$ligne;
+			  $ligne= "\n<td".$attr.'>'.$cols[$c].'</td>'.$ligne;
 			}
+			$numeric &= (preg_match('/[{<]/',$cols[$c][0]) || is_numeric($cols[$c]));
 		}
 
 		// ligne complete
 		$class = 'row_'.alterner($l+1, 'even', 'odd');
 		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
 	}
-
+	if ($numeric) 
+		$html = str_replace("\n<td", "\n<td style='text-align: right'", $html);
 	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
 		. "<tbody>\n"
