@@ -14,12 +14,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-	/* a prendre en compte dans l'appel du formulaire
-	if (! (($GLOBALS['meta']['multi_articles'] == 'oui')
-		OR (($GLOBALS['meta']['multi_rubriques'] == 'oui')
-			AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) )
-		return '';
-  */
 
 /**
  * Charger les donnes de #FORMULAIRE_TRADUIRE
@@ -41,7 +35,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	if (!isset($valeurs['langue']))
 		return false;
 
-	$valeurs['editable'] = autoriser('modifier',$objet,$id_objet);
+	$valeurs['editable'] = autoriser('changerlangue',$objet,$id_objet);
 	$valeurs['_langues'] = '';
 	$langue_parent = '';
 	if (isset($valeurs['id_rubrique'])){
@@ -52,7 +46,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	}
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
-	if ($valeurs['editable'] AND autoriser('changerlangue',$objet,$id_objet)){
+	if ($valeurs['editable']){
 		$valeurs['_langues'] = liste_options_langues('changer_lang', $valeurs['langue'], $langue_parent);
 	}
 	$valeurs['langue_parent'] = $langue_parent;
@@ -65,6 +59,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	$valeurs['_traduire'] = '';
 	if (isset($valeurs['id_trad'])) {
 		$valeurs['_traduire'] = ($traduire?' ':'');
+		$valeurs['_vue_traductions'] = "prive/objets/liste/" . (trouver_fond($f=table_objet($objet)."-trad","prive/objets/liste")?$f:"objets-trad");
 		// pour afficher la liste des trad sur la base de l'id_trad en base
 		// independamment d'une saisie en cours sur id_trad
 		$valeurs['_lister_id_trad'] = $valeurs['id_trad'];
@@ -112,7 +107,7 @@ function formulaires_traduire_verifier_dist($objet, $id_objet, $retour='', $trad
  */
 function formulaires_traduire_traiter_dist($objet, $id_objet, $retour='', $traduire = true){
 	$res = array();
-	if (!_request('annuler')) {
+	if (!_request('annuler') AND autoriser('changerlangue',$objet,$id_objet)) {
 		// action/editer_xxx doit traiter la modif de changer_lang
 		$res = formulaires_editer_objet_traiter($objet,$id_objet,0,0,$retour);
 

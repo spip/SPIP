@@ -26,8 +26,7 @@
 			[(#ENV{_traduire}|oui)
 				[(#ENV{_lister_id_trad}|oui)
 				<li class="fieldset voir_traductions">
-					[(#SET{vue,[prive/objets/liste/(#ENV{_objet}|table_objet)-trad]})]
-					<INCLURE{fond=#GET{vue},id_trad=#ENV{_lister_id_trad},titre=<:titre_liste_traductions:>,env,ajax} />
+					<INCLURE{fond=#ENV**{_vue_traductions},id_trad=#ENV{_lister_id_trad},titre=<:info_traductions:>,objet=#ENV{_objet},env,ajax} />
 					[(#ENV{editable})
 					<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
 						<input type="submit" class="submit supprimer_trad" name="supprimer_trad" value="<:trad_delier|attribut_html:>" />

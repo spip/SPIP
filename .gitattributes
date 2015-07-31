@@ -618,6 +618,7 @@ prive/objets/editer/logo.html -text
 prive/objets/editer/objet.html -text
 prive/objets/editer/rediriger_article.html -text
 prive/objets/editer/rubrique.html -text
+prive/objets/editer/traductions.html -text
 prive/objets/infos/article.html -text
 prive/objets/infos/article_fonctions.php -text
 prive/objets/infos/auteur.html -text
@@ -632,6 +633,8 @@ prive/objets/liste/auteurs_lies.html -text
 prive/objets/liste/auteurs_lies_fonctions.php -text
 prive/objets/liste/objets-en-edition.html -text
 prive/objets/liste/objets-en-edition_fonctions.php -text
+prive/objets/liste/objets-trad.html -text
+prive/objets/liste/objets-trad_fonctions.php -text
 prive/objets/liste/rubriques.html -text
 prive/objets/liste/visiteurs.html -text
 prive/objets/liste/visiteurs_fonctions.php -text

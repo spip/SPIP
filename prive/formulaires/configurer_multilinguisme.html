@@ -3,75 +3,93 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<p>
-	<:texte_multilinguisme:>
-	</p>
+	<p><:texte_multilinguisme:></p>
+	<p><:texte_multilinguisme_trad:></p>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="multi_objets&#91;&#93;" value="" />
+		<input type="hidden" name="gerer_trad_objets&#91;&#93;" value="" />
 	  <ul>
-	  	#SET{name,multi_articles}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}"><:info_multi_articles:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
-					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
-					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
-				</div>
-	    </li>
-	  	#SET{name,multi_rubriques}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}"><:info_multi_rubriques:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
-					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
-					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
-				</div>
-	    </li>
-			[(#ENV{multi_rubriques}|=={oui}|oui)
-	  	#SET{name,multi_secteurs}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}"><:info_multi_secteurs:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
-					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
-					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
-				</div>
-	    </li>
+			<li class="fieldset">
+				<fieldset>
+					#SET{objets,#VAL{rubrique}|info_objet{texte_objets}|_T}
+					#SET{val,spip_rubriques}
+					<legend>#GET{objets}</legend>
+					<ul>
+						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_multi_objets{objets=#GET{objets}}:></label>
+							</div>
+						</li>
+						[(#GET{val}|in_any{#ENV{multi_objets}}|oui)
+						#SET{name,multi_secteurs}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
+								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:info_multi_secteurs:></label>
+							</div>
+						</li>
+						[(#VAL{spip_rubriques}|table_supporte_trad|oui)
+						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_gerer_trad_objets{objets=#GET{objets}}:></label>
+							</div>
+						</li>
+						]
+						]
+					</ul>
+				</fieldset>
+			</li>
+			]
+			<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}{cle!=spip_rubriques}{cle!=spip_auteurs}{si #ENV{editable}}>[(#CLE|table_supporte_lang|et{#VALEUR{type}|info_objet{editable}})
+			#SET{val,#CLE}
+			<li class="fieldset">
+				<fieldset>
+					#SET{objets,#VALEUR{texte_objets}|_T}
+					<legend>#GET{objets}</legend>
+					<ul>
+						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_multi_objets{objets=#GET{objets}}:></label>
+							</div>
+						</li>
+						[(#GET{val}|in_any{#ENV{#GET{name}}}|et{#CLE|table_supporte_trad})
+						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
+								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_gerer_trad_objets{objets=#GET{objets}}:></label>
+							</div>
+						</li>
+						]
+					</ul>
+				</fieldset>
+			</li>]</BOUCLE_objets>
+			[(#ENV{editable})
+
+			[<li class="fieldset">
+				<fieldset>
+					<legend><:icone_gestion_langues:></legend>
+					<p><:info_multi_langues_choisies:></p>
+					(#ENV**{_langues,''})
+					<p><:info_multi_langues_soulignees:></p>
+				</fieldset>
+			</li>
 			]
 		</ul>
-		[(#ENV{multi_rubriques}|=={oui}|ou{#ENV{multi_articles}|=={oui}}|oui)
-		<p><:texte_multilinguisme_trad:></p>
-		<ul>
-			#SET{name,gerer_trad}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}"><:info_gerer_trad:></label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
-					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
-					&nbsp;&nbsp;
-					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
-					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
-				</div>
-			</li>
-	  </ul>
-		]
-		[
-		<p><:info_multi_langues_choisies:></p>
-		(#ENV**{_langues,''})
-		<p><:info_multi_langues_soulignees:></p>
-		]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

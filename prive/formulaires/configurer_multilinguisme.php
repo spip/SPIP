@@ -13,14 +13,14 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_multilinguisme_charger_dist(){
-	foreach(array('multi_articles','multi_rubriques','multi_secteurs','gerer_trad') as $m)
-		$valeurs[$m] = $GLOBALS['meta'][$m];
+	$valeurs['multi_secteurs'] = $GLOBALS['meta']['multi_secteurs'];
+	foreach(array('multi_objets','gerer_trad_objets') as $m)
+		$valeurs[$m] = explode(',',isset($GLOBALS['meta'][$m])?$GLOBALS['meta'][$m]:'');
 
-	if ($GLOBALS['meta']['multi_articles'] == "oui"
-	  OR $GLOBALS['meta']['multi_rubriques'] == "oui"
+	if (count($valeurs['multi_objet'])
 	  OR count(explode(',',$GLOBALS['meta']['langues_utilisees'])) > 1) {
 
-		$selection = (is_null(_request('multi_articles'))?explode(',', $GLOBALS['meta']['langues_multilingue']):_request('langues_auth'));
+		$selection = (is_null(_request('multi_objets'))?explode(',', $GLOBALS['meta']['langues_multilingue']):_request('langues_auth'));
 		$valeurs['_langues'] = saisie_langues_utiles('langues_auth',$selection?$selection:array());
 	}
 
@@ -30,9 +30,13 @@ function formulaires_configurer_multilinguisme_charger_dist(){
 
 function formulaires_configurer_multilinguisme_traiter_dist(){
 	$res = array('editable'=>true);
-	foreach(array('multi_articles','multi_rubriques','multi_secteurs','gerer_trad') as $m)
+	foreach(array('multi_secteurs') as $m)
 		if (!is_null($v=_request($m)))
 			ecrire_meta($m, $v=='oui'?'oui':'non');
+	foreach(array('multi_objets','gerer_trad_objets') as $m)
+		if (!is_null($v=_request($m)))
+			// join et enlever la valeur vide ''
+			ecrire_meta($m, implode(',',array_diff($v,array(''))));
 
 	if ($i = _request('langues_auth') AND is_array($i)) {
 		$i = array_unique(array_merge($i,explode(',',$GLOBALS['meta']['langues_utilisees'])));
@@ -41,6 +45,33 @@ function formulaires_configurer_multilinguisme_traiter_dist(){
 	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;
 }
+
+/**
+ * Tester si une table supporte les langues (champ lang)
+ * @param string $table_sql
+ * @return string
+ */
+function table_supporte_lang($table_sql){
+	$trouver_table = charger_fonction('trouver_table','base');
+	$desc = $trouver_table($table_sql);
+	if (!$desc OR !isset($desc['field']['lang']))
+		return '';
+	return ' ';
+}
+
+/**
+ * Tester si une table supporte les traductions (champ id_trad)
+ * @param string $table_sql
+ * @return string
+ */
+function table_supporte_trad($table_sql){
+	$trouver_table = charger_fonction('trouver_table','base');
+	$desc = $trouver_table($table_sql);
+	if (!$desc OR !isset($desc['field']['id_trad']))
+		return '';
+	return ' ';
+}
+
 
 function saisie_langues_utiles($name, $selection) {
 	include_spip('inc/lang_liste');

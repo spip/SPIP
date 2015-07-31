@@ -300,4 +300,20 @@ function maj_auteurs_16428 () {
 	}
 }
 
+//TODO : upgrades a activer
+/*
+$GLOBALS['maj'][17311] = array(
+	array('ecrire_meta',"multi_objets",implode(',',
+				 array_diff(
+					 array($GLOBALS['meta']['multi_rubriques']=='oui'?'spip_rubriques':'',$GLOBALS['meta']['multi_articles']=='oui'?'spip_articles':''),
+					 array('')
+				 ))),
+	array('ecrire_meta',"gerer_trad_objets",implode(',',
+				 array_diff(
+					 array($GLOBALS['meta']['gerer_trad']=='oui'?'spip_articles':''),
+					 array('')
+				 ))),
+);
+*/
+
 ?>
