@@ -577,6 +577,13 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	return $restreint[$id_auteur] = $rubriques;
 }
 
+// Autoriser a modifier l'URL d'un objet (cf. action=redirect)
+// http://doc.spip.org/@autoriser_modifierurl_dist
+function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('modifier', $type, $id, $qui, $opt);
+}
+
+
 // Deux fonctions sans surprise pour permettre les tests
 // Dire toujours OK
 // http://doc.spip.org/@autoriser_ok_dist

@@ -261,6 +261,7 @@ $spip_pipeline = array(
 	'calculer_rubriques' => '',
 	'autoriser' => '',
 	'notifications' => '',
+	'creer_chaine_url' => '|creer_chaine_url',
 	'rechercher_liste_des_champs' => '' # inc/recherche; pas stabilise !
 );
 
