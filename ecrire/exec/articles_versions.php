@@ -164,8 +164,27 @@ debut_cadre_relief();
 
 $result = spip_query("SELECT id_version, titre_version, date, id_auteur	FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC");
 
+// s'il y en a trop on en zappe (pagination a la va-vite)
+$zap = (spip_num_rows($result) > 50);
+$zaps = '<li>...</li>';
+$zapn = 0;
+
 echo "<ul class='verdana3'>";
 while ($row = spip_fetch_array($result)) {
+
+	// points de pagination
+	if ($zap
+	AND $zapn++>10
+	AND abs($id_version - $row['id_version']) > 20) {
+		echo $zaps;
+		$zaps = '';
+		if ($id_version > $row['id_version']) {
+			echo '<li>...</li>';
+			break;
+		}
+		continue;
+	}
+
 	echo "<li>\n";
 	$date = affdate_heure($row['date']);
 	$version_aff = $row['id_version'];
