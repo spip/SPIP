@@ -126,7 +126,8 @@ define('_TRANCHES', 10);
 //
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
-if (!_request('reinstall')
+if ($exec!='install'
+AND !_request('reinstall')
 AND !_request('var_ajaxcharset')
 AND isset($GLOBALS['meta']['version_installee'])
 AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
