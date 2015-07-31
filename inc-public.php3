@@ -1,16 +1,8 @@
 <?php
 
 if (!defined("_INC_PUBLIC")) {
-	$t = microtime();
-
  	define("_INC_PUBLIC", "1");
 	include("inc-public-global.php3");
-
-	$tt = microtime();
-	$t = explode(" ", $t);
-	$tt = explode(" ", $tt);
-	$dt = ($tt[1] + (float) $tt[0]) - ($t[1] + (float) $t[0]);
-	echo "resultat en $dt secondes.<p>";
 }
 else {
 	$fichier_requete = $fond;
