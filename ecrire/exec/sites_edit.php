@@ -75,7 +75,7 @@ function exec_sites_edit_dist()
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n<tr>";
 
 	if ($new != 'oui') {
-		echo "<td>";
+		echo "<td><br /><br />";
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
 		echo "</td>";
 		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";

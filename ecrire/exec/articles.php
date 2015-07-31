@@ -194,7 +194,7 @@ $(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
 	
 	$documenter = charger_fonction('documenter', 'inc');
 
-	return "<div id='portfolio'>" . $documenter($id, 'article', 'portfolio', $flag_editable) . "</div>"
+	return "<div id='portfolio'>" . $documenter($id, 'article', 'portfolio', $flag_editable) . "</div><br />"
 	. "<div id='documents'>" . $documenter($id, 'article', 'documents', $flag_editable) . "</div>"
 	. $res;
 }
