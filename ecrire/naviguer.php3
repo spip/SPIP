@@ -13,7 +13,7 @@ $flag_mots = lire_meta("articles_mots");
 
 
 function enfant($collection){
-	global $les_enfants;
+	global $les_enfants, $couleur_foncee;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 	
@@ -37,7 +37,7 @@ function enfant($collection){
 		if  (acces_restreint_rubrique($id_rubrique)){
 			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='red'>".typo($titre)."</font></A></B>";
 		}else{
-			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</A></B>";
+			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		}
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
@@ -224,13 +224,15 @@ debut_page($titre_page, "documents", "rubriques");
 
 debut_grand_cadre();
 
-afficher_parents($id_parent);
-$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+if ($coll  > 0) {
+	afficher_parents($id_parent);
+	$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><b><font color='$couleur_foncee'>RACINE DU SITE</font></b></A> ".aide ("rubhier")."<BR>".$parents;
 
-$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
-$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+	$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+	$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
 
-echo "$parents";
+	echo "$parents";
+}
 
 fin_grand_cadre();
 
