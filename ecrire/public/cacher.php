@@ -252,7 +252,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // - page qui est le tableau decrivant la page, si le cache la contenait
 // - lastmodifed qui vaut la date de derniere modif du fichier.
 
-function public_utiliser_cache_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
+function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
 	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);
 	// cas ignorant le cache car complement dynamique
