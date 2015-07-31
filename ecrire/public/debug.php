@@ -508,7 +508,7 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
 		$req = $tout['requete'][$objet];
 		if (function_exists('traite_query'))
-			$req = traite_query($req);
+		  $req = traite_query($req,'',$GLOBALS['table_prefix']);
 		$res .= ancre_texte($req, array(), true);
 		foreach ($quoi as $view) 
 			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
