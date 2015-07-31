@@ -959,6 +959,7 @@ function maj_base() {
 			if ($id_groupe = mysql_insert_id()) 
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
 		}
+		spip_query("UPDATE spip_articles SET popularite=0");
 	}
 
 	//
