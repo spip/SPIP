@@ -322,11 +322,13 @@ function typo_fr($letexte) {
 	}
 
 	$cherche1 = array(
+		/* 1 */		'/{([^}]+)}/',
 		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
 		/* 3 */		'/&#187;|[!?]| -,|:([^0-9]|$)/',
 		/* 4 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /'
 	);
 	$remplace1 = array(
+		/* 1 */		'<i class="spip">\1</i>',
 		/* 2 */		'\1~;',
 		/* 3 */		'~\0',
 		/* 4 */		'\0~'
@@ -347,9 +349,17 @@ function typo_fr($letexte) {
 	return $letexte;
 }
 
-// rien sauf les ~
+// rien sauf les ~ {}
 function typo_en($letexte) {
+	$cherche1 = array(
+		/* 1 */		'/{([^}]+)}/'
+	);
+	$remplace1 = array(
+		/* 1 */		'<i class="spip">\1</i>'
+	);
+	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	$letexte = str_replace("&nbsp;", "~", $letexte);
+
 	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
 }
 
