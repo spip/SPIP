@@ -72,7 +72,7 @@ function ajax_page_sql()
 		elseif ($fonction == "afficher_groupe_mots") {
 			include_spip('inc/texte');
 			include_spip('inc/mots');
-			afficher_groupe_mots ($id_groupe);
+			echo afficher_groupe_mots ($id_groupe);
 		}
 	}
 }

@@ -195,6 +195,8 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
+	echo $supprimer_groupe;
+
 	if (acces_mots() AND !$conf_mot){
 		echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		echo "<tr>";
