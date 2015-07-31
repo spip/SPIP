@@ -75,7 +75,8 @@ if ($connect_statut == "0minirezo") {
 			    $id_article,
 			    $debut, 
 			    "(statut='publie' OR statut='poubelle')",
-			    "date_time DESC");
+			    "date_time DESC",
+			    10);
 
  }
 else {
