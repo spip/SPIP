@@ -3135,7 +3135,7 @@ function debut_gauche($rubrique = "asuivre") {
 
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
 		<tr><td width='$largeur' class='colonne_etroite' valign='top' class='serif' $rspan>
-		<div style='width: ${largeur}px;'>
+		<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) echo "<!-- ";
