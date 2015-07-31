@@ -1106,7 +1106,7 @@ function multi_trad ($trads) {
 		return $trads[$spip_lang];
 
 	}	// cas des langues xx_yy
-	else if (ereg('^([a-z]+)_', $spip_lang, $regs) AND isset($trads[$regs[1]])) {
+	else if (preg_match(',^([a-z]+)_,', $spip_lang, $regs) AND isset($trads[$regs[1]])) {
 		return $trads[$regs[1]];
 	}	
 	// sinon, renvoyer la premiere du tableau
