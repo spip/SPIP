@@ -459,12 +459,17 @@ window.onpopstate = function(popState){
  */
 jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	var force = options.force || false;
-	jQuery(blocfrag)
-	.animateLoading();
+	jQuery(blocfrag).animateLoading();
 	if (jQuery.spip.preloaded_urls[url] && !force) {
+		// si on est deja en train de charger ce fragment, revenir plus tard
+		if (jQuery.spip.preloaded_urls[url]=="<!--loading-->"){
+			setTimeout(function(){jQuery.spip.loadAjax(blocfrag,url,href,options);},100);
+			return;
+		}
 		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href,options.history);
 	} else {
 		var d = new Date();
+		jQuery.spip.preloaded_urls[url] = "<!--loading-->";
 		jQuery.ajax({
 			url: parametre_url(url,'var_t',d.getTime()),
 			onAjaxLoad:false,
@@ -473,6 +478,9 @@ jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 				jQuery.spip.preloaded_urls[url] = c;
 				if (options.callback && typeof options.callback == "function")
 					options.callback.apply(blocfrag);
+			},
+			error: function(){
+				jQuery.spip.preloaded_urls[url]='';
 			}
 		});
 	}
@@ -589,8 +597,8 @@ jQuery.fn.ajaxbloc = function() {
 				var href = this.href;
 				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 				if (!jQuery.spip.preloaded_urls[url]) {
-					jQuery.spip.preloaded_urls[url] = '<!--preloading-->';
-					jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
+					jQuery.spip.preloaded_urls[url] = '<!--loading-->';
+					jQuery.ajax({url:url,onAjaxLoad:false,success:function(r){jQuery.spip.preloaded_urls[url]=r;},error:function(){jQuery.spip.preloaded_urls[url]='';}});
 				}
 			}); // previent qu'on ajax pas deux fois le meme lien
 
