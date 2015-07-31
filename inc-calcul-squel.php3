@@ -268,7 +268,7 @@ function parser_boucle($texte, $id_parent) {
 					}
 					else if (ereg('^debut([-_a-zA-Z0-9]+),([0-9]*)$', $param, $match)) {
 						$debut_lim = "debut".$match[1];
-						$req_limit = "0\$GLOBALS[$debut_lim],".$match[2];
+						$req_limit = '".intval($GLOBALS[\''.$debut_lim.'\']).",'.$match[2];
 					}
 					else if (ereg('^([0-9]+)/([0-9]+)$', $param, $match)) {
 						$partie = $match[1];
