@@ -48,6 +48,7 @@ function expliquer_config($cfg){
 	$casier = null;
 	$sous_casier = array();
 	$cfg = explode('/',$cfg);
+
 	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
 	if (!reset($cfg) AND count($cfg)>1) {
 		array_shift($cfg);
@@ -55,9 +56,14 @@ function expliquer_config($cfg){
 		if (!isset($GLOBALS[$table]))
 			lire_metas($table);
 	}
+
 	// si on a demande #CONFIG{/meta,'',0}
-	if (count($cfg))
-		$casier = array_shift($cfg);
+	if (count($cfg)) {
+		// pas sur un appel vide ''
+		if ('' !== ($c = array_shift($cfg))) {
+			$casier = $c;
+		}
+	}
 
 	if (count($cfg))
 		$sous_casier = $cfg;
@@ -103,7 +109,7 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 			OR !is_string($GLOBALS['meta'][$cfg])
 			// ne pas essayer de deserialiser si ce n'est visiblement pas une chaine serializee
 			OR strpos($GLOBALS['meta'][$cfg],':')===false
-			OR ($t=unserialize($GLOBALS['meta'][$cfg]))===false)?$GLOBALS['meta'][$cfg]:$t)
+			OR ($t=@unserialize($GLOBALS['meta'][$cfg]))===false)?$GLOBALS['meta'][$cfg]:$t)
 		  :$def;
 		return $r;
 	}
@@ -132,7 +138,7 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 	// d'un sous casier
 	$r = isset($r[$casier])?$r[$casier]:null;
 	if (($unserialize OR count($sous_casier)) AND $r AND is_string($r))
-		$r = (($t=unserialize($r))===false?$r:$t);
+		$r = (($t=@unserialize($r))===false?$r:$t);
 
 	// aller chercher le sous_casier
 	while(!is_null($r) AND $casier = array_shift($sous_casier))
