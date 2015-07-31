@@ -166,7 +166,7 @@ function zap_sessions ($login, $zap) {
 
 	$dir = opendir($dirname);
 	while(($item = readdir($dir)) != ''){
-		if (ereg("^session_([a-z0-9]+)\.php3$", $item, $regs) AND ($fichier_session != $item)) {
+		if (ereg("^session_([a-z0-9]+)\.php3$", $item, $regs) AND ($fichier_session != $dirname.$item)) {
 			$session = file("$dirname$item");
 			if (ereg("GLOBALS\['auteur_session'\]\['login'\] = '$login'", $session[3])) {
 				if ($zap) {
