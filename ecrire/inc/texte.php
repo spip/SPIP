@@ -259,7 +259,7 @@ function nettoyer_raccourcis_typo($texte){
 }
 
 // http://doc.spip.org/@couper
-function couper($texte, $taille=50) {
+function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!strlen($texte)) return '';
 	$offset = 400 + 2*$taille;
 	if (	$offset<strlen($texte)
@@ -304,7 +304,7 @@ function couper($texte, $taille=50) {
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
 	$court = preg_replace("/([^\s][\s]+)[^\s]*\n?$/", "\\1", $long);
-	$points = '&nbsp;(...)';
+	$points = $suite;
 
 	// trop court ? ne pas faire de (...)
 	if (spip_strlen($court) < max(0.75 * $taille,2)) {
@@ -331,7 +331,7 @@ function couper($texte, $taille=50) {
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 // http://doc.spip.org/@couper_intro
-function couper_intro($texte, $long) {
+function couper_intro($texte, $long, $suite = '&nbsp;(...)') {
 	$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
 	$intro = '';
 	while ($fin = strpos($texte, "</intro>")) {
@@ -343,9 +343,9 @@ function couper_intro($texte, $long) {
 	}
 
 	if ($intro)
-		$intro = $intro.'&nbsp;(...)';
+		$intro .= $suite;
 	else {
-		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long));
+		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long, $suite));
 	}
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
