@@ -61,11 +61,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'pouze jeden podpis na jednu elektronickou adresu',
 'bouton_checkbox_signature_unique_site' => 'pouze jeden podpis na jeden web',
 'bouton_demande_publication' => 'Po&#382;&aacute;dat o zve&#345;ejn&#283;n&iacute; &#269;l&aacute;nku',
+'bouton_desactive_tout' => 'V&#353;e vypnout',
 'bouton_effacer_index' => 'Odstranit indexov&aacute;n&iacute;',
 'bouton_effacer_tout' => 'Odstranit v&#353;e',
 'bouton_envoi_message_02' => 'ODESLAT ZPR&Aacute;VU',
 'bouton_envoyer_message' => 'Kone&#269;n&aacute; zpr&aacute;va: odeslat',
-'bouton_forum_petition' => 'DISKUSN&Iacute; SKUPINA A PETICE',
+'bouton_forum_petition' => 'F&Oacute;RUM A PETICE',
 'bouton_modifier' => 'Zm&#283;nit',
 'bouton_pense_bete' => 'INTERN&Iacute; POZN&Aacute;MKA',
 'bouton_radio_activer_messagerie' => 'Zapnout intern&iacute; syst&eacute;m zpr&aacute;v',
@@ -96,8 +97,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Okam&#382;it&eacute; zve&#345;ej&#328;ov&aacute;n&iacute; zpr&aacute;v
  (p&#345;&iacute;sp&#283;vky se zobrazuj&iacute; okam&#382;it&#283;,
  spr&aacute;vci je mohou odstranit dodate&#269;n&#283;).',
-'bouton_radio_sauvegarde_compressee' => 'comprimovan&eacute; ukl&aacute;d&aacute;n&iacute; jako  <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'nekomprimovan&eacute; ukl&aacute;d&aacute;n&iacute; jako  <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'ulo&#382;it komprimovan&#283; v  @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'ulo&#382;it nekomprimovan&#283; v @fichier@',
 'bouton_radio_supprimer_petition' => 'Odstranit petici',
 'bouton_radio_syndication' => 'Syndikace:',
 'bouton_redirection' => 'P&#344;ESM&#282;ROV&Aacute;N&Iacute;',
@@ -133,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'email:',
 'entree_adresse_annuaire' => 'Adresa seznamu',
 'entree_adresse_email' => 'V&aacute;&#353; email',
-'entree_adresse_fichier_syndication' => '<MODIF>Adresa souboru "backend" pro syndikaci:',
+'entree_adresse_fichier_syndication' => 'Adresa souboru pro syndikaci:',
 'entree_adresse_site' => '<b>Adresa webu</b> [povinn&yacute; &uacute;daj]',
 'entree_base_donnee_1' => 'Adresa datab&aacute;ze',
 'entree_base_donnee_2' => '(Tato adresa v&#283;t&#353;inou odpov&iacute;d&aacute; adrese va&#353;eho webu n&#283;kdy v&yacute;razu "localhost", n&#283;kdy je pr&aacute;zdn&aacute;.)',
@@ -188,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Novinky tohoto webu m&#367;&#382;ete syndikovat v libovoln&eacute;m programu, kter&yacute; umo&#382;&#328;uje &#269;&iacute;st soubory ve form&aacute;tu XML/RSS (Rich Site Summary). Tento form&aacute;t umo&#382;&#328;uje syst&eacute;mu SPIP &#269;&iacute;st novinky zve&#345;ejn&#283;n&eacute; na jin&yacute;ch webech, kter&eacute; pou&#382;&iacute;vaj&iacute; kompatibiln&iacute; form&aacute;t (syndikovan&yacute;ch webech).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Seznam pro rozes&iacute;l&aacute;n&iacute; email&#367;',
-'ical_titre_rss' => '<MODIF>Soubor "backend"',
+'ical_titre_rss' => 'Syndika&#269;n&iacute; soubory',
 'icone_activer_cookie' => 'Nastavit cookie',
 'icone_admin_plugin' => 'Spravovat pluginy',
 'icone_afficher_auteurs' => 'Zobrazit autory',
@@ -462,8 +463,10 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_ou' => 'nebo...',
 'info_oui_suppression_mot_cle' => 'ur&#269;it&#283; chci toto kl&iacute;&#269;ov&eacute; slovo odstanit.',
 'info_page_interdite' => 'Zak&aacute;zan&aacute; str&aacute;nka',
-'info_par_nombre_article' => '(podle po&#269;tu &#269;l&aacute;nk&#367;)',
-'info_par_tri' => '(podle @tri@)',
+'info_par_nom' => 'podle jm&eacute;na',
+'info_par_nombre_article' => 'podle po&#269;tu &#269;l&aacute;nk&#367;',
+'info_par_statut' => 'podle stavu',
+'info_par_tri' => '\'(podle @tri@)\'',
 'info_pas_de_forum' => 'bez diskusn&iacute; skupiny',
 'info_passe_trop_court' => 'Heslo je p&#345;&iacute;li&#353; kr&aacute;tk&eacute;.',
 'info_passes_identiques' => 'Zadan&aacute; hesla nesouhlas&iacute;.',
@@ -544,7 +547,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_sauvegarde_petitions' => 'Ulo&#382;it petice',
 'info_sauvegarde_refers' => 'Ulo&#382;it osoby, kter&eacute; zadali odkazy',
 'info_sauvegarde_reussi_01' => 'Ulo&#382;en&iacute; prob&#283;hlo &uacute;sp&#283;&#353;n&#283;.',
-'info_sauvegarde_reussi_02' => 'Datab&aacute;ze byla ulo&#382;ena do <b>ecrire/data/@archive@</b>. M&#367;&#382;ete',
+'info_sauvegarde_reussi_02' => 'Datab&aacute;ze byla ulo&#382;ena do @archive@. M&#367;&#382;ete',
 'info_sauvegarde_reussi_03' => 'se vr&aacute;tit ke spr&aacute;v&#283;',
 'info_sauvegarde_reussi_04' => 'va&#353;eho webu.',
 'info_sauvegarde_rubriques' => 'Ulo&#382;it sekce',
@@ -616,8 +619,8 @@ ukazuje jejich stav:',
 'info_une_breve' => 'jedna novinka,',
 'info_une_rubrique' => 'jedna sekce, ',
 'info_une_rubrique_02' => '1 sekce',
-'info_url' => '<MODIF>adresa URL:',
-'info_url_site' => '<MODIF>ADRESA URL WEBU:',
+'info_url' => 'URL:',
+'info_url_site' => 'URL WEBU:',
 'info_urlref' => 'Hypertextov&yacute; odkaz:',
 'info_utilisation_spip' => 'Nyn&iacute; m&#367;&#382;ete za&#269;&iacute;t pou&#382;&iacute;vat redak&#269;n&iacute; syst&eacute;m...',
 'info_visites_par_mois' => 'Zobrazen&iacute; po m&#283;s&iacute;c&iacute;ch:',
@@ -696,6 +699,7 @@ ukazuje jejich stav:',
 
 
 // L
+'les_deux' => 'dva',
 'lien_ajout_destinataire' => 'P&#345;idat p&#345;&iacute;jemce',
 'lien_ajouter_auteur' => 'P&#345;idat autora',
 'lien_ajouter_participant' => 'P&#345;idat &uacute;&#269;astn&iacute;ka',
@@ -783,8 +787,8 @@ ukazuje jejich stav:',
 
 // T
 'taille_cache_image' => 'Obr&aacute;zky, automaticky vypo&#269;ten&eacute; syst&eacute;mem SPIP (n&aacute;hledy dokument&#367;, n&aacute;zvy zobrazen&eacute; graficky, matematick&eacute; funkce ve form&aacute;tu TeX...) zab&iacute;raj&iacute; v adres&aacute;&#345;i @dir@ celkem @taille@.',
-'taille_cache_infinie' => 'Maxim&aacute;ln&iacute; velikost adres&aacute;&#345;e <code>CACHE/</code> nen&iacute; na tomto webu omezena.',
-'taille_cache_maxi' => 'Syst&eacute;m SPIP se sna&#382;&iacute; omezit velikost adres&aacute;&#345;e <code>CACHE/</code> tohoto webu na cca <b>@octets@</b> pro do&#269;asn&eacute; ulo&#382;en&iacute; &uacute;daj&#367;.',
+'taille_cache_infinie' => 'Maxim&aacute;ln&iacute; velikost adres&aacute;&#345;e pro vyrovn&aacute;vac&iacute; pam&#283;t nen&iacute; na tomto webu omezena.',
+'taille_cache_maxi' => 'Syst&eacute;m SPIP se sna&#382;&iacute; omezit velikost adres&aacute;&#345;e vyrovn&aacute;vac&iacute; pam&#283;ti (cache) tohoto webu na cca <b>@octets@</b> bajt&#367;.',
 'taille_cache_octets' => 'Velikost cache je v sou&#269;asnosti @octets@.',
 'taille_cache_vide' => 'Cache je pr&aacute;zdn&aacute;.',
 'taille_repertoire_cache' => 'Velikost adres&aacute;&#345;e cache',
@@ -793,7 +797,7 @@ ukazuje jejich stav:',
 'texte_admin_effacer_01' => 'T&iacute;mto p&#345;&iacute;kazem odstran&iacute;te <i>ve&#353;ker&yacute;</i> obsah datab&aacute;ze,
 v&#269;etn&#283; <i>ve&#353;ker&yacute;ch</i> p&#345;&iacute;stup&#367; redaktor&#367; a spr&aacute;vc&#367;. Pokud jej spust&iacute;te, mus&iacute;te n&aacute;sledn&#283; znovu nainstalovat
 syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p&#345;&iacute;stup pro spr&aacute;vce.',
-'texte_admin_tech_01' => 'Tato volba je ur&#269;ena k ulo&#382;en&iacute; obsahu datab&aacute;ze do souboru, jen&#382; bude ulo&#382;en v adres&aacute;&#345;i <i>ecrire/data/</i>. Nezapome&#328;te uchovat i obsah cel&eacute;ho adres&aacute;&#345;e <i>IMG/</i>. V n&#283;m jsou ulo&#382;eny obr&aacute;zky a dokumenty pou&#382;it&eacute; v &#269;l&aacute;nc&iacute;ch a sekc&iacute;ch.',
+'texte_admin_tech_01' => 'Tato volba je ur&#269;ena k ulo&#382;en&iacute; obsahu datab&aacute;ze do souboru, jen&#382; bude ulo&#382;en v adres&aacute;&#345;i @dossier@. Nezapome&#328;te z&aacute;lohovat i obsah cel&eacute;ho adres&aacute;&#345;e @img@, ve kter&eacute;m jsou ulo&#382;eny obr&aacute;zky a dokumenty pou&#382;it&eacute; v &#269;l&aacute;nc&iacute;ch a sekc&iacute;ch.',
 'texte_admin_tech_02' => 'Pozor! Takto ulo&#382;en&eacute; soubory lze obnovit POUZE na webu, kde je nainstalov&aacute;na stejn&aacute; verze syst&eacute;mu SPIP. V &#382;&aacute;dn&eacute;m p&#345;&iacute;pad&#283; "nevypr&aacute;zd&#328;ujte datab&aacute;zi" s t&iacute;m, &#382;e obnov&iacute;te z&aacute;lohu po aktualizaci... Viz <a href="http://www.spip.net/fr_article1489.html">la dokumentace k syst&eacute;mu SPIP</a>.',
 'texte_admin_tech_03' => 'M&#367;&#382;ete se rozhodnout o ulo&#382;en&iacute; komprimovan&eacute;ho souboru. T&iacute;m zkr&aacute;t&iacute;te
  dobu pot&#345;ebnou k jeho p&#345;enosu u v&aacute;s nebo na serveru kde m&aacute;te z&aacute;lohy a u&#353;et&#345;&iacute;te m&iacute;sto na disku.',
@@ -851,7 +855,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_en_cours_validation' => 'N&aacute;sleduj&iacute;c&iacute; &#269;l&aacute;nky a novinky jsou p&#345;ipraveny k publikaci. Nev&aacute;hejte p&#345;ipojit sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je k nim p&#345;ipojeno.',
 'texte_enrichir_mise_a_jour' => 'Zalamov&aacute;n&iacute; textu m&#367;&#382;ete roz&#353;&iacute;&#345;it pomoc&iacute; "typografick&yacute;ch zkratek".',
 'texte_fichier_authent' => '<b>M&aacute; syst&eacute;m SPIP vytvo&#345;it speci&aacute;ln&iacute; soubory <tt>.htpasswd</tt>
-  a <tt>.htpasswd-admin</tt> v adres&aacute;&#345;i  <tt>ecrire/data/</tt> ?</b><p />
+  a <tt>.htpasswd-admin</tt> v adres&aacute;&#345;i  @dossier@?</b><p />
   Tyto soubory umo&#382;&#328;uj&iacute; omezit p&#345;&iacute;stup autor&#367; a spr&aacute;vc&#367; k dal&#353;&iacute;m &#269;&aacute;stem
   va&#353;eho webu
   (nap&#345;. k extern&iacute;mu programu statistik).<p />
@@ -860,16 +864,8 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_informations_personnelles_1' => 'Syst&eacute;m pro v&aacute;s nyn&iacute; vytvo&#345;&iacute; vlastn&iacute; p&#345;&iacute;stup k webu.',
 'texte_informations_personnelles_2' => '(Pozn&aacute;mka: pokud se jedn&aacute; o opakovanou instalaci a v&aacute;&#353; p&#345;&iacute;stup je st&aacute;le funk&#269;n&iacute;, m&#367;&#382;ete',
 'texte_introductif_article' => '(&Uacute;vodn&iacute; text &#269;l&aacute;nku.)',
-'texte_jeu_caractere' => '<MODIF>Tato mo&#382;nost je u&#382;ite&#269;n&aacute;, pokud na webu pot&#345;ebujete zobrazovat jinou abecedu
- ne&#382; latinku (resp. "z&aacute;padn&iacute; znakovou sadu") a jej&iacute; varianty.
- V takov&eacute;m p&#345;&iacute;pad&#283; m&#367;&#382;e b&yacute;t vhodn&eacute; zm&#283;nit standardn&iacute; nastaven&iacute; na pot&#345;ebnou
- znakovou sadu. V ka&#382;d&eacute;m p&#345;&iacute;pad&#283; doporu&#269;ujeme toto nastaven&iacute; odzkou&#353;et,
- abyste nalezli vyhovuj&iacute;c&iacute; &#345;e&#353;en&iacute;. Pokud tento parametr zm&#283;n&iacute;te, nezapome&#328;te zm&#283;nit
- i navazuj&iacute;c&iacute; ve&#345;ejn&yacute; web (ozna&#269;en&iacute; <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => '<MODIF>Nastaven&iacute; nem&aacute; zp&#283;tn&yacute; &uacute;&#269;inek. To znamen&aacute;,
- &#382;e ji&#382; zadan&eacute; texty nemus&iacute; b&yacute;t po zm&#283;n&#283; nastaven&iacute;
- zobrazeny spr&aacute;vn&#283;. K p&#345;edchoz&iacute;mu nastaven&iacute;
- se m&#367;&#382;ete v&#382;dy vr&aacute;tit, ani&#382; by vznikly n&#283;jak&eacute; &#353;kody.',
+'texte_jeu_caractere' => 'Doporu&#269;ujeme pou&#382;&iacute;t univerz&aacute;ln&iacute; abecedu Unicode (<tt>utf-8</tt>) pro v&aacute;&#353; web, kter&aacute; umo&#382;&#328;uje zobrazit texty v jak&eacute;mkoli jazyce. &#381;&aacute;dn&yacute; modern&iacute; prohl&iacute;&#382;e&#269; s Unicode nem&aacute; pot&iacute;&#382;e.',
+'texte_jeu_caractere_2' => 'Toto nastaven&iacute; nezm&#283;n&iacute; texty, kter&eacute; jsou ji&#382; ulo&#382;eny v datab&aacute;zi.',
 'texte_jeu_caractere_3' => 'V&aacute;&#353; web nyn&iacute; pou&#382;&iacute;v&aacute; tuto znakovou sadu:',
 'texte_jeu_caractere_4' => 'Pokud toto neodpov&iacute;d&aacute; va&#353;&iacute; situaci (nap&#345;&iacute;klad po obnoven&iacute; dat ze z&aacute;lohy), nebo <em>pokud konfigurujete tento web</em> a chcete pou&#382;&iacute;t jinou znakovou sadu, pros&iacute;m ozna&#269;te znakovou sadu:',
 'texte_jeu_caractere_conversion' => 'M&#367;&#382;ete se rozhodnout zkonvertovat v&#353;echny texty (&#269;l&aacute;nky, novinky, diskuse, ...) jednou prov&#382;dy do <tt>UTF-8</tt>. Pou&#382;ijte <a href="@url@">UTF-8 konverzn&iacute; str&aacute;nku</a>.',
@@ -925,7 +921,7 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
 'texte_recapitiule_liste_documents' => 'Na t&eacute;to str&aacute;nkce je p&#345;ehled dokument&#367; um&iacute;stn&#283;n&yacute;ch v sekc&iacute;ch. Informace o dokumentech zm&#283;n&iacute;te klepnut&iacute;m na odkaz na str&aacute;nku p&#345;&iacute;slu&#353;n&eacute; sekce.',
 'texte_recuperer_base' => 'Opravit datab&aacute;zi',
 'texte_reference_mais_redirige' => 'Na &#269;l&aacute;nek je na va&#353;em webu SPIP odkaz, ale je p&#345;esm&#283;rov&aacute;n na jinou adresu URL.',
-'texte_referencement_automatique' => '<MODIF><b>Automatick&yacute; odkaz na web</b><br>Odkaz na web vytvo&#345;&iacute;te rychle zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho serverov&eacute;ho souboru (backend. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
+'texte_referencement_automatique' => '<b>Automatick&yacute; odkaz na web</b><br>Odkaz na web snadno vytvo&#345;&iacute;te zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho syndika&#269;n&iacute;ho souboru. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
 'texte_requetes_echouent' => '<b>Pokud n&#283;kter&eacute; dotazy MySQL neust&aacute;le
   selh&aacute;vaj&iacute; bez zjevn&eacute; p&#345;&iacute;&#269;iny, m&#367;&#382;e to b&yacute;t kv&#367;li samotn&eacute; datab&aacute;zi.</b><p />
   Datab&aacute;ze MySQL umo&#382;&#328;uje opravu n&aacute;hodn&#283; po&#353;kozen&yacute;ch datab&aacute;zov&yacute;ch tabulek.
@@ -935,13 +931,13 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
   Jestli&#382;e probl&eacute;m nejde vy&#345;e&#353;it, kontaktujte
   sv&eacute;ho poskytovatele webov&eacute;ho prostoru.<p />',
 'texte_restaurer_base' => 'Obnovit obsah ze z&aacute;lohy datab&aacute;ze',
-'texte_restaurer_sauvegarde' => 'Tato mo&#382;nost slou&#382;&iacute; k obnov&#283; d&#345;&iacute;ve po&#345;&iacute;zen&eacute; z&aacute;lohy datab&aacute;ze.
-  Z&aacute;lo&#382;n&iacute; soubor mus&iacute; b&yacute;t v adres&aacute;&#345;i <i>ecrire/data/</i>.
+'texte_restaurer_sauvegarde' => 'Tato volba slou&#382;&iacute; k obnov&#283; d&#345;&iacute;ve po&#345;&iacute;zen&eacute; z&aacute;lohy datab&aacute;ze.
+  Z&aacute;lo&#382;n&iacute; soubor mus&iacute; b&yacute;t v adres&aacute;&#345;i @dossier@.
   P&#345;i pou&#382;it&iacute; t&eacute;to funkce postupujte opatrn&#283;. <b>Zm&#283;ny i p&#345;&iacute;padn&eacute; ztr&aacute;ty
   jsou toti&#382; nevratn&eacute;.</b>',
 'texte_sauvegarde' => 'Z&aacute;lohovat obsah datab&aacute;ze',
 'texte_sauvegarde_base' => 'Ulo&#382;it datab&aacute;zi',
-'texte_sauvegarde_compressee' => 'Z&aacute;loha se ulo&#382;&iacute; do nekomprimovan&eacute;ho souboru <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'Z&aacute;loha bude ulo&#382;ena do nekomprimovan&eacute;ho souboru @fichier@.',
 'texte_selection_langue_principale' => 'N&iacute;&#382;e m&#367;&#382;ete vybrat "hlavn&iacute; jazyk" webu. Tato volba v&aacute;s neomezuje na psan&iacute; &#269;l&aacute;nk&#367; pouze v tomto jazyce, ale umo&#382;&#328;uje ur&#269;it:
  <ul><li> standardn&iacute; form&aacute;t dat ve&#345;ejn&eacute;ho webu;</li>
  <li> podstatu textov&eacute;ho procesoru, kter&yacute; syst&eacute;m SPIP pou&#382;ije p&#345;i zad&aacute;v&aacute;n&iacute; text&#367;;</li>
@@ -977,16 +973,13 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
   zobrazov&aacute;n&iacute; zbyte&#269;n&yacute;ch varovn&yacute;ch hl&aacute;&#353;en&iacute;.',
 'texte_trop_resultats_auteurs' => 'Pro "@cherche_auteur@" bylo zobrazeno p&#345;&iacute;li&#353; mnoho v&yacute;sledk&#367;. Zp&#345;esn&#283;te vyhled&aacute;vac&iacute; krit&eacute;ria.',
 'texte_unpack' => 'odes&iacute;l&aacute;n&iacute;/stahov&aacute;n&iacute; posledn&iacute; verze',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Pou&#382;&iacute;v&aacute;te-li vestav&#283;n&yacute; vyhled&aacute;va&#269; syst&eacute;mu SPIS,
+'texte_utilisation_moteur_syndiques' => 'Vestav&#283;n&yacute; prohled&aacute;vac&iacute; n&aacute;stroj syst&eacute;mu SPIS,
     m&#367;&#382;ete vyhled&aacute;vat i na syndikovan&yacute;ch webech a v syndikovan&yacute;ch
-    &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.
-    <br><img src=\'puce.gif\'> Nejjednodu&#353;&#353;&iacute; je
-    hledat pouze v n&aacute;zvech a popisech &#269;l&aacute;nk&#367;.
-    <br><img src=\'puce.gif\'>
-    Druh&yacute;, mnohem &uacute;&#269;inn&#283;j&#353;&iacute; zp&#367;sob, umo&#382;&#328;uje syst&eacute;mu SPIP
+    &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.    <br>- Nejjednodu&#353;&#353;&iacute; je
+    hledat pouze v n&aacute;zvech a popisech &#269;l&aacute;nk&#367;. <br>-    Druh&yacute;, mnohem &uacute;&#269;inn&#283;j&#353;&iacute; zp&#367;sob, umo&#382;&#328;uje syst&eacute;mu SPIP
     hledat i v textech web&#367;, na kter&eacute; vedou odkazy.
-    Pokud odkazujete na web, syst&eacute;m SPIP
-    bude hledat v textu tohoto webu.',
+    Pokud se odkazujete n&#283;jak&yacute; web, syst&eacute;m SPIP
+    bude vyhled&aacute;vat v textech tohoto webu.',
 'texte_utilisation_moteur_syndiques_2' => 'Tento zp&#367;sob vy&#382;aduje, aby syst&eacute;m SPIP
     pravideln&#283; odkazovan&eacute; weby nav&#353;t&#283;voval.
     To m&#367;&#382;e m&iacute;rn&#283; zpomalit b&#283;h va&#353;eho webu.',
@@ -1069,7 +1062,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'tout_dossier_upload' => 'Cel&aacute; slo&#382;ka @upload@',
 'trad_article_inexistant' => '&#268;l&aacute;nek tohoto &#269;&iacute;sla neexistuje.',
 'trad_article_traduction' => 'V&#353;echny verze tohoto &#269;l&aacute;nku:',
-'trad_deja_traduit' => 'Tento &#269;l&aacute;nek je ji&#382; p&#345;ekladem tohoto &#269;l&aacute;nku.',
+'trad_deja_traduit' => 'Chyba: tento &#269;l&aacute;nek nen&iacute; mo&#382;n&eacute; propojit s po&#382;adovan&yacute;m &#269;&iacute;slem',
 'trad_delier' => 'Tento &#269;l&aacute;nek nad&aacute;le s p&#345;eklady nespojovat',
 'trad_lier' => 'Toto je p&#345;eklad &#269;l&aacute;nku &#269;&iacute;slo:',
 'trad_new' => 'Nov&#283; p&#345;elo&#382;it &#269;l&aacute;nek',
@@ -1078,7 +1071,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 // U
 'utf8_convert_attendez' => 'Po&#269;kejte n&#283;kolik sekund a potom znovu na&#269;t&#283;te tuto str&aacute;nku.',
 'utf8_convert_avertissement' => 'Nyn&iacute; zkonvertujete obsah datab&aacute;ze (&#269;l&aacute;nky, novinky, ...) ze znakov&eacute; sady <b>@orig@</b> do znakov&eacute; sady  <b>@charset@</b>.',
-'utf8_convert_backup' => 'Nezapome&#328;te nejprve ud&#283;lat kompletn&iacute; z&aacute;lohu va&#353;eho webu. Rovn&#283;&#382; zkontrolujte, zda jsou va&#353;e &#353;ablony a jazykov&eacute; soubory kompatibiln&iacute; se znakovou sadou @charset@. Je-li zapnuto sledov&aacute;n&iacute; zm&#283;n (verzov&aacute;n&iacute;), bude v ka&#382;d&eacute;m p&#345;&iacute;pad&#283; po&#353;kozeno.',
+'utf8_convert_backup' => 'Nezapome&#328;te nejprve ud&#283;lat kompletn&iacute; z&aacute;lohu va&#353;eho webu. Rovn&#283;&#382; zkontrolujte, zda jsou va&#353;e &#353;ablony a jazykov&eacute; soubory kompatibiln&iacute; se znakovou sadou @charset@. ',
 'utf8_convert_erreur_deja' => 'V&aacute;&#353; web ji&#382; pou&#382;&iacute;v&aacute; znakovou sadu @charset@, nen&iacute; d&#367;vod ke konverzi.',
 'utf8_convert_erreur_orig' => 'Chyba: jazykov&aacute; sada @charset@ nen&iacute; podporov&aacute;na.',
 'utf8_convert_termine' => 'Hotovo!',

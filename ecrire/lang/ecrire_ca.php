@@ -674,6 +674,7 @@ amb un color que indica el seu estat:',
 
 
 // L
+'les_deux' => 'els dos',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
 'lien_ajouter_participant' => 'Afegir un participant',

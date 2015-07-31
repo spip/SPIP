@@ -694,6 +694,7 @@ Le traduzioni sono associate all\'originale,
 
 
 // L
+'les_deux' => 'entrambi',
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questa autrice',
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
