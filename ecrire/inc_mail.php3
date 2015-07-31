@@ -56,10 +56,8 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	$sujet = filtrer_entites($sujet);
 
 	// encoder le sujet si possible selon la RFC
-	if($GLOBALS['flag_multibyte']) {
-		mb_internal_encoding($charset);
+	if($GLOBALS['flag_multibyte'] AND mb_internal_encoding($charset))
 		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
-	}
 
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
