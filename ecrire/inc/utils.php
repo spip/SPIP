@@ -180,7 +180,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	$f = @fopen($logfile, "ab");
 	if ($f) {
-		fputs($f, ($logname!==NULL) ? $m : str_replace('<','&lt;',$m));
+		fputs($f, (defined('_LOG_BRUT') AND _LOG_BRUT) ? $m : str_replace('<','&lt;',$m));
 		fclose($f);
 	}
 
