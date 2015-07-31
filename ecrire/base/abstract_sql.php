@@ -307,6 +307,12 @@ function sql_quote($val, $serveur='')
 
 // http://doc.spip.org/@sql_in
 function sql_in($val, $valeurs, $not='', $serveur='') {
+	if (is_array($valeurs)) {
+		$f = sql_serveur('quote', $serveur);
+		$valeurs = join(',', array_map($f, array_unique($valeurs)));
+	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+
 	$f = sql_serveur('in', $serveur);
 	return $f($val, $valeurs, $not, $serveur);
 }

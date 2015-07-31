@@ -562,21 +562,10 @@ function spip_mysql_quote($v)
 	return _q($v);
 }
 
-// pour compatibilite
-function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
-	return calcul_mysql_in($val, $valeurs, $not);
-}
-
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
-// http://doc.spip.org/@calcul_mysql_in
-function calcul_mysql_in($val, $valeurs, $not='') {
-	if (is_array($valeurs))
-		$valeurs = join(',', array_map('_q', $valeurs));
-	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
-	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
-
+function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
 	$n = $i = 0;
 	$in_sql ="";
 	while ($n = strpos($valeurs, ',', $n+1)) {
@@ -592,6 +581,16 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	$in_sql .= "($val $not IN ($valeurs))";
 
 	return "($in_sql)";
+}
+
+// pour compatibilite. Ne plus utiliser.
+// http://doc.spip.org/@calcul_mysql_in
+function calcul_mysql_in($val, $valeurs, $not='') {
+	if (is_array($valeurs))
+		$valeurs = join(',', array_map('_q', $valeurs));
+	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+	return spip_mysql_in($val, $valeurs, $not);
 }
 
 // http://doc.spip.org/@spip_mysql_cite
