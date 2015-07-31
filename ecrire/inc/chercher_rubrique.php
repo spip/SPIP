@@ -204,7 +204,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 		$exclus = "&exclus=$idem&rac=oui";
 
 	if ($id_rubrique)
-		list($titre_parent) = spip_fetch_array(spip_query("SELECT titr<e FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
+		list($titre_parent) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
 	else if ($type == 'auteur')
 		$titre_parent = '&nbsp;';
 	else
