@@ -39,6 +39,7 @@ include_spip('public/interfaces');
 # definition des tables
 include_spip('base/serial');
 
+// http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
 	$l = array();
 	$lang = '';
