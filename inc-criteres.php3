@@ -358,7 +358,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 	$primary = $boucle->primary;
 	$id_field = $id_table . '.' . $primary; 
 
-	if (ereg('^([0-9a-zA-Z#_{}-]+)([,/])([0-9a-zA-Z#_{}-]+)$', $param, $match))
+	if (ereg('^([0-9a-zA-Z#_}{-]+)([,/])([0-9a-zA-Z#_}{-]+)$', $param, $match))
 	  calculer_critere_parties($idb, $boucles, $param, $not, $match);
 
 		// Restriction de valeurs (implicite ou explicite)

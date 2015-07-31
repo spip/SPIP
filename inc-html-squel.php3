@@ -23,7 +23,7 @@ define("_INC_HTML_SQUEL", "1");
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
-define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^{}]*([{][^}]*[}][^}]*)*)[[:space:]]*[}]');
+define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^}{]*([{][^}]*[}][^}]*)*)[[:space:]]*[}]');
 define('TYPE_DE_BOUCLE', "[^)]*");
 define('BALISE_DE_BOUCLE',
 	"^<BOUCLE(" .
@@ -178,7 +178,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg("^( *)([^,{}]*({[^{}]*[}][^,{}]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
+			ereg("^( *)([^,}{]*({[^}{]*[}][^,}{]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
@@ -293,7 +293,7 @@ function phraser_param($params, &$result) {
 		else { 
 		  $params2[] = ($param == 'unique') ? 'doublons' :$param;
 		  /* pour bientot
-		   if (ereg('^([0-9a-zA-Z#_{}-]+)([,/])([0-9a-zA-Z#_{}-]+)$', $param, $match))
+		   if (ereg('^([0-9a-zA-Z#_}{-]+)([,/])([0-9a-zA-Z#_}{-]+)$', $param, $match))
 			  $args['parties'] = $match;
 			else if (eregi('^(`?[a-z_]+\(?[a-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $match))
 			  $args['comparaison'] = $match;

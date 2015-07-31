@@ -18,7 +18,7 @@ define("_ECRIRE_INC_INDEX", "1");
 
 function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction
-	$liste = "],:;*\"!\r\n\t\\/){}[|@<>$%";
+	$liste = "],:;*\"!\r\n\t\\/)}{[|@<>$%";
 
 	// pour autoriser les recherches en vietnamien,
 	// ne pas eliminer les accents de translitteration
