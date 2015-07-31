@@ -356,9 +356,9 @@ a.cellule-h-texte {
 	display: block;
 	clear: both;
 	text-align: <?php echo $left; ?>;
-	font-family: Verdana, Arial, Sans, sans-serif;
+	font-family: Trebuchet Sans MS, Arial, Sans, sans-serif;
 	font-weight: bold;
-	font-size: 9px;
+	font-size: 11px;
 	color: #606060;
 	padding: 4px;
 	margin: 3px;
