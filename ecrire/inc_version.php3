@@ -605,6 +605,7 @@ function http_status($status) {
 	$status_string = array(
 		200 => '200 OK',
 		301 => '301 Moved Permanently',
+		302 => '302 Found',
 		304 => '304 Not Modified',
 		401 => '401 Unauthorized',
 		403 => '403 Forbidden',
@@ -1051,10 +1052,9 @@ function creer_repertoire($base, $subdir) {
 // Entetes
 //
 function redirige_par_entete($url) {
-	header("Location: $url");
-#	include_ecrire('inc_cron.php3');
-#	spip_cron();
 	spip_log("redirige $url");
+	http_status(302);
+	header("Location: $url");
 	exit;
 }
 
@@ -1147,5 +1147,7 @@ OR defined('_ECRIRE_AIDE'))) {
 	}
 	// Soit on est appele de l'exterieur (spikini, etc)
 }
+
+#spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl());
 
 ?>

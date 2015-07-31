@@ -61,8 +61,6 @@ if ($change_session == 'oui') {
 	}
 }
 
-if ($url)  $url = urldecode($url);
-
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
 	auth_http(($url ? $url : _DIR_RESTREINT_ABS), $essai_auth_http);
@@ -101,8 +99,8 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&amp;url="
-		. ($url ? $url : _DIR_RESTREINT_ABS));
+	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&url="
+		. ($url ? urlencode($url) : _DIR_RESTREINT_ABS));
 }
 
 // Tentative de login
@@ -173,10 +171,10 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	if (!$retour)
-	  $retour = 'spip_login.php3?var_url='.urlencode($url);
+		$retour = 'spip_login.php3?var_url='.urlencode($url);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
-	$redirect = ereg_replace("([?&])var_login=[^&]*", '\1', urldecode($retour));
+	$redirect = ereg_replace("([?&])var_login=[^&]*", '\1', $retour);
 	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
@@ -233,7 +231,6 @@ if ($var_lang_ecrire) {
 // Redirection
 // Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP
-
 if (ereg("^Apache", $SERVER_SOFTWARE)) {
 	redirige_par_entete($redirect);
 }
