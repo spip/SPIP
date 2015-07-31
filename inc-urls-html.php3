@@ -14,19 +14,22 @@
 
 - Comment utiliser ce jeu d'URLs ?
 
-Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
-dans le repertoire de base du site SPIP (attention a ne pas ecraser
-d'autres reglages que vous pourriez avoir mis dans ce fichier) ; si votre site
-est en "sous-repertoire", vous devrez editer la ligne "RewriteBase" ce fichier.
+Recopiez le fichier "htaccess.txt" du repertoire de base du site SPIP sous
+le sous le nom ".htaccess" (attention a ne pas ecraser d'autres reglages
+que vous pourriez avoir mis dans ce fichier) ; si votre site est en
+"sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
+Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-definissez ensuite dans ecrire/mes_options.php3 :
+Definissez ensuite dans ecrire/mes_options.php3 :
 	type_urls = 'html';
 
-Note : le fichier htaccess-propres.txt est compatible avec les URLS 'html' ;
-toutefois si htaccess-propres.txt se revele trop "puissant", car trop generique,
-et conduit a des problemes (en lien par exemple avec d'autres applications
-installees dans votre repertoire, a cote de SPIP), vous pouvez utiliser a la
-place le fichier htaccess-html.txt, qui est suffisant pour ce type d'urls.
+SPIP calculera alors ses liens sous la forme "article123.html".
+
+
+Note : si le fichier htaccess.txt se revele trop "puissant", car trop
+generique, et conduit a des problemes (en lien par exemple avec d'autres
+applications installees dans votre repertoire, a cote de SPIP), vous
+pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 
 */
 

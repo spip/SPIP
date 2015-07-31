@@ -1,6 +1,6 @@
 ###########################################################
 # Fichier .htaccess pour les URLs propres ; a installer   #
-# si vous reglez $type_urls='propres'                     #
+# si vous reglez $type_urls='propres' ou 'propres2'       #
 # dans ecrire/mes_options.php3                            #
 # (fichier associe : inc-urls-propres.php3)               #
 #                                                         #
@@ -9,8 +9,27 @@
 
 RewriteEngine On
 
-### si votre site est en sous-domaine, preciser ci-dessous
-# RewriteBase /sous/domaine/
+### Si votre site est dans un sous-repertoire, preciser ci-dessous
+# RewriteBase /sous/repertoire/
+
+
+
+
+################ DEBUT HTACCESS SPIP ######################
+
+### Supprimez le '#' de la ligne ci-dessous si votre hebergement
+### lit les .php3 avec php3 au lieu de php4 ou php5 (sans garantie!)
+# AddType x-mapp-php4 .php3
+
+
+###
+# Si le fichier ou repertoire existe, ignorer toutes les regles suivantes
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule "." - [skip=100]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule "." - [skip=100]
+#
+###
 
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
@@ -22,33 +41,33 @@ RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
 # Fin compatibilite
 ###
 
+###
+# URLs "propres" et "propres2"
+
 # Rediriger les mots et breves sans le "+" final
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(\+[^/\.\+]+)(\.html)?$ /$1+$2 [QSA,R]
 
 # Les mots-cles
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^\+-[^/\.]+-\+(\.html)?$ mot.php3 [QSA,E=url_propre:$0,L]
 
 # Les breves
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^\+[^/\.]+\+(\.html)?$ breve.php3 [QSA,E=url_propre:$0,L]
 
 # Les rubriques
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^-[^/\.]+-(\.html)?$ rubrique.php3 [QSA,E=url_propre:$0,L]
 
 # les auteurs
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^_[^/\.]+(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
 
 # Les articles (en dernier car expression plus "large")
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]
 
+# Fin URLs "propres" et "propres2"
+###
+
+# rediriger les .php3 errones vers .php
+RewriteCond %{REQUEST_FILENAME} (.*\.php)3$
+RewriteCond $1 -f
+RewriteRule . $1 [QSA,L]
+
+################ FIN HTACCESS SPIP ########################
