@@ -288,31 +288,42 @@ function applique_filtres($p) {
 
 function filtres_arglist($args, $p, $sep) {
 	$arglist ='';
+
 	while (strlen($args = trim($args))) {
-		if ($args[0] =='"')
-			ereg ('^"([^"]*)",?(.*)$', $args, $regs);
-		else if ($args[0] =="'")
-			ereg ("^'([^']*)',?(.*)$", $args, $regs);
+		if ($args[0] == '"')
+			ereg ('^[[:space:]]*(")([^"]*)"[[:space:]]*,?(.*)$', $args, $regs);
+		else if ($args[0] == "'")
+			ereg ("^[[:space:]]*(')([^']*)'[[:space:]]*,?(.*)$", $args, $regs);
 		else
-			ereg('^([^,]*),?(.*)$', $args, $regs);
+			ereg('^([[:space:]]*)([^,]*),?(.*)$', $args, $regs);
 
-		$arg = trim($regs[1]);
-		$args = $regs[2];
+		// $quote differencie {#ID_ARTICLE} et {'#ID_ARTICLE'}
+		$quote = trim($regs[1]);	// valeur = ", ', ou vide
+		$arg = $regs[2];			// le premier argument
+		$args = $regs[3];			// ceux qui restent
 
-		if ($arg[0] =='$')
-			$arg = '$Pile[0][\'' . substr($arg,1) . "']";
-		else if ($arg[0] =='<')
-			$arg = calculer_texte($arg, $p->id_boucle, $p->boucles);
-		else if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
-			$p->nom_boucle = $r2[2];
-			$p->nom_champ = $r2[3];
-			# faudrait verifier !trim(r2[5])
-			$arg = calculer_champ($p);
-		} else if (!is_numeric($arg))
+		if ($quote)
 			$arg = "'" . texte_script($arg) . "'";
+		else {
+			$arg = trim($arg);
+			if ($arg[0] =='$')
+				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
+			else if ($arg[0] =='<')
+				$arg = calculer_texte($arg, $p->id_boucle, $p->boucles);
+			else if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
+				$p->nom_boucle = $r2[2];
+				$p->nom_champ = $r2[3];
+				# faudrait verifier !trim(r2[5])
+				$arg = calculer_champ($p);
+			} else if (is_numeric($arg))
+				$arg = $arg;
+			else
+				$arg = "'" . texte_script($arg) . "'";
+		}
 
 		$arglist .= $sep . $arg;
 	}
+
 	return $arglist;
 }
 
