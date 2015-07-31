@@ -20,11 +20,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@copie_locale
 function copie_locale($source, $mode='auto') {
-	// Si copie_locale() est appele depuis l'espace prive
-	if (!_DIR_RESTREINT
-	AND strpos(_DIR_RACINE . $source, _DIR_IMG) === 0)
-		return _DIR_RACINE . $source;
-
 	$local = fichier_copie_locale($source);
 
 	// test d'existence du fichier
@@ -244,13 +239,8 @@ function nom_fichier_copie_locale($source, $extension) {
 //
 // http://doc.spip.org/@fichier_copie_locale
 function fichier_copie_locale($source) {
-	// Si c'est une image de IMG/ pas de souci
-	if (preg_match(',^'._DIR_IMG.',', $source))
-		return $source;
-	else if (preg_match(',^'._DIR_IMG_PACK.',', $source))
-		return $source;
-
-	else if (preg_match(',^'._DIR_RACINE.'dist/,', $source))
+	// Si c'est une image locale pas de souci
+	if (!preg_match(',^(\w+:),', $source))
 		return $source;
 
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
