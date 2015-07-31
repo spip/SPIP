@@ -813,6 +813,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_symbole_jaune' => 'Das <B>gelbe</b> Symbol bedeutet <B>Ank&uuml;ndigung an alle Redakteure</b> (f&uuml;r alle Redakteure sichtbar, &Auml;nderung nur durch Adnministratoren)',
 'info_symbole_vert' => 'Das <B>gr&uuml;ne</b> Symbol bedeutet  <B>Nachricht f&uuml;r andere Benutzer </b> der Website.',
 'info_syndication' => 'Syndikation:',
+'info_syndication_articles' => 'Artikel',
 'info_taille_maximale_vignette' => 'Maximale Gr&ouml;sse der Icons des Systems:',
 'info_telecharger' => 'Von Ihrem Computer hochladen:',
 'info_telecharger_nouveau_logo' => 'Neues Logo hochladen:',
@@ -925,6 +926,10 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'item_utiliser_mots_cles' => 'Schlagworte verwenden',
 'item_utiliser_syndication' => 'Automatische Syndikation verwenden',
 'item_visiteur' => 'Besucher',
+
+
+// J
+'jour_non_connu_nc' => 'unbekannt',
 
 
 // L
