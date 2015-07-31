@@ -464,7 +464,7 @@ function filtre_logique($fonc, $code, $arg)
 		case ($fonc == 'xor') OR ($fonc == 'xou'):
 			return "((($code) XOR ($arg)) ?' ' :'')";
 		case ($fonc == 'sinon'):
-			return "(((\$a = $code) OR (is_string(\$a) AND strlen(\$a))) ? \$a : $arg)";
+			return "(((\$a = $code) OR (!is_array(\$a) AND strlen(\$a))) ? \$a : $arg)";
 		case ($fonc == 'not') OR ($fonc == 'non'):
 			return "(($code) ?'' :' ')";
 		case ($fonc == 'yes') OR ($fonc == 'oui'):
