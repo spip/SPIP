@@ -462,6 +462,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_48();
 	  maj_version('1.948');
 	}
+	if (upgrade_vers(1.949, $version_installee, $version_cible)) {
+	  maj_v019_49();
+	  maj_version('1.949');
+	}
 }
 
 function maj_v019_45()
@@ -593,4 +597,11 @@ function maj_v019_48()
 {
 	sql_alter("TABLE spip_versions CHANGE id_version bigint(21) DEFAULT 0 NOT NULL");
 }
+
+function maj_v019_49()
+{
+	sql_alter("TABLE spip_versions DROP INDEX date");
+	sql_alter("TABLE spip_versions DROP INDEX id_auteur");
+}
+
 ?>
