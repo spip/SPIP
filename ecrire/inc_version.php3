@@ -813,7 +813,7 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 	global $db_ok, $dir_ecrire;
 
 	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
-	$timeoutfile = $dir_ecrire.'data/surcharge-mysql';
+	$timeoutfile = $dir_ecrire.'data/lock';
 	if (@file_exists($timeoutfile)
 	AND ((time() - @filemtime($timeoutfile)) < 600)) {
 		spip_debug ("lock hebergeur $timeoutfile");
