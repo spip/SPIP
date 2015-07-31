@@ -18,110 +18,78 @@ include_spip('inc/suivi_versions');
 // http://doc.spip.org/@exec_suivi_revisions_dist
 function exec_suivi_revisions_dist()
 {
-  global
-    $connect_id_auteur,
-    $connect_statut,
-    $debut,
-    $id_auteur,
-    $id_secteur,
-    $lang_choisie,
-    $uniq_auteur;
+	$debut = intval(_request('debut'));
+	$lang_choisie = _request('lang_choisie');
+	$id_auteur = intval(_request('id_auteur'));
+	$id_secteur = intval(_request('id_secteur'));
 
-$debut = intval($debut);
-$id_auteur = ($id_auteur == $connect_id_auteur) ? $id_auteur : false;
+	$nom_auteur = $GLOBALS['auteur_session']['nom'];
+	$connecte = $GLOBALS['auteur_session']['id_auteur'];
+	if ($id_auteur == $connecte) $id_auteur = false;
 
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T("icone_suivi_revisions"));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("icone_suivi_revisions"));
 
+	debut_gauche();
 
-//////////////////////////////////////////////////////
-// Affichage de la colonne de gauche
-//
+	if (autoriser('voir', 'article'))
+	  $req_where = "('prepa','prop','publie')"; 
+	else $req_where = "('prop','publie')"; 
 
-debut_gauche();
+	debut_cadre_relief();
 
+	echo "<div class='arial11'><ul>";
 
-if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
-else $req_where = " AND articles.statut IN ('prop','publie')"; 
-
-echo "<p>";
+	if (!$id_auteur AND $id_secteur < 1) echo "\n<li><b>"._T('info_tout_site')."</b></li>";
+	else echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions") . "'>"._T('info_tout_site')."</a></li>";
 
 
-debut_cadre_relief();
+	if ($id_auteur) echo "\n<li><b>$nom_auteur</b></li>";
+	else echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_auteur=$connecte") . "'>$nom_auteur</a></li>";
 
-echo "<div class='arial11'><ul>";
-echo "<p>";
+	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))
 
-if (!$id_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
-else echo "<li><a href='" . generer_url_ecrire("suivi_revisions") . "'>"._T('info_tout_site')."</a>";
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+	else $langues = array();
 
-echo "<p>";
+	$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre");
 
-$nom_auteur = $GLOBALS['auteur_session']['nom'];
-
-if ($id_auteur) echo "<li><b>$nom_auteur</b>";
-else echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_auteur=$connect_id_auteur") . "'>$nom_auteur</a>";
-
-echo "<p>";
-
-$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre");
-
-while ($row = spip_fetch_array($result)) {
-	$id_rubrique = $row['id_rubrique'];
-	$titre = typo($row['titre']);
+	while ($row = spip_fetch_array($result)) {
+		$id_rubrique = $row['id_rubrique'];
+		$titre = typo($row['titre']);
 	
-	$result_rub = spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1");
+		if ($id_rubrique == $id_secteur)  echo "\n<li><b>$titre</b>";
+		else {
+			$result_rub = spip_query("SELECT articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where LIMIT 1");
+			if (spip_num_rows($result_rub) > 0) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a></li>";
+		}
+		foreach ($langues as $lang) {
+			$titre = traduire_nom_langue($lang);
 	
-	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
-	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a>";
-}
+			$result_lang = spip_query("SELECT versions.* FROM spip_versions AS versions, spip_articles AS articles WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where LIMIT 1");
 
-if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
-	echo "<p>";
-	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
-	
-	foreach ($langues as $lang) {
-		$titre = traduire_nom_langue($lang);
-	
-		$result_lang = spip_query("SELECT versions.* FROM spip_versions AS versions, spip_articles AS articles WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 1");
-
-		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
-		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a>";
+			if ($lang == $lang_choisie)  echo "\n<li><b>$titre</b></li>";
+			else if (spip_num_rows($result_lang) > 0) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
+		}
 	}
-}
-
-
-echo "</ul></div>\n";
+	echo "</ul></div>\n";
 
 // lien vers le rss
 
-$op = 'revisions';
-$args = array(
+
+	$args = array(
 	'id_secteur' => $id_secteur,
 	'id_auteur' => $id_auteur,
 	'lang_choisie' => $lang_choisie
-);
-echo "<div style='text-align: "
-	. $GLOBALS['spip_lang_right']
-	. ";'>"
-	. bouton_spip_rss($op, $args)
-	."</div>";
+	);
+	$op =  bouton_spip_rss('revisions', $args);
 
+	echo "<div style='text-align: ", $GLOBALS['spip_lang_right'], ";'>", $op, "</div>";
 
-fin_cadre_relief();
+	fin_cadre_relief();
 
-
-
-//////////////////////////////////////////////////////
-// Affichage de la colonne de droite
-//
-
-
-echo debut_droite("", true);
-
- echo afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
-
-echo fin_gauche(), fin_page();
+	echo debut_droite("", true);
+	echo afficher_suivi_versions($debut, $id_secteur, $id_auteur, $lang_choisie);
+	echo fin_gauche(), fin_page();
 }
-
 ?>
