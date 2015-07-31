@@ -18,7 +18,7 @@ include_spip('inc/extra');
 // http://doc.spip.org/@inc_editer_article_dist
 function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
 {
-	// Appel en tant que filtre d'un squelette 
+	// Appel en tant que filtre d'un squelette
 	if (!$row) {
 		include_spip('inc/presentation');
 		include_spip('inc/article_select');
@@ -30,6 +30,8 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
 	$id_article = ($new OR $lier_trad) ? 'oui' : $row['id_article'];
+
+	$contexte['config'] = $config = $config_fonc($row);
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
 		 (!$lier_trad ? '' :
@@ -50,11 +52,10 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		unset($contexte['lang']);
 	}
 
-	$contexte['config'] = $config = $config_fonc($row);	
 	$contexte['browser_caret']=$GLOBALS['browser_caret'];
 	include_spip('public/assembler');
 	$form .= recuperer_fond("prive/editer/article", $contexte);
-	
+
 	$form .= $hidden
 	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -90,7 +91,7 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 
 	if ($config['afficher_barre']) {
 		include_spip('inc/barre');
-		$afficher_barre = '<div>' 
+		$afficher_barre = '<div>'
 		.  afficher_barre("document.getElementById('text_area')",false,$lang)
 		. '</div>';
 	} else $afficher_barre = '';
@@ -102,7 +103,7 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 	} else $sup='';
 
 	return	"\n<p><label for='text_area'><b>" ._T('info_texte') ."</b></label>"
-	. $aider ("arttexte") . "<br />\n" 
+	. $aider ("arttexte") . "<br />\n"
 	. _T('texte_enrichir_mise_a_jour')
 	. $aider("raccourcis")
 	. "</p>"
