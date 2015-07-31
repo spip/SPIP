@@ -802,7 +802,8 @@ dans une couleur qui indique leur état :',
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s',
 	'queue_no_job_in_queue' => 'Aucun travail en attente',
 	'queue_one_job_in_queue' => '1 travail en attente',
-	'queue_purger_queue' => 'Purger la liste des travaux',
+	'queue_purger_queue' => 'Réinitialiser la liste des travaux',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques',
 	'queue_titre' => 'Liste des travaux',
 
 	// R

@@ -24,6 +24,7 @@
 		</ul>
 		[<p class="pagination">(#PAGINATION{prive})</p>]
 		[(#AUTORISER{'purger','queue'}|oui)
+		<p><:queue_info_purger:></p>
 		<div class="actions">
 			[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
 		</div>
@@ -32,6 +33,7 @@
 </B_jobs>
 	<h3><:queue_no_job_in_queue:></h3>
 	[(#AUTORISER{'purger','queue'}|oui)
+	<p><:queue_info_purger:></p>
 	<div class="actions">
 		[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
 	</div>
