@@ -30,11 +30,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 
 	if ($document) {
 		// premier appel
-		$flag_deplie = teste_doc_deplie($id_document);
+		$flag = teste_doc_deplie($id_document);
 	} else if ($id_document) {
 		// retour d'Ajax
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
-		$flag_deplie = 'ajax';
+		$flag = 'ajax';
 	} else {
 		return;
 	}
@@ -89,7 +89,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 	  "</textarea>\n" .
 	  $taille .
 	  "\n<div " .
-	  ($flag_deplie == 'ajax' ? '' : "class='display_au_chargement'") .
+	  ($flag == 'ajax' ? '' : "class='display_au_chargement'") .
 	  "id='valider_doc$id_document' align='".
 	  $GLOBALS['spip_lang_right'].
 	  "'>\n<input class='fondo' style='font-size:9px;' value='".
@@ -110,12 +110,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 	. "\n\n\n\n"
 	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps = block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag_deplie);
+	$corps = block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag);
 
-	return ($flag_deplie === 'ajax') ? $corps :
-	   "<div id='legender-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] .";  padding: 5px; margin: 3px; background-color: white;'>" .
-	   $corps .
-	  '</div>';
+	$atts = " class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] .";  padding: 5px; margin: 3px; background-color: white;'";
+
+	return greffe_action_ajax("legender-$id_document", $corps, $atts);
 }
 
 

@@ -160,7 +160,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 				"var_ajaxcharset=utf-8&script=$script$args_ajax",
 				$corps,
 				(" method='post'\nonsubmit="
-				 . declencheur_ajax('this', $ancre, $fct_ajax)));
+				 . declencheur_action_ajax('this', $ancre, $fct_ajax)));
 				 
 		}
 	}
@@ -184,12 +184,12 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
 		return "<a href='$href'\nonclick="
-		.  declencheur_ajax("\"$ajax\"", $ancre, $fct_ajax)
+		.  declencheur_action_ajax("\"$ajax\"", $ancre, $fct_ajax)
 		. ">$clic</a>";
 	}
 }
 
-function declencheur_ajax($request, $noeud, $fct_ajax)
+function declencheur_action_ajax($request, $noeud, $fct_ajax)
 {
 	return "'return AjaxSqueeze("
 	. $request
@@ -198,6 +198,13 @@ function declencheur_ajax($request, $noeud, $fct_ajax)
 	. '"'
 	. (!$fct_ajax ? '' : ",$fct_ajax")
 	. ")'";
+}
+
+function greffe_action_ajax($idom, $corps, $atts='')
+{
+	return _request('var_ajaxcharset')
+	? $corps
+	: "\n<div id='$idom'$atts>$corps</div>";
 }
 
 // http://doc.spip.org/@determine_upload

@@ -96,8 +96,6 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 	$res .="</span>";
 	$res = ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
 
-	return ($ajax == 'ajax') 
-	? $res
-	: "<div id='petitionner-$id_article'>$res</div>";
+	return greffe_action_ajax("petitionner-$id_article", $res);
 }
 ?>

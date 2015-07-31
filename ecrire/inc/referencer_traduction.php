@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err='')
+function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_trad, $trad_err='')
 {
 	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
 
@@ -24,7 +24,7 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 
 	$reponse = '';
 	// Choix langue article
-	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag_editable) {
+	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag) {
 
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
@@ -70,7 +70,7 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 
 	$form = "<table width='100%'><tr>";
 
-	if ($flag_editable AND $options == "avancees" AND !$table) {
+	if ($flag AND $options == "avancees" AND !$table) {
 			// Formulaire pour lier a un article
 		$form .= "<td class='arial2' width='60%'>"
 		. ajax_action_auteur("referencer_traduction",
@@ -89,7 +89,7 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
 	. "</td>";
 
-	if ($flag_editable AND $options == "avancees" AND $table) {
+	if ($flag AND $options == "avancees" AND $table) {
 		$clic = _T('trad_delier');
 		$form .= "<td background='' width='10'> &nbsp; </td>"
 		. "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
@@ -110,9 +110,8 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 	if ($langue_article)
 		$bouton .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
-	return ($flag_editable === 'ajax')
-		? 
-			(debut_cadre_enfonce('langues-24.gif', true, "", 
+	if ($flag === 'ajax')
+		$res = debut_cadre_enfonce('langues-24.gif', true, "", 
 				bouton_block_visible('languearticle,lier_traductions')
 				. $bouton)
 			. debut_block_visible('languearticle')
@@ -122,10 +121,8 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 			. debut_block_visible('lier_traductions')
 			. $form
 			. fin_block()
-			. fin_cadre_enfonce(true)
-			. fin_block())
-		:	("<div id='referencer_traduction-$id_article'>"
-			. debut_cadre_enfonce('langues-24.gif', true, "",
+			. fin_cadre_enfonce(true);
+	else $res =  debut_cadre_enfonce('langues-24.gif', true, "",
 				bouton_block_invisible('languearticle,lier_traductions')
 				. $bouton)
 			. debut_block_invisible('languearticle')
@@ -135,8 +132,8 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 			. debut_block_invisible('lier_traductions')
 			. $form
 			. fin_block()
-			. fin_cadre_enfonce(true)
-			. "</div>");
+			. fin_cadre_enfonce(true);
+	return greffe_action_ajax("referencer_traduction-$id_article", $res);
 }
 
 

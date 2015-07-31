@@ -21,7 +21,7 @@ function inc_documenter_dist(
 	$doc,		# tableau des documents ou numero de l'objet attachant
 	$type = "article",	# article ou rubrique ?
 	$ancre = 'portfolio',	# album d'images ou de documents ?
-	$flag_modif = false,	# a-t-on le droit de modifier ?
+	$flag = false,	# a-t-on le droit de modifier ?
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
@@ -68,8 +68,8 @@ function inc_documenter_dist(
 		else if ($case == $bord_droit)
 			$style .= " border-$spip_lang_right: 1px solid $couleur;";
 		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>"
-		.  $tourner($id_document, $document, $script, $flag_modif, $type)
-		. (!$flag_modif  ? '' :
+		.  $tourner($id_document, $document, $script, $flag, $type)
+		. (!$flag  ? '' :
 		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre))
 		. (!isset($document['info']) ? '' :
 		       ("<div class='verdana1'>".$document['info']."</div>"))
@@ -107,7 +107,5 @@ function inc_documenter_dist(
 	. $res
 	. "</table>";	  
 
-	return ($flag_modif === 'ajax')
-	? $res
-	: ("<div id='documenter-$s$doc'>$res</div>");
+	return greffe_action_ajax("documenter-$s$doc", $res);
 }

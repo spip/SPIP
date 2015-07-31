@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-function inc_editer_auteurs_dist($id_article, $flag_editable, $cherche_auteur, $ids)
+function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 {
   global $spip_lang_left, $spip_lang_right, $options;
 
@@ -55,14 +55,14 @@ function inc_editer_auteurs_dist($id_article, $flag_editable, $cherche_auteur, $
 		$les_auteurs[]= $row['id_auteur'];
 
 	if ($les_auteurs = join(',', $les_auteurs)) 
-		$reponse .= afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs);
+		$reponse .= afficher_auteurs_articles($id_article, $flag, $les_auteurs);
 
 //
 // Ajouter un auteur
 //
 
  $res = '';
- if ($flag_editable AND $options == 'avancees') {
+ if ($flag AND $options == 'avancees') {
 
 	if ($bouton_creer_auteur) {
 
@@ -78,9 +78,9 @@ function inc_editer_auteurs_dist($id_article, $flag_editable, $cherche_auteur, $
 
  }
 
- $bouton = (!$flag_editable 
+ $bouton = (!$flag 
 	    ? ''
-	    : (($flag_editable === 'ajax')
+	    : (($flag === 'ajax')
 	        ? bouton_block_visible("auteursarticle")
 	       : bouton_block_invisible("auteursarticle")))
  . _T('texte_auteurs')
@@ -89,16 +89,14 @@ function inc_editer_auteurs_dist($id_article, $flag_editable, $cherche_auteur, $
  $res = '<div>&nbsp;</div>' // pour placer le gif patienteur
  . debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
  . $reponse
- .  ($flag_editable === 'ajax' ?
+ .  ($flag === 'ajax' ?
      debut_block_visible("auteursarticle") :
      debut_block_invisible("auteursarticle"))
  . $res
  . fin_block()
  . fin_cadre_enfonce(true);
 
- return ($flag_editable === 'ajax')
-   ? $res
-   :  "\n<div id='editer_auteurs-$id_article'>$res</div>";
+ return greffe_action_ajax("editer_auteurs-$id_article", $res);
 }
 
 // http://doc.spip.org/@rechercher_auteurs_articles

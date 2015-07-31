@@ -22,13 +22,13 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 	
 	if (!$logo = $logo_f($id, $id_objet, 'on')) {
 		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script);
-		$res .= block_parfois_visible('on', "<b>$texteon</b>", $masque);
+		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque);
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
 		$masque = block_parfois_visible('on', "<b>$texteon</b><p>$img</p>", $clic, 'margin-bottom: -2px');
 
-		$res .= "<center>$masque</center><br /><br />";;
+		$res = "<center>$masque</center><br /><br />";;
 		$texteoff = _T('logo_survol');
 
 		if ($logo = $logo_f($id, $id_objet, 'off')) {
@@ -50,9 +50,7 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 	. "</div>"
 	. fin_cadre_relief(true);
 
-	return (_request('var_ajaxcharset')) 
-	?  $res
-	: "<div id='iconifier-$id'>$res</div>";
+	return greffe_action_ajax("iconifier-$id", $res);
 }
 
 global $logo_libelles;
