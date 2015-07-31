@@ -103,31 +103,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 #	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
-	return('$Pile[0][\''.$nom_champ.'\']');
-}
-
-# calculer_champ genere le code PHP correspondant a une balise Spip
-# Retourne une EXPRESSION php 
-function calculer_champ($p) {
-	$p = calculer_balise($p->nom_champ, $p);
-
-	// definir le type et les traitements
-	// si ca ramene le choix par defaut, ce n'est pas un champ 
-
-	if (($p->code) && ($p->code != '$Pile[0][\''.$nom.'\']')) {
-		// Par defaut basculer en numerique pour les #ID_xxx
-		if (substr($nom,0,3) == 'ID_') $p->statut = 'num';
-	}
-
-	else {
-	// on renvoie la forme initiale '#TOTO'
-	$p->code = "'#" . $nom . "'";
-	$p->statut = 'php';	// pas de traitement
-	
-	}
-
-	// Retourner l'expression php correspondant au champ + ses filtres
-	return applique_filtres($p);
+	return('$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
@@ -135,7 +111,14 @@ function champ_sql($champ, $p) {
 	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
 }
 
-// cette fonction sert d'API pour demander une balise quelconque sans filtre
+// cette fonction sert d'API pour demander une balise Spip avec filtres
+
+function calculer_champ($p) {
+	$p = calculer_balise($p->nom_champ, $p);
+	return applique_filtres($p);
+}
+
+// cette fonction sert d'API pour demander une balise Spip sans filtres
 function calculer_balise($nom, $p) {
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
@@ -165,6 +148,8 @@ function calculer_balise($nom, $p) {
 
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
+
+	if (strpos($nom, 'ID_') === 0) $p->statut = 'num';
 
 	// Compatibilite ascendante avec les couleurs html (#FEFEFE) :
 	// SI le champ SQL n'est pas trouve
