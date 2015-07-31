@@ -204,7 +204,7 @@ function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre, $nom_site
 		."<li class='haut'><label for='texte' >"
 	  	. _T('info_texte_message')
 	  	."</label>"
-			."<textarea name='texte' id='texte' class='textarea'>\n"
+			."<textarea name='texte' id='texte' rows='13' class='textarea'>\n"
 			. $texte
 			. "</textarea>"
 			."<input type='hidden' name='modif_forum' value='oui' />\n"
