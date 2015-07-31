@@ -34,7 +34,7 @@ function find_langs_in_path ($file, $dirname='lang') {
 			}
 		}
 	}
-	return $liste;
+	return array_reverse($liste);;
 }
 //
 // Charger un fichier langue
