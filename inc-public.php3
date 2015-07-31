@@ -97,7 +97,9 @@ else {
 	}
 
 	if ($envoi) {
-		@header("Content-Length: ".strlen($envoi));
+#		avec la compression cet entete provoque la mort de
+#		la commande 'ab -n100 -c10 http://....'
+#		@header("Content-Length: ".strlen($envoi));
 		@header("Connection: close");
 		echo $envoi;
 	}
