@@ -24,7 +24,7 @@ else {
 
 
 if (file_exists("mes_fonctions.php3")) {
-	include_local("mes_fonctions.php3");
+	include ("mes_fonctions.php3");
 }
 
 
