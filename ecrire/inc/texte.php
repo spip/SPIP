@@ -565,7 +565,7 @@ function corriger_typo($letexte) {
 		// Proteger les caracteres typographiques a l'interieur des tags html
 		$protege = "!':;?~%-";
 		$illegal = "\x1\x2\x3\x4\x5\x6\x7\x8";
-		if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~%][^<>]*>,imsS",
+		if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$insert = $reg[0];
