@@ -85,6 +85,7 @@ function convert_utf8_dist() {
 		'spip_petitions' => 'texte',
 		'spip_signatures' => 'nom_email',
 		'spip_syndic' => 'nom_site',
+		'spip_syndic_articles' => 'titre',
 		'spip_messages' => 'titre'
 	);
 
