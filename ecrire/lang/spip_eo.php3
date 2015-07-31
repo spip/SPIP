@@ -1182,7 +1182,7 @@ kaj rekonekti vin al la teksejo.
 'pass_nouveau_pass' => 'Nova pasvorto',
 'pass_ok' => 'BONE',
 'pass_oubli_mot' => 'Forgeso de pasvorto',
-'pass_quitter_fenetre' => 'Forlasi tiun fenestron<',
+'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 'pass_rappel_login' => 'Konsciu: via identigilo (salutnomo, login) estas &laquo; @login@ &raquo;.',
 'pass_recevoir_mail' => 'Vi ricevos retmesa&#285;on indikantan al vi kiel retrovi vian aliron al la teksejo.',
 'pass_retour_public' => 'Reiro al la publika spaco',
