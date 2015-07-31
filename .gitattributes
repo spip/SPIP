@@ -88,7 +88,6 @@ ecrire/exec/informer_auteur.php -text
 ecrire/exec/infos_perso.php -text
 ecrire/exec/install.php -text
 ecrire/exec/menu_rubriques.php -text
-ecrire/exec/navigation.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/plonger.php -text
 ecrire/exec/puce_statut.php -text
@@ -672,6 +671,7 @@ prive/squelettes/contenu/configurer_langage.html -text
 prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
+prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/visiteurs.html -text
 prive/squelettes/contenu/visiteurs_fonctions.php -text
 prive/squelettes/extra/dist.html -text
@@ -686,6 +686,7 @@ prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
 prive/squelettes/inclure/admin_vider_images.html -text
 prive/squelettes/inclure/admin_vider_images_fonctions.php -text
 prive/squelettes/inclure/barre-nav.html -text
+prive/squelettes/inclure/barre-nav_fonctions.php -text
 prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text

@@ -14,8 +14,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/boutons');
 
-function definir_barre_contexte(){
-	$contexte = $_GET;
+function definir_barre_contexte($contexte = null){
+	if (is_null($contexte))
+		$contexte = $_GET;
+	elseif(is_string($contexte))
+		$contexte = unserialize($contexte);
 	if (!isset($contexte['id_rubrique'])){
 		foreach(array('article','site','breve') as $type) {
 			$_id = id_table_objet($type);
@@ -114,178 +117,6 @@ function bandeau_creer_url($url, $args="", $contexte=null){
 	return $url;
 }
 
-/**
- * Lister le contenu d'un sous menu dans des elements li de class $class
- *
- * @param array $sousmenu
- * @param string $class
- * @return string
- */
-function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false){
-	$class = $class ? " class='$class'":"";
-	$sous = "";
-	if (is_array($sousmenu)){
-		$sous = "";
-		foreach($sousmenu as $souspage => $sousdetail){
-			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
-			if (!$image){
-					$sous .= "<li$class>"
-			 . "<a href='$url' class='bando2_$souspage'>"
-			 . _T($sousdetail->libelle)
-			 . "</a>"
-			 . "</li>";
-			}
-			else {
-					//$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
-					$sous .= "<li$class>"
-			 . "<a href='$url' class='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
-			 . "<span>"._T($sousdetail->libelle)."</span>"
-			 . "</a>"
-			 . "</li>";
-			}
-		}
-	}
-	return $sous;
-}
-
-/**
- * Construire le bandeau de navigation principale de l'espace prive
- * a partir de la liste des boutons definies dans un tableau d'objets
- *
- * @param array $boutons
- * @return string
- */
-function bando_navigation($boutons, $contexte = array())
-{
-	$res = "";
-
-	$first = " class = 'first'";
-	foreach($boutons as $page => $detail){
-        // les outils rapides sont traites a part, dans une barre dediee
-        if (!in_array($page,array('outils_rapides','outils_collaboratifs'))){
-
-            // les icones de premier niveau sont ignoree si leur sous menu est vide
-            // et si elles pointent vers exec=navigation
-            if (
-             ($detail->libelle AND is_array($detail->sousmenu) AND count($detail->sousmenu))
-             OR ($detail->libelle AND $detail->url AND $detail->url!='navigation')) {
-                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
-                $res .= "<li$first>"
-                 . "<a href='$url' id='bando1_$page'>"
-                 . _T($detail->libelle)
-                 . "</a>";
-            }
-
-            $sous = bando_lister_sous_menu($detail->sousmenu, $contexte);
-            $res .= $sous ? "<ul>$sous</ul>":"";
-
-            $res .= "</li>";
-            $first = "";
-        }
-	}
-
-	return "<div id='bando_navigation'><div class='largeur'><ul class='deroulant'>\n$res</ul><div class='nettoyeur'></div></div></div>";
-}
-
-/**
- * Construire le bandeau identite de l'espace prive
- *
- * @return unknown
- */
-function bando_identite(){
-
-	$nom_site = typo($GLOBALS['meta']['nom_site']);
-	$img_info = find_in_theme('images/information-24.png');
-	$url_config_identite = generer_url_ecrire('configurer_identite');
-
-	$res = "";
-
-	$moi = typo($GLOBALS['visiteur_session']['nom']);
-	$img_langue = find_in_theme('images/langues.png');
-	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
-	$url_lang = generer_url_ecrire('configurer_langage');
-
-	$res .= "<p class='session'>"
-	  . "<a title='"._T('icone_informations_personnelles')."' href='".
-	  //generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])
-	  generer_url_ecrire("infos_perso")
-	  ."'>"
-	  . "<strong class='nom'>$moi</strong>"
-	  //. " <img alt='"._T('icone_informations_personnelles')."' src='$img_info'/>"
-	  . "</a>"
-	  . " | "
-	  . "<a class='menu_lang' href='$url_lang' title='"._T('titre_config_langage')."'><img alt='"._T('titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
-	  . " | "
-	  . "<a class='aide' onclick=\"window.open('$url_aide', 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;\" href='$url_aide'>"._T('icone_aide_ligne')."</a>"
-	  . " | "
-	  // $auth_can_disconnect?
-	  . "<a href='".generer_url_action("logout","logout=prive")."'>"._T('icone_deconnecter')."</a>"
-	  . "</p>";
-
-	// informations sur le site
-	$res .= "<p class='nom_site_spip'>"
-	  . "<a class='info' title='Informations sur ".attribut_html($nom_site)."' href='$url_config_identite'>"
-	  . "<strong class='nom'> $nom_site </strong>"
-	  //. "<img alt='Informations sur ".textebrut($nom_site)."' src='$img_info' />"
-	  ."</a>"
-	  . "| "
-	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('icone_visiter_site')."</a>"
-	  . "</p>";
-
-
-	return "<div id='bando_identite'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
-
-}
-
-/**
- * Construire le bandeau des raccourcis rapides
- *
- * @param array $boutons
- * @return string
- */
-function bando_outils_rapides($boutons, $contexte = array()){
-	include_spip('inc/presentation_mini');
-    $res = "";
-
-
-	// le navigateur de rubriques
-	$img = find_in_theme('images/boussole-24.png');
-	$url = generer_url_ecrire("articles_tous");
-	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
-	$res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
-	include_spip('exec/menu_rubriques');
-	$res .= menu_rubriques(false);
-	$res .= "</li></ul>";
-
-	// la barre de raccourcis rapides
-	if (isset($boutons['outils_rapides']))
-			$res .= "<ul class='rapides creer'>"
-				. bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,$contexte,'bouton',true)
-				. "</ul>";
-
-	$res .= "<div id='rapides'>";
-
-	// la barre de raccourcis collaboratifs
-	if (isset($boutons['outils_collaboratifs'])) {
-		$sous_menu = bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true);
-		if ($sous_menu)
-			$res .= "<ul class='rapides collaborer'>"
-				. $sous_menu
-				. "</ul>";
-	}
-	$res .= formulaire_recherche("recherche")."</div>";
-
-	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
-}
-
-function bando_liens_acces_rapide(){
-	$res = "";
-	$res .= "<a href='#conteneur' onclick='return focus_zone(\"#conteneur\")'>Aller au contenu</a> | ";
-	$res .= "<a href='#bando_navigation' onclick='return focus_zone(\"#bando_navigation\")'>Aller &agrave; la navigation</a> | ";
-	$res .= "<a href='#recherche' onclick='return focus_zone(\"#recherche\")'>Aller &agrave; la recherche</a>";
-
-	return "<div id='bando_liens_rapides'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
-}
 
 /**
  * Construire tout le bandeau superieur de l'espace prive
@@ -296,16 +127,7 @@ function bando_liens_acces_rapide(){
  * @return unknown
  */
 function inc_bandeau_dist() {
-	$contexte = definir_barre_contexte();
-	$boutons = definir_barre_boutons($contexte, false);
-	return "<div id='bando_haut'>"
-		. bando_liens_acces_rapide()
-		. bando_identite()
-		. bando_navigation($boutons,$contexte)
-		. bando_outils_rapides($boutons,$contexte)
-		. "</div>"
-		;
-
+	return recuperer_fond('prive/squelettes/inclure/barre-nav',$_GET);
 }
 
 ?>

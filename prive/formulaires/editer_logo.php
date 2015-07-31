@@ -65,7 +65,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	}
 	if (!isset ($options['editable']))
 		$options['editable'] = autoriser('iconifier',$objet,$id_objet);
-	
+
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '')&&(!isset($options['editable']) OR $options['editable']),
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),

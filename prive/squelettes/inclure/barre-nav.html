@@ -5,7 +5,91 @@
   Distribue sous licence GPL
 
 ]
-<?php
-$bandeau = charger_fonction('bandeau', 'inc');
-echo $bandeau();
-?>
+#SET{boutons,#ENV**|definir_barre_contexte|definir_barre_boutons{0}}
+<div id='bando_haut'>
+	<div id='bando_liens_rapides'>
+		<div class='largeur clearfix'>
+			<a href='#conteneur' onclick='return focus_zone("#conteneur")'>Aller au contenu</a> |
+			<a href='#bando_navigation' onclick='return focus_zone("#bando_navigation")'>Aller &agrave; la navigation</a> |
+			<a href='#recherche' onclick='return focus_zone("#recherche")'>Aller &agrave; la recherche</a>
+		</div>
+	</div>
+
+	<div id='bando_identite'>
+		<div class='largeur clearfix'>
+			<p class='session'><a
+				   title='<:icone_informations_personnelles:>'
+				   href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|typo)]</strong>
+				</a> |
+				<a class='menu_lang'
+					 href='#URL_ECRIRE{configurer_langage}'
+					 title='<:titre_config_langage:>'>[(#CHEMIN_IMAGE{langues.png}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
+				<a class='aide'
+					 onclick="window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;"
+					 href='#URL_ECRIRE{aide_index,var_lang=#LANG}'><:icone_aide_ligne:></a> |
+				<a href='[(#VAL{logout}|generer_url_action{logout=prive})]'><:icone_deconnecter:></a>
+			</p>
+			<p class='nom_site_spip'><a
+				   class='info'
+					 title='Informations sur [(#NOM_SITE|attribut_html)]'
+					 href='#URL_ECRIRE{configurer_identite}'><strong
+			 	  class='nom'> #NOM_SITE_SPIP </strong></a>|
+				<a class='voir'
+					 href='#URL_SITE_SPIP'><:icone_visiter_site:></a>
+			</p>
+		</div>
+	</div>
+
+	<div id='bando_navigation'>
+		<div class='largeur clearfix'>
+			<B_boutons>
+			<ul class='deroulant'>
+				<BOUCLE_boutons(POUR)
+					{tableau #GET{boutons}}
+					{cle!=outils_rapides}
+					{cle!=outils_collaboratifs}><li
+						[class="(#VAL{first}|unique)"]><a
+						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+						id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><B_sous><ul><BOUCLE_sous(POUR)
+						{tableau #VALEUR{sousmenu}}>[<li><a
+								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+								class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous></li></BOUCLE_boutons></ul>
+			</B_boutons>
+		</div>
+	</div>
+
+	<div id='bando_outils'>
+		<div class='largeur clearfix'>
+			<ul class='bandeau_rubriques deroulant'>
+				<li class='boussole'><a
+					href='#URL_ECRIRE{articles_tous}'
+					id='boutonbandeautoutsite'>[(#CHEMIN_IMAGE{boussole-24.png}|balise_img)]</a>
+					[(#REM|menu_rubriques)]</li></ul>
+			<B_creer>
+				<ul class='rapides creer'>
+					<BOUCLE_creer(POUR)
+						{tableau #GET{boutons}}
+						{cle=outils_rapides}><BOUCLE_creersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
+						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+						title="[(#VALEUR{libelle}|_T|attribut_html)]"
+						class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_creersous></BOUCLE_creer>
+				</ul>
+			</B_creer>
+			<div id='rapides'>
+				<B_collaborer>
+					<ul class='rapides collaborer'>
+					<BOUCLE_collaborer(POUR)
+						{tableau #GET{boutons}}
+						{cle=outils_collaboratifs}><BOUCLE_collaborersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
+							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+							title="[(#VALEUR{libelle}|_T|attribut_html)]"
+							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
+					</ul>
+				</B_collaborer>
+
+				#FORMULAIRE_RECHERCHE_ECRIRE
+			</div>
+		</div>
+	</div>
+
+</div>
