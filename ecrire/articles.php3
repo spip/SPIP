@@ -94,18 +94,20 @@ $reindexer = false;
 $ok_nouveau_statut = false;
 
 function terminer_changement_statut() {
-	global $statut_nouv, $statut_ancien, $id_article, $reindexer;
+	global $ok_nouveau_statut, $statut_nouv, $statut_ancien, $id_article, $reindexer;
 
-	calculer_rubriques();
-	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_publication($id_article);
+	if ($ok_nouveau_statut) {
+		calculer_rubriques();
+		if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
+			include_ecrire("inc_mail.php3");
+			envoyer_mail_publication($id_article);
+		}
+		if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
+			include_ecrire("inc_mail.php3");
+			envoyer_mail_proposition($id_article);
+		}
+		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
 	}
-	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_proposition($id_article);
-	}
-	if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
 
 	if ($reindexer AND (lire_meta('activer_moteur') == 'oui')) {
 		include_ecrire ("inc_index.php3");
@@ -1609,7 +1611,7 @@ echo "</div>\n";
 fin_page();
 
 
-if ($ok_nouveau_statut) {
+if ($ok_nouveau_statut || $reindexer) {
 	@flush();
 	terminer_changement_statut();
 }
