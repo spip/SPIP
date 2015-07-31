@@ -283,7 +283,7 @@ function debut_boite_info() {
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='#333333'>";
 	*/
 	
-	echo "<div class='cadre-info'>";
+	echo "<div class='cadre-info verdana1'>";
 }
 
 function fin_boite_info() {
