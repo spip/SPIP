@@ -86,9 +86,9 @@ function spip_mysql_select($select, $from, $where,
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
-		$query = "SELECT ". (!is_array($select) ? $select : join(", ", $select)) . $query;
+		$query = (!is_array($select) ? $select : join(", ", $select)) . $query;
 	else
-		$query = "SELECT S_" . join(", S_", $select)
+		$query = "S_" . join(", S_", $select)
 		. " FROM (" . join(", ", $select)
 		. ", COUNT(" . $sousrequete . ") AS compteur " . $query
 		. ") AS S_$table WHERE compteur=" . $cpt;
@@ -97,10 +97,10 @@ function spip_mysql_select($select, $from, $where,
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_resultat($id, 'requete', $query);
+		boucle_debug_resultat($id, 'requete', "SELECT " . $query);
 	}
 
-	if (!($res = @spip_query($query))) {
+	if (!($res = @spip_query("SELECT ". $query))) {
 		include_spip('public/debug');
 		erreur_requete_boucle($query, $id, $table,
 				      spip_sql_errno(),

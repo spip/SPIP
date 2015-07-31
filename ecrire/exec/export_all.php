@@ -29,8 +29,6 @@ $action = _T('info_exportation_base', array('archive' => $archive));
 
 debut_admin(generer_url_post_ecrire("export_all","archive=$archive&gz=$gz"), $action);
 
-$debug_limit = '';
-
  $debut_limit = intval($debut_limit);
 
 install_debut_html(_T('info_sauvegarde'));
@@ -52,54 +50,31 @@ $_fputs = ($gz) ? gzputs : fputs;
 if ($etape < 2)
 	$_fputs($f, "<"."?xml version=\"1.0\" encoding=\"".$GLOBALS['meta']['charset']."\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
-$query = "SELECT * FROM spip_rubriques";
-export_objets($query, "rubrique", $f, $gz, $etape, 1, _T('info_sauvegarde_rubriques'));
+export_objets("spip_rubriques", "rubrique", $f, $gz, $etape, 1, _T('info_sauvegarde_rubriques'));
 
-$query = "SELECT * FROM spip_auteurs";
-export_objets($query, "auteur", $f, $gz, $etape, 2, _T('info_sauvegarde_auteurs'));
+export_objets("spip_auteurs", "auteur", $f, $gz, $etape, 2, _T('info_sauvegarde_auteurs'));
 
-$query = "SELECT * FROM spip_articles";
-export_objets($query, "article", $f, $gz, $etape, 3, _T('info_sauvegarde_articles'));
+export_objets("spip_articles", "article", $f, $gz, $etape, 3, _T('info_sauvegarde_articles'));
 
-$query = "SELECT * FROM spip_types_documents";
-export_objets($query, "type_document", $f, $gz, $etape, 4, _T('info_sauvegarde_type_documents'));
+export_objets("spip_types_documents", "type_document", $f, $gz, $etape, 4, _T('info_sauvegarde_type_documents'));
 
-$query = "SELECT * FROM spip_documents";
-export_objets($query, "document", $f, $gz, $etape, 5, _T('info_sauvegarde_documents'));
+export_objets("spip_documents", "document", $f, $gz, $etape, 5, _T('info_sauvegarde_documents'));
 
-$query = "SELECT * FROM spip_mots";
-export_objets($query, "mot", $f, $gz, $etape, 6, _T('info_sauvegarde_mots_cles'));
+export_objets("spip_mots", "mot", $f, $gz, $etape, 6, _T('info_sauvegarde_mots_cles'));
 
-$query = "SELECT * FROM spip_groupes_mots";
-export_objets($query, "groupe_mots", $f, $gz, $etape, 7, _T('info_sauvegarde_groupe_mots'));
+export_objets("spip_groupes_mots", "groupe_mots", $f, $gz, $etape, 7, _T('info_sauvegarde_groupe_mots'));
 
-$query = "SELECT * FROM spip_breves".$debug_limit;
-export_objets($query, "breve", $f, $gz, $etape, 8, _T('info_sauvegarde_breves'));
+export_objets("spip_breves", "breve", $f, $gz, $etape, 8, _T('info_sauvegarde_breves'));
 
-//$query = "SELECT * FROM spip_messages";
-//export_objets($query, "message", $f, $gz, $etape, 9, _T('info_sauvegarde_messages'));
+export_objets("spip_forum", "forum", $f, $gz, $etape, 9, _T('info_sauvegarde_forums'));
 
-$query = "SELECT * FROM spip_forum".$debug_limit;
-export_objets($query, "forum", $f, $gz, $etape, 9, _T('info_sauvegarde_forums'));
+export_objets("spip_petitions", "petition", $f, $gz, $etape, 10, _T('info_sauvegarde_petitions'));
 
-$query = "SELECT * FROM spip_petitions";
-export_objets($query, "petition", $f, $gz, $etape, 10, _T('info_sauvegarde_petitions'));
+export_objets("spip_signatures", "signature", $f, $gz, $etape, 11, _T('info_sauvegarde_signatures'));
 
-$query = "SELECT * FROM spip_signatures".$debug_limit;
-export_objets($query, "signature", $f, $gz, $etape, 11, _T('info_sauvegarde_signatures'));
+export_objets("spip_syndic", "syndic", $f, $gz, $etape, 12, _T('info_sauvegarde_sites_references'));
 
-$query = "SELECT * FROM spip_syndic";
-export_objets($query, "syndic", $f, $gz, $etape, 12, _T('info_sauvegarde_sites_references'));
-
-$query = "SELECT * FROM spip_syndic_articles".$debug_limit;
-export_objets($query, "syndic_article", $f, $gz, $etape, 13, _T('info_sauvegarde_articles_sites_ref'));
-
-/*$query = "SELECT * FROM spip_visites".$debug_limit;
-export_objets($query, "spip_visite", $f, $gz, $etape, 14, _T('info_sauvegarde_visites'));
-
-$query = "SELECT * FROM spip_referers".$debug_limit;
-export_objets($query, "spip_referers", $f, $gz, $etape, 15, _T('info_sauvegarde_refers'));
-*/
+export_objets("spip_syndic_articles", "syndic_article", $f, $gz, $etape, 13, _T('info_sauvegarde_articles_sites_ref'));
 
 if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
@@ -122,23 +97,21 @@ if (!$etape OR $etape == 14) fin_admin($action);
 //
 // Exportation generique d'objets (fichier ou retour de fonction)
 //
-function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours="", $etape_actuelle="", $nom_etape="") {
+function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours="", $etape_actuelle="", $nom_etape="") {
 	global $debut_limit;
 	if ($etape_en_cours < 1 OR $etape_en_cours == $etape_actuelle){
 		if ($etape_en_cours > 0) {
 			echo "<li><b>$nom_etape</b>";
 		}
 	
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM $table");
 
 		if ($etape_en_cours > 0){
 			if ($type == "forum"){
 				$total = spip_num_rows($result);
 				if ($total > 5000){
-					$result = spip_query($query.
-#" LIMIT  5000 OFFSET $debut_limit" # PG
-" LIMIT  $debut_limit, 5000"
-							     );
+					$result = spip_query("SELECT * FROM $table LIMIT  $debut_limit, 5000"); #" LIMIT  5000 OFFSET $debut_limit" # PG
+
 					$debut_limit = $debut_limit + 5000;
 					if ($debut_limit > $total) {
 						$debut_limit = 0;
@@ -155,10 +128,8 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 			if ($type == "article"){
 				$total = spip_num_rows($result);
 				if ($total > 500){
-					$result = spip_query($query. 
-#" LIMIT  500 OFFSET $debut_limit" # PG
-" LIMIT  $debut_limit, 500"
-							     );
+					$result = spip_query("SELECT * FROM $table  LIMIT  $debut_limit, 500"); #" LIMIT  500 OFFSET $debut_limit" # PG
+
 					$debut_limit = $debut_limit + 500;
 					if ($debut_limit > $total) {
 						$debut_limit = 0;
@@ -172,7 +143,6 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 					$debut_limit = 0;
 				}
 			}
-		
 		}
 		
 		$_fputs = ($gz) ? gzputs : fputs;
