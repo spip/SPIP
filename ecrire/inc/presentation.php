@@ -2017,31 +2017,42 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 
 	$retour = '';
 
+	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a href='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	  list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+	$lien = "\nhref='$lien'$atts";
+
 	if ($spip_display != 4) {
 		//if (!$fonction) $fonction = "rien.gif";
 	
 		if ($spip_display != 1) {
-			$retour .= "<a href='$lien' class='cellule-h' $javascript>";
-			$retour .= "<table cellpadding='0' valign='middle'><tr>\n";
-			$retour .= "<td><a href='$lien' class='cellule-h'><div class='cell-i'>" ;
+			$retour .= "<a class='cellule-h' $javascript$lien>"
+			. "\n<table cellpadding='0' valign='middle'><tr>\n"
+			. "<td><a class='cellule-h'"
+			. $lien
+			. "><div class='cell-i'>" ;
 			if ($fonction){
 			  $retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
 			}
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</div></a></td>\n" .
-			  "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
-			$retour .= "</tr></table>\n";
-			$retour .= "</a>\n";
+			$retour .= "</div></a></td>" .
+			  "\n<td class='cellule-h-lien'><a class='cellule-h'"
+			. $lien
+			. ">"
+			. $texte
+			. "</a></td></tr></table>\n";
 		}
 		else {
-			$retour .= "<a href='$lien' class='cellule-h-texte' $javascript><div>$texte</div></a>\n";
+			$retour .= "<a class='cellule-h-texte' $javascript$lien><div>$texte</div></a>\n";
 		}
 		if ($fonction == "supprimer.gif")
-			$retour = "<div class='danger'>$retour</div>";
+			$retour = "\n<div class='danger'>$retour</div>";
 	} else {
-		$retour = "<li><a href='$lien'>$texte</a></li>";
+		$retour = "<li><a$lien>$texte</a></li>";
 	}
 
 	if ($echo) echo $retour;

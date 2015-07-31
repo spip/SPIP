@@ -37,7 +37,6 @@ function exec_referencer_traduction_dist()
 
 function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $flag_editable, $trad_err='')
 {
-  spip_log("formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $flag_editable, $trad_err=''");
 	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
 
 	$langue_article = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
@@ -56,10 +55,14 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 		if (!$langue_article)
 			$langue_article = $langue_parent;
 
+		$menu = menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, 'ajax');
+
+		$menu = ajax_action_auteur('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu);
+
 		$reponse .= debut_block_invisible('languesarticle')
 		. debut_cadre_couleur('',true)
-		. "\n<div style='text-align: center;' id='instituer_langue_article-$id_article'>"
-		.  menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer_langue_article', "$id_article-$id_rubrique","articles","id_article=$id_article"))
+		. "\n<div style='text-align: center;'>"
+		. $menu
 		. "</div>\n"
 		. fin_cadre_couleur(true)
 		. fin_block();
@@ -88,7 +91,7 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 	// changer les globales $dir_lang etc
 	changer_typo($langue_article);
 
-	$form .= "<table width='100%'><tr>";
+	$form = "<table width='100%'><tr>";
 
 	if ($flag_editable AND $options == "avancees" AND !$table) {
 			// Formulaire pour lier a un article
@@ -109,13 +112,16 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 	$form .= "<td>"
 	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
 	. "</td>";
+
 	if ($flag_editable AND $options == "avancees" AND $table) {
-			$form .= "<td background='' width='10'> &nbsp; </td>";
-			$form .= "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
-			$form .= "<td background='' width='10'> &nbsp; </td>";
-			$form .= "<td>";
-			$form .= icone_horizontale(_T('trad_delier'), redirige_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles',	"id_article=$id_article"), "traductions-24.gif", "supprimer.gif", false);
-			$form .= "</td>\n";
+		$clic = _T('trad_delier');
+		$form .= "<td background='' width='10'> &nbsp; </td>"
+		. "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td background='' width='10'> &nbsp; </td>"
+		. "<td>"
+		  // la 1ere occurrence de clic ne sert pas en Ajax
+		. icone_horizontale($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif", false)
+		. "</td>\n";
 	}
 
 	$form .= "</tr></table>";
@@ -137,7 +143,6 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 	. fin_block()
 	. fin_cadre_enfonce(true);
 
-	spip_log("rt $flag_editable ($flag_editable === 'ajax')");
 	return ($flag_editable === 'ajax')
 	? $res
 	: "\n<div id='referencer_traduction-$id_article'>$res</div>";
