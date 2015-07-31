@@ -16,14 +16,14 @@ if (defined('_INC_PUBLIC')) {
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
 		$fond = $contexte_inclus['fond'];
-	$page = inclure_page($fond, $contexte_inclus);
+	$subpage = inclure_page($fond, $contexte_inclus);
 
-	if ($page['process_ins'] == 'html')
-		echo $page['texte'];
+	if ($subpage['process_ins'] == 'html')
+		echo $subpage['texte'];
 	else
 		eval('?' . '>' . $page['texte']);
 
-	if ($page['lang_select'] === true)
+	if ($subpage['lang_select'] === true)
 		lang_dselect();
 
 } else {
@@ -102,7 +102,6 @@ if (defined('_INC_PUBLIC')) {
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
 		foreach($page['entetes'] as $k => $v) @header("$k: $v");
-		$texte = $page['texte'];
 	}
 
 	// 2. Cas d'une page contenant du PHP :
@@ -115,7 +114,7 @@ if (defined('_INC_PUBLIC')) {
 		if (!$flag_ob) {
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			eval('?' . '>' . $page['texte']);
-			$texte = '';
+			$page['texte'] = '';
 		}
 
 		// sinon, inclure_balise_dynamique nous enverra peut-etre
@@ -123,8 +122,9 @@ if (defined('_INC_PUBLIC')) {
 		else {
 			ob_start(); 
 			$res = eval('?' . '>' . $page['texte']);
-			$texte = ob_get_contents(); 
+			$page['texte'] = ob_get_contents(); 
 			ob_end_clean();
+
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
@@ -140,37 +140,37 @@ if (defined('_INC_PUBLIC')) {
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
 		include_spip('inc/debug');
-		debug_dumpfile($var_mode_affiche== 'validation' ? $texte :"",
+		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
 
 	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
-		$texte = affiche_erreurs_page($tableau_des_erreurs) . $texte;
+		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs) . $page['texte'];
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {
 		include_spip('inc/surligne');
-		$texte = surligner_mots($texte, $var_recherche);
+		$page['texte'] = surligner_mots($page['texte'], $var_recherche);
 	}
 
 	// Valider/indenter a la demande.
-	if (trim($texte) AND $xhtml AND $html AND !headers_sent()) {
+	if (trim($page['texte']) AND $xhtml AND $html AND !headers_sent()) {
 		# Compatibilite ascendante
 		if ($xhtml === true) $xhtml ='tidy';
 		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
 
 		if ($f = include_fonction($xhtml, 'inc'))
-			$texte = $f($texte);
+			$page['texte'] = $f($page['texte']);
 	}
 
 	// Inserer au besoin les boutons admins
 	if ($affiche_boutons_admin) {
 		include_spip('public/admin');
-		$texte = affiche_boutons_admin($texte);
+		$page['texte'] = affiche_boutons_admin($page['texte']);
 	}
 
 	// Affichage final s'il en reste
-	echo $texte;
+	echo $page['texte'];
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
