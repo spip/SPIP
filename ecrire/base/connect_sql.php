@@ -20,14 +20,25 @@ include_spip('base/objets');
 
 
 
-// API d'appel aux bases de donnees:
-// on charge le fichier config/$serveur ($serveur='connect' pour le principal)
-// qui est cense initaliser la connexion en appelant spip_connect_db
-// laquelle met dans la globale db_ok la description de la connexion
-// On la memorise dans un tableau pour permettre plusieurs serveurs.
-// A l'installation, il faut simuler l'existence de ce fichier
-
-// http://doc.spip.org/@spip_connect
+/**
+ * Connexion à un serveur de base de données
+ *
+ * On charge le fichier `config/$serveur` (`$serveur='connect'` pour le principal)
+ * qui est censé initaliser la connexion en appelant la fonction `spip_connect_db`
+ * laquelle met dans la globale `db_ok` la description de la connexion.
+ *
+ * On la mémorise dans un tableau pour permettre plusieurs serveurs.
+ *
+ * À l'installation, il faut simuler l'existence de ce fichier.
+ *
+ * @uses spip_connect_main() 
+ * 
+ * @param string $serveur Nom du connecteur
+ * @param string $version Version de l'API SQL
+ * @return bool|array
+ *     - false si la connexion a échouée,
+ *     - tableau décrivant la connexion sinon
+**/
 function spip_connect($serveur='', $version='') {
 	global $connexions, $spip_sql_version;
 
@@ -123,6 +134,11 @@ function spip_connect($serveur='', $version='') {
 	return $connexions[$index];
 }
 
+/**
+ * Log la dernière erreur SQL présente sur la connexion indiquée
+ *
+ * @param string $serveur Nom du connecteur de bdd utilisé
+**/
 function spip_sql_erreur($serveur='')
 {
 	$connexion = spip_connect($serveur);
@@ -133,12 +149,24 @@ function spip_sql_erreur($serveur='')
 	spip_log($m, $f.'.'._LOG_ERREUR);
 }
 
-// Cette fonction ne doit etre appelee qu'a travers la fonction sql_serveur
-// definie dans base/abstract_sql
-// Elle existe en tant que gestionnaire de versions,
-// connue seulement des convertisseurs automatiques
-
-// http://doc.spip.org/@spip_connect_sql
+/**
+ * Retourne le nom de la fonction adaptée de l'API SQL en fonction du type de serveur
+ *
+ * Cette fonction ne doit être appelée qu'à travers la fonction sql_serveur
+ * définie dans base/abstract_sql
+ *
+ * Elle existe en tant que gestionnaire de versions,
+ * connue seulement des convertisseurs automatiques
+ *  
+ * @param string $version Numéro de version de l'API SQL
+ * @param string $ins     Instruction de l'API souhaitée, tel que 'allfetsel'
+ * @param string $serveur Nom du connecteur
+ * @param bool   $cont    true pour continuer même si le serveur SQL ou l'instruction est indisponible
+ * @return array|bool|string
+ *     - string : nom de la fonction à utiliser,
+ *     - false : si la connexion a échouée
+ *     - array : description de la connexion, si l'instruction sql est indisponible pour cette connexion
+**/
 function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 	$desc = spip_connect($serveur, $version);
 	if (function_exists($f = @$desc[$version][$ins])) return $f;
@@ -151,23 +179,25 @@ function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 }
 
 /**
- * Fonction appelee par le fichier cree dans config/ a l'instal'.
- * Il contient un appel direct a cette fonction avec comme arguments
+ * Fonction appelée par le fichier connecteur de base de données
+ * crée dans `config/` à l'installation.
+ * 
+ * Il contient un appel direct à cette fonction avec comme arguments
  * les identifants de connexion.
- * Si la connexion reussit, la globale db_ok memorise sa description.
- * C'est un tableau egalement retourne en valeur, pour les appels a l'install'
+ * 
+ * Si la connexion reussit, la globale `db_ok` mémorise sa description.
+ * C'est un tableau également retourné en valeur, pour les appels
+ * lors de l'installation.
  *
- * http://doc.spip.org/@spip_connect_db
- *
- * @param string $host
- * @param string $port
- * @param string $login
- * @param string $pass
- * @param string $db
- * @param string $type
- * @param string $prefixe
- * @param string $auth
- * @return array
+ * @param string $host    Adresse du serveur de base de données
+ * @param string $port    Port utilisé pour la connexion
+ * @param string $login   Identifiant de connexion à la base de données
+ * @param string $pass    Mot de passe pour cet identifiant
+ * @param string $db      Nom de la base de données à utiliser
+ * @param string $type    Type de base de données tel que 'mysql', 'sqlite3' (cf ecrire/req/)
+ * @param string $prefixe Préfixe des tables SPIP
+ * @param string $auth    Type d'authentification (cas si 'ldap')
+ * @return array          Description de la connexion
  */
 function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 	global $db_ok;
@@ -220,20 +250,32 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	}
 }
 
-// Premiere connexion au serveur principal:
-// retourner le charset donnee par la table principale
-// mais verifier que le fichier de connexion n'est pas trop vieux
-// Version courante = 0.7 
-// La version 0.7 indique un serveur d'authentification comme 8e arg
-// La version 0.6 indique le prefixe comme 7e arg
-// La version 0.5 indique le serveur comme 6e arg
-//
-// La version 0.0 (non numerotee) doit etre refaite par un admin
-// les autres fonctionnent toujours, meme si :
-// - la version 0.1 est moins performante que la 0.2
-// - la 0.2 fait un include_ecrire('inc_db_mysql.php3').
 
-// http://doc.spip.org/@spip_connect_main
+/**
+ * Première connexion au serveur principal de base de données
+ *
+ * Retourner le charset donnée par la table principale
+ * mais vérifier que le fichier de connexion n'est pas trop vieux
+ *
+ * @note
+ *   Version courante = 0.7
+ *
+ *   - La version 0.7 indique un serveur d'authentification comme 8e arg
+ *   - La version 0.6 indique le prefixe comme 7e arg
+ *   - La version 0.5 indique le serveur comme 6e arg
+ *
+ *   La version 0.0 (non numerotée) doit être refaite par un admin.
+ *   Les autres fonctionnent toujours, même si :
+ *
+ *   - la version 0.1 est moins performante que la 0.2
+ *   - la 0.2 fait un include_ecrire('inc_db_mysql.php3').
+ * 
+ * @param array $connexion Description de la connexion
+ * @return string|bool|int
+ *     - false si pas de charset connu pour la connexion
+ *     - -1 charset non renseigné
+ *     - nom du charset sinon
+**/
 function spip_connect_main($connexion)
 {
 	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
@@ -249,16 +291,34 @@ function spip_connect_main($connexion)
 	return ($r['valeur'] ? $r['valeur'] : -1);
 }
 
-// compatibilite
+/**
+ * Connection à LDAP
+ * 
+ * Fonction présente pour compatibilité
+ * 
+ * @deprecated Utiliser l'authentification LDAP de auth/ldap
+ * @uses auth_ldap_connect()
+ * 
+ * @param string $serveur Nom du connecteur
+ * @return array
+ */
 function spip_connect_ldap($serveur='') {
 	include_spip('auth/ldap');
 	return auth_ldap_connect($serveur);
 }
 
-// Echappement d'une valeur (num, string, array) sous forme de chaine PHP
-// pour un array(1,'a',"a'") renvoie la chaine "'1','a','a\''"
-// Usage sql un peu deprecie, a remplacer par sql_quote()
-// http://doc.spip.org/@_q
+/**
+ * Échappement d'une valeur sous forme de chaîne PHP
+ *
+ * Échappe une valeur (num, string, array) pour en faire une chaîne pour PHP.
+ * Un `array(1,'a',"a'")` renvoie la chaine `"'1','a','a\''"`
+ *
+ * @note
+ *   L'usage comme échappement SQL est déprécié, à remplacer par sql_quote().
+ * 
+ * @param num|string|array $a Valeur à échapper
+ * @return string Valeur échappée.
+**/
 function _q ($a) {
 	return (is_numeric($a)) ? strval($a) :
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
@@ -266,8 +326,19 @@ function _q ($a) {
 }
 
 
-// Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
-// http://doc.spip.org/@table_jointure
+/**
+ * Récupérer le nom de la table de jointure `xxxx` sur l'objet `yyyy`
+ *
+ * @deprecated
+ *     Utiliser l'API editer_liens ou les tables de liaisons spip_xx_liens
+ *     ou spip_yy_liens selon.
+ * 
+ * @param string $x Table de destination
+ * @param string $y Objet source
+ * @return array|string
+ *     - array : Description de la table de jointure si connue
+ *     - chaîne vide si non trouvé.
+**/
 function table_jointure($x, $y) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$xdesc = $trouver_table(table_objet($x));
@@ -280,11 +351,14 @@ function table_jointure($x, $y) {
 }
 
 /**
- * Echapper les textes entre ' ' ou " " d'une requete SQL
+ * Echapper les textes entre ' ' ou " " d'une requête SQL
  * avant son pre-traitement
- * On renvoi la query sans textes et les textes separes, dans
+ * 
+ * On renvoi la query sans textes et les textes séparés, dans
  * leur ordre d'apparition dans la query
  *
+ * @see query_reinjecte_textes()
+ * 
  * @param string $query
  * @return array
  */
@@ -315,9 +389,11 @@ function query_echappe_textes($query){
 }
 
 /**
- * Reinjecter les textes d'une requete SQL a leur place initiale,
- * apres traitement de la requete
+ * Réinjecter les textes d'une requete SQL à leur place initiale,
+ * après traitement de la requête
  *
+ * @see query_echappe_textes()
+ * 
  * @param string $query
  * @param array $textes
  * @return string
@@ -354,6 +430,7 @@ function query_reinjecte_textes($query, $textes){
  *
  * @see sql_query()
  * @deprecated  Pour compatibilité. Utiliser `sql_query()` ou l'API `sql_*`.
+ * 
  * @param string $query Texte de la requête
  * @param string $serveur Nom du connecteur pour la base de données
  * @return bool|mixed

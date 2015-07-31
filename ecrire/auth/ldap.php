@@ -99,7 +99,7 @@ function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
  * meme si dans les fait cet argument est toujours vide
  *
  * @param string $serveur
- * @return string
+ * @return array
  */
 function auth_ldap_connect($serveur='') {
 	include_spip('base/connect_sql');
