@@ -39,8 +39,16 @@ function effacer_image($nom) {
 }
 
 function creer_repertoire_documents($ext) {
+	global $dossier_squelettes;
+
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
 	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	// Securite
+	if (($rep == $dossier_squelettes) || (substr($rep,0,-1) == $dossier_squelettes))
+		{
+		  spip_log("dossier squelette egal a DIR_DOC/html!!!");
+		  exit;
+		}
 	if (lire_meta("creer_htaccess") == 'oui') {
 		include_ecrire('inc_acces.php3');
 		verifier_htaccess($rep);
@@ -217,20 +225,22 @@ function corriger_extension($ext) {
 //
 
 function ajout_image($source, $dest) {
-	global $redirect_url, $hash_id_auteur, $hash, $num_img;
+	global $redirect_url, $hash_id_auteur, $hash, $num_img, $dossier_squelettes;
 
 	// Securite
-	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
+	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)
+	    AND _DIR_DOC != $dossier_squelettes) {
 
 		// analyse le type de l'image (on ne fait pas confiance au nom de
 		// fichier envoye par le browser : pour les Macs c'est plus sur)
-		deplacer_fichier_upload($source, _DIR_DOC . $dest . '.tmp');
-		$size = @getimagesize(_DIR_DOC . $dest . '.tmp');
+		$f =_DIR_DOC . $dest . '.tmp';
+		deplacer_fichier_upload($source, $f);
+		$size = @getimagesize($f);
 		$type = decoder_type_image($size[2], true);
 		if ($type)
-			@rename (_DIR_DOC . $dest . '.tmp', _DIR_DOC . $dest . ".$type");
+			@rename ($f, _DIR_DOC . $dest . ".$type");
 		else
-			@unlink (_DIR_DOC . $dest . '.tmp');
+			@unlink ($f);
 	}
 }
 

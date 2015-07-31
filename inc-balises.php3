@@ -1,3 +1,4 @@
+
 <?php
 
 //
@@ -655,7 +656,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 // Ca donne les arguments a chercher dans la pile,on compile leur localisation
 // Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
 // qui recevra a l'execution la valeurs des arguments, 
-// ainsi que les filtres (que la compilation ignore pour le moment)
+// ainsi que les filtres (qui ne sont donc pas traites à la compil)
 
 function calculer_balise_formulaire($p) {
 	balise_distante_interdite($p);
@@ -670,6 +671,7 @@ function calculer_balise_formulaire($p) {
 	  . (!$filtres ? '' : ("'" . join("','", $filtres) . "'"))
 	  . "))";
 	$p->statut = 'php';
+	$p->fonctions = '';
 	return $p;
 }
 
@@ -701,4 +703,29 @@ function balise_FORMULAIRE_ADMIN_dist($p) {
 	return $p;
 }
 
+// reference a l'URL de la page courante
+
+function balise_SELF_dist($p) {
+	$p->code = 'quote_amp($GLOBALS["clean_link"]->getUrl())';
+	$p->statut = 'php';
+	return $p;
+}
+
+// reference aux parametres GET & POST
+
+function balise_HTTP_VARS_dist($p) {
+	$a = $p->fonctions;
+	if ($a) list(,$nom) = each($a) ; else $nom = '';
+	if (!ereg(' *\{ *([][a-zA-Z0-9_-]+) *\} *',$nom, $m))
+		erreur_squelette(_L("Champ #HTTP_VARS argument '$nom' fautif"),
+				$p->id_boucle);
+	else {
+		$p->code = '$Pile[0]["' . addslashes($m[1]) . '"]';
+		$p->statut = 'php';
+		$filtres= array();
+		while (list(, $nom) = each($a)) if ($nom) $filtres[] = $nom;
+		$p->fonctions = $filtres;
+	}
+	return $p;
+}
 ?>

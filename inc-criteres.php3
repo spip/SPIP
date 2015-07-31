@@ -258,6 +258,33 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 
 
 
+function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
+  global $tables_relations, $table_des_tables, $table_date, $tables_des_serveurs_sql;
+	$boucle = &$boucles[$idb];
+	list(,$a1,$op,$a2) = $match;
+	list($a11,$a12) = calculer_critere_parties_aux($idb, $boucles, $a1);
+	list($a21,$a22) = calculer_critere_parties_aux($idb, $boucles, $a2);
+
+	if (($op== ',')&&(is_numeric($a11) && (is_numeric($a21))))
+		$boucle->limit = $a11 .',' . $a21;
+	else {
+	  $boucle->partie =	($a11 != 'n') ? $a11 : $a12;
+		$boucle->total_parties =  ($a21 != 'n') ? $a21 : $a22;
+		$boucle->mode_partie = (($op == '/') ? '/' :
+				(($a1=='n')?'-':'+').(($a2=='n')?'-':'+'));
+	}
+}
+
+function calculer_critere_parties_aux($idb, &$boucles, $param) {
+	ereg('^(([0-9]+)|n|(#.*))(-([0-9]+))?$', $param, $m);
+	if ($m[1] == 'n') 
+	  $a = 'n';
+	else {
+	  $a = calculer_param_dynamique($m[1], $boucles, $idb);
+	  if (ereg('" \. *addslashes(.*)\. "', $a, $m2)) $a = $m2[1];
+	}
+	return array($a, ($m[5] ? $m[5] : 0));
+}
 
 //
 // La fonction d'aiguillage sur le nom du criteres
@@ -299,28 +326,11 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 	$primary = $boucle->primary;
 	$id_field = $id_table . '.' . $primary; 
 
-	if (ereg('^([0-9]+)/([0-9]+)$', $param, $match)) {
-			$boucle->partie = $match[1];
-			$boucle->total_parties = $match[2];
-			$boucle->mode_partie = '/';
-		}
-		else if (ereg('^(([0-9]+)|n)(-([0-9]+))?,(([0-9]+)|n)(-([0-9]+))?$', $param, $match)) {
-			if (($match[2]!='') && ($match[6]!=''))
-				$boucle->limit = $match[2].','.$match[6];
-			else {
-				$boucle->partie =
-					($match[1] != 'n') ? $match[1] :
-					($match[4] ? $match[4] : 0);
-				$boucle->total_parties =
-					($match[5] != 'n') ? $match[5] :
-					($match[8] ? $match[8] : 0);
-				$boucle->mode_partie =
-				(($match[1]=='n')?'-':'+').(($match[5]=='n')?'-':'+');
-			}
-		}
+	if (ereg('^([0-9a-zA-Z#_\{\}]+)([,/])([0-9a-zA-Z#_\{\}]+)$', $param, $match))
+	  calculer_critere_parties($idb, $boucles, $param, $not, $match);
 
 		// Restriction de valeurs (implicite ou explicite)
-		else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
+	else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
 			$op = $match[5];
 			// Variable comparee
 			$col = $match[1];
@@ -574,11 +584,14 @@ define("_REF_HTTP_GET_VAR", '%');
 // Calculer les parametres
 //
 function calculer_param_dynamique($val, &$boucles, $idb) {
-	if (ereg(NOM_DE_CHAMP, $val, $regs)) {
+#	if (ereg('^ *\((.*)) *$', $val, $m)) $val = $m[1]; # si on veut (#...)
+	if (ereg(NOM_DE_CHAMP . "(\{[^}]*\})?", $val, $regs)) {
+	  spip_log("dyn: '$val'" . join("','", $regs));
 	  	$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
 		$champ->etoile = $regs[4];
+		$champ->fonctions = $regs[5] ? array($regs[5]) : '';
 		$champ->id_boucle = $boucles[$idb]->id_parent;
 		$champ->boucles = &$boucles;
 		$champ->id_mere = $idb;
@@ -586,8 +599,11 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 		return '" . addslashes(' . $champ . ') . "';
 
 	} else {
-		if ($val[0]==_REF_HTTP_GET_VAR)
+	  if ($val[0]==_REF_HTTP_GET_VAR) {
+	    spip_log($val .
+		     " est obsolete; utiliser HTTP_VARS{" .  substr($val,1) . "}");
 		  return '" . addslashes($Pile[0][\''. substr($val,1)  ."']) . \"";
+	  }
 		else
 		  return addslashes($val);
 	}

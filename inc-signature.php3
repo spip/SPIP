@@ -5,78 +5,36 @@
 //
 
 global $signature_array;
-$signature_array = array('id_article', 'petition');
+$signature_array = array('petition');
 
 function signature_stat($args, $filtres)
 {
-  list($id_article, $petition) = $args;
-  return (!$petition ? '' :
-	  array("'$id_article'",
-		"'"
-		. str_replace('\'', '\\\'', 
-			      str_replace('\\', '\\\\', serialize($petition)))
-		. "'"));
+  return ($args[0] ? $args : '');
 }
 
-function signature_dyn($id_article,$petition) {
+function signature_dyn($id_article) {
 	if ($GLOBALS['val_confirm'])
 		return _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
 	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])
 		return reponse_signature($id_article);
-	else if (!$petition)
-		return '';
 	else {
-		$row_petition = (unserialize($petition));
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_mail.php3");
-
-		$id_article = $row_petition['id_article'];
-		$email_unique = $row_petition['email_unique'];
-		$site_obli = $row_petition['site_obli'];
-		$site_unique = $row_petition['site_unique'];
-		$message_petition = $row_petition['message'];
-		$texte_petition = $row_petition['texte'];
-
-		$link = new Link;
-		$url = lire_meta("adresse_site").'/'.$link->getUrl();
-		$link->addVar('url_page', $url);
-
-		$retour = $link->getForm('post', "sp$id_article");
-
-		$retour .= propre($texte_petition);
-
-		$retour .= "<div><a name='sp$id_article'></a><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
-		$retour .= "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\" /></p>";
-
-		$retour .= "<p><b>"._T('form_pet_votre_email')."</b><br />";
-		$retour .= "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\" /></p></fieldset>";
-
-		$retour .= "<br /><fieldset><p>";
-		if ($site_obli != "oui") {
-			$retour .= _T('form_pet_votre_site')."<br />";
-		}
-		$retour .= "<b>"._T('form_pet_nom_site2')."</b><br />";
-		$retour .= "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\" /></p>";
-
-		$retour .= "<p><b>"._T('form_pet_adresse_site')."</b><br />";
-		$retour .= "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\" /></p></fieldset>";
-
-		if ($message_petition == "oui") {
-			$retour .= "<br /><fieldset>";
-
-			$retour .= "<b>"._T('form_pet_message_commentaire')."</b><br />";
-			$retour .= "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
-			$retour .= "</textarea></fieldset>\n";
-		}
-		else {
-			$retour .= "<input type=\"hidden\" name=\"message\" value=\"\" />";
-		}
-		$retour .= "</div>";
-
-		$retour .= "<br /><div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" />";
-		$retour .= "</div></form>\n";
-
-	return $retour;
+		include(_FILE_CONNECT);
+		$query_petition = "SELECT * FROM spip_petitions WHERE id_article='$id_article'";
+		$result_petition = spip_query($query_petition);
+		
+		if (!$row = spip_fetch_array($result_petition)) return '';
+		$site_obli = $row['site_obli'];
+		$message = $row['message'];
+		$texte = $row['texte'];
+		return array('formulaire_signature',
+			     0,
+			     array(
+				'id_article' => $id_article,
+				'texte' => $texte,
+				'message' => (($message == 'oui') ? ' ' : ''),
+				'site_obli' => (($site_obli != 'oui') ? ' ' : '')
+				)
+			     );
 	}
 }
 

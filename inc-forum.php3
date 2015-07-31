@@ -41,6 +41,10 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
+	// ne pas mettre '', sinon le squelette n'affichera rien.
+
+	$previsu = ' ';
+
 	// Recuperer le message a previsualiser
 	if ($id_message = intval($GLOBALS[HTTP_POST_VARS][id_message]))  {
 		$titre = $GLOBALS[HTTP_POST_VARS][titre];
@@ -92,7 +96,7 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 			$previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism", "<\\1no-f\\2", $previsu);
 		}
 	} else {
-		// Si premiere edition, initialiser l'auteur
+		// Premiere edition, initialiser l'auteur
 	  	// puis s'accorder une nouvelle entree dans la table
 		if ($spip_forum_user && is_array($cookie_user = unserialize($spip_forum_user))) {
 			$auteur = $cookie_user['nom'];
@@ -120,8 +124,6 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 	$forum_id_syndic = intval($id_syndic);
 	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea");
 	$titre = entites_html($titre);
-	if (!$url_site) $url_site = "http://";
-	if ($forums_publics == "abo") $disabled = " disabled='disabled'";
 
 	// Faut-il ajouter des propositions de mots-cles
 	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))
@@ -129,64 +131,37 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 	else
 		$table = '';
 
-	$url = quote_amp($url);
-
-	return ("<form action='$url' method='post' name='formulaire'>\n" .
-		boutonne('hidden', 'retour', $retour) .
-		boutonne('hidden', 'ajout_forum','oui') .
-		boutonne('hidden', 'id_message', $id_message) .
-		boutonne('hidden', 'alea', $alea) .
-		boutonne('hidden', 'hash', $hash) .
-		(($forums_publics != 'pri') ? '' :
-		 (_T('forum_info_modere'). '<p>')) .
-		(($afficher_texte == "non") ?
-		 (boutonne('hidden', 'titre', $titre) .
-		  $table .
-		  "\n<br /><div align='right'>" .
-		  boutonne('submit', '', _T('forum_valider'), "class='spip_bouton'") .
-		  "</div>") :
-		 ($previsu . "<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />".
-		  boutonne('text', 'titre', $titre, "class='forml' size='40'") . "</div>\n<br />"
-		  ."<div class='spip_encadrer'><b>" .
-		  _T('forum_texte') .
-		  "</b>\n<br />" .
-		  _T('info_creation_paragraphe') .
-		  "\n<br /> " .
-		  afficher_barre('formulaire', 'texte', true) .
-		  "<textarea name='texte' " .
-		  afficher_claret() .
-		  " rows='12' class='forml' cols='40'>" .
-		  entites_html($texte) .
-		  "</textarea></div>" .
-		  $table  .
-		 "\n<br /><div class='spip_encadrer'>" .
-		  _T('forum_lien_hyper') .
-		  "\n<br />" .
-		  _T('forum_page_url') .
-		  "\n<br />" .
-		  _T('forum_titre') .
-		  "\n<br />" .
-		  boutonne('text', 'nom_site_forum', entites_html($nom_site_forum), " class='forml' size='40'") .
-		  "\n<br />" .
-		  _T('forum_url') .
-		  "\n<br />" .
-		  boutonne('text', 'url_site', entites_html($url_site),
-			   " class='forml'  size='40'") . 
-		  "</div>\n<br /><div class='spip_encadrer'>" .
-		  _T('forum_qui_etes_vous') .
-		  "\n<br />" .
-		  _T('forum_votre_nom') .
-		  "\n<br />" .
-		  boutonne('text', 'auteur', entites_html($auteur),
-			   "class='forml' size='40'$disabled") .
-		  "\n<br />" .
-		  _T('forum_votre_email') .
-		  "\n<br />" .
-		  boutonne('text', 'email_auteur', entites_html($email_auteur),
-			   "class='forml' size='40'$disabled") .
-		  "</div>\n<br /><div align='right'>" .
-		  boutonne('submit', '',  _T('forum_voir_avant'), "class='spip_bouton'") . 
-		  "</div>\n</form>")));
+	return array(
+		     'formulaire_forum',
+		     0,
+		     array(
+		     'afficher_claret' => afficher_claret(),
+		     // ca devrait plutot etre un squelette
+		     'afficher_barre' => afficher_barre('formulaire', 'texte', true),
+		     'afficher_non' => 
+		     ($afficher_texte != 'non' ? '' :
+		      (boutonne('hidden', 'titre', $titre) .
+		       $table .
+		       "\n<br /><div align='right'>" .
+		       boutonne('submit', '', _T('forum_valider'), "class='spip_bouton'") .
+		       "</div>")),
+		     'alea' => $alea,
+		     'auteur' => entites_html($auteur),
+		     'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
+		     'email_auteur' => entites_html($email_auteur),
+		     'hash' => $hash,
+		     'id_message' => $id_message,
+		     'modere' => (($forums_publics != 'pri') ? '' :
+				  (_T('forum_info_modere'). '<p>')),
+		     'nom_site_forum' => entites_html($nom_site_forum),
+		     'previsu' => $previsu,
+		     'retour' => $retour,
+		     'table' => $table,
+		     'texte' =>   entites_html($texte),
+		     'titre' => $titre,
+		     'url' =>  quote_amp($url),
+		     'url_site' => ($url_site ? entites_html($url_site) : "http://")
+		     ));
 }
 
 
@@ -342,21 +317,12 @@ function forum_stat($args, $filtres)
   // recuperer les donnees du forum auquel on repond, false = forum interdit
   if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
     return '';
+  list($titre, $table, $accepter_forum) = $r;
   return 
-    array("'"
-	  . str_replace('\'', '\\\'', 
-			str_replace('\\', '\\\\', serialize($args)))
-	  . "'",
-	  "'"
-	  . str_replace('\'', '\\\'', 
-			str_replace('\\', '\\\\', serialize($r)))
-	  . "'");
+    array($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids);
 }
 
-function forum_dyn($args, $donnees_forum) {
-
-  list ($idr, $idf, $ida, $idb, $ids) = unserialize($args);
-  list($titre, $table, $accepter_forum) = unserialize($donnees_forum);
+function forum_dyn($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids) {
 
 	// url de reference
 	if (!$url = rawurldecode($GLOBALS['url'])) 

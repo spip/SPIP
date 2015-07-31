@@ -1,0 +1,41 @@
+<BOUCLE1(ARTICLES){id_article}>
+<form	method='post'
+	action='#SELF#sp#ID_ARTICLE' >
+
+<input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF">
+[(#HTTP_VARS{texte}|traiter_raccourcis|interdire_scripts)]
+<div>
+	<a name='#sp#ID_ARTICLE'></a>
+	<fieldset>
+		<p>
+			<b><:form_pet_votre_nom:></b><br />
+			<input type="text" class="forml" name="nom_email" value="" size="20" />
+    		</p>
+		<p>
+			<b><:form_pet_votre_email:></b><br />
+			<input type="text" class="forml" name="adresse_email" value="" size="20" />
+		</p>
+	</fieldset>
+	<br />
+	<fieldset>
+		<p>
+			[(#HTTP_VARS{site_obli}) <:form_pet_votre_site:><br />]
+			<b><:form_pet_nom_site2:></b><br />
+			<input type="text" class="forml" name="nom_site" value="" size="20" />
+		</p>
+		<p>
+			<b><:form_pet_adresse_site:></b><br />
+			<input type="text" class="forml" name="url_site" value="http://" size="20" />
+		</p>
+	</fieldset>
+	[(#HTTP_VARS{message}) <br />
+		<fieldset>
+			<b><:form_pet_message_commentaire:></b><br />
+			<textarea name="message" rows="3" class="forml" cols="20" wrap='soft'></textarea>
+		</fieldset>
+	]
+</div>
+<br />
+<div align="right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" /></div>
+</form>
+</BOUCLE1>

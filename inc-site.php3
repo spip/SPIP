@@ -51,16 +51,7 @@ function site_dyn($la_rubrique) {
 		$res = "<div class='reponse_formulaire'>$res</div>";
 	}
 	else {
-		$link = $GLOBALS['clean_link'];
-		$res = $link->getForm('POST') .
-		  "<p><div class='spip_encadrer'><b>"._T('form_prop_nom_site')."</b><br />" .
-		  "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"30\">" .
-		  "</p><p><b>"._T('form_prop_url_site')."</b></p><br />" .
-		  "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"\" size=\"30\"></div>" .
-		  "<p><b>"._T('form_prop_description')."</b></p><br />" .
-		  "<textarea name='description_site' rows='5' class='forml' cols='40' wrap=soft></textarea>" .
-		  "<div align=\"right\"><input type=\"submit\" name=\"valider\" class=\"spip_bouton\" value=\""._t('bouton_valider')."\">" .
-		  "</div></form>";
+	  $res = array('formulaire_site', 0);
 		}
 	return $res;
 }

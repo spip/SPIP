@@ -5,12 +5,13 @@ $recherche_array = array();
 
 function recherche_stat($args, $filtres)
 {
-  if (lire_meta("activer_moteur") != "oui")
-    return '';
-  else {
-    if (!($lien = $filtre[0])) $lien = 'recherche.php3';
-    return "<form action='$lien' method='get' class='formrecherche'><input type='text' id='formulaire_recherche' size='20' class='formrecherche' name='recherche' value='" . _T('info_rechercher') . "' /></form>";
-  }
+  return (lire_meta("activer_moteur") != "oui") ? '' : array($filtres[0]);
+}
+ 
+function recherche_dyn($lien) {
+	return array('formulaire_recherche', 0, 
+		     array('lien' => ($lien ? $lien : 'recherche.php3'),
+			   'recherche' => ($GLOBALS['recherche'] ? $GLOBALS['recherche'] : _T('info_rechercher'))));
 }
 
 ?>
