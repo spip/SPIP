@@ -2390,7 +2390,7 @@ function image_typo() {
 
 	// Construire requete et nom fichier
 	$text = ereg_replace("\&nbsp;", "~", $texte);	
-	$text = ereg_replace("(\r|\n)+", " ", $texte);
+	$text = ereg_replace("(\r|\n)+", " ", $text);
 	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
