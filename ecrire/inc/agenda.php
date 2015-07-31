@@ -845,7 +845,7 @@ function http_calendrier_sans_date($annee, $mois, $evenements)
 function http_calendrier_sans_heure($ev)
 {
 	$desc = propre($ev['DESCRIPTION']);
-	$sum = $ev['SUMMARY'];
+	$sum = typo($ev['SUMMARY']);
 	if (!$sum) $sum = $desc;
 	$i = isset($ev['DESCRIPTION']) ? 11 : 9; // 11: article; 9:autre
 	if ($ev['URL'])
@@ -1402,7 +1402,12 @@ function  sql_calendrier_interval_forums($limites, &$evenements) {
 // http://doc.spip.org/@sql_calendrier_interval_articles
 function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
-	$result=spip_query("SELECT id_article, titre, date, descriptif, chapo FROM	spip_articles WHERE statut='publie' AND	date >= $avant  AND	date < $apres ORDER BY date");
+	$result=spip_query("SELECT id_article, titre, date, descriptif, chapo,  lang FROM spip_articles WHERE statut='publie' AND	date >= $avant  AND	date < $apres ORDER BY date");
+
+	if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+	  include_spip('inc/lang_liste');
+	  $langues = $GLOBALS['codes_langues'];
+	} else $langues = array();
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_article'];
@@ -1410,7 +1415,7 @@ function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 			$evenements[$amj][]=
 			    array(
 				  'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
-				'DESCRIPTION' => $row['descriptif'],
+				  'DESCRIPTION' => $row['descriptif'] ? $row['descriptif'] : $langues[$row['lang']],
 				'SUMMARY' => $row['titre'],
 				'URL' => generer_url_article($id, 'prop'));
 	}
