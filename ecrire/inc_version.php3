@@ -777,6 +777,9 @@ function _L($text) {
 		return $text;
 }
 
+// langue principale du site
+$spip_lang = lire_meta('langue_site');
+if (!$spip_lang) $spip_lang = 'fr';
 
 
 //

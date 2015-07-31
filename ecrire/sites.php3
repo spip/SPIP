@@ -422,8 +422,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<font face='verdana,arial,helvetica' size=2>";
 	// afficher la date de dernier acces a la syndication
 	if ($date_syndic)
-		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate($date_syndic)
-		.", ".heures($date_syndic)."h ".minutes($date_syndic)."min.</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>"._T('lien_mise_a_jour_syndication')."</a></div>\n";
+		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate_heure($date_syndic)
+		.".</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>"._T('lien_mise_a_jour_syndication')."</a></div>\n";
 
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {

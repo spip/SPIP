@@ -483,6 +483,20 @@ function secondes($numdate) {
 	return $secondes;
 }
 
+function heures_minutes($numdate) {
+	global $spip_lang;
+	switch ($spip_lang) {
+		case 'en':
+		case 'es':
+		case 'fr':
+		default:
+			$th = 'h ';
+			$tm = 'min';
+		
+	} 
+	return heures($numdate).$th.minutes($numdate).$tm;
+}
+
 function recup_date($numdate){
 	if (!$numdate) return '';
 	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})', $numdate, $regs)) {
@@ -512,7 +526,7 @@ function recup_date($numdate){
 
 
 function affdate_base($numdate, $vue) { 
-	global $lang;
+	global $spip_lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
 		list($annee, $mois, $jour) = $date_array;
@@ -520,21 +534,32 @@ function affdate_base($numdate, $vue) {
 		return '';
 
 	if ($mois > 0){
-		$saison = "hiver";
-		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = _T('item_printemps');
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = unicode2charset(_T('item_ete'));
-		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = _T('item_automne');
-		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = _T('item_hiver');
+		$saison = 0;
+		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = 1;
+		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = 2;
+		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 3;
+		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 0;
 	}
 	
-	if ($lang == "fr") {
-		if ($jour == '1') $jour = _T('item_premier');
+	switch ($spip_lang) {
+
+	case 'de':
 		$tab_mois = array('',
-			'janvier', "f&eacute;vrier", 'mars', 'avril', 'mai', 'juin',
-			'juillet', "ao&ucirc;t", 'septembre', 'octobre', 'novembre', "d&eacute;cembre");
-		$avjc = ' av. J.C.';
-	}
-	elseif ($lang == "en"){
+			'Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni',
+			'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember');
+		$nom_saisons = array('Winter', 'Fr&uuml;hling', 'Sommer', 'Herbst');
+		$avjc = ' v.u.Z.';
+		break;
+
+	case 'es':
+		$tab_mois = array('',
+			'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+			'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+		$nom_saisons = array('invierno', 'primavera', 'verano', 'oto&ntilde;o');
+		$avjc = ' B.C.';
+		break;
+
+	case 'en':
 		switch($jour) {
 		case '1':
 			$jour = '1st';
@@ -561,7 +586,19 @@ function affdate_base($numdate, $vue) {
 		$tab_mois = array('',
 			'January', 'February', 'March', 'April', 'May', 'June',
 			'July', 'August', 'September', 'October', 'November', 'December');
+		$nom_saisons = array('Winter', 'Spring', 'Summer', 'Autumn');
 		$avjc = ' B.C.';
+		break;
+
+	case 'fr':
+	default:
+		if ($jour == '1') $jour = '1er';
+		$tab_mois = array('',
+			'janvier', "f&eacute;vrier", 'mars', 'avril', 'mai', 'juin',
+			'juillet', "ao&ucirc;t", 'septembre', 'octobre', 'novembre', "d&eacute;cembre");
+		$nom_saisons = array('hiver', 'printemps', '&eacute;t&eacute;', 'automne');
+		$avjc = ' av. J.C.';
+
 	}
 	if ($jour == 0) $jour = "";
 	if ($jour) $jour .= ' ';
@@ -574,7 +611,7 @@ function affdate_base($numdate, $vue) {
 
 	switch ($vue) {
 	case 'saison':
-		return $saison;
+		return $nom_saisons[$saison];
 
 	case 'court':
 		if ($avjc) return $annee;
@@ -599,7 +636,7 @@ function affdate_base($numdate, $vue) {
 }
 
 function nom_jour($numdate) {
-	global $lang;
+	global $spip_lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
 		list($annee,$mois,$jour) = $date_array;
@@ -609,46 +646,80 @@ function nom_jour($numdate) {
 	if (!$mois OR !$jour) return;
 
 	$nom = mktime(1,1,1,$mois,$jour,$annee);
-	$nom = date("D",$nom);
+	$nom = date("w",$nom);
 
-	if ($lang == "fr") {
-		switch($nom) {
-			case 'Sun': $nom='dimanche'; break;
-			case 'Mon': $nom='lundi'; break;
-			case 'Tue': $nom='mardi'; break;
-			case 'Wed': $nom='mercredi'; break;
-			case 'Thu': $nom='jeudi'; break;
-			case 'Fri': $nom='vendredi'; break;
-			case 'Sat': $nom='samedi'; break;
-		}
+	switch ($spip_lang) {
+		case 'de':
+		default:
+			$nom_jours = Array(
+			O => 'Sonntag',
+			1 => 'Montag',
+			2 => 'Dienstag',
+			3 => 'Mittwoch',
+			4 => 'Donnerstag',
+			5 => 'Freitag',
+			6 => 'Samstag'
+			);
+			break;
+
+		case 'en':
+		default:
+			$nom_jours = Array(
+			O => 'Sunday',
+			1 => 'Monday',
+			2 => 'Tuesday',
+			3 => 'Wednesday',
+			4 => 'Thursday',
+			5 => 'Friday',
+			6 => 'Saturday'
+			);
+			break;
+
+		case 'es':
+		default:
+			$nom_jours = Array(
+			O => 'domingo',
+			1 => 'lunes',
+			2 => 'martes',
+			3 => 'mi&eacute;rcoles',
+			4 => 'jueves',
+			5 => 'viernes',
+			6 => 's&aacute;bado'
+			);
+			break;
+
+		case 'fr':
+		default:
+			$nom_jours = Array(
+			O => 'dimanche',
+			1 => 'lundi',
+			2 => 'mardi',
+			3 => 'mercredi',
+			4 => 'jeudi',
+			5 => 'vendredi',
+			6 => 'samedi'
+			);
+			break;
 	}
-	elseif ($lang == "en") {
-		switch($nom) {
-			case 'Sun': $nom='Sunday'; break;
-			case 'Mon': $nom='Monday'; break;
-			case 'Tue': $nom='Tuesday'; break;
-			case 'Wed': $nom='Wednesday'; break;
-			case 'Thu': $nom='Thursday'; break;
-			case 'Fri': $nom='Friday'; break;
-			case 'Sat': $nom='Saturday'; break;
-		}
-	}
-	return $nom;
+
+	return $nom_jours[$nom];
 }
 
 function jour($numdate) {
-	global $lang;
+	global $spip_lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
 		list($annee,$mois,$jour) = $date_array;
-	if ($jour=="1") switch($lang) {
+	if ($jour=="1") switch($spip_lang) {
 		case 'en':
 			$jour = "1st";
 			break;
 		
 		case 'fr':
-		default:
 			$jour = "1er";
+
+		default:
+			$jour = "1";
 	}
 	return $jour;
 }
@@ -668,6 +739,10 @@ function mois($numdate) {
 	else
 		return '';
 	return $mois;
+}
+
+function nom_mois($numdate) {
+	return affdate_base($numdate, 'mois');
 }
 
 function annee($numdate) {
@@ -695,9 +770,22 @@ function affdate_mois_annee($numdate) {
 	return affdate_base($numdate, 'mois_annee');
 }
 
-function nom_mois($numdate) {
-	return affdate_base($numdate, 'mois');
+function affdate_heure($numdate) {
+	global $spip_lang;
+	switch ($spip_lang) {
+		case 'en':
+			$ta = 'at';
+			break;
+		case 'es':
+			$ta = 'a';
+			break;
+		case 'fr':
+		default:
+			$ta = '&agrave;';
+	} 
+	return affdate($numdate).' '.$ta.' '.heures_minutes($numdate);
 }
+
 
 //
 // Alignements en HTML

@@ -191,6 +191,52 @@ if ($options == "avancees") {
 
 
 
+//
+// Configuration i18n
+//
+
+
+debut_cadre_relief("langues-24.gif");
+
+$langues_prop = split(",",lire_meta("langues_proposees"));
+$langue_site = lire_meta('langue_site');
+
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Langue principale du site')."</FONT></B> ".aide ()."</TD></TR>";
+
+echo "<TR><TD class='verdana2'>";
+echo _L('Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
+	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
+	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
+	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
+	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>');
+echo "</TD></TR>";
+
+
+// langue du site
+echo "<TR><TD ALIGN='left' class='verdana2'>";
+echo _L('Langue principale du site&nbsp;:');
+echo "\n<select name='langue_site' class='fondl'>\n";
+echo "<option value='$langue_site' style='background-image: url(lang/drap_$langue_site.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;' selected>".traduire_nom_langue($langue_site)."</option>\n";
+reset ($langues_prop);
+while (list(,$l) = each ($langues_prop)) {
+	if ($l <> $langue_site)
+		echo "<option value='$l' style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
+}
+echo "</select><br>\n";
+echo "</TD></TR>";
+
+echo "<TR><TD ALIGN='right'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "</TD></TR>";
+echo "</TABLE>\n";
+
+
+fin_cadre_relief();
+
+echo "<p>";
+
+
 
 //
 // Configuration du charset
