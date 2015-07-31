@@ -67,7 +67,34 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   return fabrique_jointures($boucle, $res, $cond, $desc, $nom, $col);
 }
 
-// http://doc.spip.org/@fabrique_jointures
+/**
+ * Fabriquer une jointure a l'aide d'une liste descriptive d'etapes
+ * 
+ * http://doc.spip.org/@fabrique_jointures
+ *
+ * $res = array(
+ * array(table_depart,array(table_arrivee,desc),jointure
+ * ...
+ * )
+ * jointure peut etre un tableau pour les jointures sur champ decomposr
+ * array('id_article','id_objet','objet','article')
+ * array('id_objet','id_article','objet','article')
+ *
+ * @param object $boucle
+ *   objet boucle
+ * @param array $res
+ *   chaine des jointures
+ * @param bool $cond
+ *   flag pour savoir si le critere est conditionnel ou non
+ * @param array $desc
+ *   description de la table de depart
+ * @param string $nom
+ *   nom de la table de depart
+ * @param string $col
+ *   colonne cible de la jointure
+ * @param bool $echap
+ * @return string
+ */
 function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='', $col='', $echap=true)
 {
 	static $num=array();

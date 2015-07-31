@@ -1010,11 +1010,15 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 	
 	// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
-	else if (count(trouver_champs_decomposes($col,$desc))>1){
+	// sauf si exception declaree : sauter cette etape
+	else if (
+		!isset($exceptions_des_jointures[table_objet_sql($table)][$col])
+		AND !isset($exceptions_des_jointures[$col])
+		AND count(trouver_champs_decomposes($col,$desc))>1){
+		var_dump(array('pasla',$table,$col,$exceptions_des_jointures));
 		$e = decompose_champ_id_objet($col);
 		$col = array_shift($e);
 		$where_complement = primary_doublee($e, $table);
-
 	}
 	// Cas particulier : expressions de date
 	else if ($c = calculer_critere_infixe_date($idb, $boucles, $col)) {
@@ -1084,15 +1088,17 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	$calculer_critere_externe = 'calculer_critere_externe_init';
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
-	if (is_array($exceptions_des_jointures[$table])) {
-		$t = $exceptions_des_jointures[$table];
+	$table_sql = table_objet_sql($table);
+	if (is_array($exceptions_des_jointures[$table_sql])) {
+		$t = $exceptions_des_jointures[$table_sql];
 		$index = isset($t[$col])
 		?  $t[$col] : (isset($t['']) ? $t[''] : array());
 		
 		if (count($index)==3)
 			list($t, $col, $calculer_critere_externe) = $index;
-		elseif (count($index)==2)
+		elseif (count($index)==2){
 			list($t, $col) = $t[$col];
+		}
 		else 	{
 			list($calculer_critere_externe) = $index;
 			$t = $table;
@@ -1127,22 +1133,43 @@ function primary_doublee($decompose, $table)
 	return array("'='","'$table.". $e1 ."'",$e2);
 }
 
-// Champ hors table, ca ne peut etre qu'une jointure.
-// On cherche la table du champ et on regarde si elle est deja jointe
-// Si oui et qu'on y cherche un champ nouveau, pas de jointure supplementaire
-// Exemple: criteres {titre_mot=...}{type_mot=...}
-// Dans les 2 autres cas ==> jointure 
-// (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
-// pour selectioner ce qui a exactement ces 2 mots-cles.
+/**
+ * Champ hors table, ca ne peut etre qu'une jointure.
+ * On cherche la table du champ et on regarde si elle est deja jointe
+ * Si oui et qu'on y cherche un champ nouveau, pas de jointure supplementaire
+ * Exemple: criteres {titre_mot=...}{type_mot=...}
+ * Dans les 2 autres cas ==> jointure
+ * (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
+ * pour selectioner ce qui a exactement ces 2 mots-cles.
+ *
+ * http://doc.spip.org/@calculer_critere_externe_init
+ *
+ * @param  $boucle
+ * @param  $joints
+ * @param  $col
+ * @param  $desc
+ * @param  $cond
+ * @param bool $checkarrivee
+ * @return mixed|string
+ */
+function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
 
-// http://doc.spip.org/@calculer_critere_externe_init
-function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $checkarrivee = false)
-{
+	// si on demande un truc du genre spip_mots
+	// avec aussi spip_mots_liens dans les jointures dispo
+	// et qu'on est la
+	// il faut privilegier la jointure directe en 2 etapes spip_mots_liens, spip_mots
+	if ($checkarrivee
+	  AND $a = table_objet($checkarrivee)
+	  AND in_array($a.'_liens',$joints)) {
+		if ($res = calculer_lien_externe_init($boucle, $joints, $col, $desc, $cond, $checkarrivee))
+			return $res;
+	}
+
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 	if (!$cle) return '';
 	$t = array_search($cle[0], $boucle->from);
 	// transformer eventuellement id_xx en (id_objet,objet)
-	$cols = trouver_champs_decomposes($col,$cle[1]); 
+	$cols = trouver_champs_decomposes($col,$cle[1]);
 	if ($t) {
 			$joindre = false;
 			foreach($cols as $col){
@@ -1156,9 +1183,36 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $che
 			}
 		  if (!$joindre) return $t;
 	}
-	return calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $eg);
-
+	return calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $cond);
 }
+
+/**
+ * Generer directement une jointure via une table de lien spip_xxx_liens
+ * pour un critere {id_xxx}
+ * @param  $boucle
+ * @param  $joints
+ * @param  $col
+ * @param  $desc
+ * @param  $cond
+ * @param bool $checkarrivee
+ * @return string
+ */
+function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
+
+	$intermediaire = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee."_liens");
+	$arrivee = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
+
+	if (!$intermediaire OR !$arrivee) return '';
+
+	$res = fabrique_jointures($boucle,
+		array(
+			array($boucle->id_table,$intermediaire,array(id_table_objet($desc['table_objet']),'id_objet','objet',$desc['type'])),
+			array(reset($intermediaire),$arrivee,$col)
+		)
+		, $cond, $desc, $boucle->id_table, array($col));
+	return $res;
+}
+
 
 // http://doc.spip.org/@trouver_champ
 function trouver_champ($champ, $where)
