@@ -51,7 +51,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 				break;
 			}
 			else
-				$id_rubrique = sql_parent($id_rubrique);
+				$id_rubrique = quete_parent($id_rubrique);
 		}
 	}
 
