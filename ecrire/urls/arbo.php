@@ -401,7 +401,7 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 }
 
 
-// @return array([contexte],[fond],[url_redirect]) : url decodee
+// @return array([contexte],[type],[url_redirect],[fond]) : url decodee
 // http://doc.spip.org/@urls_arbo_dist
 function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	if (is_numeric($i))

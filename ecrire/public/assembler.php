@@ -87,7 +87,7 @@ function assembler($fond, $connect='') {
 				$url = nettoyer_uri();
 				$a = $renommer($url, $fond);
 				if (is_array($a)) {
-					list($ncontexte, $nfond, $url_redirect) = $a;
+					list($ncontexte, $type, $url_redirect, $nfond) = $a;
 					if (isset($url_redirect)
 					AND $url !== $url_redirect) {
 						spip_log("Redirige $url vers $url_redirect");
@@ -97,20 +97,27 @@ function assembler($fond, $connect='') {
 					}
 					if (isset($nfond))
 						$fond = $nfond;
+					else if ($fond == ''
+					OR $fond == 'type_urls' /* compat avec htaccess 2.0.0 */
+					)
+						$fond = ($type === 'syndic') ? 'site' : $type;
 					if (isset($ncontexte))
 						$contexte = $ncontexte;
 				}
 			}
+			// compatibilite <= 1.9.2
 			elseif (function_exists('recuperer_parametres_url'))
-				// compatibilite <= 1.9.2
 				recuperer_parametres_url($fond, nettoyer_uri());
+
+
+			// squelette par defaut
+			if (!strlen($fond))
+				$fond = 'sommaire';
+
+			// preparer le contexte
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
-			// Ajouter les scripts avant de mettre en cache
-			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
-			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
-			
 			// Stocker le cache sur le disque
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
