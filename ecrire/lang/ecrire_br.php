@@ -84,8 +84,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_pas_petition' => 'Sinadeg ebet',
 'bouton_radio_petition_activee' => 'Sinadeg war-enaou',
 'bouton_radio_publication_immediate' => 'Embann ar c\'hemennadenno&ugrave; diouzhtu (embannet e vez ar c\'hemennadenno&ugrave; diouzhtu goude beza&ntilde; skrivet, war-lerc\'h e c\'hellont beza&ntilde; diverket gant ar c\'hasourien)',
-'bouton_radio_sauvegarde_compressee' => 'restr-savetei&ntilde;, gwaeget, dindan <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'restr-savetei&ntilde;, ket gwaeget, dindan<b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'restr-savetei&ntilde; gwaeget dindan @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'restr-savetei&ntilde;, ket gwaeget, dindan @fichier@',
 'bouton_radio_supprimer_petition' => 'Dilemel ar sinadeg',
 'bouton_radio_syndication' => 'Sindikadur',
 'bouton_redirection' => 'ADSTURIA&Ntilde;',
@@ -463,7 +463,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'kit war-raok prantad-ha-prantad',
 'info_procedure_maj_version' => 'rankout a ra al labour hizivaat beza&ntilde; graet a-benn azasaat 
 	an diaz-titouro&ugrave; ouzh arreval nevez SPIP.',
-'info_ps' => 'G.S',
+'info_ps' => 'G.-S',
 'info_publier' => 'embann',
 'info_publies' => 'Ho pennado&ugrave; bet embannet',
 'info_question_accepter_visiteurs' => 'Ma vez savet ho frammo&ugrave; evit ma enrollfe ar gweladennerien hep gallout dont-tre el lodenn brevez, enaouit ar poent ama&ntilde;-dindan&nbsp;:',
@@ -519,7 +519,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sauvegarde_petitions' => 'savetei&ntilde; ar sinadego&ugrave;',
 'info_sauvegarde_refers' => 'Savetei&ntilde; ar referers',
 'info_sauvegarde_reussi_01' => 'Deuet omp a-benn da savetei&ntilde;',
-'info_sauvegarde_reussi_02' => 'E-barzh <b>ecrire/data/@archive@</b> eo bet saveteet an diaz-titouro&ugrave;. Gallout a rit',
+'info_sauvegarde_reussi_02' => 'E-barzh @archive@ eo bet saveteet an diaz-titouro&ugrave;. Gallout a rit',
 'info_sauvegarde_reussi_03' => 'distrei&ntilde; da vera&ntilde;s',
 'info_sauvegarde_reussi_04' => 'ho lec\'hienn.',
 'info_sauvegarde_rubriques' => 'Savetei&ntilde; ar rummado&ugrave;',
@@ -758,8 +758,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 
 // T
 'taille_cache_image' => '@taille@ eo ar skeudenno&ugrave; jedet gant SPIP (skeudennigo&ugrave; an teuliado&ugrave;, titlo&ugrave; skeudennaouet, fonksiono&ugrave; jedoniezh er stumm TeX,...) hag en teul @dir@  emaint.',
-'taille_cache_infinie' => 'Ne vo ket bevennet ment an teul <code>MEMORET/</code> gant ho lec\'hienn.',
-'taille_cache_maxi' => 'Klask a ra SPIP diwall na vefe ket ment an teul <code>MEMORET/</code> brasoc\'h eget <b>@octets@</b>.',
+'taille_cache_infinie' => 'Ne vo ket bevennet ment an teul "MEMORET/" gant ho lec\'hienn.',
+'taille_cache_maxi' => 'Klask a ra SPIP diwall na vefe ket ment an teul "MEMORET/" brasoc\'h eget <b>@octets@</b>.',
 'taille_cache_octets' => '@octets@ eo ment ar memoret.',
 'taille_cache_vide' => 'Goullo eo ar memoret.',
 'taille_repertoire_cache' => 'Ment teul ar memoret',
@@ -768,7 +768,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'texte_admin_effacer_01' => 'Gant se e tiverkoc\'h <i>PEP TRA</i> en ho tiaz titouro&ugrave;,
 da lavaret eo <i>an holl</i> aotreo&ugrave; evit ar merourien hag ar skridaozerien. Goude beza&ntilde; bet graet se e rankoc\'h
 adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an nebeuta&ntilde; un aotre evit ar merour',
-'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh <i>ecrire/data/</i>. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul <i>IMG/</i>, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
+'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh @dossier@. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul <i>IMG/</i>, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
 'texte_admin_tech_02' => 'Diwallit : war ul lec\'hienn warna&ntilde; ar memes arreval HEPKEN ouzh SPIP e c\'hello ar restr-savete-ma&ntilde; beza&ntilde; implijet. Arabat neuze &laquo;&nbsp;goullonderi&ntilde; an diaz&nbsp;&raquo; o so&ntilde;jal adstalia&ntilde; ar savete goude beza&ntilde; bet nevesaet SPIP... Sellit ouzh <a href="http://www.spip.net/fr_article1489.html">diello&ugrave; SPIP</a>.',
 'texte_admin_tech_03' => 'Gallout a rit dibab savetei&ntilde; stumm gwaeget ar restr evit berraat ar saveteadur, ha ma kemerfe nebeutoc\'h a blas.',
 'texte_adresse_annuaire_1' => '(Ma \'z eo staliet ar roll dud er memes lec\'h hag ho lec\'hienn, ema&ntilde; moarvat e-barzh &laquo;localhost&raquo;.)',
@@ -820,7 +820,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_en_cours_validation' => 'Kinniget eo ar pennado&ugrave; ha berrskrido&ugrave; ama&ntilde;-dindan d\'an embann. Gallout a rit rei&ntilde; ho ali er forumo&ugrave; stag outo.',
 'texte_enrichir_mise_a_jour' => 'Gallout a rit bravaat kinnig ho testenn oc\'h implijout &laquo;&nbsp;berradenno&ugrave;-lizherenna&ntilde;&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>Ha rankout a ra SPIP kroui&ntilde; ar restro&ugrave; ispisial <tt>.htpasswd</tt>
-  ha <tt>.htpasswd-admin</tt> en teul <tt>ecrire/data/</tt> ?</b><p />
+  ha <tt>.htpasswd-admin</tt> en teul @dossier@ ?</b><p />
   Gant ar restro&ugrave;-se e c\'hellit herzel ouzh ar re n\'int ket skridaozer pe merour
   da vont war bajeno&ugrave; all \'zo
   (poellad diavaez statistiko&ugrave;, da skouer).<p />
@@ -885,11 +885,11 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
   Kit e-darempred gant ho poder ma kendalc\'h ar gudenn.<p />',
 'texte_restaurer_base' => 'Resteurel endalc\'had ur savete eus an diaz-titouro&ugrave;',
 'texte_restaurer_sauvegarde' => 'Gant an dilenn-ma&ntilde; e c\'hellit resteurel ur skouerenn eus an diaz bet saveteet ganeoc\'h en a-raok.
-		Evit hen ober e rank ar restr-savete beza&ntilde; bet lakaet en teul <i>ecrire/data/</i>.
-		Diwallit gant ar servij-ma&ntilde;, n\'haller ket mont war-gil ma vez diverket pe gwallgaset tra pe dra.</b>',
+  Evit hen ober e rank ar restr-savete beza&ntilde; bet lakaet en teul @dossier@.
+  Diwallit gant ar servij-ma&ntilde;, n\'haller ket mont war-gil ma vez diverket pe gwallgaset tra pe dra.</b>',
 'texte_sauvegarde' => 'Savetei&ntilde; endalc\'had an diaz',
 'texte_sauvegarde_base' => 'Savetei&ntilde; an diaz',
-'texte_sauvegarde_compressee' => 'Graet e vo ar saveteadenn er restr ket gwaeget <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'Er restr ket gwaeget @fichier@ e vo graet ar savetei&ntilde;.',
 'texte_selection_langue_principale' => 'Ama&ntilde;-dindan e c\'hellit diuza&ntilde; &laquo;&nbsp;yezh penna&ntilde;&nbsp;&raquo; al lec\'hienn. Ne talvez ket e voc\'h rediet da skriva&ntilde; ho pennado&ugrave; er yezh-se, met servijout a ra da resisaat&nbsp;:
 	<ul><li> an doare dre-ziouer da ziskouez an deiziado&ugrave;&nbsp;;</li>
 	<li> peseurt benvegad-skriva&ntilde; a rank beza&ntilde; implijet gant SPIP evit diskouez an testenno&ugrave;&nbsp;;</li>

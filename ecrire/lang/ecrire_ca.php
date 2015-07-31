@@ -97,8 +97,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_radio_pas_petition' => 'Cap petici&oacute;',
 'bouton_radio_petition_activee' => 'Petici&oacute; activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute; immediata dels missatges (es poden suprimir posteriorment des de l\'administraci&oacute;). ',
-'bouton_radio_sauvegarde_compressee' => 'c&ograve;pia de seguretat comprimida a <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'c&ograve;pia de seguretat no comprimida a <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'c&ograve;pia de seguretat comprimida a @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'c&ograve;pia de seguretat no comprimida a @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;',
 'bouton_radio_syndication' => 'Sindicaci&oacute;:',
 'bouton_redirection' => 'REDIRECCI&Oacute;',
@@ -470,7 +470,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_principaux_correspondants' => 'Els vostres principals corresponsals',
 'info_procedez_par_etape' => 'procediu pas per pas',
 'info_procedure_maj_version' => 'El proc&eacute;s d\'actualitzaci&oacute; s\'ha de tornar a arrancar per tal d\'adaptar la base de dades a la nova versi&oacute; d\'SPIP.',
-'info_ps' => 'P.D.',
+'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Els vostres articles publicats en l&iacute;nia',
 'info_question_accepter_visiteurs' => 'Si a les plantilles (esquelets) del vostre lloc Web es preveu l\'enregistrament de visitants sense acc&eacute;s a l\'espai privat, vulgueu activar la seg&uuml;ent opci&oacute;:',
@@ -520,7 +520,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_sauvegarde_petitions' => 'Crear c&ograve;pia de seguretat de les peticions',
 'info_sauvegarde_refers' => 'Crear c&ograve;pia de seguretat de les refer&egrave;ncies',
 'info_sauvegarde_reussi_01' => 'C&ograve;pia de seguretat amb &egrave;xit.',
-'info_sauvegarde_reussi_02' => 'La base de dades s\'ha desat a <b>ecrire/data/@archive@</b>. Podeu',
+'info_sauvegarde_reussi_02' => 'La base de dades s\'ha desat a @archive@. Podeu',
 'info_sauvegarde_reussi_03' => 'tornar a la gesti&oacute;',
 'info_sauvegarde_reussi_04' => 'del vostre lloc.',
 'info_sauvegarde_rubriques' => 'Crear c&ograve;pia de seguretat de les seccions',
@@ -759,8 +759,8 @@ amb un color que indica el seu estat:',
 
 // T
 'taille_cache_image' => 'Les imatges calculades autom&agrave;ticament per SPIP (miniatures dels documents, t&iacute;tols presentats en forma gr&agrave;fica, funci&oacute;n matem&agrave;tiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
-'taille_cache_infinie' => 'Aquest lloc no preveu limitar la mida del directori <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori <code>CACHE/</code> d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
+'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la mem&ograve;ria cau (cache).',
+'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la mem&ograve;ria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
 'taille_cache_octets' => 'La mida de la mem&ograve;ria cau &eacute;s actualment de @octets@.',
 'taille_cache_vide' => 'La mem&ograve;ria cau est&agrave; buida.',
 'taille_repertoire_cache' => 'Mida del directori de la mem&ograve;ria cau',
@@ -768,7 +768,7 @@ amb un color que indica el seu estat:',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
 'texte_admin_effacer_01' => 'Aquesta comanda esborra <i>tot</i> el contingut de la base de dades,
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
-'texte_admin_tech_01' => 'Aquesta opci&oacute; permet desar el contigut de la base a un fitxer que ser&agrave; guardat al directori <i>ecrire/data/</i>. No oblide igualment recuperar integrament el directori <i>IMG/</i>, que cont&eacute; les imatges i els documents utilitzats als articles i les seccions.',
+'texte_admin_tech_01' => 'Aquesta opci&oacute; us permet desar el contigut de la base en un fitxer que ser&agrave; guardat al directori @dossier@. No oblideu, igualment, recuperar la totalitat del directori <i>IMG/</i>, que cont&eacute; les imatges i els documents utilitzats en els articles i les seccions.',
 'texte_admin_tech_02' => 'Atenci&oacute;: aquesta c&ograve;pia de seguretat NOM&Eacute;S podr&agrave; ser restaurada en un lloc Web que estigui instal&middot;lat en la mateixa versi&oacute; d\'SPIP. Per tant, cal sobretot no &laquo;&nbsp;buidar la base&nbsp;&raquo; esperant reinstal&middot;lar la c&ograve;pia de seguretat despr&eacute;s de l\'actualitzaci&oacute;... Consulteu per m&eacute;s detalls <a href="http://www.spip.net/fr_article1489.html">la documentaci&oacute; d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Es pot triar guardar el fitxer comprimit per retallar temps de transfer&egrave;ncia fins a casa seva o guardar-lo en un servidor per a c&ograve;pies de seguretat, i estalviar l\'espai de disc.',
 'texte_adresse_annuaire_1' => '(Si el vostre anuari est&agrave; instal.lat a la mateixa maquina que aquesta web, es tracta probablement de "localhost".)',
@@ -817,10 +817,9 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexaci&oacute;',
 'texte_en_cours_validation' => 'Els articles i breus d\'ac&iacute; sota estan proposats per a la seua publicaci&oacute;. No vos estigueu de fer-ne algun comentari al respecte als f&ograve;rums que tenen assignats.',
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
-'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt> .htpasswd</tt>
-i <tt>.htpasswd-admin</tt>en el directori <tt>ecrire/date/</tt>? </b></p>
- Aquests fitxers poden servir per a restringir l\'acc&eacute;s als autors i als administradors en altres llocs de la vostra web (programa extern d\'estad&iacute;stiques, per exemple).<p>
- Si no li veuieu cap utilitat podeu deixar aquesta opci&oacute; amb el seu valor per defecte (no creaci&oacute; dels fitxers).',
+'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p />
+ Aquests fitxers poden servir per restringir l\'acc&eacute;s als autors i als administradors en altres llocs de la vostra Web (programa extern d\'estad&iacute;stiques, per exemple).<p>
+ Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no creaci&oacute; dels fitxers).',
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
@@ -883,11 +882,11 @@ En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la form
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
 'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguretat de la base',
-'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Perqu&egrave; aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat en el directori <i>ecrire/data/</i>.
+'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Per tal que aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat dins del directori @dossier@.
 Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues eventuals s&oacute;n irreversibles.</b>',
 'texte_sauvegarde' => 'Desar el contigut de la base',
 'texte_sauvegarde_base' => 'Desar la base',
-'texte_sauvegarde_compressee' => 'La c&ograve;pia de seguretat ser&agrave; feta a l\'arxiu no comprimit <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La c&ograve;pia de seguretat es far&agrave; a l\'arxiu no comprimit @fichier@.',
 'texte_selection_langue_principale' => 'A continuaci&oacute; podeu seleccionar la &laquo;llengua principal&raquo; del lloc. Aquesta selecci&oacute; no us obliga - afortunadament! - a escriure els vostres articles en la llengua escollida, per&ograve; permet determinar:
 <ul><li> el format per defecte de les dates en el lloc p&uacute;blic;</li>
 <li> la naturalesa del motor tipogr&agrave;fic que l\'SPIP ha d\'utilitzar per la reproducci&oacute; dels textos;</li>

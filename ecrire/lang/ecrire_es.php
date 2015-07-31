@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => '&iexcl;Borrar TODO!',
 'bouton_envoi_message_02' => 'ENVIAR UN MENSAJE',
 'bouton_envoyer_message' => 'Mensaje definitivo: enviar',
-'bouton_forum_petition' => 'Foro y petici&oacute;n',
+'bouton_forum_petition' => 'FORO &amp; FIRMAS',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORIO PERSONAL',
 'bouton_radio_activer_messagerie' => 'Activar la mensajer&iacute;a interna',
@@ -85,8 +85,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_pas_petition' => 'Sin petici&oacute;n',
 'bouton_radio_petition_activee' => 'Petici&oacute;n activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute;n inmediata de los mensajes (las contribuciones aparecen en cuanto enviadas, pueden suprimirse posteriormente desde la administraci&oacute;n).',
-'bouton_radio_sauvegarde_compressee' => 'copia comprimida en <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'copia no comprimida en <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'respaldo comprimido en @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'respaldo no comprimido en @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;n',
 'bouton_radio_syndication' => 'Sindicaci&oacute;n',
 'bouton_redirection' => 'Redirecci&oacute;n',
@@ -450,7 +450,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_principaux_correspondants' => 'Tus principales corresponsales',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'la actulizaci&oacute;n debe ser realizada para adaptar la base de datos a esta nueva versi&oacute;n de SPIP.',
-'info_ps' => 'P.S',
+'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Tus art&iacute;culos publicados',
 'info_question_accepter_visiteurs' => 'Si en los esqueletos de tu sitio est&aacute; previsto el registro de visitantes sin acceso al espacio privado, tendr&aacute;s que activar la opci&oacute;n siguiente:',
@@ -499,7 +499,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_sauvegarde_petitions' => 'Guardar las peticiones',
 'info_sauvegarde_refers' => 'Guardar los "referers"',
 'info_sauvegarde_reussi_01' => 'Copia de respaldo lograda.',
-'info_sauvegarde_reussi_02' => 'La copia de respaldo de la base fue creada en <b>ecrire/data/@archive@</b>. Puedes',
+'info_sauvegarde_reussi_02' => 'El respaldo de la base est&aacute; en @archive@. Puedes',
 'info_sauvegarde_reussi_03' => 'volver a la gesti&oacute;n',
 'info_sauvegarde_reussi_04' => 'del sitio.',
 'info_sauvegarde_rubriques' => 'Guardar las secciones',
@@ -737,16 +737,15 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 
 // T
 'taille_cache_image' => 'Las im&aacute;genes calculadas autom&aacute;ticamente por SPIP (miniaturas de documentos, t&iacute;tulos presentados en forma gr&aacute;fica, f&oacute;rmulas matem&aacute;ticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
-'taille_cache_infinie' => 'Este sitio no tiene previsto un l&iacute;mite del tama&ntilde;o de la carpeta <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP intenta limitar el tama&ntilde;o de la carpeta <code>CACHE/</code> de este sitio a unos <b>@octets@</b> de datos.',
+'taille_cache_infinie' => 'En este sitio no se limita el tama&ntilde;o de la carpeta de cache.',
+'taille_cache_maxi' => 'SPIP intenta limitar el tama&ntilde;o de la carpeta de cache de este sitio a unos <b>@octets@</b> de datos.',
 'taille_cache_octets' => 'El tama&ntilde;o de la cache es actualmente de @octets@.',
 'taille_cache_vide' => 'La cache est&aacute; vac&iacute;a.',
 'taille_repertoire_cache' => 'Tama&ntilde;o de la carpeta cache',
 'text_article_propose_publication' => 'Art&iacute;culo propuesto a la publicaci&oacute;n.<br> No dudes en dar tu opini&oacute;n en el foro aferente, que se encuentra m&aacute;s adelante en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso debes especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
 'texte_admin_effacer_01' => 'Este comando borra <i>TODO</i>  el contenido de la base de datos, redactoras y administradores inclu&iacute;dos. Despu&eacute;s de ejecutarlo tendr&aacute;s que volver a instalar SPIP, creando una nueva base al igual que un primer acceso de administraci&oacute;n.',
-'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de respaldo de la base en un archivo que se guardar&aacute; en la carpeta <i>ecrire/data/</i>.
-No olvides igualmente recuperar la totalidad de la carpeta <i>IMG/</i>, que contiene las im&aacute;genes y los documentos utilizadas en los art&iacute;culos y las secciones.',
+'texte_admin_tech_01' => 'Esta opci&oacute;n permite respaldar el contenido de la base en un archivo que se guardar&aacute; en la carpeta @dossier@. No olvides recuperar adem&aacute;s la totalidad de la carpeta <i>IMG/</i>, que contiene las im&aacute;genes y los documentos utilizadas en los art&iacute;culos y las secciones.',
 'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de respaldo S&Oacute;LO PODR&Aacute; ser restaurada en un sitio que utiliza LA MISMA versi&oacute;n de SPIP. Por ning&uacute;n motivo se deber&aacute; &laquo;&nbsp;vaciar la base&nbsp;&raquo; imaginando volver a instalar el respaldo despu&eacute;s de una actualizaci&oacute;n. Consultar la <a href="http://www.spip.net/fr_article12436.html">documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Puedes elegir de guardar el archivo comprimido, y as&iacute; acortar el tiempo de transferencia hacia tu ordenador o un servidor de respaldo, aparte de ganar espacio en el disco.',
 'texte_adresse_annuaire_1' => '(Si tu anuario est&aacute; instalado en la misma m&aacute;quina que el sitio Web, se trata probablemente de "localhost".)',
@@ -789,9 +788,10 @@ No olvides igualmente recuperar la totalidad de la carpeta <i>IMG/</i>, que cont
 'texte_effacer_donnees_indexation' => 'Borrar los datos de indexaci&oacute;n',
 'texte_en_cours_validation' => 'Los art&iacute;culos y notas breves mostradas m&aacute;s adelante, est&aacute;n propuestas para la publicaci&oacute;n. No dudes en dar tu opini&oacute;n mediante los foros adjuntos.',
 'texte_enrichir_mise_a_jour' => 'Puedes enriquecer el formato de tu texto utilizando "atajos tipogr&aacute;ficos"',
-'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt> y <tt>.htpasswd-admin</tt> en la carpeta <tt>ecrire/data/</tt>?</b><p>
+'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
+ y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p />
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estad&iacute;sticas, por ejemplo).<p>
-Si no ves la utilidad puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).',
+Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).',
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
@@ -841,11 +841,11 @@ En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt
 MySQL dispone de una facultad de reparaci&oacute;n de sus tablas cuando han sido da&ntilde;adas por accidente. Aqu&iacute; puedes intentar esta reparaci&oacute;n; en caso de fallo, conserva una copia del resultado, que posiblemente contiene indicios de lo que no funciona...
 Si el problema persiste, contacta con tu proveedor de hospedaje.',
 'texte_restaurer_base' => 'Restaurar el contenido de una copia de respaldo',
-'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  <i>ecrire/data/</i>.
-Se prudente con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',
+'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  @dossier@.
+Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',
 'texte_sauvegarde' => 'Crear una copia de respaldo de la base',
 'texte_sauvegarde_base' => 'Crear una copia de respaldo de la base',
-'texte_sauvegarde_compressee' => 'La copia de respaldo ser&aacute; realizada en un archivo sin compressi&oacute;n <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La copia de respaldo ser&aacute; realizada en un archivo no comprimido @fichier@.',
 'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! - a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
 <ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
 <li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>

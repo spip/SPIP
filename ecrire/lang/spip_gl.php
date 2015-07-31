@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'O ficheiro @fichier@ non foi atopado',
-'form_deja_inscrit' => 'Xa te rexistraches.',
+'form_deja_inscrit' => 'Xa est&aacute; inscrito.',
 'form_email_non_valide' => 'O seu enderezo de correo-e. non &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Non tes acceso a este web.',
 'form_forum_bonjour' => 'Ola, @nom@,',
@@ -246,7 +246,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'form_prop_confirmer_envoi' => 'Confirmar o env&iacute;o',
 'form_prop_description' => 'Descrici&oacute;n/comentario',
 'form_prop_enregistre' => 'A t&uacute;a proposta foi rexistrada, estar&aacute; en li&ntilde;a en canto sexa
-		validada polo equipo de xesti&oacute;n da p&aacute;xina.',
+  validada polo equipo de xesti&oacute;n da p&aacute;xina.',
 'form_prop_envoyer' => 'Enviar unha mensaxe',
 'form_prop_indiquer_email' => 'Indique un enderezo de correo-e. correcto',
 'form_prop_indiquer_nom_site' => 'Indique o nome do web.',
@@ -284,7 +284,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_vous_enregistrer' => 'Para participar neste foro, ten que se rexistrar
   na p&aacute;xina anterior. Escriba aqu&iacute; embaixo o identificador persoal
   que recibiu. Se a&iacute;nda non se rexistrou, d&eacute;beo facer',
-'forum_vous_inscrire' => 'rexistrarte.',
+'forum_vous_inscrire' => 'inscribirse.',
 
 
 // I
@@ -451,7 +451,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_nouveau_message' => 'TES UNHA NOVA MENSAXE',
 'info_nouveaux_messages' => 'TES @total_messages@ NOVAS MENSAXES',
 'info_numero_abbreviation' => 'N&uacute;m.&nbsp;',
-'info_panne_site_syndique' => 'Lugar afiliado ca&iacute;do',
+'info_panne_site_syndique' => 'Web afiliado ca&iacute;do',
 'info_pense_bete' => 'NOTA',
 'info_petit_ecran' => 'Pantalla pequena',
 'info_pixels' => 'pixels',
@@ -482,13 +482,13 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_selectionner_fichier' => 'Pode seleccionar un ficheiro do cartafol @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
 'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
-'info_site_reference' => 'Lugar referido en li&ntilde;a',
-'info_site_refuse' => 'Lugar web rexeitado',
-'info_sites_referencer' => 'Referir un lugar',
+'info_site_reference' => 'Web referido en li&ntilde;a',
+'info_site_refuse' => 'Web rexeitado',
+'info_sites_referencer' => 'Referenciar un web',
 'info_supprimer_vignette' => 'suprimir a vi&ntilde;eta',
 'info_symbole_bleu' => 'O s&iacute;mbolo <B>azul</B> indica unha <B>nota</B>: ou sexa, unha mensaxe para o teu uso persoal.',
 'info_symbole_jaune' => 'O s&iacute;mbolo <B>amarelo</B> indica un <B>an&uacute;ncio a todo o equipo de redacci&oacute;n</B>: &eacute; modificable polo equipo de xesti&oacute;n, e visible por toda a redacci&oacute;n.',
-'info_symbole_vert' => 'A icona <B>verde</B> indica as <B>mensaxes intercambiadas con outras persoas</B> do lugar.',
+'info_symbole_vert' => 'A &iacute;cona <B>verde</B> indica as <B>mensaxes intercambiadas con outras persoas</B> do web.',
 'info_syndication' => 'sindicaci&oacute;n&nbsp;:',
 'info_syndication_articles' => 'artigo(s)',
 'info_telecharger' => 'Subir dende a t&uacute;a computadora:',
@@ -529,20 +529,20 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_repondre_message' => 'Responder esta mensaxe',
 'lien_supprimer' => 'Suprimir',
 'lien_tout_afficher' => 'Amosar todo',
-'lien_visite_site' => 'visitar este lugar',
+'lien_visite_site' => 'visitar este web',
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
 'login_acces_prive' => 'acceso &oacute; espazo privado',
 'login_autre_identifiant' => 'conectarse con outro identificador',
 'login_connexion_refusee' => 'Conexi&oacute;n rexeitada.',
-'login_cookie_accepte' => 'Axusta o teu navegador para que as acepte (a.lo menos para este lugar).',
-'login_cookie_oblige' => 'Para indentificar.te dun xeito seguro neste lugar, tes que aceptar as cookies.',
-'login_deconnexion_ok' => 'Desconect&aacute;ches.te ben.',
+'login_cookie_accepte' => 'Axuste o seu navegador para que as acepte (cando menos para este web).',
+'login_cookie_oblige' => 'Para indentificarse dun xeito seguro neste webr, ten que aceptar as cookies.',
+'login_deconnexion_ok' => 'Desconexi&oacute;n realizada.',
 'login_erreur_pass' => 'Erro na chave.',
 'login_espace_prive' => 'Espazo privado',
 'login_identifiant_inconnu' => 'O identificador &laquo; @login@ &raquo; &eacute; desco&ntilde;ecido.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificador de conexi&oacute;n &oacute; lugar):',
+'login_login2' => 'Login (identificador de conexi&oacute;n ao web):',
 'login_login_pass_incorrect' => '(Login ou chave incorrectos.)',
 'login_motpasseoublie' => 'esqueceu a chave?',
 'login_non_securise' => 'Atenci&oacute;n, este formulario non &eacute; seguro.
@@ -558,7 +558,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'login_retour_site' => 'Volver ao web p&uacute;blico',
 'login_retoursitepublic' => 'volver ao web p&uacute;blico',
 'login_sans_cookiie' => 'Identificaci&oacute;n sen cookie',
-'login_sinscrire' => 'Rexistrarse',
+'login_sinscrire' => 'Inscribirse',
 'login_test_navigateur' => 'proba navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(De todos os xeitos, comprobe que o seu navegador non memorizou a s&uacute;a chave...)',
 
@@ -574,7 +574,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 // O
 'onglet_affacer_base' => 'Eliminar a base',
 'onglet_auteur' => 'A persoa',
-'onglet_contenu_site' => 'Contido do lugar',
+'onglet_contenu_site' => 'Contido do web',
 'onglet_evolution_visite_mod' => 'Evoluci&oacute;n',
 'onglet_fonctions_avances' => 'Funci&oacute;ns avanzadas',
 'onglet_informations_personnelles' => 'Informaci&oacute;ns persoais',
@@ -595,16 +595,16 @@ Grazas pola s&uacute;a participaci&oacute;n
 // P
 'pass_choix_pass' => 'Elixa s&uacute;a nova chave:',
 'pass_erreur' => 'Erro',
-'pass_erreur_acces_refuse' => '<b>Erro:</b> xa non tes acceso a este lugar.',
-'pass_erreur_code_inconnu' => '<b>Erro:</b> este c&oacute;digo non se corresponde con ningu&eacute;n con acceso a este lugar.',
-'pass_erreur_non_enregistre' => '<b>Erro:</b> o enderezo <tt>@email_oubli@</tt> non foi rexistrado neste lugar.',
+'pass_erreur_acces_refuse' => '<b>Erro:</b> xa non ten acceso a este web.',
+'pass_erreur_code_inconnu' => '<b>Erro:</b> este c&oacute;digo non se corresponde con ningu&eacute;n con acceso a este web.',
+'pass_erreur_non_enregistre' => '<b>Erro:</b> o enderezo <tt>@email_oubli@</tt> non foi rexistrado neste web.',
 'pass_erreur_non_valide' => '<b>Erro:</b> o correo-e. <tt>@email_oubli@</tt> non &eacute; v&aacute;lido!',
 'pass_erreur_probleme_technique' => '<b>Erro:</b> debido a un problema t&eacute;cnico, o correo-e. non puido ser enviado.',
 'pass_espace_prive_bla' => 'O espazo privado deste web est&aacute; aberto &aacute;s
   visitas, logo de se rexistrar. Unha vez que se rexistre,
   poder&aacute; consultar os artigos en proceso de redacci&oacute;n,
   propor novos artigos e participar en todos os foros.',
-'pass_forum_bla' => 'Solicitaches participar nun foro reservado as persoas rexistradas.',
+'pass_forum_bla' => 'Solicitou participar nun foro reservado as persoas rexistradas.',
 'pass_indiquez_cidessous' => 'Indique aqu&iacute; embaixo o enderezo do correo-e. co que se
   rexistrara. Recibir&aacute; un correo indic&aacute;ndolle os pasos a seguir para
   recuperar o seu acceso.',
@@ -631,7 +631,7 @@ e reconectar co web.
 'pass_recevoir_mail' => 'Recibir&aacute;s un correo indic&aacute;ndote os pasos a seguir para recuperar o teu acceso.',
 'pass_retour_public' => 'Volver ao web p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Non hai nada que facer aqu&iacute;.',
-'pass_vousinscrire' => 'Rex&iacute;stra.te neste lugar',
+'pass_vousinscrire' => 'Inscr&iacute;base neste web',
 'precedent' => 'anterior',
 'previsualisation' => 'Previsualizaci&oacute;n',
 'previsualiser' => 'Previsualizar',
@@ -666,10 +666,10 @@ e reconectar co web.
 		Tenta',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', despois de reiniciar o teu navegador.',
-'texte_inc_config' => 'As modificaci&oacute;ns que fagas nestas p&aacute;xinas influir&aacute;n notablemente no
-  funcionamento do lugar. Recomend&aacute;mosche non intervir namentres que non esteas 
-  un pouco &oacute; tanto do funcionamento do sistema SPIP.
-  <P align="justify"><B>En xeral, &eacute; moi recomendable que estas p&aacute;xinas sexan
+'texte_inc_config' => 'As modificaci&oacute;ns que faga nestas p&aacute;xinas influir&aacute;n notablemente no
+  funcionamento do web. Recomend&aacute;moslle non intervir namentres que non estea 
+  un pouco ao tanto do funcionamento do sistema SPIP.
+  <P align="justify"><B>En xeral, &eacute; moi recomend&aacute;bel que estas p&aacute;xinas sexan
   xestionadas polo/a webm&aacute;ster principal do web.</B>',
 'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>. Rev&iacute;seo co perfil de administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
@@ -698,7 +698,7 @@ e reconectar co web.
 'titre_mots_cles' => 'PALABRAS CHAVE',
 'titre_probleme_technique' => 'Atenci&oacute;n: un problema t&eacute;cnico (servidor MySQL) impide o acceso a esta parte do web. Gracias pola s&uacute;a comprensi&oacute;n.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENTO NESTE TEMA',
-'titre_statistiques' => 'Estat&iacute;sticas do lugar',
+'titre_statistiques' => 'Estat&iacute;sticas do web',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'trad_reference' => '(artigo de referencia)',
 

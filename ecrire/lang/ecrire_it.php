@@ -97,8 +97,8 @@ amministratori).',
 'bouton_radio_publication_immediate' => 'Pubblicazione immediata dei messaggi
 (i contributi sono pubblicati subito dopo il loro invio, gli amministratori possono
 cancellarli successivamente).',
-'bouton_radio_sauvegarde_compressee' => 'backup compresso in <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'backup non compresso in <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'backup compresso in @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'backup non compresso in @fichier@',
 'bouton_radio_supprimer_petition' => 'Elimina la petizione',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'REINDIRIZZAMENTO',
@@ -540,7 +540,7 @@ impossibile.',
 'info_sauvegarde_petitions' => 'Salva le petizioni  ',
 'info_sauvegarde_refers' => 'Salva i <em>referrer</em> (siti che fanno riferimento al tuo)',
 'info_sauvegarde_reussi_01' => 'Salvataggio riuscito.',
-'info_sauvegarde_reussi_02' => 'Il database &egrave; stato salvato in <b>ecrire/data/@archive@</b>. Puoi ',
+'info_sauvegarde_reussi_02' => 'Il database &egrave; stato salvato in @archive@. Puoi ',
 'info_sauvegarde_reussi_03' => 'tornare alla gestione',
 'info_sauvegarde_reussi_04' => 'del tuo sito.',
 'info_sauvegarde_rubriques' => 'Salva le rubriche',
@@ -779,8 +779,8 @@ Le traduzioni sono associate all\'originale,
 
 // T
 'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
-'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella <code>CACHE/</code> a  <b>@octets@</b>.',
+'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
+'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
 'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',
 'taille_cache_vide' => 'La cache &egrave; vuota.',
 'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
@@ -788,8 +788,8 @@ Le traduzioni sono associate all\'originale,
 'texte_acces_ldap_anonyme_1' => 'Alcuni server LDAP non consentono accessi anonimi. In questo caso si deve specificare un identificatore d\'accesso iniziale al fine di poter poi ricercare delle informazioni nell\'elenco. Nella maggior parte dei casi tuttavia, i campi seguenti potranno essere lasciati vuoti.',
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login dei redattori e degli amministratori. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
-'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella <i>ecrire/data/</i>.
-In fase di backup non dimenticare di recuperare integralmente anche la cartella <i>IMG/</i>, che contiene le immagini utilizzate negli articoli e nelle rubriche.',
+'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
+Non dimenticare di recuperare integralmente anche la cartella <i>IMG/</i>, che contiene le immagini e i documentii utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
 Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',
@@ -846,12 +846,13 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_en_cours_validation' => 'Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
 'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
-e <tt>.htpasswd-admin</tt> nella cartella <tt>ecrire/data/</tt>?</b><p>
-Questi file possono servire a limitare l\'accesso agli autori
+e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
+ Questi file possono servire a limitare l\'accesso agli autori
 e agli amministratori in particolari aree del sito
 (per esempio, per un programma esterno di statistiche).<p />
 Se ci&ograve; non &egrave; necessario, lasciare quest\'opzione
-al suo valore predefinito (nessuna creazione di file).',
+al suo valore predefinito (nessuna creazione 
+di file).',
 'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
 'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
@@ -922,11 +923,11 @@ contenente forse delle informazioni preziose...<p />
 Se il problema persiste, contattare il webmaster.<p />',
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
-Il file di salvataggio deve trovarsi nella cartella <i>ecrire/data/</i>.
-Attenzione: <b>le modifiche o la perdita eventuale di dati, sono irreversibili.</b>',
+Il file di salvataggio deve trovarsi nella cartella @dossier@.
+Attenzione: <b>le modifiche o la perdita eventuale di dati sono irreversibili.</b>',
 'texte_sauvegarde' => 'Salva il contenuto del database',
 'texte_sauvegarde_base' => 'Salva il database',
-'texte_sauvegarde_compressee' => 'Il salvataggio avverr&agrave; nel file non compresso <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'Il salvataggio avverr&agrave; nel file non compresso @fichier@.',
 'texte_selection_langue_principale' => 'Puoi selezionare qui sotto la &laquo;lingua predefinita&raquo; del sito. Questa scelta non obbliga - fortunatamente! - a scrivere gli articoli nella stessa lingua, ma permette di determinare:
 <ul><li> il formato di default delle date sul sito pubblico;</li>
 <li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo;</li>
