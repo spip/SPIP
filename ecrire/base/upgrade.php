@@ -66,23 +66,6 @@ function maj_base($version_cible = 0) {
 	}
 }
 
-
-// Appliquer une serie de spip_query() qui risquent de partir en timeout
-// cf. maj/v019.php
-// http://doc.spip.org/@serie_upgrade
-function serie_upgrade($serie, $q = array()) {
-	$etape = intval($GLOBALS['meta']['upgrade_etape_'.$serie]);
-	foreach ($q as $i => $req) {
-		if ($i <= $etape) {
-			spip_log("etape $i: ".$req);
-			spip_query($req);
-			ecrire_meta('upgrade_etape_'.$serie, $i+1);
-		}
-	}
-	effacer_meta('upgrade_etape_'.$serie);
-}
-
-
 // A partir de la version 1.945, le while ci-dessus aboutit ici.
 // Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
 // (qu'on espere pas trop longue chacune).
@@ -116,6 +99,22 @@ function maj_while($version_installee, $version_cible)
 		}
 	}
 }
+
+// Appliquer une serie de spip_query() qui risquent de partir en timeout
+// cf. maj/v019.php
+
+function serie_alter($serie, $q = array()) {
+	$etape = intval(@$GLOBALS['meta']['upgrade_etape_'.$serie]);
+	foreach ($q as $i => $req) {
+		if ($i >= $etape) {
+			spip_log("serie_alter etape $i: ".$req);
+			sql_alter($req);
+			ecrire_meta('upgrade_etape_'.$serie, $i+1);
+		}
+	}
+	effacer_meta('upgrade_etape_'.$serie);
+}
+
 
 // A refaire pour PG
 // http://doc.spip.org/@convertir_un_champ_blob_en_text
