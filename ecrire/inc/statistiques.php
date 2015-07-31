@@ -146,11 +146,10 @@ function maxgraph($max) {
 }
 
 // http://doc.spip.org/@statistiques_jour_et_mois
-function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree, $order, $count, $serveur, $total, $popularite, $liste='', $classement=array(), $script='')
+function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree, $order, $count, $serveur, $interval, $total, $popularite, $liste='', $classement=array(), $script='')
 {
 	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree DAY)": '';
 	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
-	$interval = 3600*24;
 	$log = statistiques_collecte_date($select, "(ROUND(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
 	if (!$log) return array('','');
@@ -208,7 +207,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 	if (flag_svg() AND !$script) {
 		list($moyenne,$val_prec, $res) = stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $last);
 	} else {
-		list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $script);
+		list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script);
 		$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
 		  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
 
@@ -305,12 +304,12 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 	return $zoom;
 }
 
+// Presentation graphique (rq: on n'affiche pas le jour courant)
 // http://doc.spip.org/@stat_log1
-function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $script) {
+function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script) {
 	$res = '';
+	$rien = http_img_rien($largeur, 1, 'trait_bas', '');
 	$test_agreg = $decal = $jour_prec = $val_prec = $moyenne = 0;
-	$jagreg = (3600*24)*$agreg;
-	// Presentation graphique (rq: on n'affiche pas le jour courant)
 	foreach ($log as $key => $value) {
 		if ($key == $date_today) break; 
 		$test_agreg ++;
@@ -318,29 +317,23 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $script) {
 		$test_agreg = 0;
 		if ($decal == 30) $decal = 0;
 		$decal ++;
-		$tab_moyenne[$decal] = $value;
+		$evol[$decal] = $value;
 		// Inserer des jours vides si pas d'entrees	
 		if ($jour_prec > 0) {
-			$ecart = floor(($key-$jour_prec)/$jagreg-1);
-			for ($i=1; $i <= $ecart; $i++){
+			$ecart = (($key-$jour_prec)/$agreg)-$interval;
+			for ($i=$interval; $i <= $ecart; $i+=$interval){
 				if ($decal == 30) $decal = 0;
 				$decal ++;
-				$tab_moyenne[$decal] = $value;
-				$res .= "\n<td style='width: ${largeur}px'>"
-				. statistiques_vides($jour_prec+(3600*24*$i), $largeur, $rapport, statistiques_moyenne($tab_moyenne), $script)
-				. "</td>";
+				$evol[$decal] = $value;
+				$m = statistiques_moyenne($evol);
+				$m = statistiques_vides($jour_prec+$i, $largeur, $rapport, $m, $script);
+				$res .= "\n<td style='width: ${largeur}px'>$m</td>";
 			}
 		}
-		$ce_jour=date("Y-m-d", $key);
-		$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
-		$moyenne = round(statistiques_moyenne($tab_moyenne),2);
+		$moyenne = round(statistiques_moyenne($evol),2);
 		$hauteur = round($value * $rapport) - 1;
-		$res .= "\n<td style='width: ${largeur}px'>";
-		if ($hauteur > 0) {
-			$res .= statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $script);
-		}
-		$res .= http_img_rien($largeur, 1, 'trait_bas', '');
-		$res .= "</td>\n";
+		$m = ($hauteur <= 0) ? '' : statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $script);
+		$res .= "\n<td style='width: ${largeur}px'>$m$rien</td>\n";
 		$jour_prec = $key;
 		$val_prec = $value;
 	}
@@ -491,7 +484,7 @@ function statistiques_par_mois($entrees, $visites_today, $script){
 	if ($largeur < 1) $largeur = 1;
 	if ($largeur > 50) $largeur = 50;
 	$decal = 0;
-	$tab_moyenne = "";
+	$tab_moyenne = array();
 
 	$table = ''
 	. "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
@@ -667,7 +660,7 @@ function statistiques_signatures($aff_jours, $id_article, $serveur)
 	$total = sql_countsel("spip_signatures", "id_article=$id_article");
 	if (!$total) return '';
 	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, 3600*24, $total, 0, '', array(), $script);
 
 	return "<br />"
 	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
@@ -685,7 +678,7 @@ function statistiques_forums($aff_jours, $id_article, $serveur)
 	$total = sql_countsel("spip_forum", "id_article=$id_article");
 	if (!$total) return '';
 	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, 3600*24, $total, 0, '', array(), $script);
 
 	return "<br />"
 	. gros_titre(_L('Messages de forum par jour'),'', false)
