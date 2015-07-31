@@ -15,18 +15,19 @@
 <style type="text/css">
 <!--
 	body.page_login { text-align: center; font: 1em Verdana, Tahoma, Geneva, Helvetica, sans-serif; }
-	#minipres { width:30em;}
+	#minipres { width: 30em; }
 	.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.8em; }
 	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
 	.formulaire_menu_lang { float: #LANG_RIGHT; }
 	.formulaire_menu_lang label { display: none; }
 	.formulaire_login { clear: both; }
 	.spip_logos { float: right; padding-left: 10px; }
-	.forml,input { font-size: 1.0em;}
-	p .forml { width:20em; font-family: inherit; }
+	.forml,input { font-size: 1.0em; }
+	p .forml { width: 20em; font-family: inherit; }
 	.spip_bouton input { float: #LANG_RIGHT; }
 	.reponse_formulaire { font-weight: bold; color: red; }
 	a { color: #e86519; text-decoration: none; }
+	.formulaire_login .retour { text-align: center; }
 -->
 </style>
 [<script type='text/javascript' src='(#URL_PAGE{jquery.js})'></script>]
@@ -35,8 +36,8 @@
 
 <div id='minipres'>
 
-		<h3 class="spip">#NOM_SITE_SPIP<br />
-
+	<h3 class="spip">#NOM_SITE_SPIP<br />
+	
 	[(#REM)
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
 	]
@@ -45,21 +46,20 @@
 	[(#GET{prive}) <small><:login_acces_prive:></small>]
 	[(#GET{prive}|?{'',' '}) <!-- ?? -->]
 	
-		</h3>
-
-		#MENU_LANG_ECRIRE
-
-		<div class="formulaire_spip formulaire_login">
-			#LOGIN_PRIVE
-
-			<p style="text-align: center;">
-			[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config)" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
-			&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
-			&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
-			</p>
-
-		</div>
-</div>
+	</h3>
+	
+	#MENU_LANG_ECRIRE
+	
+	<div class="formulaire_spip formulaire_login">
+		#LOGIN_PRIVE
+		<p class="retour">
+		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config)" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
+		&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
+		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+		</p>
+	</div>
+	
+</div><!--#minipres-->
 
 </body>
 </html>

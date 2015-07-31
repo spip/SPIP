@@ -39,7 +39,7 @@
 
 
 <input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
-<p id='login_securise' style='display:none;'><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]</strong><br />&#91;<a href='[(#ENV{action2}
+<p id='login_securise' style='display: none;'><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]</strong><br />&#91;<a href='[(#ENV{action2}
 	|parametre_url{cookie_admin,non}
 	|parametre_url{url,#ENV*{url}}
 	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:></a>&#93;</p>
@@ -54,7 +54,7 @@ if (l=document.getElementById('login_securise'))	l.style.display='';
 	</div>
 </noscript>
 ]
-	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display:none;'>]
+	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display: none;'>]
 	<p><label[ for="var_login_(#ENV{login})"]><:login_pass2:></label><br />
 	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /></p>
 
