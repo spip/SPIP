@@ -101,32 +101,36 @@ function logo_modifier($objet, $id_objet, $etat, $source){
 	if ($type){
 		$poids = filesize($file_tmp);
 
-		if (_LOGO_MAX_SIZE>0
-			AND $poids>_LOGO_MAX_SIZE*1024
-		){
+		if (defined('_LOGO_MAX_SIZE') AND $poids>_LOGO_MAX_SIZE*1024){
 			spip_unlink($file_tmp);
 			$erreur = _T('info_logo_max_poids',
 				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 					'actuel' => taille_en_octets($poids)));
-		} elseif (_LOGO_MAX_WIDTH*_LOGO_MAX_HEIGHT
-			AND ($size[0]>_LOGO_MAX_WIDTH
-				OR $size[1]>_LOGO_MAX_HEIGHT)
-		) {
-			spip_unlink($file_tmp);
-			$erreur = _T('info_logo_max_poids',
-				array(
-					'maxi' =>
-						_T('info_largeur_vignette',
-							array('largeur_vignette' => _LOGO_MAX_WIDTH,
-								'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
-					'actuel' =>
-						_T('info_largeur_vignette',
-							array('largeur_vignette' => $size[0],
-								'hauteur_vignette' => $size[1]))
-				));
-		} else
+		}
+		elseif (defined('_LOGO_MAX_WIDTH') OR defined('_LOGO_MAX_HEIGHT')) {
+
+			if ((defined('_LOGO_MAX_WIDTH') AND $size[0]>_LOGO_MAX_WIDTH)
+				OR (defined('_LOGO_MAX_HEIGHT') AND $size[1]>_LOGO_MAX_HEIGHT)
+			){
+				spip_unlink($file_tmp);
+				$erreur = _T('info_logo_max_poids',
+					array(
+						'maxi' =>
+							_T('info_largeur_vignette',
+								array('largeur_vignette' => defined('_LOGO_MAX_WIDTH') ? _LOGO_MAX_WIDTH : '*',
+									'hauteur_vignette' => defined('_LOGO_MAX_HEIGHT') ? _LOGO_MAX_HEIGHT : '*')),
+						'actuel' =>
+							_T('info_largeur_vignette',
+								array('largeur_vignette' => $size[0],
+									'hauteur_vignette' => $size[1]))
+					));
+			}
+		}
+
+		if (!$erreur)
 			@rename($file_tmp, _DIR_LOGOS . $nom . ".$type");
-	} else {
+	}
+	else {
 		spip_unlink($file_tmp);
 		$erreur = _T('info_logo_format_interdit',
 			array('formats' => join(', ', $GLOBALS['formats_logos'])));

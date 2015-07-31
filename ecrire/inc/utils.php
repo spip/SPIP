@@ -2083,10 +2083,10 @@ function spip_initialisation_suite() {
 	// taille mini des login
 	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
 
-	// la taille maxi des logos (0 : pas de limite)
-	if (!defined('_LOGO_MAX_SIZE')) define('_LOGO_MAX_SIZE', 0); # poids en ko
-	if (!defined('_LOGO_MAX_WIDTH')) define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
-	if (!defined('_LOGO_MAX_HEIGHT')) define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
+	// la taille maxi des logos (0 : pas de limite) (pas de define par defaut, ce n'est pas utile)
+	#if (!defined('_LOGO_MAX_SIZE')) define('_LOGO_MAX_SIZE', 0); # poids en ko
+	#if (!defined('_LOGO_MAX_WIDTH')) define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
+	#if (!defined('_LOGO_MAX_HEIGHT')) define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
 
 	if (!defined('_DOC_MAX_SIZE')) define('_DOC_MAX_SIZE', 0); # poids en ko
 
