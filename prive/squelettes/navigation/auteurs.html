@@ -8,7 +8,7 @@
 
 [(#BOITE_OUVRIR{'','raccourcis'})]
 	[(#AUTORISER{creer,auteur})
-		[(#REM|generer_url_entite{auteur,new=oui}|icone_horizontale{<:icone_creer_nouvel_auteur:>,auteur,new})]
+		[(#URL_ECRIRE{auteur_edit,new=oui}|icone_horizontale{<:icone_creer_nouvel_auteur:>,auteur,new})]
 	]
 	[(#SESSION{id_auteur}|generer_url_entite{auteur}|icone_horizontale{<:icone_informations_personnelles:>,fiche-perso})]
 
