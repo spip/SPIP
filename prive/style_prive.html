@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{3600*100*0,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -25,7 +25,7 @@
 [(#INCLURE{fond=style_vieilles_def}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 
 body { background-color: #f8f7f3; margin: 0; border: 0; color: #000; scrollbar-face-color: #fff; scrollbar-shadow-color: #fff; scrollbar-highlight-color: #fff; scrollbar-3dlight-color: #GET{claire}; scrollbar-darkshadow-color: #fff; scrollbar-track-color: #GET{foncee}; scrollbar-arrow-color: #GET{foncee}; }
-body, body * { font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
+body{ font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 
 /* Espaceurns de blocs */
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
@@ -65,13 +65,14 @@ div.table_page { margin-top: 1em; }
 #contenu { font-size: small; }
 
 #chemin { 
-	font-size: 0.9em; 
+	font-size: 0.85em; 
+	font-weight: bold;
 	overflow: hidden; 
 	margin: 0; 
 	padding: 0; 
 }
 #chemin li em { display: none; }
-#chemin li a { color: white;  }
+#chemin li a { color: black;  }
 #chemin ul, #chemin li, #chemin li .bloc {  
 	margin: 0; 
 	padding: 0; 
@@ -81,7 +82,7 @@ div.table_page { margin-top: 1em; }
 	display: inline; 
 }
 #chemin li .bloc {	
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
 	padding: 2px;	
 	padding-bottom: 4px;
 	padding-#GET{left}: 10px;	
@@ -91,12 +92,15 @@ div.table_page { margin-top: 1em; }
 	display: inline-block; 
 }
 #chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer|couleur_foncer)], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
 }
 
 #chemin li li .bloc { 
 	margin-top: 2px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], center [(#GET{left})] no-repeat })]
+}
+#chemin li li .bloc a  {
+	color: [#(#ENV{couleur_foncee}|couleur_foncer)];
 }
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
@@ -128,7 +132,7 @@ select.fondl { padding: 0; }
 .table_page{ margin: auto; text-align: #GET{left}; }
 
 /*style for bandeau-principal*/
-#bandeau-principal { padding-top: 5px; border-bottom: 1px solid #000; position: relative; z-index: 90; background: #fff; }
+#bandeau-principal { padding-top: 5px; border-bottom: 1px solid #aaa; position: relative; z-index: 90; background: #fff; }
 #bandeau-principal .h-list .menu-item { margin: 0 auto}
 
 #bandeau-principal a {cursor:hand;}
@@ -140,13 +144,13 @@ select.fondl { padding: 0; }
 #bandeau-principal span.icon_fond span { background: center top no-repeat; height: 48px; display: block; width: 48px; margin: 0; }
 
 /*style for submenus*/
-.bandeau_sec { margin-top: 0; padding: 2px; padding-top: 0; background-color: #fff; border-bottom: 1px solid #000; border-#GET{left}: 1px solid #000; border-#GET{right}: 1px solid #000; z-index: 100; display: none; position:absolute; }
+.bandeau_sec { margin-top: 0; padding: 2px; padding-top: 0; background-color: #fff; border-bottom: 1px solid #aaa; border-#GET{left}: 1px solid #aaa; border-#GET{right}: 1px solid #aaa; z-index: 100; display: none; position:absolute; }
 
 /*style for #bandeau_couleur*/
 .bandeau_couleur {text-align: #GET{left}; margin: 0; padding: 0; }
 .bandeau_couleur a {color:#666;}
 
-#bandeau_couleur { min-height: 20px; padding: 2px 0; max-height: 40px; width: 100%; border-bottom: solid 1px white; background: #GET{claire}; }
+#bandeau_couleur { min-height: 20px; padding: 2px 0; max-height: 40px; width: 100%; background: #GET{claire}; }
 #bandeau_couleur1 .menu-item { width: 230px; text-align: #ENV{ltr}}
 #bandeau_couleur3 .menu-item { width: 150px; text-align: #GET{right}}
 #bandeau_couleur4 .menu-item { width: 68px; margin: 0 5px; text-align: #GET{right}; }
@@ -379,7 +383,7 @@ td.icone a img { border: 0; }
 .cadre-couleur-foncee div.cadre-titre { color: #fff; }
 .cadre-trait-couleur { background-color: #fff; border: 2px solid #GET{foncee}; }
 .cadre-trait-couleur div.cadre-titre { background-color: #GET{foncee}; border-bottom: 2px solid #GET{foncee}; color: #fff; }
-.cadre-r { background-color: #fff; border: 1px solid #666; }
+.cadre-r { background-color: #fff; border: 1px solid #bbb; color: #333333; }
 .cadre-r div.cadre-titre { background-color: #aaa; border-bottom: 1px solid #666; color: #000; }
 .cadre-e { background-color: #ddd; border-top: 1px solid #aaa; border-#GET{left}: 1px solid #aaa; border-bottom: 1px solid #fff; border-#GET{right}: 1px solid #fff; border: 1px solid #666; }
 .cadre-e div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #666; color: #000; }
@@ -415,7 +419,7 @@ span.lang_base { color: #666; border: 1px solid #666; background-color: #eee; }
 span.creer { color: #333; border: 1px solid #333; background-color: #fff; }
 .trad_float { float: #GET{right}; z-index: 20; margin-top: 4px; }
 
-div.liste,div.cadre-liste { border: 1px solid #444; margin-top: 3px; margin-bottom: 3px; background:white; }
+div.liste,div.cadre-liste { border: 1px solid #aaa; margin-top: 3px; margin-bottom: 3px; background:white; }
 div.cadre-liste .cadre_padding {padding: 0; }
 div.cadre-liste .padding_x .bloc_depliable {padding: 0; }
 div.cadre-liste .tranches{ position: relative;border-top: 1px solid #000; background-color: #ddd; border-bottom: 1px solid #444; padding: 2px;padding-#GET{right}:25px; }
@@ -541,7 +545,7 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 .cadre-couleur .titrem { background-color: #fff; }
 
 .joindre .titrem, #navigation .joindre .titrem { background-color: #GET{claire}; }
-.accueil #navigation .titrem { background-color: #GET{foncee}; }
+.accueil #navigation .titrem { background-color: #fff; }
 
 #navigation .titrem, #extra .titrem {text-align: center; }
 #navigation .titrem, #extra .titrem { background-color: #fff; }

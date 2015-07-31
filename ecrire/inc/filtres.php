@@ -319,6 +319,7 @@ function image_filtrer($args){
 
 // pour les feuilles de style
 function image_bg ($img, $couleur, $pos="") {
+	include_spip("inc/filtres_images");
 	if (!function_exists("imagecreatetruecolor")
 		OR !($image = image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true))
 	)
