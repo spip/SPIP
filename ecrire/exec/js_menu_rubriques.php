@@ -42,20 +42,17 @@ function gen_liste_rubriques() {
 
 
 function bandeau_menu() {
-	global $spip_ecran;
+	global $max_lignes, $width_col;
 
 	gen_liste_rubriques(); 
 	$arr_low = extraire_article(0);
 
-	$i = sizeof($arr_low);
+	$total_lignes = $i = sizeof($arr_low);
 
-	$total_lignes = $i;
-	if ($spip_ecran == "large") $max_lignes = 20;
-	else $max_lignes = 15;
-
-	$nb_col = ceil($total_lignes / $max_lignes);
-	if ($nb_col < 1) $nb_col = 1;
+	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
 	$max_lignes = ceil($total_lignes / $nb_col);
+	$width_col=min(120, 800/$nb_col);
+	$width_col =  "position: absolute; left: $width_col" . "px;";
 
 	$count_lignes = 0;
 
@@ -83,20 +80,15 @@ function bandeau_menu() {
 
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	global $zdecal;
+	global $max_lignes, $width_col;
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
 	$count_ligne = 0;
-	// Calcul du nombre max de sous-menus
 	$zdecal = $zdecal + 1;
-	if ($spip_ecran == "large") $zmax = 8;
-	else $zmax= 6;
-	
 	// Limiter volontairement le nombre de sous-menus 
 	$zmax = 6;
-	if ($spip_ecran == "large") $max_lignes = 20;
-	else $max_lignes = 15;
 
 	if ($zdecal == 1) $image = "secteur-12.gif";
 	//else $image = "rubrique-12.gif";
@@ -109,7 +101,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 
 	$i = sizeof($arr_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
-		$ret = '<div class=\"pos_r\" style=\"z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
+		$ret = '<div class=\"pos_r\" style=\"$width_col' .'z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
 		$ret .= '<div class=\"brt\"><a href=\\"' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '\\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>'
 		  . '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
@@ -117,8 +109,8 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret .= '<table cellspacing=\"0\" cellpadding=\"0\"><tr><td valign=\"top\">';		
 		$ret .= "<div  style='width: 200px;'>";
 		
-		$nb_rub = count($arr_rub);
-		$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
+		if ($nb_rub = count($arr_rub))
+			$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
 				
 		foreach( $arr_rub as $id_rub => $titre_rub) {
 			$count_ligne ++;
