@@ -425,7 +425,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 
 	$ret = "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 	$ret .= $texte;
-	if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
+	if (!$flag_ecrire) $ret .= "\n<select name='$nom_select' class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
+	else if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_claire; color: black;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
 	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 
 	sort($langues);
@@ -443,7 +444,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
-	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+	if (!$flag_ecrire)  $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='&gt;&gt;' class='spip_bouton' style='vertical-align: top;'></noscript>";
+	else if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
 	else $ret .= "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
 	$ret .= "</form>";
 	return $ret;
