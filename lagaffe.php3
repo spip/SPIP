@@ -8,7 +8,8 @@ include("inc-compilo-index.php3");
 include("inc-balises.php3");
 include("inc-boucles.php3");
 
-if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
+# décommenter au besoin, mais faire attention au double chargement.
+#if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
 
 $res = '';
 
