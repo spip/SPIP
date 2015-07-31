@@ -45,7 +45,7 @@ function debutElement($parser, $name, $attrs)
 	$delim = strpos($v, "'") === false ? "'" : '"';
 	$val = $phraseur_xml->translate_entities($v);
 	$att .= $sep .  $k . "=" . $delim
-	  . ($delim == '"' ? str_replace('"',  '&quot;', $val) : $val)
+	  . ($delim !== '"' ? str_replace('&quot;', '"', $val) : $val)
 	  . $delim;
 	$sep = "\n $depth";
     }
@@ -71,8 +71,10 @@ function finElement($parser, $name)
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
-  // fusion <balise></balise> en <balise /> sauf pour qq unes qui hallucinent
-  if ($t || ($name == 'a') || ($name == 'textarea'))
+  // fusion <balise></balise> en <balise />
+  // ATTENTION, ne pas le faire s'il y a des attributs
+  // ca trompe completement les clients http
+  if ($t || ($ouv !=$name))
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
     $res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
@@ -84,7 +86,9 @@ function textElement($parser, $data)
   global $phraseur_xml;
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
-  $contenu[$depth] .= $phraseur_xml->translate_entities($data);
+  $contenu[$depth] .= preg_match('/^script/',$phraseur_xml->ouvrant[$depth])
+    ? $data
+    : $phraseur_xml->translate_entities($data);
 }
 
 // http://doc.spip.org/@PiElement
@@ -143,7 +147,7 @@ function xml_parsestring($xml_parser, $data)
 	global $phraseur_xml;
 	$r = "";
 	if (!xml_parse($xml_parser, $data, true)) {
-	  // ne pas commencer le message par un "<" (cf spip_sax)
+	  // ne pas commencer le message par un "<" (cf inc_sax_dist)
 	  $r = xml_error_string(xml_get_error_code($xml_parser)) .
 	    _L(" ligne ") .
 	    xml_get_current_line_number($xml_parser) .
@@ -163,16 +167,16 @@ function xml_parsestring($xml_parser, $data)
 	return $r;
 }
 
-var $depth = "";
-var $res = "";
-var $contenu = array();
-var $ouvrant = array();
-var $reperes = array();
+ var $depth = "";
+ var $res = "";
+ var $contenu = array();
+ var $ouvrant = array();
+ var $reperes = array();
 }
 
 // http://doc.spip.org/@inc_sax_dist
-function inc_sax_dist($page) {
-	global $phraseur_xml, $xml_parser, $xhtml_error;
+function inc_sax_dist($page, $apply=false) {
+	global $phraseur_xml, $xml_parser;
 
 	$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
 	xml_set_element_handler($xml_parser,
@@ -182,14 +186,25 @@ function inc_sax_dist($page) {
 	xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElement'));
 	xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
+	unset($GLOBALS['xhtml_error']);
+
+	if ($apply) {
+		ob_start();
+		$page();
+		$page = ob_get_contents();
+		ob_end_clean();
+	}
+
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
 	xml_parser_free($xml_parser);
 	if ($res[0] != '<')
-	  $xhtml_error = $res;
+		$GLOBALS['xhtml_error'] = $res;
 	else
 	  $page = $res;
 	return $page;
 }
+
+
 
 $GLOBALS['phraseur_xml'] = new PhraseurXML();
 // exemple d'appel en ligne de commande:

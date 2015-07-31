@@ -196,6 +196,10 @@ $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
 
+// Appliquer un indenteur XHTML aux espaces public et/ou prive ?
+$xhtml = false;
+$xml_indent = false;
+
 // Vignettes de previsulation des referers
 // dans les statistiques
 // 3 de trouves, possibilite de switcher
