@@ -236,7 +236,7 @@ function spip_release_lock($nom) {
 }
 
 // http://doc.spip.org/@spip_sql_version
-function spip_sql_version($nom) {
+function spip_sql_version() {
 	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }

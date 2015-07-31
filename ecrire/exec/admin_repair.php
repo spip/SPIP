@@ -20,12 +20,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  */
 
-include_spip('base/db_mysql');
 
 // http://doc.spip.org/@exec_admin_repair_dist
 function exec_admin_repair_dist()
 {
 	$ok = false;
+	spip_connect();
 	$version_mysql = spip_sql_version();
 	if (!$version_mysql)
 	  $message = _T('avis_erreur_connexion_mysql');
