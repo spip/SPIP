@@ -18,7 +18,7 @@ include_spip('inc/meta');
 
 function configuration_reducteur_dist()
 {
-	global $image_process;
+	$image_process = _request('image_process');
 
 		// application du choix de vignette
 	if ($image_process) {
