@@ -1035,7 +1035,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		  if (!$table) return '';
 	}
 	elseif (@!array_key_exists($col, $desc['field'])
-	AND @!array_key_exists('*', $desc['field'])) {
+		// Champ joker * des iterateurs DATA qui accepte tout
+		AND @!array_key_exists('*', $desc['field'])) {
 		$r = calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table);
 		if (!$r) return '';
 		list($col, $col_alias, $table, $where_complement) = $r;

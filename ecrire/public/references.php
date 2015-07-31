@@ -82,10 +82,13 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 		if (isset($desc['field'][$nom_champ])) {
 			$t = $boucles[$idb]->id_table;
 			return array("$t.$nom_champ", $nom_champ);
-		} else if (isset($desc['field']['*'])) {
+		}
+		// Champ joker * des iterateurs DATA qui accepte tout
+		else if (isset($desc['field']['*'])) {
 			$t = $boucles[$idb]->id_table;
 			return array($nom_champ, $nom_champ);
-		} else {
+		}
+		else {
 		  if ($boucles[$idb]->jointures_explicites) {
 		    $t = trouver_champ_exterieur($nom_champ, 
 						 $boucles[$idb]->jointures,
