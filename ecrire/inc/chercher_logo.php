@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $mode
  *     Mode de survol du logo désiré (on ou off)
  * @return array
- *     - Liste (chemin du fichier, répertoire de logos, extension du logo, date de modification)
+ *     - Liste (chemin complet du fichier, répertoire de logos, nom du logo, extension du logo, date de modification)
  *     - array vide aucun logo trouvé.
 **/
 function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
