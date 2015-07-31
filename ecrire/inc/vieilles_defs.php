@@ -114,4 +114,31 @@ function applatit_arbre($arbre,$separateur = " "){
 	return spip_xml_aplatit($arbre,$separateur);
 }
 
+
+//
+// une autre boite
+//
+// http://doc.spip.org/@bandeau_titre_boite
+function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true) {
+	global $couleur_foncee;
+	if ($boite_importante) {
+		$couleur_fond = $couleur_foncee;
+		$couleur_texte = '#FFFFFF';
+	}
+	else {
+		$couleur_fond = '#EEEECC';
+		$couleur_texte = '#000000';
+	}
+	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><font face='Verdana,Arial,Sans,sans-serif' size='3' color='$couleur_texte'>";
+	echo "<b>$titre</b></font></td>";
+	if ($afficher_auteurs){
+		echo "<td width='100'>";
+		echo http_img_pack("rien.gif", " ", "width='100' height='12'");
+		echo "</td>";
+	}
+	echo "<td width='90'>";
+	echo http_img_pack("rien.gif", " ", "width='90' height='12'");
+	echo "</td>";
+	echo "</tr>";
+}
 ?>

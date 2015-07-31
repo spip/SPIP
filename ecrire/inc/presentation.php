@@ -299,32 +299,6 @@ function fin_boite_info($return=false) {
 //
 // une autre boite
 //
-// http://doc.spip.org/@bandeau_titre_boite
-function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true) {
-	global $couleur_foncee;
-	if ($boite_importante) {
-		$couleur_fond = $couleur_foncee;
-		$couleur_texte = '#FFFFFF';
-	}
-	else {
-		$couleur_fond = '#EEEECC';
-		$couleur_texte = '#000000';
-	}
-	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><font face='Verdana,Arial,Sans,sans-serif' size='3' color='$couleur_texte'>";
-	echo "<b>$titre</b></font></td>";
-	if ($afficher_auteurs){
-		echo "<td width='100'>";
-		echo http_img_pack("rien.gif", " ", "width='100' height='12'");
-		echo "</td>";
-	}
-	echo "<td width='90'>";
-	echo http_img_pack("rien.gif", " ", "width='90' height='12'");
-	echo "</td>";
-	echo "</tr>";
-}
-//
-// une autre boite
-//
 // http://doc.spip.org/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
 	global $spip_lang_left, $spip_display, $browser_name;
@@ -1979,7 +1953,7 @@ if (true /*$bandeau_colore*/) {
 	}
 
 	echo "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
-	echo "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr width='$largeur'>";
+	echo "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>";
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 
@@ -2040,7 +2014,7 @@ if (true /*$bandeau_colore*/) {
 			  http_img_pack("$icone", "", "width='26' height='20'")."</a>";
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
+			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'");
 
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
@@ -2217,7 +2191,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 		}
 		
 		$flag_3_colonnes = true;
-		$rspan = " rowspan=2";
+		$rspan = " rowspan='2'";
 
 	}
 	else {
@@ -2226,7 +2200,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	}
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
-		<tr><td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
+		<tr>\n<td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
 		<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
@@ -2257,16 +2231,16 @@ function creer_colonne_droite($rubrique="", $return= false){
 			$largeur = 200;
 	}
 
-	$res = "<td width='"
+	$res = "\n<td width='"
 	.  $espacement
 	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
-	. "<td rowspan='1' class='colonne_etroite'></td>"
-	. "<td width='"
+	. "\n<td rowspan='1' class='colonne_etroite'></td>"
+	. "\n<td width='"
 	.  $espacement
-	.  "'rowspan=2 class='colonne_etroite'>&nbsp;</td>"
-	. "<td width='"
+	.  "'rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	. "\n<td width='"
 	. $largeur 
-	. "' rowspan=2 align='"
+	. "' rowspan='2' align='"
 	. $spip_lang_left
 	. "' valign='top' class='colonne_etroite'><p />";
 
@@ -2287,8 +2261,7 @@ function debut_droite($rubrique="", $return= false) {
 
 	if ($options == "avancees") {
 
-		$res .= liste_articles_bloques()
-		. creer_colonne_droite($rubrique, true);
+		$res .= liste_articles_bloques();
 	}
 
 	$res .= "<div>&nbsp;</div></td>";
@@ -2370,7 +2343,7 @@ function fin_page() {
 		. '</div>'))
 
 	. fin_grand_cadre(true)
-	. "</center></font>"
+	. "</center>"
 	. $GLOBALS['rejoue_session']
 	. generer_spip_cron()
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
