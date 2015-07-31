@@ -31,8 +31,8 @@ function debut_admin($action) {
 	$fichier = fichier_admin($action);
 	if (file_exists("data/$fichier")) return true;
 
-	include("inc_install.php3");
-	debut_html("Action : $action");
+	include_local ("inc_presentation.php3");
+	install_debut_html("Action : $action");
 	
 		echo "<FORM ACTION='$lien' METHOD='post'>";
 		echo "<P><B>Authentification (par FTP).</B>";
@@ -43,7 +43,7 @@ function debut_admin($action) {
 		echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='recharger cette page' CLASS='fondo'>";
 		echo "</FORM>";
 
-	fin_html();
+	install_fin_html();
 	exit;
 }
 
