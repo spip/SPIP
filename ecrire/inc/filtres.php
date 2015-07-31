@@ -1922,38 +1922,52 @@ define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
 // Extraire et transformer les blocs multi ; on indique la langue courante
 // pour ne pas mettre de span@lang=fr si on est deja en fr
 // http://doc.spip.org/@extraire_multi
-function extraire_multi($letexte, $lang=null, $echappe_span=false) {
-	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
+function extraire_multi($letexte, $lang=null, $options=array()) {
+
+	if ($letexte
+	AND preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
 		if (!$lang) $lang = $GLOBALS['spip_lang'];
 
+		// Compatibilité avec le prototype de fonction précédente qui utilisait un boolean
+		if (is_bool($options))
+			$options = array('echappe_span' => $options, 'lang_defaut' => 'fr');
+		if (!isset($options['echappe_span']))
+			$options = array_merge($options, array('echappe_span' => false));
+		if (!isset($options['lang_defaut']))
+			$options = array_merge($options, array('lang_defaut' => 'fr'));
+
+		include_spip('inc/lang');
 		foreach ($regs as $reg) {
 			// chercher la version de la langue courante
 			$trads = extraire_trads($reg[1]);
 			if ($l = approcher_langue($trads, $lang)) {
 				$trad = $trads[$l];
 			} else {
-				include_spip('inc/texte');
-				// langue absente, prendre le fr (meme comportement que inc/traduire.php)
-				// ou la premiere dispo
-				// mais typographier le texte selon les regles de celle-ci
-				// Attention aux blocs multi sur plusieurs lignes
-				if (!$l = approcher_langue($trads, 'fr')) {
-					$l = key($trads);
+				if ($options['lang_defaut']=='aucune') {
+					$trad = '';
+				} else {
+					// langue absente, prendre le fr ou une langue précisée (meme comportement que inc/traduire.php)
+					// ou la premiere dispo
+					// mais typographier le texte selon les regles de celle-ci
+					// Attention aux blocs multi sur plusieurs lignes
+					if (!$l = approcher_langue($trads, $options['lang_defaut'])) {
+						$l = key($trads);
+					}
+					$trad = $trads[$l];
+					$typographie = charger_fonction(lang_typo($l), 'typographie');
+					$trad = $typographie($trad);
+					// Tester si on echappe en span ou en div
+					// il ne faut pas echapper en div si propre produit un seul paragraphe
+					include_spip('inc/texte');
+					$trad_propre = preg_replace(",(^<p[^>]*>|</p>$),Uims","",propre($trad));
+					$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
+					$trad = code_echappement($trad, 'multi', false, $mode);
+					$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
+					if (lang_dir($l) !== lang_dir($lang))
+						$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
+					if (!$options['echappe_span'])
+						$trad = echappe_retour($trad, 'multi');
 				}
-				$trad = $trads[$l];
-				$typographie = charger_fonction(lang_typo($l), 'typographie');
-				$trad = $typographie($trad);
-				include_spip('inc/texte');
-				// Tester si on echappe en span ou en div
-				// il ne faut pas echapper en div si propre produit un seul paragraphe
-				$trad_propre = preg_replace(",(^<p[^>]*>|</p>$),Uims","",propre($trad));
-				$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
-				$trad = code_echappement($trad, 'multi', false, $mode);
-				$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
-				if (lang_dir($l) !== lang_dir($lang))
-					$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
-				if (!$echappe_span)
-					$trad = echappe_retour($trad, 'multi');
 			}
 			$letexte = str_replace($reg[0], $trad, $letexte);
 		}
