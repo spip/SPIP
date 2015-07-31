@@ -703,6 +703,7 @@ function normaliser_date($date) {
 // http://doc.spip.org/@vider_date
 function vider_date($letexte) {
 	if (strncmp("0000-00-00", $letexte,10)==0) return '';
+	if (strncmp("0001-01-01", $letexte,10)==0) return '';
 	if (strncmp("1970-01-01", $letexte,10)==0) return '';	// eviter le bug GMT-1
 	return $letexte;
 }
