@@ -19,7 +19,7 @@ define('_FILE_TMP', '_install');
 function exec_install_dist()
 {
 	$etape = _request('etape');
-	if (_FILE_CONNECT && $etape != 'unpack') 
+	if (_FILE_CONNECT) 
 		minipres('AUTO', _T('avis_espace_interdit'));
 	else {
 
