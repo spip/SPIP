@@ -520,4 +520,20 @@ function appliquer_modifs_config($purger_skel=false) {
 	}
 }
 
+/**
+ * Mettre a jour l'adresse du site a partir d'une valeur saisie
+ * (ou auto detection si vide)
+ * 
+ * @param  $adresse_site
+ * @return void
+ */
+function appliquer_adresse_site($adresse_site){
+	if ($adresse_site!==NULL){
+		if (!strlen($adresse_site)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$adresse_site = url_de_base();}
+		$adresse_site = preg_replace(",/?\s*$,", "", $adresse_site);
+		ecrire_meta('adresse_site',$adresse_site);
+	}
+	return $adresse_site;
+}
+
 ?>
