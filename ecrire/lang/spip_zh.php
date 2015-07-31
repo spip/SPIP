@@ -379,6 +379,7 @@ sera ignor&eacute;e) :
 'icone_supprimer_message' => '&#21024;&#38500;&#28040;&#24687;',
 'icone_tous_articles' => '&#24744;&#25152;&#26377;&#30340;&#25991;&#31456;',
 'icone_tous_auteur' => '&#25152;&#26377;&#20316;&#32773;',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => '&#20351;&#28040;&#24687;&#26377;&#25928;',
 'icone_visiter_site' => '<MODIF>&#35775;&#38382;', # MODIF
 'icone_voir_en_ligne' => '&#22312;&#32447;&#39044;&#35272;',
@@ -423,7 +424,7 @@ sera ignor&eacute;e) :
 'info_copyright' => '@spip@&#26159;&#19968;&#27454;&#20813;&#36153;&#36719;&#20214;@lien_gpl@&#12290;',
 'info_copyright_doc' => '&#35814;&#32454;&#20449;&#24687;,&#35831;&#35775;&#38382;&#31449;&#28857; <a href="@spipnet@">http://www.spip.net/zh</a>.', # MODIF
 'info_copyright_gpl' => '&#26681;&#25454;GPL&#21327;&#35758;',
-'info_cours_edition' => '&#36827;&#23637;&#20013;&#25991;&#31456;',
+'info_cours_edition' => '&#36827;&#23637;&#20013;&#25991;&#31456;', # MODIF
 'info_creer_repertoire' => '&#35831;&#21019;&#24314;&#19968;&#20010;&#25991;&#20214;&#25110;&#30446;&#24405;&#21483;:',
 'info_creer_repertoire_2' => '&#22312;<b>@repertoire@</b>&#23376;&#30446;&#24405;&#20869;&#37096;&#65292;&#28982;&#21518;&nbsp;&#65306;',
 'info_creer_vignette' => '&#33258;&#21160;&#20135;&#29983;&#22270;&#26631;',
@@ -573,7 +574,7 @@ sera ignor&eacute;e) :
 'lien_afficher_texte_icones' => '&#26174;&#31034;&#25991;&#26412;&#21644;&#22270;&#29255;',
 'lien_afficher_texte_seul' => '&#21482;&#26174;&#31034;&#27491;&#25991;',
 'lien_liberer' => '&#21457;&#34920;',
-'lien_liberer_tous' => '&#37322;&#25918;&#36825;&#20123;&#25991;&#31456;',
+'lien_liberer_tous' => '&#37322;&#25918;&#36825;&#20123;&#25991;&#31456;', # MODIF
 'lien_nouvea_pense_bete' => '&#26032;&#22791;&#27880;',
 'lien_nouveau_message' => '&#26032;&#28040;&#24687;',
 'lien_nouvelle_annonce' => '&#26032;&#22768;&#26126;',
@@ -766,7 +767,7 @@ sera ignor&eacute;e) :
 'titre_statistiques' => '&#31449;&#28857;&#32479;&#35745;',
 'titre_titre_document' => '&#25991;&#31456;&#26631;&#39064;:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(&#21442;&#32771;&#25991;&#31456;)',
+'trad_reference' => '(&#21442;&#32771;&#25991;&#31456;)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval', # NEW

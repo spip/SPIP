@@ -389,6 +389,7 @@ Mersi aou m&egrave;t ansanm isi
 'icone_supprimer_message' => 'D&eacute;gr&egrave;n mod&eacute;kri-la',
 'icone_tous_articles' => 'Tout bann zartik aou',
 'icone_tous_auteur' => 'Tout bann lot&egrave;r',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Konfirm mod&eacute;kri-la',
 'icone_visiter_site' => 'Bat-kar&eacute; ', # MODIF
 'icone_voir_en_ligne' => 'Vwar an liyn',
@@ -433,7 +434,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_copyright' => '@spip@ l&eacute; inn lozisyel lib sak l&eacute; don&eacute; @lien_gpl@.',
 'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href="@spipnet@">http://www.spip.net/cpf</a>.', # MODIF
 'info_copyright_gpl' => 'sou lisans GPL',
-'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
+'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon', # MODIF
 'info_creer_repertoire' => 'Mersi kr&eacute; inn fisy&eacute; o inn r&eacute;pertwar &egrave;k non-la&nbsp;:',
 'info_creer_repertoire_2' => 'andann lo sou-r&eacute;pertwar <b>@repertoire@</b>, &eacute; apr&egrave;&nbsp;:',
 'info_creer_vignette' => 'pou kr&eacute;y inn tite-limaz otomatikman',
@@ -582,7 +583,7 @@ Mersi aou m&egrave;t ansanm isi
 'lien_afficher_texte_icones' => 'Afis bann zikon &egrave;k lo t&egrave;ks',
 'lien_afficher_texte_seul' => 'Afis s&egrave;lman lo t&egrave;ks',
 'lien_liberer' => 'Maronn',
-'lien_liberer_tous' => 'maronn tout bann zartik-la',
+'lien_liberer_tous' => 'maronn tout bann zartik-la', # MODIF
 'lien_nouvea_pense_bete' => 'NOUVO GARDANT&Egrave;T',
 'lien_nouveau_message' => 'NOUVO MOD&Eacute;KRI',
 'lien_nouvelle_annonce' => 'NOUVEL ZANONS',
@@ -768,7 +769,7 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'titre_statistiques' => 'Sifkl&eacute; lo sitw&egrave;b',
 'titre_titre_document' => 'Lo non dokiman-la&nbsp;:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anl&egrave;r',

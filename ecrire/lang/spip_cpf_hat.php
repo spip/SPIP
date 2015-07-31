@@ -382,6 +382,7 @@ M&egrave;si  w soutni petisyon-nan
 'icone_supprimer_message' => 'Kraze mesaj la',
 'icone_tous_articles' => 'Tout atik ou',
 'icone_tous_auteur' => 'Tout lot&egrave; yo',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Konfime mesaj la',
 'icone_visiter_site' => 'F&egrave; yon vire', # MODIF
 'icone_voir_en_ligne' => 'Gad an liy',
@@ -426,7 +427,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_copyright' => '@spip@ se yon logisy&egrave;l lib ki done @lien_gpl@.',
 'info_copyright_doc' => 'Si w vle plis enf&ograve;masyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.', # MODIF
 'info_copyright_gpl' => 'nan lisans GPL',
-'info_cours_edition' => 'Tout atik yo w ka ekri ank&ograve;',
+'info_cours_edition' => 'Tout atik yo w ka ekri ank&ograve;', # MODIF
 'info_creer_repertoire' => 'Kreye yon fichye ousinon yon r&eacute;p&egrave;twa sak i rele&nbsp;:',
 'info_creer_repertoire_2' => 'nan sou-rep&egrave;twa <b>@repertoire@</b>, epi&nbsp;:', # MODIF
 'info_creer_vignette' => 'kreyasyon viy&egrave;t otomatik ',
@@ -575,7 +576,7 @@ M&egrave;si  w soutni petisyon-nan
 'lien_afficher_texte_icones' => 'Afiche ik&ograve;n ak t&egrave;ks',
 'lien_afficher_texte_seul' => 'F&egrave; par&egrave;t kisa se t&egrave;ks s&egrave;lman',
 'lien_liberer' => 'mawonn',
-'lien_liberer_tous' => 'Mawonn tout atik sa-yo',
+'lien_liberer_tous' => 'Mawonn tout atik sa-yo', # MODIF
 'lien_nouvea_pense_bete' => 'NOUVO RAPLE-W',
 'lien_nouveau_message' => 'NOUVO MESAJ',
 'lien_nouvelle_annonce' => 'YON NOUVEL ANNONS',
@@ -765,7 +766,7 @@ l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou
 'titre_statistiques' => 'Estatistik sit la',
 'titre_titre_document' => 'Kouman rele dokiman a&nbsp;:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(atik pou referans)',
+'trad_reference' => '(atik pou referans)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anba',

@@ -380,6 +380,7 @@ Merci fir &auml;r Participatioun
 'icone_supprimer_message' => 'D&euml;se Message l&auml;schen',
 'icone_tous_articles' => 'All &auml;r Artikelen',
 'icone_tous_auteur' => 'All d\'Auteuren',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'D&euml;se Message valid&eacute;ieren',
 'icone_visiter_site' => 'Ukucken', # MODIF
 'icone_voir_en_ligne' => 'Online weisen',
@@ -424,7 +425,7 @@ Merci fir &auml;r Participatioun
 'info_copyright' => '@spip@ ass eng fr&auml;i Software d&eacute;i &euml;nner @lien_gpl@ verdeelt g&euml;t.',
 'info_copyright_doc' => 'Fir m&eacute;i Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
 'info_copyright_gpl' => '&euml;nner GPL-Lizenz',
-'info_cours_edition' => '&Auml;r Artikelen an der Aarbecht',
+'info_cours_edition' => '&Auml;r Artikelen an der Aarbecht', # MODIF
 'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat d&euml;sem Numm derb&auml;i:',
 'info_creer_repertoire_2' => 'am Dossier <b>ecrire/data</b>, dann:',
 'info_creer_vignette' => 'Automat&euml;sch Vignetten maachen',
@@ -572,7 +573,7 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'lien_afficher_texte_icones' => 'D\'Ikonen an d\'Texter weisen',
 'lien_afficher_texte_seul' => 'N&euml;mmen d\'Texter weisen',
 'lien_liberer' => 'fr&auml;i ginn',
-'lien_liberer_tous' => 'd&euml;s Artikelen fr&auml;i ginn',
+'lien_liberer_tous' => 'd&euml;s Artikelen fr&auml;i ginn', # MODIF
 'lien_nouvea_pense_bete' => 'NEI NOTIZ',
 'lien_nouveau_message' => 'NEIE MESSAGE',
 'lien_nouvelle_annonce' => 'NEI ANNONCE',
@@ -743,7 +744,7 @@ Prob&eacute;iert ',
 'titre_statistiques' => 'Statistik vum Site',
 'titre_titre_document' => 'Titel vum Dokument:',
 'todo' => 'k&euml;nnt nach',
-'trad_reference' => '(Referenz-Artikel)',
+'trad_reference' => '(Referenz-Artikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': B-Tag dr&euml;nner',

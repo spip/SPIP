@@ -377,6 +377,7 @@ Obrigado por participar
 'icone_supprimer_message' => 'Suprimir esta mensagem',
 'icone_tous_articles' => 'Todas as suas mat&eacute;rias',
 'icone_tous_auteur' => 'Todos os autores',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validar esta mensagem',
 'icone_visiter_site' => 'Ver o site p&uacute;blico',
 'icone_voir_en_ligne' => 'Ver online',
@@ -421,7 +422,7 @@ Obrigado por participar
 'info_copyright' => '@spip@ &eacute; um software livre distribu&iacute;do @lien_gpl@.',
 'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, veja o site <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
-'info_cours_edition' => 'Suas mat&eacute;rias em fase de reda&ccedil;&atilde;o',
+'info_cours_edition' => 'Suas mat&eacute;rias em fase de reda&ccedil;&atilde;o', # MODIF
 'info_creer_repertoire' => 'Por favor, crie um arquivo ou diret&oacute;rio com o nome:',
 'info_creer_repertoire_2' => 'dentro do subdiret&oacute;rio <b>@repertoire@</b>, e depois:',
 'info_creer_vignette' => 'cria&ccedil;&atilde;o autom&aacute;tica do &iacute;cone',
@@ -569,7 +570,7 @@ Obrigado por participar
 'lien_afficher_texte_icones' => 'Exibir &iacute;cones e texto',
 'lien_afficher_texte_seul' => 'Exibir apenas o texto',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberar estas mat&eacute;rias',
+'lien_liberer_tous' => 'liberar estas mat&eacute;rias', # MODIF
 'lien_nouvea_pense_bete' => 'NOVO LEMBRETE',
 'lien_nouveau_message' => 'NOVA MENSAGEM',
 'lien_nouvelle_annonce' => 'NOVO AN&Uacute;NCIO',
@@ -743,7 +744,7 @@ Tente se',
 'titre_statistiques' => 'Estat&iacute;sticas do site',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'todo' => 'breve',
-'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)',
+'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',

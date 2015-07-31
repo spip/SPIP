@@ -386,6 +386,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'icone_supprimer_message' => 'Usu&#324; t&#281; wiadomo&#347;&#263;',
 'icone_tous_articles' => 'Wszystkie Twoje artyku&#322;y',
 'icone_tous_auteur' => 'Wszyscy autorzy',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Zatwierd&#378; t&#281; wiadomo&#347;&#263;',
 'icone_visiter_site' => 'Odwied&#378;', # MODIF
 'icone_voir_en_ligne' => 'Obejrzyj online',
@@ -430,7 +431,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_copyright' => '@spip@ - darmowe oprogramowanie dystrybuowane w oparciu o licencj&#281; @lien_gpl@.',
 'info_copyright_doc' => 'Wi&#281;cej informacji na stronie <a href="@spipnet@">http://www.spip.net</a>.', # MODIF
 'info_copyright_gpl' => 'na licencji GPL',
-'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
+'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania', # MODIF
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',
 'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a nast&#281;pnie:',
 'info_creer_vignette' => 'generowanie miniaturki',
@@ -580,7 +581,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'lien_afficher_texte_icones' => 'POkazuj ikonki i tekst',
 'lien_afficher_texte_seul' => 'Pokazuj tylko tekst',
 'lien_liberer' => 'uwolnij',
-'lien_liberer_tous' => 'uwolnij artyku&#322;y',
+'lien_liberer_tous' => 'uwolnij artyku&#322;y', # MODIF
 'lien_nouvea_pense_bete' => 'NOWA NOTATKA',
 'lien_nouveau_message' => 'NOWA WIADOMO&#346;&#262;',
 'lien_nouvelle_annonce' => 'NOWE ZAWIADOMIENIE',
@@ -770,7 +771,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'titre_statistiques' => 'Statystyki strony',
 'titre_titre_document' => 'Tytu&#322; dokumentu:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(artyku&#322; wzorcowy)',
+'trad_reference' => '(artyku&#322; wzorcowy)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',

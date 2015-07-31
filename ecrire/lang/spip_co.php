@@ -388,6 +388,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'icone_supprimer_message' => 'Sguass&agrave; stu messagiu',
 'icone_tous_articles' => 'Tutti i vostri art&igrave;culi',
 'icone_tous_auteur' => 'Tutti l\'autori',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Cunvalid&agrave; stu messagiu',
 'icone_visiter_site' => 'Situ p&ugrave;bblicu', # MODIF
 'icone_voir_en_ligne' => 'Vede in ligna',
@@ -432,7 +433,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'info_copyright' => '@spip@ h&egrave; un prugrammu l&igrave;beru distribuitu @lien_gpl@.',
 'info_copyright_doc' => 'Per sap&egrave; ne di pi&ugrave;, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'sottu licenza GPL',
-'info_cours_edition' => 'I vostri art&igrave;culi in corsu di scrittura',
+'info_cours_edition' => 'I vostri art&igrave;culi in corsu di scrittura', # MODIF
 'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu&nbsp;:',
 'info_creer_repertoire_2' => '&agrave; l\'internu di u sottucartulare <b>@repertoire@</b>, poi&nbsp;:',
 'info_creer_vignette' => 'creazione autum&agrave;tica di a figuretta',
@@ -583,7 +584,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'lien_afficher_texte_icones' => 'F&agrave; cumparisce l\'icone c&ugrave; u testu',
 'lien_afficher_texte_seul' => 'F&agrave; cumparisce solu u testu',
 'lien_liberer' => 'liber&agrave;',
-'lien_liberer_tous' => 'liber&agrave; st\'art&igrave;culi',
+'lien_liberer_tous' => 'liber&agrave; st\'art&igrave;culi', # MODIF
 'lien_nouvea_pense_bete' => 'NUVELLU MEMENTU',
 'lien_nouveau_message' => 'NUVELLU MESSAGIU',
 'lien_nouvelle_annonce' => 'NUVELLU ANNUNCIU',
@@ -768,7 +769,7 @@ Puderete tandu inserisce un nuvellu password
 'titre_statistiques' => 'Stat&igrave;stiche di u situ',
 'titre_titre_document' => 'T&igrave;tulu di u ducumentu&nbsp;:',
 'todo' => 'In futuru',
-'trad_reference' => '(art&igrave;culu di riferenza)',
+'trad_reference' => '(art&igrave;culu di riferenza)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B pi&ugrave; in d&agrave;',

@@ -382,6 +382,7 @@ Tak for din deltagelse
 'icone_supprimer_message' => 'Slet denne meddelelse',
 'icone_tous_articles' => 'Alle dine artikler',
 'icone_tous_auteur' => 'Alle forfattere',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Godkend meddelelse',
 'icone_visiter_site' => 'Bes&oslash;g websted', # MODIF
 'icone_voir_en_ligne' => 'Vis online',
@@ -426,7 +427,7 @@ Tak for din deltagelse
 'info_copyright' => '@spip@ er fri software der distribueres @lien_gpl@.',
 'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href="@spipnet@">http://www.spip.net/da</a>.', # MODIF
 'info_copyright_gpl' => 'under GPL licens',
-'info_cours_edition' => 'Artikler undervejs',
+'info_cours_edition' => 'Artikler undervejs', # MODIF
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
 'info_creer_repertoire_2' => 'i underkataloget <b>@repertoire@</b>, og derefter', # MODIF
 'info_creer_vignette' => 'cr&eacute;ation automatique de la vignette', # NEW
@@ -574,7 +575,7 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'lien_afficher_texte_icones' => 'Vis piktogrammer og tekst',
 'lien_afficher_texte_seul' => 'Vis kun tekst',
 'lien_liberer' => 'frigiv',
-'lien_liberer_tous' => 'frigiv disse artikler',
+'lien_liberer_tous' => 'frigiv disse artikler', # MODIF
 'lien_nouvea_pense_bete' => 'NYT MEMO',
 'lien_nouveau_message' => 'NY MEDDELELSE',
 'lien_nouvelle_annonce' => 'NY ANNONCERING',
@@ -753,7 +754,7 @@ og igen f&aring; adgang til webstedet.', # MODIF
 'titre_statistiques' => 'Webstedsstatistik',
 'titre_titre_document' => 'Dokumentoverskrift:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(referenceartikel)',
+'trad_reference' => '(referenceartikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval', # NEW

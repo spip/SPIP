@@ -383,6 +383,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'icone_supprimer_message' => 'Az &uuml;zenet t&ouml;rl&eacute;se',
 'icone_tous_articles' => 'Az &ouml;sszes cikkei',
 'icone_tous_auteur' => 'Az &ouml;sszes szerz&#337;',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Az &uuml;zenet &eacute;rv&eacute;nyes&iacute;t&eacute;se',
 'icone_visiter_site' => 'L&aacute;togat&aacute;s', # MODIF
 'icone_voir_en_ligne' => 'N&eacute;zni &eacute;l&#337;ben',
@@ -427,7 +428,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_copyright' => '@spip@ egy szabad szoftver, let&ouml;lthet&#337;: @lien_gpl@.',
 'info_copyright_doc' => 'B&#337;vebb inform&aacute;ci&oacute;kra, l&aacute;sd a honlapot <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'GPL licenz&uacute;',
-'info_cours_edition' => 'Az &Ouml;n szerkeszt&eacute;s alatti cikkei',
+'info_cours_edition' => 'Az &Ouml;n szerkeszt&eacute;s alatti cikkei', # MODIF
 'info_creer_repertoire' => 'Hozzon l&eacute;tre f&aacute;jlt, vagy mapp&aacute;t, melynek a neve&nbsp;:',
 'info_creer_repertoire_2' => 'az almapp&aacute;n <b>@repertoire@</b> bel&uuml;l, ez&uacute;t&aacute;n&nbsp;:',
 'info_creer_vignette' => 'a b&eacute;lyegk&eacute;p automatikus l&eacute;trehoz&aacute;sa',
@@ -576,7 +577,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'lien_afficher_texte_icones' => 'Ikonok &eacute;s sz&ouml;veg megjelen&iacute;t&eacute;se',
 'lien_afficher_texte_seul' => 'Csak a sz&ouml;veg megjelen&iacute;t&eacute;se',
 'lien_liberer' => 'szabad&iacute;tani',
-'lien_liberer_tous' => 'a cikkek szabad&iacute;t&aacute;sa',
+'lien_liberer_tous' => 'a cikkek szabad&iacute;t&aacute;sa', # MODIF
 'lien_nouvea_pense_bete' => '&Uacute;J EML&Eacute;KEZTET&#336;',
 'lien_nouveau_message' => '&Uacute;J &Uuml;ZENET',
 'lien_nouvelle_annonce' => '&Uacute;J H&Iacute;RK&Ouml;ZL&Eacute;S',
@@ -761,7 +762,7 @@ Pr&oacute;b&aacute;ljon', # MODIF
 'titre_statistiques' => 'A honlap statisztikai',
 'titre_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'todo' => 'to come', # NEW
-'trad_reference' => '(eredeti cikk)',
+'trad_reference' => '(eredeti cikk)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B jelz&#337; ut&aacute;n',

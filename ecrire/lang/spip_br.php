@@ -382,6 +382,7 @@ Trugarez da gemer perzh
 'icone_supprimer_message' => 'Diverka&ntilde; ar gemennadenn-ma&ntilde;',
 'icone_tous_articles' => 'Ho holl bennado&ugrave;',
 'icone_tous_auteur' => 'An holl skridaozerien',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Asanti&ntilde; d\'ar gemennadenn-ma&ntilde;',
 'icone_visiter_site' => 'Gweladenni&ntilde;', # MODIF
 'icone_voir_en_ligne' => 'Gwelet enlinenn',
@@ -426,7 +427,7 @@ Trugarez da gemer perzh
 'info_copyright' => 'Ur meziant dieub eo @spip@, dasparzhet @lien_gpl@.',
 'info_copyright_doc' => 'Evit titouro&ugrave; ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'dindan aotre implijout GPL',
-'info_cours_edition' => 'Ar pennado&ugrave; emaoc\'h o skriva&ntilde;',
+'info_cours_edition' => 'Ar pennado&ugrave; emaoc\'h o skriva&ntilde;', # MODIF
 'info_creer_repertoire' => 'Krouit ur restr pe ur c\'havlec\'h anvet&nbsp;:',
 'info_creer_repertoire_2' => 'en iskavlec\'h <b>@repertoire@</b>, ha&nbsp;:',
 'info_creer_vignette' => 'kroui&ntilde; emgefreek ar skeudennig',
@@ -574,7 +575,7 @@ Trugarez da gemer perzh
 'lien_afficher_texte_icones' => 'Diskouez ar skeudennigo&ugrave; hag an destenn',
 'lien_afficher_texte_seul' => 'Diskouez an destenn hepken',
 'lien_liberer' => 'dieubi&ntilde;',
-'lien_liberer_tous' => 'dieubi&ntilde; ar pennado&ugrave;-ma&ntilde;',
+'lien_liberer_tous' => 'dieubi&ntilde; ar pennado&ugrave;-ma&ntilde;', # MODIF
 'lien_nouvea_pense_bete' => 'NOTENNIG-E&Ntilde;VOR NEVEZ',
 'lien_nouveau_message' => 'KEMENNADENN NEVEZ',
 'lien_nouvelle_annonce' => 'KEMENN NEVEZ',
@@ -756,7 +757,7 @@ Aliet oc\'h da chom hep kemma&ntilde; tra ebet e-keit ha n\'oc\'h ket boas ouzh 
 'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn', # Stadego&ugrave;, termen skoueriekaet gant TermBret evit Statistiques.
 'titre_titre_document' => 'Titl an teul&nbsp;:',
 'todo' => 'da zont',
-'trad_reference' => '(pennad orin)',
+'trad_reference' => '(pennad orin)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balizenn B en ardrao&ntilde;',

@@ -360,6 +360,7 @@ sera ignor&eacute;e) :
 'icone_supprimer_message' => 'Izbrisi ovu poruku',
 'icone_tous_articles' => 'Svi vasi clanci',
 'icone_tous_auteur' => 'Svi autori',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Ovjeri ovu poruku',
 'icone_visiter_site' => 'Posjeti', # MODIF
 'icone_voir_en_ligne' => 'Pogledaj online',
@@ -404,7 +405,7 @@ sera ignor&eacute;e) :
 'info_copyright' => '@spip@ je slobodni softver distribucije @lien_gpl@.',
 'info_copyright_doc' => 'Za vise informacija pogledajte <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'pod GPL licencom',
-'info_cours_edition' => 'Vasi clanci u toku uredjivanja',
+'info_cours_edition' => 'Vasi clanci u toku uredjivanja', # MODIF
 'info_creer_repertoire' => 'Kreirajte dokument ili direktorij pod imenom:',
 'info_creer_repertoire_2' => 'Unutar podirektorija<b>ecrire/data/</b>, zatim:',
 'info_creer_vignette' => 'automatska kreacija vinjete',
@@ -551,7 +552,7 @@ sera ignor&eacute;e) :
 'lien_afficher_texte_icones' => 'Prikazi ikone i tekst',
 'lien_afficher_texte_seul' => 'Prikazi samo tekst',
 'lien_liberer' => 'izdanje',
-'lien_liberer_tous' => 'izdaj ove clanke',
+'lien_liberer_tous' => 'izdaj ove clanke', # MODIF
 'lien_nouvea_pense_bete' => 'NOVA BILJESKA',
 'lien_nouveau_message' => 'NOVA PORUKA',
 'lien_nouvelle_annonce' => 'NOVA NAJAVA',
@@ -723,7 +724,7 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'titre_statistiques' => 'Statistike stranice',
 'titre_titre_document' => 'Naslov dokumenta:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(preporuceni clanak)',
+'trad_reference' => '(preporuceni clanak)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: oznaka B kasni u petlji',

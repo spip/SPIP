@@ -386,6 +386,7 @@ Terima kasih atas partisipasi anda!
 'icone_supprimer_message' => 'Hapus pesan ini',
 'icone_tous_articles' => 'Semua artikel anda',
 'icone_tous_auteur' => 'Semua penulis',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validasi pesan ini',
 'icone_visiter_site' => 'Kunjungi situs', # MODIF
 'icone_voir_en_ligne' => 'Lihat online',
@@ -430,7 +431,7 @@ Terima kasih atas partisipasi anda!
 'info_copyright' => '@spip@ adalah piranti lunak bebas yang didistribusi @lien_gpl@.',
 'info_copyright_doc' => 'Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'di bawah lisensi GPL',
-'info_cours_edition' => 'Artikel anda dalam proses',
+'info_cours_edition' => 'Artikel anda dalam proses', # MODIF
 'info_creer_repertoire' => 'Silakan buat sebuah berkas atau direktori yang diberi nama:',
 'info_creer_repertoire_2' => 'dalam sub directori <b>@repertoire@</b>, kemudian',
 'info_creer_vignette' => 'pembuatan otomatis gambar kecil',
@@ -580,7 +581,7 @@ Terima kasih atas partisipasi anda!
 'lien_afficher_texte_icones' => 'Tampilkan icon dan teks',
 'lien_afficher_texte_seul' => 'Tampilkan teks saja',
 'lien_liberer' => 'rilis',
-'lien_liberer_tous' => 'bebaskan artikel-artikel ini',
+'lien_liberer_tous' => 'bebaskan artikel-artikel ini', # MODIF
 'lien_nouvea_pense_bete' => 'MEMO BARU',
 'lien_nouveau_message' => 'PESAN BARU',
 'lien_nouvelle_annonce' => 'PENGUMUMAN BARU',
@@ -772,7 +773,7 @@ dan mengakses situs kembali.
 'titre_statistiques' => 'Statistik situs',
 'titre_titre_document' => 'Judul dokumen:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(rujuk artikel)',
+'trad_reference' => '(rujuk artikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',
