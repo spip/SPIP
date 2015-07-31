@@ -175,7 +175,7 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 			  . preg_replace(_REGEXP_DOCTYPE, '', $page);
 			$r =  analyser_doctype($page);
 		}
-		list($entete, $avail, $grammaire, $rotlvl) = $r;
+		list($entete, $avail, $grammaire, $rotlvl) = array_pad($r, 4, null);
 		$page = substr($page,strlen($entete));
 	} else {
 		$avail = 'SYSTEM';
