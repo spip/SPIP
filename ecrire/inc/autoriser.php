@@ -200,6 +200,7 @@ function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt){
 		OR (
 			$type == 'article'
 			AND $id<0
+			AND abs($id) == $qui['id_auteur']
 			AND autoriser('ecrire', $type, $id, $qui, $opt)
 		);
 }
