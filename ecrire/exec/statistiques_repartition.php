@@ -145,7 +145,7 @@ function exec_statistiques_repartition_dist()
 		$taille = 400;
 	}
 
-	echo "\n<br /><br /><center><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>";
+	echo "\n<br /><br /><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>";
 	gros_titre(_T('titre_page_statistiques'));
 
 	if ($critere == "debut") {
@@ -170,7 +170,7 @@ function exec_statistiques_repartition_dist()
 	  "</div>";
 	fin_cadre_relief();
 
-	echo "</td></tr></table></center>";
+	echo "</td></tr></table>";
 
 	echo fin_page();
 }

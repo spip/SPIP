@@ -407,11 +407,11 @@ else $style = "display: none;";
 		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "\n<tr><td style='font-size: 11px; color: #000000' class='verdana1'>";
 		echo _T('info_question_proposer_site');
-			echo "\n<center><select name='proposer_sites' class='fondo' size='1'>\n";
-				echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
-				echo "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
-				echo "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
-			echo "</select></center>\n";
+		echo "\n<div style='text-align: center'><select name='proposer_sites' class='fondo' size='1'>\n";
+		echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
+		echo "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
+		echo "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
+		echo "</select></div>\n";
 		echo "</td></tr></table>\n";
 		fin_cadre_relief();
 

@@ -295,9 +295,11 @@ function import_affiche_javascript($taille)
 	$max_time = ini_get('max_execution_time')*1000;
 	echo debut_boite_alerte(),
 	  "<span style='font-size: 18px; color: black;' class='verdana1'><b>",  _T('info_base_restauration'),  "</b></span>",
-	  "<form name='progression'><center><input type='text' size='10' style='text-align:center;' name='taille' value='",
+	  "<form name='progression'><div style='text-align: center'><input type='text' size='10' name='taille' value='",
 	  $taille,
-	  "'><br /><input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>",
+	  "'></div><div style='text-align: center'><input type='text' class='forml' name='recharge' value='",
+	  _T('info_recharger_page'),
+	  "'></div></form>",
 	  fin_boite_alerte(),
 	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
 	  self(),

@@ -177,10 +177,10 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo "</td></tr></table>";
 	
 		echo debut_block_invisible('languesbreve');
-		echo "<center>";
+		echo "<div style='text-align: center'>";
 		$menu = menu_langues('changer_lang', $langue_breve, '', $langue_parent,'ajax');
 		echo redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);
-		echo "</center>\n";
+		echo "</div>\n";
 		echo fin_block();
 	
 		fin_cadre_enfonce();
