@@ -148,10 +148,11 @@ function assembler_page ($fond) {
 		} else {
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache);
+
 			//ajouter les scripts poue le mettre en cache
-      $page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
+			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
-			
+
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 		}
@@ -384,86 +385,86 @@ function f_admin ($texte) {
 //ajoute a la volee scripts a le squelette jquery.js.html
 // http://doc.spip.org/@ajouter_js_affichage_final
 function ajouter_js_affichage_final($page,$scripts,$inline = false) {
-  if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
-    spip_log("ajouter_js_afficaghe_final interdite $scripts");
-    return $page;
-  }
-  if($inline) {
-    $page = substr_replace($page,$scripts."\n",strpos($page,"</head>"),0);
-  }
-  //verifie c'est un script HTML et que jquery.js.html est la
-  else if($res = jquery_chargee($page)) {
-    list($pos_script,$appelle) = $res;
-    $params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts; 
-    $page = substr_replace($page,$params,$pos_script,strlen($appelle));
-  }
-  return $page;
+	if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
+		spip_log("ajouter_js_afficaghe_final interdite $scripts");
+		return $page;
+	}
+	if($inline) {
+		$page = substr_replace($page,$scripts."\n",strpos($page,"</head>"),0);
+	}
+	//verifie c'est un script HTML et que jquery.js.html est la
+	else if($res = jquery_chargee($page)) {
+		list($pos_script,$appelle) = $res;
+		$params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts; 
+		$page = substr_replace($page,$params,$pos_script,strlen($appelle));
+	}
+	return $page;
 }
 
 //verifie si le squelette jquery.js.html est appelle dans un flux de page et donnee 
 //false ou un tableau avec la position et la chaine de l'appelle
 // http://doc.spip.org/@jquery_chargee
 function jquery_chargee($page) {
-    $pos_debut_head=strpos($page,"<head>");
-    $pos_fin_head=strpos($page,"</head>",$pos_debut_head);
-    if($pos_debut_head!==false && $pos_fin_head!==false) { 
-      $head = substr($page,$pos_debut_head,$pos_fin_head-$pos_debut_head);
-      //verifie on a l'appelle a le squelette jquery.js
-      if($pos_script=strpos($head,'spip.php?page=jquery.js')){
-        $pos_script += $pos_debut_head;
-        $appelle = substr($page,$pos_script,strpos($page,'"',$pos_script)-$pos_script);
-        return array($pos_script,$appelle);          
-      }
-    }
-    return false;
+	$pos_debut_head=strpos($page,"<head>");
+	$pos_fin_head=strpos($page,"</head>",$pos_debut_head);
+	if($pos_debut_head!==false && $pos_fin_head!==false) { 
+		$head = substr($page,$pos_debut_head,$pos_fin_head-$pos_debut_head);
+		// verifie on a l'appelle a le squelette jquery.js
+		if ($pos_script = strpos($head,'spip.php?page=jquery.js')){
+			$pos_script += $pos_debut_head;
+			$appelle = substr($page,$pos_script,strpos($page,'"',$pos_script)-$pos_script);
+			return array($pos_script,$appelle);
+		}
+	}
+	return false;
 }
 
 // http://doc.spip.org/@analyse_js_ajoutee
 function analyse_js_ajoutee($page) {
-  //verifie si jquery.js.html est chargee
-  $corps = $page['texte'];
-  if(!($jquery_chargee = jquery_chargee($corps))) return $page;
-  //verifie js necessaire
-  $js_necessaire = pipeline("verifie_js_necessaire",array("page" => $page, "data" => ""));
-  $scripts_fichier = $page['insert_js_fichier'];
-  $scripts_inline = $page['insert_js_inline'];
-  $scripts_a_ajouter = array();
-  if(is_array($scripts_fichier))
-    foreach($scripts_fichier as $nom => $script) 
-      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-        //ajoute script fichier
-        if(is_array($script)) 
-          foreach($script as $code) 
-            push_script($scripts_a_ajouter,$code);
-        else
-          push_script($scripts_a_ajouter,$script);
-      }
-  //ajoute le scripts trouvee
-  if(count($scripts_a_ajouter)) {
-    $scripts_a_ajouter = join("|",$scripts_a_ajouter);
-    list($pos_script,$appelle) = $jquery_chargee;
-    $params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts_a_ajouter; 
-    $corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
-  }  
-  $scripts_a_ajouter = array();
-  if(is_array($scripts_inline))
-    foreach($scripts_inline as $nom => $script) 
-      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-        //ajoute script inline
-        if(is_array($script)) 
-          foreach($script as $code) 
-            push_script($scripts_a_ajouter,$code,true);
-        else
-          push_script($scripts_a_ajouter,$script,true);    
-      }
-  //ajoute le scripts trouvee
-  if(count($scripts_a_ajouter)) {
-    list($pos_script,$appelle) = $jquery_chargee;
-    $pos_fin_script = strpos($corps,"</script>",$pos_script)+strlen("</script>");
-    $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_script,0);
-  }
-  $page['texte'] = $corps;
-  return $page;
+	//verifie si jquery.js.html est chargee
+	$corps = $page['texte'];
+	if(!($jquery_chargee = jquery_chargee($corps))) return $page;
+	//verifie js necessaire
+	$js_necessaire = pipeline("verifie_js_necessaire",array("page" => $page, "data" => ""));
+	$scripts_fichier = $page['insert_js_fichier'];
+	$scripts_inline = $page['insert_js_inline'];
+	$scripts_a_ajouter = array();
+	if (is_array($scripts_fichier))
+		foreach($scripts_fichier as $nom => $script)
+		if (!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+			//ajoute script fichier
+			if(is_array($script)) 
+				foreach($script as $code)
+					push_script($scripts_a_ajouter,$code);
+			else
+				push_script($scripts_a_ajouter,$script);
+		}
+	// ajoute le scripts trouvee
+	if(count($scripts_a_ajouter)) {
+		$scripts_a_ajouter = join("|",$scripts_a_ajouter);
+		list($pos_script,$appelle) = $jquery_chargee;
+		$params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts_a_ajouter; 
+		$corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
+	}
+	$scripts_a_ajouter = array();
+	if (is_array($scripts_inline))
+	foreach($scripts_inline as $nom => $script)
+	if (!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+		//ajoute script inline
+		if (is_array($script)) {
+			foreach($script as $code)
+				push_script($scripts_a_ajouter,$code,true);
+		} else
+			push_script($scripts_a_ajouter,$script,true);
+	}
+	// ajoute le scripts trouvee
+	if (count($scripts_a_ajouter)) {
+		list($pos_script,$appelle) = $jquery_chargee;
+		$pos_fin_script = strpos($corps,"</script>",$pos_script)+strlen("</script>");
+		$corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_script,0);
+	}
+	$page['texte'] = $corps;
+	return $page;
 }
 
 // http://doc.spip.org/@push_script
