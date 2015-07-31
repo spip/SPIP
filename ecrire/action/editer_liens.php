@@ -343,6 +343,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @return int
  */
 function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
+	include_spip('base/optimiser');
 	$echec = false;
 	$dels = 0;
 	foreach($objets as $objet => $id_objets){
@@ -350,7 +351,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
-			# les liens des objets qui sont lies a un objet inexistant
+			# les liens vers un objet inexistant
 			$r = sql_select("DISTINCT objet",$table_lien,$where);
 			while ($t = sql_fetch($r)){
 				$type = $t['objet'];
@@ -370,6 +371,15 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 					}
 				}
 			}
+
+			# les liens depuis un objet inexistant
+			$table_source = table_objet_sql($objet_source);
+			$where = lien_where("L.$primary", $id, $objet, $id_objet);
+			$where[] = "O.$primary IS NULL";
+			$res = sql_select("L.$primary AS id",
+				      "$table_lien AS L LEFT JOIN $table_source AS O ON L.$primary=0.$primary",
+							$where);
+			$dels+= optimiser_sansref($table_lien, $primary, $res);
 		}
 	}
 	return ($echec?false:$dels);
