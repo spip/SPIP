@@ -105,8 +105,19 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$row[$id_table_objet] = $id;
 
 	$contexte = $row;
-	if (strlen($id_parent) && is_numeric($id_parent) && (!isset($contexte['id_parent']) OR $new))
+	if (strlen($id_parent) && is_numeric($id_parent) && (!isset($contexte['id_parent']) OR $new)){
+		if (!isset($contexte['id_parent'])) unset($contexte['id_rubrique']);
 		$contexte['id_parent']=$id_parent;
+	}
+	elseif (!isset($contexte['id_parent'])){
+		// id_rubrique dans id_parent si possible
+		if (isset($contexte['id_rubrique'])) {
+			$contexte['id_parent'] = $contexte['id_rubrique'];
+			unset($contexte['id_rubrique']);
+		}
+		else
+			$contexte['id_parent'] = '';
+	}
 
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
