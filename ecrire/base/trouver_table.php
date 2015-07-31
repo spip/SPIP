@@ -84,14 +84,14 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	// et si on est pas explicitement en recalcul
 	// on essaye de recharger le cache des decriptions de ce serveur
 	// dans le fichier cache
-	if (!isset($connexion['tables'][$nom])
+	if (!isset($connexion['tables'][$nom_sql])
 	  AND _VAR_MODE!=='recalcul'
 	  AND (!isset($connexion['tables']) OR !$connexion['tables'])) {
 		if (lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],$desc_cache)
 		  AND $desc_cache=unserialize($desc_cache))
 		  $connexion['tables'] = $desc_cache;
 	}
-	if (!isset($connexion['tables'][$nom])) {
+	if (!isset($connexion['tables'][$nom_sql])) {
 
 		if (isset($tables_principales[$nom_sql]))
 			$fdesc = $tables_principales[$nom_sql];
@@ -108,6 +108,8 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 				$fdesc = &$tables_auxiliaires[$nom_sql];
 			}  # table locale a cote de SPIP, comme non SPIP:
 		}
+	}
+	if (!isset($connexion['tables'][$nom_sql])) {
 
 		// La *vraie* base a la priorite
 		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
@@ -132,16 +134,18 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		$desc = array_merge(lister_tables_objets_sql($nom_sql,$desc),$desc);
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher
-		$connexion['tables'][$nom] = $desc;
-		$res = &$connexion['tables'][$nom];
+		$connexion['tables'][$nom_sql] = $desc;
+		if ($nom!==$nom_sql)
+		$res = &$connexion['tables'][$nom_sql];
 		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur
 		if (is_writeable(_DIR_CACHE))
 			ecrire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],serialize($connexion['tables']));
 	}
 	else
-		$res = &$connexion['tables'][$nom];
+		$res = &$connexion['tables'][$nom_sql];
 
+	// toujours retourner $nom dans id_table
 	$res['id_table']=$nom;
 	return $res;
 }
