@@ -50,8 +50,9 @@
 				
 				<B_articles>
 				<div class="liste-articles">
-					[<p class="pagination">(#PAGINATION)</p>]
+					#ANCRE_PAGINATION
 					<h2 class="invisible"><:articles_rubrique:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
 						<li>
@@ -85,9 +86,11 @@
 				[(#REM) Breves du secteur ]
 				<B_breves>
 				<div class="breves">
+					#ANCRE_PAGINATION
 					<h2 class="menu-titre"><:breves:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
-						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {0,5}>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
