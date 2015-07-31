@@ -15,6 +15,13 @@ $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
 
+if ($id_article==0 AND $new=='oui') {
+	spip_query("INSERT INTO spip_articles (id_rubrique, statut, date) VALUES ($id_rubrique, 'prepa', NOW())");
+	$id_article = mysql_insert_id();
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
+	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
+}
+
 $requete_fichier = "articles.php3?id_article=$id_article";
 // Initialiser doublons pour documents (completes par "propre($texte)")
 $id_doublons['documents'] = "0";

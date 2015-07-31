@@ -11,80 +11,66 @@ $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
 
+// securite
+$id_article = (int) $id_article;
+unset ($flag_editable);
 
 //
-// Gestion des modifications
+// Creation de l'objet article
 //
 
-if ($new == "oui") {
-	$id_rubrique = (int) $id_rubrique;
+if ($id_article) {
+	$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article";
+	$result = spip_query($query);
+	$id_article_bloque = $id_article;	// message pour inc_presentation
 
-	$mydate = date("YmdHis", time() - 24 * 3600);
-	$query = "DELETE FROM spip_articles WHERE (statut = 'poubelle') && (maj < $mydate)";
+	// Recuperer les donnees de l'article
+	$query = "SELECT * FROM spip_articles WHERE id_article=$id_article";
 	$result = spip_query($query);
 
-	$forums_publics = substr(lire_meta('forums_publics'),0,3);
+	if ($row = mysql_fetch_array($result)) {
+		$id_article = $row["id_article"];
+		$surtitre = $row["surtitre"];
+		$titre = $row["titre"];
+		$soustitre = $row["soustitre"];
+		$id_rubrique = $row["id_rubrique"];
+		$descriptif = $row["descriptif"];
+		$chapo = $row["chapo"];
+		$texte = $row["texte"];
+		$ps = $row["ps"];
+		$date = $row["date"];
+		$statut = $row['statut'];
+		$date_redac = $row['date_redac'];
+	    	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)){
+		        $mois_redac = $regs[2];
+		        $jour_redac = $regs[3];
+		        $annee_redac = $regs[1];
+		        if ($annee_redac > 4000) $annee_redac -= 9000;
+		}
 
-	$query = "INSERT INTO spip_articles (titre, id_rubrique, date, statut, accepter_forum) VALUES ('Nouvel article', '$id_rubrique', NOW(), 'poubelle', '$forums_publics')";
-	$result = spip_query($query);
-	$id_article = mysql_insert_id();
+		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
+		$result_auteur = spip_query($query);
+		$flag_auteur = (mysql_num_rows($result_auteur) > 0);
 
-	$query = "DELETE FROM spip_auteurs_articles WHERE id_article=$id_article";
-	$result = spip_query($query);
-	$query = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES('$connect_id_auteur','$id_article')";
-	$result = spip_query($query);
-}
-
-// Indication de modif en cours
-$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif='$connect_id_auteur'  WHERE id_article='$id_article'";
-$result = spip_query($query);
-$id_article_bloque = $id_article;	// message pour inc_presentation
-
-// Recuperer les donnees de l'article
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
-
-while ($row = mysql_fetch_array($result)) {
-	$id_article = $row["id_article"];
-	$surtitre = $row["surtitre"];
-	$titre = $row["titre"];
-	$soustitre = $row["soustitre"];
-	$id_rubrique = $row["id_rubrique"];
-	$descriptif = $row["descriptif"];
-	$chapo = $row["chapo"];
-	$texte = $row["texte"];
-	$ps = $row["ps"];
-	$date = $row["date"];
-	$statut = $row['statut'];
-	$date_redac = $row['date_redac'];
-    	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)){
-	        $mois_redac = $regs[2];
-	        $jour_redac = $regs[3];
-	        $annee_redac = $regs[1];
-	        if ($annee_redac > 4000) $annee_redac -= 9000;
+		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
 	}
-	$pour_doublons = propre ("$titre.$surtitre.$soustitre.$descriptif.$chapo.$texte");
-
-	$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
-	$result_auteur = spip_query($query);
-
-	$flag_auteur = (mysql_num_rows($result_auteur) > 0);
-
-	$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
+}
+else if ($new=='oui') {
+	$flag_editable = true;
+	$titre = 'Nouvel article';
 }
 
 if (!$flag_editable) {
-	die("<H3>Acc&egrave;s interdit</H3>");
+	die ("<H3>Acc&egrave;s interdit</H3>");
 }
 
-if ($id_document) {
+if ($id_article && $id_document) {
 	$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_article=$id_article";
 	$result_doc = spip_query($query_doc);
 	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
 } else {
 	$flag_document_editable = false;
 }
-
 
 $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_document_editable) {
@@ -125,7 +111,6 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 
 
 debut_page("Modifier : $titre", "documents", "articles");
-
 
 
 debut_grand_cadre();
@@ -287,17 +272,22 @@ echo "<p>";
 echo "<P><HR><P>";
 
 	$titre = entites_html($titre);
-	$soustitre = htmlspecialchars($soustitre);
-	$surtitre = htmlspecialchars($surtitre);
+	$soustitre = entites_html($soustitre);
+	$surtitre = entites_html($surtitre);
 
-	$descriptif = htmlspecialchars($descriptif);
-	$chapo = htmlspecialchars($chapo);
+	$descriptif = entites_html($descriptif);
+	$chapo = entites_html($chapo);
 	$texte = entites_html($texte);
-	$ps = htmlspecialchars($ps);
+	$ps = entites_html($ps);
 
-	echo "<FORM ACTION='articles.php3?id_article=$id_article' METHOD='post'>";
+	$lien = 'articles.php3';
+	if ($id_article) $lien .= "?id_article=$id_article";
+	echo "<FORM ACTION='$lien' METHOD='post'>\n";
 
-	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
+	if ($id_article)
+		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
+	else if ($new == 'oui')
+		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
 
 	if (($articles_surtitre != "non") OR strlen($surtitre) > 0) {
 		echo "<B>Sur-titre</B>";
@@ -443,7 +433,8 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
 	}
 
-	echo "<INPUT TYPE='Hidden' NAME='date' VALUE=\"$date\" SIZE='40'><P>";
+	if ($date)
+		echo "<INPUT TYPE='Hidden' NAME='date' VALUE=\"$date\" SIZE='40'><P>";
 
 	if ($new == "oui")
 		echo "<INPUT TYPE='Hidden' NAME='statut_nouv' VALUE=\"prepa\" SIZE='40'><P>";
