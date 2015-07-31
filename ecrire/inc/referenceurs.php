@@ -10,7 +10,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 
 	$nbvisites = array();
 	$aff = '';
-
+	$unseul = preg_match('/id_article=/', $args);
 	$plus = generer_url_ecrire($script, $args . "&limit=" . strval($limit+200));
 
 	$result = sql_select("referer_md5, referer, $select AS vis", $table, $where, $groupby, "vis DESC", $limit,'',$serveur);
@@ -45,7 +45,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 			}
 
 			if ($tmp) {
-			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":""). ($args ? '' : referes($referermd5));
+			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
 			} else {
 				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
 				$lesliensracine[$numero] += $visites;
@@ -102,7 +102,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 					} else
 						$lien = "<a href='http://".$dom."'>".$dom."</a>";
 					$aff .= "<b>".quote_amp($lien)."</b>"
-					  . ($args ? '' : referes($referermd5));
+					  . ($unseul ? '' : referes($referermd5));
 				}
 			}
 			$aff .= "</li>\n";
