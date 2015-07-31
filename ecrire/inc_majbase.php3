@@ -959,7 +959,12 @@ function maj_base() {
 		maj_version(1.811);
 	}
 	
-	
+	if ($version_installee < 1.812) {
+		spip_query("ALTER TABLE spip_documents
+		ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		maj_version(1.812);
+	}
+
 	return true;
 }
 
