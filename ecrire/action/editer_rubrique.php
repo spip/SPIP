@@ -226,9 +226,26 @@ function rubrique_instituer($id_rubrique, $c) {
 				}
 			}
 			elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
-				$statut_ancien = $s['statut'];
-				sql_updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
 
+				$champs = array('id_parent' => $id_parent);
+				$statut_ancien = $s['statut'];
+
+				// Envoyer aux plugins
+				$champs = pipeline('pre_edition',
+					array(
+						'args' => array(
+							'table' => 'spip_rubriques',
+							'id_objet' => $id_rubrique,
+							'action'=>'instituer',
+							'statut_ancien' => $statut_ancien,
+						),
+						'data' => $champs
+					)
+				);
+
+				if (!count($champs)) return '';
+
+				sql_updateq('spip_rubriques', $champs, "id_rubrique=$id_rubrique");
 
 				propager_les_secteurs();
 
@@ -241,6 +258,19 @@ function rubrique_instituer($id_rubrique, $c) {
 					effacer_meta("date_calcul_rubriques");
 
 				calculer_langues_rubriques();
+
+				// Pipeline
+				pipeline('post_edition',
+					array(
+						'args' => array(
+							'table' => 'spip_rubriques',
+							'id_objet' => $id_rubrique,
+							'action'=>'instituer',
+							'statut_ancien' => $statut_ancien,
+						),
+						'data' => $champs
+					)
+				);
 			}
 		}
 	}
