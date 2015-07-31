@@ -1089,6 +1089,43 @@ a.liste-mot {
 	height: 100%;
 }
 
+div.puce_article {
+	position: relative; 
+	height: 11px; 
+	width: 11px;
+}
+
+div.puce_breve {
+	position: relative; 
+	height: 9px; 
+	width: 9px;
+}
+div.puce_article_fixe, div.puce_breve_fixe {
+	position: absolute;
+}
+
+div.puce_article_popup, div.puce_breve_popup {
+	position: absolute;
+	visibility: hidden;
+	margin-top: -1px; top: 0px; 
+	border: 1px solid #666666; 
+	background-color: 
+	#cccccc; z-index: 10; 
+	-moz-border-radius: 3px;
+}
+div.puce_article_popup img, div.puce_breve_popup img {
+	padding: 1px;
+	border: 0px;
+}
+
+div.puce_article_popup {
+	width: 55px; 
+}
+div.puce_breve_popup {
+	width: 27px; 
+}
+
+
 
 div.brouteur_rubrique {
 	display: block;

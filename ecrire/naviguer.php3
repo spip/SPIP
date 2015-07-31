@@ -499,11 +499,6 @@ echo "</table><p />";
 /////////////////////////
 
 echo "<P>";
-afficher_articles(_T('info_en_cours_validation'),
-	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND id_rubrique='$coll' ".
-	"AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
-
 
 
 //

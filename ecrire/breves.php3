@@ -2,6 +2,16 @@
 
 include ("inc.php3");
 
+if ($statut AND $connect_statut == "0minirezo") {
+	$query="UPDATE spip_breves SET date_heure=NOW(), statut=\"$statut\" WHERE id_breve=$id_breve";
+	$result=spip_query($query);
+	calculer_rubriques();
+	
+	@header("Location:breves.php3");
+}
+
+
+
 debut_page(_T('titre_page_breves'), "documents", "breves");
 debut_gauche();
 
@@ -9,12 +19,6 @@ echo "<P align=left>";
 	
 debut_droite();
 
-
-if ($statut) {
-	$query="UPDATE spip_breves SET date_heure=NOW(), statut=\"$statut\" WHERE id_breve=$id_breve";
-	$result=spip_query($query);
-	calculer_rubriques();
-}
 
 
 function enfant($leparent){
