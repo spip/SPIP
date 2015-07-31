@@ -141,14 +141,23 @@ function forms_init_field(el,lang) {
 	//if already inited just return
 	if(el.field_lang) return;
 	var langs;
-	var m = el.value.match(/<multi>((?:.|\n|\s)*?)<\/multi>/);
+	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>/);
 	el.field_lang = {};
+	el.field_pre_lang = ""; //this is the 01. part of the string, the will be put outside the <multi>
 	el.titre_el = $("#titre_"+el.id);
 	if(m!=null) {
+	  el.field_pre_lang = m[1];
 		el.multi = true;
 		match_multi.lastIndex=0;
-		while((langs=match_multi.exec(m[1]))!=null) {
-			el.field_lang[langs[1]||multilang_def_lang] = langs[2]; 
+		while((langs=match_multi.exec(m[2]))!=null) {
+			var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
+      if(text!=null) {
+        value = text[2];
+        el.field_pre_lang = text[1];
+      } else {
+        value = langs[2];
+      }
+      el.field_lang[langs[1]||multilang_def_lang] = value; 
 		}
 		//Put the current lang string only in the field
 		forms_set_lang(el,lang);
@@ -162,13 +171,18 @@ function forms_set_lang(el,lang) {
 	//if current lang is not setted use default lang value
 	if(el.field_lang[lang]==undefined)
 			el.field_lang[lang] = el.field_lang[multilang_def_lang];
-	el.value = el.field_lang[lang];
+	el.value = el.field_pre_lang+el.field_lang[lang]; //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
 }
 
 function forms_save_lang(el,lang) {
 	//if the lang value is equal to the def lang do nothing
 	//else save value but if the field is not empty, delete lang value
+	var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
+	if(m!=null) {
+    el.field_pre_lang = m[1];
+    el.value = m[2];
+  }
 	if(el.field_lang[multilang_def_lang]!=el.value) { 
 		if(!el.value) {
 			delete el.field_lang[lang];
@@ -204,7 +218,7 @@ function forms_multi_submit(params) {
 					count++;
 				}
 			});
-			this.value = count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,'');
+			this.value = this.field_pre_lang+(count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 		} 
 	});
 	//save back the params
