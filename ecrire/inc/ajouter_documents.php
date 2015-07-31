@@ -18,6 +18,7 @@ include_spip('inc/documents');
 // Joindre un document ou un Zip a deballer (fonction pour action/joindre)
 // Distinguer les deux cas pour commencer
 
+// http://doc.spip.org/@inc_ajouter_documents_dist
 function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_document, &$actifs, $hash='', $redirect='', $iframe_redirect='')
 {
 	if (is_array($sources))
@@ -40,6 +41,7 @@ function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_doc
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
+// http://doc.spip.org/@ajouter_un_document
 function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 // Documents distants : pas trop de verifications bloquantes, mais un test

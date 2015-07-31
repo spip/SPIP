@@ -16,6 +16,7 @@ include_spip('inc/charsets'); # pour le nom de fichier
 include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
+// http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -32,6 +33,7 @@ function action_joindre_dist()
 	action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
 }
 
+// http://doc.spip.org/@action_joindre_sous_action
 function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
 {
 	global $redirect, $hash, $url, $chemin, $ancre,
@@ -89,6 +91,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 
 // Cas d'un document distant reference sur internet
 
+// http://doc.spip.org/@inc_joindre2_dist
 function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	return joindre_documents(array(
@@ -100,6 +103,7 @@ function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Cas d'un fichier transmis
 
+// http://doc.spip.org/@inc_joindre1_dist
 function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$files = array();
@@ -116,6 +120,7 @@ function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // copie de tout ou partie du repertoire upload
 
+// http://doc.spip.org/@inc_joindre3_dist
 function inc_joindre3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
@@ -199,6 +204,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 
 //  Zip avec confirmation "tel quel"
 
+// http://doc.spip.org/@inc_joindre5_dist
 function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
@@ -211,6 +217,7 @@ function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Zip a deballer. 
 
+// http://doc.spip.org/@inc_joindre6_dist
 function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
@@ -221,6 +228,7 @@ function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 
 // Zip avec les 2 options a la fois
 
+// http://doc.spip.org/@inc_joindre4_dist
 function inc_joindre4_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
