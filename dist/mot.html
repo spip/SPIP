@@ -126,7 +126,7 @@
 				[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 				<B_mots_freres>
 				<div class="divers">
-					<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><h3 class="titre"[ title="(#TITRE|couper{80}|texte_backend)"]><:mots_clefs_meme_groupe:></h3></BOUCLE_groupe>
+					<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><h3 class="titre"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]><:mots_clefs_meme_groupe:></h3></BOUCLE_groupe>
 					<ul>
 						<BOUCLE_mots_freres(MOTS) {type} {par titre}>
 						<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
