@@ -425,7 +425,8 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
-		AND autoriser('voir','rubrique',$id);
+		AND autoriser('voir','rubrique',$id)
+		AND autoriser('creer', 'article');
 }
 
 
