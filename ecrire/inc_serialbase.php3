@@ -34,7 +34,6 @@ $spip_articles = array(
 		"extra"		=> "longblob NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
-
 		"nom_site"	=> "tinytext NOT NULL",
 		"url_site"	=> "VARCHAR(255) NOT NULL");
 
@@ -167,7 +166,10 @@ $spip_rubriques = array(
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
-		"extra"	=> "longblob NULL");
+		"extra"	=> "longblob NULL",
+		"statut_tmp"	=> "VARCHAR(10) NOT NULL",
+		"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+		);
 
 $spip_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_rubrique",
