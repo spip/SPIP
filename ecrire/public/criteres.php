@@ -414,7 +414,7 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($param[0]->type != 'texte')
 	  {
-	  $a1 = calculer_liste(array($param[0]), array(), $boucles[$idb]->id_parent, $boucles);
+	    $a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
 	  ereg('^ *(-([0-9]+))? *$', $param[1]->texte, $m);
 	  return array("intval($a1)", ($m[2] ? $m[2] : 0));
 	  } else {
@@ -607,7 +607,6 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
   $id_primary = $ddesc['key']['PRIMARY KEY'];
   $id_field = $dnom . '.' . $id_primary;
   $id_table = "";
-  spip_log("cj $col $id_primary");
   foreach($res as $r) {
     list($d, $a, $j) = $r;
     $num++;
