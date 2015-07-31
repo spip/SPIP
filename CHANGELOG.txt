@@ -1,7 +1,41 @@
+SPIP-Core spip-3.0.19 -> spip-3.0.20  23 juin 2015
+-------------------------------------------------------------
+r22106 | ben       |  (sam. 09 mai 2015) | 3.0.20 dev
+r22111 | cedric    |  (sam. 09 mai 2015) | #3418 : loger les creations de table pour debusquer le bug
+r22112 | cedric    |  (sam. 09 mai 2015) | #3418 : purger les opcode cache y compris sur php-fpm (a valider) / Credits pour le patch https://www.drupal.org/node/779482
+r22121 | cedric    |  (dim. 10 mai 2015) | Report de r22115 : realpath pour faire un clear opcode cache
+r22122 | cedric    |  (dim. 10 mai 2015) | Report de r22116 : #3418 : Octave utilise une configuration foireuse de opcode cache, qui persiste 2s apres modification du fichier sans possibilite de l'invalider manuellement. On essaye donc de detecter cette configuration et de faire un sleep() le temps que le cache soit invalide
+r22123 | cedric    |  (dim. 10 mai 2015) | Report de r22118 : Affectation de variable inutile (inutilisée) dans r22116.
+r22124 | cedric    |  (dim. 10 mai 2015) | Report de r22119 : Complement a r22116 : deplacer les  de code dans une fonction qui peut resservir dans un plugin si necessaire
+r22125 | cedric    |  (dim. 10 mai 2015) | Report de r22120 : Commenter les logs inutiles de r22111, on conserve la verification et seconde tentative de creation de table en cas d'echec
+r22155 | erational |  (lun. 18 mai 2015) | un warning de moins.
+r22204 | b_b       |  (ven. 05 juin 2015)| Report de r22203 / Fix #3440 : éviter la disparition du texte du troisième onglet de l'installation sous firefox win$ (merci à Franck pour le signalement)
+r22208 | b_b       |  (mar. 09 juin 2015)| report de r22201 / Fixe #3418 : complément à r22119 ajouter une seconde à la durée de opcache.revalidate_freq, sans quoi on retombe dans le cache
+r22246 | cedric    |  (ven. 19 juin 2015)| Report de r22245 : une option mtime sur purger_repertoire pour supprimer uniquement les fichiers plus anciens que filemtime donne
+r22247 | rasta     |  (ven. 19 juin 2015)| Charger la l'API autoriser avant de l'utiliser… On rappelle que SPIP n'utilise pas d'autoload, et que donc on DOIT TOUJOURS penser à charger les API avant de les utiliser. :)
+r22252 | toutati   |  (dim. 21 juin 2015)| un petit {tout} qui permet d'afficher la liste des traductions, même si l'article a une rubrique en -1 (cas du plugin pages uniques)
+
+SPIP-plugins-dist spip-3.0.19 -> spip-3.0.20  23 juin 2015
+-------------------------------------------------------------
+r89160 | eric      |  (ven. 08 mai 2015) | Le décideur prend la première version compatible des plugins dépendants si plusieurs sont disponibles. Autant prendre la version la plus élevée.
+r89163 | eric      |  (ven. 08 mai 2015) | oubli d'incrément.
+r89165 | cedric    |  (ven. 08 mai 2015) | Fix https://core.spip.net/issues/3398 : date_thread ne doit etre mis a jour que si le message est publie
+r89169 | franck    |  (ven. 08 mai 2015) | Ce n'est plus http://core.spip.org mais https://core.spip.net
+r89230 | cedric    |  (sam. 09 mai 2015) | Report de r89229 : Fix https://core.spip.net/issues/2899 : erreur 404 mal geree en urls propres
+r89281 | marcimat  |  (dim. 10 mai 2015) | Corriger #3416 : ne pas afficher obsolète un plugin local en présence d'une version plus élevée du même plugin, mais non compatible avec ce SPIP.Notons que le terme 'obsolète' ne convient pas vraiment. En effet, dans le cas suivants, tous 2 compatibles avec notre SPIP :A : prefixe TOTO | v1.0.0 | stableB : prefixe TOTO | v1.1.0 | stableC : prefixe TOTO | v1.1.1 | testAlors - A est considéré obsolète (OK)- B n'est pas considéré obsolète (OK)- C est considéré obsolète (hum…)En fait un terme 'prioritaire' sur B à true, et false sur les autres aurait été plus adapté. Parce que C n'est pas tellement obsolète,juste plus à jour, mais d'un état inférieur.
+r89311 | marcimat  |  (mar. 12 mai 2015) | Report de r85634 : Eviter des "Warning: Illegal string offset..." (Oxymore)(JandB)
+r89345 | marcimat  |  (jeu. 14 mai 2015) | Report de r89344 : Fermer véritablement #3398 car la correction r89165 n'avait pas vu un piège et créait un beau warning :$t, censé être un tableau, était réaffecté au dessus pour recevoir l'identifiant du thread.On nomme pour ce cas correctement la variable.
+r89347 | marcimat  |  (jeu. 14 mai 2015) | Report de r89346 :  Ferme #3443 et suite de #3380 , qui complète r89155 (et 89157) : il faut que l'autorisation d'associer des documents, tout commele fait déjà la nouvelle autorisation de dissocier des documents, prenne en compte les identifiants négatifs.Ils correspondent à l'ajout d'un document sur un nouvel article encore en édition et non encore enregistré (pas d'id_article connu),ce qui affecte le document avec 0-$id_auteur qui l'a envoyé.
+r89691 | marcimat  |  (mer. 27 mai 2015) | Correction d'un cas très particulier lors de l'installation de SPIP et du plugin organiseur, si un pluginappelle la fonction 'creer_base()' avant l'installation du plugin organiseur. (Cas qui peut arriversi quelqu'un ajoute au moins un plugin dans plugins-dist qui fait cela, avant d'avoir installé SPIP)Dans ce cas, la table 'spip_messages' est déjà créée, et Organiseur croit que l'on vient d'une mise à jourd'un vieux SPIP. Et à ce moment là, il ne crée pas les colonnes nécessaires (imessage et messagerie) dans SPIP auteurs,mais par contre il fait toutes les procédures de mises à jour.Du coup, on ajoute une procédure de mise à jour qui peut créer ces champs s'ils manquent.Corrige une erreur «Critère inconnu =» sur le squelettes prive/objets/liste/auteurs-enligne à l'installation.À noter que ce squelette dans SPIP fait appel à la colonne imessage depuis https://core.spip.net/projects/spip/repository/revisions/21401 , alors que ce champ estdéclaré dans ce plugin. Peut être faudrait il surcharger le squelette dans ce plugin pour permettre à SPIP de pouvoir fonctionner sans.
+r89923 | real3t    |  (ven. 05 juin 2015)| Ce bouton actualiser la liste des plugins était tellement bas que j'étais passé à côté (merci Marcimat pour le signalement)
+r89933 | real3t    |  (ven. 05 juin 2015)| Revert à la demande d'Eric : une boite d'info, c'est dans la navigation (bon, moi, je pense que c'est une boite de raccourcis, mais...)
+r90060 | b_b       |  (mar. 09 juin 2015)| Report de r90059Fix ​https://core.spip.net/issues/3452 : rétablir la possibilité de joindre un document sur un forumSuite à r89155, il faut définir les autorisation autoriser_forum_associerdocuments_dist et autoriser_forum_dissocierdocuments_dist pour permettre de lier/délier un document à un message de forum. Les deux fonctions renvoient toujours true pour que cela fonctionne, voir remarques ici ​https://core.spip.net/issues/3452#note-4
+r90353 | cedric    |  (ven. 19 juin 2015)| Report de r90352 : Detection des flooders : quand un utilisateur comptabilise plus de 200 visites d'articles dans une visite,on note son IP dans le dossier tmp/flood/Au bout de 24H (redefinissable via la constante _IP_FLOOD_TTL) on la supprime de tmp/flood/Ces IP reperees peuvent ensuite etre considerees comme des BOT ou meme kickee temporairement, au choix, action a ajouter dans le mes_options.php par exemple
+r90358 | real3t    |  (ven. 19 juin 2015)| Report de [90354] et [90356] : Retour sur [89155] : il est autorise d'associer des documents a d'autres documents, certains plugins le font deja, evitons la casse pas trop justifiee (b_b, kent1, RealET)
+
 
 SPIP-Core spip-3.0.17 -> spip-3.0.19  08 mai 2015
 -------------------------------------------------------------
-
 r21519 | ben       |  (mer. 13 août 2014) | Allez reparton(ton) en dev pour un tour
 r21529 | ben       |  (jeu. 21 août 2014) | Pas d'onglet dans le nom de la fonction d'autorisation. Permet à un redacteur de pouvoir remodifier la langue et la couleur dans l'espace privé
 r21531 | eric      |  (ven. 22 août 2014) | Eviter des "illegal offset" si l'utilisateur n'est pas connecté (déjà corrigé en 3.1).
