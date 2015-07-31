@@ -249,6 +249,30 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
+// Ajouter "&lang=..." si la langue du forum n'est pas celle du site.
+// Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
+// determiner la table a la compil, on le fait maintenant.
+// Il faudrait encore completer: on ne connait pas la langue
+// pour une boucle forum sans id_article ou id_rubrique issu du contexte,
+// ce qui provoque un Log abscons ("table inconnue forum")
+// voire une erreur SQL dans le cas de id_syndic, qu'on neutralise 
+// in extremis mais ce n'est pas satisfaisant
+// http://doc.spip.org/@lang_parametres_forum
+function lang_parametres_forum($qs, $lang) {
+	if (is_array($lang) AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
+		$id = 'id_' . $r[1];
+		if ($t = $lang[$id] AND $id != 'id_syndic')
+			$lang = sql_getfetsel('lang', $t, "$id=" . $r[2]);
+		else $lang = '';
+	}
+  // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
+
+	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
+		return $qs . "&lang=" . $lang;
+
+	return $qs;
+}
+
 function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
