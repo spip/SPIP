@@ -154,8 +154,12 @@ function inc_auth_dist() {
 	// pour permettre les connexions multiples
 	if (!$_COOKIE['spip_session']) {
 		$var_f = charger_fonction('session', 'inc');
-		if ($session = $var_f($row))
-			spip_setcookie('spip_session', $session, time() + 3600 * 24 * 14);
+		if ($session = $var_f($row)) {
+			preg_match(',^[^/]*//[^/]*(.*)$,',
+				   $GLOBALS['meta']['adresse_site'],
+				   $r);
+			spip_setcookie('spip_session', $session, time() + 3600 * 24 * 14, $r[1]);
+		}
 	}
 
 	// ceci n'arrive qu'a la premiere connexion il me semble
@@ -200,7 +204,5 @@ function auth_arefaire()
 	$url = rawurlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS) . str_replace('&amp;', '&', self()))); 
 	return generer_url_public('login', "url=$url" . ($_GET['bonjour'] == 'oui' ? '&var_echec_cookie=true' : ''),true);
-	  }
-
-
+}
 ?>
