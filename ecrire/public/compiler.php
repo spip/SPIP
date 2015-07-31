@@ -760,6 +760,15 @@ function code_boucle(&$boucles, $id, $nom)
 	return $pretty;
 }
 
+function compile_inclure_doublons($lexemes)
+{
+	foreach($lexemes as $v)
+	  if($v->type === 'include') 
+	    foreach($v->param as $r) 
+	      if (trim($r[0]) === 'doublons') 
+		return true;
+	return false;
+}
 
 // Prend en argument le texte d'un squelette (et son fichier d'origine)
 // sa grammaire et un nom.
@@ -785,26 +794,33 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_spip('inc/charsets');
-	$squelette = transcoder_page($squelette);
-
-	// Informations sur le squelette
-	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile,
-		'squelette' => $squelette);
-	unset($squelette);
+	$descr = array('nom' => $nom,
+			'sourcefile' => $sourcefile,
+			'squelette' => transcoder_page($squelette));
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-
 	$f = charger_fonction('phraser_'.$gram, 'public');
 
-	$racine = $f($descr['squelette'], '', $boucles, $nom);
+	$squelette = $f($descr['squelette'], '', $boucles, $nom);
+	$descr['documents'] = compile_inclure_doublons($squelette);
 
 	// Demander la description des tables une fois pour toutes
+	// et reperer si les doublons sont demandes
+	// pour un inclure ou une boucle document
+	// c'est utile a la fonction champs_traitements
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
+		if (!$descr['documents'] AND (
+			(($type == 'documents') AND $boucle->doublons) OR
+				compile_inclure_doublons($boucle->avant) OR
+				compile_inclure_doublons($boucle->apres) OR
+				compile_inclure_doublons($boucle->milieu) OR
+				compile_inclure_doublons($boucle->altern)))
+			$descr['documents'] = true;  
 		if ($type != 'boucle') {
 			if (!$boucles[$id]->sql_serveur AND $connect)
 				$boucles[$id]->sql_serveur = $connect;
@@ -879,7 +895,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	// idem pour la racine
 	$descr['id_mere'] = '';
-	$corps = calculer_liste($racine, $descr, $boucles);
+	$corps = calculer_liste($squelette, $descr, $boucles);
 
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
