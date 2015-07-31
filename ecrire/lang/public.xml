@@ -95,7 +95,9 @@
 	<langue code="pl" url="http://trad.spip.net/tradlang_module/public?lang_cible=pl">
 		<traducteur nom="Karolina Anna" lien="http://trad.spip.net/auteur/karolina-anna" />
 	</langue>
-	<langue code="pt" />
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/public?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/public?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
@@ -120,6 +122,8 @@
 	<langue code="tr" />
 	<langue code="vi" />
 	<langue code="wa" />
-	<langue code="zh" />
+	<langue code="zh" url="http://trad.spip.net/tradlang_module/public?lang_cible=zh">
+		<traducteur nom="Chia Kiah Yeen" lien="http://trad.spip.net/auteur/chia-kiah-yeen" />
+	</langue>
 	<langue code="zh_tw" />
 </traduction>
