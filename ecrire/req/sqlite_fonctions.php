@@ -119,7 +119,7 @@ function _sqlite_func_concat () {
 
 // http://doc.spip.org/@_sqlite_func_dayofmonth
 function _sqlite_func_dayofmonth ($d) {
-	return date("d",_sqlite_func_unix_timestamp($d));
+	return _sqlite_func_date("d",$d);
 }
 
 
@@ -180,15 +180,17 @@ function _sqlite_func_left ($s, $lenght) {
 
 // http://doc.spip.org/@_sqlite_func_now
 function _sqlite_func_now(){
-	$result = date("Y-m-d H:i:s");
-	#spip_log("Passage avec NOW : $result",'sqlite.'._LOG_DEBUG);
-	return $result;
+	static $now = null;
+	if (is_null($now))
+		$now = date("Y-m-d H:i:s");
+	#spip_log("Passage avec NOW : $now",'sqlite.'._LOG_DEBUG);
+	return $now;
 }
 
 
 // http://doc.spip.org/@_sqlite_func_month
 function _sqlite_func_month ($d) {
-	return date("m",_sqlite_func_unix_timestamp($d));
+	return _sqlite_func_date("m",$d);
 }
 
 
@@ -260,7 +262,7 @@ function _sqlite_func_strftime($date, $conv){
  * @return int
  */
 function _sqlite_func_to_days ($d) {
-    $offset = 719528; // nb de jour entre 0000-00-00 et timestamp 0=1970-01-01
+	static $offset = 719528; // nb de jour entre 0000-00-00 et timestamp 0=1970-01-01
 	$result = $offset+(int)ceil(_sqlite_func_unix_timestamp($d)/(24*3600));
 	#spip_log("Passage avec TO_DAYS : $d, $result",'sqlite.'._LOG_DEBUG);
 	return $result;
@@ -346,21 +348,43 @@ function _sqlite_timestampdiff($unit,$date1,$date2){
 
 // http://doc.spip.org/@_sqlite_func_unix_timestamp
 function _sqlite_func_unix_timestamp($d) {
+	static $mem = array();
+	static $n = 0;
+	if (isset($mem[$d])) return $mem[$d];
+	if ($n++>100) {$mem = array();$n=0;}
+
 	//2005-12-02 20:53:53
 	#spip_log("Passage avec UNIX_TIMESTAMP : $d",'sqlite.'._LOG_DEBUG);
-	// mktime ( [int hour [, int minute [, int second [, int month [, int day [, int year [, int is_dst]]]]]]] )
-	if (!$d) return mktime();
-	return strtotime($d);
-	#preg_match(";^([0-9]{4})-([0-9]+)-([0-9]+)\s*(?:([0-9]+)(?::([0-9]+)(?::([0-9]+))?)?)?;", $d, $f);
-	#return mktime($f[4],$f[5],$f[6],$f[2],$f[3],$f[1]);
+	if (!$d) return $mem[$d] = mktime();
+	// une pile plus grosse n'accelere pas le calcul
+	return $mem[$d] = strtotime($d);
 }
 
 
 // http://doc.spip.org/@_sqlite_func_year
 function _sqlite_func_year ($d) {
-	return date("Y",_sqlite_func_unix_timestamp($d));
+	return _sqlite_func_date("Y",$d);
 }
 
+/**
+ * version optimisee et memoizee de date() utilisee par
+ * _sqlite_func_year, _sqlite_func_month, _sqlite_func_dayofmonth
+ * @param string $quoi
+ *   format : Y, m, ou d
+ * @param int $d
+ *   timestamp
+ * @return int
+ */
+function _sqlite_func_date($quoi,$d) {
+	static $mem = array();
+	static $n = 0;
+	if (isset($mem[$d])) return $mem[$d][$quoi];
+	if ($n++>100) {$mem = array();$n=0;}
+
+	$dec = date("Y-m-d",_sqlite_func_unix_timestamp($d));
+	$mem[$d] = array("Y"=>substr($dec,0,4),"m"=>substr($dec,5,2),"d"=>substr($dec,8,2));
+	return $mem[$d][$quoi];
+}
 
 // http://doc.spip.org/@_sqlite_func_vide
 function _sqlite_func_vide(){
