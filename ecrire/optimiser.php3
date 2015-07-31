@@ -297,6 +297,7 @@ function optimiser_base() {
 			spip_query("DELETE FROM $table_index WHERE id_$type IN (0$suppr)");
 	}
 
+/*
 	// les objets supprimes
 	$hash = array();
 	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
@@ -318,7 +319,7 @@ function optimiser_base() {
 		if ($suppr)
 			spip_query("DELETE FROM spip_index_dico WHERE hash IN (0$suppr)");	
 	}
-
+*/
 
 	//
 	// MySQL
