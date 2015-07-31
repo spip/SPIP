@@ -750,11 +750,12 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		else
 		// imagick (php4-imagemagick)
 		if ($process == 'imagick') {
+
 			$vignette = "$destination.".$format_sortie;
 
 			$imagick = new Imagick();
 			$imagick->readImage($image);
-			$imagick->resizeImage($destWidth, $destHeight, $imagick::FILTER_LANCZOS, 1 );//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
+			$imagick->resizeImage($destWidth, $destHeight, Imagick::FILTER_LANCZOS, 1 );//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
 			$imagick->writeImage($vignette);
 
 			if (!@file_exists($vignette)) {
