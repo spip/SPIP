@@ -35,6 +35,7 @@ function spip_abstract_serveur($ins_sql, $serveur) {
 	}
 	if (function_exists($f)) return $f;
 
+	include_spip('public/debug');
 	erreur_squelette(" $f " ._T('zbug_serveur_indefini'), $serveur);
 
 	// hack pour continuer la chasse aux erreurs
