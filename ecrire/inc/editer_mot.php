@@ -348,9 +348,9 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 
 	$id_groupe = $row['id_groupe'];
 
-	$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
+	$result = spip_query("SELECT COUNT(id_mot) FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : ''));
 
-	$n = spip_num_rows($result);
+	list($n) = spip_fetch_array($result, SPIP_NUM);
 	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
@@ -389,6 +389,10 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 			$res .= "<select name='nouv_mot' size='1' style='width: 180px; ' class='fondl' $jscript>";
 
 		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
+
+		$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY titre");
+
+
 		while($row = spip_fetch_array($result)) {
 			$res .= "\n<option value='" .$row['id_mot'] .
 				"'>&nbsp;&nbsp;&nbsp;" .
