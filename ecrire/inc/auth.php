@@ -143,7 +143,6 @@ function inc_auth_dist() {
 
 	$prefs = unserialize($row['prefs']);
 	$connect_login = $row['login'];
-	if (!$row['pass']) $row['pass'] = $connect_login; // pour LDAP
 
 	// Le tableau global auteur_session contient toutes les infos.
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
