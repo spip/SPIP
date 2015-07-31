@@ -165,15 +165,30 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 // produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
-function http_img_pack($img, $alt, $att, $title='') {
-	global $browser_name;
-	if (!strlen($browser_name)){
-		include_spip('inc/layer');
+function http_wrapper($img){
+	static $wrapper_state=NULL;
+	static $wrapper_table = array();
+	
+	$f = _DIR_IMG_PACK . $img;
+	
+	if ($wrapper_state==NULL){
+		global $browser_name;
+		if (!strlen($browser_name)){include_spip('inc/layer');}
+		$wrapper_state = ($browser_name=="MSIE");
 	}
-	$f = _DIR_IMG_PACK.$img;
-	if ($browser_name=="MSIE" && file_exists($w = dirname($f)."/wrapper.php"))
-		$f = "$w?file=".urlencode($img);
-	return "<img src='" . $f
+	if ($wrapper_state){
+		if (!isset($wrapper_table[$d=dirname($f)])) {
+			$wrapper_table[$d] = false;
+			if (file_exists("$d/wrapper.php"))
+				$wrapper_table[$d] = "$d/wrapper.php?file=";
+		}
+		if ($wrapper_table[$d])
+			$f = $wrapper_table[$d] . urlencode($img);
+	}
+	return $f;
+}
+function http_img_pack($img, $alt, $att, $title='') {
+	return "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
 	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
 	     . '" ')
@@ -188,14 +203,7 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 
 function http_style_background($img, $att='')
 {
-	global $browser_name;
-	if (!strlen($browser_name)){
-		include_spip('inc/layer');
-	}
-	$f = _DIR_IMG_PACK.$img;
-	if ($browser_name=="MSIE" && file_exists($w = dirname($f)."/wrapper.php"))
-		$f = "$w?file=".urlencode($img);
-  return " style='background: url(\"$f\")" .
+  return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
 }
 
