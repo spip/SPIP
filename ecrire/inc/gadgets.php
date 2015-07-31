@@ -60,28 +60,31 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	. "</div>";
 	// FIN GADGET recherche
 
-	// GADGET Agenda
-	$bandeau .= "<div id='bandeauagenda' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 100px;'>"
-	. "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='lien_sous'>"
-	. _T('icone_agenda')
-	. "</a>"
-	
-	. "\n<div id='gadget-agenda'></div>\n"
-	. "</div>\n";
-	// FIN GADGET Agenda
+	// messagerie et agenda
+	if ($GLOBALS['meta']['messagerie_agenda'] != 'non') {
+		// GADGET Agenda
+		$bandeau .= "<div id='bandeauagenda' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 100px;'>"
+		. "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='lien_sous'>"
+		. _T('icone_agenda')
+		. "</a>"
+		
+		. "\n<div id='gadget-agenda'></div>\n"
+		. "</div>\n";
+		// FIN GADGET Agenda
 
-	// GADGET Messagerie
-	$gadget = '';
-	$gadget .= "<div id='bandeaumessagerie' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 130px;'>";
-	$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
-	$gadget .= _T('icone_messagerie_personnelle');
-	$gadget .= "</a>";
-	$gadget .= "\n<div id='gadget-messagerie'></div>\n";
-	$gadget .= "</div>";
+		// GADGET Messagerie
+		$gadget = '';
+		$gadget .= "<div id='bandeaumessagerie' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 130px;'>";
+		$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
+		$gadget .= _T('icone_messagerie_personnelle');
+		$gadget .= "</a>";
+		$gadget .= "\n<div id='gadget-messagerie'></div>\n";
+		$gadget .= "</div>";
 
-	$bandeau .= $gadget;
+		$bandeau .= $gadget;
 
-	// FIN GADGET Messagerie
+		// FIN GADGET Messagerie
+	}
 
 	// Suivi activite
 	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>"
@@ -92,14 +95,15 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 //	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'racine-24.gif', '', false)
 //	. "</div>".
 	. "</div>\n";
-	
+
+/*	
 		// Infos perso
 	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>"
 	. "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur") . "' class='lien_sous'>"
 	. _T('icone_informations_personnelles')
 	. "</a>"
 	. "</div>";
-
+*/
 		
 		//
 		// -------- Affichage de droite ----------
@@ -113,16 +117,27 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	$decal = $decal + 150;
 
 	$bandeau .= "\n<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
-	$bandeau .= _T('titre_changer_couleur_interface');
-	$bandeau .= "</div>";
-		
-	$decal = $decal + 70;
-		
-	$bandeau .= "\n<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	
+	// couleurs
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$bandeau .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
+	$bandeau .= $couleurs() . "</div>";
+
+	// menu
+	$bandeau .= "\n<div id='preferences_map'><map name='map_layout' id='map_layout'>"
+		. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'))
+		. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'))
+		. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'))
+		. "\n</map></div>";
+	$bandeau .= "<div id='preferences_menu'>"
+		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), " style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
+		. http_img_pack("rien.gif", "", "width='10' height='1'")
+		. "</div>";
+	// ecran
 	if ($spip_ecran == "large") 
-			$bandeau .= "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
+			$bandeau .= "<div id='preferences_ecran'><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
-			$bandeau .= "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
+			$bandeau .= "<div id='preferences_ecran'><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 	$bandeau .= "</div>";
 
 

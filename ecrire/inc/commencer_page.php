@@ -82,18 +82,19 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-	$couleurs = charger_fonction('couleurs', 'inc');
+	// $couleurs = charger_fonction('couleurs', 'inc');
 
 	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
+/*
 	if ($menu)
 		$res .= "\n<div><map name='map_layout' id='map_layout'>"
 		. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 		. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 		. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 		. "\n</map></div>";
-
+*/
 	if ($spip_display == "4") {
 		$res .= "<ul>"
 		. "\n<li><a href='" . generer_url_ecrire() ."'>"._T('icone_a_suivre')."</a></li>"
@@ -129,7 +130,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'
 		. typo($GLOBALS['visiteur_session']['nom'])
-		. "</a></div></li>"
+		. "</a></div></li>";
+/*
 		. "<li style='width:20px'><div class='menu-item'> &nbsp; </div></li>"
 		. "<li id='bandeau_couleur3' class='bandeau_couleur'><div class='menu-item'>";
 
@@ -150,9 +152,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		}
 
 		// Choix de la couleur
-		$res .= "</div></li>"
-		. "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>"
-		. $couleurs()
+		$res .= "</div></li>";
+*/
+		$res .= "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>"
+		//. $couleurs()
+		. "<a href='#' onmouseover=\"changestyle('bandeauinterface');\" title=\"$i\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\">" 
+		. _L('Pr&eacute;f&eacute;rences')
+		. "</a>"
 		. "</div></li>";
 
 		// choix de la langue
