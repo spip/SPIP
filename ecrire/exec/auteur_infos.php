@@ -26,7 +26,6 @@ global $ajouter_id_article,
   $connect_toutes_rubriques,
   $email,
   $id_auteur,
-  $new,
   $new_login,
   $new_pass,
   $new_pass2,
@@ -40,7 +39,6 @@ global $ajouter_id_article,
   $url_site;
 
 
-// securite
  $id_auteur = intval($id_auteur);
 
 //
@@ -48,22 +46,18 @@ global $ajouter_id_article,
 //
  if ($id_auteur) {
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
-} 
- if (!$auteur) {
-	if ($id_auteur) exit;
+	if (!$auteur) exit;
+ } else {
 	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
 	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	$auteur['statut'] = '1comite'; // statut par defaut a la creation
 	$auteur['source'] = 'spip';
 }
 
-// securite
-
 if (!statut_modifiable_auteur($id_auteur, $auteur)) {
 	gros_titre(_T('info_acces_interdit'));
 	exit;
  }
-
 
 //
 // Modification (et creation si besoin)

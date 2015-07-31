@@ -63,7 +63,7 @@ affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs);
 
 function affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs)
 {
-  global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut;
+  global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
 
 if ($tri=='nom' OR $tri=='statut')
@@ -95,7 +95,7 @@ fin_boite_info();
 if ($connect_statut == '0minirezo') {
 
 	debut_raccourcis();
-	icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos","new=oui"), "auteur-24.gif", "creer.gif");
+	if ($connect_toutes_rubriques) icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif");
 	icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
 
 	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"))) {
