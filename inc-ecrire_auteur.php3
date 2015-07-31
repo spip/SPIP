@@ -45,10 +45,10 @@ function ecrire_auteur_dyn($id_auteur, $mail, $sujet, $texte, $adres) {
 		      'action' => $link->getUrl(),
 		      'id_auteur' => $id_auteur,
 		      'mailko' => $mailko ? $spip_lang_rtl : '',
-		      'mail' => entites_html($adres),
+		      'mail' => $adres,
 		      'sujetko' => ($texte && !$sujet) ? $spip_lang_rtl : '',
-		      'sujet' => entites_html($sujet),
-		      'texte' => entites_html($texte),
+		      'sujet' => $sujet,
+		      'texte' => $texte,
 		      'valide' => ($validable ?
 				    _T('form_prop_confirmer_envoi') :
 				    _T('form_prop_envoyer'))

@@ -10,29 +10,6 @@ include_ecrire("inc_session.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_texte.php3");
 
-// gerer l'auth http
-function auth_http($url, $essai_auth_http) {
-	$lien = " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
-	if ($essai_auth_http == 'oui') {
-		include_ecrire('inc_session.php3');
-		if (!verifier_php_auth()) {
-		  $url = quote_amp(urlencode($url));
-			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
-			if (ereg(_DIR_RESTREINT_ABS, $url))
-			  $page_erreur .= $lien;
-			ask_php_auth($page_erreur);
-		}
-		else
-			redirige_par_entete($url);
-	}
-	// si demande logout auth_http
-	else if ($essai_auth_http == 'logout') {
-		include_ecrire('inc_session.php3');
-		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p />"._T('login_verifiez_navigateur')."<p />[<a href='./'>"._T('login_retour_public')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;redirect=ecrire'>"._T('login_test_navigateur')."</a>] $lien");
-		exit;
-	}
-}
-
 // fonction pour les balises #LOGIN_*
 
 function login($cible, $prive = 'prive') {
@@ -128,48 +105,43 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	}
 
 	if ($echec_cookie) {
-		$res = "<div><h3 class='spip'>" .
-		(_T('erreur_probleme_cookie')) .
-		'</h3><div style="font-family: Verdana, arial,helvetica,sans-serif; font-size: 12px;"><p /><b>' .
-		_T('login_cookie_oblige')."</b> " .
-		_T('login_cookie_accepte')."\n";
+		$message = '<h3 class="spip">' .
+		  (_T('erreur_probleme_cookie')) .
+		  '</h3><b>' .
+		  _T('login_cookie_oblige')."</b> " .
+		  _T('login_cookie_accepte')."<p />\n";
 	}
-	else {
-		$res = '<div><div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">' .
-		(!$message ? '' :
-			("<br />" . 
-			_T("forum_vous_enregistrer") . 
-			" <a $pass_popup>" .
-			_T("forum_vous_inscrire") .
-			"</a><p />\n")) ;
+	else { if ($message)
+	    $message = "<br />" . 
+	      _T("forum_vous_enregistrer") . 
+	      " <a $pass_popup>" .
+	      _T("forum_vous_inscrire") .
+	      "</a><p />\n" ;
 	}
+
+	$res = $message .
+	  '<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">';
 
 # Affichage du formulaire de login avec un challenge MD5 en javascript
 # si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 # sinon , le login est modifiable (puisque le challenge n'est pas utilise)
 
 	if ($login) {
-
 		$session = "<br /><br /><label><b>"._T('login_login2')."</b><br /></label>\n<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />";
-		if (!$source_auteur) 
-			$challenge = '';
-		else {
-			$challenge = 
-		  (" onSubmit='if (this.session_password.value) {
+
+		$res .= (!$source_auteur ? '' : http_script('', _DIR_INCLUDE . 'md5.js')) .
+		  "<form name='form_login' action='spip_cookie.php3' method='post'" .
+		  (!$source_auteur ?  '' : 
+		   (" onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
-			}'");
-			$res .= http_script('', _DIR_INCLUDE . 'md5.js');
-		}
-		$res .= "<form name='form_login' action='spip_cookie.php3' method='post'" .
-		  $challenge .
-		  ">\n" .
-		  "<input type='hidden' name='session_login_hidden' value='$login' />\n" .
+			}'")) .
+		  ">\n<input type='hidden' name='session_login_hidden' value='$login' />\n" .
 		  "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>\n" .
 		  (!$erreur ? '' : "<div class='reponse_formulaire'><b>$erreur</b></div>\n") .
-		  (!$challenge ? $session :
-		   http_script("document.write('".addslashes(_T('login_login'))." <b>$login</b><br /><a href=\"spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\"><font size=\"2\">["._T('login_autre_identifiant')."]</font></a>');",
+		  (!$source_auteur ? $session :
+		   http_script("document.write('".addslashes(_T('login_login'))." <b>$login</b><br /><a href=\"spip_cookie.php3?cookie_admin=non&amp;var_url=".rawurlencode($action)."\"><font size=\"2\">["._T('login_autre_identifiant')."]</font></a>');",
 			       '',
 				"<font face='Georgia, Garamond, Times, serif' size='3'>" .
 				_T('login_non_securise') .
@@ -181,25 +153,22 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 		  "<label for='session_remember'>" .
 		  _T('login_rester_identifie') .
 		  "</label>" .
-		  "<input type='hidden' name='url' value='$cible' />\n" .
 		  "<input type='hidden' name='session_password_md5' value='' />\n" .
 		  "<input type='hidden' name='next_session_password_md5' value='' />\n" .
-		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."' /></div>\n" .
-		  "</div>" .
-		  "</form>";
-	}
+		  "<input type='hidden' name='var_url' value='$cible' />\n" .
+		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."' /></div>\n</div></form>";
+			}
 	else { // demander seulement le login
 		$action = quote_amp($action);
-		$res .= "<form name='form_login' action='$action' method='post'>\n" .
+		$res .= 
+		"<form name='form_login' action='$action' method='post'>\n" .
 		  "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
 		if ($erreur) $res .= "<span style='color:red;'><b>$erreur</b></span><p />";
 		$res .=
 		  "<label><b>"._T('login_login2')."</b><br /></label>" .
 		  "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n" .
 		  "<input type='hidden' name='var_url' value='$cible' />\n" .
-		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'/></div>\n" .
-		  "</div>" .
-		  "</form>";
+		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'/></div>\n</div></form>";
 	}
 
 	// Gerer le focus
@@ -211,7 +180,7 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 		$res .= "<form action='spip_cookie.php3' method='get'><fieldset>\n<p>"
 			. _T('login_preferez_refuser')
 			. "<input type='hidden' name='essai_auth_http' value='oui'/>\n"
-			. "<input type='hidden' name='url' value='$cible'/>\n"
+			. "<input type='hidden' name='var_url' value='$cible'/>\n"
 			. "<div align='right'><input type='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'/></div>\n"
 			.  "</fieldset></form>\n";
 	}
@@ -240,8 +209,7 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	  $res .= " [<a href='$url_site'>"._T('login_retoursitepublic')."</a>]";
 	}
 
-	return $res .  "</div></div></div>";
-
+	return $res .  "</div></div>";
 }
 
 ?>

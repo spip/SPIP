@@ -1,17 +1,17 @@
 <form action='[(#HTTP_VARS{url})]' method='post' name='formulaire'>
-      <input type='hidden' name='ajout_forum' value='oui' />
-      <input type='hidden' name='id_message' value='[(#HTTP_VARS{id_message})]' />
-      <input type='hidden' name='alea' value='[(#HTTP_VARS{alea})]' />
-      <input type='hidden' name='hash' value='[(#HTTP_VARS{hash})]' />
-      <input type='hidden' name='retour' value='[(#HTTP_VARS{retour})]' />
-      [(#HTTP_VARS{modere})]
-      [(#HTTP_VARS{afficher_non})]
-      [(#HTTP_VARS{previsu})
+      <input type='hidden' name='ajout_forum' value="oui" />
+      <input type='hidden' name='id_message' value="[(#HTTP_VARS{id_message})]" />
+      <input type='hidden' name='alea' value="[(#HTTP_VARS{alea})]" />
+      <input type='hidden' name='hash' value="[(#HTTP_VARS{hash})]" />
+      <input type='hidden' name='retour' value="[(#HTTP_VARS{retour})]" />
+      [(#HTTP_VARS{modere})<p>]
+      [(#HTTP_VARS*{afficher_non})]
+      [(#HTTP_VARS*{previsu})
       <fieldset class='spip_encadrer'>
 	<legend><b><:forum_titre:></b></legend>
 	<label>
 	  <input type='text' name='titre' 
-	    [value="> (#HTTP_VARS{titre}|supprimer_prefixe{'>'}|supprimer_numero|entites_html)" ]class='forml' size='40' />
+	    [value="> (#HTTP_VARS{titre}|supprimer_prefixe{'>'}|supprimer_numero)" ]class='forml' size='40' />
 	</label>
       </fieldset>
       <br />
