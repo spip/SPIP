@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_editer_mot_dist
 function action_editer_mot_dist() {
@@ -71,6 +72,12 @@ function action_editer_mot_post($r)
 
 	if (preg_match('/^(.*exec=)editer_mot(&.*)script=(grouper_mots)(.*)$/', $redirect, $r))
 	    $redirect = $r[1] . $r[3] . $r[2] . $r[4];
+	if (preg_match(',exec=grouper_mots,',$redirect)){
+		// mettre a jour le total de mots dans la liste pour eviter les pb de cache navigateur avec ajax
+		$id_groupe = parametre_url($redirect,'id_groupe'); // recuperer l'id_groupe dans l'url
+		$groupe = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe="._q($id_groupe)));
+		$redirect = parametre_url($redirect,'total',$groupe['n'],'&');
+	}
 	    
 	if ($cherche_mot) {
 		if ($p = strpos($redirect, '#')) {
