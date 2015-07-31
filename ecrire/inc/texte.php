@@ -890,7 +890,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 
 			$a = strpos($texte,$match[0]);
 			preg_match(_RACCOURCI_MODELE_DEBUT, substr($texte, $a), $regs);
-
+			$regs[]=""; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
 			list(,$mod, $type, $id, $params, $fin) = $regs;
 			if ($fin AND preg_match(
 			',<a\s[^<>]*>\s*$,i', substr($texte, 0, $a), $r)) {

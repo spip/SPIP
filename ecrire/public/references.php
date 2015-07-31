@@ -444,7 +444,7 @@ function compose_filtres(&$p, $code) {
 			if ($fonc == '?') {
 				// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
 				if (count($filtre) != 2)
-					$filtre = array($filtre[0], $filtre[1]);
+					$filtre = array(isset($filtre[0])?$filtre[0]:"", isset($filtre[1])?$filtre[1]:"");
 				$arglist = compose_filtres_args($p, $filtre, ':');
 			} else
 				$arglist = compose_filtres_args($p, $filtre, ',');
@@ -503,7 +503,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
 	$prec = $boucles[$idb]->id_parent;
 	return (($prec === '')
-		? ('$Pile[' . $zero . "]['$nom_champ']") 
+		? ('isset($Pile[' . $zero . "]['$nom_champ'])") 
 		: index_pile($prec, $nom_champ, $boucles));
 }
 

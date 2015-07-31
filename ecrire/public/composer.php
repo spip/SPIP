@@ -66,7 +66,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) 
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
-		if ($GLOBALS['var_mode'] == 'debug') {
+		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
 		eval('?'.'>'.$skel_code);
@@ -83,7 +83,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) 
 // http://doc.spip.org/@squelette_obsolete
 function squelette_obsolete($skel, $squelette) {
 	return (
-		in_array($GLOBALS['var_mode'], array('recalcul','preview','debug'))
+		(isset($GLOBALS['var_mode']) AND in_array($GLOBALS['var_mode'], array('recalcul','preview','debug')))
 		OR !@file_exists($skel)
 		OR ((@file_exists($squelette)?@filemtime($squelette):0)
 			> ($date = @filemtime($skel)))

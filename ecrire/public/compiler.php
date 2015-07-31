@@ -240,7 +240,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (preg_match(CODE_MONOTONE,$corps, $r)) {
-		if (!$r[2]) {
+		if (!isset($r[2]) OR (!$r[2])) {
 			if (!$boucle->numrows)
 				return 'return "";';
 			else
@@ -791,7 +791,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			$req .
 			"\n}\n\n";
 
-		if ($GLOBALS['var_mode'] == 'debug')
+		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
 			boucle_debug_compile ($id, $nom, $boucles[$id]->return);
 	}
 
@@ -835,7 +835,7 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 
 ?".">";
 
-	if ($GLOBALS['var_mode'] == 'debug')
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
 		squelette_debug_compile($nom, $sourcefile, $code, $squelette);
 	return $code;
 

@@ -114,7 +114,8 @@ function arbo_articles_tous()
 
 // http://doc.spip.org/@texte_articles_tous
 function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
-
+	global $spip_lang;
+	
 	if ($flag_trad)
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	else	$langues = array();
@@ -204,35 +205,35 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 	$out = "\n<input type='hidden' name='aff_art[]' value='x' />\n"
 	. "<b>"._T('titre_cadre_afficher_article')."&nbsp;:</b><br />\n";
 	
-	if ($aff_statut['prepa'])
+	if (isset($aff_statut['prepa']) && $aff_statut['prepa'])
 		$out .= http_label_img('prepa',
 				    in_array('prepa', $aff_art),
 				    'aff_art',
 				    'puce-blanche-breve.gif',
 				    _T('texte_statut_en_cours_redaction'));
 	
-	if ($aff_statut['prop'])
+	if (isset($aff_statut['prop']) && $aff_statut['prop'])
 		$out .= http_label_img('prop',
 				    in_array('prop', $aff_art),
 				    'aff_art',
 				    'puce-orange-breve.gif',
 				    _T('texte_statut_attente_validation'));
 		
-	if ($aff_statut['publie'])
+	if (isset($aff_statut['publie']) && $aff_statut['publie'])
 		$out .= http_label_img('publie',
 				    in_array('publie', $aff_art),
 				    'aff_art',
 				    'puce-verte-breve.gif',
 				    _T('texte_statut_publies'));
 	
-	if ($aff_statut['refuse'])
+	if (isset($aff_statut['refuse']) && $aff_statut['refuse'])
 		$out .= http_label_img('refuse',
 				    in_array('refuse', $aff_art),
 				    'aff_art',
 				    'puce-rouge-breve.gif',
 				    _T('texte_statut_refuses'));
 	
-	if ($aff_statut['poubelle'])
+	if (isset($aff_statut['poubelle']) && $aff_statut['poubelle'])
 		$out .= http_label_img('poubelle',
 				    in_array('poubelle', $aff_art),
 				    'aff_art',

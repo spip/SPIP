@@ -22,6 +22,7 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@inc_joindre_dist
 function inc_joindre_dist($v) {
 	global $spip_lang_right;
+	$depliable = false;
 
 	$mode = $v['mode'];
 	$vignette_de_doc = ($mode == 'vignette' AND $v['id_document']>0);

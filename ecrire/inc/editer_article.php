@@ -44,7 +44,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		  "' />"))
 
 	. editer_article_surtitre($row['surtitre'], $config, $aider)
-	. editer_article_titre($row['titre'], $row['onfocus'], $config, $aider)
+	. editer_article_titre($row['titre'], isset($row['onfocus'])?$row['onfocus']:"", $config, $aider)
 	. editer_article_soustitre($row['soustitre'], $config, $aider)
 	. editer_article_rubrique($row['id_rubrique'], $row['id_secteur'], $config, $aider)
 	. editer_article_descriptif($row['descriptif'], $config, $aider)
