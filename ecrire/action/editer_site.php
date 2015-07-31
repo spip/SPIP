@@ -55,8 +55,8 @@ function action_editer_site_dist() {
 		}
 	}
 	// Envoi depuis le formulaire d'analyse automatique d'un site
-	else if (strlen(vider_url(_request('url_auto')))) {
-		if ($auto = analyser_site(_request('url_auto'))) {
+	else if (strlen(vider_url($u = _request('url_auto')))) {
+		if ($auto = analyser_site($u)) {
 			$id_syndic = insert_syndic(_request('id_parent'));
 			revisions_sites($id_syndic, $auto);
 			if ($auto['syndication'] == 'oui')
@@ -90,10 +90,11 @@ function action_editer_site_dist() {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if (!$logo = $chercher_logo($id_syndic, 'id_syndic', 'on')
 			OR !$t) {
-				$auto = analyser_site(_request('url_syndic'));
-				revisions_sites($id_syndic,
-					array('descriptif' => $auto['descriptif'])
-				);
+				if ($auto = vider_url(_request('url_auto'))) {
+					$auto = analyser_site($auto);
+					revisions_sites($id_syndic,
+					array('descriptif' => $auto['descriptif']));
+				}
 				if (!$logo
 				AND $auto['logo'] AND $auto['format_logo'])
 					@rename($auto['logo'],
