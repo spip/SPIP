@@ -539,12 +539,20 @@ function calculer_select ($select = array(), $from = array(),
 		if ($sous[0]=='SELF') {
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
 			array_push($where_simples,$sous[2]);
+			$wheresub = array($sous[2],'0=0'); // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
+			$jsub = $join;
+			foreach ($join as $cle=>$wj){
+				if (count($wj)==4){
+					$wheresub[] = $wj[3];
+					unset($jsub[$cle][3]);
+				}
+			}
 			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
 			array($sous[1]." AS id"),
 			$from,
 			$from_type,
-			array($sous[2],'0=0'), // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
-			$join,
+			$wheresub,
+			$jsub,
 			array(),array(),'',
 			$having,$table,$id,$serveur,false).")");
 		}
