@@ -1,4 +1,6 @@
-<BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>[(#INCLURE
+<BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>[(#CHEMIN{modeles/emb_[(#EXTENSION)].html}|?{[(#INCLURE
+{fond=modeles/emb_[(#EXTENSION)]}{id=#ID_DOCUMENT}{env}{emb=' '}
+)],[(#INCLURE
 {fond=modeles/[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]})]}{id=#ID_DOCUMENT}{env}{emb=' '}
-)]
+)]})]
 </BOUCLE_ext>
