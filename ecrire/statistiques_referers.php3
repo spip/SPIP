@@ -63,6 +63,9 @@ while ($row = @spip_fetch_array($result)) {
 	echo "</li>\n";
 }
 
+if (spip_num_rows($result) == 800)
+	echo "<li>...</li>";
+
 echo "</ul>";
 echo "</font>";
 
