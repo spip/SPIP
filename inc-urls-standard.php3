@@ -25,14 +25,13 @@ function generer_url_auteur($id_auteur) {
 }
 
 function generer_url_document($id_document) {
-	if ($id_document > 0) {
-		$query = "SELECT fichier FROM spip_documents WHERE id_document = $id_document";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$url = $row['fichier'];
-		}
-	}
-	return $url;
+	if (intval($id_document) <= 0)
+		return '';
+	if ((lire_meta("creer_htpasswd")) == 'oui')
+		return "donne_l_ode.php3?id_document=$id_document";
+	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
+		return ($row['fichier']);
+	return '';
 }
 
 function recuperer_parametres_url($fond, $url) {

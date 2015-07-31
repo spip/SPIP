@@ -189,7 +189,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	return array (ceil($destWidth), ceil($destHeight));
 }
 
-function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
+function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false) {
 	global $convert_command, $djpeg_command, $cjpeg_command, $pnmscale_command;
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
@@ -207,6 +207,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;
 
+	$destination = creer_repertoire_documents($destdir) . $destfile;
 	// chercher un cache
 	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {
@@ -218,9 +219,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
 		$creation = true;
-
 		// calculer la taille
-		if ($srcsize = @getimagesize($image)) {
+		if ($srcsize = getimagesize($image)) {
 			$srcWidth=$srcsize[0];
 			$srcHeight=$srcsize[1];
 			list ($destWidth,$destHeight) = image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
@@ -228,6 +228,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			$destWidth = $maxWidth;
 			$destHeight = $maxHeight;
 		} else {
+			spip_log("echec $process sur $image");
 			return;
 		}
 
@@ -238,8 +239,10 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			$commande = "$convert_command -size ${destWidth}x${destHeight} ./$image -geometry ${destWidth}x${destHeight} +profile \"*\" ./".escapeshellcmd($vignette);
 			spip_log($commande);
 			exec($commande);
-			if (!@file_exists($vignette))
-				return;	// echec commande
+			if (!@file_exists($vignette)) {
+					spip_log("echec convert sur $vignette");
+					return;	// echec commande
+			}
 		}
 		else
 		 // imagick (php4-imagemagick)
@@ -249,14 +252,19 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			$handle = imagick_readimage($image);
 			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 			imagick_write($handle, $vignette);
-			if (!@file_exists($vignette)) return;	// echec imagick
+			if (!@file_exists($vignette)) {
+				spip_log("echec imagick sur $vignette");
+				return;	
+			}
 		}
 		if ($process == "netpbm") {
 			if ($format == "jpg") {
 				$vignette = $destination.".".$format;
 				exec("$djpeg_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
-				if (!@file_exists($vignette))
-					return;	// echec commande
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm sur $vignette");
+					return;
+				}
 			}
 		}
 		// gd ou gd2
@@ -272,8 +280,10 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			else if ($format == "png"){
 				$srcImage = @ImageCreateFromPNG($image);
 			}
-			if (!$srcImage) return;
-
+			if (!$srcImage) {
+				spip_log("echec gd1/gd2");
+				return;
+			}
 			// Choisir le format destination
 			// - on sauve de preference en JPEG (meilleure compression)
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
@@ -286,7 +296,10 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 				}
 			}
 
-			if (!$destFormat) return;
+			if (!$destFormat) {
+				spip_log("pas de format pour $image");
+				return;
+			}
 
 			// Initialisation de l'image destination
 			if ($process == 'gd2' AND $destFormat != "gif")
@@ -380,8 +393,7 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,) = $i;
 			$suffixe = '-'.$taille.'x'.$taille_y;
-			$cache_folder= creer_repertoire_documents('cache'.$suffixe);
-			$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
+			$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
 
 			if ($preview) {
 				$vignette = $preview['fichier'];

@@ -16,8 +16,7 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		$logo = $dir . $nom . '.' . $format;
 		include_ecrire("inc_logos.php3");
 		$suffixe = '-'.$taille_x.'x'.$taille_y;
-		$cache_folder= creer_repertoire_documents('cache'.$suffixe);
-		$preview = creer_vignette($logo, $taille_x, $taille_y, $format, $cache_folder.$nom.$suffixe);
+		$preview = creer_vignette($logo, $taille_x, $taille_y, $format,('cache'.$suffixe), $nom.$suffixe);
 		if ($preview) {
 			$vignette = $preview['fichier'];
 			$width = $preview['width'];
