@@ -41,7 +41,7 @@ function action_editer_signatures_post($r)
 		$result_forum = spip_query("UPDATE spip_signatures SET statut='publie' WHERE id_signature=$id");
 
 	}
-spip_log("action_editer_signature_dist $id maj");
+
 	// Invalider les pages ayant trait aux petitions
 	if ($id) {
 		include_spip('inc/invalideur');
