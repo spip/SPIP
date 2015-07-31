@@ -1099,15 +1099,15 @@ td.vu { background: #CCC; }
 	pour les puces de changement rapide de statut ; NB: ca buggue car ca s'affiche en-dessous du cadre
 ]
 li .puce_statut { float: #GET{left}; padding-top: 5px; }
-li .puce_article_popup, li.puce_breve_popup { padding: 0; }
-div.puce_article, span.puce_article, div.puce_breve, span.puce_breve { position: relative; }
-div.puce_article_fixe, div.puce_breve_fixe, span.puce_article_fixe, span.puce_breve_fixe { position: relative; }
+li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup, { padding: 0; }
+.puce_article, .puce_breve, .puce_site { position: relative; }
+.puce_article_fixe, .puce_breve_fixe, .puce_site_fixe { position: relative; }
 
-div.puce_article_popup, div.puce_breve_popup, span.puce_article_popup, span.puce_breve_popup { position: absolute; top: 0; #GET{left}: 0; visibility: hidden; border: 1px solid #666; background-color: #ccc; z-index: 10; }
-div.puce_article_popup img, div.puce_breve_popup img, span.puce_article_popup img, span.puce_breve_popup img { padding: 1px; border: 0; }
+.puce_article_popup, .puce_breve_popup, .puce_site_popup { position: absolute; top: 0; #GET{left}: 0; visibility: hidden; border: 1px solid #666; background-color: #ccc; z-index: 10; }
+.puce_article_popup img, .puce_breve_popup img, .puce_site_popup img { padding: 1px; border: 0; }
 
-div.puce_article_popup, span.puce_article_popup { width: 55px; }
-div.puce_breve_popup, span.puce_breve_popup { width: 27px; }
+.puce_article_popup { width: 55px; }
+.puce_breve_popup, .puce_site_popup { width: 27px; }
 
 .boite_onglets {clear:both; margin-top:15px; }
 .tabs-nav a { color: #GET{foncee}; }
