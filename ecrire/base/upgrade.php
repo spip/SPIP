@@ -1174,6 +1174,11 @@ function maj_base() {
 		maj_version(1.914);
 	}
 
+	// Ajout de plein de type mime
+	if ($version_installee < 1.915) {
+		maj_version(1.915);
+	}
+
 }
 
 ?>
