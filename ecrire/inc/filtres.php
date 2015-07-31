@@ -2230,15 +2230,20 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 	$plugin = strtoupper($plugin);
 	$plugins_actifs = liste_plugin_actifs();
 
-	if(!$plugin)
+	if (!$plugin)
 		return serialize(array_keys($plugins_actifs));
-	if(!empty($plugins_actifs[$plugin]))
-		if($type_info == 'est_actif')
-			return $plugins_actifs[$plugin] ? 1 : 0;
-		else
-			return $plugins_actifs[$plugin][$type_info];
+	elseif (empty($plugins_actifs[$plugin]))
+		return '';
+	elseif ($type_info == 'est_actif')
+		return $plugins_actifs[$plugin] ? 1 : 0;
+	elseif (isset($plugins_actifs[$plugin][$type_info]))
+		return $plugins_actifs[$plugin][$type_info];
+	else {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos($plugins_actifs[$plugin]['dir']);
+		return strval($infos[$type_info]);
+	}
 }
-
 
 
 // http://doc.spip.org/@chercher_rubrique
