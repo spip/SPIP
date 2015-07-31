@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-	global $connect_statut;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	// Les articles a valider
 	//
@@ -61,13 +61,16 @@ function encours_accueil()
 
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
 		if ($cpt = $cpt['n']) {
-		$res .= "\n<br /><small> <a href='" . generer_url_ecrire("controle_forum","type=prop") . "' style='color: black;'>".$cpt;
+		$lien = "\n<br /><small>$cpt";
 		if ($cpt>1)
-			$res .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
+			$lien .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
-			$res .= " "._T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
-		$res .= " "._T('info_liens_syndiques_7').".</a></small>";
+			$lien .= " "._T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
+		$lien .= " "._T('info_liens_syndiques_7'). "</small>";
+		if ($connect_toutes_rubriques)
+			$lien = "<a href='" . generer_url_ecrire("controle_forum","type=prop") . "' style='color: black;'>". $lien . ".</a>";
 		}
+		$res .= $lien;
 	}
 
 	if (!$res) return '';
@@ -360,7 +363,8 @@ function etat_base_accueil()
 			}
 		}
 
-		if ($connect_statut == "0minirezo") $res .= afficher_plus(generer_url_ecrire("controle_forum",""));
+		if ($connect_statut == "0minirezo" AND !$connect_id_rubrique)
+			$res .= afficher_plus(generer_url_ecrire("controle_forum",""));
 		$res .= "<b>" ._T('onglet_messages_publics') ."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] .$cpt['prop'] . '</li>';
@@ -451,6 +455,7 @@ function exec_accueil_dist()
 			 $GLOBALS['meta']["activer_breves"],
 			 $GLOBALS['meta']["activer_sites"],
 			 $GLOBALS['meta']['articles_mots']);
+
 	  echo encours_accueil();
 	}
 

@@ -196,17 +196,28 @@ function controle_un_forum($row) {
 // http://doc.spip.org/@exec_controle_forum_dist
 function exec_controle_forum_dist()
 {
+	global $connect_statut, $connect_toutes_rubriques;
 
-	global $type, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
+	$id_rubrique = intval(_request('id_rubrique'));
 
-	$debut= intval($debut);
-	$id_rubrique = intval($id_rubrique);
-	if (!preg_match('/^\w+$/', $type)) $type = "public";
+	# TODO autoriser
+	$droit = (($connect_statut != "0minirezo") OR 
+		  (!$connect_toutes_rubriques AND
+		   (!$id_rubrique OR !autoriser('publierdans','rubrique',$id_rubrique))));
+
+	if ($droit) {
+	  include_spip('inc/minipres');
+	  echo minipres();
+	  exit;
+	} 
+
+	$debut= intval(_request('debut'));
+	if (!preg_match('/^\w+$/', $type=_request('type'))) $type = "public";
 
 	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique);
 
 	// Si un id_controle_forum est demande, on adapte le debut
-	if ($debut_id_forum = intval($debut_id_forum)
+	if ($debut_id_forum = intval(_request('debut_id_forum'))
 	AND $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
 		$debut = spip_fetch_array(spip_query($q = "SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'"))));
 		$debut = $debut['n'];
@@ -224,11 +235,6 @@ function exec_controle_forum_dist()
 	$ancre = 'controle_forum';
 	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $limitdeb, $pack, $ancre, $query)
 	. affiche_tranche_forum($debut, $limitdeb, $pack, $query);
-
-	# TODO autoriser
-	$droit = (($connect_statut != "0minirezo") OR 
-		  (!$connect_toutes_rubriques AND
-		   (!$id_rubrique OR !autoriser('publierdans','rubrique',$id_rubrique))));
 
 	if (_request('var_ajaxcharset') AND !$droit) {
 		ajax_retour($mess);
@@ -258,36 +264,30 @@ function exec_controle_forum_dist()
 
 		echo fin_onglet();
 
-		if ($droit) {
-		  echo "<b>"._T('avis_non_acces_page')."</b>";
-		} else {
+		debut_gauche();
+		debut_boite_info();
+		echo "<span class='verdana1 spip_small'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
 
-			debut_gauche();
-			debut_boite_info();
-			echo "<span class='verdana1 spip_small'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
+		// Afficher le lien RSS
 
-			// Afficher le lien RSS
-
-			echo "<div style='text-align: "
+		echo "<div style='text-align: "
 			. $GLOBALS['spip_lang_right']
 			. ";'>"
 			. bouton_spip_rss('forums', array('page' => $type))
 			. "</div>";
 
-			fin_boite_info();
+		fin_boite_info();
 			
-			echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
-			creer_colonne_droite();
-			echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+		creer_colonne_droite();
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
 			
-			debut_droite();
-			echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+		debut_droite();
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
-			echo "<div id='$ancre' class='serif2'>$mess</div>";
-
-			echo fin_gauche(), fin_page();
-		}
+		echo "<div id='$ancre' class='serif2'>$mess</div>";
+		echo fin_gauche(), fin_page();
 	}
 }
 
