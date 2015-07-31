@@ -44,6 +44,7 @@ function surligner_mots($page) {
   if($surcharge_surligne=_request("var_recherche")) {
     $surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),","$1\\\\$2",$surcharge_surligne);
     $surcharge_surligne = str_replace("\\","\\\\",$surcharge_surligne);
+    if($GLOBALS['meta']['charset']=='utf-8') $surcharge_surligne = utf8_encode($surcharge_surligne);
   }
   foreach($surlignejs_engines as $engine) 
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
