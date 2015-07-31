@@ -371,6 +371,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
 'info_copyright' => '&eacute; um software livre distribuido <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
 'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, ver o s&iacute;tio <a href=\'http://www.spip.net/pt\'>http://www.spip.net/pt</a>.',
+'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Os seus artigos em curso de reda&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Favor criar um ficheiro ou um repert&oacute;rio nomeado&nbsp;:',
 'info_creer_repertoire_2' => 'dentro do sub-repert&oacute;rio <b>ecrire/data/</b>, depois&nbsp;:',

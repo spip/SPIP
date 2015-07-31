@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Reiro al kompletan grafikan interfacon',
 'access_mode_texte' => 'Afi&#349;igi la simpligita tekstan interfacon',
-'admin_debug' => '<NEW>debug',
+'admin_debug' => 'erarser&#265;ilo',
 'admin_modifier_article' => 'Modifu tiun &#265;i artikolon',
 'admin_modifier_auteur' => 'Modifu tiun &#265;i a&#365;toron',
 'admin_modifier_breve' => 'Modifu tiun &#265;i informeton',
@@ -68,12 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
-'cal_jour_entier' => '<NEW>jour entier',
-'cal_matin' => '<NEW>matin',
-'cal_par_jour' => '<NEW>calendrier par jour',
-'cal_par_mois' => '<NEW>calendrier par mois',
-'cal_par_semaine' => '<NEW>calendrier par semaine',
+'cal_apresmidi' => 'posttagmezo',
+'cal_jour_entier' => 'tuta tago',
+'cal_matin' => 'mateno',
+'cal_par_jour' => 'tag-kalendaro',
+'cal_par_mois' => 'monat-kalendaro',
+'cal_par_semaine' => 'semajn-kalendaro',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuson de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 
 
@@ -185,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Vi estas jam enskribita.',
 'form_email_non_valide' => 'Via retadreso ne validas.',
 'form_forum_access_refuse' => 'Vi ne havas plu alirrajton al tiu teksejo.',
-'form_forum_bonjour' => '<MODIF>Saluton,',
+'form_forum_bonjour' => 'Saluton @nom@,',
 'form_forum_email_deja_enregistre' => 'Tiu &#265;i retpo&#349;t-adreso estas jam registrita, vi povas do uzi vian kutiman pasvorton.',
 'form_forum_identifiant_mail' => 'Via nova identigilo estas al vi sendita per e-po&#349;to.',
 'form_forum_identifiants' => 'Personaj identigiloj',
@@ -276,7 +276,7 @@ Dankon pro via partopreno
   &#265;i forumo, vi devas anta&#365;e registri vin. Bonvolu
   indiki &#265;i-sube la personan identigilon kiu estis
   sendita al vi. Se vi ne estas registrita, vi devas',
-'forum_vous_inscrire' => '<MODIF>enskribi vin </a> unue.',
+'forum_vous_inscrire' => 'enskribi vin.',
 
 
 // I
@@ -334,10 +334,10 @@ Dankon pro via partopreno
 'icone_valider_message' => 'Validigi tiun mesa&#285;on',
 'icone_visiter_site' => 'Viziti',
 'icone_voir_en_ligne' => 'Konektite vidi',
-'image_tourner_180' => '<NEW>Rotation 180&deg;',
-'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
-'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
-'img_indisponible' => '<NEW>image indisponible',
+'image_tourner_180' => 'Rotacio 180&deg;',
+'image_tourner_droite' => 'Dekstra rotacio 90&deg;',
+'image_tourner_gauche' => 'Maldekstra rotacio 90&deg;',
+'img_indisponible' => 'nedisponebla bildo',
 'info_a_suivre' => 'DA&#364;RIGOTA &raquo;',
 'info_a_valider' => '[validigota]',
 'info_acces_interdit' => 'Malpermesita aliro',
@@ -367,20 +367,20 @@ Dankon pro via partopreno
 'info_contact_developpeur' => 'Bonvolu kontakti programiston.',
 'info_contenance' => 'Tiu teksejo enhavas:',
 'info_contribution' => 'kontribua&#309;oj por la forumo',
-'info_copyright' => '<MODIF>estas libera programo distribuata <a href=\'copyright_fr.html\'>sub GPL licenco.</a>',
+'info_copyright' => '@spip@ estas libera programo distribuata @lien_gpl@.',
 'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
-'info_copyright_gpl' => '<NEW>sous licence GPL',
+'info_copyright_gpl' => 'sub licenco GPL',
 'info_cours_edition' => 'Viaj nun redaktaj artikoloj',
 'info_creer_repertoire' => 'Bonvolu krei dosier(uj)on kies nomo estu:',
 'info_creer_repertoire_2' => 'ene de la subdosierujo <b>ecrire/data/</b>, kaj',
-'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
+'info_creer_vignette' => 'a&#365;tomata kreado de vinjeto',
 'info_deplier' => 'Malfaldi',
 'info_descriptif_nombre' => 'Priskribo(j):',
 'info_description' => 'Priskribo:',
 'info_description_2' => 'Priskribo:',
 'info_dimension' => 'Dimensioj:',
 'info_document' => 'Dokumento ',
-'info_documents' => '<NEW>Documents',
+'info_documents' => 'Dokumentoj',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj inter la partoprenantoj de la teksejo. Vi povas aktivigi a&#365; malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_email_invalide' => 'Nevalida retpo&#349;tadreso.',
@@ -418,9 +418,9 @@ Dankon pro via partopreno
 'info_langue_principale' => '&#264;efa lingvo de la teksejo',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ rastrumeroj',
 'info_les_auteurs_1' => 'de @les_auteurs@',
-'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
-'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
-'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_format_interdit' => 'Nur vinjetoj kun formato @formats@ estas permisitaj.',
+'info_logo_max_poids' => 'Vinjetoj devigas pezi malpli de @maxi@ (tiu dosiero pezas @actuel@).',
+'info_logo_max_taille' => 'Vinjetoj devigas pezi malpli de @maxi@ (tiu dosiero pezas @actuel@).',
 'info_mail_fournisseur' => 'vi@retpo&#349;tadreso.com',
 'info_message_2' => 'MESA&#284;O',
 'info_message_supprime' => 'FORIGITA MESA&#284;O',
@@ -445,7 +445,7 @@ Dankon pro via partopreno
 'info_pixels' => 'bildpunktoj',
 'info_plusieurs_mots_trouves' => 'Pluraj &#349;losilvortoj trovitaj por "@cherche_mot@":',
 'info_popularite_5' => 'populareco&nbsp;:',
-'info_portfolio' => '<NEW>Portfolio',
+'info_portfolio' => 'Bildaro',
 'info_portfolio_automatique' => 'A&#365;tomata bildaro:',
 'info_premier_resultat' => '[@debut_limit@ unuaj rezultoj el @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ unuaj rezultoj el @total@]',
@@ -495,7 +495,7 @@ Dankon pro via partopreno
 'info_visite' => 'vizito :',
 'info_visites' => 'vizitoj :',
 'info_vos_rendez_vous' => 'Viaj estontaj rendevuoj',
-'info_zoom' => '<NEW>zoom',
+'info_zoom' => 'grandilo',
 'infos_vos_pense_bete' => 'Viaj memorigiloj',
 'item_breve_proposee' => 'Proponita informeto',
 
@@ -623,14 +623,14 @@ kaj rekonekti vin al la teksejo.
 'pass_retour_public' => 'Reiro al la publika spaco',
 'pass_rien_a_faire_ici' => 'Nenion por fari &#265;i tie.',
 'pass_vousinscrire' => 'Enskribi vin en tiu teksejo',
-'precedent' => '<NEW>pr&eacute;c&eacute;dent',
+'precedent' => 'anta&#365;an',
 'previsualisation' => 'Anta&#365;vida&#309;o',
 'previsualiser' => 'Anta&#365;vidi',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ vizitoj&nbsp;; populareco&nbsp;: @popularite@',
-'suivant' => '<NEW>suivant',
+'suivant' => 'postan',
 
 
 // T
@@ -703,27 +703,27 @@ kaj rekonekti vin al la teksejo.
 
 
 // Z
-'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
-'zbug_boucle' => '<NEW>boucle',
-'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
-'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
-'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
-'zbug_code' => '<NEW>code',
-'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => '<NEW>externe interdit',
+'zbug_balise_b_aval' => '&nbsp;: anta&#365;a B signo ',
+'zbug_boucle' => 'ma&#349;o',
+'zbug_boucle_recursive_undef' => 'nedifinita rekursia ma&#349;o',
+'zbug_champ_hors_boucle' => 'Kampo @champ@ eksteras ma&#349;on',
+'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras ma&#349;on de motivo @motif@',
+'zbug_code' => 'kodo',
+'zbug_critere_inconnu' => 'nekonata kriterio @critere@',
+'zbug_distant_interdit' => 'eksterne malpermisita',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: ne fermigita marko',
 'zbug_erreur_boucle_syntaxe' => 'Mal&#285;usta sintakso de ma&#349;o',
-'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_execution_page' => 'eraro rulante pa&#285;on',
 'zbug_erreur_filtre' => 'Eraro : filtro <b>&laquo; @filtre@ &raquo;</b> nedifinita',
-'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je ma&#349;oj (FORUMS) a&#365; (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Eraro(j) en skeleto',
 'zbug_info_erreur_squelette' => 'Eraro en la teksejo',
-'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
-'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
-'zbug_resultat' => '<NEW>r&eacute;sultat',
-'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_inversion_ordre_inexistant' => 'inversigo de ekzitanta ordo',
+'zbug_parametres_inclus_incorrects' => 'Eraraj parametroj de enmetado',
+'zbug_resultat' => 'rezulto',
+'zbug_serveur_indefini' => 'nedifinata SQL servilo',
+'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo'
 
 );
 

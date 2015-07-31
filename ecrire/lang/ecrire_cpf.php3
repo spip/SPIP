@@ -489,7 +489,6 @@ sanm inn lim&egrave;l. Indik t&egrave;rla si ou v&eacute; anserv lopsyon-la&nbsp
 'info_popularite_2' => 'Popularit&eacute; lo sitw&egrave;b&nbsp;:',
 'info_popularite_3' => 'Koman l&eacute; popul&egrave;r&nbsp;:&nbsp;@popularite@&nbsp;; bann vizit&nbsp;:&nbsp;@visites@',
 'info_popularite_4' => 'koman l&eacute; popul&egrave;r&nbsp;:&nbsp;@popularite@&nbsp;; bann vizit&nbsp;:&nbsp;@visites@',
-'info_popularite_5' => 'popularit&eacute;&nbsp;:',
 'info_post_scriptum' => 'Koz-D&eacute;ry&egrave;r',
 'info_post_scriptum_2' => 'Koz-d&eacute;ry&egrave;r :',
 'info_pour' => 'pou',
