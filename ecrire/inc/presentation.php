@@ -2132,7 +2132,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		.$load
-		. '">');
+		. '>');
 
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
