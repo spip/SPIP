@@ -1004,11 +1004,11 @@ function barre_onglets($rubrique, $onglet){
 	
 	if ($rubrique == "statistiques"){
 		onglet("&Eacute;volution des visites", "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-		onglet("R&eacute;partition des entr&eacute;es", "statistiques.php3", "repartition", $onglet, "");
+		onglet("Par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
+		onglet("Par articles", "statistiques_articles.php3", "recents", $onglet, "article-24.gif");
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref == "oui")	onglet("Les referers du jour", "statistiques_referers.php3", "referers", $onglet, "");
-		onglet("Articles r&eacute;cents", "statistiques_recents.php3", "recents", $onglet, "article-24.gif");
-		onglet("Tous les articles", "statistiques_tous.php3", "tous", $onglet, "");
+		if ($activer_statistiques_ref == "oui")	onglet("Les liens entrants du jour", "statistiques_referers.php3", "referers", $onglet, "");
+//		onglet("Tous les articles", "statistiques_tous.php3", "tous", $onglet, "");
 	}
 	
 	if ($rubrique == "administration"){

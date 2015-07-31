@@ -6,11 +6,11 @@
 
 	// que faire si on est connecte
 	if ($auteur_session) {
+		@Header("Location: ".$cible->getUrl());
 		echo "Vous &ecirc;tes connect&eacute;...";
 		exit;
 	}
 ?>
-
 #LOGIN_PRIVE
 
 
