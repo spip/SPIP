@@ -630,9 +630,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 					 _T('zbug_erreur_boucle_double',
 					 	array('id'=>$id_boucle)));
 		} else
-			$boucles[$id_boucle] = &$result;
+			$boucles[$id_boucle] = $result;
 		$all_res = phraser_champs_etendus($debut, $ligne, $all_res);
-		$all_res[] = &$result;
+		$all_res[] = &$boucles[$id_boucle];
 		$ligne += substr_count(substr($texte, 0, strpos($texte, $suite)), "\n");
 		$texte = $suite;
 	}
