@@ -31,11 +31,10 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	}
 	else $args = "";
 
-	$q = spip_query("SELECT COUNT(*) AS n FROM spip_signatures " . ($where ? "WHERE $where" : ''));
-	$t = spip_fetch_array($q);
-	if ($t['n'] > $nb_aff = floor(1.5*_TRANCHES)) {
-		$res .= navigation_pagination($t['n'], $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
-	}
+	$t = spip_abstract_countsel("spip_signatures", $where);
+	if ($t > ($nb_aff = floor(1.5*_TRANCHES))) {
+		$res = navigation_pagination($t, $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
+	} else $res = '';
 
 
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);

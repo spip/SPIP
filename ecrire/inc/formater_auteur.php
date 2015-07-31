@@ -58,16 +58,15 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	else $vals[] =  "&nbsp;";
 
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
-	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"), SPIP_NUM);
+	  $cpt = spip_abstract_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"), "lien.id_auteur");
 	  $t = _T('info_article_2');
 	  $t1 = _T('info_1_article'); 
 	} else {
-	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum AS F WHERE F.id_auteur=$id_auteur"), SPIP_NUM);
+	  $cpt = spip_abstract_countsel("spip_forum AS F", "F.id_auteur=$id_auteur");
 	  $t = _T('public:messages_forum');
 	  $t1 = '1 ' . _T('public:message');
 	}
 
-	$cpt= $cpt[0];
 	if ($cpt > 1) $vals[] =  $cpt.' '.$t;
 	// manque "1 message de forum"
 	elseif ($cpt == 1) $vals[] =  $t1;

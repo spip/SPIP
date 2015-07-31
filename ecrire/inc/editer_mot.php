@@ -47,13 +47,13 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		return '';
 	}
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
+	$cpt = spip_abstract_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
 
-	if (!$cpt['n']) {
+	if (!$cpt) {
 		if (!$flag) return;
-		$cpt = spip_fetch_array(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"), SPIP_NUM);
+		$cpt = spip_fetch_array(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"));
 
-		if (!$cpt[0]) return;
+		if (!$cpt['n']) return;
 	}
 
 	//
@@ -321,13 +321,9 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 // http://doc.spip.org/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots)
 {
-	$rand = rand(0,10000); # pour antifocus & ajax
-
 	$id_groupe = $row['id_groupe'];
 
-	$result = spip_query("SELECT COUNT(id_mot) FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : ''));
-
-	list($n) = spip_fetch_array($result, SPIP_NUM);
+	$n = spip_abstract_countsel("spip_mots", "id_groupe=$id_groupe" . ($les_mots ? " AND id_mot NOT IN ($les_mots) " : ''));
 	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
@@ -339,6 +335,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	$ancre = "valider_groupe_$id_groupe"; 
 
 	// forcer le recalcul du noeud car on est en Ajax
+	$rand = rand(0,10000); # pour antifocus & ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 	$jscript2 = "if(!antifocus_mots['$rand-$id_groupe']){this.value='';antifocus_mots['$rand-$id_groupe']=true;}";
 

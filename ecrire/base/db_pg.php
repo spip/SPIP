@@ -52,7 +52,7 @@ function spip_pg_query($query)
 	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
 
 	$r = pg_query($spip_pg_link, $query);
-
+#	if (!$r) echo $query;
 	return $r;
 }
 
@@ -81,13 +81,14 @@ function spip_pg_listdbs() {
 function spip_pg_select($select, $from, $where,
                            $groupby, $orderby, $limit,
                            $sousrequete, $having,
-                           $table, $id, $serveur){
+                           $table='', $id='', $serveur=''){
 	global $spip_pg_link;
-	if (eregi("^([0-9]+), *([0-9]+)$", $limit,$match))
-	      {
-		$offset = $match[1];
-		$count = $match[2];
-	      }
+
+	$limit = preg_match("/^(([0-9]+),)?\s*([0-9]+)$/", $limit,$limatch);
+	if ($limit) {
+		$offset = $limatch[2];
+		$count = $limatch[3];
+	}
 
 	$q =  (!is_array($select) ? $select : join(", ", $select)) .
 	  (!$from ? '' :
@@ -109,12 +110,12 @@ function spip_pg_select($select, $from, $where,
 	}
 
 	if (!($res = spip_pg_query($q))) {
-		include_spip('inc/debug_sql.php');
+		include_spip('public/debug');
 		erreur_requete_boucle($q, $id, $table,
 				      spip_pg_errno(),
 				      spip_pg_error());
 	}
-#	spip_log("selectabs $q" . pg_numrows($res));
+#	spip_log("querypg $q res=" . pg_numrows($res));
 	return $res;
 }
 
@@ -177,9 +178,19 @@ function spip_fetch_array($r, $extra='') {
 	  if ($r) return pg_fetch_array($r);
 }
 
+function spip_pg_countsel($from = array(), $where = array(),
+	$groupby='', $limit='', $sousrequete = '', $having = array())
+{
+	$r = spip_pg_select('COUNT(*)', $from, $where,
+			    $groupby, '', $limit, $sousrequete, $having);
+	if ($r) list($r) = pg_fetch_array($r, NULL, PGSQL_NUM);
+#	spip_log("$r pg_mysql_countsel($from $where $limit");
+	return $r;
+}
+
 // http://doc.spip.org/@spip_pg_count
 function spip_pg_count($res, $serveur='') {
-		return !$res ? 0 : pg_numrows($res);
+	return !$res ? 0 : pg_numrows($res);
 }
   
 // http://doc.spip.org/@spip_pg_free
@@ -204,7 +215,7 @@ function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 	$r = pg_query($spip_pg_link, "INSERT INTO $table $champs VALUES $valeurs $ret");
 	if (!$r) return 0;
 	if (!$ret) return -1;
-	$r = pg_fetch_array($r, 0, PGSQL_NUM);
+	$r = pg_fetch_array($r, NULL, PGSQL_NUM);
 
 	return $r[0];
 }

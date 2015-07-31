@@ -78,8 +78,8 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	$q = spip_query("SELECT statut, count(*) FROM spip_auteurs WHERE statut NOT IN (" . _q($GLOBALS['liste_des_statuts']) . ") GROUP BY statut");
 
 	$hstatut = htmlentities($statut);
-	while ($r = spip_fetch_array($q, SPIP_NUM)) {
-		$nom = htmlentities($r[0]);
+	while ($r = spip_fetch_array($q)) {
+		$nom = htmlentities($r['statut']);
 		$autres .= mySel($nom, $hstatut, _T('info_statut_auteur_autre') . ' ' . $nom);
 	}
 

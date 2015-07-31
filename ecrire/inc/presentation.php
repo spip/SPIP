@@ -458,9 +458,9 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	$cpt = spip_abstract_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
 
-	if (! (($cpt = $cpt['n']) OR $force)) return '';
+	if (!($cpt OR $force)) return '';
 
 	$nb_aff = floor(1.5 * _TRANCHES);
 
@@ -521,9 +521,7 @@ function avoir_visiteurs() {
 
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
 	if ($GLOBALS['meta']['accepter_visiteurs'] == 'oui') return true;
-	$n = spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1");
-	$n = spip_fetch_array($n);
-	return $n['n'];
+	return spip_abstract_countsel('spip_articles', "accepter_forum='abo'",'', '1');
 }
 
 //
