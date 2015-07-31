@@ -118,7 +118,7 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 		$chaine = strtolower($match[3]);
 		if (!($module = $match[2]))
 			// ordre standard des modules a explorer
-			$module = 'local/public/spip';
+			$module = 'local/public/spip/ecrire';
 		$c = new Champ;
 		$c->code = "_T('$module:$chaine')";
 		$c->fonctions = explode('|', substr($match[4],1));
