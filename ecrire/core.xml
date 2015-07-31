@@ -242,6 +242,7 @@
 	<pipeline><nom>calculer_rubriques</nom><action></action></pipeline>
 	<pipeline><nom>configurer_liste_metas</nom><action></action></pipeline>
 	<pipeline><nom>compter_contributions_auteur</nom><action></action></pipeline>
+	<pipeline><nom>declarer_filtres_squelettes</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_interfaces</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_principales</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_auxiliaires</nom><action></action></pipeline>

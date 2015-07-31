@@ -185,6 +185,7 @@ function echapper_php_callback($r) {
 
 // http://doc.spip.org/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source='') {
+	static $filtres = null;
 	$headers = array();
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
@@ -212,17 +213,25 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		? 'html'
 		: 'php';
 
-	// traiter #FILTRE{} ?
-	if (isset($headers['X-Spip-Filtre'])
-	AND strlen($headers['X-Spip-Filtre'])) {
+	// traiter #FILTRE{} et filtres
+  if (is_null($filtres)) {
+	  $filtres = pipeline('declarer_filtres_squelettes',array());
+  }
+	if (count($filtres) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
 		// proteger les <INCLUDE> et tous les morceaux de php
 		if ($process_ins == 'php')
 			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
 				'echapper_php_callback', $corps);
-		foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
-			if ($f = chercher_filtre($filtre))
-				$corps = $f($corps);
-		}
+		if (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))
+			foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
+				if ($f = chercher_filtre($filtre))
+					$corps = $f($corps);
+			}
+		if (count($filtres))
+			foreach ($filtres as $filtre) {
+				if ($f = chercher_filtre($filtre))
+					$corps = $f($corps);
+			}
 		// restaurer les echappements
 		$corps = echapper_php_callback($corps);
 		unset($headers['X-Spip-Filtre']);
