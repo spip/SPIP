@@ -27,6 +27,12 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	static $infos=array();
 	static $plugin_xml_cache=NULL;
 	include_spip('inc/xml');
+	// cas d'un appel en dehors du repertoire plugin
+	// cette solution n'est pas ideale.
+	if (strpos($plug, _DIR_EXTENSIONS) === 0) {
+		$dir_plugins = _DIR_EXTENSIONS;
+		$plug = str_replace(_DIR_EXTENSIONS, '', $plug);
+	}
 	if (!isset($infos[$dir_plugins][$plug]) OR $force_reload){
 		if ($plugin_xml_cache==NULL){
 			$plugin_xml_cache = array();
