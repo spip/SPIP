@@ -163,7 +163,7 @@ function phraser_champs_etendus($texte, $result) {
 // de ceux trouves dans les arguments des filtres (rare)
 
 function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
-  $texte = trim($texte);
+  $texte = ltrim($texte);
   while ($texte && $texte[0] != $fin) {
       ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
       $suite = ltrim($match[2]);
@@ -173,7 +173,7 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
       $args = $suite;
       if ($suite[0] == '{') {
 	$args = ltrim(substr($suite,1)); 
-	$citations = array();
+	$collecte = array();
 	while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
 			ereg ('^(")([^"]*)(")(.*)$', $args, $regs);
@@ -188,21 +188,21 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$champ = new Texte;
 			$champ->texte = $arg;
 			$result[] = $champ;
-			$citations[] = $champ;
+			$collecte[] = $champ;
 		} else {
 
 		  $arg = phraser_champs_exterieurs(trim($arg), $sep, $result);
-		  $citations = array_merge($citations, $arg);
+		  $collecte = array_merge($collecte, $arg);
 		  $result = array_merge($result, $arg);
 		}
 		$args = ltrim($args);
 		if ($args[0] == ',') {
 		  $args = substr($args,1);
-		  if ($citations)
-		    {$res[] = $citations; $citations = array();}
+		  if ($collecte)
+		    {$res[] = $collecte; $collecte = array();}
 		}
 	}
-	if ($citations) {$res[] = $citations; $citations = array();}
+	if ($collecte) {$res[] = $collecte; $collecte = array();}
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
