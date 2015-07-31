@@ -33,7 +33,7 @@ define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S'
 
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
-define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^|]*)})?((\|[^:>]*)?:>),iS');
+define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|]*)})?((\|.*)?:>),iS');
 
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
