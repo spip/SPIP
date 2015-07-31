@@ -91,10 +91,12 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/filtres');
+		if ($document['distant'] != 'oui')
+			$image = _DIR_RACINE.$document['fichier'];
 		if ($portfolio) {
-			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'], 110, 120, false, true);
+			$image = filtrer('image_reduire',$image, 110, 120, false, true);
 		} else {
-			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'],-1,-1,false, true);
+			$image = filtrer('image_reduire',$image,-1,-1,false, true);
 		}
 	} else {
 		$image = '';
