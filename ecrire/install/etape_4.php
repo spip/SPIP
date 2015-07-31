@@ -102,10 +102,7 @@ function install_etape_4_dist()
 		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
-	echo "<form action='", generer_url_ecrire(), "' method='post'><div>";
-	echo bouton_suivant();
-	echo "</div></form>";
-
+	echo generer_post_ecrire('', bouton_suivant());
 	echo info_progression_etape(4,'etape_','install/');
 	echo install_fin_html();
 }

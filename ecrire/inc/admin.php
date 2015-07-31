@@ -81,8 +81,8 @@ function debut_admin($script, $action='', $commentaire='') {
 			spip_log ("Action super-admin: $action");
 			return;
 		}
-		$form = ('<input type="hidden" name="validation_admin" value="'.$signal.'" />'
-			 . bouton_suivant(_T('bouton_valider')));
+		$form = '<input type="hidden" name="validation_admin" value="'.$signal.'" />';
+		$suivant = _T('bouton_valider');
 
 		$js = '';
 	} else {
@@ -93,8 +93,8 @@ function debut_admin($script, $action='', $commentaire='') {
 								    'valeur' => $signal
 								    )),
 					   ('<br />'
-					    . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
-					    . bouton_suivant(_T('bouton_recharger_page'))));
+					    . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))));
+		  $suivant = _T('bouton_recharger_page');
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire
@@ -104,7 +104,7 @@ function debut_admin($script, $action='', $commentaire='') {
 		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
 	}
 
-	$form = $commentaire . copy_request($script, $form);
+	$form = $commentaire . copy_request($script, $form, $suivant);
 	echo minipres(_T('info_action', array('action' => $action)), $form, $js);
 	exit;
 }
@@ -124,7 +124,7 @@ function fin_admin($action) {
 
 
 // http://doc.spip.org/@copy_request
-function copy_request($script, $suite)
+function copy_request($script, $suite, $submit='')
 {
         include_spip('inc/filtres');
 	foreach($_POST as $n => $c) {
@@ -133,6 +133,6 @@ function copy_request($script, $suite)
 		  entites_html($c) .
 		  "'  />";
 	}
-	return  generer_post_ecrire($script, $suite);
+	return  generer_post_ecrire($script, $suite, '', $submit);
 }
 ?>
