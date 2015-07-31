@@ -78,6 +78,7 @@ function _action_auteur($action, $id_auteur, $nom_alea) {
 
 
 function calculer_action_auteur($action, $id_auteur = 0) {
+	renouvelle_alea();
 	return _action_auteur($action, $id_auteur, 'alea_ephemere');
 }
 
