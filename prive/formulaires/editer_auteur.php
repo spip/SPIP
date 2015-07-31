@@ -27,7 +27,7 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $l
 	// forcer la prise en compte du post, sans verifier si c'est bien le meme formulaire,
 	// c'est trop hasardeux selon le contenud de $row
 	$valeurs['_forcer_request'] = true;
-	if (!isset($valeurs['source']))
+	if (empty($valeurs['source']))
 		$valeurs['source'] = spip_connect_ldap() ? 'ldap' : 'spip';
 	return $valeurs;
 }
