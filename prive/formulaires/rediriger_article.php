@@ -14,17 +14,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_rediriger_article_charger_dist($id_article,$retour=''){
 
-	$row = sql_fetsel('id_article,chapo','spip_articles','id_article='.intval($id_article));
+	$row = sql_fetsel('id_article,virtuel','spip_articles','id_article='.intval($id_article));
 	if (!$row['id_article'])
 		return false;
-
-	$redirection = (strncmp($row["chapo"],'=',1)!==0) ? '' : chapo_redirige(substr($row["chapo"], 1));
+	include_spip('inc/lien');
+	$redirection = virtuel_redirige($row["virtuel"]);
 
 	if (!$redirection
 		AND $GLOBALS['meta']['articles_redirection'] != 'oui')
 		return false;
 
 
+	include_spip('inc/texte');
 	$valeurs = array(
 		'redirection'=>$redirection,
 		'id'=>$id_article,
@@ -36,10 +37,10 @@ function formulaires_rediriger_article_charger_dist($id_article,$retour=''){
 function formulaires_rediriger_article_traiter_dist($id_article,$retour=''){
 
 	$url = preg_replace(",^\s*https?://$,i", "", rtrim(_request('redirection')));
-	if ($url) $url = corriger_caracteres("=$url");
+	if ($url) $url = corriger_caracteres($url);
 
 	include_spip('action/editer_article');
-	articles_set($id_article, array('chapo'=>$url));
+	articles_set($id_article, array('virtuel'=>$url));
 
 	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>':'';
 

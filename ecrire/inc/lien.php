@@ -290,7 +290,7 @@ function traiter_raccourci_liens($t) {
 
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
 /**
- * Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
+ * Fonction pour les champs virtuels de redirection qui peut etre:
  * 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
  * 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
  * 3. une URL std
@@ -300,27 +300,19 @@ define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
  *
  * http://doc.spip.org/@chapo_redirige
  *
- * @param string $chapo
+ * @param string $virtuel
  * @param bool $url
  * @return string
  */
-function chapo_redirige($chapo, $url=false)
-{
-	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
-		if (!preg_match(_RACCOURCI_CHAPO, $chapo, $m))
-			return $chapo;
+function virtuel_redirige($virtuel, $url=false){
+	if (!strlen($virtuel)) return '';
+	if (!preg_match(_RACCOURCI_LIEN, $virtuel, $m))
+		if (!preg_match(_RACCOURCI_CHAPO, $virtuel, $m))
+			return $virtuel;
 
 	return !$url ? $m[3] : traiter_lien_implicite($m[3]);
 }
 
-// Ne pas afficher le chapo si article virtuel
-// http://doc.spip.org/@nettoyer_chapo
-function nettoyer_chapo($chapo){
-	return (substr($chapo,0,1) == "=") ? '' : $chapo;
-}
-
-// http://doc.spip.org/@chapo_redirigetil
-function chapo_redirigetil($chapo) { return $chapo && $chapo[0] == '=';}
 
 // Cherche un lien du type [->raccourci 123]
 // associe a une fonction generer_url_raccourci() definie explicitement 

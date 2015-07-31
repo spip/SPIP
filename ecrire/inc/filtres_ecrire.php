@@ -326,14 +326,14 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
  * Afficher le lien de redirection d'un article virtuel si il y a lieu
  * (rien si l'article n'est pas redirige)
  * 
- * @param string $chapo
+ * @param string $virtuel
  * @return string
  */
-function lien_article_virtuel($chapo){
+function lien_article_virtuel($virtuel){
 	include_spip('inc/lien');
-  if (!chapo_redirigetil($chapo))
+  if (!$virtuel = virtuel_redirige($virtuel))
 	  return '';
-  return propre("[->".chapo_redirige(substr($chapo, 1))."]");
+  return propre("[->".$virtuel."]");
 }
 
 

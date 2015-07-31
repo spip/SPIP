@@ -337,4 +337,9 @@ $GLOBALS['maj'][17555] = array(
 	array('sql_alter',"TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"),
 );
 
+$GLOBALS['maj'][17563] = array(
+	array('sql_alter',"TABLE spip_articles ADD virtuel VARCHAR(255) DEFAULT '' NOT NULL"),
+	array('sql_update','spip_articles',array('virtuel'=>'SUBSTRING(chapo,2)','chapo'=>"''"),"chapo LIKE '=_%'"),
+);
+
 ?>

@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/lang');
-include_spip('public/quete'); // pour quete_chapo et ses dependances
+include_spip('public/quete'); // pour quete_virtuel et ses dependances
 
 // NB: mes_fonctions peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
@@ -177,7 +177,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 
 /**
- * si le champ chapo commence par '=' c'est une redirection.
+ * si le champ virtuel est non vide c'est une redirection.
  * avec un eventuel raccourci Spip
  * si le raccourci a un titre il sera pris comme corps du 302
  *
@@ -191,12 +191,12 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 function tester_redirection($fond, $contexte, $connect)
 {
 	if ($fond == 'article'
-	AND $id_article = intval($contexte['id_article'])) {
-		$m = quete_chapo($id_article, $connect);
-		if ($m[0]=='=') {
+	  AND $id_article = intval($contexte['id_article'])) {
+		$m = quete_virtuel($id_article, $connect);
+		if (strlen($m)) {
 			include_spip('inc/texte');
 			// les navigateurs pataugent si l'URL est vide
-			if ($url = chapo_redirige(substr($m,1), true)){
+			if ($url = virtuel_redirige($m, true)){
 				// passer en url absolue car cette redirection pourra
 				// etre utilisee dans un contexte d'url qui change
 				// y compris url arbo

@@ -23,8 +23,8 @@ include_spip('base/abstract_sql');
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 // http://doc.spip.org/@quete_chapo
-function quete_chapo($id_article, $connect) {
-	return sql_getfetsel('chapo', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
+function quete_virtuel($id_article, $connect) {
+	return sql_getfetsel('virtuel', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
 }
 
 function quete_parent_lang($table,$id,$connect=''){
