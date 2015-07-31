@@ -35,7 +35,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "rien.gif");
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "petition-24.gif", "rien.gif");
 	}
 	
 	fin_raccourcis();

@@ -60,7 +60,8 @@ if ($set_options == 'basiques') {
 	$options = 'basiques';
 }
 
-if ($connect_statut == "0minirezo") $options = 'avancees';
+
+if (!isset($spip_couleur)) $spip_couleur = 6;
 
 switch ($spip_couleur) {
 	case 1:

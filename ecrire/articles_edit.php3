@@ -280,7 +280,7 @@ echo "<P><HR><P>";
 	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
 
-	if (($options=="avancees" AND $articles_surtitre!="non") OR strlen($surtitre)>0){
+	if (($articles_surtitre!="non") OR strlen($surtitre)>0){
 		echo "<B>Sur-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
@@ -292,7 +292,7 @@ echo "<P><HR><P>";
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
 
-	if (($options=="avancees" AND $articles_soustitre!="non") OR strlen($soustitre) > 0) {
+	if (($articles_soustitre!="non") OR strlen($soustitre) > 0) {
 		echo "<B>Sous-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><P>";
@@ -314,15 +314,20 @@ echo "<P><HR><P>";
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-	debut_cadre_relief("$logo_parent");
-	
-	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
-	echo aide ("artrub");
-	echo "<BR><SELECT NAME='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
-	enfant(0);
-	echo "</SELECT><BR>\n";
-	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
-	fin_cadre_relief();
+	if ($options == "avancees") {
+
+		debut_cadre_relief("$logo_parent");
+		
+		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
+		echo aide ("artrub");
+		echo "<BR><SELECT NAME='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
+		enfant(0);
+		echo "</SELECT><BR>\n";
+		echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
+		fin_cadre_relief();
+	} else {
+		echo "<INPUT TYPE='hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";	
+	}
 
 	if (($options=="avancees" AND $articles_descriptif!="non") OR strlen($descriptif) > 0) {
 		echo "<P><B>Descriptif rapide</B>";
