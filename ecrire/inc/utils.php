@@ -1290,6 +1290,7 @@ function exec_info_dist() {
 // on recupere le resultat sous la forme d'une $page['texte', 'headers'...]
 // options :
 // 'protect_xml' => false,  conserver le \1 du xml-hack
+// http://doc.spip.org/@assembler
 function assembler($fond, $contexte=array(), $options=array(), $connect=null) {
 	charger_fonction('assembler', 'public');
 
