@@ -823,6 +823,20 @@ function unique($donnee, $famille='') {
 		return $donnee;
 }
 
+//
+// Filtre |alterner
+//
+// Exemple [(#COMPTEUR_BOUCLE|alterner{'bleu','vert','rouge'})]
+//
+function alterner($i) {
+	// recuperer les arguments (attention fonctions un peu space)
+	$num = func_num_args();
+	$args = func_get_args();
+
+	// renvoyer le i-ieme argument, modulo le nombre d'arguments
+	return $args[(intval($i)-1)%($num-1)+1];
+}
+
 
 function extraire_attribut($balise, $attribut) {
 # la mise en facteur ne marche pas....
