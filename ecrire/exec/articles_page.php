@@ -49,7 +49,7 @@ debut_droite();
 //
 
 echo "<P align=left>";
-afficher_articles(_T('info_en_cours_validation'), ", spip_auteurs_articles AS lien ".	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
+ afficher_articles(_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 
@@ -59,7 +59,7 @@ echo "</p>";
 //
 
 echo "<p>";
-afficher_articles(_T('info_attente_validation'), ", spip_auteurs_articles AS lien ".	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop' ORDER BY articles.date");
+ afficher_articles(_T('info_attente_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop'", "ORDER BY" => "articles.date"));
 echo "</p>";
 
 //
@@ -67,7 +67,7 @@ echo "</p>";
 //
 
 echo "<p>";
-afficher_articles(_T('info_publies'),	", spip_auteurs_articles AS lien ".	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie' ORDER BY articles.date DESC", true);
+ afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"), true);
 echo "</p>";
 
 //
@@ -75,7 +75,7 @@ echo "</p>";
 //
 
 echo "<p>";
-afficher_articles(_T('info_refuses'),	", spip_auteurs_articles AS lien ".	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse' ORDER BY articles.date DESC");
+ afficher_articles(_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 fin_page();

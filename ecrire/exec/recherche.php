@@ -45,37 +45,33 @@ function exec_recherche_dist()
 	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
 	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche</B></FONT><p>";
 
-	$query_articles = "SELECT * FROM spip_articles WHERE";
-	$query_breves = "SELECT * FROM spip_breves WHERE ";
-	$query_rubriques = "SELECT * FROM spip_rubriques WHERE ";
-	$query_sites = "SELECT * FROM spip_syndic WHERE ";
-	
-	if (ereg("^[0-9]+$", $recherche)) {
-		$query_articles .= " (id_article = $recherche) OR ";
-		$query_breves .= " (id_breve = $recherche) OR ";
-		$query_rubriques .= " (id_rubrique = $recherche) OR ";
-		$query_sites .= " (id_syndic = $recherche) OR ";
-	}
-	
+	$query_articles['FROM'] = 'spip_articles AS articles';
+	$query_breves['FROM'] = 'spip_breves';
+	$query_rubriques['FROM'] = 'spip_rubriques';
+	$query_sites['FROM'] = 'spip_syndic';
+	$testnum = ereg("^[0-9]+$", $recherche);
+
 	// Eviter les symboles '%', caracteres SQL speciaux
-	$recherche = str_replace("%","\%",$recherche);
-	$rech2 = split("[[:space:]]+", $recherche);
-	if ($rech2)
-		$where = " (titre LIKE '%".join("%' AND titre LIKE '%", $rech2)."%') ";
-	else
-		$where = " 1=2";
-	
-	$query_articles .= " $where ORDER BY date_modif DESC";
-	$query_breves .= " $where ORDER BY maj DESC";
-	$query_rubriques .= " $where ORDER BY maj DESC";
-	
-	$query_sites .= " $where ORDER BY maj DESC";
-	$query_sites  = ereg_replace("titre LIKE", "nom_site LIKE", $query_sites);
+	$recherche1 = str_replace("%","\%",$recherche);
+	$where = split("[[:space:]]+", $recherche1);
+	if ($where)
+		$where = ($testnum ? "OR " : '') .
+		  "(titre LIKE '%".join("%' AND titre LIKE '%", $where)."%') ";
+	$query_articles['WHERE']= ($testnum ? "(id_article = $recherche)" :'') . $where;
+	$query_breves['WHERE']= ($testnum ? "(id_breve = $recherche)" : '') . $where;
+	$query_rubriques['WHERE']= ($testnum ? "(id_rubrique = $recherche)" : '') . $where;
+	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . ereg_replace("titre LIKE", "nom_site LIKE",$where);
+	}
+
+	$query_articles['ORDER BY']= "date_modif DESC";
+	$query_breves['ORDER BY']= "maj DESC";
+	$query_rubriques['ORDER BY']= "maj DESC";
+	$query_sites['ORDER BY']= "maj DESC";
 	
 	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($activer_moteur) {	// texte integral
 		include_spip('inc/indexation');
-		list($hash_recherche,) = requete_hash ($recherche);
+		list($hash_recherche,) = requete_hash($recherche1);
 		$query_articles_int = requete_txt_integral('spip_articles', $hash_recherche);
 		$query_breves_int = requete_txt_integral('spip_breves', $hash_recherche);
 		$query_rubriques_int = requete_txt_integral('spip_rubriques', $hash_recherche);
@@ -83,45 +79,40 @@ function exec_recherche_dist()
 		$query_auteurs_int = requete_txt_integral('spip_auteurs', $hash_recherche);
 	}
 	
-	if ($query_articles)
-		$nba = afficher_articles (_T('info_articles_trouves'), $query_articles);
+	$nba = afficher_articles (_T('info_articles_trouves'), $query_articles);
 	if ($activer_moteur) {
 		if ($nba) {
 			$doublons = join($nba, ",");
-			$query_articles_int = ereg_replace ("WHERE", "WHERE objet.id_article NOT IN ($doublons) AND", $query_articles_int);
+			$query_articles_int['WHERE'] .= " AND objet.id_article NOT IN ($doublons)";
 		}
 		$nba1 = afficher_articles (_T('info_articles_trouves_dans_texte'), $query_articles_int);
 	}
 	
-	if ($query_breves)
-		$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
+	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
 	if ($activer_moteur) {
 		if ($nbb) {
 			$doublons = join($nbb, ",");
-			$query_breves_int = ereg_replace ("WHERE", "WHERE objet.id_breve NOT IN ($doublons) AND", $query_breves_int);
+			$query_breves_int["WHERE"].= " AND objet.id_breve NOT IN ($doublons)";
 		}
 		$nbb1 = afficher_breves (_T('info_breves_touvees_dans_texte'), $query_breves_int, true);
 	}
 	
-	if ($query_rubriques)
-		$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
+	$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
 	if ($activer_moteur) {
 		if ($nbr) {
 			$doublons = join($nbr, ",");
-			$query_rubriques_int = ereg_replace ("WHERE", "WHERE objet.id_rubrique NOT IN ($doublons) AND", $query_rubriques_int);
+			$query_rubriques_int["WHERE"].= " AND objet.id_rubrique NOT IN ($doublons)";
 		}
 		$nbr1 = afficher_rubriques (_T('info_rubriques_trouvees_dans_texte'), $query_rubriques_int);
 	}
 	
-	if ($activer_moteur)
-		$nbt = afficher_auteurs (_T('info_auteurs_trouves'), $query_auteurs_int);
+	$nbt = afficher_auteurs (_T('info_auteurs_trouves'), $query_auteurs_int);
 	
-	if ($query_sites)
-		$nbs = afficher_sites (_T('info_sites_trouves'), $query_sites);
+	$nbs = afficher_sites (_T('info_sites_trouves'), $query_sites);
 	if ($activer_moteur) {
 		if ($nbs) {
 			$doublons = join($nbs, ",");
-			$query_sites_int = ereg_replace ("WHERE", "WHERE objet.id_syndic NOT IN ($doublons) AND", $query_sites_int);
+			$query_sites_int["WHERE"].= " AND objet.id_syndic NOT IN ($doublons)";
 		}
 		$nbs1 = afficher_sites (_T('info_sites_trouves_dans_texte'), $query_sites_int);
 	}
@@ -129,7 +120,6 @@ function exec_recherche_dist()
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
 	}
-}
 
 echo "<p>";
 

@@ -25,11 +25,11 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return ;
 
 	$nb_aff = 1.5 * _TRANCHES;
+	$def_aff = intval(_request('t_' .$tmp_var));
 
 	if ($cpt > $nb_aff) {
-	  // 1er arg fictif ici
-		$tranches = afficher_tranches_requete($cpt, $cpt, ($afficher_auteurs ? 4 : 2), $tmp_var);
 		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, ($afficher_auteurs ? 4 : 2), $tmp_var, '', $nb_aff);
 	}
 	if ($important) debut_cadre_couleur();
 
@@ -40,7 +40,7 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
 	echo $tranches;
 
-	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT  " . intval(_request('t_' .$tmp_var)) . ", $nb_aff")
+	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT  " . $deb_aff . ", $nb_aff")
 ;
 	while($row = spip_fetch_array($result_message)) {
 			$vals = array();

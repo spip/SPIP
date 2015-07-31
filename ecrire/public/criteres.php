@@ -539,7 +539,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
-		spip_log("col $col ");
+
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
 	  $col = $boucle->primary;
@@ -554,7 +554,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	$col, $regs)) {
 		list($col, $table) =
 		calculer_critere_infixe_date($idb, $boucles, $regs);
-		spip_log("col $col table $table");
 	}
 
 	// HACK : selection des documents selon mode 'image'

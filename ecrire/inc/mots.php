@@ -579,7 +579,7 @@ function afficher_groupe_mots($id_groupe) {
 			  "id_groupe" => $id_groupe);
 	$jjscript = addslashes(serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
-	$tmp_var = substr(md5($jjscript), 0, 4);
+	$tmp_var = substr($hash, 2, 6);
 			
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
@@ -593,37 +593,34 @@ function afficher_groupe_mots($id_groupe) {
 	if (! ($cpt = $cpt['n'])) return true ;
 
 	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
 
 	if ($cpt > $nb_aff) {
-	  // 1er arg fictif ici
-		$tranches = afficher_tranches_requete($cpt, $cpt, 3, $tmp_var, $javascript);
 		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
 	}
 
 	$occurrences = calculer_liens_mots();
-		$table = '';
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
-		if ($row = spip_fetch_array($res_proch)) {
+	$table = '';
+	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
+	if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
-		} else  {
+	} else  {
 			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
-		}
+	}
 
-		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var' style='position: relative;'>";
+	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
 
-		echo http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
+	echo http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
 
-		
-		echo "<div class='liste'>";
-		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
+	echo "<div class='liste'>";
+	echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
-		echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+	echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-
-		$result = spip_query($r = "SELECT $select FROM $from WHERE $where $order LIMIT  " . intval(_request('t_' .$tmp_var)) . ", $nb_aff");
-		if ($id_groupe == 7) spip_log($r);
-		while ($row = spip_fetch_array($result)) {
+	$result = spip_query("SELECT $select FROM $from WHERE $where $order LIMIT  $deb_aff, $nb_aff");
+	while ($row = spip_fetch_array($result)) {
 		
 			$vals = '';
 			
@@ -681,23 +678,22 @@ function afficher_groupe_mots($id_groupe) {
 
 				$table[] = $vals;			
 			}
-		}
-		if ($connect_statut=="0minirezo") {
+	}
+	if ($connect_statut=="0minirezo") {
 			$largeurs = array('', 100, 130);
 			$styles = array('arial11', 'arial1', 'arial1');
 		}
-		else {
+	else {
 			$largeurs = array('', 100);
 			$styles = array('arial11', 'arial1');
-		}
-		echo afficher_liste($largeurs, $table, $styles);
+	}
+	echo afficher_liste($largeurs, $table, $styles);
 
-		echo "</table>";
+	echo "</table>";
 //		fin_cadre_relief();
-		echo "</div>";
+	echo "</div>";
 		
-		if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
-
+	if (!$deb_aff) echo "</div>";
 
 	return false;
 }
