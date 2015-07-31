@@ -34,7 +34,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // construit un tableau de raccourcis pour un noeud de DOM 
 
-function afficher_barre_spip($champ, $forum=false) {
+function afficher_barre($champ, $forum=false) {
 	static $num_barre = 0;
 	include_ecrire ("inc_layer");
 	if (!$GLOBALS['browser_barre']) return '';
