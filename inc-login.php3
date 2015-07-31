@@ -35,34 +35,20 @@ function auth_http($cible, $essai_auth_http) {
 	}
 }
 
-function login($cible, $prive = 'prive', $message_login='', $action='') {
+// fonction pour les balises #LOGIN_*
 
-  $pass_popup ='href="spip_pass.php3" target="spip_pass" onclick="'
-                       . "javascript:window.open('spip_pass.php3', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\"";
-
-	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
-	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
-	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
-	// et pas un echec cookie.
-	if ($GLOBALS['var_echec_cookie'])
-	  $echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
+function login($cible, $prive = 'prive') {
 
 	global $auteur_session;
-	global $ignore_auth_http;
-	global $spip_admin;
-	global $php_module;
 
 	$cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
 	$cible = ereg_replace("[?&]var_url[^&]*", '', $cible);
 
-	if (!$action)
-	  {
-		global $clean_link;
-		$clean_link->delVar('var_erreur');
-		$clean_link->delVar('var_login');
-		$action = $clean_link->getUrl();
-	  }
-	spip_log("action dans inc-login : $action");
+	global $clean_link;
+	$clean_link->delVar('var_erreur');
+	$clean_link->delVar('var_login');
+	$action = $clean_link->getUrl();
+
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 
@@ -73,6 +59,19 @@ function login($cible, $prive = 'prive', $message_login='', $action='') {
 		echo "<a href='$cible'>"._T('login_par_ici')."</a>\n";
 		return;
 	}
+	login_pour_tous($cible, $prive, '', $action);
+}
+
+
+// fonction aussi pour le forums sur abonnement
+
+function login_pour_tous($cible, $prive, $message, $action) {
+  $pass_popup ='href="spip_pass.php3" target="spip_pass" onclick="'
+                       . "javascript:window.open('spip_pass.php3', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\"";
+
+	global $ignore_auth_http;
+	global $spip_admin;
+	global $php_module;
 
 	$login = $GLOBALS['var_login'];
 	// Le login est memorise dans le cookie d'admin eventuel
@@ -83,6 +82,13 @@ function login($cible, $prive = 'prive', $message_login='', $action='') {
 		$login = '';
 
 	$flag_autres_sources = $GLOBALS['ldap_present'];
+	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
+	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
+	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
+	// et pas un echec cookie.
+	if ($GLOBALS['var_echec_cookie'])
+	  $echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
+
 
 	// quels sont les aleas a passer ?
 	if ($login) {
@@ -130,7 +136,7 @@ function login($cible, $prive = 'prive', $message_login='', $action='') {
 	}
 	else {
 		echo '<div><div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">',
-		  (!$message_login ? '' :
+		  (!$message ? '' :
 		   ("<br />" . 
 		    _T("forum_vous_enregistrer") . 
 		    " <a $pass_popup>" .
@@ -149,8 +155,9 @@ function login($cible, $prive = 'prive', $message_login='', $action='') {
 	if ($login) {
 		// Affiche formulaire de login en incluant le javascript MD5
 		$flag_challenge_md5 = ($source_auteur == 'spip');
+		$src = _DIR_RESTREINT_ABS . 'md5.js';
 
-		if ($flag_challenge_md5) echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
+		if ($flag_challenge_md5) echo "<script type=\"text/javascript\" src=\"$src\"></script>\n";
 		echo "<form name='form_login' action='./spip_cookie.php3' method='post'";
 		if ($flag_challenge_md5) echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
@@ -164,14 +171,14 @@ function login($cible, $prive = 'prive', $message_login='', $action='') {
 		if ($flag_challenge_md5) {
 			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 			echo "<script type=\"text/javascript\"><!--\n" .
-			  "document.write('".addslashes(_T('login_login'))." <b>$login</b> <br .><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
+			  "document.write('".addslashes(_T('login_login'))." <b>$login</b><br /><a href=\"spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\"><font size=\"2\">["._T('login_autre_identifiant')."]</font></a>');\n" .
 				"//--></script>\n";
 			echo "<input type='hidden' name='session_login_hidden' value='$login' />";
 
 			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
 			echo "<noscript>";
 			echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
-			echo _T('login_non_securise')." <a href=\"".quote_amp($action)."\">"._T('login_recharger')."</a>.<p /></font>\n";
+			echo _T('login_non_securise')." <a href=\"".quote_amp($action)."\">"._T('login_recharger')."</a>.</font>\n";
 		}
 		echo "<label><b>"._T('login_login2')."</b><br /></label>";
 		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />\n";
