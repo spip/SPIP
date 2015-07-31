@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Changer',
 'bouton_chercher' => 'Chercher',
 'bouton_choisir' => 'Choisir',
+'bouton_enregistrer' => 'Enregistrer',
 'bouton_radio_desactiver_messagerie_interne' => 'D&eacute;sactiver la messagerie interne',
 'bouton_radio_envoi_annonces' => 'Envoyer les annonces &eacute;ditoriales',
 'bouton_radio_non_envoi_annonces' => 'Ne pas envoyer d\'annonces',
@@ -183,6 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Fichier @fichier@ introuvable',
 'form_deja_inscrit' => 'Vous &ecirc;tes d&eacute;j&agrave; inscrit.',
 'form_email_non_valide' => 'Votre adresse email n\'est pas valide.',
 'form_forum_access_refuse' => 'Vous n\'avez plus acc&egrave;s &agrave; ce site.',
