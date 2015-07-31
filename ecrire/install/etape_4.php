@@ -46,7 +46,7 @@ function install_etape_4_dist()
 	// mettre a jour si necessaire l'adresse du site
 	// securite si on arrive plus a se loger
 	include_spip('inc/config');
-	set_request('adresse_site','');
+	$_POST['adresse_site'] = '';
 	appliquer_modifs_config();
 
 	// aller a la derniere etape qui clos l'install et redirige
