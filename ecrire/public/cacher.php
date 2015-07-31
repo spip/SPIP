@@ -229,9 +229,11 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Toute la suite correspond au premier appel
 
+	$contexte_implicite = $page['contexte_implicite'];
+
 	// Cas ignorant le cache car completement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
-	OR (substr($page,0,8)=='modeles/') 
+	OR (substr($contexte_implicite['cache'],0,8)=='modeles/') 
 	OR (_request('connect'))
 // Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
 // et n'y ecrire que la compilation des squelettes (pas les pages produites)
@@ -247,7 +249,6 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// Controler l'existence d'un cache nous correspondant, dans les
 	// deux versions possibles : session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
-	$contexte_implicite = $page['contexte_implicite'];
 	$lastmodified = 0;
 	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
 		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f, spip_session())), $page);
