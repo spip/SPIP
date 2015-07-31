@@ -71,7 +71,7 @@ function init_champs_squel() {
 		'CHARSET', 'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM',
 		'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 'ID_AUTEUR',
 		'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE',
-		'ID_GROUPE', 'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF',
+		'ID_GROUPE', 'ID_VIGNETTE', 'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF',
 		'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE', 'DATE',
 		'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS', 'LANG',
 		'LANG_LEFT', 'LANG_RIGHT', 'LANG_DIR', 'LESAUTEURS', 'EMAIL',
@@ -239,6 +239,7 @@ function init_champs_squel() {
 		'ID_DOCUMENT' => 'id_document',
 		'ID_VIGNETTE' => 'id_vignette',
 		'ID_TYPE' => 'id_type',
+		'ID_ARTICLE' => 'id_article',
 		'TITRE' => 'titre',
 		'DESCRIPTIF' => 'descriptif',
 		'DATE' => 'date',
@@ -355,6 +356,7 @@ function init_champs_squel() {
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_article"] = $row["id_article"];
 		$contexte["id_breve"] = $row["id_breve"];
+		$contexte["id_syndic"] = $row["id_syndic"];
 		$contexte["id_parent"] = $row["id_parent"];
 		$contexte["id_auteur"] = $row["id_auteur"];
 		$contexte["date"] = $row["date_heure"];
