@@ -1,3 +1,5 @@
+[(#AUTORISER{configurer,admin_vider}|oui)
+
 #BOITE_OUVRIR{#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone}|concat{#VAL{info_images_auto}|_T}|wrap{'<h3>'},'simple','titrem'}
 
 [<p>(#REM|afficher_taille_cache_vignettes{})</p>]
@@ -5,3 +7,4 @@
 #BOITE_PIED
 	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,vignettes,#SELF},ajax})]
 #BOITE_FERMER
+]

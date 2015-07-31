@@ -109,11 +109,9 @@ ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
-ecrire/exec/admin_declarer.php -text
 ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
 ecrire/exec/admin_repair.php -text
-ecrire/exec/admin_tech.php -text
 ecrire/exec/aide_index.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
@@ -736,6 +734,7 @@ prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
+prive/squelettes/contenu/page-admin_tech.html -text
 prive/squelettes/contenu/page-admin_vider.html -text
 prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-charte.html -text
@@ -750,6 +749,8 @@ prive/squelettes/hierarchie/page-configurer_identite.html -text
 prive/squelettes/hierarchie/page-configurer_langage.html -text
 prive/squelettes/hierarchie/page-configurer_preferences.html -text
 prive/squelettes/hierarchie/page-typo.html -text
+prive/squelettes/inclure/admin_autres_bases.html -text
+prive/squelettes/inclure/admin_autres_bases_fonctions.php -text
 prive/squelettes/inclure/admin_vider_cache.html -text
 prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
 prive/squelettes/inclure/admin_vider_images.html -text
@@ -758,6 +759,7 @@ prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/dist.html -text
+prive/squelettes/navigation/page-admin_tech.html -text
 prive/squelettes/navigation/page-configurer_identite.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text

@@ -1,0 +1,22 @@
+[(#AUTORISER{detruire}|interdire_acces)]
+
+<h1><:titre_admin_tech:></h1>
+
+[(#AUTORISER{reparer,base})
+
+	#BOITE_OUVRIR{#VAL{texte_recuperer_base}|_T|wrap{'<h3>'},'simple','titrem'}
+		<p><:texte_crash_base:></p>
+	#BOITE_PIED
+		[(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{admin_repair}})]
+	#BOITE_FERMER
+]
+
+<INCLURE{fond=prive/squelettes/inclure/admin_autres_bases}>
+
+#BOITE_OUVRIR{#VAL{texte_effacer_base}|_T|wrap{'<h3>'},'error','titrem'}
+	<p><:info_avertissement:></p>
+	<p><:texte_admin_effacer_01:></p>
+	<p><strong><:avis_suppression_base:></strong></p>
+#BOITE_PIED
+	[(#BOUTON_ACTION{<:bouton_effacer_tout:>,#URL_ECRIRE{delete_all,reinstall=non}})]
+#BOITE_FERMER
