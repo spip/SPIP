@@ -32,7 +32,7 @@ function spip_split($reg, $texte) {
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
-	$texte = strtolower(translitteration($texte));
+	$texte = translitteration($texte);
 
 	if (lire_meta('langue_site') == 'vi')
 		$texte = strtr($texte, "'`?~.^+(-", "123456789");
@@ -43,20 +43,26 @@ function nettoyer_chaine_indexation($texte) {
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 
-	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';	// supprimer_tags()
+	// Nettoyer les tags, entites HTML, signes diacritiques...
+	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';
 	$texte = nettoyer_chaine_indexation($texte);
 
+	// Nettoyer les caracteres non-alphanumeriques
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
+
+	// Cas particulier : abbreviations d'au moins deux lettres
+	$texte = ereg_replace(" ([A-Z]{2,$min_long}) ", ' \\1___ ', $texte);
+
+	// Separer les mots
 	$table = spip_split(" +", $texte);
 
 	while (list(, $mot) = each($table)) {
-		if (strlen($mot) > $min_long or
-			(ereg("[A-Z][A-Z][A-Z]", $mot) and $mot = strtolower($mot).'_')) {
-				$h = substr(md5($mot), 0, 16);
-				$index[$h] += $val;
-				$mots .= ",(0x$h,'$mot')";
-			}
+		if (strlen($mot) > $min_long) {
+			$h = substr(md5($mot), 0, 16);
+			$index[$h] += $val;
+			$mots .= ",(0x$h,'$mot')";
+		}
 	}
 }
 
@@ -302,7 +308,7 @@ function requete_txt_integral($objet, $hash_recherche) {
 }
 
 // rechercher un mot dans le dico
-function requete_dico ($val) {
+function requete_dico($val) {
 	$min_long = 3;
 
 	// cas particulier translitteration vietnamien
@@ -321,9 +327,7 @@ function requete_dico ($val) {
 	$val = nettoyer_chaine_indexation($val);
 	if (strlen($val) > $min_long)
 		return "dico LIKE '$val%'";
-	else if (strlen($val) == $min_long) {
-		return "dico = '".$val."_'";
-	}
+	else return "dico = '".$val."___'";
 }
 
 
