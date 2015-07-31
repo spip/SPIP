@@ -747,7 +747,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$taille = $logo[1];
 					$taille_x = $logo[3];
 					$taille_y = $logo[4];
-					$taille = image_ratio($taille_x, $taille_y, 26, 18);
+					$taille = image_ratio($taille_x, $taille_y, 26, 20);
 					$w = $taille[0];
 					$h = $taille[1];
 					$fid = $logo[2];
@@ -852,7 +852,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			bandeau_titre_boite2($titre_table, "breve-24.gif", $couleur_foncee, "white");
 		}
 
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		echo "<table width='100%' cellpadding='2' cellspacing='0' border='0' background=''>";
 
 		echo $tranches;
 
@@ -875,6 +875,26 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
+
+			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
+				include_ecrire("inc_logos.php3");
+				$logo = decrire_logo("breveon$id_breve");
+				if ($logo) {
+					$fichier = $logo[0];
+					$taille = $logo[1];
+					$taille_x = $logo[3];
+					$taille_y = $logo[4];
+					$taille = image_ratio($taille_x, $taille_y, 26, 20);
+					$w = $taille[0];
+					$h = $taille[1];
+					$fid = $logo[2];
+					$hash = calculer_action_auteur ("reduire $w $h");
+
+					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='' width='$w' height='$h' border='0'></div>";
+					
+				}
+			}
+
 			$s .= typo($titre);
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
@@ -903,11 +923,11 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		spip_free_result($result);
 
 		if ($options == "avancees") {
-			if ($affrub) $largeurs = array('7', '', '170', '30');
-			else  $largeurs = array('7','', '100', '30');
+			if ($affrub) $largeurs = array('7', '', '188', '35');
+			else  $largeurs = array('7','', '100', '35');
 			$styles = array('', 'arial11', 'arial1', 'arial1');
 		} else {
-			if ($affrub) $largeurs = array('7','', '170');
+			if ($affrub) $largeurs = array('7','', '188');
 			else  $largeurs = array('7','', '100');
 			$styles = array('','arial11', 'arial1');
 		}

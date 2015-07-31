@@ -410,7 +410,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 
 function afficher_sites($titre_table, $requete) {
-	global $couleur_claire, $couleur_foncee;
+	global $couleur_claire, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 
 	$tranches = afficher_tranches_requete($requete, 3);
@@ -420,7 +420,7 @@ function afficher_sites($titre_table, $requete) {
 		if ($titre_table) echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";
 		bandeau_titre_boite2($titre_table, "site-24.gif", $couleur_claire, "black");
-		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
+		echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 
 		echo $tranches;
 
@@ -479,6 +479,27 @@ function afficher_sites($titre_table, $requete) {
 			}
 
 			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
+
+			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
+				include_ecrire("inc_logos.php3");
+				$logo = decrire_logo("siteon$id_syndic");
+				if ($logo) {
+					$fichier = $logo[0];
+					$taille = $logo[1];
+					$taille_x = $logo[3];
+					$taille_y = $logo[4];
+					$taille = image_ratio($taille_x, $taille_y, 26, 20);
+					$w = $taille[0];
+					$h = $taille[1];
+					$fid = $logo[2];
+					$hash = calculer_action_auteur ("reduire $w $h");
+
+					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='' width='$w' height='$h' border='0'></div>";
+					
+				}
+			}
+
+
 			$s .= "<img src='img_pack/$puce' alt='' width='7' height='7' border='0'>&nbsp;&nbsp;";
 			
 			$s .= typo($nom_site);
@@ -521,7 +542,7 @@ function afficher_sites($titre_table, $requete) {
 		$largeurs = array('','','');
 		$styles = array('arial11', 'arial1', 'arial1');
 		afficher_liste($largeurs, $table, $styles);
-		echo "</TABLE>";
+		echo "</table>";
 		//fin_cadre_relief();
 		echo "</div>\n";
 	}
