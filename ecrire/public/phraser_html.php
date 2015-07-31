@@ -155,6 +155,8 @@ function phraser_champs($texte,$ligne,$result) {
 		// ce ltrim est une ereur de conception
 		// mais on le conserve par souci de compatibilité
 		$texte = ltrim($suite);
+		if ($champ->nom_champ == 'EMBED_DOCUMENT')
+			phraser_vieux_emb($champ);
 		$result[] = $champ;
 	  } else {
 	    // faux champ
@@ -334,7 +336,8 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			if (preg_match(",^LOGO_[A-Z]+,", $match[4])
 			AND $champ->param) {
 				phraser_vieux_logos($champ);
-			}
+			} elseif ($match[4] == 'EMBED_DOCUMENT')
+				phraser_vieux_emb($champ);
 			$champ->avant =
 				phraser_champs_exterieurs($match[1],$n,$sep,$result);
 			$debut = substr($champ->apres,1);
@@ -408,6 +411,31 @@ function phraser_vieux_logos($p)
 
 	}
 	array_unshift($p->param, $args);
+}
+
+function phraser_vieux_emb($p)
+{
+	if (!is_array($p->param))
+		$p->param=array();
+
+	// Produire le premier argument {emb}
+	$texte = new Texte;
+	$texte->texte='emb';
+	$param = array('', array($texte));
+
+	// Transformer les filtres en arguments
+	for ($i=0; $i<count($p->param); $i++) {
+		if ($p->param[$i][0]) {
+			if (!strstr($p->param[$i][0], '='))
+				break;# on a rencontre un vrai filtre, c'est fini
+			$texte = new Texte;
+			$texte->texte=$p->param[$i][0];
+			$param[] = array($texte);
+		}
+		array_shift($p->param);
+	}
+	array_unshift($p->param, $param);	
+	$p->nom_champ = 'MODELE';
 }
 
 function phraser_logo_faux_filtres($nom)
