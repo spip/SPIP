@@ -56,9 +56,7 @@ if ($id_parent) {
 
 
 if ($titre_parent) {
-	debut_cadre_relief("forum-interne-24.gif");
-	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Sans,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
-	echo "<tr><td bgcolor='#EEEEEE' class='serif2' style='padding:5px;'>";
+	debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre_parent));
 	echo "<span class='arial2'>$date_heure_parent</span>";
 	echo " ".typo($auteur_parent);
 
@@ -73,8 +71,7 @@ if ($titre_parent) {
 		echo "<p align='left'><font face='Verdana,Arial,Sans,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font>";
 	}
 
-	echo "</td></tr></table>";
-	fin_cadre_relief();
+	fin_cadre_forum();
 
 	if ($modif_forum == "oui") {
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
@@ -85,10 +82,9 @@ if ($titre_parent) {
 
 
 if ($modif_forum == "oui") {
-	debut_cadre_relief();
+	debut_cadre_thread_forum("", false, "", typo($titre_message));
 
-	echo "<b>".typo($titre_message)."</b>";
-	echo "<p>".propre($texte);
+	echo propre($texte);
 
 	if (strlen($nom_site)>0) {
 		echo "<p><a href='$url_site'>$nom_site</a>";
@@ -97,7 +93,7 @@ if ($modif_forum == "oui") {
 	echo "<form action='forum_envoi.php3' name='formulaire' method='post'>";
 	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='"._T('bouton_envoyer_message')."'></div>";
 
-	fin_cadre_relief();
+	fin_cadre_thread_forum();
 	if ($titre_parent) {
 		echo "</td></tr><tr>";
 		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
@@ -108,7 +104,7 @@ else {
 	echo "<FORM ACTION='forum_envoi.php3' name='formulaire' METHOD='post'>";
 }
 
-echo "<p></p>";
+	echo "<div>&nbsp;</div>";
 
 
 debut_cadre_formulaire();

@@ -734,7 +734,6 @@ function afficher_jour($jour){
 
 
 debut_cadre_relief();
-echo "<CENTER>";
 
 //
 // Titre, surtitre, sous-titre
