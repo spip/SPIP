@@ -22,7 +22,9 @@ define('_META_CACHE_TIME', 1<<24);
 function inc_meta_dist()
 {
 	// Lire les meta, en cache si present, valide et lisible
-	if ($new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
+	// en cas d'install ne pas faire confiance au meta_cache eventuel
+	if ((_request('exec')!=='install' OR !test_espace_prive())
+	AND $new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
 #   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
 	AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
