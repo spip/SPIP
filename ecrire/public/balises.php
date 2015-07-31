@@ -1104,7 +1104,7 @@ function balise_INCLURE_dist($p) {
 		// Gerer ajax
 		if (isset($_contexte['ajax'])) {
 			$p->code = '( // {ajax}
-				($t = '.$p->code.')
+				(trim($t = '.$p->code.'))
 				? "<div class=\'ajaxbloc env-"
 					.encoder_contexte_ajax($l)
 					."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
@@ -1181,7 +1181,7 @@ function balise_MODELE_dist($p) {
 	// Gerer ajax
 	if (isset($_contexte['ajax'])) {
 		$p->code = '( // {ajax}
-			strlen($t = '.$p->code.')
+			strlen(trim($t = '.$p->code.'))
 			? "<div class=\'ajaxbloc env-"
 				.encoder_contexte_ajax($l)
 				."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
