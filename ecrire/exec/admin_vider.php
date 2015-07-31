@@ -102,7 +102,7 @@ if ($quota_cache) {
 
  $action = 'purger';
  $arg = 'cache';
- $hash = calculer_action_auteur("$action $arg");
+ $hash = calculer_action_auteur("$action-$arg");
 
  echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
   "\n<form action='", generer_url_action($action), "' method='POST'>", 
@@ -129,7 +129,7 @@ if ($quota_cache) {
 
  $action = 'purger';
  $arg = 'vignettes';
- $hash = calculer_action_auteur("$action $arg");
+ $hash = calculer_action_auteur("$action-$arg");
 
  echo   "\n<form action='", generer_url_action($action), "' method='POST'>",
    "\n<input type='hidden' name='action' value='$action' />",

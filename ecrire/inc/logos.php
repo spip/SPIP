@@ -118,7 +118,7 @@ function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 	}
 	else {
 		$type = $GLOBALS['table_logos'][$id_objet];
-		$hash = calculer_action_auteur("iconifier $type$mode$id");
+		$hash = calculer_action_auteur("iconifier-$type$mode$id");
 		echo debut_block_invisible(md5($titre));
 
 		echo "\n\n<form action='" . generer_url_action('iconifier') . "' method='POST'

@@ -123,7 +123,7 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 			  "</a>";
 			
 			if ($modif) {
-			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_action_auteur('supprimer', "auteur_rubrique $id_auteur $id_rubrique", $redirect), "'>",
+			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_action_auteur('supprimer', "auteur_rubrique-$id_auteur-$id_rubrique", $redirect), "'>",
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 			}

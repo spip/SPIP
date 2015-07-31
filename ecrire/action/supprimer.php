@@ -20,12 +20,12 @@ function action_supprimer_dist() {
 
 	global $action, $arg, $hash, $id_auteur;
 	include_spip('inc/session');
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
-	ereg("^([^ ]*) (.*)$", $arg, $r);
+	preg_match('/^(\w+)\W(.*)$/', $arg, $r);
 	$var_nom = 'action_supprimer_' . $r[1];
 	if (function_exists($var_nom)) {
 		spip_log("$var_nom $r[2]");
