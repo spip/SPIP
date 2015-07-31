@@ -144,32 +144,39 @@ function require_spip($f) {
 	return find_in_path($f . '.php', '', 'required');
 }
 
-// un pipeline est lie a une action et une valeur
-// chaque element du pipeline est autorise a modifier la valeur
-//
-// le pipeline execute les elements disponibles pour cette action,
-// les uns apres les autres, et retourne la valeur finale
-//
-// Cf. compose_filtres dans references.php, qui est la
-// version compilee de cette fonctionnalite
-
-// appel unitaire d'une fonction du pipeline
-// utilisee dans le script pipeline precompile
-// on passe $val par reference pour limiter les allocations memoire
-// http://doc.spip.org/@minipipe
+/**
+ * Un pipeline est lie a une action et une valeur
+ * chaque element du pipeline est autorise a modifier la valeur
+ * le pipeline execute les elements disponibles pour cette action,
+ * les uns apres les autres, et retourne la valeur finale
+ * 
+ * Cf. compose_filtres dans references.php, qui est la
+ * version compilee de cette fonctionnalite
+ * appel unitaire d'une fonction du pipeline
+ * utilisee dans le script pipeline precompile
+ * 
+ * on passe $val par reference pour limiter les allocations memoire
+ * 
+ * @param string $fond
+ * 		Nom de la fonction appelée par le pipeline
+ * @param string|array $val
+ * 		Les paramètres du pipeline, son environnement
+ * @return string|array $val
+ * 		Les paramètres du pipeline modifiés
+**/
 function minipipe($fonc,&$val){
 	// fonction
 	if (function_exists($fonc))
 		$val = call_user_func($fonc, $val);
-
+	else if (function_exists($fonc . '_dist'))
+		$val = call_user_func($fonc. '_dist', $val);
 	// Class::Methode
 	else if (preg_match("/^(\w*)::(\w*)$/S", $fonc, $regs)
 	AND $methode = array($regs[1], $regs[2])
 	AND is_callable($methode))
 		$val = call_user_func($methode, $val);
-	else {
+	else
 		spip_log("Erreur - '$fonc' non definie !");
-	}
 	return $val;
 }
 
