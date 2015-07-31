@@ -68,19 +68,31 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	if (strncmp($url,$current_base,strlen($current_base))==0)
 		$url = substr($url,strlen($current_base));
 
-	// si on est pas en train d'assembler la page principale,
-	// vider les globales url propres qui ne doivent pas etre utilisees en cas
-	// d'inversion url => objet
-	if (!$assembler) {
-		unset($_SERVER['REDIRECT_url_propre']);
-		unset($_ENV['url_propre']);
-		include_spip('inc/filtres_mini');
-		if (strpos($url,"://")===false){
-			$GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"),'/'),'/');
-		}
+	// si on est en train d'assembler la page principale,
+	// recuperer l'url depuis les globales url propres si fournies
+	// sinon extraire la bonne portion d'url
+	if ($assembler) {
+		if (isset($_SERVER['REDIRECT_url_propre']))
+			$url = $_SERVER['REDIRECT_url_propre'];
+		elseif (isset($_ENV['url_propre']))
+			$url = $_ENV['url_propre'];
 		else {
-			$GLOBALS['profondeur_url'] = max(0,substr_count($url,"/")-substr_count($current_base,"/"));
+			// ne prendre que le segment d'url qui correspond, en fonction de la profondeur calculee
+			$url = ltrim($url,'/');
+			$url = explode('/',$url);
+			while (count($url)>$GLOBALS['profondeur_url']+1)
+				array_shift($url);
+			$url = implode('/',$url);
 		}
+	}
+	unset($_SERVER['REDIRECT_url_propre']);
+	unset($_ENV['url_propre']);
+	include_spip('inc/filtres_mini');
+	if (strpos($url,"://")===false){
+		$GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"),'/'),'/');
+	}
+	else {
+		$GLOBALS['profondeur_url'] = max(0,substr_count($url,"/")-substr_count($current_base,"/"));
 	}
 
 	$url_redirect = "";
