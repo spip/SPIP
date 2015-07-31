@@ -321,20 +321,21 @@ function init_langues() {
 
 	$tout = array();
 	if (!$all_langs) {
-		if (!$d = @opendir(repertoire_lang())) break;
-		while (($f = readdir($d)) !== false) {
-			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
-				$tout[] = $regs[1];
+		if ($d = @opendir(repertoire_lang())) {
+			while (($f = readdir($d)) !== false) {
+				if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
+					$tout[] = $regs[1];
+			}
+			closedir($d);
+			sort($tout);
+			$tout = join(',', $tout);
+			// Si les langues n'ont pas change, ne rien faire
+			if ($tout != $all_langs) {
+				$GLOBALS['meta']['langues_proposees'] =	$tout;
+				include_spip('inc/meta');
+				ecrire_meta('langues_proposees', $tout);
+			} else $tout = '';
 		}
-		closedir($d);
-		sort($tout);
-		$tout = join(',', $tout);
-		// Si les langues n'ont pas change, ne rien faire
-		if ($tout != $all_langs) {
-			$GLOBALS['meta']['langues_proposees'] =	$tout;
-			include_spip('inc/meta');
-			ecrire_meta('langues_proposees', $tout);
-		} else $tout = '';
 	}
 	if (!isset($GLOBALS['meta']['langue_site'])) {
 // Initialisation : le francais si dispo, sinon la premiere langue trouvee
