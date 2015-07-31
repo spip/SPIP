@@ -579,16 +579,19 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
 	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
 	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
+	$params = array();
 	if ($p->param[0]) {
 		while (count($p->param[0])>2){
-			$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
+			array_unshift($params,array(0=>NULL,1=>array_pop($p->param[0])));
 		}
 	}
 	$__modele = interprete_argument_balise(1,$p);
 	$__modele = $__modele?", $__modele":", ''";
 	array_shift($p->param);
+	while(count($params))
+		array_unshift($p->param,array_pop($params));
 	
-	$champ = phraser_arguments_inclure($p, true); 
+	$champ = phraser_arguments_inclure($p, true);
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
