@@ -19,15 +19,25 @@ function protege_champ($texte){
 	return $texte;
 }
 
+function existe_formulaire($form)
+{
+	if (substr($form,0,11)=="FORMULAIRE_")
+		$form = strtolower(substr($form,11));
+	else 
+		$form = strtolower($form);
+
+	if (!$form) return '';
+
+	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : '';
+}
+
+
 /* prendre en charge par defaut les balises formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
 
 	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
-	$form = $p->nom_champ;
-	if (substr($form,0,11)=="FORMULAIRE_"
-	AND $form = strtolower(substr($form,11)) 
-	AND (!find_in_path('formulaires/'.$form.'.' . _EXTENSION_SQUELETTES))) {
+	if (!existe_formulaire($p->nom_champ)) {
 		    $p->code = "''";
 		    $p->interdire_scripts = false;
 		    return $p;
@@ -41,22 +51,19 @@ function balise_FORMULAIRE__dist($p) {
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
-	// recuperer les arguments passes a la balise
-	$args = func_get_args();
+	$form = existe_formulaire($form);
+	if (!$form) return '';
 
-
-	// deux moyen d'arriver ici : soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
+	// deux moyen d'arriver ici : 
+	// soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
 	// soit #FORMULAIRE_{xx}
-	if (substr($form,0,11)=="FORMULAIRE_")
-		$form = strtolower(substr($form,11));
-	else 
-		$form = strtolower($form);	
 		
-	// on enleve le premier qui est le nom de la balise et deja recupere ci-dessus
-	array_shift($args);
+	// recuperer les arguments passes a la balise
+	// on enleve le premier qui est le nom de la balise 
+	// deja recupere ci-dessus
 
-	if (!find_in_path("formulaires/$form" . '.' . _EXTENSION_SQUELETTES))
-		return '';
+	$args = func_get_args();
+	array_shift($args);
 
 	// tester si ce formulaire vient d'etre poste (memes arguments)
 	// pour ne pas confondre 2 #FORMULAIRES_XX identiques sur une meme page
