@@ -142,7 +142,11 @@ echo "<P><HR><P>";
 	$date = $row['date'];
 	$extra = $row['extra'];
 	$onfocus = $row['onfocus'];
-
+	
+	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
+	// (et donc: pas de lien de traduction)
+	if ($lier_trad) $id_article = "";
+	
 	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire');
 
 	if ($new == 'oui')
