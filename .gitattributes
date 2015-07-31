@@ -13,6 +13,7 @@ ecrire/action/desinstaller_plugin.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteur.php -text
 ecrire/action/editer_liens.php -text
+ecrire/action/editer_objet.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/etre_webmestre.php -text
 ecrire/action/iconifier.php -text

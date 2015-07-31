@@ -19,8 +19,13 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
-	$action_editer = charger_fonction("editer_$type",'action');
-	list($id,$err) = $action_editer($id);
+	if ($action_editer = charger_fonction("editer_$type",'action',true)) {
+		list($id,$err) = $action_editer($id);
+	}
+	else {
+		$action_editer = charger_fonction("editer_objet",'action');
+		list($id,$err) = $action_editer($id,$type);
+	}
 	$id_table_objet = id_table_objet($type);
 	$res[$id_table_objet] = $id;
 	if ($err OR !$id){
