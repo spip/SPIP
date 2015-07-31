@@ -177,55 +177,10 @@ if ($options == "avancees") {
 		d&eacute;sactiver cette fonctionnalit&eacute;.";
 	echo "</TD></TR>";
 
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>
-		Messagerie interne</FONT></B></TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "Vous pouvez activer ou d&eacute;sactiver l'int&eacute;gralit&eacute; du syst&egrave;me de messagerie.";
-	echo "</TD></TR>";
-
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	afficher_choix('activer_messagerie', $activer_messagerie,
 		array('oui' => 'Activer la messagerie interne',
 			'non' => 'D&eacute;sactiver la messagerie interne'));
-	echo "</TD></TR>\n";
-
-	//
-	// Activer la liste des redacteurs connectes
-	//
-	if ($activer_messagerie != "non") {
-		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT
-			FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Liste des r&eacute;dacteurs
-			connect&eacute;s</FONT></B></TD></TR>";
-
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-		echo "Lorsque le syst&egrave;me de messagerie est activ&eacute;, SPIP peut
-			indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce
-			qui vous permet d'&eacute;changer des messages en direct. Cette
-			fonctionnalit&eacute; favorise l'apparition de discussions en temps r&eacute;el
-			entre r&eacute;dacteurs <i>(et peut charger votre serveur)</i>.";
-		echo "</TD></TR>";
-
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-		afficher_choix('activer_imessage', $activer_imessage,
-			array('oui' => 'Afficher la liste des r&eacute;dacteurs connect&eacute;s',
-				'non' => 'Ne pas afficher la liste des r&eacute;dacteurs connect&eacute;s'));
-		echo "</TD></TR>\n";
-	}
-
-	echo "<TR><TD>&nbsp;</TD></TR>";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT
-		FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Forums internes</FONT></B></TD></TR>";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo propre("Outre la messagerie interne, un forum est disponible dans l'espace priv&eacute;
-		du site, ouvert &agrave; tous les r&eacute;dacteurs enregistr&eacute;s; vous pouvez choisir
-		d'y ajouter un forum r&eacute;serv&eacute; aux seuls administrateurs.");
-	echo "</TD></TR>";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
-		array('oui' => 'Activer le forum des administrateurs',
-			'non' => 'D&eacute;sactiver le forum des administrateurs'));
 	echo "</TD></TR>\n";
 
 	echo "<TR><TD ALIGN='right'>";

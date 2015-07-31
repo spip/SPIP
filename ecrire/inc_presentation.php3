@@ -1613,7 +1613,7 @@ function debut_gauche($rubrique = "asuivre") {
 	// zap sessions si bonjour
 	if (
 		($GLOBALS['bonjour'] == "oui" AND $GLOBALS['prefs']['securite'] == 'strict') // reglage perso
-		|| ($GLOBALS['bonjour'] == "oui" AND lire_meta('secu_avertissement') == 'oui') // reglage global
+		|| ($GLOBALS['bonjour'] == "oui" AND lire_meta('secu_avertissement') != 'non') // reglage global
 		|| $GLOBALS['secu'] == 'oui'	// demande specifique
 	) {
 		$securite = $GLOBALS['prefs']['securite'];
@@ -1779,7 +1779,7 @@ function debut_droite($rubrique="") {
 		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 
 		// liste des articles bloques
-		if (lire_meta("articles_modif") == "oui") {
+		if (lire_meta("articles_modif") != "non") {
 			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
 			$result = spip_query($query);
 			$num_articles_ouverts = spip_num_rows($result);

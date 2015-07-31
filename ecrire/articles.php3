@@ -718,7 +718,7 @@ if ($flag_editable) {
 	$flag_modif = false;
 
 	// Recuperer les donnees de l'article
-	if (lire_meta('articles_modif') == 'oui') {
+	if (lire_meta('articles_modif') != 'non') {
 		$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 
