@@ -652,7 +652,7 @@ function statistiques_par_mois($query, $visites_today)
 		$res .= "\n<td style='width: ${largeur}px'>";
 
 		$tagtitle= attribut_html(supprimer_tags("$mois | "
-			._T('info_visites')." ".$value));
+			._T('info_total')." ".$value));
 
 		if ($hauteur > 0){
 			if ($hauteur_moyenne > $hauteur) {

@@ -51,7 +51,7 @@ function action_logout_dist()
 
 	// Rediriger en contrant le cache navigateur (Safari3)
 	redirige_par_entete($url
-		? parametre_url($url, 'var_hasard', uniqid(), '&')
+		? parametre_url($url, 'var_hasard', uniqid(rand()), '&')
 		: generer_url_public('login'));
 }
 
