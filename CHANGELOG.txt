@@ -1,3 +1,13 @@
+SPIP-Core spip-3.0.12 -> spip-3.0.13  10 novembre 2013
+-------------------------------------------------------------
+
+r20949 | ben       |  (sam 09 nov 2013) | MAJ changelog
+r20954 | suske     |  (dim 10 nov 2013) | Report des langues
+
+SPIP-plugins-dist spip-3.0.12 -> spip-3.0.13  10 novembre 2013
+-------------------------------------------------------------
+
+r78205 | eric      |  (sam 09 nov 2013) | Il manque une parenthèse suite au rajout d'image_reduire
 
 SPIP-Core spip-3.0.11 -> spip-3.0.12  09 novembre 2013
 -------------------------------------------------------------
