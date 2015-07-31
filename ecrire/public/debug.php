@@ -54,7 +54,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	$anc = '';
 	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr id='req$i'><td style='text-align: right'><a href='#spip-debug'><b>"
+		$res .= "<tr id='req$i'><td style='text-align: right'><a href='".quote_amp($GLOBALS['REQUEST_URI'])."#spip-debug'><b>"
 		  . $i
 		  ."&nbsp;</b></a>\n</td><td>"
 		  .join("</td>\n<td>",$err)
@@ -113,7 +113,7 @@ function chrono_requete($temps)
 		$temps[$k] = $v;
 		$x = "<a style='font-family: monospace' title='"
 		  .  textebrut(preg_replace(',</tr>,', "\n",$v[0]))
-		  . "' href='#req$i'>"
+		  . "' href='".quote_amp($GLOBALS['REQUEST_URI'])."#req$i'>"
 		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
 		  . "</a>";
 		if (count($t[$boucle]) % 30 == 29) $x .= "<br />";
@@ -583,8 +583,32 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		  $req = traite_query($req,'', $c);
 		}
 		$res .= ancre_texte($req, array(), true);
-		foreach ($quoi as $view) 
-			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
+		//  formatage et affichage des resultats bruts de la requete
+		$ress_req = spip_query($req);
+		$brut_sql = '';
+		$num = 1;
+		//  eviter l'affichage de milliers de lignes
+		//  personnalisation possible dans mes_options
+		$max_aff = defined('_MAX_DEBUG_AFF') ? _MAX_DEBUG_AFF : 50;
+		while ($retours_sql = sql_fetch($ress_req)) {
+			if ($num <= $max_aff) {
+				$brut_sql .= "<h3>" .($num == 1 ? $num. " sur " .sql_count($ress_req):$num). "</h3>";
+				$brut_sql .= "<p>";
+				foreach ($retours_sql as $key => $val) {
+					$brut_sql .= "<strong>" .$key. "</strong> => " .htmlspecialchars(couper($val, 150)). "<br />\n";
+				}
+				$brut_sql .= "</p>";
+			}
+			$num++;
+		}
+		$res .= interdire_scripts($brut_sql);
+		foreach ($quoi as $view) {
+			//  ne pas afficher les $contexte_inclus
+			$view = preg_replace(",<\?php.+\?[>],Uims", "", $view);
+			if ($view) {
+				$res .= "\n<br /><fieldset>" .interdire_scripts($view). "</fieldset>";
+			}
+		}
 
 	} else if ($affiche == 'code') {
 		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
