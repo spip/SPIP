@@ -267,8 +267,8 @@ function recuperer_fragments($id_article, $id_version) {
 				## mais ce code va les nettoyer ; pour les autres charsets
 				## la situation n'est pas meilleure ni pire qu'avant)
 				if ($GLOBALS['meta']['charset'] == 'utf-8'
+				AND include_spip('inc/charsets')
 				AND !is_utf8($fragment[$i])) {
-					include_spip('inc/charsets');
 					$fragment[$i] = importer_charset($fragment[$i], 'iso-8859-1');
 				}
 

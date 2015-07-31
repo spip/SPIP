@@ -93,8 +93,8 @@ function notifier_publication_article($id_article) {
 			$l = lang_select($row['lang']);
 
 			// URL de l'article
-			charger_generer_url();
-			$url = url_absolue(generer_url_article($id_article, '','', 'publie'));
+			charger_generer_url(false);
+			$url = url_absolue(_DIR_RACINE.generer_url_article($id_article, '','', 'publie'));
 
 			$titre = nettoyer_titre_email($row['titre']);
 
@@ -109,7 +109,6 @@ function notifier_publication_article($id_article) {
 				. "-> " . $url
 				. "\n";
 			$envoyer_mail($adresse_suivi, $sujet, $courr);
-
 			if ($l) lang_select();
 		}
 	}
