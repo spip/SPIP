@@ -181,7 +181,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'entree_texte_breve' => 'Testenn ar berrskrid',
 'entree_titre_obligatoire' => '<b>Titl</b> [Rekis]<br />',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Restr ezvezant',
 'erreur_plugin_fichier_def_absent' => 'Restr termeni&ntilde; ezvezant',
 'erreur_plugin_nom_fonction_interdit' => 'Berzet eo anv ar fonksion',

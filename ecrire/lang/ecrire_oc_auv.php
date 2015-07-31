@@ -186,7 +186,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
 'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent', # NEW
 'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit', # NEW

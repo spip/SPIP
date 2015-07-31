@@ -180,7 +180,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun &auml;rem Site',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier fehlt',
 'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
 'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',

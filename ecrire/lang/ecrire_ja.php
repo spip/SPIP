@@ -187,7 +187,7 @@ SPIP&#12489;&#12461;&#12517;&#12513;&#12531;&#12488;</a>&#12434;&#12372;&#35239;
 'entree_texte_breve' => '&#12491;&#12517;&#12540;&#12473;&#12398;&#25991;',
 'entree_titre_obligatoire' => '<b>&#12479;&#12452;&#12488;&#12523;</b> [&#24517;&#38920;]<br />',
 'entree_url' => '&#12354;&#12394;&#12383;&#12398;&#12469;&#12452;&#12488;&#12398;URL',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => '&#12501;&#12449;&#12452;&#12523;&#12364;&#35211;&#12388;&#12363;&#12426;&#12414;&#12379;&#12435;',
 'erreur_plugin_fichier_def_absent' => 'Definition file missing', # NEW
 'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name', # NEW

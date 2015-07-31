@@ -188,7 +188,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'entree_texte_breve' => 'H&iacute;r sz&ouml;vege',
 'entree_titre_obligatoire' => '<b>C&iacute;m</b> [K&ouml;telez&#337;]<br />', # MODIF
 'entree_url' => 'A honlapja c&iacute;me (URL)',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Nem l&eacute;tez&#337; f&aacute;jl',
 'erreur_plugin_fichier_def_absent' => 'Nem l&eacute;tez&#337; defini&aacute;l&oacute; f&aacute;jl',
 'erreur_plugin_nom_fonction_interdit' => 'Tilos f&uuml;ggv&eacute;nyn&eacute;v',

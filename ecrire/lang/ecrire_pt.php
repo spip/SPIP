@@ -192,7 +192,7 @@ ou da rede',
 'entree_texte_breve' => 'Texto da not&iacute;cia',
 'entree_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigat&oacute;rio]<br />', # MODIF
 'entree_url' => 'O endere&ccedil;o (URL) do seu s&iacute;tio',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
 'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent', # NEW
 'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit', # NEW

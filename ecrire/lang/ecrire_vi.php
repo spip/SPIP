@@ -181,7 +181,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'entree_texte_breve' => 'N&#7897;i dung tin ng&#7855;n',
 'entree_titre_obligatoire' => '<b>T&#7921;a &#273;&#7873;</b> [B&#7855;t bu&#7897;c]<br />',
 'entree_url' => '&#272;&#7883;a ch&#7881; website c&#7911;a b&#7841;n',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'File missing', # NEW
 'erreur_plugin_fichier_def_absent' => 'Definition file missing', # NEW
 'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name', # NEW

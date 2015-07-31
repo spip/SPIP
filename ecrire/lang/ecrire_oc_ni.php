@@ -179,7 +179,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
 'entree_titre_obligatoire' => '<b>Titre</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adre&ccedil;a (URL) dau voastre sit',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier assent',
 'erreur_plugin_fichier_def_absent' => 'Fichier de definicion assent',
 'erreur_plugin_nom_fonction_interdit' => 'Nom de foncion pro&iuml;bit',
