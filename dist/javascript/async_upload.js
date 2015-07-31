@@ -77,7 +77,7 @@ function async_upload_article_edit(res,jForm){
 	      find(">div[@class]")
 	      .addClass("documents_added")
 	      .css("display","none");
-	      if (jForm.find("input[@name='arg']").val().search("/0/vignette")!=-1)
+	      if (jForm.find("input[@name='arg']").val().search("/0/image")!=-1)
 	        cont = jQuery("#liste_images");
 	      else
 	        cont = jQuery("#liste_documents");

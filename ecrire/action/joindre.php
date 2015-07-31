@@ -70,9 +70,9 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	if ($documents_actifs) {
 		$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
 	}
-     
+
 	if (!$ancre) {
-		if ($mode=='vignette')
+		if ($mode=='image')
 			$ancre = 'images';
 		else if ($type_image)
 			$ancre = 'portfolio';

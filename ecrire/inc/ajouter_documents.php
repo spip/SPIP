@@ -34,10 +34,10 @@ function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_doc
 # $nom_envoye,	# son nom chez le client (portequoi.pdf)
 # $type_lien,	# lie a un article, une breve ou une rubrique ?
 # $id_lien,	# identifiant de l'article (ou rubrique) lie
-# $mode,	# 'vignette' => image en mode image
-#		# ou vignette personnalisee liee a un document
-		# 'document' => doc ou image en mode document
-		# 'distant' => lien internet
+# $mode,	# 'image' => image en mode image
+#			# 'vignette' => personnalisee liee a un document
+			# 'document' => doc ou image en mode document
+			# 'distant' => lien internet
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
@@ -231,9 +231,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	if (!$id_document) {
 		// par defaut (upload ZIP ou ftp) integrer
 		// les images en mode 'vignette' et le reste en mode document
-		if (!in_array($mode, array('vignette', 'distant', 'document')))
+		if (!in_array($mode, array('vignette', 'distant', 'image', 'document')))
 			if ($type_image AND $type_inclus_image)
-				$mode = 'vignette';
+				$mode = 'image';
 			else
 				$mode = 'document';
 
