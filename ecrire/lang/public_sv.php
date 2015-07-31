@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Kommentera sajten',
+'copie_document_impossible' => 'Det g&aring;r inte att kopiera dokumentet',
 
 // D
 'date' => 'Datum',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Senaste artiklarna',
 'derniers_commentaires' => 'Senaste kommentarerna',
 'derniers_messages_forum' => 'Senaste forum-meddelandena',
+'documents_interdits_forum' => 'Dokument &auml;r inte till&aring;tna i forumet',
 
 // E
 'edition_mode_texte' => 'Textversion',
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Privat del',
 
 // F
+'formats_acceptes' => 'Godk&auml;nda format: @formats@.',
 'forum' => 'Forum',
 
 // H
