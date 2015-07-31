@@ -17,12 +17,13 @@ function exec_controle_petition_dist()
 {
 	exec_controle_petition_args(intval(_request('id_article')),
 				    _request('type'),
+				    _request('date'),
 				    intval(_request('debut')),
 				    intval(_request('id_signature')));
 }
 
 // http://doc.spip.org/@exec_controle_petition_args
-function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
+function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature)
 {
 	include_spip('inc/presentation');
 
@@ -58,14 +59,22 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 		include_spip('inc/minipres'); 
 		echo minipres();}
 	else {
+		$where .= "(statut='publie' OR statut='poubelle')";
+		if ($type == 'interne')   $where = "NOT($where)";
+		if ($id_article) $where .= " AND id_article=$id_article";
+		$order = "date_time DESC";
 		$signatures = charger_fonction('signatures', 'inc');
-		$r = $signatures('controle_petition',
-			$id_article,
-			$debut, 
-			$where . "(statut='publie' OR statut='poubelle')",
-			"date_time DESC",
-			 15,
-			 $type);
+		$pas = floor(1.5*_TRANCHES);
+		if ($date) {
+			include_spip('inc/forum');
+			$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
+					'FROM' => 'spip_signatures', 
+					'WHERE' => $where,
+					'ORDER BY' => $order);
+			$debut = navigation_trouve_date($date, 'd', $pas, $query);
+		}
+
+		$r = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, 15,  $type);
 
 		if (_AJAX) {
 			ajax_retour($r);
@@ -82,6 +91,12 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
 	echo debut_gauche('', true);
+
+	echo "<br /><br /><br /><br /><br />";
+
+	$res = icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
+
+	echo bloc_des_raccourcis($res);
 
 	echo debut_droite('', true);
   

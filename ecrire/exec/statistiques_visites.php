@@ -20,7 +20,6 @@ function exec_statistiques_visites_dist()
 {
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
-	if (!$aff_jours) $aff_jours = 105;
 	
 	// enregistrer *maintenant* le cookie
 	flag_svg();
@@ -37,8 +36,9 @@ function exec_statistiques_visites_dist()
 			exec_statistiques_visites_args($id_article, $aff_jours, $limit);
 		else {
 			include_spip('public/assembler');
+			$t = str_replace('spip_', '', _request('table'));
 			$fond = 'prive/transmettre/'
-			 .  (_request('table')=='visites' ? 'statistiques' : 'signatures');
+			  .  (strstr($t, 'visites') ? 'statistiques' : $t);
 			if (!$id_article)
 				$page = envoyer_page($fond, array());
 			else envoyer_page($fond . "_article", 
@@ -96,10 +96,12 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	echo "</div>";
 	echo "</div>";
 	
-	echo aff_statistique_visites_popularite($serveur);
+	$classement = array();
+	$liste = 0;
+	echo aff_statistique_visites_popularite($serveur, $id_article, $classement, $liste);
 
 	// Par visites depuis le debut
-	$result = aff_statistique_visites_par_visites($serveur);
+	$result = aff_statistique_visites_par_visites($serveur, $id_article, $classement);
 
 	if ($result OR $id_article)
 		echo creer_colonne_droite('', true);
@@ -118,34 +120,25 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	} else {
 			$table = "spip_visites";
 			$table_ref = "spip_referers";
-			$where = "0=0";
+			$where = "";
 	}
 
-	$select = "UNIX_TIMESTAMP(date) AS date_entree, UNIX_TIMESTAMP(date) AS date_time, visites as total";
-	$where2 = " date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)";
-	$order = "date_entree";
+	$select = "visites";
+	$order = "date";
 
-	$log = statistiques_collecte_date($select, $table, "$where AND $where2", '', $order, array(), $serveur);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $aff_jours ? $aff_jours : 105, $order, "SUM(visites)", $serveur, $total_absolu, $val_popularite,  $classement,  $liste);
 
-	if ($log) {
-		$r = sql_fetsel($select, $table, $where, '',  $order, "1",'',$serveur);
-		$last = 0;
-		echo debut_cadre_relief("statistiques-24.gif", true);
-		echo statistiques_tous($log,$r[$order], $last, $total_absolu, $val_popularite, $aff_jours, $classement, $id_article, $liste);
-
-		if (count($log) > 60) {
-			echo "<br />";
-			echo "<span class='verdana1 spip_small'><b>"
-			  ._T('info_visites_par_mois')."</b></span>";
-
-			$log_mois = statistiques_collecte_date("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_entree, SUM(visites) AS total", $table, "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_entree', 'date', array(), $serveur);
-			echo statistiques_par_mois($log_mois, $last);
-		}
-		echo fin_cadre_relief(true), statistiques_mode('visites');
+	echo $res;
+	if ($mois) {
+		echo "<br /><span class='verdana1 spip_small'><b>",
+			  _T('info_visites_par_mois'),
+			  "</b></span>",
+			  $mois;
 	}
 
-	if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article",'','','',$serveur)) {
-		echo statistiques_signatures($aff_jours, $id_article, statistiques_mode('signatures'), $n, $serveur);
+	if ($id_article) {
+		echo statistiques_signatures($aff_jours, $id_article, $serveur);
+		echo statistiques_forums($aff_jours, $id_article, $serveur);
 	}
 
 	$r = sql_select("referer, referer_md5, visites AS vis", $table_ref, $where, "", "vis DESC", $limit,'',$serveur);
@@ -162,41 +155,38 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 }
 
 // http://doc.spip.org/@statistiques_signatures
-function statistiques_signatures($aff_jours, $id_article, $mode, $n, $serveur)
+function statistiques_signatures($aff_jours, $id_article, $serveur)
 {
-	$stable = "spip_signatures";
-	$swhere = "id_article=$id_article";
-	$sselect = "UNIX_TIMESTAMP(date_time) AS date_time, (ROUND(UNIX_TIMESTAMP(date_time) / (24*3600)) *  (24*3600)) AS date_entree, COUNT(*) AS total";
-	$swhere2 = " date_time > DATE_SUB(NOW(),INTERVAL 420 DAY)";
-	$sgroupby = 'date_entree';
-	$sorder = "date_time";
-
-	$log = statistiques_collecte_date($sselect, $stable, "$swhere AND $swhere2", $sgroupby,$sorder,$serveur);
-
-	if ($log) {
-		$r = sql_fetsel($sselect, $stable, $swhere, $sgroupby,  $sorder, "1",'',$serveur);
-		$last = 0;
-		$res = statistiques_tous($log, $r[$sorder], $last=0, $n, 0, $aff_jours);
-	} else $res ='';
-
-	$log_mois = statistiques_collecte_date(
-	  "FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_entree, COUNT(*) AS total",
-	  'spip_signatures',
-	  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)",
-	  'date_entree',
-	  'date_entree',array(),$serveur);
+	$total = sql_countsel("spip_signatures", "id_article=$id_article");
+	if (!$total) return '';
+	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
 
 	return "<br />"
 	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
-	. debut_cadre_relief("statistiques-24.gif", true)
 	. $res
-	. fin_cadre_relief(true)
-	. $mode
-	. "<br />"
-	  . gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. statistiques_par_mois($log_mois, 0);
+	. (!$mois ? '' : (
+	  "<br />"
+	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
+	. $mois));
 }
 
+function statistiques_forums($aff_jours, $id_article, $serveur)
+{
+
+	$total = sql_countsel("spip_forum", "id_article=$id_article");
+	if (!$total) return '';
+	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
+
+	return "<br />"
+	. gros_titre(_L('Messages de forum par jour'),'', false)
+	. $res
+	. (!$mois ? '' : (
+	  "<br />"
+	. gros_titre(_L('Messages de forum par mois'),'', false)
+	. $mois));
+}
 
 // Le bouton pour CSV et pour passer de svg a htm
 
@@ -220,6 +210,4 @@ function statistiques_mode($table)
 	  	. "'>CSV</a>"
 		. "</div>\n";
 }
-
-
 ?>

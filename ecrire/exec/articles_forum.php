@@ -18,13 +18,14 @@ include_spip('inc/forum'); // pour boutons_controle_forum
 function exec_articles_forum_dist()
 {
 	exec_articles_forum_args(intval(_request('id_article')),
+				 _request('date'),
 				 intval(_request('debut')),
 				 intval(_request('pas')),
 				 intval(_request('enplus')));
 }
 
 // http://doc.spip.org/@exec_articles_forum_args
-function exec_articles_forum_args($id_article, $debut, $pas, $enplus)
+function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 {
 	if (!autoriser('modererforum', 'article', $id_article)) {
 		include_spip('inc/minipres');
@@ -38,12 +39,11 @@ function exec_articles_forum_args($id_article, $debut, $pas, $enplus)
 		       'ORDER BY' => "date DESC");
 
 	if (!$pas) $pas = 5;
-	$nav = affiche_navigation_forum($query, "articles_forum", "id_article=$id_article", $debut, $pas, $enplus);
+	$nav = affiche_navigation_forum($query, "articles_forum", "id_article=$id_article", $debut, $pas, $enplus, $date);
 
 	$select = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY'], $query['LIMIT']);
 	
 	$res = afficher_forum($select, '', '', $id_article);
-#	$res = sql_count($select);
 	$res =  "<br />$nav<br />$res<br />$nav";	
 
 	if (_AJAX) {
@@ -98,6 +98,10 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  . "</div>";
 
 	echo fin_boite_info(true);
+
+	$res = icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
+
+	echo bloc_des_raccourcis($res);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 	echo creer_colonne_droite('', true);

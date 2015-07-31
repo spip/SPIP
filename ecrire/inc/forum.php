@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@affiche_navigation_forum
-function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus)
+function affiche_navigation_forum(&$query, $script, $args, $debut, $pas=NULL, $enplus=NULL, $date=NULL)
 {
 	if (!$pas) $pas = 10;
 	if (!$enplus) $enplus = 100;
@@ -22,6 +22,10 @@ function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus
 	$total = sql_countsel($query['FROM'], $query['WHERE'], $query['GROUP BY']);
 	// pas de navigation si tout tient
 	if ($total > $pas) {
+		if ($date) {
+			preg_match('/^\w+/', $query['ORDER BY'], $m);
+			$debut = navigation_trouve_date($date, $m[0], $pas, $query);
+		}
 		if ($total <= $debut) $debut = $total-$pas;
 		$max = min($total, $debut+$enplus);
 		$tranche = $debut;
@@ -58,6 +62,22 @@ function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus
 	return $nav;
 }
 
+function navigation_trouve_date($date, $nom_date, $pas, $query)
+{
+	$debut = 0;
+	if (!is_numeric($date)) {
+		include_spip('inc/filtres');
+		list($a,$m,$j,$h,$n,$s) = recup_date($date);
+		$date = mktime($h,$n,$s,$m ? $m : 1,$j ? $j : 1,$a);
+	}
+	$q = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY']);
+	while ($r = sql_fetch($q)) {
+		if ($r[$nom_date] <= $date) break;
+		$debut++;
+	}
+	$debut -= ($debut%$pas);
+	return $debut;
+}
 
 // tous les boutons de controle d'un forum
 // nb : les forums prives (privrac ou prive), une fois effaces
@@ -66,7 +86,7 @@ function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus
 
 // http://doc.spip.org/@boutons_controle_forum
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
-	$controle = '';
+	$controle = $original = $spam = '';
 
 
 	// selection du logo et des boutons correspondant a l'etat du forum
@@ -439,7 +459,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$statut=$row['statut'];
 	$ip=$row["ip"];
 	
-	$titre_boite .= "<a href='#id$id_forum' id='id$id_forum'>"
+	$titre_boite = "<a href='#id$id_forum' id='id$id_forum'>"
 	  . typo($titre)
 	  . '</a>';
 
