@@ -30,7 +30,7 @@ function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique
  * ne representent pas l'objet edite
  */
 function formulaires_editer_article_identifier_dist($id_article='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
-	return serialize(array($id_article,$lier_trad,$row));
+	return serialize(array(intval($id_article),$lier_trad));
 }
 
 // Choix par defaut des options de presentation
