@@ -241,7 +241,7 @@ function init_codes_langues() {
 	'hu' => "magyar",
 	'hy' => "Armenian",
 	'ia' => "Interlingua",
-	'id' => "Bahasa Indonesia",
+	'id' => "Indonesia",
 	'ie' => "Interlingue",
 	'ik' => "Inupiak",
 	'is' => "&#237;slenska",
