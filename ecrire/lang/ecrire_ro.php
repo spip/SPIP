@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Ad&#259;uga&#355;i accesul la LDAP >>',
+'bouton_acces_ldap' => 'Ad&#259;uga&#355;i accesul la LDAP',
 'bouton_ajouter' => 'Ad&#259;uga&#355;i',
 'bouton_ajouter_participant' => 'AD&#258;UGA&#354;I UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANUN&#354;',
@@ -191,8 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Crea&#355;i o nou&#259; rubric&#259;',
 'icone_ecrire_nouvel_article' => '&#350;tiri con&#355;inute &icirc;n aceast&#259; rubric&#259;',
 'icone_envoyer_message' => 'Trimite&#355;i acest mesaj',
-'icone_evolution_visites' => 'Evolu&#355;ia vizitelor
-@visites@ vizite',
+'icone_evolution_visites' => 'Evolu&#355;ia vizitelor<br />@visites@ vizite',
 'icone_modif_groupe_mots' => 'Modifica&#355;i acest grup de cuvinte',
 'icone_modifier_article' => 'Modifica&#355;i acest articol',
 'icone_modifier_breve' => 'Modifica&#355;i aceast&#259; &#351;tire',
@@ -281,17 +280,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Dac&#259; aceast&#259; adres&#259; corespunde unei liste de email-uri, pute&#355;i indica mai jos adresa la care participan&#355;ii la site se pot &icirc;nscrie. Aceast&#259; adres&#259; poate fi un URL (de exemplu adresa paginii de &icirc;nsriere la list&#259; pe Web) sau o adres&#259; de email dotat&#259; cu un subiect specific (de exemplu: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Pute&#355;i s&#259; v&#259; abona&#355;i la lista de email-uri a acestui site. Ve&#355;i primi ca urmare anun&#355;uri de &#351;tiri sau articole propuse spre publicare.',
 'info_confirmer_passe' => 'Confirma&#355;i aceast&#259; nou&#259; parol&#259; :',
-'info_connexion_base' => 'Cea de-a doua etap&#259; : <b>testarea conexiunii la baza de date</b>',
+'info_connexion_base' => 'Cea de-a doua etap&#259; : <b>Testarea conexiunii la baza de date</b>',
 'info_connexion_ldap_ok' => 'Conexiunea LDAP a reu&#351;it.</b><br /> Pute&#355;i trece la etapa urm&#259;toare.',
-'info_connexion_mysql' => 'Prima etap&#259;: <b>Conexiunea MySQL</b>',
+'info_connexion_mysql' => 'Prima etap&#259;: <b>Conexiunea dumneavoastr&#259; MySQL</b>',
 'info_connexion_ok' => 'Conexiunea a reu&#351;it.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Con&#355;inutul articolelor',
 'info_creation_mots_cles' => 'Crea&#355;i &#351;i configura&#355;i aici cuvintele-cheie de pe acest site',
 'info_creation_paragraphe' => '(Pentru a crea paragrafe, l&#259;sa&#355;i pur &#351;i simplu liniile goale.)',
-'info_creation_rubrique' => '&Icirc;nainte de a putea scrie articole,
-trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
-',
+'info_creation_rubrique' => '&Icirc;nainte de a putea scrie articole,<br /> trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.<br />',
 'info_creation_tables' => 'Cea de-a patra etap&#259;: <b>Crearea tabelelor bazei de date</b>',
 'info_creer_base' => '<b>Crea&#355;i</b> o nou&#259; baze de date&nbsp;:',
 'info_dans_groupe' => '&Icirc;n grupul :',
@@ -795,7 +792,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_breves' => '&#350;tirile sunt texte scurte &#351;i simple, permi&#355;&acirc;nd publicarea rapid&#259; de informa&#355;ii concise, men&#355;inerea unei reviste a presei, o agenda ...',
 'texte_choix_base_1' => 'Alege&#355;i baza dumneavoastr&#259; :',
 'texte_choix_base_2' => 'Server-ul MySQL con&#355;ine mai multe baze de date.',
-'texte_choix_base_3' => '<b>Selec&#355;iona&#355;i</b> aici aceea care v-a fost atribuit&#259; de c&#259;tre furnizorul dumneavoastr&#259;:',
+'texte_choix_base_3' => '<b>Selec&#355;iona&#355;i</b> aici aceea care v-a fost atribuit&#259; de c&#259;tre furnizorul dumneavoastr&#259; de internet:',
 'texte_commande_vider_tables_indexation' => 'Utiliza&#355;i aceast&#259; comand&#259; pentru a goli tabelele de indexare utilizate
    de c&#259;tre motorul de c&#259;utare integrat &icirc;n SPIP. Aceast&#259; opera&#355;ie v&#259; va permite s&#259;
    c&acirc;&#351;tiga&#355;i spa&#355;iu pe disc.',
@@ -808,7 +805,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_compte_elements' => '@count@ element(e)',
 'texte_config_groupe_mots_cles' => 'Dori&#355;i s&#259; activa&#355;i configurarea avansat&#259; a cuvintelor-cheie,
    indic&acirc;nd, de exemplu, c&#259; pute&#355;i selec&#355;iona un cuv&acirc;nt unic
-   pe grup, sau c&#259; un grup este important... ?',
+   pe grup, sau c&#259; un grup este important...&nbsp;?',
 'texte_connexion_mysql' => 'V&#259; rug&#259;m s&#259; consulta&#355;i informa&#355;iile care v-au fost date de furnizorul dumneavoastr&#259; de hosting&nbsp;: ar trebui s&#259; g&#259;si&#355;i, dac&#259; furnizorul suport&#259; MySQL, codurile de acces la server-ul MySQL.',
 'texte_contenu_article' => '(Con&#355;inutul articolului &icirc;n c&acirc;teva cuvinte.)',
 'texte_contenu_articles' => '&Icirc;n func&#355;ie de formatul ales pentru site-ul dumneavoastr&#259;, pute&#355;i decide
@@ -816,8 +813,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
    Indica&#355;i lista de mai jos pentru a indica care elemente vor fi disponibile.',
 'texte_crash_base' => 'Dac&#259; baza dumneavoastr&#259; de date a suferit o c&#259;dere,
    pute&#355;i &icirc;ncerca o reparare automat&#259;.',
-'texte_creer_rubrique' => '&Icirc;nainte de a putea scrie articole,
-   trebuie s&#259; crea&#355;i o rubric&#259;.',
+'texte_creer_rubrique' => '&Icirc;nainte de a putea scrie articole,<br />   trebuie s&#259; crea&#355;i o rubric&#259;.',
 'texte_date_creation_article' => 'DATA CRE&#258;RII ARTICOLULUI&nbsp;:',
 'texte_date_publication_anterieure' => 'DATA REDACT&#258;RII ANTERIOARE&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nu afi&#351;a&#355;i data redact&#259;rii anterioare.',
@@ -884,12 +880,11 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_plusieurs_articles' => 'Mai multe articole g&#259;site pentru "@cherche_auteur@":',
 'texte_port_annuaire' => '(Valoarea implicit&#259; este &icirc;n general cea bun&#259;.)',
 'texte_presente_plugin' => 'Aceast&#259; pagin&#259; con&#355;ine lista plugin-urilor disponibile pentru acest site. Pute&#355;i s&#259; activa&#355;i plugin-urile necesare bif&acirc;nd c&#259;su&#355;a corespunz&#259;toare.',
-'texte_proposer_publication' => 'C&#259;nd articolul dumneavoastr&#259; este terminat, 
-pute&#355;i s&#259;-l propune&#355;i spre publicare.',
+'texte_proposer_publication' => 'C&acirc;nd articolul dumneavoastr&#259; este terminat,<br />pute&#355;i s&#259;-l propune&#355;i pentru publicare.',
 'texte_proxy' => '&Icirc;n anumite cazuri (intranet, re&#355;ea protejat&#259;, &#351;.a.m.d.),
  poate fi necesar&#259; folosirea unui <i>proxy</i> pentru a putea contacta site-urile sindicalizate.
   V&#259; rug&#259;m s&#259; indica&#355;i mai jos adresa proxy-ului sub forma
-  <tt><html>http://proxy:8080</html></tt>.
+  <tt><html>http://proxy:8080/path</html></tt>.
  &Icirc;n general,
   pute&#355;i l&#259;sa acest c&acirc;mp gol.',
 'texte_publication_articles_post_dates' => 'Ce comportament trebuie s&#259; adopte SPIP &icirc;n ceea ce prive&#351;te articolele
@@ -900,8 +895,7 @@ pute&#355;i s&#259;-l propune&#355;i spre publicare.',
 'texte_recapitiule_liste_documents' => 'Aceast&#259; pagin&#259; recapituleaz&#259; lista documentelor pe care le-a&#355;i plasat direct &icirc;n interiorul rubricilor. Pentru a modifica informa&#355;iile fiec&#259;rui document, urm&#259;ri&#355;i leg&#259;tura c&#259;tre pagina rubricii corespunz&#259;toare.',
 'texte_recuperer_base' => 'Repara&#355;i baza de date',
 'texte_reference_mais_redirige' => 'articol referen&#355;iat &icirc;n site-ul dumneavoastr&#259;, dar redirijat c&#259;tre un alt URL.',
-'texte_referencement_automatique' => '<b>Referen&#355;ierea automatic&#259; a unui site</b>
-Pute&#355;i s&#259; referen&#355;ia&#355;i rapid un site Web indic&acirc;nd mai jos adresa sa URL, sau adresa fi&#351;ierului s&#259;u de sindicalizare. SPIP va recupera &icirc;n mod automat informa&#355;iile referitoare la acest site (titlu, descriere, &#351;.a.m.d.).',
+'texte_referencement_automatique' => '<b>Referen&#355;ierea automatic&#259; a unui site</b><br />Pute&#355;i s&#259; referen&#355;ia&#355;i rapid un site Web indic&acirc;nd mai jos adresa sa URL, sau adresa fi&#351;ierului s&#259;u de sindicalizare. SPIP va recupera &icirc;n mod automat informa&#355;iile referitoare la acest site (titlu, descriere, &#351;.a.m.d.).',
 'texte_requetes_echouent' => '<b>Atunci c&acirc;nd cererile MySQL e&#351;ueaz&#259;
  &icirc;n mod sistematic &#351;i f&#259;r&#259; un motiv evident, este posibil
  ca baza de date &icirc;ns&#259;&#351;i s&#259; fie cauza.</b>
@@ -973,7 +967,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_cadre_forum_interne' => 'Forum intern',
 'titre_cadre_interieur_rubrique' => '&Icirc;n interiorul rubricii',
 'titre_cadre_numero_auteur' => 'AUTOR NUM&#258;RUL',
-'titre_cadre_signature_obligatoire' => '<b>Semn&#259;tur&#259;</b> [Obligatorie]
+'titre_cadre_signature_obligatoire' => '<b>Semn&#259;tura</b> [Obligatorie]
 ',
 'titre_config_fonctions' => 'Configura&#355;ia site-ului',
 'titre_config_groupe_mots_cles' => 'Configura&#355;ia grupurilor de cuvinte-cheie',

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Errore di programmazione. Questa funzione non avrebbe dovuto essere chiamata in questo contesto.',
 'avis_erreur_mysql' => 'Errore MySQL ',
 'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
+'avis_erreur_visiteur' => 'Problema di accesso all\'area riservata',
 
 
 // B
@@ -682,6 +683,7 @@ L\'immagine <b>@fichier@</b> non &egrave; passata (articolo @id_article@).
 Prendi nota di questo riferimento, ritenta l\'aggiornamento,
 e verifica che le immagini si vedano ancora
 negli articoli.',
+'texte_erreur_visiteur' => 'Si &egrave; tentato di entrare nell\'area riservata con un login non valido.',
 'texte_inc_auth_1' => 'Sei identificato con il
 login <b>@auth_login@</b>, ma non esiste pi&ugrave; nel database. 
 Prova a ',

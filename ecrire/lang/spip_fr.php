@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calendrier par semaine',
 'choix_couleur_interface' => 'couleur ',
 'choix_interface' => 'choix  de l\'interface',
+'colonne' => 'Colonne',
 'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 'correcte' => 'correcte',
 
@@ -203,6 +204,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Titre du document&nbsp;:',
 'entree_titre_image' => 'Titre de l\'image&nbsp;:',
 'envoi_via_le_site' => 'Envoi via le site',
+'erreur' => 'Erreur',
+'erreur_texte' => 'erreur(s)',
 
 
 // F
@@ -552,6 +555,7 @@ Merci de votre participation
 'lien_visite_site' => 'visiter ce site',
 'lien_visites' => '@visites@&nbsp;visites',
 'lien_voir_auteur' => 'Voir cet auteur',
+'ligne' => 'Ligne',
 'login_acces_prive' => 'acc&egrave;s &agrave; l\'espace priv&eacute;',
 'login_autre_identifiant' => 'se connecter sous un autre identifiant',
 'login_connexion_refusee' => 'Connexion refus&eacute;e.',
@@ -591,9 +595,11 @@ Merci de votre participation
 
 // N
 'navigateur_pas_redirige' => 'Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+'numero' => 'Num&eacute;ro',
 
 
 // O
+'occurence' => 'Occurence',
 'onglet_affacer_base' => 'Effacer la base',
 'onglet_auteur' => 'L\'auteur',
 'onglet_contenu_site' => 'Contenu du site',
@@ -661,6 +667,7 @@ et vous reconnecter au site.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'squelette',
 'squelette_inclus_ligne' => 'squelette inclus, ligne',
 'squelette_ligne' => 'squelette, ligne',

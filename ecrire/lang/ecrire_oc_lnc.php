@@ -341,7 +341,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_gauche_numero_breve' => 'BR&Egrave;VA NUM&Egrave;RO',
 'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <i>referidors</i>, valent a dire dels sits que contenon de ligams menant cap a v&ograve;stre quite sit, mas unicament per i&egrave;r e u&egrave;i: aquela lista s\'actualiza cada 24 oras.',
 'info_gauche_suivi_forum' => 'La pagina de <i>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
-'info_gauche_suivi_forum_2' => 'La pagina de <i>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
+'info_gauche_suivi_forum_2' => 'La pagina de <i>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dels forums del sit, tant las del sit public coma las de l\'espaci privat e vos permet de gerir aquelas contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aqu&iacute; los vesitaires registrats
  dins l\'espaci public del sit (forums amb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas dels imatges',
@@ -803,7 +803,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_compresse_ou_non' => '(Aqueste se p&ograve;t comprimir o non)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
-'texte_config_groupe_mots_cles' => 'Desiratz, vos, d\'activar la configuracion avan&ccedil;ada dels mots clau,
+'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avan&ccedil;ada dels mots clau,
  en indicant per exemple que se p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop es important...?',
 'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre albergador forn&iacute;s: i dev&egrave;tz trobar, se v&ograve;stre albergador sup&ograve;rta MySQL, los c&ograve;des de connexion al servidor MySQL.',

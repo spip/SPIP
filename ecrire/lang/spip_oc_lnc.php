@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar aquel mot clau',
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
+'afficher_trad' => 'mostrar las reviradas',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualizar la basa MySQL v&egrave;rs la version @version@; saique i a un probl&egrave;ma relatiu al drech de modificar la basa de donadas. Volgatz contactar v&ograve;stre albergador.',
 'analyse_xml' => 'Analisi XML',
 'antispam_champ_vide' => 'Volgatz daissar aquel camp void&nbsp;:',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cal pas apelar aquela foncion dins aquel cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la salvagarda (@type@ @id_objet@)! ',
+'avis_erreur_visiteur' => 'Probl&egrave;ma per accedir a l\'espaci privat',
 
 
 // B
@@ -82,6 +84,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aqueste sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
 'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent permet de seguir l\'activitat de l\'espaci public d\'aqueste sit (articles e br&egrave;vas publicats).',
 'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
+'choix_couleur_interface' => 'color ',
+'choix_interface' => 'causir l\'interf&agrave;cia',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz de contunhar? ',
 'correcte' => 'corr&egrave;cte',
 
@@ -289,7 +293,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrich(a), si&aacute; av&egrave;tz fach una error d\'adrei&ccedil;a o de mot de santa Clara. ',
 'forum_page_url' => '(se v&ograve;stre messatge se refer&iacute;s a un article publicat pel web, o a una pagina que baile mai d\'informacions, pod&egrave;tz marcar &ccedil;ai sota lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
-'forum_poste_par' => 'Messatge poste@parauteur@ que fa seguida a v&ograve;stre article.',
+'forum_poste_par' => 'Messatge mandat@parauteur@ que fa seguida a v&ograve;stre article &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, v&ograve;stre messatge s\'es pas registrat.',
 'forum_qui_etes_vous' => '<b>Qual s&egrave;tz ?</b> (opcional)',
 'forum_texte' => 'T&egrave;xt de v&ograve;stre messatge :',
@@ -583,6 +587,7 @@ Merc&eacute;s per v&ograve;stra participacion
 
 
 // M
+'masquer_trad' => 'escondre las reviradas',
 'module_fichiers_langues' => 'Fichi&egrave;rs de lenga',
 
 
@@ -681,6 +686,7 @@ e vos tornar connectar al sit.
   Notatz plan aquela refer&eacute;ncia, tornatz ensajar la mesa a
  niv&egrave;l, e verificatz pu&egrave;i que los imatges aparescan
  encara dins los articles.',
+'texte_erreur_visiteur' => 'Av&egrave;tz assajat d\'accedir a l\'espaci privat amb un identificant qu\'o permet pas.',
 'texte_inc_auth_1' => 'S&egrave;tz identificat/ada coma
    <b>@auth_login@</b>, mas aquel login exist&iacute;s pas o pas mai dins la basa.
   Ensajatz de vos',

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cau pas apelar aquela foncion dins aqueu cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@) ! ',
+'avis_erreur_visiteur' => 'Probl&egrave;ma per acc&egrave;dre a l\'espaci privat',
 
 
 // B
@@ -676,6 +677,7 @@ e vos tornar connectar au sit.
 'texte_documents_associes' => 'Li documents seguents son associats a l\'article, ma son pas estats drech inserits. Segon la compaginacion dau sit public, podran apar&eacute;isser sota forma de documents jonchs.',
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela referen&ccedil;a, tornatz ensajar la mesa a niv&egrave;u, e verificatz pi que lu imatges apar&eacute;isson encara dins lu articles.',
+'texte_erreur_visiteur' => 'Av&egrave;tz assajat d\'acc&egrave;dre a l\'espaci privat emb un identificant que lo permet pas.',
 'texte_inc_auth_1' => 'Si&egrave;tz identificat/ada coma
    <b>@auth_login@</b>, ma aqueu login existisse pas &ograve; pas plus mai dins la basa.
   Temptatz de vos',
