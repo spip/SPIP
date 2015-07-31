@@ -63,7 +63,7 @@ a:active.spip-admin-boutons {
 #spip-debug fieldset {
 	background-color: #FFF;
 	font-family: "Courier New", Courier, monospace;
-	font-size: 12;
+	font-size: 12px;
 }
 
 #spip-debug legend {

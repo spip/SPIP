@@ -132,7 +132,7 @@ function http_calendrier_ics($evenements, $amj = "")
 
 # affiche un mois en grand, avec des tableau de clics vers d'autres mois
 
-function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
+function http_calendrier_init_mois($premier_jour, $mois, $annee, $date)
 {
 	global $spip_lang_left, $largeur_table, $largeur_gauche, $spip_ecran;
 
@@ -149,6 +149,7 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		'http_calendrier_clics' : 
 		'http_calendrier_sans_clics';*/
 	$fclic = 'http_calendrier_clics';
+	$dernier_jour = 31;
 	while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
 	$today=getdate(time());
 	$m=$today["mon"];
@@ -192,7 +193,8 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 function http_calendrier_aide_mess()
 {
   global $bleu, $vert, $jaune;
- return
+  if (_DIR_RESTREINT) return "";
+  return
    "<br /><br /><br />\n<table width='700'>\n<tr><td><font face='arial,helvetica,sans-serif' size='2'>" .
     "<b>"._T('info_aide')."</b>" .
     "<br />$bleu "._T('info_symbole_bleu')."\n" .
@@ -597,8 +599,9 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
 
   return "\n" .
-    http_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee", $clic) .
+    http_href("calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
     "\n" .
+    (_DIR_RESTREINT ? '' : (
     http_href("$href&type=pb", 
 		 $bleu, 
 		 _T("lien_nouvea_pense_bete"),
@@ -607,13 +610,13 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
     http_href("$href&type=normal",
 		 $vert,
 		 _T("lien_nouveau_message"),
-		 'color: green; font-family: Arial, Sans, sans-serif; font-size: 10px; ') .
+	      'color: green; font-family: Arial, Sans, sans-serif; font-size: 10px; '))) .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
       http_href("$href&type=affich",
 		   $jaune,
 		   _T("lien_nouvelle_annonce"),
-		   'color: #ff9900; font-family: Arial, Sans, sans-serif; font-size: 10px; ')));
+		'color: #ff9900; font-family: Arial, Sans, sans-serif; font-size: 10px; ')));
 }
 
 # dispose les evenements d'une semaine
@@ -1085,7 +1088,7 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 }
 
 
-function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
+function http_calendrier_init_jour($jour_today,$mois_today,$annee_today, $date){
 	global $largeur_table, $largeur_gauche, $spip_ecran;
 	$jour = journum($date);
 	$mois = mois($date);
@@ -1100,7 +1103,7 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 		$largeur_centre = $largeur_table - ($largeur_gauche + 20);
 	}
 		
-	$retour = "<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>";
+	$retour = "<div>&nbsp;</div><table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>";
 	
 	if ($spip_ecran == "large") {
 		$retour .= "<td width='$largeur_gauche' class='verdana1' valign='top'>" .
@@ -1127,7 +1130,7 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 	return $retour;
 }
 
-function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
+function http_calendrier_init_semaine($jour_today,$mois_today,$annee_today,$date)
 {
 	global $spip_ecran, $spip_lang_left, $couleur_claire;	
 	
@@ -1209,7 +1212,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 
 	if ($large == "col" ) {
 	  $entete = "<div align='center' style='padding: 5px;'><b class='verdana1'>" .
-	    http_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee",
+	    http_href("calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee",
 				 affdate_jourcourt("$annee-$mois-$jour"),
 				 '',
 				 'color:black;') .
@@ -1440,11 +1443,13 @@ WHERE	statut='publie'
  AND	date < $apres
 ORDER BY date
 ");
+	$script = (_DIR_RESTREINT ? 'article' : 'articles');
 	while($row=spip_fetch_array($result)){
 		$amj = sql_calendrier_jour_ical($row['date']);
 		$evenements[$amj][]=
 		array(
-			'URL' => "articles.php3?id_article=" . $row['id_article'],
+			'URL' => $script . _EXTENSION_PHP . "?id_article=" .
+ $row['id_article'],
 			'CATEGORIES' => 'a',
 			'DESCRIPTION' => $row['titre']);
 	}
@@ -1463,9 +1468,10 @@ ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
 		$amj = sql_calendrier_jour_ical($row['date_heure']);
+		$script = (_DIR_RESTREINT ? 'breve' : 'breves_voir');
 		$evenements[$amj][]=
 		array(
-			'URL' => "breves_voir.php3?id_breve=" . $row['id_breve'],
+			'URL' => $script . _EXTENSION_PHP . "?id_breve=" . $row['id_breve'],
 			'CATEGORIES' => 'b',
 			'DESCRIPTION' => $row['titre']);
 	}
@@ -1475,6 +1481,7 @@ ORDER BY date_heure
 function sql_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
+	if (!$connect_id_auteur) return $evenements;
 	$result=spip_query("
 SELECT	messages.id_message, messages.titre, messages.texte,
 	messages.date_heure, messages.date_fin, messages.type
@@ -1557,7 +1564,9 @@ WHERE	(lien.id_message='$id_message'
 
 
 function sql_calendrier_taches_annonces () {
+	global $connect_id_auteur;
 	$r = array();
+	if (!$connect_id_auteur) return $r;
 	$result = spip_query("
 SELECT * FROM spip_messages 
 WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
@@ -1569,6 +1578,7 @@ WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure 
 function sql_calendrier_taches_pb () {
 	global $connect_id_auteur;
 	$r = array();
+	if (!$connect_id_auteur) return $r;
 	$result = spip_query("
 SELECT * FROM spip_messages AS messages 
 WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
@@ -1582,6 +1592,7 @@ WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='ou
 function sql_calendrier_taches_rv () {
 	global $connect_id_auteur;
 	$r = array();
+	if (!$connect_id_auteur) return $r;
 	$result = spip_query("
 SELECT messages.* 
 FROM spip_messages AS messages, spip_auteurs_messages AS lien 
@@ -1605,13 +1616,14 @@ ORDER BY messages.date_heure");
 function sql_calendrier_agenda ($mois, $annee) {
 	global $connect_id_auteur;
 
+	$rv = array();
+	if (!$connect_id_auteur) return $rv;
 	$date = date("Y-m-d", mktime(0,0,0,$mois, 1, $annee));
 	$mois = mois($date);
 	$annee = annee($date);
 
 	// rendez-vous personnels dans le mois
 	$result_messages=spip_query("SELECT messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
-	$rv = array();
 	while($row=spip_fetch_array($result_messages)){
 		$rv[journum($row['date_heure'])] = 1;
 	}

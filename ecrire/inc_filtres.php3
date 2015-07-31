@@ -118,13 +118,27 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 	return '<a href="' .
 		str_replace('&', '&amp;', $href) .
 		'"' .
-		(!$style ? '' : (" style=\"" . $style . "\"")) .
-		(!$title ? '' : (" title=\"" . supprimer_tags($title)."\"")) .
-		(!$class ? '' : (" class=\"" . $class . "\"")) .
-		($evt ? " $evt" : '') .
+		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
+		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
+		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
+		($evt ? "\n$evt" : '') .
 		'>' .
 		$clic .
 		'</a>';
+}
+
+// produit une balise img avec un champ alt d'office (et different) si vide
+// attention le htmlentities et la traduction doivent etre appliques avant.
+
+function http_img_pack($img, $alt, $att) {
+  static $num = 0;
+  return "<img src='" . _DIR_IMG_PACK . $img .
+    ("'\nalt=\"" . ($alt ? $alt : ('img_pack' . $num++)) . '" ') .
+    $att . " />";
+}
+
+function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
+	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
 
 // Corrige les caracteres degoutants utilises par les Windozeries

@@ -16,7 +16,7 @@
 if (defined("_ECRIRE_INC_PRESENTATION")) return;
 define("_ECRIRE_INC_PRESENTATION", "1");
 
-include_ecrire("inc_filtres.php3"); # pour http_script (normalement déjà fait)
+include_ecrire("inc_filtres.php3"); # pour les fonctions http_* (normalement deja la)
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 
@@ -1595,14 +1595,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	// < script type="text/javascript" src="js_detectplugins.js"></script>
 
 	debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non'));
-?>
-	  <link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
-	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
-	<link rel="stylesheet" href="spip_style_print.css" type="text/css" media="print">
 
-</head>
-<?php
-	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
+	echo '<link rel="alternate stylesheet" href="', _DIR_RESTREINT, 'spip_style_invisible.css" type="text/css" title="invisible" />', "\n",
+		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n",
+		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_print.css" type="text/css" media="print">', "\n",
+		"</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
 
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
@@ -2370,13 +2367,15 @@ else {
 			// Choix de la couleur: automatique en fonction de $couleurs_spip
 
 			$link = new Link;
-			ksort($couleurs_spip);
-			while (list($key,$val) = each($couleurs_spip)) {
+			if ($couleurs_spip) {
+			  ksort($couleurs_spip);
+			  while (list($key,$val) = each($couleurs_spip)) {
 					$link->delVar('set_couleur');
 					$link->addVar('set_couleur', $key);
 					
 					echo "<a href=\"".$link->getUrl()."\">" .
 					  http_img_pack("rien.gif", "", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
+			  }
 			}
 			// echo "<img src=_DIR_IMG_PACK . 'rien.gif' width='10' height='1' />";
 		echo "</td>";
@@ -3151,24 +3150,10 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&$en_ligne=oui", $image, "rien.gif");
 }
 
-// produit une balise img avec un champ alt d'office (et different) si vide
-// attention le htmlentities et la traduction doivent etre appliques avant.
-
-function http_img_pack($img, $alt, $att) {
-  static $num = 0;
-  return "<img src='" . _DIR_IMG_PACK . $img .
-    ("'\nalt=\"" . ($alt ? $alt : ('img_pack' . $num++)) . '" ') .
-    $att . " />";
-}
 
 function http_style_background($img, $att='')
 {
   return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
     ($att ? (' ' . $att) : '') . ";'";
 }
-
-function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
-  return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
-}
-
 ?>
