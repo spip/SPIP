@@ -125,10 +125,10 @@ function creer_cache(&$page, &$chemin_cache) {
 // vieux fichiers
 // http://doc.spip.org/@nettoyer_petit_cache
 function nettoyer_petit_cache($prefix, $duree = 300) {
-	// determiner le repertoire a purger : 'CACHE/rech/'
+	// determiner le repertoire a purger : 'tmp/CACHE/rech/'
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
-		foreach (preg_files("$dircache$prefix") as $f) {
+		foreach (preg_files($dircache,'[.]txt$') as $f) {
 			if (time() - (@file_exists($f)?@filemtime($f):0) > $duree)
 				@unlink($f);
 		}
