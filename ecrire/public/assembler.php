@@ -532,7 +532,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 
 	// Appliquer le modele avec le contexte
-	$retour = recuperer_fond($fond, $contexte);
+	$retour = recuperer_fond($fond, $contexte, array(), $connect);
 
 
 	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
