@@ -38,12 +38,13 @@ if ($unquote_gpc) {
 
 $INSECURE = array();
 
-function feed_globals($table) {
+function feed_globals($table, $insecure = true) {
 	global $INSECURE;
 	if (is_array($GLOBALS[$table])) {
 	        reset($GLOBALS[$table]);
 	        while (list($key, $val) = each($GLOBALS[$table])) {
-			$GLOBALS[$key] = $INSECURE[$key] = $val;
+			$GLOBALS[$key] = $val;
+			if ($insecure) $INSECURE[$key] = $val;
 	        }
 	}
 }
@@ -51,7 +52,7 @@ function feed_globals($table) {
 feed_globals('HTTP_GET_VARS');
 feed_globals('HTTP_POST_VARS');
 feed_globals('HTTP_COOKIE_VARS');
-feed_globals('HTTP_SERVER_VARS');
+feed_globals('HTTP_SERVER_VARS', false);
 
 
 //
