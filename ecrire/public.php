@@ -21,6 +21,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 } else {
 
 	$GLOBALS['_INC_PUBLIC'] = 0;
+	define('_PIPELINE_SUFFIX',  test_espace_prive()?'_prive':'');
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
 	if (!defined('_DIR_RESTREINT_ABS'))
@@ -87,8 +88,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			traiter_appels_inclusions_ajax()
 		 OR
 			// cas des formulaires charger/verifier/traiter
-			traiter_formulaires_dynamiques())
+			traiter_formulaires_dynamiques()){
+			// lancer les taches sur affichage final, comme le cron
+			// mais sans rien afficher
+			$GLOBALS['html'] = false; // ne rien afficher
+			pipeline('affichage_final'._PIPELINE_SUFFIX, '');
 			exit; // le hit est fini !
+		}
 	}
 
 	// Il y a du texte a produire, charger le metteur en page
@@ -131,9 +137,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
 
-	
+
 	// Execution de la page calculee
-	define('_PIPELINE_SUFFIX',  test_espace_prive()?'_prive':'');
 
 	// traitements sur les entetes avant envoi
 	// peut servir pour le plugin de stats
