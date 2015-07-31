@@ -204,9 +204,20 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	$les_auteurs = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
-	$maxitems = 10;
-	$firstitem = 0;
-	$limit = "$firstitem,$maxitems";
+	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs);
+	$cpt = spip_num_rows($result);
+
+	$tmp_var = "editer_auteurs-$id";
+	$nb_aff = floor(1.5 * _TRANCHES);
+	if ($cpt > $nb_aff) {
+		$nb_aff = _TRANCHES; 
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('editer_auteurs',$arg_ajax), $nb_aff);
+	} else $tranches = '';
+	
+	$deb_aff = _request($tmp_var);
+	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+	
+	$limit = (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff");
 	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs,$limit);
 
 	// charger ici meme si ps d'auteurs
@@ -233,7 +244,8 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 
 	$t = afficher_liste($largeurs, $table, $styles);
 	if ($spip_display != 4)
-	  $t = "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
+	  $t = $tranches
+	  	. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 	    . $t
 	    . "</table>";
 	return "<div class='liste'>$t</div>\n";
