@@ -918,6 +918,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 //
 // zippe les fichiers .gz
 function ecrire_fichier ($fichier, $contenu) {
+	global $os_serveur;
 
 	// Ne rien faire si on est en preview ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
@@ -959,6 +960,7 @@ function ecrire_fichier ($fichier, $contenu) {
 			while (!spip_flock($fp, LOCK_EX, $fichier));
 
 		// recopier le temporaire
+		if ($os_serveur == 'windows') @unlink("./".$fichier);
 		$ok = @rename("./".$fichiertmp, "./".$fichier);
 
 		// liberer le verrou
