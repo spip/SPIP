@@ -1032,6 +1032,13 @@ class sqlite_analyse_query {
 		$this->corrigerField();
 		$this->corrigerTablesFrom();
 		$this->corrigerZeroAsX();
+		$this->corrigerApostrohesTordues();
+	}
+	
+	
+	// ` => rien
+	function corrigerApostrohesTordues(){
+		$this->query = str_replace('`','',$this->query);	
 	}
 	
 	
