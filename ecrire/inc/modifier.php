@@ -253,7 +253,7 @@ function revision_forum($id_forum, $c=false) {
 	// ainsi que le nouvel id_auteur dans le message modifie ; et on
 	// enregistre le nouveau date_thread
 	if ($r) {
-		spip_query("UPDATE spip_forum SET ip="._q($GLOBALS['ip']).", id_auteur="._q($GLOBALS['auteur_session']['id_auteur'])." WHERE id_forum="._q($id_forum));
+		sql_updateq('spip_forum', array('ip'=>($GLOBALS['ip']), 'id_auteur'=>($GLOBALS['auteur_session']['id_auteur'])),"id_forum="._q($id_forum));
 
 		sql_update("spip_forum", array("date_thread" => "NOW()"), "id_thread=".$t['id_thread']);
 	}

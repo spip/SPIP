@@ -47,7 +47,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	// fait tourner le codage du pass dans la base
 	if ($md5next) {
 		include_spip('inc/acces'); // pour creer_uniqid
-		@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = " . _q($md5next) . ", alea_futur = '" . creer_uniqid() ."' WHERE id_auteur=" . $row['id_auteur']);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => _q($md5next), 'alea_futur' => _q(creer_uniqid())), "id_auteur=" . $row['id_auteur']);
 		// En profiter pour verifier la securite de tmp/
 		verifier_htaccess(_DIR_TMP);
 	}

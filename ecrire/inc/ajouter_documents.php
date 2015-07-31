@@ -263,7 +263,12 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			);
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
 	} else 	// Mise a jour des descripteurs d'un vieux doc
-		spip_query("UPDATE spip_documents SET taille="._q($taille).", largeur="._q($largeur)."', hauteur="._q($hauteur).", fichier="._q($chemin) ." WHERE id_document=$id_document");
+		sql_updateq('spip_documents', array(
+			'taille' => intval($taille),
+			'largeur' => intval($largeur),
+			'hauteur' => intval($hauteur),
+			'fichier' => $chemin),
+				"id_document=$id_document");
 
 	if ($id_document_lie) {
 		sql_updateq("spip_documents", array("id_vignette" => $id_document	), "id_document=$id_document_lie");

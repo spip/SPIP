@@ -63,17 +63,12 @@ function install_etape_4_dist()
 		$email = (importer_charset($email, _DEFAULT_CHARSET));
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
-		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
-		$result = sql_select("id_auteur", "spip_auteurs", "login=" . _q($login));
-
-		unset($id_auteur);
-		if ($row = sql_fetch($result, $server_db)) $id_auteur = $row['id_auteur'];
-
-		$mdpass = md5($pass);
+		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 		$alea = creer_uniqid();
-		if ($id_auteur) {
-			spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=" . _q($alea)  . ", htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
+		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . _q($login));
+		if ($id_auteur !== NULL) {
+			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
 		}
 		else {
 			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass', " . _q($alea) .",'0minirezo')");
