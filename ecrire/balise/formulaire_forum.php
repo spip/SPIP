@@ -133,8 +133,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
 			$auteur = $cookie_user['nom'];
 			$email_auteur = $cookie_user['email'];
-			$nom_site_forum = $cookie_user['nom_site_forum'];
-			$url_site = $cookie_user['url_site'];
 		} else {
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
@@ -164,9 +162,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	include_spip('inc/cookie');
 	spip_setcookie('spip_forum_user',
 		       serialize(array('nom' => $auteur, 
-				       'email' => $email_auteur,
-				       'nom_site_forum' => $nom_site_forum,
-				       'url_site' => $url_site)));
+				       'email' => $email_auteur)));
 
 	// sauf si on a passe un parametre en argument (exemple : {#SELF})
 	if ($url_param_retour) {
