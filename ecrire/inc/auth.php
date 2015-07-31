@@ -81,7 +81,7 @@ function acces_statut($id_auteur, $statut, $bio)
 // http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
-	global $prefs, $connect_id_auteur, $connect_login;
+	global $prefs, $connect_id_auteur, $connect_login, $connect_quand;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -145,6 +145,7 @@ function inc_auth_dist() {
 	}
 
 	$connect_id_auteur = $row['id_auteur'];
+	$connect_quand = $row['quand'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 	$r = auth_rubrique($connect_id_auteur, $connect_statut);
 
