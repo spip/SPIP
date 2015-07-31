@@ -632,7 +632,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		case 'idiome':
 			$args=array();
 			foreach ($p->arg as $k => $v) {
-				if ($k) $args[]=$k.' => '.calculer_liste($v,$p->descr,$boucles,$id_boucle);
+			  if ($k) $args[]=$k.' => '.calculer_liste($v,$p->descr,$boucles,$id_boucle);
 			}
 			$code = "_T('" . $p->module . ":" .$p->nom_champ . "',array(".implode(', ',$args)."))";
 			if ($p->param) {
