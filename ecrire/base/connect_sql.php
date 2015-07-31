@@ -47,8 +47,15 @@ function spip_connect($serveur='', $version='') {
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
-		if ($f AND is_readable($f)) {
-			include($f);
+		if ($f) { 
+			if (is_readable($f)) { 
+				include($f);
+			} elseif ($serveur AND !$install) {
+				// chercher une declaration de serveur dans le path
+				// qui pourra un jour servir a declarer des bases sqlite
+				// par des plugins. Et sert aussi aux boucles POUR.
+				find_in_path("$serveur.php",'connect/',true);
+			}
 		}
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
