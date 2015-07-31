@@ -60,12 +60,27 @@ class ParamChamp {
 	var $id_boucle;
 	var $boucles;
 	var $id_mere;
-	var $code;
-	var $entete;
+	var $entete;		// code php a installer avant le calcul
+	var $code;			// code du calcul
+	var $process;		// processeurs standards, exemple 'propre(%s)'
+	var $etoile;		// le champ a ete appele avec une etoile (booleen)
+	var $type;			// 'num'erique, 'h'=texte (html) ou 'p'=script (php) ?
+						// -> definira les pre et post-traitements obligatoires
 
 	function retour() {
-	  list($code_filtre,$entete_filtre) = applique_filtres($this->fonctions, $this->code, $this->id_boucle, $this->boucles, $this->id_mere);
-	  return array($code_filtre,$this->entete.$entete_filtre);
+		// Annuler les traitements si le champ est etoile
+		if ($this->etoile) unset($this->process);
+
+		list ($code_filtre, $entete_filtre) = applique_filtres(
+			$this->fonctions,
+			$this->code,
+			$this->id_boucle,
+			$this->boucles,
+			$this->id_mere,
+			$this->type,
+			$this->process
+		);
+		return array($code_filtre, $this->entete.$entete_filtre);
 	}
 }
 

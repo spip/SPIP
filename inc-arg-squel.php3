@@ -142,7 +142,7 @@ function calculer_params($idb, &$boucles) {
 				// Valeur de comparaison
 				if ($match[3]) {
 					$val = calculer_param_dynamique($match[6], $boucles, $idb);
-					if (is_array($val)) return $val;
+					if (is_array($val)) return $val; #erreur
 				} else {
 					$val = $match[1];
 					// Si id_parent, comparer l'id_parent avec l'id_objet
@@ -413,10 +413,17 @@ function calculer_param_date($date_compare, $date_orig) {
 // Calculer les parametres
 function calculer_param_dynamique($val, &$boucles, $idb) {
 	if (ereg("^#([A-Za-z0-9_-]+)$",$val,$m)) {
-		list($c,$a) = calculer_champ('',$m[1], $idb, $boucles, $idb);
-		return (!$a ? (ereg("'(.*)'", $c, $v) ? $v[1] : $c) :
-			array(_T('info_erreur_squelette'),
-			($val . _L("&nbsp;: champ interdit dans cette comparaison")))) ;
+		list($c,$a) = calculer_champ('',$m[1], $idb, $boucles,$idb);
+		#spip_log("trouve $c");
+		if ($a) {
+			return array(_T('info_erreur_squelette'),
+			($val . _L("&nbsp;: champ interdit dans cette comparaison"))) ;
+		} else if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $c, $v))
+			return $v[0];
+		else {
+			spip_log("hum : $c");
+			return $c;
+		}
 	} else {
 		if (ereg('^\$(.*)$',$val,$m))
 			return '$Pile[0][\''. $m[1] ."']";

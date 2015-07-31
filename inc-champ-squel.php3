@@ -6,7 +6,6 @@ if (defined("_INC_CHAMP_SQUEL")) return;
 define("_INC_CHAMP_SQUEL", "1");
 
 global $exceptions_des_tables, $table_des_tables;
-global $champs_traitement, $champs_pretraitement, $champs_posttraitement;
 global $tables_relations,  $table_primary, $table_date;
 
 
@@ -44,69 +43,43 @@ $tables_relations['rubriques']['id_document'] = 'documents_rubriques';
 
 $tables_relations['syndication']['id_mot'] = 'mots_syndic';
 
+
 //
 // Construire un tableau associatif des pre-traitements de champs
 //
 
-// Textes utilisateur : ajouter la securite anti-script
-$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER', 'CHARSET',
-	'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-	'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'IP', 'BIO', 'TYPE', 'PGP',
-	'RECHERCHE'
-);
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_pretraitement[$val][] = 'trim';
-	$champs_posttraitement[$val][] = 'interdire_scripts';
-}
-$c = array('EXTRA');
-reset($c);
-while (list(, $val) = each($c)) {
-  $champs_posttraitement[$val][] = 'interdire_scripts';
-}
-   
-// Textes courts : ajouter le traitement typographique
-$c = array('NOM_SITE_SPIP', 'SURTITRE', 'TITRE', 'SOUSTITRE', 'NOM_SITE', 'LIEN_TITRE', 'NOM', 'TYPE');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'typo';
+function champs_traitements ($nom_champ) {
+	static $traitements = array (
+		'BIO' => 'traiter_raccourcis(%s)',
+		'CHAPO' => 'traiter_raccourcis(nettoyer_chapo(%s))',
+		'DESCRIPTIF' => 'traiter_raccourcis(%s)',
+		'LIEN_TITRE' => 'typo(%s)',
+		'LIEN_URL' => 'htmlspecialchars(vider_url(%s))',
+		'MESSAGE' => 'traiter_raccourcis(%s)',
+		'NOM_SITE_SPIP' => 'typo(%s)',
+		'NOM' => 'typo(%s)',
+		'PARAMETRES_FORUM' => 'htmlspecialchars(vider_url(%s))',
+		'PS' => 'traiter_raccourcis(%s)',
+		'SOUSTITRE' => 'typo(%s)',
+		'SURTITRE' => 'typo(%s)',
+		'TEXTE' => 'traiter_raccourcis(%s)',
+		'TITRE' => 'typo(%s)',
+		'TYPE' => 'typo(%s)',
+		'URL_ARTICLE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_BREVE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_DOCUMENT' => 'htmlspecialchars(vider_url(%s))',
+		'URL_FORUM' => 'htmlspecialchars(vider_url(%s))',
+		'URL_MOT' => 'htmlspecialchars(vider_url(%s))',
+		'URL_RUBRIQUE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))'
+	);
+
+	return $traitements[$nom_champ];
 }
 
-// Chapo : ne pas l'afficher si article virtuel
-$c = array('CHAPO');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'nettoyer_chapo';
-}
 
-// Textes longs : ajouter le traitement typographique + mise en forme
-$c = array('DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'BIO', 'MESSAGE');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'traiter_raccourcis';
-}
-
-// Dates : ajouter le vidage des dates egales a 00-00-0000
-$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'vider_date';
-}
-
-// URL_SITE : vider les url == 'http://'
-$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'vider_url';
-}
-
-// URLs : remplacer les & par &amp;
-$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
-	'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT');
-reset($c);
-while (list(, $val) = each($c)) {
-	$champs_traitement[$val][] = 'htmlspecialchars';
-}
 
 // champ principal des tables SQL
 

@@ -329,8 +329,9 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 				$objet->nom_champ,
 				$id_boucle,
 				$boucles,
-				$id_mere);
-			$commentaire = "/* #$objet->nom_champ */";
+				$id_mere,
+				$objet->etoile);
+			$commentaire = "/* #$objet->nom_champ".($objet->etoile?'*':'')." */";
 			list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix,
 				$id_boucle, $niv+2,$boucles, $id_mere); 
 			list($ac,$am) = calculer_liste($objet->cond_apres, $prefix,
@@ -423,7 +424,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 // (voir son utilisation, optionnelle, dans invalideur.php)
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
-function calculer_squelette($squelette, $nom, $gram) {
+function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
@@ -506,16 +507,28 @@ function calculer_squelette($squelette, $nom, $gram) {
 		}
 	}
 
-	return $code . '
+	return "
+/*
+ * Squelette : $sourcefile
+ * Date :    ".http_gmoddate(@filemtime($sourcefile))." GMT
+ * Compile : ".http_gmoddate(time())." GMT
+ * Boucles : ".join (', ', array_keys($boucles))."
+ */
+$code
+
 //
-// Fonction principale du squelette
+// Fonction principale du squelette $sourcefile
 //
-function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0) {
-' . $corps . "\n	\$t0 = " . $return . ';
-	return array("texte" => $t0,
-		"squelette" => "' . $nom . '",
-		"process_ins" => ((strpos($t0,\'<\'.\'?\')=== false) ? \'html\' : \'php\'),
-		"invalideurs" => $Cache);' . "\n}\n" ;
+function $nom (\$Cache, \$Pile, \$doublons, \$Numrows='', \$SP=0) {
+$corps
+\$t0 = $return;
+
+	return array('texte' => \$t0,
+	'squelette' => '$nom',
+	'process_ins' => ((strpos(\$t0,'<'.'?')=== false) ? 'html' : 'php'),
+	'invalideurs' => \$Cache);
+}
+";
 
 }
 

@@ -63,45 +63,34 @@ function parser_texte($texte) {
 }
 
 function parser_champs($texte) {
-  global $champs_traitement, $champs_pretraitement, $champs_posttraitement;
-
 	$result=Array();
-	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs))
-	  {
-	    $p = strpos($texte, $regs[0]);
-	    if ($p) 
-	      $result = array_merge($result,
-				    parser_texte(substr($texte, 0, $p)));
-	    $texte = $regs[5];
-	    $nom_champ = $regs[3];
-	    $champ = new Champ;
-	    $champ->nom_champ = $regs[1];
-	    $champ->fonctions = $champs_pretraitement[$nom_champ];
-	    if (!$regs[4] AND $champs_traitement[$nom_champ]) {
-	      reset($champs_traitement[$nom_champ]);
-	      while (list(, $f) = each($champs_traitement[$nom_champ])) {
-		$champ->fonctions[] = $f;
+	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
+		$p = strpos($texte, $regs[0]);
+		if ($p) {
+			$result = array_merge($result,
+			parser_texte(substr($texte, 0, $p)));
 		}
-	    }
-	    if ($champs_posttraitement[$nom_champ]) {
-	      reset($champs_posttraitement[$nom_champ]);
-	      while (list(, $f) = each($champs_posttraitement[$nom_champ])) {
-		$champ->fonctions[] = $f;
-	      }
-	    }
-	    $result[] = $champ;
-	  }
-	return (!$texte ?
-		$result :
-		array_merge($result, parser_texte($texte)));
+		$texte = $regs[5];
+
+		$champ = new Champ;
+		$champ->nom_champ = $regs[1];
+
+		// traiter #CHAMP*
+		if ($regs[4]) $champ->etoile = true;
+		$result[] = $champ;
+	}
+	if (!$texte)
+		return $result;
+	else
+		return array_merge($result, parser_texte($texte));
 }
 
 
-function parser_champs_etendus($debut)
-{
-  $sep = '##';
-  while (strpos($debut,$sep)!== false) $sep .= '#';
-  return parser_champs_interieurs($debut, $sep, array());
+function parser_champs_etendus($debut) {
+	$sep = '##';
+	while (strpos($debut,$sep)!== false)
+		$sep .= '#';
+	return parser_champs_interieurs($debut, $sep, array());
 }
 
 function parser_champs_exterieurs($debut, $sep, $nested)
@@ -125,7 +114,7 @@ function parser_champs_exterieurs($debut, $sep, $nested)
 
 function parser_champs_interieurs($texte, $sep, $nested)
 {
-  global $champs_traitement, $champs_pretraitement, $champs_posttraitement;
+  global $champs_traitement;
   $result = array();
   if (!$texte) return $result;
   $i = 0;
@@ -134,10 +123,10 @@ function parser_champs_interieurs($texte, $sep, $nested)
 	  $fonctions = $regs[6];
 	  $champ = new Champ;
 	  $champ->nom_champ = $regs[2];
+	  if ($regs[5]) $champ->etoile = true;	## a verifier ???
 	  $champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
 
 	  $champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
-	  $champ->fonctions = $champs_pretraitement[$nom_champ];
 	  if (!$regs[5] AND $champs_traitement[$nom_champ]) {
 	    reset($champs_traitement[$nom_champ]);
 	    while (list(, $f) = each($champs_traitement[$nom_champ])) {
@@ -148,12 +137,6 @@ function parser_champs_interieurs($texte, $sep, $nested)
 	    $fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
 	    reset($fonctions);
 	    while (list(, $f) = each($fonctions)) $champ->fonctions[]= $f;
-	  }
-	  if ($champs_posttraitement[$nom_champ]) {
-	    reset($champs_posttraitement[$nom_champ]);
-	    while (list(, $f) = each($champs_posttraitement[$nom_champ])) {
-	      $champ->fonctions[]= $f;
-	    }
 	  }
 	  $p = strpos($texte, $regs[0]);
 	  if ($p) {

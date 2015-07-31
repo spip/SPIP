@@ -38,17 +38,7 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 	$query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
 		($keys ? ",$keys" : '') .
 		")\n";
-	spip_query($query);  
-
-/*
-if (($autoinc && !strpos($p, ","))) {
-		$t = "spip_" . $p . _SUFFIXE_DES_CACHES;
-		spip_query("DROP TABLE IF EXISTS $t");
-		spip_log("Destruction/creation de la table $t");
-		spip_query("CREATE TABLE $t (hache char (64) NOT NULL,
-			$p char (64) NOT NULL, KEY hache (hache), KEY $p ($p))");
-	}
-*/
+	spip_query($query);
 
 }
 
@@ -57,9 +47,10 @@ if (($autoinc && !strpos($p, ","))) {
 function creer_base() {
 	global $tables_principales, $tables_auxiliaires;
 
-	// ne pas revenir plusieurs fois
-	static $vu = false;
-	if ($vu) return; else $vu = true;
+	// ne pas revenir plusieurs fois (si, au contraire, il faut pouvoir
+	// le faire car certaines mises a jour le demandent explicitement)
+	# static $vu = false;
+	# if ($vu) return; else $vu = true;
 
 	foreach($tables_principales as $k => $v)
 		spip_create_table($k, $v['field'], $v['key'], true);

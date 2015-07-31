@@ -15,7 +15,7 @@ function calculer_champ_FORMULAIRE_RECHERCHE($fonctions, $nom_champ, $id_boucle,
 	}
 	if (!$lien) $lien = 'recherche.php3';
 	$code = "((lire_meta('activer_moteur') != 'oui') ? '' : calcul_form_rech('$lien'))";
-	return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 }
 
 
@@ -25,7 +25,7 @@ function calculer_champ_FORMULAIRE_INSCRIPTION($fonctions, $nom_champ, $id_boucl
 		$spip_lang = $GLOBALS["spip_lang"];';
 	$code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
 		("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);
 }
 
@@ -42,7 +42,7 @@ function calculer_champ_FORMULAIRE_ECRIRE_AUTEUR($fonctions, $nom_champ, $id_bou
 		lang_select(\"$spip_lang\");
 		formulaire_ecrire_auteur(\"$nomauteur\", trim(\"$mailauteur\"));
 		lang_dselect(); ?'.'>"))';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);  
 }
 
@@ -55,7 +55,7 @@ function calculer_champ_FORMULAIRE_SIGNATURE($fonctions, $nom_champ, $id_boucle,
 		("<"."?php include(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\'); echo formulaire_signature($lacible);
 		lang_dselect(); ?".">"))';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);
 }
 
@@ -69,7 +69,7 @@ function calculer_champ_FORMULAIRE_SITE($fonctions, $nom_champ, $id_boucle, &$bo
 		("<"."?php include(\'inc-formulaires.php3\');
 		lang_select(\"$spip_lang\"); formulaire_site($lacible);
 		lang_dselect(); ?".">")';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);
 }
 
@@ -124,7 +124,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 		", '$type', '', \$Cache)";
 		break;
 	}
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);
 }
 
@@ -181,8 +181,6 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 # a chaque utilisation du squelette, on produira la de'finition ad hoc
 */
 function calculer_champ_FORMULAIRE_ADMIN($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-# Quand Fil sera convaincu:
-# return array("envoi_script('if (window.admin != null) admin()')",'');
   return array("'<!-- @@formulaire_admin@@45609871@@ -->'",'');
 }
 

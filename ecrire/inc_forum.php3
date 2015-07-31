@@ -20,7 +20,7 @@ function changer_statut_forum($id_forum, $statut) {
 	// invalider les pages comportant ce forum
 	include_ecrire('inc_invalideur.php3');
 	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
-	suivre_invalideur("id='id_forum/$index_forum'", "spip_caches");
+	suivre_invalideur("id='id_forum/$index_forum'");
 
 	// Signaler au moteur de recherche qu'il faut reindexer le thread
 	if ($id_parent) {

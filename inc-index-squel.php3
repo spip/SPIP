@@ -94,14 +94,18 @@ function champ_sql($champ, $p) {
 	return index_pile($p->id_boucle, $champ, $p->boucles);
 }
 
-function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
+function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere, $etoile = false) {
 	// Preparer les parametres
 	$p = new ParamChamp;
 	$p->fonctions = $fonctions;
 	$p->nom_champ = $nom_champ;
 	$p->id_boucle = $id_boucle;
-	$p->boucles = $boucles;
+	$p->boucles = $boucles;			# vraiment indispensable ?? c'est lourd et on doit pouvoir le passer plut™t par argument - d'ailleurs il y a probablement un bug actuellement car $p->boucles n'est qu'une copie de &$boucles
 	$p->id_mere = $id_mere;
+	$p->type = 'html';
+	$p->process = '';
+
+	# $p->type_requete = $boucles[$id_boucle]->type_requete; # A AJOUTER
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
 	$f = 'balise_' . $nom_champ;
@@ -113,30 +117,62 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 	if (function_exists($f) AND $p = $f($p))
 		return $p->retour();
 
-	# A SUPPRIMER
+	# A SUPPRIMER, cf. inc-form-squel.php3
 	// regarder s'il existe une fonction old style calculer_champ_NOM()
 	$f = 'calculer_champ_' . $nom_champ;
-	if (function_exists($f)) 
+	if (function_exists($f)) {
 		return $f($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
+	}
 
-	// on regarde ensuite s'il y a un champ SQL homonyme,
+	// On regarde ensuite s'il y a un champ SQL homonyme,
+	// et on definit le type et les traitements
 	$code = index_pile($id_boucle, $nom_champ, $boucles);
-	if (($code) && ($code != '$Pile[0]['.$nom_champ.']'))
-		return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	if (($code) && ($code != '$Pile[0][\''.$nom_champ.'\']')) {
+
+		// Par defaut basculer en numerique pour les #ID_xxx
+		if (substr($nom_champ,0,3) == 'ID_') $p->type = 'num';
+
+		// Aller chercher les processeurs standards (cas des #TITRE, qui
+		// ne necessitent pas une fonction balise_TITRE)
+		if (!$etoile)
+			$p->process = champs_traitements($nom_champ);
+
+		return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, $p->type, $p->process);
+	}
 
 	// si index_pile a ramene le choix par defaut, 
 	// ca doit plutot etre un champ SPIP non SQL,
-	// ou ni l'un ni l'autre
+	// ou ni l'un ni l'autre => on le renvoie sous la forme brute '#TOTO'
 	$code = "'#$nom_champ'";
-		return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	$p->type = 'php';	// pas de traitement
+	return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, $p->type);
 }
 
 
 // Genere l'application d'une liste de filtres
-function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere) {
+function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $type ='html', $process='') {
 	$milieu = '';
+
+	// pretraitements standards
+	switch ($type) {
+		case 'num':
+			$code = "intval($code)";
+			break;
+		case 'php':
+			break;
+		case 'html':
+		default:
+			$code = "trim($code)";
+			break;
+	}
+
+	// traitements standards
+	if (strpos($process, '%s') !== false)
+		$code = str_replace('%s', $code, $process);
+
+	// Appliquer les filtres perso
 	if ($fonctions) {
-		while (list(, $fonc) = each($fonctions)) {
+		foreach($fonctions as $fonc) {
 			if ($fonc) {
 				$arglist = '';
 				if (ereg('([^\{\}]*)\{(.+)\}$', $fonc, $regs)) {
@@ -165,7 +201,12 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere) {
 			}
 		}
 	}
-	return array($code,$milieu);
+
+	// post-traitement securite
+	if ($type == 'html')
+		$code = "interdire_scripts($code)";
+
+	return array($code, $milieu);
 }
 
 ?>

@@ -79,7 +79,7 @@ function charger_squelette ($squelette) {
 		}
 
 		$skel_compile = "<"."?php\n"
-		. calculer_squelette($skel, $nom, $ext)."\n?".">";
+		. calculer_squelette($skel, $nom, $ext, $sourcefile)."\n?".">";
 
 		// Evaluer le squelette
 		afficher_page_si_demande_admin ('skel', $skel_compile, "CACHE/skel_$nom.php");
@@ -120,7 +120,7 @@ function charger_squelette ($squelette) {
 # - des fonctions de traduction de balise (cf inc-index-squel)
 
 function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
-	global $dossier_squelettes;
+	global $dossier_squelettes, $delais;
 
 	/* Bonne idee mais plus tard ?
 	$dir = "$dossier_squelettes/mon-chercher.php3";
@@ -171,8 +171,10 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	}
 
 	// Entrer les invalideurs dans la base
-	include_ecrire('inc_invalideur.php3');
-	maj_invalideurs($cache, $page['invalideurs']);
+	if ($delais>0) {
+		include_ecrire('inc_invalideur.php3');
+		maj_invalideurs($cache, $page['invalideurs'], $delais);
+	}
 
 	// Retourner la structure de la page
 	return $page;

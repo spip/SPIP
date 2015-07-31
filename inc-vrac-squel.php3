@@ -4,159 +4,220 @@
 // Fonctions new style
 //
 
-function balise_NOM_SITE_SPIP_dist($params) {
-  $params->code = "lire_meta('nom_site')";
-  return $params;
+function balise_NOM_SITE_SPIP_dist($p) {
+	$p->code = "lire_meta('nom_site')";
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_EMAIL_WEBMASTER_dist($params) {
-  $params->code = "lire_meta('email_webmaster')";
-  return $params;
+function balise_EMAIL_WEBMASTER_dist($p) {
+	$p->code = "lire_meta('email_webmaster')";
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_CHARSET_dist($params) {
-  $params->code = "lire_meta('charset')";
-  return $params;
-}
-
-
-function balise_LANG_LEFT_dist($params) {
-  $params->code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
-  return $params;
-}
-
-function balise_LANG_RIGHT_dist($params) {
-  $params->code = "lang_dir(\$GLOBALS['spip_lang'],'right','left')";
-  return $params;
-}
-
-function balise_LANG_DIR_dist($params) {
-  $params->code = "lang_dir(\$GLOBALS['spip_lang'],'ltr','rtl')";
-  return $params;
-}
-
-function balise_PUCE_dist($params) {
-  $params->code = "propre('- ')";
-  return $params;
+function balise_CHARSET_dist($p) {
+	$p->code = "lire_meta('charset')";
+	$p->type = 'php';
+	return $p;
 }
 
 
-function balise_DATE_NOUVEAUTES_dist($params) {
-  $params->code = "((lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv')) ? normaliser_date(lire_meta('majnouv')) : \"'0000-00-00'\")";
-  return $params;
+function balise_LANG_LEFT_dist($p) {
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_URL_SITE_SPIP_dist($params) {
-  $params->code = "lire_meta('adresse_site')";
-  return $params;
+function balise_LANG_RIGHT_dist($p) {
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'right','left')";
+	$p->type = 'php';
+	return $p;
+}
+
+function balise_LANG_DIR_dist($p) {
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'ltr','rtl')";
+	$p->type = 'php';
+	return $p;
+}
+
+function balise_PUCE_dist($p) {
+	$p->code = "propre('- ')";
+	$p->type = 'php';
+	return $p;
 }
 
 
-function balise_URL_ARTICLE_dist($params) {
-	$_type = $params->boucles[$params->id_boucle]->type_requete;
+// #DATE
+// Cette fonction sait aller chercher dans le contexte general
+// quand #DATE est en dehors des boucles
+// http://www.spip.net/fr_article1971.html
+function balise_DATE_dist ($p) {
+	$_date = champ_sql('date', $p);
+	$p->code = "$_date";
+	$p->process = 'vider_date(%s)';
+	$p->type = 'php';
+	return $p;
+}
+
+// #DATE_REDAC
+// http://www.spip.net/fr_article1971.html
+function balise_DATE_REDAC_dist ($p) {
+	$_date = champ_sql('date_redac', $p);
+	$p->code = "$_date";
+	$p->process = 'vider_date(%s)';
+	$p->type = 'php';
+	return $p;
+}
+
+// #DATE_MODIF
+// http://www.spip.net/fr_article1971.html
+function balise_DATE_MODIF_dist ($p) {
+	$_date = champ_sql('date_modif', $p);
+	$p->code = "$_date";
+	$p->process = 'vider_date(%s)';
+	$p->type = 'php';
+	return $p;
+}
+
+// #DATE_NOUVEAUTES
+// http://www.spip.net/fr_article1971.html
+function balise_DATE_NOUVEAUTES_dist($p) {
+	$p->code = "((lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv')) ? normaliser_date(lire_meta('majnouv')) : \"'0000-00-00'\")";
+	$p->process = 'vider_date(%s)';
+	$p->type = 'php';
+	return $p;
+}
+
+function balise_URL_SITE_SPIP_dist($p) {
+	$p->code = "lire_meta('adresse_site')";
+	$p->type = 'php';
+	return $p;
+}
+
+
+function balise_URL_ARTICLE_dist($p) {
+	$_type = $p->boucles[$p->id_boucle]->type_requete;
 
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($_type == 'syndic_articles') {
-		$params->code = champ_sql('url', $params);
+		$p->code = champ_sql('url', $p);
 	}
 
 	// Cas general : chercher un id_article dans la pile
 	else {
-		$_id_article = champ_sql('id_article', $params);
-		$params->code = "generer_url_article($_id_article)";
+		$_id_article = champ_sql('id_article', $p);
+		$p->code = "generer_url_article($_id_article)";
 
-		if ($params->boucles[$params->id_boucle]->hash)
-			$params->code = "url_var_recherche(" . $params->code . ")";
+		if ($p->boucles[$p->id_boucle]->hash)
+			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
-	return $params;
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_RUBRIQUE_dist($params) {
-  $params->code = "generer_url_rubrique(" . 
-	champ_sql('id_rubrique',$params) . 
+function balise_URL_RUBRIQUE_dist($p) {
+	$p->code = "generer_url_rubrique(" . 
+	champ_sql('id_rubrique',$p) . 
 	")" ;
-  if ($params->boucles[$params->id_boucle]->hash)
-	$params->code = "url_var_recherche(" . $params->code . ")";
-  return $params;
+	if ($p->boucles[$p->id_boucle]->hash)
+	$p->code = "url_var_recherche(" . $p->code . ")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_BREVE_dist($params) {
-  $params->code = "generer_url_breve(" .
-	champ_sql('id_breve',$params) . 
+function balise_URL_BREVE_dist($p) {
+	$p->code = "generer_url_breve(" .
+	champ_sql('id_breve',$p) . 
 	")";
-  if ($params->boucles[$params->id_boucle]->hash)
-	$params->code = "url_var_recherche(" . $params->code . ")";
-  return $params;
+	if ($p->boucles[$p->id_boucle]->hash)
+	$p->code = "url_var_recherche(" . $p->code . ")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_MOT_dist($params) {
-  $params->code = "generer_url_mot(" .
-	champ_sql('id_mot',$params) .
+function balise_URL_MOT_dist($p) {
+	$p->code = "generer_url_mot(" .
+	champ_sql('id_mot',$p) .
 	")";
-  $params->code = "url_var_recherche(" . $params->code . ")";
-  return $params;
+	$p->code = "url_var_recherche(" . $p->code . ")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_FORUM_dist($params) {
-  $params->code = "generer_url_forum(" .
-	champ_sql('id_forum',$params) .")";
-  return $params;
+function balise_URL_FORUM_dist($p) {
+	$p->code = "generer_url_forum(" .
+	champ_sql('id_forum',$p) .")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_DOCUMENT_dist($params) {
-  $params->code = "generer_url_document(" .
-	champ_sql('id_document',$params) . ")";
-  return $params;
+function balise_URL_DOCUMENT_dist($p) {
+	$p->code = "generer_url_document(" .
+	champ_sql('id_document',$p) . ")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_URL_AUTEUR_dist($params) {
-  $params->code = "generer_url_auteur(" .
-	champ_sql('id_auteur',$params) .")";
-  if ($params->boucles[$params->id_boucle]->hash)
-	$params->code = "url_var_recherche(" . $params->code . ")";
-  return $params;
+function balise_URL_AUTEUR_dist($p) {
+	$p->code = "generer_url_auteur(" .
+	champ_sql('id_auteur',$p) .")";
+	if ($p->boucles[$p->id_boucle]->hash)
+	$p->code = "url_var_recherche(" . $p->code . ")";
+
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_NOTES_dist($params) {
-  $params->entete = '$lacible = $GLOBALS["les_notes"];
+function balise_NOTES_dist($p) {
+	$p->entete = '$lacible = $GLOBALS["les_notes"];
 $GLOBALS["les_notes"] = "";
 $GLOBALS["compt_note"] = 0;
 $GLOBALS["marqueur_notes"] ++;
 ';
-  $params->code = '$lacible';
-  return $params;
+	$p->code = '$lacible';
+	$p->type = 'html';
+	return $p;
 }
 
-function balise_RECHERCHE_dist($params) {
-  $params->code = 'htmlspecialchars($GLOBALS["recherche"])';
-  return $params;
+function balise_RECHERCHE_dist($p) {
+	$p->code = 'htmlspecialchars($GLOBALS["recherche"])';
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_COMPTEUR_BOUCLE_dist($params) {
-  $params->code = '$compteur_boucle';
-  return $params;
+function balise_COMPTEUR_BOUCLE_dist($p) {
+	$p->code = '$compteur_boucle';
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_TOTAL_BOUCLE_dist($params) {
-  if ($params->id_mere === '') {
-	include_local("inc-debug-squel.php3");
-	erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $params->id_boucle);
-  }
-  $params->code = "\$Numrows['$params->id_mere']";
-  $params->boucles[$params->id_mere]->numrows = true;
-  return $params;
+function balise_TOTAL_BOUCLE_dist($p) {
+	if ($p->id_mere === '') {
+		include_local("inc-debug-squel.php3");
+		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $p->id_boucle);
+	}
+	$p->code = "\$Numrows['$p->id_mere']";
+	$p->boucles[$p->id_mere]->numrows = true;
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_POINTS_dist($params) {
-  $n = 0;
-  $b = $params->id_boucle;
-  $params->code = '';
-  while ($b != '') {
-	if ($s = $params->boucles[$b]->param) {
+function balise_POINTS_dist($p) {
+	$n = 0;
+	$b = $p->id_boucle;
+	$p->code = '';
+	while ($b != '') {
+	if ($s = $p->boucles[$b]->param) {
 	  foreach($s as $v) {
 		if (strpos($v,'recherche') !== false) {
-		  $params->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
+		  $p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
 			'][points]';
 		  $b = '';
 		  break;
@@ -164,75 +225,81 @@ function balise_POINTS_dist($params) {
 	  }
 	}
 	$n++;
-	$b = $params->boucles[$b]->id_parent;
-  }
-  if (!$params->code) {
+	$b = $p->boucles[$b]->id_parent;
+	}
+	if (!$p->code) {
 	include_local("inc-debug-squel.php3");
-	erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $params->id_boucle);
-  }
-  return $params;
+	erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $p->id_boucle);
+	}
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_POPULARITE_ABSOLUE_dist($params) {
-  $params->code = 'ceil(' .
-	champ_sql('popularite', $params) .
+function balise_POPULARITE_ABSOLUE_dist($p) {
+	$p->code = 'ceil(' .
+	champ_sql('popularite', $p) .
 	')';
-  return $params;
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_POPULARITE_SITE_dist($params) {
-  $params->code = 'ceil(lire_meta(\'popularite_total\'))';
-  return $params;
+function balise_POPULARITE_SITE_dist($p) {
+	$p->code = 'ceil(lire_meta(\'popularite_total\'))';
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_POPULARITE_MAX_dist($params) {
-  $params->code = 'ceil(lire_meta(\'popularite_max\'))';
-  return $params;
+function balise_POPULARITE_MAX_dist($p) {
+	$p->code = 'ceil(lire_meta(\'popularite_max\'))';
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_EXPOSER_dist($params) {
-  global  $table_primary;
-  $on = 'on';
-  $off= '';
-  if ($params->fonctions) {
+function balise_EXPOSER_dist($p) {
+	global  $table_primary;
+	$on = 'on';
+	$off= '';
+	if ($p->fonctions) {
 	// Gerer la notation [(#EXPOSER|on,off)]
-	reset($params->fonctions);
-	list(, $onoff) = each($params->fonctions);
+	reset($p->fonctions);
+	list(, $onoff) = each($p->fonctions);
 	ereg("([^,]*)(,(.*))?", $onoff, $regs);
 	$on = addslashes($regs[1]);
 	$off = addslashes($regs[3]);
 	
 	// autres filtres
 	$filtres=Array();
-	while (list(, $nom) = each($params->fonctions))
+	while (list(, $nom) = each($p->fonctions))
 	  $filtres[] = $nom;
-	$params->fonctions = $filtres;
-  }
+	$p->fonctions = $filtres;
+	}
 
-  $type_boucle = $params->boucles[$params->id_boucle]->type_requete;
-  $primary_key = $table_primary[$type_boucle];
+	$type_boucle = $p->boucles[$p->id_boucle]->type_requete;
+	$primary_key = $table_primary[$type_boucle];
 
-  $params->code = '(calcul_exposer('
-	.champ_sql($primary_key, $params)
+	$p->code = '(calcul_exposer('
+	.champ_sql($primary_key, $p)
 	.', "'.$primary_key.'", $Pile[0]) ?'." '$on': '$off')";
-  return $params;
+	$p->type = 'php';
+	return $p;
 }
 
 
 //
 // Inserer directement un document dans le squelette
 //
-function balise_EMBED_DOCUMENT_dist($params) {
-  $params->entete = '
+function balise_EMBED_DOCUMENT_dist($p) {
+	$p->entete = '
 $lacible = '
-	. champ_sql('id_document',$params)
+	. champ_sql('id_document',$p)
 	. ';
 $lacible = embed_document($lacible, \'' .
 	($fonctions ? join($fonctions, "|") : "") .
 	'\', false);';
-  $fonctions = "";
-  $params->code = '$lacible';
-  return $params;
+	$fonctions = "";
+	$p->code = '$lacible';
+	$p->type = 'html';
+	return $p;
 }
 
 // Debut et fin de surlignage auto des mots de la recherche
@@ -241,138 +308,143 @@ $lacible = embed_document($lacible, \'' .
 // sinon elles seront remplacees par les fontions de inc_surligne
 // flag_pcre est juste une flag signalant que preg_match est dispo.
 
-function balise_DEBUT_SURLIGNE_dist($params) {
-  global $flag_pcre;
-  $params->code = ($flag_pcre ? ('\'<span class="spip_surligneconditionnel">\'') : "''");
-  return $params;
+function balise_DEBUT_SURLIGNE_dist($p) {
+	global $flag_pcre;
+	$p->code = ($flag_pcre ? ('\'<span class="spip_surligneconditionnel">\'') : "''");
+	return $p;
 }
-function balise_FIN_SURLIGNE_dist($params) {
-  global $flag_pcre;
-  $params->code = ($flag_pcre ? ('\'</span class="spip_surligneconditionnel">\'') : "''");
-  return $params;
+function balise_FIN_SURLIGNE_dist($p) {
+	global $flag_pcre;
+	$p->code = ($flag_pcre ? ('\'</span class="spip_surligneconditionnel">\'') : "''");
+	return $p;
 }
 
 // Formulaire de changement de langue
-function balise_MENU_LANG_dist($params) {
-  $params->code = '"<"."?php
+function balise_MENU_LANG_dist($p) {
+	$p->code = '"<"."?php
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang\", \$menu_lang);
 ?".">"';
-  return $params;
+	$p->type = 'php';
+	return $p;
 }
 
 // Formulaire de changement de langue / page de login
-function balise_MENU_LANG_ECRIRE_dist($params) {
-  $params->code = '"<"."?php
+function balise_MENU_LANG_ECRIRE_dist($p) {
+	$p->code = '"<"."?php
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 ?".">"';
-  return $params;
+	$p->type = 'php';
+	return $p;
 }
 
 //
 // Formulaires de login
 //
-function balise_LOGIN_PRIVE_dist($params) {
-  $params->code = '"<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">"'; 
-  return $params;
+function balise_LOGIN_PRIVE_dist($p) {
+	$p->code = '"<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">"'; 
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_LOGIN_PUBLIC_dist($params) {
-  if ($nom = $params->fonctions[0])
+function balise_LOGIN_PUBLIC_dist($p) {
+	if ($nom = $p->fonctions[0])
 	$lacible = "new Link('".$nom."')";
-  else
+	else
 	$lacible = '\$GLOBALS[\'clean_link\']';
-  $params->code = '"<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">"';
-  $params->fonctions = array();
-  return $params;
+	$p->code = '"<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">"';
+	$p->fonctions = array();
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_URL_LOGOUT_dist($params) {
-  if ($params->fonctions) {
-	$url = "&url=".$params->fonctions[0];
-	$params->fonctions = array();
-  } else {
+function balise_URL_LOGOUT_dist($p) {
+	if ($p->fonctions) {
+	$url = "&url=".$p->fonctions[0];
+	$p->fonctions = array();
+	} else {
 	$url = '&url=\'.urlencode(\$clean_link->getUrl()).\'';
-  }
-  $params->code = '"<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
+	}
+	$p->code = '"<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
 { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\'; } ?".">"';
-  return $params;
+	$p->type = 'php';
+	return $p;
 }
 
-function balise_LOGO_ARTICLE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_ARTICLE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_ARTICLE_NORMAL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_ARTICLE_NORMAL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_ARTICLE_RUBRIQUE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_ARTICLE_RUBRIQUE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_ARTICLE_SURVOL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_ARTICLE_SURVOL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_AUTEUR_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_AUTEUR_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_AUTEUR_NORMAL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_AUTEUR_NORMAL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_AUTEUR_SURVOL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_AUTEUR_SURVOL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_SITE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_SITE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_BREVE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_BREVE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_BREVE_RUBRIQUE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_BREVE_RUBRIQUE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_MOT_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_MOT_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_RUBRIQUE_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_RUBRIQUE_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_RUBRIQUE_NORMAL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_RUBRIQUE_NORMAL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_RUBRIQUE_SURVOL_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_RUBRIQUE_SURVOL_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
-function balise_LOGO_DOCUMENT_dist($params) {
-  // retour immediat: filtres derogatoires traites dans la fonction
-  return calculer_champ_LOGO($params);
+function balise_LOGO_DOCUMENT_dist($p) {
+	// retour immediat: filtres derogatoires traites dans la fonction
+	return calculer_champ_LOGO($p);
 }
 
 
@@ -383,6 +455,7 @@ function balise_INTRODUCTION_dist ($p) {
 	$_descriptif = champ_sql('descriptif', $p);
 	$p->code = "calcul_introduction('$_type', $_texte, $_chapo, $_descriptif)";
 
+	$p->type = 'html';
 	return $p;
 }
 
