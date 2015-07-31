@@ -48,9 +48,10 @@ function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
-	if (!($s = tester_config('', $bio))) return $statut;
-		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $s), "id_auteur=$id_auteur");
-	return $s;
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrire', $bio)) return $statut; //i.e. "nouveau"
+		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $bio), "id_auteur=$id_auteur");
+	return $bio;
 }
 
 // Fonction d'authentification. Retourne:
