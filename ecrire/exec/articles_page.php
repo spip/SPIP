@@ -34,11 +34,11 @@ function exec_articles_page_dist()
 	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
 
 	if (spip_num_rows($result) > 0) {
-	  echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif", "creer.gif", '', true));
+	  echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif", "creer.gif", true));
 	} else {
 		if ($connect_statut == '0minirezo') {
 		  echo _T('texte_creer_rubrique');
-		  echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.gif", "creer.gif", '',true));
+		  echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.gif", "creer.gif",true));
 	}
 }
 
@@ -51,7 +51,7 @@ debut_droite();
 // Vos articles en cours de redaction
 //
 
- echo "<P align=left>", afficher_articles(_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
+ echo "<p align='left'>", afficher_articles(_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 
@@ -67,8 +67,7 @@ echo "</p>";
 // Vos articles publies
 //
 
- echo "<p>", afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"));
-echo "</p>";
+ echo afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"));
 
 //
 //  Vos articles refuses

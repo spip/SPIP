@@ -204,7 +204,8 @@ function inc_sax_dist($page, $apply=false) {
 		$page = ob_get_contents();
 		ob_end_clean();
 	}
-	if ($validateur = charger_fonction('validateur', 'inc', true))
+	if ($GLOBALS['xml_validation']
+	AND $validateur = charger_fonction('validateur', 'inc', true))
 		$validateur($page);
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
 	xml_parser_free($xml_parser);

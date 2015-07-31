@@ -27,33 +27,35 @@ function inc_validateur_dist($data)
 
 	include_spip('inc/distant');
 	$dtd = recuperer_page($grammaire);
-	preg_match_all('/<!ELEMENT\s+(\w+)[^>]*>/', $dtd, $r);
-	$phraseur_xml->elements = $r[1];
 
 	$res = array();
 	// on ignore les entites publiques. A ameliorer a terme
 	if (preg_match_all('/<!ENTITY\s+%\s+([.\w]+)\s+"([^"]*)"\s*>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
-	    if (preg_match_all('/%([.\w]+);/', $val, $r2, PREG_SET_ORDER)) {
-	      foreach($r2 as $m2)
-		$val = str_replace($m2[0], $res[$m2[1]], $val);
-	    }
-	    $res[$nom] = $val;
+	    $res[$nom] =  expanserEntite($val, $res);
 	  }
 	}
 	$phraseur_xml->entites = $res;
+
+	// reperer pour chaque noeud ses fils potentiels, sans repetitions,
+	// pour faire une analyse syntaxique sommaire
+	$res = array();
+	if (preg_match_all('/<!ELEMENT\s+(\w+)([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
+	  foreach($r as $m) {
+	    list(,$nom, $val) = $m;
+	    $val = expanserEntite($val, $phraseur_xml->entites);
+	    $val = array_values(preg_split('/\W+/', $val));
+	    $res[$nom]= $val;
+	  }
+	}
+	$phraseur_xml->elements = $res;
 
 	$res = array();
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
-	    if (preg_match_all('/%([.\w]+);/', $val, $r2, PREG_SET_ORDER)) {
-		foreach($r2 as $m2)
-	  // parfois faux suite au non chargement des entites publiques
-		  if ($x = $phraseur_xml->entites[$m2[1]])
-		    $val = str_replace($m2[0], $x, $val);
-	    }
+	    $val = expanserEntite($val, $phraseur_xml->entites);
 	    $att = array();
 	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 	      foreach($r2 as $m2)
@@ -65,13 +67,24 @@ function inc_validateur_dist($data)
 	$phraseur_xml->attributs = $res;
 }
 
+function expanserEntite($val, $entites)
+{
+	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
+		foreach($r as $m)
+	  // parfois faux suite au non chargement des entites publiques
+			if ($x = $entites[$m[1]])
+				$val = str_replace($m[0], $x, $val);
+	}
+	return $val;
+}
+
 function validerElement($parser, $name)
 {
 	global $phraseur_xml;
 
 	if (!$phraseur_xml->elements) return;
 
-	if (!in_array($name, $phraseur_xml->elements))
+	if (!isset($phraseur_xml->elements[$name]))
 
 		$phraseur_xml->err[]= $name 
 		. '&nbsp;:&nbsp;'
@@ -79,6 +92,24 @@ function validerElement($parser, $name)
 		. _L('ligne ')
 		. xml_get_current_line_number($parser)
 		. '<br />';
+	else {
+	  $depth = $phraseur_xml->depth;
+	  $ouvrant = $phraseur_xml->ouvrant;
+	  if (isset($ouvrant[$depth])) {
+	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
+	      $pere = $r[1];
+	      if (!@in_array($name, $phraseur_xml->elements[$pere]))
+		$phraseur_xml->err[]= $name 
+		. '&nbsp;:&nbsp;'
+		. _L(" n'est pas un fils de <b>")
+		. $pere
+		. _L('</b> ligne ')
+		. xml_get_current_line_number($parser)
+		. '<br />';
+	    }
+	  }
+
+	}
 }
 
 
