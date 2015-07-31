@@ -1042,6 +1042,11 @@ function balise_INCLURE_dist($p) {
 	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $id_boucle, false);
 
 	if (isset($_contexte['fond'])) {
+		if (isset($_contexte['ajax'])){
+			$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
+			$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette('fond/ajax') . '";
+			unset($_contexte['ajax']);
+		}
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 		if (isset($_contexte['env'])
 		|| isset($_contexte['self'])

@@ -92,8 +92,11 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	}
 
 	$_contexte = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
-
-	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
+	if (isset($_contexte['fond']) && isset($_contexte['ajax'])){
+		$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
+		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette('fond/ajax') . '";
+		unset($_contexte['ajax']);
+	}	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
 	}
