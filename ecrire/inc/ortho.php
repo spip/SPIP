@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/meta');
 
 // Mettre a jour la liste locale des miroirs
 // http://doc.spip.org/@maj_miroirs_ortho

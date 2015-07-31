@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/config');
+include_spip('inc/meta');
 
 function configuration_reducteur_dist()
 {

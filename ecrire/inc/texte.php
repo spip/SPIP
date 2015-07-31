@@ -554,6 +554,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
+		spip_log("$f,$objet,$id,$params,$ancre");
 		if (function_exists($f)) {
 			if ($pour == 'url') {
 				$url = $f($id);

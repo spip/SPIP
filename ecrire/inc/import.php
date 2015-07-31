@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/acces');
+include_spip('inc/meta');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
 include_spip('base/abstract_sql');
 

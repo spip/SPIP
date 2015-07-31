@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
 include_spip("inc/indexation");
 include_spip('inc/texte');
 include_spip('inc/documents');

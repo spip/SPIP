@@ -10,7 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/minipres');
+include_spip('inc/meta');
+
 // http://doc.spip.org/@premiers_pas_etapes
 function premiers_pas_etapes($etape,$titre,$texte){
 	global $spip_lang_left;

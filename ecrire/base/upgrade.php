@@ -13,6 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/meta');
+
 // http://doc.spip.org/@base_upgrade_dist
 function base_upgrade_dist($titre)
 {
@@ -30,7 +32,6 @@ function base_upgrade_dist($titre)
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
-		include_spip('inc/meta');
 		ecrire_meta('version_installee', $version,'non');
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
@@ -412,7 +413,6 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.414, $version_installee, $version_cible)) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
-		include_spip('inc/meta');
 		$accepter_forum = substr($GLOBALS['meta']["forums_publics"],0,3) ;
 		$result = spip_query("ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL");
 
@@ -437,7 +437,6 @@ function maj_base($version_cible = 0) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1");
 
 		if ($webmaster = spip_fetch_array($result)) {
-			include_spip('inc/meta');
 			ecrire_meta('email_webmaster', $webmaster['email']);
 			ecrire_metas();
 		}
@@ -1114,10 +1113,8 @@ function maj_base($version_cible = 0) {
 
 		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_syndic as id_objet,'9' as id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-		include_spip('inc/meta');
 		lire_metas();
 		ecrire_metas();
-
 		maj_version(1.905);
 	}
 
@@ -1250,7 +1247,6 @@ function maj_base($version_cible = 0) {
 			$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
 			foreach ($IMPORT_tables_noimport as $key=>$table)
 				if ($table=='spip_meta') unset($IMPORT_tables_noimport[$key]);
-			include_spip('inc/meta');
 			ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport),'non');
 		}
 		maj_version('1.923');

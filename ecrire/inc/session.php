@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
-
 /*
  * Gestion de l'authentification par sessions
  * a utiliser pour valider l'acces (bloquant)

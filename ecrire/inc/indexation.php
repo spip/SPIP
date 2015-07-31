@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/meta');
 include_spip('base/create');
 include_spip('base/abstract_sql');
 include_spip('public/interfaces');
@@ -38,7 +37,6 @@ $INDEX_elements_objet = FALSE;
 if (isset($GLOBALS['meta']['INDEX_elements_objet']))
 	$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 if (!$INDEX_elements_objet) {
-	include_spip('inc/meta');
 	$INDEX_elements_objet['spip_articles'] = array('titre'=>8,'soustitre'=>5,'surtitre'=>5,'descriptif'=>4,'chapo'=>3,'texte'=>1,'ps'=>1,'nom_site'=>1,'extra|unserialize_join'=>1);
 	$INDEX_elements_objet['spip_breves'] = array('titre'=>8,'texte'=>2,'extra|unserialize_join'=>1);
 	$INDEX_elements_objet['spip_rubriques'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
@@ -61,7 +59,6 @@ $INDEX_objet_associes = FALSE;
 if (isset($GLOBALS['meta']['INDEX_objet_associes']))
 	$INDEX_objet_associes = unserialize($GLOBALS['meta']['INDEX_objet_associes']);
 if (!$INDEX_objet_associes) {
-	include_spip('inc/meta');
 	$INDEX_objet_associes['spip_articles'] = array('spip_documents'=>1,'spip_auteurs'=>10,'spip_mots'=>3);
 	$INDEX_objet_associes['spip_breves'] = array('spip_documents'=>1,'spip_mots'=>3);
 	$INDEX_objet_associes['spip_rubriques'] = array('spip_documents'=>1,'spip_mots'=>3);
@@ -78,7 +75,6 @@ $INDEX_elements_associes = FALSE;
 if (isset($GLOBALS['meta']['INDEX_elements_associes']))
 	$INDEX_elements_associes = unserialize($GLOBALS['meta']['INDEX_elements_associes']);
 if (!$INDEX_elements_associes){
-	include_spip('inc/meta');
 	$INDEX_elements_associes['spip_documents'] = array('titre'=>2,'descriptif'=>1);
 	$INDEX_elements_associes['spip_auteurs'] = array('nom'=>1);
 	$INDEX_elements_associes['spip_mots'] = array('titre'=>4,'descriptif'=>1);
@@ -92,7 +88,6 @@ $INDEX_critere_indexation = FALSE;
 if (isset($GLOBALS['meta']['INDEX_critere_indexation']))
 	$INDEX_critere_indexation = unserialize($GLOBALS['meta']['INDEX_critere_indexation']);
 if (!$INDEX_critere_indexation){
-	include_spip('inc/meta');
 	$INDEX_critere_indexation['spip_articles']="statut='publie'";
 	$INDEX_critere_indexation['spip_breves']="statut='publie'";
 	$INDEX_critere_indexation['spip_rubriques']="statut='publie'";
@@ -110,7 +105,6 @@ $INDEX_critere_optimisation = FALSE;
 if (isset($GLOBALS['meta']['INDEX_critere_optimisation']))
 	$INDEX_critere_optimisation = unserialize($GLOBALS['meta']['INDEX_critere_optimisation']);
 if (!$INDEX_critere_optimisation) {
-	include_spip('inc/meta');
 	$INDEX_critere_optimisation['spip_articles']="statut<>'publie'";
 	$INDEX_critere_optimisation['spip_breves']="statut<>'publie'";
 	$INDEX_critere_optimisation['spip_rubriques']="statut<>'publie'";
@@ -128,7 +122,6 @@ $INDEX_iteration_nb_maxi = FALSE;
 if (isset($GLOBALS['meta']['INDEX_iteration_nb_maxi']))
 	$INDEX_iteration_nb_maxi = unserialize($GLOBALS['meta']['INDEX_iteration_nb_maxi']);
 if (!$INDEX_iteration_nb_maxi) {
-	include_spip('inc/meta');
 	$INDEX_iteration_nb_maxi['spip_documents']=10;
 	$INDEX_iteration_nb_maxi['spip_syndic']=1;
 	ecrire_meta('INDEX_iteration_nb_maxi',serialize($INDEX_iteration_nb_maxi));
@@ -300,7 +293,6 @@ function update_index_tables(){
 function liste_index_tables() {
 	$liste_tables = array();
 	if (!isset($GLOBALS['meta']['index_table'])) {
-		include_spip('inc/meta');
 		lire_metas();
 	}
 	if (isset($GLOBALS['meta']['index_table']))

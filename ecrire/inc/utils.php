@@ -1236,11 +1236,17 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
 
-	// Lire les meta cachees et initier le noyau (espace public uniquement)
+	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
+
+	define('_RENOUVELLE_ALEA', 3600 << 2);
+
+	// Lire les meta cachees et init noyau (espace public uniquement)
+
 	$GLOBALS['noyau'] = array();
 	if (lire_fichier(_FILE_META, $meta)) {
 		$GLOBALS['meta'] = @unserialize($meta);
 		if (_DIR_RESTREINT
+		AND (!isset($_REQUEST['var_mode']))
 		AND isset($GLOBALS['meta']['noyau'])
 		AND is_array($GLOBALS['meta']['noyau'])) {
 			$GLOBALS['noyau'] = $GLOBALS['meta']['noyau'];
@@ -1248,21 +1254,25 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		}
 	}
 
+	if  (_FILE_CONNECT) {
 	// en cas d'echec refaire le fichier
-	if (!isset($GLOBALS['meta']) AND _FILE_CONNECT) {
-		include_spip('inc/meta');
-		ecrire_metas();
+		if (!isset($GLOBALS['meta'])) {
+			include_spip('inc/meta');
+			ecrire_metas();
+		}
+
+		// Forcer le renouvellement de l'alea
+
+		if ((!_DIR_RESTREINT)
+		AND (time() > _RENOUVELLE_ALEA +  @$GLOBALS['meta']['alea_ephemere_date'])) {
+			include_spip('inc/acces');
+			renouvelle_alea();
+		}
 	}
+
 	// La meta est indefinie a la premiere installation
 	$GLOBALS['langue_site'] = @$GLOBALS['meta']['langue_site'];
 	
-	# nombre de pixels maxi pour calcul de la vignette avec gd
-	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
-
-	// supprimer le noyau si on recalcule
-	if (isset($_REQUEST['var_mode']))
-		$GLOBALS['noyau'] = array();
-
 	// Langue principale du site
 
 	if (!isset($GLOBALS['langue_site'])) include_spip('inc/lang');
@@ -1270,6 +1280,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Verifier le visiteur
 	if (_FILE_CONNECT) verifier_visiteur();
+
+	# nombre de pixels maxi pour calcul de la vignette avec gd
+	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
 
 }
 

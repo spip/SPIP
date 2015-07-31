@@ -91,7 +91,7 @@ function action_cookie_dist() {
 			// La case "rester connecte quelques jours"
 			$session_remember = (_request('session_remember') == 'oui') ? 'perma' : '';
 			if ($session_remember)
-				spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
+				spip_setcookie('spip_session', $cookie_session, time() + (_RENOUVELLE_ALEA << 1));
 			else
 				spip_setcookie('spip_session', $cookie_session);
 	
@@ -117,7 +117,7 @@ function action_cookie_dist() {
 	// Ajout de cookie d'admin
 	else if (($set_cookie_admin OR $set_cookie_admin = _request('cookie_admin'))
 	AND $set_cookie_admin != $_COOKIE['spip_admin']) {
-		spip_setcookie('spip_admin', $set_cookie_admin, time() + 3600 * 24 * 14);
+		spip_setcookie('spip_admin', $set_cookie_admin, time() + (_RENOUVELLE_ALEA << 1));
 	}
 
 	// Redirection finale

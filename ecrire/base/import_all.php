@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
 include_spip('base/auxiliaires');
+include_spip('inc/meta');
 
 // par defaut tout est importe sauf les tables ci-dessous
 // possibiliter de definir cela tables via la meta
@@ -43,7 +44,6 @@ function base_import_all_dist($titre, $reprise=false)
 	// au rappel, on commence (voire on continue)
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_spip('inc/meta');
 	lire_metas();
 	include_spip('inc/import');
 	@ignore_user_abort(1);

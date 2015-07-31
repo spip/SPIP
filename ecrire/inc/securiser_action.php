@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
-
 // interface d'appel:
 // - au moins un argument: retourne une URL ou un formulaire securises
 // - sans argument: verifie la securite et retourne _request('arg'), ou exit.

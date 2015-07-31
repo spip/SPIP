@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/headers');
+include_spip('inc/meta');
 
 // demande/verifie le droit de creation de repertoire par le demandeur;
 // memorise dans les meta que ce script est en cours d'execution

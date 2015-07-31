@@ -35,6 +35,7 @@ function enregistre_modif_plugin(){
 
 	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['auteur_session']['id_auteur'] . ": " . join(',', $plugin));
 	ecrire_plugin_actifs($plugin);
+	include_spip('inc/meta');
 	ecrire_metas();
 }
 
