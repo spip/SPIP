@@ -27,12 +27,14 @@ function inc_msiefix_dist($texte) {
 	if (strpos($texte, 'jquery.js')
 	AND strpos($texte, '.png')
 	AND true /* ... autres tests si on veut affiner ... */
-	AND lire_fichier(_DIR_RACINE.'dist/javascript/jquery.ifixpng.js', $ifixpng)) {
+	AND lire_fichier(_DIR_RACINE.'dist/javascript/jquery.ifixpng.js', $ifixpng)
+	) {
 		$texte .=
 "<script type='text/javascript'><!--
 if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
-jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url']).'rien.gif'."');
+jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
+jQuery('img').ifixpng();
 }
 // --></script>\n";
 	}
@@ -48,7 +50,8 @@ function presentation_msiefix() {
 	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 	if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
-		jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url']).'rien.gif'."');
+		jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
+		jQuery('img').ifixpng();
 	}
 	// --></script>";
 }
