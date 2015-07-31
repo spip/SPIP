@@ -11,11 +11,14 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('maj/vieille_base/1917/serial');
-include_spip('maj/vieille_base/1917/auxiliaires');
-include_spip('maj/vieille_base/1917/typedoc');
 
-function maj_vieille_base_1917_create() {
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('maj/vieille_base/1915/serial');
+include_spip('maj/vieille_base/1915/auxiliaires');
+include_spip('maj/vieille_base/1915/typedoc');
+
+function maj_vieille_base_1915_create() {
   global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
 	// ne pas revenir plusieurs fois (si, au contraire, il faut pouvoir
@@ -46,16 +49,5 @@ function maj_vieille_base_1917_create() {
 	  spip_query("UPDATE spip_types_documents
 		SET mime_type='$type_mime' WHERE extension='$extension'");
 }
-/*
-// http://doc.spip.org/@stripslashes_base
-function stripslashes_base($table, $champs) {
-	$modifs = '';
-	reset($champs);
-	while (list(, $champ) = each($champs)) {
-		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
-	}
-	spip_query("UPDATE $table SET ".join(',', $modifs));
-
-}*/
 
 ?>

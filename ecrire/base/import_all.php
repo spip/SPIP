@@ -97,7 +97,7 @@ function import_all_milieu($request)
 
 // http://doc.spip.org/@import_all_debut
 function import_all_debut() {
-	ecrire_meta("status_restauration", "0",'non');
+	ecrire_meta("restauration_status", "0",'non');
 }
 
 // http://doc.spip.org/@import_all_fin
@@ -105,15 +105,16 @@ function import_all_fin($request) {
 
 	effacer_meta("charset_restauration");
 	effacer_meta("charset_insertion");
-	effacer_meta("status_restauration");
+	effacer_meta("restauration_status");
 	effacer_meta("date_optimisation");
-	effacer_meta('version_archive_restauration');
-	effacer_meta('tag_archive_restauration');
+	effacer_meta('restauration_version_archive');
+	effacer_meta('restauration_tag_archive');
 	effacer_meta('restauration_charset_sql_connexion');
-	effacer_meta('attributs_archive_restauration');
+	effacer_meta('restauration_attributs_archive');
 	effacer_meta('restauration_table_prefix');
 	effacer_meta('restauration_table_prefix_source');
 	effacer_meta('vieille_version_installee');
+	effacer_meta('restauration_recopie_tables');
 	if ($request['insertion'] == 'passe2') 
 		sql_drop_table("spip_translate");
 	 
