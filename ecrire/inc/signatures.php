@@ -38,8 +38,8 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
 
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
-#	($limit . ($debut ? " OFFSET $debut" : "")); #PG
-	$request = spip_query("SELECT * FROM spip_signatures " .  ($where ? " WHERE $where" : "") .  ($order ? " ORDER BY $order" : "") . (!$limit ? ''  : " LIMIT $limit"));
+
+	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
 
 	$res .= '<br />';
 
