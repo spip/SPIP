@@ -1886,19 +1886,14 @@ function debut_droite($rubrique="") {
 					$ze_article = $row['id_article'];
 					$ze_titre = typo($row['titre']);
 					echo "<br />";
+					echo "<a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$nb_liberer ++;
 						$lien = $clean_link;
 						$lien->addVar('debloquer_article', $ze_article);
-						echo "<a href='". $lien->getUrl() ."'><img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='top'></a>&nbsp;";
+						echo " <small><a href='". $lien->getUrl() ."'>["._T('lien_liberer')."]</a></small>";
 					}
-					echo "<a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
-				}
-				if ($nb_liberer >= 2) {
-					$lien = $clean_link;
-					$lien->addVar('debloquer_article', 'tous');
-					echo "<br /><br /><a href='". $lien->getUrl() ."'><img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='top'><img src='img_pack/croix-rouge.gif' alt='' width='7' height='7' border='0' align='top'>&nbsp;["._T('lien_liberer')."]</a>";
 				}
 				echo "</font>";
 				fin_cadre_formulaire();

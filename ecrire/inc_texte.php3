@@ -179,8 +179,7 @@ function echappe_html($letexte,$source) {
 			$lecode = trim(entites_html($regs[8]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "<form><textarea cols='50' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
-
+			$les_echap[$num_echap] = "<form><textarea readonly='readonly' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
 		}
 
 		$pos = strpos($letexte, $regs[0]);
