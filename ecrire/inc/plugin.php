@@ -243,8 +243,6 @@ function liste_chemin_plugin_actifs(){
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
 
-
-
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
@@ -526,27 +524,28 @@ function installe_un_plugin($plug,$infos){
 		}
 	}
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
-	$prefix_install = $infos['prefix']."_install";
+	$prefix = $infos['prefix'];
+	$prefix_install = $prefix."_install";
 	// cas de la fonction install fournie par le plugin
 	if (function_exists($prefix_install)){
 		// voir si on a besoin de faire l'install
-		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
+		$ok = $prefix_install('test',$prefix,$version_cible);
 		if (!$ok) {
-			$prefix_install('install',$infos['prefix'],$version_cible);
-			$ok = $prefix_install('test',$infos['prefix'],$version_cible);
+			$prefix_install('install',$prefix,$version_cible);
+			$ok = $prefix_install('test',$prefix,$version_cible);
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
 		}
-		return $ok; // le plugin est deja installe et ok
+		return $ok;
 	}
 	// pas de fonction instal fournie, mais une version_base dans le plugin
 	// on utilise la fonction par defaut
 	if (isset($infos['version_base'])){
-		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		$ok = spip_plugin_install('test',$prefix,$infos['version_base']);
 		if (!$ok) {
-			spip_plugin_install('install',$infos['prefix'],$infos['version_base']);
-			$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+			spip_plugin_install('install',$prefix,$infos['version_base']);
+			$ok = spip_plugin_install('test',$prefix,$infos['version_base']);
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
@@ -558,19 +557,20 @@ function installe_un_plugin($plug,$infos){
 
 // http://doc.spip.org/@installe_plugins
 function installe_plugins(){
-	$meta_plug_installes = array();
+
+	// on peut enregistrer le chemin ici
+	// car il est mis a jour juste avant l'affichage du panneau
+ 	// -> cela suivra si le plugin demenage
+
 	$liste = liste_chemin_plugin_actifs();
-	foreach($liste as $plug){
+	foreach($liste as $k => $plug) {
 		$infos = plugin_get_infos($plug);
-		if (isset($infos['install'])){
-			$ok = installe_un_plugin($plug,$infos);
-			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
-			// du panneau -> cela suivra si le plugin demenage
-			if ($ok)
-				$meta_plug_installes[] = $plug;
-		}
+		if (isset($infos['install']) AND !installe_un_plugin($plug, $infos))
+			unset($liste[$k]);
 	}
-	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
+
+	ecrire_meta('plugin_installes', serialize($liste), 'non');
+	return $liste;
 }
 
 // http://doc.spip.org/@plugin_est_installe
