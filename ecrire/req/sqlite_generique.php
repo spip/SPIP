@@ -146,7 +146,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 	// traduire la requete pour recuperer les bons noms de table
 	$query = spip_sqlite::traduire_requete($query, $serveur);
 
-	/* 
+	/*
 		 * la il faut faire les transformations
 		 * si ALTER TABLE x (DROP|CHANGE) y
 		 *
@@ -1665,13 +1665,26 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 		'/character set \w+/is' => '',
 		'/((big|small|medium|tiny)?int(eger)?)'.$num.'\s*unsigned/is' => '\\1 UNSIGNED',
 		'/(text\s+not\s+null)\s*$/is' => "\\1 DEFAULT ''",
+		//		'/((big|small|medium|tiny)?int(eger)?'.$num.'\s+not\s+null)\s*$/is' => "\\1 DEFAULT 0", // utile ?
 	);
 
 	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
-	if ($autoinc)
-		$remplace['/(big|small|medium|tiny)?int(eger)?'.$num.'/is'] = 'INTEGER';
+	$remplace_autocinc = array(
+		'/(big|small|medium|tiny)?int(eger)?'.$num.'/is' => 'INTEGER'
+	);
 
-	return preg_replace(array_keys($remplace), $remplace, $query);
+	if ($autoinc OR (is_string($query) AND preg_match(',AUTO_INCREMENT,is',$query))){
+		$query = preg_replace(array_keys($remplace), $remplace, $query);
+		$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
+	}
+	elseif(is_array($query))
+		foreach($query as $k=>$q) {
+			$autoinc = preg_match(',AUTO_INCREMENT,is',$q);
+			$query[$k] = preg_replace(array_keys($remplace), $remplace, $query[$k]);
+			if ($autoinc)
+				$query[$k] = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query[$k]);
+		}
+	return $query;
 }
 
 
