@@ -72,16 +72,15 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			//($table ? "$table='oui'" : '')
 			);
 			if (!$row) {
-		  // cas pathologique: 
-		  // creation d'un mot sans groupe de mots cree auparavant
-		  // (ne devrait arriver qu'en cas d'appel explicite ou
-		  // destruction concomittante des groupes de mots idoines)
-				if ($redirect)
-					$redirect = '&redirect=' . $redirect;
-				if ($titre)
-					$titre = "&titre=".rawurlencode($titre);
-				include_spip('inc/headers');
-				redirige_par_entete(redirige_action_auteur('instituer_groupe_mots', $table, 'mots_edit', "new=$new&table=$table&table_id=$table_id&ajouter_id_article=$ajouter_id_article$titre$redirect", true));
+				// cas pathologique:
+				// creation d'un mot sans groupe de mots cree auparavant
+				// (ne devrait arriver qu'en cas d'appel explicite ou
+				// destruction concomittante des groupes de mots idoines)
+				include_spip('action/editer_groupe_mot');
+				if (!$id_groupe = insert_groupe_mot($table)){
+					include_spip('inc/minipres');
+					echo minipres(_T('info_mot_sans_groupe'));
+				}
 			}
 			$ok = true;
 		}
