@@ -393,6 +393,12 @@ jQuery.fn.ajaxbloc = function() {
   });
 };
 
+jQuery.fn.followLink = function(){
+	$(this).click();
+	if (!$(this).is('.bind-ajax'))
+		window.location.href = $(this).get(0).href;
+	return this;
+}
 /**
  * Recharger un bloc ajax pour le mettre a jour
  * ajaxid est l'id passe en argument de INCLURE{ajax=ajaxid}
