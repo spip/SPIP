@@ -126,7 +126,7 @@ if ($connect_statut =="0minirezo"){
 	
 	echo "<p>";
 	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
-		echo "<b>Les mots de ce groupe peuvent être attribués par&nbsp;:</b>";
+		echo "<b>Les mots de ce groupe peuvent &ecirc;tre attribu&eacute;s par&nbsp;:</b>";
 		echo "<ul>";
 		
 		if ($acces_minirezo == "oui") $checked = "checked";
@@ -134,7 +134,7 @@ if ($connect_statut =="0minirezo"){
 		echo "<input type='checkbox' name='acces_minirezo' value='oui' $checked id='administrateurs'> <label for='administrateurs'>les administrateurs du site</label><br>";
 		if ($acces_comite == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='acces_comite' value='oui' $checked id='comite'> <label for='comite'>les rédacteurs</label><br>";
+		echo "<input type='checkbox' name='acces_comite' value='oui' $checked id='comite'> <label for='comite'>les r&eacute;dacteurs</label><br>";
 	
 		$mots_cles_forums = lire_meta("mots_cles_forums");
 		$forums_publics=lire_meta("forums_publics");
