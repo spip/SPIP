@@ -171,7 +171,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		$ajout = $id_syndic_article = sql_insertq('spip_syndic_articles',
 				array('id_syndic' => $now_id_syndic,
 				'url' => $le_lien,
-				'date' => date("Y-m-d H:i:s", $data['date']),
+				'date' => date("Y-m-d H:i:s", $data['date'] ? $data['date'] : $data['lastbuilddate']),
 				'statut'  => $statut));
 		if (!$ajout) return;
 	}
