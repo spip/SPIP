@@ -2258,10 +2258,11 @@ function couleur_4096($couleur) {
 
 
 // http://doc.spip.org/@couleur_extreme
-function couleur_extreme ($couleur) {
+function couleur_extreme ($couleur, $limite=122) {
 	// force la couleur au noir ou au blanc le plus proche
 	// -> donc couleur foncee devient noire
 	//    et couleur claire devient blanche
+	// -> la limite est une valeur de 0 a 255, permettant de regler le point limite entre le passage noir ou blanc
 
 	$couleurs = couleur_hex_to_dec($couleur);
 	$red = $couleurs["red"];
@@ -2270,7 +2271,7 @@ function couleur_extreme ($couleur) {
 	
 	$moyenne = round(($red+$green+$blue)/3);
 
-	if ($moyenne > 122) $couleur_texte = "ffffff";
+	if ($moyenne > $limite) $couleur_texte = "ffffff";
 	else $couleur_texte = "000000";
 
 	return $couleur_texte;
