@@ -271,6 +271,8 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 	// travailler en accents charset
 	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
+	if (!function_exists('nettoyer_raccourcis_typo'))
+		include_spip('inc/lien');
 	$texte = nettoyer_raccourcis_typo($texte);
 
 	// corriger la longueur de coupe
