@@ -24,7 +24,7 @@ if (!$url_site) $url_site = '../index.php3';
 if ($erreur=='pass') $erreur = "Erreur de mot de passe.";
 
 // Le login est memorise dans le cookie d'admin eventuel
-if (!$login AND !$autolog=='non')
+if (!$login)
 	if (ereg("^@(.*)$", $spip_admin, $regs))
 		$login = $regs[1];
 
@@ -111,7 +111,7 @@ if ($login) {
 
 	// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 	echo "<script type=\"text/javascript\"><!--
-			document.write('<b>$login</b> <br><font size=1><a href=\\'login.php3?autolog=non\\'>[se connecter sous un autre identifiant]</a></font>');
+			document.write('<b>$login</b> <br><font size=1>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
 		//--></script>\n";
 	echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
