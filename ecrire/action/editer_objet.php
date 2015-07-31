@@ -288,6 +288,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 		if ($champ_date) {
 			if ($champs['statut'] == 'publie'
 			 OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array('publie', 'prop')))
+			 OR $d
 			) {
 				if ($d OR strtotime($d=$date)>time())
 					$champs[$champ_date] = $date = $d;
