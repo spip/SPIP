@@ -77,9 +77,9 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 			$desc = $defaut;
 		else {
 			if ($request['insertion']=='on') {
-// Ne memoriser que la cle primaire pour le premier tour de l'insertion.
-// car les autres cles rentreraient en conflit avec les presentes
-// Prendre le strict necessaire pour pouvoir identifier avec l'existant
+// Au premier tour de l'insertion, ne memoriser que le strict necessaire 
+// pour pouvoir identifier avec l'existant.
+
 				$b = array();
 				if (isset($desc['field'][$p='titre']))
 					$b[$p]= $desc['field'][$p];
@@ -98,7 +98,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 				     $gz,
 				     $phpmyadmin,
 				     '/' . $table);
-	
+
 	if ($values === false) return  ($import_ok = false);
 	if ($values) $boucle($values, $new, $desc, $request, $trans);
 
@@ -107,8 +107,9 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 
 // http://doc.spip.org/@import_replace
 function import_replace($values, $table, $desc, $request, $trans) {
-	if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',$values) . ')'))
+	if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
 		$GLOBALS['erreur_restauration'] = spip_sql_error();
+  }
 }
 
 // http://doc.spip.org/@import_lire_champs
@@ -136,7 +137,7 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 				$value = str_replace($phpmyadmin[0],$phpmyadmin[1],$value);
 			if ($char) 
 				$value = importer_charset($value, $charset);
-			$values[$col]= _q($value);
+			$values[$col]= $value;
 		}
 	}
 

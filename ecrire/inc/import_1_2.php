@@ -113,13 +113,13 @@ function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
 			else if ($fields==NULL or isset($fields[$col])) {
 				if ($char) 
 					$value = importer_charset($value, $charset);
-				$values[$col] = _q($value);
+				$values[$col] = $value;
 				if ($col == $id) $id_objet = $value;
 			}
 		}
 	}
    if ($values) {
-	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', $values) . ')')) {
+	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', array_map('_q', $values)) . ')')) {
 		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
