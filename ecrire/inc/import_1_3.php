@@ -81,7 +81,7 @@ function inc_import_1_3_dist($f, $gz=false) {
 		if ($col == '/'.$table) break;
 		if (substr($col,0,1) == '/')
 		{ // tag fermant ici : probleme erreur de format
-			spip_log('restauration : table $table tag fermanr $col innatendu');
+			spip_log("restauration : table $table tag fermant $col innatendu");
 		  break;
 		}
 		$value = '';
