@@ -27,15 +27,12 @@ function install_etape_ldap4_dist()
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</FONT>";
-		echo "<P>";
-
-		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
-		echo "</tt>) "._T('avis_chemin_invalide_2');
+		info_etape(_T('info_chemin_acces_annuaire'),
+			"<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap)."</tt>) "._T('avis_chemin_invalide_2')
+		);
 	}
 	else {
-		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
-		echo "<P>";
+		info_etape(_T('info_reglage_ldap'));
 
 		lire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 		if ($p = strpos($conn, '?'.'>')) 
@@ -58,20 +55,24 @@ function install_etape_ldap4_dist()
 		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 
 		echo generer_url_post_ecrire('install');
-		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
-		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR />\n";
-		echo _T('info_statut_utilisateurs_2')." ";
-		echo "<p>";
-		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"6forum\" id='visit'>";
-		echo "<label for='visit'><b>"._T('info_visiteur_1')."</b></label> "._T('info_visiteur_2')."<br />\n";
-		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"1comite\" id='redac' CHECKED>";
-		echo "<label for='redac'><b>"._T('info_redacteur_1')."</b></label> "._T('info_redacteur_2')."<br />\n";
-		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"0minirezo\" id='admin'>";
-		echo "<label for='admin'><b>"._T('info_administrateur_1')."</b></label> "._T('info_administrateur_2')."<br />\n";
-	
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<input type='hidden' name='etape' value='ldap5' />";
+		
+		echo fieldset(_T('info_statut_utilisateurs_1'),
+			array(
+				'$statut_ldap' => array(
+					'label' => _T('info_statut_utilisateurs_2').'<br />',
+					'valeur' => '1comite',
+					'alternatives' => array(
+						'6forum' => "<b>"._T('info_visiteur_1')."</b> "._T('info_visiteur_2')."<br />",
+						'1comite' => "<b>"._T('info_redacteur_1')."</b> "._T('info_redacteur_2')."<br />",
+						'0minirezo' => "<b>"._T('info_administrateur_1')."</b> "._T('info_administrateur_2')."<br />"
+					)
+				)
+			)
+		);
 
-		echo "</FORM>";
+		echo bouton_suivant();
+		echo "</form>";
 	}
 
 	install_fin_html();

@@ -18,9 +18,7 @@ function install_etape_ldap3_dist()
 
 	install_debut_html();
 
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
-
-	echo "<P>"._T('info_chemin_acces_2');
+	echo info_etape(_T('info_chemin_acces_1'),_T('info_chemin_acces_2'));
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
@@ -29,51 +27,52 @@ function install_etape_ldap3_dist()
 	$info = @ldap_get_entries($ldap_link, $result);
 
 	echo generer_url_post_ecrire('install');
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap4'>";
-	echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
-	echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
-	echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
-	echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
-	echo "<INPUT TYPE='hidden' NAME='protocole_ldap' VALUE=\"$protocole_ldap\">";
-	echo "<INPUT TYPE='hidden' NAME='tls_ldap' VALUE=\"$tls_ldap\">";
+	echo "<input type='hidden' name='etape' value='ldap4' />";
+	echo "<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />";
+	echo "<input type='hidden' name='port_ldap' value=\"$port_ldap\" />";
+	echo "<input type='hidden' name='login_ldap' value=\"$login_ldap\" />";
+	echo "<input type='hidden' name='pass_ldap' value=\"$pass_ldap\" />";
+	echo "<input type='hidden' name='protocole_ldap' value=\"$protocole_ldap\" />";
+	echo "<input type='hidden' name='tls_ldap' value=\"$tls_ldap\" />";
 
 	echo "<fieldset>";
 
 	$checked = false;
 
 	if (is_array($info) AND $info["count"] > 0) {
-		echo "<P>"._T('info_selection_chemin_acces');
-		echo "<UL>";
+		echo "<p>"._T('info_selection_chemin_acces')."</p>";
+		echo "<ul>";
 		$n = 0;
 		for ($i = 0; $i < $info["count"]; $i++) {
 			$names = $info[$i]["namingcontexts"];
 			if (is_array($names)) {
 				for ($j = 0; $j < $names["count"]; $j++) {
 					$n++;
-					echo "<INPUT NAME=\"base_ldap\" VALUE=\"".htmlspecialchars($names[$j])."\" TYPE='Radio' id='tab$n'";
+					echo "<li><input name=\"base_ldap\" value=\"".htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
 					if (!$checked) {
-						echo " CHECKED";
+						echo " checked=\"checked\"";
 						$checked = true;
 					}
-					echo ">";
-					echo "<label for='tab$n'>".htmlspecialchars($names[$j])."</label><BR />\n\n";
+					echo " />";
+					echo "<label for='tab$n'>".htmlspecialchars($names[$j])."</label></li>\n";
 				}
 			}
 		}
-		echo "</UL>";
+		echo "</ul>";
 		echo _T('info_ou')." ";
 	}
-	echo "<INPUT NAME=\"base_ldap\" VALUE=\"\" TYPE='Radio' id='manuel'";
+	echo "<input name=\"base_ldap\" value=\"\" type='radio' id='manuel'";
 	if (!$checked) {
-		echo " CHECKED";
+		echo " checked=\"checked\"";
 		$checked = true;
 	}
-	echo ">";
+	echo " />";
 	echo "<label for='manuel'>"._T('entree_chemin_acces')."</label> ";
-	echo "<INPUT TYPE='text' NAME='base_ldap_text' CLASS='formo' VALUE=\"ou=users, dc=mon-domaine, dc=com\" SIZE='40'></fieldset><P>";
+	echo "<input type='text' name='base_ldap_text' class='formo' value=\"ou=users, dc=mon-domaine, dc=com\" size='40' />";
+	echo "</fieldset>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
-	echo "</FORM>";
+	echo bouton_suivant();
+	echo "</form>";
 
 	install_fin_html();
 }
