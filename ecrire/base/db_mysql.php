@@ -33,7 +33,8 @@ function base_db_mysql_dist()
 		else  return 'spip_query_db'; // oui; valeur d'office
 	}
 
-	include_once(_FILE_CONNECT);
+	include_once(_FILE_CONNECT); 
+	if (!$GLOBALS['db_ok']) return false;
 
 	// Version courante = 0.3
 	//
@@ -196,9 +197,11 @@ function traite_query($query) {
 }
 
 //
-// Connexion a la base 
-// (db_ok n'a plus besoin d'etre globale, mais on garde pour compatibilite)
-//
+// Fonction appelee uniquement par le fichier FILE_CONNECT cree a l'installation, 
+// et comportant les identifants de connexion SQL
+// db_ok est globale, pour test par base_db_mysql_dist ci-dessus
+// Ce serait plus propre de reduire FILE_CONNECT a un fichier de donnees
+// et et d'appeler cette fonction a partir de base_db_mysql_dist.
 
 // http://doc.spip.org/@spip_connect_db
 function spip_connect_db($host, $port, $login, $pass, $db) {
