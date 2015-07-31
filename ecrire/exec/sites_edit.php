@@ -16,10 +16,10 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_sites_edit_dist
 function exec_sites_edit_dist()
 {
-	global $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
-	global $spip_lang_right;
+	global $connect_statut, $connect_id_rubrique, $spip_lang_right;
 
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
+	$id_syndic = intval(_request('id_syndic'));
+	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
 
 	if ($row = spip_fetch_array($result)) {
 		$id_syndic = $row["id_syndic"];
@@ -29,11 +29,14 @@ function exec_sites_edit_dist()
 		$url_syndic = $row["url_syndic"];
 		$descriptif = $row["descriptif"];
 		$syndication = $row["syndication"];
-		$extra=$row["extra"];
+		$extra = $row["extra"];
+		$new = false;
 	} else {
+		$id_rubrique = intval(_request('id_rubrique'));
 		$syndication = 'non';
 		$new = 'oui';
-		if (!intval($id_rubrique)) {
+		$descriptif = $nom_site = $url_site = $url_syndic = '';
+		if (!$id_rubrique) {
 			$in = !$connect_id_rubrique ? ''
 			  : (' WHERE id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
 			$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
@@ -196,7 +199,7 @@ function exec_sites_edit_dist()
 
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		$form .= extra_saisie($extra, 'sites', intval($id_secteur));
+		$form .= extra_saisie($extra, 'sites', intval($id_rubrique));
 	}
 
 	$form .= "\n<div style='text-align: right'><input type='submit' value='"

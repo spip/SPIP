@@ -1147,6 +1147,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 		  }
 		  $class= 'calendrier-arial11 calendrier-agenda';
 		  $type = ($semaine ? 'semaine' : 'jour') ;
+		  $couleur = "black";
 		}
 		$ligne .= "\n\t<td><div class='$class$classe0 $toile'>" .
 		  $fclic($script, $annee, $mois, $j,$type, '', $ancre,'', $title ,'','', $j, "color: $couleur; font-weight: bold") .
