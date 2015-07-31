@@ -383,6 +383,7 @@ prive/formulaires/selecteur/lister-rubriques-rubriques.html -text
 prive/formulaires/selecteur/lister.html -text
 prive/formulaires/selecteur/navigateur.html -text
 prive/formulaires/selecteur/picker-ajax.html -text
+prive/formulaires/selecteur/picker-ajax_fonctions.php -text
 prive/formulaires/selecteur/picker.css -text
 prive/formulaires/selecteur/rubriques.html -text
 prive/formulaires/selecteur/rubriques_fonctions.php -text
