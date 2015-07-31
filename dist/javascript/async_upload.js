@@ -61,3 +61,56 @@ jQuery.fn.async_upload = function(add_function) {
     return true;
   }
 }
+
+function async_upload_article_edit(res,jForm){
+      var cont;
+      //add a class to new documents
+      res.
+      find(">div[@class]")
+        .addClass("documents_added")
+        .css("display","none")
+      .end();
+      if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
+        cont = $("#liste_images");
+      else
+        cont = $("#liste_documents");
+      cont
+      .prepend(res.html());
+      //find added documents, remove label and show them nicely
+      //set overflow to visible to completely show the overlay icon
+      cont.
+      find("div.documents_added")
+        .removeClass("documents_added")
+        .show("slow",function(){
+            var anim = $(this).css({"height":"","overflow":""});
+            //bug explorer-opera-safari
+            if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
+            $(anim).find("img[@onclick]").get(0).onclick();
+        })
+        .overflow("");
+      verifForm(cont);
+      return true;
+}
+
+function async_upload_icon(res) {
+  res.find(">div").each(function(){
+    var cont = $("#"+this.id);
+    verifForm(cont.html($(this).html()));
+    cont.find("img[@onclick]").each(function(){this.onclick();})
+    $(".form_upload_icon").async_upload(async_upload_icon);
+  });
+  return true;                     
+}
+
+function async_upload_article(res){
+  res.find(">div").each(function(){
+    var cont = $("#"+this.id);
+    var self = $(this);
+    if(!cont.size()) {
+      cont = $(this.id.search(/--/)!=-1 ? "#portfolio":"#documents")
+      .append(self.clone().get());
+    }
+    verifForm(cont.html(self.html()));
+  });
+  return true;             
+}
