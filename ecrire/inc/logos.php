@@ -54,15 +54,17 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	else
 		$formats_sortie = array('jpg','png','gif');
 		
-	if ($process == 'AUTO')
+	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
 		$process = $GLOBALS['meta']['image_process'];
 
 	// liste des formats qu'on sait lire
-	$formats_graphiques = $GLOBALS['meta']['formats_graphiques'];
+	$img = isset($GLOBALS['meta']['formats_graphiques'])
+	  ? eregi(",$format,",$GLOBALS['meta']['formats_graphiques'])
+	  : false;
 
 	// si le doc n'est pas une image, refuser
-	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
-		return;
+	if (!$force AND !$img) return;
+
 	$destination = sous_repertoire(_DIR_IMG, $destdir) . $destfile;
 
 	// chercher un cache

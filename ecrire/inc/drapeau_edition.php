@@ -31,6 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function lire_tableau_edition () {
 	$edition = @unserialize($GLOBALS['meta']['drapeau_edition']);
 	if (!$edition) $edition = array();
+	$changed = false;
 
 	// parcourir le tableau et virer les vieux
 	foreach ($edition as $objet => $data) {

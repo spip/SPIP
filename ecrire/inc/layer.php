@@ -101,6 +101,7 @@ function bouton_block_visible($nom_block){
 // http://doc.spip.org/@produire_acceder_couche
 function produire_acceder_couche($couches, $nom, $icone) {
 
+	global $spip_lang_rtl;
 	// ne rien afficher si js desactive
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
 		return '';
