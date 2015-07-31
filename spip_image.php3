@@ -8,7 +8,6 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
-
 /* ResizeGif with (height % width) */
 function RatioResizeImg( $image, $newWidth, $newHeight){ 
 
@@ -309,6 +308,9 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 if (!$image_name AND $image2) {
 	$image = "ecrire/upload/".$image2;
 	$image_name = $image;
+	$supprimer_ecrire_upload = $image;
+} else {
+	$supprimer_ecrire_upload = '';
 }
 
 //
@@ -370,7 +372,13 @@ if ($doc_supp) {
 }
 
 
+// supprimer le fichier original si pris dans ecrire/upload
+if ($supprimer_ecrire_upload)
+	@unlink ($supprimer_ecrire_upload);
 
+//
+// redirection
+//
 if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 else $vars = $HTTP_GET_VARS;
 $redirect_url = "ecrire/" . $vars["redirect"];
