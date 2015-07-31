@@ -204,4 +204,21 @@
 		<titre>icone_mes_preferences</titre>
 	</onglet>
 
+	<onglet id='plugins_actifs' parent="plugins">
+		<icone>images/plugin-24.png</icone>
+		<titre>plugins_actifs_liste</titre>
+		<url>admin_plugin</url>
+	</onglet>
+	<onglet id='admin_plugin' parent="plugins">
+		<icone>images/plugin-24.png</icone>
+		<titre>plugins_liste</titre>
+		<url>admin_plugin</url>
+		<args>voir=tous</args>
+	</onglet>
+	<onglet id='charger_plugin' parent="plugins">
+		<icone>images/spip-pack-24.png</icone>
+		<titre>plugin_titre_automatique_ajouter</titre>
+		<url>charger_plugin</url>
+	</onglet>
+
 </plugin>
