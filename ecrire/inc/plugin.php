@@ -149,6 +149,28 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 }
 
 /**
+ * extrait les chemins d'une liste de plugin
+ * selectionne au passage ceux qui sont dans $dir_plugins uniquement
+ * si valeur non vide
+ * 
+ * @param array $liste
+ * @param string $dir_plugins
+ * @return array
+ */
+function liste_chemin_plugin($liste, $dir_plugins=_DIR_PLUGINS){
+	foreach ($liste as $prefix=>$infos) {
+		if (!$dir_plugins
+			OR (
+				defined($infos['dir_type'])
+		    AND constant($infos['dir_type'])==$dir_plugins))
+			$liste[$prefix] = $infos['dir'];
+		else
+			unset($liste[$prefix]);
+	}
+	return $liste;
+}
+
+/**
  * Liste les chemins vers les plugins actifs du dossier fourni en argument
  * a partir d'une liste d'elelements construits par plugin_valide_resume
  *
@@ -157,15 +179,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 // http://doc.spip.org/@liste_chemin_plugin_actifs
 function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	include_spip('plugins/installer');
-	$liste = liste_plugin_actifs();
-	foreach ($liste as $prefix=>$infos) {
-		if (defined($infos['dir_type']) 
-		AND constant($infos['dir_type'])==$dir_plugins)
-			$liste[$prefix] = $infos['dir'];
-		else 
-			unset($liste[$prefix]);
-	}
-	return $liste;
+	return liste_chemin_plugin(liste_plugin_actifs(), $dir_plugins);
 }
 
 // Pour tester utilise, il faut connaitre tous les plugins 
@@ -242,19 +256,20 @@ function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 	ecrire_meta('plugin_erreur_activation',	serialize($erreurs));
 }
 
-function plugin_donne_erreurs() {
-	if (!isset($GLOBALS['meta']['plugin_erreur_activation'])) return '';
+function plugin_donne_erreurs($raw=false, $raz=true) {
+	if (!isset($GLOBALS['meta']['plugin_erreur_activation'])) return $raw?array():'';
 	$list = @unserialize($GLOBALS['meta']['plugin_erreur_activation']);
 	// Compat ancienne version
 	if (!$list)
-	  $list = $GLOBALS['meta']['plugin_erreur_activation'];
-	else {
+	  $list = $raw?array():$GLOBALS['meta']['plugin_erreur_activation'];
+	elseif(!$raw) {
 	  foreach($list as $plug => $msg)
 	    $list[$plug] = "<li>" . _T('plugin_impossible_activer', array('plugin' => $plug))
 		  . "<ul><li>" . implode("</li><li>", $msg) . "</li></ul></li>";
 	  $list ="<ul>" . join("\n", $list) . "</ul>";
 	}
-	effacer_meta('plugin_erreur_activation');
+	if ($raz)
+		effacer_meta('plugin_erreur_activation');
 	return $list;
 }
 
@@ -304,7 +319,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	sous_repertoire(_DIR_CACHE, '', false,true);
 	if (!spip_connect()) return false;
 	if ($operation!='raz') {
-		$plugin_valides = array_intersect(liste_chemin_plugin_actifs(),liste_plugin_files());
+		$plugin_valides = liste_chemin_plugin_actifs();
+		// si des plugins sont en attentes (coches mais impossible a activer)
+		// on les reinjecte ici
+		if (isset($GLOBALS['meta']['plugin_attente'])
+		  AND $a = unserialize($GLOBALS['meta']['plugin_attente']))
+		$plugin_valides = $plugin_valides + liste_chemin_plugin($a);
+
+		$plugin_valides = array_intersect($plugin_valides,liste_plugin_files());
 		if ($operation=='ajoute')
 			$plugin = array_merge($plugin_valides,$plugin);
 		elseif ($operation=='enleve')
@@ -336,6 +358,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	effacer_meta('message_crash_plugins');
 	ecrire_meta('plugin',serialize($plugin_valides));
+	$liste = array_diff_assoc($liste,$plugin_valides);
+	ecrire_meta('plugin_attente',serialize($liste));
 	ecrire_meta('plugin_header',substr(strtolower(implode(",",$header)),0,900));
 	// generer charger_plugins_chemin.php
 	plugins_precompile_chemin($plugin_valides, $ordre);

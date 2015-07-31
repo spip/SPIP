@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/charsets');
 
 // http://doc.spip.org/@affiche_liste_plugins
-function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
+function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_checked, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
 	$get_infos = charger_fonction('get_infos','plugins');
 	$ligne_plug = charger_fonction($afficher_un,'plugins');
 
@@ -27,7 +27,13 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 	$exposed = urldecode(_request('plugin'));
 
 	$block_par_lettre = false;//count($liste_plugins)>10;
-	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
+	$fast_liste_plugins_actifs = array();
+	$fast_liste_plugins_checked = array();
+	if (is_array($liste_plugins_actifs))
+		$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
+	if (is_array($liste_plugins_checked))
+		$fast_liste_plugins_checked = array_flip($liste_plugins_checked);
+
 	$res = '';
 	$block = '';
 	$initiale = '';
@@ -40,10 +46,11 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 			$block_actif = false;
 		}
 		// le rep suivant
-		$actif = @isset($fast_liste_plugins_actifs[$plug]);
+		$actif = isset($fast_liste_plugins_actifs[$plug]);
+		$checked = isset($fast_liste_plugins_checked[$plug]);
 		$block_actif = $block_actif | $actif;
 		$expose = ($exposed AND ($exposed==$plug OR $exposed==$dir_plugins . $plug OR $exposed==substr($dir_plugins,strlen(_DIR_RACINE)) . $plug));
-		$block .= $ligne_plug($url_page, $plug, $actif, $expose, "item", $dir_plugins)."\n";
+		$block .= $ligne_plug($url_page, $plug, $checked, $actif, $expose, "item", $dir_plugins)."\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
 	$class = basename($dir_plugins);
