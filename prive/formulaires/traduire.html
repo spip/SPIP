@@ -8,8 +8,8 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		]
-		<ul class="editer-groupe">
-			<li class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
 				<label for="changer_lang">[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{changer_lang})</span>
 			]<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
@@ -28,28 +28,28 @@
 					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
 					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
 					</span>]]]
-			</li>
+			</div>
 			[(#ENV{_traduire}|oui)
 				[(#ENV{_lister_id_trad}|oui)
-				<li class="fieldset voir_traductions">
+				<div class="fieldset voir_traductions">
 					<INCLURE{fond=#ENV**{_vue_traductions},id_trad=#ENV{_lister_id_trad},titre=<:info_traductions:>,objet=#ENV{_objet},env,ajax} />
 					[(#ENV{editable})
 					<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
 						<input type="submit" class="submit supprimer_trad" name="supprimer_trad" value="<:trad_delier|attribut_html:>" />
 					</span>
 					]
-				</li>
+				</div>
 				]
 				[(#ENV{_lister_id_trad}|non)
-				<li class="editer editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
+				<div class="editer editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
 					<label for="id_trad">[(#ENV{_objet}|objet_info{texte_definir_comme_traduction_objet}|_T)]</label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_trad})</span>
 					]<input type="text" class="text" name="id_trad" id="id_trad" value="[(#ENV{id_trad}|?{#ENV{id_trad}})]"
 						onkeypress="$(this).parents('form').find('.boutons').slideDown();"/>
-				</li>
+				</div>
 				]
 			]
-		</ul>
+		</div>
 		[(#ENV{_traduire}|oui)
 			[<div class="new_trad[(#ENV{_saisie_en_cours}|non)]">
 			(#URL_ECRIRE{#ENV{_objet}|objet_info{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|parametre_url{#ENV{_objet}|=={rubrique}|?{id_parent,id_rubrique},#ENV{_id_parent}}|icone_horizontale{<:trad_new:>,traduction,new})

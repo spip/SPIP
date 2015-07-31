@@ -7,9 +7,9 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul class="editer-groupe">
+		<div class="editer-groupe">
 		  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_taille_ecran:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -22,9 +22,9 @@
 					onchange="if (this.checked) jQuery('body').addClass('large').removeClass('etroit'); else jQuery('body').removeClass('large').addClass('etroit');"/>
 					<label for="[(#GET{name})]_large"><:info_grand_ecran:></label>
 				</div>
-			</li>
+			</div>
 			#SET{name,display_navigation}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_texte_et_icones_navigation:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -37,9 +37,9 @@
 					onchange="if (!this.checked) jQuery('body').addClass('navigation_sans_icone').removeClass('navigation_avec_icones'); else jQuery('body').removeClass('navigation_sans_icone').addClass('navigation_avec_icones');"/>
 					<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
 				</div>
-			</li>
+			</div>
 			#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_texte_et_icones_page:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -69,9 +69,9 @@
 					/>
 					<label for="[(#GET{name})]_3"><:lien_afficher_icones_seuls:></label>
 				</div>
-			</li>
+			</div>
 			#SET{name,couleur}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:titre_changer_couleur_interface:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<BOUCLE_couleurs(POUR){tableau #ENV{couleurs}}>
@@ -87,8 +87,8 @@
 					</label>
 				</div>
 				</BOUCLE_couleurs>
-			</li>
-			<li class="editer editer_imessage">
+			</div>
+			<div class="editer editer_imessage">
 				<label><:info_liste_redacteurs_connectes:></label>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<div class="choix">
@@ -99,16 +99,16 @@
 					<input type='radio' class='radio' name='imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' #GET{disable}/>
 					<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
 				</div>
-			</li>
-			<li class='editer editer_activer_menudev[ (#ENV**{erreurs}|table_valeur{activer_menudev}|oui)erreur]'>
+			</div>
+			<div class='editer editer_activer_menudev[ (#ENV**{erreurs}|table_valeur{activer_menudev}|oui)erreur]'>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{activer_menudev})</span>]
 				<div class='choix'>
 					<input type="hidden" name="activer_menudev" value="non" />
 					<input class='checkbox' type="checkbox" name="activer_menudev" value='oui' [checked="(#ENV{activer_menudev,non}|=={oui}|?{checked})"] id="activer_menudev"/>
 					<label for="activer_menudev"><:info_activer_menu_developpement:></label>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

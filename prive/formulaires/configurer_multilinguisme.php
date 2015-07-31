@@ -95,7 +95,7 @@ function saisie_langues_utiles($name, $selection) {
 	foreach($langues_bloquees as $code_langue) {
 		$nom_langue = $langues[$code_langue];
 		$res .= "<li class='choix "
-		  . alterner($i++,'odd','even')
+		  . alterner(++$i,'odd','even')
 		  . (isset($langues_trad[$code_langue])?" traduite":"")
 		  . "'>"
 			. "<input type='hidden' name='{$name}[]' value='$code_langue'>" // necessaire ...
@@ -115,7 +115,7 @@ function saisie_langues_utiles($name, $selection) {
 		if (!isset($langues_bloquees[$code_langue])) {
 			$checked = (in_array($code_langue,$selection)?' checked="checked"':'');
 			$res .= "<li class='choix "
-			  . alterner($i++,'odd','even')
+			  . alterner(++$i,'odd','even')
 				. (isset($langues_trad[$code_langue])?" traduite":"")
 				. "'>"
 				. "<input type='checkbox' name='{$name}[]' id='{$name}_$code_langue' value='$code_langue'"

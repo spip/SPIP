@@ -7,21 +7,19 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <ul class="editer-groupe">
-			<li>
-				<div class="explication">
-				<:texte_selection_langue_principale|inserer_attribut{class,spip}:>
-				</div>
-			</li>
+	  <div class="editer-groupe">
+			<div class="explication">
+			<:texte_selection_langue_principale|inserer_attribut{class,spip}:>
+			</div>
 	  	#SET{name,changer_langue_site}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_langue_principale:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[<select name="changer_langue_site" id="changer_langue_site">
 				(#ENV*{_langues})
 				</select>]
-	    </li>
-	  </ul>
+	    </div>
+	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

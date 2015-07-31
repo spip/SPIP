@@ -7,9 +7,9 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul class="editer-groupe">
+		<div class="editer-groupe">
 			#SET{name,choix_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:config_titre_base_sup_choix:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -25,8 +25,8 @@
 				</BOUCLE_db>
 					<p><:config_erreur_base_sup:></p>
 				<//B_db>
-			</li>
-			<li>
+			</div>
+			<div class="editer">
 				<label><:info_ou:></label>
 				<div class="choix">
 					<input type="radio" class="radio" name="choix_db" value="-1" id='new' #GET{def}/>
@@ -35,8 +35,8 @@
 				<input type="text" class="text" name="table_new" value="#ENV*{table_new}"
 					onfocus="$(this).siblings('.choix').find('input').attr('checked','checked');"
 					/>
-			</li>
-		</ul>
+			</div>
+		</div>
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

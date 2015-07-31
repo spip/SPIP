@@ -9,9 +9,9 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset><legend><:info_contenu_articles:>#AIDER{confart}</legend>
 			<p><:texte_contenu_articles:></p>
-			<ul class="editer-groupe">
+			<div class="editer-groupe">
 				#SET{name,articles_surtitre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_surtitre:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -21,9 +21,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_soustitre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_sous_titre:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -33,9 +33,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_descriptif}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_descriptif:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -45,9 +45,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_chapeau}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_chapeau_2:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -57,9 +57,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_texte:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -69,9 +69,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_ps}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_post_scriptum_2:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -81,9 +81,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_redac}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_date_publication_anterieure:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -93,9 +93,9 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
+				</div>
 				#SET{name,articles_urlref}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:info_urlref:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -105,13 +105,13 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset><legend><:titre_publication_articles_post_dates:>#AIDER{confdates}</legend>
-			<ul class="editer-groupe">
+			<div class="editer-groupe">
 				#SET{name,post_dates}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:texte_publication_articles_post_dates:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -122,13 +122,13 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non_publier_articles:></label>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset><legend><:config_redirection:>#AIDER{artvirt}</legend>
-			<ul class="editer-groupe">
+			<div class="editer-groupe">
 				#SET{name,articles_redirection}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:config_info_redirection:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<div class="choix">
@@ -138,8 +138,8 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</fieldset>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
