@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/abstract_sql');
+
 // http://doc.spip.org/@exec_delete_all_dist
 function exec_delete_all_dist()
 {
@@ -21,9 +23,16 @@ function exec_delete_all_dist()
 		echo minipres();
 		exit;
 	}
-
+	$q = sql_showbase();
+	$res = '';
+	while ($r = sql_fetch($q)) {
+		$t = array_shift($r);
+		$res .= "<li><input type='checkbox' checked='checked' name='delete[]' id='delete_$t' value='$t' /> $t\n</li>";
+	}
+	  
+	$res = "<ol style='text-align:left'>$res</ol>";
 	$r = generer_url_ecrire('install','',true);
 	$admin = charger_fonction('admin', 'inc');
-	$admin('delete_all', _T('titre_page_delete_all'), '', $r);
+	$admin('delete_all', _T('titre_page_delete_all'), $res, $r);
 }
 ?>

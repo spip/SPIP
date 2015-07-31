@@ -99,7 +99,7 @@ function fichier_admin($action, $pref='admin_') {
 // ou retourne sans rien faire si repertoire deja la.
 
 // http://doc.spip.org/@debut_admin
-function debut_admin($script, $action='', $commentaire='') {
+function debut_admin($script, $action='', $corps='') {
 
 	if ((!$action) || (!autoriser('chargerftp'))) {
 		include_spip('inc/minipres');
@@ -114,10 +114,6 @@ function debut_admin($script, $action='', $commentaire='') {
 	}
 	include_spip('inc/minipres');
 
-	if ($commentaire) {
-		$commentaire = ("\n<p>".propre($commentaire)."</p>\n");
-	}
-
 	// Si on est un super-admin, un bouton de validation suffit
 	// sauf dans les cas destroy
 	if ((autoriser('webmestre') OR $script === 'admin_repair')
@@ -126,12 +122,12 @@ function debut_admin($script, $action='', $commentaire='') {
 			spip_log ("Action super-admin: $action");
 			return;
 		}
-		$form = '<input type="hidden" name="validation_admin" value="'.$signal.'" />';
+		$corps .= '<input type="hidden" name="validation_admin" value="'.$signal.'" />';
 		$suivant = _T('bouton_valider');
 
 		$js = '';
 	} else {
-		$form = "<fieldset><legend>"
+		$corps .= "<fieldset><legend>"
 		. _T('info_authentification_ftp')
 		. aide("ftp_auth")
 		. "</legend>\n<label for='fichier'>"
@@ -154,7 +150,7 @@ function debut_admin($script, $action='', $commentaire='') {
 		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
 	}
 
-	$form = $commentaire . copy_request($script, $form, $suivant);
+	$form = copy_request($script, $corps, $suivant);
 	echo minipres(_T('info_action', array('action' => $action)), $form, $js);
 	exit;
 }
