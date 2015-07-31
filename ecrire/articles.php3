@@ -298,7 +298,7 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>ARTICLE NUM&Ea
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
 
 if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
-	$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article";
+	$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND FIND_IN_SET(statut,'publie,off,prop')";
 	if ($row = mysql_fetch_row(spip_query($req))) {
 		$nb_forums = $row[0];
 		if ($nb_forums) {
