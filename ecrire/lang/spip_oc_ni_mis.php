@@ -246,7 +246,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_introuvable' => 'Fichié @fichier@ introuvable',
 	'form_auteur_confirmation' => 'Counfirmàs la vouòstra adressa email',
 	'form_auteur_email_modifie' => 'La vouòstra adressa email a estada moudificada.',
-	'form_auteur_envoi_mail_confirmation' => 'Un courrié electrònicou de counfirmacioun a estat mandat a @email@. Deurès visità l’adressa Web menciounada en aqueu courrié pèr validà la vouòstra adressa mail.',
+	'form_auteur_envoi_mail_confirmation' => 'Un courrié electrònicou de counfirmacioun es estat mandat a @email@. Deurès visità l’adressa Web menciounada en aqueu courrié da validà la vouòstra adressa mail.',
 	'form_auteur_mail_confirmation' => 'Bouònjou,
 
 Avès demandat à changà la vouòstra adressa e-mail.
@@ -311,7 +311,7 @@ sera ignourada) :
 	'icone_deconnecter' => 'Si descounetà',
 	'icone_discussions' => 'Discussioun',
 	'icone_doc_rubrique' => 'Doucumen dei rùbrica',
-	'icone_ecrire_article' => 'Escrieure un novèl article',
+	'icone_ecrire_article' => 'Escriéure un nouvèl article',
 	'icone_edition_site' => 'Edicioun',
 	'icone_gestion_langues' => 'Gestioun dei lenga',
 	'icone_informations_personnelles' => 'Infourmacioun persounali',
@@ -496,7 +496,7 @@ sera ignourada) :
 	'lien_liberer_tous' => 'Liberà tout',
 	'lien_nouvea_pense_bete' => 'NOUVÈLA NOTA DE RENEMBRANÇA ',
 	'lien_nouveau_message' => 'NOVÈU MESSAGE',
-	'lien_nouvelle_annonce' => 'NOVÈL ANOUNCI',
+	'lien_nouvelle_annonce' => 'NOUVÈL ANOUNCI',
 	'lien_petitions' => 'PETICIOUN',
 	'lien_popularite' => 'poupularità : @popularite@%',
 	'lien_racine_site' => 'RAÏS DÓU SIT',
