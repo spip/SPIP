@@ -551,7 +551,7 @@ function extra($letexte, $champ) {
 }
 
 // postautobr : transforme les sauts de ligne en _
-function post_autobr($texte) {
+function post_autobr($texte, $delim="\n_ ") {
 	$texte = str_replace("\r\n", "\r", $texte);
 	$texte = str_replace("\r", "\n", $texte);
 	list($texte, $les_echap) = echappe_html($texte, "POSTAUTOBR", true);
@@ -559,11 +559,13 @@ function post_autobr($texte) {
 	$debut = '';
 	$suite = $texte;
 	while ($t = strpos('-'.$suite, "\n", 1)) {
-		$debut .= substr($suite, 0, $t);
+		$debut .= substr($suite, 0, $t-1);
 		$suite = substr($suite, $t);
 		$car = substr($suite, 0, 1);
 		if (($car<>'-') AND ($car<>'_') AND ($car<>"\n"))
-			$debut .='_ ';
+			$debut .= $delim;
+		else
+			$debut .= "\n";
 		if (ereg("^\n+", $suite, $regs)) {
 			$debut.=$regs[0];
 			$suite = substr($suite, strlen($regs[0]));
