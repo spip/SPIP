@@ -15,7 +15,7 @@ if ($var_lang) changer_langue($var_lang);
 function fichier_aide($lang_aide) {
 	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) 
 		return array($fichier_aide, $lang_aide);
-	else	// reduction ISO du code langue oci_prv_ni => oci_prv => oci
+	else	// reduction ISO du code langue oc_prv_ni => oc_prv => oc
 		if (ereg("(.*)_", $lang_aide, $regs))
 			return fichier_aide($regs[1]);
 
@@ -55,6 +55,7 @@ else {
 }
 
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <style type="text/css"><!--
@@ -116,7 +117,7 @@ include_ecrire ("inc_filtres.php3");
 echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
 if ($spip_lang_rtl)
 	echo " dir='rtl'";
-echo ">";
+echo " lang='$lang_aide'>";
 
 if ($aide == 'spip') {
 	echo '<TABLE BORDER=0 WIDTH=100% HEIGHT=60%>
