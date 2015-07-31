@@ -58,10 +58,10 @@ if (strlen($recherche) > 0) {
 		$where = " 1=2";
 	
 	$query_articles .= " $where ORDER BY date_modif DESC";
-	$query_breves .= " $where ORDER BY maj DESC LIMIT 0,10";
-	$query_rubriques .= " $where ORDER BY maj DESC LIMIT 0,10";
+	$query_breves .= " $where ORDER BY maj DESC";
+	$query_rubriques .= " $where ORDER BY maj DESC";
 	
-	$query_sites .= " $where ORDER BY maj DESC LIMIT 0,10";
+	$query_sites .= " $where ORDER BY maj DESC";
 	$query_sites  = ereg_replace("titre LIKE", "nom_site LIKE", $query_sites);
 	
 	$activer_moteur = (lire_meta('activer_moteur') == 'oui');
