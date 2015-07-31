@@ -1139,7 +1139,7 @@ function maj_base($version_cible = 0) {
 	// supprime si le plugin n'est pas active ; risque inherent a l'utilisation
 	// de versions alpha :-)
 	if (upgrade_vers(1.906, $version_installee, $version_cible)) {
-		if (!in_array('podcast_client', $GLOBALS['plugins'])) {
+		if (!@in_array('podcast_client', $GLOBALS['plugins'])) {
 			spip_query("DROP TABLE spip_documents_syndic");
 		}
 		maj_version(1.906);
