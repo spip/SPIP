@@ -21,12 +21,13 @@ define("_INC_COMPILO_API", "1");
 class Texte {
 	var $type = 'texte';
 	var $texte;
+	var $avant, $apres = ""; // s'il y avait des guillemets autour
 }
 
 class Inclure {
 	var $type = 'include';
 	var $texte;
-	var $args = array();  //  valeurs des params
+	var $param = array();  //  valeurs des params
 	var $avant, $apres; // inutilises mais generiques
 }
 
@@ -73,10 +74,9 @@ class Boucle {
 // sous-noeud du precedent
 
 class Critere {
-	var $operateur;
-	var $arg1;
-	var $arg2;
+	var $op;
 	var $not;	
+	var $param;
 }
 
 class Champ {
@@ -85,7 +85,7 @@ class Champ {
 	var $nom_boucle= ''; // seulement si boucle explicite
 	var $avant, $apres; // tableaux d'objets
 	var $etoile;
-	var $filtres = array();  // filtre explicites
+	var $param = array();  // filtre explicites
 	var $fonctions = array();  // source des filtres (compatibilite)
 	// champs pour la production de code
 	var $id_boucle;
@@ -106,8 +106,8 @@ class Idiome {
 	var $type = 'idiome';
 	var $nom_champ = ""; // la chaine a traduire
 	var $module = ""; // son module de definition
-	var $filtres = array(); // les filtres a appliquer au resultat
-	var $fonctions = array(); // source des filtres
+	var $param = array(); // les filtres a appliquer au resultat
+	var $fonctions = array(); // source des filtres  (compatibilite)
 	var $avant, $apres; // inutilises mais faut = ci-dessus
 	// champs pour la production de code, cf ci-dessus
 	var $id_boucle;

@@ -23,16 +23,14 @@ define("_INC_HTML_SQUEL", "1");
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
-define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^}{]*([{][^}]*[}][^}]*)*)[[:space:]]*[}]');
+define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^{}]*([{][^[}]]*[}][^[}]]*)*)[[:space:]]*[}]');
 define('TYPE_DE_BOUCLE', "[^)]*");
 define('BALISE_DE_BOUCLE',
 	"^<BOUCLE(" .
 	NOM_DE_BOUCLE .
 	')[[:space:]]*\((' .
 	TYPE_DE_BOUCLE .
-	')\)((' .
-	PARAM_DE_BOUCLE .
-	')*)[[:space:]]*>');
+	')\)');
 define('PARAM_INCLURE','^[[:space:]]*[{][[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=)?');
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
 define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
@@ -47,7 +45,7 @@ function phraser_inclure($texte, $result) {
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,">","",$result,$champ);
-		foreach ($champ->args as $k => $v) {
+		foreach ($champ->param as $k => $v) {
 		  $var = $v[1][0];
 		  if ($var->type != 'texte')
 			erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
@@ -55,16 +53,16 @@ function phraser_inclure($texte, $result) {
 		  else {
 		    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
 		    if ($m[2]) {
-		      $champ->args[$k][0] = $m[1];
+		      $champ->param[$k][0] = $m[1];
 		      $val = $m[3];
 		      if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
-		      $champ->args[$k][1][0]->texte = $val;
+		      $champ->param[$k][1][0]->texte = $val;
 		    }
 		    else
-		      $champ->args[$k] = array($m[1]);
+		      $champ->param[$k] = array($m[1]);
 		  }
 		}
-		$texte = $champ->apres;
+		$texte = substr($champ->apres,1);
 		$champ->apres = "";
 		$result[] = $champ;
 	}
@@ -84,7 +82,7 @@ function phraser_polyglotte($texte,$result) {
 		$lang = '';
 		$bloc = $match[1];
 		$texte = substr($texte,$p+strlen($match[0]));
-		while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[{\[]([a-z_]+)[}\]](.*)$/si", $bloc, $regs)) {
+		while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[[{]([a-z_]+)[]}](.*)$/si", $bloc, $regs)) {
 		  $trad = $regs[1];
 		  if ($trad OR $lang) 
 			$champ->traductions[$lang] = $trad;
@@ -159,17 +157,24 @@ function phraser_champs_etendus($texte, $result) {
 //  Analyse les filtres d'un champ etendu et affecte le resultat
 // renvoie la liste des lexemes d'origine augmentee
 // de ceux trouves dans les arguments des filtres (rare)
+// sert aussi aux arguments des includes et aux criteres de boucles
+// Tres chevelu
 
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
-  while (($texte!=="") && $texte[0] != $fin) {
+  while (($texte!=="") && strpos($fin, $texte[0]) === false) {
       ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = $match[1];
       if ($fonc[0] == "|") $fonc = substr($fonc,1);
       $res = array(trim($fonc));
       $args = $suite;
-      if ($suite[0] == '{') {
+      if ($suite[0] != '{')
+	{ if (!$match[1]) {
+	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
+	    break;
+	  }
+	} else {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
 	while ($args && $args[0] != '}') {
@@ -177,48 +182,74 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			ereg ('^(")([^"]*)(")(.*)$', $args, $regs);
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
-		else
-			ereg("^( *)([^,}{]*([{][^}{]*[}][^,}{]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
+		else {
+		  ereg("^( *)([^,}]*)([,}$fin].*)$", $args, $regs);
+		  if (!strlen($regs[2]))
+		    {
+		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
+		      $args = '';
+		      exit;
+		      }   
+		}
 
-		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
-		if (trim($regs[1])) { // valeur = ", ', ou vide
+		if (trim($regs[1])) {
 			$champ = new Texte;
 			$champ->texte = $arg;
+			$champ->apres = $champ->avant = $regs[1];
 			$result[] = $champ;
 			$collecte[] = $champ;
-		} else {   // valeur = ", ', ou vide
-		  if ((count($regs) > 3) &&
-		      ereg("^(.*)(#[A-Z0-9:_=]+[{].*[}])(.*)$",$arg, $r))
-		    {
-		      // champ avec arg, sans les [( )]: on les rajoute
-		      $arg = $r[1] .  '[(' . $r[2] . ')' . $r[3] . ']';
-		      $arg = phraser_champs_etendus($arg, array());
-		      
-		    } else {
-		    $arg = phraser_champs_exterieurs(ltrim($arg), $sep, $result);
+			$args = ltrim($regs[count($regs)-1]);
+		} else {
+		  if (!ereg("^(.*)" . NOM_DE_CHAMP ."[|{]", $arg, $r)) {
+		    $arg = phraser_champs_exterieurs($arg, $sep, $result);
+		    $args = ltrim($regs[count($regs)-1]);
+		    $collecte = array_merge($collecte, $arg);
+		    $result = array_merge($result, $arg);
 		  }
-		  $collecte = array_merge($collecte, $arg);
-		  $result = array_merge($result, $arg);
+		  else {
+		    $pred = $r[1];
+		    $par = ',}';
+		    if (ereg('(.*)\($', $pred, $m))
+		      {$pred = $m[1]; $par =')';}
+		    if ($pred) {
+			$champ = new Texte;
+			$champ->texte = $pred;
+			$champ->apres = $champ->avant = "";
+			$result[] = $champ;
+			$collecte[] = $champ;
+		    }
+		    $rec = substr($args, strpos($r[0],$args)+strlen($r[0])-1);
+		    $champ = new Champ;
+		    $champ->nom_boucle = $r[3];
+		    $champ->nom_champ = $r[4];
+		    $champ->etoile = $r[5];
+		    phraser_args($rec, $par, $sep, array(), $champ);
+		    $args = $champ->apres ;
+		    $champ->apres = '';
+		    if ($par==')') $args = substr($args,1);
+		    $collecte[] = $champ;
+		    $result[] = $champ;
+		  }
 		}
-		$args = ltrim($args);
 		if ($args[0] == ',') {
-		  $args = substr($args,1);
+		  $args = ltrim(substr($args,1));
 		  if ($collecte)
 		    {$res[] = $collecte; $collecte = array();}
 		}
+
 	}
 	if ($collecte) {$res[] = $collecte; $collecte = array();}
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
-      $pointeur_champ->args[] = $res;
+      $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
       $texte = ltrim($args);
   }
-  # virer la parenthese fermante ou le chevron fermant
-  $pointeur_champ->apres = substr($texte,1);
+  # laisser l'appelant virer le caractere fermant
+  $pointeur_champ->apres = $texte;
   return $result;
 }
 
@@ -244,7 +275,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		// phraser_args indiquera ou commence apres
 		$result = phraser_args($regs[6], ")", $sep, $result, $champ);
 		$champ->avant = phraser_champs_exterieurs($regs[1],$sep,$result);
-		$champ->apres = phraser_champs_exterieurs($champ->apres,$sep,$result);
+		$champ->apres = phraser_champs_exterieurs(substr($champ->apres,1),$sep,$result);
 
 
 		$p = strpos($texte, $regs[0]);
@@ -264,55 +295,123 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 	  else return phraser_champs_exterieurs($x, $sep, $result);}
 }
 
+// analyse des criteres de boucle, 
 
-function phraser_param($params, &$result) {
-	$params2 = array();
+function phraser_criteres($params, &$result) {
+
 	$args = array();
 	$type = $result->type_requete;
-	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
-		$params = $m[3];
-		$param = trim($m[1]);
+	foreach($params as $v) {
+		$var = $v[1][0];
+		$param = ($var->type != 'texte') ? "" : $var->texte;
+		if ((count($v) > 2) && (!eregi("[^A-Za-z]IN[^A-Za-z]",$param)))
+		  {
+// plus d'un argument:
+// c'est soit le critere LIMIT debut,fin si ça se termine par un chiffre
+// soit le critere PAR soit un critere perso
+		       
+			if (($var->type != 'texte') ||
+			    (strpos("0123456789", $param[strlen($param)-1])
+			     !== false))
+			  $op = ',';
+			else {
+			  ereg("^([a-zA-Z][a-zA-Z0-9]*) *(.*)$", $param, $m);
+			  $op = $m[1];
+			  $v[1][0]->texte = $m[2];
+			}
+			array_shift($v);
+			$crit = new Critere;
+			$crit->op = $op;
+			$crit->not = "";
+			$crit->param = $v;
+			$args[] = $crit;
+		  } else {
+
+		  if ($var->type != 'texte')
+			  erreur_squelette('criteres','');
+		  else {
 	// traiter qq lexemes particuliers pour faciliter la suite
-		if (($param == 'tout') OR ($param == 'tous'))
-			$result->tout = true;
-		else if ($param == 'plat') 
-			$result->plat = true;
-	// les separateurs (specs CSS3 aN+b a finaliser)
-		else if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $m))
-			$result->separateur[] = $m[1];
+
+	// les separateurs
+			if ($var->apres)
+				$result->separateur[] = $param;
+			elseif (($param == 'tout') OR ($param == 'tous'))
+				$result->tout = true;
+			elseif ($param == 'plat') 
+				$result->plat = true;
 
 	// Boucle hierarchie, analyser le critere id_article - id_rubrique
 	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
 	// forcer {tout} pour avoir la rubrique mere...
 
-		else if (($type == 'hierarchie') &&
-			($param == 'id_article' OR $param == 'id_syndic'))
-			$result->tout = true;
-		else if (($type == 'hierarchie') && ($param == 'id_rubrique'))
-			{;}
-		else { 
-		  $params2[] = ($param == 'unique') ? 'doublons' :$param;
-		  /* pour bientot
-		   if (ereg('^([0-9a-zA-Z#_}{-]+)([,/])([0-9a-zA-Z#_}{-]+)$', $param, $match))
-			  $args['parties'] = $match;
-			else if (eregi('^(`?[a-z_]+\(?[a-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $match))
-			  $args['comparaison'] = $match;
-			else {
-			  preg_match("/^([!]?)[[:space:]]*(debut|([a-z_]+))/ism", $param, $match);
-			  // contient aussi les comparaisons implicites !
-			  $args[$match[2]] = $match;
-		  */
+			elseif (($type == 'hierarchie') &&
+				($param == 'id_article' OR $param == 'id_syndic'))
+				$result->tout = true;
+			elseif (($type == 'hierarchie') && ($param == 'id_rubrique'))
+				{;}
+			else { 
+			  // pas d'emplacement statique, faut un dynamique
+			  /// mais il y a 2 cas qui ont les 2 !
+			  if (($param == 'unique') || ($param == 'doublons'))
+			    {
+			      // sera remplace ensuite par la bonne valeur
+			      // mais il faut l'indiquer tout de suite
+			      $result->doublons = true;
+			      $param = 'doublons';
+			    }
+			  elseif ($param == 'recherche')
+			    // meme chose (a cause de #nom_de_boucle:URL_*)
+			      $result->hash = true;
+
+			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
+			    $v[0] = $v[1];
+			    $v[0][0]->texte = $m[1];
+			    $v[1][0]->texte = $m[2];
+			    $crit = new Critere;
+			    $crit->op = '/';
+			    $crit->not = "";
+			    $crit->param = $v;
+			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?| IN) *"?([^<>=!"]*)"?$', $param, $m)) {
+			    $v[0] = $v[1];
+			    $v[0][0]->texte = $m[1];
+			    $v[1][0]->texte = $m[5];
+			    $crit = new Critere;
+			    $crit->param = $v;
+			    $crit->op = trim($m[4]);
+			    $crit->not = $m[3];
+			    $crit->cond = $m[2];
+			    if ($m[1] == 'lang_select') $crit->op = $m[1];
+		  } elseif (preg_match("/^([!]?)[[:space:]]*([a-z_]+)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
+
+		  // contient aussi les comparaisons implicites !
+			    array_shift($v);
+			    if ($m[4])
+			      $v[0][0]->texte = $m[4];
+			    else {
+			      array_shift($v[0]);
+			      if (!$v[0]) array_shift($v);
+			    }
+			    $crit = new Critere;
+			    $crit->op = $m[2];
+			    $crit->param = $v;
+			    $crit->not = $m[1];
+			    $crit->cond = $m[3];
+			  }
+			  else
+			    erreur_squelette(_T('zbug_critere_inconnu',
+						array('critere' => $param)));
+			  $args[] = $crit;
+			}
+		  }
 		}
 	}
 
-	$result->param = $params2;
-	// pour bientot	$result->args = $args2;
+	$result->criteres = $args;
 }
 
 function phraser($texte, $id_parent, &$boucles, $nom) {
 
 	$all_res = array();
-
 	while (preg_match(DEBUT_DE_BOUCLE, $texte, $regs)) {
 		$nom_boucle = $regs[1].$regs[2];
 		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
@@ -330,12 +429,11 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		//
 		$debut = substr($texte, 0, $p);
 		$milieu = substr($texte, $p);
-
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
 			erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $milieu);
 		}
+		$milieu = substr($milieu, strlen($match[0]));
 		$id_boucle = $match[1];
-
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
 		$result->id_boucle = $id_boucle;
@@ -354,12 +452,15 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		//
 		if (substr($type, 0, 6) == 'boucle') {
 			$result->type_requete = 'boucle';
-			$result->param = substr($match[2], 6);
+			$result->param[0] = substr($match[2], 6);
+			$milieu = substr($milieu, strpos($milieu, '>'));
 		} else {
 			$result->type_requete = $type;
-			phraser_param($match[3], $result);
+			phraser_args($milieu,">","",$all_res,$result);
+			phraser_criteres($result->param, $result);
+			$milieu = substr($result->apres,1);
+			$result->apres = "";
 		}
-
 		//
 		// Recuperer la partie conditionnelle avant
 		//
@@ -369,7 +470,7 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 			$result->avant = substr($debut, $p + strlen($s));
 			$debut = substr($debut, 0, $p);
 		}
-		$milieu = substr($milieu, strlen($match[0]));
+
 		if (strpos($milieu, $s)) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 				$id_boucle . 
@@ -388,7 +489,6 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		}
 		$texte = substr($milieu, $p + strlen($s));
 		$milieu = substr($milieu, 0, $p);
-
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//
@@ -408,7 +508,6 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 			$result->altern = substr($texte, 0, $p);
 			$texte = substr($texte, $p + strlen($s));
 		}
-
 		$result->avant = phraser($result->avant, $id_parent,$boucles, $nom);
 		$result->apres = phraser($result->apres, $id_parent,$boucles, $nom);
 		$result->altern = phraser($result->altern,$id_parent,$boucles, $nom);
@@ -423,8 +522,6 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		} else
 			$boucles[$id_boucle] = $result;
 	}
-
 	return phraser_champs_etendus($texte, $all_res);
 }
-
 ?>
