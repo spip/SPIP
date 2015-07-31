@@ -114,15 +114,14 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	} else { // pas distant
 
 		$type_image = ''; // au pire
-		list($nom_envoye, $ext, $titre) = corriger_extension_et_nom($nom_envoye, $titrer);
 		// tester le type de document :
 		// - interdit a l'upload ?
 		// - quelle extension dans spip_types_documents ?
 		// - est-ce "inclus" comme une image ?
-		$row = sql_fetsel("inclus", "spip_types_documents", "extension=" . sql_quote($ext) . " AND upload='oui'");
+		list($nom_envoye, $ext, $titre, $inclus) = corriger_extension_et_nom($nom_envoye, $titrer);
 
-		if ($row) {
-			$type_inclus_image = ($row['inclus'] == 'image');
+		if ($inclus !== false) {
+			$type_inclus_image = ($inclus == 'image');
 			$fichier = copier_document($ext, $nom_envoye, $source);
 		} else {
 
@@ -432,6 +431,10 @@ function traite_svg($file)
 	return array($width, $height);
 }
 
+// Regexp synthetisant un titre a partir d'un nom de fichier.
+// Exemple: squelette-de-Mozart-vers-5-ans.jpg => squelette de Mozart vers 5 ans
+define('_REGEXP_TITRER_DOCUMENT', ',[[:punct:][:space:]]+,u');
+
 function corriger_extension_et_nom($nom, $titrer=false)
 {
 	preg_match(",^(.*)\.([^.]+)$,", $nom, $match);
@@ -444,10 +447,11 @@ function corriger_extension_et_nom($nom, $titrer=false)
 	else $nom = str_replace('.','-',$titre).'.'.$ext;
 
 	if ($titrer) {
-		$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+	  $titre = is_string($titrer) ? $titrer : preg_replace($titrer, ' ', $titre ? $titre : $nom);
 	} else $titre = '';
 	$ext = corriger_extension(strtolower($ext));
-	return array($nom, $ext, $titre);
+	$row = sql_fetsel("inclus", "spip_types_documents", "extension=" . sql_quote($ext) . " AND upload='oui'");
+	return array($nom, $ext, $titre, $row ? $row['inclus'] : false);
 }
 
 //
