@@ -265,7 +265,7 @@ else
 
 
 
-debut_page("$titre_page","documents","sites");
+debut_page("$titre_page","documents","sites", "", "", $id_rubrique);
 
 
 //////// parents

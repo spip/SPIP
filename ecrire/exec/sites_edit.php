@@ -37,7 +37,7 @@ else {
 
 }
 
-debut_page(_T('info_site_reference_2'), "documents", "sites");
+debut_page(_T('info_site_reference_2'), "documents", "sites", "", "", $id_rubrique);
 
 debut_grand_cadre();
 

@@ -2138,11 +2138,11 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 // Presentation de l'interface privee, debut du HTML
 //
 
-function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="") {
+function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="", $id_rubrique = "") {
 
 	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
-	init_body($rubrique, $sous_rubrique, $onLoad);
+	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
 	debut_corps_page();
 }
  
@@ -2172,7 +2172,7 @@ function init_entete($titre, $rubrique, $css='') {
 }
 
 // fonction envoyant la double serie d'icones de redac
-function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='') {
+function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
 	global $connect_statut;
@@ -2181,7 +2181,6 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='') {
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
-	global $id_rubrique;
 
 	$id_rubrique = intval($id_rubrique);
 
