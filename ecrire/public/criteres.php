@@ -411,7 +411,12 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	      }
 	  } else $sens ='';
 
-	  $t = ($fct ? "'$fct(' . $order . ')'" : $order) . $collecte . $sens;
+	  if ($fct) {
+	    if (preg_match("/^\s*'(.*)'\s*$/", $order, $r))
+	      $order = "'$fct(" . $r[1] . ")'";
+	    else $order = "'$fct(' . $order . ')'";
+	  }
+	  $t = $order . $collecte . $sens;
 	  if (preg_match("/^(.*)'\s*\.\s*'([^']*')$/", $t, $r))
 	      $t = $r[1] . $r[2];
 	  $boucle->order[] = $t;
