@@ -73,7 +73,7 @@ function index_tous_dist()
 	icone_horizontale (_L('Statut de l\'indexation'), generer_url_ecrire("admin_index"), "tout-site-24.gif");
 	echo "</p>";
 
-	icone_horizontale (_L('Tout'), "index_tous.php", "tout-site-24.gif");
+	icone_horizontale (_L('Tout'), generer_url_ecrire("index_tous.php"), "tout-site-24.gif");
 
 	$link = new Link();
 	$link->addVar('filtre',$filtre);
@@ -191,15 +191,17 @@ function index_tous_dist()
 				else {
 					$puce = 'puce-orange-breve.gif';
 				}
-				$s = "";
-				$s .= "<img src='img_pack/$puce' width='7' height='7' style='border:0px;' />";
-				$s .= "[$points] ";
-				$s .= "<a href='recherche.php3?recherche=";
-				$s .= urlencode($dico);
-				$s .= "' title='$occurences occurences'>";
-				$s .= $dico . "</a>";
-				$s .= "&nbsp;";
-				$vals[] = $s;
+				$vals[] = "<img src='img_pack/"
+				  . $puce 
+				  . "' width='7' height='7' style='border:0px;' />["
+				  . $points
+				  . "] <a href='" 
+				  . generer_url_ecrire("recherche", "recherche=" . urlencode($dico))
+				  .  "' title='"
+				  . $occurences
+				  . " occurences'>"
+				  .  $dico
+				  . "</a>&nbsp;";
 
 				if (fmod($compteur_liste,3)==0){
 					$tableau[] = $vals;

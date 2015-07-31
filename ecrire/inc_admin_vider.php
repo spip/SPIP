@@ -121,15 +121,11 @@ if ($quota_cache) {
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 
- $action = 'purger';
- $arg = 'taille_vignettes';
- $hash = calculer_action_auteur("$action $arg");
-
- echo "<div style='text-align: center;'>",
-   "<iframe width='530px' height='65px' src='",
-   generer_action_auteur($action, $arg) . "&lang=$spip_lang",
-   "'></iframe>",
-   "</div>";
+ echo "<div style='text-align: center;'>
+<iframe width='530px' height='65px' src='",
+   generer_action_auteur('purger','taille_vignettes') . "&lang=$spip_lang",
+   "'></iframe>
+</div>";
 
  $action = 'purger';
  $arg = 'vignettes';

@@ -34,7 +34,7 @@ fin_boite_info();
 
 debut_raccourcis();
 echo "<p>";
-icone_horizontale (_L('Voir le vocabulaire indexe'), "index_tous.php", "statistiques-24.gif");
+ icone_horizontale (_L('Voir le vocabulaire indexe'),  generer_url_ecrire("index_tous.php"), "statistiques-24.gif");
 echo "</p>";
 
  icone_horizontale (_L('Mettre &agrave; jour les infos d\'indexation du site'), generer_url_ecrire("admin_index", "mise_a_jour=oui"), "cache-24.gif");
