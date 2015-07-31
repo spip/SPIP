@@ -45,7 +45,7 @@ function exec_articles_args($id_article)
 		echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", $row['id_rubrique']);
 
 		echo debut_grand_cadre(true),
-			afficher_hierarchie($row['id_rubrique']),
+			afficher_hierarchie($row['id_rubrique'],_T('titre_cadre_interieur_rubrique'),$id_article,'article',$id_secteur,($row['statut'] == 'publie')),
 			fin_grand_cadre(true),
 			$res,
 			fin_page();
@@ -135,8 +135,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_contenu =
 	  afficher_corps_articles($id_article,$virtuel,$row);
 
-	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :
-		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut_rubrique))
+	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$editer_mots ? '' : $editer_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
@@ -310,30 +309,4 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	return $res;
 }
 
-// http://doc.spip.org/@afficher_article_rubrique
-function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
-{
-	global $spip_lang_right;
-	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$aider = charger_fonction('aider', 'inc');
-
-	$form = $chercher_rubrique($id_rubrique, 'article', $statut=='publie');
-	if (strpos($form,'<select')!==false) {
-		$form .= "<div style='text-align: $spip_lang_right;'>"
-			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
-			. "</div>";
-	}
-
-	$msg = _T('titre_cadre_interieur_rubrique') .
-	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("artrub"));
-	  
-	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
-	$form = generer_action_auteur("editer_article", $id_article, generer_url_ecrire('articles'), $form, " method='post' class='submit_plongeur'");
-
-	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
-	else $logo = "rubrique-24.gif";
-
-	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
-}
 ?>
