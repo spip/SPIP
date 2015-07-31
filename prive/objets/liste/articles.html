@@ -26,7 +26,7 @@
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
-				<a href="[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
 				#ID_ARTICLE
 			})]</td>
 		</tr>
