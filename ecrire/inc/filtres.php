@@ -2117,6 +2117,23 @@ function modulo($nb, $mod, $add=0) {
 }
 
 
+/**
+ * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ *
+ * @param string $nom
+ *      Nom (signature) proposé
+ * @return bool
+ *      - false si pas conforme,
+ *      - true sinon
+**/
+function nom_acceptable($nom) {
+	if (!is_string($nom)) {
+		return false;
+	}
+	$v_nom = str_replace(array('@multi@','@/multi@'), array('<multi>','</multi>'), supprimer_tags(str_replace(array('<multi>','</multi>'), array('@multi@','@/multi@'), $nom)));
+	return $v_nom == $nom;
+}
+
 
 /**
  * Vérifier la conformité d'une ou plusieurs adresses email (suivant RFC 822)
