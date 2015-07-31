@@ -311,7 +311,7 @@ Merci de votre participation
 'forum_lien_hyper' => '<b>Lien hypertexte</b> (optionnel)',
 'forum_message_definitif' => 'Message d&eacute;finitif : envoyer au site',
 'forum_message_trop_long' => 'Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.',
-'forum_ne_repondez_pas' => 'Ne repondez pas a ce mail mais sur le forum a l\'adresse suivante :',
+'forum_ne_repondez_pas' => 'Ne r&eacute;pondez pas &agrave; ce mail mais sur le forum &agrave; l\'adresse suivante :',
 'forum_non_inscrit' => 'Vous n\'&ecirc;tes pas inscrit, ou l\'adresse ou le mot de passe sont erron&eacute;s.',
 'forum_page_url' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, vous pouvez indiquer ci-apr&egrave;s le titre de la page et son adresse.)',
 'forum_par_auteur' => 'par @auteur@',
