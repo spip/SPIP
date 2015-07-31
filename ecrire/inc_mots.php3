@@ -315,7 +315,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
 				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
 	
-				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe";
+				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre";
 				$result_autres_mots = spip_query($query_autres_mots);
 				while ($row_autres = spip_fetch_array($result_autres_mots)) {
 					$le_mot = $row_autres['id_mot'];
