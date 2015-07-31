@@ -413,7 +413,7 @@ function calculer_param_date($date_compare, $date_orig) {
 // Calculer les parametres
 function calculer_param_dynamique($val, &$boucles, $idb) {
 	if (ereg("^#([A-Za-z0-9_-]+)$",$val,$m)) {
-		list($c,$a) = calculer_champ('',$m[1], $idb, $boucles,$idb);
+		$c = calculer_champ('',$m[1], $idb, $boucles,$idb);
 		#spip_log("trouve $c");
 		if ($a) {
 			return array(_T('info_erreur_squelette'),
