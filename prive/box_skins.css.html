@@ -38,10 +38,26 @@
 
 /* ----- error, success, notice (extends box) ----- */
 .box.error, .box.success, .box.notice {padding:0;backround-image:none;}
-.error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 5px 5px;}
-.success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;background-image:url(#CHEMIN_IMAGE{ok-24.png});}
-.error .inner{color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;background-image:url(#CHEMIN_IMAGE{erreur-24.png});}
-.notice .inner{color: #514721;border-color: #FFD324;background-color:#FFF6BF;background-image:url(#CHEMIN_IMAGE{warning-24.png});}
+.error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;}
+.error .bd,.success .bd,.notice .bd {padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 5px 5px;}
+.box.error .hd,.box.success .hd,.box.notice .hd {padding-left:40px;}
+.error .ft,.success .ft,.notice .ft {padding-left:40px;}
+
+.success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
+.success .bd{background-image:url(#CHEMIN_IMAGE{ok-24.png});}
+.box.success .hd {background-color:#C6DF61;}
+.box.success .hd h1,.box.success .hd h2,.box.success .hd h3,.box.success .hd h4,.box.success .hd h5,.box.success .hd h6 {background-color:#C6DF61;}
+
+.error .inner{color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
+.error .bd{background-image:url(#CHEMIN_IMAGE{erreur-24.png});}
+.box.error .hd {background-color:#DF454F;color:#fff;}
+.box.error .hd h1,.box.error .hd h2,.box.error .hd h3,.box.error .hd h4,.box.error .hd h5,.box.error .hd h6 {background-color:#DF454F;color:#fff;}
+
+.notice .inner{color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
+.notice .bd{background-image:url(#CHEMIN_IMAGE{warning-24.png});}
+.box.notice .hd {background-color:#FFD83F;}
+.box.notice .hd h1,.box.notice .hd h2,.box.notice .hd h3,.box.notice .hd h4,.box.notice .hd h5,.box.notice .hd h6 {background-color:#FFD83F;}
+
 
 /* ====== Background blocks ====== */
 .highlight .inner{background-color:#GET{claire};}
