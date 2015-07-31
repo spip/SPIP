@@ -749,6 +749,12 @@ function hauteur($img) {
 //
 function copie_locale($source, $mode='auto') {
 	include_ecrire('inc_getdocument.php3');
+
+	// Si copie_locale() est appele depuis l'espace prive
+	if (!_DIR_RESTREINT
+	AND strpos('../'.$source, _DIR_IMG) === 0)
+		return '../'.$source;
+
 	$local = fichier_copie_locale($source);
 
 	if ($source != $local) {
