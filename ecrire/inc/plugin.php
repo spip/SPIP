@@ -484,6 +484,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
 	// generer le fichier _CACHE_PIPELINE
 	pipeline_precompile();
+
+	// lancer et initialiser les nouveaux crons !
+	include_spip('inc/genie');
+	genie_queue_watch_dist();
+
 	return ($GLOBALS['meta']['plugin'] != $actifs_avant);
 }
 
