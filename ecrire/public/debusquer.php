@@ -439,24 +439,31 @@ function debusquer_navigation_squelettes($self)
 	$res = '';
 	$boucles = !empty($debug_objets['boucle']) ? $debug_objets['boucle']:'';
 	$contexte = $debug_objets['contexte'];
-	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
-		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
-		$res .= "<fieldset><legend>" ._T('squelette') . ' '  . $sourcefile ."&nbsp;: ";
-		$res .= "\n<a href='$self2&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
-		$res .= "\n<a href='$self2&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
-		$res .= "\n<a href='$self2&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a>";
-		$res .= "\n<a href='" . str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
-		  . "'>" .
-		  _T('zbug_calcul')."</a></legend>";
-		$res .= "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>isset($debug_objets['profile'][$sourcefile])?$debug_objets['profile'][$sourcefile]:0))."</span>";
+	$t_skel = _T('squelette');
+	foreach ($debug_objets['sourcefile'] as $nom => $sourcefile) {
+		$self2 = parametre_url($self,'var_mode_objet', $nom);
+		$nav = !$boucles ? '' : debusquer_navigation_boucles($boucles, $nom, $self);
+		$temps = !isset($debug_objets['profile'][$sourcefile]) ? '' : _T('zbug_profile', array('time'=>$debug_objets['profile'][$sourcefile]));
 
-		$res .= debusquer_contexte($contexte[$sourcefile]);
-
-		if ($boucles)
-			$res .= "<table width='100%'>\n" .
-				debusquer_navigation_boucles($boucles, $nom_skel, $self) .
-				"</table>\n";
-		$res .= "</fieldset>\n";
+		$res .= "<fieldset><legend>"
+		. $t_skel
+		. ' ' 
+		. $sourcefile
+		."&nbsp;:\n<a href='$self2&amp;var_mode_affiche=squelette#$nom'>"
+		. $t_skel
+		. "</a>\n<a href='$self2&amp;var_mode_affiche=resultat#$nom'>"
+		. _T('zbug_resultat')
+		. "</a>\n<a href='$self2&amp;var_mode_affiche=code#$nom'>"
+		. _T('zbug_code')
+		."</a>\n<a href='"
+		. str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
+		. "'>"
+		.  _T('zbug_calcul')
+		. "</a></legend>"
+		. (!$temps ? '' : ("\n<span style='display:block;float:$spip_lang_right'>$temps</span><br />"))
+		. debusquer_contexte($contexte[$sourcefile])
+		. (!$nav ? '' : ("<table width='100%'>\n$nav</table>\n"))
+		. "</fieldset>\n";
 	}
 	return $res;
 }
