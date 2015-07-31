@@ -53,14 +53,19 @@ else{
 
 function exec_export_all_dist()
 {
-  global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive;
+  global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $connect_login, $connect_toutes_rubriques;
 
-	if (!$archive) {
-		if ($gz) $archive = "dump.xml.gz";
-		else $archive = "dump.xml";
+	if ($connect_toutes_rubriques) {
+		$dir = _DIR_SESSIONS;
+	} else {
+		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
-	$partfile = $archive.".part";
-	
+
+  	if (!$archive) {
+		if ($gz) $archive = _SPIP_DUMP . '.gz';
+		else $archive = _SPIP_DUMP;
+	}
+  
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
 	lire_metas();
@@ -86,6 +91,9 @@ function exec_export_all_dist()
 
 	install_debut_html(_T('info_sauvegarde'));
 
+	$file = $dir . $archive;
+	$partfile = $file . ".part";
+
 	//if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='" . generer_url_ecrire("export_all","reinstall=non&etape=1&gz=$gz") . "'>"._T('info_procedez_par_etape')."</a></font></blockquote><p>";
 
 	$_fputs = ($gz) ? gzputs : fputs;
@@ -99,12 +107,12 @@ function exec_export_all_dist()
 		#ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
 		// et au cas ou (le rammase_parties s'arrete si un fichier de la serie est absent)
 		// on ratisse large avec un preg_files
-		$liste = preg_files(_DIR_SESSIONS, "$archive\.part\.[0-9]*");
+		$liste = preg_files($file .  ".part\.[0-9]*");
 		foreach($liste as $dummy)
 			@unlink($dummy);
 
 		echo _T("info_sauvegarde")."<br/>";
-		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "wb") : fopen(_DIR_SESSIONS . $archive, "wb");
+		$f = ($gz) ? gzopen($file, "wb") : fopen($file, "wb");
 		if (!$f) {
 			echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 			exit;
@@ -114,9 +122,9 @@ function exec_export_all_dist()
 		if ($gz) gzclose($f);
 		else fclose($f);
 	}
-	else{
+	else{ // reprise
 		echo _T("info_sauvegarde"). " (" . $status_dump[2] . ", " . $status_dump[3] . ")<br/>";
-		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "ab") : fopen(_DIR_SESSIONS . $archive, "ab");
+		$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
 		if (!$f) {
 			echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 			exit;
@@ -191,16 +199,16 @@ function exec_export_all_dist()
 		}
 
 		ob_flush();flush();
-		ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+		ramasse_parties($file, $gz, $partfile);
 
-		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "ab") : fopen(_DIR_SESSIONS . $archive, "ab");
+		$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
 		$_fputs ($f, build_end_tag("SPIP")."\n");
 		if ($gz) gzclose($f);
 		else fclose($f);
 		
 		effacer_meta("status_dump");
 		ecrire_metas();
-		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'.joli_repertoire(_DIR_SESSIONS.$archive).'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
+		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'.joli_repertoire($file).'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 	}
 	else{
 		if (!($timeout = ini_get('max_execution_time')*1000));
@@ -215,12 +223,12 @@ function exec_export_all_dist()
 			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
 		  while ($string!=''){
 				if ($cpt == 0)
-					ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+					ramasse_parties($file, $gz, $partfile);
 
 				// on ecrit dans un fichier generique
-				ecrire_fichier (_DIR_SESSIONS .$partfile, $string);
+				ecrire_fichier ($partfile, $string);
 				// on le renomme avec un numero -> operation atomique en linux
-				rename(_DIR_SESSIONS .$partfile,_DIR_SESSIONS .$partfile.".$cpt");
+				rename($partfile,$partfile.".$cpt");
 				$cpt ++;
 				ecrire_meta("status_dump", implode("::",$status_dump));
 				#lire_metas();

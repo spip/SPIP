@@ -18,14 +18,20 @@ function fichier_admin($action) {
 }
 
 function debut_admin($form, $action, $commentaire='') {
-	global $connect_statut;
+	global $connect_login, $connect_statut, $connect_toutes_rubriques;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_refuse'));
 	}
-	$fichier = fichier_admin($action);
-	if (@file_exists(_DIR_SESSIONS . $fichier)) {
+	if ($connect_toutes_rubriques) {
+		$dir = _DIR_SESSIONS;
+	} else {
+		$dir = _DIR_TRANSFERT . $connect_login . '/';
+
+	}
+	$signal = fichier_admin($action);
+	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
 		return true;
 	}
@@ -42,11 +48,11 @@ function debut_admin($form, $action, $commentaire='') {
 		. "\n<p>"
 		. _T('info_creer_repertoire')
 		. "\n<p align='center'>\n<INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"".
-		 $fichier
+		 $signal
 		. "\" size='30'>"
 		. "\n<p>"
 		. _T('info_creer_repertoire_2',
-			array('repertoire' => joli_repertoire(_DIR_SESSIONS)))
+			array('repertoire' => joli_repertoire($dir)))
 		. "\n<p align='right'><INPUT TYPE='submit' VALUE='"
 		. _T('bouton_recharger_page')
 		. "' CLASS='fondo'>"
@@ -54,9 +60,15 @@ function debut_admin($form, $action, $commentaire='') {
 }
 
 function fin_admin($action) {
-	$fichier = fichier_admin($action);
-	@unlink(_DIR_SESSIONS . $fichier);
-	@rmdir(_DIR_SESSIONS . $fichier);
+	global $connect_login, $connect_toutes_rubriques;
+	if ($connect_toutes_rubriques) {
+		$dir = _DIR_SESSIONS;
+	} else {
+		$dir = _DIR_TRANSFERT . $connect_login . '/';
+	}
+	$signal = fichier_admin($action);
+	@unlink($dir . $signal);
+	@rmdir($dir . $signal);
 }
 
 

@@ -68,8 +68,8 @@ function definir_barre_boutons() {
 		$boutons_admin['statistiques_visites']=
 		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
 	}
-	if ($GLOBALS['connect_statut'] == '0minirezo'
-		AND $GLOBALS['connect_toutes_rubriques']) {
+	if ($GLOBALS['connect_statut'] == '0minirezo') {
+
 		$boutons_admin['configuration']=
 		  new Bouton('administration-48.png', 'icone_configuration_site');
 	}
