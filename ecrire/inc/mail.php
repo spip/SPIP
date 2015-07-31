@@ -189,7 +189,7 @@ function extrait_article($row) {
 }
 
 function nettoyer_titre_email($titre) {
-	return ereg_replace("\n", ' ', supprimer_tags($titre));
+	return ereg_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
 }
 
 function envoyer_mail_publication($id_article) {
