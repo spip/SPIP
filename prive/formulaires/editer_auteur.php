@@ -36,8 +36,9 @@ function auteurs_edit_config($row)
 function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
 	// login trop court ou existant
-	if ($p = _request('new_login')){
-		if (strlen($p) < _LOGIN_TROP_COURT) {
+	if ($p = _request('new_login')) {
+		if ((strlen($p) < _LOGIN_TROP_COURT)
+		AND $p !== sql_getfetsel("login", "spip_auteurs", "id_auteur=$id_auteur")) {
 			$erreurs['login'] = _T('info_login_trop_court');
 			$erreurs['message_erreur'] .= _T('info_login_trop_court');
 		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'")) {
