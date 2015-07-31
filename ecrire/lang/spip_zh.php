@@ -60,7 +60,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'barre_lien' => '转为超文本链接[http://...]',
 'barre_lien_input' => '请输入目标链接(您可以使用 http://www.mysite.com的格式或直接指出在本站中该文章的编号).',
 'barre_note' => '转为[[页尾标号]]',
-'barre_paragraphe' => '<modif>新建段落',
+'barre_paragraphe' => '<modif>新建段落', # MODIF
 'barre_quote' => '<quote>引用一个消息</quote>',
 'bouton_changer' => '修改',
 'bouton_chercher' => '搜索',
@@ -85,10 +85,10 @@ Zhen QIN (zhen_q@21cn.com)',
 'cal_par_mois' => '按月显示日程',
 'cal_par_semaine' => '按周显示日程',
 'choix_couleur_interface' => '颜色',
-'choix_interface' => '<modif>界面切换',
+'choix_interface' => '<modif>界面切换', # MODIF
 'colonne' => '列',
 'confirm_changer_statut' => '注意，您要求改变这一项目的状态。请确认继续。',
-'correcte' => '<modif>生效',
+'correcte' => '<modif>生效', # MODIF
 
 // D
 'date_aujourdhui' => '今天',
@@ -151,10 +151,10 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => '星期日',
-'date_jour_1_abbr' => '<modif>周日',
+'date_jour_1_abbr' => '<modif>周日', # MODIF
 'date_jour_1_initiale' => '星期天',
 'date_jour_2' => '星期一',
-'date_jour_2_abbr' => '<modif>星期一',
+'date_jour_2_abbr' => '<modif>星期一', # MODIF
 'date_jour_2_initiale' => 'l.',
 'date_jour_3' => '星期二',
 'date_jour_3_abbr' => '星期二',
@@ -250,7 +250,7 @@ sera ignorée) :
 'form_deja_inscrit' => '您已注册.',
 'form_email_non_valide' => '您的电子邮件无效.',
 'form_forum_access_refuse' => '您无权继续访问该站点.',
-'form_forum_bonjour' => '<MODIF>您好@nom@，',
+'form_forum_bonjour' => '您好@nom@，', # MODIF
 'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => '该电子邮件地址已经记录,您可以使用常用密码.',
 'form_forum_identifiant_mail' => '您的新标识已经通过邮件发送给您了.',
@@ -260,8 +260,8 @@ sera ignorée) :
 'form_forum_message_auto' => '(这是自动消息)',
 'form_forum_pass' => '密码:',
 'form_forum_probleme_mail' => '邮件问题: 标识符不能被发送.',
-'form_forum_voici1' => '<MODIF>这是您加入站点网站编辑和论坛的标识符
-"@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici1' => '这是您加入站点网站编辑和论坛的标识符
+"@nom_site_spip@" (@adresse_site@):', # MODIF
 'form_forum_voici2' => '这是您提交文章的标识符
  "@nom_site_spip@" (@adresse_login@):', # MODIF
 'form_indiquer_email' => '请输入您的电子邮件地址.',
@@ -291,11 +291,11 @@ sera ignorée) :
 'icone_a_suivre' => '跟踪',
 'icone_admin_site' => '站点管理',
 'icone_agenda' => '记事',
-'icone_aide_ligne' => '<MODIF>帮助',
+'icone_aide_ligne' => '帮助', # MODIF
 'icone_articles' => '文章',
 'icone_auteurs' => '作者',
 'icone_brouteur' => '快速浏览',
-'icone_configuration_site' => '<MODIF>配置',
+'icone_configuration_site' => '配置', # MODIF
 'icone_configurer_site' => '配置站点',
 'icone_creer_nouvel_auteur' => '新建一个作者',
 'icone_creer_rubrique' => '新建专栏',
@@ -304,7 +304,7 @@ sera ignorée) :
 'icone_discussions' => '讨论',
 'icone_doc_rubrique' => '各专栏文档',
 'icone_ecrire_article' => '写新文章',
-'icone_edition_site' => '<MODIF>编辑',
+'icone_edition_site' => '编辑', # MODIF
 'icone_gestion_langues' => '语言管理',
 'icone_informations_personnelles' => '个人信息',
 'icone_interface_complet' => '完整界面',
@@ -326,7 +326,7 @@ sera ignorée) :
 'icone_tous_articles' => '您所有的文章',
 'icone_tous_auteur' => '所有作者',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_visiter_site' => '<MODIF>访问', # MODIF
+'icone_visiter_site' => '访问', # MODIF
 'icone_voir_en_ligne' => '在线预览',
 'img_indisponible' => '必需图像',
 'impossible' => 'impossible', # NEW
@@ -381,9 +381,9 @@ sera ignorée) :
 'info_erreur_requete' => '错误查询:',
 'info_erreur_squelette2' => '所有面板<b>@fichier@</b>均无效...',
 'info_erreur_systeme' => '系统错误 (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>硬盘无足够空间,或数据库遭破坏。 <br />
+'info_erreur_systeme2' => '硬盘无足够空间,或数据库遭破坏。 <br />
  <font color=\'red\'>请试用 <a href=\'@script@\'>修复数据库</a>，
- 或者联系您的管理员。</font>',
+ 或者联系您的管理员。</font>', # MODIF
 'info_fini' => '完成了!',
 'info_format_image' => '图片格式被用来创建插图: @gd_formats@.',
 'info_format_non_defini' => '未定义格式',
@@ -454,14 +454,14 @@ sera ignorée) :
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '无标题',
-'info_selectionner_fichier' => '<MODIF>从@upload@文件中选择一个文件',
+'info_selectionner_fichier' => '从@upload@文件中选择一个文件', # MODIF
 'info_selectionner_fichier_2' => '选择一个文件:',
 'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => '删除小插图',
-'info_symbole_bleu' => '<MODIF><b>蓝色</b>标志<b>备注</b>：例如个人使用的消息.',
-'info_symbole_jaune' => '<MODIF><b>黄色</b>表示<b>对所有编辑者声明</b> ：所有站点管理者都能看见并编辑。',
-'info_symbole_vert' => '<MODIF><b>绿色</b>表示<b>站点中与其它用户交换的信息</b>。',
+'info_symbole_bleu' => '<b>蓝色</b>标志<b>备注</b>：例如个人使用的消息.', # MODIF
+'info_symbole_jaune' => '<b>黄色</b>表示<b>对所有编辑者声明</b> ：所有站点管理者都能看见并编辑。', # MODIF
+'info_symbole_vert' => '<b>绿色</b>表示<b>站点中与其它用户交换的信息</b>。', # MODIF
 'info_telecharger_nouveau_logo' => '上传新图标:',
 'info_telecharger_ordinateur' => '从你的电脑上传:',
 'info_tous_resultats_enregistres' => '[所有结果被记录]',
@@ -573,7 +573,7 @@ sera ignorée) :
 .你
 将收到电子邮件
 向你解释如何得到访问.',
-'pass_mail_passcookie' => '<MODIF>(这是自动消息)
+'pass_mail_passcookie' => '(这是自动消息)
 要重新访问站点
 @nom_site_spip@ (@adresse_site@)
 
@@ -584,7 +584,7 @@ sera ignorée) :
 您可以输入新密码
 重新连接到站点。
 
-',
+', # MODIF
 'pass_mot_oublie' => '忘记密码',
 'pass_nouveau_enregistre' => '你的新密码已经被记录.',
 'pass_nouveau_pass' => '新密码',
@@ -617,7 +617,7 @@ sera ignorée) :
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@字符',
-'texte_actualite_site_1' => '<MODIF>当您认为此界面适合您，您就可以点击«',
+'texte_actualite_site_1' => '当您认为此界面适合您，您就可以点击«', # MODIF
 'texte_actualite_site_2' => '完整界西',
 'texte_actualite_site_3' => '» 使更多特性可用.',
 'texte_creation_automatique_vignette' => '站点自动创建签名预览激活. 如果你安装, 通过论坛, 图片格式 @gd_formats@, 它们将能和一个最大尺寸为 @taille_preview@ 像素的连接.',
@@ -625,11 +625,11 @@ sera ignorée) :
     但是它们不是直接插入的
     . 基于公共站点的规划,
     它们将作为附和文档出现.',
-'texte_erreur_mise_niveau_base' => '<MODIF>整理过程中数据库错误。
+'texte_erreur_mise_niveau_base' => '整理过程中数据库错误。
 图像<b>@fichier@</b>不能通过 (article @id_article@)。
 认真阅读此参考内容，
 再试整理过程，
-并注意图像始终显示在你的文件中。',
+并注意图像始终显示在你的文件中。', # MODIF
 'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 'texte_inc_auth_1' => '用登录名标识你自己
   <b>@auth_login@</b>, 但是在数据库中不存在 (不再存在). 
@@ -664,7 +664,7 @@ sera ignorée) :
 'titre_mots_cles' => '关键词',
 'titre_probleme_technique' => '警告:技术问题 MYSQL 制止访问站点的这部分,谢谢理解 .', # MODIF
 'titre_publier_document' => '在此栏下发布文档',
-'titre_signatures_attente' => '<modif>签名等待认证',
+'titre_signatures_attente' => '<modif>签名等待认证', # MODIF
 'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 'titre_statistiques' => '站点统计',
 'titre_titre_document' => '文章标题:',

@@ -391,7 +391,7 @@ sera ignorée) :
 'info_image_process_titre' => 'Método de fabricaçao das vinhetas',
 'info_impossible_lire_page' => '<b>Erro !</b> Impossível ler a página<tt><html>@test_proxy@</html></tt> através do proxy <tt>', # MODIF
 'info_installation_systeme_publication' => 'Instalação do sistema de publicação',
-'info_installer_documents' => '<MODIF>Pode instalar automaticamente todos os documentos contidos no processo @upload@.',
+'info_installer_documents' => 'Pode instalar automaticamente todos os documentos contidos no processo @upload@.', # MODIF
 'info_installer_ftp' => 'Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccioná-los directamente aqui.', # MODIF
 'info_installer_images' => 'Pode instalar imagens nos formatos JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Instalar imagens no dossier @upload@ para poder seleccioná-los aqui.', # MODIF
@@ -428,7 +428,7 @@ sera ignorée) :
 'info_nouveau_message' => 'TEM UMA NOVA MENSAGEM',
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_numero_abbreviation' => '<N° >',
-'info_obligatoire' => '<NEW>Esta informação é obrigatória',
+'info_obligatoire' => 'Esta informação é obrigatória', # NEW
 'info_pense_bete' => 'MEMORANDO',
 'info_petit_ecran' => 'Ecrã Pequeno',
 'info_petition_close' => 'Pétition close', # NEW
