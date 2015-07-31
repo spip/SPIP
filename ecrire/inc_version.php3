@@ -794,9 +794,9 @@ function _L($text) {
 		return $text;
 }
 
-// langue principale du site
+// Langue principale du site
 $langue_site = lire_meta('langue_site');
-if (!$langue_site) $langue_site = 'fr';
+if (!$langue_site) include_ecrire('inc_lang.php3');
 $spip_lang = $langue_site;
 
 //

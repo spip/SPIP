@@ -29,7 +29,7 @@ function changer_langue($lang) {
 			$spip_lang_left = 'right';
 			$spip_lang_right = 'left';
 		} else {
-			$spip_lang_left = 'left';	
+			$spip_lang_left = 'left';
 			$spip_lang_right = 'right';
 		}
 		return true;
@@ -69,10 +69,10 @@ function traduire_chaine($code, $args) {
 	if (!$GLOBALS[$var]) charger_langue($spip_lang);
 	$text = $GLOBALS[$var][$code];
 
-	if (!$text) {
+	/*if (!$text) {
 		charger_langue('fr');
 		$text = $GLOBALS['i18n_fr'][$code];
-	}
+	}*/
 	if (!is_array($args)) return $text;
 
 	if ($GLOBALS['flag_str_replace']) {
@@ -240,8 +240,7 @@ function traduire_nom_langue($lang) {
 function menu_langues() {
 	global $couleur_foncee;
 
-	if(!$couleur_foncee)
-		$couleur_foncee = '#044476';
+	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	$lien = $GLOBALS['clean_link'];
 	$lien->delVar('var_lang');
@@ -278,27 +277,26 @@ function gerer_menu_langues() {
 // Selection de langue haut niveau
 //
 function utiliser_langue_visiteur() {
-	changer_langue('fr');
 	if (!regler_langue_navigateur())
-		changer_langue(lire_meta('langue_site'));
+		changer_langue($GLOBALS['langue_site']);
 	if ($GLOBALS['prefs']['spip_lang'])
 		changer_langue($GLOBALS['prefs']['spip_lang']);
 }
 
 function utiliser_langue_site() {
-	changer_langue('fr');
-	changer_langue(lire_meta('langue_site'));
+	changer_langue($GLOBALS['langue_site']);
 }
 
 //
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $flag_ecrire;
+	global $all_langs, $flag_ecrire, $langue_defaut, $langue_site;
 
 	$all_langs = lire_meta('langues_proposees');
+	$langue_site = lire_meta('langue_site');
 
-	if (!$all_langs || $flag_ecrire) {
+	if (!$all_langs || !$langue_site || $flag_ecrire) {
 		$d = opendir($flag_ecrire ? "lang" : "ecrire/lang");
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z]{2,3})\.php3?$', $f, $regs))
@@ -310,6 +308,14 @@ function init_langues() {
 
 		if (defined("_ECRIRE_INC_META"))
 			ecrire_meta('langues_proposees', $all_langs);
+
+		if (!$langue_site) {
+			// Initialisation : le francais par defaut, sinon la premiere langue trouvee
+			if (ereg(',fr,', ',$all_langs,')) $langue_site = 'fr';
+			else list(, $langue_site) = each(explode(',', $all_langs));
+			if (defined("_ECRIRE_INC_META"))
+				ecrire_meta('langue_site', $langue_site);
+		}
 	}
 }
 
