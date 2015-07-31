@@ -439,6 +439,12 @@ function applique_filtres($p) {
 	if ($p->param)
 		$code = compose_filtres($p, $code);
 
+	// S'il y a un lien avec la session, ajouter un code qui levera
+	// un drapeau dans la structure d'invalidation $Cache
+	if ($p->descr['session'])
+		$code = "$code
+		. (!\$Cache['session']=true) // invalideur session\n		";
+
 	// ramasser les images intermediaires inutiles et graver l'image finale
 	if ($p->ramasser_miettes)
 		$code = "filtrer('image_graver',$code)";
