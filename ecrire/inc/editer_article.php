@@ -28,8 +28,8 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	}
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
-	$id_article = $lier_trad ? '' : $id_trad;
 	$id_trad = $row['id_article'];
+	$id_article = $lier_trad ? '' : $id_trad;
 	$titre = entites_html($row['titre']);
 	$texte = entites_html($row['texte']);
 
@@ -108,7 +108,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	 	_T('texte_modifier_article') .
 		gros_titre($row['titre'],'',false) . 
 		"</td></tr></table><hr />\n<p>" .
-	  generer_action_auteur("editer_article", $new ? $new : $id_article, $retour, $form, " method='post' name='formulaire'");
+	  generer_action_auteur("editer_article", $new ? 'oui' : $id_article, $retour, $form, " method='post' name='formulaire'");
 
 }
 
