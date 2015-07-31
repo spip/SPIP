@@ -508,6 +508,7 @@ $tables_auxiliaires['spip_jobs_liens'] = array(
  * texte_retour
  * texte_modifier
  * texte_creer
+ * texte_creer_associer
  * texte_ajouter
  * texte_objets
  * texte_objet
@@ -595,6 +596,8 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
 	if (!isset($infos['texte_creer']))
 		$infos['texte_creer'] = $infos['type'].':'.'icone_creer_'.$infos['type'];
+	if (!isset($infos['texte_creer_associer']))
+		$infos['texte_creer_associer'] = $infos['type'].':'.'texte_creer_associer_'.$infos['type'];
 	if (!isset($infos['texte_ajouter'])) // Ajouter un X
 		$infos['texte_ajouter'] = $infos['type'].':'.'texte_ajouter_'.$infos['type'];
 	if (!isset($infos['texte_objets']))
