@@ -72,10 +72,14 @@ p.resultat.echec { background-color: #d60c0c; }
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(images/degrade-etapes-clair-left.gif); }
 
 /* installation des plugins */
-.install-plugins {border-top:1px solid #ddd;border-bottom:1px solid #ddd;color:#555;font-size:0.85em;padding:10px;padding-right:150px;position:relative;}
-.install-plugins + .install-plugins {border-top:none;}
-.install-plugins .ok {display:block;position:absolute;top:10px;right:10px;color:green;font-weight:bold;}
-.install-plugins .erreur {display:block;position:absolute;top:10px;right:10px;color:red;font-weight:bold;}
+.error,.success,.notice {border:2px solid;color:#333;font-weight: normal;padding:10px;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;margin-bottom:1em;margin-top:1em;}
+.success {color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
+.error {color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
+.notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
+
+.install-plugins {position:relative;margin-bottom: 0;}
+.install-plugins + .install-plugins {margin-top: 0;border-top: 0;}
+.install-plugins .result {display:block;position:absolute;top:10px;right:10px;font-weight:bold;}
 
 
 /* Page de login
