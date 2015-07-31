@@ -1185,14 +1185,24 @@ function extraire_tag($texte, $tag) {
 }
 
 
-// recuperer un attribut html d'une balise
+// recuperer un attribut d'une balise html
 // ($complet demande de retourner $r)
 // http://doc.spip.org/@extraire_attribut
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (preg_match(
-	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
+//	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
+	',(.*?<(?:\s*\w+(?:=(?:"[^"]*?"|\'[^\']*?\'|[^\'"]\S*))?)*)\s*(\s'.$attribut.'(?:=\s*("[^"]*?"|\'[^\']*?\'|[^\'"]\S*))?)()([^>]*>.*),isS',
 	$balise, $r)) {
-		$att = $r[4];
+		if ($r[3][0] == '"' || $r[3][0] == "'") {
+			$r[4] = substr($r[3], 1, -1);
+			$r[3] = $r[3][0];
+		} elseif ($r[3]) {
+			$r[4] = $r[3]; 
+			$r[3] = '';
+		} else {
+			$r[4] = trim($r[2]); 
+		}
+		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
 	}
 	else
 		$att = NULL;
@@ -1216,7 +1226,7 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=
 	else
 		$insert = " $attribut='$val' ";
 
-	list($old,$r) = extraire_attribut($balise, $attribut, true);
+	list($old, $r) = extraire_attribut($balise, $attribut, true);
 
 	if ($old !== NULL) {
 		// Remplacer l'ancien attribut du meme nom
