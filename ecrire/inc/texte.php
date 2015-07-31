@@ -1059,10 +1059,13 @@ function traiter_raccourci_glossaire($letexte)
 // faire sauter l'eventuelle partie "|bulle d'aide" du lien
 // cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
 			$_terme = preg_replace(',[|].*,', '', $_terme);
+			include_spip('inc/charsets');
+			$_terme = rawurlencode(unicode2charset(charset2unicode($_terme), 'utf-8'));
 
 			if ($subst)
-				$url = str_replace("%s", rawurlencode($_terme),	$glosateur);
-			else $url = $glosateur. $_terme;
+				$url = str_replace("%s", $_terme, $glosateur);
+			else
+				$url = $glosateur. $_terme;
 			list($terme, $bulle, $hlang) = traiter_raccourci_lien_atts($terme);
 			$url = traiter_raccourci_lien_lang($url, 'spip_glossaire', $terme, $hlang, '', $bulle);
 			$letexte = str_replace($tout, $url, $letexte);
@@ -1086,6 +1089,8 @@ define('_RACCOURCI_LIEN', ",\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\],msS");
 // http://doc.spip.org/@expanser_liens
 function expanser_liens($letexte, $connect='')
 {
+	$letexte = pipeline('pre_liens', $letexte);
+
 	$inserts = array();
 	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
@@ -1107,26 +1112,6 @@ function expanser_liens($letexte, $connect='')
 	}
 	return $letexte;
 }
-
-/*
-// Inserer un lien a partir du preg_match du raccourci [xx->url]
-// Le preg-match a change, cette fonction est inutilisable
-// $regs:
-// 0=>tout le raccourci
-// 1=>texte (ou texte|hreflang ou texte|bulle ou texte|bulle{hreflang})
-// 2=>double fleche (historiquement, liens ouvrants)
-// 3=>url
-
-// http://doc.spip.org/@traiter_raccourci_lien
-function traiter_raccourci_lien($regs, $connect='') {
-
-	list(,$texte, ,$url) = $regs;
-	list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($texte);
-	list ($lien, $class, $texte, $lang) =
-		calculer_url($url, $texte, 'tout', $connect);
-	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect);
-}
-*/
 
 // http://doc.spip.org/@traiter_raccourci_lien_lang
 function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect='')
