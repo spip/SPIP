@@ -33,7 +33,7 @@ function install_etape_ldap5_dist()
 
 	echo info_etape(_T('info_ldap_ok'), _T('info_terminer_installation'));
 
-	echo generer_post_ecrire('install', (
+	echo generer_form_ecrire('install', (
 		"<input type='hidden' name='etape' value='5' />"
 		. bouton_suivant()));
 

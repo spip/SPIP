@@ -132,7 +132,7 @@ function install_etape_3_dist()
 		_T('info_laisser_champs_vides')
 	);
 
-	echo generer_post_ecrire('install', (
+	echo generer_form_ecrire('install', (
 
 	  "\n<input type='hidden' name='etape' value='4' />"
 
@@ -169,7 +169,7 @@ function install_etape_3_dist()
 	. bouton_suivant()));
 
 	if (function_exists('ldap_connect') AND !$ldap_present) {
-		echo generer_post_ecrire('install', (
+		echo generer_form_ecrire('install', (
 			fieldset(_T('info_authentification_externe'),
 				array(
 				'etape' => array(

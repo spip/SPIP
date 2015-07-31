@@ -54,7 +54,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	// GADGET Recherche
 	$r =  _T('info_rechercher');
 	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 60px;'>"
-	. generer_post_ecrire('recherche', 
+	. generer_form_ecrire('recherche', 
 		("<input type='text' size='10' value='$r' name='recherche' class='formo' accesskey='r' id='form_recherche' style='width: 140px;' />"),
 		" method='get' style='margin: 0px; position: relative;'")
 	. "</div>";

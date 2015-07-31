@@ -60,7 +60,7 @@ function exec_valider_xml_dist()
 	echo $commencer_page($titre);
 
 	echo "<div style='margin: 10px; text-align: center'>", "<h1>", $titre, '</h1>';
-	echo generer_post_ecrire('valider_xml',
+	echo generer_form_ecrire('valider_xml',
 				 ('<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />'),
 				 "method='get'");
 

@@ -45,7 +45,7 @@ function install_etape_1_dist()
 			$chmod = $regs[1]; 
 		}
 	}
-	echo generer_post_ecrire('install', (
+	echo generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='2' />" 
 	. "\n<input type='hidden' name='chmod' value='$chmod' />"
 	
