@@ -432,8 +432,6 @@ $flag_ImageGif = function_exists("ImageGif");
 $flag_ImageJpeg = function_exists("ImageJpeg");
 $flag_ImagePng = function_exists("ImagePng");
 $flag_imagick = function_exists("imagick_readimage");	// http://pear.sourceforge.net/en/packages.imagick.php
-$flag_multibyte = function_exists("mb_encode_mimeheader");
-$flag_iconv = function_exists("iconv");
 $flag_strtotime = function_exists("strtotime");
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;

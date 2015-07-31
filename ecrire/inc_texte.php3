@@ -280,28 +280,8 @@ function echappe_retour_doublon($letexte, $les_echap, $source, &$doublons)
 //
 // Gerer les outils mb_string
 //
-function init_mb_string() {
-	static $mb;
-
-	// verifier que tout est present et que le charset est connu de mb_string
-	if (!$mb) {
-		if (function_exists('mb_internal_encoding')
-		AND function_exists('mb_detect_order')
-		AND function_exists('mb_substr')
-		AND function_exists('mb_strlen')
-		AND mb_detect_order(lire_meta('charset'))
-		) {
-			mb_internal_encoding('utf-8');
-			$mb = 1;
-		} else
-			$mb = -1;
-	}
-
-	return ($mb == 1);
-}
-
 function spip_substr($c, $start=0, $end='') {
-
+	include_ecrire('inc_charsets.php3');
 	if (init_mb_string()) {
 		if ($end)
 			return mb_substr($c, $start, $end);
@@ -319,6 +299,7 @@ function spip_substr($c, $start=0, $end='') {
 }
 
 function spip_strlen($c) {
+	include_ecrire('inc_charsets.php3');
 	if (init_mb_string())
 		return mb_strlen($c);
 	else
