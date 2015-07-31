@@ -66,7 +66,7 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 		ajax_retour($res);
 	} else {
 		$count = ($type != 'interne') ? 0 : sql_countsel("spip_signatures", $where);
-		controle_petition_page($id_article, $type, $res, $count);
+		controle_petition_page($id_article, $id_signature ? '' : $type, $res, $count);
 	}
 }
 
@@ -87,7 +87,7 @@ function controle_petition_page($id_article, $type,  $corps, $count)
 		if ($id_article) {
 			$h = generer_url_ecrire("statistiques_visites","id_article=$id_article");
 			$rac = icone_horizontale(_T('icone_statistiques_visites'), $h, "statistiques-24.gif","rien.gif", false);
-			if ($type == 'interne') {
+			if ($type !== 'public') {
 
 				$h = redirige_action_auteur('editer_signatures', $id_article . 'A', 'controle_petition', "id_article=$id_article&type=interne");
 				$rac .= icone_horizontale(_T('icone_relancer_signataire') . " ($count)", $h, "envoi-message-24.gif","rien.gif", false);
