@@ -47,9 +47,17 @@ function spip_connect($serveur='', $version='') {
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
+		
+		if ($f) { 
+			if (is_readable($f)) { 
+				include($f); 
+			} elseif ($serveur AND !$install) {
+				find_in_path("$serveur.php",'connect/',true);
+			}
+		}/*
 		if ($f AND is_readable($f)) {
 			include($f);
-		}
+		}*/
 
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
