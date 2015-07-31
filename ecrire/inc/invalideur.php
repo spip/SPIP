@@ -125,7 +125,7 @@ function appliquer_quota_cache() {
 	list($nombre,$taille) = nombre_de_fichiers_repertoire($dir);
 	$total_cache = $taille * $nombre;
 	spip_log("Taille du CACHE estimee ($l): "
-		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo");
+		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo","invalideur");
 
 	// Nombre max de fichiers a supprimer
 	if ($quota_cache > 0) {
@@ -138,10 +138,13 @@ function appliquer_quota_cache() {
 					'limit' => $trop
 				)
 			);
-			spip_log("$dir : $n caches supprimes");
+			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]","invalideur");
+			$total_cache = intval(max(0,(16*$total_cache) - $n*$taille)/(1024*1024)*10)/10;
+			spip_log("cache restant estime : $total_cache Mo, ratio ".$total_cache/$quota_cache,"invalideur");
 		}
+		return ($total_cache/$quota_cache);
 	}
-
+	return 0;
 }
 
 
