@@ -59,19 +59,21 @@ function liste_plugin_files($dir_plugins = null){
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(]([0-9.a-zRC\s]*)[;]([0-9.a-zRC\s]*)[\]\)]$,',$intervalle,$regs)) return false;
-	$mineure = $regs[1];
-	$majeure = $regs[2];
-	$mineure_inc = $intervalle{0}=="[";
-	$majeure_inc = substr($intervalle,-1)=="]";
-	#var_dump("$mineure_inc-$mineure-$majeure-$majeure_inc");
-	if (strlen($mineure)){
-		if ($mineure_inc AND version_compare($version,$mineure,'<')) return false;
-		if (!$mineure_inc AND version_compare($version,$mineure,'<=')) return false;
+	if (!preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,',$intervalle,$regs)) return false;
+	#var_dump("$version::$intervalle");
+	$minimum = $regs[1];
+	$maximum = $regs[2];
+	$minimum_inc = $intervalle{0}=="[";
+	$maximum_inc = substr($intervalle,-1)=="]";
+	#var_dump("$version::$minimum_inc::$minimum::$maximum::$maximum_inc");
+	#var_dump(version_compare($version,$minimum,'<'));
+	if (strlen($minimum)){
+		if ($minimum_inc AND version_compare($version,$minimum,'<')) return false;
+		if (!$minimum_inc AND version_compare($version,$minimum,'<=')) return false;
 	}
-	if (strlen($majeure)){
-		if ($majeure_inc AND version_compare($version,$majeure,'>')) return false;
-		if (!$majeure_inc AND version_compare($version,$majeure,'>=')) return false;
+	if (strlen($maximum)){
+		if ($maximum_inc AND version_compare($version,$maximum,'>')) return false;
+		if (!$maximum_inc AND version_compare($version,$maximum,'>=')) return false;
 	}
 	return true;
 }
@@ -114,7 +116,7 @@ function erreur_necessite($n, $liste) {
 		// Necessite SPIP version x ?
 		if ($id=='SPIP') {
 			if (!plugin_version_compatible($need['version'],
-			$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
+			$GLOBALS['spip_version_branche'])) {
 				$msg .= "<li>"
 				._T('plugin_necessite_spip',
 				array('version' => $need['version'])
@@ -364,7 +366,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir); ";
 					foreach($info['path'] as $chemin){
-						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])){
+						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
 							if (isset($chemin['type']))
 								$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
 							$dir = $chemin['dir'];
