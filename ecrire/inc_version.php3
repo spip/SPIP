@@ -415,7 +415,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 $spip_version = 1.826;
 
 // version de spip
-$spip_version_affichee = "1.8.2 SVN";
+$spip_version_affichee = "1.9 alpha";
 
 
 // ** Securite **

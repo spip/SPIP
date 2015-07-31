@@ -40,7 +40,6 @@ function spip_abstract_select (
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
-
 	if (!$serveur)
 	  // le serveur par defaut est celui de inc_connect.php
 	  // tout est deja pret, notamment la fonction suivante:
@@ -100,6 +99,13 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
   $f = (!$serveur ? 'spip_mysql_insert' :
 	spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur));
   return $f($table, $noms, $valeurs);
+}
+
+function spip_abstract_showtable($table, $serveur='')
+{
+  $f = (!$serveur ? 'spip_mysql_showtable' :
+	spip_abstract_serveur('spip_' . $serveur . '_showtable', $serveur));
+  return $f($table);
 }
 
 # une composition tellement frequente...

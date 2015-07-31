@@ -27,9 +27,9 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	if ($not)
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
+		erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
 
-	$boucle->where[] = $boucle->id_table.".id_parent='0'";
+	$boucle->where[] = $boucle->id_table.".id_parent=0";
 
 }
 
@@ -100,7 +100,9 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
 	if ($rech_where) ';
 
-	$boucle->select[]= $boucle->id_table . '.' . $boucle->primary; # pour postgres, neuneu ici
+	$t = $boucle->id_table . '.' . $boucle->primary;
+	if (!in_array($t, $boucles[$idb]->select))
+	  $boucle->select[]= $t; # pour postgres, neuneu ici
 	$boucle->select[]= '$rech_select as points';
 
 	// et la recherche trouve
@@ -194,8 +196,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
 	      $order =
 		"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
-	  }
-	    else {
+	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
 	// par hasard
@@ -213,20 +214,23 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 	// par titre_mot
 		else if ($par == 'titre_mot') {
-		  $order= "'mots.titre'";
+		  $order= "'" .
+		    array_search('spip_mots', $boucle->from) .
+		    ".titre'";
 		}
 
 	// par type_mot
 		else if ($par == 'type_mot'){
-		  $order= "'mots.type'";
+		  $order= "'" .
+		    array_search('spip_mots', $boucle->from) .
+		    ".type'";
 		}
     // par multi champ
-    else if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
-        $texte = $boucle->id_table . '.' . trim($m[1]);
-        $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
-        $order = "multi";
-    }
-	
+		else if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
+		  $texte = $boucle->id_table . '.' . trim($m[1]);
+		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
+		  $order = "multi";
+		}
 	// par num champ(, suite)
 		else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
 		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
@@ -236,36 +240,35 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $as = 'num' .($boucle->order ? count($boucle->order) : "");
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
-	}
-	// par champ. Verifier qu'ils sont presents.
-		elseif (ereg("^[a-z][a-z0-9_]*$", $par)) {
-		    if ($par == 'date')
+		}
+		else if ($par == 'date') {
 		      $order = "'".$boucle->id_table.".".
 			$GLOBALS['table_date'][$boucle->type_requete]
 			."'";
-		    else {
-			global $table_des_tables, $tables_des_serveurs_sql;
-			$r = $boucle->type_requete;
-			$s = $boucles[$idb]->sql_serveur;
-			if (!$s) $s = 'localhost';
-			$t = $table_des_tables[$r];
-			// pour les tables non Spip
-			if (!$t) $t = $r; else $t = "spip_$t";
-			$desc = $tables_des_serveurs_sql[$s][$t];
-			if ($desc['field'][$par])
-				$order = "'".$boucle->id_table.".".$par."'";
-			else {
-			  // tri sur les champs synthetises (cf points)
-				$order = "'".$par."'";
-			}
-		    }
-		} else
-		    erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
-	    }
-
-	    if ($order)
-	      $boucle->order[] = $order . (($order[0]=="'") ? $sens : "");
+		}
+		// par champ. Verifier qu'ils sont presents.
+		else if (ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) {
+		  if ($match[2]) $par = $match[2];
+		  global $table_des_tables, $tables_des_serveurs_sql;
+		  $r = $boucle->type_requete;
+		  $s = $boucles[$idb]->sql_serveur;
+		  if (!$s) $s = 'localhost';
+		  $t = $table_des_tables[$r];
+		  // pour les tables non Spip
+		  if (!$t) $t = $r; else $t = "spip_$t";
+		  $desc = $tables_des_serveurs_sql[$s][$t];
+		  if ($desc['field'][$par])
+		    $par = $boucle->id_table.".".$par;
+		  // sinon, tri sur les champs synthetises (cf points)
+		  $order = (!$match[2]) ? $par : ($match[1] . "($par)");
+		  $order = "'$order'";
+		}
+		else
+		  erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	  }
+	  if ($order)
+	      $boucle->order[] = $order . (($order[0]=="'") ? $sens : "");
+	}
 }
 
 
@@ -425,23 +428,232 @@ function calculer_criteres ($idb, &$boucles) {
 
 # Criteres de comparaison
 
-function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
-	
-	global $table_date, $table_des_tables;
-	global $tables_relations;
+function calculer_critere_DEFAUT($idb, &$boucles, $crit)
+{
+	list($fct, $col, $op, $val, $table) =
+	  calculer_critere_infixe($idb, $boucles, $crit);
+
+	// ajout pour le cas special d'une condition sur le champ statut:
+	// il faut alors interdire a la fonction de boucle
+	// de mettre ses propres criteres de statut
+	// http://www.spip.net/@statut (a documenter)
+
+	if ($col == 'statut') $boucles[$idb]->statut = true;
+
+	// ajout pour le cas spécial des forums
+	// il faut alors interdire a la fonction de boucle sur forum
+	// de selectionner uniquement les forums sans pere
+
+	elseif ($boucles[$idb]->type_requete == 'forums' AND
+		($col == 'id_parent' OR $col == 'id_forum'))
+	  $boucles[$idb]->plat = true;
+
+	// inserer le nom de la table SQL devant le nom du champ
+	if ($table) {
+		if ($col[0] == "`") 
+		  $ct = "$table." . substr($col,1,-1);
+		else $ct = "$table.$col";
+	} else $ct = $col;
+
+	// inserer la fonction SQL
+	if ($fct) $ct = "$fct($ct)";
+
+	// inserer la negation (cf !...)
+	if (strtoupper($op) == 'IN') {
+	  
+	      $where = "$ct IN ('\" . " . join(" .\n\"','\" . ", $val) . " . \"')";
+	      if ($crit->not) {
+		$where = "NOT ($where)";
+	      } else {
+			$boucles[$idb]->default_order = array('rang');
+			$boucles[$idb]->select[]= "FIND_IN_SET($ct, '\" . " . 
+			  join(" .\n\",\" . ", $val) . ' . "\') AS rang';
+	      }
+	} else {
+		$val = ereg("^'[^']*'$", $val[0]) ? $val[0] :
+		  ("'\" . " . $val[0] . ' . "\'');
+		$where = "$ct $op $val";
+		if ($crit->not) $where = "NOT ($where)";
+	}
+
+	 // inserer la condition (cf {lang?}) et c'est fini
+
+	$boucles[$idb]->where[] = 
+	  (!$crit->cond) ?
+	  $where :
+	 ("\".(" . 
+	  calculer_argument_precedent($idb, $col, $boucles) .
+	  "? \"$where\" : 'TRUE').\"");
+}
+
+function calculer_critere_infixe($idb, &$boucles, $crit) {
+
+  global $table_des_tables, $tables_principales;
+  global  $exceptions_des_jointures;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
-	$col_table = $id_table = $boucle->id_table;
-	$primary = $boucle->primary;
-	$id_field = $id_table . '.' . $primary; 
-	$fct = '';
+	$col_table = $boucle->id_table;
 
+	list($fct, $col, $op, $val) =
+	  calculer_critere_infixe_ops($idb, $boucles, $crit);
+
+	// Cas particulier : id_enfant => utiliser la colonne id_objet
+	if ($col == 'id_enfant')
+	  $col = $boucle->primary;
+
+	// Cas particulier : id_secteur = id_rubrique pour certaines tables
+	else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
+	  $col = 'id_rubrique';
+
+	// Cas particulier : expressions de date
+	else if (ereg("^(date|mois|annee|heure|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
+	  list($col, $col_table) =
+	    calculer_critere_infixe_date($idb, &$boucles, $regs[1], $regs[2]);
+	} 
+
+	// HACK : selection des documents selon mode 'image'
+	// (a creer en dur dans la base)
+	else if ($type == 'documents' AND $col == 'mode' AND $val[0] == "'image'")
+	  $val[0] = "'vignette'";
+
+	else  {
+	  $nom = $table_des_tables[$type];
+	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+	  // si champ hors table, ca doit etre une jointure
+	  if (!array_key_exists($col, $desc['field'])) {
+	    if ($exceptions_des_jointures[$col])
+	      $col = $exceptions_des_jointures[$col];
+	    $cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+	    if ($cle) 
+	      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
+	    if ($cle)
+		$col_table = "L$cle";
+	    else erreur_squelette(_T('zbug_info_erreur_squelette'), $cle);
+	  } // else: champ dans la table, c'est ok.
+	}
+
+	return array($fct, $col, $op, $val, $col_table);
+}
+
+// deduction automatique des jointures 
+// une jointure sur une table avec primary key doit se faire sur cette Key. 
+
+function calculer_jointure(&$boucle, $depart, $arrivee)
+{
+  $res = calculer_chaine_jointures(&$boucle, $depart, $arrivee);
+  if (!$res) return "";
+  $n = "";
+  foreach($res as $r) {
+    list($d, $a, $j) = $r;
+    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j);
+  }
+  return $n;
+}
+
+function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
+{
+  list($dnom,$ddesc) = $depart;
+  list($anom,$adesc) = $arrivee;
+  $prim = $ddesc['key']['PRIMARY KEY'];
+  $v = array_intersect($prim ? array($prim): $ddesc['key'], $adesc['key']);
+  if ($v)
+    return array(array($dnom, $anom, array_shift($v)));
+   else    {
+      $new = $vu;
+      foreach($boucle->jointures as $v) {
+	if ($v && (!in_array($v,$vu)) && 
+	    ($j = trouver_def_table($v, $boucle))) {
+	  list($table,$join) = $j;
+	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
+	  foreach ($milieu as $k)
+	    {
+	      $new[] = $v;
+	      $r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
+	      if ($r)
+		
+		{
+		  array_unshift($r, array($dnom, $table, $k));
+		  return $r;
+		}
+	    }
+	}
+      }
+    }
+  return array();
+}
+
+// applatit les cles multiples
+
+function trouver_cles_table($keys)
+{
+  $res =array();
+  foreach ($keys as $v) {
+    if (!strpos($v,","))
+      $res[$v]=1; 
+    else {
+      foreach (split(" *, *", $v) as $k)
+	$res[$k]=1;
+    }
+  }
+  return array_keys($res);
+}
+
+function trouver_def_table($nom, &$boucle)
+{
+  global $tables_principales, $tables_auxiliaires, $table_des_tables;
+  include_ecrire('inc_auxbase.php3');
+  if ($desc = $tables_principales['spip_' . $nom])
+    return array('spip_' . $nom, $desc);
+  if ($desc = $tables_auxiliaires['spip_' . $nom])
+    return array('spip_' . $nom, $desc);
+  $desc = $table_des_tables[$nom] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom) : $nom;
+  if ($desc = spip_abstract_showtable($desc, $boucle->sql_serveur))
+    if (isset($desc['field'])) {
+      // faudrait aussi prevoir le cas du serveur externe
+      $tables_principales[$nom] = $desc;
+      return array($nom, $desc);
+    }
+  erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)),
+		   $boucle->id_boucle);
+}
+
+function trouver_champ_exterieur($cle, $joints, &$boucle)
+{
+  foreach($joints as $k => $join) {
+    if ($join && $table = trouver_def_table($join, $boucle)) {
+      if (array_key_exists($cle, $table[1]['field'])) 
+	return  $table;
+    }
+  }
+  return "";
+}
+
+// traitement des relations externes par DES jointures.
+
+function calculer_critere_externe(&$boucle, $id_table, $lien, $join) {
+	static $num;
+	$id_field = $id_table . '.' . $join; 
+	$num++;
+	$boucle->lien = true;
+	$boucle->from["L$num"] = $lien;
+	$boucle->where[] = "$id_field=L$num." . $join;
+	if (!in_array($id_field, $boucle->group))
+	  $boucle->group[] = $id_field;
+	// postgres exige que le champ pour GROUP soit dans le SELECT
+	if (!in_array($id_field, $boucle->select))
+	  $boucle->select[] = $id_field;
+	return $num;
+}
+
+// determine l'operateur et les operandes
+
+function calculer_critere_infixe_ops($idb, &$boucles, $crit)
+{
 	// cas d'une valeur comparee a elle-meme ou son referent
-	if (count($crit->param) ==0)
+	if (count($crit->param) == 0)
 	  { $op = '=';
-	    $col = $crit->op;
-	    $val = $crit->op;
+	    $col = $val = $crit->op;
 	    // Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 	    if ($val == 'lang')
 	      $val = array('$GLOBALS[\'spip_lang\']');
@@ -450,193 +662,39 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    // de la boucle superieure.... faudrait verifier qu'il existe
 	      // pour eviter l'erreur SQL
 	      if ($val == 'id_parent')
-		$val = $primary;
+		$val = $boucles[$idb]->primary;
 	      // Si id_enfant, comparer l'id_objet avec l'id_parent
 	      // de la boucle superieure
 	      else if ($val == 'id_enfant')
 		$val = 'id_parent';
 	      $val = array("addslashes(" .calculer_argument_precedent($idb, $val, $boucles) .")");
 	    }
-	  }
-	else
-	  {
+	  } else {
 	    // comparaison explicite
 	    // le phraseur impose que le premier param soit du texte
 	    $params = $crit->param;
 	    $op = $crit->op;
-
+	    if ($op == '==') $op = 'REGEXP';
 	    $col = array_shift($params);
 	    $col = $col[0]->texte;
-	    // fonction SQL ?
-	    if (ereg("([A-Za-z_]+)\(([a-z_]+)\)", $col,$match3)) {
-	      $col = $match3[2];
-	      $fct = $match3[1];
-	    }
 
 	    $val = array();
 	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
-	      $val[] = "addslashes(" .
-		calculer_liste($p, array(), $boucles, $boucles[$idb]->id_parent) .
-		")";
+	      $v = calculer_liste($p, array(), $boucles, $boucles[$idb]->id_parent);
+	      $val[] = (preg_match(",^(\n//[^\n]*\n)?'(.*)'$,", $v, $r) ? 
+			($r[1] . "'" . addslashes($r[2]) . "'") :
+			("addslashes(" . $v . ")"));
 	    }
-	  }
-
-	  // cas special: statut=
-	  // si on l'invoque dans une boucle il faut interdire
-	  // a la boucle de mettre ses propres criteres de statut
-	  // http://www.spip.net/@statut (a documenter)
-	if ($col == 'statut')
-		  $boucle->where['statut'] = '1';
-
-	// reperer les champs n'appartenant pas a la table de la boucle
-
-	if ($ext_table =  $tables_relations[$type][$col])
-		$col_table = $ext_table . 
-		  calculer_critere_externe($boucle, $id_field, $ext_table, $type, $col);
-	// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-	elseif ($type != 'mots' AND $table_des_tables[$type]
-			AND ($col == 'type_mot' OR $col == 'titre_mot'
-			OR $col == 'id_groupe')) {
-		if ($type == 'forums')
-		  $lien = "mots_forum";
-		else if ($type == 'syndication')
-		  $lien = "mots_syndic";
-		else
-		  $lien = "mots_$type";
-		
-		// jointure nouvelle a chaque comparaison
-		$num_lien = calculer_critere_externe($boucle, $id_field, $lien, $type, $col);
-		// jointure pour lier la table principale et la nouvelle
-		$boucle->from[] = "spip_mots AS l_mots$num_lien";
-		$boucle->where[] = "$lien$num_lien.id_mot=l_mots$num_lien.id_mot";
-		$col_table = "l_mots$num_lien";
-
-		if ($col == 'type_mot')
-		  $col = 'type';
-		else if ($col == 'titre_mot')
-		  $col = 'titre';
 	}
 
-	// Cas particulier : selection des documents selon l'extension
-	if ($type == 'documents' AND $col == 'extension')
-	  $col_table = 'types_documents';
-	// HACK : selection des documents selon mode 'image'
-	// (a creer en dur dans la base)
-	else if ($type == 'documents' AND $col == 'mode' AND $val[0] == "'image'")
-	  $val[0] = "'vignette'";
-	// Cas particulier : lier les articles syndiques
-	// au site correspondant
-	else if ($type == 'syndic_articles' AND
-		 !ereg("^(id_syndic_article|titre|url|date|descriptif|lesauteurs|id_document)$",$col))
-	  $col_table = 'syndic';
-
-	// Cas particulier : id_enfant => utiliser la colonne id_objet
-	if ($col == 'id_enfant')
-	  $col = $primary;
-	// Cas particulier : id_secteur = id_rubrique pour certaines tables
-
-	if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
-	  $col = 'id_rubrique';
-
-	// Cas particulier : expressions de date
-	if (ereg("^(date|mois|annee|heure|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
-	  $col = $regs[1];
-	  if ($regs[2]) {
-	    $date_orig = $id_table . ".date_redac";
-	    $date_compare = '\'" . normaliser_date(' .
-	      calculer_argument_precedent($idb, 'date_redac', $boucles) .
-	      ') . "\'';
-	  }
-	  else {
-	    $date_orig = "$id_table." . $table_date[$type];
-	    $date_compare = '\'" . normaliser_date(' .
-	      calculer_argument_precedent($idb, 'date', $boucles) .
-	      ') . "\'';
-	  }
-
-	  if ($col == 'date') {
-			$col = $date_orig;
-			$col_table = '';
-		}
-		else if ($col == 'mois') {
-			$col = "MONTH($date_orig)";
-			$col_table = '';
-		}
-		else if ($col == 'annee') {
-			$col = "YEAR($date_orig)";
-			$col_table = '';
-		}
-		else if ($col == 'heure') {
-			$col = "DATE_FORMAT($date_orig, '%H:%i')";
-			$col_table = '';
-		}
-		else if ($col == 'age') {
-			$col = calculer_param_date("now()", $date_orig);
-			$col_table = '';
-		}
-		else if ($col == 'age_relatif') {
-			$col = calculer_param_date($date_compare, $date_orig);
-			$col_table = '';
-		}
-		else if ($col == 'jour_relatif') {
-			$col = "LEAST(TO_DAYS(" .$date_compare . ")-TO_DAYS(" .
-			$date_orig . "), DAYOFMONTH(" . $date_compare .
-			")-DAYOFMONTH(" . $date_orig . ")+30.4368*(MONTH(" .
-			$date_compare . ")-MONTH(" . $date_orig .
-			"))+365.2422*(YEAR(" . $date_compare . ")-YEAR(" .
-			$date_orig . ")))";
-			$col_table = '';
-		}
-		else if ($col == 'mois_relatif') {
-			$col = "MONTH(" . $date_compare . ")-MONTH(" .
-			$date_orig . ")+12*(YEAR(" . $date_compare .
-			")-YEAR(" . $date_orig . "))";
-			$col_table = '';
-		}
-		else if ($col == 'annee_relatif') {
-			$col = "YEAR(" . $date_compare . ")-YEAR(" .
-			$date_orig . ")";
-			$col_table = '';
-		}
+	$fct = '';
+	// fonction SQL ?
+	if (ereg("([A-Za-z_]+)\(([^)]+)\)", $col,$match3)) {
+	  $col = $match3[2];
+	  $fct = $match3[1];
 	}
 
-	if ($type == 'forums' AND
-	($col == 'id_parent' OR $col == 'id_forum'))
-		$boucle->plat = true;
-
-	// Rajouter le nom de la table SQL devant le nom du champ
-	if ($col_table) {
-		if ($col[0] == "`") 
-		  $ct = "$col_table." . substr($col,1,-1);
-		else $ct = "$col_table.$col";
-	} else $ct = $col;
-
-	// fonction SQL
-	if ($fct) $ct = "$fct($ct)";
-
-	//	if (($op != '=') || !calculer_critere_repete($boucle, $ct, $val[0])) # a revoir
-	if (strtoupper($op) == 'IN') {
-	  
-	      $where = "$ct IN ('\" . " . join(" .\n\"','\" . ", $val) . " . \"')";
-	      if ($crit->not) {
-		$where = "NOT ($where)";
-	      } else {
-			$boucle->default_order = array('rang');
-			$boucle->select[]= "FIND_IN_SET($ct, '\" . " . 
-			  join(" .\n\",\" . ", $val) . ' . "\') AS rang';
-	      }
-	} else {
-		  if ($op == '==') $op = 'REGEXP';
-		  $where = "($ct $op '\" . " . $val[0] . ' . "\')';
-		  if ($crit->not) $where = "NOT $where";
-
-		// operateur optionnel {lang?}
-		  if ($crit->cond) {
-		    $champ = calculer_argument_precedent($idb, $col, $boucles) ;
-		    $where = "\".($champ ? \"$where\" : 1).\"";
-		  }
-	    }
-	$boucle->where[] = $where;
+	return array($fct, $col, $op, $val);
 }
 
 // compatibilite ancienne version
@@ -649,7 +707,6 @@ function calculer_vieux_in($params)
 	      $j = count($last)-1;
 	      $last = $last[$j];
 	      $n = strlen($last->texte);
-	      // compatibilité ancienne version
 
 	      if (!(($deb->texte[0] == '(') && ($last->texte[$n-1] == ')')))
 		return $params;
@@ -673,39 +730,67 @@ function calculer_vieux_in($params)
 	      return  $newp;
 }
 
-// fonction provisoirement inutilisee
-// reperer des repetitions comme {id_mot=1}{id_mot=2}
-//  pour creer une clause HAVING
-/*
-function calculer_critere_repete(&$boucle, $col, $val)
+function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 {
-	foreach ($boucle->where as $k => $v)  {
-        	if (ereg(" *$col *(=|IN) *\(?'(.*)(\".*)[')]$",$v, $m)) {
-                  $boucle->where[$k] = "$col IN ('$m[2] \"','\" . $val . $m[3])";
-                  // esperons que c'est le meme !
-                  $boucle->having++;
-		  return true;}
-              }
-	return false;
-}
-*/
-// traitement des relations externes par DES jointures.
+	global $table_date; 
+	$boucle = $boucles[$idb];
 
-function calculer_critere_externe(&$boucle, $id_field, $lien, $type, $col) {
+	if ($suite) {
+	    $date_orig = "date_redac";
+	} else {
+	    $date_orig = $table_date[$boucle->type_requete];
+	  }
 
-	global $tables_relations_keys;
-	static $num;
+	$date_orig = $boucle->id_table . ".$date_orig";
+	$date_compare = '\'" . normaliser_date(' .
+	      calculer_argument_precedent($idb, 'date' . $suite, $boucles) .
+	      ') . "\'';
 
-	$num++;
-	$ref = $tables_relations_keys[$type][$col];
-	$boucle->lien = true;
-	$boucle->from[] = "spip_$lien AS $lien$num";
-	$boucle->where[] = "$id_field=$lien$num." .
-	  ($ref ? $ref : $boucle->primary);
-	$boucle->group = $id_field;
-	// postgres exige que le champ pour GROUP soit dans le SELECT
-	$boucle->select[] = $id_field;
-	return $num;
+	if ($col == 'date') {
+			$col = $date_orig;
+			$col_table = '';
+		}
+	else if ($col == 'mois') {
+			$col = "MONTH($date_orig)";
+			$col_table = '';
+		}
+	else if ($col == 'annee') {
+			$col = "YEAR($date_orig)";
+			$col_table = '';
+		}
+	else if ($col == 'heure') {
+			$col = "DATE_FORMAT($date_orig, '%H:%i')";
+			$col_table = '';
+		}
+	else if ($col == 'age') {
+			$col = calculer_param_date("now()", $date_orig);
+			$col_table = '';
+		}
+	else if ($col == 'age_relatif') {
+			$col = calculer_param_date($date_compare, $date_orig);
+			$col_table = '';
+		}
+	else if ($col == 'jour_relatif') {
+			$col = "LEAST(TO_DAYS(" .$date_compare . ")-TO_DAYS(" .
+			$date_orig . "), DAYOFMONTH(" . $date_compare .
+			")-DAYOFMONTH(" . $date_orig . ")+30.4368*(MONTH(" .
+			$date_compare . ")-MONTH(" . $date_orig .
+			"))+365.2422*(YEAR(" . $date_compare . ")-YEAR(" .
+			$date_orig . ")))";
+			$col_table = '';
+		}
+	else if ($col == 'mois_relatif') {
+			$col = "MONTH(" . $date_compare . ")-MONTH(" .
+			$date_orig . ")+12*(YEAR(" . $date_compare .
+			")-YEAR(" . $date_orig . "))";
+			$col_table = '';
+		}
+	else if ($col == 'annee_relatif') {
+			$col = "YEAR(" . $date_compare . ")-YEAR(" .
+			$date_orig . ")";
+			$col_table = '';
+		}
+	return array($col, $col_table);
 }
 
 function calculer_param_date($date_compare, $date_orig) {
@@ -740,4 +825,20 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
+// fonction provisoirement inutilisee
+// reperer des repetitions comme {id_mot=1}{id_mot=2}
+//  pour creer une clause HAVING
+/*
+function calculer_critere_repete(&$boucle, $col, $val)
+{
+	foreach ($boucle->where as $k => $v)  {
+        	if (ereg(" *$col *(=|IN) *\(?'(.*)(\".*)[')]$",$v, $m)) {
+                  $boucle->where[$k] = "$col IN ('$m[2] \"','\" . $val . $m[3])";
+                  // esperons que c'est le meme !
+                  $boucle->having++;
+		  return true;}
+              }
+	return false;
+}
+*/
 ?>

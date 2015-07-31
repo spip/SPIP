@@ -29,39 +29,9 @@ define("_INC_BALISES", "1");
 // Traitements standard de divers champs
 //
 function champs_traitements ($p) {
-	static $traitements = array (
-		'BIO' => 'traiter_raccourcis(%s)',
-		'CHAPO' => 'traiter_raccourcis(nettoyer_chapo(%s))',
-		'DATE' => 'vider_date(%s)',
-		'DATE_MODIF' => 'vider_date(%s)',
-		'DATE_NOUVEAUTES' => 'vider_date(%s)',
-		'DATE_REDAC' => 'vider_date(%s)',
-		'DESCRIPTIF' => 'traiter_raccourcis(%s)',
-		'LIEN_TITRE' => 'typo(%s)',
-		'LIEN_URL' => 'htmlspecialchars(vider_url(%s))',
-		'MESSAGE' => 'traiter_raccourcis(%s)',
-		'NOM_SITE_SPIP' => 'typo(%s)',
-		'NOM_SITE' => 'typo(%s)',
-		'NOM' => 'typo(%s)',
-		'PARAMETRES_FORUM' => 'htmlspecialchars(lang_parametres_forum(%s))',
-		'PS' => 'traiter_raccourcis(%s)',
-		'SOUSTITRE' => 'typo(%s)',
-		'SURTITRE' => 'typo(%s)',
-		'TEXTE' => 'traiter_raccourcis(%s)',
-		'TITRE' => 'typo(%s)',
-		'TYPE' => 'typo(%s)',
-		'URL_ARTICLE' => 'htmlspecialchars(vider_url(%s))',
-		'URL_BREVE' => 'htmlspecialchars(vider_url(%s))',
-		'URL_DOCUMENT' => 'htmlspecialchars(vider_url(%s))',
-		'URL_FORUM' => 'htmlspecialchars(vider_url(%s))',
-		'URL_MOT' => 'htmlspecialchars(vider_url(%s))',
-		'URL_RUBRIQUE' => 'htmlspecialchars(vider_url(%s))',
-		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
-		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
-		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))',
-		'ENV' => 'entites_html(%s)'
-	);
-	$ps = $traitements[$p->nom_champ];
+	global $table_des_traitements;
+
+	$ps = $table_des_traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
 	if ($p->descr['documents']) {
 		$ps = str_replace('traiter_raccourcis(', 
@@ -399,9 +369,7 @@ function balise_EXPOSER_dist($p)
 
 function calculer_balise_expose($p, $on, $off)
 {
-	global  $table_primary;
-	$type_boucle = $p->type_requete;
-	$primary_key = $table_primary[$type_boucle];
+	$primary_key = $p->boucles[$p->id_boucle]->primary;
 	if (!$primary_key) {
 		erreur_squelette(_T('zbug_champ_hors_boucle',
 				array('champ' => '#EXPOSER')

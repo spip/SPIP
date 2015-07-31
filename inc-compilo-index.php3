@@ -56,13 +56,20 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		if (!$t) {$nom_table = $t = $r; }
 		else $nom_table = 'spip_' . $t;
 
-#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
 		$desc = $tables_des_serveurs_sql[$s][$nom_table];
-		if (!$desc) {
-			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
-				"'$idb'");
+#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t desc=" . array_keys($desc));
+
+		if (!isset($desc['field'])) {
+			$desc = $table_des_tables[$r] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $t) : $nom_table;
+
+			$desc = spip_abstract_showtable($desc, $boucles[$idb]->sql_serveur);
+			if (!isset($desc['field'])) {
+			  erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
+					   "'$idb'");
 			# continuer pour chercher l'erreur suivante
-			return  "'#" . $r . ':' . $nom_champ . "'";
+			  return  "'#" . $r . ':' . $nom_champ . "'";
+			}
+			$tables_des_serveurs_sql[$s][$nom_table] = $desc;
 		}
 		$excep = $exceptions_des_tables[$r][$c];
 		if ($excep) {
@@ -71,10 +78,14 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 				$e = $excep;
 				$c = $excep;
 			} 
-			// entite SPIP alias d'un champ dans une autre table SQL
+			// entite SPIP alias d'un champ dans une jointure
 			else {
-				$t = $excep[0];
-				$e = $excep[1].' AS '.$c;
+			  if (!$t = array_search($excep[0], $boucles[$idb]->from)) {
+			    $t = 'J' . count($boucles[$idb]->from);
+			    $boucles[$idb]->from[$t] = $excep[0];
+			  }
+			  $e = $excep[1];
+			  if ($e != $c) $e .= ' AS '.$c;
 			}
 		}
 		else {

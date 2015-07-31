@@ -158,6 +158,36 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	return $GLOBALS['db_ok'];
 }
 
+function spip_mysql_showtable($nom_table)
+{
+  $a = spip_query("SHOW TABLES LIKE '$nom_table'");
+  if (!a) return "";
+  if (!spip_fetch_array($a)) return "";
+  list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
+  if (!ereg("^[^()]*\(([^()]*(\([^()]*\)[^()]*)*)\)", $a, $r))
+    return "";
+  else {
+
+    $a = preg_split("/,\s*`/",$r[1]);
+    $n = count($a)-1;
+    ereg("^([^(),]*([^(),]*(\([^()]*\)[^(),]*)*)),(.*)", $a[$n], $r);
+    $a[$n]= $r[1];
+    $namedkeys = $r[count($r)-1];
+    $fields = array();
+    foreach($a as $v) {
+      preg_match("/^\s*`?([^`]*)`\s*(.*)$/",$v,$r);
+      $fields[$r[1]] = $r[2];
+    }
+    $keys = array();
+    foreach(split(",",$namedkeys) as $v) {
+      preg_match("/^([^(]*)\((.*)\)\s*$/",$v,$r);
+      $k = str_replace("`", '', $r[1]);
+      $t = str_replace("`", '', $r[2]);
+      $keys[$k] = $t;
+    }
+    return array('field' => $fields,	'key' => $keys);
+  }
+} 
 
 //
 // Recuperation des resultats

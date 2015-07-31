@@ -218,27 +218,24 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$order = array();
 
 	$init .= $boucle->hash . 
-	  "\n\n	// REQUETE
-	\$result = spip_abstract_select(\n\t\tarray(\"". 
+		"\n\n	// REQUETE
+	\$result = spip_abstract_select(\n\t\tarray(\"" . 
 		# En absence de champ c'est un decompte : 
-	  	# prendre la primary pour avoir qqch
-	  	# (COUNT incompatible avec le cas general
-		($boucle->select ? 
-		 join("\",\n\t\t\"", $boucle->select) :
-		 ($boucle->id_table . "." .
-		 (($p = strpos($primary, ',')) ?
-		  substr($primary, 0, $p) : $primary))) .
+	  	# prendre une constante pour avoir qqch
+		(!$boucle->select ? 1 :
+		 join("\",\n\t\t\"", $boucle->select)) .
 		'"), # SELECT
-		array("' .
-		join('","', array_unique($boucle->from)) .
-		'"), # FROM
+		' . calculer_from($boucle->from) .
+		', # FROM
 		array(' .
 		(!$boucle->where ? '' : ( '"' . join('",
 		"', $boucle->where) . '"')) .
 		"), # WHERE
-		'".addslashes($boucle->group)."', # GROUP
+		" . (!$boucle->group ? "''" : 
+		     ('"' . join(", ", $boucle->group)) . '"') .
+		", # GROUP
 		array(" .
-	  	join(', ', $order) .
+			join(', ', $order) .
 		"), # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'".$boucle->limit."'" :
@@ -267,7 +264,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Conclusion et retour
 	//
 	$corps .= "\n	@spip_abstract_free(\$result,'" .
-	     $boucle->sql_serveur . "');";
+		   $boucle->sql_serveur . "');";
 
   }
 
@@ -276,10 +273,14 @@ function calculer_boucle($id_boucle, &$boucles) {
 	(($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);") .
     "\n	return \$t0;";
-
-
 }
 
+function calculer_from($t)
+{
+  $res = "";
+  foreach($t as $k => $v) $res .= "\", \"$v AS $k";
+  return 'array(' . substr($res,3) . '")';
+}
 
 //
 // fonction traitant les criteres {1,n} (analyses dans inc-criteres)
@@ -553,8 +554,8 @@ function code_boucle(&$boucles, $id, $nom)
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
 function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
-# 3 variables qui sont en fait des constantes après chargement
-  global $table_primary, $table_des_tables, $tables_des_serveurs_sql;
+  global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
+    $tables_jointures;
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
@@ -595,27 +596,32 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $id => $boucle) { 
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
-			$boucles[$id]->id_table = $table_des_tables[$type];
-			if ($boucles[$id]->id_table) {
-				$boucles[$id]->primary = $table_primary[$type];
-			} else { 
-				// table non Spip.
-				$boucles[$id]->id_table = $type;
-				$serveur = $boucle->sql_serveur;
-				$x = &$tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];
-				$boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
-			}
-			if ($boucle->param) {
+		  if ($x = $table_des_tables[$type]) {
+		    $boucles[$id]->id_table = $x;
+		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
+		    if (is_array($x = $tables_jointures['spip_' . $x])) {
+		      foreach($x as $j) {
+			$boucles[$id]->jointures[]= $j;
+		      }
+		    }
+		  } else {
+			// table non Spip.
+		    $boucles[$id]->id_table = $type;
+		    $serveur = $boucle->sql_serveur;
+		    $x = &$tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
+		    $boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
+		  }
+		  if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
 				if (is_array($res)) return $res; # erreur
 			}
-			$descr['id_mere'] = $id;
-			$boucles[$id]->return =
+		  $descr['id_mere'] = $id;
+		  $boucles[$id]->return =
 			  calculer_liste($boucle->milieu,
 					 $descr,
 					 $boucles,
 					 $id);
-			}
+		}
 	}
 
 	// idem pour la racine
