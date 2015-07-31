@@ -18,6 +18,8 @@ function exec_infos_perso_dist(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		unset($auteur['maj']);
+		unset($auteur['en_ligne']);
 
 		pipeline('exec_init',
 			array('args' => array(
@@ -35,7 +37,7 @@ function exec_infos_perso_dist(){
 
 		charger_fonction('auteur_infos','exec');
 
-		auteur_infos_ok($auteur, $auteur['id_auteur'], _request('echec'), '', self());
+		auteur_infos_ok($auteur, $auteur['id_auteur'], _request('echec'), '', parametre_url(self(),'id_auteur',$auteur['id_auteur']));
 		echo auteurs_interventions($auteur);
 		echo fin_gauche(),fin_page();
 	}
