@@ -347,26 +347,27 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 // (mail ou site). S'il y en a plus qu'une on les retire sauf la premiere
 // En cas d'acces concurrents il y aura des requetes de retraits d'elements
 // deja detruits. Bizarre ?  C'est mieux que de bloquer!
+// De plus, ca supprime les doublons "en attente de validation".
 
 // http://doc.spip.org/@signature_entrop
 function signature_entrop($where)
 {
-	$where .= " AND statut='publie'";
-	$query = sql_select('id_signature', 'spip_signatures', $where,'',"date_time desc");
-	$n = sql_count($query);
-	if ($n>1) {
-		$entrop = array();
-		for ($i=$n-1;$i;$i--) {
-			$r = sql_fetch($query);
-			$entrop[]=$r['id_signature'];
-		}
-		sql_free($query);
-		$where .= " OR " . sql_in('id_signature', $entrop);
-	
-		sql_delete('spip_signatures', $where);
+	$query = sql_select('id_signature, statut', 'spip_signatures', $where,'',"date_time desc");
+	$entrop = array();
+	$id_ok = 0;
+	$double = false;
+	while($r = sql_fetch($query)) {
+	  if (!$id_ok AND $r['statut'] == 'publie')
+	    $id_ok = $r['id_signature'];
+	  else {
+	    $double |= ($r['statut'] == 'publie');
+	    $entrop[]= $r['id_signature'];
+	  }
 	}
-
-	return $entrop;
+	if (!$entrop) return false;
+	spip_log("signature $id_ok confirmee, suppression des doublons " . join(' ', $entrop));
+	sql_delete('spip_signatures', sql_in('id_signature', $entrop));
+	return $double;
 }
 
 // Creer un mot de passe aleatoire et verifier qu'il est unique
