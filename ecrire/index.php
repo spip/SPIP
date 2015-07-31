@@ -26,14 +26,17 @@ include_spip('inc/cookie');
 
 $exec = _request('exec');
 $reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
+
 //
-// Authentification, redefinissable
+// Les scripts d'insallation n'authentifient pas, forcement,
+// alors il faut blinder les variables d'URL
 //
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
+	set_request('transformer_xml');
 	$var_auth = true;
 } else {
-	// cette variable es reutilisee en fin de script
+	// Authentification, redefinissable
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
 	if ($var_auth) { 
