@@ -22,13 +22,15 @@ function action_editer_message_dist() {
 	$arg = $securiser_action();
 
 	if (preg_match(',^(\d+)$,', $arg, $r))
-		action_editer_message_post_vieux($arg); // pas encore fait.
+		action_editer_message_post_vieux($arg); 
 	elseif (preg_match(',^-(\d+)$,', $arg, $r))
 		action_editer_message_post_supprimer($r[1]);
 	elseif (preg_match(',^(\d+)\W@(\d+)$,', $arg, $r))
 		action_editer_message_post_ajouter($r[1], $r[2]);	  
 	elseif (preg_match(',^(\d+)\W-(\d+)$,', $arg, $r))
 		action_editer_message_post_retirer($r[1], $r[2]);	  
+	elseif (preg_match(',^(\d+)\W(\w+)$,', $arg, $r))
+		action_editer_message_post_envoyer($r[1], $r[2]);	  
 	elseif (preg_match(',^(\w+)$,', $arg, $r))
 		action_editer_message_post_nouveau($arg);
 	elseif (preg_match(',^(\w+)\W(\d+)$,', $arg, $r))
@@ -53,6 +55,12 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	spip_abstract_insert('spip_auteurs_messages',
 		"(id_auteur,id_message,vu)",
 		"('$id_auteur','$id_message','non')");
+}
+
+function action_editer_message_post_envoyer($id_message, $statut) {
+
+	spip_query("UPDATE spip_messages SET statut=" . _q($statut) . " WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
 }
 
 // http://doc.spip.org/@action_editer_message_post_nouveau
@@ -87,4 +95,52 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 	}
 	redirige_par_entete(generer_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest",true));
 }
+
+function action_editer_message_post_vieux($id_message)
+{
+	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . " WHERE id_message='$id_message'");
+
+	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message='$id_message'");
+
+	if (_request('jour'))
+		change_date_message($id_message, _request('heures'),_request('minutes'),_request('mois'), _request('jour'), _request('annee'), _request('heures_fin'),_request('minutes_fin'),_request('mois_fin'), _request('jour_fin'), _request('annee_fin'));
+}
+
+
+// Convertir dates a calendrier correct
+// (exemple: 31 fevrier devient debut mars, 24h12 devient 00h12 du lendemain)
+
+// http://doc.spip.org/@change_date_message
+function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin)
+{
+	$date = date("Y-m-d H:i:s", mktime($heures,$minutes,0,$mois, $jour, $annee));
+	
+	$jour = journum($date);
+	$mois = mois($date);
+	$annee = annee($date);
+	$heures = heures($date);
+	$minutes = minutes($date);
+	
+	// Verifier que la date de fin est bien posterieure au debut
+	$unix_debut = date("U", mktime($heures,$minutes,0,$mois, $jour, $annee));
+	$unix_fin = date("U", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+	if ($unix_fin <= $unix_debut) {
+		$jour_fin = $jour;
+		$mois_fin = $mois;
+		$annee_fin = $annee;
+		$heures_fin = $heures + 1;
+		$minutes_fin = $minutes;
+	}		
+
+	$date_fin = date("Y-m-d H:i:s", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+	
+	$jour_fin = journum($date_fin);
+	$mois_fin = mois($date_fin);
+	$annee_fin = annee($date_fin);
+	$heures_fin = heures($date_fin);
+	$minutes_fin = minutes($date_fin);
+
+	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message='$id_message'");
+}
+
 ?>

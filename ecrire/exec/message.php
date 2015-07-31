@@ -20,70 +20,33 @@ include_spip('inc/mots');
 function exec_message_dist()
 {
 global 
-$ajout_forum,
-$annee,
-$annee_fin,
-$change_statut,
-$changer_rv,
+  			$ajout_forum,
 $cherche_auteur,
 $connect_id_auteur,
 $forcer_dest,
-$heures,
-$heures_fin,
 $id_message,
-$jour,
-$jour_fin,
-$minutes,
-$minutes_fin,
-$modifier_message,
-$mois,
-$mois_fin,
-$nouv_auteur,
-$rv,
-$texte,
-$titre;
+$nouv_auteur;
 
-$id_message = intval($id_message);
-$nouv_auteur = intval($nouv_auteur);
-charger_generer_url();
+	$id_message = intval($id_message);
+	$nouv_auteur = intval($nouv_auteur);
+	charger_generer_url();
 
-$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
+	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
-if ($row['type'] != "affich"){
-	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
-	if (!$n['n']) {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('info_acces_refuse'));
-		debut_gauche();
-		debut_droite();
-		echo "<b>"._T('avis_non_acces_message')."</b><p>";
-		echo fin_gauche(), fin_page();
-		exit;
+	if ($row['type'] != "affich"){
+		$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
+		if (!$n['n']) {
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('info_acces_refuse'));
+			debut_gauche();
+			debut_droite();
+			echo "<b>"._T('avis_non_acces_message')."</b><p>";
+			echo fin_gauche(), fin_page();
+			exit;
+		}
 	}
-}
 
-if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
-	spip_query("UPDATE spip_auteurs_messages SET vu='non' WHERE id_message='$id_message'");
-}
-
-if ($modifier_message == "oui") {
-	spip_query("UPDATE spip_messages SET titre=" . _q($titre) . ", texte=" . _q($texte) . " WHERE id_message='$id_message'");
-}
-
-if ($changer_rv) {
-  spip_query("UPDATE spip_messages SET rv=" . _q($rv) . " WHERE id_message='$id_message'");
-}
-
-if ($jour)
-  change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin);
-
-if ($change_statut) {
-	spip_query("UPDATE spip_messages SET statut=" . _q($change_statut) . " WHERE id_message='$id_message'");
-	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
-}
-
-
- exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur, $forcer_dest);
+	exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur, $forcer_dest);
 }
 
 
@@ -387,7 +350,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	    echo "<p style='color: #666666; text-align: right;' class='verdana1 spip_small'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
 	  } else {
 	    echo "\n<div align='center'><table><tr><td>";
-	    icone (_T('icone_envoyer_message'), (generer_url_ecrire("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
+	    icone (_T('icone_envoyer_message'), redirige_action_auteur('editer_message', "$id_message/publie", "message","id_message=$id_message"), "messagerie-24.gif", "creer.gif");
 	    echo "</td></tr></table></div>";
 	  }
 	}
@@ -429,43 +392,6 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	echo "</td></tr></table>";
 }
 
-// Convertir dates a calendrier correct (exemple: 31 fevrier devient debut mars, 24h12 devient 00h12 du lendemain)
-
-// http://doc.spip.org/@change_date_message
-function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin)
-{
-			$date = date("Y-m-d H:i:s", mktime($heures,$minutes,0,$mois, $jour, $annee));
-			
-			$jour = journum($date);
-			$mois = mois($date);
-			$annee = annee($date);
-			$heures = heures($date);
-			$minutes = minutes($date);
-			
-			// Verifier que la date de fin est bien posterieure au debut
-			$unix_debut = date("U", mktime($heures,$minutes,0,$mois, $jour, $annee));
-			$unix_fin = date("U", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
-			if ($unix_fin <= $unix_debut) {
-				$jour_fin = $jour;
-				$mois_fin = $mois;
-				$annee_fin = $annee;
-				$heures_fin = $heures + 1;
-				$minutes_fin = $minutes;
-			}		
-
-			$date_fin = date("Y-m-d H:i:s", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
-			
-			$jour_fin = journum($date_fin);
-			$mois_fin = mois($date_fin);
-			$annee_fin = annee($date_fin);
-			$heures_fin = heures($date_fin);
-			$minutes_fin = minutes($date_fin);
-			
-
-	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message='$id_message'");
-}
-
-
 // http://doc.spip.org/@exec_affiche_message_dist
 function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
@@ -500,7 +426,6 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, generer_url_ecrire('calendrier'));
 	
 	echo "<br />";
-	
 	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
 	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
 	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
