@@ -23,7 +23,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	if ($logname != 'maj'
 	AND defined('_MAX_LOG')
 	AND (
-		$compteur[$logname]++ > 1000*_MAX_LOG
+		$compteur[$logname]++ > _MAX_LOG
 		OR !$nombre_de_logs
 		OR !$taille_des_logs
 	))
