@@ -124,7 +124,10 @@ function debusquer_compose_message($msg){
 			// message SQL: interpreter
 			$msg = debusquer_requete($msg);
 	}
-	spip_log("Debug: " . $msg . " (" . $GLOBALS['fond'] . ")");
+	// [fixme] le fond n'est pas la si on n'est pas dans un squelette
+	// cela dit, ca serait bien d'indiquer tout de meme d'ou vient l'erreur
+	$fond = isset($GLOBALS['fond']) ? $GLOBALS['fond']  : "";
+	spip_log("Debug: " . $msg . " (" . $fond . ")");
 	return $msg;
 }
 

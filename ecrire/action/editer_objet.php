@@ -254,8 +254,8 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 		$champ_date = $desc['date'];
 	elseif (isset($desc['field']['date']))
 		$champ_date = 'date';
-	if ($champ_date)
-		$sel[] = ($champ_date?"$champ_date as date":"'' as date");
+
+	$sel[] = ($champ_date ? "$champ_date as date" : "'' as date");
 	$sel[] = (isset($desc['field']['id_rubrique'])?'id_rubrique':"0 as id_rubrique");
 
 	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet).'='.intval($id));
