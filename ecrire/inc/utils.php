@@ -1345,7 +1345,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		$GLOBALS['profondeur_url'] = _DIR_RESTREINT ? 0 : 1;
 
 	// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
-	if (test_espace_prive())	verifier_visiteur();
+	if (_FILE_CONNECT) verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
