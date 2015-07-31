@@ -118,6 +118,13 @@ function exec_brouteur_dist()
 		echo "</td>";
 	}
 	echo "\n</tr></table>";
+
+	// fixer la hauteur du brouteur de maniere a remplir l'ecran
+	echo "<script type='text/javascript'><!--
+		jQuery('iframe.iframe-bouteur').height(
+			Math.max((window.innerHeight||0)-190,300)
+		);
+	//--></script>\n";
 	echo fin_page();
 }
 ?>
