@@ -35,6 +35,7 @@ function sql_serveur($ins_sql, $serveur='') {
 
 // Regler le codage de connexion
 
+// http://doc.spip.org/@sql_set_charset
 function sql_set_charset($charset,$serveur=''){
 	$f = sql_serveur('set_charset', $serveur);
 	return $f($charset, $serveur);
@@ -43,6 +44,7 @@ function sql_set_charset($charset,$serveur=''){
 // Demande si un charset est disponible. 
 // Pas d'erreur fatale ==> ne pas utiliser la fonction generale
 
+// http://doc.spip.org/@sql_get_charset
 function sql_get_charset($charset, $serveur=''){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
 	$desc = spip_connect($serveur);
