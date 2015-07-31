@@ -323,9 +323,13 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 						$valeur = $vals[2];
 						$inserer_vignette .= "<param name='$nom' value='$valeur'>";
 						$param_emb .= " $nom='$valeur'";
-						if ($nom == "controls" AND $valeur == "All") { 
-							$largeur = $largeur;
-							$hauteur = 100;
+						if ($nom == "controls" AND $valeur == "PlayButton") { 
+							$largeur = 40;
+							$hauteur = 25;
+						}
+						else if ($nom == "controls" AND $valeur == "PositionSlider") { 
+							$largeur = $largeur - 40;
+							$hauteur = 25;
 						}
 					}
 				}
@@ -341,8 +345,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		else if ($inclus == "embed" AND $real) {
 			$vignette .= embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= "<br>";
-			$vignette .= embed_document ($id_document, "controls=All|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
-			//$vignette .= embed_document ($id_document, "controls=PositionSlider|console=Console$id_document|$les_parametres", false);
+			$vignette .= embed_document ($id_document, "controls=PlayButton|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
+			$vignette .= embed_document ($id_document, "controls=PositionSlider|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 		}
 		else if ($inclus == "image") {
 			$fichier_vignette = $fichier;
