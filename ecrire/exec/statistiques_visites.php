@@ -143,7 +143,8 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 
 	$r = sql_select("referer, referer_md5, visites AS vis", $table_ref, $where, "", "vis DESC", $limit,'',$serveur);
 
-	$res = aff_referers ($r, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
+	$referenceurs = charger_fonction('referenceurs', 'inc');
+	$res = $referenceurs ($r, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
 	if ($res) {
 		echo gros_titre(_T("onglet_origine_visites"),'', false);
 		echo "<div style='overflow:hidden;' class='verdana1 spip_small'><br />";
@@ -152,63 +153,5 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	}
 
 	echo fin_gauche(), fin_page();	
-}
-
-// http://doc.spip.org/@statistiques_signatures
-function statistiques_signatures($aff_jours, $id_article, $serveur)
-{
-	$total = sql_countsel("spip_signatures", "id_article=$id_article");
-	if (!$total) return '';
-	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
-
-	return "<br />"
-	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
-	. $res
-	. (!$mois ? '' : (
-	  "<br />"
-	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. $mois));
-}
-
-// http://doc.spip.org/@statistiques_forums
-function statistiques_forums($aff_jours, $id_article, $serveur)
-{
-
-	$total = sql_countsel("spip_forum", "id_article=$id_article");
-	if (!$total) return '';
-	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
-
-	return "<br />"
-	. gros_titre(_L('Messages de forum par jour'),'', false)
-	. $res
-	. (!$mois ? '' : (
-	  "<br />"
-	. gros_titre(_L('Messages de forum par mois'),'', false)
-	. $mois));
-}
-
-// Le bouton pour CSV et pour passer de svg a htm
-
-// http://doc.spip.org/@statistiques_mode
-function statistiques_mode($table)
-{
-	if (flag_svg()) {
-		$lien = 'non'; $alter = 'HTML';
-	} else {
-		$lien = 'oui'; $alter = 'SVG';
-	}
-
-	$lui = self();
-	$csv = parametre_url(parametre_url($lui, 'table', $table), 'format', 'csv');
-
-	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
-		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>"
-		. $alter
-		. "</a> | <a href='"
-		. $csv
-	  	. "'>CSV</a>"
-		. "</div>\n";
 }
 ?>

@@ -13,252 +13,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Les deux fonctions suivantes sont adaptees du code des "Visiteurs",
-// par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
-
-// http://doc.spip.org/@stats_load_engines
-function stats_load_engines() {
-	$arr_engines = Array();
-	lire_fichier(find_in_path('engines-list.txt'), $moteurs);
-	foreach (array_filter(preg_split("/([\r\n]|#.*)+/", $moteurs)) as $ligne) {
-		$ligne = trim($ligne);
-		if (preg_match(',^\[([^][]*)\]$,S', $ligne, $regs)) {
-			$moteur = $regs[1];
-			$query = '';
-		} else if (preg_match(',=$,', $ligne, $regs))
-			$query = $ligne;
-		else
-			$arr_engines[] = array($moteur,$query,$ligne);
-	}
-	return $arr_engines;
-}
-
-// http://doc.spip.org/@stats_show_keywords
-function stats_show_keywords($kw_referer, $kw_referer_host) {
-	static $arr_engines;
-	static $url_site;
-
-	if (!$arr_engines) {
-		// Charger les moteurs de recherche
-		$arr_engines = stats_load_engines();
-
-		// initialiser la recherche interne
-		$url_site = $GLOBALS['meta']['adresse_site'];
-		$url_site = preg_replace(",^((https?|ftp)://)?(www\.)?,", "", strtolower($url_site));
-	}
-
-	if ($url = @parse_url( $kw_referer )) {
-		$query = isset($url['query'])?$url['query']:"";
-		$host  = strtolower($url['host']);
-		$path  = $url['path'];
-	} else $query = $host = $path ='';
-
-	// Cette fonction affecte directement les variables selon la query-string !
-	parse_str($query);
-
-	$keywords = '';
-	$found = false;
-	
-	if (!empty($url_site)) {
-	if (strpos('-'.$kw_referer, preg_replace(",^(https?:?/?/?)?(www\.)?,", "",$url_site))!==false) {
-		if (preg_match(",(s|search|r|recherche)=([^&]+),i", $kw_referer, $regs))
-			$keywords = urldecode($regs[2]);
-			
-			
-		else
-			return array('host' => '');
-	} else
-	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
-	{
-		if ( $found = preg_match(','.$arr_engines[$cnt][2].',', $host)
-		  OR $found = preg_match(','.$arr_engines[$cnt][2].',', $path))
-		{
-			$kw_referer_host = $arr_engines[$cnt][0];
-			
-			if (strpos($arr_engines[$cnt][1],'=')!==false) {
-			
-				// Fonctionnement simple: la variable existe
-				$v = str_replace('=', '', $arr_engines[$cnt][1]);
-				$keywords = isset($$v)?$$v:"";
-				
-				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
-				if (! strlen($keywords) > 0) {
-					if (preg_match(",".$arr_engines[$cnt][1]."([^\&]*),", $query, $vals)) {
-						$keywords = urldecode($vals[2]);
-					}
-				}
-			} else {
-				$keywords = "";
-			}
-						
-			if ((  ($kw_referer_host == "Google")
-				|| ($kw_referer_host == "AOL" && strpos($query,'enc=iso')===false)
-				|| ($kw_referer_host == "MSN")
-				)) {
-				include_spip('inc/charsets');
-				if (!isset($ie) OR !$cset = $ie) $cset = 'utf-8';
-				$keywords = importer_charset($keywords,$cset);
-			}
-			$buffer["hostname"] = $kw_referer_host;
-		}
-	}
-	}
-
-	$buffer["host"] = $host;
-	if (!isset($buffer["hostname"]) OR !$buffer["hostname"])
-		$buffer["hostname"] = $host;
-	
-	$buffer["path"] = substr($path, 1, strlen($path));
-	$buffer["query"] = $query;
-
-	if ($keywords != '')
-	{
-		if (strlen($keywords) > 150) {
-			$keywords = spip_substr($keywords, 0, 148);
-			// supprimer l'eventuelle entite finale mal coupee
-			$keywords = preg_replace('/&#?[a-z0-9]*$/', '', $keywords);
-		}
-		$buffer["keywords"] = trim(entites_html(urldecode(stripslashes($keywords))));
-	}
-
-	return $buffer;
-
-}
-
-//
-// Recherche des articles pointes par le referer
-//
-// http://doc.spip.org/@referes
-function referes($referermd5, $serveur='') {
-	$refarts = sql_select('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(NOW(), INTERVAL 2 DAY))", '', "titre",'','',$serveur);
-
-	$retarts = array();
-	while ($rowart = sql_fetch($refarts,$serveur)) {
-		$id_article = $rowart['id_article'];
-		$titre_article = $rowart['titre'];
-		$retarts[] = "<a href='".generer_url_article($id_article)."'><i>".typo($titre_article)."</i></a>";
-	}
-	$r = "";
-	if (count($retarts) > 1) $r = '<br />&rarr; '.join(',<br />&rarr; ',$retarts);
-	if (count($retarts) == 1) $r = '<br />&rarr; '.$retarts[0];
-	return $r;
-}
-
-//
-// Afficher les referers d'un article (ou du site)
-//
-// http://doc.spip.org/@aff_referers
-function aff_referers ($result, $limit, $plus, $serveur='') {
-	global $spip_lang_right, $source_vignettes;
-	// Charger les moteurs de recherche
-	$arr_engines = stats_load_engines();
-	$nbvisites = array();
-	$aff = '';
-	while ($row = sql_fetch($result,$serveur)) {
-		$referermd5 = $row['referer_md5'];
-		$referer = interdire_scripts($row['referer']);
-		$visites = $row['vis'];
-		$tmp = "";
-		
-		$buff = stats_show_keywords($referer, $referer);
-		
-		if ($buff["host"]) {
-			$numero = substr(md5($buff["hostname"]),0,8);
-			if (!isset($nbvisites[$numero])) $nbvisites[$numero]=0;
-			
-			$nbvisites[$numero] += $visites;
-
-			if (isset($buff["keywords"]) AND strlen($buff["keywords"]) > 0) {
-				$criteres = substr(md5($buff["keywords"]),0,8);
-				if (!isset($lescriteres[$numero][$criteres]))
-					$tmp = " &laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;";
-				$lescriteres[$numero][$criteres] = true;
-			} else {
-				$tmp = $buff["path"];
-				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
-		
-				if (strlen($tmp) > 18)
-					$tmp = "/".substr($tmp, 0, 15)."...";
-				else if (strlen($tmp) > 0)
-					$tmp = "/$tmp";
-			}
-
-			if ($tmp) {
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"").referes($referermd5);
-			} else {
-				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
-				$lesliensracine[$numero] += $visites;
-			}
-			$lesdomaines[$numero] = $buff["hostname"];
-			$lesreferermd5[$numero] = $referermd5;
-			$lesurls[$numero] = $buff["host"];
-			$lesliens[$numero] = $referer;
-		}
-	}
-	
-	if (count($nbvisites) > 0) {
-		arsort($nbvisites);
-
-		$aff = '';
-		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
-			$dom =  $lesdomaines[$numero];
-			$referermd5 = $lesreferermd5[$numero];
-			if (!$dom) next;
-
-			$visites = pos($nbvisites);
-			$ret = "\n<li>";
-
-			if (
-			  (strlen($source_vignettes) > 0) && 
-			  $GLOBALS['meta']["activer_captures_referers"]!='non')
-				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
-
-			$bouton = "";
-			if ($visites > 5) $bouton .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
-			else if ($visites > 1) $bouton .= "$visites "._T('info_visites')." ";
-			else $bouton .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
-
-			if ($dom == "(email)") {
-				$aff .= $ret . $bouton . "<b>".$dom."</b>";
-			} else {
-			  $n = isset($lesreferers[$numero]) ? count($lesreferers[$numero]) : 0;
-			  if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
-					$rac = isset($lesliensracine[$numero]);
-					$bouton .= "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
-					  . (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"));
-					$aff .= $ret . bouton_block_depliable($bouton,false)
-					  . debut_block_depliable(false)
-					  . "\n<ul><li>"
-					  . join ("</li><li>",$lesreferers[$numero])
-					  . "</li></ul>"
-					  . fin_block();
-				} else {
-					$aff .= $ret . $bouton;
-					$lien = $n ? $lesreferers[$numero][0] : '';
-					if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
-						$lien = quote_amp($regs[1]).$dom.$regs[2];
-						if (!strpos($lien, '</a>')) $lien .= '</a>';
-					} else
-						$lien = "<a href='http://".$dom."'>".$dom."</a>";
-					$aff .= "<b>".quote_amp($lien)."</b>".referes($referermd5);
-				}
-			}
-			$aff .= "</li>\n";
-		}
-
-		if (preg_match(",</ul>\s*<ul style='font-size:small;'>\s*$,",$aff,$r))
-		  $aff = substr($aff,0,(0-strlen($r[0])));
-		if ($aff) $aff = "<ul class='referers'>$aff</ul>";
-
-		// Le lien pour en afficher "plus"
-		if ($plus AND (sql_count($result,$serveur) == $limit)) {
-			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
-		}
-	}
-
-	return $aff;
-}
-
 
 // http://doc.spip.org/@aff_statistique_visites_popularite
 function aff_statistique_visites_popularite($serveur, $id_article, &$classement, &$liste){
@@ -429,7 +183,6 @@ function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 		if ($r['d'] AND  isset($log[$r['d']]))
 			$log[$r['d']] += $r['n'];
 		else	$log[$r['d']] = $r['n'];
-#		echo $log[$r['d']], ' ', $r['d'], '<br >';
 	}
 	return $log;
 }
@@ -437,7 +190,7 @@ function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 // Appelee S'il y a au moins cinq minutes de stats :-)
 
 // http://doc.spip.org/@statistiques_tous
-function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, &$classement, $id_article=0, $liste=0, $script='')
+function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, $classement, $id_article=0, $liste=0, $script='')
 {
 	$r = array_keys($log);
 	$date_today = max($r);
@@ -865,10 +618,8 @@ function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, &$total
 	$total_absolu = $total_absolu + $visites_today;
 	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
 	$n = ((3600*24)*$agreg);
-	spip_log("newstat");
 	foreach ($log as $key => $value) {
 		# quand on atteint aujourd'hui, stop
-	  spip_log(date("Y-m-d",$key) . " $value");
 		if ($key == $date_today) break; 
 		$test_agreg ++;
 		if ($test_agreg == $agreg) {	
@@ -923,4 +674,61 @@ function statistiques_moyenne($tab)
 	return  $moyenne / count($tab);
 }
 
+
+// http://doc.spip.org/@statistiques_signatures
+function statistiques_signatures($aff_jours, $id_article, $serveur)
+{
+	$total = sql_countsel("spip_signatures", "id_article=$id_article");
+	if (!$total) return '';
+	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", $aff_jours, "date_time", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
+
+	return "<br />"
+	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
+	. $res
+	. (!$mois ? '' : (
+	  "<br />"
+	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
+	. $mois));
+}
+
+function statistiques_forums($aff_jours, $id_article, $serveur)
+{
+
+	$total = sql_countsel("spip_forum", "id_article=$id_article");
+	if (!$total) return '';
+	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
+	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", $aff_jours, "date_heure", "COUNT(*)", $serveur, $total, 0, '', array(), $script);
+
+	return "<br />"
+	. gros_titre(_L('Messages de forum par jour'),'', false)
+	. $res
+	. (!$mois ? '' : (
+	  "<br />"
+	. gros_titre(_L('Messages de forum par mois'),'', false)
+	. $mois));
+}
+
+// Le bouton pour CSV et pour passer de svg a htm
+
+// http://doc.spip.org/@statistiques_mode
+function statistiques_mode($table)
+{
+	if (flag_svg()) {
+		$lien = 'non'; $alter = 'HTML';
+	} else {
+		$lien = 'oui'; $alter = 'SVG';
+	}
+
+	$lui = self();
+	$csv = parametre_url(parametre_url($lui, 'table', $table), 'format', 'csv');
+
+	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
+		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>"
+		. $alter
+		. "</a> | <a href='"
+		. $csv
+	  	. "'>CSV</a>"
+		. "</div>\n";
+}
 ?>

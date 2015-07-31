@@ -709,6 +709,7 @@ ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
+ecrire/inc/referenceurs.php -text
 ecrire/inc/regler_moderation.php -text
 ecrire/inc/safehtml.php -text
 ecrire/inc/securiser_action.php -text
