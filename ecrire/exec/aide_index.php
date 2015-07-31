@@ -171,12 +171,6 @@ function help_body($aide, $suite, $lang_aide='') {
 	// relocaliser img_pack au bon endroit ...
 	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html . $suite);
 	
-	echo http_script('jQuery(function(){
-	jQuery("a.target_blank").click(function(){
-		window.open(this.href);
-		return false;
-	});
-});');
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
 	echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
@@ -198,7 +192,7 @@ function help_body($aide, $suite, $lang_aide='') {
 
 	$html = justifier($html);
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
-	$html = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@', '<a href="\\1"\\2 class="target_blank">', $html);
+	$html = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@', '<a href="\\1"\\2 target="_blank">', $html);
 
 	echo $html, '</body>';
 }
@@ -301,13 +295,7 @@ function activer_article(id) {
 		curr_article = id;
 	}
 }
-
-jQuery(function(){
-	jQuery("a.target_droite").click(function(){
-		window.open(this.href,"droite");
-		return false;
-	});
-});'),
+'),
 	$GLOBALS['browser_layer'],
 	'
 </head>
@@ -401,7 +389,7 @@ function article($titre, $lien, $statut = "redac") {
 		else {
 			$class = "article-inactif";
 		}
-		$texte[$ligne] .= "<a class='$class target_droite' id='$id'
+		$texte[$ligne] .= "<a class='$class' target='droite' id='$id'
  href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
 		  "' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
 	}
