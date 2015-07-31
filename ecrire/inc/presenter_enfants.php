@@ -18,9 +18,9 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
-	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
+	global $spip_display, $spip_lang_right, $spip_lang;
 
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
+	$voir_logo = ($spip_display != 1 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
 
 	if ($voir_logo) {
 		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: 0px; margin-top: 0px;";
@@ -110,13 +110,13 @@ function sous_enfant_rub($collection2){
 }
 
 // http://doc.spip.org/@afficher_enfant_rub
-function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
-	global  $spip_lang_left,$spip_lang_right, $spip_display;
+function afficher_enfant_rub($id_rubrique=0) {
+	global  $spip_display;
 
 	$les_enfants = enfant_rub($id_rubrique);
 	$n = strlen(trim($les_enfants));
 
-	if (!$n && !$bouton) return "";
+	if (!$n) return "";
 
 	if (!($x = strpos($les_enfants,"\n<div class='enfants'>",round($n/2)))) {
 		$les_enfants2="";
@@ -135,18 +135,9 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "</div>"
 	. "<div class='droite'>"
 	. $les_enfants2
-	. "</div>"
-	. "&nbsp;"
-	. "<div style='float:"
-	. $spip_lang_right
-	. ";position:relative;'>"
-	. (!$bouton ? ''
-		 : (!$id_rubrique
-		    ? icone_verticale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right)
-		    : icone_verticale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right)))
 	. "</div>";
 
-	if ($return) return $res; else echo_log('afficher_enfant_rub',$res);
+	return $res;
 }
 
 ?>
