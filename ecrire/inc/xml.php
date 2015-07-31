@@ -13,11 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@spip_xml_load
-function spip_xml_load($fichier, $strict=true, $clean=true){
+function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas=''){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
 		include_spip('inc/distant');
-		$contenu = recuperer_page($fichier);
+		$contenu = recuperer_page($fichier,false,false,$taille_max, $datas);
 	}
 	else lire_fichier ($fichier, $contenu);
 	$arbre = array();
@@ -64,7 +64,20 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 		}
 		else{
 			// tag fermant
-			$chars = preg_split("{(</".preg_quote($closing_tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+			$chars = preg_split("{(</".preg_quote($closing_tag).">)}is",$txt,-1,PREG_SPLIT_DELIM_CAPTURE);
+			$content = "";
+			if (count($chars)>3){ // plusieurs tags fermant -> verifier les tags ouvrants/fermants
+				$nclose =0; $nopen = 0;
+				preg_match_all("{<".preg_quote($closing_tag)."(\s*>|\s[^>]*[^/>]>)}is",$chars[0],$matches,PREG_SET_ORDER);
+				$nopen += count($matches);
+				while ($nopen>$nclose && (count($chars)>3)){
+					$content.=array_shift($chars);
+					$content.=array_shift($chars);
+					$nclose++;
+					preg_match_all("{<".preg_quote($closing_tag)."(>|[^>]*[^/>]>)}is",$chars[0],$matches,PREG_SET_ORDER);
+					$nopen += count($matches);
+				}
+			}
 			if (!isset($chars[1])) { // tag fermant manquant
 				if ($strict){
 					$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
@@ -72,8 +85,9 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 				}
 				else return $texte; // un tag qui constitue du texte a reporter dans $before
 			}
-			$content = $chars[0];
-			$txt = $chars[2];
+			$content .= array_shift($chars);
+			array_shift($chars); // enlever le separateur
+			$txt = implode("",$chars);
 			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
 				$out[$tag][] = $content;
 			else
