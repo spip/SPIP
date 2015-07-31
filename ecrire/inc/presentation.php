@@ -86,7 +86,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		}
 	}
 	
-	return $ret . "</div>\n<div class='cadre-padding' style='overflow:hidden'>";
+	return $ret . "</div>\n<div class='cadre-padding'>";
 }
 
 // http://doc.spip.org/@fin_cadre
