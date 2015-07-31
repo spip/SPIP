@@ -89,14 +89,14 @@
 					</BOUCLE_forum_parent>
 
 					<BOUCLE_article(ARTICLES) {id_article}>
-					[(#LOGO_ARTICLE||reduire_image{120,120})]
+					[(#LOGO_ARTICLE||image_reduire{150,100})]
 					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<div class="texte">(#INTRODUCTION)</div>]
 					</BOUCLE_article>
 
 					<BOUCLE_breve(BREVES) {id_breve}>
-					[(#LOGO_BREVE||reduire_image{120,120})]
+					[(#LOGO_BREVE||image_reduire{150,100})]
 					<h3 class="titre"><a href="#URL_BREVE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)]</small>
 					[<div class="texte">(#INTRODUCTION)</div>]
