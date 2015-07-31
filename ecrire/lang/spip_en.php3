@@ -1038,7 +1038,7 @@ requiring an FTP access to the Web site.',
 // O
 'onglet_affacer_base' => 'Delete the database',
 'onglet_auteur' => 'The author',
-'onglet_contenu_site' => 'Content of the site',
+'onglet_contenu_site' => 'The site\'s content',
 'onglet_evolution_visite' => 'Visits evolution',
 'onglet_fonctions_avances' => 'Advanced functions',
 'onglet_informations_personnelles' => 'Personal Information',
