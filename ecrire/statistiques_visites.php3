@@ -58,7 +58,7 @@ debut_gauche();
 	}
 
 	echo "<font size=1>";
-	$query = "SELECT id_article, titre FROM spip_articles WHERE statut='publie' AND visites > 0 ORDER BY date DESC LIMIT 0,20";
+	$query = "SELECT id_article, titre FROM spip_articles WHERE statut='publie' AND visites > 0 ORDER BY popularite DESC LIMIT 0,20";
 	$result = spip_query($query);
 
 	if (mysql_num_rows($result) > 0)
@@ -66,9 +66,9 @@ debut_gauche();
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
 			if ($l_article == $id_article){
-				echo "\n<li><b>$titre</b>";
+				echo "\n<li><b>$titre</b></li>";
 			} else {
-				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a>";
+				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a></li>";
 			}
 		}
 	else
