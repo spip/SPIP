@@ -64,8 +64,19 @@ if (defined('_INC_PUBLIC')) {
 			die (_L("Faut pas se gener"));
 
 	# par defaut
-	} else
+	} else {
+		// traiter le cas pathologique d'un upload de document ayant echoue
+		// car trop gros
+		if (empty($_GET) AND empty($_POST) AND empty($_FILES)
+		AND strlen($_SERVER["CONTENT_LENGTH"]) >= 7
+		AND strstr($_SERVER["CONTENT_TYPE"], "multipart/form-data;")) {
+			include_spip('inc/getdocument');
+			erreur_upload_trop_gros();
+		}
+
+		// mais plus probablement nous sommes dans le cas
 		$fond = 'sommaire';
+	}
 
 	// Particularites de certains squelettes
 	if ($fond == 'login')

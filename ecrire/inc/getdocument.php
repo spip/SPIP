@@ -141,6 +141,19 @@ function check_upload_error($error, $msg='') {
 		' &gt;&gt;"></div></form>');
 }
 
+// Erreur appelee depuis public.php (la precedente ne fonctionne plus
+// depuis qu'on est sortis de spip_image.php, apparemment).
+function erreur_upload_trop_gros() {
+	include_spip('inc/filtres');
+	minipres(_T('pass_erreur'),
+		"<p>"
+		.taille_en_octets($_SERVER["CONTENT_LENGTH"])
+		.'<br />'
+		._T('upload_limit',
+		array('max' => ini_get('upload_max_filesize')))
+		."</p>");
+	exit;
+}
 
 //
 // Gestion des fichiers ZIP
