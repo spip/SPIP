@@ -103,20 +103,6 @@ function init_body_class() {
 	return $GLOBALS['spip_ecran'] . " $spip_display_navigation ".$display_class[$GLOBALS['spip_display']];
 }
 
-// http://doc.spip.org/@avertissement_messagerie
-function avertissement_messagerie($id_auteur) {
-
-	$result_messages = sql_allfetsel("M.id_message", "spip_messages AS M LEFT JOIN spip_auteurs_liens AS L ON (L.objet='message' AND L.id_objet=M.id_message)", "L.id_auteur=".intval($id_auteur)." AND vu='non' AND statut='publie' AND type='normal'");
-	$total_messages = count($result_messages);
-	if ($total_messages == 1) {
-		$row = $result_messages[0];
-		$ze_message=$row['id_message'];
-		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' class='ligne_foncee'>"._T('info_nouveau_message')."</a>";
-	} elseif ($total_messages > 1)
-		return "<a href='" . generer_url_ecrire("messagerie") . "' classe='ligne_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a>";
-	else return '';
-}
-
 // http://doc.spip.org/@alertes_auteur
 function alertes_auteur($id_auteur) {
 
@@ -147,8 +133,6 @@ function alertes_auteur($id_auteur) {
 		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
 		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
 	}
-
-	$alertes[] = avertissement_messagerie($id_auteur);
 
 	$alertes = pipeline(
 		'alertes_auteur',

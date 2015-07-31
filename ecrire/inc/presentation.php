@@ -13,7 +13,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation_mini');
-include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
+include_spip('inc/layer');
+include_spip('inc/texte');
+include_spip('inc/filtre');
 include_spip('inc/boutons');
 include_spip('inc/actions');
 include_spip('inc/puce_statut');

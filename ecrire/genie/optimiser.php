@@ -207,20 +207,6 @@ function optimiser_base_disparus($attente = 86400) {
 	
 	// on ne nettoie volontairement pas automatiquement les documents orphelins
 	
-	//
-	// Messages prives
-	//
-
-	# supprimer les messages lies a un auteur disparu
-	$res = sql_select("M.id_message AS id",
-		      "spip_messages AS M
-		        LEFT JOIN spip_auteurs AS A
-		          ON A.id_auteur=M.id_auteur",
-			"A.id_auteur IS NULL");
-
-	$n+= optimiser_sansref('spip_messages', 'id_message', $res);
-
-
 	$n = pipeline('optimiser_base_disparus', array(
 			'args'=>array(
 				'attente' => $attente,

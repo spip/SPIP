@@ -66,13 +66,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	  . url_absolue(find_in_path('style_prive_defaut.css'))
 	. '" id="cssprivee" />'  . "\n"
 
-	// CSS calendrier
-	. (($GLOBALS['meta']['messagerie_agenda'] != 'non')
-		? '<link rel="stylesheet" type="text/css" href="'
-		. url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
-		: '')
-
-	// CSS imprimante (masque des trucs, a completer)
+	// SPIP-style...
 	. '<link rel="stylesheet" type="text/css" href="'
 	  . url_absolue(find_in_path('spip_style.css'))
 	. '" media="all" />' . "\n"

@@ -74,8 +74,6 @@ $spip_auteurs = array(
 		"pgp"	=> "TEXT DEFAULT '' NOT NULL",
 		"htpass"	=> "tinytext DEFAULT '' NOT NULL",
 		"en_ligne"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"imessage"	=> "VARCHAR(3)",
-		"messagerie"	=> "VARCHAR(3)",
 		"alea_actuel"	=> "tinytext",
 		"alea_futur"	=> "tinytext",
 		"prefs"	=> "tinytext",
@@ -94,22 +92,6 @@ $spip_auteurs_join = array(
 		"id_auteur"=>"id_auteur",
 		"login"=>"login");
 
-
-$spip_messages = array(
-		"id_message"	=> "bigint(21) NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		"type"	=> "varchar(6) DEFAULT '' NOT NULL",
-		"date_heure"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"date_fin"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"rv"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"statut"	=> "varchar(6)  DEFAULT '0' NOT NULL",
-		"id_auteur"	=> "bigint(21) NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_messages_key = array(
-		"PRIMARY KEY"	=> "id_message",
-		"KEY id_auteur"	=> "id_auteur");
 
 $spip_rubriques = array(
 		"id_rubrique"	=> "bigint(21) NOT NULL",
@@ -180,8 +162,6 @@ $tables_principales['spip_articles'] =
 	array('field' => &$spip_articles, 'key' => &$spip_articles_key, 'join' => &$spip_articles_join);
 $tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key,'join' => &$spip_auteurs_join);
-$tables_principales['spip_messages'] =
-	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
 $tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
 $tables_principales['spip_documents'] =
