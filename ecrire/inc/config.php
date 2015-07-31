@@ -298,7 +298,7 @@ function appliquer_modifs_config() {
 	if ($modif_secu) {
 		$admin = _T('info_modification_parametres_securite');
 		include_spip('inc/admin');
-		debut_admin(generer_url_post_ecrire($_POST['exec'], cache_post()),$admin);
+		debut_admin($_POST['exec'], $admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))
 			if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
@@ -310,16 +310,6 @@ function appliquer_modifs_config() {
 		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_SKELS);
 	}
-}
-
-// faudrait essayer d'etre plus malin
-
-// http://doc.spip.org/@cache_post
-function cache_post()
-{
-  $res = "";
-  foreach ($_POST as $k => $v) if ($k != 'exec') $res .= "&$k=$v";
-  return substr($res,1);
 }
     
 

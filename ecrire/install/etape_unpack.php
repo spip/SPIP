@@ -22,7 +22,7 @@ function install_etape_unpack_dist()
 
   $action = _T('texte_unpack');
  
-  debut_admin(generer_url_post_ecrire("install"),$action);
+  debut_admin("install",$action);
 
   fin_admin($action);
 

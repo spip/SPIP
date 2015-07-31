@@ -107,7 +107,7 @@ function exec_import_all_dist()
 
 		// au tout premier appel, on ne revient pas de debut_admin
 
-		debut_admin(generer_url_post_ecrire("import_all","archive=$archive&insertion=$insertion"), $action, $commentaire);
+		debut_admin("import_all", $action, $commentaire);
 
 		// si on est revenu c'est que l'authentification ftp est ok
 		// sinon il reste le meta request_restau; a ameliorer.

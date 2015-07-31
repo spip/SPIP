@@ -72,6 +72,8 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	font-size: 0.8em;
 	font-family: Verdana,Arial,Sans,sans-serif; }\n",
 	  "\n\n]]>\n--></style>\n\n
+	<script type='text/javascript' src='"
+	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
 </head>
 <body".$onLoad.">
 	<div id='minipres'>
@@ -114,16 +116,16 @@ function bouton_suivant($code = 'bouton_suivant') {
 }
 
 // http://doc.spip.org/@minipres
-function minipres($titre, $corps="")
+function minipres($titre, $corps="", $onload='')
 {
 	if (!$titre)
 		echo  _DOCTYPE_ECRIRE ,
 		  html_lang_attributes(),
-		  "<body>",
+		  "<body$onload>",
 		  $corps,
 		  '</body></html>';
 	else {
-		install_debut_html($titre);
+		install_debut_html($titre, $onload);
 		echo $corps;
 		install_fin_html();
 	}
