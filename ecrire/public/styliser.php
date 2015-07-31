@@ -75,7 +75,7 @@ function styliser_par_z_dist($flux){
 		if (test_espace_prive ()){
 			$prefix_path = "prive/squelettes/";
 			$prefix_length = strlen($prefix_path);
-			$z_blocs = isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie');
+			$z_blocs = isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top');
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
 			$echaffauder = ""; // pas d'echaffaudage dans ecrire/ pour le moment
