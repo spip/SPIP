@@ -214,7 +214,7 @@ $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 //
 function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $secure='') {
 	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
-	
+
 	// patch safari beta 51-60
 	if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT']))
 		$path = ereg_replace("/[^/]+$", "/", $GLOBALS['REQUEST_URI']);
@@ -384,16 +384,20 @@ if ($auto_compress && $flag_obgz) {
 	if (ob_get_contents())
 		$use_gz = false;
 
+	// si la compression est deja commencee, stop
+	else if (@ini_get("zlib.output_compression") || @ini_get("output_handler"))
+		$use_gz = false;
+
 	// special bug de proxy
-	if (eregi("NetCache|Hasd_proxy", $HTTP_VIA))
+	else if (eregi("NetCache|Hasd_proxy", $HTTP_VIA))
 		$use_gz = false;
 
 	// special bug Netscape Win 4.0x
-	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT))
+	else if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT))
 		$use_gz = false;
 
 	// special bug Apache2x + php4.2.x (versions a preciser eventuellement si on retrouve)
-	if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
+	else if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
 		$use_gz = false;
 
 	if ($use_gz) {
