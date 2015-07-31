@@ -487,14 +487,14 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "\n<a href='", 
 		  str_replace('var_mode=','var_profile=', $self), "'>",
 		  _T('zbug_calcul')."</a></legend>";
-		echo "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>$debug_objets['profile'][$sourcefile]))."</span>";
+		echo "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>isset($debug_objets['profile'][$sourcefile])?$debug_objets['profile'][$sourcefile]:0))."</span>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
 
 		$i = 0;
 		$res = "";
-		if (is_array($debug_objets['pretty']))
+		if (isset($debug_objets['pretty']) AND is_array($debug_objets['pretty']))
 		  foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
 				$i++;
@@ -572,7 +572,7 @@ function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
 function debug_affiche($fonc, $tout, $objet, $affiche)
 {
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
-	if (!$objet OR !$quoi = $tout[$affiche][$objet]) return;
+	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return;
 	$res = "<div id=\"debug_boucle\"><fieldset>";
 	if ($affiche == 'resultat') {
 		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
