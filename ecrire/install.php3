@@ -17,6 +17,7 @@ if (_FILE_CONNECT) {
 
 include_ecrire ("inc_base.php3");
 define('_FILE_TMP', '_install');
+
 //
 // Etapes de l'installation standard
 //
@@ -371,6 +372,7 @@ else if (!$etape) {
 		echo "<p style='text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>";
 		echo "<b>SPIP $spip_version_affichee</b> ";
 		echo _T('info_copyright');
+
 		echo "</p>";
 
 		echo "<p>" . _T('install_select_langue');
@@ -381,7 +383,6 @@ else if (!$etape) {
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='dirs'>";
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
-
 		install_fin_html();
 	}
 }

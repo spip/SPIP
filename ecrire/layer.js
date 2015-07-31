@@ -38,41 +38,41 @@ var vis = new Array();
 		}
 	}
 
-function swap_couche(couche, rtl) {
+function swap_couche(couche, rtl, dir) {
 	triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (vis[couche] == 'hide'){
-		if (triangle) triangle.src = 'img_pack/deplierbas.gif';
+		if (triangle) triangle.src = dir + 'deplierbas.gif';
 		layer.style.display = 'block';
 		vis[couche] = 'show';
 	} else {
-		if (triangle) triangle.src = 'img_pack/deplierhaut' + rtl + '.gif';
+		if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
 		layer.style.display = 'none';
 		vis[couche] = 'hide';
 	}
 }
-function ouvrir_couche(couche, rtl) {
+function ouvrir_couche(couche, rtl,dir) {
 	triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
-	if (triangle) triangle.src = 'img_pack/deplierbas.gif';
+	if (triangle) triangle.src = dir + 'deplierbas.gif';
 	layer.style.display = 'block';
 	vis[couche] = 'show';
 }
-function fermer_couche(couche, rtl) {
+function fermer_couche(couche, rtl, dir) {
 	triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
-	if (triangle) triangle.src = 'img_pack/deplierhaut' + rtl + '.gif';
+	if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
 	layer.style.display = 'none';
 	vis[couche] = 'hide';
 }
-function manipuler_couches(action,rtl,first,last) {
+function manipuler_couches(action,rtl,first,last, dir) {
 	if (action=='ouvrir') {
 		for (j=first; j<=last; j+=1) {
-			ouvrir_couche(j,rtl);
+			ouvrir_couche(j,rtl, dir);
 		}
 	} else {
 		for (j=first; j<=last; j+=1) {
-			fermer_couche(j,rtl);
+			fermer_couche(j,rtl, dir);
 		}
 	}
 }

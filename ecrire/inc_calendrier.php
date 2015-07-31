@@ -135,7 +135,7 @@ function http_calendrier_aujourdhui_et_aide($now, $texte, $href)
     (($now) ? '' :
      ("<a href='$href' class='cellule-h'>" .
       "<table cellpadding='0'><tr>\n" .
-      "<td><img src='img_pack/calendrier-24.gif' alt='' /></td>\n" .
+      "<td>" . http_img_pack("calendrier-24.gif", "alt=''") . "</td>\n" .
       "<td>" . _T("info_aujourdhui")."<br />".
       $texte .
       "</td></tr></table></a>\n")) .
@@ -839,10 +839,10 @@ function http_calendrier_image_et_typo($evenements)
 	if (!(is_int($v['CATEGORIES'])))
 	  {
 	    if ($v['CATEGORIES'] == 'a')
-	      $i = 'img_pack/puce-verte-breve.gif';
+	      $i = 'puce-verte-breve.gif';
 	    else
-	      $i = 'img_pack/puce-blanche-breve.gif';
-	    $v['SUMMARY'] = "<img src='$i' alt='.' width='8' height='9' border='0' />";
+	      $i = 'puce-blanche-breve.gif';
+	    $v['SUMMARY'] = http_img_pack($i, "alt='.' width='8' height='9' border='0'");
 	    $v['DESCRIPTION'] = typo($v['DESCRIPTION']);
 	  }
 	$res[$k] = $v;
@@ -1294,9 +1294,11 @@ function http_calendrier_ical($id) {
     debut_cadre_enfonce('',true) .
     "<div class='verdana1'>"._T("calendrier_synchro") .
     "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
-    "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\"); background-repeat: no-repeat; background-position: center center;' src='img_pack/$fonction' alt='' /></div></a></td>\n" .
-    "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n" .
-    "</tr></table></a>\n" ."</div>" .
+    "<td><a href='$lien'><div class='cell-i'>"
+    . http_img_pack($fonction, http_style_background($fond, "background-repeat: no-repeat; background-position: center center;' alt=''"))
+    . "</div></a></td>\n"
+    . "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n"
+    . "</tr></table></a>\n" ."</div>" .
     fin_cadre_enfonce(true);
 }
 
@@ -1329,14 +1331,24 @@ function http_calendrier_rv($messages, $type) {
 
 		$total .= "<tr><td width='24' valign='middle'>" .
 		http_calendrier_href($url,
-			 ($rv ? "<img src='img_pack/rv.gif' style='background: url(img_pack/$bouton.gif) no-repeat;' border='0' alt='' />" : "<img src='img_pack/$bouton.gif' border='0' alt='' />"),
-			 '', '') .
+				     ($rv ?
+				      http_img_pack("rv.gif",
+						    http_style_background($bouton . '.gif', "no-repeat;' border='0' alt=''")) : 
+				      http_img_pack("$bouton.gif", "border='0' alt=''")),
+				     '', '') .
 		"</td>" .
 		"<td valign='middle'>" .
 		((!$rv) ? '' :
 		((affdate($date) == affdate($date_fin)) ?
-		("<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>") :
-		( "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat; text-align: center;'>".heures($date).":".minutes($date)."<br />...</div>" ))) .
+		 ("<div class='arial0'" . 
+		  http_style_background('fond-agenda.gif', 
+					"$spip_lang_right center no-repeat; float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px;")
+		  . heures($date).":".minutes($date)."<br />"
+		  . heures($date_fin).":".minutes($date_fin)."</div>") :
+		( "<div class='arial0'" . 
+		  http_style_background('fond-agenda.gif', 
+					"$spip_lang_right center no-repeat; float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; text-align: center;")
+		  . heures($date).":".minutes($date)."<br />...</div>" ))) .
 		"<div><b>" .
 		http_calendrier_href($url, typo($row['titre']), '', 
 'font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;') .

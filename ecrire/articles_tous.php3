@@ -313,8 +313,8 @@ function afficher_rubriques_filles($id_parent) {
 
 
 
-$javasc_ouvrir = "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche)";
-$javasc_fermer = "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche)";
+$javasc_ouvrir = "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')";
+$javasc_fermer = "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')";
 
 // Demarrer l'affichage
 if ($les_rubriques AND test_layer()) {
