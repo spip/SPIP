@@ -21,6 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array ou string
  */
 
+// http://doc.spip.org/@decompose_champ_id_objet
 function decompose_champ_id_objet($champ){
 	if (($champ!=='id_objet') AND preg_match(',^id_([a-z_]+)$,',$champ,$regs)){
 		return array('id_objet','objet',$regs[1]);
@@ -35,6 +36,7 @@ function decompose_champ_id_objet($champ){
  * @param array $desc
  * @return array
  */
+// http://doc.spip.org/@trouver_champs_decomposes
 function trouver_champs_decomposes($champ,$desc){
 	if (array_key_exists($champ,$desc['field']))
 		return array($champ);
