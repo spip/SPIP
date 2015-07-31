@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des textes et raccourcis SPIP
+ *
+ * @package SPIP\Core\Texte
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/texte_mini');
@@ -20,31 +26,52 @@ include_spip('inc/lien');
  *
  */
 
-// Raccourcis dependant du sens de la langue
+/**
+ * Raccourcis dépendant du sens de la langue
+ * @return array Tablea ('','')
+ */
 function definir_raccourcis_alineas(){
 	return array('','');
 }
 
 
-//
-// Tableaux
-//
-// http://doc.spip.org/@traiter_tableau
+/**
+ * Traitement des raccourcis de tableaux
+ *
+ * Ne fait rien ici. Voir plugin Textwheel.
+ * 
+ * @param sring $bloc
+ * @return string
+ */
 function traiter_tableau($bloc) {
 	return $bloc;
 }
 
 
-//
-// Traitement des listes (merci a Michael Parienti)
-//
-// http://doc.spip.org/@traiter_listes
+/**
+ * Traitement des listes
+ *
+ * Ne fais rien. Voir Plugin Textwheel.
+ * (merci a Michael Parienti)
+ * 
+ * @param string $texte
+ * @return string
+ */
 function traiter_listes ($texte) {
 	return $texte;
 }
 
-// Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
-// http://doc.spip.org/@traiter_raccourcis
+/**
+ * Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
+ *
+ * Ne fais rien ici. Voir plugin Textwheel.
+ * 
+ * @pipeline_appel pre_propre
+ * @pipeline_appel post_propre
+ * 
+ * @param string $letexte
+ * @return string
+ */
 function traiter_raccourcis($letexte) {
 
 	// Appeler les fonctions de pre_traitement
@@ -63,8 +90,14 @@ function traiter_raccourcis($letexte) {
  * Fonctions utilisees en dehors de inc/texte
  */
 
-// afficher joliment les <script>
-// http://doc.spip.org/@echappe_js
+
+/**
+ * Échapper et affichier joliement les `<script` ...
+ *
+ * @param string $t
+ * @param string $class Attributs HTML du conteneur à ajouter
+ * @return string
+ */
 function echappe_js($t,$class=' class="echappe-js"') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
@@ -138,10 +171,31 @@ function interdire_scripts($arg) {
 	return $dejavu[$GLOBALS['filtrer_javascript']][$arg] = $t;
 }
 
-// Typographie generale
-// avec protection prealable des balises HTML et SPIP
 
-// http://doc.spip.org/@typo
+/**
+ * Applique la typographie générale
+ *
+ * Effectue un traitement pour que les textes affichés suivent les règles
+ * de typographie. Fait une protection préalable des balises HTML et SPIP.
+ * Transforme les balises `<multi>`
+ *
+ * @filtre typo
+ * @uses traiter_modeles()
+ * @uses corriger_typo()
+ * @uses echapper_faux_tags()
+ * @see propre()
+ * 
+ * @param string $letexte
+ *     Texte d'origine
+ * @param bool $echapper
+ *     Échapper ?
+ * @param string|null $connect
+ *     Nom du connecteur à la bdd
+ * @param array $env
+ *     Environnement (pour les calculs de modèles)
+ * @return string $t
+ *     Texte transformé
+**/
 function typo($letexte, $echapper=true, $connect=null, $env=array()) {
 	// Plus vite !
 	if (!$letexte) return $letexte;
@@ -192,7 +246,20 @@ define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
 
 define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,imsS");
 
-// http://doc.spip.org/@corriger_typo
+/**
+ * Corrige la typographie
+ *
+ * Applique les corrections typographiques adaptées à la langue indiquée.
+ * 
+ * @pipeline_appel pre_typo
+ * @pipeline_appel post_typo
+ * @uses corriger_caracteres()
+ * @uses corriger_caracteres()
+ * 
+ * @param string $letexte Texte
+ * @param string $lang Langue
+ * @return string Texte
+ */
 function corriger_typo($letexte, $lang='') {
 
 	// Plus vite !
@@ -238,24 +305,29 @@ function corriger_typo($letexte, $lang='') {
 }
 
 
-
-
-//
-// Une fonction pour fermer les paragraphes ; on essaie de preserver
-// des paragraphes indiques a la main dans le texte
-// (par ex: on ne modifie pas un <p align='center'>)
-//
-// deuxieme argument : forcer les <p> meme pour un seul paragraphe
-//
-// http://doc.spip.org/@paragrapher
-// /!\ appelee dans inc/filtres et public/composer
+/**
+ * Paragrapher seulement
+ *
+ * /!\ appelée dans inc/filtres et public/composer
+ * 
+ * Ne fait rien ici. Voir plugin Textwheel
+ * 
+ * @param string $letexte
+ * @param null $forcer
+ * @return string
+ */
 function paragrapher($letexte, $forcer=true) {
 	return $letexte;
 }
 
-// Harmonise les retours chariots et mange les paragraphes html
-// http://doc.spip.org/@traiter_retours_chariots
-// ne sert plus
+/**
+ * Harmonise les retours chariots et mange les paragraphes HTML
+ *
+ * Ne sert plus
+ * 
+ * @param string $letexte Texte
+ * @return string Texte
+**/
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
@@ -264,8 +336,27 @@ function traiter_retours_chariots($letexte) {
 }
 
 
-// Filtre a appliquer aux champs du type #TEXTE*
-// http://doc.spip.org/@propre
+/**
+ * Transforme les raccourcis SPIP, liens et modèles d'un texte en code HTML
+ *
+ * Filtre à appliquer aux champs du type `#TEXTE*`
+ * 
+ * @filtre propre
+ * @uses echappe_html()
+ * @uses expanser_liens()
+ * @uses traiter_raccourcis()
+ * @uses echappe_retour_modeles()
+ * @see typo()
+ * 
+ * @param string $t
+ *     Texte avec des raccourcis SPIP
+ * @param string|null $connect
+ *     Nom du connecteur à la bdd
+ * @param array $env
+ *     Environnement (pour les calculs de modèles)
+ * @return string $t
+ *     Texte transformé
+**/
 function propre($t, $connect=null, $env=array()) {
 	// les appels directs a cette fonction depuis le php de l'espace
 	// prive etant historiquement ecrits sans argment $connect
