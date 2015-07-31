@@ -30,7 +30,7 @@ function inc_selectionner_auteur_dist($id_article)
 	$idom5 = 'img_' . $idom4;
 	$idom6 = $idom."_fonc";
 
-	$les_auteurs = join(',', determiner_auteurs_article($id_article));
+	$les_auteurs = determiner_auteurs_article($id_article);
 	$futurs = selectionner_auteur_boucle(determiner_non_auteurs($les_auteurs, "nom, statut"), $idom);
 
 	// url completee par la fonction JS onkeypress_rechercher
