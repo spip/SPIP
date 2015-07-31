@@ -355,6 +355,7 @@ function init_champs_squel() {
 		$contexte["id_article"] = $row["id_article"];
 		$contexte["id_breve"] = $row["id_breve"];
 		$contexte["id_parent"] = $row["id_parent"];
+		$contexte["id_auteur"] = $row["id_auteur"];
 		$contexte["date"] = $row["date_heure"];
 	',
 	'auteurs' => '
