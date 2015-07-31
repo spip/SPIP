@@ -3,6 +3,6 @@
 	[(#REM|info_maj_spip)]
 	[(#REM|info_copyright)]
 	[(#SET{home_server,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{'/',#EVAL{$GLOBALS}|table_valeur{spip_lang}}})]
-	<p><:info_copyright_doc{spipnet=#GET{home_server}}:></p>
+	<p><:info_copyright_doc{spipnet=#GET{home_server},spipnet_affiche=#GET{home_server}}:></p>
 </div>
 [(#REM**|html_tests_js)]

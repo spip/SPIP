@@ -24,8 +24,8 @@
 			</div>
 		</div>
 		<p>
-		#SET{doc,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{/,#EVAL{$GLOBALS}|table_valeur{spip_lang},'_'}}
-		<:info_copyright_doc{spipnet=#GET{doc}}:>
+		#SET{doc,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{/,#EVAL{$GLOBALS}|table_valeur{spip_lang}}}
+		<:info_copyright_doc{spipnet=#GET{doc},spipnet_affiche=#GET{doc}}:>
 		</p>]
 	})]
 </div>
