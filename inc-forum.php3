@@ -138,12 +138,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	else 
 		$retour = rawurlencode($lien);
 
-	$fich = $REQUEST_URI;
-	if ($p = strrpos($REQUEST_URI, '/')) $fich = substr($fich, $p + 1);
-	
-
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
-	$ret .= "\n<FORM ACTION='$fich' METHOD='post'>";
+	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
 	$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
 	
 	if ($forums_publics == "pri") {
