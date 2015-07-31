@@ -608,7 +608,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), $type,
-		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
+		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:intval(_request($modif)),"
 	. $p->boucles[$b]->total_parties
 	  . ", $liste$__modele," . _q($connect) 
 	  . ", array(" . implode(',',$code_contexte) . ")" 
