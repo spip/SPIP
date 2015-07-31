@@ -2,15 +2,24 @@
 
 include ("inc.php3");
 
-debut_page("Envoyer un message", "messagerie");
-debut_gauche();
-debut_droite();
-
 
 $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
 $titre_message = htmlspecialchars($titre_message);
 $nom = htmlspecialchars($connect_nom);
 $adresse_retour = rawurldecode($adresse_retour);
+
+if ($valider_forum) {
+	$query = "INSERT spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
+	"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
+	$result = spip_query($query);
+	@header("location:$adresse_retour");
+	die();
+}
+
+debut_page("Envoyer un message", "messagerie");
+debut_gauche();
+debut_droite();
+
 
 if ($id_parent) {
 	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_parent";
@@ -25,7 +34,25 @@ if ($id_parent) {
 	}
 }
 
-echo "<FORM ACTION='$adresse_retour' METHOD='post'>";
+
+echo "<FORM ACTION='forum_envoi.php3' METHOD='post'>";
+
+if ($modif_forum == "oui") {
+	debut_cadre_relief("forum-interne-24.gif");
+	echo "<b>".propre($titre_message)."</b>";
+	
+	echo "<p>".propre($texte);
+	
+	if (strlen($nom_site)>0) {
+		echo "<p><a href='$url_site'>$nom_site</a>";
+	}
+	
+	echo "<p><DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer le message'></div>";
+
+	fin_cadre_relief();
+}
+
+
 debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
@@ -33,17 +60,21 @@ echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><
 echo "<TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
 echo "</TD><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";
-echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre_message\" SIZE='40'><P>\n";
+echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";
 echo "</TD></TR></TABLE>";
 
-echo "<INPUT TYPE='Hidden' NAME='forum_id_rubrique' VALUE=\"$id_rubrique\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_id_parent' VALUE=\"$id_parent\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_id_article' VALUE=\"$id_article\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_id_breve' VALUE=\"$id_breve\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_id_message' VALUE=\"$id_message\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_id_syndic' VALUE=\"$id_syndic\">\n";
-echo "<INPUT TYPE='Hidden' NAME='ajout_forum' VALUE=\"ajout_forum\">\n";
-echo "<INPUT TYPE='Hidden' NAME='forum_statut' VALUE=\"$statut\">\n";
+if (!$modif_forum OR $modif_forum == "oui") {
+	echo "<INPUT TYPE='Hidden' NAME='modif_forum' VALUE='oui'>\n";
+}
+
+echo "<INPUT TYPE='Hidden' NAME='adresse_retour' VALUE=\"$adresse_retour\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_parent' VALUE=\"$id_parent\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">\n";
+echo "<INPUT TYPE='Hidden' NAME='id_syndic' VALUE=\"$id_syndic\">\n";
+echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 
 echo "<p><B>Texte de votre message :</B><BR>";
@@ -61,12 +92,7 @@ $lien_url="http://";
 echo "URL :<BR>";
 echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
 
-echo "<INPUT TYPE='hidden' NAME='auteur' VALUE=\"$nom\" SIZE='40'><BR>";
-
-echo "<INPUT TYPE='hidden' NAME='email_auteur' VALUE=\"$connect_email\" SIZE='40'><P>";
-
-
-echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Poster ce message'>";
+echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Voir ce message avant de le valider'></div>";
 echo "</FORM>";
 
 
