@@ -23,22 +23,21 @@ function recuperer_page($url) {
 	spip_log("syndication $http_proxy$url"); 
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
-			$t = @parse_url($url);
-			$host = $t['host'];
-			if (!($port = $t['port'])) $port = 80;
-			$query = $t['query'];
-			if (!($path = $t['path'])) $path = "/";
+		$t = @parse_url($url);
+		$host = $t['host'];
+		if (!($port = $t['port'])) $port = 80;
+		$query = $t['query'];
+		if (!($path = $t['path'])) $path = "/";
 
-			if ($http_proxy) {
-				$t2 =  @parse_url($http_proxy);
-				$proxy_host = $t2['host'];
-				if (!($proxy_port = $t2['port'])) $proxy_port = 80;
-				$f = @fsockopen($proxy_host, $proxy_port);
-			} else
-				$f = @fsockopen($host, $port);
+		if ($http_proxy) {
+			$t2 =  @parse_url($http_proxy);
+			$proxy_host = $t2['host'];
+			if (!($proxy_port = $t2['port'])) $proxy_port = 80;
+			$f = @fsockopen($proxy_host, $proxy_port);
+		} else
+			$f = @fsockopen($host, $port);
 
-			if (!$f) return;
-
+		if ($f) {
 			if ($http_proxy)
 				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\n");
 			else
@@ -64,10 +63,12 @@ function recuperer_page($url) {
 			else if ($status != 200) return;
 			else break;
 			fclose($f);
+		}
+		else {
+			$f = @fopen($url, "rb");
+			break;
+		}
 	}
-
-	if (!$f AND !$http_proxy)	// methode fopen
-		$f = fopen($url, "rb");
 
 	if (!f)
 		spip_log("ECHEC syndication $http_proxy$url");
