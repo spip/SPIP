@@ -25,7 +25,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 <BOUCLE_B(BREVES){!par date}{statut=prop}{0,10}>
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:titre_breve_proposee|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
+		<title><:breves:titre_breve_proposee|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
 		<link>[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
@@ -37,7 +37,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 <BOUCLE_S(SYNDIC){!par date}{statut=prop}{0,10}>
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:info_site_attente|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
+		<title><:sites:info_site_attente|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
 		<link>[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backendq)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
