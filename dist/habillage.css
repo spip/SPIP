@@ -47,11 +47,11 @@ body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, 
 h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
 h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #9DBA00; font-size: 1.10em; font-weight: bold; }
-h3.spip { color: #9DBA00; }
+h3, h3 a, h3 a:hover { color: #000; }
+h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; }
 
 /* Divers */
-hr.spip { width: 40%; height: 2px; margin: 4em auto; background-color: #9DBA00; color: #9DBA00; border: 0; }
+hr.spip { width: 40%; height: 2px; margin: 4em auto; background-color: #999; color: #999; border: 0; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
@@ -70,9 +70,9 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
-table.spip { margin-bottom: 1em; color: #633E6D; }
-table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
-table.spip tr.row_first { background: #C4D665; }
+table.spip { margin-bottom: 1em; }
+table.spip caption { caption-side: top; font-weight: bold; color: #999; line-height: normal; }
+table.spip tr.row_first { background: #CCC; }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
 table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
@@ -97,7 +97,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #9DBA00; }
+.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #999; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -235,7 +235,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
-.articles ul li h3 { margin: 0; padding: 0; border: 0; font-weight: bold; }
+.articles ul li h3 { margin: 0; padding: 0; font-weight: bold; }
 .articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
