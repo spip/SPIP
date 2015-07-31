@@ -255,6 +255,9 @@ define('_ROOT_IMG_ICONES_DIST', (dirname(__FILE__) . '/img_pack/icones/'));
 // Fichiers de langue
 define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 
+// Le charset par defaut lors de l'installation
+define('_DEFAULT_CHARSET', 'utf-8');
+
 // les repertoires devant etre TOUJOURS accessibles en ecriture
 
 $test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);

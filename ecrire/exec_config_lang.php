@@ -86,7 +86,7 @@ echo "<p>";
 // Configuration du charset
 //
 
-if ($options == 'avancees') {
+#if ($options == 'avancees') {
 	debut_cadre_relief("breve-24.gif", false, "", _T('info_jeu_caractere'));
 
 	$charset = $GLOBALS['meta']["charset"];
@@ -95,11 +95,11 @@ if ($options == 'avancees') {
 	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_2')."</p></blockquote>";
 
 
-	echo bouton_radio('charset', 'iso-8859-1',
-		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
-	echo "<br>";
 	echo bouton_radio('charset', 'utf-8',
 		_T('bouton_radio_universel'), $charset == 'utf-8');
+	echo "<br>";
+	echo bouton_radio('charset', 'iso-8859-1',
+		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
 	echo "<br>";
 	echo bouton_radio('charset', 'custom',
 		_T('bouton_radio_personnalise'), $charset != 'utf-8' && $charset != 'iso-8859-1');
@@ -115,7 +115,7 @@ if ($options == 'avancees') {
 
 	fin_cadre_relief();
 
-}
+#} # /avancees
 
 
 echo "</form>";

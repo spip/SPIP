@@ -27,21 +27,20 @@ function install_debut_html($titre = 'AUTO') {
 	include_ecrire('inc_headers');
 
 	http_no_cache();
-	$args =  "fond=style&couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
-		$GLOBALS['spip_lang_left'];
-;
+
+	# le charset est en utf-8, pour recuperer le nom comme il faut
+	# lors de l'installation
+	if (!headers_sent())
+		header('Content-Type: text/html; charset=utf-8');
+
 	echo  _DOCTYPE_ECRIRE ,
 	  "<html lang='",$GLOBALS['spip_lang'],
 	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
 	  "<head>\n",
 	  "<title>",
 	  $titre,
-	  '</title>',
-	  (($GLOBALS['exec'] != 'install') ? ('
-<link	rel="stylesheet" 
-	type="text/css"
-	href="'. generer_url_public('page', $args). '">') : ''),
-	  "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
+	  "</title>
+	  <style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
 	  "a {text-decoration: none; }",
 	  "\n\n]]>\n--></style>\n\n
 </head>

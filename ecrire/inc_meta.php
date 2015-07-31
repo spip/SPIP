@@ -20,6 +20,8 @@ function lire_metas() {
 	while (list($nom,$valeur) = spip_fetch_array($result)) {
 		$meta[$nom] = $valeur;
 	}
+	if (!$meta['charset'])
+		ecrire_meta('charset', _DEFAULT_CHARSET);
 }
 
 function ecrire_meta($nom, $valeur) {
