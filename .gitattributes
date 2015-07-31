@@ -457,7 +457,6 @@ prive/javascript/SearchHighlight.js -text
 prive/javascript/ajaxCallback.js -text
 prive/javascript/gadgets.js -text
 prive/javascript/jquery.autosave.js -text
-prive/javascript/jquery.colors.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text
 prive/javascript/jquery.ifixpng.js -text
