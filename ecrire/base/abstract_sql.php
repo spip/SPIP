@@ -124,7 +124,7 @@ function sql_set_charset($charset,$serveur='', $option=true){
 
 
 /**
- * Effectue une requete de selection
+ * Effectue une requête de selection
  * 
  * Fonction de selection (SELECT), retournant la ressource interrogeable par sql_fetch.
  *
@@ -148,7 +148,7 @@ function sql_set_charset($charset,$serveur='', $option=true){
  * @param string $serveur
  * 		Le serveur sollicite (pour retrouver la connexion)
  * @param bool|string $option
- * 		Peut avoir 3 valeurs : 
+ * 		Peut avoir 3 valeurs :
  * 		- false -> ne pas l'executer mais la retourner, 
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
  * 		- true|array -> executer la requete.
@@ -382,11 +382,11 @@ function sql_fetch_all($res, $serveur='', $option=true){
 }
 
 /**
- * Deplace le pointeur d'une ressource de selection
+ * Déplace le pointeur d'une ressource de sélection
  *
- * Deplace le pointeur sur un numero de ligne precise
+ * Deplace le pointeur sur un numéro de ligne précisé
  * sur une ressource issue de sql_select, afin que
- * le prochain sql_fetch recupere cette ligne.
+ * le prochain sql_fetch récupère cette ligne.
  *
  * @api
  * @see sql_skip() Pour sauter des enregistrements
@@ -403,7 +403,7 @@ function sql_fetch_all($res, $serveur='', $option=true){
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
  * @return bool
- * 		Operation effectuee (true), sinon false.
+ * 		Operation effectuée (true), sinon false.
 **/
 function sql_seek($res, $row_number, $serveur='', $option=true) {
 	$f = sql_serveur('seek', $serveur,  $option==='continue' OR $option===false);
@@ -500,7 +500,24 @@ function sql_count($res, $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_free
+/**
+ * Libère une ressource de résultat
+ *
+ * Indique au gestionnaire SQL de libérer de sa mémoire la ressoucre de
+ * résultat indiquée car on n'a plus besoin de l'utiliser.
+ * 
+ * @param Ressource|Object $r
+ *     Ressource de résultat
+ * @param string $serveur
+ *     Nom de la connexion
+ * @param bool|string $option
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true -> exécuter la requete
+ *     - continue -> ne pas échouer en cas de serveur SQL indisponible
+ * @return bool
+ *     True si réussi
+ */
 function sql_free($res, $serveur='', $option=true)
 {
 	$f = sql_serveur('free', $serveur,  $option==='continue' OR $option===false);
@@ -789,6 +806,9 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
  * Supprime une table SQL (structure et données)
  *
  * @api
+ * @see sql_create_table()
+ * @see sql_drop_view()
+ * 
  * @param string $table
  *     Nom de la table
  * @param string $exist
@@ -815,8 +835,21 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 	return $r;
 }
 
-// supprimer une vue sql
-// http://doc.spip.org/@sql_drop_view
+/**
+ * Supprime une vue SQL
+ *
+ * @api
+ * @see sql_create_view()
+ * @see sql_drop_table()
+ * 
+ * @param string $table    Nom de la vue SQL
+ * @param string $exist    True pour ajouter un test d'existence avant de supprimer
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ */
 function sql_drop_view($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_view', $serveur,  $option==='continue' OR $option===false);
@@ -986,6 +1019,15 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
 	return $r;
 }
 
+/**
+ * Crée une base de données
+ *
+ * @api
+ * @param string $nom      Nom de la base (sans l'extension de fichier si gestionnaire SQLite)
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return bool true si la base est créee.
+ **/
 function sql_create_base($nom, $serveur='', $option=true)
 {
 	$f = sql_serveur('create_base', $serveur,  $option==='continue' OR $option===false);
@@ -1000,6 +1042,8 @@ function sql_create_base($nom, $serveur='', $option=true)
  * Crée une vue SQL
  *
  * @api
+ * @see sql_drop_view()
+ * @see sql_create_table()
  * @see sql_get_select() Pour obtenir le texte de la requête SELECT pour créer la vue.
  * 
  * @param string $nom
@@ -1068,7 +1112,15 @@ function sql_errno($serveur='') {
 	return $f($serveur);
 }
 
-// http://doc.spip.org/@sql_explain
+/**
+ * Retourne une explication de requête (Explain) SQL
+ *
+ * @api
+ * @param string $query    Texte de la requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return array           Tableau de l'explication
+ */
 function sql_explain($q, $serveur='', $option=true) {
 	$f = sql_serveur('explain', $serveur,  'continue');
 	if (!is_string($f) OR !$f) return false;
@@ -1077,7 +1129,15 @@ function sql_explain($q, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_optimize
+/**
+ * Optimise une table SQL
+ *
+ * @api
+ * @param string $table    Nom de la table
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter de la requête, sinon la retourner
+ * @return bool            Toujours true
+ */
 function sql_optimize($table, $serveur='', $option=true) {
 	$f = sql_serveur('optimize', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -1086,7 +1146,17 @@ function sql_optimize($table, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_repair
+/**
+ * Répare une table SQL
+ *
+ * @api
+ * @param string $table    Nom de la table SQL
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandée,
+ *     - true si la requête a réussie, false sinon
+ */
 function sql_repair($table, $serveur='', $option=true) {
 	$f = sql_serveur('repair', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -1095,10 +1165,22 @@ function sql_repair($table, $serveur='', $option=true) {
 	return $r;
 }
 
-// Fonction la plus generale ... et la moins portable
-// A n'utiliser qu'en derniere extremite
 
-// http://doc.spip.org/@sql_query
+/**
+ * Exécute une requête SQL
+ *
+ * Fonction la plus générale ... et la moins portable
+ * À n'utiliser qu'en dernière extrémité
+ *
+ * @api
+ * @param string $ins      Requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return array|resource|string|bool
+ *     - string : Texte de la requête si on ne l'exécute pas
+ *     - ressource|bool : Si requête exécutée
+ *     - array : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
+ */
 function sql_query($ins, $serveur='', $option=true) {
 	$f = sql_serveur('query', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -1567,8 +1649,7 @@ function sql_test_date($type, $serveur='', $option=true)
  * Formater une date Y-m-d H:i:s sans passer par mktime
  * qui ne sait pas gerer les dates < 1970
  *
- * http://doc.spip.org/@format_mysql_date
- *
+ * @api
  * @param int $annee Annee
  * @param int $mois  Numero du mois
  * @param int $jour  Numero du jour dans le mois
@@ -1576,9 +1657,9 @@ function sql_test_date($type, $serveur='', $option=true)
  * @param int $m     Minutes
  * @param int $s     Secondes
  * @param string $serveur
- * 		Le serveur sollicite (pour retrouver la connexion)
+ *     Le serveur sollicite (pour retrouver la connexion)
  * @return string
- * 		La date formatee
+ *     La date formatee
  */
 function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=''){
 	$annee = sprintf("%04s",$annee);
