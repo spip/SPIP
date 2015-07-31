@@ -74,8 +74,9 @@ function recuperer_page($url) {
 			}
 			if ($status >= 300 AND $status < 400 AND $location) $url = $location;
 			else if ($status != 200) return;
-			else break;
+			else break; # ici on est content
 			fclose($f);
+			$f = false;
 		}
 		else {
 			if (!$GLOBALS['tester_proxy'])
