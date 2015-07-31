@@ -316,7 +316,13 @@ class Link {
 	//
 
 	function getForm($method = 'get', $query = '', $enctype = '') {
-		$form = "<form method='$method' action='".$this->file.$query."'";
+		if (preg_match(',^[a-z],i', $query))
+			$action = $query;
+		else
+			$action = $this->file.$query;
+
+		$form = "<form method='$method' action='"
+		.quote_amp($action)."'";
 		if ($enctype) $form .= " enctype='$enctype'";
 		$form .= " style='border: 0px; margin: 0px;'>\n";
 		foreach ($this->vars as $name => $value) {
