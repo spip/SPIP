@@ -1,16 +1,17 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="George" />
-		<traducteur nom="kent1" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="ast">
-		<traducteur nom="Xuacu" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
 	<langue code="bg" />
 	<langue code="br" />
 	<langue code="bs" />
 	<langue code="ca">
-		<traducteur nom="merce" />
+		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="co" />
 	<langue code="cpf" />
@@ -18,41 +19,42 @@
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de">
-		<traducteur nom="klaus++" />
-		<traducteur nom="Fil" />
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="sQuonk" />
-		<traducteur nom="Paolo" />
-		<traducteur nom="Fil" />
-		<traducteur nom="George" />
-		<traducteur nom="Mark" />
-		<traducteur nom="jaro" />
-		<traducteur nom="kent1" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
+		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
+		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo">
-		<traducteur nom="Fil" />
+		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
 	</langue>
 	<langue code="es">
-		<traducteur nom="severo" />
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="severo" lien="http://trad.spip.org/auteur/severo" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="eu">
-		<traducteur nom="otalazt" />
+		<traducteur nom="otalazt" lien="http://trad.spip.org/auteur/otalazt" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="Fil" />
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fon" />
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
-		<traducteur nom="orlammd" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
 	</langue>
 	<langue code="gl">
-		<traducteur nom="Antón Méixome" />
+		<traducteur nom="Antón Méixome" lien="http://trad.spip.org/auteur/anton-meixome" />
 	</langue>
 	<langue code="hu" />
 	<langue code="id" />
@@ -64,7 +66,7 @@
 	<langue code="lb" />
 	<langue code="my" />
 	<langue code="nl">
-		<traducteur nom="mpossoz" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 	</langue>
 	<langue code="no" />
 	<langue code="oc_auv" />
@@ -77,20 +79,20 @@
 	<langue code="oc_va" />
 	<langue code="pl" />
 	<langue code="pt">
-		<traducteur nom="Ricardo Porto" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
 	<langue code="pt_br">
-		<traducteur nom="Ricardo Porto" />
-		<traducteur nom="Fil" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
 	</langue>
 	<langue code="ro">
-		<traducteur nom="vmurariu" />
+		<traducteur nom="vmurariu" lien="http://trad.spip.org/auteur/vmurariu" />
 	</langue>
 	<langue code="ru">
-		<traducteur nom="Serge Markitanenko" />
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.org/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
