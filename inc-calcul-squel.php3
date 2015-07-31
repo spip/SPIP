@@ -14,6 +14,7 @@ include_local("inc-form-squel.php3");
 include_local("inc-vrac-squel.php3");
 include_local("inc-index-squel.php3");
 include_local("inc-text-squel.php3");
+include_local("inc-debug.php3");
 
 # Produit le corps PHP d'une boucle Spip,
 # essentiellement une boucle while (ou une double en cas de hierarchie)
@@ -185,7 +186,7 @@ function calculer_parties($partie, $mode_partie, $total_parties)
 
 function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $id_mere)
 {
-	if (!$tableau) return array("''",'');
+	if ((!$tableau)) return array("''",'');
 	$texte = '';
 	$exp = "";
 	$process_ins = false;
@@ -319,8 +320,16 @@ function calculer_squelette($squelette, $nom, $gram) {
 	{ 
 	  if ($boucle->type_requete == 'boucle')
 	    {
+	      $rec = $boucles[$boucle->param];
+	      if (!$rec)
+		{
+		  include_local("inc-debug-squel.php3");
+		  erreur_squelette(_L('Boucle récursive non définie'), '',
+				   $boucle->param);
+		  exit;
+		  } 
 	      $boucles[$id]->return =
-		calculer_liste(array($boucles[$boucle->param]),
+		calculer_liste(array($rec),
 			       $nom,
 			       $boucle->param,
 			       1,
