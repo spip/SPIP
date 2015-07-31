@@ -76,7 +76,7 @@ function copier_document($ext, $orig, $source) {
 //
 
 // http://doc.spip.org/@deplacer_fichier_upload
-function deplacer_fichier_upload($source, $dest) {
+function deplacer_fichier_upload($source, $dest, $move=false) {
 	// Securite
 	## !! interdit pour le moment d'uploader depuis l'espace prive (UPLOAD_DIRECT)
 	if (strstr($dest, "..")) {
@@ -84,7 +84,8 @@ function deplacer_fichier_upload($source, $dest) {
 		exit;
 	}
 
-	$ok = @copy($source, $dest);
+	if ($move)	$ok = @rename($source, $dest);
+	else				$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
 	if ($ok)
 		@chmod($dest, 0666);
