@@ -28,12 +28,12 @@ function generer_nom_fichier_cache($contexte) {
 			$fichier_requete .= "&$var=$val";
 	}
 
-	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
-	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
-	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
+	$fichier_cache = preg_replace(',^/+,', '', $fichier_requete);
+	$fichier_cache = preg_replace(',\.[a-zA-Z0-9]*,', '', $fichier_cache);
+	$fichier_cache = preg_replace(',&[^&]+=([^&]+),', '&\1', $fichier_cache);
 	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 	if (strlen($fichier_cache) > 24)
-		$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-',
+		$fichier_cache = substr(preg_replace('/([a-zA-Z]{1,3})[^-]*-/',
 		'\1-', $fichier_cache), -22);
 
 	// Pour la page d'accueil
