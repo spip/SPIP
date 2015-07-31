@@ -162,10 +162,10 @@ $texte = $texte_ajout . $texte;
 // preparer le virtuel
 
 if ($changer_virtuel && $flag_editable) {
-	if (!ereg("^(https?|ftp|mailto)://.+", trim($virtuel))) $virtuel = "";
-	if ($virtuel) $chapo = "=$virtuel";
+	$virtuel = eregi_replace("^http://$", "", trim($virtuel));
+	if ($virtuel) $chapo = addslashes("=$virtuel");
 	else $chapo = "";
-	$query = "UPDATE spip_articles SET chapo=\"$chapo\" WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET chapo='$chapo' WHERE id_article=$id_article";
 	$result = spip_query($query);
 }
 
