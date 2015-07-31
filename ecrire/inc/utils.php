@@ -885,6 +885,21 @@ function spip_register_globals() {
 		'id_document', 'date', 'lang'
 	);
 
+	// temporaire: si on est en ajax tout a ete encode
+	// via encodeURIComponent, il faut donc repasser
+	// dans le charset local.... on le repere grace
+	// a la variable var_charset=utf-8 ajoutee dans
+	// la fonction AjaxSqueeze() de layer.js
+	if ($c = _request('var_charset')
+	AND $GLOBALS['meta']['charset']!=$c) {
+		include_spip('inc/charsets');
+		foreach($_POST as $var => $val)
+			$_POST[$var] = importer_charset($val, $c);
+		foreach($_GET as $var => $val)
+			$_GET[$var] = importer_charset($val, $charset);
+		foreach($_REQUEST as $var => $val)
+			$_REQUEST[$var] = importer_charset($val, $c);
+	}
 
 	// Si les variables sont passees en global par le serveur, il faut
 	// faire quelques verifications de base
