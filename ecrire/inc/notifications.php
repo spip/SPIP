@@ -57,7 +57,7 @@ function notifications_nettoyer_emails(&$emails, $exclure = array()){
  * @param string $texte
  * @param string $sujet
  */
-function notifications_envoyer_mails($emails,$texte,$sujet=""){
+function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $headers = ""){
 	// rien a faire si pas de texte !
 	if (!strlen($texte))
 		return;
@@ -89,9 +89,9 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 		$sujet = $envoi['sujet'];
 		$texte = $envoi['texte'];
 		if (function_exists('job_queue_add'))
-			job_queue_add('envoyer_mail', ">$email : $sujet", array($email, $sujet, $texte), 'inc/');
+			job_queue_add('envoyer_mail', ">$email : $sujet", array($email, $sujet, $texte, $from, $headers), 'inc/');
 		else
-			$envoyer_mail($email, $sujet, $texte);
+			$envoyer_mail($email, $sujet, $texte, $from, $headers);
 	}
 
 }

@@ -94,20 +94,19 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 	if (is_array($desc)) {
 	// generer le mot de passe (ou le refaire si compte inutilise)
 		$desc['pass'] = creer_pass_pour_auteur($desc['id_auteur']);
+
+
 		// charger de suite cette fonction, pour ses utilitaires
-		$envoyer_mail = charger_fonction('envoyer_mail','inc');
-		if (function_exists('envoyer_inscription'))
-			$f = 'envoyer_inscription';
-		else 	$f = 'envoyer_inscription_dist';
-		list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode, $id);
-		if (!$envoyer_mail($mail_complet, $sujet, $msg, $from, $head))
-			$desc = _T('form_forum_probleme_mail');
+		$envoyer_inscription = charger_fonction("envoyer_inscription","");
+		list($sujet,$msg,$from,$head) = $envoyer_inscription($desc, $nom, $mode, $id);
+
+		$notifications = charger_fonction('notifications', 'inc');
+		notifications_envoyer_mails($mail_complet, $msg, $sujet, $from, $head);
+
 		// Notifications
-		if ($notifications = charger_fonction('notifications', 'inc')) {
-			$notifications('inscription', $desc['id_auteur'],
-				array('nom' => $desc['nom'], 'email' => $desc['email'])
-			);
-		}
+		$notifications('inscription', $desc['id_auteur'],
+			array('nom' => $desc['nom'], 'email' => $desc['email'])
+		);
 	}
 
 	return array('message_ok'=>is_string($desc) ? $desc : _T('form_forum_identifiant_mail'));
@@ -165,25 +164,12 @@ function inscription_nouveau($desc)
 // http://doc.spip.org/@envoyer_inscription_dist
 function envoyer_inscription_dist($desc, $nom, $mode, $id) {
 
-	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	if ($mode == '6forum') {
-		$adresse_login = generer_url_public('login'); 
-		$msg = 'form_forum_voici1';
-	} else {
-		$adresse_login = $adresse_site .'/'. _DIR_RESTREINT_ABS;
-		$msg = 'form_forum_voici2';
-	}
+	$contexte = $desc;
+	$contexte['nom'] = $nom;
+	$contexte['mode'] = $mode;
 
-	$msg = _T('form_forum_message_auto')."\n\n"
-		. _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"
-		. _T($msg, array('nom_site_spip' => $nom_site_spip,
-			'adresse_site' => $adresse_site . '/',
-			'adresse_login' => $adresse_login)) . "\n\n- "
-		. _T('form_forum_login')." " . $desc['login'] . "\n- "
-		. _T('form_forum_pass'). " " . $desc['pass'] . "\n\n";
-
-	return array("[$nom_site_spip] "._T('form_forum_identifiants'), $msg);
+	$message = recuperer_fond('modeles/mail_inscription',$contexte);
+	return array("", $message);
 }
 
 // http://doc.spip.org/@test_login
