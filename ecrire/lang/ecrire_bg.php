@@ -136,7 +136,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Възможност за активиране на <b>cookie администриране</b>, което позволява
  улеснено превключване между публичния сайт и личната зона.',
 	'info_admin_gere_rubriques' => 'Този администратор управлява следните рубрики:',
-	'info_admin_gere_toutes_rubriques' => 'Този администратор управлява <b>всички рубрики</b>.', # MODIF
 	'info_administrateur' => 'Администратор',
 	'info_administrateur_1' => 'Администратор',
 	'info_administrateur_2' => 'на сайта (<i>внимавайте</i>)',

@@ -164,7 +164,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'אתה יכול להפעיל <b> עוגיית התכתבות</b>, אשר יאפשר לך
  לעבור בקלות מן האתר הציבורי לאתר הפרטי.',
 	'info_admin_gere_rubriques' => 'המנהל הזה מנהל את המדורים הבאים:',
-	'info_admin_gere_toutes_rubriques' => 'המנהל הזה מנהל את <b>כל המדורים</b>.', # MODIF
 	'info_administrateur' => 'מנהל',
 	'info_administrateur_1' => 'מנהל',
 	'info_administrateur_2' => 'של האתר (<i>use with caution</i>)',

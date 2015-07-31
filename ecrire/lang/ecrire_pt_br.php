@@ -202,8 +202,6 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_activer_menu_developpement' => 'Exibir o menu Desenvolvimento',
 	'info_admin_etre_webmestre' => 'Me conceder direitos de webmaster',
 	'info_admin_gere_rubriques' => 'Este administrador gerencia as seguintes seções:',
-	'info_admin_gere_toutes_rubriques' => 'Este administrador gerencia <b>todas as seções</b>',
-	'info_admin_gere_toutes_rubriques_2' => 'Eu gerencio <b>todas as seções</b>',
 	'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Dar a este administrador os direitos de webmaster',
 	'info_admin_webmestre' => 'Este administrador é <b>webmaster</b>',

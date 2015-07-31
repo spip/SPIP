@@ -195,7 +195,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  pozwoli przechodzić łatwo pomiędzy stroną publiczną a prywatną.',
 	'info_admin_etre_webmestre' => 'Daj mi prawa administratora sieci',
 	'info_admin_gere_rubriques' => 'Ten administrator zarządza następującymi działami:',
-	'info_admin_gere_toutes_rubriques' => 'Ten administrator zarządza <b>wszystkimi działami</b>.', # MODIF
 	'info_admin_statuer_webmestre' => 'Daj webmasterowi prawo do tego administratora.',
 	'info_admin_webmestre' => 'Ten administrator jest <b>webmestre</b>',
 	'info_administrateur' => 'Administrator',

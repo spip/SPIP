@@ -187,7 +187,6 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_1_visiteur' => '1 visitator',
 	'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondença</b>; aquò vos permetrà de passar facilament dau sit public au sit privat.',
 	'info_admin_gere_rubriques' => 'Aquel administrator gerisse li rubricas seguentas:',
-	'info_admin_gere_toutes_rubriques' => 'Aquel administrator gera<b>toti li rubricas</b>.',
 	'info_administrateur' => 'Administrator',
 	'info_administrateur_1' => 'Administrator',
 	'info_administrateur_2' => 'dau sit (<i>d’utilisar emb precaucion</i>)',

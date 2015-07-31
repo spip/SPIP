@@ -139,7 +139,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Anda apat mengaktifkan <b>cookie administrasi</b>, yang memperbolehkan anda
  untuk berpindah-pindah dengan mudah antara situs umum dan area pribadi.',
 	'info_admin_gere_rubriques' => 'Administrator ini mengelola bagian-bagian berikut:',
-	'info_admin_gere_toutes_rubriques' => 'Administrator ini mengelola <b>semua bagian</b>.', # MODIF
 	'info_administrateur' => 'Administrator',
 	'info_administrateur_1' => 'Administrator',
 	'info_administrateur_2' => 'situs (<i>gunakan dengan penuh kehati-hatian</i>)',

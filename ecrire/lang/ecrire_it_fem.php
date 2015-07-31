@@ -185,7 +185,6 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetterà
 di passare facilmente dal sito pubblico all’interfaccia privata.',
 	'info_admin_gere_rubriques' => 'Questa amministratrice gestisce le seguenti rubriche:',
-	'info_admin_gere_toutes_rubriques' => 'Questa amministratrice gestisce <b>tutte le rubriche</b>.',
 	'info_administrateur' => 'Amministratrice',
 	'info_administrateur_1' => 'Amministratrice',
 	'info_administrateur_2' => 'del sito (<i>da utilizzare con prudenza</i>)',

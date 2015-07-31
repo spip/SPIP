@@ -123,7 +123,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_article' => '1 artikel',
 	'info_activer_cookie' => 'Du kan installere en <b>administrationscookie</b>, som tillader dig at skifte nemt mellem det offentlige websted og dit private afsnit.',
 	'info_admin_gere_rubriques' => 'Denne administrator administrerer følgende afsnit:',
-	'info_admin_gere_toutes_rubriques' => 'Denne administrator administrerer <b>alle afsnit</b>.', # MODIF
 	'info_administrateur' => 'Administrator',
 	'info_administrateur_1' => 'Administrator',
 	'info_administrateur_2' => 'af webstedet (<i>anvend med forsigtighed</i>)',

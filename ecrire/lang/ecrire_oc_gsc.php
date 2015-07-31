@@ -125,7 +125,6 @@ L’administrator deu sistèma o de l’arret que’vs deu poder hornir
 	'info_1_article' => '1 article',
 	'info_activer_cookie' => 'Que podetz activar un <b>cookie de correspondéncia</b>; aquò que’vs permeterà de passar aisit deu sit public au sit privat.',
 	'info_admin_gere_rubriques' => 'Aqueth administrator que gereish las rubricas seguentas:',
-	'info_admin_gere_toutes_rubriques' => 'Aqueth administrator que gereish <b>totas las rubricas</b>.', # MODIF
 	'info_administrateur' => 'Administrator',
 	'info_administrateur_1' => 'Administrator',
 	'info_administrateur_2' => 'deu sit(<i>d’utilizar dab precaucion</i>)',

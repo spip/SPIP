@@ -199,8 +199,6 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
  permitirá passar facilmente do sítio público ao sítio privado ',
 	'info_admin_etre_webmestre' => 'Conceder-me os direitos de webmaster',
 	'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
-	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
-	'info_admin_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>',
 	'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Conceder ao administrador os direitos de webmaster',
 	'info_admin_webmestre' => 'Este administrador é <b>webmaster</b>',

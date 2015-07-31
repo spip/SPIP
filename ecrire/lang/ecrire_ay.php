@@ -135,7 +135,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_administrer_rubrique' => 'Aka t’aqa apnaqasmawa',
 	'info_1_article' => '1 qillqata',
 	'info_admin_gere_rubriques' => 'Jutir t’aqanakxa aka jaqiw apnaqi:',
-	'info_admin_gere_toutes_rubriques' => 'Aka apnaqiriw apnaqi <b>taqpacha apnaqi</b>.', # MODIF
 	'info_administrateur' => 'Apnaqiri',
 	'info_administrateur_1' => 'Apnaqiri',
 	'info_administrateur_2' => 'Qamawita (<i>amuyump luram</i>)',

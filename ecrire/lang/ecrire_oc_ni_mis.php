@@ -203,8 +203,6 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'info_activer_menu_developpement' => 'Afichà lou menù Desfouloupamen',
 	'info_admin_etre_webmestre' => 'Mi dounà lu drech de webmestre',
 	'info_admin_gere_rubriques' => 'Aquel aministratour gèra li rùbrica seguenti:',
-	'info_admin_gere_toutes_rubriques' => 'Aquel aministratour gèra<b>touti li rùbrica</b>.',
-	'info_admin_gere_toutes_rubriques_2' => 'Gèri <b>touti li rùbrica</b>',
 	'info_admin_je_suis_webmestre' => 'Siéu <b>webmestre</b>',
 	'info_admin_statuer_webmestre' => 'Dounà en aquel aministratour lu drech de webmèstre',
 	'info_admin_webmestre' => 'Aquel aministratour es <b>webmestre</b>',

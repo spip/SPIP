@@ -183,7 +183,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  permitite que pases fácilmente del sitiu públicu al sitiu privau.',
 	'info_admin_etre_webmestre' => 'Conseñame permisos de webmaster',
 	'info_admin_gere_rubriques' => 'Esti alministrador xestiona les estayes siguientes:',
-	'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.', # MODIF
 	'info_admin_je_suis_webmestre' => 'Yá soi <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Da-y a esti alministrador permisos de webmaster',
 	'info_admin_webmestre' => 'Esti alministrador ye <b>webmaster</b>',
