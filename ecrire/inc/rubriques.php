@@ -372,9 +372,13 @@ function calculer_prochain_postdate($check= false) {
 function creer_rubrique_nommee($titre, $id_parent=0) {
 
 	// eclater l'arborescence demandee
+	// echapper les </multi> et autres balises fermantes html
+	$titre = preg_replace(",</([a-z][^>]*)>,ims","<@\\1>",$titre);
 	$arbo = explode('/', preg_replace(',^/,', '', $titre));
 	include_spip('base/abstract_sql');
 	foreach ($arbo as $titre) {
+		// retablir les </multi> et autres balises fermantes html
+		$titre = preg_replace(",<@([a-z][^>]*)>,ims","</\\1>",$titre);
 		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent));
 		if ($r !== NULL) {
 			$id_parent = $r;
