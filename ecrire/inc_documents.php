@@ -635,7 +635,6 @@ function afficher_transferer_upload($type, $texte_upload)
 
 function afficher_portfolio(
 	$documents = array(),	# liste des documents, avec toutes les donnees
-	$id_article, 		# numero de l'article ou de la rubrique
 	$type = "article",	# article ou rubrique ?
 	$album = 'portfolio',	# album d'images ou de documents ?
 	$flag_modif = false,	# a-t-on le droit de modifier ?
@@ -651,11 +650,18 @@ function afficher_portfolio(
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
 
 	foreach ($documents as $document) {
+		$id_article = $document["id_$type"]; 		# numero de l'article ou de la rubrique
 		$id_document = $document['id_document'];
 		$id_vignette = $document['id_vignette'];
 		$titre = $document['titre'];
 		$descriptif = $document['descriptif'];
-		$url = generer_url_document($id_document);
+		if (!isset($document['url']))
+			$url = generer_url_document($id_document);
+		else
+			$url = $document['url'];
+		$script = ""; # script pour l'action des formulaires
+		if (isset($document['script']))
+			$script = $document['script']; # script pour l'action des formulaires
 		$fichier = $document['fichier'];
 		$largeur = $document['largeur'];
 		$hauteur = $document['hauteur'];
@@ -689,13 +695,14 @@ entites_html($document['fichier'])."\" />\n";
 			// Recuperer la vignette et afficher le doc
 			//
 
-			// Indiquer les documents manquants
+			// Indiquer les documents manquants avec un panneau de warning
 			if ($document['distant'] != 'oui'
-			AND !@file_exists(_DIR_RACINE.$document['fichier']))
-				echo "<img src='" . _DIR_IMG_PACK
-				. "warning-24.gif' style='float: right;' alt=\""
-				. _L('Attention : document manquant'). "\" title=\""
-				. _L('Attention : document manquant'). "\" />";
+			AND !@file_exists(_DIR_RACINE.$document['fichier'])) {
+				$c = _T('fichier_introuvable',
+					array('fichier'=>basename($document['fichier'])));
+				echo "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
+				." style='float: right;' alt=\"$c\" title=\"$c\" />";
+			}
 
 			echo document_et_vignette($document, $url, true);
 
@@ -737,6 +744,8 @@ entites_html($document['fichier'])."\" />\n";
 			echo " <font size='1' face='arial,helvetica,sans-serif'><font color='333333'>&lt;doc$id_document&gt;</font></font>";
 
 			echo "</div>";
+			if (isset($document['info']))
+				echo "<div class='verdana1'>".$document['info']."</div>";
 
 
 			if ($flag_modif) {
@@ -745,7 +754,7 @@ entites_html($document['fichier'])."\" />\n";
 				else
 					echo debut_block_invisible("port$id_document");
 
-				block_document($id_article, $id_document, $type, $titre, $descriptif,$date, $document, $album);
+				block_document($id_article, $id_document, $type, $titre, $descriptif,$date, $document, $album, $script);
 			// fin bloc titre + descriptif
 				echo fin_block();
 
@@ -767,20 +776,22 @@ entites_html($document['fichier'])."\" />\n";
 	}
 }
 
-function block_document($id, $id_document, $type, $titre, $descriptif, $date, $document, $album)
+function block_document($id, $id_document, $type, $titre, $descriptif, $date, $document, $album, $script="")
 {
 	global $connect_statut, $couleur_foncee, $options;
 
 	if ($type == "rubrique") {
 	  $hidden = "<input type='hidden' name='action' value='calculer_rubriques' />";
-	  $script = 'naviguer';
+	  if ($script=="")
+	  	$script = 'naviguer';
 	} else {
 	  $hidden = "";
-	  $script = 'articles';
+	  if ($script=="")
+	  	$script = 'articles';
 	}
 	echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
 	
-	echo generer_url_post_ecrire($script, "id_$type=$id", '', "#$album");
+	echo generer_url_post_ecrire($script, ($id?"id_$type=$id&":""), '', "#$album");
 	echo "<b>"._T('titre_titre_document')."</b><br />\n";
 	echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
 	echo "<input type='hidden' name='modif_document' value='oui' />";
@@ -915,7 +926,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	// Afficher portfolio
 	/////////
 
-	$query = "SELECT docs.* FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
+	$query = "SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'".
 		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
@@ -938,13 +949,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>".majuscules(_T('info_portfolio'))."</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='3'>";
 
-		afficher_portfolio ($documents, $id_article, $type, 'portfolio', $flag_modif, $couleur_claire);
+		afficher_portfolio ($documents, $type, 'portfolio', $flag_modif, $couleur_claire);
 
 		echo "</table>\n";
 	}
 
 	//// Documents associes
-	$query = "SELECT * FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
+	$query = "SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'";
 
@@ -965,7 +976,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>". majuscules(_T('info_documents')) ."</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='5'>";
 
-		afficher_portfolio ($documents, $id_article, $type, 'documents', $flag_modif, '#aaaaaa');
+		afficher_portfolio ($documents, $type, 'documents', $flag_modif, '#aaaaaa');
 		echo "</table>";
 	}
 
