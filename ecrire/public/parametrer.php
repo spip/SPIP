@@ -333,8 +333,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 			if ($m[0]=='=') {
 				include_spip('inc/texte');
 				// les navigateurs pataugent si l'URL est vide
-				if ($m = chapo_redirige(substr($m,1)))
-					if ($url = calculer_url($m[3]))
+				if ($url = chapo_redirige(substr($m,1), true))
 					return array('texte' => "<"
 				. "?php header('Location: "
 				. texte_script(str_replace('&amp;', '&', $url))

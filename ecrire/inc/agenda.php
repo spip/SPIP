@@ -1501,10 +1501,9 @@ function quete_calendrier_interval_rv($avant, $apres) {
 // http://doc.spip.org/@tache_redirige
 function tache_redirige ($row) {
 
-	$m = $row['DESCRIPTION'];
+	$m = $row['description'];
 	if ($m[0] == '=')
-	    if ($m = chapo_redirige(substr($m,1)))
-	      if ($m = calculer_url($m[3], '', 'url'))
+	  if ($m = chapo_redirige(substr($m,1), true))
 		return $m;
 	return generer_url_ecrire("message", "id_message=".$row['UID']);
 }

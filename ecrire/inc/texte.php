@@ -1289,12 +1289,12 @@ function traiter_raccourci_lien_atts($texte) {
 define('_RACCOURCI_CHAPO', ',^(\W*)(\W*)(\w*\d+([?#].*)?)$,');
 
 // http://doc.spip.org/@chapo_redirige
-function chapo_redirige($chapo)
+function chapo_redirige($chapo, $url=false)
 {
 	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
 		if (!preg_match(_RACCOURCI_CHAPO, $chapo, $m))
-			$m = array('','','',$chapo);
-	return $m;
+			return $chapo;
+	return !$url ? $m[3] : calculer_url($m[3]);
 }
 
 // http://doc.spip.org/@traiter_poesie
