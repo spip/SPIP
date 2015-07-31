@@ -463,7 +463,9 @@ function import_all_continue($tables)
 	if (!@is_readable($archive)) {
 		import_abandon();
 		minipres(_T('info_base_restauration'),
-			 _T('info_erreur_restauration'));
+			 _T('info_erreur_restauration') .
+			 "<br /><br /><a href='./'>"._T('info_sauvegarde_reussi_03').
+			 "</a> "._T('info_sauvegarde_reussi_04'));
 	}
 
 
@@ -479,10 +481,13 @@ function import_all_continue($tables)
 			$gz = false;
 		}
 	install_debut_html(_T('info_base_restauration'));
+        echo "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'>";
+        echo "<table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor
+='white'>";
 	echo "<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
 		<input type='text' class='forml' size='80' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
-
-#	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
+        echo "</td></tr></table>";
+        echo "</td></tr></table><br /><br >";
 
 	$_fopen = ($gz) ? gzopen : fopen;
 	$f = $_fopen($archive, "rb");
@@ -493,7 +498,7 @@ function import_all_continue($tables)
 	if ($res)
 		import_abandon();
 	else	import_fin();
-	echo "<a href='./'>retour au site</a>";
+	echo " <a href='./'>",_T('info_sauvegarde_reussi_03'),"</a> ",_T('info_sauvegarde_reussi_04');
 	install_fin_html();
 	flush();
 }
