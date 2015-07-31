@@ -130,7 +130,7 @@ function ajouter_session($auteur) {
 			}
 		}
 		// Si après ça la session est vide et qu'on a pas de cookie session, on arrete
-		if (!isset($_COOKIE['spip_session'])){
+		if (!$auteur_verif AND !isset($_COOKIE['spip_session'])){
 			return false;
 		}
 	}
