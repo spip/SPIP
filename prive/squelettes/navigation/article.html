@@ -1,4 +1,4 @@
-<BOUCLE_nav(ARTICLES){id_article}{statut?}{si #ENV{exec}|=={article}}>
+<BOUCLE_nav(ARTICLES){id_article}{statut==.*}{si #ENV{exec}|=={article}}>
 #BOITE_OUVRIR{'','info'}
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','article','id',#ENV{id_article}}}}
 #BOITE_FERMER

@@ -1,4 +1,4 @@
-<BOUCLE_article(ARTICLES){id_article}{statut?}{si #ENV{exec}|=={article}}>
+<BOUCLE_article(ARTICLES){id_article}{statut==.*}{si #ENV{exec}|=={article}}>
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,article,#ID_ARTICLE})

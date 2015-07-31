@@ -90,14 +90,32 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 /* generique */
 #voir { overflow: hidden; }
 
-#navigation .infos .numero { font-size: x-small;font-weight: bold; text-align: center; text-transform:uppercase;}
-#navigation .infos .numero p { font-size: x-large; margin:5px 0;color:#333; font-family: verdana, helvetica, arial, sans; }
+#navigation .infos .numero { font-size: 0.769em;font-weight: bold; text-align: center; text-transform:uppercase;border-bottom: 1px solid #eee;padding-bottom: 10px;}
+#navigation .infos .numero p { font-size: 2.4em; margin:5px 0;color:#333; font-family: verdana, helvetica, arial, sans; }
 #navigation .infos .noinfo { color:#ddd;}
 #contenu .bandeau_actions { margin:5px 0;clear:both; }
 #contenu .bandeau_actions a:hover { background: #fff; }
 #contenu .logo_titre { float: #ENV{right}; margin: 5px 0; margin-#ENV{left}: 5px; }
 
-ul.instituer { /*float: #ENV{right}; */ text-align: #ENV{left}; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 0; padding:5px 0; /*font-size:0.9em; */ }
+.infos .formulaire_instituer {background: none;border: 0;margin:0 -10px;margin-bottom:[(#ENV{margin-bottom}|mult{0.5})em];}
+.infos .formulaire_instituer form {border-bottom:1px solid #eee;}
+.infos .formulaire_instituer .reponse_formulaire {display: none;}
+.infos .formulaire_instituer ul {padding-bottom: 0;margin-bottom: 0;}
+.infos .formulaire_instituer .editer {padding-left: 10px;padding-right: 10px;}
+.infos .formulaire_instituer .show {display:block; margin:0 -10px;padding:10px;background-color: #eee;}
+.infos .formulaire_instituer .show select {width: 100%;}
+.infos .formulaire_instituer .show select,
+.infos .formulaire_instituer .show option {background-repeat:no-repeat;background-position: 4px center;background-color: #eee;}
+.infos .formulaire_instituer .boutons {background: none;border-top: 0;}
+
+.infos .formulaire_instituer .statut_prepa .show {background-color: #fff;}
+.infos .formulaire_instituer .statut_prop .show {background-color: #f89058;}
+.infos .formulaire_instituer .statut_publie .show {background-color: #9dba00;}
+.infos .formulaire_instituer .statut_poubelle .show {background-color: #000;}
+.infos .formulaire_instituer .statut_refuse .show {background-color: #ff0000;}
+
+/*
+ul.instituer { text-align: #ENV{left}; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 0; padding:5px 0; }
 ul.instituer li { list-style: none; margin: 0; padding: 0; }
 ul.instituer li ul { margin: 0; padding: 0; }
 ul.instituer li ul li a { display: block; }
@@ -109,7 +127,7 @@ ul.instituer li.prop.selected,ul.instituer li.prop a:hover { background: #f89058
 ul.instituer li.publie.selected,ul.instituer li.publie a:hover { background: #9dba00;color: #fff; }
 ul.instituer li.poubelle.selected,ul.instituer li.poubelle a:hover { background: #000; color: #fff;}
 ul.instituer li.refuse.selected,ul.instituer li.refuse a:hover { background: #ff0000;color: #fff; }
-
+*/
 
 #wysiwyg .label { clear: both;color:#888;}
 #wysiwyg div p { margin-top: 0; }

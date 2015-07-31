@@ -23,7 +23,6 @@ ecrire/action/forcer_job.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/inscrire_auteur.php -text
-ecrire/action/instituer_article.php -text
 ecrire/action/instituer_langue_objet.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/logout.php -text
@@ -123,7 +122,6 @@ ecrire/inc/iconifier.php -text
 ecrire/inc/index.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/install.php -text
-ecrire/inc/instituer_article.php -text
 ecrire/inc/journal.php -text
 ecrire/inc/json.php -text
 ecrire/inc/lang_liste.php -text
@@ -352,6 +350,8 @@ prive/formulaires/inc-instituer_auteur.html -text
 prive/formulaires/inc-instituer_auteur_fonctions.php -text
 prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/inc-options-langues.html -text
+prive/formulaires/instituer_objet.html -text
+prive/formulaires/instituer_objet.php -text
 prive/formulaires/login.php -text
 prive/formulaires/recherche_ecrire.html -text
 prive/formulaires/recherche_ecrire.php -text
@@ -581,7 +581,6 @@ prive/objets/editer/logo.html -text
 prive/objets/editer/rediriger_article.html -text
 prive/objets/editer/traductions.html -text
 prive/objets/infos/article.html -text
-prive/objets/infos/article_fonctions.php -text
 prive/objets/infos/auteur.html -text
 prive/objets/infos/objet.html -text
 prive/objets/infos/rubrique.html -text
