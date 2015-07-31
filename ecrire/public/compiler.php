@@ -891,9 +891,9 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	include_spip('inc/charsets');
 	$squelette = transcoder_page($squelette);
 
-	// rendre inertes les echappements de #[](){}
-	while(false !== strpos($squelette, $inerte = 'INERTE'.$i)) $i++;
-	$squelette = preg_replace_callback(',\\\\([#[()\]{}]),',
+	// rendre inertes les echappements de #[](){}<>
+	while(false !== strpos($squelette, $inerte = '-INERTE'.$i)) $i++;
+	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
 		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
 
 	$descr = array('nom' => $nom,
