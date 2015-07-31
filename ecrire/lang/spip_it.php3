@@ -82,7 +82,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'barre_eo_maj' => 'Inserire una E nell\'O maiuscola',
 'barre_gras' => 'Formattare in {{grassetto}}',
 'barre_guillemets' => 'Porre il testo fra &laquo; virgolette basse francesi &raquo;',
-'barre_guillemets_de' => 'Porre il testo fra „virgolette“',
+'barre_guillemets_simples' => 'Porre il testo fra „virgolette“',
 'barre_intertitre' => 'Trasformare in {{{titolo di paragrafo}}}',
 'barre_italic' => 'Formattare in {corsivo}',
 'barre_lien' => 'Trasformare in un [link ipertestuale->http://...]',

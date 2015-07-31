@@ -77,7 +77,7 @@ la documentacion d\'SPIP</a>.',
 'barre_eo_maj' => 'Inserir una E dins l\'O majuscula',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Enrodar amb de &laquo; verguetas francesas &raquo;',
-'barre_guillemets_de' => 'Enrodar amb de &#8222;verguetas&#8220;',
+'barre_guillemets_simples' => 'Enrodar amb de &#8222;verguetas&#8220;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
@@ -646,7 +646,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_langue_principale' => 'Lenga majorala del sit',
 'info_langues' => 'Lengas del sit',
 'info_langues_proposees' => 'Lengas prepausadas:',
-'info_largeur_vignette' => ' @largor_vinheta@ x @autor_vinheta@ pix&egrave;ls',
+'info_largeur_vignette' => ' @largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_ldap_ok' => 'L\'autentificacion LDAP es installada.',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_lettre_heures' => 'H',
@@ -1352,7 +1352,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
 'texte_jeu_caractere' => 'Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidental") e sos derivats.
- Dins aquel cas, cal cambiar lo reglatge predefinit per tal d\'utilizar
+ En aquel cas, cal cambiar lo reglatge predefinit per tal d\'utilizar
  un j&ograve;c de caract&egrave;rs apropriat. Oblidetz pas tanpauc d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aqueste reglatge a pas cap d\'efi&egrave;ch retroactiu. Adoncas
@@ -1382,7 +1382,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
   se vol&egrave;tz tornar indexar la basa rapidament (apr&egrave;p restauracion
   d\'una salvagarda per exemple). Notatz que los documents modificats d\'un 
   biais normal (a partir de l\'interf&agrave;cia SPIP) se tornan indexar
-  automaticament: donc aquesta commanda es utila pas que d\'un biais excepcional.',
+  automaticament: donc aquesta comanda es utila pas que d\'un biais excepcional.',
 'texte_moteur_recherche_non_active' => 'Lo motor de rec&egrave;rca es pas activat.',
 'texte_mots_cles' => 'Merc&eacute;s als mots claus pod&egrave;tz crear de ligams tematics entre v&ograve;stres articles
   qu&eacute; que si&aacute; lor pla&ccedil;a dins las rubricas. Aqu&ograve; vos permet
@@ -1459,7 +1459,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la ti&egrave;ra de sas novetats. Per aqu&ograve; far, vos cal activar la sindicacion. 
   <blockquote><i>D\'unes albergadors activan pas aquela foncionalitat; 
-  dins aquel cas, poiretz pas utilizar la sindicacion de contengut
+  en aquel cas, poiretz pas utilizar la sindicacion de contengut
   dempu&egrave;i v&ograve;stre sit.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion del motor son vu&egrave;jas.',

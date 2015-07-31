@@ -95,7 +95,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'barre_eo_maj' => 'Pou m&egrave;t in E andan O an mazizkil',
 'barre_gras' => 'Pou &eacute;kri {{an gro}}',
 'barre_guillemets' => 'Pou m&egrave;t bann &laquo; giym&eacute; frans&eacute; &raquo;',
-'barre_guillemets_de' => 'Pou m&egrave; bann „giym&eacute;“',
+'barre_guillemets_simples' => 'Pou m&egrave; bann „giym&eacute;“',
 'barre_intertitre' => 'M&egrave;t sa-la kom in {{{lint&egrave;rtitr}}}',
 'barre_italic' => 'M&egrave;t sa-la an {litalik}',
 'barre_lien' => 'M&egrave;t sa-la kom in [gatir w&egrave;b->http://...]',

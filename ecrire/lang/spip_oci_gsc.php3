@@ -77,7 +77,7 @@ la documentacion d\'SPIP</a>.',
 'barre_eo_maj' => 'Inserir ua E dens l\'O majuscula',
 'barre_gras' => 'Hicar en {{gras}}',
 'barre_guillemets' => 'Enrodar dab &laquo; verguetas francesas &raquo;',
-'barre_guillemets_de' => 'Enrodar dab &#8222;verguetas&#8220;',
+'barre_guillemets_simples' => 'Enrodar dab &#8222;verguetas&#8220;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Hicar en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
@@ -646,7 +646,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_langue_principale' => 'Lenga majorau deu sit',
 'info_langues' => 'Lengas deu sit',
 'info_langues_proposees' => 'Lengas perpausadas:',
-'info_largeur_vignette' => '@largor_vinheta@ x @autor_vinheta@ pix&egrave;ls',
+'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_ldap_ok' => 'L\'autentificacion LDAP qu\'ei installada.',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_lettre_heures' => 'H',
@@ -1351,7 +1351,7 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
 'texte_jeu_caractere' => 'Aquesta opcion qu\'ei utila se lo v&ograve;ste sit deu afichar alfabets
  diferents de l\'alfabet latin (o "occidentau") e los sons derivats.
- Dens aqueth cas, que cau cambiar lo reglatge predefinit ent&agrave; utilizar
+ En aqueth cas, que cau cambiar lo reglatge predefinit ent&agrave; utilizar
  un j&ograve;c de caract&egrave;rs apropiat. N\'oblidetz pas tanp&ograve;c d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aqueste reglatge n\'a pas nat efi&egrave;it retroactiu. Adonc
@@ -1379,9 +1379,9 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_modifier_article' => 'Modificar l\'article:',
 'texte_moteur_recherche_active' => '<b>Lo motor de rec&egrave;rca qu\'ei activat.</b> Utilizatz aquesta commanda
   se voletz tornar indexar la basa rapidament (apr&egrave;s restauracion
-  d\'ua sauvagarda per exemple). Notatz que los documents modificats d\'ua 
+  d\'ua sauvagarda per exemple). Notatz que los documents modificats de
   man&egrave;ra normau (a partir de l\'interf&agrave;cia SPIP) que\'s tornan indexar
-  automaticament: donc aquesta commanda qu\'ei utila sonque d\'ua man&egrave;ra excepcionau.',
+  automaticament: donc aquesta comanda qu\'ei utila sonque de man&egrave;ra excepcionau.',
 'texte_moteur_recherche_non_active' => 'Lo motor de rec&egrave;rca n\'ei pas activat.',
 'texte_mots_cles' => 'Merc&eacute;s aus mots claus que podetz crear ligams tematics entre los v&ograve;stes articles
   qu&eacute; que sia la lor pla&ccedil;a dens las rubricas. Aqu&ograve; que\'vs permet
@@ -1458,7 +1458,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'texte_syndication' => 'Que\'s p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la t&egrave;ra de las soas nautats. T&agrave; har aqu&ograve;, que\'vs cau activar la sindicacion. 
   <blockquote><i>Daubuns aubergaders n\'activan pas aquera foncionalitat; 
-  dens aqueth cas, non poiratz pas utilizar la sindicacion de contengut
+  en aqueth cas, non poiratz pas utilizar la sindicacion de contengut
   dempuish lo v&ograve;ste sit.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula qu\'ei condreta.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion deu motor que son vueitas.',

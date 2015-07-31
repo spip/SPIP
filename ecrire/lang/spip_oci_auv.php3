@@ -77,7 +77,7 @@ la documentacion d\'SPIP</a>.',
 'barre_eo_maj' => 'Inserir una E dins l\'O majuscula',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Rodar amb de &laquo; vergetas francesas &raquo;',
-'barre_guillemets_de' => 'Rodar amb de &#8222;vergetas&#8220;',
+'barre_guillemets_simples' => 'Rodar amb de &#8222;vergetas&#8220;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [liam ipert&egrave;xt->http://...]',
@@ -646,7 +646,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_langue_principale' => 'Lenga majorala dau sit',
 'info_langues' => 'Lengas dau sit',
 'info_langues_proposees' => 'Lengas prepausadas:',
-'info_largeur_vignette' => '@largor_vinheta@ x @autor_vinheta@ pix&egrave;ls',
+'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_ldap_ok' => 'L\'autentificacion LDAP z-es installada.',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_lettre_heures' => 'H',
@@ -725,7 +725,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_notes' => 'N&ograve;tas',
 'info_nouveau' => '(Nu&ograve;u)',
 'info_nouveau_message' => 'AV&Egrave;TZ UN MESSATGE NU&Ograve;U',
-'info_nouveau_pense_bete' => 'Aquel boton vos permet de crear una n&ograve;ta de remembran&ccedil;a personala.',
+'info_nouveau_pense_bete' => 'Aquel boton vos permet de crear una n&ograve;ta de nembran&ccedil;a personala.',
 'info_nouveaux_message' => 'Messatges nu&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES NU&Ograve;US',
 'info_nouvel_article' => 'Article nu&ograve;u',
@@ -1143,7 +1143,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempu&egrave;i lhors 
 'menu_aide_messagerie' => 'La messatjari&aacute; int&egrave;rna',
 'menu_aide_messagerie_calendrier' => 'Lo chalend&egrave;ir',
 'menu_aide_messagerie_configuration_perso' => 'Configuracion personala de la messatjari&aacute;',
-'menu_aide_messagerie_pense_bete' => 'Las n&ograve;tas de remembran&ccedil;a',
+'menu_aide_messagerie_pense_bete' => 'Las n&ograve;tas de nembran&ccedil;a',
 'menu_aide_messagerie_utilisateurs' => 'Los messatges entre utilizaires',
 'menu_aide_mots_cles' => 'Los mots claus',
 'menu_aide_mots_cles_groupes' => 'Los grops de mots',
@@ -1352,7 +1352,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
 'texte_jeu_caractere' => 'Aquesta opcion z-es utila se v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidentau") e sos derivats.
- Dins aquel cas, chau chamjar lo reglatge predefinit a fin d\'utilizar
+ En aquel cas, chau chamjar lo reglatge predefinit a fin d\'utilizar
  un j&ograve;c de caract&egrave;rs apropriat. Oblidetz pas tanpauc d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aqueste reglatge a gran d\'ef&egrave;it retroactiu. Adoncas
@@ -1380,9 +1380,9 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
 'texte_modifier_article' => 'Modificar l\'article:',
 'texte_moteur_recherche_active' => '<b>Lo motor de rec&egrave;rcha es activat.</b> Utilizatz aquesta commanda
   se vol&egrave;tz tornar indexar la basa rapidament (apr&egrave;p restauracion
-  d\'una sauvagarda per exemple). Notatz que los documents modificats d\'una 
+  d\'una sauvagarda per exemple). Notatz que los documents modificats de
   man&egrave;ira normala (a partir de l\'interf&agrave;cia SPIP) se tornan indexar
-  automaticament: donc aquesta commanda es utila solament d\'una man&egrave;ira excepcionala.',
+  automaticament: donc aquesta comanda es utila solament de man&egrave;ira excepcionala.',
 'texte_moteur_recherche_non_active' => 'Lo motor de rec&egrave;rcha es pas activat.',
 'texte_mots_cles' => 'Gr&agrave;cias aus mots claus pod&egrave;tz crear de liams tematics entre v&ograve;stres articles
   qu&eacute; que si&aacute; lhor pla&ccedil;a dins las rubricas. Aqu&ograve; vos permet
@@ -1459,7 +1459,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
   la t&egrave;ira de sas novetats. Per aqu&ograve; far, vos chau activar la sindicacion. 
   <blockquote><i>Quauques auberjadors activan pas aquela foncionalitat; 
-  dins aquel cas, poiretz pas utilizar la sindicacion de contengut
+  en aquel cas, poiretz pas utilizar la sindicacion de contengut
   dempu&egrave;i v&ograve;stre sit.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula z-es condreita.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion dau motor son voidas.',
