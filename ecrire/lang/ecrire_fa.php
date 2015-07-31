@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=fa
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -158,7 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'آدرس (يو.آر.ال) سايت',
 	'erreur_connect_deja_existant' => 'سروري به نام     موجود است',
 	'erreur_nom_connect_incorrect' => 'نام سرور مجاز نيست',
-	'erreur_plugin_desinstalation_echouee' => 'پلاگين نصب زدايي نشد. با اين وجود مي‌توانيد آن را غيرفعال سازيد.',
+	'erreur_plugin_desinstalation_echouee' => 'پلاگين نصب زدايي نشد. با اين وجود مي‌توانيد آن را غيرفعال سازيد.', # MODIF
 	'erreur_plugin_fichier_absent' => 'فایل موجود نیست',
 	'erreur_plugin_fichier_def_absent' => 'فایل معیار موجود نیست',
 	'erreur_plugin_nom_fonction_interdit' => 'نام تابع مجاز نمیباشد',
@@ -302,7 +302,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'نسخه شما:',
 	'info_connexion_base' => '<b>آزمايش ارتباط با پايگاه</b>',
 	'info_connexion_base_donnee' => 'اتصال با پايگاه داده‌هاي شما',
-	'info_connexion_ldap_ok' => 'ارتباط LDAP برقرار شد .</b><p>ميتوانيد به مرحله بعدى برويد. ',
+	'info_connexion_ldap_ok' => 'ارتباط LDAP برقرار شد .</b><p>ميتوانيد به مرحله بعدى برويد. ', # MODIF
 	'info_connexion_mysql' => 'ارتباط شما با SQL',
 	'info_connexion_ok' => '.ارتباط برقرار شد',
 	'info_contact' => 'تماس',
@@ -568,6 +568,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'يك زبان را انتخاب كنيد سپس روى دكمه  "بعدى" كليك كنيد، روند استقرار برنامه بكار خواهد افتاد',
 	'install_select_type_db' => 'نوع پايگاه داده‌ها را تعيين كردن',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -718,7 +719,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_credit' => 'معتبر',
 	'plugin_info_erreur_xml' => 'اعلام پلاگين علط',
 	'plugin_info_install_ok' => 'نصب موفق',
-	'plugin_info_necessite' => 'ضروري: ',
+	'plugin_info_necessite' => 'ضروري: ', # MODIF
 	'plugin_info_non_compatible_spip' => 'اين پلاگن با اين نسخه‌ي اسپيپ نمي‌خواند',
 	'plugin_info_plugins_dist_1' => 'پلاگين‌هاي زير در پوشه‌ي @plugins_dist@ بارگذاري و فعال‌ شده‌اند. ',
 	'plugin_info_plugins_dist_2' => 'غيرفعال نمي‌شوند',
@@ -759,7 +760,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'اجرا حالا',
-	'queue_info_purger' => 'مي‌‌توانيد تمام كارهاي در انتظار را حذف كنيد و فهرست را با كارهاي دوره‌اي بازتنظيم كنيد',
+	'queue_info_purger' => 'مي‌‌توانيد تمام كارهاي در انتظار را حذف كنيد و فهرست را با كارهاي دوره‌اي بازتنظيم كنيد', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ وظيفه در صف ',
 	'queue_next_job_in_nb_sec' => 'وظيفه‌ي بعدي در  @nb@ امين',
 	'queue_no_job_in_queue' => 'وظيفه‌اي در دست اجرا نيست',
@@ -775,8 +776,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(اداره محدود)',
 
 	// T
-	'tache_cron_asap' => 'وظيفه‌ي CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'وظيفه‌ي CRON @function@ (تمام @nb@)',
+	'tache_cron_asap' => 'وظيفه‌ي CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'وظيفه‌ي CRON @function@ (تمام @nb@)', # MODIF
 	'taille_cache_image' => 'اندازه ى تصاوير, كه توسط اسپيپ حساب شده ( تصاوير كوچك اسناد, عناوين گرافيكى عرضه شده, كاربردهاى رياضى با فرمهاى TeX...) در رپرتوار @dir@جمعا @taille@ را اشغال ميكنند.',
 	'taille_cache_infinie' => 'اين سايت محدوديت اندازه ى رپرتوار Cache را پيش بينى نميكند.',
 	'taille_cache_maxi' => 'اسپيپ سعى در محدود كردن اندازه ى رپرتوار Cache به اين اندازه دارد <b>@octets@</b>.',

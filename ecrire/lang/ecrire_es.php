@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=es
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage' => 'Visualización',
 	'aide_non_disponible' => 'Esta parte de la ayuda en línea aún no está disponible en este idioma.',
 	'annuler_recherche' => 'Anular la búsqueda',
-	'auteur' => 'Autor:',
+	'auteur' => 'Autor/a:',
 	'avis_acces_interdit' => 'Acceso prohibido.',
 	'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabajó en este artículo hace @date_diff@ minutos.',
 	'avis_aucun_resultat' => 'Ningún resultado.',
@@ -305,7 +305,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Su versión :',
 	'info_connexion_base' => 'Intento de conexión a la base',
 	'info_connexion_base_donnee' => 'Conexión a tu base de datos',
-	'info_connexion_ldap_ok' => 'Se logró la conexión LDAP.</b><p> Puedes pasar a la etapa siguiente.</b>',
+	'info_connexion_ldap_ok' => '<b>Se logró la conexión LDAP.</b><p> Puedes pasar a la etapa siguiente.</p>',
 	'info_connexion_mysql' => 'Tu conexión SQL',
 	'info_connexion_ok' => 'La conexión ha funcionado.',
 	'info_contact' => 'Contacto',
@@ -581,6 +581,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'install_select_langue' => 'Selecciona un idioma y después pulsa el botón «siguiente» para iniciar el proceso de instalación.',
 	'install_select_type_db' => 'Indicar el tipo de base de datos:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -815,7 +816,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'texte_choix_base_3' => '<b>Selecciona</b> aquí la que te fue atribuída por tu proveedor de hospedaje:',
 	'texte_choix_table_prefix' => 'Prefijo de las tablas:',
 	'texte_commande_vider_tables_indexation' => 'Utilice esta comanda para vaciar las tablas de indexación del motor de búsqueda integrado de SPIP. Permite ganar espacio en el disco.',
-	'texte_compatibilite_html' => 'Puede elegir si quiere que SPIP produzca, en el sitio público, un código compatible con la norma <i>HTML4</i>, o si prefiere usar las posibilidades más modernas de <i>HTML5</i>.',
+	'texte_compatibilite_html' => 'Puedes elegir si quieres que SPIP produzca, en el sitio público, un código compatible con la norma <i>HTML4</i>, o si prefieres usar las posibilidades más modernas de <i>HTML5</i>.',
 	'texte_compatibilite_html_attention' => 'No hay ningún riesgo en activar la opción <i>HTML5</i>, pero entonces las páginas de su sitio tienen que empezar por la mención siguiente (para ser válidas): <code>&lt;!DOCTYPE html&gt;</code>.',
 	'texte_compresse_ou_non' => '(comprimido o no)',
 	'texte_compte_element' => '@count@ elemento',
@@ -844,7 +845,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estadísticas, por ejemplo).<p>
 Si no le ves utilidad, puedes dejar esta opción con su valor por omisión (no crear los archivos).</p>',
 	'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
-	'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalación, y tu acceso todavía funciona, puedes ', # MODIF
+	'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalación, y tu acceso todavía funciona, puedes ',
 	'texte_introductif_article' => '(Introducción del artículo.)',
 	'texte_jeu_caractere' => 'Se aconseja emplear para el sitio el alfabeto universal <tt>utf-8</tt>): permite visualizar textos en todos los idiomas, y ya no plantea problemas de compatibilidad con navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Cuidado: este parametro no provoca la conversión de textos ya ingresados en el sitio. ',

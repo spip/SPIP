@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/spip?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -255,7 +255,7 @@ wird Ihre Adresse beibehalten):
 	'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ungültig.',
 	'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
 	'form_forum_bonjour' => 'Hallo @nom@,',
-	'form_forum_confirmer_email' => 'Bitte öffnen sie folgenden URL zum Bestätigen ihrer Maiadresse: @url_confirm@',
+	'form_forum_confirmer_email' => 'Bitte öffnen sie folgenden URL zum Bestätigen ihrer Mailadresse: @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Diese E-Mail-Adresse ist bereits eingetragen. Sie können also Ihr normals Passwort verwenden.',
 	'form_forum_identifiant_mail' => 'Ihre neuen Zugangsdaten wurden Ihnen per Mail zugestellt.',
 	'form_forum_identifiants' => 'Persönliche Zugangsdaten',
@@ -470,7 +470,7 @@ wird Ihre Adresse beibehalten):
 	'info_tous_resultats_enregistres' => ' [alle Ergebnisse sind erfasst]',
 	'info_tout_afficher' => 'Alles zeigen',
 	'info_travaux_texte' => 'Diese Website ist noch nicht fertig eingerichtet. Schauen Sie später mal wieder rein ...',
-	'info_travaux_titre' => 'Website im Aufbau',
+	'info_travaux_titre' => 'Website in Bearbeitung',
 	'info_trop_resultat' => 'Zu viele Ergebnisse für “@cherche_mot”. Bitte präzisieren Sie Ihre Suchbegriffe.',
 	'info_utilisation_messagerie_interne' => 'Sie verwenden das interne Nachrichtensystem der Website. ',
 	'info_valider_lien' => 'Link freigeben',

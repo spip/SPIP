@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=ro
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ro
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -157,7 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'Adresse (URL) du site', # NEW
 	'erreur_connect_deja_existant' => 'Un server cu acest nume există deja',
 	'erreur_nom_connect_incorrect' => 'Acest nume de server nu este autorizat',
-	'erreur_plugin_desinstalation_echouee' => 'Dezinstalarea plugin-ului a eşuat. Puteţi totuşi să îl dezactivaţi.',
+	'erreur_plugin_desinstalation_echouee' => 'Dezinstalarea plugin-ului a eşuat. Puteţi totuşi să îl dezactivaţi.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Fişier lipsă',
 	'erreur_plugin_fichier_def_absent' => 'Fişier de definiţii lipsă',
 	'erreur_plugin_nom_fonction_interdit' => 'Nume de funcţie interzis',
@@ -302,7 +302,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Versiunea dumneavoastră :',
 	'info_connexion_base' => 'Încercarea conexiunii la baza de date',
 	'info_connexion_base_donnee' => 'Conexiunea la baza dumneavoastră de date',
-	'info_connexion_ldap_ok' => 'Conexiunea LDAP a reuşit.</b><p>Puteţi trece la etapa următoare.<p/>',
+	'info_connexion_ldap_ok' => 'Conexiunea LDAP a reuşit.</b><p>Puteţi trece la etapa următoare.<p/>', # MODIF
 	'info_connexion_mysql' => 'Conexiunea dumneavoastră SQL',
 	'info_connexion_ok' => 'Conexiunea a reuşit.',
 	'info_contact' => 'Contact',
@@ -590,6 +590,7 @@ cu o culoare care le indică starea :',
 	'install_select_langue' => 'Selecţionaţi o limbă şi faceţi click pe butonul « următorul » pentru a lansa procedura de instalare.',
 	'install_select_type_db' => 'Indicaţi tipul bazei de date :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

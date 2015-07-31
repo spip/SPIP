@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=gl
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=gl
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -163,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'Adresse (URL) du site', # NEW
 	'erreur_connect_deja_existant' => 'Xa existe un servidor con ese nome',
 	'erreur_nom_connect_incorrect' => 'Este nome de servidor non está autorizado',
-	'erreur_plugin_desinstalation_echouee' => 'A desinstalación do módulo fallou. No entanto, pode desactivalo.',
+	'erreur_plugin_desinstalation_echouee' => 'A desinstalación do módulo fallou. No entanto, pode desactivalo.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
 	'erreur_plugin_fichier_def_absent' => 'Ficheiro de definición ausente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome de función prohibido',
@@ -310,7 +310,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'A súa versión :',
 	'info_connexion_base' => 'Proba de conexión coa base de datos',
 	'info_connexion_base_donnee' => 'Conexión ás súa base de datos',
-	'info_connexion_ldap_ok' => 'Conseguiu conexión LDAP.</b><p> Pode pasar á etapa seguinte.</p>',
+	'info_connexion_ldap_ok' => 'Conseguiu conexión LDAP.</b><p> Pode pasar á etapa seguinte.</p>', # MODIF
 	'info_connexion_mysql' => 'A súa conexión SQL',
 	'info_connexion_ok' => 'Conexión feita.',
 	'info_contact' => 'Contacto',
@@ -601,6 +601,7 @@ cunha cor que indica o seu estado :',
 	'install_select_langue' => 'Selecciona un idioma e preme o botón «seguinte» para comezar co proceso de instalación.',
 	'install_select_type_db' => 'Indique o tipo de base de datos :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/spip?lang_cible=es
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -244,20 +244,19 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 	'form_auteur_envoi_mail_confirmation' => 'Se te acaba de enviar un mensaje de confirmación a @email@. Tienes que visitar la página web indicada en ese mensaje para validar tu dirección de correo.',
 	'form_auteur_mail_confirmation' => 'Hola,
 
-Has solicitado cambiar tu dirección de correo.
-Para confirmar tu nueva dirección, alcanza con visitar la página
-siguiente:
+Ha solicitado cambiar su dirección de correo electrónico.
+Para confirmar su nueva dirección, haga clic en el siguiente enlace:
 
     @url@
-Caso contrario, la solicitud será simplemente ignorada.
+En caso contrario, la solicitud será ignorada.
 ',
 	'form_deja_inscrit' => 'Ya estás inscrito.',
 	'form_email_non_valide' => 'La dirección de correo electrónico no es válida.',
 	'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
 	'form_forum_bonjour' => 'Hola, @nom@,',
-	'form_forum_confirmer_email' => 'Para confirmar su dirección mail, hacé clic en este vínculo: @url_confirm@',
+	'form_forum_confirmer_email' => 'Para confirmar tu dirección mail, visita el siguiente enlace: @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Esta dirección de correo electrónico ya está registrada, por lo que puedes utilizar tu contraseña habitual.',
-	'form_forum_identifiant_mail' => 'Hemos enviado tu nuevo identificador por correo electrónico.',
+	'form_forum_identifiant_mail' => 'Acabamos de enviarte tu nuevo identificador por correo electrónico.',
 	'form_forum_identifiants' => 'Identificadores personales',
 	'form_forum_indiquer_nom_email' => 'Indica aquí tu nombre y dirección de correo electrónico. Se te enviará de inmediato por correo electrónico tu identificador personal.',
 	'form_forum_login' => 'login:',

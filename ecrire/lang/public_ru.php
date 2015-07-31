@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/public?lang_cible=ru
+// extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=ru
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -11,18 +11,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Главная',
 	'article' => 'Статья',
 	'articles' => 'Статьи',
-	'articles_auteur' => 'Авторы статей',
+	'articles_auteur' => 'Статьи автора',
 	'articles_populaires' => 'Самые читаемые статьи',
 	'articles_rubrique' => 'Статьи в этом разделе',
-	'aucun_article' => 'Нет статьи по этому адресу',
-	'aucun_auteur' => 'Нет автора по этой ссылке',
-	'aucun_site' => 'Неправильно указан адрес сайта',
-	'aucune_breve' => 'Неправильно указан адрес новостей',
-	'aucune_rubrique' => 'Неправильно указан адрес рубрики',
+	'aucun_article' => 'Статей нет',
+	'aucun_auteur' => 'Авторов нет',
+	'aucun_site' => 'Сайтов нет',
+	'aucune_breve' => 'Новостей нет',
+	'aucune_rubrique' => 'Разделов нет',
 	'auteur' => 'Автор',
 	'autres' => 'Прочие',
 	'autres_breves' => 'Другие новости',
-	'autres_groupes_mots_clefs' => 'Группы ключей',
+	'autres_groupes_mots_clefs' => 'Другие группы ключей',
 	'autres_sites' => 'Другие сайты',
 
 	// B

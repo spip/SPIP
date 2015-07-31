@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=co
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=co
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -620,6 +620,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	'install_select_langue' => 'Sceglite una lingua è poi cliccate nant\'à « In avanti » per lancià u prucedimentu di stallazione.',
 	'install_select_type_db' => 'Indettà u tippu di basa di dati :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

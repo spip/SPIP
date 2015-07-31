@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/spip?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -424,7 +424,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'Počas mesiaca:',
 	'info_mot_cle_ajoute' => 'Toto kľúčové slovo bolo pridané k',
 	'info_multi_herit' => 'Predvolený jazyk',
-	'info_multi_langues_soulignees' => '<u>Podčiarknuté jazyky</u> poskytujú preklad všetkých alebo takmer všetkých textov rozhrania. Ak si vyberiete tieto jazyky, mnohé prvky verejne prístupnej stránky (dátumy, formuláre) sa preložia automaticky. Ak si vyberiete niektorý z jazykov, ktoré nie sú podčiarknuté, tieto prvky zobrazia v hlavnom jazyku stránky.',
+	'info_multi_langues_soulignees' => '<u>Podčiarknuté jazyky</u> poskytujú preklad všetkých alebo takmer všetkých textov rozhrania. Ak si vyberiete niektorý z týchto jazykov, mnohé prvky verejne prístupnej stránky (dátumy, formuláre) sa preložia automaticky. Ak si vyberiete niektorý z jazykov, ktoré nie sú podčiarknuté, tieto prvky sa zobrazia v hlavnom jazyku stránky.',
 	'info_multilinguisme' => 'Viacjazyčnosť',
 	'info_nom_non_utilisateurs_connectes' => 'Vaše meno sa nezobrazuje v zozname používateľov online.',
 	'info_nom_utilisateurs_connectes' => 'Vaše meno sa zobrazuje v zozname používateľov online.',

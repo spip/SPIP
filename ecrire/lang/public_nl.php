@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/public?lang_cible=nl
+// extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=nl
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Beginpagina', # MODIF
+	'accueil_site' => 'Homepagina',
 	'article' => 'Artikel',
 	'articles' => 'Artikels',
 	'articles_auteur' => 'Artikels van deze auteur',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'vorige pagina',
 	'page_suivante' => 'volgende pagina',
 	'par_auteur' => 'door ',
-	'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor de privé-deel van de site.',
+	'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor het privé-deel van de site.',
 	'plan_site' => 'Overzicht van de site',
 	'popularite' => 'Populariteit',
 	'poster_message' => 'Een bericht plaatsen',
@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques' => 'Rubrieken',
 
 	// S
-	'signatures_petition' => 'Ondertekeningen',
+	'signatures_petition' => 'Handtekeningen',
 	'site_realise_avec_spip' => 'Site gebouwd met SPIP',
 	'sites_web' => 'Websites',
 	'sous_rubriques' => 'Subrubrieken',
