@@ -20,9 +20,9 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 		if (!$s) {
 			if ($flag_mt_rand) $s = mt_rand();
 			if (!$s) $s = rand();
-			$s = substr(md5(uniqid($s).$sel), 0, 15);
+			$s = substr(md5(uniqid($s).$sel), 0, 16);
 		}
-		$r = unpack("Cr", pack("H2", $s));
+		$r = unpack("Cr", pack("H2", $s.$s));
 		$x = $r['r'] & 63;
 		if ($x < 10) $x = chr($x + 48);
 		else if ($x < 36) $x = chr($x + 55);
@@ -30,7 +30,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 		else if ($x == 63) $x = '/';
 		else $x = '.';
 		$pass .= $x;
-		$s = substr($s, 1);
+		$s = substr($s, 2);
 	}
 	return $pass;
 }
