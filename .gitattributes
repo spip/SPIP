@@ -510,12 +510,14 @@ ecrire/configuration/compresseur.php -text
 ecrire/configuration/compteur.php -text
 ecrire/configuration/contenu_forums.php -text
 ecrire/configuration/documents.php -text
+ecrire/configuration/forums_prives.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/indexeur.php -text
 ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
+ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/mots.php -text
 ecrire/configuration/notifications_forum.php -text
 ecrire/configuration/participants.php -text

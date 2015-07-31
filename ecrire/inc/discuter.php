@@ -45,6 +45,9 @@ function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $obje
 // http://doc.spip.org/@inc_discuter_dist
 function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=10, $id_parent = 0)
 {
+	if ($GLOBALS['meta']['forum_prive_objets'] == 'non')
+		return '';
+
 	$debut = intval($debut);
 	if (!$pas) $pas = 10;
 	$id = intval($id);

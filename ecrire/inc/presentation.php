@@ -443,8 +443,10 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. '" id="cssprivee" />'  . "\n"
 	
 	// CSS calendrier
-	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
+	. (($GLOBALS['meta']['messagerie_agenda'] != 'non')
+		? '<link rel="stylesheet" type="text/css" href="'
+		. url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
+		: '')
 	
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
