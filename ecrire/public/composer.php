@@ -480,23 +480,21 @@ function construire_titre_lien($nom,$url) {
 	return typo(supprimer_numero(calculer_url($url, $nom, 'titre')));
 }
 
-// Ajouter "&lang=..." si la langue de base n'est pas celle du site
+// Ajouter "&lang=..." si la langue de base n'est pas celle du site.
+// Si le 2e parametre est "-1", c'est qu'on n'a pas pu
+// determiner la table a la compil, on le fait maintenant.
+// Il faudrait encore completer: on ne connait pas la langue
+// pour une boucle forum sans id_article ou id_rubrique donné par le contexte
 // http://doc.spip.org/@lang_parametres_forum
-function lang_parametres_forum($s) {
-	// ne pas se fatiguer si le site est unilingue (plus rapide)
-	if (strstr($GLOBALS['meta']['langues_utilisees'], ',')
-	// chercher l'identifiant qui nous donnera la langue
-	AND preg_match(',(id_(article|breve|rubrique|syndic)=([0-9]+)),', $s, $r)){
-		$lang = sql_fetsel(array('lang'),
-					   array("spip_" . $r[2] .'s'),
-					   array($r[1]));
-
-	// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
-		if ($lang['lang'] AND $lang['lang'] <> $GLOBALS['meta']['langue_site'])
-			return "$s&lang=" . $lang['lang'];
+function lang_parametres_forum($qs, $lang) {
+	if ($lang == -1 AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
+		$lang = quete_lang($r[2], $r[1]);
 	}
+  // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
+	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
+		return $qs . "&lang=" . $lang;
 
-	return $s;
+	return $qs;
 }
 
 // La fonction presente dans les squelettes compiles
