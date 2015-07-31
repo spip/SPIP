@@ -644,6 +644,7 @@ function email_valide($adresse) {
 
 function logrotate() {
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
+	@unlink($logfile.'.3');
 	@rename($logfile.'.2',$logfile.'.3'); 
 	@rename($logfile.'.1',$logfile.'.2'); 
 	@rename($logfile,$logfile.'.1'); 
