@@ -104,9 +104,8 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$boucle->where[] = "\".(".index_pile($boucle->id_parent, 'id_rubrique', $boucles)."? $c : 1).\"";
 			}
 			else if ($type == 'hierarchie') {
-				// Hack specifique; cf complement dans calculer_boucle
-					$boucle->tout = index_pile($boucle->id_parent,
-						'id_rubrique', $boucles);
+				// Hack specifique; voir à la fin de la fonction
+				$boucle->tout = $param;
 			}
 			// Restriction de valeurs (implicite ou explicite)
 			else if (ereg('^([a-zA-Z_]+) *(\??)((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
@@ -327,6 +326,12 @@ function calculer_params($type, $params, $idb, &$boucles) {
 			}
 		}
 	}
+	if (($type == 'hierarchie') &&
+	    (($boucle->tout != 'id_rubrique') && ($boucle->tout != 'id_article')))
+	  {
+		include_local("inc-debug-squel.php3");
+		erreur_squelette(_L("Critère id_rubrique ou id_article absent"), $type, $idb);
+	  }
 }
 
 function calculer_param_date($date_compare, $date_orig) {
