@@ -202,7 +202,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	} else if ($boucle->type_requete == 'forums') {
 			$boucle->where[]= array("'='", "'$mparent'", $arg);
 			$boucle->where[]= array("'>'", "'$mparent'", 0);
-			$boucle->plat = $boucle->modificateur['plat'] = true; // $boucle->plat conserve pour compatibilite
+			$boucle->modificateur['plat'] = true;
 	} else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
 }
 
@@ -327,7 +327,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 				.") AS date_thread";
 			$boucle->group[] = $t . ".id_thread";
 			$order = "'date_thread'";
-			$boucle->plat = $boucle->modificateur['plat'] = true; // $boucle->plat conserve pour compatibilite
+			$boucle->modificateur['plat'] = true;
 		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
@@ -691,7 +691,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	elseif ($boucles[$idb]->type_requete == 'forums' AND
 		($col == 'id_parent' OR $col == 'id_forum'))
-		$boucles[$idb]->plat = $boucles[$idb]->modificateur['plat'] = true; // $boucles[$idb]->plat conserve pour compatibilite
+		$boucles[$idb]->modificateur['plat'] = true;
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
@@ -813,7 +813,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 		}
 	}
 
-  $boucle->lien = $boucle->modificateur['lien'] = true; // $boucle->lien conserve provisoirement pour compatibilite
+  $boucle->modificateur['lien'] = true;
   return $n;
 }
 
