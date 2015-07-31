@@ -290,7 +290,10 @@ function bouton($titre, $lien) {
 // Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
 //
 
-if (($HTTP_COOKIE_VARS['spip_admin'] OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
+$cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
+$admin_ok = ($cookie_admin != '');
+
+if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
 	if ($id_article) {
 		bouton("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
