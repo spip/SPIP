@@ -19,6 +19,7 @@ $GLOBALS['i18n_en'] = array(
 'admin_modifier_mot' => 'Modify this keyword',
 'admin_modifier_rubrique' => 'Modify this section',
 'admin_recalculer' => 'Refresh this page',
+'aide_non_disponible' => '<NEW> Cette partie de l\'aide en ligne n\'est pas encore disponible dans cette langue.',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',

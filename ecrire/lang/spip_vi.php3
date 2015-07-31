@@ -19,6 +19,7 @@ $GLOBALS['i18n_vi'] = array(
 'admin_modifier_mot' => 'S&#7917;a &#273;&#7893;i T&#7915; then ch&#7889;t n&agrave;y',
 'admin_modifier_rubrique' => 'S&#7917;a &#273;&#7893;i &#273;&#7873; m&#7909;c n&agrave;y',
 'admin_recalculer' => 'N&#7841;p l&#7841;i trang n&agrave;y',
+'aide_non_disponible' => 'Ph&#7853;n gi&uacute;p &#273;&#7905; n&agrave;y ch&#432;a &#273;&#432;&#7907;c d&#7883;ch sang ti&#7871;ng n&agrave;y.',
 'avis_acces_interdit' => 'Qu&yacute; v&#7883; kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o &#273;&acirc;y.',
 'avis_archive_incorrect' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng ph&#7843;i l&agrave; m&#7897;t h&#7891; s&#417; SPIP',
 'avis_archive_invalide' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng c&oacute; h&#7907;p l&yacute;',
