@@ -238,9 +238,9 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		$texte = _T('form_indiquer_email');
 	elseif (!email_valide($adresse_email)) 
 		$texte = _T('form_email_non_valide');
-	elseif (strlen(_request('nobot')) {
+	elseif (strlen(_request('nobot'))) {
 		$texte = _T('form_pet_probleme_technique'); # _L("Vilain !")
-#		envoyer_mail('email_moderateur@example.tld', 'spam intercepte', var_export($_POST,1));
+		#envoyer_mail('email_moderateur@example.tld', 'spam intercepte', var_export($_POST,1));
 	} else {
 		if ($email_unique == "oui") {
 			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
