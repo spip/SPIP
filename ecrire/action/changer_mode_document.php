@@ -36,5 +36,17 @@ function action_changer_mode_document_post($r)
 	AND in_array($mode, array('vignette', 'image', 'document'))) {
 		sql_updateq('spip_documents', array('mode'=>$mode), 'id_document='.$id_document);
 	}
+	if ($case = _request('afficher_case')){
+		$case = explode('-',$case);
+		list($id,$type,$script) = $case;
+		include_spip('inc/presentation');
+		include_spip('inc/documents');
+		include_spip('inc/actions');
+		// vilain hack pour ne pas recharger un script js
+		affiche_raccourci_doc('doc', $id_document, 'left');
+		// voila
+		ajax_retour(afficher_case_document($id_document, $id, $script, $type, true));
+		exit();
+	}
 }
 ?>

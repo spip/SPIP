@@ -1264,9 +1264,11 @@ function spip_initialisation_suite() {
 
 	// La requete est-elle en ajax ?
 	define('_AJAX',
-		isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
+		(isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
 		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
 		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
+		)
+		AND !@$_REQUEST['var_noajax'] # horrible exception, car c'est pas parce que la requete est ajax jquery qu'il faut tuer tous les formulaires ajax qu'elle contient
 	);
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
