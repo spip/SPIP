@@ -179,7 +179,7 @@ function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
 	if ((lire_meta("creer_htaccess")) == 'oui')
-		return "spip_acces_doc.php3?id_document=$id_document";
+		return "spip_image.php3?action=autoriser&doc=$id_document";
 	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
 		return ($row['fichier']);
 	return '';
@@ -198,7 +198,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 			$url_propre = $func($id_objet);
 			if ($url_propre
 			AND ($url_propre<>$regs[2])) {
-				include_ecrire('inc_headers.php');
+>                               include_ecrire('inc_headers.php');
 				http_status(301);
 				// recuperer les arguments supplementaires (&debut_xxx=...)
 				$reste = preg_replace('/^&/','?',

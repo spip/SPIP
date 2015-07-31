@@ -101,7 +101,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 
 	if ($logo) {
 		list ($fichier, $taille) =  $logo;
-		$hash = calculer_action_auteur("effacer_logo $fichier");
+		$hash = calculer_action_auteur("effacer $fichier");
 
 		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
 		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
@@ -110,12 +110,12 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
 		echo "$id_objet=$id&";
-		echo "action=effacer_logo&amp;doc=$fichier&amp;hash_id_auteur=$connect_id_auteur&amp;hash=$hash&amp;redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</a>]";
+		echo "action=effacer&amp;doc=$fichier&amp;hash_id_auteur=$connect_id_auteur&amp;hash=$hash&amp;redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
 	else {
-		$hash = calculer_action_auteur("ajout_logo $racine");
+		$hash = calculer_action_auteur("ajouter $racine");
 		echo debut_block_invisible(md5($titre));
 
 		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST'
@@ -125,7 +125,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo "\n<INPUT NAME='$id_objet' TYPE=Hidden VALUE='$id' />";
 		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur' />";
 		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash' />";
-		echo "\n<INPUT NAME='action' TYPE=Hidden VALUE='ajout_logo' />";
+		echo "\n<INPUT NAME='action' TYPE=Hidden VALUE='ajouter' />";
 		echo "\n<INPUT NAME='doc' TYPE=Hidden VALUE='$racine' />";
 		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
 		echo "\n<INPUT NAME='image' type='File' class='forml' style='font-size:9px;' SIZE=15>";
@@ -148,7 +148,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		  echo _T('info_installer_images_dossier');
 		} else {
 			echo "\n<div style='text-align: left'>"._T('info_selectionner_fichier').":</div>";
-			echo "\n<SELECT NAME='chemin' CLASS='forml' size='1'>";
+			echo "\n<SELECT NAME='source' CLASS='forml' size='1'>";
 			echo $afficher;
 			echo "\n</SELECT>";
 			echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
