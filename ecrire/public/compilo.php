@@ -268,9 +268,8 @@ function calculer_requete_sql(&$boucle)
 		array(' .
 		($boucle->where  ? ('"'. join('", "', $boucle->where) . '"') : '') .
 		'), # WHERE
-		array(' .
-		($boucle->join  ? ('"'. join('", "', $boucle->join) . '"') : '') .
-		'), # WHERE pour jointure
+		' . calculer_dump_array($boucle->join)
+		. ', # WHERE pour jointure
 		' . (!$boucle->group ? "''" : 
 		     ('"' . join(", ", $boucle->group)) . '"') .
 		', # GROUP
@@ -287,6 +286,13 @@ function calculer_requete_sql(&$boucle)
 		'".$boucle->sql_serveur."'); # serveur";
 }
 
+
+function calculer_dump_array($a)
+{
+  $res = "";
+  foreach($a as $k => $v) $res .= ", $k => array('$v[0]', '$v[1]')";
+  return 'array(' . substr($res,2) . ')';
+}
 
 function calculer_from(&$boucle)
 {

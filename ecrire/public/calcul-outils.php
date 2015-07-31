@@ -551,9 +551,25 @@ function spip_optim_select ($select = array(), $from = array(),
 			    $sousrequete = '', $cpt = '',
 			    $table = '', $id = '', $serveur='') {
 
-	foreach($where as $k => $v) { if (!$v) unset($where[$k]);}
-	$where = array_merge($where, $join);
+// retirer les criteres vides:
+// {X ?} avec X absent de l'URL
+// {par #ENV{X}} avec X absent de l'URL
+// IN sur collection vide
 
+	foreach($where as $k => $v) { 
+		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
+			unset($where[$k]);
+		}
+	}
+// Construire les clauses determinant les jointures.
+// Il faudrait retirer celles seulement utiles aux criteres finalement absents
+// (et nettoyer $from en consequence)
+// mais la condition necessaire et suffisante n'est pas triviale
+
+	foreach($join as $k => $v) {
+		list($t,$c) = $v;
+		$where[]= "$t.$c=L$k.$c";
+	}
 	return spip_abstract_select($select, $from, $where,
 		  $groupby, array_filter($orderby), $limit,
 		  $sousrequete, $cpt,
