@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Pas besoin de contexte de compilation
@@ -17,7 +27,7 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 }
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
-	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_filtres');
 	if (!$recherche_securisee = entites_html(_request('recherche'))) {
 	  if (!$recherche_securisee = entites_html($rech)) {
 		$recherche_securisee = _T('info_rechercher');

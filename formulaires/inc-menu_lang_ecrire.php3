@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Ce "menu_lang" collecte dans le contexte permet de forcer la langue
@@ -10,7 +20,7 @@ $balise_MENU_LANG_ECRIRE_collecte = array('menu_lang');
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
 	global $all_langs;
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 	if (strpos($all_langs,',') === false) return '';
 	return $args;
 }
@@ -22,7 +32,7 @@ function balise_MENU_LANG_ECRIRE_dyn($default) {
 }
 
 function menu_lang_pour_tous($nom, $opt) {
-	include_ecrire("inc_lang.php3");
+	include_ecrire("inc_lang");
 
 	// Voir s'il y a une langue demandee par _request,
 	// ou une langue par defaut dans le contexte {menu_lang=xx}

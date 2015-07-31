@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
@@ -9,7 +19,7 @@ global $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte;
 $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte = array('id_auteur', 'id_article', 'email');
 
 function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
-	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_filtres');
 
 	// Pas d'id_auteur ni d'id_article ? Erreur de squelette
 	if (!$args[0] AND !$args[1])
@@ -41,7 +51,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 }
 
 function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
-	include_ecrire('inc_texte.php3');
+	include_ecrire('inc_texte');
 	$puce = $GLOBALS['puce'.$GLOBALS['spip_lang_rtl']];
 
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
@@ -60,7 +70,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	AND $id == _request('num_formulaire_ecrire_auteur')
 	AND _request('confirmer'.$id)) { 
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
-		include_ecrire("inc_mail.php3");
+		include_ecrire("inc_mail");
 		envoyer_mail($mail, $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 		return _T('form_prop_message_envoye');

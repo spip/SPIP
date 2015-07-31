@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 global $balise_FORMULAIRE_ADMIN_collecte ;
@@ -74,7 +84,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		FROM spip_articles WHERE statut='publie'
 		AND id_article = $id_article")
 		AND spip_fetch_array($s)) {
-			include_local ("inc-stats.php3");
+			include_local ("inc-stats");
 			$r = afficher_raccourci_stats($id_article);
 			$visites = $r['visites'];
 			$popularite = $r['popularite'];

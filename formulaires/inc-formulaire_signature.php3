@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 //
@@ -84,8 +94,8 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 	if (!$var_confirm) return $confirm;
 	include_local(_FILE_CONNECT);
 	if ($GLOBALS['db_ok']) {
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_filtres.php3");
+		include_ecrire("inc_texte");
+		include_ecrire("inc_filtres");
 
 		// Eviter les doublons
 		$lock = "petition $id_article $var_confirm";
@@ -149,8 +159,8 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
 					// invalider les pages ayant des boucles signatures
-					include_ecrire('inc_invalideur.php3');
-					include_ecrire('inc_meta.php3');
+					include_ecrire('inc_invalideur');
+					include_ecrire('inc_meta');
 					suivre_invalideur("id='varia/pet$id_article'");
 	
 					$confirm= (_T('form_pet_signature_validee'));
@@ -174,9 +184,9 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	if ($GLOBALS['db_ok']) {
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_filtres.php3");
-		include_ecrire("inc_mail.php3");
+		include_ecrire("inc_texte");
+		include_ecrire("inc_filtres");
+		include_ecrire("inc_mail");
 
 		// Eviter les doublons
 		$lock = "petition $id_article $adresse_email";
@@ -220,7 +230,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				if (!$nom_site) {
 					return _T('form_indiquer_nom_site');
 				}
-				include_ecrire("inc_sites.php3");
+				include_ecrire("inc_sites");
 	
 				if (!recuperer_page($url_site)) {
 					return _T('form_pet_url_invalide');
@@ -279,7 +289,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 
 
 function test_pass() {
-	include_ecrire("inc_acces.php3");
+	include_ecrire("inc_acces");
 	for (;;) {
 		$passw = creer_pass_aleatoire();
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";

@@ -1,8 +1,18 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_ecrire('inc_abstract_sql.php3');
+include_ecrire('inc_abstract_sql');
 
 // Balise independante du contexte
 global $balise_FORMULAIRE_INSCRIPTION_collecte ;
@@ -61,7 +71,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 // cas general: controler juste que l'adresse n'est pas vide et est valide
 
 function test_inscription_dist($mode, $mail) {
-	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_filtres');
 	return email_valide($mail);
 }
 
@@ -136,7 +146,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
 	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
 
-	include_ecrire("inc_mail.php3");
+	include_ecrire("inc_mail");
 	if (envoyer_mail($ids['email'],
 			 "[$nom_site_spip] "._T('form_forum_identifiants'),
 			 $message))
@@ -146,7 +156,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 }
 
 function test_login($nom, $mail) {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	$nom = strtolower(translitteration($nom));
 	$login_base = ereg_replace("[^a-zA-Z0-9_]", "_", $nom);
 
@@ -175,7 +185,7 @@ function test_login($nom, $mail) {
 }
 
 function creer_pass_pour_auteur($id_auteur) {
-	include_ecrire("inc_acces.php3");
+	include_ecrire("inc_acces");
 	$pass = creer_pass_aleatoire(8, $id_auteur);
 	$mdpass = md5($pass);
 	$htpass = generer_htpass($pass);
