@@ -55,7 +55,8 @@ if ($changer_config == 'oui') {
 		'activer_sites',
 		'proposer_sites',
 		'activer_syndic',
-		'visiter_sites'
+		'visiter_sites',
+		'moderation_sites'
 	);
 	while (list(,$i) = each($liste_meta))
 		if ($$i) ecrire_meta($i, $$i);
@@ -577,6 +578,28 @@ debut_cadre_relief("site-24.gif");
 			echo " <B><label for='syndic_on'>Utiliser la syndication</label></B> ";
 			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' id='syndic_off'>";
 			echo " <label for='syndic_off'>Ne pas utiliser la syndication</label> ";
+
+			// Moderation par defaut des sites syndiques
+			echo "<p><hr><p align='left'>";
+			echo propre("Les liens issus des sites syndiqu&eacute;s peuvent
+				&ecirc;tre bloqu&eacute;s a priori ; le r&eacute;glage
+				ci-dessous indique le r&eacute;glage par d&eacute;faut des
+				sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
+				est ensuite possible, de toutes fa&ccedil;ons, de
+				d&eacute;bloquer chaque lien individuellement, ou de
+				choisir, site par site, de bloquer les liens &agrave; venir
+				de tel ou tel site.");
+			if (lire_meta("moderation_sites") == 'oui') {
+				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='syndic_on' CHECKED>";
+				echo " <B><label for='mod_syndic_on'>Bloquer les liens a priori</label></B> ";
+				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='syndic_off'>";
+				echo " <label for='mod_syndic_off'>Ne pas bloquer</label> ";
+			} else {
+				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='syndic_on'>";
+				echo " <label for='mod_syndic_on'>Bloquer les liens a priori</label> ";
+				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='syndic_off' CHECKED>";
+				echo " <B><label for='mod_syndic_off'>Ne pas bloquer</label></B> ";
+			}
 
 			// Si indexation, activer/desactiver pages recuperees
 

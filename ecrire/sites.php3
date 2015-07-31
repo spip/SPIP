@@ -76,8 +76,10 @@ if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	$query = "DELETE FROM spip_syndic WHERE (statut = 'refuse') && (maj < $mydate)";
 	$result = spip_query($query);
 
-	$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication) ".
-		"VALUES ('Site introuvable', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non')";
+	$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
+
+	$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
+		"VALUES ('Site introuvable', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
 	$result = spip_query($query);
 	$id_syndic = mysql_insert_id();
 }
