@@ -51,16 +51,20 @@ function debut_admin($script, $action, $commentaire='') {
 			array(
 				'fichier' => array(
 					'label' => _T('info_creer_repertoire'),
-					'valeur' => ''
+					'valeur' => $signal
 					)),
 			('<br />'
 			 . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
 			 . bouton_suivant(_T('recharger_page'))))
 		. "</form>";
 
+	// code volontairement tordu:
+	// provoquer la copie dans le presse papier du nom du repertoire
+	// en remettant a vide le champ pour que ça marche aussi en cas
+	// de JavaScript inactif.
 	echo minipres(_T('info_action', array('action' => $action)),
-		 $form,
-		 " onload='barre_inserer(\"$signal\", document.forms[0].fichier)'");
+		 $form
+,		 " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'");
 	exit;
 }
 

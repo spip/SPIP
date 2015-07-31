@@ -23,7 +23,7 @@ $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
 
 
-echo "<br><br><br>";
+echo "\n<br /><br /><br />";
 gros_titre(_T('titre_admin_effacer'));
 echo barre_onglets("administration", "effacer");
 
@@ -52,23 +52,23 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 debut_cadre_relief();
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
+echo "\n<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='8' WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='3' COLOR='#FFFFFF'>";
 echo _T('texte_effacer_base')."</FONT></B></TD></TR>";
 
 echo "<tr><td class='serif'>";
 
-echo "\n<p align='justify'>";
-echo '<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right">';
+echo "\n<p align='justify'>\n";
+echo '<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right" />';
 echo _T('texte_admin_effacer_01');
 
-echo "<CENTER>";
+echo "\n<CENTER>";
 
 echo debut_boite_alerte();
 
 echo "\n<div class='serif'>";
-echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
+echo "\n<b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
  echo  generer_url_post_ecrire("delete_all", "reinstall=non"),
    "\n<div align='right'>",
@@ -79,14 +79,14 @@ echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
 echo fin_boite_alerte();
 
-echo "</CENTER>";
+echo "</CENTER></p>";
 
 echo "</td></tr>";
 echo "</TABLE>";
 
 fin_cadre_relief();
 
-echo "<BR>";
+echo "<br />";
 
 
 

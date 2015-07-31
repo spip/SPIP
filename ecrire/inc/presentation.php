@@ -235,7 +235,7 @@ function debut_boite_alerte() {
 
 // http://doc.spip.org/@fin_boite_alerte
 function fin_boite_alerte() {
-	return "</td></tr></table></td></tr></table>";
+	return "</td></tr></table></td></tr></table></p>";
 }
 
 

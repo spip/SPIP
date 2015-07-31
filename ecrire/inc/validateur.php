@@ -67,16 +67,18 @@ function inc_validateur_dist($data)
 
 function validerElement($parser, $name)
 {
-  global $phraseur_xml;
+	global $phraseur_xml;
 
-	if ($phraseur_xml->elements 
-	AND !in_array($name, $phraseur_xml->elements))
+	if (!$phraseur_xml->elements) return;
+
+	if (!in_array($name, $phraseur_xml->elements))
 
 		$phraseur_xml->err[]= $name 
 		. '&nbsp;:&nbsp;'
 		. _L('balise inconnue ')
 		. _L('ligne ')
-		. xml_get_current_line_number($parser);
+		. xml_get_current_line_number($parser)
+		. '<br />';
 }
 
 
@@ -92,7 +94,8 @@ function validerAttribut($parser, $name, $val, $bal)
 		. _L('attribut inconnu de ')
 		. $bal 
 		. _L(' ligne ')
-		. xml_get_current_line_number($parser);
+		. xml_get_current_line_number($parser)
+		. '<br />';
 }
 
 
