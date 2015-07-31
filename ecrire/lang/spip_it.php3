@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_it'] = array(
 'avis_erreur_fonction_contexte' => 'Errore di programmazione. Questa funzione non avrebbe dovuto essere chiamata in questo contesto.',
 'avis_erreur_mysql' => 'Errore MySQL ',
 'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<B>Attenzione! Il file @archive@ corrisponde ad
+'avis_erreur_version_archive' => '<MODIF> <B>Attenzione! Il file @archive@ corrisponde ad
 una versione di SPIP diversa da quella installata.</b>
 Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito, etc.
@@ -188,6 +188,11 @@ non &egrave; riconosciuto da tutti i browser.',
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
 'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => '<b>Problema nei diritti di accesso</b>',
+'dirs_repertoires_absents' => '<B>Le seguenti cartelle non sono state trovate: <ul>@bad_dirs@.</ul> </B>
+  <P>Probabilmente ci&ograve; &egrave; dovuto ad un\'errata formattazione delle lettere maiuscole o minuscole.
+  Verifica che le minuscole e le maiuscole delle cartelle coincidano con quelle visualizzate
+  qui sopra; se non &egrave; cos&igrave;, rinomina le cartelle utilizzando il tuo software FTP.
+  <P>Una volta effettuata questa correzione, potrai ',
 'dirs_repertoires_suivants' => '<B>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></b>
 <P>Utilizza un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida di installazione.
@@ -517,7 +522,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_contribution' => 'contributi dei forum',
 'info_copyright' => '&egrave; un software libero distribuito <a href=\'http://www.softwarelibero.it/gnudoc/gpl.it.txt\'>sotto licenza GPL.</a>',
-'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/it\'>SPIP</a>.',
+'info_copyright_doc' => '<MODIF> Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/it\'>SPIP</a>.',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
@@ -604,6 +609,7 @@ gli autori eliminati invece da un cestino.',
 'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati allo spazio
 pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
+'info_gerer_trad' => '<NEW> G&eacute;rer les liens de traduction ?',
 'info_grand_ecran' => 'Layout per monitor grandi',
 'info_groupe_important' => 'Gruppo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano  l\'invio automatico di email
@@ -634,6 +640,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_la_rubrique' => 'la sezione',
 'info_laisser_champs_vides' => 'lasciare questi campi vuoti)',
 'info_langue_defaut' => 'Lingua predefinita: ',
+'info_langue_interface' => '<NEW> Langue de l\'interface',
 'info_langue_principale' => 'Lingua predefinita del sito',
 'info_langues' => 'Lingua del sito',
 'info_langues_proposees' => 'Lingue proposte: ',
@@ -680,9 +687,13 @@ le informazioni contenute nel database sono probabilmente andate perse.<br>{{Rei
 'info_mots_cles_association' => 'Le parole chiave di questo gruppo possono essere associate:',
 'info_moyenne' => 'media: ',
 'info_multi_articles' => '<NEW> Activer le menu de langue sur les articles&nbsp;?',
-'info_multi_cet_article' => '<NEW> Cet article est en&nbsp;:',
-'info_multi_cette_rubrique' => '<NEW> Cette rubrique est en&nbsp;:',
+'info_multi_cet_article' => '<NEW> Langue utilis&eacute;e dans cet article&nbsp;:',
+'info_multi_cette_rubrique' => '<NEW> Langue utilis&eacute;e dans cette rubrique&nbsp;:',
+'info_multi_herit' => '<NEW> langue de la rubrique sup&eacute;rieure',
+'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
+  Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => '<NEW> Activer le menu de langue sur les rubriques&nbsp;?',
+'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => '<NEW> Multilinguisme',
 'info_nexen_1' => 'Il tuo hoster &egrave; Nexen Services.',
 'info_nexen_2' => 'La protezione della cartella <tt>ecrire/data/</tt> si deve fare con l\'intermediazione dello ',
@@ -1064,7 +1075,7 @@ siti esterni che puntano con un link al tuo (<i>referrer</i>)?',
 'login_login2' => 'Login (ID di connessione al sito):',
 'login_login_pass_incorrect' => '(Login o password errati.)',
 'login_motpasseoublie' => 'password&nbsp;dimenticata?',
-'login_non_securise' => 'Attenzione, questo modulo non &egrave; sicuro.
+'login_non_securise' => '<MODIF> Attenzione, questo modulo non &egrave; sicuro.
 Se non vuoi che la tua password possa essere intercettata sulla rete,
 devi attivare Javascript nel tuo browser e',
 'login_nouvelle_tentative' => 'Nuovo tentativo',
@@ -1072,6 +1083,7 @@ devi attivare Javascript nel tuo browser e',
 'login_pass2' => 'Password:',
 'login_preferez_refuser' => '<b>Se preferisci non accettare i cookie</b> c\'&egrave; un altro metodo (meno sicuro) per connettersi:',
 'login_recharger' => 'aggiorna questa pagina',
+'login_rester_identifie' => '<NEW> Rester identifi&eacute; quelques jours',
 'login_retour_public' => 'Ritorna al sito pubblico',
 'login_retour_site' => 'Ritorna al sito pubblico',
 'login_retoursitepublic' => 'ritorna&nbsp;al&nbsp;sito&nbsp;pubblico',
@@ -1163,11 +1175,11 @@ devi attivare Javascript nel tuo browser e',
 'onglet_affacer_base' => 'Svuota il database',
 'onglet_auteur' => 'L\'autore',
 'onglet_contenu_site' => 'Contenuto del sito',
-'onglet_evolution_visite' => 'Evoluzione delle visite',
+'onglet_evolution_visite_mod' => '<NEW> &Eacute;volution',
 'onglet_fonctions_avances' => 'Funzioni avanzate',
 'onglet_informations_personnelles' => 'Dati personali',
 'onglet_interactivite' => 'Interattivit&agrave;',
-'onglet_langue' => 'Lingue del sito',
+'onglet_langues' => '<NEW> Langues',
 'onglet_messagerie' => 'Messaggi',
 'onglet_messages_internes' => 'Messaggi interni',
 'onglet_messages_publics' => 'Messaggi pubblici',
@@ -1175,6 +1187,7 @@ devi attivare Javascript nel tuo browser e',
 'onglet_origine_visites' => 'Origine delle visite',
 'onglet_repartition_actuelle' => 'attualmente',
 'onglet_repartition_debut' => 'dall\'inizio',
+'onglet_repartition_lang' => '<NEW> par langues',
 'onglet_repartition_rubrique' => 'Ripartizione per rubriche',
 'onglet_save_restaur_base' => 'Salva/ripristina il database',
 'onglet_vider_cache' => 'Svuota la cache',
@@ -1236,7 +1249,7 @@ Potrai quindi inserire una nuova password e riconnetterti all\'area riservata.',
  compresi <i>tutti</i> i login dei redattori e degli amministratori. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella <i>ecrire/data/</i>.
 In fase di backup non dimenticare di recuperare integralmente anche la cartella <i>IMG/</i>, che contiene le immagini utilizzate negli articoli e nelle rubriche.',
-'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
+'texte_admin_tech_02' => '<MODIF> Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 Con l\'intenzione di aggiornare la versione di SPIP, si commette spesso l\'errore di salvare il database,
 pensando di doverlo cancellare per poi ripristinarlo ad aggiornamento effettuato...
 Per maggiori informazioni consulta <a href="http://www.spip.net/fr_article1489.html">la documentazione di SPIP</a>.',
@@ -1362,6 +1375,7 @@ Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste pro
 per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_mots_cles_dans_forum' => 'Vuoi consentire ai visitatori di selezionare delle parole chiave nei forum pubblici? (Attenzione: questa opzione &egrave; relativamente complessa da gestire in modo corretto.)',
 'texte_multilinguisme' => '<NEW> Si vous souhaitez g&eacute;rer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de s&eacute;lection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.',
+'texte_multilinguisme_trad' => '<NEW> Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes traductions d\'un article.',
 'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalit&agrave;)',
 'texte_non_fonction_referencement' => 'Puoi non utilizzare questa funzione automatica, e indicare direttamente gli elementi riguardanti il sito...',
 'texte_nouveau_message' => 'Nuovo messaggio',
@@ -1492,6 +1506,9 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_image_redacteur_02' => 'Redattore',
 'titre_image_visiteur' => 'Visitatore',
 'titre_joindre_document' => 'ALLEGA UN DOCUMENTO',
+'titre_langue_article' => '<NEW> LANGUE DE L\'ARTICLE',
+'titre_langue_breve' => '<NEW> LANGUE DE LA BR&Egrave;VE',
+'titre_langue_trad_article' => '<NEW> LANGUE ET TRADUCTIONS DE L\'ARTICLE',
 'titre_les_articles' => 'GLI ARTICOLI',
 'titre_liens_entrants' => 'I link odierni al tuo sito',
 'titre_mots_cles' => 'PAROLE CHIAVE',
@@ -1545,7 +1562,19 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_statistiques' => 'Statistiche del sito',
 'titre_suivi_petition' => 'Monitoraggio delle petizioni',
 'titre_syndication' => 'Syndication di siti',
-'titre_titre_document' => 'Titolo del documento:'
+'titre_titre_document' => 'Titolo del documento:',
+'trad_article_inexistant' => '<NEW> Il n\'y a pas d\'article portant ce num&eacute;ro.',
+'trad_article_traduction' => '<NEW> Toutes les versions de cet article&nbsp;:',
+'trad_deja_traduit' => '<NEW> Cet article est d&eacute;j&agrave; une traduction du pr&eacute;sent article.',
+'trad_delier' => '<NEW> Ne plus lier cet article &agrave; ces traductions',
+'trad_lier' => '<NEW> Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
+'trad_new' => '<NEW> &Eacute;crire une nouvelle traduction de cet article',
+'trad_reference' => '<NEW> (article de r&eacute;f&eacute;rence)',
+
+
+// CONFLIT
+'onglet_evolution_visite' => 'Evoluzione delle visite',
+'onglet_langue' => 'Lingue del sito'
 
 );
 

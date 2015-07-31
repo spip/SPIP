@@ -64,7 +64,10 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
-		include_ecrire ('lang/'.$module.'_fr.php3');
+		$fichier_lang = 'lang/'.$module.'_fr.php3';
+		if (file_exists($dir_ecrire.$fichier_lang)) {
+			include_ecrire ($fichier_lang);
+		}
 		$GLOBALS['i18n_'.$module.'_'.$lang] = $GLOBALS['i18n_'.$module.'_fr'];
 	}
 
