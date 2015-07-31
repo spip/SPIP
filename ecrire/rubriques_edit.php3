@@ -177,7 +177,7 @@ if ($options=="avancees") {
 if ($options == "avancees" OR $descriptif) {
 	echo "<B>Descriptif rapide</B><BR>";
 	echo "(Contenu de la rubrique en quelques mots.)<BR>";
-	echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+	echo "<TEXTAREA NAME='descriptif' CLASS='forml' style='padding: 5px;' ROWS='7' COLS='40' wrap=soft>";
 	echo $descriptif;
 	echo "</TEXTAREA><P>\n";
 }
@@ -187,7 +187,7 @@ else {
 
 echo "<B>Texte explicatif</B>";
 echo aide ("raccourcis");
-echo "<BR><TEXTAREA NAME='texte' ROWS='20' CLASS='forml' COLS='40' wrap=soft>";
+echo "<BR><TEXTAREA NAME='texte' ROWS='25' CLASS='forml' style='padding: 5px;' COLS='40' wrap=soft>";
 echo $texte;
 echo "</TEXTAREA>\n";
 

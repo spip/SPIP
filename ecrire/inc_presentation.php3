@@ -1751,7 +1751,7 @@ function creer_colonne_droite(){
 		$deja_colonne_droite = true;
 		
 		if ($flag_centre_large) {
-			$espacement = 27;
+			$espacement = 17;
 			$largeur = 140;
 		}
 		else {
@@ -1861,7 +1861,7 @@ function debut_droite() {
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)
-		$largeur = 580;
+		$largeur = 600;
 	else
 		$largeur = 500;
 	
