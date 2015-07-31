@@ -13,11 +13,7 @@
 
 
 		[<!-- Le logo auto-detecte -->
-		<div style='height:1px;'>(#ENV**{logo}|image_reduire{180,999}|inserer_attribut{style,
-			position: relative;
-			#LANG_LEFT: -220px;
-			top: -60px;
-		})</div>]
+		<div class='previsu_logo_site'>(#ENV**{logo}|image_reduire{180,999})</div>]
 
 		<ul>
 		[(#ENV{id_syndic}|intval|>{0}|sinon{#ENV{url_site}}|non)

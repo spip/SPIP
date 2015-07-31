@@ -53,6 +53,18 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 	// Envoi depuis le formulaire d'analyse automatique d'un site
 	if (_request('ajoute_url_auto') AND strlen(vider_url($u = _request('url_auto')))) {
 		if ($auto = analyser_site($u)) {
+			// Si pas de logo, on va le chercher dans le ou les feeds
+			if(isset($auto['url_syndic']) && !$auto['logo'] && ($auto['url_syndic'] != _request('ajouter_url_auto')) && preg_match(',^select: (.+),', $auto['url_syndic'], $regs)){
+				$url_syndic = str_replace('select: ','',$auto['url_syndic']);
+				$feeds = explode(' ',$regs[1]);
+				foreach ($feeds as $feed) {
+					if(($auto_syndic = analyser_site($feed)) && isset($auto_syndic['format_logo'])){
+						$auto['format_logo'] = $auto_syndic['format_logo'];
+						$auto['logo'] = $auto_syndic['logo'];
+						break;
+					}
+				}
+			}
 			foreach($auto as $k=>$v){
 				set_request($k,$v);
 			}
