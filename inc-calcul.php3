@@ -11,13 +11,6 @@ include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
-if (file_exists("inc-urls.php3")) {
-	include_local ("inc-urls.php3");
-}
-else {
-	include_local ("inc-urls-dist.php3");
-}
-
 include_local("inc-calcul_mysql3.php");
 include("inc-calcul_html4.php");
 
@@ -44,7 +37,7 @@ if (file_exists("mes_fonctions.php3"))
 # - des filtres
 # - des fonctions de traduction de balise (cf inc-index-squel)
 
-function cherche_page($fond, $cache, $contexte, $id_rubrique, $lang='') 
+function cherche_page($cache, $contexte, $fond, $id_rubrique, $lang='') 
 {
   global $dossier_squelettes;
 
@@ -75,35 +68,21 @@ function cherche_page($fond, $cache, $contexte, $id_rubrique, $lang='')
 function cherche_page_incluse($cache, $contexte)
 {
   $contexte_inclus = $contexte['contexte'];
-  return cherche_page($contexte['fond'], 
-		      $cache,
+  return cherche_page($cache,
 		      $contexte_inclus,
+		      $contexte['fond'], 
 		      $contexte_inclus['id_rubrique']);
 }
 
-function calculer_page_globale($cache, $fond, $var_recherche)
+function calculer_page_globale($cache, $contexte, $fond, $var_recherche)
  {
    global $spip_lang;
-	global $contexte;	// va avec le truc sale ci-dessous :-)
-
-   $contexte = $GLOBALS['HTTP_GET_VARS'];
-   if ($GLOBALS['date'])
-    $contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
-  else
-    $contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
-
-	// Analyser les URLs personnalisees (inc-urls-...)
-	/* attention c'est assez sale */
-	$fichier_requete = $GLOBALS['REQUEST_URI'];
-	$fichier_requete = strtr($fichier_requete, '?', '&');
-	$fichier_requete = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
-	recuperer_parametres_url($fond, $fichier_requete);
-	/* fin du truc sale */
   
    $id_rubrique_fond = 0;
    $lang = $contexte['lang'];	// si inc-urls veut fixer la langue
    if ($r = cherche_rubrique_fond($contexte, $lang ? $lang : lire_meta('langue_site')))
      list($id_rubrique_fond, $lang) = $r;
+
   $signale_globals = "";
   foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe', 'id_document') as $val)
@@ -114,7 +93,7 @@ function calculer_page_globale($cache, $fond, $var_recherche)
   if (!$GLOBALS['forcer_lang'])
     lang_select($lang);
 
-  $page = cherche_page($fond, $cache, $contexte, $id_rubrique_fond, $spip_lang);
+  $page = cherche_page($cache, $contexte, $fond, $id_rubrique_fond, $spip_lang);
   $texte = $page['texte'];
 
   if ($var_recherche)
@@ -150,9 +129,10 @@ function cherche_page_incluante($cache, $contexte)
 	}
     }
   }
-  return calculer_page_globale($cache,
-			       $contexte['fond'],
-			       $contexte['var_recherche']);
+  return calculer_page_globale( $cache,
+				$contexte['contexte'],
+				$contexte['fond'],
+				$contexte['var_recherche']);
 }
 
 # Fonctions appelées par les squelettes (insertion dans le code trop lourde)

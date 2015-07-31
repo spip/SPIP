@@ -18,8 +18,11 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
     $ptr_delais++;
     $pile_delais[$ptr_delais] = $delais_inclus;
 
-    spip_log("Inclusion ($cache_incluant)");
-    $cle = nom_du_cache($fond, $contexte_inclus);
+    spip_log("Inclusion dans $cache_incluant");
+    $cle = $fond;
+    if ($contexte_inclus)
+      while(list($k, $v) = each($contexte))$cle .= "&$k=$v";
+
     $page = ramener_cache($cle,
 			  'cherche_page_incluse',
 			  array('fond' => $fond, 
@@ -63,21 +66,6 @@ function admin_page($cached, $texte)
     return envoi_script($a) . $texte;
     }
 }
-
-function nom_du_cache($fond, $contexte)
- {
-   // Tenir compte de l'URL, pour le jour ou` on mutualisera Spip 
-   $appel = $GLOBALS['PHP_SELF'];
-   $appel = substr($appel,0, strrpos($appel, '/')+1) . $fond;
-   // Virer les variables internes. 
-   // Faudrait rationnaliser pour ne pas interfe'rer avec contexte_inclus
-   if ($contexte)
-     while(list($k, $v) = each($contexte))
-       {if (!(ereg('((var_*)|recalcul)', $k)))
-	   $appel .= "=$v";
-       }
-   return $appel;
- }
 
 function envoi_script($code)
 {
