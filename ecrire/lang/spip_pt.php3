@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-'0_langue' => 'portugu&ecirc;s [pt]',
+'0_langue' => '<MODIF>portugu&ecirc;s [pt]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
 
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'A coluna  @col@ n&atilde;o existe',
 'avis_connexion_echec_1' => 'A conex&atilde;o ao servidor  MySQL falhou.',
 'avis_connexion_echec_2' => 'Volte &agrave; p&aacute;gina precedente e verifique as informa&ccedil;&otilde;es que forneceu ',
-'avis_connexion_echec_3' => '<B>N.B.</B> Em muitos servidores, deve <B>pedir</B> a activa&ccedil;&atilde;o do seu acesso &agrave; base MySQL antes de poder utiliz&aacute;-la. Se n&atilde;o conseguir a conex&atilde;o, verifique que efectuou essa exig&ecirc;ncia',
+'avis_connexion_echec_3' => '<MODIF><B>N.B.</B> Em muitos servidores, deve <B>pedir</B> a activa&ccedil;&atilde;o do seu acesso &agrave; base MySQL antes de poder utiliz&aacute;-la. Se n&atilde;o conseguir a conex&atilde;o, verifique que efectuou essa exig&ecirc;ncia',
 'avis_connexion_ldap_echec_1' => 'A conex&atilde;o ao servidor LDAP falhou',
 'avis_connexion_ldap_echec_2' => 'Volte &agrave; p&aacute;gina precedente e verifique as informa&ccedil;&otilde;es que forneceu ',
 'avis_connexion_ldap_echec_3' => 'Alternativamente, n&atilde;o utilize o suporte LDAP para importar utilizadores.',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erro de programa&ccedil;&atilde;o. N&atilde;o se dve chamar esta fun&ccedil;&atilde;o neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro na salvaguarda  (@type@ @id_objet@) !',
-'avis_erreur_version_archive' => '<B>Aten&ccedil;&atilde;o! O ficheiro @archive@ corresponde &agrave;
+'avis_erreur_version_archive' => '<MODIF><B>Aten&ccedil;&atilde;o! O ficheiro @archive@ corresponde &agrave;
     uma  vers&atilde;o de SPIP diferente da que instalou  
     </B> Vai ter muitas 
  dificuldades:riscos de destru&ccedil;&atilde;o da sua base de    
@@ -57,7 +57,7 @@ dados, disfuncionamentos diversos do s&iacute;tio, etc.    N&atilde;o
  valide este pedido de importa&ccedil;&atilde;o.   <p>Para mais
     informa&ccedil;&otilde;es, veja<A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 a documenta&ccedil;&atilde;o de SPIP</A>.',
-'avis_espace_interdit' => '<B>Espa&ccedil;o proibido</B><p>SPIP j&aacute; est&aacute; instalado.',
+'avis_espace_interdit' => '<MODIF><B>Espa&ccedil;o proibido</B><p>SPIP j&aacute; est&aacute; instalado.',
 'avis_lecture_noms_bases_1' => 'O programa de instala&ccedil;&atilde;o n&atilde;o conseguiu ler os nomes das bases de dados instaladas. ',
 'avis_lecture_noms_bases_2' => 'Ou nenhuma base est&aacute; dispon&iacute;vel, ou a fun&ccedil;&atilde;o que permite listar as bases foi desactivada
  por raz&otilde;es de seguran&ccedil;a( o que &eacute; o caso em muitos h&oacute;spedes).  ',
@@ -249,15 +249,21 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'ver&atilde;o',
 'date_saison_4' => 'outono',
+'diff_para_ajoute' => 'Paragrafo  acrescentado',
+'diff_para_deplace' => 'Paragrafo alterado',
+'diff_para_supprime' => 'Paragrafo suprimido',
+'diff_texte_ajoute' => 'texto acrescentado',
+'diff_texte_deplace' => 'Texto alterado',
+'diff_texte_supprime' => 'Texto suprimido',
 'dirs_commencer' => 'afim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
-'dirs_preliminaire' => ' Preliminar : <B>Resolver os problemas de acesso</B>',
+'dirs_preliminaire' => '<MODIF> Preliminar : <B>Resolver os problemas de acesso</B>',
 'dirs_probleme_droits' => '<b>Problema de direitos de acesso</b>',
-'dirs_repertoires_absents' => '<B>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
+'dirs_repertoires_absents' => '<b>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
  acima; se n&atilde;o for o caso, renomeie os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
-  <P>Terminada esta opera&ccedil;&atilde;o, poder&aacute;',
-'dirs_repertoires_suivants' => '<B>Os seguintes repert&oacute;rios n&atilde;o s&atilde;o acess&iacute;veis em escrita&nbsp;: <ul>@bad_dirs@.</ul> </B>
+  <p/>Terminada esta opera&ccedil;&atilde;o, poder&aacute;',
+'dirs_repertoires_suivants' => '<MODIF><B>Os seguintes repert&oacute;rios n&atilde;o s&atilde;o acess&iacute;veis em escrita&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Para remediar, utilize o seu cliente FTP para resolver os direitos de acesso de cada um
   desses repert&oacute;rios. O procedimento est&aacute; explicado em pormenor no manual de instala&ccedil;&atilde;o.
   <P>Uma vez efectuada essa manipula&ccedil;&atilde;o, poder&aacute;',
@@ -385,10 +391,9 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'forum_attention_trois_caracteres' => '<b>Aten&ccedil;&atilde;o&nbsp;!</b> o seu t&iacute;tulo contem menos de tr&ecirc;s car&aacute;cteres.',
 'forum_avez_selectionne' => 'Seleccionou&nbsp;:',
 'forum_cliquer_retour' => 'Clicar <a href=\'@retour_forum@\'>ici</a> para continuar',
-'forum_creer_paragraphes' => '(Para criar par&aacute;grafos, deixar simplesmente linhas vazias',
 'forum_forum' => 'f&oacute;rum',
 'forum_info_modere' => 'Este f&oacute;rum est&aacute; moderado a priori&nbsp;: a sua contribui&ccedil;&atilde;o s&oacute; aparecer&aacute; depois de ser validada por um administrador do s&iacute;tio.',
-'forum_lien_hyper' => '<B>La&ccedil;o hipertexto</B> (opcional)',
+'forum_lien_hyper' => '<MODIF><B>La&ccedil;o hipertexto</B> (opcional)',
 'forum_message_definitif' => 'Mensagem definitiva: mandar ao s&iacute;tio',
 'forum_message_trop_long' => 'A sua mensagem &eacute; demasiado comprida. O tamanho m&aacute;ximo &eacute; 20000 car&aacute;cteres.',
 'forum_ne_repondez_pas' => 'N&atilde;o responder para este mail mas no f&oacute;rum ao endere&ccedil;o seguinte:',
@@ -397,7 +402,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensagem posta@parauteur@ depois do seu artigo',
 'forum_probleme_database' => 'Problema de base de dados, a sua mensagem n&atilde;o foi registada.',
-'forum_qui_etes_vous' => '<B>Quem &eacute; voc&ecirc;  ?</B> (opcional)',
+'forum_qui_etes_vous' => '<MODIF><B>Quem &eacute; voc&ecirc;  ?</B> (opcional)',
 'forum_texte' => 'Texto da sua mensagem',
 'forum_titre' => 'T&iacute;tulo',
 'forum_titre_erreur' => 'Erro...',
@@ -614,7 +619,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste s&iacute;tio. Receber&aacute; ent&atilde;o  por correio electr&oacute;nico, os an&uacute;ncios de artigos e de not&iacute;cias propostos para publica&ccedil;&atilde;o.',
 'info_confirmer_passe' => 'Confirmar esta nova palavra-passe',
 'info_connexion_base' => 'Segunda etapa: <B>Teste de conex&atilde;o &agrave; base</B>',
-'info_connexion_ldap_ok' => 'A conex&atilde;o LDAP resultou.</B>Pode passar para a etapa seguinte.',
+'info_connexion_ldap_ok' => '<MODIF>A conex&atilde;o LDAP resultou.</B>Pode passar para a etapa seguinte.',
 'info_connexion_mysql' => 'Primeira etapa : <B>A sua conex&atilde;o MySQL<B>',
 'info_connexion_ok' => 'A conex&atilde;o resultou',
 'info_connexion_refusee' => 'Conex&atilde;o recusada',
@@ -703,11 +708,11 @@ entre os participantes do s&iacute;tio. Pode activar ou
  os redactores registados. Pode, a seguir, activar um
  f&oacute;rum suplementar, reservado apenas aos administradores',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
-'info_gauche_admin_effacer' => '<B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica.Algumas d&atilde;o ocasi&atilde;o a um processo de autentifica&ccedil;&atilde;o espec&iacute;fica, que requer ter um acesso FTP ao s&iacute;tio Web.',
-'info_gauche_admin_tech' => '<B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias
+'info_gauche_admin_effacer' => '<MODIF><B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica.Algumas d&atilde;o ocasi&atilde;o a um processo de autentifica&ccedil;&atilde;o espec&iacute;fica, que requer ter um acesso FTP ao s&iacute;tio Web.',
+'info_gauche_admin_tech' => '<MODIF><B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias
  fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica.Algumas d&atilde;o ocasi&atilde;o a um processo de autentifica&ccedil;&atilde;o espec&iacute;fica, que
  requer ter um acesso FTP ao s&iacute;tio Web.',
-'info_gauche_admin_vider' => '<B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias
+'info_gauche_admin_vider' => '<MODIF><B>Esta p&aacute;gina &eacute; s&oacute; acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.</B><P>D&aacute; acesso &agrave;s v&aacute;rias
  fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica.Algumas d&atilde;o ocasi&atilde;o a um processo de autentifica&ccedil;&atilde;o espec&iacute;fica, que
  requer ter um acesso FTP ao s&iacute;tio Web.',
 'info_gauche_auteurs' => 'Encontrar&aacute; aqui todos os autores do s&iacute;tio.
@@ -730,9 +735,19 @@ entre os participantes do s&iacute;tio. Pode activar ou
  mails a partir dos seus  servidores. Nesse caso, as seguintes
  funcionalidadesde SPIP n&atilde;o funcionar&atilde;o.',
 'info_hier' => 'ontem&nbsp;:',
+'info_historique' => '<NEW>R&eacute;visions&nbsp;:',
+'info_historique_activer' => 'activar o seguimento das revisoes',
+'info_historique_affiche' => 'visualizar esta versao',
+'info_historique_comparaison' => 'compara&ccedil;ao',
+'info_historique_desactiver' => 'desactivar o seguimento das revisoes',
+'info_historique_lien' => 'visualizar o historico',
+'info_historique_texte' => 'O seguimento das revisoes permite de conservar um historico de todas as  altera&ccedil;oes  fornecidas ao conteudo dum artigo, e  de visualizar as diferen&ccedil;as entre as versoes sucessiveis',
+'info_historique_titre' => 'seguimento das revisoes',
 'info_identification_publique' => 'A sua identidade p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
 'info_image_process' => 'Seleccione o melhor m&eacute;todo de fabricar as vinhetas clicando sobre a imagem correspondente.',
+'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, entao o servidor que acolhe seu sitio nao foi configurado para utilizar tais ferramentas. Se deseja utilizar essas fun&ccedil;oes, contacte o responsavel tecnico e pessa as exten&ccedil;oes  &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => 'M&eacute;thodo de fabrica&ccedil;ao das  vinhetas',
 'info_impossible_lire_page' => '<B>Erro !</B> Imposs&iacute;vel ler a p&aacute;gina<tt><html>@test_proxy@</html></tt> atrav&eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
@@ -1453,7 +1468,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
   mas n&atilde;o foram directamente
  inseridos nele. Conforme a pagina&ccedil;&atilde;o do s&iacute;tio p&uacute;blico,
   poder&atilde;o aparecer sob forma de documentos anexados.',
-'texte_documents_joints' => 'Pode autorizar o acr&eacute;scimo de documentos (ficheiros bur&oacute;ticos, imagens,
+'texte_documents_joints' => '<MODIF>Pode autorizar o acr&eacute;scimo de documentos (ficheiros bur&oacute;ticos, imagens,
   multim&iacute;dia, etc.) aos artigos e/ou &agrave;s rubricas. esses ficheiros
 podem depois ser referenciados no
  artigo, ou exibidos separadamente.<p>',
@@ -1467,7 +1482,7 @@ podem depois ser referenciados no
   Notar bem esta refer&ecirc;ncia, voltar a tentar o nivelamento
 , e enfim verificar que as imagens aparecem
  sempre nos artigos.',
-'texte_fichier_authent' => '<b>SPIP deve criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repert&oacute;rio<tt>ecrire/data/<tt> ?</b><p>
+'texte_fichier_authent' => '<MODIF><b>SPIP deve criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repert&oacute;rio<tt>ecrire/data/<tt> ?</b><p>
   Estes ficheiros podem servir-lhepara restringir o acesso aos autores
 e administradores em outros lugares do seu s&iacute;tios
 (programa externo de estat&iacute;sticas, por exemplo).<p>
@@ -1536,7 +1551,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 'texte_nouveau_message' => 'Nova mensagem',
 'texte_nouveau_mot' => 'Nova palavra',
 'texte_nouvelle_version_spip_1' => 'Instalou uma nova vers&atilde;o de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nova vers&atilde;o requer uma actualiza&ccedil;&atilde;o mais completado que de costume. Se for webmestre do s&iacute;tio, favor apagar o ficheiro <tt>inc_connect.php3</tt> do repert&oacute;rio <tt>ecrire</tt> e retomar a instala&ccedil;&atilde;oafim de actualizar os seus par&acirc;metros de conex&atilde;o &agrave; base de dados. <p> (NB.&nbsp;: se esqueceu os seus par&acirc;metros de conex&atilde;o,veja no ficheiro <tt>inc_connect.php3</tt> antes de suprimir...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Esta nova vers&atilde;o requer uma actualiza&ccedil;&atilde;o mais completado que de costume. Se for webmestre do s&iacute;tio, favor apagar o ficheiro <tt>inc_connect.php3</tt> do repert&oacute;rio <tt>ecrire</tt> e retomar a instala&ccedil;&atilde;oafim de actualizar os seus par&acirc;metros de conex&atilde;o &agrave; base de dados. <p> (NB.&nbsp;: se esqueceu os seus par&acirc;metros de conex&atilde;o,veja no ficheiro <tt>inc_connect.php3</tt> antes de suprimir...)',
 'texte_operation_echec' => 'Volte &agrave; p&aacute;gina precedente, seleccione uma outra base ou crie uma nova. Verifique as informa&ccedil;&otilde;es fornecidas pelo seu hospedeiro.',
 'texte_plan_trad' => 'Esta p&aacute;gina permite-lhe visualizar o estado das tradu&ccedil;&otilde;es para a l&iacute;ngua escolhida. 
   A p&aacute;gina exibe os artigos cuja tradu&ccedil;&atilde;o est&aacute; em curso, os artigos cuja tradu&ccedil;&atilde;odeve ser actualizada,
@@ -1566,7 +1581,7 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'artigo referenciado no seu s&iacute;tio SPIP, mas redirigido para uma outra URL.',
 'texte_referencement_automatique' => '<b>Referenciamento automatizado de um s&iacute;tio</b><br>Pode referenciar rapidamente um s&iacute;tio Web indicando a seguir o endere&ccedil;o URL desejado, ou o endere&ccedil;o doseu backend. SPIP vai recuperar automaticamente as informa&ccedil;&otilde;es relativas a esse s&iacute;tio (t&iacute;tulo, descri&ccedil;&atilde;o...).',
-'texte_requetes_echouent' => '<b>Quando alguns pedidos MySQL falharem
+'texte_requetes_echouent' => '<MODIF><b>Quando alguns pedidos MySQL falharem
  sistematicamente e sem zaz&atilde;o aparente, &eacute; poss&iacute;vel
  que seja por causa da  pr&oacute;pria base de dados
 .</b><p>
@@ -1665,7 +1680,7 @@ a SPIP pesquisar igualmente no texto dos
 'titre_config_fonctions' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
 'titre_config_groupe_mots_cles' => 'Configura&ccedil;&atilde;o dos grupos de palavras-chave',
 'titre_configuration' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
-'titre_connexion_ldap' => 'Op&ccedil;&otilde;es : <B>A sua conex&atilde;o LDAP</B>',
+'titre_connexion_ldap' => '<MODIF>Op&ccedil;&otilde;es : <B>A sua conex&atilde;o LDAP</B>',
 'titre_dernier_article_syndique' => '&uacute;ltimos artigos vinculados',
 'titre_documents_joints' => 'Documentos anexados',
 'titre_evolution_visite' => 'Evolu&ccedil;&atilde;o das visitas',
