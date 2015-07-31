@@ -20,9 +20,7 @@ include_spip('inc/meta');
 // http://doc.spip.org/@exec_config_contenu_dist
 function exec_config_contenu_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques ;
-
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	if (!autoriser('configurer', 'contenu')) {
 		echo _T('avis_non_acces_page');
 		echo fin_gauche(), fin_page();
 		exit;

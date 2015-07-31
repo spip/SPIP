@@ -19,7 +19,12 @@ include_spip('inc/meta');
 // http://doc.spip.org/@exec_config_multilang_dist
 function exec_config_multilang_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques;
+
+	if (!autoriser('configurer', 'multilang')) {
+		echo _T('avis_non_acces_page');
+		echo fin_gauche(), fin_page();
+		exit;
+	}
 
 	lire_metas();
 
@@ -29,12 +34,6 @@ function exec_config_multilang_dist()
 
 	echo "<br /><br /><br />";
 	gros_titre(_T('info_langues'));
-
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
-		exit;
-	}
 
 	init_config();
 

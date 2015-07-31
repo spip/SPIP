@@ -17,17 +17,18 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $flag_gz;
+  global $flag_gz;
 
  $commencer_page = charger_fonction('commencer_page', 'inc');
  echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
- if ($connect_statut != '0minirezo' ){
+ if (!autoriser('backup')){
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
 	exit;
  }
- if ($connect_toutes_rubriques) {
+
+ if ($GLOBALS['connect_toutes_rubriques']) {
 
 		debut_gauche();
 		echo "<br /><br /><br /><br />";

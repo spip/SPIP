@@ -76,8 +76,9 @@ function debut_admin($script, $action='', $commentaire='') {
 	}
 
 	// Si on est un super-admin, un bouton de validation suffit
-	// nom de l'autorisation a revoir... 'webmestre' veut tout et rien dire...
-	if (autoriser('webmestre')) {
+	// sauf dans les cas destroy
+	if (autoriser('webmestre')
+	AND $script != 'delete_all') {
 		if (_request('validation_admin') == $signal) {
 			spip_log ("Action super-admin: $action");
 			return;
