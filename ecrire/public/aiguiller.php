@@ -62,12 +62,12 @@ function traiter_appels_inclusions_ajax(){
 		include_spip('inc/actions');
 		if ($args = decoder_contexte_ajax($args)
 		AND $fond = $args['fond']) {
-			include_spip('public/parametrer');
+			include_spip('public/assembler');
 			$contexte = calculer_contexte();
 			$contexte = array_merge($args, $contexte);
 			$page = evaluer_fond($fond,$contexte);
 			$texte = $page['texte'];
-		} 
+		}
 		else 
 			$texte = _L('signature ajax bloc incorrecte');
 		ajax_retour($page['texte']);
@@ -95,7 +95,6 @@ function traiter_formulaires_dynamiques($get=false){
 
 	include_spip('inc/filtres');
 	if (($args = decoder_contexte_ajax($args,$form))===false) {
-		include_spip('inc/actions');
 		spip_log("signature ajax form incorrecte : $form");
 		return false; // continuons le hit comme si de rien etait
 	} else {
