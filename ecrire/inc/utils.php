@@ -632,17 +632,18 @@ function find_in_path ($filename) {
 				_DIR_RESTREINT
 			);
 
-		// Ajouter les repertoires des plugins
+	// Ajouter les repertoires des plugins
 	foreach ($GLOBALS['plugins'] as $plug)
-			array_unshift($path, _DIR_PLUGINS.$plug.'/');
+		array_unshift($path, _DIR_PLUGINS.$plug.'/');
 
-		// Ajouter squelettes/
+	// Ajouter squelettes/
 	array_unshift($path, _DIR_RACINE.'squelettes/');
 
-		// Et le(s) dossier(s) des squelettes nommes
+	// Et le(s) dossier(s) des squelettes nommes
 	if ($GLOBALS['dossier_squelettes'])
 		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
-			array_unshift($path, _DIR_RACINE.$d.'/');
+			array_unshift($path,
+				($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
 
 	foreach ($path as $dir) {
 		// ajouter un / eventuellement manquant a la fin
