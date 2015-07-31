@@ -534,6 +534,9 @@ function installe_un_plugin($plug,$infos){
 		if (!$ok) {
 			$prefix_install('install',$infos['prefix'],$version_cible);
 			$ok = $prefix_install('test',$infos['prefix'],$version_cible);
+			// vider le cache des definitions des tables
+			$trouver_table = charger_fonction('trouver_table','base');
+			$trouver_table(false);
 		}
 		return $ok; // le plugin est deja installe et ok
 	}
@@ -544,6 +547,9 @@ function installe_un_plugin($plug,$infos){
 		if (!$ok) {
 			spip_plugin_install('install',$infos['prefix'],$infos['version_base']);
 			$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+			// vider le cache des definitions des tables
+			$trouver_table = charger_fonction('trouver_table','base');
+			$trouver_table(false);
 		}
 		return $ok; // le plugin est deja installe et ok
 	}
