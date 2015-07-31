@@ -90,11 +90,12 @@ function liste_drapeau_edition ($id_auteur, $type = 'article') {
 		AND ($data[1] > time()-3600)
 		AND preg_match(",$type([0-9]+),", $objet, $regs)) {
 			$row = spip_fetch_array(spip_query(
-			"SELECT titre FROM spip_articles WHERE id_article=".$regs[1]
+			"SELECT titre, statut FROM spip_articles WHERE id_article=".$regs[1]
 			));
 			$articles_ouverts[] = array(
 				'id_article' => $regs[1],
-				'titre' => typo($row['titre'])
+				'titre' => typo($row['titre']),
+				'statut' => typo($row['statut'])
 			);
 		}
 	}

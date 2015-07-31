@@ -989,12 +989,12 @@ a.bouton_rotation:hover img {
 	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #404040;
 }
  
-.plan-articles {
+.plan-articles, .plan-articles-bloques {
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 }
-.plan-articles a {
+.plan-articles a, .plan-articles-bloques .publie, .plan-articles-bloques .prepa, .plan-articles-bloques .prop, .plan-articles-bloques .refuse, .plan-articles-bloques .poubelle {
 	display: block;
 	padding: 2px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 18px;
@@ -1009,19 +1009,19 @@ a.bouton_rotation:hover img {
 	background-color: #fff; 
 	text-decoration: none;
 }
-.plan-articles .publie {
+.plan-articles .publie, .plan-articles-bloques .publie {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-verte.gif);
 }
-.plan-articles .prepa {
+.plan-articles .prepa, .plan-articles-bloques .prepa {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-blanche.gif);
 }
-.plan-articles .prop {
+.plan-articles .prop, .plan-articles-bloques .prop {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-orange.gif);
 }
-.plan-articles .refuse {
+.plan-articles .refuse, .plan-articles-bloques .refuse {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-rouge.gif);
 }
-.plan-articles .poubelle {
+.plan-articles .poubelle, .plan-articles-bloques .poubelle {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=puce-poubelle.gif);
 }
 
