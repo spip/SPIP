@@ -229,6 +229,7 @@ ecrire/install/etape_ldap5.php -text
 ecrire/install/etape_sup1.php -text
 ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
+ecrire/iterateurs/iterateur.php -text
 ecrire/lang/ecrire_ast.php -text
 ecrire/lang/ecrire_ay.php -text
 ecrire/lang/ecrire_br.php -text
