@@ -15,19 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_auxiliaires
 function base_auxiliaires(&$tables_auxiliaires){
-$spip_petitions = array(
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"email_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
-		"site_obli"	=> "CHAR (3) DEFAULT '' NOT NULL",
-		"site_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
-		"message"	=> "CHAR (3) DEFAULT '' NOT NULL",
-		"texte"	=> "LONGTEXT DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_petitions_key = array(
-		"PRIMARY KEY"	=> "id_article");
-
-
 $spip_resultats = array(
  		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
 		"id"	=> "INT UNSIGNED NOT NULL",
