@@ -609,6 +609,7 @@ con una color que indica el estáu:',
 	'install_select_langue' => 'Escueye una llíngua y calca nel botón «siguiente» pa llanzar el procesu d\'instalación.',
 	'install_select_type_db' => 'Indicar el tipu de base de datos:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

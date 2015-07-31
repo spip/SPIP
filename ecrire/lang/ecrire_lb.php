@@ -565,6 +565,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'Wielt eng Sprooch a klickt op de Knäppche "Weider" fir d\'Ariichten ze starten.',
 	'install_select_type_db' => 'Gidd den Typ vun der Datebank un:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

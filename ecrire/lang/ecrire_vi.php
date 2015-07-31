@@ -571,6 +571,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'install_select_langue' => 'Chọn một ngôn ngữ, rồi bấm vào nút "Kế tiếp" để bắt đầu thể thức thiết trí.',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW

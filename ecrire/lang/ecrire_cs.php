@@ -604,6 +604,7 @@ ukazuje jejich stav:',
 	'install_select_langue' => 'Zvolte jazyk a spusťte instalaci klepnutím na tlačítko "Další".',
 	'install_select_type_db' => 'Indicate the type of database:', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW

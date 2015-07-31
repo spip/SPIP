@@ -565,6 +565,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'ဘာသာစကားကိုရွေးချယ်ပါ၊ ထို့နောက် စတင်ထည့်သွင်းခြင်း လုပ်ထုံးလုပ်နည်းများကို စတင်ရန်အတွက် \\"နောက်တခု\\" စာလုံးကိုနှိပ်ပါ',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW
