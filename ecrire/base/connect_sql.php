@@ -236,7 +236,9 @@ function spip_connect_main($connexion)
 	}
 
 	if (!($f = $connexion['select'])) return false;
-	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'"))
+	// en cas d'erreur select retourne la requette (is_string=true donc)
+	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'")
+	  OR is_string($r))
 		return false;
 	if (!($f = $connexion['fetch'])) return false;
 	$r = $f($r);
