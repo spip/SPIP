@@ -35,25 +35,26 @@ if(!jQuery.load_handlers) {
 		
 		return this._load( url, params, callback2, ifModified );
 	};
-	
-	
+
 	jQuery._ajax = jQuery.ajax;
 	
-	jQuery.ajax = function( type, url, data, ret, ifModified ) {
+	jQuery.ajax = function(type) {
 	  
 	  //If called by _load exit now because the callback has already been set
-	  if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type, url, data, ret, ifModified );
-	  // If only a single argument was passed in,
-		// assume that it is a object of key/value pairs
-		if ( !url ) {
-			var orig_complete = type.complete || function() {}; 
-	    type.complete = function(res,status) {triggerAjaxLoad(document);orig_complete(res,status);};
-		} else {
-			var orig_ret = ret || function() {};
-	    ret = function(res,status) {triggerAjaxLoad(document);orig_ret(res,status);};  
-	  }
+    if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type);
+		
+    var orig_complete = type.complete || function() {}; 
+    type.complete = function(res,status) {
+      //Do not fire OnAjaxLoad if the dataType is not html
+      var dataType = type.dataType;
+			var ct = res.getResponseHeader("content-type");
+			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
+			if(dataType == "" && !xml || dataType == "html") triggerAjaxLoad(document);
+			orig_complete(res,status);
+		};
 	
-	  return jQuery._ajax( type, url, data, ret, ifModified ); 
+	  return jQuery._ajax(type); 
 	
 	};
+
 }
