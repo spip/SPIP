@@ -270,6 +270,8 @@ dist/prive/rubrique_infos.html -text
 dist/prive/site_infos.html -text
 dist/prive/site_infos_fonctions.php -text
 dist/puce.gif -text
+dist/puce_prive.gif -text
+dist/puce_prive_rtl.gif -text
 dist/puce_rtl.gif -text
 dist/spip.png -text
 dist/spip_style.css -text
