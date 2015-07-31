@@ -21,8 +21,7 @@ spip_connect();
 // avec une variable d'URL nommee confirmer_forum 
 // Voir commentaires dans balise/formulaire_forum
 // http://doc.spip.org/@prevenir_auteurs
-function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
-	global $nom_site_forum, $url_site;
+function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut, $nom_site_forum, $url_site) {
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
@@ -255,6 +254,7 @@ function inc_forum_insert_dist() {
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
+	$url_site = vider_url($url_site); # pas de http://
 	spip_query("UPDATE spip_forum	SET id_parent = $id_forum,	id_rubrique = $id_rubrique,	id_article = $id_article,	id_breve = $id_breve,	id_syndic = $id_syndic,	id_auteur = $id_auteur,	id_thread = $id_thread,	date_heure = NOW(),							titre = ".spip_abstract_quote(corriger_caracteres($titre)).",			texte = ".spip_abstract_quote(corriger_caracteres($texte)).",			nom_site = ".spip_abstract_quote(corriger_caracteres($nom_site_forum)).",	url_site = ".spip_abstract_quote(corriger_caracteres($url_site)).",		auteur = ".spip_abstract_quote(corriger_caracteres($auteur)).",		email_auteur = ".spip_abstract_quote(corriger_caracteres($email_auteur)).",	ip = " . spip_abstract_quote($GLOBALS['ip']) . ",						statut = '$statut'	WHERE id_forum = $id_message");
 
 	// Entrer les mots-cles associes
@@ -276,7 +276,7 @@ function inc_forum_insert_dist() {
 	if ($afficher_texte <> 'non') {
 		unlink($file);
 		if ($GLOBALS['meta']["prevenir_auteurs"] == "oui")
-			prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
+			prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut, $nom_site_forum, $url_site);
 	}
 
 	// En cas de retour sur (par exemple) {#SELF}, on ajoute quand
