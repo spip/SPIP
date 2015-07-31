@@ -923,7 +923,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$c = memoriser_contexte_compil($p);
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
-				   "array('objet'=>'".$objet."','id_objet' => ".champ_sql($id_table_objet, $p) .")",
+				   "array('objet'=>'".$objet."','id_objet' => ".champ_sql($id_table_objet, $p) .",'$id_table_objet' => ".champ_sql($id_table_objet, $p) .")",
 				   "'trim'=>true, 'compil'=>array($c)",
 				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
