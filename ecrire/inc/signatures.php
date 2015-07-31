@@ -65,7 +65,6 @@ function signatures_edit($script, $id, $arg, $row) {
 		$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, $arg);
 		$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, $arg);
 
-		$res = '';
 		if  ($statut=="poubelle"){
 			$res = icone_inline (_T('icone_valider_signature'),
 				$retour_s,
@@ -89,21 +88,22 @@ function signatures_edit($script, $id, $arg, $row) {
 				false);
 			}
 		}
+
 	}
 
-	$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />\n";
+	$res .= "<div class='spip_small date'>".date_interface($date_time)."</div>\n";
 	if ($statut=="poubelle"){
-		$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />\n";
+		$res .= "<div class='spip_x-small info_statut'>"._T('info_message_efface')."</div>\n";
 	}
 	if (strlen($url_site)>6) {
-			if (!$nom_site) $nom_site = _T('info_site');
-			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />\n";
+		if (!$nom_site) $nom_site = _T('info_site');
+		$res .= "<div class='site'><span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a></div>\n";
 		}
 	if (strlen($ad_email)>0){
-		$res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a><br />\n";
+		$res .= "<div class='ad_email'><span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a></div>\n";
 	}
 
-	$res .= message_de_signature($row);
+	$res .= "<div class='texte'>" . message_de_signature($row) . "</div>";
 		
 	if (!$id) {
 		if ($r = sql_fetsel("titre, id_rubrique", "spip_articles", "id_article=$id_article")) {
@@ -112,27 +112,26 @@ function signatures_edit($script, $id, $arg, $row) {
 			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
 		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
 			$h2 = generer_url_ecrire_article($id_article);
-			$res .= "<br class='nettoyeur' /><a title='$id_article' href='"
+			$res .= "<div class='nettoyeur'></div><div class='reponse_a'><a title='$id_article' href='"
 			  . $h2
 			  . "'>"
 			  . typo($titre_a)
-			  . "</a><a style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
+			  . "</a><a ' class='reponse_a' style='float: $spip_lang_right; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
 			. typo($titre_r)
-			. " </a>";
+			. " </a></div>";
 		}
 	}
 
-		
-	$res = "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'>\n<tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+	$res = "<table class='signature' id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'>\n<tr><td class='verdana2 cartouche'>"
  		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
-		.  "</b></td></tr>"
-		.  "\n<tr><td style='background-color: #ffffff' class='serif'>"
+		.  "</td></tr>"
+		.  "\n<tr><td class='serif contenu'>"
 		. $res
 		. "</td></tr></table>\n";
 		
 	if ($statut=="poubelle") {
-			$res = "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>"
+		$res = "<table class='signature' width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td class='poubelle'>"
 			. $res
 			. "</td></tr></table>";
 	}
