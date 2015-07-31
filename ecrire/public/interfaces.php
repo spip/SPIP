@@ -284,6 +284,7 @@ $table_des_traitements['DATE_NOUVEAUTES'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
 $table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
+$table_des_traitements['INTRODUCTION'][]= 'PtoBR(traiter_raccourcis(%s))';
 $table_des_traitements['LIEN_TITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['LIEN_URL'][]= 'vider_url(%s)';
 $table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
