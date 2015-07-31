@@ -53,6 +53,7 @@ function surligner_mots($page) {
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
       
       //good referrer found or var_recherche is not null
+      include_spip('inc/filtres');
       $script = "
       <script type='text/javascript' src='".url_absolue(find_in_path('javascript/SearchHighlight.js'))."'></script>
       <script type='text/javascript'>
