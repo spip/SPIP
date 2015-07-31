@@ -89,9 +89,6 @@ function exec_sites_edit_dist()
 		. _T('texte_referencement_automatique')
 		. "</span>"
 		. "\n<div style='text-align: right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n"
-		. "\n<input type='hidden' name='id_parent' value='"
-		. intval(_request('id_rubrique'))
-		. "' />\n"
 		. "<input type=\"submit\"  value=\""
 		. _T('bouton_ajouter')
 		. "\" class='fondo' />\n"
