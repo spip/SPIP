@@ -62,19 +62,19 @@ function include_fonction($nom) {
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$inc = ('inc_' . $nom . '.php');
 	$f = find_in_path($inc);
-	if ($f && (!$GLOBALS['included_files'][$f]++) && is_readable($f))
-		include($f);
-	else {
+	if ($f && is_readable($f)) {
+		if (!$GLOBALS['included_files'][$f]++) include($f);
+	} else {
 		$f = _DIR_INCLUDE . $inc;
-		if ((!$GLOBALS['included_files'][$f]++) && is_readable($f))
-			include($f);
-		else {
+		if (is_readable($f)) {
+			if (!$GLOBALS['included_files'][$f]++) include($f);
+		} else {
 		  // provisoire avant renommage php/php3
 			$f = _DIR_INCLUDE . ('inc_' . $nom . '.php3');
-			if ((!$GLOBALS['included_files'][$f]++) && is_readable($f))
-				include($f);
-			else {
-			  spip_log($inc . " inconnu");
+			if (is_readable($f)) {
+				if (!$GLOBALS['included_files'][$f]++) include($f);
+			} else {
+			  spip_log($f . " inconnu meme en php3");
 			// esperons qu'elle est dans les fichiers deja lus
 			}
 		}
