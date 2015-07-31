@@ -41,9 +41,13 @@ function surligner_mots($page) {
     
   $ref = $_SERVER['HTTP_REFERER'];
   //avoid a js injection
-  $surcharge_surligne = preg_replace(",(?:\\\\{2})*(?:\\\\)',","\'",$_GET["var_recherche"]);
+  if($surcharge_surligne=_request("var_recherche")) {
+    $surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),","$1\\\\$2",$surcharge_surligne);
+    $surcharge_surligne = str_replace("\\","\\\\",$surcharge_surligne);
+  }
   foreach($surlignejs_engines as $engine) 
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
+      
       //good referrer found or var_recherche is not null
       $script = "<script src='".find_in_path("javascript/SearchHighlight.js")."'></script>
       <script type='text/javascript'>
