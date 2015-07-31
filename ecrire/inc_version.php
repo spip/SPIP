@@ -9,7 +9,7 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
-#
+##
 
 if (defined('_ECRIRE_INC_VERSION')) return;
 define('_ECRIRE_INC_VERSION', "1");
