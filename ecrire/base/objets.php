@@ -828,6 +828,20 @@ function lister_tables_spip($serveur=''){
 	}
 	return $tables[$serveur];
 }
+
+function lister_toutes_tables($serveur){
+	static $tables = array();
+	if (!isset($tables[$serveur])){
+		$tables[$serveur] = array();
+		if (!function_exists("sql_alltable"))
+			include_spip("base/abstract_sql");
+		$ts = sql_alltable('%',$serveur); // toutes les tables
+		foreach ($ts as $t){
+			$tables[$serveur][$t] = $t;
+		}
+	}
+	return $tables[$serveur];
+}
  
 /**
  * Retrouve le nom d'objet à partir de la table
@@ -939,7 +953,8 @@ function id_table_objet($type,$serveur='') {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 
 	$ts=lister_tables_spip($serveur);
-	if (in_array($t,$ts)){
+	if (in_array($t,$ts)
+	  OR in_array($t,lister_toutes_tables($serveur))){
 		$desc = $trouver_table($t,$serveur);
 		if (isset($desc['key']['PRIMARY KEY']))
 			return $desc['key']['PRIMARY KEY'];
