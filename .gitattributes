@@ -234,11 +234,6 @@ ecrire/iterateur/enum.php -text
 ecrire/iterateur/iterateur.php -text
 ecrire/iterateur/pour.php -text
 ecrire/iterateur/sql.php -text
-ecrire/iterateurs/data.php -text
-ecrire/iterateurs/enum.php -text
-ecrire/iterateurs/iterateur.php -text
-ecrire/iterateurs/pour.php -text
-ecrire/iterateurs/sql.php -text
 ecrire/lang/ecrire_ast.php -text
 ecrire/lang/ecrire_ay.php -text
 ecrire/lang/ecrire_br.php -text
