@@ -181,7 +181,7 @@ debut_droite();
 	echo $texte;
 	echo "</textarea></p><br />\n";
 
-	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_enregistrer')."' class='fondo'/></p>";
+	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'/></p>";
 	echo "</div>";
 	echo "</form>";
 
