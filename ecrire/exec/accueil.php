@@ -46,7 +46,7 @@ else
 	//
 	// Les sites references a valider
 	//
-if (afficher_plus(generer_url_ecrire('sites_tous')).$GLOBALS['meta']['activer_syndic'] != 'non') {
+if ($GLOBALS['meta']['activer_syndic'] != 'non') {
 		include_spip('inc/sites_voir');
 		afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
 	}
@@ -123,7 +123,8 @@ function colonne_gauche_accueil($id_rubrique, $activer_breves,
 //
 if ($spip_display == 4) {
 	debut_raccourcis();
-	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
+	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	if ($n) {
 		icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif","creer.gif");
 	
 
@@ -155,7 +156,8 @@ if ($spip_display == 4) {
 			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
 			$gadget .= "</td>";
 		}
-	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
+	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	if ($n) {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
 			$gadget .= "</td>";
@@ -262,15 +264,17 @@ if ($spip_display != 4) {
 		if ($connect_id_rubrique) {
 
 			$rubs = array();
-			foreach ($connect_id_rubrique as $id_rubrique)
-			  if ($r = spip_fetch_array(spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique=$id_rubrique AND id_parent=0"))) {
-			    list($titre, $descr) = $r;
-			    $rubs[] = "<a title='" .
-			      typo($descr) .
-			      "' href='" . generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique") . "'>" .
-			      typo($titre) .
-			      '</a>';
-			  }
+			foreach ($connect_id_rubrique as $id_rubrique) {
+				$r = spip_fetch_array(spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique=$id_rubrique AND id_parent=0"));
+				if ($r) {
+				  list($titre, $descr) = $r;
+				  $rubs[] = "<a title='" .
+				    typo($descr) .
+				    "' href='" . generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique") . "'>" .
+				    typo($titre) .
+				    '</a>';
+				}
+			}
 			sort($rubs);
 
 			echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>", join("</li>\n<li>", $rubs), "\n</li></ul>";
