@@ -26,30 +26,35 @@ function action_redirect_dist()
   if ($mode = _request('var_mode')) $mode = "var_mode=$mode";
 
   if ($id_article = intval(_request('id_article'))) {
-	$redirect = generer_url_article($id_article,$mode,_request('ancre'));
+	$r = generer_url_article($id_article,$mode,_request('ancre'));
 }
   else if ($id_breve = intval(_request('id_breve'))) {
-	$redirect = generer_url_breve($id_breve,$mode,_request('ancre'));
+	$r = generer_url_breve($id_breve,$mode,_request('ancre'));
 }
   else if ($id_forum = intval(_request('id_forum'))) {
-	$redirect = generer_url_forum($id_forum,$mode,_request('ancre'));
+	$r = generer_url_forum($id_forum,$mode,_request('ancre'));
 }
   else if ($id_rubrique = intval(_request('id_rubrique'))) {
-	$redirect = generer_url_rubrique($id_rubrique,$mode,_request('ancre'));
+	$r = generer_url_rubrique($id_rubrique,$mode,_request('ancre'));
 }
   else if ($id_mot = intval(_request('id_mot'))) {
-	$redirect = generer_url_mot($id_mot,$mode,_request('ancre'));
+	$r = generer_url_mot($id_mot,$mode,_request('ancre'));
 }
   else if ($id_auteur = intval(_request('id_auteur'))) {
-	$redirect = generer_url_auteur($id_auteur,$mode,_request('ancre'));
+	$r = generer_url_auteur($id_auteur,$mode,_request('ancre'));
 }
   else if ($id_syndic = intval(_request('id_syndic')) OR $id_syndic = intval(_request('id_site'))) {
-	$redirect = generer_url_site($id_syndic,$mode,_request('ancre'));
+	$r = generer_url_site($id_syndic,$mode,_request('ancre'));
 }
 
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls ou mes_fonctions/mes_options)
   else $redirect = _DIR_RESTREINT_ABS;
+
+	// si c'est un url calcule, on l'encode car spip va ensuite le decoder
+	// avant de faire le header(location)
+	if (isset($r))
+		$redirect = rawurlencode($r);
 
 // Compatibilite avec l'ancienne interface a un seul argument des generer_url_
   if ($mode AND !strpos($redirect, 'var_mode')) {
