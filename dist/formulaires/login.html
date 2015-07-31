@@ -29,7 +29,7 @@
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 
 [(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}}
-|sinon{<span id="logo" class="spip_logos"></span>})]
+|sinon{<span id="spip_logo_auteur" class="spip_logos"></span>})]
 
 
 		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />
@@ -104,9 +104,9 @@ $('#var_login').blur(function(){
 				// indiquer le cnx si on n'y a pas touche
 				$('input#session_remember.intact')
 				.attr('checked',c.cnx=='1'?'checked':'');
-				$('#logo').html(c.logo);
+				$('#spip_logo_auteur').html(c.logo);
 			} else {
-				$('#logo').html('');
+				$('#spip_logo_auteur').html('');
 			}
 	});
 });
