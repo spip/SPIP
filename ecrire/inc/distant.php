@@ -12,7 +12,7 @@
 
 /**
  * Ce fichier gère l'obtention de données distantes
- * 
+ *
  * @package SPIP\Core\Distant
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -22,7 +22,7 @@ if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCO
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
 if (!defined('_INC_DISTANT_MAX_SIZE')) define('_INC_DISTANT_MAX_SIZE',2097152);
 
-define('_REGEXP_COPIE_LOCALE', ',' . 
+define('_REGEXP_COPIE_LOCALE', ',' .
        preg_replace('@^https?:@', 'https?:',
            (isset($GLOBALS['meta']["adresse_site"]) ? $GLOBALS['meta']["adresse_site"] : ''))
        . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
@@ -295,13 +295,20 @@ function recuperer_url($url, $options = array()){
 	if (!$fopen) {
 		$res = recuperer_entetes_complets($handle, $options['if_modified_since']);
 		if(!$res) {
+			fclose($handle);
+			$t = @parse_url($url);
+			$host = $t['host'];
 			// Chinoisierie inexplicable pour contrer
 			// les actions liberticides de l'empire du milieu
-			if ($res = @file_get_contents($url)){
-				$result['status'] = 200;
-				$result['page'] = $res;
-				return $result;
+			if (!need_proxy($host)
+			  AND $res = @file_get_contents($url)){
+				$res = array(
+					'status' => 200,
+					'page' => $res,
+				);
 			}
+			else
+				return false;
 		}
 		elseif ($res['location'] AND $options['follow_location']){
 			$options['follow_location']--;
@@ -315,9 +322,14 @@ function recuperer_url($url, $options = array()){
 			spip_log("HTTP status ".$res['status']." pour $url");
 		}
 		$result['status'] = $res['status'];
-		$result['headers'] = $res['headers'];
-		$result['last_modified'] = $res['last_modified'];
-		$result['location'] = $res['location'];
+		if (isset($res['headers']))
+			$result['headers'] = $res['headers'];
+		if (isset($res['last_modified']))
+			$result['last_modified'] = $res['last_modified'];
+		if (isset($res['location']))
+			$result['location'] = $res['location'];
+		if (isset($res['page']))
+			$result['page'] = $res['page'];
 	}
 
 	// on ne veut que les entetes
@@ -332,27 +344,30 @@ function recuperer_url($url, $options = array()){
 	if (preg_match(",\bContent-Encoding: .*gzip,is", $result['headers']))
 		$gz = (_DIR_TMP . md5(uniqid(mt_rand())) . '.tmp.gz');
 
-	$res = recuperer_body($handle, $options['taille_max'], $gz ? $gz : $copy);
-	fclose($handle);
-	if ($copy){
-		$result['length'] = $res;
-		$result['file'] = $copy;
+	if (!$result['page']){
+		$res = recuperer_body($handle, $options['taille_max'], $gz ? $gz : $copy);
+		fclose($handle);
+		if ($copy){
+			$result['length'] = $res;
+			$result['file'] = $copy;
+		}
+		elseif($res) {
+			$result['page'] = &$res;
+			$result['length'] = strlen($result['page']);
 	}
-	elseif($res) {
-		$result['page'] = &$res;
-		$result['length'] = strlen($result['page']);
+	if (!$result['page'])
+		return $result;
 
-		// Decompresser au besoin
-		if ($gz){
-			$result['page'] = implode('', gzfile($gz));
-			supprimer_fichier($gz);
-		}
+	// Decompresser au besoin
+	if ($gz){
+		$result['page'] = implode('', gzfile($gz));
+		supprimer_fichier($gz);
+	}
 
-		// Faut-il l'importer dans notre charset local ?
-		if ($options['transcoder']){
-			include_spip('inc/charsets');
-			$result['page'] = transcoder_page($result['page'], $result['headers']);
-		}
+	// Faut-il l'importer dans notre charset local ?
+	if ($options['transcoder']){
+		include_spip('inc/charsets');
+		$result['page'] = transcoder_page($result['page'], $result['headers']);
 	}
 
 	return $result;
@@ -1010,7 +1025,8 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
 	if (!$f){
 		// fallback : fopen
-		if (!_request('tester_proxy')){
+		if (!need_proxy($host)
+			AND !_request('tester_proxy')){
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
@@ -1059,10 +1075,19 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	$http_proxy = need_proxy($host);
 	if ($user) $user = urlencode($user[0]) . ":" . urlencode($user[1]);
 
+	$connect = "";
 	if ($http_proxy){
-		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
-			. (!$user ? '' : "$user@")
-			. "$host" . (($port!=80) ? ":$port" : "") . $path;
+		if (defined('_PROXY_HTTPS_VIA_CONNECT') AND $scheme=="ssl"){
+			$path_host = (!$user ? '' : "$user@") . $host . (($port!=80) ? ":$port" : "");
+			$connect = "CONNECT " .$path_host." $vers\r\n"
+				."Host: $path_host\r\n"
+				."Proxy-Connection: Keep-Alive\r\n";
+		}
+		else {
+			$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
+				. (!$user ? '' : "$user@")
+				. "$host" . (($port!=80) ? ":$port" : "") . $path;
+		}
 		$t2 = @parse_url($http_proxy);
 		$first_host = $t2['host'];
 		if (!($port = $t2['port'])) $port = 80;
@@ -1072,9 +1097,34 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	else
 		$first_host = $noproxy . $host;
 
-	$f = @fsockopen($first_host, $port);
-	spip_log("Recuperer $path sur $first_host:$port par $f");
-	if (!$f) return false;
+	if ($connect){
+		$streamContext = stream_context_create(array('ssl' => array('verify_peer' => false, 'allow_self_signed' => true)));
+		$f = @stream_socket_client("tcp://$first_host:$port", $nError, $sError, 10, STREAM_CLIENT_CONNECT, $streamContext);
+		spip_log("Recuperer $path sur $first_host:$port par $f (via CONNECT)","connect");
+		if (!$f) return false;
+		stream_set_timeout($f, 10);
+
+		fputs($f, $connect);
+		fputs($f, "\r\n");
+		$res = fread($f, 1024);
+		if (!$res
+		  OR !count($res = explode(' ',$res))
+		  OR $res[1]!=='200'){
+			spip_log("Echec CONNECT sur $first_host:$port","connect"._LOG_INFO_IMPORTANTE);
+			fclose($f);
+			return false;
+		}
+		// important, car sinon on lit trop vite et les donnees ne sont pas encore dispo
+		stream_set_blocking($f, true);
+		// envoyer le handshake
+		stream_socket_enable_crypto($f, true,	STREAM_CRYPTO_METHOD_SSLv23_CLIENT);
+		spip_log("OK CONNECT sur $first_host:$port","connect");
+	}
+	else {
+		$f = @fsockopen($first_host, $port);
+		spip_log("Recuperer $path sur $first_host:$port par $f");
+		if (!$f) return false;
+	}
 
 	$site = isset($GLOBALS['meta']["adresse_site"]) ? $GLOBALS['meta']["adresse_site"] : '';
 
@@ -1094,4 +1144,3 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	return $f;
 }
 
-?>
