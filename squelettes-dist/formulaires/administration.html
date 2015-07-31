@@ -1,33 +1,25 @@
- <div[ class="(#ENV{divclass,spip-admin-bloc})"] id='spip-admin' dir="#LANG_DIR">[
+ <div[ class="(#ENV{divclass,spip-admin-bloc})"] id="spip-admin" dir="#LANG_DIR">[
 	<a href="(#ENV{analyser})" class="spip-admin-boutons"
 		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>]
 	[<a href="[(#ENV{voir_article})]" class="spip-admin-boutons"
-		id="voir_article"><:article:>
-			((#ENV{id_article}))</a>]
+		id="voir_article"><:article:>&nbsp;(#ENV{id_article})</a>]
 	[<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons"
-		id="voir_breve"><:breve:>
-			((#ENV{id_breve}))</a>]
+		id="voir_breve"><:breve:>&nbsp;(#ENV{id_breve})</a>]
 	[<a href="[(#ENV{voir_rubrique})]" class="spip-admin-boutons"
-		id="voir_rubrique"><:rubrique:>
-			((#ENV{id_rubrique}))</a>]
+		id="voir_rubrique"><:rubrique:>&nbsp;(#ENV{id_rubrique})</a>]
 	[<a href="[(#ENV{voir_mot})]" class="spip-admin-boutons"
-		id="voir_mot"><:mots_clef:>
-			((#ENV{id_mot}))</a>]
+		id="voir_mot"><:mots_clef:>&nbsp;(#ENV{id_mot})</a>]
 	[(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
 	<a href="[(#ENV{voir_site})]" class="spip-admin-boutons"
-		id="voir_site"><:info_site:>
-			[((#ENV{id_syndic}))]</a>]]
+		id="voir_site"><:info_site:>&nbsp;[(#ENV{id_syndic})]</a>]]
 	[<a href="[(#ENV{voir_auteur})]" class="spip-admin-boutons"
-		id="voir_auteur"><:auteur:>
-			((#ENV{id_auteur}))</a>][
-	<a href="(#ENV{ecrire})" class="spip-admin-boutons"
-		id="ecrire"><:espace_prive:></a>]
+		id="voir_auteur"><:auteur:>&nbsp;(#ENV{id_auteur})</a>][
+	<a href="(#ENV{ecrire})" class="spip-admin-boutons" id="ecrire"><:espace_prive:></a>]
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" class="spip-admin-boutons"
 		id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>[
 	<a href="(#ENV{statistiques})" class="spip-admin-boutons"
 		id="statistiques">[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>][
 	<a href="(#ENV{preview})" class="spip-admin-boutons"
 		id="preview"><:previsualisation:></a>][
-	<a href="(#ENV{debug})" class="spip-admin-boutons"
-		id="debug"><:admin_debug:></a>]
+	<a href="(#ENV{debug})" class="spip-admin-boutons" id="debug"><:admin_debug:></a>]
 </div>
