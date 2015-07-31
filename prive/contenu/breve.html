@@ -1,13 +1,13 @@
 <BOUCLE_afficher_contenu(BREVES){id_breve=#ENV{id}}{statut?}>
-<div class="champ contenu_titre[ (#TITRE*|?{'',vide})]">
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
 <div class='label'><:info_titre:></div>
 <div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
 </div>
-<div class="champ contenu_texte[ (#TEXTE*|?{'',vide})]">
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 <div class='label'><:info_texte:></div>
 <div dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</div>
 </div>
-<div class="champ contenu_lien_titre[ (#LIEN_TITRE*|?{'',vide})]">
+<div class="champ contenu_lien_titre[ (#LIEN_TITRE*|strlen|?{'',vide})]">
 <div class='label'><:lien_voir_en_ligne:></div>
 <div dir='#LANG_DIR' class='#EDIT{hyperlien} lien_titre'><a href='#LIEN_URL'>#LIEN_TITRE</a></div>
 </div>
