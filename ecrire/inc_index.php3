@@ -6,12 +6,12 @@ if (defined("_ECRIRE_INC_INDEX")) return;
 define("_ECRIRE_INC_INDEX", "1");
 
 
-function separateurs_indexation($requete=false) {
+function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction
-	$liste = "],:*\"!\r\n\t\\/){}[|@<>$%";
+	$liste = "],:;*\"!\r\n\t\\/){}[|@<>$%";
 
 	// en vietnamien ne pas eliminer les accents de translitteration
-	if (! (lire_meta('langue_site') == 'vi' AND $requete))
+	if (!(lire_meta('langue_site') == 'vi' AND $requete))
 		$liste .= "'`?\~.^+(-";
 
 	// windowzeries iso-8859-1
@@ -30,24 +30,33 @@ function spip_split($reg, $texte) {
 		return split($reg, $texte);
 }
 
+function nettoyer_chaine_indexation($texte) {
+	include_ecrire("inc_charsets.php3");
+	$texte = strtolower(translitteration($texte));
+
+	if (lire_meta('langue_site') == 'vi')
+		$texte = strtr($texte, "'`?~.^+(-", "123456789");
+
+	return $texte;
+}
+
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 
 	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';	// supprimer_tags()
+	$texte = nettoyer_chaine_indexation($texte);
+
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
-
 	$table = spip_split(" +", $texte);
+
 	while (list(, $mot) = each($table)) {
-		if ($mot2 = nettoyer_chaine_indexation($mot)) {
-			if ((strlen($mot2) > $min_long)
-			|| (ereg("[A-Z][A-Z][A-Z]",$mot) && $mot2=strtolower($mot).'_')) // indexer les mots comme 'OGM', 'CGI'...
-			{
-				$h = substr(md5($mot2), 0, 16);
+		if (strlen($mot) > $min_long or
+			(ereg("[A-Z][A-Z][A-Z]", $mot) and $mot = strtolower($mot).'_')) {
+				$h = substr(md5($mot), 0, 16);
 				$index[$h] += $val;
-				$mots .= ",(0x$h,'$mot2')";
+				$mots .= ",(0x$h,'$mot')";
 			}
-		}
 	}
 }
 
@@ -292,16 +301,6 @@ function requete_txt_integral($objet, $hash_recherche) {
 		LIMIT 0,10";
 }
 
-function nettoyer_chaine_indexation($texte) {
-	include_ecrire("inc_charsets.php3");
-	$texte = strtolower(translitteration($texte));
-
-	if (lire_meta('langue_site') == 'vi')
-		$texte = strtr($texte, "'`?~.^+(-","123456789");
-
-	return eregi_replace("[^A-Z0-9_-]","",$texte);
-}
-
 // rechercher un mot dans le dico
 function requete_dico ($val) {
 	$min_long = 3;
@@ -321,7 +320,7 @@ function requete_dico ($val) {
 	// cas normal
 	$val = nettoyer_chaine_indexation($val);
 	if (strlen($val) > $min_long)
-		return "dico LIKE '$val%'"; 
+		return "dico LIKE '$val%'";
 	else if (strlen($val) == $min_long) {
 		return "dico = '".$val."_'";
 	}
@@ -331,7 +330,7 @@ function requete_dico ($val) {
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
 	// recupere les mots de la recherche
-	$regs = separateurs_indexation(true)." "; 
+	$regs = separateurs_indexation(true)." ";
 	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
 	$s = spip_split(" +", $rech);
 	unset($dico);
@@ -346,7 +345,7 @@ function requete_hash ($rech) {
 	if ($dico) {
 		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 		$result2 = spip_query($query2);
-		while ($row2 = spip_fetch_array($result2)) 
+		while ($row2 = spip_fetch_array($result2))
 			$h[] = "0x".$row2["hx"];
 	}
 	if ($h)
