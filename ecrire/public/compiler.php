@@ -360,12 +360,12 @@ function calculer_from(&$boucle)
 function calculer_order(&$boucle)
 {
 	$order = $boucle->order;
-	if (isset($boucle->modificateur['collate'])){
-		$col = $boucle->modificateur['collate'];
-		$col = ".($col ?' COLLATE '.$col:'')";
+	/*if (isset($boucle->modificateur['collate'])){
+		$col = "." . $boucle->modificateur['collate'];
 		foreach($order as $k=>$o)
-			$order[$k] .= $col;
-	}
+			if (strpos($order[$k],'COLLATE')===false)
+				$order[$k].= $col;
+	}*/
 	return join(', ', $order);
 }
 
