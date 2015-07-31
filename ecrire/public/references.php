@@ -154,18 +154,26 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 	global $tables_des_serveurs_sql;
 
 	if (is_array($excep)) {
-
-		list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
-		$excep = $x;		#PHP5 de droite a gauche !
-		if (!$t = array_search($e, $boucle->from)) {
-			$t = 'J' . count($boucle->from);
-			$boucle->from[$t] = $e;
-			$j = $tables_des_serveurs_sql[$desc['serveur']][$e];
-# essayer ca un jour: 	list($nom, $j) = trouver_def_table($e, $boucle);
-			$j = $j['key']['PRIMARY KEY'];
-			$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
-			}
-	} else $t = $desc['type'];
+		// permettre aux plugins de gerer eux meme des jointures derogatoire ingérables
+		$t = NULL;
+		if (count($excep)==3){
+			$index_exception_derogatoire = array_pop($excep);
+			$t = $index_exception_derogatoire($boucle, $desc, $nom_champ, $excep);
+		}
+		if ($t == NULL) {
+			list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
+			$excep = $x;		#PHP5 de droite a gauche !
+			if (!$t = array_search($e, $boucle->from)) {
+				$t = 'J' . count($boucle->from);
+				$boucle->from[$t] = $e;
+				$j = $tables_des_serveurs_sql[$desc['serveur']][$e];
+	# essayer ca un jour: 	list($nom, $j) = trouver_def_table($e, $boucle);
+				$j = $j['key']['PRIMARY KEY'];
+				$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
+				}
+		}
+	} 
+	else $t = $desc['type'];
 	// demander a SQL de gerer le synonyme
 	// ca permet que excep soit dynamique (Cedric, 2/3/06)
 	if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
