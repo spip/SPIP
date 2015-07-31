@@ -31,9 +31,16 @@ $res = true;
 // Cas d'une page contenant du PHP :
 if ($page['process_ins'] != 'html') {
 
-	// compter les passages ici pour inclure inc/lang la première fois pour définir spip_lang
-	if (!isset($GLOBALS['evaluer_page'])) $GLOBALS['evaluer_page'] = -1;
-	if (!++$GLOBALS['evaluer_page']) include_spip('inc/lang');
+	/**
+	 * Teste si on a déjà évalué du PHP
+	 * 
+	 * Inclure inc/lang la première fois pour définir spip_lang
+	 * si ça n'a pas encore été fait.
+	 */
+	if (!defined('_EVALUER_PAGE_PHP')) {
+		define('_EVALUER_PAGE_PHP', true);
+		include_spip('inc/lang');
+	}
 
 	// restaurer l'etat des notes avant calcul
 	if (isset($page['notes'])
