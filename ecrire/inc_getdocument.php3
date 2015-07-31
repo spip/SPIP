@@ -194,7 +194,10 @@ function afficher_compactes($image_name /* not used */, $fichiers, $link) {
 function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 	// type de document inconnu ?
-	if (!ereg("\.([^.]+)$", $nom_envoye, $match)) return;
+	if (!ereg("\.([^.]+)$", $nom_envoye, $match)) {
+		spip_log("nom envoye incorrect ($nom_envoye)");
+		return;
+	}
 
 	// tester le type de document :
 	// - interdit a l'upload ?
@@ -204,8 +207,10 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	if (!$row = spip_fetch_array(spip_query(
 	"SELECT * FROM spip_types_documents
-	WHERE extension='$ext' AND upload='oui'")))
-		return 'o';
+	WHERE extension='$ext' AND upload='oui'"))) {
+		spip_log("Extension $ext interdite a l'upload");
+		return;
+	}
 	$id_type = $row['id_type'];	# numero du type dans spip_types_documents :(
 	$type_inclus_image = ($row['inclus'] == 'image');
 
@@ -231,6 +236,16 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	if ($mode == 'vignette' AND !($largeur * $hauteur)) {
 		@unlink($definitif);
 		return;
+	}
+
+	// regler l'ancre du retour
+	if (!$GLOBALS['ancre']) {
+		if ($mode=='vignette')
+			$GLOBALS['ancre'] = 'images';
+		else if ($type_image)
+			$GLOBALS['ancre'] = 'portfolio';
+		else
+			$GLOBALS['ancre'] = 'docs';
 	}
 
 	// Preparation vignette du document $id_document
