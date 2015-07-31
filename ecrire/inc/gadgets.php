@@ -293,7 +293,15 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	// GADGET Menu rubriques
 	. "\n<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
-	. "<a href='" . generer_url_ecrire("articles_tous") . "' class='lien_sous'>"._T('icone_site_entier')."</a>"
+	. "<a href='"
+	. generer_url_ecrire("articles_tous")
+	. "' class='lien_sous'" 
+/* retire par la 7033 car bugge. a reintroduire ? 
+onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\" */
+	. ">"
+	._T('icone_site_entier')
+	. "</a>"
+	. "<div id='nav-recherche'></div>"
 	. "<div id='gadget-rubriques'></div>"
 	. "</div>";
 	// FIN GADGET Menu rubriques

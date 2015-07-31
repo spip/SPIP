@@ -506,6 +506,9 @@ ecrire/safehtml/readme.txt -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
 ecrire/win_png.htc -text
+ecrire/xml/atom.php -text
+ecrire/xml/ical.php -text
+ecrire/xml/rss.php -text
 /inc-public.php3 -text
 /index.php -text
 /rien.gif -text

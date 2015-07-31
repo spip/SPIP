@@ -23,177 +23,9 @@ function trier_par_date($a, $b) {
 	return ($a['date'] < $b['date']);
 }
 
-
-//
-// Prend un tableau et l'affiche au format rss
-// (fonction inverse de analyser_backend)
-// A completer (il manque des tests, des valeurs par defaut, les enclosures,
-// differents formats de sortie, etc.)
-//
-// http://doc.spip.org/@affiche_rss
-function affiche_rss($rss, $intro = '', $fmt='') {
-	if (!$fmt) $fmt = 'rss';
-	if (function_exists($f = 'affiche_rss_'.$fmt)) {
-		return $f($rss, $intro);
-	}
-	else
-		spip_log("Format $fmt inconnu");
-}
-
-// http://doc.spip.org/@affiche_rss_rss
-function affiche_rss_rss($rss, $intro = '') {
-	// entetes
-	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
-
-	$u .= '
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<channel>
-	<title>'.texte_backend($intro['title']).'</title>
-	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
-	<description>'.texte_backend($intro['description']).'</description>
-	<language>'.texte_backend($intro['language']).'</language>
-	';
-
-	// elements
-	if (is_array($rss)) {
-		usort($rss, 'trier_par_date');
-		foreach ($rss as $article) {
-			$u .= '
-	<item>
-		<title>'.texte_backend($article['title']).'</title>
-		<link>'.texte_backend(url_absolue($article['url'])).'</link>
-		<guid isPermaLink="true">'.texte_backend(url_absolue($article['url'])).'</guid>
-		<dc:date>'.date_iso($article['date']).'</dc:date>
-		<dc:format>text/html</dc:format>';
-			if ($article['lang']) $u .= '
-		<dc:language>'.texte_backend($article['lang']).'</dc:language>';
-			if ($article['author']) {
-				if ($article['email'])
-					$article['author'].=' <'.$article['email'].'>';
-
-				$u .= '
-		<dc:creator>'.texte_backend($article['author']).'</dc:creator>';
-			}
-			$u .= '
-		<description>'.texte_backend(liens_absolus($article['description'])).'</description>
-	</item>
-';
-		}
-	}
-
-	// pied
-	$u .= '
-	</channel>
-</rss>
-';
-
-	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
-}
-
-// http://doc.spip.org/@affiche_rss_atom
-function affiche_rss_atom($rss, $intro = '') {
-	// entetes
-	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']
-	.'"?'.">\n";
-	$u .= '<feed xmlns="http://www.w3.org/2005/Atom"';
-	if ($intro['language'])
-		$u .= ' xml:lang="'.$intro['language'].'"';
-	$u .= '>
-	<title>'.texte_backend($intro['title']).'</title>
-	<id>'.texte_backend(url_absolue($intro['url'])).'</id>
-	<link href="'.texte_backend(url_absolue($intro['url'])).'"/>';
-	if ($intro['description']) $u .= '<subtitle>'.texte_backend($intro['description']).'</subtitle>';
-	$u .= '<link rel="self" type="application/atom+xml" href="'.texte_backend(url_absolue($_SERVER['REQUEST_URI'])).'"/>
-	<updated>'.gmdate("Y-m-d\TH:i:s\Z").'</updated>'; // probleme, <updated> pourrait etre plus precis
-
-	// elements
-	if (is_array($rss)) {
-		usort($rss, 'trier_par_date');
-		foreach ($rss as $article) {
-			$u .= "\n\t<entry";
-			if ($article['lang'])
-				$u .= ' xml:lang="'.texte_backend($article['lang']).'"';
-			$u .= '>
-		<title>'.texte_backend($article['title']).'</title>
-		<id>'.texte_backend(url_absolue($article['url'])).'</id>
-		<link rel="alternate" type="text/html" href="'.texte_backend(url_absolue($article['url'])).'"/>
-		<published>'.date_iso($article['date']).'</published>
-		<updated>'.date_iso($article['date']).'</updated>';
-			if ($article['author']) {
-				$u .= '
-		<author><name>'.texte_backend($article['author']).'</name>';
-				if ($article['email'])
-					$u .= '<email>'.texte_backend($article['email']).'</email>';
-				$u .= '</author>';
-			}
-			$u .='
-		<summary type="html">'.texte_backend(liens_absolus($article['description'])).'</summary>
-	</entry>
-';
-		}
-	}
-
-	// pied
-	$u .= '
-</feed>
- ';
-
-	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
-}
-
-// http://doc.spip.org/@affiche_rss_ical
-function affiche_rss_ical($rss, $intro = '') {
-
-	// entetes
-	$u =
-'BEGIN:VCALENDAR
-CALSCALE:GREGORIAN
-X-WR-CALNAME;VALUE=TEXT:'.filtrer_ical($intro['title']).'
-X-WR-RELCALID:'.filtrer_ical(url_absolue($intro['url'])).'
-';
-
-	// elements
-	if (is_array($rss)) {
-		usort($rss, 'trier_par_date');
-		foreach ($rss as $article) {
-
-			// Regler la date de fin a h+60min
-			if (!$article['enddate'])
-				$article['enddate'] = date_ical($article['date'],60);
-			else
-				$article['enddate'] = date_ical($article['enddate']);
-
-			// Type d'evenement
-			if ($article['type'] == 'todo')
-				$type = 'VTODO';
-			else
-				$type = 'VEVENT';
-
-			$u .=
-'BEGIN:'.$type.'
-SUMMARY:'.filtrer_ical($article['title']).'
-URL:'.filtrer_ical(url_absolue($article['url'])).'
-DTSTAMP:'. date_ical($article['date']).'
-DTSTART:'. date_ical($article['date']).'
-DTEND:'. $article['enddate'].'
-DESCRIPTION:'.filtrer_ical(liens_absolus($article['description'])).'
-ORGANIZER:'.filtrer_ical($article['author']).'
-CATEGORIES:--
-END:'.$type.'
-';
-		}
-	}
-
-	// pied
-	$u .= 'END:VCALENDAR';
-
-	return array($u, 'Content-Type: text/calendar; charset=utf-8');
-}
-
 //
 // Fonctions de remplissage du RSS
 //
-
 
 // Suivi des revisions d'articles
 // http://doc.spip.org/@rss_suivi_versions
@@ -239,8 +71,6 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 
 	return $rss;
 }
-
-
 
 // Suivi de la messagerie privee
 // http://doc.spip.org/@rss_suivi_messagerie
@@ -467,21 +297,13 @@ switch($op) {
 		break;
 }
 
-//
-// Envoyer le RSS
-//
-$intro = array(
+ if (!$fmt) $fmt = 'rss';
+ $f = charger_fonction($fmt, 'xml');
+ $f($rss, array(
 	'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
 	'url' => $url,
-	'language'=> $GLOBALS['spip_lang']
-);
-
-list($content,$header) = affiche_rss($rss, $intro, $fmt);
-if ($header) @header($header);
-echo $content;
-
-spip_log("spip_rss: ".spip_timer('rss'));
-
+	'language'=> $GLOBALS['spip_lang']));
+ 
+ spip_log("spip_rss applique $f sur '$fmt $opt $args'. Tempsd: " . spip_timer('rss'));
 }
-
 ?>
