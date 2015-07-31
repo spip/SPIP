@@ -37,7 +37,7 @@ function action_confirmer_inscription_dist() {
 		// TODO : ne semble pas marcher si inscrit non visiteur, a debug
 		if (!_request('redirect')){
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
-			if (autoriser('ecrire','',$auteur['id_auteur']))
+			if (autoriser('ecrire','','',$auteur['id_auteur']))
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
 			else
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
@@ -47,7 +47,7 @@ function action_confirmer_inscription_dist() {
 		// lien perime :
 		if ($GLOBALS['visiteur_session']['id_auteur']){
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
-			if (autoriser('ecrire','',$GLOBALS['visiteur_session']['id_auteur']))
+			if (autoriser('ecrire','','',$GLOBALS['visiteur_session']['id_auteur']))
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
 			else
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
