@@ -132,6 +132,18 @@ function image_filtrer($args){
 							$texte = str_replace($tag[1], $replace, $texte);
 						}
 					}
+					// traiter aussi un eventuel mouseover
+					if ($mouseover = extraire_attribut($reduit,'onmouseover')){
+						if (preg_match(",this[.]src=['\"]([^'\"]+)['\"],ims", $mouseover, $match)){
+							$srcover = $match[1];
+							array_shift($args);
+							array_unshift($args,"<img src='".$match[1]."' />");
+							$srcover_filter = call_user_func_array($filtre, $args);
+							$srcover_filter = extraire_attribut($srcover_filter,'src');
+							$mouseover = str_replace($srcover,$srcover_filter,$mouseover);
+							$reduit = inserer_attribut($reduit,'mouseover',$mouseover);
+						}
+					}
 					$texte = str_replace($tag[3], $reduit, $texte);
 				}
 				array_shift($args);

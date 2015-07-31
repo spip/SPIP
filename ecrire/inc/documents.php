@@ -85,18 +85,18 @@ function document_et_vignette($document, $url, $portfolio=false) {
 			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 				$image = image_pattern($vignette);
 			} else {
-				include_spip('inc/logos');
-				$image = reduire_image_logo(_DIR_RACINE.$vignette['fichier'], 120, 110);
+				include_spip('inc/filtres');
+				$image = filtrer('image_reduire',_DIR_RACINE.$vignette['fichier'], 120, 110, false, true);
 			}
 	}
 	else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
-		include_spip('inc/logos');
+		include_spip('inc/filtres');
 		if ($portfolio) {
-			$image = reduire_image_logo(_DIR_RACINE.$document['fichier'], 110, 120);
+			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'], 110, 120, false, true);
 		} else {
-			$image = reduire_image_logo(_DIR_RACINE.$document['fichier']);
+			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'],-1,-1,false, true);
 		}
 	} else {
 		$image = '';

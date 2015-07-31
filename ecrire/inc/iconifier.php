@@ -137,8 +137,9 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="") {
 
 	list($fid, $dir, $nom, $format) = $img;
-
+	include_spip('inc/logos');
 	$res = ratio_image($fid, $nom, $format, $width, $height, "alt=''");
+
 	if ($res)
 	    $res = "<div><a href='" .	$fid . "'>$res</a></div>";
 	else
