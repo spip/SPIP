@@ -5,7 +5,7 @@ include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
-if ($url = $HTTP_POST_VARS['url'])
+if ($url)
 	$cible = new Link($url);
 else
 	$cible = new Link('ecrire/');

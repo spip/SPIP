@@ -164,7 +164,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript ";
 		echo "dans votre navigateur et <a href=\"".$clean_link->getUrl()."\">recharger cette page</a>.<p></font>\n";
 		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
-		echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>\n";
+		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'></noscript>\n";
 
 		echo "<p>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
 		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'><p>\n";
@@ -176,10 +176,6 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
-
-		echo '[<script language="JavaScript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot de passe oubli&eacute;</a>]';
 	}
 	else { // demander seulement le login
 
@@ -195,6 +191,10 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
 	}
+
+	echo '[<script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot de passe oubli&eacute;&nbsp;?</a>]';
 
 	// Gerer le focus
 	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";

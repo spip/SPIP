@@ -73,15 +73,17 @@ if ($email_oubli) {
 					$erreur = "Probl&egrave;me de mail&nbsp;: l'email ne peut pas &ecirc;tre envoy&eacute;.";
 			}
 		}
+		else
+			$erreur = propre("L'adresse <code>$email_oubli</code> n'est pas enregistr&eacute;e sur ce site.");
 	}
 	else
-		$erreur = "Cet email n'est pas valide !";
+		$erreur = propre("Cet email <code>$email_oubli</code> n'est pas valide !");
 }
 
 if ($erreur) {
 	install_debut_html("Erreur");
 
-	echo "<b>$erreur</b>";
+	echo "<p><br><b>$erreur</b>";
 }
 else {
 	if ($oubli_pass == 'oui') {
@@ -98,7 +100,8 @@ else {
 		echo '<form action="spip_pass.php3" method="post">';
 		echo '<div align="right">';
 		echo '<input type="text" class="fondo" name="email_oubli" value="">';
-		echo '  <input type=submit class="fondl" name="oubli" value="Changer de mot de passe"></div></form>';
+		echo '<input type="hidden" name="oubli_pass" value="oui">';
+		echo '  <input type=submit class="fondl" name="oubli" value="OK"></div></form>';
 	}
 
 	else if ($inscription_ecrire || forums_sur_abo()) {
