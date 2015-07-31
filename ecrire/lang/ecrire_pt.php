@@ -104,19 +104,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_choix_base_sup' => 'Escolher uma base de dados neste servidor',
 	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis', # MODIF
 	'config_info_base_sup' => 'Se precisar de indagar outras bases de dados usando SPIP, quer seja neste servidor SQL ou noutro, use este formulário para as declarar. Se deixar alguns campos por preencher, os identificadores de conexão à base de dados principal serão usados.', # MODIF
-	'config_info_base_sup_disponibles' => 'Bases supplémentaires déjà interrogeables:', # NEW
+	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem interrogar:', # MODIF
 	'config_info_enregistree' => 'A nova configuração foi guardada', # MODIF
-	'config_info_logos' => 'Chaque élément du site peut avoir un logo, ainsi qu\'un « logo de survol »', # NEW
+	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo assim como um « mover o rato sobre o logo »', # MODIF
 	'config_info_logos_utiliser' => 'Utilizar os logos', # MODIF
 	'config_info_logos_utiliser_non' => 'Não utilizar os logos', # MODIF
-	'config_info_logos_utiliser_survol' => 'Utiliser les logos de survol', # NEW
-	'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol', # NEW
-	'config_info_redirection' => 'En activant cette option, vous pourrez créer des articles virtuels, simples références d\'articles publiés sur d\'autres sites ou hors de SPIP.', # NEW
+	'config_info_logos_utiliser_survol' => 'Usar os logos de "mover o rato sobre o logo"', # MODIF
+	'config_info_logos_utiliser_survol_non' => 'Não usar os logos de "mover o rato sobre o logo"', # MODIF
+	'config_info_redirection' => 'Activando esta opção, pode criar artigos virtuais, que são referências simples a artigos publicados noutros sites, não necessariamente usando SPIP.', # MODIF
 	'config_redirection' => 'Artigos virtuais', # MODIF
 	'config_titre_base_sup' => 'Declaração de uma base de dados suplementar', # MODIF
 	'config_titre_base_sup_choix' => 'Escolher uma base de dados suplementar', # MODIF
 	'connexion_ldap' => 'Conexão:', # MODIF
-	'copier_en_local' => 'Copier en local', # NEW
+	'copier_en_local' => 'Copiar para o site local', # MODIF
 	'creer_et_associer_un_auteur' => 'Criar e associar um autor', # MODIF
 	'creer_et_associer_une_rubrique' => 'Criar e associar uma rubrica', # MODIF
 
@@ -166,7 +166,7 @@ ou da rede',
 	'entree_signature' => 'Assinatura',
 	'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 	'entree_url' => 'O endereço (URL) do seu sítio',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
+	'entree_url_2' => 'Endereço (URL) do site', # MODIF
 	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome', # MODIF
 	'erreur_nom_connect_incorrect' => 'O nome de servidor não é autorizado', # MODIF
 	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, pode desactivá-lo.', # MODIF
@@ -174,7 +174,7 @@ ou da rede',
 	'erreur_plugin_fichier_def_absent' => 'Ficheiro de definição inexistente', # MODIF
 	'erreur_plugin_nom_fonction_interdit' => 'Nome de função interdito', # MODIF
 	'erreur_plugin_nom_manquant' => 'Nome de plugin inexistente', # MODIF
-	'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
+	'erreur_plugin_prefix_manquant' => 'Espaço de criação de nome não definido para este plugin ', # MODIF
 	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inexistente no ficheiro de definição', # MODIF
 	'erreur_plugin_version_manquant' => 'Versão de plugin inexistente', # MODIF
 
