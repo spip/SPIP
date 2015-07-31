@@ -164,7 +164,7 @@ function editer_article_descriptif($descriptif, $config, $aider)
 		(!trim($msg) ? '' : "$msg<br />\n") .
 		"<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
 		entites_html($descriptif) .
-		"\n</textarea></p>");
+		"</textarea></p>");
 }
 
 function editer_article_url($url, $nom, $config, $aider)
