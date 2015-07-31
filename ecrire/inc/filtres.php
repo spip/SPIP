@@ -374,9 +374,9 @@ function liens_ouvrants ($texte) {
 // Transformer les sauts de paragraphe en simples passages a la ligne
 // http://doc.spip.org/@PtoBR
 function PtoBR($texte){
-	$texte = eregi_replace("</p>", "\n", $texte);
-	$texte = eregi_replace("<p([[:space:]][^>]*)?".">", "<br />", $texte);
-	$texte = ereg_replace("^[[:space:]]*<br />", "", $texte);
+	$texte = preg_replace("@</p>@i", "\n", $texte);
+	$texte = preg_replace("@<p([[:space:]][^>]*)?".">@i", "<br />", $texte);
+	$texte = preg_replace("@^[[:space:]]*<br />@", "", $texte);
 	return $texte;
 }
 

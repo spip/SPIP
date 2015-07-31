@@ -337,7 +337,7 @@ function couper($texte, $taille=50) {
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 // http://doc.spip.org/@couper_intro
 function couper_intro($texte, $long) {
-	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
+	$texte = extraire_multi(preg_replace("@(</?)intro>@i", "\\1intro>", $texte)); // minuscules
 	$intro = '';
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);

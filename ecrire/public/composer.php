@@ -308,7 +308,7 @@ function calcul_exposer ($id, $type, $reference) {
 				if ($hierarchie) {
 					 $row = spip_abstract_fetsel(array('id_rubrique'), array($table), array("$element="._q($id_element)));
 					$hierarchie = calculer_hierarchie($row['id_rubrique']);
-				foreach (split(',',$hierarchie) as $id_rubrique)
+				foreach (preg_split('/,/',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
 				}
 			}
