@@ -745,9 +745,10 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	
 	// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
 	else if (count(trouver_champs_decomposes($col,$desc))>1){
-		$decompose = decompose_champ_id_objet($col);
-		$col = array_shift($decompose);
-		$where_complement = array("'='","'$table.".reset($decompose)."'","sql_quote('".end($decompose)."')");
+		$e = decompose_champ_id_objet($col);
+		$col = array_shift($e);
+		$where_complement = primary_doublee($e, $table);
+
 	}
 	// Cas particulier : expressions de date
 	else if ($date = tester_param_date($boucle->type_requete, $col)) {
@@ -775,10 +776,10 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
 			if (count(trouver_champs_decomposes($col,$desc))>1){
-				$decompose = decompose_champ_id_objet($col);
 				$col_alias = $col; // id_article devient juste le nom d'origine
-				$col = array_shift($decompose);
-				$where_complement = array("'='","'$table.".reset($decompose)."'","sql_quote('".end($decompose)."')");
+				$e = decompose_champ_id_objet($col);
+				$col = array_shift($e);
+				$where_complement = primary_doublee($e, $table);
 			}
 		}
 	}
@@ -826,6 +827,15 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	return array($arg, $op, $val, $col_alias, $where_complement);
 }
 
+// Ne pas appliquer sql_quote lors de la compilation,
+// car on ne connait pas le serveur SQL, donc s'il faut \' ou ''
+
+function primary_doublee($decompose, $table)
+{
+	$e1 = reset($decompose);
+	$e2 = "sql_quote('" . end($decompose) ."')";
+	return array("'='","'$table.". $e1 ."'",$e2);
+}
 
 // Faute de copie du champ id_secteur dans la table des forums,
 // faut le retrouver par jointure
