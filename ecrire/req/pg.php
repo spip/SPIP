@@ -515,7 +515,11 @@ function spip_pg_orderby($order, $select)
 function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = strpos($from, ",");
-	
+	// ismplifier avant de decouper
+	if (is_string($select))
+		// fct SQL sur colonne et constante apostrophee ==> la colonne
+		$select = preg_replace('/\w+\(\s*([^(),\']*),\s*\'[^\']*\'[^)]*\)/','\\1', $select);
+
 	if ($join OR $groupby) $join = is_array($select) ? $select : explode(", ", $select);
 	if ($join) {
 		// enlever les 0 as points, '', ...
