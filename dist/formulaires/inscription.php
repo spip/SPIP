@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
 
 function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
-	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'');
+	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
 	if ($mode=='1comite')
 		$valeurs['_commentaire'] = _T('pass_espace_prive_bla');
 	else 
@@ -29,6 +29,7 @@ function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
 function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
+
 	$erreurs = array();
 	include_spip('inc/filtres');	
 	if (!tester_config($id, $mode))
@@ -68,6 +69,7 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 				if (($row['statut'] != 'nouveau') AND !$declaration['pass'])
 					// deja inscrit
 					$erreurs['message_erreur'] = _T('form_forum_email_deja_enregistre');
+				spip_log($row['id_auteur'] . " veut se resinscrire");
 			}
 		}
 	}
@@ -75,28 +77,37 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 }
 
 function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
-	$message = _T('form_forum_identifiant_mail');
 
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
 	
-	if ($mail) {
-		$erreur = message_inscription($mail, $nom, $mode, $id);
-		if (is_array($erreur)) {
-			if (function_exists('envoyer_inscription'))
-				$f = 'envoyer_inscription';
-			else 
-				$f = 'envoyer_inscription_dist';
-			$erreur = $f($erreur, $nom, $mode, $id);
-		}
+	if (function_exists('test_inscription'))
+		$f = 'test_inscription';
+	else 	$f = 'test_inscription_dist';
+	$desc = $f($mode, $mail, $nom, $id);
+
+	if (is_array($desc)) {
+		$mail = $desc['email'];
+		include_spip('base/abstract_sql');
+		$row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($mail));
+		// s'il n'existe pas deja, creer les identifiants  
+		$desc = $row ? $row : inscription_nouveau($desc);
+	}
+	if (is_array($desc)) {
+	// generer le mot de passe (ou le refaire si compte inutilise)
+		$desc['pass'] = creer_pass_pour_auteur($desc['id_auteur']);
+		// charger de suite cette fonction, pour ses utilitaires
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+		if (function_exists('envoyer_inscription'))
+			$f = 'envoyer_inscription';
+		else 	$f = 'envoyer_inscription_dist';
+		list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode, $id);
+		if (!$envoyer_mail($mail, $sujet, $msg, $from, $head))
+			$desc = _T('form_forum_probleme_mail');
 	}
 
-	if ($erreur)
-		$message= $erreur;
-		
-	return $message;
+	return is_string($desc) ? $desc : _T('form_forum_identifiant_mail');
 }
-
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
 // et donner des infos supplementaires
@@ -116,64 +127,34 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
-// cree un nouvel utilisateur et renvoie un message d'impossibilite 
-// ou le tableau representant la ligne SQL le decrivant.
-// $mode = 'forum' ou 'redac' selon ce a quoi on s'inscrit
-// $id = une id_rubrique eventuelle (?)
-// http://doc.spip.org/@message_inscription
-function message_inscription($mail, $nom, $mode, $id=0) {
-
-	if (function_exists('test_inscription'))
-		$f = 'test_inscription';
-	else 
-		$f = 'test_inscription_dist';
-	$declaration = $f($mode, $mail, $nom, $id);
-
-	if (is_string($declaration))
-		return $declaration;
-	
-	include_spip('base/abstract_sql');
-	$row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']));
-
-	if (!$row)
-		// il n'existe pas, creer les identifiants  
-		return inscription_nouveau($declaration);
-		
-	// les cas "auteur existant" ont ete testes dans verifier()
-
-	// existant mais encore muet, ou ressucite: renvoyer les infos
-	$row['pass'] = creer_pass_pour_auteur($row['id_auteur']);
-	return $row;
-}
-
 // On enregistre le demandeur comme 'nouveau', en memorisant le statut final
 // provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
 // A sa premiere connexion il obtiendra son statut final (auth->activer())
 
 // http://doc.spip.org/@inscription_nouveau
-function inscription_nouveau($declaration)
+function inscription_nouveau($desc)
 {
-	if (!isset($declaration['login']))
-		$declaration['login'] = test_login($declaration['nom'], $declaration['email']);
+	if (!isset($desc['login']))
+		$desc['login'] = test_login($desc['nom'], $desc['email']);
 
-	$declaration['statut'] = 'nouveau';
+	$desc['statut'] = 'nouveau';
 
-	$n = sql_insertq('spip_auteurs', $declaration);
+	$n = sql_insertq('spip_auteurs', $desc);
 
-	$declaration['id_auteur'] = $n;
+	if (!$n) return _T('titre_probleme_technique');
 
-	$declaration['pass'] = creer_pass_pour_auteur($declaration['id_auteur']);
-	return $declaration;
+	$desc['id_auteur'] = $n;
+
+	return $desc;
 }
 
-// envoyer identifiants par mail
-// fonction redefinissable qui doit retourner false si tout est ok
-// ou une chaine non vide expliquant pourquoi le mail n'a pas ete envoye
+// construction du mail envoyant les identifiants 
+// fonction redefinissable qui doit retourner un tableau
+// dont les elements seront les arguments de inc_envoyer_mail
 
 // http://doc.spip.org/@envoyer_inscription_dist
-function envoyer_inscription_dist($ids, $nom, $mode, $id) {
+function envoyer_inscription_dist($desc, $nom, $mode, $id) {
 
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
@@ -185,16 +166,11 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 	       array('nom_site_spip' => $nom_site_spip,
 		     'adresse_site' => $adresse_site . '/',
 		     'adresse_login' => $adresse_site .'/'. _DIR_RESTREINT_ABS))
-	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
-	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
+	  . "\n\n- "._T('form_forum_login')." " . $desc['login']
+	  . "\n- ".  _T('form_forum_pass'). " " . $desc['pass'] . "\n\n";
 
-
-	if ($envoyer_mail($ids['email'],
-			 "[$nom_site_spip] "._T('form_forum_identifiants'),
-			 $message))
-		return false;
-	else
-		return _T('form_forum_probleme_mail');
+	return array("[$nom_site_spip] "._T('form_forum_identifiants'),
+		     $message);
 }
 
 // http://doc.spip.org/@test_login
