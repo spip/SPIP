@@ -590,7 +590,7 @@ function corriger_typo($letexte, $lang='') {
 // Tableaux
 //
 
-define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
+define('_RACCOURCI_TH_SPAN', '\s*(?:{{[^{}]+}}\s*)?|<');
 
 // http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
