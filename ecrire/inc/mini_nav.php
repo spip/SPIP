@@ -133,15 +133,15 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false,
 	if ($aff_racine) {
 		$onClick = " aff_selection('rubrique','$rac', '0');";
 		# ce lien provoque la selection (directe) de la rubrique cliquee
-		$ondbClick = "findObj('id_parent').value=0;";
+		$ondbClick = "findObj_forcer('id_parent').value=0;";
 		# et l'affichage de son titre dans le bandeau
-		$ondbClick .= "findObj('titreparent').value='"
+		$ondbClick .= "findObj_forcer('titreparent').value='"
 			. strtr(
 				str_replace("'", "&#8217;",
 				str_replace('"', "&#34;",
 					textebrut(_T('info_racine_site')))),
 				"\n\r", "  ")."';";
-		$ondbClick .= "findObj('selection_rubrique').style.display='none';";
+		$ondbClick .= "findObj_forcer('selection_rubrique').style.display='none';";
 	}
 
 	if ($plonger)

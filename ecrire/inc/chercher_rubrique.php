@@ -204,7 +204,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 		$exclus = "&exclus=$idem&rac=oui";
 
 	if ($id_rubrique)
-		list($titre_parent) = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
+		list($titre_parent) = spip_fetch_array(spip_query("SELECT titr<e FROM spip_rubriques WHERE id_rubrique=$id_rubrique"), SPIP_NUM);
 	else if ($type == 'auteur')
 		$titre_parent = '&nbsp;';
 	else
@@ -212,11 +212,11 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
 	return 	"<table width='100%'><tr width='100%'><td width='45'>
 	<a	href=\"#\"
-		onClick=\"if(findObj('selection_rubrique').style.display=='none')
+		onClick=\"if(findObj_forcer('selection_rubrique').style.display=='none')
 			{charger_id_url_si_vide('" .
 	  generer_url_ecrire('selectionner',"id=$id_rubrique$exclus&type=$type", true) ."',
 				'selection_rubrique');}
-			else {findObj('selection_rubrique').style.display='none';}\"
+			else {findObj_forcer('selection_rubrique').style.display='none';}\"
 	><img src='". _DIR_IMG_PACK . "loupe.png' style='vertical-align: middle;'
 	/></a><img src='". _DIR_IMG_PACK . "searching.gif'
 		id='img_selection_rubrique' style='visibility: hidden;'>

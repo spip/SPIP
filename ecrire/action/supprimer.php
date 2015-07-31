@@ -64,14 +64,6 @@ function action_supprimer_rubrique($id_rubrique)
 
 }
 
-// http://doc.spip.org/@action_supprimer_auteur_rubrique
-function action_supprimer_auteur_rubrique($arg)
-{
-	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r))
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=".$r[1]." AND id_rubrique=" . $r[2]);
-	else spip_log("action_supprimer_auteur_rubrique $arg pas compris");
-}
-
 function supprimer_document_et_vignette($arg)
 {
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");

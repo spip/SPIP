@@ -309,6 +309,7 @@ ecrire/action/editer_mot.php -text
 ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/instituer_article.php -text
+ecrire/action/instituer_auteur.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_forum.php -text
@@ -404,6 +405,7 @@ ecrire/fragments/editer_mot.php -text
 ecrire/fragments/grouper_mots.php -text
 ecrire/fragments/iconifier.php -text
 ecrire/fragments/informer.php -text
+ecrire/fragments/instituer_auteur.php -text
 ecrire/fragments/legender.php -text
 ecrire/fragments/memoriser.php -text
 ecrire/fragments/petitionner.php -text
@@ -418,7 +420,6 @@ ecrire/fragments/virtualiser.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text
 ecrire/inc/article_select.php -text
-ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
@@ -453,6 +454,7 @@ ecrire/inc/install_ldap3.php -text
 ecrire/inc/install_ldap4.php -text
 ecrire/inc/install_ldap5.php -text
 ecrire/inc/install_unpack.php -text
+ecrire/inc/instituer_auteur.php -text
 ecrire/inc/joindre.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
