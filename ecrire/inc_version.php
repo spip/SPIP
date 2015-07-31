@@ -329,8 +329,8 @@ if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192); // compatibilite PHP
 if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 error_reporting(SPIP_ERREUR_REPORT);
 
-// niveau de log par defaut
-defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_DEBUG);
+// niveau maxi d'enregistrement des logs
+defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
