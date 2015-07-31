@@ -289,6 +289,8 @@ function confirmer_statut_inscription($auteur){
 	auteur_modifier($auteur['id_auteur'],array('statut'=> $s));
 	unset($_COOKIE['spip_session']); // forcer la maj de la session
 
+	// mettre a jour le statut
+	$auteur['statut'] = $s;
 	return $auteur;
 }
 
