@@ -30,7 +30,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $mode
  *     Mode de survol du logo désiré (on ou off)
  * @return array
- *
  *     - Liste (chemin du fichier, répertoire de logos, extension du logo, date de modification)
  *     - array vide aucun logo trouvé.
 **/

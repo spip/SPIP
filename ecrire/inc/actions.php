@@ -10,36 +10,69 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des actions sécurisées
+ *
+ * @package SPIP\Core\Actions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * retourne une URL ou un formulaire securises
+ * Retourne une URL ou un formulaire securisé
  *
- * http://doc.spip.org/@generer_action_auteur
- *
+ * @uses inc_securiser_action_dist()
+ * 
  * @param string $action
+ *     Nom du fichier/action appelé (dans le répertoire action)
  * @param string $arg
+ *     Arguments pour l'action sécurisée
  * @param string $redirect
+ *     Adresse de redirection souhaitée à la fin du bon déroulement de l’action
  * @param bool|int|string $mode
- *   -1 : renvoyer action, arg et hash sous forme de array()
- *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
- *   string : renvoyer un formulaire
+ *     - -1 : renvoyer action, arg et hash sous forme de array()
+ *     - true ou false : renvoyer une url, avec `&amp;` (false) ou `&` (true)
+ *     - string : renvoyer un formulaire
  * @param string|int $att
- *   id_auteur pour lequel generer l'action en mode url ou array()
- *   atributs du formulaire en mode formulaire
+ *     - id_auteur pour lequel générer l'action en mode url ou array()
+ *     - attributs du formulaire en mode formulaire
  * @param bool $public
  * @return array|string
+ *     URL, code HTML du formulaire ou tableau (action, arg, hash)
  */
 function generer_action_auteur($action, $arg, $redirect = "", $mode = false, $att = '', $public = false){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	return $securiser_action($action, $arg, $redirect, $mode, $att, $public);
 }
 
-// http://doc.spip.org/@redirige_action_auteur
+/**
+ * Génère une URL ou un formulaire dirigé vers un fichier action (action/xx.php)
+ *
+ * Le génère à condition que $mode="texte".
+ *
+ * @uses generer_action_auteur()
+ *
+ * @api
+ * @param string $action
+ *     Nom du fichier action/xx.php
+ * @param string $args
+ *     Argument passé à l'action, qui sera récupéré par la fonction
+ *     `securiser_action()`
+ * @param string $ret
+ *     Nom du script exec sur lequel on revient après l'action (redirection),
+ *     que l'on peut récupérer dans une fonction d'action par `_request('redirect')`
+ * @param string $gra
+ *     Arguments transmis au script exec de retour `arg1=yy&arg2=zz`
+ * @param bool|string|int $mode
+ *     - -1 : renvoyer action, arg et hash sous forme de array()
+ *     - true ou false : renvoyer une url, avec `&amp;` (false) ou `&` (true)
+ *     - string : renvoyer un formulaire
+ * @param string $atts ?
+ * @return string
+ *     Code HTML du formulaire
+ */
 function redirige_action_auteur($action, $arg, $ret, $gra = '', $mode = false, $atts = ''){
-
 	$r = _DIR_RESTREINT.generer_url_ecrire($ret, $gra, true, true);
-
 	return generer_action_auteur($action, $arg, $r, $mode, $atts);
 }
 

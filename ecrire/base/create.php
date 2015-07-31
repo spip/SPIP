@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Création ou mise à jour des tables
+ *
+ * @package SPIP\Core\Installation
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/acces');
@@ -40,10 +45,8 @@ function base_determine_autoinc($table,$desc=array()){
 }
 
 /**
- * Creer une table,
- * ou ajouter les champs manquants si elle existe deja
- *
- * http://doc.spip.org/@creer_ou_upgrader_table
+ * Créer une table,
+ * ou ajouter les champs manquants si elle existe déjà
  *
  * @param string $table
  * @param array $desc
@@ -83,9 +86,11 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 }
 
 /**
- * Creer ou mettre a jour un ensemble de tables
- * en fonction du flag $up
+ * Creer ou mettre à jour un ensemble de tables
+ * en fonction du flag `$up`
  *
+ * @uses creer_ou_upgrader_table()
+ * 
  * @param array $tables_inc
  *   tables avec autoincrement sur la cle primaire
  * @param  $tables_noinc
@@ -117,11 +122,17 @@ function alterer_base($tables_inc, $tables_noinc, $up=false, $serveur='')
 }
 
 /**
- * Creer une base de donnee
- * a partir des tables principales et auxiliaires
+ * Créer une base de données
+ * à partir des tables principales et auxiliaires
  *
- * http://doc.spip.org/@creer_base
- *
+ * Lorsque de nouvelles tables ont été déclarées, cette fonction crée les tables manquantes.
+ * mais ne crée pas des champs manquant d'une table déjà présente.
+ * Pour cela, c’est `maj_tables()` qu’il faut appeler.
+ * 
+ * @api
+ * @see maj_tables()
+ * @uses alterer_base()
+ * 
  * @param string $serveur
  * @return void
  */
@@ -138,10 +149,17 @@ function creer_base($serveur='') {
 }
 
 /**
- * Mettre a jour une liste de tables,
- * fonction facilitatrice utilisee pour les maj de base
- * dans les plugins
+ * Mettre à jour une liste de tables
+ * 
+ * Fonction facilitatrice utilisée pour les maj de base
+ * dans les plugins.
  *
+ * Elle permet de créer les champs manquants d'une table déjà présente.
+ *
+ * @api
+ * @see creer_base()
+ * @uses alterer_base()
+ * 
  * @param array $upgrade_tables
  * @param string $serveur
  * @return void

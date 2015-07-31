@@ -10,12 +10,36 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des cookies
+ *
+ * @param SPIP\Core\Cookies
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Appliquer le prefixe cookie
-//
-// http://doc.spip.org/@spip_setcookie
+
+/**
+ * Place un cookie (préfixé) sur le poste client
+ * 
+ * @global cookie_prefix Préfixe de cookie défini
+ * @link http://fr.php.net/setcookie
+ * 
+ * @param string $name
+ *     Nom du cookie
+ * @param string $value
+ *     Valeur à stocker
+ * @param int $expire
+ *     Durée de vie du cookie en secondes
+ * @param string $path
+ *     Chemin sur lequel le cookie sera disponible
+ * @param string $domaine
+ *     Domaine à partir duquel le cookie est disponible
+ * @param bool $secure
+ *     cookie sécurisé ou non ?
+ * @return bool
+ *     true si le cookie a été posé, false sinon.
+**/
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
 	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO')
