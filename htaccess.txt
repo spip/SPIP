@@ -75,8 +75,8 @@ RewriteRule ^breve([0-9]+)\.html$	page.php3?fond=breve&id_breve=$1 [QSA,L]
 RewriteRule ^mot([0-9]+)\.html$		page.php3?fond=mot&id_mot=$1 [QSA,L]
 RewriteRule ^auteur([0-9]+)\.html$	page.php3?fond=auteur&id_auteur=$1 [QSA,L]
 RewriteRule ^site([0-9]+)\.html$	page.php3?fond=site&id_syndic=$1 [QSA,L]
-# Note = la compatibilite avec les URLS "standard" : assuree par les fichiers
-# article.php3 etc (s'ils n'ont pas ete effaces)
+# Compatibilite avec les URLS "standard"
+RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|resume|sommaire|sommaire_texte)\.php3?$	page.php3?fond=$1 [QSA,L]
 # Fin compatibilite
 ###
 
