@@ -25,7 +25,7 @@ function exec_suivi_revisions_dist()
 
 	$nom_auteur = $GLOBALS['visiteur_session']['nom'];
 	$connecte = $GLOBALS['visiteur_session']['id_auteur'];
-	if ($id_auteur == $connecte) $id_auteur = false;
+	//if ($id_auteur == $connecte) $id_auteur = false;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T("icone_suivi_revisions"));
@@ -48,9 +48,9 @@ function exec_suivi_revisions_dist()
 	else echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_auteur=$connecte") . "'>$nom_auteur</a></li>";
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))
-
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
-	else $langues = array();
+	else
+		$langues = array();
 
 	$result = sql_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
@@ -63,14 +63,14 @@ function exec_suivi_revisions_dist()
 		  if (sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where"))
 		    echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a></li>";
 		}
-		foreach ($langues as $lang) {
-			$titre = traduire_nom_langue($lang);
-	
-			if ($lang == $lang_choisie)  echo "\n<li><b>$titre</b></li>";
-			else {
-				$n = sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where");
-				if ($n) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
-			}
+	}
+	foreach ($langues as $lang) {
+		$titre = traduire_nom_langue($lang);
+
+		if ($lang == $lang_choisie)  echo "\n<li><b>$titre</b></li>";
+		else {
+			$n = sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where");
+			if ($n) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
 		}
 	}
 	echo "</ul></div>\n";
