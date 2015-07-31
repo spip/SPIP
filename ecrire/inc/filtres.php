@@ -95,7 +95,7 @@ function image_filtrer($args){
 
 	// Cas general : trier toutes les images, avec eventuellement leur <span>
 	if (preg_match_all(
-	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
+	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),UimsS',
 	$texte, $tags, PREG_SET_ORDER)) {
 		if ($inclure){
 			include_spip('inc/filtres_images');
@@ -107,7 +107,7 @@ function image_filtrer($args){
 				// En cas de span spip_documents, modifier le style=...width:
 				if($tag[1]
 				AND $w = extraire_attribut($reduit, 'width')) {
-					$style = preg_replace(", width: *\d+px,", " width: ${w}px",
+					$style = preg_replace(", width: *\d+px,S", " width: ${w}px",
 						extraire_attribut($tag[1], 'style'));
 					$replace = inserer_attribut($tag[1], 'style', $style);
 					$replace = str_replace(" style=''", '', $replace);
@@ -163,11 +163,11 @@ function hauteur($img) {
 // preserver des echappements de caracteres "bas" (par exemple [ ou ")
 // et au cas particulier de &amp; qui devient &amp;amp; dans les url
 function corriger_entites_html($texte) {
-	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),i', '&\1', $texte);
+	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),iS', '&\1', $texte);
 }
 // idem mais corriger aussi les &amp;eacute; en &eacute;
 function corriger_toutes_entites_html($texte) {
-	return preg_replace(',&amp;(#?[a-z0-9]+;),', '&\1', $texte);
+	return preg_replace(',&amp;(#?[a-z0-9]+;),S', '&\1', $texte);
 }
 
 function entites_html($texte) {
@@ -205,7 +205,7 @@ function texte_backend($texte) {
 	$texte = liens_absolus($texte);
 
 	// echapper les tags &gt; &lt;
-	$texte = preg_replace(',&(gt|lt);,', '&amp;\1;', $texte);
+	$texte = preg_replace(',&(gt|lt);,S', '&amp;\1;', $texte);
 
 	// importer les &eacute;
 	$texte = filtrer_entites($texte);
@@ -214,7 +214,7 @@ function texte_backend($texte) {
 	// contourner bug windows ou char(160) fait partie de la regexp \s
 	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
 	$texte = str_replace("&nbsp;", " ", $texte);
-	$texte = preg_replace("/\s\s+/$u", " ", $texte);
+	$texte = preg_replace('/\s{2,}/'.$u.'S', " ", $texte);
 	$texte = entites_html($texte);
 
 	// verifier le charset
@@ -236,14 +236,14 @@ function texte_backend($texte) {
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	return preg_replace(
-	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,",
+	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
 	"", $texte);
 }
 
 // et la fonction inverse
 function recuperer_numero($texte) {
 	if (preg_match(
-	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,",
+	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
 	$texte, $regs))
 		return intval($regs[1]);
 	else
@@ -252,7 +252,7 @@ function recuperer_numero($texte) {
 
 // Suppression basique et brutale de tous les <...>
 function supprimer_tags($texte, $rempl = "") {
-	$texte = preg_replace(",<[^>]*>,U", $rempl, $texte);
+	$texte = preg_replace(",<[^>]*>,US", $rempl, $texte);
 	// ne pas oublier un < final non ferme
 	// mais qui peut aussi etre un simple signe plus petit que
 	$texte = str_replace('<', ' ', $texte);
@@ -268,13 +268,13 @@ function echapper_tags($texte, $rempl = "") {
 // Convertit un texte HTML en texte brut
 function textebrut($texte) {
 	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
-	$texte = preg_replace("/\s+/$u", " ", $texte);
-	$texte = preg_replace("/<(p|br)( [^>]*)?".">/i", "\n\n", $texte);
+	$texte = preg_replace('/\s+/'.$u.'S', " ", $texte);
+	$texte = preg_replace("/<(p|br)( [^>]*)?".">/iS", "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", "", $texte);
 	$texte = preg_replace("/\n+$/", "", $texte);
 	$texte = preg_replace("/\n +/", "\n", $texte);
 	$texte = supprimer_tags($texte);
-	$texte = preg_replace("/(&nbsp;| )+/", " ", $texte);
+	$texte = preg_replace("/(&nbsp;| )+/S", " ", $texte);
 	// nettoyer l'apostrophe curly qui pose probleme a certains rss-readers, lecteurs de mail...
 	$texte = str_replace("&#8217;","'",$texte);
 	return $texte;
@@ -304,7 +304,7 @@ function lignes_longues($texte, $l = 70) {
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.*>/Uums', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.*>/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
 			$tags[$n] = $tag[0];
 			$texte = str_replace($tag[0], " @@SPIPTAG$n@@ ", $texte);
@@ -312,7 +312,7 @@ function lignes_longues($texte, $l = 70) {
 	}
 	// casser les mots longs qui restent
 	// note : on pourrait preferer couper sur les / , etc.
-	if (preg_match_all("/[\w,\/.]{".$l."}/Ums", $texte, $longs, PREG_SET_ORDER)) {
+	if (preg_match_all("/[\w,\/.]{".$l."}/UmsS", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
 			$texte = str_replace($long[0], $long[0].' ', $texte);
 		}
@@ -333,7 +333,7 @@ function majuscules($texte) {
 	// Cas du turc
 	if ($GLOBALS['spip_lang'] == 'tr') {
 		# remplacer hors des tags et des entites
-		if (preg_match_all(',<[^<>]+>|&[^;]+;,', $texte, $regs, PREG_SET_ORDER))
+		if (preg_match_all(',<[^<>]+>|&[^;]+;,S', $texte, $regs, PREG_SET_ORDER))
 			foreach ($regs as $n => $match)
 				$texte = str_replace($match[0], "@@SPIP_TURC$n@@", $texte);
 
@@ -938,8 +938,8 @@ function multi_trad ($trads) {
 function extraire_trad ($bloc) {
 	$lang = '';
 // ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
-//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/si", $bloc, $regs)) {
-	while (preg_match("/^(.*?)[\[]([a-z_]+)[\]]/si", $bloc, $regs)) {
+//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
+	while (preg_match("/^(.*?)[\[]([a-z_]+)[\]]/siS", $bloc, $regs)) {
 		$texte = trim($regs[1]);
 		if ($texte OR $lang)
 			$trads[$lang] = $texte;
@@ -955,7 +955,7 @@ function extraire_trad ($bloc) {
 // repere les blocs multi dans un texte et extrait le bon
 function extraire_multi ($letexte) {
 	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
-	if (preg_match_all("@<multi>(.*?)</multi>@s", $letexte, $regs, PREG_SET_ORDER))
+	if (preg_match_all("@<multi>(.*?)</multi>@sS", $letexte, $regs, PREG_SET_ORDER))
 		foreach ($regs as $reg)
 			$letexte = str_replace($reg[0], extraire_trad($reg[1]), $letexte);
 	return $letexte;
@@ -993,7 +993,7 @@ function alterner($i) {
 // recuperer une balise HTML de type "xxx"
 // exemple : [(#DESCRIPTIF|extraire_tag{img})] (pour flux RSS-photo)
 function extraire_tag($texte, $tag) {
-	if (preg_match(",<$tag(\\s.*)?".">,Uims", $texte, $regs))
+	if (preg_match(",<$tag(\\s.*)?".">,UimsS", $texte, $regs))
 		return $regs[0];
 }
 
@@ -1001,7 +1001,7 @@ function extraire_tag($texte, $tag) {
 // recuperer un attribut html d'une balise
 // ($complet demande de retourner $r)
 function extraire_attribut($balise, $attribut, $complet = false) {
-	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([^>]*>.*),ims", $balise, $r)) {
+	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([^>]*>.*),imsS", $balise, $r)) {
 		$att = $r[4];
 	}
 	else
@@ -1033,8 +1033,8 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=
 	}
 	else {
 		// preferer une balise " />" (comme <img />)
-		if (preg_match(',[[:space:]]/>,', $balise))
-			$balise = preg_replace(",[[:space:]]/>,", $insert."/>", $balise, 1);
+		if (preg_match(',[[:space:]]/>,S', $balise))
+			$balise = preg_replace(",[[:space:]]/>,S", $insert."/>", $balise, 1);
 		// sinon une balise <a ...> ... </a>
 		else
 			$balise = preg_replace(",>,", $insert.">", $balise, 1);
@@ -1072,7 +1072,7 @@ function tester_config($ignore, $quoi) {
 // Attention applique a un #PARAMETRES_FORUM complexe (id_article=x&id_forum=y)
 // ca retourne un url de suivi du thread y (que le thread existe ou non)
 function url_rss_forum($param) {
-	if (preg_match(',.*(id_.*?)=([0-9]+),', $param, $regs)) {
+	if (preg_match(',.*(id_.*?)=([0-9]+),S', $param, $regs)) {
 		include_spip('inc/acces');
 		$regs[1] = str_replace('id_forum', 'id_thread', $regs[1]);
 		$arg = $regs[1].'-'.$regs[2];
@@ -1101,11 +1101,11 @@ function url_reponse_forum($parametres) {
 //
 function resolve_path($url) {
 	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
-	OR preg_match(',/[^/]*/\.\./,', $url, $regs)	# supprime /toto/../
-	OR preg_match(',^/\.\./,', $url, $regs))		# supprime les /../ du haut
+	OR preg_match(',/[^/]*/\.\./,S', $url, $regs)	# supprime /toto/../
+	OR preg_match(',^/\.\./,S', $url, $regs))		# supprime les /../ du haut
 		$url = str_replace($regs[0], '/', $url);
 
-	return '/'.preg_replace(',^/,', '', $url);
+	return '/'.preg_replace(',^/,S', '', $url);
 }
 
 // 
@@ -1115,11 +1115,11 @@ function resolve_path($url) {
 // 'a/../../titi.coco.html/tata#titi');
 function suivre_lien($url, $lien) {
 	# lien absolu ? ok
-	if (preg_match(',^([a-z0-9]+://|mailto:),i', $lien))
+	if (preg_match(',^([a-z0-9]+://|mailto:),iS', $lien))
 		return $lien;
 
 	# lien relatif, il faut verifier l'url de base
-	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?[^/]*$,', $url, $regs)) {
+	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?[^/]*$,S', $url, $regs)) {
 		$debut = $regs[1];
 		$dir = $regs[2];
 	}
@@ -1143,7 +1143,7 @@ function url_absolue($url, $base='') {
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux textes contenant des liens
 function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$abs = url_absolue($lien[3], $base);
@@ -1151,7 +1151,7 @@ function liens_absolus($texte, $base='') {
 				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
 		}
 	}
-	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$abs = url_absolue($lien[3], $base);
@@ -1216,7 +1216,7 @@ function email_valide($adresses) {
 // afficher les tags
 // ou afficher les enclosures
 function extraire_tags($tags) {
-	if (preg_match_all(',<a([[:space:]][^>]*)?[[:space:]][^>]*>.*</a>,Uims',
+	if (preg_match_all(',<a([[:space:]][^>]*)?[[:space:]][^>]*>.*</a>,UimsS',
 	$tags, $regs, PREG_PATTERN_ORDER))
 		return $regs[0];
 	else
@@ -1228,7 +1228,7 @@ function afficher_enclosures($tags) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
 			include_spip('inc/minipres'); #pour http_img_pack (quel bazar)
-			$s[] = preg_replace(',>[^<]+</a>,', 
+			$s[] = preg_replace(',>[^<]+</a>,S', 
 				'>'
 				.http_img_pack('attachment.gif', $t,
 					'height="15" width="15" title="'.attribut_html($t).'"')
@@ -1252,7 +1252,7 @@ function afficher_tags($tags, $rels='tag,directory') {
 function enclosure2microformat($e) {
 	$url = extraire_attribut($e, 'url');
 	$fichier = basename($url) OR $fichier;
-	$e = preg_replace(',<enclosure[[:space:]],i','<a rel="enclosure" ', $e)
+	$e = preg_replace(',<enclosure[[:space:]],iS','<a rel="enclosure" ', $e)
 		. $fichier.'</a>';
 	$e = vider_attribut($e, 'url');
 	$e = inserer_attribut($e, 'href', filtrer_entites($url));
@@ -1266,8 +1266,8 @@ function microformat2enclosure($tags) {
 	if (extraire_attribut($e, rel) == 'enclosure') {
 		$url = extraire_attribut($e, 'href');
 		$fichier = basename($url) OR $fichier;
-		$e = preg_replace(',<a[[:space:]],i','<enclosure ', $e);
-		$e = preg_replace(',( ?/?)>.*,',' />', $e);
+		$e = preg_replace(',<a[[:space:]],iS','<enclosure ', $e);
+		$e = preg_replace(',( ?/?)>.*,S',' />', $e);
 		$e = vider_attribut($e, 'href');
 		$e = vider_attribut($e, 'rel');
 		$e = inserer_attribut($e, 'url', filtrer_entites($url));
@@ -1297,7 +1297,7 @@ function boutonne($t, $n, $v, $a='') {
 // retourne la premiere balise du type demande
 // ex: [(#DESCRIPTIF|extraire_balise{img})]
 function extraire_balise($texte, $tag) {
-	if (preg_match(",<$tag\\s.*>,Uims", $texte, $regs))
+	if (preg_match(",<$tag\\s.*>,UimsS", $texte, $regs))
 		return $regs[0];
 }
 
@@ -1335,7 +1335,7 @@ function in_any($val, $vals, $def) {
 // valeur_numerique("3*2") => 6
 // n'accepte que les *, + et - (a ameliorer si on l'utilise vraiment)
 function valeur_numerique($expr) {
-	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,', trim($expr)))
+	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,S', trim($expr)))
 		eval("\$a = $expr;");
 	return intval($a);
 }
@@ -1346,7 +1346,7 @@ function valeur_numerique($expr) {
 function form_hidden($action) {
 	$hidden = '';
 	if (false !== ($p = strpos($action, '?')))
-		foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
+		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
 			$hidden .= "\n<input name='" .
 				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
 				"' type='hidden' />";
@@ -1521,7 +1521,7 @@ function table_valeur($table,$cle,$defaut=''){
 
 // filtre match pour faire des tests avec expression reguliere
 // [(#TEXTE|match{^ceci$,Uims})]
-function match($texte,$expression,$modif="Uims"){
+function match($texte,$expression,$modif="UimsS"){
 	$expression=str_replace("\/","/",$expression);
 	$expression=str_replace("/","\/",$expression);
   return preg_match("/$expression/$modif",$texte);
