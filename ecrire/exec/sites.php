@@ -115,7 +115,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>".
-		gros_titre($nom_site, '' , false)
+		gros_titre($nom_site?$nom_site:"("._T('info_sans_titre_2').")", '' , false)
 	  . "<a href='$url_site' class='url_site'>$url_affichee</a>";
 
 	$onglet_contenu = 

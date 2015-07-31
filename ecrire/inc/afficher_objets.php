@@ -90,9 +90,9 @@ function afficher_titre_objet($type,$row){
 	if (function_exists($f = "afficher_titre_$type"))
 		return $f($row);
 
-	$titre = isset($row['titre'])?sinon($row['titre'], _T('ecrire:info_sans_titre')):
-	(isset($row['nom'])?sinon($row['nom'], _T('ecrire:info_sans_titre')):
-	 (isset($row['nom_email'])?sinon($row['nom_email'], _T('ecrire:info_sans_titre')):
+	$titre = isset($row['titre'])?sinon($row['titre'], "("._T('info_sans_titre_2').")"):
+	(isset($row['nom'])?sinon($row['nom'], "("._T('info_sans_titre_2').")"):
+	 (isset($row['nom_email'])?sinon($row['nom_email'], "("._T('info_sans_titre_2').")"):
 	  ""));
 	return array(typo(supprime_img($titre,'')),'');
 }
@@ -100,7 +100,7 @@ function afficher_titre_objet($type,$row){
 function afficher_titre_site($row){
 	$syndication = $row['syndication'];
 	$s = "";
-	$s .= typo($row['nom_site']);
+	$s .= $row['nom_site']?typo($row['nom_site']):"("._T('info_sans_titre_2').")";
 	$s2 = "&nbsp;&nbsp; <span class='spip_xx-small'>[<a href='"
 	.$row['url_site']."'>"._T('lien_visite_site')."</a>]</span>";
 	
