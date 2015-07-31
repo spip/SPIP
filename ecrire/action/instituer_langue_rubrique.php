@@ -37,7 +37,6 @@ function action_instituer_langue_rubrique_dist() {
 			spip_query("UPDATE spip_rubriques SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 		}
 		include_spip('inc/rubriques');
-		calculer_rubriques();
 		calculer_langues_rubriques();
 
 		// invalider les caches marques de cette rubrique

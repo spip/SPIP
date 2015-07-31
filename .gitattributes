@@ -377,7 +377,6 @@ ecrire/action/instituer_forum.php -text
 ecrire/action/instituer_groupe_mots.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/instituer_mot.php -text
-ecrire/action/instituer_rubrique_articles.php -text
 ecrire/action/instituer_rubrique_breves.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text
