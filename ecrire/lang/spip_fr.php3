@@ -1294,7 +1294,7 @@ avez fait des modifications importantes de graphisme ou de structure du site. ',
 'texte_titre_02' => 'Titre :',
 'texte_titre_obligatoire' => '<B>Titre</B> [Obligatoire]',
 'texte_travail_article' => '@nom_auteur_modif@ a travaill&eacute; sur cet article il y a @date_diff@ minutes',
-'texte_travail_colaboratif' => 'S\'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
+'texte_travail_collaboratif' => 'S\'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
 		travaillent sur le m&ecirc;me article, le syst&egrave;me
 		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
 		afin d\'&eacute;viter les modifications simultan&eacute;es.
