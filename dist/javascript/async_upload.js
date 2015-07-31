@@ -62,23 +62,21 @@ jQuery.fn.async_upload = function(add_function) {
 
 // Safari plante quand on utilise clone() -> on utilise html()
 // Mais FF a un bug sur les urls contenant ~ quand on utilise html() -> on utilise clone()
-jQuery.fn.clone2 = jQuery.browser.safari ? jQuery.fn.html : jQuery.fn.clone;
+jQuery.fn.clone2 = jQuery.browser.mozilla ? jQuery.fn.clone : jQuery.fn.html;
 
 
 function async_upload_article_edit(res,jForm){
       var cont;
       //verify if a new document or a customized vignette
       var anchor = jQuery(res.find(">a:first"));
-      res.end(); 
 			if(jQuery("#"+anchor.attr('id')).size()) {
 				cont = jQuery("#"+anchor.attr('id')).next().next().html(anchor.next().next().html());
 			} else {
 	      //add a class to new documents
 	      res.
 	      find(">div[@class]")
-	        .addClass("documents_added")
-	        .css("display","none")
-	      .end();
+	      .addClass("documents_added")
+	      .css("display","none");
 	      if (jForm.find("input[@name='arg']").val().search("/0/vignette")!=-1)
 	        cont = jQuery("#liste_images");
 	      else
