@@ -868,7 +868,6 @@ function spip_initialisation() {
 	define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 	# vers les logos de type de document, standard & perso
 	define('_DIR_IMG_ICONES_DIST', _DIR_IMG_PACK . "icones/");
-	define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 	# les icones de la barre d'edition des formulaires
 	define('_DIR_IMG_ICONES_BARRE', _DIR_IMG_PACK . "icones_barre/");
 
@@ -878,9 +877,6 @@ function spip_initialisation() {
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
-
-	// les repertoires devant etre TOUJOURS accessibles en ecriture
-	$GLOBALS['test_dirs'] = array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
 
 	// qq chaines standard
 	define('_ACCESS_FILE_NAME', '.htaccess');
@@ -981,9 +977,8 @@ function spip_initialisation() {
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
 
-
 	// Lire les meta cachees
-	if (lire_fichier(_DIR_TMP . 'meta_cache.txt', $meta))
+	if (lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
