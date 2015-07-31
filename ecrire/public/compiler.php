@@ -40,20 +40,39 @@ include_spip('public/balises');
 include_spip('public/jointures');
 
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($params, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
+function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
-	foreach($params as $couple) {
-		list($var, $val) = $couple;
-		if ($var == 'lang') {
-			$lang = $val;
-		} else {
-			$val = ($val[0]->type == 'texte' AND !$val[0]->texte) 
-			? index_pile($id_boucle, $var, $boucles)
-			: calculer_liste($val, $descr, $boucles, $id_boucle);
+	foreach($params as $k => $couple) {
+		$val = $couple[1];
+		$var = $val[0];
+		if ($couple[0]){
+			if ($rejet_filtres)
+				break; // on est arrive sur un filtre qui suit la balise
+		} elseif ($var->type != 'texte') {
+			if ($rejet_filtres)
+				break; // on est arrive sur un filtre sans argument qui suit la balise
+			else
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
+		} else { preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
+			$var = $m[1];
+			if ($m[2]) {
+			  $v = $m[3];
+			  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
+			  $val[0]->texte = $v;
+			} else $val[0]->type = 'vide';
 
-			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
-			  . $val . ($echap? ") . '":" ");
+			if ($var == 'lang') {
+			  $lang = $val;
+			} else {
+
+			  $val = ($val[0]->type === 'vide')
+			    ? index_pile($id_boucle, $var, $boucles)
+			    : calculer_liste($val, $descr, $boucles, $id_boucle);
+
+			  $l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
+			    . $val . ($echap? ") . '":" ");
+			}
 		}
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
@@ -62,10 +81,11 @@ function argumenter_inclure($params, $descr, &$boucles, $id_boucle, $echap=true	
 	if ($lang === false) return $l;
 
 	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
-		($lang
+	  (($lang[0]->type !== 'vide')
 			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
 			: '$GLOBALS["spip_lang"]'
 			) . ($echap?") . '":" ");
+
 	return $l;
 }
 
@@ -95,8 +115,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 			}
 		}
 	}
-
-	$_contexte = argumenter_inclure(phraser_arguments_inclure($p->param), $descr, $boucles, $id_boucle);
+	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {

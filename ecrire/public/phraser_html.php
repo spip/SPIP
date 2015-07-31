@@ -38,29 +38,6 @@ define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|=>]*=[^\|>]*)})?(
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
 
-// http://doc.spip.org/@phraser_arguments_inclure
-function phraser_arguments_inclure($param,$rejet_filtres = false){
-	// on assimile {var=val} a une liste de un argument sans fonction
-	foreach ($param as $k => $v) {
-		$var = $v[1][0];
-		if ($var==NULL){
-			if ($rejet_filtres)
-				break; // on est arrive sur un filtre sans argument qui suit la balise
-		} elseif ($var->type != 'texte') {
-			if ($rejet_filtres)
-				break; // on est arrive sur un filtre sans argument qui suit la balise
-			else
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
-		} elseif (preg_match(",^([^=]*)=?(.*)$,", $var->texte,$m)) {
-			$param[$k][0] = $m[1];
-			$val = $m[2];
-			if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
-			$param[$k][1][0]->texte = $val;
-		}
-	}
-	return $param;
-}
-
 // http://doc.spip.org/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
 
@@ -604,8 +581,8 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
-			$args = phraser_arguments_inclure($result->param);
-
+			phraser_criteres($result->param, $result);
+			$args = $result->param;
 			array_unshift($args,
 				      substr($type, strlen(TYPE_RECURSIF)));
 			$result->param = $args;
