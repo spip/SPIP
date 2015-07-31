@@ -512,8 +512,8 @@ function analyser_backend($rss) {
 (preg_match(",<title>(.*?)</title>,ims",$item,$match))
 			$data['titre'] = $match[1];
 			else if (($syndic_version==0.3) AND (strlen($letitre)==0))
-				if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"\']+)[\'"]',$link_match,$mat))
-				$data['titre']=$mat[1]; 
+				if (preg_match(',title[[:space:]]*=[[:space:]]*([\'"])(.+?)\\1,ims',$link_match,$mat))
+				$data['titre']=$mat[2]; 
 		if (!$data['titre'] = trim($data['titre']))
 			$data['titre'] = _T('ecrire:info_sans_titre');
 
