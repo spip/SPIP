@@ -42,7 +42,7 @@ function exec_calendrier_dist()
 	  }
   $ancre = 'calendrier-1';
 
-  $r = http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
+  $r = http_calendrier_init('', $type, '',DEFAUT_PARTIE,generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
 
   if (_request('var_ajaxcharset')) ajax_retour($r);
 

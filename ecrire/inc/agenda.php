@@ -26,6 +26,12 @@ charger_generer_url();
 
 define('DEFAUT_D_ECHELLE',120); # 1 pixel = 2 minutes
 
+define('DEFAUT_PARTIE_M', "matin");
+define('DEFAUT_PARTIE_S', "soir");
+define('DEFAUT_PARTIE_T', "tout");
+define('DEFAUT_PARTIE_R', "sansheure");
+define('DEFAUT_PARTIE', DEFAUT_PARTIE_R);
+
 // 
 // Utilitaires sans html ni sql
 //
@@ -166,6 +172,7 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	$annee = date("Y",$time);
 	if (!$ltype) $ltype = $type ? $type : 'mois';
 	if (!$lechelle) $lechelle = $echelle;
+
 	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
@@ -374,7 +381,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 
 	if (is_array($evt))
 	  {
-	  	if($partie_cal!='sansheure'){
+	  	if($partie_cal!= DEFAUT_PARTIE_R){
 	    $sd = http_calendrier_sans_date($annee, $mois,$evt[0]);
 	    $finurl = "&amp;echelle=$echelle&amp;partie_cal=$partie_cal";
 	    $evt =
@@ -536,7 +543,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 	global $spip_ecran;
 
 	$gauche = (_DIR_RESTREINT  || ($spip_ecran != "large"));
-	if ($partie_cal!="sansheure")
+	if ($partie_cal!= DEFAUT_PARTIE_R)
 		return
 		  "<tr class='calendrier-verdana10'>" .
 			# afficher en reduction le tableau du jour precedent
@@ -595,10 +602,10 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 	global $spip_lang_left;
 
 	// tableau
-	if ($partie_cal == "soir") {
+	if ($partie_cal == DEFAUT_PARTIE_M) {
 		$debut = 12;
 		$fin = 23;
-	} else if ($partie_cal == "matin") {
+	} else if ($partie_cal == DEFAUT_PARTIE_M) {
 		$debut = 4;
 		$fin = 15;
 	} else {
@@ -938,27 +945,27 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . (!isset($couleur_foncee) ? "" : "\nstyle='background-color: $couleur_foncee;'")
 	  . ">\n<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
-	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=sansheure", $ancre,
+	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_R, $ancre,
 				 "sans-heure.gif",
 				 _T('sans_heure'),
 				 "calendrier-png" .
-				 (($partie_cal == "sansheure") ? " calendrier-opacity'" : ""))
-	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=tout", $ancre,
+				 (($partie_cal == DEFAUT_PARTIE_R) ? " calendrier-opacity'" : ""))
+	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_T, $ancre,
 				 "heures-tout.png",
 				 _T('cal_jour_entier'),
 				 "calendrier-png" .
-				 (($partie_cal == "tout") ? " calendrier-opacity'" : ""))
-	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=matin", $ancre,
+				 (($partie_cal == DEFAUT_PARTIE_T) ? " calendrier-opacity'" : ""))
+	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_M, $ancre,
 				 "heures-am.png",
 				 _T('cal_matin'),
 				 "calendrier-png" .
-				 (($partie_cal == "matin") ? " calendrier-opacity'" : ""))
+				 (($partie_cal == DEFAUT_PARTIE_M) ? " calendrier-opacity'" : ""))
 
-	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=soir", $ancre,
+	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_S, $ancre,
 				 "heures-pm.png",
 				 _T('cal_apresmidi'), 
 				 "calendrier-png" .
-				 (($partie_cal == "soir") ? " calendrier-opacity'" : ""))
+				 (($partie_cal == DEFAUT_PARTIE_S) ? " calendrier-opacity'" : ""))
 		  . "&nbsp;"
 	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;partie_cal=$partie_cal&amp;echelle=" . floor($echelle * 1.5),
 				$ancre,
