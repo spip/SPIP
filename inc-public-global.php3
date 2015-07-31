@@ -248,41 +248,19 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 
 	// Retourner le contenu...
 	return $page;
-
 }
 
 function inclure_formulaire($r) {
 	if (is_string($r))
-	echo $r;
+		echo $r;	# ??? c'est du debug ou quoi ?
 	else {
 		list($fond, $delais, $contexte_inclus) = $r;
 		if ((!$contexte_inclus['lang']) AND
-		    ($GLOBALS['spip_lang'] != lire_meta('langue_site')))
+		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang']; 
 		include('inc-public.php3');
 	}
 }
 
-
-// Inserer la feuille de style selon les normes, dans le <head>
-// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
-function perso_admin($texte) {
-	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />";
-	if (@file_exists('spip_admin_perso.css'))
-		$css2 = "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
-	else $css2 = '';
-	$x = strpos($texte,$css);
-	if ($x !== false) {
-		if ($css2) {
-			$x+=strlen($css);
-			return substr($texte,0,$x) . $css2 . substr($texte,$x+1);
-		} else 	return $texte;
-	} else {
-		if (eregi('<(/head|body)', $texte, $regs)) {
-			$texte = explode($regs[0], $texte, 2);
-			return $texte[0].$css."\n" . $css2.$regs[0].$texte[1];
-		} else  return $texte . $css . "\n" . $css2;
-	}
-}
 
 ?>
