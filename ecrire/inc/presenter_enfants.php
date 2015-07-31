@@ -43,7 +43,9 @@ function enfant_rub($collection,$debut=0,$limite=500){
 	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
-		$titre=$row['titre'];
+		$titre=generer_info_entite($id_rubrique,'rubrique','titre'); // pour etre sur de passer par tous les traitements
+		if ($rang = recuperer_numero($row['titre']))
+			$rang = "$rang. ";
 
 		if (autoriser('voir','rubrique',$id_rubrique)){
 
@@ -67,7 +69,7 @@ function enfant_rub($collection,$debut=0,$limite=500){
 			  " <a dir='$lang_dir' href='" .
 			  generer_url_entite($id_rubrique,'rubrique') .
 			  "'>".
-			  typo($titre) .
+				$rang . $titre .
 			  "</a>";
 
 			$titre = (is_string($logo) ? $logo : '') .
@@ -118,11 +120,14 @@ function sous_enfant_rub($collection2){
 	while($row=sql_fetch($result)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
-		$titre2=$row['titre'];
+		$titre2=generer_info_entite($id_rubrique2,'rubrique','titre'); // pour etre sur de passer par tous les traitements
+		if ($rang2 = recuperer_numero($row['titre']))
+			$rang2 = "$rang2. ";
+
 		changer_typo($row['lang']);
 		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir','rubrique',$id_rubrique2))
-			$retour.="\n<li class='item' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".typo($titre2)."</a></li>\n";
+			$retour.="\n<li class='item' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".$rang2.$titre2."</a></li>\n";
 	}
 	
 	$retour = $pagination.$retour.$pagination;
