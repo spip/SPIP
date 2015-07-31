@@ -45,11 +45,6 @@ if ($set_lang) {
 		spip_setcookie('spip_lang', $set_lang, time() + 365 * 24 * 3600);
 	}
 }
-if ($securite == 'normal' || $securite == 'strict') {
-	$prefs['securite'] = $securite;
-	$secu = 'oui';
-	$prefs_mod = true;
-}
 
 if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");

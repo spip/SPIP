@@ -14,6 +14,10 @@ include_ecrire ("inc_mail.php3");
 // Appliquer les valeurs par defaut pour les options non initialisees
 //
 function init_config() {
+	// langue par defaut du site = langue d'installation (cookie spip_lang) sinon francais
+	if (! $lang = $GLOBALS['spip_lang'])
+		$lang = 'fr';
+
 	$liste_meta = array(
 		'activer_breves' => 'oui',
 		'config_precise_groupes' => 'non',
@@ -55,7 +59,7 @@ function init_config() {
 
 		'creer_htpasswd' => 'non',
 		
-		'langue_site' => 'fr'
+		'langue_site' => $lang
 		
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {

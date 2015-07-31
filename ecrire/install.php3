@@ -4,9 +4,12 @@ include ("inc_version.php3");
 
 include_ecrire ("inc_presentation.php3");
 
+gerer_menu_langues();
+
 if (file_exists("inc_connect.php3")) {
 	install_debut_html();
 	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
+
 	install_fin_html();
 	exit;
 }
@@ -349,8 +352,25 @@ else if ($etape == 1) {
 	install_fin_html();
 
 }
-else if (!$etape) {
+else if ($etape == 'dirs') {
 	header("Location: ../spip_test_dirs.php3");
+}
+else if (!$etape) {
+	install_debut_html();
+
+	echo "<p>&nbsp;</p><p align='center'><img src='AIDE/fr/logo-spip.gif'></p>";
+	
+	echo "<p>&nbsp;</p><p>" . _L("S&eacute;lectionnez une langue puis cliquez sur le bouton &laquo;&nbsp;suivant&nbsp;&raquo; pour lancer la proc&eacute;dure d'installation.");
+
+	echo "<p><div align='center'>".menu_langues()."</div>";
+
+
+	echo "<p><FORM ACTION='install.php3' METHOD='get'>";
+	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='dirs'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "</FORM>";
+
+	install_fin_html();
 }
 
 
