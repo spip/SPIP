@@ -499,6 +499,7 @@ function calculer_select ($select = array(), $from = array(),
 // parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
 // si elle est seulement utile a Ln+1 elle meme inutile
 	
+	$sfrom = '';
 	for($k = count($join); $k > 0; $k--) {
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
@@ -506,10 +507,11 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $where))
-			$where[]= "$t.$c=$cle.$c";
-		else { unset($from[$cle]); unset($join[$k]);}
+			$sfrom = " INNER JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
+		else { unset($join[$k]);}
+		unset($from[$cle]);
 	}
-
+	if ($sfrom) $from[-1] = $sfrom;
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
 
 	$r = sql_select($select, $from, $where,

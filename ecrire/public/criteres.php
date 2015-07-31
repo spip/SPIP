@@ -853,13 +853,11 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 
 function fabrique_jointures(&$boucle, $res, $cond=false, $desc, $nom='', $col='')
 {
-  spip_log("fj " . join(',',$res) . ' ' . join(';', $desc));
 	static $num=array();
 	$id_table = "";
 	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
 	foreach($res as $r) {
 		list($d, $a, $j) = $r;
-		spip_log("id $id_table  d $d a $a[0] j $j");
 		if (!$id_table) $id_table = $d;
 		$n = ++$cpt;
 		$boucle->join[$n]= array("'$id_table'","'$j'");
@@ -876,17 +874,14 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc, $nom='', $col=''
 	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
 		if ($pk = $a[1]['key']['PRIMARY KEY']) {
 			$id_primary = $desc['key']['PRIMARY KEY'];
-			spip_log("prim $id_primary $col '$pk'");
 			$pk = (preg_match("/^$id_primary, *$col$/", $pk) OR
 			       preg_match("/^$col, *$id_primary$/", $pk));
 		}
 	}
 	
   // la clause Group by est en conflit avec ORDER BY, a completer
-	spip_log("pj '$pk' '$cond' " . join(',',$boucle->from) . " $desc");
 	if (!$pk) foreach(liste_champs_jointures($nom,$desc) as $id_prim){
 		$id_field = $nom . '.' . $id_prim;
-		spip_log("id_field");
 		if (!in_array($id_field, $boucle->group)) {
 			$boucle->group[] = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
