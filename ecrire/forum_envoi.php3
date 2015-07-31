@@ -88,7 +88,7 @@ echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 echo "<p><B>Texte de votre message :</B><BR>";
 echo "(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
 echo "<TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
-echo $texte;
+echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 
 echo "<B>Lien hypertexte :</B><BR>";
