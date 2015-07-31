@@ -54,15 +54,20 @@ function balise_URL_SITE_SPIP_dist($params) {
 
 function balise_URL_ARTICLE_dist($params) {
 	$_type = $params->boucles[$params->id_boucle]->type_requete;
-	if ($_type == 'articles') {
-		$_id_article = champ_sql('id_article', $params);
-		$params->code = "generer_url_article($_id_article)";
-	} else if ($_type == 'syndic_articles') {
+
+	// Cas particulier des boucles (SYNDIC_ARTICLES)
+	if ($_type == 'syndic_articles') {
 		$params->code = champ_sql('url', $params);
 	}
 
-	if ($params->boucles[$params->id_boucle]->hash)
-		$params->code = "url_var_recherche(" . $params->code . ")";
+	// Cas general : chercher un id_article dans la pile
+	else {
+		$_id_article = champ_sql('id_article', $params);
+		$params->code = "generer_url_article($_id_article)";
+
+		if ($params->boucles[$params->id_boucle]->hash)
+			$params->code = "url_var_recherche(" . $params->code . ")";
+	}
 
 	return $params;
 }

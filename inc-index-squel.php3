@@ -34,7 +34,7 @@ function index_pile($idb, $nom_champ, &$boucles) {
 		if (!$t)
 			$t = $r; // pour les tables non Spip
 		// $t est le nom PHP de cette table 
-		#spip_log("'$idb' '$r' '$c' '$nom_champ'");
+		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ'");
 		$desc = $tables_principales[$t];
 		if (!$desc) {
 			include_local("inc-debug-squel.php3");
@@ -55,22 +55,28 @@ function index_pile($idb, $nom_champ, &$boucles) {
 		else {
 			// $e est le type SQL de l'entree (ici utile comme booleen)
 			// entite SPIP homonyme au champ SQL
-			$e = $desc['field'][$c];
-			if ($e)
+			if ($desc['field'][$c])
 				$e = $c;
+			else
+				$e = '';
 		}
-		#spip_log("Dans $idb ($t $e): $desc");    
+
+		#spip_log("Dans $idb ($t $e): $desc");
+
+		// On l'a trouve
 		if ($e) {
 			$boucles[$idb]->select[] = $t . "." . $e;
-			return '$Pile[$SP' . ($i ? "-$i" : "") . '][' . $e . ']';
+			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $e . '\']';
 		}
+
+		// Sinon on remonte d'un cran
 		$idb = $boucles[$idb]->id_parent;
 		$i++;
 	}
 
 	#spip_log("Pas vu $nom_champ dans les " . count($boucles) . " boucles");
 	// esperons qu'il y sera
-	return('$Pile[0]['.$nom_champ.']');
+	return('$Pile[0][\''.$nom_champ.'\']');
 }
 
 # calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
