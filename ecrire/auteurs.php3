@@ -301,7 +301,7 @@ fin_cadre_relief();
 
 if ($connect_statut =="0minirezo"){
 	echo "<div align='right'>";
-	icone ("Cr&eacute;er un nouvel auteur", "auteurs_infos.php3?new=oui&redirect=$retour", "redacteurs-24.png", "creer.gif");
+	icone ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.png", "creer.gif");
 	echo "</div>";
 }
 
