@@ -109,7 +109,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$navigation =
 	  debut_boite_info(true). $boite . fin_boite_info(true)
 	  . $icone
-		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
+		. boites_de_config_articles($id_article)
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
@@ -126,27 +126,21 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>".
-		(_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n")
+		(strlen($surtitre)?"<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n":"")
 		. gros_titre($titre, '' , false)
-		. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n");
+		. (strlen($soustitre)?"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n":"");
 
 	$onglet_contenu =
 	  afficher_corps_articles($id_article,$virtuel,$row)
 		.		"<div class='bandeau_actions'>$actions</div>";
 
-	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
-	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
+	$onglet_proprietes =
+	    $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 		. bouton_proposer_article($id_article,$statut_article)
 	  ;
-
-	$onglet_documents = "";
-	if ($documenter_objet = charger_fonction('documenter_objet','inc',true)){
-		$onglet_documents = $documenter_objet($id_article,'article','articles',$flag_editable);
-	}
-	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 
 	return
 	  $navigation
@@ -154,19 +148,12 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . pipeline('afficher_fiche_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>
 	  	"<div class='fiche_objet'>" .
 	  	$haut	.
-	  	afficher_onglets_pages(
-	  	array(
-	  	'voir' => _T('onglet_contenu'),
-	  	'props' => _T('onglet_proprietes'),
-	  	'docs' => _T('onglet_documents'),
-	  	'interactivite' => _T('onglet_interactivite'),
-	  	),
-	  	array(
-	    'props'=>$onglet_proprietes,
-	    'voir'=>$onglet_contenu,
-	    'docs'=>$onglet_documents,
-	    'interactivite'=>$onglet_interactivite,
-	    )) .
+		  "<div class='nettoyeur'></div>" .
+	    $onglet_proprietes .
+		  "<div class='nettoyeur'></div>" .
+	    $onglet_contenu .
+		  pipeline('afficher_complement_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>"<div class='nettoyeur'></div>")) .
+		  "<div class='nettoyeur'></div>" .
 	    "</div>"
 	  ));
 }

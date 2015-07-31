@@ -37,6 +37,7 @@ function hr($color, $retour = false) {
 // Cadres
 //
 // http://doc.spip.org/@afficher_onglets_pages
+/*
 function afficher_onglets_pages($ordre,$onglets){
 	static $onglet_compteur = 0;
 	$res = "";
@@ -69,7 +70,7 @@ function afficher_onglets_pages($ordre,$onglets){
 	 	);")
 	   :"");
 }
-
+*/
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
 	global $spip_display, $spip_lang_left;

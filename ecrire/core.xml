@@ -205,7 +205,7 @@
 	<pipeline><nom>affichage_entetes_final</nom><action></action></pipeline>
 	<pipeline><nom>affichage_entetes_final_prive</nom><action></action></pipeline>
 	<pipeline><nom>afficher_fiche_objet</nom><action></action></pipeline>
-	<pipeline><nom>afficher_fiche_objet</nom><action></action></pipeline>
+	<pipeline><nom>afficher_complement_objet</nom><action></action></pipeline>
 	<pipeline><nom>afficher_config_objet</nom><action></action></pipeline>
 	<pipeline><nom>afficher_contenu_objet</nom><action></action></pipeline>
 	<pipeline><nom>afficher_nombre_objets_associes_a</nom><action></action></pipeline>
