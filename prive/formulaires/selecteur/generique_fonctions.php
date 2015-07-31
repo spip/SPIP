@@ -77,7 +77,7 @@ function picker_selected($selected, $type=''){
 				if (is_string($type) and $type == $objet and $id_objet){
 					$select[] = $id_objet;
 				}
-				else{
+				else if(!is_string($type)){
 					$select[] = array('objet' => $objet, 'id_objet' => $id_objet);
 				}
 			}
