@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_urls');
+charger_generer_url();
 
 function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 	global $couleur_foncee;

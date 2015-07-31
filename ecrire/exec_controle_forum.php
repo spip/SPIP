@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
-include_ecrire("inc_urls");
+charger_generer_url();
 include_ecrire('inc_forum');
 
 function forum_parent($id_forum) {
