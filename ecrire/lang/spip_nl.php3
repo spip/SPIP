@@ -48,13 +48,13 @@ $GLOBALS['i18n_spip_nl'] = array(
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
 'avis_erreur_mysql' => 'MySQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
-'avis_erreur_version_archive' => '<MODIF> <B>Opgelet! Het bestand @archive@ komt overeen met een andere
-    SPIP-versie dan deze die is ge&iuml;nstalleerd.</B>Dit kan voor
+'avis_erreur_version_archive' => '<B>Opgelet! Het bestand @archive@ komt overeen met een andere
+    SPIP-versie dan deze die is ge&iuml;nstalleerd.</b>Dit kan voor
  grote moeilijkheden zorgen : risico op het wissen van de databank,
  ontregeling van de website, enz. Ga niet verder met de invoer
  van het bestand. <p>Meer info kan je vinden op
  <A HREF=\'http://www.spip.net/fr_article1489.html\'>
-                                de documentatie van SPIP</A>.',
+                                de documentatie van SPIP</a>.',
 'avis_espace_interdit' => '<B>Verboden toegang</B><p>SPIP is reeds ge&iuml;nstalleerd.',
 'avis_lecture_noms_bases_1' => 'Het installatieprogramma heeft de namen van de ge&iuml;nstalleerde databanken niet kunnen lezen.',
 'avis_lecture_noms_bases_2' => 'Geen enkele database is beschikbaar, ofwel is de functie die de databases zou moeten tonen, niet geactiveerd
@@ -184,6 +184,11 @@ $GLOBALS['i18n_spip_nl'] = array(
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf : <B>Toegangsrechten regelen</B>',
 'dirs_probleme_droits' => '<b>Probleem met toegangsrechten</b>',
+'dirs_repertoires_absents' => '<B>De volgende mappen werden niet gevonden&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <P>Waarschijnlijk is te wijten aan het door elkaar halen van grote en kleine letters.
+  Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
+ is dit niet het geval, hernoem dan mappen met je FTP-programma om de fout zo weg te nemen.
+  <P>Eenmaal deze bewerking uitgevoerd is, kan je',
 'dirs_repertoires_suivants' => '<B>Je hebt geen schrijfrechten op de volgende mappen&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding
@@ -520,7 +525,7 @@ Bedankt voor je deelname
 'info_contenu_articles' => 'Inhoud van de artikels',
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
-'info_copyright_doc' => '<MODIF> Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
+'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creation_mots_cles' => 'Cre&euml;er en configureer hier de trefwoorden van de site',
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
@@ -688,9 +693,9 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_mots_cles_association' => 'Trefwoorden uit deze groep kunnen verbonden worden met&nbsp;:',
 'info_moyenne' => 'gemiddeld&nbsp;:',
 'info_multi_articles' => 'Taalmenu voor artikels instellen&nbsp;?',
-'info_multi_cet_article' => 'Gerbuikte taal in dit artikel is&nbsp;:',
+'info_multi_cet_article' => 'Gebruikte taal in dit artikel is&nbsp;:',
 'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is&nbsp;:',
-'info_multi_herit' => '<MODIF> taal van het ouderartikel',
+'info_multi_herit' => 'Standaardtaal',
 'info_multi_langues_choisies' => '<MODIF> Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al in gebruik zijn (als eerste in de lijst getoond) kunnen niet geschrapt worden.
   Opgelet&nbsp;: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
@@ -1076,7 +1081,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'login_login2' => 'Login (naam voor aanmelding bij deze site):',
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
 'login_motpasseoublie' => 'Paswoord&nbsp;vergeten&nbsp;?',
-'login_non_securise' => '<MODIF> Opgepast, dit formuilier is niet beveiligd.
+'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.
 
    Als je wil dat derden je paswoord niet kunnen onderscheppen
 
@@ -1255,10 +1260,10 @@ verbinding maken met de site
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in de map <i>ecrire/data/</i>. Vergeet ook niet de map <i>IMG/</i>, die alle afbeeldingen en bijlagen bij de artikels en rubrieken bevat, integraal te bewaren.',
-'texte_admin_tech_02' => '<MODIF> Opgelet: deze reservekopie kan ENKEL worden teruggezet
+'texte_admin_tech_02' => 'Opgelet: deze reservekopie kan ENKEL worden teruggezet
  op een site met dezelfde SPIP-versie. Vaak wordt de
  fout gemaakt om een reservekopie te maken alvorens SPIP
- te updaten ... Voor meer info, kan je <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
+ te updaten ... Voor meer info, kan je de <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
 'texte_admin_tech_03' => 'Je kan de reservekopie ook als een gecomprimeerd bestand opslaan, dit om de overzettijd van de server naar je computer sterk in te korten en om schijfruimte te besparen.',
 'texte_adresse_annuaire_1' => '(Als de map is ge&iuml;nstalleerd is op dezelfde computer als je website, is het waarschijnlijk &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Deze auteuer is toegevoegd aan het artikel :',
@@ -1388,7 +1393,7 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
  van artikels aanpassen aan de inhoud.',
 'texte_mots_cles_dans_forum' => 'Wens je het gebruik van trefwoorden, te selecteren door de bezoekers, toe te laten op de forums van de publieke site&nbsp;? (Opgelet&nbsp;: deze optie is redelijk ingewikkeld om juist te gebruiken.)',
 'texte_multilinguisme' => 'Als je graag artikels in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij de artikels en/of de rubrieken, i.f.v de organisatie van je site.',
-'texte_multilinguisme_trad' => '<MODIF> Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.',
+'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.',
 'texte_non_compresse' => '<i>niet gecomprimeerd</i> (de server ondersteunt deze functionaliteit niet)',
 'texte_non_fonction_referencement' => 'Je kan kiezen om deze automatische functie uit te schakelen en zelf aangeven welke elementen je wil opnemen voor deze site.',
 'texte_nouveau_message' => 'Nieuw bericht',

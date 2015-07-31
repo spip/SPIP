@@ -641,7 +641,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_multi_articles' => 'Sprachauswahl f&uuml;r Artikel aktivieren?',
 'info_multi_cet_article' => '<MODIF> Dieser Artikel ist auf:',
 'info_multi_cette_rubrique' => '<MODIF> Diese Rubrik ist auf:',
-'info_multi_herit' => '<NEW> langue de la rubrique sup&eacute;rieure',
+'info_multi_herit' => '<NEW> Langue par d&eacute;faut',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => 'Sprachauswahl f&uuml;r Rubriken aktivieren?',
