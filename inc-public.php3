@@ -41,6 +41,17 @@ include_local ("inc-cache.php3");
 
 
 //
+// Authentification, le cas echeant
+//
+$auteur_session = '';
+if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
+	include_ecrire("inc_connect.php3");
+	include_ecrire("inc_meta.php3");
+	include_ecrire ("inc_session.php3");
+	verifier_visiteur();
+}
+
+//
 // Ajouter un forum
 //
 
@@ -72,15 +83,6 @@ if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 else {
 	include_ecrire("inc_connect.php3");
 	include_ecrire("inc_meta.php3");
-}
-
-//
-// Authentification, le cas echeant
-//
-$auteur_session = '';
-if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
-	include_ecrire ("inc_session.php3");
-	verifier_visiteur();
 }
 
 
