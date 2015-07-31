@@ -137,6 +137,7 @@ function maj_base($version_cible = 0) {
 
 define('_UPGRADE_TIME_OUT', 20);
 
+// http://doc.spip.org/@maj_while
 function maj_while($version_installee, $version_cible)
 {
 	$pref = floor($version_installee);
