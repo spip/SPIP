@@ -97,8 +97,11 @@ function traiter_appels_inclusions_ajax(){
 				$texte = "<a href='#$ancre' name='ajax_ancre' style='display:none;'>anchor</a>".$texte;
 			}
 		}
-		else 
+		else {
+			include_spip('inc/headers');
+			http_status(403);
 			$texte = _L('signature ajax bloc incorrecte');
+		}
 		ajax_retour($texte);
 		return true; // on a fini le hit
 	}
