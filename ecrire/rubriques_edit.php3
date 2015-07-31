@@ -50,7 +50,7 @@ function enfant($leparent){
 
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">&nbsp;&nbsp;&nbsp; $espace$titre\n";
+				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">&nbsp;&nbsp;&nbsp; $espace".supprimer_tags($titre)."\n";
 			}
 			enfant($my_rubrique);
 		}

@@ -68,7 +68,7 @@ function enfant($leparent){
 		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
+			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
 		}
 		enfant($my_rubrique);
 	}

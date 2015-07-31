@@ -26,7 +26,7 @@ function afficher_auteur_rubriques($leparent){
 			if ($i==1)
 				$espace = "*";
 
-			echo "<OPTION VALUE='$my_rubrique'>$espace $titre\n";
+			echo "<OPTION VALUE='$my_rubrique'>$espace ".supprimer_tags($titre)."\n";
 			afficher_auteur_rubriques($my_rubrique);
 		}
 	}

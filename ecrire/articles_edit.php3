@@ -317,7 +317,7 @@ function enfant($leparent){
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
 			$titre = couper($titre." ", 50); // largeur maxi
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
+			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
 		}
 		$premier = 0;
 		enfant($my_rubrique);

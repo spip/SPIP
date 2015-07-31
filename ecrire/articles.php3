@@ -1136,7 +1136,7 @@ if ($flag_editable AND $options == 'avancees') {
 					echo "\n<OPTION VALUE=\"x\">";
 				}
 
-				$texte_option = couper("$nom$email", 40);
+				$texte_option = supprimer_tags(couper("$nom$email", 40));
 				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
 				$statut_old = $statut;
 				$premiere_old = $premiere;
@@ -1463,7 +1463,7 @@ if ($virtuel) {
 }
 else {
 	echo "<div $dir_lang><b>";
-	$revision_nbsp = false;	// a regler pour relecture des nbsp dans les articles
+	$revision_nbsp = ($options == "avancees");	// a regler pour relecture des nbsp dans les articles
 	echo justifier(propre($chapo));
 	echo "</b></div>\n\n";
 

@@ -210,7 +210,7 @@ function enfant($leparent){
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=$row['titre'];
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$titre\n";
+		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">".supprimer_tags($titre)."\n";
 	}
 	$i=$i-1;
 
