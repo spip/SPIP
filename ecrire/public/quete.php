@@ -134,7 +134,10 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	// qu'une fois (par squelette) et on conserve le resultat
 	// en static.
 	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
-		$principal = $reference[$type];
+		$principal = isset($reference[$type])?$reference[$type]:
+			// cas de la pagination indecte @xx qui positionne la page avec l'id xx
+			// et donne la reference dynamique @type=xx dans le contexte
+			(isset($reference["@$type"])?$reference["@$type"]:'');
 		// le parent fournit en argument est le parent de $id, pas celui de $principal
 		// il n'est donc pas utile
 		$parent = 0;
@@ -142,9 +145,11 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
 			if (isset($enfants[$type]))
 				foreach($enfants[$type] as $t)
-					if (isset($reference[$t])) {
+					if (isset($reference[$t])
+						// cas de la reference donnee dynamiquement par la pagination
+						OR isset($reference["@$t"])) {
 						$type = $t;
-						$principal = $reference[$type];
+						$principal = isset($reference[$type])?$reference[$type]:$reference["@$type"];
 						continue;
 					}
 		}
@@ -326,4 +331,34 @@ function lang_parametres_forum($qs, $lang) {
 
 	return $qs;
 }
+
+/**
+ * Trouver la page d'une liste qui contient l'id_primaire
+ * indiquee par la pagination par indirection debut_xxx=@xxxx
+ *
+ * @param string $primary
+ * @param string $valeur
+ * @param int $pas
+ * @param resource $res
+ * @param string $serveur
+ * @return int
+ */
+function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
+	// on ne devrait pas arriver ici si la cle primaire est inexistante
+	// ou composee, mais verifions
+	if (!$primary OR preg_match('/[,\s]/',$primary))
+		return 0;
+
+	$pos = 0;
+	while ($row = sql_fetch($res,$serveur) AND $row[$primary]!=$valeur){
+		$pos++;
+	}
+	// si on a pas trouve
+	if ($row[$primary]!=$valeur)
+		return 0;
+
+	// sinon, calculer le bon numero de page
+	return floor($pos/$pas)*$pas;
+}
+
 ?>
