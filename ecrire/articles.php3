@@ -1463,10 +1463,13 @@ if ($virtuel) {
 }
 else {
 	echo "<div $dir_lang><b>";
+	$revision_nbsp = false;	// a regler pour relecture des nbsp dans les articles
 	echo justifier(propre($chapo));
 	echo "</b></div>\n\n";
 
-	echo "<div $dir_lang>".justifier(propre($texte))."</div>";
+	echo "<div $dir_lang>";
+	echo justifier(propre($texte));
+	echo "</div>";
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
@@ -1475,6 +1478,7 @@ else {
 		echo "</font></div>";
 		echo fin_cadre_enfonce();
 	}
+	$revision_nbsp = false;
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
