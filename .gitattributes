@@ -538,7 +538,7 @@ prive/squelettes/contenu/configurer_identite.html -text
 prive/squelettes/contenu/configurer_interactions.html -text
 prive/squelettes/contenu/configurer_langage.html -text
 prive/squelettes/contenu/configurer_langue.html -text
-prive/squelettes/contenu/configurer_multilang.html -text
+prive/squelettes/contenu/configurer_multilinguisme.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/infos_perso.html -text
 prive/squelettes/contenu/job_queue.html -text
