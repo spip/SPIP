@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Xa te rexistraches.',
 'form_email_non_valide' => 'O seu enderezo de correo-e. non &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Non tes acceso a este web.',
-'form_forum_bonjour' => 'Ola,',
+'form_forum_bonjour' => 'Ola, @nom@,',
 'form_forum_email_deja_enregistre' => 'Este correo-e xa foi rexistrado, daquela pode empregar a s&uacute;a chave de sempre.',
 'form_forum_identifiant_mail' => 'Enviouseche o teu novo identificador por correo electr&oacute;nico.',
 'form_forum_identifiants' => 'Identificadores persoais',
@@ -282,7 +282,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'forum_vous_enregistrer' => 'Para participar neste foro, ten que se rexistrar
   na p&aacute;xina anterior. Escriba aqu&iacute; embaixo o identificador persoal
   que recibiu. Se a&iacute;nda non se rexistrou, d&eacute;beo facer',
-'forum_vous_inscrire' => 'te rexistrar</a> na p&aacute;xina anterior.',
+'forum_vous_inscrire' => 'rexistrarte.',
 
 
 // I
@@ -374,8 +374,9 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_contact_developpeur' => 'Tes que contactar cun desenrolador.',
 'info_contenance' => 'Este web cont&eacute;n:',
 'info_contribution' => 'contribuci&oacute;ns no foro',
-'info_copyright' => '&eacute; un programa libre distribu&iacute;do <a href=\'copyright_fr.html\'>baixo licenza p&uacute;blica xeral(GPL).</a>',
+'info_copyright' => '@spip@ &eacute; un programa libre distribu&iacute;do @lien_gpl@.',
 'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vaia a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
+'info_copyright_gpl' => 'con licenza GPL',
 'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
 'info_creer_repertoire' => 'Crea un ficheiro ou cartafol chamado:',
 'info_creer_repertoire_2' => 'dentro do subcartafol <b>ecrire/data/</b>, e logo:',
