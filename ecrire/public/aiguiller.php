@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@traiter_appels_actions
 function traiter_appels_actions(){
 	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
 	if ($action = _request('action')) {
@@ -51,6 +52,7 @@ function refuser_traiter_formulaire_ajax(){
 	}
 }
 
+// http://doc.spip.org/@traiter_appels_inclusions_ajax
 function traiter_appels_inclusions_ajax(){
 	// traiter les appels de bloc ajax (ex: pagination)
 	if ($v = _request('var_ajax')

@@ -26,6 +26,7 @@ function action_documenter_dist()
 	else action_documenter_post($r);
 }
 
+// http://doc.spip.org/@supprimer_lien_document
 function supprimer_lien_document($id_document, $objet, $id_objet) {
 	if (!$id_document = intval($id_document))
 		return false;
@@ -43,6 +44,7 @@ function supprimer_lien_document($id_document, $objet, $id_objet) {
 
 }
 
+// http://doc.spip.org/@supprimer_document
 function supprimer_document ($id_document) {
 	include_spip('inc/documents');
 
