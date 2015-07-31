@@ -36,9 +36,6 @@ unset ($flag_editable);
 //
 
 if ($id_article) {
-	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
-	$id_article_bloque = $id_article;	// message pour inc_presentation
-
 	// Recuperer les donnees de l'article
 	$query = "SELECT * FROM spip_articles WHERE id_article=$id_article";
 	$result = spip_query($query);
@@ -145,6 +142,13 @@ else if ($new=='oui') {
 if (!$flag_editable) {
 	die ("<H3>"._T('info_acces_interdit')."</H3>");
 }
+
+
+// Qui veut modifier l'article ?
+spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+$id_article_bloque = $id_article;	// message pour inc_presentation
+
+
 
 
 //
