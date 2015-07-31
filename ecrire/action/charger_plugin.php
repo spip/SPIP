@@ -152,6 +152,7 @@ function action_charger_plugin_dist() {
 		if ($infos) {
 			$nom = $infos['nom'];
 			$image = $infos['icon'];
+			$prefix = $infos['prefix'];
 			$description = $infos['description'];
 			$type = 'plugin';
 			$dest = _DIR_PLUGINS_AUTO;
@@ -191,7 +192,7 @@ function action_charger_plugin_dist() {
 
 			if (_request('extract')) {
 				$afficher = charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
-				$texte = plugin_propre($description)
+				$texte = plugin_propre($description, $prefix)
 				. '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>'
 				. "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
 			} else {
