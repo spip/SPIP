@@ -196,7 +196,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		// mode "resume"
 		$desc = strlen($data['descriptif']) ?
 			$data['descriptif'] : $data['content'];
-		$desc = couper(trim(textebrut($desc)), 300);
+		$desc = couper(trim_more(textebrut($desc)), 300);
 	} else {
 		// mode "full syndication"
 		// choisir le contenu pertinent
@@ -244,5 +244,17 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	);
 
 	return $ajout;
+}
+
+/**
+ * Nettoyer les contenus de flux qui utilisent des espaces insecables en debut
+ * pour faire un retrait.
+ * Peut etre sous la forme de l'entite &nbsp; ou en utf8 \xc2\xa0
+ */
+function trim_more($texte){
+	$texte = trim($texte);
+	// chr(194)chr(160)
+	$texte = preg_replace(",^(\s|(&nbsp;)|(\xc2\xa0))+,ums","",$texte);
+	return  $texte;
 }
 ?>
