@@ -15,8 +15,8 @@ define("_ECRIRE_INC_VERSION", "1");
 $spip_version = 1.409; // version de la base
 
 // dernier tag connu ou date si cvs
-if (! ereg("Name: v(.*) ","$Name$", $regs))
-	ereg("(20../../.. ..:..:..)", "$Id$", $regs);
+if (! ereg('Name: v(.*) ','$Name$', $regs))
+	ereg('(20../../.. ..:..:..)', '$Id$', $regs);
 $spip_version_affichee = $regs[1];
 
 
