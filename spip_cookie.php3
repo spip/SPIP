@@ -34,11 +34,10 @@ if ($change_session == 'oui') {
 		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
-		@header('Cache-Control: no-cache');
+		@header("Cache-Control: no-store, no-cache, must-revalidate");
 		@header('Pragma: no-cache');
 		@header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		@header("Cache-Control: no-store, no-cache, must-revalidate");
 		@readfile('ecrire/img_pack/rien.gif');
 		exit;
 	}
@@ -52,15 +51,16 @@ if ($cookie_session == "non") {
 }
 else if ($essai_login == "oui") {
 	// recuperer le login passe en champ hidden
-	if ($session_login_hidden AND ! $session_login)	$session_login=$session_login_hidden;	
+	if ($session_login_hidden AND !$session_login) $session_login = $session_login_hidden;
 
 	// verifier l'auteur
 	$login = addslashes($session_login);
 	if ($session_password_md5) {
 		$md5pass = $session_password_md5;
 		$md5next = $next_session_password_md5;
-	} else {
-		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
+	}
+	else {
+		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
 			$md5pass = md5($row['alea_actuel'] . $session_password);
@@ -97,7 +97,10 @@ else if ($essai_login == "oui") {
 		$redirect .= '&bonjour=oui';
 	}
 	else {
-		@header("Location: login.php3?login=$login&erreur=pass");
+		if ($session_password || $session_password_md5) 
+			@header("Location: login.php3?login=$login&erreur=pass");
+		else
+			@header("Location: login.php3?login=$login");
 		exit;
 	}
 }

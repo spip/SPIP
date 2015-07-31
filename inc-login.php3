@@ -34,7 +34,7 @@ function login() {
 	// quels sont les aleas a passer ?
 	if ($login) {
 		$login = addslashes($login);
-		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
+		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
@@ -71,16 +71,17 @@ function login() {
 	$images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
 	while (list(,$img) = each ($images)) {
 		if (file_exists($img)) {
-			echo '<style type="text/css"><!--
-				body {background-image: url("'.$img.'"); background-repeat: no-repeat; background-position: top left;}
-				--></style>';
+			echo "<style type=\"text/css\"><!--\n" .
+				"body {background-image: url(\"$img\"); background-repeat: no-repeat; background-position: top left;}\n" .
+				"--></style>\n";
 			break;
 		}
 	}
 
 	echo "<p>&nbsp;<p>";
 
-	$redirect = ereg_replace ("/login\.php3", "/ecrire/index.php3", $GLOBALS['REQUEST_URI']);
+//	$redirect = ereg_replace ("/login\.php3", "/ecrire/index.php3", $GLOBALS['REQUEST_URI']);
+	$redirect = "./ecrire/index.php3";
 
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
@@ -110,9 +111,9 @@ function login() {
 		echo "<tr width=100%>";
 		echo "<td width=100%>";
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
-		echo "<script type=\"text/javascript\"><!--
-				document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&redirect=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
-			//--></script>\n";
+		echo "<script type=\"text/javascript\"><!--\n" .
+			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&redirect=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
+			"//--></script>\n";
 		echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
 		// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
