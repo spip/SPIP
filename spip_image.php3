@@ -2,6 +2,7 @@
 
 include ("ecrire/inc_version.php3");
 
+include_ecrire("inc_index.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
@@ -260,7 +261,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 			spip_query($query);
 		}
 	}
-	if (!$dest) {
+/*	if (!$dest) {
 		if ($id_document_lie)
 			$dest = "doc-$id_document_lie-prv";
 		else
@@ -272,6 +273,16 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$dest_path = "IMG/$ext/$dest";
 	else
 		$dest_path = "IMG/$dest";
+*/
+	$dest = 'IMG/';
+	if (creer_repertoire('IMG', $ext))
+		$dest .= $ext.'/';
+	$dest .= ereg_replace("([^a-zA-Z0-9_=-]|\.)", "_",
+	nettoyer_chaine_indexation(ereg_replace("\.([^.]+)$", "",
+	basename($orig))));
+	$n = 0;
+	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
+	$dest_path = $newFile;
 
 	if (!deplacer_fichier_upload($source, $dest_path)) return false;
 
