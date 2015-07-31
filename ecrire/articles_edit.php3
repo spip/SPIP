@@ -326,7 +326,7 @@ function enfant($leparent){
 		}
 
 			$selec_rub = "selec_rub";
-			if ($browser_name == "MSIE" AND $browser_version == "5.0b1") $selec_rub = ""; // Bug de MSIE MacOs 9.0
+			if ($browser_name == "MSIE" AND floor($browser_version) == "5") $selec_rub = ""; // Bug de MSIE MacOs 9.0
 
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
