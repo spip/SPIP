@@ -363,23 +363,11 @@ function phraser_criteres($params, &$result) {
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
 			      $result->hash = true;
 			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
-			    $v[0] = $v[1];
-			    $v[0][0]->texte = $m[1];
-			    $v[1][0]->texte = $m[3];
-			    $crit = new Critere;
-			    $crit->op = '/';
-			    $crit->not = "";
-			    $crit->param = $v;
+			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
 			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?| IN) *"?([^<>=!"]*)"?$', $param, $m)) {
-			    $v[0] = $v[1];
-			    $v[0][0]->texte = $m[1];
-			    $v[1][0]->texte = $m[5];
-			    $crit = new Critere;
-			    $crit->param = $v;
-			    $crit->op = trim($m[4]);
-			    $crit->not = $m[3];
-			    $crit->cond = $m[2];
-			    if ($m[1] == 'lang_select') $crit->op = $m[1];
+			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
+							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
+							   $m[3], $m[2]);
 		  } elseif (preg_match("/^([!]?)[[:space:]]*([a-z_]+)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
 			    array_shift($v);
@@ -405,6 +393,20 @@ function phraser_criteres($params, &$result) {
 	}
 
 	$result->criteres = $args;
+}
+
+function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
+{
+	$args[0] = new Texte;
+	$args[0]->texte = $arg1;
+	$args[0] = array($args[0]);
+	$args[1][0]->texte = $arg2;
+	$crit = new Critere;
+	$crit->op = $op;
+	$crit->not = $not;
+	$crit->cond = $cond;
+	$crit->param = $args;
+	return $crit;
 }
 
 function phraser($texte, $id_parent, &$boucles, $nom) {
