@@ -648,11 +648,14 @@ ecrire/install/etape_2.php -text
 ecrire/install/etape_3.php -text
 ecrire/install/etape_4.php -text
 ecrire/install/etape_chmod.php -text
+ecrire/install/etape_fin.php -text
 ecrire/install/etape_ldap1.php -text
 ecrire/install/etape_ldap2.php -text
 ecrire/install/etape_ldap3.php -text
 ecrire/install/etape_ldap4.php -text
 ecrire/install/etape_ldap5.php -text
+ecrire/install/etape_sup1.php -text
+ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
