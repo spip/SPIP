@@ -6,7 +6,8 @@
 #SET{id_secteur,#ID_SECTEUR}</BOUCLE_ariane></BOUCLE_rub>
 [ &gt; <strong class="on">(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|couper{80}|sinon{<:ecrire:info_sans_titre:>})</strong>]
 #AIDER{rubhier}
-[(#ENV{editable}|oui)
+<BOUCLE_testrub(RUBRIQUES){statut!=poub}{1,1} />
+[(#TOTAL_BOUCLE|et{#ENV{editable}}|oui)
 	[(#ENV{deplacer}|non)
 	<span class="bouton_deplacer"><span class="image_loading" style="float:#DIR_LANG_LEFT;"></span> &#91;<a href="[(#SELF|parametre_url{deplacer,oui})]" class="ajax"><:bouton_deplacer:></a>&#93;</span>
 	]
@@ -20,3 +21,4 @@
 	</div>
 	]
 ]
+<//B_testrub>
