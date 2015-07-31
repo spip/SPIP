@@ -1175,7 +1175,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'module_fichiers_langues' => 'Ficheros de idioma',
 'module_raccourci' => 'Atajo',
 'module_texte_affiche' => 'Texto mostrado',
-'module_texte_explicatif' => 'Puedes insertar los atajos siguientes en los esquemetos de tu sitio p&uacute;blico. Ser&aacute;n traducidos autom&aacute;ticamente en los diferentes idiomas para los cuales existe un fichero de lengua.',
+'module_texte_explicatif' => 'Puedes insertar los atajos siguientes en los esqueletos de tu sitio p&uacute;blico. Ser&aacute;n traducidos autom&aacute;ticamente en los diferentes idiomas para los cuales existe un fichero de lengua.',
 'module_texte_traduction' => 'El archivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; disponible en:',
 'mois_non_connu' => 'desconocido',
 

@@ -432,7 +432,7 @@ Dankon pro via partopreno
 'icone_sites_references' => 'Referencitaj teksejoj',
 'icone_statistiques' => 'Statistikoj de la teksejo',
 'icone_statistiques_visites' => 'Statistikoj de la vizitoj',
-'icone_suivi_activite' => 'Observi la funkciadon de la teksejo',
+'icone_suivi_activite' => 'Observi funkciadon de la teksejo',
 'icone_suivi_actualite' => 'Evoluado de la&nbsp;teksejo',
 'icone_suivi_forum' => 'Supervido de la publica forumo: @nb_forums@ kontribua&#309;o(j)',
 'icone_suivi_forums' => 'Supervidi/administri la forumojn',
@@ -812,7 +812,7 @@ Dankon pro via partopreno
 'info_question_referers' => '&#264;u via retpa&#285;o devas konservi la <i>referers</i>
 		(adresoj de eksternaj ligoj kondukantaj al via retpa&#285;o)&nbsp;?',
 'info_question_utilisation_moteur_recherche' => '&#264;u vi deziras uzi la SPIP-internan ser&#265;ilon&nbsp;?
-	(malaktivigi &#285;in rapidigas la funkciadon de la sistemo.)',
+ (malaktivigi &#285;in rapidigas la funkciadon de la sistemo.)',
 'info_qui_attribue_mot_cle' => 'La vortoj de tiu &#265;i grupo povas esti atribuitaj de&nbsp;:',
 'info_racine_site' => 'Radiko de la teksejo',
 'info_recharger_page' => 'Bonvolu re&#349;argi tiun &#265;i pa&#285;on post momento.',
