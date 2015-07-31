@@ -19,14 +19,14 @@ style='display:none;'>#GET{bouton_modif}</a>&#93;</div>
 		<label for="picker_id"><:label_ajout_id_rapide:></label>
 		<input type="text" value="" id="picker_id" size="10" />
 		<a href="#"
-			 onclick="jQuery.ajax({'url':'[(#URL_PAGE{ajax_item_pick,rubriques=[(#ENV{rubriques})]&articles=[(#ENV{articles})]&ref=})]'+jQuery('#picker_id').attr('value'),
+			 onclick="jQuery.ajax({'url':'[(#URL_PAGE{ajax_item_pick,rubriques=[(#ENV{rubriques})]&articles=[(#ENV{articles})]&ref=})]'+jQuery('#picker_id').val(),
 			 'dataType':'text',
 			 'success':function(r){
 					eval('r = '+r); // JSON envoye par ajax_item_pick.html
 					if (r){
 						jQuery('#picker_id').item_pick(r.id,'#ENV{name,id_item}',r.titre,r.type);
 					}
-					jQuery('#picker_id').attr('value','');
+					jQuery('#picker_id').val('');
 			 }
 		 });return false;">#GET{bouton_modif}</a>
 	</div>
