@@ -1,17 +1,24 @@
 /* Correction des styles par defaut
 ---------------------------------------------- */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font: .75em/20px Verdana, Geneva, sans-serif; color: #222; }
+body { font: .75em/1.5em Verdana, Geneva, sans-serif; color: #222; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
-h1 { margin: 0 auto 20px auto; font-size: 1.3em; font-weight: bold; color: #5c3566; text-align: center; }
-h2 { margin: 0 0 20px 0; font-size: 1.2em; font-weight: normal; }
-h3 { margin: 0 auto 20px auto; font-size: 1em; font-weight: bold; }
-p,.p { display: block; margin: 0 0 20px 0; }
+h1 { margin: 0 auto 1.5em auto; font-size: 1.3em; font-weight: bold; color: #5c3566; text-align: center; }
+h2 { margin: 0 0 1.5em 0; font-size: 1.2em; font-weight: normal; }
+h3 { margin: 0 auto 1.5em auto; font-size: 1em; font-weight: bold; }
+p,.p { display: block; margin: 0 0 1.5em 0; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
-ul,ol,li { list-style: none; }
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
 small,.small { font-size: .9em; }
+ul.spip { list-style: square; margin-bottom:1.5em;}
+ul.spip ul { list-style: circle; }
+ol.spip { list-style: decimal; margin-bottom:1.5em;}
+ul.spip li, ol.spip li {margin-left:50px;}
+ul.spip li li, ol.spip li li {margin-left:25px}
+
 
 
 /* LAYOUT / Disposition a l'ecran
