@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/article_update');
+#include_spip('inc/article_select');
 include_spip('inc/rubriques');
 include_spip('inc/documents');
 include_spip('inc/barre');
@@ -323,7 +324,7 @@ function exec_affiche_articles_edit_dist($row, $lier_trad, $new, $champs_article
 
 function exec_articles_edit_dist()
 {
-	$row = article_update(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
+	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
 
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
