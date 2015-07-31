@@ -703,6 +703,7 @@ prive/modeles/application.html -text
 prive/modeles/audio.html -text
 prive/modeles/doc.html -text
 prive/modeles/emb.html -text
+prive/modeles/emb_fonctions.php -text
 prive/modeles/formulaire.html -text
 prive/modeles/image.html -text
 prive/modeles/img.html -text
@@ -715,6 +716,8 @@ prive/modeles/pagination_precedent_suivant.html -text
 prive/modeles/pagination_prive.html -text
 prive/modeles/paginationitem.html -text
 prive/modeles/text.html -text
+prive/modeles/text_csv.html -text
+prive/modeles/text_html.html -text
 prive/modeles/video.html -text
 prive/objets/contenu/article.html -text
 prive/objets/contenu/auteur.html -text
