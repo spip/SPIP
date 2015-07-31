@@ -157,11 +157,9 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 //ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
-global $tables_principales; // (voir inc_serialbase)
 global $exceptions_des_tables, $table_des_tables;
 global $table_date;
 
- # cf. fonction table_objet dans inc_version
 $table_des_tables['articles']='articles';
 $table_des_tables['auteurs']='auteurs';
 $table_des_tables['breves']='breves';

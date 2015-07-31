@@ -33,13 +33,6 @@ include_spip('public/criteres');
 // definition des balises
 include_spip('public/balises');
 
-// definition de l'API
-include_spip('public/interfaces');
-
-# definition des tables
-include_spip('base/serial');
-include_spip('base/auxiliaires');
-
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
 	$l = array();
@@ -616,61 +609,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	return $codes;
 }
 
-
-// Trouve la description d'une table, en particulier celle d'une boucle
-// Si on ne la trouve pas, on demande au serveur SQL
-// retourne False si lui non plus  ne la trouve pas.
-// Si on la trouve, le tableau resultat a les entrees:
-// field (comme dans serial.php)
-// key (comme dans serial.php)
-// table = nom SQL de la table (avec le prefixe spip_ pour les stds)
-// id_table = nom SPIP de la table (i.e. type de boucle)
-// le compilateur produit  FROM $r['table'] AS $r['id_table']
-
-// http://doc.spip.org/@trouver_table
-function trouver_table($type, $boucle)
-{
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
-
-	$serveur = $boucle->sql_serveur;
-	if (!spip_connect($serveur)) return null;
-	$s = $serveur ? $serveur : 0;
-	$spip = $connexions[$s]['spip_connect_version'];
-	if ($spip AND isset($table_des_tables[$type])) {
-    	// indirection (pour les rares cas ou le nom de la table!=type)
-		$t = $table_des_tables[$type];
-		$nom_table = 'spip_' . $t;
-		if (!isset($connexions[$s]['tables'][$nom_table])) {
-			$connexions[$s]['tables'][$nom_table] = 
-				$tables_principales[$nom_table];
-			$connexions[$s]['tables'][$nom_table]['table']= $nom_table;
-			$connexions[$s]['tables'][$nom_table]['id_table']= $t;
-		}
-	} elseif ($spip AND isset($tables_auxiliaires['spip_' .$type])) {
-		$t = $type;
-		$nom_table = 'spip_' . $t;
-		if (!isset($connexions[$s]['tables'][$nom_table])) {
-			$connexions[$s]['tables'][$nom_table] = 
-				$tables_auxiliaires[$nom_table];
-			$connexions[$s]['tables'][$nom_table]['table']= $nom_table;
-			$connexions[$s]['tables'][$nom_table]['id_table']= $t;
-		}
-	} else	$nom_table = $t = $type;
-
-	if (!isset($connexions[$s]['tables'][$nom_table])) {
-		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
-		if (!$desc OR !$desc['field']) {
-		  erreur_squelette(_T('zbug_table_inconnue', array('table' => $s ? "$serveur:$type" : $type)),
-					 $boucle->id_boucle);
-			return null;
-		} else {
-			$desc['table']= $nom_table;
-			$desc['id_table']= $t;
-		}
-		$connexions[$s]['tables'][$nom_table] = $desc;
-	}
-	return $connexions[$s]['tables'][$nom_table];
-}
 
 // affichage du code produit
 

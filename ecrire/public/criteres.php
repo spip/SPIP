@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 //
 // Definition des {criteres} d'une boucle
 //
@@ -701,9 +700,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 // http://doc.spip.org/@calculer_critere_infixe
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
-	global $table_des_tables, $tables_principales, $table_date;
+	global $table_date, $table_criteres_infixes;
 	global $exceptions_des_jointures, $exceptions_des_tables;
-	global $table_criteres_infixes;
+
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
@@ -1116,7 +1115,7 @@ function calculer_vieux_in($params)
 // http://doc.spip.org/@calculer_critere_infixe_date
 function calculer_critere_infixe_date($idb, &$boucles, $regs)
 {
-  global $table_date, $table_des_tables, $tables_principales; 
+	global $table_date; 
 	$boucle = $boucles[$idb];
 	list(,$col, $rel, $suite) = $regs;
 	$date_orig = $pred = $table_date[$boucle->type_requete];
