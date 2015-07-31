@@ -1064,8 +1064,10 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	global $spip_display;
 	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
 
-	// div conteneur fermee par fin_gauche()
-	// div fermee par debut_droite() ou creer_colonne_droite
+	// div navigation fermee par creer_colonne_droite qui ouvre
+	// div extra lui-meme ferme par debut_droite qui ouvre 
+	// div contenu lui-meme ferme par fin_gauche() ainsi que
+	// div conteneur
 
 	$res = "<br /><div id='conteneur'>
 		\n<div id='navigation'>\n";
@@ -1078,7 +1080,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 // http://doc.spip.org/@fin_gauche
 function fin_gauche()
 {
-	return "</div><br class='nettoyeur' />";
+	return "</div></div><br class='nettoyeur' />";
 }
 
 //
@@ -1182,7 +1184,6 @@ function fin_page()
 	} else $chrono = '';
 
 	return debut_grand_cadre(true)
-	. "\n"
 	. (($spip_display == 4)
 		? ("<div><a href='"
 		   	. parametre_url(self(),'set_disp', '2')
@@ -1196,7 +1197,7 @@ function fin_page()
 			. '</div>'))
 
 	. fin_grand_cadre(true)
-	. "</div>" // cf. div align = center ouverte dans conmmencer_page()
+	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
 	. $GLOBALS['rejoue_session']
 	. '<div style="background-image: url(\''
 	. generer_url_action('cron')
