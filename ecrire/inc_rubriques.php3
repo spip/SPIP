@@ -77,7 +77,7 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 		}
 
 		// documents de rubrique
-		if ($row = spip_fetch_array(spip_query("SELECT MAX(date) AS date_h FROM spip_documents WHERE id_rubrique=$id_rubrique")))
+		if ($row = spip_fetch_array(spip_query("SELECT MAX(doc.date) AS date_h FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE doc.id_document=lien.id_document AND lien.id_rubrique=$id_rubrique")))
 			if ($row['date_h'] > $date_rubrique) $date_rubrique = $row['date_h'];
 
 	}
