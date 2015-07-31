@@ -192,48 +192,9 @@ debut_droite();
 if ($meta["debut_restauration"]) {
 	@ignore_user_abort(1);
 	include_ecrire("inc_import.php3");
-
-	$archive = $meta["fichier_restauration"];
-	$my_pos = $meta["status_restauration"];
-	$ok = @file_exists($archive);
-
-	if ($ok) {
-		if (ereg("\.gz$", $archive)) {
-			$affiche_progression_pourcent = false;
-			$taille = taille_en_octets($my_pos);
-		}
-		else {
-			$affiche_progression_pourcent = filesize($archive);
-			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
-		}
-		$texte_boite = _T('info_base_restauration')."<p>
-		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
-		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
-	}
-	else {
-		$texte_boite = _T('info_erreur_restauration');
-	}
-
-	debut_boite_alerte();
-	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
-	fin_boite_alerte();
-	fin_page("jimmac");
-	echo "</HTML><font color='white'>\n<!--";
-	@flush();
-	$gz = $flag_gz;
-	$_fopen = ($gz) ? gzopen : fopen;
-
-	if ($ok) {
-		$f = $_fopen($archive, "rb");
-		$pos = 0;
-		$buf = "";
-		if (!import_all($f, $gz)) import_abandon();
-	}
-	else {
-		import_fin();
-	}
+	import_init();
 	exit;
-}
+ }
 
 
 //
