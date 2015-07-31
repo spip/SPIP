@@ -120,20 +120,20 @@ function signatures_edit($script, $id, $debut, $row) {
 
 		$res .= '<br />' . message_de_signature($row);
 		
-		$titre = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
+		if (!$id) {
+			$r = spip_fetch_array(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
 
-		if (!$id)
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
 			. _T('info_numero_abbreviation')
 			. $id_article
 			. " </b></span><a href='"
-			  .  (($statut == 'publie') ? 
+			  .  (($r['statut'] == 'publie') ? 
 			      generer_url_action('redirect', "id_article=$id_article") :
 			      generer_url_ecrire('articles', "id_article=$id_article"))
 			  . "'>"
-			  . typo($titre['titre'])
+			  . typo($r['titre'])
 			  . "</a>";
-
+		}
 		$res .= "</td></tr></table>";
 		
 		if ($statut=="poubelle"){
