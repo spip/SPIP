@@ -10,6 +10,8 @@ include_ecrire ("inc_acces.php3");
 
 function creer_base() {
 
+	global $spip_version;
+
 	//
 	// Elements redactionnels
 	//
@@ -267,14 +269,6 @@ function creer_base() {
 		KEY id_article (id_article),
 		KEY statut(statut))";
 	$result = spip_query($query);
-/*
-	$query = "CREATE TABLE spip_visites_temp (
-		date DATE NOT NULL,
-		ip INTEGER UNSIGNED NOT NULL,
-		type varchar(16) NOT NULL,
-		referer text NOT NULL)";
-	$result = spip_query($query);
-*/
 
 	$query = "CREATE TABLE spip_visites_temp (
 		ip INTEGER UNSIGNED NOT NULL,
@@ -282,15 +276,6 @@ function creer_base() {
 		id_objet INTEGER UNSIGNED NOT NULL,
 		PRIMARY KEY (type, id_objet, ip))";
 	$result = spip_query($query);
-
-/*
-	$query = "CREATE TABLE spip_visites (
-		date DATE NOT NULL,
-		type varchar(16) NOT NULL,
-		visites bigint(21) DEFAULT '0' NOT NULL,
-		maj TIMESTAMP)";
-	$result = spip_query($query);
-*/
 
 	$query = "CREATE TABLE spip_visites (
 		date DATE NOT NULL,
@@ -315,21 +300,6 @@ function creer_base() {
 		id_objet INTEGER UNSIGNED NOT NULL,
 		PRIMARY KEY (type, id_objet, referer_md5, ip))";
 	$result = spip_query($query);
-
-/*
-	$query = "CREATE TABLE spip_visites_referers (
-		id_referer bigint(21) DEFAULT '0' NOT NULL auto_increment,
-		date DATE NOT NULL,
-		referer text,
-		referer_md5 varchar(16) NOT NULL,
-		type varchar(16) NOT NULL,
-		visites bigint(21) DEFAULT '0' NOT NULL,
-		maj TIMESTAMP, 
-		PRIMARY KEY (id_referer),
-		KEY type (type),
-		KEY referer_md5 (referer_md5))";
-	$result = spip_query($query);
-*/	
 
 	$query = "CREATE TABLE spip_referers (
 		referer_md5 BIGINT UNSIGNED NOT NULL,
@@ -527,6 +497,12 @@ function creer_base() {
 		"('wmv', 'Windows Media', 'embed'), ".
 		"('zip', 'Zip', 'non')";
 	spip_query($query);
+
+
+	//
+	// Mettre a jour le numero de version installee
+	//
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$spip_version')");
 }
 
 
