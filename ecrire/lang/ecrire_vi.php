@@ -199,7 +199,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'ical_info1' => 'Trang này cho bạn biết các cách để theo dõi các hoạt động của trang web này.',
 'ical_info2' => 'Để biết thêm chi tiết xin vào xem trang web <a href="@spipnet@">SPIP\'s documentation</a>.', # MODIF
 'ical_info_calendrier' => 'Bạn có 2 thời biểu để sử dụng. Thời biểu thứ nhất liệt kê tất cả các bài viết được đăng. Thời biểu thứ hai liệt kê các thông báo của Ban Biên Tập và những thông tin cá nhân của bạn. Phần này được dành cho bạn qua một mật mã riêng mà bạn có thể thay đổi bằng cách thay đổi mật mã của mình.',
-'ical_lien_rss_breves' => 'Syndication of the site\'s news items', # NEW
 'ical_methode_http' => 'Đang tải xuống',
 'ical_methode_webcal' => 'Đồng bộ hoá (webcal://)',
 'ical_texte_js' => 'Một mệnh lệnh javascript có thể được sử dụng để hiển thị những bài vỡ mới nhất được đăng của trang web này trên bất kỳ trang web nào của bạn một cách rất dễ dàng.',
@@ -223,7 +222,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_creation_mots_cles' => 'Thêm từ then chốt mới ',
 'icone_creer_auteur' => 'Thêm tên một tác giả mới và ghi vào bài này',
 'icone_creer_mot_cle' => 'Thêm một từ then chốt mới và ghi vào bài này',
-'icone_creer_mot_cle_breve' => 'Create a new keyword and attach it to this news item', # NEW
 'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
 'icone_creer_mot_cle_site' => 'Create a new keyword and attach it to this site', # NEW
 'icone_creer_rubrique_2' => 'Thêm một đề mục mới ',
@@ -241,9 +239,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_modifier_site' => 'Sửa liên kết này',
 'icone_poster_message' => 'Gửi một thư tín ',
 'icone_publication' => 'Publication', # NEW
-'icone_publier_breve' => 'Ðăng mẫu tin này',
 'icone_referencer_nouveau_site' => 'Thêm một điểm nối vào trang Web khác',
-'icone_refuser_breve' => 'Từ chối tin ngắn này',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Trở lại',
 'icone_retour_article' => 'Trở về bài trước',
@@ -323,10 +319,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
 'info_bloquer' => 'ngăn chận',
-'info_breves_03' => ' tin ngắn',
-'info_breves_liees_mot' => 'Những tin ngắn liên hệ đến từ then chốt này',
-'info_breves_touvees' => 'Những tin ngắn tìm thấy',
-'info_breves_touvees_dans_texte' => 'Những tin ngắn tìm thấy (trong văn bản)',
 'info_changer_nom_groupe' => 'Đổi tên của nhóm này:',
 'info_chapeau' => 'Dẫn nhập',
 'info_chapeau_2' => 'Dẫn nhập:',
@@ -462,7 +454,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => 'Cách thức điều hành định sẵn của diễn đàn công',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_breve' => 'Sửa đổi tin ngắn:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Sửa đổi đề mục:',
 'info_modifier_titre' => 'Sửa đổi: @titre@',
@@ -492,7 +483,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_nom_site' => 'Tên website của bạn',
 'info_nom_site_2' => '<b>Tên website</b> [Bắt buộc]',
 'info_nombre_articles' => '@nb_articles@ bài,',
-'info_nombre_breves' => '@nb_breves@ tin ngắn, ',
 'info_nombre_partcipants' => 'THAM DỰ VIÊN VÀO CUỘC THẢO LUẬN:',
 'info_nombre_rubriques' => '@nb_rubriques@ đề mục, ',
 'info_nombre_sites' => '@nb_sites@ website, ',
@@ -654,7 +644,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'info_un_article' => 'một bài, ',
 'info_un_mot' => 'Mỗi lần một từ then chốt thôi',
 'info_un_site' => 'một website, ',
-'info_une_breve' => 'một tin ngắn, ',
 'info_une_rubrique' => 'một đề mục, ',
 'info_une_rubrique_02' => '1 đề mục',
 'info_url' => 'URL:', # MODIF
@@ -721,7 +710,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
 'item_mots_cles_association_articles' => 'bài vở',
-'item_mots_cles_association_breves' => 'tin ngắn',
 'item_mots_cles_association_rubriques' => 'các đề mục',
 'item_mots_cles_association_sites' => 'Website nối kết hay syndicated.',
 'item_non' => 'Không dùng',
@@ -748,7 +736,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_utiliser_mots_cles' => 'Không dùng từ then chốt',
 'item_non_utiliser_syndication' => 'Đừng dùng syndication tự động',
 'item_nouvel_auteur' => 'Tác giả mới',
-'item_nouvelle_breve' => 'Tin ngắn mới',
 'item_nouvelle_rubrique' => 'Đề mục mới',
 'item_oui' => 'Dùng',
 'item_publier_articles' => 'Cứ đăng tải bài bất kể ngày ghi.',
@@ -787,8 +774,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_nom_site' => 'TÊN WEBSITE:',
 'lien_nouvelle_recuperation' => 'Thử tìm cách thu hồi dữ kiện',
 'lien_reponse_article' => 'Hồi âm bài này',
-'lien_reponse_breve' => 'Hồi âm tin ngắn',
-'lien_reponse_breve_2' => 'Hồi âm tin ngắn',
 'lien_reponse_rubrique' => 'Hồi âm đề mục này',
 'lien_reponse_site_reference' => 'Hồi âm website nối kết:',
 'lien_retirer_auteur' => 'Loại bỏ tác giả',
@@ -805,7 +790,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_voir_en_ligne' => 'XEM ONLINE :',
 'logo_article' => 'LOGO CỦA BÀI',
 'logo_auteur' => 'LOGO CỦA TÁC GIẢ',
-'logo_breve' => 'LOGO CỦA TIN NGẮN',
 'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO CỦA TỪ THEN CHỐT',
 'logo_rubrique' => 'LOGO CỦA ĐỀ MỤC',
@@ -1106,7 +1090,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'NGÔN NGỮ CỦA BÀI',
-'titre_langue_breve' => 'NGÔN NGỮ CỦA TIN NGẮN',
 'titre_langue_rubrique' => 'NGÔN NGỮ CỦA ĐỀ MỤC',
 'titre_langue_trad_article' => 'NGÔN NGỮ VÀ DỊCH THUẬT CỦA BÀI',
 'titre_les_articles' => 'BÀI VỞ',
@@ -1115,7 +1098,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_mots_tous' => 'Từ then chốt',
 'titre_naviguer_dans_le_site' => 'Xem trang web...',
 'titre_nouveau_groupe' => 'Nhóm mới',
-'titre_nouvelle_breve' => 'Tin ngắn mới',
 'titre_nouvelle_rubrique' => 'Đề mục mới',
 'titre_numero_rubrique' => 'SỐ THỨ TỰ ĐỀ MỤC:',
 'titre_page_admin_effacer' => 'Bảo trì kỹ thuật: xóa database',
@@ -1123,7 +1105,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_articles_page' => 'Bài vỡ',
 'titre_page_articles_tous' => 'Toàn bộ trang web',
 'titre_page_auteurs' => 'Khách',
-'titre_page_breves_edit' => 'Sửa đổi tin ngắn: «@titre@»',
 'titre_page_calendrier' => 'Lịch @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Cấu hình website',
 'titre_page_config_fonctions' => 'Cấu hình website',

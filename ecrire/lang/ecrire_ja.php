@@ -207,7 +207,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'ical_info1' => 'このページは、このサイトでの活動であなたとの連絡を保ついくつかの手段を提供します。',
 'ical_info2' => 'さらに情報が欲しい場合、躊躇せずに、<a href="@spipnet@">SPIP\'sドキュメント</a>を訪れてください。', # MODIF
 'ical_info_calendrier' => 'あなたは２種類のカレンダーが自由に使えます。１つめはすべての公開された記事を示すサイトマップです。２つめは編集中のアナウンスに加え、あなたの最新のプライベートメッセージも含んでいます: URL中に含まれる個人のキーはあなたの為に確保してあり、あなたのパスワードを新しくすることでいつでも変更することができます。',
-'ical_lien_rss_breves' => 'Syndication des brèves du site', # NEW
 'ical_methode_http' => 'ダウンロードする',
 'ical_methode_webcal' => '同調（シンクロ）する (webcal://)',
 'ical_texte_js' => 'このサイトで出版された最新記事を、あなたの管理しているどんなサイトでもとても簡単に、たった１行のjavascriptで表示することが出来ます。',
@@ -231,7 +230,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_creation_mots_cles' => '新しいキーワードを作る',
 'icone_creer_auteur' => '新しい著者を作って、彼をこの記事に参加させる。',
 'icone_creer_mot_cle' => '新しいキーワードと、この記事へのリンクを作る',
-'icone_creer_mot_cle_breve' => 'Créer un nouveau mot-clé et le lier à cette brève', # NEW
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => '新しいセクションを作る',
@@ -249,9 +247,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_modifier_site' => 'このサイトを修正',
 'icone_poster_message' => 'メッセージの投稿',
 'icone_publication' => 'Publication', # NEW
-'icone_publier_breve' => 'このニュースを掲げる',
 'icone_referencer_nouveau_site' => '新しいサイトを参照する',
-'icone_refuser_breve' => 'このニュースを拒む',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => '戻る',
 'icone_retour_article' => '記事に戻る',
@@ -335,10 +331,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
 'info_bloquer' => 'ブロック',
-'info_breves_03' => 'ニュース',
-'info_breves_liees_mot' => 'このキーワードに関連するニュース',
-'info_breves_touvees' => 'ニュースが見つかりました。',
-'info_breves_touvees_dans_texte' => 'ニュースが見つかりました（文中）。',
 'info_changer_nom_groupe' => 'このグループ名を変更して下さい:',
 'info_chapeau' => '飾り',
 'info_chapeau_2' => 'イントロダクション:',
@@ -480,7 +472,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => '公開掲示板の標準の操作方法',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_breve' => '修正するニュース:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => '修正するセクション:',
 'info_modifier_titre' => '修正: @titre@',
@@ -509,7 +500,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_nom_site' => 'ＨＰの名前',
 'info_nom_site_2' => '<b>サイトの名前</b> [必須]',
 'info_nombre_articles' => '@nb_articles@ 記事、',
-'info_nombre_breves' => '@nb_breves@ ニュース、',
 'info_nombre_partcipants' => '討論の参加者:',
 'info_nombre_rubriques' => '@nb_rubriques@ セクション、',
 'info_nombre_sites' => '@nb_sites@サイト、',
@@ -673,7 +663,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_un_article' => '記事、',
 'info_un_mot' => '１度に１つのキーワード',
 'info_un_site' => '１つのサイト、',
-'info_une_breve' => '１つのニュース、',
 'info_une_rubrique' => '１つのセクション、',
 'info_une_rubrique_02' => '１セクション',
 'info_url' => 'URL:',
@@ -740,7 +729,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_login' => 'ログインID',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
 'item_mots_cles_association_articles' => '記事',
-'item_mots_cles_association_breves' => 'ニュース',
 'item_mots_cles_association_rubriques' => 'セクション',
 'item_mots_cles_association_sites' => '参照か供給（シンジケート）しているサイト',
 'item_non' => 'いいえ',
@@ -767,7 +755,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_utiliser_mots_cles' => 'キーワードを使わない',
 'item_non_utiliser_syndication' => '自動的に供給（シンジケート）しない',
 'item_nouvel_auteur' => '新しい著者',
-'item_nouvelle_breve' => '新しいニュース',
 'item_nouvelle_rubrique' => '新しいセクション',
 'item_oui' => 'はい',
 'item_publier_articles' => 'それらの発表日時を無視して記事を公表する。',
@@ -806,8 +793,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_nom_site' => 'サイトの名前:',
 'lien_nouvelle_recuperation' => 'データの新しい検索を開始',
 'lien_reponse_article' => '記事へ返信',
-'lien_reponse_breve' => 'ニュースに返信',
-'lien_reponse_breve_2' => 'ニュースに返信',
 'lien_reponse_rubrique' => 'セクションに返信',
 'lien_reponse_site_reference' => '参照されたサイトに返信:',
 'lien_retirer_auteur' => '著者を削除',
@@ -824,7 +809,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_voir_en_ligne' => 'オンラインで見る:',
 'logo_article' => '記事のロゴ',
 'logo_auteur' => '著者のロゴ',
-'logo_breve' => 'ニュースのロゴ',
 'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'キーワードのロゴ',
 'logo_rubrique' => 'セクションのロゴ',
@@ -1120,7 +1104,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => '記事の言語',
-'titre_langue_breve' => 'ニュースの言語',
 'titre_langue_rubrique' => 'セクションの言語',
 'titre_langue_trad_article' => '記事の言語と翻訳版',
 'titre_les_articles' => '記事',
@@ -1129,7 +1112,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_mots_tous' => 'キーワード',
 'titre_naviguer_dans_le_site' => 'このサイトをブラウザする...',
 'titre_nouveau_groupe' => '新しいグループ',
-'titre_nouvelle_breve' => '新しいニュース',
 'titre_nouvelle_rubrique' => '新しいセクション',
 'titre_numero_rubrique' => 'セクション番号:',
 'titre_page_admin_effacer' => '技術的なメンテナンス: データベースを削除しています',
@@ -1137,7 +1119,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_page_articles_page' => '記事',
 'titre_page_articles_tous' => '全てのサイト',
 'titre_page_auteurs' => '訪問者たち',
-'titre_page_breves_edit' => 'ニュースの変更: «@titre@»',
 'titre_page_calendrier' => 'カレンダー @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'サイトの設定',
 'titre_page_config_fonctions' => 'サイトの設定',
