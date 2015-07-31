@@ -18,7 +18,7 @@
 // souvent utilisee pour faire de la concatenation lors de la compilation
 // plutot qu'a l'execution, i.e. pour remplacer 'x'.'y' par 'xy'
 
-define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+define('_CODE_QUOTE', ",^(?:\n//[^\n]*\n)? *'(.*)' *$,");
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
