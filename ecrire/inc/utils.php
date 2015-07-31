@@ -36,15 +36,17 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 		die(htmlspecialchars($nom)." pas autorise");
 
 	// passer en minuscules (cf les balises de formulaires)
-	$inc = include_spip($d = ($dossier . strtolower($nom)));
-
-	if (function_exists($f)) return $f;
-	if (function_exists($g)) return $g;
+	$inc = find_in_path(($d = strtolower($nom) . '.php'), $dossier);
+	if ($inc) {
+		include_once $inc;
+		if (function_exists($f)) return $f;
+		if (function_exists($g)) return $g;
+	}
 	if ($continue) return false;
 
 	// Echec : message d'erreur
 	spip_log("fonction $nom ($f ou $g) indisponible" .
-		($inc ? "" : " (fichier $d absent)"));
+		($inc ? "" : " (fichier $d absent de $dossier)"));
 
 	include_spip('inc/minipres');
 	echo minipres(_T('forum_titre_erreur'),
@@ -603,7 +605,7 @@ function creer_chemin() {
 	return $path_a;
 }
 
-
+/*
 // Cette fonction est appelee une seule fois par hit et par dir du chemin
 // http://doc.spip.org/@memoriser_fichiers
 function memoriser_fichiers($dir) {
@@ -619,26 +621,28 @@ function memoriser_fichiers($dir) {
 	}
 	return $fichiers;
 }
+*/
 
 // http://doc.spip.org/@find_in_path
-function find_in_path ($filename) {
+function find_in_path ($file, $dirname='') {
 	static $ram;
 
-	$a = strrpos($filename,'/');
-	if ($a === false) {
-		$dirname = '';
-		$basename = $filename;
-	} else {
-		$dirname = substr($filename, 0, $a+1);
-		$basename = substr($filename, $a+1);
+	$a = strrpos($file,'/');
+	if ($a !== false) {
+		$dirname .= substr($file, 0, $a+1);
+		$file = substr($file, $a+1);
 	}
+
 	foreach(creer_chemin() as $dir) {
-		$sous = $dir.$dirname;
-		if (!isset($ram[$sous]))
-			$ram[$sous] = memoriser_fichiers($sous);
-		if (isset($ram[$sous][$basename])
-		AND is_readable($f = $sous.$basename))
-			return $f;
+		if (!isset($ram[$s = $dir . $dirname]))
+			$ram[$s] = is_dir($s) ? array() : false;
+		if (isset($ram[$s][$file])) {
+			if ($a = $ram[$s][$file]) return $a;
+		} elseif (is_array($ram[$s])) {
+			$a = $s . $file;
+			if ($ram[$s][$file]=(is_readable($a)?$a:''))
+				return $a;
+		}
 	}
 }
 
