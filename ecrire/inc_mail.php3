@@ -6,6 +6,36 @@ if (defined("_ECRIRE_INC_MAIL")) return;
 define("_ECRIRE_INC_MAIL", "1");
 
 
+
+//
+// Infos de mails sur l'hebergeur (tout ca est assez sale)
+//
+$hebergeur = '';
+
+// Lycos (ex-Multimachin)
+if ($HTTP_X_HOST == 'membres.lycos.fr') {
+	$hebergeur = 'lycos';
+}
+// Altern
+else if (ereg('altern\.com$', $SERVER_NAME)) {
+	$hebergeur = 'altern';
+}
+// Free
+else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
+	$hebergeur = 'free';
+}
+// NexenServices
+else if ($SERVER_ADMIN == 'www@nexenservices.com') {
+	if (!function_exists('email'))
+		include ('mail.inc');
+	$hebergeur = 'nexenservices';
+}
+// Online
+else if (function_exists('email')) {
+	$hebergeur = 'online';
+}
+
+
 //
 // Chez lyconiania, envoyer un mail coupe la connection MySQL (sic)
 //
@@ -37,7 +67,7 @@ function tester_mail() {
 }
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
-	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
+	global $hebergeur, $queue_mails, $flag_wordwrap;
 	include_ecrire("inc_filtres.php3");
 
 	if (!$from) {
@@ -73,7 +103,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
-	if ($os_serveur == 'windows') {
+	if (os_serveur == 'windows') {
 		$texte = ereg_replace ("\r*\n","\r\n", $texte);
 		$headers = ereg_replace ("\r*\n","\r\n", $headers);
 	}

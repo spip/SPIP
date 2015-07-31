@@ -5,6 +5,29 @@
 if (defined("_ECRIRE_INC_LOGOS")) return;
 define("_ECRIRE_INC_LOGOS", "1");
 
+
+function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
+	if (ereg("^../",$nom))	$nom = substr($nom,3);
+	if (ereg("^" . _DIR_IMG, $nom)) {
+		$nom = substr($nom,strlen(_DIR_IMG));
+	}
+	$pos = strrpos($nom, "/");
+	if ($pos > 0) {
+		$chemin = substr($nom, 0, $pos+1);
+		$nom = substr($nom, $pos+1);
+	} else {
+		$chemin = "";
+	}
+
+	reset($formats);
+	while (list(, $format) = each($formats)) {
+		$d = _DIR_IMG . "$chemin$nom.$format";
+		if (@file_exists($d)) return array(_DIR_IMG."$chemin", $nom, $format);
+	}
+}
+
+
+
 function decrire_logo($racine) {
 	global $connect_id_auteur;
 		

@@ -4,12 +4,10 @@
 if (defined("_INC_BARRE")) return;
 define("_INC_BARRE", "1");
 
-//include_ecrire ("inc_layers.php3"); // (pour memoire)
-
 function test_barre() {
 	global $browser_name, $browser_version, $browser_rev;
-	
-	if ($browser_name == '') verif_butineur();
+
+	include_ecrire ("inc_layer.php3");	# verif butineur
 
 	if (
 	(eregi("msie", $browser_name) AND $browser_version >= 5.5)

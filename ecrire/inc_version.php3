@@ -457,76 +457,10 @@ if ($cookie_prefix != 'spip') {
 
 
 //
-// Infos sur l'hebergeur
+// Sommes-nous dans l'empire du Mal ?
 //
-
-$hebergeur = '';
-$login_hebergeur = '';
-$os_serveur = '';
-
-
-// Lycos (ex-Multimachin)
-if ($HTTP_X_HOST == 'membres.lycos.fr') {
-	$hebergeur = 'lycos';
-	ereg('^/([^/]*)', $REQUEST_URI, $regs);
-	$login_hebergeur = $regs[1];
-}
-// Altern
-if (ereg('altern\.com$', $SERVER_NAME)) {
-	$hebergeur = 'altern';
-	ereg('([^.]*\.[^.]*)$', $HTTP_HOST, $regs);
-	$login_hebergeur = ereg_replace('[^a-zA-Z0-9]', '_', $regs[1]);
-}
-// Free
-else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
-	$hebergeur = 'free';
-	$login_hebergeur = $regs[1];
-}
-// NexenServices
-else if ($SERVER_ADMIN == 'www@nexenservices.com') {
-	if (!function_exists('email'))
-		include ('mail.inc');
-	$hebergeur = 'nexenservices';
-}
-// Online
-else if (function_exists('email')) {
-	$hebergeur = 'online';
-}
-
-if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
-	$os_serveur = 'windows';
-
-//
-// Verifier la presence des .htaccess
-//
-function verifier_htaccess($rep) {
-	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
-	if ((!@file_exists($htaccess)) AND 
-	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
-		spip_log("demande de creation de $htaccess");
-		if ($GLOBALS['hebergeur'] != 'nexenservices'){
-			if (!$f = fopen($htaccess, "w"))
-				echo "<b>" .
-				  _L("ECHEC DE LA CREATION DE $htaccess") .
-				  "</b>";
-			else
-			  {
-				fputs($f, "deny from all\n");
-				fclose($f);
-			  }
-		} else {
-			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
-			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
-			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
-			par l'interm&eacute;diaire de ";
-			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
-			target=\"_blank\">l'espace webmestres</a>.";
-			echo "Veuillez cr&eacute;er manuellement la protection pour
-			ce r&eacute;pertoire (un couple login/mot de passe est
-			n&eacute;cessaire).<br />";
-		}
-	}
-}
+if (strpos($HTTP_SERVER_VARS['SERVER_SOFTWARE'], '(Win') !== false)
+	define ('os_serveur', 'windows');
 
 
 //
@@ -555,8 +489,6 @@ function spip_log($message, $logname='spip') {
 		@rename($logfile.'.2',$logfile.'.3');
 		@rename($logfile.'.1',$logfile.'.2');
 		@rename($logfile,$logfile.'.1');
-		#if (function_exists('logrotate'))
-		#	logrotate($logfile);
 	}
 
 	// recopier les spip_log mysql (ce sont uniquement des erreurs)
@@ -565,9 +497,6 @@ function spip_log($message, $logname='spip') {
 		spip_log($message);
 }
 
-// Parano avant d'aller plus loin
-
-verifier_htaccess(_DIR_SESSIONS);
 
 //
 // Infos sur le fichier courant
@@ -1027,50 +956,6 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 }
 
 //
-// Tests sur le nom du butineur
-//
-function verif_butineur() {
-  global $HTTP_USER_AGENT, $browser_name, $browser_version, $browser_description, $browser_rev, $browser_layer ;
-	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $HTTP_USER_AGENT, $match);
-	$browser_name = $match[1];
-	$browser_version = $match[2];
-	$browser_description = $match[3];
-	$browser_layer = '';
-
-	if (eregi("opera", $browser_description)) {
-		eregi("Opera ([^\ ]*)", $browser_description, $match);
-		$browser_name = "Opera";
-		$browser_version = $match[1];
-		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_INCLUDE . 'layer.js',''));
-	}
-	else if (eregi("msie", $browser_description)) {
-		eregi("MSIE ([^;]*)", $browser_description, $match);
-		$browser_name = "MSIE";
-		$browser_version = $match[1];
-		$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_INCLUDE . 'layer.js',''));
-	}
-	else if (eregi("KHTML", $browser_description) &&
-		eregi("Safari/([^;]*)", $browser_description, $match)) {
-		$browser_name = "Safari";
-		$browser_version = $match[1];
-		$browser_layer = http_script('', _DIR_INCLUDE . 'layer.js','');
-	}
-	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
-		$browser_layer = http_script('', _DIR_INCLUDE . 'layer.js','');
-		// Numero de version pour Mozilla "authentique"
-		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
-			$browser_rev = doubleval($match[1]);
-		// Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
-		else if (strpos($browser_description, "Gecko") and !strpos($browser_description, "KHTML"))
-			$browser_rev = 1.4;
-		// Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)
-		else $browser_rev = 1.0;
-	}
-
-	if (!$browser_name) $browser_name = "Mozilla";
-}
-
-//
 // spip_timer : on l'appelle deux fois et on a la difference, affichable
 //
 function spip_timer($t='rien') {
@@ -1133,46 +1018,11 @@ function creer_repertoire($base, $subdir) {
 	return ($ok? "$subdir/" : '');
 }
 
-function creer_repertoire_documents($ext) {
-# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
-	if (lire_meta("creer_htaccess") == 'oui')
-		verifier_htaccess($rep);
-	return $rep;
-}
 
-// Pour les documents comme pour les logos, le filtre |fichier donne
-// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-// remarquable, mais a conserver pour compatibilite ascendante.
-// -> http://www.spip.net/fr_article901.html
-
-function calcule_fichier_logo($on) {
-  $r= ereg_replace("^" . _DIR_IMG, "", $on);
-  return $r;
-}
-
-function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
-	if (ereg("^../",$nom))	$nom = substr($nom,3);
-	if (ereg("^" . _DIR_IMG, $nom)) {
-		$nom = substr($nom,strlen(_DIR_IMG));
-	}
-	$pos = strrpos($nom, "/");
-	if ($pos > 0) {
-		$chemin = substr($nom, 0, $pos+1);
-		$nom = substr($nom, $pos+1);
-	} else {
-		$chemin = "";
-	}
-
-	reset($formats);
-	while (list(, $format) = each($formats)) {
-		$d = _DIR_IMG . "$chemin$nom.$format";
-		if (@file_exists($d)) return array(_DIR_IMG."$chemin", $nom, $format);
-	}
-}
-
-function redirige_par_entete($url)
-{
+//
+// Entetes
+//
+function redirige_par_entete($url) {
 	header("Location: $url");
 	include_ecrire('inc_cron.php3');
 #	spip_cron();
@@ -1180,22 +1030,7 @@ function redirige_par_entete($url)
 	exit;
 }
 
-// Envoi des en-tetes
-
-function debut_entete($title, $entete='')
-{
-  /* '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
-
-//if (eregi("msie", $browser_name)) {
-// '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
-// '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
-
-	$base=lire_meta("adresse_site");
-	if (!$base)
-		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
-	else
-	  $base .= '/' . (_DIR_RESTREINT ? '' : _DIR_RESTREINT_ABS);
-*/
+function debut_entete($title, $entete='') {
 	if (!$entete) {
 		if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 		$entete = "Content-Type: text/html; charset=$charset";
@@ -1209,8 +1044,7 @@ function debut_entete($title, $entete='')
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
 
-function http_script($script, $src='', $noscript='')
-{
+function http_script($script, $src='', $noscript='') {
 	return '<script type="text/javascript"'
 		. ($src ? " src=\"$src\"" : '')
 		. ">"

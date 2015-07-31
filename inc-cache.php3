@@ -59,6 +59,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
 	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
+	include_ecrire('inc_acces.php3');
 	verifier_htaccess(_DIR_CACHE);
 
 	$gzip = $flag_gz && $compresser_cache ? '.gz' : '';

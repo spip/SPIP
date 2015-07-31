@@ -4,6 +4,7 @@ $img = $_GET['img'];
 $logo = $img;
 include ("ecrire/inc_version.php3");
 include_ecrire("inc_admin.php3");
+include_ecrire("inc_logos.php3");
 
 if (!$taille_y)
 	$taille_y = $taille_x;

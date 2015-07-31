@@ -246,6 +246,7 @@ function table_des_mots($table, $les_mots) {
 
 
 function afficher_petits_logos_mots($id_mot) {
+	include_ecrire('inc_logos.php3');
 	$on = cherche_image_nommee("moton$id_mot");
 	if ($on) {
 	  $image = ("$on[0]$on[1].$on[2]");
