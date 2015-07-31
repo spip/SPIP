@@ -89,15 +89,16 @@ function gadget_rubriques() {
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$nb_col = min(8,ceil($total_lignes / 30));
-	if ($nb_col <= 1) $nb_col = ceil($total_lignes / 10);
-	$max_lignes = ceil($total_lignes / $nb_col);
-	$largeur = min(200, ceil($largeur_t / $nb_col)); 
-	$count_lignes = 0;
-	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
 
 	if ($i > 0) {
+		$nb_col = min(8,ceil($total_lignes / 30));
+		$nb_col =  ceil($total_lignes / 10);
+		$max_lignes = ceil($total_lignes / $nb_col);
+		$largeur = min(200, ceil($largeur_t / $nb_col)); 
+		$count_lignes = 0;
+		$style = " style='z-index: 1; vertical-align: top;'";
+
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
