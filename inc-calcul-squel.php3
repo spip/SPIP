@@ -1607,10 +1607,12 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		if ($fonctions) {
 			$filtres = array();
 			while (list(, $nom) = each($fonctions)) {
-				if (ereg("url=(.*)", $nom, $regs))
+				/*if (ereg("url=(.*)", $nom, $regs))
 					$lacible = "new Link('".$regs[1]."')";
 				else
 					$filtres[] = $nom;
+				*/
+				$lacible = "new Link('".$nom."')";
 			}
 			$fonctions = $filtres;
 		}
