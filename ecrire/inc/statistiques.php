@@ -182,12 +182,12 @@ function aff_referers ($result, $limit, $plus) {
 			$visites = pos($nbvisites);
 			$ret = "\n<li>";
 
-			if (strlen($source_vignettes) > 0) $ret .= "\n<span style='clear: $spip_lang_right;'></span>\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
+			if (strlen($source_vignettes) > 0)
+				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
-		
 
 			if ($dom == "(email)") {
 				$aff .= $ret . "<b>".$dom."</b>";
@@ -199,10 +199,9 @@ function aff_referers ($result, $limit, $plus) {
 				$aff .= $ret
 				. "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
 				. (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"))
-				. "\n<ul style='font-size:x-small;'><li>"
+				. "\n<ul><li>"
 				. join ("</li><li>",$lesreferers[$numero])
-				. "</li></ul>\n"
-				. "</li></ul>\n<ul style='font-size:small;'>\n";
+				. "</li></ul>\n";
 			} else {
 				$aff .= $ret;
 				$lien = $n ? $lesreferers[$numero][0] : '';
@@ -212,14 +211,14 @@ function aff_referers ($result, $limit, $plus) {
 				} else
 					$lien = "<a href='http://".$dom."'>".$dom."</a>";
 				$aff .= "<b>".quote_amp($lien)."</b>";
-				$aff .= "</li>\n";
 			  }
 			}
+			$aff .= "</li>\n";
 		}
 
 		if (preg_match(",</ul>\s*<ul style='font-size:small;'>\s*$,",$aff,$r))
 		  $aff = substr($aff,0,(0-strlen($r[0])));
-		if ($aff) $aff = "<ul>$aff</ul>";
+		if ($aff) $aff = "<ul class='referers'>$aff</ul>";
 
 		// Le lien pour en afficher "plus"
 		if ($plus AND (spip_num_rows($result) == $limit)) {
