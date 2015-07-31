@@ -1,3 +1,4 @@
+#SET{statuts_auteurs,#VAL{_STATUT_AUTEUR_RUBRIQUE}|constant|explode{','}}
 <label for="statut"><:info_statut_auteur:></label>
 <select name="statut"
 				id="statut"
@@ -17,12 +18,12 @@
 		<input type='hidden' name='saisie_webmestre' value='1' />
 	</div>
 ]
-<div class="rubriques_restreintes[(#STATUT|=={0minirezo}|non)none-js]">
+<div class="rubriques_restreintes[(#STATUT|in_array{#GET{statuts_auteurs}}|non)none-js]">
 	[(#SET{label,<:info_restreindre_rubrique:>})]
 	<B_restreint>
 			<p><:info_admin_gere_rubriques:></p>
 			<ul id='liste_rubriques_restreintes'>
-				<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #ENV{statut}|=={0minirezo}}>
+				<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #ENV{statut}|in_array{#GET{statuts_auteurs}}}>
 					<li><input type='checkbox' name='restreintes[]' checked="checked" value='#ID_RUBRIQUE' />
 						<label><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" target="_blank">[(#TITRE|sinon{<:info_sans_titre:>})]</a></label>
 					</li>
@@ -49,7 +50,7 @@ Masquer/afficher le selecteur de rubriques restreintes, ou le choix webmestre
 ]
 <script type="text/javascript">/*<![CDATA[*/
 function update_saisie_statut_auteur(node,value){
-	var statut_auteur_rubrique="[(#VAL{_STATUT_AUTEUR_RUBRIQUE}|constant|replace{',','|'})]";
+	var statut_auteur_rubrique="[(#GET{statuts_auteurs}|implode{|})]";
 	var reg = new RegExp("^("+statut_auteur_rubrique+")$");
 	if (value.match(reg))
 		jQuery(node).siblings('.rubriques_restreintes:hidden').slideDown();
