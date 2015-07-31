@@ -340,7 +340,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 .formulaire_editer input.password,
 .formulaire_editer textarea,
 .formulaire_editer select {
-	width: 96%;
+	width: 95%;
 	font-size:1em;
 	margin:0;
 }
@@ -410,7 +410,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 *  pour l'avoir horizontale, il faut specifier :
 *  .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_editer .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
+.formulaire_editer .choix label{float:none; margin-#GET{left}:5px; display:inline;font-weight:normal;}
 .formulaire_editer .choix input.radio,
 .formulaire_editer .choix input.checkbox {width:auto;}
 
@@ -480,8 +480,6 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 /* barre d'outil */
 .formulaire_editer table.spip_barre{
-	background:#aaa;
-	border: 1px solid #666;
 	width:90%; /* pour mettre a la meme taille que les champs de formulaire */
 	background:none; border:0; margin:0; padding:0;/**/
 }
@@ -503,6 +501,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 .formulaire_editer .editer_titre input,
 .formulaire_editer .editer_nom input{font-size:1.2em; font-weight:bold;}
 .formulaire_editer .editer_chapo textarea{height:12em;}
+
+.formulaire_editer .confirmer_deplacement label{float:none; margin-#GET{left}:5px; display:inline;font-weight:normal;}
 
 /* le brouteur de rubrique en cas de petit ecran doit etre aussi plus petit ! */
 .etroit .formulaire_editer .editer_parent #titreparent{width:50% !important;}
