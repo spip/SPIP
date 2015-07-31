@@ -280,7 +280,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// Fin de parties
 	if ($boucle->mode_partie) $corps .= "\n		}\n";
 
-	$sql_args = '$result, ' . _q($boucle->sql_serveur);
+	$sql_args = '$allrows';
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
@@ -300,7 +300,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$SP++;
 
 	// RESULTATS
-	while ($Pile[$SP] = @sql_fetch(' .
+	while ($Pile[$SP] = array_shift(' .
 		  $sql_args .
 		  ")) {\n$corps\n	}\n" .
 		  $fin ;
@@ -316,10 +316,10 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
-			$count = "array_shift(sql_fetch($sql_args))";
-		else $count = "sql_count($sql_args)";
+			$count = "array_shift($sql_args)";
+		else $count = "count($sql_args)";
 		$count = !$boucle->mode_partie
-		  ? "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);"
+		  ? "\n\t\$Numrows['$id_boucle']['total'] = intval($count);"
 		  : calculer_parties($boucles, $id_boucle, $count);
 	} else $count = '';
 	
@@ -328,8 +328,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
 		. '
 	$t0 = "";' .
-		$corps .
-		"\n\t@sql_free($sql_args);";
+		$corps;
 }
 
 
@@ -355,7 +354,9 @@ function calculer_requete_sql(&$boucle)
 				    $boucle->limit))
 	  . calculer_dec('$having', calculer_dump_array($boucle->having))
 	  . "\n\t// REQUETE\n\t"
-	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);';
+	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'
+		. "\n\t"
+		. '$allrows = @sql_fetchall($result,$connect);';
 }
 
 // http://doc.spip.org/@calculer_dec
@@ -451,7 +452,7 @@ function calculer_parties($boucles, $id_boucle, $count) {
 	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
 
 	// nombre total avant partition
-	$retour = "\n\n	// PARTITION\n\t" . '$nombre_boucle = @' . $count .';';
+	$retour = "\n\n	// PARTITION\n\t" . '$nombre_boucle = ' . $count .';';
 
 	preg_match(",([+-/p])([+-/])?,", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
