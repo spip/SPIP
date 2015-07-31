@@ -372,7 +372,7 @@ jQuery.fn.ajaxbloc = function() {
 				event.stopPropagation();
 	  }).addClass('bind-ajaxReload');
 
-		jQuery(ajaxbloc_selecteur,this).not('.noajax','.bind-ajax')
+		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
 			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,jQuery(this).is('.nocache'));})
 			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
