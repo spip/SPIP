@@ -96,11 +96,9 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$out .= fin_boite_info(true);
 
 		// Logos du mot-clef
-
-		if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) AND ($spip_display != 4)) {
-			$iconifier = charger_fonction('iconifier', 'inc');
-			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
-		}
+		$flag_editable = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe);
+		$iconifier = charger_fonction('iconifier', 'inc');
+		$out .= $iconifier('id_mot', $id_mot, 'mots_edit', $flag_editable);
 	 }
 
 //

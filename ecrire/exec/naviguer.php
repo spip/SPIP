@@ -76,7 +76,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 	echo infos_naviguer($id_rubrique, $statut, $row, $n_forums);
 
 	$iconifier = charger_fonction('iconifier', 'inc');
-	echo ($iconifier('id_rubrique', $id_rubrique, 'naviguer', false));
+	echo $iconifier('id_rubrique', $id_rubrique, 'naviguer', false, $flag_editable);
 
 	echo raccourcis_naviguer($id_rubrique, $id_parent);
 

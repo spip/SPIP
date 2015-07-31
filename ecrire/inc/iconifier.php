@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
-function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
+function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modif=true) {
 	if ($GLOBALS['spip_display'] == 4) return "";
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
@@ -26,21 +26,21 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 	$iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
 
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
-		if ($GLOBALS['meta']['activer_logos'] != 'non') {
+		if ($flag_modif AND $GLOBALS['meta']['activer_logos'] != 'non') {
 			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 			$masque = "<div class='cadre_padding'>$masque</div>";
 			$bouton = bouton_block_depliable($texteon, $visible, 'on');
 			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
 		}
 	} else {
-		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
+		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif);
 
 		$bouton = bouton_block_depliable($texteon, $visible, 'on');
 
 		$survol = '';
 		$texteoff = _T('logo_survol');
 		if (!$logo = $chercher_logo($id, $id_objet, 'off')) {
-			if ($GLOBALS['meta']['activer_logos_survol'] == 'oui') {
+			if ($flag_modif AND $GLOBALS['meta']['activer_logos_survol'] == 'oui') {
 				$masque = "<br />".indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
 				$survol .= "<br />".block_parfois_visible('off', $texteoff, $masque, null, $visible);
 			}
@@ -48,12 +48,14 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 				. "<div class='cadre_padding'>"
 				. $clic . $survol . "</div>" . fin_block();
 		} else {
-			list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
-			$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
-			$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
+			if ($flag_modif) {
+				list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script, $flag_modif);
+				$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
+				$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
 				. "<div class='cadre_padding'>".$imgoff.$masque."</div>";
-			$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
-	}
+				$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
+			}
+		}
 
 		$res = "$img$masque";
 	}
@@ -72,9 +74,9 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
       </script>
 EOF;
 		}
+		return ajax_action_greffe("iconifier", $id, $res).$js;
 	}
-
-	return ajax_action_greffe("iconifier", $id, $res).$js;
+	else return '';
 
 }
 
@@ -146,7 +148,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 }
 
 // http://doc.spip.org/@decrire_logo
-function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="") {
+function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="", $flag_modif=true) {
 
 	list($fid, $dir, $nom, $format) = $img;
 	include_spip('inc/filtres_images');
@@ -160,10 +162,14 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 
 	return array($res,
-			"<div class='spip_xx-small'>" .
-		     $taille .
-		     "\n<br />[" .
-		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,status) {this.innerHTML = r; \$('.form_upload_icon',this).async_upload(async_upload_icon);}") .
-		     "]</div>");
+		"<div class='spip_xx-small'>" . $taille
+		. ($flag_modif
+			? "\n<br />["
+				. ajax_action_auteur("iconifier", "$id-$nom.$format",
+				$script, "$id_objet=$id&type=$id_objet",
+				array(_T('lien_supprimer')),
+				'',"function(r,status) {this.innerHTML = r; \$('.form_upload_icon',this).async_upload(async_upload_icon);}") ."]"
+			: '')
+			. "</div>");
 }
 ?>

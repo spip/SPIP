@@ -90,9 +90,9 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 
 		// Interface de logo
 		$iconifier = charger_fonction('iconifier', 'inc');
-		if ($id_auteur > 0)
-			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
 
+		if ($id_auteur > 0)
+			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos', false, autoriser('modifier', 'auteur', $id_auteur));
 		// nouvel auteur : le hack classique
 		else if ($fiche)
 			echo $iconifier('id_auteur',
