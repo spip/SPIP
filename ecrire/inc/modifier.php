@@ -83,7 +83,9 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		suivre_invalideur($options['invalideur']);
 	}
 
-	// Demander une reindexation
+	// Demander une reindexation ?
+	if (!isset($options['indexation']))
+		$options['indexation'] = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($options['indexation']) {
 		include_spip('inc/indexation');
 		marquer_indexer('spip_'.$table_objet, $id);
@@ -145,9 +147,20 @@ function revision_auteur($id_auteur, $c=false) {
 // http://doc.spip.org/@revision_mot
 function revision_mot($id_mot, $c=false) {
 
+	// regler le groupe
+	if (NULL != ($id_groupe = _request('id_groupe',$c))
+	OR NULL != ($type = _request('type',$c))) {
+		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe="._q('id_groupe'));
+		if ($row = spip_fetch_array($result))
+			$type = $row['titre'];
+		else
+			$type = NULL;
+		$c = set_request('type', $type, $c);
+	}
+
 	modifier_contenu('mot', $id_mot,
 		array(
-			'champs' => array('titre', 'descriptif', 'texte'),
+			'champs' => array('titre', 'descriptif', 'texte', 'id_groupe', 'type'),
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
