@@ -119,7 +119,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	.	$icone
 
 	.	boites_de_config_articles($id_article)
-	.	boite_article_virtuel($id_article, $virtuel, $flag_editable)
+	.	($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
 	.	meme_rubrique($id_rubrique, $id_article, 'article')
 
 	.	 pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
@@ -250,29 +250,24 @@ function boites_de_config_articles($id_article)
 }
 
 // http://doc.spip.org/@boite_article_virtuel
-function boite_article_virtuel($id_article, $virtuel, $flag)
+function boite_article_virtuel($id_article, $virtuel)
 {
-	if (!strlen($virtuel)
+	if (!$virtuel
 	AND $GLOBALS['meta']['articles_redirection'] != 'oui')
 		return '';
-
-
-	$virtualiser = charger_fonction('virtualiser', 'inc');
-	$masque = $virtualiser($id_article, $flag, $virtuel, "articles", "id_article=$id_article");
-
-	if (!$masque) return '';
 
 	$invite = '<b>'
 	._T('bouton_redirection')
 	. '</b>'
 	. aide ("artvirt");
 
-	return
-		cadre_depliable("site-24.gif",
-		  $invite,
-		  $virtuel,
-		  $masque,
-		  'redirection');
+	$virtualiser = charger_fonction('virtualiser', 'inc');
+
+	return cadre_depliable("site-24.gif",
+		$invite,
+		$virtuel,
+		$virtualiser($id_article, $virtuel, "articles", "id_article=$id_article"),
+		'redirection');
 }
 
 // http://doc.spip.org/@bouton_modifier_articles
