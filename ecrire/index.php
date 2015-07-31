@@ -84,7 +84,10 @@ if (autoriser_sans_cookie($exec)) {
 } else {
 	$var_auth = charger_fonction('auth', 'inc');
 	$var_auth = $var_auth();
-	if ($var_auth) redirige_par_entete($var_auth);
+	if ($var_auth) {
+		include_spip('inc/headers');
+		redirige_par_entete($var_auth);
+	}
  }
 
 //
