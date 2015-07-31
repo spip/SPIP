@@ -56,7 +56,7 @@ function surligner_mots($page, $mots) {
 
 
 // debut et fin, appeles depuis les squelettes
-function debut_surligne($mots,$mode_surligne) {
+function debut_surligne($mots, $mode_surligne) {
 
 	switch ($mode_surligne) {
 		case 'auto' :	// on arrive du debut de la page, on ne touche pas au buffer
@@ -85,7 +85,7 @@ function debut_surligne($mots,$mode_surligne) {
 	return $mode_surligne;
 }
 
-function fin_surligne($mots,$mode_surligne) {
+function fin_surligne($mots, $mode_surligne) {
 
 	switch ($mode_surligne) {
 		case 'auto' :	// on arrive du debut de la page, on s'occupe du buffer
