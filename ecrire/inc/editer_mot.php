@@ -16,7 +16,6 @@ include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
-	global $connect_statut;
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
@@ -50,11 +49,11 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
-	if (!($nombre_mots = $cpt['n'])) {
+	if (!$cpt['n']) {
 		if (!$flag) return;
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE $table = 'oui'	AND ".substr($connect_statut,1)." = 'oui'"));
+		$cpt = spip_fetch_array(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"), SPIP_NUM);
 
-		if (!$cpt['n']) return;
+		if (!$cpt[0]) return;
 	}
 
 	//
@@ -155,8 +154,6 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 // http://doc.spip.org/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
-	global $connect_statut, $connect_toutes_rubriques;
-
 	$les_mots = array();
 	$id_groupes_vus = array();
 	$groupes_vus = array();
@@ -176,27 +173,26 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$id_groupes_vus[] = $id_groupe;
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 			$vals= array("<a href='$url'>$cle</a>");
-			
 
-			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+			list($type_mot, $un) = spip_fetch_array(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"), SPIP_NUM);
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 
-			$type_mot = typo($row_groupe['titre']);
-			$flag_groupe = ($flag_editable AND
-					((($connect_statut === '1comite') AND $row_groupe['comite'] === 'oui') OR (($connect_statut === '0minirezo') AND $row_groupe['minirezo'] === 'oui')));
+			$type_mot = typo($type_mot);
+			if (autoriser('modifier', 'groupemots', $id_groupe))
+				$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+
+			$flag_groupe = ($flag_editable
+			AND editer_mot_droits('id_groupe', "id_groupe = $id_groupe"));	
 
 			// Changer
-			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
+			if ($unseul == "oui" AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 			} else {
 				$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
 			}
 
-			if ($connect_toutes_rubriques)
-				$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+			$vals[]= $type_mot;
 
-			else	$vals[] = $type_mot;
-	
 			if ($flag_editable){
 				if ($flag_groupe) {
 					$s =  _T('info_retirer_mot')
@@ -258,7 +254,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 // http://doc.spip.org/@formulaire_mots_cles
 function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
-	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
+	global  $spip_lang, $spip_lang_right;
 
 	if ($les_mots) {
 		$nombre_mots_associes = count($les_mots);
@@ -270,7 +266,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$cond_id_groupes_vus = "0";
 	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
 	
-	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
+	$nb_groupes = spip_num_rows(editer_mot_droits('*', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($nombre_mots_associes > 3) {
@@ -279,7 +275,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		. "</div><br />\n";
 	}
 
-	$result_groupes = spip_query("SELECT id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+	$result_groupes = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
@@ -384,5 +380,16 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		return array($res, _T('bouton_choisir'));
 	}
 
+}
+
+// Fonction verifiant que l'auteur a le droit de modifier un groupe de mots.
+// Fondee sur l'egalite du nom du statut et du nom du champ.
+// Il vaudrait mieux rajouter une table des statuts (ou un groupe de mots)
+// et un table de jointure entre ca et la table des groupes de mots.
+
+function editer_mot_droits($select, $cond)
+{
+	$droit = substr($GLOBALS['auteur_session']['statut'],1);
+	return spip_query("SELECT $select FROM spip_groupes_mots WHERE $droit = 'oui' AND $cond");
 }
 ?>
