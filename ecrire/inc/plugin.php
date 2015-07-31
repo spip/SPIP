@@ -252,7 +252,8 @@ function liste_plugin_actifs(){
 function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	$liste = liste_plugin_actifs();
 	foreach ($liste as $prefix=>$infos) {
-		if (constant($infos['dir_type'])==$dir_plugins)
+		if (defined($infos['dir_type']) 
+		AND constant($infos['dir_type'])==$dir_plugins)
 			$liste[$prefix] = $infos['dir'];
 		else 
 			unset($liste[$prefix]);
