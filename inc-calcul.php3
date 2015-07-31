@@ -13,6 +13,7 @@ if (file_exists("mes_fonctions.php3")) {
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
+include_ecrire("inc_documents.php3");
 
 tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
 tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
