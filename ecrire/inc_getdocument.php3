@@ -566,7 +566,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 					 'hash' => $hash,
 					 'hash_id_auteur' => $hash_id_auteur,
 					 'chemin' => $zip,
-					 'mode' => $mode,
+					 'doc' => $mode,
 					 'type' => $type),
 				   "spip_image.php3?id_article=$id");
 			  // a tout de suite en joindre5 ou joindre6
@@ -831,17 +831,21 @@ function corriger_extension($ext) {
 function ajout_logo($source, $dest) {
 
 	if (!$source) return;
-	if (!is_array($source))
-		$f = _DIR_TRANSFERT . $source; // fichier dans upload/
+	$f =_DIR_DOC . $dest . '.tmp';
+
+	if (!is_array($source)) 
+		// fichier dans upload/
+	  	$ok = @copy(_DIR_TRANSFERT . $source, $f);
 	else {
 		// Intercepter une erreur a l'envoi
 		if (check_upload_error($source['error'])) return;
 
 		// analyse le type de l'image (on ne fait pas confiance au nom de
 		// fichier envoye par le browser : pour les Macs c'est plus sur)
-		$f =_DIR_DOC . $dest . '.tmp';
-		deplacer_fichier_upload($source['tmp_name'], $f);
+
+		$ok = deplacer_fichier_upload($source['tmp_name'], $f);
 	}
+	if (!$ok)  {spip_log("pb de copie pour $f"); return;}
 
 	$size = @getimagesize($f);
 	$type = decoder_type_image($size[2], true);

@@ -456,6 +456,7 @@ $flag_imagick = function_exists("imagick_readimage");	// http://pear.sourceforge
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 $flag_revisions = function_exists("gzcompress");
+$flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
 
 //
 // Appliquer le prefixe cookie
@@ -639,13 +640,6 @@ function http_last_modified($lastmodified, $expire = 0) {
 		@Header ("Expires: ".http_gmoddate($expire)." GMT");
 	return $headers_only;
 }
-
-$flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
-
-function tester_upload() {
-	return $GLOBALS['flag_upload'];
-}
-
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie

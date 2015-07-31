@@ -110,7 +110,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
 		echo "$id_objet=$id&";
-		echo "action=effacer_logo&amp;chemin=$fichier&amp;hash_id_auteur=$connect_id_auteur&amp;hash=$hash&amp;redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</a>]";
+		echo "action=effacer_logo&amp;doc=$fichier&amp;hash_id_auteur=$connect_id_auteur&amp;hash=$hash&amp;redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
@@ -126,16 +126,15 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur' />";
 		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash' />";
 		echo "\n<INPUT NAME='action' TYPE=Hidden VALUE='ajout_logo' />";
-		echo "\n<INPUT NAME='logo' TYPE=Hidden VALUE='$racine' />";
+		echo "\n<INPUT NAME='doc' TYPE=Hidden VALUE='$racine' />";
 		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
 		echo "\n<INPUT NAME='image' type='File' class='forml' style='font-size:9px;' SIZE=15>";
 		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
 		echo "\n<input name='sousaction1' type='submit' value='",
 		  _T('bouton_telecharger'),
 		  "' class='fondo' style='font-size:9px' /></div>";
-		if (!$GLOBALS['flag_upload']) {
-				echo _T('info_installer_images_dossier');
-		} else {
+		$afficher = "";
+		if ($GLOBALS['flag_upload']) {
 			$myDir = opendir(_DIR_TRANSFERT);
 			while($entryName = readdir($myDir)){
 				if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
@@ -144,7 +143,10 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 				}
 			}
 			closedir($myDir);
-
+		}
+		if (!$afficher) {
+		  echo _T('info_installer_images_dossier');
+		} else {
 			echo "\n<div style='text-align: left'>"._T('info_selectionner_fichier').":</div>";
 			echo "\n<SELECT NAME='chemin' CLASS='forml' size='1'>";
 			echo $afficher;

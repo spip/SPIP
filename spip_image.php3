@@ -24,23 +24,20 @@ include_ecrire("inc_admin.php3");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql.php3");# spip_insert
 include_ecrire('inc_documents.php3');	# fichiers_upload()
 
-$documents_actifs = array();
-//
-// Le switch principal : quelle est l'action demandee
-//
-
-// appel de config-fonction
 if ($test_vignette)
 	redirige_par_entete(tester_vignette($test_vignette));
 
- else if ($action == 'joindre')
-   {
-// Autorisation ?
-     if (!verifier_action_auteur("joindre", $hash, $hash_id_auteur))
-	die ('Interdit');
-     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte
+else {
+	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
+		die ('Interdit');
+
+	$documents_actifs = array();
+
+	if ($action == 'joindre') {
+
+     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
-     $fonc = 'joindre' . 
+     $action .=
        ($sousaction1 ? 1 :
 	($sousaction2 ? 2 :
 	 ($sousaction3 ? 3 : 
@@ -50,42 +47,33 @@ if ($test_vignette)
      $arg = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
 	     ($sousaction2 ? $url : $chemin));
 
-     if (function_exists($fonc))
-       $fonc($arg, $mode, $type, $id_article, $id_document, 
-	     $hash, $hash_id_auteur, $redirect, $documents_actifs);
-     else spip_log("spip_image ne connait pas $fonc");
-   }
-// Ajout d'un logo
-else if ($action == 'ajout_logo') {
+     if (function_exists($action))
+       $action($arg, $doc, $type, $id_article, $id_document, 
+	       $hash, $hash_id_auteur, $redirect, $documents_actifs);
 
-  if (!$_FILES) $_FILES = $HTTP_POST_FILES;
-  $desc = $sousaction2 ? $chemin : (is_array($_FILES) ? array_pop($_FILES) : "");
-  if ($desc AND verifier_action_auteur("$action $logo", $hash, $hash_id_auteur))
-		ajout_logo($desc, $logo);
-}
+     else spip_log("spip_image: action inconnue $action");
+	}
+	else if ($action == 'ajout_logo') {
 
-// Suppression d'un logo
-else if ($action = "effacer_logo") {
-	if (verifier_action_auteur("$action $chemin", $hash, $hash_id_auteur))
-		effacer_logo($chemin);
-}
+		if (!$_FILES) $_FILES = $HTTP_POST_FILES;
+		$desc = $sousaction2 ? $chemin : (is_array($_FILES) ? array_pop($_FILES) : "");
+		if ($desc) ajout_logo($desc, $doc);
+	}
 
-// Suppression d'un document et de sa vignette
-else if ($doc_supp) {
-	if (verifier_action_auteur("supp_doc $doc_supp",
-	$hash, $hash_id_auteur))
-		supprime_document_et_vignette($doc_supp);
-}
+	else if ($action == "effacer_logo") {
+		effacer_logo($doc);
+	}
 
-// Rotation d'une image
-else if ($doc_rotate) {
-	if (verifier_action_auteur("rotate $doc_rotate",
-	$hash, $hash_id_auteur))
-		tourner_document($var_rot, $doc_rotate, $convert_command);
-}
+	else if ($action == 'supprime_document_et_vignette') {
+		supprime_document_et_vignette($doc);
+	}
 
- else spip_log("spip_image: action inconnue");
+	else if ($action = 'tourner_document') {
+		tourner_document($var_rot, $doc, $convert_command);
+	}
 
+	else spip_log("spip_image: action inconnue $action");
+ }
 //
 // Retour a l'envoyeur
 //
