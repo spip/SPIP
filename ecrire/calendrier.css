@@ -29,7 +29,6 @@ div.navigation-calendrier {
 	font-family: verdana, arial, sans,sans-serif;
 	font-weight: bold;
 	font-size: 14px;
-	padding: 2px;
 }
 
 div.navigation-calendrier img {
@@ -56,7 +55,7 @@ a.calendrier-annee:hover {
 
 .calendrier-table-large { 
 	border: 0px;
-	width: 950px;
+	width: 900px;
  }
 
 .calendrier-table-etroit { 
@@ -65,9 +64,9 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-td-centre { 
-	width: 570px;
-	padding-left: 2%;
-	padding-right: 2%;
+	width: 550px;
+	padding-left: 25px;
+	padding-right: 25px;
   	vertical-align: top;
  }
 
@@ -77,17 +76,17 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-table-large  .calendrier-td-gauche {
-	width: 180px;
+	width: 150px;
   	vertical-align: top;
  }
 
 .calendrier-table-etroit  .calendrier-td-droit {
-	width: 180px;
+	width: 150px;
   	vertical-align: top;
  }
 
 .calendrier-table-large  .calendrier-td-droit {
-	width: 180px;
+	width: 150px;
   	vertical-align: top;
  }
 
@@ -116,6 +115,22 @@ a.calendrier-annee:hover {
 	text-align: center; 
 	background-color: white;
 	-moz-border-radius: 5px;
+ }
+
+
+.calendrier-tripleagenda { 
+	vertical-align: top;
+	width: 33%;  
+ }
+
+.calendrier-cadreagenda { 
+	visibility: hidden;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 0px;
+	-moz-border-radius-bottomleft: 8px;
+	-moz-border-radius-bottomright: 8px;
  }
 
 .calendrier-titre { 

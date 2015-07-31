@@ -167,16 +167,17 @@ if ($spip_display != 4) {
 		$jour = jour($date);
 	
 		// rendez-vous personnels dans le mois
-		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie' LIMIT 0,1"))) {
+		$evt = sql_calendrier_agenda($mois, $annee);
+		if ($evt) {
 			echo "<p />";
-			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
+			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3', $evt);
 		}
-		// rendez-vous personnels dans le mois
+		// et ceux du jour
 		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
 				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
 					     "AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) AND messages.statut='publie' LIMIT 0,1"))) {
 			echo "<p />";
-			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, 90, $partie_cal, $echelle);
+			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col", $partie_cal, $echelle);
 		}
 }
 
@@ -453,8 +454,9 @@ if (lire_meta('calculer_rubriques') == 'oui') {
 // (ajouter une image, etc.)
 //
 
-
-if (abs(time() - $meta_maj['alea_ephemere']) > 2*24*3600) {
+$maj_alea = $meta_maj['alea_ephemere'];
+$t_jour = substr($maj_alea, 6, 2);
+if (abs($t_jour - date('d')) > 2) {
 	include_ecrire("inc_session.php3");
 	$alea = md5(creer_uniqid());
 	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
