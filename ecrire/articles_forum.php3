@@ -10,11 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("inc.php3");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_calendrier.php");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_layer.php3");
+include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
-
+include_ecrire('inc_forum.php3');
 
 
 $query = "SELECT titre, id_rubrique FROM spip_articles WHERE id_article='$id_article'";

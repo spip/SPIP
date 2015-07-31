@@ -15,17 +15,28 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	include ("inc_version.php3");
 }
 
-include_ecrire('inc_auth.php3');
+$var_nom = "auth";
+$var_f = find_in_path('inc_' . $var_nom . '.php');
+
+if ($var_f) 
+        include($var_f);
+elseif (is_readable($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php3')))
+        include($var_f);
+else {spip_log("pas de fichier pour $var_nom");exit;}
+
+if (function_exists($var_nom))
+        $var_res = $var_nom();
+elseif (function_exists($var_f = $var_nom . "_dist"))
+        $var_res = $var_f();
+else {spip_log("fonction $var_nom indisponible dans $var_f");exit;}
+
+if (!$var_res) exit;
+
+
 include_ecrire("inc_minipres.php"); // choisit la langue
 include_ecrire('inc_admin.php3');
-include_ecrire("inc_presentation.php3");
 include_ecrire('inc_cookie.php');
-include_ecrire("inc_calendrier.php");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_layer.php3");
-include_ecrire("inc_rubriques.php3");
+
 
 //
 // Preferences de presentation
@@ -70,55 +81,60 @@ if ($set_ecran) {
 if (!$spip_ecran) $spip_ecran = "etroit";
 
 
-// deux globales (compatibilite ascendante)
-$options      = $prefs['options'];
-$spip_display = $prefs['display'];
-
+$GLOBALS['couleurs_spip'] = array(
 
 // Vert
-if (!$couleurs_spip[1]) $couleurs_spip[1] = array (
+1 => array (
 		"couleur_foncee" => "#9DBA00",
 		"couleur_claire" => "#C5E41C",
 		"couleur_lien" => "#657701",
 		"couleur_lien_off" => "#A6C113"
-);
+		),
+
 // Violet clair
-if (!$couleurs_spip[2]) $couleurs_spip[2] = array (
+2 => array (
 		"couleur_foncee" => "#eb68b3",
 		"couleur_claire" => "#ffa9e6",
 		"couleur_lien" => "#8F004D",
 		"couleur_lien_off" => "#BE6B97"
-);
+		),
+
 // Orange
-if (!$couleurs_spip[3]) $couleurs_spip[3] = array (
+3 => array (
 		"couleur_foncee" => "#fa9a00",
 		"couleur_claire" => "#ffc000",
 		"couleur_lien" => "#FF5B00",
 		"couleur_lien_off" => "#B49280"
-);
+		),
+
 // Saumon
-if (!$couleurs_spip[4]) $couleurs_spip[4] = array (
+4 => array (
 		"couleur_foncee" => "#CDA261",
 		"couleur_claire" => "#FFDDAA",
 		"couleur_lien" => "#AA6A09",
 		"couleur_lien_off" => "#B79562"
-);
-//  Bleu pastelle
-if (!$couleurs_spip[5]) $couleurs_spip[5] = array (
+		),
+
+//  Bleu pastel
+5 => array (
 		"couleur_foncee" => "#5da7c5",
 		"couleur_claire" => "#97d2e1",
 		"couleur_lien" => "#116587",
 		"couleur_lien_off" => "#81B7CD"
-);
+		),
+
 //  Gris
-if (!$couleurs_spip[6]) $couleurs_spip[6] = array (
+6 => array (
 		"couleur_foncee" => "#85909A",
 		"couleur_claire" => "#C0CAD4",
 		"couleur_lien" => "#3B5063",
 		"couleur_lien_off" => "#6D8499"
+		),
 );
 
-
+// deux globales (compatibilite ascendante)
+$options      = $prefs['options'];
+$spip_display = $prefs['display'];
 $choix_couleur = $prefs['couleur'];
 if (strlen($couleurs_spip[$choix_couleur]['couleur_foncee']) < 7) $choix_couleur = 1;
 
@@ -134,16 +150,7 @@ $attributes_body = "text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink=
 // Gestion de version
 //
 
-$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
-if ($version_installee <> $spip_version) {
-	debut_page();
-	if (!$version_installee) $version_installee = _T('info_anterieur');
-	echo "<blockquote><blockquote><h4><font color='red'>"._T('info_message_technique')."</font><br> "._T('info_procedure_maj_version')."</h4>
-	"._T('info_administrateur_site_01')." <a href='upgrade.php3'>"._T('info_administrateur_site_02')."</a></blockquote></blockquote><p>";
-	fin_page();
-	exit;
-}
-
+if (!isset($reinstall)) if (demande_maj_version()) exit;
 
 //
 // Gestion de la configuration globale du site

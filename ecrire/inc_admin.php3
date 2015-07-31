@@ -92,5 +92,17 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 	return false;
 }
 
+function demande_maj_version()
+{
+	global $spip_version;
+	$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
+	if ($version_installee == $spip_version) return false;
+	debut_page();
+	if (!$version_installee) $version_installee = _T('info_anterieur');
+	echo "<blockquote><blockquote><h4><font color='red'>"._T('info_message_technique')."</font><br> "._T('info_procedure_maj_version')."</h4>
+	"._T('info_administrateur_site_01')." <a href='upgrade.php3'>"._T('info_administrateur_site_02')."</a></blockquote></blockquote><p>";
+	fin_page();
+	return true;
+}
 
 ?>

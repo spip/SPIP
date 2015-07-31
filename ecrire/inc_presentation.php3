@@ -16,6 +16,23 @@
 if (defined("_ECRIRE_INC_PRESENTATION")) return;
 define("_ECRIRE_INC_PRESENTATION", "1");
 
+// Choix dynamique de la couleur
+
+function choix_couleur()
+{
+	global $couleurs_spip;
+	$link = new Link;
+	if ($couleurs_spip) {
+		while (list($key,$val) = each($couleurs_spip)) {
+			$link->delVar('set_couleur');
+			$link->addVar('set_couleur', $key);
+					
+			echo "<a href=\"".$link->getUrl()."\">" .
+				http_img_pack("rien.gif", " ", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
+		}
+	}
+}
+
 //
 // affiche un bouton imessage
 //
@@ -2317,7 +2334,6 @@ function init_entete($titre, $rubrique, $css)
 // fonction envoyant la double serie d'icones de redac
 
 function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
-	global $couleurs_spip;
 	global $couleur_foncee;
 	global $couleur_claire;
 	global $adresse_site;
@@ -2667,19 +2683,8 @@ if (true /*$bandeau_colore*/) {
 		echo "</td>";
 		
 		echo "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>";
-			// Choix de la couleur: automatique en fonction de $couleurs_spip
-
-			$link = new Link;
-			if ($couleurs_spip) {
-			  ksort($couleurs_spip);
-			  while (list($key,$val) = each($couleurs_spip)) {
-					$link->delVar('set_couleur');
-					$link->addVar('set_couleur', $key);
-					
-					echo "<a href=\"".$link->getUrl()."\">" .
-					  http_img_pack("rien.gif", " ", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
-			  }
-			}
+		choix_couleur();
+		
 		echo "</td>";
 	//
 	// choix de la langue
@@ -3424,5 +3429,6 @@ function http_style_background($img, $att='')
   return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
     ($att ? (' ' . $att) : '') . ";'";
 }
+
 
 ?>

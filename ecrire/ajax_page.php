@@ -11,7 +11,15 @@
 
 #var_dump($_GET);
 
+
 include ("inc.php3");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_calendrier.php");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_layer.php3");
+include_ecrire("inc_rubriques.php3");
 
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 if ($flag_ob) {
