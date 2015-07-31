@@ -122,6 +122,10 @@ function f_afficher_blocs_ecrire($flux) {
 		if (!isset($o[$exec])){
 			$o[$exec] = trouver_objet_exec($exec);
 		}
+		// cas particulier
+		if ($exec=="infos_perso"){
+			$flux['args']['contexte']['id_auteur'] = $GLOBALS['visiteur_session']['id_auteur'];
+		}
 		$typepage = (isset($flux['args']['contexte']['type-page'])?$flux['args']['contexte']['type-page']:$exec);
 		if ($fond == "prive/squelettes/navigation/$typepage"){
 			$flux['data']['texte'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
@@ -202,6 +206,11 @@ function f_queue_affiche_milieu($flux){
 function trouver_objet_exec($exec){
 	static $objet_exec=array();
 	if (!$exec) return false;
+	// cas particulier
+	if ($exec=="infos_perso"){
+		$exec = "auteur";
+		set_request('id_auteur',$GLOBALS['visiteur_session']['id_auteur']);
+	}
 	if (!isset($objet_exec[$exec])){
 		$objet_exec[$exec]=false;
 		$infos = lister_tables_objets_sql();
