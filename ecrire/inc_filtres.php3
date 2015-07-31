@@ -136,7 +136,7 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 	if (lire_meta('charset') == 'iso-8859-1')	// recuperer les caracteres iso-latin
 		$texte = strtr2 ($texte, $trans_iso);
 
-	return $texte;		
+	return $texte;
 }
 
 // strtr (string $texte, array $trans) = emuler le php4
@@ -163,7 +163,6 @@ function entites_unicode($chaine, $charset='AUTO') {
 		$charset=lire_meta('charset');
 
 	switch($charset) {
-
 		case 'iso-8859-1':
 		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
 		//	$chaine = iso_8859_1_to_unicode($chaine);
