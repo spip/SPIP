@@ -30,9 +30,11 @@ list($fichier_aide, $l) = fichier_aide($lang_aide);
 if (!$fichier_aide)
 	$html = _T('aide_non_disponible');
 else {
-	$lastmodified = filemtime($fichier_aide);
-	$headers_only = http_last_modified($lastmodified);
-	if ($headers_only) exit;
+	if ($var_lang) {
+		$lastmodified = filemtime($fichier_aide);
+		$headers_only = http_last_modified($lastmodified);
+		if ($headers_only) exit;
+	}
 	
 	$html = join('', file($fichier_aide));
 	$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));

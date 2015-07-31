@@ -2,9 +2,11 @@
 
 include ("inc_version.php3");
 
-$lastmodified = filemtime("aide_gauche.php3");
-$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-if ($headers_only) exit;
+if ($var_lang) {
+	$lastmodified = filemtime("aide_gauche.php3");
+	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+	if ($headers_only) exit;
+}
 
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
 	include_ecrire("inc_auth.php3");

@@ -2,9 +2,11 @@
 
 include ("inc_version.php3");
 
-$lastmodified = filemtime("aide_index.php3");
-$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-if ($headers_only) exit;
+if ($var_lang) {
+	$lastmodified = filemtime("aide_index.php3");
+	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+	if ($headers_only) exit;
+}
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (file_exists("inc_connect.php3")) {
