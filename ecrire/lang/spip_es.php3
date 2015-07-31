@@ -885,7 +885,7 @@ imposible.
 'info_symbole_jaune' => 'El s&iacute;mbolo <B>AMARILLO</b> representa un <B>Anuncio para los redactores/as</b> y solo es modificable por la administraci&oacute;n del sitio.',
 'info_symbole_vert' => 'El s&iacute;mbolo <B>VERDE</b> indica los  <B>mensajes intercambiados con otros usuarios/as</b> del sitio.',
 'info_syndication' => 'sindicaci&oacute;n:',
-'info_syndication_articles' => '<NEW>',
+'info_syndication_articles' => 'art&iacute;culo(s)',
 'info_taille_maximale_vignette' => 'Dimensiones m&aacute;ximas de los iconos generados :',
 'info_telecharger' => 'Enviar desde tu ordenador...',
 'info_telecharger_nouveau_logo' => 'Subir un nuevo logotipo:',
