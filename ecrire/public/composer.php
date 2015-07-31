@@ -779,6 +779,7 @@ function calculer_select ($select = array(), $from = array(),
 		$cle = $cledef;
 		// le format de join est :
 		// array(table depart, cle depart [,cle arrivee[,condition optionnelle and ...]])
+		$join[$cle] = array_values($join[$cle]); // recalculer les cles car des unset ont pu perturber
 		if (count($join[$cle])==2) $join[$cle][] = $join[$cle][1];
 		if (count($join[$cle])==3) $join[$cle][] = '';
 		list($t,$c,$carr,$and) = $join[$cle];
