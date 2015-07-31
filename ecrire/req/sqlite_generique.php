@@ -617,6 +617,21 @@ function spip_sqlite_fetch($r, $t='', $serveur='',$requeter=true) {
 }
 
 
+function spip_sqlite_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r){
+		$link = _sqlite_link($serveur);
+		if (_sqlite_is_version(3, $link)){
+			// encore un truc de bien fichu : PDO ne PEUT PAS faire de seek ou de rewind...
+			// je me demande si pour sqlite 3 il ne faudrait pas mieux utiliser
+			// les nouvelles fonctions sqlite3_xx (mais encore moins presentes...)
+			return false;
+		}
+		else {
+			return sqlite_seek($r, $row_number);
+		}
+	}
+}
+
 // http://doc.spip.org/@spip_sqlite_free
 function spip_sqlite_free(&$r, $serveur='',$requeter=true) {
 	unset($r);
@@ -1364,6 +1379,7 @@ function _sqlite_ref_fonctions(){
 		'error' => 'spip_sqlite_error',
 		'explain' => 'spip_sqlite_explain',
 		'fetch' => 'spip_sqlite_fetch',
+		'seek' => 'spip_sqlite_seek',
 		'free' => 'spip_sqlite_free',
 		'hex' => 'spip_sqlite_hex',
 		'in' => 'spip_sqlite_in', 

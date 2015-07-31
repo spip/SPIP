@@ -115,6 +115,12 @@ function sql_fetch($res, $serveur='', $option=true) {
 	return $f($res, NULL, $serveur, $option!==false);
 }
 
+function sql_seek($res, $row_number, $serveur='', $option=true) {
+	$f = sql_serveur('seek', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	return $f($res, $row_number, $serveur, $option!==false);
+}
+
 // http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='', $option=true) {
 	$f = sql_serveur('listdbs', $serveur,  $option==='continue' OR $option===false);
