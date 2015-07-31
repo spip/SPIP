@@ -21,7 +21,8 @@ function action_iconifier_dist()
 	$iframe_redirect = _request('iframe_redirect');
 
 	$arg = rawurldecode($arg);
-	if (!preg_match(',^\d*(\D)(.*)$,',$arg, $r))
+
+	if (!preg_match(',^-?\d*(\D)(.*)$,',$arg, $r))
 		spip_log("action iconifier: $arg pas compris");
 	elseif ($r[1] == '+')
 		action_spip_image_ajouter_dist($r[2]);

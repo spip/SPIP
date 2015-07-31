@@ -20,8 +20,6 @@ function action_editer_auteurs_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$redirect = urldecode(_request('redirect'));
-	if ($script_aut = _request('script_aut'))
-		$redirect = parametre_url($redirect,'script_aut',$script_aut,'&');
 	if ($script = _request('script'))
 		$redirect = parametre_url($redirect,'script',$script,'&');
 	if ($titre = _request('titre'))
@@ -47,7 +45,7 @@ function action_editer_auteurs_dist() {
 
 			if ($n == 1)
 			# Bingo. Signaler le choix fait.
-				ajouter_auteur_et_rediriger($r[2], $r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . $res[0] . $ancre);
+				ajouter_auteur_et_rediriger($r[2], $r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . rawurlencode($cherche) . $ancre);
 			# Trop vague. Le signaler.
 			elseif ($n > 16)
 				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=-1" . $ancre);

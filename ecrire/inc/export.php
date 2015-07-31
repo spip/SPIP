@@ -41,7 +41,9 @@ if (!isset($EXPORT_tables_noexport)){
 		'spip_visites',
 		'spip_visites_articles',
 		'spip_ortho_cache',
-		'spip_ortho_dico'
+		'spip_ortho_dico',
+		'spip_versions', // le dump des fragments n'est pas robuste
+		'spip_versions_fragments' // le dump des fragments n'est pas robuste
 		);
 	if (!$GLOBALS['connect_toutes_rubriques']){
 		$EXPORT_tables_noexport[]='spip_messages';

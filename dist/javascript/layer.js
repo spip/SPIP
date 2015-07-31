@@ -130,6 +130,7 @@ function aff_selection_titre(titre, id, idom, nid)
 	t.value= titre;
 	t=findObj_forcer(nid);
 	t.value=id;
+	jQuery(t).trigger('change'); // declencher le onchange
 	t=findObj_forcer(idom);
 	t.style.display='none';
 }

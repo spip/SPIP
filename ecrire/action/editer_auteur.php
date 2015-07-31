@@ -16,21 +16,22 @@ include_spip('inc/filtres');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@action_legender_auteur_dist
-function action_legender_auteur_dist()
-{
-        $securiser_action = charger_fonction('securiser_action', 'inc');
-        $arg = $securiser_action();
+// http://doc.spip.org/@action_editer_auteur_dist
+function action_editer_auteur_dist() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
-        if (!preg_match(",^(\d+)\D(\d*)(\D(\w*))?$,", $arg, $r)) {
-		$r = "action_legender_auteur_dist $arg pas compris";
+	if (!preg_match(",^(\d+)$,", $arg, $r)) {
+		$r = "action_editer_auteur_dist $arg pas compris";
 		spip_log($r);
-        } else 	redirige_par_entete(action_legender_auteur_post($r));
+	} else {
+		$url = action_legender_auteur_post($r);
+		redirige_par_entete($url);
+	}
 }
 
 // http://doc.spip.org/@action_legender_auteur_post
-function action_legender_auteur_post($r)
-{
+function action_legender_auteur_post($r) {
 	global $auteur_session;
 
 	$bio = _request('bio');
@@ -176,14 +177,62 @@ function action_legender_auteur_post($r)
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
 			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
-			if ($ajouter_id_article)
-				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
+
+			// recuperer l'eventuel logo charge avant la creation
+			$id_hack = 0 - $GLOBALS['auteur_session']['id_auteur'];
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
 		}
 
 		spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . ",					bio=" . _q($auteur['bio']) . ",						email=" . _q($auteur['email']) . ",					nom_site=" . _q($auteur['nom_site']) . ",				url_site=" . _q($auteur['url_site']) . ",				pgp=" . _q($auteur['pgp']) .					(!$extra ? '' : (", extra = " . _q($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
 	}
 
-	// Si on modifie la fiche auteur, reindexer 
+
+	//
+	// Modifications de statut
+	//
+	// TODO : autorisations correspondantes !
+	//
+	if ($statut = _request('statut')
+	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
+	$opt = array('statut'=>$statut))) {
+		if (!ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
+		  spip_log("action_instituer_auteur_dist: $statut incompris  pour $id_auteur");
+		} else {
+			spip_query("UPDATE spip_auteurs SET statut="._q($statut) . " WHERE id_auteur=" . _q($id_auteur));
+		}
+	}
+
+	// Rubriques restreintes
+	$restreintes = _request('restreintes');
+	if ($id_parent = intval(_request('id_parent'))) {
+		if (is_array($restreintes))
+			$restreintes[] = $id_parent;
+		else
+			$restreintes = array($id_parent);
+	}
+	if (is_array($restreintes)
+	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
+	$opt = array('restreint'=>$restreintes))) {
+		include_spip('base/abstract_sql');
+		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur="._q($id_auteur));
+		foreach (array_unique($restreintes) as $id_rub)
+			if ($id_rub = intval($id_rub)) // si '0' on ignore
+				spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");
+	}
+
+
+	// Lier a un article
+	if ($id_article = intval(_request('lier_id_article'))
+	AND autoriser('modifier', 'article', $id_article)
+	) {
+		spip_query("INSERT spip_auteurs_articles (id_article,id_auteur) VALUES ($id_article,$id_auteur)");
+	}
+
+	// Si on modifie la fiche auteur, reindexer
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
 		marquer_indexer('spip_auteurs', $id_auteur);
@@ -193,28 +242,21 @@ function action_legender_auteur_post($r)
 
 	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 
-	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
+	$redirect = rawurldecode($redirect);
 
-	if ($echec OR ($init = ($tout[0]=='0'))) {
-	  // tout nouveau. envoyer le formulaire de saisie du reste
-	  // en transmettant le retour eventuel
-	  // decode / encode car encode pas necessairement deja fait.
+	if ($echec) {
+		// revenir au formulaire de saisie
+		$ret = !$redirect
+			? '' 
+			: ('&redirect=' . rawurlencode($redirect));
 
-		$ret = !$redirect ? '' 
-		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
-
-		$script = (_request('var_ajaxcharset') ? 'legender_auteur' : 'auteur_infos');
-
-		return generer_url_ecrire($script, "id_auteur=$id_auteur&initial=$init$echec$ret",true);
+		return generer_url_ecrire('auteur_infos',
+			"id_auteur=$id_auteur$echec$ret",'&');
 	} else {
-	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
-		  if (!$redirect) {
-		    $redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", true, true);
-		    $anc = '';
-		  } else 
-		    list($redirect,$anc) = split('#',rawurldecode($redirect));
+		// modif: renvoyer le resultat ou a nouveau le formulaire si erreur
+		if (!$redirect)
+			$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", '&', true);
 
-		  $redirect .= $echec . $anc . ($echec ? '' : '&initial=-1');
 		return $redirect;
 	}
 }

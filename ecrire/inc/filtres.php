@@ -94,7 +94,15 @@ function image_filtrer($args){
 	$texte = array_shift($args);
 	if (!$texte) return;
 	// Cas du nom de fichier local
-	if (preg_match(',^('._DIR_IMG . '|'. _DIR_IMG_PACK .'),', $texte)) {
+	if (is_array($texte)) {
+			if ($inclure){
+				include_spip('inc/filtres_images');
+				$inclure = false;
+			}
+			array_unshift($args,$texte);
+			return call_user_func_array($filtre, $args);	
+	}
+	else if (preg_match(',^('._DIR_IMG . '|'. _DIR_IMG_PACK .'),', $texte)) {
 		if (!@file_exists($texte)) {
 			spip_log("Image absente : $texte");
 			return '';
@@ -175,6 +183,81 @@ function image_typo() {
 	$tous = func_get_args();
 	return call_user_func_array('produire_image_typo', $tous);
 }
+
+
+// Fonctions permettant de realiser 
+// les filtres images_... entierement en memoire
+
+
+
+// http://doc.spip.org/@image_lire
+function image_lire ($im) {
+	
+	include_spip('inc/filtres_images');
+	// Exemple de passage de fonction
+	//	include_spip('inc/filtres_images');
+	//	$fonc = "image_nb('$img','200','500','300')";
+	//	eval("\$img=$fonc;");
+
+	$image = image_valeurs_trans($im, "image_lire", "png");
+	if (!$image) return("");
+
+	$img["texte"] = $im; 
+	$img["source"] = $image["fichier"];
+	$img["largeur_source"] = $image["largeur"];
+	$img["hauteur_source"] = $image["hauteur"];
+
+
+	$img["dest"] = $image["fichier"];
+	$img["fonction"] = "@image_spip@";
+
+	$img["largeur"] = $image["largeur"];
+	$img["hauteur"] = $image["hauteur"];
+	
+
+	$fichier = $image["fichier"];
+
+	$img["passe"] = 1;
+	$img["mem"] = $image["fonction_imagecreatefrom"]($fichier);
+
+	return $img;
+
+}
+
+// http://doc.spip.org/@image_ecrire
+function image_ecrire ($im, $fmt="jpg") {
+	$image = image_valeurs_trans($im["dest"], "image_lire", $fmt);	
+
+	$fichier = $image["fichier"];
+	$dest = $image["fichier_dest"];
+
+//	echo "<li>$fichier / $dest";
+
+	if (!file_exists($dest)) {
+		//echo "<li>Pass - $fichier";
+
+		// Repasser les valeurs d'origine pour la deuxieme passe
+		$im["passe"] = 2;
+		$im["dest"] = $im["source"];
+		$im["largeur"] = $im["largeur_source"];
+		$im["hauteur"] = $im["hauteur_source"];
+
+//		echo "<div>".$im["fonction"]."</div>";
+
+
+		$fonc = str_replace("@image_spip@","\$im", $im["fonction"]);
+		eval("\$im=$fonc;");
+		
+		
+		//$dest = $im["dest"];
+		if ($im["dest"] != $im["source"]) $image["fonction_image"]($im["mem"], $dest);		
+		imagedestroy($im["mem"]);
+	}
+	
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>largeur($dest),'height'=>hauteur($dest)));
+}
+
+
 
 //
 // Retourner taille d'une image
@@ -1815,11 +1898,16 @@ function replace($texte, $expression, $replace='', $modif="UimsS") {
 // et affecte les doublons['documents']
 // http://doc.spip.org/@traiter_doublons_documents
 function traiter_doublons_documents(&$doublons, $letexte) {
-	if (strstr($letexte, 'spip_document_') // evite le preg_match_all si inutile
+
+	// Verifier dans le texte & les notes (pas beau, helas)
+	$t = $letexte.$GLOBALS['les_notes'];
+
+	if (strstr($t, 'spip_document_') // evite le preg_match_all si inutile
 	AND preg_match_all(
 	',<[^>]+\sclass=["\']spip_document_([0-9]+)[\s"\'],imsS',
-	$letexte, $matches, PREG_PATTERN_ORDER))
+	$t, $matches, PREG_PATTERN_ORDER))
 		$doublons['documents'] .= "," . join(',', $matches[1]);
+
 	return $letexte;
 }
 
