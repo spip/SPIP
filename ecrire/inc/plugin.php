@@ -500,7 +500,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	ecrire_meta('plugin',serialize($plugin_valides));
 	$liste = array_diff_key($liste,$plugin_valides);
 	ecrire_meta('plugin_attente',serialize($liste));
-	ecrire_meta('plugin_header',substr(strtolower(implode(",",$header)),0,900));
+	$header = strtolower(implode(",",$header));
+	ecrire_meta('plugin_header',substr($header,0,900));
+	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
+		ecrire_fichier(_DIR_VAR."config.txt",$GLOBALS['spip_version_affichee '] . "@ www.spip.net + " . $header);
+	else
+		@unlink(_DIR_VAR."config.txt");
 	// generer charger_plugins_chemin.php
 	plugins_precompile_chemin($plugin_valides, $ordre);
 	// generer les fichiers
