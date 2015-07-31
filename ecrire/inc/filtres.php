@@ -1886,6 +1886,7 @@ function compacte_js($flux) {
 // dans _DIR_VAR/cache_$format/
 // Si c'est un flux on le renvoit compacte
 // Si on ne sait pas compacter, on renvoie ce qu'on a recu
+// http://doc.spip.org/@compacte
 function compacte($source, $format = null) {
 	if (!$format AND preg_match(',\.(js|css)$,', $source, $r))
 		$format = $r[1];
