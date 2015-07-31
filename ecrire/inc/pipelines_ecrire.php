@@ -283,7 +283,6 @@ function trouver_objet_exec($exec){
 	if (!$exec) return false;
 	if (!isset($objet_exec[$exec])){
 		$objet_exec[$exec]=false;
-		include_spip('base/objets');
 		$infos = lister_tables_objets_sql();
 		foreach($infos as $t=>$info){
 			if ($exec==$info['url_edit'] AND $info['editable']){

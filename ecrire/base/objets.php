@@ -583,7 +583,8 @@ function table_objet($type,$serveur='') {
 function table_objet_sql($type,$serveur='') {
 	global $table_des_tables;
 	$nom = table_objet($type, $serveur);
-	include_spip('public/interfaces');
+	if (!isset($table_des_tables['articles'])) // eviter de multiples inclusions
+		include_spip('public/interfaces');
 	if (isset($table_des_tables[$nom])) {
 		$nom = $table_des_tables[$nom];
 		$nom = "spip_$nom";

@@ -13,7 +13,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/lang');
-include_spip('public/quete'); // pour quete_virtuel et ses dependances
 
 // NB: mes_fonctions peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
@@ -202,6 +201,7 @@ function tester_redirection($fond, $contexte, $connect)
 {
 	if ($fond == 'article'
 	  AND $id_article = intval($contexte['id_article'])) {
+		include_spip('public/quete'); // pour quete_virtuel et ses dependances
 		$m = quete_virtuel($id_article, $connect);
 		if (strlen($m)) {
 			include_spip('inc/texte');

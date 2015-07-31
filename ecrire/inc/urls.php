@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+include_spip('base/objets');
 
 /**
  * Decoder une url en utilisant les fonctions inverse
@@ -121,7 +122,6 @@ function urls_liste_objets($preg = true){
 	if (is_null($url_objets)){
 		$url_objets = array();
 		// recuperer les tables_objets_sql declarees
-		include_spip('base/objets');
 		$tables_objets = lister_tables_objets_sql();
 		foreach($tables_objets as $t=>$infos){
 			if ($infos['page']) {

@@ -14,6 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
+include_spip('base/objets');
+include_spip('public/parametrer'); // charger les fichiers fonctions
 
 /**
  * Charger un filtre depuis le php :
@@ -114,15 +116,15 @@ function version_svn_courante($dir) {
 
 // La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
 // et laisser passer les fonctions personnelles baptisees image_...
-$GLOBALS['spip_matrice']['image_graver'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_select'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_reduire'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_reduire_par'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_graver'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_select'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_reduire'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_reduire_par'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_passe_partout'] = true;//'inc/filtres_images_mini.php';
 
-$GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_html_to_hex'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_foncer'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_eclaircir'] = true;//'inc/filtres_images_mini.php';
 
 // ou pour inclure un script au moment ou l'on cherche le filtre
 $GLOBALS['spip_matrice']['filtre_image_dist'] = 'inc/filtres_mime.php';
@@ -140,9 +142,10 @@ $GLOBALS['spip_matrice']['filtre_audio_x_pn_realaudio'] = 'inc/filtres_mime.php'
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
-	include_spip('public/parametrer'); // charger les fichiers fonctions
-	if (is_string($f = $GLOBALS['spip_matrice'][$filtre]))
+	if (is_string($f = $GLOBALS['spip_matrice'][$filtre])){
 		find_in_path($f,'', true);
+		$GLOBALS['spip_matrice'][$filtre] = true;
+	}
 	$tous = func_get_args();
 	if (substr($filtre,0,6)=='image_' && $GLOBALS['spip_matrice'][$filtre])
 		return image_filtrer($tous);
@@ -2603,7 +2606,6 @@ function filtre_print_dist($u, $join=', ') {
  * @return string
  */
 function objet_info($objet,$info){
-	include_spip('base/objets');
 	$table = table_objet_sql($objet);
 	$infos = lister_tables_objets_sql($table);
 	return (isset($infos[$info])?$infos[$info]:'');

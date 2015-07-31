@@ -117,8 +117,10 @@ function styliser_par_objets($flux){
 function quete_rubrique_fond($contexte) {
 	static $liste_objets = null;
 	static $quete = array();
-	if (!$liste_objets) {
+	if (is_null($liste_objets)) {
+		$liste_objets = array();
 		include_spip('inc/urls');
+		include_spip('public/quete');
 		$l = urls_liste_objets(false);
 		// placer la rubrique en tete des objets
 		$l = array_diff($l,array('rubrique'));

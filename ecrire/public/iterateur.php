@@ -66,14 +66,15 @@ class IterFactory{
 			// IterateurXXX
 			// definie dans le fichier iterateurs/xxx.php
 			$class = "Iterateur".$iterateur;
-			if (!include_spip("iterateur/" . strtolower($iterateur))
-			  OR !class_exists($class)) {
-				die("Iterateur $iterateur non trouv&#233;");
-				// si l'iterateur n'existe pas, on se rabat sur le generique
-				$iter = new EmptyIterator();
-			} else {
-				$iter = new $class($command, $info);
+			if (!class_exists($class)){
+				if (!include_spip("iterateur/" . strtolower($iterateur))
+					OR !class_exists($class)) {
+					die("Iterateur $iterateur non trouv&#233;");
+					// si l'iterateur n'existe pas, on se rabat sur le generique
+					# $iter = new EmptyIterator();
+				}
 			}
+			$iter = new $class($command, $info);
 		}
 		return new IterDecorator($iter, $command, $info);
 	}

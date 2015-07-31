@@ -32,10 +32,13 @@ if (!defined('_LOG_DEBUG')) define('_LOG_DEBUG', 7);
 // Peut etre appelee plusieurs fois, donc optimiser
 // http://doc.spip.org/@charger_fonction
 function charger_fonction($nom, $dossier='exec', $continue=false) {
+	static $echecs = array();
 
 	if (strlen($dossier) AND substr($dossier,-1) != '/') $dossier .= '/';
+	$f = str_replace('/','_',$dossier) . $nom;
+	if (isset($echecs[$f])) return $echecs[$f];
 
-	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
+	if (function_exists($f))
 		return $f;
 	if (function_exists($g = $f . '_dist'))
 		return $g;
@@ -55,7 +58,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	if (function_exists($f)) return $f;
 	if (function_exists($g)) return $g;
 
-	if ($continue) return false;
+	if ($continue) return $echecs[$f] = false;
 
 	// Echec : message d'erreur
 	spip_log("fonction $nom ($f ou $g) indisponible" .
@@ -1027,7 +1030,8 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 
 	if (!$public) {
 		if (!$entite) return '';
-		include_spip('inc/urls');
+		if (!function_exists('generer_url_ecrire_objet'))
+			include_spip('inc/urls');
 		$res = generer_url_ecrire_objet($entite,$id, $args, $ancre, false);
 	} else {
 		if ($type === NULL) {
@@ -1861,7 +1865,6 @@ function verifier_visiteur() {
 // http://doc.spip.org/@lang_select
 function lang_select ($lang=NULL) {
 	static $pile_langues = array();
-	include_spip('inc/lang');
 	if ($lang === NULL)
 		$lang = array_pop($pile_langues);
 	else {
@@ -1943,7 +1946,8 @@ function erreur_squelette($message='', $lieu='') {
  */
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
-	include_spip('public/assembler');
+	if (!function_exists('evaluer_fond'))
+		include_spip('public/assembler');
 	// assurer la compat avec l'ancienne syntaxe
 	// (trim etait le 3eme argument, par defaut a true)
 	if (!is_array($options)) $options = array('trim'=>$options);
@@ -1982,7 +1986,8 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 			'data'=>$page
 		));
 		if (isset($options['ajax']) AND $options['ajax']){
-			include_spip('inc/filtres');
+			if (!function_exists('encoder_contexte_ajax'))
+				include_spip('inc/filtres');
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte'], $options['ajax']);
 		}
 
@@ -2037,19 +2042,21 @@ function trouver_fond($nom, $dir='', $pathinfo = false) {
 }
 
 function tester_url_ecrire($nom){
+	static $exec=array();
+	if (isset($exec[$nom])) return $exec[$nom];
 	// tester si c'est une page en squelette
 	if (trouver_fond($nom, 'prive/squelettes/contenu/'))
-		return 'fond';
+		return $exec[$nom] = 'fond';
 	// compat skels orthogonaux version precedente
 	elseif (trouver_fond($nom, 'prive/exec/'))
-		return 'fond_monobloc';
+		return $exec[$nom] = 'fond_monobloc';
 	// echaffaudage d'un fond !
 	elseif(include_spip('public/styliser_par_z') AND z_echaffaudable($nom))
-		return 'fond';
+		return $exec[$nom] = 'fond';
 	// attention, il ne faut pas inclure l'exec ici
 	// car sinon #URL_ECRIRE provoque des inclusions
 	// et des define intrusifs potentiels
-	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
+	return $exec[$nom] = ((find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'');
 }
 
 // Charger dynamiquement une extension php

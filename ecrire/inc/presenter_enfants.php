@@ -23,6 +23,7 @@ function enfant_rub($collection){
 
 	if ($voir_logo) {
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		include_spip('inc/filtres_images_mini');
 	}
 
 	$res = array();
@@ -43,7 +44,6 @@ function enfant_rub($collection){
 			if ($voir_logo) {
 				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 					list($fid, $dir, $nom, $format) = $logo;
-					include_spip('inc/filtres_images_mini');
 					$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
 					if ($logo)
 						$logo =  inserer_attribut($logo,'class','logo');

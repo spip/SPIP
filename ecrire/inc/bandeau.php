@@ -20,7 +20,8 @@ function definir_barre_contexte($contexte = null){
 	elseif(is_string($contexte))
 		$contexte = unserialize($contexte);
 	if (!isset($contexte['id_rubrique']) AND isset($contexte['exec'])){
-		include_spip('inc/pipelines_ecrire');
+		if (!function_exists('trouver_objet_exec'))
+			include_spip('inc/pipelines_ecrire');
 		if ($e=trouver_objet_exec($contexte['exec'])){
 			$_id = $e['id_table_objet'];
 			if (isset($contexte[$_id]) AND $id=intval($contexte[$_id])){

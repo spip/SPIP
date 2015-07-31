@@ -257,7 +257,8 @@ function z_echaffaudable($type){
 		return $echaffaudable[$type] = false;
 
 	if (test_espace_prive()){
-		include_spip('inc/pipelines_ecrire');
+		if (!function_exists('trouver_objet_exec'))
+			include_spip('inc/pipelines_ecrire');
 		if ($e=trouver_objet_exec($type)){
 			return $echaffaudable[$type] = array($e['table'],$e['table_objet_sql'],$e);
 		}
