@@ -62,15 +62,17 @@ function filtre_text_csv_dist($t)
 			$t);
 	list($entete, $corps) = split("\n",$t,2);
 	$caption = '';
-	// sauter la ligne de separateur en tete
+	// sauter la ligne de tete formee seulement de separateurs 
 	if (substr_count($entete, $sep) == strlen($entete)) {
 		list($entete, $corps) = split("\n",$corps,2);
 	}
 	// si une seule colonne, en faire le titre
-	if (preg_match("/^([^$sep]*)$sep+\$/", $entete, $l)) {
+	if (preg_match("/^([^$sep]+)$sep+\$/", $entete, $l)) {
 			$caption = "\n||" .  $l[1] . "|";
 			list($entete, $corps) = split("\n",$corps,2);
 	}
+	// si premiere colonne vide, le raccourci doit quand meme produire <th...
+	if ($entete[0] == $sep) $entete = ' ' . $entete;
 	return propre($caption .
 		"\n|{{" .
 		str_replace($sep,'}}|{{',$entete) .
