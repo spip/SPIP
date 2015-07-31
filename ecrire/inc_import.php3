@@ -151,51 +151,74 @@ function import_debut($f, $gz=false) {
 function import_objet_1_2($f, $gz=false) {
 	global $import_ok, $pos, $abs_pos;
 
+	static $tables = array(
+		'article' => 'spip_articles',
+		'auteur' => 'spip_auteurs',
+		'breve' => 'spip_breves',
+		'document' => 'spip_documents',
+		'forum' => 'spip_forum',
+		'groupe_mots' => 'spip_groupes_mots',
+		'message' => 'spip_messages',
+		'mot' => 'spip_mots',
+		'petition' => 'spip_petitions',
+		'rubrique' => 'spip_rubriques',
+		'signature' => 'spip_signatures',
+		'syndic' => 'spip_syndic',
+		'syndic_article' => 'spip_syndic_articles',
+		'type_document' => 'spip_types_documents'
+	);
+
 	$import_ok = false;
 	$b = '';
+	// Lire le type d'objet
 	if (!($type = xml_fetch_tag($f, $b, $gz))) return false;
 	if ($type == '/SPIP') return !($import_ok = true);
 	$id = "id_$type";
+	$id_objet = 0;
+
+	// Lire les champs de l'objet
 	for (;;) {
 		$b = '';
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
-		if ($col == ("/$type")) break;
+		if ($col == '/'.$type) break;
 		$value = '';
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 		if (substr($col, 0, 5) == 'lien:') {
 			$type_lien = substr($col, 5);
-			$liens[$type_lien][] = '('.$$id.','.$value.')';
+			$liens[$type_lien][] = '('.$id_objet.','.$value.')';
 		}
 		else if ($col != 'maj') {
 			$cols[] = $col;
 			$values[] = '"'.addslashes($value).'"';
-			if (substr($col, 0, 3) == 'id_') $$col = $value;
+			if ($col == $id) $id_objet = $value;
 		}
 	}
 
-	$table = 'spip_'.$type;
-	if ($type != 'forum' AND $type != 'syndic') $table .= 's';
+	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
 	mysql_query($query);
 
 	if ($type == 'article') {
-		mysql_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_article");
+		mysql_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
+		mysql_query("DELETE FROM spip_auteurs_documents WHERE id_article=$id_objet");
 	}
 	else if ($type == 'mot') {
-		mysql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot");
-		mysql_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_mot");
+		mysql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
+		mysql_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
 	}
 	else if ($type == 'auteur') {
-		mysql_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur");
+		mysql_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
 	}
 	else if ($type == 'message') {
-		mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message");
+		mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_objet");
 	}
 	if ($liens) {
 		reset($liens);
 		while (list($type_lien, $t) = each($liens)) {
-			if ($type == 'auteur' OR $type == 'mot') $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
-			else $table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
+			if ($type == 'auteur' OR $type == 'mot' OR $type == 'document')
+				$table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
+			else
+				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
 			$query = "INSERT $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
 			mysql_query($query);
 		}
@@ -372,9 +395,13 @@ function import_all($f, $gz=false) {
 	mysql_query($query);
 	$query = "DELETE FROM spip_articles WHERE maj < $my_date";
 	mysql_query($query);
+	$query = "DELETE FROM spip_documents WHERE maj < $my_date";
+	mysql_query($query);
 	$query = "DELETE FROM spip_forum WHERE maj < $my_date";
 	mysql_query($query);
 	$query = "DELETE FROM spip_mots WHERE maj < $my_date";
+	mysql_query($query);
+	$query = "DELETE FROM spip_groupes_mots WHERE maj < $my_date";
 	mysql_query($query);
 	$query = "DELETE FROM spip_petitions WHERE maj < $my_date";
 	mysql_query($query);

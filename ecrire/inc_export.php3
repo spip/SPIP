@@ -49,17 +49,26 @@ else {
 function export_objets($result, $type, $file = 0, $gz = false) {
 	$_fputs = ($gz) ? gzputs : fputs;
 	$nfields = mysql_num_fields($result);
+	// Recuperer les noms des champs
 	for ($i = 0; $i < $nfields; ++$i) $fields[$i] = mysql_field_name($result, $i);
 	while ($row = mysql_fetch_array($result)) {
 		$string .= build_begin_tag($type) . "\n";
+		// Exporter les champs de la table
 		for ($i = 0; $i < $nfields; ++$i) {
 			$string .= '<'.$fields[$i].'>' . text_to_xml($row[$i]) . '</'.$fields[$i].'>' . "\n";
 		}
+		// Exporter les relations
 		if ($type == 'article') {
 			$query = 'SELECT id_auteur FROM spip_auteurs_articles WHERE id_article='.$row['id_article'];
 			$res2 = mysql_query($query);
 			while($row2 = mysql_fetch_array($res2)) {
 				$string .= '<lien:auteur>' . $row2[0] . '</lien:auteur>' . "\n";
+			}
+			mysql_free_result($res2);
+			$query = 'SELECT id_document FROM spip_documents_articles WHERE id_article='.$row['id_article'];
+			$res2 = mysql_query($query);
+			while($row2 = mysql_fetch_array($res2)) {
+				$string .= '<lien:document>' . $row2[0] . '</lien:document>' . "\n";
 			}
 			mysql_free_result($res2);
 		}
