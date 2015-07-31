@@ -202,6 +202,9 @@ function calculer_balise($nom, $p) {
 
 	if ($f) return $f($p);
 
+ if(find_in_path('modeles/'.strtolower($nom).'.html'))
+  return balise_MODELE_dist($p);
+ 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
 		$res = calculer_balise_logo($p);
