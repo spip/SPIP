@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Perbaharui halaman ini',
 'afficher_trad' => 'tampilkan terjemahan',
 'alerte_maj_impossible' => '<b>Peringatan!</b> Gagal memperbaharui database SQL ke versi @version@, mungkin karena ada masalah hak akses di database. Silakan hubungi ISP anda.',
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute;e par ailleurs. La valeur actuelle est&nbsp;:', # NEW
 'analyse_xml' => 'Pemroresan XML',
 'annuler' => 'Batal',
 'antispam_champ_vide' => 'Mohon biarkan kolom ini kosong:',
@@ -59,9 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Ubah dalam bentuk [tautan web->http://...]',
 'barre_lien_input' => 'Silakan isi target tautan web anda (anda dapat memberikan sebuah URL internet dalam bentuk http://www.mysite.com atau cukup mencantumkan nomor artikel di situs ini).',
 'barre_note' => 'Ubah ke [[Footnote]]',
+'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
 'barre_quote' => '<quote>Kutip sebuah pesan</quote>',
-'bouton_ajouter_document' => '<MODIF>TAMBAH DOKUMEN',
-'bouton_ajouter_image' => '<MODIF>TAMBAH GAMBAR',
+'bouton_ajouter_document' => 'TAMBAH DOKUMEN', # MODIF
+'bouton_ajouter_image' => 'TAMBAH GAMBAR', # MODIF
+'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
 'bouton_changer' => 'Modifikasi',
 'bouton_chercher' => 'Pencarian',
 'bouton_choisir' => 'Pilih',
@@ -185,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'musim semi',
 'date_saison_3' => 'musim panas',
 'date_saison_4' => 'musim gugur',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'minggu',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => ' untuk memulai proses instalasi sesungguhnya',
 'dirs_preliminaire' => 'Pendahuluan: <b>Mengatur hak akses</b>',
 'dirs_probleme_droits' => 'Masalah dalam hak akses',
@@ -201,9 +210,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   direktori tersebut. Prosedur secara rinci dapat dilihat di manual instalasi.
 
   <p />Setelah anda selesai melakukannya, anda dapat ',
-'double_occurrence' => '<MODIF>Entri ganda',
+'double_occurrence' => 'Entri ganda', # MODIF
 
 // E
+'en_cours' => 'en cours', # NEW
 'entree_dimensions' => 'Ukuran:',
 'entree_titre_document' => 'Judul dokumen:',
 'entree_titre_image' => 'Judul gambar:',
@@ -211,9 +221,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Kesalahan',
 'erreur_balise_non_fermee' => 'tag terakhir tidak ditutup:',
 'erreur_texte' => 'kesalahan',
+'etape' => '&Eacute;tape', # NEW
 
 // F
 'fichier_introuvable' => 'Berkas tidak ditemukan: @fichier@',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Anda telah terdaftar.',
 'form_email_non_valide' => 'Alamat e-mail anda tidak sah.',
 'form_forum_access_refuse' => 'Anda tidak memiliki akses ke situs ini lagi.',
@@ -237,7 +260,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Silakan konfirmasi tanda tangan anda:',
 'form_pet_deja_enregistre' => 'Situs ini telah terdaftar',
 'form_pet_deja_signe' => 'Anda telah menandatangani teks ini.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Sebuah e-mail konfirmasi telah dikirimkan kepada anda. Anda harus mengunjungi URL yang tercantum dalam email ini untuk menvalidasi tanda tangan anda.',
+'form_pet_envoi_mail_confirmation' => 'Sebuah e-mail konfirmasi telah dikirimkan kepada anda. Anda harus mengunjungi URL yang tercantum dalam email ini untuk menvalidasi tanda tangan anda.', # MODIF
 'form_pet_mail_confirmation' => 'Halo,
 
 Anda telah menandatangani petisi:
@@ -258,6 +281,7 @@ Terima kasih atas partisipasi anda!
 ',
 'form_pet_message_commentaire' => 'Ada pesan atau komentar?',
 'form_pet_nom_site2' => 'Nama situs web anda',
+'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Permasalahan teknis, sistem tanda tangan untuk sementara waktu terganggu.',
 'form_pet_signature_pasprise' => 'Tanda tangan anda tidak dihiraukan.',
 'form_pet_signature_validee' => 'Tanda tangan anda sah. Terima kasih!',
@@ -387,19 +411,23 @@ Terima kasih atas partisipasi anda!
 'info_article_supprime' => 'Artikel dihapus',
 'info_articles' => 'Artikel',
 'info_articles_a_valider' => 'Artikel yang akan divalidasi',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Artikel dikirim',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'penulis:',
 'info_authentification_ftp' => 'Ototentikasi (dengan FTP).',
 'info_bloquer_lien' => 'Blokir tautan ini',
 'info_breves_02' => 'Berita',
 'info_breves_2' => 'berita',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Artikel berita yang akan divalidasi',
 'info_connexion_refusee' => 'Koneksi ditolak',
 'info_contact_developpeur' => 'Silakan hubungi pengembang.',
 'info_contenance' => 'Situs ini berisikan:',
 'info_contribution' => 'kontribusi forum',
 'info_copyright' => '@spip@ adalah piranti lunak bebas yang didistribusi @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => 'Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'di bawah lisensi GPL',
 'info_cours_edition' => 'Artikel anda dalam proses',
 'info_creer_repertoire' => 'Silakan buat sebuah berkas atau direktori yang diberi nama:',
@@ -411,7 +439,10 @@ Terima kasih atas partisipasi anda!
 'info_description_2' => 'Deskripsi:',
 'info_dimension' => 'Ukuran:',
 'info_document' => 'Dokumen',
+'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
 'info_documents' => 'Dokumen',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP mengizinkan pertukaran pesan dan pembuatan forum
 		diskusi pribadi di antara pengunjung situs. Anda dapat mengaktifkan
 		atau menonaktifka fitur ini.',
@@ -458,6 +489,8 @@ Terima kasih atas partisipasi anda!
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'PESAN',
 'info_message_supprime' => 'PESAN DIHAPUS',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Tanggal publikasi online:',
 'info_modification_parametres_securite' => 'modifikasi parameter-parameter keamanan',
 'info_mois_courant' => 'Selama bulan:',
@@ -473,9 +506,11 @@ Terima kasih atas partisipasi anda!
 'info_nouveau_message' => 'ANDA MEMILIKI SEBUAH PESAN BARU',
 'info_nouveaux_messages' => 'ANDA MEMILIKI @total_messages@ PESAN BARU',
 'info_numero_abbreviation' => 'Tidak',
+'info_obligatoire' => 'Cette information est obligatoire', # NEW
 'info_panne_site_syndique' => 'Situs-situs sindikasi tidak dapat dijangkau',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Tampilan kecil',
+'info_petition_close' => 'P&eacute;tition close', # NEW
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Beberapa kata kunci ditemukan untuk "@cherche_mot@":',
 'info_popularite_5' => 'popularitas:',
@@ -500,13 +535,19 @@ Terima kasih atas partisipasi anda!
 'info_retablir_lien' => 'pulihkan tautan ini',
 'info_retirer_mot' => 'Hapus kata kunci ini',
 'info_retirer_mots' => 'Hapus semua kata kunci',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'tidak berjudul',
 'info_selectionner_fichier' => 'Anda dapat memilih sebuah berkas dari direktori @upload@',
 'info_selectionner_fichier_2' => 'Pilih sebuah berkas:',
+'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
+'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Validasi tertunda situs web',
 'info_site_reference' => 'Situs-situs referensi online',
 'info_site_refuse' => 'Situs web ditolak',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Merujuk sebuah situs',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'hapus gambar kecil',
 'info_symbole_bleu' => 'Simbol <b>biru</B> menandakan sebuah <b>memo</B>: yakni sebuah pesan untuk penggunaan pribadi anda.',
 'info_symbole_jaune' => 'Simbol <b>kuning</B> menandakan sebuah <b>pengumuman untuk semua edtor</B>: dapat diedit oleh semua administrator, dan muncul pada semua editor.',
@@ -553,6 +594,7 @@ Terima kasih atas partisipasi anda!
 'lien_visites' => '@visites@ kunjungan',
 'lien_voir_auteur' => 'Cek penulis ini',
 'ligne' => 'Baris',
+'login' => 'Connexion', # NEW
 'login_acces_prive' => 'akses ke area pribadi',
 'login_autre_identifiant' => 'gunakan ID lain',
 'login_cookie_accepte' => 'Silakan set browser anda untuk menerimanya (paling tidak untuk situs ini).',
@@ -584,6 +626,7 @@ Terima kasih atas partisipasi anda!
 'login_verifiez_navigateur' => '(Bagaimana pun, verifikasi bahwasanya browser anda tidak menyimpan kata sandi anda...)',
 
 // M
+'masquer_colonne' => 'Masquer cette colonne', # NEW
 'masquer_trad' => 'sembunyikan terjemahan',
 'module_fichiers_langues' => 'Berkas-berkas bahasa',
 
@@ -685,9 +728,9 @@ dan mengakses situs kembali.
 						dan pastikan gambar akhirnya muncul
 						di artikel.',
 'texte_erreur_visiteur' => 'Anda telah mencoba memasuki area pribadi dengan log masuk yang tidak sah.',
-'texte_inc_auth_1' => '<MODIF>Anda mengidentifikasikan diri anda dengan log masuk
+'texte_inc_auth_1' => 'Anda mengidentifikasikan diri anda dengan log masuk
 		<b>@auth_login@</B>, tapi tidak dapat ditemukan di database (lagi). 
-		Coba untuk',
+		Coba untuk', # MODIF
 'texte_inc_auth_2' => 'akses kembali',
 'texte_inc_auth_3' => 'keluar, dan
 		buka kembali browser anda jika perlu.',
@@ -723,35 +766,44 @@ dan mengakses situs kembali.
 'titre_mots_cles' => 'KATA-KATA KUNCI',
 'titre_probleme_technique' => 'Peringatan: sebuah permasalahan teknis (server SQL) telah mengganggu akses ke bagian situs ini.<p>Terima kasih atas pengertian anda.',
 'titre_publier_document' => 'PUBLIKASI DOKUMEN DI BAGIAN INI',
+'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
 'titre_statistiques' => 'Statistik situs',
 'titre_titre_document' => 'Judul dokumen:',
+'todo' => '&agrave; venir', # NEW
 'trad_reference' => '(rujuk artikel)',
 
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',
+'zbug_balise_inexistante' => 'Balise @balise@ mal d&eacute;clar&eacute;e pour @from@', # NEW
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'loop',
-'zbug_boucle_recursive_undef' => '<MODIF>loop rekursif yang tak terdefinisi',
+'zbug_boucle_recursive_undef' => 'loop rekursif yang tak terdefinisi', # MODIF
+'zbug_calcul' => 'calcul', # NEW
 'zbug_champ_hors_boucle' => 'Kolom @champ@ di luar loop',
-'zbug_champ_hors_motif' => '<MODIF>Kolom @champ@ di luar loop bertag @motif@',
+'zbug_champ_hors_motif' => 'Kolom @champ@ di luar loop bertag @motif@', # MODIF
 'zbug_code' => 'kode',
-'zbug_critere_inconnu' => '<MODIF>kriteria yang tidak dikenal @critere@',
-'zbug_distant_interdit' => '<MODIF>data eksternal dilarang',
-'zbug_doublon_table_sans_index' => '<MODIF>ganda dalam sebuah tabel tanpa indeks',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: definisi ganda',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: tag penutup hilang',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Sintaks (BOUCLE) loop yang salah ',
+'zbug_critere_inconnu' => 'kriteria yang tidak dikenal @critere@', # MODIF
+'zbug_distant_interdit' => 'data eksternal dilarang', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
+'zbug_doublon_table_sans_index' => 'ganda dalam sebuah tabel tanpa indeks', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: definisi ganda', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag penutup hilang', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Sintaks (BOUCLE) loop yang salah ', # MODIF
 'zbug_erreur_compilation' => 'Kesalahan kompilasi',
-'zbug_erreur_execution_page' => '<MODIF>kesalahan dalam kalkulasi halaman',
-'zbug_erreur_filtre' => '<MODIF>Kesalahan - filter yang tak terdefinisi: <b>"@filtre@"</b>',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} hanya berlaku untuk loop (FORUM) and (RUBRIK)',
+'zbug_erreur_execution_page' => 'kesalahan dalam kalkulasi halaman', # MODIF
+'zbug_erreur_filtre' => 'Kesalahan - filter yang tak terdefinisi: <b>"@filtre@"</b>', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} hanya berlaku untuk loop (FORUM) and (RUBRIK)', # MODIF
 'zbug_erreur_squelette' => 'Kesalahan dalam templat',
+'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => '&#1615;Kesalahan di situs',
-'zbug_inversion_ordre_inexistant' => '<MODIF>susunan yang tidak dikenal',
-'zbug_pagination_sans_critere' => '<MODIF>Tag #PAGINATION tanpa kriteria (penomoran halaman), atau digunakan dalam loop rekursif',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Parameter-parameter tambahan yang salah',
+'zbug_inversion_ordre_inexistant' => 'susunan yang tidak dikenal', # MODIF
+'zbug_pagination_sans_critere' => 'Tag #PAGINATION tanpa kriteria (penomoran halaman), atau digunakan dalam loop rekursif', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Parameter-parameter tambahan yang salah', # MODIF
 'zbug_profile' => 'Waktu kalkulasi: @time@',
 'zbug_resultat' => 'hasil',
-'zbug_serveur_indefini' => '<MODIF>server SQL yang tidak dikenal',
+'zbug_serveur_indefini' => 'server SQL yang tidak dikenal', # MODIF
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
 'zbug_table_inconnue' => 'Tabel SQL yang tidak dikenal "@table@"',
 'zxml_connus_attributs' => 'atribut yang dikenal',
 'zxml_de' => 'dari',

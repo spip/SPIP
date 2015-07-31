@@ -221,6 +221,18 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 
 // F
 'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
 'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
@@ -398,12 +410,16 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_article_supprime' => 'Art&iacute;culo suprimido',
 'info_articles' => 'Art&iacute;culos',
 'info_articles_a_valider' => 'Los art&iacute;culos a validar',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Art&iacute;culos propuestos',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Autora(s) y autor(es):',
 'info_authentification_ftp' => 'Autentificaci&oacute;n (por FTP).',
 'info_bloquer_lien' => 'bloquear este enlace',
 'info_breves_02' => 'Breves',
 'info_breves_2' => 'breves',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Breves a validar',
 'info_connexion_refusee' => 'Conexi&oacute;n rechazada',
 'info_contact_developpeur' => 'Debes contactar con un programador.',
@@ -424,6 +440,8 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Este documento no est&aacute; disponible',
 'info_documents' => 'Documentos',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'En funci&oacute;n de las preferencias, SPIP permite el intercambio de mensajes y la existencia de foros internos
  privados entre los participantes del sitio. Esta funcionalidad
 se puede activar o desactivar .',
@@ -470,6 +488,8 @@ se puede activar o desactivar .',
 'info_mail_fournisseur' => 'tu@proveedor.com',
 'info_message_2' => 'MENSAJE',
 'info_message_supprime' => 'Mensaje suprimido',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Fecha de puesta en l&iacute;nea',
 'info_modification_parametres_securite' => 'modificaciones de los par&aacute;metros de seguridad',
 'info_mois_courant' => 'En el mes actual de: ',
@@ -514,6 +534,8 @@ se puede activar o desactivar .',
 'info_retablir_lien' => 'restablecer el enlace',
 'info_retirer_mot' => 'Retirar la palabra',
 'info_retirer_mots' => 'Retirar todas las palabras',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sin t&iacute;tulo',
 'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un documento...',
@@ -522,7 +544,9 @@ se puede activar o desactivar .',
 'info_site_attente' => 'Sitio Web en espera de validaci&oacute;n',
 'info_site_reference' => 'Sitio referenciado en l&iacute;nea',
 'info_site_refuse' => 'Sitio Web rechazado',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referenciar un sitio',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Suprimir este icono',
 'info_symbole_bleu' => 'El s&iacute;mbolo <b>azul</b> representa un <b>recordatorio personal</b>, o sea una manera de recordar algo.',
 'info_symbole_jaune' => 'El s&iacute;mbolo <b>amarillo</b> representa un <b>anuncio para todos</b>: s&oacute;lo es modificable por las/os administradoras/es del sitio, y es visible por todos los redactores.',

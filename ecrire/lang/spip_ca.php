@@ -219,6 +219,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Fitxer @fichier@ introbable',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Ja est&agrave;s inscrit/a.',
 'form_email_non_valide' => 'La seva adre&ccedil;a electr&ograve;nica no ha estat validada.',
 'form_forum_access_refuse' => 'No teniu acc&eacute;s a aquest lloc.',
@@ -393,12 +405,16 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_article_supprime' => 'Article suprimit',
 'info_articles' => 'Articles',
 'info_articles_a_valider' => 'Articles per validar',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Articles proposats',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(s)/es:',
 'info_authentification_ftp' => 'Autenticaci&oacute; (per FTP).',
 'info_bloquer_lien' => 'blocar aquest enlla&ccedil;',
 'info_breves_02' => 'Breus',
 'info_breves_2' => 'breus',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Breus per validar',
 'info_connexion_refusee' => 'Connexi&oacute; denegada',
 'info_contact_developpeur' => 'Contacteu amb un desenvolupador.',
@@ -419,6 +435,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_document' => 'Document',
 'info_document_indisponible' => 'Aquest document no est&agrave; disponible',
 'info_documents' => 'Documents',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permet l\'intercanvi de missatges i la creaci&oacute; de f&ograve;rums de discussi&oacute;
   privats entre els participants d\'un lloc. Podeu habilitar o
   inhabilitar aquesta funcionalitat.',
@@ -465,6 +483,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_mail_fournisseur' => 'elteu@proveidor.com',
 'info_message_2' => 'MISSATGE',
 'info_message_supprime' => 'MISSATGE SUPRIMIT',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data de publicaci&oacute;:',
 'info_modification_parametres_securite' => 'modificacions dels par&agrave;metres de seguretat',
 'info_mois_courant' => 'Durant aquest mes:',
@@ -509,6 +529,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_retablir_lien' => 'restaurar aquest enlla&ccedil;',
 'info_retirer_mot' => 'suprimir aquesta paraula',
 'info_retirer_mots' => 'suprimir totes les paraules',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sense t&iacute;tol',
 'info_selectionner_fichier' => 'Podeu seleccionar un fitxer de la carpeta @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fitxer:',
@@ -517,7 +539,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_site_attente' => 'Lloc Web pendent de validaci&oacute;',
 'info_site_reference' => 'Lloc referenciat en l&iacute;nia',
 'info_site_refuse' => 'Lloc Web rebutjat',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referenciar un lloc',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'suprimir la icona',
 'info_symbole_bleu' => 'El s&iacute;mbol <b>blau</b> indica un <b>recordatori</b>: &eacute;s a dir un missatge per a &uacute;s personal.',
 'info_symbole_jaune' => 'El s&iacute;mbol <b>groc</b> indica un <b>av&iacute;s a tots els redactors</b>&nbsp;: modificable per tots els administradors i visible per tots els redactors.',

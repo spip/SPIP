@@ -222,6 +222,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'O ficheiro @fichier@ non foi atopado',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Xa est&aacute; inscrito.',
 'form_email_non_valide' => 'O seu enderezo de correo-e. non &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Non tes acceso a este web.',
@@ -398,12 +410,16 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_article_supprime' => 'Artigo eliminado',
 'info_articles' => 'Artigos',
 'info_articles_a_valider' => 'Os artigos por validar',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Artigos propostos',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(as/es):',
 'info_authentification_ftp' => 'Autentificaci&oacute;n (por FTP).',
 'info_bloquer_lien' => 'Bloquear esta ligaz&oacute;n',
 'info_breves_02' => 'Breves',
 'info_breves_2' => 'breves',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Breves por validar',
 'info_connexion_refusee' => 'Conexi&oacute;n rexeitada',
 'info_contact_developpeur' => 'Tes que contactar cun desenrolador.',
@@ -424,6 +440,8 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Este documento non est&aacute; dispo&ntilde;ible',
 'info_documents' => 'Documentos',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permite o intercambio de mensaxes e a constituci&oacute;n de foros de discusi&oacute;n
   privados entre os participantes do web. Pode activar ou
   desactivar esta funcionalidade.',
@@ -470,6 +488,8 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_mail_fournisseur' => 'oteu@aloxador.com',
 'info_message_2' => 'MENSAXE',
 'info_message_supprime' => 'MENSAXE ELIMINADA',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data de posta en li&ntilde;a:',
 'info_modification_parametres_securite' => 'modificaci&oacute;ns dos par&aacute;metros de seguridade',
 'info_mois_courant' => 'Neste mes:',
@@ -514,6 +534,8 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_retablir_lien' => 'reestablecer esta ligaz&oacute;n',
 'info_retirer_mot' => 'Retirar esta palabra',
 'info_retirer_mots' => 'Retirar todas as palabras',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sen t&iacute;tulo',
 'info_selectionner_fichier' => 'Pode seleccionar un ficheiro do cartafol @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
@@ -522,7 +544,9 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
 'info_site_reference' => 'Web referido en li&ntilde;a',
 'info_site_refuse' => 'Web rexeitado',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referenciar un web',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'suprimir a vi&ntilde;eta',
 'info_symbole_bleu' => 'O s&amp;iacute;mbolo <b>azul</b> indica unha <b>nota</b>: ou sexa, unha mensaxe para o seu uso persoal.',
 'info_symbole_jaune' => 'O s&iacute;mbolo <b>amarelo</b> indica un <b>anuncio para todo o equipo de redacci&oacute;n</b>&nbsp;: modificable polo equipo de xesti&oacute;n, e visible por toda a redacci&oacute;n.',

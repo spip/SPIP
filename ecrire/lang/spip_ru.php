@@ -149,26 +149,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => '&#1074;&#1086;&#1089;&#1082;&#1088;&#1077;&#1089;&#1077;&#1085;&#1100;&#1077;',
-'date_jour_1_abbr' => '<NEW>dim.',
-'date_jour_1_initiale' => '<NEW>d.',
+'date_jour_1_abbr' => 'dim.', # NEW
+'date_jour_1_initiale' => 'd.', # NEW
 'date_jour_2' => '&#1087;&#1086;&#1085;&#1077;&#1076;&#1077;&#1083;&#1100;&#1085;&#1080;&#1082;',
-'date_jour_2_abbr' => '<NEW>lun.',
-'date_jour_2_initiale' => '<NEW>l.',
+'date_jour_2_abbr' => 'lun.', # NEW
+'date_jour_2_initiale' => 'l.', # NEW
 'date_jour_3' => '&#1074;&#1090;&#1086;&#1088;&#1085;&#1080;&#1082;',
-'date_jour_3_abbr' => '<NEW>mar.',
-'date_jour_3_initiale' => '<NEW>m.',
+'date_jour_3_abbr' => 'mar.', # NEW
+'date_jour_3_initiale' => 'm.', # NEW
 'date_jour_4' => '&#1089;&#1088;&#1077;&#1076;&#1072;',
-'date_jour_4_abbr' => '<NEW>mer.',
-'date_jour_4_initiale' => '<NEW>m.',
+'date_jour_4_abbr' => 'mer.', # NEW
+'date_jour_4_initiale' => 'm.', # NEW
 'date_jour_5' => '&#1095;&#1077;&#1090;&#1074;&#1077;&#1088;&#1075;',
-'date_jour_5_abbr' => '<NEW>jeu.',
-'date_jour_5_initiale' => '<NEW>j.',
+'date_jour_5_abbr' => 'jeu.', # NEW
+'date_jour_5_initiale' => 'j.', # NEW
 'date_jour_6' => '&#1087;&#1103;&#1090;&#1085;&#1080;&#1094;&#1072;',
-'date_jour_6_abbr' => '<NEW>ven.',
-'date_jour_6_initiale' => '<NEW>v.',
+'date_jour_6_abbr' => 'ven.', # NEW
+'date_jour_6_initiale' => 'v.', # NEW
 'date_jour_7' => '&#1089;&#1091;&#1073;&#1073;&#1086;&#1090;&#1072;',
-'date_jour_7_abbr' => '<NEW>sam.',
-'date_jour_7_initiale' => '<NEW>s.',
+'date_jour_7_abbr' => 'sam.', # NEW
+'date_jour_7_initiale' => 's.', # NEW
 'date_jours' => '&#1076;&#1077;&#1085;&#1100;',
 'date_minutes' => '&#1084;&#1080;&#1085;&#1091;&#1090;&#1099;',
 'date_mois' => '&#1084;&#1077;&#1089;&#1103;&#1094;&#1099;',
@@ -188,13 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => '&#1074;&#1077;&#1089;&#1085;&#1072;',
 'date_saison_3' => '&#1083;&#1077;&#1090;&#1086;',
 'date_saison_4' => '&#1086;&#1089;&#1077;&#1085;&#1100;',
-'date_secondes' => '<NEW>secondes',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => '&#1085;&#1077;&#1076;&#1077;&#1083;&#1080;',
-'date_un_mois' => '<NEW>mois',
-'date_une_heure' => '<NEW>heure',
-'date_une_minute' => '<NEW>minute',
-'date_une_seconde' => '<NEW>seconde',
-'date_une_semaine' => '<NEW>semaine',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => '&#1076;&#1083;&#1103; &#1090;&#1086;&#1075;&#1086;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1085;&#1072;&#1095;&#1072;&#1090;&#1100; &#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1091;',
 'dirs_preliminaire' => '&#1055;&#1086;&#1076;&#1075;&#1086;&#1090;&#1086;&#1074;&#1082;&#1072;: <b>&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; &#1087;&#1088;&#1072;&#1074; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1072;</b>',
 'dirs_probleme_droits' => '&#1055;&#1088;&#1086;&#1073;&#1083;&#1077;&#1084;&#1072; &#1074; &#1087;&#1088;&#1072;&#1074;&#1072;&#1093; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1072;',
@@ -208,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   &#1055;&#1088;&#1086;&#1094;&#1077;&#1076;&#1091;&#1088;&#1072; &#1086;&#1087;&#1080;&#1089;&#1072;&#1085;&#1072; &#1074; &#1080;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1094;&#1080;&#1080; &#1087;&#1086; &#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1077;.
 
 ',
-'double_occurrence' => '<MODIF>Double occurrence',
+'double_occurrence' => 'Double occurrence', # MODIF
 
 // E
 'en_cours' => '&#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1103;&#1077;&#1090;&#1089;&#1103;',
@@ -223,6 +223,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => '&#1060;&#1072;&#1081;&#1083; &#1085;&#1077; &#1085;&#1072;&#1081;&#1076;&#1077;&#1085;: @fichier@',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => '&#1042;&#1099; &#1091;&#1078;&#1077; &#1079;&#1072;&#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1099;.',
 'form_email_non_valide' => '&#1059;&#1082;&#1072;&#1079;&#1072;&#1085; &#1085;&#1077;&#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1100;&#1085;&#1099;&#1081; e-mail &#1072;&#1076;&#1088;&#1077;&#1089;.',
 'form_forum_access_refuse' => '&#1042;&#1099; &#1073;&#1086;&#1083;&#1100;&#1096;&#1077; &#1085;&#1077; &#1080;&#1084;&#1077;&#1077;&#1090;&#1077; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1072; &#1082; &#1101;&#1090;&#1086;&#1084;&#1091; &#1089;&#1072;&#1081;&#1090;&#1091;.',
@@ -291,7 +303,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_acces_refuse' => '&#1042;&#1099; &#1073;&#1086;&#1083;&#1100;&#1096;&#1077; &#1085;&#1077; &#1080;&#1084;&#1077;&#1077;&#1090;&#1077; &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1072; &#1082; &#1101;&#1090;&#1080;&#1084; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;&#1084;.',
 'forum_attention_dix_caracteres' => '<b>&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;!</b> &#1057;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077; &#1076;&#1086;&#1083;&#1078;&#1085;&#1086; &#1073;&#1099;&#1090;&#1100; &#1085;&#1077; &#1084;&#1077;&#1085;&#1077;&#1077; &#1076;&#1077;&#1089;&#1103;&#1090;&#1080; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1086;&#1074;.',
 'forum_attention_trois_caracteres' => '<b>&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;!</b> &#1047;&#1072;&#1075;&#1086;&#1083;&#1086;&#1074;&#1086;&#1082; &#1076;&#1086;&#1083;&#1078;&#1077;&#1085; &#1073;&#1099;&#1090;&#1100; &#1085;&#1077; &#1084;&#1077;&#1085;&#1077;&#1077; &#1090;&#1088;&#1077;&#1093; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1086;&#1074;.',
-'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
+'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.', # NEW
 'forum_avez_selectionne' => '&#1042;&#1099; &#1074;&#1099;&#1073;&#1088;&#1072;&#1083;&#1080;:',
 'forum_cliquer_retour' => '&#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077;  <a href=\'@retour_forum@\'>&#1089;&#1102;&#1076;&#1072;</a> &#1076;&#1083;&#1103; &#1087;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1077;&#1085;&#1080;&#1103;.',
 'forum_forum' => '&#1092;&#1086;&#1088;&#1091;&#1084;',
@@ -396,12 +408,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_article_supprime' => '&#1057;&#1090;&#1072;&#1090;&#1100;&#1103; &#1091;&#1076;&#1072;&#1083;&#1077;&#1085;&#1072;',
 'info_articles' => '&#1057;&#1090;&#1072;&#1090;&#1100;&#1080;',
 'info_articles_a_valider' => '&#1057;&#1090;&#1072;&#1090;&#1100;&#1080; &#1076;&#1083;&#1103; &#1091;&#1090;&#1074;&#1077;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103;',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => '&#1054;&#1090;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1085;&#1099;&#1077; &#1089;&#1090;&#1072;&#1090;&#1100;&#1080;',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => '&#1072;&#1074;&#1090;&#1086;&#1088;(&#1099;):',
 'info_authentification_ftp' => 'FTP &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103;.',
 'info_bloquer_lien' => '&#1073;&#1083;&#1086;&#1082;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1101;&#1090;&#1091; &#1089;&#1089;&#1099;&#1083;&#1082;&#1091;',
 'info_breves_02' => '&#1053;&#1086;&#1074;&#1086;&#1089;&#1090;&#1080;',
 'info_breves_2' => '&#1085;&#1086;&#1074;&#1086;&#1089;&#1090;&#1080;',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => '&#1053;&#1086;&#1074;&#1086;&#1089;&#1090;&#1080; &#1085;&#1072; &#1091;&#1090;&#1074;&#1077;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1080;',
 'info_connexion_refusee' => '&#1055;&#1086;&#1076;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1080;&#1077; &#1079;&#1072;&#1087;&#1088;&#1077;&#1097;&#1077;&#1085;&#1085;&#1086;',
 'info_contact_developpeur' => '&#1055;&#1086;&#1078;&#1072;&#1083;&#1091;&#1081;&#1089;&#1090;&#1072; &#1089;&#1074;&#1103;&#1078;&#1080;&#1090;&#1077;&#1089;&#1100; &#1089; &#1088;&#1072;&#1079;&#1088;&#1072;&#1073;&#1086;&#1090;&#1095;&#1080;&#1082;&#1072;&#1084;&#1080;.',
@@ -422,6 +438,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_document' => '&#1044;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;',
 'info_document_indisponible' => '&#1069;&#1090;&#1086;&#1090; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090; &#1085;&#1077;&#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1077;&#1085;',
 'info_documents' => '&#1044;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;&#1099;',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1103;&#1077;&#1090; &#1086;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1086;&#1074;&#1099;&#1074;&#1072;&#1090;&#1100; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1099;&#1077;
   &#1092;&#1086;&#1088;&#1091;&#1084;&#1099; &#1076;&#1083;&#1103; &#1086;&#1073;&#1089;&#1091;&#1078;&#1076;&#1077;&#1085;&#1080;&#1081; &#1084;&#1077;&#1078;&#1076;&#1091; &#1091;&#1095;&#1072;&#1089;&#1090;&#1085;&#1080;&#1082;&#1072;&#1084;&#1080; &#1089;&#1072;&#1081;&#1090;&#1072;. &#1042;&#1099; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1074;&#1082;&#1083;&#1102;&#1095;&#1080;&#1090;&#1100; &#1080;&#1083;&#1080; 
   &#1086;&#1090;&#1082;&#1083;&#1102;&#1095;&#1080;&#1090;&#1100; &#1101;&#1090;&#1091; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102;.',
@@ -442,7 +460,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_grand_ecran' => '<MODIF>&#1041;&#1086;&#1083;&#1100;&#1096;&#1086;&#1081; &#1101;&#1082;&#1088;&#1072;&#1085;',
 'info_image_aide' => '&#1055;&#1054;&#1052;&#1054;&#1065;&#1068;',
 'info_image_process_titre' => '&#1050;&#1072;&#1082; &#1089;&#1086;&#1079;&#1076;&#1072;&#1074;&#1072;&#1090;&#1100; &#1091;&#1084;&#1077;&#1085;&#1100;&#1096;&#1077;&#1085;&#1085;&#1099;&#1077; &#1080;&#1079;&#1086;&#1073;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1103; ',
-'info_impossible_lire_page' => '<MODIF><b>&#1054;&#1096;&#1080;&#1073;&#1082;&#1072;!</b> &#1057;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072; &#1085;&#1077; &#1084;&#1086;&#1078;&#1077;&#1090; &#1073;&#1099;&#1090;&#1100; &#1087;&#1088;&#1086;&#1095;&#1080;&#1090;&#1072;&#1085;&#1072;<tt><html>@test_proxy@</html></tt> through the proxy <tt>',
+'info_impossible_lire_page' => '<b>&#1054;&#1096;&#1080;&#1073;&#1082;&#1072;!</b> &#1057;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072; &#1085;&#1077; &#1084;&#1086;&#1078;&#1077;&#1090; &#1073;&#1099;&#1090;&#1100; &#1087;&#1088;&#1086;&#1095;&#1080;&#1090;&#1072;&#1085;&#1072;<tt><html>@test_proxy@</html></tt> through the proxy <tt>', # MODIF
 'info_inclusion_directe' => '&#1055;&#1088;&#1103;&#1084;&#1086;&#1077; &#1074;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1080;&#1077;:',
 'info_inclusion_vignette' => '&#1044;&#1086;&#1073;&#1072;&#1074;&#1080;&#1090;&#1100; &#1084;&#1080;&#1085;&#1080;&#1072;&#1090;&#1102;&#1088;&#1091;:',
 'info_installation_systeme_publication' => '&#1059;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072; SPIP ...',
@@ -468,6 +486,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => '&#1057;&#1054;&#1054;&#1041;&#1065;&#1045;&#1053;&#1048;&#1045;',
 'info_message_supprime' => '&#1057;&#1054;&#1054;&#1041;&#1065;&#1045;&#1053;&#1048;&#1045; &#1059;&#1044;&#1040;&#1051;&#1045;&#1053;&#1054;',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => '&#1044;&#1072;&#1090;&#1072; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080;:',
 'info_modification_parametres_securite' => '&#1080;&#1079;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1085;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; &#1073;&#1077;&#1079;&#1086;&#1087;&#1072;&#1089;&#1085;&#1086;&#1089;&#1090;&#1080;',
 'info_mois_courant' => '&#1053;&#1072; &#1087;&#1088;&#1086;&#1090;&#1103;&#1078;&#1077;&#1085;&#1080;&#1080; &#1084;&#1077;&#1089;&#1103;&#1094;&#1072;:',
@@ -513,15 +533,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_retablir_lien' => '&#1074;&#1086;&#1089;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1080;&#1090;&#1100; &#1101;&#1090;&#1091; &#1089;&#1089;&#1099;&#1083;&#1082;&#1091;',
 'info_retirer_mot' => '&#1059;&#1076;&#1072;&#1083;&#1080;&#1090;&#1100; &#1082;&#1083;&#1102;&#1095;&#1077;&#1074;&#1086;&#1077; &#1089;&#1083;&#1086;&#1074;&#1086;',
 'info_retirer_mots' => '&#1059;&#1076;&#1072;&#1083;&#1080;&#1090;&#1100; &#1074;&#1089;&#1077; &#1082;&#1083;&#1102;&#1095;&#1077;&#1074;&#1099;&#1077; &#1089;&#1083;&#1086;&#1074;&#1072;',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '&#1073;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;',
 'info_selectionner_fichier' => '&#1042;&#1099; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1074;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1092;&#1072;&#1081;&#1083; &#1080;&#1079; &#1087;&#1072;&#1087;&#1082;&#1080; @upload@',
 'info_selectionner_fichier_2' => '&#1042;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1092;&#1072;&#1081;&#1083;:',
 'info_signature_supprimee' => '&#1055;&#1086;&#1076;&#1087;&#1080;&#1089;&#1100; &#1091;&#1076;&#1072;&#1083;&#1077;&#1085;&#1072;',
-'info_signature_supprimee_erreur' => '<NEW>Erreur&nbsp;: ce code de suppression ne correspond a aucune signature',
+'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => '&#1042;&#1077;&#1073;&#1089;&#1072;&#1081;&#1090;, &#1086;&#1078;&#1080;&#1076;&#1072;&#1102;&#1097;&#1080;&#1081; &#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080;',
 'info_site_reference' => '<MODIF>&#1057;&#1072;&#1081;&#1090;&#1099; &#1085;&#1072; &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1089;&#1089;&#1099;&#1083;&#1072;&#1102;&#1090;&#1089;&#1103;, &#1086;&#1085;&#1083;&#1072;&#1081;&#1085;',
 'info_site_refuse' => '&#1042;&#1077;&#1073;&#1089;&#1072;&#1081;&#1090; &#1086;&#1090;&#1082;&#1083;&#1086;&#1085;&#1077;&#1085;',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => '&#1057;&#1089;&#1099;&#1083;&#1082;&#1072; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => '&#1091;&#1076;&#1072;&#1083;&#1080;&#1090;&#1100; &#1084;&#1080;&#1085;&#1080;&#1072;&#1090;&#1102;&#1088;&#1091;',
 'info_symbole_bleu' => '<b>&#1057;&#1080;&#1085;&#1080;&#1081;</b> &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;  &#1091;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1077;&#1090; &#1085;&#1072; <b>&#1079;&#1072;&#1084;&#1077;&#1090;&#1082;&#1091;</b> - &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077; &#1076;&#1083;&#1103; &#1074;&#1072;&#1096;&#1077;&#1075;&#1086; &#1083;&#1080;&#1095;&#1085;&#1086;&#1075;&#1086; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;.',
 'info_symbole_jaune' => '<b>&#1046;&#1077;&#1083;&#1090;&#1099;&#1081;</b> &#1089;&#1080;&#1084;&#1074;&#1086;&#1083; - <b> &#1086;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077; &#1074;&#1089;&#1077;&#1084; &#1088;&#1077;&#1076;&#1072;&#1082;&#1090;&#1086;&#1088;&#1072;&#1084; </b>: &#1086;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077; &#1084;&#1086;&#1078;&#1077;&#1090; &#1088;&#1077;&#1076;&#1072;&#1082;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1083;&#1102;&#1073;&#1086;&#1081; &#1072;&#1076;&#1084;&#1080;&#1085;&#1080;&#1089;&#1090;&#1088;&#1072;&#1090;&#1086;&#1088; &#1080; &#1077;&#1075;&#1086; &#1074;&#1080;&#1076;&#1103;&#1090; &#1074;&#1089;&#1077; &#1088;&#1077;&#1076;&#1072;&#1082;&#1090;&#1086;&#1088;&#1072;.',
@@ -553,7 +577,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_afficher_texte_icones' => '&#1055;&#1086;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1090;&#1100; &#1080;&#1082;&#1086;&#1085;&#1082;&#1080; &#1080; &#1090;&#1077;&#1082;&#1089;&#1090;',
 'lien_afficher_texte_seul' => '&#1055;&#1086;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1090;&#1100; &#1090;&#1086;&#1083;&#1100;&#1082;&#1086; &#1090;&#1077;&#1082;&#1089;&#1090;',
 'lien_liberer' => '&#1074;&#1077;&#1088;&#1089;&#1080;&#1103;',
-'lien_liberer_tous' => '<MODIF>&#1086;&#1089;&#1074;&#1086;&#1073;&#1086;&#1076;&#1080;&#1090;&#1100; &#1101;&#1090;&#1080; &#1089;&#1090;&#1072;&#1090;&#1100;&#1080;',
+'lien_liberer_tous' => '&#1086;&#1089;&#1074;&#1086;&#1073;&#1086;&#1076;&#1080;&#1090;&#1100; &#1101;&#1090;&#1080; &#1089;&#1090;&#1072;&#1090;&#1100;&#1080;', # MODIF
 'lien_nouvea_pense_bete' => '&#1053;&#1054;&#1042;&#1040;&#1071; &#1047;&#1040;&#1052;&#1045;&#1058;&#1050;&#1040;',
 'lien_nouveau_message' => '&#1053;&#1054;&#1042;&#1054;&#1045; &#1057;&#1054;&#1054;&#1041;&#1065;&#1045;&#1053;&#1048;&#1045;',
 'lien_nouvelle_annonce' => '&#1053;&#1054;&#1042;&#1054;&#1045; &#1054;&#1041;&#1066;&#1071;&#1042;&#1051;&#1045;&#1053;&#1048;&#1045;',
@@ -609,7 +633,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'numero' => '&#1053;&#1086;&#1084;&#1077;&#1088;',
 
 // O
-'occurence' => '<MODIF>&#1089;&#1091;&#1097;&#1085;&#1086;&#1089;&#1090;&#1100;',
+'occurence' => '&#1089;&#1091;&#1097;&#1085;&#1086;&#1089;&#1090;&#1100;', # MODIF
 'onglet_affacer_base' => '&#1059;&#1076;&#1072;&#1083;&#1080;&#1090;&#1100; &#1073;&#1072;&#1079;&#1091; &#1076;&#1072;&#1085;&#1085;&#1099;&#1093;',
 'onglet_auteur' => '&#1072;&#1074;&#1090;&#1086;&#1088;',
 'onglet_contenu_site' => '&#1057;&#1086;&#1076;&#1077;&#1088;&#1078;&#1072;&#1085;&#1080;&#1077; &#1089;&#1072;&#1081;&#1090;&#1072;',
@@ -684,7 +708,7 @@ and connect again to the site.
 'retour' => '&#1042;&#1077;&#1088;&#1085;&#1091;&#1090;&#1100;&#1089;&#1103;',
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
+'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
 'squelette' => '&#1096;&#1072;&#1073;&#1083;&#1086;&#1085;',
 'squelette_inclus_ligne' => '&#1074;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1085;&#1099;&#1081; &#1096;&#1072;&#1073;&#1083;&#1086;&#1085;, &#1089;&#1090;&#1088;&#1086;&#1082;&#1072;',
 'squelette_ligne' => '&#1096;&#1072;&#1073;&#1083;&#1086;&#1085;, &#1089;&#1090;&#1088;&#1086;&#1082;&#1072;',
@@ -743,61 +767,61 @@ and connect again to the site.
 'titre_mots_cles' => '&#1050;&#1051;&#1070;&#1063;&#1045;&#1042;&#1067;&#1045; &#1057;&#1051;&#1054;&#1042;&#1040;',
 'titre_probleme_technique' => '&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;: &#1074;&#1086;&#1079;&#1085;&#1080;&#1082;&#1083;&#1080; &#1090;&#1077;&#1093;&#1085;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1077; &#1087;&#1088;&#1086;&#1073;&#1083;&#1077;&#1084;&#1099; &#1089; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1086;&#1084; SQL.&#1044;&#1086;&#1089;&#1090;&#1091;&#1087; &#1082; &#1089;&#1072;&#1081;&#1090;&#1091; &#1086;&#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1077;&#1085;.',
 'titre_publier_document' => '&#1044;&#1054;&#1041;&#1040;&#1042;&#1048;&#1058;&#1068; &#1044;&#1054;&#1050;&#1059;&#1052;&#1045;&#1053;&#1058; &#1050; &#1056;&#1040;&#1047;&#1044;&#1045;&#1051;&#1059;',
-'titre_signatures_attente' => '<NEW>Signatures en attente de validation',
-'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
+'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
 'titre_statistiques' => '&#1057;&#1090;&#1072;&#1090;&#1080;&#1089;&#1090;&#1080;&#1082;&#1072; &#1089;&#1072;&#1081;&#1090;&#1072;',
 'titre_titre_document' => '&#1053;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;&#1072;:',
-'todo' => '<MODIF>&#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100;',
+'todo' => '&#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100;', # MODIF
 'trad_reference' => '<MODIF>(&#1089;&#1089;&#1099;&#1083;&#1082;&#1072; &#1089;&#1090;&#1072;&#1090;&#1100;&#1080;)',
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
-'zbug_balise_inexistante' => '<MODIF>erreur @from@: la balise #@balise@ n\'existe pas',
-'zbug_balise_sans_argument' => '<NEW>Argument manquant dans la balise @balise@',
+'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'loop',
-'zbug_boucle_recursive_undef' => '<MODIF>undefined recursive loop',
-'zbug_calcul' => '<NEW>calcul',
+'zbug_boucle_recursive_undef' => 'undefined recursive loop', # MODIF
+'zbug_calcul' => 'calcul', # NEW
 'zbug_champ_hors_boucle' => 'Field @champ@ outside loop',
-'zbug_champ_hors_motif' => '<MODIF>Field @champ@ outside loop tagged @motif@',
+'zbug_champ_hors_motif' => 'Field @champ@ outside loop tagged @motif@', # MODIF
 'zbug_code' => 'code',
-'zbug_critere_inconnu' => '<MODIF>&#1085;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1099;&#1081; &#1082;&#1088;&#1080;&#1090;&#1077;&#1088;&#1080;&#1081; @critere@',
-'zbug_distant_interdit' => '<MODIF>&#1074;&#1085;&#1077;&#1096;&#1085;&#1080;&#1077; &#1079;&#1072;&#1087;&#1088;&#1077;&#1097;&#1077;&#1085;&#1085;&#1099;&#1077; &#1076;&#1072;&#1085;&#1085;&#1099;&#1077;',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>doublons sur une table sans clef primaire atomique',
-'zbug_doublon_table_sans_index' => '<MODIF>doublons sur une table sans index',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: double definition',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: &#1086;&#1096;&#1080;&#1073;&#1082;&#1072; &#1079;&#1072;&#1082;&#1088;&#1099;&#1090;&#1086;&#1075;&#1086; &#1090;&#1101;&#1075;&#1072;',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Incorrect loop (BOUCLE) syntax ',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
-'zbug_erreur_execution_page' => '<MODIF>error in page calculation',
-'zbug_erreur_filtre' => '<MODIF>&#1054;&#1096;&#1080;&#1073;&#1082;&#1072; - &#1085;&#1077;&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1085;&#1099;&#1081; &#1092;&#1080;&#1083;&#1100;&#1090;&#1088;: <b>"@filtre@"</b>',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)',
+'zbug_critere_inconnu' => '&#1085;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1099;&#1081; &#1082;&#1088;&#1080;&#1090;&#1077;&#1088;&#1080;&#1081; @critere@', # MODIF
+'zbug_distant_interdit' => '&#1074;&#1085;&#1077;&#1096;&#1085;&#1080;&#1077; &#1079;&#1072;&#1087;&#1088;&#1077;&#1097;&#1077;&#1085;&#1085;&#1099;&#1077; &#1076;&#1072;&#1085;&#1085;&#1099;&#1077;', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique', # MODIF
+'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: double definition', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: &#1086;&#1096;&#1080;&#1073;&#1082;&#1072; &#1079;&#1072;&#1082;&#1088;&#1099;&#1090;&#1086;&#1075;&#1086; &#1090;&#1101;&#1075;&#1072;', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ', # MODIF
+'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
+'zbug_erreur_execution_page' => 'error in page calculation', # MODIF
+'zbug_erreur_filtre' => '&#1054;&#1096;&#1080;&#1073;&#1082;&#1072; - &#1085;&#1077;&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1085;&#1099;&#1081; &#1092;&#1080;&#1083;&#1100;&#1090;&#1088;: <b>"@filtre@"</b>', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => '&#1054;&#1096;&#1080;&#1073;&#1082;&#1072;(&#1080;) &#1074; &#1096;&#1072;&#1073;&#1083;&#1086;&#1085;&#1077;(&#1072;&#1093;)',
-'zbug_hors_compilation' => '<NEW>Hors Compilation',
+'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => '&#1054;&#1096;&#1080;&#1073;&#1082;&#1072; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1077;',
-'zbug_inversion_ordre_inexistant' => '<MODIF>reversal of nonexistent order',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Wrong inclusion parameters',
-'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
+'zbug_inversion_ordre_inexistant' => 'reversal of nonexistent order', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameters', # MODIF
+'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
 'zbug_resultat' => '&#1088;&#1077;&#1079;&#1091;&#1083;&#1100;&#1090;&#1072;&#1090;',
-'zbug_serveur_indefini' => '<MODIF>&#1085;&#1077;&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085; SQL &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;',
-'zbug_statistiques' => '<NEW>Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
+'zbug_serveur_indefini' => '&#1085;&#1077;&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085; SQL &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;', # MODIF
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
 'zbug_table_inconnue' => '&#1053;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1072;&#1103; SQL &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1072; "@table@"',
-'zxml_connus_attributs' => '<NEW>attributs connus',
-'zxml_de' => '<NEW>de',
-'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
-'zxml_inconnu_balise' => '<NEW>balise inconnue',
-'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
-'zxml_inconnu_id' => '<NEW>ID inconnu',
-'zxml_mais_de' => '<NEW>mais de',
-'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
-'zxml_non_fils' => '<NEW>n\'est pas un fils de',
-'zxml_nonvide_balise' => '<NEW>balise non vide',
-'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
-'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
-'zxml_survoler' => '<NEW>survoler pour voir les corrects',
-'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
-'zxml_vide_balise' => '<NEW>balise vide',
-'zxml_vu' => '<NEW>vu auparavant'
+'zxml_connus_attributs' => 'attributs connus', # NEW
+'zxml_de' => 'de', # NEW
+'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
+'zxml_inconnu_balise' => 'balise inconnue', # NEW
+'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
+'zxml_inconnu_id' => 'ID inconnu', # NEW
+'zxml_mais_de' => 'mais de', # NEW
+'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
+'zxml_non_fils' => 'n\'est pas un fils de', # NEW
+'zxml_nonvide_balise' => 'balise non vide', # NEW
+'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
+'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
+'zxml_survoler' => 'survoler pour voir les corrects', # NEW
+'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
+'zxml_vide_balise' => 'balise vide', # NEW
+'zxml_vu' => 'vu auparavant', # NE
 );
 
 ?>

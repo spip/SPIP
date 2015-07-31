@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'ilkbahar',
 'date_saison_3' => 'yaz',
 'date_saison_4' => 'sonbahar',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'hafta',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => ' y&uuml;klemeye ger&ccedil;ekten ba&#351;lamak i&ccedil;in',
 'dirs_preliminaire' => '&Ouml;n bilgi : <b>Eri&#351;im haklar&#305;n&#305; ayarlay&#305;n&#305;z</b>',
 'dirs_probleme_droits' => 'Eri&#351;im haklar&#305; sorunu ',
@@ -199,7 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<p><b>A&#351;a&#287;&#305;daki dizinlere yazma izni yoktur&nbsp;: </b></p><ul>@bad_dirs@.</ul> 
   <p>Bu sorunu &ccedil;&ouml;zmek i&ccedil;in FTP program&#305;n&#305;zla her bir dizine eri&#351;im haklar&#305;n&#305; d&uuml;zenleyin. Bu yordam, kurulum kitap&ccedil;&#305;&#287;&#305;nda detayl&#305; bi&ccedil;imde a&ccedil;&#305;klanm&#305;&#351;t&#305;r./p> 
   <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
-'double_occurrence' => '<MODIF>&Ccedil;ift tekrar ',
+'double_occurrence' => '&Ccedil;ift tekrar ', # MODIF
 
 // E
 'en_cours' => 'i&#351;lenmekte',
@@ -214,6 +220,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => '@fichier@ dosyas&#305; bulunamad&#305;',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Zaten kay&#305;tl&#305;s&#305;n&#305;z.',
 'form_email_non_valide' => 'E-posta adresiniz ge&ccedil;ersiz.',
 'form_forum_access_refuse' => 'Art&#305;k bu siteye eri&#351;im izniniz yok.',
@@ -390,12 +408,16 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_article_supprime' => 'Silinen makale',
 'info_articles' => 'Makaleler',
 'info_articles_a_valider' => 'Onaylanacak makaleler',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => '&Ouml;nerilen makaleler',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'yazar(lar)&nbsp;:',
 'info_authentification_ftp' => 'Onay (FTP ile)',
 'info_bloquer_lien' => 'bu ba&#287;lant&#305;y&#305; engelle',
 'info_breves_02' => 'K&#305;sa haberler',
 'info_breves_2' => 'k&#305;sa haberler',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Onaylanacak k&#305;sa haberler',
 'info_connexion_refusee' => 'Ba&#287;lant&#305; reddedildi',
 'info_contact_developpeur' => 'L&uuml;tfen bir program geli&#351;tirici ile temasa ge&ccedil;iniz.',
@@ -416,6 +438,8 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_document' => 'Belge',
 'info_document_indisponible' => 'Bu belge uygun (bo&#351;ta) de&#287;il',
 'info_documents' => 'Belge',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP site kat&#305;l&#305;mc&#305;lar&#305; aras&#305;nda ileti al&#305;&#351;veri&#351;i
                            ve &ouml;zel sohbet forumlar&#305; olu&#351;turma olana&#287;&#305; verir.
                            Bu i&#351;levi &ccedil;al&#305;&#351;t&#305;rabilir veya durdurabilirsiniz.',
@@ -462,6 +486,8 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_mail_fournisseur' => 'isminiz@hizmet_veren_firma.com',
 'info_message_2' => '&#304;LET&#304;',
 'info_message_supprime' => '&#304;LET&#304; S&#304;L&#304;ND&#304;',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => '&Ccedil;evrimi&ccedil;i yay&#305;n tarihi&nbsp;:',
 'info_modification_parametres_securite' => 'g&uuml;venlik parametreleri de&#287;i&#351;ikli&#287;i',
 'info_mois_courant' => 'Ay i&ccedil;inde :',
@@ -506,6 +532,8 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_retablir_lien' => 'Bu ba&#287;lant&#305;y&#305; tekrar kur',
 'info_retirer_mot' => 'Bu anahtar s&ouml;zc&uuml;&#287;&uuml; geri al',
 'info_retirer_mots' => 'T&uuml;m anahtar s&ouml;zc&uuml;kleri geri al',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ba&#351;l&#305;ks&#305;z',
 'info_selectionner_fichier' => '@upload@ dizininden bir dosya se&ccedil;ebilirsiniz. ',
 'info_selectionner_fichier_2' => 'Bir dosya se&ccedil;&nbsp;:',
@@ -514,7 +542,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_site_attente' => 'Onaylanmay&#305; bekleyen Web sitesi',
 'info_site_reference' => 'At&#305;fta bulunulan &ccedil;evrimi&ccedil;i site',
 'info_site_refuse' => 'Web sitesi reddedildi',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Bir siteye at&#305;fta bulun',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Bu etiketi sil',
 'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hat&#305;rlatmay&#305;</b> g&ouml;sterir : yani, ki&#351;isel kullan&#305;m&#305;n&#305;z i&ccedil;in bir iletidir.',
 'info_symbole_jaune' => '<b>Sar&#305;</b> sembol <b>t&uuml;m edit&ouml;rlere y&ouml;nelik</b> bir duyuruyu g&ouml;sterir&nbsp;: t&uuml;m y&ouml;neticiler taraf&#305;ndan de&#287;i&#351;tirilebilir ve t&uuml;m edit&ouml;rler taraf&#305;ndan g&ouml;r&uuml;lebilir. ',
@@ -728,34 +758,34 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B etiketinde sorun var',
-'zbug_balise_inexistante' => '<MODIF>hata @from@: #@balise@ komutu mevcut de&#287;il',
+'zbug_balise_inexistante' => 'hata @from@: #@balise@ komutu mevcut de&#287;il', # MODIF
 'zbug_balise_sans_argument' => '@balise@ komutunda arg&uuml;man eksik',
 'zbug_boucle' => 'd&ouml;ng&uuml;',
-'zbug_boucle_recursive_undef' => '<MODIF>tan&#305;ms&#305;z tekrarl&#305; d&ouml;ng&uuml;',
+'zbug_boucle_recursive_undef' => 'tan&#305;ms&#305;z tekrarl&#305; d&ouml;ng&uuml;', # MODIF
 'zbug_calcul' => 'hesaplama',
 'zbug_champ_hors_boucle' => '@champ@ alan&#305; d&ouml;ng&uuml; d&#305;&#351;&#305;nda',
-'zbug_champ_hors_motif' => '<MODIF>@champ@ alan&#305; @motif@ d&ouml;ng&uuml;s&uuml; d&#305;&#351;&#305;nda ',
+'zbug_champ_hors_motif' => '@champ@ alan&#305; @motif@ d&ouml;ng&uuml;s&uuml; d&#305;&#351;&#305;nda ', # MODIF
 'zbug_code' => 'kod',
-'zbug_critere_inconnu' => '<MODIF>tan&#305;ms&#305;z kriter @critere@',
-'zbug_distant_interdit' => '<MODIF>yasaklanm&#305;&#351; d&#305;&#351; veri dosyas&#305;',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>endekssiz bir tabloda tekrarlar var',
-'zbug_doublon_table_sans_index' => '<MODIF>endekslenmemi&#351; bir tabloda tekrarlanan bilgiler',
-'zbug_erreur_boucle_double' => '<MODIF>D&Ouml;NG&Uuml;@id@: &ccedil;ift tan&#305;ml&#305;',
-'zbug_erreur_boucle_fermant' => '<MODIF>D&Ouml;NG&Uuml;@id@: kapatma etiketi eksik',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>D&ouml;ng&uuml; t&uuml;mcesi hatal&#305;',
+'zbug_critere_inconnu' => 'tan&#305;ms&#305;z kriter @critere@', # MODIF
+'zbug_distant_interdit' => 'yasaklanm&#305;&#351; d&#305;&#351; veri dosyas&#305;', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'endekssiz bir tabloda tekrarlar var', # MODIF
+'zbug_doublon_table_sans_index' => 'endekslenmemi&#351; bir tabloda tekrarlanan bilgiler', # MODIF
+'zbug_erreur_boucle_double' => 'D&Ouml;NG&Uuml;@id@: &ccedil;ift tan&#305;ml&#305;', # MODIF
+'zbug_erreur_boucle_fermant' => 'D&Ouml;NG&Uuml;@id@: kapatma etiketi eksik', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'D&ouml;ng&uuml; t&uuml;mcesi hatal&#305;', # MODIF
 'zbug_erreur_compilation' => 'derleme hatas&#305;',
-'zbug_erreur_execution_page' => '<MODIF>sayfa i&#351;letilirken hata olu&#351;tu',
-'zbug_erreur_filtre' => '<MODIF>Hata : <b>&laquo; @filtre@ &raquo;</b> filtresi tan&#305;ms&#305;z',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} sadece (FORUMS) veya  (RUBRIQUES) i&ccedil;in uygulanabilir',
+'zbug_erreur_execution_page' => 'sayfa i&#351;letilirken hata olu&#351;tu', # MODIF
+'zbug_erreur_filtre' => 'Hata : <b>&laquo; @filtre@ &raquo;</b> filtresi tan&#305;ms&#305;z', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} sadece (FORUMS) veya  (RUBRIQUES) i&ccedil;in uygulanabilir', # MODIF
 'zbug_erreur_squelette' => '&#304;skelette hata var',
 'zbug_hors_compilation' => 'Derleme D&#305;&#351;&#305;',
 'zbug_info_erreur_squelette' => 'Sitede hata var',
-'zbug_inversion_ordre_inexistant' => '<MODIF>olmayan bir s&#305;ralama ters &ccedil;evrilemez',
-'zbug_pagination_sans_critere' => '<MODIF>kritersiz veya kendini &ccedil;a&#287;&#305;ran d&ouml;ng&uuml;de kullan&#305;lan #PAGINATION {pagination} ',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Ekleme parametreleri hatal&#305;',
+'zbug_inversion_ordre_inexistant' => 'olmayan bir s&#305;ralama ters &ccedil;evrilemez', # MODIF
+'zbug_pagination_sans_critere' => 'kritersiz veya kendini &ccedil;a&#287;&#305;ran d&ouml;ng&uuml;de kullan&#305;lan #PAGINATION {pagination} ', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Ekleme parametreleri hatal&#305;', # MODIF
 'zbug_profile' => 'Hesaplama s&uuml;resi&nbsp;: @time@',
 'zbug_resultat' => 'sonu&ccedil;',
-'zbug_serveur_indefini' => '<MODIF>SQL hizmet birimi tan&#305;ms&#305;z',
+'zbug_serveur_indefini' => 'SQL hizmet birimi tan&#305;ms&#305;z', # MODIF
 'zbug_statistiques' => 'S&uuml;reye g&ouml;re s&#305;n&#305;flanm&#305;&#351; SQL istekleri istatistikleri',
 'zbug_table_inconnue' => '&laquo; @table@ &raquo; SQL tablosu tan&#305;ms&#305;z',
 'zxml_connus_attributs' => 'bilinen &ouml;znitelikler',

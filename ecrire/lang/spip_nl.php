@@ -222,6 +222,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Bestand @fichier@ onvindbaar',
+'form_auteur_confirmation' => 'Gelieve uw mail address te bevestigen',
+'form_auteur_email_modifie' => 'Uw mail address is veranderd',
+'form_auteur_envoi_mail_confirmation' => 'Een email werd opgestuurd naar @email@ voor bevestiging. Gelieve de url dat in de e-mail gemeld is te bezoeken om uw email address te bevestigen.',
+'form_auteur_mail_confirmation' => 'Goeiedag,
+
+U heeft uw e-mail address willen veranderen.
+Om uw nieuwe address te bevestigen, dient U zich nu te connecteren op
+volgende address (andres zal uw aanvraag niet in acht genomen worden) :
+
+    @url@
+',
 'form_deja_inscrit' => 'Je bent reeds ingeschreven.',
 'form_email_non_valide' => 'Je e-mailadres is niet geldig.',
 'form_forum_access_refuse' => 'Je hebt geen toegang meer tot deze website.',
@@ -398,12 +409,16 @@ Bedankt voor je deelname
 'info_article_supprime' => 'Artikel geschrapt',
 'info_articles' => 'Artikels',
 'info_articles_a_valider' => 'Artikels ter goedkeuring',
+'info_articles_nb' => '@nb@ artikels',
 'info_articles_proposes' => 'Voorgestelde artikels',
+'info_articles_un' => 'een artikel',
 'info_auteurs_nombre' => 'auteur(s):',
 'info_authentification_ftp' => 'Authenticatie (via FTP).',
 'info_bloquer_lien' => 'deze koppeling tegenhouden',
 'info_breves_02' => 'nieuwsberichten',
 'info_breves_2' => 'nieuwsberichten',
+'info_breves_nb' => '@nb@ kortnieuws',
+'info_breves_un' => '1 kortnieuws',
 'info_breves_valider' => 'Berichten ter goedkeuring',
 'info_connexion_refusee' => 'Verbinding geweigerd',
 'info_contact_developpeur' => 'Gelieve een ontwikkelaar te contacteren.',
@@ -424,6 +439,8 @@ Bedankt voor je deelname
 'info_document' => 'Document',
 'info_document_indisponible' => 'Dit document is niet beschikbaar',
 'info_documents' => 'documenten',
+'info_documents_nb' => '@nb@ documenten',
+'info_documents_un' => '1 document',
 'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
 'info_ecire_message_prive' => 'Een priv&eacute;-bericht schrijven',
@@ -469,6 +486,8 @@ Bedankt voor je deelname
 'info_mail_fournisseur' => 'jullie@provider.be',
 'info_message_2' => 'BERICHT',
 'info_message_supprime' => 'VERWIJDERD BERICHT',
+'info_messages_nb' => '@nb@ boodschappen',
+'info_messages_un' => '1 boodschap',
 'info_mise_en_ligne' => 'Datum van online publicatie:',
 'info_modification_parametres_securite' => 'Wijzigingen aan de veiligheidsinstellingen',
 'info_mois_courant' => 'Gedurende de maand :',
@@ -514,6 +533,8 @@ Bedankt voor je deelname
 'info_retablir_lien' => 'deze link hernieuwen',
 'info_retirer_mot' => 'Trek dat woord',
 'info_retirer_mots' => 'Alle trefwoorden intrekken',
+'info_rubriques_nb' => '@nb@ rubrieken',
+'info_rubriques_un' => '1 rubriek',
 'info_sans_titre_2' => 'zonder titel',
 'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
@@ -522,7 +543,9 @@ Bedankt voor je deelname
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
 'info_site_refuse' => 'Website weigerd',
+'info_sites_nb' => '@nb@ websites',
 'info_sites_referencer' => 'Een site koppelen',
+'info_sites_un' => '1 website',
 'info_supprimer_vignette' => 'De mini-afbeelding verwijderen',
 'info_symbole_bleu' => 'Het <b>blauwe</b> symbool wijst op een <b>memo</b>: dat wil zeggen een bericht voor persoonlijk gebruik.',
 'info_symbole_jaune' => 'Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',

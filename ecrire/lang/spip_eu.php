@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'udaberria',
 'date_saison_3' => 'uda',
 'date_saison_4' => 'udazkena',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'asteak',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => 'Atariko instalazioa hasi ',
 'dirs_preliminaire' => 'Aurretik: <b>sarbide eskubideak arautu </b>',
 'dirs_probleme_droits' => 'Sarbide eskubidearekiko arazoak',
@@ -216,6 +222,18 @@ Eragiketa hori egin eta gero, gauza izango zara',
 
 // F
 'fichier_introuvable' => '@fichier@ aurkitzeko moduan ez dagoen artxiboa',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Inskribaturik zaude jadanik.',
 'form_email_non_valide' => 'Posta elektronikoaren helbideak ez du balio.',
 'form_forum_access_refuse' => 'Ezin zara gune honetan sartu dagoeneko.',
@@ -385,12 +403,16 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'info_article_supprime' => 'Artikulu ezabatua',
 'info_articles' => 'Artikuluak',
 'info_articles_a_valider' => 'Egiaztatuak izan behar diren artikuluak',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Proposatutako artikuluak',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Egileak :',
 'info_authentification_ftp' => 'Baimena (FTP-aren bidez).',
 'info_bloquer_lien' => 'Lotura hau blokatu',
 'info_breves_02' => 'Laburrak',
 'info_breves_2' => 'laburrak',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Egiaztatzeko laburrak',
 'info_connexion_refusee' => 'Konexioa errefusatu da',
 'info_contact_developpeur' => 'Programatzaile batekin kontaktuan jarri behar duzu.',
@@ -411,6 +433,8 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'info_document' => 'Dokumentua',
 'info_document_indisponible' => 'Dokumentu hau ez da erabilgarria',
 'info_documents' => 'Dokumentuak',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIPek guneko partehartzaileen arteko mezuen trukaketa eta foro pribatuak ahalbidetzen ditu.
 Funtzionalitate hau aktiba edo desaktibatzen ahal duzu.',
 'info_ecire_message_prive' => 'Mezu pribatu bat idatzi',
@@ -455,6 +479,8 @@ Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
 'info_mail_fournisseur' => 'zure@hornitzailea.com',
 'info_message_2' => 'MEZUA',
 'info_message_supprime' => 'Mezua ezabatu da',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Argitarapen data :',
 'info_modification_parametres_securite' => 'segurtasun-parametroen aldaketa.',
 'info_mois_courant' => 'Hilabete honetan:',
@@ -501,6 +527,8 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_retablir_lien' => 'esteka berrezarri',
 'info_retirer_mot' => 'Hitz hau kendu',
 'info_retirer_mots' => 'Hitz guztiak kendu',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'izenbururik gabe',
 'info_selectionner_fichier' => '<i>Upload</i> direktorioko dokumentu bat hauta dezakezu',
 'info_selectionner_fichier_2' => 'Dokumentu bat hautatu&nbsp;:',
@@ -509,7 +537,9 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_site_attente' => 'Balioztatua izateko zain dagoen Webgunea',
 'info_site_reference' => 'Linean erreferentziatutako gunea',
 'info_site_refuse' => 'Web Gune errefusatua',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Gune bat erreferentziatu',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'miniatura hau kendu',
 'info_symbole_bleu' => 'Sinbolo <b>URDIN</b>ak oroigarri pertsonal bat adierazten du, hau da zerbait gogoratzeko modu bat.',
 'info_symbole_jaune' => 'Sinbolo <b>hori</b>ak denentzako iragarpen bat adierazten du: gunearen administratzaileek bakarrik alda dezakete, eta idazle guztiek ikus dezakete.',

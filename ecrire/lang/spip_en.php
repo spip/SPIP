@@ -222,6 +222,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'File not found: @fichier@',
+'form_auteur_confirmation' => 'Please confirm your email address',
+'form_auteur_email_modifie' => 'Your email address has been changed.',
+'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.',
+'form_auteur_mail_confirmation' => 'Hello,
+
+You have asked to change your email address.
+To confirm your new address, you need to connect to
+the address below. (Otherwise your request will be ignored.):
+
+    @url@
+',
 'form_deja_inscrit' => 'You are already registered.',
 'form_email_non_valide' => 'Your e-mail address is not valid.',
 'form_forum_access_refuse' => 'You do not have access to this site anymore.',
@@ -397,12 +408,16 @@ Thank you for your participation!
 'info_article_supprime' => 'Article deleted',
 'info_articles' => 'Articles',
 'info_articles_a_valider' => 'Articles to be validated',
+'info_articles_nb' => '@nb@ articles',
 'info_articles_proposes' => 'Articles submitted',
+'info_articles_un' => '1 article',
 'info_auteurs_nombre' => 'author(s):',
 'info_authentification_ftp' => 'Authentication (by FTP).',
 'info_bloquer_lien' => 'block this link',
 'info_breves_02' => 'News',
 'info_breves_2' => 'news',
+'info_breves_nb' => '@nb@ news items',
+'info_breves_un' => '1 news item',
 'info_breves_valider' => 'News items to be validated',
 'info_connexion_refusee' => 'Connection denied',
 'info_contact_developpeur' => 'Please contact a developer.',
@@ -423,6 +438,8 @@ Thank you for your participation!
 'info_document' => 'Document',
 'info_document_indisponible' => 'This document is unavailable',
 'info_documents' => 'Documents',
+'info_documents_nb' => '@nb@ documents',
+'info_documents_un' => '1 document',
 'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
 		discussion forums between participants to the site. You can enable or
 		disable this feature.',
@@ -469,6 +486,8 @@ Thank you for your participation!
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'MESSAGE',
 'info_message_supprime' => 'MESSAGE DELETED',
+'info_messages_nb' => '@nb@ messages',
+'info_messages_un' => '1 message',
 'info_mise_en_ligne' => 'Date of online publication:',
 'info_modification_parametres_securite' => 'modifying security parameters',
 'info_mois_courant' => 'During the month:',
@@ -513,6 +532,8 @@ Thank you for your participation!
 'info_retablir_lien' => 'restore this link',
 'info_retirer_mot' => 'Remove this keyword',
 'info_retirer_mots' => 'Remove all keywords',
+'info_rubriques_nb' => '@nb@ sections',
+'info_rubriques_un' => '1 section',
 'info_sans_titre_2' => 'untitled',
 'info_selectionner_fichier' => 'You can select a file from the folder @upload@',
 'info_selectionner_fichier_2' => 'Select a file:',
@@ -521,7 +542,9 @@ Thank you for your participation!
 'info_site_attente' => 'Web site pending validation',
 'info_site_reference' => 'Referenced sites online',
 'info_site_refuse' => 'Web site rejected',
+'info_sites_nb' => '@nb@ sites',
 'info_sites_referencer' => 'Reference a site',
+'info_sites_un' => '1 site',
 'info_supprimer_vignette' => 'delete the vignette',
 'info_symbole_bleu' => 'A <b>blue</b> symbol indicates a <b>memo</b>: i.e. a message for your personal use.',
 'info_symbole_jaune' => 'A <b>yellow</b> symbol indicates an <b>announcement to all editors</b>: it can be edited by all administrators, and is visible to all editors.',

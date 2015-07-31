@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'afficher_trad' => 'afi&#349;i la tradukojn',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la SQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
-'alerte_modif_info_concourante' => '<MODIF>ATENTU : Tiu &#265;i informo estis modifita de alia homo. La nuna stato estas&nbsp;:',
+'alerte_modif_info_concourante' => 'ATENTU : Tiu &#265;i informo estis modifita de alia homo. La nuna stato estas&nbsp;:', # MODIF
 'analyse_xml' => 'XML analizo',
 'annuler' => 'Nuligi',
 'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Transformi al [[sub-pa&#285;an noton]]',
 'barre_paragraphe' => 'Krei paragrafon',
 'barre_quote' => '<quote>Citi mesa&#285;on</quote>',
-'bouton_ajouter_document' => '<MODIF>ALDONI DOKUMENTON',
-'bouton_ajouter_image' => '<MODIF>ALDONI BILDON',
+'bouton_ajouter_document' => 'ALDONI DOKUMENTON', # MODIF
+'bouton_ajouter_image' => 'ALDONI BILDON', # MODIF
 'bouton_ajouter_image_document' => 'Aldoni bildon a&#365; dokumenton',
 'bouton_changer' => '&#348;an&#285;i',
 'bouton_chercher' => 'Ser&#265;i',
@@ -208,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigas en la instalgvidlibro.
 <p />Post tio, vi povos ',
-'double_occurrence' => '<MODIF>Duobla trafo',
+'double_occurrence' => 'Duobla trafo', # MODIF
 
 // E
 'en_cours' => 'okazanta',
@@ -223,6 +223,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Netrovebla dosiero @fichier@ ',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Vi estas jam registrita.',
 'form_email_non_valide' => 'Via retpo&#349;tadreso ne validas.',
 'form_forum_access_refuse' => 'Vi ne plu havas alir-rajton al tiu retejo.',
@@ -398,19 +410,23 @@ Dankon pro via partopreno
 'info_article_supprime' => 'Forvi&#349;ita artikolo',
 'info_articles' => 'Artikoloj',
 'info_articles_a_valider' => 'Validigendaj artikoloj',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Proponitaj artikoloj',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'a&#365;toro(j)&nbsp;:',
 'info_authentification_ftp' => 'A&#365;tentigo (per FTP).',
 'info_bloquer_lien' => 'bloki tiun ligilon',
 'info_breves_02' => 'Fulm-informoj',
 'info_breves_2' => 'fulm-informoj',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Validigendaj fulm-informoj',
 'info_connexion_refusee' => 'Konekti&#285;o rifuzata',
 'info_contact_developpeur' => 'Bonvolu kontakti programiston.',
 'info_contenance' => 'Tiu retejo enhavas&nbsp;:',
 'info_contribution' => 'forumaj kontribua&#309;oj',
 'info_copyright' => '@spip@ estas libera programo distribuata @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Por pliaj informoj vidu la retpa&#285;on <a href="@spipnet@">http://www.spip.net/eo</a>.',
+'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href="@spipnet@">http://www.spip.net/eo</a>.', # MODIF
 'info_copyright_gpl' => 'sub licenco GPL',
 'info_cours_edition' => 'Viaj redaktataj artikoloj',
 'info_creer_repertoire' => 'Bonvolu krei dosieron a&#365; dosierujon kies nomo estu&nbsp;:',
@@ -424,6 +440,8 @@ Dankon pro via partopreno
 'info_document' => 'Dokumento ',
 'info_document_indisponible' => 'Tiu &#265;i dokumento ne disponeblas',
 'info_documents' => 'Dokumentoj',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj
  inter la partoprenantoj de la retejo. Vi povas aktivigi a&#365;
  malaktivigi tiun funkcion.',
@@ -470,6 +488,8 @@ Dankon pro via partopreno
 'info_mail_fournisseur' => 'vi@retalir-provizisto.com',
 'info_message_2' => 'MESA&#284;O',
 'info_message_supprime' => 'FORIGITA MESA&#284;O',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Dato de &#265;eretigo&nbsp;: ',
 'info_modification_parametres_securite' => 'modifoj de la sekuraj parametroj',
 'info_mois_courant' => 'En la kuranta monato :',
@@ -514,6 +534,8 @@ Dankon pro via partopreno
 'info_retablir_lien' => 'Resta&#365;ri tiun ligilon',
 'info_retirer_mot' => 'Forigi tiun vorton',
 'info_retirer_mots' => 'Forigi &#265;iujn vortojn',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sen titolo',
 'info_selectionner_fichier' => 'Vi povas selekti dosieron el la dosierujo @upload@',
 'info_selectionner_fichier_2' => 'Elektu dosieron&nbsp;:',
@@ -522,7 +544,9 @@ Dankon pro via partopreno
 'info_site_attente' => 'Retejo atendanta validigon',
 'info_site_reference' => 'Retejo rete referencigita',
 'info_site_refuse' => 'Rifuzita retejo',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referencigi retejon',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'forigi la vinjeton',
 'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
 'info_symbole_jaune' => 'La <b>flava</b> simbolo indikas <b>anoncon al &#265;iuj redaktantoj</b>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
@@ -751,34 +775,34 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',
-'zbug_balise_inexistante' => '<MODIF>eraro @from@: la etikedo " #@balise@ " ne ekzistas',
+'zbug_balise_inexistante' => 'eraro @from@: la etikedo " #@balise@ " ne ekzistas', # MODIF
 'zbug_balise_sans_argument' => 'Mankas argumento en la etikedo @balise@',
 'zbug_boucle' => 'iteracio',
-'zbug_boucle_recursive_undef' => '<MODIF>nedifinita rekursia iteracio',
+'zbug_boucle_recursive_undef' => 'nedifinita rekursia iteracio', # MODIF
 'zbug_calcul' => 'komputado',
 'zbug_champ_hors_boucle' => 'Kampo @champ@ eksteras iteracion',
-'zbug_champ_hors_motif' => '<MODIF>Kampo @champ@ eksteras iteracion, kies formo estas @motif@',
+'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras iteracion, kies formo estas @motif@', # MODIF
 'zbug_code' => 'kodo',
-'zbug_critere_inconnu' => '<MODIF>nekonata kriterio @critere@',
-'zbug_distant_interdit' => '<MODIF>ago &#265;e tiu ekstera datenbazo malpermesata',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>duobloj uzitaj &#265;e tabelo, kiu ne havas simplan &#265;ef&#349;losilon',
-'zbug_doublon_table_sans_index' => '<MODIF>duobla&#309;oj en la datentabelo sen indekso',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: duobla difino',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: mankas fermcela marko',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Ne valida iteracia sintakso',
+'zbug_critere_inconnu' => 'nekonata kriterio @critere@', # MODIF
+'zbug_distant_interdit' => 'ago &#265;e tiu ekstera datenbazo malpermesata', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'duobloj uzitaj &#265;e tabelo, kiu ne havas simplan &#265;ef&#349;losilon', # MODIF
+'zbug_doublon_table_sans_index' => 'duobla&#309;oj en la datentabelo sen indekso', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mankas fermcela marko', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Ne valida iteracia sintakso', # MODIF
 'zbug_erreur_compilation' => 'Kompil-eraro',
-'zbug_erreur_execution_page' => '<MODIF>eraro dum plenumo de pa&#285;-afi&#349;o',
-'zbug_erreur_filtre' => '<MODIF>Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} nur apliki&#285;as je iteracioj (FORUMS) a&#365; (RUBRIQUES)',
+'zbug_erreur_execution_page' => 'eraro dum plenumo de pa&#285;-afi&#349;o', # MODIF
+'zbug_erreur_filtre' => 'Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je iteracioj (FORUMS) a&#365; (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Eraro(j) en la skeleto',
 'zbug_hors_compilation' => 'Ne kompilita',
 'zbug_info_erreur_squelette' => 'Eraro &#265;e la retejo',
-'zbug_inversion_ordre_inexistant' => '<MODIF>inversigo de ne ekzistanta ordo',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION senkriteria {pa&#285;numerado} a&#365; uzata en rekursia iteracio',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Ne korektaj inkludaj parametroj',
+'zbug_inversion_ordre_inexistant' => 'inversigo de ne ekzistanta ordo', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION senkriteria {pa&#285;numerado} a&#365; uzata en rekursia iteracio', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Ne korektaj inkludaj parametroj', # MODIF
 'zbug_profile' => 'Kalkulda&#365;ro&nbsp;: @time@',
 'zbug_resultat' => 'rezulto',
-'zbug_serveur_indefini' => '<MODIF>nedifinata SQL servilo',
+'zbug_serveur_indefini' => 'nedifinata SQL servilo', # MODIF
 'zbug_statistiques' => 'statistikoj pri SQL-informpetoj ordigitaj la&#365; da&#365;ro',
 'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo',
 'zxml_connus_attributs' => 'konataj atributoj',
