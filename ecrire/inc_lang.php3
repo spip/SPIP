@@ -262,6 +262,7 @@ function init_codes_langues() {
 	'ln' => "Lingala",
 	'lo' => "Laothian",
 	'lt' => "lietuvi&#371;",
+	'lu' => "L&euml;tzebuergesch",
 	'lv' => "latvie&#353;u",
 	'mg' => "Malagasy",
 	'mi' => "Maori",
