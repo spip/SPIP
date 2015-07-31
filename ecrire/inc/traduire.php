@@ -17,15 +17,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@chercher_module_lang
 function chercher_module_lang($module, $lang = '') {
-	if ($lang OR $module=='spip')
+	if ($lang)
 		$lang = '_'.$lang;
 
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
 	if ($f = include_spip('lang/'.$module.$lang, false))
 		return $f;
 
-	// 2) directement dans le chemin (old style)
-	return include_spip($module.$lang, false);
+	// 2) directement dans le chemin (old style, uniquement pour local)
+	return ($module == 'local')
+		? include_spip($module.$lang, false)
+		: '';
 }
 
 // http://doc.spip.org/@charger_langue
