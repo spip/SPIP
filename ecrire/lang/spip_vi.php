@@ -331,9 +331,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'Vấn đáp có lỗi: ',
 	'info_erreur_squelette2' => 'Không có mẫu cho trang web này. Không tìm thay hồ sơ <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Thông báo lỗi số (errno @errsys@)',
-	'info_erreur_systeme2' => 'Đĩa cứng có thể đã đầy hay là database bị hư. <br />
- <font color=\'red\'>Xin <a href=\'@script@\'>sửa Database</a>,
- hay liên lạc với quản trị viên máy.</font>', # MODIF
+	'info_erreur_systeme2' => 'Đĩa cứng có thể đã đầy hay là database bị hư.<br />
+<font color=\'red\'>Xin <a href=\'@script@\'>sửa Database</a>, hay liên lạc với quản trị viên máy.</font>', # MODIF
 	'info_fini' => 'Xong rồi! ',
 	'info_format_image' => 'Dạng hình dùng để lập ra hình mẫu: @gd_formats@.',
 	'info_format_non_defini' => 'Dạng không định rõ',

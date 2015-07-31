@@ -27,6 +27,7 @@
 	<langue code="cs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cs" total="631" traduits="497" relire="0" modifs="38" nouveaux="96" pourcent="78.76">
 	</langue>
 	<langue code="da" url="http://trad.spip.net/tradlang_module/spip?lang_cible=da" total="631" traduits="450" relire="0" modifs="54" nouveaux="127" pourcent="71.32">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/spip?lang_cible=de" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="Benjamin Tricault" lien="http://trad.spip.net/auteur/benjamin-tricault" />
@@ -63,14 +64,17 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fi" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fi" total="631" traduits="287" relire="0" modifs="41" nouveaux="303" pourcent="45.48">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="fon" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fon" total="631" traduits="451" relire="0" modifs="50" nouveaux="130" pourcent="71.47">
+	<langue code="fon" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fon" total="631" traduits="451" relire="0" modifs="49" nouveaux="131" pourcent="71.47">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
@@ -78,100 +82,134 @@
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=gl" total="631" traduits="607" relire="0" modifs="5" nouveaux="19" pourcent="96.20">
 		<traducteur nom="Antón Méixome" lien="http://trad.spip.net/auteur/anton-meixome" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="hac" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hac" total="631" traduits="622" relire="0" modifs="1" nouveaux="8" pourcent="98.57">
 		<traducteur nom="akomarani" lien="http://trad.spip.net/auteur/akomarani" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="he" url="http://trad.spip.net/tradlang_module/spip?lang_cible=he" total="631" traduits="569" relire="0" modifs="11" nouveaux="51" pourcent="90.17">
 	</langue>
 	<langue code="hr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hr" total="631" traduits="562" relire="0" modifs="10" nouveaux="59" pourcent="89.06">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="hu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hu" total="631" traduits="530" relire="0" modifs="40" nouveaux="61" pourcent="83.99">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/spip?lang_cible=id" total="631" traduits="529" relire="0" modifs="28" nouveaux="74" pourcent="83.84">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cap" lien="http://trad.spip.net/auteur/cap" />
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it_fem" total="631" traduits="545" relire="0" modifs="29" nouveaux="57" pourcent="86.37">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="ja" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ja" total="631" traduits="483" relire="0" modifs="55" nouveaux="93" pourcent="76.55">
 		<traducteur nom="Cap" lien="http://trad.spip.net/auteur/cap" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="km" url="http://trad.spip.net/tradlang_module/spip?lang_cible=km" total="631" traduits="568" relire="0" modifs="12" nouveaux="51" pourcent="90.02">
 	</langue>
 	<langue code="la" url="http://trad.spip.net/tradlang_module/spip?lang_cible=la" total="631" traduits="373" relire="0" modifs="31" nouveaux="227" pourcent="59.11">
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/spip?lang_cible=lb" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="lt" url="http://trad.spip.net/tradlang_module/spip?lang_cible=lt" total="631" traduits="359" relire="0" modifs="25" nouveaux="247" pourcent="56.89">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="my" url="http://trad.spip.net/tradlang_module/spip?lang_cible=my" total="631" traduits="526" relire="0" modifs="28" nouveaux="77" pourcent="83.36">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="nap" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nap" total="631" traduits="533" relire="0" modifs="30" nouveaux="68" pourcent="84.47">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="nb" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nb" total="631" traduits="520" relire="0" modifs="39" nouveaux="72" pourcent="82.41">
 	</langue>
 	<langue code="ne" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ne" total="631" traduits="544" relire="0" modifs="28" nouveaux="59" pourcent="86.21">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_auv" total="631" traduits="475" relire="0" modifs="25" nouveaux="131" pourcent="75.28">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_gsc" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_gsc" total="631" traduits="454" relire="0" modifs="49" nouveaux="128" pourcent="71.95">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_lms" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_lms" total="631" traduits="475" relire="0" modifs="24" nouveaux="132" pourcent="75.28">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_lnc" total="631" traduits="529" relire="0" modifs="28" nouveaux="74" pourcent="83.84">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni" total="631" traduits="567" relire="0" modifs="2" nouveaux="62" pourcent="89.86">
 		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_la" total="631" traduits="475" relire="0" modifs="24" nouveaux="132" pourcent="75.28">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_prv" total="631" traduits="479" relire="0" modifs="24" nouveaux="128" pourcent="75.91">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="oc_va" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_va" total="631" traduits="475" relire="0" modifs="24" nouveaux="132" pourcent="75.28">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="pl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pl" total="631" traduits="566" relire="0" modifs="27" nouveaux="38" pourcent="89.70">
 		<traducteur nom="Dominik Paszkiewicz" lien="http://trad.spip.net/auteur/dominik-pologne" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Fernando Ferreira" lien="http://trad.spip.net/auteur/fernando-ferreira" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt_br" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="joao1315" lien="http://trad.spip.net/auteur/joao1315" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ro" total="631" traduits="615" relire="0" modifs="2" nouveaux="14" pourcent="97.46">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 		<traducteur nom="vmurariu" lien="http://trad.spip.net/auteur/vmurariu" />
 	</langue>
 	<langue code="roa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=roa" total="631" traduits="520" relire="0" modifs="32" nouveaux="79" pourcent="82.41">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ru" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="sq" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sq" total="631" traduits="470" relire="0" modifs="52" nouveaux="109" pourcent="74.48">
 		<traducteur nom="minijack" lien="http://trad.spip.net/auteur/minijack" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="sv" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sv" total="631" traduits="571" relire="0" modifs="26" nouveaux="34" pourcent="90.49">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=tr" total="631" traduits="545" relire="0" modifs="29" nouveaux="57" pourcent="86.37">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="vi" url="http://trad.spip.net/tradlang_module/spip?lang_cible=vi" total="631" traduits="495" relire="0" modifs="50" nouveaux="86" pourcent="78.45">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="wo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=wo" total="631" traduits="427" relire="0" modifs="56" nouveaux="148" pourcent="67.67">
 		<traducteur nom="usufaati" lien="http://trad.spip.net/auteur/usufaati" />

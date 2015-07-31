@@ -374,9 +374,8 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'info_erreur_requete' => 'Erro na petición:',
 	'info_erreur_squelette2' => 'Ningún esqueleto <b>@fichier@</b> está dispoñible...',
 	'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
-	'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada. <br />
- <font color=\'red\'>Probe a <a href=\'@script@\'>reparar a base</a>,
- ou contacte co seu aloxador.</font>',
+	'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada.<br />
+<font color=\'red\'>Probe a <a href=\'@script@\'>reparar a base</a>, ou contacte co seu aloxador.</font>',
 	'info_fini' => 'Rematou!',
 	'info_format_image' => 'Formatos de imaxes que poden ser utilizados para crear as viñetas: @gd_formats@.',
 	'info_format_non_defini' => 'formato non definido',

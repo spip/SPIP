@@ -351,9 +351,8 @@ För att bekräfta din nya adress måste du gå till
 	'info_erreur_requete' => 'Fel i frågan:',
 	'info_erreur_squelette2' => 'Det finns ingen mall <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Systemfel (errno @errsys@)',
-	'info_erreur_systeme2' => 'Hårddisken kan vara full eller databasen kan vara skadad. <br />
- <font color=\'red\'>Försök <a href=\'@script@\'>laga databasen</a>,
- eller kontakta din leverantör.</font>',
+	'info_erreur_systeme2' => 'Hårddisken kan vara full eller databasen kan vara skadad.<br />
+<font color=\'red\'>Försök <a href=\'@script@\'>laga databasen</a>, eller kontakta din leverantör.</font>',
 	'info_fini' => 'Klart!',
 	'info_format_image' => 'Bildformat som kan användas för att skapa ikoner: @gd_formats@.',
 	'info_format_non_defini' => 'Odefinierat format',
