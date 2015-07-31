@@ -20,7 +20,7 @@ function configuration_visiteurs_dist()
 {
 	global $spip_lang_left ;
 
-	if (!avoir_visiteurs()) {
+	if (!avoir_visiteurs(false,false)) {
 		$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 		. "\n<tr><td class='verdana2'>"
 		. _T('info_question_accepter_visiteurs')
