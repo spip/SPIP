@@ -240,8 +240,17 @@ function argumenter_squelette($v) {
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
 function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
-	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true))
-		die ("pas de balise dynamique pour #". strtolower($nom)." !");
+	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true)) {
+		// regarder si une fonction generique n'existe pas
+		if (($p = strpos($nom,"_"))
+		&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
+			// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
+			array_unshift($args,$nom);
+			$nom = substr($nom,0,$p+1);
+		}
+		else
+			die ("pas de balise dynamique pour #". strtolower($nom)." !");
+	}
 
 	// Y a-t-il une fonction de traitement filtres-arguments ?
 	$f = 'balise_' . $nom . '_stat';
