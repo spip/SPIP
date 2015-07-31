@@ -402,6 +402,25 @@ function alertes_auteur($id_auteur) {
 			$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
 	}
 
+	$a = $GLOBALS['meta']['message_alertes_auteurs'];
+	if ($a
+		AND is_array($a = unserialize($a))
+	  AND count($a)){
+		$update = false;
+		if (isset($a[$GLOBALS['visiteur_session']['statut']])){
+			$alertes = array_merge($alertes,$a[$GLOBALS['visiteur_session']['statut']]);
+			unset($a[$GLOBALS['visiteur_session']['statut']]);
+			$update = true;
+		}
+		if (isset($a[''])){
+			$alertes = array_merge($alertes,$a['']);
+			unset($a['']);
+			$update = true;
+		}
+		if ($update)
+			ecrire_meta("message_alertes_auteurs",serialize($a));
+	}
+
 	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
 	  AND autoriser('configurer', '_plugins', null, $id_auteur)) {
 		include_spip('inc/plugin');
