@@ -39,7 +39,7 @@ function action_acceder_document_dist()
     else
   {
     if (!$arg) {
-      $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . _q($file));
+      $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . _q(set_spip_doc($file)));
       $arg = spip_fetch_array($arg);
       if (!$arg) $refus = 2;
       $dcc = $arg['descriptif'];
@@ -50,7 +50,7 @@ function action_acceder_document_dist()
       $file = spip_fetch_array($file);
       if (!$file) $refus = 3;
       $dcc = $file['descriptif'];
-      $file = $file['fichier'];
+      $file = get_spip_doc($file['fichier']);
     }
   }
 
