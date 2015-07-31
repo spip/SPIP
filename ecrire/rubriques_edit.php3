@@ -10,7 +10,7 @@ if ($new=="oui"){
 	$id_rubrique=mysql_insert_id();
 	
 	// Effacer une eventuelle rubrique creee en double
-	$query_eff = "DELETE FROM spip_rubriques WHERE titre='Nouvelle rubrique' AND id_rubrique != $id_rubrique";
+	$query_eff = "DELETE FROM spip_rubriques WHERE titre='Nouvelle rubrique' AND id_rubrique != $id_rubrique AND statut=''";
 	$result_eff = spip_query($query_eff);
 }
 
@@ -90,7 +90,7 @@ else {
 
 debut_grand_cadre();
 
-afficher_parents($id_rubrique);
+afficher_parents($id_parent);
 $parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
