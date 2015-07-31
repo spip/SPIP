@@ -118,7 +118,9 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 
 // http://doc.spip.org/@calculer_boucle
 function calculer_boucle($id_boucle, &$boucles) {
- 
+
+	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
+
   if ($boucles[$id_boucle]->type_requete == 'boucle')  {
     $corps = calculer_boucle_rec($id_boucle, $boucles);
     $req = "";
@@ -815,6 +817,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	// de'terminables seulement maintenant
 
 	foreach($boucles as $id => $boucle) {
+		$boucle = pipeline('pre_boucle', $boucle);
+
 		// appeler la fonction de definition de la boucle
 		$req = $boucle->type_requete;
 		if ($req) {
