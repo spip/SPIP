@@ -27,7 +27,7 @@ function balise_FORMULAIRE__dist($p) {
 	$form = $p->nom_champ;
 	if (substr($form,0,11)=="FORMULAIRE_"
 	AND $form = strtolower(substr($form,11)) 
-	AND (!find_in_path('formulaires/'.$form.'.html'))) {
+	AND (!find_in_path('formulaires/'.$form.'.' . _EXTENSION_SQUELETTES))) {
 		    $p->code = "''";
 		    $p->interdire_scripts = false;
 		    return $p;
@@ -55,7 +55,7 @@ function balise_FORMULAIRE__dyn($form)
 	// on enleve le premier qui est le nom de la balise et deja recupere ci-dessus
 	array_shift($args);
 
-	if (!find_in_path("formulaires/$form.html"))
+	if (!find_in_path("formulaires/$form" . '.' . _EXTENSION_SQUELETTES))
 		return '';
 
 	// tester si ce formulaire vient d'etre poste (memes arguments)
@@ -65,7 +65,7 @@ function balise_FORMULAIRE__dyn($form)
 	AND $post_args = _request('formulaire_action_args')) {
 		$post_args = decoder_contexte_ajax($post_args,$post_form);
 		// enlever le faux attribut de langue masque
-		@array_shift($post_args);
+		array_shift($post_args);
 		if ($args === $post_args){
 			$je_suis_poste = true;
 		}
