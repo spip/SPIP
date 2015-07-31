@@ -115,20 +115,24 @@ function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum, 
   if (!$retour_forum)
     $retour_forum = rawurlencode($url);
   else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
+	$retour_forum = ereg_replace("\&","&amp;", $retour_forum);
+
   $cache = $Cache[cache];
+  
+  
 
   $lacible = "
 	include_local('inc-forum.php3');
 	lang_select(\$GLOBALS['spip_lang']);
 	echo retour_forum('$idr','$idf','$ida','$idb','$ids',\"$titre\",'$table', '$forum', '$url', \"
-	<input type=hidden name='retour' value='$retour_forum' />
-	<input type=hidden name='var_cache' value='$cache' />
-	<input type=hidden name='ajout_forum' value='oui' />
-	<input type=hidden name='forum_id_rubrique' value='$idr' />
-	<input type=hidden name='forum_id_parent' value='$idf' />
-	<input type=hidden name='forum_id_article' value='$ida' />
-	<input type=hidden name='forum_id_breve' value='$idb' />
-	<input type=hidden name='forum_id_syndic' value='$ids' />
+	<input type='hidden' name='retour' value='$retour_forum' />
+	<input type='hidden' name='var_cache' value='$cache' />
+	<input type='hidden' name='ajout_forum' value='oui' />
+	<input type='hidden' name='forum_id_rubrique' value='$idr' />
+	<input type='hidden' name='forum_id_parent' value='$idf' />
+	<input type='hidden' name='forum_id_article' value='$ida' />
+	<input type='hidden' name='forum_id_breve' value='$idb' />
+	<input type='hidden' name='forum_id_syndic' value='$ids' />
 	" .
 	(($forum != 'pri') ? '' : ((_T('forum_info_modere'). '<p>'))) . 
 	"\");

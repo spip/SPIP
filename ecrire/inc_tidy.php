@@ -8,13 +8,17 @@ define("_ECRIRE_INC_TIDY", "1");
 
 function version_tidy() {
 	$version = 0;
-	
+
 	if (function_exists('tidy_parse_string')) {
 		$version = 1;
 		if (function_exists('tidy_get_body')) {
 			$version = 2;
 		}
 	}
+
+//	$charset = lire_meta('charset');
+//	if ($charset != "iso-8859-1" AND $charset != "uft-8") $version = 0; 
+	
 	return $version;
 }
 
@@ -60,14 +64,20 @@ function xhtml ($buffer) {
 		$les_echap = $retour_echap[1];
 
 		// Options selon: http://tidy.sourceforge.net/docs/quickref.html
-		tidy_set_encoding ("utf8");
+		
+		$charset = lire_meta('charset');
+		if ($charset == "iso-8859-1") $enc_char = "latin1";
+		else if ($charset == "utf-8") $enc_char = "utf8";
+
+		tidy_set_encoding ($enc_char);
+
 		tidy_setopt('wrap', 0);
 		tidy_setopt('indent-spaces', 4);
 		tidy_setopt('output-xhtml', true);
 		tidy_setopt('indent', 5);
 		tidy_setopt('show-body-only', false);
 		tidy_setopt('quote-nbsp', false);
-	
+				
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
 	    $tidy = tidy_get_output();
