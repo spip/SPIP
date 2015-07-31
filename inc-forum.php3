@@ -213,7 +213,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				
 			}
 		
-			if ((strlen($texte) >= 10 OR $presence_mots) AND (strlen($titre) >= 3 OR $afficher_texte=="non"))
+			if (strlen($texte) < 10 AND !$presence_mots)
+				$ret .= "<p><div align='right'><font color=red><b>Attention&nbsp;!</b> votre message fait moins de dix caract&egrave;res.</font></div>\n";
+			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
+				$ret .= "<p><div align='right'><font color=red><b>Attention&nbsp;!</b> votre titre fait moins de trois caract&egrave;res.</font></div>\n";
+			else
 				$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='Message d&eacute;finitif : envoyer au site'></DIV>";
 	
 			$ret .= "</div>\n<p>";
