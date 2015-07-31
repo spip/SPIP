@@ -127,6 +127,14 @@ function calendrier_retire_args_ancre($script)
   return array($script, $ancre);
 }
 
+function calendrier_args_date($annee, $mois, $jour) 
+{
+  return 'annee=' . sprintf("%04d", $annee) . '&' .
+	 'mois=' . sprintf("%02d", $mois) . '&' .
+    'jour=' . sprintf("%02d", $jour);
+}
+  
+
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
 # et retourne un tableau compose
 # - taille d'une heure
@@ -295,8 +303,8 @@ function http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_
 	  $annee_prec=$annee-1;
 	}
 	else if ($mois==12){$mois_suiv=1;	$annee_suiv=$annee+1;}
-	$prec = "mois=$mois_prec&annee=$annee_prec";
-	$suiv = "mois=$mois_suiv&annee=$annee_suiv";
+	$prec = calendrier_args_date($annee_prec, $mois_prec, 1);
+	$suiv = calendrier_args_date($annee_suiv, $mois_suiv, 1);
 	$periode = affdate_mois_annee("$annee-$mois-1");
 	}
 	return
@@ -350,7 +358,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$jour = date("d",$nom);
 		$jour_semaine = date("w",$nom);
 		$mois_en_cours = date("m",$nom);
-		$annee_en_cours = date("y",$nom);
+		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
 
 		if ($jour_semaine == 0) {
@@ -395,10 +403,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 
 function http_calendrier_mois_clics($annee, $mois, $jour, $script, $ancre, $color)
 {
-  $script .= "jour=$jour&mois=$mois&annee=$annee";
-
+  $script .= calendrier_args_date($annee, $mois, $jour);
   if (!_DIR_RESTREINT) 
-    return http_href("$script&type=jour" . $ancre, $jour,
+    return http_href($script. "&type=jour" . $ancre, $jour,
 		     '', "color: $color",'calendrier-helvetica16') . 
       http_calendrier_ics_message($annee, $mois, $jour, false);
   else
@@ -469,8 +476,8 @@ function http_calendrier_semaine_navigation($annee, $mois, $jour, $echelle, $par
 			       $partie_cal, 
 			       $periode,
 			       $script,
-			       "mois=$dmois&annee=$dannee&jour=".($djour-7),
-			       "mois=$fmois&annee=$fannee&jour=".($fjour+1),
+calendrier_args_date($dannee, $dmois, ($djour-7)),
+calendrier_args_date($fannee, $fmois, ($fjour+1)),
 			       'semaine',
 			       $ancre) .
     "</td></tr>\n";
@@ -480,7 +487,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 	global $couleur_claire, $couleur_foncee, $spip_ecran;
 	$href = $script .
 	  (ereg('[?&]$', $script) ? '' : (strpos($script,'?') ? '&' : '?')) .
-	  "type=jour";
+	  "type=jour&";
 
 	$bandeau = '';
 	for ($j=$jour; $j<$jour+7;$j++){
@@ -491,12 +498,8 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 		$bandeau .= 
 		  "\n\t<th class='calendrier-th'>" .
 		  http_href(($href .
-			     "&jour=" .
-			     $num .
-			     "&mois=" .
-			     $numois .
-			     "&annee=" .
-			     date("Y",$nom) .
+			     calendrier_args_date(date("Y",$nom), $numois, $num) .
+			     
 			     $ancre),
 			    ($nomjour .
 			     " " .
@@ -545,8 +548,8 @@ function http_calendrier_jour($annee, $mois, $jour, $echelle, $partie_cal, $scri
 				     (nom_jour("$annee-$mois-$jour") . " " .
 				      affdate_jourcourt("$annee-$mois-$jour")),
 				     $script,
-				     "jour=".($jour-1)."&mois=$mois&annee=$annee",
-				     "jour=".($jour+1)."&mois=$mois&annee=$annee",
+calendrier_args_date($annee, $mois, ($jour-1)),
+calendrier_args_date($annee, $mois, ($jour+1)),
 				     'jour',
 				     $ancre) .
 	  "</td>" .
@@ -832,7 +835,8 @@ function http_calendrier_ics_titre($annee, $mois, $jour,$script)
 	$annee = date("Y",$date);
 	
 	return "<div class='calendrier-arial10 calendrier-titre'>" .
-	  http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee",
+	  http_href("$script?type=jour&" .
+		    calendrier_args_date($annee, $mois, $jour),
 		      affdate_jourcourt("$annee-$mois-$jour"),
 		      '',
 		      'color:black;') .
@@ -983,7 +987,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 
 	if (!ereg('[?&]$', $script)) $script .= (strpos($script,'?') ? '&' : '?');
-	$args = "jour=$jour&mois=$mois&annee=$annee";
+	$args = calendrier_args_date($annee, $mois, $jour);
 	  
 	$today=getdate(time());
 	$jour_today = $today["mday"];
@@ -1038,7 +1042,9 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 			  _T('cal_par_mois'))
 	  . "</div>"
 	  . "&nbsp;&nbsp;"
-	  . http_href_img($script . "type=$type&echelle=$echelle&jour=$jour_today&mois=$mois_today&annee=$annee_today$ancre",
+	  . http_href_img($script . 
+calendrier_args_date($annee_today, $mois_today, $jour_today) .
+			  "&type=$type&echelle=$echelle$ancre",
 			  "cal-today.gif",
 			  (" onmouseover=\"montrer('$id');\"" .
 			   (($annee == $annee_today && $mois == $mois_today && (($type == 'mois')  || ($jour == $jour_today)))
@@ -1078,11 +1084,13 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 	$annee_apres = $annee + 1;
 
 	for ($i=$mois; $i < 13; $i++) {
-		$gadget .= http_href($script . "mois=$i&annee=$annee_avant$ancre",
+		$gadget .= http_href($script .
+				     calendrier_args_date($annee_avant, $i, 1) . $ancre,
 				     nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
 			}
 	for ($i=1; $i < $mois - 1; $i++) {
-		$gadget .= http_href($script . "mois=$i&annee=$annee$ancre",
+		$gadget .= http_href($script .
+				     calendrier_args_date($annee, $i, 1) . $ancre,
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 	$gadget .= "</td></tr>"
@@ -1096,11 +1104,13 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 		. "</tr>"
 		. "\n<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
 	for ($i=$mois+2; $i <= 12; $i++) {
-				$gadget .= http_href($script. "mois=$i&annee=$annee$ancre",
+				$gadget .= http_href($script .
+				     calendrier_args_date($annee, $i, 1) . $ancre,
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 	for ($i=1; $i < $mois+1; $i++) {
-		$gadget .= http_href($script . "mois=$i&annee=$annee_apres$ancre",
+		$gadget .= http_href($script . 
+				     calendrier_args_date($annee_apres, $i, 1) . $ancre,
 					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
 			}
 	return $gadget . "</td></tr></table></div>";
@@ -1117,7 +1127,8 @@ function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved
   if (!$evt) $evt = sql_calendrier_agenda($annee, $mois);
   return 
     "<div class='calendrier-titre calendrier-arial10'>" .
-    http_href($script . "mois=$mois&annee=$annee$ancre",
+    http_href($script .
+	      calendrier_args_date($annee, $mois, 1) . $ancre,
 	      affdate_mois_annee("$annee-$mois-1"),
 	      '',
 	      'color: black;') .
@@ -1135,7 +1146,9 @@ function http_calendrier_clic($annee, $mois, $jour, $type, $couleur, $perso)
 
   list($script, $ancre) = $perso;
 
-  return http_href($script . "type=$type&jour=$jour&mois=$mois&annee=$annee$ancre", 
+  return http_href($script .
+		   calendrier_args_date($annee, $mois, $jour) .
+		   "&type=$type$ancre", 
 		   $jour,
 		   '',
 		   "color: $couleur; font-weight: bold");
@@ -1358,7 +1371,7 @@ WHERE	date_heure >= $avant
 ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
-		$amj = sql_calendrier_jour_ical($row['date_heure']);
+		$amj = date_anneemoisjour($row['date_heure']);
 		if (_DIR_RESTREINT)
 		  {
 		    $script = 'article';
@@ -1402,7 +1415,7 @@ ORDER BY date
 	  }
 
 	while($row=spip_fetch_array($result)){
-		$amj = sql_calendrier_jour_ical($row['date']);
+		$amj = date_anneemoisjour($row['date']);
 		if ((!_DIR_RESTREINT) || ($now >= $amj))
 			$url = $script . $row['id_article'];
 		else {
@@ -1436,7 +1449,7 @@ WHERE	statut='publie'
 ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
-		$amj = sql_calendrier_jour_ical($row['date_heure']);
+		$amj = date_anneemoisjour($row['date_heure']);
 		$script = (_DIR_RESTREINT ? 'breve' : 'breves_voir');
 		$evenements[$amj][]=
 		array(
@@ -1501,14 +1514,14 @@ WHERE	(lien.id_message='$id_message'
 		$jour_apres = substr($apres, 9,2);
 		$mois_apres = substr($apres, 6,2);
 		$annee_apres = substr($apres, 1,4);
-		$ical_apres = sql_calendrier_jour_ical("$annee_apres-$mois_apres-".sprintf("%02d",$jour_apres));
+		$ical_apres = date_anneemoisjour("$annee_apres-$mois_apres-".sprintf("%02d",$jour_apres));
 
 		// Calcul pour les semaines a cheval sur deux mois 
  		$j = 0;
-		$amj = sql_calendrier_jour_ical("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
+		$amj = date_anneemoisjour("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
 
 		while ($amj <= $ical_apres) {
-		if (!($amj == sql_calendrier_jour_ical($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
+		if (!($amj == date_anneemoisjour($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
 				'URL' => "message.php3?id_message=$id_message",
@@ -1522,7 +1535,7 @@ WHERE	(lien.id_message='$id_message'
 			$j ++; 
 			$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));
 			
-			$amj = sql_calendrier_jour_ical($ladate);
+			$amj = date_anneemoisjour($ladate);
 
 		}
 
@@ -1599,7 +1612,4 @@ function sql_calendrier_agenda ($annee, $mois) {
 	return $rv;
 }
 
-function sql_calendrier_jour_ical($d)  {
-	return  substr($d, 0, 4) . substr($d, 5, 2) .substr($d, 8, 2);
-}
 ?>

@@ -674,6 +674,31 @@ function date_iso($date_heure) {
 	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
+
+function date_anneemoisjour($d)  {
+	if (!$d) $d = date("Y-m-d");
+	return  substr($d, 0, 4) . substr($d, 5, 2) .substr($d, 8, 2);
+}
+
+function date_anneemois($d)  {
+	if (!$d) $d = date("Y-m-d");
+	return  substr($d, 0, 4) . substr($d, 5, 2);
+}
+
+function date_debut_semaine($annee, $mois, $jour) {
+  $w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
+  if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
+  $debut = $jour-$w_day;
+  return date("Ymd", mktime(0,0,0,$mois,$debut,$annee));
+}
+
+function date_fin_semaine($annee, $mois, $jour) {
+  $w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
+  if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
+  $debut = $jour-$w_day+1;
+  return date("Ymd", mktime(0,0,0,$mois,$debut+6,$annee));
+}
+
 //
 // Fonctions graphiques
 //
