@@ -936,6 +936,14 @@ a.bouton_rotation:hover img {
 	color: black;	
 }
 
+.cadre-sous_rub {
+	background-color: white;
+	border: 1px solid #666666;
+	-moz-border-radius-bottomleft: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-top<? echo $left; ?>: 8px;
+}
+
 
 .cadre-thread-forum {
 	background-color: #eeeeee;
