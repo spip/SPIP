@@ -83,7 +83,7 @@
 						[(#ENV{config}|table_valeur{edit_login}|oui)
 							<label for='new_login'><:item_login:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
-							]<p class='explication'>(<:texte_plus_trois_car:>)</p>
+							]<p class='explication'>(<:info_login_trop_court_car_pluriel{nb=#EVAL{_LOGIN_TROP_COURT}}:>)</p>
 							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{new_login})]" />
 						]
 						[(#ENV{config}|table_valeur{edit_login}|non)
@@ -96,7 +96,7 @@
 					<li class='editer editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
 						<label for='new_pass'><:entree_nouveau_passe:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>
-						]<p class='explication'>(<:info_plus_cinq_car:>)</p>
+						]<p class='explication'>(<:info_passe_trop_court_car_pluriel{nb=#EVAL{_PASS_LONGUEUR_MINI}}:>)</p>
 						<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
 					</li>
 					<li class='editer editer_new_pass2'>
