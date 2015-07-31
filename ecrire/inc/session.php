@@ -70,7 +70,7 @@ function ajouter_session($auteur) {
 	} else {
 		include_spip('inc/cookie');
 		spip_setcookie('spip_session', $_COOKIE['spip_session'],
-			2 * _RENOUVELLE_ALEA);
+			time() + 20 * _RENOUVELLE_ALEA);
 		spip_log("ajoute session $fichier_session");
 		return $_COOKIE['spip_session'];
 	}
@@ -115,7 +115,7 @@ function verifier_session($change=false) {
 		include($fichier_session);
 	} else {
 		// Sinon, tester avec alea precedent
-	  $fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere_ancien'], true);
+		$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere_ancien'], true);
 		if (!$fichier_session OR !@file_exists($fichier_session)) return false;
 
 		// Renouveler la session avec l'alea courant

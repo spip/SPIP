@@ -62,17 +62,16 @@ function creer_uniqid() {
 }
 
 //
-// Renouvellement de l'alea utilise pour sécuriser les scripts dans action/
+// Renouvellement de l'alea utilise pour securiser les scripts dans action/
 //
 
 // http://doc.spip.org/@renouvelle_alea
-function renouvelle_alea()
-{
+function renouvelle_alea() {
 	$alea = md5(creer_uniqid());
 	include_spip('inc/meta');
-	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'],'non');
-	ecrire_meta('alea_ephemere', $alea,'non');
-	ecrire_meta('alea_ephemere_date', time(),'non');
+	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
+	ecrire_meta('alea_ephemere', $alea, 'non');
+	ecrire_meta('alea_ephemere_date', time(), 'non');
 	ecrire_metas();
 	spip_log("renouvellement de l'alea_ephemere: $alea");
 }
