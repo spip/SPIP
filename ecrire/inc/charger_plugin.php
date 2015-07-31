@@ -97,7 +97,7 @@ function interface_plugins_auto($retour) {
 			
 			
 			$nick = strtolower(basename($url, '.zip'));
-			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
+			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" id="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
 		}
 		ksort($menu);
 
@@ -111,7 +111,7 @@ function interface_plugins_auto($retour) {
 // --></style>\n";
 
 		$res .= "<div id='liste_plug' class='cadre-trait-couleur'>\n";
-# <select name='url_zip_plugin'>
+# <select name='url_zip_plugin' id='url_zip_plugin'>
 #			."<option>"._L('choisir...')."</option>"
 			$res .= join("\n",$menu);
 #			."\n</select></p>\n";
