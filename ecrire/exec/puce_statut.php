@@ -26,7 +26,7 @@ include_spip('inc/presentation');
  * Récupère l'identifiant id et le type d'objet dans les données postées
  * et appelle la fonction de traitement de cet exec.
  * 
- * @see exec_puce_statut_formulaires_args()
+ * @uses exec_puce_statut_args()
  * @return string Code HTML
 **/
 function exec_puce_statut_dist()

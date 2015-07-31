@@ -29,9 +29,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * et fournir le tableau `$maj` à la fonction `maj_plugin`.
  * La reprise sur timeout se fait alors par la page admin_plugin et jamais par ici.
  *
- * @use creer_base()
- * @use maj_base()
- * @use auth_synchroniser_distant()
+ * @uses creer_base()
+ * @uses maj_base()
+ * @uses auth_synchroniser_distant()
  * 
  * @param string $titre
  * @param string $reprise Inutilisé
@@ -82,8 +82,8 @@ function base_upgrade_dist($titre='', $reprise='')
  *
  * Les fonctions de mises à jour se trouvent dans `ecrire/maj/`
  * 
- * @use upgrade_test()
- * @use maj_while()
+ * @uses upgrade_test()
+ * @uses maj_while()
  * 
  * @param int $version_cible
  * @param string $redirect
@@ -156,7 +156,7 @@ function maj_base($version_cible = 0, $redirect = '') {
  * On lui fournit un tableau de fonctions élementaires
  * dont l'indice est la version.
  *
- * @use maj_while()
+ * @uses maj_while()
  * 
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -238,7 +238,7 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
  * si pas de redirect fourni, on redirige vers `exec=upgrade` pour finir
  * ce qui doit être une mise à jour SPIP
  *
- * @use redirige_formulaire()
+ * @uses redirige_formulaire()
  * 
  * @param string $meta
  * @param string $table
@@ -318,9 +318,9 @@ define('_UPGRADE_TIME_OUT', 20);
  * spécifiques sont relancées jusqu'à ce qu'elles finissent.
  * Elles doivent donc s'assurer de progresser à chaque reprise.
  *
- * @use maj_debut_page()
- * @use serie_alter()
- * @use relance_maj()
+ * @uses maj_debut_page()
+ * @uses serie_alter()
+ * @uses relance_maj()
  * 
  * @param string $installee
  * @param string $cible
@@ -389,7 +389,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
  *
  * Alter crée une copie temporaire d'une table, c'est lourd.
  *
- * @use relance_maj()
+ * @uses relance_maj()
  * 
  * @param string $serie
  *   numero de version upgrade
@@ -460,7 +460,7 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect=''
  *     $GLOBALS['maj'][1953] = array(array('upgrade_types_documents'));
  * 
  *     ```
- * @use creer_base_types_doc()
+ * @uses creer_base_types_doc()
  * 
 **/
 function upgrade_types_documents() {

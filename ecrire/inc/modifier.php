@@ -298,7 +298,7 @@ function modifier_contenu($type, $id, $options, $c=null, $serveur='') {
  *
  * @deprecated
  *     Utiliser objet_modifier();
- * @see objet_modifier();
+ * @uses objet_modifier()
  * 
  * @param string $objet
  *     Nom de l'objet

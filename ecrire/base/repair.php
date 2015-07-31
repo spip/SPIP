@@ -25,9 +25,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * de rubriques. Affiche les erreurs s'il y en a eu.
  *
  * @pipeline_appel base_admin_repair
- * @use admin_repair_tables()
- * @use calculer_rubriques()
- * @use propager_les_secteurs()
+ * @uses admin_repair_tables()
+ * @uses calculer_rubriques()
+ * @uses propager_les_secteurs()
  * 
  * @param string $titre   Inutilisé
  * @param string $reprise Inutilisé
