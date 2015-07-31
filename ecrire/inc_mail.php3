@@ -46,8 +46,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	spip_log("mail ($email): $sujet");
 
-	if (!$charset = lire_meta('charset'))$
-		$charset='iso-8859-1';
+	$charset = lire_meta('charset');
 
 	$headers = "From: $from\n".
 		"MIME-Version: 1.0\n".

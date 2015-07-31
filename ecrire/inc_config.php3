@@ -30,7 +30,7 @@ function init_config() {
 		'taille_preview' => 150,
 
 		'activer_sites' => 'oui',
-		'proposer_sites' => '0',
+		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
 		'visiter_sites' => 'non',
 		'moderation_sites' => 'non',
@@ -45,7 +45,9 @@ function init_config() {
 
 		'activer_moteur' => 'non',
 		'activer_statistiques' => 'oui',
-		'activer_statistiques_ref' => 'non'
+		'activer_statistiques_ref' => 'non',
+		
+		'charset' => 'iso-8859-1'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
