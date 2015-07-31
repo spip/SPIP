@@ -407,9 +407,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				if($dir_plugins_suppl && preg_match(',('.$dir_plugins_suppl.'),',$plug)){
 					$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
 				}else{
-					$dir = $dir_type.".'"
-						. $plug
-						."/'";
+					$dir = $dir_type.".'". $plug ."/'";
 				}
 				$info = $infos[$dir_type][$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
@@ -455,9 +453,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				$splugs .= "else _chemin(implode(':',array(".implode(',',array_reverse($chemins['prive'])).")));\n";
 			}
 		}
-		if ($charge=='options'){
-			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
-			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
+		if ($charge=='fonctions'){
+			$s .= "if (!function_exists('boutons_plugins')){function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}}\n";
+			$s .= "if (!function_exists('onglets_plugins')){function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}}\n";
 		}
 		ecrire_fichier($fileconf, $start_file . $splugs . $s . $end_file);
 	}
