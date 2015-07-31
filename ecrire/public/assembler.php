@@ -98,7 +98,8 @@ function public_assembler_dist($fond, $connect='') {
 	}
 	
 	// traiter les appels de bloc ajax
-	if (_request('var_ajax')
+	if (($v=_request('var_ajax'))
+	 AND ($v!=='form')
 	 AND ($args = _request('var_ajax_env'))
 	 AND ($cle = _request('var_ajax_cle')) ){ 
 		 if ((include_spip('inc/securiser_action'))

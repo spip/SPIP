@@ -69,7 +69,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (typeof target == 'undefined') target = this;
 	this
 	.find('form:not(.noajax)')
-		.prepend("<input type='hidden' name='var_ajax' value='1' />")
+		.prepend("<input type='hidden' name='var_ajax' value='form' />")
 		.ajaxForm({
 			target: target,
 			beforeSubmit: function(){
