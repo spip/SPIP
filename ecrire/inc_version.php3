@@ -67,7 +67,7 @@ function spip_query_debug($query) {
 }
 
 function spip_query($query) {
-	return spip_query_profile($query);
+	// return spip_query_profile($query); // a decommenter pour chronometrer les requetes
 	// return spip_query_debug($query); // a decommenter pour afficher toutes les erreurs
 	$suite = "";
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
