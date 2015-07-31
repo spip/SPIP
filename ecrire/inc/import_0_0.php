@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour le support des vieux dump
 // pff ou vous l'avez trouve ce dump ?
 // http://doc.spip.org/@inc_import_0_0_dist
-function inc_import_0_0_dist($f, $request, $gz=false, $t='') {
+function inc_import_0_0_dist($f, $request, $gz=false) {
 	global $import_ok;
 
 	// detruire les tables a restaurer

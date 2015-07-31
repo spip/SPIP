@@ -55,12 +55,14 @@ function insere_1_init($request) {
 	return insere_2_init($request);
 }
 
+//   construire le tableau PHP de la table spip_translate
+// (mis en table pour pouvoir reprendre apres interruption)
+
 // http://doc.spip.org/@translate_init
 function translate_init($request) {
-  /* 
-   construire le tableau PHP de la table spip_translate
-   (mis en table pour pouvoir reprendre apres interruption)
-  */
+
+	include_spip('inc/texte.php'); // pour les Regexp des raccourcis
+
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
 	while ($r = spip_fetch_array($q)) {
@@ -71,13 +73,14 @@ function translate_init($request) {
 
 
 // http://doc.spip.org/@import_insere
-function import_insere($values, $table, $desc, $request, $trans) {
+function import_insere($values, $table, $desc, $request) {
+
 	$type_id = $desc['key']["PRIMARY KEY"];
 
 	// reserver une place dans les tables principales si nouveau
 	$ajout = 0;
 	if ((!function_exists($f = 'import_identifie_' . $type_id))
-	OR (!$n = $f($values, $table, $desc, $request, $trans))) {
+	OR (!$n = $f($values, $table, $desc, $request))) {
 		$n = spip_abstract_insert($table, '', '()');
 		if (!$n) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
@@ -107,25 +110,19 @@ function import_insere($values, $table, $desc, $request, $trans) {
 // si une autre occurrence est rencontree a la reprise. Pas dramatique.
 
 // http://doc.spip.org/@import_translate
-function import_translate($values, $table, $desc, $request, &$trans) {
+function import_translate($values, $table, $desc, $request) {
+	global $trans;
 	$vals = '';
 
 	foreach ($values as $k => $v) {
 		if ($k=='id_parent' OR $k=='id_secteur') $k = 'id_rubrique';
 
-		if (isset($trans[$k]) AND isset($trans[$k][$v])) {
-			list($g, $titre, $ajout) = $trans[$k][$v];
-			if ($g < 0) {
-				$f = 'import_identifie_parent_' . $k;
-				$g = $f($g, $titre, $trans, $v);
-				if ($g > 0)
-				  // memoriser qu'on insere
-				  $trans[$k][$v][2]=1;
-				else $g = (0-$g);
-#				spip_log("MAJ $k $v = $g");
-				$trans[$k][$v][0] = $g;
+		$v = importe_translate_maj($k, $v);
+
+		if (preg_match_all(_RACCOURCI_LIEN, $v, $m, PREG_SET_ORDER)) {
+			foreach ($m as $regs) {
+				$v = importe_raccourci($regs, $k, $v);
 			}
-			$v = $g;
 		}
 
 		$vals .= "," . _q($v);
@@ -134,14 +131,47 @@ function import_translate($values, $table, $desc, $request, &$trans) {
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
 	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2])
-		spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
-#	else spip_log("evite $p $v $table");
+		spip_query($q = "REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
 }
 
+function importe_translate_maj($k, $v)
+{
+  global $trans;
+	if (!(isset($trans[$k]) AND isset($trans[$k][$v]))) return $v;
+
+	list($g, $titre, $ajout) = $trans[$k][$v];
+	if ($g < 0) {
+		$f = 'import_identifie_parent_' . $k;
+		$g = $f($g, $titre, $v);
+		if ($g > 0)
+			  // memoriser qu'on insere
+			$trans[$k][$v][2]=1;
+		else $g = (0-$g);
+		$trans[$k][$v][0] = $g;
+	}
+	return $g;
+}
+
+function importe_raccourci($regs, $k, $v)
+{
+	$lien = vider_url($regs[3]); # supprimer 'http://' ou 'mailto:'
+
+	if (!$match = typer_raccourci($lien)) return $v;
+
+	list($f,$objet,$id,$params,$ancre) = $match;
+
+	$k = 'id_' . $f;
+	$g = importe_translate_maj($k, $id);
+
+	if ($g == $id) return $v;
+
+	$rac = '[' . $regs[1] . '->' . $reg[2] . $objet . $g . $params . $ancre .']';
+	return str_replace($regs[0], $rac, $v);
+}
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
-function import_identifie_id_groupe($values, $table, $desc, $request, $trans)  {
+function import_identifie_id_groupe($values, $table, $desc, $request)  {
 	$r = spip_fetch_array(spip_query($q = "SELECT id_groupe, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])), SPIP_NUM);
 	return $r;
 }
@@ -149,14 +179,15 @@ function import_identifie_id_groupe($values, $table, $desc, $request, $trans)  {
 // pour un mot le titre est insuffisant, il faut aussi l'identite du groupe.
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
 // http://doc.spip.org/@import_identifie_id_mot
-function import_identifie_id_mot($values, $table, $desc, $request, $trans) {
+function import_identifie_id_mot($values, $table, $desc, $request) {
 	return array((0 - $values['id_groupe']), $values['titre']);
 }
 
 // mot de meme titre et de meme groupe ==> identification
 // http://doc.spip.org/@import_identifie_parent_id_mot
-function import_identifie_parent_id_mot($id_groupe, $titre, $trans, $v)
+function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 {
+  global $trans;
 	$titre = _q($titre);
 	$id_groupe = 0-$id_groupe;
 	if (isset($trans['id_groupe'])
@@ -173,49 +204,51 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $trans, $v)
 
 // pour une rubrique le titre est insuffisant, il faut l'identite du parent
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
-function import_identifie_id_rubrique($values, $table, $desc, $request, $trans) {
+function import_identifie_id_rubrique($values, $table, $desc, $request) {
 	return array((0 - $values['id_parent']), $values['titre']);
 }
 
 // renumerotation en cascade. 
 // rubrique de meme titre et de meme parent ==> identification
-function import_identifie_parent_id_rubrique($id_parent, $titre, &$trans, $v)
+function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 {
-#  spip_log("import_identifie_parent_id_rubrique($id_parent, $titre, $v ");
+	global $trans;
 	if (isset($trans['id_rubrique'])) {
 		if ($id_parent < 0) {
 			$id_parent = (0 - $id_parent);
-			$pitre = $trans['id_rubrique'][$id_parent][1];
 			$gparent = $trans['id_rubrique'][$id_parent][0];
-			$n = import_identifie_parent_id_rubrique($gparent, $pitre, $trans, $id_parent);
-#			spip_log("MAJ_rub $id_parent = $n");
-			$trans['id_rubrique'][$id_parent][0] = $n>0 ? $n: (0-$n);
-			if ($n > 0) {
-			  $trans['id_rubrique'][$id_parent][2]=1; // nouvelle rub.
-			  return import_alloue_id_rubrique($n, $titre, $trans, $v);
-			}
+			// parent deja renumerote depuis le debut la passe 2
+			if ($gparent > 0)
+			  $id_parent = $gparent;
 			else {
-			  $id_parent = (0 - $n);
+			  // premiere occurrence du parent
+				$pitre = $trans['id_rubrique'][$id_parent][1];
+				$n = import_identifie_parent_id_rubrique($gparent, $pitre, $id_parent);
+				$trans['id_rubrique'][$id_parent][0] = ($n>0) ? $n: (0-$n);
+				// parent tout neuf,
+				// pas la peine de chercher un titre homonyme
+				if ($n > 0) {
+					$trans['id_rubrique'][$id_parent][2]=1; // nouvelle rub.
+					return import_alloue_id_rubrique($n, $titre, $v);
+				} else $id_parent = (0 - $n);
 			}
 		}
 
 		$r = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
 		if ($r)  {
-#		  spip_log("identification $titre $v de nouveau part $id_parent a " . (0 - $r['id_rubrique']));
 		  return (0 - $r['id_rubrique']);
 		}
-		return import_alloue_id_rubrique($id_parent, $titre, $trans, $v);
+		return import_alloue_id_rubrique($id_parent, $titre, $v);
 	}
 }
 
 // reserver la place en mettant titre et parent tout de suite
 // pour que le SELECT ci-dessus fonctionne a la prochaine occurrence
 
-function import_alloue_id_rubrique($id_parent, $titre, &$trans, $v) {
+function import_alloue_id_rubrique($id_parent, $titre, $v) {
 	$titre = _q($titre);
 	$r = spip_abstract_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)");
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_rubrique',1)");
-#	spip_log("allocation rub $titre $r pour $v nouveau parent $id_parent");
 	return $r;
 }
 

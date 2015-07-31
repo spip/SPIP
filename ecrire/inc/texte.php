@@ -636,6 +636,30 @@ function extraire_lien ($regs) {
 }
 
 // traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
+
+define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
+
+function typer_raccourci ($lien) {
+
+	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
+
+	$f = $match[1];
+
+	// valeur par defaut et alias historiques
+	if (!$f) $f = 'article';
+	else if ($f == 'art') $f = 'article';
+	else if ($f == 'br') $f = 'breve';
+	else if ($f == 'rub') $f = 'rubrique';
+	else if ($f == 'aut') $f = 'auteur';
+	else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
+		$f = 'document';
+	else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
+	$match[0] = $f;
+	return $match;
+}
+
+// Cherche un lien du type [->raccourci 123]
+// associe a une fonction generer_url_raccourci()
 //
 // Valeur retournee selon le parametre $pour:
 // 'tout' : <a href="L">T</a>
@@ -646,23 +670,8 @@ function extraire_lien ($regs) {
 function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
 
-	// Cherche un lien du type [->raccourci 123]
-	// associe a une fonction generer_url_raccourci()
-	if (preg_match(',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S', trim($lien), $match)) {
-		list(,$objet,$id,$params,$ancre) = $match;
-
-		// valeur par defaut
-		if (!$f = $objet) $f = 'article';
-
-		// aliases (historique)
-		if ($f == 'art') $f = 'article';
-		else if ($f == 'br') $f = 'breve';
-		else if ($f == 'rub') $f = 'rubrique';
-		else if ($f == 'aut') $f = 'auteur';
-		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
-			$f = 'document';
-		else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
-
+	if ($match = typer_raccourci ($lien)) {
+		list($f,$objet,$id,$params,$ancre) = $match;
 		// chercher la fonction nommee generer_url_$raccourci
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
@@ -1188,6 +1197,8 @@ function traiter_raccourci_lien($regs) {
 		. "</a>");
 }
 
+// Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
+define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
@@ -1352,9 +1363,9 @@ function traiter_raccourcis($letexte) {
 	// Note : complique car c'est ici qu'on applique typo(),
 	// et en plus on veut pouvoir les passer en pipeline
 	//
-	$regexp = ",\[([^][]*)->(>?)([^]]*)\],msS";
+
 	$inserts = array();
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
+	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
 			$inserts[++$i] = traiter_raccourci_lien($regs);
