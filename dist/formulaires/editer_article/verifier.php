@@ -26,6 +26,10 @@ function formulaires_editer_article_verifier_dist($id_article='new', $id_rubriqu
 			}
 		}
 	}
+	foreach(array('titre') as $obli){
+		if (!_request($obli))
+			$erreurs[$obli] .= _L("Cette information est obligatoire");;
+	}
 
 	return $erreurs;
 }
