@@ -210,7 +210,7 @@
 	]
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
-			jQuery('div.formulaire_#FORM form input.radio').bind('change',function(){jQuery(this).parents('form').ajaxSubmit();});
+			jQuery('div.formulaire_#FORM form input.radio').bind('change',function(){jQuery(this).parents('form').submit();});
 			jQuery('div.formulaire_#FORM .boutons').hide();
 		});
 	</script>
