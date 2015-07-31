@@ -55,7 +55,7 @@ else {
 		// il nous faut id_article ! C'est donc encore a nettoyer...
 		include_local('inc-calcul.php3');
 		calculer_contexte();
-		include_local('inc-formulaires.php3');
+		include_local('inc-signature.php3');
 		reponse_confirmation($id_article, $val_confirm);
 	}
 
@@ -77,6 +77,7 @@ else {
 	$affiche_boutons_admin = (!$flag_preserver
 		AND ($HTTP_COOKIE_VARS['spip_admin']
 			OR $HTTP_COOKIE_VARS['spip_debug']));
+
 	if ($affiche_boutons_admin)
 		include_local('inc-admin.php3');
 
@@ -102,6 +103,7 @@ else {
 		($var_debug OR $var_recherche OR $affiche_boutons_admin));
 
 		// Cas d'une page contenant uniquement du HTML :
+
 	if ($page['process_ins'] == 'html') {
 			if (!spip_active_ob) {
 				echo $page['texte'];

@@ -17,7 +17,6 @@ if (defined("_INC_BALISES")) return;
 define("_INC_BALISES", "1");
 
 
-
 //
 // Traitements standard de divers champs
 //
@@ -91,7 +90,6 @@ function balise_CHARSET_dist($p) {
 	$p->statut = 'php';
 	return $p;
 }
-
 
 function balise_LANG_LEFT_dist($p) {
 	$_lang = champ_sql('lang', $p);
@@ -478,15 +476,16 @@ function balise_LESAUTEURS_dist ($p) {
 
 // #PETITION
 // Champ testant la presence d'une petition
-// non documente ???
+// non documente mais indispensable a FORMULAIRE_PETITION
+
 function balise_PETITION_dist ($p) {
 	$nom = $p->id_boucle;
 	$p->code = "sql_petitions(" .
 			champ_sql('id_article', $p) .
 			",'" .
-			$nom .
-			"','" .
 			$p->boucles[$nom]->type_requete .
+			"','" .
+			$nom .
 			"','" .
 			$p->boucles[$nom]->sql_serveur .
 			"', \$Cache)";
@@ -510,7 +509,7 @@ function balise_POPULARITE_dist ($p) {
 // Fonction commune aux balises #LOGO_XXXX
 // (les balises portant ce type de nom sont traitees en bloc ici)
 //
-function calcul_balise_logo ($p) {
+function calculer_balise_logo ($p) {
 
 	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
@@ -641,108 +640,48 @@ function balise_EXTRA_dist ($p) {
 	return $p;
 }
 
+//
+// Gros morceau inséparable du formulaire associe. On delegue
+//
 
+function balise_PARAMETRES_FORUM_dist($p) {
+  include_local("inc-forum.php3");
+  return calculer_balise_parametres($p);
+}
 
 //
 // Traduction des champs "formulaire"
-//
+// Inclusion du fichier associe a son nom.
+// Ca donne les arguments a chercher dans la pile,on compile leur localisation
+// Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
+// qui recevra a l'execution la valeurs des arguments, 
+// ainsi que les filtres (que la compilation ignore pour le moment)
 
-//
-// Note : les balises de gestion de forums (FORMULAIRE_FORUM et
-// PARAMETRES_FORUM) sont definies dans le fichier inc-forum.php3
-// qui centralise toute la gestion des forums
-//
-
-//
-// Formulaire de recherche
-//
-function balise_FORMULAIRE_RECHERCHE_dist($p) {
-	if ($p->fonctions) {
-		list(, $lien) = each($p->fonctions);	// le premier est un url
-		while (list(, $filtre) = each($p->fonctions))
-			$filtres[] = $filtre;	// les suivants sont des filtres
-		$p->fonctions = $filtres;
-	}
-	if (!$lien) $lien = 'recherche.php3';
-
-	$formulaire_recherche = "\"<form action='$lien' method='get' class='formrecherche'><input type='text' id='formulaire_recherche' size='20' class='formrecherche' name='recherche' value='\" . _T('info_rechercher') . \"' /></form>\"";
-
-	$p->code = "((lire_meta('activer_moteur') != 'oui') ? '' :
-	$formulaire_recherche)";
-
-	$p->statut = 'html';
-	return $p;
-}
-
-
-//
-// Formulaire d'inscription comme redacteur (dans inc-formulaires.php3)
-//
-function balise_FORMULAIRE_INSCRIPTION_dist($p) {
+function calculer_balise_formulaire($p) {
 	balise_distante_interdite($p);
-	$p->code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
-		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); echo formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
-
+	$nom = strtolower(substr($p->nom_champ, strlen('FORMULAIRE_')));
+	$filtres = $p->fonctions;
+	$file = 'inc-' . $nom . _EXTENSION_PHP;
+	include_local($file);
+	$l = $GLOBALS[$nom . '_array'];
+	$p->code = "calculer_formulaire('$nom', array("
+	  . join(',',calculer_multiple_balise($l, $p))
+	  . '), array('
+	  . (!$filtres ? '' : ("'" . join("','", $filtres) . "'"))
+	  . "))";
 	$p->statut = 'php';
 	return $p;
 }
 
-//
-// Formulaire ecrire auteur
-//
-function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
-	balise_distante_interdite($p);
-	$_id_auteur = champ_sql('id_auteur', $p);
-	$_mail_auteur = champ_sql('email', $p);
+// construire un tableau des valeurs interessant un formulaire
 
-	$p->code = '(!email_valide('.$_mail_auteur.') ? "" :
-		("<'.'?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); echo formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\'); lang_dselect(); ?'.'>"))';
-
-	$p->statut = 'php';
-	return $p;
+function calculer_multiple_balise($l, $p) {
+  $args = array();
+  foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
+  return $args;
 }
 
-//
-// Formulaire signature de petition
-//
-function balise_FORMULAIRE_SIGNATURE_dist($p) {
-	balise_distante_interdite($p);
-	$_id_article = champ_sql('id_article', $p);
-	$nom = $p->id_boucle;
-	$code = "sql_petitions(" .
-			$_id_article .
-			",'" .
-			$nom .
-			"','" .
-			$p->boucles[$nom]->type_requete .
-			"','" .
-			$p->boucles[$nom]->sql_serveur .
-			"', \$Cache)";
-
-	$p->code = '(!($petition = '.
-		$code .
-		') ? "" : ("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); 
-echo formulaire_signature(".' .
-		$_id_article .
-		'.", \'".texte_script(serialize($petition))."\'); lang_dselect(); ?".">"))';
-
-	$p->statut = 'php';
-	return $p;
-}
-
-// Formulaire d'inscription de site dans l'annuaire
-function balise_FORMULAIRE_SITE_dist($p) {
-	balise_distante_interdite($p);
-	$_id_rubrique = champ_sql('id_rubrique', $p);
-
-	$p->code = '((lire_meta("proposer_sites") != 2) ? "":
-		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); echo formulaire_site(\'".'.$_id_rubrique.'."\'); lang_dselect(); ?".">"))';
-
-	$p->statut = 'php';
-	return $p;
-}
-
-// il faudrait traiter le formulaire en local 
+// il faudrait savoir traiter les formulaires en local 
 // tout en appelant le serveur SQL distant.
 // En attendant, refuser une authentification sur qqch qui n'a rien à voir.
 
@@ -753,7 +692,6 @@ function balise_distante_interdite($p) {
 	}
 }
 
-
 //
 // Boutons d'administration: 
 //
@@ -763,19 +701,4 @@ function balise_FORMULAIRE_ADMIN_dist($p) {
 	return $p;
 }
 
-
-function balise_HTTP_dist($p) {
-	if (is_array($p->fonctions)) {
-		foreach($p->fonctions as $nom) {
-			if (is_numeric($nom))
-				$p->code = " http_status($nom);";
-			else
-				$p->code = " header($nom);";
-		}
-		$p->code = '("<" . "?php ' . $p->code . ' ?" . ">")';
-		$p->fonctions = array();
-	}
-	$p->statut = 'php';
-	return $p;
-}
 ?>

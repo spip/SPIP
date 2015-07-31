@@ -280,25 +280,8 @@ function code_invalideur_forums($p, $code) {
 				"?'':\n" . $code .")";
 }
 
-
-// Formulaire de reponse a un forum
-function balise_FORMULAIRE_FORUM_dist($p) {
-	$code = "code_de_forum_spip(" .
-	champ_sql('id_rubrique', $p) . ', ' .
-	champ_sql('id_forum', $p) . ', ' .
-	champ_sql('id_article', $p) . ', ' .
-	champ_sql('id_breve', $p) . ', ' .
-	champ_sql('id_syndic', $p) . ')';
-
-	$p->code = code_invalideur_forums($p, "(".$code.")");
-
-	$p->statut = 'php';
-	return $p;
-}
-
-
 // Parametres de reponse a un forum
-function balise_PARAMETRES_FORUM_dist($p) {
+function calculer_balise_parametres($p) {
 	$_accepter_forum = champ_sql('accepter_forum', $p);
 	$p->code = '
 	// refus des forums ?
@@ -344,14 +327,32 @@ function balise_PARAMETRES_FORUM_dist($p) {
 /*******************************************************/
 /* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */
 /*******************************************************/
-function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 
-	// recuperer les donnees du forum auquel on repond, false = forum interdit
-	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
-		return false;
+global $forum_array;
+$forum_array = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
 
-	list($titre, $table, $accepter_forum) = $r;
+function forum_stat($args, $filtres)
+{
+  list ($idr, $idf, $ida, $idb, $ids) = $args;
+  include_local("inc-forum.php3");
+  // recuperer les donnees du forum auquel on repond, false = forum interdit
+  if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
+    return '';
+  return 
+    array("'"
+	  . str_replace('\'', '\\\'', 
+			str_replace('\\', '\\\\', serialize($args)))
+	  . "'",
+	  "'"
+	  . str_replace('\'', '\\\'', 
+			str_replace('\\', '\\\\', serialize($r)))
+	  . "'");
+}
 
+function forum_dyn($args, $donnees_forum) {
+
+  list ($idr, $idf, $ida, $idb, $ids) = unserialize($args);
+  list($titre, $table, $accepter_forum) = unserialize($donnees_forum);
 	// titre propose pour la reponse
 	$titre = '> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre));
 
@@ -380,30 +381,20 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	    $retour_forum = $url;
 	}
 
-
+	// verifier l'identite des posteurs pour les forums sur abo
+	if (($accepter_forum == "abo") && (!$GLOBALS["auteur_session"]))
+	  return login_pour_tous($url, false, true, $url);
+	else
 	// debut formulaire forum
-	$lacible = "
-	include_local('inc-forum.php3');
-	lang_select(\$GLOBALS['spip_lang']);
-	echo retour_forum('$idr','$idf','$ida','$idb','$ids','".
-	  texte_script($titre).
-	  "','".$table."', '".$accepter_forum."', '".$url."', \"
-	<input type='hidden' name='retour' value='".$retour_forum."' />
+	 return retour_forum($idr,$idf,$ida,$idb,$ids,
+			     texte_script($titre),
+		      $table,
+		      $accepter_forum,
+		      $url,
+		      "<input type='hidden' name='retour' value='".$retour_forum."' />
 	<input type='hidden' name='ajout_forum' value='oui' />
 	" .
-	  (($accepter_forum != 'pri') ? '' : (_T('forum_info_modere'). '<p>')) . 
-	  "\"); lang_dselect();";
-
-	// verifier l'identite des posteurs pour les forums sur abo
-	if ($accepter_forum == "abo")
-		$lacible = "
-		if (\$GLOBALS[\"auteur_session\"]) {\n$lacible
-		} else {
-			include_local('inc-login.php3'); 
-			login_pour_tous('$url', false, true, '$url');
-		}";
-
-	return "<" . "?php" . $lacible . "?" . ">";
+		      (($accepter_forum != 'pri') ? '' : (_T('forum_info_modere'). '<p>')));
 }
 
 //
