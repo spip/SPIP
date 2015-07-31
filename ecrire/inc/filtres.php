@@ -191,8 +191,8 @@ function taille_image($img) {
 	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
 	$mem = $logo;
 	if (strrpos($mem,"/") > 0) $mem = substr($mem, strrpos($mem,"/")+1, strlen($mem));
-	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
-	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
+	$mem = preg_replace("/\-flip\_v|\-flip\_h/", "", $mem);
+	$mem = preg_replace("/\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?/", "", $mem);
 
 	$srcsize = false;
 	if (isset($largeur_img[$mem]))
