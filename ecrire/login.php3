@@ -34,7 +34,7 @@ if ($essai_cookie == "oui") {
 	}
 }
 else {
-	install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
+	install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;", "document.forms[0].elements[1].focus();");
 	echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 	echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 	echo "fournis lors de votre inscription.";
