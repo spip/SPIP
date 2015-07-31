@@ -1351,7 +1351,7 @@ function sql_calendrier_interval($limites) {
 function  sql_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
 	$result=spip_query("
-SELECT	id_forum, titre, date_heure, id_article
+SELECT	DISTINCT titre, date_heure, id_article
 FROM	spip_forum
 WHERE	date_heure >= $avant
  AND	date_heure < $apres
@@ -1362,11 +1362,11 @@ ORDER BY date_heure
 		if (_DIR_RESTREINT)
 		  {
 		    $script = 'article';
-		    $id = $id_article;
+		    $id = $row['id_article'];
 		  }
 		else {
 		    $script = 'articles_forum';
-		    $id = $id_article;
+		    $id = $row['id_forum'];
 		}
 		$evenements[$amj][]=
 		array(
