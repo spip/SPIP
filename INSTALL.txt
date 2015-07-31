@@ -1,0 +1,15 @@
+
+###### Installation de SPIP #####
+
+Rendez-vous avec votre navigateur sur la page ecrire/
+pour commencer l'installation de votre site SPIP.
+
+Votre serveur Web doit offrir php (version > 4.0.8) et MySQL.
+
+Pour permettre a SPIP de gerer de belles adresses (URL),
+vous devrez probablement renommer le fichier htaccess.txt
+en .htaccess a la racine du site (apres avoir, si necessaire,
+edite la ligne RewriteBase ; voir les commentaires).
+
+################################# http://www.spip.net/
+

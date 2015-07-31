@@ -1,11 +1,6 @@
-<a id="formulaire"></a>
+<a id="formulaire" name="formulaire"></a>
 <form action="[(#ENV{url})][(#ENV**{previsu}|?{'#formulaire',''})]" method="post">[
-<input type='hidden' name='page' value='(#ENV{page})' />][
-<input type='hidden' name='id_article' value='(#ENV{id_article})' />][
-<input type='hidden' name='id_breve' value='(#ENV{id_breve})' />][
-<input type='hidden' name='id_forum' value='(#ENV{id_forum})' />][
-<input type='hidden' name='id_rubrique' value='(#ENV{id_rubrique})' />][
-<input type='hidden' name='id_syndic' value='(#ENV{id_syndic})' />][
+(#ENV{url}|form_hidden)][
 <input type='hidden' name='alea' value='(#ENV{alea})' />][
 <input type='hidden' name='hash' value='(#ENV{hash})' />][
 <input type='hidden' name='afficher_texte' value='(#ENV{afficher_texte})' />][

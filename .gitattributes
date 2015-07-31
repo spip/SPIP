@@ -1,5 +1,6 @@
 * text=auto !eol
 IMG/logo_spip.jpg -text
+/INSTALL.txt -text
 dist/choix_mots.html -text
 dist/style.html -text
 ecrire/charsets/cp1251.php -text

@@ -84,7 +84,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		FROM spip_articles WHERE statut='publie'
 		AND id_article = $id_article")
 		AND spip_fetch_array($s)) {
-			include_local ("inc-stats");
+			include_ecrire ("public-stats");
 			$r = afficher_raccourci_stats($id_article);
 			$visites = $r['visites'];
 			$popularite = $r['popularite'];
