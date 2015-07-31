@@ -247,6 +247,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$hauteur = $document['hauteur'];
 	$taille = $document['taille'];
 	$mode = $document['mode'];
+	$distant = $document['distant'];
 
 	// le doc est-il appele dans le texte ?
 	$doublon = est_inclus($id_document);
@@ -286,6 +287,12 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		// Affichage de la vignette
 		//
 		$ret .= "\n<div align='center'>";
+
+		// Signaler les documents distants par une icone de trombone
+		$ret .= ($document['distant'] == 'oui')
+			? "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n"
+			:'';
+
 		$ret .= document_et_vignette($document, $url, true); 
 		$ret .= '</div>';
 		$ret .= "\n<div class='verdana1' style='text-align: center; color: black;'>\n";
