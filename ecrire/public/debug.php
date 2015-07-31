@@ -315,10 +315,11 @@ function ancre_texte($texte, $fautifs=array())
 	if (substr($s,0,6) == '<code>') { $s=substr($s,6); $res = '<code>';}
 	$tableau = explode("<br />", $s);
 
+	$ancre = md5($texte);
 	$n = strlen(count($tableau));
-	$format = "<span id='L%d' style='text-align: right;color: black;'>%0"
+	$format = "<a href='#T$ancre'><span id='L%d' style='text-align: right;color: black;'>%0"
 	. strval($n)
-	. "d&nbsp;&nbsp;</span>\n";
+	. "d&nbsp;&nbsp;</span></a>\n";
 
 	$format10=str_replace('black','pink',$format);
 	$formaterr="<span style='background-color: pink'>%s</span>";
@@ -330,7 +331,7 @@ function ancre_texte($texte, $fautifs=array())
 		.  sprintf(in_array($i, $fautifs) ? $formaterr : '%s', $ligne);
 		$i++;
 	}
-	return $res;
+	return "<div id='T$ancre'>$res</div>";
 }
 
 // l'environnement graphique du debuggueur 

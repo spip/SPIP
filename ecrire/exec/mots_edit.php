@@ -66,10 +66,10 @@ global
 
 	 if ($id_mot) {
 		debut_boite_info();
-		echo "<CENTER>";
-		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
-		echo "</CENTER>";
+		echo "<center>";
+		echo "<font FACE='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_gauche_mots_edit')."</B></font>";
+		echo "<br /><font FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><B>$id_mot</B></font>";
+		echo "</center>";
 
 		voir_en_ligne ('mot', $id_mot);
 
@@ -140,9 +140,9 @@ global
 
 
 	if (strlen($texte)>0){
-		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo "<font FACE='Verdana,Arial,Sans,sans-serif'>";
 		echo "<P>".propre($texte);
-		echo "</FONT>";
+		echo "</font>";
 	}
 
 	if ($les_notes) {
@@ -161,14 +161,14 @@ global
 		else
 			$aff_articles = "'prop','publie'";
 
-		echo afficher_rubriques(_T('info_rubriques_liees_mot'), array("FROM" => 'spip_rubriques AS rubrique, spip_mots_rubriques AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_rubrique=rubrique.id_rubrique", 'ORDER BY' => "rubrique.titre"));
+		echo afficher_rubriques('<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique, spip_mots_rubriques AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_rubrique=rubrique.id_rubrique", 'ORDER BY' => "rubrique.titre"));
 
 		echo afficher_articles(_T('info_articles_lies_mot'),	array('FROM' => "spip_articles AS articles, spip_mots_articles AS lien", 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
 
-		echo afficher_breves(_T('info_breves_liees_mot'), array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
+		echo afficher_breves('<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
 
 		include_spip('inc/sites_voir');
-		echo afficher_sites(_T('info_sites_lies_mot'), array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
+		echo afficher_sites('<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
 	}
 
 	fin_cadre_relief();

@@ -94,36 +94,36 @@ function exec_recherche_dist()
 		echo $nba1;
 	}
 	
-	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
+	$nbb = afficher_breves ('<b>' . _T('info_breves_touvees') . '</b>', $query_breves, true);
 	echo $nbb;
 	if ($activer_moteur) {
 		if ($nbb) {
 			$doublons = join($nbb, ",");
 			$query_breves_int["WHERE"].= " AND NOT (" . $query_breves['WHERE'] . ")";
 		}
-		$nbb1 = afficher_breves (_T('info_breves_touvees_dans_texte'), $query_breves_int, true);
+		$nbb1 = afficher_breves ('<b>' . _T('info_breves_touvees_dans_texte') . '</b>', $query_breves_int, true);
 		echo $nbb1;
 	}
 
-	$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
+	$nbr = afficher_rubriques ('<b>' . _T('info_rubriques_trouvees') . '</b>', $query_rubriques);
 	echo $nbr;
 	if ($activer_moteur) {
 		if ($nbr) {
 			$query_rubriques_int["WHERE"].= " AND NOT (" . $query_rubriques['WHERE'] . ")";
 		}
-		$nbr1 = afficher_rubriques (_T('info_rubriques_trouvees_dans_texte'), $query_rubriques_int);
+		$nbr1 = afficher_rubriques ('<b>' . _T('info_rubriques_trouvees_dans_texte') . '</b>', $query_rubriques_int);
 		echo $nbr1;
 	}
 	
 	$nbt = afficher_auteurs (_T('info_auteurs_trouves'), $query_auteurs_int);
 	
-	$nbs = afficher_sites (_T('info_sites_trouves'), $query_sites);
+	$nbs = afficher_sites ('<b>' . _T('info_sites_trouves') . '</b>', $query_sites);
 	echo $nbs;
 	if ($activer_moteur) {
 		if ($nbs) {
 			$query_sites_int["WHERE"].=  " AND NOT (" . $query_sites['WHERE'] . ")";
 		}
-		$nbs1 = afficher_sites (_T('info_sites_trouves_dans_texte'), $query_sites_int);
+		$nbs1 = afficher_sites ('<b>' . _T('info_sites_trouves_dans_texte') . '</b>', $query_sites_int);
 		echo $nbs1;
 	}
 	

@@ -447,7 +447,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	$res = "";
 	if ($titre) $res .= "\n<div style='height: 12px;'></div>";
 	$res .= "\n<div class='liste'>";
-	$res .= bandeau_titre_boite2('<b>' . $titre . '</b>', $icone, $fg, $bg, false);
+	$res .= bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
 	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
