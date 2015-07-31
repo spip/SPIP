@@ -74,25 +74,21 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 //
 function include_spip($f, $include = true) {
 
-	// deja charge (nom) ?
-	if (isset($GLOBALS['meta']['noyau'][_NOYAU][$f])) {
-		$s = $GLOBALS['meta']['noyau'][_NOYAU][$f];
-		if ($include && $s) {
-			include_once $s;
-		}
-		return $s;
+	// Dans le noyau ?
+	if (isset($GLOBALS['noyau'][$f])) {
+		$s = $GLOBALS['noyau'][$f];
 	}
-	if (!$s = find_in_path($f . '.php')
-	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
-		return $GLOBALS['meta']['noyau'][_NOYAU][$f] = false;
+	// Sinon le chercher et mettre a jour le noyau
+	else {
+		if (!$s = find_in_path($f . '.php')
+		AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
+			return $GLOBALS['noyau'][$f] = false;
+		} else
+			$GLOBALS['noyau'][$f] = $s;
 	}
 
-	$GLOBALS['meta']['noyau'][_NOYAU][$f] = $s;
-	if (!defined('ecrire_noyau'))
-		define('ecrire_noyau', 1);
-
-	// alors on le charge (sauf si on ne voulait que son chemin)
-	if ($include) {
+	// On charge le fichier (sauf si on ne voulait que son chemin)
+	if ($include && $s) {
 		include_once $s;
 	}
 
@@ -569,8 +565,7 @@ function texte_script($texte) {
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
-
-function find_in_path ($filename) {
+function creer_chemin() {
 	static $path_a = array();
 	static $c = '';
 
@@ -607,18 +602,21 @@ function find_in_path ($filename) {
 				$dir .= "/";
 			$path_a[] = $dir;
 		}
-		define('_NOYAU', md5(join(':', $path_a)));
 	}
 
+	return $path_a;
+}
+
+function find_in_path ($filename) {
 	// Parcourir le chemin
-	foreach ($path_a as $dir) {
+	foreach (creer_chemin() as $dir) {
 		if (@is_readable($f = "$dir$filename")) {
 # spip_log("find_in_path trouve $f");
 			return $f;
 		}
 	}
 
-# spip_log("find_in_path n'a pas vu '$filename' dans " . join(':',$path_a));
+# spip_log("find_in_path n'a pas vu '$filename' dans " . join(':',creer_chemin()));
 	return false;
 }
 
@@ -977,21 +975,24 @@ function spip_initialisation() {
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
 
-	// Lire les meta cachees
-	if (lire_fichier(_FILE_META, $meta))
+	// Lire les meta cachees et initier le noyau (espace public uniquement)
+	$GLOBALS['noyau'] = array();
+	if (lire_fichier(_FILE_META, $meta)) {
 		$GLOBALS['meta'] = @unserialize($meta);
+		if (_DIR_RESTREINT
+		AND isset($GLOBALS['meta']['noyau'])
+		AND is_array($GLOBALS['meta']['noyau']))
+			$GLOBALS['noyau'] = $GLOBALS['meta']['noyau'];
+	}
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
 		include_spip('inc/meta');
 		ecrire_metas();
 	}
 
-	// supprimer le noyau si on recalcul
-	if (isset($_REQUEST['var_mode'])) {
-		$GLOBALS['meta']['noyau'] = array();
-		if (!defined('ecrire_noyau'))
-			define('ecrire_noyau', 1);
-	}
+	// supprimer le noyau si on recalcule
+	if (isset($_REQUEST['var_mode']))
+		$GLOBALS['noyau'] = array();
 
 	// Langue principale du site
 	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
