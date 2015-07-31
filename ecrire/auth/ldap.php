@@ -104,7 +104,10 @@ function auth_ldap_retrouver($dn, $desc=array())
 {
 	// Lire les infos sur l'utilisateur a partir de son DN depuis LDAP
 
-	$ldap = spip_connect_ldap();
+	if (!$ldap = spip_connect_ldap()) {
+		spip_log("ldap injoignable");
+		return array();
+	}
 	$ldap_link = $ldap['link'];
 	if (!$desc) {
 		$desc = $ldap['attributes'] ? $ldap['attributes'] : $GLOBALS['ldap_attributes'] ;
