@@ -1,14 +1,15 @@
 <?php
 
 include ("inc_version.php3");
-include_ecrire("inc_lang.php3");
-utiliser_langue_visiteur();
 
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
 	include_ecrire("inc_auth.php3");
 	$aide_statut = ($connect_statut == '1comite') ? 'redac' : 'admin';
 }
 else $aide_statut = 'admin';
+
+include_ecrire("inc_lang.php3");
+utiliser_langue_visiteur();
 
 ?>
 <HTML>

@@ -1,24 +1,18 @@
 <?php
 
 include ("inc_version.php3");
-include_ecrire ("inc_lang.php3");
-utiliser_langue_visiteur();
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (file_exists("inc_connect.php3")) {
 	include_ecrire ("inc_auth.php3");
 }
 
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
+
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
-// Selection du fichier d'aide correspondant a la langue
-$lang_aide = $GLOBALS['spip_lang'];
-if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-	$fichier_aide = "AIDE/fr/aide";
-	$lang_aide = 'fr';
-	changer_langue('fr');
-}
 
 ?>
 <HTML>
@@ -90,10 +84,13 @@ if (!$aide) {
 }
 
 
-// Analyser le fichier d'aide
-$html = join('', file($fichier_aide));
-$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
-$html = substr($html, 0, strpos($html, "</$aide>"));
+// Selection du fichier d'aide correspondant a la langue
+$lang_aide = $GLOBALS['spip_lang'];
+if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
+	$html = join('', file($fichier_aide));
+	$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
+	$html = substr($html, 0, strpos($html, "</$aide>"));
+}
 
 if (!$html)
 	$html = _T('aide_non_disponible');

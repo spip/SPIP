@@ -268,15 +268,15 @@ function gerer_menu_langues() {
 //
 // Selection de langue haut niveau
 //
-function utiliser_langue_visiteur() {
-	if (!regler_langue_navigateur())
-		changer_langue($GLOBALS['langue_site']);
-	if ($GLOBALS['auteur_session']['lang'])
-		changer_langue($GLOBALS['auteur_session']['lang']);
-}
-
 function utiliser_langue_site() {
 	changer_langue($GLOBALS['langue_site']);
+}
+
+function utiliser_langue_visiteur() {
+	if (!regler_langue_navigateur())
+		utiliser_langue_site();
+	if ($GLOBALS['auteur_session']['lang'])
+		changer_langue($GLOBALS['auteur_session']['lang']);
 }
 
 //
