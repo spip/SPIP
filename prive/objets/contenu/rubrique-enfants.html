@@ -24,7 +24,12 @@
 
 		Les articles en cours de redaction
 	]
-	[(#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,par=date,ajax,env})]
+	[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|?{
+		#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,par=date,ajax,env}
+		,
+		#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,id_auteur=#SESSION{id_auteur},par=date,ajax,env}
+		})
+	]
 
 	[(#REM)
 
