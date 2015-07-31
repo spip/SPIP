@@ -45,50 +45,36 @@ include_ecrire('inc_serialbase.php3');
 //
 // Calculer un <INCLURE()>
 //
-function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
-	$l = array();
-	if ($params) {
-		foreach($params as $var => $val) {
-			if ($val) {
-				$val = ereg_replace('^["\'](.*)["\']$', "\\1",trim($val));
-				$val = calculer_param_dynamique(
-					$val, 
-					$boucles,
-					$id_boucle);
-				$l[] = "\'$var\' => " .
-				  (!ereg('" \. *(.*)\. "', $val, $m) ?
-				   ('"' . addslashes($val) . '"') :
-				   ("\"' . "  .  $m[1] . " .  '\""));
-			}
-			else {
-			// Cas de la langue : passer $spip_lang
-			// et non table.lang (car depend de {lang_select})
-				if ($var =='lang')
-					$l[] = "\'lang\' => \''.\$GLOBALS[\"spip_lang\"].'\'";
-				else
-					$l[] = "\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\'";
-				}
-			}
-	}
+function calculer_inclure($struct, $descr, &$boucles, $id_boucle, $niv) {
+	$fichier = $struct->texte;
 
-	if ($path = find_in_path($fichier))
-		$path = "\\'$path\\'";
-	else {
+	if (!($path = find_in_path($fichier)))
+	  {
 		spip_log("ERREUR: <INCLURE($fichier)> impossible");
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			"&lt;INCLURE($fichier)&gt; - "
-			._T('fichier_introuvable', array('fichier' => $fichier))
-		);
-		return "'<!-- INCLURE(".texte_script($fichier).") -->'";
+				 "&lt;INCLURE($fichier)&gt; - "
+				 ._T('fichier_introuvable', array('fichier' => $fichier)));
+		return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
 	}
+
+	$l = array();
+	foreach($struct->args as $val) {
+		$var = array_shift($val);
+		$l[] = "\'$var\' => \'' . addslashes(" .
+		    ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle, $niv) :
+		    (($var =='lang') ?
+		     '$GLOBALS["spip_lang"]' :
+		     index_pile($id_boucle, $var, $boucles)))
+		    . ") . '\\'";
+		}
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
-		join(", ",$l) .
+		join(",\n\t",$l) .
 		");" .
-		"\n\tinclude($path);" .
+		"\n\tinclude(\\'$path\\');" .
 		"\n?'." . "'>'";
-}
+ }
 
 //
 // calculer_boucle() produit le corps PHP d'une boucle Spip 
@@ -421,11 +407,8 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 
 		// inclure
 		case 'include':
-			$code= calculer_inclure($p->fichier,
-						$p->params,
-						$id_boucle,
-						$boucles);
-			$commentaire = '<INCLURE('.$p->fichier.')>';
+			$code = calculer_inclure($p, $descr, $boucles, $id_boucle, $niv);
+			$commentaire = '<INCLURE('.$p->texte.')>';
 			$avant='';
 			$apres='';
 			$altern = "''";

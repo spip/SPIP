@@ -623,7 +623,7 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 		$champ->etoile = $regs[4];
 		$champ->id_boucle = $idb;
 		$champ->boucles = &$boucles;
-		phraser_filtres($regs[5], "", "", array(), $champ);
+		phraser_args($regs[5], "", "", array(), $champ);
 		$champ = calculer_champ($champ);
 		return '" . addslashes(' . $champ . ') . "';
 
@@ -638,6 +638,18 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 	}
 }
 
+/*
+// une version acceptant les champs etendus  serait en gros:
+function calculer_param_dynamique($val, &$boucles, $idb) {
+  
+return '" . addslashes(' .
+	calculer_liste(phraser_champs_etendus($val, array()),
+			 array(), $boucles, $idb)
+ . ') . "';
+}
+/* */
+
+//
 function calculer_params_dynamiques($liste, &$boucles, $idb) {
 	ereg("^ *\(?(.*[^)])\)? *$",$liste, $reg);
 	$res = array();

@@ -25,8 +25,9 @@ class Texte {
 
 class Inclure {
 	var $type = 'include';
-	var $fichier;
-	var $params;
+	var $texte;
+	var $args = array();  //  valeurs des params
+	var $cond_avant, $cond_apres; // inutilises mais generiques
 }
 
 //
