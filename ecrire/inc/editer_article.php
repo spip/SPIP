@@ -151,7 +151,11 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		"\n<td>" .
 		($lier_trad ?
 		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif", '',false) :
-		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_trad"), "article-24.gif", "rien.gif",'',false)) .
+		 icone(_T('icone_retour'),
+			$new=='oui'
+				? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+				: generer_url_ecrire("articles","id_article=$id_trad"),
+			"article-24.gif", "rien.gif",'',false)) .
 		"</td>\n<td>" .
 		http_img_pack('rien.gif', " ", "width='10'") .
 		"</td>\n" .
