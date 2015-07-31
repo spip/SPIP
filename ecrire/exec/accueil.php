@@ -83,7 +83,7 @@ function encours_accueil()
 	"<div style='position:relative;display:inline;'>" 
 	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation')
 		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? _T('texte_en_cours_validation_forum')
+			? ' '._T('texte_en_cours_validation_forum')
 			: '' )
 		)
 	. $res
