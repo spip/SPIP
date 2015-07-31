@@ -203,7 +203,7 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 
 	if (isset($info['licence']))
 	  $s .= "<dt class='licence'>" . _T('intitule_licence') ."</dt><dd class='licence'>". PtoBR(plugin_propre($info['licence'], $dir)) . "</dd>\n";
-	$s = "<dl>$s</dl>";
+	$s = "<dl class='description'>$s</dl>";
 
 	//
 	// Ajouter les infos techniques
