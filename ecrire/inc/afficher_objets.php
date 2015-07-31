@@ -232,24 +232,18 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	} else $afficher_langue = $langue_defaut = '';
 
-	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-
 	$arg = array( $afficher_langue, false, $langue_defaut);
 	if (!function_exists($skel = "afficher_{$type}s_boucle")){
 		$skel = "afficher_objet_boucle";
 		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
-	$tranches = affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $arg);
+	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$largeurs = array('7','', '', '', '100', '38');
 	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
 
-	if ($deb_aff > 0)
-		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
-	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
-
 	$tableau = array(); // ne sert pas ici
-	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, icone_table($type));
+	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tmp_var, $titre, icone_table($type));
 }
 
 function charger_fonction_logo_if()
@@ -381,8 +375,6 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 
 	$hash = substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
 	$tmp_var = 't' . substr($hash, 0, 7);
-	$nb_aff = floor(1.5 * _TRANCHES);
-	$deb_aff = intval(_request($tmp_var));
 
 	//
 	// Stocke la fonction ajax dans le fichier temp pour exec=memoriser
@@ -393,7 +385,7 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	$ajax_fonctions = @unserialize($ajax_fonctions);
 
 	// on ajoute notre fonction
-	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
+
 	$v = array(time(), $titre, $requete, $tmp_var, $formater);
 	$ajax_fonctions[$hash] = $v;
 
@@ -406,6 +398,7 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	ecrire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt',
 		serialize($ajax_fonctions));
 
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $hash, $cpt);
 }
 
@@ -426,34 +419,23 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 		$alt = _T('afficher_trad');
 	}
 
-	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
-	$deb_aff = intval(_request($tmp_var));
-
-	if ($deb_aff >= 0)
-		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
-	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
-
-	$style = "style='visibility: hidden; float: $spip_lang_right'";
-
-	$texte = http_img_pack("searching.gif", "", $style . " id='img_$tmp_var'");
+	$texte =  '<b>' . $titre_table  . '</b>';
 
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
 		$texte .=
 		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		. "<img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
+		  . "<img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
+
 	}
-	$texte .=  '<b>' . $titre_table  . '</b>';
+
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$largeurs = array(11, '', 80, 100, 50);
 	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 	$tableau = array();
-
-	$tranches = ($cpt <= $nb_aff) ? ''
-	  : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff);
-
-	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
+	$url = generer_url_ecrire('memoriser', "hash=$hash&trad=$trad");
+	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }

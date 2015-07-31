@@ -17,7 +17,7 @@ include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@inc_grouper_mots_dist
-function inc_grouper_mots_dist($id_groupe, $cpt) {
+function inc_grouper_mots_dist($id_groupe, $total) {
 	global $connect_statut, $spip_lang_right, $spip_lang;
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
@@ -27,19 +27,12 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	// - a donner un ID a la balise ou greffer le retour d'Ajax
 	// tant pour la prochaine tranche que pour le retrait de mot
 	$tmp_var = "editer_mots-$id_groupe";
-	$nb_aff = floor(1.5 * _TRANCHES);
-	if ($cpt > $nb_aff) {
-		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe&total=$cpt"), $nb_aff);
-	} else $tranches = '';
+	$url = generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe");
 
-
-	$deb_aff = _request($tmp_var);
-	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
 	$select = 'id_mot, id_groupe, titre, descriptif, '
 	. sql_multi ("titre", $spip_lang);
 
-	$requete = array('SELECT' => $select, 'FROM' => 'spip_mots', 'WHERE' => "id_groupe=$id_groupe", 'ORDER BY' => 'multi', 'LIMIT' => (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff"));
+	$requete = array('SELECT' => $select, 'FROM' => 'spip_mots', 'WHERE' => "id_groupe=$id_groupe", 'ORDER BY' => 'multi');
 
 	$tableau = array();
 	$occurrences = calculer_liens_mots($id_groupe);
@@ -50,9 +43,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 			$largeurs = array('', 100);
 			$styles = array('arial11', 'arial1');
 	}
-
-	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . 	$presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
+	return $presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tmp_var, '', '', $url);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
