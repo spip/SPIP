@@ -22,9 +22,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // Il *faut* demander petition, meme si on ne s'en sert pas dans l'affichage,
 // car on doit obtenir la jointure avec sql_petitions pour verifier si
 // une petition est attachee a l'article
-global $balise_FORMULAIRE_SIGNATURE_collecte;
-$balise_FORMULAIRE_SIGNATURE_collecte = array('id_article', 'petition');
 
+function balise_FORMULAIRE_SIGNATURE ($p) {
+	return calculer_balise_dynamique($p,'FORMULAIRE_SIGNATURE', array('id_article', 'petition'));
+}
 
 // Verification des arguments (contexte + filtres)
 function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
@@ -298,7 +299,4 @@ function test_pass() {
 	}
 	return $passw;
 }
-
-
-function balise_FORMULAIRE_SIGNATURE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_SIGNATURE');}
 ?>

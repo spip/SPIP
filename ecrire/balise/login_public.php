@@ -12,8 +12,20 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-global $balise_LOGIN_PUBLIC_collecte;
-$balise_LOGIN_PUBLIC_collecte = array('url');
+
+// Cette balise necessite les entetes "flag_dynamique"
+// (attention, ne fonctionnera pas en INCLURE)
+
+function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
+  spip_log("bLP $nom");
+	return calculer_balise_dynamique($p, $nom, array('url'));
+	$p->code = '\'<'
+		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+		.'><'
+		.'?php header("Pragma: no-cache"); ?'
+		.'>\'.' . $p->code;
+	return $p;
+}
 
 # retourner:
 # 1. l'url collectee ci-dessus (args0) ou donnee en filtre (filtre0)
@@ -23,17 +35,6 @@ $balise_LOGIN_PUBLIC_collecte = array('url');
 
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
 	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
-}
-
-// Cette balise necessite les entetes "flag_dynamique"
-// (attention, ne fonctionnera pas en INCLURE)
-function balise_LOGIN_PUBLIC_traitement($p) {
-	$p->code = '\'<'
-		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
-		.'><'
-		.'?php header("Pragma: no-cache"); ?'
-		.'>\'.' . $p->code;
-	return $p;
 }
 
 function balise_LOGIN_PUBLIC_dyn($url, $login) {
@@ -178,6 +179,4 @@ function filtre_rester_connecte($prefs) {
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
 }
 
-
-function balise_LOGIN_PUBLIC ($p) {return declencher_balise_dynamique($p,'LOGIN_PUBLIC');}
 ?>

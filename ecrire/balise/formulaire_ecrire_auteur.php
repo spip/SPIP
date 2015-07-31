@@ -15,8 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // On prend l'email dans le contexte de maniere a ne pas avoir a le
 // verifier dans la base ni a le devoiler au visiteur
-global $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte;
-$balise_FORMULAIRE_ECRIRE_AUTEUR_collecte = array('id_auteur', 'id_article', 'email');
+
+
+function balise_FORMULAIRE_ECRIRE_AUTEUR ($p) {
+	return calculer_balise_dynamique($p,'FORMULAIRE_ECRIRE_AUTEUR', array('id_auteur', 'id_article', 'email'));
+}
 
 function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 	include_spip('inc/filtres');
@@ -93,6 +96,4 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 			)
 		);
 }
-
-function balise_FORMULAIRE_ECRIRE_AUTEUR ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_ECRIRE_AUTEUR');}
 ?>

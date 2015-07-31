@@ -212,6 +212,7 @@ function declencher_balise_dynamique($p, $nom)
 // mais on traite le vrai parametre si present.
 
 function calculer_balise_dynamique($p, $nom, $l) {
+
 	balise_distante_interdite($p);
 	$param = "";
 	if ($a = $p->param) {
@@ -222,7 +223,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 		  $param = compose_filtres_args($p, $c, ',');
 		}
 	}
-	$collecte = join(',',collecter_balise_dynamique($l, $p));
+	$collecte = join(',',collecter_balise_dynamique($l, $p, $nom));
 	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
 	  . $collecte
 	  . ($collecte ? $param : substr($param,1)) # virer la virgule
@@ -238,9 +239,11 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	return $p;
 }
 
-// construire un tableau des valeurs interessant un formulaire
+// Construction du tableau des arguments d'une balise dynamique.
+// Ces arguments peuvent etre eux-meme des balises (cf FORMULAIRE_SIGNATURE)
+// mais gare au bouclage (on peut s'aider de $nom pour le reperer au besoin)
 
-function collecter_balise_dynamique($l, $p) {
+function collecter_balise_dynamique($l, &$p, $nom) {
 	$args = array();
 	foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
 	return $args;

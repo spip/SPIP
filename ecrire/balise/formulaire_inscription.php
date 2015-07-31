@@ -13,10 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
-spip_log("je charge fip");
+
 // Balise independante du contexte
-global $balise_FORMULAIRE_INSCRIPTION_collecte ;
-$balise_FORMULAIRE_INSCRIPTION_collecte = array();
+
+
+function balise_FORMULAIRE_INSCRIPTION ($p) {
+
+	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
+}
 
 // args[0] indique le focus eventuel
 // args[1] indique la rubrique eventuelle de proposition
@@ -204,6 +208,4 @@ function creer_pass_pour_auteur($id_auteur) {
 	return $pass;
 }
 
-
-function balise_FORMULAIRE_INSCRIPTION ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_INSCRIPTION');}
 ?>

@@ -34,11 +34,10 @@ charger_generer_url();
 // dans le fichier d'appel, et si la table de reference est OK, proposer
 // la liste des mots-cles
 
-global $balise_FORMULAIRE_FORUM_collecte;
-$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte');
+function balise_FORMULAIRE_FORUM ($p) {
 
-// Ajouter l'invalideur forums sur les pages contenant ce formulaire
-function balise_FORMULAIRE_FORUM_traitement($p) {
+	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte'));
+	// Ajouter l'invalideur forums sur les pages contenant ce formulaire
 	$p->code = code_invalideur_forums($p, $p->code);
 	return $p;
 }
@@ -324,6 +323,4 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	return array ($titre, $table, $accepter_forum);
 }
 
-
-function balise_FORMULAIRE_FORUM ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_FORUM');}
 ?>

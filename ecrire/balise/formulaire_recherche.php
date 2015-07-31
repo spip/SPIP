@@ -13,8 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Pas besoin de contexte de compilation
-global $balise_FORMULAIRE_RECHERCHE_collecte;
-$balise_FORMULAIRE_RECHERCHE_collecte = array();
+
+
+function balise_FORMULAIRE_RECHERCHE ($p) 
+{
+	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
+}
 
 function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 	// Si le moteur n'est pas active, pas de balise
@@ -40,6 +44,4 @@ function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 		));
 }
 
-
-function balise_FORMULAIRE_RECHERCHE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_RECHERCHE');}
 ?>
