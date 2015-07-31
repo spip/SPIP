@@ -40,10 +40,10 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='', $t
 
 	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
 
-	$res .= '<br />';
+	$res .= "<br />\n";
 
  	while($row=sql_fetch($request)){
-	  $res .= '<br />' . signatures_edit($script, $id, $debut, $row, $type);
+	  $res .= "<br />\n" . signatures_edit($script, $id, $debut, $row, $type);
 	}
 	return $res;
 }
@@ -70,11 +70,11 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
 		}
 		
-	$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+	$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'>\n<tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
  		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
 		.  "</b></td></tr>"
-		.  "<tr><td style='background-color: #ffffff' class='serif'>";
+		.  "\n<tr><td style='background-color: #ffffff' class='serif'>";
 				
 	if  ($statut=="poubelle"){
 			$res .= icone_inline (_T('icone_valider_signature'),
@@ -99,19 +99,19 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 				false);
 		}
 	}
-	$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />";
+	$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />\n";
 	if ($statut=="poubelle"){
-			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />";
+			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />\n";
 	}
 	if (strlen($url_site)>6) {
 			if (!$nom_site) $nom_site = _T('info_site');
-			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />";
+			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />\n";
 		}
 	if (strlen($ad_email)>0){
-			$res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:$ad_email'>$ad_email</a><br />";
+	  $res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a><br />\n";
 	}
 
-	$res .= '<br />' . message_de_signature($row);
+	$res .= message_de_signature($row);
 		
 	if (!$id) {
 		if ($r = sql_fetsel("titre, id_rubrique, statut", "spip_articles", "id_article=$id_article")) {
@@ -120,18 +120,18 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			$titre_a = $r['titre'];
 			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
 		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
-			$res .= "<a style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
-			. typo($titre_r)
-			. " </a><a title='$id_article' href='"
+			$res .= "<br class='nettoyeur' /><a title='$id_article' href='"
 			  .  ($publie ? 
 			      generer_url_action('redirect', "id_article=$id_article") :
 			      generer_url_ecrire('articles', "id_article=$id_article"))
 			  . "'>"
 			  . typo($titre_a)
-			  . "</a>";
+			  . "</a><a style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
+			. typo($titre_r)
+			. " </a>";
 		}
 	}
-	$res .= "</td></tr></table>";
+	$res .= "</td></tr></table>\n";
 		
 	if ($statut=="poubelle"){
 			$res .= "</td></tr></table>";
