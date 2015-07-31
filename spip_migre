@@ -92,7 +92,7 @@ done
 # et eliminer les sequelles de - en _
 
 grep -v "= include_rustine" inc_utils.php |
-sed 's/$ext=.*"\?/$args = "?exec=$script" . ($args ? "\&$args/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/;s/(.inc_. /("exec_" /' > x
+sed 's/$ext=.*"."/$args = "?exec=$script" . ($args ? "\&$args"/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/;s/(.inc_. /("exec_" /' > x
 mv x inc_utils.php
 
 # consequence 1:  inc devient index, avec une valeur par defaut en dur
