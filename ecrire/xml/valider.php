@@ -310,6 +310,8 @@ function phraserTout($phraseur, $data)
 // http://doc.spip.org/@emboite_texte
 function emboite_texte($res, $fonc='',$self='')
 {
+	include_spip('public/debusquer');
+
 	list($texte, $errs) = $res;
 	if (!$texte)
 		return array(ancre_texte('', array('','')), false);

@@ -181,7 +181,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		// la memoriser dans le tableau des erreurs
 		// On ne revient pas ici si le nb d'erreurs > 4
 		if ($res === false AND $affiche_boutons_admin) {
-			include_spip('public/debug');
 			erreur_squelette(_T('zbug_erreur_execution_page'));
 		}
 	}
@@ -192,7 +191,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$var_mode_affiche = _request('var_mode_affiche');
 		$var_mode_objet = _request('var_mode_objet');
 		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-		include_spip('public/debug');
 		if ($GLOBALS['debug_objets']['sourcefile']) {
 			erreur_squelette('', '', $var_mode_objet);
 		}
@@ -207,12 +205,12 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	//
 	page_base_href($page['texte']);
 
-	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
+	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
 
 	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
-		include_spip('public/debug');
+		include_spip('public/tracer');
 		echo chrono_requete($tableau_des_temps);
 	}
 

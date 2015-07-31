@@ -1644,6 +1644,10 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
+function erreur_squelette($message='', $lieu='', $quoi='') {
+	$debusquer = charger_fonction('debusquer', 'public');
+	return $debusquer($message, $lieu, $quoi);
+}
 
 /**
  * La fonction de base de SPIP : un squelette + un contexte => une page.

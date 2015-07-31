@@ -32,7 +32,6 @@ function spip_connect($serveur='', $version='') {
 	if (isset($connexions[$index][$version])) return $connexions[$index];
 
 	include_spip('base/abstract_sql');
-	if (isset($_GET['var_profile'])) include_spip('public/debug');
 	$install = (_request('exec') == 'install');
 
 	// Premiere connexion ? 

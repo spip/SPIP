@@ -33,12 +33,9 @@ function trace_query_end($query, $start, $result, $err, $serveur='')
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	if (!($err = sql_errno())) return $result;
 	$err .= ' '.sql_error();
-	if (autoriser('debug')) {
-		include_spip('public/debug');
-		$tableau_des_erreurs[] = array(
+	$tableau_des_erreurs[] = array(
 		_T('info_erreur_requete'). " "  .  htmlentities($query),
 		"&laquo; " .  htmlentities($err)," &raquo;");
-	}
 	return $result;
 }
 
@@ -139,6 +136,7 @@ function chrono_requete($temps)
 	     ("<tr><td>" .  count($temps) . " </td><td> " . _T('info_total') . '</td><td>' . $total . "</td></td><td></td></tr>"))
 	  . "</table>";
 
+	include_spip('public/debusquer');
 	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
 	. affiche_erreurs_page($temps, $titre);
 }
