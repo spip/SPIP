@@ -826,7 +826,7 @@ function parser($texte) {
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE',
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS',
+		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_MAIL_NOUV', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
@@ -883,7 +883,7 @@ function parser($texte) {
 	}
 
 	// Dates : ajouter le vidage des dates egales a 00-00-0000
-	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES');
+	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_MAIL_NOUV');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'vider_date';
@@ -1347,7 +1347,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$code = "propre('- ')";
 		break;
 
-	case 'DATE_NOUVEAUTES':
+	case 'DATE_MAIL_NOUV':
 		if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('date_envoi'))
 			$code = "date('Y-m-d H:i:s', lire_meta('date_envoi'))";
 		else
