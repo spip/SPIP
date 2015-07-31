@@ -483,9 +483,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 // http://doc.spip.org/@lister_les_documents_orphelins
 function lister_les_documents_orphelins() {
 	$s = sql_select("d.id_document, d.id_vignette",
-	"spip_documents AS d
-	LEFT JOIN spip_documents_liens AS l
-	",
+	"spip_documents AS d LEFT JOIN spip_documents_liens AS l ON d.id_document=l.id_document",
 	"(l.id_objet IS NULL)");
 
 	$orphelins = array();
