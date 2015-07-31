@@ -418,7 +418,7 @@ if ($boite_ouverte) {
 // Pave "documents associes a l'article"
 //
 
-echo pave_documents($id_article);
+boite_documents_article($id_article);
 
 
 

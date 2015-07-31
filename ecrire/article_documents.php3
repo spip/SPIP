@@ -58,8 +58,8 @@ else if ($transformer_image == 'vignette') {
 $query = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
 $result = mysql_query($query);
 if ($art = mysql_fetch_object($result)) {
-	$titre_art = "&laquo; ".typo($art->titre)." &raquo;";
-	$lien_art = " <a href='articles.php3?id_article=$id_article' target='spip_normal'><font color='ffffff'>$titre_art</font></a>";
+	$titre_art = typo($art->titre);
+	$lien_art = "<a href='articles.php3?id_article=$id_article' target='spip_normal'>";
 }
 else {
 	$titre_art = '';
@@ -67,6 +67,12 @@ else {
 }
 
 debut_html("Images et documents li&eacute;s &agrave; l'article $titre_art");
+
+echo "<p align='right'><font face='Georgia, Garamond, Times, sans-serif'>";
+echo "Edition de l'article&nbsp;:<br>\n";
+echo "<font size='5' face='Verdana,Arial,Helvetica,sans-serif'><b>";
+echo "&laquo;&nbsp;<a href='articles.php3?id_article=$id_article' target='spip_normal'><font color='$couleur_foncee'>$titre_art</font></a>&nbsp;&raquo;</b></font>\n";
+echo "</font></p>\n";
 
 
 echo "<table width='100%' border='0' cellpadding='6' cellspacing='0'>\n";
@@ -80,8 +86,7 @@ $documents_lies = fetch_document($query);
 if ($documents_lies) {
 	echo "<tr bgcolor='$couleur_foncee'>\n";
 	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
-	echo "Documents li&eacute;s &agrave l'article".$lien_art;
-	$lien_art='';
+	echo "Documents li&eacute;s &agrave l'article";
 	echo "</td></tr>\n";
 
 	reset($documents_lies);
@@ -113,8 +118,7 @@ $images_liees = fetch_document($query);
 if ($images_liees) {
 	echo "<tr bgcolor='$couleur_foncee'>\n";
 	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
-	echo "Images affichables dans l'article".$lien_art;
-	$lien_art = '';
+	echo "Images affichables dans l'article";
 	echo "</td></tr>\n";
 
 	reset($images_liees);
@@ -131,12 +135,10 @@ if ($images_liees) {
 // Ajouter un document
 //
 
-
-echo "<tr bgcolor='$couleur_foncee'>\n";
-echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
-echo "<i>Ajouter une image ou un document &agrave; l'article".$lien_art;
-$lien_art = '';
-echo "</i></td></tr>\n";
+echo "<tr bgcolor='#EEEECC'>\n";
+echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#000000'>";
+echo "Ajouter une image ou un document &agrave; l'article";
+echo "</td></tr>\n";
 echo "</td></tr></table>\n";
 
 echo debut_boite_info();
