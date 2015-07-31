@@ -17,7 +17,7 @@ include_spip('inc/minipres');
 // Creer IMG/pdf/
 // http://doc.spip.org/@creer_repertoire_documents
 function creer_repertoire_documents($ext) {
-	$rep = sous_repertoire(_DIR_DOC, $ext);
+	$rep = sous_repertoire(_DIR_IMG, $ext);
 
 	if (!$ext OR !$rep) {
 		spip_log("creer_repertoire_documents interdit");

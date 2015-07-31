@@ -223,7 +223,7 @@ function gerer_htaccess() {
 	$mode = $GLOBALS['meta']['creer_htaccess'];
 	$r = spip_query("SELECT extension FROM spip_types_documents");
 	while ($e = spip_fetch_array($r)) {
-		if (is_dir($dir = _DIR_DOC . $e['extension'])) {
+		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
 			if ($mode == 'oui')
 				verifier_htaccess($dir);
 			else @unlink("$dir/" . _ACCESS_FILE_NAME);

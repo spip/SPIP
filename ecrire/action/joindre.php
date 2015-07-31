@@ -240,7 +240,7 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 	    $ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 
-	    if (_tmp_dir == _DIR_DOC)
+	    if (_tmp_dir == _DIR_IMG)
 	      {include_spip('minipres');
 		echo minipres(_T('avis_operation_impossible'));
 		exit;

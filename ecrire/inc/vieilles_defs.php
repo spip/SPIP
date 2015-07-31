@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /* fonctionner en chargeant ce fichier, en attendant d'etre	*/
 /* reecrites conformement a la nouvelle interface.		*/
 
+define('_DIR_DOC', _DIR_IMG);
 
 // http://doc.spip.org/@debut_raccourcis
 function debut_raccourcis() {
