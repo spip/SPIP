@@ -174,9 +174,9 @@ function echappe_html($letexte,$source) {
 		if ($regs[7]) {
 			// Echapper les <cadre>...</cadre>
 			$lecode = trim(entites_html($regs[8]));
-			$total_lignes = count(explode("\n", $lecode)) + 1;
+			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "<form><textarea cols='' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "<form><textarea cols='50' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre'>".$lecode."</textarea></form>";
 
 		}
 
@@ -188,7 +188,8 @@ function echappe_html($letexte,$source) {
 	//
 	// Echapper les <a href>
 	//
-	$regexp_echap = "<a[[:space:]][^>]+>";
+	//$regexp_echap = "<a[[:space:]][^>]+>";
+	$regexp_echap = "<[^>]+>"; // Echappement tout HTML
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
@@ -345,8 +346,9 @@ function typo($letexte) {
 	else
 		$letexte = typo_en($letexte);
 		
-		
+	
 	$letexte = ereg_replace("'", "&rsquo;", $letexte);
+	
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
 
