@@ -132,10 +132,10 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
-			return redirige_action_auteur($action,
+				return redirige_action_auteur($action,
 				$id,
 				$action,
-				"var_ajax=1&script=$script$args_ajax",
+				"script=$script$args_ajax&var_ajaxcharset=utf-8",
 				$corps,
 				" method='post'\nonsubmit='return AjaxSqueeze(this, \"$ancre\")'");
 		}
@@ -155,10 +155,10 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
-			"var_ajax=1&script=$script$args_ajax");
+			"script=$script$args_ajax&var_ajaxcharset=utf-8");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
-		return "<a href='$href'\nonclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+		return "<a href='$href'\nonclick='return AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
 	}
 }
 
@@ -186,9 +186,7 @@ function verifier_php_auth() {
 	&& !$GLOBALS['ignore_auth_http']) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($_SERVER['PHP_AUTH_USER']));
 
-		if (!$GLOBALS['db_ok'])	return false;
-
-		$row = spip_fetch_array($result);
+		$row = @spip_fetch_array($result);
 		if ($row AND $row['source'] != 'ldap') {
 		  if ($row['pass'] == md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			$GLOBALS['auteur_session'] = $row;

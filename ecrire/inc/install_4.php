@@ -17,9 +17,6 @@ function inc_install_4()
 
 	install_debut_html();
 
-	// Necessaire pour appeler les fonctions SQL wrappees
-	include_spip('base/db_mysql');
-
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
 	echo "<P>\n";
 
@@ -38,7 +35,7 @@ function inc_install_4()
 	mysql_select_db($sel_db);
 
 	// Message pour spip_query : tout va bien !
-	$GLOBALS['db_ok'] = true;
+	$GLOBALS['db_ok'] = 'spip_connect_db';
 	$GLOBALS['spip_connect_version'] = 0.3;
 
 	// Test si SPIP deja installe
@@ -57,7 +54,7 @@ function inc_install_4()
 		$ligne_rappel = '';
 		spip_query("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'");
 	} else {
-		echo " (erreur rappel nom base `$sel_db`.spip_meta) ";
+		echo " (erreur rappel nom base `$sel_db`.spip_meta $nouvelle) ";
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
@@ -73,7 +70,6 @@ function inc_install_4()
 		$result_ok = (spip_num_rows($result) > 0);
 	}
 	echo "($result_ok) -->";
-
 
 	if ($result_ok) {
 		if (preg_match(',(.*):(.*),', $adresse_db, $r))

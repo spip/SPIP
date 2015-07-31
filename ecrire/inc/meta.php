@@ -14,14 +14,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@lire_metas
 function lire_metas() {
-	$result = spip_query("SELECT nom,valeur FROM spip_meta");
-	if($GLOBALS['db_ok']) {
+	if (!_FILE_CONNECT) return;
+	if ($result = @spip_query("SELECT nom,valeur FROM spip_meta")) {
+
 		$GLOBALS['meta'] = array();
 		while ($row = spip_fetch_array($result))
 			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
+
+		if (!$GLOBALS['meta']['charset'])
+			ecrire_meta('charset', _DEFAULT_CHARSET);
 	}
-	if (!$GLOBALS['meta']['charset'])
-		ecrire_meta('charset', _DEFAULT_CHARSET);
 }
 
 // http://doc.spip.org/@ecrire_meta
@@ -73,7 +75,7 @@ if (!isset($GLOBALS['meta']))
 
 // On force le renouvellement de l'alea de l'espace prive tous les 2 jours
 
-if (!_DIR_RESTREINT AND abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
+if ((!_DIR_RESTREINT) AND _FILE_CONNECT AND abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
 	include_spip('inc/acces');
 	renouvelle_alea();
  }

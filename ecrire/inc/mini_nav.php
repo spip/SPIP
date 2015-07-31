@@ -49,7 +49,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 				$titre = "\n<div class='rub-ouverte'>$titre</div>";
 
 		# ensuite, ouverture ou fermeture du menu des sous-rubriques
-				$url = generer_url_ecrire('plonger',"&var_ajax=1&rac=$rac&exclus=$exclu&id=$id&col=".($col+1), true);
+				$url = generer_url_ecrire('plonger',"rac=$rac&exclus=$exclu&id=$id&col=".($col+1), true);
 
 			} else {  $url = ''; }
 
@@ -159,7 +159,7 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 		$ondbClick .= "findObj('selection_rubrique').style.display='none';";
 	}
 
-	$onClick .= "charger_id_url('" . generer_url_ecrire('plonger',"&var_ajax=1&rac=$rac&exclus=$rub_exclus&id=0&col=1", true) . "', '".$rac."_col_1');";
+	$onClick .= "charger_id_url('" . generer_url_ecrire('plonger',"rac=$rac&exclus=$rub_exclus&id=0&col=1", true) . "', '".$rac."_col_1');";
 
 	$ret .= "\n<div class='arial11 petite-racine'\nonclick=\""
 	. $onClick

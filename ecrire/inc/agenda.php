@@ -85,7 +85,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {
-		return "<a$c$s\nhref='$h$a' $evt\nonclick='return !AjaxSqueeze(\"$h&var_ajax=1\",\n\t\"$ancre\")'>$clic</a>";
+		return "<a$c$s\nhref='$h$a' $evt\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$ancre\")'>$clic</a>";
 	}
 }
 

@@ -182,14 +182,17 @@ else
 		verifie_include_plugins();
 	}
 
+// Trouver la fonction eventuellement surchagee et l'appeler.
+// Elle envoie parfois des en-tetes http,
+// et en mode Ajax retourne un resultat, qu'il faut reencoder
+
 $var_f = charger_fonction($exec);
 $r = $var_f(); 
 
-if (isset($var_ajax)) {
+// Un retour d'Ajax est repere par cette variable, qui donne en + le charset
+if (isset($var_ajaxcharset)) {
 	
-// reencodage du resultat et envoi du prefixe si retour d'Ajax
-// (attention: le result pouvant envoyer des entetes, envoyer le prefixe apres)
-	include_spip('inc/charsets');
+  	include_spip('inc/charsets');
 	$charset = $GLOBALS['meta']["charset"];
 
 // Curieux: le content-type bloque MSIE!
@@ -197,6 +200,6 @@ if (isset($var_ajax)) {
 
 	echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
-	echo charset2unicode($r, 'AUTO', true);
+	echo charset2unicode($r, 'AUTO', true); 
  }
 ?>
