@@ -103,18 +103,21 @@ function bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_p
 
  if ($connect_statut == '0minirezo') {
 
-	debut_raccourcis();
-	if ($connect_toutes_rubriques) icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif");
-	icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
+	$res = '';
+
+	if ($connect_toutes_rubriques) 
+		$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif", false);
+
+	$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
 
 	$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
 	if ($n) {
 		if ($visiteurs)
-			icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "");
+		  $res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "", false);
 		else
-			icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "");
+		  $res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "", false);
 	}
-	fin_raccourcis();
+	echo bloc_des_raccourcis($res);
  }
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	creer_colonne_droite();

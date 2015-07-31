@@ -120,30 +120,29 @@ function colonne_gauche_accueil($id_rubrique, $activer_breves,
   global  $spip_display, $connect_statut, $connect_toutes_rubriques,
     $connect_id_auteur, $connect_login;
 
-
 //
 // Raccourcis pour malvoyants
 //
 if ($spip_display == 4) {
-	debut_raccourcis();
-	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
-	if ($n) {
-		icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif","creer.gif");
+
+	$res = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	if ($res) {
+		$res = icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif","creer.gif", false);
 	
 
 		if ($activer_breves != "non") {
-			icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif");
+			$res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif");
 		}
 	}
 	else {
 		if ($connect_statut == '0minirezo') {
-			echo "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
+			$res = "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
 		}
 	}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif");
+		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif", true);
 	}
-	fin_raccourcis();
+	echo bloc_des_raccourcis($res);
  } else {
 
 	$gadget = "";
