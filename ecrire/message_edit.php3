@@ -62,7 +62,7 @@ if ($new == "oui") {
 	$id_message = spip_insert_id();
 	
 	if ($rv) {
-		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00', date_fin: '$rv 13:00:00' WHERE id_message = $id_message");
+		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00', date_fin= '$rv 13:00:00' WHERE id_message = $id_message");
 	}
 
 	if ($type != "affich"){
