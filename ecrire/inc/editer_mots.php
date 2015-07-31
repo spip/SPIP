@@ -26,7 +26,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	$where = "$droit = 'oui' AND tables_liees REGEXP '(^|,)$nom($|,)' ";
 
-	$n = sql_fetsel(1, "spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON M.id_mot=L.id_mot", "L.$table_id=$id_objet",'','',1);
+	$n = !$table ? '' : sql_fetsel(1, "spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON M.id_mot=L.id_mot", "L.$table_id=$id_objet",'','',1);
 
 	if (!$n) {
 		if (!$flag) return; // rien a afficher, et pas droit de modif
