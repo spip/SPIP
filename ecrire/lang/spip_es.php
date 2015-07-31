@@ -718,15 +718,6 @@ Intenta',
 'titre_titre_document' => 'T&iacute;tulo del documento',
 'trad_reference' => '(art&iacute;culo de referencia)',
 
-// U
-'upload_fichier_zip' => '<NEW>Fichero ZIP',
-'upload_fichier_zip_texte' => '<NEW>El fichero que se propone instalar es un fichero Zip.',
-'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
-'upload_limit' => 'Este archivo es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
-'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
-'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
-'upload_zip_titrer' => '<NEW>Titrer selon le nom des fichiers',
-
 // Z
 'zbug_balise_b_aval' => ': balize de bucle B m&aacute;s adelante',
 'zbug_balise_inexistante' => '<NEW>erreur @from@: la balise #@balise@ n\'existe pas',

@@ -721,9 +721,6 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'titre_titre_document' => 'Titlul documentului:',
 'trad_reference' => '(articol de referin&#355;&#259;)',
 
-// U
-'upload_limit' => 'Acest fi&#351;ier este prea mare pentru server&nbsp;; talia maximal&#259; autorizat&#259; &icirc;n directorul <i>upload</i> este de @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',
 'zbug_boucle' => 'bucl&#259;',

@@ -706,15 +706,6 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_titre_document' => 'Titel des Dokuments:',
 'trad_reference' => '(Referenzartikel)',
 
-// U
-'upload_fichier_zip' => 'ZIP-Datei',
-'upload_fichier_zip_texte' => 'Sie m&ouml;chten eine ZIP-Datei hochladen.',
-'upload_fichier_zip_texte2' => 'Optionen f&uuml;r diese Datei:',
-'upload_limit' => 'Datei zu gross zum Hochladen. Maximale <i>upload</i>-Gr&ouml;sse: @max@.',
-'upload_zip_decompacter' => 'Entpacken und alle enthaltenen Elemente in die Website integrieren. Folgende Dateien werden auf den Server kopiert:',
-'upload_zip_telquel' => 'Als komprimiertes Dateiarchiv im ZIP-Format in die Website integrieren;',
-'upload_zip_titrer' => 'Dateinamen als Titel verwenden',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: Tag B muss vor der Schleife stehen',
 'zbug_balise_inexistante' => 'Fehler @from@: Der Tag #@balise@ existiert nicht',

@@ -732,9 +732,6 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'titre_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'trad_reference' => '(referenca artikolo)',
 
-// U
-'upload_limit' => 'Tiu dosiero estas tro granda por la servilo&nbsp;; la maksimuma grandeco permesata en <i>upload</i> estas @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',
 'zbug_boucle' => 'iteracio',

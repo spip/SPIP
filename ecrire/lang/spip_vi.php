@@ -697,9 +697,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'titre_titre_document' => 'T&#7921;a b&agrave;i:',
 'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
 
-// U
-'upload_limit' => 'H&#7891; s&#417; n&agrave;y qu&aacute; to cho server; kh&#7893; l&#7899;n nh&#7845;t cho ph&eacute;p <i>&#273;em l&ecirc;n</i> l&agrave; @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
 'zbug_boucle' => 'loop',

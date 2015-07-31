@@ -620,9 +620,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_titre_document' => 'Dokumentuaren izenburua',
 'trad_reference' => '(erreferentzia artikulua)',
 
-// U
-'upload_limit' => 'Fitxategi hauhandiegia da zerbitzarirako; baimendutako gehienezko tamainia upload-ean@max@-koa da.',
-
 // Z
 'zbug_balise_b_aval' => ': B begiztako baliza aurrerago',
 'zbug_boucle' => 'begizta',

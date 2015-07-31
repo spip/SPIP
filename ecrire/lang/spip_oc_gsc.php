@@ -719,9 +719,6 @@ e tornar connect&agrave;\'vs au sit.
 'titre_titre_document' => 'T&iacute;tol deu document:',
 'trad_reference' => '(article de refer&eacute;ncia)',
 
-// U
-'upload_limit' => 'Aqueth fichi&egrave;r qu\'ei tr&ograve;p gr&ograve;s peu servider; la talha maxima autorizada en <i>upload</i> qu\'ei de @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B cap envath',
 'zbug_boucle' => 'bloca',

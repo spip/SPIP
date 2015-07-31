@@ -719,9 +719,6 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'titre_titre_document' => 'Lo non dokiman-la&nbsp;:',
 'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
 
-// U
-'upload_limit' => 'Fisy&eacute;-l li l&eacute; tro gro pou lo s&egrave;rv&egrave;r&nbsp;; pli gran tay l&eacute; posib <i>upload</i> sa l&eacute; @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anl&egrave;r',
 'zbug_boucle' => 'boukl',

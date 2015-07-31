@@ -730,9 +730,6 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'titre_titre_document' => 'Tytu&#322; dokumentu:',
 'trad_reference' => '(artyku&#322; wzorcowy)',
 
-// U
-'upload_limit' => 'Ten plik jest zbyt du&#380;y dla serwera&nbsp;;maksymalny rozmiar pliku zapisywanego na serwerze to @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
 'zbug_boucle' => 'p&#281;tla',

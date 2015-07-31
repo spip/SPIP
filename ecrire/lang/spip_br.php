@@ -716,9 +716,6 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'titre_titre_document' => 'Titl an teuliad&nbsp;:',
 'trad_reference' => '(pennad-orin)',
 
-// U
-'upload_limit' => 'Re vras eo ar restr-se evit ar servijer&nbsp;; @max@ eo ar ment brasa&ntilde; aotreet evit an <i>upload</i>.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balizenn B diardraon',
 'zbug_boucle' => 'blouk',

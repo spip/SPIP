@@ -717,15 +717,6 @@ i tornar-vos a connectar al lloc.
 'titre_titre_document' => 'T&iacute;tol del document:',
 'trad_reference' => '(article de refer&egrave;ncia)',
 
-// U
-'upload_fichier_zip' => 'Fitxer ZIP',
-'upload_fichier_zip_texte' => 'El fitxer que voleu instal&middot;lar &eacute;s un fitxer Zip.',
-'upload_fichier_zip_texte2' => 'Aquest fitxer pot ser:',
-'upload_limit' => 'El fitxer &eacute;s massa gran pel servidor; la   mida m&agrave;xima autoritzada en <i>upload</i> &eacute;s de @max@.',
-'upload_zip_decompacter' => 'descomprimeix i instal&middot;la cada element que cont&eacute;. Els fitxers que s\'instal&middot;laran al lloc s&oacute;n: ',
-'upload_zip_telquel' => 'instal&middot;lat tal qual, com arxiu comprimit Zip;',
-'upload_zip_titrer' => 'Titular segons el nom dels fitxers',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: l\'etiqueta B ha d\'anar abans',
 'zbug_balise_inexistante' => 'error @from@: l\'etiqueta #@balise@ no existeix',
