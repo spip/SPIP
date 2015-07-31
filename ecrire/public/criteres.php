@@ -278,6 +278,7 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 
 // c'est la commande SQL "COLLATE"
 // qui peut etre appliquee sur les order by, group by, where like ...
+// http://doc.spip.org/@critere_collecte_dist
 function critere_collecte_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_coll = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
