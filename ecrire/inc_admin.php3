@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_ADMIN")) return;
 define("_ECRIRE_INC_ADMIN", "1");
 
-include_local("inc_texte.php3");
 
 function fichier_admin($action) {
 	global $connect_login;

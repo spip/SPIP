@@ -7,6 +7,8 @@ include_local ("inc_auth.php3");
 include_local ("inc_admin.php3");
 include_local ("inc_acces.php3");
 include_local ("inc_meta.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
 
 $upgrade_titre = "mise &agrave; niveau de votre base MySQL";
 
