@@ -426,7 +426,7 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
 	$res = sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur); 
 	while ($r = sql_fetch($res)) {$liste[] = array_shift($r);}
 	sql_free($res);
-	return !$liste ?  '' : sql_in($in, $liste);
+	return sql_in($in, $liste);
 }
 
 
