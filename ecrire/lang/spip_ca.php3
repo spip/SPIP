@@ -654,7 +654,7 @@ Generalment, es molt aconsellable
 'texte_inc_meta_3' => 'del directori <code>ecrire/data/</code>.',
 'texte_statut_en_cours_redaction' => 'en curs de redacci&oacute;',
 'texte_statut_poubelle' => 'a la paperera',
-'texte_statut_propose_evaluation' => 'proposat per l\'evaluaci&oacute;',
+'texte_statut_propose_evaluation' => 'proposat per a l\'avaluaci&oacute;',
 'texte_statut_publie' => 'publicat en l&iacute;nia',
 'texte_statut_refuse' => 'refusat',
 'titre_ajouter_mot_cle' => 'AFEGIR UN MOT CLAU:',

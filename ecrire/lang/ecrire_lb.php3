@@ -104,7 +104,7 @@ der Dokumentatioun vu SPIP</a>.',
 // C
 'cache_mode_compresse' => 'D\'Fichier\'en am Cache si komprim&eacute;iert gesp&auml;ichert.',
 'cache_mode_non_compresse' => 'D\'Fichier\'en am Cache si n&euml;t komprim&eacute;iert gesp&auml;ichert.',
-'cache_modifiable_webmestre' => 'D\'Parameteren vum Cache k&euml;nnen vum Webmaster vum Site ge&auml;nnert ginn.',
+'cache_modifiable_webmestre' => 'D&euml;sen Parameter kann vum Webmaster vum Site ge&auml;nnert ginn.',
 'calendrier_synchro' => 'Wann dir en <b>iCal</b>-kompatiblen Agenda benotzt, da k&euml;nnt der d\'Informatiounen mat d&euml;sem Site synchronis&eacute;ieren.',
 
 
@@ -116,6 +116,7 @@ der Dokumentatioun vu SPIP</a>.',
 'diff_texte_ajoute' => 'Text derb&auml;i setzen',
 'diff_texte_deplace' => 'Text ger&eacute;ckelt',
 'diff_texte_supprime' => 'Text gel&auml;scht',
+'double_clic_inserer_doc' => 'Duebel-Klick fir d&euml;s Ofkirzung an den Text ze iwerhuelen',
 
 
 // E
@@ -283,7 +284,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_creer_base' => 'Eng nei Datebank <b>derb&auml;i setzen</b>:',
 'info_dans_groupe' => 'Am Grupp:',
 'info_dans_rubrique' => 'An der Rubrik:',
-'info_date_publication_anterieure' => '&Eacute;ischten Publikatiounsdatum:',
+'info_date_publication_anterieure' => '&Eacute;ischten Redaktiounsdatum:',
 'info_date_referencement' => 'D&Euml;SE SITE GOUF REFERENZ&Eacute;IERT:',
 'info_delet_mots_cles' => 'Dir w&euml;llt d\'Schl&euml;sselwuert
 <B>@titre_mot@</B> (@type_mot@) l&auml;schen. D&euml;st Wuert ass un
@@ -346,6 +347,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Reda
 'info_identification_publique' => '&Auml;r &ouml;ffentl&euml;ch Identit&eacute;it...',
 'info_image_process' => 'Wielt d&eacute;i bescht Method fir Vignetten ze maachen an deem dier op d\'Bild klickt.',
 'info_image_process2' => '<b>N.B.</b> <i>Wan dier kee Bild gesidd, dann ass de Server n&euml;t fir d&euml;s Fonktionnalit&eacute;it konfigur&eacute;iert. Wann dir se w&euml;llt benotzen, kontakt&eacute;iert een Techniker a froot fir d\'Extensiounen "GD" oder "Imagick".</i>',
+'info_images_auto' => 'Automat&euml;sch berechend Biller',
 'info_informations_personnelles' => 'F&ouml;nnefte Schr&euml;tt: <B>Pers&eacute;inl&euml;ch Informatiounen</B>',
 'info_inscription_automatique' => 'Nei Redakteren automat&euml;sch aschreiwen',
 'info_jeu_caractere' => 'Buchstawen-Kode vum Site',
@@ -464,6 +466,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_redacteurs' => 'Redakteren',
 'info_redaction_en_cours' => 'AN DER AARBECHT',
 'info_redirection' => '&Euml;mledung',
+'info_referencer_doc_distant' => 'En Dokument vum Internet referenz&eacute;ieren:',
 'info_refuses' => '&Auml;r refus&eacute;iert Artikelen',
 'info_reglage_ldap' => 'Optiounen: <B>Astellen vum LDAP-Import</B>',
 'info_renvoi_article' => '<B>&Euml;mledung.</B> D&euml;sen Artikel weist op d\'S&auml;it:',
@@ -567,6 +570,9 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_visiteur_2' => 'vum &ouml;ffentl&euml;che Site',
 'info_visiteurs' => 'Visiteuren',
 'info_visiteurs_02' => 'Visiteuren vum &ouml;ffentl&euml;che Site',
+'install_echec_annonce' => 'D\'Installatioun w&auml;rt warscheinlech n&euml;t fonktionn&eacute;ieren oder zu engem fehlerhaften Site f&eacute;ieren...',
+'install_extension_mbstring' => 'SPIP fonktionn&eacute;iert n&euml;t mat:',
+'install_extension_php_obligatoire' => 'SPIP brauch d\'PHP-Extensioun:',
 'install_select_langue' => 'Wielt eng Sprooch a klickt op de Kn&auml;ppchen "Weider" fir d\'Installatioun ze starten.',
 'intem_redacteur' => 'Redakter',
 'item_accepter_inscriptions' => 'Aschreiwungen unhuelen',
@@ -697,6 +703,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 
 
 // T
+'taille_cache_image' => 'D&eacute;i automat&euml;sch berechent Biller (Vignetten vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am R&eacute;pertoire @dir@ eng Plaz vun @taille@.',
 'taille_cache_infinie' => 'D&euml;se Site huet keng Limite fir d\'Gr&eacute;isst vum Dossier <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP prob&eacute;iert d\'Gr&eacute;isst vum Dossier <code>CACHE/</code> vun d&euml;sem Site op ongef&eacute;ier <b>@octets@</b> ze limit&eacute;ieren.',
 'taille_cache_octets' => 'D\'Gr&eacute;isst vum Cache ass elo @octets@.',
@@ -735,8 +742,8 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_crash_base' => 'Wann &auml;r Datebank ofgestiertz ass, da k&euml;nnt d&euml;r eng automatesch Reparatur prob&eacute;ieren.',
 'texte_creer_rubrique' => 'Ier dier k&euml;nnt en Artikel schreiwen, musst dier eng Rubrik derb&auml;i setzen.',
 'texte_date_creation_article' => 'ARTIKEL DERB&Auml;I GESAT DEN:',
-'texte_date_publication_anterieure' => '&Eacute;ISCHTEN PUBLIKATIOUNS-DATUM:',
-'texte_date_publication_anterieure_nonaffichee' => '&Eacute;ischten Publikatiouns-Datum n&euml;t weisen.',
+'texte_date_publication_anterieure' => '&Eacute;ISCHTEN REDAKTIOUNS-DATUM:',
+'texte_date_publication_anterieure_nonaffichee' => '&Eacute;ischten Redaktiouns-Datum n&euml;t weisen.',
 'texte_date_publication_article' => 'PUBLIZ&Eacute;IRT DEN:',
 'texte_demander_blocage_priori' => 'D&eacute;i n&auml;chst Linken vun d&euml;sem Site ginn fir d\'&eacute;ischt emol block&eacute;iert.',
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',

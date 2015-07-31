@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'D\'Syndicatioun huet n&euml;t fonktionn&eacute;iert: onm&eacute;iglech de Backend vun d&euml;sem Site ze ereechen.',
 'avis_erreur' => 'Fehler: kuckt hei driwwer',
 'avis_erreur_connexion' => 'Verbindungs-Fehler',
+'avis_erreur_cookie' => 'Problem mat dem Cookie',
 'avis_erreur_fonction_contexte' => 'Programm-Fehler. D&euml;s Fonktioun d&auml;rf n&euml;t an d&euml;sem Kontext opgeruff ginn.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler am Backup (@type@ @id_objet@)!',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&Auml;nneren',
 'bouton_chercher' => 'Sichen',
 'bouton_choisir' => 'Auswielen',
+'bouton_enregistrer' => 'Sp&auml;icheren',
 'bouton_radio_desactiver_messagerie_interne' => 'D&eacute;i intern Messagerie ausschalten',
 'bouton_radio_envoi_annonces' => 'Editorial Annoncen sch&eacute;cken',
 'bouton_radio_non_envoi_annonces' => 'Keng Neiegkeeten sch&eacute;cken',
@@ -181,6 +183,7 @@ Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat dee
 
 
 // F
+'fichier_introuvable' => 'De Fichier @fichier@ kann n&euml;t font ginn',
 'form_deja_inscrit' => 'Dir sidd schon ugemelt.',
 'form_email_non_valide' => '&Auml;r Email-Adress ass n&euml;t richteg.',
 'form_forum_access_refuse' => 'Dir hutt keen Zougang m&eacute;i zu d&euml;sem Site.',
@@ -246,8 +249,8 @@ Merci fir &auml;r Participatioun
 'form_prop_sujet' => 'Sujet',
 'form_prop_url_site' => 'Adress (URL) vum Site',
 'forum_acces_refuse' => 'Dir hutt keen Zougang m&eacute;i zu d&euml;se Forum\'en.',
-'forum_attention_dix_caracteres' => '<b>Opgepasst!</b> &Auml;re Message huet manner w&eacute;i 10 Buchstawen.',
-'forum_attention_trois_caracteres' => '<b>Opgepasst!</b> &Auml;ren Titel huet manner w&eacute;i 3 Buchstawen.',
+'forum_attention_dix_caracteres' => '<b>Opgepasst!</b> &Auml;re Message muss op manst 10 Buchstawen hun.',
+'forum_attention_trois_caracteres' => '<b>Opgepasst!</b> &Auml;ren Titel muss op manst 3 Buchstawen hun.',
 'forum_avez_selectionne' => 'Dir hutt gewielt:',
 'forum_cliquer_retour' => '<a href=\'@retour_forum@\'>Hei klicken</a> fir weider.',
 'forum_forum' => 'Forum',

@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Sindicalizarea a e&#351;uat: imposibil de accesat backend-ul acestui site.',
 'avis_erreur' => 'Eroare: vede&#355;i mai jos',
 'avis_erreur_connexion' => 'Eroare de conexiune',
-'avis_erreur_cookie' => 'Eroare de conexiune MySQL',
+'avis_erreur_cookie' => 'problem&#259; de cookie',
 'avis_erreur_fonction_contexte' => 'Eroare de programare. Aceast&#259; func&#355;ie nu trebuie chemat&#259; &icirc;n acest context.',
 'avis_erreur_mysql' => 'Eroare MySQL',
 'avis_erreur_sauvegarde' => 'Eroare &icirc;n timpul salv&#259;rii (@type@ @id_objet@) !',
@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Schimba&#355;i',
 'bouton_chercher' => 'C&#259;uta&#355;i',
 'bouton_choisir' => 'Alege&#355;i',
+'bouton_enregistrer' => '&Icirc;nregistra&#355;i',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezactiva&#355;i mesageria intern&#259;',
 'bouton_radio_envoi_annonces' => 'Trimite&#355;i anun&#355;urile editoriale',
 'bouton_radio_non_envoi_annonces' => 'Nu trimite&#355;i anun&#355;uri',
@@ -185,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Fi&#351;ier @fichier@ de neg&#259;sit',
 'form_deja_inscrit' => 'Sunte&#355;i deja &icirc;nscris.',
 'form_email_non_valide' => 'Adresa dumneavoastr&#259; de email nu este valabil&#259;.',
 'form_forum_access_refuse' => 'Nu mai ave&#355;i dreptul de acces la acest site.',
@@ -251,8 +253,8 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'form_prop_sujet' => 'Subiect',
 'form_prop_url_site' => 'Adresa (URL-ul) site-ului',
 'forum_acces_refuse' => 'Nu mai ave&#355;i acces la aceste forum-uri.',
-'forum_attention_dix_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> mesajul dumneavoastr&#259; con&#355;ine mai pu&#355;in de zece caractere.',
-'forum_attention_trois_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> titlul dumneavoastr&#259; con&#355;ine mai pu&#355;in de trei caractere.',
+'forum_attention_dix_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> mesajul dumneavoastr&#259; trebuie s&#259; con&#355;in&#259; cel pu&#355;in  zece caractere.',
+'forum_attention_trois_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> titlul dumneavoastr&#259; trebuie s&#259; con&#355;in&#259; cel pu&#355;in trei caractere.',
 'forum_avez_selectionne' => 'A&#355;i selec&#355;ionat&nbsp;:',
 'forum_cliquer_retour' => 'Face&#355;i click <a href=\'@retour_forum@\'>aici</a> pentru a continua.',
 'forum_forum' => 'forum',

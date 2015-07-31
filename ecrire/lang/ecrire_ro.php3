@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Fi&#351;ierele de tampon sunt &icirc;nregistrate &icirc;n mod comprimat.',
 'cache_mode_non_compresse' => 'Fi&#351;ierele de tampon sunt &icirc;nregistrate &icirc;n mod necomprimat.',
-'cache_modifiable_webmestre' => 'Ace&#351;ti parametrii sunt modificabili de c&#259;tre webmaster-ul acestui site.',
+'cache_modifiable_webmestre' => 'Acest parametru est modificabil de c&#259;tre webmaster-ul acestui site.',
 'calendrier_synchro' => 'Dac&#259; folosi&#355;i un soft de agend&#259; compatibil <b>iCal</b>, pute&#355;i s&#259;-l sincroniza&#355;i cu informa&#355;iile de pe site.',
 
 
@@ -118,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Text ad&#259;ugat',
 'diff_texte_deplace' => 'Text deplasat',
 'diff_texte_supprime' => 'Text &#351;ters',
+'double_clic_inserer_doc' => 'Face&#355;i dublu-clic pentru a insera aceast&#259; scurt&#259;tur&#259; &icirc;n text',
 
 
 // E
@@ -291,7 +292,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_creer_base' => '<b>Crea&#355;i</b> o nou&#259; baze de date&nbsp;:',
 'info_dans_groupe' => '&Icirc;n grupul :',
 'info_dans_rubrique' => '&Icirc;n rubrica :',
-'info_date_publication_anterieure' => 'Data public&#259;rii anterioare :',
+'info_date_publication_anterieure' => 'Data redact&#259;rii anterioare :',
 'info_date_referencement' => 'DATA DE REFEREN&#354;IERE A ACESTUI SITE&nbsp;:',
 'info_delet_mots_cles' => 'A&#355;i cerut &#351;tergerea cuv&acirc;ntului-cheie
 <b>@titre_mot@</b> (@type_mot@). Acest cuv&acirc;nt-cheie fiind legat de
@@ -360,6 +361,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_identification_publique' => 'Identitatea dumneavoastr&#259; public&#259;...',
 'info_image_process' => 'V&#259; rug&#259;m s&#259; selec&#355;iona&#355;i cea mai bun&#259; metod&#259; de generare a vini&eacute;telor f&#259;c&acirc;nd click pe imaginea corespunz&#259;toare.',
 'info_image_process2' => '<b>Nota Bene</b> <i> Dac&#259; nici o imagine nu este afi&#351;at&#259;, &icirc;nseamn&#259; ca server-ul care g&#259;zduie&#351;te site-ul dumneavoastr&#259; nu a fost configurat s&#259; foloseasc&#259; unelte de acest tip. Dac&#259; dori&#355;i s&#259; folosi&#355;i aceste func&#355;ii, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe responsabilul tehnic &#351;i s&#259; &icirc;i cere&#355;i instalarea extensiilor &laquo;GD&raquo; sau &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imagini calculate automat',
 'info_informations_personnelles' => 'Cea de-a cincea etap&#259; : <b>Informa&#355;ii personale</b>',
 'info_inscription_automatique' => '&Icirc;nscrierea automatic&#259; a noi redactori',
 'info_jeu_caractere' => 'Setul de caractere al site-ului',
@@ -493,6 +495,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_redacteurs' => 'Redactori',
 'info_redaction_en_cours' => '&Icirc;N REDACTARE',
 'info_redirection' => 'Redirijare',
+'info_referencer_doc_distant' => 'Referen&#355;ia&#355;i un document pe internet&nbsp;:',
 'info_refuses' => 'Articolele dumneavoastr&#259; refuzate',
 'info_reglage_ldap' => 'Op&#355;iuni : <b>Reglajele importului LDAP</b>',
 'info_renvoi_article' => '<b>Redirijare.</b> Acest articol trimite la pagina:',
@@ -598,6 +601,9 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'info_visiteur_2' => '&nbsp;al site-ului public',
 'info_visiteurs' => 'Vizitatori',
 'info_visiteurs_02' => 'Vizitatorii site-ului public',
+'install_echec_annonce' => 'Instalarea va e&#351;ua probabil sau va conduce la un site nefunc&#355;ional...',
+'install_extension_mbstring' => 'SPIP nu fonc&#355;ioneaz&#259; cu&nbsp;:',
+'install_extension_php_obligatoire' => 'SPIP are nevoie de extensia php&nbsp;:',
 'install_select_langue' => 'Selec&#355;iona&#355;i o limb&#259; &#351;i face&#355;i click pe butonul &laquo;&nbsp;urm&#259;torul&nbsp;&raquo; pentru a lansa procedura de instalare.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Accepta&#355;i &icirc;nscrierile',
@@ -728,6 +734,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 
 
 // T
+'taille_cache_image' => 'Imaginile calculate automat de c&#259;tre SPIP (viniete de documente, titluri prezentate sub form&#259; grafic&#259;, func&#355;ii matematice &icirc;n format TeX...) ocup&#259; &icirc;n directorul @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Acest site nu prevede limitarea m&#259;rimii directorului <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP &icirc;ncearc&#259; s&#259; limiteze m&#259;rimea directorului <code>CACHE/</code> al acestui site la aproximativ <b>@octets@</b> de date.',
 'taille_cache_octets' => 'M&#259;rimea tamponului este acum de @octets@.',
@@ -779,8 +786,8 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_creer_rubrique' => '&Icirc;nainte de a putea scrie articole,
    trebuie s&#259; crea&#355;i o rubric&#259;.',
 'texte_date_creation_article' => 'DATA CRE&#258;RII ARTICOLULUI&nbsp;:',
-'texte_date_publication_anterieure' => 'DATA PUBLIC&#258;RII ANTERIOARE&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Nu afi&#351;a&#355;i data de publicare anterioar&#259;.',
+'texte_date_publication_anterieure' => 'DATA REDACT&#258;RII ANTERIOARE&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'Nu afi&#351;a&#355;i data redact&#259;rii anterioare.',
 'texte_date_publication_article' => 'DATA PUBLIC&#258;RII &Icirc;N LINIE&nbsp;:',
 'texte_demander_blocage_priori' => 'Urm&#259;toarele leg&#259;turi provenind de la
    acest site vor fi blocate &agrave; priori.',
@@ -1002,6 +1009,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_sites_tous' => 'Site-urile referen&#355;iate',
 'titre_suivi_petition' => 'Urm&#259;rirea peti&#355;iilor',
 'titre_syndication' => 'Sindicalizarea site-urilor',
+'tout_dossier_upload' => 'Tot dosarul @upload@',
 'trad_article_inexistant' => 'Nu exist&#259; un articol care s&#259; aib&#259; acest numar.',
 'trad_article_traduction' => 'Toate versiunile acestui articol&nbsp;:',
 'trad_deja_traduit' => 'Articolul este d&eacute;j&agrave; o traducere a articolului de fa&#355;&#259;.',
