@@ -59,7 +59,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 	// liste des formats qu'on sait lire
 	$img = isset($GLOBALS['meta']['formats_graphiques'])
-	  ? eregi(",$format,",$GLOBALS['meta']['formats_graphiques'])
+	  ? in_array($format,explode(',',$GLOBALS['meta']['formats_graphiques']))
 	  : false;
 
 	// si le doc n'est pas une image, refuser
