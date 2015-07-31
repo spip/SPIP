@@ -33,8 +33,6 @@ function action_poster_forum_prive_post($r)
 
 	list($x,$id,$id_parent,$statut,$script,$objet) = $r;
 
-	$redirect = urldecode($redirect);
-
 	if ($valider_forum AND ($statut!='')) {
 		include_spip('inc/texte');
 		include_spip('base/abstract_sql');
@@ -43,7 +41,7 @@ function action_poster_forum_prive_post($r)
 		$titre_message = corriger_caracteres($titre_message);
 		$texte = corriger_caracteres($texte);
 
-		spip_abstract_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
+		$id_forum = spip_abstract_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
 
 		calculer_threads();
 
@@ -51,7 +49,7 @@ function action_poster_forum_prive_post($r)
 			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'");
 
 		}
-		redirige_par_entete($redirect);
+		redirige_par_entete(urldecode($redirect)."#id".$id_forum);
 		
 	 } else {
 	   // previsualisation : on ne fait que passer .... 
