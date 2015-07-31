@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/rechercher'); // mots_ressemblants()
+include_spip('inc/ressembler'); // mots_ressemblants()
 
 // http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
