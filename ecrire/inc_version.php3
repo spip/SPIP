@@ -957,7 +957,7 @@ function email_valide($adresse) {
 //
 function _T($text, $args = '') {
 	include_ecrire('inc_lang.php3');
-	$text = traduire_chaine($text, $args, $GLOBALS['spip_lang']);
+	$text = traduire_chaine($text, $args);
 
 	if (!empty($GLOBALS['xhtml'])) {
 		include_ecrire("inc_charsets.php3");
@@ -1175,7 +1175,7 @@ function redirige_par_entete($url)
 	header("Location: $url");
 	include_ecrire('inc_cron.php3');
 #	spip_cron();
-#	spip_log("redirige $url");
+	spip_log("redirige $url");
 	exit;
 }
 
