@@ -337,7 +337,7 @@ function declarer_url_arbo($type, $id_objet) {
 		do {
 			$where = "U.type='$type' AND U.id_objet=$id_objet AND url=";
 			if (sql_countsel('spip_urls AS U', $where  .sql_quote($set['url']))) {
-				sql_updateq('spip_urls AS U', array('date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
+				sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
 				spip_log("reordonne $type $id_objet");
 				return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 			}
