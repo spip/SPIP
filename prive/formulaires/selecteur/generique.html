@@ -60,10 +60,9 @@ afficher la selection dans un ul class item_picked
 </div>
 
 [(#ENV{sortable,'non'}|=={oui}|oui)
-<script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery-ui-1.8.custom.js}'></script>
 <script type='text/javascript'>
-jQuery(function() {
-		jQuery("ul.item_picked").sortable();
-	});
+jQuery.getScript('#CHEMIN{formulaires/selecteur/jquery-ui-1.8.custom.js}',function(){
+	jQuery(function() {jQuery("ul.item_picked").sortable(); });
+});
 </script>
 ]
