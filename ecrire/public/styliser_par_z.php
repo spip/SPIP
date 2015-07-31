@@ -233,7 +233,7 @@ function z_fond_valide($squelette){
  */
 function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
 	if (
-		($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") AND z_fond_valide($f))
+		(defined('_ZCORE_BLOC_PREFIX_SKEL') AND $f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") AND z_fond_valide($f))
 		OR ($f = find_in_path("$prefix_path$bloc/$fond.$ext") AND z_fond_valide($f))
 		){
 		return substr($f, 0, - strlen(".$ext"));
