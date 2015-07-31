@@ -192,7 +192,7 @@ function parser_param($params, &$result, $idb) {
 	    $params = $args[4];
 	    ereg("^(.*[^ \t\n])[[:space:]]*$", $args[2], $m);
 	    $param = $args[1] . $m[1];
-	    if ($param == 'tout') {
+	    if (($param == 'tout') OR ($param == 'tous')) {
 	      $result->tout = true;
 	    }
 	    else if ($param == 'plat') {
