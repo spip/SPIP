@@ -197,7 +197,7 @@ function aff_referers ($query, $limit=10, $plus) {
 
 			$visites = pos($nbvisites);
 
-			$ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesdomaines[$numero]."\"><img src=\"http://open.thumbshots.org/image.pxf?url=http://".$lesdomaines[$numero]."\" style=\"float: $spip_lang_right;\" /></a>";
+			$ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"http://open.thumbshots.org/image.pxf?url=http://".urlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0;\" /></a>";
 
 			$ret .= "\n<li>";
 
