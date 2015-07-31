@@ -118,7 +118,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc)
 {
 	$bouton = _T('forum_message_definitif');
-
+	include_spip('public/assembler');
 	// supprimer les <form> de la previsualisation
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)form\b@ism",
