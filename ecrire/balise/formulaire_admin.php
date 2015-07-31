@@ -104,17 +104,14 @@ function admin_objet()
 			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($id_type));
 			if ($id_type) {
 				$env[$_id_type] = $id_type;
+				$env['objet'] = $id;
+				$env['id_objet'] = $id_type;
 				$g = 'generer_url_ecrire_'.$obj;
 				$env['voir_'.$obj] = 
 				  str_replace('&amp;', '&', $g($id_type, '','', 'prop'));
 				if ($id == 'article' OR $id == 'breve') {
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
-					if ($l = admin_stats($id, $id_type, $var_preview)) {
-						$env['visites'] = $l[0];
-						$env['popularite'] = $l[1];
-						$env['statistiques'] = $l[2];
-					}
 					if (admin_preview($id, $id_type))
 						$env['preview']=parametre_url(self(),'var_mode','preview','&');
 				}
@@ -190,22 +187,4 @@ function admin_debug()
 	  ? parametre_url(self(),'var_mode', 'debug', '&'): '';
 }
 
-// http://doc.spip.org/@admin_stats
-function admin_stats($id, $id_type, $var_preview)
-{
-	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
-	AND $id = 'article'
-	AND !$var_preview
-	AND autoriser('voirstats')
-	) {
-		$row = sql_fetsel("visites, popularite", "spip_articles", "id_article=$id_type AND statut='publie'");
-
-		if ($row) {
-			return array(intval($row['visites']),
-			       ceil($row['popularite']),
-			       str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_type)));
-		}
-	}
-	return false;
-}
 ?>
