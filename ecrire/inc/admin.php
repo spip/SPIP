@@ -34,7 +34,6 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 	$base = charger_fonction($script, 'base');
 	$base($titre,$reprise);
 	fin_admin($script);
-	spip_log("efface les meta admin et $script " . ($retour ? $retour : ''));
 	if ($retour) redirige_par_entete($retour);
 }
 
@@ -155,10 +154,12 @@ function debut_admin($script, $action='', $corps='') {
 // http://doc.spip.org/@fin_admin
 function fin_admin($action) {
 	$signal = dir_admin() . fichier_admin($action);
-	@rmdir($signal); // par precaution
 	spip_unlink($signal);
-	effacer_meta($action);
-	effacer_meta('admin');
+	if ($action != 'delete_all') {
+		effacer_meta($action);
+		effacer_meta('admin');
+		spip_log("efface les meta admin et $action ");
+	}
 }
 
 // http://doc.spip.org/@copy_request
