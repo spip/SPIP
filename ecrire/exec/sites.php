@@ -172,7 +172,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 
 
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-		echo "<p class='verdana1 spip_medium'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
+		echo "<br /><p class='verdana1 spip_medium centered'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ' class="x" style="vertical-align:middle;"'),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
 
 		if ($syndication == "off" OR $syndication=="sus") {
