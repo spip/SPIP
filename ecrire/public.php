@@ -21,7 +21,7 @@ if (defined('_INC_PUBLIC')) {
 	if ($subpage['process_ins'] == 'html')
 		echo $subpage['texte'];
 	else
-		eval('?' . '>' . $page['texte']);
+		eval('?' . '>' . $subpage['texte']);
 
 	if ($subpage['lang_select'] === true)
 		lang_dselect();
