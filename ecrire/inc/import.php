@@ -121,9 +121,6 @@ function import_debut($f, $gz='fread') {
 			return $r;
 		}
 	}
-	// improbable: fichier correct avant debut_admin et plus apres
-	import_all_fin();
-	die(_T('info_erreur_restauration'));
 }
 
 // on conserve ce tableau pour faire des translations
@@ -180,7 +177,8 @@ function import_tables($request, $dir) {
 
 	if ($request['insertion']=='on') {
 		include_spip('inc/import_insere');
-		$request['init'] = (!$abs_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
+		$request['init'] = (!$abs_pos) ? 'insere_1_init' : 'insere_1bis_init';
+		$request['boucle'] = 'import_insere';
 	} elseif ($request['insertion']=='passe2') {
 		$request['init'] = 'insere_2_init';
 		$request['boucle'] = 'import_translate';
@@ -205,6 +203,8 @@ function import_tables($request, $dir) {
 
 	if ($abs_pos==0) {
 		list($tag, $r, $charset) = import_debut($file, $gz);
+	// improbable: fichier correct avant debut_admin et plus apres
+		if (!$tag) return !($import_ok = true);
 // tag ouvrant du Dump:
 // 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
 		$version_archive = $r['version_archive'];
@@ -230,18 +230,25 @@ function import_tables($request, $dir) {
 	flush();
 
 	$oldtable ='';
+	$cpt = 0;
+	$pos = $abs_pos;
 	while ($table = $fimport($file, $request, $gz)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
 		ecrire_meta("status_restauration", "$abs_pos");
 		if ($oldtable != $table) {
-			spip_log("Restauration de $table (commence en $abs_pos)");
+			if ($oldtable) spip_log("$cpt entrees");
+			spip_log("Analyse de $table (commence en $pos)");
 			affiche_progression_javascript($abs_pos,$size,$table);
 			$oldtable = $table;
-		}
+			$cpt = 0;
+			$pos = $abs_pos;
+		} 
+		$cpt++;
 	}
+	spip_log("$cpt entrees");
 
-	if (!$import_ok) 
+	if (!$import_imok) 
 		$res =  _T('avis_archive_invalide');
 	else {
 		$res = '';

@@ -145,6 +145,10 @@ echo "</table>";
 	echo  "<p><input name='insertion' type='radio' />&nbsp;",
 	  _L('Fusionner la base actuelle et la sauvegarde'),
 	  '</p>';
+	echo  "<p>",
+	  _L("Eventuellement, URL du site d'origine&nbsp;:"),
+	  "<input name='url_site' type='texte' />",
+	  '</p>';
 	fin_cadre_relief();
 
 	echo "\n</p><div align='right'><input class='fondo' type='submit' value='",

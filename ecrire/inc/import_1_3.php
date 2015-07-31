@@ -78,7 +78,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 			if ($request['insertion']=='on') {
 // Au premier tour de l'insertion, ne memoriser que le strict necessaire 
 // pour pouvoir identifier avec l'existant.
-
+// (Faudrait convenir d'une structure de donnees, c'est lourd & inextensible)
 				$b = array();
 				if (isset($desc['field'][$p='titre']))
 					$b[$p]= $desc['field'][$p];
@@ -86,6 +86,13 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 					$b[$p]= $desc['field'][$p];
 				if (isset($desc['field'][$p='id_parent']))
 					$b[$p]= $desc['field'][$p];
+				if (isset($desc['field'][$p='id_rubrique']))
+					$b[$p]= $desc['field'][$p];
+				if (isset($desc['field'][$p='fichier'])) {
+					$b[$p]= $desc['field'][$p];
+					$b['taille']= $desc['field']['taille'];
+					spip_log("pass1 " . join(',', array_keys($b)));
+				}
 				$p = $desc['key']["PRIMARY KEY"];
 				$b[$p] = $desc['field'][$p];
 				$desc['field'] = $b; 
