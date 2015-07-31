@@ -80,8 +80,10 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 	if ($errno > 0 AND $errno < 200) {
 		$retour .= "<tt><br /><br /><blink>"
 		. _T('info_erreur_systeme', array('errsys'=>$errno))
-		. "</blink><br />\n"
-		. _T('info_erreur_systeme2');
+		. "</blink><br />\n<b>"
+		. _T('info_erreur_systeme2',
+			array('script' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'admin_repair'))) 
+		. '</b><br />';
 		spip_log("Erreur systeme $errno");
 	}
 	// Requete erronee
