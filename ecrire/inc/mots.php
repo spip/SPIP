@@ -421,14 +421,16 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mot)
 {
 	$id_groupe = $row['id_groupe'];
-	$titre_groupe = entites_html(textebrut(typo($row['titre'])));
-	$unseul = $row['unseul'];
-	$obligatoire = $row['obligatoire'];
 
 	$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
 
 	$n = spip_num_rows($result);
 	if (!$n) return false;
+
+	$titre = textebrut(typo($row['titre']));
+	$titre_groupe = entites_html($titre_groupe);
+	$unseul = $row['unseul'] == 'oui';
+	$obligatoire = $row['obligatoire']=='oui' AND !$groupes_vus[$id_groupe];
 
 	// faudrait rendre ca validable quand meme
 	echo $form_mot, "\n<tr><td>", $message_ajouter_mot, "</td>\n<td>";
@@ -436,9 +438,9 @@ function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mo
 	if ($n > 50) {
 		$jscript = "onfocus=\"setvisibility('valider_groupe_$id_groupe', 'visible'); if(!antifocus_mots[$id_groupe]){this.value='';antifocus_mots[$id_groupe]=true;}\"";
 
-		if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
+		if ($obligatoire)
 			echo "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript>";
-		else if ($unseul == "oui")
+		else if ($unseul)
 			echo "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript>";
 		else
 			echo "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript>";
@@ -450,21 +452,19 @@ function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mo
 		echo "</span>"; 
 	} else {
 
-		if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
+		if ($obligatoire)
 			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
-		else if ($unseul == "oui")
+		else if ($unseul)
 			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
 		else
 			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; ' CLASS='fondl'>";
 
-		echo "\n<option value='x' style='font-variant: small-caps;'>$titre_groupe</option>";
+		echo "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 		while($row = spip_fetch_array($result)) {
-			$id_mot = $row['id_mot'];
-			$titre_mot = $row['titre'];
-			$texte_option = entites_html(textebrut(typo($titre_mot)));
-			echo "\n<OPTION VALUE=\"$id_mot\">";
-			echo "&nbsp;&nbsp;&nbsp;";
-			echo "$texte_option</option>";
+			echo "\n<option value='",$row['id_mot'],
+				"'>&nbsp;&nbsp;&nbsp;",
+				textebrut(typo($row['titre'])),
+				"</option>";
 		}
 		echo "</SELECT>";
 		echo "</td>\n<td>";
