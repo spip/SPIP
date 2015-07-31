@@ -50,7 +50,7 @@ function action_redirect_dist()
 		$h = parametre_url($h, 'var_mode', $m);
 
 	if ($m == 'preview'
-	AND autoriser('previsualiser', $type, $id)
+	AND autoriser('previsualiser')
 	AND $aut = $GLOBALS['visiteur_session']['id_auteur'] ) {
 		include_spip('inc/securiser_action');
 		$token = _action_auteur('previsualiser', $aut, null, 'alea_ephemere');
