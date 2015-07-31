@@ -330,8 +330,13 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_mots_syndic', 'id_mot', $res);
 
 
-	$n = pipeline('optimiser_base_disparus',$n);
-
+	$n = pipeline('optimiser_base_disparus', array(
+			'args'=>array(
+				'attente' => $attente,
+				'date' => $mydate),
+			'data'=>$n
+	));
+	
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }
 ?>
