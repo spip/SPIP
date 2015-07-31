@@ -22,13 +22,10 @@ function entites_html($texte) {
 }
 
 function filtrer_entites($texte) {	// html -> texte, a completer
-	if (lire_meta('charset') != 'iso-8859-1')
-		return $texte;
 
 	// NB en php4 il suffirait d'utiliser get_html_translation_table/array_flip
 	// HTML_ENTITIES
-	$trans = array(
-		'&nbsp;' => " ",
+	$trans_iso = array(
 		'&iexcl;' => "\xa1",
 		'&cent;' => "\xa2",
 		'&pound;' => "\xa3",
@@ -37,12 +34,10 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 		'&brvbar;' => "\xa6",
 		'&sect;' => "\xa7",
 		'&uml;' => "\xa8",
-		'&copy;' => "(c)",
 		'&ordf;' => "\xaa",
 		'&laquo;' => "\xab",
 		'&not;' => "\xac",
 		'&shy;' => "\xad",
-		'&reg;' => "(r)",
 		'&macr;' => "\xaf",
 		'&deg;' => "\xb0",
 		'&plusmn;' => "\xb1",
@@ -56,9 +51,6 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 		'&sup1;' => "\xb9",
 		'&ordm;' => "\xba",
 		'&raquo;' => "\xbb",
-		'&frac14;' => "1/4",
-		'&frac12;' => "1/2",
-		'&frac34;' => "3/4",
 		'&iquest;' => "\xbf",
 		'&Agrave;' => "\xc0",
 		'&Aacute;' => "\xc1",
@@ -122,14 +114,28 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 		'&ucirc;' => "\xfb",
 		'&uuml;' => "\xfc",
 		'&yacute;' => "\xfd",
-		'&thorn;' => "\xfe",
-		'&amp;' => "\x26",
-		'&quot;' => "\"",
-		'&lt;' => "<",
-		'&gt;' => ">"
+		'&thorn;' => "\xfe"
 	);
 
-	return strtr2 ($texte, $trans);
+	$trans = array (
+		'&nbsp;' => " ",
+		'&copy;' => "(c)",
+		'&reg;' => "(r)",
+		'&frac14;' => "1/4",
+		'&frac12;' => "1/2",
+		'&frac34;' => "3/4",
+		'&amp;' => '&',
+		'&quot;' => '"',
+		'&lt;' => '<',
+		'&gt;' => '>'
+	);
+
+	$texte = strtr2 ($texte, $trans);
+
+	if (lire_meta('charset') == 'iso-8859-1')	// recuperer les caracteres iso-latin
+		$texte = strtr2 ($texte, $trans_iso);
+
+	return $texte;		
 }
 
 // strtr (string $texte, array $trans) = emuler le php4
