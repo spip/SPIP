@@ -144,8 +144,8 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$boucle->from[$id_table] =  "spip_signatures";
 	$boucle->from["petitions"] =  "spip_petitions";
 	$boucle->from["articles"] =  "spip_articles";
-	$boucle->where[] = "petitions.id_article=articles.id_article";
 	$boucle->where[] = "petitions.id_article=$id_table.id_article";
+	$boucle->where[] = "petitions.id_article=articles.id_article";
 
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
