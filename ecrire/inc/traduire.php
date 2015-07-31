@@ -71,7 +71,7 @@ function surcharger_langue($fichier) {
 	}
 	if (is_array($surcharges[$fichier])) {
 		$GLOBALS[$GLOBALS['idx_lang']] = array_merge(
-			$GLOBALS[$GLOBALS['idx_lang']],
+			(array)$GLOBALS[$GLOBALS['idx_lang']],
 			$surcharges[$fichier]
 		);
 	}
