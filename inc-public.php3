@@ -74,7 +74,7 @@ if (defined("_INC_PUBLIC")) {
 		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
 	} 
 	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
-	  $page = affiche_erreurs_page($tableau_des_erreurs) . $page;
+		$page = affiche_erreurs_page($tableau_des_erreurs) . $page;
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {

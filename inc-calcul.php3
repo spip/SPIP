@@ -37,7 +37,6 @@ include_local("inc-calcul-outils.php3");
 if ($f = find_in_path("mes_fonctions.php3"))
 	include_local ($f);
 
-
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
 	include_local("inc-urls.php3");
