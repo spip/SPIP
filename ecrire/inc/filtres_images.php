@@ -512,6 +512,8 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			#else
 			{
 				$fonction_imagecreatefrom = $valeurs['fonction_imagecreatefrom'];
+				if (!function_exists($fonction_imagecreatefrom))
+					return '';
 				$srcImage = $fonction_imagecreatefrom($image);
 				if (!$srcImage) { 
 					spip_log("echec gd1/gd2"); 
