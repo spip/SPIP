@@ -324,14 +324,14 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 }
 
 // idem pour les breves
-// http://doc.spip.org/@import_identifie_id_article
+// http://doc.spip.org/@import_identifie_id_breve
 function import_identifie_id_breve($values, $table, $desc, $request) {
 	return array((0 - $values['id_rubrique']), $values['titre']);
 }
 
 // Passe 2 des breves comme pour les mots
 
-// http://doc.spip.org/@import_identifie_parent_id_article
+// http://doc.spip.org/@import_identifie_parent_id_breve
 function import_identifie_parent_id_breve($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));

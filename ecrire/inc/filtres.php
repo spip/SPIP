@@ -1896,6 +1896,7 @@ function concat(){
 // utile pour dist/jquery.js par exemple
 // attention contrairement a compacte_css ici c'est un flux qui est compacte
 // et pas un fichier ... comment unifier ?
+// http://doc.spip.org/@compacte_js
 function compacte_js($flux) {
 	include_spip('inc/jscompressor');
 	$k = new JavaScriptCompressor();

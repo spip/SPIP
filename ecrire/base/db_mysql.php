@@ -243,6 +243,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
+// http://doc.spip.org/@spip_mysql_create
 function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	$query = ''; $keys = ''; $s = ''; $p='';
 
