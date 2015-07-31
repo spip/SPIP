@@ -12,7 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_instituer_breve_dist
+/**
+ * Instituer un objet avec les puces rapides
+ * @param null|string $arg
+ * @return 
+ */
 function action_instituer_objet_dist($arg=null) {
 
 	if (is_null($arg)){
