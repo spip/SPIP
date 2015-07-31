@@ -188,6 +188,7 @@ $exceptions_des_tables = array();
 $tables_principales = array();
 $table_des_tables = array();
 $tables_relations = array();
+$tables_auxiliaires = array();
 $tables_relations_keys = array();
 $table_primary = array();
 $table_date = array();
