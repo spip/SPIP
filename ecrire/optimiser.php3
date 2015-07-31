@@ -17,11 +17,10 @@ function optimiser_base() {
 
 	$query = "SELECT id_rubrique FROM spip_rubriques";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
+	$rubriques = '0';
+	while ($row = spip_fetch_array($result)) $rubriques .= ','.$row['id_rubrique'];
 
 	if ($rubriques) {
-		$rubriques = join(",", $rubriques);
-
 		$query = "DELETE FROM spip_articles WHERE id_rubrique NOT IN ($rubriques) AND maj < $mydate";
 		spip_query($query);
 		$query = "DELETE FROM spip_breves WHERE id_rubrique NOT IN ($rubriques) AND maj < $mydate";
@@ -45,11 +44,10 @@ function optimiser_base() {
 	spip_query($query);
 	$query = "SELECT id_article FROM spip_articles";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $articles[] = $row['id_article'];
+	$articles = '0';
+	while ($row = spip_fetch_array($result)) $articles .= ','.$row['id_article'];
 
 	if ($articles) {
-		$articles = join(",", $articles);
-
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_article NOT IN ($articles)";
 		spip_query($query);
 		$query = "DELETE FROM spip_documents_articles WHERE id_article NOT IN ($articles)";
@@ -67,13 +65,12 @@ function optimiser_base() {
 
 	$query = "DELETE FROM spip_breves WHERE statut='refuse' AND maj < $mydate";
 	spip_query($query);
+	$breves = '0';
 	$query = "SELECT id_breve FROM spip_breves";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $breves[] = $row['id_breve'];
+	while ($row = spip_fetch_array($result)) $breves .= ','.$row['id_breve'];
 
 	if ($breves) {
-		$breves = join(",", $breves);
-
 		$query = "DELETE FROM spip_documents_breves WHERE id_breve NOT IN ($breves)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_breves WHERE id_breve NOT IN ($breves)";
@@ -90,13 +87,12 @@ function optimiser_base() {
 	$query = "DELETE FROM spip_syndic WHERE maj < $mydate AND statut = 'refuse'";
 	spip_query($query);
 
+	$syndic = '0';
 	$query = "SELECT id_syndic FROM spip_syndic";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $syndic[] = $row['id_syndic'];
+	while ($row = spip_fetch_array($result)) $syndic .= ','.$row['id_syndic'];
 
 	if ($syndic) {
-		$syndic = join(",", $syndic);
-
 		$query = "DELETE FROM spip_syndic_articles WHERE id_syndic NOT IN (0,$syndic)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_syndic WHERE id_syndic NOT IN ($syndic)";
@@ -110,13 +106,12 @@ function optimiser_base() {
 	// Auteurs
 	//
 
+	$auteurs = '0';
 	$query = "SELECT id_auteur FROM spip_auteurs";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $auteurs[] = $row['id_auteur'];
+	while ($row = spip_fetch_array($result)) $auteurs .= ','.$row['id_auteur'];
 
 	if ($auteurs) {
-		$auteurs = join(",", $auteurs);
-
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_auteur NOT IN ($auteurs)";
 		spip_query($query);
 		$query = "DELETE FROM spip_auteurs_messages WHERE id_auteur NOT IN ($auteurs)";
@@ -173,13 +168,12 @@ function optimiser_base() {
 	$query = "DELETE FROM spip_mots WHERE titre='' AND maj < $mydate";
 	$result = spip_query($query);
 
+	$mots = '0';
 	$query = "SELECT id_mot FROM spip_mots";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $mots[] = $row['id_mot'];
+	while ($row = spip_fetch_array($result)) $mots .= ','.$row['id_mot'];
 
 	if ($mots) {
-		$mots = join(",", $mots);
-
 		$query = "DELETE FROM spip_mots_articles WHERE id_mot NOT IN ($mots)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_breves WHERE id_mot NOT IN ($mots)";
@@ -248,17 +242,78 @@ function optimiser_base() {
 	$query = "DELETE FROM spip_forum WHERE statut='redac' AND maj < $mydate";
 	spip_query($query);
 
+	$forums = '0';
 	$query = "SELECT id_forum FROM spip_forum";
 	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $forums[] = $row[0];
+	while ($row = spip_fetch_array($result)) $forums .= ','.$row[0];
 
 	if ($forums) {
-		$forums = join(",", $forums);
-
 		$query = "DELETE FROM spip_forum WHERE id_parent NOT IN (0,$forums)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_forum WHERE id_forum NOT IN ($forums)";
 		spip_query($query);
+	}
+
+
+	//
+	// Indexation
+	//
+
+	// les objets inutiles
+	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
+	while (list(,$type) = each($types)) {
+		$table_objet = 'spip_'.table_objet($type);
+		$table_index = 'spip_index_'.table_objet($type);
+		
+		// limiter aux objets publies
+		switch ($type) {
+			case 'article':
+			case 'breve':
+			case 'rubrique':
+			case 'syndic':
+			case 'forum':
+			case 'signature':
+				$critere = "AND statut<>'publie'";
+				break;
+			case 'auteur':
+				$critere = "AND statut NOT IN ('0minirezo', '1comite')";
+				break;
+			case 'mot':
+			default:
+				$critere = 'AND 1=0';	// ne jamais desindexer un mot
+				break;
+		}
+
+		spip_query("UPDATE $table_objet SET idx='' WHERE idx<>'non' $critere");
+
+		$suppr = '';
+		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx=''");
+		while ($t = spip_fetch_array($s))
+			$suppr .= ','.$t[0];
+		if ($suppr)
+			spip_query("DELETE FROM $table_index WHERE id_$type IN (0$suppr)");
+	}
+
+	// les objets supprimes
+	$hash = array();
+	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
+	while (list(,$type) = each($types)) {
+		$table_objet = 'spip_'.table_objet($type);
+		$table_index = 'spip_index_'.table_objet($type);
+		$list_objets = table_objet($type);
+		if ($liste = $$list_objets)
+			spip_query("DELETE FROM $table_index WHERE id_$type NOT IN ($liste)");
+		$s = spip_query("SELECT DISTINCT(hash) FROM $table_index");
+		while ($t = spip_fetch_array($s))
+			$hash[$t[0]] = $t[0];
+	}
+	if (count($hash)) {
+		$s = spip_query("SELECT hash FROM spip_index_dico");
+		$suppr = '';
+		while ($t = spip_fetch_array($s))
+			if (!$hash[$t[0]]) $suppr.=','.$t[0];
+		if ($suppr)
+			spip_query("DELETE FROM spip_index_dico WHERE hash IN (0$suppr)");	
 	}
 
 
