@@ -171,7 +171,7 @@ function exec_convert_utf8_dist() {
 	if ($f) fclose($f);
 
 	echo "<p><b>"._T('utf8_convert_termine')."</b>";
-	echo "<p> "._T('utf8_convert_verifier', array('rep' => _DIR_SESSIONS));
+	echo "<p> "._T('utf8_convert_verifier', array('rep' => joli_repertoire(_DIR_SESSIONS)));
 	effacer_meta('conversion_charset');
 	ecrire_metas();
 

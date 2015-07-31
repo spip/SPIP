@@ -62,7 +62,7 @@ echo "<tr><td class='serif'>";
  echo  generer_url_post_ecrire("export_all", "reinstall=non"),
    "\n<p align='justify'>",
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
-   _T('texte_admin_tech_01', array('dossier'=>'<i>'._DIR_SESSIONS.'</i>')),
+   _T('texte_admin_tech_01', array('dossier'=>'<i>'.joli_repertoire(_DIR_SESSIONS).'</i>')),
    "<p>",
    _T('texte_admin_tech_02');
 
@@ -74,7 +74,7 @@ if ($flag_gz) {
 	array('fichier'=>'<b>'._DIR_SESSIONS.'dump.xml</b>'))." </label><BR>\n";
 }
 else {
-	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'._DIR_SESSIONS.'dump.xml</b>'));
+	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.joli_repertoire(_DIR_SESSIONS).'dump.xml</b>'));
 	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0' />";
 }
 
@@ -104,7 +104,7 @@ echo	"<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
 	"<TR><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
 	"\n<p align='justify'> ",
-	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'._DIR_SESSIONS.'</i>')),
+	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.joli_repertoire(_DIR_SESSIONS).'</i>')),
 	"\n<p>",
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
 	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>",

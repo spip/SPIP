@@ -45,7 +45,8 @@ function debut_admin($form, $action, $commentaire='') {
 		 $fichier
 		. "\" size='30'>"
 		. "\n<p>"
-		. _T('info_creer_repertoire_2', array('repertoire' => _DIR_SESSIONS))
+		. _T('info_creer_repertoire_2',
+			array('repertoire' => joli_repertoire(_DIR_SESSIONS)))
 		. "\n<p align='right'><INPUT TYPE='submit' VALUE='"
 		. _T('bouton_recharger_page')
 		. "' CLASS='fondo'>"
