@@ -620,7 +620,7 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		}
 	}
 
-	$contenu['options'] .= "define('_PLUGINS_HASH','".md5($sign)."');\n";
+	$contenu['options'] = "define('_PLUGINS_HASH','".md5($sign)."');\n" . $contenu['options'];
 	$contenu['fonctions'] .= plugin_ongletbouton("boutons_plugins", $boutons)
 	. plugin_ongletbouton("onglets_plugins", $onglets);
 
