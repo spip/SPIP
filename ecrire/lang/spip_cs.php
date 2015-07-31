@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'zobrazen&iacute; cel&eacute;ho m&#283;s&iacute;ce',
 'cal_par_semaine' => 'zobrazen&iacute; cel&yacute;ch t&yacute;dn&#367;',
 'confirm_changer_statut' => 'Je nutn&eacute; potvrzen&iacute; akce: Po&#382;&aacute;dali jste o zm&#283;nu stavu &#269;l&aacute;nku. Chcete pokra&#269;ovat?',
+'correcte' => '<NEW>correcte',
 
 
 // D
@@ -349,6 +350,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'image_tourner_droite' => 'Oto&#269;it o 90&deg; doprava',
 'image_tourner_gauche' => 'Oto&#269;it o 90&deg; doleva',
 'img_indisponible' => 'Obr&aacute;zek nen&iacute; k dispozici',
+'impossible' => '<NEW>impossible',
 'info_a_suivre' => 'HLAVN&Iacute; NAB&Iacute;DKA"',
 'info_a_valider' => '[ke schv&aacute;len&iacute;]',
 'info_acces_interdit' => 'P&#345;&iacute;stup zak&aacute;z&aacute;n',
@@ -642,6 +644,9 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 
 
 // S
+'squelette' => '<NEW>squelette',
+'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
+'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => 'po&#269;et n&aacute;v&#353;t&#283;v: @visites@; obl&iacute;benost: @popularite@',
 'suivant' => 'dal&#353;&iacute;',
 

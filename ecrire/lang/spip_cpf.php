@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'kalandrye pa mwa',
 'cal_par_semaine' => 'kalandrye pa sem&egrave;n',
 'confirm_changer_statut' => 'Pangar, ou la domann po sanz lo statu z&eacute;l&eacute;man-la. L&eacute; byin sertin y v&eacute; sanz a li ?',
+'correcte' => 'kor&egrave;k',
 
 
 // D
@@ -209,8 +210,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(sa l&eacute; inn mod&eacute;kri otomatik)',
 'form_forum_pass' => 'modpas :',
 'form_forum_probleme_mail' => 'Ast&egrave;r, nana inn larlik &egrave;k out im&egrave;l&nbsp;: lo kod-lidantit&eacute; i giny pa &egrave;t anvway&eacute;.',
-'form_forum_voici1' => 'Ala out bann kod-lidantit&eacute; pou m&egrave;t ansanm andann forom kozman lo sit"@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => 'Ala out bann kod-lidantit&eacute; pou out i propoz bann zartik si lo sitw&egrave;b "@nom_site_spip@" (@adresse_login@) :',
+'form_forum_voici1' => 'Ala out bann kod-lidantit&eacute; pou m&egrave;t ansanm ek vi lo sit"@nom_site_spip@" (@adresse_site@) :',
+'form_forum_voici2' => 'Ala out bann kod-lidantit&eacute; pou ou i propoz bann zartik si lo sitw&egrave;b "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Mersi inskri out ladr&egrave;s im&egrave;l.',
 'form_indiquer_nom' => 'Mersi m&egrave;t isi out non.',
 'form_indiquer_nom_site' => 'Mersi m&egrave;t isi lo non out sitw&egrave;b.',
@@ -229,9 +230,9 @@ Ou la don&eacute; bann rans&eacute;ynman  swivan :
     Nom: @nom_email@
     Site: @nom_site@ - @url_site@
 
-Bot byen...
+PANGAR...
 
-Pou konfirm out sinyatir-la, i fo s&egrave;lman akost ladr&egrave;s anba (si l&eacute; pa f&eacute;, sitw&egrave;b-la i sava pa antyen pa out doman) :
+Pou konfirm out sinyatir-la, i fo s&egrave;lman akost ladr&egrave;s anba (si l&eacute; pa f&eacute;, sitw&egrave;b-la i sava pa antyen kon out doman) :
     @url@
 
 Mersi aou m&egrave;t ansanm isi
@@ -348,6 +349,7 @@ Mersi aou m&egrave;t ansanm isi
 'image_tourner_droite' => 'toun&eacute; drwat 90&deg; ',
 'image_tourner_gauche' => 'Toun&eacute; goch 90&deg; ',
 'img_indisponible' => 'zimaj-la l&eacute; pa posib giny ali',
+'impossible' => 'pa posib',
 'info_a_suivre' => 'POU SWIV&nbsp;&raquo;',
 'info_a_valider' => '[pou konfirmasyon]',
 'info_acces_interdit' => 'Ou n&eacute;na pwinn permisyon akost lapazw&egrave;b-la.',
@@ -382,7 +384,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_copyright_gpl' => 'sou lisans GPL',
 'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
 'info_creer_repertoire' => 'Mersi kr&eacute; inn fisy&eacute; o inn r&eacute;pertwar &egrave;k non-la&nbsp;:',
-'info_creer_repertoire_2' => 'an dodan lo sou-r&eacute;pertwar <b>@repertoire@</b>, &eacute; apr&egrave;&nbsp;:',
+'info_creer_repertoire_2' => 'andann lo sou-r&eacute;pertwar <b>@repertoire@</b>, &eacute; apr&egrave;&nbsp;:',
 'info_creer_vignette' => 'pou kr&eacute;y inn tite-limaz otomatikman',
 'info_deplier' => 'D&eacute;pliy',
 'info_descriptif_nombre' => 'Bann zaf&egrave;r sak i kontyin&nbsp;:',
@@ -479,7 +481,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_retirer_mot' => 'Anl&egrave;v mo-la',
 'info_retirer_mots' => 'Anl&egrave;v tout bann mo',
 'info_sans_titre_2' => 'n&eacute;na pwinn titr',
-'info_selectionner_fichier' => 'I p&eacute; swazi inn fisy&eacute; dann dosy&eacute; @upload@',
+'info_selectionner_fichier' => 'Ou i p&eacute; swazi in fisy&eacute; dann dosy&eacute; @upload@',
 'info_selectionner_fichier_2' => 'Swazi inn fisy&eacute;&nbsp;:',
 'info_site_attente' => 'Sitw&egrave;b-la l&eacute; apr&eacute; esp&egrave;r lakonfirmasyon',
 'info_site_reference' => 'Sitw&egrave;b r&eacute;f&eacute;rans&eacute; an liyn',
@@ -609,14 +611,14 @@ m&egrave;t ansanm &egrave;k bann dalon dan tout bann forom.',
 sak l&eacute; r&eacute;z&egrave;rv&eacute; pou bann vizit&egrave;r anrozistr&eacute;.',
 'pass_indiquez_cidessous' => 'M&egrave;t isi ladr&egrave;s im&egrave;l ou la d&eacute;za anservi pou anroziztr aou. Apr&eacute;sa, ou sava
 giny inn lim&egrave;l : li indik aou lamanyir pou r&eacute;kup&egrave;r out laks&eacute;.',
-'pass_mail_passcookie' => '(Sa l&eacute; inn mod&eacute;kri otomatik)
-Pour ou p&eacute; artrouv out laks&eacute; si lo sitw&egrave;b
+'pass_mail_passcookie' => '(Sa l&eacute; in mod&eacute;kri otomatik)
+Pour ou i p&eacute; artrouv out laks&eacute; si lo sitw&egrave;b
 @nom_site_spip@ (@adresse_site@)
 
 Mersi rand aou sir ladr&egrave;s la :
     @sendcookie@
 
-Apr&eacute;sa, zi poura m&egrave;t inn nouvo modpas
+Apr&eacute;sa, ou i poura m&egrave;t in nouvo modpas
  pou rakost lo sitw&egrave;b.
 ',
 'pass_mot_oublie' => 'Modpas oubliy&eacute;',
@@ -636,6 +638,9 @@ Apr&eacute;sa, zi poura m&egrave;t inn nouvo modpas
 
 
 // S
+'squelette' => 'l&eacute;skel&egrave;t',
+'squelette_inclus_ligne' => 'lesk&eacute;l&egrave;t dodan, liny',
+'squelette_ligne' => 'l&eacute;skel&egrave;t, liny',
 'stats_visites_et_popularite' => '@visites@ vizit&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'suivant' => 'd&egrave;ry&egrave;r',
 
@@ -665,7 +670,7 @@ out sit i mars. Ni kons&egrave;y aou pa tous a ryin si ou l&eacute; pa fransv&ea
 
  <P align="justify"><B>&Eacute; minm, ni kons&eacute;y
 aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prinsipal.</b>',
-'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>@fichier@</code>.  Mersi, kom komand&egrave;r lo sit,',
+'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov&eacute; inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>@fichier@</code>.  Mersi, kom komand&egrave;r lo sit,',
 'texte_inc_meta_2' => 'v&eacute;rify&eacute; bann drwa l&eacute;kritir',
 'texte_inc_meta_3' => 'dann r&eacute;pertwar <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'apr&eacute; l&eacute;kritir',

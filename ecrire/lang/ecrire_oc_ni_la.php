@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => '<NEW>Activer le plugin',
 'aide_non_disponible' => 'Aquela part de l\'ajuda en linha non es encara disponibla per aquesta lenga.',
+'auteur' => '<NEW>Auteur&nbsp;:',
 'avis_acces_interdit' => 'Acc&egrave;s pro&iuml;bit.',
 'avis_article_modifie' => 'Atencion, @nom_auteur_modif@ a trabalhat sus aquel article fa @date_diff@ minutas',
 'avis_aucun_resultat' => 'Minga de resultat.',
@@ -54,6 +56,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_checkbox_signature_unique_email' => 'basta una signatura per adrei&ccedil;a e-mail',
 'bouton_checkbox_signature_unique_site' => 'basta una signatura per sit web',
 'bouton_demande_publication' => 'Demandar la publicacion d\'aquest article',
+'bouton_desactive_tout' => '<NEW>Tout d&eacute;sactiver',
 'bouton_effacer_index' => 'Esfa&ccedil;ar lu ind&egrave;x',
 'bouton_effacer_tout' => 'O esfa&ccedil;ar tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
@@ -84,11 +87,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non apar&eacute;isser dins la tiera dei redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non mandar d\'anoncis editoriaus',
 'bouton_radio_non_syndication' => 'Minga de sindicacion',
-'bouton_radio_occidental' => 'Alfabet occidentau&nbsp; (<tt>iso-8859-1</tt>): toi lu navigadors lo sup&ograve;rtan, mas permete basta
- d\'afichar li lengas o&egrave;st-europ&egrave;&iuml; (occitan, catalan, angl&eacute;s, alemand...).  ',
 'bouton_radio_pas_petition' => 'Minga de peticion',
-'bouton_radio_personnalise' => 'Juec de caract&egrave;rs personalizat: chausiss&egrave;tz aquela opcion se vol&egrave;tz
- utilizar un juec de caract&egrave;rs especific ',
 'bouton_radio_petition_activee' => 'Peticion activada',
 'bouton_radio_publication_immediate' => 'Publicar lu messatges sus lo c&ograve;up
  (li contribucions apareisson a pena mandadi, lu administrators li p&ograve;don
@@ -97,8 +96,6 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimida sota <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => 'Alfabet universau (<tt>utf-8</tt>: permete d\'afichar toti lei lengas, mas per a&uuml;ra non es
- reconegut per toi lu navigadors.',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lan&ccedil;ar l\'installacion',
 'bouton_restaurer_base' => 'Restaurar la basa',
@@ -132,7 +129,7 @@ la documentacion d\'SPIP</a>.',
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Adrei&ccedil;a de l\'annuari',
 'entree_adresse_email' => 'La v&ograve;stra adrei&ccedil;a e-mail',
-'entree_adresse_fichier_syndication' => 'Adrei&ccedil;a dau fichier "backend" per la sindicacion:',
+'entree_adresse_fichier_syndication' => '<MODIF>Adrei&ccedil;a dau fichier "backend" per la sindicacion:',
 'entree_adresse_site' => '<b>Adrei&ccedil;a dau sit</b> [Obligat&ograve;ria]',
 'entree_base_donnee_1' => 'Adrei&ccedil;a de la basa de donadas',
 'entree_base_donnee_2' => '(Sovent, aquela adrei&ccedil;a corresp&ograve;nde a aquela dau v&ograve;stre sit, de c&ograve;ups corresp&ograve;nde a la men&ccedil;on "localhost", de c&ograve;ups, si laissa vueia completament.)',
@@ -167,6 +164,13 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
 'entree_url' => 'L\'adrei&ccedil;a (URL) dau v&ograve;stre sit',
+'erreur_plugin_fichier_absent' => '<NEW>Fichier absent',
+'erreur_plugin_fichier_def_absent' => '<NEW>Fichier de d&eacute;finition absent',
+'erreur_plugin_nom_fonction_interdit' => '<NEW>Nom de fonction interdit',
+'erreur_plugin_nom_manquant' => '<NEW>Nom du plugin manquant',
+'erreur_plugin_prefix_manquant' => '<NEW>Espace de nommage du plugin non d&eacute;fini',
+'erreur_plugin_tag_plugin_absent' => '<NEW>&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
+'erreur_plugin_version_manquant' => '<NEW>Version du plugin manquante',
 
 
 // I
@@ -181,8 +185,9 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'ical_texte_rss' => 'Pod&egrave;tz sindicar li novetats d\'aquest sit dins quin legidor de fichiers que sia en format XML/RSS (Rich Site Summary). Es finda lo format que permete a SPIP de legir li novetats publicadi dins d\'autres sits en utilizant un format d\'escambi compatible (sits sindicats). ',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de corrier',
-'ical_titre_rss' => 'Fichiers &laquo;backend&raquo;',
+'ical_titre_rss' => '<MODIF>Fichiers &laquo;backend&raquo;',
 'icone_activer_cookie' => 'Activar lo cookie de correspond&eacute;ncia',
+'icone_admin_plugin' => '<NEW>Gestion des plugins',
 'icone_afficher_auteurs' => 'Afichar lu autors',
 'icone_afficher_visiteurs' => 'Afichar lu vesitaires',
 'icone_arret_discussion' => 'Quitar aquela discussion',
@@ -546,6 +551,8 @@ D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu s
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Estatut d\'aquel autor:',
+'info_statut_auteur_a_confirmer' => '<NEW>Inscription &agrave; confirmer',
+'info_statut_auteur_autre' => '<NEW>Autre statut&nbsp;:',
 'info_statut_efface' => 'Esfa&ccedil;at',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Aqueu sit es:',
@@ -557,6 +564,8 @@ D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu s
 'info_suivi_activite' => 'Segut de l\'activitat editoriala',
 'info_supprimer_mot' => 'suprimir aqueu mot',
 'info_surtitre' => 'Sobret&iacute;tol:',
+'info_syndication_integrale_1' => '<NEW>Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => '<NEW>Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?',
 'info_taille_maximale_vignette' => 'Talha maximala dei vinhetas congreadi per lo sist&egrave;ma:',
 'info_terminer_installation' => 'A&uuml;ra pod&egrave;tz acabar la procedura d\'installacion estandard.',
 'info_texte' => 'T&egrave;xt',
@@ -586,8 +595,8 @@ un color indica lo sieu estat:',
 'info_une_breve' => 'una br&egrave;va, ',
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
-'info_url' => 'URL:',
-'info_url_site' => 'URL DAU SIT:',
+'info_url' => '<MODIF>URL:',
+'info_url_site' => '<MODIF>URL DAU SIT:',
 'info_urlref' => 'Ligam ipert&egrave;xt:',
 'info_utilisation_spip' => 'A&uuml;ra pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_visites_par_mois' => 'Afichatge per mes:',
@@ -609,6 +618,7 @@ un color indica lo sieu estat:',
 'item_ajout_mots_cles' => 'Autorizar que s\'aponda de mots clau ai forums',
 'item_autoriser_documents_joints' => 'Autorizar que si jonga de documents ai articles',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar lu documents dins li rubricas',
+'item_autoriser_syndication_integrale' => '<NEW>Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication',
 'item_bloquer_liens_syndiques' => 'Blocar lu ligams sindicats per validacion',
 'item_breve_refusee' => 'NON - Br&egrave;va refusada',
 'item_breve_validee' => 'A&Iacute;- Br&egrave;va validada',
@@ -634,6 +644,7 @@ un color indica lo sieu estat:',
 'item_non_ajout_mots_cles' => 'Pro&iuml;bir l\'utilizacion dei mots clau dins lu forums',
 'item_non_autoriser_documents_joints' => 'Non autorizar lu documents dins lu articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Non autorizar lu documents dins li rubricas',
+'item_non_autoriser_syndication_integrale' => '<NEW>Ne diffuser qu\'un r&eacute;sum&eacute;',
 'item_non_bloquer_liens_syndiques' => 'Non blocar lu ligams eissits de la sindicacion',
 'item_non_creer_fichiers_authent' => 'Non crear aquelu fichiers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
@@ -724,13 +735,28 @@ un color indica lo sieu estat:',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
 
+// P
+'plugin_etat_developpement' => '<NEW>en d&eacute;veloppement',
+'plugin_etat_experimental' => '<NEW>exp&eacute;rimental',
+'plugin_etat_stable' => '<NEW>stable',
+'plugin_etat_test' => '<NEW>en test',
+'plugins_liste' => '<NEW>Liste des plugins',
+
+
+// R
+'repertoire_plugins' => '<NEW>R&eacute;pertoire&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(admin. restrench)',
 'syndic_choix_moderation' => 'Que si p&ograve;u far embai ligams venents que provenon d\'aqueu sit?',
 'syndic_choix_oublier' => 'Que si p&ograve;u far embai ligams que figuran pus dins lo fichier de sindicacion?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'ligam obsolet',
 'syndic_option_miroir' => 'lu blocar sus lo c&ograve;up',
 'syndic_option_oubli' => 'lu escafar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Opcions de sindicacion:',
 
 
@@ -813,15 +839,18 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_informations_personnelles_1' => 'A&uuml;ra lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat au sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'agisse d\'una re&iuml;nstallacion, e se lo v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opcion es utila se lo v&ograve;stre sit deu afichar d\'alfabets
+'texte_jeu_caractere' => '<MODIF>Aquesta opcion es utila se lo v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (&ograve; "occidentau") e lu sieus derivats.
  En aqueu cas, cau cambiar lo reglatge predefinit per fin d\'utilizar
  un juec de caract&egrave;rs apropriat. Non oblidetz nimai d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Aquest reglatge a minga d\'efiech retroactiu. Doncas
+'texte_jeu_caractere_2' => '<MODIF>Aquest reglatge a minga d\'efiech retroactiu. Doncas
  lu t&egrave;xts ja sasits si p&ograve;don afichar
  d\'un biais incorr&egrave;cte apr&egrave;s que s\'auga modificat lo reglatge. De tot biais
  porretz tornar sensa damatge au reglatge precedent.',
+'texte_jeu_caractere_3' => '<NEW>Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
+'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Se lo v&ograve;stre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina fornissent mai d\'informacions, vorgatz indicar &ccedil;ai sota lo t&iacute;tol de la p&agrave;gina e la sieu adrei&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Lu ligams eissits dei sits sindicats si p&ograve;don
    blocar a pri&ograve;ri; lo reglatge
@@ -857,11 +886,12 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_nouveau_message' => 'Messatge n&ograve;u',
 'texte_nouveau_mot' => 'Mot n&ograve;u',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz installada una version nov&egrave;la d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se siatz webm&egrave;stre/webm&egrave;stra dau sit, vorgatz esfa&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar pilhar l\'installacion per fin d\'actualizar lu v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p /> (NB: s\'av&egrave;tz demembrat lu v&ograve;stres param&egrave;tres de connexion, espepissatz lo fichier  <tt>inc_connect.php3</tt> avans de lo suprimir...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se siatz webm&egrave;stre/webm&egrave;stra dau sit, vorgatz esfa&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar pilhar l\'installacion per fin d\'actualizar lu v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p /> (NB: s\'av&egrave;tz demembrat lu v&ograve;stres param&egrave;tres de connexion, espepissatz lo fichier  <tt>inc_connect.php3</tt> avans de lo suprimir...)',
 'texte_operation_echec' => 'Tornatz a la p&agrave;gina precedenta, chausiss&egrave;tz una autra basa &ograve; creatz-ne\'n una nov&egrave;la. Verificatz li informacions que lo v&ograve;stre aubergador a fornidi.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(Lo valor indicat coma predefinit conven en generau.)',
+'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
 'texte_proposer_publication' => 'Quora auretz acabat lo v&ograve;stre article,<br> porretz prepauar que sia publicat.',
 'texte_proxy' => 'Dins d\'unu cas (intranet, rets protegidas...),
   si p&ograve;u que cauga utilizar un <I>proxy HTTP</i> per at&eacute;nher lu sits sindicats.
@@ -877,7 +907,7 @@ tornar calcular basta una p&agrave;gina, passatz puspr&egrave;st per l\'espaci p
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recapitula la tiera dei documents qu\'av&egrave;tz pla&ccedil;ats dins li rubricas. Per modificar li informacions de cada document, segu&egrave;tz lo ligam v&egrave;rs la p&agrave;gina de la sieu rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins lo v&ograve;stre sit SPIP, mas redirigit v&egrave;rs una autra URL.',
-'texte_referencement_automatique' => '<b>Referenciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicant &ccedil;ai sota l\'adrei&ccedil;a URL desirada, &ograve; l\'adrei&ccedil;a dau sieu fichier backend. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<MODIF><b>Referenciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicant &ccedil;ai sota l\'adrei&ccedil;a URL desirada, &ograve; l\'adrei&ccedil;a dau sieu fichier backend. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu sit (t&iacute;tol, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora d\'uni requistas MySQL s\'encalan
   sistematicament e sensa rason aparenta, si p&ograve;u
   qu\'aqu&ograve; venga ben de la basa de donadas.  </b><p />
@@ -935,7 +965,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;up de resultats per "@cherche_auteur@" ; vorgatz afinar la c&egrave;rca.',
 'texte_unpack' => 'telecargament de la darriera version',
-'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quora utilizatz lo cercador integrat 
     a SPIP, pod&egrave;tz far li c&egrave;rcas sobre lu sits e
     articles sindicats de doi biais
     diferents. <br><img src=\'puce.gif\'> Lo mai
@@ -1035,7 +1065,20 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aquest article',
 
 
+// U
+'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+
+
 // V
+'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'Version iniciala'
 
 );
