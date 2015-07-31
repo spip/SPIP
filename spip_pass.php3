@@ -118,7 +118,14 @@ else {
 	echo "</small>";
 }
 
-echo "<p align='right'><a href='javascript:{if(window.opener) window.opener.location.href=window.opener.location.href;close();}'>Quitter cette fen&ecirc;tre</a></p>";
+echo "<p align='right'><script type='text/javascript'><!--
+	function ciao() { window.opener.location.href=window.opener.location.href; close(); }
+	if (window.opener) document.write(\"<a href='javascript:ciao();'>\");
+	else document.write(\"<a href='./'>\");
+	document.write(\"Quitter cette fen&ecirc;tre</a>\");
+	//--></script>
+<noscript>[<a href='./'>Retour sur le site public</a>]</noscript>
+</p>";
 
 install_fin_html();
 
