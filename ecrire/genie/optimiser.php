@@ -167,7 +167,7 @@ function optimiser_base_disparus($attente = 86400) {
 
 	include_spip('action/editer_liens');
 	// optimiser les liens de tous les documents vers des objets effaces
-	$n+= objet_optimiser_liens(array('document'=>'*','*'));
+	$n+= objet_optimiser_liens(array('document'=>'*'),'*');
 	
 
 	// on ne nettoie volontairement pas automatiquement les documents orphelins
