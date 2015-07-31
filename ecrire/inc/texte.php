@@ -1050,7 +1050,10 @@ function traiter_raccourci_glossaire($letexte)
 //
 
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
-define('_RACCOURCI_LIEN', ",\[(.*?)->(>?)([^]]*)\],msS");
+// Laisser passer des paires de crochets pour la balise multi
+// mais refuser plus d'imbrications ou de mauvaises imbrications
+// sinon les crochets ne peuvent plus servir qu'a ce type de raccourci
+define('_RACCOURCI_LIEN', ",\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\],msS");
 
 // http://doc.spip.org/@expanser_liens
 function expanser_liens($letexte, $connect='')
