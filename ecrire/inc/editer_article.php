@@ -54,8 +54,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_chapo($row['chapo'], $config, $aider)
 	. editer_article_texte($row['texte'], $config, $aider)
 	. editer_article_ps($row['ps'], $config, $aider)
-
-	. (!$config['extra'] ? '': extra_saisie($row['extra'], 'articles', $id_secteur))
+	. editer_article_extra($row['ps'], $config, $aider)
 	. $hidden
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -295,6 +294,14 @@ function editer_article_chapo($chapo, $config, $aider)
 	}
 }
 
+function editer_article_extra($chapo, $config, $aider)
+{
+	if (!$config['extra'])
+		return '';
+	include_spip('inc_extra');
+	return extra_saisie($row['extra'], 'articles', $id_secteur);
+}
+
 // Choix par defaut des options de presentation
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
@@ -322,5 +329,4 @@ function articles_edit_config($row)
 	$config['restreint'] = ($row['statut'] == 'publie');
 	return $config;
 }
-
 ?>
