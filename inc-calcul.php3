@@ -244,25 +244,25 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 		// Page globale
 		// si le champ chapo commence par '=' c'est une redirection.
 		if ($id_article = intval($GLOBALS['id_article'])) {
-			$page = sql_chapo($id_article);
-			if ($page) {
-				$page = $page['chapo'];
-				if (substr($page, 0, 1) == '=') {
+			if ($art = sql_chapo($id_article)) {
+				$chapo = $art['chapo'];
+				if (substr($chapo, 0, 1) == '=') {
 					include_ecrire('inc_texte.php3');
-					list(,$page) = extraire_lien(array('','','',
-					substr($page, 1)));
-					if ($page) { // sinon les navigateurs pataugent
-						$page = addslashes($page);
-						return array('texte' =>
-						("<". "?php header(\"Location: $page\"); ?" . ">"),
+					list(,$url) = extraire_lien(array('','','',
+					substr($chapo, 1)));
+					if ($url) { // sinon les navigateurs pataugent
+						$url = addslashes($url);
+						$page = array('texte' => "<".
+						"?php header(\"Location: $url\"); ?" . ">",
 						'process_ins' => 'php');
 					}
 				}
 			}
 		}
-		$page = calculer_page_globale($chemin_cache,
-			$elements['contexte'],
-			$elements['fond']);
+		if (!$page)
+			$page = calculer_page_globale($chemin_cache,
+				$elements['contexte'],
+				$elements['fond']);
 	}
 
 	$page['signal']['process_ins'] = $page['process_ins'];
