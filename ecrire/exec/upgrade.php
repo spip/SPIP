@@ -78,6 +78,7 @@ function exec_upgrade_dist() {
 
 	fin_admin($upgrade_titre);
 
+	include_spip('inc/actions');
 	redirige_par_entete(generer_action_auteur('purger', 'cache', _DIR_RESTREINT_ABS, true));
 }
 
