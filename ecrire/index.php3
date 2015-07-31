@@ -36,7 +36,160 @@ if ($spip_display != 4) {
 		icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 	}
 
-	echo "<p>";	
+
+
+	$nom_site_spip = propre(lire_meta("nom_site"));
+	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	
+	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
+	include_ecrire("inc_logos.php3");
+
+	$logo = get_image("rubon0");
+	if ($logo) {
+		$fichier = $logo[0];
+		$taille = $logo[1];
+		$fid = $logo[2];
+		if ($taille) {
+			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
+		}
+		echo "<img src='../IMG/$fichier$fid' $taille_html alt='' />";
+	}
+	
+	echo "<div class='verdana1'>";
+	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_art_publie = $result['cnt'];
+	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='prop'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_art_prop = $result['cnt'];
+	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='prepa'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_art_redac= $result['cnt'];
+	
+	
+	if ($nb_art_redac OR $nb_art_prop OR $nb_art_publie) 
+	{
+		echo afficher_plus("articles.php3")."<b>"._T('info_articles')."</b>";
+		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		if ($nb_art_redac) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_redac;
+		if ($nb_art_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_art_prop;
+		if ($nb_art_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_art_publie."</b>";
+		echo "</ul>";
+	}
+
+	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_bre_publie = $result['cnt'];
+	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='prop'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_bre_prop = $result['cnt'];
+
+	if ($nb_bre_prop OR $nb_bre_publie) 
+	{
+		echo afficher_plus("breves.php3")."<b>"._T('info_breves_02')."</b>";
+		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		if ($nb_bre_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_bre_prop;
+		if ($nb_bre_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_bre_publie."</b>";
+		echo "</ul>";
+	}
+
+	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_forum = $result['cnt'];
+
+	if ($nb_forum) {
+		echo "<b>"._T('onglet_messages_publics')."</b>";
+		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		echo "<li><b>".$nb_forum."</b>";
+		echo "</ul>";
+	}
+
+	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='0minirezo'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_admin = $result['cnt'];
+
+	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='1comite'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_redac = $result['cnt'];
+
+	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='6forum'";
+	$result = spip_fetch_array(spip_query($query));
+	$nb_abonn = $result['cnt'];
+
+	if ($nb_admin OR $nb_redac OR $nb_abonn) 
+	{
+		echo afficher_plus("auteurs.php3")."<b>"._T('icone_auteurs')."</b>";
+		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		if ($nb_admin) echo "<li>"._T("info_administrateurs").": ".$nb_admin;
+		if ($nb_redac) echo "<li><b>"._T("info_redacteurs").": ".$nb_redac."</b>";
+		if ($nb_abonn) echo "<li><b>"._T("info_visiteurs").": ".$nb_abonn."</b>";
+		echo "</ul>";
+	}
+
+
+	echo "</div>";
+
+	
+	echo fin_cadre_relief();
+
+
+//
+// Afficher les raccourcis : boutons de creation d'article et de breve, etc.
+//
+
+debut_raccourcis();
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+
+$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+$result = spip_query($query);
+
+if (spip_num_rows($result) > 0) {
+	icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
+
+	$activer_breves = lire_meta("activer_breves");
+	if ($activer_breves != "non") {
+		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+	}
+}
+else {
+	if ($connect_statut == '0minirezo') {
+		echo "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
+	}
+}
+if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
+}
+
+
+/* La nouvelle interface rend ces raccourcis inutiles
+if ($options == "avancees") {
+	echo "<p>";
+	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
+
+	if ($connect_statut == "0minirezo") {
+		if (lire_meta('forum_prive_admin') == 'oui') {
+			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
+		}
+			echo "<p>";
+		if (lire_meta("activer_statistiques") == 'oui')
+			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
+		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
+		if ($connect_toutes_rubriques)
+			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
+	}
+}
+else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+	echo "<p>";
+	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
+}
+*/
+
+fin_raccourcis();
+
+	echo "<div>&nbsp;</div>";	
 	
 	//
 	// Annonces
@@ -78,61 +231,6 @@ if ($spip_display != 4) {
 		echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 		}
 }
-
-//
-// Afficher les raccourcis : boutons de creation d'article et de breve, etc.
-//
-
-debut_raccourcis();
-
-//
-// Afficher les boutons de creation d'article et de breve
-//
-
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = spip_query($query);
-
-if (spip_num_rows($result) > 0) {
-	icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
-
-	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non") {
-		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
-	}
-}
-else {
-	if ($connect_statut == '0minirezo') {
-		echo "<font size='2'>"._T('info_ecrire_article')."</font><p>";
-	}
-}
-if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
-}
-
-
-
-if ($options == "avancees") {
-	echo "<p>";
-	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
-
-	if ($connect_statut == "0minirezo") {
-		if (lire_meta('forum_prive_admin') == 'oui') {
-			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
-		}
-			echo "<p>";
-		if (lire_meta("activer_statistiques") == 'oui')
-			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
-		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
-		if ($connect_toutes_rubriques)
-			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
-	}
-}
-else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	echo "<p>";
-	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
-}
-
-fin_raccourcis();
 
 
 debut_droite();
@@ -327,22 +425,17 @@ if ($relief) {
 
 if ($options == 'avancees') {
 
-	//
+	/* Ne plus afficher: il y a la page "Tous vos articles" pour cela
 	// Vos articles publies
-	//
-
 	echo "<p>";
 	afficher_articles(afficher_plus('articles_page.php3')._T('info_derniers_articles_publies'),
 		", spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
+	*/
 
 	// Dernieres modifications d'articles
-	echo "<p>";
 	include_ecrire("inc_suivi_revisions.php");
 	afficher_suivi_versions (0, 0, false, "", true);
-	
-
-
 }
 
 

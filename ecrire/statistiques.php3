@@ -161,24 +161,6 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 }
 
 
-$query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
-$result = spip_fetch_array(spip_query($query));
-$nb_art = $result['cnt'];
-
-if ($nb_art){
-	$cesite = "<LI> $nb_art "._T('info_article_2');
-	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_breves = $result['cnt'];
-	if ($nb_breves) $cesite .= "<LI> $nb_breves "._T('info_breves_2');
-	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_forum = $result['cnt'];
-	if ($nb_forum) $cesite .= "<LI> $nb_forum "._T('info_contribution');
-	echo "<P><B>"._T('info_contenance')."<UL> $cesite.</UL></B>";
-}
-
-
 
 $abs_total=enfants(0);
 if ($abs_total<1) $abs_total=1;

@@ -128,7 +128,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 function fin_cadre($style="") {
 	if ($style == "e") $ret = "</div>";
 	$ret .= "</div></div></div>\n";
-	//$ret .= "<div style='height: 5px;'></div>";
+	if ($style != "forum" AND $style != "thread-forum") $ret .= "<div style='height: 5px;'></div>";
 	
 	return $ret;
 }
@@ -2094,7 +2094,7 @@ else {
 
 		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 0,1"));
 		if ($nombre_articles > 0) {
-			icone_bandeau_secondaire (_T('icone_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
 
 		/*if ($options == "avancees") {
