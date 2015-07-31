@@ -32,7 +32,10 @@ function action_logout_dist()
 		if ($_COOKIE['spip_session']) {
 			$session = charger_fonction('session', 'inc');
 			$session($auteur_session['id_auteur']);
-			spip_setcookie('spip_session', '', 0);
+			preg_match(',^[^/]*//[^/]*(.*)/$,',
+				   url_de_base(),
+				   $r);
+			spip_setcookie('spip_session', '', 0, $r[1]);
 		}
 		if ($_SERVER['PHP_AUTH_USER'] AND !$ignore_auth_http) {
 			include_spip('inc/actions');
