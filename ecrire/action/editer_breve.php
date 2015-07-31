@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/auth');
+include_spip("inc/lang");
 
 // http://doc.spip.org/@action_editer_breve_dist
 function action_editer_breve_dist() {
