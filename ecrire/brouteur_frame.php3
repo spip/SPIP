@@ -22,12 +22,15 @@ debut_html();
 		$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
+			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
+			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
 				$titre = typo($row['titre']);
-				$puce = "puce-blanche-breve.gif";
-				echo "<div class='puce-article' style='background: url(img_pack/$puce) left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
+				$statut = $row['statut'];
+				echo "<a class='$statut' href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a>";
 			}
+			echo "</div>";
 		}
 	
 	}
@@ -36,13 +39,14 @@ debut_html();
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
+			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				$puce = "puce-orange-breve.gif";
-				echo "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
+				echo "<a class='$statut' href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a>";
 			}
+			echo "</div>";
 		}
 	
 		$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT 0, 20";
@@ -105,30 +109,14 @@ debut_html();
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
+				echo "<div class='plan-articles'>";
 				while($row=spip_fetch_array($result)){
 					$id_article=$row['id_article'];
 					$titre = typo($row['titre']);
 					$statut = $row['statut'];
-					switch ($statut) {
-						case 'publie':
-							$puce = 'verte';
-								break;
-						case 'prepa':
-							$puce = 'blanche';
-							break;
-						case 'prop':
-							$puce = 'orange';
-							break;
-						case 'refuse':
-							$puce = 'rouge';
-							break;
-						case 'poubelle':
-							$puce = 'poubelle';
-							break;
-					}
-					$puce = "puce-$puce-breve.gif";
-					echo "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
+					echo "<a class='$statut' href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a>";
 				}
+				echo "</div>";
 			}
 	
 			$query = "SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT 0, 20";

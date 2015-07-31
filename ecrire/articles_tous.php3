@@ -79,62 +79,55 @@ echo "</form>";
 debut_droite();
 
 function afficher_rubriques_filles($id_parent) {
-	global $rubrique, $enfant, $article, $rubriques_actives;
+	global $rubrique, $enfant, $article;
 	global $spip_lang_left, $spip_lang_right;
 	global $couleur_claire;
 	
 	if ($enfant[$id_parent]) {
 		while (list(,$id_rubrique) = each($enfant[$id_parent]) ) {
-			$vide = !($enfant[$id_rubrique] OR $article[$id_rubrique]);
 			
 			if ($id_parent == 0) {
 				$icone = "secteur-24.gif";
-				$bgcolor = " background-image: none; background-color: $couleur_claire;";
+				$bgcolor = " background-color: $couleur_claire;";
 			}
 			else {
 				$icone = "rubrique-24.gif";
 				$bgcolor = "";
 			}
-
-			echo "<div style='padding: 3px; $bgcolor'>";
-			if (!$vide) {
-				echo "<div style='float: $spip_lang_left; padding: 1px;'>";
-				echo bouton_block_invisible("rubrique$id_rubrique");
-				echo "</div>";
-			}
-			echo "<div style='float: $spip_lang_left; margin-$spip_lang_left: 5px; padding: 4px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;'>";
-
-			echo "<b class='verdana3'><a href='naviguer.php3?coll=$id_rubrique'>";
-			if ($vide && !$rubriques_actives[$id_rubrique]) echo "<font color='#909090'>";
+			
+			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;$bgcolor'>";
+			
+			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
+			
+			echo "<b class='verdana2'><a href='naviguer.php3?coll=$id_rubrique'>";
 			echo $rubrique[$id_rubrique];
-			if ($vide && !$rubriques_actives[$id_rubrique]) echo "</font>";
-			echo "</a></b></div>\n";
-			echo "<div style='clear:both;'></div>";
-			echo "</div>\n";
+			echo "</b></a></div>\n";
+			
 
-			if (!$vide) {
-				echo debut_block_invisible("rubrique$id_rubrique");
+			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) {
+				echo debut_block_invisible("rubrique$id_rubrique");			
 
-				if ($id_parent)
-					echo "<div class='plan-rubrique'>";
-				else 
-					echo "<div class='plan-secteur'>";
-				
+				echo "<div class='plan-rubrique'>";
 				if ($article[$id_rubrique]) {
-					echo "<div class='plan-articles'>\n";
-					echo join("", $article[$id_rubrique]);
-					echo "</div>\n";
+					echo "<div class='plan-articles'>";
+					while(list(,$zarticle) = each($article[$id_rubrique]) ) {
+						
+						echo "$zarticle\n";
+					}
+					echo "</div>";
+								
 				}
 
-				afficher_rubriques_filles($id_rubrique);
+				afficher_rubriques_filles($id_rubrique);	
 				echo "</div>";
 				echo fin_block();
 			}
-			if (!$id_parent) echo "<p>";
+			
+		if ($id_parent == 0) echo "<div>&nbsp;</div>";
 		}
 	}
+	
 }
-
 
 // Recuperer toutes les rubriques 
 $query = "SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY titre";
@@ -180,24 +173,6 @@ while($row = spip_fetch_array($result)) {
 	$id_article = $row['id_article'];
 	$titre = typo($row['titre']);
 	$statut = $row['statut'];
-	switch ($statut) {
-		case 'publie':
-			$puce = 'verte';
-			break;
-		case 'prepa':
-			$puce = 'blanche';
-			break;
-		case 'prop':
-			$puce = 'orange';
-			break;
-		case 'refuse':
-			$puce = 'rouge';
-			break;
-		case 'poubelle':
-			$puce = 'poubelle';
-			break;
-	}
-	$puce = "puce-$puce-breve.gif";
 	
 	$article[$id_rubrique][] = "<a class='$statut' href='articles.php3?id_article=$id_article'>$titre</a>\n";
 }
