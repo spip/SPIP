@@ -120,7 +120,7 @@ Hồ sơ SPIP</a>.', # MODIF
 
 	// I
 	'ical_info1' => 'Trang này cho bạn biết các cách để theo dõi các hoạt động của trang web này.',
-	'ical_info2' => 'Để biết thêm chi tiết xin vào xem trang web <a href="@spipnet@">SPIP\'s documentation</a>.', # MODIF
+	'ical_info2' => 'Để biết thêm chi tiết xin vào xem trang web <a href="@spipnet@">SPIP’s documentation</a>.', # MODIF
 	'ical_info_calendrier' => 'Bạn có 2 thời biểu để sử dụng. Thời biểu thứ nhất liệt kê tất cả các bài viết được đăng. Thời biểu thứ hai liệt kê các thông báo của Ban Biên Tập và những thông tin cá nhân của bạn. Phần này được dành cho bạn qua một mật mã riêng mà bạn có thể thay đổi bằng cách thay đổi mật mã của mình.',
 	'ical_methode_http' => 'Đang tải xuống',
 	'ical_methode_webcal' => 'Đồng bộ hoá (webcal://)',
@@ -609,7 +609,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 Bạn có thể cho phép cảnh báo hay không:',
 	'texte_trop_resultats_auteurs' => 'Quá nhiều kết quả khi tìm "@cherche_auteur@"; hãy duyệt lại việc tìm kiếm.',
 	'texte_unpack' => 'Đang tải xuống ấn bản mới nhất',
-	'texte_utilisation_moteur_syndiques' => 'Nếu bạn dùng cơ phận tìm kiếm của SPIP, bạn có thể tìm trong webiste và bài vở syndicated bằng nhiều cách khác nhau. <br /><img src=\'puce.gif\'>Cách đơn giản nhất là tìm trong tựa đề và phần mô tả bài. <br /><img src=\'puce.gif\'> Cách thứ nhất, mạnh hơn, cho phép SPIP tìm kiếm trong văn bản của website nối kết. Nếu bạn nối kết một website, SPIP sẽ tìm trong văn bản của website đó. ', # MODIF
+	'texte_utilisation_moteur_syndiques' => 'Nếu bạn dùng cơ phận tìm kiếm của SPIP, bạn có thể tìm trong webiste và bài vở syndicated bằng nhiều cách khác nhau. <br /><img src=’puce.gif’>Cách đơn giản nhất là tìm trong tựa đề và phần mô tả bài. <br /><img src=’puce.gif’> Cách thứ nhất, mạnh hơn, cho phép SPIP tìm kiếm trong văn bản của website nối kết. Nếu bạn nối kết một website, SPIP sẽ tìm trong văn bản của website đó. ', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Phương pháp này buộc SPIP đến viếng thường xuyên những website kết nối; việc này có thể làm giảm hiệu suất của website bạn.',
 	'texte_vide' => 'Trống rỗng',
 	'texte_vider_cache' => 'Dọn sạch cache',

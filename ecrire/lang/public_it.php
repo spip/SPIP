@@ -83,17 +83,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pagina precedente',
 	'page_suivante' => 'pagina successiva',
 	'par_auteur' => 'di ',
-	'participer_site' => 'È possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verrà spedito immediatamente un email con il codice di accesso all\'area riservata del sito.',
+	'participer_site' => 'È possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verrà spedito immediatamente un email con il codice di accesso all’area riservata del sito.',
 	'plan_site' => 'Mappa del sito',
 	'popularite' => 'Popolarità',
 	'poster_message' => 'Inviare un messaggio',
 	'proposer_site' => 'È possibile proporre un sito da aggiungere a questa rubrica:',
 
 	// R
-	'repondre_article' => 'Rispondere all\'articolo',
+	'repondre_article' => 'Rispondere all’articolo',
 	'repondre_breve' => 'Rispondere a questa breve',
 	'resultats_recherche' => 'Risultati della ricerca',
-	'retour_debut_forums' => 'Tornare all\'inizio dei forum',
+	'retour_debut_forums' => 'Tornare all’inizio dei forum',
 	'rubrique' => 'Rubrica',
 	'rubriques' => 'Rubriche',
 

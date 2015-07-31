@@ -23,19 +23,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Sanz molaklé-la',
 	'admin_modifier_rubrique' => 'Sanz rubrik-la',
 	'admin_recalculer' => 'Arkalkil pazwèb-la',
-	'afficher_trad' => 'Afich\' bann tradiksyon',
-	'alerte_maj_impossible' => '<b>Tansyon !</b> Larnouvèlman labazdodné SQL zizka lo vèrsyon @version@ lé pa posib, peut-être à cause d\'un problème de droit de modification sur la base de données. Veuillez contacter votre hébergeur.', # MODIF
-	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
+	'afficher_trad' => 'Afich’ bann tradiksyon',
+	'alerte_maj_impossible' => '<b>Tansyon !</b> Larnouvèlman labazdodné SQL zizka lo vèrsyon @version@ lé pa posib, peut-être à cause d’un problème de droit de modification sur la base de données. Veuillez contacter votre hébergeur.', # MODIF
+	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
 	'analyse_xml' => 'Analiz XML',
-	'annuler' => 'Anil\'',
+	'annuler' => 'Anil’',
 	'antispam_champ_vide' => 'Lés karo-la vide :',
 	'articles_recents' => 'Bann zartik li lé nouvo',
 	'avis_archive_incorrect' => 'Lo fisyé arsiv lé pwinn inn fisyé SPIP',
 	'avis_archive_invalide' => 'Lo fisyé arsiv i giny pa marsé',
 	'avis_attention' => 'TANSYON PANGAR !',
-	'avis_champ_incorrect_type_objet' => 'Non d\'karo-la lé fo @name@ pou inn sizé lo tip-la minm : @type@',
-	'avis_colonne_inexistante' => 'Nana pwinn kolonn-la : @col@ ',
-	'avis_erreur' => 'Kanard : gèt anba.',
+	'avis_champ_incorrect_type_objet' => 'Non d’karo-la lé fo @name@ pou inn sizé lo tip-la minm : @type@',
+	'avis_colonne_inexistante' => 'Nana pwinn kolonn-la : @col@ ',
+	'avis_erreur' => 'Kanard : gèt anba.',
 	'avis_erreur_connexion' => 'Astèr néna inn kanard èk lakostaz.
 
 ',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 ', # MODIF
 	'avis_erreur_mysql' => 'Néna inn kanard SQL', # MODIF
-	'avis_erreur_sauvegarde' => 'Astèr néna inn kanard èk la sovgard (@type@ @id_objet@) !',
+	'avis_erreur_sauvegarde' => 'Astèr néna inn kanard èk la sovgard (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Kanard ék laksé privé',
 
 	// B
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_eo_maj' => 'Pou mèt in E andan O an mazizkil',
 	'barre_euro' => 'Mèt lo sinbol €',
 	'barre_gras' => 'Pou ékri {{an gro}}',
-	'barre_guillemets' => 'Pou mèt bann « giymé fransé »',
+	'barre_guillemets' => 'Pou mèt bann « giymé fransé »',
 	'barre_guillemets_simples' => 'Pou mè bann „giymé“',
 	'barre_intertitre' => 'Mèt sa-la kom in {{{lintèrtitr}}}',
 	'barre_italic' => 'Mèt sa-la an {litalik}',
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_couleur_interface' => 'Koulèr',
 	'choix_interface' => 'soizi lintèrfas',
 	'colonne' => 'Kolonn',
-	'confirm_changer_statut' => 'Pangar, ou la domann po sanz lo statu zéléman-la. Lé byin sertin y vé sanz a li ?',
+	'confirm_changer_statut' => 'Pangar, ou la domann po sanz lo statu zéléman-la. Lé byin sertin y vé sanz a li ?',
 	'correcte' => 'korèk',
 
 	// D
@@ -190,12 +190,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_saison_4' => 'otonn an Frans - find sézon sèk / débu dla grandsézon la Réinyon',
 	'date_semaines' => 'semèn',
 	'dirs_commencer' => 'pou komans fransvérité linstalasyon ',
-	'dirs_preliminaire' => 'Dabor : <b> Règ out bann drwa-laksé</b>',
+	'dirs_preliminaire' => 'Dabor : <b> Règ out bann drwa-laksé</b>',
 	'dirs_probleme_droits' => 'Astèr, néna inn larlik èk out bann drwa-laksé',
 	'dirs_repertoires_absents' => '<b>Lé pa posib giny bann répèrtwar-la : <ul>@bad_dirs@.</ul> </b>
   <p>Ni pans néna inn larlik èk lékritir bann lèt maziskil o miniskil
   Ogad byin néna okinn diskord ant bann zot maziskil o miniskil andann bann répèrtwar é sak lé afisé
-  anlèr ; si ou trouv i lé pa parèy, ardonn inn ot non bann répèrtwar-la sanm out lozisyèl FTP. Komsa lo larlik i sra pou aranzé.
+  anlèr ; si ou trouv i lé pa parèy, ardonn inn ot non bann répèrtwar-la sanm out lozisyèl FTP. Komsa lo larlik i sra pou aranzé.
   <p>Kank ou lora fini ou sra kav ', # MODIF
 	'dirs_repertoires_suivants' => '<b>Bann répertwar-la lé pa ouvèr pou léktritir : <ul>@bad_dirs@.</ul> </b>
 
@@ -212,7 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'envoi_via_le_site' => 'Envwa samn lo sit',
 	'erreur' => 'Kanard',
-	'erreur_balise_non_fermee' => 'dernyé baliz lé pa fermé :',
+	'erreur_balise_non_fermee' => 'dernyé baliz lé pa fermé :',
 	'erreur_texte' => 'kanard(s)',
 
 	// F
@@ -221,16 +221,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_email_non_valide' => 'Out ladrès imèl la pa marsé.',
 	'form_forum_access_refuse' => 'Ou néna plid drwa pou akost dann sitwèb-la.',
 	'form_forum_bonjour' => 'Oté @nom@,,',
-	'form_forum_email_deja_enregistre' => 'Ladrès imèl-la lé déza anrozistré : ou  pé anserv modpas sa-minm sak nana labitid.',
+	'form_forum_email_deja_enregistre' => 'Ladrès imèl-la lé déza anrozistré : ou  pé anserv modpas sa-minm sak nana labitid.',
 	'form_forum_identifiant_mail' => 'Inn nouvo kod-lidentité la finn dèt anvwayé dann out kazimèl.',
 	'form_forum_identifiants' => 'Out bann kod-lidantité',
 	'form_forum_indiquer_nom_email' => 'Mèt isi out non èk ladrès imèl. out kod-lidantité li sava ariv talèr dann out kazimèl.',
-	'form_forum_login' => 'Nondkod :',
+	'form_forum_login' => 'Nondkod :',
 	'form_forum_message_auto' => '(sa lé inn modékri otomatik)',
-	'form_forum_pass' => 'modpas :',
+	'form_forum_pass' => 'modpas :',
 	'form_forum_probleme_mail' => 'Astèr, nana inn larlik èk out imèl : lo kod-lidantité i giny pa èt anvwayé.',
-	'form_forum_voici1' => 'Ala out bann kod-lidantité pou mèt ansanm ek vi lo sit"@nom_site_spip@" (@adresse_site@) :',
-	'form_forum_voici2' => 'Ala out bann kod-lidantité pou ou i propoz bann zartik si lo sitwèb "@nom_site_spip@" (@adresse_login@) :',
+	'form_forum_voici1' => 'Ala out bann kod-lidantité pou mèt ansanm ek vi lo sit"@nom_site_spip@" (@adresse_site@) :',
+	'form_forum_voici2' => 'Ala out bann kod-lidantité pou ou i propoz bann zartik si lo sitwèb "@nom_site_spip@" (@adresse_login@) :',
 	'form_indiquer_email' => 'Mersi inskri out ladrès imèl.',
 	'form_indiquer_nom' => 'Mersi mèt isi out non.',
 	'form_indiquer_nom_site' => 'Mersi mèt isi lo non out sitwèb.',
@@ -252,8 +252,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_titre_erreur' => 'Kanard...',
 
 	// I
-	'ical_texte_rss_articles' => 'Lo fisyé «backend» pou bann zartik lo sit-la, zot i va trouv ali si ladrès-la :',
-	'ical_texte_rss_articles2' => 'Ou pé osi giny bann fisyé «backend» pou tout bann zartik andan ban ribrik si lo sit-la:',
+	'ical_texte_rss_articles' => 'Lo fisyé « backend » pou bann zartik lo sit-la, zot i va trouv ali si ladrès-la :',
+	'ical_texte_rss_articles2' => 'Ou pé osi giny bann fisyé « backend » pou tout bann zartik andan ban ribrik si lo sit-la :',
 	'ical_texte_rss_breves' => 'Néna in ot fisyé pou bann tite-nouvèl i sort andan lo sit. Si ou présiz lo niméro laribrik-la, i sava giny sèlman bann tite-nouvèl néna anda lo ribrik-la.',
 	'icone_a_suivre' => 'Pou swiv',
 	'icone_admin_site' => 'Kolonaz lo sitwèb',
@@ -299,10 +299,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_a_suivre' => 'POU SWIV »',
 	'info_acces_interdit' => 'Ou néna pwinn permisyon akost lapazwèb-la.',
 	'info_acces_refuse' => 'Lakostaz lapazwèb lé afronté',
-	'info_action' => 'Azisman : @action@',
+	'info_action' => 'Azisman : @action@',
 	'info_administrer_rubriques' => 'Ou pé zèr larubrik-la èk son bann sourubrik',
 	'info_adresse_non_indiquee' => 'Ou néna pwin mi ladrès sak i vé test astèr !',
-	'info_aide' => 'KOUDMIN :',
+	'info_aide' => 'KOUDMIN :',
 	'info_ajouter_mot' => 'Azout lo mo',
 	'info_annonce' => 'ZANONS',
 	'info_annonces_generales' => 'Zanons a tout moun :',
@@ -338,19 +338,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_en_cours_validation' => 'Out bann zartik-la lé apré lékritir',
 	'info_en_ligne' => 'An liyn astèr :',
 	'info_envoyer_message_prive' => 'Anvwa inn modékri privé pou lotèr-la',
-	'info_erreur_requete' => 'Kanard dann rokèt-la :',
+	'info_erreur_requete' => 'Kanard dann rokèt-la :',
 	'info_erreur_squelette2' => 'Néna pa okin léskélèt <b>@fichier@</b> sat lé disponib...',
 	'info_erreur_systeme' => 'Kanar sistèm (errno @errsys@)',
 	'info_erreur_systeme2' => 'Lo diksodir li sré byin po èt komplètman ragoulé o labazdodné lé gaté<br />
- <font color=\'red\'>Anon esayé <a href=\'@script@\'>aranzé labaz</a>,
+ <font color=’red’>Anon esayé <a href=’@script@’>aranzé labaz</a>,
  ou kontakté out lébèrzèr.</font>', # MODIF
-	'info_fini' => 'Astèr sa lè fini !',
+	'info_fini' => 'Astèr sa lè fini !',
 	'info_format_image' => 'Bann tay-zimaz ou pé itilizé pou kré out bann vinyèt : @gd_formats@.',
 	'info_format_non_defini' => 'forma-la lé pa kadré',
 	'info_grand_ecran' => 'Gran lékran',
 	'info_image_aide' => 'KOUDMIN',
 	'info_image_process_titre' => 'Koman ou pé kré bann tit-zimaz',
-	'info_impossible_lire_page' => '<b>Kanard !</b> Lé inposib lir pazwèb-la <tt><html>@test_proxy@</html></tt> èk lo proksi <tt>', # MODIF
+	'info_impossible_lire_page' => '<b>Kanard !</b> Lé inposib lir pazwèb-la <tt><html>@test_proxy@</html></tt> èk lo proksi <tt>', # MODIF
 	'info_installation_systeme_publication' => 'Pou fé zwé (instal) lo sistèm lapiblikasyon...',
 	'info_installer_documents' => 'Ou pé fè zwé otomatikman tout bann dokiman sak lé prézan dann fisyé @upload@.',
 	'info_installer_ftp' => 'Kom komandèr, ou pé instal (èk FTP) bann fisyé dann dosyé @upload@ pou answuit swazi banna tèrla dirèkman.',
@@ -374,7 +374,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_message_supprime' => 'MODÉKRI SUPRIMÉ',
 	'info_mise_en_ligne' => 'Dat pou mèt an liyn :',
 	'info_modification_parametres_securite' => 'bann sanzman bann paramèt lasékirité',
-	'info_mois_courant' => 'Dann kouran lo mwa :',
+	'info_mois_courant' => 'Dann kouran lo mwa :',
 	'info_mot_cle_ajoute' => 'Molaklé-la la finn dèt azouté dann',
 	'info_multi_herit' => 'Lang laribrik anlèr',
 	'info_multi_langues_soulignees' => 'Bann <u>lang soulinyé </u> lé sat néna in traidksyonkomplé po tout bann tèks lintérfas SPIP. Si ou swazi bann lang-la, néna in bon péd zéléman lo sit piblik (ladat, bann formilèr) sak i aparé tradwi otomatikman. Ek tout bann lang sat lé pa soulinyé, bann zéléamn-la i aparé samn lo lang prinsipal lo sit.', # MODIF
@@ -390,18 +390,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pense_bete' => 'GARDANTÈT',
 	'info_petit_ecran' => 'Tit ékran',
 	'info_pixels' => 'bann piksèl',
-	'info_plusieurs_mots_trouves' => 'Nana plizièr bann molaklé pou "@cherche_mot@":',
+	'info_plusieurs_mots_trouves' => 'Nana plizièr bann molaklé pou "@cherche_mot@" :',
 	'info_portfolio_automatique' => 'Livzimaz otomatik :',
 	'info_premier_resultat' => '[@debut_limit@ bann promyé rézilta si @total@]',
 	'info_premier_resultat_sur' => '[@debut_limit@ bann promyé rézilta si @total@]',
-	'info_propose_1' => '[@nom_site_spip@] i propoz aou : @titre@',
+	'info_propose_1' => '[@nom_site_spip@] i propoz aou : @titre@',
 	'info_propose_2' => 'Lartik-la lé propozé
 ---------------',
 	'info_propose_3' => 'Lartik-la, "@titre@", lé propozé pou lapiblikasyon.',
 	'info_propose_4' => 'Anon zot lir ali è donn zot manyèr dvwar',
-	'info_propose_5' => 'dann forom sak i bord ali. Ou va trouv ali si ladrès-la :',
+	'info_propose_5' => 'dann forom sak i bord ali. Ou va trouv ali si ladrès-la :',
 	'info_publie_01' => 'Lartik "@titre@" la finn dèt konfirmé sanm @connect_nom@.',
-	'info_publie_1' => '[@nom_site_spip@] I PUBLIY : @titre@',
+	'info_publie_1' => '[@nom_site_spip@] I PUBLIY : @titre@',
 	'info_publie_2' => 'Lartik-la lé pibliyé
 ---------',
 	'info_rechercher' => 'Rod',
@@ -411,8 +411,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_selectionner_fichier' => 'Ou i pé swazi in fisyé dann dosyé @upload@',
 	'info_selectionner_fichier_2' => 'Swazi inn fisyé :',
 	'info_supprimer_vignette' => 'dégrèn vinyèt-la',
-	'info_symbole_bleu' => 'Lo sinbol <b>blé</b> li mark <b>inn gardantèt</b>: inn modékri pour out prop lisaz.', # MODIF
-	'info_symbole_jaune' => 'Lo sinbol <b>zon</b> li mark <b>inn zanons pou tout bann lotèr</b> : banna i pé vwar ali an liyn ; bann komandèr i pé sanz ali.', # MODIF
+	'info_symbole_bleu' => 'Lo sinbol <b>blé</b> li mark <b>inn gardantèt</b> : inn modékri pour out prop lisaz.', # MODIF
+	'info_symbole_jaune' => 'Lo sinbol <b>zon</b> li mark <b>inn zanons pou tout bann lotèr</b> : banna i pé vwar ali an liyn ; bann komandèr i pé sanz ali.', # MODIF
 	'info_symbole_vert' => 'Lo sinbol <b>vèr</b> i mark <b>bann modékri èk dot bann zitilizatèr</b> lo sitwèb.', # MODIF
 	'info_telecharger_nouveau_logo' => 'Télésarz inn nouvo logo :',
 	'info_telecharger_ordinateur' => 'Télésarz dopwi out prop lordinatèr :',
@@ -420,13 +420,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tout_afficher' => 'Afis tout',
 	'info_travaux_texte' => 'Si lo sit-la lé pa konfigiré, arvyin inn pé pli tar...',
 	'info_travaux_titre' => 'Sit-la lé apré travay bèrlok  ou pètèt travay santyé...lé pa finn ankor astèr... ',
-	'info_trop_resultat' => 'Nana tro bann rézilta pou "@cherche_mot@" ; mersi kadr myé lo rodaz.',
+	'info_trop_resultat' => 'Nana tro bann rézilta pou "@cherche_mot@" ; mersi kadr myé lo rodaz.',
 	'info_utilisation_messagerie_interne' => 'Ou ansèrv lakazmodékri lo sitwèb.',
 	'info_valider_lien' => 'konfirm gatir-la',
 	'info_verifier_image' => ', mersi gèt ankor out bann zimaz la finn dèt sarzé korèkman sir lo servèr.',
 	'info_vignette_defaut' => 'Vinyèt sanswa',
 	'info_vignette_personnalisee' => 'Out prop vinyèt',
-	'info_visite' => 'vizit :',
+	'info_visite' => 'vizit :',
 	'info_vos_rendez_vous' => 'Out bann prosin randévou',
 	'infos_vos_pense_bete' => 'Out bann gardantèt', # MODIF
 
@@ -456,8 +456,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_deconnexion_ok' => 'Out défalkaz la finn marsé.',
 	'login_erreur_pass' => 'Kanard èk lo modpas.',
 	'login_espace_prive' => 'Léspas privé',
-	'login_identifiant_inconnu' => 'Lo nondkod « @login@ » li lé pa konu.',
-	'login_login' => 'Nondkod :',
+	'login_identifiant_inconnu' => 'Lo nondkod « @login@ » li lé pa konu.',
+	'login_login' => 'Nondkod :',
 	'login_login2' => 'Nondkod (lidantifian pou lakostaz lo sitwèb) :', # MODIF
 	'login_login_pass_incorrect' => '(Out nondkod ou modpas lé pa korèk.)',
 	'login_motpasseoublie' => 'Ou la oubliyé out modpas ?',
@@ -468,7 +468,7 @@ dann out navigatèr é',
 	'login_nouvelle_tentative' => 'Nouvèl ésé',
 	'login_par_ici' => 'Ou lé anroziztré... dann kwin-la...',
 	'login_pass2' => 'Modpas :',
-	'login_preferez_refuser' => '<b>Si ou préfèr afront bann gatomakro</b>,nana inn ot sistèm lakostaz (mwin sir) sak ou pé anserv:',
+	'login_preferez_refuser' => '<b>Si ou préfèr afront bann gatomakro</b>,nana inn ot sistèm lakostaz (mwin sir) sak ou pé anserv :',
 	'login_recharger' => 'rosarz pazwèb-la',
 	'login_rester_identifie' => 'Po inn lidantifikasyon i dir plisyèr zor',
 	'login_retour_public' => 'Artourn sir figirwèb',
@@ -499,13 +499,13 @@ dann out navigatèr é',
 	'onglet_vider_cache' => 'Dévid lo kas',
 
 	// P
-	'pass_choix_pass' => 'Mersi swazi out nouvo modpas :',
+	'pass_choix_pass' => 'Mersi swazi out nouvo modpas :',
 	'pass_erreur' => 'Kanard',
-	'pass_erreur_acces_refuse' => '<b>Kanard :</b> out nana pli laksé sir lo sit-la.',
-	'pass_erreur_code_inconnu' => '<b>Kanard :</b> lo kod-la i korespon pa pou okin lotèr anroziztré si lo sit.',
-	'pass_erreur_non_enregistre' => '<b>Kanard :</b> ladrès-la <tt>@email_oubli@</tt> li lé pli anroziztré si lo sit-la.',
-	'pass_erreur_non_valide' => '<b>Kanard : /b> limèl-la <tt>@email_oubli@</tt> lé pa bon !',
-	'pass_erreur_probleme_technique' => '<b>Kanard  :</b> akoz inn larlik tèknik, lé pa posib astèr anvwayé limèl-la.',
+	'pass_erreur_acces_refuse' => '<b>Kanard :</b> out nana pli laksé sir lo sit-la.',
+	'pass_erreur_code_inconnu' => '<b>Kanard :</b> lo kod-la i korespon pa pou okin lotèr anroziztré si lo sit.',
+	'pass_erreur_non_enregistre' => '<b>Kanard :</b> ladrès-la <tt>@email_oubli@</tt> li lé pli anroziztré si lo sit-la.',
+	'pass_erreur_non_valide' => '<b>Kanard : /b> limèl-la <tt>@email_oubli@</tt> lé pa bon !',
+	'pass_erreur_probleme_technique' => '<b>Kanard :</b> akoz inn larlik tèknik, lé pa posib astèr anvwayé limèl-la.',
 	'pass_espace_prive_bla' => 'Léspas privé lo sit-la lé ouvèr pou tout
 bann vizitèr, aprè linskrisyon. Kank ou lé anroziztré,
 i pé konsilt oubyinsa propoz bann zartik.I pé osi
@@ -513,12 +513,12 @@ mèt ansanm èk bann dalon dan tout bann forom.',
 	'pass_forum_bla' => 'Ou la domand mèt out grindsèl dann forom
 sak lé rézèrvé pou bann vizitèr anrozistré.',
 	'pass_indiquez_cidessous' => 'Mèt isi ladrès imèl ou la déza anservi pou anroziztr aou. Aprésa, ou sava
-giny inn limèl : li indik aou lamanyir pou rékupèr out laksé.',
+giny inn limèl : li indik aou lamanyir pou rékupèr out laksé.',
 	'pass_mail_passcookie' => '(Sa lé in modékri otomatik)
 Pour ou i pé artrouv out laksé si lo sitwèb
 @nom_site_spip@ (@adresse_site@)
 
-Mersi rand aou sir ladrès la :
+Mersi rand aou sir ladrès la :
     @sendcookie@
 
 Aprésa, ou i poura mèt in nouvo modpas
@@ -530,7 +530,7 @@ Aprésa, ou i poura mèt in nouvo modpas
 	'pass_ok' => 'Dakor',
 	'pass_oubli_mot' => 'Modpas oublyé',
 	'pass_quitter_fenetre' => 'Défalk finèt-la',
-	'pass_rappel_login' => 'Rapèl aou : out lidantifyan (nondkod) lé « @login@ ».',
+	'pass_rappel_login' => 'Rapèl aou : out lidantifyan (nondkod) lé « @login@ ».',
 	'pass_recevoir_mail' => 'Ou sava giny inn limèl sak i indik aou kouk sa i pé artrouv out laksé sir lo sit.',
 	'pass_retour_public' => 'Artourn sir figirwèb',
 	'pass_rien_a_faire_ici' => 'Nana ryinn a fèr isi.',
@@ -549,11 +549,11 @@ Aprésa, ou i poura mèt in nouvo modpas
 	// T
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
-	'taille_octets' => '@taille@  bann zokté',
-	'texte_actualite_site_1' => 'Kank ou sra pli zabityé èk lo figirwèb, i poura klik sir «',
+	'taille_octets' => '@taille@ bann zokté',
+	'texte_actualite_site_1' => 'Kank ou sra pli zabityé èk lo figirwèb, i poura klik sir « ',
 	'texte_actualite_site_2' => 'lintèrfas konplé',
-	'texte_actualite_site_3' => '» pour giny plid posibilité.',
-	'texte_creation_automatique_vignette' => 'Lakréasyon otomatik pou bann vinyèt avwar-avan, lé an mars si lo sit-la. Si ou linstal bann zimaz dann (bann) tay  @gd_formats@, dopwi formulèr-la, zimaz-la i sra prézanté èk inn vinyèt pa pli grank @taille_preview@  bann piksèl oplis.',
+	'texte_actualite_site_3' => ' » pour giny plid posibilité.',
+	'texte_creation_automatique_vignette' => 'Lakréasyon otomatik pou bann vinyèt avwar-avan, lé an mars si lo sit-la. Si ou linstal bann zimaz dann (bann) tay  @gd_formats@, dopwi formulèr-la, zimaz-la i sra prézanté èk inn vinyèt pa pli grank @taille_preview@ bann piksèl oplis.',
 	'texte_documents_associes' => 'Bann dokiman-la lé mi èk lartik-la,
 mé zot lé pa plasé dann kor-minm lartik-la. Sélon lamanyir ou sava mèt an paz lo sit piblik,
 zot i sra pou aparèt kom bann dokiman zwinn.',
@@ -579,8 +579,8 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'texte_statut_propose_evaluation' => 'propozé pou zot zizman',
 	'texte_statut_publie' => 'pibliyé an liyn',
 	'texte_statut_refuse' => 'arfizé',
-	'titre_ajouter_mot_cle' => 'AZOUT INN MOLAKLÉ :',
-	'titre_cadre_raccourcis' => 'BANN RÉDIYON:',
+	'titre_ajouter_mot_cle' => 'AZOUT INN MOLAKLÉ :',
+	'titre_cadre_raccourcis' => 'BANN RÉDIYON :',
 	'titre_changer_couleur_interface' => 'Sanz lakoulèr lintèrfas',
 	'titre_image_admin_article' => 'Ou pé zèr lartik-la',
 	'titre_image_administrateur' => 'Komandèr',
@@ -599,7 +599,7 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' : baliz B anlèr',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@ : la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'boukl',
 	'zbug_boucle_recursive_undef' => 'boukl rékirsiv-la lé pa défini', # MODIF
 	'zbug_champ_hors_boucle' => 'lo chan @champ@ lé andéor in boukl',
@@ -609,11 +609,11 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'zbug_distant_interdit' => 'déor interdi', # MODIF
 	'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique', # MODIF
 	'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
-	'zbug_erreur_boucle_double' => 'BOUCLE@id@: néna dé définisyon', # MODIF
-	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: néna in "tag" sat i mank po tak in boukl.', # MODIF
+	'zbug_erreur_boucle_double' => 'BOUCLE@id@ : néna dé définisyon', # MODIF
+	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@ : néna in "tag" sat i mank po tak in boukl.', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Sintask lo boukl-là lé pa korèk', # MODIF
 	'zbug_erreur_execution_page' => 'néna in larlik pou léxékisyon paj-la', # MODIF
-	'zbug_erreur_filtre' => 'Néna in kanar andan lo filt <b>« @filtre@ »</b> sat lé pa défini', # MODIF
+	'zbug_erreur_filtre' => 'Néna in kanar andan lo filt <b>« @filtre@ »</b> sat lé pa défini', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} li aplik sèlman pou bann boukl (FORUMS) ou (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'néna (bann) larlik andan léskélèt',
 	'zbug_info_erreur_squelette' => 'Kanar sir lo sit',
@@ -622,7 +622,7 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'zbug_parametres_inclus_incorrects' => 'Bann paramèt pou linklizyon lé pa korèk', # MODIF
 	'zbug_resultat' => 'rézilta',
 	'zbug_serveur_indefini' => 'servèr SQL la lé pa défini', # MODIF
-	'zbug_table_inconnue' => 'Lo tab SQL « @table@ »  la , li lé pa konu'
+	'zbug_table_inconnue' => 'Lo tab SQL « @table@ »  la , li lé pa konu'
 );
 
 ?>

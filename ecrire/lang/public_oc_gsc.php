@@ -10,14 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'accueil_site' => 'Arcuelh deu sit', # MODIF
 	'articles' => 'Articles',
-	'articles_auteur' => 'Articles d\'aqueth autor',
+	'articles_auteur' => 'Articles d’aqueth autor',
 	'articles_populaires' => 'Los articles mei populars',
-	'articles_rubrique' => 'Articles d\'aquera rubrica',
-	'aucun_article' => 'N\'i a pas nat d\'article a aquera adreça ',
-	'aucun_auteur' => 'N\'i a pas nat autor a aquera adreça ',
-	'aucun_site' => 'N\'i a pas nat sit a aquera adreça ',
-	'aucune_breve' => 'N\'i a pas nada brèva a aquera adreça ',
-	'aucune_rubrique' => 'N\'i a pas nada rubrica a aquera adreça ',
+	'articles_rubrique' => 'Articles d’aquera rubrica',
+	'aucun_article' => 'N’i a pas nat d’article a aquera adreça ',
+	'aucun_auteur' => 'N’i a pas nat autor a aquera adreça ',
+	'aucun_site' => 'N’i a pas nat sit a aquera adreça ',
+	'aucune_breve' => 'N’i a pas nada brèva a aquera adreça ',
+	'aucune_rubrique' => 'N’i a pas nada rubrica a aquera adreça ',
 	'autres_breves' => 'Autas brèvas',
 	'autres_groupes_mots_clefs' => 'Autes grops de mots clau',
 	'autres_sites' => 'Autes sits',
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pagina precedenta',
 	'page_suivante' => 'pagina seguenta',
 	'par_auteur' => 'per ',
-	'participer_site' => 'Que podetz participar a la vita d\'aqueth sit e perpausar los articles vòstes en inscrive\'vs ça devath. Qu\'arreceberatz suu còp un e-mail qui vs\'indicarà los vòstes còdes tà accedir a l\'espaci privat deu sit.',
+	'participer_site' => 'Que podetz participar a la vita d’aqueth sit e perpausar los articles vòstes en inscrive’vs ça devath. Qu’arreceberatz suu còp un e-mail qui vs’indicarà los vòstes còdes tà accedir a l’espaci privat deu sit.',
 	'plan_site' => 'Plan deu sit',
 	'popularite' => 'Popularitat',
 	'poster_message' => 'Postar un messatge',
@@ -96,13 +96,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'Sindicar tot lo sit',
 
 	// T
-	'texte_lettre_information' => 'Ací la letra d\'informacion deu sit',
+	'texte_lettre_information' => 'Ací la letra d’informacion deu sit',
 	'texte_lettre_information_2' => 'Aquera letra que recensa los articles e brèvas publicats dempuish', # MODIF
 
 	// V
-	'ver_imprimer' => 'Version d\'estampar',
+	'ver_imprimer' => 'Version d’estampar',
 	'voir_en_ligne' => 'Vedetz en linha',
-	'voir_squelette' => 'telecargar l\'esqueleta d\'aquera pagina'
+	'voir_squelette' => 'telecargar l’esqueleta d’aquera pagina'
 );
 
 ?>

@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'navigation' => 'Gezinti',
 	'nom' => 'Soyadı',
 	'nouveautes' => 'Yenilikler',
-	'nouveautes_web' => 'Web\'deki yenilikler',
+	'nouveautes_web' => 'Web’deki yenilikler',
 	'nouveaux_articles' => 'Yeni makaleler',
 	'nouvelles_breves' => 'Yeni kısa haberler',
 
@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sous_rubriques' => 'Alt-bölümler',
 	'spam' => 'Spam',
 	'suite' => 'devamı',
-	'sur_web' => 'Web\'de',
+	'sur_web' => 'Web’de',
 	'syndiquer_rubrique' => 'Bu bölümü paylaş',
 	'syndiquer_site' => 'Tüm siteyi paylaş',
 

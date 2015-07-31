@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_attention' => 'SE UPP!',
 	'avis_champ_incorrect_type_objet' => 'Ogiltigt fält-namn för objekt av typen @type@',
 	'avis_colonne_inexistante' => 'Kolumnen @col@ finns inte',
-	'avis_erreur' => 'Fel: se nedan\\\';',
+	'avis_erreur' => 'Fel: se nedan\\’;',
 	'avis_erreur_connexion' => 'Anslutningsfel',
 	'avis_erreur_cookie' => 'cookieproblem',
 	'avis_erreur_fonction_contexte' => 'Programmeringsfel. Den här funktionen borde inte bli kallad i det här sammanhanget.',
@@ -352,7 +352,7 @@ För att bekräfta din nya adress måste du gå till
 	'info_erreur_squelette2' => 'Det finns ingen mall <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Systemfel (errno @errsys@)',
 	'info_erreur_systeme2' => 'Hårddisken kan vara full eller databasen kan vara skadad. <br />
- <font color=\'red\'>Försök <a href=\'@script@\'>laga databasen</a>,
+ <font color=’red’>Försök <a href=’@script@’>laga databasen</a>,
  eller kontakta din leverantör.</font>',
 	'info_fini' => 'Klart!',
 	'info_format_image' => 'Bildformat som kan användas för att skapa ikoner: @gd_formats@.',

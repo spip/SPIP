@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_couleur_interface' => 'colour',
 	'choix_interface' => 'choice of interface',
 	'colonne' => 'Column',
-	'confirm_changer_statut' => 'Warning: You are about to change this article\'s status. Do you wish to continue?',
+	'confirm_changer_statut' => 'Warning: You are about to change this article’s status. Do you wish to continue?',
 	'correcte' => 'correct',
 
 	// D
@@ -220,7 +220,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dirs_repertoires_absents' => '<p><b>The following directories were not found: </b></p><ul>@bad_dirs@.</ul>
   <p>It is possible that this is due to inappropriate lower or upper case letters in directory names.
   Please check that the case of the letters in the names of these directories match what is displayed
-  above. If they don\'t, correct the directory names using your FTP client.</p>
+  above. If they don’t, correct the directory names using your FTP client.</p>
   <p>Once this is done, you can',
 	'dirs_repertoires_suivants' => '<p><b>The following directories do not have write permission: </b></p><ul>@bad_dirs@</ul>
 <p>To change this, use your FTP client to set access permissions for each
@@ -279,7 +279,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'form_prop_enregistre' => 'Your suggestion has been recorded. It will appear online after being validated by the administrators of this site.',
 	'form_prop_envoyer' => 'Send a message',
 	'form_prop_indiquer_email' => 'Please enter a valid email address',
-	'form_prop_indiquer_nom_site' => 'Please enter the site\'s name.',
+	'form_prop_indiquer_nom_site' => 'Please enter the site’s name.',
 	'form_prop_indiquer_sujet' => 'Please enter a subject',
 	'form_prop_message_envoye' => 'Message sent',
 	'form_prop_non_enregistre' => 'Your suggestion has not been recorded.',
@@ -290,9 +290,9 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'forum_titre_erreur' => 'Error...',
 
 	// I
-	'ical_texte_rss_articles' => 'The site\'s backend file for articles is:',
+	'ical_texte_rss_articles' => 'The site’s backend file for articles is:',
 	'ical_texte_rss_articles2' => 'You can also get backend files for individual sections on the site:',
-	'ical_texte_rss_breves' => 'Furthermore, there is a file containing the site\'s news items. By selecting a section number, you can choose to get news items in that section only.',
+	'ical_texte_rss_breves' => 'Furthermore, there is a file containing the site’s news items. By selecting a section number, you can choose to get news items in that section only.',
 	'icone_a_suivre' => 'Launch pad',
 	'icone_admin_site' => 'Site administration',
 	'icone_agenda' => 'Calendar',
@@ -371,7 +371,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Please create a file or a directory called:',
 	'info_creer_repertoire_2' => 'inside the sub-directory <b>@repertoire@</b>, then',
 	'info_creer_vignette' => 'automatic thumbnail creation',
-	'info_creerdansrubrique_non_autorise' => 'You don\'t have sufficient rights to create content in this section',
+	'info_creerdansrubrique_non_autorise' => 'You don’t have sufficient rights to create content in this section',
 	'info_deplier' => 'Unfold',
 	'info_descriptif_nombre' => 'description(s):',
 	'info_description' => 'Description:',
@@ -388,7 +388,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'No <b>@fichier@</b> template available ...',
 	'info_erreur_systeme' => 'System error (errno @errsys@)',
 	'info_erreur_systeme2' => 'The hard disk may be full or the database damaged. <br />
- <font color=\'red\'>Try <a href=\'@script@\'>repairing the database</a>,
+ <font color=’red’>Try <a href=’@script@’>repairing the database</a>,
  or contact your service provider.</font>',
 	'info_fini' => 'Done!',
 	'info_format_image' => 'Image format to be used for vignettes: @gd_formats@.',
@@ -425,7 +425,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'During the month:',
 	'info_mot_cle_ajoute' => 'The following keyword was added to',
 	'info_multi_herit' => 'Default language',
-	'info_multi_langues_soulignees' => 'The <u>languages underlined</u> provide partial or total translations for all the interface texts. If you select these languages, many elements of the public site (dates, forms) will be translated automatically. As for the languages that are not underlined, those elements will be displayed using the site\'s default language.',
+	'info_multi_langues_soulignees' => 'The <u>languages underlined</u> provide partial or total translations for all the interface texts. If you select these languages, many elements of the public site (dates, forms) will be translated automatically. As for the languages that are not underlined, those elements will be displayed using the site’s default language.',
 	'info_multilinguisme' => 'Multilingual',
 	'info_nom_non_utilisateurs_connectes' => 'Your name does not appear in the list of users online.',
 	'info_nom_utilisateurs_connectes' => 'Your name appears in the list of users online.',

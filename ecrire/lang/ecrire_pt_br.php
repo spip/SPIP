@@ -438,7 +438,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 	'info_par_nom' => 'por nome',
 	'info_par_nombre_article' => 'por número de matérias',
 	'info_par_statut' => 'por status',
-	'info_par_tri' => '\'(por @tri@)\'',
+	'info_par_tri' => '’(por @tri@)’',
 	'info_passe_trop_court' => 'Senha muito curta.',
 	'info_passe_trop_court_car_pluriel' => 'A senha deve conter pelo menos @nb@ caracteres.',
 	'info_passes_identiques' => 'As duas senhas não são idênticas.',

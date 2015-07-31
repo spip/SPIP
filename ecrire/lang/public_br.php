@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Degemer al lec\'hienn', # MODIF
+	'accueil_site' => 'Degemer al lec’hienn', # MODIF
 	'articles' => 'Pennadoù',
 	'articles_auteur' => 'Pennadoù all ar skridaozer-mañ',
 	'articles_populaires' => 'Pennadoù lennet ar muiañ',
 	'articles_rubrique' => 'Pennadoù ar rubrikenn-mañ',
-	'aucun_article' => 'N\'eus pennad ebet er chomlec\'h-mañ',
-	'aucun_auteur' => 'N\'eus skridaozer ebet er chomlec\'h-mañ',
-	'aucun_site' => 'N\'eus lec\'hienn ebet er chomlec\'h-mañ',
-	'aucune_breve' => 'N\'eus berrskrid ebet er chomlec\'h-mañ',
-	'aucune_rubrique' => 'N\'eus rubrikenn ebet er chomlec\'h-mañ',
+	'aucun_article' => 'N’eus pennad ebet er chomlec’h-mañ',
+	'aucun_auteur' => 'N’eus skridaozer ebet er chomlec’h-mañ',
+	'aucun_site' => 'N’eus lec’hienn ebet er chomlec’h-mañ',
+	'aucune_breve' => 'N’eus berrskrid ebet er chomlec’h-mañ',
+	'aucune_rubrique' => 'N’eus rubrikenn ebet er chomlec’h-mañ',
 	'autres' => 'Re all',
 	'autres_breves' => 'Berrskridoù all',
 	'autres_groupes_mots_clefs' => 'Strolladoù gerioù-stur all',
-	'autres_sites' => 'Lec\'hiennoù all',
+	'autres_sites' => 'Lec’hiennoù all',
 
 	// B
-	'bonjour' => 'Demat deoc\'h',
+	'bonjour' => 'Demat deoc’h',
 
 	// C
-	'commenter_site' => 'Ober evezhiadennoù diwar-benn al lec\'hienn-mañ',
-	'copie_document_impossible' => 'N\'eo ket posupl eilañ an teul',
+	'commenter_site' => 'Ober evezhiadennoù diwar-benn al lec’hienn-mañ',
+	'copie_document_impossible' => 'N’eo ket posupl eilañ an teul',
 
 	// D
 	'date' => 'Deiziad',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formats_acceptes' => 'Furmadoù aotreet : @formats@.',
 
 	// H
-	'hierarchie_site' => 'Gwezennadur al lec\'hienn',
+	'hierarchie_site' => 'Gwezennadur al lec’hienn',
 
 	// J
 	'jours' => 'deizioù',
@@ -77,35 +77,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_precedente' => 'Pajenn kent',
-	'page_suivante' => 'Pajenn war-lerc\'h',
+	'page_suivante' => 'Pajenn war-lerc’h',
 	'par_auteur' => 'gant',
-	'participer_site' => 'Gallout a rit kemer perzh e buhez al lec\'hienn ha kinnig pennadoù oc\'h emezelañ amañ dindan. Diouzhtu e vo kaset ur postel deoc\'h, ennañ ar c\'hodoù ret evit dont-tre.',
-	'plan_site' => 'Steuñv al lec\'hienn',
+	'participer_site' => 'Gallout a rit kemer perzh e buhez al lec’hienn ha kinnig pennadoù oc’h emezelañ amañ dindan. Diouzhtu e vo kaset ur postel deoc’h, ennañ ar c’hodoù ret evit dont-tre.',
+	'plan_site' => 'Steuñv al lec’hienn',
 	'popularite' => 'Brud vat',
 	'poster_message' => 'Kas ur gemennadenn',
-	'proposer_site' => 'Gallout a rit kinnig ul lec\'hienn da ouzhpennañ er rubrikenn-mañ :',
+	'proposer_site' => 'Gallout a rit kinnig ul lec’hienn da ouzhpennañ er rubrikenn-mañ :',
 
 	// R
-	'repondre_article' => 'Respont d\'ar pennad-mañ',
-	'repondre_breve' => 'Respont d\'ar berrskrid-mañ',
-	'resultats_recherche' => 'Disoc\'hoù an enklask',
+	'repondre_article' => 'Respont d’ar pennad-mañ',
+	'repondre_breve' => 'Respont d’ar berrskrid-mañ',
+	'resultats_recherche' => 'Disoc’hoù an enklask',
 	'retour_debut_forums' => 'Distreiñ e deroù ar foromoù',
 	'rubrique' => 'Rubrikenn',
 	'rubriques' => 'Rubrikennoù',
 
 	// S
 	'signatures_petition' => 'Sinadurioù',
-	'site_realise_avec_spip' => 'Lec\'hienn bet savet gant SPIP',
-	'sites_web' => 'Lec\'hiennoù',
+	'site_realise_avec_spip' => 'Lec’hienn bet savet gant SPIP',
+	'sites_web' => 'Lec’hiennoù',
 	'sous_rubriques' => 'Isrummadoù',
 	'spam' => 'Strob',
-	'suite' => 'kenderc\'hel',
+	'suite' => 'kenderc’hel',
 	'sur_web' => 'War ar Gwiad',
 	'syndiquer_rubrique' => 'Sindikadañ ar rubrikenn-mañ',
-	'syndiquer_site' => 'Sindikadañ al lec\'hienn a-bezh',
+	'syndiquer_site' => 'Sindikadañ al lec’hienn a-bezh',
 
 	// T
-	'texte_lettre_information' => 'Setu lizher kelaouiñ al lec\'hienn',
+	'texte_lettre_information' => 'Setu lizher kelaouiñ al lec’hienn',
 	'texte_lettre_information_2' => 'Enni emañ ar pennadoù hag ar berrskridoù embannet abaoe', # MODIF
 
 	// V

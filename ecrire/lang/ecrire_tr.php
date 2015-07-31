@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_plugin' => 'Plugin\'i etkinleştir',
+	'activer_plugin' => 'Plugin’i etkinleştir',
 	'affichage' => 'Gösterim',
 	'aide_non_disponible' => 'Çevrimiçi yardımın bu kısmı henüz bu dile çevrilmemiş.',
 	'auteur' => 'Yazar :',
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_ldap_echec_1' => 'LDAP sunucusuna bağlantı başarısız.',
 	'avis_connexion_ldap_echec_2' => 'Bir önceki sayfaya dönüp verdiğiniz bilgileri kontrol edin.',
 	'avis_connexion_ldap_echec_3' => 'Buna alternatif olarak, kullanıcı ithal etmek için LDAP sunucusunu kullanmayın.',
-	'avis_deplacement_rubrique' => 'Dikkat ! Bu bölüm @contient_breves@ kısa haber @scb@  içeriyor: eğer yerini değiştiriyorsanız (taşıyorsanız) lütfen bu onay kutucuğunu işaretleyin.',
+	'avis_deplacement_rubrique' => 'Dikkat ! Bu bölüm @contient_breves@ kısa haber @scb@ içeriyor: eğer yerini değiştiriyorsanız (taşıyorsanız) lütfen bu onay kutucuğunu işaretleyin.',
 	'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan önce kime yollamak istediğinizi belirmelisiniz.',
 	'avis_erreur_connexion_mysql' => 'SQL bağlantısı hatası',
 	'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyası kullandığınız
@@ -45,7 +45,7 @@ Bu ithal istemini onaylamayın.
 	'avis_version_mysql' => 'Kullandığınız (@version_mysql@) SQL sürümü veritabanı tablolarının otomatik onarımına izin vermiyor.',
 
 	// B
-	'bouton_acces_ldap' => 'LDAP\'a erişim ekle >>',
+	'bouton_acces_ldap' => 'LDAP’a erişim ekle >>',
 	'bouton_ajouter' => 'Ekle',
 	'bouton_ajouter_participant' => 'BİR KATILIMCI EKLE :',
 	'bouton_annonce' => 'DUYURU',
@@ -128,7 +128,7 @@ Bu ithal istemini onaylamayın.
 	'entree_liens_sites' => '<b>Hipermetin bağı</b> (atıflar, ziyaret edilecek site...)',
 	'entree_login' => 'Kullanıcı isminiz',
 	'entree_login_connexion_1' => 'Bağlantı için kullanıcı ismi',
-	'entree_login_connexion_2' => '(Bazen FTP\'ye bağlandığınız kullanıcı isminizdir bazen boş bırakılır) ',
+	'entree_login_connexion_2' => '(Bazen FTP’ye bağlandığınız kullanıcı isminizdir bazen boş bırakılır) ',
 	'entree_login_ldap' => 'Başlangıçtaki LDAP girişi',
 	'entree_mot_passe' => 'Şifreniz',
 	'entree_mot_passe_1' => 'Bağlantı şifreniz',
@@ -149,7 +149,7 @@ Bu ithal istemini onaylamayın.
 	'erreur_plugin_nom_manquant' => 'Plugin ismi eksik',
 	'erreur_plugin_prefix_manquant' => 'Plugin isimlendirme alanı tanımlanmamış',
 	'erreur_plugin_tag_plugin_absent' => 'Tanımlama dosyasında &lt;plugin&gt; eksik',
-	'erreur_plugin_version_manquant' => 'Plugin\'in uyarlaması eksik',
+	'erreur_plugin_version_manquant' => 'Plugin’in uyarlaması eksik',
 
 	// I
 	'ical_info1' => 'Bu sayfa bu sitenin yaşamı ile temas halinde kalmak için bir kaç yöntem sunmaktadır. ',
@@ -160,12 +160,12 @@ Bu ithal istemini onaylamayın.
 	'ical_texte_js' => 'Bir javascript satırı size ait herhangi bir sitede yayınlanan son makaleleri gayet basit bir şekilde görüntülemenizi sağlar. ',
 	'ical_texte_prive' => 'Tamamen kişisel kullanıma ayrılmış bu takvim size bu sitenin özel editör etkinlikleri hakkında bilgi verir (kişisel işler ve randevular, önerilen makaleler ve haberler...).',
 	'ical_texte_public' => 'Bu takvim bu sitenin kamu etkinliğini izlemenizi sağlar (yayınlanan makeleler ve haberler).',
-	'ical_texte_rss' => 'Bu sitenin yeniliklerini herhangi bir XML/RSS (Rich Site Summary) formatındaki dosya okuyucusunda paylaşabilirsiniz. SPIP\'e uyumlu değiş-tokuş formatı kullanan (paylaşımlı)  başka sitelerde yayınlanan yenilikleri okuma olanağı veren de bu formattır.',
+	'ical_texte_rss' => 'Bu sitenin yeniliklerini herhangi bir XML/RSS (Rich Site Summary) formatındaki dosya okuyucusunda paylaşabilirsiniz. SPIP’e uyumlu değiş-tokuş formatı kullanan (paylaşımlı)  başka sitelerde yayınlanan yenilikleri okuma olanağı veren de bu formattır.',
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'E-posta listesi',
 	'ical_titre_rss' => 'Paylaşım dosyaları',
 	'icone_activer_cookie' => 'Yazışma çerezini etkinleştir',
-	'icone_admin_plugin' => 'Plugin\'lerin yönetimi',
+	'icone_admin_plugin' => 'Plugin’lerin yönetimi',
 	'icone_afficher_auteurs' => 'Yazarları göster',
 	'icone_afficher_visiteurs' => 'Ziyaretçileri görüntüle',
 	'icone_arret_discussion' => 'Artık bu sohbete katılma',
@@ -236,13 +236,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_chemin_acces_2' => 'Artık dizindeki bilgilere erişim yolunu düzenlemeniz gerekiyor. Bu bilgi dizinde bulundurulan kullanıcı profillerini okumak için şarttır. ',
 	'info_chemin_acces_annuaire' => 'Seçenekler : <b>Rehbere erişim yolu',
 	'info_choix_base' => 'Üçüncü aşama :',
-	'info_classement_1' => '@liste@\'den     inci',
-	'info_classement_2' => '@liste@\'den     inci',
+	'info_classement_1' => '@liste@’den     inci',
+	'info_classement_2' => '@liste@’den     inci',
 	'info_code_acces' => 'Kendi erişim şifrelerinizi unutmayınız !',
 	'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Eğer sunucunuz html sayfaları otomatik olarak sıkıştırmıyorsa, yüklenen sayfa ağırlıklarını düşürmek için bu işlemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu işlem bazı sunucuları gözle görülür şekilde yavaşlatabilir.',
-	'info_config_suivi' => 'Eğer bu adres bir gönderi listesi (mailing-list)\'ne karşı düşüyorsa, aşağıya site katılımcılarının hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (örneğin listeye Web ile kaydolma sayfası), veya özel bir konu içeren (örneğin: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
-	'info_config_suivi_explication' => 'Bu sitenin gönderi listesi (mailing-list)\'ne abone olabilirsiniz. O takdirde yayınlanması önerilen makale ve haber ilanları e-posta yoluyla elinize geçecektir. ',
+	'info_config_suivi' => 'Eğer bu adres bir gönderi listesi (mailing-list)’ne karşı düşüyorsa, aşağıya site katılımcılarının hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (örneğin listeye Web ile kaydolma sayfası), veya özel bir konu içeren (örneğin: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
+	'info_config_suivi_explication' => 'Bu sitenin gönderi listesi (mailing-list)’ne abone olabilirsiniz. O takdirde yayınlanması önerilen makale ve haber ilanları e-posta yoluyla elinize geçecektir. ',
 	'info_confirmer_passe' => 'Yeni şifrenin teyid edilmesi :',
 	'info_conflit_edition_avis_non_sauvegarde' => 'Dikkat, şu alanlar başka bir yerden değiştirildi. Sizin bu alanlardaki değişiklikleriniz kaydedilmedi.',
 	'info_conflit_edition_differences' => 'Farklar :',
@@ -266,7 +266,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_derniers_articles_publies' => 'Çevrimiçi yayınlanan son makaleleriniz',
 	'info_desactiver_messagerie_personnelle' => 'Bu sitedeki kişisel mesajlaşmanızı çalıştırabilir veya durdurabilirsiniz.',
 	'info_descriptif' => 'Tanım :',
-	'info_desinstaller_plugin' => 'verileri sil ve plugin\'i pasif kıl',
+	'info_desinstaller_plugin' => 'verileri sil ve plugin’i pasif kıl',
 	'info_discussion_cours' => 'Süren sohbetler',
 	'info_ecrire_article' => 'Makale yazmadam önce en az bir bölüm yaratmanız gerekir.',
 	'info_email_envoi' => 'Gönderi e-posta adresi (seçimlik)',
@@ -278,7 +278,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_etape_suivante' => 'Bir sonraki aşamaya geç',
 	'info_etape_suivante_1' => 'Bir sonraki aşamaya geçebilirsiniz',
 	'info_etape_suivante_2' => 'Bir sonraki aşamaya geçebilirsiniz',
-	'info_exportation_base' => 'tabanın @archive@\'e doğru ihracı',
+	'info_exportation_base' => 'tabanın @archive@’e doğru ihracı',
 	'info_facilite_suivi_activite' => 'Sitenin editör etkinliğinin izlenmesini kolaylaştırmak üzere,
                                    SPIP, e-posta ile, örneğin, yayınlama taleplerinin  ve makale
                                    onaylarının duyurusunu editörlerin bir gönderi listesine yollayabilir.',
@@ -298,7 +298,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_gerer_trad' => 'Çeviri bağlantıları yönetilsin mi ?',
 	'info_hebergeur_desactiver_envoi_email' => 'Bazı Hizmet bilgisayarları kendi sunucularından 
                                            otomatik e-posta gönderisini durduruyorlar. 
-                                           Bu durumda SPIP\'in şu işlevleri çalışmaz :',
+                                           Bu durumda SPIP’in şu işlevleri çalışmaz :',
 	'info_hier' => 'Dün :',
 	'info_historique_activer' => 'Gözden geçirmelerin izlenmesini başlat',
 	'info_historique_affiche' => 'Bu uyarlamayı göster',
@@ -341,7 +341,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_mot_sans_groupe' => '(Grupsuz sözcükler...)',
 	'info_moteur_recherche' => 'Entegre arama motoru',
 	'info_moyenne' => 'Ortalama :',
-	'info_multi_articles' => 'Makalelerin dil mönüsü çalıştırılsın mı  ?',
+	'info_multi_articles' => 'Makalelerin dil mönüsü çalıştırılsın mı ?',
 	'info_multi_cet_article' => 'Bu makalenin dili :',
 	'info_multi_langues_choisies' => 'Lütfen aşağıda sitenizdeki yazarların kullanabileceği dilleri seçiniz.
     Sitenizde daha önce kullanılan (ve görüntülenen) diller iptal edilemez. ',
@@ -377,7 +377,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_par_nom' => 'isme göre',
 	'info_par_nombre_article' => 'makale sayısına göre',
 	'info_par_statut' => 'duruma göre',
-	'info_par_tri' => '\'(@tri@ sıralamasına göre) \'',
+	'info_par_tri' => '’(@tri@ sıralamasına göre) ’',
 	'info_passe_trop_court' => 'Şifre çok kısa.',
 	'info_passes_identiques' => 'İki şifre aynı değil.',
 	'info_pense_bete_ancien' => 'Eski hatırlatmalarınız', # MODIF
@@ -409,7 +409,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 <blockquote><i>Kayıt aşamasında,    kullanıcılara,  özel siteye erişim şifresi veren bir otomatik
     e-posta gönderilir. Bazı Hizmet bilgisayarları kendi sunucularından
     e-posta yollanmasını durduruyorlar : bu durumda otomatik kayıt olanaksızdır.', # MODIF
-	'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
+	'info_question_utilisation_moteur_recherche' => 'SPIP’in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin işleyişini hızlandırır)',
 	'info_question_vignettes_referer_non' => 'Ziyaretlerin yapıldığı kaynak sitelerden alıntıları gösterme',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
@@ -489,7 +489,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_une_rubrique' => 'bir bölüm,',
 	'info_une_rubrique_02' => '1 bölüm',
 	'info_url' => 'URL :',
-	'info_url_site' => 'SİTE\'nin URL\'si :',
+	'info_url_site' => 'SİTE’nin URL’si :',
 	'info_urlref' => 'Hipermetin bağı :',
 	'info_utilisation_spip' => 'SPIP artık kullanılmaya hazırdır...',
 	'info_visites_par_mois' => 'Ay olarak görüntüleme :',
@@ -618,7 +618,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_etat_experimental' => 'deneysel',
 	'plugin_etat_stable' => 'durgun ("stable")',
 	'plugin_etat_test' => 'test aşamasında',
-	'plugin_impossible_activer' => '@plugin@ plugin\'ini aktive etmek olanaksız',
+	'plugin_impossible_activer' => '@plugin@ plugin’ini aktive etmek olanaksız',
 	'plugin_info_automatique1' => 'Eklentilerin otomatik yüklenmesini istiyorsanız, lütfen :',
 	'plugin_info_automatique2' => '<code>@rep@</code> isimli bir dizin oluşturun ;',
 	'plugin_info_automatique3' => 'sunucunun bu dizine yazma hakkı olduğunu kontrol ediniz',
@@ -634,8 +634,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
-	'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ sürümünü gerektirir.',
-	'plugin_necessite_spip' => 'SPIP\'in en az @version@ sürümünü gerektirir.',
+	'plugin_necessite_plugin' => '@plugin@ plugin’inin en az @version@ sürümünü gerektirir.',
+	'plugin_necessite_spip' => 'SPIP’in en az @version@ sürümünü gerektirir.',
 	'plugin_source' => 'kaynak: ',
 	'plugin_titre_automatique' => 'Otomatik kurulum',
 	'plugin_titre_automatique_ajouter' => 'Eklenti ekleyiniz',
@@ -675,14 +675,14 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_admin_effacer_01' => 'Bu komut veritabanının,
   yazarlar ve yönetici erişimleri dahil, <i>tüm</i> içeriğini siler.
   Bu komuttan sonra, yeni bir veritabanı ve bir yönetici 
-  erişimi yaratmak üzere SPIP\'i 
+  erişimi yaratmak üzere SPIP’i 
   yeniden yüklemelisiniz. ',
 	'texte_adresse_annuaire_1' => '(Eğer dizininiz bu Web sitesi ile aynı makinaya yüklenmiş ise, muhtemelen bir yerel hizmet bilgisayarı «localhost» sözkonusudur.)',
 	'texte_ajout_auteur' => 'Makaleye şu yazar eklendi :',
-	'texte_annuaire_ldap_1' => 'Eğer bir (LDAP) dizinine erişiminiz varsa, onu SPIP\'e otomatik olarak kullanıcı ithal etmek için  kullanabilirsiniz. ',
+	'texte_annuaire_ldap_1' => 'Eğer bir (LDAP) dizinine erişiminiz varsa, onu SPIP’e otomatik olarak kullanıcı ithal etmek için  kullanabilirsiniz. ',
 	'texte_article_statut' => 'Bu makale :',
 	'texte_article_virtuel' => 'Sanal makale',
-	'texte_article_virtuel_reference' => '<b>Sanal makale :</b> SPIP sitenizde atıfta bulunulan ancak başka bir URL\'ye yönlendirilmiş bir makaledir. Yeniden yönlendirmeyi iptâl etmek için yukarıdaki URL\'yi siliniz.',
+	'texte_article_virtuel_reference' => '<b>Sanal makale :</b> SPIP sitenizde atıfta bulunulan ancak başka bir URL’ye yönlendirilmiş bir makaledir. Yeniden yönlendirmeyi iptâl etmek için yukarıdaki URL’yi siliniz.',
 	'texte_aucun_resultat_auteur' => '"@cherche_auteur@" için hiçbir sonuç yok.',
 	'texte_auteur_messagerie' => 'Bu site size bağlı olan yazarların listesini sürekli olarak belirtebilir, bu da sizin doğrudan ileti alışverişinde bulunmanızı sağlar.  Bu listede görünmemeyi seçebilirsiniz (bu durumda diğer kullanıcılara « görünmez »sinizdir).',
 	'texte_auteur_messagerie_1' => 'Bu site ileti alışverişini ve site katılımcıları arasında özel sohbet forumları oluşturmayı sağlar. Bunlara katılmamayı tercih edebilirsiniz. ',
@@ -691,7 +691,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_choix_base_2' => 'SQL sunucusu bir çok veritabanı içeriyor.',
 	'texte_choix_base_3' => 'Aşağıda servis sağlayıcınız tarafından size ayrılmış olanı <b>seçiniz</b>.',
 	'texte_choix_table_prefix' => 'Tablo ön-ekleri :',
-	'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru tarafından
+	'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP’teki arama motoru tarafından
     kullanılan endeksleme çizelgelerini boşaltmak için kullanınız.
     Diskteki alanı boşa harcamamış olursunuz.',
 	'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
@@ -717,16 +717,16 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_effacer_statistiques' => 'İstatistikleri sil',
 	'texte_en_cours_validation' => 'Aşağıdaki makale ve kısa haberler yayın için önerilmiştir. ', # MODIF
 	'texte_enrichir_mise_a_jour' => 'Metninizin sayfa düzenini « tipografi kısaltmaları » kullanarak zenginleştirebilirsiniz.',
-	'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin özel dosyalarını  @dossier@ dizininde yaratması gerekir mi ? Bu dosyalar sizin, sitenizin başka yerlerine sadece yazar ve yöneticilerin erişmesini sınırlamanızı sağlayabilir (örneğin, dışsal istatistik programı). Bunun bir yararı olmadığını düşünüyorsanız bu seçeneği varsayılan değerinde bırakabilirsiniz (dosya yaratma işlemi yapılmaz).', # MODIF
+	'texte_fichier_authent' => 'SPIP’in, .htpasswd ve .htpasswd-admin özel dosyalarını  @dossier@ dizininde yaratması gerekir mi ? Bu dosyalar sizin, sitenizin başka yerlerine sadece yazar ve yöneticilerin erişmesini sınırlamanızı sağlayabilir (örneğin, dışsal istatistik programı). Bunun bir yararı olmadığını düşünüyorsanız bu seçeneği varsayılan değerinde bırakabilirsiniz (dosya yaratma işlemi yapılmaz).', # MODIF
 	'texte_informations_personnelles_1' => 'Sistem şimdi size kişiselleştirilmiş bir erişim (hesap) yaratacaktır.',
 	'texte_informations_personnelles_2' => '(Not : eğer yeniden kurulum sözkonusu ise ve erişiminiz halen çalışıyorsa, yapabileceğiniz :', # MODIF
 	'texte_introductif_article' => '(Makalenin giriş metni.)',
-	'texte_jeu_caractere' => 'Sitenizde evrensel alfabe (<tt>utf-8</tt>)  kullanmanız önerilir: bu alfabe metinlerin tüm dillerde görüntülenmesine olanak tanır ve  modern web tarayıcılarında hiç sorun yaratmaz.',
+	'texte_jeu_caractere' => 'Sitenizde evrensel alfabe (<tt>utf-8</tt>) kullanmanız önerilir: bu alfabe metinlerin tüm dillerde görüntülenmesine olanak tanır ve  modern web tarayıcılarında hiç sorun yaratmaz.',
 	'texte_jeu_caractere_2' => 'Dikkat : bu ayar veritabanına önceden kaydedilmiş metinleri dönüştürmez.',
 	'texte_jeu_caractere_3' => 'Sitenizin şu anda kurulu olan karakter seti :',
 	'texte_jeu_caractere_4' => 'Eğer bu verilerinize uymazsa (örneğin bir veritabanı kurtarma işleminden sonra)  veya <em>siteyi yeni kuruyorsanız</em> ve başka bir karakter setiyle devam etmek istiyorsanız bunu belirtmeyi unutmayınız :',
-	'texte_jeu_caractere_conversion' => 'Not : tüm siteyi (makaleler, kısa haberler, forumlar vs.) <a href="@url@">utf-8\'e dönüştürme sayfasına giderek</a> bir kerede <tt>utf-8</tt>\'ye dönüştürmek isteyebilirsiniz.',
-	'texte_lien_hypertexte' => '(Eğer iletiniz Web\'de yayınlanan bir makaleye, ya da daha fazla bilgi veren bir sayfaya atıfta bulunuyorsa, lütfen buraya sayfanın başlığını ve URL adresini belirtiniz.)',
+	'texte_jeu_caractere_conversion' => 'Not : tüm siteyi (makaleler, kısa haberler, forumlar vs.) <a href="@url@">utf-8’e dönüştürme sayfasına giderek</a> bir kerede <tt>utf-8</tt>’ye dönüştürmek isteyebilirsiniz.',
+	'texte_lien_hypertexte' => '(Eğer iletiniz Web’de yayınlanan bir makaleye, ya da daha fazla bilgi veren bir sayfaya atıfta bulunuyorsa, lütfen buraya sayfanın başlığını ve URL adresini belirtiniz.)',
 	'texte_login_ldap_1' => '(Ya anonim bir erişim için boş bırakınız ya da tüm yolu belirtiniz, örneğin; « uid=dupont, ou=users, dc=mon-domaine, dc=com ».)',
 	'texte_login_precaution' => 'Dikkat ! Bu şu anki bağlantı için kullanılan kullanıcı ismidir.
  Bu formu dikkatli kullanınız...',
@@ -740,13 +740,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_multilinguisme_trad' => 'Ayrıca, bir makalenin çeşitli çevirileri arasında bir bağlantı yönetme sistemi de çalıştırabilirsiniz. ', # MODIF
 	'texte_non_compresse' => 'Sıkıştırılmamış (sunucunuz bu özniteliği taşıyamıyor). ',
 	'texte_nouveau_message' => 'Yeni ileti',
-	'texte_nouvelle_version_spip_1' => 'SPIP\'in yeni bir sürümünü yüklediniz.',
+	'texte_nouvelle_version_spip_1' => 'SPIP’in yeni bir sürümünü yüklediniz.',
 	'texte_nouvelle_version_spip_2' => 'Bu yeni uyarlama alışılana göre daha eksiksiz bir güncelleştirme gerektirir. Eğer siz bu sitenin Ağ Yöneticisi iseniz lütfen @connect@  dosyasını ecrire dizininden siliniz ve veritabanına bağlantı parametrelerinizi güncelleştirmek amacıyla yüklemeyi tekrar yapınız. <p>(Not : bağlantı parametrelerinizi unuttuysanız, silmeden önce @connect@ dosyasına bir göz atınız...) </p>', # MODIF
 	'texte_operation_echec' => 'Bir önceki sayfaya geri dönüp başka bir veri tabanı seçiniz ya da yeni bir tane yaratınız. Ana bilgisayarınız tarafından verilen bilgilerden emin olunuz. ',
 	'texte_plus_trois_car' => '3 karakterden fazla',
 	'texte_plusieurs_articles' => '"@cherche_auteur@" için bir kaç yazar bulundu : ',
 	'texte_port_annuaire' => '(Genelde, varsayılan değer uygundur.) ',
-	'texte_presente_plugin' => 'Bu sayfa sitedeki plugin\'leri listeler. Gerekli plugin\'leri uygun kutucukları işaretleyerek etkinleştirebilirsiniz.',
+	'texte_presente_plugin' => 'Bu sayfa sitedeki plugin’leri listeler. Gerekli plugin’leri uygun kutucukları işaretleyerek etkinleştirebilirsiniz.',
 	'texte_proposer_publication' => 'Makaleniz bittiğinde, yayınlanmasını önerebilirsiniz. ',
 	'texte_proxy' => 'Bazı durumlarda (intranet, korumalı ağlar...), referans verilen sitelere ulaşmak için bir <i>HTTP vekili</i> kullanmak gerekebilir. Başarısızlık durumunda, adresini aşağıya @proxy_en_cours@. (http://proxy:8080) biçiminde belirtiniz. Genelde bu kutu boş bırakılır.',
 	'texte_publication_articles_post_dates' => 'Yayınlanması ileri bir tarihe saptanan makaleler karşısında SPIP ne gibi bir tavır almalı ?',
@@ -754,12 +754,12 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_recalcul_page' => 'Sadece bir tek sayfayı yenilemek istiyorsanız, daha ziyade kamu sitesinden geçiniz ve orada « yenileme » düğmesini seçiniz.',
 	'texte_recapitiule_liste_documents' => 'Bu sayfa bölümlere yerleştirdiğiniz dokümanların listesini özetler. Her bir dokümanın bilgilerini değiştirmek için o bölümün sayfasına giden bağı izleyiniz. ',
 	'texte_recuperer_base' => 'Veritabanını tamir et',
-	'texte_reference_mais_redirige' => 'SPIP sitenizde atıfta bulunulan ve başka bir URL\'ye yönlendirilmiş makale.',
+	'texte_reference_mais_redirige' => 'SPIP sitenizde atıfta bulunulan ve başka bir URL’ye yönlendirilmiş makale.',
 	'texte_requetes_echouent' => '<b>Bazı SQL talepleri sistematik olarak ve görünürde bir neden olmaksızın başarısız oluyorsa bunun nedeni veri tabanının kendisi olabilir.</b> <p>
-SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu onarımı deneyebilirsiniz ; başarısızlık durumunda, görüntünün bir kopyasını saklayınız, belki orada aksayan şeylerin ipuçlarını bulabilirsiniz... Eğer sorun devam ederse servis sağlayıcınızla temasa geçiniz.</p>', # MODIF
+SQL’in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu onarımı deneyebilirsiniz ; başarısızlık durumunda, görüntünün bir kopyasını saklayınız, belki orada aksayan şeylerin ipuçlarını bulabilirsiniz... Eğer sorun devam ederse servis sağlayıcınızla temasa geçiniz.</p>', # MODIF
 	'texte_selection_langue_principale' => 'Aşağıda sitenin « başlıca dil » ini seçebilirsiniz. Bu seçim, sizin makalelerinizi seçilen dilde yazmanızı gerektirmez, buna karşılık :
 <ul><li> kamu sitesindeki tarihlerin varsayılan formatını ;</li>
-<li> SPIP\'in metinler için kullanacağı tipografi motorunun cinsini ;</li>
+<li> SPIP’in metinler için kullanacağı tipografi motorunun cinsini ;</li>
 <li> kamu sitesinin formlarında kullanılan dili ;</li>
 <li> özel alanda varsayılan dili belirlemeye yarar.</li></ul>',
 	'texte_sous_titre' => 'Alt-başlık',
@@ -780,8 +780,8 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 	'texte_travail_collaboratif' => 'Bir kaç yazarın aynı makalede çalışıyor olması sıkça rastlansa da, sistem eşzamanlı değişiklikleri önlemek amacıyla yeni « açılmış » olan makaleleri görüntüleyebilir.  Bu seçenek geçici uyarı iletilerinin görüntülenmesine engel olmak üzere  başlangıçta engellenmiştir.',
 	'texte_trop_resultats_auteurs' => '"@cherche_auteur@" için fazla sonuç çıktı ; lütfen aramayı detaylandırın',
 	'texte_unpack' => 'Son sürümün indirilmesi',
-	'texte_utilisation_moteur_syndiques' => 'SPIP\'le bütünleşik arama motorunu kullandığınızda paylaşımlı site ve makalelerde aramalarınızı iki farklı şekilde yapabilirsiniz. <br /> En basit yöntem sadece makalelerin başlık ve tanımlarında arama yapmaktır. Diğer bir yöntem ise çok daha güçlü olup, SPIP\'in atıfta bulunulan sitelerin metinlerinde de arama yapmasını sağlar. Eğer bir siteye atıfta bulunursanız, SPIP aramayı o sitenin metninde yapacaktır. ',
-	'texte_utilisation_moteur_syndiques_2' => 'Bu yöntem SPIP\'i atıfta bulunulan sitelere düzenli olarak ziyarette bulunmaya zorlar, bu da sizin kendi sitenizde hafif bir yavaşlamaya neden olabilir. ',
+	'texte_utilisation_moteur_syndiques' => 'SPIP’le bütünleşik arama motorunu kullandığınızda paylaşımlı site ve makalelerde aramalarınızı iki farklı şekilde yapabilirsiniz. <br /> En basit yöntem sadece makalelerin başlık ve tanımlarında arama yapmaktır. Diğer bir yöntem ise çok daha güçlü olup, SPIP’in atıfta bulunulan sitelerin metinlerinde de arama yapmasını sağlar. Eğer bir siteye atıfta bulunursanız, SPIP aramayı o sitenin metninde yapacaktır. ',
+	'texte_utilisation_moteur_syndiques_2' => 'Bu yöntem SPIP’i atıfta bulunulan sitelere düzenli olarak ziyarette bulunmaya zorlar, bu da sizin kendi sitenizde hafif bir yavaşlamaya neden olabilir. ',
 	'texte_vide' => 'Boş ',
 	'texte_vider_cache' => 'Önbelleği boşalt',
 	'titre_admin_effacer' => 'Teknik bakım ',
@@ -853,7 +853,7 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 	'utf8_convert_termine' => 'Tamamlandı !',
 	'utf8_convert_timeout' => '<b>Önemli :</b> sunucuda <i>zaman aşımı</i> oluşursa sayfayı « tamamlandı » yazana kadar tekrar yükleyiniz.',
 	'utf8_convert_verifier' => 'Şimdi önbelleği boşaltmalı ve sitenin kamusal sayfalarında herşeyin yolunda olduğunu doğrulamalısınız. Büyük bir soun varsa, @rep@ dizininde verilerinizin bir yedeği (SQL formatında) alınmıştır.',
-	'utf8_convertir_votre_site' => 'Sitenizi utf-8\'e dönüştürmek',
+	'utf8_convertir_votre_site' => 'Sitenizi utf-8’e dönüştürmek',
 
 	// V
 	'version' => 'Sürüm :'

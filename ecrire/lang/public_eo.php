@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'espace_prive' => 'Privata spaco',
 
 	// F
-	'formats_acceptes' => 'Formatoj akceptitaj : @formats@.',
+	'formats_acceptes' => 'Formatoj akceptitaj : @formats@.',
 
 	// H
 	'hierarchie_site' => 'Hierarkio de la retejo',

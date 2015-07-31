@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'edition_mode_texte' => 'winwlanmɛ',
-	'en_reponse' => 'ɖogbèyiyi mɛ nu  :',
+	'en_reponse' => 'ɖogbèyiyi mɛ nu :',
 	'en_resume' => 'ɖo xo kléwun mɛ ɔ',
 	'envoyer_message' => 'Sɛ wɛn do ',
 	'espace_prive' => 'tɛnkandovo',

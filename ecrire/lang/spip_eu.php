@@ -432,7 +432,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 	'info_non_utilisation_messagerie' => 'Ez erabili barne-mezularitza.',
 	'info_nouveau_message' => 'MEZU BERRI BAT BADUZU',
 	'info_nouveaux_messages' => '@total_messages@ MEZU BERRI BADITUZU',
-	'info_numero_abbreviation' => 'Zk  ',
+	'info_numero_abbreviation' => 'Zk ',
 	'info_obligatoire' => 'Informazio hori beharrezkoa da',
 	'info_pense_bete' => 'Buruz ikasteko oroigarria',
 	'info_petit_ecran' => 'Pantaila txikia',

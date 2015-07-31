@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_attention' => 'Advarsel!',
 	'avis_champ_incorrect_type_objet' => 'Ugyldigt feltnavn @name@ for et objekt af typen @type@',
 	'avis_colonne_inexistante' => 'Kolonnen @col@ findes ikke',
-	'avis_erreur' => 'Fejl: se nedenfor\';',
+	'avis_erreur' => 'Fejl: se nedenfor’;',
 	'avis_erreur_connexion' => 'Ingen forbindelse',
 	'avis_erreur_cookie' => 'cookie-problem', # MODIF
 	'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenhæng.', # MODIF
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_euro' => 'Indsæt et €-symbol',
 	'barre_gras' => 'Skriv med {{fed type}}',
 	'barre_guillemets' => 'Sæt i "anførselstegn" ',
-	'barre_guillemets_simples' => 'Sæt i \'anførselstegn\' ',
+	'barre_guillemets_simples' => 'Sæt i ’anførselstegn’ ',
 	'barre_intertitre' => 'Gør til {{{underoverskrift}}}',
 	'barre_italic' => 'Skriv med {kursiv}',
 	'barre_lien' => 'Lav til et [hyperlink->http://...]',
@@ -322,7 +322,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'System fejl (errno @errsys@)',
 	'info_erreur_systeme2' => 'Harddisken er måske fyldt eller databasen er skadet. <br />
- <font color=\'red\'>prøv <a href=\'@script@\'>at reparere databasen</a>,
+ <font color=’red’>prøv <a href=’@script@’>at reparere databasen</a>,
 eller kontakt din internetudbyder.</font>', # MODIF
 	'info_fini' => 'Det er overstået!',
 	'info_format_image' => 'Billedformater til brug ved dannelse af piktogrammer: @gd_formats@.',
@@ -561,20 +561,20 @@ og igen få adgang til webstedet.', # MODIF
 
 	// Z
 	'zbug_boucle_recursive_undef' => 'boucle récursive non définie', # MODIF
-	'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@', # MODIF
+	'zbug_champ_hors_motif' => 'Champ @champ@ hors d’une boucle de motif @motif@', # MODIF
 	'zbug_critere_inconnu' => 'critère inconnu @critere@', # MODIF
 	'zbug_distant_interdit' => 'externe interdit', # MODIF
 	'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
 	'zbug_erreur_boucle_double' => 'BOUCLE@id@: flertydig definition', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mangler slutkoden der lukker', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'forkert loop (BOUCLE) syntax ', # MODIF
-	'zbug_erreur_execution_page' => 'erreur d\'exécution de la page', # MODIF
+	'zbug_erreur_execution_page' => 'erreur d’exécution de la page', # MODIF
 	'zbug_erreur_filtre' => 'Fejl - udefineret filter: <b>"@filter@"</b>', # MODIF
-	'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)', # MODIF
+	'zbug_erreur_meme_parent' => '{meme_parent} ne s’applique qu’aux boucles (FORUMS) ou (RUBRIQUES)', # MODIF
 	'zbug_info_erreur_squelette' => 'Fejl på sitet',
-	'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant', # MODIF
+	'zbug_inversion_ordre_inexistant' => 'inversion d’un ordre inexistant', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
-	'zbug_parametres_inclus_incorrects' => 'Paramètres d\'inclusion incorrects', # MODIF
+	'zbug_parametres_inclus_incorrects' => 'Paramètres d’inclusion incorrects', # MODIF
 	'zbug_serveur_indefini' => 'serveur SQL indéfini' # MODIF
 );
 

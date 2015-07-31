@@ -291,7 +291,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_2' => '<sup>e</sup> na @liste@',
 	'info_code_acces' => 'Zapamiętaj swoje kody dostępu!',
 	'info_compatibilite_html' => 'Norma HTML do zastosowania',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Jeśli serwer nie kompresuje strony HTML przed wysłaniem, można próbować wymusić kompresję w celu zmniejszenia rozmiaru przesyłanych stron. Uwaga: to może mieć widoczny niekorzystny wpływ na działanie niektórych serwerów.',
 	'info_config_suivi' => 'Jeśli ten adres odpowiada liście subskrypcyjnej, możecie wpisać poniżej adres, za któego pomocą uczestnicy serwisu mogą się zapisać. Adres ten może być URL-em (np. stroną służącą do zapisywania się na listę przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@dany_adres@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Możesz automatycznie, za pomocą poczty elektronicznej otrzymywać ogłoszenia dotyczące aktywności redakcyjnej tego serwisu. W tym celu powinnieneś się zapisać na listę mailową.',
@@ -442,7 +442,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_par_nom' => 'wg nazw',
 	'info_par_nombre_article' => '(wg liczby artykułów)',
 	'info_par_statut' => 'wg statusu',
-	'info_par_tri' => '\'(par @tri@)\'',
+	'info_par_tri' => '’(par @tri@)’',
 	'info_passe_trop_court' => 'Za krótkie hasło.',
 	'info_passes_identiques' => 'Hasła nie są identyczne.',
 	'info_pense_bete_ancien' => 'Twoje stare notatki', # MODIF

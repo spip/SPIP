@@ -303,7 +303,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Nijedan predlozak <b>@fichier@</b> nije dostupan...',
 	'info_erreur_systeme' => 'Sistemska greska (errno @errsys@)',
 	'info_erreur_systeme2' => '<b>Hard disk je mozda pun ili je baza podataka ostecena. <br />
-	<font color=\'red\'>Pokusajte <a href=\'ecrire/admin_repair.php3\'>popravku baze podataka</a>, ili kontaktirajte vaseg hosta.</font><br /></b>', # MODIF
+	<font color=’red’>Pokusajte <a href=’ecrire/admin_repair.php3’>popravku baze podataka</a>, ili kontaktirajte vaseg hosta.</font><br /></b>', # MODIF
 	'info_fini' => 'Zavrseno je!',
 	'info_format_image' => 'Format fotografija koji se moze koristiti za kreiranje vinjeta: @gd_formats@.',
 	'info_format_non_defini' => 'neodredjen format',
@@ -545,7 +545,7 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 
 	// Z
 	'zbug_balise_b_aval' => ' : oznaka B kasni u petlji',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'petlja',
 	'zbug_boucle_recursive_undef' => 'nedefinisana rakurzivna petlja', # MODIF
 	'zbug_champ_hors_boucle' => 'Polje @champ@ izvan petlje',

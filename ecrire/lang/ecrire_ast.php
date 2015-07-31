@@ -10,35 +10,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_plugin' => 'Activar el plugin',
 	'affichage' => 'Compaxinación',
-	'aide_non_disponible' => 'Esta parte de l\'aida en llínia tovía nun tá iguada n\'esta llingua.',
+	'aide_non_disponible' => 'Esta parte de l’aida en llínia tovía nun tá iguada n’esta llingua.',
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Accesu torgau.',
-	'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabayó n\'esti artículo hai @date_diff@ minutos.',
+	'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabayó n’esti artículo hai @date_diff@ minutos.',
 	'avis_aucun_resultat' => 'Dengún resultáu',
 	'avis_chemin_invalide_1' => 'El camín escoyíu',
-	'avis_chemin_invalide_2' => 'nun paez afayaízu. Torna a la páxina anterior y revisa la información qu\'escribiste.',
-	'avis_connexion_echec_1' => 'Falló l\'enxertu al servidor SQL.',
+	'avis_chemin_invalide_2' => 'nun paez afayaízu. Torna a la páxina anterior y revisa la información qu’escribiste.',
+	'avis_connexion_echec_1' => 'Falló l’enxertu al servidor SQL.',
 	'avis_connexion_echec_2' => 'Torna a la páxina cabera y revisa los datos que pusiste.',
 	'avis_connexion_echec_3' => '<b>Nota:</b> En munchos sirvidores, fai falta <b>pidir</b> la activación del accesu a la base de datos enantes de poder usala. Si nun puedes conectate, mira si ficiste esi trámite.',
 	'avis_connexion_ldap_echec_1' => 'Hubo un fallu na conexón al sirvidor LDAP.',
-	'avis_connexion_ldap_echec_2' => 'Torna a la páxina anterior, y revisa la información qu\'escribisti n\'ella.',
-	'avis_connexion_ldap_echec_3' => 'D\'otru mou, nun uses el sofitu de LDAP pa importar usuarios.',
+	'avis_connexion_ldap_echec_2' => 'Torna a la páxina anterior, y revisa la información qu’escribisti n’ella.',
+	'avis_connexion_ldap_echec_3' => 'D’otru mou, nun uses el sofitu de LDAP pa importar usuarios.',
 	'avis_deplacement_rubrique' => '¡Atención! Esta estaya contién @contient_breves@ breve@scb@: si la mueves, ties que marcar esti cuadru de confirmación.',
-	'avis_destinataire_obligatoire' => 'Ties qu\'indicar un destinatariu enantes d\'unviar esti mensaxe.',
+	'avis_destinataire_obligatoire' => 'Ties qu’indicar un destinatariu enantes d’unviar esti mensaxe.',
 	'avis_erreur_connexion_mysql' => 'Fallu de conexón SQL',
 	'avis_erreur_version_archive' => '<b>¡Atención! El ficheru @archive@ pertenez
     otra versión de SPIP distinta de la que ta
     instalada.</b> Tas delantre de dificultaes
     abondo: peligru de destruir la base de datos,
     fallos variaos nel funcionamientu del sitiu, etc.
-    Nun valides esta demanda d\'importación.<p>Pa
+    Nun valides esta demanda d’importación.<p>Pa
     mayor información, llee <a href="@spipnet@">
                                 la documentación de SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Espaciu torgáu</b><div>SPIP ya ta instalao.</div>',
-	'avis_lecture_noms_bases_1' => 'El programa d\'instalación nun fue a lleer los nomes de les bases de datos instaláes.',
+	'avis_lecture_noms_bases_1' => 'El programa d’instalación nun fue a lleer los nomes de les bases de datos instaláes.',
 	'avis_lecture_noms_bases_2' => 'Puede ser que denguna base nun te disponible, o que la función que permite llistar les bases te desactivada
- por cuenta de razones de seguridá (lo que ye\'l casu n\'abondos agospiamientos web).',
-	'avis_lecture_noms_bases_3' => 'Nel segundu casu, ye probable qu\'esista una base que col mesmu nome qu\'el to login:',
+ por cuenta de razones de seguridá (lo que ye’l casu n’abondos agospiamientos web).',
+	'avis_lecture_noms_bases_3' => 'Nel segundu casu, ye probable qu’esista una base que col mesmu nome qu’el to login:',
 	'avis_non_acces_message' => 'Nun tienes accesu a esti mensaxe.',
 	'avis_non_acces_page' => 'Nun tienes accesu a esta páxina.',
 	'avis_operation_echec' => 'Falló la operación.',
@@ -48,16 +48,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_version_mysql' => 'El to sirvidor SQL (@version_mysql@) nun permite la igua automática de les tables de la base.',
 
 	// B
-	'bouton_acces_ldap' => 'Añader l\'accesu a LDAP',
+	'bouton_acces_ldap' => 'Añader l’accesu a LDAP',
 	'bouton_ajouter' => 'Amestar',
 	'bouton_ajouter_participant' => 'AÑADER UN PARTICIPANTE:',
 	'bouton_annonce' => 'ANUNCIU',
 	'bouton_annuler' => 'Anular',
-	'bouton_checkbox_envoi_message' => 'posibilidá d\'unviar un mensaxe',
+	'bouton_checkbox_envoi_message' => 'posibilidá d’unviar un mensaxe',
 	'bouton_checkbox_indiquer_site' => 'poner obligatoriamente un sitiu Web',
 	'bouton_checkbox_signature_unique_email' => 'una sola firma por corréu electrónicu',
 	'bouton_checkbox_signature_unique_site' => 'una sola firma por sitiu Web',
-	'bouton_demande_publication' => 'Pedir l\'espublizamientu d\'esti artículu',
+	'bouton_demande_publication' => 'Pedir l’espublizamientu d’esti artículu',
 	'bouton_desactive_tout' => 'Desactivalo too',
 	'bouton_desinstaller' => 'Desasitiar',
 	'bouton_effacer_index' => 'Desaniciar los índices',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_petition_activee' => 'Solicitú activada',
 	'bouton_radio_supprimer_petition' => 'Desaniciar la solicitú',
 	'bouton_redirection' => 'REDIREICIÓN',
-	'bouton_relancer_installation' => 'Rellanzar l\'instalación',
+	'bouton_relancer_installation' => 'Rellanzar l’instalación',
 	'bouton_suivant' => 'Siguiente',
 	'bouton_tenter_recuperation' => 'Tentar una reparación',
 	'bouton_test_proxy' => 'Comprobar el proxy',
@@ -92,21 +92,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cache_mode_compresse' => 'Los archivos de la caché grábense en mou comprimíu.',
 	'cache_mode_non_compresse' => 'Los archivos de la caché grábense en mou nun comprimíu.',
 	'cache_modifiable_webmestre' => 'Esti parámetru puede modificase pol webmaster del sitiu.',
-	'calendrier_synchro' => 'Si uses un programa d\'axenda compatible <b>iCal</b>, puedes sincronizalu cola información d\'esti sitiu.',
+	'calendrier_synchro' => 'Si uses un programa d’axenda compatible <b>iCal</b>, puedes sincronizalu cola información d’esti sitiu.',
 	'config_activer_champs' => 'Activar los campos siguientes',
 	'config_choix_base_sup' => 'indicar una base datos nesti sirvidor',
 	'config_erreur_base_sup' => 'SPIP nun tien accesu a la llista de les bases disponibles',
-	'config_info_base_sup' => 'Si tienes otres bases de datos pa restolar al traviés de SPIP, col so sirvidor SQL o con otru, el formulariu d\'embaxo va permitite declarales. Si dexes ciertos campos vacíos, utilizaránse les identificaciones de conexón a la base principal.',
+	'config_info_base_sup' => 'Si tienes otres bases de datos pa restolar al traviés de SPIP, col so sirvidor SQL o con otru, el formulariu d’embaxo va permitite declarales. Si dexes ciertos campos vacíos, utilizaránse les identificaciones de conexón a la base principal.',
 	'config_info_base_sup_disponibles' => 'Bases suplementaries que ya son restolables:',
 	'config_info_enregistree' => 'Guardose la nueva configuración',
-	'config_info_logos' => 'Cada elementu del sitiu puede tener un logo, lo mesmo qu\'un «logo de pasu\'l mur»',
+	'config_info_logos' => 'Cada elementu del sitiu puede tener un logo, lo mesmo qu’un «logo de pasu’l mur»',
 	'config_info_logos_utiliser' => 'Usar los logos',
 	'config_info_logos_utiliser_non' => 'Nun usar los logos',
-	'config_info_logos_utiliser_survol' => 'Usar los logos de pasu\'l mur',
-	'config_info_logos_utiliser_survol_non' => 'Nun usar los logos de pasu\'l mur',
-	'config_info_redirection' => 'En activando esta opción, vas poder crear artículos virtuales, simples referencies d\'artículos espublizáos n\'otros sitios o fechos ensin SPIP.',
+	'config_info_logos_utiliser_survol' => 'Usar los logos de pasu’l mur',
+	'config_info_logos_utiliser_survol_non' => 'Nun usar los logos de pasu’l mur',
+	'config_info_redirection' => 'En activando esta opción, vas poder crear artículos virtuales, simples referencies d’artículos espublizáos n’otros sitios o fechos ensin SPIP.',
 	'config_redirection' => 'Artículos virtuales',
-	'config_titre_base_sup' => 'Declaración d\'una base suplementaria',
+	'config_titre_base_sup' => 'Declaración d’una base suplementaria',
 	'config_titre_base_sup_choix' => 'Escueye una base suplementaria',
 	'connexion_ldap' => 'Conexón:',
 	'copier_en_local' => 'Copiar en llocal',
@@ -118,29 +118,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email' => 'corréu electrónicu',
 	'email_2' => 'correu elletrónicu:',
 	'en_savoir_plus' => 'Pa saber más',
-	'entree_adresse_annuaire' => 'Señes de l\'anuariu',
-	'entree_adresse_email' => 'Les tos señes d\'email',
+	'entree_adresse_annuaire' => 'Señes de l’anuariu',
+	'entree_adresse_email' => 'Les tos señes d’email',
 	'entree_base_donnee_1' => 'Señes de la base de datos',
 	'entree_base_donnee_2' => '(Bien de veces estes señes correspuendense coles del sitiu mesmu, dacuando son el nome «localhost», o sinon dexense vacíes dafechu.)',
 	'entree_biographie' => 'Biografía curtia en delles pallabres.',
-	'entree_chemin_acces' => '<b>Enxertar</b> la ruta d\'accesu:',
+	'entree_chemin_acces' => '<b>Enxertar</b> la ruta d’accesu:',
 	'entree_cle_pgp' => 'La to clave PGP',
 	'entree_contenu_rubrique' => '(Conteníu de la estaya en delles pallabres.)',
 	'entree_identifiants_connexion' => 'Los identificadores pa la to conexón...',
-	'entree_informations_connexion_ldap' => 'Nesti formulariu has d\'enxertar la información pa coneutate al sirvidor de señes LDAP.
- Esta información tien que apurrítela l\'alministrador del sistema,
+	'entree_informations_connexion_ldap' => 'Nesti formulariu has d’enxertar la información pa coneutate al sirvidor de señes LDAP.
+ Esta información tien que apurrítela l’alministrador del sistema,
  o de la rede.',
 	'entree_infos_perso' => '¿Quién yes?',
-	'entree_interieur_rubrique' => 'Dientro de l\'estaya:',
-	'entree_liens_sites' => '<b>Enllaz d\'hipertestu</b> (referencia, sitiu a visitar...)',
+	'entree_interieur_rubrique' => 'Dientro de l’estaya:',
+	'entree_liens_sites' => '<b>Enllaz d’hipertestu</b> (referencia, sitiu a visitar...)',
 	'entree_login' => 'El to login',
 	'entree_login_connexion_1' => 'El nome de conexón',
-	'entree_login_connexion_2' => '(Correspuende seique al to nome d\'accesu al FTP; seique en blancu)',
+	'entree_login_connexion_2' => '(Correspuende seique al to nome d’accesu al FTP; seique en blancu)',
 	'entree_login_ldap' => 'Nome inicial LDAP',
 	'entree_mot_passe' => 'La to contraseña',
 	'entree_mot_passe_1' => 'La contraseña pa la conexón',
 	'entree_mot_passe_2' => '(Correspuende seique a la to contraseña pal FTP; seique en blancu)',
-	'entree_nom_fichier' => 'Has d\'amestar el nome de l\'archivu @texte_compresse@:',
+	'entree_nom_fichier' => 'Has d’amestar el nome de l’archivu @texte_compresse@:',
 	'entree_nom_pseudo' => 'El to nome o nomatu',
 	'entree_nom_pseudo_1' => '(El to nome o nomatu)',
 	'entree_nom_site' => 'Nome del to sitiu web',
@@ -151,10 +151,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_obligatoire' => '<b>Títulu</b> [Obligatoriu]<br />',
 	'entree_url' => 'Les señes (URL) del to sitiu web',
 	'erreur_plugin_desinstalation_echouee' => 'Falló la desinstalación del complementu. Sicasí, puedes desactivalu.', # MODIF
-	'erreur_plugin_fichier_absent' => 'Falta l\'archivu',
-	'erreur_plugin_fichier_def_absent' => 'Falta l\'archivu de definición',
+	'erreur_plugin_fichier_absent' => 'Falta l’archivu',
+	'erreur_plugin_fichier_def_absent' => 'Falta l’archivu de definición',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome de función encaboxada',
-	'erreur_plugin_nom_manquant' => 'Falta\'l nome del plugin',
+	'erreur_plugin_nom_manquant' => 'Falta’l nome del plugin',
 	'erreur_plugin_prefix_manquant' => 'Espaciu de nomes del plugin nun definíu',
 	'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; nel archivu de definición',
 	'erreur_plugin_version_manquant' => 'Falta la versión del plugin',
@@ -164,15 +164,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'htaccess_inoperant' => 'htaccess non operativu',
 
 	// I
-	'ical_info1' => 'N\'esta páxina ufrense delles maneres de tar en contautu cola actividá d\'esti sitiu.',
+	'ical_info1' => 'N’esta páxina ufrense delles maneres de tar en contautu cola actividá d’esti sitiu.',
 	'ical_info2' => 'Pa más información tocante a toes estes técniques, pues consultar <a href="@spipnet@">la documentación de SPIP</a>.',
 	'ical_info_calendrier' => 'Tienes dos axendes a la to disposición. La primera ye el plan del sitiu que anuncia tolos artículos espublizaos. La segunda contién los anuncios editoriales y también los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que pues modificar en tou momentu anovando la to contraseña.',
 	'ical_methode_http' => 'Descarga',
 	'ical_methode_webcal' => 'Sincronización (webcal://)',
 	'ical_texte_js' => 'Una llinia de javascript va permitite amosar de mou bien fácil, en cualquier otru sitiu tuyu, los artículos recientes espublizaos nesti sitiu.',
-	'ical_texte_prive' => 'Esta axenda, de usu esclusivamente personal, te informa de l\'actividá editorial privada d\'esti sitiu (xeres y conceyos personales, artículos y breves propuestos...).',
-	'ical_texte_public' => 'Esta axenda te permite siguir l\'actividá pública d\'esti sitiu (artículos y breves espublizáos).',
-	'ical_texte_rss' => 'Puedes sindicar les novedáes d\'esti sitiu en cualisquier llector d\'archivos en formatu XML/RSS (Rich Site Summary). Esti ye también el formatu que permite a SPIP lleer les novedáes espublizáes n\'otros sitios que utilicen un formatu d\'intercambéu compatible (sitios sindicaos).',
+	'ical_texte_prive' => 'Esta axenda, de usu esclusivamente personal, te informa de l’actividá editorial privada d’esti sitiu (xeres y conceyos personales, artículos y breves propuestos...).',
+	'ical_texte_public' => 'Esta axenda te permite siguir l’actividá pública d’esti sitiu (artículos y breves espublizáos).',
+	'ical_texte_rss' => 'Puedes sindicar les novedáes d’esti sitiu en cualisquier llector d’archivos en formatu XML/RSS (Rich Site Summary). Esti ye también el formatu que permite a SPIP lleer les novedáes espublizáes n’otros sitios que utilicen un formatu d’intercambéu compatible (sitios sindicaos).',
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'Llista de corréu',
 	'ical_titre_rss' => 'Archivos de sindicación',
@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_publication' => 'Publicación',
 	'icone_relancer_signataire' => 'Rellanzar el roblador',
 	'icone_retour' => 'Tornar',
-	'icone_retour_article' => 'Tornar a l\'artículu',
+	'icone_retour_article' => 'Tornar a l’artículu',
 	'icone_squelette' => 'Cadarmes',
 	'icone_suivi_publication' => 'Siguimientu de la publicación',
 	'icone_supprimer_cookie' => 'Desaniciar la cookie de correspondencia',
@@ -230,7 +230,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrateur_1' => 'Xestión',
 	'info_administrateur_2' => 'de la web (<i>úsalo con cuidáu</i>)',
 	'info_administrateur_site_01' => 'Si tas nel equipu de xestión,',
-	'info_administrateur_site_02' => 'pica n\'esti enllaz',
+	'info_administrateur_site_02' => 'pica n’esti enllaz',
 	'info_administrateurs' => 'Alministradores',
 	'info_administrer_rubrique' => 'Puedes alministrar esta estaya',
 	'info_adresse' => 'a les señes:',
@@ -250,7 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_article_a_paraitre' => 'Los artículos que apaecerán en feches futures',
 	'info_articles_02' => 'artículos',
 	'info_articles_2' => 'Artículos',
-	'info_articles_auteur' => 'Los artículos d\'esti autor',
+	'info_articles_auteur' => 'Los artículos d’esti autor',
 	'info_articles_trouves' => 'Artículos alcontraos',
 	'info_articles_trouves_dans_texte' => 'Artículos alcontraos (nel testu)',
 	'info_attente_validation' => 'Los tos artículos esperando validación',
@@ -269,23 +269,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_authentification_externe' => 'Autentificación esterna',
 	'info_avertissement' => 'Avisu',
 	'info_barre_outils' => 'cola so barra de ferramientes?',
-	'info_base_installee' => 'L\'armazón de la base de datos ta instalada.',
+	'info_base_installee' => 'L’armazón de la base de datos ta instalada.',
 	'info_chapeau' => 'Cabecera',
 	'info_chapeau_2' => 'Cabecera:',
-	'info_chemin_acces_1' => 'Opciones: <b>Camín d\'accesu na guía</b>',
-	'info_chemin_acces_2' => 'Agora debes configurar el camín d\'accesu a la información de la guía. Esta información ye indispensable pa lleer los perfiles d\'usuariu guardáos na guía.',
-	'info_chemin_acces_annuaire' => 'Opciones: <b>Camín d\'accesu na guía</b>',
+	'info_chemin_acces_1' => 'Opciones: <b>Camín d’accesu na guía</b>',
+	'info_chemin_acces_2' => 'Agora debes configurar el camín d’accesu a la información de la guía. Esta información ye indispensable pa lleer los perfiles d’usuariu guardáos na guía.',
+	'info_chemin_acces_annuaire' => 'Opciones: <b>Camín d’accesu na guía</b>',
 	'info_choix_base' => 'Tercera etapa:',
 	'info_classement_1' => '<sup>u</sup> en @liste@',
 	'info_classement_2' => '<sup>u</sup> en @liste@',
-	'info_code_acces' => '¡Nun escaezas los tos códigos d\'accesu!',
+	'info_code_acces' => '¡Nun escaezas los tos códigos d’accesu!',
 	'info_compatibilite_html' => 'Norma HTML a siguir',
-	'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l\'agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l’agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Si el to sirvidor nun comprime automáticamente les páxines html par unviales a los internautes, puedes tentar de forzar esta compresión pa amenorgar el pesu de les páxines descargáes. <b>Atención</b>: esto puede ralentizar enforma dellos sirvidores.',
-	'info_config_suivi' => 'Si estes señes corresponden a una llista de corréu, pues indicar embaxo les señes nes que pueden apuntase los participantes nel sitiu. Estes señes puen ser una URL (por exemplu la páxina d\'inscripción a la llista na Rede), o unes señes d\'email con un asuntu específicu (por exemplu: <tt>@señes_llista@?subject=subscribe</tt>):',
-	'info_config_suivi_explication' => 'Puedes soscribite a la llista de corréu d\'esti sitiu. D\'esti mou recibirás per corréu electrónicu los anuncios d\'artículos y de breves propuestos pa espublizar.',
+	'info_config_suivi' => 'Si estes señes corresponden a una llista de corréu, pues indicar embaxo les señes nes que pueden apuntase los participantes nel sitiu. Estes señes puen ser una URL (por exemplu la páxina d’inscripción a la llista na Rede), o unes señes d’email con un asuntu específicu (por exemplu: <tt>@señes_llista@?subject=subscribe</tt>):',
+	'info_config_suivi_explication' => 'Puedes soscribite a la llista de corréu d’esti sitiu. D’esti mou recibirás per corréu electrónicu los anuncios d’artículos y de breves propuestos pa espublizar.',
 	'info_confirmer_passe' => 'Confirmar esta nueva contraseña:',
-	'info_conflit_edition_avis_non_sauvegarde' => 'Atención, los campos siguientes camudáronse n\'otra parte. Poro, les modificaciones dientro d\'esos campos nun se grabaron.',
+	'info_conflit_edition_avis_non_sauvegarde' => 'Atención, los campos siguientes camudáronse n’otra parte. Poro, les modificaciones dientro d’esos campos nun se grabaron.',
 	'info_conflit_edition_differences' => 'Diferencies:',
 	'info_conflit_edition_version_enregistree' => 'La versión grabada:',
 	'info_conflit_edition_votre_version' => 'La to versión:',
@@ -303,7 +303,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_creer_base' => '<b>Crear</b> una nueva base datos:',
 	'info_dans_rubrique' => 'Na estaya:',
 	'info_date_publication_anterieure' => 'Fecha de redaición anterior:',
-	'info_date_referencement' => 'FECHA DE REFERENCIACIÓN D\'ESTI SITIU:',
+	'info_date_referencement' => 'FECHA DE REFERENCIACIÓN D’ESTI SITIU:',
 	'info_derniere_etape' => '¡Ya finamos!',
 	'info_derniers_articles_publies' => 'Los caberos artículos espublizaos en llinia',
 	'info_desactiver_messagerie_personnelle' => 'Pues activar o desactivar la mensaxería personal nesti sitiu.',
@@ -311,42 +311,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_desinstaller_plugin' => 'desanicia los datos y desactiva el plugin',
 	'info_discussion_cours' => 'Discutinios en cursu',
 	'info_ecrire_article' => 'Enantes que puedas escribir artículos, tienes que crear polo menos una estaya.',
-	'info_email_envoi' => 'Señes d\'email d\'unvíu (opcional)',
-	'info_email_envoi_txt' => 'Indica equí les señes a utilizar pa unviar los emails (por omisión, usense les señes del destinatariu como señes d\'unvíu):',
-	'info_email_webmestre' => 'Señes d\'email del webmaster (opcional)', # MODIF
-	'info_entrer_code_alphabet' => 'Enxerta\'l códigu de l\'alfabetu a utilizar:',
-	'info_envoi_email_automatique' => 'Unvíu d\'e-mails automáticu',
+	'info_email_envoi' => 'Señes d’email d’unvíu (opcional)',
+	'info_email_envoi_txt' => 'Indica equí les señes a utilizar pa unviar los emails (por omisión, usense les señes del destinatariu como señes d’unvíu):',
+	'info_email_webmestre' => 'Señes d’email del webmaster (opcional)', # MODIF
+	'info_entrer_code_alphabet' => 'Enxerta’l códigu de l’alfabetu a utilizar:',
+	'info_envoi_email_automatique' => 'Unvíu d’e-mails automáticu',
 	'info_envoyer_maintenant' => 'Unviar agora',
 	'info_etape_suivante' => 'Pasar a la etapa siguiente',
 	'info_etape_suivante_1' => 'Puedes pasar a la etapa siguiente.',
 	'info_etape_suivante_2' => 'Puedes pasar a la etapa siguiente.',
 	'info_exceptions_proxy' => 'Esceiciones pal proxy',
 	'info_exportation_base' => 'esportación de la base a @archive@',
-	'info_facilite_suivi_activite' => 'Col envís de facilitar el siguimientu de l\'actividá
+	'info_facilite_suivi_activite' => 'Col envís de facilitar el siguimientu de l’actividá
   editorial del sitiu, SPIP pue comunicar por e-mail, por exemplu
-  a una llista de corréu de redactores, l\'anunciu de les propuestes de
-  publicación y les validaciones d\'artículos.',
-	'info_fichiers_authent' => 'Archivos d\'autentificación «.htpasswd»',
+  a una llista de corréu de redactores, l’anunciu de les propuestes de
+  publicación y les validaciones d’artículos.',
+	'info_fichiers_authent' => 'Archivos d’autentificación «.htpasswd»',
 	'info_forums_abo_invites' => 'Esti sitiu tien foros pa abonaos; poro a los visiteurs se-yos encamienta que se rexistren nel sitiu públicu.',
-	'info_gauche_admin_effacer' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l\'accesu a les diferentes funciones de mantenimientu téunicu. Delles llancen un procesu d\'identificación específicu, pal que fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
-	'info_gauche_admin_tech' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l\'accesu a les diferentes
-funciones de mantenimientu téunicu. Delles llancen un procesu d\'identificación específicu, pal que
+	'info_gauche_admin_effacer' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l’accesu a les diferentes funciones de mantenimientu téunicu. Delles llancen un procesu d’identificación específicu, pal que fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
+	'info_gauche_admin_tech' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l’accesu a les diferentes
+funciones de mantenimientu téunicu. Delles llancen un procesu d’identificación específicu, pal que
 fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
-	'info_gauche_admin_vider' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l\'accesu a les diferentes
-funciones de mantenimientu téunicu. Delles llancen un procesu d\'identificación específicu, pal que
+	'info_gauche_admin_vider' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l’accesu a les diferentes
+funciones de mantenimientu téunicu. Delles llancen un procesu d’identificación específicu, pal que
 fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
-	'info_gauche_auteurs' => 'Equí s\'alcuentren tolos autores del sitiu.
- El so estatutu vien indicáu pola color de l\'iconu (alministrador = verde; redactor = mariellu).',
+	'info_gauche_auteurs' => 'Equí s’alcuentren tolos autores del sitiu.
+ El so estatutu vien indicáu pola color de l’iconu (alministrador = verde; redactor = mariellu).',
 	'info_gauche_auteurs_exterieurs' => 'Los autores esternos, ensin accesu al sitiu, vienen indicaos con un iconu azul;
   los autores esborráos con un calderu de basoria.', # MODIF
-	'info_gauche_messagerie' => 'La mensaxería permite mandase mensaxes ente redactores, conservar recordatorioss (pa usu personal) o amosar anuncies na páxina principal de l\'espaciu priváu (si yes alministrador).',
+	'info_gauche_messagerie' => 'La mensaxería permite mandase mensaxes ente redactores, conservar recordatorioss (pa usu personal) o amosar anuncies na páxina principal de l’espaciu priváu (si yes alministrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMBERU',
-	'info_gauche_statistiques_referers' => 'Esta páxina presenta la llista de los <i>referers</i>, que son sitios que contienen enllaces que apunten pa esti mesmu sitiu, namái d\'ayeri y de güei; esta llista ponse a cero cada 24 hores.',
+	'info_gauche_statistiques_referers' => 'Esta páxina presenta la llista de los <i>referers</i>, que son sitios que contienen enllaces que apunten pa esti mesmu sitiu, namái d’ayeri y de güei; esta llista ponse a cero cada 24 hores.',
 	'info_gauche_visiteurs_enregistres' => 'Equí alcontrarás los visitantes rexistraes
  nel espaciu públicu del sitiu (foros pa abonaos).',
-	'info_generation_miniatures_images' => 'Xeneración d\'imaxes amenorgáes',
+	'info_generation_miniatures_images' => 'Xeneración d’imaxes amenorgáes',
 	'info_gerer_trad' => '¿Xestionar los enllaces de traducción?',
-	'info_hebergeur_desactiver_envoi_email' => 'Dellos agospiamientos encaboxen l\'unvíu automáticu de
+	'info_hebergeur_desactiver_envoi_email' => 'Dellos agospiamientos encaboxen l’unvíu automáticu de
   correos dende los sos sirvidores. Nesti casu, les siguientes
   carauterístiques de SPIP nun funcionarán.',
 	'info_hier' => 'ayeri:',
@@ -354,10 +354,10 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_historique_affiche' => 'Amosar esta versión',
 	'info_historique_comparaison' => 'comparanza',
 	'info_historique_desactiver' => 'Desactivar el siguimientu de les revisiones',
-	'info_historique_texte' => 'El siguimientu de les revisiones permite conservar un históricu de toles modificaciones amestaes al conteníu d\'un artículu, y amosar les diferencies ente les versiones sucesives.',
+	'info_historique_texte' => 'El siguimientu de les revisiones permite conservar un históricu de toles modificaciones amestaes al conteníu d’un artículu, y amosar les diferencies ente les versiones sucesives.',
 	'info_identification_publique' => 'La to identidá pública...',
-	'info_image_process' => 'Has d\'escoyer el meyor métodu de fabricación de les viñetes calcando enriba de la imaxe correspondiente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d\'estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>', # MODIF
+	'info_image_process' => 'Has d’escoyer el meyor métodu de fabricación de les viñetes calcando enriba de la imaxe correspondiente.',
+	'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d’estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imaxes calculáes automáticamente',
 	'info_informations_personnelles' => 'Información personal',
 	'info_inscription_automatique' => 'Inscripción automática de redactores nuevos',
@@ -365,8 +365,8 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_jours' => 'díes',
 	'info_laisser_champs_vides' => 'dexar estos campos vacíos)',
 	'info_langues' => 'Idiomes del sitiu',
-	'info_ldap_ok' => 'L\'autentificación LDAP ta instalada.',
-	'info_lien_hypertexte' => 'Enllace d\'hipertestu:',
+	'info_ldap_ok' => 'L’autentificación LDAP ta instalada.',
+	'info_lien_hypertexte' => 'Enllace d’hipertestu:',
 	'info_liste_redacteurs_connectes' => 'Llista de los redactores conectáos',
 	'info_login_existant' => 'Esti nome ya esiste.',
 	'info_login_trop_court' => 'El nome ye mui curtiu.',
@@ -380,11 +380,11 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_messagerie_interne' => 'Mensaxería interna',
 	'info_mise_a_niveau_base' => 'axuste de la base de datos SQL',
 	'info_mise_a_niveau_base_2' => '{{¡Atención!}} Instalasti una versión de los
-  archivos de SPIP {anterior} a la que s\'alcontraba
+  archivos de SPIP {anterior} a la que s’alcontraba
   enantes nesti sitiu: la base de datos puede tar
   perdida y el sitiu ya nun funcionará.<br />{{Reinstala los
   archivos de SPIP.}}',
-	'info_modifier_auteur' => 'Modificar l\'autor:',
+	'info_modifier_auteur' => 'Modificar l’autor:',
 	'info_modifier_rubrique' => 'Modificar la estaya:',
 	'info_modifier_titre' => 'Modificar: @titre@',
 	'info_mon_site_spip' => 'El mio sitiu SPIP',
@@ -392,7 +392,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_moteur_recherche' => 'Motor de gueta integráu',
 	'info_moyenne' => 'media:',
 	'info_multi_articles' => '¿Activar el menú de llingües pa los artículos?',
-	'info_multi_cet_article' => 'Llingua d\'esti artículu:',
+	'info_multi_cet_article' => 'Llingua d’esti artículu:',
 	'info_multi_langues_choisies' => 'Seleiciona de siguío les llingües disponibles pa los redactores del sitiu Web.
   Les llingües que ya tan usándose nel sitiu (amosaes en primer llugar) nun puen desactivase.',
 	'info_multi_rubriques' => '¿Activar el menú de llingües pa les estayes?',
@@ -413,7 +413,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_nombre_rubriques' => '@nb_rubriques@ estayes,',
 	'info_nombre_sites' => '@nb_sites@ sitios web,',
 	'info_non_deplacer' => 'Nun desplazar...',
-	'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP pue unviar, regularmente, l\'anunciu de les caberes novedaes del sitiu
+	'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP pue unviar, regularmente, l’anunciu de les caberes novedaes del sitiu
   (artículos y breves espublizaos apocayá).',
 	'info_non_envoi_liste_nouveautes' => 'Nun mandar la llista de les novedáes',
 	'info_non_modifiable' => 'nun pue camudase',
@@ -434,9 +434,9 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_ou' => 'o...',
 	'info_page_interdite' => 'Páxina torgada',
 	'info_par_nom' => 'pol nome',
-	'info_par_nombre_article' => 'pol númberu d\'artículos',
+	'info_par_nombre_article' => 'pol númberu d’artículos',
 	'info_par_statut' => 'pol cargu',
-	'info_par_tri' => '\'(por @tri@)\'',
+	'info_par_tri' => '’(por @tri@)’',
 	'info_passe_trop_court' => 'La contraseña ye mui curtia.',
 	'info_passes_identiques' => 'Les dos contraseñes nun concasen.',
 	'info_pense_bete_ancien' => 'Recordatorios antiguos',
@@ -451,28 +451,28 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_preview_admin' => 'Namái los alministradores puen previsualizar el sitiu',
 	'info_preview_comite' => 'Tolos redactores puen previsualizar el sitiu',
 	'info_preview_desactive' => 'La previsualización ta desactivada dafechu',
-	'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l\'estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?',
+	'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l’estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?',
 	'info_principaux_correspondants' => 'Principales intercambéos de mensaxes',
 	'info_procedez_par_etape' => 'sigue pasu ente pasu',
-	'info_procedure_maj_version' => 'hai que llanzar el procesu d\'actualización a la fin d\'adautar
+	'info_procedure_maj_version' => 'hai que llanzar el procesu d’actualización a la fin d’adautar
  la base de datos a la nueva versión de SPIP.',
 	'info_proxy_ok' => 'Preba del proxy superada.',
 	'info_ps' => 'P.-S.',
 	'info_publier' => 'espublizar',
 	'info_publies' => 'Los tos artículos espublizáos en llinia',
-	'info_question_accepter_visiteurs' => 'Si les cadarmes d\'esti sitiu prevén el rexistru de visitantes ensin accesu a l\'espaciu priváu, has d\'activar la opción d\'embaxo:',
-	'info_question_inscription_nouveaux_redacteurs' => '¿Aceutes les inscripciones de nuevos redactores dende\'l
+	'info_question_accepter_visiteurs' => 'Si les cadarmes d’esti sitiu prevén el rexistru de visitantes ensin accesu a l’espaciu priváu, has d’activar la opción d’embaxo:',
+	'info_question_inscription_nouveaux_redacteurs' => '¿Aceutes les inscripciones de nuevos redactores dende’l
   sitiu públicu? Si aceutes, los visitantes podrán inscribise
-  dende un formulariu automatizáu y tendrán accesu a l\'espaciu priváu pa
-  proponer artículos propios. <blockquote><i>Tres de la fase d\'inscripción,
+  dende un formulariu automatizáu y tendrán accesu a l’espaciu priváu pa
+  proponer artículos propios. <blockquote><i>Tres de la fase d’inscripción,
   los usuarios reciben un corréu electrónicu automáticu
-  que-yos da los códigos d\'accesu al sitiu priváu. Dellos
-  agospiadores desactiven l\'unvíu d\'e-mails dende los sos
+  que-yos da los códigos d’accesu al sitiu priváu. Dellos
+  agospiadores desactiven l’unvíu d’e-mails dende los sos
   sirvidores: nesti casu, la inscripción automática ye
   imposible.</i></blockquote>', # MODIF
 	'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
-	'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
+	'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d’orixe de les visites',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Raiz del sitiu',
 	'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
@@ -481,7 +481,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_recherche_auteur_zero' => 'Nun hai resultaos pa «@cherche_auteur@».',
 	'info_recommencer' => 'Vuelve a entamar',
 	'info_redacteur_1' => 'Redactor',
-	'info_redacteur_2' => 'con accesu a l\'espaciu priváu (<i>encamentao</i>)',
+	'info_redacteur_2' => 'con accesu a l’espaciu priváu (<i>encamentao</i>)',
 	'info_redacteurs' => 'Redactores',
 	'info_redaction_en_cours' => 'EN CURSU DE REDAICIÓN',
 	'info_redirection' => 'Redireición',
@@ -496,7 +496,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_rubriques_trouvees' => 'Estayes alcontráes',
 	'info_rubriques_trouvees_dans_texte' => 'Estayes alcontráes (nel testu)',
 	'info_sans_titre' => 'Ensin títulu',
-	'info_selection_chemin_acces' => '<b>Seleiciona</b> de siguío el camín d\'accesu a la guía:',
+	'info_selection_chemin_acces' => '<b>Seleiciona</b> de siguío el camín d’accesu a la guía:',
 	'info_signatures' => 'robles',
 	'info_site' => 'Sitiu',
 	'info_site_2' => 'sitiu:',
@@ -510,21 +510,21 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_sites_trouves_dans_texte' => 'Sitios alcontraos (nel testu)',
 	'info_sous_titre' => 'Subtítulu:',
 	'info_statut_administrateur' => 'Alministrador',
-	'info_statut_auteur' => 'Estatutu d\'esti autor:',
+	'info_statut_auteur' => 'Estatutu d’esti autor:',
 	'info_statut_auteur_a_confirmer' => 'Inscripción por confirmar',
 	'info_statut_auteur_autre' => 'Otru estatutu:',
 	'info_statut_efface' => 'Esborráu',
 	'info_statut_redacteur' => 'Redactor',
 	'info_statut_utilisateurs_1' => 'Estatutu por omisión de los usuarios importaos',
-	'info_statut_utilisateurs_2' => 'Escueye l\'estatutu que se-yos da a les persones presentes na guía LDAP cuando se conecten la primera vegada. Lluéu podrás camudar esti valor pa caún de los autores casu per casu.',
-	'info_suivi_activite' => 'Siguimientu de l\'actividá editorial',
+	'info_statut_utilisateurs_2' => 'Escueye l’estatutu que se-yos da a les persones presentes na guía LDAP cuando se conecten la primera vegada. Lluéu podrás camudar esti valor pa caún de los autores casu per casu.',
+	'info_suivi_activite' => 'Siguimientu de l’actividá editorial',
 	'info_surtitre' => 'Antetítulu:',
 	'info_syndication_integrale_1' => 'Esti sitiu ufre archivos de sindicación (ver «<a href="@url@">@titre@</a>»).',
 	'info_syndication_integrale_2' => '¿Quies tresmitir los artículos ensembre, o nun esparder nás que un resume con dellos cientos de carauteres?',
 	'info_table_prefix' => 'Pues cambear el prefixu del nome de les tables de datos (esto ye necesario dafechu si se quier instalar dellos sitios na mesma base de datos). Esti prefixu escríbese en lletres minúscules, ensin acentos, y ensin espacios.',
 	'info_taille_maximale_images' => 'SPIP va comprebar el tamañu másimu de les imaxes que pue remanar (en millones de pixels).<br /> Les imaxes más grandes nun van reducise.',
 	'info_taille_maximale_vignette' => 'Tamañu másimu de les viñetes xeneráes pol sistema:',
-	'info_terminer_installation' => 'Agora pues finar el procesu d\'instalación estándar.',
+	'info_terminer_installation' => 'Agora pues finar el procesu d’instalación estándar.',
 	'info_texte' => 'Testu',
 	'info_texte_explicatif' => 'Testu explicativu',
 	'info_texte_long' => '(el testu ye llargu: poro apaez en delles partes que volverán a amestase tres de la validación.)',
@@ -538,9 +538,9 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_tous_les' => 'tolos:',
 	'info_tous_redacteurs' => 'Anuncios pa tolos redactores',
 	'info_tout_site' => 'Tou el sitiu',
-	'info_tout_site2' => 'L\'artículu nun ta traducíu a esta llingua.',
-	'info_tout_site3' => 'L\'artículu ta traducíu a esta llingua, pero después amestáronse modificaciones a l\'artículu de referencia. La traducción tien que ponese al día.',
-	'info_tout_site4' => 'L\'artículu ta traducíu a esta llingua, y la traducción ta actualizada.',
+	'info_tout_site2' => 'L’artículu nun ta traducíu a esta llingua.',
+	'info_tout_site3' => 'L’artículu ta traducíu a esta llingua, pero después amestáronse modificaciones a l’artículu de referencia. La traducción tien que ponese al día.',
+	'info_tout_site4' => 'L’artículu ta traducíu a esta llingua, y la traducción ta actualizada.',
 	'info_tout_site5' => 'Artículu orixinal.',
 	'info_tout_site6' => '<b>Atención :</b> sólo se amuesen los artículos orixinales.
 Les traducciones asociense col orixinal,
@@ -554,8 +554,8 @@ con una color que indica el estáu:',
 	'info_url_proxy' => 'URL del proxy',
 	'info_url_site' => 'URL del sitiu:',
 	'info_url_test_proxy' => 'URL de pruebes',
-	'info_urlref' => 'Enllace d\'hipertestu:',
-	'info_utilisation_spip' => 'Agora puedes entamar a utilizar el sistema d\'espublizamientu asistíu...',
+	'info_urlref' => 'Enllace d’hipertestu:',
+	'info_utilisation_spip' => 'Agora puedes entamar a utilizar el sistema d’espublizamientu asistíu...',
 	'info_visites_par_mois' => 'Amosar por meses:',
 	'info_visiteur_1' => 'Visitante',
 	'info_visiteur_2' => 'del sitiu públicu',
@@ -572,7 +572,7 @@ con una color que indica el estáu:',
 	'install_pas_table' => 'La base nun tien tables actualmente',
 	'install_pass_base_hebergeur' => 'Contraseña de conexón conseñada pol agospiador',
 	'install_php_version' => 'PHP versión @version@ nun ye suficiente (minimo= @minimum@)',
-	'install_select_langue' => 'Escueye una llíngua y calca nel botón «siguiente» pa llanzar el procesu d\'instalación.',
+	'install_select_langue' => 'Escueye una llíngua y calca nel botón «siguiente» pa llanzar el procesu d’instalación.',
 	'install_select_type_db' => 'Indicar el tipu de base de datos:',
 	'install_select_type_mysql' => 'MySQL',
 	'install_select_type_pg' => 'PostgreSQL',
@@ -586,7 +586,7 @@ con una color que indica el estáu:',
 	'intem_redacteur' => 'redactor',
 	'intitule_licence' => 'Llicencia',
 	'item_accepter_inscriptions' => 'Aceptar les inscripciones',
-	'item_activer_messages_avertissement' => 'Activar los mensaxes d\'avisu',
+	'item_activer_messages_avertissement' => 'Activar los mensaxes d’avisu',
 	'item_administrateur_2' => 'alministrador',
 	'item_afficher_calendrier' => 'Amosar na axenda',
 	'item_autoriser_documents_joints' => 'Autorizar los documentos axuntos nos artículos',
@@ -606,7 +606,7 @@ con una color que indica el estáu:',
 	'item_mots_cles_association_sites' => 'a los sitios referenciaos o sindicaos.',
 	'item_non' => 'Non',
 	'item_non_accepter_inscriptions' => 'Nun aceutar les inscripciones',
-	'item_non_activer_messages_avertissement' => 'Ensin mensaxes d\'avisu',
+	'item_non_activer_messages_avertissement' => 'Ensin mensaxes d’avisu',
 	'item_non_afficher_calendrier' => 'Nun amosar nel calendariu',
 	'item_non_autoriser_documents_joints' => 'Nun autorizar los documentos nos artículos',
 	'item_non_autoriser_documents_joints_rubriques' => 'Nun autorizar los documentos nes estayes',
@@ -616,13 +616,13 @@ con una color que indica el estáu:',
 	'item_non_gerer_statistiques' => 'Nun xestionar les estadístiques',
 	'item_non_limiter_recherche' => 'Estender la gueta al conteníu de los sitios referenciaos',
 	'item_non_messagerie_agenda' => 'Desactivar la mensaxeria y l’axenda',
-	'item_non_publier_articles' => 'Nun espublizar los artículos enantes de la fecha d\'espublizamientu conseñada.',
+	'item_non_publier_articles' => 'Nun espublizar los artículos enantes de la fecha d’espublizamientu conseñada.',
 	'item_non_utiliser_moteur_recherche' => 'Nun utilizar el motor',
 	'item_nouvel_auteur' => 'Autor nuevu',
 	'item_nouvelle_rubrique' => 'Estaya nueva',
 	'item_oui' => 'Sí',
-	'item_publier_articles' => 'Espublizar los artículos, cualquiera que sea la fecha d\'espublizamientu.',
-	'item_reponse_article' => 'Respuesta a l\'artículu',
+	'item_publier_articles' => 'Espublizar los artículos, cualquiera que sea la fecha d’espublizamientu.',
+	'item_reponse_article' => 'Respuesta a l’artículu',
 	'item_utiliser_moteur_recherche' => 'Utilizar el motor de gueta',
 	'item_version_html_max_html4' => 'Llendar a HTML4 nel sitiu públicu',
 	'item_version_html_max_html5' => 'Permitir el HTML5',
@@ -648,7 +648,7 @@ con una color que indica el estáu:',
 	'lien_ajouter_participant' => 'Amestar un participante',
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NOME DEL SITIU:',
-	'lien_retirer_auteur' => 'Retirar l\'autor',
+	'lien_retirer_auteur' => 'Retirar l’autor',
 	'lien_retirer_tous_auteurs' => 'Retirar tolos autores',
 	'lien_retrait_particpant' => 'retirar esti participante',
 	'lien_site' => 'sitiu',
@@ -657,13 +657,13 @@ con una color que indica el estáu:',
 	'lien_tout_replier' => 'Replegalo too',
 	'lien_tout_supprimer' => 'Desanicialo too',
 	'lien_trier_nom' => 'Ordenar pol nome',
-	'lien_trier_nombre_articles' => 'Ordenar pol númberu d\'artículos',
+	'lien_trier_nombre_articles' => 'Ordenar pol númberu d’artículos',
 	'lien_trier_statut' => 'Ordenar pol estau',
 	'lien_voir_en_ligne' => 'VER EN LLINIA:',
-	'logo_article' => 'LOGO DE L\'ARTÍCULU', # MODIF
-	'logo_auteur' => 'LOGO DE L\'AUTOR O AUTORA', # MODIF
+	'logo_article' => 'LOGO DE L’ARTÍCULU', # MODIF
+	'logo_auteur' => 'LOGO DE L’AUTOR O AUTORA', # MODIF
 	'logo_rubrique' => 'LOGO DE LA ESTAYA', # MODIF
-	'logo_site' => 'LOGO D\'ESTI SITIU', # MODIF
+	'logo_site' => 'LOGO D’ESTI SITIU', # MODIF
 	'logo_standard_rubrique' => 'LOGO ESTÁNDAR DE LES ESTAYES', # MODIF
 	'logo_survol' => 'LOGO AL PASAR EL MUR', # MODIF
 
@@ -672,8 +672,8 @@ con una color que indica el estáu:',
 	'module_fichier_langue' => 'Ficheru de llíngua',
 	'module_raccourci' => 'Atayu',
 	'module_texte_affiche' => 'Testu amosau',
-	'module_texte_explicatif' => 'Pues amestar los siguientes atayos nes cadarmes del sitiu públicu. Estos van traducise automáticamente a les diferentes llingües pa les qu\'esista un archivu de llingua.',
-	'module_texte_traduction' => 'L\'archivu de llingua « @module@ » ta disponible en:',
+	'module_texte_explicatif' => 'Pues amestar los siguientes atayos nes cadarmes del sitiu públicu. Estos van traducise automáticamente a les diferentes llingües pa les qu’esista un archivu de llingua.',
+	'module_texte_traduction' => 'L’archivu de llingua « @module@ » ta disponible en:',
 	'mois_non_connu' => 'desconocíu',
 
 	// N
@@ -696,7 +696,7 @@ con una color que indica el estáu:',
 	'plugin_charger' => 'Descargar',
 	'plugin_erreur_charger' => 'fallu: nun ye posible cargar @zip@',
 	'plugin_erreur_droit1' => 'El direutoriu <code>@dest@</code> nun ye accesible pa escritura.',
-	'plugin_erreur_droit2' => 'Verifica los permisos d\'esti direutoriu (o créalu si ye\'l casu), o instala los archivos per FTP.',
+	'plugin_erreur_droit2' => 'Verifica los permisos d’esti direutoriu (o créalu si ye’l casu), o instala los archivos per FTP.',
 	'plugin_erreur_zip' => 'falló pclzip col mensaxe: @status@',
 	'plugin_etat_developpement' => 'en desarrollu',
 	'plugin_etat_experimental' => 'esperimental',
@@ -704,19 +704,19 @@ con una color que indica el estáu:',
 	'plugin_etat_test' => 'en prebes',
 	'plugin_impossible_activer' => 'Nun ye posible activar el plugin @plugin@',
 	'plugin_info_automatique1' => 'Si se quier autorizar la instalación automática de los plugins, hai que:',
-	'plugin_info_automatique1_lib' => 'Si quies autorizar la instalación automática d\'esta biblioteca, necesites:',
+	'plugin_info_automatique1_lib' => 'Si quies autorizar la instalación automática d’esta biblioteca, necesites:',
 	'plugin_info_automatique2' => 'crear un direutoriu <code>@rep@</code> ;',
-	'plugin_info_automatique3' => 'verificar que\'l sirvidor tenga permisos pa escribir nesi direutoriu.',
+	'plugin_info_automatique3' => 'verificar que’l sirvidor tenga permisos pa escribir nesi direutoriu.',
 	'plugin_info_automatique_creer' => 'que hai que crear na raiz del sitiu.',
 	'plugin_info_automatique_exemples' => 'exemplos:',
 	'plugin_info_automatique_ftp' => 'Puedes instalar plugins, per FTP, nel direutoriu <tt>@rep@</tt>',
-	'plugin_info_automatique_lib' => 'Dellos plugins necesiten también permisu pa descargar archivos nel direutoriu <code>lib/</code>, a crear si ye\'l casu na raiz del sitiu.',
+	'plugin_info_automatique_lib' => 'Dellos plugins necesiten también permisu pa descargar archivos nel direutoriu <code>lib/</code>, a crear si ye’l casu na raiz del sitiu.',
 	'plugin_info_automatique_liste' => 'Les tos llistes de plugins:',
 	'plugin_info_automatique_liste_officielle' => 'los plugins oficiales',
 	'plugin_info_automatique_liste_update' => 'Actualizar les llistes',
 	'plugin_info_automatique_ou' => 'o...',
-	'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
-	'plugin_info_plugins_dist_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @plugins_dist@.', # MODIF
+	'plugin_info_automatique_select' => 'Seleiciona un plugin d’embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
+	'plugin_info_plugins_dist_1' => 'Les estensiones darréu se carguen y s’activen nel direutoriu @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_telecharger' => 'a descargar de @url@ y a instalar en @rep@',
 	'plugin_librairies_installees' => 'Llibreríes instaláes',
@@ -728,13 +728,13 @@ con una color que indica el estáu:',
 	'plugin_titre_automatique_ajouter' => 'Amestar plugins',
 	'plugin_titre_installation' => 'Instalación del complementu @plugin@',
 	'plugin_zip_active' => 'Continúa pa activalu',
-	'plugin_zip_adresse' => 'indica embaxo les señes d\'un archivu zip de plugin a descargar, o mesmo les señes d\'una llista de plugins.',
+	'plugin_zip_adresse' => 'indica embaxo les señes d’un archivu zip de plugin a descargar, o mesmo les señes d’una llista de plugins.',
 	'plugin_zip_adresse_champ' => 'Señes del plugin o de la llista ',
 	'plugin_zip_content' => 'Contien los archivos siguientes (@taille@),<br />preparaos pa instalase nel direutoriu <code>@rep@</code>',
-	'plugin_zip_installe_finie' => 'L\'archivu @zip@ descomprimiose y quedó instalau.',
-	'plugin_zip_installe_rep_finie' => 'L\'archivu @zip@ descomprimiose y quedó instalau nel direutoriu @rep@',
+	'plugin_zip_installe_finie' => 'L’archivu @zip@ descomprimiose y quedó instalau.',
+	'plugin_zip_installe_rep_finie' => 'L’archivu @zip@ descomprimiose y quedó instalau nel direutoriu @rep@',
 	'plugin_zip_installer' => 'Pues instalalu agora.',
-	'plugin_zip_telecharge' => 'Descargose l\'archivu @zip@',
+	'plugin_zip_telecharge' => 'Descargose l’archivu @zip@',
 	'plugins_actif_aucun' => 'Dengún complementu activáu.',
 	'plugins_actif_un' => 'Un complementu activáu.',
 	'plugins_actifs' => '@count@ plugins activaos.',
@@ -760,117 +760,117 @@ con una color que indica el estáu:',
 	// T
 	'taille_cache_image' => 'Les imaxes calculáes automáticamente por SPIP (miniatures de documentos, títulos en formatu gráficu, funciones matemátiques en formatu TeX...) ocupen nel direutoriu @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Esti sitiu nun conseña llendes de tamañu pal direutoriu de caché.',
-	'taille_cache_maxi' => 'SPIP tenta llendar el tamañu del direutoriu de caché d\'esti sitiu a unos <b>@octets@</b> de datos.',
+	'taille_cache_maxi' => 'SPIP tenta llendar el tamañu del direutoriu de caché d’esti sitiu a unos <b>@octets@</b> de datos.',
 	'taille_cache_octets' => 'El tamañu de caché actualmente ye de @octets@.', # MODIF
 	'taille_cache_vide' => 'La caché ta vacía.',
 	'taille_repertoire_cache' => 'Tamañu del direutoriu de caché',
 	'text_article_propose_publication' => 'Artículu propuestu pa espublizase.',
-	'texte_acces_ldap_anonyme_1' => 'Dellos sirvidores LDAP nun acepten los accesos anónimos. Si esti ye\'l casu hai que especificar una identificación d\'accesu inicial a la fin de poder lluéu restolar la información na guía. Sicasí, nos más de los casos, los campos siguientes puen dexase vacíos.',
+	'texte_acces_ldap_anonyme_1' => 'Dellos sirvidores LDAP nun acepten los accesos anónimos. Si esti ye’l casu hai que especificar una identificación d’accesu inicial a la fin de poder lluéu restolar la información na guía. Sicasí, nos más de los casos, los campos siguientes puen dexase vacíos.',
 	'texte_admin_effacer_01' => 'Esta orde desanicia <i>tol</i> conteníu de la base de datos,
-incluyíos <i>tolos</i> accesos de redactores y alministradores. Tres d\'executalu, vas tener que llanzar la
-reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alministrador.',
+incluyíos <i>tolos</i> accesos de redactores y alministradores. Tres d’executalu, vas tener que llanzar la
+reinstalación de SPIP pa crear una nueva base igual que un primer accesu d’alministrador.',
 	'texte_adresse_annuaire_1' => '(Si la guía ta instalada na mesma máquina que esti sitiu Web, ye probablemente «localhost».)',
-	'texte_ajout_auteur' => 'El siguiente autor amestose a l\'artículu:',
+	'texte_ajout_auteur' => 'El siguiente autor amestose a l’artículu:',
 	'texte_annuaire_ldap_1' => 'Si ties accesu a una guía (LDAP), vas poder utilizala pa importar automáticamente usuarios a SPIP.',
 	'texte_article_statut' => 'Esti artículu ta:',
 	'texte_article_virtuel' => 'Artículu virtual',
-	'texte_article_virtuel_reference' => '<b>Artículu virtual:</b> artículu referenciau nel sitiu SPIP, magar que redirixe a otra URL. Pa desaniciar la redireición, esborra la URL d\'enriba.',
+	'texte_article_virtuel_reference' => '<b>Artículu virtual:</b> artículu referenciau nel sitiu SPIP, magar que redirixe a otra URL. Pa desaniciar la redireición, esborra la URL d’enriba.',
 	'texte_aucun_resultat_auteur' => 'Nun hai resultaos pa "@cherche_auteur@"',
 	'texte_auteur_messagerie' => 'Esti sitiu pue amosate de mou permanente la llista de redactores coneutaos, lo que te permite intercambiar mensaxes en direutu. Pues decidir nun apaecer nesa llista (ser «invisible» pa los demás usuarios).',
-	'texte_auteur_messagerie_1' => 'Esti sitiu permite l\'intercambiu de mensaxes y la constitución de foros de discutiniu privaos ente los participantes del sitiu. Pue decidir nun participar nos intercambios.',
+	'texte_auteur_messagerie_1' => 'Esti sitiu permite l’intercambiu de mensaxes y la constitución de foros de discutiniu privaos ente los participantes del sitiu. Pue decidir nun participar nos intercambios.',
 	'texte_auteurs' => 'LOS AUTORES',
 	'texte_choix_base_1' => 'Escueye la base de datos:',
 	'texte_choix_base_2' => 'El sirvidor SQL contién delles bases de datos.',
 	'texte_choix_base_3' => '<b>Seleiciona</b> de siguío la que te conseñaren nel agospiamientu:',
 	'texte_choix_table_prefix' => 'Prefixu de les tables:',
-	'texte_commande_vider_tables_indexation' => 'Utiliza esta orde a la fin de vaciar les tables d\'indexación utilizáes
+	'texte_commande_vider_tables_indexation' => 'Utiliza esta orde a la fin de vaciar les tables d’indexación utilizáes
    pol motor de guetar integráu con SPIP. Esto va permitite
    ganar espaciu nel discu.',
 	'texte_compatibilite_html' => 'Puedes pidi-y a SPIP que produza, nel sitiu públicu, códigu compatible cola norma <i>HTML4</i>, o permiti-y utilizar les posibilidaes más modernes del <i>HTML5</i>.',
-	'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d\'entamar cola cita darréu pa ser válidos: <code>&lt;!DOCTYPE html&gt;</code>.',
+	'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d’entamar cola cita darréu pa ser válidos: <code>&lt;!DOCTYPE html&gt;</code>.',
 	'texte_compresse_ou_non' => '(esti pue tar comprimíu o non)',
 	'texte_compte_element' => '@count@ elementu',
 	'texte_compte_elements' => '@count@ elementos',
 	'texte_conflit_edition_correction' => 'Compreba embaxo les diferencies ente les dos versiones del testu; también pues copiar los tos cambéos y, de siguío, volver a entamar',
 	'texte_connexion_mysql' => 'Consulta la información que te dieren nel to agospiamientu web: ties que atopar el sirvidor de base datos que te ufre y los códigos de identificación pa conectate.',
-	'texte_contenu_article' => '(Conteníu de l\'artículu en delles pallabres.)',
+	'texte_contenu_article' => '(Conteníu de l’artículu en delles pallabres.)',
 	'texte_contenu_articles' => 'Según la maquetación que uses pal to sitiu, seique decidas
   que dellos elementos de los artículos nun van utilizase.
-  Usa la llista d\'embaxo pa indicar los elementos que van tar disponibles.',
+  Usa la llista d’embaxo pa indicar los elementos que van tar disponibles.',
 	'texte_crash_base' => 'Si la to base de datos ta
    caída, pues tentar una reparación
    automática.',
 	'texte_creer_rubrique' => 'Enantes que puedas escribir artículos,<br /> tienes que crear una estaya.',
-	'texte_date_creation_article' => 'FECHA DE CREACIÓN DE L\'ARTÍCULU:',
+	'texte_date_creation_article' => 'FECHA DE CREACIÓN DE L’ARTÍCULU:',
 	'texte_date_publication_anterieure' => 'Fecha de redaición anterior:',
 	'texte_date_publication_anterieure_nonaffichee' => 'Nun amosar fecha de redaición anterior.',
-	'texte_date_publication_article' => 'FECHA D\'ESPUBLIZAMIENTU EN LLINIA:',
+	'texte_date_publication_article' => 'FECHA D’ESPUBLIZAMIENTU EN LLINIA:',
 	'texte_descriptif_petition' => 'Descripción de la solicitú',
 	'texte_descriptif_rapide' => 'Descripción rápida',
 	'texte_effacer_base' => 'Desaniciar la base de datos SPIP',
-	'texte_effacer_donnees_indexation' => 'Desaniciar los datos d\'indexación',
+	'texte_effacer_donnees_indexation' => 'Desaniciar los datos d’indexación',
 	'texte_effacer_statistiques' => 'Desaniciar les estadístiques',
-	'texte_en_cours_validation' => 'Los artículos y breves d\'embaxo tan propuestos pa espublizase.', # MODIF
+	'texte_en_cours_validation' => 'Los artículos y breves d’embaxo tan propuestos pa espublizase.', # MODIF
 	'texte_enrichir_mise_a_jour' => 'Pues arriquecer la paxinación del testu utilizando los «atayos tipográficos».',
 	'texte_fichier_authent' => '<b>¿Tien SPIP que crear los ficheros especiales <tt>.htpasswd</tt>
   y <tt>.htpasswd-admin</tt> na carpeta @dossier@?</b><p>
-  Estos ficheros pueden sirvite pa torgar l\'accesu, tanto de los autores
+  Estos ficheros pueden sirvite pa torgar l’accesu, tanto de los autores
   como de los alministradores a otres partes del to sitiu web
-  (al programa esternu d\'estadístiques, por exemplu).</p><p>
+  (al programa esternu d’estadístiques, por exemplu).</p><p>
   Si nun vas utilizalo, puedes dexar esta opción
  col so valor predetermináu (nun crear
  esos ficheros).</p>',
 	'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personalizáu al sitiu.',
 	'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalación, y el to accesu siempre funciona, pues', # MODIF
-	'texte_introductif_article' => '(Testu d\'introducción de l\'artículu.)',
-	'texte_jeu_caractere' => 'Encamiéntase emplegar, pal to sitiu, l\'alfabetu universal (<tt>utf-8</tt>): esti permite amosar los testos en toes les llingües, y ya nun da problemes de compatibilidá colos ñavegadores modernos.',
+	'texte_introductif_article' => '(Testu d’introducción de l’artículu.)',
+	'texte_jeu_caractere' => 'Encamiéntase emplegar, pal to sitiu, l’alfabetu universal (<tt>utf-8</tt>): esti permite amosar los testos en toes les llingües, y ya nun da problemes de compatibilidá colos ñavegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atención: esti axuste nun provoca la conversión de los testos que ya tean grabaos na base de datos.',
 	'texte_jeu_caractere_3' => 'Esti sitiu ta instaláu actualmente col xuegu de carauteres:',
-	'texte_jeu_caractere_4' => 'Si esto nun concasa cola realidá de los datos (siguir, por exemplu, tres d\'una restauración de la base de datos), o si <em>tas arrancando esti sitiu</em> y quies entamar con otru xuegu de carauteres, conseña esti darréu:',
-	'texte_jeu_caractere_conversion' => 'Nota: pues querer convertir d\'una vez por toes el conxuntu de testos d\'esti sitiu (artículos, breves, foros, etc.) a l\'alfabetu <tt>utf-8</tt>, entrando na <a href="@url@">páxina de conversión a l\'utf-8</a>.',
+	'texte_jeu_caractere_4' => 'Si esto nun concasa cola realidá de los datos (siguir, por exemplu, tres d’una restauración de la base de datos), o si <em>tas arrancando esti sitiu</em> y quies entamar con otru xuegu de carauteres, conseña esti darréu:',
+	'texte_jeu_caractere_conversion' => 'Nota: pues querer convertir d’una vez por toes el conxuntu de testos d’esti sitiu (artículos, breves, foros, etc.) a l’alfabetu <tt>utf-8</tt>, entrando na <a href="@url@">páxina de conversión a l’utf-8</a>.',
 	'texte_lien_hypertexte' => '(Si el to mensaxe refierse a un artículu espublizáu na Web, o a una páxina que ufre más información, indica de siguío el títulu de la páxina y les señes URL.)',
 	'texte_login_ldap_1' => '(Dexar vacío pa un accesu anónimu, o conseñar el camín ensembre, por exemplu «<tt>uid=dupont, ou=users, dc=mio-dominiu, dc=com</tt> ».)',
-	'texte_login_precaution' => '¡Atención! Esti ye l\'usuariu col que tas coneutau actualmente.
+	'texte_login_precaution' => '¡Atención! Esti ye l’usuariu col que tas coneutau actualmente.
  Utiliza esti formulariu con procuru...',
 	'texte_message_edit' => 'Atención: esti mensaxe pue camudase por tolos alministradores del sitiu, y ye visible pa tolos redactores. Nun uses les anuncies más que pa amosar les actividáes importantes pa la vida del sitiu.',
 	'texte_messagerie_agenda' => 'Una mensaxería permite-yos a los redactores del sitiu comunicase direutamente ente ellos nel espaciu privau del sitiu. La mensaxería va asociada con una axenda.',
 	'texte_mise_a_niveau_base_1' => 'Tas acabante de poner al día los archivos de SPIP.
  Agora fai falta actualizar la base de datos
  del sitiu.',
-	'texte_modifier_article' => 'Iguar l\'artículu:',
+	'texte_modifier_article' => 'Iguar l’artículu:',
 	'texte_moteur_recherche_active' => '<b>El motor de restolar ta activáu.</b> Utiliza esta orde
-  si quies entamar una reindexación rápida (tres la restauración d\'una
+  si quies entamar una reindexación rápida (tres la restauración d’una
   copia de seguridá por exemplu). Atalanta que los documentos modificaos
   de mou normal (dende la interfaz SPIP) reindexense automáticamente:
   esta orde, poro, nun ye afayadiza sinon de mou esceicional.',
 	'texte_moteur_recherche_non_active' => 'El motor de restolar nun ta activáu.',
 	'texte_multilinguisme' => 'Si quiés xuestionar artículos en delles llingües, con una ñavegación complexa, pues amestar un menú de seleición de llingua nos articulos y/o nes estayes, al aldu de la organización del sitiu.', # MODIF
-	'texte_multilinguisme_trad' => 'Igualmente pues activar un sistema de xestión de enllaces ente les distintes traducciones d\'un artículu.', # MODIF
+	'texte_multilinguisme_trad' => 'Igualmente pues activar un sistema de xestión de enllaces ente les distintes traducciones d’un artículu.', # MODIF
 	'texte_non_compresse' => '<i>non comprimíu</i> (el to sirvidor nun soporta esta carauterística)',
 	'texte_nouveau_message' => 'Mensaxe nuevu',
-	'texte_nouvelle_version_spip_1' => 'Vienes d\'instalar una versión nueva de SPIP.',
-	'texte_nouvelle_version_spip_2' => 'Esta nueva versión necesita una actualización más completa que la de vezu. Si yes el webmaster del sitiu, tienes de desaniciar el ficheru @connect@ y siguir cola instalación p\'anovar los parámetros de conexón cola base de datos.<p> (NB.: si escaecisti los tos parámetros de conexón, echa-y una güeyada al ficheru @connect@ enantes de desanicialu...)</p>',
+	'texte_nouvelle_version_spip_1' => 'Vienes d’instalar una versión nueva de SPIP.',
+	'texte_nouvelle_version_spip_2' => 'Esta nueva versión necesita una actualización más completa que la de vezu. Si yes el webmaster del sitiu, tienes de desaniciar el ficheru @connect@ y siguir cola instalación p’anovar los parámetros de conexón cola base de datos.<p> (NB.: si escaecisti los tos parámetros de conexón, echa-y una güeyada al ficheru @connect@ enantes de desanicialu...)</p>',
 	'texte_operation_echec' => 'Torna a la páxina precedente, seleiciona otra base o crea una nueva. Compreba la información ufrida pol to agospiamientu web.',
 	'texte_plus_trois_car' => 'más de 3 carauteres',
 	'texte_plusieurs_articles' => 'Alcontráronse dellos autores pa "@cherche_auteur@":',
 	'texte_port_annuaire' => '(El valor indicáu por omisión convién polo xeneral.)',
 	'texte_presente_plugin' => 'Esta páxina llista los plugins disponibles nel sitiu. Pues activar los plugins necesarios marcando el cuadru correspondiente.',
-	'texte_proposer_publication' => 'Cuando tea termináu l\'artículu,<br /> pues proponelu pa espublizar.',
-	'texte_proxy' => 'En ciertos casos (intranet, redes protexíes), los sitios esternos (documentación de SPIP, sitios sindicaos, etc.) nun son accesibles más que al traviés d\'un <i>proxy HTTP</i>. Si ye\'l casu, conseña embaxo les señes, na forma @proxy_en_cours@. En xeneral, esti cuadru déxase vacíu.',
+	'texte_proposer_publication' => 'Cuando tea termináu l’artículu,<br /> pues proponelu pa espublizar.',
+	'texte_proxy' => 'En ciertos casos (intranet, redes protexíes), los sitios esternos (documentación de SPIP, sitios sindicaos, etc.) nun son accesibles más que al traviés d’un <i>proxy HTTP</i>. Si ye’l casu, conseña embaxo les señes, na forma @proxy_en_cours@. En xeneral, esti cuadru déxase vacíu.',
 	'texte_publication_articles_post_dates' => '¿Cómo tien que comportase SPIP colos artículos nos que la
-  fecha d\'espublizamientu ta conseñada pa otru
+  fecha d’espublizamientu ta conseñada pa otru
   momentu futuru?',
 	'texte_rappel_selection_champs' => '[Nun escaezas seleicionar correutamente esti campu.]',
 	'texte_recalcul_page' => 'Si quies
 recalcular una sola páxina, pasa meyor pel espaciu públicu y calca nel botón «recalcular».',
-	'texte_recapitiule_liste_documents' => 'Esta páxina recapitula la llista de documentos que tienes allugáos nes estayes. Pa iguar la información de caún de los documentos, sigui l\'enllaz a la páxina de la so estaya.',
+	'texte_recapitiule_liste_documents' => 'Esta páxina recapitula la llista de documentos que tienes allugáos nes estayes. Pa iguar la información de caún de los documentos, sigui l’enllaz a la páxina de la so estaya.',
 	'texte_recuperer_base' => 'Iguar la base de datos',
 	'texte_reference_mais_redirige' => 'artículu referenciáu nel to sitiu SPIP, pero redirixíu a otra URL.',
 	'texte_requetes_echouent' => '<b>Cuando ciertes consultes SQL fallen
   sistemáticamente y ensin razón aparente, ye
   posible que seya por cuenta de la mesma base
   de datos.</b><p>
-  El sirvidor SQL tien la posibilidá d\'iguar les sos
+  El sirvidor SQL tien la posibilidá d’iguar les sos
   tables cuando estes tan dañaes por
   accidente. Equí pues tentar esta reparación; en
   casu de fallu, guarda una copia del mensaxe, que tendrá,
@@ -881,7 +881,7 @@ recalcular una sola páxina, pasa meyor pel espaciu públicu y calca nel botón 
  <ul><li> el formatu por omisión de les feches pal sitiu públicu;</li>
  <li> la natura del motor tipográficu que SPIP tien que utilizar pa representar los testos;</li>
  <li> la llingua utilizada nos formularios del sitiu públicu;</li>
- <li> la llingua por omisión pa presentar l\'espaciu priváu.</li></ul>',
+ <li> la llingua por omisión pa presentar l’espaciu priváu.</li></ul>',
 	'texte_sous_titre' => 'Subtítulu',
 	'texte_statistiques_visites' => '(barres prietes:  domingu / curva prieta: evolución de la media)',
 	'texte_statut_attente_validation' => 'esperando validación',
@@ -892,10 +892,10 @@ na caché de SPIP. Esto permite por exemplu forzar un recálculu de toes les pá
 vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	'texte_sur_titre' => 'Antetítulu',
 	'texte_table_ok' => ': esta tabla ta bién.',
-	'texte_tables_indexation_vides' => 'Les tables d\'indexación del motor tan vacíes.',
-	'texte_tentative_recuperation' => 'Intentu d\'igua',
+	'texte_tables_indexation_vides' => 'Les tables d’indexación del motor tan vacíes.',
+	'texte_tentative_recuperation' => 'Intentu d’igua',
 	'texte_tenter_reparation' => 'Tentar una reparación de la base de datos',
-	'texte_test_proxy' => 'Pa facer una preba d\'esti proxy, conseña equí les señes d\'un sitiu Web
+	'texte_test_proxy' => 'Pa facer una preba d’esti proxy, conseña equí les señes d’un sitiu Web
     que quieras prebar.',
 	'texte_titre_02' => 'Títulu:',
 	'texte_titre_obligatoire' => '<b>Títulu</b> [Obligatorio]',
@@ -903,11 +903,11 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	'texte_travail_collaboratif' => 'Si ye frecuente que dellos redactores
   trabayen nel mesmu artículu, el sistema
   pue amosar los artículos «abiertos» recientemente
-  a la fin d\'evitar modificaciones simultánees.
+  a la fin d’evitar modificaciones simultánees.
   Esta opción ta desactivada por omisión
-  pa evitar l\'apaición de mensaxes d\'avisu
+  pa evitar l’apaición de mensaxes d’avisu
   intempestivos.',
-	'texte_trop_resultats_auteurs' => 'Abondos resultaos pa "@cherche_auteur@" ; has d\'afinar la gueta.',
+	'texte_trop_resultats_auteurs' => 'Abondos resultaos pa "@cherche_auteur@" ; has d’afinar la gueta.',
 	'texte_unpack' => 'descarga de la versión cabera',
 	'texte_utilisation_moteur_syndiques' => 'Cuando uses el motor de restolar integráu en
   SPIP, puedes facer les guetes nos sitios webs y
@@ -916,10 +916,10 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
   cenciella consiste en restolar namái ente los
   títulos y descriciones de los artículos.<br />-
   Un segundu métodu, muncho más potente, permíte-y
-  a SPIP restolar ente\'l testu de los llugares
+  a SPIP restolar ente’l testu de los llugares
   referenciaos. Si referencies
-  un sitiu web, SPIP va restolar tamién ente\'l
-  testu d\'esi sitiu web.',
+  un sitiu web, SPIP va restolar tamién ente’l
+  testu d’esi sitiu web.',
 	'texte_utilisation_moteur_syndiques_2' => 'Esti métodu obliga a que SPIP visite
     regularmente los sitios referenciaos,
     lo que pue provocar una lixera lentitú del propiu
@@ -932,7 +932,7 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	'titre_ajouter_un_auteur' => 'Amestar un autor',
 	'titre_ajouter_un_mot' => 'Amestar una pallabra-clave',
 	'titre_cadre_afficher_article' => 'Amosar los artículos',
-	'titre_cadre_afficher_traductions' => 'Amosar l\'estau de les traducciones pa les llingües siguientes:',
+	'titre_cadre_afficher_traductions' => 'Amosar l’estau de les traducciones pa les llingües siguientes:',
 	'titre_cadre_ajouter_auteur' => 'AMESTAR UN AUTOR:',
 	'titre_cadre_interieur_rubrique' => 'Dientro de la estaya',
 	'titre_cadre_numero_auteur' => 'AUTOR NÚMBERU',
@@ -948,9 +948,9 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	'titre_connexion_ldap' => 'Axustes: <b>La to conexón LDAP</b>',
 	'titre_groupe_mots' => 'GRUPU DE PALLABRES:',
 	'titre_identite_site' => 'Identidá del sitiu',
-	'titre_langue_article' => 'LLINGUA DE L\'ARTICULU', # MODIF
+	'titre_langue_article' => 'LLINGUA DE L’ARTICULU', # MODIF
 	'titre_langue_rubrique' => 'LLINGUA DE LA ESTAYA', # MODIF
-	'titre_langue_trad_article' => 'LLINGUA Y TRADUCCIONES DE L\'ARTÍCULU',
+	'titre_langue_trad_article' => 'LLINGUA Y TRADUCCIONES DE L’ARTÍCULU',
 	'titre_les_articles' => 'LOS ARTÍCULOS',
 	'titre_messagerie_agenda' => 'Mensaxería y axenda',
 	'titre_naviguer_dans_le_site' => 'Ñavegar pol sitiu Web...',
@@ -976,18 +976,18 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 	'titre_page_statistiques_signatures_jour' => 'Númberu de robles por día',
 	'titre_page_statistiques_signatures_mois' => 'Númberu de robles por mes',
 	'titre_page_upgrade' => 'Actualización de SPIP',
-	'titre_publication_articles_post_dates' => 'Publicación d\'artículos con fecha posterior',
+	'titre_publication_articles_post_dates' => 'Publicación d’artículos con fecha posterior',
 	'titre_referencer_site' => 'Referenciar el sitiu:',
 	'titre_rendez_vous' => 'CITES:',
 	'titre_reparation' => 'Igua',
 	'titre_suivi_petition' => 'Siguimientu de les solicitudes',
 	'tls_ldap' => 'Transport Layer Security (TLS):',
 	'trad_article_inexistant' => 'Nun hay dengún artículu con esi númberu.',
-	'trad_article_traduction' => 'Toles versiones d\'esti artículu:',
+	'trad_article_traduction' => 'Toles versiones d’esti artículu:',
 	'trad_deja_traduit' => 'Fallu: nun ye posible rellacionar esti artículu col númberu pidíu. ',
 	'trad_delier' => 'Ya nun enllazar esti artículu coles sos traduciones ', # MODIF
 	'trad_lier' => 'Esti artículu ye una tradución del artículu númberu:',
-	'trad_new' => 'Escribir una nueva torna d\'esti artículu', # MODIF
+	'trad_new' => 'Escribir una nueva torna d’esti artículu', # MODIF
 
 	// U
 	'upload_info_mode_document' => 'Dexar esta imaxe nel maletu',
