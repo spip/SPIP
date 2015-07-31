@@ -120,8 +120,9 @@ function minipipe($fonc,&$val){
 	AND $methode = array($regs[1], $regs[2])
 	AND is_callable($methode))
 		$val = call_user_func($methode, $val);
-	else
+	else {
 		spip_log("Erreur - '$fonc' non definie !");
+	}
 	return $val;
 }
 
