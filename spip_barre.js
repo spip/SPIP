@@ -64,13 +64,15 @@ function barre_inserer(text,champ) {
 		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
 		txtarea.focus();
 	} else {
-		txtarea.value  += text;
-		txtarea.focus();
+		//txtarea.value  += text;
+		//txtarea.focus();
+		mozWrap(txtarea, '', text);
+		return;
 	}
 }
 
 
-// Nicolas Hoizey 
+// D'apres Nicolas Hoizey 
 function barre_tableau(toolbarfield)
 {
 	var txtarea = toolbarfield;
@@ -96,16 +98,7 @@ function barre_tableau(toolbarfield)
 			var sel = document.selection.createRange();
 			sel.text = str + '\n\n' + tbl + '\n\n';
 		} else {
-			var selLength = txtarea.textLength;
-			var selStart = txtarea.selectionStart;
-			var selEnd = txtarea.selectionEnd;
-			if (selEnd == 1 || selEnd == 2) {
-				selEnd = selLength;
-			}
-			var s1 = (txtarea.value).substring(0,selStart);
-			var s2 = (txtarea.value).substring(selStart, selEnd)
-			var s3 = (txtarea.value).substring(selEnd, selLength);
-			txtarea.value = s1 + s2 + "\n\n" + tbl + "\n\n" + s3;
+			mozWrap(txtarea, '', "\n\n" + tbl + "\n\n");
 		}
 	}
 	return;
