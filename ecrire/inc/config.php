@@ -36,7 +36,7 @@ function init_config() {
 		'articles_ps' => 'oui',
 		'articles_redac' => 'non',
 		'articles_mots' => 'oui',
-		'post_dates' => 'oui',
+		'post_dates' => 'non',
 		'articles_urlref' => 'non',
 		'creer_preview' => 'non',
 		'taille_preview' => 150,
@@ -84,11 +84,16 @@ function init_config() {
 			$modifs = true;
 		}
 	}
-
-	if (isset($GLOBALS['meta']['nouvelle_install']) && $GLOBALS['meta']['nouvelle_install'] == 'oui') {
-		effacer_meta('nouvelle_install');
+	// initialiser adresse_site au besoin
+	if (strlen($GLOBALS['meta']["adresse_site"])<10) {
+		ecrire_meta('adresse_site', preg_replace(",/$,", "", url_de_base()));
 		$modifs = true;
 	}
+
+	/*if (isset($GLOBALS['meta']['nouvelle_install']) && $GLOBALS['meta']['nouvelle_install'] == 'oui') {
+		effacer_meta('nouvelle_install');
+		$modifs = true;
+	}*/
 
 	if ($modifs) ecrire_metas();
 

@@ -334,6 +334,7 @@ dist/vignettes/zip.png -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
+ecrire/action/config.php -text
 ecrire/action/converser.php -text
 ecrire/action/dater.php -text
 ecrire/action/desinstaller_plugin.php -text
@@ -366,6 +367,7 @@ ecrire/action/legender.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
 ecrire/action/poster_forum_prive.php -text
+ecrire/action/premiers_pas.php -text
 ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
@@ -572,6 +574,9 @@ ecrire/lang/spip_bs.php -text
 ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_ru.php -text
+ecrire/premiers_pas/pas_1.php -text
+ecrire/premiers_pas/pas_2.php -text
+ecrire/premiers_pas/pas_fin.php -text
 ecrire/prive.php -text
 ecrire/rien.gif -text
 ecrire/safehtml/classes/HTMLSax3.php -text

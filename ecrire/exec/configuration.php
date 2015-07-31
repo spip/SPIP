@@ -35,16 +35,6 @@ function exec_configuration_dist(){
 	//
 
 	init_config();
-	if ($changer_config == 'oui') {
-		appliquer_modifs_config();
-	}
-	else {
-		$forums_publics = $GLOBALS['meta']["forums_publics"];
-		if (!$forums_publics) {
-			ecrire_meta("forums_publics", "posteriori");
-			ecrire_metas();
-		}
-	}
 	lire_metas();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
@@ -77,17 +67,37 @@ function exec_configuration_dist(){
 	//
 	// Afficher les options de config
 	//
-	$action = generer_url_ecrire('configuration');
+	$action = generer_action_auteur('config', '', generer_url_ecrire('configuration'));
 
 	echo "<form action='$action' method='post'><div>", form_hidden($action);
 	echo "<input type='hidden' name='changer_config' value='oui' />";
+
+	echo configuration_bloc_votre_site();
+	echo "<p>&nbsp;</p>";
+
+	echo configuration_bloc_les_articles();
+	echo "<br />\n";
+
+	echo configuration_bloc_les_breves();
+	echo "<br />\n";
+
+	echo configuration_bloc_mots_cles();
+	echo "<br />\n";
+
+	echo configuration_bloc_syndication();
+	echo "<br />\n";
+
+	echo configuration_bloc_documents_joints();
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));	
+	echo "</div></form>";
+	
+	echo fin_gauche(), fin_page();
+}
+
+function configuration_bloc_votre_site($bouton = true){
 	debut_cadre_couleur("racine-site-24.gif");
 
-	// initialiser adresse_site au besoin
-	if (strlen($GLOBALS['meta']["adresse_site"])<10) {
-		ecrire_meta('adresse_site', preg_replace(",/$,", "", url_de_base()));
-		ecrire_metas();
-	}
 	$adresse_site = entites_html($GLOBALS['meta']["adresse_site"]);
 
 	$nom_site = entites_html($GLOBALS['meta']["nom_site"]);
@@ -115,16 +125,16 @@ function exec_configuration_dist(){
 		fin_cadre_relief();
 	}
 
-	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+	if ($bouton)
+		echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 	fin_cadre_couleur();
+}
 
-	echo "<p>&nbsp;</p>";
-
-	//
-	// Options des articles
-	//
-
+//
+// Options des articles
+//
+function configuration_bloc_les_articles(){
 	debut_cadre_trait_couleur("article-24.gif", false, "", _T('titre_les_articles'));
 	//
 	// Champs optionnels des articles
@@ -243,13 +253,12 @@ function exec_configuration_dist(){
 	fin_cadre_relief();
 
 	fin_cadre_trait_couleur();
+}
 
-	echo "<br />\n";
-
-	//
-	// Actives/desactiver les breves
-	//
-
+//
+// Actives/desactiver les breves
+//
+function configuration_bloc_les_breves(){
 	debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
 	$activer_breves = $GLOBALS['meta']["activer_breves"];
@@ -272,13 +281,12 @@ function exec_configuration_dist(){
 	echo "</table>\n";
 	
 	fin_cadre_trait_couleur();
-	
-	echo "<br />\n";
+}
 
-	//
-	// Gestion des mots-cles
-	//
-
+//
+// Gestion des mots-cles
+//
+function configuration_bloc_mots_cles(){
 	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
 	$articles_mots = $GLOBALS['meta']["articles_mots"];
@@ -352,13 +360,12 @@ function exec_configuration_dist(){
 	echo "</table>\n";
 
 	fin_cadre_trait_couleur();
+}
 
-	echo "<br />\n";
-
-	//
-	// Actives/desactiver systeme de syndication
-	//
-
+//
+// Actives/desactiver systeme de syndication
+//
+function configuration_bloc_syndication(){
 	debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
 	
 	$activer_sites = $GLOBALS['meta']['activer_sites'];
@@ -484,13 +491,12 @@ function exec_configuration_dist(){
 	echo "</table>\n";
 	
 	fin_cadre_trait_couleur();
-	
-	echo "<br />\n";
+}
 
-	//
-	// Gestion des documents joints
-	//
-
+//
+// Gestion des documents joints
+//
+function configuration_bloc_documents_joints(){
 	debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
 	
 	$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
@@ -519,12 +525,6 @@ function exec_configuration_dist(){
 	echo "</td></tr>";
 	echo "</table>\n";
 	
-	fin_cadre_trait_couleur();	
-	
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
-	
-	echo "</div></form>";
-	
-	echo fin_gauche(), fin_page();
+	fin_cadre_trait_couleur();
 }
 ?>
