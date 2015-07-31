@@ -20,7 +20,7 @@ function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 		$valeurs['_commentaire'] = _T('pass_forum_bla');
 
 	include_spip('inc/autoriser');
-	if (!autoriser('inscrire', $mode, $id))
+	if (!autoriser('inscrireauteur', $mode, $id))
 		$valeurs['editable'] = false;
 
 	return $valeurs;
@@ -32,7 +32,7 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/autoriser');
-	if (!autoriser('inscrire', $mode, $id) OR (strlen(_request('nobot'))>0))
+	if (!autoriser('inscrireauteur', $mode, $id) OR (strlen(_request('nobot'))>0))
 		$erreurs['message_erreur'] = _T('rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))

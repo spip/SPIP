@@ -663,7 +663,7 @@ function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
 // a l'aide de la liste globale des statuts (tableau mode => nom du mode)
 
 // http://doc.spip.org/@tester_config
-function autoriser_inscrire($faire, $quoi, $id, $qui, $opt){
+function autoriser_inscrireauteur($faire, $quoi, $id, $qui, $opt){
 
 	switch (array_search($quoi, $GLOBALS['liste_des_statuts'])) {
 

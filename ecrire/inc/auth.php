@@ -49,7 +49,7 @@ function acces_statut($id_auteur, $statut, $bio)
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
 	include_spip('inc/autoriser');
-	if (!autoriser('inscrire', $bio)) return $statut; //i.e. "nouveau"
+	if (!autoriser('inscrireauteur', $bio)) return $statut; //i.e. "nouveau"
 		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $bio), "id_auteur=$id_auteur");
 	return $bio;
 }
