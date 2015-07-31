@@ -29,11 +29,19 @@ function optimiser_base($attente = 86400) {
 
 	$result = spip_query("SHOW TABLES LIKE '$table_pref%'");
 
+	// on ne va OPTIMIZE qu'une seule des tables a chaque fois,
+	// pour ne pas vautrer le systeme
+	// lire http://dev.mysql.com/doc/refman/5.0/fr/optimize-table.html
 	while ($row = spip_fetch_array($result)) $tables[] = $row[0];
 
 	if ($tables) {
-		$tables = join(",", $tables);
-		spip_query("OPTIMIZE TABLE ".$tables);
+		$table_op = intval($GLOBALS['meta']['optimiser_table']+1) % sizeof($tables);
+		ecrire_meta('optimiser_table', $table_op);
+		ecrire_metas();
+		$query = "OPTIMIZE TABLE ".$tables[$table_op];
+		spip_log($query);
+		spip_query($query);
+		spip_log("$query : ok");
 	}
 
 
