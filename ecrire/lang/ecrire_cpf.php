@@ -52,7 +52,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'avis_operation_echec' => 'Lop&eacute;rasyon-la la pwinn finn mars&eacute;. ',
 'avis_probleme_archive' => 'Ast&egrave;r, n&eacute;na inn kanard. L&eacute; pa posib lir lo fisy&eacute; @archive@',
 'avis_site_introuvable' => 'L&eacute; pa posib trouv sitw&egrave;b-la',
-'avis_site_syndique_probleme' => 'Tansyon pangar : lasindikasyon sitw&egrave;b-la, n&eacute;na trov inn larlik&nbsp;; ast&egrave;r, sist&egrave;m la d&eacute;falk&eacute; pou inn ti moman. V&eacute;y byin ladr&egrave;s lo fisy&eacute; lasindicasyon l&eacute; bon, pou lo sit-la : (<b>@url_syndic@</b>). Si ou v&eacute;, ou i p&eacute; es&eacute;y inn nouv&egrave;l r&eacute;kup&egrave;rasyon do bann zinformasyon.',
+'avis_site_syndique_probleme' => '<MODIF>Tansyon pangar : lasindikasyon sitw&egrave;b-la, n&eacute;na trov inn larlik&nbsp;; ast&egrave;r, sist&egrave;m la d&eacute;falk&eacute; pou inn ti moman. V&eacute;y byin ladr&egrave;s lo fisy&eacute; lasindicasyon l&eacute; bon, pou lo sit-la : (<b>@url_syndic@</b>). Si ou v&eacute;, ou i p&eacute; es&eacute;y inn nouv&egrave;l r&eacute;kup&egrave;rasyon do bann zinformasyon.',
 'avis_sites_probleme_syndication' => 'Bann sitw&egrave;b-la n&eacute;na giny inn larlik pou lasindikasyon.',
 'avis_sites_syndiques_probleme' => 'Bann sitw&egrave;b sak n&eacute;na inn larlik ',
 'avis_suppression_base' => 'TANSYON PANGAR, si ou i d&eacute;gr&egrave;n bann don&eacute;-la, i p&eacute; pa batary&egrave;r pou r&eacute;kup&egrave;r azot : ou sava p&egrave;rd tout bann zinformasyon',
