@@ -42,7 +42,7 @@ $GLOBALS['ldap_attributes'] = array(
 // http://doc.spip.org/@inc_auth_ldap_dist
 function auth_ldap_dist ($login, $pass, $serveur='') {
 
-	spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
+	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
 	// Utilisateur connu ?
 	if (!($dn = auth_ldap_search($login, $pass, true, $serveur))) return array();
