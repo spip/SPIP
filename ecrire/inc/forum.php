@@ -85,7 +85,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	}
 
 	$link = new Link();
-	$link = _DIR_RESTREINT_ABS . $link->geturl() . "#id$id_forum";
+	$link = str_replace('&amp;', '&', _DIR_RESTREINT_ABS . $link->geturl() . "#id$id_forum");
 
 	if ($supprimer)
 	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer', "forum $id_forum $supprimer", $link),
