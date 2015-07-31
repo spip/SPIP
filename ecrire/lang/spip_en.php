@@ -274,6 +274,7 @@ Thank you for your participation!
 'forum_acces_refuse' => 'You have not access to these forums anymore.',
 'forum_attention_dix_caracteres' => '<b>Warning!</b> Your message needs to be at least ten characters in length.',
 'forum_attention_trois_caracteres' => '<b>Warning!</b> Your title needs to be at least three characters in length.',
+'forum_attention_trop_caracteres' => '<b>Warning&nbsp;!</b> your message is too long (@compte@ characters)&nbsp;: to be able to save it, the message should not contain more than @max@ characters.',
 'forum_avez_selectionne' => 'You have selected:',
 'forum_cliquer_retour' => 'Click  <a href=\'@retour_forum@\'>here</a> to continue.',
 'forum_forum' => 'forum',

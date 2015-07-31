@@ -270,6 +270,7 @@ Trugarez da gemer perzh
 'forum_acces_refuse' => 'N\'oc\'h ket aotreet ken da vont war ar foromo&ugrave;-ma&ntilde;.',
 'forum_attention_dix_caracteres' => '<b>Diwallit&nbsp;!</b> Dek arouez d\'an nebeuta&ntilde; a rank beza&ntilde; en ho kemennadenn.',
 'forum_attention_trois_caracteres' => '<b>Diwallit&nbsp;!</b> Tri arouez d\'an nebeuta&ntilde; a rank beza&ntilde; en ho titl.',
+'forum_attention_trop_caracteres' => '<b>Diwallit&nbsp;!</b> re hir eo ho kemennadenn (@compte@ arouez)&nbsp;: ne rank ket beza&ntilde; ouzhpenn @max@ arouez evit gallout beza&ntilde; kaset.',
 'forum_avez_selectionne' => 'Diuzet ho peus&nbsp;:',
 'forum_cliquer_retour' => 'Klikit <a href=\'@retour_forum@\'>ama&ntilde;</a> evit kenderc\'hel.',
 'forum_forum' => 'forom',

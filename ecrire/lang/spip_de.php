@@ -267,6 +267,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'forum_acces_refuse' => 'Sie haben keinen Zugang mehr zu diesen Foren.',
 'forum_attention_dix_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist muss mindestens 10 Zeichen lang sein.',
 'forum_attention_trois_caracteres' => '<b>Achtung!</b> Ihr Titel muss mindestens drei Zeichen lang sein.',
+'forum_attention_trop_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist zu lang (@compte@ Zeichen). Damit er gespeichert werden kann, darf er maximal @max@ Zeichen lang sein.',
 'forum_avez_selectionne' => 'Sie haben ausgew&auml;hlt:',
 'forum_cliquer_retour' => '<a href=\'@retour_forum@\'>Weiter</a>',
 'forum_forum' => 'Forum',

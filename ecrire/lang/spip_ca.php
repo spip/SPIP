@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'No enviar anuncis',
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la llista de novetats',
 'bouton_recharger_page' => 'recarregar aquesta p&agrave;gina',
-'bouton_telecharger' => 'Pujar',
+'bouton_telecharger' => 'Baixar',
 'bouton_valider' => 'Validar',
 
 
@@ -275,6 +275,7 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_acces_refuse' => 'Ja no teniu acc&eacute;s a aquests f&ograve;rums.',
 'forum_attention_dix_caracteres' => '<b>Atenci&oacute;!</b> el vostre missatge ha de tenir almenys deu car&agrave;cters.',
 'forum_attention_trois_caracteres' => '<b>Atenci&oacute;!</b> el vostre t&iacute;tol ha de tenir almenys tres car&agrave;cters.',
+'forum_attention_trop_caracteres' => '<b>Atenci&oacute;!</b> el vostre missatge &eacute;s massa llarg (@compte@ car&agrave;cters)&nbsp;: per a poder-vos enregistrar no pot sobrepassar els @max@ car&agrave;cters.',
 'forum_avez_selectionne' => 'Heu seleccionat:',
 'forum_cliquer_retour' => 'Premeu <a href=\'@retour_forum@\'>ici</a> per continuar.',
 'forum_forum' => 'f&ograve;rum',

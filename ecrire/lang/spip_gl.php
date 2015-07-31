@@ -274,6 +274,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_acces_refuse' => 'Non tes acceso a estes foros.',
 'forum_attention_dix_caracteres' => '<b>Atenci&oacute;n!</b> a s&uacute;a mensaxe debe conter m&aacute;is de dez caracteres.',
 'forum_attention_trois_caracteres' => '<b>Atenci&oacute;n!</b> o seu t&iacute;tulo debe ter m&aacute;is de tres caracteres.',
+'forum_attention_trop_caracteres' => '<b>Atencion&nbsp;!</b> a mensaxe &eacute; demasiado longa (@compte@ car&aacute;cteres)&nbsp;: para poder ser rexistrado, non debe sobrepasar  @max@ car&aacute;cteres.',
 'forum_avez_selectionne' => 'Seleccionaches:',
 'forum_cliquer_retour' => 'Preme <a href=\'@retour_forum@\'>aqu&iacute;</a> para seguir.',
 'forum_forum' => 'foro',
