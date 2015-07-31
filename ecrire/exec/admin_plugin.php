@@ -321,8 +321,6 @@ function ligne_plug($plug_file, $actif, $id){
 	$vals = array();
 
 	$info = plugin_get_infos($plug_file);
-	$s = "<a name='" . $info['prefix'] . $versions[$info['prefix']] . 
-		"'></a>";
 
 	// plug pour CFG
 	if ($actif
@@ -335,7 +333,7 @@ function ligne_plug($plug_file, $actif, $id){
 
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ?
 			$versions[$info['prefix']] + 1 : '';
-	$s .= "<div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
+	$s .= "<div id='" . $info['prefix'] . $versions[$info['prefix']] . "' class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div class='plugin_erreur'>";
 		$erreur = true;
@@ -362,7 +360,7 @@ function ligne_plug($plug_file, $actif, $id){
 
 	if (!$erreur){
 		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
-		$s .= "\n<input type='checkbox' name='$name' value='O' id='label_$id_input'";
+		$s .= "\n<input type='checkbox' name='$name' id='label_$id_input' value='O'";
 		$s .= $actif?" checked='checked'":"";
 		$s .= " class='check' />";
 		$s .= "\n<label for='label_$id_input'>"._T('activer_plugin')."</label>";

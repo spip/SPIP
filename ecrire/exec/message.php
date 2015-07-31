@@ -115,16 +115,16 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
 	if (!spip_num_rows($result) > 0) return '';
 
-	$res = "<span class='verdana1 spip_small'><b>" .
-	  _T('bouton_ajouter_participant') ." &nbsp; </b></span>\n" .
-	  "<input type='hidden' name='id_message' value=\"$id_message\" />";
+	$res = "<span class='verdana1 spip_small'><b><label for='id_message'>" .
+	  _T('bouton_ajouter_participant') ."</label> &nbsp; </b></span>\n" .
+	  "<input type='hidden' name='id_message' id='id_message' value=\"$id_message\" />";
 
 	if (spip_num_rows($result) > 50) {
-		$res .=  "\n<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
+		$res .=  "\n<input type='text' name='cherche_auteur' id='cherche_auteur' class='fondl' value='' size='20' />";
 		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
 	} else {
 		include_spip('inc/editer_auteurs');
-		$res .=  "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>"
+		$res .=  "<select name='nouv_auteur' id='nouv_auteur' size='1' style='width: 150px' class='fondl'>"
 		. objet_auteur_select($result)	
 		.  "</select>"
 		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";

@@ -78,13 +78,13 @@ function exec_message_edit_dist()
 	if ($type == "affich")
 		$res .="<p style='color:red;' class='verdana1 spip_x-small'>" . _T('texte_message_edit')."</p>";
 	
-	$res .= '<br /><br />' . _T('texte_titre_obligatoire')."<br />\n";
-	$res .="<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />";
+	$res .= '<br /><br />'."<label for='titre'>" . _T('texte_titre_obligatoire')."</label><br />\n";
+	$res .="<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />";
 
 	if (!$dest) {
 		if ($type == 'normal') {
-		  $res .="<br /><b>"._T('info_nom_destinataire')."</b><br />\n";
-		  $res .="<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
+		  $res .="<br /><label for='cherche_auteur'><b>"._T('info_nom_destinataire')."</b></label><br />\n";
+		  $res .="<input type='text' class='formo' name='cherche_auteur' id='cherche_auteur' value='' size='40'/>";
 		}
 	} else {
 		$nom = sql_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
@@ -104,8 +104,8 @@ function exec_message_edit_dist()
 	$res .= afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
 	$res .= fin_cadre_trait_couleur(true);
 
-	$res .= "\n<p><b>"._T('info_texte_message_02')."</b><br />";
-	$res .= "<textarea name='texte' rows='20' class='formo' cols='40'>";
+	$res .= "\n<p><label for='texte'><b>"._T('info_texte_message_02')."</b></label><br />";
+	$res .= "<textarea name='texte' id='texte' rows='20' class='formo' cols='40'>";
 	$res .= $texte;
 	$res .= "</textarea></p><br />\n";
 

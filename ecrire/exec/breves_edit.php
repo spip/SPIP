@@ -133,8 +133,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form = _T('entree_titre_obligatoire')
-	. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
+	$form = "<label for='sel_lang'>" . _T('entree_titre_obligatoire') . "</label>"
+	. "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />"
 	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />"
 	. debut_cadre_couleur($logo_parent, true, "",_T('entree_interieur_rubrique').aide ("brevesrub"))
 	. $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie')) 
@@ -146,10 +146,10 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	. _T('entree_liens_sites')
 	. aide ("breveslien")
 	. "<br />\n"
-	. _T('info_titre')."<br />\n"
-	. "<input type='text' class='forml' name='lien_titre' value=\"$lien_titre\" size='40' /><br />\n"
-	. _T('info_url')."<br />\n"
-	. "<input type='text' class='forml' name='lien_url' value=\"$lien_url\" size='40' /><br />";
+	. "<label for='lien_titre'>" . _T('info_titre')."</label><br />\n"
+	. "<input type='text' class='forml' name='lien_titre' id='lien_titre' value=\"$lien_titre\" size='40' /><br />\n"
+	. "<label for='lien_url'>" . _T('info_url')."</label><br />\n"
+	. "<input type='text' class='forml' name='lien_url' id='lien_url' value=\"$lien_url\" size='40' /><br />";
 
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
@@ -158,8 +158,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if (autoriser('publierdans','rubrique',$id_rubrique)) {
 		$form .= debut_cadre_relief('', true)
-		. "<b>"._T('entree_breve_publiee')."</b>\n"
-		. "<select name='statut' size='1' class='fondl'>\n"
+		. "<b><label for='statut'>"._T('entree_breve_publiee')."</label></b>\n"
+		. "<select name='statut' id='statut' size='1' class='fondl'>\n"
 		. "<option".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."</option>\n"
 		. "<option".mySel("refuse",$statut). " class='danger'>"._T('item_breve_refusee')."</option>\n"
 		. "<option".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."</option>\n"

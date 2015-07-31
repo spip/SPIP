@@ -180,21 +180,21 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 		$descriptif = entites_html($descriptif);
 		$texte = entites_html($texte);
 		
-		$res .= "<b>"._T('info_titre_mot_cle')."</b> "._T('info_obligatoire_02');
+		$res .= "<label for='titre'><b>"._T('info_titre_mot_cle')."</b></label> "._T('info_obligatoire_02');
 		$res .= aide ("mots");
 
-		$res .= "<br /><input type='text' name='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
+		$res .= "<br /><input type='text' name='titre' id='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
 
 		$res .= determine_groupe_mots($table, $id_groupe);
 
 
-		$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
-		$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
+		$res .= "<label for='descriptif'><b>"._T('texte_descriptif_rapide')."</b></label><br />";
+		$res .= "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>";
 		$res .= $descriptif;
 		$res .= "</textarea><br />\n";
 
-		$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
-		$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+		$res .= "<label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
+		$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 		$res .= $texte;
 		$res .= "</textarea><br />";
 
@@ -229,7 +229,7 @@ function determine_groupe_mots($table, $id_groupe) {
 
 	if (spip_num_rows($q)>1) {
 
-		$res = " &nbsp; <select name='id_groupe' class='fondl'>\n";
+		$res = " &nbsp; <select name='id_groupe' id='id_groupe' class='fondl'>\n";
 		while ($row = sql_fetch($q)){
 			$groupe = $row['id_groupe'];
 			$titre_groupe = texte_backend(supprimer_tags(typo($row['titre'])));
@@ -241,7 +241,7 @@ function determine_groupe_mots($table, $id_groupe) {
 	  // (et on est sur qu'il y en a un grace au redirect preventif)
 		$row = sql_fetch($q);
 		$res = $row['titre']
-		. "<br /><input type='hidden' name='id_groupe' value='".$row['id_groupe']."' />";
+		. "<br /><input type='hidden' name='id_groupe' id='id_groupe' value='".$row['id_groupe']."' />";
 	}
 
 	return _T('info_dans_groupe')
