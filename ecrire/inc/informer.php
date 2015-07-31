@@ -60,8 +60,8 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	. "</div>"
 	. "<div class='informer' style='padding: 5px; border-top: 0px;'>"
 	. (!$res ? '' : $res)
-	. "<p><b>$titre</b></p>"
-	. (!$descriptif ? '' : "<div>$descriptif</div>")
+	. "<p><b>".safehtml($titre)."</b></p>"
+	. (!$descriptif ? '' : "<div>".safehtml($descriptif)."</div>")
 	. "<div style='text-align: $spip_lang_right;'>"
 	. "<input type='submit' class='fondo' value='"
 	. _T('bouton_choisir')
