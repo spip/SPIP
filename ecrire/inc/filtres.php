@@ -1617,4 +1617,29 @@ function vide($texte){
 	return "";
 }
 
+//
+// Filtres pour le modele/emb (embed document)
+//
+
+// A partir d'un #ENV, retourne des <param ...>
+function env_to_params ($texte){
+	$ignore_params = array('id_document','date','date_redac','align','fond','');
+	$tableau = unserialize($texte);
+	$texte = "";
+	foreach ($tableau as $i => $j)
+		if (!in_array($i,$ignore))
+			$texte .= "<param name='".$i."' value='".$j."' />";
+	return $texte;
+}
+// A partir d'un #ENV, retourne des attributs
+function env_to_attributs ($texte){
+	$ignore_params = array('id_document','date','date_redac','align','fond','');
+	$tableau = unserialize($texte);
+	$texte = "";
+	foreach ($tableau as $i => $j)
+		if (!in_array($i,$ne_pas_garder))
+			$texte .= $i."='".$j."' "; 
+	return $texte;
+}
+
 ?>

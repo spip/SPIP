@@ -19,7 +19,7 @@
 
 <BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
 
-<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#LARGEUR' height='#HAUTEUR' />
+<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
 
 </BOUCLE_svg>
 
@@ -49,12 +49,12 @@
  width='#GET{largeur}' height='#GET{hauteur}'>
 	<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 	[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
-	[(#ENV*|params_spip_to_params_html)]
+	[(#ENV*|env_to_params)]
 
 	<!--[if !IE]> <-->
 	<object data="[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
 		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
-		[(#ENV*|params_spip_to_params_html)]
+		[(#ENV*|env_to_params)]
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
    	
 	</object>
@@ -67,8 +67,8 @@
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 <param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-[(#ENV*|params_spip_to_params_html)]
-<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
+[(#ENV*|env_to_params)]
+<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
 </BOUCLE_inclus>
 
