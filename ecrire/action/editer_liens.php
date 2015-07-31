@@ -59,7 +59,7 @@ function objet_associable($objet){
  * @return string
  */
 function objet_associer($objets_source, $objets_lies, $qualif = null){
-	$modifs = objet_traiter_laisons('lien_insert', $objets_source, $objets_lies);
+	$modifs = objet_traiter_liaisons('lien_insert', $objets_source, $objets_lies);
 
 	if ($qualif)
 		objet_qualifier_liens($objets_source, $objets_lies, $qualif);
@@ -87,7 +87,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  * @return string
  */
 function objet_dissocier($objets_source,$objets_lies){
-	return objet_traiter_laisons('lien_delete',$objets_source,$objets_lies);
+	return objet_traiter_liaisons('lien_delete',$objets_source,$objets_lies);
 }
 
 
@@ -110,7 +110,7 @@ function objet_dissocier($objets_source,$objets_lies){
  * @param array $qualif
  */
 function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
-	return objet_traiter_laisons('lien_set',$objets_source,$objets_lies,$qualif);
+	return objet_traiter_liaisons('lien_set',$objets_source,$objets_lies,$qualif);
 }
 
 
@@ -142,7 +142,7 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  * @return array
  */
 function objet_trouver_liens($objets_source,$objets_lies){
-	return objet_traiter_laisons('lien_find',$objets_source,$objets_lies);
+	return objet_traiter_liaisons('lien_find',$objets_source,$objets_lies);
 }
 
 
@@ -164,7 +164,7 @@ function objet_trouver_liens($objets_source,$objets_lies){
  * @return int
  */
 function objet_optimiser_liens($objets_source,$objets_lies){
-	return objet_traiter_laisons('lien_optimise',$objets_source,$objets_lies);
+	return objet_traiter_liaisons('lien_optimise',$objets_source,$objets_lies);
 }
 
 
@@ -229,7 +229,7 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
  * @param array $qualif
  * @return string
  */
-function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = null){
+function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = null){
 	// accepter une syntaxe minimale pour supprimer tous les liens
 	if ($objets_lies=='*') $objets_lies = array('*'=>'*');
 	$modifs = 0; // compter le nombre de modifications
@@ -241,7 +241,7 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
 			foreach($ids as $id) {
 				$res = $operation($objet,$primary,$l,$id,$objets_lies,$set);
 				if ($res===false) {
-					spip_log("objet_traiter_laisons [Echec] : $operation sur $objet/$primary/$l/$id",_LOG_ERREUR);
+					spip_log("objet_traiter_liaisons [Echec] : $operation sur $objet/$primary/$l/$id",_LOG_ERREUR);
 					$echec = true;
 				}
 				else
