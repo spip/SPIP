@@ -363,7 +363,7 @@ function self($amp = '&amp;', $root = false) {
 		$url = str_replace('&amp;', $amp, $url);
 
 	// Si ca demarre par ? ou vide, donner './'
-	$url = preg_replace(',^([?].*)$,', './\1', $url);
+	$url = preg_replace(',^([?].*)?$,', './\1', $url);
 
 	return $url;
 }
