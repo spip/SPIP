@@ -569,24 +569,14 @@ function javascript_to_binary ($texte) {
 }
 
 
-//
-// Translitteration charset => ascii (pour l'indexation)
-// Attention les caracteres non reconnus sont renvoyes en utf-8
-//
-// http://doc.spip.org/@translitteration
-function translitteration($texte, $charset='AUTO', $complexe='') {
+function translitteration_rapide($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')
 		$charset = $GLOBALS['meta']['charset'];
+	if (!strlen($texte))
+		return $texte;
 
 	$table_translit ='translit'.$complexe;
-
-	// 0. Supprimer les caracteres illegaux
-	include_spip('inc/filtres');
-	$texte = corriger_caracteres($texte);
-
-	// 1. Passer le charset et les &eacute en utf-8
-	$texte = unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 
 	// 2. Translitterer grace a la table predefinie
 	if (!$trans[$complexe]) {
@@ -597,6 +587,22 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	}
 
 	return str_replace(array_keys($trans[$complexe]),array_values($trans[$complexe]),$texte);
+}
+
+//
+// Translitteration charset => ascii (pour l'indexation)
+// Attention les caracteres non reconnus sont renvoyes en utf-8
+//
+// http://doc.spip.org/@translitteration
+function translitteration($texte, $charset='AUTO', $complexe='') {
+	// 0. Supprimer les caracteres illegaux
+	include_spip('inc/filtres');
+	$texte = corriger_caracteres($texte);
+
+	// 1. Passer le charset et les &eacute en utf-8
+	$texte = unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
+
+	return translitteration_rapide($texte,$charset,$complexe);
 }
 
 // &agrave; est retourne sous la forme "a`" et pas "a"

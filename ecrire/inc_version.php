@@ -258,7 +258,8 @@ $spip_pipeline = array(
 	'afficher_revision_objet'=>'',
 	'editer_contenu_objet' => '',
 	'creer_chaine_url' => '|creer_chaine_url',
-	'rechercher_liste_des_champs' => '' # inc/recherche; pas stabilise !
+	'rechercher_liste_des_champs' => '',
+	'rechercher_liste_des_jointures' => '',
 );
 
 # pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
