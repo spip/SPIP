@@ -117,7 +117,7 @@ function menu_langues($nom_select) {
 		$base = '';
 	} else {
 		$cible = _DIR_RESTREINT_ABS . self();
-		$base = _FILE_CONNECT ? 'base' : '';
+		$base = spip_connect() ? 'base' : '';
 	}
 
 	$change = ' onchange="this.parentNode.parentNode.submit()"';
