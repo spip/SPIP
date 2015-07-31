@@ -214,7 +214,7 @@ function cvtmulti_formulaire_verifier($flux){
 			$etape = min($etape,$etapes);
 			#var_dump("prochaine etape $etape");
 			// retourner les erreurs de l'etape ciblee
-			$flux['data'] = $erreurs[$etape];
+			$flux['data'] = isset($erreurs[$etape]) ? $erreurs[$etape] : array() ;
 			$flux['data']['_etapes'] = "etape suivante $etape";
 			set_request('_etape',$etape);
 		}

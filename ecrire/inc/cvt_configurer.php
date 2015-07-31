@@ -67,6 +67,7 @@ function cvtconf_formulaire_traiter($flux){
  * @return string
  */
 function cvtconf_formulaires_configurer_enregistre($form,$args){
+		$valeurs = array();
 		// charger les valeurs
 		// ce qui permet de prendre en charge une fonction charger() existante
 		// qui prend alors la main sur l'auto detection
