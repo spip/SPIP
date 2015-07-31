@@ -216,12 +216,17 @@ if ($meta["debut_restauration"]) {
 	$ok = file_exists($archive);
 
 	if ($ok) {
-		if (ereg("\.gz$", $archive))
+		if (ereg("\.gz$", $archive)) {
+			$affiche_progression_pourcent = false;
 			$taille = taille_en_octets($my_pos);
-		else
-			$taille = floor(100 * $my_pos / filesize($archive))."&nbsp;%";
-		$texte_boite = "La base est en cours de restauration ($taille).<p>
-		Veuillez recharger cette page dans quelques instants.";
+		}
+		else {
+			$affiche_progression_pourcent = filesize($archive);
+			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
+		}
+		$texte_boite = "La base est en cours de restauration.<p>
+		<form name='progression'><input type='text' name='taille' value='$taille'>
+		<input type='text' name='recharge' value='Veuillez recharger cette page dans quelques instants.'></form>";
 	}
 	else {
 		$texte_boite = "Erreur de restauration : fichier inexistant.";
