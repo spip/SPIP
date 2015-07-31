@@ -505,15 +505,10 @@ function ajout_forum() {
 		$prevenir_auteurs = lire_meta("prevenir_auteurs");
 		if ($prevenir_auteurs == "oui") {
 			if ($id_article = $forum_id_article) {
-				$url = generer_url_article($id_article);
+				$url = ereg_replace('^/', '', generer_url_article($id_article));
 				$adresse_site = lire_meta("adresse_site");
 				$nom_site_spip = lire_meta("nom_site");
-				if ($url[0] == '/') {
-					$url = "$adresse_site$url";
-				}
-				else {
-					$url = "$adresse_site".substr($REQUEST_URI, 0, strrpos($REQUEST_URI, '/') + 1).$url;
-				}
+				$url = "$adresse_site/$url";
 				$courr = "(ceci est un message automatique)\n\n";
 				$courr .= "Message poste ";
 				if (strlen($auteur) > 2) {
