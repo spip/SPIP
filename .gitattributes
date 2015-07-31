@@ -34,6 +34,7 @@ ecrire/action/supprimer.php -text
 ecrire/action/test_dirs.php -text
 ecrire/action/tester.php -text
 ecrire/action/tourner.php -text
+ecrire/action/virtualiser.php -text
 ecrire/charsets/cp1250.php -text
 ecrire/charsets/cp1251.php -text
 ecrire/charsets/cp1256.php -text
@@ -415,6 +416,7 @@ ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/utils.php -text
+ecrire/inc/virtualite.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
 ecrire/lang/ecrire_cs.php -text

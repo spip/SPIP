@@ -259,7 +259,6 @@ function formulaire_poster($id_article, $script, $args, $ajax=false) {
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";
-	spip_log("$id_article, $script, $args, $ajax");
 	return ajax_action_auteur('poster', $id_article, $r, $script, $args, $args);
 
 }

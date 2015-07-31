@@ -219,8 +219,6 @@ function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id,
 
 function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $table, $table_id, $url_base)
 {
-	global $connect_toutes_rubriques; $connect_statut;
-
 	if ($table == 'articles') $ou = _T('info_l_article');
 	else if ($table == 'breves') $ou = _T('info_la_breve');
 	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');

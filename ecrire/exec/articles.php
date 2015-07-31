@@ -20,11 +20,12 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/petition');
+include_spip('inc/virtualite');
 include_spip('base/abstract_sql');
 
 function exec_articles_dist()
 {
-	global  $changer_virtuel,  $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot, $virtuel; 
+	global $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot; 
 	global  $connect_id_auteur, $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
 	$id_parent = intval($id_parent);
@@ -143,7 +144,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable)
   {
 	boites_de_config_articles($id_article);
  
-	boite_article_virtuel($id_article, $changer_virtuel, $virtuel);
+	boite_article_virtuel($id_article, $virtuel);
   }
 
 //
@@ -401,39 +402,28 @@ function boites_de_config_articles($id_article)
 	fin_cadre_relief();
 }
 
-function boite_article_virtuel($id_article, $changer_virtuel, $virtuel)
+function boite_article_virtuel($id_article, $virtuel)
 {
-  global $spip_lang_right;
-
-	// Redirection (article virtuel)
 	debut_cadre_relief("site-24.gif");
-	$visible = ($changer_virtuel || $virtuel);
 
-	echo "\n<div class='verdana1' style='text-align: center;'><b>";
-	if ($visible)
+	echo "\n<div class='verdana1' style='text-align: center;'>";
+	if ($virtuel)
 		echo bouton_block_visible("redirection");
 	else
 		echo bouton_block_invisible("redirection");
-	echo _T('bouton_redirection');
+
+	echo '<b>', _T('bouton_redirection'), '</b>';
 	echo aide ("artvirt");
-	echo "</b></div>";
-	if ($visible)
+	echo "</div>";
+
+	if ($virtuel)
 		echo debut_block_visible("redirection");
 	else
 		echo debut_block_invisible("redirection");
-
-	echo generer_url_post_ecrire("articles", "id_article=$id_article");
-	echo "\n<input type='hidden' name='changer_virtuel' value='oui' />";
-	$virtuelhttp = ($virtuel ? "" : "http://");
-
-	echo "<input type='text' name='virtuel' class='formo' style='font-size:9px;' value=\"$virtuelhttp$virtuel\" size='40' /><br />\n";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-	echo "(<b>"._T('texte_article_virtuel')."&nbsp;:</b> "._T('texte_reference_mais_redirige').")";
-	echo "</font>";
-	echo "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' style='font-size:10px' /></div>";
-	echo "</form>";
+	echo "<div id='virtualiser-$id_article'>";
+	echo formulaire_virtualiser($id_article, $virtuel, "articles", "&id_article=$id_article");
+	echo "</div>";
 	echo fin_block();
-
 	fin_cadre_relief();
 }
 
@@ -1064,7 +1054,11 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 
 	if ($virtuel) {
 		debut_boite_info();
-		echo _T('info_renvoi_article')." ".propre("<center>[->$virtuel]</center>");
+		echo "<div id='renvoi' style='text-align: center'>",
+		  _T('info_renvoi_article'),
+		  " ",
+		  propre("[->$virtuel]"),
+		  '</div>';
 		fin_boite_info();
 	} else {
 		$revision_nbsp = $activer_revision_nbsp;
@@ -1235,9 +1229,7 @@ function revisions_articles ($id_article, $id_rubrique, $change_rubrique, $titre
 		'descriptif' => corriger_caracteres(_request('descriptif')),
 		'nom_site' => corriger_caracteres(_request('nom_site')),
 		'url_site' => corriger_caracteres(_request('url_site')),
-		'chapo' => corriger_caracteres(
-		_request('changer_virtuel')?'='._request('virtuel') : _request('chapo')
-		),
+		'chapo' => corriger_caracteres( _request('chapo')),
 		'texte' => corriger_caracteres($texte),
 		'ps' => corriger_caracteres(_request('ps')))  ;
 
@@ -1323,12 +1315,6 @@ function insert_article($id_parent)
 
 function articles_set($id_article, $id_rubrique, $statut)
 {
-   if ($_POST['changer_virtuel']) {
-     if ($virtuel = eregi_replace("^http://$", "", trim($_POST['virtuel'])))
-		$chapo = corriger_caracteres("=$virtuel");
-     else $chapo = $_POST['chapo'];
-     spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($chapo) . ", date_modif=NOW() WHERE id_article=$id_article");
-   }
 
    if (!isset($_POST['titre'])) return 0;
 
