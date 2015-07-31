@@ -21,7 +21,7 @@ function auth_http($url) {
 	if (verifier_php_auth())
 		redirige_par_entete($url);
 	else {
-		ask_php_auth(_T('login_connexion_refusee'),
+		ask_php_auth(_T('info_connexion_refusee'),
 			     _T('login_login_pass_incorrect'),
 			     _T('login_retour_site'),
 			     "url=".rawurlencode($url),
