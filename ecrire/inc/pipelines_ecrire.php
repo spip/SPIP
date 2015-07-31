@@ -42,7 +42,7 @@ function affichage_final_prive_title_auto($texte){
 	  AND
 			(preg_match(",<h1[^>]*>(.+)</h1>,Uims", $texte, $match)
 		   OR preg_match(",<h[23][^>]*>(.+)</h[23]>,Uims", $texte, $match))
-		AND $match = trim($match[1])
+		AND $match = textebrut(trim($match[1]))
 		AND ($p = strpos($texte,'<head>'))!==FALSE) {
 		if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 			$nom_site_spip=  _T('info_mon_site_spip');
