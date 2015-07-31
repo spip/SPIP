@@ -28,9 +28,8 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 
 	if (!$desc)
 		return false;
-	include_spip('public/interfaces');
-	$champ_date = @$GLOBALS['table_date'][$table];
-	if (!$champ_date) $champ_date = 'date';
+
+	$champ_date = $desc['date']?$desc['date']:'date';
 
 	$valeurs = array(
 		'objet'=>$objet,
@@ -153,9 +152,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 		if (!$desc)
 			return array('message_erreur'=>_L('erreur')); #impossible en principe
 
-		include_spip('public/interfaces');
-		$champ_date = @$GLOBALS['table_date'][$table];
-		if (!$champ_date) $champ_date = 'date';
+		$champ_date = $desc['date']?$desc['date']:'date';
 
 		$set = array();
 

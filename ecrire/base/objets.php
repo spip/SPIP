@@ -114,7 +114,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
 	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
-		return $desc?$desc:false;
+		return renseigner_table_objet_sql($table_sql,$desc);
 	}
 	if ($table_sql)
 		return $infos_tables[$table_sql];
