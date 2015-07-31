@@ -89,7 +89,7 @@ onload = function() { ortho-content.focus(); }
 </script>
 <![endif]-->";
 
-debut_html("Orthographe", $code_ie);
+debut_html(_T('ortho_orthographe'), $code_ie);
 
 changer_typo('','article'.$id_article);
 
