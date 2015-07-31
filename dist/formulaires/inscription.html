@@ -28,6 +28,7 @@ document.getElementById('(#ENV{focus})').focus();
 --></script>]
 ]
 </div>
+[(#ENV{focus,''}|?{' '})
 <div style="font-size: 10px; text-align: #LANG_RIGHT">
 <script type="text/javascript"><!--
 document.write("<a style='color: #e86519' href='")
@@ -37,4 +38,4 @@ document.write("'><:pass_quitter_fenetre:><" + "/a>");
 <noscript>
 	&#91;<a href='./'><:pass_retour_public:></a>&#93;
 </noscript>
-</div>
+</div>]
