@@ -2218,10 +2218,16 @@ function rtl_visuel($texte, $rtl_global) {
 		$mot = preg_replace(",٩,u", "^٩^", $mot);
 
 		
-		// symboles speciaux
+		// accents (enfin, pas exactement)
 				
 		$mot = preg_replace(",\^ّ,u", "ّ^", $mot);
 		$mot = preg_replace(",\^ْ,u", "ْ^", $mot);
+		$mot = preg_replace(",\^ِ,u", "ِ^", $mot);
+		$mot = preg_replace(",\^َ,u", "َ^", $mot);
+		$mot = preg_replace(",\^ً,u", "ً^", $mot);
+		$mot = preg_replace(",\^ٍ,u", "ٍ^", $mot);
+		$mot = preg_replace(",\^ُ,u", "ُ^", $mot);
+		$mot = preg_replace(",\^ٌ,u", "ٌ^", $mot);
 	
 
 		// Ligatures
