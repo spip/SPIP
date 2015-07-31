@@ -74,9 +74,10 @@ unset($auteur);
 if ($id_auteur) {
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	$new = false;	// eviter hack
-} else if ($new == 'oui') {	// creation
+} else {
 	$auteur['nom'] = 'Nouvel auteur';
 	$auteur['statut'] = '1comite';
+	$auteur['source'] = 'spip';
 }
 
 //
@@ -289,7 +290,7 @@ fin_cadre_relief();
 // accessibles seulement aux admins non restreints et l'auteur lui-meme
 //
 
-if (!$new AND ($auteur['source'] != 'spip')) {
+if ($auteur['source'] != 'spip') {
 	$edit_login = false;
 	$edit_pass = false;
 }
