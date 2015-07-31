@@ -309,9 +309,12 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
 			}
 		}
-		
-		$query .= "$s\n\t\t$k $v" .
-		(($autoinc && ($p == $k)) ? " auto_increment" : '');
+
+		$query .= "$s\n\t\t$k $v"
+			. (($autoinc && ($p == $k) && preg_match(',\b(big)?int\b,i', $v))
+				? " auto_increment"
+				: ''
+			);
 		$s = ",";
 	}
 	$temporary = $temporary ? 'TEMPORARY':'';
