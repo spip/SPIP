@@ -26,9 +26,6 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 
 	if (is_numeric($id_article)) {
 
-		if (!autoriser('modifier','article',$id_article))
-			return array();
-
 // marquer le fait que l'article est ouvert en edition par toto a telle date
 // une alerte sera donnee aux autres redacteurs sur exec=articles
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
