@@ -99,8 +99,10 @@ function auth_dist() {
 	// demander login / mdp et nettoyer en cas de login en echec
 	if (!$auth_login) {
 		if ($_GET['bonjour'] == 'oui') $clean_link->delVar('bonjour');
-
-		redirige_url_public('spip_login', "url=".urlencode(str_replace('/./', '/',  _DIR_LOGGED_IN. $clean_link->getUrl())));
+		redirige_par_entete(
+			generer_url_public('spip_login',
+			"url=" . urlencode(str_replace('/./', '/',
+			_DIR_LOGGED_IN. $clean_link->getUrl()))));
 	}
 
 	//
