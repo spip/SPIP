@@ -194,7 +194,7 @@ AND $l = @unserialize($l)) {
 
 // Trouver la fonction eventuellement surchagee et l'appeler.
 $var_f = charger_fonction($exec);
-if (!$GLOBALS['transformer_xml']
+if (!isset($GLOBALS['transformer_xml'])
 OR $GLOBALS['auteur_session']['statut']!='0minirezo')
 	$var_f();
  else { include('public/debug.php');

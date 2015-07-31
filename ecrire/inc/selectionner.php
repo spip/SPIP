@@ -42,12 +42,12 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 		. "\">\n<div class='pashighlight'>"
 		. _T("info_racine_site")
 		. "</div></div>";
-	}
+	} else $onClick = '';
 
 	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1", true);
 	if ($recur) {
-		$onClick .= "charger_id_url('$url_init', '$idom4');";
-	}
+		$onClick .= "charger_id_url('$url_init', '$idom" . "_col_1');";
+	} 
 
 	$plonger = charger_fonction('plonger', 'inc');
 	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus);
@@ -71,7 +71,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 
 	return "<div id='$idom'>"
 	. "<a id='$idom6' style='visibility: hidden;'"
-	. ($url_init ?  " href='$url_init'" : '')
+	. ($url_init ?  "\nhref='$url_init'" : '')
 	. "></a>"
 	. "<table width='100%' cellpadding='0' cellspacing='0'><tr>"
 	. "<td style='vertical-align: bottom;'>\n"
