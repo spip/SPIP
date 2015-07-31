@@ -5,6 +5,7 @@
 if (defined("_INC_LOGIN")) return;
 define("_INC_LOGIN", "1");
 
+
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
@@ -72,7 +73,6 @@ function login($cible, $prive = 'prive', $message_login='') {
 	global $php_module;
 	global $clean_link;
 
-
 	if (!$cible) {
 		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
 		else if ($prive) $cible = new Link('ecrire/');
@@ -87,9 +87,11 @@ function login($cible, $prive = 'prive', $message_login='') {
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
+
 	if ($auteur_session AND !$logout AND
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
-		if ($url != $GLOBALS['clean_link']->getUrl())
+		if (($url != $GLOBALS['clean_link']->getUrl()) && 
+		    !headers_sent())
 			redirige_par_entete($url);
 		echo "<a href='$url'>"._T('login_par_ici')."</a>\n";
 		return;
@@ -147,7 +149,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 			@spip_setcookie("spip_admin", "", time() - 3600);
 		}
 	}
-	
+
 	// javascript pour le focus
 	if ($login)
 		$js_focus = 'document.form_login.session_password.focus();';
