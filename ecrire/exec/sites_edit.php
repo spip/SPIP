@@ -38,6 +38,13 @@ function exec_sites_edit_dist()
 			$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
 			$id_rubrique = $row['id_rubrique'];
 		}
+		if (!autoriser('creersitedans','rubrique',$id_rubrique )){
+			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
+			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $row_rub = spip_fetch_array($res)){
+				$id_rubrique = $row_rub['id_rubrique'];
+			}
+		}
 	}
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if ( ($new!='oui' AND (!autoriser('voir','site',$id_syndic) OR !autoriser('modifier','site',$id_syndic)))

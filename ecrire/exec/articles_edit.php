@@ -31,9 +31,13 @@ function exec_articles_edit_dist()
 // http://doc.spip.org/@articles_edit
 function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
 {
+	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+	$id_article = $row['id_article'];
+	$id_rubrique = $row['id_rubrique'];
+	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if (
-	  ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
+	if (!$row
+	  OR ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
 	  OR (!$new AND (!autoriser('voir', 'article', $id_article)	OR !autoriser('modifier','article', $id_article))) 
 	  ) {
 		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
@@ -44,16 +48,6 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
-	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-	if (!$row) 
-	      {include_spip('minipres');
-		echo minipres();
-		exit;
-	      }
-
-	$id_article = $row['id_article'];
-	$id_rubrique = $row['id_rubrique'];
-
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 	else $titre = $row['titre'];
 

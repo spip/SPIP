@@ -25,8 +25,27 @@ function exec_breves_edit_dist()
 	$id_rubrique  = intval(_request('id_rubrique'));
 	$new = _request('new');
 
-	if ( (!$new AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
-		OR ($new AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) ) {
+	// appel du script a la racine, faut choisir 
+	// on prend le dernier secteur cree
+	// dans une liste restreinte si admin restreint
+
+	if (!$id_rubrique) {
+		$in = !$connect_id_rubrique ? ''
+		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+		$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0$in ORDER BY id_rubrique DESC LIMIT 1"));		
+		$id_rubrique = $row_rub['id_rubrique'];
+		if (!autoriser('creerbrevedans','rubrique',$id_rubrique )){
+			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
+			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			while (!autoriser('creerbrevedans','rubrique',$id_rubrique ) && $row_rub = spip_fetch_array($res)){
+				$id_rubrique = $row_rub['id_rubrique'];
+			}
+		}
+	}
+	
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	if ( ($new!='oui' AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
+		OR ($new=='oui' AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) ) {
 		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
@@ -66,7 +85,6 @@ function exec_breves_edit_dist()
 
 pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 
-$commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
 
 
@@ -131,17 +149,6 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 
 	$form .= debut_cadre_couleur("$logo_parent", true, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
-
-	// appel du script a la racine, faut choisir 
-	// on prend le dernier secteur cree
-	// dans une liste restreinte si admin restreint
-
-	if (!$id_rubrique) {
-		$in = !$connect_id_rubrique ? ''
-		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
-		$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0$in ORDER BY id_rubrique DESC LIMIT 1"));		
-		$id_rubrique = $row_rub['id_rubrique'];
-	}
 
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
