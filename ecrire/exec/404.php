@@ -34,7 +34,7 @@ function exec_404_dist(){
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'404','exec_erreur'=>$exec),'data'=>''));
 
 	echo debut_droite("404",true);
-	echo "<h1>"._T('fichier_introuvable',array('fichier'=>$exec))."</h1>";
+	echo "<h1 class='grostitre'>"._T('fichier_introuvable',array('fichier'=>$exec))."</h1>";
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'404','exec_erreur'=>$exec),'data'=>''));
 
 	echo fin_gauche(),fin_page();
