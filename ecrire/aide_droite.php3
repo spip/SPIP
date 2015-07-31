@@ -1,10 +1,12 @@
 <?php
+
 include ("inc_version.php3");
 
 $flag_ecrire = true;	// hack : on veut pouvoir eventuellement proposer
 						// l'aide en ligne depuis l'espace public via un
 						// RewriteRule (c'est le cas sur uZine)
 
+include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 ?>
