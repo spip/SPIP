@@ -309,21 +309,22 @@ function calculer_where($v)
 	if (!is_array($v)) return ($v);
 	$op = array_shift($v);
 	if (!($n=count($v)))
-	  return $op;
+		return $op;
 	else {
-	  $arg = calculer_where(array_shift($v));
-	  if ($n==1)
-	    return "\"$op(" . $arg . ")\"";
-	  else {
-	    $arg2 = calculer_where(array_shift($v));
-	    if ($n==2) {
-	      $arg = (substr($arg,-1)!="'") ? ("$arg . '") : (substr($arg,0,-1));
-	      $arg2 = ($arg2[0]=="'") ? (' '. substr($arg2,1)) : (is_numeric($arg2) ? "$arg2'" : "' . $arg2");
-	      return "$arg $op $arg2";
-	    }
-	    else
-	      return "($arg ? ($arg2) : $v[0])";
-	  }
+		$arg = calculer_where(array_shift($v));
+		if ($n==1) {
+			if (preg_match(",^'(.*)'$,",$arg,$r))
+			  return "'$op($r[1])'";
+			else
+			  return "'$op(' . " . $arg . ". ')'";
+		} else {
+			$arg2 = calculer_where(array_shift($v));
+			if ($n==2) {
+				$arg = (substr($arg,-1)!="'") ? ("$arg . '") : (substr($arg,0,-1));
+				$arg2 = ($arg2[0]=="'") ? (' '. substr($arg2,1)) : (is_numeric($arg2) ? "$arg2'" : "' . $arg2");
+				return "$arg $op $arg2";
+			} else return "($arg ? ($arg2) : $v[0])";
+		}
 	}
 }
 
