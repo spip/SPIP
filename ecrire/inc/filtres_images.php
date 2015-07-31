@@ -673,6 +673,7 @@ function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 
 // http://doc.spip.org/@image_passe_partout
 function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,$cherche_image=false,$process='AUTO'){
+	if (!$img) return '';
 	list ($hauteur,$largeur) = taille_image($img);
 	if ($taille_x == -1)
 		$taille_x = isset($GLOBALS['meta']['taille_preview'])?$GLOBALS['meta']['taille_preview']:150;
