@@ -562,7 +562,6 @@ function spip_pg_frommysql($arg)
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
 
-	$res = preg_replace('/FROM_UNIXTIME/i', 'ABSTIME', $res);
 
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
 			    ' EXTRACT(epoch FROM NOW())', $res);
@@ -593,8 +592,11 @@ function spip_pg_frommysql($arg)
 			    $res);
 
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)\"([^\"]*)\"/", '\1\'\2\'', $res);
-	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m%d\'[)]/', 'to_number(to_char(\1, \'YYYYMMDD\'), \'8\')', $res);
-	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m\'[)]/', 'to_number(to_char(\1, \'YYYYMM\'),\'6\')', $res);
+
+	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m%d\'[)]/', 'to_char(\1, \'YYYYMMDD\')', $res);
+
+	$res = preg_replace('/DATE_FORMAT\s*[(]([^,]*),\s*\'%Y%m\'[)]/', 'to_char(\1, \'YYYYMM\')', $res);
+
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
 	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
 	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
