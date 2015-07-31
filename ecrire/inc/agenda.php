@@ -290,7 +290,7 @@ function http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre){
 		  _T('date_jour_' . (($j%7)+1)) .
 		  "</th>";
 	}
-	return "\n<tr class='toile_claire'>$bandeau\n</tr>";
+	return "\n<tr class='bandeau_agenda'>$bandeau\n</tr>";
 }
 
 # dispose les lignes d'un calendrier de 7 colonnes (les jours)
@@ -320,7 +320,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$couleur_texte = "black";
 		$fond = "";
 
-		if ($jour_semaine == 0) $fond = ' toile_claire';
+		if ($jour_semaine == 0) $fond = ' jour_dimanche';
 		else if ($jour_semaine==1)
 			  { 
 			    if ($ligne||$init)
@@ -330,7 +330,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		
 		if ($amj == $today) {
 			$couleur_texte = "red";
-			$fond = " toile_blanche";
+			$fond = " jour_encours";
 		}
 		$res = '';
 		if ($evts = $evenements[$amj]) {
@@ -471,7 +471,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $finurl, $a
 		  calendrier_href($script, date("Y",$nom), $numois, $num, 'jour', $finurl, $ancre, '', $clic, '', '', $clic) .
 		  "</th>";
 	}
-	return "\n<tr class='toile_claire'>$bandeau\n</tr>";
+	return "\n<tr class='bandeau_agenda'>$bandeau\n</tr>";
 }
 
 // http://doc.spip.org/@http_calendrier_semaine_sept
@@ -489,10 +489,10 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 		$v = mktime(0,0,0,$mois, $j, $annee);
 		$total .= "\n<td class='calendrier-td'>" .
 		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, $style, $class . ( (date("w",$v)==0 && test_espace_prive()) ? 
-			  " toile_claire" :
+			  " jour_dimanche" :
 			  ((date("Ymd", $v) == $today) ? 
-			   " toile_blanche" :
-			   " toile_gris_leger") ) ) .
+			   " jour_encours" :
+			   " jour_gris") ) ) .
 		  "\n</td>";
 	}
 	return "\n<tr class='calendrier-verdana10'>$total</tr>";
