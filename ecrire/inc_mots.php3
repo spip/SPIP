@@ -306,7 +306,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			$url = "mots_edit.php3?id_mot=$id_mot&redirect=".rawurlencode($url_base.'#mots');
 	
-			$vals[] = "<A HREF='$url'>" . http_img_pack('petite-cle.gif', "alt='' width='23' height='12' border='0'") ."</A>";
+			$vals[] = "<A HREF='$url'>" . http_img_pack('petite-cle.gif', "", "width='23' height='12' border='0'") ."</A>";
 			
 	
 			// Changer
@@ -343,7 +343,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			if ($flag_editable){
 				$s = "";
 				if ($flag_groupe)
-				  $s .= "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "alt='X' width='7' height='7' border='0' align='middle'") ."</A>";
+				  $s .= "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
 				else $s .= "&nbsp;";
 			}
 			$vals[] = $s;
@@ -473,14 +473,14 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 						echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; ' CLASS='fondl'>";
 
 					$ifond == 0;
-					echo "<OPTION VALUE='x' style='font-variant: small-caps;'>$titre_groupe";
+					echo "\n<option value='x' style='font-variant: small-caps;'>$titre_groupe</option>";
 					while($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = $row['titre'];
 						$texte_option = entites_html(textebrut(typo($titre_mot)));
 						echo "\n<OPTION VALUE=\"$id_mot\">";
 						echo "&nbsp;&nbsp;&nbsp;";
-						echo $texte_option;
+						echo "$texte_option</option>";
 					}
 					echo "</SELECT>";
 					echo "</td>\n<td>";

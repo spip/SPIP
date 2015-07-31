@@ -5,16 +5,10 @@ include_ecrire("inc_statistiques.php3");
 
 function http_img_rien($width, $height, $style='', $title='')
 {
-  return "<img src='"
-    . _DIR_IMG_PACK . "rien.gif' width='$width' height='$height' alt=''" 
-    . (!$style ? '' : (" style='$style'"))
-    . (!$title ? '' : (" title=\"$title\""))
-    . "/>";
-}
-
-function http_a_img($href, $img, $att)
-{
-  return "<a href='$href'><img src='" . _DIR_IMG_PACK . $img . "' $att /></a>";
+  return http_img_pack('rien.gif', $title, 
+		       "width='$width' height='$height'" 
+		       . (!$style ? '' : (" style='$style'"))
+		       . (!$title ? '' : (" title=\"$title\"")));
 }
 
 if ($id_article = intval($id_article)){
@@ -314,8 +308,16 @@ if (!$origine) {
 		
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
-		if ($date_premier < $date_debut) echo http_a_img("statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article", 'loupe-moins.gif', "border='0' valign='center'"), "&nbsp;";
-		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo http_a_img("statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article", 'loupe-plus.gif', "border='0' valign='center'"), "&nbsp;";
+		if ($date_premier < $date_debut)
+		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article",
+				     'loupe-moins.gif',
+				     "border='0' valign='center'",
+				     _L('zoom'). '-'), "&nbsp;";
+		if ( (($date_today - $date_debut) / (24*3600)) > 30)
+		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article", 
+				     'loupe-plus.gif',
+				     "border='0' valign='center'",
+				     _L('zoom'). '+'), "&nbsp;";
 	
 		/*
 		if ($spip_svg_plugin == 'oui') {

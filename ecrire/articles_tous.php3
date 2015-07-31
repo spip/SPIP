@@ -140,7 +140,7 @@ if ($aff_statut["prepa"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
 	}
-	echo " <label for='prepa'>". http_img_pack('puce-blanche-breve.gif', "alt='' width='8' height='9' border='0'");
+	echo " <label for='prepa'>". http_img_pack('puce-blanche-breve.gif', "", "width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_en_cours_redaction')."</label><BR>";
 }
 
@@ -152,7 +152,7 @@ if ($aff_statut["prop"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
 	}
-	echo " <label for='prop'>". http_img_pack('puce-orange-breve.gif', "alt='' width='8' height='9' border='0'");
+	echo " <label for='prop'>". http_img_pack('puce-orange-breve.gif', "", "width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_attente_validation')."</label><BR>";
 }
 	
@@ -163,7 +163,7 @@ if ($aff_statut["publie"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
 	}
-	echo " <label for='publie'>". http_img_pack('puce-verte-breve.gif', "alt='' width='8' height='9' border='0'");
+	echo " <label for='publie'>". http_img_pack('puce-verte-breve.gif', "", "width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_publies')."</label><BR>";
 }
 
@@ -174,7 +174,7 @@ if ($aff_statut["refuse"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
 	}
-	echo " <label for='refuse'>" . http_img_pack('puce-rouge-breve.gif', "alt='' width='8' height='9' border='0'");
+	echo " <label for='refuse'>" . http_img_pack('puce-rouge-breve.gif', "", "width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_refuses')."</label><BR>";
 }
 
@@ -185,7 +185,7 @@ if ($aff_statut["poubelle"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
 	}
-	echo " <label for='poubelle'>" . http_img_pack('puce-poubelle-breve.gif', "alt='' width='8' height='9' border='0'");
+	echo " <label for='poubelle'>" . http_img_pack('puce-poubelle-breve.gif', "", "width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_poubelle')."</label>";
 }
 

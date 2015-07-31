@@ -740,7 +740,7 @@ class Link {
 				if (!preg_match('/^('.
 				(!_DIR_RESTREINT ?
 					'|lang|set_options|set_couleur|set_disp|set_ecran':
-					'|submit|var_mode')
+					'var_mode')
 				. ')$/i', $name)) {
 					if (is_array($value))
 						$this->arrays[$name] = $value;

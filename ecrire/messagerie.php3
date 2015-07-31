@@ -27,15 +27,15 @@ debut_boite_info();
 
 echo _T('info_gauche_messagerie');
 
-echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_vert');
+echo "<p>".http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_vert');
 
 echo aide ("messut");
 
-echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_bleu');
+echo "<p>".http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_bleu');
 
 echo aide ("messpense");
 
-echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_jaune');
+echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_jaune');
 
 
 

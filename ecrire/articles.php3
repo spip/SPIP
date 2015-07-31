@@ -777,7 +777,7 @@ echo "</td>";
 
 
 if ($flag_editable) {
-  echo "<td>". http_img_pack('rien.gif', "alt='' width=5") . "</td>\n";
+  echo "<td>". http_img_pack('rien.gif', "", "width=5") . "</td>\n";
 	echo "<td align='center'>";
 	$flag_modif = false;
 
@@ -1125,7 +1125,7 @@ if (spip_num_rows($result)) {
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "alt='X' width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1360,14 +1360,15 @@ if ((lire_meta('multi_articles') == 'oui')
 				}
 
 
-				$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "alt='' width='7' height='7' border='0' NAME='statut'");
+				$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", "width='7' height='7' border='0' NAME='statut'");
 				
 				if ($id_article_trad == $id_trad) {
-				  $vals[] = http_img_pack('langues-12.gif', "width='12' height='12' alt='' border='0'");
+				  $vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' border='0'");
 					$titre_trad = "<b>$titre_trad</b>";
 				} else {
-				  if ($connect_statut=='0minirezo') $vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". http_img_pack('langues-off-12.gif', "width='12' height='12' alt='' border='0'") . "</a>";
-				  else $vals[] = http_img_pack('langues-off-12.gif', "width='12' height='12' alt='' border='0'");
+				  if ($connect_statut=='0minirezo') $vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". 
+				    http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'") . "</a>";
+				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
 
 				$ret .= "</td>";
@@ -1420,7 +1421,7 @@ if ((lire_meta('multi_articles') == 'oui')
 			echo "</form>";
 			echo "</td>\n";
 			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "alt='' width=2 height=2") . "</td>";
+			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "", "width=2 height=2") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 		}
 		echo "<td>";
@@ -1428,7 +1429,7 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo "</td>";
 		if ($flag_editable AND $options == "avancees" AND $ret) {
 			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "alt='' width=2 height=2") . "</td>";
+			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "", "width=2 height=2") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td>";
 			icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
@@ -1494,7 +1495,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<OPTION" . mySel("refuse", $statut_article) . " style='background-color: #FFA4A4'>"._T('texte_statut_refuse')."\n";
 	echo "</SELECT>";
 
-	echo " &nbsp; ". http_img_pack("puce-".puce_statut($statut_article).'.gif', "alt='' border='0' NAME='statut'") . "  &nbsp; ";
+	echo " &nbsp; ". http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") . "  &nbsp; ";
 
 	// echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
