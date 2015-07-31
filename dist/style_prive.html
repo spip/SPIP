@@ -449,7 +449,9 @@ a.ical { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=synchro-24.gif) n
 
 /* Titre d'une boite */
 .titrem { font-weight: bold; }
-div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; background-position: [(#GET{left})] 6px; padding-#GET{left}: 16px; }
+div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;position:relative;padding-[(#GET{left})]:16px;}
+div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:absolute;[(#GET{left})]:0;}
+
 .cadre-couleur-foncee .titrem { background-color: #GET{foncee};color: #FFF; }
 .cadre-couleur-foncee .cadre_padding .titrem {color: #000; }
 .cadre-trait-couleur .titrem { background-color: #GET{foncee};color: #FFF; }
@@ -487,9 +489,9 @@ div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-r
 .iconifier div div label {text-align: #GET{left};display: block; }
 
 /* Deplier / Replier */
-.replie, .deplie.hoverwait { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{#GET{left},'',_rtl})].gif); }
+.replie a.titremancre, .deplie.hoverwait a.titremancre { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
 .hover { background-color: #GET{claire}; }
-.deplie, .replie.hoverwait { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.deplie a.titremancre, .replie.hoverwait a.titremancre { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .impliable {}
 .blocreplie { display: none; }
 .blocdeplie { display: block; background: none; }

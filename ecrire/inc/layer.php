@@ -79,7 +79,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  	?""
 	  	:" onmouseover=\"jQuery(this).depliant('$cible');\""
 	  )
-	  .">$texte</div>"
+	  ."><a href=\"#\" onclick=\"jQuery(this).parent().toggleother('$cible')\" class='titremancre'></a>$texte</div>"
 	  .http_script( ($deplie==='incertain')
 			? "jQuery(document).ready(function(){if (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');});"
 			: '');
