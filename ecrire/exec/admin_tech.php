@@ -90,7 +90,9 @@ function exec_admin_tech_args($tables)
 
 	if ($form) {
 		if (preg_match('@^<select([^>]*)>(\s*<option[^>]*)>([^[<]+)(.*)$@s', $form, $r)) {
-			$form = "<select onchange='x=this.options[this.options.selectedIndex].firstChild.data.match(/\w+/); findObj_forcer(\"znom_sauvegarde\").value=x[0]; findObj_forcer(\"nom_sauvegarde\").value=x[0];'" . $r[1] . '>' . $r[2] . " selected='selected'>" . $r[3] . $r[4];
+			if (!strpos($r[2], 'selected='))
+				$r[2] .=  " selected='selected'";
+			$form = "<select onchange='x=this.options[this.options.selectedIndex].firstChild.data.match(/\w+/); findObj_forcer(\"znom_sauvegarde\").value=x[0]; findObj_forcer(\"nom_sauvegarde\").value=x[0];'" . $r[1] . '>' . $r[2] . '>' . $r[3] . $r[4];
 			if ($GLOBALS['connect_id_rubrique'])
 				$file = trim($r[3]);
 		} elseif (preg_match('@^<input[^>]*>([^[<]+)@', $form, $r))
