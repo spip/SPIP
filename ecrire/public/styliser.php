@@ -101,71 +101,6 @@ function styliser_par_objets($flux){
 }
 
 /**
- * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
- * Squelette par rubrique squelette-XX.html ou squelette=XX.html
- * 
- * @param <type> $flux
- * @return <type>
- */
-function styliser_par_rubrique($flux) {
-
-	// uniquement si un squelette a ete trouve
-	if ($squelette = $flux['data']) {
-		$ext = $flux['args']['ext'];
-
-		// On selectionne, dans l'ordre :
-		// fond=10
-		if ($id_rubrique = $flux['args']['id_rubrique']) {
-			$f = "$squelette=$id_rubrique";
-			if (@file_exists("$f.$ext"))
-				$squelette = $f;
-			else {
-				// fond-10 fond-<rubriques parentes>
-				do {
-					$f = "$squelette-$id_rubrique";
-					if (@file_exists("$f.$ext")) {
-						$squelette = $f;
-						break;
-					}
-				} while ($id_rubrique = quete_parent($id_rubrique));
-			}
-			// sauver le squelette
-			$flux['data'] = $squelette;
-		}		
-	}
-	
-	return $flux;
-}
-
-/**
- * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
- * Squelette par langue squelette.en.html
- *
- * @param array $flux
- * @return array
- */
-function styliser_par_langue($flux) {
-
-	// uniquement si un squelette a ete trouve
-	if ($squelette = $flux['data']) {
-		$ext = $flux['args']['ext'];
-
-		// Affiner par lang
-		if ($lang = $flux['args']['lang']) {
-			$l = lang_select($lang);
-			$f = "$squelette.".$GLOBALS['spip_lang'];
-			if ($l) lang_select();
-			if (@file_exists("$f.$ext")) {
-				// sauver le squelette
-				$flux['data'] = $f;
-			}
-		}
-	}
-	
-	return $flux;
-}
-
-/**
  * Calcul de la rubrique associee a la requete
  * (selection de squelette specifique par id_rubrique & lang)
  *
@@ -200,11 +135,17 @@ function quete_rubrique_fond($contexte) {
 	if (isset($quete[$s]))
 		return $quete[$s];
 
+	if (isset($c['id_rubrique']) AND $r = $c['id_rubrique']){
+		unset($c['id_rubrique']);
+		$c = array('id_rubrique'=>$r) + $c;
+	}
+
 	foreach($c as $_id=>$id) {
 		if ($id
 		  AND $row = quete_parent_lang(table_objet_sql($liste_objets[$_id]),$id)) {
 			$lang = isset($row['lang']) ? $row['lang'] : '';
-			return $quete[$s] = array ($id, $lang);
+			if ($_id=='id_rubrique' OR (isset($row['id_rubrique']) AND $id=$row['id_rubrique']))
+				return $quete[$s] = array ($id, $lang);
 		}
 	}
 	return $quete[$s] = false;
