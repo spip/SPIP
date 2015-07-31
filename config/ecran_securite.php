@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '0.9.4'); // 2 janv 2010
+define('_ECRAN_SECURITE', '0.9.5'); // 2 janv 2010
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
