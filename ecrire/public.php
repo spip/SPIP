@@ -180,7 +180,7 @@ if (defined('_INC_PUBLIC')) {
 			// On ne revient pas ici si le nb d'erreurs > 4
 			if ($res === false AND $affiche_boutons_admin
 			AND $auteur_session['statut'] == '0minirezo') {
-				include_spip('inc/debug');
+				include_spip('public/debug');
 				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}
 		}
@@ -188,7 +188,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// Passer la main au debuggueur le cas echeant
 	if ($var_mode == 'debug') {
-		include_spip('inc/debug');
+		include_spip('public/debug');
 		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
