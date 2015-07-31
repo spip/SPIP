@@ -229,7 +229,7 @@ function declarer_interfaces(){
 			'statut'
 		),
 		'publie' => 'publie',
-		'previsu' => 'publie,prop',
+		'previsu' => '!',
 		'post_date' => 'date',
 		'exception' => array('statut','lien','tout')
 	);
