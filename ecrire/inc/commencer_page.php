@@ -18,20 +18,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true) {
-  global $spip_ecran;
+	global $spip_ecran;
   
 	include_spip('inc/headers');
 
 	http_no_cache();
   
-  if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
+	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
   
 	return init_entete($titre, $id_rubrique)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page'>"
 	. avertissement_messagerie()
-	  . ((($rubrique == "messagerie") OR (_request('changer_config')!="oui"))
-	     ? auteurs_recemment_connectes() : '');
+	. auteurs_recemment_connectes();
 }
 
 // envoi du doctype et du <head><title>...</head> 

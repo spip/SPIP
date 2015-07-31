@@ -13,13 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/rubriques');
 include_spip('inc/config');
 
 // http://doc.spip.org/@exec_config_lang_dist
 function exec_config_lang_dist()
 { 
-	global $connect_statut, $connect_toutes_rubriques, $spip_lang_right, $all_langs, $changer_config;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');

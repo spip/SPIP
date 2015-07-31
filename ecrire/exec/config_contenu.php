@@ -19,30 +19,25 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_contenu_dist
 function exec_config_contenu_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $spip_lang_left,$changer_config, $envoi_now ;
+	global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $spip_lang_left ;
 
 
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		echo _T('avis_non_acces_page');
+		echo fin_gauche(), fin_page();
+		exit;
+	}
 
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-}
+	init_config();
+	lire_metas();
 
-lire_metas();
+	pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
 
-pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
-
-echo "<br /><br /><br />\n";
-gros_titre(_T('titre_page_config_contenu'));
-echo barre_onglets("configuration", "interactivite");
-
+	echo "<br /><br /><br />\n";
+	gros_titre(_T('titre_page_config_contenu'));
+	echo barre_onglets("configuration", "interactivite");
 
 	debut_gauche();
 

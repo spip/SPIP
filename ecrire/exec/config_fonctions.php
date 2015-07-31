@@ -18,7 +18,7 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_fonctions_dist
 function exec_config_fonctions_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $changer_config;
+	global $connect_statut, $connect_toutes_rubriques;
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
 		exit;
@@ -26,7 +26,6 @@ function exec_config_fonctions_dist()
 	}
 
 	init_config();
-	if ($changer_config == 'oui') appliquer_modifs_config();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
