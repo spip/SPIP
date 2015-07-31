@@ -165,6 +165,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	$s = _request('statut', $c);
 
+	// cf autorisations dans inc/instituer_article
 	if ($s AND $s != $statut) {
 		if (autoriser('publierdans', 'rubrique', $id_rubrique))
 			$statut = $champs['statut'] = $s;

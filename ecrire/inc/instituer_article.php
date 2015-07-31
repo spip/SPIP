@@ -23,6 +23,9 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 		list($postdates,$postdates_js) = menu_postdates();
 	else $postdates = $postdates_js = '';*/
 
+	// cf autorisations dans action/editer_article
+	if (!autoriser('modifier', 'article', $id_article)) return '';
+
 	$liste_statuts = array(
 	  // statut => array(titre,image)
 		'prepa' => array(_T('texte_statut_en_cours_redaction'),''),
@@ -42,7 +45,7 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	
 	$res .=
 	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
-	  . "<li>" . _T('texte_article_statut') 
+	  . "<li>" . _T('texte_article_statut')
 		. aide("artstatut")
 	  ."<ul>";
 	
