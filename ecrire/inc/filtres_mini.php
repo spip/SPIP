@@ -88,11 +88,11 @@ function url_absolue($url, $base='') {
 
 /**
  * Supprimer le protocole d'une url absolue
- * pour en faire une url relative au protocole
+ * pour le rendre implicite (URL commencant par "//")
  * @param string $url_absolue
  * @return string
  */
-function url_relative_protocole($url_absolue){
+function protocole_implicite($url_absolue){
 	return preg_replace(";^[a-z]{3,7}://;i","//",$url_absolue);
 }
 
