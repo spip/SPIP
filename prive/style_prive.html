@@ -583,11 +583,11 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 .blocreplie { display: none; }
 .blocdeplie { display: block; background: none; }
 
-td.pense-bete, a.pense-bete { background: url(#GET{chemin_img_pack}m_envoi_bleu[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 20px; }
+div.pense-bete, a.pense-bete { background: url(#GET{chemin_img_pack}m_envoi_bleu[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 10px; }
 
-td.annonce, a.annonce { background: url(#GET{chemin_img_pack}m_envoi_jaune[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 20px; }
+div.annonce, a.annonce { background: url(#GET{chemin_img_pack}m_envoi_jaune[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 10px; }
 
-td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 10px; }
+div.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})].gif) center [(#GET{left})] no-repeat; padding-#GET{left}: 10px; }
 
 .enfants ul { list-style: none; }
 .enfants ul li.rubrique_12 {background:url(#GET{chemin_img_pack}rubrique-12.gif)[ (#GET{left})] center no-repeat; padding: 2px; padding-#GET{left}: 18px; margin-#GET{left}: 6px;position:relative;}
@@ -686,13 +686,23 @@ ul.classement li em {display:block;width:37px;float:#GET{left};margin-left:-40px
 .signature .poubelle {background-color: #ffff00}
 
 /* agenda */
-.bandeau_agenda { background: #GET{claire}; }
+table.calendrier th { background: #GET{claire}; }
+table.calendrier td { border: 1px solid #GET{claire};}
+tr.calendrier-3jours > td[colspan] { border: 1px solid #GET{claire};}
+tr.calendrier-3jours > td { border: 1px solid #GET{claire};}
+tr.calendrier-3jours > td+td+td { border: 1px solid #GET{claire};}
+tr.calendrier-3jours > td+td+td+td+td { border: 1px solid #GET{claire};}
+
+table.calendrier tr.heure td { border: 0 }
+.calendrier-jour { border: 1px solid #GET{claire}; border-right: 0;}
+.calendrier-msg { border: 1px solid #GET{claire};}
 .jour_dimanche { background: #GET{claire};color: #fff; }
 .jour_encours { background: #fff;color: #000; }
-.jour_gris { background: #eee;color: #000; }
 .jour_pris { background: #fff;color: #000; }
-.calendrier-cadreagenda { background: #GET{claire}; }
-div.navigation-calendrier { background-color: #GET{foncee}; }
+.jour_gris { background: #eee;color: #000; }
+tr.calendrier-titre-jour > th { background: #f8f7f3; color: #000; }
+table.calendrier-cadreagenda { background: #GET{claire}; }
+table.calendrier caption { background-color: #GET{foncee}; }
 
 /* lang_raccourcis */
 #raccourcis .titrem { background: #GET{claire}; }
