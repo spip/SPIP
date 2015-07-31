@@ -28,7 +28,7 @@
 	#BOITE_FERMER
 	[(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">if (window.jQuery)
-	jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'[(#OBJET|objet_info{url_voir})]'}});})
+	jQuery(function(){jQuery('#navigation>div, #chemin').ajaxReload({args:{exec:'[(#OBJET|objet_info{url_voir})]'}});})
 	</script>
 	]
 	#SET{ok,' '}
