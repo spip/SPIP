@@ -162,6 +162,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	@spip_free_result($result);' .
 		 (!($flag_h) ? '
 	return $t0;' : ('
+	$SP--;
 	$h0 = $t0 .' .
 		   ((!$boucle->separateur) ? "" :
 		    ('(($h0 && $t0) ? \'' . $boucle->separateur . "' : '') .")) .
