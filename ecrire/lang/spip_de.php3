@@ -345,6 +345,9 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'ical_texte_prive' => 'Dieser nur f&uuml;r Sie selbst zug&auml;ngliche Kalender h&auml;lt Sie auf dem Laufenden &uuml;ber die internen redaktionellen Vorg&auml;nge dieser Website (Aufgaben und pers&ouml;nliche Termine, vorgeschlagene Artikel und Meldungen ...).',
 'ical_texte_public' => 'Dieser Kalender gibt Ihnen einen &Uuml;berblick &uuml;ber die Ereignisse im &ouml;ffentlichen Bereich der Website.',
 'ical_texte_rss' => '<MODIF> Sie k&ouml;nnen die Neuheiten dieser Website mit einem beliebigen Programm anzeigen, dass das Format XML/RSS (Rich Site Summary) beherrscht. Dieses Protokoll erlaubt es SPIP, neue Eintr&auml;ge aus anderen Websites zu &uuml;bernehmen, die damit arbeiten.',
+'ical_texte_rss_articles' => '<NEW> Le fichier &laquo;backend&raquo; des articles de ce site se trouve &agrave; l\'adresse:',
+'ical_texte_rss_articles2' => '<NEW> Vous pouvez &eacute;galement obtenir des fichiers &laquo;backend&raquo; pour les articles de chaque rubrique du site:',
+'ical_texte_rss_breves' => '<NEW> Il existe de plus un fichier contenant les br&egrave;ves du site. En pr&eacute;cisant un num&eacute;ro de rubrique, vous obtiendrez uniquement les br&egrave;ves de cette rubrique.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-List',
 'ical_titre_rss' => '"Backend" Datei',
@@ -1387,7 +1390,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_statut_refuses' => 'abgelehnt',
 'texte_suppression_fichiers' => 'Benutzen Sie diesen Befehl, um alle Dateien aus dem Zwischenspeicher von SPIP zu l&ouml;schen. Damit k&ouml;nnen Sie eine erneute Berechnung aller Seiten erzwingen, wenn Sie z.B. wesentliche &Auml;nderungen am Inhalt und Layout Ihrer Site gemacht haben. ',
 'texte_sur_titre' => 'Einleitender Titel',
- 'texte_syndication' => 'Manche Websites erm&ouml;glichen den automatischen Abruf einer Liste von neuen Artikeln. Um diese Daten nutzen zu k&ouml;nnen, m&uuml;ssen Sie die Syndikation aktivieren.
+'texte_syndication' => 'Manche Websites erm&ouml;glichen den automatischen Abruf einer Liste von neuen Artikeln. Um diese Daten nutzen zu k&ouml;nnen, m&uuml;ssen Sie die Syndikation aktivieren.
                 <blockquote><i>Manche Provider unterbinden die Nutzung dieser Funktion. Dann k&ouml;nnen Sie keine syndizierten Inhalte nutzen.</i></blockquote>',
 'texte_table_ok' => ': Tabelle OK.',
 'texte_tables_indexation_vides' => 'Indextabellen der Suchmaschine sind leer.',
