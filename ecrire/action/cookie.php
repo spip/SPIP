@@ -96,8 +96,13 @@ function action_cookie_dist() {
 				spip_setcookie('spip_session', $cookie_session);
 	
 			$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
+
+spip_log($prefs);
+
 			$prefs['cnx'] = $session_remember;
-	
+
+spip_log($prefs);
+
 			spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
 		}
 	}
