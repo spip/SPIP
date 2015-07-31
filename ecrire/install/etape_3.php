@@ -43,8 +43,14 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 
 	$fquery = sql_serveur('query', $server_db);
 	if ($choix_db == "new_spip") {
-		if (preg_match(',^[a-z_][a-z_0-9]*$,i', $sel_db))
-			$fquery("CREATE DATABASE $sel_db", $server_db);
+		$re = ',^[a-z_][a-z_0-9-]*$,i';
+		if (preg_match($re, $sel_db))
+			$fquery("CREATE DATABASE `$sel_db`", $server_db);
+		else {
+		  $re = "Le nom de la base doit correspondre a $re";
+		  spip_log($re);
+		  return "<!--\n$re\n-->";
+		}
 	}
 
 	sql_selectdb($sel_db, $server_db);
