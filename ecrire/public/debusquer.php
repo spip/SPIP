@@ -77,30 +77,30 @@ function public_debusquer_dist($message='', $lieu='') {
 	if (empty($debug_objets['principal'])) 
 		$debug_objets['principal'] = $GLOBALS['fond'];
 
+
 	include_spip('inc/autoriser');
-	if (!autoriser('debug'))
-		$res = '';
-	else {
+	if (!autoriser('debug')) return;
+	include_spip('inc/headers');
+	include_spip('inc/filtres');
+
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
-		if (ob_get_length()) ob_end_clean();
-		include_spip('inc/headers');
-		include_spip('inc/filtres');
-		lang_select($visiteur_session['lang']);
-		$fonc = _request('var_mode_objet');
-		$mode = _request('var_mode_affiche');
-		$self = str_replace("\\'", '&#39;', self());
-		$self = parametre_url($self,'var_mode', 'debug');
+	if (ob_get_length()) ob_end_clean();
 
-		$res = debusquer_bandeau($tableau_des_erreurs) 
-		  . '<br />'
-		  . debusquer_squelette($fonc, $mode, $self);
-	}
+	lang_select($visiteur_session['lang']);
+	$fonc = _request('var_mode_objet');
+	$mode = _request('var_mode_affiche');
+	$self = str_replace("\\'", '&#39;', self());
+	$self = parametre_url($self,'var_mode', 'debug');
+
+	$res = debusquer_bandeau($tableau_des_erreurs) 
+		. '<br />'
+		. debusquer_squelette($fonc, $mode, $self);
+
 	if (!_DIR_RESTREINT OR headers_sent()) return $res;
 
 	if ($tableau_des_erreurs) {
-		include_spip('inc/headers');
 		http_status(503);
 		return;
 	}
