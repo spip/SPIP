@@ -27,7 +27,7 @@ function install_debut_html($titre = 'AUTO') {
 	include_ecrire('inc_headers');
 
 	http_no_cache();
-	$args =  "couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
+	$args =  "fond=style&couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
 		$GLOBALS['spip_lang_left'];
 ;
 	echo  _DOCTYPE_ECRIRE ,
@@ -36,10 +36,11 @@ function install_debut_html($titre = 'AUTO') {
 	  "<head>\n",
 	  "<title>",
 	  $titre,
-	  '</title>
+	  '</title>',
+	  (($GLOBALS['exec'] != 'install') ? ('
 <link	rel="stylesheet" 
 	type="text/css"
-	href="', generer_url_public('page', $args), '">',
+	href="'. generer_url_public('page', $args). '">') : ''),
 	  "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
 	  "a {text-decoration: none; }",
 	  "\n\n]]>\n--></style>\n\n
