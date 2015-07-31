@@ -142,7 +142,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar an&uacute;ncios editoriais',
 'bouton_radio_non_envoi_liste_nouveautes' => 'N&atilde;o enviar a lista das novidades',
 'bouton_radio_non_syndication' => 'N&atilde;o h&aacute; vincula&ccedil;&atilde;o',
-'bouton_radio_occidental' => ' Alfabeto ocidental&nbsp; (<tt>iso-8859-1</tt>): aceite por todos os  navegadores, mas permite unicamente
+'bouton_radio_occidental' => '<MODIF>  Alfabeto ocidental&nbsp; (<tt>iso-8859-1</tt>): aceite por todos os  navegadores, mas permite unicamente
  a exibi&ccedil;&atilde;o das l&iacute;nguas da Europa Ocidental ( ingl&ecirc;s,franc&ecirc;s, alem&atilde;o...). ',
 'bouton_radio_pas_petition' => 'N&atilde;o h&aacute; abaixo-assinado',
 'bouton_radio_personnalise' => 'Jogo de car&aacute;cteres personalizado&nbsp;: escolha esta op&ccedil;&atilde;o se quiser
@@ -154,7 +154,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_sauvegarde_non_compressee' => 'salvaguarda n&atilde;o compressada sob   <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo -assinado',
 'bouton_radio_syndication' => 'Vincula&ccedil;&atilde;o',
-'bouton_radio_universel' => ' Alfabeto universal&nbsp; (<tt>utf- 8</tt>): permite a exibi&ccedil;&atilde;o de todas as l&iacute;nguas, mas n&atilde;o &eacute; reconhecido
+'bouton_radio_universel' => '<MODIF>  Alfabeto universal&nbsp; (<tt>utf- 8</tt>): permite a exibi&ccedil;&atilde;o de todas as l&iacute;nguas, mas n&atilde;o &eacute; reconhecido
  hoje por todos os navegadores.  ',
 'bouton_recharger_page' => 'recarregar esta p&aacute;gina',
 'bouton_redirection' => 'REDIRIGIR',
@@ -790,6 +790,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_nouveaux_message' => 'Novas mensagens',
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_nouvel_article' => 'Novo artigo',
+'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'ARTIGO N&Uacute;MERO&nbsp;:',
 'info_obligatoire_02' => '[Obigat&oacute;rio]',
 'info_option_email' => 'Quando um visitador do s&iacute;tio manda uma nova mensagem no f&oacute;rum
@@ -1427,7 +1428,7 @@ ao seu valor por defeito (n&atilde;o h&aacute; cria&ccedil;&atilde;o
 'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao s&iacute;tio',
 'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstala&ccedil;&atilde;o e se o seu acesso sempre funcionar, pode',
 'texte_introductif_article' => '(Texto introdut&oacute;rio do artigo.)',
-'texte_jeu_caractere' => 'Esta op&ccedil;&atilde;o &eacute; u&uacute;til se o seu s&iacute;tio deve exibir alfabetos
+'texte_jeu_caractere' => '<MODIF> Esta op&ccedil;&atilde;o &eacute; u&uacute;til se o seu s&iacute;tio deve exibir alfabetos
  diferentes do alfabeto romano ( ou  &laquo;&nbsp;ocidental&nbsp;&raquo;) e seus derivados.
  Nesse caso, &eacute; preciso mudar o acerto por defeito para utilizar
  um jogo de car&aacute;cteres adequado. N&atilde;o esquecer tamb&eacute;m, por isso,   adaptar

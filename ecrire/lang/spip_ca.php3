@@ -143,8 +143,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncis editorials',
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la llista de novetats',
 'bouton_radio_non_syndication' => 'Cap sindicaci&oacute;',
-'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>): suportat per tots els navegadors, per&ograve; nom&eacute;s permet
- mostrar les llengues de l\'oest europeu (angl&egrave;s, franc&egrave;s, alemany...).',
+'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>): permet principalment
+ mostrar les lleng&uuml;es del\'oest europeu (angl&egrave;s, franc&egrave;s, alemany...)&nbsp;;
+  SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;es.',
 'bouton_radio_pas_petition' => 'Cap petici&oacute;',
 'bouton_radio_personnalise' => 'Joc de car&agrave;cter personalitzat: Seleccioneu aquesta opci&oacute; per utilitzar
  un joc de car&agrave;cters espec&iacute;fic',
@@ -154,8 +155,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_radio_sauvegarde_non_compressee' => 'c&ograve;pia de seguretat no comprimida a <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;',
 'bouton_radio_syndication' => 'Sindicaci&oacute;:',
-'bouton_radio_universel' => 'Alfabet universal&nbsp; (<tt>utf-8</tt>): permet mostrar totes les lleng&uuml;es, per&ograve; actualment no &eacute;s reconegut
- per tots els navegadors.',
+'bouton_radio_universel' => 'Alfabet universal&nbsp; (<tt>utf-8</tt>): permet la publicaci&oacute; de totes les lleng&uuml;es, per&ograve; pot posar problemes d\'incompatibilitat amb els  programes utilitzats per modificar les vostres plantilles, i alguns lectors de correu electr&ograve;nic. ',
 'bouton_recharger_page' => 'recarregar aquesta p&agrave;gina',
 'bouton_redirection' => 'REDIRECCI&Oacute;',
 'bouton_relancer_installation' => 'Tornar a llan&ccedil;ar la instal&middot;laci&oacute;',
@@ -782,6 +782,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_nouveaux_message' => 'Nous missatges',
 'info_nouveaux_messages' => 'TENIU @total_messages@ NOUS MISSATGES',
 'info_nouvel_article' => 'Nou article',
+'info_nouvelle_traduction' => 'Nova traducci&oacute;:',
 'info_numero_article' => 'ARTICLE N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obligatori]',
 'info_option_email' => 'Quan un visitant del lloc envia un nou missatge en el f&ograve;rum associat a un article, els autors de l\'article poden ser informats d\'aquest missatge per correu electr&ograve;nic. Voleu fer servir aquesta opci&oacute;?',
@@ -1388,11 +1389,8 @@ Generalment, es molt aconsellable
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opci&oacute; &eacute;s &uacute;til si la web ha de contindre diferents alfabets
- que no siga l\'alfabet rom&agrave; (o "occidental") i els seus derivats.
- A aquest cas, cal carregar regles per defecte per a usar
-  un joc de car&agrave;cters apropiat. No oblideu pas adaptar
- el lloc p&uacute;blic com a consequ&egrave;ncia (balisa <tt>#CHARSET</tt>).',
+'texte_jeu_caractere' => 'Aquesta opci&oacute; &eacute;s &uacute;til si el vostre lloc Web ha de publicar alfabets diferents de l\'alfabet rom&agrave; (o &laquo;occidental&raquo;) i els seus derivats.
+ En aquest cas, pot ser preferible canviar les regles per defecte per un joc de car&agrave;cters apropiat; us aconsellem en tot cas de fer proves per tal de trobar una soluci&oacute; satisfact&ograve;ria. Si modifiqueu aquest par&agrave;metre, no oblideu com a conseq&uuml;&egrave;ncia adaptar tamb&eacute; el lloc p&uacute;blic (etiqueta <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aquesta norma no t&eacute; efectes retroactius. Com
  a consequ&egrave;ncia, els textos ja inserits es poden mostrar incorrectament a partir de la modificaci&oacute; de la regla. Dins tots
  els casos, es pot retornar a la regla precedent sense cap problema.',

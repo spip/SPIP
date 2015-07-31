@@ -136,7 +136,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anoncis editorials',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Mandar pas la ti&egrave;ra de las novetats',
 'bouton_radio_non_syndication' => 'Pas cap de sindicacion',
-'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>):totes los navigadors lo sup&ograve;rtan, mas permet pas que
+'bouton_radio_occidental' => '<MODIF> Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>):totes los navigadors lo sup&ograve;rtan, mas permet pas que
  d\'afichar las lengas o&egrave;st-europ&egrave;as (occitan, catalan, angl&eacute;s, alemand...).  ',
 'bouton_radio_pas_petition' => 'Pas cap de peticion',
 'bouton_radio_personnalise' => 'J&ograve;c de caract&egrave;rs personalizat: causiss&egrave;tz aquela opcion se vol&egrave;tz
@@ -149,7 +149,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_sauvegarde_non_compressee' => 'Salvagarda non comprimida jos <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => 'Alfabet universal (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per ara es
+'bouton_radio_universel' => '<MODIF> Alfabet universal (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per ara es
  pas reconegut per totes los navigadors.',
 'bouton_recharger_page' => 'tornar cargar aquela pagina',
 'bouton_redirection' => 'TORNAR DIRIGIR',
@@ -757,6 +757,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges n&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
+'info_nouvelle_traduction' => 'Revirada n&ograve;va:',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quora un vesitaire del sit manda un messatge n&ograve;u al forum
@@ -1391,7 +1392,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_informations_personnelles_1' => 'Ara lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat al sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
+'texte_jeu_caractere' => '<MODIF> Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidental") e sos derivats.
  En aquel cas, cal cambiar lo reglatge predefinit per tal d\'utilizar
  un j&ograve;c de caract&egrave;rs apropriat. Oblidetz pas tanpauc d\'adaptar

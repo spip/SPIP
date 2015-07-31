@@ -166,6 +166,10 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => '<MODIF> S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat dau sit.',
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfachs et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -757,6 +761,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges n&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
+'info_nouvelle_traduction' => 'Revirada n&ograve;va:',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quora un vesitaire dau sit manda un messatge n&ograve;u au forum
@@ -1655,10 +1660,6 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 
 
 // PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfachs et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );

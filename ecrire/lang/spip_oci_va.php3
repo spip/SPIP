@@ -136,7 +136,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Pas mandar d\'anoncis editoriaus',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Pas mandar la tiera de las novetats',
 'bouton_radio_non_syndication' => 'Ges de sindicacion',
-'bouton_radio_occidental' => 'Alfabet occidentau&nbsp; (<tt>iso-8859-1</tt>): tots los navigaors lo sup&ograve;rtan, mas permet mas que
+'bouton_radio_occidental' => '<MODIF> Alfabet occidentau&nbsp; (<tt>iso-8859-1</tt>): tots los navigaors lo sup&ograve;rtan, mas permet mas que
  d\'afichar las lengas o&egrave;st-europ&egrave;as (occitan, catalan, angl&eacute;s, alemand...).  ',
 'bouton_radio_pas_petition' => 'Ges de peticion',
 'bouton_radio_personnalise' => 'Juec de caract&egrave;rs personalizat: chausiss&egrave;tz aquela opcion se vol&egrave;tz
@@ -149,7 +149,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimia sos <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => 'Alfabet universau (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per lo temps que vai es
+'bouton_radio_universel' => '<MODIF> Alfabet universau (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per lo temps que vai es
  pas reconeissut per tots los navigaors.',
 'bouton_recharger_page' => 'tornar charjar aquela pagina',
 'bouton_redirection' => 'TORNAR DIRIGIR',
@@ -166,6 +166,10 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo po&egrave;tz sincronizar amb l\'actualitat dau sit.',
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privaa d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -550,6 +554,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a corresp&ograve;nd a una lista de corrier, po&egrave;tz indicar &ccedil;ai sos l\'adrei&ccedil;a ont los participants au sit se p&ograve;on inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Po&egrave;tz recebre automaticament, per e-mail, los anoncis pertochant l\'activitat editoriala d\'aqueu sit. Per aqu&ograve; faire, vos po&egrave;tz abonar a la lista de corrier seguenta:',
+'info_config_suivi_lien' => '<NEW> <NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirmar aqueu mot de santa Clara nov&egrave;u:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><P> Po&egrave;tz passar a l\'estapa seguenta.',
@@ -757,6 +762,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges n&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
+'info_nouvelle_traduction' => 'Reviraa n&ograve;va:',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quand un vesitaire dau sit manda un messatge n&ograve;u au forum
@@ -1391,7 +1397,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
 'texte_informations_personnelles_1' => 'A&uuml;ra lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat au sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, po&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
+'texte_jeu_caractere' => '<MODIF> Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidentau") e sos derivats.
  En aqueu cas, chau chambiar lo reglatge predefinit a fin d\'utilizar
  un juec de caract&egrave;rs apropriat. Eissublietz pas tanpauc d\'adaptar
@@ -1592,6 +1598,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRAAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los liams intrants per encuei',
+'titre_liens_entrants_total' => '<NEW> <NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1651,16 +1658,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas pus liar aquest article a sas reviraas ',
 'trad_lier' => 'Aquest article es una reviraa de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una reviraa nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privaa d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
-'info_config_suivi_lien' => '<NEW> <NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
-'titre_liens_entrants_total' => '<NEW> <NEW> <NEW> Les liens entrants depuis le d&eacute;but'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

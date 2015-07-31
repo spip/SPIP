@@ -166,6 +166,10 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), que\'u podetz sincronizar dab l\'actualitat deu sit.',
+'calendrier_synchro_lien' => 'Anar cu&eacute;lher lo fichi&egrave;r <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calend&egrave;r seguent, d\'usatge estrictament personau, que vs\'informa suber l\'activitat editoriau privada d\'aqueth sit (pr&egrave;tzh&egrave;its et rendetz-vse personaus, articles et br&egrave;vas perpausats...).',
+'calendrier_synchro_public' => 'Lo calend&egrave;r seguent que\'vs permet de seguir l\'activitat publica d\'aqueth sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -757,6 +761,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_nouveaux_message' => 'Messatges naus',
 'info_nouveaux_messages' => 'QU\'AVETZ @total_messages@ MESSATGES NAUS',
 'info_nouvel_article' => 'Article nau',
+'info_nouvelle_traduction' => 'Arrevirada nava:',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quan un vesitaire deu sit e manda un messatge nau au forum
@@ -1654,10 +1659,6 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 
 
 // PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar cu&eacute;lher lo fichi&egrave;r <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calend&egrave;r seguent, d\'usatge estrictament personau, que vs\'informa suber l\'activitat editoriau privada d\'aqueth sit (pr&egrave;tzh&egrave;its et rendetz-vse personaus, articles et br&egrave;vas perpausats...).',
-'calendrier_synchro_public' => 'Lo calend&egrave;r seguent que\'vs permet de seguir l\'activitat publica d\'aqueth sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );

@@ -130,7 +130,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar los anuncios editoriales',
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la lista de novedades',
 'bouton_radio_non_syndication' => 'Ninguna sindicaci&oacute;n',
-'bouton_radio_occidental' => 'Alfabeto occidental (<tt>iso-8859-1</tt>): soportado por todos los navegadores, pero solo permite mostrar las lenguas europeas del oeste (ingl&eacute;s, franc&eacute;s, alem&aacute;n...).',
+'bouton_radio_occidental' => 'Alfabeto occidental (<tt>iso-8859-1</tt>):
+ permite principalmente visualizar las idiomas de Europa del oeste (ingl&eacute;s, franc&eacute;s, alem&aacute;n...);
+ sin embargo SPIP permite manejar relativamente bien los otros idiomas.',
 'bouton_radio_pas_petition' => 'Sin petici&oacute;n',
 'bouton_radio_personnalise' => 'Juego de caracteres personalizado. Seleccionar esta opci&oacute;n para utilizar un juego de caracteres espec&iacute;fico.',
 'bouton_radio_petition_activee' => 'Petici&oacute;n activada',
@@ -139,7 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'copia no comprimida en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;n',
 'bouton_radio_syndication' => 'Sindicaci&oacute;n',
-'bouton_radio_universel' => 'Alfabeto universal (<tt>utf-8</tt>): permite mostrar todas las lenguas, pero actualmente no es reconocido por todos los navegadores.',
+'bouton_radio_universel' => 'Alfabeto universal (<tt>utf-8</tt>): permite visualizar todas las lenguas, pero puede plantear problemas de compatibilidad con los sofwares utilizados para modificar los esqueletos y con ciertos lectores de correo electr&oacute;nico.',
 'bouton_recharger_page' => 'Recargar esta p&aacute;gina',
 'bouton_redirection' => 'Redirecci&oacute;n',
 'bouton_relancer_installation' => 'Relanzar la instalaci&oacute;n',
@@ -154,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => '<MODIF> Si utilizas un software de agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), puedes sincronizarlo con la actualidad editorial de este sitio.',
+'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
 
 
 // D
@@ -427,7 +429,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_sites_references' => 'Sitios referenciados',
 'icone_statistiques' => 'Estad&iacute;sticas del sitio',
 'icone_statistiques_visites' => 'Estad&iacute;sticas de las visitas',
-'icone_suivi_activite' => '<MODIF> Seguir la actividad editorial',
+'icone_suivi_activite' => 'Seguir la vida del sitio',
 'icone_suivi_actualite' => 'Evoluci&oacute;n del&nbsp;sitio',
 'icone_suivi_forum' => 'Actualidad del foro p&uacute;blico: @nb_forums@ contribuci&oacute;n(es)',
 'icone_suivi_forums' => 'Gesti&oacute;n de los foros',
@@ -536,7 +538,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_code_acces' => '&iexcl;No olvides tus c&oacute;digos de acceso!',
 'info_comment_lire_tableau' => 'Como leer este cuadro',
 'info_config_suivi' => 'Si esta direcci&oacute;n corresponde a una lista de correo, puedes idicar aqu&iacute; abajo la direcci&oacute;n en la cual los participantes al sitio pueden inscribirse. Esta direcci&oacute;n puede ser una URL (por ejemplo la p&aacute;gina de inscripci&oacute;n a la lista por la web), o una direcci&oacute;n e-mail con un asunto espec&iacute;fico (por ejemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<MODIF> Puedes recibir automaticamente, por correo electr&oacute;nico, los anuncios acerca de la actividad editorial del sitio. Para esto, te puedes suscribir a la lista de correo siguiente:',
+'info_config_suivi_explication' => 'Puedes suscribirte a la lista de correo de este sitio. Recibir&aacute;s por correo electr&oacute;nico los anuncios de art&iacute;culos y de bereves propuestas a la publicaci&oacute;n.',
 'info_confirmer_passe' => 'Confirmar la nueva contrase&ntilde;a:',
 'info_connexion_base' => 'Segunda etapa: <B>tentativa de conexi&oacute;n a la base </B>',
 'info_connexion_ldap_ok' => 'La conexi&oacute;n LDAP ha funcionado.</B><P> Puedes pasar a le etapa siguiente.',
@@ -739,6 +741,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_nouveaux_message' => 'Nuevos mensajes',
 'info_nouveaux_messages' => 'Tienes @total_messages@ mensajes nuevos ',
 'info_nouvel_article' => 'Nuevo art&iacute;culo',
+'info_nouvelle_traduction' => 'Nueva traducci&oacute;n:',
 'info_numero_article' => 'Art&iacute;culo:',
 'info_obligatoire_02' => '[Obligatorio]',
 'info_option_email' => 'Cuando un/una visitante env&iacute;a un nuevo mensaje en un foro asociado a un art&iacute;culo, el autor/a puede ser notificado por correo electr&oacute;nico. &iquest;Deseas utilizar esta opci&oacute;n?',
@@ -1327,8 +1330,8 @@ Debes intentar',
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
-'texte_jeu_caractere' => 'Esta opci&oacute;n es &uacute;til si tu sitio debe mostrar alfabetos diferentes al romano (u "occidental") y sus derivados.
-En ese caso, hay que cambiar el reglaje por defecto para utilizar un juego de caracteres apropiado. No olvides tampoco adaptar el sitio p&uacute;blico en consecuencia (baliza <tt>#CHARSET</tt>).',
+'texte_jeu_caractere' => 'Esta opci&oacute;n es &uacute;til si tu sitio debe visualizar  alfabetos diferentes del alfabeto romano (u &laquo;occidental&raquo;) y sus derivados.
+En ese caso, puede ser preferible cambiar el reglaje por omisi&oacute;n para utilizar un juego de caracteres apropiado. En todo caso, se aconseja hacer pruebas para encontrar una soluci&oacute;n satisfactoria. Si modificas este par&aacute;metro, conviene adaptar el sitio p&uacute;blico en consecuencia (baliza <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Este reglaje no tiene efecto retroactivo. Por lo tanto, los textos incluidos anteriormente pueden mostrarse incorrectamente despu&eacute;s de una modificaci&oacute;n del reglaje. En todos los casos, puedes, sin riesgos, volver a la configuraci&oacute;n anterior.',
 'texte_lien_hypertexte' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en la Web, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
 'texte_liens_sites_syndiques' => 'Los enlaces salidos de los sitios sindicados pueden ser bloqueados a priori; el ajuste indicado a continuaci&oacute;n se refiere al ajuste por defecto de los sitios sindicados despu&eacute;s de su creaci&oacute;n. De todos modos, posteriormente se puede desbloquear cada enlace individualmente, o escoger, sitio a sitio, bloquear los enlaces que viene de tal o cual sitio.',
