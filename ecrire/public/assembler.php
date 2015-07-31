@@ -337,22 +337,23 @@ function message_erreur_404 ($erreur= "") {
 
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
-function recuperer_fond($fond, $contexte=array()){
-	define ('_INC_PUBLIC', 1); // on est peut etre dans l'espace privé au moment de l'appel
-	//$contexte = array_merge($contexte,array('fond'=>$fond));
-	ob_start();
+function recuperer_fond($fond, $contexte=array()) {
+	// on est peut etre dans l'espace prive au moment de l'appel
+	define ('_INC_PUBLIC', 1);
+
 	$page = inclure_page($fond, $contexte);
-	if ($page['process_ins'] == 'html')
-		echo $page['texte'];
-	else
+
+	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+		ob_start();
 		eval('?' . '>' . $page['texte']);
+		$page['texte'] = ob_get_contents(); 
+		ob_end_clean();
+	}
 
 	if ($page['lang_select'] === true)
 		lang_dselect();
 
-	$page = ob_get_contents(); 
-	ob_end_clean();
-	return $page;
+	return $page['texte'];
 }
 
 ?>
