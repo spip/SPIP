@@ -86,28 +86,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Activar o abaixo-assinado',
 'bouton_radio_afficher' => 'Exibir',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Aparecer na lista dos redactores ligados',
-'bouton_radio_articles_futurs' => 'aos futuros artigos unicamente (não há acção sobre a base de dados) ',
-'bouton_radio_articles_tous' => 'a todos os artigos sem excepção',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'a todos os artigos, excepto aqueles cujo fórum está desactivado',
 'bouton_radio_desactiver_messagerie' => 'Desactivar a caixa de correio',
-'bouton_radio_enregistrement_obligatoire' => 'Registo obrigatório (os
-utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes de
- poderem enviar contribuições).',
 'bouton_radio_envoi_annonces_adresse' => 'Enviar os anúncios para o endereço:',
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista das novidades',
-'bouton_radio_moderation_priori' => 'Moderação a  priori (as
- contribuições aparecem publicamente só depois da validação pelos
- administradores). ',
-'bouton_radio_modere_abonnement' => 'moderado com assinatura',
-'bouton_radio_modere_posteriori' => 'moderado a posteriori',
 'bouton_radio_modere_priori' => 'moderado a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Não aparecer na lista dos redactores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Não enviar anúncios editoriais',
 'bouton_radio_non_syndication' => 'Não há vinculação',
 'bouton_radio_pas_petition' => 'Não há abaixo-assinado',
 'bouton_radio_petition_activee' => 'Abaixo-assinado activado',
-'bouton_radio_publication_immediate' => 'Publicação imediata das mensagens
- (as contribuições afixam-se logo que são enviadas, os administradores podem suprimi-las depois).',
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo-assinado',
 'bouton_radio_syndication' => 'Vinculação',
 'bouton_redirection' => 'REDIRIGIR',
@@ -250,14 +237,12 @@ ou da rede',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modificar esta rubrica',
 'icone_modifier_site' => 'Modificar este sítio',
-'icone_poster_message' => 'Enviar uma mensagem ',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Referenciar um novo sítio',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'voltar',
 'icone_retour_article' => 'Voltar ao artigo',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Seguimento do fórum público : @nb_forums@ contribuição(ões)',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir o cookie de correspondência',
 'icone_supprimer_groupe_mots' => 'Suprimir este grupo',
@@ -277,8 +262,6 @@ ou da rede',
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Pode activar um <b>cookie de correspondência</b>, o que lhe
  permitirá passar facilmente do sítio público ao sítio privado ',
-'info_activer_forum_public' => '<i>Para activar os fóruns públicos, favor escolher o seu modo
-  de moderação por defeito </i>', # MODIF
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
@@ -306,7 +289,6 @@ ou da rede',
 'info_ajouter_rubrique' => 'Acrescentar uma rubrica a administrar :',
 'info_annonce_nouveautes' => 'Anúncio das novidades',
 'info_anterieur' => 'anterior',
-'info_appliquer_choix_moderation' => 'Aplicar esta escolha de moderação :',
 'info_article' => 'artigo',
 'info_article_2' => 'artigos',
 'info_article_a_paraitre' => 'Os artigos pós-datados a publicar',
@@ -351,10 +333,6 @@ ou da rede',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Se este endereço corresponder a uma mailing-list, pode indicar, a seguir, o endereço no qual os participantes no sítio podem inscrever-se. Este endereço pode ser uma URL (por exemplo a página de inscrição na lista pela Web), ou um endereço email com um assunto específico (por exemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste sítio. Receberá então, por correio electrónico, os anúncios de artigos e de notícias propostos para publicação.',
 'info_confirmer_passe' => 'Confirmar esta nova palavra-passe',
@@ -385,9 +363,6 @@ ou da rede',
 'info_derniere_etape' => 'Última etapa : <b>Acabou !', # MODIF
 'info_derniere_syndication' => 'A última vinculação deste sítio foi efectuada a',
 'info_derniers_articles_publies' => 'Os seus últimos artigos publicados em linha',
-'info_desactiver_forum_public' => 'Desactivar a utilização dos fóruns
- públicos. Os fóruns públicos poderão ser autorizados caso a caso
- nos artigos ; serão proibidos nas rubricas, notícias, etc.',
 'info_desactiver_messagerie_personnelle' => 'Pode activar ou desactivar o seu correio pessoal neste sítio.',
 'info_descriptif' => 'Descrição:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -398,7 +373,6 @@ ou da rede',
 'info_email_webmestre' => 'Endereço e-mail do webmestre (opcional)',
 'info_entrer_code_alphabet' => 'Insira o código do alfabeto a utilizar :',
 'info_envoi_email_automatique' => 'Envio automático de mails',
-'info_envoi_forum' => 'Envio dos fóruns aos autores dos artigos',
 'info_envoyer_maintenant' => 'Enviar agora',
 'info_etape_suivante' => 'Passar para a seguinte etapa',
 'info_etape_suivante_1' => 'Pode passar para a etapa seguinte',
@@ -410,7 +384,6 @@ ou da rede',
  a uma <i>mailing-list</i> dos redactores, o anúncio dos pedidos de
  publicação e das validações de artigos.',
 'info_fichiers_authent' => 'Ficheiros de autenticação « .htpasswd »',
-'info_fonctionnement_forum' => 'Funcionamento do fórum :',
 'info_forum_administrateur' => 'fórum dos administradores',
 'info_forum_interne' => 'fórum interno',
 'info_forum_ouvert' => 'No espaço privado do sítio, um fórum está aberto a todos
@@ -429,7 +402,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
 'info_gauche_suivi_forum' => 'A página de <i>acompanhamento dos fóruns </i> é um instrumento de gestão do seu sítio (e não um espaço de discussão ou de redacção). Exibe todas as contribuições do fórum público deste artigo e permite-lhe gerir essas contribuições. ', # MODIF
-'info_gauche_suivi_forum_2' => 'A página <i>acompanhamento dos fóruns </i> é um instrumento de gestão do seu sítio (e não um espaço de discussão ou de redacção). Exibe todas as contribuições do fórum público deste artigo e permite-lhe gerir essas contribuições. ', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Encontrará aqui os visitantes registados
  no espaço público do sítio (fóruns por assinatura).',
 'info_generation_miniatures_images' => 'Geração de miniaturas das imagens',
@@ -462,11 +434,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_lien_hypertexte' => 'Vínculo hipertexto :',
 'info_liens_syndiques_1' => 'laços vinculados',
 'info_liens_syndiques_2' => 'estão à espera de validação',
-'info_liens_syndiques_3' => 'fóruns',
-'info_liens_syndiques_4' => 'são',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'é',
-'info_liens_syndiques_7' => 'à espera de validação',
 'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 'info_login_existant' => 'Este login já existe.',
 'info_login_trop_court' => 'Login demasiado curto.',
@@ -484,7 +451,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  antes neste sítio: a sua base de dados corre o risco de se perder
  e o seu sítio já não funcionará .<br />{{Re-instalar os
  ficheiros de SPIP.}}', # MODIF
-'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamento por defeito dos fóruns públicos',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -533,9 +499,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_numero_article' => 'ARTIGO NÚMERO :',
 'info_obligatoire_02' => '[Obigatório]',
 'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do site público',
-'info_option_email' => 'Quando um visitante do sítio deixa uma nova mensagem no fórum
- ligado a um artigo, os autores do artigo podem ser
- avisados por e-mail. Deseja utilizar essa opção ?', # MODIF
 'info_option_faire_suivre' => 'Fazer seguir as mensagens dos fóruns para os autores dos artigos',
 'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição dos visitantes',
 'info_option_ne_pas_faire_suivre' => 'Não fazer seguir as mensagens dos fóruns',
@@ -549,7 +512,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_par_nombre_article' => '(por número de artigos)', # MODIF
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'não há fórum',
 'info_passe_trop_court' => 'Palavra-passe demasiado curta',
 'info_passes_identiques' => 'As duas palavras-passe não são idênticas.',
 'info_pense_bete_ancien' => 'Os seus antigos memorandos', # MODIF
@@ -594,8 +556,6 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'As palavras deste grupo podem ser atribuidas por :',
 'info_racine_site' => 'Raiz do sítio',
 'info_recharger_page' => 'Favor voltar a carregar esta página daqui a pouco.',
@@ -727,7 +687,6 @@ numa cor que indica o seu estado:',
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Aceitar as inscrições',
-'item_activer_forum_administrateur' => 'Activar o fórum dos administradores',
 'item_activer_messages_avertissement' => 'Activar as mensagens de aviso',
 'item_administrateur_2' => 'administrador',
 'item_afficher_calendrier' => 'Exibir o calendário',
@@ -742,10 +701,7 @@ numa cor que indica o seu estado:',
 'item_choix_non_generation_miniature' => 'Não gerar miniaturas das imagens.',
 'item_choix_redacteurs' => 'os redactores',
 'item_choix_visiteurs' => 'os visitadores do sítio público',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Criar os ficheiros .htpasswd',
-'item_desactiver_forum_administrateur' => 'Desactivar o fórum dos administradores',
 'item_gerer_annuaire_site_web' => 'Gerir um anuário de sítios Web',
 'item_gerer_statistiques' => 'Gerir as estatísticas',
 'item_limiter_recherche' => 'Limitar a pesquisa às informações contidas no seu sítio',
@@ -765,8 +721,6 @@ numa cor que indica o seu estado:',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Não impedir os laços resultantes da vinculação',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Não criar estes ficheiros',
 'item_non_gerer_annuaire_site_web' => 'Desactivar o anuário de sítios Web',
 'item_non_gerer_statistiques' => 'Não gerir as estatísticas',
@@ -954,7 +908,6 @@ numa cor que indica o seu estado:',
 'taille_cache_vide' => 'A cache está vazia.',
 'taille_repertoire_cache' => 'Tamanho do directório cache',
 'text_article_propose_publication' => 'Artigo proposto para publicação. Não hesite em dar a sua opinião graças ao fórum ligado a este artigo (no fundo da página).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP não aceitam nenhum acesso anónimo. Nesse caso, é preciso especificar um identificador de acesso inicial a fim de poder depois procurar informações no anuário. Na maior parte dos casos, porém, os seguintes campos poderão ser deixados vazios.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conteúdo da base de dados,
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, deverá lançar a
@@ -1012,7 +965,6 @@ que alguns elementos dos artigos não são utilizados.
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexação',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Os artigos e notícias seguintes estão propostos para publicação. Não hesite em dar a sua opinião graças aos fóruns que lhes estão ligados.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Pode enriquecer a paginação do seu texto, utilizando « atalhos tipográficos ».',
 'texte_fichier_authent' => '<b>SPIP deverá criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repertório<tt>ecrire/data/<tt> ?</b><p>
   Estes ficheiros podem servir-lhe para restringir o acesso aos autores
@@ -1167,8 +1119,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_cadre_afficher_article' => 'Exibir os artigos',
 'titre_cadre_afficher_traductions' => 'Exibir o estado das traduções para estas línguas:',
 'titre_cadre_ajouter_auteur' => 'ACRESCENTAR UM AUTOR :',
-'titre_cadre_forum_administrateur' => 'Fórum privado dos administradores',
-'titre_cadre_forum_interne' => 'Fórum interno',
 'titre_cadre_interieur_rubrique' => 'Dentro da rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1177,7 +1127,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuração do sítio',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Configuração dos grupos de palavras-chave',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuração do sítio',
@@ -1187,7 +1136,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_dernier_article_syndique' => 'Últimos artigos vinculados',
 'titre_documents_joints' => 'Documentos anexados',
 'titre_evolution_visite' => 'Evolução das visitas',
-'titre_forum_suivi' => 'Acompanhamento dos fóruns',
 'titre_gauche_mots_edit' => 'PALAVRA NÚMERO :',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1216,7 +1164,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_documents_liste' => 'Os documentos das rubricas',
 'titre_page_forum' => 'Fórum dos administradores',
 'titre_page_forum_envoi' => 'Enviar uma mensagem',
-'titre_page_forum_suivi' => 'Acompanhamento dos fóruns',
 'titre_page_index' => 'O seu espaço privado',
 'titre_page_message_edit' => 'Redigir uma mensagem',
 'titre_page_messagerie' => 'O seu correio',

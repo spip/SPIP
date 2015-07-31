@@ -85,29 +85,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Aktywacja ogłoszeń',
 'bouton_radio_afficher' => 'Pokaż',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Pojawić się na liście zalogowanych redaktorów',
-'bouton_radio_articles_futurs' => 'wyłącznie do przyszłych artykułów (brak działania na bazie danych).',
-'bouton_radio_articles_tous' => 'do wszystkich artykułów bez wyjątków.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'do wszystkich artykułów z wyjątkiem tych z nieczynnym forum.',
 'bouton_radio_desactiver_messagerie' => 'Dezaktywuj pocztę',
-'bouton_radio_enregistrement_obligatoire' => 'Obowiązkowa rejestracja (
-  użytkownicy muszą się zapisać przez podanie adresu e-mail
-  aby mieć możliwość zamieszczania postów).',
 'bouton_radio_envoi_annonces_adresse' => 'Wysyłaj ogłoszenia na adres :',
 'bouton_radio_envoi_liste_nouveautes' => 'Wysyłaj najnowszą listę newsów',
-'bouton_radio_moderation_priori' => 'Uprzednia moderacja (
- posty będą się ukazywać dopiero po ich zatwierdzeniu przez
- administratorów).',
-'bouton_radio_modere_abonnement' => 'na abonament',
-'bouton_radio_modere_posteriori' => 'moderacja a posteriori',
 'bouton_radio_modere_priori' => 'moderacja a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nie pokazuj w liście redaktorów',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysyłaj żadnych zawiadomień redakcyjnych',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
 'bouton_radio_pas_petition' => 'Wyłącz ogłoszenia',
 'bouton_radio_petition_activee' => 'Ogłoszenia włączone',
-'bouton_radio_publication_immediate' => 'Natychmiastowa publikacja wiadomości
- (posty będą się ukazywać w momencie ich wysłania, administratorzy mogą
- je później usunąć).',
 'bouton_radio_supprimer_petition' => 'Usuń ogłoszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
 'bouton_redirection' => 'PRZEKIERUJ',
@@ -248,14 +234,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Zmień ten dział',
 'icone_modifier_site' => 'Zmień tę stronę',
-'icone_poster_message' => 'Napisz wiadomość',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Nowy link do strony',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Powrót',
 'icone_retour_article' => 'Powrót do artykułu',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Śledź wątek forum publicznego: @nb_forums@',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Usuń cookies korespondencji',
 'icone_supprimer_groupe_mots' => 'Usuń tę grupę',
@@ -275,7 +259,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Możesz uaktywnić <b>cookies korespondecji</b>, co ci
  pozwoli przechodzić łatwo pomiędzy stroną publiczną a prywatną.',
-'info_activer_forum_public' => '<i>Aby aktywować forum publiczne, wybierz domyślny sposób moderacji</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ten administrator zarządza następującymi działami:',
 'info_admin_gere_toutes_rubriques' => 'Ten administrator zarządza <b>wszystkimi działami</b>.',
@@ -303,7 +286,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Dodaj dział do zarządzania :',
 'info_annonce_nouveautes' => 'Zapowiedzi najnowszych newsów',
 'info_anterieur' => 'poprzedni',
-'info_appliquer_choix_moderation' => 'Wybierze ten sposób moderowania:',
 'info_article' => 'artykuł',
 'info_article_2' => 'artykuły',
 'info_article_a_paraitre' => 'Artykuły przeterminowane do opublikowania',
@@ -348,10 +330,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Jeśli ten adres odpowiada liście subskrypcyjnej, możecie wpisać poniżej adres, za któego pomocą uczestnicy serwisu mogą się zapisać. Adres ten może być URL-em (np. stroną służącą do zapisywania się na listę przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@dany_adres@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Możesz automatycznie, za pomocą poczty elektronicznej otrzymywać ogłoszenia dotyczące aktywności redakcyjnej tego serwisu. W tym celu powinnieneś się zapisać na listę mailową.',
 'info_confirmer_passe' => 'Potwierdź nowe hasło:',
@@ -382,9 +360,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Zakończone z sukcesem!',
 'info_derniere_syndication' => 'Ostatnia syndykacja tego serwisu została dokonana',
 'info_derniers_articles_publies' => 'Twoje ostatnie opublikowane artykuły',
-'info_desactiver_forum_public' => 'Wyłącz możliwość korzystania z forum
- publicznego. Forum publiczne będzie można w pewnych przypadkach aktywować
- dołączając je do określonych artykułów ; wyłączenie będzie dotyczyło przede wszystkim działów i skrótów itd.',
 'info_desactiver_messagerie_personnelle' => 'Możesz włączyć lub wyłączyć wewnętrzną pocztę w tym serwisie.',
 'info_descriptif' => 'Opis:',
 'info_desinstaller_plugin' => 'usuń dane i wyłącz plugina',
@@ -395,7 +370,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => 'Adres e-mail webmastera (nieobowiązkowo)',
 'info_entrer_code_alphabet' => 'Wpisz kodowanie alfabetu :',
 'info_envoi_email_automatique' => 'Automatyczna wysyłka maili',
-'info_envoi_forum' => 'Wysyłka forum do autorów artykułów',
 'info_envoyer_maintenant' => 'Wyślij teraz',
 'info_etape_suivante' => 'Przejdź do następnego kroku',
 'info_etape_suivante_1' => 'Możesz przejść do następnego kroku.',
@@ -407,7 +381,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    na listę mailingową redaktorów, informację-zapytanie
   o sprawdzenie i publikację artykułów.',
 'info_fichiers_authent' => 'Plik uwierzytelniający « .htpasswd »',
-'info_fonctionnement_forum' => 'Funkcjonowanie forum :',
 'info_forum_administrateur' => 'forum administratorów',
 'info_forum_interne' => 'forum wewnętrzne',
 'info_forum_ouvert' => 'W strefie prywatnej, forum jest otwarte dla wszystkich
@@ -428,7 +401,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_numero_auteur' => 'AUTOR NUMER',
 'info_gauche_statistiques_referers' => 'Ta strona wyświetla listę <i>odnośników</i>, to znaczy stron które zawierają łącza prowadzące do Twojej strony, które ktoś użył wczoraj lub dzisiaj : lista jest zerowana co 24 godziny.',
 'info_gauche_suivi_forum' => 'Strona <i>obserwacji forum</i> jest narzędziem zarządzania stroną (nie, miejscem dyskusji czy redakcji). Wyświetla ona wszystkie komentarze do danego artykułu na forum publicznym i pozwala edytować owe komentarze.',
-'info_gauche_suivi_forum_2' => 'Strona  <i>archiwum forum</i> jest narzędziem administracji stroną (a nie miejscem dyskusji czy redagowania). Wyświetla ona wszystkie komentarze forum z całego serwisu, zarówno te ze stron publicznych i strefy prywatnej i pozwala na zarządzanie tymi komentarzami.',
 'info_gauche_visiteurs_enregistres' => 'Znajdziesz tu gości zarejestrowanych
  w strefie publicznej strony (abonament forum).',
 'info_generation_miniatures_images' => 'Generowanie miniaturek obrazków',
@@ -461,11 +433,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_lien_hypertexte' => 'Hiperłącze:',
 'info_liens_syndiques_1' => 'linki syndykowane',
 'info_liens_syndiques_2' => 'oczekujące zatwierdzenia.',
-'info_liens_syndiques_3' => 'forum',
-'info_liens_syndiques_4' => 'są',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'jest',
-'info_liens_syndiques_7' => 'w trakcie zatwierdzania.',
 'info_liste_redacteurs_connectes' => 'Lista zalogowanych redaktorów',
 'info_login_existant' => 'Podany login już istnieje.',
 'info_login_trop_court' => 'Za krótki login.',
@@ -483,7 +450,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   twoja baza danych może zostać zniszczona
   lub popsuta i strona przestanie działać.<br />{{Zainstaluj ponownie
   pliki SPIP.}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Domyślny tryb funkcjonowania forum publicznego',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -532,9 +498,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTYKUŁ NUMER :',
 'info_obligatoire_02' => '[Obowiązkowo]',
 'info_option_accepter_visiteurs' => 'Zaakceptuj zapisy czytelników Twojej strony',
-'info_option_email' => 'Kiedy odwiedzający stronę zostawią na forum wiadomość
-  związaną z artykułem, autorzy artykułu mogą zostać
-  poinformowani o tym przez e-mail. Czy chcesz zastosować tę opcję?', # MODIF
 'info_option_faire_suivre' => 'Przesłać wiadomości tego forum do autorów artykułów',
 'info_option_ne_pas_accepter_visiteurs' => 'Wyłącz zapisy czytelników serwisu',
 'info_option_ne_pas_faire_suivre' => 'Nie przesyłać wiadomości tego forum',
@@ -548,7 +511,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_nombre_article' => '(wg liczby artykułów)',
 'info_par_statut' => 'wg statusu',
 'info_par_tri' => '\'(par @tri@)\'',
-'info_pas_de_forum' => 'brak forum',
 'info_passe_trop_court' => 'Za krótkie hasło.',
 'info_passes_identiques' => 'Hasła nie są identyczne.',
 'info_pense_bete_ancien' => 'Twoje stare notatki', # MODIF
@@ -593,8 +555,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Słowa kluczowe w tej grupie mogą być dopisywane przez:',
 'info_racine_site' => 'Rdzeń strony',
 'info_recharger_page' => 'Proszę za chwilę ponownie załadować tę stronę.',
@@ -725,7 +685,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'intem_redacteur' => 'redaktor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Zaakceptuj zapisy',
-'item_activer_forum_administrateur' => 'Aktywuj forum administratorów',
 'item_activer_messages_avertissement' => 'Aktywuj komunikaty ostrzegawcze',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Wyświetl kalendarz',
@@ -740,10 +699,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_choix_non_generation_miniature' => 'Nie generuj miniaturek obrazków.',
 'item_choix_redacteurs' => 'redaktorzy',
 'item_choix_visiteurs' => 'odwiedzający stronę publiczną',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Utwórz pliki .htpasswd',
-'item_desactiver_forum_administrateur' => 'Wyłącz forum administratorów',
 'item_gerer_annuaire_site_web' => 'Zarządzaj katalogiem stron www',
 'item_gerer_statistiques' => 'Zarządzaj statystykami',
 'item_limiter_recherche' => 'Ogranicz szukanie do informacji zawartych na Twojej stronie',
@@ -763,8 +719,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_non_autoriser_syndication_integrale' => 'Wysyłanie podsumowania',
 'item_non_bloquer_liens_syndiques' => 'Nie blokuj łączy pochodzących z syndykacji',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Nie twórz tych plików',
 'item_non_gerer_annuaire_site_web' => 'Wyłącz katalog stron www',
 'item_non_gerer_statistiques' => 'Nie zarządzaj statystykami',
@@ -952,7 +906,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'taille_cache_vide' => 'Cache jest pusty.',
 'taille_repertoire_cache' => 'Wielkość katalogu cache',
 'text_article_propose_publication' => 'Artykuł zatwierdzony do publikacji. Nie wahaj się wyrazić swoją opinię przez forum dotyczące tego artykułu (na dole strony).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Niektóre serwery LDAP nie akceptują dostępu anonimowego. W tym przypadku należy podać indentyfikator dostępu, aby móc przeszukiwać katalog. Niemniej, w większości przypadków poniższe pola powinny pozostać puste.',
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>całą</i> zawartość bazy danych,
 włącznie z <i>wszystkimi</i> parametrami dostępu dla redaktorów i administartorów. Po jej zastosowaniu powinieneś
@@ -1012,7 +965,6 @@ multimediów, itd.) do artykułów bądź działów. Te pliki
 'texte_effacer_donnees_indexation' => 'Wymaż dane pochodzące z indeksowania',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Następujące artykuły i newsy zostały zatwierdzone do publikacji. Nie wahaj się wyrazić swoją opinię na dołączonych do nich forach.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Możesz wzbogacić układ Twojego tekstu « skrótami typograficznymi ».',
 'texte_fichier_authent' => '<b>Czy SPIP ma stworzyć specjalne pliki <tt>.htpasswd</tt>
   i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p>
@@ -1154,8 +1106,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_cadre_afficher_article' => 'Pokaż artykuły:',
 'titre_cadre_afficher_traductions' => 'Wyświetl stan przekładów dla następujących języków:',
 'titre_cadre_ajouter_auteur' => 'DODAJ ARTYKUŁY:',
-'titre_cadre_forum_administrateur' => 'Prywatne forum administratorów',
-'titre_cadre_forum_interne' => 'Forum wewnętrzne',
 'titre_cadre_interieur_rubrique' => 'Artykuł znajduje się w dziale',
 'titre_cadre_numero_auteur' => 'AUTOR NUMER',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1164,7 +1114,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfiguracja strony',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Konfiguracja grup słów kluczowych',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfiguracja strony',
@@ -1174,7 +1123,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_dernier_article_syndique' => 'Ostatnio syndykowane artykuły',
 'titre_documents_joints' => 'Załączniki',
 'titre_evolution_visite' => 'Ewolucja odwiedzin',
-'titre_forum_suivi' => 'Archiwum forum',
 'titre_gauche_mots_edit' => 'SŁOWO NUMER :',
 'titre_groupe_mots' => 'GRUPY SŁÓW KLUCZOWYCH:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1203,7 +1151,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_page_documents_liste' => 'Załączniki',
 'titre_page_forum' => 'Forum administratorów',
 'titre_page_forum_envoi' => 'Wyślij wiadomość',
-'titre_page_forum_suivi' => 'Archiwum forum',
 'titre_page_index' => 'Twój obszar prywatny',
 'titre_page_message_edit' => 'Napisz wiadomość',
 'titre_page_messagerie' => 'Twoje wiadomości',

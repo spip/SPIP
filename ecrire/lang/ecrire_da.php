@@ -85,25 +85,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Tillad appeller',
 'bouton_radio_afficher' => 'Vis',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Medtag i listen over tilknyttede redaktører',
-'bouton_radio_articles_futurs' => 'alene for fremtidige artikler (ingen opdatering af databasen).',
-'bouton_radio_articles_tous' => 'for alle artikler uden undtagelse.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'for alle artikler med aktivt tilknyttet forum.',
 'bouton_radio_desactiver_messagerie' => 'Slå meddelelsesfunktion fra',
-'bouton_radio_enregistrement_obligatoire' => 'Tvungen registrering (
-		brugere skal give sig til kende ved at oplyse deres e-mail-adresse
-		for at kunne komme med indlæg).',
 'bouton_radio_envoi_annonces_adresse' => 'Send nyheder til adressen:',
 'bouton_radio_envoi_liste_nouveautes' => 'Send seneste nyhedsliste',
-'bouton_radio_moderation_priori' => 'Forhåndsgodkendelse (bidrag vises først efter at de er godkendt af administratorer).',
-'bouton_radio_modere_abonnement' => 'Kun for abonnenter (bidragydere skal oplyse e-mail-adresse, før de kan indsende bidrag)',
-'bouton_radio_modere_posteriori' => 'Efterfølgende godkendelse (bidrag er straks synlige men en administrator kan senere slette dem)',
 'bouton_radio_modere_priori' => 'Forhåndsgodkendelse',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Medtag ikke i listen over tilknyttede redaktører',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Send ingen redaktionelle nyheder',
 'bouton_radio_non_syndication' => 'Ingen syndikering',
 'bouton_radio_pas_petition' => 'Ingen appeller',
 'bouton_radio_petition_activee' => 'Appelfunktion slået til',
-'bouton_radio_publication_immediate' => 'Indlæg offentliggøres straks (bidrag vises straks efter at de er sendt, administratorer kan slette dem senere).',
 'bouton_radio_supprimer_petition' => 'Slet appellen',
 'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'VIDERESTIL',
@@ -244,14 +234,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Ret dette afsnit',
 'icone_modifier_site' => 'Ret dette websted',
-'icone_poster_message' => 'Opret meddelelse',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Ny webstedshenvisning',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tilbage',
 'icone_retour_article' => 'Tilbage til artikel',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Opfølgning i offentligt forum: @nb_forums@ bidrag',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Slet cookier',
 'icone_supprimer_groupe_mots' => 'Slet denne gruppe',
@@ -270,7 +258,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_site' => '1 websted',
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Du kan installere en <b>administrationscookie</b>, som tillader dig at skifte nemt mellem det offentlige websted og dit private afsnit.',
-'info_activer_forum_public' => '<i>For at åbne op for offentlige forummer, skal du vælge, hvordan deres godkendelsesprocedure skal være som standard:</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Denne administrator administrerer følgende afsnit:',
 'info_admin_gere_toutes_rubriques' => 'Denne administrator administrerer <b>alle afsnit</b>.',
@@ -298,7 +285,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Tilføj endnu et afsnit at administrere:',
 'info_annonce_nouveautes' => 'Seneste annonceringer',
 'info_anterieur' => 'forrige',
-'info_appliquer_choix_moderation' => 'Anvend denne godkendelsesprocedure:',
 'info_article' => 'artikel',
 'info_article_2' => 'artikler',
 'info_article_a_paraitre' => 'Fremdaterede artikler der skal offentliggøres',
@@ -343,10 +329,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Hvis denne adresse svarer til en postliste, kan du nedefor angive, hvor webstedets besøgende kan lade sig registrere. Denne adresse kan være en  URL (f.eks. siden med tilmelding til listen via web), eller en e-mail adresse med et særligt emne tilknyttet (f.eks.: <tt>@adresse_suivi@?subject=abonner</tt>):',
 'info_config_suivi_explication' => 'Du kan abonnere på dette websteds postliste. Du vil så via e-mail modtage annonceringer vedrørende artikler og nyheder, der er indsendt til offentliggørelse.',
 'info_confirmer_passe' => 'Bekræft ny adgangskode:',
@@ -377,8 +359,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Sidste skridt: <b>Det er overstået!',
 'info_derniere_syndication' => 'Sidste syndikering af dette websted blev udført den',
 'info_derniers_articles_publies' => 'Dine senest offentliggjorte artikler',
-'info_desactiver_forum_public' => 'Fravælg brugen af offentlige forummer. Der kan åbnes op for offentlige forummer fra gang til gang i forhold til artikler.
-De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_desactiver_messagerie_personnelle' => 'Du kan åbne eller lukke for personlige meddelelser på dette websted.',
 'info_descriptif' => 'Beskrivelse:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -389,7 +369,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_email_webmestre' => 'E-mail-adresse på webmaster (valgfrit)',
 'info_entrer_code_alphabet' => 'Indtast koden for det tegnsæt, der skal benyttes:',
 'info_envoi_email_automatique' => 'Automatisk e-mail-forsendelse',
-'info_envoi_forum' => 'Send indlæg i forummer til artiklernes forfattere',
 'info_envoyer_maintenant' => 'Send nu',
 'info_etape_suivante' => 'Gå til næste trin',
 'info_etape_suivante_1' => 'Du kan gå til næste trin.',
@@ -398,7 +377,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_exportation_base' => 'eksporter database til @archive@',
 'info_facilite_suivi_activite' => 'For at lette opfølgning på webstedets redaktionelle aktiviteter sender SPIP e-mails med anmodning om offentliggørelse og godkendelse til f.eks. redaktørens adresseliste.',
 'info_fichiers_authent' => 'Adgangskontrolfil ".htpasswd"',
-'info_fonctionnement_forum' => 'Forummets funktionsmåde:',
 'info_forum_administrateur' => 'administratorforum',
 'info_forum_interne' => 'internt forum',
 'info_forum_ouvert' => 'I det private afsnit af webstedet er der et forum åbent for alle registrerede redaktører. Nedenfor kan du åbne et ekstra forum alene for administratorer.',
@@ -414,7 +392,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_gauche_numero_auteur' => 'FORFATTER NUMMER:',
 'info_gauche_statistiques_referers' => 'Denne side viser en oversigt over <i>henvisende sider</i>, dvs. websteder der har linket til dit websted alene i dag. Faktisk nulstilles oversigten med 24 timers mellemrum.',
 'info_gauche_suivi_forum' => '<i>Forumopfølgning</i> er et administrationsværktøj (ikke et diskussions- eller redigeringsområde). Det viser alle indlæg i det offentlige forum knyttet til en bestemt artikel og giver dig mulighed for at administrere indlæggene.',
-'info_gauche_suivi_forum_2' => '<i>Forumopfølgning</i> er et administrationsværktøj (ikke et diskussions- eller redigeringsområde). Siden viser alle indlæg i webstedets forummer, både på det offentlige og det private område, og giver dig mulighed for at administrere indlæggene.',
 'info_gauche_visiteurs_enregistres' => 'Her finder du de besøgende, der er tilmeldt til webstedets offentlige afsnit (fora med tilmelding).',
 'info_generation_miniatures_images' => 'Dannelse af piktogrammer',
 'info_gerer_trad' => 'Danne link til oversættelse?',
@@ -444,11 +421,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_lien_hypertexte' => 'Hypertekst link:',
 'info_liens_syndiques_1' => 'syndikerede links',
 'info_liens_syndiques_2' => 'afventer godkendelse.',
-'info_liens_syndiques_3' => 'forummer',
-'info_liens_syndiques_4' => 'er',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'er',
-'info_liens_syndiques_7' => 'afventer godkendelse.',
 'info_liste_redacteurs_connectes' => 'Oversigt over tilknyttede reaktører',
 'info_login_existant' => 'Dette login findes allerede.',
 'info_login_trop_court' => 'Login for kort.',
@@ -462,7 +434,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_messagerie_interne' => 'Interne meddelelser',
 'info_mise_a_niveau_base' => 'SQL databaseopgradering',
 'info_mise_a_niveau_base_2' => '{{Advarsel!}} Du har installeret en version af SPIP-filer, der er ældre end dem, der var på webstedet i forvejen. Du risikerer at miste databasen og webstedet vil ikke fungere ordentligt mere.<br />{{Geninstraller SPIP-filerne.}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Standard funktionsmåde for offentlige forummer',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -512,7 +483,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Skal udfyldes]',
 'info_option_accepter_visiteurs' => 'Allow visitors registration from the public site', # NEW
-'info_option_email' => 'Når en besøgende på webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter få underretning om meddelelsen via e-mail. Ønsker du at bruge denne mulighed?', # MODIF
 'info_option_faire_suivre' => 'Videresend meddelelser i forummer til artiklernes forfattere',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuse visitor registration', # NEW
 'info_option_ne_pas_faire_suivre' => 'Videresend ikke meddelelser i forummer',
@@ -526,7 +496,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_par_nombre_article' => '(efter antal artiker)',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'intet forum',
 'info_passe_trop_court' => 'Adgangskode for kort.',
 'info_passes_identiques' => 'De to adgangskoder er ikke ens.',
 'info_pense_bete_ancien' => 'Dine gamle huskesedler', # MODIF
@@ -567,8 +536,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Nøgleord i denne grupe kan tildeles efter:',
 'info_racine_site' => 'Top',
 'info_recharger_page' => 'Vær venlig at genindlæse denne side om et øjeblik.',
@@ -700,7 +667,6 @@ i en farve, der angiver deres status:',
 'intem_redacteur' => 'redaktør',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Tillad tilmeldinger',
-'item_activer_forum_administrateur' => 'Slå funktionen administratorforum til',
 'item_activer_messages_avertissement' => 'Tillad advarselsmeddelelser',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Vis i kalenderen',
@@ -715,10 +681,7 @@ i en farve, der angiver deres status:',
 'item_choix_non_generation_miniature' => 'Dan ikke miniaturebilleder.',
 'item_choix_redacteurs' => 'redaktører',
 'item_choix_visiteurs' => 'besøgende på den offentlige websted',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Dan .htpasswd filer',
-'item_desactiver_forum_administrateur' => 'Slå funktionen administratorforum fra',
 'item_gerer_annuaire_site_web' => 'Vedligehold katalog over websteder',
 'item_gerer_statistiques' => 'Dan statistik',
 'item_limiter_recherche' => 'Begræns søgning til information på din eget websted',
@@ -738,8 +701,6 @@ i en farve, der angiver deres status:',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Undlad at spærre links til syndikerede websteder',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Dan ikke disse filer',
 'item_non_gerer_annuaire_site_web' => 'Vedligehold ikke katalog over websteder',
 'item_non_gerer_statistiques' => 'Dan ikke statistik',
@@ -927,7 +888,6 @@ i en farve, der angiver deres status:',
 'taille_cache_vide' => 'The cache is empty.', # NEW
 'taille_repertoire_cache' => 'Current size of the cache', # NEW
 'text_article_propose_publication' => 'Artiklen er sendt til offentliggørelse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst på siden).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Nogle LDAP-servere tillader ikke anonym adgang. I så fald må du angive en brugeridentifikation for senere at kunne søge efter information i kataloget. Men i de fleste tilfælde kan du lade de følgende felter stå tomme.',
 'texte_admin_effacer_01' => 'Denne kommando sletter <i>hele</i> indholdet i databasen,
 	herunder <i>hele</i> opsætningen for redaktører og administratorer. Når du har udført den, bør du 
@@ -980,7 +940,6 @@ i en farve, der angiver deres status:',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Følgende artikler og nyheder er foreslået offentliggjort. Tøv ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Du kan forbedre layoutet af teksten ved at benytte «typografiske koder».',
 'texte_fichier_authent' => '<b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
 		og <tt>.htpasswd-admin</tt> filer i kataloget @dossier@?</b><p>
@@ -1111,8 +1070,6 @@ i en farve, der angiver deres status:',
 'titre_cadre_afficher_article' => 'Vis artikler som er',
 'titre_cadre_afficher_traductions' => 'Vis oversættelsesstatus for følgende sprog:',
 'titre_cadre_ajouter_auteur' => 'TILFØJ FORFATTER:',
-'titre_cadre_forum_administrateur' => 'Administratorers private forum',
-'titre_cadre_forum_interne' => 'Internt forum',
 'titre_cadre_interieur_rubrique' => 'I afsnit',
 'titre_cadre_numero_auteur' => 'FORFATTER NUMMER',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1121,7 +1078,6 @@ i en farve, der angiver deres status:',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfigurering af webstedet',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Konfiguration af nøgleordsgrupper',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfigurering af webstedet',
@@ -1131,7 +1087,6 @@ i en farve, der angiver deres status:',
 'titre_dernier_article_syndique' => 'Senest syndikerede artikler',
 'titre_documents_joints' => 'Vedhæftede dokumenter',
 'titre_evolution_visite' => 'Udvikling i besøgstal',
-'titre_forum_suivi' => 'Opfølgning på forummer',
 'titre_gauche_mots_edit' => 'NØGLEORDSNUMMER:',
 'titre_groupe_mots' => 'NØGLEORDSGRUPPE:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1160,7 +1115,6 @@ i en farve, der angiver deres status:',
 'titre_page_documents_liste' => 'Dokumenter i afsnit',
 'titre_page_forum' => 'Administratorforum',
 'titre_page_forum_envoi' => 'Send meddelelse',
-'titre_page_forum_suivi' => 'Opfølgning på forummer',
 'titre_page_index' => 'Dit private område',
 'titre_page_message_edit' => 'Skriv meddelelse',
 'titre_page_messagerie' => 'Din meddelelsesfunktion',

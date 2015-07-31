@@ -85,29 +85,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Aktifkan petisi',
 'bouton_radio_afficher' => 'Tampilkan',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Muncul di daftar editor-editor yang terkoneksi',
-'bouton_radio_articles_futurs' => 'untuk artikel yang akan dipublikasikan di masa depan saja (tidak ada aksi di database).',
-'bouton_radio_articles_tous' => 'untuk semua artikel tanpa pengecualian.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'untuk semua artikel, terkecuali artikel yang forumnya dinonaktifkan.',
 'bouton_radio_desactiver_messagerie' => 'Non aktifkan sistem pesan',
-'bouton_radio_enregistrement_obligatoire' => 'Registrasi diperlukan (
-  pengguna harus mendaftarkan diri dengan memberikan alamat e-mailnya
-  sebelum dapat berkontribusi).',
 'bouton_radio_envoi_annonces_adresse' => 'Kirim pengumuman ke alamat:',
 'bouton_radio_envoi_liste_nouveautes' => 'Kirim daftar berita terbaru',
-'bouton_radio_moderation_priori' => 'Moderasi awal (
- kontribusi hanya akan ditampilkan setelah validasi
- oleh administrator).',
-'bouton_radio_modere_abonnement' => 'registrasi diperlukan',
-'bouton_radio_modere_posteriori' => 'moderasi akhir',
 'bouton_radio_modere_priori' => 'moderasi awal',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Jangan muncul di daftar editor-editor yang terkoneksi',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Jangan kirim pengumuman editorial apapun juga',
 'bouton_radio_non_syndication' => 'Tidak ada sindikasi',
 'bouton_radio_pas_petition' => 'Tidak ada petisi',
 'bouton_radio_petition_activee' => 'Petisi diaktifkan',
-'bouton_radio_publication_immediate' => 'Publikasi pesan segera
- (kontribusi akan ditampilkan sesegera mungkin setelah dikirimkan, kemudian
- administrator dapat menghapusnya).',
 'bouton_radio_supprimer_petition' => 'Hapus petisi',
 'bouton_radio_syndication' => 'Sindikasi:',
 'bouton_redirection' => 'MENGALIHKAN TUJUAN	',
@@ -248,14 +234,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modifikasi bagian ini',
 'icone_modifier_site' => 'Modifikasi situs ini',
-'icone_poster_message' => 'Kirim sebuah pesan',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Referensi sebuah situs baru',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Kembali',
 'icone_retour_article' => 'Kembali ke artikel',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Tindak lanjut dari forum umum: @nb_forums@ kontribusi',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Hapus cookie',
 'icone_supprimer_groupe_mots' => 'Hapus kelompok ini',
@@ -275,7 +259,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Anda apat mengaktifkan <b>cookie administrasi</b>, yang memperbolehkan anda
  untuk berpindah-pindah dengan mudah antara situs umum dan area pribadi.',
-'info_activer_forum_public' => '<i>Untuk mengaktifkan forum-forum umum, silakan pilih mode moderasi standar forum-forum tersebut:</I>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Administrator ini mengelola bagian-bagian berikut:',
 'info_admin_gere_toutes_rubriques' => 'Administrator ini mengelola <b>semua bagian</b>.',
@@ -303,7 +286,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Tambah sebuah bagian untuk dikelola:',
 'info_annonce_nouveautes' => 'Pengumuman-pengumuman berita terbaru',
 'info_anterieur' => 'sebelumnya',
-'info_appliquer_choix_moderation' => 'Terapkan pilihan moderasi ini:',
 'info_article' => 'artikel',
 'info_article_2' => 'artikel',
 'info_article_a_paraitre' => 'Artikel-artikel bertanggal yang akan dipublikasikan',
@@ -348,10 +330,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Jika alamat ini berkaitan dengan suatu daftar surat, anda dapat mengindikasikan di bawah alamat di mana pengunjung situs dapat mendaftarkan diri. Alamat ini dapat berupa URL (sebagai contoh halaman registrasi daftar surat melalui web), atau alamat e-mail dengan subyek yang spesifik (contoh: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Anda dapat berlangganan daftar surat situs ini. Anda akan menerima melalui e-mail secara otomatis, pengumuman-pengumuman yang berkenaan dengan artikel-artikel dan berita-berita yang dikirim untuk publikasi.',
 'info_confirmer_passe' => 'Konfirmasi kata sandi baru:',
@@ -382,9 +360,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Langkah terakhir: <b>Selesai!',
 'info_derniere_syndication' => 'Sindikasi terakhir situs ini dijalankan pada',
 'info_derniers_articles_publies' => 'Artikel-artikel terakhir anda yang dipublikasi',
-'info_desactiver_forum_public' => 'Non aktifkan penggunaan forum
-	umum. Forum umum dapat digunakan berdasarkan kasus per kasus untuk
-	artikel-artikel; dan penggunannya dilarang untuk bagian, berita, dll.',
 'info_desactiver_messagerie_personnelle' => 'Anda dapat mengaktifkan atau menonaktifkan sistem pesan pribadi anda di situs ini.',
 'info_descriptif' => 'Deskripsi:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -395,7 +370,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => 'Alamat e-mail webmaster (opsional)',
 'info_entrer_code_alphabet' => 'Masukkan kode set karakter yang akan digunakan:',
 'info_envoi_email_automatique' => 'Pengiriman otomatis',
-'info_envoi_forum' => 'Kirim forum ke penulis artikel',
 'info_envoyer_maintenant' => 'Kirim sekarang',
 'info_etape_suivante' => 'Lanjut ke langkah berikutnya',
 'info_etape_suivante_1' => 'Anda dapat pindah ke langkah selanjutnya.',
@@ -406,7 +380,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   SPIP dapat mengirimkan notifikasi melalui e-mail, ke daftar surat seorang editor,
   sebagai contoh permohonan publikasi dan validasi artikel.',
 'info_fichiers_authent' => 'Berkas ototentikasi ".htpasswd"',
-'info_fonctionnement_forum' => 'Operasi forum:',
 'info_forum_administrateur' => 'forum administrators',
 'info_forum_interne' => 'forum internal',
 'info_forum_ouvert' => 'Di area pribadi situs, sebuah forum terbuka untuk semua
@@ -424,7 +397,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_numero_auteur' => 'NOMOR PENULIS:',
 'info_gauche_statistiques_referers' => 'Halaman ini menampilkan daftar <i>pereferensi</I>, yakni situs-situs yang memuat tautan ke situs anda, hanya untuk kemarin dan hari ini: sesungguhnya daftar ini diperbaharui setiap 24 jam.',
 'info_gauche_suivi_forum' => 'Halaman <i>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
-'info_gauche_suivi_forum_2' => 'Halaman <i>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
 'info_gauche_visiteurs_enregistres' => 'Anda akan menemukan di sini para pengunjung
 	terdaftar di area umum situs (forum-forum berlangganan).',
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
@@ -457,11 +429,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_lien_hypertexte' => 'Tautan web:',
 'info_liens_syndiques_1' => 'tautan tersindikasi',
 'info_liens_syndiques_2' => 'validasi tertunda.',
-'info_liens_syndiques_3' => 'forum',
-'info_liens_syndiques_4' => 'adalah',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'adalah',
-'info_liens_syndiques_7' => 'validasi tertunda.',
 'info_liste_redacteurs_connectes' => 'Daftar editor-editor terkoneksi',
 'info_login_existant' => 'Log masuk ini sudah ada.',
 'info_login_trop_court' => 'Log masuk terlalu pendek.',
@@ -479,7 +446,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   di situs ini: database anda terancam hilang dan situs anda
   tidak akan bekerja sebagaimana mestinya lagi.<br>{{Instal kembali
   berkas-berkas SPIP}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Mode operasi standar forum-forum umum',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -528,9 +494,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'NOMOR ARTIKEL:',
 'info_obligatoire_02' => '[Dibutuhkan]',
 'info_option_accepter_visiteurs' => 'Izinkan registrasi pengunjung dari situs umum',
-'info_option_email' => 'Ketika seorang pengunjung situs mengirimkan sebuah pesan ke forum
-		yang terasosiasi dengan sebuah artikel, penulis artikel akan diinformasikan
-		melalui e-mail. Anda ingin menggunakan opsi ini?', # MODIF
 'info_option_faire_suivre' => 'Teruskan pesan forum ke penulis artikel',
 'info_option_ne_pas_accepter_visiteurs' => 'Tolak registrasi pengunjung',
 'info_option_ne_pas_faire_suivre' => 'Jangan teruskan pesan forum',
@@ -544,7 +507,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_nombre_article' => '(berdasarkan jumlah artikel)',
 'info_par_statut' => 'berdasarkan status',
 'info_par_tri' => '(Oleh @tri@)',
-'info_pas_de_forum' => 'tidak ada forum',
 'info_passe_trop_court' => 'Kata sandi terlalu pendek.',
 'info_passes_identiques' => 'Dua kata sandi tidak identik.',
 'info_pense_bete_ancien' => 'Memo-memo lama anda', # MODIF
@@ -589,8 +551,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Kata-kata kunci dalam kelompok ini dapat ditunjuk oleh:',
 'info_racine_site' => 'Root situs',
 'info_recharger_page' => 'Silakan buka kembali halaman ini beberapa saat lagi.',
@@ -722,7 +682,6 @@ dalam warna yang menunjukkan statusnya:',
 'intem_redacteur' => 'editor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Izinkan pendaftaran',
-'item_activer_forum_administrateur' => 'Aktifkan forum administrator',
 'item_activer_messages_avertissement' => 'Aktifkan pesan-pesan peringatan',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Tampilkan dalam kalender',
@@ -737,10 +696,7 @@ dalam warna yang menunjukkan statusnya:',
 'item_choix_non_generation_miniature' => 'Jangan buat gambar-gambar kecil.',
 'item_choix_redacteurs' => 'editor',
 'item_choix_visiteurs' => 'pengunjung situs umum',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Buat berkas .htpasswd',
-'item_desactiver_forum_administrateur' => 'Non aktifkan forum administrator',
 'item_gerer_annuaire_site_web' => 'Kelola direktori situs-situs web',
 'item_gerer_statistiques' => 'Kelola statistik',
 'item_limiter_recherche' => 'Batasi pencarian pada informasi yang terdapat di situs anda',
@@ -760,8 +716,6 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_autoriser_syndication_integrale' => 'Kirim ringkasan saja',
 'item_non_bloquer_liens_syndiques' => 'Jangan blokir tautan web yang berasal dari sindikasi',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Jangan buat berkas-berkas ini',
 'item_non_gerer_annuaire_site_web' => 'Non aktifkan direktori situs-situs web',
 'item_non_gerer_statistiques' => 'Jangan kelola statistik',
@@ -949,7 +903,6 @@ dalam warna yang menunjukkan statusnya:',
 'taille_cache_vide' => 'Cache kosong.',
 'taille_repertoire_cache' => 'Ukuran cache saat ini',
 'text_article_propose_publication' => 'Artikel yang dikirimkan untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang yang terlampir di artikel ini (di bagian bawah halaman).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Sejumlah server LDAP tidak mengizinkan akses anonim. Dalam hal ini anda harus memberikan satu pengidentifikasi akses awal agar bisa mencari informasi dalam direktori setelahnya. Walaupun demikian, dalam banyak kasus kolom-kolom berikut dapat dibiarkan kosong tidak terisi.',
 'texte_admin_effacer_01' => 'Perintah ini menghapus <i>semua</i> isi database,
 termasuk <i>semua</i> parameter akses untuk editor dan administrator. Setelah mengeksekusinya, anda sebaiknya
@@ -1010,7 +963,6 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Artikel-artikel dan berita-berita berikut dikirim untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang terlampir di dalamnya.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Anda dapat memperkaya tampilan teks anda dengan menggunakan «jalan pintas typografis».',
 'texte_fichier_authent' => '<b>Haruskah SPIP membuat berkas <tt>.htpasswd</tt>
   dan <tt>.htpasswd-admin</tt> dalam direktori @dossier@?</b><p>
@@ -1149,8 +1101,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_cadre_afficher_article' => 'Tampilkan artikel:',
 'titre_cadre_afficher_traductions' => 'Tampikan status terjemahan dari bahasa-bahasa berikut:',
 'titre_cadre_ajouter_auteur' => 'TAMBAH SEORANG PENULIS:',
-'titre_cadre_forum_administrateur' => 'Forum pribadi para administrator',
-'titre_cadre_forum_interne' => 'Forum intern',
 'titre_cadre_interieur_rubrique' => 'Dalam bagian',
 'titre_cadre_numero_auteur' => 'NOMOR PENULIS',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1159,7 +1109,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfigurasi situs',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Konfigurasi kelompok kata kunci',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfigurasi situs',
@@ -1169,7 +1118,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_dernier_article_syndique' => 'Artikel-artikel sindikasi terbaru',
 'titre_documents_joints' => 'Lampiran',
 'titre_evolution_visite' => 'Tingkat kunjungan',
-'titre_forum_suivi' => 'Tindak lanjut forum',
 'titre_gauche_mots_edit' => 'NOMOR KATA KUNCI:',
 'titre_groupe_mots' => 'KELOMPOK KATA KUNCI:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1198,7 +1146,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_documents_liste' => 'Lampiran',
 'titre_page_forum' => 'Forum administrator',
 'titre_page_forum_envoi' => 'Kirim sebuah pesan',
-'titre_page_forum_suivi' => 'Tindak lanjut forum',
 'titre_page_index' => 'Area pribadi anda',
 'titre_page_message_edit' => 'Tulis sebuah pesan',
 'titre_page_messagerie' => 'Sistem pesan anda',

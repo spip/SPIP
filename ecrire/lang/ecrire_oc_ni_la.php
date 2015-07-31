@@ -79,29 +79,15 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_radio_activer_petition' => 'Activar la peticion',
 'bouton_radio_afficher' => 'Afichar',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Afichar dins la tiera dei redactors connectats',
-'bouton_radio_articles_futurs' => 'basta ai articles futurs (minga d\'accion sus la basa de donadas).',
-'bouton_radio_articles_tous' => 'ai articles toi sensa excepcion',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'a toi lu articles, exceptat aquelu que lo sieu forum es desactivat.',
 'bouton_radio_desactiver_messagerie' => 'Desactivar la messatjaria',
-'bouton_radio_enregistrement_obligatoire' => 'Registrament obligatòri (lu
- utilizaires si devon abonar en donant la sieu adreiça e-mail avans de
- poder mandar de contribucions).',
 'bouton_radio_envoi_annonces_adresse' => 'Mandar lu anoncis a l\'adreiça:',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandar la tiera dei novetats',
-'bouton_radio_moderation_priori' => 'Moderacion a priòri (li
- contribucions apareisson en public basta se lu administrators
- li an validadi).',
-'bouton_radio_modere_abonnement' => 'moderat emb abonament',
-'bouton_radio_modere_posteriori' => 'moderat a posteriòri',
 'bouton_radio_modere_priori' => 'moderat a priòri',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non aparéisser dins la tiera dei redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non mandar d\'anoncis editoriaus',
 'bouton_radio_non_syndication' => 'Minga de sindicacion',
 'bouton_radio_pas_petition' => 'Minga de peticion',
 'bouton_radio_petition_activee' => 'Peticion activada',
-'bouton_radio_publication_immediate' => 'Publicar lu messatges sus lo còup
- (li contribucions apareisson a pena mandadi, lu administrators li pòdon
- suprimir pi).',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
 'bouton_redirection' => 'TORNAR DIRIGIR',
@@ -244,14 +230,12 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modificar aquela rubrica',
 'icone_modifier_site' => 'Modificar aqueu sit',
-'icone_poster_message' => 'Postar un messatge',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Referenciar un sit nòu',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Seguit dau forum public: @nb_forums@ contribucion(s)',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir lo cookie de correspondéncia',
 'icone_supprimer_groupe_mots' => 'Suprimir aqueu document',
@@ -270,7 +254,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_1_site' => '1 sit',
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondéncia</b>; aquò vos permetrà de passar aisat dau sit public au sit privat.',
-'info_activer_forum_public' => '<i>Per activar lu forums publics, vorgatz chausir lo sieu mòde de moderacion predefinit:</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Aquel administrator gerisse li rubricas seguenti:',
 'info_admin_gere_toutes_rubriques' => 'Aquel administrator gerisse <b>toti li rubricas</b>.',
@@ -295,7 +278,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_ajouter_rubrique' => 'Apondre una autra rubrica d\'administrar:',
 'info_annonce_nouveautes' => 'Anonci dei novetats',
 'info_anterieur' => 'anteriora',
-'info_appliquer_choix_moderation' => 'Aplicar aquela chausida de moderacion:',
 'info_article' => 'article',
 'info_article_2' => 'articles',
 'info_article_a_paraitre' => 'Lu articles pòstdatats per paréisser',
@@ -340,10 +322,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'S\'aquela adreiça correspònde a una lista de corrier, podètz indicar çai sota l\'adreiça dont lu participants au sit si pòdon inscriure. Aquela adreiça pòu èstre una URL (per exemple la pàgina d\'inscripcion a la lista per lo web), ò una adreiça e-mail tenent un subjècte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos podètz abonar a la lista de difusion d\'aquest sit. Alora recebretz per e-mail lu anoncis d\'articles e de brèvas que si prepaua a la publicacion.',
 'info_confirmer_passe' => 'Confirmar aqueu mot de santa Clara novèu:',
@@ -374,7 +352,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_derniere_etape' => 'Darriera estapa: <b>Es acabat!',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit si faguèt lo',
 'info_derniers_articles_publies' => 'Lu vòstres darriers articles publicats en linha',
-'info_desactiver_forum_public' => 'Desactivar l\'utilizacion dei forums publics. Lu forums publics porràn èstre autorizats au cas per cas sobre lu articles; seràn proïbits sobre li rubricas, brèvas, etc.',
 'info_desactiver_messagerie_personnelle' => 'Podètz activar ò desactivar la vòstra messatjaria personala sus aqueu sit.',
 'info_descriptif' => 'Descriptiu:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -385,7 +362,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_email_webmestre' => 'Adreiça e-mail dau responsable dau sit (opcionau)',
 'info_entrer_code_alphabet' => 'Picatz lo còde de l\'alfabet d\'utilizar:',
 'info_envoi_email_automatique' => 'Mandadís d\'e-mails automatics',
-'info_envoi_forum' => 'Mandadís dei forums ai autors dei articles',
 'info_envoyer_maintenant' => 'Mandar aüra',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Podètz passar a l\'estapa seguenta.',
@@ -394,7 +370,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_exportation_base' => 'exportacion de la basa vèrs @archive@',
 'info_facilite_suivi_activite' => 'Per facilitar lo segut de l\'activitat editoriala dau sit, SPIP vos pòu fornir per e-mail, per exemple a una lista de corrier dei redactors, l\'anonci dei demandas de publicacion e dei validacions d\'articles.',
 'info_fichiers_authent' => 'Fichiers d\'autentificacion « .htpasswd »',
-'info_fonctionnement_forum' => 'Foncionament dau forum:',
 'info_forum_administrateur' => 'forum dei administrators',
 'info_forum_interne' => 'forum intèrne',
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es dubèrt a toi lu redactors registrats. Podètz, çai sota, activar un forum suplementari, reservat basta au administrators.',
@@ -409,7 +384,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 'info_gauche_statistiques_referers' => 'Aquela pàgina presenta la lista dei <i>referidors</i>, valent a dire dei sits que contenon de ligams menant vèrs lo vòstre sit pròpri, mas unicament per ièr e ancuei: aquela lista s\'actualiza cada 24 oras.',
 'info_gauche_suivi_forum' => 'La pàgina de <i>segut dei forums</i> es una aisina de gestion dau vòstre sit (mas non es un espaci per discutir ò per redigir). Aficha toti li contribucions dau forum public d\'aquel article e vos permete de gerir aqueli contribucions.',
-'info_gauche_suivi_forum_2' => 'La pàgina de <i>segut dei forums</i> es una aisina de gestion dau vòstre sit (mas non es un espaci per discutir ò per redigir). Aficha toti li contribucions dau forum public d\'aquel article e vos permete de gerir aqueli contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aquí lu vesitaires registrats
  dins l\'espaci public dau sit (forums emb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas dei imatges',
@@ -442,11 +416,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_lien_hypertexte' => 'Ligam ipertèxt:',
 'info_liens_syndiques_1' => 'ligams sindicats',
 'info_liens_syndiques_2' => 'son en espèra de validacion.',
-'info_liens_syndiques_3' => 'forums',
-'info_liens_syndiques_4' => 'son',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'es',
-'info_liens_syndiques_7' => 'en espèra de validacion',
 'info_liste_redacteurs_connectes' => 'Tiera dei redactors connectats',
 'info_login_existant' => 'Aqueu login ja existisse.',
 'info_login_trop_court' => 'Login tròup cort.',
@@ -464,7 +433,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
   avans sus aquest sit: riscatz de pèrdre la vòstra basa de donadas
    e lo vòstre sit foncionarà pus.<br />{{Tornatz installar lu
   fichiers d\'SPIP.}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Mòde de foncionament predefinit dei forums publics',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -513,9 +481,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_numero_article' => 'ARTICLE NÚMERO:',
 'info_obligatoire_02' => '[Obligatòri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dei vesitaires dau sit public',
-'info_option_email' => 'Quora un vesitaire dau sit manda un messatge nòu au forum
- associat a un article, se\'n pòu avisar lu autors
- de l\'article per e-mail. Desiratz d\'utilizar aquela opcion?', # MODIF
 'info_option_faire_suivre' => 'Faire sègre lu messatges dei forums ai autors dei articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de vesitaires',
 'info_option_ne_pas_faire_suivre' => 'Non faire sègre lu messatges dei forums',
@@ -529,7 +494,6 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 'info_par_nombre_article' => '(per nombre d\'articles)',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'Minga de forum',
 'info_passe_trop_court' => 'Mot de santa Clara tròp cort.',
 'info_passes_identiques' => 'Lu doi mots de santa Clara non son identics.',
 'info_pense_bete_ancien' => 'Lu vòstres mementos ancians', # MODIF
@@ -571,8 +535,6 @@ D\'unu aubergadors non autorizan lo mandadís d\'e-mails despí lu sieus servido
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Lu mots d\'aqueu grop pòdon èstre atribuits per:',
 'info_racine_site' => 'Raiç dau sit',
 'info_recharger_page' => 'Vorgatz tornar cargar aquela pàgina dins un momenton.',
@@ -704,7 +666,6 @@ un color indica lo sieu estat:',
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Acceptar li inscripcions',
-'item_activer_forum_administrateur' => 'Activar lo forum dei administrators',
 'item_activer_messages_avertissement' => 'Activar lu messatges d\'avertiment',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Afichar dins lo calendier',
@@ -719,10 +680,7 @@ un color indica lo sieu estat:',
 'item_choix_non_generation_miniature' => 'Congrear minga de miniaturas dei imatges.',
 'item_choix_redacteurs' => 'lu redactors',
 'item_choix_visiteurs' => 'lu vesitaires dau sit public',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Crear de fichiers .htpasswd',
-'item_desactiver_forum_administrateur' => 'Desactivar lo forum dei administrators',
 'item_gerer_annuaire_site_web' => 'Gerir un annuari de sits web',
 'item_gerer_statistiques' => 'Gerir li estadisticas',
 'item_limiter_recherche' => 'Limitar la cèrca ai informacions contengudi dins lo vòstre sit',
@@ -742,8 +700,6 @@ un color indica lo sieu estat:',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Non blocar lu ligams eissits de la sindicacion',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Non crear aquelu fichiers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
 'item_non_gerer_statistiques' => 'Non gerir li estadisticas',
@@ -931,7 +887,6 @@ un color indica lo sieu estat:',
 'taille_cache_vide' => 'L\'escondedor es vuei.',
 'taille_repertoire_cache' => 'Talha dau repertòri escondedor',
 'text_article_propose_publication' => 'Article prepauat per la publicacion. Non esitetz de donar lo vòstre vejaire gaug au forum estacat a aquel article (en bas de pàgina).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'D\'unu servidors LDAP accèptan minga d\'accès anonim. En aqueu cas, cau especificar un identificant d\'accès iniciau per poder pi cercar d\'informacions dins l\'annuari. Totun, lu camps seguents si porràn laissar vueis dins la màger part dei cas.',
 'texte_admin_effacer_01' => 'Aquela comanda esfaça <i>tot</i> lo contengut de la basa de donadas,
  inclús <i>toi</i> lu accès redactors e administrators. Un còup que l\'auretz executada, auretz de tornar lançar l\'installacion d\'SPIP per tornar crear una basa novèla e finda un primier accès administrator.',
@@ -990,7 +945,6 @@ qu\'apareisse quora la rateta passa sus lo títol.',
 'texte_effacer_donnees_indexation' => 'Esfaçar li donadas d\'indexacion',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e brèvas çai sota. Non esitetz de donar lo vòstre vejaire gaug ai forums que i son estacats.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Podètz enriquir la compaginacion dau vòstre tèxt en utilizant d\'"acorchas tipografiqui".',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repertòri @dossier@?</b><p>
@@ -1150,8 +1104,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_cadre_afficher_article' => 'Afichar lu articles',
 'titre_cadre_afficher_traductions' => 'Afichar l\'estat dei reviradas per aquela lenga',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
-'titre_cadre_forum_administrateur' => 'Forum privat dei administrators',
-'titre_cadre_forum_interne' => 'Forum intèrne',
 'titre_cadre_interieur_rubrique' => 'Dintre la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1160,7 +1112,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuracion dau sit',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Configuracion dei grops de mots clau',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuracion dau sit',
@@ -1170,7 +1121,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_documents_joints' => 'Documents jonchs',
 'titre_evolution_visite' => 'Evolucion dei vesitas',
-'titre_forum_suivi' => 'Segut dei forums',
 'titre_gauche_mots_edit' => 'MOT NÚMERO:',
 'titre_groupe_mots' => 'GROP DE MOTS:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1199,7 +1149,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_page_documents_liste' => 'Lu documents dei rubricas',
 'titre_page_forum' => 'Forum per lu administrators',
 'titre_page_forum_envoi' => 'Mandar un messatge',
-'titre_page_forum_suivi' => 'Segut dei forums',
 'titre_page_index' => 'Lo vòstre espaci privat',
 'titre_page_message_edit' => 'Redigir un messatge',
 'titre_page_messagerie' => 'La vòstra messatjaria',
