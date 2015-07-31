@@ -29,17 +29,16 @@ function action_editer_article_dist() {
 	        $id_article = insert_article($id_parent);
 	} 
 	  
-	$err = false;
-
-	// Enregistre l'envoi dans la BD et positionne $err si pb
-
-	articles_set($id_article, $id_parent, $lier_trad, $arg=='oui');
+	// Enregistre l'envoi dans la BD
+	$err = articles_set($id_article, $id_parent, $lier_trad, $arg=='oui');
 
 	// id_article_bloque,  globale dans inc/presentation 
 
-	$redirect = urldecode(_request('redirect'))
-		. "&id_article=$id_article&id_article_bloque=$id_article"
-		. ($GLOBALS['err'] ? '&trad_err=1' : '');
+	$redirect = parametre_url(
+		parametre_url(urldecode(_request('redirect')),
+			'id_article', $id_article),
+			'id_article_bloque', $id_article, '&')
+		. ($err ? '&trad_err=1' : '');
 
 	redirige_par_entete($redirect);
 }
@@ -76,29 +75,22 @@ function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
 
-	$row = spip_fetch_array(spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$id_article"));
-
 	// retour de articles_edit
 	if (_request('titre') !== NULL) {
-		revisions_articles($id_article, $id_rubrique, $id_trad, $new);
+		return revisions_articles($id_article, $id_rubrique, $new);
 	}
 	// retour articles.php, pour gestion des liens de trad (ou autre)
 	else {
-		if ($lier_trad) {
-			$id_trad = article_referent($id_article, $row['id_trad'], $lier_trad);
-			spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
-		}
+		if ($lier_trad)
+			return article_referent($id_article, $lier_trad);
 		else
 			spip_log("erreur sur action/editer_article"); // ne devrait pas se produire
 	}
 return;
-print_r($_GET);
-print_r($_POST);
-exit;
 }
 
 // http://doc.spip.org/@revisions_articles
-function revisions_articles ($id_article, $id_rubrique, $id_trad) {
+function revisions_articles ($id_article, $id_rubrique, $new) {
 {
 	global $flag_revisions, $champs_extra;
 
@@ -141,10 +133,7 @@ function revisions_articles ($id_article, $id_rubrique, $id_trad) {
 		$champs_extra = extra_recup_saisie("articles", _request('id_secteur'));
 	}
 
-	spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
-
-
-	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, id_trad=$id_trad, surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -195,32 +184,37 @@ function trop_longs_articles($texte_plus)
 	return $texte_ajout;
 }
 
-//
+// Poser un lien de traduction vers un article de reference
 // http://doc.spip.org/@article_referent
-function article_referent ($id_article, $id_trad, $lier_trad)
-{ 
-	global $err; // pour avertir l'appelant
+function article_referent ($id_article, $lier_trad) {
 
-	$row = spip_fetch_array(spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad"));
+	$lier_trad = intval($lier_trad);
 
-	$id_lier = $row['id_trad'];
-
-	spip_log("$id_article, $id_trad, $lier_trad, $id_lier");
-// Si l'article vise n'a pas deja de traduction, creer nouveau id_trad
-	if ($id_lier == 0) {
-			$nouveau_trad = $lier_trad;
-			spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article = $lier_trad");
-	} else {
-	  // insuffisant pour prevenir les traductions redondantes a mon avis
-		if ($id_lier == $id_trad) $err = true;
-		$nouveau_trad = $id_lier;
-		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_trad = $id_lier");
+	// selectionner l'article cible, qui doit etre different de nous-meme,
+	// et quitter s'il n'existe pas
+	if (!$row = spip_fetch_array(
+	spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
+	{
+		spip_log("echec lien de trad vers article inexistant ($lier_trad)");
+		return 'erreur';
 	}
 
-	if ($id_trad > 0)
-		  spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
+	// $id_lier est le numero du groupe de traduction
+	$id_lier = $row['id_trad'];
+	spip_log("traduction $id_article, $id_trad, $lier_trad, $id_lier");
 
-	return $nouveau_trad;
+	// Si l'article vise n'est pas deja traduit, son identifiant devient
+	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
+	// articles
+	if ($id_lier == 0) {
+		spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
+	}
+	// sinon on ajouter notre article dans le groupe
+	else {
+		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
+	}
+
+	return false; # pas d'erreur
 }
 
 ?>
