@@ -16,6 +16,7 @@ include_local("inc-vrac-squel.php3");
 include_local("inc-index-squel.php3");
 include_local("inc-text-squel.php3");
 include_local("inc-debug.php3");
+include_local("inc-forum.php3");
 
 // Produit le corps PHP d'une boucle Spip,
 // essentiellement une boucle while (ou une double en cas de hierarchie)
