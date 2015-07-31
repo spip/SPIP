@@ -171,7 +171,7 @@ else {
 		echo $open;
 		$liste = 0;
 		while ($row = sql_fetch($result)) {
-			$titre = typo($row['titre']);
+			$titre = typo(supprime_img($row['titre'],''));
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
 			$popularite = round($row['popularite']);
@@ -196,7 +196,7 @@ else {
 		if (sql_count($result_suite) > 0) {
 		  echo "</ol><div style='text-align: center'>[...]</div>",$open;
 			while ($row = sql_fetch($result_suite)) {
-				$titre = typo($row['titre']);
+				$titre = typo(supprime_img($row['titre'], ''));
 				$l_article = $row['id_article'];
 				$visites = $row['visites'];
 				$popularite = round($row['popularite']);
@@ -238,7 +238,7 @@ else {
 		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 
 		while ($row = sql_fetch($result)) {
-			$titre = typo($row['titre']);
+			$titre = typo(supprime_img($row['titre'],''));
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
 			$popularite = round($row['popularite']);

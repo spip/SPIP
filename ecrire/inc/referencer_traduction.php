@@ -175,7 +175,7 @@ function articles_traduction($id_article, $id_trad)
 		    $vals[] = ajax_action_auteur("referencer_traduction", "$id_article,$id_trad,$id_article_trad", 'articles', "id_article=$id_article", array(http_img_pack('langues-off-12.gif', _T('trad_reference'), "class='lang'"), ' title="' . _T('trad_reference') . '"'));
 		}
 
-		$s = typo($titre_trad);
+		$s = typo(supprime_img($titre_trad,''));
 		if ($id_article_trad != $id_article) 
 			$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad") . "'>$s</a>";
 		if ($id_article_trad == $id_trad)

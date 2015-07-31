@@ -852,12 +852,13 @@ function traiter_listes ($texte) {
 
 // fonction en cas de texte extrait d'un serveur distant:
 // on ne sait pas (encore) rapatrier les documents joints
+// Sert aussi a nettoyer un texte qu'on veut mettre dans un <a> etc.
 // TODO: gerer les modeles ?
 // http://doc.spip.org/@supprime_img
-function supprime_img($letexte) {
-	$message = _T('img_indisponible');
+function supprime_img($letexte, $message=NULL) {
+	if ($message===NULL) $message = '(' . _T('img_indisponible') . ')';
 	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'\s*/?'.'>,i',
-		"($message)", $letexte);
+		$message, $letexte);
 }
 
 // traite les modeles (dans la fonction typo), en remplacant

@@ -78,7 +78,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			if ($total > $nb_aff) {
 				$nb_tranches = ceil($total / $nb_aff);
 			
-				$revisions .= "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
+				$revisions .= "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>\n";
 		
 				for ($i = 0; $i < $nb_tranches; $i++) {
 					if ($i > 0) $revisions .= " | ";
@@ -103,7 +103,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 			$id_article = $row['id_article'];
 			if (autoriser('voir','article',$id_article)){
 				$statut = $row['statut'];
-				$titre = typo($row['titre']);
+				$titre = typo(supprime_img($row['titre'],''));
 				
 				// l'id_auteur peut etre un numero IP (edition anonyme)
 				if ($id_auteur == intval($id_auteur)
@@ -121,9 +121,9 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 		
 					$titre_bouton = "<span class='arial2'>";
 					$titre_bouton .= puce_statut($statut);
-					$titre_bouton .= " &nbsp;<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+					$titre_bouton .= "\n&nbsp;<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 					$titre_bouton .= "<span class='arial1' dir='$lang_dir'>";
-					$titre_bouton .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
+					$titre_bouton .= "\n".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
 					$titre_bouton .= "</span>";
 					if (strlen($nom)>0) $titre_bouton .= "($nom)";
 					$titre_bouton .= "</span>";
