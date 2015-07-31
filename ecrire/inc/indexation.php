@@ -397,7 +397,7 @@ function indexer_contenu_document ($row) {
 		// par defaut, on pense que l'extracteur va retourner ce charset
 		$charset = 'iso-8859-1'; 
 		// lire le contenu
-		$contenu = $lire($fichier, $charset);
+		$contenu = $lire(_DIR_RACINE.$fichier, $charset);
 		if (!$contenu) {
 			spip_log("Echec de l'extraction de '$fichier'");
 		} else {

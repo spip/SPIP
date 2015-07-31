@@ -83,19 +83,21 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = image_pattern($vignette);
 			} else {
 				include_spip('inc/logos');
-				$image = reduire_image_logo($vignette['fichier'], 120, 110);
+				$image = reduire_image_logo(_DIR_RACINE.$vignette['fichier'], 120, 110);
 			}
-	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
+	}
+	else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/logos');
-		$local = copie_locale($document['fichier']);
-		if ($portfolio)
-			$image = reduire_image_logo($local, 110, 120);
-		else
-			$image = reduire_image_logo($local);
-	} else $image = '';
-
+		if ($portfolio) {
+			$image = reduire_image_logo(_DIR_RACINE.$document['fichier'], 110, 120);
+		} else {
+			$image = reduire_image_logo(_DIR_RACINE.$document['fichier']);
+		}
+	} else {
+		$image = '';
+	}
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
 		$image = "<img src='$fichier'\n\theight='$hauteur' width='$largeur' />";

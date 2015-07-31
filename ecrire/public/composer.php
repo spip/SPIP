@@ -108,10 +108,6 @@ function squelette_obsolete($skel, $squelette) {
 // remarquable, mais a conserver pour compatibilite ascendante.
 // -> http://www.spip.net/fr_article901.html
 
-// http://doc.spip.org/@calcule_fichier_logo
-function calcule_fichier_logo($on) {
-	return ereg_replace("^" . _DIR_IMG, "", $on);
-}
 
 // Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
 
@@ -410,7 +406,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
 		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
-		  if ($img = copie_locale($fichier)
+		  if ($img = _DIR_RACINE.copie_locale($fichier)
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
 					$logo = reduire_image($img);
@@ -436,7 +432,8 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
-		return ereg_replace("^" . _DIR_IMG, "", (extraire_attribut($logo, 'src')));
+		return preg_replace(',^' . preg_quote(_DIR_IMG).',', '',
+			extraire_attribut($logo, 'src'));
 
 
 	// Calculer le code html complet (cf. calcule_logo)
