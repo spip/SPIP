@@ -14,6 +14,22 @@
 		<description></description>
 	</image>
 
+<!-- d'abord les articles specifiques a une langue - syntaxe backend.php3?lang=xx -->
+
+	<BOUCLE_langue(ARTICLES){lang}{par date}{inverse}{0,10}>
+		<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+		<date>#DATE</date>
+			<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+			<author><BOUCLE_aut_lang(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut_lang></author>
+			<dc:date>[(#DATE|date_iso)]</dc:date>
+			<dc:format>text/html</dc:format>
+			<dc:language>#LANG</dc:language>
+			<dc:creator><BOUCLE_aut_langb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut_langb></dc:creator>
+		</item>
+	</BOUCLE_langue>
+
 <!-- d'abord les articles specifiques a une rubrique - syntaxe backend.php3?id_rubrique=123 -->
 
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
@@ -60,7 +76,9 @@
 		<dc:creator><BOUCLE_aut3b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut3b></dc:creator>
 		</item>
 	</BOUCLE3>
+
 <//B_rub>
+<//B_langue>
 
 </channel>
 
