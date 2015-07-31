@@ -1411,7 +1411,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else if ($spip_display == 3) $h = 20;
 	else $h = 34;
 	echo "<div class='milieu' style='margin-top: ".$h."px'>";
-	echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
+	echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</div>\n";
 
 	echo "<div class='fin'></div>\n";
