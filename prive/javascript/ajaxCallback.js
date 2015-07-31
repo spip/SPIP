@@ -906,7 +906,7 @@ function parametre_url(url,c,v,sep,force_vide){
 	}
         else
             a=url;
-	var regexp = new RegExp('^(' + c.replace('[]','\[\]') + '\[?\]?)(=.*)?$');
+	var regexp = new RegExp('^(' + c.replace('[]','\\[\\]') + '\\[?\\]?)(=.*)?$');
 	var ajouts = [];
 	var u = (typeof(v)!=='object')?encodeURIComponent(v):v;
 	var na = [];
