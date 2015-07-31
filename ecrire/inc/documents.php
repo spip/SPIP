@@ -121,8 +121,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	include_spip('inc/autoriser');
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
-	if (!autoriser('joindredocument',$type,$id))
-		return "";
+	if (!autoriser('modifier',$type, $id))
+      return "";
 		
 	include_spip('inc/minipres'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
