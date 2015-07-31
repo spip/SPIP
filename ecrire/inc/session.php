@@ -131,7 +131,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 	$texte = "<"."?php\n";
 	foreach ($auteur as $var => $val)
 		$texte .= '$GLOBALS[\'visiteur_session\'][\''.$var.'\'] = '
-			. _q($val).";\n";
+			. var_export($val,true).";\n";
 	$texte .= "?".">\n";
 
 	return ecrire_fichier($fichier, $texte);

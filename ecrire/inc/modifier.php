@@ -221,11 +221,25 @@ function revision_signature($id_signature, $c=false) {
 // http://doc.spip.org/@revision_auteur
 function revision_auteur($id_auteur, $c=false) {
 
-	modifier_contenu('auteur', $id_auteur,
+	$r = modifier_contenu('auteur', $id_auteur,
 		array(
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
 		$c);
+
+	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	if (isset($c['login'])
+	OR isset($c['pass'])
+	OR isset($c['statut'])
+	) {
+		include_spip('inc/acces');
+		ecrire_acces();
+	}
+
+	// .. mettre a jour les sessions de cet auteur
+	include_spip('inc/session');
+	$c['id_auteur'] = $id_auteur;
+	actualiser_sessions($c);
 }
 
 
