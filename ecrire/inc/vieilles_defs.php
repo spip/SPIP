@@ -20,6 +20,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /* fonctionner en chargeant ce fichier, en attendant d'etre	*/
 /* reecrites conformement a la nouvelle interface.		*/
 
+define('_SIGNALER_ECHOS', false);
+
 
 // Log des appels aux vieilles_defs
 // http://doc.spip.org/@vieilles_log
