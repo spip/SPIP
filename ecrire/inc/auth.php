@@ -129,7 +129,7 @@ function inc_auth_dist() {
 	// Trouver le login dans la table auteurs pour avoir les autres infos
 	//
 
-	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($connect_login) . " AND statut!='5poubelle'");
+	$result = @spip_query("SELECT UNIX_TIMESTAMP(en_ligne) AS quand, id_auteur, pass, statut, bio, prefs FROM spip_auteurs WHERE login=" . spip_abstract_quote($connect_login) . " AND statut!='5poubelle'");
 
 	if (!$row = spip_fetch_array($result)) {
 		auth_areconnecter($connect_login);
@@ -160,9 +160,10 @@ function inc_auth_dist() {
 			$GLOBALS['set_options'] = 'basiques';
 	}
 
-	// Indiquer connexion
-	@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
-
+	// Indiquer la connexion. A la minute pres ca suffit.
+	if ((time() - $row['quand']) >= 60) {
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
+	}
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";
 }
