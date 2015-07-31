@@ -363,6 +363,7 @@ prive/formulaires/recherche_ecrire.php -text
 prive/formulaires/rediriger_article.html -text
 prive/formulaires/rediriger_article.php -text
 prive/formulaires/selecteur/ajax.html -text
+prive/formulaires/selecteur/ajax_fonctions.php -text
 prive/formulaires/selecteur/articles.html -text
 prive/formulaires/selecteur/articles_fonctions.php -text
 prive/formulaires/selecteur/generique.html -text
@@ -382,6 +383,7 @@ prive/formulaires/selecteur/lister-rubriques-articles.html -text
 prive/formulaires/selecteur/lister-rubriques-rubriques.html -text
 prive/formulaires/selecteur/lister.html -text
 prive/formulaires/selecteur/navigateur.html -text
+prive/formulaires/selecteur/navigateur_fonctions.php -text
 prive/formulaires/selecteur/picker-ajax.html -text
 prive/formulaires/selecteur/picker-ajax_fonctions.php -text
 prive/formulaires/selecteur/picker.css -text
