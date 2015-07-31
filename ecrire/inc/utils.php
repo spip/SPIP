@@ -2541,9 +2541,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	if (!isset($GLOBALS['_INC_PUBLIC'])) {
 		$GLOBALS['_INC_PUBLIC'] = 0;
-	} else {
-		$GLOBALS['_INC_PUBLIC']++;
 	}
+
+	$GLOBALS['_INC_PUBLIC']++;
+
 
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
