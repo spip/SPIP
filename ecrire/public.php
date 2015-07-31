@@ -132,20 +132,10 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	}
 
 	if ($var_preview AND $html) {
-		include_spip('inc/minipres'); // pour http_img_pack
-		$x = '<div class="spip_large" style="
-		display: block;
-		color: #eeeeee;
-		background-color: #111111;
-		padding-right: 5px;
-		padding-top: 2px;
-		padding-bottom: 5px;
-		top: 0px;
-		left: 0px;
-		position: absolute;
-		">' 
-		. http_img_pack('naviguer-site.png', _T('previsualisation'), '')
-		. '&nbsp;' . majuscules(_T('previsualisation')) . '</div>';
+		include_spip('inc/filtres'); // pour http_img_pack
+		$x = _T('previsualisation');
+		$x = http_img_pack('naviguer-site.png', $x) . '&nbsp;' . majuscules($x); 
+		$x = "<div class='spip-previsu'>$x</div>";
 		if (!$pos = strpos($page['texte'], '</body>'))
 			$pos = strlen($page['texte']);
 		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
