@@ -41,6 +41,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 	return ajax_action_greffe("petitionner-$id_article", $res);
 }
 
+// http://doc.spip.org/@petitionner_choisir
 function petitionner_choisir($petition)
 {
 	if ($petition) {
@@ -68,6 +69,7 @@ function petitionner_choisir($petition)
 		>\n$res</select><br />\n";
 }
 
+// http://doc.spip.org/@petitionner_decompte
 function petitionner_decompte($id_article, $petition)
 {
 	$signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
@@ -84,6 +86,7 @@ function petitionner_decompte($id_article, $petition)
 		);
 }
 
+// http://doc.spip.org/@petitionner_message
 function petitionner_message($petition)
 {
 	return "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />"
@@ -92,6 +95,7 @@ function petitionner_message($petition)
 	. "</textarea>\n";
 }
 
+// http://doc.spip.org/@petitionner_params
 function petitionner_params($petition)
 {
 	$email_unique=$petition["email_unique"];
