@@ -19,8 +19,8 @@ function exec_documenter_dist()
 {
 	$type = _request("type");
 	$script = _request("script"); // generalisation a tester
-  $album = !_request("s") ? 'documents' :  'portfolio'; 
-	$id = intval(_request(($type == 'article') ? 'id_article' : 'id_rubrique'));
+	$album = !_request("s") ? 'documents' :  'portfolio';
+	$id = intval(_request(id_table_objet($type)));
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$statut = $GLOBALS['auteur_session']['statut'];
 
