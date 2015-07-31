@@ -155,6 +155,10 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 		}
 	}
 
+	if (preg_match(",^\s*javascript,i", _request('url_site'))) {
+		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
+	}
+
 	if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)){
 		$erreurs['new_login'] = $err;
 		$erreurs['message_erreur'] .= $err;
