@@ -55,8 +55,8 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 	if ($lier_trad)
 		$row = article_select_trad($lier_trad);
 	else {
-		$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
-		$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$row['titre'] = '';//filtrer_entites(_T('info_nouvel_article'));
+		//$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		$row['id_rubrique'] = $id_rubrique;
 	}
 

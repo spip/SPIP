@@ -31,9 +31,6 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	// (et donc: pas de lien de traduction)
 	$id_article = ($new OR $lier_trad) ? 'oui' : $row['id_article'];
 
-	$aider = charger_fonction('aider', 'inc');
-	$config = $config_fonc($row);
-
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
 		 (!$lier_trad ? '' :
 		 ("\n<input type='hidden' name='lier_trad' value='" .
@@ -41,22 +38,26 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		  "' />" .
 		  "\n<input type='hidden' name='changer_lang' value='" .
 		  $config['langue'] .
-		  "' />"))
+		  "' />"));
 
-	. editer_article_surtitre($row['surtitre'], $config, $aider)
-	. editer_article_titre($row['titre'], isset($row['onfocus'])?$row['onfocus']:"", $config, $aider)
-	. editer_article_soustitre($row['soustitre'], $config, $aider)
-	. editer_article_rubrique($row['id_rubrique'], $row['id_secteur'], $config, $aider)
-	. editer_article_descriptif($row['descriptif'], $config, $aider)
-	. editer_article_url($row['url_site'], $row['nom_site'], $config, $aider)
-	. editer_article_chapo($row['chapo'], $config, $aider)
-	. editer_article_texte($row['texte'], $config, $aider,$row['lang'])
-	. editer_article_ps($row['ps'], $config, $aider)
-	. editer_article_extra($row['extra'], $row['id_secteur'], $config, $aider)
-	. $hidden
+	$contexte = $row;
+	$contexte['config'] = $config = $config_fonc($row);	
+	$contexte['browser_caret']=$GLOBALS['browser_caret'];
+	include_spip('public/assembler');
+	$form .= recuperer_fond("prive/editer/article",$contexte);
+	
+	$form .= $hidden
 	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' /></div>");
+
+	$form = pipeline(
+		'editer_contenu_objet',
+		array(
+			'data'=>$form,
+			'args'=>array('type'=>'article','id'=>$id_article,'contexte'=>$contexte)
+		)
+	);
 
 	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post'");
 }
@@ -105,113 +106,6 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 	);
 }
 
-// http://doc.spip.org/@editer_article_titre
-function editer_article_titre($titre, $onfocus, $config, $aider)
-{
-	return	"\n<p><label for='titre' >" .
-		_T('texte_titre_obligatoire') . 
-		"</label>" .
-		$aider("arttitre") .
-		"\n<br /><input type='text' name='titre' id='titre' style='font-weight: bold; ' class='formo spip_small' value=\"" .
-	  	entites_html($titre) .
-		"\" size='40' " .
-	  	$onfocus. // effacer le titre lorsque nouvel article
-		  " />\n</p>";
-}
-
-// http://doc.spip.org/@editer_article_rubrique
-function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
-{
-	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-
-	$opt = $chercher_rubrique($id_rubrique, 'article', $config['restreint']);
-
-	$msg = _T('titre_cadre_interieur_rubrique') .
-	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $opt)) ? '' : $aider("artrub"));
-
-	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
-	else $logo = "rubrique-24.gif";
-
-	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
-}
-
-// http://doc.spip.org/@editer_article_surtitre
-function editer_article_surtitre($surtitre, $config, $aider)
-{
-	if (($config['articles_surtitre'] == 'non') AND !$surtitre)
-		return '';
-
-	return ( "\n<p><label for='surtitre'><b>" .
-		 _T('texte_sur_titre') .
-		"</b></label>" .
-		$aider ("arttitre") .
-		"<br />\n<input type='text' name='surtitre' id='surtitre' class='forml' value=\"" .
-		 entites_html($surtitre) .
-		 "\" size='40' /></p>");
-}
-
-// http://doc.spip.org/@editer_article_soustitre
-function editer_article_soustitre($soustitre, $config, $aider)
-{
-	if (($config['articles_soustitre'] == "non") AND !$soustitre)
-		return '';
-
-	return ("\n<p><label for='soustitre'><b>" .
-		  _T('texte_sous_titre') .
-		  "</b></label>" .
-		  $aider ("arttitre") .
-		  "\n<br /><input type='text' name='soustitre' id='soustitre' class='forml' value=\"" .
-		  entites_html($soustitre) .
-		"\" size='40' /><br /><br /></p>\n");
-}
-
-// http://doc.spip.org/@editer_article_descriptif
-function editer_article_descriptif($descriptif, $config, $aider)
-{
-	if (($config['articles_descriptif'] == "non") AND !strlen($descriptif))
-		return '';
-
-	$msg = _T('texte_contenu_article');
-	return ("\n<p><label for='descriptif'><b>" ._T('texte_descriptif_rapide') ."</b></label>" .
-		  $aider("artdesc") .
-		"<br />\n" . 
-		(!trim($msg) ? '' : "$msg<br />\n") .
-		"<textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>" .
-		entites_html($descriptif) .
-		"</textarea></p>");
-}
-
-// http://doc.spip.org/@editer_article_url
-function editer_article_url($url, $nom, $config, $aider)
-{
-	if (($config['articles_urlref'] == "non") AND !$url AND !$nom)
-		return '';
-
-	$url_site = entites_html($url);
-	$nom_site = entites_html($nom);
-
-	return "<br /><label for='nom_site'>" . _T('entree_liens_sites') ."<br />\n" .
-	  _T('info_titre') ."</label> " .
-	  "\n<input type='text' name='nom_site' id='nom_site' class='forml' size='40' value=\"$nom\"/><br />\n" .
-	  "<label for='url_site'>" . _T('info_url') . "</label>" .
-	  "\n<input type='text' name='url_site' id='url_site' class='forml' size='40' value=\"$url\"/>\n";
-}
-
-// http://doc.spip.org/@editer_article_ps
-function editer_article_ps($ps, $config, $aider)
-{
-	if (($config['articles_ps'] == "non") AND !$ps)
-		 return '';
-
-	return  "\n<p><label for='ps'><b>"
-		. _T('info_post_scriptum')
-		."</b></label><br />"
-		. "<textarea name='ps' id='ps' class='forml' rows='5' cols='40'>"
-		. entites_html($ps)
-		. "</textarea></p>\n";
-}
-
 //
 // Gestion des textes trop longs (limitation brouteurs)
 // utile pour les textes > 32ko
@@ -258,51 +152,6 @@ function editer_article_recolle($texte, $att_text)
 	return array($texte,$textes_supplement);
 }
 
-
-// http://doc.spip.org/@editer_article_chapo
-function editer_article_chapo($chapo, $config, $aider)
-{
-	$chapo = entites_html($chapo);
-
-	if (substr($chapo, 0, 1) == '=') {
-		$virtuel = substr($chapo, 1);
-
-		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
-			"<table width='100%' cellspacing='0' cellpadding='0' border='0'>" .
-			"<tr><td valign='top'>" .
-			"<span class='verdana1 spip_small'><b><label for='virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
-			"</td>" .
-			"<td style='width: 10px'>&nbsp;</td>" .
-			"<td valign='top' style='width: 50%'>" .
-			"<input type='text' name='virtuel' id='virtuel' class='forml spip_xx-small' value=\"$virtuel\" size='40' />" .
-			"<input type='hidden' name='changer_virtuel' value='oui' />" .
-			"</td></tr></table>\n" .
-			"<span class='verdana1 spip_small'>" . _T('texte_article_virtuel_reference') . "</span>" .
-			"</div>\n";
-	} else {
-
-		if (($config['articles_chapeau'] == "non") AND !$chapo)
-			return '';
-
-		$rows = $config['lignes'];
-		return "\n<p><br /><label for='chapo'><b>"._T('info_chapeau')."</b></label>" .
-			$aider ("artchap") .
-		  	"\n<br />"._T('texte_introductif_article')."<br />\n" .
-			"<textarea name='chapo' id='chapo' class='forml' rows='$rows' cols='40'>" .
-			$chapo .
-			"</textarea></p>\n";
-	}
-}
-
-// http://doc.spip.org/@editer_article_extra
-function editer_article_extra($extra, $id_secteur, $config, $aider)
-{
-	if (!$config['extra'])
-		return '';
-	include_spip('inc/extra');
-	return extra_saisie($extra, 'articles', $id_secteur);
-}
-
 // Choix par defaut des options de presentation
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
@@ -322,4 +171,5 @@ function articles_edit_config($row)
 	$config['restreint'] = ($row['statut'] == 'publie');
 	return $config;
 }
+
 ?>

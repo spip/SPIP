@@ -265,6 +265,8 @@ dist/prive/contenu/article.html -text
 dist/prive/contenu/breve.html -text
 dist/prive/contenu/rubrique.html -text
 dist/prive/contenu/site.html -text
+dist/prive/editer/article.html -text
+dist/prive/editer/article_fonctions.php -text
 dist/prive/infos/article.html -text
 dist/prive/infos/article_fonctions.php -text
 dist/prive/infos/auteur.html -text
