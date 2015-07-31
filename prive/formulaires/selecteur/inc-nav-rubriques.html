@@ -10,7 +10,7 @@
 	alt='ajouter'
 	width="16"
 	height="16"
-	/></a>#TITRE][(#ID_RUBRIQUE|test_enfants_rubrique{#LISTE{#ENV{articles,''}}}|?{[
+	/></a>#TITRE][(#ID_RUBRIQUE|test_enfants_rubrique{#ENV{articles,''}|?{#LISTE{article},''}}|?{[
 	<a
 	class='ajax'
 	href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'
