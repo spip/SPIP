@@ -11,13 +11,6 @@ if (!$nom_site) $nom_site = 'Mon site SPIP';
 $url_site = lire_meta('adresse_site');
 if (!$url_site) $url_site = '../index.php3';
 
-function ask_php_auth($text_failure) {
-	@Header("WWW-Authenticate: Basic realm=\"administrateur\"");
-	@Header("HTTP/1.0 401 Unauthorized");
-	echo $text_failure;
-	exit;
-}
-
 // Le login est memorise dans le cookie d'admin eventuel
 if (ereg("^@(.*)$", $spip_admin, $regs)) $login = $regs[1];
 else $login = "";
@@ -35,7 +28,20 @@ else {
 	echo "fournis lors de votre inscription.";
 }
 
-echo "<p>";
+
+// fond d'ecran de login
+$images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
+while (list(,$img) = each ($images)) {
+	if (file_exists($img)) {
+		echo '<style type="text/css"><!--
+			body {background-image: url("'.$img.'"); background-repeat: no-repeat; background-position: top;}
+			--></style>';
+		break;
+	}
+}
+
+
+echo "<p>&nbsp;<p>";
 affiche_formulaire_login($login, './ecrire/index.php3?essai_cookie=oui', './ecrire/login.php3');
 
 
