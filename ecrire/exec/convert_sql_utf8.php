@@ -25,7 +25,6 @@ function convert_utf8_non($action, $message) {
 function exec_convert_sql_utf8_dist() {
 	include_spip('inc/minipres');
 	include_spip('inc/charsets');
-	lire_metas();
 	$charset_spip = $GLOBALS['meta']['charset'];
 
 	// Definir le titre de la page (et le nom du fichier admin)

@@ -21,9 +21,6 @@ include_spip('inc/acces');
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
-	global $connect_toutes_rubriques;
-	// utiliser une version fraiche des metas (ie pas le cache)
-	lire_metas();
 	$rub = intval(_request('id_parent'));
 	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
 

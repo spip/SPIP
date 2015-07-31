@@ -102,7 +102,7 @@ function format_choisi()
 	$res .= '</div>';
 
 	if ($creer_preview == "oui") $style = "block;"; else $style = "none;";
-	
+
 	$res .= "<div id='config-preview' class='verdana2' style='display: $style margin-$spip_lang_left: 40px;'>"
 	  . "<label for='taille_preview'>"
 	  ._T('info_taille_maximale_vignette')
@@ -113,7 +113,6 @@ function format_choisi()
 	if ($creer_preview == "oui"){
 			// detection de taille maxi d'image manipulable avec GDx pour faire les image_reduire notamment
 		if ($GLOBALS['meta']['image_process']=='gd1' OR $GLOBALS['meta']['image_process']=='gd2') {
-			lire_metas(); // on force une mise a jour des meta avant le test
 			$res .= "<p>"._L('SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br/> Les images plus grandes ne seront pas r&eacute;duites.')."</p>";
 			
 			$res .= "<div dir='ltr' id='teste_memory_size_gd' style='text-align:left;float:$spip_lang_right;width:196px;background:url("._DIR_IMG_PACK . "jauge-test-gd.gif) no-repeat top left;'>";

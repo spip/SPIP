@@ -43,7 +43,6 @@ function export_all_fin($file, $meta)
 {
 	global $spip_lang_left,$spip_lang_right;
 
-	lire_metas();
 	$metatable = $meta . '_tables';
 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
 	effacer_meta($meta);
