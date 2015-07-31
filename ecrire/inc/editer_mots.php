@@ -186,6 +186,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	return $res;
 }
 
+// http://doc.spip.org/@editer_mots_un
 function editer_mots_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots)
 {
 	$id_mot = $row['id_mot'];

@@ -232,6 +232,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	return xhtml_table_id_type($table, $largeurs, $styles, $tranche);
 }
 
+// http://doc.spip.org/@ajouter_auteur_un
 function ajouter_auteur_un($row, $formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit)
 {
 	global $connect_statut, $connect_id_auteur;
