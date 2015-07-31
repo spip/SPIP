@@ -519,11 +519,11 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 
 	// Cas particulier : selection des documents selon l'extension
 	if ($type == 'documents' AND $col == 'extension')
-	  $col_table = 'types_documents';
+		$col_table = 'types_documents';
 	// HACK : selection des documents selon mode 'image'
-	// (a creer en dur dans la base)
-	else if ($type == 'documents' AND $col == 'mode' AND $val[0] == "'image'")
-	  $val[0] = "'vignette'";
+	// => on cherche en fait 'vignette'
+	else if ($type == 'documents' AND $col == 'mode')
+		$val[0] = str_replace('image', 'vignette', $val[0]);
 	// Cas particulier : lier les articles syndiques
 	// au site correspondant
 	else if ($type == 'syndic_articles' AND
