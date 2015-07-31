@@ -10,25 +10,57 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'obtention des descriptions de tables SQL
+ *
+ * @package SQL\Tables
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/objets');
 
-// Trouve la description d'une table, en particulier celle d'une boucle
-// Si on ne la trouve pas, on demande au serveur SQL
-// retourne False si lui non plus  ne la trouve pas.
-// Si on la trouve, le tableau resultat a les entrees:
-// field (comme dans serial.php)
-// key (comme dans serial.php)
-// table = nom SQL de la table (avec le prefixe spip_ pour les stds)
-// id_table = nom SPIP de la table (i.e. type de boucle)
-// le compilateur produit  FROM $r['table'] AS $r['id_table']
-// Cette fonction intervient a la compilation, 
-// mais aussi pour la balise contextuelle EXPOSE.
-// l'ensemble des descriptions de table d'un serveur est stocke dans un fichier cache/sql_desc.txt
-// par soucis de performance
-// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
-
-// http://doc.spip.org/@base_trouver_table_dist
+/**
+ * Retourne la description d'une table SQL
+ *
+ * Cela sert notamment au moment de la compilation des boucles, critères et balise.
+ * 
+ * Les champs et clés de la tables sont retrouvés prioritairement via le
+ * gestionnaire de base de données. Les descriptions sont complétées,
+ * pour les tables éditoriales, des informations déclarées ou construites
+ * par la déclaration des objets éditoriaux.
+ *  
+ * @example
+ *     $trouver_table = charger_fonction('trouver_table', 'base');
+ *     $desc = $trouver_table('spip_groupes_mots');
+ * 
+ * Cette fonction intervient à la compilation, mais aussi pour la balise
+ * contextuelle EXPOSE ou certains critères.
+ * 
+ * L'ensemble des descriptions de table d'un serveur est stocké dans un
+ * fichier cache/sql_desc.txt par soucis de performance. Un appel
+ * avec $nom vide est une demande explicite de vidange de ce cache
+ *
+ * @see lister_tables_objets_sql()
+ * 
+ * @api
+ * @param string $nom
+ *     Nom de la table
+ *     Vide '' demande de vider le cache des discriptions
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $table_spip
+ *     Indique s'il faut transformer le préfixe de table
+ * @return array|bool
+ *     false si table introuvable
+ *     tableau de description de la table sinon, en particulier :
+ *     - field : tableau des colonnes SQL et leur description (comme dans serial.php ou objets.php)
+ *     - key   : tableau des KEY (comme dans serial.php ou objets.php)
+ *     - table et table_sql : nom de la table (avec spip_ en préfixe)
+ *     - id_table : nom SPIP de la table (type de boucle)
+ *                  le compilateur produit  FROM $r['table'] AS $r['id_table']
+ *     - Toutes les autres informations des objets éditoriaux si la table est l'un d'eux.
+ *     
+ *
+**/
 function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	static $nom_cache_desc_sql=array();
 	global $tables_principales, $tables_auxiliaires, $table_des_tables;
