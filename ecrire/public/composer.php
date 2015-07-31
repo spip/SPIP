@@ -19,6 +19,7 @@ include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
+include_spip('public/debug'); # toujours prévoir le pire
 
 # Charge et retourne un composeur, i.e. la fonction principale d'un squelette
 # ou '' s'il est inconnu. Le compile au besoin
@@ -64,7 +65,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
 		if ($GLOBALS['var_mode'] == 'debug') {
-			include_spip('public/debug');
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
 		eval('?'.'>'.$skel_code);
