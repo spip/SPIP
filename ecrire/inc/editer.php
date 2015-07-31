@@ -85,9 +85,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
-	$att_text = " class='formo' "
-	. $GLOBALS['browser_caret']
-	. " rows='"
+	$att_text = " rows='"
 	. ($config['lignes'] +15)
 	. "' cols='40'";
 	list($contexte['texte'],$contexte['_texte_trop_long']) = editer_texte_recolle($contexte['texte'],$att_text);
@@ -99,8 +97,6 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		$contexte['langue'] = $contexte['lang'];
 		unset($contexte['lang']);
 	}
-
-	$contexte['_browser_caret']=$GLOBALS['browser_caret'];
 
 	$contexte['_hidden'] = "<input type='hidden' name='editer_$type' value='oui' />\n" .
 		 (!$lier_trad ? '' :
