@@ -2431,17 +2431,25 @@ function _xor($message, $key=null){
  * @param string $title
  * @return string
  */
-function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel=""){
-	return
-	($on ?"<strong class='on'>":
-		"<a href='$url'"
+function lien_ou_expose($url,$clic,$on=false,$class="",$title="",$rel="", $evt=''){
+	if ($on) {
+		$bal = "strong";
+		$att = "class='on'";
+	} else {
+		$bal = 'a';
+		$att = "href='$url'"
 	  	.($title?" title='".attribut_html($title)."'":'')
 	  	.($class?" class='".attribut_html($class)."'":'')
 	  	.($rel?" rel='".attribut_html($rel)."'":'')
-	  	.">"
-	)
-	. $libelle
-	. ($on ? "</strong>":"</a>");
+		.$evt;
+	}
+
+	if (!preg_match('@^<(p|div)([^>]*)>(.*)</\1>$@', $clic, $r))
+		return "<$bal $att>$clic</$bal>";
+	else {
+		list(,$b,$a,$c) = $r;
+		return "<$b$a><$bal $att>$c</$bal></$b>";
+	}
 }
 
 

@@ -75,22 +75,15 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
 function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $img, $titre, $class='', $alt='', $clic='', $style='', $evt='')
 {
 	$h = calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
-	$evt .= " rel='nofollow'";
 	$a = ($ancre ? "#$ancre" : '');
-	$t = ($titre ? " title=\"$titre\"" : '');
-	$s = ($style ? " style=\"$style\"" : '');
 	$c = ($class ? " class=\"$class\"" : '');
 
 	$moi = preg_match("/exec=" . _request('exec') .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
 	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
-	if (!test_espace_prive() || !$moi || (_SPIP_AJAX !== 1 ))
-
-		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
-	else {
+	if (test_espace_prive() AND $moi AND (_SPIP_AJAX === 1 ))
 		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-		return "<a$c$s$t\nhref='$h$a'$evt>$clic</a>";
-	}
+	return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 }
 
 // Fabrique une balise A, avec tous les attributs possibles
@@ -99,19 +92,8 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 
 // http://doc.spip.org/@http_href
 function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
-	$atts = ' href="' .
-		$href .
-		'"' .
-		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
-		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
-		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
-		($evt ? "\n$evt" : '');
-	if (!preg_match('@^<(p|div)>(.*)</\1>$@', $clic, $r))
-	  return "<a$atts>$clic</a>";
-	else {
-	  list(,$b,$c) = $r;
-	  return "<$b><a$atts>$c</a></$b>";
-	}
+	if ($style) $evt .= " style='$style'";
+	return lien_ou_expose($href, $clic, false, $class, $title, '', $evt);
 }
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
@@ -1224,8 +1206,7 @@ function http_calendrier_rv($messages, $type) {
 				     ($rv ?
 				      http_img_pack("rv.gif", 'rv',
 						    http_style_background($bouton . '.gif', "no-repeat;")) : 
-				      http_img_pack($bouton.".gif", $bouton, "")),
-				     '', '') .
+				      http_img_pack($bouton.".gif", $bouton, ""))) .
 		"</td>\n" .
 		"<td valign='middle'><div style='font-weight: bold;$c'>" .
 		$rv .
