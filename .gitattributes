@@ -67,9 +67,6 @@ IMG/test.gif -text
 IMG/test.jpg -text
 IMG/test.png -text
 IMG/test_image.jpg -text
-NAVPICS/petit-logo-spip.gif -text
-NAVPICS/point.gif -text
-NAVPICS/rien.gif -text
 ecrire/img_pack/admin-12.gif -text
 ecrire/img_pack/administration-24.gif -text
 ecrire/img_pack/administration-48.png -text
@@ -231,3 +228,4 @@ ecrire/puce.gif -text
 ecrire/puce_rtl.gif -text
 /puce.gif -text
 /puce_rtl.gif -text
+/spip_logo.jpg -text
