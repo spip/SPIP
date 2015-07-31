@@ -1046,8 +1046,13 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
 
-	// Le charset par defaut lors de l'installation
-	define('_DEFAULT_CHARSET', 'utf-8');
+	// Declaration des repertoires
+
+	// le nom du repertoire plugins/ activables/desactivables
+	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+
+	// le nom du repertoire des extensions/ permanentes du core, toujours actives
+	define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
 
 	define('_DIR_IMG', $pa);
 	define('_DIR_LOGOS', $pa);
@@ -1062,25 +1067,29 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_AIDE',  _DIR_CACHE . "aide/");
 	define('_DIR_TMP', $ti);
 
-	# attention .php obligatoire pour ecrire_fichier_securise
-	define('_FILE_META', $ti . 'meta_cache.php');
-
 	define('_DIR_VAR', $ta);
 
 	define('_DIR_ETC', $pi);
 	define('_DIR_CONNECT', $pi);
 	define('_DIR_CHMOD', $pi);
 
-	define('_DIR_LOG', _DIR_TMP);
-	define('_FILE_LOG', 'spip');
-	define('_FILE_LOG_SUFFIX', '.log');
-
-	define('_MAX_LOG', 100);
-
 	if (!isset($GLOBALS['test_dirs']))
 	  // Pas $pi car il est bon de le mettre hors ecriture apres intstall
 	  // il sera rajoute automatiquement si besoin a l'etape 2 de l'install
 		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
+
+	// Declaration des fichiers
+
+	define('_CACHE_PLUGINS_OPT', _DIR_CACHE . "charger_plugins_options.php");
+	define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
+	define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
+	define('_CACHE_PIPELINES',  _DIR_CACHE."charger_pipelines.php");
+
+	# attention .php obligatoire pour ecrire_fichier_securise
+	define('_FILE_META', $ti . 'meta_cache.php');
+	define('_DIR_LOG', _DIR_TMP);
+	define('_FILE_LOG', 'spip');
+	define('_FILE_LOG_SUFFIX', '.log');
 
 	// Le fichier de connexion a la base de donnees
 	// tient compte des anciennes versions (inc_connect...)
@@ -1110,8 +1119,11 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Se mefier des fichiers mal remplis!
 	if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', 0777);
 
-	// le nom du repertoire plugins/
-	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+	// Le charset par defaut lors de l'installation
+	define('_DEFAULT_CHARSET', 'utf-8');
+
+	// La taille des Log
+	define('_MAX_LOG', 100);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
@@ -1244,10 +1256,6 @@ function spip_initialisation_suite() {
 	define('_ACCESS_FILE_NAME', '.htaccess');
 	define('_AUTH_USER_FILE', '.htpasswd');
 	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
-	define('_CACHE_PLUGINS_OPT', _DIR_TMP . "charger_plugins_options.php");
-	define('_CACHE_PLUGINS_FCT', _DIR_TMP . "charger_plugins_fonctions.php");
-	define('_CACHE_PLUGINS_VERIF', _DIR_TMP . "verifier_plugins.txt");
-	define('_CACHE_PIPELINES',  _DIR_TMP."charger_pipelines.php");
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
 	define('_CACHE_RUBRIQUES_MAX', 500);
 
