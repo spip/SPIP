@@ -173,13 +173,13 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 					'formulaire_forum_previsu',
 					0,
 					array(
-						'titre' => interdire_scripts(typo($titre)),
-						'email_auteur' => $email_auteur,
-						'auteur' => interdire_scripts(typo($auteur)),
-						'texte' => propre($texte),
-						'url_site' => $url_site,
+						'titre' => safehtml(typo($titre)),
+						'email_auteur' => safehtml($email_auteur),
+						'auteur' => safehtml(typo($auteur)),
+						'texte' => safehtml(propre($texte)),
+						'url_site' => safehtml($url_site),
 						'nom_site_forum' =>
-							interdire_scripts(typo($nom_site_forum)),
+							safehtml(typo($nom_site_forum)),
 						'mots_forum' => $mots_forum,
 						'erreur' => $erreur,
 						'bouton' => $bouton
