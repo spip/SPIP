@@ -35,11 +35,11 @@ function enfant($collection){
 		$les_enfants.= "<div class='enfants'>";
 		
 		
-		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
-		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-
-
-
+		if ($id_parent == "0") $logo_rub = "secteur-24.gif";
+		else $logo_rub = "rubrique-24.gif";
+		
+		$les_enfants .= debut_cadre_relief($logo_rub, true);
+		
 		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
 			include_ecrire("inc_logos.php3");
 			$logo = decrire_logo("rubon$id_rubrique");
@@ -53,7 +53,9 @@ function enfant($collection){
 				$fid = $logo[2];
 				$hash = calculer_action_auteur ("reduire $w $h");
 
-				$les_enfants.= "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>";
+//				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' />";
+				$les_enfants.= "<div style='position: absolute; right: 0px; top: 0px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' /></div>";
+				$les_enfants.= "<img src='img_pack/rien.gif' width='$w' height='$h' align='right' />";
 				
 			}
 		}
@@ -71,6 +73,7 @@ function enfant($collection){
 		}
 
 		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;		
+		
 		$les_enfants .= "<div style='clear:both;'></div>";
 
 
