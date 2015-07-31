@@ -8,7 +8,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	<link>[(#URL_ECRIRE{controle_forum, type=prop&amp;[id_rubrique=(#ENV{id_rubrique}|intval)]|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>[(#LANG|texte_backend)]</language>
-	<BOUCLE_RSS(FORUMS){statut IN publie,prop,off,spam}{texte!=""}{tout}{id_article ?}>
+	<BOUCLE_RSS(FORUMS){statut IN publie,prop,off,spam}{texte!=""}{tout}{id_article ?}{!par date}>
 	<item>
 		<title>[(#TITRE|texte_backend)][ ((#STATUT|=={publie}|?{'', #STATUT}))]</title>
 		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
