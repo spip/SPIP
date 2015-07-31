@@ -20,23 +20,24 @@ include_spip('base/abstract_sql');
 //
 
 // http://doc.spip.org/@inc_joindre_dist
-function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='', $ancre='', $id_document=0,$iframe_script='') {
+function inc_joindre_dist($v) {
 	global $spip_lang_right;
-	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
-	$distant = ($mode == 'document' AND $type);
+
+	$vignette_de_doc = ($v['mode'] == 'vignette' AND $v['id_document']>0);
+	$distant = ($v['mode'] == 'document' AND $v['type']);
 
 	# indiquer un choix d'upload FTP
 	$dir_ftp = '';
 	if (test_espace_prive()
-	AND !($mode == 'vignette')	# si c'est pour un document
+	AND !($v['mode'] == 'vignette')	# si c'est pour un document
 	AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	AND $GLOBALS['flag_upload']) {
 		if($dir = determine_upload('documents')) {
 			// quels sont les docs accessibles en ftp ?
-			$l = texte_upload_manuel($dir, '', $mode);
+			$l = texte_upload_manuel($dir, '', $v['mode']);
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode vignette
-			if ($l OR ($mode == 'document'))
+			if ($l OR ($v['mode'] == 'document'))
 				$dir_ftp = afficher_transferer_upload($l, $dir);
 		}
 	}
@@ -44,23 +45,25 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
   // Add the redirect url when uploading via iframe
 
   $iframe = "";
-  if($iframe_script)
-    $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
+  if($v['iframe_script'])
+    $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($v['iframe_script'])."' />\n";
 
 	// Un menu depliant si on a une possibilite supplementaire
 
 	if ($dir_ftp OR $distant OR $vignette_de_doc) {
-		$bloc = "ftp_$mode" .'_'. intval($id_document);
-		$debut = 
-		//"\n\t<div style='float:".$GLOBALS['spip_lang_left'].";position:relative'>"
-		//	. 
-			bouton_block_depliable($intitule,false,$bloc) 
-			//."</div>\n"
-			;
+		$bloc = "ftp_". $v['mode'] .'_'. intval($v['id_document']);
+
+		if ($vignette_de_doc)
+			$debut = bouton_block_depliable($v['intitule'],false,$bloc);
+		else
+			$debut = $v['intitule'];
+
 		$milieu = debut_block_depliable(false,$bloc);
 		$fin = "\n\t" . fin_block();
+		$depliable = true;
 
-	} else $debut = $milieu = $fin = '';
+	} else
+		$debut = $milieu = $fin = '';
 
 	// Lien document distant, jamais en mode image
 	if ($distant) {
@@ -76,7 +79,10 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	}
 
 	$res = "<input name='fichier' type='file' class='forml spip_xx-small' size='15' />"
-	. "\n\t\t<input type='hidden' name='ancre' value='$ancre' />"
+	. ($v['ancre']
+		? "\n\t\t<input type='hidden' name='ancre' value='".$v['ancre']."' />"
+		: ''
+	)
 	. "\n\t\t<div style='text-align: $spip_lang_right'><input name='sousaction1' type='submit' value='"
 	. _T('bouton_telecharger')
 	. "' class='fondo' /></div>";
@@ -86,11 +92,25 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	else
 		$res = $res . $milieu;
 
-	return generer_action_auteur('joindre',
-		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
-		(!test_espace_prive())?$script:generer_url_ecrire($script, $args, true),
+
+	$res = generer_action_auteur('joindre',
+		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
+		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' class='form_upload'");
+
+	if ($v['cadre']) {
+		if ($depliable) {
+			$v['titre'] = bouton_block_depliable($v['titre'],false,$bloc);
+		}
+		$debut_cadre = 'debut_cadre_'.$v['cadre'];
+		$fin_cadre = 'fin_cadre_'.$v['cadre'];
+		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])
+			. $res
+			. $fin_cadre(true);
+	}
+
+	return $res;
 }
 
 

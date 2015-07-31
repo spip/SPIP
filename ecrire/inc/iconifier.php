@@ -28,29 +28,31 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
 		if ($GLOBALS['meta']['activer_logos'] != 'non') {
 			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
-			$bouton = bouton_block_depliable($texteon,$visible,'on');
+			$bouton = bouton_block_depliable($texteon, $visible, 'on');
 			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
 		}
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
-		$bouton = bouton_block_depliable("$texteon<br />$img",$visible,'on');
-		$masque = debut_block_depliable($visible,'on') . $clic . fin_block();
-		$res = "<div style='text-align: center'>$masque</div>";;
+		$bouton = bouton_block_depliable($texteon, $visible, 'on');
 
+		$survol = '';
 		$texteoff = _T('logo_survol');
-		if ($logo = $chercher_logo($id, $id_objet, 'off')) {
-
-			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
-
-			$masque = block_parfois_visible('off', "$texteoff<br />$img", $clic, 'margin-bottom: -2px');
-			$res .= "<br /><br /><div style='text-align: center'>$masque</div>";
-		} else {
+		if (!$logo = $chercher_logo($id, $id_objet, 'off')) {
 			if ($GLOBALS['meta']['activer_logos_survol'] == 'oui') {
-				$masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
-				$res .= "<br /><br />".block_parfois_visible('off', "$texteoff", $masque);
+				$masque = "<br />".indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
+				$survol .= "<br />".block_parfois_visible('off', $texteoff, $masque, null, $visible);
 			}
-		}
+			$masque = debut_block_depliable($visible,'on') . $clic . $survol . fin_block();
+		} else {
+			list($imgoff, $clicoff) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
+			$masque = debut_block_depliable($visible, 'off') .  $clicoff . fin_block();
+			$survol .= "<br />".bouton_block_depliable($texteoff, $visible, 'off')
+				. "<div class='cadre_padding'>".$imgoff.$masque."</div>";
+			$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
+	}
+
+		$res = "$img<div style='text-align: center'>$masque</div>";;
 	}
 
 	if ($res) {

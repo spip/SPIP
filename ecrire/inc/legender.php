@@ -173,8 +173,19 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
-	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,$iframe_redirect)
-	   : $supprimer);
+		? $joindre(array(
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_vignette_personnalisee'),
+			'mode' => 'vignette',
+			'type' => $type,
+			'ancre' => $ancre,
+			'id_document' => $id_document,
+			'iframe_script' => $iframe_redirect
+			))
+		: $supprimer
+	);
 }
 
 
