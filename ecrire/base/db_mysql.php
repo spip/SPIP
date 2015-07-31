@@ -39,6 +39,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'countsel' => 'spip_mysql_countsel',
 		'create' => 'spip_mysql_create',
 		'delete' => 'spip_mysql_delete',
+		'drop_table' => 'spip_mysql_drop_table',
 		'errno' => 'spip_mysql_errno',
 		'error' => 'spip_mysql_error',
 		'explain' => 'spip_mysql_explain',
@@ -306,6 +307,12 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 	return spip_mysql_query($q, $serveur);
+}
+
+function spip_mysql_drop_table($table, $exist='', $serveur='')
+{
+	if ($exist) $exist =" IF EXISTS";
+	return spip_mysql_query("DROP TABLE$exist $table", $serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_showbase

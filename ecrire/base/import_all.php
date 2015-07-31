@@ -110,7 +110,7 @@ function import_all_fin($request) {
 	effacer_meta('tag_archive_restauration');
 	effacer_meta('restauration_charset_sql_connexion');
 	if ($request['insertion'] == 'passe2') 
-		spip_query("DROP TABLE spip_translate");
+		sql_drop_table("spip_translate");
 	 
 }
 ?>

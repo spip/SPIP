@@ -49,6 +49,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'countsel' => 'spip_pg_countsel',
 		'create' => 'spip_pg_create',
 		'delete' => 'spip_pg_delete',
+		'drop_table' => 'spip_pg_drop_table',
 		'errno' => 'spip_pg_errno',
 		'error' => 'spip_pg_error',
 		'explain' => 'spip_pg_explain',
@@ -592,6 +593,12 @@ function spip_pg_errno() {
 	$s = pg_last_error(); 
 	if ($s) spip_log("Erreur PG $s");
 	return $s ? 1 : 0;
+}
+
+function spip_pg_drop_table($table, $exist='', $serveur='')
+{
+	if ($exist) $exist =" IF EXISTS";
+	return spip_pg_query("DROP TABLE$exist $table", $serveur);
 }
 
 // http://doc.spip.org/@spip_pg_showbase

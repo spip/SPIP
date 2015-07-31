@@ -19,9 +19,9 @@ function base_delete_all_dist($titre)
 	$res = array();
 	if (is_array($delete)) {
 		foreach ($delete as $table) {
-			if (spip_query("DROP TABLE $table"))
+			if (sql_drop_table($table))
 				$res[] = $table;
-			else spip_log("DROP TABLE $table inoperant.");
+			else spip_log("SPIP n'a pas pu detruire $table.");
 		}
 	}
 

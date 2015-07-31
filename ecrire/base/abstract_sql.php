@@ -199,6 +199,12 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 	return $f($table, $values, $desc, $serveur);
 }
 
+function sql_drop_table($table, $exist='', $serveur='')
+{
+	$f = sql_serveur('drop_table', $serveur);
+	return $f($table, $exist, $serveur);
+}
+
 // http://doc.spip.org/@sql_showbase
 function sql_showbase($spip=NULL, $serveur='')
 {
@@ -231,7 +237,7 @@ function sql_showtable($table, $serveur='', $table_spip = false)
 }
 
 // http://doc.spip.org/@sql_create
-function sql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
+function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='') {
 	$f = sql_serveur('create', $serveur);
 	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur);
 }
