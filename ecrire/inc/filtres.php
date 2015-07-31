@@ -61,9 +61,13 @@ function filtre_text_csv_dist($t)
 	else	{ $sep = ';'; $hs = '&#59;'; $virg = $pvirg;}
 	if ($tab > $virg) {$sep = "\t"; $hs = "\t";}
 
-	$t = str_replace('""','&#34;',
-			 preg_replace('/\r?\n/', "\n",
-				      preg_replace('/[\r\n]+/', "\n", $t)));
+	$t = preg_replace('/\r?\n/', "\n",
+				      preg_replace('/[\r\n]+/', "\n", $t));
+	// un separateur suivi de 3 guillemets attention !
+	// attention au ; suceptible d'etre confondu avec un separateur
+	// on substitue un # et on remplacera a la fin
+	$t = preg_replace("/([\n$sep])\"\"\"/",'\\1"&#34#',$t);
+	$t = str_replace('""','&#34#',$t);
 	preg_match_all('/"[^"]*"/', $t, $r);
 	foreach($r[0] as $cell) 
 		$t = str_replace($cell, 
@@ -113,12 +117,15 @@ function filtre_text_csv_dist($t)
 	  foreach($lignes as $k=>$v) $lignes[$k] = substr($v,0,-1);
 	}
 	$corps = join("\n", $lignes) . "\n";
-	return propre($caption .
+	$corps = $caption .
 		"\n|{{" .
 		str_replace($sep,'}}|{{',$entete) .
 		"}}|" .
 		"\n|" .
-		str_replace($sep,'|',str_replace("\n", "|\n|",$corps)));
+		str_replace($sep,'|',str_replace("\n", "|\n|",$corps));
+	$corps = str_replace('&#34#','&#34;',$corps);
+	include_spip('inc/texte');
+	return propre($corps);
 }
 
 // Incrustation de HTML, si on est capable de le securiser
@@ -137,6 +144,7 @@ function filtre_text_html_dist($t)
 		$style =  join("\n",$r[1]);
 	// ... et externes
 
+	include_spip('inc/distant');
 	if (preg_match_all(',<link[^>]+type=.text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER))
 		foreach($r[0] as $l) {
 			preg_match("/href='([^']*)'/", str_replace('"',"'",$l), $m);
@@ -549,6 +557,7 @@ function PtoBR($texte){
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
 // http://doc.spip.org/@lignes_longues
 function lignes_longues($texte, $l = 70) {
+	if ($l<1) return $texte;
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
 	#include_spip('inc/charsets');
@@ -557,10 +566,10 @@ function lignes_longues($texte, $l = 70) {
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.*>/UumsS', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.+>/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
 			$tags[$n] = $tag[0];
-			$texte = str_replace($tag[0], " @@SPIPTAG$n@@ ", $texte);
+			$texte = str_replace($tag[0], " <---$n---> ", $texte);
 		}
 	}
 	// casser les mots longs qui restent
@@ -572,8 +581,11 @@ function lignes_longues($texte, $l = 70) {
 	}
 
 	// retablir les tags
-	foreach ($tags as $n=>$tag) {
-		$texte = str_replace(" @@SPIPTAG$n@@ ", $tag, $texte);
+	if (preg_match_all('/<---[\s0-9]+--->/UumsS', $texte, $t, PREG_SET_ORDER)) {
+		foreach ($t as $tag) {
+			$n = intval(preg_replace(',[^0-9]+,U','',$tag[0]));
+			$texte = str_replace($tag[0], $tags[$n], $texte);
+		}
 	}
 
 	return importer_charset($texte, 'utf-8');
@@ -1551,7 +1563,7 @@ function div($a,$b) {
 }
 // http://doc.spip.org/@modulo
 function modulo($nb, $mod, $add=0) {
-	return ($nb%$mod)+$add;
+	return ($mod?$nb%$mod:0)+$add;
 }
 
 

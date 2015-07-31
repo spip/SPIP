@@ -14,8 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/filtres');
 
 function protege_champ($texte){
-	$texte = entites_html($texte);
-	$texte = str_replace("'","&#39;",$texte);
+	if (is_array($texte))
+		$texte = array_map('protege_champ',$texte);
+	else {
+		$texte = entites_html($texte);
+		$texte = str_replace("'","&#39;",$texte);
+	}
 	return $texte;
 }
 
@@ -139,8 +143,7 @@ function balise_FORMULAIRE__dyn($form)
 			if ($action)
 				$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
 			// proteger les ' et les " dans les champs que l'on va injecter
-			if (is_string($valeurs[$champ]))
-				$valeurs[$champ] = protege_champ($valeurs[$champ]);
+			$valeurs[$champ] = protege_champ($valeurs[$champ]);
 		}
 	}
 
