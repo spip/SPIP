@@ -115,8 +115,9 @@ function ecrire_acces() {
 
 	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
 	# de devenir "1comite" le cas echeant (auth http)... a nettoyer
-	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
-	$result = spip_query_db($query);	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
+	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
+	$result = spip_query_db("SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'");
+
 	$logins = array();
 	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
 
@@ -128,8 +129,8 @@ function ecrire_acces() {
 	  redirige_par_entete(generer_url_action('test_dirs', '', true));
 	}
 
-	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";
-	$result = spip_query_db($query);
+	$result = spip_query_db("SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'");
+
 
 	$logins = array();
 	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];

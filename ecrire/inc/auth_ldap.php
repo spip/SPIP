@@ -131,9 +131,11 @@ class Auth_ldap {
 
 		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
 
-		if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'"))) return false;
+		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'"));
+		if ($n) return false;
 
-		return spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')");
+		$n = spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')");
+		return $n;
 
 	}
 }

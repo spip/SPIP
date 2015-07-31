@@ -139,7 +139,8 @@ function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
 	AND !ereg("^\.", basename($f))) {
 		$ext = corriger_extension(addslashes(strtolower(substr(strrchr($f, "."), 1))));
-		return  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"));
+		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"));
+		return $row;
 	}
 }
 
@@ -231,8 +232,8 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 /*			$ext = 'bin';
 			$nom_envoye .= '.bin';
 			spip_log("Extension $ext");
-			if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents
-			WHERE extension='bin' AND upload='oui'"))) {
+			$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='bin' AND upload='oui'"));
+			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}

@@ -509,7 +509,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 	if ($index) {
 		if ($mots) {
-			spip_query("INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES ".substr($mots,1));	// supprimer la virgule du debut
+	// supprimer la virgule du debut
+			spip_query("INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES ".substr($mots,1));
 
 		}
 		reset($index);
@@ -663,9 +664,9 @@ function requete_hash ($rech) {
 
 	// Attention en MySQL 3.x il faut passer par HEX(hash)
 	// alors qu'en MySQL 4.1 c'est interdit !
-	$vers = spip_fetch_array(spip_query("SELECT VERSION()"));
-	if (substr($vers[0], 0, 1) >= 4
-	AND substr($vers[0], 2, 1) >= 1 ) {
+	$vers = spip_fetch_array(spip_query("SELECT VERSION() AS v"));
+	if (substr($vers['v'], 0, 1) >= 4
+	AND substr($vers['v'], 2, 1) >= 1 ) {
 		$hex_fmt = '';
 		$select_hash = 'hash AS h';
 	} else {

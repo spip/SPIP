@@ -1074,8 +1074,8 @@ function calendrier_categories($table, $num, $objet)
     return generer_calendrier_class($table, $num, $objet);
   else {
     // cf calendrier.css
-    $result= spip_fetch_array(spip_query("SELECT " . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . " FROM	$table WHERE	$objet=$num"));
-    if ($result) $num = $result[0];
+    $result= spip_fetch_array(spip_query("SELECT " . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . " AS id FROM	$table WHERE	$objet=$num"));
+    if ($result) $num = $result['id'];
     return 'calendrier-couleur' . (($num%14)+1);
   }
 }
