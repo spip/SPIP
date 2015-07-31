@@ -117,8 +117,8 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 
 	$terminaison_dest = "";
-	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
-		$terminaison = $regs[1];
+	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),i", $fichier, $regs)) {
+		$terminaison = strtolower($regs[1]);
 		$terminaison_dest = $terminaison;
 		
 		if ($terminaison == "gif") $terminaison_dest = "png";
