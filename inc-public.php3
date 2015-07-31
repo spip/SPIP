@@ -6,8 +6,7 @@ if (!defined("_INC_PUBLIC")) {
 }
 else {
 	$cache_inclus = inclure_fichier($fond, $delais, $contexte_inclus);
-	if (!$delais)
-		$cache_supprimes[]=$cache_inclus; // message pour suppression
+	if (!$delais) $cache_supprimes[] = $cache_inclus; // message pour suppression
 	include($cache_inclus);
 }
 
