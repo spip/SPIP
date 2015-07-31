@@ -259,7 +259,7 @@ function enfant($leparent){
 	global $statut;
 	global $connect_toutes_rubriques;
 	global $couleur_claire, $spip_lang_left;
-	global $browser_name;
+	global $browser_name, $browser_version;
 
 
 	$i++;
@@ -325,12 +325,15 @@ function enfant($leparent){
 			//$style .= "background: url(" . _DIR_IMG_PACK. "rubrique-12.gif) $spip_lang_left no-repeat;";
 		}
 
+			$selec_rub = "selec_rub";
+			if ($browser_name == "MSIE" AND $browser_version == "5.0b1") $selec_rub = ""; // Bug de MSIE MacOs 9.0
+
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
 			// largeur maxi a 50
 			$titre = couper(supprimer_tags(typo(extraire_multi($titre)))." ", 50);
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<option".mySel($my_rubrique,$id_rubrique)." class='selec_rub' style=\"$style\">$espace$titre</option>\n";
+			echo "<option".mySel($my_rubrique,$id_rubrique)." class='$selec_rub' style=\"$style\">$espace$titre</option>\n";
 		}
 		$premier = 0;
 		enfant($my_rubrique);
