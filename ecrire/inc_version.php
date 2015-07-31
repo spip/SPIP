@@ -228,6 +228,9 @@ $controler_dates_rss = true;
 # lorsqu'il est rencontre
 // http://doc.spip.org/@Tuto-Se-servir-des-points-d-entree
 $spip_pipeline = array(
+	'accueil_encours' => '',
+	'accueil_gadgets' => '',
+	'acceuil_informations' => '',
 	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
 	'affiche_droite' => '',
 	'affiche_gauche' => '',

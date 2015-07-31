@@ -71,6 +71,8 @@ function encours_accueil()
 		$res .= "\n<br />" . $lien;
 		}
 	}
+	
+	$res = pipeline('accueil_encours',$res);
 
 	if (!$res) return '';
 
@@ -186,6 +188,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 		}
 		$gadget .= "</tr></table>\n";
 	}
+	$gadget = pipeline('accueil_gadgets',$gadget);
 
 //
 // Modification du cookie
@@ -378,7 +381,7 @@ function etat_base_accueil()
 	$res .= accueil_liste_participants()
 	. "</div>";
 
-	return $res ;
+	return pipeline('acceuil_informations',$res) ;
 }
 
 
