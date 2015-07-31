@@ -117,6 +117,10 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 // http://doc.spip.org/@afficher_documents_colonne
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
+	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
+	if (!autoriser('modifier',$type,$id))
+		return "";
+		
 	include_spip('inc/minipres'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	// seuls cas connus : article, breve ou rubrique
