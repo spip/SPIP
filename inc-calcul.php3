@@ -58,7 +58,7 @@ function charger_squelette ($squelette) {
 
 	$phpfile = 'CACHE/skel_' . $nom . '.php';
 
-		// le squelette est-il deja compile, lisible, etc ?
+	// le squelette est-il deja compile, lisible, etc ?
 	if (!squelette_obsolete($phpfile, $sourcefile)
 	      AND lire_fichier ($phpfile, $contenu,
 				array('critique' => 'oui', 'phpcheck' => 'oui'))) 
@@ -66,22 +66,11 @@ function charger_squelette ($squelette) {
 	if (!function_exists($nom)) {
 		// sinon charger le compilateur et tester le source
 		include_local("inc-compilo.php3");
-		if (!lire_fichier ($sourcefile, $skel)) { 
-			// erreur webmaster : $fond ne correspond a rien
-			include_ecrire ("inc_presentation.php3");
-			install_debut_html(_T('info_erreur_squelette'));
-			echo "<p>",
-				_T('info_erreur_squelette2',
-				   array('fichier'=>$squelette)),
-				"</p>";
-			spip_log("ERREUR: squelette '$squelette' indisponible");
-			install_fin_html();
-			exit;
-		}
+		lire_fichier ($sourcefile, $skel);
 	}
 
 	// ce fichier peut contenir deux sortes de choses:
-	// 1. les filtres utilisés par le squelette
+	// 1. les filtres utilises par le squelette
 	// 2. d'eventuels ajouts a $tables_principales
 	// Le point 1 exige qu'il soit lu dans tous les cas.
 	// Le point 2 exige qu'il soit lu apres inc-compilo
