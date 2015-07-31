@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
+include_spip('public/debug');
 
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
@@ -37,7 +38,8 @@ function valider_xml_ok($url)
 		$transformer_xml = charger_fonction('valider_xml', 'inc');
 
 		if (is_dir($url)) {
-			foreach(preg_files($url, '.php$') as $f) {
+			$res = array();
+			foreach(preg_files($url, 'articles.php$') as $f) {
 				$res[]= controle_une_url($transformer_xml, basename($f, '.php'), $url);
 			}
 			$res = valider_resultats($res);
@@ -87,20 +89,36 @@ function valider_xml_ok($url)
 // http://doc.spip.org/@valider_resultats
 function valider_resultats($res)
 {
+	foreach($res as $k => $l) {
+		$n = preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
+			$l[0],
+			$regs,
+			PREG_SET_ORDER);
+		if ($n = intval($n)) {
+			$x.= count_occ($regs);
+			if (count($x) > 1)
+				$x = join('+',$x);
+			else $x = trim(substr(textebrut($l[0]),0,16)) .' ...';
+			$x = ' (' . $x  . ')';
+		} else $x = '';
+		$res[$k][0] = $n;
+		$res[$k][4] = $x;
+	}
 	$i = 0;
 	$table = '';
 	rsort($res);
 	foreach($res as $l) {
 		$i++;
 		$class = 'row_'.alterner($i, 'even', 'odd');
-		list($erreurs, $texte, $script, $args) = $l;
+		list($nb, $texte, $script, $args,$erreurs) = $l;
 		if ($texte < 0) {
 			$texte = (0- $texte);
 			$color = ";color: red";
 		} else  {$color = '';}
 		$h = generer_url_ecrire('valider_xml', "var_url=$script");
 		$table .= "<tr class='$class'>"
-		. "<td style='text-align: right'>$erreurs</td>"
+		. "<td style='text-align: right'>$nb</td>"
+		. "<td style='text-align: left'>$erreurs</td>"
 		. "<td><a href='$h'>$script</a></td>"
 		. "<td>$args</td>"
 		. "<td style='text-align: right$color'>$texte</td>";
@@ -108,6 +126,8 @@ function valider_resultats($res)
 	return "<table class='spip'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
+	  . "</th><th>" 
+	  . _T('message')
 	  . "</th><th>script</th><th>args</th><th>"
 	  . _T('taille_octets', array('taille' => ' '))
 	  . "</th></tr>"
@@ -154,14 +174,8 @@ function controle_une_url($transformer_xml, $script, $dir)
 			} else $res = strlen($page2);
 		}
 	}
-	spip_log("validation de $script en appelant $f");
-	if (isset($GLOBALS['xhtml_error'])) {
-		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
-		       $GLOBALS['xhtml_error'],
-		       $regs,
-		       PREG_SET_ORDER);
-		$n = count($regs);
-	} else $n = 0;
+	$n = isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '';
+	spip_log("validation de $script en appelant $f : " . count($n) . " erreurs."); 
 	return array($n, $res, $script, $appel);
 }
 ?>

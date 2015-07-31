@@ -78,7 +78,7 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 	if ($config['afficher_barre']) {
 		include_spip('inc/barre');
 		$afficher_barre = '<div>' 
-		.  afficher_barre('document.formulaire.texte',false,$lang)
+		.  afficher_barre("document.getElementById('text_area')",false,$lang)
 		. '</div>';
 	} else $afficher_barre = '';
 
