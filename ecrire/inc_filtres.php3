@@ -899,9 +899,14 @@ function hauteur($img) {
 // uniquement pour GD2
 function valeurs_image_trans($img, $effet) {
 	include_ecrire("inc_logos.php3");
+
+	if (strlen($img)==0) return false;
+
 	
 	$fichier = extraire_attribut($img, 'src');
 	if (strlen($fichier) < 1) $fichier = $img;
+
+	if (!file_exists($fichier)) return false;
 	
 	$class = extraire_attribut($img, 'class');
 	$alt = extraire_attribut($img, 'alt');
@@ -948,6 +953,7 @@ function image_flip_vertical($im)
 	include_ecrire('inc_logos.php3');
 	
 	$image = valeurs_image_trans($im, "flip_v");
+	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
@@ -983,6 +989,7 @@ function image_flip_horizontal($im)
 	include_ecrire('inc_logos.php3');
 	
 	$image = valeurs_image_trans($im, "flip_h");
+	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
@@ -1018,6 +1025,7 @@ function image_nb($im)
 	include_ecrire('inc_logos.php3');
 	
 	$image = valeurs_image_trans($im, "nb");
+	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
@@ -1069,6 +1077,7 @@ function image_gamma($im, $gamma = 0)
 	include_ecrire('inc_logos.php3');
 	
 	$image = valeurs_image_trans($im, "gamma-$gamma");
+	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
@@ -1119,6 +1128,7 @@ function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 	include_ecrire('inc_logos.php3');
 		
 	$image = valeurs_image_trans($im, "sepia-$dr-$dv-$db");
+	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
