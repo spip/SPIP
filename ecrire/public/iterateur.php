@@ -70,6 +70,27 @@ class IterDecorator implements Iterator {
 	 */
 	protected $func_filtre = null;
 
+	protected function ajouter_filtre($com) {
+		if (!in_array($com[1], array('cle', 'valeur')))
+			return;
+
+		$op = '';
+		if ($com[0] == 'REGEXP')
+			$filtre = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+		else if ($com[0] == '=')
+			$op = '==';
+		else if (in_array($com[0], array('<','<=', '>', '>=')))
+			$op = $com[0];
+	
+		if ($op)
+			$filtre = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
+
+		if ($com['not'])
+			$filtre = "!($filtre)";
+
+		$this->filtre[] = $filtre;
+	}
+
 	public function __construct(Iterator $iter, $command, $info){
 		$this->iter = $iter;
 		$this->command = $command;
@@ -77,29 +98,15 @@ class IterDecorator implements Iterator {
 		$this->pos = 0;
 
 
-		$op = '';
 		if (is_array($this->command['where'])) {
 			foreach ($this->command['where'] as $k => $com) {
-				switch($com[1]) {
-					case 'cle':
-					case 'valeur':
-						unset($op);
-						if ($com[0] == 'REGEXP')
-							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
-						else if ($com[0] == '=')
-							$op = '==';
-						else if (in_array($com[0], array('<','<=', '>', '>=')))
-							$op = $com[0];
-
-						if ($op)
-							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
-
-						break;
+				if ($com[0] == 'NOT') {
+					$com = $com[1];
+					$com['not'] = true;
 				}
-
+				$this->ajouter_filtre($com);
 			}
 		}
-
 
 		// Appliquer les filtres sur (valeur)
 		if ($this->filtre) {
