@@ -403,10 +403,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	// Options
 	if ($flag_administrable && $options=='avancees') {
 
-		debut_cadre_relief();
-		echo "<u>",_T('syndic_options'),"</u>",
-		  aide('artsyn')."\n",
-		  generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
+		debut_cadre_relief('feed.png', false, "", _T('syndic_options').aide('artsyn'));
+		echo  generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
 
 		// modifier la moderation
 		if ($moderation == 'oui' OR $moderation == 'non')
@@ -415,8 +413,9 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			$moderation = $mod;
 		if ($moderation != 'oui') $moderation='non';
 
-		echo "<p  class='verdana2'><div align='$spip_lang_left'>",
-		  _T('syndic_choix_moderation'), "</div>\n";
+		echo "<div align='".$GLOBALS['spip_lang_left']."'>",
+		  _T('syndic_choix_moderation');
+		echo "<div style='padding-$spip_lang_left: 40px;'>";
 		afficher_choix('moderation', $moderation,
 			array(
 			'non' => _T('info_publier')
@@ -424,7 +423,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			'oui' => _T('info_bloquer')
 				.' ('._T('bouton_radio_modere_priori').')'
 			));
-
+		echo "</div></div>\n";
+		
 		// Oublier les vieux liens ?
 		// Depublier les liens qui ne figurent plus ?
 		# appliquer les choix
@@ -433,9 +433,10 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		if ($oubli == 'oui' OR $oubli == 'non')
 			spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
 
-		echo "<div align='left'>"._T('syndic_choix_oublier'), '</div>';
+		echo "<div>&nbsp;</div>";
+		echo "<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'), '</div>';
 
-		echo "<ul>\n";
+		echo "<ul align='".$GLOBALS['spip_lang_left']."'>\n";
 
 		# miroir
 		if (!$miroir AND !$miroir = $row['miroir']) $miroir = 'non';
@@ -462,13 +463,14 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
 		if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 		echo "<div align='$spip_lang_left'>"
-			. _T('syndic_choix_resume') . "<br />\n";
+			. _T('syndic_choix_resume') ;
+		echo "<div style='padding-$spip_lang_left: 40px;'>";		
 		afficher_choix('resume', $resume,
 			array(
 				'oui' => _T('syndic_option_resume_oui'),
 				'non' => _T('syndic_option_resume_non')
 			));
-		echo "</div>\n";
+		echo "</div></div>\n";
 
 
 		// Bouton "Valider"
