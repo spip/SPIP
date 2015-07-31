@@ -128,11 +128,11 @@ function generateur_obsolete($nom)
 # Si présent, on modifie $fraicheur (passé en référence)
 # pour qu'il indique la durée de vie restante
 
-function page_perenne($lock, $file, &$fraicheur)
+function page_perenne($lock, $file, &$fraicheur, $passer_outre)
 {
   $naissance = filemtime($file);
   $t = time() - $naissance;
-  if ($t > $fraicheur) return false; 
+  if (($t > $fraicheur) && $passer_outre) return false; 
 #  spip_log("Perenne: fraicheur ok");
 # la ligne 1 contient un commentaire comportant successivement
 # - la longévité du include le plus bref
@@ -140,14 +140,17 @@ function page_perenne($lock, $file, &$fraicheur)
 # - le squelette ayant produit la page
 # - d'autres info pour debug seulement
   $l = fgets($lock,1024);
-  if (!preg_match("/^<!--\s(\d+)\s(\w+)\s(\S+)\s/", $l, $m))
+  if ((!preg_match("/^<!--\s(\d+)\s(\w+)\s(\S+)\s/", $l, $m)) && $passer_outre)
 # fichier non conforme, on ignore
     return false; 
 #  spip_log("Perenne: contenu ok");
   $t =  $m[1] - $t;
-  if ($t < 0) return false;
+  if (!$passer_outre) 
+    {
+      if ($t < 0) return false;
 #  spip_log("Perenne: include ok");
-  if (generateur_obsolete($m[3])) return false;
+      if (generateur_obsolete($m[3])) return false;
+    }
 #  spip_log("Perenne: generateur $m[3] ok");
   $fraicheur = $t;
   return array('texte' =>
@@ -228,11 +231,15 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
       while(!flock($lock2, LOCK_EX));
     }
   else
-    flock($lock, LOCK_UN);
-#  spip_log("obtient verrou $cle et libère le général"); 
-  if ($usefile AND ($r = page_perenne($lock2, $file, $fraicheur)))
     {
-    timeout(false,false);
+    flock($lock, LOCK_UN);
+    }
+#  spip_log("obtient verrou $cle et libère le général"); 
+  $passer_outre =  !(timeout(false,false));
+  $r = ((!$usefile) && (!$passer_outre)) ? '' :
+    page_perenne($lock2, $file, $fraicheur, $passer_outre);
+  if ($r)
+    {
 #      spip_log("libère verrou $cle (page perenne)"); 
       flock($lock2, LOCK_UN);
       return $r;
