@@ -24,8 +24,6 @@ function action_instituer_forum_dist() {
 	if (!($row = sql_fetch($result)))
 		return;
 
-	$id_parent = $row['id_parent'];
-
 	// invalider les pages comportant ce forum
 	include_spip('inc/invalideur');
 	include_spip('inc/forum');
