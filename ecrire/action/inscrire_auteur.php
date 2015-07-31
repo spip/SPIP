@@ -23,12 +23,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $nom
  * @return array|string
  */
-function action_inscrire_auteur_dist($mode, $mail_complet, $nom){
+function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $login=''){
 	
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
 	else 	$f = 'test_inscription_dist';
-	$desc = $f($mode, $mail_complet, $nom);
+	$desc = $f($statut, $mail_complet, $nom, $login);
 
 	// erreur ?
 	if (!is_array($desc))
@@ -55,7 +55,7 @@ function action_inscrire_auteur_dist($mode, $mail_complet, $nom){
 
 	// charger de suite cette fonction, pour ses utilitaires
 	$envoyer_inscription = charger_fonction("envoyer_inscription","");
-	list($sujet,$msg,$from,$head) = $envoyer_inscription($desc, $nom, $mode, $id);
+	list($sujet,$msg,$from,$head) = $envoyer_inscription($desc, $nom, $statut);
 
 	$notifications = charger_fonction('notifications', 'inc');
 	notifications_envoyer_mails($mail_complet, $msg, $sujet, $from, $head);
@@ -85,13 +85,13 @@ function action_inscrire_auteur_dist($mode, $mail_complet, $nom){
  * @param string $nom
  * @return array|string
  */
-function test_inscription_dist($statut, $mail, $nom) {
+function test_inscription_dist($statut, $mail, $nom, $login='') {
 	include_spip('inc/filtres');
 	$nom = trim(corriger_caracteres($nom));
 	if((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64))
 	    return 'ecrire:info_login_trop_court';
 	if (!$r = email_valide($mail)) return 'info_email_invalide';
-	return array('email' => $r, 'nom' => $nom, 'bio' => $statut);
+	return array('email' => $r, 'nom' => $nom, 'bio' => $statut, 'login'=>$login);
 }
 
 
@@ -107,7 +107,7 @@ function test_inscription_dist($statut, $mail, $nom) {
  */
 function inscription_nouveau($desc)
 {
-	if (!isset($desc['login']))
+	if (!isset($desc['login']) OR !strlen($desc['login']))
 		$desc['login'] = test_login($desc['nom'], $desc['email']);
 
 	$desc['statut'] = 'nouveau';
@@ -177,7 +177,7 @@ function test_login($nom, $mail) {
  * @param int $id
  * @return array
  */
-function envoyer_inscription_dist($desc, $nom, $mode, $id) {
+function envoyer_inscription_dist($desc, $nom, $mode) {
 
 	$contexte = $desc;
 	$contexte['nom'] = $nom;
