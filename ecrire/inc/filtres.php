@@ -2552,6 +2552,7 @@ function decoder_contexte_ajax($c) {
 }
 
 // encrypter/decrypter un message
+// http://www.php.net/manual/fr/language.operators.bitwise.php#81358
 // http://doc.spip.org/@_xor
 function _xor($message, $key=null){
 	if (is_null($key))
