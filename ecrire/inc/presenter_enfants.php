@@ -16,8 +16,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/autoriser');
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@enfant_rub
-function enfant_rub($collection){
+/**
+ * Crée l'affichage des listes de rubriques dans le privé
+ * 
+ * @param int $collection
+ *  L'identifiant numérique de la rubrique à lister
+ * @param int $debut
+ * 	Le numéro de la pagination si paginé (> 500)
+ * @param int $limite
+ * 	Le pas de pagination si paginé (> 500)
+ * @return array $res
+ * 	Un tableau des sous rubriques
+ */
+function enfant_rub($collection,$debut=0,$limite=500){
 	$voir_logo = (isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
 	$logo = "";
 
@@ -27,7 +38,8 @@ function enfant_rub($collection){
 	}
 
 	$res = array();
-	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
+	
+	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre',"$debut,$limite");
 	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -73,11 +85,36 @@ function enfant_rub($collection){
 	return $res;
 }
 
-// http://doc.spip.org/@sous_enfant_rub
+/**
+ * Affiche les enfants d'une sous rubrique dans un bloc dépliable
+ * (Utilisé dans les pages du privé)
+ * 
+ * @param int $collection2
+ * 	L'identifiant numérique de la rubrique parente
+ * @return string
+ * 	Le contenu du bloc dépliable 
+ */
 function sous_enfant_rub($collection2){
-	$result =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
-
+	$nb = sql_countsel('spip_rubriques',"id_parent=$collection2");
+	
 	$retour = '';
+	$pagination = '';
+	$debut = 0;
+	$limite = 500;
+	
+	/**
+	 * On ne va afficher que 500 résultats max
+	 * Si > 500 on affiche une pagination
+	 */
+	if($nb > $limite){
+		$debut = _request('debut_rubrique'.$collection2) ? _request('debut_rubrique'.$collection2) : $debut;
+		$pagination = chercher_filtre('pagination');
+		$pagination = '<p class="pagination">'.$pagination($nb, '_rubrique'.$collection2, $debut, $limite, true, 'prive').'</p>';
+		$limite = $debut + $limite;
+	}
+	
+	$result =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre',"$debut,$limite");
+	
 	while($row=sql_fetch($result)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
@@ -87,18 +124,42 @@ function sous_enfant_rub($collection2){
 		if (autoriser('voir','rubrique',$id_rubrique2))
 			$retour.="\n<li class='item' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".typo($titre2)."</a></li>\n";
 	}
-
+	
+	$retour = $pagination.$retour.$pagination;
+	 
 	if (!$retour) return '';
-
-	return debut_block_depliable(false,"enfants$collection2")
+	
+	return debut_block_depliable($debut > 0 ? true : false,"enfants$collection2")
 	."\n<ul class='liste-items sous-sous-rub'>\n"
 	. $retour
 	. "</ul>\n".fin_block()."\n\n";
 }
 
-// http://doc.spip.org/@afficher_enfant_rub
+/**
+ * Affiche la liste des rubriques enfants d'une rubrique
+ * (Utilisé dans les pages du privé notamment ?exec=rubriques)
+ * 
+ * Si plus de 500 rubriques enfants, on pagine par 500 les résultats
+ * 
+ * @param int $id_rubrique
+ * 	L'identifiant numérique de la rubrique parente (0 par défaut, la racine)
+ * @return string $res
+ * 	Le contenu textuel affiché, la liste des sous rubriques
+ */
 function afficher_enfant_rub($id_rubrique=0) {
-	$les_enfants = enfant_rub($id_rubrique);
+	$pagination = '';
+	$debut = 0;
+	$limite = 500;
+
+	$nb = sql_countsel('spip_rubriques',"id_parent=$id_rubrique");
+	
+	if($nb > $limite){
+		$debut = _request('debut_rubrique'.$collection2) ? _request('debut_rubrique'.$collection2) : $debut;
+		$pagination = chercher_filtre('pagination');
+		$pagination = '<br class="nettoyeur"><p class="pagination">'.$pagination($nb, '_rubrique'.$collection2, $debut, $limite, true, 'prive').'</p>';
+	}
+
+	$les_enfants = enfant_rub($id_rubrique,$debut,$limite);
 
 	if (!$n = count($les_enfants)) return "";
 
@@ -111,14 +172,16 @@ function afficher_enfant_rub($id_rubrique=0) {
 		$les_enfants2 = implode('',array_slice($les_enfants,$n));
 		$les_enfants = implode('',array_slice($les_enfants,0,$n));
 	}
-
+	
 	$res =
-	"<div class='gauche'>"
+	$pagination
+	. "<div class='gauche'>"
 	. $les_enfants
 	. "</div>"
 	. "<div class='droite'>"
 	. $les_enfants2
-	. "</div>";
+	. "</div>"
+	. $pagination;
 
 	return $res;
 }
