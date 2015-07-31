@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/getdocument');
+include_spip('inc/documents');
 
 //
 // Ajouter un document (au format $_FILES)
