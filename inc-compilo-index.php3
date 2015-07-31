@@ -214,6 +214,7 @@ function collecter_balise_dynamique($l, $p) {
 
 // Genere l'application d'une liste de filtres
 function applique_filtres($p) {
+
 	$statut = $p->statut;
 	$fonctions = $p->fonctions;
 	$p->fonctions = ''; # pour réutiliser la structure si récursion
@@ -237,9 +238,11 @@ function applique_filtres($p) {
 	if ($fonctions) {
 		foreach($fonctions as $fonc) {
 			if ($fonc) {
+
 				$arglist = '';
-				if (ereg('([^\{\}]*)\{(.+)\}$', $fonc, $regs)) {
+				if (ereg('([^\{\}]+)\{(.+)\}$', $fonc, $regs)) {
 					$fonc = $regs[1];
+
 				        $arglist = filtres_arglist($regs[2],$p, ($fonc == '?' ? ':' : ','));
 				}
 				if (function_exists($fonc))
@@ -272,14 +275,17 @@ function filtres_arglist($args, $p, $sep) {
 	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
 		$arg = trim($regs[1]);
 		if ($arg) {
-			if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $regs2)) {
-				$p->nom_boucle = $regs2[2];
-				$p->nom_champ = $regs2[3];
-				# faudrait verifier !trim(regs2[5])
-				$arg = calculer_champ($p);
-				
-			} else if ($arg[0] =='$')
+			if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
+			elseif ($arg[0] =='<')
+			  $arg = calculer_texte($arg, $p->id_boucle, $p->boucles, $p->id_mere);
+			elseif (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
+				$p->nom_boucle = $r2[2];
+				$p->nom_champ = $r2[3];
+				# faudrait verifier !trim(r2[5])
+				$arg = calculer_champ($p);
+			} 
+
 			$arglist .= $sep . $arg;
 		}
 		$args=$regs[2];
