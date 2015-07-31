@@ -1453,8 +1453,9 @@ function saison($numdate, $hemisphere = 'nord') {
 }
 
 // http://doc.spip.org/@saison_annee
-function saison_annee($numdate) {
-	return affdate_base($numdate, 'saison_annee');
+function saison_annee($numdate, $hemisphere = 'nord') {
+	if ($hemisphere != 'sud') $hemisphere = 'nord';
+	return affdate_base($numdate, 'saison_annee', $hemisphere);
 }
 
 /**
