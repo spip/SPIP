@@ -74,7 +74,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 
 	if (!$nb) return '';
 	reset($selection);
-	if ($opt != -1) {
+	if ($opt > -1) {
 		$moy = 1;
 		while(list(, $val) = each($selection)) $moy *= $val;
 		if($moy) $moy = pow($moy, 1.0/$nb);
