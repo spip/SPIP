@@ -169,7 +169,7 @@ function choix_statut_auteur($statut, $ancre) {
 			'</option>';
 
 	// Ajouter l'option "autre" si le statut est inconnu
-	if (!in_array($statut, array('nouveau', '0minirezo', '1comite', '6forum')))
+	if (!in_array($statut, array('nouveau', '0minirezo', '1comite', '5poubelle', '6forum')))
 		$menu .= "\n<option" .
 			mySel('autre','autre') .
 			">" .
