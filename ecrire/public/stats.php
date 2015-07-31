@@ -14,7 +14,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@public_stats_dist
 function public_stats_dist() {
-
+	// $_SERVER["HTTP_REFERER"] ne fonctionne pas partout
+	if (isset($_SERVER['HTTP_REFERER'])) $referer = $_SERVER['HTTP_REFERER'];
+	else if (isset($GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"])) $referer = $GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"];
+	
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (preg_match(
 	',google|yahoo|msnbot|crawl|lycos|voila|slurp|jeeves|teoma,i',
@@ -31,14 +34,14 @@ function public_stats_dist() {
 
 	// Analyse du referer
 	$log_referer = '';
-	if (isset($_SERVER['HTTP_REFERER'])) {
+	if (isset($referer)) {
 		$url_site_spip = preg_replace(',/$,', '',
 			preg_replace(',^(https?://)?(www\.)?,i', '',
 			url_de_base()));
 		if (!(($url_site_spip<>'')
-		AND strpos('-'.strtolower($_SERVER['HTTP_REFERER']), strtolower($url_site_spip))
-		AND strpos($_SERVER['HTTP_REFERER'],"recherche=")===false)) {
-			$log_referer = $_SERVER['HTTP_REFERER'];
+		AND strpos('-'.strtolower($referer), strtolower($url_site_spip))
+		AND strpos($referer,"recherche=")===false)) {
+			$log_referer =$referer;
 		}
 	}
 
