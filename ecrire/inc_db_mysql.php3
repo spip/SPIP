@@ -22,7 +22,8 @@ function spip_query_db($query) {
 	if ($my_profile)
 		$m1 = microtime();
 
-	$result = mysql_query($query, $spip_mysql_link);
+	if ($spip_mysql_link) $result = mysql_query($query, $spip_mysql_link);
+	else $result = mysql_query($query);
 
 	if ($my_profile) {
 		$m2 = microtime();
@@ -32,7 +33,7 @@ function spip_query_db($query) {
 		$tt += $dt;
 		echo "<small>".htmlentities($query);
 		echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
-		
+
 	}
 
 	if ($my_debug AND $s = mysql_error()) {
