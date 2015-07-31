@@ -239,9 +239,11 @@ function chargeur_charger_zip($quoi = array())
 	AND array_values($paths[$i]) == array($total))
 		$i++;
 
-	$racine = $i
-		? array_pop(array_keys($paths[$i-1])).'/'
-		: '';
+	$racine = '';
+	if ($i){
+		$racine = array_keys($paths[$i-1]);
+		$racine = array_pop($racine).'/';
+	}
 
 	$quoi['remove'] = $racine;
 

@@ -375,7 +375,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace){
 
 	if ($boucle->numrows OR $boucle->mode_partie){
 		if ($count=='count(*)')
-			$count = "array_shift(sql_fetch(\$result$serveur))";
+			$count = "(\$cc=sql_fetch(\$result$serveur))?array_shift(\$cc):0";
 		else
 			$count = "sql_count(\$result$serveur)";
 		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
