@@ -100,7 +100,7 @@ function informer_login($login){
 		$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
 		unset($row['prefs']);
 		
-		$page = evaluer_fond('formulaires/logo_auteur', array('id_auteur'=>$row['id_auteur']));
+		$page = evaluer_fond('formulaires/inc-logo_auteur', array('id_auteur'=>$row['id_auteur']));
 		$row['logo'] = $page['texte'];
 	}
 	return $row;	
