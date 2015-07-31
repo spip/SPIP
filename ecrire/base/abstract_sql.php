@@ -159,4 +159,37 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 	return "($in_sql)";
 }
+
+
+// Une version d'abstract_showtable prenant en compte les tables predefinies
+// Faudrait tester un jour si ca accelere vraiment.
+
+function description_table($nom){
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+	static $tables_externes = array();
+
+	if (isset($tables_externes[$nom]))
+		return array($nom, $tables_externes[$nom]);
+
+	$nom_table = $nom;
+	if (in_array($nom, $table_des_tables))
+	   $nom_table = 'spip_' . $nom;
+
+	include_spip('base/serial');
+	if (isset($tables_principales[$nom_table]))
+		return array($nom_table, $tables_principales[$nom_table]);
+
+	include_spip('base/auxiliaires');
+	$nom_table = 'spip_' . $nom;
+	if (isset($tables_auxiliaires[$nom_table]))
+		return array($nom_table, $tables_auxiliaires[$nom_table]);
+
+	if ($desc = spip_abstract_showtable($nom, '', true))
+		if (isset($desc['field'])) {
+			$tables_externes[$nom] = $desc;
+			return array($nom, $desc);
+		}
+
+	return array($nom,array());
+}
 ?>
