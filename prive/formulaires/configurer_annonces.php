@@ -78,7 +78,7 @@ function formulaires_configurer_annonces_traiter_dist(){
 		$id_job = job_queue_add("mail","Test Envoi des nouveautes",array(),"genie/");
 		include_spip('inc/queue');
 		queue_schedule(array($id_job));
-		$res['message_ok'] .= "<br />"._L("La liste des nouveautés a été envoyée");
+		$res['message_ok'] .= "<br />"._T("info_liste_nouveautes_envoyee");
 	}
 
 	return $res;
