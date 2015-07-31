@@ -60,9 +60,9 @@ img, table { margin: 0; padding: 0; border: none; }
 h1 { font-size: 1.27em; font-weight: bold; color: #000; }
 h2 { margin: 0; padding: .2em; background: #666699; font-size: 1em; text-transform: uppercase; }
 h2, h2 a, h2 a:hover { color: #fff; text-decoration: none; }
-h3.spip { font-weight: bold; border-bottom: 2px solid #99CC66; color: #99CC66; font-family: Georgia, Times, serif; }
+h3.spip { font-weight: bold; border-bottom: 2px solid #CCCC66; color: #CCCC66; font-family: Georgia, Times, serif; }
 
-.surtitre, .soustitre { font-size: 0.82em; text-transform: uppercase; color: #666; }
+.surtitre, .soustitre { font-size: 0.82em; text-transform: uppercase; color: #666; color: #CCCC66; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; }
@@ -72,9 +72,11 @@ h3.spip { font-weight: bold; border-bottom: 2px solid #99CC66; color: #99CC66; f
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
+small { color: #666; }
+
 /* Mise en forme des textes du contenu */
-.chapo { margin-bottom: 1.5em; font-weight: bold; line-height: 1.4em; }
-.texte { color: #000; font-size: 0.96em; line-height: 1.4em; }
+.chapo { margin-bottom: 1.5em; font-size: 0.96em; font-weight: bold; line-height: 1.4em; color: #666699; }
+.texte { font-size: 0.96em; line-height: 1.4em; color: #000; }
 .lien { font-size: 0.82em; font-weight: bold; }
 .ps, .notes { margin-bottom: 2em; }
 .ps { font-size: 0.82em; }
@@ -82,16 +84,14 @@ h3.spip { font-weight: bold; border-bottom: 2px solid #99CC66; color: #99CC66; f
 
 /* Citations, code et poesie */
 blockquote { margin: 1em 3em; padding-left: 1em; padding-right: 1em; border-left: 4px solid #CCC; }
-
 .spip_poesie { margin: 1em 3em; padding-left: 1em; border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
 .spip_poesie div { text-indent: -60px; margin-left: 60px; }
-
 .spip_code, .spip_cadre { font-family: "Courier New", Courier, mono; font-style: normal; font-size: 1.1em; color: #009; }
 
 .spip_surligne { background: #FF6; }
 
 
-/* Habillage des menus
+/* Habillage des sommaires et menus
 ---------------------------------------------- */
 
 /* Habillage general des menus de navigation */
@@ -107,8 +107,14 @@ blockquote { margin: 1em 3em; padding-left: 1em; padding-right: 1em; border-left
 .menu ul li ul li { margin: 0; padding: 0; border: 0; }
 
 .pagination { text-align: right; font-size: 0.90em; }
-.pagination a { color: #99CC66; text-decoration: none; }
+.pagination a { text-decoration: none; }
 .pagination .on { font-weight: bold; }
+
+/* Rubriques */
+.rubriques {}
+.rubriques ul li { background: #eee; border: 0; text-transform: uppercase; }
+.rubriques ul li ul li { text-transform: none; }
+.rubriques a, .rubriques a:hover { text-decoration: none; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul {}
@@ -126,12 +132,11 @@ blockquote { margin: 1em 3em; padding-left: 1em; padding-right: 1em; border-left
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-.formulaire_spip { text-align: left; font-size: 0.77em; }
-.formulaire_spip p { margin: 0.5em 0; padding: 0; }
-.formulaire_spip fieldset {}
-.formulaire_spip legend {}
+.formulaire_spip { background: #CCCC99; margin-bottom: 2em; padding: 1em; text-align: left; font-size: 0.77em; }
+.formulaire_spip fieldset { border: 0; }
+.formulaire_spip legend { font-weight: bold; color: #fff; }
 .formulaire_spip label {}
-.formulaire_spip .forml { width: 99%; font-family: inherit; font-size: inherit; }
+.formulaire_spip .forml, textarea { width: 99%; background: #fff; border: 1px inset; font-family: inherit; font-size: inherit; }
 
 /* Boutons */
 .spip_bouton { text-align: right; }
