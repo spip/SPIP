@@ -486,11 +486,13 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 	$contenu = array('options' => '', 'fonctions' =>'');
 	$boutons = array();
 	$onglets = array();
+	$sign = "";
 
 	foreach($ordre as $p => $info){
 		// $ordre peur contenir des plugins en attente et non valides pour ce hit
 		if (isset($plugin_valides[$p])){
-		$dir_type = $plugin_valides[$p]['dir_type'];
+			$sign .= md5(serialize($info));
+			$dir_type = $plugin_valides[$p]['dir_type'];
 			$plug = $plugin_valides[$p]['dir'];
 			$dir = constant($dir_type);
 			$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
@@ -510,6 +512,7 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		}
 	}
 
+	$contenu['options'] .= "define('_PLUGINS_HASH','".md5($sign)."');\n";
 	$contenu['fonctions'] .= plugin_ongletbouton("boutons_plugins", $boutons)
 	. plugin_ongletbouton("onglets_plugins", $onglets);
 
