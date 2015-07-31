@@ -1737,7 +1737,7 @@ function debut_javascript($admin, $stat)
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
 			"';\n") .
-		http_script('',_DIR_IMG_PACK . 'presentation.js');
+                http_script('',_DIR_JAVASCRIPT . 'presentation.js'); 
 }
 
 // Fonctions onglets

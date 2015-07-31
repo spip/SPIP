@@ -944,13 +944,16 @@ function spip_initialisation() {
 
 	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
 
+	# le chemin http (relatif) vers les bibliotheques JavaScript 
+	define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/javascript/')); 
+
 	// Icones
 	# le chemin http (relatif) vers les images standard
 	define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 	# vers les logos de type de document, standard & perso
-	define('_DIR_IMG_ICONES_DIST', _DIR_IMG_PACK . "icones/");
+	define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/img/icones/");
 	# les icones de la barre d'edition des formulaires
-	define('_DIR_IMG_ICONES_BARRE', _DIR_IMG_PACK . "icones_barre/");
+	define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/img/icones_barre/");
 
 	# le chemin php (absolu) vers les images standard (pour hebergement centralise)
 	define('_ROOT_IMG_PACK', (dirname(dirname(__FILE__)) . '/img_pack/'));
