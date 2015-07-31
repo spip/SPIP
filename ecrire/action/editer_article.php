@@ -267,15 +267,14 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 	// Si on deplace l'article
 	//  changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
-		$id_rubrique_new = $champs['id_rubrique'];
 
-		$row_rub = sql_fetch(spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique="._q($id_rubrique_new)));
+		$row_rub = sql_fetch(spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
 
 		$langue = $row_rub['lang'];
-		$id_secteur = $row_rub['id_secteur'];
+		$champs['id_secteur'] = $row_rub['id_secteur'];
 
-		$row = sql_fetch(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . _q($langue)));
-		if ($row) $champs['lang='] = $langue;
+		if (sql_countsel('spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . _q($langue)))
+			$champs['lang='] = $langue;
 	}
 
 	if (!$champs) return;
