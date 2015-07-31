@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // elle-meme ne fait que traiter les cas particuliers, puis passe la main.
 // http://doc.spip.org/@public_assembler_dist
 function public_assembler_dist($fond) {
-	  global $auteur_session, $forcer_lang, $ignore_auth_http, $var_mode;
+	  global $forcer_lang, $ignore_auth_http;
 
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non')) {
@@ -43,17 +43,50 @@ function public_assembler_dist($fond) {
 		reponse_confirmation($_GET['var_confirm']);
 	}
 
-	//  forcer la connexion si on veut le debusqueur
-	if ($var_mode=='debug') {
-		include_spip('inc/autoriser');
-		if (autoriser('configurer'))
-			spip_log($auteur_session['nom'] . " ausculte $fond");
-		else {
-			include_spip('inc/headers');
-			redirige_par_entete(generer_url_public('login',
-			'url='.rawurlencode(
-			parametre_url(self(), 'var_mode', 'debug', '&')
-			), true));
+	// On fixe $GLOBALS['var_mode']
+	$GLOBALS['var_mode'] = false;
+	$GLOBALS['var_preview'] = false;
+	if (isset($_GET['var_mode'])) {
+		// tout le monde peut calcul/recalcul
+		if ($_GET['var_mode'] == 'calcul'
+		OR $_GET['var_mode'] == 'recalcul')
+			$GLOBALS['var_mode'] = $_GET['var_mode'];
+
+		// preview et debug necessitent une autorisation
+		else if ($_GET['var_mode'] == 'preview'
+		OR $_GET['var_mode'] == 'debug') {
+			include_spip('inc/autoriser');
+			if (autoriser(
+				($_GET['var_mode'] == 'preview')
+					? 'previsualiser'
+					: 'debug'
+			)) {
+				// preview ?
+				if ($_GET['var_mode'] == 'preview') {
+					// forcer le compilo et ignorer les caches existants
+					$GLOBALS['var_mode'] = 'recalcul';
+					// truquer les boucles et ne pas enregistrer de cache
+					$GLOBALS['var_preview'] = true;
+				}
+				// seul cas ici: 'debug'
+				else { 
+					$GLOBALS['var_mode'] = $_GET['var_mode'];
+				}
+				spip_log($GLOBALS['auteur_session']['nom']
+					. " ".$GLOBALS['var_mode']);
+			}
+			// pas autorise ?
+			else {
+				// si on n'est pas connecte on se redirige
+				if (!$GLOBALS['auteur_session']) {
+					include_spip('inc/headers');
+					redirige_par_entete(generer_url_public('login',
+					'url='.rawurlencode(
+					parametre_url(self(), 'var_mode', $_GET['var_mode'], '&')
+					), true));
+				}
+				// sinon tant pis
+			}
 		}
 	}
 
@@ -62,21 +95,13 @@ function public_assembler_dist($fond) {
 }
 
 
-// http://doc.spip.org/@is_preview
-function is_preview()
-{
-	if ($GLOBALS['var_mode'] !== 'preview') return false;
-	include_spip('inc/autoriser');
-	return autoriser('previsualiser'); 
-}
-
 //
 // calcule la page et les entetes
 //
 // http://doc.spip.org/@assembler_page
 function assembler_page ($fond) {
 	global $flag_preserver,$lastmodified,
-		$use_cache, $var_mode, $var_preview;
+		$use_cache;
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
@@ -85,21 +110,13 @@ function assembler_page ($fond) {
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
-	// demande de previsualisation ?
-	// -> inc-calcul n'enregistrera pas les fichiers caches
-	// -> inc-boucles acceptera les objets non 'publie'
-	if ($var_preview = is_preview()) {
-		$var_mode = 'recalcul';
-		spip_log('preview !');
-	}
-
 	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
 
 	// Pour les pages non-dynamiques (indiquees par #CACHE{duree,cache-client})
 	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
 	// pages sont dynamiques)
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !$var_mode
+	AND !$GLOBALS['var_mode']
 	AND $chemin_cache
 	AND isset($page['entetes'])
 	AND isset($page['entetes']['Cache-Control'])
@@ -150,11 +167,11 @@ function assembler_page ($fond) {
 			if ($GLOBALS['flag_ob']) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
-				AND $var_mode != 'debug') {
+				AND $GLOBALS['var_mode'] != 'debug') {
 					$page = message_erreur_404();
 				}
 				// pas de cache client en mode 'observation'
-				if ($var_mode) {
+				if ($GLOBALS['var_mode']) {
 					$page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
 					$page['entetes']["Pragma"] = "no-cache";
 				}

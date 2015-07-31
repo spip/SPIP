@@ -966,12 +966,11 @@ function generer_url_action($script, $args="", $no_entities=false) {
 
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
 // A remplacer (bientot ?) par une gestion propre des variables admissibles ;-)
-// Attention pour compatibilite max $_GET n'est pas superglobale
 // NB: c'est une fonction de maniere a ne pas pourrir $GLOBALS
 // http://doc.spip.org/@spip_register_globals
 function spip_register_globals() {
 
-	define('_FEED_GLOBALS', true);
+	define('_FEED_GLOBALS', false); // si ca marche on simplifiera tout ca
 
 	// Liste des variables dont on refuse qu'elles puissent provenir du client
 	$refuse_gpc = array (

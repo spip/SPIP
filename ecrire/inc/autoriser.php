@@ -113,7 +113,6 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-
 	return ($GLOBALS['meta']['preview'] == '1comite'
 		OR ($GLOBALS['meta']['preview']== 'oui' AND
 		    $qui['statut']=='0minirezo')); 
@@ -473,6 +472,12 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	OR
 		spip_num_rows(spip_query("SELECT breves.id_breve FROM spip_documents_breves AS rel_breves, spip_breves AS breves WHERE rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document  LIMIT 1")) > 0
 	;
+}
+
+// Qui peut activer le debugueur ?
+// A noter : pour le moment ne fonctionne que pour ?var_profile (timer SQL)
+function autoriser_debug_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
 }
 
 // Renvoie la liste des rubriques liees a cet auteur, independamment de son
