@@ -1031,7 +1031,7 @@ function spip_desinfecte(&$t) {
 	}
 }
 
-// Authentifier le visiteur s'il s'annonce
+//  retourne le statut du visiteur s'il s'annonce
 
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
@@ -1041,7 +1041,7 @@ function verifier_visiteur() {
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 		$var_f = charger_fonction('session', 'inc');
-		if ($var_f()) return true;
+		if ($var_f()) return $GLOBALS['auteur_session']['statut'];
 		include_spip('inc/actions');
 		return verifier_php_auth();
 	}

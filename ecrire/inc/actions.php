@@ -89,7 +89,7 @@ function determine_upload()
 }
 
 //
-// reconnaitre un utilisateur authentifie en php_auth
+// retourne le statut d'un utilisateur authentifie en php_auth, false sinon
 //
 function verifier_php_auth() {
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
@@ -102,7 +102,7 @@ function verifier_php_auth() {
 		if ($row AND $row['source'] != 'ldap') {
 		  if ($row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			$GLOBALS['auteur_session'] = $row;
-			return true;
+			return $row['statut'];
 		  } else return false;
 		} else {
 		  if (!$row AND !$GLOBALS['ldap_present'])
@@ -111,7 +111,7 @@ function verifier_php_auth() {
 			$f = charger_fonction('auth_ldap', 'inc', true);
 			if ($f) {
 			  $GLOBALS['auteur_session'] =  $f($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
-			  return true;
+			  return $GLOBALS['auteur_session']['statut'];
 			}
 		  }
 		}
