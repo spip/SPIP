@@ -601,7 +601,7 @@ function typo($letexte, $echapper=true) {
 	//
 	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
 	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	$letexte = traiter_modeles($mem = $letexte, false, 'TYPO');
+	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '');
 	if ($letexte != $mem) $echapper = true;
 	unset($mem);
 
