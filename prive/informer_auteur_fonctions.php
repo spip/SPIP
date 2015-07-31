@@ -25,8 +25,14 @@ function informer_auteur($bof)
 	if ($row AND is_array($row))
 		unset($row['id_auteur']);
 	else {
+		// permettre d'autoriser l'envoi de password non crypte lorsque
+		// l'auteur n'est pas (encore) declare dans SPIP, par exemple pour les cas
+		// de premiere authentification via SPIP a une autre application.
+		if (defined('_AUTORISER_AUTH_FAIBLE') and _AUTORISER_AUTH_FAIBLE) {
+			$row = array();
+		}
 		// piocher les infos sur un autre login
-		if ($n = sql_countsel('spip_auteurs',"login<>''")){
+		elseif ($n = sql_countsel('spip_auteurs',"login<>''")){
 			$n = (abs(crc32($login))%$n);
 			$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
 			if ($row AND is_array($row)){
@@ -34,7 +40,7 @@ function informer_auteur($bof)
 				$row['login'] = $login;
 			}
 		}
-		else $row = array();
+		else  $row = array();
 	}
 
 	return json_export($row);
