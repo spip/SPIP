@@ -316,6 +316,14 @@ $traiter_math = 'tex';
 // Masquer les warning
 error_reporting(E_ALL ^ E_NOTICE);
 
+// Variable du compilateur de squelettes
+$tables_des_serveurs_sql = array();
+$exceptions_des_tables = array();
+$tables_principales = array();
+$table_des_tables = array();
+$tables_relations = array();
+$table_primary = array();
+$table_date = array();
 /* ATTENTION CETTE VARIABLE NE FONCTIONNE PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
