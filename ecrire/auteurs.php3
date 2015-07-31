@@ -338,7 +338,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		$debut_prec = strval(max($debut - $max_par_page, 0));
 		$link = new Link;
 		$link->addVar('debut', $debut_prec);
-		echo $link->getForm('GET', 'bas');
+		echo $link->getForm('GET');
 		echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo'>";
 		echo "</form>";
 		//echo "<a href='$myretour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
@@ -347,7 +347,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	if ($debut_suivant < $nombre_auteurs) {
 		$link = new Link;
 		$link->addVar('debut', $debut_suivant);
-		echo $link->getForm('GET', 'bas');
+		echo $link->getForm('GET');
 		echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo'>";
 		echo "</form>";
 		//echo "<a href='$myretour&debut=$debut_suivant'>&gt;&gt;&gt;</a>";
