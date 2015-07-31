@@ -204,21 +204,17 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 	global $_POST;
 
 	// Le fichier cache est-il valide ?
-	if ($delais == 0 OR count($_POST)) {
-		$use_cache = 0;
-		$chemin_cache = '';
-	} else {
-		$use_cache = utiliser_cache($chemin_cache, $delais);
-	}
+	$use_cache = ($delais != 0 and !count($_POST));
+	if ($use_cache)	$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	// Sinon, tester qu'on a la connexion a la base
 	if (!$use_cache) {
 		include_local(_FILE_CONNECT);
 		if (!$GLOBALS['db_ok']) {
-			if ($chemin_cache AND @file_exists($chemin_cache)) {
-				$use_cache = 1;
-			}
-			else {
+			if (@file_exists($chemin_cache)) 
+			  $use_cache = 1; // passer outre
+			else
+			  {
 				spip_log("Erreur base de donnees & "
 					. "impossible utiliser $chemin_cache");
 				if (!$GLOBALS['flag_preserver']) {
@@ -227,22 +223,23 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 						install_debut_html(_T('info_travaux_titre'));
 						echo _T('titre_probleme_technique');
 						install_fin_html();
-					} else
-						echo _T('titre_probleme_technique');
+					}
+					else echo _T('titre_probleme_technique');
+
 				}
-				// ne plus rien signaler, ne pas mettre en cache ...
+				// continuer quand meme, ca n'ira pas loin.
+
+				// mais ne plus rien signaler, ne pas mettre en cache ...
 				$GLOBALS['flag_preserver'] = true;
 				define ('spip_interdire_cache', true);
-				// ... mais continuer quand meme
-			}
+			  }
 		}
 	}
 }
 
-
-//
 // Fonctions pour le cache des images (vues reduites)
-//
+
+
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
