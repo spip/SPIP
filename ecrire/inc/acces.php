@@ -205,7 +205,6 @@ function verifier_htaccess($rep, $force=false) {
 		return true;
 	if ($_SERVER['SERVER_ADMIN'] == 'www@nexenservices.com')
 		return nexen($rep);
-	spip_log("Creation de $htaccess");
 	if ($ht = @fopen($htaccess, "w")) {
 		fputs($ht, "deny from all\n");
 		fclose($ht);
@@ -214,14 +213,15 @@ function verifier_htaccess($rep, $force=false) {
 		if ($ht = @fopen($t, "w")) {
 			@fclose($ht);
 			include_spip('inc/distant');
-			$t = '/' . _DIR_RACINE . $t;
-			if (preg_match(',^(.*/)[^/]+/../(.*)$,',$t, $m))
-				$t = $m[1] . $m[2];
-			$f = $GLOBALS['meta']['adresse_site'] . $t;
-			$ht = !recuperer_lapage($f, false, 'HEAD', 0);
+			$t = substr($t,strlen(_DIR_RACINE));
+			$t = url_de_base() . $t;
+			$ht = recuperer_lapage($t, false, 'HEAD', 0);
+			// htaccess inoperant si on a recupere des entetes HTTP
+			// (ignorer la reussite si connexion par fopen)
+			$ht = !(isset($ht[0]) AND $ht[0]);
 		}
 	}
-	if (!$ht) spip_log("$htaccess inoperant sur $rep"); 
+	spip_log("Creation de $htaccess " . ($ht ? " reussie" : " manquee"));
 	return $ht;
 }	
 
