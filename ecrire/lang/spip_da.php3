@@ -1203,8 +1203,8 @@ og igen f&aring; adgang til webstedet.',
 	herunder <i>hele</i> ops&aelig;tningen for redakt&oslash;rer og administratorer. N&aring;r du har udf&oslash;rt den, b&oslash;r du 
 	geninstallere SPIP for at danne en ny database og &aring;bne op for den f&oslash;rste administratoradgang.',
 'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
-	<i>ecrire/data/</i>.
-	Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder der bruges i artikler og afsnit.',
+ <i>ecrire/data/</i>.
+ Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
 'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
 	Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
 	For mere information henvises til <a href=\'http://www.uzine.net/article1489.html\'>SPIP documentation</a>.',

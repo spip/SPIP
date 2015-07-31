@@ -1259,9 +1259,9 @@ Apr&eacute;sa, zi poura m&egrave;t inn nouvo modpas
 <i>tout</i> minm bann laks&egrave; lot&egrave;r &egrave;k komand&egrave;r. Si ou i anserv ali, i sra n&eacute;s&eacute;s&egrave;r f&eacute; zw&eacute; inn nouv&egrave;l 
 linstalasyon do SPIP pou kr&eacute; inn nouv&egrave;l labaz &egrave;k inn promy&eacute; laks&eacute; komand&egrave;r.',
 'texte_admin_tech_01' => 'Lopsyon-la li rand aou kav sovgard lo kontnu
-la bazdodn&eacute;. LPou sa minm, li m&egrave;t ali dann zinn fisy&eacute; pr&eacute;si dann r&eacute;pertwar   <i>ecrire/data/</i>.
+la bazdodn&eacute;. Pou sa minm, oubli pa m&egrave;t ali andann  fisy&eacute; pr&eacute;si dann r&eacute;p&egrave;rtwar   <i>ecrire/data/</i>.
 Oubli pa r&eacute;kup&egrave;r osi tout sak nana dann r&eacute;pertwar <i>IMG/</i>, s&eacute; dir
-tout bann zimaz nana dann bann zartik &egrave;k bann rubrik.',
+tout bann zimaz &egrave;k tout bann dokiman kn&eacute;na dann bann zartik &egrave;k bann rubrik.',
 'texte_admin_tech_02' => 'Tansyon pangar : sovgard-la li sra pou nir r&eacute;stor&eacute; 
 S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Souvandfwa nanna d-moun sak i kanard azot : moun-la i f&eacute; inn sovgard labaz avan larnouv&egrave;lman la versyon SPIP. Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.uzine.net/article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Ou p&eacute; swazi sovgard lo fisy&eacute; dann manyir-konpers&eacute;. Manyir-la i perm&eacute; rand pli takini lo transf&egrave;r d-fisy&eacute; sir out lordinat&egrave;r oubyin sa lo serv&egrave;r pou bann sovgard. L&eacute; itil aou pour kons&egrave;rv out l&eacute;spas-diks.',
