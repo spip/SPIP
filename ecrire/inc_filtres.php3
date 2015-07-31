@@ -1130,7 +1130,7 @@ function image_typo() {
 	// Recuperer les differents arguments
 	$numargs = func_num_args();
 	$arg_list = func_get_args();
-	$text = $arg_list[0];
+	$texte = $arg_list[0];
 	for ($i = 1; $i < $numargs; $i++) {
 		if (ereg("\=", $arg_list[$i])) {
 			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
@@ -1142,7 +1142,7 @@ function image_typo() {
 	}
 
 	// Construire requete et nom fichier
-	$text = ereg_replace("\&nbsp;", "~", $text);	
+	$text = ereg_replace("\&nbsp;", "~", $texte);	
 
 	$taille = $variable["taille"];
 	if ($taille < 1) $taille = 16;
@@ -1153,6 +1153,8 @@ function image_typo() {
 	$fond = $variable["fond"];
 	if (strlen($fond) < 6) $fond = "ffffff";
 	
+	$alt = $variable["alt"];
+	
 	$ombre = $variable["ombre"];
 	$ombrex = $variable["ombrex"];
 	$ombrey = $variable["ombrey"];
@@ -1161,7 +1163,8 @@ function image_typo() {
 	
 	$align = $variable["align"];
 	if (!$variable["align"]) $align="left";
-	
+	 
+	$retour = $variable["retour"];
 	
 	$police = $variable["police"];
 	if (strlen($police) < 2) $police = "dustismo.ttf";
@@ -1173,20 +1176,23 @@ function image_typo() {
 	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur";
 	$query = md5($string);
 	$dossier = _DIR_IMG. creer_repertoire(_DIR_IMG, 'cache-texte');
-	$fichier = "$dossier/$query.png";
+	$fichier = "$dossier$query.png";
+
+	$flag_gd_typo = function_exists("imageftbbox");
+
 	
-	if (!file_exists($fichier)) {
+	if (!file_exists($fichier) AND $flag_gd_typo) {
 		// Il faut completer avec un vrai _SPIP_PATH, de facon a pouvoir livrer des /polices dans les dossiers de squelettes
 		$font = find_in_path("polices/$police", "ecrire");
 	
 		$imgbidon = imageCreateTrueColor($largeur, 45);
 		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille);
 		$hauteur = $retour["height"];
-		$largeur = $retour["width"];
+		$largeur_reelle = $retour["width"];
 		$espace = $retour["espace"];
 		imagedestroy($imgbidon);
 		
-		$im = imageCreateTrueColor($largeur+$ombrex-$espace, $hauteur+5+$ombrey);
+		$im = imageCreateTrueColor($largeur_reelle+$ombrex-$espace, $hauteur+5+$ombrey);
 		imagealphablending ($im, FALSE );
 		imagesavealpha ( $im, TRUE );
 		
@@ -1200,8 +1206,7 @@ function image_typo() {
 		// Le texte ˆ dessiner
 		// Remplacez le chemin par votre propre chemin de police
 		//global $text;
-		
-		
+				
 		if (strlen($ombre) == 6) printWordWrapped($im, $taille+$ombrey+5, $ombrex, $largeur, $font, $grey, $text, $taille, $align);
 		printWordWrapped($im, $taille+5, 0, $largeur, $font, $black, $text, $taille, $align);
 		
@@ -1213,12 +1218,20 @@ function image_typo() {
 		
 		$image = $fichier;
 		
-	} else {
+	} else if ($flag_gd_typo) {
 		$image = $fichier;
 	}
 
 	if ($image) {
-		return "<img src='$image' style='border: 0px;'>";
+		$dimensions = getimagesize($image);
+		$largeur = $dimensions[0];
+		$hauteur = $dimensions[1];
+		if ($retour == "image_seule")
+			return "<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' alt='$alt' class='image_typo'>";
+		else if ($retour == "fichier_seul")
+			return "$image";
+		else 
+			return "<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' alt='$alt' class='image_typo'><span class='texte_typo'>$texte</span>";
 	} else {
 		return $texte;
 	}
