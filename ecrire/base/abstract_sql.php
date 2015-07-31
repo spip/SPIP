@@ -1161,7 +1161,7 @@ function sql_create_view($nom, $select_query, $serveur='', $option=true) {
  *     $t = sql_multi('chapo', 'fr');
  *     ```
  * @api
- * @param string $objet
+ * @param string $sel
  *     Colonne ayant le texte
  * @param string $lang
  *     Langue à extraire
@@ -1660,7 +1660,7 @@ function sql_quote($val, $serveur='', $type='')
  *     Utité utilisée (DAY, MONTH, YEAR, ...)
  * @param string $serveur
  *     Nom du connecteur
- * @param bool|string $options
+ * @param bool|string $option
  *     Peut avoir 2 valeurs :
  * 
  *     - true pour exécuter la demande.

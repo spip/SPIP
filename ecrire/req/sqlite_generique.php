@@ -1842,12 +1842,11 @@ function _sqlite_link($serveur = ''){
 
 
 /**
- * renvoie les bons echappements (pas sur les fonctions now())
- * http://doc.spip.org/@_sqlite_calculer_cite
+ * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
  *
- * @param string|array|number $v
- * @param string $type
- * @return string|array|number
+ * @param string|number $v   Texte ou nombre à échapper
+ * @param string $type       Type de donnée attendue, description SQL de la colonne de destination
+ * @return string|number     Texte ou nombre échappé
  */
 function _sqlite_calculer_cite($v, $type){
 	if ($type){
@@ -2000,11 +1999,11 @@ function _sqlite_calculer_where($v){
 
 
 /**
- * Charger les modules sqlite (si possible) (juste la version demandee),
- * ou, si aucune version, renvoie les versions sqlite dispo
- * sur ce serveur dans un array
+ * Charger les modules SQLite
  *
- * http://doc.spip.org/@_sqlite_charger_version
+ * Si possible et juste la version demandée,
+ * ou, si aucune version, on renvoie les versions sqlite disponibles
+ * sur ce serveur dans un tableau
  *
  * @param string $version
  * @return array|bool
@@ -2457,19 +2456,23 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
 
 
 /**
- * renvoyer la liste des versions sqlite disponibles
+ * Renvoyer la liste des versions sqlite disponibles
  * sur le serveur
- * http://doc.spip.org/@spip_versions_sqlite
- *
+ * 
  * @return array|bool
  */
 function spip_versions_sqlite(){
 	return _sqlite_charger_version();
 }
 
-
+/**
+ * Gère l'envoi et la réception de requêtes à SQLite, qui peuvent être
+ * encadrées de transactions.
+**/
 class spip_sqlite {
+	/** @var sqlite_requeteur[] Liste des instances de requêteurs créés */
 	static $requeteurs = array();
+	/** @var bool[] Pour chaque connexion, flag pour savoir si une transaction est en cours */
 	static $transaction_en_cours = array();
 
 	function spip_sqlite(){}
@@ -2509,26 +2512,54 @@ class spip_sqlite {
 		return $traducteur->traduire_requete();
 	}
 
+	/**
+	 * Démarre une transaction
+	 * 
+	 * @param string $serveur    Nom de la connexion
+	**/
 	static function demarrer_transaction($serveur){
 		spip_sqlite::executer_requete("BEGIN TRANSACTION",$serveur);
 		spip_sqlite::$transaction_en_cours[$serveur] = true;
 	}
 
+	/**
+	 * Exécute la requête donnée
+	 * 
+	 * @param string $query       Requête
+	 * @param string $serveur     Nom de la connexion
+	 * @param null|bool $tracer   Demander des statistiques (temps) ?
+	**/
 	static function executer_requete($query, $serveur, $tracer=null){
 		$requeteur = spip_sqlite::requeteur($serveur);
 		return $requeteur->executer_requete($query, $tracer);
 	}
 
+	/**
+	 * Obtient l'identifiant de la dernière ligne insérée ou modifiée
+	 * 
+	 * @param string $serveur    Nom de la connexion
+	 * return int                Identifiant
+	**/
 	static function last_insert_id($serveur){
 		$requeteur = spip_sqlite::requeteur($serveur);
 		return $requeteur->last_insert_id($serveur);
 	}
 
+	/**
+	 * Annule une transaction
+	 * 
+	 * @param string $serveur    Nom de la connexion
+	**/
 	static function annuler_transaction($serveur){
 		spip_sqlite::executer_requete("ROLLBACK",$serveur);
 		spip_sqlite::$transaction_en_cours[$serveur] = false;
 	}
 
+	/**
+	 * Termine une transaction
+	 * 
+	 * @param string $serveur    Nom de la connexion
+	**/
 	static function finir_transaction($serveur){
 		// si pas de transaction en cours, ne rien faire et le dire
 		if (!isset (spip_sqlite::$transaction_en_cours[$serveur])
@@ -2550,14 +2581,21 @@ class spip_sqlite {
  * - peut tracer les requêtes
  */
 class sqlite_requeteur {
+	/** @var string Texte de la requête */
 	var $query = ''; // la requete
-	var $serveur = ''; // le serveur
-	var $link = ''; // le link (ressource) sqlite
-	var $prefixe = ''; // le prefixe des tables
-	var $db = ''; // le nom de la base 
+	/** @var string Nom de la connexion */
+	var $serveur = ''; 
+	/** @var Ressource Identifiant de la connexion SQLite */
+	var $link = '';
+	/** @var string Prefixe des tables SPIP */
+	var $prefixe = '';
+	/** @var string Nom de la base de donnée */
+	var $db = ''; 
+	/** @var bool Doit-on tracer les requetes (var_profile) ? */
 	var $tracer = false; // doit-on tracer les requetes (var_profile)
 
-	var $sqlite_version = ''; // Version de sqlite (2 ou 3)
+	/** @var string Version de SQLite (2 ou 3) */
+	var $sqlite_version = '';
 
 	/**
 	 * Constructeur
@@ -2649,6 +2687,11 @@ class sqlite_requeteur {
 		return $t ? trace_query_end($query, $t, $r, $err, $this->serveur) : $r;
 	}
 
+	/**
+	 * Obtient l'identifiant de la dernière ligne insérée ou modifiée
+	 * 
+	 * @return int
+	**/
 	function last_insert_id(){
 		if ($this->sqlite_version==3)
 			return $this->link->lastInsertId();
@@ -2664,12 +2707,16 @@ class sqlite_requeteur {
  * (fonction pour proteger les textes)
  */
 class sqlite_traducteur {
+	/** @var string $query Texte de la requête */
 	var $query = '';
-	var $prefixe = ''; // le prefixe des tables
-	var $sqlite_version = ''; // Version de sqlite (2 ou 3)
+	/** @var string $prefixe Préfixe des tables */
+	var $prefixe = ''; 
+	/** @var string $sqlite_version Version de sqlite (2 ou 3) */
+	var $sqlite_version = '';
 	
-	// Pour les corrections a effectuer sur les requetes :
-	var $textes = array(); // array(code=>'texte') trouvé
+	/** Pour les corrections à effectuer sur les requêtes : array(code=>'texte') trouvé
+	 * @var array */
+	var $textes = array();
 
 	/**
 	 * Constructeur
