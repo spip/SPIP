@@ -145,7 +145,12 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$return = $boucle->return;
 	$id_table = $boucle->id_table;
 	$primary = $boucle->primary;
-	$id_field = $id_table . "." . $primary;
+	if($p = strpos($primary, ',')) {
+		$id_field = $id_table . "." . substr($primary, 0, $p);
+	} else {
+		$id_field = $id_table . "." . $primary;
+	}
+
 	// La boucle doit-elle selectionner la langue ?
 	// 1. par defaut, les boucles suivantes le font
 	// "peut-etre", c'est-a-dire si forcer_lang == false.
