@@ -27,7 +27,6 @@ function spip_action_joindre_dist()
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
 
-
 	include_ecrire("inc_session");
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
 		include_ecrire('inc_minipres');
@@ -84,9 +83,11 @@ function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	$files = array();
 	if (is_array($arg))
 	  foreach ($arg as $file) {
-		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+	  var_dump($file);
+		if (!($file['error'] == 4) /* UPLOAD_ERR_NO_FILE */)
 			$files[]=$file;
 	}
+
 	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
 			     $hash, $id_auteur, $redirect, $actifs);
 } 
@@ -118,18 +119,6 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
 			     $hash, $id_auteur, $redirect, $actifs);
 }
-
-/* code mort cf. sousaction4
-//  identifie les repertoires de upload aux rubriques Spip
-
-function spip_action_joindre4($arg, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$documents_actifs)
-{
-	if (!$arg || strstr($arg, '..')) return;
-	$upload = (_DIR_TRANSFERT .$arg);
-	identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
-	include_ecrire("inc_rubriques");
-	calculer_rubriques();
-} */
 
 //  Zip avec confirmation "tel quel"
 

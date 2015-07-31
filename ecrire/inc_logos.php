@@ -122,7 +122,7 @@ function afficher_logo($racine, $titre, $type, $mode, $id, $redirect) {
 		$hash = calculer_action_auteur("iconifier $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "\n\n<form action='" . generer_url_public('spip_action.php') . "' method='POST'
+		echo "\n\n<form action='" . generer_url_action('iconifier') . "' method='POST'
 			ENCTYPE='multipart/form-data'>
 			<div>";
 		echo "\n<input name='redirect' type='hidden' value='$redirect' />";
@@ -497,7 +497,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
-			ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
+			return ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
 		}
 	}
 }

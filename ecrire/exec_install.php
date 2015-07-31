@@ -529,7 +529,7 @@ function install_()
 		  "<p><div align='center'>",
 		  $menu_langues,
 		  "</div>",
-		  "<p><form action='", generer_url_public('spip_action.php'),
+		  "<p><form action='", generer_url_action('test_dirs'),
 		  "'>",
 		  '<input type="hidden" name="action" value="test_dirs" />',
 		  "<div align='$spip_lang_right'><input type='submit' class='fondl'  VALUE='",

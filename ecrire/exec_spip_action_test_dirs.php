@@ -94,7 +94,7 @@ if ($bad_dirs OR $absent_dirs) {
 	}
 
 	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
-	  "<form action='" . generer_url_public('spip_action.php') . "'>" .
+	  "<form action='" . generer_url_action('test_dirs') . "'>" .
 	   "<input type='hidden' name='action' value='test_dirs' />" .
 	  (!$test_dir ? "" : 
 	   "<input type='hidden' name='test_dir' value='$test_dir' />") .

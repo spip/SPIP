@@ -594,7 +594,7 @@ function construire_upload($corps, $args, $enctype='')
 	    $res .= "\n<input type='hidden' name='$k' value='$v' />";
 
 # ici enlever $action pour uploader directemet dans l'espace prive (UPLOAD_DIRECT)
-	return "\n<form method='post' action='" . generer_url_public('spip_action.php') .
+	return "\n<form method='post' action='" . generer_url_action('joindre') .
 	  "'" .
 	  (!$enctype ? '' : " enctype='$enctype'") .
 	  " style='border: 0px; margin: 0px;'>\n" .
