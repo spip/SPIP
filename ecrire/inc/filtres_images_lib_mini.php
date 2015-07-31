@@ -532,7 +532,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		// imagemagick en ligne de commande
 		else if ($process == 'convert') {
 			define('_CONVERT_COMMAND', 'convert');
-			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality 85 -resize %xx%y! %src %dest');
+			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality '._IMG_CONVERT_QUALITE.' -resize %xx%y! %src %dest');
 			$vignette = $destination.".".$format_sortie;
 			$commande = str_replace(
 				array('%x', '%y', '%src', '%dest'),
@@ -555,7 +555,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		if ($process == 'imagick') {
 			$vignette = "$destination.".$format_sortie;
 			$handle = imagick_readimage($image);
-			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
+			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
 			imagick_write($handle, $vignette);
 			if (!@file_exists($vignette)) {
 				spip_log("echec imagick sur $vignette");
