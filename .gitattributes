@@ -452,6 +452,7 @@ ecrire/inc/install_ldap4.php -text
 ecrire/inc/install_ldap5.php -text
 ecrire/inc/install_unpack.php -text
 ecrire/inc/lang_liste.php -text
+ecrire/inc/legender.php -text
 ecrire/inc/maintenance.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/mini_nav.php -text
@@ -464,6 +465,7 @@ ecrire/inc/referencer_traduction.php -text
 ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
+ecrire/inc/tourner.php -text
 ecrire/inc/utils.php -text
 ecrire/inc/virtualiser.php -text
 ecrire/lang/ecrire_br.php -text

@@ -26,9 +26,7 @@ function fragments_legender_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	include_spip('inc/documents');
-	include_spip('inc/presentation');
-
-	return formulaire_legender($id_document, array(), $script, $type, $id, $ancre);
+	$f = charger_fonction('legender', 'inc');
+	return $f($id_document, array(), $script, $type, $id, $ancre);
 }
 ?>
