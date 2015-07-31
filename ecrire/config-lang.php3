@@ -26,6 +26,24 @@ debut_droite();
 lire_metas();
 
 
+
+/// Recuperer liste des fichiers de langue
+	$myDir = opendir("lang");
+	while($entryName = readdir($myDir)) {
+		if (is_file("lang/".$entryName)) {
+			if (ereg("^spip\_([^\.]*)", $entryName, $match)) {
+				$ext = $match[1];
+				$langues_toutes[] = "$ext";
+			}
+		}
+	}
+	closedir($myDir);
+
+	$sauver_langues_ok = join ($langues_toutes,",");
+	ecrire_meta('sauver_langues_ok', $sauver_langues_ok);
+
+
+
 echo "<form action='config-lang.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
@@ -33,6 +51,7 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 //
 // Configuration i18n
 //
+
 
 debut_cadre_relief("langues-24.gif");
 
@@ -51,11 +70,11 @@ echo "</TD></TR>";
 echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _T('info_langue_defaut');
 echo "\n<select name='langue_site' class='fondl'>\n";
-echo "<option value='$langue_site' style='background-image: url(lang/drap_$langue_site.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;' selected>"._T("langue_".$langue_site)."</option>\n";
+echo "<option value='$langue_site' style='background-image: url(lang/drap_$langue_site.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;' selected>".traduire_nom_langue($langue_site)."</option>\n";
 reset ($langues_prop);
 while (list(,$l) = each ($langues_prop)) {
 	if ($l <> $langue_site)
-		echo "<option value='$l' style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>"._T("langue_".$l)."</option>\n";
+		echo "<option value='$l' style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
 }
 echo "</select><br>\n";
 echo "</TD></TR>";
@@ -64,17 +83,17 @@ echo "</TD></TR>";
 // langues proposees
 echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _T('info_langues_proposees');
-$langues_toutes = split(',',$all_langs);
+//$langues_toutes = split(',',$all_langs);
 $langues_proposees = lire_meta('langues_proposees');
 $test = (ereg(",$langue_site,", ",$langues_tests,")) ? _T('info_en_test_1') : "";
-echo "<input type='checkbox' name='langues_prop[]' value='$langue_site' checked id='lang_$langue_site'><label for='lang_$langue_site'>&nbsp;<b>"._T("langue_".$langue_site).'</b>'.$test."</label>\n";
+echo "<input type='checkbox' name='langues_prop[]' value='$langue_site' checked id='lang_$langue_site'><label for='lang_$langue_site'>&nbsp;<b>".traduire_nom_langue($langue_site).'</b>'.$test."</label>\n";
 while (list(,$l) = each ($langues_toutes)) {
 	if ($l AND ($l <> $langue_site)) {
 		$test = (ereg(",$l,", ",$langues_tests,")) ? _T('info_en_test_2') : "";
 		if (ereg(",$l,", ",$langues_proposees,"))
-			echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' checked id='lang_$l'><label for='lang_$l'>&nbsp;<b>"._T("langue_".$l).'</b>'.$test.'</label>';
+			echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' checked id='lang_$l'><label for='lang_$l'>&nbsp;<b>".traduire_nom_langue($l).'</b>'.$test.'</label>';
 		else
-			echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' id='lang_$l'> <label for='lang_$l'>"._T("langue_".$l).$test.'</label>';
+			echo "<br>&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' id='lang_$l'> <label for='lang_$l'>".traduire_nom_langue($l).$test.'</label>';
 	}
 }
 echo "</TD></TR>";
