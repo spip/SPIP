@@ -1,7 +1,8 @@
 <?php
 
 include ("inc_version.php3");
-//include_ecrire ("inc_db_mysql.php3");
+
+include_ecrire ("inc_db_mysql.php3");
 include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
