@@ -10,24 +10,48 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des puces de statut sur les objets
+ * ainsi que des puces de changement rapide de statut.
+ *
+ * @package SPIP\Core\PuceStatut
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
-if (!defined('_ACTIVER_PUCE_RAPIDE'))
+
+if (!defined('_ACTIVER_PUCE_RAPIDE')) {
+	/**
+	 * Activer le changement rapide de statut sur les listes d'objets ? 
+	 *
+	 * Peut ralentir un site sur des listes très longues.
+	 * @var bool
+	**/
 	define('_ACTIVER_PUCE_RAPIDE', true);
+}
 
 /**
  * Afficher la puce statut d'un objet
  *
- *
- * http://doc.spip.org/@inc_puce_statut_dist
+ * Utilise une fonction spécifique pour un type d'objet si elle existe, tel que
+ * puce_statut_$type_dist(), sinon tente avec puce_statut_changement_rapide().
+ * 
+ * @see puce_statut_changement_rapide()
  *
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $statut
+ *     Statut actuel de l'objet
  * @param int $id_parent
+ *     Identifiant du parent
  * @param string $type
+ *     Type d'objet
  * @param bool $ajax
- *   indique qu'il ne faut renvoyer que le coeur du menu car on est dans la requete ajax post changement rapide
+ *     Indique s'il ne faut renvoyer que le coeur du menu car on est
+ *     dans une requete ajax suite à un post de changement rapide
  * @param bool $menu_rapide
+ *     Indique si l'on peut changer le statut, ou si on l'affiche simplement
  * @return string
+ *     Code HTML de l'image de puce de statut à insérer (et du menu de changement si présent)
  */
 function inc_puce_statut_dist($id_objet, $statut, $id_parent, $type, $ajax=false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	static $f_puce_statut = array();
@@ -242,7 +266,26 @@ function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='',$
 	return http_img_pack('rubrique-16.png', '');
 }
 
-// http://doc.spip.org/@puce_statut_article_dist
+/**
+ * Retourne le contenu d'une puce avec changement de statut possible
+ * si on en a l'autorisation, sinon simplement l'image de la puce
+ *
+ * @param int $id
+ *     Identifiant de l'objet
+ * @param string $statut
+ *     Statut actuel de l'objet
+ * @param int $id_rubrique
+ *     Identifiant du parent, une rubrique
+ * @param string $type
+ *     Type d'objet
+ * @param bool $ajax
+ *     Indique s'il ne faut renvoyer que le coeur du menu car on est
+ *     dans une requete ajax suite à un post de changement rapide
+ * @param bool $menu_rapide
+ *     Indique si l'on peut changer le statut, ou si on l'affiche simplement
+ * @return string
+ *     Code HTML de l'image de puce de statut à insérer (et du menu de changement si présent)
+**/
 function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='article', $ajax = false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	$src = statut_image($type, $statut);
 	if (!$src)
