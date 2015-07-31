@@ -35,8 +35,8 @@ debut_admin($upgrade_titre, $commentaire);
 
 include_ecrire ("inc_base.php3");
 
-creer_base();
 maj_base();
+creer_base();
 ecrire_acces();
 
 $hash = calculer_action_auteur("purger_squelettes");

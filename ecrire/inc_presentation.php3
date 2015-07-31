@@ -414,9 +414,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 
-			$query_petition = "SELECT COUNT(*) AS cnt FROM spip_petitions WHERE id_article=$id_article";
-			$row_petition = mysql_fetch_array(spip_query($query_petition));
-			$petition = ($row_petition['cnt'] > 0);
+			$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$id_article";
+			$result_petition = spip_query($query_petition);
+			$petition = (@mysql_num_rows($result_petition) > 0);
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
@@ -460,11 +460,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = affdate($date);
 			if ($connect_statut == "0minirezo" AND $activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a></font>";
-				if ($activer_statistiques_ref == "oui" AND $referers > 0){
+/*				if ($activer_statistiques_ref == "oui" AND $referers > 0){
 					$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$referers&nbsp;entr&eacute;es directes</a></font>";
-				}
-			
-				
+				}*/
 			}
 			$vals[] = $s;
 

@@ -84,7 +84,208 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 }
 
 
+//
+// Compiler les statistiques temporaires : visites et referers (si active)
+//
 
+function calculer_referers($date) {
+	// Referers sur tout le site
+	$query = "SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
+		"FROM spip_referers_temp GROUP BY referer_md5";
+	$result = spip_query($query);
+
+	$referer_insert = "";
+	$referer_update = "";
+
+	while ($row = @mysql_fetch_array($result)) {
+		$visites = $row['visites'];
+		$referer = addslashes($row['referer']);
+		$referer_md5 = '0x'.$row['md5'];
+
+		$referer_update[$visites][] = $referer_md5;
+		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites)";
+	}
+
+	// Mise a jour de la base
+	if (is_array($referer_update)) {
+		while (list($visites, $referers) = each($referer_update)) {
+			$query = "UPDATE spip_referers SET visites = visites + $visites ".
+				"WHERE referer_md5 IN (".join(', ', $referers).")";
+			$result = spip_query($query);
+		}
+	}
+	if (is_array($referer_insert)) {
+		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers ".
+			"(date, referer, referer_md5, visites) VALUES ".join(', ', $referer_insert);
+		$result_insert = spip_query($query_insert);
+	}
+
+	// Referers par article
+	$query = "SELECT COUNT(DISTINCT ip) AS visites, id_objet, referer, HEX(referer_md5) AS md5 ".
+		"FROM spip_referers_temp WHERE type='article' GROUP BY id_objet, referer_md5";
+	$result = spip_query($query);
+
+	$referer_insert = "";
+	$referer_update = "";
+
+	while ($row = @mysql_fetch_array($result)) {
+		$id_article = $row['id_objet'];
+		$visites = $row['visites'];
+		$referer = addslashes($row['referer']);
+		$referer_md5 = '0x'.$row['md5'];
+
+		$referer_update[$visites][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
+		$referer_insert[] = "('$date', '$referer', $referer_md5, $id_article, $visites)";
+	}
+
+	// Mise a jour de la base
+	if (is_array($referer_update)) {
+		while (list($visites, $where) = each($referer_update)) {
+			$query = "UPDATE spip_referers_articles SET visites = visites + $visites ".
+				"WHERE ".join(' OR ', $where);
+			$result = spip_query($query);
+		}
+	}
+	if (is_array($referer_insert)) {
+		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers_articles ".
+			"(date, referer, referer_md5, id_article, visites) VALUES ".join(', ', $referer_insert);
+		$result_insert = spip_query($query_insert);
+	}
+
+	$query_effacer = "DELETE FROM spip_referers_temp";
+	$result_effacer = spip_query($query_effacer);	
+}
+
+
+function calculer_visites($date = "") {
+	// Date par defaut = hier
+	if (!$date) $date = date("Y-m-d", time() - 24 * 3600);
+
+	// Sur tout le site, nombre de visiteurs uniques pendant la journee
+	$query = "SELECT COUNT(DISTINCT ip) AS total_visites FROM spip_visites_temp GROUP BY ip";
+	$result = spip_query($query);
+	if ($row = @mysql_fetch_array($result))
+		$total_visites = $row['total_visites'];
+	else
+		$total_visites = 0;
+	$query_insert = "INSERT INTO spip_visites (date, visites) VALUES ('$date', $total_visites)";
+	$result_insert = spip_query($query_insert);
+
+	// Nombre de visiteurs uniques par article
+	$query = "SELECT COUNT(DISTINCT ip) AS visites, id_objet FROM spip_visites_temp ".
+		"WHERE type='article' GROUP BY id_objet";
+	$result = spip_query($query);
+
+	$visites_insert = "";
+	$visites_update = "";
+
+	while ($row = @mysql_fetch_array($result)) {
+		$id_article = $row['id_objet'];
+		$visites = $row['visites'];
+
+		$visites_update[$visites][] = $id_article;
+		$visites_insert[] = "('$date', $id_article, $visites)";
+	}
+
+	$query_effacer = "DELETE FROM spip_visites_temp";
+	$result_effacer = spip_query($query_effacer);	
+
+	// Mise a jour de la base
+	if (is_array($visites_insert)) {
+		$query_insert = "INSERT DELAYED IGNORE INTO spip_visites_articles (date, id_article, visites) ".
+				"VALUES ".join(', ', $visites_insert);
+		$result_insert = spip_query($query_insert);
+	}
+	if (is_array($visites_update)) {
+		while (list($visites, $articles) = each($visites_update)) {
+			$query = "UPDATE spip_articles SET visites = visites + $visites ".
+				"WHERE id_article IN (".join(', ', $articles).")";
+			$result = spip_query($query);
+		}
+	}
+
+	if (lire_meta('activer_statistiques_ref') == 'oui') {
+		calculer_referers($date);
+	}
+}
+
+
+//
+// Optimiser les informations liees aux referers (popularite...)
+//
+
+function supprimer_referers($type = "") {
+	$table = 'spip_referers';
+	if ($type) {
+		$table .= $table . '_'. $type . 's';
+		$col_id = 'id_' . $type;
+		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
+		$result = spip_query($query);
+		if ($row = @mysql_fetch_array($result)) {
+			$count = $row['count'];
+		}
+	}
+	if (!$count) $count = 1;
+
+	$query = "SELECT visites FROM $table ".
+		"ORDER BY visites LIMIT ".intval($count * 100).",1";
+	$result = spip_query($query);
+	if ($row = @mysql_fetch_array($result)) {
+		$visites_min = $row['visites'];
+	}
+
+	$query = "DELETE FROM $table WHERE date < DATE_SUB(NOW(),INTERVAL 7 DAY)";
+	if ($visites_min) $query .= " OR visites <= $visites_min";
+	$result = spip_query($query);
+}
+
+
+function optimiser_referers() {
+	$popularite_update = "";
+
+	// Calcul des gains en popularite
+	$query = "SELECT id_article, COUNT(*) AS referers, SUM(visites) AS visites ".
+		"FROM spip_referers_articles GROUP BY id_article";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$id_article = $row['id_article'];
+		$referers = $row['referers'];
+		$visites = $row['visites'];
+
+		$popularite = $referers * $visites;
+		$popularite_update[$popularite][] = $id_article;
+		if ($max < $popularite) $max = $popularite;
+	}
+
+	// Mise a jour des valeurs de referers et popularite
+	if (is_array($popularite_update)) {
+		// Normalisation avant (limiter l'influence des derniers arrivees)
+		if ($max < 100) $max = 100;
+
+		while (list($popularite, $articles) = each($popularite_update)) {
+			$query = "UPDATE spip_articles SET popularite = popularite + $popularite * 100 / $max ".
+				"WHERE id_article IN (".join(', ', $articles).")";
+			$result = spip_query($query);
+		}
+
+		// Normalisation apres
+		$query = "SELECT MAX(popularite) AS max FROM spip_articles";
+		$result = spip_query($query);
+		if ($row = mysql_fetch_array($result)) {
+			$max = $row['max'];
+			if ($max > 100) {
+				$query = "UPDATE spip_articles SET popularite = popularite * 100 / $max";
+				$result = spip_query($query);
+			}
+		}
+	}
+
+	supprimer_referers();
+	supprimer_referers("article");
+}
+
+
+/*
 function calculer_visites() {
 
 	// Selectionner les dates > 24 heures
@@ -193,9 +394,7 @@ function calculer_visites() {
 	}
 }
 
-
-function supprimer_referers($type){
-
+function supprimer_referers($type) {
 	// Recuperer les 100 plus gros referers de ce type
 	$query = "SELECT id_referer, visites FROM spip_visites_referers WHERE type ='$type' ORDER BY visites DESC LIMIT 0,100";
 	$result = spip_query($query);
@@ -203,7 +402,7 @@ function supprimer_referers($type){
 		$id_referer[] = $row['id_referer'];
 		$visites = $visites + $row['visites'];
 	}
-	
+
 	// Supprimer les autres s'ils datent de plus d'une semaine
 	if ($id_referer){
 		$referers = join($id_referer, ",");
@@ -221,8 +420,7 @@ function supprimer_referers($type){
 	
 }
 
-function optimiser_referers(){
-
+function optimiser_referers() {
 	// Supprimer referers inutiles
 	
 	supprimer_referers("tout");
@@ -233,7 +431,6 @@ function optimiser_referers(){
 		$id_article = $row['id_article'];
 		supprimer_referers("article$id_article");
 	}
-	
 	
 	// Calculer et reinjecter popularite
 	$query = "SELECT id_article, visites, referers FROM spip_articles WHERE statut = 'publie'";
@@ -253,7 +450,7 @@ function optimiser_referers(){
 		}
 	}
 }
-
+*/
 
 
 

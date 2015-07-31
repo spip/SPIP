@@ -3,14 +3,14 @@
 include ("inc.php3");
 include ("inc_statistiques.php3");
 
-$query = "SELECT * FROM spip_visites_temp WHERE date <= DATE_SUB(NOW(),INTERVAL 24 HOUR)";
+/*$query = "SELECT * FROM spip_visites_temp WHERE date <= DATE_SUB(NOW(),INTERVAL 24 HOUR)";
 $result = spip_query($query);
 
 if (mysql_num_rows($result) > 0) {
 	ecrire_meta("date_stats_process", "$date");
 	ecrire_metas();
 	calculer_visites();
-}
+}*/
 
 
 
@@ -31,7 +31,7 @@ if ($id_article){
 	}
 } 
 else {
-	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites WHERE type='tout'";
+	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites";
 	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
@@ -106,11 +106,21 @@ if ($connect_statut != '0minirezo') {
 
 //////
 
-if ($id_article) $page = "article$id_article";
-else $page = "tout";
+if ($id_article) {
+	$table = "spip_visites_articles";
+	$table_ref = "spip_referers_articles";
+	$where = "id_article=$id_article";
+}
+else {
+	$table = "spip_visites";
+	$table_ref = "spip_referers";
+	$where = "1";
+}
 
 
-$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM spip_visites WHERE type = '$page' AND date > DATE_SUB(NOW(),INTERVAL 420 DAY) ORDER BY date";
+
+$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
+	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 420 DAY) ORDER BY date";
 $result=spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
@@ -124,14 +134,18 @@ while ($row = mysql_fetch_array($result)) {
 
 // Visites du jour
 if ($id_article) {
-	$query = "SELECT * FROM spip_visites_temp WHERE type = 'article$id_article' GROUP BY ip";
+	$query = "SELECT COUNT(DISTINCT ip) AS visites FROM spip_visites_temp WHERE type = 'article' AND id_objet = $id_article";
 	$result = spip_query($query);
 }
 else {
-	$query = "SELECT * FROM spip_visites_temp GROUP BY ip";
+	$query = "SELECT COUNT(DISTINCT ip) AS visites FROM spip_visites_temp";
 	$result = spip_query($query);
 }
-$visites_today = mysql_num_rows($result);
+if ($row = @mysql_fetch_array($result)) {
+	$visites_today = $row['visites'];
+}
+else
+	$visites_today = 0;
 
 if (count($log)>0){
 
@@ -302,8 +316,8 @@ if (count($log)>0){
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 if ($activer_statistiques_ref == "oui"){
 	// Affichage des referers
-	
-	$query = "SELECT * FROM spip_visites_referers WHERE type = '$page' ORDER BY visites DESC LIMIT 0,100";
+
+	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY visites DESC LIMIT 0,100";
 	$result = spip_query($query);
 	
 	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";

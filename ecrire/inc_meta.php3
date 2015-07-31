@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_META")) return;
 define("_ECRIRE_INC_META", "1");
 
-
 function lire_metas() {
 	global $meta, $meta_maj;
 
@@ -20,14 +19,15 @@ function lire_metas() {
 	}
 }
 
-function lire_meta($nom) {
-	global $meta;
-	return $meta[$nom];
-}
-
-function lire_meta_maj($nom) {
-	global $meta_maj;
-	return $meta_maj[$nom];
+if (!defined("_ECRIRE_INC_META_CACHE")) {
+	function lire_meta($nom) {
+		global $meta;
+		return $meta[$nom];
+	}
+	function lire_meta_maj($nom) {
+		global $meta_maj;
+		return $meta_maj[$nom];
+	}
 }
 
 function ecrire_meta($nom, $valeur) {
@@ -45,14 +45,14 @@ function effacer_meta($nom) {
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
 function ecrire_metas() {
-	global $meta, $meta_maj;
+	global $meta, $meta_maj, $flag_ecrire;
 
 	lire_metas();
 
 	$s = '<?php
 
-if (defined("_ECRIRE_INC_META")) return;
-define("_ECRIRE_INC_META", "1");
+if (defined("_ECRIRE_INC_META_CACHE")) return;
+define("_ECRIRE_INC_META_CACHE", "1");
 
 function lire_meta($nom) {
 	global $meta;
@@ -63,7 +63,6 @@ function lire_meta_maj($nom) {
 	global $meta_maj;
 	return $meta_maj[$nom];
 }
-
 ';
 	if ($meta) {
 		reset($meta);
@@ -84,7 +83,7 @@ function lire_meta_maj($nom) {
 	}
 	$s .= '?'.'>';
 
-	$f = @fopen("inc_meta_cache.php3", "wb");
+	$f = @fopen(($flag_ecrire ? "" : "ecrire/") . "inc_meta_cache.php3", "wb");
 	if ($f) {
 		fputs($f, $s);
 		fclose($f);
