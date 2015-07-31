@@ -99,8 +99,12 @@ function f_boite_infos($flux) {
  * @param array $flux
  */
 function f_afficher_blocs_ecrire($flux) {
+	static $o=array();
 	if (is_string($fond=$flux['args']['fond'])) {
 		$exec = _request('exec');
+		if (!isset($o[$exec])){
+			$o[$exec] = trouver_objet_exec($exec);
+		}
 		if ($fond == "prive/squelettes/navigation/$exec"){
 			$flux['data']['texte'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
@@ -108,13 +112,16 @@ function f_afficher_blocs_ecrire($flux) {
 			include_spip('inc/presentation_mini');
 			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_objets_bloques($exec,$flux['args']['contexte']);
 		}
+		if ($fond=="prive/squelettes/hierarchie/$exec" AND $o[$exec]) {
+			$flux['data']['texte'] = pipeline('affiche_hierarchie',array('args'=>array('objet'=>$o[$exec]['type'],'id_objet'=>intval($flux['args']['contexte'][$o[$exec]['id_table_objet']])),'data'=>$flux['data']['texte']));
+		}
 		if ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
 				$flux['data']['texte'] = preg_replace(',<div id=["\']wysiwyg,',"<!--affiche_milieu-->\\0",$flux['data']['texte']);
-			if ($o = trouver_objet_exec($exec)
-				AND $objet = $o['type']
-			  AND $o['edition'] == false
-			  AND $id = intval($flux['args']['contexte'][$o['id_table_objet']])){
+			if ($o[$exec]
+				AND $objet = $o[$exec]['type']
+			  AND $o[$exec]['edition'] == false
+			  AND $id = intval($flux['args']['contexte'][$o[$exec]['id_table_objet']])){
 				// inserer le formulaire de traduction
 				$flux['data']['texte'] = str_replace("<!--affiche_milieu-->",recuperer_fond('prive/objets/editer/traductions',array('objet'=>$objet,'id_objet'=>$id))."<!--affiche_milieu-->",$flux['data']['texte']);
 				$flux['data']['texte'] = pipeline('afficher_fiche_objet',array(
