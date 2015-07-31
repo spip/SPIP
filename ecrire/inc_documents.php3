@@ -246,8 +246,6 @@ function integre_image($id_document, $align, $type_aff) {
 			$hauteur_vignette = $hauteur;
 		}
 
-		if ($type_aff=='fichier_vignette')
-			return $url_fichier_vignette;
 
 		// si pas de vignette, utiliser la vignette par defaut
 		// ou essayer de creer une preview (images)
@@ -258,6 +256,9 @@ function integre_image($id_document, $align, $type_aff) {
 				$url_fichier_vignette = ($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
 			}
 		}
+
+		if ($type_aff=='fichier_vignette')
+			return $url_fichier_vignette;
 
 		if ($url_fichier_vignette) {
 			$vignette = "<img src='$url_fichier_vignette' border='0'";
