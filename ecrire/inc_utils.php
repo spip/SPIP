@@ -645,4 +645,22 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	return $site . $script . $ext . $args;
 }
 
+// Pour les formulaires en methode POST, mettre le id_ a la fois en 
+// input-hidden et apres le "?" du champ action:
+// 1) on peut ainsi memoriser le signet comme si c'etait un GET
+// 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
+
+
+function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
+	$hidden = "";
+	foreach(split('&',$args) as $c) {
+		$hidden .= "<input name='" . 
+		  str_replace('=', "' value='", $c) .
+		  "'type='hidden' />";
+	}
+	if ($name) $name = " name='$name'";
+	$action = generer_url_ecrire($script, $args) . $ancre;
+	return "<form action='$action'$name method='post'>$hidden";
+}
+
 ?>
