@@ -69,6 +69,11 @@ le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pe
 N'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient
 les images utilis&eacute;es dans les articles et les rubriques.";
 
+echo "<p>" . propre("Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e
+	QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. L'erreur
+	consistant &agrave; faire une sauvegarde avant de faire une mise &agrave; jour
+	de SPIP est courante... Pour plus de d&eacute;tails consultez [la documentation de SPIP->http://www.uzine.net/article1489.html].");
+
 if ($flag_gz) {
 	echo "\n<p align='justify'>Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d'&eacute;conomiser de l'espace disque.<p>";

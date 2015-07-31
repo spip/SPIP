@@ -155,7 +155,7 @@ switch ($prefs['couleur']) {
 //
 
 $version_installee = (double) lire_meta("version_installee");
-if ($version_installee < $spip_version) {
+if ($version_installee <> $spip_version) {
 	debut_page();
 	if (!$version_installee) $version_installee = "ant&eacute;rieure";
 	echo "<blockquote><blockquote><h4><font color='red'>Message technique :</font><br> la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter

@@ -8,7 +8,28 @@ include_local ("inc_admin.php3");
 include_local ("inc_acces.php3");
 include_local ("inc_meta.php3");
 
-debut_admin("upgrade de la base");
+$upgrade_titre = "mise &agrave; niveau de votre base MySQL";
+
+// commentaire standard upgrade
+$commentaire = "Vous venez de mettre &agrave; jour les fichiers SPIP.
+	Il faut maintenant mettre &agrave; niveau la base de donn&eacute;es
+	du site.";
+
+// erreur downgrade (cas de double installation de fichiers SPIP sur une meme base)
+if ($spip_version < (double) lire_meta('version_installee'))
+	$commentaire = "{{Attention!}} Vous avez install&eacute; une version
+		des fichiers SPIP {ant&eacute;rieure} &agrave; celle qui se trouvait
+		auparavant sur ce site: votre base de donn&eacute;es risque d'&ecirc;tre
+		perdue et votre site ne fonctionnera plus.<br>{{R&eacute;installez les
+		fichiers de SPIP.}}";
+
+// qu'est-ce que tu fais ici?
+if ($spip_version == (double) lire_meta('version_installee')) {
+	@header("Location: index.php3");
+	exit;
+}
+
+debut_admin($upgrade_titre, $commentaire);
 
 include_local ("inc_base.php3");
 
@@ -19,7 +40,7 @@ ecrire_acces();
 $hash = calculer_action_auteur("purger_squelettes");
 $redirect = rawurlencode("index.php3");
 
-fin_admin("upgrade de la base");
+fin_admin($upgrade_titre);
 
 @header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
 

@@ -5,13 +5,14 @@
 if (defined("_ECRIRE_INC_ADMIN")) return;
 define("_ECRIRE_INC_ADMIN", "1");
 
+include_local("inc_texte.php3");
 
 function fichier_admin($action) {
 	global $connect_login;
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
 }
 
-function debut_admin($action) {
+function debut_admin($action, $commentaire='') {
 	global $REQUEST_URI;
 	global $connect_statut;
 
@@ -31,7 +32,11 @@ function debut_admin($action) {
 
 	include_local ("inc_presentation.php3");
 	install_debut_html("Action : $action");
-	
+
+		if ($commentaire) {
+			echo "<p>".propre($commentaire)."</p>";
+		}	
+
 		echo "<FORM ACTION='$lien' METHOD='post'>";
 		echo "<P><B>Authentification (par FTP).</B>";
 		echo aide("ftp_auth");
