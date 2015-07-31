@@ -1,36 +1,42 @@
  <div[ class="(#ENV{divclass,spip-admin-bloc})"] dir="#LANG_DIR">[
 	<a href="(#ENV{analyser})" class="spip-admin-boutons"
-		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>][(#ENV{id_article}|oui)[(#AUTORISER{modifier,article,#ENV{id_article}}|oui)
+		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>]
+	[(#ENV{id_article}|oui)[(#AUTORISER{modifier,article,#ENV{id_article}}|oui)
 	<a href="[(#URL_ECRIRE{articles_edit,id_article=#ENV{id_article}})]" class="spip-admin-boutons modifier"
 		id="modifier_article"><:admin_modifier_article:>
 			[((#ENV{id_article}))]</a>]][(#ENV{id_article}|oui)
 	<a href="[(#ENV{voir_article})]" class="spip-admin-boutons voir"
 		id="voir_article"><:article:>
-			[((#ENV{id_article}))]</a>][(#ENV{id_breve}|oui)[(#AUTORISER{modifier,breve,#ENV{id_breve}}|oui)
+			[((#ENV{id_article}))]</a>]
+	[(#ENV{id_breve}|oui)[(#AUTORISER{modifier,breve,#ENV{id_breve}}|oui)
 	<a href="[(#URL_ECRIRE{breves_edit,id_breve=#ENV{id_breve}})]" class="spip-admin-boutons modifier"
 		id="modifier_breve"><:admin_modifier_breve:>
 			[((#ENV{id_breve}))]</a>]][(#ENV{id_breve}|oui)
 	<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons voir"
 		id="voir_breve"><:breve:>
-			[((#ENV{id_breve}))]</a>][(#ENV{id_rubrique}|oui)[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}}|oui)
+			[((#ENV{id_breve}))]</a>]
+	[(#ENV{id_rubrique}|oui)[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}}|oui)
 	<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ENV{id_rubrique}})]" class="spip-admin-boutons modifier"
 		id="modifier_rubrique"><:admin_modifier_rubrique:>
 			[((#ENV{id_rubrique}))]</a>]][(#ENV{id_rubrique}|oui)
 	<a href="[(#ENV{voir_rubrique})]" class="spip-admin-boutons voir"
 		id="voir_rubrique"><:rubrique:>
-			[((#ENV{id_rubrique}))]</a>][(#ENV{id_mot}|oui)[(#AUTORISER{modifier,mot,#ENV{id_mot}}|oui)
+			[((#ENV{id_rubrique}))]</a>]
+	[(#ENV{id_mot}|oui)[(#AUTORISER{modifier,mot,#ENV{id_mot}}|oui)
 	<a href="[(#URL_ECRIRE{mots_edit,id_mot=#ENV{id_mot}}|parametre_url{edit,oui})]" class="spip-admin-boutons modifier"
 		id="modifier_mot"><:admin_modifier_mot:>
 			[((#ENV{id_mot}))]</a>]][(#ENV{id_mot}|oui)
 	<a href="[(#ENV{voir_mot})]" class="spip-admin-boutons voir"
 		id="voir_mot"><:mots_clef:>
-			[((#ENV{id_mot}))]</a>][(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
+			[((#ENV{id_mot}))]</a>]
+	[(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
 	<a href="[(#URL_ECRIRE{sites_edit,id_syndic=#ENV{id_syndic}})]" class="spip-admin-boutons modifier"
 		id="modifier_site"><:icone_modifier_site:>
 			[((#ENV{id_syndic}))]</a>
 	<a href="[(#ENV{voir_site})]" class="spip-admin-boutons voir"
 		id="voir_site"><:info_site:>
-			[((#ENV{id_syndic}))]</a>]][(#ENV{id_auteur}|oui)[(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
+			[((#ENV{id_syndic}))]</a>]]
+	[(#ENV{id_auteur}|oui)[(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
 	<a href="[(#URL_ECRIRE{auteur_infos,id_auteur=#ENV{id_auteur}}|parametre_url{edit,oui})]" class="spip-admin-boutons modifier"
 		id="modifier_auteur"><:admin_modifier_auteur:>
 			[((#ENV{id_auteur}))]</a>]][(#ENV{id_auteur}|oui)
