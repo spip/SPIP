@@ -180,13 +180,13 @@ function definir_barre_boutons() {
 					  );
 				if (!$parent) {
 					$position = $infos['position']?$infos['position']:-4;
-					$boutons_admin = array_slice($boutons_admin,0,$position,true)
+					$boutons_admin = array_slice($boutons_admin,0,$position)
 					+array($id=> new Bouton(
 					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  ))
-					+ array_slice($boutons_admin,$position,100,true);
+					+ array_slice($boutons_admin,$position,100);
 				}
 			}
 		}
