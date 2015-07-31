@@ -19,11 +19,12 @@ include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
+include_spip('inc/petition');
 include_spip('base/abstract_sql');
 
 function exec_articles_dist()
 {
-	global $change_accepter_forum, $change_petition, $changer_virtuel,  $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot, $virtuel; 
+	global  $changer_virtuel,  $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot, $virtuel; 
 	global  $connect_id_auteur, $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
 	$id_parent = intval($id_parent);
@@ -121,9 +122,14 @@ debut_gauche();
 boite_info_articles($id_article, $statut_article, $visites, $id_version);
 
 //
-// Logos de l'article et Boites de configuration avancee
+// Logos de l'article
 //
 
+  if ($id_article AND $flag_editable AND ($spip_display != 4)) {
+	  include_spip('inc/chercher_logo');
+	  echo afficher_boite_logo('id_article', $id_article,
+			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
+  }
 
 // pour l'affichage du virtuel
 $virtuel = '';
@@ -131,11 +137,22 @@ if (substr($chapo, 0, 1) == '=') {
 	$virtuel = substr($chapo, 1);
 }
 
-boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
-			  $change_accepter_forum, $change_petition,
-			  $changer_virtuel, $virtuel);
+// Boites de configuration avancee
+
+if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable)
+  {
+	boites_de_config_articles($id_article);
  
- echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
+	boite_article_virtuel($id_article, $changer_virtuel, $virtuel);
+  }
+
+//
+// Articles dans la meme rubrique
+//
+
+meme_rubrique_articles($id_rubrique, $id_article, $options);
+
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 //
 // Affichage de la colonne de droite
@@ -310,7 +327,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 
 	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $GLOBALS['meta']["activer_statistiques"] != "non" AND $options == "avancees"){
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif");
-}
+	}
 
 	if ((($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions)
 		AND $id_version>1 AND $options == "avancees") {
@@ -328,108 +345,14 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	fin_boite_info();
 }
 
-function formulaire_petition($id_article, $nb_signatures)
-{
-	global $spip_lang_right;
-
-	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
-
-	$email_unique=$petition["email_unique"];
-	$site_obli=$petition["site_obli"];
-	$site_unique=$petition["site_unique"];
-	$message=$petition["message"];
-	$texte_petition=$petition["texte"];
-
-	if ($petition) {
-		$menu = array(
-			'on' => _T('bouton_radio_petition_activee'),
-			'off'=> _T('bouton_radio_supprimer_petition')
-		);
-		$val_menu = 'on';
-	} else {
-		$menu = array(
-			'off'=> _T('bouton_radio_pas_petition'),
-			'on' => _T('bouton_radio_activer_petition')
-		);
-		$val_menu = 'off';
-	}
-
-	$res = '';
-	foreach ($menu as $val => $desc) {
-		$res .= "<option" . (($val_menu == $val) ? " selected" : '') . " value='$val'>".$desc."</option>\n";
-	}
-
-	$res = "<select name='change_petition'
-		class='fondl' style='font-size:10px;'
-		onChange=\"setvisibility('valider_petition', 'visible');\"
-		>\n$res</select>\n";
-
-
-	if ($petition) {
-		if ($nb_signatures) {
-			$res .= "<br />\n" .
-			icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'), generer_url_ecrire("controle_petition","id_article=$id_article",'', false), "suivi-petition-24.gif", "");
-		}
-
-		$res .= "<br />\n";
-
-		if ($email_unique=="oui")
-			$res .= "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
-		else
-			$res .="<input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
-		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><BR>";
-		if ($site_obli=="oui")
-			$res .="<input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
-		else
-			$res .="<input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
-		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><BR>";
-		if ($site_unique=="oui")
-			$res .="<input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
-		else
-			$res .="<input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
-		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><BR>";
-		if ($message=="oui")
-			$res .="<input type='checkbox' name='message' value='oui' id='message' checked>";
-		else
-			$res .="<input type='checkbox' name='message' value='oui' id='message' />";
-		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
-
-		$res .=_T('texte_descriptif_petition')."&nbsp;:<BR />";
-		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
-		$res .=entites_html($texte_petition);
-		$res .="</TEXTAREA>\n";
-
-		$res .="<span align='$spip_lang_right'>";
-	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
-	$res .="<INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px' />";
-	$res .="</span>";
-
-	return generer_action_auteur('petitionner', $id_article, generer_url_ecrire('articles', "id_article=$id_article&change_petition=oui"), $res," method='POST'");
-
-}
-
-function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
-				   $change_accepter_forum, $change_petition,
-				   $changer_virtuel, $virtuel)
-{
-  global $connect_statut, $options, $spip_lang_right, $spip_display;
-
-// Logos de l'article
-
-  if ($id_article AND $flag_editable AND ($spip_display != 4)) {
-	  include_spip('inc/chercher_logo');
-	  echo afficher_boite_logo('id_article', $id_article,
-			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
-  }
 
 //
 // Boites de configuration avancee
 //
 
-	if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
-	  echo "<p>";
+function boites_de_config_articles($id_article)
+{
 	  debut_cadre_relief("forum-interne-24.gif");
-
 
 	  $nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
@@ -437,8 +360,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 	  $nb_forums = $nb_forums['count'];
 	  $nb_signatures = $nb_signatures['count'];
-	  $visible = $change_accepter_forum || $change_petition
-		|| $nb_forums || $nb_signatures;
+	  $visible = $nb_forums || $nb_signatures;
 
 	echo "<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
@@ -461,26 +383,27 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
 	}
 
-	// Reglage existant
-	$forums_publics = get_forums_publics($id_article);
-
-	// Modification du reglage ?
-	if (isset($change_accepter_forum)
-	AND $change_accepter_forum <> $forums_publics) {
-		$forums_publics = $change_accepter_forum;
-		modifier_forums_publics($id_article, $forums_publics);
-	}
-
 	// Afficher le formulaire de modification du reglage
-	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article"));
+	echo "<div id='poster-$id_article'>",
+	  formulaire_poster($id_article,"articles","&id_article=$id_article#poster-$id_article"),
+	  '</div>';
+
+	echo '<br />';
 
 	// Petitions
 
-	echo formulaire_petition($id_article, $nb_signatures);
+	echo "<div id='petitionner-$id_article'>",
+	  formulaire_petitionner($id_article,"articles","&id_article=$id_article#petitionner-$id_article"),
+	  '</div>';
 
 	echo fin_block();
 
 	fin_cadre_relief();
+}
+
+function boite_article_virtuel($id_article, $changer_virtuel, $virtuel)
+{
+  global $spip_lang_right;
 
 	// Redirection (article virtuel)
 	debut_cadre_relief("site-24.gif");
@@ -512,14 +435,6 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	echo fin_block();
 
 	fin_cadre_relief();
- }
-
-//
-// Articles dans la meme rubrique
-//
-
-meme_rubrique_articles($id_rubrique, $id_article, $options);
-
 }
 
 function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='date', $limit=30)

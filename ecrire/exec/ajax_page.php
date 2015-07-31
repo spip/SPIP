@@ -303,4 +303,29 @@ function ajax_page_tourner()
 
 	echo formulaire_tourner($id_document, array(), $script, 'ajax', $type);
 }
+
+function ajax_page_petitionner()
+{
+	global $id_article, $script;
+	$id_article = intval($id_article);
+
+	include_spip('inc/petition');
+	include_spip('inc/presentation');
+	include_spip('inc/actions');
+
+	echo formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
+}
+
+
+function ajax_page_poster()
+{
+	global $id_article, $script;
+	$id_article = intval($id_article);
+
+	include_spip('inc/forum');
+	include_spip('inc/actions');
+
+	echo formulaire_poster($id_article, $script, "&id_article=$id_article", true);
+}
+
 ?>

@@ -203,13 +203,16 @@ function AjaxSqueeze(trig, id)
 		return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
 	}
 
-	s = trig.getAttribute('action');
 	for (i=0;i < trig.elements.length;i++) {
-		n = trig.elements[i].name;
-		if (n)  u += n+"="+ encodeURIComponent(trig.elements[i].value) + '&';
+		n = trig.elements[i];
+		s = (n.type != 'checkbox') ? n.name : n.checked;
+		if (s) {
+			u += n.name+"="+ encodeURIComponent(n.value) + '&';
+		}
 	}
-
+	
 	noeud.innerHTML = g;
+	s = trig.getAttribute('action');
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,

@@ -23,19 +23,24 @@ function action_petitionner_dist() {
 	$id_article = intval($arg);
 
 	$message = _request('message');
+	spip_log("	message	$message");
 	$site_obli = _request('site_obli');
+	spip_log("	site_obli 	$site_obli ");
 	$site_unique = _request('site_unique');
+	spip_log("	site_unique 	$site_unique ");
 	$email_unique = _request('email_unique');
+	spip_log("	email_unique 	$email_unique ");
 	$texte_petition = _request('texte_petition');
+	spip_log("	texte_petition 	$texte_petition ");
 	$change_petition = _request('change_petition');
 
 	spip_log("action $action $arg $change_petition");
 
 	if ($change_petition == "on") {
-		if (!$email_unique) $email_unique = "non";
-		if (!$site_obli) $site_obli = "non";
-		if (!$site_unique) $site_unique = "non";
-		if (!$message) $message = "non";
+	  	$email_unique = ($email_unique == 'on') ? 'oui' : "non";
+		$site_obli = ($site_obli == 'on') ? 'oui' : "non";
+		$site_unique = ($site_unique == 'on') ? 'oui' : "non";
+		$message =  ($message == 'on') ? 'oui' : "non";
 
 		$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . spip_abstract_quote($texte_petition) . ")");
 		}

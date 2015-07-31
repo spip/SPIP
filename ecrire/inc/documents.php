@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions'); // action_auteur et determine_upload
+include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
 
@@ -1262,38 +1262,5 @@ function date_formulaire_documenter($date, $id_document) {
 	   $corps .
 	  '</div>' .
 	   fin_block());
-}
-
-// Retourne un formulaire d'execution de $action sur $id,
-// revenant a l'envoyeur $script d'arguments $args.
-// Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
-// d'attribut  id = $action-$id (AjaxSqueeze dans layer.js)
-
-function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
-{
-	if ($_COOKIE['spip_accepte_ajax'] != 1 ) 
-		return redirige_action_auteur($action, 
-				$id,
-				$script,
-				$args,
-				$corps,
-				"\nmethod='post'");
-
-	$pere = '"' . "$action-" . intval($id) . '"';
-
-	if (is_string($corps))
-		return redirige_action_auteur($action,
-				$id,
-				'ajax_page',
-				"fonction=$action&script=$script$args_ajax",
-				$corps,
-				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $pere)'");
-	list($clic, $class) = $corps;
-	$href = redirige_action_auteur($action,
-				$id,
-				'ajax_page',
-				"fonction=$action&script=$script$args_ajax");
-	return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
-			
 }
 ?>
