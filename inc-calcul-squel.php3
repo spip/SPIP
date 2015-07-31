@@ -215,6 +215,7 @@ function parser_boucle($texte, $id_parent) {
 				$req_from[] = "spip_syndic AS source";
 				$req_where[] = "$table.id_syndic=source.id_syndic";
 				$req_where[] = "$table.statut='publie'";
+				$req_where[] = "source.statut='publie'";
 				$id_objet = "id_syndic_article";
 				break;
 			}

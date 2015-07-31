@@ -405,10 +405,6 @@ function ajout_forum() {
 		die ("<h4>Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.</h4>
 		Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
 	}
-	/* if (strlen($confirmer) > 0 AND (strlen($texte) < 10 OR strlen($titre) < 3)) {
-		die ("<h4>Le texte ou le titre de votre message est trop court. </h4>
-		Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
-	}*/
 
 	unset($where);
 	if ($forum_id_article) $where[] = "id_article=$forum_id_article";
@@ -445,6 +441,21 @@ function ajout_forum() {
 	}
 	
 	
+	
+	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$auteur_session = $GLOBALS['auteur_session']['email'];
+	
+	if ($new == "oui"){
+		$nouveau_document = true;
+		if ($HTTP_GET_VARS['titre']){
+			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
+		}
+		$query_forum = "INSERT spip_forum (date_heure, titre, ip, statut)
+			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
+		$result_forum = spip_query($query_forum);
+		$id_message = mysql_insert_id();
+	}
+
 	// Ajouter les mots-cles
 	$query_mots = "DELETE FROM spip_mots_forum WHERE id_forum='$id_message'";
 	$result_mots = spip_query($query_mots);
@@ -463,20 +474,6 @@ function ajout_forum() {
 
 	}
 
-	
-	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-	$auteur_session = $GLOBALS['auteur_session']['email'];
-	
-	if ($new == "oui"){
-		$nouveau_document = true;
-		if ($HTTP_GET_VARS['titre']){
-			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
-		}
-		$query_forum = "INSERT spip_forum (date_heure, titre, ip, statut)
-			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
-		$result_forum = spip_query($query_forum);
-		$id_message = mysql_insert_id();
-	}
 
 
 	$query_forum = "UPDATE spip_forum
@@ -580,8 +577,6 @@ function ajout_forum() {
 				}
 			}
 		}
-
-
 
 		@header("Location: $retour_forum");
 		exit;

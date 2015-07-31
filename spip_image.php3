@@ -11,20 +11,26 @@ include_local("inc-cache.php3");
 /// verifier les formats acceptes par GD
 
 if ($test_formats=="oui"){
-	$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
-	if ($srcImage) {
-		$gd_formats[] = "jpg";
-		ImageDestroy( $srcImage ); 
+	if (function_exists(ImageCreateFromJPEG)) {
+		$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
+		if ($srcImage) {
+			$gd_formats[] = "jpg";
+			ImageDestroy( $srcImage ); 
+		}
 	}
-	$srcImage = @ImageCreateFromGIF("IMG/test.gif");
-	if ($srcImage) {
-		$gd_formats[] = "gif";
-		ImageDestroy( $srcImage ); 
+	if (function_exists(ImageCreateFromGIF)) {
+		$srcImage = ImageCreateFromGIF("IMG/test.gif");
+		if ($srcImage) {
+			$gd_formats[] = "gif";
+			ImageDestroy( $srcImage ); 
+		}
 	}
-	$srcImage = @ImageCreateFromPNG("IMG/test.png");
-	if ($srcImage) {
-		$gd_formats[] = "png";
-		ImageDestroy( $srcImage ); 
+	if (function_exists(ImageCreateFromPNG)) {
+		$srcImage = @ImageCreateFromPNG("IMG/test.png");
+		if ($srcImage) {
+			$gd_formats[] = "png";
+			ImageDestroy( $srcImage ); 
+		}
 	}
 
 	if ($gd_formats) $gd_formats = join($gd_formats, ",");
@@ -242,7 +248,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$id_document = 0;
 	}
 	if (!$id_document) {
-		$query = "INSERT spip_documents (id_type, titre) VALUES ($id_type, '')";
+		$query = "INSERT spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
 		spip_query($query);
 		$id_document = mysql_insert_id();
 		$nouveau = true;
@@ -286,7 +292,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		else if ($format_prev == "png") $format_prev = 2;
 		else if ($format_prev == "gif") $format_prev = 3;
 		
-		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
+		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
 		spip_query($query);
 		$id_preview = mysql_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
@@ -423,6 +429,7 @@ if ($doc_supp) {
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
 		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_breves WHERE id_document=$doc_supp");
 		@unlink($fichier);
 	}
 
@@ -437,6 +444,7 @@ if ($doc_supp) {
 		spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_breves WHERE id_document=$doc_supp");
 	}
 
 

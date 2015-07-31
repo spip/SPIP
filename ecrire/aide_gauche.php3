@@ -112,7 +112,6 @@ article("Descriptif rapide","artdesc");
 article("Chapeau","artchap");
 article("Redirection d'article","artvirt","admin");
 article("Texte","arttexte");
-article("Ins&eacute;rer des images","artimg");
 article("Date","artdate");
 article("Date de publication ant&eacute;rieure","artdate_redac");
 article("Les auteurs","artauteurs");
@@ -132,6 +131,11 @@ article("Choisir la rubrique","brevesrub");
 article("Le lien hypertexte","breveslien");
 article("Le statut de la br&egrave;ve","brevesstatut","admin");
 article("Le logo de la br&egrave;ve","breveslogo","admin");
+
+rubrique("Images et documents");
+article("Ins&eacute;rer des images","ins_img");
+article("Joindre des documents","ins_doc");
+article("Joindre des documents","ins_upload","admin");
 
 rubrique("Les mots-cl&eacute;s");
 article("Principe des mots-cl&eacute;s","mots");

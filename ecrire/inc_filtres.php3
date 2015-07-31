@@ -54,8 +54,8 @@ function liens_ouvrants ($texte) {
 
 // Corrige les caracteres degoutants utilises par les Windozeries
 function corriger_caracteres($texte) {
-	// 145,146,180 = simple quote ; 147,148 = double quote ; 150 = tiret long
-	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150), "'''".'""-');
+	// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
+	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150).chr(151), "'''".'""--');
 }
 
 // Transformer les sauts de paragraphe en simples passages a la ligne

@@ -11,7 +11,7 @@ debut_gauche();
 if($options != 'avancees') {
 	debut_boite_info();
 	echo "<P align=center><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>&Agrave; SUIVRE</B></FONT>";
-	echo "<P align=left><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p>Quand vous serez familiaris&eacute;(e) avec SPIP, cliquez sur &laquo;interface compl&egrave;te&raquo; pour ouvrir plus de possibilit&eacute;s.")."</FONT>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.")."</FONT>";
 	fin_boite_info();
 }
 
@@ -203,6 +203,7 @@ if ($connect_statut == "0minirezo")	{
 	echo "<p>";
 	icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
 	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
+	icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif","rien.gif");
 }
 
 echo "</font>";
@@ -335,7 +336,7 @@ if (!$relief AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 if ($relief) {
 	echo "<p>";
 	debut_cadre_enfonce();
-
+	echo "<font color='red'><b>Les articles et br&egrave;ves suivants sont propos&eacute;s pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leurs sont attach&eacute;s.</b></font><p>";
 	//
 	// Les articles a valider
 	//

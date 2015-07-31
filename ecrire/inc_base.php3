@@ -137,6 +137,7 @@ function creer_base() {
 		id_vignette bigint(21) DEFAULT '0' NOT NULL,
 		id_type bigint(21) DEFAULT '0' NOT NULL,
 		titre text NOT NULL,
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		descriptif text NOT NULL,
 		fichier varchar(255) NOT NULL,
 		taille integer NOT NULL,
@@ -313,6 +314,10 @@ function creer_base() {
 		KEY id_document (id_document), KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
+	$query = "CREATE TABLE spip_documents_breves (
+		id_document bigint(21) DEFAULT '0' NOT NULL, id_breve bigint(21) DEFAULT '0' NOT NULL,
+		KEY id_document (id_document), KEY id_breve (id_breve))";
+	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_articles (
 		id_mot bigint(21) DEFAULT '0' NOT NULL, id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -844,6 +849,11 @@ function maj_base() {
 		$query = "ALTER TABLE spip_articles ADD referers INTEGER DEFAULT '0' NOT NULL";
 		spip_query($query);
 		$query = "ALTER TABLE spip_articles ADD popularite INTEGER DEFAULT '0' NOT NULL";
+		spip_query($query);
+	}
+
+	if ($version_installee < 1.436) {
+		$query = "ALTER TABLE spip_documents ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 		spip_query($query);
 	}
 

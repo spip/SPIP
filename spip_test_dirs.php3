@@ -29,7 +29,7 @@ $install = !file_exists("ecrire/inc_connect.php3");
 if ($test_dir)
 	$test_dirs[] = $test_dir;
 else
-	$test_dirs = array("CACHE", "IMG", "ecrire", "ecrire/data", "ecrire/upload");
+	$test_dirs = array("CACHE", "IMG", "ecrire", "ecrire/data");
 	unset($bad_dirs);
 
 while (list(, $my_dir) = each($test_dirs)) {
