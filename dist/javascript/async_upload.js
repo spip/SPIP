@@ -116,7 +116,7 @@ function async_upload_portfolio_documents(res){
     var self = jQuery(this);
     if(!cont.size()) {
       cont = jQuery(this.id.search(/--/)!=-1 ? "#portfolio":"#documents")
-      .append(self.clone2().get());
+      .append(self.clone2());
     }
     verifForm(cont.html(self.html()));
     jQuery("form.form_upload",cont).async_upload(async_upload_portfolio_documents);
