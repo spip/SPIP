@@ -4,9 +4,8 @@
 <script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery) {
 	var ajaxform_#ENV{ajaxid} = function() {
-		jQuery('div#[(#ENV{ajaxid})] form',this)
-		.formulaire_dyn_ajax('#ENV{ajaxid}');
-		}
+		jQuery('##ENV{ajaxid}',this).formulaire_dyn_ajax();
+	};
 	jQuery('document')
 	.ready(ajaxform_#ENV{ajaxid});
 	onAjaxLoad(ajaxform_#ENV{ajaxid});
