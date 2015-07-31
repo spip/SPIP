@@ -2,9 +2,8 @@
 
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_index.php3");
-include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_mots.php3");
+include_ecrire ("inc_sites.php3");
 
 $proposer_sites = lire_meta("proposer_sites");
 
@@ -139,6 +138,7 @@ if ($nouveau_statut AND $flag_administrable) {
 	calculer_rubriques();
 	if ($statut == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
 			indexer_syndic($id_syndic);
 		}
 	}
@@ -163,6 +163,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	calculer_rubriques_publiques();
 	if ($statut == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
 			indexer_syndic($id_syndic);
 		}
 	}

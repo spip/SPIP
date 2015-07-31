@@ -316,13 +316,13 @@ if (!$relief) {
 	$relief = (mysql_num_rows($result) > 0);
 }
 
-if (!$relief) {
+if (!$relief AND lire_meta('activer_syndic') != 'non') {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
 
-if (!$relief AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
@@ -347,15 +347,20 @@ if ($relief) {
 	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
 	afficher_breves("Les br&egrave;ves &agrave; valider", $query);
 
+
 	//
 	// Les sites references a valider
 	//
-	afficher_sites("Les sites &agrave; valider", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
+	if (lire_meta('activer_syndic') != 'non') {
+		include_ecrire("inc_sites.php3");
+		afficher_sites("Les sites &agrave; valider", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
+	}
 
 	//
 	// Les sites a probleme
 	//
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		include_ecrire("inc_sites.php3");
 		afficher_sites("Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me",
 			"SELECT * FROM spip_syndic WHERE syndication='off' ORDER BY nom_site");
 	}
@@ -465,13 +470,13 @@ if (($date - $date_opt) > 24 * 3600) {
 
 
 include_ecrire ("inc_mail.php3");
-include_ecrire ("inc_sites.php3");
-include_ecrire ("inc_index.php3");
 
 envoyer_mail_quoi_de_neuf();
 
+/*include_ecrire ("inc_sites.php3");
+include_ecrire ("inc_index.php3");
 executer_une_syndication();
-executer_une_indexation_syndic();
+executer_une_indexation_syndic();*/
 
 
 ?>

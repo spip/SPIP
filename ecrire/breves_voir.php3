@@ -1,7 +1,6 @@
 <?php
 
 include ("inc.php3");
-include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 
@@ -74,6 +73,7 @@ if ($titre AND $modifier_breve) {
 	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\" WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
 		indexer_breve($id_breve);
 	}
 	calculer_rubriques();

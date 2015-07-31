@@ -2,7 +2,6 @@
 
 include ("inc.php3");
 include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
@@ -170,12 +169,12 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	}
 
 	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
 		indexer_auteur($id_auteur);
 	}
 
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
-
 }
 
 // Redirection

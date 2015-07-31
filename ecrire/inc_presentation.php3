@@ -983,7 +983,6 @@ function barre_onglets($rubrique, $onglet){
 }
 
 
-
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
 	global $spip_display, $spip_ecran ;
 	
