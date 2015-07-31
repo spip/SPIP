@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_titre_mailing' => 'Elektronická konferencia',
 	'ical_titre_rss' => 'Syndikačné súbory',
 	'icone_accueil' => 'Úvodná stránka',
-	'icone_activer_cookie' => 'Aktivovať príslušnú cookie',
+	'icone_activer_cookie' => 'Aktivovať svoju cookie',
 	'icone_activite' => 'Aktivita',
 	'icone_admin_plugin' => 'Riadiť zásuvné moduly',
 	'icone_administration' => 'Údržba',
@@ -221,7 +221,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_retour_article' => 'Späť na článok',
 	'icone_squelette' => 'Šablóny',
 	'icone_suivi_publication' => 'Sledovanie publikovania',
-	'icone_supprimer_cookie' => 'Odstrániť príslušnú cookie',
+	'icone_supprimer_cookie' => 'Odstrániť svoju cookie',
 	'icone_supprimer_rubrique' => 'Odstrániť túto rubriku',
 	'icone_supprimer_signature' => 'Odstrániť tento podpis',
 	'icone_valider_signature' => 'Potvrdiť tento podpis',
@@ -236,8 +236,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_rubrique' => '1 rubrika',
 	'info_1_site' => '1 stránka',
 	'info_1_visiteur' => '1 návštevník',
-	'info_activer_cookie' => 'Môžete aktivovať <b>príslušnú cookie,</b> ktorá vám umožní
- jednoducho prepínať medzi verejne prístupnou  stránkou a súkromnou zónou.',
+	'info_activer_cookie' => 'Môžete aktivovať <b>svoju cookie,</b> ktorá vám umožní
+ jednoducho prechádzať medzi verejne prístupnou  stránkou a súkromnou zónou.',
 	'info_admin_etre_webmestre' => 'Prideliť mi práva administrátora webu',
 	'info_admin_gere_rubriques' => 'Tento administrátor riadi tieto rubriky:',
 	'info_admin_gere_toutes_rubriques' => 'Tento administrátor riadi <b>všetky rubriky</b>',
@@ -809,8 +809,8 @@ a stav ich spracovania je označený farbou:',
 
 	// S
 	'sans_heure' => 'neurčený čas',
-	'statut_admin_restreint' => '(administrátor s obmedzeniami)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
+	'statut_admin_restreint' => 'administrátor s obmedzeniami',
+	'statut_webmestre' => 'webmaster',
 
 	// T
 	'tache_cron_asap' => 'Funkcia CRON @function@ (ihneď)',
