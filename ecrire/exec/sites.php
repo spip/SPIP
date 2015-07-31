@@ -338,7 +338,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "<div align='".$GLOBALS['spip_lang_left']."'>",
 		  _T('syndic_choix_moderation');
 		echo "<div style='padding-$spip_lang_left: 40px;'>";
-		afficher_choix('moderation', $moderation,
+		echo afficher_choix('moderation', $moderation,
 			array(
 			'non' => _T('info_publier')
 				.' ('._T('bouton_radio_modere_posteriori').')',
@@ -363,7 +363,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		# miroir
 		if (!$miroir AND !$miroir = $row['miroir']) $miroir = 'non';
 		echo "<li>"._T('syndic_option_miroir').' ';
-		afficher_choix('miroir', $miroir,
+		echo afficher_choix('miroir', $miroir,
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
 			" &nbsp; ");
 		echo "</li>\n";
@@ -371,7 +371,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		# oubli
 		if (!$oubli AND !$oubli = $row['oubli']) $oubli = 'non';
 		echo "<li>"._T('syndic_option_oubli', array('mois' => 2)).' ';
-		afficher_choix('oubli', $oubli,
+		echo afficher_choix('oubli', $oubli,
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
 			" &nbsp; ");
 		echo "</li>\n";
@@ -384,7 +384,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "<div align='$spip_lang_left'>"
 			. _T('syndic_choix_resume') ;
 		echo "<div style='padding-$spip_lang_left: 40px;'>";		
-		afficher_choix('resume', $resume,
+		echo afficher_choix('resume', $resume,
 			array(
 				'oui' => _T('syndic_option_resume_oui'),
 				'non' => _T('syndic_option_resume_non')

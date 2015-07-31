@@ -142,7 +142,6 @@ function chercher_miroirs_ortho($lang) {
 			$result[] = $url;
 		}
 		else if ($chercher && !$langs["!$lang"]) {
-			//echo "test $lang $url<br />";
 			if (verifier_langue_miroir($url, $lang)) $result[] = $url;
 			// Ne recuperer la langue d'un miroir qu'une seule fois par requete
 			if ($result) $chercher = false;
@@ -392,8 +391,6 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	$texte = preg_replace(', [-\']+,', ' ', $texte); // tirets de typo
 	$texte = preg_replace(',\' ,', ' ', $texte); // apostrophes utilisees comme guillemets
 
-	//echo htmlspecialchars($texte)."<br>";
-
 	// Virer les mots contenant au moins un chiffre
 	$texte = preg_replace(', ([^ ]*\d[^ ]* )+,', ' ', $texte);
 
@@ -497,7 +494,7 @@ function panneau_ortho($ortho_result) {
 	if (!count($mauvais) && !count($bons)) return;
 	ksort($mauvais);
 
-	echo "<script type='text/javascript'><!--
+	$panneau = "<script type='text/javascript'><!--
 	var curr_suggest = null;
 // http://doc.spip.org/@suggest
 	function suggest(id) {
@@ -512,69 +509,70 @@ function panneau_ortho($ortho_result) {
 		menu_box = document.getElementById('select_ortho');
 		if (menu_box.length > id) menu_box.selectedIndex = id;
 	}";
-	echo "//--></script>";
+	$panneau .= "//--></script>";
 
-	echo "<form class='form-ortho verdana2' action='' method='get'>\n";
-	echo "<select name='select_ortho' id='select_ortho' onChange='suggest(this.selectedIndex);'>\n";
-	echo "<option value='0'>... "._T('ortho_mots_a_corriger')." ...</option>\n";
+	$panneau .= "<form class='form-ortho verdana2' action='' method='get'>\n";
+	$panneau .= "<select name='select_ortho' id='select_ortho' onChange='suggest(this.selectedIndex);'>\n";
+	$panneau .= "<option value='0'>... "._T('ortho_mots_a_corriger')." ...</option>\n";
 	foreach ($mauvais as $mot => $suggest) {
 		$id = $id_suggest[$mot] = "$i";
 		$i++;
 		$mot_html = afficher_ortho($mot);
-		echo "<option value='$id'>$mot_html</option>\n";
+		$panneau .= "<option value='$id'>$mot_html</option>\n";
 	}
 	foreach ($bons as $mot) {
 		$id = $id_suggest[$mot] = "$i";
 		$i++;
 	}
-	echo "</select>\n";
-	echo "</form>\n";
+	$panneau .= "</select>\n";
+	$panneau .= "</form>\n";
 	// Mots mal orthographies :
 	// liste des suggestions plus lien pour ajouter au dico
 	foreach ($mauvais as $mot => $suggest) {
 		$id = $id_suggest[$mot];
 		$mot_html = afficher_ortho($mot);
-		echo "<div class='suggest-inactif' id='suggest$id'>";
-		echo "<span class='ortho'>$mot_html</span>\n";
-		echo "<div class='detail'>\n";
+		$panneau .= "<div class='suggest-inactif' id='suggest$id'>";
+		$panneau .= "<span class='ortho'>$mot_html</span>\n";
+		$panneau .= "<div class='detail'>\n";
 		if (is_array($suggest) && count($suggest)) {
-			echo "<ul>\n";
+			$panneau .= "<ul>\n";
 			$i = 0;
 			foreach ($suggest as $sug) {
 				if (++$i > 12) {
-					echo "<li><i>(...)</i></li>\n";
+					$panneau .= "<li><i>(...)</i></li>\n";
 					break;
 				}
-				echo "<li>".typo(afficher_ortho($sug))."</li>\n";
+				$panneau .= "<li>".typo(afficher_ortho($sug))."</li>\n";
 			}
-			echo "</ul>\n";
+			$panneau .= "</ul>\n";
 		}
 		else {
-			echo "<i>"._T('ortho_aucune_suggestion')."</i>";
+			$panneau .= "<i>"._T('ortho_aucune_suggestion')."</i>";
 		}
-		echo "<br />";
+		$panneau .= "<br />";
 		$lien = parametre_url(self(), 'supp_ortho', '');
 		$lien = parametre_url($lien, 'ajout_ortho', $mot);
-		icone_horizontale(_T('ortho_ajouter_ce_mot'), $lien, "ortho-24.gif", "creer.gif");
-		echo "</div>\n";
-		echo "</div>\n\n";
+		$panneau .= icone_horizontale(_T('ortho_ajouter_ce_mot'), $lien, "ortho-24.gif", "creer.gif", false);
+		$panneau .= "</div>\n";
+		$panneau .= "</div>\n\n";
 	}
 	// Mots trouves dans le dico :
 	// message plus lien pour retirer du dico
 	foreach ($bons as $mot) {
 		$id = $id_suggest[$mot];
 		$mot_html = afficher_ortho($mot);
-		echo "<div class='suggest-inactif' id='suggest$id'>";
-		echo "<span class='ortho-dico'>$mot_html</span>";
-		echo "<div class='detail'>\n";
-		echo "<i>"._T('ortho_ce_mot_connu')."</i>";
-		echo "<br />";
+		$panneau .= "<div class='suggest-inactif' id='suggest$id'>";
+		$panneau .= "<span class='ortho-dico'>$mot_html</span>";
+		$panneau .= "<div class='detail'>\n";
+		$panneau .= "<i>"._T('ortho_ce_mot_connu')."</i>";
+		$panneau .= "<br />";
 		$lien = parametre_url(self(), 'ajout_ortho', '');
 		$lien = parametre_url($lien, 'supp_ortho', $mot);
-		icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif");
-		echo "</div>\n";
-		echo "</div>\n";
+		$panneau .= icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif");
+		$panneau .= "</div>\n";
+		$panneau .= "</div>\n";
 	}
+	return $panneau;
 }
 
 

@@ -281,7 +281,7 @@ function moteur_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('activer_moteur', $activer_moteur,
+	echo afficher_choix('activer_moteur', $activer_moteur,
 		array('oui' => _T('item_utiliser_moteur_recherche'),
 			'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
 	echo "</div>";
@@ -306,7 +306,7 @@ function statistiques_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-afficher_choix('activer_statistiques', $activer_statistiques,
+echo afficher_choix('activer_statistiques', $activer_statistiques,
 	array('oui' => _T('item_gerer_statistiques'),
 		'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ');
 	echo "</div>";
@@ -331,7 +331,7 @@ function notification_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('articles_modif', $articles_modif,
+	echo afficher_choix('articles_modif', $articles_modif,
 		array('oui' => _T('item_activer_messages_avertissement'),
 			'non' => _T('item_non_activer_messages_avertissement')));
 	echo "</div>";
@@ -356,7 +356,7 @@ function versions_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('articles_versions', $articles_versions,
+	echo afficher_choix('articles_versions', $articles_versions,
 		array('oui' => _T('info_historique_activer'),
 			'non' => _T('info_historique_desactiver')));
 	echo "</div>";
@@ -387,7 +387,7 @@ function correcteur_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('articles_ortho', $articles_ortho,
+	echo afficher_choix('articles_ortho', $articles_ortho,
 		array('oui' => _T('info_ortho_activer'),
 			'non' => _T('info_ortho_desactiver')));
 	echo "</div>";
@@ -414,7 +414,7 @@ function previsu_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('preview', $preview,
+	echo afficher_choix('preview', $preview,
 		array('oui' => _T('info_preview_admin'),
 			'1comite' => _T('info_preview_comite'),
 			'non' => _T('info_preview_desactive')
@@ -483,7 +483,7 @@ function htpasswd_config()
 	echo "<div class='verdana2'>", _T('texte_fichier_authent', array('dossier' => '<tt>'.joli_repertoire(_DIR_TMP).'</tt>')), "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('creer_htpasswd', $creer_htpasswd,
+	echo afficher_choix('creer_htpasswd', $creer_htpasswd,
 		array('oui' => _T('item_creer_fichiers_authent'),
 			'non' =>  _T('item_non_creer_fichiers_authent')),
 		' &nbsp; ');
@@ -510,7 +510,7 @@ function htaccess_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('creer_htaccess', $creer_htaccess,
+	echo afficher_choix('creer_htaccess', $creer_htaccess,
 		       array('oui' => _L("interdire la lecture"),
 			     'non' => _L("autoriser la lecture")),
 		       ' &nbsp; ');

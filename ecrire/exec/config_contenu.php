@@ -152,7 +152,7 @@ if ($options == "avancees") {
 
 
 	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='center' class='verdana2'>";
-	afficher_choix('accepter_inscriptions', $accepter_inscriptions,
+	echo afficher_choix('accepter_inscriptions', $accepter_inscriptions,
 		array('oui' => _T('item_accepter_inscriptions'),
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 
@@ -180,7 +180,7 @@ if ($options == "avancees") {
 			echo _T('info_question_accepter_visiteurs');
 			echo "</TD></TR>";
 			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
-			afficher_choix('accepter_visiteurs', $accepter_visiteurs,
+			echo afficher_choix('accepter_visiteurs', $accepter_visiteurs,
 				array('oui' => _T('info_option_accepter_visiteurs'),
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
 			echo "</td></tr>\n";
@@ -217,7 +217,7 @@ if ($options == "avancees") {
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('prevenir_auteurs', $prevenir_auteurs,
+	echo afficher_choix('prevenir_auteurs', $prevenir_auteurs,
 		array('oui' => _T('info_option_faire_suivre'),
 			'non' => _T('info_option_ne_pas_faire_suivre')));
 	echo "</TD></TR></table>\n";
@@ -340,7 +340,7 @@ if ($options == "avancees") {
 
 	echo _T('info_forum_ouvert');
 	echo "<br />";
-	afficher_choix('forum_prive_admin', $GLOBALS['meta']['forum_prive_admin'],
+	echo afficher_choix('forum_prive_admin', $GLOBALS['meta']['forum_prive_admin'],
 		array('oui' => _T('item_activer_forum_administrateur'),
 			'non' => _T('item_desactiver_forum_administrateur')));
 
