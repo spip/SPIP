@@ -164,7 +164,10 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 // http://doc.spip.org/@marquer_doublons_documents
 function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
-	if (!$desc) $desc = $trouver_table($table_objet, $serveur);
+	if (!$desc){
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table($table_objet, $serveur);
+	}
 	$load = "";
 
 	// charger le champ manquant en cas de modif partielle de l'objet
