@@ -132,8 +132,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	if (!strlen($recherche))
 		return array();
 
-	$preg = '/'.$recherche.'/' . $options['preg_flags'];
-
+	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	// ou si l'expression reguliere est invalide
 	if (preg_quote($recherche, '/') == $recherche
@@ -294,7 +293,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 
 	$results = recherche_en_base($recherche, $tables, $options);
 
-	$preg = '/'.$recherche.'/' . $options['preg_flags'];
+	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
 
 	foreach ($results as $table => $r) {
 		$_id_table = id_table_objet($table);
