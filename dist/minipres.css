@@ -1,6 +1,6 @@
 body {
 	color: #2e3436;
-	font-family: Trebuchet Ms,Verdana,Arial,Sans,sans-serif;
+	font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif;
 	font-size: 0.9em;
 	background-color: #babdb6;
 }
@@ -73,7 +73,7 @@ label {
 .pass #minipres {width:90%;}
 
 .petit-centre {
-	font-family: Verdana,Arial,Sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-size: 1em;
 }
 
@@ -97,7 +97,7 @@ label {
 	border: 1px solid #333;
 	background-position: center bottom;
 	font-size: 0.9em;
-	font-family: Verdana,Arial,Sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 }
 
 .formo {
@@ -110,7 +110,7 @@ label {
 	background-position: center bottom;
 	behavior: url(win_width.htc);
 	font-size: 1em;
-	font-family: Verdana,Arial,Sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 }
 
 p.resultat {

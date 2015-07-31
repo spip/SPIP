@@ -19,7 +19,7 @@ a.spip-admin-boutons {
 	text-align: center;
 	margin: 0;
 	padding: 1px .5em;
-	font-family: helvetica,arial,sans-serif;
+	font-family: helvetica,arial, sans-serif;
 	font-size: 10px;
 	font-weight: bold;
 	background-color: #FFF;
@@ -40,7 +40,7 @@ a:active.spip-admin-boutons {
 /* Style pour le mode debug */
 #spip-debug {
 	background-color: #F0F0F0;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
 }
 
 #spip-debug ul table {
@@ -56,7 +56,7 @@ a:active.spip-admin-boutons {
 
 #spip-debug fieldset fieldset {
 	background-color: #CCF;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
 	font-size: 80%;
 }
 
@@ -64,7 +64,7 @@ a:active.spip-admin-boutons {
 	background-color: #FFF;
 	border: solid 1px #F00;
 	padding: 1px 1em;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
 
@@ -86,7 +86,7 @@ a:active.spip-admin-boutons {
 }
 #debug_boucle fieldset fieldset {
 	background-color: #FFF;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
 	padding: 0.5em 1.5em;
 }
 
