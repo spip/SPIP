@@ -575,7 +575,7 @@ function spip_sqlite_replace($table, $values, $keys=array(), $serveur='',$requet
 	
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	$values = array_map('spip_sqlite_quote', $values);
-	$values = _sqlite_ajouter_champs_timestamp($table, $values, $desc, $serveur);
+	$values = _sqlite_ajouter_champs_timestamp($table, $values, '', $serveur);
 	
 	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',$values) . ')', $serveur);
 }
