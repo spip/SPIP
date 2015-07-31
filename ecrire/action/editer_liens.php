@@ -493,7 +493,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 				$type = $t['objet'];
 				$spip_table_objet = table_objet_sql($type);
 				$id_table_objet = id_table_objet($type);
-				$res = sql_select("L.$primary AS id,id_objet",
+				$res = sql_select("L.$primary AS id,L.id_objet",
 								"$table_lien AS L
 									LEFT JOIN $spip_table_objet AS O
 										ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
