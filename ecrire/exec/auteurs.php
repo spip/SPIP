@@ -73,52 +73,51 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 // http://doc.spip.org/@affiche_auteurs
 function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
-  global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
+	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
-  if ($tri=='nom') $s = _T('info_par_nom');
-  if ($tri=='statut') $s = _T('info_par_statut');
-  if ($tri=='nombre') $s = _T('info_par_nombre_articles');
-  $s = ' ('._T('info_par_nombre_article').')';
+	if ($tri=='nom') $s = _T('info_par_nom');
+	if ($tri=='statut') $s = _T('info_par_statut');
+	if ($tri=='nombre') $s = _T('info_par_nombre_articles');
+	$s = ' ('._T('info_par_nombre_article').')';
 
-  if ($visiteurs == "oui") {
-	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
-	$visiteurs = '&visiteurs=oui';
- } else {
-	debut_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
+	if ($visiteurs == "oui") {
+		debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
+		$visiteurs = '&visiteurs=oui';
+	} else {
+		debut_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
 	$visiteurs = "";
- }
- debut_gauche();
+	}
+	debut_gauche();
 
- debut_boite_info();
- if ($visiteurs)
-   echo "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'), '</p>';
- else {
-	echo "\n<p class='arial1'>"._T('info_gauche_auteurs'), '</p>';
+	debut_boite_info();
+	if ($visiteurs)
+		echo "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'), '</p>';
+	else {
+		echo "\n<p class='arial1'>"._T('info_gauche_auteurs'), '</p>';
 
 	if ($connect_statut == '0minirezo')
-		echo '\n<br />'. _T('info_gauche_auteurs_exterieurs');
- }
- fin_boite_info();
-
-
- if ($connect_statut == '0minirezo') {
-
-	$res = '';
-
-	if ($connect_toutes_rubriques) 
-		$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif", false);
-
-	$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
-
-	$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
-	if ($n) {
-		if ($visiteurs)
-		  $res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "", false);
-		else
-		  $res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "", false);
+		echo "\n<br />". _T('info_gauche_auteurs_exterieurs');
 	}
-	echo bloc_des_raccourcis($res);
- }
+	fin_boite_info();
+
+
+	if ($connect_statut == '0minirezo') {
+
+		if ($connect_toutes_rubriques) 
+			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif", false);
+		else $res = '';
+
+		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
+
+		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
+		if ($n) {
+			if ($visiteurs)
+				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "", false);
+			else
+				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "", false);
+		}
+		echo bloc_des_raccourcis($res);
+	}
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
