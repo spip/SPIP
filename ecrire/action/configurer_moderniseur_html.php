@@ -19,7 +19,7 @@ function action_configurer_moderniseur_html_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	$v = _request('version_html_max'));
+	$v = _request('version_html_max');
 	spip_log("C'est-a-dire: $v");
 	if (('html4' == $v) OR ('html5' == $v)) {
 		ecrire_meta('version_html_max', $v);
