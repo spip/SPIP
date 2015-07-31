@@ -24,9 +24,10 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	if ($err){
 		$res['message_erreur'] =$err;
 	}
-	elseif ($retour) {
+	else{
 		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
-		$res['redirect'] = parametre_url($retour,$id_table_objet,$id);
+		if ($retour)
+			$res['redirect'] = parametre_url($retour,$id_table_objet,$id);
 	}
 	return $res;
 }
