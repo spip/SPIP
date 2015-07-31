@@ -726,6 +726,11 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 			$t .= $formater($r);
 	spip_free_result($q);
 
+	if ($t)
+	  $t = afficher_liste_debut_tableau()
+	    . $t
+	    . afficher_liste_fin_tableau();
+
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
 
 	$texte = http_img_pack("searching.gif", "", $style . " id='img_$tmp_var'");
@@ -742,9 +747,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	. bandeau_titre_boite2($texte, "article-24.gif", 'toile_blanche', 'ligne_noire')
 	. (($cpt <= $nb_aff) ? ''
 	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
-	. afficher_liste_debut_tableau()
 	. $t
-	. afficher_liste_fin_tableau()
 	. "</div>\n";
 
 	return ajax_action_greffe($tmp_var,$res);
@@ -1048,7 +1051,6 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	$thread[$compteur_forum] = 1;
 	
 	$res = '';
-	if ($spip_display == 4) $res = "<ul>";
 
  	while($row = spip_fetch_array($request)) {
 		$statut=$row['statut'];
@@ -1064,7 +1066,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 
 	spip_free_result($request);
 	$compteur_forum--;
-	if ($spip_display == 4) $res .= "</ul>";	
+	if ($spip_display == 4 AND $res) $res = "<ul>$res</ul>";	
 	return $res;
 }
 
@@ -1211,7 +1213,7 @@ function afficher_forum_mots($id_forum)
 {
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
-	$res = "\n<ul>";
+	$res = "";
 	while ($row = spip_fetch_array($result)) {
 		$res .= "\n<li> <b>"
 		. propre($row['titre'])
@@ -1219,8 +1221,8 @@ function afficher_forum_mots($id_forum)
 		.  propre($row['type'])
 		.  "</li>";
 	}
-	$res .= "</ul>\n";
-	return $res;
+	
+	return $res ? "\n<ul>$res</ul>\n" : $res;
 }
 
 // affiche les traits de liaisons entre les reponses
