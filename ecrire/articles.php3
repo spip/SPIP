@@ -367,7 +367,6 @@ if ($id_article>0 AND $flag_editable)
 //
 
 if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
-
 	echo "<p>";
 	debut_cadre_relief("forum-interne-24.gif");
 	$visible = $change_accepter_forum || $change_petition;
