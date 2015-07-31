@@ -10,12 +10,12 @@
 .large { width: 900px; }
 .etroit { width: 750px; }
 
-/*.calendrier-table-large { 
+/*.large { 
 	border: 0; background: red; padding: 1em;
 	width: 100%;
  }
 
-.calendrier-table-etroit { 
+.etroit { 
 	border: 0;
 	width: 750px;
  }*/
@@ -98,22 +98,22 @@ div.navigation-calendrier img {
   color: #000;
 }
 
-.calendrier-table-etroit .calendrier-td-gauche {
+.etroit .calendrier-td-gauche {
 	width: 0;
   	vertical-align: top;
  }
 
-.calendrier-table-large .calendrier-td-gauche {
+.large .calendrier-td-gauche {
 	width: 150px;
   	vertical-align: top;
  }
 
-.calendrier-table-etroit .calendrier-td-droit {
+.etroit .calendrier-td-droit {
 	width: 150px;
   	vertical-align: top;
  }
 
-.calendrier-table-large .calendrier-td-droit {
+.large .calendrier-td-droit {
 	width: 150px;
   	vertical-align: top;
  }
@@ -155,7 +155,7 @@ div.navigation-calendrier img {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border: 0;
-	background-color: yellow;
+	background-color: #FFF;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
  }
@@ -221,19 +221,13 @@ div.navigation-calendrier img {
 	filter: alpha(opacity=30);
 }
 
-
-.calendrier-png { 
-	width: 12px; 
-	height: 12px;
-	/* URL a revoir */
-	behavior: url(win_png.htc);
-}
-
 .calendrier-icone { 
 	width: 14px;
 	height: 7px;
 	border: 0;
 }
+
+/* ----------------------- */
 
 .calendrier-noir  { 		/*  style anar */
 	color: #000;
