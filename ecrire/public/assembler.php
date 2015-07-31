@@ -86,11 +86,9 @@ function traiter_formulaires_dynamiques(){
 			if (($v=_request('var_ajax'))
 			 AND ($v!=='form')
 			 AND ($args = _request('var_ajax_env'))
-			 AND ($cle = _request('var_ajax_cle')) 
 			 AND ($url = _request('redirect'))){
 				$url = parametre_url($url,'var_ajax',$v,'&');
 				$url = parametre_url($url,'var_ajax_env',$args,'&');
-				$url = parametre_url($url,'var_ajax_cle',$cle,'&');
 				set_request('redirect',$url);
 			}
 			$var_f = charger_fonction($action, 'action');
@@ -100,11 +98,9 @@ function traiter_formulaires_dynamiques(){
 				$url = urldecode($GLOBALS['redirect']);
 				if (($v=_request('var_ajax'))
 				 AND ($v!=='form')
-				 AND ($args = _request('var_ajax_env'))
-				 AND ($cle = _request('var_ajax_cle')) ){
+				 AND ($args = _request('var_ajax_env'))) {
 					$url = parametre_url($url,'var_ajax',$v,'&');	
 					$url = parametre_url($url,'var_ajax_env',$args,'&');	
-					$url = parametre_url($url,'var_ajax_cle',$cle,'&');	
 				}
 				redirige_par_entete($url);
 			}
