@@ -1059,7 +1059,9 @@ function balise_MODELE_dist($p) {
 		}
 	}
 
-	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = '';
+	if (isset($p->boucles[$p->id_boucle]))
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
 	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
 	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
