@@ -429,24 +429,33 @@ function argumenter_squelette($v) {
  *     Code PHP d'exécutant l'inclusion du squelette (ou texte) de la balise dynamique
 **/
 function executer_balise_dynamique($nom, $args, $context_compil) {
-	$p = strpos($nom,"_");
 	$nomfonction = $nom;
-	$nomfonction_generique = substr($nom,0,$p+1);
-	if (!$file = include_spip("balise/". strtolower($nomfonction))) {
-		// pas de fichier associe, passer au traitement generique
-		$file = include_spip("balise/" .strtolower($nomfonction_generique));
-		if ($file) {
+	$nomfonction_generique = "";
+
+	// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
+	if (false !== ($p = strpos($nom, "_"))) {
+		$nomfonction_generique = substr($nom, 0, $p+1);
+	}
+
+	if (!$fonction_balise = charger_fonction($nomfonction, 'balise', true)) {
+		if ($nomfonction_generique and $fonction_balise = charger_fonction($nomfonction_generique, 'balise', true)) {
 			// et injecter en premier arg le nom de la balise 
-			array_unshift($args,$nom);
-			// et passer sur la fonction generique pour la suite
+			array_unshift($args, $nom);
 			$nomfonction = $nomfonction_generique;
 		}
-		else {
-			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
-			erreur_squelette($msg, $context_compil);
-			return '';
-		}
 	}
+
+	if (!$fonction_balise) {
+		$msg = array('zbug_balise_inexistante',array('from'=>'CVT', 'balise'=>$nom));
+		erreur_squelette($msg, $context_compil);
+		return '';
+	}
+
+	// retrouver le fichier qui a déclaré la fonction
+	// même si la fonction dynamique est déclarée dans un fichier de fonctions.
+	$reflFunc = new ReflectionFunction($fonction_balise);
+	$file = substr($reflFunc->getFileName(), strlen(_ROOT_CWD));
+
 	// Y a-t-il une fonction de traitement des arguments ?
 	$f = 'balise_' . $nomfonction . '_stat';
 
@@ -457,21 +466,26 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	// verifier que la fonction dyn est la, 
 	// sinon se replier sur la generique si elle existe
 	if (!function_exists('balise_' . $nomfonction . '_dyn')) {
-		$file = include_spip("balise/" .strtolower($nomfonction_generique));
-		if (function_exists('balise_' . $nomfonction_generique . '_dyn')) {
+		if ($nomfonction_generique
+			AND $file = include_spip("balise/" .strtolower($nomfonction_generique))
+			AND function_exists('balise_' . $nomfonction_generique . '_dyn'))
+		{
 			// et lui injecter en premier arg le nom de la balise 
-			array_unshift($r,$nom);
+			array_unshift($r, $nom);
 			$nomfonction = $nomfonction_generique;
 		} else {
-			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
+			$msg = array('zbug_balise_inexistante',array('from'=>'CVT', 'balise'=>$nom));
 			erreur_squelette($msg, $context_compil);
 			return '';
 		}
 	}
 
-	if (!_DIR_RESTREINT) 
+	if (!_DIR_RESTREINT) {
 		$file = _DIR_RESTREINT_ABS . $file;
+	}
+
 	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
+
 }
 
 /**
