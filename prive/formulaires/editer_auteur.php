@@ -1,12 +1,38 @@
 <?php
 
+/**
+ * Gestion du formulaire de d'édition de rubrique
+ *
+ * @package SPIP\Core\Auteurs\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le public
 
-// http://doc.spip.org/@inc_editer_mot_dist
+/**
+ * Chargement du formulaire d'édition d'un auteur
+ *
+ * @see formulaires_editer_objet_charger()
+ * 
+ * @param int|string $id_auteur
+ *     Identifiant de l'auteur. 'new' pour une nouvel auteur.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL de l'auteur, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	$valeurs['new_login'] = $valeurs['login'];
@@ -15,16 +41,38 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $a
 }
 
 /**
- * Identifier le formulaire en faisant abstraction des parametres qui
- * ne representent pas l'objet edite
+ * Identifier le formulaire en faisant abstraction des paramètres qui
+ * ne représentent pas l'objet édité
+ *
+ * @param int|string $id_auteur
+ *     Identifiant de l'auteur. 'new' pour une nouvel auteur.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL de l'auteur, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	return serialize(array(intval($id_auteur),$associer_objet));
 }
 
 
-// Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+/**
+ * Choix par défaut des options de présentation
+ *
+ * @param array $row
+ *     Valeurs de la ligne SQL d'un auteur, si connu
+ * return array
+ *     Configuration pour le formulaire
+ */
 function auteurs_edit_config($row)
 {
 	global $spip_lang;
@@ -52,6 +100,32 @@ function auteurs_edit_config($row)
 	return $config;
 }
 
+/**
+ * Vérifications du formulaire d'édition d'un auteur
+ *
+ * Vérifie en plus des vérifications prévues :
+ * - qu'un rédacteur ne peut pas supprimer son adresse mail,
+ * - que le mot de passe choisi n'est pas trop court et identique à sa
+ *   deuxième saisie
+ * 
+ * @see formulaires_editer_objet_verifier()
+ * 
+ * @param int|string $id_auteur
+ *     Identifiant de l'auteur. 'new' pour une nouvel auteur.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL de l'auteur, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Erreurs des saisies
+**/
 function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	// auto-renseigner le nom si il n'existe pas, sans couper
 	titre_automatique('nom',array('email','login'),255);
@@ -98,7 +172,39 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_mot_dist
+
+/**
+ * Traitements du formulaire d'édition d'un auteur
+ *
+ * En plus de l'enregistrement normal des infos de l'auteur, la fonction
+ * traite ces cas spécifiques :
+ * 
+ * - Envoie lorsqu'un rédacteur n'a pas forcément l'autorisation changer
+ *   seul son adresse email, un email à la nouvelle adresse indiquée
+ *   pour vérifier l'email saisi, avec un lien dans le mai sur l'action
+ *   'confirmer_email' qui acceptera alors le nouvel email.
+ *
+ * - Crée aussi une éventuelle laision indiquée dans $associer_objet avec
+ *   cet auteur.
+ * 
+ * @see formulaires_editer_objet_traiter()
+ * 
+ * @param int|string $id_auteur
+ *     Identifiant de l'auteur. 'new' pour une nouvel auteur.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel 'objet|x' indiquant de lier le mot créé à cet objet,
+ *     tel que 'article|3'
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL de l'auteur, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return array
+ *     Retour des traitements
+**/
 function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	if (_request('saisie_webmestre') OR _request('webmestre'))
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
@@ -116,7 +222,7 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 			AND $email_nouveau!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))){
 			$envoyer_mail = charger_fonction('envoyer_mail','inc');
 			$texte = _T('form_auteur_mail_confirmation',
-											array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))));
+				array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))));
 			$envoyer_mail($email_nouveau,_T('form_auteur_confirmation'),$texte);
 			set_request('email_confirm',$email_nouveau);
 			if ($email_ancien)
