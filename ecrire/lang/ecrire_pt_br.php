@@ -50,8 +50,6 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 	'bouton_ajouter_participant' => 'INCLUIR UM PARTICIPANTE:',
 	'bouton_annonce' => 'AVISO',
 	'bouton_annuler' => 'Anular',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilidade de enviar uma mensagem',
 	'bouton_checkbox_indiquer_site' => 'informar obrigatoriamente um website',
 	'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço de e-mail',
@@ -284,7 +282,6 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_barre_outils' => 'com sua barra de ferramentas?',
 	'info_base_installee' => 'A estrutura da sua base de dados foi instalada.',
 	'info_bio' => 'Biografia',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Introdução',
 	'info_chapeau_2' => 'Introdução:',
 	'info_chemin_acces_1' => 'Opções: <b>Caminho de acesso no diretório</b>',
@@ -413,7 +410,6 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 	'info_nb_visiteurs' => '@nb@ visitantes',
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome do destinatário',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome do seu site',
 	'info_nombre_articles' => '@nb_articles@ matérias,',
 	'info_nombre_partcipants' => 'PARTICIPANTES DA DISCUSSÃO:',
@@ -576,7 +572,6 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'install_select_langue' => 'Escolha um idioma e clique no botão «avançar» para iniciar o procedimento de instalação.',
 	'install_select_type_db' => 'Indicar o tipo de base de dados:',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -732,7 +727,6 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_plugins_dist_1' => 'Os plugins abaixo são carregados e ativados no diretório @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Eles não são desativáveis.',
 	'plugin_info_telecharger' => 'transferir de @url@ e instalar em @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',
 	'plugin_necessite_plugin' => 'É necessário o plugin @plugin@ na versão @version@, pelo menos.',
@@ -783,7 +777,6 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	// S
 	'sans_heure' => 'sem hora',
 	'statut_admin_restreint' => '(admin limitado)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)',

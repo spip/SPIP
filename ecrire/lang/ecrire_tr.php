@@ -11,18 +11,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Plugin\'i etkinleştir',
 	'affichage' => 'Gösterim',
 	'aide_non_disponible' => 'Çevrimiçi yardımın bu kısmı henüz bu dile çevrilmemiş.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
 	'auteur' => 'Yazar :',
 	'avis_acces_interdit' => 'Erişim yasak.',
 	'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin üzerinde @date_diff@ dakika önce çalıştı',
 	'avis_aucun_resultat' => 'Hiç sonuç yok.',
-	'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 	'avis_chemin_invalide_1' => 'Seçtiğiniz yol',
 	'avis_chemin_invalide_2' => 'geçersiz gözüküyor. Verdiğiniz bilgileri kontrol etmek için lütfen bir önceki sayfaya dönün.',
 	'avis_connexion_echec_1' => 'SQL veri tabanına bağlantı başarısız.',
 	'avis_connexion_echec_2' => 'Bir önceki sayfaya geri dönüp verdiğiniz bilgileri kontrol edin.',
 	'avis_connexion_echec_3' => '<b>Not:</b> Bir çok sunucuda, SQL veritabanı kullanabilmek için aktive edilmesini <b>talep etmeniz</b> gerekir. Eğer bağlanamıyorsanız bunu talep edip etmediğinizi kontrol edin.',
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 	'avis_connexion_ldap_echec_1' => 'LDAP sunucusuna bağlantı başarısız.',
 	'avis_connexion_ldap_echec_2' => 'Bir önceki sayfaya dönüp verdiğiniz bilgileri kontrol edin.',
 	'avis_connexion_ldap_echec_3' => 'Buna alternatif olarak, kullanıcı ithal etmek için LDAP sunucusunu kullanmayın.',
@@ -53,8 +50,6 @@ Bu ithal istemini onaylamayın.
 	'bouton_ajouter_participant' => 'BİR KATILIMCI EKLE :',
 	'bouton_annonce' => 'DUYURU',
 	'bouton_annuler' => 'İptal',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'ileti gönderme olanağı',
 	'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundasınız',
 	'bouton_checkbox_signature_unique_email' => 'e-posta adresi başına sadece bir imza',
@@ -66,8 +61,6 @@ Bu ithal istemini onaylamayın.
 	'bouton_effacer_tout' => 'HEPSİNİ sil',
 	'bouton_envoi_message_02' => 'İLETİ YOLLA',
 	'bouton_envoyer_message' => 'İletinin son hali : yolla',
-	'bouton_fermer' => 'Fermer', # NEW
-	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 	'bouton_modifier' => 'Değiştir',
 	'bouton_pense_bete' => 'KiŞiSEL NOT DEFTERi',
 	'bouton_radio_activer_messagerie' => 'Sitenin iç ileti sistemini aç',
@@ -113,32 +106,24 @@ Bu ithal istemini onaylamayın.
 	'config_titre_base_sup_choix' => 'Ek bir veri tabanı seçiniz',
 	'connexion_ldap' => 'Bağlantı :',
 	'copier_en_local' => 'Yerel olarak kopyala',
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 	// D
 	'date_mot_heures' => 'saat ',
 
 	// E
-	'ecran_securite' => ' + écran de sécurité @version@', # NEW
 	'email' => 'e-posta',
 	'email_2' => 'e-posta :',
-	'en_savoir_plus' => 'En savoir plus', # NEW
 	'entree_adresse_annuaire' => 'Rehber adresi',
 	'entree_adresse_email' => 'E-posta adresiniz',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
 	'entree_base_donnee_1' => 'Veritabanı adresi',
 	'entree_base_donnee_2' => '(Bu adres çoğunlukla site adresinize karşı düşer, bazen «localhost» ifadesine karşı düşer, bazen tamamen boş bırakılır.)',
 	'entree_biographie' => 'Bir kaç sözcükle kısa biyografi.',
 	'entree_chemin_acces' => 'Erişim yolunu <b>giriniz</b> :',
 	'entree_cle_pgp' => 'PGP anahtarınız',
-	'entree_cle_pgp_2' => 'Clé PGP', # NEW
 	'entree_contenu_rubrique' => '(Bir kaç sözcükle bölüm içeriği.)',
 	'entree_identifiants_connexion' => 'Bağlantı tanımlayıcılarınız...',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 	'entree_informations_connexion_ldap' => 'Lütfen bu forma LDAP rehberine bağlantı için kullandığınız bilgileri giriniz. Bu bilgiler size sistem ya da ağ yöneticisi tarafından verilebilir.',
 	'entree_infos_perso' => 'Kimsiniz ?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 	'entree_interieur_rubrique' => 'Bölüm içerisinde :',
 	'entree_liens_sites' => '<b>Hipermetin bağı</b> (atıflar, ziyaret edilecek site...)',
 	'entree_login' => 'Kullanıcı isminiz',
@@ -151,19 +136,13 @@ Bu ithal istemini onaylamayın.
 	'entree_nom_fichier' => 'Lütfen dosya ismini giriniz  @texte_compresse@:',
 	'entree_nom_pseudo' => 'Adınız ya da takma adınız ',
 	'entree_nom_pseudo_1' => '(Adınız ya da takma adınız) ',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 	'entree_nom_site' => 'Sitenizin adı ',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 	'entree_nouveau_passe' => 'Yeni şifre',
 	'entree_passe_ldap' => 'Şifre',
 	'entree_port_annuaire' => 'Rehberin kapı numarası',
 	'entree_signature' => 'İmza',
 	'entree_titre_obligatoire' => '<b>Başlık</b>  [Zorunlu]',
 	'entree_url' => 'Sitenizin adresi (URL)',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
-	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 	'erreur_plugin_fichier_absent' => 'Dosya eksik',
 	'erreur_plugin_fichier_def_absent' => 'Tanımlama dosyası eksik',
 	'erreur_plugin_nom_fonction_interdit' => 'Yasaklanmış işlev ismi',
@@ -171,10 +150,6 @@ Bu ithal istemini onaylamayın.
 	'erreur_plugin_prefix_manquant' => 'Plugin isimlendirme alanı tanımlanmamış',
 	'erreur_plugin_tag_plugin_absent' => 'Tanımlama dosyasında &lt;plugin&gt; eksik',
 	'erreur_plugin_version_manquant' => 'Plugin\'in uyarlaması eksik',
-
-	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
-	'htaccess_inoperant' => 'htaccess inopérant', # NEW
 
 	// I
 	'ical_info1' => 'Bu sayfa bu sitenin yaşamı ile temas halinde kalmak için bir kaç yöntem sunmaktadır. ',
@@ -189,59 +164,35 @@ Bu ithal istemini onaylamayın.
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'E-posta listesi',
 	'ical_titre_rss' => 'Paylaşım dosyaları',
-	'icone_accueil' => 'Accueil', # NEW
 	'icone_activer_cookie' => 'Yazışma çerezini etkinleştir',
-	'icone_activite' => 'Activité', # NEW
 	'icone_admin_plugin' => 'Plugin\'lerin yönetimi',
-	'icone_administration' => 'Maintenance', # NEW
 	'icone_afficher_auteurs' => 'Yazarları göster',
 	'icone_afficher_visiteurs' => 'Ziyaretçileri görüntüle',
 	'icone_arret_discussion' => 'Artık bu sohbete katılma',
 	'icone_calendrier' => 'Takvim',
-	'icone_configuration' => 'Configuration', # NEW
 	'icone_creer_auteur' => 'Yeni bir yazar oluştur ve bu makaleye bağla',
 	'icone_creer_mot_cle' => 'Yeni bir anahtar sözcük yarat ve bu makaleye bağla',
 	'icone_creer_mot_cle_rubrique' => 'Yeni bir anahtar sözcük oluştur ve bu başlığa bağla',
 	'icone_creer_mot_cle_site' => 'Yeni bir anahtar sözcük oluştur ve bu siteye bağla',
 	'icone_creer_rubrique_2' => 'Yeni bir bölüm oluştur',
-	'icone_edition' => 'Édition', # NEW
 	'icone_envoyer_message' => 'Bu iletiyi gönder',
-	'icone_ma_langue' => 'Ma langue', # NEW
-	'icone_mes_infos' => 'Mes informations', # NEW
-	'icone_mes_preferences' => 'Mes préférences', # NEW
 	'icone_modifier_article' => 'Bu makaleyi değiştir',
 	'icone_modifier_message' => 'Bu iletiyi değiştir',
 	'icone_modifier_rubrique' => 'Bu bölümü değiştir',
-	'icone_publication' => 'Publication', # NEW
 	'icone_relancer_signataire' => 'İmzalayanı tekrar başlat',
 	'icone_retour' => 'Geri dön',
 	'icone_retour_article' => 'Makaleye geri dön',
-	'icone_squelette' => 'Squelettes', # NEW
-	'icone_suivi_publication' => 'Suivi de la publication', # NEW
 	'icone_supprimer_cookie' => 'Yazışma çerezini sil',
 	'icone_supprimer_rubrique' => 'Bu bölümü sil',
 	'icone_supprimer_signature' => 'Bu imzayı sil',
 	'icone_valider_signature' => 'Bu imzayı onayla',
 	'image_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 	'info_1_article' => '1 makale',
-	'info_1_article_syndique' => '1 article syndiqué', # NEW
-	'info_1_auteur' => '1 auteur', # NEW
-	'info_1_message' => '1 message', # NEW
-	'info_1_mot_cle' => '1 mot-clé', # NEW
-	'info_1_rubrique' => '1 rubrique', # NEW
 	'info_1_site' => '1 site',
-	'info_1_visiteur' => '1 visiteur', # NEW
 	'info_activer_cookie' => 'Bir <b>yazışma kurabiyesi</b> çalıştırabilirsiniz,
  bu sizin kolayca kamu sitesinden özel siteye geçmenizi sağlar.',
-	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Bu yönetici şu bölümleri yönetiyor :',
 	'info_admin_gere_toutes_rubriques' => 'Bu yönetici <b>tüm bölümleri</b> yönetiyor.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
-	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
-	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
-	'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 	'info_administrateur' => 'Yönetici',
 	'info_administrateur_1' => 'Yönetici',
 	'info_administrateur_2' => 'sitenindir (<i>dikkatli kullanınız</i>)',
@@ -251,7 +202,6 @@ Bu ithal istemini onaylamayın.
 	'info_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
 	'info_adresse' => 'şu adresteki :',
 	'info_adresse_url' => 'Kamusal sitenin adresi (URL) ',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
 	'info_afficher_visites' => 'Şu adrese yapılan ziyaretlerin gösterileceği yer :',
 	'info_aide_en_ligne' => 'SPIP çevrimiçi yardım',
 	'info_ajout_image' => 'Bir makalenin eki olarak resim eklediğinizde,
@@ -268,18 +218,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_articles_02' => 'makale',
 	'info_articles_2' => 'Makaleler',
 	'info_articles_auteur' => 'Bu yazarın makaleleri',
-	'info_articles_miens' => 'Mes articles', # NEW
-	'info_articles_tous' => 'Tous les articles', # NEW
 	'info_articles_trouves' => 'Bulunan makaleler',
 	'info_articles_trouves_dans_texte' => '(metin içerisinde) bulunan makeleler ',
 	'info_attente_validation' => 'Onay bekleyen makaleleriniz',
-	'info_aucun_article' => 'Aucun article', # NEW
-	'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
-	'info_aucun_auteur' => 'Aucun auteur', # NEW
-	'info_aucun_message' => 'Aucun message', # NEW
-	'info_aucun_rubrique' => 'Aucune rubrique', # NEW
-	'info_aucun_site' => 'Aucun site', # NEW
-	'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 	'info_aujourdhui' => 'Bugün :',
 	'info_auteur_message' => 'İLETİNİN YAZARI :',
 	'info_auteurs' => 'Yazarlar',
@@ -289,8 +230,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_avertissement' => 'Uyarı',
 	'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 	'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
-	'info_bio' => 'Biographie', # NEW
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Giriş',
 	'info_chapeau_2' => 'Giriş :',
 	'info_chemin_acces_1' => 'Seçenekler : <b>Rehbere erişim yolu</b>',
@@ -300,7 +239,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_classement_1' => '@liste@\'den     inci',
 	'info_classement_2' => '@liste@\'den     inci',
 	'info_code_acces' => 'Kendi erişim şifrelerinizi unutmayınız !',
-	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 	'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Eğer sunucunuz html sayfaları otomatik olarak sıkıştırmıyorsa, yüklenen sayfa ağırlıklarını düşürmek için bu işlemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu işlem bazı sunucuları gözle görülür şekilde yavaşlatabilir.',
 	'info_config_suivi' => 'Eğer bu adres bir gönderi listesi (mailing-list)\'ne karşı düşüyorsa, aşağıya site katılımcılarının hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (örneğin listeye Web ile kaydolma sayfası), veya özel bir konu içeren (örneğin: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
@@ -317,7 +255,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_connexion_ok' => 'Bağlantı başarılı. ',
 	'info_contact' => 'İletişim',
 	'info_contenu_articles' => 'Makalelerin içeriği',
-	'info_contributions' => 'Contributions', # NEW
 	'info_creation_paragraphe' => '(Paragraf yaratmak için sadece boş bir kaç satır bırakınız.)', # MODIF
 	'info_creation_rubrique' => 'Makale yazmadan önce en az bir bölüm yaratmanız gerekir.',
 	'info_creation_tables' => 'Veritabanı tablolarının yaratılması',
@@ -341,7 +278,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_etape_suivante' => 'Bir sonraki aşamaya geç',
 	'info_etape_suivante_1' => 'Bir sonraki aşamaya geçebilirsiniz',
 	'info_etape_suivante_2' => 'Bir sonraki aşamaya geçebilirsiniz',
-	'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 	'info_exportation_base' => 'tabanın @archive@\'e doğru ihracı',
 	'info_facilite_suivi_activite' => 'Sitenin editör etkinliğinin izlenmesini kolaylaştırmak üzere,
                                    SPIP, e-posta ile, örneğin, yayınlama taleplerinin  ve makale
@@ -360,7 +296,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
                                         ziyaretçileri bulacaksınız (abonelik yöntemiyle yönetilen forumlar).',
 	'info_generation_miniatures_images' => 'Mevcut resimlerin minyatürlerinin üretilmesi',
 	'info_gerer_trad' => 'Çeviri bağlantıları yönetilsin mi ?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 	'info_hebergeur_desactiver_envoi_email' => 'Bazı Hizmet bilgisayarları kendi sunucularından 
                                            otomatik e-posta gönderisini durduruyorlar. 
                                            Bu durumda SPIP\'in şu işlevleri çalışmaz :',
@@ -382,11 +317,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_langues' => 'Sitenin dilleri',
 	'info_ldap_ok' => 'LDAP tasdiki kuruldu.',
 	'info_lien_hypertexte' => 'Hipermetin bağı :',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Bağlanan yazarlar',
 	'info_login_existant' => 'Bu kullanıcı ismi zaten var.',
 	'info_login_trop_court' => 'Kullanıcı ismi çok kısa.',
-	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 	'info_logos' => 'Logolar',
 	'info_maximum' => 'En fazla :',
 	'info_meme_rubrique' => 'Aynı bölümde',
@@ -401,7 +334,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
             sürümünü yüklediniz:
             veritabanınız kaybolabilir ve siteniz işlemez hale gelebilir.
             {{SPIP dosyalarını tekrar kurunuz.}}',
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 	'info_modifier_auteur' => 'Yazarı değiştir :',
 	'info_modifier_rubrique' => 'Bölümü değiştir :',
 	'info_modifier_titre' => 'Değiştir : @titre@',
@@ -413,20 +345,10 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_multi_cet_article' => 'Bu makalenin dili :',
 	'info_multi_langues_choisies' => 'Lütfen aşağıda sitenizdeki yazarların kullanabileceği dilleri seçiniz.
     Sitenizde daha önce kullanılan (ve görüntülenen) diller iptal edilemez. ',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
 	'info_multi_rubriques' => 'Bölümlerde dil mönüsü çalışsın mı ?',
 	'info_multi_secteurs' => 'Sadece kök dizinde yer alan bölümler için mi ?',
-	'info_nb_articles' => '@nb@ articles', # NEW
-	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
-	'info_nb_auteurs' => '@nb@ auteurs', # NEW
-	'info_nb_messages' => '@nb@ messages', # NEW
-	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-	'info_nb_rubriques' => '@nb@ rubriques', # NEW
-	'info_nb_sites' => '@nb@ sites', # NEW
-	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'İsim',
 	'info_nom_destinataire' => 'Alıcının ismi',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Sitenizin ismi',
 	'info_nombre_articles' => '@nb_articles@ makale,',
 	'info_nombre_partcipants' => 'TARTIŞMAYA KATILANLAR :',
@@ -438,7 +360,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_non_envoi_liste_nouveautes' => 'Yenilikler listesini gönderme',
 	'info_non_modifiable' => 'Değiştirilemez',
 	'info_non_suppression_mot_cle' => 'Bu anahtar sözcüğün silinmesini istemiyorum.',
-	'info_note_numero' => 'Note @numero@', # NEW
 	'info_notes' => 'Notlar',
 	'info_nouveaux_message' => 'Yeni iletiler',
 	'info_nouvel_article' => 'Yeni makale',
@@ -458,7 +379,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_par_statut' => 'duruma göre',
 	'info_par_tri' => '\'(@tri@ sıralamasına göre) \'',
 	'info_passe_trop_court' => 'Şifre çok kısa.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'İki şifre aynı değil.',
 	'info_pense_bete_ancien' => 'Eski hatırlatmalarınız', # MODIF
 	'info_plus_cinq_car' => '5 karakterden fazla',
@@ -504,8 +424,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_redacteurs' => 'Editörler',
 	'info_redaction_en_cours' => 'YAZIM AŞAMASINDA',
 	'info_redirection' => 'Yönlendirme',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 	'info_refuses' => 'Reddedilen makaleleriniz',
 	'info_reglage_ldap' => 'Seçenekler : <b>LDAP ithalinin ayarlanması.</b>',
 	'info_renvoi_article' => '<b>Yönlendirme.</b> Bu makalenin bizi şu sayfaya yönlendirir:',
@@ -532,7 +450,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_sous_titre' => 'Alt-başlık :',
 	'info_statut_administrateur' => 'Yönetici',
 	'info_statut_auteur' => 'Bu yazarın statüsü :',
-	'info_statut_auteur_2' => 'Je suis', # NEW
 	'info_statut_auteur_a_confirmer' => 'Onaylanacak kayıt',
 	'info_statut_auteur_autre' => 'Diğer statü :',
 	'info_statut_efface' => 'Silindi',
@@ -556,7 +473,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_total' => 'toplam :',
 	'info_tous_articles_en_redaction' => 'Yazılmakta olan tüm makaleler',
 	'info_tous_articles_presents' => 'Bu bölümde yayınlanan tüm makaleler',
-	'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
 	'info_tous_les' => 'her bir :',
 	'info_tous_redacteurs' => 'Tüm yazarlara duyuru',
 	'info_tout_site' => 'Tüm siteyi',
@@ -567,16 +483,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_tout_site6' => '<b>Dikkat :</b>
       sadece orijinal makaleler görüntüleniyor.
  Orijinale bağlı çeviriler durumlarını belirten bir renkle belirtilmiştir :',
-	'info_traductions' => 'Traductions', # NEW
 	'info_travail_colaboratif' => 'Makalelerde işbirliği',
 	'info_un_article' => 'bir makale,',
 	'info_un_site' => 'bir site,',
 	'info_une_rubrique' => 'bir bölüm,',
 	'info_une_rubrique_02' => '1 bölüm',
 	'info_url' => 'URL :',
-	'info_url_proxy' => 'URL du proxy', # NEW
 	'info_url_site' => 'SİTE\'nin URL\'si :',
-	'info_url_test_proxy' => 'URL de test', # NEW
 	'info_urlref' => 'Hipermetin bağı :',
 	'info_utilisation_spip' => 'SPIP artık kullanılmaya hazırdır...',
 	'info_visites_par_mois' => 'Ay olarak görüntüleme :',
@@ -584,10 +497,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_visiteur_2' => 'ziyaretçisi',
 	'info_visiteurs' => 'Ziyaretçiler',
 	'info_visiteurs_02' => 'Kamu sitesi ziyaretçileri ',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 	'install_adresse_base_hebergeur' => 'Barındırma firması tarafından atanmış veritabanının adresi',
 	'install_base_ok' => '@base@ veri tabanı tanındı',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 	'install_echec_annonce' => 'Kurulum büyük olasılıkla başarısız olacak veya site çalışmayacak...',
 	'install_extension_mbstring' => 'SPIP belirtilen programla çalışamaz :',
 	'install_extension_php_obligatoire' => 'SPIP için php uzantısı zorunludur :',
@@ -599,8 +510,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'install_select_langue' => 'Bir dil seçiniz, sonra « bir sonraki » düğmesini tıklayıp yükleme işlemini başlatınız.',
 	'install_select_type_db' => 'Veri tabanının tipini belirtiniz :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
-	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
 	'install_serveur_hebergeur' => 'Servis sağlayıcı tarafından sağlanan veri tabanı sunucusu',
@@ -608,8 +517,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'install_tables_base' => 'Veri tabanı tabloları',
 	'install_types_db_connus' => 'SPIP <b>MySQL</b> (en yaygın), <b>PostgreSQL</b> ve <b>SQLite</b> kullanmayı bilir.', # MODIF
 	'install_types_db_connus_avertissement' => 'Dikkat : bir çok eklenti sadece MySQL ile çalışır', # MODIF
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'Yazar',
 	'intitule_licence' => 'Lisans',
 	'item_accepter_inscriptions' => 'Kayıtları kabul et',
@@ -651,36 +558,18 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'item_publier_articles' => 'Makaleleri yayın tarihlerine bakmadan yayınla',
 	'item_reponse_article' => 'Makaleye yanıt ',
 	'item_utiliser_moteur_recherche' => 'Arama motorunu kullan',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 	'item_visiteur' => 'Ziyaretçi ',
 
 	// J
 	'jour_non_connu_nc' => 'Bilinmeyen ',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-	'label_slogan_site' => 'Slogan du site', # NEW
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Bu alıcıyı ekle',
 	'lien_ajouter_auteur' => 'Bu yazarın ekle',
 	'lien_ajouter_participant' => 'Bir katılımcıyı ekle',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 	'lien_email' => 'e-posta ',
 	'lien_nom_site' => 'SİTENİN ADI : ',
 	'lien_retirer_auteur' => 'Yazarı sil',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'bu katılımcıyı sil',
 	'lien_site' => 'site',
 	'lien_supprimer_rubrique' => 'bu bölümü sil',
@@ -707,9 +596,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'module_texte_traduction' => '« @module@ » dil dosyasının bulunduğu yer :',
 	'mois_non_connu' => 'Bilinmiyor ',
 
-	// N
-	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
-
 	// O
 	'onglet_contenu' => 'İçerik',
 	'onglet_declarer_une_autre_base' => 'Başka bir veri tabanı bildirin',
@@ -724,7 +610,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'page_pas_proxy' => 'Bu sayfa velilden (proxy) geçmemeli',
 	'pas_de_proxy_pour' => 'Gerekirse, bu vekilin uygulanmayacağı  makineleri veya alanları belirtiniz (örneğin : @ornek@)',
 	'plugin_charge_paquet' => '@name@ paketinin yüklenmesi',
-	'plugin_charger' => 'Télécharger', # NEW
 	'plugin_erreur_charger' => 'hata : @zip@ yüklenmesi olanaksız',
 	'plugin_erreur_droit1' => '<code>@dest@</code> dizini yazmak için izinli değil.',
 	'plugin_erreur_droit2' => 'Bu dizindeki hakları kontrol ediniz (ve hata durumunda oluşturunuz) veya dosyaları FTP ile kurunuz.',
@@ -735,7 +620,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_etat_test' => 'test aşamasında',
 	'plugin_impossible_activer' => '@plugin@ plugin\'ini aktive etmek olanaksız',
 	'plugin_info_automatique1' => 'Eklentilerin otomatik yüklenmesini istiyorsanız, lütfen :',
-	'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
 	'plugin_info_automatique2' => '<code>@rep@</code> isimli bir dizin oluşturun ;',
 	'plugin_info_automatique3' => 'sunucunun bu dizine yazma hakkı olduğunu kontrol ediniz',
 	'plugin_info_automatique_creer' => 'sitenin kök dizinini oluşturma',
@@ -747,25 +631,14 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_automatique_liste_update' => 'Listeleri güncelle',
 	'plugin_info_automatique_ou' => 'veya...',
 	'plugin_info_automatique_select' => 'Aşağıdan bir eklenti seçiniz : SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracaktır ; eğer bu eklenti zaten kurulu ise güncellenecektir.',
-	'plugin_info_credit' => 'Crédits', # NEW
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
-	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
 	'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ sürümünü gerektirir.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIP\'in en az @version@ sürümünü gerektirir.',
 	'plugin_source' => 'kaynak: ',
 	'plugin_titre_automatique' => 'Otomatik kurulum',
 	'plugin_titre_automatique_ajouter' => 'Eklenti ekleyiniz',
-	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
 	'plugin_zip_active' => 'Aktive etmek için devam ediniz',
 	'plugin_zip_adresse' => 'aşağıda indirilecek eklentiye ait zip dosyasının adresini veya bir çok eklentinin adres listesini belirtiniz.',
 	'plugin_zip_adresse_champ' => 'Eklentinin veya listenin adresi ',
@@ -774,31 +647,14 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_zip_installe_rep_finie' => '@zip@ dosyası açıldı ve @rep@ dizinine yüklendi.',
 	'plugin_zip_installer' => 'Şimdi yükleyebilirsiniz.',
 	'plugin_zip_telecharge' => '@zip@ dosyası bilgisayara indirildi',
-	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-	'plugins_actif_un' => 'Un plugin activé.', # NEW
 	'plugins_actifs' => '@count@ eklenti etkinleştirildi.',
-	'plugins_actifs_liste' => 'Actifs', # NEW
 	'plugins_compte' => '@count@ eklenti',
-	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 	'plugins_disponibles' => '@count@ eklenti kullanılabilir durumda.',
 	'plugins_erreur' => 'Eklentilerde hata var : @plugins@',
 	'plugins_liste' => 'Plugin listesi',
-	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
-	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hiyerarşi',
 	'plugins_vue_liste' => 'Liste',
 	'protocole_ldap' => 'Protokol sürümü :',
-
-	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
 
 	// R
 	'repertoire_plugins' => 'Dizin :',
@@ -806,15 +662,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	// S
 	'sans_heure' => 'saatsiz',
 	'statut_admin_restreint' => '(sınırlı yönetici)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 	'taille_cache_image' => 'SPIP tarafından otomatik olarak hesaplanan resimler (doküman ikonları, grafik olarak gösterilen başlıklar, TeX biçimindeki matematik işlevler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
 	'taille_cache_infinie' => 'Bu site <code>önbellek (CACHE)</code> dizininin boyutu için herhangi bir sınır öngörmüyor.',
 	'taille_cache_maxi' => 'SPIP, bu sitenin <code>önbellek (CACHE)</code> dizininin boyutunu yaklaşık @octets@ lik veriyle sınırlamaya çalışıyor.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
 	'taille_cache_octets' => 'Önbelleğin ölçüsü şu anda @octets@ dir.', # MODIF
 	'taille_cache_vide' => 'Ön bellek boş.',
 	'taille_repertoire_cache' => 'Ön bellek dizininin boyutu',
@@ -842,8 +694,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru tarafından
     kullanılan endeksleme çizelgelerini boşaltmak için kullanınız.
     Diskteki alanı boşa harcamamış olursunuz.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 	'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
 	'texte_compte_element' => '@count@ eleman',
 	'texte_compte_elements' => '@count@ eleman',
@@ -857,11 +707,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
               otomatik tamiri deneyebilirsiniz. ',
 	'texte_creer_rubrique' => 'Makale yazabilmek için önce bir bölüm yaratmanız gerekmektedir.',
 	'texte_date_creation_article' => 'MAKALENİN YAYIN TARİHİ :',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 	'texte_date_publication_anterieure' => 'Bir önceki düzeltme tarihi :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Yayın tarihini görüntüleme',
 	'texte_date_publication_article' => 'ÇEVRİMİÇİ YAYINLANMA TARİHİ:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 	'texte_descriptif_petition' => 'Dilekçenin tanımı',
 	'texte_descriptif_rapide' => 'Hızlı tanım',
 	'texte_effacer_base' => 'SPIP veritabanını sil',
@@ -939,27 +787,20 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 	'titre_admin_effacer' => 'Teknik bakım ',
 	'titre_admin_tech' => 'Teknik bakım ',
 	'titre_admin_vider' => 'Teknik bakım ',
-	'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-	'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 	'titre_cadre_afficher_article' => 'Makaleleri göster',
 	'titre_cadre_afficher_traductions' => 'Aşağıdaki dillerin çevirilerinin durumunu göster :',
 	'titre_cadre_ajouter_auteur' => 'BİR YAZAR EKLE :',
 	'titre_cadre_interieur_rubrique' => 'Bölüm içinde',
 	'titre_cadre_numero_auteur' => 'YAZAR NO',
-	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 	'titre_cadre_signature_obligatoire' => '<b>İmza</b> [Zorunlu]<br />',
 	'titre_config_contenu_notifications' => 'Notlama',
 	'titre_config_contenu_prive' => 'Özel alanda',
 	'titre_config_contenu_public' => 'Kamusal sitede',
 	'titre_config_fonctions' => 'Site konfigürasyonu',
-	'titre_config_langage' => 'Configurer la langue', # NEW
 	'titre_configuration' => 'Site konfigürasyonu',
-	'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 	'titre_conflit_edition' => 'Düzenleme esnasında çakışma',
 	'titre_connexion_ldap' => 'Seçenekler : <b>LDAP bağlantılarınız</b>',
 	'titre_groupe_mots' => 'SÖZCÜK GRUBU:',
-	'titre_identite_site' => 'Identité du site', # NEW
 	'titre_langue_article' => 'MAKALENİN DİLİ ', # MODIF
 	'titre_langue_rubrique' => 'BÖLÜMÜN DİLİ', # MODIF
 	'titre_langue_trad_article' => 'MAKALENİN DİLİ VE ÇEVİRİLERİ ',

@@ -55,8 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'ALDONI PARTOPRENONTON :',
 	'bouton_annonce' => 'ANONCO',
 	'bouton_annuler' => 'Nuligi',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'eblas sendi mesaĝon',
 	'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
 	'bouton_checkbox_signature_unique_email' => 'po unu subskribo por retpoŝtadreso',
@@ -291,7 +289,6 @@ Tamen vi povas malŝalti ĝin.',
 	'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 	'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
 	'info_bio' => 'Biografio',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Ĉapo',
 	'info_chapeau_2' => 'Ĉapo :',
 	'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
@@ -423,7 +420,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_nb_visiteurs' => '@nb@ vizitantoj',
 	'info_nom' => 'Nomo',
 	'info_nom_destinataire' => 'Nomo de la adresato',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nomo de via retejo',
 	'info_nombre_articles' => '@nb_articles@ artikoloj,',
 	'info_nombre_partcipants' => 'PARTOPRENANTOJ EN LA DISKUTO:',
@@ -595,7 +591,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon « sekvanta » por lanĉi la instal-proceduron.',
 	'install_select_type_db' => 'Indiku la datumbazan tipon :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -752,7 +747,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_plugins_dist_1' => 'Kromprogramoj ĉi-sube estas ŝarĝitaj kaj aktivigitaj en la dosierujo @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Ili ne malaktivigas.',
 	'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 	'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
 	'plugin_necessite_plugin' => 'Postulas la kromprogramon @plugin@ minimume laŭ versio @version@.',
@@ -804,7 +798,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	// S
 	'sans_heure' => 'sen horo',
 	'statut_admin_restreint' => '(etrajta mastrumanto)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tasko CRON @function@ (ASAP)',
