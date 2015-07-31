@@ -246,15 +246,23 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	$end_file = "}\n?".">";
 
 	if (is_array($infos)){
-		// construire tableaux de boutons
+		// construire tableaux de boutons et onglets
 		$liste_boutons = array();
+		$liste_onglets = array();
 		foreach($infos as $plug=>$info){
-				if (isset($info['bouton'])){
+			if (isset($info['bouton'])){
 				foreach($info['bouton'] as $id=>$conf){
 					$conf['icone'] = "$plug/" . $conf['icone'];
 					$info['bouton'][$id] = $conf;
 				}
 				$liste_boutons = array_merge($liste_boutons,$info['bouton']);
+			}
+			if (isset($info['onglet'])){
+				foreach($info['onglet'] as $id=>$conf){
+					$conf['icone'] = "$plug/" . $conf['icone'];
+					$info['onglet'][$id] = $conf;
+				}
+				$liste_onglets = array_merge($liste_onglets,$info['onglet']);
 			}
 		}
 	}
@@ -295,6 +303,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 		$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
+			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
 		}
 		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
 			$start_file . $splugs . $s . $end_file);
@@ -588,21 +597,25 @@ function plugin_get_infos($plug, $force_reload=false){
 				$ret['utilise'] = $arbre['utilise'];
 				$ret['path'] = $arbre['path'];
 				
-				// recuperer les boutons si necessaire
-				spip_xml_match_nodes(",^bouton\s,",$arbre,$les_boutons);
+				// recuperer les boutons et onglets si necessaire
+				spip_xml_match_nodes(",^(bouton|onglet)\s,",$arbre,$les_boutons);
 				if (is_array($les_boutons) && count($les_boutons)){
 					$ret['bouton'] = array();
+					$ret['onglet'] = array();
 					foreach($les_boutons as $bouton => $val) {
 						$bouton = spip_xml_decompose_tag($bouton);
+						$type = reset($bouton);
 						$bouton = end($bouton);
 						if (isset($bouton['id'])){
 							$id = $bouton['id'];
-							$ret['bouton'][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
 							$val = reset($val);
-							$ret['bouton'][$id]['titre'] = isset($val['titre'])?trim(end($val['titre'])):'';
-							$ret['bouton'][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
-							$ret['bouton'][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';
-							$ret['bouton'][$id]['args'] = isset($val['url'])?trim(end($val['args'])):'';
+							if(is_array($val)){
+								$ret[$type][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
+								$ret[$type][$id]['titre'] = isset($val['titre'])?trim(end($val['titre'])):'';
+								$ret[$type][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
+								$ret[$type][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';
+								$ret[$type][$id]['args'] = isset($val['args'])?trim(end($val['args'])):'';
+							}
 						}
 					}
 				}

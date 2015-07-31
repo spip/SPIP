@@ -338,6 +338,21 @@ function definir_barre_onglets($rubrique) {
 	break;
 
 	}
+	// ajouter les onglets issus des plugin via plugin.xml
+	if (function_exists('onglets_plugins')){
+		$liste_onglets_plugins = onglets_plugins();
+		foreach($liste_onglets_plugins as $id => $infos){
+			if (($parent = $infos['parent']) 
+				&& $parent == $rubrique
+				&& autoriser('onglet',$id)) {
+					$onglets[$id] = new Bouton(
+					  _DIR_PLUGINS . $infos['icone'],  // icone
+					  $infos['titre'],	// titre
+					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null	
+					  );
+			}
+		}
+	}
 
 	$onglets = pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
 
