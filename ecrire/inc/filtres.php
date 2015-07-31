@@ -2648,11 +2648,13 @@ function form_hidden($action) {
 	return $hidden;
 }
 
-function pagination($total, $debut, $pas) {
+function pagination($total, $nom, $pas, $liste = true) {
 	global $pagination_item_avant, $pagination_item_apres, $pagination_separateur;
 	global $pagination_max, $pagination_max_texte;
 	tester_variable('pagination_separateur', '&nbsp;| ');
 	tester_variable('pagination_max_texte', '...');
+
+	$debut = 'debut'.$nom;
 
 	$pagination = array(
 		'lien_base' => self(),
@@ -2663,6 +2665,9 @@ function pagination($total, $debut, $pas) {
 		'page_courante' => floor(intval(_request($debut))/$pas)+1,
 		'lien_pagination' => '<a href="@url@">@item@</a>'
 	);
+
+	$ancre='pagination'.$nom;
+	$bloc_ancre = unique("<a name='$ancre' id='$ancre'></a>");
 
 	if($pagination_max == 0 OR $pagination_max>=$pagination['nombre_pages']) {
 		$premiere = 1;
@@ -2678,20 +2683,30 @@ function pagination($total, $debut, $pas) {
 		$texte_apres = $derniere<$pagination['nombre_pages'] ? ' '.$pagination_max_texte : '';
 	}
 
+
+	// Pas de pagination
+	if($pagination['nombre_pages']<=1)
+		return '';
+
+	// liste = false : on ne veut que l'ancre
+	if (!$liste)
+		return $bloc_ancre;
+
+	// liste  = true : on retourne tout (ancre + bloc de navigation)
 	$texte = '';
-	if($pagination['nombre_pages']>1) {
-		for($i = $premiere;$i<=$derniere;$i++) {
-			$url = parametre_url($pagination['lien_base'], $debut, strval(($i-1)*$pas));
-			$_item = strval($i);
-			$item = ($i != $pagination['page_courante']) ?
-				preg_replace(array(',@url@,', ',@item@,'), array($url, $_item), $pagination['lien_pagination']) :
-				$_item;
-			$texte .= $pagination_item_avant.$item.$pagination_item_apres;
-			if($i<$pagination['nombre_pages']) $texte .= $pagination_separateur;
-		}
-		return $texte_avant.$texte.$texte_apres;
+	for($i = $premiere;$i<=$derniere;$i++) {
+		$url = parametre_url($pagination['lien_base'], $debut, strval(($i-1)*$pas));
+		$_item = strval($i);
+		$item = ($i != $pagination['page_courante']) ?
+			preg_replace(
+				array(',@url@,', ',@item@,'),
+				array($url.'#'.$ancre, $_item),
+				$pagination['lien_pagination']) :
+			$_item;
+		$texte .= $pagination_item_avant.$item.$pagination_item_apres;
+		if($i<$pagination['nombre_pages']) $texte .= $pagination_separateur;
 	}
-	return '';
+	return $bloc_ancre.$texte_avant.$texte.$texte_apres;
 }
 
 ### fonction depreciee, laissee ici pour compat ascendante 1.9

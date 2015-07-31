@@ -48,11 +48,10 @@
 
 				[(#REM) Articles de la rubrique ]
 				
-				<BOUCLE_pages(ARTICLES) {id_rubrique} {par date}{inverse}></BOUCLE_pages>
-				<p class="pagination" id="articles">#PAGINATION{_articles}</p>
-				<//B_pages>
-				
 				<B_articles>
+
+				[<p class="pagination">(#PAGINATION)</p>]
+
 				<h2 class="invisible"><:articles_rubrique:></h2>
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse}{pagination}>

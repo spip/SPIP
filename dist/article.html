@@ -98,9 +98,12 @@
 			</div>
 			</B_documents_joints>
 
-			[(#REM) Petition ]
+			[(#REM) Petition
+				la petition ayant une PAGINATION il faut absolument
+				lui passer SELF en argument.
+			]
 			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
-			<INCLURE{fond=inc-petition}{id_article}{debut_signatures}>
+			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
 
 			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
