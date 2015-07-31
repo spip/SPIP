@@ -25,8 +25,8 @@ function inc_lien_dist($lien, $texte, $class='', $title='', $hlang='', $lang='',
 {		
 	if (substr($lien,0,1) == '#')  # ancres pures (internes a la page)
 		$class = 'spip_ancre';
-	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
-		$class = "spip_mailto";
+	elseif (preg_match('/^\s*mail:/',$lien)) # pseudo URL de mail
+		$class = "spip_mail";
 	elseif (preg_match('/^<html>/',$lien)) # cf traiter_lien_explicite
 		$class = "spip_url spip_out";
 	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
@@ -226,7 +226,7 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
 }
 
-define('_EXTRAIRE_LIEN', ",^\s*(http:?/?/?|mailto:?)\s*$,iS");
+define('_EXTRAIRE_LIEN', ",^\s*(http:?/?/?|mail:?)\s*$,iS");
 
 // http://doc.spip.org/@traiter_lien_explicite
 function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
@@ -241,7 +241,7 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 		$lien = "http://".$lien;
 	else if (strpos($lien, "@") && email_valide($lien)) {
 		if (!$texte) $texte = $lien;
-		$lien = "mailto:".$lien;
+		$lien = "mail:".$lien;
 	}
 	
 	if ($pour == 'url') return $lien;
