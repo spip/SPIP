@@ -318,8 +318,27 @@ function editer_texte_recolle($texte, $att_text)
 }
 
 /**
- * Déterminer un titre automatique si non renseigné,
- * à partir des champs textes de contenu
+ * auto-renseigner le titre si il n'existe pas
+ *
+ * @param $champ_titre
+ * @param $champs_contenu
+ * @param int $longueur
+ */
+function titre_automatique($champ_titre,$champs_contenu,$longueur=null){
+	if (!_request($champ_titre)){
+		$titrer_contenu = charger_fonction('titrer_contenu','inc');
+		if (!is_null($longueur))
+			$t = $titrer_contenu($champs_contenu,null,$longueur);
+		else
+			$t = $titrer_contenu($champs_contenu);
+		if ($t)
+			set_request($champ_titre,$t);
+	}
+}
+
+/**
+ * Determiner un titre automatique,
+ * a partir des champs textes de contenu
  *
  * Les textes et le titre sont pris dans les champs postés (via _request())
  * et le titre calculé est de même affecté en tant que champ posté.
@@ -328,22 +347,27 @@ function editer_texte_recolle($texte, $att_text)
  *     Nom du champ titre
  * @param array $champs_contenu
  *     Liste des champs contenu textuels
+ * @param array|null $c
+ *   tableau qui contient les valeurs des champs de contenu
+ *   si null on utilise les valeurs du POST
  * @param int $longueur
  *     Longueur de coupe du texte
- * @return void
+ * @return string
  */
-function titre_automatique($champ_titre,$champs_contenu,$longueur=50){
-	// auto-renseigner le titre si il n'existe pas
-	if (!_request($champ_titre)){
-		foreach($champs_contenu as $c){
-			if ($t = _request($c))
-				break;
-		}
-		if ($t){
-			include_spip('inc/texte_mini');
-			set_request($champ_titre,couper($t,$longueur,"..."));
-		}
+function inc_titrer_contenu_dist($champs_contenu, $c=null, $longueur=50){
+	// trouver un champ texte non vide
+	$t = "";
+	foreach($champs_contenu as $champ){
+		if ($t = _request($champ,$c))
+			break;
 	}
+
+	if ($t){
+		include_spip('inc/texte_mini');
+		$t = couper($t,$longueur,"...");
+	}
+
+	return $t;
 }
 
 /**
