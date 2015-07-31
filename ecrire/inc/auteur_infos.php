@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Affiche la fiche de renseignements d'un auteur
 // eventuellement editable
+// http://doc.spip.org/@inc_auteur_infos_dist
 function inc_auteur_infos_dist($auteur, $redirect) {
 	if (!$auteur['id_auteur']) {
 		if (_request('new') == 'oui') {
@@ -50,6 +51,7 @@ function inc_auteur_infos_dist($auteur, $redirect) {
 
 }
 
+// http://doc.spip.org/@afficher_erreurs_auteur
 function afficher_erreurs_auteur($echec) {
 	foreach (split('@@@',$echec) as $e)
 		$corps .= '<p>' . _T($e) . "</p>\n";

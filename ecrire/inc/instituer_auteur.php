@@ -23,6 +23,7 @@ include_spip('inc/message_select');
 // les admins restreints les voient mais 
 // ne peuvent les utiliser que pour mettre un auteur a la poubelle
 
+// http://doc.spip.org/@inc_instituer_auteur_dist
 function inc_instituer_auteur_dist($auteur) {
 	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
 
@@ -133,6 +134,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 }
 
 
+// http://doc.spip.org/@choix_rubriques_admin_restreint
 function choix_rubriques_admin_restreint($auteur) {
 	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
 

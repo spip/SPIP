@@ -16,6 +16,7 @@ include_spip('inc/filtres');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_editer_auteur_dist
 function action_editer_auteur_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();

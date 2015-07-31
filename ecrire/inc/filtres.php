@@ -190,6 +190,7 @@ function image_typo() {
 
 
 
+// http://doc.spip.org/@image_lire
 function image_lire ($im) {
 	
 	include_spip('inc/filtres_images');
@@ -223,6 +224,7 @@ function image_lire ($im) {
 
 }
 
+// http://doc.spip.org/@image_ecrire
 function image_ecrire ($im, $fmt="jpg") {
 	$image = image_valeurs_trans($im["dest"], "image_lire", $fmt);	
 
