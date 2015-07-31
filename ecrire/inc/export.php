@@ -31,30 +31,26 @@ function export_nom_fichier_dump($dir,$gz=true){
 // prevenir autant que possible un Time-out.
 
 // http://doc.spip.org/@ramasse_parties
-function ramasse_parties($archive, $partfile, $nb, $fin=''){
+function ramasse_parties($archive, $partfile, $files = array()){
 
-	$files = array();
+	$files_o = array();
+	if (!count($files))
+		$files = preg_files(dirname($archive)."/",basename($partfile).".part_[0-9]+_[0-9]+");
 	$ok = true;
-	if (!ecrire_fichier($archive,$fin ? export_entete() : '',false,false))
-	  $ok = false;
-	else {
-		for($cpt =1; $cpt <= $nb; $cpt++) {
-			if (file_exists($f = $partfile.".$cpt")) {
-			  $contenu = "";
-			  if (lire_fichier ($f, $contenu)) {
-			    if (!ecrire_fichier($archive,$contenu,false,false))
-			      { $ok = false; break;}
-			  }
-			  unlink($f);
-			  $files[]=$f;
-			}
-		}
+	foreach($files as $f) {
+	  $contenu = "";
+	  if (lire_fichier ($f, $contenu)) {
+	    if (!ecrire_fichier($archive,$contenu,false,false))
+	      { $ok = false; break;}
+	  }
+	  unlink($f);
+	  $files_o[]=$f;
 	}
 
 	if ($fin AND $ok)
 		$ok = ecrire_fichier($archive, export_enpied(),false,false);
 
-	return $ok ? $files : false;
+	return $ok ? $files_o : false;
 }
 
 define('_EXPORT_TRANCHES_LIMITE', 400);
@@ -72,11 +68,11 @@ define('_EXPORT_TRANCHES_LIMITE', 400);
 function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total) {
 	global $tables_principales;
 
-	$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
-	$filetable = $dir . $archive . '_' . $etape . '.';
+	$filetable = $dir . $archive . '.part_' . sprintf('%3d',$etape);
 	$prim = isset($tables_principales[$table])
 	  ? $tables_principales[$table]['key']["PRIMARY KEY"]
 	  : '';
+	$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
@@ -85,26 +81,29 @@ function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total
 		// car les admins restreints peuvent parcourir
 		// une portion de table vide pour eux.
 		if ($string) { 
-// on ecrit dans un fichier generique
-// puis on le renomme pour avoir une operation atomique 
-			$cpt++;
-			ecrire_fichier ($filetable, $string);
-			rename($filetable,$filetable . $cpt);
+			// on ecrit dans un fichier generique
+			// puis on le renomme pour avoir une operation atomique 
+			ecrire_fichier ($filetable . '.temp', $string);
+			// le fichier destination peut deja exister si on sort d'un timeout entre le rename et le ecrire_meta
+			if (file_exists($f = $filetable . sprintf('_%4d',$cpt))) @unlink($f);
+			rename($filetable . '.temp', $f);
 		}
-
-		$debut += _EXPORT_TRANCHES_LIMITE;
+		$cpt++;
+		$status_dump = "$gz::$archive::$etape::$cpt";
+		// on se contente d'une ecriture en base pour aller plus vite
+		// a la relecture on en profitera pour mettre le cache a jour
+		ecrire_meta("status_dump", $status_dump,'non');
+//die();
+		$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
 		echo " $debut";
-	// on se contente d'une ecriture en base pour aller plus vite
-	// a la relecture on en profitera pour mettre le cache a jour
-		$status_dump = "$gz::$archive::$etape::$cpt";
-		ecrire_meta("status_dump", $status_dump,'non');
 
 	}
 	echo " $total."; 
-	$filetable = $dir . $archive . '_' . $etape;
-	ramasse_parties($dir . $archive . ".$etape", $filetable, $cpt);
+	ramasse_parties($dir.$archive, $dir.$archive);
 	$status_dump = "$gz::$archive::" . ($etape+1) . "::0";
+	// on se contente d'une ecriture en base pour aller plus vite
+	// a la relecture on en profitera pour mettre le cache a jour
 	ecrire_meta("status_dump", $status_dump,'non');
 
 }
@@ -120,28 +119,28 @@ function build_while($debut, $table, $prim) {
 	$string = '';
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 	  if ((!isset($row['impt'])) OR $row['impt']=='oui') {
-		      if (!($ok = $connect_toutes_rubriques)) {
-			if (isset($row['id_rubrique']))
-			  $ok = autoriser('publierdans','rubrique',$row['id_rubrique']);
-			elseif (isset($row['id_article']))
-			  $ok = autoriser('modifier','article',$row['id_article']);
-			else $ok = true;
+			if (!($ok = $connect_toutes_rubriques)) {
+				if (isset($row['id_rubrique']))
+				  $ok = autoriser('publierdans','rubrique',$row['id_rubrique']);
+				elseif (isset($row['id_article']))
+				  $ok = autoriser('modifier','article',$row['id_article']);
+				else $ok = true;
+			}
 			if ($ok) {
 			  $attributs = "";
-			  if ($chercher_logo) {
-				if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
-				  $attributs .= ' on="' . $logo[3] . '"';
-				if ($logo = $chercher_logo($row[$prim], $prim, 'off'))
-				  $attributs .= ' off="' . $logo[3] . '"';
-			  }
+				if ($chercher_logo) {
+					if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
+					  $attributs .= ' on="' . $logo[3] . '"';
+					if ($logo = $chercher_logo($row[$prim], $prim, 'off'))
+					  $attributs .= ' off="' . $logo[3] . '"';
+				}
 
-			  $string .= "<$table$attributs>\n";
-			  foreach ($row as $k => $v) {
-				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+				$string .= "<$table$attributs>\n";
+				foreach ($row as $k => $v) {
+					$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
 			  }
-			  $string .= "</$table>\n\n";
+				$string .= "</$table>\n\n";
 			}
-		      }
 	  }
 	}
 	spip_free_result($result);
