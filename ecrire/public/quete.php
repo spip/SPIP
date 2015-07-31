@@ -72,6 +72,15 @@ function quete_profondeur($id, $connect='') {
 }
 
 
+# retourne la date a laquelle comparer lorsqu'il y a des post-dates
+function quete_date_postdates() {
+	return
+		($GLOBALS['meta']['date_prochain_postdate'] > time())
+			? date('Y-m-d H:i:s', $GLOBALS['meta']['date_prochain_postdate'])
+			: '9999-12-31';
+}
+
+
 # retourne le fichier d'un document
 
 // http://doc.spip.org/@quete_fichier
