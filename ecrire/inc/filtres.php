@@ -17,6 +17,7 @@ include_spip('inc/filtres_mini');
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
+	if (!$fonc) return $default;
 	foreach (
 	array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f){
 		if (is_string($g = $GLOBALS['spip_matrice'][$f]))
@@ -31,15 +32,19 @@ function chercher_filtre($fonc, $default=NULL) {
 	return $default;
 }
 
-// http://doc.spip.org/@appliquer_filtre
-function appliquer_filtre($arg, $filtre) {
-	include_spip('inc/filtres_mime');
-	$nom = preg_replace('/\W/','_', $filtre);
+function chercher_filtre_mime($mime){
+	$nom = preg_replace('/\W/','_', $mime);
 	$f = chercher_filtre($nom);
 	// cas du sous-type MIME sans filtre associe, passer au type:
 	// si filtre_text_plain pas defini, passe a filtre_text
-	if (!$f AND $nom!==$filtre) 
+	if (!$f AND $nom!==$mime) 
 		$f = chercher_filtre(preg_replace('/\W.*$/','', $filtre));
+	return $f?$f:'';
+}
+
+// http://doc.spip.org/@appliquer_filtre
+function appliquer_filtre($arg, $filtre) {
+	$f = chercher_filtre($filtre);
 	if (!$f)
 		return ''; // ou faut-il retourner $arg inchange == filtre_identite?
 	$args = func_get_args();
