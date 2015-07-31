@@ -41,6 +41,79 @@ function controles_md5($data, $prefixe='ctr_', $format='html'){
 		return $ctr;
 }
 
+function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') {
+	include_spip('inc/filtres');
+
+	$table_objet = table_objet($type);
+	$spip_table_objet = table_objet_sql($type);
+	$id_table_objet = id_table_objet($type);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table_objet, $serveur);
+
+	// Appels incomplets (sans $c)
+	if (!is_array($c)) {
+		foreach($desc['field'] as $champ=>$ignore)
+			if(_request($champ))
+				$c[$champ] = _request($champ);
+	}
+
+	// Securite : certaines variables ne sont jamais acceptees ici
+	// car elles ne relevent pas de autoriser(article, modifier) ;
+	// il faut passer par instituer_XX()
+	// TODO: faut-il passer ces variables interdites
+	// dans un fichier de description separe ?
+	unset($c['statut']);
+	unset($c['id_parent']);
+	unset($c['id_rubrique']);
+	unset($c['id_secteur']);
+
+	// Gerer les champs non vides
+	if (is_array($options['nonvide']))
+	foreach ($options['nonvide'] as $champ => $sinon)
+		if ($c[$champ] === '')
+			$c[$champ] = $sinon;
+
+	// N'accepter que les champs qui existent
+	// TODO: ici aussi on peut valider les contenus
+	// en fonction du type
+	$champs = array();
+	foreach($desc['field'] as $champ => $ignore)
+		if (isset($c[$champ]))
+			$champs[$champ] = $c[$champ];
+
+	// Nettoyer les valeurs
+	$champs = array_map('corriger_caracteres', $champs);
+
+	// recuperer les extras (utilise $_POST, un peu sale...
+	// a voir pour le faire marcher avec les crayons)
+	if (isset($desc['field']['extra'])
+	AND isset($_POST['extra'])
+	AND $GLOBALS['champs_extra']) {
+		include_spip('inc/extra');
+		$extra = extra_update($table_objet, $id, $_POST);
+		if ($extra !== false)
+			$champs['extra'] = $extra;
+	}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => $spip_table_objet,
+				'id_objet' => $id,
+				'champs' => $options['champs']
+			),
+			'data' => $champs
+		)
+	);
+
+	if (!$champs) return false;
+
+	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
+	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur);
+	return $conflits;
+}
+
 // Controle la liste des md5 envoyes, supprime les inchanges,
 // signale les modifies depuis telle date
 // http://doc.spip.org/@controler_md5
