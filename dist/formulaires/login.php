@@ -15,22 +15,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('base/abstract_sql');
 spip_connect();
 
+function is_url_prive($cible){
+	$parse = parse_url($cible);
+	return strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
+}
+
 function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	$auteur = array();
 	$login = $login ? $login : _request('var_login');
-	if (is_null($prive)){
-		$parse = parse_url($cible);
-		$prive = strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
-	}
 	
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
 		if (isset($_COOKIE['spip_admin']) && preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
 			$login = $regs[1];
 	} 
-	else if ($login == '-1'){
-		$login = '';
-	}
+
 	if ($login){
 		include_spip('inc/identifier_login');
 		$auteur = informer_login($login);
@@ -75,7 +74,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	OR !$GLOBALS['visiteur_session']['id_auteur'])
 		$editable = true;
 
-	if ($prive) {
+	if (is_null($prive) ? is_url_prive($cible) : $prive) {
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
 	} else {
@@ -108,10 +107,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 
 function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	global $ignore_auth_http;
-	if (is_null($prive)){
-		$parse = parse_url($cible);
-		$prive = strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
-	}
+	
 	$erreurs = array();
 	$session_login = _request('var_login');
 	$session_password = _request('password');
@@ -152,7 +148,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 		else {
 			# login ok
 			# verifier si on a pas affaire a un visiteur qui essaye de se loge sur ecrire/
-			if ($prive) {
+			if (is_null($prive) ? is_url_prive($cible) : $prive) {
 				include_spip('inc/autoriser');
 				verifier_visiteur();
 				if (!autoriser('ecrire')){
@@ -172,28 +168,19 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 }
 
 function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
-	if (is_null($prive)){
-		$parse = parse_url($cible);
-		$prive = strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
-	}
 	$message = '';	
 	$auth = charger_fonction('auth','inc');
 	$auth();
 
 	// Si on se connecte dans l'espace prive, 
 	// ajouter "bonjour" (repere a peu pres les cookies desactives)
-	if ($prive)
+	if (is_null($prive) ? is_url_prive($cible) : $prive) {
 		$cible = parametre_url($cible, 'bonjour', 'oui', '&');
-
+	}
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} 
-	/* cible est fourni par la balise si on veut vraiment etre redirige
-	else {
-		if ($cible = parametre_url($action,'url'))
-			$cible = $cible;
-		else $cible = generer_url_ecrire();
-	}*/
+
 
 	// Si on est admin, poser le cookie de correspondance
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
