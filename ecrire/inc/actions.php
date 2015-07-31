@@ -264,6 +264,7 @@ function determine_upload($type='') {
 // http://doc.spip.org/@lire_php_auth
 function lire_php_auth($user, $pw) {
 
+	include_spip('base/abstract_sql');
 	$row = sql_select("*", "spip_auteurs", "login=" . _q($user));
 
 	$row = sql_fetch($row);
