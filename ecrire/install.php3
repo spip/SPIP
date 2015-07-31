@@ -50,12 +50,14 @@ if ($etape6) {
 	// Si PHP est installe en module Apache, pas besoin de .htaccess
 	$ecrire_htaccess = !$php_module;
 
+	/* .htaccess n'est plus necessaire puisqu'on authentifie par cookie
 	if ($ecrire_htaccess) {
 		$protec = "AuthUserFile $rootf$htpasswd\nAuthGroupFile /dev/null\nAuthName administrateur\nAuthType Basic\n\n<Limit GET POST PUT>\nrequire valid-user\n</Limit>\n";
 		$myFile = fopen($htaccess, "w");
 		fputs($myFile, $protec);
 		fclose($myFile);
 	}
+	*/
 
 	ecrire_acces();
 
