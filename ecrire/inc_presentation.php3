@@ -1585,7 +1585,11 @@ function debut_gauche($rubrique = "asuivre") {
 
 
 	// zap sessions si bonjour
-	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
+	if (
+		($GLOBALS['bonjour'] == "oui" AND $GLOBALS['prefs']['securite'] == 'strict') // reglage perso
+		|| ($GLOBALS['bonjour'] == "oui" AND lire_meta('secu_avertissement') == 'oui') // reglage global
+		|| $GLOBALS['secu'] == 'oui'	// demande specifique
+	) {
 		$securite = $GLOBALS['prefs']['securite'];
 		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
 
