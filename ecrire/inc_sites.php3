@@ -1034,10 +1034,9 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	// Section critique : n'autoriser qu'une seule syndication
 	// simultanee pour un site donne
-	if (!spip_get_lock("syndication $url_syndic")) {
-		spip_log("lock pour $url_syndic");
+	if (!spip_get_lock("syndication $url_syndic"))
 		return;
-	}
+
 	spip_query("UPDATE spip_syndic SET syndication='$statut',
 		date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
