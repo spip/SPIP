@@ -12,6 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function array_set_merge(&$table,$index,$valeur){
+	if (!isset($table[$index]))
+		$table[$index] = $valeur;
+	else
+		$table[$index] = array_merge($table[$index],$valeur);
+}
+
 /**
  * Lister les infos de toutes les tables sql declarees
  * si un argument est fourni, on ne renvoie que les infos de cette table
@@ -144,8 +151,22 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			)
 		));
 		// completer les informations manquantes ou implicites
-		foreach($infos_tables as $t=>$infos)
-			$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
+		$all = array();
+		foreach($infos_tables as $t=>$infos) {
+			// les cles numeriques servent a declarer
+			// les proprietes applicables a tous les objets
+			// on les mets de cote
+			if (is_numeric($t)) {
+				$all = array_merge_recursive($all,$infos);
+				unset($infos_tables[$t]);
+			}
+			else
+				$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
+		}
+		// repercuter les proprietes generales communes a tous les objets
+		foreach($infos_tables as $t=>$infos){
+			$infos_tables[$t] = array_merge_recursive($infos_tables[$t],$all);
+		}
 
 		// completer les tables principales et auxiliaires
 		// avec celles declarees uniquement dans declarer_table_objets_sql
