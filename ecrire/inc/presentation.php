@@ -1647,7 +1647,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('calendrier.css') .'" >' . "\n"
+	. find_in_path('agenda.css') .'" >' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
