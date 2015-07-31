@@ -122,6 +122,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	  . fin_cadre();
 }
 
+// http://doc.spip.org/@revisions_diff
 function revisions_diff ($id_article, $id_version, $court=true)
 {
 	$textes = revision_comparee($id_article, $id_version, 'diff');
