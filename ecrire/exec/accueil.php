@@ -193,28 +193,6 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	}
 	$gadget = pipeline('accueil_gadgets',$gadget);
 
-//
-// Modification du cookie
-//
-
-	if (!@$_COOKIE['spip_admin']) {
-		$cookie = rawurlencode("@$connect_login");
-		$retour = rawurlencode('./' . _SPIP_ECRIRE_SCRIPT);
-		$lien = generer_url_action('cookie', "cookie_admin=$cookie&url=$retour");
-		$gadget .= "<div>&nbsp;</div>".
-			  "<table width='95%'><tr>".
-			  "<td style='width: 100%'>".
-			  _T('info_activer_cookie').
-			  aide ("cookie").
-			  "</td>".
-			  "<td style='width: 10px'>".
-			  http_img_pack("rien.gif", ' ', "width='10'") .
-			  "</td>".
-			  "<td style='width: 250px'>".
-			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.gif", "", false).
-			  "</td></tr></table>";
-	}
-
 	if (strlen($gadget) > 0) {
 	  $gadget = "<div>&nbsp;</div>"
 	    . debut_cadre_trait_couleur('', true)
@@ -256,16 +234,32 @@ function personnel_accueil($coockcookie)
 	// Supprimer le cookie, se deconnecter...
 	//
 	
+	$res .= "<div class='info_cookie'>";
 	if ($coockcookie) {
 		$lien = generer_url_action('cookie', "cookie_admin=non&url=".rawurlencode('./'. _SPIP_ECRIRE_SCRIPT));
 		$t = _T('icone_supprimer_cookie');
-		$t = icone_horizontale($t, $lien, "cookie-24.gif", "", false);
+		$t = icone_horizontale($t, $lien, "cookie-24.gif", "supprimer-sansdanger.gif", false);
 		if ($GLOBALS['spip_display'] != 1) 
 			$t = str_replace('</td></tr></table>', 
 					 aide("cookie").'</td></tr></table>',
 					 $t);
 		$res .= $t;
 	}
+	//
+	// Modification du cookie
+	//
+
+	else {
+		$cookie = rawurlencode("@$connect_login");
+		$retour = rawurlencode('./' . _SPIP_ECRIRE_SCRIPT);
+		$lien = generer_url_action('cookie', "cookie_admin=$cookie&url=$retour");
+		$res .= 
+			  _T('info_activer_cookie').
+			  aide ("cookie").
+			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.gif", "", false);
+	}
+	$res .= "</div>";
+	
 	$titre_cadre = afficher_plus(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
 	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
 	
