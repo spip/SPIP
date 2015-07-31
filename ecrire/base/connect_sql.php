@@ -45,7 +45,15 @@ function spip_connect($serveur='', $version='') {
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
-		if ($f AND is_readable($f)) include($f);
+		if ($f) {
+			if (is_readable($f)) {
+				include($f);
+			}
+			elseif ($g = charger_fonction($serveur."_connect",'req',true)) {
+				$g();
+			}
+		}
+		
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false; 

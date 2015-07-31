@@ -429,7 +429,10 @@ ecrire/prive.php -text
 ecrire/public/index.php -text
 ecrire/public/jointures.php -text
 ecrire/public/vertebrer.php -text
+ecrire/req/array.php -text
+ecrire/req/for_connect.php -text
 ecrire/req/pg.php -text
+ecrire/req/pour_connect.php -text
 ecrire/req/sqlite2.php -text
 ecrire/req/sqlite3.php -text
 ecrire/req/sqlite_fonctions.php -text
