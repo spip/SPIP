@@ -934,7 +934,9 @@ function generer_url_action($script, $args="", $no_entities=false ,$rel = false)
 				  $no_entities,$rel);
 	}
 	// sinon, on reste ou on est
-	$url = './';
+	$url = _DIR_RACINE
+		? generer_url_prive('action', $script)
+		: generer_url_public('action', $script);
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
 	if ($redirect = parametre_url($url,'redirect')){
