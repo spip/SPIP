@@ -309,22 +309,36 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  *   liste des tables a copier
  * @param string $serveur_source
  * @param string $serveur_dest
- * @param string $callback_progression
- *   fonction a appeler pour afficher la progression, avec les arguments (compteur,total,table)
- * @param int $max_time
- *   limite de temps au dela de laquelle sortir de la fonction proprement (de la forme time()+15)
- * @param bool $drop_source
- *   vider les tables sources apres copie
- * @param array $no_erase_dest
- *   liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
- * @param array $where
- *   liste optionnelle de condition where de selection des donnees pour chaque table
- * @param array $fonction_base_inserer
- *   fonction d'insertion en base. Par defaut "base_inserer_copie" qui fait un insertq a l'identique
- *   peut etre personalisee pour filtrer, renumeroter....
+ * @param array $options
+ *   parametres optionnels sous forme de tableau :
+ *   @param string $callback_progression
+ *     fonction a appeler pour afficher la progression, avec les arguments (compteur,total,table)
+ *   @param int $max_time
+ *     limite de temps au dela de laquelle sortir de la fonction proprement (de la forme time()+15)
+ *   @param bool $drop_source
+ *     vider les tables sources apres copie
+ *   @param array $no_erase_dest
+ *     liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
+ *   @param array $where
+ *     liste optionnelle de condition where de selection des donnees pour chaque table
+ *   @param array $fonction_base_inserer
+ *     fonction d'insertion en base. Par defaut "base_inserer_copie" qui fait un insertq a l'identique
+ *     peut etre personalisee pour filtrer, renumeroter....
+ *   @param array $desc_tables_dest
+ *     description des tables de destination a utiliser de preference a la description de la table source
+ * 
  * @return <type>
  */
-function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array(), $where=array(), $fonction_base_inserer = 'base_inserer_copie') {
+function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $options=array()){
+
+	$callback_progression = isset($options['callback_progression'])?$options['callback_progression']:'';
+	$max_time = isset($options['max_time'])?$options['max_time']:0;
+	$drop_source = isset($options['drop_source'])?$options['drop_source']:false;
+	$no_erase_dest = isset($options['no_erase_dest'])?$options['no_erase_dest']:array();
+	$where = isset($options['where'])?$options['where']:array();
+	$fonction_base_inserer = isset($options['fonction_base_inserer'])?$options['fonction_base_inserer']:'base_inserer_copie';
+	$desc_tables_dest = isset($options['desc_tables_dest'])?$options['desc_tables_dest']:array();
+
 	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
 
 	if (!function_exists($fonction_base_inserer)) {
@@ -369,7 +383,11 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 
 			if (is_numeric($status['tables_copiees'][$table])
 				AND $status['tables_copiees'][$table]>=0
-				AND $desc_dest = base_preparer_table_dest($table, $desc_source, $serveur_dest, $status['tables_copiees'][$table] == 0)){
+				AND $desc_dest = base_preparer_table_dest(
+								$table,
+								isset($desc_tables_dest[$table])?$desc_tables_dest[$table]:$desc_source,
+								$serveur_dest,
+								$status['tables_copiees'][$table] == 0)){
 				if ($callback_progression)
 					$callback_progression($status['tables_copiees'][$table],0,$table);
 				while (true) {
