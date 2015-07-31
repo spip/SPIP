@@ -61,7 +61,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
 		include_spip("inc/distant");
-		$fichier = fichier_copie_locale($source);
+		$fichier = copie_locale($source);
 	}
 	
 	$terminaison_dest = "";
@@ -595,34 +595,43 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	elseif ($taille == 0 AND $taille_y == 0)
 		return '';
 
+	$fonction = array('image_reduire', func_get_args());
+
+	$image = false;
 	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
 		$process = $GLOBALS['meta']['image_process'];
 	# determiner le format de sortie
 	$format_sortie = false; // le choix par defaut sera bon
 	if ($process == "netpbm") $format_sortie = "jpg";
 	else if ($process == 'gd1' OR $process == 'gd2') {
-		if ($format == 'jpg')
-			$formats_sortie = array('jpg','png','gif');
-		else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
-			$formats_sortie = array('png','jpg','gif');
-		// Choisir le format destination
-		// - on sauve de preference en JPEG (meilleure compression)
-		// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
-		# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
-		# pas *ecrire*
-		$gd_formats = $GLOBALS['meta']["gd_formats"];
-		$format_sortie = "";
-		foreach ($formats_sortie as $fmt) {
-			if (ereg($fmt, $gd_formats)) {
-				if ($format <> "gif" OR function_exists('ImageGif'))
-					$format_sortie = $fmt;
-				break;
+		$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
+		// on verifie que l'extension choisie est bonne (en principe oui)
+		$gd_formats = explode(',',$GLOBALS['meta']["gd_formats"]);
+		if (!in_array($image['format_dest'],$gd_formats)
+		  OR ($image['format_dest']=='gif' AND !function_exists('ImageGif'))
+		  ) {
+			if ($image['format_source'] == 'jpg')
+				$formats_sortie = array('jpg','png','gif');
+			else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
+				$formats_sortie = array('png','jpg','gif');
+			// Choisir le format destination
+			// - on sauve de preference en JPEG (meilleure compression)
+			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
+			# pas *ecrire*
+			$format_sortie = "";
+			foreach ($formats_sortie as $fmt) {
+				if (in_array($fmt, $gd_formats)) {
+					if ($fmt <> "gif" OR function_exists('ImageGif'))
+						$format_sortie = $fmt;
+					break;
+				}
 			}
+			$image = false;
 		}
 	}
-	
-	$fonction = array('image_reduire', func_get_args());
-	$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
+	if (!$image)
+		$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
 
 	if (!$image){
 		spip_log("image_reduire_src:pas de version locale de $img");
