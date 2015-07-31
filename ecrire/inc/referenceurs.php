@@ -45,7 +45,7 @@ function inc_referenceurs_dist ($id_article, $select, $table, $where, $groupby, 
 					$tmp = "/$tmp";
 			}
 			if ($tmp) {
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($id_article ? '' : referes($referermd5));
+				$lesreferers[$numero][] = "<a href=\"".attribut_html($referer)."\">".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($id_article ? '' : referes($referermd5));
 			} else $lesliensracine[$numero] += $visites;
 		}
 	}
@@ -79,7 +79,7 @@ function referers_group($nbvisites, $id_article, $lesliensracine, $lesreferermd5
 			$n = count($lesreferers[$numero]);
 			if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
 				$rac = $lesliensracine[$numero];
-				$bouton .= "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$numero."</a>"
+				$bouton .= "<a href=\"http://".attribut_html($lesurls[$numero])."\" style='font-weight: bold;'>".$numero."</a>"
 				  . (!$rac ? '': (" <span class='spip_x-small'>(" . $rac .")</span>"));
 				 $ret .= bouton_block_depliable($bouton,false)
 				  . debut_block_depliable(false)
@@ -94,7 +94,7 @@ function referers_group($nbvisites, $id_article, $lesliensracine, $lesreferermd5
 					$lien = quote_amp($regs[1]).$numero.$regs[2];
 					if (!strpos($lien, '</a>')) $lien .= '</a>';
 				} else
-					$lien = "<a href='http://".$numero."'>".$numero."</a>";
+					$lien = "<a href=\"http://".attribut_html($numero)."\">".$numero."</a>";
 				$ret .= "<b>".quote_amp($lien)."</b>"
 				  . ($id_article ? '' : referes($referermd5));
 			}
