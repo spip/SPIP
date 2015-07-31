@@ -169,7 +169,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
 		$s = ($ancre =='documents' ? '': '-');
 		$f = $id_vignette ? "/$id_document" : '';
-		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}
 
 	$joindre = charger_fonction('joindre', 'inc');

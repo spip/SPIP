@@ -1,71 +1,71 @@
 // JavaScript Document
-jQuery.async_upload_count = 0;
 jQuery.fn.async_upload = function(add_function) {
-  return this.submit(function(){
-    return do_async_upload(this);
+  return this.ajaxForm({
+    beforeSubmit:async_upload_before_submit,
+    success:add_function  
   });
-  
-  function do_async_upload(form) {
-    jQuery.async_upload_count++;
-    var num = jQuery.async_upload_count;
-    var jForm = jQuery(form);
-    var par = jQuery(jForm).parent();
-    jQuery("div.upload_message",par)
-    .remove();
-    if(!form.async_init) {
-      form.async_init = true
-      jForm
-      .append("<input type='hidden' name='iframe' value='iframe'>")
-      .find("input[@name='redirect']")
-        .val("")
-      .end();
-    }
-    
-		jForm.attr("target","upload_frame"+num);
-    var jFrame = jQuery("<iframe id='upload_frame"+num+"' name='upload_frame"+num+"' frameborder='0' marginwidth='0' marginheight='0' scrolling='no' style='position:absolute;width:1px;height:1px;' onload='this.iframeload("+num+")'></iframe>")
-      .appendTo("body");
-    
-    //IE apparently do not write anything in an iframe onload event handler 
-    jFrame[0].iframeload = function(num) {
-        //remove the previous message
-        jQuery("div.upload_message",par).remove();
-        var res = jQuery(".upload_answer",this.contentDocument || document.frames(this.name).document.body);
-        //possible classes 
-        //upload_document_added
-        if(res.is(".upload_document_added")) {
-          return add_function(res,jForm);
-        }
-        //upload_error
-        if(res.is(".upload_error")) {
-          var msg = jQuery("<div class='upload_message'>")
-          .append(res.html())
-          jForm.after(msg[0]);
-          return true;
-        } 
-        //upload_zip_list
-        if(res.is(".upload_zip_list")) {
-          var zip_form = jQuery("<div class='upload_message'>").append(res.html());
-          zip_form
-          .find("form")
-            .attr("target","upload_frame"+num)
-            .append("<input type='hidden' name='iframe' value='iframe'>")
-          .end();
-          jForm.after(zip_form[0]);
-          return true;  
-        }
-    };
-    
-    jForm.before(jQuery("<div class='upload_message' style='height:1%'>").append(ajax_image_searching)[0]);
-    return true;
-  }
 }
 
 // Safari plante quand on utilise clone() -> on utilise html()
 // Mais FF a un bug sur les urls contenant ~ quand on utilise html() -> on utilise clone()
 jQuery.fn.clone2 = jQuery.browser.mozilla ? jQuery.fn.clone : jQuery.fn.html;
 
+var iframeHandler = function(data,jForm,success) {
+        //remove the previous message
+        jQuery("div.upload_message",$(jForm).parent()).remove();
+        var res = jQuery(data).filter(".upload_answer");
+        //possible classes 
+        //upload_document_added
+        if(res.is(".upload_document_added")) {
+          return res;
+        }
+        //upload_error
+        if(res.is(".upload_error")) {
+          var msg = jQuery("<div class='upload_message'>")
+          .append(res.html())
+          jForm.after(msg[0]);
+          return false;
+        } 
+        //upload_zip_list
+        if(res.is(".upload_zip_list")) {
+          var zip_form = jQuery("<div class='upload_message'>").append(res.html());
+          zip_form
+          .find("form")
+            .ajaxForm({
+              beforeSubmit:function(data){
+                jForm.before(jQuery("<div class='upload_message' style='height:1%'>").append(ajax_image_searching)[0]);
+                data.push({name:"iframe",value:"iframe"});
+              },
+              success:function(res,s) {
+                success(res,s,jForm);
+              }
+            });
+          jForm.after(zip_form[0]);
+          return false;  
+        }
+};
+    
 
-function async_upload_article_edit(res,jForm){
+function async_upload_before_submit(data,form) {
+   form.before(jQuery("<div class='upload_message' style='height:1%'>").append(ajax_image_searching)[0]);
+   //if not present add the iframe input
+   if(!form.find("input[name=iframe]").length)
+    form.append("<input type='hidden' name='iframe' value='iframe'>");
+   //reset the redirect input
+   form
+   .find("input[@name='redirect']")
+   .val("");
+    //add the submit button as hidden input, because it is not passed with form.submit()
+   form.find("input.async_upload_submit'").remove();
+   if(form[0].clk) {
+    var click = jQuery(form[0].clk);
+    form.append("<input type='hidden' class='async_upload_submit' name='"+click.attr("name")+"' value='"+click.val()+"'>");
+   }    
+};
+
+function async_upload_article_edit(res,s,jForm){
+      res = iframeHandler(res,jForm,async_upload_article_edit);
+      if(!res) return true;
       var cont;
       //verify if a new document or a customized vignette
       var anchor = jQuery(res.find(">a:first[@id^=document]"));
@@ -101,7 +101,10 @@ function async_upload_article_edit(res,jForm){
       return true;
 }
 
-function async_upload_icon(res) {
+function async_upload_icon(res,s,jForm) {
+  res = iframeHandler(res,jForm);
+  if(!res) return true;
+
   res.find(">div").each(function(){
     var cont = jQuery("#"+this.id);
     verifForm(cont.html(jQuery(this).html()));
@@ -111,7 +114,10 @@ function async_upload_icon(res) {
   return true;                     
 }
 
-function async_upload_portfolio_documents(res){
+function async_upload_portfolio_documents(res,s,jForm){
+  res = iframeHandler(res,jForm,async_upload_portfolio_documents);
+  if(!res) return true;
+
   res.find(">div").each(function(){
     var cont = jQuery("#"+this.id);
     var self = jQuery(this);

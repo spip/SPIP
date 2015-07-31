@@ -411,7 +411,7 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	  }
 
 	  $res .= http_script('',"async_upload.js")
-	 . http_script('$(".form_upload").async_upload(async_upload_portfolio_documents);');
+	 . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
 
 	} else $res ='';
 
