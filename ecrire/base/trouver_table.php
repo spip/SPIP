@@ -29,7 +29,7 @@ include_spip('public/interfaces');
 // un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 
 // http://doc.spip.org/@base_trouver_table_dist
-function base_trouver_table_dist($nom, $serveur=''){
+function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	static $nom_cache_desc_sql=array();
 	global $tables_principales, $tables_auxiliaires, $table_des_tables;
 	
@@ -105,12 +105,9 @@ function base_trouver_table_dist($nom, $serveur=''){
 			}  # table locale a cote de SPIP, comme non SPIP:
 		}
 
-		// faut il interpreter le prefixe 'spip_' ?
-		$transposer_spip = ($nom_sql != $nom);
-		
 		// La *vraie* base a la priorite
 		if (true /*  !$bdesc OR !$bdesc['field']  */) {
-			$desc = sql_showtable($nom_sql, $transposer_spip, $serveur);
+			$desc = sql_showtable($nom_sql, $table_spip, $serveur);
 			if (!$desc OR !$desc['field']) {
 				if (!$fdesc) {
 					spip_log("trouver_table: table inconnue '$serveur' '$nom'");
