@@ -696,7 +696,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	return $p;
 }
 
