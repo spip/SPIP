@@ -34,14 +34,16 @@ function inc_controler_action_auteur_dist()
 // http://doc.spip.org/@caracteriser_auteur
 function caracteriser_auteur($id_auteur=0) {
 	global $auteur_session;
-	if (!($id_auteur = intval($id_auteur))
-	AND $auteur_session['pass']) {
-		return array($auteur_session['id_auteur'], $auteur_session['pass']); 
-	}
+	if (!$id_auteur = intval($id_auteur))
+		$id_auteur = $auteur_session['id_auteur'];
+
+	// Eviter l'acces SQL si le pass est connu de PHP
+	if ($auteur_session['pass'])
+		return array($id_auteur, $auteur_session['pass']); 
 	else {
-		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if ($t = spip_fetch_array($result))
-			return array($t['id_auteur'], $t['pass']);
+		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		if (!$t = spip_fetch_array($t)) die(_L("Faut pas se gener"));
+		return array($t['id_auteur'], $t['pass']);
 	}
 }
 
