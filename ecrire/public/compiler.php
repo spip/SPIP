@@ -435,7 +435,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
 
-		$fragment = false;
 		switch($p->type) {
 		// texte seul
 		case 'texte':
