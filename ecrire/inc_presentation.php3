@@ -1755,53 +1755,52 @@ function creer_colonne_droite(){
 	
 	
 	if ($spip_ecran == "large") {
-	
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
 		echo "<td width=200 rowspan=2 valign='top'><p />";
+	}
+
+	if ($changer_config!="oui") {
+		$activer_messagerie=lire_meta("activer_messagerie");
+		$activer_imessage=lire_meta("activer_imessage");
+	}
+
+	if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non") {
+		if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
+			$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
+			$result_auteurs = spip_query($query2);
+			$nb_connectes = mysql_num_rows($result_auteurs);
+		}
+
+		$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
+		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
+		if ($rubrique == "messagerie") {
+			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
+			echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
+			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
+			echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+			if ($connect_statut == "0minirezo") {
+				echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+			}
+		}
 		
-		if ($changer_config!="oui"){
-			$activer_messagerie=lire_meta("activer_messagerie");
-			$activer_imessage=lire_meta("activer_imessage");
-		}
-	
-		if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
-			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
-				$result_auteurs = spip_query($query2);
-				$nb_connectes = mysql_num_rows($result_auteurs);
-			}
-	
-			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
-			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-			if ($rubrique == "messagerie") {
-				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
-				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
-				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
-				if ($connect_statut == "0minirezo") {
-					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
-					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+		if ($flag_cadre) {
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+			if ($nb_connectes > 0) {
+				if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
+				echo "<b>Actuellement en ligne&nbsp;:</b>";
+				while ($row = mysql_fetch_array($result_auteurs)) {
+					$id_auteur = $row["id_auteur"];
+					$nom_auteur = typo($row["nom"]);
+					if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+					else  echo "<br> $nom_auteur";
 				}
 			}
-			
-			if ($flag_cadre) {
-				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-				if ($nb_connectes > 0) {
-					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
-					echo "<b>Actuellement en ligne&nbsp;:</b>";
-					while ($row = mysql_fetch_array($result_auteurs)) {
-						$id_auteur = $row["id_auteur"];
-						$nom_auteur = typo($row["nom"]);
-						if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-						else  echo "<br> $nom_auteur";
-					}
-				}
-				echo "</font>";
-			}
-			if ($flag_cadre) fin_cadre_relief();
+			echo "</font>";
 		}
+		if ($flag_cadre) fin_cadre_relief();
 	}
 
 }
@@ -1952,7 +1951,7 @@ function fin_page() {
 <p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL.</a>
+est un logiciel libre distribu&eacute; <a href='licence.php3'>sous licence GPL.</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
