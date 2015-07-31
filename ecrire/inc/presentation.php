@@ -1312,14 +1312,16 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	if (!$limit) $limit = 10;
 
-	$table = $type . 's';
+	$table = $type . ($type!='syndic'?'s':"");
+	$titre = ($type!='syndic'?'titre':'nom_site');
+	$exec = array('article'=>'articles','breve'=>'breves_voir','syndic'=>'sites');
 	$key = 'id_' . $type;
 	$where = (($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		  ? ''
 		  :  "(statut = 'publie' OR statut = 'prop') AND ") 
 	. "id_rubrique=$id_rubrique AND ($key != $id)";
 
-	$select = "$key AS id, titre, statut";
+	$select = "$key AS id, $titre AS titre, statut";
 
 	$n = spip_num_rows(sql_select($select, "spip_$table", $where));
 
@@ -1329,7 +1331,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	$limit = $n - $limit;
 	$retour = '';
-	$fstatut = 'puce_statut_' . $type;
+	$fstatut = 'puce_statut_' . ($type!='syndic'?$type:'site');
 	$idom = 'rubrique_' . $table;
 
 	while($row = sql_fetch($voss)) {
@@ -1338,7 +1340,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		$statut = $row['statut'];
 		$statut = $fstatut($id, $statut, $id_rubrique, $type);
 		$href = "<a class='verdana1' href='"
-		. generer_url_ecrire($type=='article' ? $table : 'breves_voir',"$key=$id")
+		. generer_url_ecrire($exec[$type],"$key=$id")
 		. "'>"
 		. sinon(typo($row['titre']), _T('info_sans_titre'))
 		. "</a>";
