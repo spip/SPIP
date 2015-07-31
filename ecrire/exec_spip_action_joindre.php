@@ -107,7 +107,7 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	else {
 	  include_ecrire('inc_documents');
 	  $files = array();
-	  foreach (fichiers_upload($upload) as $fichier) {
+	  foreach (preg_files($upload) as $fichier) {
 			$files[]= array (
 					'name' => basename($fichier),
 					'tmp_name' => $fichier

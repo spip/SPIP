@@ -16,7 +16,7 @@ include_ecrire('inc_minipres');
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
-	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	$rep = sous_repertoire(_DIR_DOC, $ext);
 
 	if (!$ext OR !$rep) {
 		spip_log("creer_repertoire_documents interdit");

@@ -1969,7 +1969,7 @@ function image_typo() {
 
 	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur";
 	$query = md5($string);
-	$dossier = _DIR_IMG. creer_repertoire(_DIR_IMG, 'cache-texte');
+	$dossier = sous_repertoire(_DIR_IMG, 'cache-texte');
 	$fichier = "$dossier$query.png";
 
 	$flag_gd_typo = function_exists("imageftbbox")

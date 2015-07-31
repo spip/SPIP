@@ -194,12 +194,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;
-	// normalement il a ete cree
-	if ($destdir) {
-	  $destdir = creer_repertoire(_DIR_IMG, $destdir);
-	} 
-	$destination = _DIR_IMG . $destdir . $destfile;
-#	spip_log("$dir $destination");
+	$destination = sous_repertoire(_DIR_IMG, $destdir) . $destfile;
+
 	// chercher un cache
 	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {

@@ -724,9 +724,9 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 	// Premier passage : chercher eventuel un cache des donnees sur le disque
 	if (!$cache[$recherche]['hash']) {
-		$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'rech');
+		$dircache = sous_repertoire(_DIR_CACHE,'rech');
 		$fcache[$recherche] =
-			$dircache.'rech_'.substr(md5($recherche),0,10).'.txt';
+			$dircache . substr(md5($recherche),0,10).'.txt';
 		if (lire_fichier($fcache[$recherche], $contenu))
 			$cache[$recherche] = @unserialize($contenu);
 	}
