@@ -84,11 +84,11 @@ $logo_libelles = array(
 function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 
 	global $formats_logos;
-	$dir_ftp = determine_upload();
 	$afficher = "";
 	$reg = '[.](' . join('|', $formats_logos) . ')$';
 
 	if ($GLOBALS['flag_upload']
+	AND $dir_ftp = determine_upload()
 	AND $fichiers = preg_files($dir_ftp, $reg)) {
 		foreach ($fichiers as $f) {
 			$f = substr($f, strlen($dir_ftp));
@@ -96,10 +96,11 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		}
 	}
 	if (!$afficher) {
-		  if ($dir_ftp) 
+		if ($dir_ftp) {
 			$afficher = _T('info_installer_images_dossier',
 				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>'));
-		} else {
+		}
+	} else {
 		$afficher = "\n<div style='text-align: left'>" .
 			_T('info_selectionner_fichier',
 				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>')) .
@@ -110,23 +111,24 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			"'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir') .
 			"' class='fondo spip_xx-small'  /></div>";
-		}
-		$afficher = "\n" .
-			_T('info_telecharger_nouveau_logo') .
-			"<br />" .
-			"\n<input name='image' type='file' class='forml spip_xx-small' size='15' />" .
-			"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
-			"\n<input name='sousaction1' type='submit' value='" .
-			_T('bouton_telecharger') .
-			"' class='fondo spip_xx-small' /></div>" .
-			$afficher;
+	}
 
-		$type = type_du_logo($id_objet);
-		return generer_action_auteur('iconifier',
-			"$id+$type$mode$id",
-			generer_url_ecrire($script, "$id_objet=$id", true), 
-			$iframe_script.$afficher,
-			" method='post' enctype='multipart/form-data' class='form_upload_icon'");
+	$afficher = "\n" .
+		_T('info_telecharger_nouveau_logo') .
+		"<br />" .
+		"\n<input name='image' type='file' class='forml spip_xx-small' size='15' />" .
+		"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
+		"\n<input name='sousaction1' type='submit' value='" .
+		_T('bouton_telecharger') .
+		"' class='fondo spip_xx-small' /></div>" .
+		$afficher;
+
+	$type = type_du_logo($id_objet);
+	return generer_action_auteur('iconifier',
+		"$id+$type$mode$id",
+		generer_url_ecrire($script, "$id_objet=$id", true), 
+		$iframe_script.$afficher,
+		" method='post' enctype='multipart/form-data' class='form_upload_icon'");
 }
 
 // http://doc.spip.org/@decrire_logo
