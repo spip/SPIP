@@ -2148,7 +2148,7 @@ if ($spip_display == "4") {
 else {
 	// Icones principales
 	
-	echo "<div class='invisible_au_chargement' style='height: 0px;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
+	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	
 	echo "<div id='haut-page'>";
 
