@@ -3198,8 +3198,8 @@ function fin_page($credits='') {
 	
 		echo "<br>"._T('info_copyright_doc');
 	
-		if (ereg("jimmac", $credits))
-			echo "<br>"._T('lien_icones_interface');
+	//	if (ereg("jimmac", $credits))
+	//		echo "<br>"._T('lien_icones_interface');
 	
 		echo "</div><p>";
 	}
