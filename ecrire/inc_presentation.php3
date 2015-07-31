@@ -1095,21 +1095,22 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$accesskey = " accesskey='0'";
 		$menu_accesskey++;
 	}
+	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
 	if (eregi("^javascript:",$lien)) {
 		$java_lien = substr($lien, 11, strlen($lien));
 		$onClick = "";
-		$a_href = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
-			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
 		$a_href_icone = '<script language="JavaScript"><!--' . "\n"
+			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
+			. "<noscript><a$accesskey_icone href='$lien_noscript' target='_blank'></noscript>\n";
+		$a_href = '<script language="JavaScript"><!--' . "\n"
 			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
 			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
 		$onClick = "";
-		$a_href = "<a$accesskey href=\"$lien\">";
-		$a_href_icone = "<a$accesskey href=\"$lien\" class='icone'>";
+		$a_href_icone = "<a$accesskey_icone href=\"$lien\">";
+		$a_href = "<a$accesskey href=\"$lien\" class='icone'>";
 	}
 
 	if ($rubrique_icone == $rubrique){
@@ -1120,10 +1121,10 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1) {
-			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
+			echo "$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 		echo "</td>\n";
@@ -1136,10 +1137,10 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1) {
-			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
+			echo "$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 		echo "</td>\n";
@@ -1181,6 +1182,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		$accesskey = " accesskey='0'";
 		$menu_accesskey++;
 	}
+	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
 	if ($rubrique_icone == $rubrique){
 		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\">";
@@ -1205,7 +1207,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){
 			echo "<tr><td background='' align='center'>";
-			echo "<a$accesskey href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
+			echo "<a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
@@ -1224,7 +1226,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display, $couleur_claire, $couleur_foncee;
-	
+
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
 	if (strlen($align) > 2) $aligner = " ALIGN='$align' ";
 
@@ -1504,7 +1506,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2")
 			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('info_rechercher_02')."</b></font><br>";
-		echo '<input accesskey="r" type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche">';
+		echo '<input type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r">';
 		echo "</form>";
 		echo "</td>";
 	}
