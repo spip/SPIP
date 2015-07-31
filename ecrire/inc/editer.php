@@ -301,16 +301,14 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctrl_') 
 	}
 	if (!$champs) return;
 
-	// On veut savoir si notre modif va avoir un impact ; en mysql
-	// on pourrait employer mysql_affected_rows() mais pas en multi-base
-	// donc on fait autrement, avec verification prealable
-	// On utilise md5 pour eviter la casse (en SQL: 'SPIP'='spip')
-	$verifier = array();
+	// On veut savoir si notre modif va avoir un impact
+	// par rapport aux donnees contenues dans la base
+	// (qui peuvent etre differentes de celles ayant servi a calculer le ctr)
+	$s = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", $serveur);
+	$intact = true;
 	foreach ($champs as $ch => $val)
-		$verifier[] = "($ch IS NULL OR MD5($ch)!=".sql_quote(md5($val)).")";
-	if (!sql_countsel($spip_table_objet, "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
-	null,null,null,$serveur))
-		return;
+		$intact &= ($s[$ch] == $val);
+	if ($intact) return;
 
 	// Detection de conflits :
 	// On verifie si notre modif ne provient pas d'un formulaire
@@ -322,15 +320,13 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctrl_') 
 		if ($m = $ctr[$prefix.$key]) {
 			$ctrh[$key] = $m;
 			$ctrq[] = $key;
-			$ctrq[] = "md5($key) AS ctrq_$key";
 		}
 	}
 	if ($ctrq) {
 		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
 		foreach ($ctrh as $key => $m) {
-			if ($m != $ctrq['ctrq_'.$key]
-			AND $champs[$key] !== $ctrq[$key]
-			AND $ctrq['ctrq_'.$key] !== null) {
+			if ($m != md5($ctrq[$key])
+			AND $champs[$key] !== $ctrq[$key]) {
 				$conflits[$key] = array(
 					'base' => $ctrq[$key],
 					'post' => $champs[$key]
