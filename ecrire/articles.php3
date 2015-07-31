@@ -1091,7 +1091,7 @@ if ($flag_editable AND $options == 'avancees') {
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
-		echo "<FORM ACTION='articles.php3#auteurs' METHOD='post'>";
+		echo "<FORM ACTION='articles.php3?id_article=$id_article#auteurs' METHOD='post'>";
 		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
