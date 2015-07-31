@@ -19,21 +19,37 @@ function validerElement($phraseur, $name, $attrs)
 {
 	global $phraseur_xml;
 
-	if (!isset($phraseur_xml->dtc->elements[$name]))
-
-		$phraseur_xml->err[]= " <b>$name</b> "
-		. _T('zxml_inconnu_balise')
-		. ' '
-		.  coordonnees_erreur($phraseur);
-	else {
+	if (!($p = isset($phraseur_xml->dtc->elements[$name]))) {
+		if ($p = strpos($name, ':')) {
+			$name = substr($name, $p+1);
+			$p = isset($phraseur_xml->dtc->elements[$name]);
+		}
+		if (!$p) {
+			$phraseur_xml->err[]= " <b>$name</b> "
+			  . _T('zxml_inconnu_balise')
+			  . ' '
+			  .  coordonnees_erreur($phraseur);
+			return; 
+		}
+	}
 	// controler les filles illegitimes, ca suffit 
-	  $depth = $phraseur_xml->depth;
-	  $ouvrant = $phraseur_xml->ouvrant;
-	  if (isset($ouvrant[$depth])) {
+	$depth = $phraseur_xml->depth;
+	$ouvrant = $phraseur_xml->ouvrant;
+#	spip_log("trouve $name apres " . $ouvrant[$depth]);
+	if (isset($ouvrant[$depth])) {
 	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
 	      $pere = $r[1];
-	      if (isset($phraseur_xml->dtc->elements[$pere]))
-		if (!@in_array($name, $phraseur_xml->dtc->elements[$pere])) {
+#	      spip_log("pere $pere");
+	      if (isset($phraseur_xml->dtc->elements[$pere])) {
+		$fils = $phraseur_xml->dtc->elements[$pere];
+#		spip_log("rejeton $name fils " . @join(',',$fils));
+		if (!($p = @in_array($name, $fils))) {
+			if ($p = strpos($name, ':')) {
+				$p = substr($name, $p+1);
+				$p = @in_array($p, $fils);
+			}
+		}
+		if (!$p) {
 	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->dtc->peres[$name]);
 	          $phraseur_xml->err[]= " <b>$name</b> "
 	            . _T('zxml_non_fils')
@@ -46,12 +62,13 @@ function validerElement($phraseur, $name, $attrs)
 		} else if ($phraseur_xml->dtc->regles[$pere][0]=='/') {
 		  $phraseur_xml->fratrie[substr($depth,2)].= "$name ";
 		}
+	      }
 	    }
-	  }
-	  // Init de la suite des balises a memoriser si regle difficile
-	  if ($phraseur_xml->dtc->regles[$name][0]=='/')
+	}
+	// Init de la suite des balises a memoriser si regle difficile
+	if ($phraseur_xml->dtc->regles[$name][0]=='/')
 	    $phraseur_xml->fratrie[$depth]='';
-	  if (isset($phraseur_xml->dtc->attributs[$name])) {
+	if (isset($phraseur_xml->dtc->attributs[$name])) {
 		  foreach ($phraseur_xml->dtc->attributs[$name] as $n => $v)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
 			$phraseur_xml->err[]= " <b>$n</b>"
@@ -60,10 +77,8 @@ function validerElement($phraseur, $name, $attrs)
 			  . " <b>$name</b>"
 			  .  coordonnees_erreur($phraseur);
 		    }
-	  }
 	}
 }
-
 
 // http://doc.spip.org/@validerAttribut
 function validerAttribut($phraseur, $name, $val, $bal)
