@@ -2421,7 +2421,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 			$scb = _T('avis_deplacement_rubrique',
 				array('contient_breves' => $contient_breves,
 				      'scb' => $scb));
-			$confirm .= "\n<div class='confirmer_deplacement verdana2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>" . $scb . "</label></div>\n";
+			$confirm .= "\n<div class='confirmer_deplacement verdana2'><div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>" . $scb . "</label></div></div>\n";
 		} else
 			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 	}
@@ -2445,9 +2445,9 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 }
 
 // http://doc.spip.org/@barre_typo
-function barre_typo($id,$lang=''){
+function barre_typo($id,$lang='',$forum=false){
 	include_spip('inc/barre');
-	return '<div>' . afficher_barre("document.getElementById('$id')",true,$lang) . '</div>';
+	return '<div>' . afficher_barre("document.getElementById('$id')",$forum,$lang) . '</div>';
 }
 // http://doc.spip.org/@puce_changement_statut
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
