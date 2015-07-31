@@ -202,13 +202,14 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		foreach ($paragraphes as $para) {
 			while (eregi(__regexp_doc_echappe, $para, $match)) {
 				$num_echap++;	
-				$para = "</no p>@@SPIP_$source$num_echap@@<no p>\n\n".str_replace($match[0], "", $para);
+#				$para = "</no p>@@SPIP_$source$num_echap@@<no p>\n\n".str_replace($match[0], "", $para);
+				$para = str_replace($match[0], "</no p>@@SPIP_$source$num_echap@@<no p>", $para);
 				$les_echap[$num_echap] = $match;
 				
 			}
 			while (eregi(__regexp_img_seule_echappe, $para, $match)) {
 				$num_echap++;	
-				$para = str_replace($match[0], "@@SPIP_$source$num_echap@@<no p>", $para);
+				$para = str_replace($match[0], "@@SPIP_$source$num_echap@@", $para);
 				$les_echap[$num_echap] = $match;
 				
 			}
@@ -1081,9 +1082,6 @@ function traiter_raccourcis_doublon(&$doublons, $letexte) {
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte, $echap=false) {
 	return interdire_scripts(traiter_raccourcis(trim($letexte), $echap));
-//	$a=time(); $b=microtime();
-//	interdire_scripts(traiter_raccourcis(trim($letexte)));
-//	return time()-$a + microtime()-$b;
 }
 
 ?>
