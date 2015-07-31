@@ -100,4 +100,54 @@ function rechercher_auteurs($cherche_auteur)
 	return mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 }
 
+function revisions_auteurs($id_auteur, $c=false) {
+	include_spip('inc/filtres');
+
+	$champs_normaux = array('nom', 'bio', 'pgp', 'nom_site', 'lien_site');
+
+	if (_request('nom', $c) === '')
+		$c = set_request('nom', _T('ecrire:item_nouvel_auteur'), $c);
+
+	$champs = array();
+	foreach ($champs_normaux as $champ) {
+		$val = _request($champ, $c);
+		if ($val !== NULL)
+			$champs[$champ] = corriger_caracteres($val);
+	}
+
+	// recuperer les extras
+	if ($GLOBALS['champs_extra']) {
+		include_spip('inc/extra');
+		if ($extra = extra_update('auteurs', $id_auteur, $c))
+			$champs['extra'] = $extra;
+	}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_enregistre_contenu',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
+
+	$update = array();
+	foreach ($champs as $champ => $val)
+		$update[] = $champ . '=' . _q($val);
+
+	if (!count($update)) return;
+
+	spip_query("UPDATE spip_auteurs SET ".join(', ',$update)." WHERE id_auteur=$id_auteur");
+
+	// marquer le fait que l'auteur est travaille par toto a telle date
+	// une alerte sera donnee aux autres administrateurs sur exec=auteur_infos
+	if ($GLOBALS['meta']['auteurs_modif'] != 'non') {
+		include_spip('inc/drapeau_edition');
+		signale_edition ($id_auteur, $GLOBALS['auteur_session'], 'auteur');
+	}
+
+}
+
 ?>
