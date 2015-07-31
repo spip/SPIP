@@ -482,8 +482,8 @@ function lang_parametres_forum($qs, $lang) {
 
 // La fonction presente dans les squelettes compiles
 
-// http://doc.spip.org/@spip_optim_select
-function spip_optim_select ($select = array(), $from = array(), 
+// http://doc.spip.org/@calculer_select
+function calculer_select ($select = array(), $from = array(), 
 			    $where = array(), $join=array(),
 			    $groupby = '', $orderby = array(), $limit = '',
 			    $sousrequete = '', $having = array(),
@@ -517,9 +517,9 @@ function spip_optim_select ($select = array(), $from = array(),
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
-		OR spip_optim_joint($cle, $select)
-		OR spip_optim_joint($cle, $join)
-		OR spip_optim_joint($cle, $where))
+		OR calculer_jointnul($cle, $select)
+		OR calculer_jointnul($cle, $join)
+		OR calculer_jointnul($cle, $where))
 			$where[]= "$t.$c=$cle.$c";
 		else { unset($from[$cle]); unset($join[$k]);}
 	}
@@ -533,14 +533,14 @@ function spip_optim_select ($select = array(), $from = array(),
 
 //condition suffisante (mais non necessaire) pour qu'une jointure soit inutile
 
-// http://doc.spip.org/@spip_optim_joint
-function spip_optim_joint($cle, $exp)
+// http://doc.spip.org/@calculer_jointnul
+function calculer_jointnul($cle, $exp)
 {
 	if (!is_array($exp))
 		return	(strpos($exp, "$cle.") === false) ? false : true;
 	else {
 		foreach($exp as $v) {
-			if (spip_optim_joint($cle, $v)) return true;
+			if (calculer_jointnul($cle, $v)) return true;
 		}
 		return false;
 	}
