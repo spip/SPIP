@@ -83,16 +83,22 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 // Le squelette compile est-il trop vieux ?
 // http://doc.spip.org/@squelette_obsolete
 function squelette_obsolete($skel, $squelette) {
+	static $date_change = null;
+	// ne verifier la date de mes_fonctions et mes_options qu'une seule fois
+	// par hit
+	if (is_null($date_change)){
+		if (@spip_file_exists($fonc = 'mes_fonctions.php')
+			OR @spip_file_exists($fonc = 'mes_fonctions.php3'))
+			$date_change = @filemtime($fonc); # compatibilite
+		if (defined('_FILE_OPTIONS'))
+			$date_change = max($date_change,@filemtime(_FILE_OPTIONS));
+	}
 	return (
 		(isset($GLOBALS['var_mode']) AND in_array($GLOBALS['var_mode'], array('recalcul','preview','debug')))
 		OR !@file_exists($skel)
 		OR ((@file_exists($squelette)?@filemtime($squelette):0)
 			> ($date = @filemtime($skel)))
-		OR (
-			(@file_exists($fonc = 'mes_fonctions.php')
-			OR @file_exists($fonc = 'mes_fonctions.php3'))
-			AND @filemtime($fonc) > $date) # compatibilite
-		OR (defined('_FILE_OPTIONS') AND @filemtime(_FILE_OPTIONS) > $date)
+		OR ($date_change > $date)
 	);
 }
 
@@ -309,10 +315,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 // elles sont traitees comme des inclusions
 // http://doc.spip.org/@synthetiser_balise_dynamique
 function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
+	// prefixer le include_once par "./" pour eviter la recherche dans le path par php
 	return
 		('<'.'?php 
 $lang_select = lang_select("'.$lang.'");
-include_once(_DIR_RACINE . "'
+include_once("./" . _DIR_RACINE . "'
 		. $file
 		. '");
 inclure_balise_dynamique(balise_'
