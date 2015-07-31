@@ -369,8 +369,10 @@ debut_cadre_relief($ze_logo);
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
-if (acces_restreint_rubrique($id_rubrique))
-	gros_titre(http_img_pack("admin-12.gif",'', "width='12' height='12'", _T('info_administrer_rubrique')).$titre);
+gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
+	   http_img_pack("admin-12.gif",'', "width='12' height='12'",
+			 _T('info_administrer_rubrique'))) .
+	   $titre);
 echo "</td>";
 
 if ($id_rubrique > 0 AND $flag_editable) {
