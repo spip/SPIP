@@ -102,13 +102,13 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo "<tr>";
 	echo "<td>";
 	echo icone(_T('icone_retour'),
-		generer_url_ecrire($script, $args),
+		$url = generer_url_ecrire($script, $args),
 		"article-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";
 	echo "<td style='width: 100%'>";
 	echo _T('texte_messages_publics');
-	echo gros_titre($titre,'', false);
+	echo "<a href='$url'>".gros_titre($titre,'', false)."</a>";
 	echo "</td></tr></table>";
 }
 ?>
