@@ -4,6 +4,7 @@
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+[<link rel="canonical" href="(#URL_MOT|url_absolue)" />]
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS des articles du mot cle ]
 <link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
