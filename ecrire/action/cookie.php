@@ -62,7 +62,7 @@ function action_spip_cookie_dist()
     $spip_session,
     $test_echec_cookie,
     $url,
-    $valeur,
+    $hash,
     $var_lang,
     $var_lang_ecrire;
 
@@ -217,8 +217,10 @@ if ($var_lang_ecrire) {
 	spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
+	// ce ajouter_session me semble deja fait si on arrive jusqu'ici
+	// avec id_auteur defini
 	if (_FILE_CONNECT AND $id_auteur) {
-		if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
+		if (verifier_action_auteur("cookie-var_lang_ecrire", $hash, $id_auteur)) {
 			ajouter_session($auteur_session, $spip_session, $var_lang_ecrire);
 		}
 	}

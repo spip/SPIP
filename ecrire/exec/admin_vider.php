@@ -49,33 +49,12 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	exit;
 }
 
-// toujours vrai
-
-if ($purger_index == "oui") {
-	if (verifier_action_auteur("purger_index", $hash)) {
-		include_spip('inc/indexation');
-		purger_index();
-		creer_liste_indexation();
-	}
-}
-
-
-
-
-//
-// Purger le cache
-//
-
-
 debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
-
 
 echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."</p>",
 	"<p align='justify'>"._T('texte_recalcul_page')."</p>";
 
-
 echo "\n<div>&nbsp;</div>";
-
 
 
 //
@@ -100,22 +79,14 @@ if ($quota_cache) {
 	echo _T('taille_cache_infinie');
 }
 
- $action = 'purger';
- $arg = 'cache';
- $hash = calculer_action_auteur("$action-$arg");
-
  echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
-  "\n<form action='", generer_url_action($action), "' method='POST'>", 
-  "\n<input type='hidden' name='action' value='$action' />",
-  "\n<input type='hidden' name='arg' value='$arg' />",
-  "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />", 
-  "\n<input type='hidden' name='hash' value='$hash' />", 
-  "\n<input type='hidden' name='redirect' value='", generer_url_ecrire("admin_vider"),
-  "' />", 
-  "\n<p><div align='right'><input class='fondo' type='submit' value=\"",
-  str_replace('"', '&quot;', _T('bouton_vider_cache')),
-  "\"></form></div>";
-
+   generer_action_auteur('purger',
+	'cache',
+	generer_url_ecrire("admin_vider"),
+	"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
+			 "\">",
+	" method='POST'");
  fin_cadre_relief();
 
 
@@ -127,20 +98,13 @@ if ($quota_cache) {
    "'></iframe>
 </div>";
 
- $action = 'purger';
- $arg = 'vignettes';
- $hash = calculer_action_auteur("$action-$arg");
-
- echo   "\n<form action='", generer_url_action($action), "' method='POST'>",
-   "\n<input type='hidden' name='action' value='$action' />",
-   "\n<input type='hidden' name='arg' value='$arg' />",
-   "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />",
-   "\n<input type='hidden' name='hash' value='$hash' />",
-   "\n<input type='hidden' name='redirect' value='",generer_url_ecrire("admin_vider"),
-   "' />", 
-   "\n<p><DIV align='right'><input class='fondo' type='submit'  value=\"",
-   str_replace('"', '&quot;', _T('bouton_vider_cache')),
-   "\" /></form></div>";
+ echo generer_action_auteur('purger',
+	'vignettes',
+	generer_url_ecrire("admin_vider"),
+	"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
+			 "\">",
+	" method='POST'");
 
 fin_cadre_relief();
 
@@ -164,12 +128,13 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	$hash = calculer_action_auteur("purger_index");
-
-	echo generer_url_post_ecrire("admin_vider");
-	echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash' />";
-	echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui' />";
-	echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";
+	echo generer_action_auteur('purger',
+		'index',
+		generer_url_ecrire("admin_vider"),
+		"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+			 str_replace('"', '&quot;', _T('bouton_effacer_index')) .
+			 "\">",
+		" method='POST'");
 
 fin_cadre_trait_couleur();
 

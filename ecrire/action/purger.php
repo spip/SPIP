@@ -24,6 +24,13 @@ function action_purger_dist()
 
   switch ($arg) {
 
+  case 'index': 
+	include_spip('inc/indexation');
+	spip_log("purger_indx");
+	purger_index();
+	creer_liste_indexation();
+	break;
+
   case 'cache': 
       supprime_invalideurs();
       purger_repertoire(_DIR_CACHE, 0);
