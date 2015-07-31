@@ -133,6 +133,7 @@ function regler_langue_navigateur() {
 //
 function traduire_chaine($code, $args) {
 	global $spip_lang, $flag_ecrire;
+	global $cache_lang;
 
 	// liste des modules a parcourir
 	$modules = array('spip');
@@ -148,7 +149,6 @@ function traduire_chaine($code, $args) {
 		$var = "i18n_".$module."_".$spip_lang;
 		if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
 		if (!$flag_ecrire) {
-			global $cache_lang;
 			if (!isset($GLOBALS[$var][$code]))
 				charger_langue($spip_lang, $module, $code);
 			if (isset($GLOBALS[$var][$code]))
