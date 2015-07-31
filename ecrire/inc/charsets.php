@@ -219,9 +219,9 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 		// Sinon, peut-etre connaissons-nous ce charset ?
 		if (!isset($trans[$charset])) {
 			global $CHARSET;
-			load_charset($charset);
-			if (is_array($CHARSET[$charset]))
-				foreach ($CHARSET[$charset] as $key => $val) {
+			if ($cset = load_charset($charset)
+			AND is_array($CHARSET[$cset]))
+				foreach ($CHARSET[$cset] as $key => $val) {
 					$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
