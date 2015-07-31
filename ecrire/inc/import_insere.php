@@ -227,6 +227,13 @@ function import_translate_spip_documents($values, $table, $desc, $request, $atts
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
+function import_translate_spip_documents_liens($values, $table, $desc, $request, $atts) {
+
+	$values['id_document']= (importe_translate_maj('id_document', $values['id_document']));
+	$values['id_objet']= (importe_translate_maj('id_' .$values['objet'], $values['id_objet']));
+	sql_replace($table, $values);
+}
+
 // Fonction de renumerotation, par delegation aux fonction specialisees
 // Si une allocation est finalement necessaire, celles-ci doivent repercuter
 // la renumerotation sur la table SQL temporaire pour qu'en cas de reprise
@@ -291,8 +298,10 @@ function importe_raccourci($v)
 
 // un document importe est considere comme identique a un document local
 // s'ils ont meme taille et meme nom et que le present n'est pas detruit
+// Et ne pas importer les incoherences (docs sans extension)
 // http://doc.spip.org/@import_identifie_id_document
 function import_identifie_id_document($values, $table, $desc, $request) {
+	if (!$values['extension']) return false;
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
