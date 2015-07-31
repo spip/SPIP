@@ -82,14 +82,12 @@ function aff_selection (arg, idom, url, event) {
 
 function aff_selection_titre(titre, id, idom, nid)
 {
-	t = findObj_forcer('titreparent');
-	t.value= titre;
-	t=findObj_forcer(nid);
-	t.value=id;
-	jQuery(t).trigger('change'); // declencher le onchange
-	t=findObj_forcer(idom);
-	t.style.display='none';
-	p = $(t).parents('form');
+	var t = jQuery('#titreparent');
+	var p = t.closest('form');
+	t.attr('value',titre);
+	p.find('#'+nid).attr('value',id);
+	t.trigger('change'); // declencher le onchange
+	p.find("#"+idom).hide('fast');
 	if (p.is('.submit_plongeur')) p.get(p.length-1).submit();
 }
 
