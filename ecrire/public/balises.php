@@ -293,18 +293,23 @@ function calculer_balise_expose($p, $on, $off)
 {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	$key = $p->boucles[$b]->primary; 
+	$type = $p->boucles[$p->id_boucle]->primary; 
 	$desc = $p->boucles[$b]->show;
 
 	if (!$key) {
 		erreur_squelette(_T('zbug_champ_hors_boucle', array('champ' => '#EXPOSER')), $b);
 	}
 
-	$c = champ_sql($key, $p);
+	// Ne pas utiliser champ_sql, on jongle avec le nom boucle explicite
+	$c = index_pile($p->id_boucle, $type, $p->boucles);
 
-	$r = !isset($desc['field']['id_rubrique']) ? "''"
-	  : index_pile($p->id_boucle, 'id_rubrique', $p->boucles, $b);
-
-	$p->code = "(calcul_exposer($c, '$key', \$Pile[0], $r) ? $on : $off)";
+	if (isset($desc['field']['id_rubrique'])) {
+		$parent = index_pile($p->id_boucle, 'id_rubrique', $p->boucles, $b);
+	} elseif (isset($desc['field']['id_groupe'])) {
+		$parent = index_pile($p->id_boucle, 'id_groupe', $p->boucles, $b);
+	} else $parent = "''";
+		  
+	$p->code = "(calcul_exposer($c, '$type', \$Pile[0], $parent, '$key') ? $on : $off)";
 
 	$p->interdire_scripts = false;
 	return $p;

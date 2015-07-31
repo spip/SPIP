@@ -115,15 +115,19 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 	}
 	// Requete erronee
 	else {
-		$retour .= "<tt><blink>&lt;BOUCLE".$id_boucle."&gt;("
-		. $type . ")</blink><br />\n"
-		. "<b>"._T('avis_erreur_mysql')."</b><br />\n"
+		$err =  "<b>"._T('avis_erreur_mysql')."</b><br />\n"
 		. htmlspecialchars($query)
-		. "\n<br /><span style='color: red'><b>".htmlspecialchars($erreur)
-		. "</b></span><br />"
-		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
-
-		$retour .= aide('erreur_mysql');
+		. "\n<br /><span style='color: red'><b>"
+		. htmlspecialchars($erreur)
+		. "</b></span><br />";
+		
+		if ($id_boucle) {
+		  $err = "<blink>&lt;BOUCLE".$id_boucle."&gt;($type)</blink>"
+		    .   "<br />\n"
+		    . $err
+		    . "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink>\n";
+		}
+		$retour .= "<tt>$err</tt>" . aide('erreur_mysql');
 		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
 	}
 
@@ -137,13 +141,11 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 // http://doc.spip.org/@erreur_squelette
 function erreur_squelette($message='', $lieu='') {
 	global $tableau_des_erreurs;
-	global $auteur_session;
 	static $runs;
 
 	if (is_array($message)) list($message, $lieu) = $message;
 
-	spip_log("Erreur squelette: $message | $lieu ("
-		. $GLOBALS['fond'].".html)");
+	spip_log("Erreur SQL: $message | $lieu (" . $GLOBALS['fond'] .")");
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales

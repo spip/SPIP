@@ -293,7 +293,7 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 
 
 // http://doc.spip.org/@calcul_exposer
-function calcul_exposer ($id, $type, $reference, $parent) {
+function calcul_exposer ($id, $prim, $reference, $parent, $type) {
 	static $exposer;
 	static $ref_precedente;
 
@@ -304,15 +304,18 @@ function calcul_exposer ($id, $type, $reference, $parent) {
 	if ($reference<>$ref_precedente) {
 		$ref_precedente = $reference;
 		$principal = $reference[$type];
-		$exposer= array($type => array($principal => true));
-		if ($principal AND $parent) {
-			foreach(split(',',calculer_hierarchie($parent)) as $n)
-				$exposer['id_rubrique'][$n] = true;
+		if ($principal) {
+			$exposer= array($type => array($principal => true));
+			if ($type == 'id_mot')
+				$exposer['id_groupe'][$parent] = true;
+			if ($type != 'id_groupe') {
+			  $a = split(',',calculer_hierarchie($parent));
+			  foreach($a as $n) $exposer['id_rubrique'][$n] = true;
+			}
 		}
 	}
-
 	// And the winner is...
-	return isset($exposer[$type]) ? isset($exposer[$type][$id]) : '';
+	return isset($exposer[$prim]) ? isset($exposer[$prim][$id]) : '';
 }
 
 // http://doc.spip.org/@lister_objets_avec_logos
