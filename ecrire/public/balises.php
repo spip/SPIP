@@ -449,19 +449,21 @@ function balise_RANG_dist($p) {
 		erreur_squelette($msg, $p);
 	}
 	else {
-		$champ_titre = 'titre';
 		$boucle = &$p->boucles[$p->id_boucle];
 		$trouver_table = charger_fonction('trouver_table','base');
 		$desc = $trouver_table($boucle->id_table);
 		if (isset($desc['titre'])){
 			$t=$desc['titre'];
 		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
-			  $m = explode(' ',trim($m[2]));
-			// attention, lorsque : '' as titre, '' as lang
-		    $champ_titre = trim(reset($m), "'");
+			  $m = preg_replace(",as\s+titre$,i","",$m[2]);
+			  $m = trim($m) . " AS titre_rang";
+
+			  $boucle->select[] = $m;
+			  $_titre = '$Pile[$SP][\'titre_rang\']';
 		  }
 		}
-		$_titre = champ_sql($champ_titre, $p);
+		if (!$_titre)
+			$_titre = champ_sql('titre', $p);
 		$_rang = champ_sql('rang', $p);
 		$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
 		$p->interdire_scripts = false;
