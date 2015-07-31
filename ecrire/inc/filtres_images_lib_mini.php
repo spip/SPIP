@@ -1067,7 +1067,6 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		return $img;
 }
 
-
 /**
  * Produire des fichiers au format .ico
  *
@@ -1075,6 +1074,8 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
  *
  * @author James Heinrich <info@silisoftware.com>
  * @link http://phpthumb.sourceforge.net
+ *
+ * Class phpthumb_functions
  */
 class phpthumb_functions {
 
