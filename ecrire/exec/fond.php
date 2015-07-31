@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 $fond = _request('exec');
-
+$GLOBALS['delais'] = 0;// pas de cache !
 // Securite
 if (strstr($fond, '/')) {
 	if (!include_spip('inc/autoriser')
