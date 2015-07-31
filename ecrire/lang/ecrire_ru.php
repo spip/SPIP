@@ -260,7 +260,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_anterieur' => 'предыдущий',
 'info_article' => 'статья',
 'info_article_2' => 'статьи',
-'info_article_a_paraitre' => '<MODIF>Дата публикации статей',
+'info_article_a_paraitre' => 'Дата публикации статей', # MODIF
 'info_articles_02' => 'статьи',
 'info_articles_2' => 'Статьи',
 'info_articles_auteur' => 'Статьи этого автора',
@@ -634,7 +634,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_accepter_inscriptions' => 'Не разрешать регистрацию',
 'item_non_activer_messages_avertissement' => 'НЕ предупреждать о совместной работе',
 'item_non_afficher_calendrier' => 'Не показывать календарь',
-'item_non_autoriser_documents_joints' => '<MODIF>Отключить документы к статьям',
+'item_non_autoriser_documents_joints' => 'Отключить документы к статьям', # MODIF
 'item_non_autoriser_documents_joints_rubriques' => 'Не разрешать документов в разделах',
 'item_non_autoriser_syndication_integrale' => 'Отправка только краткого изложения',
 'item_non_compresseur' => 'Отключить сжатие',
@@ -839,17 +839,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_conflit_edition_correction' => 'Пожалуйста, проверьте ниже разницу между двумя версиями. Таким образом Вы можете копировать Ваши изменения и начать заново.',
 'texte_connexion_mysql' => 'Параметры доступа к базе данных задаются в контрольной панели хостинга. Если у вас нет возможности управлять вашими базами данных вы можете запросить помощь в службе поддержки хостинга.',
 'texte_contenu_article' => '(Краткое содержание статьи.)',
-'texte_contenu_articles' => '<MODIF>Основываясь на выбранное расположение Вашего сайта, Вы можете решить 
+'texte_contenu_articles' => 'Основываясь на выбранное расположение Вашего сайта, Вы можете решить 
   что некоторые элементы статей не будут использоваться. 
-  Используйте следующий список для выбора доступных элементов.',
+  Используйте следующий список для выбора доступных элементов.', # MODIF
 'texte_crash_base' => 'Если Ваша 
  база данных повреждена, Вы можете попробовать восстановить ее 
    автоматически.',
 'texte_creer_rubrique' => 'Создайте хотя бы один раздел, для того, что бы писать статьи.<br />',
 'texte_date_creation_article' => 'ДАТА СОЗДАНИЯ СТАТЬИ:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Дата более ранней публикации:',
 'texte_date_publication_anterieure_nonaffichee' => 'Скрыть дату более ранней публикации.',
 'texte_date_publication_article' => 'ДАТА ОНЛАЙН ПУБЛИКАЦИИ:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Описание комментария',
 'texte_descriptif_rapide' => 'Краткое описание',
 'texte_effacer_base' => 'Удалить базу данных SPIP',
@@ -905,9 +907,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   необходимо использовать <i> HTTP прокси</i>, чтобы добраться до внешней части сайтов (SPIP документация, объединенные сайты и т. д.). 
   В этом случае, введите его адрес ниже в форму 
   <tt> <html> http: // proxy:8080 </HTML> </tt>. В большинстве случаев Вы можете оставить это поле пустым.',
-'texte_publication_articles_post_dates' => '<MODIF>Какую работу должен принимать SPIP касающуюся статей, 
+'texte_publication_articles_post_dates' => 'Какую работу должен принимать SPIP касающуюся статей, 
   публикация которых была установлена на 
-  будущую дату?',
+  будущую дату?', # MODIF
 'texte_rappel_selection_champs' => '[Не забудьте правильно выбрать поле.]',
 'texte_recalcul_page' => 'Если Вы хотите 
 обновить только одну страницу, Вы можете сделать это с основной части, используя кнопку, "обновить".',
@@ -950,13 +952,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_titre_02' => 'Предмет:',
 'texte_titre_obligatoire' => '<b>Название</b> [обязательно]',
 'texte_travail_article' => '@nom_auteur_modif@ работал над этой статьей @date_diff@ несколько минут назад',
-'texte_travail_collaboratif' => '<MODIF>Когда несколько 
+'texte_travail_collaboratif' => 'Когда несколько 
  редакторов работают над одной и той же статьей, 
  система  может отметить эти статьи как недавно "открытые" 
  для предупреждения внесения одновременных изменений. 
   Эта опция отключена по умолчанию 
  для избежания показа ненужных  предупреждений.
-Сообщения.',
+Сообщения.', # MODIF
 'texte_trop_resultats_auteurs' => 'Слишком много результатов для "@cherche_auteur"; пожалуйста очистите поиск',
 'texte_unpack' => 'скачать последнюю версию',
 'texte_utilisation_moteur_syndiques' => 'Когда Вы используете поисковую систему SPIP, Вы можете выполнить поиск по сайтам и статьям, объединенных двумя разными способами. <br /> <img src =\'puce.gif\'> Самый простой заключается в том, чтобы искать только в названиях и описаниях статей. <br /> <img src =\'puce.gif\'> Второй способ, намного сильнее, позволяет SPIP искать также в текстах ссылочных сайтов. Если Вы ссылаетесь на сайт, то SPIP выполнит поиск непосредственно в тексте сайта.',
@@ -1014,7 +1016,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_statistiques_signatures_jour' => 'Подсчет подписей за день',
 'titre_page_statistiques_signatures_mois' => 'Подсчет подписей за месяц',
 'titre_page_upgrade' => 'SPIP обновления',
-'titre_publication_articles_post_dates' => '<MODIF>Публикация и дата размещения статей',
+'titre_publication_articles_post_dates' => 'Публикация и дата размещения статей', # MODIF
 'titre_referencer_site' => 'Ссылка на сайт:',
 'titre_rendez_vous' => 'СРОКИ:',
 'titre_reparation' => 'Восстановить',

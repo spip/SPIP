@@ -848,9 +848,11 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
    můžete zkusit její automatickou obnovu.',
 'texte_creer_rubrique' => 'Než můžete začít psát články,<br /> musíte vytvořit sekci.', # MODIF
 'texte_date_creation_article' => 'DATUM NAPSÁNÍ ČLÁNKU:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Datum poslední úpravy:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nezobrazovat datum poslední úpravy.',
 'texte_date_publication_article' => 'DATUM ZVEŘEJNĚNÍ ONLINE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Popis petice',
 'texte_descriptif_rapide' => 'Stručný popis',
 'texte_effacer_base' => 'Odstranit databázi SPIP',

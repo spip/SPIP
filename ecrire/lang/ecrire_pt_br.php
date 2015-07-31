@@ -809,9 +809,11 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'texte_crash_base' => 'Se a sua base de dados se corrompeu, você poderá tentar uma reparação automática.',
 'texte_creer_rubrique' => 'Antes de poder escrever matérias, você precisa criar uma seção.',
 'texte_date_creation_article' => 'DATA DE CRIAÇÃO DA MATÉRIA:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data de redação anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'Não exibir a data de redação anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICAÇÃO ONLINE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descrição da petição',
 'texte_descriptif_rapide' => 'Descrição rápida',
 'texte_effacer_base' => 'Apagar a base de dados do SPIP',

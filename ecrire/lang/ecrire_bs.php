@@ -803,9 +803,11 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_crash_base' => 'Ako je vasa baza podataka pala, mozete pokusati automatsku popravku.',
 'texte_creer_rubrique' => 'Prije pisanja clanaka,<br /> trebate kreirati rubriku.', # MODIF
 'texte_date_creation_article' => 'DATUM NASTANKA CLANKA:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Datum proslog uredjivanja:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne prikazuj datum proslog uredjivanja.',
 'texte_date_publication_article' => 'DATUM OBJAVLJIVANJA:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Opis peticije',
 'texte_descriptif_rapide' => 'Brzi opis',
 'texte_effacer_base' => 'Izbrisati SPIP bazu podataka',

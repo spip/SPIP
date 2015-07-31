@@ -818,9 +818,11 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aquí de repararla.',
 'texte_creer_rubrique' => 'Antes de poder escribir artículos,<br /> debes crear una sección.',
 'texte_date_creation_article' => 'FECHA DE CREACIÓN DEL ARTÍCULO:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Fecha de redacción anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de redacción anterior.',
 'texte_date_publication_article' => 'Fecha de publicación en línea:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descripción de la petición',
 'texte_descriptif_rapide' => 'Descripción rápida',
 'texte_effacer_base' => 'Borrar la base de datos SPIP',

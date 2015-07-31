@@ -588,7 +588,7 @@ een kleur geeft hun status aan :',
 'info_visiteurs' => 'Bezoekers',
 'info_visiteurs_02' => 'Bezoekers van de publieke site',
 'info_webmestre_forces' => 'Webmasters zijn op dit moment gedefinieerd in <tt>@file_options@</tt>.',
-'install_adresse_base_hebergeur' => '<modif>Adres van de database die door leverancier wordt toegekend',
+'install_adresse_base_hebergeur' => 'Adres van de database die door leverancier wordt toegekend', # MODIF
 'install_base_ok' => 'De basis @base@ werd erkend',
 'install_connect_ok' => 'De nieuwe basis is uitgeroepen tot de server @connect@.',
 'install_echec_annonce' => 'De installatie zal wellicht mislukken of leiden tot een niet-werkende site...',
@@ -847,9 +847,11 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 'texte_creer_rubrique' => 'Alvorens artikelen te kunnen schrijven, <br/> moet u een rubriek creëren.',
 'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Datum van eerdere redactie :',
 'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van eerdere redactie.',
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Beschrijving van de petitie.',
 'texte_descriptif_rapide' => 'Korte beschrijving.',
 'texte_effacer_base' => 'Verwijder de SPIP databank',

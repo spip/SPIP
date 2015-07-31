@@ -818,9 +818,11 @@ in einer Farbe, die den Status anzeigt :',
 'texte_crash_base' => 'Wenn Ihre Datenbank abgestürzt ist, können Sie eine automatische Reparatur versuchen.',
 'texte_creer_rubrique' => 'Bevor Sie Artikel schreiben können,<br /> müssen Sie eine Rubrik anlegen.',
 'texte_date_creation_article' => 'ARTIKEL ANGELEGT AM:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'DATUM EINER FRÜHEREN BEARBEITUNG',
 'texte_date_publication_anterieure_nonaffichee' => 'Kein Datum einer früheren Bearbeitung anzeigen.',
 'texte_date_publication_article' => 'ONLINE VERÖFFENTLICHT AM:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Beschreibung der Petition',
 'texte_descriptif_rapide' => 'Kurzbeschreibung',
 'texte_effacer_base' => 'SPIP-Datenbank löschen',

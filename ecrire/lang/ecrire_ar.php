@@ -854,9 +854,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 آلياً.',
 'texte_creer_rubrique' => 'قبل التمكن من كتابة مقالات،<br />يجب عليك إنشاء قسم واحد على الأقل.',
 'texte_date_creation_article' => 'تاريخ إنشاء المقال:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'تاريخ النشر السابق:',
 'texte_date_publication_anterieure_nonaffichee' => 'إخفاء تاريخ النشر السابق.',
 'texte_date_publication_article' => 'تاريخ النشر:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'وصف العريضة',
 'texte_descriptif_rapide' => 'وصف مقتضب',
 'texte_effacer_base' => 'حذف قاعدة بيانات SPIP',

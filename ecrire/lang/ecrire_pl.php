@@ -848,9 +848,11 @@ zreinstalować SPIP w celu utworzenia nowej bazy danych i dostępu pierwszego ad
    automatycznie.',
 'texte_creer_rubrique' => 'Aby móc pisać artykuły,<br /> musisz utworzyć dział.',
 'texte_date_creation_article' => 'DATA UTWORZENIA ARTYKUŁU:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data poprzedniej publikacji :',
 'texte_date_publication_anterieure_nonaffichee' => 'Ukryj datę poprzedniej publikacji.',
 'texte_date_publication_article' => 'DATA PUBLIKACJI ONLINE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Opis ogłoszenia',
 'texte_descriptif_rapide' => 'Krótki opis',
 'texte_effacer_base' => 'Usuń bazę danych SPIP',

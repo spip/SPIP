@@ -829,9 +829,11 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
   egy automatikus javítást kisérletezhet.',
 'texte_creer_rubrique' => 'Mielőbb írhat cikkeket,<br /> egy rovatot kell létrehozni.', # MODIF
 'texte_date_creation_article' => 'CIKK LÉTREHOZÁSÁNAK IDŐPONTJA :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Elöző szerkesztés dátuma :',
 'texte_date_publication_anterieure_nonaffichee' => 'Nem kell megjeleníteni az elöző szerkesztés(ek) időpontját.',
 'texte_date_publication_article' => 'NYILVÁNOS PUBLIKÁLÁS IDŐPONTJA :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Az aláírásgyűjtés leírása',
 'texte_descriptif_rapide' => 'Rövid leírás',
 'texte_effacer_base' => 'Az SPIP adatbázisa törlése',

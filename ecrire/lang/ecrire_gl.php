@@ -847,9 +847,11 @@ cunha cor que indica o seu estado :',
 'texte_crash_base' => 'Se a base de datos ten algún problema, podes tentar unha reparación automática.',
 'texte_creer_rubrique' => 'Antes de poder escribir artigos<br/>, ten que crear un tema ou secci&oacute;n.',
 'texte_date_creation_article' => 'DATA DE CREACIÓN DO ARTIGO',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data de redacción anterior :',
 'texte_date_publication_anterieure_nonaffichee' => 'Non mostrar data de redacción anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACIÓN EN LIÑA :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descrición da petición',
 'texte_descriptif_rapide' => 'Descrición rápida',
 'texte_effacer_base' => 'Eliminar a base de datos SPIP',

@@ -839,9 +839,11 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_crash_base' => 'Se il database è stato danneggiato, puoi tentare un ripristino automatico.',
 'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<br /> devi creare una rubrica.',
 'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
 'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
 'texte_effacer_base' => 'Cancella il database SPIP',

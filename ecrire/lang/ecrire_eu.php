@@ -820,9 +820,11 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 'texte_crash_base' => 'Baseak arazo bat baldin badauka, hemen konpontzen saiadaiteke',
 'texte_creer_rubrique' => 'Artikulu bat idatzi aurretik, atal bat sortu behar duzu.',
 'texte_date_creation_article' => ' Artikuluaren sortze data',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Lehengo argitarapen data',
 'texte_date_publication_anterieure_nonaffichee' => 'Aurreko argitarapen data ez erakutsi.',
 'texte_date_publication_article' => 'ARGITARAPEN DATA:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Eskaeraren azalpena',
 'texte_descriptif_rapide' => 'Deskribapen motza',
 'texte_effacer_base' => 'Ezabatu SPIP datu-basea',

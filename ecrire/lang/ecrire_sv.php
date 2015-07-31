@@ -848,9 +848,11 @@ installera om SPIP för att skapa en ny databas och den första administratören
 			automatique.', # NEW
 'texte_creer_rubrique' => 'Avant de pouvoir écrire des articles,<br /> vous devez créer une rubrique.', # NEW
 'texte_date_creation_article' => 'DATE DE CRÉATION DE L\'ARTICLE :', # NEW
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Date de rédaction antérieure :', # NEW
 'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de rédaction antérieure.', # NEW
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :', # NEW
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descriptif de la pétition', # NEW
 'texte_descriptif_rapide' => 'Descriptif rapide', # NEW
 'texte_effacer_base' => 'Effacer la base de données SPIP', # NEW
