@@ -82,6 +82,8 @@ function liste_metas()
 		'gerer_trad' => 'non',
 		'langues_multilingue' => '',
 
+		'version_html_max' => 'html4',
+
 		'type_urls' => 'page',
 
 		'email_envoi' => '',

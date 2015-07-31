@@ -1816,6 +1816,12 @@ function charger_php_extension($module) {
 	}
 }
 
+// Renvoie TRUE si et seulement si la configuration autorise
+// le code HTML5 sur le site public
+function html5_permis() {
+        return (isset($GLOBALS['meta']['version_html_max'])
+		AND ('html5' == $GLOBALS['meta']['version_html_max']));
+}
 
 /*
  * Bloc de compatibilite : quasiment tous les plugins utilisent ces fonctions

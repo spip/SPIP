@@ -8,6 +8,7 @@ ecrire/action/auth.php -text
 ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
+ecrire/action/configurer_moderniseur_html.php -text
 ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
 ecrire/action/confirmer_email.php -text
@@ -93,6 +94,7 @@ ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
+ecrire/configuration/moderniseur_html.php -text
 ecrire/configuration/mots.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
@@ -137,6 +139,7 @@ ecrire/exec/config_multilang.php -text
 ecrire/exec/config_preferences.php -text
 ecrire/exec/configuration.php -text
 ecrire/exec/configurer.php -text
+ecrire/exec/configurer_moderniseur_html.php -text
 ecrire/exec/configurer_previsualiseur.php -text
 ecrire/exec/configurer_relayeur.php -text
 ecrire/exec/convert_sql_utf8.php -text
@@ -850,6 +853,7 @@ prive/themes/spip/images/calendrier-edit-16.png -text
 prive/themes/spip/images/calendrier-edit-24.png -text
 prive/themes/spip/images/calendrier-new-16.png -text
 prive/themes/spip/images/calendrier-new-24.png -text
+prive/themes/spip/images/compat-24.png -text
 prive/themes/spip/images/config-contenu-16.png -text
 prive/themes/spip/images/config-contenu-24.png -text
 prive/themes/spip/images/config-interaction-16.png -text
