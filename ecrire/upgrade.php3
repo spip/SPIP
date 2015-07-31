@@ -7,8 +7,8 @@ include_ecrire ("inc_auth.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_meta.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
+include_ecrire ("inc_texte.php3");
+include_ecrire ("inc_filtres.php3");
 
 $upgrade_titre = "mise &agrave; niveau de votre base MySQL";
 
@@ -35,8 +35,8 @@ debut_admin($upgrade_titre, $commentaire);
 
 include_ecrire ("inc_base.php3");
 
-maj_base();
 creer_base();
+maj_base();
 ecrire_acces();
 
 $hash = calculer_action_auteur("purger_squelettes");

@@ -776,7 +776,7 @@ function maj_base() {
 		spip_query("UPDATE spip_mots SET type='Mots sans groupe...' WHERE type=''");
 
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
-		while($row = mysql_fetch_array($result)) {
+		while($row = @mysql_fetch_array($result)) {
 				$type = addslashes($row['type']);
 				spip_query("INSERT INTO spip_groupes_mots 
 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
@@ -789,7 +789,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_mots ADD id_groupe bigint(21) NOT NULL");
 	
 		$result = spip_query("SELECT * FROM spip_groupes_mots");
-		while($row = mysql_fetch_array($result)) {
+		while($row = @mysql_fetch_array($result)) {
 				$id_groupe = addslashes($row['id_groupe']);
 				$type = addslashes($row['titre']);
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type=\"$type\"");
@@ -860,7 +860,7 @@ function maj_base() {
 	if ($version_installee < 1.418) {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 0,1";
 		$result = spip_query($query);
-		if ($webmaster = mysql_fetch_object($result)) {
+		if ($webmaster = @mysql_fetch_object($result)) {
 			include_ecrire("inc_meta.php3");
 			ecrire_meta('email_webmaster', $webmaster->email);
 			ecrire_metas();
@@ -945,16 +945,27 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.457) {
-		// tables remplacees lors de creer_base()
 		spip_query("DROP TABLE spip_visites");
 		spip_query("DROP TABLE spip_visites_temp");
 		spip_query("DROP TABLE spip_visites_referers");
+		creer_base(); // crade, a ameliorer :-((
 	}
 
 	if ($version_installee < 1.458) {
 		spip_query("ALTER TABLE spip_auteurs ADD cookie_oubli TINYTEXT NOT NULL");
 	}
 
+	if ($version_installee < 1.459) {
+		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
+		while ($row = @mysql_fetch_array($result)) {
+			$type = addslashes($row['type']);
+			spip_query("INSERT IGNORE INTO spip_groupes_mots 
+				(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
+				VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
+			if ($id_groupe = mysql_insert_id()) 
+				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
+		}
+	}
 
 	//
 	// Mettre a jour le numero de version installee
