@@ -62,7 +62,7 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	redirige_par_entete($url ? $url : "./spip_login.php3");
+	redirige_par_entete($url ? $url : "spip_login.php3");
 }
 
 
@@ -126,7 +126,7 @@ if ($essai_login == "oui") {
 	}
 	else {
 		if (ereg("ecrire/", $cible->getUrl())) {
-			$cible = new Link("./spip_login.php3");
+			$cible = new Link("spip_login.php3");
 		}
 		$cible->addVar('var_login', $login);
 		if ($session_password || $session_password_md5)

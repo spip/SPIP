@@ -8,6 +8,7 @@ define("_ECRIRE_INC_AUTH", "1");
 include_ecrire ("inc_meta.php3"); // amorce la connexion MySQL
 include_ecrire ("inc_session.php3");
 
+
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
@@ -47,8 +48,6 @@ function auth() {
 		"<tt>".spip_sql_errno()." ".spip_sql_error()."</tt>";
 		return false;
 	}
-
-
 	//
 	// Initialiser variables (eviter hacks par URL)
 	//
@@ -113,8 +112,9 @@ function auth() {
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
-		redirige_par_entete(" ../spip_login.php3?var_url=".urlencode($url));
+		redirige_par_entete("../spip_login.php3?var_url=".urlencode($url));
 	}
+
 
 	//
 	// Chercher le login dans la table auteurs
@@ -209,8 +209,7 @@ function auth() {
 	}
 
 	if (!$auth_pass_ok) {
-		@header("Location: ../spip_login.php3?var_erreur=pass");
-		exit;
+		redirige_par_entete("spip_login.php3?var_erreur=pass");
 	}
 
 	if ($connect_statut == 'nouveau') {

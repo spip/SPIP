@@ -61,6 +61,7 @@ function ajouter_session($auteur, $id_session) {
 // Verifier et inclure une session
 //
 function verifier_session($id_session) {
+
 	// Tester avec alea courant
 	$ok = false;
 	if ($id_session) {
@@ -219,5 +220,4 @@ function verifier_visiteur() {
 		return true;
 	return false;
 }
-
 ?>

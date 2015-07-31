@@ -210,6 +210,9 @@ $extension_squelette = 'html';
 
 define('_EXTENSION_PHP', '.php3');
 
+// Droits d'acces maximum par defaut
+@umask(0);
+
 //
 // *** Fin du parametrage statique ***
 //
@@ -220,13 +223,14 @@ $flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 
 define_once('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
 
-/* bientot
+/* bientot 
 
 if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
   {
     $d = substr($d,0,strrpos($d,'/')+1);
-    define('_DIR_PREFIX1', $d);
-    define('_DIR_PREFIX2', $d);
+    define_once('_DIR_PREFIX1', $d);
+    define_once('_DIR_PREFIX2', $d);
+
     } else   */
 {
   define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
@@ -440,8 +444,75 @@ else if (function_exists('email')) {
 if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
 	$os_serveur = 'windows';
 
-// Droits d'acces maximum par defaut
-@umask(0);
+//
+// Verifier la presence des .htaccess
+//
+function verifier_htaccess($rep) {
+	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
+	if (!@file_exists($htaccess)) {
+		spip_log("demande de creation de $htaccess");
+		if ($GLOBALS['hebergeur'] != 'nexenservices'){
+			if (!$f = fopen($htaccess, "w"))
+				echo "<b>" .
+				  _L("ECHEC DE LA CREATION DE $htaccess") .
+				  "</b>";
+			else
+			  {
+				fputs($f, "deny from all\n");
+				fclose($f);
+			  }
+		} else {
+			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
+			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
+			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
+			par l'interm&eacute;diaire de ";
+			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
+			target=\"_blank\">l'espace webmestres</a>.";
+			echo "Veuillez cr&eacute;er manuellement la protection pour
+			ce r&eacute;pertoire (un couple login/mot de passe est
+			n&eacute;cessaire).<br />";
+		}
+	}
+}
+
+
+//
+// Enregistrement des evenements
+//
+function spip_log($message, $logname='spip') {
+	global $flag_ecrire;
+
+	$pid = '(pid '.@getmypid().')';
+	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
+
+	$message = date("M d H:i:s")." $ip $pid "
+		.ereg_replace("\n*$", "\n", $message);
+
+	$logfile = _DIR_SESSIONS . $logname . '.log';
+	if (@filesize($logfile) > 10*1024) {
+		$rotate = true;
+		$message .= "[-- rotate --]\n";
+	}
+	$f = @fopen($logfile, "ab");
+	if ($f) {
+		fputs($f, $message);
+		fclose($f);
+	}
+	if ($rotate) {
+		@unlink($logfile.'.3');
+		@rename($logfile.'.2',$logfile.'.3');
+		@rename($logfile.'.1',$logfile.'.2');
+		@rename($logfile,$logfile.'.1');
+		#if (function_exists('logrotate'))
+		#	logrotate($logfile);
+	}
+
+	// recopier les spip_log mysql (ce sont uniquement des erreurs)
+	// dans le spip_log general
+	if ($logname == 'mysql')
+		spip_log($message);
+}
+
 
 
 //
@@ -895,43 +966,6 @@ function table_objet($type) {
 
 
 //
-// Enregistrement des evenements
-//
-function spip_log($message, $logname='spip') {
-	global $flag_ecrire;
-
-	$pid = '(pid '.@getmypid().')';
-	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
-
-	$message = date("M d H:i:s")." $ip $pid "
-		.ereg_replace("\n*$", "\n", $message);
-
-	$logfile = _DIR_SESSIONS . $logname . '.log';
-	if (@filesize($logfile) > 10*1024) {
-		$rotate = true;
-		$message .= "[-- rotate --]\n";
-	}
-	$f = @fopen($logfile, "ab");
-	if ($f) {
-		fputs($f, $message);
-		fclose($f);
-	}
-	if ($rotate) {
-		@unlink($logfile.'.3');
-		@rename($logfile.'.2',$logfile.'.3');
-		@rename($logfile.'.1',$logfile.'.2');
-		@rename($logfile,$logfile.'.1');
-		#if (function_exists('logrotate'))
-		#	logrotate($logfile);
-	}
-
-	// recopier les spip_log mysql (ce sont uniquement des erreurs)
-	// dans le spip_log general
-	if ($logname == 'mysql')
-		spip_log($message);
-}
-
-//
 // Savoir si on peut lancer de gros calculs, et eventuellement poser un lock SQL
 // Resultat : true=vas-y ; false=stop
 //
@@ -1041,37 +1075,6 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 
 
 //
-// Verifier la presence des .htaccess
-//
-function verifier_htaccess($rep) {
-	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
-	if (!@file_exists($htaccess)) {
-		spip_log("demande de creation de $htaccess");
-		if ($GLOBALS['hebergeur'] != 'nexenservices'){
-			if (!$f = fopen($htaccess, "w"))
-				echo "<b>" .
-				  _L("ECHEC DE LA CREATION DE $htaccess") .
-				  "</b>";
-			else
-			  {
-				fputs($f, "deny from all\n");
-				fclose($f);
-			  }
-		} else {
-			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
-			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
-			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
-			par l'interm&eacute;diaire de ";
-			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
-			target=\"_blank\">l'espace webmestres</a>.";
-			echo "Veuillez cr&eacute;er manuellement la protection pour
-			ce r&eacute;pertoire (un couple login/mot de passe est
-			n&eacute;cessaire).<br />";
-		}
-	}
-}
-
-//
 // Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
 //
 
@@ -1093,8 +1096,7 @@ function creer_repertoire($base, $subdir) {
 		if ($f)
 			fclose($f);
 		else {
-			@header("Location: spip_test_dirs.php3");
-			exit;
+			redirige_par_entete("spip_test_dirs.php3");
 		}
 	}
 	return ($ok? "$subdir/" : '');
@@ -1142,7 +1144,6 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 // Gestion des taches de fond ?  toutes les 5 secondes
 // (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
-	
 	verifier_htaccess(_DIR_SESSIONS);
 	if (!@file_exists(_FILE_CRON_LOCK)
 	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 5)) {
@@ -1158,6 +1159,8 @@ function taches_de_fond() {
 
 function redirige_par_entete($url)
 {
+#	$base=lire_meta("adresse_site");
+#	if ($base) $url = "$base/$url"; # + tard
 	header("Location: $url");
 	taches_de_fond();
 	exit;
@@ -1173,6 +1176,7 @@ function debut_entete($title)
 // '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
 // '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
 
+	$dir = ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr');
 	$base=lire_meta("adresse_site");
 	if (!$base)
 		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
@@ -1181,9 +1185,9 @@ function debut_entete($title)
 	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
-	  "<html dir=\"".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."\">\n" .
-	  "<head>\n" .
-#	  "<base href='$base' />\n" . #
+	  "<html dir='$dir'>\n" .
+	  "<head dir='$dir'>\n" .
+#	  "<base href='$base' />\n" . # + tard
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset'>\n";
 }
