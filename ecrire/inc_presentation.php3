@@ -1232,6 +1232,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $spip_lang_rtl, $spip_lang_left;
 	global $mode;
 	global $connect_statut, $connect_toutes_rubriques;
+	global $browser_name, $browser_version, $browser_rev;
 	
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
@@ -1245,8 +1246,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	@Header("Content-Type: text/html; charset=$charset");
 	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n";
 	echo '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
-	echo '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
-	echo '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
+
+	if (eregi("msie", $browser_name)) {
+		echo '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
+		echo '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
+	}
 	echo "<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 
@@ -1448,8 +1452,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	<?php
 		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 		// meme principe que le behavior win_width.htc pour MSIE
-	
-		global $browser_name, $browser_version, $browser_rev;
 		if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) {
 	?>
 		
