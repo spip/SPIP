@@ -366,7 +366,7 @@ Gr&agrave;cies per la seva participaci&oacute;
 'form_pet_nom_site2' => 'Nom del vostre lloc Web',
 'form_pet_probleme_technique' => 'Problema t&egrave;cnic, les signatures estan temporalment suspeses.',
 'form_pet_signature_pasprise' => 'La seva signatura no s\'ha tingut en compte.',
-'form_pet_signature_validee' => 'La seva signatura ha estat validada. Apareixer&agrave; a la propera actualitzaci&oacute; del lloc. Gr&agrave;cies!',
+'form_pet_signature_validee' => 'La seva signatura ha estat validada. Gr&agrave;cies!',
 'form_pet_site_deja_enregistre' => 'Aquest lloc est&agrave; ja enregistrat',
 'form_pet_url_invalide' => 'L\'URL que heu indicat no &eacute;s v&agrave;lida.',
 'form_pet_votre_email' => 'El vostre correu electr&ograve;nic',
