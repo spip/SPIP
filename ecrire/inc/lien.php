@@ -340,6 +340,9 @@ define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@is');
 
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
+	// preserver la compatibilite : true = recherche des documents
+	if ($doublons===true)
+		$doublons = array('documents'=>array('doc','emb','img'));
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
@@ -400,8 +403,11 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 			}
 
 			// hack pour tout l'espace prive
-			if (((!_DIR_RESTREINT) OR ($doublons)) AND ($id) AND (in_array($type,array('doc','emb','img'))))
-				$GLOBALS['doublons_documents_inclus'][] = $id;
+			if (((!_DIR_RESTREINT) OR ($doublons)) AND ($id)){
+				foreach($doublons?$doublons:array('documents'=>array('doc','emb','img')) as $quoi=>$modeles)
+					if (in_array($type,$modeles))
+						$GLOBALS["doublons_{$quoi}_inclus"][] = $id;
+			}
 		}
 	}
 
