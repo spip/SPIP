@@ -1855,15 +1855,15 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
 		}
 
+		$page = pipeline('recuperer_fond',array(
+			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
+			'data'=>$page
+		));
 		if (isset($options['ajax']) AND $options['ajax']){
 			include_spip('inc/filtres');
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte'], $options['ajax']);
 		}
 
-		$page = pipeline('recuperer_fond',array(
-			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
-			'data'=>$page
-		));
 		if (isset($options['raw']) AND $options['raw'])
 			$pages[] = $page;
 		else
