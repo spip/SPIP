@@ -33,7 +33,7 @@ function acces_restreint_rubrique($id_rubrique) {
 
 
 function inc_auth_dist() {
-	global $_POST, $_GET, $_COOKIE, $_SERVER;
+	global $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
 	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
@@ -42,7 +42,6 @@ function inc_auth_dist() {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
 	global $auteur_session, $prefs;
-	global $clean_link;
 
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -98,11 +97,10 @@ function inc_auth_dist() {
 	// demander login / mdp et nettoyer en cas de login en echec
 	if (!$auth_login) {
 		if ($_GET['bonjour'] == 'oui') {
-			$clean_link->delVar('bonjour');
 			$erreurcookie = '&var_echec_cookie=true';
 		}
 
-		redirige_par_entete(generer_url_public('login',
+		return (generer_url_public('login',
 			"url=".urlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 			. str_replace('&amp;', '&', self()))),true).$erreurcookie);
@@ -183,6 +181,7 @@ function inc_auth_dist() {
 	  // l'auteur a ete identifie mais on n'a pas d'info sur lui
 	  // C'est soit parce que le serveur MySQL ne repond pas,
 	  // soit parce que la table des auteurs a changee (restauration etc)
+	  // Pas la peine d'insister.  Envoyer un message clair au client.
 
 		include_spip('inc/minipres');
 		if (!$GLOBALS['db_ok']) {
@@ -197,11 +196,11 @@ function inc_auth_dist() {
 	}
 
 	if (!$auth_pass_ok)
-		redirige_par_entete(
-			generer_url_public('login', 'var_erreur=pass', true));
+		return	generer_url_public('login', 'var_erreur=pass', true);
 
-	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
-	// (code presque mort, utilise peut-etre encore sous .htpasswd ?)
+	// un nouvel inscrit prend son statut definitif
+	// (en supposant que le mode d'inscription est toujours le meme!)
+
 	if ($connect_statut == 'nouveau') {
 		$connect_statut =
 		($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum';
@@ -209,6 +208,6 @@ function inc_auth_dist() {
 			WHERE id_auteur=$connect_id_auteur");
 	}
 
-	return true;
+	return "";
 }
 ?>

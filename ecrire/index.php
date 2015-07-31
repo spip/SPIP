@@ -70,13 +70,18 @@ include_spip('inc/cookie');
 $exec = _request('exec');
 if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
+//
+// Authentification, redefinissable
+//
+
 $var_auth ="";
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 } else {
 	include_spip('inc/session');
 	$var_auth = include_fonction('auth', 'inc');
-	if (!$var_auth()) exit;
+	$var_auth = $var_auth();
+	if ($var_auth) redirige_par_entete($var_auth);
 }
 
 //
