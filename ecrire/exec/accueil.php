@@ -107,7 +107,7 @@ if ($spip_display == 4) {
 	
 
 		if ($activer_breves != "non") {
-			$res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif");
+			$res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif", false);
 		}
 	}
 	else {
@@ -116,7 +116,7 @@ if ($spip_display == 4) {
 		}
 	}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif", true);
+		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif", false);
 	}
 	echo bloc_des_raccourcis($res);
  } else {
@@ -446,7 +446,7 @@ function exec_accueil_dist()
 			 $GLOBALS['meta']["activer_breves"],
 			 $GLOBALS['meta']["activer_sites"],
 			 $GLOBALS['meta']['articles_mots']);
-
+	
 	echo encours_accueil();
 
 	echo afficher_enfant_rub(0, false, true);

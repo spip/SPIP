@@ -65,8 +65,6 @@ function exec_forum_dist()
 	exit;
   }
 
-  echo "<div class='serif2'>";
-
   $result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 LIMIT 11");
 
   $total =  ($row = spip_fetch_array($result_forum)) ? $row['cnt'] : 0;
@@ -78,13 +76,10 @@ function exec_forum_dist()
   icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
   echo "\n</div>";
 
-  echo "\n<p align='left'>";
   $limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
   $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit");
  
   echo afficher_forum($result_forum,$script,'');
- 
-  echo "</p></div>";
 
   echo fin_gauche(), fin_page();
 }
