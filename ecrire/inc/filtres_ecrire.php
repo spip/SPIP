@@ -497,7 +497,8 @@ function afficher_plus_info($lien, $titre="+", $titre_lien="") {
 function lister_objets_lies($objet_source,$objet,$id_objet,$objet_lien){
 	include_spip('action/editer_liens');
 	$l = array();
-	if ($objet_lien==$objet){
+	// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
+	if ($objet_lien==$objet AND $objet_lien!==$objet_source){
 		$res = objet_trouver_liens(array($objet=>$id_objet),array($objet_source=>'*'));
 	}
 	else{
