@@ -102,6 +102,12 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 		list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode, $id);
 		if (!$envoyer_mail($mail_complet, $sujet, $msg, $from, $head))
 			$desc = _T('form_forum_probleme_mail');
+		// Notifications
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('inscription', $desc['id_auteur'],
+				array('nom' => $desc['nom'], 'email' => $desc['email'])
+			);
+		}
 	}
 
 	return array('message_ok'=>is_string($desc) ? $desc : _T('form_forum_identifiant_mail'));
