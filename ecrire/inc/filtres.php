@@ -469,9 +469,9 @@ function proteger_amp($texte){
  * @param string $texte
  *   chaine a echapper
  * @param bool $tout
- *   corriger toutes les &amp;xx; en &xx;
+ *   corriger toutes les `&amp;xx;` en `&xx;`
  * @param bool $quote
- *   echapper aussi les simples quotes en &#039;
+ *   Échapper aussi les simples quotes en `&#039;`
  * @return mixed|string
  */
 function entites_html($texte, $tout=false, $quote=true) {
@@ -580,8 +580,19 @@ function texte_backend($texte) {
 	return str_replace($apostrophe, "'", $texte);
 }
 
-// Comme ci-dessus, mais avec addslashes final pour squelettes avec PHP (rss)
-
+/**
+ * Encode et quote du HTML pour transmission XML notamment dans les flux RSS
+ *
+ * Comme texte_backend(), mais avec addslashes final pour squelettes avec PHP (rss)
+ * 
+ * @uses texte_backend
+ * @filtre texte_backendq
+ * 
+ * @param string $texte
+ *     Texte à transformer
+ * @return string
+ *     Texte encodé et quote pour XML
+ */
 function texte_backendq($texte) {
 	return addslashes(texte_backend($texte));
 }
@@ -1576,11 +1587,24 @@ function date_fin_semaine($annee, $mois, $jour) {
 }
 
 
-//
-// Recuperation de donnees dans le champ extra
-// Ce filtre n'a de sens qu'avec la balise #EXTRA
-//
-// http://doc.spip.org/@extra
+
+/**
+ * Récupération de données d'un (très vieux) champ extra 
+ *
+ * Ce filtre n'a de sens qu'avec la balise `#EXTRA`
+ * lorsque les tables (SPIP 1.8) possédaient une colonne 'extra'
+ * où étaient stockés des valeurs supplémentaires sérialisées.
+ *
+ * On pouvait les obtenir avec `[(#EXTRA|extra{cle})]`
+ *
+ * @deprecated Utiliser le plugin Champs Extras
+ * @param string $letexte
+ *     Texte de la colonne `extra` avec les données sérialisées
+ * @param string $champ
+ *     Nom du champ supplémentaire désiré
+ * @return string
+ *     Valeur du champ
+**/
 function extra($letexte, $champ) {
 	$champs = unserialize($letexte);
 	return $champs[$champ];
