@@ -120,10 +120,10 @@ function exec_export_all_dist()
 		foreach($liste as $dummy)
 			@unlink($dummy);
 
-		echo _T("info_sauvegarde")."<br/>";
+		echo "<p>"._T("info_sauvegarde")."</p>\n";
 		$f = ($gz) ? gzopen($file, "wb") : fopen($file, "wb");
 		if (!$f) {
-			echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+			echo "<p>"._T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'))."</p>\n";
 			exit;
 		}
 
@@ -132,10 +132,10 @@ function exec_export_all_dist()
 		else fclose($f);
 	}
 	else{ // reprise
-		echo _T("info_sauvegarde"). " (" . $status_dump[2] . ", " . $status_dump[3] . ")<br/>";
+		echo "<p>"._T("info_sauvegarde"). " (" . $status_dump[2] . ", " . $status_dump[3] . ")</p>\n";
 		$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
 		if (!$f) {
-			echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+			echo "<p>"._T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'))."</p>\n";
 			exit;
 		}
 		if ($gz) gzclose($f);
@@ -204,10 +204,12 @@ function exec_export_all_dist()
 	$etape = $status_dump[2];
 
 	if ($etape >= count($tables_for_dump)){
+		echo "<ul>\n";
 		foreach($tables_for_dump as $i=>$table){
 			// appel simplement pour l'affichage. Rien n'est fait puisqu'on a fini 
 			export_objets($table, primary_index_table($table), $tables_for_link[$table], 0, false, $i, _T("info_sauvegarde").", $table");
 		}
+		echo "</ul>\n";
 
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
 		flush();
@@ -220,7 +222,7 @@ function exec_export_all_dist()
 		
 		effacer_meta("status_dump");
 		ecrire_metas();
-		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'.joli_repertoire($file).'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
+		echo "<p><b>"._T('info_sauvegarde_reussi_01')."</b></p><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'.joli_repertoire($file).'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."</p>\n";
 	}
 	else{
 		if (!($timeout = ini_get('max_execution_time')*1000));
@@ -230,6 +232,7 @@ function exec_export_all_dist()
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
 		$cpt = 0;
 		$paquets = 400; // nombre d'enregistrements dans chaque paquet
+		echo "<ul>\n";
 		foreach($tables_for_dump as $i=>$table){
 			// par paquets
 			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
@@ -249,6 +252,7 @@ function exec_export_all_dist()
 			ecrire_meta("status_dump", implode("::",$status_dump));
 			#lire_metas();
 		}
+		echo "</ul>\n";
 		// pour recharger la page tout de suite en finir le ramassage
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".str_replace("&amp;","&",generer_url_ecrire("export_all","archive=$archive&gz=$gz"))."\";',0);</script>\n");
 	}
@@ -267,7 +271,7 @@ function ramasse_parties($archive, $gz, $partfile){
 		if (lire_fichier ($f, $contenu))
 			if (!ecrire_fichier($archive,$contenu,false,false))
 			{
-				echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+				echo "<p>"._T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'))."</p>\n";
 				exit;
 			}
 		unlink($f);
@@ -298,7 +302,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 			echo "<li><strong>$etape_actuelle-$nom_etape</strong>";
 			echo " : $total";
 			$etape_affichee[$etape_actuelle] = 1;
-			if ($limit<$total) echo "<br/>";
+			if ($limit<$total) echo "</li>";
 		}
 		if ($pos_in_table!=0)
 			echo "| ", $pos_in_table;
