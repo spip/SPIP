@@ -195,7 +195,7 @@ $r = $var_f();
 // mais pas avec header(Content-Type ... charset): ca bloque MSIE
 
 if (isset($var_ajaxcharset)) {
-
-	  echo "<","?xml version='1.0' encoding='",$GLOBALS['meta']["charset"],"'?",">\n", $r;
+	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
+	echo "<","?xml version='1.0' encoding='",$GLOBALS['meta']["charset"],"'?",">\n", $r;
  }
 ?>
