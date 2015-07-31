@@ -14,13 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
-
 // Fonction a appeler lorsque le statut d'un objet change dans une rubrique
 
-// Si l'objet etait publie' et est deplace' ou depublie'
-// on recalcule toutes les rubriques (a ameliorer).
-// Si publication standard, ne recalculer que la branche
-// avec consequence sur ses parentes et les langues
+// Si l'objet passe a "publie"
+// consequence sur ses parentes et les langues
+// Idem s'il est depublie'
+// s'il est deplace' alors qu'il etait publieé, double consequence.
 // (a refaire a terme par une Cascade SQL)
 
 // http://doc.spip.org/@calculer_rubriques_if
@@ -35,6 +34,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 			$neuf |= publier_branche_rubrique($modifs['id_rubrique']);
 	} elseif ($modifs['statut']=='publie')
 		$neuf |= publier_branche_rubrique($id_rubrique);
+
 	if ($neuf)
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
 	  ecrire_meta("date_calcul_rubriques", date("U"));
@@ -58,18 +58,19 @@ function publier_branche_rubrique($id_rubrique)
 		spip_query("UPDATE spip_rubriques SET statut='publie', date=NOW() WHERE id_rubrique=$id_pred");
 		if (!($id_pred = $r['id_parent'])) break;
 	}
-
+#	spip_log(" publier_branche_rubrique($id_rubrique $id_pred");
 	return $id_pred != $id_rubrique;
 }
 
 // Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
+// retourne Vrai si le statut change effectivement
 
-// http://doc.spip.org/@publier_branche_rubrique
 function depublier_branche_rubrique_if($id_rubrique)
 {
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		" AND date <= NOW()" : '';
 
+#	spip_log("depublier_branche_rubrique($id_rubrique ?");
 	$id_pred = $id_rubrique;
 	while ($id_pred) {
 
@@ -89,11 +90,13 @@ function depublier_branche_rubrique_if($id_rubrique)
 			return $id_pred != $id_rubrique;;
 
 		spip_query("UPDATE spip_rubriques SET statut='0' WHERE id_rubrique=$id_pred");
+#		spip_log("depublier_rubrique $id_pred");
 
 		$r = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_pred"));
 
 		$id_pred = $r['id_parent'];
 	}
+
 	return $id_pred != $id_rubrique;;
 }
 
@@ -366,14 +369,31 @@ function calcul_branche ($generation) {
 	}
 }
 
+// Appelee lorsqu'un (ou plusieurs) article post-date arrive a terme 
+// ou est redate'
+// Si $check, affecte le statut des rubriques concernees.
+
 // http://doc.spip.org/@calculer_prochain_postdate
-function calculer_prochain_postdate() {
+function calculer_prochain_postdate($check= false) {
+
+	if ($check) {
+		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
+			"AND A.date <= NOW()" : '';
+
+		$r = spip_query("SELECT DISTINCT A.id_rubrique AS id FROM spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique WHERE R.statut != 'publie' AND A.statut='publie'$postdates");
+		while ($row = spip_abstract_fetch($r))
+			publier_branche_rubrique($row['id']);
+	}
 	include_spip('inc/meta');
-	$s = spip_query("SELECT UNIX_TIMESTAMP(date) AS ts FROM spip_articles WHERE statut='publie' AND date>"._q(date('Y-m-d H:i:s'))." ORDER BY date LIMIT 1");
-	if ($t = spip_abstract_fetch($s))
-		ecrire_meta('date_prochain_postdate', $t['ts']);
-	else
+	$t = spip_abstract_fetch(spip_query("SELECT date FROM spip_articles WHERE statut='publie' AND date > NOW() ORDER BY date LIMIT 1"));
+	
+	if ($t) {
+		$t =  $t['date'];
+		ecrire_meta('date_prochain_postdate', strtotime($t));
+	} else
 		effacer_meta('date_prochain_postdate');
+
+	spip_log("prochain postdate: $t");
 	ecrire_metas(); // attention, sert aussi aux appelants
 }
 
