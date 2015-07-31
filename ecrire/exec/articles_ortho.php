@@ -19,7 +19,7 @@ include_spip('inc/ortho');
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
 {
-  global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
+  global $champs_extra, $chapo, $descriptif, $lang_dir, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
 
 
 //charset_texte('utf-8');
@@ -183,16 +183,16 @@ if ($les_notes) {
 debut_cadre_relief();
 
 if ($surtitre) {
-	echo "<span $dir_lang><span class='arial1 spip_medium'><b>", $surtitre, "</b></span></span>\n";
+	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", $surtitre, "</b></span></span>\n";
 }
 gros_titre($titre);
 
 if ($soustitre) {
-	echo "<span $dir_lang><span class='arial1 spip_medium'><b>", $soustitre, "</b></span></span>\n";
+	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", $soustitre, "</b></span></span>\n";
 }
 
 if ($descriptif OR $url_site OR $nom_site) {
-	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
+	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
 	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 	echo "<span class='verdana1 spip_small'>", $t, "</span>";
@@ -211,23 +211,23 @@ if ($virtuel) {
 	fin_boite_info();
 }
 else {
-	echo "<div $dir_lang><b>";
+	echo "<div  dir='$lang_dir'><b>";
 	echo $chapo;
 	echo "</b></div>\n\n";
 
-	echo "<div $dir_lang>";
+	echo "<div  dir='$lang_dir'>";
 	echo $texte;
 	echo "</div>";
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang class='verdana1 spip_small'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
+		echo "<div  dir='$lang_dir' class='verdana1 spip_small'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
 		echo fin_cadre_enfonce();
 	}
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<div $dir_lang><span class='spip_small'>", "<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes, "</span></div>";
+		echo "<div  dir='$lang_dir'><span class='spip_small'>", "<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes, "</span></div>";
 		echo fin_cadre_relief();
 	}
 
@@ -261,10 +261,10 @@ function debut_html($titre = "", $rubrique="") {
 	$titre = textebrut(typo($titre));
 
 	http_no_cache();
-	echo _DOCTYPE_ECRIRE .
+	echo _DOCTYPE_ECRIRE,
 	  html_lang_attributes(),
-	  "<head>\n" .
-	  "<title>[$nom_site_spip] $titre</title>\n";
+	  "<head>\n",
+	  "<title>[",$nom_site_spip,"]", $titre, "</title>\n";
 	echo f_jQuery("");
 	echo  $rubrique, "\n";
 	echo envoi_link($nom_site_spip),

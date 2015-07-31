@@ -1142,7 +1142,6 @@ function traiter_raccourcis($letexte) {
 	global $ferme_ref;
 	global $ouvre_note;
 	global $ferme_note;
-	global $lang_dir;
 	static $notes_vues;
 	static $tester_variables=0;
 

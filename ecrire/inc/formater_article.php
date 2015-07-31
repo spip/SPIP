@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_formater_article_dist
 function inc_formater_article_dist($row)
 {
-	global $dir_lang, $options, $spip_lang_right, $spip_display;
+	global $lang_dir, $options, $spip_lang_right, $spip_display;
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue;
 
@@ -64,14 +64,14 @@ function inc_formater_article_dist($row)
 	. "'"
 	. (!$descriptif ? '' : 
 	     (' title="'.attribut_html(typo($descriptif)).'"'))
-	. $dir_lang
+	. " dir='$lang_dir'"
 	. " style=\"display:block;\">"
 	. (!$logo ? '' :
 	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
-	   (" <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>"))
+	   (" <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>"))
 	. (!$row['petition'] ? '' : (" <span class='spip_xx-small' style='color: red'>"._T('lien_petitions')."</span>"))
 	. "</a>"
 	. "</div>";
