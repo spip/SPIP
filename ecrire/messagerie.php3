@@ -13,7 +13,7 @@ if ($detruire_message) {
 }
 
 
-debut_page("Votre messagerie", "messagerie", "messagerie");
+debut_page("Votre messagerie", "asuivre", "messagerie");
 debut_gauche("messagerie");
 
 
