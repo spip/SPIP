@@ -279,6 +279,10 @@ class IterDecorator extends FilterIterator {
 		if ($op == 'REGEXP') {
 			$filtre = 'match('.$a.', '.str_replace('\"', '"', $valeur).')';
 			$op = '';
+		} else if ($op == 'LIKE') {
+			$valeur = str_replace(array('\"', '_', '%'), array('"', '.', '.*'), preg_quote($valeur));
+			$filtre = 'match('.$a.', '.$valeur.')';
+			$op = '';
 		} else if ($op == '=')
 			$op = '==';
 		else if (!in_array($op, array('<','<=', '>', '>='))) {
