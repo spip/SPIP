@@ -537,15 +537,11 @@ function typo($letexte, $echapper=true) {
 	$letexte = strtr($letexte, $illegal, $protege);
 
 	//
-	// Installer les images et documents ;
+	// Installer les modeles, notamment images et documents ;
 	//
 	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
 	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	$letexte = pipeline('modeles', $letexte); # temporaire avant integration des modeles
-	if (preg_match(__preg_img, $letexte)) {
-		include_spip('inc/documents');
-		$letexte = inserer_documents($letexte);
-	}
+	$letexte = traiter_modeles($letexte);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_typo', $letexte);
@@ -927,17 +923,57 @@ function traiter_listes ($texte) {
 	return substr($texte, 0, -2);
 }
 
-// Definition de la regexp des images/documents
-define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS');
 
 // fonction en cas de texte extrait d'un serveur distant:
 // on ne sait pas (encore) rapatrier les documents joints
-
+// TODO: gerer les modeles ?
 // http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	preg_replace(__preg_img, "($message)", $letexte);
+	preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS',
+		"($message)", $letexte);
 	return $letexte;
+}
+
+// traite les modeles (dans la fonction typo), en remplacant
+// le raccourci <modeleN|parametres> par la page calculee a
+// partir du squelette modeles/modele.html
+// http://doc.spip.org/@traiter_modeles
+function traiter_modeles($texte) {
+	if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([^>]+))?'.'>,iS',
+	$texte, $matches, PREG_SET_ORDER)) {
+		include_spip('public/assembler');
+		foreach ($matches as $regs) {
+			$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
+			if ($modele !== false) {
+				$rempl = code_echappement($modele);
+				$cherche = $regs[0];
+
+				// XHTML : remplacer par une <div onclick> le lien
+				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+				// pas de bonne solution en XHTML pour produire un lien
+				// sur une div (!!)...
+				if (substr($rempl, 0, 5) == '<div '
+				AND preg_match(
+				',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
+				$texte, $r)) {
+					$lien = extraire_attribut($r[1], 'href');
+					$cherche = $r[0];
+					$rempl = '<div style="cursor:pointer;cursor:hand;" '
+					.'onclick="document.location=\''.$lien
+					.'\'"'
+##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
+					.'>'
+					.$rempl
+					.'</div>';
+				}
+
+				$texte = str_replace($cherche, $rempl, $texte);
+			}
+		}
+	}
+
+	return $texte;
 }
 
 

@@ -51,27 +51,6 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 }
 
 
-// Quels documents a-t-on deja vu ? (gestion des doublons dans l'espace prive)
-// http://doc.spip.org/@document_vu
-function document_vu($id_document=0) {
-	static $vu = array();
-
-	if (!_DIR_RESTREINT) {
-		if (!$id_document) return join(',', array_keys($vu));
-		if (!isset($vu[$id_document])) $vu[$id_document] = true;
-	}
-}
-
-# Affecter les document_vu() utilises dans afficher_case_document 
-# utile pour un affichage differencie des image "libres" et des images
-# integrees via <imgXX|left> dans le texte
-
-// http://doc.spip.org/@document_a_voir
-function document_a_voir($texte) {
-	preg_match_all(__preg_img, $texte, $matches, PREG_SET_ORDER);
-	foreach ($matches as $match) document_vu($match[2]);
-}
-
 //
 // Affiche le document avec sa vignette par defaut
 //
@@ -128,362 +107,6 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	else
 		return "<a href='$url'\n\ttype='$mime'>$image</a>";
 }
-
-//
-// Integration (embed) multimedia
-//
-
-// http://doc.spip.org/@embed_document
-function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
-	document_vu($id_document);
-	charger_generer_url();
-
-	if ($les_parametres) {
-		$parametres = explode("|",$les_parametres);
-
-		for ($i = 0; $i < count($parametres); $i++) {
-			$parametre = $parametres[$i];
-			
-			if (eregi("^(left|right|center)$", $parametre)) {
-				$align = strtolower($parametre);
-			}
-			else {
-				$params[] = $parametre;
-			}
-		}
-	}
-
-	$id_document = intval($id_document);
-
-	if (!$row = spip_abstract_fetsel('*', 'spip_documents',
-					 "id_document=$id_document"))
-		return '';
-
-	$id_type = $row['id_type'];
-	$titre = propre($row ['titre']);
-	$descriptif = propre($row['descriptif']);
-	$fichier = generer_url_document($id_document);
-	$largeur = $row['largeur'];
-	$hauteur = $row['hauteur'];
-	$taille = $row['taille'];
-	$mode = $row['mode'];
-	$largeur_vignette = $largeur;
-
-	if ($row_type = @spip_abstract_fetsel('*', 'spip_types_documents',
-					      "id_type=" . intval($id_type)))
-	  {
-		$type = $row_type['titre'];
-		$inclus = $row_type['inclus'];
-		$extension = $row_type['extension'];
-	}
-	else $type = 'fichier';
-
-	if ($inclus == "embed") 
-		$vignette = parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $extension, $les_parametres, $params);
-	else if ($inclus == "image") {
-		$fichier_vignette = $fichier;
-		$largeur_vignette = $largeur;
-		$hauteur_vignette = $hauteur;
-		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette'";
-			if ($largeur_vignette && $hauteur_vignette)
-				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			if ($titre) {
-				$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
-				$titre_ko = supprimer_tags(propre($titre_ko));
-				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
-			}else{  $vignette .= " alt=\"\" title=\"\""; }
-			$vignette .= " />";
-		}
-	}
-		
-	if (!$afficher_titre) return $vignette;
-
-	if ($largeur_vignette < 120) $largeur_vignette = 120;
-	$forcer_largeur = " width: ".$largeur_vignette."px;";
-
-	if ($align) {
-		$class_align = " spip_documents_".$align;
-		if ($align <> 'center')
-			$float = " style='float: $align;$forcer_largeur'";
-	}
-
-	$retour .= "<div class='spip_document_$id_document spip_documents$class_align'$float>\n";
-	$retour .= $vignette;
-	
-	if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
-	
-	if ($descriptif) {
-	  $retour .= "<div class='spip_doc_descriptif'>$descriptif</div>"; 
-	}
-
-	$retour .= "</div>\n";
-	
-	return $retour;
-}
-
-// http://doc.spip.org/@parametrer_embed_document
-function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $extension, $les_parametres, $params)
-{
-	if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)))
-	// Pour RealVideo (??? -- c'est toujours irreel la video. [esj])
-	 {
-		$param = "|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres";
-
-		return "\n<div>" .
-		  embed_document($id_document, "controls=ImageWindow$param", false) . 
-		  "</div>" .
-		  embed_document($id_document, "controls=PlayButton$param", false) .
-		  embed_document($id_document, "controls=PositionSlider$param", false);
-	 } else {
-		$inserer_vignette = '';
-
-		for ($i = 0; $i < count($params); $i++) {
-			if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
-				$nom = $vals[1];
-				$valeur = $vals[2];
-				$inserer_vignette .= "<param name='$nom' value='$valeur' />";
-				$param_emb .= " $nom='$valeur'";
-				if ($nom == "controls" AND $valeur == "PlayButton") { 
-					$largeur = 40;
-					$hauteur = 25;
-				} else if ($nom == "controls" AND $valeur == "PositionSlider") { 
-					$largeur = $largeur - 40;
-					$hauteur = 25;
-				}
-			}
-		}
-
-		$params = "<param name='movie' value='$fichier' />\n"
-		  . "<param name='src' value='$fichier' />\n"
-		  . $inserer_vignette;
-
-		// Pour Flash
-		if ((!ereg("^controls", $les_parametres)) AND ($extension=='swf'))
-
-			return "<object "
-			  . "type='application/x-shockwave-flash' data='$fichier' "
-			  . "width='$largeur' height='$hauteur'>\n"
-			  . $params
-			  . "</object>\n";
-		else {
-			$emb = "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'>$alt</embed>\n";
-
-			// Cas particulier du SVG : pas d'object
-			if ($extension == 'svg')
-				return $emb;
-
-			/* 
-			// essai pour compatibilite descendante (helas ca ne marche pas)
-			// cf. http://www.yoyodesign.org/doc/w3c/svg1/backward.html
-			if ($extension == 'svg') return 
-			"<object type='image/svg+xml' data='$fichier'
-			$param_emb width='$largeur' height='$hauteur'>$alt</object>\n";
-			*/
-
-			return "<object width='$largeur' height='$hauteur'>\n"
-			  . $params
-			  . $emb
-			  . "</object>\n";
-		}
-	}
-}
-
-//
-// Integration des images et documents
-//
-
-// http://doc.spip.org/@integre_image
-function integre_image($id_document, $align, $type_aff) {
-	document_vu($id_document);
-	charger_generer_url();
-	$id_document = intval($id_document);
-
-	$row = spip_abstract_fetsel('*', 'spip_documents', "id_document=$id_document");
-	if (!$row) return '';
-
-	$id_type = $row['id_type'];
-	$titre = !strlen($row['titre']) ? '' : typo($row['titre']);
-	$descriptif = !strlen($row['descriptif']) ?'' : propre($row['descriptif']);
-	$fichier = $row['fichier'];
-	$url_fichier = generer_url_document($id_document);
-	$largeur = $row['largeur'];
-	$hauteur = $row['hauteur'];
-	$taille = $row['taille'];
-	$mode = $row['mode'];
-	$id_vignette = $row['id_vignette'];
-
-	// on construira le lien en fonction du type de doc
-	if ($t = @spip_abstract_fetsel("titre,extension", 'spip_types_documents', "id_type = $id_type")) {
-			$extension = $t['extension']; # jpg, tex
-			$type = $t['titre']; # JPEG, LaTeX
-	}
-
-	// Attention ne pas confondre :
-	// pour un document affiche avec le raccourci <IMG> on a
-	// $mode == 'document' et $type_aff == 'IMG'
-	// inversement, pour une image presentee en mode 'DOC',
-	// $mode == 'vignette' et $type_aff == 'DOC'
-
-	// Type : vignette ou document ?
-	if ($mode == 'document') {
-		$vignette = document_et_vignette($row, $url_fichier);
-	} else {
-		$vignette = image_pattern($row);
-	}
-
-	//
-	// Regler le alt et title
-	//
-	$alt_titre_doc = entites_html(texte_backend(supprimer_tags($titre)));
-	$alt_infos_doc = entites_html($type
-		. (($taille>0) ? ' - '.texte_backend(taille_en_octets($taille)) : ''));
-	if ($row['distant'] == 'oui')
-		$alt_infos_doc .= ", ".$url_fichier;
-	if ($alt_titre_doc) $alt_sep = ', ';
-
-	$alt = "";
-	$title = "";
-	// documents presentes en mode <DOC> : alt et title "JPEG, 54 ko"
-	// mais pas de titre puisqu'il est en dessous
-	if ($mode == 'document' AND $type_aff == 'DOC') {
-		$alt = $alt_infos_doc;
-		$title = $alt_infos_doc;
-	}
-	// document en mode <IMG> : alt + title detailles
-	else if ($mode == 'document' AND $type_aff == 'IMG') {
-		$alt = "$alt_titre_doc$alt_sep$alt_infos_doc";
-		$title = "$alt_titre_doc$alt_sep$alt_infos_doc";
-	}
-	// vignette en mode <DOC> : alt disant "JPEG", pas de title
-	else if ($mode == 'vignette' AND $type_aff == 'DOC') {
-		$alt = "($type)";
-	}
-	// vignette en mode <IMG> : alt + title s'il y a un titre
-	else if ($mode == 'vignette' AND $type_aff == 'IMG') {
-		if (strlen($titre)){
-			$alt = "$alt_titre_doc ($type)";
-			$title = "$alt_titre_doc";
-		}
-		else
-			$alt = "($type)";
-	}
-
-	$vignette = inserer_attribut($vignette, 'alt', $alt);
-	if (strlen($title))
-		$vignette = inserer_attribut($vignette, 'title', $title);
-
-	// Preparer le texte sous l'image pour les <DOC>
-	if ($type_aff == 'DOC') {
-		if (strlen($titre))
-			$txt = "<div class='spip_doc_titre'><strong>"
-				. $titre
-				. "</strong></div>\n";
-		if (strlen($descriptif))
-			$txt .= "<div class='spip_doc_descriptif'>$descriptif</div>\n";
-	}
-
-	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>
-	if (preg_match(',^(left|center|right)$,i', $align))
-		$align = strtolower($align);
-	else
-		$align = '';
-	if ($align == 'center' OR $type_aff =='DOC') {
-		$span = "div";
-	} else {
-		$span = "span";
-	}
-
-	if ($align) {
-		$class_align = " spip_documents_".$align;
-		if ($align <> 'center')
-			$float = "float: $align; ";
-	}
-
-	# extraire la largeur de la vignette
-	$width = extraire_attribut($vignette, 'width');
-
-	# mode <span ...> : ne pas mettre d'attributs de type block sinon MSIE Windows refuse de faire des liens dessus
-	if ($span == 'span') {
-		$width = 'width: '.$width.'px;';
-		$vignette = "<span class='spip_document_$id_document spip_documents$class_align' style='${float}${width}'>$vignette</span>";
-		return $vignette;
-	}
-	# mode <div ...>
-	else {
-		if ($align != 'center') {
-			// Largeur de la div = celle de l'image ; mais s'il y a une legende
-			// mettre au moins 120px
-			if (strlen($txt) AND $width < 120) $width = 120;
-			$width = 'width: '.$width.'px;';
-			if (strlen($style = "$float$width"))
-				$style = " style='$style'";
-		}
-		return
-			"<div class='spip_document_$id_document spip_documents$class_align'$style>"
-			. $vignette
-			. $txt
-			. '</div>';
-	}
-}
-
-
-//
-// Traitement des images et documents <IMGxx|right> pour inc_texte
-//
-// http://doc.spip.org/@inserer_documents
-function inserer_documents($letexte) {
-	# HACK: empecher les boucles infernales lorsqu'un document est mentionne
-	# dans son propre descriptif (on peut citer un document dans un autre,
-	# mais il faut pas trop pousser...)
-	static $pile = 0;
-	if (++$pile > 5) return '';
-
-	preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER);
-	foreach ($matches as $match) {
-		$type = strtoupper($match[1]);
-		if ($type == 'EMB')
-			$rempl = embed_document($match[2], $match[4]);
-		else
-			$rempl = integre_image($match[2], $match[4], $type);
-
-		// Temporaire : un pis-aller pour eviter que des paragraphes dans
-		// le descriptif d'un document ne soient doublonnes en <br /> :
-		// le probleme est que propre() est passe deux fois...
-		$rempl = preg_replace(",\n+,", " ", $rempl);
-
-		// XHTML : remplacer par une <div onclick> le lien
-		// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-		// pas de bonne solution en XHTML pour produire un lien
-		// sur une div (!!)...
-		if (substr($rempl, 0, 5) == '<div '
-		AND preg_match(',(<a [^>]+>)'.preg_quote($match[0]).'</a>,Uims',
-		$letexte, $r)) {
-			$lien = extraire_attribut($r[1], 'href');
-			$re = '<div style="cursor:pointer;cursor:hand;" '
-				.'onclick="document.location=\''.$lien
-				.'\'"'
-##				.' href="'.$lien.'"' # href deviendra legal en XHTML2
-				.'>'
-				.$rempl
-				.'</div>';
-			$letexte = str_replace($r[0], $re, $letexte);
-		}
-
-		// cas normal
-		// Installer le document ; les <div> sont suivies de deux \n de maniere
-		// a provoquer un paragraphe a la suite ; les span, non, sinon les liens
-		// [<img|left>->URL] ne fonctionnent pas.
-		else {
-			$saut = preg_match(',<div ,', $rempl) ? "\n\n" : "";
-			$letexte = str_replace($match[0], $rempl . $saut, $letexte);
-		}
-	}
-
-	$pile--;
-	return $letexte;
-}
-
 
 //
 // Retourner le code HTML d'utilisation de fichiers envoyes
@@ -750,8 +373,8 @@ function afficher_portfolio(
 			  $case = 0;
 			  echo "</tr>\n";
 		}
-			
-		document_vu($id_document);
+
+		$GLOBALS['doublons']['documents'].=",$id_document";
 	}
 	// fermer la derniere ligne
 	if ($case) {
@@ -877,7 +500,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	// Afficher portfolio
 	/////////
 
-	$doublons = document_vu();
+	// recupere les doublons du texte de l'article
+	$doublons = $GLOBALS['doublons']['documents'];
 
 	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" . (!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.date");
 
@@ -900,7 +524,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "\n</table>\n";
 	}
 
-	$doublons = document_vu();
+	// recupere les doublons du texte de l'article + ceux du portfolio
+	$doublons = $GLOBALS['doublons']['documents'];
 
 	//// Documents associes
 	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document'" . (!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.date");
@@ -1034,8 +659,6 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 	charger_generer_url();
 	$flag_deplie = teste_doc_deplie($id_document);
 
-	$doublons = ','.document_vu().',';
-
 	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
@@ -1094,9 +717,11 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 		      ( _T('info_document').' '.majuscules($type_extension)));
 		echo "</div>";
 
+		// le doc est-il appele dans le texte ?
+		$doublon = ereg(",$id_document,", ','.$GLOBALS['doublons']['documents'].',');
 
 		// Affichage du raccourci <doc...> correspondant
-		if (!ereg(",$id_document,", $doublons)) {
+		if (!$doublon) {
 			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<b>"._T('info_inclusion_vignette')."</b><br />";
@@ -1147,7 +772,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 			$doc = 'doc';
 		else
 			$doc = 'img';
-		if (!ereg(",$id_document,", $doublons)) {
+		if (!$doublon) {
 			$raccourci_doc .=
 				affiche_raccourci_doc($doc, $id_document, 'left')
 				. affiche_raccourci_doc($doc, $id_document, 'center')
@@ -1164,11 +789,11 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 			echo "<div style='text-align: center; padding: 2px;'>\n";
 			echo document_et_vignette($document, $url, true);
 			echo "</div>\n";
-			if (!ereg(",$id_document,", $doublons))
+			if (!$doublon)
 				echo $raccourci_doc;
 		}
 
-		if (ereg(",$id_document,", $doublons))
+		if ($doublon)
 			echo $raccourci_doc;
 
 		echo formulaire_documenter($id_document, $document, $script, $type, $id, "document$id_document");

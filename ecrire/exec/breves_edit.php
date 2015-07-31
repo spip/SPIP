@@ -71,8 +71,10 @@ afficher_hierarchie($id_rubrique);
 fin_grand_cadre();
 debut_gauche();
 if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
-
-	if (isset($texte)) document_a_voir($texte);
+	$GLOBALS['doublons']['documents'] = '0';
+	$GLOBALS['doublons']['documents'] = '0';
+	traiter_doublons_documents($GLOBALS['doublons'],
+		echappe_retour(pipeline('modeles', "$titre$texte")));
 	afficher_documents_colonne($id_breve, "breve", true);
 }
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));

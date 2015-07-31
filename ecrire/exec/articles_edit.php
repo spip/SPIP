@@ -314,10 +314,12 @@ function exec_articles_edit_dist()
 
 	if (!$new){
 
-	# affichage sur le cote des pieces jointes, en reperant les inserees
-		if (isset($row['descriptif'])) document_a_voir($row['descriptif']);
-		if (isset($row['chapo'])) document_a_voir($row['chapo']);
-		if (isset($row['texte'])) document_a_voir($row['texte']);
+		# affichage sur le cote des pieces jointes, en reperant les inserees
+		# note : typo() repere les doublons aussi eficacement que propre(),
+		# mais beaucoup plus rapidement
+		$GLOBALS['doublons']['documents'] = '0';
+		traiter_doublons_documents($GLOBALS['doublons'],
+			echappe_retour(pipeline('modeles', join('',$row))));
 		afficher_documents_colonne($id_article, 'article', true);
 	}
 	$GLOBALS['id_article_bloque'] = $id_article;	// globale dans debut_droite
