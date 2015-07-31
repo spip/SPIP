@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'بحث',
 'bouton_choisir' => 'تحديد',
 'bouton_deplacer' => 'نقل',
-'bouton_download' => 'تحميل', # MODIF
+'bouton_download' => 'تحميل',
 'bouton_enregistrer' => 'إدخال',
 'bouton_radio_desactiver_messagerie_interne' => 'إيقاف المراسلة الداخلية',
 'bouton_radio_envoi_annonces' => 'إرسال إعلانات التحرير',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'عدم إرسال قائمة بآخر الأخبار',
 'bouton_recharger_page' => 'إعادة تحميل الصفحة',
 'bouton_telecharger' => 'تحميل',
-'bouton_upload' => 'تحميل', # MODIF
+'bouton_upload' => 'تنزيل',
 'bouton_valider' => 'إدخال',
 
 // C
