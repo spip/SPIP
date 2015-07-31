@@ -160,6 +160,14 @@ function antispam($texte) {
 	return ereg_replace("@", " $masque ", $texte);
 }
 
+// |sinon{rien} : affiche "rien" si la chaine est vide, affiche la chaine si non vide
+function sinon ($texte, $sinon='') {
+	if ($texte)
+		return $texte;
+	else
+		return $sinon;
+}
+
 
 //
 // Date, heure, saisons

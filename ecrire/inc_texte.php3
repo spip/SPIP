@@ -27,7 +27,7 @@ function tester_variable($nom_var, $val){
 
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
 tester_variable('fin_intertitre', "</h3>\n");
-tester_variable('ligne_horizontale', "\n<hr class=\"spip\">\n");
+tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
 tester_variable('ouvre_ref', '&nbsp;[');
 tester_variable('ferme_ref', ']');
 tester_variable('ouvre_note', '[');
