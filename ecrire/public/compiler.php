@@ -117,6 +117,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	// Gerer ajax
 	if (isset($_contexte['ajax'])) {
 		$code = '// {ajax}
+			include_spip("inc/filtres");
 			echo "<div class=\\\'ajaxbloc env-"
 				.encoder_contexte_ajax($contexte_inclus)
 				."\\\'>\\n";
