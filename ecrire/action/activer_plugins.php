@@ -27,8 +27,9 @@ function enregistre_modif_plugin(){
 	  	$test[$alt_postvar] = $file;
 	}
 	$plugin=array();
+
 	foreach($_POST as $choix=>$val){
-	  spip_log("test de $choix $val");
+		spip_log("test de $choix $val");
 		if (isset($test[$choix])&&$val=='O')
 			$plugin[]=$test[$choix];
 	}
@@ -44,6 +45,9 @@ function action_activer_plugins_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
+
+	if (!autoriser('configurer', 'plugins'))
+		die('erreur');
 
 	enregistre_modif_plugin();
 }

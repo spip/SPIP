@@ -57,10 +57,9 @@ function exec_admin_plugin_dist($retour='') {
 
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
-	$plugs = @unserialize($GLOBALS['meta']['plugin']);
-	if (isset($plugs['CFG'])) {
+	if (defined('_DIR_PLUGIN_CFG')) {
 		debut_cadre_enfonce();
-		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), 'plugin-24.gif', '', true);
+		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', true);
 		fin_cadre_enfonce();
 	}
 
@@ -249,11 +248,23 @@ function ligne_plug($plug_file, $actif, $id){
 
 	$erreur = false;
 	$vals = array();
+
 	$info = plugin_get_infos($plug_file);
+	$s = "<a name='" . $info['prefix'] . $versions[$info['prefix']] . 
+		"'></a>";
+
+	// plug pour CFG
+	if ($actif
+	AND defined('_DIR_PLUGIN_CFG')) {
+		if (include_spip('inc/cfg') // test CFG version >= 1.0.5
+		AND $i = icone_lien_cfg(_DIR_PLUGINS.$plug_file))
+			$s .= '<div style="float:right;">'.$i.'</div>';
+	}
+
+
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ?
 			$versions[$info['prefix']] + 1 : '';
-	$s = "<a name='" . $info['prefix'] . $versions[$info['prefix']] . 
-		"'></a><div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
+	$s .= "<div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div class='plugin_erreur'>";
 		$erreur = true;
