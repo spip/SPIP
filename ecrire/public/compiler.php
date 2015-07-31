@@ -173,7 +173,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	if ($boucle->mode_partie)
 		$corps .= "
-		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle) {
+		if (\$Numrows['$id_boucle']['compteur_boucle'] > \$debut_boucle) {
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n";
 
 	// Calculer les invalideurs si c'est une boucle non constante et si on
@@ -223,6 +223,16 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	else {
 		$init = '';
 		$fin = '';
+		// sortir les appels au traducteur (invariants de boucle)
+		if (strpos($return, '?php') === false
+		AND preg_match_all("/\W(_T[(]'[^']*'[)])/", $return, $r)) {
+			$i = 1;
+			foreach($r[1] as $t) {
+				$init .= "\n\t\$l$i = $t;";
+				$return = str_replace($t, "\$l$i", $return);
+				$i++;
+			}
+		}
 	}
 
 	// gestion optimale des separateurs et des boucles constantes
