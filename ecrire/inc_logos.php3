@@ -350,7 +350,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
 
-
+	/* NON: sinon a chaque appel d'une redimension, ca change la vignette
 	// mettre a jour la base si creation
 	if ($creation AND $vignette) {
 		if ($format == "jpg") $format = 1;
@@ -382,9 +382,49 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			spip_log("(document=$id_document, vignette=$id_vignette)");
 		}
 	}
+	*/
 
 	// renvoyer l'image
 	return $retour;
+}
+
+
+function inserer_vignette_base($image, $vignette) {
+
+	$taille = @filesize($vignette);
+	
+	
+	$size = @getimagesize($vignette);
+	$largeur = $size[0];
+	$hauteur = $size[1];
+	$type = $size[2];
+
+	if ($type == "2") $format = 1;
+	else if ($type == "3") $format = 2;
+	else if ($type == "1") $format = 3;
+
+	$vignette = str_replace('../', '', $vignette);
+
+	spip_log("creation vignette($image) -> $vignette");
+
+	if ($t = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($image)."'"))
+	{
+		if ($row = spip_fetch_array($t)) {
+			$id_document = $row['id_document'];
+			spip_query("INSERT INTO spip_documents (mode) VALUES ('vignette')");
+			$id_vignette = spip_insert_id();
+			spip_query("UPDATE spip_documents SET id_vignette=$id_vignette WHERE id_document=$id_document");
+			spip_query("UPDATE spip_documents SET
+				id_type = '$format',
+				largeur = '$largeur',
+				hauteur = '$hauteur',
+				taille = '$taille',
+				fichier = '$vignette',
+				date = NOW()
+				WHERE id_document = $id_vignette");
+			spip_log("(document=$id_document, vignette=$id_vignette)");
+		}
+	}
 }
 
 

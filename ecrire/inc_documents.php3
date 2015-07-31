@@ -527,6 +527,19 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			//afficher_horizontal_document($id_document, $image_link, $redirect_url, $flag_modif);
 			
 			echo "<div style='text-align:center;'>";
+			
+			switch ($id_type) {
+				case 1:
+					$format = "jpg";
+					break;
+				case 2:
+					$format = "png";
+					break;
+				case 3:
+					$format = "gif";
+					break;
+			}
+						
 			if ($flag_modif) {
 			
 				if ($id_vignette == 0) {
@@ -535,7 +548,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					echo "</div>";
 					$vignette_perso = false;
 
-				} else {
+				} else if (!ereg($format, lire_meta('formats_graphiques')))  {
 					$link = $image_link;
 					$link->addVar('redirect', $redirect_url);
 					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
@@ -554,41 +567,43 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				$process = lire_meta('image_process');
 				 // imagick (php4-imagemagick)
 				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
-					echo "<div class='verdana1' style='float: right; text-align:left;'>";		
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', -90);
-					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-gauche.gif' border='0' /></a> ";
-					echo "<br />";
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', 90);
-					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-droite.gif' border='0' /></a> ";
-					echo "<br />";
-	
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', 180);
-					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-180.gif' border='0' /></a>";
-					echo "</div>";
+					if (ereg($format, lire_meta('formats_graphiques'))) {
+						echo "<div class='verdana1' style='float: right; text-align:left;'>";		
+						$link_rot = $image_link;
+						$link_rot->addVar('redirect', $redirect_url);
+						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+						$link_rot->addVar('doc_rotate', $id_document);
+						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('var_rot', -90);
+						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-gauche.gif' border='0' /></a> ";
+						echo "<br />";
+						$link_rot = $image_link;
+						$link_rot->addVar('redirect', $redirect_url);
+						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+						$link_rot->addVar('doc_rotate', $id_document);
+						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('var_rot', 90);
+						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-droite.gif' border='0' /></a> ";
+						echo "<br />";
+		
+						$link_rot = $image_link;
+						$link_rot->addVar('redirect', $redirect_url);
+						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+						$link_rot->addVar('doc_rotate', $id_document);
+						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('var_rot', 180);
+						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-180.gif' border='0' /></a>";
+						echo "</div>";
+					}
 				}
 			}
 			//
 			// Recuperer la vignette
 			//
-
+			
 			if ($id_vignette >0) {
 				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 				if ($vignette) {
@@ -597,13 +612,14 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$hauteur_vignette = $vignette['hauteur'];
 					$taille_vignette = $vignette['taille'];
 			
-			
 					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
 				}
 			}
-			else { echo document_et_vignette($url, $fichier); }
+			else { 
+				echo document_et_vignette($url, $fichier); 
+			}
 			echo "</div>";
-					
+			
 			if ($flag_modif) {
 					
 				if ($vignette_perso) {

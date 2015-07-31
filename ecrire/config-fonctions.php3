@@ -45,7 +45,7 @@ function afficher_choix_vignette($process) {
 	else
 		$border=0;
 
-	echo "<td><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
+	echo "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
 	echo "</div></td>\n";
@@ -89,7 +89,7 @@ else {
 					$formats_graphiques = lire_meta('gd_formats');
 					break;
 				case 'netpbm':
-					$formats_graphiques = lire_meta('gd_formats');
+					$formats_graphiques = lire_meta('netpbm_formats');
 					break;
 				case 'convert':
 					$formats_graphiques = 'gif,jpg,png';
@@ -136,6 +136,7 @@ else {
 		fin_cadre_relief();
 	}
 }
+
 
 	//
 	// Une fois le process choisi, proposer vignettes
