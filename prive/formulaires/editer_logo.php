@@ -108,6 +108,12 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	if (!isset($res['logo_on']))
 		$res['logo_survol']='';
 
+	// si le logo n'est pas editable et qu'il n'y en a pas, on affiche pas du tout le formulaire
+	if (!$res['editable']
+	  AND !isset($res['logo_off'])
+	  AND !isset($res['logo_on']))
+		return false;
+
 	return $res;
 }
 
