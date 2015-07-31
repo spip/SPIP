@@ -328,13 +328,25 @@ function corriger_toutes_entites_html($texte) {
 function proteger_amp($texte){
 	return str_replace('&','&amp;',$texte);
 }
-// http://doc.spip.org/@entites_html
-function entites_html($texte, $tout=false) {
+
+//
+/**
+ * http://doc.spip.org/@entites_html
+ *
+ * @param string $texte
+ *   chaine a echapper
+ * @param bool $tout
+ *   corriger toutes les &amp;xx; en &xx;
+ * @param bool $quote
+ *   echapper aussi les simples quotes en &#039;
+ * @return mixed|string
+ */
+function entites_html($texte, $tout=false, $quote=true) {
 	if (!is_string($texte) OR !$texte
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
-	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
+	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),$quote?ENT_QUOTES:(ENT_COMPAT|ENT_HTML401));
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
 	else
@@ -373,8 +385,15 @@ function corriger_caracteres ($texte) {
 	return $texte;
 }
 
-// Encode du HTML pour transmission XML
-// http://doc.spip.org/@texte_backend
+/**
+ * Encode du HTML pour transmission XML
+ * notamment dans les flux RSS
+ *
+ * http://doc.spip.org/@texte_backend
+ *
+ * @param $texte
+ * @return mixed
+ */
 function texte_backend($texte) {
 
 	static $apostrophe = array("&#8217;", "'"); # n'allouer qu'une fois
@@ -392,7 +411,8 @@ function texte_backend($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = str_replace("&nbsp;", " ", $texte);
 	$texte = preg_replace('/\s{2,}/S'.$u, " ", $texte);
-	$texte = entites_html($texte);
+	// ne pas echapper les sinqle quotes car certains outils de syndication gerent mal
+	$texte = entites_html($texte, false, false);
 
 	// verifier le charset
 	$texte = charset2unicode($texte);
