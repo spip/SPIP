@@ -120,6 +120,9 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
 	if ($statut_ancien == 'publie')
 		calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
+ 	// Creation ou deplacement d'une rubrique
+	elseif (!$statut_ancien || $old_parent!=$id_parent)
+		calculer_rubriques();
 
 	calculer_langues_rubriques();
 
