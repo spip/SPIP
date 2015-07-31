@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action pour exécuter le cron de manière asynchrone si le serveur le permet
+ *
+ * @package SPIP\Core\Genie
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
