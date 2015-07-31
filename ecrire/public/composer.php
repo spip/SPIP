@@ -678,7 +678,16 @@ function calculer_select ($select = array(), $from = array(),
 	    unset($afrom[$t]);
 	    $e = '/\b'.preg_quote($nfrom[6]).'\b/';
 	    $t = $nfrom[4];
-	    $select = remplacer_jointnul($t, $select, $e);
+	    $alias = "";
+	    // verifier que les deux cles sont homonymes, sinon installer un alias dans le select
+	    $oldcle = explode('.',$nfrom[6]);
+	    $oldcle = end($oldcle);
+	    $newcle = explode('.',$nfrom[4]);
+	    $newcle = end($newcle);
+	    if ($newcle!=$oldcle){
+	    	$alias = ", ".$nfrom[4]." AS $oldcle";
+	    }
+	    $select = remplacer_jointnul($t . $alias, $select, $e);
 	    $join = remplacer_jointnul($t, $join, $e);
 	    $where = remplacer_jointnul($t, $where, $e);
 	    $having = remplacer_jointnul($t, $having, $e);
@@ -700,7 +709,6 @@ function calculer_select ($select = array(), $from = array(),
 	}
 
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
-
 	$r = sql_select($select, $from, $where,
 		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
 	unset($GLOBALS['debug']['aucasou']);
