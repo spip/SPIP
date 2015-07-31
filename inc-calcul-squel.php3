@@ -414,7 +414,13 @@ function parser_boucle($texte, $id_parent) {
 						}
 						else if ($col == 'age_relatif') {
 							$date_prec = "($"."date)";
-							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($col_date))+30.4368*(MONTH('$date_prec')-MONTH($table.$col_date))+365.2422*(YEAR('$date_prec')-YEAR($table.$col_date))))";
+							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('$date_prec')-MONTH($table.$col_date))+365.2422*(YEAR('$date_prec')-YEAR($table.$col_date))))";
+							$col_table = '';
+						}
+						else if ($col == 'age_mail_nouv') {
+							$datenouv = lire_meta('date_envoi') ? lire_meta('date_envoi') : time() - 3600*24*lire_meta('jours_neuf');
+							$datenouv = date('Y-m-d H:i:s', $datenouv);
+							$col = "(LEAST((TO_DAYS('$datenouv')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$datenouv')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('$datenouv')-MONTH($table.$col_date))+365.2422*(YEAR('$datenouv')-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_redac') {
@@ -820,7 +826,7 @@ function parser($texte) {
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE',
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'INCLUS',
+		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
@@ -877,7 +883,7 @@ function parser($texte) {
 	}
 
 	// Dates : ajouter le vidage des dates egales a 00-00-0000
-	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF');
+	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'vider_date';
@@ -1339,6 +1345,13 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'PUCE':
 		$code = "propre('- ')";
+		break;
+
+	case 'DATE_NOUVEAUTES':
+		if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('date_envoi'))
+			$code = "date('Y-m-d H:i:s', lire_meta('date_envoi'))";
+		else
+			$code = "'0000-00-00'";
 		break;
 
 	case 'URL_ARTICLE':
