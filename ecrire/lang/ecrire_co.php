@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'H&egrave; fiascata a cunnessione &agrave; a basa di dati.',
 'avis_connexion_echec_2' => 'Turnate &agrave; a p&agrave;gina di nanzu &egrave; verificate l\'infurmazioni furnite.',
 'avis_connexion_echec_3' => '<b>N.B.</b> &Agrave; spessu nant\'&agrave; certi servori, si deve <b>dumand&agrave;</b> l\'attivazione di l\'accessu &agrave; a basa di dati 
-	prima di pud&egrave; lu adupr&agrave;. S&egrave; vo &ugrave;n ci la fate &agrave; cunnett&agrave; vi, verificate puru ch&egrave; vo avete fattu sta dumanda.',
+ prima di pud&egrave; lu adupr&agrave;. S&egrave; vo &ugrave;n ci la fate &agrave; cunnette vi, verificate puru ch&egrave; vo avete fattu sta dumanda.',
 'avis_connexion_ldap_echec_1' => 'H&egrave; fiascata a cunnessione &agrave; u servore LDAP.',
 'avis_connexion_ldap_echec_2' => 'Turnate &agrave; a p&agrave;gina di nanzu &egrave; verificate l\'infurmazioni date. ',
 'avis_connexion_ldap_echec_3' => 'O sinn&ograve;, &ugrave;n aduprate micca u supportu LDAP per impurt&agrave; utilizatori.',
@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_messagerie_interne' => 'Attiv&agrave; a messageria interna',
 'bouton_radio_activer_petition' => 'Attiv&agrave; a petizione',
 'bouton_radio_afficher' => 'Vede',
-'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Cumparisce fr&agrave; a lista di i scrittori cunnettati',
+'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Cumparisce fr&agrave; a lista di i scrittori cunnessi',
 'bouton_radio_articles_futurs' => 'solu &agrave; l\'art&igrave;culi futuri (nisuna mud&igrave;fica &agrave; a basa attuale).',
 'bouton_radio_articles_tous' => '&agrave; tutti l\'art&igrave;culi quant\'elli s&ograve;.',
 'bouton_radio_articles_tous_sauf_forum_desactive' => '&agrave; tutti l\'art&igrave;culi salvu quelli per ch&igrave; h&egrave; disattivatu u foru.',
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_modere_abonnement' => 'Solu c&ugrave; abbunamentu',
 'bouton_radio_modere_posteriori' => 'Muderazione dopu',
 'bouton_radio_modere_priori' => 'muderazione in ant&igrave;cipu',
-'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '&Ugrave;n cumparisce micca fr&agrave; a lista di i scrittori cunnettati ',
+'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '&Ugrave;n cumparisce micca fr&agrave; a lista di i scrittori cunnessi ',
 'bouton_radio_non_envoi_annonces_editoriales' => '&Ugrave;n mand&agrave; micca annunci editoriali ',
 'bouton_radio_non_syndication' => 'Nisuna sindicazione',
 'bouton_radio_pas_petition' => 'Nisuna petizione',
@@ -466,7 +466,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_liens_syndiques_5' => 'foru',
 'info_liens_syndiques_6' => 'st&agrave;',
 'info_liens_syndiques_7' => 'in attesa di cunvalidazione',
-'info_liste_redacteurs_connectes' => 'Lista di i scrittori cunnettati',
+'info_liste_redacteurs_connectes' => 'Lista di i scrittori cunnessi',
 'info_login_existant' => 'Stu login esiste digi&agrave;.',
 'info_login_trop_court' => 'Login troppu cortu.',
 'info_logos' => 'I logo',
@@ -665,8 +665,8 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_statut_site_3' => 'Prupostu',
 'info_statut_site_4' => 'In a rum&egrave;nzula',
 'info_statut_utilisateurs_1' => 'Statutu predefinitu di l\'utilizatori impurtati',
-'info_statut_utilisateurs_2' => 'Sceglite u statutu da attribu&igrave; &agrave; e persone presenti in l\'annuariu LDAP quandu p&egrave; a prima volta si cunnettanu. 
-		Puderete in s&egrave;guitu mudific&agrave; stu par&agrave;metru per ogni s&igrave;ngulu autore.',
+'info_statut_utilisateurs_2' => 'Sceglite u statutu da attribuisce &agrave; e persone presenti in l\'annuariu LDAP quandu p&egrave; a prima volta si cunnettenu. 
+  Puderete in s&egrave;guitu mudific&agrave; stu par&agrave;metru per ogni s&igrave;ngulu autore.',
 'info_suivi_activite' => 'Guardia di l\'attivit&agrave; editoriale',
 'info_supprimer_mot' => 'sguass&agrave;&nbsp;sta&nbsp;parulla',
 'info_surtitre' => 'Soprat&igrave;tulu&nbsp;:',
@@ -829,7 +829,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'lien_reponse_breve_2' => 'Risposta i dispacci',
 'lien_reponse_rubrique' => 'Risposta &agrave; a r&ugrave;bbrica',
 'lien_reponse_site_reference' => 'Risposta &agrave; u situ riferitu&nbsp;:',
-'lien_retirer_auteur' => 'Cacci&agrave; l\'autore',
+'lien_retirer_auteur' => 'Sguass&agrave; l\'autore',
 'lien_retrait_particpant' => 'cacci&agrave; stu participante',
 'lien_site' => 'situ',
 'lien_supprimer_rubrique' => 'sguass&agrave; a r&ugrave;bbrica',
@@ -990,9 +990,9 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'texte_article_virtuel_reference' => '<b>Art&igrave;culu virtuale&nbsp;:</b> art&igrave;culu riferitu in u vostru situ SPIP, ma rindirizzatu versu un\'altru URL. 
 		Per cacci&agrave; u rindirizzamentu, sguassate puru l\'URL qu&igrave; sopra.',
 'texte_aucun_resultat_auteur' => 'Nisun risultatu per "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Stu situ vi p&ograve; furnisce in permanenza a lista di i scrittori cunnettati, cus&igrave; vi permette 
-		di scambi&agrave; messagi in tempu reale. Pudete puru decide d\'&ugrave;n cumparisce micca in quella lista (vale &agrave; d&igrave; 
-		ch&igrave; state invis&igrave;bule da l\'altri utilizatori).',
+'texte_auteur_messagerie' => 'Stu situ vi p&ograve; furnisce in permanenza a lista di i scrittori cunnessi, cus&igrave; vi permette 
+  di scambi&agrave; messagi in tempu reale. Pudete puru decide d\'&ugrave;n cumparisce micca in quella lista (vale &agrave; d&igrave; 
+  ch&igrave; state invis&igrave;bule da l\'altri utilizatori).',
 'texte_auteur_messagerie_1' => 'Stu situ permette u scambiu di messagi &egrave; a custituzione di fori di discussione privati tr&agrave; i participanti di u situ. 
 		Pudete puru decide d\'&ugrave;n particip&agrave; micca &agrave; issi scambi.',
 'texte_auteurs' => 'L\'AUTORI',
@@ -1063,7 +1063,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 			Ferma quantunque puss&igrave;bule di sblucc&agrave; ogni s&igrave;ngula lea, o di sceglie di blucc&agrave; e lee d\'ogni s&igrave;ngulu situ.',
 'texte_login_ldap_1' => '(Lasci&agrave; viotu per un accessu an&ograve;nimu, o inserisce u percorsu sanu sanu, per esempiu &laquo;<tt>uid=paoli, ou=users, 
 	dc=u-mo-duminiu, dc=com</tt>&nbsp;&raquo;.)',
-'texte_login_precaution' => 'Attenti&nbsp;! Questu h&egrave; u login cun ch&igrave; site cunnettatu av&agrave;. Aduprate stu furmulariu c&ugrave; assai cura ...',
+'texte_login_precaution' => 'Attenti&nbsp;! Questu h&egrave; u login cun ch&igrave; site cunnessu av&agrave;. Aduprate stu furmulariu c&ugrave; assai cura ...',
 'texte_message_edit' => 'Attenti&nbsp;! Stu messagiu p&ograve; esse mudificatu da tutti l\'amministratori di u situ, &egrave; si p&ograve; vede da tutti i scrittori.
 			Aduprate puru l\'annunci solu per sparghje evenimenti impurtanti ina vita di u situ.',
 'texte_messagerie_agenda' => 'A messageria permette &agrave; i scrittori di u situ di cumunic&agrave; fr&agrave; elli direttamente in u spaziu privatu. 
