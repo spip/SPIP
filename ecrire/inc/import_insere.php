@@ -268,6 +268,16 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$r = spip_fetch_array(spip_query($q="SELECT id_document, fichier FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'), SPIP_NUM);
 	return $r;
 }
+// un type de document importe est considere comme identique a un type present
+// s'ils ont meme extension et meme titre
+// Sinon il ne sera PAS importe
+// http://doc.spip.org/@import_identifie_id_type
+function import_identifie_id_type($values, $table, $desc, $request) {
+	$e = $values['extension'];
+	$t = $values['titre'];
+	$r = spip_fetch_array(spip_query($q="SELECT id_type, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)), SPIP_NUM);
+	return $r;
+}
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
