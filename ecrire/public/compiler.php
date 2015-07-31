@@ -862,6 +862,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 		}
 	}
 	foreach($boucles as $id => $boucle) { 
+		$id = strval($id); // attention au type dans index_pile
 		$type = $boucle->type_requete;
 		if ($type AND $type != 'boucle') {
 			if ($boucle->param) {
