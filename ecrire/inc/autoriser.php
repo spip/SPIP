@@ -225,20 +225,6 @@ function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt
 }
 
 
-// Autoriser a creer un site dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_creersitedans_dist
-function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
-	return
-		$id
-		AND autoriser('voir','rubrique',$id)
-		AND $GLOBALS['meta']['activer_sites'] != 'non'
-		AND (
-			$qui['statut']=='0minirezo'
-			OR ($GLOBALS['meta']["proposer_sites"] >=
-			    ($qui['statut']=='1comite' ? 1 : 2)));
-}
-
-
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_modifier_dist
