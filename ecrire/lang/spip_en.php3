@@ -53,7 +53,7 @@ $GLOBALS['i18n_en'] = array(
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
 'avis_lecture_noms_bases_2' => 'Either no database is available, or the feature allowing the listing of the databases was disabled
 		for security reasons (which is the case with a lot of hosts).',
-'avis_lecture_noms_bases_3' => 'In case the second alternative was true, it is possible that a database named after your login could usable:',
+'avis_lecture_noms_bases_3' => 'In case the second alternative was true, it is possible that a database named after your login could be usable:',
 'avis_non_acces_message' => 'You do not have access to this message.',
 'avis_non_acces_page' => 'You do not have access to this page.',
 'avis_operation_echec' => 'The operation failed.',
@@ -465,7 +465,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_numero_auteur' => 'AUTHOR NUMBER:',
 'info_gauche_numero_breve' => 'NEWS ITEM NUMBER',
 'info_gauche_statistiques_referers' => 'This page displays the list of <I>referrers</I>, i.e. the sites containing links to your own site, only for today: actually this list is initialised every 24 hours.',
-'info_gauche_suivi_forum' => 'The <I>forums follow-up</I> page is a management tool of your site (not a discussion or editing). It displays all the contributions of the public forum of this article and allows you to manage these contributions.',
+'info_gauche_suivi_forum' => 'The <I>forums follow-up</i> page is a management tool of your site (not a discussion or editing area). It displays all the contributions of the public forum of this article and allows you to manage these contributions.',
 'info_gauche_suivi_forum_2' => 'The <I>forums follow-up</I> page is a management tool of your site (not a discussion or editing). It displays all the contributions of the public forum of this article and allows you to manage these contributions.',
 'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
 	in the public area of the site (forums by subscription).',
@@ -863,7 +863,7 @@ requiring an FTP access to the Web site.',
 'item_utiliser_breves' => 'Use the news',
 'item_utiliser_config_groupe_mots_cles' => 'Use the advanced configuration of keyword groups',
 'item_utiliser_moteur_recherche' => 'Use the search engine',
-'item_utiliser_mots_cles' => 'Utiliser les mots-cl&eacute;s',
+'item_utiliser_mots_cles' => 'Use keywords',
 'item_utiliser_syndication' => 'Use automated syndication',
 'item_vendredi' => 'Friday',
 'item_visiteur' => 'visitor',
@@ -1135,8 +1135,8 @@ the images used in the articles and sections.',
 						in the articles.',
 'texte_fichier_authent' => '<b>Should SPIP create special <tt>.htpasswd</tt>
 		and <tt>.htpasswd-admin</tt> files in the directory <tt>ecrire/data/</tt>?</b><p>
-		These files can be used to restrict access of authors
-		and administrators to other parts of your site
+		These files can be used to restrict access to authors
+		and administrators in other parts of your site
 		(for instance, external statistical programme).<p>
 		If you have not used such files before you can leave this option
 		with its default value (no creation 
@@ -1147,11 +1147,11 @@ the images used in the articles and sections.',
 'texte_inc_auth_2' => 'reconnect',
 'texte_inc_auth_3' => 'having quit then
 		restarted your browser if necessary.',
-'texte_inc_config' => 'The modifications entered below influence among other things
+'texte_inc_config' => 'The modifications entered below influence notably
 	 the functioning of the site. You are advised not to deal with them unless you are
-	familiar with the functioning of the SPIP system. <P align="justify"><B>More
+	familiar with the functioning of the SPIP system. <P align=\\"justify\\"><B>More
 	generally, you are strongly advised
-	to let the main webmaster of your site deal with this page.</B>',
+	to let the main webmaster of your site deal with this page.</b>',
 'texte_inc_meta_1' => 'As a site administrator, please ',
 'texte_inc_meta_2' => 'verify write permissions',
 'texte_inc_meta_3' => ' over the directory ecrire/ ',
@@ -1219,7 +1219,7 @@ the images used in the articles and sections.',
 'texte_port_annuaire' => '(Default value is generally suitable.)',
 'texte_proposer_publication' => 'When your article is finished,<br> you can submitted it for publication.',
 'texte_proxy' => 'In some cases (intranet, protected networks...),
-		it is necessary to user an  <I>proxy HTTP</I> to reach the syndicated sites.
+		it is necessary to use a <I>proxy HTTP</i> to reach the syndicated sites.
 		Should there be a proxy, enter its address below, thus
 		<tt><html>http://proxy:8080</html></tt>. Generally,
 		you will leave this box empty.',
