@@ -870,7 +870,7 @@ function traiter_tableau($bloc) {
 		// Sinon ligne normale
 		if ($l) {
 			// Gerer les listes a puce dans les cellules
-			if (ereg("\n-[*#]", $ligne))
+			if (strpos($ligne,"\n-*")!==false OR strpos($ligne,"\n-#")!==false)
 				$ligne = traiter_listes($ligne);
 
 			// Pas de paragraphes dans les cellules
