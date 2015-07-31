@@ -112,7 +112,7 @@ function is_preview()
 //
 function afficher_page_globale ($fond) {
 	global $flag_dynamique, $flag_ob, $flag_preserver,
-	  $lastmodified, $recherche, $use_cache, $var_mode;
+	  $lastmodified, $recherche, $use_cache, $var_mode, $var_preview;
 	global $_GET, $_POST, $_COOKIE, $_SERVER;
 
 	$f = find_in_path("inc-cache.php3");
