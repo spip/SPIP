@@ -59,7 +59,7 @@ function definir_barre_boutons() {
 		'accueil' => new Bouton('asuivre-48.png', 'icone_a_suivre'),
 		'naviguer' => new Bouton("documents-48$spip_lang_rtl.png",
 								 'icone_edition_site'),
-		'forum_admin' => new Bouton('messagerie-48.png', 'titre_forum'),
+		'forum' => new Bouton('messagerie-48.png', 'titre_forum'),
 		'auteurs' => new Bouton('redacteurs-48.png', 'icone_auteurs')
 	);
 
@@ -133,7 +133,7 @@ function definir_barre_boutons() {
 	$sousmenu['controle_petition']=
 		  new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
 	
-	$boutons_admin['forum_admin']->sousmenu= $sousmenu;
+	$boutons_admin['forum']->sousmenu= $sousmenu;
 
 	// sous menu auteurs
 

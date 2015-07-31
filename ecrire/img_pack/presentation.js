@@ -5,7 +5,7 @@ function changestyle(id_couche, element, style) {
 	if (admin) {
 		hide_obj("bandeauaccueil");
 		hide_obj("bandeaunaviguer");
-		hide_obj("bandeauforum_admin");
+		hide_obj("bandeauforum");
 		hide_obj("bandeauauteurs");
 		if (stat) {  hide_obj("bandeaustatistiques_visites"); } 
 		hide_obj("bandeauconfiguration"); 
@@ -27,7 +27,7 @@ function changestyle(id_couche, element, style) {
 		if (admin) {
 			decalerCouche('bandeauaccueil');
 			decalerCouche('bandeaunaviguer');
-			decalerCouche('bandeauforum_admin');
+			decalerCouche('bandeauforum');
 			decalerCouche('bandeauauteurs');
 			if (stat) decalerCouche('bandeaustatistiques_visites');
 			decalerCouche('bandeauconfiguration');
