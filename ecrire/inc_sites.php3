@@ -68,7 +68,7 @@ function no_password_proxy_url($http_proxy) {
 // Demarre une transaction HTTP (s'arrete a la fin des entetes)
 // retourne un descripteur de fichier
 //
-function init_http($get, $url) {
+function init_http($get, $url, $refuse_gz=false) {
 	$http_proxy = lire_meta("http_proxy");
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
@@ -117,7 +117,7 @@ function init_http($get, $url) {
 			fputs($f, "Referer: $referer/\r\n");
 
 		// On sait lire du gzip
-		if ($GLOBALS['flag_gz'])
+		if ($GLOBALS['flag_gz'] AND !$refuse_gz)
 			fputs($f, "Accept-Encoding: gzip\r\n");
 
 	}
