@@ -886,7 +886,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	// de'terminables seulement maintenant
 
 	foreach($boucles as $id => $boucle) {
-		$boucle = pipeline('pre_boucle', $boucle);
+		$boucle = $boucles[$id] = pipeline('pre_boucle', $boucle);
 
 		// appeler la fonction de definition de la boucle
 		$req = $boucle->type_requete;
