@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{name,redirection}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}-#ENV{id}"><:bouton_redirection:> #AIDER{artvirt}</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" id="#GET{name}-#ENV{id}" value="#ENV{#GET{name},'http://'}"

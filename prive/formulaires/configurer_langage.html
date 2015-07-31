@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	  	#SET{name,var_lang_ecrire}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:label_choix_langue:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[(#ENV{_langues}|afficher_langues_choix{#GET{name},#GET{name},#ENV{#GET{name}}})]

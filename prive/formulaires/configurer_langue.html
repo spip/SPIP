@@ -14,7 +14,7 @@
 				</div>
 			</li>
 	  	#SET{name,changer_langue_site}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_langue_principale:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[<select name="changer_langue_site" id="changer_langue_site">

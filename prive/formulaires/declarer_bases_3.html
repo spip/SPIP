@@ -14,7 +14,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{name,nom_connect}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:label_nom_fichier_connect:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}"/>

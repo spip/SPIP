@@ -11,7 +11,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{name,syndication_integrale}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_syndication_integrale_2:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">

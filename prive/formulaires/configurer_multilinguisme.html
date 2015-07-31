@@ -19,7 +19,7 @@
 					<legend>#GET{objets}</legend>
 					<ul>
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
@@ -28,7 +28,7 @@
 						</li>
 						[(#GET{val}|in_any{#ENV{multi_objets}}|oui)
 						#SET{name,multi_secteurs}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
@@ -37,7 +37,7 @@
 						</li>
 						[(#VAL{spip_rubriques}|table_supporte_trad|oui)
 						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
@@ -58,7 +58,7 @@
 					<legend>#GET{objets}</legend>
 					<ul>
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
@@ -67,7 +67,7 @@
 						</li>
 						[(#GET{val}|in_any{#ENV{#GET{name}}}|et{#CLE|table_supporte_trad})
 						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
