@@ -2249,7 +2249,7 @@ if (true /*$bandeau_colore*/) {
 			  http_img_pack("$icone", "", "width='26' height='20'")."</a>";
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
+			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
 
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
