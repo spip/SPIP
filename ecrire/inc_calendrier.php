@@ -116,8 +116,8 @@ function http_calendrier_ics($evenements, $amj = "")
 
 			
 			if ($afficher_ev) {			
-				$radius_top = " -moz-border-radius-topleft: 6px; -moz-border-radius-topright: 6px;";
-				$radius_bottom = " -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px;";
+			  $radius_top = " radius-top";
+			  $radius_bottom = " radius-bottom";
 
 				$deb_h = substr($evenement['DTSTART'],-6,2);
 				$deb_m = substr($evenement['DTSTART'],-4,2);
@@ -166,15 +166,17 @@ function http_calendrier_ics($evenements, $amj = "")
 				}
 
 				$c = calendrier_div_style($evenement);
-				if (!$c)
+				if (!$c) 
+				  {
 					$c = "color: black";
-				else 
-				{
+					$radius_top = "";
+					$radius_bottom = "";
+				  } else {
 					list($b,$c) = $c;
 					$c = "padding: 2px; margin-top: 2px;
-$opacity$radius_top$radius_bottom background-color: $b; color: $c; border: 1px solid $c";
+$opacity background-color: $b; color: $c; border: 1px solid $c";
 				}
-				$res .= "\n<div class='calendrier-arial10' style='$c'>" .
+				$res .= "\n<div class='calendrier-arial10$radius_top$radius_bottom' style='$c'>" .
 					$date_affichee .
 					(!$url ? "$sum $desc" : http_href($url, $sum, $desc)) .
 					"\n</div>\n"; 
@@ -249,7 +251,7 @@ function http_calendrier_retire_args($script)
 # 2 icones vers les 2 autres types, a la meme date $jour $mois $annee
 # 2 icones de loupes pour zoom sur la meme date et le meme type
 # 2 fleches appelant le $script sur les periodes $pred/$suiv avec une $ancre
-# et au center le $nom du calendrier
+# et le $nom du calendrier
 
 function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle, $nom,
 			    $script, $args_pred, $args_suiv, $type, $ancre)
@@ -331,12 +333,12 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 	$arguments = "jour=$jour_today&mois=$mois_today&annee=$annee_today$ancre" ;
 	return $retour .
 	  "&nbsp;&nbsp;" .
-	  "<span onmouseover=\"montrer('$id');\">" .
 	  http_href_img($script . "type=$type&echelle=$echelle&$arguments",
 			"cal-today.gif",
-			($condition ? " class='calendrier-opacity'" : ""),
+			(" onmouseover=\"montrer('$id');\"" .
+			 ($condition ? " class='calendrier-opacity'" : "")),
 			_T("info_aujourdhui")) .
-	  "</span>&nbsp;" .
+	  "&nbsp;" .
 	  $args_pred .
 	  $args_suiv .
 	  "&nbsp;&nbsp;" .
@@ -705,13 +707,15 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 	$mois_t = $today["mon"];
 	$annee_t = $today["year"];
 	$total = '';
-	$style = (!_DIR_RESTREINT ? 'padding: 5px;' :
-		  ("position: absolute; z-index: 2; top: 10px; left: "
-		   . round($largeur/2) . 'px'));
+	$style =  (!_DIR_RESTREINT ? 'padding: 5px;' :
+		   ("position: absolute; z-index: 2; top: 10px; left: "
+		    . round($largeur/2) . "px"));
 	foreach($intitul as $k => $v) {
 		$d = $v['date'];
 		$arbrev = (!($articles[$d] OR $breves[$d]) ? '' :
-			   http_calendrier_articles_et_breves($articles[$d], $breves[$d], $style));
+			   ("<div style='$style'>" .
+			    http_calendrier_articles_et_breves($articles[$d], $breves[$d], $style) .
+			    "</div>"));
 		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
 			<div style='background-color: " . 
 			(($v['index'] == 0) ? $couleur_claire :
@@ -885,15 +889,15 @@ function http_calendrier_articles_et_breves($articles, $breves, $style)
 {
   if ($articles)
     {
-      $res1 = "<div><b class='verdana1'>"._T('info_articles')."</b></div>" .
+      $res1 = "<div><b class='calendrier-verdana10'>"._T('info_articles')."</b></div>" .
 	http_calendrier_ics(http_calendrier_image_et_typo($articles));
 	}
   if ($breves)
     {
-      $res2 = "<div><b class='verdana1'>"._T('info_breves_02')."</b></div>" .
+      $res2 = "<div><b class='calendrier-verdana10'>"._T('info_breves_02')."</b></div>" .
 	http_calendrier_ics(http_calendrier_image_et_typo($breves));
     }
-  return "<div style='$style'>$res1$res2</div>";
+  return "$res1$res2";
 }
 
 # Affiche une grille horaire 
@@ -924,16 +928,16 @@ function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 	
 	$total .= "\n<div style='position: absolute; top: ".
 		http_cal_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
-		"px; border-top: 1px solid #cccccc; font-weight: bold;'>
-		<div style='margin-$spip_lang_left: 2px'>$fin:00" . 
+		"px; border-top: 1px solid #cccccc;'>
+		<div style='font-weight: bold; margin-$spip_lang_left: 2px'>$fin:00" . 
 		"</div>\n</div>";
 	
 	
-	return "\n<div style='position: absolute; $spip_lang_left: 2px; top: 2px;'><b>0:00</b></div>" .
+	return "\n<div style='position: absolute; font-weight: bold; $spip_lang_left: 2px; top: 2px;'>0:00</div>" .
 		$total .
-		"\n<div style='position: absolute; $spip_lang_left: 2px; top: ".
+		"\n<div style='position: absolute;font-weight: bold; $spip_lang_left: 2px; top: ".
 		($dimjour - $fontsize - 2) .
-		"px;'><b>23:59</b></div>";
+		"px;'>23:59</div>";
 }
 
 # Calcule le "top" d'une heure
@@ -997,9 +1001,8 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 			$debut_avant = false;
 			$fin_apres = false;
 			
-			
-			$radius_top = " -moz-border-radius-topleft: 6px; -moz-border-radius-topright: 6px;";
-			$radius_bottom = " -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px;";
+			$radius_top = " radius-top";
+			$radius_bottom = " radius-bottom";
 			
 			if ($d_jour <= $date AND $e_jour >= $date)
 			{
@@ -1074,7 +1077,7 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 				$bcolor = 'white';
 				$fcolor = 'black';
 			}
-			$total .= "\n<div style='cursor: auto; position: absolute; overflow: hidden;$radius_top$radius_bottom$opacity z-index: " .
+			$total .= "\n<div class='calendrier-arial10$radius_top$radius_bottom' style='cursor: auto; position: absolute; overflow: hidden;$opacity z-index: " .
 				$i .
 				"; $spip_lang_left: " .
 				$decale .
@@ -1241,15 +1244,17 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, 
 		' border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;' .
 		"'>" .
 	  ((!($articles[$j] OR $breves[$j])) ? '' :
-	   http_calendrier_articles_et_breves($articles[$j], $breves[$j],
-				      "position: absolute; z-index: 2; $spip_lang_left: "
-				      . ($largeur - $padding + 35) .
-				      "px; top: 0px;")) .
-	  http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 'http_calendrier_message',
-				   $echelle,
-				   $messages[$j],
-				   $j) .
-	   "\n</div>";
+	   ("<div style='position: absolute; z-index: 2; $spip_lang_left: "
+	    . ($largeur - $padding + 35)
+	    . "px; top: 0px;'>"
+	    . http_calendrier_articles_et_breves($articles[$j], $breves[$j])
+	    . '</div>'))
+	  . http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 
+				     'http_calendrier_message',
+				     $echelle,
+				     $messages[$j],
+				     $j) .
+	  "\n</div>";
 }
 
 

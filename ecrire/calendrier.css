@@ -88,7 +88,7 @@ a.calendrier-annee:hover {
 
 .calendrier-right { 
 	-moz-border-radius-topright: 10px;
-	-moz-border-radius-bottomright: 10px;";
+	-moz-border-radius-bottomright: 10px;
  }
 
 .calendrier-opacity { 
@@ -122,4 +122,14 @@ a.calendrier-annee:hover {
 	width: 12px; 
 	height: 12px;
 	behavior: url(win_png.htc);
+}
+
+.radius-top { 
+	-moz-border-radius-topleft: 6px; 
+	-moz-border-radius-topright: 6px;
+}
+
+.radius-bottom { 
+	-moz-border-radius-bottomleft: 6px; 
+	-moz-border-radius-bottomright: 6px;
 }
