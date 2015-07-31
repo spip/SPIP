@@ -1,15 +1,12 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-
+include_local("inc-public-global.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
-include_local("inc-cache.php3");
 
-global $flag_ecrire;
-define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
 
 function creer_repertoire_documents($nom) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
@@ -77,7 +74,7 @@ if ($test_vignette) {
 		$loc =_DIR_IMG . "test_$test_vignette";
 		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg',
 					      $taille_preview, $taille_preview, 'jpg', $loc, $test_vignette, true))
-			@header("Location: $m." . $preview['format']);
+			@header("Location: $loc." . $preview['format']);
 	}
 	exit;
 }
@@ -665,7 +662,6 @@ if ($vignette) {
 	if ($regs) {
 		$source = $regs[0];
 		$format = $regs[3];
-		include_local('inc-cache.php3');
 		$destination = creer_repertoire_documents('vignettes').$regs[2].'-s';	// adresse new style
 
 		if (lire_meta("creer_preview") == 'oui') {
@@ -685,8 +681,7 @@ if ($vignette) {
 	}
 
 	@header("Location: $fichier_vignette");
-	exit;
-}
+ } else {
 
 
 //
@@ -695,23 +690,26 @@ if ($vignette) {
 
 #var_dump($GLOBALS);
 
-if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
-else $vars = $HTTP_GET_VARS;
-$redirect_url = "ecrire/" . $vars["redirect"];
-$link = new Link($redirect_url);
-reset($vars);
-while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {
-		$link->addVar($key, $val);
+	if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
+	else $vars = $HTTP_GET_VARS;
+	$redirect_url = "ecrire/" . $vars["redirect"];
+	$link = new Link($redirect_url);
+	reset($vars);
+	while (list ($key, $val) = each ($vars)) {
+	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {
+	    $link->addVar($key, $val);
+	  }
 	}
-}
-if ($id_document)
-	$link->addVar('id_document',$id_document);
-if ($type == 'rubrique')
-	$link->delVar('id_article');
+	if ($id_document)
+	  $link->addVar('id_document',$id_document);
+	if ($type == 'rubrique')
+	  $link->delVar('id_article');
+	
+	header("Location: ".$link->getUrl());
+ }
 
-header ("Location: ".$link->getUrl());
-
-exit;
+# etudier les acces concurrents avant de lancer ça
+# header("Connection: close");
+# taches_de_fond();
 
 ?>

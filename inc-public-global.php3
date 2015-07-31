@@ -124,7 +124,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	}
 
 	// Calculer le chemin putatif du cache
-	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache('', $fond);
+	$chemin_cache = generer_nom_fichier_cache('', $fond);
 
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
@@ -249,7 +249,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 
 	$contexte_inclus['fond'] = $fond;
 
-	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte_inclus, $fond);
+	$chemin_cache = generer_nom_fichier_cache($contexte_inclus, $fond);
 
 	// Peut-on utiliser un fichier cache ?
 	determiner_cache($delais_inclus, $use_cache, $chemin_cache);
@@ -292,7 +292,7 @@ function admin_page($cached, $texte) {
 
 function calcule_fichier_logo($on) {
   $r= ereg_replace("^" . _DIR_IMG, "", $on);
-  spip_log("calculer_fihchier_logo $on $r");
+#  spip_log("calculer_fihchier_logo $on $r");
   return $r;
 }
 
@@ -314,10 +314,42 @@ function taches_de_fond() {
 		// Si MySQL est out, laisser souffler
 		if (!@file_exists('ecrire/data/mysql_out')
 		OR (time() - @filemtime('ecrire/data/mysql_out') > 300)) {
+#		  spip_log("cron");
 			include_ecrire('inc_cron.php3');
+
 			spip_cron();
 		}
 	}
+}
+
+
+//
+// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+//
+
+function creer_repertoire($base, $subdir) {
+	if (@file_exists("$base/.plat")) return '';
+	$path = $base.'/'.$subdir;
+	if (@file_exists($path)) return "$subdir/";
+
+	@mkdir($path, 0777);
+	@chmod($path, 0777);
+	$ok = false;
+	if ($f = @fopen("$path/.test", "w")) {
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
+		@fclose($f);
+		include("$path/.test");
+	}
+	if (!$ok) {
+		$f = @fopen("$base/.plat", "w");
+		if ($f)
+			fclose($f);
+		else {
+			@header("Location: spip_test_dirs.php3");
+			exit;
+		}
+	}
+	return ($ok? "$subdir/" : '');
 }
 
 ?>

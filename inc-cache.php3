@@ -61,7 +61,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 
 	$gzip = $flag_gz && $compresser_cache ? '.gz' : '';
 
-	return $subdir.$subdir2.$fichier_cache.$gzip;
+	return 'CACHE/' . $subdir.$subdir2.$fichier_cache.$gzip;
 }
 
 
@@ -94,36 +94,6 @@ function utiliser_cache(&$chemin_cache, $delais) {
 		$ok_cache = true;
 
 	return $ok_cache;
-}
-
-
-//
-// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
-//
-
-function creer_repertoire($base, $subdir) {
-	if (@file_exists("$base/.plat")) return '';
-	$path = $base.'/'.$subdir;
-	if (@file_exists($path)) return "$subdir/";
-
-	@mkdir($path, 0777);
-	@chmod($path, 0777);
-	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
-		@fputs($f, '<'.'?php $ok = true; ?'.'>');
-		@fclose($f);
-		include("$path/.test");
-	}
-	if (!$ok) {
-		$f = @fopen("$base/.plat", "w");
-		if ($f)
-			fclose($f);
-		else {
-			@header("Location: spip_test_dirs.php3");
-			exit;
-		}
-	}
-	return ($ok? "$subdir/" : '');
 }
 
 
