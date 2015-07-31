@@ -458,10 +458,7 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_47();
 	  maj_version('1.947');
 	}
-	if (upgrade_vers(1.948, $version_installee, $version_cible)) {
-	  maj_v019_48();
-	  maj_version('1.948');
-	}
+	// mauvaise manip
 	if (upgrade_vers(1.949, $version_installee, $version_cible)) {
 	  maj_v019_49();
 	  maj_version('1.949');
@@ -469,6 +466,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	if (upgrade_vers(1.950, $version_installee, $version_cible)) {
 	  maj_v019_50();
 	  maj_version('1.950');
+	}
+	if (upgrade_vers(1.951, $version_installee, $version_cible)) {
+	  maj_v019_51();
+	  maj_version('1.951');
 	}
 
 }
@@ -596,13 +597,6 @@ function maj_v019_47()
 	sql_alter("TABLE spip_auteurs  DROP INDEX lang");
 }
 
-// http://trac.rezo.net/trac/spip/changeset/10194
-// Gestion du verrou SQL par PHP
-function maj_v019_48()
-{
-	sql_alter("TABLE spip_versions CHANGE id_version bigint(21) DEFAULT 0 NOT NULL");
-}
-
 function maj_v019_49()
 {
 	sql_alter("TABLE spip_versions DROP INDEX date");
@@ -637,5 +631,15 @@ function maj_v019_50()
 		sql_alter("TABLE spip_$table DROP INDEX url_propre");
 		sql_alter("TABLE spip_$table DROP url_propre");		
 	}
+}
+
+// http://trac.rezo.net/trac/spip/changeset/10210
+// Erreur dans maj_v019_48():
+// // http://trac.rezo.net/trac/spip/changeset/10194
+// // Gestion du verrou SQL par PHP
+
+function maj_v019_51()
+{
+	sql_alter("TABLE spip_versions CHANGE id_version id_version bigint(21) DEFAULT 0 NOT NULL");
 }
 ?>
