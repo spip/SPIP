@@ -593,7 +593,7 @@ function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
 // attention c'est compile directement dans inc/references
 // http://doc.spip.org/@sinon
 function sinon ($texte, $sinon='') {
-	if ($texte OR (is_string($texte) AND strlen($texte)))
+	if ($texte OR (!is_array($texte) AND strlen($texte)))
 		return $texte;
 	else
 		return $sinon;
