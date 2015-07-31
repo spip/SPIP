@@ -132,26 +132,26 @@ function reponse_confirmation($var_confirm = '') {
 		return '';
 	}
 
-	$r = sql_select('*', 'spip_signatures', "statut=" . _q($var_confirm), '', "1");
+	$row = sql_fetsel('*', 'spip_signatures', "statut=" . _q($var_confirm), '', "1");
 
-	if (!spip_num_rows($r)) {
+	if (!$row) {
 		$confirm = _T('form_pet_aucune_signature');
 		return '';
 	}
 
-	$row = sql_fetch($r);
 	$id_signature = $row['id_signature'];
 	$id_article = $row['id_article'];
 	$adresse_email = $row['ad_email'];
 	$url_site = $row['url_site'];
 
-	$r = sql_select('email_unique, site_unique', 'spip_petitions', "id_article=$id_article");
-	$row = sql_fetch($r);
+	$row = sql_fetsel('email_unique, site_unique', 'spip_petitions', "id_article=$id_article");
 
 	$email_unique = $row['email_unique']  == "oui";
 	$site_unique = $row['site_unique']  == "oui";
 
-	spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature=$id_signature");
+	sql_updateq('spip_signatures',
+		    array('statut' => 'publie', 'date_time' => 'NOW()'),
+		    "id_signature=$id_signature");
 
 	if ($email_unique) {
 
@@ -300,7 +300,7 @@ function test_pass() {
 	include_spip('inc/acces');
 	for (;;) {
 		$passw = creer_pass_aleatoire();
-		if (!spip_num_rows(sql_select('statut', 'spip_signatures', "statut='$passw'")))
+		if (!sql_countsel('spip_signatures', "statut='$passw'"))
 			return $passw;
 	}
 
