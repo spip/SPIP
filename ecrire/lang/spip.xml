@@ -21,6 +21,7 @@
 	<langue code="da" />
 	<langue code="de" url="http://trad.spip.org/tradlang_module/spip?lang_cible=de">
 		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+		<traducteur nom="Benjamin Tricault" lien="http://trad.spip.org/auteur/benjamin-tricault" />
 	</langue>
 	<langue code="el" url="http://trad.spip.org/tradlang_module/spip?lang_cible=el">
 		<traducteur nom="Yannick Bailly" lien="http://trad.spip.org/auteur/yannick-bailly" />
