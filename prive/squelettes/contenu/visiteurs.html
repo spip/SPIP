@@ -1,10 +1,16 @@
 <h1><:info_visiteurs:></h1>
 
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class='nettoyeur'></div>
-
 #SET{statuts,#REM|auteurs_lister_statuts}
-[<p class="pagination">(#SELF|auteurs_navigation_statut{#ENV{statut,''},#GET{statuts}}|implode{' | '})</p>]
+<B_st>
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#SELF|parametre_url{statut,''}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{statut,''}|non)],ajax})]</li>
+		<BOUCLE_st(POUR){tableau #GET{statuts}}{si #GET{statuts}|>{1}}>
+		<li>[(#SELF|parametre_url{statut,#VALEUR}|lien_ou_expose{[(#VALEUR|traduit_statut)],#ENV{statut,''}|=={#VALEUR},ajax})]</li>
+		</BOUCLE_st>
+	</ul>
+</div>
+</B_st>
 
 #SET{filtre,#SESSION{statut}|=={0minirezo}|?{poubelle,'prepa|poubelle|refuse'}|explode{|}}
 <INCLURE{fond=prive/objets/liste/auteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}>
