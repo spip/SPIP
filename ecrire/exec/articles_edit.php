@@ -57,7 +57,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 		$chapo = "";
 	}
 
-	if ($connect_statut=="0minirezo" AND $virtuel){
+	if ($virtuel) {
 		echo "<p><div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>";
 		echo "<table width=100% cellspacing=0 cellpadding=0 border=0>";
 		echo "<tr><td valign='top'>";
@@ -68,8 +68,8 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 		echo "</td>";
 		echo "<td width=10>&nbsp;</td>";
 		echo "<td valign='top' width='50%'>";
-		if (!$virtuel) $virtuel = "http://";
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>";
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml'
+		style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>";
 		echo "<input type='hidden' name='changer_virtuel' value='oui'>";
 		echo "</td></tr></table>\n";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
@@ -79,9 +79,9 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	}
 
 	else {
-		echo "<HR>";
+		echo "<hr />";
 
-		if (($articles_chapeau) OR $chapo) {
+		if (($articles_chapeau) OR strlen($chapo)) {
 			if ($spip_ecran == "large") $rows = 8;
 			else $rows = 5;
 			echo "<B>"._T('info_chapeau')."</B>";
