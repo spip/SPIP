@@ -100,7 +100,7 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 	$p->fonctions = $fonctions;
 	$p->nom_champ = $nom_champ;
 	$p->id_boucle = $id_boucle;
-	$p->boucles = $boucles;			# vraiment indispensable ?? c'est lourd et on doit pouvoir le passer plut™t par argument - d'ailleurs il y a probablement un bug actuellement car $p->boucles n'est qu'une copie de &$boucles
+	$p->boucles = &$boucles;
 	$p->id_mere = $id_mere;
 	$p->type = 'html';
 	$p->process = '';
