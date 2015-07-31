@@ -10,10 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de redirection publique à la volée d'un objet éditorial en
+ * recalculant au passage son URL
+ *
+ * @package SPIP\Core\Redirections
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Un script utile pour recalculer une URL symbolique des son changement
-
+/**
+ * Script utile pour recalculer une URL symbolique dès son changement
+ *
+ * Cette action est appelé par les boutons 'Voir en ligne' ou par
+ * le fichier `.htaccess` activé lors d'une URL du genre : http://site/1234
+ *
+ * @example
+ *   ```
+ *   [(#VAL{redirect}
+ *      |generer_url_action{type=article&id=#ID_ARTICLE}
+ *      |parametre_url{var_mode,calcul}
+ *      |icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+ *   ```
+**/
 function action_redirect_dist()
 {
 	$type = _request('type');
