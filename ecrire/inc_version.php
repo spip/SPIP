@@ -504,7 +504,7 @@ define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
 if (!headers_sent())
 	@header("Vary: Cookie, Accept-Encoding");
 	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
-		@header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
+		@header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".str_replace(',', ', ', $GLOBALS['meta']['plugin_header'])):""));
 	else // header minimal
 		@header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 
