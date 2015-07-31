@@ -355,13 +355,30 @@ function plugin_necessite($n, $liste) {
 	return $msg;
 }
 
+/**
+ * Verifie qu'une dependance (plugin) est bien presente. 
+ *
+ * @param $liste
+ * 		Liste de description des plugins
+ * @param $nom
+ * 		Le plugin donc on cherche la presence
+ * @param $version
+ * 		L'éventuelle version minimum de la dependance.
+ * @return string.
+ * 		Vide si ok,
+ * 		Message d'erreur la dependance est absente.
+**/
 function plugin_controler_necessite($liste, $nom, $version)
 {
-  return (isset($liste[$nom])
-	  AND plugin_version_compatible($version,$liste[$nom]['version']))
-    ? '' :    _T('plugin_necessite_plugin', array(
-				'plugin' => $nom,
-				'version' => $version));
+	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'])) {
+		return '';
+	}
+	if ($version) {
+		return _T('plugin_necessite_plugin', array(
+			'plugin' => $nom,
+			'version' => $version));
+	}
+	return _T('plugin_necessite_plugin_sans_version', array('plugin' => $nom));
 }
 
 function plugin_controler_lib($lib, $url)
