@@ -228,12 +228,12 @@ function echappe_retour($letexte, $les_echap, $source='') {
 
 
 // fonction en cas de texte extrait d'un serveur distant:
-// on ne sait pas (encore) rappatrier les documents joints
+// on ne sait pas (encore) rapatrier les documents joints
 
 function supprime_img($letexte) {
-	$message = _L('indisponible');
+	$message = _T('img_indisponible');
 	while (eregi(__regexp_img_echappe, $letexte, $match)) {
-	  $letexte = ereg_replace($match[0], $message, $letexte);
+	  $letexte = str_replace($match[0], "($message)", $letexte);
 	}
 	return $letexte;
 }

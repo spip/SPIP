@@ -91,7 +91,6 @@ function afficher_compactes($image_name, $fichiers, $link) {
 		_T('upload_fichier_zip_texte2'),
 		"</p>",
 		$link->getForm('POST'),
-		_L(''),
 		"<div><input type='radio' checked name='action_zip' value='telquel'>",
 		_T('upload_zip_telquel'),
 		"</div>",

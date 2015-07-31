@@ -52,7 +52,9 @@ function parser_inclure($texte, $result) {
 				$p = $m[5];
 			}
 			
-			if ($p)	erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $s);
+			if ($p)
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+				$s);
 		}
 		$result[] = $champ;
 	}
@@ -239,7 +241,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$milieu = substr($texte, $p);
 
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
-			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu);
+			erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $milieu);
 		}
 		$id_boucle = $match[1];
 
@@ -278,9 +280,9 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		}
 		$milieu = substr($milieu, strlen($match[0]));
 		if (strpos($milieu, $s)) {
-			erreur_squelette(_T('erreur_boucle_syntaxe'),
+			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 				$id_boucle . 
-				_L('&nbsp;: balise B en aval'));
+				_T('zbug_balise_b_aval'));
 		}
 
 		//
@@ -289,8 +291,8 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$s = "</BOUCLE$id_boucle>";
 		$p = strpos($milieu, $s);
 		if ($p === false) {
-			erreur_squelette(_T('erreur_boucle_syntaxe'),
-					 _T('erreur_boucle_fermant',
+			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
+					 _T('zbug_erreur_boucle_fermant',
 						array('id'=>$id_boucle)));
 		}
 		$texte = substr($milieu, $p + strlen($s));
@@ -324,8 +326,8 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$all_res = parser_champs_etendus($debut, $all_res);
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
-			erreur_squelette(_T('erreur_boucle_syntaxe'),
-					 _T('erreur_boucle_double',
+			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
+					 _T('zbug_erreur_boucle_double',
 					 	array('id'=>$id_boucle)));
 		} else
 			$boucles[$id_boucle] = $result;

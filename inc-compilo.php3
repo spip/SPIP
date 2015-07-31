@@ -536,9 +536,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			if ($boucle->type_requete == 'boucle') {
 				$rec = &$boucles[$boucle->param];
 				if (!$rec) {
-					return array(_T('info_erreur_squelette'),
+					return array(_T('zbug_info_erreur_squelette'),
 						($boucle->param
-						. _L(' boucle recursive non definie')));
+						. ' '. _T('zbug_boucle_recursive_undef')));
 				} else {
 					$rec->externe = $id;
 					$descr['id_mere'] = $id;

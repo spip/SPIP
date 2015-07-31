@@ -61,7 +61,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscri
 		    $message = '';
 		else {
 		  spip_log("Mail incorrect: '$mail_inscription'");
-		  $message = _L('adresse mail incorrecte');
+		  $message = _T('info_email_invalide');
 		}
 	}
 

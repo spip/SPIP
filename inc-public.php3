@@ -121,7 +121,7 @@ else {
 			if ($res === false AND $affiche_boutons_admin
 			AND $auteur_session['statut'] == '0minirezo') {
 				include_ecrire('inc_debug_sql.php3');
-				erreur_squelette(_L('erreur d\'execution de la page'));
+				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}
 		}
 	}

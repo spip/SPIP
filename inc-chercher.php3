@@ -1,8 +1,8 @@
 <?php
 
 // Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CHERCHE")) return;
-define("_INC_CHERCHE", "1");
+if (defined("_INC_CHERCHER")) return;
+define("_INC_CHERCHER", "1");
 
 // Ce fichier doit imperativement contenir la fonction chercher-squelette
 // (cf commentaires dans inc-calcul)
@@ -41,7 +41,7 @@ function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 			$squelette = "$fond-dist";
 		else {
 			// erreur webmaster : $fond ne correspond a rien
-			erreur_squelette(_T('info_erreur_squelette2',
+			erreur_squelette(_T('zbug_info_erreur_squelette2',
 				 array('fichier'=>$fond)),
 				 $dossier);
 			return '';

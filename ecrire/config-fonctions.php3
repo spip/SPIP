@@ -431,7 +431,7 @@ fin_cadre_trait_couleur();
 /*
 ###### PAS D'INTERFACE DE CONFIG POUR PROTEGER "/IMG"
 //
-// Creer fichier .htaccess dans les répertoires de documents 
+// Creer fichier .htaccess dans les repertoires de documents 
 //
 
 if ($options == "avancees" AND !$REMOTE_USER ) {
