@@ -205,7 +205,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 		$titre = _T('info_racine_site');
 
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
-	$init = " disabled='disabled' type='text' value=\"" . $titre . '"';
+	$init = " disabled='disabled' type='text' value=\"" . $titre . '" style=\'width:300px;\'';
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))));
 
@@ -222,7 +222,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
-	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\""
+	return 	"<table width='100%'><tr width='100%'><td width='45'><a onclick=\""
 	.  $js
 	. "charger_node_url_si_vide('"
 	. $url
