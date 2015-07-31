@@ -225,7 +225,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 	// Decompresser au besoin
 	if (preg_match(",\bContent-Encoding: .*gzip,i", $headers)) {
-		$result = gzinflate(substr($result,10));
+		$result = spip_gzinflate_body($result);
 	}
 	// Faut-il l'importer dans notre charset local ?
 	if ($trans) {
@@ -235,6 +235,29 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 	return array($headers, $result);
 }
+
+// Certaines decompressions gz sont subtiles
+// cf. http://fr2.php.net/manual/fr/function.gzinflate.php#77336
+// (cas de http://files.spip.org/spip-zone/paquets.xml.gz qui ne pouvait etre recupere)
+function spip_gzinflate_body($gzData){
+	// return gzinflate(substr($gzData,10));
+    if(substr($gzData,0,3)=="\x1f\x8b\x08"){
+        $i=10;
+        $flg=ord(substr($gzData,3,1));
+        if($flg>0){
+            if($flg&4){
+                list($xlen)=unpack('v',substr($gzData,$i,2));
+                $i=$i+2+$xlen;
+            }
+            if($flg&8) $i=strpos($gzData,"\0",$i)+1;
+            if($flg&16) $i=strpos($gzData,"\0",$i)+1;
+            if($flg&2) $i=$i+2;
+        }
+        return gzinflate(substr($gzData,$i,-8));
+    }
+    else return false;
+}
+
 
 // http://doc.spip.org/@recuperer_body
 function recuperer_body($f, $taille_max=1048576)
