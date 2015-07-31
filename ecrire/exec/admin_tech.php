@@ -110,7 +110,7 @@ function autres_bases()
 	} else {
 	  
 	// Lire le fichier de connexion pour valeurs par defaut probables
-		list($adresse_db, $login_db, $pass_db, , $server_db)
+		list($adresse_db, $login_db, $pass_db, $sel, $server_db)
 		  = analyse_fichier_connection(_FILE_CONNECT);
 
 	// Passer la base courante en Hidden pour ne pas la proposer
