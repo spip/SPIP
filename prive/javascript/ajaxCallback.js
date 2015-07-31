@@ -602,6 +602,7 @@ jQuery(function() {
 	jQuery('form:not(.bouton_action_post)').parents('div.ajax')
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
+	jQuery("input[placeholder]:text").placeholderLabel();
 });
 
 // ... et a chaque fois que le DOM change
@@ -613,5 +614,7 @@ onAjaxLoad(function() {
 			jQuery(this).ajaxbloc();
 		jQuery('div.ajaxbloc', this)
 			.ajaxbloc();
+		jQuery("input[placeholder]:text",this).placeholderLabel();
 	}
 });
+

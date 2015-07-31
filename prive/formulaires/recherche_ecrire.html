@@ -7,8 +7,9 @@
 				 class="text[(#ENV{recherche}|oui) cancelable]"
 				 size="10"
 				 name="recherche"
-				 id="#ENV{id_champ,recherche}"[ value="(#ENV{recherche}|sinon{<:info_rechercher:>})"]
-	[(#ENV{recherche}|non) onfocus="if(!$(this).attr('data-done')){$(this).val('');$(this).attr('data-done','1');}"]
+				 id="#ENV{id_champ,recherche}"
+				 placeholder="<:info_rechercher|attribut_html:>"[
+				 value="(#ENV{recherche})"]
 	/>[<a
 	(#ENV{recherche}|oui)
 		class="cancel[ (#ENV{class,''})]"
@@ -20,8 +21,16 @@
 					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
 					 class="image"
 					 alt='<:info_rechercher|attribut_html:>'
-					 onclick="var a=$(this).siblings('a.refresh');a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();return false;"
+					 onclick="return recherche_submit_#ENV{id_champ,recherche}.apply(this);"
+					 onkeypress="return recherche_submit_#ENV{id_champ,recherche}.apply(this);"
 	/><a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
 </div></form>
-
+<script type="text/javascript">/*<![CDATA[*/
+function recherche_submit_#ENV{id_champ,recherche}(){
+	$.placeholderLabel.disable_placeholder_fields.apply($(this).parents('form').eq(0));
+	var a=$(this).siblings('a.refresh');
+	a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();
+	return false;
+}
+/*]]>*/</script>
 </div>
