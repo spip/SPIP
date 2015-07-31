@@ -292,7 +292,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>th</sup> מחוץ ל @liste@',
 'info_code_acces' => '!אל תשכח את את קודי הגישה שלך',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :/b> מומלץ לבדוק מראש אם המאכסן מכווץ מקודם בצורה סיסטמטית את הסקריפטים php ; לשם כך, אתה יכול למשל להשתמש בשרות הבא : @testgzip@  ',
+'info_compresseur_gzip' => '<b>N. B. :/b> מומלץ לבדוק מראש אם המאכסן מכווץ מקודם בצורה סיסטמטית את הסקריפטים php ; לשם כך, אתה יכול למשל להשתמש בשרות הבא : @testgzip@  ', # MODIF
 'info_compresseur_texte' => 'אם השרת שלך אינו מכווץ אוטומטית את דפי ה-HTML על מנת לשלחם לגולשים, אתה יכול לנסות לאלץ את הכיווץ הזה על מנת להפחית את נפח הדפים המורדים.<b>שים לב</b> : הדבר יכול להאיט בצורה ניכרת כמה מסוגי שרתים ',
 'info_config_suivi' => 'אם הכתובת הזאת מותאמת לרשימת דיוור,  אתה יכול לציין להלן את הכתובת איפה שמשתתפי האתר יכולים להרשם. הכתובת הזאת יכולה להיות כתובת כללית (למשל העמוד של רשימת הרישום דרך הרשת), או כתובת דוא"למעונקת עם נושא מסויים (למשל: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'הינך יכול להירשם לרשימת הדיוור של האתר. לאחר הרישום תקבל, על ידי דואר אלקטרוני, את המודעות באשר למאמרים ולמבזקים המוצעים לפרסום.',
@@ -325,7 +325,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'לפני שתוכל לכתוב מאמרים, אתה חייב ליצור לפחות מדור אחד.',
 'info_email_envoi' => '(כתובת הדוא"ל של השולח (רשות',
 'info_email_envoi_txt' => 'Indiquez ici l\'adresse à utiliser pour envoyer les emails (à défaut, l\'adresse destinataire sera utilisée comme adresse d\'envoi) :', # NEW
-'info_email_webmestre' => '(כתובת הדוא"ל של מומחה הרשת (רשות',
+'info_email_webmestre' => '(כתובת הדוא"ל של מומחה הרשת (רשות', # MODIF
 'info_entrer_code_alphabet' => ':רשום את הקוד של מערך התווים להשתמש בו',
 'info_envoi_email_automatique' => 'דיוור אוטומטי',
 'info_envoyer_maintenant' => 'שלח עכשיו',
@@ -369,7 +369,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_historique_texte' => 'Le suivi des révisions permet de conserver un historique de toutes les modifications apportées au contenu d\'un article, et d\'afficher les différences entre les versions successives.', # NEW
 'info_identification_publique' => '...הזהות הציבורית שלך',
 'info_image_process' => 'Veuillez sélectionner la meilleure méthode de fabrication des vignettes en cliquant sur l\'image correspondante.', # NEW
-'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>', # NEW
+'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>', # MODIF
 'info_images_auto' => 'Images calculées automatiquement', # NEW
 'info_informations_personnelles' => 'נתונים אישיים',
 'info_inscription_automatique' => 'הרשמה אוטומטית של עורכים חדשים',

@@ -325,7 +325,7 @@ inn liv-zimaz (sédir inn galri).',
 'info_classement_2' => '<sup>èm</sup> si @liste@',
 'info_code_acces' => 'Oubliy pa out prop bann kod-laksé !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'Si ladrès-la lé inn ladrès po inlistmèl, ou pé présiz anba tèrla kosa i lé ladrès out bann vizitèr i pé inskri azot. Ladrès-la i pé èt in sinp URL (lapaz pou linskrisyon si lo sit-minm), o in ladrès imèl, po un sizé pli spésifik(égsanp: <tt>@ladrès_swivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Ou pé abonn aou po gigny lo listmèl  lo sit-. Ou sar gigny in limèl pou tout bann zanons èk bann tite-nouvèl sat ni propoz po lapiblikasyon  si lo sit.',
@@ -358,7 +358,7 @@ inn liv-zimaz (sédir inn galri).',
 'info_ecrire_article' => 'Ou i dwa dabor kré inn promyé rubrik avand ékri out bann zartik.',
 'info_email_envoi' => 'Ladrès po lanvwa inn lilèl(lépa obligatwar)',
 'info_email_envoi_txt' => 'Mèrsi indiké tèrla out ladrès pou anvwa bann zimèl (sinonsa ladrès déstinatèr li sra ansèrvi osi kom ladrès lanvwa) :',
-'info_email_webmestre' => 'Ladrès imèl lo wèbmèt (lé pa obligatwar)',
+'info_email_webmestre' => 'Ladrès imèl lo wèbmèt (lé pa obligatwar)', # MODIF
 'info_entrer_code_alphabet' => 'Mèt isi lo kod lalfabé ifo anserv :',
 'info_envoi_email_automatique' => 'Anvwa inn limèl otomatikman',
 'info_envoyer_maintenant' => 'Anvwa astèr',
@@ -395,7 +395,7 @@ SPIP anba-la, i sava pa marsé.',
 'info_historique_texte' => 'Lo swivi sat la sanzé i pèrmé gard listwar out bann sanzman andann zartik, è afisé bann diférans sanm tout bann versyon.',
 'info_identification_publique' => 'Out lidantité piblik...',
 'info_image_process' => 'Mersi swazi lo méyèr manyir pou fabrik out bann vinyèt sam apiyé si limaz i korespon.',
-'info_image_process2' => '<b>Pangar</b> <i>Si néna okinn zimaz sat i pé vwar an liny, i pé dir lo sèrvèr li ébèrz out sitwèb lé pa kofigiré po akèy bann zouti-la. Ifo zot i koz èk lo résponsab po domann ali tout bann zekstansyon «GD» ou «Imagick».</i>',
+'info_image_process2' => '<b>Pangar</b> <i>Si néna okinn zimaz sat i pé vwar an liny, i pé dir lo sèrvèr li ébèrz out sitwèb lé pa kofigiré po akèy bann zouti-la. Ifo zot i koz èk lo résponsab po domann ali tout bann zekstansyon «GD» ou «Imagick».</i>', # MODIF
 'info_images_auto' => 'Ban zimaz-la lé kalkilé otomatikman',
 'info_informations_personnelles' => 'Sinkyèm étap : <b>Bann zinformasyon personèl</b>',
 'info_inscription_automatique' => 'Pou inskri otomatikman tout bann nouvo lotèr',

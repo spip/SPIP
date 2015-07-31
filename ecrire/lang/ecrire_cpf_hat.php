@@ -301,7 +301,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_classement_2' => '<sup>em</sup> sou @liste@',
 'info_code_acces' => 'Oubliy pa kod laksè w-a, pou w mèm !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'Si ladrès-la ap koresponn yon lis-limèl, w kap enskri isit anba ladès tout patisapan sou sit-la yon ke kap enskri a y. Ladrès-la pétèt se yon URL (pa egsanp lapaj lenskrisyon sou lalis-limèl pa Web-la), osnon yon ladrès limèl ki gen yon sijé spécifik (pa egsanp: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'W kap enskri w pou ou gen lalis-limèl sit-la. Ou ke gen alò yon limèl pou rankont tout anons pou atik-la ek tinouvèl nan sit-la ki pwopozé pou piblikasyon.',
@@ -334,7 +334,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_ecrire_article' => 'Ou dwa dabò kreye yon premyé ribrik avan ekri yon atik.',
 'info_email_envoi' => 'Adrès limèl pour voye yon mesaj (pa oblijé)',
 'info_email_envoi_txt' => 'Ann enskri isit ladrès fòk limèl yo ke rive sou (osnon  ladrès destinatè ke itilise konsa yon ladrès pou lanvwa) :',
-'info_email_webmestre' => 'Ladrès limèl wèbmèt(pa oblije)',
+'info_email_webmestre' => 'Ladrès limèl wèbmèt(pa oblije)', # MODIF
 'info_entrer_code_alphabet' => 'Rantre kòd lalfabe w vle sit-la li itilize :',
 'info_envoi_email_automatique' => 'Pou voye kèk limèl otomatikman',
 'info_envoyer_maintenant' => 'Voye kounye-a touswit',
@@ -374,7 +374,7 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 'info_historique_texte' => 'Swivi tout chanjman ran w kapab sere yon istorik pou tout bagay ki ap chanje nan kontni yon atik. Li afich kisa ki chanje ant kèk vèsyon sa-yo.',
 'info_identification_publique' => 'Ou lidantité piblik...',
 'info_image_process' => 'Tanpri chwazi mèyè métod pou lakreyasyon viyèt yo. Pou sa-a mèsi klike sou imaj la ki koresponn.',
-'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki parèt, pètèt se sèvè ki ebèj sit ou ki pa konfigire pou itilize outiy sa-yo. Fòk w kontak responsab teknik sèvè an pou domann tout ektansyon «GD» ou «Imagick» sa-yo.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki parèt, pètèt se sèvè ki ebèj sit ou ki pa konfigire pou itilize outiy sa-yo. Fòk w kontak responsab teknik sèvè an pou domann tout ektansyon «GD» ou «Imagick» sa-yo.</i>', # MODIF
 'info_images_auto' => 'Imaj kalkilé otomatikman',
 'info_informations_personnelles' => 'Sinkyèm etap : <b>Enfòmasyon pèsonel yo</b>', # MODIF
 'info_inscription_automatique' => 'Enskrisyon otomatik pou nouvo redaktè yo',

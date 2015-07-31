@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => ' out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_compatibilite_html' => 'HTML norm to apply',
-'info_compresseur_gzip' => 'It is advisable to check first whether your hosting provider already systematically compresses PHP scripts. To do this you can use a service such as @testgzip@',
+'info_compresseur_gzip' => 'It is advisable to check first whether your hosting provider already systematically compresses PHP scripts. To do this you can use a service such as @testgzip@', # MODIF
 'info_compresseur_texte' => 'If your server does not compress HTML pages before sending them, you can attempt to force compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
 'info_config_suivi' => 'If this address corresponds to a mailing list, you can indicate the subscription address for this list. This may be a URL (e.g. a webpage enabling subscription online), or an email address with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can subscribe to the mailing-list for this site. You will then receive email announcements concerning articles and news items submitted for publication.',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Before writing any articles, you must create at least one section.',
 'info_email_envoi' => 'Sender\'s email address (optional)',
 'info_email_envoi_txt' => 'Enter the sender\'s email address used for sending emails (by default, the recipient\'s address is used as the sender\'s address) :',
-'info_email_webmestre' => 'Webmaster\'s email address (optional)',
+'info_email_webmestre' => 'Webmaster\'s email address (optional)', # MODIF
 'info_entrer_code_alphabet' => 'Enter the code of the character set to be used:',
 'info_envoi_email_automatique' => 'Automated mailing',
 'info_envoyer_maintenant' => 'Send now',
@@ -375,7 +375,7 @@ via FTP.</p>',
 'info_historique_texte' => 'Revision tracking allows you to view changes  made to an article and displays the differences between successive versions.',
 'info_identification_publique' => 'Your public identity...',
 'info_image_process' => 'Select the best method to create thumbnails by clicking on the corresponding picture.',
-'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any images, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any images, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # MODIF
 'info_images_auto' => 'Images calculated automatically',
 'info_informations_personnelles' => 'Personal information',
 'info_inscription_automatique' => 'Automatic registration for new editors',
@@ -491,7 +491,7 @@ via FTP.</p>',
   giving them their access code for the private area. Some
   service providers disallow the sending of email from their
   servers: in that case, automated registration cannot be
-  implemented.</i></blockquote>',
+  implemented.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
@@ -762,7 +762,7 @@ and their status is colour-coded:',
 'plugin_titre_automatique' => 'Automatic installation',
 'plugin_titre_automatique_ajouter' => 'Add plugins',
 'plugin_titre_installation' => 'Installation of the @plugin@ plugin',
-'plugin_titre_modifier' => 'Mes plugins', # NEW
+'plugin_titre_modifier' => 'My plugins',
 'plugin_zip_active' => 'Continue in order to activate',
 'plugin_zip_adresse' => 'To load a zipped plugin file, or a list of plugins, enter the path below.',
 'plugin_zip_adresse_champ' => 'Path of the plugin or list ',
@@ -774,7 +774,7 @@ and their status is colour-coded:',
 'plugins_actif_aucun' => 'No plugins active.',
 'plugins_actif_un' => 'One plugin active',
 'plugins_actifs' => '@count@ active plugins.',
-'plugins_actifs_liste' => 'Active plugins', # MODIF
+'plugins_actifs_liste' => 'Enabled',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'One plugin available',
 'plugins_disponibles' => '@count@ plugins available.',
@@ -782,7 +782,7 @@ and their status is colour-coded:',
 'plugins_liste' => 'List of plugins',
 'plugins_liste_extensions' => 'Extensions',
 'plugins_recents' => 'Recent plugins',
-'plugins_tous_liste' => 'Tous', # NEW
+'plugins_tous_liste' => 'All',
 'plugins_vue_hierarchie' => 'Hierarchy',
 'plugins_vue_liste' => 'List',
 'protocole_ldap' => 'Protocol version:',

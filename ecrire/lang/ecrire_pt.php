@@ -302,7 +302,7 @@ ou da rede',
 'info_classement_2' => '<sup>e</sup> no @liste@',
 'info_code_acces' => 'Não se esqueça dos seus próprios códigos de acesso !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'Se este endereço corresponder a uma mailing-list, pode indicar, a seguir, o endereço no qual os participantes no sítio podem inscrever-se. Este endereço pode ser uma URL (por exemplo a página de inscrição na lista pela Web), ou um endereço email com um assunto específico (por exemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste sítio. Receberá então, por correio electrónico, os anúncios de artigos e de notícias propostos para publicação.',
@@ -335,7 +335,7 @@ ou da rede',
 'info_ecrire_article' => 'Antes de poder escrever artigos, deve criar pelo menos uma rubrica.',
 'info_email_envoi' => 'Endereço de email de envio (opcional)',
 'info_email_envoi_txt' => 'Indique aqui o endereço a utilizar para mandar os emails (se não for o caso, o endereço do destinatário será utilizado como endereço de envio) :',
-'info_email_webmestre' => 'Endereço e-mail do webmestre (opcional)',
+'info_email_webmestre' => 'Endereço e-mail do webmestre (opcional)', # MODIF
 'info_entrer_code_alphabet' => 'Insira o código do alfabeto a utilizar :',
 'info_envoi_email_automatique' => 'Envio automático de mails',
 'info_envoyer_maintenant' => 'Enviar agora',
@@ -376,7 +376,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_historique_texte' => 'O acompanhamento das revisões permite conservar um histórico de todas as  alterações realizadas ao conteúdo dum artigo, e visualizar as diferenças entre as sucessivas versões',
 'info_identification_publique' => 'A sua identidade pública...',
 'info_image_process' => 'Seleccione o melhor método de criar as vinhetas clicando sobre a imagem correspondente.',
-'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>', # MODIF
 'info_images_auto' => 'Imagens calculadas automaticamente',
 'info_informations_personnelles' => 'Quinta etapa : <b>Informações pessoais<b>', # MODIF
 'info_inscription_automatique' => 'Inscrição automática de novos redactores',

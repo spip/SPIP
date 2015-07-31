@@ -296,7 +296,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_classement_2' => '@liste@\'den     inci',
 'info_code_acces' => 'Kendi erişim şifrelerinizi unutmayınız !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@',
+'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Eğer sunucunuz html sayfaları otomatik olarak sıkıştırmıyorsa, yüklenen sayfa ağırlıklarını düşürmek için bu işlemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu işlem bazı sunucuları gözle görülür şekilde yavaşlatabilir.',
 'info_config_suivi' => 'Eğer bu adres bir gönderi listesi (mailing-list)\'ne karşı düşüyorsa, aşağıya site katılımcılarının hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (örneğin listeye Web ile kaydolma sayfası), veya özel bir konu içeren (örneğin: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
 'info_config_suivi_explication' => 'Bu sitenin gönderi listesi (mailing-list)\'ne abone olabilirsiniz. O takdirde yayınlanması önerilen makale ve haber ilanları e-posta yoluyla elinize geçecektir. ',
@@ -329,7 +329,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_ecrire_article' => 'Makale yazmadam önce en az bir bölüm yaratmanız gerekir.',
 'info_email_envoi' => 'Gönderi e-posta adresi (seçimlik)',
 'info_email_envoi_txt' => 'E-postaları göndermek için kullanılacak adresi burada belirtiniz (yoksa, gönderi adresi olarak alıcı adresi kullanılacaktır) :',
-'info_email_webmestre' => 'Ağ Yöneticisinin e-posta adresi (seçimlik)',
+'info_email_webmestre' => 'Ağ Yöneticisinin e-posta adresi (seçimlik)', # MODIF
 'info_entrer_code_alphabet' => 'Kullanılacak alfabenin kodunu giriniz :',
 'info_envoi_email_automatique' => 'Otomatik e-posta gönderme',
 'info_envoyer_maintenant' => 'Şimdi gönder',
@@ -367,7 +367,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_historique_texte' => 'Gözden geçirmeleri izleme bir makalenin içeriğine getirilen tüm değişikliklerin bir tarihçesini saklamaya yarar ve de birbirini izleyen uyarlamalar arasındaki farkları gösterir. ',
 'info_identification_publique' => 'Kamu kimliğiniz ...',
 'info_image_process' => 'Lütfen, uygun resme tıklayarak en iyi ikon üretim yöntemini seçiniz. ',
-'info_image_process2' => '<b>NOT:</b> <i> Hiç resim çıkmıyorsa, sitenizi yayınlayan sunucu bu tür araçlar kullanmak için konfifüre edilmemiş demektir. Eğer bu işlevleri kullanmak istiyorsanız teknik yetkiliye başvurun ve «GD» ya da «Imagick» aksesuarlarını isteyin.</i>',
+'info_image_process2' => '<b>NOT:</b> <i> Hiç resim çıkmıyorsa, sitenizi yayınlayan sunucu bu tür araçlar kullanmak için konfifüre edilmemiş demektir. Eğer bu işlevleri kullanmak istiyorsanız teknik yetkiliye başvurun ve «GD» ya da «Imagick» aksesuarlarını isteyin.</i>', # MODIF
 'info_images_auto' => 'Otomatik olarak hesaplanan resimler',
 'info_informations_personnelles' => 'Kişisel bilgiler',
 'info_inscription_automatique' => 'Yeni yazarların otomatik kaydı',

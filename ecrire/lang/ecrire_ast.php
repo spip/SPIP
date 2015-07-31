@@ -301,7 +301,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>u</sup> en @liste@',
 'info_code_acces' => '¡Nun escaezas los tos códigos d\'accesu!',
 'info_compatibilite_html' => 'Norma HTML a siguir',
-'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l\'agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@',
+'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l\'agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@', # MODIF
 'info_compresseur_texte' => 'Si el to sirvidor nun comprime automáticamente les páxines html par unviales a los internautes, puedes tentar de forzar esta compresión pa amenorgar el pesu de les páxines descargáes. <b>Atención</b>: esto puede ralentizar enforma dellos sirvidores.',
 'info_config_suivi' => 'Si estes señes corresponden a una llista de corréu, pues indicar embaxo les señes nes que pueden apuntase los participantes nel sitiu. Estes señes puen ser una URL (por exemplu la páxina d\'inscripción a la llista na Rede), o unes señes d\'email con un asuntu específicu (por exemplu: <tt>@señes_llista@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Puedes soscribite a la llista de corréu d\'esti sitiu. D\'esti mou recibirás per corréu electrónicu los anuncios d\'artículos y de breves propuestos pa espublizar.',
@@ -334,7 +334,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Enantes que puedas escribir artículos, tienes que crear polo menos una estaya.',
 'info_email_envoi' => 'Señes d\'email d\'unvíu (opcional)',
 'info_email_envoi_txt' => 'Indica equí les señes a utilizar pa unviar los emails (por omisión, usense les señes del destinatariu como señes d\'unvíu):',
-'info_email_webmestre' => 'Señes d\'email del webmaster (opcional)',
+'info_email_webmestre' => 'Señes d\'email del webmaster (opcional)', # MODIF
 'info_entrer_code_alphabet' => 'Enxerta\'l códigu de l\'alfabetu a utilizar:',
 'info_envoi_email_automatique' => 'Unvíu d\'e-mails automáticu',
 'info_envoyer_maintenant' => 'Unviar agora',
@@ -379,7 +379,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_historique_texte' => 'El siguimientu de les revisiones permite conservar un históricu de toles modificaciones amestaes al conteníu d\'un artículu, y amosar les diferencies ente les versiones sucesives.',
 'info_identification_publique' => 'La to identidá pública...',
 'info_image_process' => 'Has d\'escoyer el meyor métodu de fabricación de les viñetes calcando enriba de la imaxe correspondiente.',
-'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d\'estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d\'estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>', # MODIF
 'info_images_auto' => 'Imaxes calculáes automáticamente',
 'info_informations_personnelles' => 'Información personal',
 'info_inscription_automatique' => 'Inscripción automática de redactores nuevos',
@@ -495,7 +495,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
   que-yos da los códigos d\'accesu al sitiu priváu. Dellos
   agospiadores desactiven l\'unvíu d\'e-mails dende los sos
   sirvidores: nesti casu, la inscripción automática ye
-  imposible.</i></blockquote>',
+  imposible.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',

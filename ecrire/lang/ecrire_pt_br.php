@@ -290,7 +290,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_classement_2' => '<sup><u>a</u></sup> em @liste@',
 'info_code_acces' => 'Não se esqueça dos seus códigos de acesso!',
 'info_compatibilite_html' => 'Norma HTML a ser seguida',
-'info_compresseur_gzip' => '<b>N. B. :</b> É recomendavel que se verifique previamente se o serviço de hospedagem já comprime sistematicamente os scripts php; para isso, você pode, por exemplo, usar o serviço a seguir: @testgzip@',
+'info_compresseur_gzip' => '<b>N. B. :</b> É recomendavel que se verifique previamente se o serviço de hospedagem já comprime sistematicamente os scripts php; para isso, você pode, por exemplo, usar o serviço a seguir: @testgzip@', # MODIF
 'info_compresseur_texte' => 'Se o seu servidor não comprime automaticamente as páginas html para enviá-las aos internautas, você pode tentar forçar esta compressão diminuindo o peso das páginas transferidas. <b>Atenção</b>: isto pode retardar consideravelmente alguns servidores.',
 'info_config_suivi' => 'Se este endereço corresponde a uma mailing-list, você pode informar abaixo o endereço onde os participantes do site podem se inscrever. Este endereço pode ser um URL (por exemplo a página de inscrição na lista pela Web), ou um endereço de e-mail dotado de um assunto específico (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Voce pode assinar a  mailing-list deste site. Você irá receber por e-mail, os avisos de matérias e notas propostos para publicação.',
@@ -323,7 +323,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_ecrire_article' => 'Antes de poder escrever matérias, você precisa criar pelo menos uma seção.',
 'info_email_envoi' => 'Endereço de e-mail de envio (opcional)',
 'info_email_envoi_txt' => 'Informe aqui o endereço a ser utilizado para enviar os e-mails (por padrão, o endereço de destino será usado como endereço de envio):',
-'info_email_webmestre' => 'Endereço de e-mail do webmaster(opcional)',
+'info_email_webmestre' => 'Endereço de e-mail do webmaster(opcional)', # MODIF
 'info_entrer_code_alphabet' => 'Informe o código de alfabeto a ser usado:',
 'info_envoi_email_automatique' => 'Envio automático de e-mails',
 'info_envoyer_maintenant' => 'Enviar agora',
@@ -358,7 +358,7 @@ os autores excluídos por uma lixeira.',
 'info_historique_texte' => 'O acompanhamento de versões permite conservar um histórico de todas as modificações feitas ao conteúdo de uma matéria, e de exibir as diferenças entre as versões sucessivas.',
 'info_identification_publique' => 'Sua identificação pública...',
 'info_image_process' => 'Por favor, selecione o melhor método de criação dos ícones, clicando na imagem correspondente.',
-'info_image_process2' => '<b>N.B.</b> <i>Se nenhuma imagem está sendo exibida, o servidor que hospeda o seu site não foi configurado para utilizar essas ferramentas. Se você deseja usar essas funções, contate o responsável técnico e solicite as extensões «GD» ou «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Se nenhuma imagem está sendo exibida, o servidor que hospeda o seu site não foi configurado para utilizar essas ferramentas. Se você deseja usar essas funções, contate o responsável técnico e solicite as extensões «GD» ou «Imagick».</i>', # MODIF
 'info_images_auto' => 'Imagens calculadas automaticamente',
 'info_informations_personnelles' => 'Informações pessoais',
 'info_inscription_automatique' => 'Inscrição automática de novos redatores',
@@ -460,7 +460,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_publier' => 'publicar',
 'info_publies' => 'Suas matérias publicadas online',
 'info_question_accepter_visiteurs' => 'Se os templates do seu site prevêem o cadastramento de visitantes sem acesso à área privada, por favor, ative a opção abaixo:',
-'info_question_inscription_nouveaux_redacteurs' => 'Você quer aceitar inscrições de novos redatores a partir do site público? Se você aceitar, os visitantes poderão se cadastrar através de um formulário automatizado, tendo acesso à área privada para propôr as suas próprias matérias.<blockquote><i>Durante a fase de inscrição, os usuários recebem um e-mail automático. fornecendo-lhes os seus códigos de acesso à área privada. Alguns serviços de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscrição automática é impossível.</i></blockquote>',
+'info_question_inscription_nouveaux_redacteurs' => 'Você quer aceitar inscrições de novos redatores a partir do site público? Se você aceitar, os visitantes poderão se cadastrar através de um formulário automatizado, tendo acesso à área privada para propôr as suas próprias matérias.<blockquote><i>Durante a fase de inscrição, os usuários recebem um e-mail automático. fornecendo-lhes os seus códigos de acesso à área privada. Alguns serviços de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscrição automática é impossível.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Você deseja usar o motor de busca integrado ao SPIP? (desativá-lo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Não exibir as capturas dos sites de origem das visitas',
 'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
