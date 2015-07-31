@@ -1603,8 +1603,8 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	// div fermee par debut_droite() ou creer_colonne_droite
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
-		<tr>\n<td width='200' class='colonne_etroite serif' valign='top' $rspan>
-		\n<div style='width: ${largeur}px; overflow:hidden;'>
+		<tr>\n<td style='width: 200' class='colonne_etroite serif' valign='top' $rspan>
+		\n<div style='width: 200px; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
