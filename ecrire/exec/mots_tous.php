@@ -179,7 +179,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 		echo "<td>";
 		icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
-		if ($supprimer_groupe) {
+		if (!$supprimer_groupe) {
 			echo "<td>";
 			icone(_T('icone_supprimer_groupe_mots'), generer_url_ecrire("mots_tous","supp_group=$id_groupe"), "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
