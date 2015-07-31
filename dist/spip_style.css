@@ -5,15 +5,7 @@
 
 
 /* Raccourcis typographiques de SPIP */
-i.spip {}
-strong.spip {}
-hr.spip {}
-
 .spip_puce { list-style-position: outside; }
-
-ul.spip {}
-ol.spip {}
-li.spip {}
 
 h3.spip {
 	text-align: center; 
@@ -23,23 +15,20 @@ h3.spip {
 	font-weight: bold; }
 
 /* Paragraphes, citations, code et poesie */
-p.spip {}
-p.spip_note {}
-
 blockquote.spip, .spip_serif { font-family: Georgia, Times, serif; }
 
-blockquote.spip { 
+blockquote.spip {
 	margin: 1em; 
 	padding-left: 1em;
 	padding-right: 1em;
 	border: 1px dotted; }
 
-div.spip_poesie { 
+.spip_poesie { 
 	margin: 1em; 
 	padding-left: 1em; 
 	border-left: 1px solid;
 	font-family: Garamond, Georgia, Times, serif; }
-div.spip_poesie div { text-indent: -60px; margin-left: 60px; }
+.spip_poesie div { text-indent: -60px; margin-left: 60px; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.2em; }
 .spip_cadre { width: 99%; border: 1px inset; }
