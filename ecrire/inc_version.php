@@ -182,7 +182,8 @@ $spip_pipeline = array(
 	'affiche_gauche' => '',
 	'affiche_droite' => '',
 	'affiche_milieu' => '',
-	'affichage_final' => '|f_surligne|f_tidy|f_admin' # cf. public/assembler
+	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
+	'taches_generales_cron' => ''
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
