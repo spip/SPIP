@@ -226,8 +226,8 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'envoi_via_le_site' => 'Envío a través del sitio',
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'última baliza no cerrada:',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'Un erreor técnico impidió guardar correctamente el campo @champs@.',
+'erreur_technique_enregistrement_impossible' => 'Un erreor técnico impidió guardar los datos.',
 'erreur_texte' => 'error(es)',
 'etape' => 'Etapa',
 
@@ -277,7 +277,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Mensaje enviado',
 'form_prop_non_enregistre' => 'Tu propuesta no fue registrada.',
 'form_prop_sujet' => 'Asunto',
-'form_prop_url_site' => 'Dirección (URL) del sitio', # MODIF
+'form_prop_url_site' => 'Dirección URL del sitio',
 'forum_non_inscrit' => 'No estás inscrita o inscrito, o bien la dirección o la contraseña son erróneas.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -477,7 +477,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Tus recordatorios',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_ajout_id_rapide' => 'Agregado rápido',
 'label_poids_fichier' => 'Tamaño',
 'lien_afficher_icones_seuls' => 'Mostrar sólo los iconos',
 'lien_afficher_texte_icones' => 'Mostrar iconos y texto',
@@ -580,7 +580,7 @@ volver a conectarte al sitio.
 'pass_nouveau_pass' => 'Nueva contraseña',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Contraseña olvidada',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'Para cambiar tu contraseña, primero es necesario verificar tu identidad. Para eso, indica la dirección email asociada a tu cuenta.',
 'pass_quitter_fenetre' => 'Abandonar esta ventana',
 'pass_rappel_login' => 'Recuerda: tu identificador (login) es «@login@».',
 'pass_recevoir_mail' => 'Recibirás un mensaje de correo electrónico indicando como recuperar tu acceso al sitio.',
@@ -603,7 +603,7 @@ volver a conectarte al sitio.
 'suivant' => 'siguiente',
 
 // T
-'taille_go' => '@taille@ Go', # NEW
+'taille_go' => '@taille@ GB',
 'taille_ko' => '@taille@ KB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
