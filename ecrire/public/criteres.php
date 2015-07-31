@@ -523,9 +523,10 @@ function calculer_criteres ($idb, &$boucles) {
 
 function kwote($lisp)
 {
-	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
-		($r[1] . "\"" . spip_abstract_quote($r[2]) . "\"" ) :
-		"spip_abstract_quote($lisp)"; 
+	if (preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r))
+		return $r[1] . "\"" . spip_abstract_quote(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
+	else
+		return "spip_abstract_quote($lisp)"; 
 }
 
 function critere_IN_dist ($idb, &$boucles, $crit)
@@ -925,8 +926,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 				foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
 					$a = calculer_liste($p, $desc, $boucles, $parent);
 					if ($op == 'IN') $val[]= $a;
-					else if ($op == 'REGEXP') $val[]=kwote($a); // garder les echappements des ' dans les REGEXP
-					else $val[]=kwote(str_replace("\\'","'",$a));
+					else $val[]=kwote($a);
 				}
 	}
 
