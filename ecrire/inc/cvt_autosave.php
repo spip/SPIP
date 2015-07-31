@@ -29,7 +29,8 @@ function autosave_clean_value($val){
  * @return array
  */
 function cvtautosave_formulaire_charger($flux){
-	if (isset($flux['data']['_autosave_id'])
+	if (is_array($flux['data'])
+	  AND isset($flux['data']['_autosave_id'])
 	  AND $cle_autosave = $flux['data']['_autosave_id']){
 
 		$form = $flux['args']['form'];
