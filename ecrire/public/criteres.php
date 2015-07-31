@@ -556,7 +556,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 	  if (@!array_key_exists($col, $desc['field'])) {
 		if ($exceptions_des_jointures[$col])
-			$col = $exceptions_des_jointures[$col];
+		  // on ignore la table, quel luxe!
+			list($t, $col) = $exceptions_des_jointures[$col];
 		$col_table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
 	  }
 	}
