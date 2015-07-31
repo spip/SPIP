@@ -94,7 +94,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL) {
 	static $images_recalcul = array();
 	if (strlen($img)==0) return false;
-	
+
 	$source = trim(extraire_attribut($img, 'src'));
 	if (strlen($source) < 1){
 		$source = $img;
@@ -128,7 +128,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
-	
+
 	if (@file_exists($f = $fichier)){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 		$date_src = @filemtime($f);
@@ -149,7 +149,8 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	// pas de taille mesurable
 	if (!($ret["hauteur"] OR $ret["largeur"]))
 		return false;
-	
+		
+
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
 	// cas particulier de reduire :
@@ -303,6 +304,8 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 			  && !$lock
 	  )
 		if (@file_exists($valeurs['fichier_dest'])){
+			// dans tous les cas mettre a jour la taille de l'image finale
+			list ($valeurs["hauteur_dest"],$valeurs["largeur_dest"]) = taille_image($valeurs['fichier_dest']);
 			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
