@@ -96,17 +96,23 @@ function nettoyer_chapo($chapo){
 function code_echappement($rempl, $source='') {
 	if (!strlen($rempl)) return '';
 
-	// Convertir en base64
-	$base64 = base64_encode($rempl);
-
 	// Tester si on echappe en span ou en div
 	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $rempl) ?
 		'div' : 'span';
 	$nn = ($mode == 'div') ? "\n\n" : '';
+	$return = '';
 
-	return
-		inserer_attribut("<$mode class=\"base64$source\">", 'title', $base64)
-		."</$mode>$nn";
+	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
+	$arempl = str_split($rempl, 30000);
+	foreach($arempl as $rempl) {
+		// Convertir en base64
+		$base64 = base64_encode($rempl);
+		$return .=
+			inserer_attribut("<$mode class=\"base64$source\">", 'title', $base64)
+					                ."</$mode>";
+	}
+
+	return $return . $nn;
 }
 
 // Echapper les <html>...</ html>
