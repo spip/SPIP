@@ -43,7 +43,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'page'=>'article',
 				'texte_retour' => 'icone_retour_article',
 				'texte_modifier' => 'icone_modifier_article',
-				'texte_objets' => 'info_articles_2',
+				'texte_objets' => 'articles',
+				'texte_objet' => 'article',
 				'info_aucun_objet'=> 'info_aucun_article',
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
@@ -62,6 +63,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_retour' => 'icone_retour',
 				'texte_modifier' => 'admin_modifier_auteur',
 				'texte_objets' => 'icone_auteurs',
+				'texte_objet' => 'auteur',
 				'info_aucun_objet'=> 'info_aucun_auteur',
 				'info_1_objet' => 'info_1_auteur',
 				'info_nb_objets' => 'info_nb_auteurs',
@@ -75,7 +77,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'url_voir' => 'naviguer',
 				'url_edit' => 'rubriques_edit',
 				'texte_retour' => 'icone_retour',
-				'texte_objets' => 'info_rubriques',
+				'texte_objets' => 'rubriques',
+				'texte_objet' => 'rubrique',
 				'texte_modifier' => 'icone_modifier_rubrique',
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
@@ -133,6 +136,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  *
  * texte_retour
  * texte_modifier
+ * texte_objets
  *
  * info_aucun_objet
  * info_1_objet
@@ -204,7 +208,9 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	if (!isset($infos['texte_modifier']))
 		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
 	if (!isset($infos['texte_objets']))
-		$infos['texte_objets'] = $infos['type'].':'.'icone_'.$infos['table_objet'];
+		$infos['texte_objets'] = $infos['type'].':'.'titre_'.$infos['table_objet'];
+	if (!isset($infos['texte_objet']))
+		$infos['texte_objet'] = $infos['type'].':'.'titre_'.$infos['type'];
 
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
@@ -258,6 +264,10 @@ function lister_tables_objets_surnoms(){
 			));
 		$infos_tables = lister_tables_objets_sql();
 		foreach($infos_tables as $t=>$infos){
+			// cas de base type=>table
+			// et preg_replace(',^spip_|^id_|s$,',table)=>table
+			$surnoms[$infos['type']] = $infos['table_objet'];
+			$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['table_objet'];
 			if (is_array($infos['table_objet_surnoms']) AND count($infos['table_objet_surnoms']))
 				foreach($infos['table_objet_surnoms'] as $surnom)
 					$surnoms[$surnom] = $infos['table_objet'];
