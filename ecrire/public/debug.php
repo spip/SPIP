@@ -51,12 +51,19 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
+	$anc = '';
 	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr><td style='text-align: right'>$i&nbsp;</td><td>"
+		$res .= "<tr id='req$i'><td style='text-align: right'><a href='#spip-debug'><b>"
+		  . $i
+		  ."&nbsp;</b></a>\n</td><td>"
 		  .join("</td>\n<td>",$err)
 		  ."</td></tr>\n";
+		$anc .= "<a  title='"
+		  .  textebrut($err[0])
+		  . "' href='#req$i'>$i</a> ";
 		$i++;
+		
 	}
 	$cols = 1+count($err);
 	$style = _DIR_RESTREINT ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
@@ -66,7 +73,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	. ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-	. '</th></tr>'
+	. "<br />$anc<br /></th></tr>"
 	. $res
 	. "</table>";
 }
@@ -90,7 +97,7 @@ $dt")) .
 	}
 	array_multisort($t, SORT_DESC, $q, $temps);
 
-	return $res . affiche_erreurs_page($temps, count($temps) . ' ' . _T('icone_statistiques_visites'));
+	return $res . affiche_erreurs_page($temps, _T('icone_statistiques_visites'));
 }
 
 //
