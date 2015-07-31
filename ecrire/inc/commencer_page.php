@@ -202,10 +202,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 // http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie($id_auteur) {
 
-	$result_messages = sql_select("lien.id_message", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".sql_quote($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
-	$total_messages = @sql_count($result_messages);
+	$result_messages = sql_allfetsel("lien.id_message", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".sql_quote($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message",'','');
+	$total_messages = count($result_messages);
 	if ($total_messages == 1) {
-		$row = @sql_fetch($result_messages);
+		$row = $result_messages[0];
 		$ze_message=$row['id_message'];
 		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' class='ligne_foncee'>"._T('info_nouveau_message')."</a>";
 	} elseif ($total_messages > 1)
@@ -250,12 +250,12 @@ function alertes_auteur($id_auteur) {
 // http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur)
 {	
-	$result = sql_select("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND statut IN ('1comite', '0minirezo') AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND " . sql_in('statut', array('1comite', '0minirezo')));
 
-	if (!sql_count($result)) return '';
+	if (!$result) return '';
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	$res = '';
-	while ($row = sql_fetch($result)) {
+	foreach ($result as $row) {
 		$id = $row['id_auteur'];
 		$mail = formater_auteur_mail($row, $id);
 		$auteurs = "<a href='" . generer_url_ecrire("auteur_infos", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
