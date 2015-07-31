@@ -320,22 +320,4 @@ function message_erreur_404 ($erreur= "") {
 		     'process_ins' => 'php');
 }
 
-//
-// pour calcul du nom du fichier cache et autres
-//
-
-function nettoyer_uri() {
-	return eregi_replace
-		('[?&](PHPSESSID|(var_[^=&]*))=[^&]*',
-		'', 
-		 $GLOBALS['REQUEST_URI']);
-}
-
-// Renvoie le _GET ou le _POST emis par l'utilisateur
-function _request($var) {
-	global $_GET, $_POST;
-	if (isset($_GET[$var])) return $_GET[$var];
-	if (isset($_POST[$var])) return $_POST[$var];
-	return NULL;
-}
 ?>
