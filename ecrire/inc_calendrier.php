@@ -15,7 +15,7 @@
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
-include_ecrire("inc_filtres.php3");
+include_ecrire("inc_texte.php3");
 
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
 
