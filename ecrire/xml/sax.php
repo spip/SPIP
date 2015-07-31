@@ -185,7 +185,7 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 
 	include_spip('xml/analyser_dtd');
 	$dtc = charger_dtd($grammaire, $avail, $rotlvl);
-	$page = sax_bug($page, $dtc);
+	$page = sax_bug($page, $dtc, $charset);
 
 	// compatibilite Tidy espace public
 	if (!$phraseur) {
@@ -228,8 +228,11 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 // sinon on se rabat sur ce qu'en connait SPIP en standard.
 
 // http://doc.spip.org/@sax_bug
-function sax_bug($data, $dtc)
+function sax_bug($data, $dtc, $charset=null)
 {
+	if (is_null($charset))
+		$charset = $GLOBALS['meta']['charset'];
+
 	if ($dtc) {
 		$trans = array();
 		
@@ -241,7 +244,7 @@ function sax_bug($data, $dtc)
 	} else {
 		$data = html2unicode($data, true);
 	}
-	return unicode2charset($data);
+	return unicode2charset($data, $charset);
 }
 
 // Retirer < ? xml... ? > et autre PI, ainsi que les commentaires en debut
