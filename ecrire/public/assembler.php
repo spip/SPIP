@@ -409,15 +409,16 @@ function analyse_js_ajoutee($page) {
   $scripts_fichier = $page['insert_js_fichier'];
   $scripts_inline = $page['insert_js_inline'];
   $scripts_a_ajouter = array();
-  foreach($scripts_fichier as $nom => $script) 
-    if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-      //ajoute script fichier
-      if(is_array($script)) 
-        foreach($script as $code) 
-          push_script($scripts_a_ajouter,$code);
-      else
-        push_script($scripts_a_ajouter,$script);
-    }
+  if(is_array($scripts_fichier))
+    foreach($scripts_fichier as $nom => $script) 
+      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+        //ajoute script fichier
+        if(is_array($script)) 
+          foreach($script as $code) 
+            push_script($scripts_a_ajouter,$code);
+        else
+          push_script($scripts_a_ajouter,$script);
+      }
   //ajoute le scripts trouvee
   if(count($scripts_a_ajouter)) {
     $scripts_a_ajouter = join("|",$scripts_a_ajouter);
@@ -426,15 +427,16 @@ function analyse_js_ajoutee($page) {
     $corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
   }  
   $scripts_a_ajouter = array();
-  foreach($scripts_inline as $nom => $script) 
-    if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-      //ajoute script inline
-      if(is_array($script)) 
-        foreach($script as $code) 
-          push_script($scripts_a_ajouter,$code,true);
-      else
-        push_script($scripts_a_ajouter,$script,true);    
-    }
+  if(is_array($scripts_inline))
+    foreach($scripts_inline as $nom => $script) 
+      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+        //ajoute script inline
+        if(is_array($script)) 
+          foreach($script as $code) 
+            push_script($scripts_a_ajouter,$code,true);
+        else
+          push_script($scripts_a_ajouter,$script,true);    
+      }
   //ajoute le scripts trouvee
   if(count($scripts_a_ajouter)) {
     list($pos_script,$appelle) = $jquery_chargee;
