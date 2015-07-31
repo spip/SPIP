@@ -175,7 +175,7 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
  */
 function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
-	preg_match('/^([a-z]*)\.?(\d)?$/S', (string) $name, $regs);
+	preg_match('/^([a-z_]*)\.?(\d)?$/iS', (string) $name, $regs);
 	if (!$logname = $regs[1])
 		$logname = null;
 	if (!$niveau = $regs[2])
