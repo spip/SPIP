@@ -63,7 +63,7 @@ table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /*  Logos et documents
 ---------------------------------------------- */
-img.spip_logos { margin: 0; padding: 0; border: 0; }
+img, img.spip_logos { margin: 0; padding: 0; border: 0; }
 
 .spip_documents { font-family: Verdana, Arial, Helvetica, sans-serif; }
 .spip_documents_center { margin: auto; text-align: center; width: 80%; }
@@ -90,7 +90,7 @@ form, fieldset, legend, label, input, textarea, select, option {
 .formulaire_spip {
 	text-align: left; }
 
-.formulaire_spip form p {  
+.formulaire_spip p {  
     margin: 4px 0;  
     padding: 0; }
 
@@ -125,6 +125,11 @@ input.spip_bouton {
 .reponse_formulaire {
 	font-weight: bold;
 	color: #FF0000; }
+fieldset.reponse_formulaire {  
+	background: #FFFFFF;  
+	border: 1px solid #FF6666; }
+fieldset.reponse_formulaire legend { font-weight: normal; }
+fieldset.reponse_formulaire p { padding: 4px; }
 
 /* * Barre de raccourcis */
 a.spip_barre img {
