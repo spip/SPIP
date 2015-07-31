@@ -582,7 +582,6 @@ function find_in_path ($filename) {
 		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'dist/:'.
-			_DIR_RACINE.'formulaires/:'.
 			_DIR_RESTREINT;
 
 		// Ajouter les repertoires des plugins
