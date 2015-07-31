@@ -759,7 +759,7 @@ et vous reconnecter au site.
 'titre_image_auteur_supprime' => 'Auteur supprim&eacute;',
 'titre_image_redacteur' => 'R&eacute;dacteur sans acc&egrave;s',
 'titre_image_redacteur_02' => 'R&eacute;dacteur',
-'titre_image_selecteur_rubrique' => 'Afficher la liste des rubriques',
+'titre_image_selecteur' => 'Afficher la liste',
 'titre_image_visiteur' => 'Visiteur',
 'titre_joindre_document' => 'JOINDRE UN DOCUMENT',
 'titre_liens_entrants' => 'Liens entrants',
