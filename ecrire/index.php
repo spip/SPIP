@@ -155,13 +155,6 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 
 utiliser_langue_visiteur(); 
 
-define ('_ATTRIBUTES_BODY',  "
-link='" .  $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien'] . "'
-vlink='" . $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien_off'] ."'
-alink='" . $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien_off'] ."'
-style='margin: 0px; background-color: #f8f7f3; color: #000000'" .
-	($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : ""));
-
 define('_TRANCHES', 10);
 
 //

@@ -82,7 +82,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'". _ATTRIBUTES_BODY . '>')
+	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'"
+			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
+			.'>')
 	. "\n<div><map name='map_layout' id='map_layout'>"
 	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")

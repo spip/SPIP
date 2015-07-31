@@ -226,7 +226,6 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 {
 	global $spip_lang_rtl;
 
-	spip_log("forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site");
 	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "\n<tr>"
