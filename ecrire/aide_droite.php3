@@ -104,13 +104,13 @@ function fichier_aide($lang_aide, $aide) {
 	}
 	else	// reduction ISO du code langue oci_prv_ni => oci_prv => oci
 	if (ereg("(.*)_", $lang_aide, $regs))
-		$html = fichier_aide($regs[1], $aide);
+		list($html,$lang_aide) = fichier_aide($regs[1], $aide);
 
-	return $html;
+	return array($html,$lang_aide);
 }
 
 $lang_aide = $GLOBALS['spip_lang'];
-$html = fichier_aide($lang_aide, $aide);
+list($html,$l) = fichier_aide($lang_aide, $aide);
 if (!$html)
 	$html = _T('aide_non_disponible');
 
@@ -119,7 +119,7 @@ $suite = $html;
 $html = "";
 while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 	$f = $r[1];
-	if (file_exists("AIDE/$lang_aide/$f")) $f = "$lang_aide/$f";
+	if (file_exists("AIDE/$l/$f")) $f = "$l/$f";
 	else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
 	$p = strpos($suite, $r[0]);
 	$html .= substr($suite, 0, $p) . "AIDE/$f";
