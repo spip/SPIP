@@ -198,7 +198,6 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options=array()) {
 	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'],'jeton',$desc['jeton']);
 
 	$message = recuperer_fond('modeles/mail_inscription',$contexte);
-	var_dump($message);
 	return array("", $message);
 }
 
@@ -306,7 +305,7 @@ function auteur_attribuer_jeton($id_auteur){
  */
 function auteur_verifier_jeton($jeton){
 	// refuser un jeton corrompu
-	if (preg_match(',[^0-9a-f.],i','',$jeton))
+	if (preg_match(',[^0-9a-f.],i',$jeton))
 		return false;
 
 	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton));
