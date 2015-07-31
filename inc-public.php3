@@ -46,7 +46,7 @@ else {
 	}
 
 	// multilinguisme
-	if ($forcer_lang) {
+	if ($forcer_lang AND $forcer_lang<>'non') {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
