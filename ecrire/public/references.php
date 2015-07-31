@@ -236,7 +236,7 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s))");
+	array(%s%s))");
 
 // http://doc.spip.org/@calculer_balise_dynamique
 function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
@@ -252,13 +252,13 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 		// construire la liste d'arguments comme pour un filtre
 		$param = compose_filtres_args($p, $c, ',');
 	} else	$param = "";
-	$collecte = join(',', collecter_balise_dynamique($l, $p, $nom));
-	$supp = array_merge(fliquer_inclure_dynamique($p), $supp);
+	$collecte = collecter_balise_dynamique($l, $p, $nom);
 
 	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
-		$collecte,
+		join(',', $collecte),
 		($collecte ? $param : substr($param,1)), # virer la virgule
-			   join(',', $supp));
+		memoriser_contexte_compil($p),
+		(!$supp ? '' : (', ' . join(',', $supp))));
 
 	$p->interdire_scripts = false;
 	return $p;
