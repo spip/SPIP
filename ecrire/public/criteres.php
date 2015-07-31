@@ -826,17 +826,15 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		}
 	}
 	// Si la colonne SQL est numerique ou le critere est une date relative
-	// forcer une conversion pour eviter un erreur au niveau SQL
+	// virer les guillemets eventuels qui sont refuses par certains SQL
+	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 
-	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
-		if (($desc AND isset($desc['field'][$col]) AND sql_test_int($desc['field'][$col]))
-		    OR ($date AND strpos($date[0], '_relatif'))) {
-			if (strpos($val[0], 'sql_quote(') === 0)
-				$val[0] = 'intval' . substr($val[0],strlen('sql_quote'));
-			elseif (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
+	if (($op == '=' OR in_array($op, $table_criteres_infixes))
+	AND preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r)
+	AND (($desc AND isset($desc['field'][$col]) AND sql_test_int($desc['field'][$col]))
+	     OR ($date AND strpos($date[0], '_relatif'))))
 			  $val[0] = $r[1];
-		}
-	}
+
 	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
 	// leurs requetes par defaut, notamment le champ statut
 	// Ne pas confondre champs de la table principale et des jointures
