@@ -91,22 +91,19 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles)
 	
 	$excep = $exceptions_des_tables[$r][$nom_champ];
 	if ($excep) {
-			// entite SPIP alias d'un champ SQL
-		if (!is_array($excep)) {
-			$e = $excep;
-			$c = $excep;
-		} 
-			// entite SPIP alias d'un champ dans une jointure
-		else {
+		// entite SPIP alias d'un champ SQL
+		if (is_array($excep)) {
+			// et meme d'un champ dans une jointure
 			if (!$t = array_search($excep[0], $boucles[$idb]->from)) {
 			    $t = 'J' . count($boucles[$idb]->from);
 			    $boucles[$idb]->from[$t] = $excep[0];
 			}
-			$e = $excep[1];
-			$c = $nom_champ;
-			if ($e != $nom_champ) $e .= ' AS '.$c;
+			$excep = $excep[1];
 		}
-		return array("$t.$e", $c);
+		// demander a SQL de gerer le synonyme
+		// ca permet que excep soit dynamique (Cedric, 2/3/06)
+		if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
+		return array("$t.$excep", $nom_champ);
 
 	} else {
 		if ($desc['field'][$nom_champ])
