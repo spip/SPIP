@@ -52,33 +52,48 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	$arguments = serialize($arguments);
 	$md5args = md5($arguments);
 
+	// si pas de date programee, des que possible
+	if (!$time)
+		$time = time();
+	$date = date('Y-m-d H:i:s',$time);
+
+	$set_job = array(
+		'fonction'=>$function,
+		'descriptif'=>$description,
+		'args'=>$arguments,
+		'md5args'=>$md5args,
+		'inclure'=>$file,
+		'priorite'=>max(-10,min(10,intval($priority))),
+		'date'=>$date,
+		'status'=>_JQ_SCHEDULED,
+	);
 	// si option ne pas dupliquer, regarder si la fonction existe deja
 	// avec les memes args et file
 	if (
 			$no_duplicate
 		AND
 			$id_job = sql_getfetsel('id_job','spip_jobs',
-				'status='.intval(_JQ_SCHEDULED).' AND fonction='.sql_quote($function)
+				$duplicate_where =
+					'status='.intval(_JQ_SCHEDULED).' AND fonction='.sql_quote($function)
 				.(($no_duplicate==='function_only')?'':
 				 ' AND md5args='.sql_quote($md5args).' AND inclure='.sql_quote($file)))
 		)
 		return $id_job;
 
-	// si pas de date programee, des que possible
-	if (!$time)
-		$time = time();
-	$date = date('Y-m-d H:i:s',$time);
+	$id_job = sql_insertq('spip_jobs',$set_job);
+	// en cas de concurrence, deux process peuvent arriver jusqu'ici en parallele
+	// avec le meme job unique a inserer. Dans ce cas, celui qui a eu l'id le plus grand
+	// doit s'effacer
+	if (
+			$no_duplicate
+		AND
+			$id_prev = sql_getfetsel('id_job','spip_jobs',"id_job<".intval($id_job)." AND $duplicate_where")){
+		sql_delete('spip_jobs','id_job='.intval($id_job));
+		return $id_prev;
+	}
 
-	$id_job = sql_insertq('spip_jobs',array(
-			'fonction'=>$function,
-			'descriptif'=>$description,
-			'args'=>$arguments,
-			'md5args'=>$md5args,
-			'inclure'=>$file,
-			'priorite'=>max(-10,min(10,intval($priority))),
-			'date'=>$date,
-			'status'=>_JQ_SCHEDULED,
-		));
+	// verifier la non duplication qui peut etre problematique en cas de concurence
+	// il faut dans ce cas que seul le dernier ajoute se supprime !
 
 	// une option de debug pour verifier que les arguments en base sont bons
 	// ie cas d'un char non acceptables sur certains type de champs
