@@ -134,7 +134,11 @@ function taches_generales($taches_generales = array()) {
 function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');
-	appliquer_quota_cache();
+	$encore = appliquer_quota_cache();
+
+	// si le cache est trop gonfle, redemander la main pour poursuivre
+	if ($encore)
+		return (0 - $t);
 	return 1;
 }
 ?>
