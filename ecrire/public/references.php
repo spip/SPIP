@@ -10,22 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// fonctions de recherche et de reservation
-// dans l'arborescence des boucles
-
+/**
+ * Fonctions de recherche et de reservation dans l'arborescence des boucles
+ *
+ * @package SPIP\Compilateur\References
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Retrouver l'index de la boucle dans le cas ou une reference explicite est demandee
- * #MABALISE : l'index est celui de la premiere boucle englobante
- * #_autreboucle:MABALISE : l'index est celui de la boucle _autreboucle si elle est bien englobante
- * renvoi '' si une reference explicite incorrecte est envoyee
+ * Retrouver l'index de la boucle d'une balise
  *
- * Dans une balise dynamique :
+ * Retrouve à quelle boucle appartient une balise, utile dans le cas
+ * où une référence explicite est demandée
+ * 
+ * #MABALISE : l'index est celui de la première boucle englobante
+ * #_autreboucle:MABALISE : l'index est celui de la boucle _autreboucle si elle est bien englobante
+ * 
+ * Dans une balise dynamique ou calculée :
  * $idb = index_boucle($p);
  *
- * @param Object $p
+ * @param Champ $p    AST au niveau de la balise
  * @return string
+ *     Identifiant de la boucle possédant ce champ.
+ *     '' si une référence explicite incorrecte est envoyée
  */
 function index_boucle($p){
 
@@ -34,7 +41,7 @@ function index_boucle($p){
 
 	if (strlen($explicite)) {
 		// Recherche d'un champ dans un etage superieur
-	  while (($idb !== $explicite) && ($idb !=='')) {
+		while (($idb !== $explicite) && ($idb !=='')) {
 			$idb = $p->boucles[$idb]->id_parent;
 		}
 	}
@@ -43,24 +50,29 @@ function index_boucle($p){
 }
 
 /**
- * index_pile retourne la position dans la pile du champ SQL $nom_champ
- * en prenant la boucle la plus proche du sommet de pile (indique par $idb).
- * Si on ne trouve rien, on considere que ca doit provenir du contexte
- * (par l'URL ou l'include) qui a ete recopie dans Pile[0]
- * (un essai d'affinage a debouche sur un bug vicieux)
- * Si ca reference un champ SQL, on le memorise dans la structure $boucles
- * afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
+ * Retourne la position dans la pile d'un champ SQL
+ * 
+ * Retourne le code PHP permettant de récupérer un champ SQL dans
+ * une boucle parente, en prenant la boucle la plus proche du sommet de pile
+ * (indiqué par $idb).
+ * 
+ * Si on ne trouve rien, on considère que ça doit provenir du contexte
+ * (par l'URL ou l'include) qui a été recopié dans Pile[0]
+ * (un essai d'affinage a débouché sur un bug vicieux)
  *
- * http://doc.spip.org/@index_pile
+ * Si ca référence un champ SQL, on le mémorise dans la structure $boucles
+ * afin de construire un requête SQL minimale (plutôt qu'un brutal 'SELECT *')
  *
- * @param string $idb
- * @param string $nom_champ
- * @param Object $boucles
+ * @param string $idb        Identifiant de la boucle
+ * @param string $nom_champ  Nom du champ SQL cherché
+ * @param Boucle $boucles    AST du squelette
  * @param string $explicite
- *   indique que le nom de la boucle explicite dans la balise #_nomboucletruc:CHAMP
- * @param string $defaut
- *   code par defaut si champ pas trouve dans l'index. @$Pile[0][$nom_champ] si non fourni
+ *     Indique que le nom de la boucle est explicite dans la balise #_nomboucletruc:CHAMP
+ * @param null|string $defaut
+ *     Code par defaut si le champ n'est pas trouvé dans l'index.
+ *     Utilise @$Pile[0][$nom_champ] si non fourni
  * @return string
+ *     Code PHP pour obtenir le champ SQL
  */
 function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
 	if (!is_string($defaut))
@@ -83,15 +95,23 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
 	// il y a incoherences qu'il vaut mieux eviter
 	while (isset($boucles[$idb])) {
 		$joker = true;
+		// modifie $joker si tous les champs sont autorisés.
+		// $t = le select pour le champ, si on l'a trouvé (ou si joker)
+		// $c = le nom du champ demandé
 		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
 		if ($t) {
 			if (!in_array($t, $boucles[$idb]->select)) {
 				$boucles[$idb]->select[] = $t;
 			}
 			$champ = '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
-			if (!$joker)
+			if (!$joker) {
 				return index_compose($conditionnel,$champ);
+			}
 
+			// tant que l'on trouve des tables avec joker, on continue
+			// avec la boucle parente et on conditionne à l'exécution
+			// la présence du champ. Si le champ existe à l'exécution
+			// dans une boucle, il est pris, sinon on le cherche dans le parent...
 			$conditionnel[] = "isset($champ)?$champ";
 		}
 		#	spip_log("On remonte vers $i");
@@ -102,32 +122,63 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
 
 	#	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
-	// on qu'on a fourni une valeur par "defaut" plus pertinent
+	// ou qu'on a fourni une valeur par "defaut" plus pertinent
 	return index_compose($conditionnel,$defaut);
 }
 
 /**
- * Reconstuire la cascade de condition avec la valeur finale par defaut
- * pour les balises dont on ne saura qu'a l'execution si elles sont definies ou non
- * (boucle DATA)
+ * Reconstuire la cascade de condition de recherche d'un champ
+ *
+ * On ajoute la valeur finale par défaut pour les balises dont on ne saura
+ * qu'à l'exécution si elles sont definies ou non (boucle DATA)
  * 
- * @param array $conditionnel
- * @param string $defaut
- * @return string
+ * @param array $conditionnel  Liste de codes PHP pour retrouver un champ
+ * @param string $defaut       Valeur par défaut si aucun des moyens ne l'a trouvé
+ * @return string              Code PHP complet de recherche d'un champ
  */
-function index_compose($conditionnel,$defaut){
-	while ($c = array_pop($conditionnel))
+function index_compose($conditionnel,$defaut) {
+	while ($c = array_pop($conditionnel)) {
 		$defaut = "($c:($defaut))";
+	}
 	return $defaut;
 }
 
-// http://doc.spip.org/@index_tables_en_pile
+/**
+ * Cherche un champ dans une boucle
+ *
+ * Le champ peut être :
+ * - un alias d'un autre : il faut alors le calculer, éventuellement en
+ *   construisant une jointure.
+ * - présent dans la table : on l'utilise
+ * - absent, mais le type de boucle l'autorise (joker des itérateurs DATA) :
+ *   on l'utilise et lève le drapeau joker
+ * - absent, on cherche une jointure et on l'utilise si on en trouve.
+ *
+ * @todo
+ *     Ici la recherche de jointure sur l'absence d'un champ ne cherche
+ *     une jointure que si des jointures explicites sont demandées,
+ *     et non comme à d'autres endroits sur toutes les jointures possibles.
+ *     Il faut homogénéiser cela.
+ * 
+ *
+ * @param string $idb        Identifiant de la boucle
+ * @param string $nom_champ  Nom du champ SQL cherché
+ * @param Boucle $boucles    AST du squelette
+ * @param bool   $joker
+ *     Le champ peut-il être inconnu à la compilation ?
+ *     Ce drapeau sera levé si c'est le cas.
+ * @return array
+ *     Liste (Nom du champ véritable, nom du champ demandé).
+ *     Le nom du champ véritable est une expression pour le SELECT de
+ *     la boucle tel que "rubriques.titre" ou "mots.titre AS titre_mot".
+ *     Les éléments de la liste sont vides si on ne trouve rien.
+**/
 function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 	global $exceptions_des_tables;
 
 	$r = $boucles[$idb]->type_requete;
-
-	if ($r == 'boucle') return array();
+	// boucle recursive, c'est foutu...
+	if ($r == TYPE_RECURSIF) return array();
 	if (!$r) {
 		$joker = false; // indiquer a l'appelant
 		# continuer pour chercher l'erreur suivante
@@ -135,46 +186,78 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 	}
 
 	$desc = $boucles[$idb]->show;
+	// le nom du champ est il une exception de la table ? un alias ?
 	$excep = isset($exceptions_des_tables[$r]) ? $exceptions_des_tables[$r] : '';
-	if ($excep)
+	if ($excep) {
 		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
+	}
 	if ($excep) {
 		$joker = false; // indiquer a l'appelant
-	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
+		return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
 	}
+	// pas d'alias. Le champ existe t'il ?
 	else {
+		// le champ est réellement présent, on le prend.
 		if (isset($desc['field'][$nom_champ])) {
 			$t = $boucles[$idb]->id_table;
 			$joker = false; // indiquer a l'appelant
 			return array("$t.$nom_champ", $nom_champ);
 		}
-		// Champ joker * des iterateurs DATA qui accepte tout
+		// Tous les champs sont-ils acceptés ?
+		// Si oui, on retourne le champ, et on lève le flag joker
+		// C'est le cas des itérateurs DATA qui acceptent tout
+		// et testent la présence du champ à l'exécution et non à la compilation
+		// car ils ne connaissent pas ici leurs contenus.
 		elseif (/*$joker AND */isset($desc['field']['*'])) {
 			$joker = true; // indiquer a l'appelant
 			return array($nom_champ, $nom_champ);
 		}
+		// pas d'alias, pas de champ, pas de joker...
+		// tenter via une jointure...
 		else {
 			$joker = false; // indiquer a l'appelant
-		  if ($boucles[$idb]->jointures_explicites) {
-		    $t = trouver_champ_exterieur($nom_champ, 
+			// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
+			if ($boucles[$idb]->jointures_explicites) {
+				$t = trouver_champ_exterieur($nom_champ, 
 						 $boucles[$idb]->jointures,
 						 $boucles[$idb]);
-		    if ($t) 
+				if ($t) {
+					// si on a trouvé une jointure possible, on fait comme
+					// si c'était une exception pour le champ demandé
 					return index_exception($boucles[$idb],
-					       $desc,
-					       $nom_champ,
-					       array($t[1]['id_table'], $nom_champ));
-		  }
+						$desc,
+						$nom_champ,
+						array($t[1]['id_table'], $nom_champ));
+				}
+			}
 			return array('','');
 		}
 	}
 }
 
-// Reference a une entite SPIP alias d'un champ SQL
-// Ca peut meme etre d'un champ dans une jointure
-// qu'il faut provoquer si ce n'est fait
 
-// http://doc.spip.org/@index_exception
+/**
+ * Retrouve un alias d'un champ dans une boucle
+ *
+ * Référence à une entite SPIP alias d'un champ SQL.
+ * Ça peut même être d'un champ dans une jointure qu'il faut provoquer
+ * si ce n'est fait
+ *
+ * @param Boucle $boucle     Boucle dont on prend un alias de champ
+ * @param array  $desc       Description de la table SQL de la boucle
+ * @param string $nom_champ  Nom du champ original demandé
+ * @param array  $excep
+ *     Description de l'exception pour ce champ. Peut être
+ *     - string : nom du champ véritable dans la table
+ *     - array :
+ *         - liste (table, champ) indique que le véritable champ
+ *           est dans une autre table et construit la jointure dessus
+ *         - liste (table, champ, fonction) idem, mais en passant un
+ *           nom de fonction qui s'occupera de créer la jointure.
+ * @return array
+ *     Liste (nom du champ alias, nom du champ). Le nom du champ alias
+ *     est une expression pour le SELECT de la boucle du style "mots.titre AS titre_mot"
+**/
 function index_exception(&$boucle, $desc, $nom_champ, $excep)
 {
 	static $trouver_table;
@@ -218,17 +301,23 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 }
 
 /**
- * cette fonction sert d'API pour demander le champ '$champ' dans la pile
+ * Demande le champ '$champ' dans la pile
  *
- * http://doc.spip.org/@champ_sql
- *
+ * Le champ est cherché dans l'empilement de boucles, sinon dans la valeur
+ * par défaut (qui est l'environnement du squelette si on ne la précise pas).
+ * 
+ * @api
  * @param string $champ
- *   champ recherch�
- * @param object $p
- *   contexte de compilation
- * @param bool $joker
- *   flag pour autoriser ou non le champ joker * des iterateurs DATA
+ *     Champ recherché
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @param null|string $defaut
+ *     Code de la valeur par défaut si on ne trouve pas le champ dans une
+ *     des boucles parentes. Sans précision, il sera pris dans l'environnement
+ *     du squelette.
+ *     Passer $defaut = '' pour ne pas prendre l'environnement.
  * @return string
+ *     Code PHP pour retrouver le champ
  */
 function champ_sql($champ, $p, $defaut = null) {
 	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut);
