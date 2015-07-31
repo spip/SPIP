@@ -58,7 +58,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		"SELECT $id_type FROM spip_".table_objet($type)."
 		WHERE $id_type=".$$id_type)
 		AND spip_num_rows($s)))
-			$$id_type=0;
+			$$id_type='';
 		else {
 			$objet_affiche = $type;
 			break;
