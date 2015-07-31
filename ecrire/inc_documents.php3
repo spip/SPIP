@@ -112,14 +112,23 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 		
 		if ($afficher_titre) {
-			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
-			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
+			if ($largeur_vignette < 120) $largeur_vignette = 120;
+			$forcer_largeur = " width = '$largeur_vignette'";
+
+			$retour = "<table cellpadding=0 cellspacing=0 border=0 align='$align'>\n";
+			$retour .= "<tr>";
+			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
+			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<br /><b>$titre</b>";
-			if ($descriptif) $retour .= "<br />$descriptif";
+			if ($titre) $retour .= "<div><b>$titre</b></div>";
+			
+			if ($descriptif) $retour .= "<div style='text-align: left;'>$descriptif</div>";
+			
 
-			$retour .= "</div>\n</td></tr>\n</table>\n";
+			$retour .= "</div>\n</td>";
+			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
+			$retour .= "</tr>\n</table>\n";
 		}
 		else {
 			$retour = $vignette;
@@ -219,18 +228,27 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$type = $row_type['titre'];
 			}
 			else $type = 'fichier';
+			
+			if ($largeur_vignette < 120) $largeur_vignette = 120;
+			$forcer_largeur = " width = '$largeur_vignette'";
 
-			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
-			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
+			$retour = "<table cellpadding='0' cellspacing='0' border='0' align='$align'>\n";
+			$retour .= "<tr>";
+			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
+			
+			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<br /><b>$titre</b>";
-			if ($descriptif) $retour .= "<br />$descriptif";
+			if ($titre) $retour .= "<div><b>$titre</b></div>";
+			if ($descriptif) $retour .= "<div style='text-align:left;'>$descriptif</div>";
 
 			if ($mode == 'document')
-				$retour .= "<br />(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)";
+				$retour .= "<div>(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
 
-			$retour .= "</div>\n</td></tr>\n</table>\n";
+			$retour .= "</div>\n</td>";
+			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
+			
+			$retour .= "</tr>\n</table>\n";
 		}
 		else $retour = $vignette;
 	}
