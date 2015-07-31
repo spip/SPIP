@@ -2682,7 +2682,8 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 		'pas' => $pas,
 		'nombre_pages' => floor(($total-1)/$pas)+1,
 		'page_courante' => floor(intval(_request($debut))/$pas)+1,
-		'lien_pagination' => '<a href="@url@">@item@</a>'
+		'lien_pagination' => '<a href="@url@">@item@</a>',
+		'lien_item_courant' => '<span class="on">@item@</span>'
 	);
 
 	$ancre='pagination'.$nom;
@@ -2703,12 +2704,10 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	for($i = $premiere;$i<=$derniere;$i++) {
 		$url = parametre_url($pagination['lien_base'], $debut, strval(($i-1)*$pas));
 		$_item = strval($i);
-		$item = ($i != $pagination['page_courante']) ?
-			preg_replace(
-				array(',@url@,', ',@item@,'),
-				array($url.'#'.$ancre, $_item),
-				$pagination['lien_pagination']) :
-			$_item;
+		$item =  preg_replace(
+			array(',@url@,', ',@item@,'),
+			array($url.'#'.$ancre, $_item),
+			$pagination[($i != $pagination['page_courante']) ? 'lien_pagination' : 'lien_item_courant']);
 		$texte .= $item;
 		if($i<$derniere) $texte .= $separateur;
 	}
