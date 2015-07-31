@@ -180,6 +180,7 @@ function boucle_debug_resultat ($id, $type, $resultat) {
 // appelee a chaque requete
 // on n'a pas le nom du squelette, d'ailleurs ca n'en vient peut-etre pas
 
+// http://doc.spip.org/@boucle_debug_requete
 function boucle_debug_requete ($req) {
 	global $debug_objets;
 
