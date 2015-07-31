@@ -172,7 +172,7 @@ function spip_log($message, $logname='spip') {
 
 	$logfile = _DIR_TMP . $logname . '.log';
 	if (@is_readable($logfile)
-	AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
+	AND (!$s = @filesize($logfile) OR $s > 50*1024)) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
 	} else $rotate = '';
