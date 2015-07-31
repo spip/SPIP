@@ -127,6 +127,10 @@ function debut_admin($script, $action='', $corps='') {
 			$suivant = _T('bouton_valider');
 			$js = '';
 		} else {
+			// cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+			// l'insertion du script a cet endroit n'est pas xhtml licite mais evite de l'embarquer dans toutes les pages minipres
+			$corps .= http_script('',  "spip_barre.js");
+
 			$corps .= "<fieldset><legend>"
 			. _T('info_authentification_ftp')
 			. aide("ftp_auth")
@@ -142,10 +146,10 @@ function debut_admin($script, $action='', $corps='') {
 
 			$suivant = _T('bouton_recharger_page');
 
-	// code volontairement tordu:
-	// provoquer la copie dans le presse papier du nom du repertoire
-	// en remettant a vide le champ pour que ca marche aussi en cas
-	// de JavaScript inactif.
+			// code volontairement tordu:
+			// provoquer la copie dans le presse papier du nom du repertoire
+			// en remettant a vide le champ pour que ca marche aussi en cas
+			// de JavaScript inactif.
 			$js = " onload='var range=document.createRange(); var signal = document.getElementById(\"signal\"); var userSelection = window.getSelection(); range.setStart(signal,0); range.setEnd(signal,1); userSelection.addRange(range);'";
 
 		}
