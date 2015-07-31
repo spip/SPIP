@@ -383,11 +383,14 @@ function calcul_branche ($generation) {
 // $idem : en mode rubrique = la rubrique soi-meme
 function selecteur_rubrique($id_rubrique, $type, $restreint, $idem=0) {
 	global $_COOKIE;
+	global $browser_name, $browser_version;
 
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
+	// - soit parce qu'avec IE ca plante et c'est penible
 	if (false /* mettre true pour desactiver ajax */
+	OR (($browser_name == "MSIE" AND floor($browser_version) < "7"))
 	OR $_COOKIE['spip_accepte_ajax'] < 1
 	OR spip_num_rows(
 	spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 21")) < 20)
