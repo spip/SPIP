@@ -28,6 +28,7 @@ function liste_plugin_files($dir_plugins = null){
 		$dir_plugins = _DIR_PLUGINS;
 	if (!isset($plugin_files[$dir_plugins])
 	OR count($plugin_files[$dir_plugins]) == 0){
+		$plugin_files[$dir_plugins] = array();
 		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
 			$plugin_files[$dir_plugins][] = substr($plugin,strlen($dir_plugins));
 		}
