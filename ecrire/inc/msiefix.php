@@ -24,8 +24,8 @@ function inc_msiefix_dist($texte) {
 	// --></script>\n";
 
 	// Si jQuery n'est pas la on ne fixe pas les PNG
-	if (strpos($texte, 'jquery.js')
-	AND strpos($texte, '.png')
+	// -> en fait, si: avec le compactage, jquery.js n'apparait plus
+	if (strpos($texte, '.png')
 	AND true /* ... autres tests si on veut affiner ... */
 	AND lire_fichier(_DIR_RACINE.'prive/javascript/jquery.ifixpng.js', $ifixpng)
 	) {
