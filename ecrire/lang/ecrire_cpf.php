@@ -139,6 +139,7 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'èr',
@@ -694,10 +695,13 @@ sanm in koulèr i présiz son léta :',
 'lien_ajout_destinataire' => 'Azout korèspondan-la',
 'lien_ajouter_auteur' => 'Azout lotèr-la',
 'lien_ajouter_participant' => 'Azout inn dalon',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'limèl',
 'lien_nom_site' => 'LO NON LO SITWÈB :',
 'lien_retirer_auteur' => 'Artir lotèr-la',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Artir dalon-la',
 'lien_site' => 'sitwèb',
 'lien_supprimer_rubrique' => 'dégrèn rubrik-la',
@@ -971,6 +975,7 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_admin_vider' => 'Lantrotyin tèknik',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Afis bann zartik',
 'titre_cadre_afficher_traductions' => 'Afis léta bann tradiksyon pou lalang-la.',
 'titre_cadre_ajouter_auteur' => 'AZOUT INN LOTÈR :',

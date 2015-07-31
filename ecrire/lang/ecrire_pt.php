@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'horas',
@@ -678,10 +679,13 @@ numa cor que indica o seu estado:',
 'lien_ajout_destinataire' => 'Acrescentar este destinatário',
 'lien_ajouter_auteur' => 'Acrescentar este autor',
 'lien_ajouter_participant' => 'Acrescentar um participante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'NOME DO SÍTIO',
 'lien_retirer_auteur' => 'Tirar o autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'tirar este participante',
 'lien_site' => 'sítio',
 'lien_supprimer_rubrique' => 'suprimir esta rubrica',
@@ -988,6 +992,7 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_admin_vider' => 'Manutenção técnica',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Exibir os artigos',
 'titre_cadre_afficher_traductions' => 'Exibir o estado das traduções para estas línguas:',
 'titre_cadre_ajouter_auteur' => 'ACRESCENTAR UM AUTOR :',

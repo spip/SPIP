@@ -109,6 +109,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'oras',
@@ -659,10 +660,13 @@ un color indica lo sieu estat:',
 'lien_ajout_destinataire' => 'Apondre aqueu destinatari',
 'lien_ajouter_auteur' => 'Apondre aquel autor',
 'lien_ajouter_participant' => 'Apondre un participant',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'NOM DAU SIT:',
 'lien_retirer_auteur' => 'Levar l\'autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Levar aqueu participant',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'suprimir aquela rubrica',
@@ -972,6 +976,7 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_admin_vider' => 'Mantenença tecnica',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Afichar lu articles',
 'titre_cadre_afficher_traductions' => 'Afichar l\'estat dei reviradas per aquela lenga',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',

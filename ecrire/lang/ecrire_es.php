@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conexión:',
 'copier_en_local' => 'Copiar en local',
 'creer_et_associer_un_auteur' => 'Crear y asociar un autor',
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'horas',
@@ -653,10 +654,13 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'lien_ajout_destinataire' => 'Añadir este destinatario o destinataria',
 'lien_ajouter_auteur' => 'Añadir esta autor/a',
 'lien_ajouter_participant' => 'Añadir un/una participante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'correo electrónico',
 'lien_nom_site' => 'Nombre del sitio',
 'lien_retirer_auteur' => 'Retirar esta autor/a',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Quitar todos los autores',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Retirar este/esta participante',
 'lien_site' => 'sitio',
 'lien_supprimer_rubrique' => 'Suprimir esta sección',
@@ -914,6 +918,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_admin_vider' => 'Mantenimiento técnico',
 'titre_ajouter_un_auteur' => 'Añadir una autora',
 'titre_ajouter_un_mot' => 'Añadir una palabra-clave',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Mostrar los artículos',
 'titre_cadre_afficher_traductions' => 'Mostrar el estado de las traducciones para los idiomas siguientes:',
 'titre_cadre_ajouter_auteur' => 'Añadir un autor',

@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conexón:',
 'copier_en_local' => 'Copiar en llocal',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'hores',
@@ -681,10 +682,13 @@ con una color que indica el estáu:',
 'lien_ajout_destinataire' => 'Amestar esti destinatariu',
 'lien_ajouter_auteur' => 'Amestar esti autor',
 'lien_ajouter_participant' => 'Amestar un participante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'NOME DEL SITIU:',
 'lien_retirer_auteur' => 'Retirar l\'autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirar tolos autores',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'retirar esti participante',
 'lien_site' => 'sitiu',
 'lien_supprimer_rubrique' => 'desaniciar esta estaya',
@@ -986,6 +990,7 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_admin_vider' => 'Mantenimientu técnicu',
 'titre_ajouter_un_auteur' => 'Amestar un autor',
 'titre_ajouter_un_mot' => 'Amestar una pallabra-clave',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Amosar los artículos',
 'titre_cadre_afficher_traductions' => 'Amosar l\'estau de les traducciones pa les llingües siguientes:',
 'titre_cadre_ajouter_auteur' => 'AMESTAR UN AUTOR:',

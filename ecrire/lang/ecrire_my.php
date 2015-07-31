@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'ချိတ်ဆက်မှု',
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'H',
@@ -637,10 +638,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajout_destinataire' => 'ဤလက်ခံသူကို ထပ်ထည့်ပါ',
 'lien_ajouter_auteur' => 'ဤစာရေးသူကို ထပ်ထည့်ပါ',
 'lien_ajouter_participant' => 'ပါဝင်သူတယောက်ထပ်ထည့်ပါ',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'လျှပ်စစ်စာပို့စနစ်',
 'lien_nom_site' => 'ဝက်ဘ်ဆိုက်အမည်',
 'lien_retirer_auteur' => 'စာရေးသူကို ဖျေက်ပစ်ပါ',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'ဤပါဝင်သူကို ဖျက်ပစ်ပါ',
 'lien_site' => 'ဝက်ဘ်ဆိုက်',
 'lien_supprimer_rubrique' => 'ဤကဏ္ဍကို ဖျက်ပစ်ပါ',
@@ -887,6 +891,7 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'titre_admin_vider' => 'နည်းပညာထိန်းသိမ်းမှု',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'ဆောင်းပါးများကို ပြပါ',
 'titre_cadre_afficher_traductions' => 'ဝက်ဘ်ဆိုက်အတွက် ဘာသာပြန်ထားသော အောက်ပါဘာသာစကားများကို ဖော်ပြပါ',
 'titre_cadre_ajouter_auteur' => 'စာရေးသူတဦး​ပေါင်းထည့်ပါ',

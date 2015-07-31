@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'sati',
@@ -638,10 +639,13 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'lien_ajout_destinataire' => 'Dodaj ovog primaoca',
 'lien_ajouter_auteur' => 'Dodaj ovog autora',
 'lien_ajouter_participant' => 'Dodaj ucesnika',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'IME STRANICE:',
 'lien_retirer_auteur' => 'Odstrani autora',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Odstrani ovog ucesnika',
 'lien_site' => 'stranica',
 'lien_supprimer_rubrique' => 'Izbrisi ovu rubriku',
@@ -886,6 +890,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_admin_vider' => 'Tehnicko odrzavanje',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Prikazi clanke',
 'titre_cadre_afficher_traductions' => 'Prikazi stanje prevoda za sljedece jezike:',
 'titre_cadre_ajouter_auteur' => 'DODATI AUTORA:',

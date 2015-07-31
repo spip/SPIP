@@ -114,6 +114,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => '時',
@@ -656,10 +657,13 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_ajout_destinataire' => 'この受取人を追加',
 'lien_ajouter_auteur' => 'この著者を追加',
 'lien_ajouter_participant' => '関係者を追加',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'サイトの名前:',
 'lien_retirer_auteur' => '著者を削除',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'この関係者を削除',
 'lien_site' => 'サイト',
 'lien_supprimer_rubrique' => 'このセクションを削除',
@@ -911,6 +915,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_admin_vider' => '技術的なメンテナンス',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => '記事の表示:',
 'titre_cadre_afficher_traductions' => '次の言語のための、翻訳のステータスの表示:',
 'titre_cadre_ajouter_auteur' => '著者の追加:',

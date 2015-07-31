@@ -112,6 +112,7 @@ Ez balidatu inportazio galdera hau.
 'connexion_ldap' => 'Konexioa :',
 'copier_en_local' => 'Lokalean kopiatu',
 'creer_et_associer_un_auteur' => 'Autore bat sortu eta lotu',
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'orduak',
@@ -654,10 +655,13 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 'lien_ajouter_auteur' => 'Egile hau erantsi',
 'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'posta elektronikoa',
 'lien_nom_site' => 'Lekuaren izena',
 'lien_retirer_auteur' => 'Egile hau baztertu',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
 'lien_site' => 'lekua',
 'lien_supprimer_rubrique' => 'Atal hau kendu',
@@ -912,6 +916,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_admin_vider' => 'Mantentze-lan teknikoa',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Artikuluak erakutsi',
 'titre_cadre_afficher_traductions' => 'Hizkuntza honetarako dauden itzulpenen egoeraerakutsi',
 'titre_cadre_ajouter_auteur' => 'Idazle bat erantsi',

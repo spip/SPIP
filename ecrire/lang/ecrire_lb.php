@@ -110,6 +110,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokal kopéieren',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'h',
@@ -644,10 +645,13 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'lien_ajout_destinataire' => 'Destinataire derbäi setzen',
 'lien_ajouter_auteur' => 'Dësen Auteur derbäi setzen',
 'lien_ajouter_participant' => 'E Mataarbechter derbäi setzen',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'Email',
 'lien_nom_site' => 'NUMM VUM SITE:',
 'lien_retirer_auteur' => 'Auteur läschen',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Mataarbechter läschen',
 'lien_site' => 'Site',
 'lien_supprimer_rubrique' => 'dës Rubrik läschen',
@@ -898,6 +902,7 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_admin_vider' => 'Maintenance',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'D\'Artikelen weisen',
 'titre_cadre_afficher_traductions' => 'Zoustand vun den Iwwersetzungen weisen fir dës Sproochen:',
 'titre_cadre_ajouter_auteur' => 'AUTEUR DERBÄI SETZEN:',

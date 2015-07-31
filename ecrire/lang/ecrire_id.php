@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Koneksi:',
 'copier_en_local' => 'Kopi ke situs lokal',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'H',
@@ -673,10 +674,13 @@ dalam warna yang menunjukkan statusnya:',
 'lien_ajout_destinataire' => 'Tambahkan penerima ini',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'NAMA SITUS:',
 'lien_retirer_auteur' => 'Hapus penulis',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Hapus peserta ini',
 'lien_site' => 'situs',
 'lien_supprimer_rubrique' => 'hapus bagian ini',
@@ -966,6 +970,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_admin_vider' => 'Pemeliharaan teknis',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Tampilkan artikel:',
 'titre_cadre_afficher_traductions' => 'Tampikan status terjemahan dari bahasa-bahasa berikut:',
 'titre_cadre_ajouter_auteur' => 'TAMBAH SEORANG PENULIS:',

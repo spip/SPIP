@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Konektiĝo :',
 'copier_en_local' => 'Kopii en lokan komputilon',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'horoj',
@@ -662,10 +663,13 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 'lien_ajouter_auteur' => 'Aldoni tiun aŭtoron',
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'retpoŝtadreso',
 'lien_nom_site' => 'NOMO DE LA RETEJO:',
 'lien_retirer_auteur' => 'Forviŝi la aŭtoron',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Forviŝi tiun ĉi partoprenanton',
 'lien_site' => 'retejo',
 'lien_supprimer_rubrique' => 'forviŝi tiun ĉi rubrikon',
@@ -967,6 +971,7 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_admin_vider' => 'Teknika bontenado',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Afiŝi la artikolojn',
 'titre_cadre_afficher_traductions' => 'Afiŝi la traduk-staton por tiuj lingvoj :',
 'titre_cadre_ajouter_auteur' => 'ALDONI AŬTORON:',

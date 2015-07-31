@@ -113,6 +113,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
 'connexion_ldap' => 'Connessione:',
 'copier_en_local' => 'Copia in locale',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'ore',
@@ -669,10 +670,13 @@ Le traduzioni sono associate all\'originale,
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questa autrice',
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'NOME DEL SITO:',
 'lien_retirer_auteur' => 'Rimuovere l\'autrice',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'rimuovere questa partecipante',
 'lien_site' => 'sito',
 'lien_supprimer_rubrique' => 'elimina la rubrica',
@@ -958,6 +962,7 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_admin_vider' => 'Manutenzione tecnica',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Visualizza gli articoli',
 'titre_cadre_afficher_traductions' => 'Visualizzare lo stato delle traduzioni per le seguenti lingue:',
 'titre_cadre_ajouter_auteur' => 'AGGIUNGI UN\'AUTRICE: ',

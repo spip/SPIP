@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'èr yo',
@@ -676,10 +677,13 @@ nan yon koulè ki bay lestati ali :',
 'lien_ajout_destinataire' => 'Ajoute destinatè-a',
 'lien_ajouter_auteur' => 'Ajoute lotè-a',
 'lien_ajouter_participant' => 'Ajoute yon patisipan',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'limèl',
 'lien_nom_site' => 'KOUMAN SIT-LA RELE :',
 'lien_retirer_auteur' => 'Kraze lotè-a',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'kraze patisipan-nan',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'kraze ribrik-la',
@@ -984,6 +988,7 @@ ou nan dékripsyon atik sa-yo
 'titre_admin_vider' => 'Swen teknik',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Fè parèt atik yo',
 'titre_cadre_afficher_traductions' => 'Fè parèt kouman se tradiksyon yo pou tout lanng swivan :',
 'titre_cadre_ajouter_auteur' => 'KREYE YON LOTE :',

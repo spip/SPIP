@@ -109,6 +109,7 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'connexion_ldap' => 'Conexão:',
 'copier_en_local' => 'Copiar localmente',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'horas',
@@ -644,10 +645,13 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'lien_ajout_destinataire' => 'Incluir este destinatário',
 'lien_ajouter_auteur' => 'Incluir este autor',
 'lien_ajouter_participant' => 'Incluir um participante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'NOME DO SITE:',
 'lien_retirer_auteur' => 'Retirar o autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirar todos os autores',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'excluir este participante',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'excluir esta seção',
@@ -897,6 +901,7 @@ Se o problema persistir, contate o seu serviço de hospedagem.</p>',
 'titre_admin_vider' => 'Manutenção técnica',
 'titre_ajouter_un_auteur' => 'Incluir um autor',
 'titre_ajouter_un_mot' => 'Incluir uma palavra-chave',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Exibir as matérias',
 'titre_cadre_afficher_traductions' => 'Exibir o status das traduções para os idiomas a seguir:',
 'titre_cadre_ajouter_auteur' => 'INCLUIR UM AUTOR:',
