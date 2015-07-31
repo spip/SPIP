@@ -45,6 +45,7 @@ function install_fichier_connexion($nom, $texte)
 	ecrire_fichier($nom, $texte);
 }
 
+// http://doc.spip.org/@analyse_fichier_connection
 function analyse_fichier_connection($file)
 {
   
@@ -61,6 +62,7 @@ function analyse_fichier_connection($file)
 	return '';
 }
 
+// http://doc.spip.org/@bases_referencees
 function bases_referencees($exclu='')
 {
 	$tables = array();
@@ -208,6 +210,7 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	return $fieldset;
 }
 
+// http://doc.spip.org/@install_connexion_form
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
 	$pg = function_exists('pg_connect');
@@ -288,6 +291,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 // 4 valeurs qu'on reconduit d'un script a l'autre
 // sauf s'ils sont predefinis.
 
+// http://doc.spip.org/@predef_ou_cache
 function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 {
 	return (defined('_INSTALL_HOST_DB')
@@ -311,6 +315,7 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 
 // presentation des bases existantes
 
+// http://doc.spip.org/@install_etape_liste_bases
 function install_etape_liste_bases($server_db, $disabled=array())
 {
 	$result = sql_listdbs($server_db);
