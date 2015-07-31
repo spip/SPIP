@@ -87,7 +87,7 @@ function changer_langue($lang) {
 
 	if (ereg(",$lang,", ",$liste_langues,")
 	OR ($lang = preg_replace(',_.*,', '', $lang)
-	AND ereg(",$lang,", ",$liste_langues,")) {
+	AND ereg(",$lang,", ",$liste_langues,"))) {
 
 		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
