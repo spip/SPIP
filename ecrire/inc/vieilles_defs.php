@@ -243,7 +243,7 @@ return $GLOBALS[\'browser_layer\'];}
 
 	// $logo est le nom complet du logo ($logo = "chemin/$nom.$format)
 	// $nom et $format ne servent plus du fait du passage par le filtre image_reduire
-	include_spip(\'inc/filtres_images\');
+	include_spip(\'inc/filtres_images_mini\');
 	$res = image_reduire("<img src=\'$logo\' $attributs />", $taille, $taille_y);
 	return $res;
 }

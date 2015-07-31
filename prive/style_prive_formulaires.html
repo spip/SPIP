@@ -181,7 +181,7 @@ c'est le par defaut des formulaires de Spip */
 	position:relative;
 	display:inline;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
 
 	color: #[(#GET{foncee}|couleur_foncer)];
 	line-height: 11px;
@@ -200,7 +200,7 @@ c'est le par defaut des formulaires de Spip */
 
 .formulaire_spip li.obligatoire label,
 .formulaire_spip li.obligatoire.gauche label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
 	color: black;
 	font-weight: bold;
 }
@@ -239,7 +239,7 @@ padding-top:10px;
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip li.editer_parent textarea,
@@ -276,7 +276,7 @@ padding-top:10px;
 .formulaire_spip li.editer_texte.obligatoire label,
 .formulaire_spip li.editer_ps.obligatoire label,
 .formulaire_spip li.obligatoire.haut label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 	color: white;
 }*/
 
@@ -307,12 +307,12 @@ padding-top:10px;
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip fieldset li label {
 	color: #444444;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{bbbbbb, center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{bbbbbb, center [(#GET{right})] no-repeat })]
 }
 .formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
 	border: 1px solid #aaaaaa;
@@ -415,7 +415,7 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent label, 
 .formulaire_spip li.editer_groupe_mot label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{bbbbbb, bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
 	color: black;
 }
 
@@ -433,7 +433,7 @@ padding-top:10px;
 	width: 98%;
 }
 .formulaire_spip table.spip_barre a img { 
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], center center })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center center })]
 	padding: 3px; border: 1px outset #GET{claire}; 
 }
 .formulaire_spip table.spip_barre a:hover img { background: #fff; border: 1px solid #cc9; }
@@ -492,7 +492,7 @@ padding-top:10px;
 
 /* Bouton de validation */
 input[type="submit"] {
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire})], center center })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire})], center center })]
 	border: 1px outset [(#GET{claire})];
 	padding: 3px;
 	font-weight: bold;

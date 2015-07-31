@@ -126,12 +126,12 @@ function action_tester_dist() {
 	// et maintenant envoyer la vignette de tests
 	if (in_array($arg,array("gd1","gd2","imagick","convert","netpbm"))) {
 		include_spip('inc/filtres');
-		include_spip('inc/filtres_images');
+		include_spip('inc/filtres_images_mini');
 		$taille_preview = 150;
-		$image = image_valeurs_trans(_DIR_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
+		$image = _image_valeurs_trans(_DIR_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
 
 		$image['fichier_dest']=_DIR_VAR."test_$arg";
-		if ($preview = image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
+		if ($preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
 		AND ($preview['width'] * $preview['height'] > 0))
 			redirige_par_entete($preview['fichier']);
 	}
