@@ -204,13 +204,16 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a modifier un site
 // http://doc.spip.org/@autoriser_site_modifier_dist
 function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut'] == '0minirezo')
+	if ($qui['statut'] == '0minirezo' AND !$qui['restreint'])
 		return true;
 
 	$s = sql_select("id_rubrique,statut", "spip_syndic", "id_syndic=".sql_quote($id));
 	return ($t = sql_fetch($s)
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
-		AND ($t['statut'] == 'prop')
+		AND ($t['statut'] == 'prop'
+			OR autoriser('modifier', 'rubrique', $t['id_rubrique'])
+			)
+		)
 	);
 }
 // Autoriser a voir un site $id_syndic

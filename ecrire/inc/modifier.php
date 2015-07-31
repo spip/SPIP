@@ -24,6 +24,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@modifier_contenu
 function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
+	if (!$id = intval($id)) {
+		spip_log('Erreur $id non defini', 'warn');
+		return false;
+	}
+
 	include_spip('inc/filtres');
 
 	$table_objet = table_objet($type);

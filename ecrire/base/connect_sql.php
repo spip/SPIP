@@ -230,7 +230,9 @@ function table_objet($type) {
 		'type_document' => 'types_documents', # hum
 		'extension' => 'types_documents' # hum
 	);
-	return isset($surnoms[$type]) ? $surnoms[$type] : $type."s";
+	return isset($surnoms[$type])
+		? $surnoms[$type]
+		: preg_replace(',ss$,', 's', $type."s");
 }
 
 // http://doc.spip.org/@table_objet_sql
