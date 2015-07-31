@@ -470,7 +470,7 @@ $date_opt = $meta['date_optimisation'];
 $date = time();
 
 if (!$bonjour) {
-	if (($date - $date_opt) > 24 * 3600) {
+	if ($optimiser == 'oui' || ($date - $date_opt) > 24 * 3600) {
 		ecrire_meta("date_optimisation", "$date");
 		ecrire_metas();
 		include ("optimiser.php3");
