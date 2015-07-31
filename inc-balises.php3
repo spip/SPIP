@@ -737,7 +737,10 @@ function balise_SELF_dist($p) {
 //
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
-function balise_ENV_dist($p) {
+function balise_ENV_dist($p, $src = NULL) {
+
+	// le tableau de base de la balise (cf #META ci-dessous)
+	if (!$src) $src = '$Pile[0]';
 
 	if ($a = $p->param) {
 		$sinon = array_shift($a);
@@ -752,10 +755,10 @@ function balise_ENV_dist($p) {
 	if (!$nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = 'serialize($Pile[0])';
+		$p->code = 'serialize('.$src.')';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
+		$p->code = $src.'["' . addslashes($nom) . '"]';
 		if ($sinon)
 			$p->code = 'sinon('. 
 				$p->code
@@ -766,6 +769,23 @@ function balise_ENV_dist($p) {
 
 	return $p;
 }
+
+//
+// #META
+// les reglages du site
+//
+// Par exemple #META{gerer_trad} donne 'oui' ou 'non' selon le reglage
+// Attention c'est brut de decoffrage de la table spip_meta
+//
+// La balise fonctionne exactement comme #ENV (ci-dessus)
+//
+function balise_META_dist($p) {
+	if(function_exists('balise_ENV'))
+		return balise_ENV($p, '$GLOBALS["meta"]');
+	else
+		return balise_ENV_dist($p, '$GLOBALS["meta"]');
+}
+
 
 //
 // #EVAL{...}

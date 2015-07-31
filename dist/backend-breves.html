@@ -53,9 +53,9 @@
 [(#REM)
 	Le bloc qui suit diffuse aussi le texte integral de la breve,
 	ce qui permet une syndication plus riche (mais plus "lourde").
-	Fonction desactivable en modifiant backend-breves.php3
+	Fonction desactivable depuis les reglages du site
 ][
-(#ENV{texte_complet}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
+(#META{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
 		][&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;
 		][&lt;hr /&gt;
 		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
