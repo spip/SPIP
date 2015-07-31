@@ -26,6 +26,7 @@ function calculer_rubriques() {
 	//
 
 	// Gerer les articles post-dates ?
+	include_ecrire('inc_meta.php3');
 	$postdates = (lire_meta("post_dates") != "non") ?
 		"AND fille.date <= NOW()" : '';
 
@@ -198,6 +199,7 @@ function calculer_langues_rubriques() {
 
 	if (lire_meta('multi_rubriques') == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
+		include_ecrire('inc_meta.php3');
 		$s = spip_query ("SELECT lang FROM spip_rubriques
 		WHERE lang != '' GROUP BY lang");
 		while ($row = spip_fetch_array($s)) {
