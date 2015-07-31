@@ -25,8 +25,6 @@ function exec_breves_voir_dist()
 // http://doc.spip.org/@exec_breves_voir_args
 function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 {
-	global $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
-
 	$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
 	if (!$row OR !autoriser('voir','breve',$id_breve)){
 		include_spip('inc/minipres');

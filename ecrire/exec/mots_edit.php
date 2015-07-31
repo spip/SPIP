@@ -35,7 +35,7 @@ function exec_mots_edit_dist()
 // http://doc.spip.org/@exec_mots_edit_args
 function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='', $titre='', $redirect='', $ajouter_id_article='')
 {
-	global $spip_lang_right, $connect_statut, $spip_display, $les_notes;
+	global $spip_lang_right, $connect_statut, $les_notes;
 
 	$autoriser_editer = $editer = false;
 	if ($new=='oui')

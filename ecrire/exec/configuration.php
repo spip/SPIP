@@ -16,7 +16,6 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_configuration_dist
 function exec_configuration_dist(){
-	global $spip_display;
 
 	if (!autoriser('configurer', 'configuration')) {
 		include_spip('inc/minipres');
