@@ -33,7 +33,7 @@ function creer_base() {
 		date_redac datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		visites INTEGER DEFAULT '0' NOT NULL,
 		referers INTEGER DEFAULT '0' NOT NULL,
-		popularite INTEGER DEFAULT '0' NOT NULL,
+		popularite DOUBLE UNSIGNED DEFAULT '0' NOT NULL,
 		accepter_forum CHAR(3) NOT NULL,
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -274,6 +274,7 @@ function creer_base() {
 		ip INTEGER UNSIGNED NOT NULL,
 		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
 		id_objet INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP,
 		PRIMARY KEY (type, id_objet, ip))";
 	$result = spip_query($query);
 
@@ -298,6 +299,7 @@ function creer_base() {
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
 		id_objet INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP,
 		PRIMARY KEY (type, id_objet, referer_md5, ip))";
 	$result = spip_query($query);
 
@@ -1001,6 +1003,11 @@ function maj_base() {
 		remplir_type_documents();
 	}
 
+	if ($version_installee < 1.463) {
+		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE UNSIGNED");
+		spip_query("ALTER TABLE spip_visites_temp ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_referers_temp ADD maj TIMESTAMP");
+	}
 
 	//
 	// Mettre a jour le numero de version installee

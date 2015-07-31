@@ -77,44 +77,19 @@ function ecrire_stats() {
 		}
 	}
 
-	//
-	// popularite modele logarithmique (essai)
-	//
-if ($GLOBALS['populogarithme'] == 'oui') {
-	$a = 0.00016043786470976; 	// 1-exp(log(0.5)/(3*24*60)) : 3 signifie demi-vie = 3 jours
-	$b = $a * 60 * 24;
 
-	// 1. mise a jour a chaque hit
-	if ($id_article) {
-		$pts = ($log_referer == '') ? 1 : 2;
-		$query = "UPDATE spip_articles
-			SET popularite = popularite*POW(1-$a,(NOW()-maj)/60)+$b*$pts
-		    WHERE id_article = $id_article";
-		include_ecrire("inc_connect.php3"); // pas cool
-		if ($GLOBALS['db_ok'])
-			spip_query($query);
-	}
-
-
-	// 2. toutes les heures, update general pour faire decroitre les articles sans aucune visite
+	// popularite, mise a jour dix minutes
 	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 3600) {
+	if ((time() - $date_popularite) > 0) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
-			$query = "UPDATE spip_articles
-				SET popularite = popularite*POW(1-$a,(NOW()-maj)/60)";
-			spip_query($query);
-			list($maxpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite) FROM spip_articles"));
-
-			include_ecrire("inc_meta.php3");
-			ecrire_meta("max_popularite", $maxpop);
-			ecrire_meta("date_stats_popularite", time());
-			ecrire_metas();
+			include_ecrire("inc_statistiques.php3");
+			calculer_popularites();
 		}
 	}
-} // fin flag ($GLOBALS['populogarithme']
 
-	// Optimiser les referers
+
+	// Effacer les referers
 	$date_refs = lire_meta('date_stats_referers');
 	if ((time() - $date_refs) > 24 * 3600) {
 		include_ecrire("inc_connect.php3");
@@ -123,7 +98,8 @@ if ($GLOBALS['populogarithme'] == 'oui') {
 			ecrire_meta("date_stats_referers", time());
 			ecrire_metas();
 			include_ecrire ("inc_statistiques.php3");
-			optimiser_referers();
+			supprimer_referers();
+			supprimer_referers("article");
 		}
 	}
 	
@@ -135,7 +111,7 @@ function afficher_raccourci_stats($id_article) {
 	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$visites = intval($row['visites']);
-		$popularite = intval($row['popularite']);
+		$popularite = ceil(min(100,100 * $row['popularite'] / max(1,lire_meta('popularite_max'))));
 
 		if ($visites > 0) bouton_admin("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 
@@ -150,7 +126,5 @@ function afficher_raccourci_stats($id_article) {
 		echo "]";
 	}
 }
-
-
 
 ?>

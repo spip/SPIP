@@ -818,7 +818,7 @@ function parser($texte) {
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 'EMBED_DOCUMENT',
-		'IP', 'VISITES', 'POPULARITE', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
+		'IP', 'VISITES', 'POPULARITE', 'POPULARITE_ABS', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
 		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
 		'LOGIN_PRIVE', 'LOGIN_PUBLIC'
@@ -902,7 +902,8 @@ function parser($texte) {
 		'DATE' => 'date',
 		'DATE_REDAC' => 'date_redac',
 		'VISITES' => 'visites',
-		'POPULARITE' => 'popularite',
+	//	'POPULARITE' => 'popularite',
+		'POPULARITE_ABS' => 'popularite',
 		'POINTS' => 'points'
 	);
 	$rows_auteurs = array(
@@ -1363,6 +1364,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'TOTAL_BOUCLE':
 		$code = '$pile_boucles[$id_instance_cond]->total_boucle';
+		break;
+
+	case 'POPULARITE':
+		$code = 'ceil(min(100,100*$pile_boucles[$id_instance]->row[\'popularite\']/max(1,lire_meta(\'popularite_max\'))))';
 		break;
 
 
