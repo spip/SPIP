@@ -132,35 +132,41 @@ function minipipe($fonc,$val){
 }
 
 // chargement du pipeline sous la forme d'un fichier php prepare
-function pipeline($action,$val){
-	$ok = @is_readable($f = _DIR_SESSIONS."charger_pipelines.php");
-	if (!$ok){
-		include_spip('inc/plugin');
-		// generer les fichiers php precompiles
-		// de chargement des plugins et des pipelines
-		verif_plugin();
-		$ok = @is_readable($f = _DIR_SESSIONS."charger_pipelines.php");
-		if (!$ok)
-			spip_log("generation de $f impossible; tous les pipeline desactives");
-	}
-	if ($ok){
-		require_once($f);
-		$f = "execute_pipeline_$action";
-		$ok = function_exists($f);
-		if ($ok){
-			$val = $f($val);
-			// si le flux est une table qui encapsule donnees et autres
-			// on ne ressort du pipe que les donnees
-			if (is_array($val)&&isset($val['data']))
-				$val = $val['data'];
-		}
-		else{
+function pipeline($action,$val) {
+	static $charger;
+
+	// chargement initial des fonctions mises en cache, ou generation du cache
+	if (!$charger) {
+		if (!@is_readable($charger = _DIR_SESSIONS."charger_pipelines.php")) {
 			include_spip('inc/plugin');
-			//on passe $action en arg pour creer la fonction meme si le pipe n'est defini nul part
-			// vu qu'on est la c'est qu'il existe !
-			verif_plugin($action);
-			spip_log("fonction $f absente : pipeline desactive");
+			// generer les fichiers php precompiles
+			// de chargement des plugins et des pipelines
+			verif_plugin();
+			if ($bug = !@is_readable($charger))
+				spip_log("fichier $charger pas cree");
 		}
+
+		if (!$bug)
+			include_once $charger;
+	}
+
+	// appliquer notre fonction si elle existe
+	$fonc = 'execute_pipeline_'.$action;
+	if (function_exists($fonc)) {
+		$val = $fonc($val);
+		// si le flux est une table qui encapsule donnees et autres
+		// on ne ressort du pipe que les donnees
+		if (is_array($val)&&isset($val['data']))
+			$val = $val['data'];
+	}
+
+	// plantage ?
+	else {
+		include_spip('inc/plugin');
+		// on passe $action en arg pour creer la fonction meme si le pipe
+		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
+		verif_plugin($action);
+		spip_log("fonction $f absente : pipeline desactive");
 	}
 	return $val;
 }
