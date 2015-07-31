@@ -372,15 +372,16 @@ jQuery.fn.ajaxbloc = function() {
 				event.stopPropagation();
 	  }).addClass('bind-ajaxReload');
 
-		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
+		jQuery(ajaxbloc_selecteur,this).not('.noajax','.bind-ajax')
 			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,jQuery(this).is('.nocache'));})
+			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
 				var href = this.href;
 				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 				if (!jQuery.spip.preloaded_urls[url]) {
 					jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
 				}
-			}).addClass('bind-ajax'); // previent qu'on ajax pas deux fois le meme lien
+			}); // previent qu'on ajax pas deux fois le meme lien
 
 		// ajaxer les boutons actions qui sont techniquement des form minimaux
 		// mais se comportent comme des liens
