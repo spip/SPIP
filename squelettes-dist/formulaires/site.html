@@ -16,7 +16,7 @@
 			<li class='saisie_url_site[ (#ENV*{erreurs}|table_valeur{url_site}|oui)erreur]'>
 				<label for="url_site"><:form_prop_url_site:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_site})</span>]
-				<input type="[(#HTML5|?{url,text})]" class="text" name="url_site" id="url_site" value="#ENV{url_site}" size="30" />
+				<input[ (#HTML5|?{type="url" class="text url",type="text" class="text"})] name="url_site" id="url_site" value="#ENV{url_site}" size="30" />
 			</li>
 			<li class='saisie_description_site[ (#ENV*{erreurs}|table_valeur{description_site}|oui)erreur]'>
 				<label for="description_site"><:form_prop_description:></label>
