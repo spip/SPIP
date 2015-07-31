@@ -460,7 +460,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	}
 
 	// Si ca marche pas en precisant le sous-type, prendre le type
-	if (!$fond AND trouve_modele($fond = $type))
+	if (!$fond AND !trouve_modele($fond = $type))
 		return false;
 
 	// Creer le contexte
