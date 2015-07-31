@@ -420,7 +420,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 
 	if ($ext_table =  $tables_relations[$type][$col])
 		$col_table = $ext_table . 
-		  calculer_critere_externe($boucle, $id_field, $ext_table);
+		  calculer_critere_externe($boucle, $id_field, $ext_table, $type, $col);
 	// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
 	elseif ($type != 'mots'
 			AND ($col == 'type_mot' OR $col == 'titre_mot'
@@ -433,7 +433,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		  $lien = "mots_$type";
 		
 		// jointure nouvelle a chaque comparaison
-		$num_lien = calculer_critere_externe($boucle, $id_field, $lien );
+		$num_lien = calculer_critere_externe($boucle, $id_field, $lien, $type, $col);
 		// jointure pour lier la table principale et la nouvelle
 		$boucle->from[] = "spip_mots AS l_mots$num_lien";
 		$boucle->where[] = "$lien$num_lien.id_mot=l_mots$num_lien.id_mot";
@@ -621,14 +621,17 @@ function calculer_critere_repete(&$boucle, $col, $val)
 */
 // traitement des relations externes par DES jointures.
 
-function calculer_critere_externe(&$boucle, $id_field, $col_table) {
+function calculer_critere_externe(&$boucle, $id_field, $lien, $type, $col) {
 
+	global $tables_relations_keys;
 	static $num;
 
 	$num++;
+	$ref = $tables_relations_keys[$type][$col];
 	$boucle->lien = true;
-	$boucle->from[] = "spip_$col_table AS $col_table$num";
-	$boucle->where[] = "$id_field=$col_table$num." . $boucle->primary;
+	$boucle->from[] = "spip_$lien AS $lien$num";
+	$boucle->where[] = "$id_field=$lien$num." .
+	  ($ref ? $ref : $boucle->primary);
 	$boucle->group = $id_field;
 	// postgres exige que le champ pour GROUP soit dans le SELECT
 	$boucle->select[] = $id_field;
