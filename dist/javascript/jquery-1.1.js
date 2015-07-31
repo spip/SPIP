@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-22 00:27:54 -0500 (Mon, 22 Jan 2007) $
- * $Rev: 1153 $
+ * $Date: 2007-01-23 18:02:32 +0100 (Tue, 23 Jan 2007) $
+ * $Rev: 1173 $
  */
 
 // Global undefined variable
@@ -76,9 +76,9 @@ jQuery.fn = jQuery.prototype = {
 			this[num];
 	},
 	pushStack: function( a ) {
-		var ret = jQuery(this);
+		var ret = jQuery(a);
 		ret.prevObject = this;
-		return ret.setArray( a );
+		return ret;
 	},
 	setArray: function( a ) {
 		this.length = 0;
@@ -184,7 +184,7 @@ jQuery.fn = jQuery.prototype = {
 	find: function(t) {
 		return this.pushStack( jQuery.map( this, function(a){
 			return jQuery.find(t,a);
-		}) );
+		}), t );
 	},
 	clone: function(deep) {
 		return this.pushStack( jQuery.map( this, function(a){
@@ -205,14 +205,14 @@ jQuery.fn = jQuery.prototype = {
 	not: function(t) {
 		return this.pushStack(
 			t.constructor == String &&
-			jQuery.multiFilter(t,this,true) ||
+			jQuery.multiFilter(t, this, true) ||
 
-			jQuery.grep(this,function(a){
-					if ( t.constructor == Array || t.jquery )
-						return jQuery.inArray( t, a ) < 0;
-					else
-						return a != t;
-			}) );
+			jQuery.grep(this, function(a) {
+				return ( t.constructor == Array || t.jquery )
+					? jQuery.inArray( a, t ) < 0
+					: a != t;
+			})
+		);
 	},
 
 	add: function(t) {
@@ -220,7 +220,7 @@ jQuery.fn = jQuery.prototype = {
 			this.get(),
 			t.constructor == String ?
 				jQuery(t).get() :
-				t.length != undefined && !t.nodeName ?
+				t.length != undefined && (!t.nodeName || t.nodeName == "FORM") ?
 					t : [t] )
 		);
 	},
