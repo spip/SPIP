@@ -163,6 +163,7 @@ function inc_forum_insert_dist() {
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
 		$retour_forum = self(); # en cas d'echec du post
+		$retour_forum=str_replace('&amp;','&',$retour_forum);
 		$calculer_retour = true;
 	}
 
