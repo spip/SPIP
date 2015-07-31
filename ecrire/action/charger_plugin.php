@@ -34,8 +34,7 @@ function action_charger_plugin_dist() {
 	// droits : il faut avoir le droit de choisir les plugins,
 	// mais aussi d'en ajouter -- a voir
 	include_spip('inc/autoriser');
-	if (!autoriser('configurer', 'plugins')
-	OR !autoriser('webmestre')) {
+	if (!autoriser('configurer', 'plugins')) {
 		echo minipres();
 		exit;
 	}
