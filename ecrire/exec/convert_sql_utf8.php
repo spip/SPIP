@@ -21,6 +21,7 @@ function convert_utf8_non($action, $message) {
 	exit;
 }
 
+// http://doc.spip.org/@exec_convert_sql_utf8_dist
 function exec_convert_sql_utf8_dist() {
 	include_spip('inc/minipres');
 	include_spip('inc/meta');

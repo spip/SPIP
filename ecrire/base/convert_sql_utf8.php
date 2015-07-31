@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@base_convert_utf8_dist
+// http://doc.spip.org/@base_convert_sql_utf8_dist
 function base_convert_sql_utf8_dist($titre, $reprise=false)
 {
 	// poser un verrou (et abandonner si l'action est en cours)
@@ -41,6 +41,7 @@ function base_convert_sql_utf8_dist($titre, $reprise=false)
 	  install_fin_html();
 }
 
+// http://doc.spip.org/@convert_sql_utf8
 function convert_sql_utf8(){
 	include_spip('base/db_mysql');
 	
