@@ -14,7 +14,7 @@ define("_ECRIRE_INC_VERSION", "1");
 $table_prefix = "spip";
 
 
-function spip_query_debug($query) {
+function spip_query_profile($query) {
 	static $tt = 0;
 	$suite = "";
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
@@ -32,10 +32,25 @@ function spip_query_debug($query) {
 	echo "<small>".htmlspecialchars($query);
 	echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
 	return $result;
-} 
+}
+
+function spip_query_debug($query) {
+	$suite = "";
+	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
+		$suite = $regs[0];
+		$query = substr($query, 0, -strlen($suite));
+	}
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	$r = mysql_query($query);
+	if ($GLOBALS['connect_statut'] == '0minirezo' AND $s = mysql_error()) {
+		echo "Erreur dans la requ&ecirc;te : ".htmlspecialchars($query)."<br>";
+		echo "&laquo; ".htmlspecialchars($s)." &raquo;<p>";
+	}
+	return $r;
+}
 
 function spip_query($query) {
-//	return spip_query_debug($query);
+	// return spip_query_debug($query); // a decommenter pour afficher toutes les erreurs
 	$suite = "";
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
 		$suite = $regs[0];
@@ -43,7 +58,7 @@ function spip_query($query) {
 	}
 	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 	return mysql_query($query);
-} 
+}
 
 //
 // Version courante de SPIP
@@ -52,11 +67,11 @@ function spip_query($query) {
 //
 
 // version de la base
-$spip_version = 1.416;
+$spip_version = 1.417;
 
 // version de spip
-// (mettre a jour a la main et conserver la mention "cvs")
-$spip_version_affichee = "1.4 c4+ cvs";
+// (mettre a jour a la main et conserver la mention "CVS")
+$spip_version_affichee = "1.4c5 CVS";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
