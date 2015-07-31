@@ -18,18 +18,21 @@ define("_ECRIRE_INC_TEXTE", "1");
 
 include_ecrire("inc_filtres.php3");
 
+
 //
-// Initialisation de quelques variables globales
-// (on peut les modifier globalement dans mes_fonctions.php3,
-//  OU individuellement pour chaque type de page dans article.php3,
-//  rubrique.php3, etc. cf doc...)
+// Gerer les variables de personnalisation, qui peuvent provenir
+// des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
+// par le visiteur (sinon, pas de cache)
 //
-function tester_variable($nom_var, $val){
-	if (!isset($GLOBALS[$nom_var])) {
-		$GLOBALS[$nom_var] = $val;
-		return false;
-	}
-	return true;
+function tester_variable($var, $val){
+    if (!isset($GLOBALS[$var]))
+        $GLOBALS[$var] = $val;
+
+    if (
+        $_REQUEST[$var] !== NULL
+        AND $GLOBALS[$var] == $_REQUEST[$var]
+    )
+        die ("tester_variable: $var interdite");
 }
 
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
