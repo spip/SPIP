@@ -345,32 +345,34 @@ function executer_squelette($squelette, $contexte) {
 // Recherche recursive du squelette
 //
 
-function chercher_squelette_hierarchie($fond, $id_rubrique) {
+function chercher_squelette_hierarchie($fond, $id_rubrique, $dossier='') {
 	if (!$id_rubrique) {
-		if (file_exists("$fond.html")) {
-			return $fond;
-		} else if (file_exists("$fond-dist.html")) {
+		if (@file_exists("$dossier$fond.html")) {
+			return "$dossier$fond";
+		} else if (@file_exists("$fond.html")) {
+			return "$fond";
+		} else if (@file_exists("$fond-dist.html")) {
 			return "$fond-dist";
 		} else {
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html("Erreur sur le site");
-			echo "<P>Aucun squelette <b>$fond</b> n'est disponible...</P>";
+			echo "<P>Aucun squelette <b>$dossier$fond</b> n'est disponible...</P>";
 			install_fin_html();
-			spip_log ("ERREUR: aucun squelette $fond n'est disponible...");
+			spip_log ("ERREUR: aucun squelette $dossier$fond n'est disponible...");
 			exit;
 		}
 	}
 	else {
-		if (file_exists($fond."-$id_rubrique.html")) {
-			return "$fond-$id_rubrique";
+		if (file_exists("$dossier$fond-$id_rubrique.html")) {
+			return "$dossier$fond-$id_rubrique";
 		} else {
 			$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 			$result = spip_query($query);
 			while($row = spip_fetch_array($result)) {
 				$id_parent=$row['id_parent'];
 			}
-			return chercher_squelette_hierarchie($fond, $id_parent);
+			return chercher_squelette_hierarchie($fond, $id_parent, $dossier);
 		}
 	}
 }
@@ -379,16 +381,15 @@ function chercher_squelette($fond, $id_rubrique) {
 	global $dossier_squelettes;
 
 	// prendre en compte le bon repertoire (pas grave si on a deux / dans l'arborescence)
-	if ($dossier_squelettes)
-		$fond = "$dossier_squelettes/$fond";
+	$dossier = ($dossier_squelettes ? $dossier_squelettes.'/' : '');
 
 	// On selectionne, dans l'ordre :
 	// fond=10.html, fond-10.html, fond-<rubriques parentes>.html, fond.html puis fond-dist.html
-	if (($id_rubrique > 0) AND (file_exists($fond."=$id_rubrique.html"))) {
-		return "$fond=$id_rubrique";
+	if (($id_rubrique > 0) AND (file_exists("$dossier$fond=$id_rubrique.html"))) {
+		return "$dossier$fond=$id_rubrique";
 	}
 	else {
-		return chercher_squelette_hierarchie($fond, $id_rubrique); // recursif le long de la hierarchie
+		return chercher_squelette_hierarchie($fond, $id_rubrique, $dossier); // recursif le long de la hierarchie
 	}
 }
 

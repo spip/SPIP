@@ -2068,6 +2068,12 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 
 function calculer_texte($texte)
 {
+	global $dossier_squelettes;
+	$dossier = ($dossier_squelettes ? $dossier_squelettes.'/' : '');
+	if (@file_exists("$dossier/$fichier"))
+		$fichier = "$dossier/$fichier";
+
+
 	$code = "";
 
 	// Reperer les directives d'inclusion de squelette
@@ -2081,6 +2087,7 @@ function calculer_texte($texte)
 
 		// Traiter la directive d'inclusion
 		$fichier = $match[1];
+
 		ereg('^\\{(.*)\\}$', trim($match[2]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
 		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
@@ -2100,7 +2107,17 @@ function calculer_texte($texte)
 				}
 			}
 		}
-		$code .= "	\$retour .= 'include(\'$fichier\'); ?".">';\n";
+
+		// inclure en priorite dans le dossier_squelettes
+		if ($dossier_squelettes) {
+			$code .= "	\$retour .= '
+			if (@file_exists(\'$dossier_squelettes/$fichier\')){
+				include(\'$dossier_squelettes/$fichier\');
+			} else {
+				include(\'$fichier\');
+			} ?".">';\n";
+		} else
+			$code .= "	\$retour .= 'include(\'$fichier\'); ?".">';\n";
 	}
 
 	if ($texte)
