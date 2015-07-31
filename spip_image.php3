@@ -419,8 +419,8 @@ else {
  }
 
 if (!($redirect)) {
-	if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
-	else $vars = $HTTP_GET_VARS;
+	if ($_POST) $vars = $_POST;
+	else $vars = $_GET;
 	$redirect = $vars["redirect"];
 	$link = new Link(_DIR_RESTREINT_ABS . $redirect);
 	reset($vars);

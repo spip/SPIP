@@ -65,10 +65,10 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	// au premier appel (pas de http-var nommee "retour")
 	// memoriser l'URL courante pour y revenir apres envoi du message
 	// aux appels suivants, reconduire la valeur.
-	if ($retour = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
+	if ($retour = rawurldecode($GLOBALS['_GET']['retour']))
 	  $retour = ereg_replace('&var_mode=recalcul','',$retour);
 	else {
-	  if (!$retour = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
+	  if (!$retour = rawurldecode($GLOBALS['_POST']['retour']))
 	    $retour = $url;
 	}
 
@@ -77,14 +77,14 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$previsu = ' ';
 
 	// Recuperer le message a previsualiser
-	if ($GLOBALS['HTTP_POST_VARS']['ajout_forum'])  {
-		$titre = $GLOBALS['HTTP_POST_VARS']['titre'];
-		$texte = $GLOBALS['HTTP_POST_VARS']['texte'];
-		$auteur = $GLOBALS['HTTP_POST_VARS']['auteur'];
-		$email_auteur = $GLOBALS['HTTP_POST_VARS']['email_auteur'];
-		$nom_site_forum = $GLOBALS['HTTP_POST_VARS']['nom_site_forum'];
-		$url_site = $GLOBALS['HTTP_POST_VARS']['url_site'];
-		$ajouter_mot = $GLOBALS['HTTP_POST_VARS']['ajouter_mot']; // array
+	if ($GLOBALS['_POST']['ajout_forum'])  {
+		$titre = $GLOBALS['_POST']['titre'];
+		$texte = $GLOBALS['_POST']['texte'];
+		$auteur = $GLOBALS['_POST']['auteur'];
+		$email_auteur = $GLOBALS['_POST']['email_auteur'];
+		$nom_site_forum = $GLOBALS['_POST']['nom_site_forum'];
+		$url_site = $GLOBALS['_POST']['url_site'];
+		$ajouter_mot = $GLOBALS['_POST']['ajouter_mot']; // array
 
 		if ($afficher_texte != 'non') {
 			$previsu = 
@@ -158,7 +158,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
 	// afin de ne pas bugguer quand on vide le cache)
 	// Le lock est leve au moment de l'insertion en base (inc-messforum.php3)
-	if ($GLOBALS['HTTP_POST_VARS']['ajout_forum']) {
+	if ($GLOBALS['_POST']['ajout_forum']) {
 
 		$alea = preg_replace('/[^0-9]/', '', $alea);
 		if(!$alea OR !@file_exists(_DIR_SESSIONS."forum_$alea.lck")) {

@@ -30,19 +30,19 @@ else {
 		$delais = 0;
 
 	// authentification du visiteur
-	if ($HTTP_COOKIE_VARS['spip_session'] OR
+	if ($_COOKIE['spip_session'] OR
 	($PHP_AUTH_USER AND !$ignore_auth_http)) {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($HTTP_POST_VARS)) {
+	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($_POST)) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
-	if ($HTTP_GET_VARS['lang']) {
+	if ($_GET['lang']) {
 		include_ecrire('inc_lang.php3');
-		lang_select($HTTP_GET_VARS['lang']);
+		lang_select($_GET['lang']);
 	}
 	// Ajout_forum (pour les forums) et $val_confirm signalent des modifications
 	// a faire avant d'afficher la page
@@ -69,8 +69,8 @@ else {
 
 	// est-on admin ?
 	if ($affiche_boutons_admin = (!$flag_preserver
-	AND ($HTTP_COOKIE_VARS['spip_admin']
-	OR $HTTP_COOKIE_VARS['spip_debug'])))
+	AND ($_COOKIE['spip_admin']
+	OR $_COOKIE['spip_debug'])))
 		include_local('inc-formulaire_admin.php3');
 
 	$tableau_des_erreurs = array();
@@ -79,7 +79,7 @@ else {
 	if (!$flag_preserver) {
 	// Interdire au client de cacher un login, un admin ou un recalcul
 		if ($flag_dynamique OR $var_mode
-		OR $HTTP_COOKIE_VARS['spip_admin']) {
+		OR $_COOKIE['spip_admin']) {
 			@header("Cache-Control: no-cache,must-revalidate");
 			@header("Pragma: no-cache");
 	// Pour les autres donner l'heure de modif

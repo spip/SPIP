@@ -179,17 +179,17 @@ function cherche_page ($cache, $contexte, $fond)  {
 
 //
 // Contexte : lors du calcul d'une page spip etablit le contexte a partir
-// des variables $HTTP_GET_VARS et $HTTP_POST_VARS, et leur ajoute la date
+// des variables $_GET et $_POST, et leur ajoute la date
 // Note : pour hacker le contexte depuis le fichier d'appel (article.php3),
-// il est recommande de modifier $HTTP_GET_VARS['toto'] (meme si la page est
+// il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
 //
 function calculer_contexte() {
-	foreach($GLOBALS['HTTP_GET_VARS'] as $var => $val) {
+	foreach($GLOBALS['_GET'] as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
-	foreach($GLOBALS['HTTP_POST_VARS'] as $var => $val) {
+	foreach($GLOBALS['_POST'] as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
@@ -276,7 +276,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 
 	// Enregistrer le fichier cache
 	if ($delais > 0 AND $GLOBALS['var_mode'] != 'debug'
-	AND empty($GLOBALS['HTTP_POST_VARS']))
+	AND empty($GLOBALS['_POST']))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
