@@ -27,7 +27,6 @@ function exec_config_multilang_dist()
 
 	$config = charger_fonction('config', 'inc');
 	$config();
-	lire_metas();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -47,8 +46,6 @@ debut_droite();
 
 	$referenceur = charger_fonction('referenceur', 'configuration');
 	echo $referenceur();
-
-	calculer_langues_utilisees();
 
 	if ($GLOBALS['meta']['multi_articles'] == "oui"
 	OR $GLOBALS['meta']['multi_rubriques'] == "oui"

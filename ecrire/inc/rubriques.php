@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/meta');
+
 //
 // Recalculer l'ensemble des donnees associees a l'arborescence des rubriques
 // (cette fonction est a appeler a chaque modification sur les rubriques)
@@ -33,7 +35,6 @@ function calculer_rubriques() {
 	//
 
 	// Afficher les articles post-dates ?
-	include_spip('inc/meta');
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		"AND fille.date <= NOW()" : '';
 
@@ -107,18 +108,18 @@ function calculer_rubriques() {
 	// c'est statut_tmp/date_tmp qu'il doit modifier
 	pipeline('calculer_rubriques', null);
 
-	// "Commit" des modifs
+	// Enregistrement des modifs
 	spip_query("UPDATE spip_rubriques SET date=date_tmp, statut=statut_tmp");
-	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
-	ecrire_meta("date_calcul_rubriques", date("U"));
-	ecrire_metas();
-
 	// Comme ce calcul est fait apres chaque publication on en profite
 	// pour recalculer les langues utilisees sur le site
-	calculer_langues_utilisees();
+	$langues = calculer_langues_utilisees();
+	ecrire_meta('langues_utilisees', $langues);
+
+	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
+	ecrire_meta("date_calcul_rubriques", date("U"));
 
 	// on calcule la date du prochain article post-date
-	calculer_prochain_postdate();
+	calculer_prochain_postdate(); // fera le ecrire_metas();
 }
 
 // http://doc.spip.org/@propager_les_secteurs
@@ -213,7 +214,10 @@ function calculer_langues_rubriques() {
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
-		calculer_langues_utilisees ();
+
+		$langues = calculer_langues_utilisees();
+		ecrire_meta('langues_utilisees', $langues);
+		ecrire_metas();
 	}
 }
 
@@ -244,9 +248,7 @@ function calculer_langues_utilisees () {
 	sort($langues);
 	$langues = join(',',$langues);
 	spip_log("langues utilisees: $langues");
-	include_spip('inc/meta');
-	ecrire_meta('langues_utilisees', $langues);
-	ecrire_metas();
+	return $langues;
 }
 
 // http://doc.spip.org/@calcul_generation
@@ -283,7 +285,7 @@ function calculer_prochain_postdate() {
 		ecrire_meta('date_prochain_postdate', $t['ts']);
 	else
 		effacer_meta('date_prochain_postdate');
-	ecrire_metas();
+	ecrire_metas(); // attention, sert aussi aux appelants
 }
 
 // http://doc.spip.org/@cron_rubriques

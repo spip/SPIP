@@ -820,8 +820,8 @@ function debut_javascript()
 
 	$testeur = generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=1');
 
-	if (_SPIP_AJAX) {
-	  // pour le pied de page
+	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
+	  // pour le pied de page (deja defini si on est validation XML)
 		define('_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
 		        . generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=-1')
