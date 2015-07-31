@@ -38,7 +38,7 @@ if (@is_readable(_CACHE_PLUGINS_FCT)){
 }
 
 function base_dump_meta_name($rub){
-	return $meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
+	return $meta = "status_dump_{$rub}_"  . $GLOBALS['visiteur_session']['id_auteur'];
 }
 function base_dump_dir($meta){
 	include_spip('inc/documents');
@@ -128,8 +128,8 @@ function lister_tables_noexport(){
 		#'spip_referers_articles',
 		#'spip_visites',
 		#'spip_visites_articles',
-		#'spip_versions', 
-		#'spip_versions_fragments' 
+		#'spip_versions',
+		#'spip_versions_fragments'
 		);
 
 	return $EXPORT_tables_noexport;
@@ -144,8 +144,8 @@ function lister_tables_noexport(){
  */
 function lister_tables_noimport(){
 	static $IMPORT_tables_noimport=null;
-	if (!is_null($EXPORT_tables_noexport))
-		return $EXPORT_tables_noexport;
+	if (!is_null($IMPORT_tables_noimport))
+		return $IMPORT_tables_noimport;
 
 	$IMPORT_tables_noimport = array();
 	// par defaut tout est importe sauf les tables ci-dessous
@@ -201,6 +201,7 @@ function lister_tables_noerase(){
 function base_liste_table_for_dump($exclude_tables = array()){
 	$tables_for_dump = array();
 	$tables_pointees = array();
+	$tables = array();
 	$tables_principales = $GLOBALS['tables_principales'];
 	$tables_auxiliaires = $GLOBALS['tables_auxiliaires'];
 	$tables_jointures = $GLOBALS['tables_jointures'];
@@ -277,20 +278,24 @@ function base_vider_tables_destination_copie($tables, $exlure_tables = array(), 
 
 	spip_log('Vider '.count($tables) . " tables sur serveur '$serveur' : " . join(', ', $tables),'base.'._LOG_INFO_IMPORTANTE);
 	foreach($tables as $table){
-		// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
-		if (($table!='spip_auteurs') OR $serveur!=''){
-			// regarder si il y a au moins un champ impt='non'
-			$desc = $trouver_table($table);
-			if (isset($desc['field']['impt']))
-				sql_delete($table, "impt='oui'", $serveur);
-			else
-				sql_delete($table, "", $serveur);
+		if (!in_array($table,$exlure_tables)){
+			// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
+			if (($table!='spip_auteurs') OR $serveur!=''){
+				// regarder si il y a au moins un champ impt='non'
+				$desc = $trouver_table($table);
+				if (isset($desc['field']['impt']))
+					sql_delete($table, "impt='oui'", $serveur);
+				else
+					sql_delete($table, "", $serveur);
+			}
 		}
 	}
 
 	// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-	if ($serveur=='') {
+	if ($serveur==''
+	  AND in_array('spip_auteurs',$tables)
+	  AND !in_array('spip_auteurs',$exlure_tables)) {
 		spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
 		sql_delete("spip_auteurs", "id_auteur=0",$serveur);
 		// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
@@ -361,7 +366,10 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 		creer_ou_upgrader_table($table, $desc, 'auto', $upgrade,$serveur_dest);
 		$desc_dest = sql_showtable($table,false,$serveur_dest);
 	}
-	
+	if (!$desc_dest){
+		spip_log( "Erreur creation '$table' sur serveur '$serveur_dest'".var_export($desc,1),'dump.'._LOG_ERREUR);
+	}
+
 	return $desc_dest;
 }
 
@@ -386,12 +394,24 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  *     liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
  *   @param array $where
  *     liste optionnelle de condition where de selection des donnees pour chaque table
+ *   @param string $racine_fonctions_dest
+ *     racine utilisee pour charger_fonction() des operations elementaires sur la base de destination.
+ *     Permet de deleguer vers une autre voie de communication.
+ *     Par defaut on utilise 'base', ce qui route vers les fonctions de ce fichier. Concerne :
+ *     - vider_tables_destination_copie
+ *     - preparer_table_dest
+ *     - detruire_copieur_si_besoin
+ *     - inserer_copie
  *   @param array $fonction_base_inserer
- *     fonction d'insertion en base. Par defaut "base_inserer_copie" qui fait un insertq a l'identique
- *     peut etre personalisee pour filtrer, renumeroter....
+ *     fonction d'insertion en base. Par defaut "inserer_copie" qui fait un insertq a l'identique.
+ *     Attention, la fonction appelee est prefixee par $racine_fonctions_dest via un charger_fonction()
+ *     Peut etre personalisee pour filtrer, renumeroter....
  *   @param array $desc_tables_dest
  *     description des tables de destination a utiliser de preference a la description de la table source
- * 
+ *   @param int data_pool
+ *     nombre de lignes de la table a envoyer d'un coup en insertion dans la table cible (par defaut 1)
+ *     permet des envois groupes pour plus de rapidite, notamment si l'insertion est distante
+ *
  * @return <type>
  */
 function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $options=array()){
@@ -401,15 +421,22 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	$drop_source = isset($options['drop_source'])?$options['drop_source']:false;
 	$no_erase_dest = isset($options['no_erase_dest'])?$options['no_erase_dest']:array();
 	$where = isset($options['where'])?$options['where']:array();
-	$fonction_base_inserer = isset($options['fonction_base_inserer'])?$options['fonction_base_inserer']:'base_inserer_copie';
+	$fonction_base_inserer = isset($options['fonction_base_inserer'])?$options['fonction_base_inserer']:'inserer_copie';
 	$desc_tables_dest = isset($options['desc_tables_dest'])?$options['desc_tables_dest']:array();
+	$racine_fonctions = (isset($options['racine_fonctions_dest'])?$options['racine_fonctions_dest']:'base');
+	$data_pool = (isset($options['data_pool'])?$options['data_pool']:1);
 
 	spip_log( "Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump.'._LOG_INFO_IMPORTANTE);
 
-	if (!function_exists($fonction_base_inserer)) {
-		spip_log( "Fonction '$fonction_base_inserer' inconnue. Abandon",'dump.'._LOG_INFO_IMPORTANTE);
+	if (!$inserer_copie = charger_fonction($fonction_base_inserer,$racine_fonctions, true)) {
+		spip_log( "Fonction '{$racine_fonctions}_$fonction_base_inserer' inconnue. Abandon",'dump.'._LOG_INFO_IMPORTANTE);
 		return true; // echec mais on a fini, donc true
 	}
+	if (!$preparer_table_dest = charger_fonction('preparer_table_dest',$racine_fonctions, true)) {
+		spip_log( "Fonction '{$racine_fonctions}_$preparer_table_dest' inconnue. Abandon",'dump.'._LOG_INFO_IMPORTANTE);
+		return true; // echec mais on a fini, donc true
+	}
+
 	if (!lire_fichier($status_file, $status)
 		OR !$status = unserialize($status))
 		$status = array();
@@ -421,7 +448,11 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 
 	// si init pas encore faite, vider les tables du serveur destination
 	if (!$initialisation_copie) {
-		base_vider_tables_destination_copie($tables, $no_erase_dest, $serveur_dest);
+		if (!$vider_tables_destination_copie = charger_fonction('vider_tables_destination_copie',$racine_fonctions, true)) {
+			spip_log( "Fonction '{$racine_fonctions}_vider_tables_destination_copie' inconnue. Abandon",'dump.'._LOG_INFO_IMPORTANTE);
+			return true; // echec mais on a fini, donc true
+		}
+		$vider_tables_destination_copie($tables, $no_erase_dest, $serveur_dest);
 		$status["dump_status_copie"]='ok';
 		ecrire_fichier($status_file,serialize($status));
 	}
@@ -448,7 +479,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 
 			if (is_numeric($status['tables_copiees'][$table])
 				AND $status['tables_copiees'][$table]>=0
-				AND $desc_dest = base_preparer_table_dest(
+				AND $desc_dest = $preparer_table_dest(
 								$table,
 								isset($desc_tables_dest[$table])?$desc_tables_dest[$table]:$desc_source,
 								$serveur_dest,
@@ -460,9 +491,22 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					// on copie par lot de 400
 					$res = sql_select('*',$table,isset($where[$table])?$where[$table]:'','','',"$n,400",'',$serveur_source);
 					while ($row = sql_fetch($res,$serveur_source)){
+						$rows = array($row);
+						// lire un groupe de donnees si demande en option
+						// (permet un envoi par lot vers la destination)
+						if ($data_pool>1){
+							$i = $data_pool-1;
+							while ($i-- AND $row = sql_fetch($res,$serveur_source))
+								$rows[]= $row;
+						}
 						// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-						$fonction_base_inserer($table,$row,$desc_dest,$serveur_dest);
-						$status['tables_copiees'][$table]++;
+						// mais si ca renvoie false c'est une erreur fatale => abandon
+						if ($inserer_copie($table,$rows,$desc_dest,$serveur_dest)===false) {
+							// forcer la sortie, charge a l'appelant de gerer l'echec
+							// copie finie
+							return true;
+						}
+						$status['tables_copiees'][$table]+=count($rows);
 						if ($max_time AND time()>$max_time)
 							break;
 					}
@@ -492,7 +536,12 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		}
 	}
 
-	base_detruire_copieur_si_besoin($serveur_dest);
+	if ($detruire_copieur_si_besoin = charger_fonction('detruire_copieur_si_besoin',$racine_fonctions, true)) {
+		$detruire_copieur_si_besoin($serveur_dest);
+	}
+	else {
+		spip_log( "Fonction '{$racine_fonctions}_detruire_copieur_si_besoin' inconnue.",'dump.'._LOG_INFO_IMPORTANTE);
+	}
 	// OK, copie complete
 	return true;
 }
@@ -501,13 +550,16 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
  * fonction d'insertion en base lors de la copie de base a base
  *
  * @param string $table
- * @param array $row
+ * @param array $rows
  * @param array $desc_dest
  * @param string $serveur_dest
  * @return int/bool
  */
-function base_inserer_copie($table,$row,$desc_dest,$serveur_dest){
-	// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-	return sql_insertq($table,$row,$desc_dest,$serveur_dest);
+function base_inserer_copie($table,$rows,$desc_dest,$serveur_dest){
+	$ins = 0;
+	foreach($rows as $row)
+		// si l'enregistrement est deja en base, ca fera un echec ou un doublon
+		$ins += (sql_insertq($table,$row,$desc_dest,$serveur_dest)?1:0);
+	return $ins;
 }
 ?>
