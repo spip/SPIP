@@ -135,6 +135,32 @@ function copier_document($ext, $orig, $source) {
 }
 
 /**
+ * Trouver le dossier utilise pour upload un fichier
+ *
+ * http://doc.spip.org/@determine_upload
+ *
+ * @param string $type
+ * @return bool|string
+ */
+function determine_upload($type='') {
+
+	if (!autoriser('chargerftp')
+	OR $type == 'logos') # on ne le permet pas pour les logos
+		return false;
+
+	$repertoire = _DIR_TRANSFERT;
+	if (!@is_dir($repertoire)) {
+		$repertoire = str_replace(_DIR_TMP, '', $repertoire);
+		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	}
+
+	if (!$GLOBALS['visiteur_session']['restreint'])
+		return $repertoire;
+	else
+		return sous_repertoire($repertoire, $GLOBALS['visiteur_session']['login']);
+}
+
+/**
  * Deplacer ou copier un fichier
  *
  * http://doc.spip.org/@deplacer_fichier_upload
@@ -170,4 +196,53 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 }
 
 
+// Erreurs d'upload
+// renvoie false si pas d'erreur
+// et true si erreur = pas de fichier
+// pour les autres erreurs affiche le message d'erreur et meurt
+// http://doc.spip.org/@check_upload_error
+function check_upload_error($error, $msg='') {
+	global $spip_lang_right;
+
+	if (!$error) return false;
+
+	spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
+
+	switch ($error) {
+
+		case 4: /* UPLOAD_ERR_NO_FILE */
+			return true;
+
+		# on peut affiner les differents messages d'erreur
+		case 1: /* UPLOAD_ERR_INI_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 2: /* UPLOAD_ERR_FORM_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 3: /* UPLOAD_ERR_PARTIAL  */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+
+		default: /* autre */
+			if (!$msg)
+			$msg = _T('pass_erreur').' '. $error
+			. '<br />' . propre("[->http://php.net/manual/fr/features.file-upload.errors.php]");
+			break;
+	}
+
+	spip_log ("erreur upload $error");
+
+  	if(_request("iframe")=="iframe") {
+	  echo "<div class='upload_answer upload_error'>$msg</div>";
+	  exit;
+	}
+
+	echo minipres($msg,
+		      "<div style='text-align: $spip_lang_right'><a href='"  . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . "</button></a></div>");
+	exit;
+}
 ?>

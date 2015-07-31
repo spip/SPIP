@@ -216,22 +216,4 @@ function ajax_retour($corps,$xml = true)
 	echo $debut, $corps, $fin, $e;
 }
 
-// http://doc.spip.org/@determine_upload
-function determine_upload($type='') {
-
-	if (!autoriser('chargerftp')
-	OR $type == 'logos') # on ne le permet pas pour les logos
-		return false;
-
-	$repertoire = _DIR_TRANSFERT;
-	if (!@is_dir($repertoire)) {
-		$repertoire = str_replace(_DIR_TMP, '', $repertoire);
-		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
-	}
-
-	if (!$GLOBALS['visiteur_session']['restreint'])
-		return $repertoire;
-	else
-		return sous_repertoire($repertoire, $GLOBALS['visiteur_session']['login']);
-}
 ?>

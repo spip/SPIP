@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ *
+ * Fonctions de base pour la sauvegarde
+ * Boite a outil commune, sans prejuger de la methode de sauvegarde
+ *
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_VERSION_ARCHIVE', '1.3');
@@ -34,6 +41,7 @@ function base_dump_meta_name($rub){
 	return $meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
 }
 function base_dump_dir($meta){
+	include_spip('inc/documents');
 	// determine upload va aussi initialiser l'index "restreint"
 	$maindir = determine_upload();
 	if (!$GLOBALS['visiteur_session']['restreint'])

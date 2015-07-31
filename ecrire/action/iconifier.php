@@ -54,7 +54,7 @@ function action_spip_image_effacer_dist($arg) {
 function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 	global $formats_logos;
 
-	include_spip('inc/getdocument');
+	include_spip('inc/documents');
 	if (!$sousaction2) {
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
