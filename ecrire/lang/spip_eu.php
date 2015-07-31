@@ -563,7 +563,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_visites' => 'bisitak :',
 'info_vos_rendez_vous' => 'Zure hitzorduak',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Zure oroigarriak',
+'infos_vos_pense_bete' => 'Zure oroigarriak', # MODIF
 'item_breve_proposee' => 'Proposaturiko berri laburra',
 
 // L

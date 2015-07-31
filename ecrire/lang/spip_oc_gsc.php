@@ -567,7 +567,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_visites' => 'vesitas:',
 'info_vos_rendez_vous' => 'Los v&ograve;stes rendetz-vos qui vienen',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Los v&ograve;stes mementos',
+'infos_vos_pense_bete' => 'Los v&ograve;stes mementos', # MODIF
 'item_breve_proposee' => 'Br&egrave;va perpausada',
 
 // L

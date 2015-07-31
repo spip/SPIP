@@ -567,7 +567,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_visites' => 'l&aacute;t&oacute;gat&aacute;s :',
 'info_vos_rendez_vous' => 'A leend&#337; tal&aacute;lkoz&oacute;i',
 'info_zoom' => 'nagy&iacute;t&aacute;s',
-'infos_vos_pense_bete' => 'Az &Ouml;n eml&eacute;keztet&#337;i',
+'infos_vos_pense_bete' => 'Az &Ouml;n eml&eacute;keztet&#337;i', # MODIF
 'item_breve_proposee' => 'Javasolt h&iacute;r',
 
 // L

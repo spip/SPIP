@@ -570,7 +570,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_visites' => 'n&aacute;v&#353;t&#283;vy:',
 'info_vos_rendez_vous' => 'Va&#353;e budouc&iacute; sch&#367;zky',
 'info_zoom' => 'zv&#283;t&#353;it/zmen&#353;it',
-'infos_vos_pense_bete' => 'Va&#353;e pozn&aacute;mky',
+'infos_vos_pense_bete' => 'Va&#353;e pozn&aacute;mky', # MODIF
 'item_breve_proposee' => 'P&#345;edlo&#382;en&eacute; novinky',
 
 // L

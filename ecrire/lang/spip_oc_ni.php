@@ -569,7 +569,7 @@ Merc&eacute; de la voastra participacion
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'Lu voastres rend&egrave;tz-vos &agrave; venir',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Li voastri n&ograve;tas de renembran&ccedil;a ',
+'infos_vos_pense_bete' => 'Li voastri n&ograve;tas de renembran&ccedil;a ', # MODIF
 'item_breve_proposee' => 'Br&egrave;va prepauada',
 
 // L

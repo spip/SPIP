@@ -564,7 +564,7 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_visites' => 'bes&oslash;g:',
 'info_vos_rendez_vous' => 'Dine fremtidige aftaler',
 'info_zoom' => 'zoom', # NEW
-'infos_vos_pense_bete' => 'Dine memoer',
+'infos_vos_pense_bete' => 'Dine memoer', # MODIF
 'item_breve_proposee' => 'Nyhed indsendt',
 
 // L

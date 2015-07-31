@@ -569,7 +569,7 @@ Bedankt voor je deelname
 'info_visites' => 'bezoeke:',
 'info_vos_rendez_vous' => 'Je komende afsrpaken',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Je memo\'s',
+'infos_vos_pense_bete' => 'Je memo\'s', # MODIF
 'item_breve_proposee' => 'Bericht voorgesteld',
 
 // L

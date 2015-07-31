@@ -536,7 +536,7 @@ sera ignor&eacute;e) :
 'info_visites' => 'j&oacute;n&#596; b&igrave;b&aacute;:',
 'info_vos_rendez_vous' => 'mi n&aacute; kp&eacute; m&igrave; &#598;e&#770;',
 'info_zoom' => 'vl&#596;nvl&#596;n',
-'infos_vos_pense_bete' => 't&agrave;m&#603; l&igrave;n &agrave;g&uacute;&#598;&aacute;g&#596;',
+'infos_vos_pense_bete' => 't&agrave;m&#603; l&igrave;n &agrave;g&uacute;&#598;&aacute;g&#596;', # MODIF
 'item_breve_proposee' => '&#598;&#596; x&oacute; kl&eacute;w&uacute;n',
 
 // L

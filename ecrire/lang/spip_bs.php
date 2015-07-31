@@ -542,7 +542,7 @@ sera ignor&eacute;e) :
 'info_visites' => 'posjete:',
 'info_vos_rendez_vous' => 'Vasi sastanci koji slijede',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Vase biljeske',
+'infos_vos_pense_bete' => 'Vase biljeske', # MODIF
 'item_breve_proposee' => 'Predlozena obavjestenja',
 
 // L

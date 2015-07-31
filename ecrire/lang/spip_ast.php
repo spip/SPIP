@@ -571,7 +571,7 @@ Gracies por participar
 'info_visites' => 'visites:',
 'info_vos_rendez_vous' => 'Aconceyamientos pendientes',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Los tos recordatorios',
+'infos_vos_pense_bete' => 'Los tos recordatorios', # MODIF
 'item_breve_proposee' => 'Breve propuesta',
 
 // L

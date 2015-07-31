@@ -568,7 +568,7 @@ o contatta il tuo hoster.</font>',
 'info_visites' => 'visite:',
 'info_vos_rendez_vous' => 'I tuoi prossimi appuntamenti',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'I tuoi memo',
+'infos_vos_pense_bete' => 'I tuoi memo', # MODIF
 'item_breve_proposee' => 'Breve proposta',
 
 // L

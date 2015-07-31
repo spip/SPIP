@@ -571,7 +571,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_visites' => 'odwiedziny:',
 'info_vos_rendez_vous' => 'Twoje przysz&#322;e spotkania',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Twoje notatki',
+'infos_vos_pense_bete' => 'Twoje notatki', # MODIF
 'item_breve_proposee' => 'Zaproponowany news',
 
 // L

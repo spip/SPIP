@@ -569,7 +569,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_visites' => 'vizite :',
 'info_vos_rendez_vous' => 'Urm&#259;toarele dumneavoastr&#259; &icirc;nt&acirc;lniri',
 'info_zoom' => 'm&#259;rire',
-'infos_vos_pense_bete' => 'Ciornele dumneavoastr&#259;',
+'infos_vos_pense_bete' => 'Ciornele dumneavoastr&#259;', # MODIF
 'item_breve_proposee' => '&#350;tire propus&#259;',
 
 // L

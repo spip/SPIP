@@ -573,7 +573,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_visites' => 'bann vizit :',
 'info_vos_rendez_vous' => 'Out bann prosin rand&eacute;vou',
 'info_zoom' => 'zoum',
-'infos_vos_pense_bete' => 'Out bann gardant&egrave;t',
+'infos_vos_pense_bete' => 'Out bann gardant&egrave;t', # MODIF
 'item_breve_proposee' => 'Tit-nouv&egrave;l-la l&eacute; propoz&eacute;',
 
 // L

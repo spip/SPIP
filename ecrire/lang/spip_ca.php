@@ -563,7 +563,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_visites' => 'visites:',
 'info_vos_rendez_vous' => 'Les vostres cites',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Els vostres recordatoris',
+'infos_vos_pense_bete' => 'Els vostres recordatoris', # MODIF
 'item_breve_proposee' => 'Breu proposada',
 
 // L
