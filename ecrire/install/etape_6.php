@@ -66,6 +66,13 @@ function install_etape_6_dist()
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . _q($email) . ")");
 	}
 
+	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
+		    _DIR_ETC . 'connect.php')) {
+		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
+		     _DIR_ETC . 'connect.php');
+		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+	}
+
 	include_spip('inc/config');
 	init_config();
 
@@ -74,13 +81,6 @@ function install_etape_6_dist()
 	@unlink($htpasswd);
 	@unlink($htpasswd."-admin");
 	ecrire_acces();
-
-	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
-		    _DIR_ETC . 'connect.php')) {
-		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
-		     _DIR_ETC . 'connect.php');
-		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
-	}
 
 	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
 		    _DIR_ETC . 'chmod.php')) {
