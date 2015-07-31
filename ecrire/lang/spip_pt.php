@@ -317,37 +317,15 @@ Obrigado pela sua participação
 'form_prop_non_enregistre' => 'A sua proposta não foi registada.',
 'form_prop_sujet' => 'Assunto',
 'form_prop_url_site' => 'Endereço (URL) do sítio',
-'forum_acces_refuse' => 'Já não tem acesso a esses fóruns.',
-'forum_attention_dix_caracteres' => '<b>Atenção !</b> a sua mensagem contém menos de dez carácteres.',
-'forum_attention_trois_caracteres' => '<b>Atenção !</b> o seu título contém menos de três carácteres.',
-'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
-'forum_avez_selectionne' => 'Seleccionou :',
-'forum_cliquer_retour' => 'Clicar <a href=\'@retour_forum@\'>ici</a> para continuar.',
-'forum_forum' => 'fórum',
-'forum_info_modere' => 'Este fórum está moderado a priori : a sua contribuição só aparecerá depois de ser validada por um administrador do sítio.',
-'forum_lien_hyper' => '<b>Link hipertexto</b> (opcional)',
-'forum_message_definitif' => 'Mensagem definitiva: mandar para o sítio',
-'forum_message_trop_long' => 'A sua mensagem é demasiado comprida. O tamanho máximo é 20000 carácteres.',
-'forum_ne_repondez_pas' => 'Não responder para este mail mas no fórum, para o endereço seguinte:', # MODIF
 'forum_non_inscrit' => 'Não está inscrito, ou o endereço ou a palavra-passe estão errados.',
-'forum_page_url' => '(Se a sua mensagem se refere a um artigo publicado na Web, ou a uma página que fornece mais informações, por favor indique a seguir o título da página e o seu endereço URL.)',
 'forum_par_auteur' => 'por @auteur@',
-'forum_poste_par' => 'Mensagem posta@parauteur@ depois do seu artigo', # MODIF
 'forum_probleme_database' => 'Problema de base de dados, a sua mensagem não foi registada.',
 'forum_qui_etes_vous' => '<b>Quem é você?</b> (opcional)',
-'forum_texte' => 'Texto da sua mensagem:',
-'forum_titre' => 'Título:',
 'forum_titre_erreur' => 'Erro...',
 'forum_url' => 'URL:',
 'forum_valider' => 'Validar a sua escolha',
-'forum_voir_avant' => 'Ver esta mensagem antes de mandar',
 'forum_votre_email' => 'O seu endereço email:',
 'forum_votre_nom' => 'O seu nome (pseudónimo):',
-'forum_vous_enregistrer' => 'Para participar
- nesse fórum, deve estar previamente registado. É favor
-  indicar a seguir o identificador pessoal que lhe foi
- fornecido. Se não está registado, deve  ',
-'forum_vous_inscrire' => 'inscrever-se.',
 
 // I
 'ical_texte_rss_articles' => 'O ficheiro «backend» dos artigos deste sítio encontra-se neste endereço:',
@@ -396,11 +374,9 @@ Obrigado pela sua participação
 'icone_suivi_revisions' => 'Modificações dos artigos',
 'icone_supprimer_document' => 'Suprimir este documento',
 'icone_supprimer_image' => 'Suprimir esta imagem',
-'icone_supprimer_message' => 'Suprimir esta mensagem',
 'icone_tous_articles' => 'Todos os seus artigos',
 'icone_tous_auteur' => 'Todos os autores',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Validar esta mensagem',
 'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Ver em linha',
 'image_tourner_180' => 'Rodar 180°',
@@ -657,9 +633,6 @@ entre os participantes do sítio. Pode activar ou
 'onglet_informations_personnelles' => 'Informações pessoais',
 'onglet_interactivite' => 'Interactividade',
 'onglet_messagerie' => 'Correio',
-'onglet_messages_internes' => 'Mensagens internas',
-'onglet_messages_publics' => 'Mensagens públicas',
-'onglet_messages_vide' => 'Mensagens sem texto',
 'onglet_origine_visites' => 'Origem das visitas',
 'onglet_repartition_debut' => 'desde o início',
 'onglet_repartition_lang' => 'Distribuição por línguas',
@@ -760,7 +733,6 @@ Poderá então introduzir uma nova palavra-passe
 'titre_ajouter_mot_cle' => 'ACRESCENTAR UMA PALAVRA-CHAVE',
 'titre_cadre_raccourcis' => 'ATALHOS :',
 'titre_changer_couleur_interface' => 'Mudar a cor da interface',
-'titre_forum' => 'Fórum',
 'titre_image_admin_article' => 'Pode administrar este artigo',
 'titre_image_administrateur' => 'Administrador',
 'titre_image_aide' => 'Ajuda sobre este elemento',

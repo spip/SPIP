@@ -317,37 +317,15 @@ Mercé per vòstra participacion
 'form_prop_non_enregistre' => 'Vòstra proposicion es pas estaa registraa.',
 'form_prop_sujet' => 'Subjècte',
 'form_prop_url_site' => 'Adreiça (URL) dau sit',
-'forum_acces_refuse' => 'Poètz pas pus accedir vèrs aqueles forums.',
-'forum_attention_dix_caracteres' => '<b>Atencion!</b> vòstre messatge deu tenir aumens dètz caractèrs.',
-'forum_attention_trois_caracteres' => '<b>Atencion!</b> vòstre títol deu tenir aumens tres caractèrs.',
-'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
-'forum_avez_selectionne' => 'Avètz seleccionat:',
-'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aicí</a> per contunhar.',
-'forum_forum' => 'forum',
-'forum_info_modere' => 'Aquest forum es moderat a priòri: vòstra contribucion pareisserà mas qu\'après qu\'un administrator dau sit l\'aia validaa.',
-'forum_lien_hyper' => '<b>Liam ipertèxt</b> (opcionau)',
-'forum_message_definitif' => 'Messatge definitiu : mandar au sit',
-'forum_message_trop_long' => 'Vòstre messatge es tròp lòng. La lonjor maximala es de 20 000 caractèrs.',
-'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas per lo forum a l\'adreiça seguenta: ', # MODIF
 'forum_non_inscrit' => 'Siá siatz pas inscrich(a), siá avètz fach una error d\'adreiça o de mot de santa Clara. ',
-'forum_page_url' => '(se vòstre messatge se referís a un article publicat per lo web, o a una pagina que baile mai d\'informacions, volhatz marcar çai sos lo títol de la pagina e son adreiça URL.)',
 'forum_par_auteur' => 'per @auteur@',
-'forum_poste_par' => 'Messatge poste@parauteur@ que fai seguia a vòstre article.',
 'forum_probleme_database' => 'Problèma de basa de donaas, vòstre messatge s\'es pas registrat.',
 'forum_qui_etes_vous' => '<b>Qui siatz?</b> (opcionau)',
-'forum_texte' => 'Tèxt de vòstre messatge:',
-'forum_titre' => 'Títol:',
 'forum_titre_erreur' => 'Error...',
 'forum_url' => 'URL:',
 'forum_valider' => 'Validar aquela chausia',
-'forum_voir_avant' => 'Veire lo messatge avans de lo mandar',
 'forum_votre_email' => 'Vòstra adreiça e-mail:',
 'forum_votre_nom' => 'Vòstre nom (o pseudonim):',
-'forum_vous_enregistrer' => 'Per participar a
-  aqueu forum, d\'en primier vos chau registrar. Mercé
-  de marcar çai sos l\'identificant personau qu\'avètz recebut.
- Se siatz pas registrat/aa, avètz de',
-'forum_vous_inscrire' => 'vos inscriure',
 
 // I
 'ical_texte_rss_articles' => 'Lo fichier "backend" dels articles d\'aquest sit se tròba a l\'adreiça:',
@@ -396,11 +374,9 @@ Mercé per vòstra participacion
 'icone_suivi_revisions' => 'Modificacions dels articles',
 'icone_supprimer_document' => 'Suprimir aqueu document',
 'icone_supprimer_image' => 'Suprimir aquel imatge',
-'icone_supprimer_message' => 'Suprimir aqueu messatge',
 'icone_tous_articles' => 'Tots vòstres articles ',
 'icone_tous_auteur' => 'Tots los autors ',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Validar aqueu messatge',
 'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
 'image_tourner_180' => 'Rotacion 180°',
@@ -655,9 +631,6 @@ Mercé per vòstra participacion
 'onglet_informations_personnelles' => 'Informacions personalas',
 'onglet_interactivite' => 'Interactivitat',
 'onglet_messagerie' => 'Messatjariá',
-'onglet_messages_internes' => 'Messatges intèrnes',
-'onglet_messages_publics' => 'Messatges publics',
-'onglet_messages_vide' => 'Messatges sensa tèxt',
 'onglet_origine_visites' => 'Origina de las vesitas',
 'onglet_repartition_debut' => 'dempuei lo començament',
 'onglet_repartition_lang' => 'Reparticion per lengas',
@@ -760,7 +733,6 @@ e vos tornar connectar au sit.
 'titre_ajouter_mot_cle' => 'APONDRE UN MOT CLAU:',
 'titre_cadre_raccourcis' => 'ACORCHAS:',
 'titre_changer_couleur_interface' => 'Chambiar la color de l\'interfàcia',
-'titre_forum' => 'Forum',
 'titre_image_admin_article' => 'Poètz administrar aquest article',
 'titre_image_administrateur' => 'Administrator',
 'titre_image_aide' => 'D\'ajua sobre aquel element',

@@ -314,37 +314,15 @@ Mèsi  w soutni petisyon-nan
 'form_prop_non_enregistre' => 'Pwopozisyon ou te pa rojistré',
 'form_prop_sujet' => 'Sije',
 'form_prop_url_site' => 'Ladrès (URL) sitwèb',
-'forum_acces_refuse' => 'W ap pli laksé pou fowom-nan.',
-'forum_attention_dix_caracteres' => '<b>Atansyon !</b> mesaj ou li se mwen di lèt.',
-'forum_attention_trois_caracteres' => '<b>Atansyon !</b> Kouman i rele sit-la se mwen trwa lèt. Fôk w mèt trwa lèt omwen',
-'forum_attention_trop_caracteres' => '<b>Atansyon !</b> mesaje a w se tro lon (@compte@ caractères) : fòk w respek @max@ karaktèr pou enskri ali.',
-'forum_avez_selectionne' => 'W te chwazi :',
-'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>isit</a> pou kontinye.',
-'forum_forum' => 'fowom',
-'forum_info_modere' => 'Fowom la se modéwé-avann : patisipasyon demoun ke aparèt sèlman apré yon komandèr  sit te valide ali.',
-'forum_lien_hyper' => '<b>Lyen ipèrtèks</b> (w pa oblijé)',
-'forum_message_definitif' => 'Mesaj fin fini : anvway anndan sit la',
-'forum_message_trop_long' => 'Mesaj ou se tro lon. Pli gran tay se 20000 kawaktè.',
-'forum_ne_repondez_pas' => 'Reponn pa limèl la. Reponn anndan fowom-an sou ladrès la :', # MODIF
 'forum_non_inscrit' => 'W ap pa enskri ankò, oubyen ladrès osinon modpas ou se pa korèk.',
-'forum_page_url' => '(Si mesaj ou ka voye sou yon tik sou Wèb déò ou yon lòt paj pli konplé, mèsi mèt anba kouman paj la  ka rele èk ladrès URL.)',
 'forum_par_auteur' => 'se @auteur@ te ekri',
-'forum_poste_par' => 'Mesaj te poste @parauteur@ anba atik ou-a.', # MODIF
 'forum_probleme_database' => 'Pwoblèm ak bazdone, mesaj ou te pa enskri.',
 'forum_qui_etes_vous' => '<b>Kouman w rele ?</b> (pa oblijé)',
-'forum_texte' => 'Teks mesaj ou :',
-'forum_titre' => 'Kouman i rele mesaj ou :',
 'forum_titre_erreur' => 'Erè ...',
 'forum_url' => 'URL :',
 'forum_valider' => 'Apiyé chwa-a',
-'forum_voir_avant' => 'Gad mesaj la avan post ali',
 'forum_votre_email' => 'Ladrès limèl ou :',
 'forum_votre_nom' => 'Kouman w rele (ousinon kouman w vlé rele isit) :',
-'forum_vous_enregistrer' => 'Pou soutni andan
- fowom-nan, fòk w enskri avan. Mési
- mèt enba lidantifyan pèsonèl ou-a 
- kis nou té don a w. Si w ap pa enskri ankò, fòk w',
-'forum_vous_inscrire' => 'enskri w.',
 
 // I
 'ical_texte_rss_articles' => 'Fichyé «backend» pou tout atik yo, w ke rannkont sou ladrès la :',
@@ -393,11 +371,9 @@ Mèsi  w soutni petisyon-nan
 'icone_suivi_revisions' => 'Chanjman nan atik yo',
 'icone_supprimer_document' => 'Kraze dokiman nan',
 'icone_supprimer_image' => 'Kraze imaj la',
-'icone_supprimer_message' => 'Kraze mesaj la',
 'icone_tous_articles' => 'Tout atik ou',
 'icone_tous_auteur' => 'Tout lotè yo',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Konfime mesaj la',
 'icone_visiter_site' => 'Fè yon vire', # MODIF
 'icone_voir_en_ligne' => 'Gad an liy',
 'image_tourner_180' => 'Touné 180°',
@@ -652,9 +628,6 @@ Mèsi  w soutni petisyon-nan
 'onglet_informations_personnelles' => 'Enfòmasyon pèsonèl',
 'onglet_interactivite' => 'Entèwaktivite',
 'onglet_messagerie' => 'Kazmodékri',
-'onglet_messages_internes' => 'Mesaj yo ki andan sit-la',
-'onglet_messages_publics' => 'Mesaj piblik yo',
-'onglet_messages_vide' => 'Mesaj yo ki gen pa oken tèks',
 'onglet_origine_visites' => 'Lorijin vizit yo',
 'onglet_repartition_debut' => 'depi koumansman',
 'onglet_repartition_lang' => 'Repatisyon ant lang',
@@ -756,7 +729,6 @@ lès plitò jestyon paj sa-yo pou wèbmèt prensipal sou sit-la.</b>', # MODIF
 'titre_ajouter_mot_cle' => 'AJOUTE YON MOKLE :',
 'titre_cadre_raccourcis' => 'TICHEMEN YO :',
 'titre_changer_couleur_interface' => 'Chanje koulè lentèfas',
-'titre_forum' => 'Fowom',
 'titre_image_admin_article' => 'W kapab jère atik-la',
 'titre_image_administrateur' => 'Komandè',
 'titre_image_aide' => 'Ann genyen èd sou eleman nan',

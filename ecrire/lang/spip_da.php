@@ -314,37 +314,15 @@ Tak for din deltagelse
 'form_prop_non_enregistre' => 'Din forslag er ikke modtaget.',
 'form_prop_sujet' => 'Emne',
 'form_prop_url_site' => 'Webstedets URL',
-'forum_acces_refuse' => 'Du har ikke mere adgang til disse forummer',
-'forum_attention_dix_caracteres' => '<b>Advarsel!</b> dit indlæg er mindre end ti tegn langt.', # MODIF
-'forum_attention_trois_caracteres' => '<b>Advarsel!</b> dit emne er mindre end tre tegn langt.', # MODIF
-'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
-'forum_avez_selectionne' => 'Du har valgt:',
-'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at fortsætte.',
-'forum_forum' => 'forum',
-'forum_info_modere' => 'Dette forum benytter forhåndsgodkendelse: dit bidrag vil først blive offentliggjort, når det er godkendt af en administrator.',
-'forum_lien_hyper' => '<b>Hypertekst link</b> (valgfrit)',
-'forum_message_definitif' => 'Endeligt indlæg: send til webstedet',
-'forum_message_trop_long' => 'Dit indlæg er for langt. Maksimal længde er 20.000 tegn.',
-'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men gå i stedet til forummet på denne adresse:', # MODIF
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
-'forum_page_url' => '(Hvis dit indlæg henviser til en artikel, der er offentliggjort på Internettet, eller til en side der indeholder yderligere oplysninger, så angiv venligst sidens titel og dens adresse eller URL nedenfor).',
 'forum_par_auteur' => 'af @auteur@',
-'forum_poste_par' => 'Indlæg @parauteur@ som svar på din artikel.', # MODIF
 'forum_probleme_database' => 'Databaseproblem, dit indlæg er ikke modtaget.',
 'forum_qui_etes_vous' => '<b>Hvem er du?</b> (valgfrit)',
-'forum_texte' => 'Indlæggets tekst:',
-'forum_titre' => 'Titel:',
 'forum_titre_erreur' => 'Fejl...',
 'forum_url' => 'URL:',
 'forum_valider' => 'Kontroller gyldighed',
-'forum_voir_avant' => 'Vis indlæg før indsendelse',
 'forum_votre_email' => 'Din e-mail-adresse:',
 'forum_votre_nom' => 'Dit navn (eller alias):',
-'forum_vous_enregistrer' => 'Før du kan deltage i dette forum,
-		skal du tilmelde dig. Indtast venligst nedenfor de
-		personlige adgangsoplysninger, du har fået tilsendt.
-		Hvis du ikke allerede har tilmeldt dig, skal du gøre det.',
-'forum_vous_inscrire' => 'tilmeld dig </a> først.', # MODIF
 
 // I
 'ical_texte_rss_articles' => 'Filen "backend" for artiklerne på dette websted findes på følgende adresse: ',
@@ -393,11 +371,9 @@ Tak for din deltagelse
 'icone_suivi_revisions' => 'Modifications des articles', # NEW
 'icone_supprimer_document' => 'Slet dette dokument',
 'icone_supprimer_image' => 'Slet dette billede',
-'icone_supprimer_message' => 'Slet denne meddelelse',
 'icone_tous_articles' => 'Alle dine artikler',
 'icone_tous_auteur' => 'Alle forfattere',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Godkend meddelelse',
 'icone_visiter_site' => 'Besøg websted', # MODIF
 'icone_voir_en_ligne' => 'Vis online',
 'image_tourner_180' => 'Rotation 180°', # NEW
@@ -653,9 +629,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'onglet_informations_personnelles' => 'Personlige oplysninger',
 'onglet_interactivite' => 'Interaktivitet',
 'onglet_messagerie' => 'Meddelelsesfunktion',
-'onglet_messages_internes' => 'Interne meddelelser',
-'onglet_messages_publics' => 'Offentlige meddelelser',
-'onglet_messages_vide' => 'Meddelelser uden tekst',
 'onglet_origine_visites' => 'Besøgendes oprindelse',
 'onglet_repartition_debut' => 'fra begyndelsen',
 'onglet_repartition_lang' => 'efter sprog',
@@ -743,7 +716,6 @@ og igen få adgang til webstedet.', # MODIF
 'titre_ajouter_mot_cle' => 'TILFØJ NØGLEORD:',
 'titre_cadre_raccourcis' => 'GENVEJE:',
 'titre_changer_couleur_interface' => 'Ændre farve på brugergrænsefladen',
-'titre_forum' => 'Internt forum',
 'titre_image_admin_article' => 'Du kan administrere denne artikel',
 'titre_image_administrateur' => 'Administrator',
 'titre_image_aide' => 'Hjælp til dette emne',
