@@ -57,7 +57,7 @@ function determine_source_lien_objet($a,$b,$c){
 function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 
 	list($table_source,$objet,$id_objet,$objet_lien) = determine_source_lien_objet($a,$b,$c);
-	if (!$table_source OR !$objet OR !$objet_lien)
+	if (!$table_source OR !$objet OR !$objet_lien OR !$id_objet)
 		return false;
 
 	$objet_source = objet_type($table_source);
