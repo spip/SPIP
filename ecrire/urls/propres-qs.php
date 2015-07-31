@@ -25,7 +25,7 @@ Attention : le mode 'propres-qs' est moins fonctionnel que le mode 'propres' ou
 preferables au mode 'propres-qs'.
 
 */
-
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '');
 

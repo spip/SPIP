@@ -18,6 +18,7 @@ Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
 le suffixe '.html' aux adresses ;
 
 */
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '.html');
