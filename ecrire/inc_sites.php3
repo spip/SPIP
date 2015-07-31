@@ -643,7 +643,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 							$puce = 'puce-rouge-anim.gif';
 					}
 
-					echo http_img_pack('$puce', "width='7' height='7' border='0' alt='' /");
+					echo http_img_pack($puce, "width='7' height='7' border='0' alt=''");
 
 					if ($statut == "refuse")
 						echo "<font color='black'>&nbsp;&nbsp;$titre</font>";
