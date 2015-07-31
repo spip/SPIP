@@ -2,15 +2,15 @@
 
 # Script pour rendre Spip extensible
 # laisse tomber les .php3 par la meme occasion
-# garde neanmoins les .php3 qui peuvent avoir été mémorisés comme signets.
+# garde neanmoins les .php3 pour honorer les vieux signets.
 
-MVCOMMANB="mv"
+#MVCOMMAND="mv"
 # a terme:
-#$MVCOMMANB="svn mv"
+MVCOMMAND="svn mv"
 
-COMMITCOMMAND="cat "
+#COMMITCOMMAND="cat "
 # aterme
-#COMMITCOMMAND="svn commit -F "
+COMMITCOMMAND="svn commit -F "
 
 function sed_inc_version_php3_in_public
 {
@@ -32,7 +32,7 @@ do
     mv x $i
 done
 
-$MVCOMMANB pclzip.lib.php inc_pclzip.php
+$MVCOMMAND pclzip.lib.php inc_pclzip.php
 
 for i in $(grep -l 'lab_' inc*php*)
 do
@@ -40,9 +40,9 @@ do
     mv x $i
 done
 
-$MVCOMMANB lab_diff.php inc_diff.php
-$MVCOMMANB lab_ortho.php inc_ortho.php
-$MVCOMMANB lab_revisions.php inc_revisions.php
+$MVCOMMAND lab_diff.php inc_diff.php
+$MVCOMMAND lab_ortho.php inc_ortho.php
+$MVCOMMAND lab_revisions.php inc_revisions.php
 }
 
 # Differencier les inc_c charge automatiquement en les renommant en exec_
@@ -58,10 +58,10 @@ mv statistiques.php3 s
 for i in *.php*; do 
 	if [ -f inc_${i%3} ]; 
 	then 
-	$MVCOMMANB inc_${i%3} exec_${i%3}
+	$MVCOMMAND inc_${i%3} exec_${i%3}
 	elif [ -f inc_$i ]; 
 	then 
-	$MVCOMMANB inc_$i exec_${i%3}
+	$MVCOMMAND inc_$i exec_${i%3}
 	fi
 done
 mv i3 index.php3 
@@ -69,24 +69,24 @@ mv i index.php
 mv f forum.php3 
 mv s statistiques.php3 
 # et d'autres en plus
-$MVCOMMANB inc_auth.php3 exec_auth.php
-$MVCOMMANB inc_accueil.php exec_accueil.php
+$MVCOMMAND inc_auth.php3 exec_auth.php
+$MVCOMMAND inc_accueil.php exec_accueil.php
 
 for i in inc_spip_action*; do 
-    $MVCOMMANB $i exec_${i#inc_}
+    $MVCOMMAND $i exec_${i#inc_}
 done
 
 for i in inc_*.php3; do 
-	$MVCOMMANB $i ${i%3} 
+	$MVCOMMAND $i ${i%3} 
 done
 
 # Pour respecter "la fonction F_dist est definie dans exec_F.php"
 # il faut remplacer - par _ dans le nom des fichiers
 
-$MVCOMMANB  exec_config-contenu.php exec_config_contenu.php
-$MVCOMMANB  exec_config-multilang.php exec_config_multilang.php
-$MVCOMMANB  exec_config-fonctions.php exec_config_fonctions.php
-$MVCOMMANB  exec_config-lang.php exec_config_lang.php
+$MVCOMMAND  exec_config-contenu.php exec_config_contenu.php
+$MVCOMMAND  exec_config-multilang.php exec_config_multilang.php
+$MVCOMMAND  exec_config-fonctions.php exec_config_fonctions.php
+$MVCOMMAND  exec_config-lang.php exec_config_lang.php
 }
 
 
@@ -136,6 +136,7 @@ type normalise_inc | grep -v "is a function" >> log
 sed_inc_version_php3_in_public
 $COMMITCOMMAND log
 sleep 1
+rm log
 
 cd ecrire
 
