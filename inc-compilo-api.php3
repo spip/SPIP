@@ -215,6 +215,7 @@ $tables_relations['documents']['id_rubrique']='documents_rubriques';
 $tables_relations['documents']['id_breve']='documents_breves';
 $tables_relations['documents']['id_syndic']='documents_syndic';
 $tables_relations['documents']['id_syndic_article']='documents_syndic';
+$tables_relations['documents']['id_mot']='mots_documents';
 
 $tables_relations['forums']['id_mot']='mots_forum';
 
@@ -223,6 +224,7 @@ $tables_relations['mots']['id_breve']='mots_breves';
 $tables_relations['mots']['id_forum']='mots_forum';
 $tables_relations['mots']['id_rubrique']='mots_rubriques';
 $tables_relations['mots']['id_syndic']='mots_syndic';
+$tables_relations['mots']['id_document']='mots_documents';
 
 $tables_relations['groupes_mots']['id_groupe']='mots';
 
