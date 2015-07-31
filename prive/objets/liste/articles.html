@@ -20,6 +20,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
 			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
@@ -32,6 +33,7 @@
 			})]</td>
 		</tr>
 	</BOUCLE_liste_art>
+	[(#REM|changer_typo)]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
