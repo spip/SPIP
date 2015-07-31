@@ -45,8 +45,8 @@
 				]<div class="choix">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1"
 					onchange="jQuery('body').removeClass('icones_texte').removeClass('icones_img_texte').removeClass('icones_img');
-					if (jQuery('#[(#GET{name})]_1').attr('checked')) jQuery('body').addClass('icones_texte')
-					else if (jQuery('#[(#GET{name})]_2').attr('checked')) jQuery('body').addClass('icones_img_texte')
+					if (jQuery('#[(#GET{name})]_1').prop('checked')) jQuery('body').addClass('icones_texte')
+					else if (jQuery('#[(#GET{name})]_2').prop('checked')) jQuery('body').addClass('icones_img_texte')
 					else jQuery('body').addClass('icones_img');"
 					/>
 					<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
@@ -54,8 +54,8 @@
 				<div class="choix">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2"
 					onchange="jQuery('body').removeClass('icones_texte').removeClass('icones_img_texte').removeClass('icones_img');
-					if (jQuery('#[(#GET{name})]_1').attr('checked')) jQuery('body').addClass('icones_texte')
-					else if (jQuery('#[(#GET{name})]_2').attr('checked')) jQuery('body').addClass('icones_img_texte')
+					if (jQuery('#[(#GET{name})]_1').prop('checked')) jQuery('body').addClass('icones_texte')
+					else if (jQuery('#[(#GET{name})]_2').prop('checked')) jQuery('body').addClass('icones_img_texte')
 					else jQuery('body').addClass('icones_img');"
 					/>
 					<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
@@ -63,8 +63,8 @@
 				<div class="choix">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3"
 					onchange="jQuery('body').removeClass('icones_texte').removeClass('icones_img_texte').removeClass('icones_img');
-					if (jQuery('#[(#GET{name})]_1').attr('checked')) jQuery('body').addClass('icones_texte')
-					else if (jQuery('#[(#GET{name})]_2').attr('checked')) jQuery('body').addClass('icones_img_texte')
+					if (jQuery('#[(#GET{name})]_1').prop('checked')) jQuery('body').addClass('icones_texte')
+					else if (jQuery('#[(#GET{name})]_2').prop('checked')) jQuery('body').addClass('icones_img_texte')
 					else jQuery('body').addClass('icones_img');"
 					/>
 					<label for="[(#GET{name})]_3"><:lien_afficher_icones_seuls:></label>
