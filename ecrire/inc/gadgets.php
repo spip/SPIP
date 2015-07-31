@@ -322,12 +322,12 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
 	. "<form method='get' style='margin: 0px; position: relative;' action='"
 	 . generer_url_ecrire("recherche")
-	. "'>"
+	. "'><div>"
 	. "<input type='hidden' name='exec' value='recherche' />"
 	. "<input type=\"text\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""
 	. _T('info_rechercher')
 	. "\" name=\"recherche\" onkeypress=\"$js;t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" class=\"formo\" accesskey=\"r\" />"
-	. "</form>"
+	. "</div></form>"
 	. "</div>";
 	// FIN GADGET recherche
 

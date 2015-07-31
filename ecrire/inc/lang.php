@@ -158,10 +158,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	     : "<noscript><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></noscript>");
 
 	if ($lien === 'ajax') return $ret;
-	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
+	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"
 	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
 	  . $ret
-	  . "</form>\n";
+	  . "</div></form>\n";
 }
 
 // http://doc.spip.org/@liste_options_langues
