@@ -469,7 +469,8 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]= $skel($row, $tous_id, $voir_logo, $own);
+		if ($a = $skel($row, $tous_id, $voir_logo, $own))
+			$table[] = $a;
 	}
 	spip_free_result($result);
 
