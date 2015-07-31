@@ -59,7 +59,7 @@ class Boucle {
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
-	var $nom_boucle= false; // seulement si boucle explicite
+	var $nom_boucle= ''; // seulement si boucle explicite
 	var $cond_avant, $cond_apres; // tableaux d'objets
 	var $fonctions;  // filtre explicites
 	var $etoile;

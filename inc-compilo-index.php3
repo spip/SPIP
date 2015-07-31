@@ -21,7 +21,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 	$i = 0;
 	
-	if ($explicite !== false) {
+	if (strlen($explicite)) {
 	// Recherche d'un champ dans un etage superieur
 	  while (($idb != $explicite) && ($idb !='')) {
 #		spip_log("Cherchexpl: $nom_champ '$idb' '$i'");
