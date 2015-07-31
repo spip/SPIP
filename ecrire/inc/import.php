@@ -345,10 +345,10 @@ function import_tables($request, $archive) {
 
 		if (!$initialisation_copie) {
 			// vide et liste les tables
-			$tables = import_init_tables($request);
+			import_init_tables($request);
 			ecrire_meta("restauration_status_copie", "ok",'non');
-		} else
-			$tables = import_table_choix($request);
+		}
+		$tables = import_table_choix($request);
 #		var_dump($tables);die();
 
 		if (in_array('spip_auteurs',$tables)){
