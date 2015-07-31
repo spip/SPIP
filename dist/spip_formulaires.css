@@ -6,7 +6,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #330; }
+.formulaire_spip { margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #330; }
 
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
@@ -17,7 +17,6 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Lignes */
 .formulaire_spip ul { margin: 0; padding: 0; list-style: none; }
 .formulaire_spip ul li { clear: both; margin: 0; padding: .5em 0; }
-/*.formulaire_spip p { margin: 0 0 1em 0; }*/
 
 /* Explications */
 .formulaire_spip .explication { margin: .5em 0; color: #444; }
@@ -69,10 +68,10 @@ table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
 /* Formulaire de recherche */
-#formulaire_recherche { float: right; margin: 0; padding: 0; background: none; }
+#formulaire_recherche { margin: 0; padding: 0; background: none; }
 #formulaire_recherche * { display: inline; vertical-align: middle; }
 #formulaire_recherche label { display: none; }
-#formulaire_recherche input.text { width: 12em; text-align: left; /*padding-left: 25px; background: #fff url(rechercher.png) no-repeat left center;*/ }
+#formulaire_recherche input.text { padding-left: 25px; background: #fff url(rechercher.png) no-repeat left center; }
 #formulaire_recherche input.submit {}
 
 .spip_surligne {} /*Cf.: spip_style.css*/
