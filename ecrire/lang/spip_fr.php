@@ -569,7 +569,7 @@ Merci de votre participation
 'info_visites' => 'visites :',
 'info_vos_rendez_vous' => 'Vos rendez-vous &agrave; venir',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Vos pense-b&ecirc;te',
+'infos_vos_pense_bete' => 'Vos pense-b&ecirc;tes',
 'item_breve_proposee' => 'Br&egrave;ve propos&eacute;e',
 
 // L

@@ -191,7 +191,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_saison_4' => '&#31179;&#23395;',
 'date_secondes' => 'secondes', # NEW
 'date_semaines' => '&#21608;',
-'date_un_mois' => '<NEW>&#26376;',
+'date_un_mois' => 'mois', # NEW
 'date_une_heure' => 'heure', # NEW
 'date_une_minute' => 'minute', # NEW
 'date_une_seconde' => 'seconde', # NEW
@@ -564,7 +564,7 @@ sera ignor&eacute;e) :
 'info_visites' => '&#35775;&#38382;:',
 'info_vos_rendez_vous' => '&#23558;&#26469;&#30340;&#32422;&#20250;',
 'info_zoom' => '&#32553;&#25918;',
-'infos_vos_pense_bete' => '&#22791;&#27880;',
+'infos_vos_pense_bete' => '&#22791;&#27880;', # MODIF
 'item_breve_proposee' => '&#26032;&#38395;&#25552;&#20132;',
 
 // L
