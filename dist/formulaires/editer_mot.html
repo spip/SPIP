@@ -1,0 +1,45 @@
+<div class='formfx editer_mot'>
+	<br class='spacer' />
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_mot' value='#ENV{id_mot}' />
+	  <fieldset>
+	  <ol class="formfx">
+	    <li class="gauche obligatoire">
+	      <label for="titre"><:info_titre_mot_cle:><em>#AIDER{mots}</em></label>
+	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#VAL{texte_nouveau_mot}|_T})]"
+				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+	    </li>	
+	    <li class="gauche obligatoire">
+	      <label for="id_groupe"><:info_dans_groupe:><em>#AIDER{motsgroupes}</em></label>
+	      [(#INCLURE{fond=formulaires/selecteur_groupe_mot}{id_groupe=#ENV{id_groupe}}{table=#ENV{table,''}}{name=id_groupe}{id=id_groupe})]
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_groupe})</span>]
+	    </li>
+	    <li class="haut">
+	      <label for="descriptif"><:texte_descriptif_rapide:></label>
+	      <textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+	    </li>
+	    <li class="haut">
+	      <label for="text_area"><:info_texte_explicatif:></label>
+	    	[(#ENV**{_texte_trop_long,''})]
+	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
+	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+	    </li>
+	  </ol>
+	  </fieldset>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	</form>
+	]
+</div>
