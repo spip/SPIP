@@ -61,9 +61,11 @@ class ParamChamp {
 	var $boucles;
 	var $id_mere;
 	var $code;
+	var $entete;
 
 	function retour() {
-		return applique_filtres($this->fonctions, $this->code, $this->id_boucle, $this->boucles, $this->id_mere);
+	  list($code_filtre,$entete_filtre) = applique_filtres($this->fonctions, $this->code, $this->id_boucle, $this->boucles, $this->id_mere);
+	  return array($code_filtre,$this->entete.$entete_filtre);
 	}
 }
 

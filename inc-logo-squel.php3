@@ -98,15 +98,15 @@ function balise_DATE_dist ($p) {
 
 # Fonction commune aux logos (rubriques, articles...)
 
-function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
+function calculer_champ_LOGO($params)
 {
-  ereg("^LOGO_(([a-zA-Z]+).*)$", $nom_champ, $regs);
+  ereg("^LOGO_(([a-zA-Z]+).*)$", $params->nom_champ, $regs);
   $type_logo = $regs[1];
   $type_objet = strtolower($regs[2]);
   $flag_fichier = 0;  // compatibilite ascendante
   $filtres = '';
-  if ($fonctions) {
-    while (list(, $nom) = each($fonctions)) {
+  if (is_array($params->fonctions)) {
+    foreach($params->fonctions as $nom) {
       if (ereg('^(left|right|center|top|bottom)$', $nom))
 	$align = $nom;
       else if ($nom == 'lien') {
@@ -129,137 +129,137 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
 	}
     }
     // recuperer les filtres s'il y en a
-    $fonctions = $filtres;
+    $params->fonctions = $filtres;
   }
   if ($flag_lien_auto && !$lien) {
-    $milieu .= "\n\t\$lien = generer_url_$type_objet(" .
-      index_pile($id_boucle,  'id_$type_objet', $boucles) .
+    $params->entete .= "\n\t\$lien = generer_url_$type_objet(" .
+      champ_sql("id_$type_objet", $params) .
       ");\n";
   }
   else
     {
-      $milieu .= "\n\t\$lien = ";
+      $params->entete .= "\n\t\$lien = ";
       $a = $lien;
       while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $a, $match))
 	{
-	  list($c,$m) = calculer_champ(array(), $match[2], $id_boucle, $boucles, $id_mere);
+	  list($c,$m) = calculer_champ(array(), $match[2], $params->id_boucle, $params->boucles, $params->id_mere);
 	  // $m est nul dans les cas pre'vus
-	  $milieu .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
+	  $params->entete .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
 	  $a = $match[3];
 	}
-      if ($a) $milieu .= "'$lien';"; 
+      if ($a) $params->entete .= "'$lien';"; 
       else 
 	{
-	  if ($lien) $milieu = substr($milieu,1,-1) .";";
-	  else $milieu .= "'';";
+	  if ($lien) $params->entete = substr($params->entete,1,-1) .";";
+	  else $params->entete .= "'';";
 	}
     }
   
   if ($type_logo == 'RUBRIQUE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_rubrique(' .
-      index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier);
+      champ_sql('id_rubrique', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'RUBRIQUE_NORMAL') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon,) = image_rubrique(' .
-      index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier); ". '
+      champ_sql('id_rubrique', $params) . ", $flag_fichier); ". '
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'RUBRIQUE_SURVOL') {
-    $milieu .= '
+    $params->entete .= '
 			list(,$logon) = image_rubrique(' .
-      index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier); ". '
+      champ_sql('id_rubrique', $params) . ", $flag_fichier); ". '
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'DOCUMENT'){
     // Recours a une globale pour compatibilite avec l'ancien code. 
     // Il faudra reprendre inc_documents entierement (tu parles !)
-    $milieu .= ' 
+    $params->entete .= ' 
 		$logoff = ' .
-      index_pile($id_boucle,  "id_document", $boucles) . 
+      champ_sql('id_document', $params) . 
       '; 
 		$logon = integre_image($logoff,"","fichier_vignette");
 		$logoff = "";
 			';
   }
   else if ($type_logo == 'AUTEUR') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_auteur(' .
-      index_pile($id_boucle,  "id_auteur", $boucles) . ", $flag_fichier);
+      champ_sql('id_auteur', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'AUTEUR_NORMAL') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon,) = image_auteur(' .
-      index_pile($id_boucle,  "id_auteur", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_auteur', $params) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'AUTEUR_SURVOL') {
-    $milieu .= '
+    $params->entete .= '
 			list(,$logon) = image_auteur(' .
-      index_pile($id_boucle,  "id_auteur", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_auteur', $params) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'BREVE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_breve(' .
-      index_pile($id_boucle,  "id_breve", $boucles) . ", $flag_fichier);
+      champ_sql('id_breve', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'BREVE_RUBRIQUE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_breve(' .
-      index_pile($id_boucle,  "id_breve", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_breve', $params) . ", $flag_fichier);".'
 			if (!$logon)
 				list($logon, $logoff) = image_rubrique(' .
-      index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier);
+      champ_sql('id_rubrique', $params) . ", $flag_fichier);
 		  ";
   }
   else if ($type_logo == 'SITE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_site(' .
-      index_pile($id_boucle,  "id_syndic", $boucles) . ", $flag_fichier);
+      champ_sql('id_syndic', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'MOT') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_mot(' .
-      index_pile($id_boucle,  "id_mot", $boucles) . ", $flag_fichier);
+      champ_sql('id_mot', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'ARTICLE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_article(' .
-      index_pile($id_boucle,  "id_article", $boucles) . ", $flag_fichier);
+      champ_sql('id_article', $params) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'ARTICLE_NORMAL') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon,) = image_article(' .
-		index_pile($id_boucle,  "id_article", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_article', $params) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'ARTICLE_SURVOL') {
-    $milieu .= '
+    $params->entete .= '
 			list(,$logon) = image_article(' .
-      index_pile($id_boucle,  "id_article", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_article', $params) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'ARTICLE_RUBRIQUE') {
-    $milieu .= '
+    $params->entete .= '
 			list($logon, $logoff) = image_article(' .
-      index_pile($id_boucle,  "id_article", $boucles) . ", $flag_fichier);".'
+      champ_sql('id_article', $params) . ", $flag_fichier);".'
 			if (!$logon)
 				list($logon, $logoff) = image_rubrique(' .
-      index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier);
+      champ_sql('id_rubrique', $params) . ", $flag_fichier);
 			";
   }
 
@@ -268,13 +268,12 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
 	// remarquable, mais a conserver pour compatibilite ascendante.
 	// -> http://www.spip.net/fr_article901.html
 	if ($flag_fichier)
-		$code = 'ereg_replace("^IMG/","",$logon)';
+		$params->code = 'ereg_replace("^IMG/","",$logon)';
 	else
-		$code = "affiche_logos(\$logon, \$logoff, \$lien, '".
+		$params->code = "affiche_logos(\$logon, \$logoff, \$lien, '".
 		addslashes($align) . "')";
 
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
-	return array($c,$milieu . $m);
+	return $params;
 }
 
 ?>
