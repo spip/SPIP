@@ -15,21 +15,21 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
+/* Explications */
+.formulaire_spip .explication { margin: 0.5em 0; color: #444; }
+
 /* Lignes */
 .formulaire_spip ul { margin: 0; padding: 0; list-style: none; }
 .formulaire_spip ul li { clear: both; margin: 0; padding: 0.5em 0; }
+
+/* Labels */
+.formulaire_spip label { display: block; text-align: left; color: #444; font-weight: bold; /* for IE */ position: relative;  }
+.formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
 /* Champs de saisie */
 .formulaire_spip input.text { width: 15em; }
 .formulaire_spip textarea { width: 99%; }
 .formulaire_spip select { width: 99%; }
-
-/* Explications */
-.formulaire_spip .explication { margin: 0.5em 0; color: #444; }
-
-/* Labels */
-.formulaire_spip label { text-align: left; color: #444; font-weight: bold; /* for IE */ position: relative; display: block; }
-.formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
 /* Boutons */
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
