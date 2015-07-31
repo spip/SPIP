@@ -94,7 +94,7 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 	}
 	if (!$initiale AND !$url)
 		$memo=null;
-	return $res;
+	return ($res?" $res":"");
 }
 
 /**
