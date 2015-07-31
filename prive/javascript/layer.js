@@ -309,20 +309,6 @@ function verifForm(racine) {
 				return false;
 			}
 		});
-	
-	
-	// vieux fonctionnement verifForm, desormais uniquement sur MSIE < 8:
-	// forcer la largeur des elements de formulaires a 100%
-	// (desormais, on utilise la CSS box-sizing pour brouteurs recents).
-	if(jQuery.browser.msie && jQuery.browser.version.substr(0,3) < 8) {
-		jQuery(".formulaire_spip", racine||document).find("input.text, input.password, textarea")
-		.each(function() {
-			if(this.currentStyle && this.currentStyle.width=="100%") {
-				var jField = jQuery(this);
-				jField.width(2*jField.width()-jField.outerWidth());
-			}
-		});	
-	}
 
 }
 
