@@ -421,7 +421,6 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	$clean_link->AddVar('coll', $coll);
 	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();
