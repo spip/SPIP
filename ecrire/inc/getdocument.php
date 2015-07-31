@@ -127,6 +127,11 @@ function check_upload_error($error, $msg='') {
 			$msg = _T('upload_limit',
 			array('max' => ini_get('upload_max_filesize')));
 			break;
+		
+		default: /* autre */
+			$msg = _T('pass_erreur').' '. $error
+			. '<br />' . propre("[->http://php.net/manual/fr/features.file-upload.errors.php]");
+			break;
 	}
 
 	spip_log ("erreur upload $error");
