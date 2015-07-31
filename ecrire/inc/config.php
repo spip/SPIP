@@ -145,11 +145,12 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 
 // http://doc.spip.org/@appliquer_modifs_config
 function appliquer_modifs_config() {
-	global $adresse_site, $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
+	global $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
 
-	$adresse_site = preg_replace(",/$,", "", _request('adresse_site'));
+	if (_request('adresse_site'))
+		$_POST['adresse_site'] = preg_replace(",/$,", "", _request('adresse_site'));
 
 	// Purger les squelettes si un changement de meta les affecte
 	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
@@ -271,8 +272,9 @@ function appliquer_modifs_config() {
 		suivre_invalideur("1"); # tout effacer
 	}
 
-	while (list(,$i) = each($liste_meta))
-		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
+	foreach($liste_meta as $i)
+		if (isset($_POST[$i]))
+			ecrire_meta($i, $_POST[$i]);
 
 	// langue_site : la globale est mangee par inc_version
 	if ($lang = $GLOBALS['changer_langue_site']) {
