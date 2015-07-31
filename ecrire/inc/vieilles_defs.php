@@ -241,4 +241,6 @@ function lang_dselect () {
 	spip_log("lang_dselect: utiliser lang_select sans argument");
 	lang_select();
 }
+// toujours disponible pour PHP > 4.0.1
+$GLOBALS['flag_revisions'] = function_exists("gzcompress");
 ?>

@@ -28,8 +28,6 @@ function exec_config_fonctions_dist()
 	init_config();
 	if ($changer_config == 'oui') appliquer_modifs_config();
 
-	global $flag_revisions ;
-
 	pipeline('exec_init',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
@@ -73,7 +71,7 @@ function exec_config_fonctions_dist()
 //
 // Gestion des revisions des articles
 //
-	if ($flag_revisions) versions_config();
+	versions_config();
 
 //
 // Correcteur d'orthographe

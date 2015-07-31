@@ -269,8 +269,7 @@ function revision_forum($id_forum, $c=false) {
 // http://doc.spip.org/@premiere_revision
 function premiere_revision($x) {
 	// Stockage des versions : creer une premiere version si non-existante
-	if  ($GLOBALS['flag_revisions']
-	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+	if  ($GLOBALS['meta']["articles_versions"]=='oui') {
 		include_spip('inc/revisions');
 		$x = enregistrer_premiere_revision($x);
 	}
@@ -282,8 +281,7 @@ function premiere_revision($x) {
 // http://doc.spip.org/@nouvelle_revision
 function nouvelle_revision($x) {
 	// Stockage des versions : creer une premiere version si non-existante
-	if  ($GLOBALS['flag_revisions']
-	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+	if  ($GLOBALS['meta']["articles_versions"]=='oui') {
 		include_spip('inc/revisions');
 		$x = enregistrer_nouvelle_revision($x);
 	}

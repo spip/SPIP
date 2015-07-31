@@ -1168,7 +1168,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		&& (@ini_get('max_execution_time') > 0)
 		&& !strstr(ini_get('disable_functions'), 'ob_'));
 	$GLOBALS['flag_sapi_name'] = function_exists("php_sapi_name");
-	$GLOBALS['flag_revisions'] = function_exists("gzcompress");
 	$GLOBALS['flag_get_cfg_var'] = (@get_cfg_var('error_reporting') != "");
 	$GLOBALS['flag_upload'] = (!$GLOBALS['flag_get_cfg_var'] ||
 		(get_cfg_var('upload_max_filesize') > 0));

@@ -541,8 +541,7 @@ function liste_champs_versionnes($table) {
 // http://doc.spip.org/@enregistrer_premiere_revision
 function enregistrer_premiere_revision($x) {
 
-	if  ($GLOBALS['flag_revisions']
-	AND $GLOBALS['meta']["articles_versions"]=='oui'
+	if  ($GLOBALS['meta']["articles_versions"]=='oui'
 	AND $x['args']['table'] == 'spip_articles') {
 
 		$id_article = $x['args']['id_objet'];
@@ -577,8 +576,7 @@ function enregistrer_premiere_revision($x) {
 
 // http://doc.spip.org/@enregistrer_nouvelle_revision
 function enregistrer_nouvelle_revision($x) {
-	if  ($GLOBALS['flag_revisions']
-	AND $GLOBALS['meta']["articles_versions"]=='oui'
+	if  ($GLOBALS['meta']["articles_versions"]=='oui'
 	AND $x['args']['table'] == 'spip_articles') {
 
 		$champs = array();
