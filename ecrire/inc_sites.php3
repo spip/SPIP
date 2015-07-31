@@ -46,7 +46,7 @@ function recuperer_page($url) {
 				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 
 			fputs($f, "Host: $host\r\n");
-			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.uzine.net/spip)\r\n");
+			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
 			if ($referer = lire_meta("adresse_site"))
 				fputs($f, "Referer: $referer/\r\n");
 			fputs($f,"\r\n");
