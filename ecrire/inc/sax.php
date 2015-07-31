@@ -218,6 +218,7 @@ function inc_sax_dist($page, $apply=false) {
 	return $page;
 }
 
+// http://doc.spip.org/@coordonnees_erreur
 function coordonnees_erreur($xml_parser)
 {
   return

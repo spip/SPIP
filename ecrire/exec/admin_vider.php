@@ -35,6 +35,7 @@ function calculer_taille_dossier ($dir) {
 
 
 
+// http://doc.spip.org/@afficher_taille_cache_vignettes
 function afficher_taille_cache_vignettes() {
 	$handle = @opendir(_DIR_VAR);
 	if (!$handle) return;
