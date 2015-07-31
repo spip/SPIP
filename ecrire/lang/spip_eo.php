@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'afficher_trad' => 'afi&#349;i la tradukojn',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la SQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
+'alerte_modif_info_concourante' => 'ATENTU : Tiu &#265;i informo estis modifita de alia homo. La nuna stato estas&nbsp;:',
 'analyse_xml' => 'XML analizo',
 'annuler' => 'Nuligi',
 'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformi al [hiperligo->http://...]',
 'barre_lien_input' => 'Bonvolu indiki la retadreson de via ligilo (vi povas indiki ret-adreson tian, kia http://www.monsite.com a&#365; simple indiki la numeron de artikolo de tiu retejo.',
 'barre_note' => 'Transformi al [[sub-pa&#285;an noton]]',
+'barre_paragraphe' => 'Krei paragrafon',
 'barre_quote' => '<quote>Citi mesa&#285;on</quote>',
 'bouton_ajouter_document' => 'ALDONI DOKUMENTON',
 'bouton_ajouter_image' => 'ALDONI BILDON',
@@ -201,6 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Duobla trafo',
 
 // E
+'en_cours' => 'okazanta',
 'entree_dimensions' => 'Dimensioj&nbsp;:',
 'entree_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'entree_titre_image' => 'Bildtitolo&nbsp;:',
@@ -208,6 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Eraro',
 'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
 'erreur_texte' => 'eraro(j)',
+'etape' => 'Etapo',
 
 // F
 'fichier_introuvable' => 'Netrovebla dosiero @fichier@ ',
@@ -233,7 +237,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Bonvolu konfirmi vian subskribon:',
 'form_pet_deja_enregistre' => 'Tiu retejo estas jam registrita',
 'form_pet_deja_signe' => 'Vi jam subskribis tiun tekston.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Retmesa&#285;o estis &#309;us sendita al vi. Vi devas aliri la retadreson menciitan en tiu mesa&#285;o por validigi vian subskribon.',
+'form_pet_envoi_mail_confirmation' => 'Konfirma retmesa&#285;o estis &#309;us sendita al @email@. Vi devas aliri la retadreson menciitan en tiu mesa&#285;o por validigi vian subskribon.',
 'form_pet_mail_confirmation' => 'Saluton,
 
 Vi petis subskribi la petskribon:
@@ -463,7 +467,7 @@ Dankon pro via partopreno
 'info_mois_courant' => 'En la kuranta monato :',
 'info_mot_cle_ajoute' => 'La jena &#349;losilvorto estas ligita kun',
 'info_multi_herit' => 'Defa&#365;lta lingvo',
-'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, &#265;iuj tekstoj de la interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datoj, formularoj) estos a&#365;tomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afi&#349;i&#285;os en la &#265;efa lingvo de la retejo.',
+'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, &#265;iuj tekstoj de la interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datenoj, formularoj) estos a&#365;tomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afi&#349;i&#285;os en la &#265;efa lingvo de la retejo.',
 'info_multilinguisme' => 'Multlingvismo',
 'info_nom_non_utilisateurs_connectes' => 'Via nomo ne aperas en la listo de la ensalutintaj uzantoj.',
 'info_nom_utilisateurs_connectes' => 'Via nomo aperas en la listo de la ensalutintaj uzantoj.',
@@ -473,9 +477,11 @@ Dankon pro via partopreno
 'info_nouveau_message' => 'VI HAVAS NOVAN MESA&#284;ON',
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESA&#284;O(J)N',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
+'info_obligatoire' => 'Tiu &#265;i informo estas deviga',
 'info_panne_site_syndique' => 'Abonligita retejo paneas',
 'info_pense_bete' => 'MEMORIGILO',
 'info_petit_ecran' => 'Eta ekrano',
+'info_petition_close' => 'Petskribo fermita',
 'info_pixels' => 'bilderoj',
 'info_plusieurs_mots_trouves' => 'Pluraj &#349;losilvortoj trovitaj por "@cherche_mot@":',
 'info_popularite_5' => 'populareco&nbsp;:',
@@ -588,6 +594,7 @@ Dankon pro via partopreno
 'login_verifiez_navigateur' => '(Kontrolu tamen ke via retumilo ne memoras pri via pasvorto...)',
 
 // M
+'masquer_colonne' => 'Ka&#349;i tiun &#265;i kolumnon',
 'masquer_trad' => 'ka&#349;i la tradukojn',
 'module_fichiers_langues' => 'Dosieroj de lingvo',
 
@@ -690,7 +697,7 @@ kaj ensaluti.
   kaj fine kontrolu ke la bildoj plu aperu
 en la artikoloj.',
 'texte_erreur_visiteur' => 'Vi provis eniri la privatan spacon pere de ne alir-rajtiga salutnomo.',
-'texte_inc_auth_1' => '<MODIF>Vi ensalutis la&#365; la
+'texte_inc_auth_1' => 'Vi ensalutis la&#365; la
   salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la datenbazo.
   Provu',
 'texte_inc_auth_2' => 'rekonekti&#285;i',
@@ -728,19 +735,26 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'titre_mots_cles' => '&#348;LOSILVORTOJ',
 'titre_probleme_technique' => 'Atentu&nbsp;: teknika problemo  (SQL-servilo) malhelpas la aliron al tiu parto de la retejo. Dankon pro via komprenemo.',
 'titre_publier_document' => 'PUBLIKIGI DOKUMENTON EN TIU &#264;I RUBRIKO',
+'titre_signatures_attente' => 'Subskriboj validotaj',
+'titre_signatures_confirmees' => 'Subskriboj konfirmitaj',
 'titre_statistiques' => 'Statistikoj de la retejo',
 'titre_titre_document' => 'Titolo de la dokumento&nbsp;:',
+'todo' => 'venonta',
 'trad_reference' => '(referenca artikolo)',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',
+'zbug_balise_inexistante' => 'eraro @from@: la etikedo " #@balise@ " ne ekzistas',
+'zbug_balise_sans_argument' => 'Mankas argumento en la etikedo @balise@',
 'zbug_boucle' => 'iteracio',
 'zbug_boucle_recursive_undef' => 'nedifinita rekursia iteracio',
+'zbug_calcul' => 'komputado',
 'zbug_champ_hors_boucle' => 'Kampo @champ@ eksteras iteracion',
 'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras iteracion, kies formo estas @motif@',
 'zbug_code' => 'kodo',
 'zbug_critere_inconnu' => 'nekonata kriterio @critere@',
 'zbug_distant_interdit' => 'ago &#265;e tiu ekstera datenbazo malpermesata',
+'zbug_doublon_table_sans_cle_primaire' => 'duobloj uzitaj &#265;e tabelo, kiu ne havas simplan &#265;ef&#349;losilon',
 'zbug_doublon_table_sans_index' => 'duobla&#309;oj en la datentabelo sen indekso',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mankas fermcela marko',
@@ -750,6 +764,7 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'zbug_erreur_filtre' => 'Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita',
 'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je iteracioj (FORUMS) a&#365; (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Eraro(j) en la skeleto',
+'zbug_hors_compilation' => 'Ne kompilita',
 'zbug_info_erreur_squelette' => 'Eraro &#265;e la retejo',
 'zbug_inversion_ordre_inexistant' => 'inversigo de ne ekzistanta ordo',
 'zbug_pagination_sans_critere' => '#PAGINATION senkriteria {pa&#285;numerado} a&#365; uzata en rekursia iteracio',
@@ -757,6 +772,7 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'zbug_profile' => 'Kalkulda&#365;ro&nbsp;: @time@',
 'zbug_resultat' => 'rezulto',
 'zbug_serveur_indefini' => 'nedifinata SQL servilo',
+'zbug_statistiques' => 'statistikoj pri SQL-informpetoj ordigitaj la&#365; da&#365;ro',
 'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo',
 'zxml_connus_attributs' => 'konataj atributoj',
 'zxml_de' => 'de',

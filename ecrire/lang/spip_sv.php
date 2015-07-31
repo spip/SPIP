@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Ladda om sidan',
 'afficher_trad' => 'Visa &ouml;vers&auml;ttning',
 'alerte_maj_impossible' => '<b>Varning!</b> Misslyckades med att uppdatera SQL-databasen till version @version@. Det kan bero p&aring; ett &aring;tkomstproblem med databasen. Var v&auml;nlig ta kontakt med din ISP.',
+'alerte_modif_info_concourante' => 'VARNING: Denna information har f&ouml;r&auml;ndrats av n&aring;gon annan. Det aktuella inneh&aring;llet &auml;r:',
 'analyse_xml' => 'Unders&ouml;k XML',
 'annuler' => 'Avbryt',
 'antispam_champ_vide' => 'Var v&auml;nlig, l&auml;mna f&auml;ltet tomt',
@@ -194,6 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Tv&aring; instanser',
 
 // E
+'en_cours' => 'arbetar',
 'entree_dimensions' => 'Storlek:',
 'entree_titre_document' => 'Titel p&aring; dokumentet:',
 'entree_titre_image' => 'Titel p&aring; bilden:',
@@ -201,6 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Fel',
 'erreur_balise_non_fermee' => 'Den sista tagen &auml;r inte st&auml;ngd:',
 'erreur_texte' => 'fel',
+'etape' => 'Etapp',
 
 // F
 'fichier_introuvable' => 'Fil som inte kunde hittas: @fichier@',
@@ -228,7 +231,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Var god och bekr&auml;fta din underskrift:',
 'form_pet_deja_enregistre' => 'Den h&auml;r sajten &auml;r redan registrerad',
 'form_pet_deja_signe' => 'Du har redan skrivit under texten.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Ett epost med en beg&auml;ran om bekr&auml;ftelse har precis skickats till dig. Du b&ouml;r bes&ouml;ka den URL som st&aring;r i brevet f&ouml;r att bekr&auml;fta din underskrift.',
+'form_pet_envoi_mail_confirmation' => 'Ett epost med en beg&auml;ran om bekr&auml;ftelse har precis skickats till @email@. Du b&ouml;r bes&ouml;ka den URL som st&aring;r i brevet f&ouml;r att bekr&auml;fta din inmatning.',
 'form_pet_mail_confirmation' => 'Hej,
 
 Du har beg&auml;rt att skriva under namninsamlingen:
@@ -464,6 +467,7 @@ Tack f&ouml;r ditt deltagande
 'info_nouveau_message' => 'DU HAR ETT NYTT MEDDELANDE',
 'info_nouveaux_messages' => 'DU HAR @total_messages@ NYA MEDDELANDEN',
 'info_numero_abbreviation' => 'Nr',
+'info_obligatoire' => 'Denna information &auml;r obligatorisk',
 'info_panne_site_syndique' => 'Syndikerad sajt fungerar ej',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Liten bild',
@@ -682,7 +686,7 @@ och koppla upp dig mot sajten igen.
    kontrollera efter&aring;t att bilderna fortfarande
       finns i artiklarna.',
 'texte_erreur_visiteur' => 'Du har f&ouml;rs&ouml;kt att &ouml;ppna den privata delen med  en identitet som inte har tilltr&auml;de.',
-'texte_inc_auth_1' => '<MODIF>Du har identifierat dig med login
+'texte_inc_auth_1' => 'Du har identifierat dig med login
   <b>@auth_login@</b>, men det finns inte i databasen (l&auml;ngre). 
   F&ouml;rs&ouml;k att',
 'texte_inc_auth_2' => 'Koppla upp igen',
@@ -723,6 +727,7 @@ och koppla upp dig mot sajten igen.
 'titre_signatures_confirmees' => 'Validerade bidrag',
 'titre_statistiques' => 'Statistik f&ouml;r sajten',
 'titre_titre_document' => 'Dokumentets titel:',
+'todo' => 'Att g&ouml;ra',
 'trad_reference' => '(refererad artikel)',
 
 // Z

@@ -202,6 +202,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'double_occurrence' => 'Dublette',
 
 // E
+'en_cours' => '<NEW>en cours',
 'entree_dimensions' => 'Gr&ouml;ssenangaben:',
 'entree_titre_document' => 'Titel des Dokuments:',
 'entree_titre_image' => 'Titel des Bilds:',
@@ -209,6 +210,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
 'erreur_texte' => 'Fehler',
+'etape' => '<NEW>&Eacute;tape',
 
 // F
 'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
@@ -706,6 +708,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_signatures_confirmees' => 'Best&auml;tigte Unterschriften',
 'titre_statistiques' => 'Statistiken',
 'titre_titre_document' => 'Titel des Dokuments:',
+'todo' => '<NEW>&agrave; venir',
 'trad_reference' => '(Referenzartikel)',
 
 // Z
