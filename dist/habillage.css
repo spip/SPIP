@@ -56,8 +56,8 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #top { width: 58em; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
 #top a img.spip_logos { vertical-align: bottom; line-height: 1em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; }
-#top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; }
-#top #formulaire_recherche input.text { width: 10em; text-align: left; }
+#top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
+#top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
 #conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 #contenu { padding-top: 0.30em; }
@@ -151,9 +151,8 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 #signatures td.signature-nom { background: #ECF4F4; text-align: center; }
 #signatures td.signature-nom small { display: block; }
 #signatures td.signature-message { background: #F4F8F8; }
-#signatures .signature_recherche { text-align: right; }
-#signatures .signature_recherche input.forml { width: 12em; }
-#signatures .signature_recherche input.bouton { vertical-align: middle; }
+#signatures .formulaire_recherche { margin: 1em 0; text-align: right; } /*Cf.: spip_formulaires.css*/
+#signatures .formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
 
 /*  ------------------------------------------
