@@ -50,10 +50,14 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 		$path = _DIR_RESTREINT.'public.php';
 
 	# sinon chercher le fichier, eventuellement en changeant.php3 => .php
+	# et en gardant la compatibilite <INCLURE(page.php3)>
 	else if (!($path = find_in_path($fichier))
 	AND !(
 		preg_match(',^(.*[.]php)3$,', $fichier, $r)
-		AND $path = find_in_path($r[1]))
+		AND (
+			$path = find_in_path($r[1])
+			OR $path = ($[1] == 'page.php')? _DIR_RESTREINT.'public.php':'')
+		)
 	) {
 		spip_log("ERREUR: <INCLURE($fichier)> impossible");
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
