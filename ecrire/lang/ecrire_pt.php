@@ -35,8 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     base de dados, mau funcionamento
     generalizado do site etc.
     N&atilde;o valide este pedido de importa&ccedil;&atilde;o.
-    <p />Para mais informa&ccedil;&otilde;es, leia
-    <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.', # MODIF
+    <p>Para mais informa&ccedil;&otilde;es, leia
+    <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Espa&ccedil;o interdito</b><p>SPIP j&aacute; est&aacute; instalado.', # MODIF
 'avis_lecture_noms_bases_1' => 'O programa de instala&ccedil;&atilde;o n&atilde;o conseguiu ler os nomes das bases de dados instaladas. ',
 'avis_lecture_noms_bases_2' => 'Ou nenhuma base est&aacute; dispon&iacute;vel, ou a fun&ccedil;&atilde;o que permite listar as bases foi desactivada
@@ -344,7 +344,7 @@ ou da rede',
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Segunda etapa: <b>Teste de liga&ccedil;&atilde;o &agrave; base</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'A liga&ccedil;&atilde;o LDAP foi bem sucedida.</b><p /> Pode passar para a etapa seguinte.',
+'info_connexion_ldap_ok' => 'A liga&ccedil;&atilde;o LDAP foi bem sucedida.</b><p> Pode passar para a etapa seguinte.</p>',
 'info_connexion_mysql' => 'Primeira etapa : <b>A sua liga&ccedil;&atilde;o SQL<b>', # MODIF
 'info_connexion_ok' => 'A liga&ccedil;&atilde;o foi bem sucedida.',
 'info_contact' => 'Contacto',
@@ -397,9 +397,9 @@ ou da rede',
  f&oacute;rum suplementar, reservado apenas aos administradores',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'info_forums_abo_invites' => 'O seu site cont&eacute;m f&oacute;runs por assinatura; os visitantes s&atilde;o convidados a registar-se no site p&uacute;blico.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p /> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.',
-'info_gauche_admin_tech' => '<b>Esta p&aacute;gina est&aacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p /> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website..',
-'info_gauche_admin_vider' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p /> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>',
+'info_gauche_admin_tech' => '<b>Esta p&aacute;gina est&aacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>',
+'info_gauche_admin_vider' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website</p>',
 'info_gauche_auteurs' => 'Encontrar&aacute; aqui todos os autores do site.
 Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administrador = verde; redactor = amarelo).',
 'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao s&iacute;tio, s&atilde;o indicados por um &iacute;cone azul&nbsp;;
@@ -1009,7 +1009,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o do abaixo-assinado',
 'texte_descriptif_rapide' => 'Descri&ccedil;&atilde;o r&aacute;pida',
-'texte_documents_joints' => 'Pode autorizar a inclus&atilde;o de documentos (ficheiros, imagens,  multim&eacute;dia etc.) nos artigos e/ou nas sec&ccedil;&otilde;es. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.<p />',
+'texte_documents_joints' => 'Pode autorizar a inclus&atilde;o de documentos (ficheiros, imagens,  multim&eacute;dia etc.) nos artigos e/ou nas sec&ccedil;&otilde;es. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.',
 'texte_documents_joints_2' => 'Esta combina&ccedil;&atilde;o n&atilde;o impede a inser&ccedil;&atilde;o de imagens directamente nos artigos.',
 'texte_effacer_base' => 'Apagar a base de dados SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
@@ -1075,7 +1075,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 'texte_nouveau_message' => 'Nova mensagem',
 'texte_nouveau_mot' => 'Nova palavra',
 'texte_nouvelle_version_spip_1' => 'Instalou uma nova vers&atilde;o de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nova vers&atilde;o precisa de uma actualiza&ccedil;&atilde;o mais completa do que o normal. Se &eacute; o webmaster do site, por favor, apague o ficheiro <tt>inc_connect.php3</tt> do direct&oacute;rio <tt>ecrire</tt> e retome a instala&ccedil;&atilde;o de forma a incluir os seus par&acirc;metros de liga&ccedil;&atilde;o &agrave; base de dados.<p /> (NB.: se n&atilde;o se lembra dos seus par&acirc;metros de liga&ccedil;&atilde;o, consulte o arquivo <tt>inc_connect.php3</tt> antes de apag&aacute;-lo...)', # MODIF
+'texte_nouvelle_version_spip_2' => 'Esta nova vers&atilde;o precisa de uma actualiza&ccedil;&atilde;o mais completa do que o normal. Se &eacute; o webmaster do site, por favor, apague o ficheiro <tt>inc_connect.php3</tt> do direct&oacute;rio <tt>ecrire</tt> e retome a instala&ccedil;&atilde;o de forma a incluir os seus par&acirc;metros de liga&ccedil;&atilde;o &agrave; base de dados.<p> (NB.: se n&atilde;o se lembra dos seus par&acirc;metros de liga&ccedil;&atilde;o, consulte o arquivo <tt>inc_connect.php3</tt> antes de apag&aacute;-lo...)</p>', # MODIF
 'texte_operation_echec' => 'Volte &agrave; p&aacute;gina anterior, seleccione uma outra base ou crie uma nova. Verifique as informa&ccedil;&otilde;es fornecidas pelo seu servi&ccedil;o de hospedagem.',
 'texte_plus_trois_car' => 'mais de 3 car&aacute;cteres',
 'texte_plusieurs_articles' => 'Muitos autores encontrados para "@cherche_auteur@":',
@@ -1104,7 +1104,7 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
  SQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando foram acidententalmente
  danificadas. Pode tentar aqui essa repara&ccedil;&atilde;o&nbsp;: se falhar, conserve uma c&oacute;pia da exibi&ccedil;&atilde;o que talvez contenha
  ind&iacute;cios daquilo que n&atilde;o funciona...<p>
- Se o problema persistir, contacte com o seu servi&ccedil;o de hospedagem.<p />',
+ Se o problema persistir, contacte com o seu servi&ccedil;o de hospedagem.',
 'texte_restaurer_base' => 'Restaurar o conte&uacute;do de uma salvaguarda da base',
 'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite restaurar uma salvaguarda da base anteriormente
   efectuada. Para esse efeito, o ficheiro que cont&eacute;m a salvaguarda deve ter sido

@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Greska u SQL konekciji', # MODIF
 'avis_erreur_version_archive' => '<b>Paznja! Dokument @archive@  odgovara drugoj verziji SPIP od one koju ste instalirali.</b>  Riskirate velike poteskoce: opasnost od unistenja vase baze podataka, razne disfunkcije stranice, itd. Ne potvrdjujte ovaj zahtjev za importovanje! Za vise informacija pogledajte <a  href="@spipnet@"> SPIP dokumentaciju</a>.', # MODIF
-'avis_espace_interdit' => '<b>Zabranjen prostor</b><p />SPIP je  vec instaliran.', # MODIF
+'avis_espace_interdit' => '<b>Zabranjen prostor</b><p>SPIP je  vec instaliran.</p>', # MODIF
 'avis_lecture_noms_bases_1' => 'Instalacijski program nije uspio ucitati imena instaliranih baza podataka.',
 'avis_lecture_noms_bases_2' => 'Ili nijedna baza nije na  raspolaganju, ili je funkcija, koja dozvoljava izlistavanje  baza, dezaktivirana iz sigurnosnih razloga (sto je slucaj kod  mnogih racunara).',
 'avis_lecture_noms_bases_3' => 'Ako je u pitanju druga alternativa, moguce je da se koristi baza koja nosi isto ime kao vas login:',
@@ -323,7 +323,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Druga etapa: <b>Pokusaj konekcije sa bazom</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Uspjesna LDAP konekcija.</b><p />  Mozete pristupiti sljedecoj etapi',
+'info_connexion_ldap_ok' => 'Uspjesna LDAP konekcija.</b><p>  Mozete pristupiti sljedecoj etapi</p>',
 'info_connexion_mysql' => 'Prva etapa: <b>Vasa SQL konekcija</b>', # MODIF
 'info_connexion_ok' => 'Uspjesna konekcija.',
 'info_contact' => 'Kontakt',
@@ -367,9 +367,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'Forum na privatnoj stranici je otvoren svim regristrovanim urednicima. Ispod mozete aktivirati dodatni forum, koji je rezervisan samo za administratore.',
 'info_forum_statistiques' => 'Statistike posjeta',
 'info_forums_abo_invites' => 'Vasa stranica obudhvata i forume za clanove; posjetioci se pozivaju na registraciju u javnom  prostoru stanice.',
-'info_gauche_admin_effacer' => '<b>Ova strana je dostupna samo  osobama odgovornim za web stranicu.</b><p /> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.',
-'info_gauche_admin_tech' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p /> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.',
-'info_gauche_admin_vider' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p /> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.',
+'info_gauche_admin_effacer' => '<b>Ova strana je dostupna samo  osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
+'info_gauche_admin_tech' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
+'info_gauche_admin_vider' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>',
 'info_gauche_auteurs' => 'Ovdje cete pronaci sve autore ove web stranice. Njihov status je naznacen bojom njihove ikone (administrator = zelena; urednik = zuta).',
 'info_gauche_auteurs_exterieurs' => 'Vanjski autori bez pristupa stranici su oznaceni plavom ikonom, a izbrisani autori sa ikonicom korpe za smece.',
 'info_gauche_messagerie' => 'Servis za slanje poruka vam omogucuje razmjenu poruka medju piscima, cuvanje biljeske (za licnu upotrebu) ili, ako ste administrator, postavljanje najava na pocetnu stranicu u privatnom prostoru.',
@@ -937,7 +937,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_date_publication_article' => 'DATUM OBJAVLJIVANJA:',
 'texte_descriptif_petition' => 'Opis peticije',
 'texte_descriptif_rapide' => 'Brzi opis',
-'texte_documents_joints' => 'Mozete odobriti dodavanje dokumenata (birokratskih dokumenata, slika, multimedija, itd.) clancima i/ili rubrikama. Ti dokumenti mogu zatim biti preporuceni u clanku ili postavljeni odvojeno.<p />',
+'texte_documents_joints' => 'Mozete odobriti dodavanje dokumenata (birokratskih dokumenata, slika, multimedija, itd.) clancima i/ili rubrikama. Ti dokumenti mogu zatim biti preporuceni u clanku ili postavljeni odvojeno.',
 'texte_documents_joints_2' => 'Ova postavka ne sprijecava direktno unosenje slika u clanke.',
 'texte_effacer_base' => 'Izbrisati SPIP bazu podataka',
 'texte_effacer_donnees_indexation' => 'Izbrisati podatke indexiranja',
@@ -945,7 +945,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_en_cours_validation' => 'Dole navedeni clanci i kratke poruke su predlozene za publikaciju. Vase misljenje mozete iznijeti u njima prikljucenim forumima.', # MODIF
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'Mozete obogatiti izgled vaseg teksta na stranici, koristeci se &laquo;&nbsp;tipogrfskim  precicama&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>Treba li SPIP kreirati specijalne dokumente <tt>.htpasswd</tt> i  <tt>.htpasswd-admin</tt> u repertoaru @dossier@ ?</b><p /> Ti dokumenti vam omogucuju zabranu pristupa autorima  i administratorima na drugim mjestima vase stranice (npr.  eksterni program za statistike).<p/>  Ako od ovoga nemate  nikakve koristi, mozete ostaviti standardnu vrijednost za ovu  opciju (nema kreacije dokumenata).', # MODIF
+'texte_fichier_authent' => '<b>Treba li SPIP kreirati specijalne dokumente <tt>.htpasswd</tt> i  <tt>.htpasswd-admin</tt> u repertoaru @dossier@ ?</b><p> Ti dokumenti vam omogucuju zabranu pristupa autorima  i administratorima na drugim mjestima vase stranice (npr.  eksterni program za statistike).</p><p>  Ako od ovoga nemate  nikakve koristi, mozete ostaviti standardnu vrijednost za ovu  opciju (nema kreacije dokumenata).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Sistem ce sada kreirati  personalizovan pistup stranici.',
 'texte_informations_personnelles_2' => '(Napomena: ako se radi o reinstalaciji i ako vas pristup uvijek funkcionise, mozete',
 'texte_introductif_article' => '(Uvodni tekst u clanak.)',
@@ -974,7 +974,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Nova poruka',
 'texte_nouveau_mot' => 'Nova rijec',
 'texte_nouvelle_version_spip_1' => 'Instalirali ste novu verziju SPIP-a.',
-'texte_nouvelle_version_spip_2' => 'Ovoj verziji je potrebno obnavljanje kompletnije od uobicajenog. Ako ste webmaster stranice, izbrisite dokument <tt>inc_connect.php3</tt> iz  repertoara <tt>ecrire</tt> i ponovo otpocnite instalaciju da  biste obnovili parametre konekcije sa bazom podataka.<p />  (Napomena: ako ste zaboravili parametre vase konekcije  pogledajte dokument <tt>inc_connect.php3</tt> prije nego ga  izbrisete...)',
+'texte_nouvelle_version_spip_2' => 'Ovoj verziji je potrebno obnavljanje kompletnije od uobicajenog. Ako ste webmaster stranice, izbrisite dokument <tt>inc_connect.php3</tt> iz  repertoara <tt>ecrire</tt> i ponovo otpocnite instalaciju da  biste obnovili parametre konekcije sa bazom podataka.<p>  (Napomena: ako ste zaboravili parametre vase konekcije  pogledajte dokument <tt>inc_connect.php3</tt> prije nego ga  izbrisete...)</p>',
 'texte_operation_echec' => 'Vratite se na prethodnu stranu, izaberite drugu bazu ili napravite novu. Provjerite podatke  koje vam je dao vas kompjuter.',
 'texte_plus_trois_car' => 'vise od tri karaktera',
 'texte_plusieurs_articles' => 'Pronadjeno vise autora za "@cherche_auteur@":',
@@ -990,7 +990,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_reference_mais_redirige' => 'clanak je preporucen u vasoj SPIP stranici, ali je preusmjeren na drugi URL.',
 'texte_referencement_automatique' => '<b>Automatska preporuka stranice</b><br />Mozete brzo preporuciti web stranicu, tako sto cete naznaciti zeljenu URL adresu ili adresu njenog backend dokumenta. SPIP ce automatski sakupiti informacije vezane za tu stranicu (naslov, opis...).', # MODIF
 'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
-'texte_requetes_echouent' => '<b>Ako odredzeni SQL zahtijevi sistematski i bez ociglednog razloga ne uspijevaju, moguce je da je problem u samoj bazi podataka.</b><p /> SQL raspolaze mogucnosti popravljanja njegovih tabela, ako su one slucajno ostecene. Ovdje mozete isprobati popravku; u slucaju neuspijeha, sacuvajte kopiju prikaza na monitoru, koja mozda sadrzi naznake problema...<p/> Ako se problem nastavi, kontaktirajte vas hosting servis.<p />', # MODIF
+'texte_requetes_echouent' => '<b>Ako odredzeni SQL zahtijevi sistematski i bez ociglednog razloga ne uspijevaju, moguce je da je problem u samoj bazi podataka.</b><p> SQL raspolaze mogucnosti popravljanja njegovih tabela, ako su one slucajno ostecene. Ovdje mozete isprobati popravku; u slucaju neuspijeha, sacuvajte kopiju prikaza na monitoru, koja mozda sadrzi naznake problema...</p><p> Ako se problem nastavi, kontaktirajte vas hosting servis.</p>', # MODIF
 'texte_restaurer_base' => 'Obnoviti sadrzaj pohranjivanja baze',
 'texte_restaurer_sauvegarde' => 'Ova opcija vam omogucava obnavljanje ranije izvedenog pohranjivanja baze. U tom slucaju, dokument koji, sadrzi pohranjeni materijal, se treba nalaziti u repertoaru @dossier@. Budite oprezni sa ovom funkcijom: <b>moguce izmjene i gubitci su nepovratni.</b>', # MODIF
 'texte_sauvegarde' => 'Snimiti sadrzj baze',

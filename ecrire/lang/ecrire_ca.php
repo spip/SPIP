@@ -976,9 +976,9 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_en_cours_validation' => 'Els articles i breus que hi ha aqu&iacute; a sota estan proposats per ser publicats. ',
 'texte_en_cours_validation_forum' => 'No dubteu a donar la vostra opini&oacute; per mitj&agrave; dels f&ograve;rums que porten agregats. ',
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
-'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p />
+'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
  Aquests fitxers us poden servir per restringir l\'acc&eacute;s als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estad&iacute;stiques, per exemple).<p>
- Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no crear fitxers).',
+ Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no crear fitxers).</p>',
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
@@ -1019,7 +1019,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_nouveau_message' => 'Missatge nou',
 'texte_nouveau_mot' => 'Nova paraula',
 'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versi&oacute; d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer @connect@ i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p />(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer @connect@ abans de suprimir-lo...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer @connect@ i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p>(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer @connect@ abans de suprimir-lo...)</p>',
 'texte_operation_echec' => 'Torneu a la p&agrave;gina anterior, seleccioneu una altra base o creeu-ne una de nova. Verifiqueu les dades donades pel vostre prove&iuml;dor d\'hostatge.',
 'texte_plus_trois_car' => 'm&eacute;s de 3 car&agrave;cters',
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',

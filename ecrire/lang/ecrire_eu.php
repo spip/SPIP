@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @archive@ fitxategia beste SPIP bertsio bati dagokio, instalatutakoaren desberdina.
 </b>Arazo larriak edukitzeko arriskuan zaude: Zure datu-basearen suntsiketa, gunearen zenbait disfuntzio, eta abar.
 Ez balidatu inportazio galdera hau.
-<p />Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .',
+<p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>',
 'avis_espace_interdit' => 'Gune helezina SPIP instalaturik dago jadanik.',
 'avis_lecture_noms_bases_1' => 'Instalazio-programak ez du lortu instalaturik dauden datu-baseen izenak irakurtzea.',
 'avis_lecture_noms_bases_2' => 'Bi aukera: Base erabilgarririk ez dago edo segurtasun arrazoiak direla medio baseen zerrenda-funtzioa desaktibatu egin da (zerbitzari ugaritan ohizkoa da). ',

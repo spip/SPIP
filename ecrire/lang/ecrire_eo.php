@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     Vi estas alfrontonta grandegajn problemojn:
     detru-riskon de via datenbazo,
     diversajn retejajn misfunkciojn, ktp.
-    Ne validigu tiun peton pri importo.<p />Por pli
+    Ne validigu tiun peton pri importo.<p>Por pli
     da informoj, vidu <a href="@spipnet@">
-                                la dokumentaron pri SPIP</a>.', # MODIF
+                                la dokumentaron pri SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Malpermesata aliro</b><div>SPIP jam estas instalita.</div>',
 'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de la instalitaj datenbazoj.',
 'avis_lecture_noms_bases_2' => 'A&#365; neniu datenbazo disponeblas, a&#365; la funkcio ebliganta listigi datenbazojn estis malaktivigita pro sekuraj kialoj (tio ja okazas &#265;e multaj retejoj-gastigantoj).',
@@ -335,7 +335,7 @@ forvi&#349;i ilin poste).',
 'info_conflit_edition_votre_version' => 'Via versio&nbsp;:',
 'info_connexion_base' => 'Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
 'info_connexion_base_donnee' => 'Konekti&#285;o al via datumbazo',
-'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p /> Vi povas iri al la sekvanta etapo',
+'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p> Vi povas iri al la sekvanta etapo</p>',
 'info_connexion_mysql' => 'Via SQL-konekti&#285;o',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
@@ -385,11 +385,11 @@ La publikaj forumoj estos la&#365;kaze unu post la alia permesitaj
   plian forumon, rezervitan nur al mastrumantoj.',
 'info_forum_statistiques' => 'Statistikoj pri vizitoj',
 'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono&nbsp;; vizitantoj estas invititaj al registri&#285;o &#265;e la publika retejo.',
-'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.',
-'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.',
-'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.',
+'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>',
+'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
+postulas disponi je FTP-alirrajto al la retejo.</p>',
+'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p>&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
+postulas disponi je FTP-alirrajto al la retejo.</p>',
 'info_gauche_auteurs' => 'Vi trovos &#265;i tie &#265;iujn a&#365;torojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 'info_gauche_auteurs_exterieurs' => 'La eksteraj a&#365;toroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo&nbsp;;
  la a&#365;toroj forvi&#349;itaj per bildo de rubujo.',

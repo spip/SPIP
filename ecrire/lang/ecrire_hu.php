@@ -338,7 +338,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'M&aacute;sodik l&eacute;p&eacute;s : <b>Adatb&aacute;zishoz val&oacute; csatlakoz&aacute;si pr&oacute;ba</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Az LDAP csatlakoz&aacute;s sikeres lett.</b><p /> L&eacute;phet tov&aacute;bb a k&ouml;vetkez&#337;re.',
+'info_connexion_ldap_ok' => 'Az LDAP csatlakoz&aacute;s sikeres lett.</b><p> L&eacute;phet tov&aacute;bb a k&ouml;vetkez&#337;re.</p>',
 'info_connexion_mysql' => 'Els&#337; l&eacute;p&eacute;s : <b>Az &Ouml;n SQL csatlakoz&aacute;sa</b>', # MODIF
 'info_connexion_ok' => 'A csatlakoz&aacute;s sikeres.',
 'info_contact' => 'Kontakt',
@@ -386,9 +386,9 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_forum_ouvert' => 'Minden regisztr&aacute;lt szerz&#337; r&eacute;sz&eacute;re van f&oacute;rum a honlap priv&aacute;t r&eacute;sz&eacute;ben.Lejjebb aktiv&aacute;lhat egy &uacute;jabb f&oacute;rumot, ami csak az adminisztr&aacute;toroknak lesz el&eacute;rhet&#337;.',
 'info_forum_statistiques' => 'Statisztik&aacute;k a l&aacute;t&oacute;gat&aacute;sokr&oacute;l',
 'info_forums_abo_invites' => 'A honlapja beiratkoz&aacute;sos f&oacute;rumokat tartalmaz&nbsp;; teh&aacute;t a l&aacute;togat&oacute;k be&iacute;ratkozhatnak a nyilv&aacute;nos r&eacute;szen.',
-'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p /> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.',
-'info_gauche_admin_tech' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p /> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.',
-'info_gauche_admin_vider' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p /> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.',
+'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
+'info_gauche_admin_tech' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
+'info_gauche_admin_vider' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
 'info_gauche_auteurs' => 'Itt tal&aacute;lhat&oacute; a honlap &ouml;sszes szerz&#337;je.
  Saj&aacute;t st&aacute;tuszuk az ikon sz&iacute;ne szerint van jel&ouml;lve ( adminisztr&aacute;tor = z&ouml;ld; szerz&#337; = s&aacute;rga).',
 'info_gauche_auteurs_exterieurs' => 'A k&uuml;ls&#337; szerz&#337;k, melyek nem f&eacute;rhetnek a honlaphoz, k&eacute;k ikonnal vannak jel&ouml;lve&nbsp;;
@@ -981,7 +981,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Engedely&eacute;zheti a dokumentumok hozz&aacute;ad&aacute;s&aacute;t (irodai f&aacute;jlok, k&eacute;pek,
  multim&eacute;dia, stb.) a cikkekhez &eacute;s/vagy a rovatokhoz. Ezekre a f&aacute;jlokra
  lehet majd hivatkozni a
- cikken bel&uuml;l, vagy k&uuml;l&ouml;n megjelen&iacute;teni.<p />',
+ cikken bel&uuml;l, vagy k&uuml;l&ouml;n megjelen&iacute;teni.',
 'texte_documents_joints_2' => 'Ez a be&aacute;ll&iacute;t&aacute;s nem akad&aacute;lyozza a k&ouml;zvetlen k&eacute;pbesz&#369;r&aacute;st a cikkekbe.',
 'texte_effacer_base' => 'Az SPIP adatb&aacute;zisa t&ouml;rl&eacute;se',
 'texte_effacer_donnees_indexation' => 'Az index&aacute;l&aacute;si adatok t&ouml;rl&eacute;se',
@@ -990,11 +990,11 @@ demande plus de puissance au serveur.', # NEW
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'A szerkeszt&eacute;st lehet sz&eacute;p&iacute;teni a &laquo;&nbsp;nyomdai jelek&nbsp;&raquo; seg&iacute;ts&eacute;g&eacute;vel.',
 'texte_fichier_authent' => '<b>SPIP-nek kell-e l&eacute;trehoznia sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
-  &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a @dossier@ mapp&aacute;ban?</b><p />
+  &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a @dossier@ mapp&aacute;ban?</b><p>
   Azok a f&aacute;jlok haszn&aacute;lhat&oacute;k a szerz&#337;i &eacute;s adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;s korl&aacute;toz&aacute;s&aacute;ra bizonyos helyeken
-  (p&eacute;ld&aacute;ul k&uuml;ls&#337; statistikai program).<p />
+  (p&eacute;ld&aacute;ul k&uuml;ls&#337; statistikai program).</p><p>
   Ha nem kell, ezt az opci&oacute;t ki lehet hagyni
-  az alap&eacute;rtelmezett &eacute;rt&eacute;kkel (nincs f&aacute;jll&eacute;trehoz&aacute;s).', # MODIF
+  az alap&eacute;rtelmezett &eacute;rt&eacute;kkel (nincs f&aacute;jll&eacute;trehoz&aacute;s).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Most a rendszer fog l&eacute;trehozni egy szem&eacute;lyes hozz&aacute;f&eacute;r&eacute;st &Ouml;nnek.',
 'texte_informations_personnelles_2' => '(Megjegyz&eacute;s : ha &uacute;jratelep&iacute;t&eacute;sr&oacute;l van sz&oacute;, &eacute;s m&eacute;g mindig megy a hozz&aacute;f&eacute;r&eacute;se, akkor',
 'texte_introductif_article' => '(A cikk bevezet&#337; sz&ouml;vege.)',
@@ -1031,7 +1031,7 @@ Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&ea
 'texte_nouveau_message' => '&Uacute;j &uuml;zenet',
 'texte_nouveau_mot' => '&Uacute;j sz&oacute;',
 'texte_nouvelle_version_spip_1' => 'Az SPIP egyik &uacute;jabb verzi&oacute;j&aacute;t telep&iacute;tette.',
-'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel. Ha &Ouml;n a honlap gazd&aacute;ja, akkor t&ouml;r&ouml;lje a @connect@ nev&#369; f&aacute;jlt, folytassa a telep&iacute;t&eacute;st ahhoz, hogy az adatb&aacute;zis csatlakoz&aacute;si param&eacute;tereit m&oacute;dos&iacute;thassa.<p /> (Megjegyz&eacute;s.&nbsp;: amennyiben elfelejtette a csatlakoz&aacute;si param&eacute;tereit, tekintse &aacute;t a @connect@ nev&#369; f&aacute;jlt, miel&#337;bb kit&ouml;r&ouml;lne...)',
+'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel. Ha &Ouml;n a honlap gazd&aacute;ja, akkor t&ouml;r&ouml;lje a @connect@ nev&#369; f&aacute;jlt, folytassa a telep&iacute;t&eacute;st ahhoz, hogy az adatb&aacute;zis csatlakoz&aacute;si param&eacute;tereit m&oacute;dos&iacute;thassa.<p> (Megjegyz&eacute;s.&nbsp;: amennyiben elfelejtette a csatlakoz&aacute;si param&eacute;tereit, tekintse &aacute;t a @connect@ nev&#369; f&aacute;jlt, miel&#337;bb kit&ouml;r&ouml;lne...)</p>',
 'texte_operation_echec' => 'Menjen az el&ouml;z&#337; oldalra, jel&ouml;lj&ouml;n ki egy m&aacute;sik adatb&aacute;zist, vagy hozzon l&eacute;tre egy ujat. Ellen&#337;rizze az &Ouml;n szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat.',
 'texte_plus_trois_car' => 't&ouml;bb, mint 3 karakter',
 'texte_plusieurs_articles' => 'T&ouml;bb szerz&#337; tal&aacute;lt "@cherche_auteur@" szerint:',
@@ -1054,12 +1054,12 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
 'texte_referencement_automatique' => '<b>egy honlap automatikus felv&eacute;tele</b><br />Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;sa...).', # MODIF
 'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Ha bizonyos SQL lek&eacute;rdez&eacute;sek rendszeresen &eacute;s oktalanul hib&aacute;sak,
- lehets&eacute;ges, hogy maga az adatb&aacute;zis az  oka.</b><p />
+ lehets&eacute;ges, hogy maga az adatb&aacute;zis az  oka.</b><p>
   SQL ad lehet&#337;s&eacute;get a t&aacute;bl&aacute;k jav&iacute;t&aacute;s&aacute;ra, ha v&eacute;letlen&uuml;l lett s&eacute;r&uuml;lved.
   Itt lehet jav&iacute;t&aacute;st kezdem&eacute;nyezni&nbsp;;
   Kudarc eset&eacute;n, tartson m&aacute;solatot a k&eacute;perny&#337;r&#337;l,
-  ami tal&aacute;n nyomokat tartalmaz...<p />
- Ha a probl&eacute;ma fenn&aacute;ll, keresse a szolg&aacute;ltat&oacute;j&aacute;t.<p />', # MODIF
+  ami tal&aacute;n nyomokat tartalmaz...</p><p>
+ Ha a probl&eacute;ma fenn&aacute;ll, keresse a szolg&aacute;ltat&oacute;j&aacute;t.</p>', # MODIF
 'texte_restaurer_base' => 'Egy megmentett adatb&aacute;zis tartalm&aacute;nak resztaur&aacute;l&aacute;sa',
 'texte_restaurer_sauvegarde' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi egy m&aacute;r megmentett adatb&aacute;zis resztaur&aacute;l&aacute;s&aacute;t.
   Az&eacute;rt a ment&eacute;st tartalmaz&oacute; f&aacute;jlt kell helyezni a @dossier@ mapp&aacute;ba.

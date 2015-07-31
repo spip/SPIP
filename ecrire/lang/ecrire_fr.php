@@ -31,9 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     install&eacute;e.</b> Vous allez au-devant de grosses
     difficult&eacute;s: risque de destruction de votre base de
     donn&eacute;es, dysfonctionnements divers du site, etc. Ne
-    validez pas cette demande d\'importation.<p />Pour plus
+    validez pas cette demande d\'importation.<p>Pour plus
     d\'informations, voyez <a href="@spipnet@">
-                                la documentation de SPIP</a>.',
+                                la documentation de SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Espace interdit</b><div>SPIP est d&eacute;j&agrave; install&eacute;.</div>',
 'avis_lecture_noms_bases_1' => 'Le programme d\'installation n\'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.',
 'avis_lecture_noms_bases_2' => 'Soit aucune base n\'est disponible, soit la fonction permettant de lister les bases a &eacute;t&eacute; d&eacute;sactiv&eacute;e
@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:',
 'info_connexion_base' => 'Essai de connexion &agrave; la base',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es',
-'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</b><p /> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
+'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</b><p> Vous pouvez passer &agrave; l\'&eacute;tape suivante.</p>',
 'info_connexion_mysql' => 'Votre connexion SQL',
 'info_connexion_ok' => 'La connexion a r&eacute;ussi.',
 'info_contact' => 'Contact',
@@ -395,13 +395,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		forum suppl&eacute;mentaire, r&eacute;serv&eacute; aux seuls administrateurs.',
 'info_forum_statistiques' => 'Statistiques des visites',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
-'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui exige d\'avoir un acc&egrave;s FTP au site Web.',
-'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui exige d\'avoir un acc&egrave;s FTP au site Web.</p>',
+'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.',
-'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>',
+'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.',
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>',
 'info_gauche_auteurs' => 'Vous trouverez ici tous les auteurs du site.
  Leur statut est indiqu&eacute; par la couleur de leur icone (administrateur = vert; r&eacute;dacteur = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
@@ -1013,7 +1013,7 @@ demande plus de puissance au serveur.',
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
  multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
  peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
- l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p />',
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.</p>',
 'texte_documents_joints_2' => 'Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.',
 'texte_effacer_base' => 'Effacer la base de donn&eacute;es SPIP',
 'texte_effacer_donnees_indexation' => 'Effacer les donn&eacute;es d\'indexation',
@@ -1022,13 +1022,13 @@ demande plus de puissance au serveur.',
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.',
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
-  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire @dossier@ ?</b><p />
+  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire @dossier@ ?</b><p>
   Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
   et administrateurs en d\'autres endroits de votre site
-  (programme externe de statistiques, par exemple).<p />
+  (programme externe de statistiques, par exemple).</p><p>
   Si vous n\'en avez pas utilit&eacute;, vous pouvez laisser cette option
   &agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation
-  des fichiers).',
+  des fichiers).</p>',
 'texte_informations_personnelles_1' => 'Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.',
 'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
 'texte_introductif_article' => '(Texte introductif de l\'article.)',
@@ -1074,7 +1074,7 @@ demande plus de puissance au serveur.',
 'texte_nouveau_message' => 'Nouveau message',
 'texte_nouveau_mot' => 'Nouveau mot',
 'texte_nouvelle_version_spip_1' => 'Vous avez install&eacute; une nouvelle version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)',
+'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)</p>',
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
 'texte_plus_trois_car' => 'plus de 3 caract&egrave;res',
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
@@ -1096,14 +1096,14 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
-  elle-m&ecirc;me.</b><p />
+  elle-m&ecirc;me.</b><p>
   Votre serveur SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
   tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
   accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
   cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
+  peut-&ecirc;tre des indices de ce qui ne va pas...</p><p>
   Si le probl&egrave;me persiste, prenez contact avec votre
-  h&eacute;bergeur.<p />',
+  h&eacute;bergeur.</p>',
 'texte_restaurer_base' => 'Restaurer le contenu d\'une sauvegarde de la base',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
 		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;

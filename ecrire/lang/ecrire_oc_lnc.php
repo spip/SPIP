@@ -333,7 +333,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Ensag de connexion a la basa',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p /> Pod&egrave;tz passar a l\'estapa seguenta.',
+'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.</p>',
 'info_connexion_mysql' => 'V&ograve;stra connexion SQL',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contacte',
@@ -379,9 +379,9 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_forum_ouvert' => 'Dins l\'espaci privat del sit, un forum es dob&egrave;rt a totes los redactors registrats . Pod&egrave;tz, &ccedil;ai jos, activar un forum suplementari, reservat als administrators sonque.',
 'info_forum_statistiques' => 'Estadisticas de las vesitas',
 'info_forums_abo_invites' => 'V&ograve;stre sit web porg&iacute;s de forums pels abonats; dins lo sit public los vesitaires son convidats a se registrar.',
-'info_gauche_admin_effacer' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
-'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
-'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
+'info_gauche_admin_effacer' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.</p>',
+'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.</p>',
+'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.</p>',
 'info_gauche_auteurs' => 'Trobaretz aic&iacute; totes los autors del sit. La color de las ic&ograve;nas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens acc&egrave;s al sit, son indicats per una ic&ograve;na blava; los autors escafats per un bordilhi&egrave;r.',
 'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'escambiar de messatges entre redactors, de servar de mementos (per v&ograve;stre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
@@ -985,7 +985,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fichi&egrave;rs burotics, imatges,
  multim&egrave;dia, etc.) als articles e/o a las rubricas. Aqueles fichi&egrave;rs
  p&ograve;don pu&egrave;i &egrave;sser referenciats dins
- l\'article, o apar&eacute;isser a despart.<p />',
+ l\'article, o apar&eacute;isser a despart.',
 'texte_documents_joints_2' => 'Aquel reglatge empacha pas d\'inserir d\'imatges dir&egrave;ctament dins los articles.',
 'texte_effacer_base' => 'Escafar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Escafar las donadas d\'indexacion',
@@ -997,10 +997,10 @@ demande plus de puissance au serveur.', # NEW
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Aqueles fichi&egrave;rs vos p&ograve;don servir per restr&eacute;nher l\'acc&egrave;s als autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
-  (programa ext&egrave;rne d\'estadisticas, per exemple).<p />
+  (programa ext&egrave;rne d\'estadisticas, per exemple).<p>
  Se vos serv&iacute;s pas, pod&egrave;tz daissar aquesta opcion
   a sa valor predefinida (pas cap de creacion
-  dels fichi&egrave;rs).', # MODIF
+  dels fichi&egrave;rs).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Ara lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat al sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
@@ -1045,7 +1045,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Messatge n&ograve;u',
 'texte_nouveau_mot' => 'Mot n&ograve;u',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz installada una version nov&egrave;la d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se s&egrave;tz webm&egrave;stre/webm&egrave;stra del sit, volgatz escafar lo fichi&egrave;r @connect@ e tornar prene l\'installacion per tal d\'actualizar v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p /> (NB: s\'av&egrave;tz desmembrat v&ograve;stres param&egrave;tres de connexion, espepissatz lo fichi&egrave;r  @connect@ abans de lo suprimir...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualizacion mai completa que de costuma. Se s&egrave;tz webm&egrave;stre/webm&egrave;stra del sit, volgatz escafar lo fichi&egrave;r @connect@ e tornar prene l\'installacion per tal d\'actualizar v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p> (NB: s\'av&egrave;tz desmembrat v&ograve;stres param&egrave;tres de connexion, espepissatz lo fichi&egrave;r  @connect@ abans de lo suprimir...)</p>',
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, causiss&egrave;tz una autra basa o creatz-ne una nov&egrave;la. Verificatz las informacions que v&ograve;stre albergador a fornidas.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
@@ -1068,14 +1068,14 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Quora d\'unas requistas SQL abocan
   sistematicament e sens rason aparenta, se p&ograve;t
-  qu\'aqu&ograve; venga de la quita basa de donadas.  </b><p />
+  qu\'aqu&ograve; venga de la quita basa de donadas.  </b><p>
   SQL ten la facultat de reparar sas
   taulas quora un accident las
  a esquintadas. Aic&iacute; pod&egrave;tz ensajar aquela reparacion; se 
   capita pas, servatz una c&ograve;pia de l\'afichatge, que conten
- benl&egrave;u d\'indicis de &ccedil;&ograve; que va pas...<p>
+ benl&egrave;u d\'indicis de &ccedil;&ograve; que va pas...</p><p>
   Se lo probl&egrave;ma persist&iacute;s, contactatz v&ograve;stre
-  albergador.<p>',
+  albergador.</p>',
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una salvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una salvagarda 
  de la basa que l\'aviatz facha abans. Per aqu&ograve; faire, cal aver botat lo fichi&egrave;r que conten la salvagarda 

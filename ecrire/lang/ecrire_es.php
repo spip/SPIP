@@ -955,9 +955,9 @@ requiere m&aacute;s potencia del servidor.',
 'texte_en_cours_validation_forum' => 'No dudes en dar tu opini&oacute;n mediante los foros adjuntos.',
 'texte_enrichir_mise_a_jour' => 'Puedes enriquecer el formato de tu texto utilizando "atajos tipogr&aacute;ficos"',
 'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
- y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p />
+ y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p>
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estad&iacute;sticas, por ejemplo).<p>
-Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).',
+Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).</p>',
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
@@ -995,7 +995,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_nouveau_message' => 'Nuevo mensaje',
 'texte_nouveau_mot' => 'Nueva palabra',
 'texte_nouvelle_version_spip_1' => 'Has instalado una versi&oacute;n nueva de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que de costumbre. Si eres webmaster del sitio, borra el archivo @connect@ y retoma la instalaci&oacute;n con el fin de actualizar los par&aacute;metros de conexi&oacute;n a la base de datos.<p /> (NB.: si has olvidado los par&aacute;metros de conexi&oacute;n, echale una mirada al archivo  @connect@ antes de suprimirlo...)',
+'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que de costumbre. Si eres webmaster del sitio, borra el archivo @connect@ y retoma la instalaci&oacute;n con el fin de actualizar los par&aacute;metros de conexi&oacute;n a la base de datos.<p> (NB.: si has olvidado los par&aacute;metros de conexi&oacute;n, echale una mirada al archivo  @connect@ antes de suprimirlo...)</p>',
 'texte_operation_echec' => 'Regresa a la p&aacute;gina anterior, selecciona otra base o crea una nueva. Verifica las informaciones facilitadas por tu proveedor de hospedaje.',
 'texte_plus_trois_car' => 'm&aacute;s de 3 caracteres',
 'texte_plusieurs_articles' => 'Se han encontrado varios autores o autoras para "@cherche_auteur@":',
@@ -1011,9 +1011,9 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br />Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; la direcci&oacute;n URL deseada, o la direcci&oacute;n de su archivo de sindicaci&oacute;n. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
 'texte_referencement_automatique_verifier' => 'Deber&iacute;as verificar la informaci&oacute;n facilitada por <tt>@url@</tt> antes de guardar.',
-'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos en s&iacute;.</b><p />
-Tu servidor SQL es capaz de reparar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...<p />
-Si el problema persiste, contacta a tu hospedaje.<p />',
+'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos en s&iacute;.</b><p>
+Tu servidor SQL es capaz de reparar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...</p><p>
+Si el problema persiste, contacta a tu hospedaje.</p>',
 'texte_restaurer_base' => 'Restaurar el contenido de una copia de respaldo',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  @dossier@.
 Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',

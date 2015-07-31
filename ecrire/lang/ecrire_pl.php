@@ -341,7 +341,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p /> Id&#378; do nast&#281;pnego etapu.',
+'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p> Id&#378; do nast&#281;pnego etapu.</p>',
 'info_connexion_mysql' => 'Po&#322;&#261;czenie z baz&#261; SQL', # MODIF
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_contact' => 'Kontakt',
@@ -1018,12 +1018,12 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'Mo&#380;esz wzbogaci&#263; uk&#322;ad Twojego tekstu &laquo;&nbsp;skr&oacute;tami typograficznymi&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
-  i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p />
+  i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p>
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
-  (np. zewn&#281;trznych statystyk).<p>
+  (np. zewn&#281;trznych statystyk).</p><p>
   Je&#347;li nie chcesz z nich korzysta&#263;, mo&#380;esz pozostawi&#263; t&#261; opcj&#281;
-  w nienaruszonej postaci (te pliki nie zostan&#261; stworzone).', # MODIF
+  w nienaruszonej postaci (te pliki nie zostan&#261; stworzone).</p>', # MODIF
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',

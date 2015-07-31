@@ -986,7 +986,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Que podetz autorizar que s\'ajusten documents (fichi&egrave;rs burotics, imatges,
  multim&egrave;dia, etc.) aus articles e/o a las rubricas. Aqueths fichi&egrave;rs
  que p&ograve;den puish estar referenciats dens
- l\'article, o apar&eacute;isher a despart.<p />',
+ l\'article, o apar&eacute;isher a despart.',
 'texte_documents_joints_2' => 'Aqueth reglatge n\'empacha pas d\'inserir imatges dir&egrave;ctament dens los articles.',
 'texte_effacer_base' => 'Esfa&ccedil;ar la basa de dadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar las dadas d\'indexacion',
@@ -1053,7 +1053,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Messatge nau',
 'texte_nouveau_mot' => 'Mot nau',
 'texte_nouvelle_version_spip_1' => 'Qu\'avetz installada ua version nav&egrave;ra d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nav&egrave;ra que demanda ua actualizacion mei completa que de costuma. S\'&egrave;tz webm&egrave;stre/webm&egrave;stra deu sit, volhatz esfa&ccedil;ar lo fichi&egrave;r <tt>inc_connect.php3</tt> deu repert&ograve;ri <tt>ecrire</tt> e tornar pr&eacute;ner l\'installacion ent&agrave; actualizar los v&ograve;stes param&egrave;tres de connexion a la basa de dadas.<p /> (NB: s\'avetz desmembrat los v&ograve;stes param&egrave;tres de connexion, espiatz lo fichi&egrave;r  <tt>inc_connect.php3</tt> abans de suprim&iacute;\'u...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta version nav&egrave;ra que demanda ua actualizacion mei completa que de costuma. S\'&egrave;tz webm&egrave;stre/webm&egrave;stra deu sit, volhatz esfa&ccedil;ar lo fichi&egrave;r <tt>inc_connect.php3</tt> deu repert&ograve;ri <tt>ecrire</tt> e tornar pr&eacute;ner l\'installacion ent&agrave; actualizar los v&ograve;stes param&egrave;tres de connexion a la basa de dadas.<p> (NB: s\'avetz desmembrat los v&ograve;stes param&egrave;tres de connexion, espiatz lo fichi&egrave;r  <tt>inc_connect.php3</tt> abans de suprim&iacute;\'u...)</p>',
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, causitz ua auta basa o creatz-ne ua nav&egrave;ra. Verificatz las informacions que lo v&ograve;ste aubergader a hornidas.',
 'texte_plus_trois_car' => 'mei de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mei d\'un autor trobat ent&agrave; "@cherche_auteur@":',
