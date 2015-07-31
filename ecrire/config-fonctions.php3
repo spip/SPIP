@@ -341,7 +341,7 @@ if (tester_mail()) {
 	$jours_neuf=lire_meta("jours_neuf");
 
 	if ($envoi_now)
-		envoyer_mail_quoi_de_neuf('force');
+		spip_query("DELETE FROM spip_meta WHERE nom='majnouv'");
 	
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Annonce des nouveaut&eacute;s</FONT></B></TD></TR>";
