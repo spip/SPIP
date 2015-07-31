@@ -165,6 +165,22 @@ function antispam($texte) {
 // Date, heure, saisons
 //
 
+function normaliser_date($date) {
+	if ($date) {
+		if (ereg("^[0-9]{8,10}$", $date))
+			$date = date("Y-m-d H:i:s", $date);
+		if (ereg("^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$", $date, $regs))
+			$date = $regs[1]."-01-01".$regs[3];
+		else if (ereg("^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$", $date, $regs))
+			$date = ereg_replace("/","-",$regs[1])."-01".$regs[3];
+		else if ($GLOBALS['flag_strtotime']) {
+			$date = date("Y-m-d H:i:s", strtotime($date));
+		}
+		else $date = ereg_replace('[^-0-9/: ]', '', $date);
+	}
+	return $date;
+}
+
 function vider_date($letexte) {
 	if (ereg("^0000-00-00", $letexte)) return '';
 	return $letexte;

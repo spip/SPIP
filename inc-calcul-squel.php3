@@ -241,7 +241,7 @@ function parser_boucle($texte, $id_parent) {
 					if (ereg('\#(PS)', $milieu)) {
 						$s .= ",$table.ps";
 					}
-					
+
 					$req_select[] = $s;
 				}
 				else $req_select[] = "$table.*";
@@ -304,7 +304,7 @@ function parser_boucle($texte, $id_parent) {
 					if ($param == 'inverse') {
 						if ($req_order) $req_order .= ' DESC';
 					}
-	
+
 					// Special rubriques
 					else if ($param == 'meme_parent') {
 						$req_where[] = "$table.id_parent=\$id_parent";
@@ -319,7 +319,7 @@ function parser_boucle($texte, $id_parent) {
 					else if ($param == 'branche') {
 						$req_where[] = "$table.id_rubrique IN (\".calcul_branche(\$id_rubrique).\")";
  					}
-	
+
 					// Restriction de valeurs (implicite ou explicite)
 					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
 						// Variable comparee
@@ -390,45 +390,48 @@ function parser_boucle($texte, $id_parent) {
 						else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 							$col = 'id_rubrique';
 
-						// Cas particulier : expressions de date redac
-						$datecompare='date';
-						if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|annee_relatif)_redac(_redac)?$", $col, $regs)) {
-							$col_date = 'date_redac';
-							$col = $regs[1];
-							if ($regs[2])
-								$datecompare='date_redac';
-						}
-
 						// Cas particulier : expressions de date
-						if ($col == 'date')
-							$col = $table.$col_date;
-						else if ($col == 'mois') {
-							$col = "MONTH($table.$col_date)";
-							$col_table = '';
-						}
-						else if ($col == 'annee') {
-							$col = "YEAR($table.$col_date)";
-							$col_table = '';
-						}
-						else if ($col == 'age') {
-							$col = "(LEAST((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP($table.$col_date))/86400, TO_DAYS(now())-TO_DAYS($table.$col_date), DAYOFMONTH(now())-DAYOFMONTH($table.$col_date)+30.4368*(MONTH(now())-MONTH($table.$col_date))+365.2422*(YEAR(now())-YEAR($table.$col_date))))";
-							$col_table = '';
-						}
-						else if ($col == 'age_relatif') {
-							$col = "LEAST((UNIX_TIMESTAMP('(\$$datecompare)')-UNIX_TIMESTAMP($table.$col_date))/86400, TO_DAYS('(\$$datecompare)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$$datecompare)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$$datecompare)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
-							$col_table = '';
-						}
-						else if ($col == 'jour_relatif') {
-							$col = "LEAST(TO_DAYS('(\$$datecompare)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$$datecompare)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$$datecompare)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
-							$col_table = '';
-						}
-						else if ($col == 'mois_relatif') {
-							$col = "(MONTH('(\$$datecompare)')-MONTH($table.$col_date)+12*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
-							$col_table = '';
-						}
-						else if ($col == 'annee_relatif') {
-							$col = "YEAR('(\$$datecompare)')-YEAR($table.$col_date)";
-							$col_table = '';
+						if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
+							$col = $regs[1];
+							if ($regs[2]) {
+								$date_orig = "$table.date_redac";
+								$date_compare = 'date_redac';
+							}
+							else {
+								$date_orig = "$table.$col_date";
+								$date_compare = 'date';
+							}
+
+							if ($col == 'date')
+								$col = $date_orig;
+							else if ($col == 'mois') {
+								$col = "MONTH($date_orig)";
+								$col_table = '';
+							}
+							else if ($col == 'annee') {
+								$col = "YEAR($date_orig)";
+								$col_table = '';
+							}
+							else if ($col == 'age') {
+								$col = "(LEAST((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP($date_orig))/86400, TO_DAYS(now())-TO_DAYS($date_orig), DAYOFMONTH(now())-DAYOFMONTH($date_orig)+30.4368*(MONTH(now())-MONTH($date_orig))+365.2422*(YEAR(now())-YEAR($date_orig))))";
+								$col_table = '';
+							}
+							else if ($col == 'age_relatif') {
+								$col = "LEAST((UNIX_TIMESTAMP('\$$date_compare')-UNIX_TIMESTAMP($date_orig))/86400, TO_DAYS('\$$date_compare')-TO_DAYS($date_orig), DAYOFMONTH('\$$date_compare')-DAYOFMONTH($date_orig)+30.4368*(MONTH('\$$date_compare')-MONTH($date_orig))+365.2422*(YEAR('\$$date_compare')-YEAR($date_orig)))";
+								$col_table = '';
+							}
+							else if ($col == 'jour_relatif') {
+								$col = "LEAST(TO_DAYS('\$$date_compare')-TO_DAYS($date_orig), DAYOFMONTH('\$$date_compare')-DAYOFMONTH($date_orig)+30.4368*(MONTH('\$$date_compare')-MONTH($date_orig))+365.2422*(YEAR('\$$date_compare')-YEAR($date_orig)))";
+								$col_table = '';
+							}
+							else if ($col == 'mois_relatif') {
+								$col = "(MONTH('\$$date_compare')-MONTH($date_orig)+12*(YEAR('\$$date_compare')-YEAR($date_orig)))";
+								$col_table = '';
+							}
+							else if ($col == 'annee_relatif') {
+								$col = "YEAR('\$$date_compare')-YEAR($date_orig)";
+								$col_table = '';
+							}
 						}
 
 						if ($type == 'forums' AND ($col == 'id_parent' OR $col == 'id_forum'))
@@ -448,7 +451,7 @@ function parser_boucle($texte, $id_parent) {
 						if ($match[3] == '!') $where = "NOT ($where)";
 						$req_where[] = $where;
 					}
-	
+
 					// Selection du classement
 					else if (ereg('^par[[:space:]]+([^}]*)$', $param, $match)) {
 						$tri = trim($match[1]);
@@ -523,7 +526,7 @@ function parser_boucle($texte, $id_parent) {
 				$req_where[] = "$table.statut='publie'";
 				$req_group = " GROUP BY $table.$id_objet";
 				break;
-			
+
 			case 'syndic_articles':
 				$req_select[]='syndic.nom_site AS nom_site';
 				$req_select[]='syndic.url_site AS url_site';
@@ -698,7 +701,7 @@ function parser_champs_etendus($texte) {
 						$champ->fonctions[] = $f;
 					}
 				}
-				
+
 				if ($fonctions) {
 					$fonctions = explode('|', substr($fonctions, 1));
 					reset($fonctions);
@@ -722,7 +725,7 @@ function parser_champs_etendus($texte) {
 			break;
 		}
 	}
-	return $result;	
+	return $result;
 }
 
 function parser_texte($texte, $id_boucle) {
@@ -1351,12 +1354,13 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'DATE':
-		$code = "\$GLOBALS['date']";	// uniquement hors-boucles, pour la date passee dans l'URL ou le contexte inclusion
+		// Uniquement hors-boucles, pour la date passee dans l'URL ou le contexte inclusion
+		$code = "\$contexte['date']";
 		break;
 
 	case 'DATE_NOUVEAUTES':
 		$milieu = "if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv'))
-			\$$nom_var = date('Y-m-d H:i:s', lire_meta('majnouv'));
+			\$$nom_var = normaliser_date(lire_meta('majnouv'));
 		else
 			\$$nom_var = \"'0000-00-00'\";
 		";
@@ -2070,7 +2074,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 	// Fermeture de la boucle spip_fetch_array et liberation des resultats
 	//
-	
+
 	if ($flag_parties) {
 		$texte .= '
 		}
@@ -2123,7 +2127,7 @@ function calculer_texte($texte)
 				if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
 					$var = $args[1];
 					$val = $args[3];
-					if ($val) 
+					if ($val)
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
 					else
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \''.addslashes(\$contexte[$var]).'\'; ';\n";
@@ -2269,7 +2273,7 @@ function calculer_squelette($squelette, $fichier) {
 			$texte .= "\n\n";
 		}
 	}
-	
+
 	// Calculer le code PHP de la racine
 	$texte .= "function $func(\$contexte) {\n";
 	$texte .= " global \$pile_boucles, \$id_instance_cond;\n \$pile_boucles = Array();\n \$id_instance_cond = -1;\n"; // pour #TOTAL_BOUCLE

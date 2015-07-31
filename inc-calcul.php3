@@ -312,7 +312,7 @@ function executer_squelette($squelette, $contexte) {
 		}
 
 		// L'inclusion du squelette permet de definir les fonctions associees
-		// aux boucles, et de recuperer le nom de la fonction principale	
+		// aux boucles, et de recuperer le nom de la fonction principale
 		include($squelette_cache);
 
 		// Si le squelette compile est vide, pour une raison inconnue
@@ -430,6 +430,7 @@ function calculer_page_globale($fond) {
 	global $fichier_requete;
 	global $id_rubrique_fond;
 
+	// Generer le contexte
 	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe', 'id_document');
@@ -439,6 +440,7 @@ function calculer_page_globale($fond) {
 			$contexte[$val] = (int) $GLOBALS[$val];
 		}
 	}
+	if ($GLOBALS['date']) $contexte['date'] = normaliser_date($GLOBALS['date']);
 
 	// Calcul de la rubrique associee a la requete
 	// (selection de squelette specifique)
