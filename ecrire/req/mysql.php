@@ -547,11 +547,12 @@ function spip_mysql_create_base($nom, $serveur='',$requeter=true) {
   return spip_mysql_query("CREATE DATABASE `$nom`", $serveur, $requeter);
 }
 
-// Fonction de creation d'une vue SQL nommee $nom
-// http://doc.spip.org/@spip_mysql_create_view
+
 /**
- * @param $nom
- * @param $query_select
+ * Fonction de création d'une vue SQL nommée $nom
+ * 
+ * @param string $nom
+ * @param string $query_select
  * @param string $serveur
  * @param bool $requeter
  * @return array|bool|null|resource|string

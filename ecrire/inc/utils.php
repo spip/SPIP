@@ -241,7 +241,7 @@ function journal($phrase, $opt = array()) {
  * @api
  * @param string $var
  *     Clé souhaitée
- * @param bool|array $var
+ * @param bool|array $c
  *     Tableau transmis (sinon cherche dans GET ou POST)
  * @return mixed|null
  *     - null si la clé n'a pas été trouvée
@@ -313,19 +313,22 @@ function tester_url_absolue($url){
 }
 
 /**
- * Prend une URL et lui ajoute/retire un parametre.
- * Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
- *            [(#SELF|parametre_url{suite,''})] (supprime)
- *            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
- *            [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
+ * Prend une URL et lui ajoute/retire un paramètre
  *
- * http://doc.spip.org/@parametre_url
+ * @filtre parametre_url
+ * @link http://www.spip.net/4255
+ * @example
+ *     ```
+ *     [(#SELF|parametre_url{suite,18})] (ajout)
+ *     [(#SELF|parametre_url{suite,''})] (supprime)
+ *     [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
+ *     ```
  *
- * @param string $url
- * @param string $c
- * @param string|array $v
- * @param string $sep
- * @return string
+ * @param string $url URL
+ * @param string $c Nom du paramètre
+ * @param string|array|null $v Valeur du paramètre
+ * @param string $sep Séparateur entre les paramètres
+ * @return string URL
  */
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	// requete erronnee : plusieurs variable dans $c et aucun $v
@@ -496,14 +499,28 @@ function test_plugin_actif($plugin){
 
 /**
  * Traduction des textes de SPIP
- * http://doc.spip.org/@_T
  *
+ * Traduit une clé de traduction en l'obtenant dans les fichiers de langues.
+ * 
+ * @api
+ * @uses inc_traduire_dist()
+ * @uses _L()
+ * @example
+ *     ```
+ *     _T('bouton_enregistrer')
+ *     _T('medias:image_tourner_droite')
+ *     _T('medias:erreurs', array('nb'=>3)
+ *     ```
+ * 
  * @param string $texte
+ *     Clé de traduction
  * @param array $args
+ *     Couples (variable => valeur) pour passer des variables à la chaîne traduite
  * @param array $options
- *   string class : nom d'une classe a ajouter sur un span pour encapsuler la chaine
- *   bool force : forcer un retour meme si la chaine n'a pas de traduction
- * @return mixed|string
+ *     - string class : nom d'une classe a ajouter sur un span pour encapsuler la chaine
+ *     - bool force : forcer un retour meme si la chaine n'a pas de traduction
+ * @return string
+ *     Texte
  */
 function _T($texte, $args=array(), $options=array()) {
 	static $traduire=false ;
@@ -552,9 +569,28 @@ function _T($texte, $args=array(), $options=array()) {
 
 }
 
-// Remplacer les variables @....@ par leur valeur dans une chaine de langue.
-// Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
-// http://doc.spip.org/@_L
+
+/**
+ * Remplace les variables `@...@` par leur valeur dans une chaîne de langue.
+ *
+ * Cette fonction est également appelée dans le code source de SPIP quand une
+ * chaîne n'est pas encore dans les fichiers de langue.
+ *
+ * @see _T()
+ * @example
+ *     ```
+ *     _L('Texte avec @nb@ ...', array('nb'=>3)
+ *     ```
+ * 
+ * @param string $text
+ *     Texte
+ * @param array $args
+ *     Couples (variable => valeur) à transformer dans le texte
+ * @param string|null $class
+ *     Encapsule les valeurs dans un span avec cette classe si transmis.
+ * @return string
+ *     Texte
+ */
 function _L($text, $args=array(), $class=null) {
 	$f = $text;
 	if (is_array($args)) {
@@ -1323,7 +1359,30 @@ function url_de_($http,$host,$request,$prof=0){
 // Attention, X?y=z et "X/?y=z" sont completement differents!
 // http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
-// http://doc.spip.org/@generer_url_ecrire
+/**
+ * Crée une URL vers un script de l'espace privé
+ *
+ * @example
+ *     ```
+ *     generer_url_ecrire('admin_plugin')
+ *     ```
+ * 
+ * @param string $script
+ *     Nom de la page privée (xx dans exec=xx)
+ * @param string $args
+ *     Arguments à transmettre, tel que `arg1=yy&arg2=zz`
+ * @param bool $no_entities
+ *     Si false : transforme les `&` en `&amp;`
+ * @param bool|string $rel
+ *     URL relative ?
+ *
+ *     - false : l’URL sera complète et contiendra l’URL du site
+ *     - true : l’URL sera relavive.
+ *     - string : on transmet l'url à la fonction
+ * @param string $action
+ *     - Fichier d'exécution public (spip.php par défaut)
+ * @return string URL
+**/
 function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false) {
 	if (!$rel)
 		$rel = url_de_base() . _DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT;
@@ -1350,9 +1409,20 @@ function generer_url_retour($script, $args="")
 // Adresse des scripts publics (a passer dans inc-urls...)
 //
 
-// Detecter le fichier de base, a la racine, comme etant spip.php ou ''
-// dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
-// http://doc.spip.org/@get_spip_script
+
+/**
+ * Retourne le nom du fichier d'exécution de SPIP
+ *
+ * @see _SPIP_SCRIPT
+ * @note
+ *   Detecter le fichier de base, a la racine, comme etant spip.php ou ''
+ *   dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
+ * 
+ * @param string $default
+ *     Script par défaut
+ * @return string
+ *     Nom du fichier (constante _SPIP_SCRIPT), sinon nom par défaut
+**/
 function get_spip_script($default='') {
 	# cas define('_SPIP_SCRIPT', '');
 	if (_SPIP_SCRIPT)
@@ -1361,7 +1431,29 @@ function get_spip_script($default='') {
 		return $default;
 }
 
-// http://doc.spip.org/@generer_url_public
+/**
+ * Crée une URL vers une page publique de SPIP
+ *
+ * @example
+ *     ```
+ *     generer_url_public("rubrique","id_rubrique=$id_rubrique")
+ *     ```
+ * 
+ * @param string $script
+ *     Nom de la page
+ * @param string $args
+ *     Arguments à transmettre, tel que `arg1=yy&arg2=zz`
+ * @param bool $no_entities
+ *     Si false : transforme les `&` en `&amp;`
+ * @param bool $rel
+ *     URL relative ?
+ *
+ *     - false : l’URL sera complète et contiendra l’URL du site
+ *     - true : l’URL sera relavive.
+ * @param string $action
+ *     - Fichier d'exécution public (spip.php par défaut)
+ * @return string URL
+**/
 function generer_url_public($script='', $args="", $no_entities=false, $rel=true, $action='') {
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
@@ -1768,10 +1860,10 @@ function spip_initialisation_suite() {
 	if (!defined('_DOCTYPE_AIDE')) define('_DOCTYPE_AIDE',
 	       "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
 
-	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
-	// le script de l'espace public, alias  index.php
+	/** L'adresse de base du site ; on peut mettre '' si la racine est gerée par
+	 * le script de l'espace public, alias index.php */
 	if (!defined('_SPIP_SCRIPT')) define('_SPIP_SCRIPT', 'spip.php');
-	// argument page, personalisable en cas de conflit avec un autre script
+	/** Argument page, personalisable en cas de conflit avec un autre script */
 	if (!defined('_SPIP_PAGE')) define('_SPIP_PAGE', 'page');
 
 	// le script de l'espace prive
@@ -2254,8 +2346,19 @@ function tester_url_ecrire($nom){
 	return $exec[$nom] = ((find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'');
 }
 
-// Charger dynamiquement une extension php
-// http://doc.spip.org/@charger_php_extension
+
+/**
+ * Tente de charger dynamiquement une extension PHP
+ *
+ * @example
+ *     ```
+ *     $ok = charger_php_extension('sqlite');
+ *     ```
+ * @uses inc_charger_php_extension_dist() Si la librairie n'est pas déjà charchée
+ * 
+ * @param string $module Nom du module à charger
+ * @return bool true si le module est chargé
+**/
 function charger_php_extension($module) {
 	if (extension_loaded($module)) {
 		return true;
@@ -2265,10 +2368,15 @@ function charger_php_extension($module) {
 	}
 }
 
-// Renvoie TRUE si et seulement si la configuration autorise
-// le code HTML5 sur le site public
+
+/**
+ * Indique si le code HTML5 est permis sur le site public
+ *
+ * @return bool
+ *     true si et seulement si la configuration autorise le code HTML5 sur le site public
+**/
 function html5_permis() {
-        return (isset($GLOBALS['meta']['version_html_max'])
+	return (isset($GLOBALS['meta']['version_html_max'])
 		AND ('html5' == $GLOBALS['meta']['version_html_max']));
 }
 
@@ -2277,18 +2385,34 @@ function html5_permis() {
  * desormais depreciees ; plutot que d'obliger tout le monde a charger
  * vieilles_defs, on va assumer l'histoire de ces 3 fonctions ubiquitaires
  */
-// Fonction depreciee
-// http://doc.spip.org/@lire_meta
+
+/**
+ * lire_meta : fonction dépréciée
+ * @deprecated Utiliser `$GLOBALS['meta'][$nom]` ou `lire_config('nom')`
+ * @see lire_config()
+ * @param string $nom Clé de meta à lire
+ * @return mixed Valeur de la meta.
+**/
 function lire_meta($nom) {
 	return $GLOBALS['meta'][$nom];
 }
 
-// Fonction depreciee
-// http://doc.spip.org/@ecrire_metas
+
+/**
+ * ecrire_metas : fonction dépréciée
+ * @deprecated
+**/
 function ecrire_metas() {}
 
-// Fonction depreciee, cf. http://doc.spip.org/@sql_fetch
-// http://doc.spip.org/@spip_fetch_array
+/**
+ * Retourne une ligne d'un résultat de requête mysql (déprécié)
+ *
+ * @see sql_fetch()
+ * @deprecated Utiliser sql_fetch()
+ * @param Ressource $r Ressource mysql
+ * @param int|null $t Type de retour
+ * @return array|void|bool Tableau de la ligne SQL
+**/
 function spip_fetch_array($r, $t=NULL) {
 	if (!isset($t)) {
 		if ($r) return sql_fetch($r);

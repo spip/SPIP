@@ -1,20 +1,34 @@
 <?php
 
+/**
+ * Chargement d'une extension PHP
+ *
+ * @package SPIP\Core\Outils
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// cette fonction (adaptee de phpMyAdmin)
-// permet de charger un module php
-// dont le nom est donne en argument (ex: 'mysql')
-// retourne true en cas de succes
-//
-// 3 etapes :
-// - 1) si le module est deja charge, on sort vainqueur
-// - 2) on teste si l'on a la possibilite de charger un module
-// via la meta 'dl_allowed'. Si elle n'est pas renseignee, 
-// elle sera cree en fonction des parametres de php
-// - 3) si l'on peut, on charge le module par la fonction dl()
-//
-// http://doc.spip.org/@inc_charger_php_extension_dist
+/**
+ * Permet de charger un module PHP dont le nom est donné en argument
+ *
+ * Fonction adaptée de phpMyAdmin.
+ *
+ * Trois étapes :
+ *
+ * 1) si le module est deja charge, on sort vainqueur
+ * 2) on teste si l'on a la possibilité de charger un module
+ *    via la meta `dl_allowed`. Si elle n'est pas renseignée,
+ *    elle sera crée en fonction des paramètres de php
+ * 3) si l'on peut, on charge le module par la fonction `dl()`
+ *
+ * @note
+ *     La fonction `dl()` n'est plus présente à partir de PHP 5.3.
+ * 
+ * @param string $module
+ *     Nom du module à charger (tel que 'mysql')
+ * @return bool
+ *     true en cas de succes
+**/
 function inc_charger_php_extension_dist($module){
 	if (extension_loaded($module)) {
 		return true;

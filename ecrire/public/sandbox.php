@@ -125,6 +125,8 @@ function sandbox_composer_interdire_scripts($code, &$p){
  * La fonction accèpte plusieurs tableaux de filtres à partir du 3ème argument
  * qui seront appliqués dans l'ordre
  *
+ * @uses echapper_php_callback()
+ * 
  * @param array $skel
  * @param string $corps
  * @param array $filtres
@@ -157,17 +159,16 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres){
 
 
 /**
- * Callback pour échapper du code PHP
+ * Callback pour échapper du code PHP (les séquences `<?php ... ?>`)
  *
  * Rappeler la fonction sans paramètre pour obtenir les substitutions réalisées.
+ *
+ * @see sandbox_filtrer_squelette()
  * 
  * @param array|null $r
- *
  *     - array : ce sont les captures de la regex à échapper
  *     - NULL : demande à dépiler tous les échappements réalisés
- * 
  * @return string|array
- * 
  *     - string : hash de substitution du code php lorsque `$r` est un array
  *     - array : Liste( liste des codes PHP, liste des substitutions )
 **/

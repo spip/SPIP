@@ -2798,9 +2798,29 @@ function match($texte, $expression, $modif="UimsS",$capte=0) {
 	return false;
 }
 
-// filtre replace pour faire des operations avec expression reguliere
-// [(#TEXTE|replace{^ceci$,cela,UimsS})]
-// http://doc.spip.org/@replace
+
+/**
+ * Remplacement de texte à base d'expression régulière
+ *
+ * @filtre replace
+ * @link http://www.spip.net/4309
+ * @see match()
+ * @example
+ *     ```
+ *     [(#TEXTE|replace{^ceci$,cela,UimsS})]
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte
+ * @param string $expression
+ *     Expression régulière
+ * @param string $replace
+ *     Texte de substitution des éléments trouvés
+ * @param string $modif
+ *     Modificateurs pour l'expression régulière.
+ * @return string
+ *     Texte 
+**/
 function replace($texte, $expression, $replace='', $modif="UimsS") {
 	$expression=str_replace("\/","/", $expression);
 	$expression=str_replace("/","\/",$expression);

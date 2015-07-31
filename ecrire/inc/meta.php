@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des meta de configuration
+ *
+ * @package SPIP\Core\Configuration
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Les parametres generaux du site sont dans une table SQL;
@@ -85,9 +91,16 @@ function lire_metas($table='meta') {
 	return $GLOBALS[$table];
 }
 
-// Mettre en cache la liste des meta, sauf les valeurs sensibles 
-// pour qu'elles ne soient pas visibiles dans un fichier.souvent en 777
-// http://doc.spip.org/@touch_meta
+
+/**
+ * Mettre en cache la liste des meta, sauf les valeurs sensibles
+ * pour qu'elles ne soient pas visibiles dans un fichier (souvent en 777)
+ *
+ * @param bool|int $antidate
+ *      Date de modification du fichier à appliquer si indiqué (timestamp)
+ * @param string $table
+ *      Table SQL d'enregistrement des meta.
+**/
 function touch_meta($antidate= false, $table='meta'){
 	$file = cache_meta($table);
 	if (!$antidate OR !@touch($file, $antidate)) {
@@ -103,7 +116,18 @@ function touch_meta($antidate= false, $table='meta'){
 	}
 }
 
-// http://doc.spip.org/@effacer_meta
+/**
+ * Supprime une meta
+ *
+ * @see ecrire_config()
+ * @see effacer_config()
+ * @see lire_config()
+ * 
+ * @param string $nom
+ *     Nom de la meta
+ * @param string $table
+ *     Table SQL d'enregistrement de la meta.
+**/
 function effacer_meta($nom, $table='meta') {
 	// section critique sur le cache:
 	// l'invalider avant et apres la MAJ de la BD
@@ -117,7 +141,22 @@ function effacer_meta($nom, $table='meta') {
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
 
-// http://doc.spip.org/@ecrire_meta
+/**
+ * Met à jour où crée une meta avec la clé et valeur indiquée
+ *
+ * @see ecrire_config()
+ * @see effacer_config()
+ * @see lire_config()
+ * 
+ * @param string $nom
+ *     Nom de la meta
+ * @param string $valeur
+ *     Valeur à enregistrer
+ * @param bool|null $importable
+ *     Cette meta s'importe-elle avec une restauration de sauvegarde ?
+ * @param string $table
+ *     Table SQL d'enregistrement de la meta.
+**/
 function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 
 	static $touch = array();
@@ -151,13 +190,20 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
 
-function cache_meta($table='meta')
-{
+/**
+ * Retourne le nom du fichier cache d'une table SQL de meta
+ *
+ * @param string $table
+ *     Table SQL d'enregistrement des meta.
+ * @return string
+ *     Nom du fichier cache
+**/
+function cache_meta($table='meta') {
 	return ($table=='meta') ? _FILE_META : (_DIR_CACHE . $table . '.php');
 }
 
 /**
- * Une fonction pour installer une table de configuration supplementaire
+ * Installer une table de configuration supplementaire
  * @param string $table
  */
 function installer_table_meta($table) {
@@ -172,8 +218,9 @@ function installer_table_meta($table) {
 }
 
 /**
- * Une fonction pour supprimer une table de configuration supplementaire
- * si $force=true, on ne verifie pas qu'elle est bien vide
+ * Supprimer une table de configuration supplémentaire
+ * 
+ * Si $force=true, on ne verifie pas qu'elle est bien vide
  * 
  * @param string $table
  * @param bool $force

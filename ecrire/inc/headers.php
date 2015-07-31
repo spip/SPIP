@@ -124,7 +124,23 @@ function redirige_formulaire($url, $equiv = '', $format='message') {
 	}
 }
 
-// http://doc.spip.org/@redirige_url_ecrire
+/**
+ * Effectue une redirection par header PHP vers un script de l’interface privée
+ *
+ * @uses redirige_par_entete() Qui tue le script PHP.
+ * @example
+ *     ```
+ *     include_spip('inc/headers');
+ *     redirige_url_ecrire('rubriques','id_rubrique=' . $id_rubrique);
+ *     ```
+ * 
+ * @param string $script
+ *     Nom de la page privée (exec)
+ * @param string args
+ *     Arguments à transmettre. Exemple `etape=1&autre=oui`
+ * @param string $equiv
+ * @return void
+**/
 function redirige_url_ecrire($script='', $args='', $equiv='') {
 	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
 }

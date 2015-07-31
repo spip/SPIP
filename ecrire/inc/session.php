@@ -249,8 +249,6 @@ function verifier_session($change=false) {
 /**
  * Lire une valeur dans la session SPIP
  *
- * http://doc.spip.org/@session_get
- *
  * @param string $nom
  * @return mixed
  */
@@ -260,8 +258,7 @@ function session_get($nom) {
 
 
 /**
- * Ajouter une donnee dans la session SPIP
- * http://doc.spip.org/@session_set
+ * Ajouter une donnée dans la session SPIP
  *
  * @param string $nom
  * @param null $val
