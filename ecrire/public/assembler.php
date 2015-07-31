@@ -46,6 +46,7 @@ function public_assembler_dist($fond) {
 	// On fixe $GLOBALS['var_mode']
 	$GLOBALS['var_mode'] = false;
 	$GLOBALS['var_preview'] = false;
+	$GLOBALS['var_images'] = false;
 	if (isset($_GET['var_mode'])) {
 		// tout le monde peut calcul/recalcul
 		if ($_GET['var_mode'] == 'calcul'
@@ -87,6 +88,12 @@ function public_assembler_dist($fond) {
 				}
 				// sinon tant pis
 			}
+		}
+		else if ($_GET['var_mode'] == 'images'){
+			// forcer le compilo et ignorer les caches existants
+			$GLOBALS['var_mode'] = 'calcul';
+			// indiquer qu'on doit recalculer les images
+			$GLOBALS['var_images'] = true;
 		}
 	}
 

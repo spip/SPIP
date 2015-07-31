@@ -48,6 +48,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 // uniquement pour GD2
 // http://doc.spip.org/@image_valeurs_trans
 function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL) {
+	static $images_recalcul = array();
 	if (strlen($img)==0) return false;
 	
 	$source = trim(extraire_attribut($img, 'src'));
@@ -119,17 +120,23 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	
 	
 	$creer = true;
-	$date_src = 0;
-	$date_dest = 0;
-	if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
-		$date_src = @filemtime($f);
-	if (@file_exists($f = $fichier_dest) OR @file_exists($f = "$fichier_dest.src"))
-		$date_dest = @filemtime($f);
-	# il peut y avoir egalite de date si l'on compare deux .src crees dans la foulee
-	if ( $date_src <= $date_dest ){
-		$creer = false;
+	// si recalcul des images demande, recalculer chaque image une fois
+	if ($GLOBALS['var_images'] && !isset($images_recalcul[$fichier_dest])){
+		$images_recalcul[$fichier_dest] = true;
 	}
 	else {
+		$date_src = 0;
+		$date_dest = 0;
+		if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
+			$date_src = @filemtime($f);
+		if (@file_exists($f = $fichier_dest) OR @file_exists($f = "$fichier_dest.src"))
+			$date_dest = @filemtime($f);
+		# il peut y avoir egalite de date si l'on compare deux .src crees dans la foulee
+		if ( $date_src <= $date_dest ){
+			$creer = false;
+		}
+	}
+	if ($creer) {
 		if (!file_exists($fichier)) {
 			if (!file_exists("$fichier.src")) {
 				spip_log("Image absente : $fichier");
