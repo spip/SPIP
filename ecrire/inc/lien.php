@@ -36,8 +36,11 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
 		$class = "spip_mail";
 	elseif (preg_match('/^<html>/',$lien)) # cf traiter_lien_explicite
-		$class = "spip_url spip_out";
-	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
+		$class = "spip_url";
+
+	// spip_out sur tous les liens externes
+	if (preg_match(',^https?://,S', $lien))
+		$class = trim("$class spip_out");
 
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang!==$GLOBALS['spip_lang'])
@@ -454,7 +457,7 @@ function traiter_raccourci_ancre($letexte)
 // cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
 
 define('_RACCOURCI_GLOSSAIRE', "/\[\?+\s*([^][<>]+)\]/S");
-define('_RACCOURCI_GLOSES', '/^([^|#{]*\w[^|#{]*)([^#]*)(#([^|{}]*))?(.*)$/');
+define('_RACCOURCI_GLOSES', '/^([^|#{]*\w[^|#{]*)([^#]*)(#([^|{}]*))?(.*)$/S');
 
 // http://doc.spip.org/@traiter_raccourci_glossaire
 function traiter_raccourci_glossaire($texte)

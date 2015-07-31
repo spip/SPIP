@@ -257,7 +257,7 @@ function bando_identite(){
 	$url_lang = generer_url_ecrire('config_langage');
 
 	$res .= "<p class='session'>"
-	  . "<a title='Mes informations personnelles' href='".
+	  . "<a title='"._T('icone_informations_personnelles')."' href='".
 	  //generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])
 	  generer_url_ecrire("infos_perso")
 	  ."'>"
