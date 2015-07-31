@@ -147,4 +147,16 @@ function statuts_articles_visibles($statut_auteur){
 	else
 		return array('prop','publie');
 }
+
+function affiche_nom_table($table){
+	static $libelles = null;
+	if (!$libelles){
+		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
+		$libelles = pipeline('libelle_association_mots',$libelles);
+	}
+	if (!strlen($table))
+		return '';
+
+	return _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table");
+}
 ?>
