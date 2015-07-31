@@ -1,24 +1,37 @@
-	<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_r,#ENV{id_rubrique}}}{statut?}>
-		<div class='chemin'>
-			<a href='[(#SELF|parametre_url{id_r,0})]' class='ajax'><:info_racine_site:></a>
-			<BOUCLE_chemin(HIERARCHIE){id_rubrique}> &gt; <a href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]' class='ajax'>#TITRE</a></BOUCLE_chemin> &gt; <strong class='on'>#TITRE</strong>
-		</div>#SET{n,0}
-		<B_contenu>
-		[(#REM) afficher la racine si la profondeur le permet]
-		[(#GRAND_TOTAL|<{#TOTAL_BOUCLE}|oui)
-		<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})] frame_0'><h2>[<a(#ENV{rubriques,0}|oui) href='#' onclick="jQuery(this).item_pick('rubrique|0','#ENV{name,id_item}','<:info_racine_site|texte_script|attribut_html:>','rubrique');return false;"
-><img class='add' src='#CHEMIN_IMAGE{ajouter-16.png}' alt='' /></a>]<:info_racine_site:></h2>
-		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
-		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
-		<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'><a
-		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN_IMAGE{fermer-16}' alt='fermer' width="16" height="16" /></a>
-		<h2><a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a></h2>
-		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
-		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
-		</div>
-		</BOUCLE_contenu>
+[(#REM)
 
-	</BOUCLE_rub>
-	<div class='chemin'><strong class='on'><:info_racine_site:></strong></div>
-	<div class='frame total_0 frame_0'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>
-	<//B_rub>
+	Navigateur du sélecteur de rubrique (ancien sélecteur)
+	
+	Paramètres :
+	-* id_r int l'id_rubrique en cours;
+	-* limite_branche int l'id_rubrique de la branche sur laquelle on force la sélection
+
+]
+<BOUCLE_branche(RUBRIQUES){id_rubrique=#ENV{limite_branche}}{statut?}>
+[(#SET{titre_branche,[(#TITRE)]})]
+[(#SET{rubriques_branche,#ARRAY})]<BOUCLE_rubriques_branches(RUBRIQUES){branche}{exclus}{statut?}>#SET{rubriques_branche,#GET{rubriques_branche}|push{#ID_RUBRIQUE}}</BOUCLE_rubriques_branches>
+</BOUCLE_branche>
+<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_r,#ENV{id_rubrique}}}{statut?}>
+	<div class='chemin'>
+		[(#ENV{limite_branche}|non)<a href='[(#SELF|parametre_url{id_r,0})]' class='ajax'><:info_racine_site:></a>]
+		<BOUCLE_chemin(HIERARCHIE){id_rubrique}{id_rubrique != #ENV{id_r}}{statut?}>[(#ENV{limite_branche}|et{#COMPTEUR_BOUCLE|=={1}}|?{'',<span class="sep"> &gt; </span>})]<a href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]' class='ajax'>#TITRE</a></BOUCLE_chemin>[(#ENV{limite_branche}|=={#ID_RUBRIQUE}|?{'',<span class="sep"> &gt; </span>})]<strong class='on'>#TITRE</strong>
+	</div>#SET{n,0}
+	<B_contenu>
+	[(#REM) afficher la racine si la profondeur le permet]
+	[(#ENV{limite_branche}|non)
+	[(#GRAND_TOTAL|<{#TOTAL_BOUCLE}|oui)
+	<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})] frame_0'><h2>[<a(#ENV{rubriques,0}|oui) href='#' onclick="jQuery(this).item_pick('rubrique|0','#ENV{name,id_item}','<:info_racine_site|texte_script|attribut_html:>','rubrique');return false;"
+><img class='add' src='#CHEMIN_IMAGE{ajouter-16.png}' alt='' /></a>]<:info_racine_site:></h2>
+	[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]]
+	<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
+	<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'>[(#ID_RUBRIQUE|=={#ENV{limite_branche}}|non)<a
+	href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN_IMAGE{fermer-16}' alt='fermer' width="16" height="16" /></a>]
+	<h2>[(#ID_RUBRIQUE|=={#ENV{limite_branche}}|?{#TITRE,<a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a>})]</h2>
+	[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
+	[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
+	</div>
+	</BOUCLE_contenu>
+</BOUCLE_rub>
+<div class='chemin'><strong class='on'>[(#GET{titre_branche,<:info_racine_site:>})]</strong></div>
+<div class='frame total_0 frame_0'><h2>[(#GET{titre_branche,<:info_racine_site:>})]</h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=#ENV{limite_branche,0}}{env})]</div>
+<//B_rub>
