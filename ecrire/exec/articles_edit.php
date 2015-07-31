@@ -104,7 +104,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $new, $config_fonc
 	'config_fonc'=>$config_fonc
 	);
 
-	$milieu = recuperer_fond("prive/editer/article", $contexte);
+	$milieu = recuperer_fond("prive/objets/editer/article", $contexte);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>$milieu));
 

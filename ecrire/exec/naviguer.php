@@ -107,7 +107,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	$type = 'rubrique';
 	$contexte = array('id'=>$id_rubrique,'id_rubrique'=>$id_rubrique);
 
-	$onglet_contenu = "<div id='wysiwyg'>".recuperer_fond("prive/contenu/$type",$contexte)."</div>";
+	$onglet_contenu = "<div id='wysiwyg'>".recuperer_fond("prive/objets/contenu/$type",$contexte)."</div>";
 
 	include_spip('inc/presenter_enfants');
 	$onglet_enfants =

@@ -66,7 +66,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $associer_objet, $r
 		'auteur' => $auteur
 	);
 
-	$corps .= recuperer_fond("prive/editer/auteur", $contexte);
+	$corps .= recuperer_fond("prive/objets/editer/auteur", $contexte);
 	$corps .= '</div>';
 
 	// ajouter les infos, si l'on ne demande pas simplement le formulaire d'edition

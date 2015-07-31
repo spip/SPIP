@@ -73,7 +73,7 @@ function f_boite_infos($flux) {
 	$args = $flux['args'];
 	$type = $args['type'];
 	unset($args['row']);
-	$flux['data'] .= recuperer_fond("prive/infos/$type",$args);
+	$flux['data'] .= recuperer_fond("prive/objets/infos/$type",$args);
 	return $flux;
 }
 
@@ -111,9 +111,9 @@ function f_afficher_blocs_ecrire($flux) {
 																					'data'=>$flux['data']['texte']));
 			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
-		if (strncmp($fond,"prive/contenu/",14)==0
+		if (strncmp($fond,"prive/objets/contenu/",21)==0
 		  AND $objet=basename($fond)
-			AND $objet==substr($fond,14)){
+			AND $objet==substr($fond,21)){
 			$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$flux['args']['contexte']['id'],'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
 		}
 	}

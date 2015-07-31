@@ -172,7 +172,7 @@ function boites_de_config_articles($id_article)
 // http://doc.spip.org/@boite_article_virtuel
 function boite_article_virtuel($id_article, $virtuel){
 	return
-		recuperer_fond('prive/editer/rediriger_article',array('id_article'=>$id_article));
+		recuperer_fond('prive/objets/editer/rediriger_article',array('id_article'=>$id_article));
 }
 
 // http://doc.spip.org/@bouton_modifier_articles
@@ -220,7 +220,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 			'id_secteur' => $row['id_secteur']
 		);
 
-		$res .= "<div id='wysiwyg'>".recuperer_fond("prive/contenu/$type",$contexte)."</div>";
+		$res .= "<div id='wysiwyg'>".recuperer_fond("prive/objets/contenu/$type",$contexte)."</div>";
 	}
 	return $res;
 }

@@ -7,4 +7,4 @@
 [<p class="pagination">(#SELF|auteurs_navigation_statut{#ENV{statut,''},#GET{statuts}}|implode{' | '})</p>]
 
 #SET{filtre,#SESSION{statut}|=={0minirezo}|?{poubelle,'prepa|poubelle|refuse'}|explode{|}}
-<INCLURE{fond=prive/listes/auteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}>
+<INCLURE{fond=prive/objets/liste/auteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}>
