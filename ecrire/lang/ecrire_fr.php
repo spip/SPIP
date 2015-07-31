@@ -798,7 +798,7 @@ dans une couleur qui indique leur état :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-initialiser la liste avec les travaux périodiques',
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente',
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s',
 	'queue_no_job_in_queue' => 'Aucun travail en attente',
@@ -814,8 +814,8 @@ dans une couleur qui indique leur état :',
 	'statut_admin_restreint' => '(admin restreint)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)',
+	'tache_cron_asap' => 'Tâche CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Tâche CRON @function@ (toutes les @nb@ s)',
 	'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Ce site ne prévoit pas de limitation de taille du répertoire du cache.',
 	'taille_cache_maxi' => 'SPIP essaie de limiter la taille du répertoire du cache de ce site à environ <b>@octets@</b> de données.',
