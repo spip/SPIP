@@ -138,6 +138,10 @@ function verifier_action_auteur($action, $valeur) {
 // On ne doit pas l'exporter
 // http://doc.spip.org/@secret_du_site
 function secret_du_site() {
+	if (!isset($GLOBALS['meta']['secret_du_site'])){
+		include_spip('base/abstract_sql');
+		$GLOBALS['meta']['secret_du_site'] = sql_getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
+	}
 	if (!isset($GLOBALS['meta']['secret_du_site'])
 	OR !strlen($GLOBALS['meta']['secret_du_site'])
 	) {
