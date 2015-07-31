@@ -55,19 +55,26 @@ switch($op) {
 	# forum public
 	case 'forum':
 		include_ecrire("inc_forum.php3");
-		if ($id = intval($a['id_article']))
+		if ($id = intval($a['id_article'])) {
 			$critere = "statut='publie' AND id_article=$id";
-		else if ($id = intval($a['id_syndic']))
+			$url = generer_url_article($id);
+		}
+		else if ($id = intval($a['id_syndic'])) {
 			$critere = "statut='publie' AND id_syndic=$id";
-		else if ($id = intval($a['id_breve']))
+			$url = generer_url_site($id);
+		}
+		else if ($id = intval($a['id_breve'])) {
 			$critere = "statut='publie' AND id_breve=$id";
-		else if ($id = intval($a['id_rubrique']))
+			$url = generer_url_breve($id);
+		} else if ($id = intval($a['id_rubrique']))
 			$critere = "statut='publie' AND id_rubrique=$id";
-		else if ($id = intval($a['id_thread']))
+			$url = generer_url_rubrique($id);
+		} else if ($id = intval($a['id_thread'])) {
 			$critere = "statut='publie' AND id_thread=$id";
+			$url = generer_url_forum($id);
+		}
 		if ($id) $rss = rss_suivi_forums($a, $critere, false);
 		$title = _T("ecrire:titre_page_forum_suivi");
-		$url = generer_url_article($id);
 		break;
 	# suivi prive des forums
 	case 'forums':
