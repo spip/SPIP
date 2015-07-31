@@ -29,13 +29,13 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, ($afficher_auteurs ? 4 : 2), $tmp_var, '', $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, ($afficher_auteurs ? 4 : 3), $tmp_var, '', $nb_aff);
 	}
-	if ($important) debut_cadre_couleur();
+	if ($important)  debut_cadre_couleur();
+	// ie: echo "<div class='cadre-couleur'><div class='cadre-padding'>";
 
 	echo "<div style='height: 12px;'></div>";
 	echo "<div class='liste'>";
-//	bandeau_titre_boite($titre_table, $afficher_auteurs, $boite_importante);
 	bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
 	echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
 	echo $tranches;
@@ -43,115 +43,118 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT $deb_aff, $nb_aff");
 ;
 	while($row = spip_fetch_array($result_message)) {
-			$vals = array();
+		$table[]= afficher_message_boucles($row, $messages_vus, $afficher_auteurs);
+	}
 
-			$id_message = $row['id_message'];
-			$date = $row["date_heure"];
-			$date_fin = $row["date_fin"];
-			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-			$type = $row["type"];
-			$rv = $row["rv"];
-			$messages_vus[$id_message] = $id_message;
+	if ($afficher_auteurs) {
+			$largeurs = array('', 130, 20, 120);
+			$styles = array('arial2', 'arial1', 'arial1', 'arial1');
+	} else {
+			$largeurs = array('', 20, 120);
+			$styles = array('arial2', 'arial1', 'arial1');
+	}
+	spip_free_result($result_message);
+	echo afficher_liste($largeurs, $table, $styles);
+
+	echo "</TABLE>";
+	echo "</div>\n\n";
+	if ($important) fin_cadre_couleur();
+}
+
+function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
+{
+	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
+
+	$vals = array();
+
+	$id_message = $row['id_message'];
+	$date = $row["date_heure"];
+	$date_fin = $row["date_fin"];
+	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+	$type = $row["type"];
+	$rv = $row["rv"];
+	$messages_vus[$id_message] = $id_message;
 
 			//
 			// Titre
 			//
 
-			$s = "<a href='" . generer_url_ecrire("message","id_message=$id_message") . "' style='display: block;'>";
+	$s = "<a href='" . generer_url_ecrire("message","id_message=$id_message") . "' style='display: block;'>";
 
-			switch ($type) {
-			case 'pb' :
+	switch ($type) {
+	case 'pb' :
 				$puce = "m_envoi_bleu$spip_lang_rtl.gif";
 				break;
-			case 'memo' :
+	case 'memo' :
 				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
 				break;
-			case 'affich' :
+	case 'affich' :
 				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
 				break;
-			case 'normal':
-			default:
+	case 'normal':
+	default:
 				$puce = "m_envoi$spip_lang_rtl.gif";
 				break;
-			}
+	}
 				
-			$s .= http_img_pack("$puce", "", "width='14' height='7' border='0'");
-			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
-			$vals[] = $s;
+	$s .= http_img_pack("$puce", "", "width='14' height='7' border='0'");
+	$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
+	$vals[] = $s;
 
 			//
 			// Auteurs
 
-			if ($afficher_auteurs) {
-				$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
+	if ($afficher_auteurs) {
+		$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
 
-				$auteurs = '';
-				while ($row_auteurs = spip_fetch_array($result_auteurs)) {
-					$id_auteur = $row_auteurs['id_auteur'];
-					$auteurs[] = "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
-				}
+		$auteurs = '';
+		while ($row_auteurs = spip_fetch_array($result_auteurs)) {
+			$id_auteur = $row_auteurs['id_auteur'];
+			$auteurs[] = "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
+		}
 
-				if ($auteurs AND $type == 'normal') {
-					$s = "<FONT FACE='Arial,Sans,sans-serif' SIZE=1>";
-					$s .= join(', ', $auteurs);
-					$s .= "</FONT>";
-				}
-				else $s = "&nbsp;";
-				$vals[] = $s;
-			}
+		if ($auteurs AND $type == 'normal') {
+			$s = "<FONT FACE='Arial,Sans,sans-serif' SIZE=1>";
+			$s .= join(', ', $auteurs);
+			$s .= "</FONT>";
+		} else $s = "&nbsp;";
+		$vals[] = $s;
+	}
 			
 			//
 			// Messages de forums
 			
-			$total_forum = spip_num_rows(spip_query("SELECT id_message FROM spip_forum WHERE id_message = $id_message"));
+	$total_forum = spip_num_rows(spip_query("SELECT id_message FROM spip_forum WHERE id_message = $id_message"));
 			
-			if ($total_forum > 0) $vals[] = "($total_forum)";
-			else $vals[] = "";
-			
-		
+	if ($total_forum > 0) $vals[] = "($total_forum)";
+	else $vals[] = "";
 			
 			//
 			// Date
 			//
 			
-			$s = affdate($date);
-			if ($rv == 'oui') {
-				$jour=journum($date);
-				$mois=mois($date);
-				$annee=annee($date);
+	$s = affdate($date);
+	if ($rv == 'oui') {
+		$jour=journum($date);
+		$mois=mois($date);
+		$annee=annee($date);
 				
-				$heure = heures($date).":".minutes($date);
-				if (affdate($date) == affdate($date_fin))
-					$heure_fin = heures($date_fin).":".minutes($date_fin);
-				else 
-					$heure_fin = "...";
+		$heure = heures($date).":".minutes($date);
+		if (affdate($date) == affdate($date_fin))
+			$heure_fin = heures($date_fin).":".minutes($date_fin);
+		else 
+			$heure_fin = "...";
 
-				$s = "<div " . 
-				  http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
-				  "><a href='" . generer_url_ecrire("calendrier","type=jour&jour=$jour&mois=$mois&annee=$annee") . "'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
-			} else {
-				$s = "<font color='#999999'>$s</font>";
-			}
+		$s = "<div " . 
+			http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
+			"><a href='" . generer_url_ecrire("calendrier","type=jour&jour=$jour&mois=$mois&annee=$annee") . "'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
+	} else {
+		$s = "<font color='#999999'>$s</font>";
+	}
 			
-			$vals[] = $s;
+	$vals[] = $s;
 
-			$table[] = $vals;
-		}
-
-		if ($afficher_auteurs) {
-			$largeurs = array('', 130, 20, 120);
-			$styles = array('arial2', 'arial1', 'arial1', 'arial1');
-		}
-		else {
-			$largeurs = array('', 20, 120);
-			$styles = array('arial2', 'arial1', 'arial1');
-		}
-		echo afficher_liste($largeurs, $table, $styles);
-
-		echo "</TABLE>";
-		echo "</div>\n\n";
-		spip_free_result($result_message);
-		if ($important) fin_cadre_couleur();
+	return $vals;
 }
 
 ?>
