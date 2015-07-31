@@ -111,7 +111,7 @@ function exec_admin_tech_dist()
  
 	echo 
  		generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
- 		fin_cadre_trait_couleur();
+ 		fin_cadre_trait_couleur(true);
 
 	//
 	// Restauration de la base
