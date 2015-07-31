@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Thay &#273;&#7893;i',
 'bouton_chercher' => 'T&igrave;m',
 'bouton_choisir' => 'Ch&#7885;n',
-'bouton_enregistrer' => '<NEW>Enregistrer',
+'bouton_enregistrer' => 'L&#432;u Tr&#7919;',
 'bouton_radio_desactiver_messagerie_interne' => 'Kh&ocirc;ng s&#7917; d&#7909;ng th&#432; t&iacute;n n&#7897;i b&#7897; ',
 'bouton_radio_envoi_annonces' => 'G&#7917;i th&ocirc;ng b&aacute;o &#273;&#7871;n Ban Bi&ecirc;n T&#7853;p',
 'bouton_radio_non_envoi_annonces' => 'Kh&ocirc;ng g&#7917;i th&ocirc;ng b&aacute;o',
@@ -185,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
+'fichier_introuvable' => 'Kh&ocirc;ng ti&#7873;m r&agrave; h&#7891; s&ograve; @fichier@',
 'form_deja_inscrit' => 'B&#7841;n &#273;&atilde; ghi danh r&#7891;i.',
 'form_email_non_valide' => '&#272;&#7883;a ch&#7881; email c&#7911;a b&#7841;n kh&ocirc;ng &#273;&uacute;ng.',
 'form_forum_access_refuse' => 'B&#7841;n kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o website n&agrave;y n&#7919;a.',
@@ -246,8 +246,8 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'form_prop_sujet' => 'T&#7921;a &#273;&#7873;',
 'form_prop_url_site' => 'URL webiste',
 'forum_acces_refuse' => 'B&#7841;n kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o c&aacute;c di&#7877;n &#273;&agrave;n n&agrave;y n&#7919;a.',
-'forum_attention_dix_caracteres' => '<MODIF><B>C&#7843;nh b&aacute;o!</B> Th&#432; t&iacute;n qu&aacute; ng&#7855;n - d&#432;&#7899;i 10 m&#7851;u t&#7921;.',
-'forum_attention_trois_caracteres' => '<MODIF><B>C&#7843;nh b&aacute;o!</B> T&#7921;a &#273;&#7873; qu&aacute; ng&#7855;n - d&#432;&#7899;i 3 m&#7851;u t&#7921;.',
+'forum_attention_dix_caracteres' => '<B>C&#7843;nh b&aacute;o!</B> Th&#432; t&iacute;n qu&aacute; ng&#7855;n - Ph&#7843;i h&#417;n 10 m&#7851;u t&#7921;.',
+'forum_attention_trois_caracteres' => '<B>C&#7843;nh b&aacute;o!</B> T&#7921;a &#273;&#7873; qu&aacute; ng&#7855;n - Ph&#7843;i h&#417;n 3 m&#7851;u t&#7921;.',
 'forum_avez_selectionne' => 'B&#7841;n &#273;&atilde; ch&#7885;n:',
 'forum_cliquer_retour' => 'B&#7845;m <a href=\'@retour_forum@\'>v&ocirc; &#273;&acirc;y</a> &#273;&#7875; ti&#7871;p t&#7909;c.',
 'forum_forum' => 'di&#7877;n &#273;&agrave;n',

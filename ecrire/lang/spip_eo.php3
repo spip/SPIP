@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Kunligado malsukcesis: ne eblas iri al backend de tiu teksejo.',
 'avis_erreur' => 'eraro: vidu &#265;i-sube',
 'avis_erreur_connexion' => 'Konekteraro',
+'avis_erreur_cookie' => 'problemo de kuketo',
 'avis_erreur_fonction_contexte' => 'Programeraro. Tiu funkcio ne alvokeblas en tiu &#265;i kunteksto.',
 'avis_erreur_mysql' => 'MySQL-eraro',
 'avis_erreur_sauvegarde' => 'Eraro dum konservado(@type@ @id_objet@)! ',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&#348;an&#285;i',
 'bouton_chercher' => 'Ser&#265;i',
 'bouton_choisir' => 'Elekti',
+'bouton_enregistrer' => 'Registrigi',
 'bouton_radio_desactiver_messagerie_interne' => 'El&#349;alti la internan mesa&#285;ilon',
 'bouton_radio_envoi_annonces' => 'Sendi &#265;efartikolajn anoncojn',
 'bouton_radio_non_envoi_annonces' => 'Ne sendi anoncojn',
@@ -182,6 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Netrovebla dosiero @fichier@ ',
 'form_deja_inscrit' => 'Vi estas jam enskribita.',
 'form_email_non_valide' => 'Via retadreso ne validas.',
 'form_forum_access_refuse' => 'Vi ne havas plu alirrajton al tiu teksejo.',
@@ -248,8 +251,8 @@ Dankon pro via partopreno
 'form_prop_sujet' => 'Temo',
 'form_prop_url_site' => 'Adreso (URL) de la teksejo',
 'forum_acces_refuse' => 'Vi ne havas plu alirrajton al tiuj &#265;i forumoj.',
-'forum_attention_dix_caracteres' => '<b>Atentu!</b> via mesa&#285;o havas malpli ol dek signojn.',
-'forum_attention_trois_caracteres' => '<b>Atentu!</b> via titolo havas malpli ol tri signojn.',
+'forum_attention_dix_caracteres' => '<b>Atentu!</b> devigas vian mesa&#285;on pli ol dek signoj.',
+'forum_attention_trois_caracteres' => '<b>Atentu!</b> devigas vian titolon pli ol tri signoj.',
 'forum_avez_selectionne' => 'Vi elektis:',
 'forum_cliquer_retour' => 'Alklaku <a href=\'@retour_forum@\'>&#265;i tie</a> por da&#365;rigi.',
 'forum_forum' => 'forumo',

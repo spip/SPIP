@@ -106,7 +106,7 @@ H&#7891; s&#417; SPIP</a>.',
 // C
 'cache_mode_compresse' => 'H&#7891; s&#417; cache &#273;&#432;&#7907;c l&#432;u tr&#7919; trong d&#7841;ng n&eacute;n/&eacute;p.',
 'cache_mode_non_compresse' => 'H&#7891; s&#417; cache &#273;&#432;&#7907;c gi&#7919; nguy&ecirc;n d&#7841;ng, kh&ocirc;ng n&eacute;n.',
-'cache_modifiable_webmestre' => 'C&aacute;c th&ocirc;ng s&#7889; n&agrave;y c&oacute; th&#7875; &#273;&#432;&#7907;c webmaster &#273;i&#7873;u ch&#7881;nh.',
+'cache_modifiable_webmestre' => 'Webmaster c&oacute; th&#7875; &#273;i&#7873;u ch&#7881;nh c&aacute;c th&ocirc;ng s&#7889; n&agrave;y.',
 'calendrier_synchro' => 'N&#7871;u b&#7841;n c&oacute; thi&#7871;t tr&iacute; nhu li&#7879;u nh&#7853;t k&yacute; t&#432;&#417;ng &#7913;ng v&#7899;i <b>iCal</b>, b&#7841;n c&oacute; th&#7875; &#273;&#7891;ng b&#7897; h&oacute;a n&oacute; v&#7899;i trang web.',
 
 
@@ -118,6 +118,7 @@ H&#7891; s&#417; SPIP</a>.',
 'diff_texte_ajoute' => 'V&#259;n b&#7843;n th&ecirc;m v&agrave;o',
 'diff_texte_deplace' => 'V&#259;n b&#7843;n d&#7901;i &#273;i',
 'diff_texte_supprime' => 'V&#259;n b&#7843;n b&#7883; x&oacute;a',
+'double_clic_inserer_doc' => '<NEW>Double-cliquez pour ins&eacute;rer ce raccourci dans le texte',
 
 
 // E
@@ -346,6 +347,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_identification_publique' => 'Danh t&#225;nh c&#244;ng c&#7897;ng c&#7911;a b&#7841;n...',
 'info_image_process' => 'Xin ch&#7885;n c&aacute;ch t&#7841;o ra h&igrave;nh trang tr&iacute; b&#7857;ng b&#7845;m tr&ecirc;n h&igrave;nh &#273;&#7865;p nh&#7845;t.',
 'info_image_process2' => '<b>N.B.</b> <i>N&#7871;u b&#7841;n kh&ocirc;ng th&#7845;y h&igrave;nh n&agrave;o c&#7843; c&oacute; ngh&#297;a l&agrave; m&aacute;y ch&#7911; ch&#432;a &#273;&#432;&#7907;c thi&#7871;t tr&iacute; &#273;&#7875; s&#7917; d&#7909;ng h&igrave;nh. N&#7871;u b&#7841;n mu&#7889;n d&ugrave;ng h&igrave;nh, li&ecirc;n l&#7841;c v&#7899;i nh&oacute;m ph&#7909; tr&aacute;ch k&#7929; thu&#7853;t c&#7911;a c&ocirc;ng ty cung c&#7845;p d&#7883;ch v&#7909; &#273;&#7875; y&ecirc;u c&#7847;u c&oacute; extension &laquo;GD&raquo; hay &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => '<NEW>Images calcul&eacute;es automatiquement',
 'info_informations_personnelles' => 'B&#432;&#7899;c th&#7913; n&#259;m: <B>D&#7919; ki&#7879;n c&#225; nh&#226;n</B>',
 'info_inscription_automatique' => 'T&#7921; &#273;&#7897;ng ghi danh c&#225;c ch&#7911; b&#250;t m&#7899;i',
 'info_jeu_caractere' => 'B&#7843;ng m&#227; c&#7911;a website',
@@ -463,6 +465,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_redacteurs' => 'Ch&#7911; b&#250;t',
 'info_redaction_en_cours' => '&#272;ANG SO&#7840;N',
 'info_redirection' => 'Chuy&#7875;n h&#432;&#7899;ng',
+'info_referencer_doc_distant' => '<NEW>R&eacute;f&eacute;rencer un document sur l\'internet&nbsp;:',
 'info_refuses' => 'B&#224;i c&#7911;a b&#7841;n b&#7883; t&#7915; ch&#7889;i',
 'info_reglage_ldap' => 'Ch&#7885;n l&#7921;a: <B>&#272;i&#7873;u ch&#7881;nh vi&#7879;c nh&#7853;p LDAP</b>',
 'info_renvoi_article' => '<B>Chuy&#7875;n h&#432;&#7899;ng.</B> B&#224;i n&#224;y n&#7889;i &#273;&#7871;n trang: ',
@@ -568,6 +571,9 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'info_visiteur_2' => ' c&#7911;a website c&#244;ng',
 'info_visiteurs' => 'Kh&#225;ch',
 'info_visiteurs_02' => 'Kh&#225;ch c&#7911;a website c&#244;ng',
+'install_echec_annonce' => '<NEW>L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...',
+'install_extension_mbstring' => '<NEW>SPIP ne fonctionne pas avec&nbsp;:',
+'install_extension_php_obligatoire' => '<NEW>SPIP exige l\'extension php&nbsp;:',
 'install_select_langue' => 'Ch&#7885;n m&#7897;t ng&ocirc;n ng&#7919;, r&#7891;i b&#7845;m v&agrave;o n&uacute;t "K&#7871; ti&#7871;p" &#273;&#7875; b&#7855;t &#273;&#7847;u th&#7875; th&#7913;c thi&#7871;t tr&iacute;.',
 'intem_redacteur' => 'ch&#7911; b&uacute;t',
 'item_accepter_inscriptions' => 'Cho ph&eacute;p ghi danh',
@@ -698,6 +704,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 
 
 // T
+'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Trang web kh&ocirc;ng c&oacute; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP s&#7869; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code> v&agrave;o kho&#7843;ng <b>@octets@</b> d&#7919; li&#7879;u.',
 'taille_cache_octets' => 'Kh&#7893; c&#7911;a cache hi&#7879;n th&#7901;i l&agrave; @octets@.',
@@ -737,8 +744,8 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_crash_base' => 'N&#7871;u database b&#7883; h&#432;, b&#7841;n c&#243; th&#7875; t&#236;m c&#225;ch s&#7917;a ch&#7919;a t&#7921; &#273;&#7897;ng.',
 'texte_creer_rubrique' => '&#272;&#7875; vi&#7871;t b&#224;i,<BR>b&#7841;n ph&#7843;i l&#7853;p ra m&#7897;t &#273;&#7873; m&#7909;c. ',
 'texte_date_creation_article' => 'NG&Agrave;Y VI&#7870;T B&Agrave;I:',
-'texte_date_publication_anterieure' => 'NG&Agrave;Y PH&Aacute;T H&Agrave;NH TR&#431;&#7898;C &#272;&Oacute;&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'D&#7845;u ng&#224;y ph&#225;t h&#224;nh tr&#432;&#7899;c &#273;&#243;.',
+'texte_date_publication_anterieure' => 'Ng&agrave;y ph&aacute;t h&agrave;nh tru&#7899;c &#273;&oacute;&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'D&#7845;u ng&agrave;y ph&aacute;t h&agrave;nh tr&#432;&#7899;c &#273;&oacute;.',
 'texte_date_publication_article' => 'NG&Agrave;Y &#272;&#258;NG T&#7842;I ONLINE&nbsp;:',
 'texte_demander_blocage_priori' => 'Nh&#7919;ng m&#7889;i n&#7889;i t&#432;&#417;ng lai t&#7915; website n&#224;y s&#7869; b&#7883; ng&#7863;n ch&#7863;n tr&#432;&#7899;c.',
 'texte_descriptif_petition' => 'M&#244; t&#7843; Th&#7881;nh nguy&#7879;n th&#432;',
