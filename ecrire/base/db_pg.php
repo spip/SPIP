@@ -401,6 +401,7 @@ function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 
 	return spip_pg_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
 }
+
 // http://doc.spip.org/@spip_pg_update
 function spip_pg_update($table, $champs, $where='', $desc=array()) {
 
@@ -668,7 +669,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	$r = @pg_query($link, $q);
 
 	if (!$r)
-		spip_log("table $nom deja la");
+		spip_log("creation de la table $nom impossible (deja la ?)");
 	else {
 		foreach($keys as $index) {pg_query($link, $index);}
 	} 
@@ -709,7 +710,7 @@ function mysql2pg_type($v)
 		   preg_replace("/unsigned/i", '', 	
 		   preg_replace("/double/i", 'double precision', 	
 		   preg_replace("/tinyint/i", 'int', 	
-		     str_replace("VARCHAR(255) BINARY", 'bytea', 
+		     preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'bytea', 
 				 preg_replace("/ENUM *[(][^)]*[)]/", "varchar(255)",
 					      $v 
 				 ))))))))))));
