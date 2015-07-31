@@ -5,7 +5,7 @@ include ("inc.php3");
 
 if ($connect_statut == '0minirezo' AND $supp_syndic) {
 	$query="DELETE FROM spip_syndic WHERE id_syndic=$supp_syndic";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 }
 
 
@@ -25,7 +25,7 @@ fin_boite_info();
 debut_droite();
 
 $request_syndic="SELECT sites.*, COUNT(*) AS nombre, MAX(articles.date) AS max_date FROM spip_syndic AS sites, spip_syndic_articles AS articles WHERE sites.id_syndic=articles.id_syndic GROUP BY sites.id_syndic ORDER BY max_date DESC";
-$result_syndic=mysql_query($request_syndic);
+$result_syndic=spip_query($request_syndic);
 
 while($row=mysql_fetch_array($result_syndic)){
 	$id_syndic=$row["id_syndic"];
@@ -42,7 +42,7 @@ while($row=mysql_fetch_array($result_syndic)){
 	echo "<br><font size='1'>NOMBRE D'ARTICLES SYNDIQU&Eacute;S :</font> <b>$nombre</b>";
 	echo "<br><font size='1'>DERNI&Egrave;RE MISE &Agrave; JOUR :</font> <b>".affdate($max_date)."</b>";
 
-	$result_rub=mysql_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$result_rub=spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 	while($row=mysql_fetch_array($result_rub)){
 		$titre_rubrique=typo($row["titre"]);
 	}

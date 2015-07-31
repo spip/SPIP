@@ -31,7 +31,7 @@ if (!$email) {
 }
 else {
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$ok = true;
 
 	if (mysql_num_rows($result) > 0) {
@@ -55,7 +55,7 @@ else {
 
 		$mdpass = md5($pass);
 		$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut) VALUES ('Auteur forum', '$email', '', '$mdpass', '6forum')";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 
 		$nom_site = lire_meta("nom_site");
 		$adresse_site = lire_meta("adresse_site");

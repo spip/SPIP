@@ -24,14 +24,14 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 if ($purger_index == "oui") {
 	if (verifier_action_auteur("purger_index", $hash)) {
-		mysql_query("DELETE FROM spip_index_articles");
-		mysql_query("DELETE FROM spip_index_auteurs");
-		mysql_query("DELETE FROM spip_index_breves");
-		mysql_query("DELETE FROM spip_index_mots");
-		mysql_query("DELETE FROM spip_index_rubriques");
-		mysql_query("DELETE FROM spip_index_syndic");
+		spip_query("DELETE FROM spip_index_articles");
+		spip_query("DELETE FROM spip_index_auteurs");
+		spip_query("DELETE FROM spip_index_breves");
+		spip_query("DELETE FROM spip_index_mots");
+		spip_query("DELETE FROM spip_index_rubriques");
+		spip_query("DELETE FROM spip_index_syndic");
 
-		mysql_query("DELETE FROM spip_index_dico");
+		spip_query("DELETE FROM spip_index_dico");
 	}
 }
 

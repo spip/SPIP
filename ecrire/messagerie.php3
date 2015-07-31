@@ -3,13 +3,13 @@
 include ("inc.php3");
 
 if ($supp_dest) {
-	mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
 }
 
 if ($detruire_message) {
-	mysql_query("DELETE FROM spip_messages WHERE id_message=$detruire_message");
-	mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
-	mysql_query("DELETE FROM spip_forum WHERE id_message=$detruire_message");
+	spip_query("DELETE FROM spip_messages WHERE id_message=$detruire_message");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
+	spip_query("DELETE FROM spip_forum WHERE id_message=$detruire_message");
 }
 
 
@@ -44,7 +44,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 	// Interdire l'affichage de message en double
 	if ($messages_vus) {
-		$query_message .= ' AND spip_messages.id_message NOT IN ('.join(',', $messages_vus).')';
+		$query_message .= ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')';
 	}
 
 	$query_message .= ' ORDER BY date_heure DESC';
@@ -60,7 +60,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 		echo $tranches;
 
-		$result_message = mysql_query($query_message);
+		$result_message = spip_query($query_message);
 		$num_rows = mysql_num_rows($result_message);
 
 		while($row = mysql_fetch_array($result_message)) {
@@ -106,8 +106,8 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			// Auteurs
 
 			if ($afficher_auteurs) {
-				$query_auteurs = "SELECT spip_auteurs.nom FROM spip_auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=spip_auteurs.id_auteur";
-				$result_auteurs = mysql_query($query_auteurs);
+				$query_auteurs = "SELECT auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur";
+				$result_auteurs = spip_query($query_auteurs);
 				$auteurs = '';
 				while ($row_auteurs = mysql_fetch_array($result_auteurs)) {
 					$auteurs[] = typo($row_auteurs['nom']);
@@ -153,26 +153,31 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 $messages_vus = '';
 
-$query_message = "SELECT * FROM spip_messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND rv='oui' AND date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND statut='publie' AND lien.id_message=spip_messages.id_message";
+$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+	"WHERE lien.id_auteur=$connect_id_auteur AND rv='oui' AND date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) ".
+	"AND statut='publie' AND lien.id_message=messages.id_message";
 afficher_messages("Vos rendez-vous &agrave; venir", $query_message, true, true);
 
-$query_message = "SELECT * FROM spip_messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
+$query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
 afficher_messages("Vos pense-b&ecirc;te", $query_message, false, true);
 
-$query_message = "SELECT * FROM spip_messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=spip_messages.id_message";
+$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+	"WHERE lien.id_auteur=$connect_id_auteur AND vu='non' ".
+	"AND statut='publie' AND lien.id_message=messages.id_message";
 afficher_messages("Nouveaux messages", $query_message, true, true);
 
-$query_message = "SELECT * FROM spip_messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=spip_messages.id_message";
+$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+	"WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message";
 afficher_messages("Discussions en cours", $query_message, true, false);
 
-$query_message = "SELECT * FROM spip_messages WHERE id_auteur=$connect_id_auteur AND statut='redac'";
+$query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='redac'";
 afficher_messages("Vos messages en cours de r&eacute;daction", $query_message, true, false, false);
 
-$query_message = "SELECT * FROM spip_messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb'";
+$query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb'";
 afficher_messages("Vos anciens pense-b&ecirc;te", $query_message, false, false, false);
 
 if ($connect_statut == '0minirezo') {
-	$query_message = "SELECT * FROM spip_messages WHERE statut='publie' AND type='affich'";
+	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
 	afficher_messages("Annonces <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='IMG2/m_envoi_affich.gif' width='14' height='7' border='0'>Ajouter</a></font>", $query_message, false, false, false, true);
 }
 

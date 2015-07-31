@@ -48,7 +48,7 @@ function purger_repertoire($dir, $age, $regexp = '') {
 			if (($t - filemtime($chemin)) > $age) {
 				@unlink($chemin);
 				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 		else if (is_dir($chemin)) {

@@ -14,7 +14,7 @@ function ecrire_stats() {
 	$my_ref = "\n".substr(md5($my_ref), 0, 15);
 
 	$query = "SELECT visites, referers FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
 		$visites = $row[0];
@@ -24,10 +24,10 @@ function ecrire_stats() {
 
 		if (!ereg($my_ref, $referers)) {
 			$referers .= $my_ref;
-			mysql_query("UPDATE spip_articles SET visites=$visites, referers='$referers' WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET visites=$visites, referers='$referers' WHERE id_article=$id_article");
 		}
 		else {
-			mysql_query("UPDATE spip_articles SET visites=$visites WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET visites=$visites WHERE id_article=$id_article");
 		}
 
 		$num_ref = strlen($referers) / 16;

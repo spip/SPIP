@@ -7,7 +7,7 @@ include_local ("inc_logos.php3");
 
 
 $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while($row = mysql_fetch_array($result)) {
 	$titre = $row["titre"];
@@ -41,7 +41,7 @@ $mots_cles_forums = lire_meta("mots_cles_forums");
 
 if ($connect_statut == "0minirezo") {
 	$query_forum = "SELECT * FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut!='redac' ORDER BY date_heure DESC";
-	$result_forum = mysql_query($query_forum);
+	$result_forum = spip_query($query_forum);
 	afficher_forum($result_forum, $forum_retour, 'oui');
 }
 

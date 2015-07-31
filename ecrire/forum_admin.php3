@@ -27,7 +27,7 @@ if ($connect_statut == "0minirezo"){
 	if (!$debut) $debut = 0;
 
 	$query_forum = "SELECT COUNT(*) FROM spip_forum WHERE statut='privadm' AND id_parent=0";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
@@ -53,7 +53,7 @@ if ($connect_statut == "0minirezo"){
 
 
 	$query_forum="SELECT * FROM spip_forum WHERE statut='privadm' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut,10";
-	$result_forum=mysql_query($query_forum);
+	$result_forum=spip_query($query_forum);
 
 	afficher_forum($result_forum,"forum_admin.php3");
 } else {

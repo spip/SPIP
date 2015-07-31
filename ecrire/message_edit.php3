@@ -11,23 +11,23 @@ debut_droite();
 if ($new == "oui") {
 	$mydate = date("YmdHis", time() - 2 * 24 * 3600);
 	$query = "DELETE FROM spip_messages WHERE (statut = 'redac') && (date_heure < $mydate)";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 
 	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('Nouveau message', NOW(), '$statut', '$type', $connect_id_auteur)";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$id_message = mysql_insert_id();
 	
 	if ($rv) {
-		mysql_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00' WHERE id_message = $id_message");
+		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00' WHERE id_message = $id_message");
 	}
 
 	if ($type != "affich"){
-		mysql_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')");
+		spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')");
 		if ($dest) {
-			mysql_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$dest','$id_message','non')");
+			spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$dest','$id_message','non')");
 		}
 		else if ($type == 'normal') $ajouter_auteur = true;
 	}
@@ -35,7 +35,7 @@ if ($new == "oui") {
 
 
 $query = "SELECT * FROM spip_messages WHERE id_message=$id_message";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$id_message = $row[0];

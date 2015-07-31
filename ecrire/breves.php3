@@ -12,7 +12,7 @@ debut_droite();
 
 if ($statut) {
 	$query="UPDATE spip_breves SET date_heure=NOW(), statut=\"$statut\" WHERE id_breve=$id_breve";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 	calculer_rubriques();
 }
 
@@ -31,7 +31,7 @@ function aff_breves($id_rubrique){
 
 	$query="SELECT id_breve, date_heure, titre, statut FROM spip_breves WHERE id_rubrique='$id_rubrique' AND FIND_IN_SET(statut,'$les_breves')>0 ORDER BY date_heure DESC";
 	
-	$result=mysql_query($query);
+	$result=spip_query($query);
 	$nombre=mysql_num_rows($result);
 	
 	if ($nombre>$nombre_aff){
@@ -51,7 +51,7 @@ function aff_breves($id_rubrique){
 
 		$query="SELECT id_breve, date_heure, titre, statut FROM spip_breves WHERE id_rubrique='$id_rubrique' AND FIND_IN_SET(statut,'$les_breves')>0 ORDER BY date_heure DESC LIMIT $comm,$nombre_aff";
 	
-		$result=mysql_query($query);
+		$result=spip_query($query);
 	}
 
 	if (mysql_num_rows($result)>0){
@@ -119,7 +119,7 @@ function aff_breves($id_rubrique){
 
 function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
  	while($row=mysql_fetch_array($result)){
 		$id_rubrique=$row[0];

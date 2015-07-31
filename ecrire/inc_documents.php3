@@ -23,7 +23,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
 				if ($inclus)
 					$req .= " AND inclus='$inclus'";
-				if (@mysql_fetch_array(mysql_query($req)))
+				if (@mysql_fetch_array(spip_query($req)))
 					$texte_upload .= "\n<option value=\"$entryName\">$entryName</option>";
 			}
 		}
@@ -183,7 +183,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 
-	$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 	if ($type = @mysql_fetch_array($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
@@ -409,9 +409,9 @@ function afficher_documents_non_inclus($id_article) {
 		
 		// Ne pas afficher vignettes en tant qu'images sans docs
 		//// Documents associes
-		$query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
-			"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".
-			"AND #table.mode='document' AND #table.inclus='non' ORDER BY #table.titre";
+		$query = "SELECT #cols FROM #table AS docs, spip_documents_articles AS l ".
+			"WHERE l.id_article=$id_article AND l.id_document=docs.id_document ".
+			"AND docs.mode='document' AND docs.inclus='non' ORDER BY docs.titre";
 		
 		$documents_lies = fetch_document($query);
 
@@ -447,7 +447,7 @@ function afficher_documents_non_inclus($id_article) {
 		
 		echo "<font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
-		$result_types_docs = mysql_query($query_types_docs);
+		$result_types_docs = spip_query($query_types_docs);
 		
 		while($row=mysql_fetch_array($result_types_docs)){
 			$extension=$row['extension'];
@@ -520,7 +520,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 
-	$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 	if ($type = @mysql_fetch_array($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
@@ -711,14 +711,14 @@ function afficher_documents_colonne($id_article) {
 		
 		// Ne pas afficher vignettes en tant qu'images sans docs
 		//// Documents associes
-		$query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
-			"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".
-			"AND #table.mode='document' ORDER BY #table.titre";
+		$query = "SELECT #cols FROM #table AS docs, spip_documents_articles AS l ".
+			"WHERE l.id_article=$id_article AND l.id_document=docs.id_document ".
+			"AND docs.mode='document' ORDER BY docs.titre";
 		
 		$documents_lies = fetch_document($query);
 
 		if ($documents_lies){
-			$res = mysql_query("SELECT DISTINCT id_vignette FROM spip_documents ".
+			$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 				"WHERE id_document in (".join(',', $documents_lies).")");
 			while ($v = mysql_fetch_object($res))
 				$vignettes[] = $v->id_vignette;
@@ -730,9 +730,9 @@ function afficher_documents_colonne($id_article) {
 		}
 	
 		//// Images sans documents
-		$query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
-				"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".$docs_exclus.
-				"AND #table.mode='vignette' AND #table.titre!='' ORDER BY #table.titre";
+		$query = "SELECT #cols FROM #table AS docs, spip_documents_articles AS l ".
+				"WHERE l.id_article=$id_article AND l.id_document=docs.id_document ".$docs_exclus.
+				"AND docs.mode='vignette' AND docs.titre!='' ORDER BY docs.titre";
 		
 		$images_liees = fetch_document($query);
 		
@@ -805,7 +805,7 @@ function afficher_documents_colonne($id_article) {
 		echo "<p><font size=1>";
 		echo "<p><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
-		$result_types_docs = mysql_query($query_types_docs);
+		$result_types_docs = spip_query($query_types_docs);
 		
 		while($row=mysql_fetch_array($result_types_docs)){
 			$extension=$row['extension'];
@@ -858,7 +858,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 
-	$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 	if ($type = @mysql_fetch_array($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
@@ -1137,7 +1137,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 function boite_documents_article($id_article) {
 	global $puce;
 
-	$result_doc = mysql_query("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
+	$result_doc = spip_query("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
 		FROM spip_types_documents AS type, spip_documents AS doc, spip_documents_articles AS lien
 		WHERE lien.id_article=$id_article AND doc.id_document = lien.id_document AND doc.id_type = type.id_type
 		GROUP BY doc.id_type");

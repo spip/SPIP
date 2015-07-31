@@ -21,22 +21,22 @@ if ($new == "oui") {
 
 	$mydate = date("YmdHis", time() - 24 * 3600);
 	$query = "DELETE FROM spip_articles WHERE (statut = 'poubelle') && (maj < $mydate)";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	$forums_publics = substr(lire_meta('forums_publics'),0,3);
 
 	$query = "INSERT INTO spip_articles (titre, id_rubrique, date, statut, accepter_forum) VALUES ('Nouvel article', '$id_rubrique', NOW(), 'poubelle', '$forums_publics')";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$id_article = mysql_insert_id();
 
 	$query = "DELETE FROM spip_auteurs_articles WHERE id_article=$id_article";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$query = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES('$connect_id_auteur','$id_article')";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 }
 
 $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
 	$id_article = $row[0];
@@ -59,7 +59,7 @@ while ($row = mysql_fetch_array($result)) {
 	}
 
 	$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
-	$result_auteur = mysql_query($query);
+	$result_auteur = spip_query($query);
 
 	$flag_auteur = (mysql_num_rows($result_auteur) > 0);
 
@@ -72,7 +72,7 @@ if (!$flag_editable) {
 
 if ($id_document) {
 	$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_article=$id_article";
-	$result_doc = mysql_query($query_doc);
+	$result_doc = spip_query($query_doc);
 	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
 } else {
 	$flag_document_editable = false;
@@ -83,7 +83,7 @@ $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_document_editable) {
 	$titre = addslashes(corriger_caracteres($titre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
-	mysql_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
+	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
 }
 		
 	
@@ -184,7 +184,7 @@ function enfant($leparent){
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];

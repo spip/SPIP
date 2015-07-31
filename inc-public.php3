@@ -101,21 +101,21 @@ else {
 	}
 	else if ($id_breve) {
 		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
 			$id_rubrique_fond = $row[0];
 		}
 	}
 	else if ($id_syndic) {
 		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
 			$id_rubrique_fond = $row[0];
 		}
 	}
 	else if ($id_article) {
 		$query = "SELECT id_rubrique, chapo FROM spip_articles WHERE id_article='$id_article'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
 			$id_rubrique_fond = $row[0];
 			$chapo = $row[1];
@@ -256,7 +256,7 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 	if ($db_ok) {
 		unlink('CACHE/.purge2');
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		unset($fichiers);
 		while ($row = mysql_fetch_array($result)) {
 			$fichier = $row[0];
@@ -264,7 +264,7 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 		}
 		if ($fichiers) {
 			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
-			mysql_query($query);
+			spip_query($query);
 		}
 	}
 }

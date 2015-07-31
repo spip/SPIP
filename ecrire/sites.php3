@@ -78,7 +78,7 @@ function parent($collection){
 	$parents=ereg_replace("(~+)","\\1~",$parents);
 	if ($collection!=0){	
 		$query2="SELECT * FROM spip_rubriques WHERE id_rubrique=\"$collection\"";
-		$result2=mysql_query($query2);
+		$result2=spip_query($query2);
 
 		while($row=mysql_fetch_array($result2)){
 			$id_rubrique = $row[0];
@@ -111,16 +111,16 @@ if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 
 	$mydate = date("YmdHis", time() - 12 * 3600);
 	$query = "DELETE FROM spip_syndic WHERE (statut = 'refuse') && (maj < $mydate)";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	$query = "INSERT spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication) ".
 		"VALUES ('Site introuvable', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non')";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$id_syndic = mysql_insert_id();
 }
 
 $query = "SELECT statut FROM spip_syndic WHERE id_syndic='$id_syndic'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$statut = $row["statut"];
@@ -148,7 +148,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$query = "UPDATE spip_syndic ".
 			"SET nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' ".
 			"WHERE id_syndic=$id_syndic";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$link = new Link('sites.php3');
 		$link->addVar('id_syndic');
@@ -166,11 +166,11 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 if ($nouveau_statut AND $flag_administrable) {
 	$statut = $nouveau_statut;
 	$query = "UPDATE spip_syndic SET statut='$statut' WHERE id_syndic='$id_syndic'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	//if ($statut == 'refuse') $redirect_ok = 'oui';
 	if ($statut == 'publie') {
 		$query = "UPDATE spip_syndic SET date=NOW() WHERE id_syndic='$id_syndic'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 	}
 	calculer_rubriques_publiques();
 	if ($statut == 'publie') {
@@ -190,13 +190,13 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	$url_syndic = addslashes($url_syndic);
 
 	$query = "UPDATE spip_syndic SET id_rubrique='$id_rubrique', nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic='$id_syndic'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	if ($syndication_old != $syndication OR $url_syndic != $old_syndic) {
 		$recalcul = "oui";
 	}
 	if ($syndication_old != $syndication AND $syndication == "non") {
-		mysql_query("DELETE FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
+		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 	}
 	calculer_rubriques_publiques();
 	if ($statut == 'publie') {
@@ -216,7 +216,7 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_syndic SET date='$annee-$mois-$jour' WHERE id_syndic=$id_syndic";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	calculer_dates_rubriques();
 }
 
@@ -234,7 +234,7 @@ if ($redirect AND $redirect_ok == 'oui') {
 calculer_droits();
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
@@ -487,7 +487,7 @@ echo "<img src='IMG2/message-off.gif' alt='Poster un message' width='51' height=
 echo "<p align='left'>\n";
 
 $query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic='$id_syndic' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
-$result_forum = mysql_query($query_forum);
+$result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 
 

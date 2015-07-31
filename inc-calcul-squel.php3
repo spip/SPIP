@@ -328,14 +328,15 @@ function parser_boucle($texte, $id_parent) {
 
 						// Traitement general des relations externes
 						if ($s = $tables_relations[$type][$col]) {
-							$col_table = $s;
-							$req_from[] = $col_table;
+							$col_table = "rel_$type";
+							//$col_table = $s;
+							$req_from[] = "$s AS $col_table";
 							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
 						// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-						else if ($type != mots AND ($col == 'type_mot' OR $col == 'titre_mot')) {
+						else if ($type != 'mots' AND ($col == 'type_mot' OR $col == 'titre_mot')) {
 							$col_lien = 'spip_mots_'."$type";
 							if ($type == 'forums') $col_lien = "spip_mots_forum";
 							if ($type == 'syndication') $col_lien = "spip_mots_syndic";
@@ -348,13 +349,13 @@ function parser_boucle($texte, $id_parent) {
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
-						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
+/*						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
 							$col_table = 'spip_'.$type.'_'.substr($col, 3);
 							$req_from[] = $col_table;
 							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
-						}
+						}*/
 
 						// Cas particulier : selection des documents selon l'extension
 						else if ($type == 'documents' AND $col == 'extension') {
@@ -778,6 +779,7 @@ function parser($texte) {
 
 	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
 	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
+	$tables_relations['mots']['id_forum'] = 'spip_mots_forum';
 	$tables_relations['mots']['id_rubrique'] = 'spip_mots_rubriques';
 	$tables_relations['mots']['id_syndic'] = 'spip_mots_syndic';
 
@@ -1226,8 +1228,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'LESAUTEURS':
 		$milieu = '
 		if ($i = $contexte["id_article"]) {
-			$query_auteurs = "SELECT spip_auteurs.nom, spip_auteurs.email FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$i AND spip_auteurs.id_auteur=lien.id_auteur";
-			$result_auteurs = mysql_query($query_auteurs);
+			$query_auteurs = "SELECT auteurs.nom, auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$i AND auteurs.id_auteur=lien.id_auteur";
+			$result_auteurs = spip_query($query_auteurs);
 			$auteurs = "";
 			while($row_auteur = mysql_fetch_array($result_auteurs)) {
 				$nom_auteur = typo($row_auteur[0]);
@@ -1383,7 +1385,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$accepter_inscriptions = lire_meta("accepter_inscriptions");
 
 		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$contexte[id_article]";
- 		$result_petition = mysql_query($query_petition);
+ 		$result_petition = spip_query($query_petition);
 
 		if ($row_petition = mysql_fetch_array($result_petition)) {
 			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_signature($contexte[id_article]); ?".">";
@@ -1423,7 +1425,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'PETITION':
 		$milieu = '
 		$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$contexte[id_article]";
-		$result_petition = mysql_query($query_petition);
+		$result_petition = spip_query($query_petition);
 		if (mysql_num_rows($result_petition) > 0) $'.$nom_var.' = " ";
 		else $'.$nom_var.' = "";
 		';
@@ -1585,7 +1587,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				// le hex est indispensable : apparemment bug de mysql
 				// sur output decimal 64 bits (a cause du unsigned ?)
 				$query2 = "SELECT HEX(hash) FROM spip_index_dico WHERE ".join(" OR ", $dico);
-				$result2 = mysql_query($query2);
+				$result2 = spip_query($query2);
 				while ($row2 = mysql_fetch_array($result2)) {
 					$h[] = "0x".$row2[0];
 				}
@@ -1656,22 +1658,22 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		if ($id_article || $id_syndic) $hierarchie = construire_hierarchie($id_rubrique);
 		else $hierarchie = construire_hierarchie($id_parent);
-		if ($hierarchie) $hierarchie = explode("-", substr($hierarchie, 1));
-
-		$deb_class = 0;
-		if (ereg("([0-9]+),([0-9]*)", $instance->requete, $match)){
-			$deb_class = $match[1];
-			if ($match[2]) $fin_class = $match[2] + $deb_class;
-		}
-		if (!$fin_class) $fin_class = sizeof($hierarchie);
-
-		for ($i = $deb_class; $i < $fin_class; $i++) {
-		
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=".$hierarchie[$i];
+		if ($hierarchie) {
+			$hierarchie = explode("-", substr($hierarchie, 0, -1));
+			$deb_class = 0;
+			if (ereg("([0-9]+),([0-9]*)", $instance->requete, $match)){
+				$deb_class = $match[1];
+				if ($match[2]) $fin_class = $match[2] + $deb_class;
+			}
+			if (!$fin_class OR $fin_class > sizeof($hierarchie)) $fin_class = sizeof($hierarchie);
+	
+			$hierarchie = join(",", $hierarchie);
+			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie)";
 			if ($instance->doublons == "oui") $query .= " AND id_rubrique NOT IN ($id_doublons[rubriques])";
-			$result = mysql_query($query);
-				
-			if ($result) if ($row = mysql_fetch_array($result)) {
+			$query .= " ORDER BY _field LIMIT $deb_class, ".($fin_class - $deb_class);
+			$result = spip_query($query);
+
+			if ($result) while ($row = mysql_fetch_array($result)) {
 
 				$boucles[$id_boucle]->row = $row;
 				if ($retour) $retour .= $instance->separateur;
@@ -1684,11 +1686,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				if ($doublons == "oui") {
 					$id_doublons["rubriques"] .= ",".$row[0];
 				}
+
 		';
 		$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
 		$texte .= '
-			} // if
-		} // for
+				} // if
+//			} // for
+		} // if
 		';
 		$texte .= $code_fin;
 		return $texte;
@@ -1713,7 +1717,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		
 		if (!$requetes_cache[$valeurs]) {
 			$query_cache = "INSERT spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
-			mysql_query($query_cache);
+			spip_query($query_cache);
 			$requetes_cache[$valeurs] = 1;
 		}
 		';
@@ -1728,8 +1732,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= '	$query = $instance->requete;
-	//echo "<LI>$query";
-	$result = @mysql_query($query);
+	$result = @spip_query($query);
 	if (!$result) {
 		$retour .= "<blink>BOUCLE'.$id_boucle.'</blink> <small><i>$query</i></small> <blink>BOUCLE'.$id_boucle.'</blink>"; // debugger les squelettes
 	}

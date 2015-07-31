@@ -20,7 +20,7 @@ if($options != 'avancees') {
 // Annonces
 //
 $query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie' ORDER BY date_heure DESC";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if (mysql_num_rows($result) > 0){
 	echo "<p><table cellpadding=1 cellspacing=0 border=0 width=100%><tr><td width=100% bgcolor='black'>";
@@ -111,7 +111,7 @@ echo "<P align=left>";
 echo "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
 
 $query = "SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=0 ORDER BY titre";
-$result = mysql_query($query);
+$result = spip_query($query);
 while ($row = mysql_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	$titre_rubrique = typo($row['titre']);
@@ -196,7 +196,7 @@ if ($connect_statut == "0minirezo") {
 //
 
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if (mysql_num_rows($result) > 0) {
 
@@ -227,8 +227,8 @@ $post_dates = lire_meta("post_dates");
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
 	echo "<P align=left>";
 	afficher_articles("Les articles post-dat&eacute;s &agrave; para&icirc;tre",
-		"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE statut='publie' AND date>NOW() ORDER BY spip_articles.date");
+		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+		"FROM spip_articles WHERE statut='publie' AND date>NOW() ORDER BY date");
 }
 
 
@@ -238,7 +238,9 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 
 echo "<P align=left>";
 afficher_articles("Vos articles en cours de r&eacute;daction",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND spip_articles.statut=\"prepa\" ORDER BY spip_articles.date DESC");
+	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
 
 
 //
@@ -248,26 +250,26 @@ afficher_articles("Vos articles en cours de r&eacute;daction",
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles WHERE spip_articles.statut='prop' LIMIT 0,1";
-	$result = mysql_query($query);
+	$query = "SELECT id_article FROM spip_articles WHERE statut='prop' LIMIT 0,1";
+	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
 
 if (!$relief) {
 	$query = "SELECT id_breve FROM spip_breves WHERE statut='prop' LIMIT 0,1";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
 
 if (!$relief) {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
 
 if (!$relief AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	$query = "SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
 
@@ -281,7 +283,7 @@ if ($relief) {
 	//
 	afficher_articles("Les articles propos&eacute;s &agrave; la publication",
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE spip_articles.statut='prop' ORDER BY spip_articles.date DESC");
+		"FROM spip_articles WHERE statut='prop' ORDER BY date DESC");
 
 
 	//
@@ -313,8 +315,9 @@ if ($relief) {
 
 echo "<p>";
 afficher_articles("Vos articles en attente de validation",
-	"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-	"FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND lien.id_auteur='$connect_id_auteur' AND spip_articles.statut='prop' ORDER BY spip_articles.date");
+	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop' ORDER BY articles.date");
 
 if ($options == 'avancees') {
 
@@ -324,8 +327,9 @@ if ($options == 'avancees') {
 
 	echo "<p>";
 	afficher_articles("Vos derniers articles publi&eacute;s en ligne",
-		"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND spip_articles.statut=\"publie\" ORDER BY spip_articles.date DESC", true);
+		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 
 	//
 	//  Vos articles refuses
@@ -333,8 +337,9 @@ if ($options == 'avancees') {
 
 	echo "<p>";
 	afficher_articles("Vos articles refus&eacute;s",
-		"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND spip_articles.statut=\"refuse\" ORDER BY spip_articles.date DESC");
+		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"refuse\" ORDER BY articles.date DESC");
 
 }
 

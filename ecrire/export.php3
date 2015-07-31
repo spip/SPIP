@@ -41,7 +41,7 @@ function liste_rubriques($result) {
  		$t_rubriques = join(",", $t_rubriques);
  		$rubriques[] = $t_rubriques;
  		$query = "SELECT * FROM spip_rubriques WHERE id_parent IN ($t_rubriques)";
-		liste_rubriques(mysql_query($query));
+		liste_rubriques(spip_query($query));
 	}
 }
 
@@ -54,22 +54,22 @@ if ($id_rubrique)
 else
 	$query="SELECT * FROM spip_rubriques WHERE id_parent=0";
 
-liste_rubriques(mysql_query($query));
+liste_rubriques(spip_query($query));
 
 if ($rubriques) {
 	$rubriques = join(",", $rubriques);
 
 	$query = "SELECT id_article, statut, maj FROM spip_articles WHERE id_rubrique IN ($rubriques)";
-	liste_objets(mysql_query($query), "article");
+	liste_objets(spip_query($query), "article");
 
 	$query = "SELECT id_breve, statut, maj FROM spip_breves WHERE id_rubrique IN ($rubriques)";
-	liste_objets(mysql_query($query), "breve");
+	liste_objets(spip_query($query), "breve");
 
 	if ($articles) {
 		$articles = join(",", $articles);
 
 		$query = "SELECT DISTINCT spip_auteurs.id_auteur, maj FROM spip_auteurs, spip_auteurs_articles AS lien WHERE id_article IN ($articles) AND spip_auteurs.id_auteur=lien.id_auteur";
-		liste_objets(mysql_query($query), "auteur");
+		liste_objets(spip_query($query), "auteur");
 	}
 }
 

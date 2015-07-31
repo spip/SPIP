@@ -8,7 +8,7 @@ include_local ("inc_logos.php3");
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 }
 
 
@@ -20,7 +20,7 @@ function afficher_auteur_rubriques($leparent){
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row[0];
@@ -43,24 +43,24 @@ function afficher_auteur_rubriques($leparent){
 
 if ($connect_toutes_rubriques AND $add_rub){
 	$query = "INSERT INTO spip_auteurs_rubriques (id_auteur,id_rubrique) VALUES('$id_auteur','$add_rub')";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 }
 
 if ($connect_toutes_rubriques AND $supp_rub){
 	$query = "DELETE FROM spip_auteurs_rubriques WHERE id_auteur='$id_auteur' AND id_rubrique='$supp_rub'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 }
 
 
 $query = "SELECT nom FROM spip_auteurs WHERE id_auteur='$id_auteur'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) $nom_auteur = $row[0];
 
 if ($connect_statut == "0minirezo" OR $connect_id_auteur == $id_auteur) {
 	if ($new == "oui") {
 		$query = "INSERT INTO spip_auteurs (nom,statut) VALUES ('Nouvel auteur','5poubelle')";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$id_auteur = mysql_insert_id();
 	}
 	if ($nom) {
@@ -80,7 +80,7 @@ if ($connect_statut == "0minirezo" OR $connect_id_auteur == $id_auteur) {
 			}
 			else {
 				$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND id_auteur!=$id_auteur AND statut!='5poubelle'";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 				if (mysql_num_rows($result)) {
 					echo "<P>Ce login existe d&eacute;j&agrave;, veuillez recommencer<P>";
 					$ok = false;
@@ -104,17 +104,17 @@ if ($connect_statut == "0minirezo" OR $connect_id_auteur == $id_auteur) {
 				$nom_site_auteur = addslashes($nom_site_auteur);
 				if ($connect_statut != '0minirezo') $statut = $connect_statut;
 				$query = "UPDATE spip_auteurs SET nom='$nom', bio='$bio', email='$email', nom_site='$nom_site_auteur', url_site='$url_site', statut='$statut', pgp='$pgp', messagerie='$perso_activer_messagerie', imessage='$perso_activer_imessage' WHERE id_auteur=$id_auteur";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 
 				if ($login AND $connect_statut == '0minirezo') {
 					$query = "UPDATE spip_auteurs SET login='$login' WHERE id_auteur=$id_auteur";
-					$result = mysql_query($query);
+					$result = spip_query($query);
 				}
 				if ($new_pass) {
 					$htpass = generer_htpass($new_pass);
 					$pass = md5($new_pass);
 					$query = "UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=$id_auteur";
-					$result = mysql_query($query);
+					$result = spip_query($query);
 				}
 				if (lire_meta('activer_moteur') == 'oui') {
 					indexer_auteur($id_auteur);
@@ -182,7 +182,7 @@ function mySel($varaut,$variable) {
 
 
 $query = "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 
 if ($row = mysql_fetch_array($result)) {
@@ -425,7 +425,7 @@ if ($row = mysql_fetch_array($result)) {
 			echo "<hr><p>";
 			
 			$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
-			$result_admin = mysql_query($query_admin);
+			$result_admin = spip_query($query_admin);
 			
 			if (mysql_num_rows($result_admin) == 0) {
 				echo "Cet administrateur g&egrave;re <b>toutes les rubriques</b>.";

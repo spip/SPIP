@@ -7,6 +7,23 @@ define("_ECRIRE_INC_VERSION", "1");
 
 
 //
+// Parametrage du prefixe des tables dans la base de donnees
+// (a modifier pour avoir plusieurs sites SPIP dans une seule base)
+//
+
+$table_prefix = "spip";
+
+function spip_query($query) {
+	$suite = "";
+	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
+		$suite = $regs[0];
+		$query = substr($query, 0, -strlen($suite));
+	}
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	return mysql_query($query);
+} 
+
+//
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
 // (utilise pour les modifs de la base de donnees)

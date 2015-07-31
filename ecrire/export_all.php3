@@ -26,46 +26,46 @@ $_fputs = ($gz) ? gzputs : fputs;
 $_fputs($f, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
 $query = "SELECT * FROM spip_rubriques";
-export_objets(mysql_query($query), "rubrique", $f, $gz);
+export_objets(spip_query($query), "rubrique", $f, $gz);
 
 $query = "SELECT * FROM spip_auteurs";
-export_objets(mysql_query($query), "auteur", $f, $gz);
+export_objets(spip_query($query), "auteur", $f, $gz);
 
 $query = "SELECT * FROM spip_articles".$debug_limit;
-export_objets(mysql_query($query), "article", $f, $gz);
+export_objets(spip_query($query), "article", $f, $gz);
 
 $query = "SELECT * FROM spip_types_documents";
-export_objets(mysql_query($query), "type_document", $f, $gz);
+export_objets(spip_query($query), "type_document", $f, $gz);
 
 $query = "SELECT * FROM spip_documents";
-export_objets(mysql_query($query), "document", $f, $gz);
+export_objets(spip_query($query), "document", $f, $gz);
 
 $query = "SELECT * FROM spip_mots";
-export_objets(mysql_query($query), "mot", $f, $gz);
+export_objets(spip_query($query), "mot", $f, $gz);
 
 $query = "SELECT * FROM spip_groupes_mots";
-export_objets(mysql_query($query), "groupe_mots", $f, $gz);
+export_objets(spip_query($query), "groupe_mots", $f, $gz);
 
 $query = "SELECT * FROM spip_breves".$debug_limit;
-export_objets(mysql_query($query), "breve", $f, $gz);
+export_objets(spip_query($query), "breve", $f, $gz);
 
 $query = "SELECT * FROM spip_messages";
-export_objets(mysql_query($query), "message", $f, $gz);
+export_objets(spip_query($query), "message", $f, $gz);
 
 $query = "SELECT * FROM spip_forum".$debug_limit;
-export_objets(mysql_query($query), "forum", $f, $gz);
+export_objets(spip_query($query), "forum", $f, $gz);
 
 $query = "SELECT * FROM spip_petitions";
-export_objets(mysql_query($query), "petition", $f, $gz);
+export_objets(spip_query($query), "petition", $f, $gz);
 
 $query = "SELECT * FROM spip_signatures".$debug_limit;
-export_objets(mysql_query($query), "signature", $f, $gz);
+export_objets(spip_query($query), "signature", $f, $gz);
 
 $query = "SELECT * FROM spip_syndic";
-export_objets(mysql_query($query), "syndic", $f, $gz);
+export_objets(spip_query($query), "syndic", $f, $gz);
 
 $query = "SELECT * FROM spip_syndic_articles".$debug_limit;
-export_objets(mysql_query($query), "syndic_article", $f, $gz);
+export_objets(spip_query($query), "syndic_article", $f, $gz);
 
 
 $_fputs ($f, build_end_tag("SPIP")."\n");

@@ -11,7 +11,7 @@ function test_pass() {
 	for (;;) {
 		$passw = creer_pass_aleatoire();
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		if (!mysql_num_rows($result)) break;
 	}	
 	return $passw;
@@ -29,7 +29,7 @@ function test_login($mail) {
 		if ($i) $login = $login_base.$i;
 		else $login = $login_base;
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		if (!mysql_num_rows($result)) break;
 	}
 
@@ -52,7 +52,7 @@ function formulaire_signature($id_article) {
 
 	if ($val_confirm) {
 		$query_sign = "SELECT * FROM spip_signatures WHERE statut='$val_confirm'";
-		$result_sign = mysql_query($query_sign);
+		$result_sign = spip_query($query_sign);
 		if (mysql_num_rows($result_sign) > 0) {
 			while($row = mysql_fetch_array($result_sign)) {
 				$id_signature = $row[0];
@@ -67,7 +67,7 @@ function formulaire_signature($id_article) {
 			}
 
 			$query_petition="SELECT * FROM spip_petitions WHERE id_article=$id_article";
-		 	$result_petition=mysql_query($query_petition);
+		 	$result_petition=spip_query($query_petition);
 
 			while($row=mysql_fetch_array($result_petition)) {
 				$id_article=$row[0];
@@ -81,7 +81,7 @@ function formulaire_signature($id_article) {
 			if ($email_unique=="oui") {
 				$email=addslashes($adresse_email);
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
-				$result=mysql_query($query);
+				$result=spip_query($query);
 				if (mysql_num_rows($result)>0){
 					$texte .= erreur("Vous avez déjà signé ce texte.");
 					$refus = "oui";
@@ -91,7 +91,7 @@ function formulaire_signature($id_article) {
 			if ($site_unique=="oui") {
 				$site=addslashes($url_site);
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
-				$result=mysql_query($query);
+				$result=spip_query($query);
 				if (mysql_num_rows($result)>0){
 					$texte .= erreur("Ce site est déjà enregistré");
 					$refus = "oui";
@@ -103,7 +103,7 @@ function formulaire_signature($id_article) {
 			}
 			else {
 				$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 			
 				$texte .= erreur("Votre signature est validée. Elle apparaîtra lors de la prochaine mise à jour du site. Merci!");
 				$texte .= erreur("Your signature is now registered. Thank you!");
@@ -116,7 +116,7 @@ function formulaire_signature($id_article) {
 	else if ($nom_email AND $adresse_email) {
 		if ($GLOBALS['db_ok']) {
 		 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
-		 	$result_petition = mysql_query($query_petition);
+		 	$result_petition = spip_query($query_petition);
 
 			while($row = mysql_fetch_array($result_petition)) {
 				$id_article = $row[0];
@@ -140,7 +140,7 @@ function formulaire_signature($id_article) {
 			if ($email_unique == "oui") {
 				$email = addslashes($adresse_email);
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 				if (mysql_num_rows($result) > 0) {
 					$reponse_signature .= erreur("Vous avez déjà signé ce texte.");
 					$refus = "oui";
@@ -167,7 +167,7 @@ function formulaire_signature($id_article) {
 			if ($site_unique == "oui") {
 				$site = addslashes($url_site);
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 				if (mysql_num_rows($result) > 0) {
 					$reponse_signature .= erreur("Ce site est déjà enregistré");
 					$refus = "oui";
@@ -181,7 +181,7 @@ function formulaire_signature($id_article) {
 			}
 			else {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
-				$result_site = mysql_query($query_site);
+				$result_site = spip_query($query_site);
 				while($row = mysql_fetch_array($result_site)) {
 					$titre = $row[0];
 				}
@@ -214,7 +214,7 @@ function formulaire_signature($id_article) {
 
 		 		$query = "INSERT spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
 		 			"VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 			}
 		}
 		else {
@@ -225,7 +225,7 @@ function formulaire_signature($id_article) {
 
 	else {
 		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
- 		$result_petition = mysql_query($query_petition);
+ 		$result_petition = spip_query($query_petition);
 
 		if ($row_petition = mysql_fetch_array($result_petition)) {
 			$id_article = $row_petition[0];
@@ -287,7 +287,7 @@ function formulaire_inscription() {
 	if ($mail_inscription) {
 		include_ecrire("inc_connect.php3");
 		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$ok = true;
 
 		echo "<div class='reponse_formulaire'>";
@@ -302,7 +302,7 @@ function formulaire_inscription() {
 				$ok = false;
 			}
 			else if ($statut == 'nouveau'){
-				mysql_query("DELETE FROM spip_auteurs WHERE id_auteur='$id_auteur'");
+				spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id_auteur'");
 				echo "Vous vous &ecirc;tes d&eacute;j&agrave; inscrit avec cette adresse, mais vous ne vous &ecirc;tes jamais connect&eacute;. Vous allez recevoir un nouveau code d'acc&egrave;s. ATTENTION&nbsp;: les codes d'acc&egrave;s qui vous sont parvenus auparavant ne sont plus actifs, vous devez utiliser uniquement ceux qui vous sont envoy&eacute;s &agrave; l'instant.";
 				$ok = true;
 			}
@@ -321,7 +321,7 @@ function formulaire_inscription() {
 			$htpass = generer_htpass($pass);
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass) ".
 				"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', 'nouveau', '$htpass')";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 			ecrire_acces();
 
 			$nom_site_spip = lire_meta("nom_site");
@@ -391,7 +391,7 @@ function formulaire_site($la_rubrique) {
 			include_local ("ecrire/inc_connect.php3");
 			$query = "INSERT spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
 				"VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 			echo "Votre proposition est enregistr&eacute;e, elle appara&icirc;tra en ligne apr&egrave;s validation par les responsables de ce site.";
 		}
 		else {

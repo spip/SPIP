@@ -20,7 +20,7 @@ function mySel($varaut,$variable) {
 
 function premiere_rubrique(){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 0,1";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
@@ -37,7 +37,7 @@ function enfant($leparent) {
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
@@ -68,7 +68,7 @@ function enfant($leparent) {
 $proposer_sites = lire_meta("proposer_sites");
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 
 

@@ -21,15 +21,15 @@ function mySel($varaut, $variable) {
 if ($connect_statut == '0minirezo') {
 	if ($new == 'oui') {
 		$query = "INSERT INTO spip_mots (titre) VALUES ('')";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$id_mot = mysql_insert_id();
 	}
 
 	if ($supp_mot) {
 		$query = "DELETE FROM spip_mots WHERE id_mot=$supp_mot";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$query = "DELETE FROM spip_mots_articles WHERE id_mot=$supp_mot";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 	}
 
 	if ($titre) {
@@ -37,13 +37,13 @@ if ($connect_statut == '0minirezo') {
 		$texte = addslashes($texte);
 		$descriptif = addslashes($descriptif);
 		$type = addslashes(corriger_caracteres($type));
-		$result = mysql_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_type'");
+		$result = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_type'");
 		while($row = mysql_fetch_array($result)) {
 				$type = addslashes(corriger_caracteres($row['titre']));
 		}
 				
 		$query = "UPDATE spip_mots SET titre=\"$titre\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=\"$id_type\" WHERE id_mot=$id_mot";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		
 		
 		
@@ -65,7 +65,7 @@ if ($redirect_ok == 'oui' && $redirect) {
 // Recupere les donnees
 //
 $query = "SELECT * FROM spip_mots WHERE id_mot='$id_mot'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$id_mot = $row['id_mot'];
@@ -167,7 +167,7 @@ if ($connect_statut =="0minirezo"){
 
 
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$id_mot'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 
 	while ($row = mysql_fetch_array($result)) {
@@ -198,7 +198,7 @@ if ($connect_statut =="0minirezo"){
 		echo  "<UL><SELECT NAME='id_type'>\n";
 
 		$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
-		$result = mysql_query($query_groupes);
+		$result = spip_query($query_groupes);
 		while ($row_groupes = mysql_fetch_array($result)){
 			$id_groupe = $row_groupes['id_groupe'];
 			$titre_groupe = htmlspecialchars($row_groupes['titre']);

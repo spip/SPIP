@@ -75,7 +75,7 @@ function bouton_imessage($destinataire, $row = '') {
 
 	if ($row != "force") {
 		$login_req = "select login, messagerie from spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)";
-		$row = mysql_fetch_array(mysql_query($login_req));
+		$row = mysql_fetch_array(spip_query($login_req));
 		
 		if (($row['login'] == "") OR ($row['messagerie'] == "non")) {
 			return;
@@ -230,7 +230,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 function afficher_tranches_requete(&$query, $colspan) {
 	$query = trim($query);
 	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
-	list($num_rows) = mysql_fetch_row(mysql_query($query_count));
+	list($num_rows) = mysql_fetch_row(spip_query($query_count));
 	if (!$num_rows) return;
 
 	$nb_aff = 10;
@@ -297,7 +297,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
 
 	if (strlen($tranches) OR $toujours_afficher) {
-	 	$result = mysql_query($requete);
+	 	$result = spip_query($requete);
 	 	$num_rows = mysql_num_rows($result);
 
 		echo "<p><table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% background=''>";
@@ -321,13 +321,13 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$visites = $row['visites'];
 
 			$query_petition = "SELECT COUNT(*) FROM spip_petitions WHERE id_article=$id_article";
-			$row_petition = mysql_fetch_array(mysql_query($query_petition));
+			$row_petition = mysql_fetch_array(spip_query($query_petition));
 			$petition = ($row_petition[0] > 0);
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
-			 	$query2 = "SELECT spip_auteurs.id_auteur, nom, messagerie, login, en_ligne FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND spip_auteurs.id_auteur=lien.id_auteur";
-				$result_auteurs = mysql_query($query2);
+			 	$query2 = "SELECT auteurs.id_auteur, nom, messagerie, login, en_ligne FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
+				$result_auteurs = spip_query($query2);
 
 				while ($row = mysql_fetch_array($result_auteurs)) {
 					$id_auteur = $row['id_auteur'];
@@ -411,7 +411,7 @@ function afficher_breves($titre_table, $requete) {
 
 		echo $tranches;
 
-	 	$result = mysql_query($requete);
+	 	$result = spip_query($requete);
 		$num_rows = mysql_num_rows($result);
 
 		$table = '';
@@ -474,7 +474,7 @@ function afficher_rubriques($titre_table, $requete) {
 
 		echo $tranches;
 
-	 	$result = mysql_query($requete);
+	 	$result = spip_query($requete);
 		$num_rows = mysql_num_rows($result);
 
 		$table = '';
@@ -650,7 +650,7 @@ function forum($le_forum, $adresse_retour, $controle = "non") {
 	else {
 		$query_forum2 = "SELECT * FROM spip_forum WHERE id_parent='$le_forum' AND statut<>'off' ORDER BY date_heure";
 	}
- 	$result_forum2 = mysql_query($query_forum2);
+ 	$result_forum2 = spip_query($query_forum2);
 	afficher_forum($result_forum2, $adresse_retour, $controle);
 }
 
@@ -1013,7 +1013,7 @@ function debut_page($titre = "") {
 		
 		echo " &nbsp; &nbsp; <a href='messagerie.php3'><font color='#666666'><img src='IMG2/tous-messages.gif' align='middle' alt='' width='17' height='15' border='0'> TOUS VOS MESSAGES</font></a>";
 
-		$result_messages = mysql_query("SELECT * FROM spip_messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=spip_messages.id_message");
+		$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 		$total_messages = @mysql_num_rows($result_messages);
 		if ($total_messages == 1) {
 			while($row = @mysql_fetch_array($result_messages)) {
@@ -1024,7 +1024,7 @@ function debut_page($titre = "") {
 		if ($total_messages > 1) echo " | <a href='messagerie.php3'><font color='red'>VOUS AVEZ $total_messages NOUVEAUX MESSAGES</font></a>";
 		
 
-		$result_messages = mysql_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
+		$result_messages = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
 		$total_messages = @mysql_num_rows($result_messages);
 		
 		if ($total_messages == 1) {
@@ -1098,8 +1098,8 @@ function debut_gauche() {
 		echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
 
 		if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-		 	$query2 = "SELECT * FROM spip_auteurs WHERE spip_auteurs.id_auteur!=$connect_id_auteur AND spip_auteurs.imessage!='non' AND spip_auteurs.messagerie!='non' AND spip_auteurs.en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
-			$result_auteurs = mysql_query($query2);
+		 	$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
+			$result_auteurs = spip_query($query2);
 
 			if (mysql_num_rows($result_auteurs) > 0) {
 				echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";

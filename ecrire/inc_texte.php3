@@ -240,7 +240,7 @@ function interdire_scripts($source) {
 // Integration des images et documents
 function integre_image($id_document, $align, $type_aff = 'IMG') {
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$id_document = $row['id_document'];
 		$id_type = $row['id_type'];
@@ -257,7 +257,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$affichage_detaille = (strtoupper($type_aff) == 'DOC');
 
 		// on construira le lien en fonction du type de doc
-		$result_type = mysql_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
+		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
 		if ($type = @mysql_fetch_object($result_type)) {
 			$extension = $type->extension;
 		}
@@ -265,7 +265,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		// recuperer la vignette pour affichage inline
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
-			$result_vignette = mysql_query($query_vignette);
+			$result_vignette = spip_query($query_vignette);
 			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
 				$fichier_vignette = $row_vignette['fichier'];
 				$largeur_vignette = $row_vignette['largeur'];
@@ -312,7 +312,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		// si affichage detaille ('DOC'), ajouter une legende
 		if ($affichage_detaille) {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
-			$result_type = mysql_query($query_type);
+			$result_type = spip_query($query_type);
 			if ($row_type = @mysql_fetch_array($result_type)) {
 				$type = $row_type['titre'];
 			}
@@ -478,7 +478,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 					$lien_url = generer_url_rubrique($id_lien);
 					if (!$lien_texte) {
 						$req = "select titre from spip_rubriques where id_rubrique=$id_lien";
-						$row = @mysql_fetch_array(@mysql_query($req));
+						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['titre'];
 					}
 					break;
@@ -486,7 +486,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 					$lien_url = generer_url_breve($id_lien);
 					if (!$lien_texte) {
 						$req = "select titre from spip_breves where id_breve=$id_lien";
-						$row = @mysql_fetch_array(@mysql_query($req));
+						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['titre'];
 					}
 					break;
@@ -494,7 +494,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 					$lien_url = generer_url_auteur($id_lien);
 					if (!$lien_texte) {
 						$req = "select nom from spip_auteurs where id_auteur = $id_lien";
-						$row = @mysql_fetch_array(@mysql_query($req));
+						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['nom'];
 					}
 					break;
@@ -502,7 +502,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 					$lien_url = generer_url_mot($id_lien);
 					if (!$lien_texte) {
 						$req = "select titre from spip_mots where id_mot=$id_lien";
-						$row = @mysql_fetch_array(@mysql_query($req));
+						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['titre'];
 					}
 					break;
@@ -510,7 +510,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 					$lien_url = generer_url_article($id_lien);
 					if (!$lien_texte) {
 						$req = "select titre from spip_articles where id_article=$id_lien";
-						$row = @mysql_fetch_array(@mysql_query($req));
+						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['titre'];
 					}
 					break;

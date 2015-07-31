@@ -196,24 +196,24 @@ function import_objet_1_2($f, $gz=false) {
 
 	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
-	mysql_query($query);
+	spip_query($query);
 
 	if ($type == 'article') {
-		mysql_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
-		mysql_query("DELETE FROM spip_auteurs_documents WHERE id_article=$id_objet");
+		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
+		spip_query("DELETE FROM spip_auteurs_documents WHERE id_article=$id_objet");
 	}
 	else if ($type == 'mot') {
-		mysql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
-		mysql_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
-		mysql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_objet");
-		mysql_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_objet");
-		mysql_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_objet");
+		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
+		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
+		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_objet");
+		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_objet");
+		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_objet");
 	}
 	else if ($type == 'auteur') {
-		mysql_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
+		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
 	}
 	else if ($type == 'message') {
-		mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_objet");
+		spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_objet");
 	}
 	if ($liens) {
 		reset($liens);
@@ -224,7 +224,7 @@ function import_objet_1_2($f, $gz=false) {
 			else
 				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
 			$query = "INSERT $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
-			mysql_query($query);
+			spip_query($query);
 		}
 	}
 
@@ -279,63 +279,63 @@ function import_objet_0_0($f, $gz=false) {
 	$table = "spip_$type";
 	if ($type != 'forum' AND $type != 'syndic') $table .= 's';
 	$query = "REPLACE $table (" . join(",", $cols) . ") VALUES (" . join(",", $values) . ")";
-	mysql_query($query);
+	spip_query($query);
 
 	if ($is_art && $id_article) {
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_article=$id_article";
-		mysql_query($query);
+		spip_query($query);
 		if ($auteurs) {
 			reset ($auteurs);
 			while (list(, $auteur) = each($auteurs)) {
 				$query = "INSERT spip_auteurs_articles (id_auteur, id_article) VALUES ($auteur, $id_article)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 	}
 	if ($is_mot && $id_mot) {
 		$query = "DELETE FROM spip_mots_articles WHERE id_mot=$id_mot";
-		mysql_query($query);
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_breves WHERE id_mot=$id_mot";
-		mysql_query($query);
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_forum WHERE id_mot=$id_mot";
-		mysql_query($query);
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot";
-		mysql_query($query);
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot";
-		mysql_query($query);
+		spip_query($query);
 		if ($articles) {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {
 				$query = "INSERT spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $article)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 		if ($breves) {
 			reset ($breves);
 			while (list(, $breve) = each($breves)) {
 				$query = "INSERT spip_mots_breves (id_mot, id_breve) VALUES ($id_mot, $breve)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 		if ($forums) {
 			reset ($forums);
 			while (list(, $forum) = each($forums)) {
 				$query = "INSERT spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 		if ($rubriques) {
 			reset ($rubriques);
 			while (list(, $rubrique) = each($rubriques)) {
 				$query = "INSERT spip_mots_rubriques (id_mot, id_rubrique) VALUES ($id_mot, $id_rubrique)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 		if ($syndics) {
 			reset ($syndics);
 			while (list(, $syndic) = each($syndics)) {
 				$query = "INSERT spip_mots_syndic (id_mot, id_syndic) VALUES ($id_mot, $syndic)";
-				mysql_query($query);
+				spip_query($query);
 			}
 		}
 	}
@@ -354,7 +354,7 @@ function import_objet($f, $gz = false) {
 function import_fin() {
 	// Effacer l'ancien acces admin
 	$query = "DELETE FROM spip_auteurs WHERE id_auteur=0";
-	mysql_query($query);
+	spip_query($query);
 
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
@@ -394,7 +394,7 @@ function import_all($f, $gz=false) {
 		else {
 			// Bidouille pour garder l'acces admin actuel pendant toute la restauration
 			$query = "UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur";
-			mysql_query($query);
+			spip_query($query);
 
 			$version_archive = $r[1]['version_archive'];
 			ecrire_meta('version_archive_restauration', $version_archive);
@@ -428,27 +428,27 @@ function import_all($f, $gz=false) {
 	// Destruction des entrees non restaurees
 
 	$query = "DELETE FROM spip_rubriques WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_breves WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_auteurs WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_articles WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_documents WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_types_documents WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_forum WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_mots WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_groupes_mots WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_petitions WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 	$query = "DELETE FROM spip_signatures WHERE maj < $my_date";
-	mysql_query($query);
+	spip_query($query);
 
 	import_fin();
 

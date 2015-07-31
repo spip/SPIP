@@ -177,7 +177,7 @@ class _ObjectFactory extends _Abstract {
 		$query = ereg_replace('#cols', $cols, $query);
 		$query = ereg_replace('#table', $this->sql_table, $query);
 		$query = ereg_replace('#id', $this->sql_table.'.'.$this->sql_id, $query);
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		// If multiple results expected, create a result array
 		if ($multiple) $r = array();
 		if ($result) while ($row = mysql_fetch_array($result)) {

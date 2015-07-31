@@ -4,7 +4,7 @@ include ("inc.php3");
 
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
-	mysql_query("INSERT INTO spip_groupes_mots 
+	spip_query("INSERT INTO spip_groupes_mots 
 		(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
 		VALUES (\" Nouveau groupe\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 
@@ -13,7 +13,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 }
 
 $query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'";
-$result_groupes = mysql_query($query_groupes);
+$result_groupes = spip_query($query_groupes);
 while($row = mysql_fetch_array($result_groupes)) {
 	$id_groupe = $row['id_groupe'];
 	$titre = htmlspecialchars($row['titre']);

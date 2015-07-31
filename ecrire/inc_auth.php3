@@ -21,7 +21,7 @@ function recuperer_sous_rubriques($id_parent) {
 	global $connect_id_rubrique;
 		
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent";
- 	$result = mysql_query($query);
+ 	$result = spip_query($query);
 
 	while ($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -108,7 +108,7 @@ function auth() {
 	
 	$auth_login = addslashes($auth_login);
 	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
-	$result = @mysql_query($query);
+	$result = @spip_query($query);
 	
 	if (!@mysql_num_rows($result)) {
 		ask_php_auth($auth_text_failure);
@@ -140,13 +140,13 @@ function auth() {
 	
 		// Indiquer connexion
 		if ($connect_activer_messagerie != "non") {
-			@mysql_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
+			@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 		}
 	
 		// Si administrateur, recuperer les rubriques gerees par l'admin
 		if ($connect_statut == '0minirezo') {
 			$query_admin = "SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'";
-			$result_admin = mysql_query($query_admin);
+			$result_admin = spip_query($query_admin);
 			
 			$connect_toutes_rubriques = (@mysql_num_rows($result_admin) == 0);
 			if ($connect_toutes_rubriques) {
@@ -163,7 +163,7 @@ function auth() {
 					if (!$r) break;
 					$r = join(',', $r);
 					$query_admin = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)";
-				 	$result_admin = mysql_query($query_admin);
+				 	$result_admin = spip_query($query_admin);
 				 }
 			}
 		}
@@ -184,7 +184,7 @@ function auth() {
 	
 	if ($connect_statut == 'nouveau') {
 		$query = "UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$connect_id_auteur";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$connect_statut = '1comite';
 	}
 	return true;
