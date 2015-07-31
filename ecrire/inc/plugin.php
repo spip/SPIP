@@ -351,8 +351,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	// on note dans tmp la liste des fichiers qui doivent etre presents,
 	// pour les verifier "souvent"
+	// ils ne sont verifies que depuis l'espace prive, mais peuvent etre reconstruit depuis l'espace public
+	// dans le cas d'un plugin non declare, spip etant mis devant le fait accompli
+	// hackons donc avec un "../" en dur dans ce cas, qui ne manquera pas de nous embeter un jour...
 	foreach ($liste_fichier_verif as $k => $f)
-		$liste_fichier_verif[$k] = _DIR_PLUGINS.preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
+		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
 	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
 		serialize($liste_fichier_verif));
 
