@@ -195,7 +195,7 @@ $GLOBALS['browser_caret'] =  (!$GLOBALS['browser_barre'] ? '' : "
 onselect='storeCaret(this);'
 onclick='storeCaret(this);'
 onkeyup='storeCaret(this);'
-ondbclick='storeCaret(this);'");
+ondblclick='storeCaret(this);'");
 
 	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 	// meme principe que le behavior win_width.htc pour MSIE

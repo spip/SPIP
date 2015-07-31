@@ -2617,7 +2617,7 @@ id='textarea_$num_textarea'
 onselect='storeCaret(this);'
 onclick='storeCaret(this);'
 onkeyup='storeCaret(this);'
-ondbclick='storeCaret(this);'>$texte</textarea>";
+ondblclick='storeCaret(this);'>$texte</textarea>";
 }
 
 // comme in_array mais renvoie son 3e arg si le 2er arg n'est pas un tableau
