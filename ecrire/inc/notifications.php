@@ -153,8 +153,8 @@ function notifier_proposition_article($id_article) {
 function email_notification_forum ($t, $email) {
 
 	// Rechercher eventuellement la langue du destinataire
-	if ($l = sql_fetch(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
-		$l = lang_select($l['lang']);
+	if (NULL !== ($l = sql_getfetsel('lang', 'spip_auteurs', "email=" . _q($email))))
+		$l = lang_select($l);
 
 
 	charger_generer_url();
