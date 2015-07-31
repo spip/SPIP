@@ -72,7 +72,9 @@ function balise_FORMULAIRE__dyn($form)
 
 	$args = func_get_args();
 	array_shift($args);
-	return array("formulaires/$form", 3600, balise_FORMULAIRE__contexte($form, $args));
+	$contexte = balise_FORMULAIRE__contexte($form, $args);
+	if (!is_array($contexte)) return $contexte;
+	return array("formulaires/$form", 3600, $contexte);
 }
 
 function balise_FORMULAIRE__contexte($form, $args)
