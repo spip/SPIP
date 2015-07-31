@@ -2913,7 +2913,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
-	global $connect_statut;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	$en_ligne = $message = '';
 	switch ($type) {
@@ -2958,8 +2958,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 			$message = '';
 	}
 
-	if ($message)
+	if ($message){
 	  icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+		if ($en_ligne!='preview' AND $connect_statut=='0minirezo' AND $connect_toutes_rubriques)
+		  icone_horizontale(_T('info_url').' '.$message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne&preview=1"), 'administration-24.gif', "rien.gif");
+	}
 }
 
 //
