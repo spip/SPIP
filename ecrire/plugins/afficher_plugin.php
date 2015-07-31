@@ -216,8 +216,7 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 		$version .= ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']';
 	$version .="</dd>";
 	$infotech[] = $version;
-
-	$infotech[] = "<dt>"._T('repertoire_plugins')."</dt><dd>".joli_repertoire($plug_file)."</dd>";
+	$infotech[] = "<dt>"._T('repertoire_plugins')."</dt><dd>".joli_repertoire("$dir_plugins$plug_file")."</dd>";
 	// source zip le cas echeant
 	$infotech[] = (lire_fichier($dir_plugins.$plug_file.'/install.log', $log)
 	AND preg_match(',^source:(.*)$,m', $log, $r))
