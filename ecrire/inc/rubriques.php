@@ -286,14 +286,13 @@ function calculer_langues_utilisees () {
 
 // http://doc.spip.org/@calcul_generation
 function calcul_generation ($generation) {
-	include_spip('base/abstract_sql');
 	$lesfils = array();
-	$result = sql_select(array('id_rubrique'),
-				array('spip_rubriques AS rubriques'),
-				array(sql_in('id_parent', $generation)));
+	$result = sql_select('id_rubrique',
+			     'spip_rubriques',
+			     sql_in('id_parent', $generation));
 	while ($row = sql_fetch($result))
 		$lesfils[] = $row['id_rubrique'];
-	return join(",",$lesfils);
+	return join(",", $lesfils);
 }
 
 // http://doc.spip.org/@calcul_branche
@@ -306,6 +305,21 @@ function calcul_branche ($generation) {
 			$branche[] = $generation;
 		return join(",",$branche);
 	}
+}
+
+function calcul_branche_in ($generation, $table='', $not='') {
+	if (!$generation) return ($not ? '0=1' : '0=0');
+	$branche = $generation;
+	while (1) {
+		$q = sql_select('id_rubrique', 'spip_rubriques', sql_in('id_parent', $generation));
+		$generation = '';
+		while ($r = sql_fetch($q)) 
+			$generation .= ',' .$r['id_rubrique'];
+		if (!$generation) break;
+		$branche .= $generation;
+	}
+	$cle = (!$table ? '' : ($table . '.')) . "id_rubrique";
+	return sql_in($cle, $branche, $not);
 }
 
 // Appelee lorsqu'un (ou plusieurs) article post-date arrive a terme 
