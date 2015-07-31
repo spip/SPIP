@@ -329,8 +329,10 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 				$texte = $page['texte'];
 		} else {
 				ob_start();
+				xml_hack($page, true);
 				eval('?' . '>' . $page['texte']);
 				$texte = ob_get_contents();
+				xml_hack($page);
 				ob_end_clean();
 		}
 	}
@@ -550,11 +552,8 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(), $protect_xml=true, $trim=true, $connect='') {
-	$options = array(
-		'protect_xml' => $protect_xml,
-		'trim' => $trim
-	);
+function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
+	$options = array('trim' => $trim);
 
 	$texte = "";
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
@@ -703,6 +702,14 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 	$compteur--;
 	return $retour;
+}
+
+// Appeler avant et apres chaque eval()
+function xml_hack(&$page, $echap = false) {
+	if ($echap)
+		$page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);
+	else
+		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 }
 
 ?>

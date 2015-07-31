@@ -75,9 +75,16 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 		$headers[$j] = $r[3];
 	}
 
+	$process_ins = (
+		strpos($corps,'<'.'?') === false
+		OR strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false
+	)
+		? 'html'
+		: 'php';
+
 	return array('texte' => $corps,
 		'squelette' => $nom,
-		'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
+		'process_ins' => $process_ins,
 		'invalideurs' => $cache,
 		'entetes' => $headers,
 		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0 

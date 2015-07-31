@@ -1330,9 +1330,6 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
 	$GLOBALS['_INC_PUBLIC']++;
 
-	// option[s] par defaut
-	$options = array_merge( array('protect_xml' => false), $options);
-
 	if (isset($contexte['fond'])
 	AND $fond === '')
 		$fond = $contexte['fond'];
@@ -1340,15 +1337,13 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 	$page = inclure_page($fond, $contexte, $connect);
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
+		xml_hack($page, true);
 		eval('?' . '>' . $page['texte']);
 		$page['texte'] = ob_get_contents();
+		xml_hack($page);
 		$page['process_ins'] = 'html';
 		ob_end_clean();
 	}
-
-	if (isset($page['entetes']['X-Xml-Hack'])
-	AND isset($options['protect_xml']) AND $options['protect_xml'])
-		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	$GLOBALS['_INC_PUBLIC']--;
 

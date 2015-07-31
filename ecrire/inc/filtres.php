@@ -1764,7 +1764,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
-	return recuperer_fond("modeles/pagination$modele", $pagination, false, true, $connect);
+	return recuperer_fond("modeles/pagination$modele", $pagination, true, $connect);
 }
 
 // recuperere le chemin d'une css existante et :
