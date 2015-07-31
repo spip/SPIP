@@ -518,16 +518,23 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		return $p;
 	}
 
-	$__modele = interprete_argument_balise(1,$p);
-	if ($p->param) {
-		$params = $p->param;
-		array_shift($params);
-		// a priori true
-		// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
-		// si true, les arguments simples (sans truc=chose) vont degager
-		$code_contexte = argumenter_inclure($params, true, $p, $p->boucles, $p->id_boucle, false);
-		$code_contexte = implode(',',$code_contexte);
-	} else $code_contexte = '';
+	// a priori true
+	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
+	// si true, les arguments simples (sans truc=chose) vont degager
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false, false);
+	if (count($_contexte)){
+		list($key,$val) = each($_contexte);
+		if (is_numeric($key)){
+			array_shift($_contexte);
+			$__modele = interprete_argument_balise(1,$p);
+		}
+	}
+
+	if (count($_contexte)){
+		$code_contexte = implode(',',$_contexte);
+	}
+	else
+		$code_contexte = '';
 
 	$connect = $p->boucles[$b]->sql_serveur;
 	$pas = $p->boucles[$b]->total_parties;
