@@ -452,6 +452,11 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	if (eregi("name='([^']+)'", $img, $regs)) $name = $regs[1];
 	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
 	if (!$logo) $logo = $img;
+	
+	// Ne pas creer de valeurs vides
+	if ($align) $align = " align='$align'";
+	if ($name) $name = " name='$name'";
+	if ($espace) $espace = " hspace='$espace' vspace='$espace'";
 
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
@@ -462,11 +467,11 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
 				$height = $preview['height'];
-				return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
+				return "<img src='$vignette'$name border='0'$name alt=''$espace width='$width' height='$height' class='spip_logos' />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
+				return "<img src='$logo'$name width='$destWidth' height='$destHeight' border='0'$align alt=''$espace class='spip_logos' />";
 			}
 		}
 	}
