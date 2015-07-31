@@ -186,7 +186,8 @@ function retire_cache($cache) {
 // la meta est toujours false ; mais evitons un bug si elle est appellee
 // http://doc.spip.org/@retire_caches
 function retire_caches($chemin = '') {
-	effacer_meta('invalider_caches'); # concurrence
+	if (isset($GLOBALS['meta']['invalider_caches']))
+		effacer_meta('invalider_caches'); # concurrence
 }
 
 
