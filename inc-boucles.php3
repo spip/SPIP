@@ -86,7 +86,6 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 			$boucle->where[] = "lien.id_auteur=$id_table.id_auteur";
 			$boucle->where[] = 'lien.id_article=articles.id_article';
 			$boucle->where[] ="articles.statut='publie'";
-			$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;
 		}
 		// pas d'auteurs poubellises
 		$boucle->where[] = "NOT($id_table.statut='5poubelle')";
@@ -128,7 +127,9 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
-		$boucle->where[] ="$id_table.statut='publie'";
+		if (!$GLOBALS['var_preview'])
+			if (!$boucle->tout)
+				$boucle->where[] ="$id_table.statut='publie'";
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -152,7 +153,6 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 		$boucle->where[] ="$id_table.statut='publie'";
 	}
 
-	$boucle->group[] =  $boucle->id_table . '.' . $boucle->primary;
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
