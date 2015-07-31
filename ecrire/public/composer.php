@@ -282,6 +282,9 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// ne pas tenir compte des notes
 	$notes = charger_fonction('notes', 'inc');
 	$notes('','empiler');
+	// Supprimer les modèles avant le propre afin d'éviter qu'ils n'ajoutent du texte indésirable
+	// dans l'introduction.
+	$texte = supprime_img($texte, '');
 	$texte = propre($texte,$connect);
 	$notes('','depiler');
 
