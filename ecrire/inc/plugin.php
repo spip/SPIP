@@ -209,6 +209,15 @@ function enregistre_modif_plugin(){
 	foreach(liste_plugin_files() as $file){
 	  $test["statusplug_$file"] = $file;
 	}
+	// gerer les noms de repertoires qui ont un espace
+	// sachant qu'ils vont arriver dans le $_POST avec un _ a la place
+	// mais qu'il faut pas se melanger si jamais deux repertoire existent et ne different
+	// que par un espace et un underscore
+	foreach($test as $postvar=>$file){
+		$alt_postvar = str_replace(" ","_",$postvar);
+		if (!isset($test[$alt_postvar]))
+	  	$test[$alt_postvar] = $file;
+	}
 	$plugin=array();
 	if (!isset($_POST['desactive_tous'])){
 		foreach($_POST as $choix=>$val){
