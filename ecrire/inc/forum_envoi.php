@@ -34,7 +34,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 
 	// determiner le retour et l'action
 
-	list($script,$retour) = split('\?', urldecode($script));
+	list($script,$retour) = preg_split(',\?,', urldecode($script));
 	if (function_exists($f = 'forum_envoi_' . $script))
 		list($table, $objet, $titre, $num, $retour, $id, $corps) =
 			$f($id, $row, $retour);
