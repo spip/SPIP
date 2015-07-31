@@ -28,10 +28,10 @@ function charger_langue($lang, $module = 'spip') {
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
-		if (!$fichier_lang = find_lang_in_path($module.'_'.$l._EXTENSION_PHP,
+		if (!$fichier_lang = find_in_path($module.'_'.$l._EXTENSION_PHP,
 		'AUTO', _DIR_LANG)) {
 			$l = 'fr';
-			$fichier_lang = find_lang_in_path($module.'_'.$l._EXTENSION_PHP,
+			$fichier_lang = find_in_path($module.'_'.$l._EXTENSION_PHP,
 			'AUTO', _DIR_LANG);
 		}
 		if ($fichier_lang) {
