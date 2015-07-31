@@ -22,7 +22,7 @@ define('_DEFAULT_DB', 'spip');
 // si ca ne marche toujours pas, echec.
 
 // http://doc.spip.org/@base_db_pg_dist
-function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
+function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 
 	@list($host, $p) = split(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
@@ -41,9 +41,10 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 #		 . ($link ? 'operationnelle' : 'impossible'));
 
 	return !$link ? false : array(
-		'link' => $link,
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
+		'link' => $link,
+		'ldap' => $ldap,
 		'alter' => 'spip_pg_alter',
 		'count' => 'spip_pg_count',
 		'countsel' => 'spip_pg_countsel',

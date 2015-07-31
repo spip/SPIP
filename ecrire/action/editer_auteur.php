@@ -75,7 +75,7 @@ function action_legender_auteur_post($r) {
 	$old_login = $auteur['login'];
 
 	if (($new_login<>$old_login)
-	AND ($auteur['source'] == 'spip' OR !$GLOBALS['ldap_present'])
+	AND ($auteur['source'] == 'spip' OR !spip_connect_ldap())
 	AND autoriser('modifier','auteur', $id_auteur, NULL, array('restreintes'=>1))) {
 		if ($new_login) {
 			if (strlen($new_login) < 4)

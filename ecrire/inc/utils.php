@@ -198,7 +198,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 // C'est un tableau egalement retourne en valeur, pour les appels a l'install'
 
 // http://doc.spip.org/@spip_connect_db
-function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='') {
+function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $ldap='') {
 	global $db_ok;
 
 	## TODO : mieux differencier les serveurs
@@ -218,7 +218,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		return;
 	}
 	  
-	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
+	if ($g = $h($host, $port, $login, $pass, $db, $prefixe, $ldap)) {
 
 		$g['type'] = $type;
 		return $db_ok = $g;
@@ -296,13 +296,14 @@ function spip_connect($serveur='') {
 // Premiere connexion au serveur principal: 
 // retourner le charset donnee par la table principale
 // mais verifier que le fichier de connexion n'est pas trop vieux
-// Version courante = 0.6 (indication du prefixe comme 6e arg)
+// Version courante = 0.7 (indication d'un LDAP comme 7e arg)
+// La version 0.6 indique le prefixe comme 6e arg
+// La version 0.5 indique le serveur comme 5e arg
 //
 // La version 0.0 (non numerotee) doit etre refaite par un admin
 // les autres fonctionnent toujours, meme si :
 // - la version 0.1 est moins performante que la 0.2
-// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
-// - la version 0.5 indique le serveur comme 5e arg
+// - la 0.2 fait un include_ecrire('inc_db_mysql.php3').
 
 // http://doc.spip.org/@spip_connect_main
 function spip_connect_main($connexion)
@@ -327,8 +328,14 @@ function spip_query($query, $serveur='') {
 	return $f($query, $serveur);
 }
 
-// 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
+function spip_connect_ldap($serveur='') {
+	$connexion = spip_connect($serveur);
+	if (!$connexion['ldap']) return false;
+	include_once( _DIR_CONNECT . $connexion['ldap']);
+	return $GLOBALS['ldap_link'];
+}
 
+// 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
 
 // http://doc.spip.org/@_q
 function _q($a) {
@@ -1224,7 +1231,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		(@is_readable($f = _DIR_CHMOD . _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
 
-	define('_FILE_LDAP', _DIR_CONNECT . 'ldap' . '.php');
+	define('_FILE_LDAP', 'ldap.php');
 
 	define('_FILE_TMP_SUFFIX', '.tmp.php');
 	define('_FILE_CONNECT_TMP', _DIR_CONNECT . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);

@@ -270,7 +270,7 @@ function lire_php_auth($user, $pw) {
 	$row = sql_fetch($row);
 	if ($row AND $row['source'] != 'ldap')
 		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
-	elseif ($GLOBALS['ldap_present']) {
+	elseif (spip_connect_ldap()) {
 		$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
 		if ($auth_ldap) return $auth_ldap($user, $pw);
 	}

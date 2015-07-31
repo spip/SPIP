@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_once(_DIR_CONNECT . 'ldap.php');
 
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 
@@ -20,9 +19,6 @@ function inc_auth_ldap_dist ($login, $pass) {
 
 	// Securite contre un serveur LDAP laxiste
 	if (!$login || !$pass) return array();
-
-	// Serveur joignable ?
-	if (!@spip_connect_ldap()) return array();
 
 	// Utilisateur connu ?
 	if (!($dn = auth_ldap_search($login, $pass))) return array();
@@ -73,18 +69,17 @@ function auth_ldap_search($login, $pass)
 // http://doc.spip.org/@auth_ldap_inserer
 function auth_ldap_inserer($dn, $statut)
 {
-	global $ldap_link, $ldap_base;
+	global $ldap_link;
 
 	// refuser d'importer n'importe qui 
 	if (!$statut) return false;
 
 	// Lire les infos sur l'uid de l'utilisateur depuis LDAP 
-	$result = auth_ldap_retrouver($ldap_link, $dn, array("uid", "cn", "mail", "description"));
+	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		
 	// Si ça ne marche pas, essayer avec le samaccountname
-	if (!$result AND spip_connect_ldap())
-		$result = auth_ldap_retrouver($ldap_link, $dn, array("samaccountname", "cn", "mail", "description"));
-
+	if (!$result)
+		$result = @ldap_read($ldap_link, $dn, array("samaccountname", "cn", "mail", "description"));
 
 	if (!$result) return array();
 
@@ -113,21 +108,4 @@ function auth_ldap_inserer($dn, $statut)
 
 	return sql_select("*", "spip_auteurs", "id_auteur=$n");
 }
-
-
-// Lire les infos sur l'utilisateur depuis LDAP
-
-// http://doc.spip.org/@auth_ldap_retrouver
-function auth_ldap_retrouver($ldap_link, $dn, $champs)
-{
-	$r = @ldap_read($ldap_link, $dn, "objectClass=*", $champs);
-		
-	// Si l'utilisateur ne peut lire ses infos, 
-	// se reconnecter avec le compte principal
-	if (!$r AND spip_connect_ldap())
-		$r = @ldap_read($ldap_link, $dn, "objectClass=*",  $champs);
-
-	return $r;
-}
-
 ?>

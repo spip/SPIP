@@ -101,7 +101,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 // accessibles seulement aux admins non restreints et l'auteur lui-meme
 //
 
-	if (($auteur['source'] != 'spip') AND $GLOBALS['ldap_present']) {
+	if (($auteur['source'] != 'spip') AND spip_connect_ldap()) {
 		$edit_login = false;
 		$edit_pass = false;
 	}
