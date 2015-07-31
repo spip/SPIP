@@ -103,7 +103,7 @@ function cache_valide(&$page, $date) {
 	// si le visiteur n'a pas la meme session 'zz'
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])
-	AND $page['invalideurs']['session'] != spip_session()) {
+	AND $page['invalideurs']['session'] !== spip_session()) {
 		#spip_log('Session: \''.$page['invalideurs']['session'] . '\' != \''.spip_session().'\'');
 		return 1;
 	}

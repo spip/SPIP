@@ -442,8 +442,7 @@ function applique_filtres($p) {
 	// S'il y a un lien avec la session, ajouter un code qui levera
 	// un drapeau dans la structure d'invalidation $Cache
 	if ($p->descr['session'])
-		$code = "$code
-		. (!\$Cache['session']=true) // invalideur session\n		";
+		$code = "$code . invalideur_session(\$Cache)";
 
 	// ramasser les images intermediaires inutiles et graver l'image finale
 	if ($p->ramasser_miettes)
@@ -492,15 +491,17 @@ function compose_filtres(&$p, $code) {
 				$code = "($code $fonc " . substr($arglist,1) . ')';
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-			else {
-				if($f = chercher_filtre($fonc))
-					$code = "$f($code$arglist)";
+			else if ($f = chercher_filtre($fonc)) {
+				$code = "$f($code$arglist)";
 			}
 
-			if (!isset($code))
-				$code = "erreur_squelette('"
+			// le filtre n'existe pas, on provoque une erreur
+			else {
+				$code .= ".erreur_squelette('"
 				.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
 				."','" . $p->id_boucle . "')";
+			}
+
 		}
 	}
 	return $code;
