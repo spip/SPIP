@@ -42,10 +42,10 @@ if ($connect_statut == '0minirezo') {
 	*/
 
 
-	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
+	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
 	$result_petition = spip_query($query_petition);
 	if ($row = mysql_fetch_array($result_petition)){
-		$nombre_petition = $row[0];
+		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
@@ -72,21 +72,21 @@ function forum_parent($id_forum) {
  	$result_forum = spip_query($query_forum);
 
  	while($row=mysql_fetch_array($result_forum)){
-		$id_forum=$row[0];
-		$forum_id_parent=$row[1];
-		$forum_id_rubrique=$row[2];
-		$forum_id_article=$row[3];
-		$forum_id_breve=$row[4];
+		$id_forum=$row['id_forum'];
+		$forum_id_parent=$row['id_parent'];
+		$forum_id_rubrique=$row['id_rubrique'];
+		$forum_id_article=$row['id_article'];
+		$forum_id_breve=$row['id_breve'];
 		$forum_id_syndic=$row['id_syndic'];
-		$forum_date_heure=$row[5];
-		$forum_titre=$row[6];
-		$forum_texte=$row[7];
-		$forum_auteur=$row[8];
-		$forum_email_auteur=$row[9];
-		$forum_nom_site=$row[10];
-		$forum_url_site=$row[11];
-		$forum_stat=$row[12];
-		$forum_ip=$row[13];
+		$forum_date_heure=$row['date_heure'];
+		$forum_titre=$row['titre'];
+		$forum_texte=$row['texte'];
+		$forum_auteur=$row['auteur'];
+		$forum_email_auteur=$row['email_auteur'];
+		$forum_nom_site=$row['nom_site'];
+		$forum_url_site=$row['url_site'];
+		$forum_stat=$row['statut'];
+		$forum_ip=$row['ip'];
 
 		if ($forum_id_article > 0) {
 	
@@ -94,9 +94,9 @@ function forum_parent($id_forum) {
 		 	$result = spip_query($query);
 
 			while($row=mysql_fetch_array($result)) {
-				$id_article = $row[0];
-				$titre = $row[1];
-				$statut = $row[2];
+				$id_article = $row['id_article'];
+				$titre = $row['titre'];
+				$statut = $row['statut'];
 			}
 
 			if ($forum_stat == "prive") {
@@ -112,8 +112,8 @@ function forum_parent($id_forum) {
 			$result2 = spip_query($query2);
 
 			while($row = mysql_fetch_array($result2)){
-				$id_rubrique = $row[0];
-				$titre = $row[2];
+				$id_rubrique = $row['id_rubrique'];
+				$titre = $row['titre'];
 			}
 			return "<B>R&eacute;ponse &agrave; la rubrique <A HREF='".generer_url_rubrique($id_rubrique)."'>$titre</A></B>";
 		}
@@ -122,7 +122,7 @@ function forum_parent($id_forum) {
 			$result2 = spip_query($query2);
 
 			while($row = mysql_fetch_array($result2)){
-				$id_syndic = $row[0];
+				$id_syndic = $row['id_syndic'];
 				$titre = $row['nom_site'];
 				$statut = $row['statut'];
 			}
@@ -133,9 +133,9 @@ function forum_parent($id_forum) {
 		 	$result2 = spip_query($query2);
 
 		 	while($row = mysql_fetch_array($result2)){
-				$id_breve = $row[0];
-				$date_heure = $row[1];
-				$titre = $row[2];
+				$id_breve = $row['id_breve'];
+				$date_heure = $row['date_heure'];
+				$titre = $row['titre'];
 			}
 			if ($forum_stat == "prive") {
 				return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='breves_voir.php3?id_breve=$id_breve'>$titre</A></B>";
@@ -176,20 +176,20 @@ function controle_forum($request,$adresse_retour) {
 	$nb_forum[$compteur_forum] = mysql_num_rows($request);
 	$i[$compteur_forum] = 1;
  	while($row=mysql_fetch_array($request)){
-		$id_forum = $row[0];
-		$forum_id_parent = $row[1];
-		$forum_id_rubrique = $row[2];
-		$forum_id_article = $row[3];
-		$forum_id_breve = $row[4];
-		$forum_date_heure = $row[5];
-		$forum_titre = $row[6];
-		$forum_texte = $row[7];
-		$forum_auteur = $row[8];
-		$forum_email_auteur = $row[9];
-		$forum_nom_site = $row[10];
-		$forum_url_site = $row[11];
-		$forum_stat = $row[12];
-		$forum_ip = $row[13];
+		$id_forum = $row['id_forum'];
+		$forum_id_parent = $row['id_parent'];
+		$forum_id_rubrique = $row['id_rubrique'];
+		$forum_id_article = $row['id_article'];
+		$forum_id_breve = $row['id_breve'];
+		$forum_date_heure = $row['date_heure'];
+		$forum_titre = $row['titre'];
+		$forum_texte = $row['texte'];
+		$forum_auteur = $row['auteur'];
+		$forum_email_auteur = $row['email_auteur'];
+		$forum_nom_site = $row['nom_site'];
+		$forum_url_site = $row['url_site'];
+		$forum_stat = $row['statut'];
+		$forum_ip = $row['ip'];
 		$forum_id_auteur = $row["id_auteur"];
 		
 		if ($compteur_forum==1)
@@ -287,10 +287,10 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
-	$query_forum = "SELECT COUNT(*) FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
  	$result_forum = spip_query($query_forum);
  	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
+ 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";

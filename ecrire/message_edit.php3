@@ -38,7 +38,7 @@ $query = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
-	$id_message = $row[0];
+	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
 	$titre = htmlspecialchars($row["titre"]);
 	$texte = htmlspecialchars($row["texte"]);

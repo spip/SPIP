@@ -1250,8 +1250,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$result_auteurs = spip_query($query_auteurs);
 			$auteurs = "";
 			while($row_auteur = mysql_fetch_array($result_auteurs)) {
-				$nom_auteur = typo($row_auteur[0]);
-				$email_auteur = $row_auteur[1];
+				$nom_auteur = typo($row_auteur["nom"]);
+				$email_auteur = $row_auteur["email"];
 				if ($email_auteur) {
 					$auteurs[] = "<A HREF=\"mailto:$email_auteur\">$nom_auteur</A>";
 				}
@@ -1605,10 +1605,10 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 			if ($dico) {
 				// le hex est indispensable : apparemment bug de mysql
 				// sur output decimal 64 bits (a cause du unsigned ?)
-				$query2 = "SELECT HEX(hash) FROM spip_index_dico WHERE ".join(" OR ", $dico);
+				$query2 = "SELECT HEX(hash) hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 				$result2 = spip_query($query2);
 				while ($row2 = mysql_fetch_array($result2)) {
-					$h[] = "0x".$row2[0];
+					$h[] = "0x".$row2["hx"];
 				}
 			}
 			if ($h) $hash_recherche = join(",", $h);
@@ -1697,13 +1697,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				$boucles[$id_boucle]->row = $row;
 				if ($retour) $retour .= $instance->separateur;
 
-				$contexte["id_rubrique"] = $row[0];
-				$contexte["id_parent"] = $row[1];
-				$contexte["id_secteur"] = $row[5];
+				$contexte["id_rubrique"] = $row["id_rubrique"];
+				$contexte["id_parent"] = $row["id_parent"];
+				$contexte["id_secteur"] = $row["id_secteur"];
 				$contexte["date"] = $row["date"];
 	
 				if ($doublons == "oui") {
-					$id_doublons["rubriques"] .= ",".$row[0];
+					$id_doublons["rubriques"] .= ",".$row["id_rubrique"];
 				}
 
 		';

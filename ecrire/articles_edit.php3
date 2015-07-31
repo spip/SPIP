@@ -39,16 +39,16 @@ $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
-	$id_article = $row[0];
-	$surtitre = $row[1];
-	$titre = $row[2];
-	$soustitre = $row[3];
-	$id_rubrique = $row[4];
-	$descriptif = $row[5];
-	$chapo = $row[6];
-	$texte = $row[7];
-	$ps = $row[8];
-	$date = $row[9];
+	$id_article = $row["id_article"];
+	$surtitre = $row["surtitre"];
+	$titre = $row["titre"];
+	$soustitre = $row["soustitre"];
+	$id_rubrique = $row["id_rubrique"];
+	$descriptif = $row["descriptif"];
+	$chapo = $row["chapo"];
+	$texte = $row["texte"];
+	$ps = $row["ps"];
+	$date = $row["date"];
 	$statut = $row['statut'];
 	$date_redac = $row['date_redac'];
     	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)){

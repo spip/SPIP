@@ -25,11 +25,11 @@ function liste_rubriques($result) {
 	global $maj;
 	global $rubriques;
 	if ($result) while ($row=mysql_fetch_array($result)) {
-		$id_rubrique = $row[0];
-		$id_parent = $row[1];
-		$titre = $row[2];
-		$descriptif = $row[3];
-		$texte = $row[4];
+		$id_rubrique = $row['id_rubrique'];
+		$id_parent = $row['id_parent'];
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$texte = $row['texte'];
 		$rubrique_maj = mysql_timestamp_to_time($row["maj"]);
 		if ($rubrique_maj > $maj) {
 			echo "rubrique $id_rubrique $rubrique_maj\n";

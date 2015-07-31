@@ -23,10 +23,10 @@ function enfant($collection){
 	$result2 = mysql_query($query2);
 	
 	while($row=mysql_fetch_array($result2)){
-		$id_rubrique=$row[0];
-		$id_parent=$row[1];
-		$titre=$row[2];
-		$descriptif=propre($row[3]);
+		$id_rubrique=$row['id_rubrique'];
+		$id_parent=$row['id_parent'];
+		$titre=$row['titre'];
+		$descriptif=propre($row['descriptif']);
 	
 		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
 		$les_sous_enfants = sous_enfant($id_rubrique);
@@ -63,9 +63,9 @@ function sous_enfant($collection2){
 	if (mysql_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
 		while($row=mysql_fetch_array($result3)){
-			$id_rubrique2=$row[0];
-			$id_parent2=$row[1];
-			$titre2=$row[2];
+			$id_rubrique2=$row['id_rubrique'];
+			$id_parent2=$row['id_parent'];
+			$titre2=$row['titre'];
 			
 			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'>$titre2</A>\n";
 		}

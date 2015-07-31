@@ -17,8 +17,8 @@ function ecrire_stats() {
 	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
-		$visites = $row[0];
-		$referers = $row[1];
+		$visites = $row['visites'];
+		$referers = $row['referers'];
 
 		$visites++;
 

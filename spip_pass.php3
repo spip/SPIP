@@ -36,8 +36,8 @@ else {
 
 	if (mysql_num_rows($result) > 0) {
 	 	while($row = mysql_fetch_array($result)) {
-			$id_auteur = $row[0];
-			$statut = $row[8];
+			$id_auteur = $row['id_auteur'];
+			$statut = $row['statut'];
 		}
 		if ($statut == '5poubelle') {
 			echo "<h4>Vous n'avez plus acc&egrave;s &agrave; ces forums.</h4>";

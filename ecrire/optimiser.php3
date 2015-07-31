@@ -16,7 +16,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_rubrique FROM spip_rubriques";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $rubriques[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
 	
 	if ($rubriques) {
 		$rubriques = join(",", $rubriques);
@@ -38,7 +38,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_article FROM spip_articles";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $articles[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $articles[] = $row['id_article];
 	
 	if ($articles) {
 		$articles = join(",", $articles);
@@ -58,7 +58,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_breve FROM spip_breves";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $breves[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $breves[] = $row['id_breve'];
 	
 	if ($breves) {
 		$breves = join(",", $breves);
@@ -78,7 +78,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_syndic FROM spip_syndic";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $syndic[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $syndic[] = $row['id_syndic'];
 	
 	if ($syndic) {
 		$syndic = join(",", $syndic);
@@ -94,7 +94,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_auteur FROM spip_auteurs";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $auteurs[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $auteurs[] = $row['id_auteur'];
 	
 	if ($auteurs) {
 		$auteurs = join(",", $auteurs);
@@ -110,7 +110,7 @@ function optimiser_base() {
 	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle' AND maj < $mydate";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
-		$id_auteur = $row[0];
+		$id_auteur = $row['id_auteur'];
 	
 		$query2 = "SELECT * FROM spip_auteurs_articles WHERE id_auteur=$id_auteur";
 		$result2 = spip_query($query2);
@@ -149,12 +149,12 @@ function optimiser_base() {
 	$query = "SELECT m.id_message FROM spip_messages AS m, spip_auteurs_messages AS lien ".
 		"WHERE m.id_message = lien.id_message GROUP BY m.id_message";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $messages[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $messages[] = $row['id_message'];
 	
 	$query = "SELECT id_message FROM spip_messages ".
 		"WHERE type ='affich'";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $messages[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $messages[] = $row['id_message'];
 	
 	if ($messages) {
 		$messages = join(",", $messages);
@@ -175,7 +175,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_mot FROM spip_mots";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $mots[] = $row[0];
+	while ($row = mysql_fetch_array($result)) $mots[] = $row['id_mot'];
 	
 	if ($mots) {
 		$mots = join(",", $mots);

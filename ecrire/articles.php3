@@ -213,17 +213,17 @@ $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
-	$id_article = $row[0];
-	$surtitre = $row[1];
-	$titre = $row[2];
-	$soustitre = $row[3];
-	$id_rubrique = $row[4];
-	$descriptif = $row[5];
-	$chapo = $row[6];
-	$texte = $row[7];
-	$ps = $row[8];
-	$date = $row[9];
-	$statut_article = $row[10];
+	$id_article = $row["id_article"];
+	$surtitre = $row["surtitre"];
+	$titre = $row["titre"];
+	$soustitre = $row["soustitre"];
+	$id_rubrique = $row["id_rubrique"];
+	$descriptif = $row["descriptif"];
+	$chapo = $row["chapo"];
+	$texte = $row["texte"];
+	$ps = $row["ps"];
+	$date = $row["date"];
+	$statut_article = $row["statut"];
 	$maj = $row["maj"];
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
@@ -445,12 +445,12 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	$petition = (mysql_num_rows($result_petition) > 0);
 
 	while ($row = mysql_fetch_array($result_petition)) {
-		$id_rubrique=$row[0];
-		$email_unique=$row[1];
-		$site_obli=$row[2];
-		$site_unique=$row[3];
-		$message=$row[4];
-		$texte_petition=$row[5];
+		$id_rubrique=$row["id_article"];
+		$email_unique=$row["email_unique"];
+		$site_obli=$row["site_obli"];
+		$site_unique=$row["site_unique"];
+		$message=$row["message"];
+		$texte_petition=$row["texte"];
 	}
 
 	// boite petition ouverte ? si changement ou si petition activee :
@@ -851,8 +851,8 @@ if ($cherche_auteur) {
 	unset($table_auteurs);
 	unset($table_ids);
 	while ($row = mysql_fetch_array($result)) {
-		$table_auteurs[] = $row[1];
-		$table_ids[] = $row[0];
+		$table_auteurs[] = $row["nom"];
+		$table_ids[] = $row["id_auteur"];
 	}
 	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 	debut_boite_info();
@@ -952,11 +952,11 @@ if (mysql_num_rows($result)) {
 
 	echo "\n<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''>\n";
 	while ($row = mysql_fetch_array($result)) {
-		$id_auteur = $row[0];
-		$nom_auteur = $row[1];
-		$email_auteur = $row[3];
-		$url_site_auteur = $row[5];
-		$statut_auteur = $row[8];
+		$id_auteur = $row["id_auteur"];
+		$nom_auteur = $row["nom"];
+		$email_auteur = $row["email"];
+		$url_site_auteur = $row["url_site"];
+		$statut_auteur = $row["statut"];
 		if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
 	
 		$les_auteurs[] = $id_auteur;
@@ -1069,10 +1069,10 @@ if ($flag_editable AND $options == 'avancees') {
 			$group2 = false;
 	
 			while($row=mysql_fetch_array($result)) {
-				$id_auteur = $row[0];
-				$nom = $row[1];
-				$email = $row[3];
-				$statut = $row[8];
+				$id_auteur = $row["id_auteur"];
+				$nom = $row["nom"];
+				$email = $row["email"];
+				$statut = $row["statut"];
 	
 				$statut=ereg_replace("0minirezo", "Administrateur", $statut);
 				$statut=ereg_replace("1comite", "R&eacute;dacteur", $statut);
@@ -1285,10 +1285,10 @@ echo "</div>";
 echo "<P align='left'>";
 
 
-	$query_forum = "SELECT COUNT(*) FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
+	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
  	$result_forum = spip_query($query_forum);
  	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
+ 	if ($row = mysql_fetch_array($result_forum)) $total = $row["cnt"];
 
 	if (!$debut) $debut = 0;
 	$total_afficher = 8;

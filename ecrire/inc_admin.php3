@@ -60,7 +60,7 @@ function _action_auteur($action, $id_auteur, $nom_alea) {
 	}
 	else {
 		$result = spip_query("SELECT pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if ($result) if ($row = mysql_fetch_array($result)) $pass = $row[0];
+		if ($result) if ($row = mysql_fetch_array($result)) $pass = $row['pass'];
 	}
 	$alea = lire_meta($nom_alea);
 	return md5($action.$id_auteur.$pass.$alea);

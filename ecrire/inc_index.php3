@@ -217,7 +217,7 @@ function executer_une_indexation_syndic() {
 			"AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 0,1";
 		if ($result = spip_query($query)) {
 			while ($row = mysql_fetch_array($result)) {
-				$id_syndic = $row[0];
+				$id_syndic = $row['id_syndic'];
 				indexer_syndic($id_syndic);
 				spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
 			}

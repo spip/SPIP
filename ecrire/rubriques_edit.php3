@@ -58,11 +58,11 @@ $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY t
 $result=spip_query($query);
 
 while($row=mysql_fetch_array($result)){
-	$id_rubrique=$row[0];
-	$id_parent=$row[1];
-	$titre = $row[2];
-	$descriptif = $row[3];
-	$texte = $row[4];
+	$id_rubrique=$row['id_rubrique'];
+	$id_parent=$row['id_parent'];
+	$titre = $row['titre'];
+	$descriptif = $row['descriptif'];
+	$texte = $row['texte'];
 }
 
 debut_page("Modifier : $titre_page", "documents", "rubriques");
@@ -144,9 +144,9 @@ if ($options=="avancees"){
 	echo "</SELECT>\n";
 
 	// si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
-	$query = "SELECT COUNT(*) FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
+	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
 	$row = mysql_fetch_array(spip_query($query));
-	$contient_breves = $row[0];
+	$contient_breves = $row['cnt'];
 	if ($contient_breves > 0) {
 		echo "<font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme_deplace'><label for='confirme_deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
 	}

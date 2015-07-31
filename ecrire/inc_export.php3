@@ -99,7 +99,7 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 		$nfields = mysql_num_fields($result);
 		// Recuperer les noms des champs
 		for ($i = 0; $i < $nfields; ++$i) $fields[$i] = mysql_field_name($result, $i);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = mysql_fetch_row($result)) {
 			$string .= build_begin_tag($type) . "\n";
 			// Exporter les champs de la table
 			for ($i = 0; $i < $nfields; ++$i) {
@@ -110,13 +110,13 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 				$query = 'SELECT id_auteur FROM spip_auteurs_articles WHERE id_article='.$row['id_article'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:auteur>' . $row2[0] . '</lien:auteur>' . "\n";
+					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
 				}
 				mysql_free_result($res2);
 				$query = 'SELECT id_document FROM spip_documents_articles WHERE id_article='.$row['id_article'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:document>' . $row2[0] . '</lien:document>' . "\n";
+					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
 				}
 				mysql_free_result($res2);
 			}
@@ -124,7 +124,7 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 				$query = 'SELECT id_auteur FROM spip_auteurs_messages WHERE id_message='.$row['id_message'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:auteur>' . $row2[0] . '</lien:auteur>' . "\n";
+					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
 				}
 				mysql_free_result($res2);
 			}
@@ -132,7 +132,7 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 				$query = 'SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur='.$row['id_auteur'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:rubrique>' . $row2[0] . '</lien:rubrique>' . "\n";
+					$string .= '<lien:rubrique>' . $row2['id_rubrique'] . '</lien:rubrique>' . "\n";
 				}
 				mysql_free_result($res2);
 			}
@@ -140,31 +140,31 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 				$query = 'SELECT id_article FROM spip_mots_articles WHERE id_mot='.$row['id_mot'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:article>' . $row2[0] . '</lien:article>' . "\n";
+					$string .= '<lien:article>' . $row2['id_article'] . '</lien:article>' . "\n";
 				}
 				mysql_free_result($res2);
 				$query = 'SELECT id_breve FROM spip_mots_breves WHERE id_mot='.$row['id_mot'];
 				$res2 = spip_query($query);
 				while($row2 = mysql_fetch_array($res2)) {
-					$string .= '<lien:breve>' . $row2[0] . '</lien:breve>' . "\n";
+					$string .= '<lien:breve>' . $row2['id_breve'] . '</lien:breve>' . "\n";
 				}
 				mysql_free_result($res2);
 				$query = 'SELECT id_forum FROM spip_mots_forum WHERE id_mot='.$row['id_mot'];
 				$res3 = spip_query($query);
 				while($row3 = mysql_fetch_array($res3)) {
-					$string .= '<lien:forum>' . $row3[0] . '</lien:forum>' . "\n";
+					$string .= '<lien:forum>' . $row3['id_forum'] . '</lien:forum>' . "\n";
 				}
 				mysql_free_result($res3);
 				$query = 'SELECT id_rubrique FROM spip_mots_rubriques WHERE id_mot='.$row['id_mot'];
 				$res4 = spip_query($query);
 				while($row4 = mysql_fetch_array($res4)) {
-					$string .= '<lien:rubrique>' . $row4[0] . '</lien:rubrique>' . "\n";
+					$string .= '<lien:rubrique>' . $row4['id_rubrique'] . '</lien:rubrique>' . "\n";
 				}
 				mysql_free_result($res4);
 				$query = 'SELECT id_syndic FROM spip_mots_syndic WHERE id_mot='.$row['id_mot'];
 				$res4 = spip_query($query);
 				while($row4 = mysql_fetch_array($res4)) {
-					$string .= '<lien:syndic>' . $row4[0] . '</lien:syndic>' . "\n";
+					$string .= '<lien:syndic>' . $row4['id_syndic'] . '</lien:syndic>' . "\n";
 				}
 				mysql_free_result($res4);
 			}

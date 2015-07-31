@@ -66,7 +66,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 		while($row = mysql_fetch_array($result_message)) {
 			$vals = '';
 
-			$id_message = $row[0];
+			$id_message = $row['id_message'];
 			$date = $row["date_heure"];
 			$titre = $row["titre"];
 			$type = $row["type"];

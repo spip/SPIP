@@ -83,7 +83,7 @@ function extrait_article($row) {
 	$result_auteurs = spip_query($query);
 
 	while ($row = mysql_fetch_array($result_auteurs)) {
-		$nom_auteur = $row[1];
+		$nom_auteur = $row['nom'];
 
 		if ($les_auteurs) $les_auteurs .= ', ';
 		$les_auteurs .= $nom_auteur;
@@ -109,7 +109,7 @@ function envoyer_mail_publication($id_article) {
 		$result = spip_query($query);
 
 		if ($row = mysql_fetch_array($result)) {
-			$titre = $row[2];
+			$titre = $row['titre'];
 
 			$sujet = "[$nom_site_spip] Article publie";
 			$courr = "Article publié\n--------------\n\n";
@@ -131,7 +131,7 @@ function envoyer_mail_proposition($id_article) {
 		$result = spip_query($query);
 
 		if ($row = mysql_fetch_array($result)) {
-			$titre = $row[2];
+			$titre = $row['titre'];
 
 			$sujet = "[$nom_site_spip] Article propose";
 			$courr = "Article proposé\n---------------\n\n";
@@ -182,10 +182,10 @@ function envoyer_mail_nouveautes() {
 		}
 
 	 	while($row = mysql_fetch_array($result)) {
-			$id_breve = $row[0];
-			$date_heure = nom_jour($row[1])." ".affdate($row[1]);
-			$breve_titre = $row[2];
-			$breve_texte = $row[3];
+			$id_breve = $row['id_breve'];
+			$date_heure = nom_jour($row['date_heure'])." ".affdate($row['date_heure']);
+			$breve_titre = $row['titre'];
+			$breve_texte = $row['texte'];
 
 			$extrait = textebrut(propre(couper_intro($breve_texte, 500)));
 	

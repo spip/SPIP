@@ -59,10 +59,10 @@ function aff_breves($id_rubrique){
 		echo "<TR><TD COLSPAN=2><IMG SRC='img_pack/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD><TD BACKGROUND='img_pack/rien.gif'><IMG SRC='img_pack/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD></TR>";
 	
 	 	while($row=mysql_fetch_array($result)){
-			$id_breve=$row[0];
-			$date_heure=$row[1];
-			$titre=$row[2];
-			$statut=$row[3];
+			$id_breve=$row['id_breve'];
+			$date_heure=$row['date_heure'];
+			$titre=$row['titre'];
+			$statut=$row['statut'];
 
 			if ($ifond==0){
 				$ifond=1;
@@ -122,11 +122,11 @@ function enfant($leparent){
  	$result=spip_query($query);
 
  	while($row=mysql_fetch_array($result)){
-		$id_rubrique=$row[0];
-		$id_parent=$row[1];
-		$titre=$row[2];
-		$descriptif=$row[3];
-		$texte=$row[4];
+		$id_rubrique=$row['id_rubriques'];
+		$id_parent=$row['id_parent'];
+		$titre=$row['titre'];
+		$descriptif=$row['descriptif'];
+		$texte=$row['texte'];
 
 		debut_cadre_enfonce();
 

@@ -215,13 +215,13 @@ function construire_hierarchie($id_rubrique) {
 	$id_rubrique = intval($id_rubrique);
 	while ($id_rubrique) {
 		$hierarchie = $id_rubrique."-".$hierarchie;
-		$query = "SELECT a.id_parent, b.id_parent ".
+		$query = "SELECT a.id_parent ida, b.id_parent idb".
 			"FROM spip_rubriques AS a LEFT JOIN spip_rubriques AS b ON (b.id_rubrique = a.id_parent) ".
 			"WHERE a.id_rubrique = $id_rubrique";
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
-			if ($id_parent = $row[0]) $hierarchie = $id_parent."-".$hierarchie;
-			$id_grand_parent = $row[1];
+			if ($id_parent = $row['ida']) $hierarchie = $id_parent."-".$hierarchie;
+			$id_grand_parent = $row['idb'];
 		}
 		else break;
 		$id_rubrique = $id_grand_parent;
@@ -397,21 +397,21 @@ function calculer_page($fond) {
 		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
 		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
+			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}
 	else if ($id_syndic = $contexte['id_syndic']) {
 		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
 		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
+			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}
 	else if ($id_article = $contexte['id_article']) {
 		$query = "SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
+			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}
 	else {

@@ -350,9 +350,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$statut = $row['statut'];
 			$visites = $row['visites'];
 
-			$query_petition = "SELECT COUNT(*) FROM spip_petitions WHERE id_article=$id_article";
+			$query_petition = "SELECT COUNT(*) AS cnt FROM spip_petitions WHERE id_article=$id_article";
 			$row_petition = mysql_fetch_array(mysql_query($query_petition));
-			$petition = ($row_petition[0] > 0);
+			$petition = ($row_petition['cnt'] > 0);
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
@@ -570,21 +570,21 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 	$nb_forum[$compteur_forum] = mysql_num_rows($request);
 	$i[$compteur_forum] = 1;
  	while($row = mysql_fetch_array($request)) {
-		$id_forum=$row[0];
-		$id_parent=$row[1];
-		$id_rubrique=$row[2];
-		$id_article=$row[3];
-		$id_breve=$row[4];
+		$id_forum=$row['id_forum'];
+		$id_parent=$row['id_parent'];
+		$id_rubrique=$row['id_rubrique'];
+		$id_article=$row['id_article'];
+		$id_breve=$row['id_breve'];
 		$id_message=$row['id_message'];
 		$id_syndic=$row['id_syndic'];
-		$date_heure=$row[5];
-		$titre=$row[6];
-		$texte=$row[7];
-		$auteur=$row[8];
-		$email_auteur=$row[9];
-		$nom_site=$row[10];
-		$url_site=$row[11];
-		$statut=$row[12];
+		$date_heure=$row['date_heure'];
+		$titre=$row['titre'];
+		$texte=$row['texte'];
+		$auteur=$row['auteur'];
+		$email_auteur=$row['email_auteur'];
+		$nom_site=$row['nom_site'];
+		$url_site=$row['url_site'];
+		$statut=$row['statut'];
 		$ip=$row["ip"];
 		$id_auteur=$row["id_auteur"];
 
@@ -1287,7 +1287,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			$total_messages = @mysql_num_rows($result_messages);
 			if ($total_messages == 1) {
 				while($row = @mysql_fetch_array($result_messages)) {
-					$ze_message=$row[0];
+					$ze_message=$row['id_message'];
 					echo "<a href='message.php3?id_message=$ze_message'><font color='red'>VOUS AVEZ UN NOUVEAU MESSAGE</font></a>";
 				}
 			}
@@ -1297,7 +1297,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			
 			if ($total_messages == 1) {
 				while ($row = @mysql_fetch_array($result_messages)) {
-					$ze_message = $row[0];
+					$ze_message = $row['id_message'];
 					echo " | <a href='message.php3?id_message=$ze_message'><font color='white'>UN RENDEZ-VOUS</font></a> ";
 				}
 			}
@@ -1511,9 +1511,9 @@ function afficher_parents($collection){
 		$result2=mysql_query($query2);
 
 		while($row=mysql_fetch_array($result2)){
-			$id_rubrique = $row[0];
-			$id_parent = $row[1];
-			$titre = $row[2];
+			$id_rubrique = $row['id_rubrique'];
+			$id_parent = $row['id_parent'];
+			$titre = $row['titre'];
 			
 			if (acces_restreint_rubrique($id_rubrique)) {
 				$parents="~ <IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";

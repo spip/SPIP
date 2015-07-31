@@ -55,11 +55,11 @@ function enfants($id_parent){
 	while($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$query2 = "SELECT SUM(visites) FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
+		$query2 = "SELECT SUM(visites) AS cnt FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
 		$result2 = mysql_query($query2);
 		$visites = 0;
 		if ($row2 = mysql_fetch_array($result2)) {
-			$visites = $row2[0];
+			$visites = $row2['cnt'];
 		}
 		$nombre_abs[$id_rubrique] = $visites;
 		$nombre_vis[$id_rubrique] = $visites;
@@ -134,19 +134,19 @@ function enfants_aff($id_parent,$decalage) {
 }
 
 
-$query = "SELECT count(*) FROM spip_articles where statut='publie'";
+$query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
 $result = mysql_fetch_array(mysql_query($query));
-$nb_art = $result[0];
+$nb_art = $result['cnt'];
 
 if ($nb_art){
 	$cesite = "<LI> $nb_art articles";
-	$query = "SELECT count(*) FROM spip_breves where statut='publie'";
+	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
 	$result = mysql_fetch_array(mysql_query($query));
-	$nb_breves = $result[0];
+	$nb_breves = $result['cnt'];
 	if ($nb_breves) $cesite .= "<LI> $nb_breves br&egrave;ves";
-	$query = "SELECT count(*) FROM spip_forum where statut='publie'";
+	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
 	$result = mysql_fetch_array(mysql_query($query));
-	$nb_forum = $result[0];
+	$nb_forum = $result['cnt'];
 	if ($nb_forum) $cesite .= "<LI> $nb_forum contributions de forum";
 	echo "<P><B>Ce site contient:<UL> $cesite.</UL></B>";
 }

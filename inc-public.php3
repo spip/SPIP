@@ -89,7 +89,7 @@ else {
 		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
-			$chapo = $row[0];
+			$chapo = $row['chapo'];
 		}
 		if (substr($chapo, 0, 1) == '=') {
 			$url = substr($chapo, 1);
@@ -225,7 +225,7 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 		$result = spip_query($query);
 		unset($fichiers);
 		while ($row = mysql_fetch_array($result)) {
-			$fichier = $row[0];
+			$fichier = $row['fichier'];
 			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
 		}
 		if ($fichiers) {
