@@ -308,6 +308,7 @@ function f_tidy ($texte) {
 	if ($xhtml # tidy demande
 	AND $GLOBALS['html'] # verifie que la page avait l'entete text/html
 	AND strlen($texte)
+	AND (_request('var_fragment') === NULL)
 	AND !headers_sent()) {
 		# Compatibilite ascendante
 		if ($xhtml === true) $xhtml ='tidy';
