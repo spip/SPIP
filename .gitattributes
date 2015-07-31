@@ -104,7 +104,6 @@ ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
-ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
 ecrire/exec/admin_repair.php -text
 ecrire/exec/aide_index.php -text
