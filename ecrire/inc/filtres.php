@@ -238,11 +238,13 @@ function hauteur($img) {
 // et au cas particulier de &amp; qui devient &amp;amp; dans les url
 // http://doc.spip.org/@corriger_entites_html
 function corriger_entites_html($texte) {
+	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),iS', '&\1', $texte);
 }
 // idem mais corriger aussi les &amp;eacute; en &eacute;
 // http://doc.spip.org/@corriger_toutes_entites_html
 function corriger_toutes_entites_html($texte) {
+	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#?[a-z0-9]+;),S', '&\1', $texte);
 }
 
@@ -254,6 +256,7 @@ function entites_html($texte) {
 // Transformer les &eacute; dans le charset local
 // http://doc.spip.org/@filtrer_entites
 function filtrer_entites($texte) {
+	if (strpos($texte,'&') === false) return $texte;
 #	include_spip('inc/charsets');
 	// filtrer
 	$texte = html2unicode($texte);
