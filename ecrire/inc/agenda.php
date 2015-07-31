@@ -1166,7 +1166,31 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 
 
 
-// Fonction pour la messagerie et la page d'accueil
+// Fonctions pour la messagerie, la page d'accueil et les gadgets
+
+function http_calendrier_messages($annee='', $mois='', $jour='', $heures='')
+{
+	global  $partie_cal, $echelle;
+
+	if ($evtm = sql_calendrier_agenda($annee, $mois))
+		$evtm = http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm);
+	else $evtm= '';
+
+	$evtt = http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces")
+	  . http_calendrier_rv(sql_calendrier_taches_pb(),"pb")
+	  . http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+
+	$evtr= '';
+	if ($heures) {
+		$date = date("$annee-$mois-$jour");
+		$datef = "'$date $heures'";
+		if ($heures = sql_calendrier_interval_rv("'$date'", $datef))
+			$evtr = http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $heures));
+	}
+	return array($evtm, $evtt, $evtr);
+}
+
+
 
 // http://doc.spip.org/@http_calendrier_rv
 function http_calendrier_rv($messages, $type) {
