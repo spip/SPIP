@@ -207,6 +207,29 @@ function quete_logo_file($row, $connect=NULL) {
 	return get_spip_doc($logo);
 }
 
+/**
+ * Trouver l'image logo d'un document
+ *
+ * @param  $row
+ *   description du document, issue de la base
+ * @param  $lien
+ *   url de lien
+ * @param  $align
+ *   alignement left/right
+ * @param  $mode_logo
+ *   mode du logo :
+ *     '' => automatique (vignette sinon apercu sinon icone)
+ *     icone => icone du type du fichier
+ *     apercu => apercu de l'image exclusivement, meme si une vignette existe
+ *     vignette => vignette exclusivement, ou rien si elle n'existe pas
+ * @param  $x
+ *   largeur maxi
+ * @param  $y
+ *   hauteur maxi
+ * @param string $connect
+ *   serveur
+ * @return string
+ */
 function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect=NULL) {
 	include_spip('inc/documents');
 	$logo = '';
@@ -220,8 +243,15 @@ function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect=N
 	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
 }
 
-// Retourne la vignette explicitement attachee a un document
-// le resutat est un fichier local existant, ou une URL
+/**
+ * Retourne la vignette explicitement attachee a un document
+ * le resutat est un fichier local existant, ou une URL
+ * ou vide si pas de vignette
+ *
+ * @param array $row
+ * @param string $connect
+ * @return string
+ */
 function vignette_logo_document($row, $connect='')
 {
 	if (!$row['id_vignette']) return '';
