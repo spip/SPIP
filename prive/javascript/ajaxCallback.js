@@ -130,7 +130,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							leclk_y = leform.clk_y;
             }
         }
-				jQuery(cible).addClass('loading').animeajax();
+				jQuery(cible).addClass('loading').animeajax().positionner(false);
 			},
 			success: function(c){
 				if (c=='noajax'){
@@ -161,19 +161,19 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					.removeClass('loading')
 					.html(c);
 					var a = jQuery('a:first',recu).eq(0);
-					if (a.length 
+					if (a.length
 					  && a.is('a[name=ajax_ancre]')
 					  && jQuery(a.attr('href'),cible).length){
 						a = a.attr('href');
 						if (jQuery(a,cible).length)
 							setTimeout(function(){
-							jQuery(a,cible).positionner(true);
+							jQuery(a,cible).positionner(false);
 							//a = a.split('#');
 							//window.location.hash = a[1];
 							},10);
 					}
 					else{
-						jQuery(cible).positionner(false);
+						//jQuery(cible).positionner(false);
 						if (a.length && a.is('a[name=ajax_redirect]')){
 							a = a.attr('href');
 							jQuery(cible).addClass('loading').animeajax();
@@ -227,18 +227,18 @@ jQuery.fn.ajaxbloc = function() {
 			.html(c)
 			.removeClass('loading');
 			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
-			if (a.length 
+			if (a.length
 			  && a.is('a[name=ajax_ancre]')
 			  && jQuery(a.attr('href'),blocfrag).length){
 			  	a = a.attr('href')
 				setTimeout(function(){
-					jQuery(a,blocfrag).positionner(true);
+					jQuery(a,blocfrag).positionner(false);
 					//a = a.split('#');
 					//window.location.hash = a[1];
 				},10);
 			}
 			else {
-				jQuery(blocfrag).positionner(false);
+				//jQuery(blocfrag).positionner(false);
 			}
 			updateReaderBuffer();
 		}
@@ -268,7 +268,7 @@ jQuery.fn.ajaxbloc = function() {
 				}
 				jQuery(blocfrag)
 				.animeajax()
-				.addClass('loading');
+				.addClass('loading').positionner(false);
 				if (preloaded_urls[url[0]]) {
 					on_pagination(preloaded_urls[url[0]]);
 					triggerAjaxLoad(document);
@@ -291,7 +291,7 @@ jQuery.fn.ajaxbloc = function() {
 			.prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"' />":""))
 			.ajaxForm({
 				beforeSubmit: function(){
-					jQuery(blocfrag).addClass('loading').animeajax();
+					jQuery(blocfrag).addClass('loading').animeajax().positionner(false);
 				},
 				success: function(c){
 					on_pagination(c);
