@@ -797,7 +797,7 @@ numa cor que indica o seu estado:',
 'taille_cache_octets' => 'O tamanho da cache &eacute; atualmente de  @octets@.',
 'taille_cache_vide' => 'A cache est&aacute; vazia.',
 'taille_repertoire_cache' => 'Tamanho do direct&oacute;rio cache',
-'text_article_propose_publication' => 'Artigo proposto para publica&ccedil;&atilde;o. N&atilde;o hesite em dar a sua opini&atilde;o gra&ccedil;as ao f&oacute;rum ligado a este artigo (no fundo da p&aacute;gina).',
+'text_article_propose_publication' => '<MODIF>Artigo proposto para publica&ccedil;&atilde;o. N&atilde;o hesite em dar a sua opini&atilde;o gra&ccedil;as ao f&oacute;rum ligado a este artigo (no fundo da p&aacute;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP n&atilde;o aceitam nenhum acesso an&oacute;nimo. Nesse caso, &eacute; preciso especificar um identificador de acesso inicial a fim de poder depois procurar informa&ccedil;&otilde;es no anu&aacute;rio. Na maior parte dos casos, por&eacute;m, os seguintes campos poder&atilde;o ser deixados vazios.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, dever&aacute; lan&ccedil;ar a
@@ -857,7 +857,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_documents_joints_2' => 'Esta combina&ccedil;&atilde;o n&atilde;o impede a inser&ccedil;&atilde;o de imagens directamente nos artigos.',
 'texte_effacer_base' => 'Apagar a base de dados SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
-'texte_en_cours_validation' => 'Os artigos e not&iacute;cias seguintes est&atilde;o propostos para publica&ccedil;&atilde;o. N&atilde;o hesite em dar a sua opini&atilde;o gra&ccedil;as aos f&oacute;runs que lhes est&atilde;o ligados.',
+'texte_en_cours_validation' => '<MODIF>Os artigos e not&iacute;cias seguintes est&atilde;o propostos para publica&ccedil;&atilde;o. N&atilde;o hesite em dar a sua opini&atilde;o gra&ccedil;as aos f&oacute;runs que lhes est&atilde;o ligados.',
 'texte_enrichir_mise_a_jour' => 'Pode enriquecer a pagina&ccedil;&atilde;o do seu texto, utilizando &laquo;&nbsp;atalhos tipogr&aacute;ficos&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>SPIP dever&aacute; criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repert&oacute;rio<tt>ecrire/data/<tt> ?</b><p>
   Estes ficheiros podem servir-lhe para restringir o acesso aos autores

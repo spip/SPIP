@@ -884,7 +884,7 @@ Le traduzioni sono associate all\'originale,
 'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',
 'taille_cache_vide' => 'La cache &egrave; vuota.',
 'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
-'text_article_propose_publication' => 'Articolo proposto per la pubblicazione. Non esitare ad esprimere il tuo punto di vista nel forum che trovi a fondo pagina.',
+'text_article_propose_publication' => '<MODIF>Articolo proposto per la pubblicazione. Non esitare ad esprimere il tuo punto di vista nel forum che trovi a fondo pagina.',
 'texte_acces_ldap_anonyme_1' => 'Alcuni server LDAP non consentono accessi anonimi. In questo caso si deve specificare un identificatore d\'accesso iniziale al fine di poter poi ricercare delle informazioni nell\'elenco. Nella maggior parte dei casi tuttavia, i campi seguenti potranno essere lasciati vuoti.',
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login delle redattrici e delle amministratrici. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
@@ -947,7 +947,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
 'texte_effacer_statistiques' => 'Cancellare le statistiche',
-'texte_en_cours_validation' => 'Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
+'texte_en_cours_validation' => '<MODIF>Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
 'texte_fichier_authent' => '<MODIF><b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
 e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>

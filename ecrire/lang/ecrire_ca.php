@@ -900,7 +900,7 @@ amb un color que indica el seu estat:',
 'taille_cache_octets' => 'La mida de la mem&ograve;ria cau &eacute;s actualment de @octets@.',
 'taille_cache_vide' => 'La mem&ograve;ria cau est&agrave; buida.',
 'taille_repertoire_cache' => 'Mida del directori de la mem&ograve;ria cau',
-'text_article_propose_publication' => 'Article proposat per a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum lligat a aquest article (al capdavall de la p&agrave;gina).',
+'text_article_propose_publication' => '<MODIF>Article proposat per a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum lligat a aquest article (al capdavall de la p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
 'texte_admin_effacer_01' => 'Aquesta comanda esborra <i>tot</i> el contingut de la base de dades,
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
@@ -959,7 +959,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexaci&oacute;',
 'texte_effacer_statistiques' => 'Esborrar les estad&iacute;stiques',
-'texte_en_cours_validation' => 'Els articles i breus d\'ac&iacute; sota estan proposats per a la seua publicaci&oacute;. No vos estigueu de fer-ne algun comentari al respecte als f&ograve;rums que tenen assignats.',
+'texte_en_cours_validation' => '<MODIF>Els articles i breus d\'ac&iacute; sota estan proposats per a la seua publicaci&oacute;. No vos estigueu de fer-ne algun comentari al respecte als f&ograve;rums que tenen assignats.',
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
 'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p />
  Aquests fitxers us poden servir per restringir l\'acc&eacute;s als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estad&iacute;stiques, per exemple).<p>

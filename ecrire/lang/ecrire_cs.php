@@ -781,7 +781,7 @@ ukazuje jejich stav:',
 'taille_cache_octets' => 'Velikost cache je v sou&#269;asnosti @octets@.',
 'taille_cache_vide' => 'Cache je pr&aacute;zdn&aacute;.',
 'taille_repertoire_cache' => 'Velikost adres&aacute;&#345;e cache',
-'text_article_propose_publication' => '&#268;l&aacute;nky p&#345;ipraven&eacute; k publikov&aacute;n&iacute;. Nev&aacute;hejte p&#345;idat sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je p&#345;ipojeno ke ka&#382;d&eacute;mu &#269;l&aacute;nku (na spodn&iacute;m okraji str&aacute;nky).',
+'text_article_propose_publication' => '<MODIF>&#268;l&aacute;nky p&#345;ipraven&eacute; k publikov&aacute;n&iacute;. Nev&aacute;hejte p&#345;idat sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je p&#345;ipojeno ke ka&#382;d&eacute;mu &#269;l&aacute;nku (na spodn&iacute;m okraji str&aacute;nky).',
 'texte_acces_ldap_anonyme_1' => 'N&#283;kter&eacute; servery LDAP odm&iacute;taj&iacute; anonymn&iacute; p&#345;&iacute;stup. V takov&eacute;m p&#345;&iacute;pad&#283; je t&#345;eba definovat identifika&#269;n&iacute; &uacute;daje pro p&#345;&iacute;stup, aby bylo mo&#382;no hledat v adres&aacute;&#345;i. P&#345;esto je v&#353;ak v&#283;t&#353;inou mo&#382;n&eacute; nechat n&aacute;sleduj&iacute;c&iacute; pole nevypln&#283;n&aacute;.',
 'texte_admin_effacer_01' => 'T&iacute;mto p&#345;&iacute;kazem odstran&iacute;te <i>ve&#353;ker&yacute;</i> obsah datab&aacute;ze,
 v&#269;etn&#283; <i>ve&#353;ker&yacute;ch</i> p&#345;&iacute;stup&#367; redaktor&#367; a spr&aacute;vc&#367;. Pokud jej spust&iacute;te, mus&iacute;te n&aacute;sledn&#283; znovu nainstalovat
@@ -841,7 +841,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_documents_joints_2' => 'I p&#345;i tomto nastaven&iacute; m&#367;&#382;ete vkl&aacute;dat obr&aacute;zky p&#345;&iacute;mo do &#269;l&aacute;nk&#367;.',
 'texte_effacer_base' => 'Odstranit datab&aacute;zi SPIP',
 'texte_effacer_donnees_indexation' => 'Odstranit indexy',
-'texte_en_cours_validation' => 'N&aacute;sleduj&iacute;c&iacute; &#269;l&aacute;nky a novinky jsou p&#345;ipraveny k publikaci. Nev&aacute;hejte p&#345;ipojit sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je k nim p&#345;ipojeno.',
+'texte_en_cours_validation' => '<MODIF>N&aacute;sleduj&iacute;c&iacute; &#269;l&aacute;nky a novinky jsou p&#345;ipraveny k publikaci. Nev&aacute;hejte p&#345;ipojit sv&#367;j n&aacute;zor prost&#345;ednictv&iacute;m diskusn&iacute;ho f&oacute;ra, je&#382; je k nim p&#345;ipojeno.',
 'texte_enrichir_mise_a_jour' => 'Zalamov&aacute;n&iacute; textu m&#367;&#382;ete roz&#353;&iacute;&#345;it pomoc&iacute; "typografick&yacute;ch zkratek".',
 'texte_fichier_authent' => '<MODIF><b>M&aacute; syst&eacute;m SPIP vytvo&#345;it speci&aacute;ln&iacute; soubory <tt>.htpasswd</tt>
   a <tt>.htpasswd-admin</tt> v adres&aacute;&#345;i  @dossier@?</b><p />

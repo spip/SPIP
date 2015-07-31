@@ -917,7 +917,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'taille_cache_octets' => 'O tama&ntilde;o da cach&eacute; &eacute; actualmente de  @octets@.',
 'taille_cache_vide' => 'A cach&eacute; est&aacute; baleira',
 'taille_repertoire_cache' => 'Tama&ntilde;o do directorio de memoria cach&eacute;',
-'text_article_propose_publication' => 'Artigo proposto para a publicaci&oacute;n. Non dubide en deixar un aviso no foro que leva engadido este artigo (embaixo da p&aacute;xina).',
+'text_article_propose_publication' => '<MODIF>Artigo proposto para a publicaci&oacute;n. Non dubide en deixar un aviso no foro que leva engadido este artigo (embaixo da p&aacute;xina).',
 'texte_acces_ldap_anonyme_1' => 'Alg&uacute;ns servidores LDAP non aceptan ning&uacute;n acceso an&oacute;nimo. En tal caso hai que especificar un identificador de acceso inicial para poder procurar informaci&oacute;ns na gu&iacute;a. Na meirande parte dos casos poder&aacute;s deixar os seguintes campos baleiros.',
 'texte_admin_effacer_01' => 'Este comando elimina <i>todo</i> o contido da base de datos,
 		incluindo <i>todos</i> os accesos dos equipos de xesti&oacute;n e de redacci&oacute;n.
@@ -992,7 +992,7 @@ demanda m&aacute;is potencia do servidor.',
 'texte_effacer_base' => 'Eliminar a base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Eliminar os datos de indexaci&oacute;n',
 'texte_effacer_statistiques' => 'Borrar as estat&iacute;sticas',
-'texte_en_cours_validation' => 'Estes artigos e as breves de aqu&iacute; embaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubide en deixar un aviso nos foros que levan engadidos.',
+'texte_en_cours_validation' => '<MODIF>Estes artigos e as breves de aqu&iacute; embaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubide en deixar un aviso nos foros que levan engadidos.',
 'texte_enrichir_mise_a_jour' => 'P&oacute;dese mellorar a presentaci&oacute;n do texto empregando os &laquo;atallos tipogr&aacute;ficos&raquo;.',
 'texte_fichier_authent' => '<b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> no cartafol @dossier@?</b><p />

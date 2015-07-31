@@ -901,7 +901,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'taille_cache_octets' => 'M&#259;rimea tamponului este acum de @octets@.',
 'taille_cache_vide' => 'Tamponul este gol.',
 'taille_repertoire_cache' => 'M&#259;rimea directorului de tampon',
-'text_article_propose_publication' => 'Articol propus pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea cu ajutorul forum-ului ata&#351;at (&icirc;n josul paginii).',
+'text_article_propose_publication' => '<MODIF>Articol propus pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea cu ajutorul forum-ului ata&#351;at (&icirc;n josul paginii).',
 'texte_acces_ldap_anonyme_1' => 'Anumite server-e LDAP nu accept&#259; accesul anonim. &Icirc;n acest caz va trebui s&#259; specifica&#355;i un identificator de acces ini&#355;ial pentru a putea recupera datele din anuar. &Icirc;n majoritatea cazurilor, &icirc;ns&#259;, aceste c&acirc;mpuri pot fi l&#259;sate goale.',
 'texte_admin_effacer_01' => 'Aceast&#259; comand&#259; &#351;terge <i>tot</i> con&#355;inutul bazei de date,
 incluz&acirc;nd <i>toate</i> informa&#355;iile referitoare la redactori sau administratori. Dup&#259; execu&#355;ia acestei comenzi va trebui s&#259; relansa&#355;i procedura de
@@ -965,7 +965,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_effacer_base' => '&#350;terge&#355;i baza de date SPIP',
 'texte_effacer_donnees_indexation' => '&#350;terge&#355;i datele de indexare',
 'texte_effacer_statistiques' => '&#350;terge&#355;i statisticile',
-'texte_en_cours_validation' => 'Articolele &#351;i &#351;tirile de mai jos sunt propuse pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea folosind forum-urile care le sunt ata&#351;ate.',
+'texte_en_cours_validation' => '<MODIF>Articolele &#351;i &#351;tirile de mai jos sunt propuse pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea folosind forum-urile care le sunt ata&#351;ate.',
 'texte_enrichir_mise_a_jour' => 'Pute&#355;i &icirc;mbog&#259;&#355;i aranjarea &icirc;n pagin&#259; a textului dumneavoastr&#259; prin folosirea &laquo;&nbsp;scurt&#259;turilor tipografice&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
   &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul @dossier@ ?</b>

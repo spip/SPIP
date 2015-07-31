@@ -908,7 +908,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'taille_cache_octets' => '&Ouml;nbelle&#287;in &ouml;l&ccedil;&uuml;s&uuml; &#351;u anda @octets@ dir.',
 'taille_cache_vide' => '&Ouml;n bellek bo&#351;.',
 'taille_repertoire_cache' => '&Ouml;n bellek dizininin boyutu',
-'text_article_propose_publication' => 'Yay&#305;n i&ccedil;in &ouml;nerilen makale. Bu makaleye ekli forum yoluyla (sayfan&#305;n alt k&#305;sm&#305;nda) g&ouml;r&uuml;&#351; belirtmekten ka&ccedil;&#305;nmay&#305;n&#305;z.',
+'text_article_propose_publication' => '<MODIF>Yay&#305;n i&ccedil;in &ouml;nerilen makale. Bu makaleye ekli forum yoluyla (sayfan&#305;n alt k&#305;sm&#305;nda) g&ouml;r&uuml;&#351; belirtmekten ka&ccedil;&#305;nmay&#305;n&#305;z.',
 'texte_acces_ldap_anonyme_1' => 'Baz&#305; LDAP sunucular hi&ccedil; bir anonim eri&#351;imi kabul etmiyorlar. Bu durumda,  bir ba&#351;lang&#305;&ccedil; eri&#351;im tan&#305;mlay&#305;c&#305;s&#305; belirtmek gerekir ki sonra dizinde bilgi aranabilsin. Ancak, bir &ccedil;ok durumda, &#351;u alanlar bo&#351; b&#305;rak&#305;labilir:',
 'texte_admin_effacer_01' => 'Bu komut veritaban&#305;n&#305;n,
   yazarlar ve y&ouml;netici eri&#351;imleri dahil, <i>t&uuml;m</i> i&ccedil;eri&#287;ini siler.
@@ -978,7 +978,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_effacer_base' => 'SPIP veritaban&#305;n&#305; sil',
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
 'texte_effacer_statistiques' => '&#304;statistikleri sil',
-'texte_en_cours_validation' => 'A&#351;a&#287;&#305;daki makale ve k&#305;sa haberler yay&#305;n i&ccedil;in &ouml;nerilmi&#351;tir. Bunlara ba&#287;l&#305; olan forumlar arac&#305;l&#305;&#287;&#305;yla fikrinizi belirtmekten &ccedil;ekinmeyiniz. ',
+'texte_en_cours_validation' => '<MODIF>A&#351;a&#287;&#305;daki makale ve k&#305;sa haberler yay&#305;n i&ccedil;in &ouml;nerilmi&#351;tir. Bunlara ba&#287;l&#305; olan forumlar arac&#305;l&#305;&#287;&#305;yla fikrinizi belirtmekten &ccedil;ekinmeyiniz. ',
 'texte_enrichir_mise_a_jour' => 'Metninizin sayfa d&uuml;zenini &laquo;&nbsp;tipografi k&#305;saltmalar&#305;&nbsp;&raquo; kullanarak zenginle&#351;tirebilirsiniz.',
 'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  @dossier@ dizininde yaratmas&#305; gerekir mi ? Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351;sal istatistik program&#305;). Bunun bir yarar&#305; olmad&#305;&#287;&#305;n&#305; d&uuml;&#351;&uuml;n&uuml;yorsan&#305;z bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma i&#351;lemi yap&#305;lmaz).',
 'texte_informations_personnelles_1' => 'Sistem &#351;imdi size ki&#351;iselle&#351;tirilmi&#351; bir eri&#351;im (hesap) yaratacakt&#305;r.',

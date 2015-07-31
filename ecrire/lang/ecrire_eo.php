@@ -903,7 +903,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.',
 'taille_cache_vide' => 'La staplo estas malplena.',
 'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
-'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita kun tiu &#265;i artikolo (malsupre de la pa&#285;o).',
+'text_article_propose_publication' => '<MODIF>Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita kun tiu &#265;i artikolo (malsupre de la pa&#285;o).',
 'texte_acces_ldap_anonyme_1' => 'Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze, necesas difini identecnomon por ser&#265;i informojn en dosierujilo. Plejofte tamen, la sekvantaj tajpujoj povas resti malplenaj.',
 'texte_admin_effacer_01' => 'Tiu komando forvi&#349;as <i>la tutan</i> enhavon de la datenbazo,
 inkluzive de <i>&#265;iuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lan&#265;i la
@@ -978,7 +978,7 @@ demande plus de puissance au serveur.',
 'texte_effacer_base' => 'Forvi&#349;i la SPIP-datenbazon',
 'texte_effacer_donnees_indexation' => 'Forvi&#349;i la indeksajn datenojn',
 'texte_effacer_statistiques' => '<NEW>Effacer les statistiques',
-'texte_en_cours_validation' => 'La artikoloj kaj fulm-informoj &#265;i-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.',
+'texte_en_cours_validation' => '<MODIF>La artikoloj kaj fulm-informoj &#265;i-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.',
 'texte_enrichir_mise_a_jour' => 'Vi povas pliri&#265;igi la enpa&#285;igon de via teksto uzante &laquo;&nbsp;tipografiajn rapidklavojn&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>   kaj <tt>.htpasswd-admin</tt> en dosierujo @dossier@ ?</b><p>
   Tiuj dosieroj ebligas limigi la alirrajton de a&#365;toroj
