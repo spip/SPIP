@@ -296,6 +296,7 @@ function editer_article_chapo($chapo, $config, $aider)
 }
 
 // Choix par defaut des options de presentation
+// http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
 {
 	global $champs_extra, $spip_ecran, $options, $spip_lang;
