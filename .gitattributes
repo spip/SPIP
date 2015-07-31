@@ -32,6 +32,8 @@ dist/images/aide-48_rtl.png -text
 dist/images/aide.gif -text
 dist/images/aide_rtl.gif -text
 dist/images/annonce.gif -text
+dist/images/arrow_left.gif -text
+dist/images/arrow_right.gif -text
 dist/images/article-24.gif -text
 dist/images/asuivre-24.gif -text
 dist/images/asuivre-48.png -text
@@ -100,6 +102,7 @@ dist/images/langues-12.gif -text
 dist/images/langues-24.gif -text
 dist/images/langues-modif-12.gif -text
 dist/images/langues-off-12.gif -text
+dist/images/loader.gif -text
 dist/images/logo-spip.gif -text
 dist/images/logo_spip.jpg -text
 dist/images/loupe-moins.gif -text
@@ -222,8 +225,10 @@ dist/javascript/async_upload.js -text
 dist/javascript/dragdrop_interface.js -text
 dist/javascript/form.js -text
 dist/javascript/jquery-1.0.3.js -text
+dist/javascript/jtip.js -text
 dist/javascript/pause.js -text
 dist/jquery.js.html -text
+dist/jtip.css -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text
@@ -407,6 +412,7 @@ ecrire/exec/gadgets.php -text
 ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
+ecrire/exec/info_plugin.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/informer_auteur.php -text
 ecrire/exec/install.php -text

@@ -40,8 +40,10 @@ function exec_admin_plugin() {
 	global $couleur_claire;
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo "<style type='text/css'>\n";
 	$dir_img_pack = _DIR_IMG_PACK;
+	echo "<link rel='stylesheet' href='".find_in_path('jtip.css')."' type='text/css' media='screen' />";
+	echo "<script src='"._DIR_JAVASCRIPT."jtip.js' type='text/javascript'></script>";
+	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
 	list-style:none ;
@@ -232,11 +234,9 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$maxiter=1000;
 	echo http_script("
 	$(document).ready(
-		function()
-		{
+		function(){
 			$('input.check').click(function(){\$(this).parent().toggleClass('nomplugin_on');});
-		}
-	);");
+		});");
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
@@ -274,8 +274,13 @@ function ligne_plug($plug_file, $actif, $id){
 		$s .=  "</div>";
 	}
 
+	$etat = 'dev';
+	if (isset($info['etat']))
+		$etat = $info['etat'];
+	$nom = typo($info['nom']);
 	// puce d'etat du plugin
 	// <etat>dev|experimental|test|stable</etat>
+	$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500")."' class='jTip' name=\"".attribut_html($nom)."\" id='aide_$plug_file'>?</a></span>";
 	$s .= "<span class='$etat'>&nbsp;</span>";
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
@@ -284,38 +289,15 @@ function ligne_plug($plug_file, $actif, $id){
 	}
 	$id_input++;
 
-	$s .= bouton_block_invisible("$plug_file");
+	//$s .= bouton_block_invisible("$plug_file");
 
-	$s .= ($actif?"":"").typo($info['nom']).($actif?"":"");
+	$s .= $nom;
 	$s .= "</div>";
 
-	// TODO : n'afficher que les actifs, les autres en AHAH
-	if (true
-	OR $actif
-	OR _SPIP_AJAX!=1) # va-t-on afficher le bloc ?
+	// afficher les details d'un plug en secours
+	if (_request('plug')==$plug_file)
 		$s .= affiche_bloc_plugin($plug_file, $info);
 
 	return $s;
 }
-
-// http://doc.spip.org/@affiche_bloc_plugin
-function affiche_bloc_plugin($plug_file, $info) {
-	$s .= debut_block_invisible("$plug_file");
-	$s .= "<div class='detailplugin'>";
-	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
-	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
-
-	if (isset($info['description']))
-		$s .= "<hr/>" . propre($info['description']) . "<br/>";
-
-	if (isset($info['auteur']))
-		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
-	if (isset($info['lien']))
-		$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
-	$s .= "</div>";
-	$s .= fin_block();
-
-	return $s;
-}
-
 ?>
