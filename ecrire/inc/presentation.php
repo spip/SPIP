@@ -739,8 +739,7 @@ function f_boite_infos($flux) {
 	$args = $flux['args'];
 	$type = $args['type'];
 	unset($args['row']);
-	$res = evaluer_fond("prive/infos/$type",$args);
-	$flux['data'] .= rtrim($res['texte']);
+	$flux['data'] .= recuperer_fond("prive/infos/$type",$args);
 	return $flux;
 }
 

@@ -312,7 +312,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 		$type = 'article';
 		$id_rubrique = $row['id_rubrique'];
 		$contexte = array('id'=>$id_article,'id_rubrique'=>$id_rubrique);
-		$fond = evaluer_fond("prive/contenu/$type",$contexte);
+		$fond = recuperer_fond("prive/contenu/$type",$contexte);
 		// permettre aux plugin de faire des modifs ou des ajouts
 		$fond = pipeline('afficher_contenu_objet',
 			array(
@@ -320,7 +320,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 				'type'=>$type,
 				'id_objet'=>$id_article,
 				'contexte'=>$contexte),
-			'data'=> rtrim($fond['texte'])));
+			'data'=> ($fond)));
 	
 		$res .= "<div id='wysiwyg'>$fond</div>";
 	}

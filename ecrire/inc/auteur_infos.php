@@ -63,8 +63,8 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 		'lier_id_article' => $id_article,
 		'auteur' => $auteur
 	);
-	$page = evaluer_fond("prive/editer/auteur", $contexte, $connect);
-	$corps .= $page['texte'];
+
+	$corps .= recuperer_fond("prive/editer/auteur", $contexte, true, $connect);
 	//$corps .= fin_cadre_formulaire(true);
 	$corps .= '</div>';
 

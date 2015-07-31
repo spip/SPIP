@@ -57,8 +57,8 @@ function exec_mots_type_dist()
 		'new'=>_request('new') == "oui"?"oui":$id_groupe,
 		'config_fonc'=>'groupes_mots_edit_config',
 	);
-	$page = evaluer_fond("prive/editer/groupe_mot", $contexte, $connect);
-	$out .= $page['texte'];
+
+	$out .= recuperer_fond("prive/editer/groupe_mot", $contexte, true, $connect);
 	//$out .= fin_cadre_formulaire(true);
 	echo $out;
 

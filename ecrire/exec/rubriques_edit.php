@@ -88,8 +88,8 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	'id_rubrique'=>$id_parent, // pour permettre la specialisation par la rubrique appelante
 	'config_fonc'=>'rubriques_edit_config'
 	);
-	$page = evaluer_fond("prive/editer/rubrique", $contexte, $connect);
-	echo $page['texte'];
+
+	echo recuperer_fond("prive/editer/rubrique", $contexte, true, $connect);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 

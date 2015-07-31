@@ -1808,8 +1808,8 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
-	$res = evaluer_fond("modeles/pagination$modele", $pagination, $connect);
-	return rtrim($res['texte']);
+
+	return recuperer_fond("modeles/pagination$modele", $pagination, true, $connect);
 }
 
 // passer les url relatives a la css d'origine en url absolues
@@ -2225,11 +2225,10 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	$texte = '';
 	if(is_array($balise_deserializee))
 		foreach($balise_deserializee as $k => $v) {
-			$res = evaluer_fond(
-				'modeles/'.$modele,
+			$res = recuperer_fond('modeles/'.$modele,
 				array_merge(array('cle' => $k), (is_array($v) ? $v : array('valeur' => $v)))
 			);
-			$texte .= rtrim($res['texte']);
+			$texte .= $res;
 		}
 	return $texte;
 }
@@ -2279,8 +2278,7 @@ function filtre_cache_static($scripts,$type='js'){
 		  			$comm = _SPIP_PAGE . "=$script[0]"
 		  				. (strlen($script[1])?"($script[1])":'');
 		  			parse_str($script[1],$contexte);
-		  			$contenu = evaluer_fond($script[0],$contexte);
-		  			$contenu = $contenu['texte'];
+		  			$contenu = recuperer_fond($script[0],$contexte);
 		  			if ($type=='css')
 						$contenu = urls_absolues_css($contenu);
 		  		}
