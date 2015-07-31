@@ -140,8 +140,10 @@ function supprimer_fichier($fichier) {
 // $base/${subdir}_ sinon ; le flag $nobase signale qu'on ne veut pas de $base/
 //
 function sous_repertoire($base, $subdir, $nobase = false) {
-	$base = str_replace("//", "/", "$base/");
+	if (!preg_match(',[/_]$,', $base)) $base .= '/';
+	$base = str_replace("//", "/", $base);
 	$baseaff = $nobase ? '' : $base;
+	# $base = 'IMG/distant/' ou 'IMG/distant_'
 
 	if (!strlen($subdir)) return $baseaff;
 
@@ -150,7 +152,8 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	if (@file_exists("$base${subdir}.plat"))
 		return "$baseaff${subdir}_";; 
 
-	$path = $base.'/'.$subdir;
+	$path = $base.$subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
+
 	if (@file_exists("$path/.ok"))
 		return "$baseaff$subdir/";
 
