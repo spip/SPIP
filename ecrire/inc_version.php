@@ -132,7 +132,8 @@ $quota_cache = 10;
 // Serveurs externes
 //
 # aide en ligne
-$help_server = 'http://www.spip.net/aide';
+$home_server = 'http://www.spip.net';
+$help_server = $home_server . '/aide';
 # TeX
 $tex_server = 'http://math.spip.org/tex.php';
 # MathML (pas pour l'instant: manque un bon convertisseur)
@@ -199,7 +200,27 @@ $tableau_raccourcis = array(
 	'im' => 'document',
 	'img' => 'document',
 	'image' => 'document',
-	'spip' => array(19 => 3368) // num article sur spipnet. A completer
+	// articles de reference sur www.spip.net
+	'spip' => array( 
+		1 => 1309,
+		10 => 1309,
+		103 => 1309,
+		104 => 1309,
+		105 => 1309,
+		12 => 1310,
+		121 => 1310,
+		13 => 1253,
+		14 => 1832,
+		15 => 1911,
+		16 => 1965,
+		17 => 2102,
+		171 => 2102,
+		172 => 2102,
+		18 => 2991,
+		181 => 2991,
+		182 => 3173,
+		183 => 3333,
+		19 => 3368)
 );
 
 # la matrice standard (fichiers definissant les fonctions a inclure)

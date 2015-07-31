@@ -572,7 +572,6 @@ function calculer_url ($lien, $texte='', $pour='url') {
 			$f = $tableau_raccourcis[$f];
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		if (function_exists($f)) {
-			charger_generer_url();
 			if ($pour == 'url') return $f($match[2]) . $ancre;
 			$res = $f($match[2], $texte, $ancre);
 			return ($pour == 'titre') ? $res[2] : $res;
@@ -685,11 +684,13 @@ function calculer_url_site($id, $texte, $ancre)
 
 function calculer_url_spip($id, $texte, $ancre)
 {
-	global $tableau_raccourcis;
+	global $tableau_raccourcis, $home_server;
 	if (is_numeric($tableau_raccourcis['spip'][$id]))
-		$p= "spip.php?page=article&amp;id_article=" . $tableau_raccourcis['spip'][$id];
+		$p= "/spip.php?page=article&amp;id_article=" . $tableau_raccourcis['spip'][$id];
 	else $p = '';
-	return array("http://www.spip.net/$p$ancre", 'spip', "SPIP $id");
+	return array($home_server ."$p$ancre",
+		     'spip',
+		     'SPIP ' . join('.', preg_split('//',strval($id),-1,PREG_SPLIT_NO_EMPTY)));
 }
 
 //
