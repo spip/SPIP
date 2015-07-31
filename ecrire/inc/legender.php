@@ -128,10 +128,12 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$s = ($ancre =='documents' ? '': '-');
 
 	if (preg_match('/_edit$/', $script)){
-		if ($id==0)
+		if ($id==0) {
 			$action = redirige_action_auteur('supprimer', "document-$id_document-$script-$id", $script, "id_$type=$id#$ancre");
-		else
+		} else {
 			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+			$ajax = true;
+		}
 	}
 	else {
 		if (test_espace_prive())
@@ -145,7 +147,14 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
 	// et ca buggue si on propose de supprimer => on ne propose pas
-	if (!($id < 0) && ($document['vu']=='non' OR is_null($document['vu'])))
+	$supprimer = true;
+	if ($id < 0)
+		$supprimer = false;
+
+	if ($document['vu']=='oui')
+		$supprimer = (sql_countsel('spip_documents_liens', 'id_document='.$id_document) <= 1);
+
+	if ($supprimer)
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
 	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
@@ -159,12 +168,12 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	$id_vignette = $document['id_vignette'];
 	$texte = _T('info_supprimer_vignette');
 
+	$s = ($ancre =='documents' ? '': '-');
 	if (preg_match('/_edit$/', $script)) {
 		$iframe_redirect = generer_url_ecrire("documents_colonne","id=$id&type=$type",true);
-		$action = redirige_action_auteur('supprimer', "document-$id_vignette-$script-$id", $script, "id_$type=$id&show_docs=$id_document#$ancre");
+		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
 	} else {
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
-		$s = ($ancre =='documents' ? '': '-');
 		$f = $id_vignette ? "/$id_document" : '';
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}

@@ -225,9 +225,12 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 	$id_document_actif = _request('show_docs');
 
+	$joindre = charger_fonction('joindre', 'inc');
+
+	define('_INTERFACE_DOCUMENTS', false);
+	if (!_INTERFACE_DOCUMENTS) {
 
 	// Ajouter nouvelle image
-	$joindre = charger_fonction('joindre', 'inc');
 	$ret = "<div id='images'>\n" 
 		. $joindre(array(
 			'cadre' => 'relief',
@@ -246,14 +249,6 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		))
 		. '</div><br />';
 
-	//// Documents associes
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='document'", "", "D.id_document");
-
-
-	$documents_lies = array();
-	while ($row = sql_fetch($res))
-		$documents_lies[]= $row['id_document'];
-
 	//// Images sans documents
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='image'", "", "D.id_document");
 
@@ -265,19 +260,29 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
 	}
 
+	$ret .= "</div><br /><br />\n";
+
+	}
+
 	/// Ajouter nouveau document
-	$ret .= "</div><br /><br /><div id='documents'></div>\n<div id='portfolio'></div>\n";
-	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
+	$bouton = !_INTERFACE_DOCUMENTS
+		? majuscules(_T('bouton_ajouter_document')).aide("ins_doc")
+		: (_L('Ajouter une image ou&nbsp;un&nbsp;document')).aide("ins_doc");
+
+	$ret .= "<div id='documents'></div>\n<div id='portfolio'></div>\n";
+	if (_INTERFACE_DOCUMENTS
+	OR !isset($GLOBALS['meta']["documents_$type"])
+	OR $GLOBALS['meta']["documents_$type"]!='non') {
 		$ret .= $joindre(array(
-			'cadre' => 'enfonce',
+			'cadre' => _INTERFACE_DOCUMENTS ? 'relief' : 'enfonce',
 			'icone' => 'doc-24.gif',
 			'fonction' => 'creer.gif',
-			'titre' => majuscules(_T('bouton_ajouter_document')).aide("ins_doc"),
+			'titre' => $bouton,
 			'script' => $script,
 			'args' => "id_$type=$id",
 			'id' => $id,
 			'intitule' => _T('info_telecharger'),
-			'mode' => 'document',
+			'mode' => _INTERFACE_DOCUMENTS ? 'choix' : 'document',
 			'type' => $type,
 			'ancre' => '',
 			'id_document' => 0,
@@ -286,11 +291,18 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 
 	// Afficher les documents lies
-	$ret .= "<div id='liste_documents'>\n";
+	$ret .= "<br /><div id='liste_documents'>\n";
 
-	foreach($documents_lies as $id_document) {
-		$ret .= afficher_case_document($id_document, $id, $script, $type, ($id_document_actif==$id_document));
-	}
+	//// Documents associes
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type)
+	. (!_INTERFACE_DOCUMENTS
+		? " AND D.mode='document'"
+		: " AND D.mode IN ('image','document')"
+	), "", "D.mode, D.id_document");
+
+	while($row = sql_fetch($res))
+		$ret .= afficher_case_document($row['id_document'], $id, $script, $type, ($id_document_actif==$row['id_document']));
+
 	$ret .= "</div>";
 	if (test_espace_prive()){
 		$ret .= http_script('', "async_upload.js")

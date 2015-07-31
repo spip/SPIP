@@ -126,9 +126,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if ($ext == "mov") {
 			$largeur = 0;
 			$hauteur = 0;
-		} else 	if ($ext == "svg") {
-		  // recuperer les dimensions et supprimer les scripts
-				list($largeur,$hauteur)= traite_svg($fichier);
+		} else if ($ext == "svg") {
+			// recuperer les dimensions et supprimer les scripts
+			list($largeur,$hauteur)= traite_svg($fichier);
 		} else { // image ?
 		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
 			$size_image = @getimagesize($fichier);
@@ -143,6 +143,20 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			spip_log ("Echec copie du fichier $fichier");
 			return;
 		}
+
+
+		// _INTERFACE_DOCUMENTS
+		// Si mode == 'choix', fixer le mode image/document
+		// en fonction de la taille de l'image
+		if ($mode == 'choix') {
+			if (in_array($type_image, array('gif', 'png', 'jpg'))
+			AND $largeur > 0
+			AND $largeur < 300)
+				$mode = 'image';
+			else
+				$mode = 'document';
+		}
+
 
 		if (!$type_image) {
 			if (_DOC_MAX_SIZE > 0

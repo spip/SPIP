@@ -187,6 +187,8 @@ function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_obj
 			$GLOBALS['doublons_documents_inclus']);
 		$res = sql_select("id_document", "spip_documents", $in_liste);
 		while ($row = sql_fetch($res)) {
+			// Creer le lien s'il n'existe pas deja
+			sql_insertq("spip_documents_liens", array('id_objet'=>$id, 'objet'=>$type, 'id_document' => $row['id_document'], 'vu' => 'oui'));
 			sql_updateq("spip_documents_liens", array("vu" => 'oui'), "id_objet=$id AND objet=".sql_quote($type)." AND id_document=" . $row['id_document']);
 		}
 	}
