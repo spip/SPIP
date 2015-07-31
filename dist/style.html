@@ -38,7 +38,7 @@ td {
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
-	behavior: url(win_width.htc);
+	behavior: url(#EVAL{_DIR_IMG_PACK}win_width.htc);
  	font-size: 12px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
@@ -49,7 +49,7 @@ td {
 	background-color: white; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
-	behavior: url(win_width.htc);
+	behavior: url(#EVAL{_DIR_IMG_PACK}win_width.htc);
  	font-size: 12px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
@@ -116,7 +116,7 @@ select.fondl {
 	width: 11px;
 	padding: 0px;
 	margin: 0px;
-	background: url(#ENV{dir}tirets-separation.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}tirets-separation.gif);
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -169,7 +169,7 @@ a.bandeau_rub {
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
 	background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center;
-	background-image: url(#ENV{dir}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
 }
 a.bandeau_rub:hover {
 	background-color: white;
@@ -190,7 +190,7 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }
 div.pos_r {
 	position: relative;
@@ -198,7 +198,7 @@ div.pos_r {
 
 option.selec_rub {
 	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] center;
-	background-image: url(#ENV{dir}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
 	background-repeat: no-repeat;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 }
@@ -232,7 +232,7 @@ a.icone26 img {
 	background-color: ##ENV{couleur_foncee,3874b0};
 }
 a.icone26:hover img {
-	background: url(#ENV{dir}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 }
 
 
@@ -354,7 +354,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background: url(#ENV{dir}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 }
 
 
@@ -379,7 +379,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
-	background: url(#ENV{dir}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
 }
@@ -486,7 +486,7 @@ a.cellule-h div.cell-i {
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#ENV{dir}fond-gris-anim.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0px;
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
@@ -529,7 +529,7 @@ a.cellule-h-texte {
 }
 .danger a.cellule-h-texte {
 	border: 1px dashed black;
-	background: url(#ENV{dir}rayures-sup.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
@@ -623,10 +623,10 @@ div.onglet_off {
 
 
 .reliefblanc {
-	 background-image: url(#ENV{dir}barre-blanc.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}barre-blanc.gif);
 }
 .reliefgris { 
-	 background-image: url(#ENV{dir}barre-noir.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}barre-noir.gif);
 }
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
@@ -635,7 +635,7 @@ div.onglet_off {
 	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
-	background: url(#ENV{dir}rayures-sup.gif);
+	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
 }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
@@ -714,7 +714,7 @@ a.ortho-dico:hover {
 	z-index: 0;
 }
 .suggest-actif .detail ul, .suggest-inactif .detail ul {
-	 list-style-image: url(#ENV{dir}puce.gif);
+	 list-style-image: url(#EVAL{_DIR_IMG_PACK}puce.gif);
 	background: #f3f2f3;
 	margin: 0px;
 	padding: 0px;
@@ -1007,19 +1007,19 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles .publie {
-	 background-image: url(#ENV{dir}puce-verte.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-verte.gif);
 }
 .plan-articles .prepa {
-	 background-image: url(#ENV{dir}puce-blanche.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-blanche.gif);
 }
 .plan-articles .prop {
-	 background-image: url(#ENV{dir}puce-orange.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-orange.gif);
 }
 .plan-articles .refuse {
-	 background-image: url(#ENV{dir}puce-rouge.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-rouge.gif);
 }
 .plan-articles .poubelle {
-	 background-image: url(#ENV{dir}puce-poubelle.gif);
+	 background-image: url(#EVAL{_DIR_IMG_PACK}puce-poubelle.gif);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
@@ -1069,7 +1069,7 @@ div.liste {
 }
 
 a.liste-mot {
-	background: url(#ENV{dir}petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
+	background: url(#EVAL{_DIR_IMG_PACK}petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
 }
 
@@ -1140,7 +1140,7 @@ div.brouteur_rubrique {
 	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: white;
 }
 
@@ -1152,7 +1152,7 @@ div.brouteur_rubrique_on {
 	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1205,7 +1205,7 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(#ENV{dir}spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
 	border-bottom: 1px solid;
 }
@@ -1231,7 +1231,7 @@ a.spip_glossaire:hover {
 	margin-top: 10px;
 	padding: 5px;
 	border: 1px solid #666666;
-	behavior: url(win_width.htc);
+	behavior: url(#EVAL{_DIR_IMG_PACK}win_width.htc);
 }
 blockquote.spip {
 	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;
@@ -1297,7 +1297,7 @@ a.triangle_block:hover {
 }
 
 .fond-agenda {
-	background: url(#ENV{dir}fond-agenda.gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}fond-agenda.gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	float: [(#ENV{ltr}|choixsiegal{left,left,right})]; 
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 4px;
@@ -1320,10 +1320,10 @@ a.triangle_block:hover {
 
 div.petite-rubrique {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
-	background-image: url(#ENV{dir}rubrique-12.gif);
+	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
 }
 div.rub-ouverte {
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
-	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }

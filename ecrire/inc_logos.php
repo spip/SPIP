@@ -239,7 +239,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 		else if ($process == 'convert') {
 			$format = $formats_sortie[0];
 			$vignette = $destination.".".$format;
-			$commande = "$convert_command -size ${destWidth}x${destHeight} ./$image -geometry ${destWidth}x${destHeight} +profile \"*\" ./".escapeshellcmd($vignette);
+			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" ./".escapeshellcmd($vignette);
 			spip_log($commande);
 			exec($commande);
 			if (!@file_exists($vignette)) {
@@ -492,6 +492,9 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 					$destHeight = $preview['height'];
 				}
 
+				// dans l'espace prive mettre un timestamp sur l'adresse 
+				// de l'image, de facon a tromper le cache du navigateur
+				// quand on fait supprimer/reuploader un logo
 				if (!_DIR_RESTREINT)
 					$date = '?date='.filemtime($logo);
 				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";

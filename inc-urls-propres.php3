@@ -200,8 +200,13 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	// Migration depuis anciennes URLs ?
-	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' &&
-preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)([?&].*)?)$,', $url, $regs)) {
+	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' AND
+	(preg_match(
+	',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
+	.'([?&].*)?$,', $url, $regs)
+	OR preg_match(
+	',(^|/)page\.php3?[?]fond=(article|breve|rubrique|mot|auteur|site)'
+	.'&id_(\2|syndic)=[0-9]+([&].*)?$,', $url, $regs))) {
 		$type = $regs[3];
 		$id_objet = intval($GLOBALS[$id_table_objet = id_table_objet($type)]);
 		if ($id_objet) {

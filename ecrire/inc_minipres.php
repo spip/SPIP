@@ -28,9 +28,7 @@ function install_debut_html($titre = 'AUTO') {
 
 	http_no_cache();
 	$args =  "couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
-		$GLOBALS['spip_lang_left']
-	  	. '&dir='
-		. _DIR_IMG_PACK;
+		$GLOBALS['spip_lang_left'];
 ;
 	echo  _DOCTYPE_ECRIRE ,
 	  "<html lang='",$GLOBALS['spip_lang'],

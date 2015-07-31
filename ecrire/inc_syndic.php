@@ -21,8 +21,8 @@ function executer_une_syndication() {
 
 	## valeurs modifiables dans mes_options
 	## attention il est tres mal vu de prendre une periode < 20 minutes
-	define_once('_PERIODE_SYNDICATION', 2*60);
-	define_once('_PERIODE_SYNDICATION_SUSPENDUE', 24*60);
+	define('_PERIODE_SYNDICATION', 2*60);
+	define('_PERIODE_SYNDICATION_SUSPENDUE', 24*60);
 
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue

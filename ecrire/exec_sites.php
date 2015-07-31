@@ -25,6 +25,7 @@ function sites_dist()
 {
 global 
   $analyser_site,
+  $ajouter_lien,
   $annee,
   $champs_extra,
   $cherche_mot,
@@ -51,6 +52,7 @@ global
   $spip_lang_left,
   $spip_lang_right,
   $supp_mot,
+  $supprimer_lien,
   $syndication,
   $syndication_old,
   $url,
@@ -67,12 +69,14 @@ $id_syndic = intval($id_syndic);
 $flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));
 
 
-if ($flag_administrable && !_DIR_RESTREINT) {
-		if ($supprimer_lien = intval($GLOBALS["supprimer_lien"]))
-			spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
-		if ($ajouter_lien = intval($GLOBALS["ajouter_lien"]))
-			spip_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
- }
+	if ($flag_administrable) {
+		if ($supprimer_lien = intval($supprimer_lien))
+			spip_query("UPDATE spip_syndic_articles SET statut='refuse'
+			WHERE id_syndic_article='$supprimer_lien'");
+		if ($ajouter_lien = intval($ajouter_lien))
+			spip_query("UPDATE spip_syndic_articles SET statut='publie'
+			WHERE id_syndic_article='$ajouter_lien'");
+	}
 
 if ($new == 'oui') {
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0));

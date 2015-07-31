@@ -46,8 +46,12 @@ tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
 // On ne prend la $puce_rtl par defaut que si $puce n'a pas ete redefinie
 
 //if (!tester_variable('puce', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>")) {
-if (!tester_variable('puce', "<img class='spip_puce' src='puce.gif' alt='-' />&nbsp;")) {
-	tester_variable('puce_rtl', "<img class='spip_puce' src='puce_rtl.gif' alt='-' />&nbsp;");
+$puce = _DIR_RESTREINT ?
+	find_in_path('puce.gif'): _DIR_IMG_PACK.'puce.gif';
+$puce_rtl = _DIR_RESTREINT ?
+	find_in_path('puce_rtl.gif'): _DIR_IMG_PACK.'puce_rtl.gif';
+if (!tester_variable('puce', "<img class='spip_puce' src='$puce' alt='-' />&nbsp;")) {
+	tester_variable('puce_rtl', "<img class='spip_puce' src='$puce_rtl' alt='-' />&nbsp;");
 }
 
 
@@ -335,7 +339,7 @@ function safehtml($t) {
 		return str_replace("\x00", '', $t);
 
 	if (!$test) {
-		define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
+		define('XML_HTMLSAX3', _DIR_INCLUDE."safehtml/classes/");
 		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
 			include_local(XML_HTMLSAX3.'safehtml');
 			$process = new safehtml();
@@ -713,10 +717,13 @@ function traiter_tableau($bloc) {
 	}
 
 	// maintenant qu'on a toutes les cellules
-	// on prepare une liste de rowspan par défaut
-	$rowspans= array_fill(0, count($lignes[0]), 1);
+	// on prepare une liste de rowspan par defaut, a partir
+	// du nombre de colonnes dans la premiere ligne
+	$rowspans = array();
+	for ($i=0; $i<count($lignes[0]); $i++)
+		$rowspans[] = 1;
 
-	// et on parcours le tableau a l'envers pour ramasser les
+	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
 	for($l=count($lignes)-1; $l>=0; $l--) {
 		$cols= $lignes[$l];

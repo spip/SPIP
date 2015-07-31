@@ -69,12 +69,14 @@ RewriteRule "." - [skip=100]
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
 # voir fichier inc-urls-html.php3
-RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
-RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
-RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
-RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
-RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
-RewriteRule ^site([0-9]+)\.html$		site.php3?id_syndic=$1 [QSA,L]
+RewriteRule ^rubrique([0-9]+)\.html$	page.php3?fond=rubrique&id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)\.html$	page.php3?fond=article&id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)\.html$	page.php3?fond=breve&id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)\.html$		page.php3?fond=mot&id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)\.html$	page.php3?fond=auteur&id_auteur=$1 [QSA,L]
+RewriteRule ^site([0-9]+)\.html$	page.php3?fond=site&id_syndic=$1 [QSA,L]
+# Note = la compatibilite avec les URLS "standard" : assuree par les fichiers
+# article.php3 etc (s'ils n'ont pas ete effaces)
 # Fin compatibilite
 ###
 
@@ -85,22 +87,22 @@ RewriteRule ^site([0-9]+)\.html$		site.php3?id_syndic=$1 [QSA,L]
 # (fichier associe : inc-urls-propres.php3)
 
 # Les mots-cles
-RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$ mot.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$	page.php3?fond=mot [QSA,E=url_propre:$0,L]
 
 # Les breves
-RewriteRule ^\+[^/\.]+\+?(\.html)?$ breve.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^\+[^/\.]+\+?(\.html)?$ 	page.php3?fond=breve [QSA,E=url_propre:$0,L]
 
 # Les rubriques
-RewriteRule ^-[^/\.]+-?(\.html)?$ rubrique.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^-[^/\.]+-?(\.html)?$	page.php3?fond=rubrique [QSA,E=url_propre:$0,L]
 
 # les auteurs
-RewriteRule ^_[^/\.]+_?(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^_[^/\.]+_?(\.html)?$	page.php3?fond=auteur [QSA,E=url_propre:$0,L]
 
 # Les sites
-RewriteRule ^@[^/\.]+@?(\.html)?$ site.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^@[^/\.]+@?(\.html)?$	page.php3?fond=site [QSA,E=url_propre:$0,L]
 
 # Les articles (en dernier car expression plus "large")
-RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]
+RewriteRule ^[^/\.]+(\.html)?$		page.php3?fond=article [QSA,E=url_propre:$0,L]
 
 # Fin URLs "propres" et "propres2"
 ###

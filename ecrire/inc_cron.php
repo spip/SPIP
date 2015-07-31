@@ -114,7 +114,7 @@ function spip_cron($taches = array()) {
 			spip_log("cron: $tache (" . spip_timer('tache') . ")");
 			// eventuellement modifier la date du fichier
 			if ($code_de_retour < 0) @touch($lock, (0 - $code_de_retour));
-		} else spip_log("cron $tache a reprendre");
+		}# else spip_log("cron $tache a reprendre");
 	}
 
 	// relacher le lock mysql
@@ -137,12 +137,11 @@ function taches_generales() {
 	$taches_generales['optimiser'] = 3600*48;
 
 	// cache
-	if (_DIR_RESTREINT)
-		$taches_generales['invalideur'] = 3600;
+	$taches_generales['invalideur'] = 3600;
 
 	// nouveautes
 	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
-	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui') AND _DIR_RESTREINT)
+	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui'))
 		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
 	// stats : toutes les 5 minutes on peut vider un panier de visites
