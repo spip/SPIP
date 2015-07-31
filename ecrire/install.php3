@@ -34,7 +34,6 @@ if ($etape == 6) {
 	include_ecrire ("inc_meta.php3");
 
 	if ($login) {
-
 		$nom = addslashes($nom);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
 		$result = spip_query_db($query);

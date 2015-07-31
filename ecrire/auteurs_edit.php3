@@ -119,33 +119,32 @@ else if ($statut == "5poubelle") $logo = "redacteurs-poubelle-24.gif";
 else $logo = "redacteurs-24.gif";
 
 
-	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($champs_extra AND $extra)) {
-		debut_cadre_relief("$logo");
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
-		if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
-		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
-		echo "<P>".propre($bio)."</P>";
+if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($champs_extra AND $extra)) {
+	debut_cadre_relief("$logo");
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
+	if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
+	echo "<P>".propre($bio)."</P>";
 
-		if ($champs_extra AND $extra) {
-			include_ecrire("inc_extra.php3");
-			extra_affichage($extra, "auteur");
-		}
-
-		echo "</FONT>";
-		fin_cadre_relief();
+	if ($champs_extra AND $extra) {
+		include_ecrire("inc_extra.php3");
+		extra_affichage($extra, "auteur");
 	}
 
-
-	echo "<P>";
-	if ($connect_statut == "0minirezo") $aff_art = "prepa,prop,publie,refuse";
-	else if($connect_id_auteur == $id_auteur) $aff_art = "prepa,prop,publie";
-	else $aff_art = "prop,publie";
-	
-	afficher_articles(_T('info_articles_auteur'),
-	"SELECT article.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-	"FROM spip_articles AS article, spip_auteurs_articles AS lien WHERE lien.id_auteur='$id_auteur' AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_art')>0 ORDER BY article.date DESC");
+	echo "</FONT>";
+	fin_cadre_relief();
+}
 
 
+echo "<P>";
+if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
+else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
+else $aff_art = "'prop','publie'";
+
+afficher_articles(_T('info_articles_auteur'),
+	", spip_auteurs_articles AS lien WHERE lien.id_auteur='$id_auteur' ".
+	"AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art) ".
+	"ORDER BY articles.date DESC");
 }
 
 

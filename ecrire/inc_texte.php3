@@ -378,12 +378,12 @@ function typo($letexte) {
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if (!$typo = $lang_typo) {
+	if (!$lang_typo) {
 		include_ecrire('inc_lang.php3');
-		$typo = lang_typo($spip_lang);
+		lang_typo($spip_lang);
 	}
 
-	if ($typo == 'fr')
+	if ($lang_typo == 'fr')
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);

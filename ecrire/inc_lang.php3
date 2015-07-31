@@ -315,7 +315,6 @@ function traduire_nom_langue($lang) {
 
 // afficher 'gaucher' si la langue est arabe, hebreu, persan, 'droitier' sinon
 // utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT
-// ou encore par [(#LANG|lang_dir{"x","y"})]
 function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he')
 		return $gaucher;
@@ -347,8 +346,6 @@ function changer_typo($lang = '', $source = '') {
 	$lang_typo = lang_typo($lang);
 	$lang_dir = lang_dir($lang);
 	$dir_lang = " dir='$lang_dir'";
-
-	spip_debug("typo '$source' *$lang $lang_typo $lang_dir");
 }
 
 // selectionner une langue
@@ -419,7 +416,7 @@ function gerer_menu_langues() {
 	global $var_lang;
 	if ($var_lang) {
 		if (changer_langue($var_lang)) {
-			spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
+			spip_setcookie('spip_lang', $var_lang, time() + 24 * 3600);
 		}
 	}
 }
@@ -442,14 +439,18 @@ function utiliser_langue_visiteur() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $dir_ecrire, $langue_site, $cache_lang, $cache_lang_modifs;
+	global $all_langs, $flag_ecrire, $langue_site, $cache_lang, $cache_lang_modifs;
+	global $pile_langues, $lang_typo, $lang_dir;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
 	$cache_lang = array();
 	$cache_lang_modifs = array();
+	$pile_langues = array();
+	$lang_typo = '';
+	$lang_dir = '';
 
-	if (!$all_langs || !$langue_site || !$dir_ecrire) {
+	if (!$all_langs || !$langue_site || $flag_ecrire) {
 		if (!$d = @opendir($dir_ecrire.'lang')) return;
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
@@ -457,17 +458,22 @@ function init_langues() {
 		}
 		closedir($d);
 		sort($toutes_langs);
-		$all_langs = join(',', $toutes_langs);
+		$all_langs2 = join(',', $toutes_langs);
 
-		if (defined("_ECRIRE_INC_META"))
-			ecrire_meta('langues_proposees', $all_langs);
-
-		if (!$langue_site) {
-			// Initialisation : le francais par defaut, sinon la premiere langue trouvee
-			if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
-			else list(, $langue_site) = each($toutes_langs);
-			if (defined("_ECRIRE_INC_META"))
-				ecrire_meta('langue_site', $langue_site);
+		// Si les langues n'ont pas change, ne rien faire
+		if ($all_langs2 != $all_langs) {
+			$all_langs = $all_langs2;
+			if (!$langue_site) {
+				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
+				if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
+				else list(, $langue_site) = each($toutes_langs);
+				if (defined("_ECRIRE_INC_META"))
+					ecrire_meta('langue_site', $langue_site);
+			}
+			if (defined("_ECRIRE_INC_META")) {
+				ecrire_meta('langues_proposees', $all_langs);
+				ecrire_metas();
+			}
 		}
 	}
 }
@@ -496,6 +502,7 @@ utiliser_langue_site();
  * Url :
  * Description : Implementation de array_push() et array_pop pour PHP3
 ****/
+// Le code qui suit est encore un peu trop leger. Y a personne pour le coder en Java (ou en Flash) ?
 function php3_array_push(&$stack,$value){
 	if (!is_array($stack))
 		return FALSE;

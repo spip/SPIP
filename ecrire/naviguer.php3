@@ -474,18 +474,16 @@ echo "<DIV align='left'>";
 
 echo "<P>";
 afficher_articles(_T('info_en_cours_validation'),
-"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
-"WHERE articles.id_article=lien.id_article AND id_rubrique='$coll' ".
-"AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
+	", spip_auteurs_articles AS lien ".
+	"WHERE articles.id_article=lien.id_article AND id_rubrique='$coll' ".
+	"AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
 
 
 //////////  Les articles a valider
 /////////////////////////
 
 afficher_articles(_T('info_articles_a_valider'),
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-"FROM spip_articles WHERE statut=\"prop\" AND id_rubrique='$coll' ORDER BY date DESC");
+	"WHERE statut=\"prop\" AND id_rubrique='$coll' ORDER BY date DESC");
 
 
 //////////  Les articles en cours de redaction
@@ -493,8 +491,7 @@ afficher_articles(_T('info_articles_a_valider'),
 
 if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 	afficher_articles(_T('info_tous_articles_en_redaction'),
-	"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-	"FROM spip_articles WHERE statut=\"prepa\" AND id_rubrique='$coll' ORDER BY date DESC");
+		"WHERE statut=\"prepa\" AND id_rubrique='$coll' ORDER BY date DESC");
 }
 
 
@@ -502,8 +499,7 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 /////////////////////////
 
 afficher_articles(_T('info_tous_articles_presents'),
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-"FROM spip_articles WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC");
+	"WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC");
 
 if ($coll > 0){
 	echo "<div align='right'>";

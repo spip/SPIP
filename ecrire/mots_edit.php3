@@ -174,17 +174,17 @@ if ($id_mot) {
 	echo "<P>";
 
 	if ($connect_statut == "0minirezo")
-		$aff_articles = "prepa,prop,publie,refuse";
+		$aff_articles = "'prepa','prop','publie','refuse'";
 	else
-		$aff_articles = "prop,publie";
+		$aff_articles = "'prop','publie'";
 
 	afficher_rubriques(_T('info_rubriques_liees_mot'),
 	"SELECT rubrique.* FROM spip_rubriques AS rubrique, spip_mots_rubriques AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_rubrique=rubrique.id_rubrique ORDER BY rubrique.titre");
 
 	afficher_articles(_T('info_articles_lies_mot'),
-	"SELECT article.* FROM spip_articles AS article, spip_mots_articles AS lien WHERE lien.id_mot='$id_mot'
-	AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 ORDER BY article.date DESC");
+	", spip_mots_articles AS lien WHERE lien.id_mot='$id_mot'
+	AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles) ORDER BY articles.date DESC");
 
 	afficher_breves(_T('info_breves_liees_mot'),
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'

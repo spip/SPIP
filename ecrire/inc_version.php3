@@ -149,7 +149,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.716;
+$spip_version = 1.717;
 
 // version de spip
 $spip_version_affichee = "1.7a7 CVS";
@@ -165,9 +165,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 $auteur_session = '';
 $connect_statut = '';
 $hash_recherche = '';
-$pile_langues = Array();
-$lang_typo = '';
-$lang_dir = '';
 
 
 //

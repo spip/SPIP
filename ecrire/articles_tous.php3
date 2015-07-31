@@ -97,9 +97,6 @@ function enfants($id_parent, $decalage = 0) {
 		$sucrer = '';
 		$lien = '';
 
-
-
-		//$flag_active = ereg("(^|,)$id_rubrique(\$|,)", $coll_actives);
 		if (tester_rubrique_vide("$id_rubrique") ==  true) {
 			$sucrer="[<A HREF='articles_tous.php3?liste_coll=$liste_coll&supp_rubrique=$id_rubrique'><font color='white'>"._T('lien_supprimer')."</font></A>]";
 		}
@@ -124,9 +121,10 @@ function enfants($id_parent, $decalage = 0) {
 			$bandeau = "<A HREF='$lien'>";
 			$bandeau .= "<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'></A>";
 			$bandeau .= " <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='white'>$titre</FONT></A> $sucrer";
-			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles ".
-				"WHERE id_rubrique=$id_rubrique AND statut IN ($statut_art) ORDER BY date DESC";
-			afficher_articles($bandeau, $requete, false, false, true, false);
+/*			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles ".
+				"WHERE id_rubrique=$id_rubrique AND statut IN ($statut_art) ORDER BY date DESC";*/
+			$requete = "WHERE id_rubrique=$id_rubrique AND statut IN ($statut_art) ORDER BY date DESC";
+			afficher_articles($bandeau, $requete, false, false, true, false, false);
 			if ($decalage) {
 				echo "</TD></TR></TABLE>";
 			}
