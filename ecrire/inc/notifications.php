@@ -120,8 +120,7 @@ function notifier_proposition_article($id_article) {
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"));
 		if ($row) {
 
-			$lang_utilisateur = $GLOBALS['spip_lang'];
-			changer_langue($row['lang']);
+			if ($l = $row['lang']) $l = lang_select($l);
 
 			$titre = nettoyer_titre_email($row['titre']);
 
@@ -140,7 +139,7 @@ function notifier_proposition_article($id_article) {
 				. "\n\n\n" 
 				. extrait_article($row)
 			);
-			changer_langue($lang_utilisateur);
+			if ($l) lang_select();
 		}
 	}
 }
