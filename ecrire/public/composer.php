@@ -426,7 +426,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// Calculer le code html complet (cf. calcule_logo)
 	$logo = inserer_attribut($logo, 'alt', '');
-	$logo = inserer_attribut($logo, 'style', 'border-width: 0px;');
 	$logo = inserer_attribut($logo, 'class', 'spip_logos');
 	if ($align)
 		$logo = inserer_attribut($logo, 'align', $align);
