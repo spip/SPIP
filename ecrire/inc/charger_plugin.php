@@ -428,13 +428,13 @@ function essaie_ajouter_liste_plugins($url) {
 	OR !preg_match(',<item,i', $rss))
 		return;
 
-	$liste = chercher_enclosures_zip($rss);
+	$liste = chercher_enclosures_zip($rss,true);
 	if (!$liste)
 		return;
 
 	// Ici c'est bon, on conserve l'url dans spip_meta
-	// et une copie du flux dans tmp/
-	ecrire_fichier(_DIR_TMP.'syndic_plug_'.md5($url).'.xml', $rss);
+	// et une copie du flux analise dans tmp/
+	ecrire_fichier(_DIR_TMP.'syndic_plug_'.md5($url).'.txt', serialize($liste));
 	$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
 	$syndic_plug[$url] = count($liste);
 	ecrire_meta('syndic_plug', serialize($syndic_plug));
@@ -454,7 +454,7 @@ function chercher_enclosures_zip($rss, $desc = '') {
 				if (extraire_attribut($zip, 'type') == 'application/zip') {
 					if ($url = extraire_attribut($zip, 'href')) {
 						$liste[$url] = array($item['titre'], $item['url']);
-						if ($desc == $url)
+						if ($desc===true OR $desc == $url)
 							$liste[$url][] = $item;
 					}
 				}
@@ -474,9 +474,9 @@ function liste_plugins_distants($desc = false) {
 	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
 	
 		foreach ($flux as $url => $c) {
-			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
+			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.txt')
 			AND lire_fichier($cache, $rss))
-				$liste = array_merge(chercher_enclosures_zip($rss, $desc),$liste);
+				$liste = array_merge(unserialize($rss),$liste);
 		}
 	}
 
