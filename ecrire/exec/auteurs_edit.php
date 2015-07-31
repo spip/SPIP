@@ -15,13 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/logos');
 include_spip('inc/auteur_voir');
+include_spip('inc/message_select');
 
 function exec_auteurs_edit_dist()
 {
-	global $connect_id_auteur, $id_auteur;
-	$id_auteur = intval($id_auteur);
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" .
-			     $id_auteur);
+	global $connect_id_auteur;
+
+	$id_auteur = intval(_request('id_auteur'));
+
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'");
 
 	if (!$auteur = spip_fetch_array($result)) die('erreur');
 
@@ -48,7 +50,7 @@ function exec_auteurs_edit_dist()
 
 function table_auteurs_edit($auteur)
 {
-	global $connect_statut, $connect_id_auteur, $champs_extra,$options  ;
+	global $connect_statut, $connect_id_auteur, $champs_extra, $options  ;
 
 	$id_auteur=$auteur['id_auteur'];
 	$nom=$auteur['nom'];
@@ -56,14 +58,9 @@ function table_auteurs_edit($auteur)
 	$email=$auteur['email'];
 	$nom_site_auteur=$auteur['nom_site'];
 	$url_site=$auteur['url_site'];
-	$login=$auteur['login'];
-	$pass=$auteur['pass'];
 	$statut=$auteur['statut'];
 	$pgp=$auteur["pgp"];
-	$messagerie=$auteur["messagerie"];
-	$imessage=$auteur["imessage"];
 	$extra = $auteur["extra"];
-	$low_sec = $auteur["low_sec"];
 
 	debut_droite();
 
@@ -121,12 +118,14 @@ function table_auteurs_edit($auteur)
 	    AND ($statut == '0minirezo' OR $statut == '1comite')) {
 		echo "<div>&nbsp;</div>";
 		debut_cadre_couleur();
+
+		$vus = array();
 	
 		$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-		afficher_messages(_T('info_discussion_cours'), $query_message, false, false);
+		afficher_messages(_T('info_discussion_cours'), $query_message, $vus, false, false);
 	
 		$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-		afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
+		afficher_messages(_T('info_vos_rendez_vous'), $query_message, $vus, false, false);
 	
 		icone_horizontale(_T('info_envoyer_message_prive'), generer_url_ecrire("message_edit", "new=oui&type=normal&dest=$id_auteur"),
 				  "message.gif");
