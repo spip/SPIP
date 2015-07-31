@@ -41,15 +41,14 @@ function fichier_session($id_session, $alea) {
 //
 function ajouter_session($auteur, $id_session) {
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
-	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut');
+	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'ip_change', 'hash_env');
 
 	$texte = "<"."?php\n";
 	reset($vars);
 	while (list(, $var) = each($vars)) {
 		$texte .= "\$GLOBALS['auteur_session']['$var'] = '".addslashes($auteur[$var])."';\n";
 	}
-	$texte .= "\$GLOBALS['auteur_session']['hash_env'] = '".hash_env()."';\n";
-	$texte .= "?".">";
+	$texte .= "?".">\n";
 	if ($f = fopen($fichier_session, "wb")) {
 		fputs($f, $texte);
  		fclose($f);
@@ -84,9 +83,11 @@ function verifier_session($id_session) {
 		}
 	}
 
-	// Valider le brouteur et l'IP si on est en mode parano
-	if ($ok AND $GLOBALS['prefs']['securite'] == 'strict')
-		$ok = (hash_env() == $GLOBALS['auteur_session']['hash_env']);
+	// marquer la session comme "ip-change" si le cas se presente
+	if ($ok AND (hash_env() != $GLOBALS['auteur_session']['hash_env']) AND !$GLOBALS['auteur_session']['ip_change']) {
+		$GLOBALS['auteur_session']['ip_change'] = true;
+		ajouter_session($GLOBALS['auteur_session'], $id_session);
+	}
 
 	return $ok;
 }
@@ -111,6 +112,7 @@ function supprimer_session($id_session) {
 function creer_cookie_session($auteur) {
 	if ($id_auteur = $auteur['id_auteur']) {
 		$id_session = $id_auteur.'_'.md5(creer_uniqid());
+		$auteur['hash_env'] = hash_env();
 		ajouter_session($auteur, $id_session);
 		return $id_session;
 	}
@@ -140,9 +142,7 @@ function creer_uniqid() {
 
 
 //
-// Cette fonction regarde toutes les sessions appartenant a l'auteur,
-// et les efface (a l'exception de la session courante)
-//
+// Cette fonction efface toutes les sessions appartenant a l'auteur
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
 //
 function zap_sessions ($id_auteur, $zap) {
@@ -156,8 +156,7 @@ function zap_sessions ($id_auteur, $zap) {
 	$t = time();
 	while(($item = readdir($dir)) != '') {
 		$chemin = "$dirname$item";
-		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)
-			AND ($fichier_session != $chemin)) {
+		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)) {
 
 			// Si c'est une vieille session, on jette
 			if (($t - filemtime($chemin)) > 48 * 3600)
@@ -195,7 +194,7 @@ function verifier_php_auth() {
 			$GLOBALS['auteur_session']['login'] = $row['login'];
 			$GLOBALS['auteur_session']['email'] = $row['email'];
 			$GLOBALS['auteur_session']['statut'] = $row['statut'];
-			$GLOBALS['auteur_session']['hash_env'] = '';
+			$GLOBALS['auteur_session']['hash_env'] = hash_env();
 			return true;
 		}
 	}
