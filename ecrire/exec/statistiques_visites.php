@@ -70,6 +70,8 @@ function exec_statistiques_visites_dist()
 {
 	global $spip_lang_left;
 
+	$accepte_svg = flag_svg();
+
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
 	$origine = _request('origine');
@@ -356,9 +358,7 @@ else {
 					       _T('info_zoom'). '+', 
 					       "style='border: 0px; vertical-align: middle;'"),
 				 "&nbsp;");
-	
-	
-	$accepte_svg = flag_svg();
+
 
 	if ($accepte_svg) {
 	echo "\n<div>";
