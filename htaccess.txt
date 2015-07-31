@@ -83,6 +83,14 @@ RewriteRule ^spip_rss\.php3?$	spip.php?page=rss [QSA,L]
 ###
 
 ###
+# ping http://site/1234 => article1234
+
+RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&id=$1 [QSA,L]
+
+#
+###
+
+###
 # URLs "propres", "propres2", "libres", "arbo"
 
 RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
@@ -103,9 +111,6 @@ RewriteRule ^robots[.]txt$      spip.php?page=robots.txt [QSA,L]
 RewriteRule ^favicon[.]ico$      spip.php?page=favicon.ico [QSA,L]
 RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
 ##
-
-## ping http://site/1234 => article1234
-RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&id=$1 [QSA,L]
 
 # expirer les images (pour contourner gros bug MSIE sur le cache)
 # note : a decommenter si vous voulez tester
