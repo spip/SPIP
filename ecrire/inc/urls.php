@@ -161,10 +161,10 @@ function nettoyer_url_page($url, $contexte=array())
 	return array();
 }
 
-
 /**
- * Generer l'url d'un article dans l'espace prive,
- * fonction du statut de l'article
+ * Generer l'url d'un objet dans l'espace prive,
+ * fonction de son etat publie ou non
+ * calcule a partir de la declaration de statut
  *
  * @param int $id
  * @param string $args
@@ -173,84 +173,21 @@ function nettoyer_url_page($url, $contexte=array())
  * @param string $connect
  * @return string
  *
- * http://doc.spip.org/@generer_url_ecrire_article
  */
-function generer_url_ecrire_article($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_article=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_articles', $a,'','','','',$connect);
+function generer_url_ecrire_objet($objet,$id, $args='', $ancre='', $public=null, $connect=''){
+	if (function_exists($f = 'generer_url_ecrire_' . $objet)
+		// ou definie par un plugin
+	  OR $f = charger_fonction($f,'urls',true))
+		return $f($id, $args, $ancre, $public, $connect);
+	// si pas de flag public fourni
+	// le calculer en fonction de la declaration de statut
+	if (is_null($public) AND !$connect)
+		$public = objet_test_si_publie($objet, $id, $connect);
+	if ($public OR $connect){
+		return generer_url_entite_absolue($id, $objet, $args, $ancre, $connect);
 	}
-	$h = ($statut == 'publie' OR $connect)
-	? generer_url_entite_absolue($id, 'article', $args, $ancre, $connect)
-	: (generer_url_ecrire('article', $a . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
-
-/**
- * Generer l'url d'une rubrique dans l'espace prive,
- * fonction du statut de la rubrique
- *
- * @param int $id
- * @param string $args
- * @param string $ancre
- * @param string $statut
- * @param string $connect
- * @return string
- *
- * http://doc.spip.org/@generer_url_ecrire_rubrique
- */
-function generer_url_ecrire_rubrique($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_rubrique=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_rubriques', $a,'','','','',$connect);
-	}
-	$h = ($statut == 'publie' OR $connect)
-	? generer_url_entite_absolue($id, 'rubrique', $args, $ancre, $connect)
-	: (generer_url_ecrire('naviguer',$a . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
-
-
-/**
- * Generer l'url d'un auteur dans l'espace prive,
- * fonction du statut de l'auteur
- *
- * @param int $id
- * @param string $args
- * @param string $ancre
- * @param string $statut
- * @param string $connect
- * @return string
- *
- * http://doc.spip.org/@generer_url_ecrire_auteur
- */
-function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = (intval($id)?"id_auteur=" . intval($id):'');
-	$h = (!$statut OR $connect)
-	?  generer_url_entite_absolue($id, 'auteur', $args, $ancre, $connect)
-	: (generer_url_ecrire('auteur',$a . ($args ? ($a?"&":"").$args : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
-
-/**
- * Generer l'url d'un document dans l'espace prive,
- * fonction du statut du document
- * 
- * @param int $id
- * @param string $args
- * @param string $ancre
- * @param string $statut
- * @param string $connect
- * @return string
- *
- * http://doc.spip.org/@generer_url_ecrire_document
- */
-function generer_url_ecrire_document($id, $args='', $ancre='', $statut='', $connect='') {
-	include_spip('inc/documents');
-	return generer_url_document_dist($id);
+	$a = id_table_objet($objet) . "=" . intval($id);
+	return generer_url_ecrire(info_objet($objet,'url_voir'), $a . ($args ? "&$args" : '')). ($ancre ? "#$ancre" : '');
 }
 
 ?>
