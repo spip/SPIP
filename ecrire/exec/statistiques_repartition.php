@@ -55,6 +55,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 
 	$result=spip_query("SELECT id_rubrique, titre, descriptif FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY 0+titre, titre");
 
+	spip_log("enfants_aff($id_parent,$decalage, $critere, $gauche=0");
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
@@ -122,20 +123,30 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 function exec_statistiques_repartition_dist()
 {
 
-  global $connect_statut, $connect_toutes_rubriques, $spip_ecran, $taille,
-    $abs_total, $nombre_vis, $critere;
+	global  $abs_total, $nombre_vis, $taille, $spip_ecran;
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_statistiques'), "statistiques_visites", "repartition");
-	
-	if (($connect_statut != '0minirezo')|| !$connect_toutes_rubriques) {
-		echo _T('avis_non_acces_page');
+	if (!autoriser('voirstats')) {
+		include_spip('inc/minipres');
+		echo minipres();
 		exit;
 	}
 
+	$taille = _request('taille');
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_statistiques'), "statistiques_visites", "repartition");
+	
 	echo debut_grand_cadre(true);
 	echo gros_titre(_T('titre_page_statistiques'),'',false);
-
+	if (_ecran == "large") { 
+	 	                $largeur_table = 974; 
+	 	                $taille = 550; 
+	 	        } else { 
+	 	                $largeur_table = 750; 
+	 	                $taille = 400; 
+	 	        } 
+	 	 
+	echo "\n<br /><br /><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>"; 
+	$critere = _request('critere');
 	if ($critere == "debut") {
 		$critere = "visites";
 		echo barre_onglets("stat_depuis", "debut");
@@ -157,6 +168,7 @@ function exec_statistiques_repartition_dist()
 	  _T('texte_signification'),
 	  "</div>";
 	echo fin_cadre_relief(true);
+	echo "</td></tr></table>"; 
 	echo fin_grand_cadre(true),fin_page();
 }
 ?>
