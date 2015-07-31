@@ -142,19 +142,17 @@ function html2unicode($texte, $secure=false) {
 	if (!$trans) {
 		global $CHARSET;
 		load_charset('html');
-		
-		if (!$secure) {
-			$CHARSET['html']['amp'] = '&';
-			$CHARSET['html']['quot'] = '"';
-			$CHARSET['html']['lt'] = '<';
-			$CHARSET['html']['gt'] = '>';
-		}
 		foreach ($CHARSET['html'] as $key => $val) {
 			$trans["&$key;"] = $val;
 		}
 	}
 
-	return strtr($texte, $trans);
+	if ($secure)
+		return strtr($texte, $trans);
+	else
+		return strtr(strtr($texte, $trans),
+			array('&amp;'=>'&', '&quot;'=>'"', '&lt;'=>'<', '&gt;'=>'>')
+		);
 }
 
 //
