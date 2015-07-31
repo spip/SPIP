@@ -795,12 +795,20 @@ function calculer_criteres($idb, &$boucles){
 	return $msg;
 }
 
-// Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
-// hum, c'est kwoi cette fonxion ?
-// http://doc.spip.org/@kwote
-function kwote($lisp){
+/**
+ * Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
+ * hum, c'est kwoi cette fonxion ? on va dire qu'elle desemberlificote les guillemets...
+ *
+ * http://doc.spip.org/@kwote
+ *
+ * @param string $lisp
+ * @param string $serveur
+ * @param string $type
+ * @return string
+ */
+function kwote($lisp, $serveur='', $type=''){
 	if (preg_match(_CODE_QUOTE, $lisp, $r))
-		return $r[1]."\"".sql_quote(str_replace(array("\\'", "\\\\"), array("'", "\\"), $r[2]))."\"";
+		return $r[1]."\"".sql_quote(str_replace(array("\\'", "\\\\"), array("'", "\\"), $r[2]),$serveur,$type)."\"";
 	else
 		return "sql_quote($lisp)";
 }
@@ -1105,16 +1113,16 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		if (!$r) return '';
 		list($col, $col_alias, $table, $where_complement) = $r;
 	}
-	// Si la colonne SQL est numerique ou le critere est une date relative
-	// virer les guillemets eventuels qui sont refuses par certains SQL
-	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 
-	if (($op=='=' OR in_array($op, $table_criteres_infixes))
-	    AND (($desc AND isset($desc['field'][$col]))
-	         OR ($date AND strpos($date[0], '_relatif')))
-	){
+	// Dans tous les cas,
+	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL) et passer dans sql_quote avec le type si connu
+	// et int sinon si la valeur est numerique
+	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
+	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
+	if ($op=='=' OR in_array($op, $table_criteres_infixes)){
+		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
 		if (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
-			$val[0] = $r[1];
+			$val[0] = '"'.sql_quote($r[1],$boucle->sql_serveur,(isset($desc['field'][$col])?$desc['field'][$col]:'int NOT NULL')).'"';
 		elseif (preg_match('/^sql_quote[(]([^,]*?)(,[^)]*)?[)]\s*$/m', $val[0], $r)) {
 			$r = $r[1].($r[2] ? $r[2] : ",''").",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
@@ -1396,7 +1404,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 			foreach ((($op!='IN') ? $params : calculer_vieux_in($params)) as $p){
 				$a = calculer_liste($p, $desc, $boucles, $parent);
 				if ($op=='IN') $val[] = $a;
-				else $val[] = kwote($a);
+				else $val[] = kwote($a, $boucles[$idb]->sql_serveur, 'char'); // toujours quoter en char ici
 			}
 	}
 
