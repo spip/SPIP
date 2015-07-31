@@ -4,6 +4,7 @@
 (#ENV*{message}|?{'',' '})
 
 <form id="oubli_form" action="[(#ENV{action})]" method="post">
+	[(#ENV{action}|form_hidden)]
 	<fieldset>
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type="hidden" name="p" value="(#ENV{p})" />
@@ -21,17 +22,10 @@
 ]
 </div>
 
-<div align="#LANG_RIGHT">
 <script type="text/javascript"><!--
 [
 (#ENV*{message}|?{'',' '})
 document.getElementById('oubli').focus()
 ]
-document.write("<a style='color: #e86519' href='")
-document.write((window.opener) ? "javascript:close()" : "./")
-document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>
-<noscript>
-	&#91;<a href='./'><:pass_retour_public:></a>&#93;
-</noscript>
 </div>

@@ -12,13 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres'); # charge lang et execute utiliser_lang
-include_spip('inc/acces'); # pour generer_htpass
-include_spip('public/assembler'); # pour calculer la page
 include_spip('inc/filtres'); # pour email_valide()
-
-// Ce fichier est celui d'une balise dynamique qui s'ignore.
-
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail 
 
@@ -68,11 +62,19 @@ function message_oubli($email, $param)
 	  return  _T('pass_erreur_probleme_technique');
 }
 
+function balise_FORMULAIRE_OUBLI ($p) {
+  return calculer_balise_dynamique($p,'FORMULAIRE_OUBLI',array());
+}
 
-// http://doc.spip.org/@formulaire_oubli_dyn
-function formulaire_oubli_dyn($p, $oubli)
+function balise_FORMULAIRE_OUBLI_stat($args, $filtres) {
+
+	return $args;
+}
+
+function balise_FORMULAIRE_OUBLI_dyn()
 {
-
+$p = _request('p');
+$oubli = _request('oubli');
 $message = '';
 
 // au 3e appel la variable P est positionnee et oubli = mot passe.
@@ -100,15 +102,7 @@ $message = '';
  return array('formulaires/oubli', 0, 
 	      array('p' => $p,
 		    'message' => $message,
-		    'action' => generer_url_action('pass')));
+		    'action' => self()));
 }
 
-// http://doc.spip.org/@action_pass_dist
-function action_pass_dist()
-{
-	utiliser_langue_visiteur();
-	echo install_debut_html(_T('pass_mot_oublie'), " class='pass'");
-	inclure_balise_dynamique(formulaire_oubli_dyn(_request('p'), _request('oubli')));
-	echo install_fin_html();
-}
 ?>
