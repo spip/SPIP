@@ -22,6 +22,9 @@ function exec_sites_tous_dist()
 pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 debut_page(_T('titre_page_sites_tous'),"documents","sites");
 debut_gauche();
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  
 debut_droite();
 
  afficher_sites(_T('titre_sites_tous'), array("FROM" => 'spip_syndic', 'WHERE' => "syndication='non' AND statut='publie'", 'ORDER BY'=> "nom_site"));

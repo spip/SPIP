@@ -64,6 +64,9 @@ if ($spip_display != 4)
 	afficher_boite_logo('id_syndic', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
 
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
 debut_droite();
 
 avertissement_config();

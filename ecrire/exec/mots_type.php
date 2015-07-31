@@ -64,6 +64,9 @@ debut_gauche();
 
 
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 debut_droite();
 
 debut_cadre_relief("groupe-mot-24.gif");

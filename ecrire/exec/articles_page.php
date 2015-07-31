@@ -43,6 +43,9 @@ function exec_articles_page_dist()
 	}
 }
 
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_page'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 debut_droite();
 
 //

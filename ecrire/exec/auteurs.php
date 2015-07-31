@@ -106,6 +106,9 @@ if ($connect_statut == '0minirezo') {
 	}
 	fin_raccourcis();
 }
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 debut_droite();
 
 echo "<br>";

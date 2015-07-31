@@ -44,6 +44,9 @@ barre_onglets("configuration", "interactivite");
 
 debut_gauche();
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 debut_droite();
 
  echo generer_url_post_ecrire("config_contenu");
