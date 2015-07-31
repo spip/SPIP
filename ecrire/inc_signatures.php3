@@ -48,16 +48,14 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		  "<TR><TD BGCOLOR='#FFFFFF' class='serif'>";
 				
 		if ($statut=="publie"){
-			icone (_T('icone_supprimer_signature'), 
-			       generer_url_ecrire($script,
+			icone (_T('icone_supprimer_signature'), generer_url_ecrire($script,
 						 "supp_petition=$id_signature&debut=$debut"),
 			       "forum-interne-24.gif", 
 			       "supprimer.gif",
 			       "right");
 		}
 		if ($statut=="poubelle"){
-			icone (_T('icone_valider_signature'),
-			       generer_url_ecrire($script,
+			icone (_T('icone_valider_signature'), generer_url_ecrire($script,
 						 "add_petition=$id_signature&debut=$debut"),
 			       "forum-interne-24.gif", 
 			       "creer.gif",

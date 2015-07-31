@@ -71,8 +71,7 @@ function forum_admin_dist()
   if ($total > 10) liste_numeros_forum($urlforum, $debut, $total);
 
   echo "<p><div align='center'>";
-  icone (_T('icone_poster_message'), 
-	 generer_url_ecrire("forum_envoi", 
+  icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", 
 			 "statut=$statutforum&adresse_retour=" .
 			 urlencode($urlforum) . 
 			 "&titre_message=" .

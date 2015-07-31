@@ -21,14 +21,12 @@ function afficher_liens_calendrier($lien, $args, $icone, $texte) {
 	echo debut_cadre_enfonce($icone);
 	echo $texte;
 	echo "<table style='width: 100%;><tr'><td style='width: 200px;'>";
-	icone_horizontale (_T('ical_methode_http'),
-			   generer_url_public($lien, $args),
+	icone_horizontale (_T('ical_methode_http'), generer_url_public($lien, $args),
 			   "calendrier-24.gif");
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
-	icone_horizontale (_T('ical_methode_webcal'), 
-			   ereg_replace("https?://", "webcal://", generer_url_public($lien, $args)),
+	icone_horizontale (_T('ical_methode_webcal'), ereg_replace("https?://", "webcal://", generer_url_public($lien, $args)),
 			   "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();

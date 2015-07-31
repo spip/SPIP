@@ -170,8 +170,7 @@ function infos_naviguer($id_rubrique, $statut)
 			  list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) " .
 								 critere_statut_controle_forum('prop', $id_rubrique)));
 			  if ($n)
-			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)),
-					      generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
+			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
 			}
 		}
 		fin_boite_info();
@@ -391,13 +390,9 @@ if ($relief) {
 
 	  $proposer_sites=$GLOBALS['meta']["proposer_sites"];
 	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
-		$link = new Link(generer_url_ecrire('sites_edit'));
-		$link->addVar('id_rubrique', $id_rubrique);
-		$link->addVar('target', generer_url_ecrire('sites'));
-		$link->addVar('redirect', $clean_link->getUrl());
 	
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('info_sites_referencer'), $link->getUrl(), "site-24.gif", "creer.gif");
+		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&target=" . generer_url_ecrire('sites') . '&redirect=' . urlencode($clean_link->getUrl())), "site-24.gif", "creer.gif");
 		echo "</div><p>";
 	  }
 	}
@@ -474,8 +469,7 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
   if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 
 	echo "<p><div align='center'>";
-	icone(_T('icone_supprimer_rubrique'), 
-	      generer_url_ecrire("naviguer","id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent"), $ze_logo, "supprimer.gif");
+	icone(_T('icone_supprimer_rubrique'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent"), $ze_logo, "supprimer.gif");
 	echo "</div><p>";
  }
 }

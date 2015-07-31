@@ -920,8 +920,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 	echo debut_block_invisible("gerer_vignette$id_document");
 
 	if ($id_vignette) {
-		icone_horizontale (_T('info_supprimer_vignette'),
-			bouton_supprime_document_et_vignette($image_url,
+		icone_horizontale (_T('info_supprimer_vignette'), bouton_supprime_document_et_vignette($image_url,
 				$redirect_url.'&show_docs='.$id_document,
 							     $id_vignette,
 							     $album),
@@ -1294,14 +1293,12 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		echo "</div>";
 		echo "</form>";
 
-		$link_supp = bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'documents');
-
 		echo "</div>";
 		echo fin_block();
 		// Fin edition des champs
 
 		echo "<p /><div align='center'>";
-		icone_horizontale(_T('icone_supprimer_document'), $link_supp, "doc-24.gif", "supprimer.gif");
+		icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'documents'), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 
 
@@ -1411,8 +1408,8 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		echo "</form>";
 
 		echo "<center>";
-		$link = bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'images');
-		icone_horizontale (_T('icone_supprimer_image'), $link, "image-24.gif", "supprimer.gif");
+
+		icone_horizontale (_T('icone_supprimer_image'), bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'images'), "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
 
 
