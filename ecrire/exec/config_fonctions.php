@@ -28,7 +28,7 @@ function exec_config_fonctions_dist()
 	init_config();
 	if ($changer_config == 'oui') appliquer_modifs_config();
 
-	global $flag_revisions, $options ;
+	global $flag_revisions ;
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -68,12 +68,12 @@ function exec_config_fonctions_dist()
 //
 // Notification de modification des articles
 //
-	if ($options == "avancees") notification_config();
+	notification_config();
 
 //
 // Gestion des revisions des articles
 //
-	if ($flag_revisions AND $options == "avancees") versions_config();
+	if ($flag_revisions) versions_config();
 
 //
 // Correcteur d'orthographe
@@ -88,19 +88,11 @@ function exec_config_fonctions_dist()
 //
 // Utilisation d'un proxy pour aller lire les sites syndiques
 //
-	if ($options == 'avancees') proxy_config();
+	proxy_config();
 
 //
-// Creer fichier .htpasswd ?
+// Choix supplementaires proposees par les plugins
 //
-	if ($options == "avancees") htpasswd_config();
-
-//
-// Creer fichier .htaccess dans les repertoires de documents 
-//
-
-/* if ($options == "avancees" AND !$REMOTE_USER ) htaccess_config();*/
-
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	echo "</div></form>";
 
@@ -476,8 +468,7 @@ function previsu_config()
 	);
 	echo "</div>";
 		echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
-	
-fin_cadre_trait_couleur();
+	fin_cadre_trait_couleur();
 
 	echo "<br />";
 }
@@ -527,61 +518,8 @@ function proxy_config()
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
-}
-
-// http://doc.spip.org/@htpasswd_config
-function htpasswd_config()
-{
-	global $spip_lang_right;
-
-	include_spip('inc/acces');
-	ecrire_acces();
-
-	debut_cadre_trait_couleur("cadenas-24.gif", false, "",
-		_T('info_fichiers_authent'));
-
-	$creer_htpasswd = $GLOBALS['meta']["creer_htpasswd"];
-
-	echo "<div class='verdana2'>", _T('texte_fichier_authent', array('dossier' => '<tt>'.joli_repertoire(_DIR_TMP).'</tt>')), "</div>";
-
-	echo "<div class='verdana2'>";
-	echo afficher_choix('creer_htpasswd', $creer_htpasswd,
-		array('oui' => _T('item_creer_fichiers_authent'),
-			'non' =>  _T('item_non_creer_fichiers_authent')),
-		' &nbsp; ');
-	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
-	
-	fin_cadre_trait_couleur();
-}
-
-##### n'est pas encore utilise #######
-// http://doc.spip.org/@htaccess_config
-function htaccess_config()
- {
-
-	global $spip_lang_right;
-
-	debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
-			  _L("Acc&egrave;s aux document joints par leur URL"));
-#	include_spip('inc/acces'); vient d'etre fait
-	$creer_htaccess = gerer_htaccess();
-
-	echo "<div class='verdana2'>";
-	echo _L("Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n'est pas publi&eacute");
-	echo "</div>";
-
-	echo "<div class='verdana2'>";
-	echo afficher_choix('creer_htaccess', $creer_htaccess,
-		       array('oui' => _L("interdire la lecture"),
-			     'non' => _L("autoriser la lecture")),
-		       ' &nbsp; ');
-	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><input type='submit'  value='"._T('bouton_valider')."' class='fondo' /></div>";
-	
-	fin_cadre_trait_couleur();
-
 	echo "<br />";
 }
+
 
 ?>
