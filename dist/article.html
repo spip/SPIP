@@ -74,7 +74,7 @@
 			</div>
 			</B_documents_portfolio>
 			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
-			<div class="spip_documents" id="document_actif">
+			<div class="spip_documents spip_documents_center" id="document_actif">
 				#EMBED_DOCUMENT
 				[<div class="spip_doc_titre">(#TITRE)</div>]
 				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
@@ -90,7 +90,7 @@
 				<ul>
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par date} {doublons}>
 					<li>
-					<div class="spip_doc_titre">[<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">(#TITRE|sinon{<:info_document:>})</a> ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+					<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
 					[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
 					<br class="nettoyeur" />
 					</BOUCLE_documents_joints>
