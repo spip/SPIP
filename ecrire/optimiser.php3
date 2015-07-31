@@ -10,18 +10,18 @@ function optimiser_base() {
 	spip_log ("optimisation de la base");
 
 	$mydate = date("YmdHis", time() - 24 * 3600);
-	
+
 	//
 	// Rubriques
 	//
-	
+
 	$query = "SELECT id_rubrique FROM spip_rubriques";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
-	
+
 	if ($rubriques) {
 		$rubriques = join(",", $rubriques);
-	
+
 		$query = "DELETE FROM spip_articles WHERE id_rubrique NOT IN ($rubriques) AND maj < $mydate";
 		spip_query($query);
 		$query = "DELETE FROM spip_breves WHERE id_rubrique NOT IN ($rubriques) AND maj < $mydate";
@@ -31,19 +31,21 @@ function optimiser_base() {
 		$query = "DELETE FROM spip_auteurs_rubriques WHERE id_rubrique NOT IN ($rubriques)";
 		spip_query($query);
 	}
-	
-	
+
+
 	//
 	// Articles
 	//
-	
+
+	$query = "DELETE FROM spip_articles WHERE statut='poubelle' AND maj < $mydate";
+	spip_query($query);
 	$query = "SELECT id_article FROM spip_articles";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $articles[] = $row['id_article'];
-	
+
 	if ($articles) {
 		$articles = join(",", $articles);
-	
+
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_article NOT IN ($articles)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_articles WHERE id_article NOT IN ($articles)";
@@ -51,55 +53,57 @@ function optimiser_base() {
 		$query = "DELETE FROM spip_forum WHERE id_article NOT IN (0,$articles)";
 		spip_query($query);
 	}
-	
-	
+
+
 	//
 	// Breves
 	//
-	
+
+	$query = "DELETE FROM spip_breves WHERE statut='refuse' AND maj < $mydate";
+	spip_query($query);
 	$query = "SELECT id_breve FROM spip_breves";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $breves[] = $row['id_breve'];
-	
+
 	if ($breves) {
 		$breves = join(",", $breves);
-	
+
 		$query = "DELETE FROM spip_forum WHERE id_breve NOT IN (0,$breves)";
 		spip_query($query);
 	}
-	
-	
+
+
 	//
 	// Sites
 	//
-	
-	
+
+
 	$query = "DELETE FROM spip_syndic WHERE maj < $mydate AND statut = 'refuse'";
 	spip_query($query);
-	
+
 	$query = "SELECT id_syndic FROM spip_syndic";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $syndic[] = $row['id_syndic'];
-	
+
 	if ($syndic) {
 		$syndic = join(",", $syndic);
-	
+
 		$query = "DELETE FROM spip_syndic_articles WHERE id_syndic NOT IN (0,$syndic)";
 		spip_query($query);
 	}
-	
-	
+
+
 	//
 	// Auteurs
 	//
-	
+
 	$query = "SELECT id_auteur FROM spip_auteurs";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $auteurs[] = $row['id_auteur'];
-	
+
 	if ($auteurs) {
 		$auteurs = join(",", $auteurs);
-	
+
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_auteur NOT IN ($auteurs)";
 		spip_query($query);
 		$query = "DELETE FROM spip_auteurs_messages WHERE id_auteur NOT IN ($auteurs)";
@@ -107,7 +111,7 @@ function optimiser_base() {
 		$query = "DELETE FROM spip_auteurs_rubriques WHERE id_auteur NOT IN ($auteurs)";
 		spip_query($query);
 	}
-	
+
 	$query = "SELECT id_auteur,nom,email FROM spip_auteurs WHERE statut='5poubelle' AND maj < $mydate";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {

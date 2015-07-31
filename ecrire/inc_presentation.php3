@@ -44,7 +44,7 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($row != "force") {
 		$login_req = "select login, messagerie from spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)";
 		$row = spip_fetch_array(spip_query($login_req));
-		
+
 		if (($row['login'] == "") OR ($row['messagerie'] == "non")) {
 			return;
 		}
@@ -382,16 +382,30 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$les_auteurs = substr($les_auteurs, 2);
 			}
 
-			$s = "<a href=\"articles.php3?id_article=$id_article\">";
-			if ($statut=='publie') $puce = 'verte';
-			else if ($statut == 'prepa') $puce = 'blanche';
-			else if ($statut == 'prop') $puce = 'orange';
-			else if ($statut == 'refuse') $puce = 'rouge';
-			else if ($statut == 'poubelle') $puce = 'poubelle';
-			/*if (acces_restreint_rubrique($id_rubrique))
-				$puce = "puce-$puce-anim.gif";
-			else*/
-				$puce = "puce-$puce.gif";
+			switch ($statut) {
+			case 'publie':
+				$puce = 'verte';
+				$title = 'Article publi&eacute;';
+				break;
+			case 'prepa':
+				$puce = 'blanche';
+				$title = 'Article en cours de r&eacute;daction';
+				break;
+			case 'prop':
+				$puce = 'orange';
+				$title = 'Article propos&eacute;';
+				break;
+			case 'refuse':
+				$puce = 'rouge';
+				$title = 'Article refus&eacute;';
+				break;
+			case 'poubelle':
+				$puce = 'poubelle';
+				$title = 'Article supprim&eacute;';
+				break;
+			}
+			$s = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
+			$puce = "puce-$puce.gif";
 
 			$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
 			if (acces_restreint_rubrique($id_rubrique))
