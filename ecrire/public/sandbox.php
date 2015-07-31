@@ -123,6 +123,9 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres){
 	if ($skel['process_ins'] == 'php')
 		$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS','echapper_php_callback', $corps);
 
+	// recuperer les couples de remplacement
+	$replace = echapper_php_callback();
+
 	foreach($series_filtres as $filtres){
 		if (count($filtres))
 			foreach ($filtres as $filtre) {
@@ -132,12 +135,12 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres){
 	}
 
 	// restaurer les echappements
-	return echapper_php_callback($corps);
+	return str_replace($replace[0],$replace[1],$corps);
 }
 
 
 // http://doc.spip.org/@echapper_php_callback
-function echapper_php_callback($r) {
+function echapper_php_callback($r=null) {
 	static $src = array();
 	static $dst = array();
 
@@ -148,8 +151,9 @@ function echapper_php_callback($r) {
 		return $src[] = '___'.md5($r[0]).'___';
 	}
 
-	// si on recoit une chaine, on est en mode remplacement
-	$r = str_replace($src, $dst, $r);
-	$src = $dst = array(); // raz de la memoire
+	// si on recoit pas un tableau, on renvoit les couples de substitution
+	// et on RAZ les remplacements
+	$r = array($src,$dst);
+	$src = $dst = array();
 	return $r;
 }
