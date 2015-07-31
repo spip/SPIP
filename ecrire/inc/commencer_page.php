@@ -75,7 +75,6 @@ function init_entete($titre='', $id_rubrique=0) {
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
-	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $auth_can_disconnect;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
@@ -103,14 +102,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		return $res;
 	}
 	if ($menu){
-		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur);
-
-		if ($rubrique == "administration") {
-			$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
-			$res .= "<style>a.icone26 { color: white; }</style>";
-		} else  $style = "background-color: $couleur_claire";
-
-		$res .= "\n<div align='center' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
+		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
+		. "\n<div align='center' style='max-height: 40px; width: 100%; border-bottom: solid 1px white;' class='toile_claire'>"
 	. "<table cellpadding='0' style='background: none;' width='$largeur'><tr>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
 		.  installer_gadgets($id_rubrique)
@@ -217,7 +210,6 @@ onblur="changestyle(\'bandeauinterface\');"';
 
 // http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie() {
-	global $couleur_foncee;
 	global $connect_id_auteur;
 
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
@@ -225,9 +217,9 @@ function avertissement_messagerie() {
 	if ($total_messages == 1) {
 		$row = @spip_fetch_array($result_messages);
 		$ze_message=$row['id_message'];
-		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><span style='color: $couleur_foncee'>"._T('info_nouveau_message')."</span></a></div>";
+		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' classe='ligne_foncee'>"._T('info_nouveau_message')."</a></div>";
 	} elseif ($total_messages > 1)
-		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><span style='color: $couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</span></a></div>";
+		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "' classe='ligne_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a></div>";
 	else return '';
 }
 

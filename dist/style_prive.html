@@ -27,6 +27,23 @@ body {
 	scrollbar-track-color: ##ENV{couleur_foncee,3874b0};
 	scrollbar-arrow-color: ##ENV{couleur_foncee,3874b0};
 }
+
+.toile_claire {
+	background-color: ##ENV{couleur_claire,edf3fe};
+}
+
+.toile_foncee {
+	background-color: ##ENV{couleur_foncee,3874b0};
+}
+
+.ligne_claire {
+	color: ##ENV{couleur_claire,edf3fe};
+}
+
+.ligne_foncee {
+	color: ##ENV{couleur_foncee,3874b0};
+}
+
 td {
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 }

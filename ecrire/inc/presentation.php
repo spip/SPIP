@@ -500,7 +500,7 @@ function afficher_liste_fin_tableau() {
 
 // http://doc.spip.org/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
-	global $spip_lang_left, $lang_objet, $connect_statut, $options;
+	global $spip_lang_left, $lang_objet, $options;
 	
 	$lang_dir = lang_dir($lang_objet);
 	if (!$id) {
@@ -1265,7 +1265,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 // http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip) {
-	global $connect_statut, $connect_toutes_rubriques, $spip_display;
+	global $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
 
 	$args = "couleur_claire=" .
@@ -1274,7 +1274,6 @@ function envoi_link($nom_site_spip) {
 		substr($couleur_foncee,1) .
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
-
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'

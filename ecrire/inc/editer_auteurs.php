@@ -315,7 +315,7 @@ function objet_auteur_select($result)
 
 		if ($statut != $statut_old) {
 			$res .= "\n<option value=\"x\" />";
-			$res .= "\n<option value=\"x\" style='background-color: $couleur_claire;'> $statut</option>";
+			$res .= "\n<option value=\"x\" class='toile_claire'> $statut</option>";
 		}
 
 		if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old))
