@@ -59,24 +59,28 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 			$var = $val[0];
 			if ($var->type != 'texte') {
 			  if ($n OR $k)
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), '');
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), $id_boucle);
 			  else $l[1] = calculer_liste($val, $descr, $boucles, $id_boucle);
 			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
 				$var = $m[1];
+				$auto = false;;
 				if ($m[2]) {
 				  $v = $m[3];
 				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
 				  $val[0]->texte = $v;
 				} elseif ($k OR $n) {
-				    $val[0]->type = 'vide';
+				  $auto = true;
 				} else $var = 1;
 
+
 				if ($var == 'lang') {
-				  $lang = $val;
+				  $lang = !$auto 
+				    ? calculer_liste($val, $descr, $boucles, $id_boucle)
+				    : '$GLOBALS["spip_lang"]';
 				} else {
-				  $val = ($val[0]->type === 'vide')
+				  $val = $auto
 				    ? index_pile($id_boucle, $var, $boucles)
 				    : calculer_liste($val, $descr, $boucles, $id_boucle);
 
@@ -93,12 +97,8 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 	// la passe, sinon on passe la langue courante au moment du calcul
 	// sauf si on n'en veut pas 
 	if ($lang === false) return $l;
-
-	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
-	  (($lang[0]->type !== 'vide')
-			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
-			: '$GLOBALS["spip_lang"]'
-			) . ($echap?") . '":" ");
+	if (!$lang) $lang = '$GLOBALS["spip_lang"]';
+	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  . $lang . ($echap?") . '":" ");
 
 	return $l;
 }
@@ -164,7 +164,6 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 			."\n"
 			.'	echo "</div><!-- ajaxbloc -->\\n";';
 	}
-
 
 	return "\n'<".
 		"?php\n\t".'$contexte_inclus = '.$contexte.";\n"
