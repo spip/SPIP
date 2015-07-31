@@ -37,6 +37,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	
 	// Quelques synonymes
 	if ($charset == '') $charset = 'iso-8859-1';
+	else if ($charset == 'windows-1250') $charset = 'cp1250';
 	else if ($charset == 'windows-1251') $charset = 'cp1251';
 	else if ($charset == 'windows-1256') $charset = 'cp1256';
 
