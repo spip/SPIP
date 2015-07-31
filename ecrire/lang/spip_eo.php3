@@ -1346,7 +1346,7 @@ kaj rekonekti vin al la teksejo.
 'taille_octets' => '@taille@&nbsp;bajtoj',
 'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita al tiu artikolo (malsupre en la pa&#285;o).',
 'texte_acces_ldap_anonyme_1' => 'Certaj LDAP-serviloj ne akceptas anoniman aliron. Tiukaze necesas difini identigilon por komenca aliro por povi poste ser&#265;i informojn en la adresaro. Plejofte tamen la sekvaj &#265;eloj povas resti malplenaj.',
-'texte_actualite_site_1' => 'Tiu pa&#285;o montras la aktualecon de la teksejo kaj ebligas al vi superrigardi viajn kontribua&#309;ojn. Vi retrovos tie viajn artikolojn redaktatajn, la artikolojn kaj la informetojn pri kiuj vi estas petitaj doni vian opinion, krome estas menciitaj viaj anta&#365;aj kontribua&#309;oj.<p><hr><p>Kiam vi estos kutimi&#285;inta kun la interfaco, vi povos alklaki sur &laquo;',
+'texte_actualite_site_1' => 'Kiam vi estos kutimi&#285;inta kun la interfaco, vi povos alklaki sur &laquo;',
 'texte_actualite_site_2' => 'kompleta interfaco',
 'texte_actualite_site_3' => '&raquo; por malfermi pliajn eblecojn.',
 'texte_admin_effacer_01' => 'Tiu ordono estingas <i>&#265;ian</i> enhavon de la datenbazo,
