@@ -1,5 +1,10 @@
 <?php
 
+//
+// Ce fichier ne sera execute qu'une fois
+if (defined("_ECRIRE_INC_OBJET")) return;
+define("_ECRIRE_INC_OBJET", "1");
+
 include_ecrire('inc_objet_base.php3');
 
 
