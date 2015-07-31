@@ -283,9 +283,8 @@ function table_jointure($x, $y) {
  * @return array
  */
 function query_echappe_textes($query){
-	static $codeEchappements = "\x1@##@\x1";
-	if (strpos($query,"''")!==false)
-		$query = str_replace("''", $codeEchappements, $query);
+	static $codeEchappements = array("''"=>"\x1@##@\x1","\'"=>"\x2@##@\x2");
+	$query = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
 	if (preg_match_all("/(['\"])[^']*(\\1)/S",$query,$textes)){
 		$textes = reset($textes); // indice 0 du match
 		$query = str_replace($textes,"%s",$query);
@@ -305,7 +304,7 @@ function query_echappe_textes($query){
  * @return string
  */
 function query_reinjecte_textes($query, $textes){
-	static $codeEchappements = "\x1@##@\x1";
+	static $codeEchappements = array("''"=>"\x1@##@\x1","\'"=>"\x2@##@\x2");
 	# debug de la substitution
 	#if (($c1=substr_count($query,"%"))!=($c2=count($textes))){
 	#	spip_log("$c1 ::". $query,"tradquery"._LOG_ERREUR);
@@ -325,8 +324,7 @@ function query_reinjecte_textes($query, $textes){
 			break;
 	}
 
-	if (strpos($query,$codeEchappements)!==false)
-		$query = str_replace($codeEchappements,"''", $query);
+	$query = str_replace(array_values($codeEchappements), array_keys($codeEchappements), $query);
 
 	return $query;
 }
