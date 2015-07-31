@@ -5,11 +5,12 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-// 6 constantes incontournables et prioritaires
+// 7 constantes incontournables et prioritaires
 
 define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+define('_DIR_INCLUDE', _DIR_RESTREINT);
 define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
 define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 define_once('_FILE_CONNECT',
@@ -21,9 +22,14 @@ define_once('_FILE_CONNECT',
 
 if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
   if (!defined("_INC_PUBLIC"))
+    {
 	header("Location: " . _DIR_RESTREINT . "install.php3");
+    }
   else
     {
+
+		define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
+		define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 		$db_ok = 0;
 		include_ecrire ("inc_presentation.php3");
 		install_debut_html(_T('info_travaux_titre'));
@@ -32,6 +38,8 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 		exit;
 	}
 }
+
+
 
 // *********** traiter les variables ************
 // Magic quotes : on n'en veut pas sur la base,
@@ -244,7 +252,6 @@ if (@file_exists(_FILE_OPTIONS)) {
 
 define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
 define_once('_DIR_PREFIX2', _DIR_RESTREINT);
-define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
@@ -561,11 +568,9 @@ function include_ecrire($file) {
 
 function include_lang($file) {
 	$file = _DIR_LANG . $file;
-	spip_log("include $file");
 	if ($GLOBALS['included_files'][$file]) return;
 	$GLOBALS['included_files'][$file] = 1;
 	include($file);
-	spip_log("fin d'inclusion de $file");
 }
 
 function include_plug($file) {
