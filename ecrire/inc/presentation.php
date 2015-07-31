@@ -1266,7 +1266,7 @@ function fin_page()
 			try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 			if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '"
 			.find_in_path('javascript/jquery.iepnghack.1.5.js')
-			."' , function() { pixelspip = '".(_DIR_RACINE.'rien.gif')."'; jQuery('img').pngfix(); } );
+			."' , function() { $.pngfix('".(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
 			// --></script>"
 		: '';
 

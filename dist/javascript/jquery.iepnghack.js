@@ -1,10 +1,10 @@
 /*
  * jQuery pngfix plugin
- * Version 1.5  (23/07/2007)
+ * Version 1.6  (05/09/2007)
  * @requires jQuery v1.1.3
  *
  * Examples at: http://khurshid.com/jquery/iepnghack/
- * Copyright (c) 2007 Khurshid M.
+ * Copyright (c) 2007 Kush M.
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -12,6 +12,9 @@
  /**
   *
   * @example
+  *
+  * optional if location of pixel.gif if different to default which is images/pixel.gif
+  * $.pngfix('media/pixel.gif');
   *
   * $('img[@src$=.png], #panel').pngfix();
   *
@@ -25,12 +28,20 @@
   */
  
 (function($) {
+	
 	/**
 	 * helper variables and function
 	 */
+	$.pngfix = function(customPixel) {
+		$.pngfix.pixel = customPixel;
+	};
+	
+	$.pngfix.getPixel = function() {
+		return $.pngfix.pixel || 'images/pixel.gif';
+	};
+	
 	var hack = {
-		ltie7 : $.browser.msie && /MSIE\s(5\.5|6\.)/.test(navigator.userAgent),
-		pixel : 'images/pixel.gif',
+		ltie7  : $.browser.msie && /MSIE\s(5\.5|6\.)/.test(navigator.userAgent),
 		filter : function(src) {
 			return "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop,src='"+src+"')";
 		}
@@ -49,9 +60,6 @@
 	 * @cat Plugins/pngfix
 	 */
 	$.fn.pngfix = hack.ltie7 ? function() {
-
-	if (pixelspip) hack.pixel = pixelspip; // indiquer la valeur de l'exterieur du script
-
     	return this.each(function() {
 			var $$ = $(this);
 			var base = $('base').attr('href'); // need to use this in case you are using rewriting urls
@@ -61,7 +69,7 @@
 					var source = (base && $$.attr('src').substring(0,1)!='/') ? base + $$.attr('src') : $$.attr('src');
 					// apply filter
 					$$.css({filter:hack.filter(source), width:$$.width(), height:$$.height()})
-					  .attr({src:hack.pixel})
+					  .attr({src:$.pngfix.getPixel()})
 					  .positionFix();
 				}
 			} else { // hack png css properties present inside css
