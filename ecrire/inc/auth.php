@@ -319,6 +319,20 @@ function auth_administrer($fonction,$args,$defaut=false){
  */
 
 /**
+ * Pipeline pour inserer du contenu dans le formulaire de login
+ *
+ * @param array $flux
+ * @return array
+ */
+function auth_formulaire_login($flux){
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode)
+		$flux = auth_administrer('formulaire_login',array($methode,$flux),$flux);
+	return $flux;
+}
+
+
+
+/**
  * Retrouver le login interne lie a une info login saisie
  * la saisie peut correspondre a un login delegue
  * qui sera alors converti en login interne apres verification
@@ -496,7 +510,7 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
 function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array()){
 	$args = func_get_args();
 	if ($auth_methode===true){
-		$args[] = array('all'=>true); // ajouter une option all=>true pour chaque auth
+		$args = array(true, 0, array(), array('all'=>true)); // ajouter une option all=>true pour chaque auth
 		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 			array_shift($args);
 			array_unshift($args,$methode);

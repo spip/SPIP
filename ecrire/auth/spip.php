@@ -50,6 +50,31 @@ function auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
 	return $row;
 }
 
+function auth_spip_formulaire_login($flux){
+	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
+	$flux['data'].=
+		'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>'
+		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login.js"></script>'
+		.'<script type="text/javascript">/*<![CDATA[*/'
+		."var alea_actuel='".$flux['args']['_alea_actuel']."';"
+		."var alea_futur='".$flux['args']['_alea_futur']."';"
+		."var login='".$flux['args']['var_login']."';"
+		."var page_auteur = '".generer_url_public('informer_auteur')."';"
+		."var informe_auteur_en_cours = false;"
+		."var attente_informe = 0;"
+		."(function($){
+		$('#password')
+			.after(\"<em id='pass_securise'><img src='"._DIR_IMG_PACK."securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>\");
+		affiche_login_secure();
+		$('#var_login').change(actualise_auteur);
+		$('form#formulaire_login').submit(login_submit);
+	}(jQuery));"
+		."/*]]>*/</script>";
+
+	return $flux;
+}
+
+
 /**
  * Informer du droit de modifier ou non son login
  * @return bool
