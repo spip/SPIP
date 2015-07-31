@@ -521,7 +521,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_telecharger_ordinateur' => 'Zure ordenagailutik igo :',
 'info_tous_resultats_enregistres' => '[emaitza guztiak grabatuak dira]',
 'info_tout_afficher' => 'Dena erakutsi',
-'info_travaux_texte' => 'Leku hau oraindik konfiguratu gabe dago. Berantago itzuli…',
+'info_travaux_texte' => 'Leku hau oraindik konfiguratu gabe dago. Berantago itzuliâ€¦',
 'info_travaux_titre' => 'Gunea aldatzeko bidean',
 'info_trop_resultat' => 'Emaitza gehiegi "@cherche_mot@"-aren bilaketarako. Irizpideak zehaztu.',
 'info_utilisation_messagerie_interne' => 'Gunearen barruko mezularitza erabiltzen duzu.',
