@@ -72,10 +72,11 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 				$erreur_p_i_i = array('zbug_parametres_inclus_incorrects',
 					 array('param' => $var->nom_champ));
 				erreur_squelette($erreur_p_i_i, $p);
-			  } else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
-			  break;
+				  break;
+			  }
+			  else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			} else {
-				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
+				preg_match(",^([^=]*)(=?)(.*)$,m", $var->texte,$m);
 				$m = array_pad($m, 3, null);
 				$var = $m[1];
 				$auto = false;;
