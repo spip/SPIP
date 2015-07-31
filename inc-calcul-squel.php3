@@ -188,6 +188,12 @@ function parser_boucle($texte, $id_parent) {
 				$id_objet = "id_type";
 				break;
 
+			case 'groupes_mots':
+				$table = "groupes_mots";
+				$req_from[] = "spip_groupes_mots AS $table";
+				$id_objet = "id_groupe";
+				break;
+
 			case 'mots':
 				$table = "mots";
 				$req_from[] = "spip_mots AS $table";
@@ -477,6 +483,10 @@ function parser_boucle($texte, $id_parent) {
 				$req_where[] = "$table.statut='publie'";
 				break;
 
+			case 'groupes_mots':
+				// pas de restriction sur les groupes de_mots
+				break;
+
 			case 'mots':
 				// pas de restriction sur les mots
 				break;
@@ -763,6 +773,7 @@ function parser($texte) {
 	global $rows_auteurs;
 	global $rows_hierarchie;
 	global $rows_mots;
+	global $rows_groupes_mots;
 
 	global $tables_relations;
 
@@ -791,6 +802,8 @@ function parser($texte) {
 	$tables_relations['mots']['id_forum'] = 'spip_mots_forum';
 	$tables_relations['mots']['id_rubrique'] = 'spip_mots_rubriques';
 	$tables_relations['mots']['id_syndic'] = 'spip_mots_syndic';
+
+	$tables_relations['groupes_mots']['id_groupe'] = 'spip_mots';
 
 	$tables_relations['rubriques']['id_mot'] = 'spip_mots_rubriques';
 	$tables_relations['forums']['id_mot'] = 'spip_mots_forum';
@@ -962,6 +975,11 @@ function parser($texte) {
 		'TEXTE' => 'texte',
 		'POINTS' => 'points',
 		'ID_GROUPE' => 'id_groupe'
+	);
+	$rows_groupes_mots = array(
+		'ID_GROUPE' => 'id_groupe',
+		'TYPE' => 'type',
+		'TITRE' => 'titre',
 	);
 	$rows_rubriques = array(
 		'ID_RUBRIQUE' => 'id_rubrique',
@@ -2003,6 +2021,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["type"] = $row["type"];
 		$contexte["id_groupe"] = $row["id_groupe"];
 		if ($instance->doublons == "oui") $id_doublons["mots"] .= ",".$row["id_mot"];
+		';
+		break;
+
+	case 'groupes_mots':
+		$texte .= '
+		$contexte["id_groupe"] = $row["id_groupe"];
+		if ($instance->doublons == "oui") $id_doublons["groupes_mots"] .= ",".$row["id_groupe"];
 		';
 		break;
 	}
