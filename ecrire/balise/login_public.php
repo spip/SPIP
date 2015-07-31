@@ -108,8 +108,8 @@ function login_pour_tous($login, $cible, $action) {
 			if ($t = spip_fetch_array(
 			spip_query(
 				"SELECT * FROM spip_auteurs
-				WHERE (nom LIKE '" .addslashes($login) ."'
-				OR email LIKE '" .addslashes($login) ."')
+				WHERE (nom = '" .addslashes($login) ."'
+				OR email = '" .addslashes($login) ."')
 				AND login<>'' AND statut<>'5poubelle'"
 			))) {
 				$row = $t;
