@@ -1,0 +1,68 @@
+/* Spip Styles : intertitre, citations, etc...
+----------------------------------------------- */
+i.spip {}
+strong.spip {}
+hr.spip {}
+
+.spip_puce { list-style-position: outside; }
+
+ul.spip {}
+ol.spip {}
+li.spip {}
+
+h3.spip {
+    clear: both;
+	text-align: center; 
+	margin-top: 2em 0 1.4em 0;
+	font: 1.15em Verdana,Arial,Sans,sans-serif;
+	font-weight: bold; }
+
+p.spip {}
+p.spip_note {}
+
+/* * Citations, code et poesie */
+q, blockquote.spip, .spip_poesie, .spip_serif { font-family: Georgia, Garamond, Times, serif; }
+
+blockquote.spip { 
+	margin: 1em; 
+	padding: 0 1em;
+	border: 1px solid #aaaaaa; }
+
+.spip_poesie { 
+	margin: 1em; 
+	padding-left: 1em; 
+	border-left: 1px solid; }
+.spip_poesie div { text-indent: -60px; margin-left: 60px; }
+
+.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
+.spip_cadre { width: 99%; border: 1px solid; }
+
+/*  Tableaux
+---------------------------------------------- */
+table.spip {
+	margin: auto;
+	margin-bottom: 1em;
+	border: 1px solid;
+	border-collapse: collapse;
+	font-size: 0.70em; }
+table.spip caption {
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin: auto;
+	padding: 3px;
+	font-weight: bold; }
+table.spip tr.row_first { background-color: #FCF4D0; }
+table.spip tr.row_odd { background-color: #d0d0d0; }
+table.spip tr.row_even { background-color: #F0F0F0; }
+table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+
+/*  Logos, documents et images
+---------------------------------------------- */
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
+
+.spip_documents { font-family: Verdana,Arial,Sans,sans-serif; font-size: 0.90em; }
+.spip_documents_center { width: 100%; margin: auto; text-align: center; }
+.spip_documents_left { float: left; margin-right: 15px; text-align: center; }
+.spip_documents_right { float: right; margin-left: 15px; text-align: center; }
+.spip_doc_titre { text-align: center; font-weight: bold; }
+.spip_doc_descriptif { clear: both; }
