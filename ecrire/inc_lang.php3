@@ -65,8 +65,9 @@ function surcharger_langue($f) {
 	$GLOBALS['idx_lang'] .= '_temporaire';
 	include($f);
 
-	foreach ($GLOBALS[$GLOBALS['idx_lang']] as $var => $val)
-		$GLOBALS[$idx_lang_normal][$var] = $val;
+	if (is_array($GLOBALS[$GLOBALS['idx_lang']]))
+		foreach ($GLOBALS[$GLOBALS['idx_lang']] as $var => $val)
+			$GLOBALS[$idx_lang_normal][$var] = $val;
 
 	unset ($GLOBALS[$GLOBALS['idx_lang']]);
 	$GLOBALS['idx_lang'] = $idx_lang_normal;
