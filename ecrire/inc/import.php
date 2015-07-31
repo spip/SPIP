@@ -77,23 +77,17 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 }
 
 // http://doc.spip.org/@xml_parse_tag
-function xml_parse_tag($texte) {
+function xml_parse_tag($t) {
 
-	list($tag, $atts) = split('[[:space:]]+', $texte, 2);
-	$result[0] = $tag;
-	$result[1] = array();
+	preg_match(',^([\w[?!%.;:-]*),s', $t, $res);
+	$t = substr($t,strlen($res[0]));
+	$res[1] = array();
 
-	if (!$atts) return $result;
-	if ($tag=='!--'){
-	  $result[1]=preg_replace(",(.*?)--$,s",'\\1',$atts);
+	// pourquoi on ne peut pas mettre \3 entre crochets ?
+	if (preg_match_all(',\s*(--.*?--)?\s*([^=]*)\s*=\s*([\'"])([^"]*)\3,sS', $t, $m, PREG_SET_ORDER)) {
+		foreach($m as $r) $res[1][$r[2]] = $r[4];
 	}
-	else {
-		while (ereg('^([^[:space:]]+)[[:space:]]*=[[:space:]]*"([^"]*)"([[:space:]]+(.*))?', $atts, $regs)) {
-			$result[1][$regs[1]] = $regs[2];
-			$atts = $regs[4];
-		}
-	}
-	return $result;
+	return $res;
 }
 
 // Balise ouvrante:
@@ -198,7 +192,7 @@ function import_tables($request, $dir) {
 
 	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
 
-	if (ereg("\.gz$", $archive)) {
+	if (strncmp(".gz", substr($archive,-3),3)==0) {
 			$size = false;
 			$taille = taille_en_octets($abs_pos);
 			$file = gzopen($archive, 'rb');
@@ -314,7 +308,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 		if (trim($table))
 			echo "document.progression.recharge.value='$table';\n";
 		if (!$size)
-			$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
+			$taille = preg_replace("/&nbsp;/", " ", taille_en_octets($abs_pos));
 		else
 			$taille = floor(100 * $abs_pos / $size)." %";
 		echo "document.progression.taille.value='$taille';\n";
