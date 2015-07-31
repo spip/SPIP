@@ -267,7 +267,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_message_envoye' => 'پيام فرستاده شده',
 'form_prop_non_enregistre' => '.پيشنهاد شما ثبت نشده است',
 'form_prop_sujet' => 'موضوع',
-'form_prop_url_site' => '(URL) آدرس سايت', # MODIF
+'form_prop_url_site' => 'آدرس يو.آر.ال سايت',
 'forum_non_inscrit' => 'شما ثبت نشده ايد، يا اينكه آدرس يا كلمه ورودتان اشتباه است',
 'forum_par_auteur' => 'بوسيله @auteur@ ',
 'forum_titre_erreur' => '...اشتباه',
@@ -466,7 +466,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_vos_pense_bete' => 'يادداشت هايتان',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_ajout_id_rapide' => 'افزودن سريع',
 'label_poids_fichier' => 'اندازه',
 'lien_afficher_icones_seuls' => 'فقط آيكونها را نشان دهيد',
 'lien_afficher_texte_icones' => 'آيكونها و متن را نشان دهيد',
@@ -557,7 +557,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pass_nouveau_pass' => 'كلمه ورودى جديد',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'فراموشى كلمه ورودى ',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'براي تغيير گذرواژه‌ي خود، ما بايد اول شما را شناسايي كنيم. براي اين كار نشاني ايميل مربوط به حساب خود را به ما اعلام كنيد. ',
 'pass_quitter_fenetre' => 'اين پنجره را ترك كنيد',
 'pass_rappel_login' => '(login)شما : « @login@ ».',
 'pass_recevoir_mail' => ' شما ايميلى دريافت خواهيد كرد كه شامل راهنماى ورودتان به سايت ميباشد',

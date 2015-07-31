@@ -270,7 +270,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'form_prop_message_envoye' => 'Missatge enviat',
 'form_prop_non_enregistre' => 'La seva proposta no ha estat registrada.',
 'form_prop_sujet' => 'Assumpte:',
-'form_prop_url_site' => 'Adreça (URL) del lloc', # MODIF
+'form_prop_url_site' => 'Adreça URL del lloc',
 'forum_non_inscrit' => 'No esteu inscrit o bé l\'adreça o la contrasenya són errònies. ',
 'forum_par_auteur' => 'per @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -470,7 +470,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'infos_vos_pense_bete' => 'Els vostres recordatoris',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_ajout_id_rapide' => 'Afegit ràpid',
 'label_poids_fichier' => 'Mida',
 'lien_afficher_icones_seuls' => 'Mostrar només les icones',
 'lien_afficher_texte_icones' => 'Mostrar les icones i el text',
@@ -571,7 +571,7 @@ i tornar-vos a connectar al lloc.
 'pass_nouveau_pass' => 'Nova contrasenya',
 'pass_ok' => 'D\'acord',
 'pass_oubli_mot' => 'Oblit de la contrasenya',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'Per canviar la contrasenya, hem de verificar primerament la vostra identitat. Per això, indiqueu-nos el correu electrònic associat al vostre compte.',
 'pass_quitter_fenetre' => 'Tancar aquesta finestra',
 'pass_rappel_login' => 'Recordatori: la vostra identificació (usuari) és " @login@".',
 'pass_recevoir_mail' => 'Voleu rebre un correu electrònic indicant com recuperar l\'accés al lloc.',

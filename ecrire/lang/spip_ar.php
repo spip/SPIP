@@ -276,7 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_message_envoye' => 'تم بعث الرسالة',
 'form_prop_non_enregistre' => 'لم يتم تسجيل اقتراحك.',
 'form_prop_sujet' => 'الموضوع',
-'form_prop_url_site' => 'عنوان الموقع', # MODIF
+'form_prop_url_site' => 'عنوان الموقع',
 'forum_non_inscrit' => 'إما انك غير مسجل أو هناك خطأ في العنوان أو كلمة السر.',
 'forum_par_auteur' => 'من @auteur@',
 'forum_titre_erreur' => 'خطأ...',
@@ -476,7 +476,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_vos_pense_bete' => 'مذكراتك',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_ajout_id_rapide' => 'إضافة سريعة',
 'label_poids_fichier' => 'الحجم',
 'lien_afficher_icones_seuls' => 'عرض الرموز فقط',
 'lien_afficher_texte_icones' => 'عرض الرموز والعناوين',
@@ -587,7 +587,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pass_nouveau_pass' => 'كلمة السر الجديدة',
 'pass_ok' => 'موافق',
 'pass_oubli_mot' => 'نسيان كلمة السر',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'من أجل تغيير كلمة السر يتحتم اولاً التأكد من هويتك. لذلك، قم بأدخال عنوان البريد الالكتروني المرتبط بهذا الحساب.',
 'pass_quitter_fenetre' => 'إقفال هذه النافذة',
 'pass_rappel_login' => 'تذكير: معرّفك هو «@login@».',
 'pass_recevoir_mail' => 'ستحصل على رسالة تفسر لك كيف تستعيد دخولك إلى الموقع.',
