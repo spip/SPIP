@@ -3,6 +3,17 @@
 # generateur automatique d'un squelette de test
 # le repertoire des squelettes doit etre accessibles en ecriture
 
+# pour ne pas etre logé automatiquement lors du test de balises FORMULAIRE
+# demander au client de tuer son cookie et de rappeler ce script aussitot
+$url = $_SERVER['REQUEST_URI'];
+if (!strpos($url,'cookie_killed='))
+  {
+    setcookie("", "", time()-3600);
+    header("Location: $url" . 
+	   (strpos($url,'?') ? '&' : '?') .
+	   'cookie_killed=oui');
+    exit;
+    } 
 include("ecrire/inc_serialbase.php3");
 include("inc-compilo-index.php3");
 include("inc-balises.php3");
@@ -11,40 +22,95 @@ include("inc-boucles.php3");
 # décommenter au besoin, mais faire attention au double chargement.
 #if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
 
-$res = '';
-
-foreach($table_des_tables as $k => $v)
+function dispose_boucle($nom, $corps, $criteres, $avant, $apres, $sinon)
 {
-  $k = strtoupper($k);
-  $b = "BOUCLE_$k($k){0,1}";
-  $res .= "<B_$k>\n<table border='1' width='100%'>\n";
-  $res .= "<tr><td colspan=2 align=center>$b</td></tr>";
-  $res .= "<$b>";
+  return
+    ($avant ? "<B_$nom>$avant" : '') .
+    "<BOUCLE_$nom$criteres>$corps</BOUCLE_$nom>" .
+    ($apres ? "$apres</B_$nom>" : '') .
+    ($sinon ? "$sinon<//B_$nom>" : '');
+}
+
+function dispose_champs($type)
+{
+  $corps = '';
   $p = new Champ;
-  $p->id_boucle = $k;
+  $p->id_boucle = $nom;
   $p->boucles = '';
-  $p->id_mere = $k;
+  $p->id_mere = $nom;
   $p->etoile = false; # le + dur
   $p->documents = true; # le + dur
   $p->statut = 'html';
   $p->type_requete = $v;
   $p->code ='';
-
-  foreach($tables_principales[$v]['field'] as $n => $t) {
+  global $tables_principales;
+  foreach($tables_principales[$type]['field'] as $n => $t) {
     $n = strtoupper($n);
-    $res .= "\n\t<tr><td>" . $n . "</td><td>#$n</td></tr>";
+    $corps .= "\n\t<tr><td>" . $n . "</td><td>#$n</td></tr>";
     $p->nom_champ = $n;
     if (champs_traitements($p))
-      $res .= "\n\t<tr><td>" . $n . "*</td><td>#$n*</td></tr>";
-
+      $corps .= "\n\t<tr><td>" . $n . "*</td><td>#$n*</td></tr>";
   }
-  $res .= "\n</BOUCLE_$k>\n"
-    . "</table>\n</B_$k>\n"
-    . "<center>table $k "
-    . (function_exists('boucle_' . $k . '_dist') ? 'vide' : 'inconnue')
-    . "</center>\n<//B_$k>\n<br><hr><br>\n";
+  return $corps . "\n";
 }
 
+function table_nulle($nom, $type) {
+  return
+    ("\n<center>table $type " .
+     (function_exists('boucle_' . $nom . '_dist') ? 'vide' : 'inconnue') .
+     "</center>\n");
+}
+
+$res = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="fr">
+<head><title>Lagaffe</title></head><body>
+';
+#$res .= "<b>url: $url</b><br>";
+$la_semantique_folle_a_encore_frappe = $table_des_tables;
+
+foreach($table_des_tables as $k => $v)
+{
+  $nom = strtoupper($k);
+  $criteres = "($nom){0,1}";
+  $les_champs = dispose_champs($v);
+  $corps = $les_champs;
+
+  // faire toute la combinatoire dépasse les 30 secondes sur un G4 à 1.33
+  // on ne fait que ça du coup.
+
+  if ($k == 'rubriques')
+    {
+
+  foreach($la_semantique_folle_a_encore_frappe as $k2 => $v2)
+    {
+      if ($k2 != $k)
+	{
+	  $nom2 = strtoupper($k2);
+	  $nomdouble = $nom .'_englobant_' . $nom2;
+	  $criteres2 = "($nom2){0,1}";
+	  $corps .= "\n" .
+	    dispose_boucle($nomdouble,
+			   $les_champs,
+			   $criteres2,
+			   ("\n<table border='1' width='100%'>\n" .
+			    "<tr><td colspan=2 align=center> BOUCLE $nomdouble $criteres2</td></tr>\n"),
+			   "\n</table>\n",
+			   table_nulle($k2, $nom2));
+	}
+    }
+    }
+  $res .= "\n" .
+    dispose_boucle($nom, 
+		   $corps,
+		   $criteres,
+		   ("\n<table border='1' width='100%'>\n" .
+		    "<tr><td colspan=2 align=center> BOUCLE $nom $criteres</td></tr>\n"),
+		   "\n</table>\n",
+		   table_nulle($k, $nom)) .
+    "\n<br><hr><br>\n";
+}
+
+$res .= "</body></html>";
 $fond = "lagaffe";
 $f = fopen($GLOBALS['dossier_squelettes'] . $fond. ".html",'w');
 fwrite($f, $res);
