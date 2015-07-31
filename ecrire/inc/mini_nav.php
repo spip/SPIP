@@ -22,6 +22,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 
 	# recherche les filles et petites-filles de la rubrique donnee
 	$ordre = array();
+	$rub = array();
 
 	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique");
 
@@ -36,7 +37,8 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 	$next = $list[$col];
 	if ($ordre) {
 		asort($ordre);
-
+		$rec = generer_url_ecrire('plonger',"rac=$rac&exclus=$exclu&col=".($col+1));
+		$args = "'$rac',this,$col,'$spip_lang_left'";
 		while (list($id, $titrebrut) = each($ordre)) {
 
 			$titre = "<div class='"
@@ -45,50 +47,43 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 			. supprimer_numero($titrebrut)
 			. "</div>";
 
-			if ($rub[$id]["enfants"]) {
-				$titre = "\n<div class='rub-ouverte'>$titre</div>";
+			if (isset($rub[$id]["enfants"])) {
+				$titre = "<div class='rub-ouverte'>$titre</div>";
 
-		# ensuite, ouverture ou fermeture du menu des sous-rubriques
-				$url = generer_url_ecrire('plonger',"rac=$rac&exclus=$exclu&id=$id&col=".($col+1), true);
+				$acces = "firstChild.";
+				$url = "\nhref='$rec&amp;id=$id'" ;
+			} else {  $url = $acces = ''; }
 
-			} else {  $url = ''; }
-
-			$class= ($id == $next) ? "highlight" : "pashighlight";
-
-			$onClick = "\naff_selection_provisoire($id,\n\t'$rac',\n\t'$url',\n\t$col,\n\t'$spip_lang_left');";
-				
+			$ret .= "<a class='"
+			. (($id == $next) ? "highlight" : "pashighlight")
+			. "'"
+			. $url
+			. "\nonClick=\"changerhighlight(this);"
+			. "return aff_selection_provisoire($id,$args);"
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
-			$ondbClick = "aff_selection_titre($id,'"
-			. strtr(str_replace("'", "&#8217;",
-						str_replace('"', "&#34;",
-							textebrut($titrebrut))),
-					"\n\r", "  ")
-			. "');";
-
-			$ret .= "\n<div class='$class'\nonClick=\"changerhighlight(this);$onClick\"\nondblclick=\"$ondbClick$onClick\">$titre\n</div>";
+			. "\"\nondblclick=\""
+			. "return aff_selection_titre(this."
+			. $acces
+			. "firstChild.firstChild.nodeValue,$id,$args);"
+			. "\">$titre</a>";
 		}
 	}
 
 	$nom_col = $rac . "_col_".($col+1);
 	$left = ($col*150);
 
-	return "<div id='"
-	. $rac
-	. "_col_"
-	. $col
-	."' class='arial1'>" 
-	. http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: "
-		.($left-30)
-		."px; top: 2px; z-index: 2;' id='img_$nom_col'")
+	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: "
+	. ($left-30)
+	. "px; top: 2px; z-index: 2;' id='img_$nom_col'")
 	. "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: "
 	.($left-150)
 	."px;'>"
 	. $ret
-	. "\n</div>"
+	. "\n</div>\n<div id='$nom_col'>"
 	. ($next
 	   ? mini_afficher_rubrique($id_rubrique, $rac, $list, $col+1, $exclu)
-	   : "\n<div id='$nom_col'></div>")
+	   : "")
 	. "\n</div>";
 }
 
@@ -111,7 +106,11 @@ function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 	
 	$liste = "0,".$liste;
 		
-	return mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus);
+	return  "<div id='"
+	. $rac
+	. "_col_1' class='arial1'>" 
+	. mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus)
+	. "</div>";
 }
 
 // http://doc.spip.org/@mini_nav_principal
