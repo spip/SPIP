@@ -126,9 +126,8 @@ define ('__regexp_echappe',
 define ('__regexp_img_echappe', "<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">");
 
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
-	$debut = '';
-	$suite = $letexte;
-	while (preg_match(__regexp_echappe, $suite, $regs)) {
+	if (preg_match_all(__regexp_echappe, $letexte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs) {
 		$num_echap++;
 		$marqueur_echap = "@@SPIP_$source$num_echap@@";
 
@@ -178,11 +177,9 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			$les_echap[$num_echap] = propre($lecode);
 		} 
 
-		$pos = strpos($suite, $regs[0]);
-		$debut .= substr($suite,0,$pos).$marqueur_echap;
-		$suite = substr($suite, $pos+strlen($regs[0]));
+		$letexte = str_replace($regs[0], $marqueur_echap, $letexte);
 	}
-	$letexte = $debut . $suite;
+
 	// Gestion du TeX
 	if (!(strpos($letexte, "<math>") === false)) {
 		include_ecrire("inc_math.php3");
@@ -204,14 +201,11 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	// Echapper les tags html contenant des caracteres sensibles a la typo
 	//
 	$regexp_echap = "<[a-zA-Z!][^<>!':;\?]*[!':;\?][^<>]*>";
-	if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER))
-	while (list(,$reg) = each($regs)) {
+	if (preg_match_all("/$regexp_echap/ims", $letexte, $regs, PREG_SET_ORDER))
+	foreach ($regs as $reg) {
 		$num_echap++;
 		$les_echap[$num_echap] = $reg[0];
-		//echo htmlspecialchars($reg[0])."<p>";
-		$pos = strpos($letexte, $les_echap[$num_echap]);
-		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-			.substr($letexte,$pos+strlen($les_echap[$num_echap]));
+		$letexte = str_replace($reg[0], "@@SPIP_$source$num_echap@@", $letexte);
 	}
 
 	return array($letexte, $les_echap);
@@ -832,17 +826,19 @@ function traiter_raccourcis_generale($letexte) {
 	// Note : complique car c'est ici qu'on applique la typo() !
 	//
 	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
-	$texte_vu = '';
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-		list($insert, $lien) = extraire_lien($regs);
-		$pos = strpos($letexte, $regs[0]);
-		$texte_vu .= typo(substr($letexte, 0, $pos)) . $insert;
-		$letexte = substr($letexte, $pos + strlen($regs[0]));
+	$inserts = array();
+	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
+		$i = 0;
+		foreach ($matches as $regs) {
+			list($insert) = extraire_lien($regs);
+			$inserts[++$i] = $insert;
+			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE$i@@", $letexte);
+		}
 	}
-	$letexte = $texte_vu.typo($letexte); // typo de la queue du texte
-
-
+	$letexte = typo($letexte);
+	foreach ($inserts as $i => $insert) {
+		$letexte = str_replace("@@SPIP_ECHAPPE$i@@", $insert, $letexte);
+	}
 
 	//
 	// Tableaux
@@ -971,6 +967,7 @@ function traiter_les_notes($mes_notes, $les_echap) {
 
 function traiter_raccourcis($letexte, $les_echap=false) {
 	// echapper les <a href>, <html>...< /html>, <code>...< /code>
+
 	if (!$les_echap)
 		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
